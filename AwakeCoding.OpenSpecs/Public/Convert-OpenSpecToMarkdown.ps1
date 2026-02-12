@@ -110,7 +110,7 @@ function Convert-OpenSpecToMarkdown {
 
             $conversionStep = $null
             if ($resolvedFormat -eq 'DOCX') {
-                $toolchain = Get-OpenSpecToolchain -RequirePandoc
+                $toolchain = Get-OpenSpecToolchain -RequireDocxConverter
                 $rawMarkdownPath = Join-Path -Path $artifactDirectory -ChildPath 'raw-docx.md'
                 $conversionStep = ConvertFrom-OpenSpecDocx -InputPath $sourcePath -OutputPath $rawMarkdownPath -Toolchain $toolchain
             }
@@ -178,7 +178,7 @@ function Convert-OpenSpecToMarkdown {
                 ConvertedAtUtc = [DateTime]::UtcNow.ToString('o')
                 Strategy = $conversionStep.Strategy
                 Toolchain = [pscustomobject]@{
-                    HasPandoc = $toolchain.HasPandoc
+                    HasOpenXml = if ($toolchain.PSObject.Properties['HasOpenXml']) { $toolchain.HasOpenXml } else { $false }
                     HasDocling = $toolchain.HasDocling
                     HasMarkItDown = $toolchain.HasMarkItDown
                 }

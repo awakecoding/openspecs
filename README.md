@@ -84,4 +84,6 @@ Test-OpenSpecMarkdownFidelity -OutputPath $ConvertedPath
 - Output filename preserves the source filename from the download URL.
 - The module uses retry/backoff for transient HTTP errors.
 - Conversion defaults to textual packet/structure output (Markdown tables with ASCII fallback), never image-based diagram rendering.
-- DOCX conversion requires `pandoc`; PDF conversion prefers `docling` or `markitdown`, with `pandoc` fallback.
+- DOCX conversion uses OpenXML-based conversion.
+- Migration note: `Convert-OpenSpecToMarkdown` no longer supports `-DocxStrategy`; remove that argument from existing scripts.
+- PDF conversion prefers `docling` or `markitdown`.

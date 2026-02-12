@@ -52,20 +52,5 @@ function ConvertFrom-OpenSpecPdf {
         $notes.Add('markitdown was detected but conversion failed.')
     }
 
-    if ($Toolchain.HasPandoc) {
-        $pandocArguments = @('--from', 'pdf', '--to', 'gfm', '--wrap=none', '--output', $OutputPath, $InputPath)
-        & $Toolchain.PandocPath @pandocArguments
-        if ($LASTEXITCODE -eq 0 -and (Test-Path -LiteralPath $OutputPath)) {
-            return [pscustomobject]@{
-                PSTypeName = 'AwakeCoding.OpenSpecs.ConversionStep'
-                Strategy = 'pandoc-pdf-fallback'
-                OutputPath = $OutputPath
-                Notes = @('Converted with pandoc fallback from PDF.')
-            }
-        }
-
-        $notes.Add('pandoc fallback from PDF failed.')
-    }
-
     throw ("Unable to convert PDF '{0}' to Markdown. {1}" -f $InputPath, ($notes -join ' '))
 }

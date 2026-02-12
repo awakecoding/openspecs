@@ -48,7 +48,7 @@ Describe 'Conversion report aggregation' {
         [pscustomobject]@{
             ProtocolId = 'MS-TEST'
             SourceFormat = 'DOCX'
-            Strategy = 'pandoc-docx-gfm'
+            Strategy = 'openxml-docx'
             IssueCount = 1
             InfoCount = 2
             WarningCount = 1
