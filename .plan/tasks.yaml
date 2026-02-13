@@ -155,12 +155,12 @@ tasks:
     dependencies:
       - TASK-007
     risk: low
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: ""
+    status: completed
+    started_at: "2026-02-12T21:45:00Z"
+    completed_at: "2026-02-12T21:50:00Z"
+    notes: "Verified: 555 headings all have section numbers, 0 _Toc anchors, section numbers correct for deep nesting (1.3.1.4.1). Section number fix applied and working. Bold formatting on field names remains as future improvement (TASK-009)."
     files_affected: []
-    estimated_hours: 1.5
+    estimated_hours: 0.5
 
   - id: TASK-009
     phase: 4
@@ -174,10 +174,17 @@ tasks:
     dependencies:
       - TASK-008
     risk: medium
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: "Start with bold/italic; defer complex nested formatting"
+    status: completed
+    started_at: "2026-02-13T01:30:00Z"
+    completed_at: "2026-02-13T02:00:00Z"
+    notes: |
+      Implemented formatting detection in ConvertFrom-OpenSpecOpenXmlInlineNode for the 'r' case.
+      Uses Unicode noncharacter placeholders (U+FDD0/1/2) for safe marker merging.
+      Detects: w:b (bold), w:i (italic), w:rStyle with code-like names, w:rFonts with monospace.
+      Whitespace moved outside markers for CommonMark compliance.
+      Adjacent same-format markers merged (including single-space separated).
+      Bold stripped from headings (heading style implies bold).
+      Results: 2,845 bold pairs in MS-RDPBCGR, 3 italic instances detected.
     files_affected:
       - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
     estimated_hours: 2
@@ -193,10 +200,14 @@ tasks:
     dependencies:
       - TASK-008
     risk: medium
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: ""
+    status: completed
+    started_at: "2026-02-13T02:00:00Z"
+    completed_at: "2026-02-13T02:15:00Z"
+    notes: |
+      Replaced Get-OpenSpecOpenXmlNodeText with ConvertFrom-OpenSpecOpenXmlParagraph
+      in table cell extraction. Added RelationshipMap parameter to
+      ConvertFrom-OpenSpecOpenXmlTable. Results: 179 bold table rows and 249 linked
+      table rows in MS-RDPBCGR. Multi-paragraph cells joined with spaces.
     files_affected:
       - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
     estimated_hours: 2
@@ -212,10 +223,14 @@ tasks:
     dependencies:
       - TASK-010
     risk: low
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: "Use -Force flag to overwrite existing conversions"
+    status: completed
+    started_at: "2026-02-13T01:10:00Z"
+    completed_at: "2026-02-13T01:15:00Z"
+    notes: |
+      All 41 specs converted with 0 errors. Fixed Get-ChildItem pipeline
+      issue (FileInfo lacks .Path property; used -Path parameter instead).
+      Quality spot-checks verified: TOC links, Section_X.Y anchors,
+      heading numbers, zero _Toc remnants.
     files_affected: []
     estimated_hours: 1
 
@@ -231,10 +246,15 @@ tasks:
     dependencies:
       - TASK-011
     risk: low
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: ""
+    status: completed
+    started_at: "2026-02-13T01:15:00Z"
+    completed_at: "2026-02-13T01:20:00Z"
+    notes: |
+      Quality report generated at reports/conversion-quality-report.md.
+      Results: 41/41 specs converted, 5,643 headings (99.8% numbered),
+      5,912 Section_X.Y anchors, 11,040 TOC links, 0 residual _Toc anchors.
+      11 non-numbered headings are structure/PDU names without section
+      numbers in the source DOCX (by design).
     files_affected:
-      - "AwakeCoding.OpenSpecs/Public/Test-OpenSpecMarkdownFidelity.ps1"
+      - "reports/conversion-quality-report.md"
     estimated_hours: 1

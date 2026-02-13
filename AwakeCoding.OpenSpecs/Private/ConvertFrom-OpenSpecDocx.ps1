@@ -112,7 +112,10 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
 
                 if ($style -match '^Heading(?<level>[1-6])$') {
                     $level = [int]$Matches['level']
-                    $lines.Add((('{0} ' -f ('#' * $level)) + $text.Trim()))
+                    # Strip bold from heading text — the heading style (#) already implies bold.
+                    # Keep italic and code formatting if present.
+                    $headingText = ($text -replace '\*\*(?!\*)', '').Trim()
+                    $lines.Add((('{0} ' -f ('#' * $level)) + $headingText))
                     $lines.Add('')
                 }
                 elseif ($numberingNode) {
@@ -124,7 +127,7 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
                 }
             }
             elseif ($child.LocalName -eq 'tbl') {
-                $tableLines = ConvertFrom-OpenSpecOpenXmlTable -TableNode $child -NamespaceManager $nsmgr
+                $tableLines = ConvertFrom-OpenSpecOpenXmlTable -TableNode $child -NamespaceManager $nsmgr -RelationshipMap $relationshipMap
                 foreach ($line in $tableLines) {
                     $lines.Add($line)
                 }
@@ -290,6 +293,27 @@ function ConvertFrom-OpenSpecOpenXmlParagraph {
     $joined = ($segments.ToArray() -join '')
     $joined = $joined -replace "`r?`n", ' '
     $joined = $joined -replace '\s{2,}', ' '
+
+    # Merge adjacent formatting markers (close marker + open marker = nothing).
+    # This collapses adjacent same-format runs that Word split arbitrarily.
+    $bm = [string][char]0xFDD0
+    $im = [string][char]0xFDD1
+    $cm = [string][char]0xFDD2
+    # Direct adjacency: close + open with nothing between
+    $joined = $joined.Replace("$bm$bm", '')
+    $joined = $joined.Replace("$im$im", '')
+    $joined = $joined.Replace("$cm$cm", '')
+    # Adjacency with single space (from whitespace moved outside markers):
+    # e.g., {B}text1{B} {B}text2{B} → {B}text1 text2{B}
+    $joined = $joined.Replace("$bm $bm", ' ')
+    $joined = $joined.Replace("$im $im", ' ')
+    $joined = $joined.Replace("$cm $cm", ' ')
+
+    # Convert formatting markers to markdown syntax
+    $joined = $joined.Replace($bm, '**')
+    $joined = $joined.Replace($im, '*')
+    $joined = $joined.Replace($cm, '`')
+
     return $joined.Trim()
 }
 
@@ -312,7 +336,75 @@ function ConvertFrom-OpenSpecOpenXmlInlineNode {
 
     switch ($Node.LocalName) {
         'r' {
-            return ConvertFrom-OpenSpecOpenXmlRunText -RunNode $Node -NamespaceManager $NamespaceManager
+            $text = ConvertFrom-OpenSpecOpenXmlRunText -RunNode $Node -NamespaceManager $NamespaceManager
+            if (-not [string]::IsNullOrEmpty($text)) {
+                $rPr = $Node.SelectSingleNode('./w:rPr', $NamespaceManager)
+                if ($null -ne $rPr) {
+                    $isBold = $false
+                    $isItalic = $false
+                    $isCode = $false
+
+                    $boldNode = $rPr.SelectSingleNode('./w:b', $NamespaceManager)
+                    if ($null -ne $boldNode) {
+                        $val = $boldNode.GetAttribute('val', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main')
+                        $isBold = [string]::IsNullOrEmpty($val) -or $val -eq 'true' -or $val -eq '1'
+                    }
+
+                    $italicNode = $rPr.SelectSingleNode('./w:i', $NamespaceManager)
+                    if ($null -ne $italicNode) {
+                        $val = $italicNode.GetAttribute('val', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main')
+                        $isItalic = [string]::IsNullOrEmpty($val) -or $val -eq 'true' -or $val -eq '1'
+                    }
+
+                    # Detect code formatting via character style (e.g., InlineCode)
+                    $rStyleNode = $rPr.SelectSingleNode('./w:rStyle', $NamespaceManager)
+                    if ($null -ne $rStyleNode) {
+                        $styleName = $rStyleNode.GetAttribute('val', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main')
+                        if ($styleName -match '(?i)(Code|Monospace|Console|Verbatim)') {
+                            $isCode = $true
+                        }
+                    }
+
+                    # Detect code formatting via monospace font name
+                    if (-not $isCode) {
+                        $fontsNode = $rPr.SelectSingleNode('./w:rFonts', $NamespaceManager)
+                        if ($null -ne $fontsNode) {
+                            $fontName = $fontsNode.GetAttribute('ascii', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main')
+                            if ($fontName -match '^(Courier|Consolas|Lucida Console|Menlo|Monaco)') {
+                                $isCode = $true
+                            }
+                        }
+                    }
+
+                    # Use Unicode noncharacters as temporary formatting markers.
+                    # These are merged in ConvertFrom-OpenSpecOpenXmlParagraph and
+                    # converted to markdown ** / * / ` markers.
+                    $bm = [char]0xFDD0  # bold marker
+                    $im = [char]0xFDD1  # italic marker
+                    $cm = [char]0xFDD2  # code marker
+
+                    if ($isCode -or $isBold -or $isItalic) {
+                        # Trim whitespace from the text and move it outside
+                        # the formatting markers. CommonMark requires closing
+                        # markers to be preceded by non-whitespace.
+                        $trimmedText = $text.Trim()
+                        if ($trimmedText.Length -gt 0) {
+                            $leading = if ($text -ne $text.TrimStart()) { ' ' } else { '' }
+                            $trailing = if ($text -ne $text.TrimEnd()) { ' ' } else { '' }
+                            if ($isCode) {
+                                $text = "$leading$cm$trimmedText$cm$trailing"
+                            } elseif ($isBold -and $isItalic) {
+                                $text = "$leading$bm$im$trimmedText$im$bm$trailing"
+                            } elseif ($isBold) {
+                                $text = "$leading$bm$trimmedText$bm$trailing"
+                            } elseif ($isItalic) {
+                                $text = "$leading$im$trimmedText$im$trailing"
+                            }
+                        }
+                    }
+                }
+            }
+            return $text
         }
         'hyperlink' {
             $linkTextParts = New-Object System.Collections.Generic.List[string]
@@ -568,7 +660,10 @@ function ConvertFrom-OpenSpecOpenXmlTable {
         [System.Xml.XmlNode]$TableNode,
 
         [Parameter(Mandatory)]
-        [System.Xml.XmlNamespaceManager]$NamespaceManager
+        [System.Xml.XmlNamespaceManager]$NamespaceManager,
+
+        [Parameter()]
+        [hashtable]$RelationshipMap = @{}
     )
 
     $rows = New-Object System.Collections.Generic.List[object]
@@ -579,7 +674,22 @@ function ConvertFrom-OpenSpecOpenXmlTable {
         $cells = New-Object System.Collections.Generic.List[string]
         $cellNodes = $rowNode.SelectNodes('./w:tc', $NamespaceManager)
         foreach ($cellNode in $cellNodes) {
-            $cells.Add((Get-OpenSpecOpenXmlNodeText -Node $cellNode -NamespaceManager $NamespaceManager))
+            # Extract cell content with formatting and links preserved.
+            # Each <w:tc> contains one or more <w:p> paragraphs.
+            $paragraphNodes = $cellNode.SelectNodes('./w:p', $NamespaceManager)
+            if ($null -ne $paragraphNodes -and $paragraphNodes.Count -gt 0) {
+                $cellParts = New-Object System.Collections.Generic.List[string]
+                foreach ($pNode in $paragraphNodes) {
+                    $pText = ConvertFrom-OpenSpecOpenXmlParagraph -ParagraphNode $pNode -NamespaceManager $NamespaceManager -RelationshipMap $RelationshipMap
+                    if (-not [string]::IsNullOrWhiteSpace($pText)) {
+                        $cellParts.Add($pText)
+                    }
+                }
+                $cells.Add(($cellParts.ToArray() -join ' '))
+            } else {
+                # Fallback to plain text extraction
+                $cells.Add((Get-OpenSpecOpenXmlNodeText -Node $cellNode -NamespaceManager $NamespaceManager))
+            }
         }
 
         if ($cells.Count -gt $maxColumns) {
