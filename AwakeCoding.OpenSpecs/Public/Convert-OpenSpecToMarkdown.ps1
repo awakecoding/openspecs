@@ -89,7 +89,7 @@ function Convert-OpenSpecToMarkdown {
                 [void](New-Item -Path $artifactDirectory -ItemType Directory -Force)
             }
 
-            $markdownPath = Join-Path -Path $specDirectory -ChildPath 'index.md'
+            $markdownPath = Join-Path -Path $specDirectory -ChildPath "$safeProtocol.md"
             if ((Test-Path -LiteralPath $markdownPath) -and -not $Force) {
                 [pscustomobject]@{
                     PSTypeName = 'AwakeCoding.OpenSpecs.ConversionResult'
@@ -112,7 +112,8 @@ function Convert-OpenSpecToMarkdown {
             if ($resolvedFormat -eq 'DOCX') {
                 $toolchain = Get-OpenSpecToolchain -RequireDocxConverter
                 $rawMarkdownPath = Join-Path -Path $artifactDirectory -ChildPath 'raw-docx.md'
-                $conversionStep = ConvertFrom-OpenSpecDocx -InputPath $sourcePath -OutputPath $rawMarkdownPath -Toolchain $toolchain
+                $mediaDirectory = Join-Path -Path $specDirectory -ChildPath 'media'
+                $conversionStep = ConvertFrom-OpenSpecDocx -InputPath $sourcePath -OutputPath $rawMarkdownPath -Toolchain $toolchain -MediaOutputDirectory $mediaDirectory
             }
             elseif ($resolvedFormat -eq 'PDF') {
                 $toolchain = Get-OpenSpecToolchain -RequirePdfConverter
