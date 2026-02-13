@@ -14,10 +14,10 @@ tasks:
       - "No regressions in body text or heading extraction"
     dependencies: []
     risk: medium
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: ""
+    status: completed
+    started_at: "2026-02-12T21:10:00Z"
+    completed_at: "2026-02-12T21:15:00Z"
+    notes: "Rewrote to use paragraph/run structure instead of flat w:t selection. Also handles w:br, w:tab, w:cr via ConvertFrom-OpenSpecOpenXmlRunText reuse."
     files_affected:
       - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
     estimated_hours: 1
@@ -33,13 +33,13 @@ tasks:
     dependencies:
       - TASK-001
     risk: low
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: ""
+    status: completed
+    started_at: "2026-02-12T21:15:00Z"
+    completed_at: "2026-02-12T21:16:00Z"
+    notes: "Covered by TASK-001 fix. ConvertFrom-OpenSpecOpenXmlRunText includes all w:t InnerText without filtering, so whitespace-only nodes with xml:space=preserve are already preserved."
     files_affected:
       - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
-    estimated_hours: 1
+    estimated_hours: 0
 
   - id: TASK-003
     phase: 2

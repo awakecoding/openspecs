@@ -164,15 +164,51 @@ function Get-OpenSpecOpenXmlNodeText {
         [System.Xml.XmlNamespaceManager]$NamespaceManager
     )
 
-    $segments = New-Object System.Collections.Generic.List[string]
-    $textNodes = $Node.SelectNodes('.//w:t', $NamespaceManager)
-    foreach ($textNode in $textNodes) {
-        if ($textNode -and -not [string]::IsNullOrWhiteSpace($textNode.InnerText)) {
-            $segments.Add($textNode.InnerText)
+    # Walk paragraph and run structure to extract text properly.
+    # Word splits text across multiple <w:r> runs at arbitrary boundaries
+    # (spell-check, formatting, revisions). Concatenating <w:t> content
+    # directly (no extra spaces) gives the correct text. Breaks, tabs, and
+    # carriage returns between runs are represented by <w:br/>, <w:tab/>,
+    # and <w:cr/> elements that must be converted to spaces.
+    $paragraphParts = New-Object System.Collections.Generic.List[string]
+    $paragraphNodes = $Node.SelectNodes('.//w:p', $NamespaceManager)
+
+    if ($null -eq $paragraphNodes -or $paragraphNodes.Count -eq 0) {
+        # Fallback: node may not contain paragraphs (e.g., a single run).
+        # Collect text directly from runs or text nodes.
+        $runNodes = $Node.SelectNodes('.//w:r', $NamespaceManager)
+        if ($null -ne $runNodes -and $runNodes.Count -gt 0) {
+            $parts = New-Object System.Collections.Generic.List[string]
+            foreach ($runNode in $runNodes) {
+                $runText = ConvertFrom-OpenSpecOpenXmlRunText -RunNode $runNode -NamespaceManager $NamespaceManager
+                if (-not [string]::IsNullOrEmpty($runText)) {
+                    $parts.Add($runText)
+                }
+            }
+            return (($parts.ToArray() -join '') -replace '\s+', ' ').Trim()
+        }
+
+        # Last resort: just get raw inner text
+        return ($Node.InnerText -replace '\s+', ' ').Trim()
+    }
+
+    foreach ($paragraphNode in $paragraphNodes) {
+        $runNodes = $paragraphNode.SelectNodes('./w:r', $NamespaceManager)
+        $parts = New-Object System.Collections.Generic.List[string]
+        foreach ($runNode in $runNodes) {
+            $runText = ConvertFrom-OpenSpecOpenXmlRunText -RunNode $runNode -NamespaceManager $NamespaceManager
+            if (-not [string]::IsNullOrEmpty($runText)) {
+                $parts.Add($runText)
+            }
+        }
+
+        $paraText = ($parts.ToArray() -join '').Trim()
+        if (-not [string]::IsNullOrWhiteSpace($paraText)) {
+            $paragraphParts.Add($paraText)
         }
     }
 
-    return (($segments.ToArray() -join ' ') -replace '\s+', ' ').Trim()
+    return (($paragraphParts.ToArray() -join ' ') -replace '\s+', ' ').Trim()
 }
 
 function Get-OpenSpecOpenXmlRelationshipMap {
