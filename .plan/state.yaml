@@ -1,0 +1,63 @@
+project_name: "Fix Markdown Conversion Fidelity for MS Open Specs"
+current_phase: 1
+overall_status: not_started
+started_at: null
+
+phases:
+  - id: 1
+    name: "Fix Text Extraction Fidelity"
+    status: pending
+    started_at: null
+    completed_at: null
+    tasks_total: 2
+    tasks_completed: 0
+    blocked: false
+    blocker_reason: null
+
+  - id: 2
+    name: "Fix TOC & Anchor Links"
+    status: pending
+    started_at: null
+    completed_at: null
+    tasks_total: 4
+    tasks_completed: 0
+    blocked: false
+    blocker_reason: null
+
+  - id: 3
+    name: "Validate Against Live HTML"
+    status: pending
+    started_at: null
+    completed_at: null
+    tasks_total: 2
+    tasks_completed: 0
+    blocked: false
+    blocker_reason: null
+
+  - id: 4
+    name: "Fix Remaining Conversion Issues"
+    status: pending
+    started_at: null
+    completed_at: null
+    tasks_total: 2
+    tasks_completed: 0
+    blocked: false
+    blocker_reason: null
+
+  - id: 5
+    name: "Re-conversion & Final Validation"
+    status: pending
+    started_at: null
+    completed_at: null
+    tasks_total: 2
+    tasks_completed: 0
+    blocked: false
+    blocker_reason: null
+
+tasks_total: 12
+tasks_completed: 0
+tasks_in_progress: 0
+tasks_blocked: 0
+last_updated: "2026-02-12T20:56:00Z"
+last_commit: null
+notes: []

@@ -1,0 +1,233 @@
+project_name: "Fix Markdown Conversion Fidelity for MS Open Specs"
+created: "2026-02-12T20:56:00Z"
+total_tasks: 12
+total_phases: 5
+
+tasks:
+  - id: TASK-001
+    phase: 1
+    title: "Fix Get-OpenSpecOpenXmlNodeText space-join bug"
+    description: "The Get-OpenSpecOpenXmlNodeText function joins all <w:t> text nodes with space separators (-join ' '). Word splits text across multiple <w:r> runs at arbitrary boundaries (spell-check, formatting, revision marks), so this produces mid-word spaces like 'W EBAUTHN', '10/8/20 10', 'technica l'. Fix by joining without spaces and using xml:space attribute to determine actual whitespace."
+    acceptance_criteria:
+      - "Table cell text no longer has spurious mid-word spaces"
+      - "The specific examples identified are fixed: WEBAUTHN, 10/8/2010, technical"
+      - "No regressions in body text or heading extraction"
+    dependencies: []
+    risk: medium
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 1
+
+  - id: TASK-002
+    phase: 1
+    title: "Handle xml:space=preserve attribute on w:t elements"
+    description: "Word uses xml:space='preserve' on <w:t> elements to indicate significant whitespace (leading/trailing spaces). Currently whitespace-only <w:t> nodes are skipped entirely (line 170). Fix to preserve meaningful whitespace while not adding spurious spaces at run boundaries."
+    acceptance_criteria:
+      - "Intentional spaces between words in the same table cell are preserved"
+      - "Leading/trailing whitespace in w:t elements with xml:space=preserve is respected"
+      - "Empty or truly whitespace-only nodes between separate content runs still join correctly"
+    dependencies:
+      - TASK-001
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 1
+
+  - id: TASK-003
+    phase: 2
+    title: "Rewrite TOC links from _Toc anchors to Section_X.Y anchors"
+    description: "TOC entries currently link to _Toc anchors (e.g., [1 Introduction 17](#_Toc194624320)). The _Toc → Section_X.Y mapping already exists in Add-OpenSpecSectionAnchorsFromToc. Extend this function to also rewrite the TOC hyperlinks themselves to use Section_X.Y targets."
+    acceptance_criteria:
+      - "All TOC links use Section_X.Y format instead of _Toc format"
+      - "TOC links for numbered sections resolve correctly (e.g., #Section_1.2.1)"
+      - "Non-numbered TOC entries handled gracefully"
+    dependencies: []
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 1
+
+  - id: TASK-004
+    phase: 2
+    title: "Strip page numbers from TOC entry labels"
+    description: "TOC labels contain page numbers from the DOCX (e.g., '1 Introduction 17'). These are meaningless in markdown. Strip the trailing page number from each TOC entry label while preserving the section number and title."
+    acceptance_criteria:
+      - "Page numbers removed from all TOC labels"
+      - "Section numbers preserved (e.g., '1 Introduction' not 'Introduction')"
+      - "Multi-word titles preserved correctly"
+      - "Labels with numbers in the title don't get mangled (e.g., 'Section 2.2.1 WebAuthN_Channel Request Message')"
+    dependencies:
+      - TASK-003
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: "Can be combined with TASK-003 in the same regex rewrite"
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 0.5
+
+  - id: TASK-005
+    phase: 2
+    title: "Consolidate heading anchors — remove _Toc, keep Section_X.Y + bookmark GUIDs"
+    description: "Each heading currently gets 3 anchor tags: bookmark GUID, Section_X.Y, and _Toc. Once TOC links use Section_X.Y (TASK-003), _Toc anchors become dead targets. Remove them to reduce clutter. Keep bookmark GUIDs (used by cross-references) and Section_X.Y (used by TOC)."
+    acceptance_criteria:
+      - "No <a id=\"_Toc...\"> tags in output"
+      - "Bookmark GUID anchors preserved (e.g., section_3cca2157...)"
+      - "Section_X.Y anchors preserved for numbered headings"
+      - "Internal cross-references still resolve correctly"
+    dependencies:
+      - TASK-003
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: "Filter _Toc bookmarks in Get-OpenSpecOpenXmlParagraphAnchors"
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 0.5
+
+  - id: TASK-006
+    phase: 2
+    title: "Generate slug-based anchors for non-numbered headings"
+    description: "Some headings don't have section numbers (e.g., 'Table of Contents', 'Revision Summary'). These currently only get bookmark GUID anchors but not a human-readable slug anchor. Add slug generation (lowercase, hyphenated) for non-numbered headings to make TOC links to them work with readable anchors."
+    acceptance_criteria:
+      - "Non-numbered headings get slug-based anchors (e.g., 'table-of-contents')"
+      - "TOC links to non-numbered sections use slug anchors"
+      - "Slug generation handles special characters correctly"
+    dependencies:
+      - TASK-005
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 1
+
+  - id: TASK-007
+    phase: 3
+    title: "Compare markdown with live HTML for MS-RDPEWA"
+    description: "After applying fixes from Phases 1-2, re-convert MS-RDPEWA and compare the output section-by-section with the live HTML at learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rdpewa/. Document all remaining discrepancies."
+    acceptance_criteria:
+      - "Section-by-section comparison completed for all 8 top-level sections"
+      - "All discrepancies documented with type and severity"
+      - "Issue list created for Phase 4 work"
+    dependencies:
+      - TASK-005
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected: []
+    estimated_hours: 1.5
+
+  - id: TASK-008
+    phase: 3
+    title: "Compare markdown with live HTML for MS-RDPBCGR"
+    description: "Spot-check comparison of MS-RDPBCGR (24K+ lines, largest spec) with live HTML. Focus on: TOC accuracy, table formatting, cross-references, packet layout tables, and inline formatting."
+    acceptance_criteria:
+      - "At least 10 representative sections compared"
+      - "Packet layout tables verified for correctness"
+      - "Cross-reference links validated"
+      - "Additional issues documented"
+    dependencies:
+      - TASK-007
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected: []
+    estimated_hours: 1.5
+
+  - id: TASK-009
+    phase: 4
+    title: "Fix inline formatting boundary detection"
+    description: "Address issues with bold, italic, and code formatting in converted markdown. Currently ConvertFrom-OpenSpecOpenXmlRunText does not apply formatting from run properties (w:rPr). Add detection of bold (w:b), italic (w:i), and code (w:rFonts with monospace) properties."
+    acceptance_criteria:
+      - "Bold text in DOCX renders as **bold** in markdown"
+      - "Italic text renders as *italic*"
+      - "Monospace/code font renders as `code`"
+      - "Formatting boundaries align with word boundaries (no mid-word ** or *)"
+    dependencies:
+      - TASK-008
+    risk: medium
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: "Start with bold/italic; defer complex nested formatting"
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 2
+
+  - id: TASK-010
+    phase: 4
+    title: "Fix table cell content extraction issues"
+    description: "Address issues with table cell content: multi-paragraph cells, nested lists within cells, and preserving links/formatting inside cells."
+    acceptance_criteria:
+      - "Multi-paragraph table cells render with line breaks"
+      - "Links inside table cells are preserved as markdown links"
+      - "Formatting inside table cells (bold, code) preserved"
+    dependencies:
+      - TASK-008
+    risk: medium
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
+    estimated_hours: 2
+
+  - id: TASK-011
+    phase: 5
+    title: "Re-convert all 41 specs with applied fixes"
+    description: "Run the full conversion pipeline on all 41 RDP specs using the updated module. Compare output sizes and spot-check results."
+    acceptance_criteria:
+      - "All 41 specs converted successfully (no errors)"
+      - "No new warnings or errors introduced"
+      - "Output file sizes comparable to previous conversion"
+    dependencies:
+      - TASK-010
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: "Use -Force flag to overwrite existing conversions"
+    files_affected: []
+    estimated_hours: 1
+
+  - id: TASK-012
+    phase: 5
+    title: "Update fidelity tests and generate quality report"
+    description: "Extend Test-OpenSpecMarkdownFidelity to validate anchor links (all TOC links resolve, no _Toc anchors remain, Section_X.Y anchors present for numbered headings). Generate a quality comparison report."
+    acceptance_criteria:
+      - "Test-OpenSpecMarkdownFidelity checks for working anchor links"
+      - "Test validates no _Toc anchors remain"
+      - "Test validates Section_X.Y anchors exist for numbered headings"
+      - "Quality report generated comparing before/after conversion"
+    dependencies:
+      - TASK-011
+    risk: low
+    status: pending
+    started_at: null
+    completed_at: null
+    notes: ""
+    files_affected:
+      - "AwakeCoding.OpenSpecs/Public/Test-OpenSpecMarkdownFidelity.ps1"
+    estimated_hours: 1
