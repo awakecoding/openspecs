@@ -34,10 +34,15 @@ function Compare-OpenSpecToLiveHtml {
     $results = New-Object System.Collections.Generic.List[object]
 
     foreach ($report in $reports) {
+        try {
         $protocolId = $report.ProtocolId
+        if ([string]::IsNullOrWhiteSpace($protocolId)) { continue }
         $mdPath = $report.MarkdownPath
+        if ([string]::IsNullOrWhiteSpace($mdPath)) {
+            $mdPath = Join-Path (Join-Path $OutputPath $protocolId) "$protocolId.md"
+        }
         $markdown = ''
-        if (Test-Path -LiteralPath $mdPath) {
+        if ($mdPath -and (Test-Path -LiteralPath $mdPath -PathType Leaf -ErrorAction SilentlyContinue)) {
             $markdown = Get-Content -LiteralPath $mdPath -Raw -ErrorAction SilentlyContinue
         }
 
@@ -76,7 +81,8 @@ function Compare-OpenSpecToLiveHtml {
                 foreach ($m in $altHRegex.Matches($html)) {
                     $level = [int]$m.Groups[1].Value
                     $text = (ConvertFrom-OpenSpecHtml -Html $m.Groups[2].Value).Trim()
-                    if ($text.Length -gt 0 -and ($liveHeadings.Count -eq 0 -or $liveHeadings[-1].Text -ne $text)) {
+                    $lastText = if ($liveHeadings.Count -gt 0) { $liveHeadings[$liveHeadings.Count - 1].Text } else { $null }
+                    if ($text.Length -gt 0 -and $text -ne $lastText) {
                         [void]$liveHeadings.Add([pscustomobject]@{ Level = $level; Id = $null; Text = $text })
                     }
                 }
@@ -123,6 +129,15 @@ function Compare-OpenSpecToLiveHtml {
             SuggestManualReview  = $suggestReview
             IssueCount           = $report.IssueCount
         })
+        } catch {
+            Write-Warning "Compare failed for $($report.ProtocolId): $_"
+            [void]$results.Add([pscustomobject]@{
+                PSTypeName = 'AwakeCoding.OpenSpecs.LiveHtmlCompareResult'
+                ProtocolId = $report.ProtocolId
+                FetchError = $_.Exception.Message
+                SuggestManualReview = $true
+            })
+        }
     }
 
     $results
