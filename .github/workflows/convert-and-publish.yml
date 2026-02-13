@@ -22,6 +22,7 @@ jobs:
       - name: Import module and convert all specs
         shell: pwsh
         run: |
+          Set-Location $env:GITHUB_WORKSPACE
           Import-Module .\AwakeCoding.OpenSpecs -Force
           Get-OpenSpecCatalog |
             Save-OpenSpecDocument -Format DOCX -OutputPath ./downloads-convert -Force |
@@ -31,14 +32,15 @@ jobs:
       - name: Build publish directory and index
         shell: pwsh
         run: |
+          Set-Location $env:GITHUB_WORKSPACE
           Import-Module .\AwakeCoding.OpenSpecs -Force
-          .\scripts\Prepare-Publish.ps1 -ConvertedSpecsPath ./converted-specs -PublishPath ./publish
-          Update-OpenSpecIndex -Path ./publish
+          & "$env:GITHUB_WORKSPACE\scripts\Prepare-Publish.ps1" -ConvertedSpecsPath "$env:GITHUB_WORKSPACE\converted-specs" -PublishPath "$env:GITHUB_WORKSPACE\publish"
+          Update-OpenSpecIndex -Path "$env:GITHUB_WORKSPACE\publish"
 
       - name: Zip publish contents
         shell: pwsh
         run: |
-          Compress-Archive -Path ./publish/* -DestinationPath ./publish.zip -Force
+          Compress-Archive -Path "$env:GITHUB_WORKSPACE/publish/*" -DestinationPath "$env:GITHUB_WORKSPACE/publish.zip" -Force
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
