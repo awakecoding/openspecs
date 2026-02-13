@@ -469,6 +469,7 @@ function Add-OpenSpecSectionAnchorsFromToc {
         [System.Text.RegularExpressions.RegexOptions]::None
     )
 
+    # Build map from _Toc anchors to Section_X.Y anchors.
     $aliasMap = @{}
     foreach ($match in $tocRegex.Matches($result)) {
         $sectionNum = $match.Groups['num'].Value
@@ -480,15 +481,48 @@ function Add-OpenSpecSectionAnchorsFromToc {
 
         $sectionAnchor = "Section_$sectionNum"
         if (-not $aliasMap.ContainsKey($tocAnchor)) {
-            $aliasMap[$tocAnchor] = New-Object System.Collections.Generic.List[string]
-        }
-
-        if (-not $aliasMap[$tocAnchor].Contains($sectionAnchor)) {
-            [void]$aliasMap[$tocAnchor].Add($sectionAnchor)
+            $aliasMap[$tocAnchor] = $sectionAnchor
         }
     }
 
+    # Rewrite TOC links: replace _Toc targets with Section_X.Y and strip page numbers.
+    $result = $tocRegex.Replace($result, {
+        param($m)
+        $label = $m.Groups['label'].Value
+        $sectionNum = $m.Groups['num'].Value
+        $tocAnchor = $m.Groups['toc'].Value
+
+        # Determine the target anchor.
+        $targetAnchor = if ($aliasMap.ContainsKey($tocAnchor)) {
+            $aliasMap[$tocAnchor]
+        } else {
+            $tocAnchor
+        }
+
+        # Strip the trailing page number from the label.
+        # Label format: "<section_num> <title> <page_num>"
+        # The page number is the last group of digits at the end.
+        $cleanLabel = $label
+        if ($cleanLabel -match '^(?<num>\d+(?:\.\d+)*)\s+(?<title>.+?)\s+\d+$') {
+            $cleanLabel = "$($Matches['num']) $($Matches['title'])"
+        }
+        elseif ($cleanLabel -match '^(?<num>\d+(?:\.\d+)*)\s+\d+$') {
+            # Edge case: section with only a number and page number (no title text)
+            $cleanLabel = $Matches['num']
+        }
+
+        "[$cleanLabel](#$targetAnchor)"
+    })
+
+    # Ensure Section_X.Y anchor tags exist at each heading that has a _Toc anchor.
     foreach ($tocAnchor in $aliasMap.Keys) {
+        $sectionAnchor = $aliasMap[$tocAnchor]
+        $sectionPattern = '<a id="' + [regex]::Escape($sectionAnchor) + '"></a>'
+        if ($result -match $sectionPattern) {
+            continue
+        }
+
+        # Insert Section anchor alongside the _Toc anchor tag.
         $anchorPattern = '<a id="' + [regex]::Escape($tocAnchor) + '"></a>'
         $anchorRegex = [regex]::new($anchorPattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
         $anchorMatch = $anchorRegex.Match($result)
@@ -496,21 +530,8 @@ function Add-OpenSpecSectionAnchorsFromToc {
             continue
         }
 
-        $insertAnchors = New-Object System.Collections.Generic.List[string]
-        foreach ($sectionAnchor in $aliasMap[$tocAnchor]) {
-            $sectionPattern = '<a id="' + [regex]::Escape($sectionAnchor) + '"></a>'
-            if ($result -match $sectionPattern) {
-                continue
-            }
-
-            $insertAnchors.Add(('<a id="' + $sectionAnchor + '"></a>'))
-        }
-
-        if ($insertAnchors.Count -eq 0) {
-            continue
-        }
-
-        $replacement = ($insertAnchors.ToArray() -join [Environment]::NewLine) + [Environment]::NewLine + $anchorMatch.Value
+        $newAnchor = '<a id="' + $sectionAnchor + '"></a>'
+        $replacement = $newAnchor + [Environment]::NewLine + $anchorMatch.Value
         $result = $result.Substring(0, $anchorMatch.Index) + $replacement + $result.Substring($anchorMatch.Index + $anchorMatch.Length)
     }
 

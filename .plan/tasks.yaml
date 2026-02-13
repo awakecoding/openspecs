@@ -51,10 +51,10 @@ tasks:
       - "Non-numbered TOC entries handled gracefully"
     dependencies: []
     risk: low
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: ""
+    status: completed
+    started_at: "2026-02-12T21:20:00Z"
+    completed_at: "2026-02-12T21:25:00Z"
+    notes: "Used tocRegex.Replace() to rewrite TOC links in-place. All _Toc references in TOC entries replaced with Section_X.Y."
     files_affected:
       - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
     estimated_hours: 1
@@ -71,13 +71,13 @@ tasks:
     dependencies:
       - TASK-003
     risk: low
-    status: pending
-    started_at: null
-    completed_at: null
-    notes: "Can be combined with TASK-003 in the same regex rewrite"
+    status: completed
+    started_at: "2026-02-12T21:20:00Z"
+    completed_at: "2026-02-12T21:25:00Z"
+    notes: "Combined with TASK-003 in same regex replacement. Strips trailing page number using pattern matching on label text."
     files_affected:
       - "AwakeCoding.OpenSpecs/Private/ConvertFrom-OpenSpecDocx.ps1"
-    estimated_hours: 0.5
+    estimated_hours: 0
 
   - id: TASK-005
     phase: 2
