@@ -856,7 +856,7 @@ function Test-OpenSpecOpenXmlPacketDiagram {
     )
 
     # Detect packet layout tables by checking if the first row contains
-    # cells with the PacketDiagramHeaderText paragraph style.
+    # cells with a known packet diagram paragraph style.
     $firstRow = $TableNode.SelectSingleNode('./w:tr[1]', $NamespaceManager)
     if ($null -eq $firstRow) {
         return $false
@@ -873,7 +873,20 @@ function Test-OpenSpecOpenXmlPacketDiagram {
     }
 
     $styleName = $styleNode.GetAttribute('val', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main')
-    return ($styleName -eq 'PacketDiagramHeaderText')
+
+    # Primary match: 'PacketDiagramHeaderText' and 'Packetdiagramheaderrow' variants.
+    if ($styleName -like 'PacketDiagram*') {
+        return $true
+    }
+
+    # Secondary match: 'Definition-Field' / 'Definition-Field2' styles used for packet
+    # diagrams in some specs. Require >=30 columns to avoid matching non-packet tables.
+    if ($styleName -like 'Definition-Field*') {
+        $cellCount = $firstRow.SelectNodes('./w:tc', $NamespaceManager).Count
+        return ($cellCount -ge 30)
+    }
+
+    return $false
 }
 
 function ConvertFrom-OpenSpecOpenXmlPacketDiagram {
