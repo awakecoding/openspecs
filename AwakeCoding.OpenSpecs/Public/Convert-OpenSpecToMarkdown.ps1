@@ -191,6 +191,19 @@ function Convert-OpenSpecToMarkdown {
 
             $cleaned.Markdown | Set-Content -LiteralPath $markdownPath -Encoding UTF8
 
+            if ($protocolId -eq 'MS-DTYP' -and $cleaned.PSObject.Properties['ExtractedBoilerplate']) {
+                $legalDir = Join-Path -Path $OutputPath -ChildPath '_legal'
+                if (-not (Test-Path -LiteralPath $legalDir)) {
+                    [void](New-Item -Path $legalDir -ItemType Directory -Force)
+                }
+                $legalContent = $cleaned.ExtractedBoilerplate.Trim()
+                if ($legalContent -and -not ($legalContent -match '^(#|\*\*[^*]+\*\*)')) {
+                    $legalContent = "# Intellectual Property Rights Notice for Open Specifications Documentation`n`n" + $legalContent
+                }
+                $legalPath = Join-Path -Path $legalDir -ChildPath 'LEGAL.md'
+                $legalContent | Set-Content -LiteralPath $legalPath -Encoding UTF8
+            }
+
             $layoutModelPath = Join-Path -Path $artifactDirectory -ChildPath 'layout-model.json'
             $allIssues | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $layoutModelPath -Encoding UTF8
 

@@ -57,9 +57,9 @@ try {
     }
     if ($patterns.Count -gt 0) {
         $catalog = $catalog | Where-Object {
-            $pid = $_.ProtocolId
+            $protocolId = $_.ProtocolId
             foreach ($p in $patterns) {
-                if ($pid -like $p) { return $true }
+                if ($protocolId -like $p) { return $true }
             }
             return $false
         }
@@ -97,6 +97,19 @@ try {
         if (Test-Path -LiteralPath $media -PathType Container) {
             Copy-Item -LiteralPath $media -Destination $dest -Recurse -Force
         }
+    }
+
+    $legalSource = Join-Path (Join-Path $convPath '_legal') 'LEGAL.md'
+    $legalFallback = Join-Path (Join-Path (Join-Path $root 'scripts') 'templates') 'LEGAL.md'
+    $legalDest = Join-Path $pubPath 'LEGAL.md'
+    if (Test-Path -LiteralPath $legalSource) {
+        Copy-Item -LiteralPath $legalSource -Destination $legalDest -Force
+    }
+    elseif (Test-Path -LiteralPath $legalFallback) {
+        Copy-Item -LiteralPath $legalFallback -Destination $legalDest -Force
+    }
+    else {
+        Write-Warning 'LEGAL.md was not created (filter may have excluded MS-DTYP). Add scripts/templates/LEGAL.md as fallback.'
     }
 
     Write-Host 'Updating index (README.md)...'

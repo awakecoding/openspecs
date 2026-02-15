@@ -110,6 +110,7 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
         }
         $inGlossary = $false
         $glossaryHeadingLevel = 0
+        $pendingSectionGuids = New-Object System.Collections.Generic.List[string]
 
         # Resolve media output directory for image extraction.
         $resolvedMediaDir = $null
@@ -173,6 +174,14 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
 
                     $sectionAnchor = $anchorInfo.SectionAnchor
                     if (-not [string]::IsNullOrWhiteSpace($sectionAnchor)) {
+                        # Strategy B: Resolve cross-paragraph section GUIDs from previous paragraph
+                        foreach ($g in $pendingSectionGuids) {
+                            if (-not $linkMetadata.GuidToSection.ContainsKey($g)) {
+                                $linkMetadata.GuidToSection[$g] = $sectionAnchor
+                            }
+                        }
+                        $pendingSectionGuids.Clear()
+
                         if (-not $linkMetadata.SectionToTitle.ContainsKey($sectionAnchor)) {
                             $linkMetadata.SectionToTitle[$sectionAnchor] = $headingText
                         }
@@ -215,6 +224,18 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
                         }
                     }
                 }
+
+                # Strategy B: Paragraph has section_<guid> bookmarks but no SectionAnchor — defer to next paragraph
+                if ([string]::IsNullOrWhiteSpace($anchorInfo.SectionAnchor)) {
+                    foreach ($bookmarkName in @($anchorInfo.BookmarkNames)) {
+                        if ($bookmarkName -match '(?i)^section_(?<guid>[a-f0-9]{32})$') {
+                            $g = $Matches['guid'].ToLowerInvariant()
+                            if (-not $linkMetadata.GuidToSection.ContainsKey($g) -and -not $pendingSectionGuids.Contains($g)) {
+                                [void]$pendingSectionGuids.Add($g)
+                            }
+                        }
+                    }
+                }
             }
             elseif ($child.LocalName -eq 'tbl') {
                 $tableLines = ConvertFrom-OpenSpecOpenXmlTable -TableNode $child -NamespaceManager $nsmgr -RelationshipMap $relationshipMap -Archive $archive -MediaOutputDirectory $resolvedMediaDir
@@ -229,6 +250,80 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
         $markdown = Add-OpenSpecSectionAnchorsFromToc -Markdown $markdown
         if ([string]::IsNullOrWhiteSpace($markdown)) {
             throw 'OpenXml conversion produced empty markdown output.'
+        }
+
+        # Strategy A: Build GuidToSection from InternalHyperlinks by matching link text to SectionToTitle
+        if ($linkMetadata.SectionToTitle.Count -eq 0) {
+            $headingRegex = [regex]::new('^(?<level>#{1,6})\s+(?<num>\d+(?:\.\d+)*)\s+(?<title>.+)$', [System.Text.RegularExpressions.RegexOptions]::Multiline)
+            foreach ($m in $headingRegex.Matches($markdown)) {
+                $sectionAnchor = "Section_$($m.Groups['num'].Value)"
+                $fullTitle = "$($m.Groups['num'].Value) $($m.Groups['title'].Value.Trim())"
+                if (-not $linkMetadata.SectionToTitle.ContainsKey($sectionAnchor)) {
+                    $linkMetadata.SectionToTitle[$sectionAnchor] = $fullTitle
+                }
+            }
+        }
+        $titleToSection = @{}
+        foreach ($entry in $linkMetadata.SectionToTitle.GetEnumerator()) {
+            $key = [string]$entry.Key
+            $val = ([string]$entry.Value -replace '\s+', ' ').Trim()
+            if (-not [string]::IsNullOrWhiteSpace($val)) {
+                $titleToSection[$val] = $key
+                $withoutNum = ($val -replace '^\d+(?:\.\d+)*\s+', '').Trim()
+                if ($withoutNum -and -not $titleToSection.ContainsKey($withoutNum)) {
+                    $titleToSection[$withoutNum] = $key
+                }
+            }
+        }
+        $sectionGuidRegex = [regex]::new('^(?:[Ss]ection_)?([a-f0-9]{32})$')
+        $internalLinksArray = $linkMetadata.InternalHyperlinks.ToArray()
+        foreach ($link in $internalLinksArray) {
+            $anchor = [string]$link.Anchor
+            $text = ([string]$link.Text -replace '\s+', ' ').Trim()
+            $m = $sectionGuidRegex.Match($anchor)
+            if (-not $m.Success) { continue }
+            $guid = $m.Groups[1].Value.ToLowerInvariant()
+            if ($linkMetadata.GuidToSection.ContainsKey($guid)) { continue }
+            $matchedSection = $null
+            if ($titleToSection.ContainsKey($text)) {
+                $matchedSection = $titleToSection[$text]
+            }
+            else {
+                foreach ($tit in $titleToSection.Keys) {
+                    if ($tit -eq $text) { $matchedSection = $titleToSection[$tit]; break }
+                    $textEsc = [Management.Automation.WildcardPattern]::Escape($text)
+                    $titEsc = [Management.Automation.WildcardPattern]::Escape($tit)
+                    if ($tit -like "*$textEsc*" -and $text.Length -ge 8) { $matchedSection = $titleToSection[$tit]; break }
+                    if ($text -like "*$titEsc*" -and $tit.Length -ge 8) { $matchedSection = $titleToSection[$tit]; break }
+                }
+            }
+            if ($matchedSection) {
+                $linkMetadata.GuidToSection[$guid] = $matchedSection
+            }
+        }
+
+        # Strategy D: Build GuidToGlossarySlug from InternalHyperlinks with gt_<guid> anchors
+        $termToSlug = @{}
+        $glossaryDefRegex = [regex]::new('^\s*\*\*(?<term>[^*]+)\*\*\s*:\s*', [System.Text.RegularExpressions.RegexOptions]::Multiline)
+        foreach ($gm in $glossaryDefRegex.Matches($markdown)) {
+            $term = $gm.Groups['term'].Value.Trim()
+            $slug = Get-OpenSpecGlossarySlugFromTerm -Term $term
+            $termToSlug[$term] = $slug
+            if ($term -match '^(.+?)\s+\(([^)]+)\)\s*$') {
+                $termToSlug[$Matches[2].Trim()] = $slug
+            }
+        }
+        $gtGuidRegex = [regex]::new('^gt_([a-f0-9\-]{36})$', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        foreach ($link in $internalLinksArray) {
+            $anchor = [string]$link.Anchor
+            $text = ([string]$link.Text -replace '\s+', ' ').Trim()
+            $m = $gtGuidRegex.Match($anchor)
+            if (-not $m.Success) { continue }
+            $guid = $m.Groups[1].Value.ToLowerInvariant()
+            if ($linkMetadata.GuidToGlossarySlug.ContainsKey($guid)) { continue }
+            if ($termToSlug.ContainsKey($text)) {
+                $linkMetadata.GuidToGlossarySlug[$guid] = $termToSlug[$text]
+            }
         }
 
         $linkMetadata.Stats.GuidSectionMapCount = $linkMetadata.GuidToSection.Count
