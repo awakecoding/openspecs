@@ -7,6 +7,9 @@ function Invoke-OpenSpecMarkdownCleanup {
         [Parameter(Mandatory)]
         [string]$CurrentProtocolId,
 
+        [Parameter()]
+        [object]$SourceLinkMetadata,
+
         [switch]$RemoveDocumentIndex = $true
     )
 
@@ -65,7 +68,8 @@ function Invoke-OpenSpecMarkdownCleanup {
     $result = $tocResult.Markdown
     foreach ($issue in $tocResult.Issues) { [void]$issues.Add($issue) }
 
-    $guidResult = Resolve-OpenSpecGuidSectionAnchors -Markdown $result
+    $sourceGuidToSection = if ($SourceLinkMetadata -and $SourceLinkMetadata.PSObject.Properties['GuidToSection']) { $SourceLinkMetadata.GuidToSection } else { $null }
+    $guidResult = Resolve-OpenSpecGuidSectionAnchors -Markdown $result -GuidToSectionMap $sourceGuidToSection
     $result = $guidResult.Markdown
     foreach ($issue in $guidResult.Issues) { [void]$issues.Add($issue) }
 
@@ -106,7 +110,8 @@ function Invoke-OpenSpecMarkdownCleanup {
         })
     }
 
-    $guidByHeadingResult = Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $result
+    $sourceSectionToTitle = if ($SourceLinkMetadata -and $SourceLinkMetadata.PSObject.Properties['SectionToTitle']) { $SourceLinkMetadata.SectionToTitle } else { $null }
+    $guidByHeadingResult = Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $result -SectionToTitleMap $sourceSectionToTitle
     $result = $guidByHeadingResult.Markdown
     if ($guidByHeadingResult.LinksRepaired -gt 0) {
         [void]$issues.Add([pscustomobject]@{
@@ -117,7 +122,8 @@ function Invoke-OpenSpecMarkdownCleanup {
         })
     }
 
-    $glossaryResult = Add-OpenSpecGlossaryAnchorsAndRepairLinks -Markdown $result
+    $sourceGuidToGlossarySlug = if ($SourceLinkMetadata -and $SourceLinkMetadata.PSObject.Properties['GuidToGlossarySlug']) { $SourceLinkMetadata.GuidToGlossarySlug } else { $null }
+    $glossaryResult = Add-OpenSpecGlossaryAnchorsAndRepairLinks -Markdown $result -GuidToGlossarySlugMap $sourceGuidToGlossarySlug
     $result = $glossaryResult.Markdown
     if ($glossaryResult.AnchorsInjected -gt 0 -or $glossaryResult.LinksRepaired -gt 0) {
         [void]$issues.Add([pscustomobject]@{
@@ -125,6 +131,7 @@ function Invoke-OpenSpecMarkdownCleanup {
             Severity = 'Info'
             AnchorsInjected = $glossaryResult.AnchorsInjected
             LinksRepaired = $glossaryResult.LinksRepaired
+            SourceMapLinksRepaired = if ($glossaryResult.PSObject.Properties['SourceMapLinksRepaired']) { $glossaryResult.SourceMapLinksRepaired } else { 0 }
             Reason = 'Glossary term anchors were added and #gt_ links were rewritten so they resolve.'
         })
     }
@@ -1014,7 +1021,10 @@ function Resolve-OpenSpecGuidSectionAnchors {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
-        [string]$Markdown
+        [string]$Markdown,
+
+        [Parameter()]
+        [object]$GuidToSectionMap
     )
 
     $issues = New-Object System.Collections.Generic.List[object]
@@ -1032,6 +1042,20 @@ function Resolve-OpenSpecGuidSectionAnchors {
     # lowercase "section_" while the hyperlink uses "Section_"). Replacing
     # these with the Section_X.Y.Z form fixes both issues.
     $guidToSection = @{}
+    $sourceMapCount = 0
+    if ($GuidToSectionMap) {
+        foreach ($entry in $GuidToSectionMap.GetEnumerator()) {
+            $guid = ([string]$entry.Key).ToLowerInvariant()
+            $section = [string]$entry.Value
+            if ([string]::IsNullOrWhiteSpace($guid) -or [string]::IsNullOrWhiteSpace($section)) {
+                continue
+            }
+            if (-not $guidToSection.ContainsKey($guid)) {
+                $guidToSection[$guid] = $section
+                $sourceMapCount++
+            }
+        }
+    }
 
     # Order 1: GUID anchor followed by Section anchor (most common)
     $pairRegex1 = [regex]::new(
@@ -1090,6 +1114,7 @@ function Resolve-OpenSpecGuidSectionAnchors {
             Severity = 'Info'
             Count = $rewriteCount
             MappedAnchors = $guidToSection.Count
+            SourceMappedAnchors = $sourceMapCount
             Reason = 'GUID-based section anchors were resolved to section number anchors.'
         })
     }
@@ -1519,12 +1544,28 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
-        [string]$Markdown
+        [string]$Markdown,
+
+        [Parameter()]
+        [object]$SectionToTitleMap
     )
 
     $newLine = [Environment]::NewLine
     $lineArray = $Markdown -split '\r?\n'
     $titleToSection = @{}
+
+    if ($SectionToTitleMap) {
+        foreach ($entry in $SectionToTitleMap.GetEnumerator()) {
+            $sectionId = [string]$entry.Key
+            $title = [string]$entry.Value
+            if ([string]::IsNullOrWhiteSpace($sectionId) -or [string]::IsNullOrWhiteSpace($title)) { continue }
+            $norm = ($title -replace '\s+', ' ').Trim()
+            if (-not $titleToSection.ContainsKey($norm)) { $titleToSection[$norm] = $sectionId }
+            $withoutNum = $title -replace '^\d+(?:\.\d+)*\s+', ''
+            $normWithout = ($withoutNum -replace '\s+', ' ').Trim()
+            if ($normWithout -and -not $titleToSection.ContainsKey($normWithout)) { $titleToSection[$normWithout] = $sectionId }
+        }
+    }
 
     for ($i = 0; $i -lt $lineArray.Count; $i++) {
         $line = $lineArray[$i]
@@ -1543,21 +1584,35 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
         }
     }
 
-    $guidLinkRegex = [regex]::new('\[(?<text>[^\]]+)\]\(#Section_[a-fA-F0-9]{32}\)')
-    $linksRepaired = 0
-    foreach ($m in $guidLinkRegex.Matches($Markdown)) {
-        $norm = ($m.Groups['text'].Value -replace '\*+', '' -replace '\s+', ' ').Trim()
-        if ($titleToSection.ContainsKey($norm) -or $titleToSection.ContainsKey($m.Groups['text'].Value.Trim())) { $linksRepaired++ }
+    # Find best section for link text: exact match, or heading starts with link text (e.g. "Set Error Info PDU" -> "Set Error Info PDU Data (TS_...)").
+    $findSectionForLinkText = {
+        param($norm, $titleToSection)
+        if ($titleToSection.ContainsKey($norm)) { return $titleToSection[$norm] }
+        $candidates = @()
+        foreach ($key in $titleToSection.Keys) {
+            if ($key -eq $norm) { return $titleToSection[$key] }
+            if ($key.StartsWith($norm + ' ') -or $key.StartsWith($norm + '(')) { $candidates += $titleToSection[$key] }
+            elseif ($norm.StartsWith($key + ' ') -or $norm.StartsWith($key + '(')) { $candidates += $titleToSection[$key] }
+        }
+        if ($candidates.Count -eq 1) { return $candidates[0] }
+        return $null
     }
+    $guidLinkRegex = [regex]::new('\[(?<text>[^\]]+)\]\(#Section_[a-fA-F0-9]{32}\)')
     $result = $guidLinkRegex.Replace($Markdown, {
         param($m)
         $rawText = $m.Groups['text'].Value
         $norm = ($rawText -replace '\*+', '' -replace '\s+', ' ').Trim()
-        $sectionId = $null
-        if ($titleToSection.ContainsKey($norm)) { $sectionId = $titleToSection[$norm] }
-        if (-not $sectionId -and $titleToSection.ContainsKey($rawText.Trim())) { $sectionId = $titleToSection[$rawText.Trim()] }
+        $sectionId = & $findSectionForLinkText $norm $titleToSection
+        if (-not $sectionId -and $rawText.Trim() -ne $norm) { $sectionId = & $findSectionForLinkText $rawText.Trim() $titleToSection }
         if ($sectionId) { "[$rawText](#$sectionId)" } else { $m.Value }
     })
+    $linksRepaired = 0
+    foreach ($m in $guidLinkRegex.Matches($Markdown)) {
+        $norm = ($m.Groups['text'].Value -replace '\*+', '' -replace '\s+', ' ').Trim()
+        $sid = & $findSectionForLinkText $norm $titleToSection
+        if (-not $sid) { $sid = & $findSectionForLinkText $m.Groups['text'].Value.Trim() $titleToSection }
+        if ($sid) { $linksRepaired++ }
+    }
 
     [pscustomobject]@{
         Markdown       = $result
@@ -1569,7 +1624,10 @@ function Add-OpenSpecGlossaryAnchorsAndRepairLinks {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
-        [string]$Markdown
+        [string]$Markdown,
+
+        [Parameter()]
+        [object]$GuidToGlossarySlugMap
     )
 
     $newLine = [Environment]::NewLine
@@ -1609,7 +1667,9 @@ function Add-OpenSpecGlossaryAnchorsAndRepairLinks {
                 $slug = $slug.ToLowerInvariant()
                 if ([string]::IsNullOrWhiteSpace($slug)) { $slug = "term-$i" }
                 $slug = "gt_$slug"
-                if (-not $insertedSlugs.ContainsKey($slug)) {
+                $prevLine = if ($i -gt 0) { $lineArray[$i - 1].Trim() } else { '' }
+                $alreadyHasAnchor = $prevLine -match ('^\s*<a\s+id="' + [regex]::Escape($slug) + '"\s*></a>\s*$')
+                if (-not $insertedSlugs.ContainsKey($slug) -and -not $alreadyHasAnchor) {
                     $insertedSlugs[$slug] = $true
                     $anchorLine = "<a id=`"$slug`"></a>"
                     $lineArray.Insert($i, $anchorLine)
@@ -1626,6 +1686,12 @@ function Add-OpenSpecGlossaryAnchorsAndRepairLinks {
                     if ($abbrev.Length -gt 0 -and -not $abbrev.EndsWith('s')) {
                         $termToSlug["$abbrev`s"] = $slug
                     }
+                    # Plural phrasing used in body links: "Message Authentication Codes (MAC)", "input method editors (IMEs)", "Multipoint Communication Services (MCS)".
+                    if (-not $termBeforeParen.EndsWith('s')) {
+                        $termToSlug["$termBeforeParen`s ($abbrev)"] = $slug
+                        $abbrevPlural = if ($abbrev.EndsWith('s')) { $abbrev } else { "$abbrev`s" }
+                        $termToSlug["$termBeforeParen`s ($abbrevPlural)"] = $slug
+                    }
                 }
                 if ($normalizedTerm.EndsWith('s') -eq $false -and $normalizedTerm.Length -gt 1) {
                     $termToSlug["$normalizedTerm`s"] = $slug
@@ -1637,25 +1703,42 @@ function Add-OpenSpecGlossaryAnchorsAndRepairLinks {
 
     $result = $lineArray -join $newLine
 
-    # Rewrite [text](#gt_guid) to [text](#gt_slug) using link text -> slug map.
-    $linkRegex = [regex]::new('\[(?<text>[^\]]+)\]\(#gt_[a-f0-9\-]{36}\)')
+    # Rewrite [text](#gt_guid) to [text](#gt_slug) using source map first (deterministic), then link text -> slug map.
+    $linkRegex = [regex]::new('\[(?<text>[^\]]+)\]\(#gt_(?<guid>[a-f0-9\-]{36})\)')
     $linksRepaired = 0
-    foreach ($match in $linkRegex.Matches($result)) {
-        $norm = ($match.Groups['text'].Value -replace '\*+', '').Trim()
-        if ($termToSlug.ContainsKey($norm) -or $termToSlug.ContainsKey($match.Groups['text'].Value.Trim())) {
-            $linksRepaired++
+    $sourceGuidToSlug = @{}
+    if ($GuidToGlossarySlugMap) {
+        foreach ($entry in $GuidToGlossarySlugMap.GetEnumerator()) {
+            $guid = ([string]$entry.Key).ToLowerInvariant()
+            $slug = [string]$entry.Value
+            if ([string]::IsNullOrWhiteSpace($guid) -or [string]::IsNullOrWhiteSpace($slug)) { continue }
+            if (-not $sourceGuidToSlug.ContainsKey($guid)) { $sourceGuidToSlug[$guid] = $slug }
         }
+    }
+    $matchesBeforeRewrite = $linkRegex.Matches($result)
+    # Case-insensitive fallback: build lower-key map so link text "RSA" / "rsa" resolve when abbrev is "RSA".
+    $slugByLower = @{}
+    foreach ($k in $termToSlug.Keys) {
+        $lower = $k.ToLowerInvariant()
+        if (-not $slugByLower.ContainsKey($lower)) { $slugByLower[$lower] = $termToSlug[$k] }
     }
     $result = $linkRegex.Replace($result, {
         param($m)
         $rawText = $m.Groups['text'].Value
         $normalized = ($rawText -replace '\*+', '').Trim()
+        $guid = $m.Groups['guid'].Value.ToLowerInvariant()
         $slug = $null
-        if ($termToSlug.ContainsKey($normalized)) {
+        if ($sourceGuidToSlug.ContainsKey($guid)) {
+            $slug = $sourceGuidToSlug[$guid]
+        }
+        elseif ($termToSlug.ContainsKey($normalized)) {
             $slug = $termToSlug[$normalized]
         }
         elseif ($termToSlug.ContainsKey($rawText.Trim())) {
             $slug = $termToSlug[$rawText.Trim()]
+        }
+        elseif ($slugByLower.ContainsKey($normalized.ToLowerInvariant())) {
+            $slug = $slugByLower[$normalized.ToLowerInvariant()]
         }
         if ($slug) {
             "[$rawText](#$slug)"
@@ -1665,9 +1748,25 @@ function Add-OpenSpecGlossaryAnchorsAndRepairLinks {
         }
     })
 
+    foreach ($match in $matchesBeforeRewrite) {
+        $guid = $match.Groups['guid'].Value.ToLowerInvariant()
+        $norm = ($match.Groups['text'].Value -replace '\*+', '').Trim()
+        if ($sourceGuidToSlug.ContainsKey($guid) -or $termToSlug.ContainsKey($norm) -or $termToSlug.ContainsKey($match.Groups['text'].Value.Trim()) -or $slugByLower.ContainsKey($norm.ToLowerInvariant())) {
+            $linksRepaired++
+        }
+    }
+    $sourceMapLinksRepaired = 0
+    foreach ($match in $matchesBeforeRewrite) {
+        $guid = $match.Groups['guid'].Value.ToLowerInvariant()
+        if ($sourceGuidToSlug.ContainsKey($guid)) {
+            $sourceMapLinksRepaired++
+        }
+    }
+
     [pscustomobject]@{
         Markdown         = $result
         AnchorsInjected  = $injectedCount
         LinksRepaired    = $linksRepaired
+        SourceMapLinksRepaired = $sourceMapLinksRepaired
     }
 }

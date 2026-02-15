@@ -25,7 +25,7 @@ $files = if (Test-Path -LiteralPath $Path -PathType Container) {
     Write-Error "Path not found: $Path"
 }
 
-$linkRegex = [regex]::new('\]\(#([^)\)]+)\)')
+$linkRegex = [regex]::new('\[(?<text>[^\]]+)\]\(#(?<target>[^)]+)\)')
 $anchorRegex = [regex]::new('<a\s+id="([^"]+)"\s*></a>', 'IgnoreCase')
 
 foreach ($mdPath in $files) {
@@ -35,12 +35,20 @@ foreach ($mdPath in $files) {
         [void]$anchors.Add($m.Groups[1].Value)
     }
     $linkTargets = [System.Collections.Generic.Dictionary[string, [System.Collections.Generic.List[string]]]]::new([StringComparer]::OrdinalIgnoreCase)
+    $linkTextsByTarget = [System.Collections.Generic.Dictionary[string, [System.Collections.Generic.List[string]]]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($m in $linkRegex.Matches($content)) {
-        $target = $m.Groups[1].Value
+        $target = $m.Groups['target'].Value
+        $text = ($m.Groups['text'].Value -replace '\*+', '').Trim()
         if (-not $linkTargets.ContainsKey($target)) {
             $linkTargets[$target] = [System.Collections.Generic.List[string]]::new()
         }
         $linkTargets[$target].Add($target) | Out-Null
+        if (-not $linkTextsByTarget.ContainsKey($target)) {
+            $linkTextsByTarget[$target] = [System.Collections.Generic.List[string]]::new()
+        }
+        if (-not [string]::IsNullOrWhiteSpace($text)) {
+            $linkTextsByTarget[$target].Add($text) | Out-Null
+        }
     }
     $broken = [System.Collections.Generic.List[string]]::new()
     foreach ($t in $linkTargets.Keys) {
@@ -55,6 +63,15 @@ foreach ($mdPath in $files) {
         if ($b -match '^gt_[a-f0-9\-]{36}$') { $gt.Add($b) }
         elseif ($b -match '^Section_[a-f0-9]{32}$') { $sectionGuid.Add($b) }
         elseif ($b -match '^Section_\d+(?:\.\d+)*$') { $sectionNum.Add($b) }
+    }
+    $sectionGuidTextCounts = @{}
+    foreach ($target in $sectionGuid) {
+        if (-not $linkTextsByTarget.ContainsKey($target)) { continue }
+        foreach ($text in $linkTextsByTarget[$target]) {
+            if ([string]::IsNullOrWhiteSpace($text)) { continue }
+            if (-not $sectionGuidTextCounts.ContainsKey($text)) { $sectionGuidTextCounts[$text] = 0 }
+            $sectionGuidTextCounts[$text]++
+        }
     }
     $protocolId = [System.IO.Path]::GetFileNameWithoutExtension($mdPath)
     $report = @"
@@ -83,6 +100,13 @@ Generated from link targets that do not have a matching ``<a id="..."></a>`` in 
         $report += "Sample: " + (($sectionGuid | Sort-Object | Select-Object -First 5) -join ", ")
         if ($sectionGuid.Count -gt 5) { $report += " ... and $($sectionGuid.Count - 5) more" }
         $report += "`n"
+        if ($sectionGuidTextCounts.Count -gt 0) {
+            $topPatterns = $sectionGuidTextCounts.GetEnumerator() | Sort-Object -Property Value -Descending | Select-Object -First 10
+            $report += "`nTop unresolved Section GUID link texts:`n"
+            foreach ($p in $topPatterns) {
+                $report += "- ``$($p.Key)`` ($($p.Value))`n"
+            }
+        }
     }
     if ($sectionNum.Count -gt 0) {
         $report += "`n## 3. Section number links - $($sectionNum.Count) broken`n`n"
@@ -92,6 +116,24 @@ Generated from link targets that do not have a matching ``<a id="..."></a>`` in 
     }
     Write-Host "=== $protocolId ==="
     Write-Host "Broken: $($broken.Count) (gt_: $($gt.Count), Section_guid: $($sectionGuid.Count), Section_N.N: $($sectionNum.Count))"
+    $conversionReportPath = Join-Path -Path ([System.IO.Path]::GetDirectoryName($mdPath)) -ChildPath 'artifacts\conversion-report.json'
+    if (Test-Path -LiteralPath $conversionReportPath) {
+        $conv = Get-Content -LiteralPath $conversionReportPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $deterministic = 0
+        $heuristic = 0
+        foreach ($issue in @($conv.Issues)) {
+            switch ([string]$issue.Type) {
+                'GuidAnchorResolved' { $deterministic += [int]$issue.Count; break }
+                'GlossaryAnchorsAndLinks' { $deterministic += [int]$issue.SourceMapLinksRepaired; $heuristic += ([int]$issue.LinksRepaired - [int]$issue.SourceMapLinksRepaired); break }
+                'SectionGuidLinksRepairedByHeading' { $heuristic += [int]$issue.Count; break }
+                'SectionNumberLinksRepaired' { $heuristic += [int]$issue.Count; break }
+            }
+        }
+        Write-Host "Repairs (conversion report): deterministic=$deterministic heuristic=$heuristic"
+        $report += "`n## Repair source diagnostics`n`n"
+        $report += "- Deterministic repairs (source-map driven): **$deterministic**`n"
+        $report += "- Heuristic repairs (text/title matching): **$heuristic**`n"
+    }
     if ($OutputReport) {
         $reportPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($mdPath), 'broken-links-report.md')
         $report | Set-Content -LiteralPath $reportPath -Encoding UTF8 -NoNewline

@@ -92,6 +92,24 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
         $relationshipMap = Get-OpenSpecOpenXmlRelationshipMap -Archive $archive
         $lines = New-Object System.Collections.Generic.List[string]
         $emittedAnchors = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+        $linkMetadata = [ordered]@{
+            GuidToSection = @{}
+            SectionToTitle = @{}
+            TocAlias = @{}
+            GuidToGlossarySlug = @{}
+            InternalHyperlinks = New-Object System.Collections.Generic.List[object]
+            Stats = [ordered]@{
+                ParagraphCount = 0
+                HeadingCount = 0
+                BookmarkCount = 0
+                InternalHyperlinkCount = 0
+                GuidSectionMapCount = 0
+                TocAliasCount = 0
+                GlossaryGuidMapCount = 0
+            }
+        }
+        $inGlossary = $false
+        $glossaryHeadingLevel = 0
 
         # Resolve media output directory for image extraction.
         $resolvedMediaDir = $null
@@ -101,10 +119,12 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
 
         foreach ($child in $body.ChildNodes) {
             if ($child.LocalName -eq 'p') {
+                $linkMetadata.Stats.ParagraphCount++
                 $text = ConvertFrom-OpenSpecOpenXmlParagraph -ParagraphNode $child -NamespaceManager $nsmgr -RelationshipMap $relationshipMap -Archive $archive -MediaOutputDirectory $resolvedMediaDir
                 $styleNode = $child.SelectSingleNode('./w:pPr/w:pStyle', $nsmgr)
                 $style = if ($styleNode -and $styleNode.Attributes) { $styleNode.GetAttribute('val', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main') } else { '' }
-                $anchors = Get-OpenSpecOpenXmlParagraphAnchors -ParagraphNode $child -NamespaceManager $nsmgr -ParagraphText $text -HeadingStyle $style
+                $anchorInfo = Get-OpenSpecOpenXmlParagraphAnchorInfo -ParagraphNode $child -NamespaceManager $nsmgr -ParagraphText $text -HeadingStyle $style
+                $anchors = @($anchorInfo.Anchors)
 
                 foreach ($anchor in $anchors) {
                     if ([string]::IsNullOrWhiteSpace($anchor)) {
@@ -117,6 +137,13 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
 
                     $lines.Add(('<a id="' + $anchor + '"></a>'))
                 }
+                $linkMetadata.Stats.BookmarkCount += @($anchorInfo.BookmarkNames).Count
+
+                $internalLinks = Get-OpenSpecOpenXmlParagraphInternalHyperlinks -ParagraphNode $child -NamespaceManager $nsmgr
+                foreach ($internalLink in $internalLinks) {
+                    [void]$linkMetadata.InternalHyperlinks.Add($internalLink)
+                }
+                $linkMetadata.Stats.InternalHyperlinkCount += @($internalLinks).Count
 
                 $numberingNode = $child.SelectSingleNode('./w:pPr/w:numPr', $nsmgr)
                 if ([string]::IsNullOrWhiteSpace($text)) {
@@ -128,11 +155,42 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
 
                 if ($style -match '^Heading(?<level>[1-6])$') {
                     $level = [int]$Matches['level']
+                    $linkMetadata.Stats.HeadingCount++
                     # Strip bold from heading text — the heading style (#) already implies bold.
                     # Keep italic and code formatting if present.
                     $headingText = ($text -replace '\*\*(?!\*)', '').Trim()
                     $lines.Add((('{0} ' -f ('#' * $level)) + $headingText))
                     $lines.Add('')
+
+                    $isGlossaryHeading = $headingText -match '(?i)^\d+(?:\.\d+)*\s+Glossary$'
+                    if ($isGlossaryHeading) {
+                        $inGlossary = $true
+                        $glossaryHeadingLevel = $level
+                    }
+                    elseif ($inGlossary -and $level -le $glossaryHeadingLevel) {
+                        $inGlossary = $false
+                    }
+
+                    $sectionAnchor = $anchorInfo.SectionAnchor
+                    if (-not [string]::IsNullOrWhiteSpace($sectionAnchor)) {
+                        if (-not $linkMetadata.SectionToTitle.ContainsKey($sectionAnchor)) {
+                            $linkMetadata.SectionToTitle[$sectionAnchor] = $headingText
+                        }
+
+                        foreach ($bookmarkName in @($anchorInfo.BookmarkNames)) {
+                            if ($bookmarkName -match '(?i)^section_(?<guid>[a-f0-9]{32})$') {
+                                $guid = $Matches['guid'].ToLowerInvariant()
+                                if (-not $linkMetadata.GuidToSection.ContainsKey($guid)) {
+                                    $linkMetadata.GuidToSection[$guid] = $sectionAnchor
+                                }
+                            }
+                            elseif ($bookmarkName -match '^_Toc\d+$') {
+                                if (-not $linkMetadata.TocAlias.ContainsKey($bookmarkName)) {
+                                    $linkMetadata.TocAlias[$bookmarkName] = $sectionAnchor
+                                }
+                            }
+                        }
+                    }
                 }
                 elseif ($numberingNode) {
                     $lines.Add(('- ' + $text.Trim()))
@@ -140,6 +198,22 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
                 else {
                     $lines.Add($text.Trim())
                     $lines.Add('')
+                }
+
+                if ($inGlossary) {
+                    $defMatch = [regex]::Match($text, '^\s*\*\*(?<term>[^*]+)\*\*\s*:\s*')
+                    if ($defMatch.Success) {
+                        $term = $defMatch.Groups['term'].Value.Trim()
+                        $slug = Get-OpenSpecGlossarySlugFromTerm -Term $term
+                        foreach ($bookmarkName in @($anchorInfo.BookmarkNames)) {
+                            if ($bookmarkName -match '(?i)^gt_(?<guid>[a-f0-9\-]{36})$') {
+                                $guid = $Matches['guid'].ToLowerInvariant()
+                                if (-not $linkMetadata.GuidToGlossarySlug.ContainsKey($guid)) {
+                                    $linkMetadata.GuidToGlossarySlug[$guid] = $slug
+                                }
+                            }
+                        }
+                    }
                 }
             }
             elseif ($child.LocalName -eq 'tbl') {
@@ -157,6 +231,11 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
             throw 'OpenXml conversion produced empty markdown output.'
         }
 
+        $linkMetadata.Stats.GuidSectionMapCount = $linkMetadata.GuidToSection.Count
+        $linkMetadata.Stats.TocAliasCount = $linkMetadata.TocAlias.Count
+        $linkMetadata.Stats.GlossaryGuidMapCount = $linkMetadata.GuidToGlossarySlug.Count
+        $notes.Add("Link metadata captured: guidToSection=$($linkMetadata.Stats.GuidSectionMapCount), tocAlias=$($linkMetadata.Stats.TocAliasCount), guidToGlossarySlug=$($linkMetadata.Stats.GlossaryGuidMapCount), internalLinks=$($linkMetadata.Stats.InternalHyperlinkCount).")
+
         $markdown | Set-Content -LiteralPath $OutputPath -Encoding UTF8
     }
     finally {
@@ -165,11 +244,21 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
         }
     }
 
+    $linkMetadataOut = [ordered]@{
+        GuidToSection = $linkMetadata.GuidToSection
+        SectionToTitle = $linkMetadata.SectionToTitle
+        TocAlias = $linkMetadata.TocAlias
+        GuidToGlossarySlug = $linkMetadata.GuidToGlossarySlug
+        InternalHyperlinks = @($linkMetadata.InternalHyperlinks.ToArray())
+        Stats = $linkMetadata.Stats
+    }
+
     return [pscustomobject]@{
         PSTypeName = 'AwakeCoding.OpenSpecs.ConversionStep'
         Strategy = 'openxml-docx'
         OutputPath = $OutputPath
         Notes = $notes.ToArray()
+        LinkMetadata = $linkMetadataOut
     }
 }
 
@@ -679,7 +768,7 @@ function ConvertFrom-OpenSpecOpenXmlRunText {
     return ($parts.ToArray() -join '')
 }
 
-function Get-OpenSpecOpenXmlParagraphAnchors {
+function Get-OpenSpecOpenXmlParagraphAnchorInfo {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
@@ -696,6 +785,8 @@ function Get-OpenSpecOpenXmlParagraphAnchors {
     )
 
     $anchors = New-Object System.Collections.Generic.List[string]
+    $bookmarkNames = New-Object System.Collections.Generic.List[string]
+    $sectionAnchor = $null
 
     $bookmarkNodes = $ParagraphNode.SelectNodes('.//w:bookmarkStart', $NamespaceManager)
     foreach ($bookmarkNode in $bookmarkNodes) {
@@ -709,6 +800,7 @@ function Get-OpenSpecOpenXmlParagraphAnchors {
         }
 
         $anchors.Add($bookmarkName)
+        $bookmarkNames.Add($bookmarkName)
     }
 
     if ($HeadingStyle -match '^Heading[1-6]$') {
@@ -718,7 +810,82 @@ function Get-OpenSpecOpenXmlParagraphAnchors {
         }
     }
 
-    return @($anchors.ToArray() | Select-Object -Unique)
+    [pscustomobject]@{
+        Anchors = @($anchors.ToArray() | Select-Object -Unique)
+        BookmarkNames = @($bookmarkNames.ToArray() | Select-Object -Unique)
+        SectionAnchor = $sectionAnchor
+    }
+}
+
+function Get-OpenSpecOpenXmlParagraphAnchors {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [System.Xml.XmlNode]$ParagraphNode,
+
+        [Parameter(Mandatory)]
+        [System.Xml.XmlNamespaceManager]$NamespaceManager,
+
+        [Parameter()]
+        [string]$ParagraphText,
+
+        [Parameter()]
+        [string]$HeadingStyle
+    )
+
+    $info = Get-OpenSpecOpenXmlParagraphAnchorInfo -ParagraphNode $ParagraphNode -NamespaceManager $NamespaceManager -ParagraphText $ParagraphText -HeadingStyle $HeadingStyle
+    return @($info.Anchors)
+}
+
+function Get-OpenSpecOpenXmlParagraphInternalHyperlinks {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [System.Xml.XmlNode]$ParagraphNode,
+
+        [Parameter(Mandatory)]
+        [System.Xml.XmlNamespaceManager]$NamespaceManager
+    )
+
+    $links = New-Object System.Collections.Generic.List[object]
+    $hyperlinkNodes = $ParagraphNode.SelectNodes('.//w:hyperlink[@w:anchor]', $NamespaceManager)
+    foreach ($hyperlinkNode in $hyperlinkNodes) {
+        $anchor = $hyperlinkNode.GetAttribute('anchor', 'http://schemas.openxmlformats.org/wordprocessingml/2006/main')
+        if ([string]::IsNullOrWhiteSpace($anchor)) {
+            continue
+        }
+
+        $textNodes = $hyperlinkNode.SelectNodes('.//w:t', $NamespaceManager)
+        $parts = New-Object System.Collections.Generic.List[string]
+        foreach ($textNode in $textNodes) {
+            if (-not [string]::IsNullOrWhiteSpace($textNode.InnerText)) {
+                [void]$parts.Add($textNode.InnerText)
+            }
+        }
+        $text = (($parts.ToArray() -join '') -replace '\s+', ' ').Trim()
+
+        [void]$links.Add([pscustomobject]@{
+            Anchor = $anchor
+            Text = $text
+        })
+    }
+
+    return @($links.ToArray())
+}
+
+function Get-OpenSpecGlossarySlugFromTerm {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Term
+    )
+
+    $slug = $Term -replace '\s+', '-' -replace '[^\w\-]', '' -replace '-+', '-' -replace '^-|-$', ''
+    $slug = $slug.ToLowerInvariant()
+    if ([string]::IsNullOrWhiteSpace($slug)) {
+        $slug = 'term'
+    }
+    return "gt_$slug"
 }
 
 function Get-OpenSpecSectionAnchorFromHeadingText {

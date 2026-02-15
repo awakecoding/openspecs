@@ -144,7 +144,8 @@ function Convert-OpenSpecToMarkdown {
 
             $rawMarkdown = Get-Content -LiteralPath $conversionStep.OutputPath -Raw
             $normalized = ConvertTo-OpenSpecTextLayout -Markdown $rawMarkdown
-            $cleaned = Invoke-OpenSpecMarkdownCleanup -Markdown $normalized.Markdown -CurrentProtocolId $protocolId -RemoveDocumentIndex:$RemoveDocumentIndex
+            $sourceLinkMetadata = if ($conversionStep.PSObject.Properties['LinkMetadata']) { $conversionStep.LinkMetadata } else { $null }
+            $cleaned = Invoke-OpenSpecMarkdownCleanup -Markdown $normalized.Markdown -CurrentProtocolId $protocolId -RemoveDocumentIndex:$RemoveDocumentIndex -SourceLinkMetadata $sourceLinkMetadata
 
             $allIssues = @()
             if ($normalized.Issues) {
@@ -204,7 +205,13 @@ function Convert-OpenSpecToMarkdown {
                     HasDocling = $toolchain.HasDocling
                     HasMarkItDown = $toolchain.HasMarkItDown
                 }
+                SourceLinkMetadataPath = if ($sourceLinkMetadata) { (Join-Path -Path $artifactDirectory -ChildPath 'source-link-metadata.json') } else { $null }
             } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $sourceManifestPath -Encoding UTF8
+
+            if ($sourceLinkMetadata) {
+                $sourceLinkMetadataPath = Join-Path -Path $artifactDirectory -ChildPath 'source-link-metadata.json'
+                $sourceLinkMetadata | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $sourceLinkMetadataPath -Encoding UTF8
+            }
 
             $reportPath = Join-Path -Path $artifactDirectory -ChildPath 'conversion-report.json'
             [pscustomobject]@{
