@@ -23,56 +23,16 @@ jobs:
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
           Install-Module -Name OpenXML -Force -Scope CurrentUser
 
-      - name: Import module and convert all specs
+      - name: Build publish tree and Windows_Protocols.zip
         shell: pwsh
         working-directory: ${{ github.workspace }}
-        run: |
-          Import-Module .\AwakeCoding.OpenSpecs -Force
-          Get-OpenSpecCatalog -IncludeReferenceSpecs |
-            Save-OpenSpecDocument -Format DOCX -OutputPath ./downloads-convert -Force |
-            Where-Object { $_.Status -in 'Downloaded', 'Exists' } |
-            Convert-OpenSpecToMarkdown -OutputPath ./converted-specs -Force -Parallel -ThrottleLimit 4
-
-      - name: Repair broken links (post-conversion pass)
-        shell: pwsh
-        working-directory: ${{ github.workspace }}
-        run: .\scripts\Repair-AllBrokenLinks.ps1 -Path ./converted-specs
-
-      - name: Build publish directory and index
-        shell: pwsh
-        working-directory: ${{ github.workspace }}
-        run: |
-          Import-Module .\AwakeCoding.OpenSpecs -Force
-          $converted = Join-Path $PWD 'converted-specs'
-          $publish = Join-Path $PWD 'publish'
-          New-Item -Path $publish -ItemType Directory -Force | Out-Null
-          Get-ChildItem -LiteralPath $converted -Directory | ForEach-Object {
-            $name = $_.Name
-            $md = Join-Path $_.FullName "$name.md"
-            if (-not (Test-Path -LiteralPath $md)) { $md = Join-Path $_.FullName 'README.md' }
-            if (-not (Test-Path -LiteralPath $md)) { $md = Join-Path $_.FullName 'index.md' }
-            if (-not (Test-Path -LiteralPath $md)) { return }
-            $dest = Join-Path $publish $name
-            New-Item -Path $dest -ItemType Directory -Force | Out-Null
-            Copy-Item -LiteralPath $md -Destination $dest -Force
-            $media = Join-Path $_.FullName 'media'
-            if (Test-Path -LiteralPath $media -PathType Container) {
-              Copy-Item -LiteralPath $media -Destination $dest -Recurse -Force
-            }
-          }
-          Update-OpenSpecIndex -Path $publish -Title 'Microsoft Open Specifications'
-
-      - name: Zip publish contents
-        shell: pwsh
-        working-directory: ${{ github.workspace }}
-        run: |
-          Compress-Archive -Path .\publish\* -DestinationPath .\publish.zip -Force
+        run: .\scripts\Build-Publish.ps1
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
           name: publish
-          path: publish.zip
+          path: Windows_Protocols.zip
 
       - name: Push to orphaned publish branch
         shell: pwsh
