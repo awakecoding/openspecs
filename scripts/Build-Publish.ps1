@@ -36,7 +36,7 @@ try {
     Import-Module (Join-Path $root 'AwakeCoding.OpenSpecs') -Force
 
     Write-Host 'Downloading DOCX files...'
-    $downloadResults = Get-OpenSpecCatalog |
+    $downloadResults = Get-OpenSpecCatalog -IncludeReferenceSpecs |
         Save-OpenSpecDocument -Format DOCX -OutputPath $dlPath -Force |
         Where-Object { $_.Status -in 'Downloaded', 'Exists' }
 

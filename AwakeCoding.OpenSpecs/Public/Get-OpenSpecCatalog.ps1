@@ -1,7 +1,18 @@
+$script:OpenSpecReferenceDocsUri = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-winprotlp/1593dc07-6116-4e9e-8aeb-85c7438fab0a'
+
+# Reference specs (MS-DTYP, MS-ERREF, MS-LCID, MS-UCODEREF) from https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-winprotlp/1593dc07-6116-4e9e-8aeb-85c7438fab0a
+$script:OpenSpecReferenceSpecs = @(
+    [pscustomobject]@{ ProtocolId = 'MS-DTYP'; Title = 'Windows Data Types'; Slug = 'ms-dtyp'; SpecPageUrl = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/cca27429-5689-4a16-b2b4-9325d93e4ba2' }
+    [pscustomobject]@{ ProtocolId = 'MS-ERREF'; Title = 'Windows Error Codes'; Slug = 'ms-erref'; SpecPageUrl = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/1bc92ddf-b79e-413c-bbaa-99a5281a6c90' }
+    [pscustomobject]@{ ProtocolId = 'MS-LCID'; Title = 'Windows Language Code Identifier (LCID) Reference'; Slug = 'ms-lcid'; SpecPageUrl = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/70feba9f-294e-491e-b6eb-56532684c37f' }
+    [pscustomobject]@{ ProtocolId = 'MS-UCODEREF'; Title = 'Windows Protocols Unicode Reference'; Slug = 'ms-ucoderef'; SpecPageUrl = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-ucoderef/4a045e08-fc29-4f22-baf4-16f38c2825fb' }
+)
+
 function Get-OpenSpecCatalog {
     [CmdletBinding()]
     param(
-        [string]$Uri = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/MS-WINPROTLP/e36c976a-6263-42a8-b119-7a3cc41ddd2a'
+        [string]$Uri = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/MS-WINPROTLP/e36c976a-6263-42a8-b119-7a3cc41ddd2a',
+        [switch]$IncludeReferenceSpecs
     )
 
     $response = Invoke-OpenSpecRequest -Uri $Uri
@@ -76,6 +87,22 @@ function Get-OpenSpecCatalog {
                 Slug = $protocolId.ToLowerInvariant()
                 SourcePage = $Uri
             })
+        }
+    }
+
+    if ($IncludeReferenceSpecs) {
+        foreach ($ref in $script:OpenSpecReferenceSpecs) {
+            if ($seen.Add($ref.ProtocolId)) {
+                $entries.Add([pscustomobject]@{
+                    PSTypeName = 'AwakeCoding.OpenSpecs.Entry'
+                    ProtocolId = $ref.ProtocolId
+                    Title = $ref.Title
+                    Description = ''
+                    SpecPageUrl = $ref.SpecPageUrl
+                    Slug = $ref.Slug
+                    SourcePage = $script:OpenSpecReferenceDocsUri
+                })
+            }
         }
     }
 

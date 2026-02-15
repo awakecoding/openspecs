@@ -9,7 +9,7 @@ $dl = Join-Path $repoRoot 'artifacts/downloads'
 $out = Join-Path $repoRoot 'artifacts/converted-specs'
 New-Item -Path $dl, $out -ItemType Directory -Force | Out-Null
 
-Get-OpenSpecCatalog |
+Get-OpenSpecCatalog -IncludeReferenceSpecs |
     Save-OpenSpecDocument -Format DOCX -OutputPath $dl -Force |
     Where-Object { $_.Status -in 'Downloaded', 'Exists' } |
     Convert-OpenSpecToMarkdown -OutputPath $out -Force -Parallel -ThrottleLimit 4

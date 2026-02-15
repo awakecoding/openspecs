@@ -28,7 +28,7 @@ These folders are tracked with `.gitkeep`, while their contents are ignored via 
 
 ## Cmdlets
 
-- `Get-OpenSpecCatalog` - Gets Windows Protocol technical document entries from the Learn catalog page.
+- `Get-OpenSpecCatalog` - Gets Windows Protocol technical document entries from the Learn catalog page. Use `-IncludeReferenceSpecs` to also include reference docs (MS-DTYP, MS-ERREF, MS-LCID, MS-UCODEREF) from [Reference Documents](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-winprotlp/1593dc07-6116-4e9e-8aeb-85c7438fab0a).
 - `Find-OpenSpec` - Filters catalog entries by query or protocol ID.
 - `Get-OpenSpecVersion` - Resolves latest (or all) version rows for a spec page.
 - `Get-OpenSpecDownloadLink` - Gets download URLs for PDF and/or DOCX.
