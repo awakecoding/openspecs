@@ -17,7 +17,10 @@ function Save-OpenSpecDocument {
 
         [switch]$AllVersions,
 
-        [switch]$Force
+        [switch]$Force,
+
+        [switch]$Parallel,
+        [int]$ThrottleLimit = 8
     )
 
     begin {
@@ -45,8 +48,15 @@ function Save-OpenSpecDocument {
                 }
 
                 if ($item.ProtocolId) {
-                    foreach ($link in (Get-OpenSpecDownloadLink -ProtocolId $item.ProtocolId -Format $Format -AllVersions:$AllVersions -IncludePrevious:$IncludePrevious)) {
-                        [void]$links.Add($link)
+                    if ($item.SpecPageUrl) {
+                        foreach ($link in (Get-OpenSpecDownloadLink -InputObject $item -Format $Format -AllVersions:$AllVersions -IncludePrevious:$IncludePrevious)) {
+                            [void]$links.Add($link)
+                        }
+                    }
+                    else {
+                        foreach ($link in (Get-OpenSpecDownloadLink -ProtocolId $item.ProtocolId -Format $Format -AllVersions:$AllVersions -IncludePrevious:$IncludePrevious)) {
+                            [void]$links.Add($link)
+                        }
                     }
                 }
             }
@@ -73,6 +83,7 @@ function Save-OpenSpecDocument {
             }
         }
 
+        $toDownload = [System.Collections.Generic.List[object]]::new()
         foreach ($link in $links) {
             $fileName = $link.FileName
             if ([string]::IsNullOrWhiteSpace($fileName)) {
@@ -94,15 +105,17 @@ function Save-OpenSpecDocument {
                 continue
             }
 
-            if (-not $PSCmdlet.ShouldProcess($link.Url, "Download to $destination")) {
-                continue
+            if ($PSCmdlet.ShouldProcess($link.Url, "Download to $destination")) {
+                [void]$toDownload.Add([pscustomobject]@{ Link = $link; Destination = $destination })
             }
+        }
 
+        $downloadOne = {
+            param($link, $destination)
             try {
                 $attempt = 0
                 $maxRetries = 4
                 $delay = 1
-
                 while ($true) {
                     $attempt++
                     try {
@@ -114,17 +127,12 @@ function Save-OpenSpecDocument {
                         if ($_.Exception.Response -and $_.Exception.Response.StatusCode) {
                             $statusCode = [int]$_.Exception.Response.StatusCode
                         }
-
                         $transient = ($statusCode -in 429, 500, 502, 503, 504) -or (-not $statusCode)
-                        if ($attempt -ge $maxRetries -or -not $transient) {
-                            throw
-                        }
-
+                        if ($attempt -ge $maxRetries -or -not $transient) { throw }
                         Start-Sleep -Seconds $delay
                         $delay = [Math]::Min($delay * 2, 16)
                     }
                 }
-
                 [pscustomobject]@{
                     PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                     ProtocolId = $link.ProtocolId
@@ -146,6 +154,62 @@ function Save-OpenSpecDocument {
                     Error = $_.Exception.Message
                     Size = $null
                 }
+            }
+        }
+
+        $useParallel = $Parallel -and $PSVersionTable.PSVersion.Major -ge 7 -and $toDownload.Count -gt 1
+        if ($useParallel) {
+            $toDownload | ForEach-Object -Parallel {
+                $link = $_.Link
+                $destination = $_.Destination
+                try {
+                    $attempt = 0
+                    $maxRetries = 4
+                    $delay = 1
+                    while ($true) {
+                        $attempt++
+                        try {
+                            Invoke-WebRequest -Uri $link.Url -OutFile $destination -MaximumRedirection 8 -ErrorAction Stop
+                            break
+                        }
+                        catch {
+                            $statusCode = $null
+                            if ($_.Exception.Response -and $_.Exception.Response.StatusCode) {
+                                $statusCode = [int]$_.Exception.Response.StatusCode
+                            }
+                            $transient = ($statusCode -in 429, 500, 502, 503, 504) -or (-not $statusCode)
+                            if ($attempt -ge $maxRetries -or -not $transient) { throw }
+                            Start-Sleep -Seconds $delay
+                            $delay = [Math]::Min($delay * 2, 16)
+                        }
+                    }
+                    [pscustomobject]@{
+                        PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
+                        ProtocolId = $link.ProtocolId
+                        Format = $link.Format
+                        Url = $link.Url
+                        Path = $destination
+                        Status = 'Downloaded'
+                        Size = (Get-Item -LiteralPath $destination).Length
+                    }
+                }
+                catch {
+                    [pscustomobject]@{
+                        PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
+                        ProtocolId = $link.ProtocolId
+                        Format = $link.Format
+                        Url = $link.Url
+                        Path = $destination
+                        Status = 'Failed'
+                        Error = $_.Exception.Message
+                        Size = $null
+                    }
+                }
+            } -ThrottleLimit $ThrottleLimit
+        }
+        else {
+            foreach ($item in $toDownload) {
+                & $downloadOne -link $item.Link -destination $item.Destination
             }
         }
     }
