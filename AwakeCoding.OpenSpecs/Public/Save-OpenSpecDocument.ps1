@@ -45,8 +45,15 @@ function Save-OpenSpecDocument {
                 }
 
                 if ($item.ProtocolId) {
-                    foreach ($link in (Get-OpenSpecDownloadLink -ProtocolId $item.ProtocolId -Format $Format -AllVersions:$AllVersions -IncludePrevious:$IncludePrevious)) {
-                        [void]$links.Add($link)
+                    if ($item.SpecPageUrl) {
+                        foreach ($link in (Get-OpenSpecDownloadLink -InputObject $item -Format $Format -AllVersions:$AllVersions -IncludePrevious:$IncludePrevious)) {
+                            [void]$links.Add($link)
+                        }
+                    }
+                    else {
+                        foreach ($link in (Get-OpenSpecDownloadLink -ProtocolId $item.ProtocolId -Format $Format -AllVersions:$AllVersions -IncludePrevious:$IncludePrevious)) {
+                            [void]$links.Add($link)
+                        }
                     }
                 }
             }
