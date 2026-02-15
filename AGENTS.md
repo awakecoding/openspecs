@@ -4,7 +4,13 @@ Instructions for AI agents working in this repository. For user-facing usage and
 
 ## Project summary
 
-This repo is a PowerShell module that discovers and downloads Microsoft Open Specifications (Windows Protocols) from Learn and converts DOCX/PDF documents to strict GFM Markdown. There is no separate build: the module is `AwakeCoding.OpenSpecs.psd1` + `AwakeCoding.OpenSpecs.psm1` plus dot-sourced `Public/*.ps1` and `Private/*.ps1` on load. Target runtimes are PowerShell 5.1 and 7 (PSEditions Desktop and Core).
+This repo is a PowerShell module that discovers and downloads Microsoft Open Specifications (Windows Protocols) from Learn and converts DOCX/PDF documents to strict GFM Markdown. There is no separate build: the module is `AwakeCoding.OpenSpecs.psd1` + `AwakeCoding.OpenSpecs.psm1` plus dot-sourced `Public/*.ps1` and `Private/*.ps1` on load.
+
+## PowerShell version (required)
+
+- **PowerShell 7 only.** Use the latest stable PowerShell 7 (pwsh) at all times. This is mandatory.
+- **Windows PowerShell (5.1) compatibility is not a goal and is forbidden.** Do not add workarounds, conditional logic, or compatibility shims for Windows PowerShell. Code must assume PowerShell 7+ exclusively.
+- Run all scripts, tests, and module commands with `pwsh`, not `powershell.exe`. CI, local development, and any tooling must target PowerShell 7.
 
 ## File and directory structure
 
@@ -43,7 +49,7 @@ Tests use Pester 5. From repo root:
 Invoke-Pester ./tests
 ```
 
-Use PowerShell 7 when possible for consistency with CI. Some tests are tagged `Live` and hit the network (Find-OpenSpec, Get-OpenSpecDownloadLink). To skip them:
+Use PowerShell 7 (required; see above). Some tests are tagged `Live` and hit the network (Find-OpenSpec, Get-OpenSpecDownloadLink). To skip them:
 
 ```powershell
 Invoke-Pester ./tests -Tag '!Live'
@@ -55,4 +61,4 @@ When you add a new exported function, add its name to the `$expected` array in t
 
 - Do not remove or rename exported functions without updating `AwakeCoding.OpenSpecs.psd1` and the exports test.
 - Conversion: DOCX is handled in-module via OpenXML; PDF uses external `docling` or `markitdown` when available (see `AwakeCoding.OpenSpecs/Private/Get-OpenSpecToolchain.ps1`). Output is textual (tables, ASCII), not image-based.
-- For bulk or CI conversions, use `-Parallel -ThrottleLimit N` on PowerShell 7 with `Convert-OpenSpecToMarkdown` or `Invoke-OpenSpecConversionPipeline`.
+- For bulk or CI conversions, use `-Parallel -ThrottleLimit N` with `Convert-OpenSpecToMarkdown` or `Invoke-OpenSpecConversionPipeline` (PowerShell 7 only).
