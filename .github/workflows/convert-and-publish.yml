@@ -17,26 +17,55 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install oxipng
+        shell: pwsh
+        run: |
+          $release = Invoke-RestMethod -Uri 'https://api.github.com/repos/oxipng/oxipng/releases/latest'
+          $asset = $release.assets | Where-Object { $_.name -match 'x86_64-pc-windows-msvc\.zip$' } | Select-Object -First 1
+          if (-not $asset) {
+            throw 'Could not find Windows x86_64 zip asset in latest oxipng release.'
+          }
+          $zipPath = Join-Path $env:RUNNER_TEMP $asset.name
+          Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $zipPath
+          $extractPath = Join-Path $env:RUNNER_TEMP 'oxipng'
+          if (Test-Path -LiteralPath $extractPath) {
+            Remove-Item -LiteralPath $extractPath -Recurse -Force
+          }
+          Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath -Force
+          $binPath = Get-ChildItem -LiteralPath $extractPath -Recurse -File -Filter 'oxipng.exe' | Select-Object -First 1
+          if (-not $binPath) {
+            throw 'oxipng.exe was not found after extracting release archive.'
+          }
+          $binDir = Split-Path -Path $binPath.FullName -Parent
+          $env:PATH = "$binDir;$env:PATH"
+          Add-Content -Path $env:GITHUB_PATH -Value $binDir
+          & $binPath.FullName --version
+
       - name: Install OpenXML module
         shell: pwsh
         run: |
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
           Install-Module -Name OpenXML -Force -Scope CurrentUser
 
-      - name: Build publish tree and Windows_Protocols.zip
+      - name: Build publish tree and windows-protocols.zip
         shell: pwsh
         working-directory: ${{ github.workspace }}
-        run: .\scripts\Build-Publish.ps1
+        run: .\scripts\Build-Publish.ps1 -ThrottleLimit 4 -AllowPartial
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
           name: publish
-          path: Windows_Protocols.zip
+          path: windows-protocols.zip
+
+      - name: Stage downloadable bundle in publish tree
+        shell: pwsh
+        working-directory: ${{ github.workspace }}
+        run: Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\skills\windows-protocols\windows-protocols.zip -Force
 
       - name: Push to orphaned publish branch
         shell: pwsh
-        working-directory: publish
+        working-directory: skills/windows-protocols
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

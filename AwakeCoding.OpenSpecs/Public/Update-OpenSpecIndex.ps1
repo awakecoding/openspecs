@@ -10,17 +10,34 @@ function Update-OpenSpecIndex {
 
         [switch]$IncludeDescription = $false,
 
-        [string[]]$OverviewProtocolIds = @()
+        [string[]]$OverviewProtocolIds = @(),
+
+        [string[]]$ReferenceProtocolIds = @('MS-DTYP', 'MS-ERREF', 'MS-LCID', 'MS-UCODEREF')
     )
 
     if (-not (Test-Path -LiteralPath $Path)) {
         throw "Output directory not found: $Path"
     }
 
+    $overviewDocsUri = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-winprotlp/4a1806f9-2979-491d-af3c-f82ed0a4c1ba'
+    $technicalDocsUri = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-winprotlp/e36c976a-6263-42a8-b119-7a3cc41ddd2a'
+    $referenceDocsUri = 'https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-winprotlp/1593dc07-6116-4e9e-8aeb-85c7438fab0a'
+
+    $normalizeUri = {
+        param([string]$Uri)
+        if ([string]::IsNullOrWhiteSpace($Uri)) {
+            return ''
+        }
+        return $Uri.Trim().TrimEnd('/').ToLowerInvariant()
+    }
+
+    $normalizedOverviewUri = & $normalizeUri $overviewDocsUri
+    $normalizedReferenceUri = & $normalizeUri $referenceDocsUri
+
     $catalogMap = @{}
     if ($UseCatalogTitles) {
         try {
-            $catalog = @(Get-OpenSpecCatalog)
+            $catalog = @(Get-OpenSpecCatalog -IncludeReferenceSpecs -IncludeOverviewDocs)
             foreach ($entry in $catalog) {
                 $catalogMap[$entry.ProtocolId] = $entry
                 $normalized = $entry.ProtocolId -replace '-', '_'
@@ -100,21 +117,50 @@ function Update-OpenSpecIndex {
     }
 
     $overviewIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
-    foreach ($id in $OverviewProtocolIds) { [void]$overviewIds.Add($id.Trim()) }
+    foreach ($id in $OverviewProtocolIds) {
+        $trimmed = $id.Trim()
+        if ($trimmed) { [void]$overviewIds.Add($trimmed) }
+    }
 
-    $overviewEntries = @($entries | Where-Object { $overviewIds.Contains($_.Name) })
-    $specEntries = @($entries | Where-Object { -not $overviewIds.Contains($_.Name) })
+    $referenceIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($id in $ReferenceProtocolIds) {
+        $trimmed = $id.Trim()
+        if ($trimmed) { [void]$referenceIds.Add($trimmed) }
+    }
+
+    $overviewEntries = New-Object System.Collections.Generic.List[object]
+    $technicalEntries = New-Object System.Collections.Generic.List[object]
+    $referenceEntries = New-Object System.Collections.Generic.List[object]
+
+    foreach ($entry in $entries) {
+        if ($overviewIds.Contains($entry.Name)) {
+            [void]$overviewEntries.Add($entry)
+            continue
+        }
+        if ($referenceIds.Contains($entry.Name)) {
+            [void]$referenceEntries.Add($entry)
+            continue
+        }
+
+        $catalogEntry = $catalogMap[$entry.Name]
+        $sourcePage = ''
+        if ($catalogEntry -and $catalogEntry.PSObject.Properties.Match('SourcePage').Count -gt 0) {
+            $sourcePage = & $normalizeUri $catalogEntry.SourcePage
+        }
+
+        if ($sourcePage -eq $normalizedOverviewUri) {
+            [void]$overviewEntries.Add($entry)
+        }
+        elseif ($sourcePage -eq $normalizedReferenceUri) {
+            [void]$referenceEntries.Add($entry)
+        }
+        else {
+            [void]$technicalEntries.Add($entry)
+        }
+    }
 
     $sb = New-Object System.Text.StringBuilder
     [void]$sb.AppendLine("# $Title")
-    [void]$sb.AppendLine()
-    $totalCount = $entries.Count
-    if ($overviewEntries.Count -gt 0 -and $specEntries.Count -gt 0) {
-        [void]$sb.AppendLine("$totalCount documents converted to Markdown (overview and protocol specifications).")
-    }
-    else {
-        [void]$sb.AppendLine("$totalCount protocol specifications converted to Markdown.")
-    }
     [void]$sb.AppendLine()
 
     $writeTable = {
@@ -136,20 +182,19 @@ function Update-OpenSpecIndex {
         }
     }
 
-    if ($overviewEntries.Count -gt 0) {
-        [void]$sb.AppendLine('## Overview')
-        [void]$sb.AppendLine()
-        & $writeTable $overviewEntries $IncludeDescription
-        [void]$sb.AppendLine()
-    }
+    [void]$sb.AppendLine('## Overview Documents')
+    [void]$sb.AppendLine()
+    & $writeTable $overviewEntries $IncludeDescription
+    [void]$sb.AppendLine()
 
-    if ($specEntries.Count -gt 0) {
-        if ($overviewEntries.Count -gt 0) {
-            [void]$sb.AppendLine('## Protocol specifications')
-            [void]$sb.AppendLine()
-        }
-        & $writeTable $specEntries $IncludeDescription
-    }
+    [void]$sb.AppendLine('## Technical Documents')
+    [void]$sb.AppendLine()
+    & $writeTable $technicalEntries $IncludeDescription
+    [void]$sb.AppendLine()
+
+    [void]$sb.AppendLine('## Reference Documents')
+    [void]$sb.AppendLine()
+    & $writeTable $referenceEntries $IncludeDescription
 
     $readmePath = Join-Path -Path $Path -ChildPath 'README.md'
     $sb.ToString() | Set-Content -LiteralPath $readmePath -Encoding UTF8

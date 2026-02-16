@@ -4,11 +4,11 @@
 .DESCRIPTION
     Downloads all Open Specs DOCX, converts to markdown, repairs broken links,
     builds the publish directory, generates the README index, and optionally creates
-    Windows_Protocols.zip (Microsoft publishes a PDF zip with the same name; this is the markdown equivalent).
+    windows-protocols.zip (Microsoft publishes a PDF zip as Windows_Protocols; this is the markdown equivalent).
     Use -Filter for faster local iteration (e.g. -Filter 'MS-RDP' for RDP-related specs).
 .EXAMPLE
     .\Build-Publish.ps1
-    .\Build-Publish.ps1 -ZipPath ''  # skip zip, publish folder only
+    .\Build-Publish.ps1 -ZipPath ''  # skip zip, skill folder only
 .EXAMPLE
     .\Build-Publish.ps1 -Filter 'MS-RDP'  # RDP-related specs only (faster local iteration)
 .EXAMPLE
@@ -19,12 +19,13 @@ param(
     [string]$WorkspaceRoot = (Get-Location),
     [string]$DownloadsPath = 'downloads-convert',
     [string]$ConvertedPath = 'converted-specs',
-    [string]$PublishPath = 'publish',
-    [string]$ZipPath = 'Windows_Protocols.zip',
+    [string]$PublishPath = 'skills/windows-protocols',
+    [string]$ZipPath = 'windows-protocols.zip',
     [string]$IndexTitle = 'Microsoft Open Specifications',
     [string[]]$Filter = @(),
     [int]$ThrottleLimit = 8,
-    [switch]$SkipOpenXmlInstall
+    [switch]$SkipOpenXmlInstall,
+    [switch]$AllowPartial  # When set, continue build when some specs fail to download (e.g. 404 from stale CDN links)
 )
 
 $ErrorActionPreference = 'Stop'
@@ -48,7 +49,7 @@ try {
     Import-Module (Join-Path $root 'AwakeCoding.OpenSpecs') -Force
 
     Write-Host 'Downloading DOCX files...'
-    $catalog = Get-OpenSpecCatalog -IncludeReferenceSpecs
+    $catalog = Get-OpenSpecCatalog -IncludeReferenceSpecs -IncludeOverviewDocs
     $patterns = @()
     if ($Filter.Count -gt 0) {
         $patterns = @($Filter | Where-Object { $_ } | ForEach-Object {
@@ -65,9 +66,43 @@ try {
         }
         Write-Host "Filter ($($Filter -join ', ')) -> $($catalog.Count) specs"
     }
-    $downloadResults = $catalog |
+    $downloadResultsAll = $catalog |
         Save-OpenSpecDocument -Format DOCX -OutputPath $dlPath -Force -Parallel -ThrottleLimit $ThrottleLimit |
-        Where-Object { $_.Status -in 'Downloaded', 'Exists' }
+        ForEach-Object { $_ }
+
+    $downloadResults = @($downloadResultsAll | Where-Object { $_.Status -in 'Downloaded', 'Exists' })
+    $downloadedProtocolIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($result in $downloadResults) {
+        if ($result.ProtocolId) {
+            [void]$downloadedProtocolIds.Add($result.ProtocolId)
+        }
+    }
+    $missingDownloads = @($catalog | Where-Object { -not $downloadedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
+
+    # Retry missing downloads with lower parallelism (helps with CDN rate limiting in CI)
+    if ($missingDownloads.Count -gt 0) {
+        Write-Host "Retrying $($missingDownloads.Count) missing downloads with reduced parallelism..."
+        Start-Sleep -Seconds 10
+        $retryCatalog = $catalog | Where-Object { $missingDownloads -contains $_.ProtocolId }
+        $retryResults = $retryCatalog |
+            Save-OpenSpecDocument -Format DOCX -OutputPath $dlPath -Force -Parallel -ThrottleLimit 2 |
+            ForEach-Object { $_ }
+        foreach ($result in ($retryResults | Where-Object { $_.Status -in 'Downloaded', 'Exists' -and $_.ProtocolId })) {
+            [void]$downloadedProtocolIds.Add($result.ProtocolId)
+        }
+        $downloadResults = @($downloadResultsAll | Where-Object { $_.Status -in 'Downloaded', 'Exists' }) + @($retryResults | Where-Object { $_.Status -in 'Downloaded', 'Exists' })
+    }
+
+    $missingDownloads = @($catalog | Where-Object { -not $downloadedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
+    if ($missingDownloads.Count -gt 0) {
+        if ($AllowPartial) {
+            Write-Warning "Skipping $($missingDownloads.Count) specs with missing downloads (CDN links may be stale): $($missingDownloads -join ', ')"
+            $catalog = $catalog | Where-Object { $downloadedProtocolIds.Contains($_.ProtocolId) }
+        }
+        else {
+            throw "Missing downloads for $($missingDownloads.Count) specs: $($missingDownloads -join ', ')"
+        }
+    }
 
     $toConvert = @($downloadResults)
     Write-Host "Convert: $($toConvert.Count) specs"
@@ -82,6 +117,7 @@ try {
     Write-Host 'Building publish directory...'
     New-Item -Path $pubPath -ItemType Directory -Force | Out-Null
 
+    $publishedProtocolIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
     Get-ChildItem -LiteralPath $convPath -Directory | ForEach-Object {
         $name = $_.Name
         $md = Join-Path $_.FullName "$name.md"
@@ -97,6 +133,13 @@ try {
         if (Test-Path -LiteralPath $media -PathType Container) {
             Copy-Item -LiteralPath $media -Destination $dest -Recurse -Force
         }
+
+        [void]$publishedProtocolIds.Add($name)
+    }
+
+    $missingPublished = @($catalog | Where-Object { -not $publishedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
+    if ($missingPublished.Count -gt 0) {
+        throw "Missing converted output for $($missingPublished.Count) specs: $($missingPublished -join ', ')"
     }
 
     $legalSource = Join-Path (Join-Path $convPath '_legal') 'LEGAL.md'
@@ -115,14 +158,23 @@ try {
     Write-Host 'Updating index (README.md)...'
     Update-OpenSpecIndex -Path $pubPath -Title $IndexTitle
 
+    Write-Host 'Optimizing publish PNG files...'
+    $optimizePngScript = Join-Path $root 'scripts\Optimize-PublishPng.ps1'
+    if (Test-Path -LiteralPath $optimizePngScript -PathType Leaf) {
+        & $optimizePngScript -PublishPath $pubPath -ThrottleLimit $ThrottleLimit | Out-Null
+    }
+    else {
+        Write-Warning "PNG optimization script not found: $optimizePngScript"
+    }
+
+    $entryCount = $publishedProtocolIds.Count
+
     if ($ZipPath) {
         $zipFull = if ([System.IO.Path]::IsPathRooted($ZipPath)) { $ZipPath } else { Join-Path $root $ZipPath }
         Write-Host "Creating $zipFull ..."
         Compress-Archive -Path (Join-Path $pubPath '*') -DestinationPath $zipFull -Force
         Write-Host "Zip created: $zipFull"
     }
-
-    $entryCount = (Get-Content (Join-Path $pubPath 'README.md') | Select-String '^\| \[.*\]').Count
     Write-Host "Done. Publish folder: $pubPath ($entryCount specs)"
 }
 finally {
