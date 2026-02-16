@@ -68,7 +68,7 @@ function Invoke-OpenSpecMarkdownCleanup {
     $result = $tocResult.Markdown
     foreach ($issue in $tocResult.Issues) { [void]$issues.Add($issue) }
 
-    $sourceGuidToSection = if ($SourceLinkMetadata -and $SourceLinkMetadata.PSObject.Properties['GuidToSection']) { $SourceLinkMetadata.GuidToSection } else { $null }
+    $sourceGuidToSection = if ($SourceLinkMetadata -and $SourceLinkMetadata.GuidToSection) { $SourceLinkMetadata.GuidToSection } else { $null }
     $guidResult = Resolve-OpenSpecGuidSectionAnchors -Markdown $result -GuidToSectionMap $sourceGuidToSection
     $result = $guidResult.Markdown
     foreach ($issue in $guidResult.Issues) { [void]$issues.Add($issue) }
@@ -110,7 +110,7 @@ function Invoke-OpenSpecMarkdownCleanup {
         })
     }
 
-    $sourceSectionToTitle = if ($SourceLinkMetadata -and $SourceLinkMetadata.PSObject.Properties['SectionToTitle']) { $SourceLinkMetadata.SectionToTitle } else { $null }
+    $sourceSectionToTitle = if ($SourceLinkMetadata -and $null -ne $SourceLinkMetadata.SectionToTitle) { $SourceLinkMetadata.SectionToTitle } else { $null }
     $guidByHeadingResult = Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $result -SectionToTitleMap $sourceSectionToTitle
     $result = $guidByHeadingResult.Markdown
     if ($guidByHeadingResult.LinksRepaired -gt 0) {
@@ -122,7 +122,7 @@ function Invoke-OpenSpecMarkdownCleanup {
         })
     }
 
-    $sourceGuidToGlossarySlug = if ($SourceLinkMetadata -and $SourceLinkMetadata.PSObject.Properties['GuidToGlossarySlug']) { $SourceLinkMetadata.GuidToGlossarySlug } else { $null }
+    $sourceGuidToGlossarySlug = if ($SourceLinkMetadata -and $null -ne $SourceLinkMetadata.GuidToGlossarySlug) { $SourceLinkMetadata.GuidToGlossarySlug } else { $null }
     $glossaryResult = Add-OpenSpecGlossaryAnchorsAndRepairLinks -Markdown $result -GuidToGlossarySlugMap $sourceGuidToGlossarySlug
     $result = $glossaryResult.Markdown
     if ($glossaryResult.AnchorsInjected -gt 0 -or $glossaryResult.LinksRepaired -gt 0) {
@@ -146,14 +146,26 @@ function Invoke-OpenSpecMarkdownCleanup {
         })
     }
 
+    $extractedRev = $frontMatterResult.ExtractedRevisionHistory
+    if ($extractedRev) {
+        $result = Add-OpenSpecRevisionHistorySectionAtEnd -Markdown $result -RevisionHistory $extractedRev
+    }
+
+    $legalResult = Add-LegalNoticeLinkAfterToc -Markdown $result -LastUpdated $frontMatterResult.LastUpdated -HasRevisionHistory:($null -ne $extractedRev)
+    $result = $legalResult.Markdown
+
     $newLine = [Environment]::NewLine
     $result = [regex]::Replace($result, "(`r?`n){3,}", "$newLine$newLine")
 
-    [pscustomobject]@{
+    $out = [pscustomobject]@{
         PSTypeName = 'AwakeCoding.OpenSpecs.MarkdownCleanupResult'
         Markdown = $result
         Issues = $issues.ToArray()
     }
+    if ($frontMatterResult.Removed -and $frontMatterResult.PSObject.Properties['ExtractedBoilerplate']) {
+        Add-Member -InputObject $out -NotePropertyName 'ExtractedBoilerplate' -NotePropertyValue $frontMatterResult.ExtractedBoilerplate
+    }
+    $out
 }
 
 function ConvertFrom-OpenSpecHtmlTables {
@@ -935,6 +947,75 @@ function ConvertTo-OpenSpecGitHubFriendlyToc {
     }
 }
 
+function Add-OpenSpecRevisionHistorySectionAtEnd {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Markdown,
+        [Parameter(Mandatory)]
+        [string]$RevisionHistory
+    )
+    $newLine = [Environment]::NewLine
+    $section = $newLine + $newLine + "<a id=`"revision-history`"></a>" + $newLine + $newLine + "## Revision History" + $newLine + $newLine + $RevisionHistory.Trim()
+    return $Markdown.TrimEnd() + $section
+}
+
+function Add-LegalNoticeLinkAfterToc {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Markdown,
+        [Parameter()]
+        [string]$LastUpdated,
+        [Parameter()]
+        [switch]$HasRevisionHistory
+    )
+
+    $newLine = [Environment]::NewLine
+    $lines = New-Object System.Collections.Generic.List[string]
+    $lines.Add("For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).")
+    if ($LastUpdated) {
+        $lines.Add("Last updated: $LastUpdated.")
+    }
+    if ($HasRevisionHistory) {
+        $lines.Add("See [Revision History](#revision-history) for full version history.")
+    }
+    $legalBlock = $lines -join $newLine
+
+    $sectionAnchorRegex = [regex]::new('<a\s+id="Section_\d', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $firstSectionMatch = $sectionAnchorRegex.Match($Markdown)
+    if (-not $firstSectionMatch.Success) {
+        return [pscustomobject]@{ Markdown = $Markdown }
+    }
+    $beforeContent = $Markdown.Substring(0, $firstSectionMatch.Index)
+
+    $detailsCloseRegex = [regex]::new('</details>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $lastDetailsMatch = $null
+    foreach ($m in $detailsCloseRegex.Matches($beforeContent)) {
+        $lastDetailsMatch = $m
+    }
+    if (-not $lastDetailsMatch) {
+        return [pscustomobject]@{ Markdown = $Markdown }
+    }
+
+    $insertEnd = $lastDetailsMatch.Index + $lastDetailsMatch.Length
+    $trailing = $beforeContent.Substring($insertEnd)
+    $trailingNewlines = ''
+    if ($trailing -match '^(\r?\n)+') {
+        $trailingNewlines = $Matches[1]
+        $insertEnd += $Matches[1].Length
+    }
+    $before = $Markdown.Substring(0, $insertEnd)
+    $after = $Markdown.Substring($insertEnd)
+
+    $insertion = $trailingNewlines + $legalBlock + $newLine + $newLine
+    $result = $before + $insertion + $after
+
+    [pscustomobject]@{
+        Markdown = $result
+    }
+}
+
 function ConvertTo-OpenSpecNormalizedEncodedBracketUrls {
     [CmdletBinding()]
     param(
@@ -1387,6 +1468,9 @@ function Remove-OpenSpecFrontMatterBoilerplate {
     $result = $Markdown
     $removed = $false
     $newLine = [Environment]::NewLine
+    $blockContent = $null
+    $extractedRevisionHistory = $null
+    $lastUpdated = $null
 
     # Block from "Intellectual Property Rights Notice" (or similar) through the revision table, ending before "Table of Contents".
     $blockRegex = [regex]::new(
@@ -1396,28 +1480,56 @@ function Remove-OpenSpecFrontMatterBoilerplate {
     $match = $blockRegex.Match($result)
     if ($match.Success) {
         $blockContent = $match.Groups[2].Value
-        $lastUpdated = $null
         $dateRowRegex = [regex]::new('\|\s*(\d{1,2}/\d{1,2}/\d{4})\s*\|')
         $dateMatches = $dateRowRegex.Matches($blockContent)
         if ($dateMatches.Count -gt 0) {
             $lastMatch = $dateMatches[$dateMatches.Count - 1]
             $lastUpdated = $lastMatch.Groups[1].Value
         }
-        $replacement = $match.Groups[1].Value
-        if ($lastUpdated) {
-            $replacement += "Last updated: $lastUpdated" + $newLine + $newLine
-        } else {
-            $replacement += $match.Groups[3].Value
+
+        # Split into legal part (for LEGAL.md) and revision history (for end of document).
+        $revisionStartRegex = [regex]::new('\*\*Revision Summary\*\*', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        $revMatch = $revisionStartRegex.Match($blockContent)
+        if ($revMatch.Success) {
+            $legalPart = $blockContent.Substring(0, $revMatch.Index).TrimEnd()
+            $revisionPart = $blockContent.Substring($revMatch.Index).Trim()
+            $extractedRevisionHistory = ConvertTo-OpenSpecGfmRevisionTable -RevisionMarkdown $revisionPart
+            $blockContent = $legalPart
         }
-        $replacement += $match.Groups[4].Value
+
+        $replacement = $match.Groups[1].Value + $match.Groups[4].Value
         $result = $result.Substring(0, $match.Index) + $replacement + $result.Substring($match.Index + $match.Length)
         $removed = $true
     }
 
-    [pscustomobject]@{
+    $out = [pscustomobject]@{
         Markdown = $result
         Removed  = $removed
     }
+    if ($removed -and $blockContent) {
+        Add-Member -InputObject $out -NotePropertyName 'ExtractedBoilerplate' -NotePropertyValue $blockContent
+    }
+    if ($extractedRevisionHistory) {
+        Add-Member -InputObject $out -NotePropertyName 'ExtractedRevisionHistory' -NotePropertyValue $extractedRevisionHistory
+    }
+    if ($lastUpdated) {
+        Add-Member -InputObject $out -NotePropertyName 'LastUpdated' -NotePropertyValue $lastUpdated
+    }
+    $out
+}
+
+function ConvertTo-OpenSpecGfmRevisionTable {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$RevisionMarkdown
+    )
+    $result = $RevisionMarkdown.Trim()
+    # Remove standalone **Revision Summary** or **Revision History** line (heading comes from Add-OpenSpecRevisionHistorySectionAtEnd).
+    $result = $result -replace '(?im)^\s*\*\*Revision (?:Summary|History)\*\*\s*\r?\n', ''
+    # Rename table header column "Revision History" to "Version" for GFM clarity (version numbers column).
+    $result = $result -replace '(?m)^(\|\s*Date\s*\|)\s*Revision History\s*(\|\s*Revision Class\s*\|)', '$1 Version $2'
+    return $result.Trim()
 }
 
 function Add-OpenSpecSectionAnchors {
