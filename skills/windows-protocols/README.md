@@ -4,6 +4,12 @@ Agent skill for navigating the Microsoft Open Specifications corpus locally. Use
 
 ## Installation
 
+**[skills.sh](https://skills.sh)** — Add this skill globally:
+
+```bash
+npx skills add awakecoding/openspecs --skill windows-protocols -y -g
+```
+
 This skill works with the corpus already extracted in this directory. No setup or downloads are required for normal usage. Ensure the agent has read access to this folder and its subdirectories.
 
 ## File Structure
@@ -13,7 +19,7 @@ This skill works with the corpus already extracted in this directory. No setup o
 | `SKILL.md` | AI-facing instructions for the agent |
 | `README.md` | This file — skill overview and corpus index |
 | `LEGAL.md` | Legal and redistribution notice |
-| `&lt;PROTOCOL-ID&gt;/` | Protocol directories with spec markdown and `media/` assets |
+| `<PROTOCOL-ID>/` | Protocol directories with spec markdown and `media/` assets |
 
 The tables below are the corpus index: Overview Documents for topical discovery, Technical Documents for full specs, Reference Documents for supplemental materials.
 
