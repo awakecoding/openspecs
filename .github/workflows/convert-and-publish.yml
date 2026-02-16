@@ -37,8 +37,9 @@ jobs:
             throw 'oxipng.exe was not found after extracting release archive.'
           }
           $binDir = Split-Path -Path $binPath.FullName -Parent
+          $env:PATH = "$binDir;$env:PATH"
           Add-Content -Path $env:GITHUB_PATH -Value $binDir
-          oxipng --version
+          & $binPath.FullName --version
 
       - name: Install OpenXML module
         shell: pwsh
