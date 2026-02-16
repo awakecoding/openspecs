@@ -50,7 +50,7 @@ jobs:
       - name: Build publish tree and windows-protocols.zip
         shell: pwsh
         working-directory: ${{ github.workspace }}
-        run: .\scripts\Build-Publish.ps1 -ThrottleLimit 4
+        run: .\scripts\Build-Publish.ps1 -ThrottleLimit 4 -AllowPartial
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4

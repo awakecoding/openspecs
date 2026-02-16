@@ -25,7 +25,8 @@ param(
     [string]$IndexTitle = 'Microsoft Open Specifications',
     [string[]]$Filter = @(),
     [int]$ThrottleLimit = 8,
-    [switch]$SkipOpenXmlInstall
+    [switch]$SkipOpenXmlInstall,
+    [switch]$AllowPartial  # When set, continue build when some specs fail to download (e.g. 404 from stale CDN links)
 )
 
 $ErrorActionPreference = 'Stop'
@@ -95,7 +96,13 @@ try {
 
     $missingDownloads = @($catalog | Where-Object { -not $downloadedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
     if ($missingDownloads.Count -gt 0) {
-        throw "Missing downloads for $($missingDownloads.Count) specs: $($missingDownloads -join ', ')"
+        if ($AllowPartial) {
+            Write-Warning "Skipping $($missingDownloads.Count) specs with missing downloads (CDN links may be stale): $($missingDownloads -join ', ')"
+            $catalog = $catalog | Where-Object { $downloadedProtocolIds.Contains($_.ProtocolId) }
+        }
+        else {
+            throw "Missing downloads for $($missingDownloads.Count) specs: $($missingDownloads -join ', ')"
+        }
     }
 
     $toConvert = @($downloadResults)

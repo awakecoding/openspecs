@@ -84,6 +84,7 @@ function Save-OpenSpecDocument {
         }
 
         $toDownload = [System.Collections.Generic.List[object]]::new()
+        $existsResults = [System.Collections.Generic.List[object]]::new()
         foreach ($link in $links) {
             $fileName = $link.FileName
             if ([string]::IsNullOrWhiteSpace($fileName)) {
@@ -93,7 +94,7 @@ function Save-OpenSpecDocument {
             $destination = Join-Path -Path $OutputPath -ChildPath $fileName
 
             if ((Test-Path -LiteralPath $destination) -and -not $Force) {
-                [pscustomobject]@{
+                [void]$existsResults.Add([pscustomobject]@{
                     PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                     ProtocolId = $link.ProtocolId
                     Format = $link.Format
@@ -101,7 +102,7 @@ function Save-OpenSpecDocument {
                     Path = $destination
                     Status = 'Exists'
                     Size = (Get-Item -LiteralPath $destination).Length
-                }
+                })
                 continue
             }
 
@@ -157,8 +158,31 @@ function Save-OpenSpecDocument {
             }
         }
 
+        $tryDocxFallback = {
+            param($result, $destination)
+            if ($result.Status -ne 'Failed' -or $result.Format -ne 'DOCX' -or -not $result.ProtocolId) { return $result }
+            $fallbacks = Get-OpenSpecDocxFallbackUrls -ProtocolId $result.ProtocolId
+            foreach ($url in $fallbacks) {
+                if ($url -eq $result.Url) { continue }
+                try {
+                    Invoke-WebRequest -Uri $url -OutFile $destination -MaximumRedirection 8 -ErrorAction Stop
+                    return [pscustomobject]@{
+                        PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
+                        ProtocolId = $result.ProtocolId
+                        Format = $result.Format
+                        Url = $url
+                        Path = $destination
+                        Status = 'Downloaded'
+                        Size = (Get-Item -LiteralPath $destination).Length
+                    }
+                }
+                catch { continue }
+            }
+            return $result
+        }
+
         $useParallel = $Parallel -and $PSVersionTable.PSVersion.Major -ge 7 -and $toDownload.Count -gt 1
-        if ($useParallel) {
+        $results = if ($useParallel) {
             $toDownload | ForEach-Object -Parallel {
                 $link = $_.Link
                 $destination = $_.Destination
@@ -212,5 +236,18 @@ function Save-OpenSpecDocument {
                 & $downloadOne -link $item.Link -destination $item.Destination
             }
         }
+
+        # Retry failed DOCX via RSS fallback URLs (e.g. MS-THCH, MS-MQOD with stale Learn-page links)
+        $downloadResults = New-Object System.Collections.Generic.List[object]
+        $i = 0
+        foreach ($r in @($results)) {
+            $dest = $toDownload[$i].Destination
+            $r = & $tryDocxFallback -result $r -destination $dest
+            [void]$downloadResults.Add($r)
+            $i++
+        }
+
+        $existsResults
+        $downloadResults
     }
 }
