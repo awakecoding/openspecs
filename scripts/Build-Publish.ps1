@@ -78,6 +78,22 @@ try {
         }
     }
     $missingDownloads = @($catalog | Where-Object { -not $downloadedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
+
+    # Retry missing downloads with lower parallelism (helps with CDN rate limiting in CI)
+    if ($missingDownloads.Count -gt 0) {
+        Write-Host "Retrying $($missingDownloads.Count) missing downloads with reduced parallelism..."
+        Start-Sleep -Seconds 10
+        $retryCatalog = $catalog | Where-Object { $missingDownloads -contains $_.ProtocolId }
+        $retryResults = $retryCatalog |
+            Save-OpenSpecDocument -Format DOCX -OutputPath $dlPath -Force -Parallel -ThrottleLimit 2 |
+            ForEach-Object { $_ }
+        foreach ($result in ($retryResults | Where-Object { $_.Status -in 'Downloaded', 'Exists' -and $_.ProtocolId })) {
+            [void]$downloadedProtocolIds.Add($result.ProtocolId)
+        }
+        $downloadResults = @($downloadResultsAll | Where-Object { $_.Status -in 'Downloaded', 'Exists' }) + @($retryResults | Where-Object { $_.Status -in 'Downloaded', 'Exists' })
+    }
+
+    $missingDownloads = @($catalog | Where-Object { -not $downloadedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
     if ($missingDownloads.Count -gt 0) {
         throw "Missing downloads for $($missingDownloads.Count) specs: $($missingDownloads -join ', ')"
     }
