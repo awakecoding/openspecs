@@ -21,7 +21,6 @@ param(
     [string]$ConvertedPath = 'converted-specs',
     [string]$PublishPath = 'skills/windows-protocols',
     [string]$ZipPath = 'windows-protocols.zip',
-    [string]$MetadataPath = 'windows-protocols.metadata.json',
     [string]$IndexTitle = 'Microsoft Open Specifications',
     [string[]]$Filter = @(),
     [int]$ThrottleLimit = 8,
@@ -175,22 +174,6 @@ try {
         Write-Host "Creating $zipFull ..."
         Compress-Archive -Path (Join-Path $pubPath '*') -DestinationPath $zipFull -Force
         Write-Host "Zip created: $zipFull"
-
-        if ($MetadataPath) {
-            $metadataFull = if ([System.IO.Path]::IsPathRooted($MetadataPath)) { $MetadataPath } else { Join-Path $root $MetadataPath }
-            $zipInfo = Get-Item -LiteralPath $zipFull
-            $zipSha256 = (Get-FileHash -LiteralPath $zipFull -Algorithm SHA256).Hash.ToLowerInvariant()
-            $metadata = [ordered]@{
-                generatedAtUtc = (Get-Date).ToUniversalTime().ToString('o')
-                zipFile = [System.IO.Path]::GetFileName($zipFull)
-                sha256 = $zipSha256
-                zipSizeBytes = $zipInfo.Length
-                specCount = $entryCount
-                indexTitle = $IndexTitle
-            }
-            $metadata | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $metadataFull -Encoding UTF8
-            Write-Host "Metadata created: $metadataFull"
-        }
     }
     Write-Host "Done. Publish folder: $pubPath ($entryCount specs)"
 }

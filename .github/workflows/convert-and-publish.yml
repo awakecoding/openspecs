@@ -56,18 +56,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: publish
-          path: |
-            windows-protocols.zip
-            windows-protocols.metadata.json
+          path: windows-protocols.zip
 
       - name: Stage downloadable bundle in publish tree
         shell: pwsh
         working-directory: ${{ github.workspace }}
-        run: |
-          Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\skills\windows-protocols\windows-protocols.zip -Force
-          if (Test-Path -LiteralPath .\windows-protocols.metadata.json -PathType Leaf) {
-            Copy-Item -LiteralPath .\windows-protocols.metadata.json -Destination .\skills\windows-protocols\windows-protocols.metadata.json -Force
-          }
+        run: Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\skills\windows-protocols\windows-protocols.zip -Force
 
       - name: Push to orphaned publish branch
         shell: pwsh
