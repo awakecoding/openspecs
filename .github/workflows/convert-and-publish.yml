@@ -17,6 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install oxipng
+        shell: pwsh
+        run: |
+          choco install oxipng -y --no-progress
+          oxipng --version
+
       - name: Install OpenXML module
         shell: pwsh
         run: |

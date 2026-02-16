@@ -115,6 +115,15 @@ try {
     Write-Host 'Updating index (README.md)...'
     Update-OpenSpecIndex -Path $pubPath -Title $IndexTitle
 
+    Write-Host 'Optimizing publish PNG files...'
+    $optimizePngScript = Join-Path $root 'scripts\Optimize-PublishPng.ps1'
+    if (Test-Path -LiteralPath $optimizePngScript -PathType Leaf) {
+        & $optimizePngScript -PublishPath $pubPath -ThrottleLimit $ThrottleLimit | Out-Null
+    }
+    else {
+        Write-Warning "PNG optimization script not found: $optimizePngScript"
+    }
+
     if ($ZipPath) {
         $zipFull = if ([System.IO.Path]::IsPathRooted($ZipPath)) { $ZipPath } else { Join-Path $root $ZipPath }
         Write-Host "Creating $zipFull ..."
