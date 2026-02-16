@@ -146,7 +146,12 @@ function Invoke-OpenSpecMarkdownCleanup {
         })
     }
 
-    $legalResult = Add-LegalNoticeLinkAfterToc -Markdown $result
+    $extractedRev = $frontMatterResult.ExtractedRevisionHistory
+    if ($extractedRev) {
+        $result = Add-OpenSpecRevisionHistorySectionAtEnd -Markdown $result -RevisionHistory $extractedRev
+    }
+
+    $legalResult = Add-LegalNoticeLinkAfterToc -Markdown $result -LastUpdated $frontMatterResult.LastUpdated -HasRevisionHistory:($null -ne $extractedRev)
     $result = $legalResult.Markdown
 
     $newLine = [Environment]::NewLine
@@ -942,15 +947,40 @@ function ConvertTo-OpenSpecGitHubFriendlyToc {
     }
 }
 
+function Add-OpenSpecRevisionHistorySectionAtEnd {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$Markdown,
+        [Parameter(Mandatory)]
+        [string]$RevisionHistory
+    )
+    $newLine = [Environment]::NewLine
+    $section = $newLine + $newLine + "<a id=`"revision-history`"></a>" + $newLine + $newLine + "## Revision History" + $newLine + $newLine + $RevisionHistory.Trim()
+    return $Markdown.TrimEnd() + $section
+}
+
 function Add-LegalNoticeLinkAfterToc {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
-        [string]$Markdown
+        [string]$Markdown,
+        [Parameter()]
+        [string]$LastUpdated,
+        [Parameter()]
+        [switch]$HasRevisionHistory
     )
 
     $newLine = [Environment]::NewLine
-    $legalLine = "For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md)."
+    $lines = New-Object System.Collections.Generic.List[string]
+    $lines.Add("For the legal notice and IP terms, see [LEGAL.md](../LEGAL.md).")
+    if ($LastUpdated) {
+        $lines.Add("Last updated: $LastUpdated.")
+    }
+    if ($HasRevisionHistory) {
+        $lines.Add("See [Revision History](#revision-history) for full version history.")
+    }
+    $legalBlock = $lines -join $newLine
 
     $sectionAnchorRegex = [regex]::new('<a\s+id="Section_\d', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
     $firstSectionMatch = $sectionAnchorRegex.Match($Markdown)
@@ -978,7 +1008,7 @@ function Add-LegalNoticeLinkAfterToc {
     $before = $Markdown.Substring(0, $insertEnd)
     $after = $Markdown.Substring($insertEnd)
 
-    $insertion = $trailingNewlines + $legalLine + $newLine + $newLine
+    $insertion = $trailingNewlines + $legalBlock + $newLine + $newLine
     $result = $before + $insertion + $after
 
     [pscustomobject]@{
@@ -1438,6 +1468,9 @@ function Remove-OpenSpecFrontMatterBoilerplate {
     $result = $Markdown
     $removed = $false
     $newLine = [Environment]::NewLine
+    $blockContent = $null
+    $extractedRevisionHistory = $null
+    $lastUpdated = $null
 
     # Block from "Intellectual Property Rights Notice" (or similar) through the revision table, ending before "Table of Contents".
     $blockRegex = [regex]::new(
@@ -1447,20 +1480,24 @@ function Remove-OpenSpecFrontMatterBoilerplate {
     $match = $blockRegex.Match($result)
     if ($match.Success) {
         $blockContent = $match.Groups[2].Value
-        $lastUpdated = $null
         $dateRowRegex = [regex]::new('\|\s*(\d{1,2}/\d{1,2}/\d{4})\s*\|')
         $dateMatches = $dateRowRegex.Matches($blockContent)
         if ($dateMatches.Count -gt 0) {
             $lastMatch = $dateMatches[$dateMatches.Count - 1]
             $lastUpdated = $lastMatch.Groups[1].Value
         }
-        $replacement = $match.Groups[1].Value
-        if ($lastUpdated) {
-            $replacement += "Last updated: $lastUpdated" + $newLine + $newLine
-        } else {
-            $replacement += $match.Groups[3].Value
+
+        # Split into legal part (for LEGAL.md) and revision history (for end of document).
+        $revisionStartRegex = [regex]::new('\*\*Revision Summary\*\*', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        $revMatch = $revisionStartRegex.Match($blockContent)
+        if ($revMatch.Success) {
+            $legalPart = $blockContent.Substring(0, $revMatch.Index).TrimEnd()
+            $revisionPart = $blockContent.Substring($revMatch.Index).Trim()
+            $extractedRevisionHistory = ConvertTo-OpenSpecGfmRevisionTable -RevisionMarkdown $revisionPart
+            $blockContent = $legalPart
         }
-        $replacement += $match.Groups[4].Value
+
+        $replacement = $match.Groups[1].Value + $match.Groups[4].Value
         $result = $result.Substring(0, $match.Index) + $replacement + $result.Substring($match.Index + $match.Length)
         $removed = $true
     }
@@ -1472,7 +1509,27 @@ function Remove-OpenSpecFrontMatterBoilerplate {
     if ($removed -and $blockContent) {
         Add-Member -InputObject $out -NotePropertyName 'ExtractedBoilerplate' -NotePropertyValue $blockContent
     }
+    if ($extractedRevisionHistory) {
+        Add-Member -InputObject $out -NotePropertyName 'ExtractedRevisionHistory' -NotePropertyValue $extractedRevisionHistory
+    }
+    if ($lastUpdated) {
+        Add-Member -InputObject $out -NotePropertyName 'LastUpdated' -NotePropertyValue $lastUpdated
+    }
     $out
+}
+
+function ConvertTo-OpenSpecGfmRevisionTable {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]$RevisionMarkdown
+    )
+    $result = $RevisionMarkdown.Trim()
+    # Remove standalone **Revision Summary** or **Revision History** line (heading comes from Add-OpenSpecRevisionHistorySectionAtEnd).
+    $result = $result -replace '(?im)^\s*\*\*Revision (?:Summary|History)\*\*\s*\r?\n', ''
+    # Rename table header column "Revision History" to "Version" for GFM clarity (version numbers column).
+    $result = $result -replace '(?m)^(\|\s*Date\s*\|)\s*Revision History\s*(\|\s*Revision Class\s*\|)', '$1 Version $2'
+    return $result.Trim()
 }
 
 function Add-OpenSpecSectionAnchors {
