@@ -574,7 +574,7 @@ packet-beta
 
 **AppData (variable):** MUST NOT be specified.
 
-The Extended Options for QCR packet are specified in section [2.2.8.4](#Section_2.2.8).
+The Extended Options for QCR packet are specified in section [2.2.8.4](#Section_2.2.8.4).
 
 <a id="Section_2.2.8.2"></a>
 #### 2.2.8.2 In Response to QCC
@@ -607,7 +607,7 @@ packet-beta
 
 **AppData (variable):** Specifies the Application Data provided by the WDS Multicast Application Protocol, as specified in [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md). The protocol acts as transport for the Application Data and MUST NOT define the structure for it.
 
-The Extended Options for QCR packet are specified in section [2.2.8.4](#Section_2.2.8).
+The Extended Options for QCR packet are specified in section [2.2.8.4](#Section_2.2.8.4).
 
 <a id="Section_2.2.8.3"></a>
 #### 2.2.8.3 Voluntary Response
@@ -642,7 +642,7 @@ packet-beta
 
 **AppData (variable):** Specifies the Application Data provided by the WDS Multicast Application Protocol, as specified in [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md). The protocol acts as transport for the Application Data and MUST NOT define the structure for it.
 
-The Extended Options for QCR packet are specified in section [2.2.8.4](#Section_2.2.8).
+The Extended Options for QCR packet are specified in section [2.2.8.4](#Section_2.2.8.4).
 
 <a id="Section_2.2.8.4"></a>
 #### 2.2.8.4 Extended Options
@@ -1006,7 +1006,7 @@ Figure 3: Server state diagram
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-Multicast Session Configuration: Configuration information for a [**multicast**](#gt_multicast) session, stored in temporary storage in the form of a (name, value) pair. The list of metadata information is specified in section [3.1.1.1](#Section_3.1.1.1).
+Multicast Session Configuration: Configuration information for a [**multicast**](#gt_multicast) session, stored in temporary storage in the form of a (name, value) pair. The list of metadata information is specified in section [3.1.1.1](#Section_3.2.1.1).
 
 Protocol Parameters: Configuration information that specifies parameters for the WDS Multicast Transport Protocol. The parameters are specified in section 3.1.1.1.
 
@@ -1150,7 +1150,7 @@ The following list specifies the information that is kept for each client in the
 
 | Timer | Description |
 | --- | --- |
-| Inactivity Timer | The timeout for this timer is specified by the *InactivityTimeout* parameter (section [3.1.1.4](#Section_3.1.1.4)). |
+| Inactivity Timer | The timeout for this timer is specified by the *InactivityTimeout* parameter (section [3.1.1.4](#Section_3.2.1.2)). |
 | JoinAck Timer | The default value for this timer is specified by *JoinAckToQCRTimeout* (section 3.1.1.4). |
 | Client Cleanup Timer | The default value for this timer is specified by *DeadClientTimeout* (section 3.1.1.4). |
 | InState QCC Timer | The timeout for this timer is computed by the server as specified (section [3.1.5.7.3](#Section_3.1.5.7.3)). |
@@ -1161,9 +1161,9 @@ The following list specifies the information that is kept for each client in the
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The multicast session on initialization MUST configure the TCP/IP stack to listen for incoming UDP packets as specified by the [**unicast address**](#gt_unicast-address) (section [3.1.1.1](#Section_3.1.1.1)).
+The multicast session on initialization MUST configure the TCP/IP stack to listen for incoming UDP packets as specified by the [**unicast address**](#gt_unicast-address) (section [3.1.1.1](#Section_3.2.1.1)).
 
-The Inactivity Timer MUST be initialized with the default timeout value as specified in section [3.1.2](#Section_3.1.2).
+The Inactivity Timer MUST be initialized with the default timeout value as specified in section [3.1.2](#Section_3.2.2).
 
 The Client Cleanup Timer is a recurring timer that MUST be initialized with the default timeout value as specified in section 3.1.2.
 
@@ -1174,7 +1174,7 @@ The multicast session is initialized when a client requests content using the WD
 
 An administrator action can cause a kick trigger to be sent, causing the multicast session to remove a client from the multicast session. The kick trigger MUST be processed as specified in section [3.1.5.6](#Section_1.3).
 
-An administrator action can cause a demote trigger to be sent, causing the multicast session to demote a client to a lower speed multicast session. Demote triggers are processed as specified in section [3.1.5.10](#Section_3.1.5.10).
+An administrator action can cause a demote trigger to be sent, causing the multicast session to demote a client to a lower speed multicast session. Demote triggers are processed as specified in section [3.1.5.10](#Section_3.1.5.10.1).
 
 The WDS Multicast Application Protocol, as specified in [MS-WDSMA], can cause a POLL trigger to ask the WDS Multicast Transport Protocol to send a payload to all clients using a POLL packet. The POLL trigger is processed as specified in section [3.1.5.4](#Section_3.2.5.6).
 
@@ -1186,7 +1186,7 @@ The WDS Multicast Application Protocol, as specified in [MS-WDSMA], can cause a 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Packet Processing
 
-A multicast session is initialized to be in PreStartState (section [3.1.1.1](#Section_3.1.1.1)). In PreStartState, the server MUST NOT send any packets and MUST wait until the first client joins (section [3.1.5.2](#Section_1.3)) the multicast session; at which point the **SessionState** (section 3.1.1.1) is changed to QCCState.
+A multicast session is initialized to be in PreStartState (section [3.1.1.1](#Section_3.2.1.1)). In PreStartState, the server MUST NOT send any packets and MUST wait until the first client joins (section [3.1.5.2](#Section_1.3)) the multicast session; at which point the **SessionState** (section 3.1.1.1) is changed to QCCState.
 
 When **SessionState** (section 3.1.1.1) is set to QCCState, the server MUST process as specified in section [3.1.5.7](#Section_1.3). The server moves from QCCState to DataState when a client has been selected as the master client for the multicast session.
 
@@ -1196,7 +1196,7 @@ The server MUST accept and process packets received from clients on [**unicast a
 
 For each packet received from a client, the server MUST validate the packet as specified in section [3.1.5.1.1](#Section_3.1.5.1.1)and MUST ignore all packets that are not properly constructed.
 
-Whenever a packet is received from a client, the server MUST reset the Inactivity Timer (section [3.1.2](#Section_3.1.2)) and set its timeout value back to the value specified in section 3.1.2.
+Whenever a packet is received from a client, the server MUST reset the Inactivity Timer (section [3.1.2](#Section_3.2.2)) and set its timeout value back to the value specified in section 3.1.2.
 
 The WDS Multicast Transport Protocol causes lower-layered triggered events to the WDS Multicast Application Protocol ([MS-WDSMA]) as the following specifies:
 
@@ -1223,7 +1223,7 @@ When the Inactivity Timer (section 3.1.2) expires (which happens when the server
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 Packet Validation
 
-The information specified in the Security Header (section [2.2.2](#Section_2.2.2)) MUST match the client security mode (section [3.1.1.1](#Section_3.1.1.1)).
+The information specified in the Security Header (section [2.2.2](#Section_2.2.2)) MUST match the client security mode (section [3.1.1.1](#Section_3.2.1.1)).
 
 If the client security mode (section 3.1.1.1) is set to WDSMCTP_SEC_HASH, the server MUST compute the HMAC Hash of the packet (section [2.2.2.1](#Section_2.2.2.1)), and the HMAC Hash specified in the Security Header of packet MUST match the value computed by the server.
 
@@ -1240,7 +1240,7 @@ Based on the **OpCode** field in the Session Header (section 2.2.3), the server 
 
 When a JOIN packet is received from client, the server MUST add a record of the client to the Pending Client List (section [3.1.5.2.1](#Section_3.1.5.2.1)). The server MUST send a JOINACK packet (section [3.1.5.2.2](#Section_3.1.5.2.2)) to the client and MUST wait for a QCR packet (section [3.1.5.2.3](#Section_3.1.5.2.3)) to be returned. When a QCR packet is received, the server MUST move the entry for the client from the Pending Client List (section [3.1.1.2](#Section_3.1.1.2)) to the Active Client List, and MUST destroy the instance of JoinAck Timer created for the client.
 
-The server MUST create an instance of JoinAck Timer for the client, and MUST configure the JoinAck Timer to expire after a timeout specified by the *JoinAckToQCRTimeout* parameter (section [3.1.1.4](#Section_3.1.1.4)).
+The server MUST create an instance of JoinAck Timer for the client, and MUST configure the JoinAck Timer to expire after a timeout specified by the *JoinAckToQCRTimeout* parameter (section [3.1.1.4](#Section_3.2.1.2)).
 
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Adding a Client to the Pending Client List
@@ -1255,7 +1255,7 @@ The server MUST add a new record into the Pending Client List (section [3.1.1.2]
 
 **LastUpdate**: MUST be set to the local time on the server, in millisecond granularity.
 
-**ClientId**: MUST be set to the value of **NextClientId** field (section [3.1.1.1](#Section_3.1.1.1)), after which the value of **NextClientId** MUST be incremented by one.
+**ClientId**: MUST be set to the value of **NextClientId** field (section [3.1.1.1](#Section_3.2.1.1)), after which the value of **NextClientId** MUST be incremented by one.
 
 **SupportsDemote**: If the JOIN packet specifies the WDSMCTP_OPT_CAPABILITIES Extended Option (section [2.2.5.1](#Section_2.2.5.1)), and the value for the Extended Option specifies WDSMCTP_CAP_MULTISTREAM (section 2.2.5.1), then this parameter MUST be set to TRUE (0x00000001); otherwise, it MUST be set to FALSE (0x00000000).
 
@@ -1291,7 +1291,7 @@ The server MUST update the entry for the client in Active Client List (section 3
 
 The server MUST send a Status Trigger to the WDS Multicast Application Protocol, as specified in [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md), to communicate the payload specified in the QCR packet, using the **AppData** and **AppDataLen** fields (section [2.2.8](#Section_2.2.8)).
 
-If **SessionState** (section [3.1.1.1](#Section_3.1.1.1)) is set to PreStartState, the server MUST change it to QCCState.
+If **SessionState** (section [3.1.1.1](#Section_3.2.1.1)) is set to PreStartState, the server MUST change it to QCCState.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Processing a LEAVE Packet
@@ -1303,9 +1303,9 @@ When a LEAVE packet is received, the server MUST remove the entry for the client
 
 The server MUST construct the POLL packet as specified in section [2.2.9](#Section_2.2.9) and set the fields of the packet as specified below.
 
-**PollSeqNo**: MUST be set to the value of the **NextPollSeqNo** (section [3.1.1.1](#Section_3.1.1.1)), and then increment the **NextPollSeqNo** by one.
+**PollSeqNo**: MUST be set to the value of the **NextPollSeqNo** (section [3.1.1.1](#Section_3.2.1.1)), and then increment the **NextPollSeqNo** by one.
 
-**BackOff**: MUST be set to the value of **PollBackOff** (section [3.2.1.2](#Section_3.1.1.4)).
+**BackOff**: MUST be set to the value of **PollBackOff** (section [3.2.1.2](#Section_3.2.1.2)).
 
 **AppData** and **AppDataLen**: MUST be set to the payload provided by the POLL Trigger from the WDS Multicast Application Protocol, as specified in [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md).
 
@@ -1316,7 +1316,7 @@ The server MUST provide the value of **PollBackOff** to the WDS Multicast Applic
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 Processing a POLLACK Packet
 
-The server MUST validate that the **POLLSeqNo** field (section [2.2.10](#Section_2.2.10)) in the POLLACK packet matches the value (**NextPollSeqNo** – 1) (section [3.1.1.1](#Section_3.1.1.1)).
+The server MUST validate that the **POLLSeqNo** field (section [2.2.10](#Section_2.2.10)) in the POLLACK packet matches the value (**NextPollSeqNo** – 1) (section [3.1.1.1](#Section_3.2.1.1)).
 
 The protocol MUST send a POLLACK Trigger to the WDS Multicast Application Protocol, as specified in [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md), to communicate that the payload has been received in the packet in the **AppData** and **AppDataLen** fields.
 
@@ -1333,7 +1333,7 @@ If the Kick Timer is not actively waiting for a timeout, the server MUST:
 
 Immediately send a KICK packet as specified in section [3.1.5.6.1](#Section_3.1.5.6.1).
 
-Configure the Kick Timer to expire at the interval specified by **KickInterval** (section [3.2.1.2](#Section_3.1.1.4)).
+Configure the Kick Timer to expire at the interval specified by **KickInterval** (section [3.2.1.2](#Section_3.2.1.2)).
 
 <a id="Section_3.1.5.6.1"></a>
 ##### 3.1.5.6.1 Sending a KICK Packet
@@ -1342,12 +1342,12 @@ The server MUST construct the KICK packet as specified in section [2.2.12](#Sect
 
 The server MUST add information for all clients on the Kick Client List (section [3.1.1.2](#Section_3.1.1.2)) to the KICK packet. If the count of clients exceeds the maximum specified in section 3.1.1.2, then the server MUST construct multiple KICK packets.
 
-The server MUST send all constructed KICK packets to the multicast address (section [3.1.1.1](#Section_3.1.1.1)).
+The server MUST send all constructed KICK packets to the multicast address (section [3.1.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.1.5.7"></a>
 #### 3.1.5.7 Processing QCC State
 
-The server enters QCC state in order to find a client that can be used as a Master Client for the multicast session. The server sends a QCC packet (section [2.2.7](#Section_2.2.7)) to the multicast address (section [3.1.1.1](#Section_3.1.1.1)) and waits for clients to reply using the QCR packet (section [2.2.8.2](#Section_2.2.7)). When replies from clients have been received, the server MUST pick a client with the highest round trip time and MUST designate this client as the Master Client. When the Master Client has been chosen, the server MUST change the **SessionState** (section 3.1.1.1) to DataState.
+The server enters QCC state in order to find a client that can be used as a Master Client for the multicast session. The server sends a QCC packet (section [2.2.7](#Section_2.2.7)) to the multicast address (section [3.1.1.1](#Section_3.2.1.1)) and waits for clients to reply using the QCR packet (section [2.2.8.2](#Section_2.2.7)). When replies from clients have been received, the server MUST pick a client with the highest round trip time and MUST designate this client as the Master Client. When the Master Client has been chosen, the server MUST change the **SessionState** (section 3.1.1.1) to DataState.
 
 When no QCR packet (section 2.2.8.2) reply is received in response to the QCC packet (section 2.2.7), the server MUST continue to transmit the QCC packet (section 2.2.7) until a reply is received.
 
@@ -1379,14 +1379,14 @@ The server MUST construct a QCC packet (section [2.2.7](#Section_2.2.7)), set th
 Server MUST set **WaitTime** (section 3.1.1.5) as follows:
 
 - If there are client entries in the Active Client List (section 3.1.1.2), then **WaitTime** MUST be set to allow 1 millisecond for each client.
-- If there are no client entries in the Active Client List (section 3.1.1.2), then **WaitTime** MUST be set to a value by doubling the previous value of **WaitTime**. The final value of **WaitTime** MUST NOT exceed the value specified by **NoClientQCCInterval** (section [3.2.1.2](#Section_3.1.1.4)).
+- If there are no client entries in the Active Client List (section 3.1.1.2), then **WaitTime** MUST be set to a value by doubling the previous value of **WaitTime**. The final value of **WaitTime** MUST NOT exceed the value specified by **NoClientQCCInterval** (section [3.2.1.2](#Section_3.2.1.2)).
 The server MUST find the largest value for **RTT** among all entries in the Active Client List (section 3.1.1.2) and add this value to **WaitTime** (section 3.1.1.5).
 
 The server MUST set the **QCRBackOff** (section 2.2.7) in the constructed QCC packet to the computed value of **WaitTime** (section 3.1.1.5).
 
-The server MUST send the constructed QCC packet to the **multicast address** (section [3.1.1.1](#Section_3.1.1.1)) of the multicast session.
+The server MUST send the constructed QCC packet to the **multicast address** (section [3.1.1.1](#Section_3.2.1.1)) of the multicast session.
 
-The server MUST set the **InState QCC Timer** (section [3.1.2](#Section_3.1.2)) to expire after the time specified by **WaitTime** (section 3.1.1.5).
+The server MUST set the **InState QCC Timer** (section [3.1.2](#Section_3.2.2)) to expire after the time specified by **WaitTime** (section 3.1.1.5).
 
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 Processing a QCR Packet
@@ -1422,7 +1422,7 @@ When leaving this state, the server MUST proceed as specified in section [3.1.5.
 The server:
 
 - MUST set **SPMCount** (section [3.1.1.3](#Section_3.1.1.3)) to zero.
-- MUST set Cleanup Data List Timer (section [3.1.2](#Section_3.1.2)) to expire in the time specified by **CleanupDataListInterval** (section [3.2.1.2](#Section_3.1.1.4)).
+- MUST set Cleanup Data List Timer (section [3.1.2](#Section_3.2.2)) to expire in the time specified by **CleanupDataListInterval** (section [3.2.1.2](#Section_3.2.1.2)).
 - MUST set OutState QCC Timer to expire after the time specified by **QCCInterval** (section 3.2.1.2).
 - MUST send an SPM packet and Update SPM Timer as specified in section [3.1.5.9.3](#Section_3.1.5.9.3).
 <a id="Section_3.1.5.9.2"></a>
@@ -1450,9 +1450,9 @@ The server MUST construct an SPM packet (section [2.2.14](#Section_2.2.14)) and 
 - **RTT**: MUST be set to **MCRTT** (section [3.1.1.5](#Section_3.1.1.5)).
 Once the SPM packet has been constructed, the server:
 
-- MUST send the constructed SPM packet to the multicast address (section [3.1.1.1](#Section_3.1.1.1)) of the multicast session.
+- MUST send the constructed SPM packet to the multicast address (section [3.1.1.1](#Section_3.2.1.1)) of the multicast session.
 - MUST increment the **SPMCount** (section 3.1.1.3) by one.
-- MUST set the SPM Timer to expire in **SPMInterval** (section [3.2.1.2](#Section_3.1.1.4)), or to 4 times the round trip time for the Master Client, whichever is larger.
+- MUST set the SPM Timer to expire in **SPMInterval** (section [3.2.1.2](#Section_3.2.1.2)), or to 4 times the round trip time for the Master Client, whichever is larger.
 <a id="Section_3.1.5.9.4"></a>
 ##### 3.1.5.9.4 Processing a Data Trigger
 
@@ -1479,7 +1479,7 @@ The server MUST compute the number of packets being acknowledged by the Master C
 
 **PacketsAcknowledged** = **ODATASeqNo** from ACK packet – **MCTrailODATASeqNo**
 
-The server MUST update **CurrentWindowSize** (section 3.1.1.3) as specified below when the value of **CurrentWindowSize** is less than ExpMaxWindowSize (section [3.1.1.4](#Section_3.1.1.4)):
+The server MUST update **CurrentWindowSize** (section 3.1.1.3) as specified below when the value of **CurrentWindowSize** is less than ExpMaxWindowSize (section [3.1.1.4](#Section_3.2.1.2)):
 
 **CurrentWindowSize** = MIN(**CurrentWindowSize** + ( **PacketsAcknowledged** x 2 ), **ExpMaxWindowSize** )
 
@@ -1501,7 +1501,7 @@ The server MUST calculate the number of ODATA packets that can be sent as follow
 
 **PacketCount** = **CurrentWindowSize** – **InFlightPackets**
 
-The server MUST start from the entry in Data Packet List (section 3.1.1.3) with **ODATASeqNo** being (**MCLeadODATASeqNo** + 1) (section 3.1.1.3) and MUST send the count of ODATA packets as specified by **PacketCount**. Each ODATA packet MUST be updated as specified in section [3.1.5.9.7](#Section_3.1.5.9.7)before sending the packet to the multicast address (section [3.2.1.1](#Section_3.1.1.1)).
+The server MUST start from the entry in Data Packet List (section 3.1.1.3) with **ODATASeqNo** being (**MCLeadODATASeqNo** + 1) (section 3.1.1.3) and MUST send the count of ODATA packets as specified by **PacketCount**. Each ODATA packet MUST be updated as specified in section [3.1.5.9.7](#Section_3.1.5.9.7)before sending the packet to the multicast address (section [3.2.1.1](#Section_3.2.1.1)).
 
 The server MUST add the number of ODATA packets that have been sent to **MCLeadODATASeqNo** (section 3.1.1.3).
 
@@ -1516,7 +1516,7 @@ The server MUST update **CurrentWindowSize** (section 3.1.1.3) as follows.
 
 **CurrentWindowSize** = MAX( **CurrentWindowSize** x 0.75, 2 )
 
-The server MUST construct an NCF packet (section [2.2.19](#Section_2.2.19)) and set the **RangeList** (section [2.2.19.1](#Section_2.2.19.1)) specified by the NACK packet into the NCF packet. The server MUST send the NCF packet to multicast address (section [3.1.1.1](#Section_3.1.1.1)).
+The server MUST construct an NCF packet (section [2.2.19](#Section_2.2.19)) and set the **RangeList** (section [2.2.19.1](#Section_2.2.19.1)) specified by the NACK packet into the NCF packet. The server MUST send the NCF packet to multicast address (section [3.1.1.1](#Section_3.2.1.1)).
 
 The server MUST go through each **ODATASeqNo** range specified by **RangeList** field (section 2.2.19.1) of the NACK packet and process them as specified below:
 
@@ -1552,7 +1552,7 @@ Server MUST set **MCLossRate** to the value of the **LossRate** field (section N
 <a id="Section_3.1.5.9.7"></a>
 ##### 3.1.5.9.7 Updating an ODATA Packet
 
-The server MUST update the following fields of the ODATA packet (section [2.2.16](#Section_2.2.16)) before sending the packet to the multicast address (section [3.1.1.1](#Section_3.1.1.1)):
+The server MUST update the following fields of the ODATA packet (section [2.2.16](#Section_2.2.16)) before sending the packet to the multicast address (section [3.1.1.1](#Section_3.2.1.1)):
 
 **ClientId**: MUST be set to **MasterClientId** (section [3.1.1.3](#Section_3.1.1.3)).
 
@@ -1565,7 +1565,7 @@ ODATA and RDATA packets have same packet format and are differentiated only by t
 
 The server MUST duplicate the ODATA packet, update the fields of the ODATA packet as specified in section [3.1.5.9.7](#Section_3.1.5.9.7), and MUST set the **OpCode** in Session Header (section 2.2.3) to WDSMCTP_OP_RDATA.
 
-The server MUST send each RDATA packet to [**multicast address**](#gt_multicast-address) (section [3.1.1.1](#Section_3.1.1.1)).
+The server MUST send each RDATA packet to [**multicast address**](#gt_multicast-address) (section [3.1.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.1.5.10"></a>
 #### 3.1.5.10 Processing the Demote Trigger
@@ -1578,14 +1578,14 @@ If the Demote Timer is not actively waiting for timer expiration, then the serve
 
 Immediately send a DEMOTE packet as specified in section [3.1.5.10.1](#Section_3.1.5.10.1).
 
-Set the Demote Timer to expire after the time specified by **DemoteInterval** (section [3.2.1.2](#Section_3.1.1.4)).
+Set the Demote Timer to expire after the time specified by **DemoteInterval** (section [3.2.1.2](#Section_3.2.1.2)).
 
 <a id="Section_3.1.5.10.1"></a>
 ##### 3.1.5.10.1 Sending a DEMOTE Packet
 
 The server MUST construct the DEMOTE packet (section [2.2.13](#Section_2.2.13)) and add information for all clients in the Demoted Client List (section [3.1.1.2](#Section_3.1.1.2)). If the number of clients exceeds the limit specified in section 2.2.13, the server MUST construct multiple DEMOTE packets.
 
-The server MUST send all DEMOTE packets to the multicast address (section [3.1.1.1](#Section_3.1.1.1)).
+The server MUST send all DEMOTE packets to the multicast address (section [3.1.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -1593,7 +1593,7 @@ The server MUST send all DEMOTE packets to the multicast address (section [3.1.1
 <a id="Section_3.1.6.1"></a>
 #### 3.1.6.1 JoinAck Timer
 
-If the **JoinAckSendCount** (section [3.1.1.2](#Section_3.1.1.2)) matches the **MaxJoinAckSends** (section [3.2.1.2](#Section_3.1.1.4)) parameter, then the server MUST:
+If the **JoinAckSendCount** (section [3.1.1.2](#Section_3.1.1.2)) matches the **MaxJoinAckSends** (section [3.2.1.2](#Section_3.2.1.2)) parameter, then the server MUST:
 
 - destroy the instance of the **JoinAck Timer** field created for the client,
 - remove the entry for the client from Pending Client List (section 3.1.1.2), and
@@ -1605,14 +1605,14 @@ The server MUST configure the instance of JoinAck Timer to expire again at inter
 <a id="Section_3.1.6.2"></a>
 #### 3.1.6.2 Client Cleanup Timer
 
-The server MUST go through each entry in the Active Client List (section [3.1.1.2](#Section_3.1.1.2)) and Kick Client List (section 3.1.1.2) and MUST remove all entries for clients where the ( Local Time on Server – **LastUpdate** (section 3.1.1.2) ) is more than **DeadClientTimeout** (section [3.2.1.2](#Section_3.1.1.4)).
+The server MUST go through each entry in the Active Client List (section [3.1.1.2](#Section_3.1.1.2)) and Kick Client List (section 3.1.1.2) and MUST remove all entries for clients where the ( Local Time on Server – **LastUpdate** (section 3.1.1.2) ) is more than **DeadClientTimeout** (section [3.2.1.2](#Section_3.2.1.2)).
 
 <a id="Section_3.1.6.3"></a>
 #### 3.1.6.3 Kick Timer
 
 The server MUST disable the Kick Timer if the Kick Client List (section [3.1.1.2](#Section_3.1.1.2)) is empty.
 
-Otherwise, the server MUST send the KICK packet as specified in section [3.1.5.6.1](#Section_3.1.5.6.1). The server MUST also configure Kick Timer to expire after the interval specified by **KickInterval** (section [3.2.1.2](#Section_3.1.1.4)).
+Otherwise, the server MUST send the KICK packet as specified in section [3.1.5.6.1](#Section_3.1.5.6.1). The server MUST also configure Kick Timer to expire after the interval specified by **KickInterval** (section [3.2.1.2](#Section_3.2.1.2)).
 
 <a id="Section_3.1.6.4"></a>
 #### 3.1.6.4 InState QCC Timer
@@ -1628,16 +1628,16 @@ The server MUST construct a QCC packet (section [2.2.7](#Section_2.2.7)) and set
 
 The server MUST compute the value for **QCRBackOff** field of the QCC packet as follows:
 
-**QCRBackOff** = MAX( **QCCInterval** (section [3.2.1.2](#Section_3.1.1.4)), Count of entries in Active Client List (section [3.1.1.2](#Section_3.1.1.2)) ) + (Highest **RTT** among all entries in Active Client List (section 3.1.1.2) )
+**QCRBackOff** = MAX( **QCCInterval** (section [3.2.1.2](#Section_3.2.1.2)), Count of entries in Active Client List (section [3.1.1.2](#Section_3.1.1.2)) ) + (Highest **RTT** among all entries in Active Client List (section 3.1.1.2) )
 
-The server MUST send the QCC packet to multicast address (section [3.1.1.1](#Section_3.1.1.1)).
+The server MUST send the QCC packet to multicast address (section [3.1.1.1](#Section_3.2.1.1)).
 
 The server MUST set the OutState QCC Timer to expire at computed value for **QCRBackOff**.
 
 <a id="Section_3.1.6.6"></a>
 #### 3.1.6.6 SPM Timer
 
-If **SPMCount** (section [3.1.1.3](#Section_3.1.1.3)) matches the value specified by **MaxNoResponseSPM** (section [3.2.1.2](#Section_3.1.1.4)), then the server MUST change the state to **QCCState**. Otherwise, the server MUST send an SPM packet and update SPM Timer as specified in section [3.1.5.9.3](#Section_3.1.5.9.3).
+If **SPMCount** (section [3.1.1.3](#Section_3.1.1.3)) matches the value specified by **MaxNoResponseSPM** (section [3.2.1.2](#Section_3.2.1.2)), then the server MUST change the state to **QCCState**. Otherwise, the server MUST send an SPM packet and update SPM Timer as specified in section [3.1.5.9.3](#Section_3.1.5.9.3).
 
 <a id="Section_3.1.6.7"></a>
 #### 3.1.6.7 Cleanup Data List Timer
@@ -1652,14 +1652,14 @@ If ODATA packets have been removed from the Data Packet List (section [3.1.1.5](
 
 - Send an SPM packet as specified in section [3.1.5.9.3](#Section_3.1.5.9.3).
 - Send a Data Empty Trigger to WDS Multicast Application Protocol.
-The server MUST reset the Cleanup Data List Timer to expire in **CleanUpDataListInterval** (section [3.2.1.2](#Section_3.1.1.4)).
+The server MUST reset the Cleanup Data List Timer to expire in **CleanUpDataListInterval** (section [3.2.1.2](#Section_3.2.1.2)).
 
 <a id="Section_3.1.6.8"></a>
 #### 3.1.6.8 Demote Timer
 
 The server MUST disable the Demote Timer if the Demoted Client List (section [3.1.1.2](#Section_3.1.1.2)) is empty.
 
-Otherwise, server MUST send the DEMOTE packet as specified in section [3.1.5.10.1](#Section_3.1.5.10.1). The server MUST also configure Demote Timer to expire after the interval specified by **DemoteInterval** (section [3.1.1.4](#Section_3.1.1.4)).
+Otherwise, server MUST send the DEMOTE packet as specified in section [3.1.5.10.1](#Section_3.1.5.10.1). The server MUST also configure Demote Timer to expire after the interval specified by **DemoteInterval** (section [3.1.1.4](#Section_3.2.1.2)).
 
 <a id="Section_3.1.6.9"></a>
 #### 3.1.6.9 Inactivity Timer
@@ -1681,9 +1681,9 @@ This section specifies the WDS Multicast Transport Protocol behavior for the cli
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-**Multicast Session Configuration:** Configuration information for WDS Multicast Transport Protocol that is stored in temporary storage in the form of (name, value) pairs. The list of metadata information is specified in section [3.2.1.1](#Section_3.1.1.1).
+**Multicast Session Configuration:** Configuration information for WDS Multicast Transport Protocol that is stored in temporary storage in the form of (name, value) pairs. The list of metadata information is specified in section [3.2.1.1](#Section_3.2.1.1).
 
-**Protocol Parameters:** Configuration information that specifies the parameters for the WDS Multicast Transport Protocol and are specified in section [3.2.1.2](#Section_3.1.1.4).
+**Protocol Parameters:** Configuration information that specifies the parameters for the WDS Multicast Transport Protocol and are specified in section [3.2.1.2](#Section_3.2.1.2).
 
 **Data Configuration:** Configuration information used to keep track of ODATA and RDATA packets received from server. The list of metadata information is specified in section [3.2.1.3](#Section_3.2.1.3).
 
@@ -1837,9 +1837,9 @@ To perform this operation, the client MUST perform the steps below:
 
 | Timer | Description |
 | --- | --- |
-| Inactivity Timer | The default value is specified in section [3.2.1.2](#Section_3.1.1.4) by **InactivityTimeout** parameter. |
+| Inactivity Timer | The default value is specified in section [3.2.1.2](#Section_3.2.1.2) by **InactivityTimeout** parameter. |
 | Join Timer | The default value is specified in section 3.2.1.2 by **JoinInterval** parameter. |
-| Poll Timer | The timeout for this timer is controlled by POLL packet sent by the server and the procedure is specified in section [3.2.5.6](#Section_2.2.9). |
+| Poll Timer | The timeout for this timer is controlled by POLL packet sent by the server and the procedure is specified in section [3.2.5.6](#Section_3.2.5.6). |
 | QCC Timer | The timeout for this timer is controlled by QCC packet sent by the server and the procedure is specified in section [3.2.5.7](#Section_3.2.5.7). |
 | Force QCC Timer | The default is specified in section 3.2.1.2 by **ForceQCCInterval** parameter. |
 | NACK Timer | The timeout for this timer is computed by client as specified in section [3.2.5.12](#Section_3.2.5.12.1). |
@@ -1847,11 +1847,11 @@ To perform this operation, the client MUST perform the steps below:
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The client MUST bind to any available UDP port to receive and send UDP packets to the server and set **Local Address** (section [3.2.1.1](#Section_3.1.1.1)) to that address.
+The client MUST bind to any available UDP port to receive and send UDP packets to the server and set **Local Address** (section [3.2.1.1](#Section_3.2.1.1)) to that address.
 
 The client MUST send Query Cache Trigger (section [3.2.5.17](#Section_3.2.5.17)) to WDS Multicast Application Protocol.
 
-Inactivity Timer MUST be initialized with a timeout value as specified in section [3.2.2](#Section_3.1.6.1).
+Inactivity Timer MUST be initialized with a timeout value as specified in section [3.2.2](#Section_3.2.5.12.1).
 
 The client MUST start communication with server as specified in section [3.2.5.3](#Section_1.3).
 
@@ -1868,7 +1868,7 @@ WDS Multicast Application Protocol, as specified in [MS-WDSMA], MUST send a Cach
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Messages Processing
 
-Higher Layered Trigger Events (section [3.2.4](#Section_3.1.4)) MUST be processed as specified below:
+Higher Layered Trigger Events (section [3.2.4](#Section_3.2.4)) MUST be processed as specified below:
 
 | Trigger | Description |
 | --- | --- |
@@ -1886,9 +1886,9 @@ The client MUST process Timers as specified below:
 | Force QCC Timer | Section [3.2.5.8](#Section_3.2.5.7.1) |
 | NACK Timer | Section [3.2.5.12.1](#Section_3.2.5.12.1) |
 
-Packets received from the server MUST be validated as specified in section [3.2.5.2](#Section_3.1.5.1.1). The client MUST reset the Inactivity Timer to expire in the time specified in section [3.2.2](#Section_3.1.6.1) whenever a packet is received from server.
+Packets received from the server MUST be validated as specified in section [3.2.5.2](#Section_3.1.5.1.1). The client MUST reset the Inactivity Timer to expire in the time specified in section [3.2.2](#Section_3.2.5.12.1) whenever a packet is received from server.
 
-When in **JoinState** (section [3.1.1.1](#Section_3.1.1.1)), the client MUST process the received packets as specified below and MUST ignore all other packets:
+When in **JoinState** (section [3.1.1.1](#Section_3.2.1.1)), the client MUST process the received packets as specified below and MUST ignore all other packets:
 
 | Packet | Description |
 | --- | --- |
@@ -1900,7 +1900,7 @@ When in **RegularState**, client MUST process the received packets as specified 
 | --- | --- |
 | JOINACK | Section [3.2.5.5](#Section_2.2.15) |
 | QCC | Section [3.2.5.7](#Section_3.2.5.7) |
-| POLL | Section [3.2.5.6](#Section_2.2.9) |
+| POLL | Section [3.2.5.6](#Section_3.2.5.6) |
 | ODATA | Section [3.2.5.13](#Section_3.2.5.13) |
 | RDATA | Section [3.2.5.14](#Section_2.2.17) |
 | NCF | Section [3.2.5.19](#Section_2.2.19) |
@@ -1918,7 +1918,7 @@ When in **RegularState**, client MUST process the received packets as specified 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Packet Validation
 
-The information specified in Security Header (section [2.2.2](#Section_2.2.2)) MUST match the **server security mode** (section [3.1.1.1](#Section_3.1.1.1)).
+The information specified in Security Header (section [2.2.2](#Section_2.2.2)) MUST match the **server security mode** (section [3.1.1.1](#Section_3.2.1.1)).
 
 If the **server security mode** (section 3.1.1.1) is set to WDSMCTP_SEC_HASH, the client MUST compute the HMAC Hash of the packet (section [2.2.2.1](#Section_2.2.2.1)), and the HMAC Hash specified in the Security Header of packet MUST match the value computed by the client.
 
@@ -1937,7 +1937,7 @@ Based on the **OpCode** field in **Session Header** (section 2.2.3), the client 
 
 The client MUST construct a JOIN packet (section [2.2.5](#Section_2.2.5)) and set the fields of the packet as specified below:
 
-- **IPAddrLen:** MUST be set to the length in bytes of the IP address as specified by **Local Address** (section [3.2.1.1](#Section_3.1.1.1)).
+- **IPAddrLen:** MUST be set to the length in bytes of the IP address as specified by **Local Address** (section [3.2.1.1](#Section_3.2.1.1)).
 - **IPAddress:** MUST be set to the IP address as specified by **Local Address** (section 3.2.1.1).
 The client MUST set remaining fields as specified in section 2.2.5.
 
@@ -1945,7 +1945,7 @@ The client MAY<8> add WDSMCTP_OPT_USER_SID Extended Option (section 2.2.5) to th
 
 The client MAY<9> add WDSMCTP_OPT_CAPABILITIES Extended Option (section [2.2.5.1](#Section_2.2.5.1)) set to WDSMCTP_CAP_MULTISTREAM in the JOIN packet.
 
-The client MUST send the packet to the **Server Address** (section 3.2.1.1), and set the Join Timer to expire after a timeout specified in section [3.2.2](#Section_3.1.6.1).
+The client MUST send the packet to the **Server Address** (section 3.2.1.1), and set the Join Timer to expire after a timeout specified in section [3.2.2](#Section_3.2.5.12.1).
 
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 Join Timer Expiry
@@ -1955,7 +1955,7 @@ When Join Timer expires, client MUST send JOIN packet as specified in section [3
 <a id="Section_3.2.5.3.2"></a>
 ##### 3.2.5.3.2 JOINACK Reply
 
-The client MUST set **ClientId** (section [3.2.1.1](#Section_3.1.1.1)) to the **ClientId** field (section [2.2.6](#Section_2.2.15)) from the JOINACK packet.
+The client MUST set **ClientId** (section [3.2.1.1](#Section_3.2.1.1)) to the **ClientId** field (section [2.2.6](#Section_2.2.15)) from the JOINACK packet.
 
 The client MUST set **MinNACKBackOff** (section [3.2.1.3](#Section_3.2.1.3)) to **MinNACKBackOff** field from JOINACK packet.
 
@@ -1965,15 +1965,15 @@ The client MUST construct QCR packet (section [2.2.8](#Section_2.2.8)) and set t
 
 - **ClientId:** MUST be set to the **ClientId** (section 3.2.1.1).
 - MUST set all remaining fields as specified in section [2.2.8.1](#Section_2.2.15).
-The client can optionally add the Extended Options specified in section [2.2.8.4](#Section_2.2.8).
+The client can optionally add the Extended Options specified in section [2.2.8.4](#Section_2.2.8.4).
 
 The client MUST send the constructed QCR packet to **Server Address** (section 3.2.1.1).
 
-The client MUST disable the Join Timer (section [3.1.2](#Section_3.1.2)).
+The client MUST disable the Join Timer (section [3.1.2](#Section_3.2.2)).
 
 The client MUST change the **SessionState** to **RegularState** (section 3.2.1.1).
 
-The client MUST set the Force QCC Timer to expire in time specified by section [3.2.2](#Section_3.1.6.1).
+The client MUST set the Force QCC Timer to expire in time specified by section [3.2.2](#Section_3.2.5.12.1).
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Leaving
@@ -1993,30 +1993,30 @@ The client MUST send a LEAVE packet as specified in section [2.2.11](#Section_2.
 
 If **MaxNACKBackOff** (section [3.2.1.3](#Section_3.2.1.3)) is non-zero, then the client MUST wait for a random time between zero and **MaxNACKBackOff** (section 3.2.1.3) before sending a LEAVE packet.
 
-If **MaxNACKBackOff** (section 3.2.1.3) is zero, the client MUST wait for a random time up to the maximum time specified by **MaxLeaveDelay** (section [3.2.1.2](#Section_3.1.1.4)) before sending a LEAVE packet.
+If **MaxNACKBackOff** (section 3.2.1.3) is zero, the client MUST wait for a random time up to the maximum time specified by **MaxLeaveDelay** (section [3.2.1.2](#Section_3.2.1.2)) before sending a LEAVE packet.
 
-The client MUST send the LEAVE packet to **Server Address** (section [3.2.1.1](#Section_3.1.1.1)).
+The client MUST send the LEAVE packet to **Server Address** (section [3.2.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Processing JOINACK
 
-When the client receives a JOINACK packet in **RegularState** (section [3.2.1.1](#Section_3.1.1.1)), the client MUST assume that the QCR packet sent in response to JOINACK (section [3.2.5.3.2](#Section_3.2.5.3.2)) is lost and MUST proceed as specified in section 3.2.5.3.2.
+When the client receives a JOINACK packet in **RegularState** (section [3.2.1.1](#Section_3.2.1.1)), the client MUST assume that the QCR packet sent in response to JOINACK (section [3.2.5.3.2](#Section_3.2.5.3.2)) is lost and MUST proceed as specified in section 3.2.5.3.2.
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Processing POLL
 
-If the **POLLSeqNo** from the POLL packet (section [2.2.9](#Section_2.2.9)) is less than or equal to the **LastPOLLSeqNo** (section [3.2.1.1](#Section_3.1.1.1)), then such a packet MUST be rejected by client.
+If the **POLLSeqNo** from the POLL packet (section [2.2.9](#Section_2.2.9)) is less than or equal to the **LastPOLLSeqNo** (section [3.2.1.1](#Section_3.2.1.1)), then such a packet MUST be rejected by client.
 
 The client MUST set **LastPOLLSeqNo** (section 3.2.1.1) to the **POLLSeqNo** from the POLL packet (section 2.2.9).
 
 The client MUST set **LastPOLLPacket** (section 3.2.1.1) to the POLL packet (section 2.2.9) received from server.
 
-The client MUST set the Poll Timer (section [3.2.2](#Section_3.1.6.1)) timeout to a random value between 0 and **BackOff** (section 2.2.9).
+The client MUST set the Poll Timer (section [3.2.2](#Section_3.2.5.12.1)) timeout to a random value between 0 and **BackOff** (section 2.2.9).
 
 <a id="Section_3.2.5.6.1"></a>
 ##### 3.2.5.6.1 Poll Timer Expiry
 
-The client MUST send a POLL Trigger to [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md) WDS Multicast Application Protocol providing the **AppData** and **AppDataLen** from the **LastPOLLPacket** (section [3.2.1.1](#Section_3.1.1.1)).
+The client MUST send a POLL Trigger to [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md) WDS Multicast Application Protocol providing the **AppData** and **AppDataLen** from the **LastPOLLPacket** (section [3.2.1.1](#Section_3.2.1.1)).
 
 The response from the POLL Trigger MUST be packaged in the POLLACK packet, and the fields of POLLACK packet MUST be set as specified below:
 
@@ -2029,7 +2029,7 @@ The POLLACK packet MUST be sent to the **Server Address** (section 3.2.1.1).
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Processing QCC Packet
 
-If the **QCCSeqNo** from QCC packet (section [2.2.7](#Section_2.2.7)) is less than or equal to the **LastQCCSeqNo** (section [3.2.1.1](#Section_3.1.1.1)) then the packet MUST be rejected by client.
+If the **QCCSeqNo** from QCC packet (section [2.2.7](#Section_2.2.7)) is less than or equal to the **LastQCCSeqNo** (section [3.2.1.1](#Section_3.2.1.1)) then the packet MUST be rejected by client.
 
 The client MUST set **LastQCCSeqNo** (section 3.2.1.1) to **QCCSeqNo** from the QCC packet (section 2.2.7).
 
@@ -2037,14 +2037,14 @@ The client MUST set **QCCRecvTime** (section 3.2.1.1) to the local time of clien
 
 The client MUST set **LastQCCPacket** (section 3.2.1.1) to the QCC packet received from server.
 
-The client MUST set QCC Timer (section [3.2.2](#Section_3.1.6.1)) to expire after a random time which MUST be between zero and **QCRBackOff** (section 2.2.7).
+The client MUST set QCC Timer (section [3.2.2](#Section_3.2.5.12.1)) to expire after a random time which MUST be between zero and **QCRBackOff** (section 2.2.7).
 
 <a id="Section_3.2.5.7.1"></a>
 ##### 3.2.5.7.1 QCC Timer Expiry
 
 The client MUST send a QCC Trigger to WDS Multicast Application Protocol to get the payload for QCR packet. The client MUST construct the QCR packet and set the fields as specified below:
 
-- **ClientId**: MUST be set to **ClientId** (section [3.2.1.1](#Section_3.1.1.1)).
+- **ClientId**: MUST be set to **ClientId** (section [3.2.1.1](#Section_3.2.1.1)).
 - **QCCSeqNo**: MUST be set to **LastQCCSeqNo** (section 3.2.1.1).
 - **BackOff**: MUST be set as follows:
 - = ( Local Time on Client – **QCCRecvTime** (section 3.2.1.1) )
@@ -2053,29 +2053,29 @@ The client MUST send a QCC Trigger to WDS Multicast Application Protocol to get 
 - **LossRate**: MUST be set to ( **LossRate** x 10000000000000000 ) (section 3.2.1.3).
 - **AppDataLen**: MUST set to length in bytes of the payload provided by WDS Multicast Application Protocol in response to the Trigger.
 - **AppData**: MUST be set to the payload provided by WDS Multicast Application Protocol in response to the Trigger.
-The client can optionally add the Extended Options specified in section [2.2.8.4](#Section_2.2.8).
+The client can optionally add the Extended Options specified in section [2.2.8.4](#Section_2.2.8.4).
 
 The client MUST send the constructed QCR packet to **Server Address** (section 3.2.1.1).
 
-The client MUST reset the **Force QCC Timer** to timeout as specified in section [3.2.2](#Section_3.1.6.1).
+The client MUST reset the **Force QCC Timer** to timeout as specified in section [3.2.2](#Section_3.2.5.12.1).
 
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 Force QCC Timer Expiry
 
 The client MUST send a QCC Trigger to WDS Multicast Application Protocol to get the payload for QCR packet. The client MUST construct the QCR packet and set the fields as specified below:
 
-- **ClientId**: MUST be set to **ClientId** (section [3.2.1.1](#Section_3.1.1.1)).
+- **ClientId**: MUST be set to **ClientId** (section [3.2.1.1](#Section_3.2.1.1)).
 - **HiODATASeqNo**: MUST be set to **HiODATASeqNo** (section [3.2.1.3](#Section_3.2.1.3)).
 - **LossRate**: MUST be set to ( **LossRate** x 10000000000000000 ) (section 3.2.1.3).
 - **AppDataLen**: MUST set to length in bytes of the payload provided by WDS Multicast Application Protocol, as specified in [MS-WDSMA](../MS-WDSMA/MS-WDSMA.md), in response to the Trigger.
 - **AppData**: MUST be set to the payload provided by WDS Multicast Application Protocol in response to the Trigger.
-The client can optionally add the Extended Options specified in section [2.2.8.4](#Section_2.2.8).
+The client can optionally add the Extended Options specified in section [2.2.8.4](#Section_2.2.8.4).
 
 The remaining fields MUST be set as specified in section [2.2.8.3](#Section_2.2.8.3).
 
 The client MUST send the constructed QCR packet to **Server Address** (section 3.2.1.1).
 
-The client MUST reset the Force QCC Timer to timeout as specified in section [3.2.2](#Section_3.1.6.1).
+The client MUST reset the Force QCC Timer to timeout as specified in section [3.2.2](#Section_3.2.5.12.1).
 
 <a id="Section_3.2.5.9"></a>
 #### 3.2.5.9 Processing SPM Packet
@@ -2156,7 +2156,7 @@ The client MUST update **HiLossODATASeqNo** (section 3.2.1.3) as follows:
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Sending an ACK Packet
 
-The client MUST NOT sent ACK packet if **MasterClientId** (section [3.2.1.3](#Section_3.2.1.3)) is not equal to **ClientId** (section [3.2.1.1](#Section_3.1.1.1)).
+The client MUST NOT sent ACK packet if **MasterClientId** (section [3.2.1.3](#Section_3.2.1.3)) is not equal to **ClientId** (section [3.2.1.1](#Section_3.2.1.1)).
 
 The client MUST construct an ACK packet (section [2.2.15](#Section_2.2.15)) and set the fields as specified below:
 
@@ -2170,11 +2170,11 @@ The ACK packet MUST be sent to **Server Address** (section 3.2.1.1).
 <a id="Section_3.2.5.12"></a>
 #### 3.2.5.12 NACK Management
 
-If the **RangeList** (section [3.2.1.3.1](#Section_3.2.1.3.1.4)) is empty or [NACK Timer](#Section_3.1.6.1) is still active, then the client MUST stop processing.
+If the **RangeList** (section [3.2.1.3.1](#Section_3.2.1.3.1.4)) is empty or [NACK Timer](#Section_3.2.5.12.1) is still active, then the client MUST stop processing.
 
 The client MUST setup the NACK Timer to expire with a timeout as specified below:
 
-- If **MasterClientId** (section [3.2.1.3](#Section_3.2.1.3)) matches the **ClientId** (section [3.2.1.1](#Section_3.1.1.1)) then timeout MUST be zero.
+- If **MasterClientId** (section [3.2.1.3](#Section_3.2.1.3)) matches the **ClientId** (section [3.2.1.1](#Section_3.2.1.1)) then timeout MUST be zero.
 - Otherwise, client MUST generate a random value in range **MinNACKBackOff** (section 3.2.1.3) and **MaxNACKBackOff** (section 3.2.1.3) and setup the NACK Timer with it.
 <a id="Section_3.2.5.12.1"></a>
 ##### 3.2.5.12.1 NACK Timer Expiry
@@ -2188,9 +2188,9 @@ The client MUST construct NACK packet as specified in section [2.2.18](#Section_
 - **LossRate:** MUST be set to ( **LossRate** x 10000000000000000 ) (section 3.2.1.3).
 - **RangeCount:** MUST be set to number of entries in **RangeList** (section 3.2.1.3).
 - **RangeList:** MUST set to the **RangeList** (section 3.2.1.3).
-The client MUST send the NACK packet to the **Server Address** (section [3.2.1.1](#Section_3.1.1.1)).
+The client MUST send the NACK packet to the **Server Address** (section [3.2.1.1](#Section_3.2.1.1)).
 
-The client MUST generate a random value between **MinNACKBackOff** (section 3.2.1.3) and **MaxNACKBackOff** (section 3.2.1.3), and MUST set the timeout for NACK Timer (section [3.2.2](#Section_3.1.6.1)) to it.
+The client MUST generate a random value between **MinNACKBackOff** (section 3.2.1.3) and **MaxNACKBackOff** (section 3.2.1.3), and MUST set the timeout for NACK Timer (section [3.2.2](#Section_3.2.5.12.1)) to it.
 
 <a id="Section_3.2.5.12.2"></a>
 ##### 3.2.5.12.2 Sending Zero NACK
@@ -2202,7 +2202,7 @@ The client MUST construct a NACK packet (section [2.2.18](#Section_2.2.18)) and 
 - **LossRate:** MUST be set to **LossRate** (section 3.2.1.3).
 - **RangeCount:** MUST be set to zero.
 - **RangeList:** MUST set to an empty list.
-The client MUST send the NACK packet to the **Server Address** (section [3.2.1.1](#Section_3.1.1.1)).
+The client MUST send the NACK packet to the **Server Address** (section [3.2.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.2.5.13"></a>
 #### 3.2.5.13 Processing an ODATA Packet
@@ -2245,7 +2245,7 @@ The client MUST process RDATA exactly like an ODATA packet, as specified in sect
 <a id="Section_3.2.5.15"></a>
 #### 3.2.5.15 Processing a KICK Packet
 
-The client MUST iterate through the list of **ClientList** fields (section [2.2.12](#Section_2.2.12)) looking for an entry that matches the **ClientId** (section [3.2.1.1](#Section_3.1.1.1)). If such an entry is found, client MUST terminate the Multicast Session.
+The client MUST iterate through the list of **ClientList** fields (section [2.2.12](#Section_2.2.12)) looking for an entry that matches the **ClientId** (section [3.2.1.1](#Section_3.2.1.1)). If such an entry is found, client MUST terminate the Multicast Session.
 
 <a id="Section_3.2.5.16"></a>
 #### 3.2.5.16 Processing a DEMOTE Packet

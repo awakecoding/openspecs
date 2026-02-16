@@ -626,7 +626,7 @@ The [**initiator**](#gt_initiator) MUST perform the following steps.
 - If the MSMQ Session policy assertion described in section [2.2.3.2](#Section_2.2.3.2) is not set:
 - Set *rMsmqMessage.Body* to **rNetMsmqMessage**.
 - Deliver **rMsmqMessage** by raising the Enqueue Message event from section 3.1.7.1.9 of [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) with the following parameters:
-- *iQueue* set to **rSendQueue**, the opened queue from section [3.2.4.1](#Section_3.3.4.1).
+- *iQueue* set to **rSendQueue**, the opened queue from section [3.2.4.1](#Section_3.2.4.1).
 - *iMessage* set to **rMsmqMessage**.
 - *iTransaction* set to **rTransaction**.
 - If the returned **rStatus**, is not equal to MQ_OK (0x00000000), then an error MUST be propagated to the higher layer.
@@ -641,7 +641,7 @@ If the MSMQ Session policy assertion described in section [2.2.3.2](#Section_2.2
 - Set *rNetMsmqMessage.EndRecord* equal to **rEndRecord**.
 - Set *rMsmqMessage.Body* to **rNetMsmqMessage**.
 - Raise the Enqueue Message event from section 3.1.7.1.9 of [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) with the following parameters:
-- *iQueue* set to **rSendQueue**, the opened queue from section [3.2.4.1](#Section_3.3.4.1).
+- *iQueue* set to **rSendQueue**, the opened queue from section [3.2.4.1](#Section_3.2.4.1).
 - *iMessage* set to **rMsmqMessage**.
 - *iTransaction* set to **rTransaction**.
 - If the returned **rStatus** is not equal to MQ_OK (0x00000000), then an error MUST be propagated to the higher layer, and no further processing done.

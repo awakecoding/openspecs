@@ -299,8 +299,8 @@ No standards assignments have been received for this protocol. All values used i
 | RPC Interface UUID for IPCHCollection | 833E4100-AFF7-4AC3-AAC2-9F24C1457BCE | [IPCHCollection](#Section_3.1.4.1.2.1) |
 | RPC Interface UUID for ISAFSession | 833E41AA-AFF7-4AC3-AAC2-9F24C1457BCE | [ISAFSession](#Section_3.1.4.1.2.2) |
 | RPC Interface UUID for IRASrv | F120A684-B926-447F-9DF4-C966CB785648 | [IRASrv](#Section_3.3.4.1) |
-| [**CLSID**](#gt_class-identifier-clsid) for PCHService object | 833E4010-AFF7-4AC3-AAC2-9F24C1457BCE | [PCHService](#Section_3.1.4) |
-| CLSID for RASrv object | 3C3A70A7-A468-49B9-8ADA-28E11FCCAD5D | [RASrv](#Section_3.1.4) |
+| [**CLSID**](#gt_class-identifier-clsid) for PCHService object | 833E4010-AFF7-4AC3-AAC2-9F24C1457BCE | [PCHService](#Section_3.2.4) |
+| CLSID for RASrv object | 3C3A70A7-A468-49B9-8ADA-28E11FCCAD5D | [RASrv](#Section_3.2.4) |
 
 <a id="Section_2"></a>
 # 2 Messages

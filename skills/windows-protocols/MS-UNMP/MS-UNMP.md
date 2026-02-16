@@ -759,7 +759,7 @@ long MapRecordIndex;
 | 0x00000000 | Enumerate user account mappings. |
 | 0x00000001 | Enumerate group account mappings. |
 
-**MapRecordIndex**: An XDR-encoded, 32-bit signed integer that is an index into the set of mapping records. This MUST be set to 0 on the first call in an enumeration sequence, and to the sum of all the records returned by all preceding replies on subsequent calls in the enumeration sequence. For more information on enumeration sequences, see sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_3.2.5).
+**MapRecordIndex**: An XDR-encoded, 32-bit signed integer that is an index into the set of mapping records. This MUST be set to 0 on the first call in an enumeration sequence, and to the sum of all the records returned by all preceding replies on subsequent calls in the enumeration sequence. For more information on enumeration sequences, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.1.5).
 
 <a id="Section_2.2.2.21"></a>
 #### 2.2.2.21 sequence_number
@@ -774,7 +774,7 @@ long CurrentVersionTokenHighPart;
 
 };
 
-**CurrentVersionTokenLowPart**: An [**XDR**](#gt_xdr)-encoded, 32-bit signed integer that MUST be either 0x00000000 or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more information about **CurrentVersionTokenLowPart**, see sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_3.2.5).
+**CurrentVersionTokenLowPart**: An [**XDR**](#gt_xdr)-encoded, 32-bit signed integer that MUST be either 0x00000000 or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more information about **CurrentVersionTokenLowPart**, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.1.5).
 
 **CurrentVersionTokenHighPart**: An XDR-encoded, 32-bit signed integer that MUST be either 0x00000000 or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or **DUMPALLMAPSXXX_PROC**. For more information about **CurrentVersionTokenHighPart**, see sections 3.1.5 and 3.2.5.
 
@@ -1102,7 +1102,7 @@ sequence_number SequenceNumber
 
 );
 
-*SequenceNumber*: A data structure that contains two 32-bit signed integers. *SequenceNumber* MUST contain either 0x00000000 for each member field or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more details, see sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_3.2.5).
+*SequenceNumber*: A data structure that contains two 32-bit signed integers. *SequenceNumber* MUST contain either 0x00000000 for each member field or a value returned by the server from a previous call to GETCURRENTVERSIONTOKEN_PROC or [**DUMPALLMAPSXXX_PROC**](#gt_dumpallmapsxxx_proc). For more details, see sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_3.1.5).
 
 **Return Value:** The User Name Mapping Protocol server MUST return a [**SUNRPC**](#gt_sunrpc) status of MSG_ACCEPTED with an accept status of SUCCESS. It MUST also return a [sequence_number](#Section_2.2.2.21) structure with the current sequence number value for the set of mapping records held by the server.
 

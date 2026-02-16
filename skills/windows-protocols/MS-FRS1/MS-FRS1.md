@@ -1207,7 +1207,7 @@ The types of replication command packets are listed in the following table along
 | CMD_RETRY_FETCH (0x244) | COMM_BLOCK_SIZE COMM_FILE_OFFSET COMM_CO_GUID COMM_CO_SEQUENCE_NUMBER | To inform the downstream partner that the request for the staging file data cannot be fulfilled at this time and that the request SHOULD be retried at a later time. |
 | CMD_NEED_JOIN (0x121) | - | To inform the upstream partner that a Join operation is needed. |
 | CMD_START_JOIN (0x122) | - | To inform the downstream partner that a Join operation is starting. |
-| CMD_JOINING (0x130) | [COMM_VVECTOR](#Section_2.2.3.6.9) [COMM_JOIN_TIME](#Section_2.2.3.6.10) [COMM_REPLICA_VERSION_GUID](#Section_2.2.3.6.11) [COMM_COMPRESSION_GUID](#Section_2.2.3.6.12) | To send a version vector to an upstream partner. |
+| CMD_JOINING (0x130) | [COMM_VVECTOR](#Section_2.2.3.6.9) [COMM_JOIN_TIME](#Section_2.2.3.6.10) [COMM_REPLICA_VERSION_GUID](#Section_2.2.3.6.5) [COMM_COMPRESSION_GUID](#Section_2.2.3.6.12) | To send a version vector to an upstream partner. |
 | CMD_JOINED (0x128) | - | To inform the downstream partner that Join is successful. |
 | CMD_UNJOIN_REMOTE (0x148) | - | On completion of a VVJ on a connection, this command causes the upstream partner to disconnect the connection so that it can be torn down. |
 | CMD_VVJOIN_DONE (0x136) | - | To inform the downstream partner that all change orders are sent out during Initial Sync. |
@@ -3036,7 +3036,7 @@ When doing [**initial sync**](#gt_initial-sync) for the [**replica set**](#gt_re
 
 - FRS forms a list of connections to upstream partners in order of the connection priority stored in the AD connection object (see section 2.3.1.6).
 - For every connection in a given priority class (see the following table), FRS sends a NEED_JOIN request to the upstream partner. For more details on [**connection joining**](#gt_join), see section [3.3.4.6](#Section_3.3.4.6).
-- A downstream partner can only perform a VVJoin with a single upstream partner at a time. Once an upstream partner responds to an FRS request, the connections to all other upstream partners are paused to prevent VVJoins from proceeding on those connections. On successful completion of the VVJoin on a connection, the connection state never goes back to initial sync. If the VVJoin failed (that is, if the partner goes offline), the connection is returned back to the list and the logic goes back to connection selection, and then performs a VVJoin again on the newly selected connection. For more details on how files and folders are replicated out to partners during initial sync, see section [3.3.4.4.1](#Section_3.3.4.4.12).
+- A downstream partner can only perform a VVJoin with a single upstream partner at a time. Once an upstream partner responds to an FRS request, the connections to all other upstream partners are paused to prevent VVJoins from proceeding on those connections. On successful completion of the VVJoin on a connection, the connection state never goes back to initial sync. If the VVJoin failed (that is, if the partner goes offline), the connection is returned back to the list and the logic goes back to connection selection, and then performs a VVJoin again on the newly selected connection. For more details on how files and folders are replicated out to partners during initial sync, see section [3.3.4.4.1](#Section_3.3.4.4.11).
 - The replica set leaves the Seeding state and becomes Online only after it has successfully completed a VVJoin with each of its upstream partners.
 FRS performs initial VVJoin with one [**partner**](#gt_partner) at a time. The sequence depends on the priority class of the upstream partner. *Next class* in the table below means the class with a larger priority value (plus 1). The priority classes and their meanings follow.
 
@@ -3999,7 +3999,7 @@ COMM_JOIN_GUID MUST be all 0 for new connection.
 
 COMM_LAST_JOIN_TIME MUST be 1.
 
-Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.12).
+Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.11).
 
 See sections [4.1](#Section_4.1) and [4.4.1](#Section_4.4.1) for examples of the use of this command.
 
@@ -4022,7 +4022,7 @@ COMM_REPLICA_VERSION_GUID MUST be the unique GUID that is generated for the loca
 
 COMM_COMPRESSION_GUID MUST be the unique GUID (see section [2.2.3.6.12](#Section_2.2.3.6.12)).
 
-Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.12).
+Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.11).
 
 See sections [4.1](#Section_4.1) and [4.4.2](#Section_4.4.2) for examples of the use of this command.
 
@@ -4050,7 +4050,7 @@ The upstream partner MUST answer the connection session establishment request wi
 - COMM_COMMAND MUST be CMD_JOINED (0x128).
 - COMM_JOIN_GUID MUST be P_IN.COMM_JOIN_GUID.
 - COMM_LAST_JOIN_TIME MUST be the current time.
-- Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.12).
+- Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.11).
 After the CMD_JOINED packet is sent:
 
 - If a connection VVJoin needs to be performed, FRS MUST go through the process specified in the following section.

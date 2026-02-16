@@ -366,7 +366,7 @@ Applicable uses of such an X.509 certificate include, but are not limited to, ce
 
 The Health Certificate Enrollment Protocol does not perform any version detection or capability negotiation by itself since this is the first version.
 
-Although this version of the Health Certificate Enrollment Protocol does not support the concept of versioning, there is a version number field in Health Certificate Enrollment Protocol messages. This field is intended for future use. In the current version of the Health Certificate Enrollment Protocol, implementations are required to set the version field value to "1.0". The fixed value version field (see sections [2.2.1.2](#Section_2.2.1.2) and [2.2.2.2](#Section_2.2.2.4)) is intended to enable future versions of the protocol to negotiate a version that is commonly supported by both [**HCEA**](#gt_health-certificate-enrollment-agent-hcea) and [**HRA**](#gt_health-registration-authority-hra).
+Although this version of the Health Certificate Enrollment Protocol does not support the concept of versioning, there is a version number field in Health Certificate Enrollment Protocol messages. This field is intended for future use. In the current version of the Health Certificate Enrollment Protocol, implementations are required to set the version field value to "1.0". The fixed value version field (see sections [2.2.1.2](#Section_2.2.2.2) and [2.2.2.2](#Section_2.2.2)) is intended to enable future versions of the protocol to negotiate a version that is commonly supported by both [**HCEA**](#gt_health-certificate-enrollment-agent-hcea) and [**HRA**](#gt_health-registration-authority-hra).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -509,7 +509,7 @@ The header MAY<15> contain other fields besides those listed here. All other fie
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 HTTP Message Body Used in an HCEP Response (HTTP OK Response)
 
-The [**health certificate**](#gt_health-certificate) response MUST be present if the client is deemed to be compliant with policy as the [**HTTP**](#gt_hypertext-transfer-protocol-http) message body, which follows the rules as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 4.3.<16> If the message body is present, the value of this message body MUST be an [**ASN.1**](#gt_asn1) [**DER**](#gt_distinguished-encoding-rules-der)–encoded health certificate response. The format of the health certificate response MUST be as specified in section [2.2.2.4](#Section_2.2.2.4).
+The [**health certificate**](#gt_health-certificate) response MUST be present if the client is deemed to be compliant with policy as the [**HTTP**](#gt_hypertext-transfer-protocol-http) message body, which follows the rules as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 4.3.<16> If the message body is present, the value of this message body MUST be an [**ASN.1**](#gt_asn1) [**DER**](#gt_distinguished-encoding-rules-der)–encoded health certificate response. The format of the health certificate response MUST be as specified in section [2.2.2.4](#Section_2.2.2).
 
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 Health Certificate Response
@@ -616,7 +616,7 @@ Figure 3: Health Certificate Enrollment Protocol single request and response
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-**CorrelationId:** An HCEP-Correlation-Id, as specified in section [2.2.1.2](#Section_2.2.1.2). The [**HCEA**](#gt_health-certificate-enrollment-agent-hcea) SHOULD use this ADM element to store the HCEP-Correlation-Id that it sent in its [HCEP request](#Section_2.2.1).
+**CorrelationId:** An HCEP-Correlation-Id, as specified in section [2.2.1.2](#Section_2.2.2.2). The [**HCEA**](#gt_health-certificate-enrollment-agent-hcea) SHOULD use this ADM element to store the HCEP-Correlation-Id that it sent in its [HCEP request](#Section_2.2.1).
 
 **ClientAuthenticationFlag:** A Boolean flag. The HCEA SHOULD<19> maintain this flag to specify if it expects the [**HRA**](#gt_health-registration-authority-hra) to authenticate the client, as specified in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). This flag determines the values of the **subject**, **Subject Alternative Name**, and **Extended Key Usage** fields in the [**health certificate**](#gt_health-certificate) request, as specified in section [2.2.1.4](#Section_2.2.1.4).
 
@@ -655,7 +655,7 @@ The higher layer SHOULD use the **INapEnforcementClientCallback::NotifySoHChange
 - MUST set the [**HTTP**](#gt_hypertext-transfer-protocol-http) message body to an [**ASN.1**](#gt_asn1) [**DER**](#gt_distinguished-encoding-rules-der) (as specified in [[ITUX680]](https://go.microsoft.com/fwlink/?LinkId=89923)) health certificate request as specified in section [2.2.1](#Section_2.2.1).
 - Set the HTTP message headers as follows:
 - MUST set the **Pragma**, **Content-Type**, **HCEP-Version** and the **Content-Length** header fields, as specified in section 2.2.1.
-- MUST set the HCEP-Correlation-Id, as specified in section [2.2.1.2](#Section_2.2.1.2). It MUST be [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7)-encoded, as specified in [[RFC3548]](https://go.microsoft.com/fwlink/?LinkId=90432). The value SHOULD be stored in the **CorrelationId** ADM element as specified in section [3.1.1](#Section_3.1.1).
+- MUST set the HCEP-Correlation-Id, as specified in section [2.2.1.2](#Section_2.2.2.2). It MUST be [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7)-encoded, as specified in [[RFC3548]](https://go.microsoft.com/fwlink/?LinkId=90432). The value SHOULD be stored in the **CorrelationId** ADM element as specified in section [3.1.1](#Section_3.1.1).
 - The HCEA MUST then select the provisioned [**URL**](#gt_uniform-resource-locator-url) from the list of [**HRA**](#gt_health-registration-authority-hra) URLs specified by section [1.5](#Section_1.5) and send the request over the transport designated by the scheme (see [[RFC2396]](https://go.microsoft.com/fwlink/?LinkId=90339) for the definition of the scheme part and [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) and [[RFC2818]](https://go.microsoft.com/fwlink/?LinkId=90383) for designation of HTTP and HTTP over TLS schemes, respectively) to the HRA. If the HRA is configured to authenticate clients as specified in section 1.5, the authentication will be handled by the transport as specified by [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483).
 - If the transport returns an error in either transmitting or receiving the response, HCEA MUST select the next URL from the provisioned list and repeat step 4.
 - If the HRA returned the response, HCEA MUST proceed to "Processing an HCEP Response" as specified in section [3.1.5.2](#Section_3.1.5.2)
@@ -665,10 +665,10 @@ The higher layer SHOULD use the **INapEnforcementClientCallback::NotifySoHChange
 
 If the [**HCEA**](#gt_health-certificate-enrollment-agent-hcea) receives an [**HTTP**](#gt_hypertext-transfer-protocol-http) response other than [**HTTP OK**](#gt_http-ok), it MUST perform the error handling as specified in section [3.1.8](#Section_3.2.8). On receiving an HTTP OK response, HCEA MUST perform the validation as follows:
 
-- HCEA MUST validate that all the HCEP response header fields are present in the response, as specified in section [2.2.1.2](#Section_2.2.1.2), and MUST discard the response if the validation fails.
-- HCEA MAY<23> validate the values of all the HCEP response header fields, as specified in sections [2.2.2.1](#Section_2.2.2.4) and [2.2.2.2](#Section_2.2.2.4) and MUST discard the response if the validation fails.
+- HCEA MUST validate that all the HCEP response header fields are present in the response, as specified in section [2.2.1.2](#Section_2.2.2.2), and MUST discard the response if the validation fails.
+- HCEA MAY<23> validate the values of all the HCEP response header fields, as specified in sections [2.2.2.1](#Section_2.2.2) and [2.2.2.2](#Section_2.2.2) and MUST discard the response if the validation fails.
 - HCEA SHOULD <24>compare the value of the HCEP-correlation-Id header to the value stored in the **CorrelationId** ADM element as specified in section [3.1.1](#Section_3.1.1); if the values do not match, HCEA MAY <25> discard the [HCEP response](#Section_2.2.2).
-- HCEA MUST validate the format of the [**health certificate**](#gt_health-certificate) response that is present in the HCEP response, as specified in section [2.2.2.4](#Section_2.2.2.4). If the health certificate response is invalid, the HCEA MUST discard the HCEP response.
+- HCEA MUST validate the format of the [**health certificate**](#gt_health-certificate) response that is present in the HCEP response, as specified in section [2.2.2.4](#Section_2.2.2). If the health certificate response is invalid, the HCEA MUST discard the HCEP response.
 - When the validation checks are complete, the HCEA processes the HCEP response and MUST extract the base64-encoded [**SoHR**](#gt_statement-of-health-response-sohr) from the HCEP-SoHR HTTP header (which is described in section 2.2.2.2) and decode it. The decoded SoHR MUST be passed to the [**system health entity**](#gt_system-health-entity), which SHOULD be done by calling **INapEnforcementClientConnection::SetSoHResponse**, which is part of the [**NAP EC API**](#gt_nap-ec-api), and passing the SoHR as an opaque buffer; and then calling the **INapEnforcementClientBinding::ProcessSoHResponse**, which is part of the NAP EC API.
 - HCEA MUST extract the certificate and place it in the **PersistedComputerCertificates** ADM element specified in section 3.1.1. If the specific implementation of this ADM element supports associating metadata with the certificate, the HCEA SHOULD store values of **HCEP-AFW-Zone** and **HCEP-AFW-Protection-Level** headers of the HCEP Response in the metadata associated with the certificate. The certificate is shared with the intended consumers (see section [1.6](#Section_1.6)) by means of the **PersistedComputerCertificates** ADM element. The intended consumers SHOULD use the specific implementation of ADM in order to retrieve the certificate. <26>
 <a id="Section_3.1.6"></a>
@@ -698,7 +698,7 @@ Any subsequent requests by the client MUST have a new HCEP-Correlation-Id value.
 
 The following is a list of predefined settings that SHOULD<28> be present on the server and SHOULD be initialized by the server administrator:
 
-- A list of strings that are used to restrict the requests based on the user-agent strings, as specified in section [2.2.2.1](#Section_2.2.2.4), that are present in an HCEP request. If no string in the list is a substring of the user-agent string, the request MUST be discarded. If this list is empty, all [**user agents**](#gt_user-agent) SHOULD<29> be allowed.
+- A list of strings that are used to restrict the requests based on the user-agent strings, as specified in section [2.2.2.1](#Section_2.2.2), that are present in an HCEP request. If no string in the list is a substring of the user-agent string, the request MUST be discarded. If this list is empty, all [**user agents**](#gt_user-agent) SHOULD<29> be allowed.
 - A list of algorithms that are used to restrict the allowed public keys in the certificate request. If the list is empty, all algorithms SHOULD<30> be allowed.
 - A list of algorithms that are used to restrict the allowed signatures in the certificate request. If the list is empty, all algorithms SHOULD<31> be allowed.
 - A list of [**cryptographic service providers (CSPs)**](#gt_cryptographic-service-provider-csp) that are used to restrict the CSPs that created the certificate requests. If the list is empty, certificate requests from all CSPs SHOULD<32> be allowed.
@@ -712,7 +712,7 @@ The following is a list of predefined settings that SHOULD<28> be present on the
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-The [**HRA**](#gt_health-registration-authority-hra) server uses the **CAConnectionDuration** timer to ensure the response time from the [**CA**](#gt_certification-authority-ca) does not exceed the duration set in the **CAResponseTimeOut** ADM element defined in section [3.2.1](#Section_3.1.1). The **CAConnectionDuration** timer is specified per HCEP request connection and is used in the processing steps for obtaining a [**health certificate**](#gt_health-certificate) from the CA as specified in section [3.2.5.2](#Section_3.1.5) as part of the sequence of steps for creating the HCEP response.
+The [**HRA**](#gt_health-registration-authority-hra) server uses the **CAConnectionDuration** timer to ensure the response time from the [**CA**](#gt_certification-authority-ca) does not exceed the duration set in the **CAResponseTimeOut** ADM element defined in section [3.2.1](#Section_3.1.1). The **CAConnectionDuration** timer is specified per HCEP request connection and is used in the processing steps for obtaining a [**health certificate**](#gt_health-certificate) from the CA as specified in section [3.2.5.2](#Section_3.2.5) as part of the sequence of steps for creating the HCEP response.
 
 The HRA server uses the **SoHEvaluationDuration** timer to ensure the evaluation time does not exceed the duration set in the **EvaluationTimeOut** ADM element defined in section 3.2.1. The **SoHEvaluationEuration** timer is specified per HCEP request connection and is used in the steps for processing an HCEP request as specified in section 3.2.5.2.
 
@@ -734,7 +734,7 @@ HRESULT SetSoHR([in] SoHR message, [in] BOOL compliant,
 
 The SoHR is defined in [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054) section 3.6.
 
-The received SoHR is used for both the Enforce NAP policy task (specified in [MS-HCEP] section [3.2.5.4](#Section_2.2.1.4)) and for Proxy SoHR task (specified in [MS-HCEP] section [3.2.5.2](#Section_3.1.5)).
+The received SoHR is used for both the Enforce NAP policy task (specified in [MS-HCEP] section [3.2.5.4](#Section_2.2.1.4)) and for Proxy SoHR task (specified in [MS-HCEP] section [3.2.5.2](#Section_3.2.5)).
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -781,7 +781,7 @@ After the validation checks are complete, the [**HRA**](#gt_health-registration-
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Creating and Sending an HCEP Response
 
-- The HCEP response MUST be created as follows. (The logical values of the headers are specified. The values MUST be formatted and encoded as specified in sections [2.2.2.1](#Section_2.2.2.4) and [2.2.2.2](#Section_2.2.2.4).)
+- The HCEP response MUST be created as follows. (The logical values of the headers are specified. The values MUST be formatted and encoded as specified in sections [2.2.2.1](#Section_2.2.2) and [2.2.2.2](#Section_2.2.2).)
 - Set the value of the **HCEP-Correlation-Id** header to the value of the **HCEP-Correlation-Id** header in the HCEP request.
 - Set the value of the **HCEP-SoHR** header to the *SoHR* parameter of the **SetSoHR** abstract interface.
 - Set the value of the **HCEP-AFW-Zone** header to the *Zone* parameter of the **SetSoHR** abstract interface.
@@ -795,13 +795,13 @@ The processing steps for obtaining a health certificate from the CA are:
 
 - HRA reads the **remote CA name List** ADM element specified in section [3.2.1](#Section_3.1.1) from the beginning, and gets the first **CAToConnect** ADM element specified in section 3.2.1.
 - HRA constructs the request to the CA (as specified in section [3.2.5.4](#Section_2.2.1.4)).<38>
-- HRA initiates the **CAConnectionDuration** timer specified in section [3.2.2](#Section_3.2.2).
+- HRA initiates the **CAConnectionDuration** timer specified in section [3.2.2](#Section_3.1.2).
 - HRA submits a certificate request by invoking the local event, "submitting certificate request", described in [MS-WCCE] section 3.1.1.6.2, with the following parameters:
 - *CAName*: The value of the CAToConnect.Name.
 - *ServerName*: The value of the CAToConnect.EndPoint.
 - *Flags*: The flag value 0x402 indicates that the request is a CMC request in binary format.
 - *Request*: The certificate request generated in step 2.
-The response is a [**PKCS**](#gt_public-key-cryptography-standards-pkcs) #7 response (as specified in section [2.2.2.4](#Section_2.2.2.4)).
+The response is a [**PKCS**](#gt_public-key-cryptography-standards-pkcs) #7 response (as specified in section [2.2.2.4](#Section_2.2.2)).
 
 If the CA responds with an error (nonzero value) or the *Disposition* output parameter value (as specified in [MS-WCCE] section 3.1.1.6.2) is not "***Issued***" the HRA gets the next **CAToConnect** ADM element from the **remote CA name List** and performs step 4 again until a CA responds with a PKCS #7 response or all of the CAs in the **remote CA name List** have been tried.
 
@@ -865,7 +865,7 @@ The [**health registration authority (HRA)**](#gt_health-registration-authority-
 
 The server uses the following timer events:
 
-- When the **CAConnectionDuration** timer specified in section [3.2.2](#Section_3.2.2) times out, an event is triggered. When this timer event is triggered, the [**HRA**](#gt_health-registration-authority-hra) stops performing the processing steps for obtaining a health certificate from the [**CA**](#gt_certification-authority-ca) specified in section [3.2.5.2](#Section_3.1.5) subsection 5, and responds with an error as specified in section [3.2.8](#Section_3.2.8).
+- When the **CAConnectionDuration** timer specified in section [3.2.2](#Section_3.1.2) times out, an event is triggered. When this timer event is triggered, the [**HRA**](#gt_health-registration-authority-hra) stops performing the processing steps for obtaining a health certificate from the [**CA**](#gt_certification-authority-ca) specified in section [3.2.5.2](#Section_3.2.5) subsection 5, and responds with an error as specified in section [3.2.8](#Section_3.2.8).
 - When the **SoHEvaluationDuration** timer specified in section 3.2.2 times out, the HCEP Request processing MUST be aborted and HRA MUST respond with an error as specified in section 3.2.8.
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
@@ -949,7 +949,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <3> Section 1.5: The Windows implementations of the HCEA and the HRA depend on the [**Cryptographic Application Programming Interface (CAPI)**](#gt_cryptographic-application-programming-interface-capi) (for more information, see [[MSDN-CAPI]](https://go.microsoft.com/fwlink/?LinkId=89964)) for the implementation of the algorithms previously specified. The [**CAPI**](#gt_cryptographic-application-programming-interface-capi) has a pluggable model for cryptographic service providers (CSPs) to be added, removed, or replaced by the administrator. Hence the HCEA and the HRA support all the algorithms that are provided by CAPI through the pluggable CSPs. For more information about the default list of CSPs that are present on a Windows-based system, see [MSDN-CSP].
 
-<4> Section 1.5: Windows implementations of the HCEA and the HRA use the [**OID**](#gt_object-identifier-oid) "1.3.6.1.4.1.311.47.1.1" (napHealthyOid) (as specified in section [1.9](#Section_1.9)) for the **Statement of Health** field (as specified in section [2.2.1.4](#Section_2.2.1.4)), the OID "1.3.6.1.4.1.311.47.1.3" (napUnhealthyOid) (as specified in section [2.2.2.4](#Section_2.2.2.4)), and the OID "1.3.6.1.4.1.311.13.2.2" (szOID_ENROLLMENT_CSP_PROVIDER) (as specified in section 2.2.1.4).
+<4> Section 1.5: Windows implementations of the HCEA and the HRA use the [**OID**](#gt_object-identifier-oid) "1.3.6.1.4.1.311.47.1.1" (napHealthyOid) (as specified in section [1.9](#Section_1.9)) for the **Statement of Health** field (as specified in section [2.2.1.4](#Section_2.2.1.4)), the OID "1.3.6.1.4.1.311.47.1.3" (napUnhealthyOid) (as specified in section [2.2.2.4](#Section_2.2.2)), and the OID "1.3.6.1.4.1.311.13.2.2" (szOID_ENROLLMENT_CSP_PROVIDER) (as specified in section 2.2.1.4).
 
 <5> Section 1.6: The Windows HCEA depends on general platform security. Strong security is possible by using a secure execution environment.
 
@@ -1113,7 +1113,7 @@ Data: A 32-bit unsigned integer.
 | 0x00000000 | HRA does not request health certificate for non-compliant SoH. |
 | 0x00000001 | HRA requests health certificate for non-compliant SoH. |
 
-If the HRA is set to request a health certificate for a non-compliant SoH, the HRA communicates with the CA using the [MS-WCCE](../MS-WCCE/MS-WCCE.md) protocol and the exact processing steps are described in section [2.2.2.3](#Section_2.2.2.4) of the Health Certificate Enrollment Protocol.
+If the HRA is set to request a health certificate for a non-compliant SoH, the HRA communicates with the CA using the [MS-WCCE](../MS-WCCE/MS-WCCE.md) protocol and the exact processing steps are described in section [2.2.2.3](#Section_2.2.2) of the Health Certificate Enrollment Protocol.
 
 <38> Section 3.2.5.3: This behavior is only available on a Server SKU implementation where HRA is installed, and was first released in Windows Server 2008.
 

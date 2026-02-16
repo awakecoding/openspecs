@@ -334,7 +334,7 @@ The data model is as specified in [[RFC1002]](https://go.microsoft.com/fwlink/?L
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-There is an **lmhost_include** timer used to determine whether an [**LMHOSTS**](#gt_lmhost) file can be read (see section [3.1.6](#Section_3.1.6)).
+There is an **lmhost_include** timer used to determine whether an [**LMHOSTS**](#gt_lmhost) file can be read (see section [3.1.6](#Section_3.2.6)).
 
 There are timers specified in [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261) and [[HYBRID]](https://go.microsoft.com/fwlink/?LinkId=148113), except as follows.
 

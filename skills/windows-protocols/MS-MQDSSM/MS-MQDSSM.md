@@ -812,7 +812,7 @@ For the syntactic specifications of the following <Class> or <Class><Attribute> 
 <a id="Section_3.1"></a>
 ## 3.1 Algorithm Details
 
-This algorithm is specified in terms of a set of abstract local events that are raised by the processing rules within the common processing rules specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md). The algorithm converts these events to [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) operations against [**Active Directory**](#gt_active-directory). Three operations ([Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3), [Read Directory Next (section 3.1.6.5)](#Section_3.1.6.5), and [Read Directory End (section 3.1.6.6)](#Section_3.1.6.6)) have shared state; the rest are independent. The processing rules of the abstract events describe the conversion of arguments from abstract to concrete, which can involve some simple computation; the results returned by the transport are returned after conversion of results from concrete to abstract, which again can involve some simple computation.
+This algorithm is specified in terms of a set of abstract local events that are raised by the processing rules within the common processing rules specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md). The algorithm converts these events to [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) operations against [**Active Directory**](#gt_active-directory). Three operations ([Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4), [Read Directory Next (section 3.1.6.5)](#Section_3.1.6.5), and [Read Directory End (section 3.1.6.6)](#Section_3.1.6.6)) have shared state; the rest are independent. The processing rules of the abstract events describe the conversion of arguments from abstract to concrete, which can involve some simple computation; the results returned by the transport are returned after conversion of results from concrete to abstract, which again can involve some simple computation.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -838,7 +838,7 @@ This algorithm accesses the following externally defined ADM elements:
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 ReadDirectoryIteratorState Data Element
 
-The **ReadDirectoryIteratorState** ADM element represents the state associated with a directory read initiated by a [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3) event. This ADM element MUST contain the following ADM attributes:
+The **ReadDirectoryIteratorState** ADM element represents the state associated with a directory read initiated by a [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4) event. This ADM element MUST contain the following ADM attributes:
 
 - **Handle**: A **HANDLE** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.16) that identifies the **ReadDirectoryIteratorState** ADM element instance. This identifier MUST NOT change over the lifetime of the **ReadDirectoryIteratorState** ADM element instance.
 - **DataElementType**: A string that is the name of a sub-type of a **DirectoryObject** ADM element.
@@ -927,10 +927,10 @@ The MQDSSM algorithm MUST perform the following actions to process this event:
 
 - Determine the type of the *iDirectoryObject* argument. If the type is not one of **QueueManager**, **Queue**, **Site**, or **RoutingLink**, *rStatus* MUST be set to the **DirectoryOperationResult.GenericError**, *rObjectGUID* is undefined, and processing MUST end.
 - The create operation logic for the type of ADM element specified by the *iDirectoryObject* argument MUST be performed as specified in the sections listed following. The *rStatus* and *rObjectGUID* values specified in each section MUST be returned.
-- [QueueManager (section 3.1.6.1.1)](#Section_3.1.6.3.2)
-- [Queue (section 3.1.6.1.2)](#Section_3.1.6.1.2.3)
-- [Site (section 3.1.6.1.3)](#Section_3.1.6.1.3.3)
-- [RoutingLink (section 3.1.6.1.4)](#Section_3.1.6.11.5)
+- [QueueManager (section 3.1.6.1.1)](#Section_3.1.6.10.1)
+- [Queue (section 3.1.6.1.2)](#Section_3.1.6.1.2.2)
+- [Site (section 3.1.6.1.3)](#Section_3.1.6.1.3)
+- [RoutingLink (section 3.1.6.1.4)](#Section_5.1.5)
 <a id="Section_3.1.6.1.1"></a>
 ##### 3.1.6.1.1 QueueManager
 
@@ -1322,10 +1322,10 @@ The algorithm MUST perform the following actions to process this event:
 
 - Determine the type of *iDirectoryObject*. If the type is not one of **QueueManager**, **Queue**, **Site**, or **RoutingLink**, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, and processing MUST end.
 - Perform the steps of the delete operation for that type of ADM element, as specified in the sections listed following, and return the *rStatus* value specified in that section.
-- [QueueManager (section 3.1.6.2.1)](#Section_3.1.6.3.2)
-- [Queue (section 3.1.6.2.2)](#Section_3.1.6.2.2.2)
-- [Site (section 3.1.6.2.3)](#Section_3.1.6.2.3.1)
-- [RoutingLink (section 3.1.6.2.4)](#Section_3.1.6.11.5)
+- [QueueManager (section 3.1.6.2.1)](#Section_3.1.6.10.1)
+- [Queue (section 3.1.6.2.2)](#Section_3.1.6.2.2)
+- [Site (section 3.1.6.2.3)](#Section_3.1.6.2.3.2)
+- [RoutingLink (section 3.1.6.2.4)](#Section_5.1.5)
 <a id="Section_3.1.6.2.1"></a>
 ##### 3.1.6.2.1 QueueManager
 
@@ -1469,16 +1469,16 @@ The algorithm MUST perform the following operations to process this event:
 - Let *UseGuid* be a GUID variable initialized to be empty. If the single element in *iFilter* is of the form "Identifier" EQUALS *aGuid*, set the value of *UseGuid* to *aGuid*.
 - If *iDirectoryObjectType* has the value **ConnectedNetwork**, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rDirectoryObject* is undefined, and processing MUST end.
 - Perform the steps of the read operation for the type of ADM element indicated by *iDirectoryObjectType*, as specified in the following sections, and return the *rStatus* and *rDirectoryObject* values specified in that section. The directory contents must NOT be modified by this operation.
-- [QueueManager (section 3.1.6.3.2)](#Section_3.1.6.3.2)
-- [Queue (section 3.1.6.3.3)](#Section_3.1.6.3.3)
-- [Enterprise (section 3.1.6.3.4)](#Section_3.1.6.10.3)
-- [Site (section 3.1.6.3.5)](#Section_3.1.6.3.5.1)
-- [RoutingLink (section 3.1.6.3.6)](#Section_3.1.6.11.5)
-- [User (section 3.1.6.3.7)](#Section_3.1.6.3.7.2)
+- [QueueManager (section 3.1.6.3.2)](#Section_3.1.6.10.1)
+- [Queue (section 3.1.6.3.3)](#Section_3.1.6.3.3.2)
+- [Enterprise (section 3.1.6.3.4)](#Section_3.1.6.4.3)
+- [Site (section 3.1.6.3.5)](#Section_3.1.6.3.5)
+- [RoutingLink (section 3.1.6.3.6)](#Section_5.1.5)
+- [User (section 3.1.6.3.7)](#Section_3.1.6.3.7)
 <a id="Section_3.1.6.3.1"></a>
 ##### 3.1.6.3.1 Search For One Object
 
-- Generate a [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3) event with the following arguments:
+- Generate a [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4) event with the following arguments:
 - *iDirectoryObjectType* := *iDirectoryObjectType*
 - *iFilter* := *iFilter*
 - *iAttributeList* := *iAttributeList*
@@ -1685,12 +1685,12 @@ The algorithm MUST perform the following actions to process this event:
 - If *iDirectoryObjectType* has the value "ConnectedNetwork", *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rQueryHandle* is undefined, and processing MUST end.
 - Let *ReadIterator* be a [ReadDirectoryIteratorState (section 3.1.1.2)](#Section_3.1.1.3) ADM element instance, which MUST be created. The **ReadDirectoryIteratorState** ADM element instance referenced by *ReadIterator* MUST be added to the [ReadDirectoryIteratorStateCollection (section 3.1.1.3)](#Section_3.1.1.3) ADM element. *ReadIterator*.**Handle** MUST be set to a value that is unique within the **ReadDirectoryIteratorStateCollection** ADM element. The value of *iDirectoryObjectType* MUST be copied to *ReadIterator*.**DataElementType**.
 - Based on *iDirectoryObjectType*, perform the steps of the read-begin operation for that type of ADM element, as specified in the following sections, and return the *rStatus* value specified in that section. The directory contents must NOT be modified by this operation.
-- [QueueManager (section 3.1.6.4.1)](#Section_3.1.6.3.2)
+- [QueueManager (section 3.1.6.4.1)](#Section_3.1.6.10.1)
 - [Queue (section 3.1.6.4.2)](#Section_3.1.6.4.2.2)
-- [Enterprise (section 3.1.6.4.3)](#Section_3.1.6.10.3)
+- [Enterprise (section 3.1.6.4.3)](#Section_3.1.6.4.3)
 - [Site (section 3.1.6.4.4)](#Section_3.1.6.4.4.1)
-- [RoutingLink (section 3.1.6.4.5)](#Section_3.1.6.11.5)
-- [User (section 3.1.6.4.6)](#Section_3.1.6.4.6)
+- [RoutingLink (section 3.1.6.4.5)](#Section_5.1.5)
+- [User (section 3.1.6.4.6)](#Section_3.1.6.4.6.3)
 - If the value of *rStatus* is not **DirectoryOperationResult.Success**, the **ReadDirectoryIteratorState** ADM element instance referenced by *ReadIterator* MUST be removed from the **ReadDirectoryIteratorStateCollection** ADM element and discarded, *rQueryHandle* is undefined, and processing MUST end.
 - If the value of *rStatus* is **DirectoryOperationResult.Success**, *rQueryHandle* MUST be set to the value of *ReadIterator*.**Handle**, and processing MUST end.
 <a id="Section_3.1.6.4.1"></a>
@@ -1699,7 +1699,7 @@ The algorithm MUST perform the following actions to process this event:
 <a id="Section_3.1.6.4.1.1"></a>
 ###### 3.1.6.4.1.1 Preconditions
 
-The arguments supplied to the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3) event MUST meet the following requirement:
+The arguments supplied to the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4) event MUST meet the following requirement:
 
 - If *iAttributeList* is provided, it MUST NOT contain the name **ConnectedNetworkIdentifierList**. This attribute is not supported in [**Active Directory**](#gt_active-directory)-based environments.
 If this condition is violated, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rObjectGUID* is undefined, and processing of the event MUST end.
@@ -1748,7 +1748,7 @@ If the **QueueManager** ADM element attribute in the original expression does no
 <a id="Section_3.1.6.4.1.3"></a>
 ###### 3.1.6.4.1.3 Postprocessing
 
-- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.3), where the priorities and orders apply to the corresponding attributes named in *QueueAttributeList*.
+- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.4), where the priorities and orders apply to the corresponding attributes named in *QueueAttributeList*.
 - The sorted *rValues* list MUST be stored in *ReadIterator*.**LDAPState**.
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.4.2"></a>
@@ -1801,7 +1801,7 @@ If the **Queue** ADM element attribute in the original expression does not appea
 <a id="Section_3.1.6.4.2.3"></a>
 ###### 3.1.6.4.2.3 Postprocessing
 
-- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.3), where the priorities and orders apply to the corresponding attributes named in *QueueAttributeList*.
+- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.4), where the priorities and orders apply to the corresponding attributes named in *QueueAttributeList*.
 - The sorted *rValues* list MUST be stored in *ReadIterator*.**LDAPState**.
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.4.3"></a>
@@ -1845,7 +1845,7 @@ If the **Enterprise** ADM element attribute in the original expression does not 
 <a id="Section_3.1.6.4.3.3"></a>
 ###### 3.1.6.4.3.3 Postprocessing
 
-- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.3), where the priorities and orders apply to the corresponding attributes named in *EnterpriseAttributeList*.
+- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.4), where the priorities and orders apply to the corresponding attributes named in *EnterpriseAttributeList*.
 - The sorted *rValues* list MUST be stored in *ReadIterator*.**LDAPState**.
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.4.3.4"></a>
@@ -1874,7 +1874,7 @@ The mSMQCSPName attribute is a string that MUST have one of the values listed in
 <a id="Section_3.1.6.4.4.1"></a>
 ###### 3.1.6.4.4.1 Preconditions
 
-The arguments supplied to the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3) event MUST meet the following requirement:
+The arguments supplied to the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4) event MUST meet the following requirement:
 
 - If *iAttributeList* is provided, it MUST NOT contain the names **PrimarySiteController** or **PublicSigningKey**. These **Site** ADM element attributes are not supported in [**Active Directory**](#gt_active-directory)-based environments.
 If this condition is violated, *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, *rObjectGUID* is undefined, and processing of the event MUST end.
@@ -1914,7 +1914,7 @@ If the **Site** ADM element attribute in the original expression does not appear
 <a id="Section_3.1.6.4.4.3"></a>
 ###### 3.1.6.4.4.3 Postprocessing
 
-- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.3), where the priorities and orders apply to the corresponding attributes named in *SiteAttributeList*.
+- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.4), where the priorities and orders apply to the corresponding attributes named in *SiteAttributeList*.
 - The sorted *rValues* list MUST be stored in *ReadIterator*.**LDAPState**.
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.4.5"></a>
@@ -1958,7 +1958,7 @@ If the **RoutingLink** ADM element attribute in the original expression does not
 <a id="Section_3.1.6.4.5.3"></a>
 ###### 3.1.6.4.5.3 Postprocessing
 
-- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.3), where the priorities and orders apply to the corresponding attributes named in *SiteLinkAttributeList*.
+- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.4), where the priorities and orders apply to the corresponding attributes named in *SiteLinkAttributeList*.
 - The sorted *rValues* list MUST be stored in *ReadIterator*.**LDAPState**.
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.4.5.4"></a>
@@ -2029,7 +2029,7 @@ If the **User** ADM element attribute in the original expression does not appear
 <a id="Section_3.1.6.4.6.3"></a>
 ###### 3.1.6.4.6.3 Postprocessing
 
-- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.3), where the priorities and orders apply to the corresponding attributes named in *UserAttributeList*.
+- If *iAttributeSortOrder* is supplied, the sublists in the *rValues* list returned by the [Search Using LDAP (section 3.1.6.15)](#Section_3.1.6.15) event MUST be sorted according to the priorities and orders specified in *iAttributeSortOrder*, as specified at the start of section [3.1.6.4](#Section_3.1.6.4), where the priorities and orders apply to the corresponding attributes named in *UserAttributeList*.
 - The sorted *rValues* list MUST be stored in *ReadIterator*.**LDAPState**.
 - *rStatus* MUST be set to **DirectoryOperationResult.Success**, and processing MUST end.
 <a id="Section_3.1.6.5"></a>
@@ -2037,7 +2037,7 @@ If the **User** ADM element attribute in the original expression does not appear
 
 This event MUST be generated with the following arguments:
 
-- *iQueryHandle*: The **HANDLE** that was generated by the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3) event.
+- *iQueryHandle*: The **HANDLE** that was generated by the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4) event.
 **Return Values**:
 
 - *rStatus*: A **DirectoryOperationResult** that indicates the result of this directory operation.
@@ -2057,7 +2057,7 @@ The algorithm MUST perform the following actions to process this event:
 
 This event MUST be generated with the following arguments:
 
-- *iQueryHandle*: The **HANDLE** that was generated by the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.3) event.
+- *iQueryHandle*: The **HANDLE** that was generated by the [Read Directory Begin (section 3.1.6.4)](#Section_3.1.6.4) event.
 **Return Values**:
 
 - *rStatus*: A **DirectoryOperationResult** that indicates the result of this directory operation.
@@ -2082,12 +2082,12 @@ The algorithm MUST perform the following actions to process this event:
 
 - Determine the type of *iDirectoryObject*. If the type is **ConnectedNetwork** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.9), *rStatus* MUST be set to **DirectoryOperationResult.GenericError**, and processing MUST end.
 - Perform the steps of the write operation for that type of ADM element, as specified in the sections listed following, and return the *rStatus* value specified in that section.
-- [QueueManager (section 3.1.6.7.1)](#Section_3.1.6.3.2)
-- [Queue (section 3.1.6.7.2)](#Section_3.1.6.7.2)
-- [Enterprise (section 3.1.6.7.3)](#Section_3.1.6.10.3)
+- [QueueManager (section 3.1.6.7.1)](#Section_3.1.6.10.1)
+- [Queue (section 3.1.6.7.2)](#Section_3.1.6.7.2.1)
+- [Enterprise (section 3.1.6.7.3)](#Section_3.1.6.4.3)
 - [Site (section 3.1.6.7.4)](#Section_3.1.6.7.4.3)
-- [RoutingLink (section 3.1.6.7.5)](#Section_3.1.6.11.5)
-- [User (section 3.1.6.7.6)](#Section_3.1.6.7.6)
+- [RoutingLink (section 3.1.6.7.5)](#Section_5.1.5)
+- [User (section 3.1.6.7.6)](#Section_3.1.6.7.6.3)
 <a id="Section_3.1.6.7.1"></a>
 ##### 3.1.6.7.1 QueueManager
 
@@ -2133,7 +2133,7 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 <a id="Section_3.1.6.7.1.3"></a>
 ###### 3.1.6.7.1.3 Postprocessing
 
-- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** ADM attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_5) event MUST be generated with the following arguments:
+- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** ADM attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_3.1.6.17) event MUST be generated with the following arguments:
 - *iPath* := *WriteDN*
 - *iGuid* := *WriteGUID*
 - *iSecurity* := *iDirectoryObject*.**Security**
@@ -2283,7 +2283,7 @@ If, as a result of this write operation, one or more of the **RoutingServer**, *
 <a id="Section_3.1.6.7.1.10"></a>
 ###### 3.1.6.7.1.10 PublicSigningKeyList
 
-The **PublicSigningKeyList** ADM attribute is stored in two attributes on the computer object, as specified in section [3.1.6.11.1](#Section_3.1.6.11.1.2). When writing the **Certificates** ADM attribute, both mSMQSignCertificates and mSMQDigests MUST be written. In addition, the **MQUSERSIGNCERTS** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.21) structure contained in the mSMQSignCertificates attribute can be written only atomically; so to add, delete, or write an individual certificate, the mSMQSignCertificates attribute MUST be read first; the **MQUSERSIGNCERTS** structure modified (by adding, deleting, or writing a **MQUSERSIGNCERT** structure within it); then the mSMQSignCertificates attribute written with the modified structure. The appropriate operation (add, delete, or write) MUST be performed on the corresponding MD5 digest in the mSMQDigests attribute. The certificates and the digests MUST be in the same order.
+The **PublicSigningKeyList** ADM attribute is stored in two attributes on the computer object, as specified in section [3.1.6.11.1](#Section_3.1.6.11.1). When writing the **Certificates** ADM attribute, both mSMQSignCertificates and mSMQDigests MUST be written. In addition, the **MQUSERSIGNCERTS** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.21) structure contained in the mSMQSignCertificates attribute can be written only atomically; so to add, delete, or write an individual certificate, the mSMQSignCertificates attribute MUST be read first; the **MQUSERSIGNCERTS** structure modified (by adding, deleting, or writing a **MQUSERSIGNCERT** structure within it); then the mSMQSignCertificates attribute written with the modified structure. The appropriate operation (add, delete, or write) MUST be performed on the corresponding MD5 digest in the mSMQDigests attribute. The certificates and the digests MUST be in the same order.
 
 <a id="Section_3.1.6.7.2"></a>
 ##### 3.1.6.7.2 Queue
@@ -2326,7 +2326,7 @@ If this condition is violated, *rStatus* MUST be set to **DirectoryOperationResu
 <a id="Section_3.1.6.7.2.3"></a>
 ###### 3.1.6.7.2.3 Postprocessing
 
-- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** ADM attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_5) event MUST be generated with the following arguments:
+- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** ADM attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_3.1.6.17) event MUST be generated with the following arguments:
 - *iPath* := *WriteDN*
 - *iGuid* := *WriteGUID*
 - *iSecurity* := *iDirectoryObject*.**Security**
@@ -2379,7 +2379,7 @@ There are no preconditions for the [Write Directory (section 3.1.6.7)](#Sectio
 <a id="Section_3.1.6.7.3.3"></a>
 ###### 3.1.6.7.3.3 Postprocessing
 
-- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** ADM attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_5) event MUST be generated with the following arguments:
+- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** ADM attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_3.1.6.17) event MUST be generated with the following arguments:
 - *iPath* := the [**distinguished name**](#gt_distinguished-name-dn) specified in section [2.2.1](#Section_2.2.1) for an mSMQEnterpriseSettings object.
 - *iSecurity* := *iDirectoryObject*.**Security**
 - If the Set Object Security Using LDAP event returns an *rStatus* that is not **DirectoryOperationResult.Success**, *rStatus* MUST be set to the *rStatus* returned by the Set Object Security Using LDAP event, and processing MUST end.
@@ -2430,7 +2430,7 @@ If any of these conditions is violated, *rStatus* MUST be set to **DirectoryOper
 <a id="Section_3.1.6.7.4.3"></a>
 ###### 3.1.6.7.4.3 Postprocessing
 
-- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_5) event MUST be generated with the following arguments:
+- If *iAttributeList* contains the name "Security" and the *iDirectoryObject*.**Security** attribute is populated, a [Set Object Security Using LDAP (section 3.1.6.17)](#Section_3.1.6.17) event MUST be generated with the following arguments:
 - *iPath* := *WriteDN*
 - *iGuid* := *WriteGUID*
 - *iSecurity* := *iDirectoryObject*.**Security**
@@ -2631,11 +2631,11 @@ This event MUST be generated with the following arguments:
 The algorithm MUST perform the following actions to process this event:
 
 - Based on *iDirectoryObjectType*, perform the conversion steps for that type of ADM element, as specified in the following sections.
-- [QueueManager (section 3.1.6.10.1)](#Section_3.1.6.3.2)
+- [QueueManager (section 3.1.6.10.1)](#Section_3.1.6.10.1)
 - [Queue (section 3.1.6.10.2)](#Section_3.1.6.10.2)
-- [Enterprise (section 3.1.6.10.3)](#Section_3.1.6.10.3)
+- [Enterprise (section 3.1.6.10.3)](#Section_3.1.6.4.3)
 - [Site (section 3.1.6.10.4)](#Section_3.1.6.10.4)
-- [RoutingLink (section 3.1.6.10.5)](#Section_3.1.6.11.5)
+- [RoutingLink (section 3.1.6.10.5)](#Section_5.1.5)
 - [User (section 3.1.6.10.6)](#Section_3.1.6.10.6)
 <a id="Section_3.1.6.10.1"></a>
 ##### 3.1.6.10.1 QueueManager
@@ -3710,7 +3710,7 @@ The following sections describe, for each combination of object and operation, t
 <a id="Section_5.1.1"></a>
 ### 5.1.1 QueueManager
 
-The directory representation of a **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.1](#Section_3.1.6.3.2), [3.1.6.2.1](#Section_3.1.6.3.2), [3.1.6.3.2](#Section_3.1.6.3.2), [3.1.6.4.1](#Section_3.1.6.3.2), and [3.1.6.7.1](#Section_3.1.6.3.2). These operations always act on an mSMQConfiguration ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.163) [**Active Directory**](#gt_active-directory) object and can also act on computer ([MS-ADSC] section 2.21) and mSMQSettings ([MS-ADSC] section 2.167) objects. The default security is discussed in section [3.1.6.1.1.8](#Section_3.1.6.1.1.8).
+The directory representation of a **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.1](#Section_3.1.6.10.1), [3.1.6.2.1](#Section_3.1.6.10.1), [3.1.6.3.2](#Section_3.1.6.10.1), [3.1.6.4.1](#Section_3.1.6.10.1), and [3.1.6.7.1](#Section_3.1.6.10.1). These operations always act on an mSMQConfiguration ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.163) [**Active Directory**](#gt_active-directory) object and can also act on computer ([MS-ADSC] section 2.21) and mSMQSettings ([MS-ADSC] section 2.167) objects. The default security is discussed in section [3.1.6.1.1.8](#Section_3.1.6.1.1.8).
 
 To create the directory representation of a **QueueManager** ADM element instance requires at least RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent computer object. If the **PublicSigningKeyList** ADM attribute is present, as described in section [3.1.6.1.1.3](#Section_3.1.6.1.1.3), RIGHT_GENERIC_WRITE ([MS-ADTS] section 5.1.3.2) access is also required on the parent object. If one or more associated mSMQSettings objects are required to be created, as described in section 3.1.6.1.1.3, RIGHT_DS_CREATE_CHILD access is required on the parent objects of the mSMQSettings objects, which are of class server ([MS-ADSC] 2.250).
 
@@ -3723,7 +3723,7 @@ To modify the directory representation of a **QueueManager** ADM element instanc
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Queue
 
-The directory representation of a **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.2](#Section_3.1.6.1.2.3), [3.1.6.2.2](#Section_3.1.6.2.2.2), [3.1.6.3.3](#Section_3.1.6.3.3), [3.1.6.4.2](#Section_3.1.6.4.2.2), and [3.1.6.7.2](#Section_3.1.6.7.2). These operations act on an mSMQQueue ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.166) [**Active Directory**](#gt_active-directory) object. The default security is discussed in [MS-MQDMPR] section 3.1.7.1.3.1.
+The directory representation of a **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.2](#Section_3.1.6.1.2.2), [3.1.6.2.2](#Section_3.1.6.2.2), [3.1.6.3.3](#Section_3.1.6.3.3.2), [3.1.6.4.2](#Section_3.1.6.4.2.2), and [3.1.6.7.2](#Section_3.1.6.7.2.1). These operations act on an mSMQQueue ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.166) [**Active Directory**](#gt_active-directory) object. The default security is discussed in [MS-MQDMPR] section 3.1.7.1.3.1.
 
 To create the directory representation of a **Queue** ADM element instance requires RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent mSMQConfiguration ([MS-ADSC] section 2.163) object.
 
@@ -3736,7 +3736,7 @@ To modify the directory representation of a **Queue** ADM element instance requi
 <a id="Section_5.1.3"></a>
 ### 5.1.3 Enterprise
 
-The directory representation of an **Enterprise** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.6) ADM element instance can be read and modified, as described in sections [3.1.6.3.4](#Section_3.1.6.10.3), [3.1.6.4.3](#Section_3.1.6.10.3), and [3.1.6.7.3](#Section_3.1.6.10.3). These operations act on an mSMQEnterpriseSettings ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.164) [**Active Directory**](#gt_active-directory) object.
+The directory representation of an **Enterprise** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.6) ADM element instance can be read and modified, as described in sections [3.1.6.3.4](#Section_3.1.6.4.3), [3.1.6.4.3](#Section_3.1.6.4.3), and [3.1.6.7.3](#Section_3.1.6.4.3). These operations act on an mSMQEnterpriseSettings ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.164) [**Active Directory**](#gt_active-directory) object.
 
 To read the attributes of an **Enterprise** ADM element instance requires RIGHT_GENERIC_READ ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the object.
 
@@ -3745,7 +3745,7 @@ To modify the directory representation of an **Enterprise** ADM element instance
 <a id="Section_5.1.4"></a>
 ### 5.1.4 Site
 
-The directory representation of a **Site** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.7) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.3](#Section_3.1.6.1.3.3), [3.1.6.2.3](#Section_3.1.6.2.3.1), [3.1.6.3.5](#Section_3.1.6.3.5.1), [3.1.6.4.4](#Section_3.1.6.4.4.1), and [3.1.6.7.4](#Section_3.1.6.7.4.3). These operations act on a site ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.258) [**Active Directory**](#gt_active-directory) object.
+The directory representation of a **Site** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.7) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.3](#Section_3.1.6.1.3), [3.1.6.2.3](#Section_3.1.6.2.3.2), [3.1.6.3.5](#Section_3.1.6.3.5), [3.1.6.4.4](#Section_3.1.6.4.4.1), and [3.1.6.7.4](#Section_3.1.6.7.4.3). These operations act on a site ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.258) [**Active Directory**](#gt_active-directory) object.
 
 To create the directory representation of a **Site** ADM element instance requires RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent object, which is of class sitesContainer ([MS-ADSC] section 2.261) and has a fixed distinguished name of "CN=Sites,CN=Configuration,<root>".
 
@@ -3758,7 +3758,7 @@ To modify the directory representation of a **Site** ADM element instance requir
 <a id="Section_5.1.5"></a>
 ### 5.1.5 RoutingLink
 
-The directory representation of a **RoutingLink** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.8) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.4](#Section_3.1.6.11.5), [3.1.6.2.4](#Section_3.1.6.11.5), [3.1.6.3.6](#Section_3.1.6.11.5), [3.1.6.4.5](#Section_3.1.6.11.5), and [3.1.6.7.5](#Section_3.1.6.11.5). These operations act on an mSMQSiteLink ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.168) Active Directory object.
+The directory representation of a **RoutingLink** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.8) ADM element instance can be created, deleted, read, and modified, as described in sections [3.1.6.1.4](#Section_5.1.5), [3.1.6.2.4](#Section_5.1.5), [3.1.6.3.6](#Section_5.1.5), [3.1.6.4.5](#Section_5.1.5), and [3.1.6.7.5](#Section_5.1.5). These operations act on an mSMQSiteLink ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.168) Active Directory object.
 
 To create the directory representation of a **RoutingLink** ADM element instance requires RIGHT_DS_CREATE_CHILD ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the parent mSMQEnterpriseSettings ([MS-ADSC] section 2.164) object.
 
@@ -3771,7 +3771,7 @@ To modify the directory representation of a **RoutingLink** ADM element instance
 <a id="Section_5.1.6"></a>
 ### 5.1.6 User
 
-The directory representation of a **User** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.15) ADM element instance can be read and modified, as described in sections [3.1.6.3.7](#Section_3.1.6.3.7.2), [3.1.6.4.6](#Section_3.1.6.4.6), and [3.1.6.7.6](#Section_3.1.6.7.6). These operations act on a user ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.269) [**Active Directory**](#gt_active-directory) object.
+The directory representation of a **User** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.15) ADM element instance can be read and modified, as described in sections [3.1.6.3.7](#Section_3.1.6.3.7), [3.1.6.4.6](#Section_3.1.6.4.6.3), and [3.1.6.7.6](#Section_3.1.6.7.6.3). These operations act on a user ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.269) [**Active Directory**](#gt_active-directory) object.
 
 To read the attributes of a **User** ADM element instance requires RIGHT_GENERIC_READ ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2) access on the object.
 

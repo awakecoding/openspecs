@@ -20937,7 +20937,7 @@ The following table summarizes the [**XML Schema**](#gt_xml-schema-xsd) complex 
 
 **wsPassword**: Contains the password to be associated with the account.
 
-**eType**: Contains the type of account to create with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.3.2):
+**eType**: Contains the type of account to create with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.1.2):
 
 | Value | Meaning |
 | --- | --- |
@@ -21112,7 +21112,7 @@ The **WMS_USER_WS** complex type containis data about a single user.
 
 **wsDescription**: Contains the user account description.
 
-**UserType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.3.2):
+**UserType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.1.2):
 
 | Value | Meaning |
 | --- | --- |
@@ -21384,7 +21384,7 @@ The following table summarizes the [**XML Schema**](#gt_xml-schema-xsd) complex 
 
 </xsd:complexType>
 
-**peType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.3.2):
+**peType**: Contains the type of account with the following possible values, as specified in section [3.10.4.2](#Section_3.10.4.2.1.2):
 
 | Value | Meaning |
 | --- | --- |

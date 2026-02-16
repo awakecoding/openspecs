@@ -1927,7 +1927,7 @@ default="true" />
 
 **Architecture:** Specifies whether the plug-in is a 32-bit or 64-bit implementation. If present, this attribute MUST be set to either 32 or 64.
 
-**UseSharedProcess:** Specifies whether Remote Shells created by this plug-in are executed within the same process or within different processes. If set to true, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute all Shells within the same process. If set to false, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute each Shell within a separate process. For more details, see section [3.1.4.1.31](#Section_3.1.4.1.31.8).
+**UseSharedProcess:** Specifies whether Remote Shells created by this plug-in are executed within the same process or within different processes. If set to true, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute all Shells within the same process. If set to false, the Web Services Management Protocol Extensions for Windows Vista service SHOULD execute each Shell within a separate process. For more details, see section [3.1.4.1.31](#Section_3.1.4.1.31.2).
 
 **AutoRestart:** Specifies whether this plug-in is automatically loaded when the Web Services Management Protocol Extensions for Windows Vista service is started. If set to true, the Web Services Management Protocol Extensions for Windows Vista service SHOULD create a process and load the plug-in at startup. If set to false, the Web Services Management Protocol Extensions for Windows Vista service SHOULD NOT create a process and load the plug-in until a request message is received that is directed to this plug-in.
 
@@ -2233,7 +2233,7 @@ This type describes an XPath query that is used to filter events, as a part of Q
 <a id="Section_2.2.4.32"></a>
 #### 2.2.4.32 Send
 
-This type describes the input data blocks sent to the server. It is used as the s:Body element of the Send message (for more information, see section [3.1.4.13](#Section_3.1.4.13.1)).
+This type describes the input data blocks sent to the server. It is used as the s:Body element of the Send message (for more information, see section [3.1.4.13](#Section_3.1.4.13)).
 
 <xs:complexType name="Send">
 
@@ -2471,7 +2471,7 @@ minOccurs="0"/>
 
 **MaxPacketRetrievalTimeSeconds:** The maximum length of time, in seconds, a service is allowed to take to receive the entire HTTP request from the client. The time interval is measured beginning from the time the service receives the HTTP header from the client, to the time the service has retrieved the entire HTTP message. The minimum value of this element MUST be 1, and the maximum value MUST be 4294967295. The default value MUST be 120. This configuration setting is used by the Packet Retrieval timer, as specified in section 3.1.5.
 
-**AllowUnencrypted:** Contains a setting that allows the Web Services Management Protocol Extensions for Windows Vista client to send requests by using an authentication scheme and transport that does not encrypt the request and response, such as Digest over HTTP. The default value MUST be false. Used when processing messages, as specified in section [3.1.4.1.29](#Section_3.1.4.1.29.1).
+**AllowUnencrypted:** Contains a setting that allows the Web Services Management Protocol Extensions for Windows Vista client to send requests by using an authentication scheme and transport that does not encrypt the request and response, such as Digest over HTTP. The default value MUST be false. Used when processing messages, as specified in section [3.1.4.1.29](#Section_3.1.4.1.29).
 
 **Auth:** This MUST contain additional elements to configure authentication schemes, as specified in section [2.2.4.34](#Section_2.2.4.34).
 
@@ -2743,7 +2743,7 @@ In addition to the preceding standardized initialization parameters, the open co
 <a id="Section_2.2.4.38"></a>
 #### 2.2.4.38 Signal
 
-This type describes the signal values that are used to control the execution of the specific commands or of the Shell processor itself. It defines the format of the s:Body element of the Signal message (for more information, see section [3.1.4.12](#Section_3.1.4.12)).
+This type describes the signal values that are used to control the execution of the specific commands or of the Shell processor itself. It defines the format of the s:Body element of the Signal message (for more information, see section [3.1.4.12](#Section_3.1.4.12.1)).
 
 <xs:complexType name="Signal">
 
@@ -3312,8 +3312,8 @@ The following table summarizes the set of common XML Schema simple type definiti
 | [StreamNameList](#Section_2.2.5.8) | StreamNameList describes a list of data stream names. |
 | [XmlRenderingTypeEnumeration](#Section_2.2.5.9) | XmlRenderingTypeEnumeration is an enumeration of possible data formats used by plug-ins that expose a set of resources through the Web Services Management Protocol Extensions for Windows Vista service. |
 | [OutputBufferingModeEnumeration](#Section_2.2.5.10) | OutputBufferingModeEnumeration is an enumeration of possible buffering modes used by the server for plug-ins that implement the Disconnect Shell capability. |
-| [EventType_Type](#Section_2.2.5.16) | EventType_Type defines possible types of interactive messages that are part of a CIM/WMI operation with PowerShell semantics. |
-| [PromptType_Type](#Section_2.2.5.16) | PromptType_Type defines the importance of a Confirm message, from the provider's perspective. |
+| [EventType_Type](#Section_2.2.5.11) | EventType_Type defines possible types of interactive messages that are part of a CIM/WMI operation with PowerShell semantics. |
+| [PromptType_Type](#Section_2.2.5.12) | PromptType_Type defines the importance of a Confirm message, from the provider's perspective. |
 | [ActionType_Type](#Section_2.2.5.13) | ActionType_Type defines the possible actions for an Error message or a Confirm message. |
 | [ResponseType](#Section_2.2.5.14) | ResponseType defines the possible responses from a client to an Error message or a Confirm message. |
 | [Type_Type](#Section_2.2.5.16) | Type_Type defines the possible types of a streamed CIM/WMI property. |
@@ -4787,11 +4787,11 @@ This section describes a conceptual model of possible data organization that an 
 
 Web Services Management Protocol Extensions for Windows Vista service extends the abstract data model of the server role of the WS-Management Protocol as specified in [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849).
 
-**PubInitSubscriptions:** A table of active [**publisher-initiated event subscriptions**](#gt_publisher-initiated-event-subscription) (as specified in section [3.1.4.1.30](#Section_3.1.4.1.30.2)). Each row contains the following elements:
+**PubInitSubscriptions:** A table of active [**publisher-initiated event subscriptions**](#gt_publisher-initiated-event-subscription) (as specified in section [3.1.4.1.30](#Section_3.1.4.1.30)). Each row contains the following elements:
 
 - **Envelope:** a SOAP envelope containing a SubscribeMsg message
 - **Version :** a version [**GUID**](#gt_globally-unique-identifier-guid), as specified in section [2.2.4.41](#Section_2.2.4.41)
-**ShellInstances:** a table of remote shell instances operations (see section [3.1.4.1.31](#Section_3.1.4.1.31.8) for details). Each row contains the following elements:
+**ShellInstances:** a table of remote shell instances operations (see section [3.1.4.1.31](#Section_3.1.4.1.31.2) for details). Each row contains the following elements:
 
 - **ShellId:** a ShellId as specified in section [2.2.4.37](#Section_2.2.4.37)
 - **Instance:** an implementation-specific remote shell instance
@@ -4983,7 +4983,7 @@ Web Services Management Protocol Extensions for Windows Vista servers MUST retur
 
 Web Services Management Protocol Extensions for Windows Vista servers MAY<48> send the wsmv:DataLocale header with response messages.When sent as part of a response message, the wsmv:DataLocale header SHOULD indicate the language in which the server formatted the numerical data in the response text.
 
-Like the [wsman:Locale](#Section_3.2.4.1.4) header, the wsmv:DataLocale header makes use of the standard XML attribute xml:lang and MUST be defined as follows.
+Like the [wsman:Locale](#Section_3.1.4.1.8) header, the wsmv:DataLocale header makes use of the standard XML attribute xml:lang and MUST be defined as follows.
 
 <wsmv:DataLocale xml:lang="xs:language" s:mustUnderstand="false" />
 
@@ -5250,7 +5250,7 @@ The Web Services Management Protocol Extensions for Windows Vista service MUST r
 <a id="Section_3.1.4.1.28"></a>
 ##### 3.1.4.1.28 Security
 
-The Web Services Management Protocol Extensions for Windows Vista service MUST authenticate a request by using one of the configured security profiles. See section [2.2.4.36](#Section_2.2.4.36) and section [3.1.4.1.29](#Section_3.1.4.1.29.1) for more information about configured profiles.
+The Web Services Management Protocol Extensions for Windows Vista service MUST authenticate a request by using one of the configured security profiles. See section [2.2.4.36](#Section_2.2.4.36) and section [3.1.4.1.29](#Section_3.1.4.1.29) for more information about configured profiles.
 
 The Web Services Management Protocol Extensions for Windows Vista service SHOULD authorize a request by using the Sddl value retrieved by issuing a Get request to itself, on the [**resource URI**](#gt_resource-uri) http://schemas.microsoft.com/wbem/wsman/1/config/service/security, and using the resource [**URI**](#gt_uniform-resource-identifier-uri) from the client request message as a [**selector**](#gt_selector). See section [3.1.4.1.29.4](#Section_3.1.4.1.29.4) for more information.
 
@@ -5332,7 +5332,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/service/security [**resourc
 | --- | --- |
 | Uri | The resource URI that is being protected using the Sddl attribute in the Security element. |
 
-This selector property is used as a key when selecting a row from **ResourceSecurity** (see Section [3.1.1](#Section_3.1.1) for details). The Uri selector property is compared to the **Uri** element in order to identify the row to retrieve or to modify.
+This selector property is used as a key when selecting a row from **ResourceSecurity** (see Section [3.1.1](#Section_3.2.1) for details). The Uri selector property is compared to the **Uri** element in order to identify the row to retrieve or to modify.
 
 <a id="Section_3.1.4.1.29.5"></a>
 ###### 3.1.4.1.29.5 http://schemas.microsoft.com/wbem/wsman/1/config/listener
@@ -5515,7 +5515,7 @@ There are two types of remote shell scenarios that can be created:
 **Custom Remote Shell**: Unlike the Text-based Command Shell scenario, the Custom Remote Shell scenario allows the user to execute any Shell remotely. However, before the user tries to execute the custom Shell remotely, the administrator has to set up the configuration table at the server to map a specific custom Shell to corresponding resource URIs. This can be done in one of the following ways:
 
 - The administrator configures a new plugin on the server, which exposes a resource with the Shell capability.<86> For more details, see section [2.2.4.22](#Section_2.2.4.22).
-- The administrator can set up **CustomRemoteShells** as specified in section [3.1.1](#Section_3.1.1).<87> In this type of Custom Remote Shell, the "Command" request and response are not sent explicitly. Rather, in this scenario, the "Command", its arguments, and any associated data are sent as a BLOB in the "Send" request. This BLOB is Shell-specific and is transparent to the protocol. In case of Custom Remote Shell, the "Send" is targeted at the Shell itself, which decodes the BLOB.
+- The administrator can set up **CustomRemoteShells** as specified in section [3.1.1](#Section_3.2.1).<87> In this type of Custom Remote Shell, the "Command" request and response are not sent explicitly. Rather, in this scenario, the "Command", its arguments, and any associated data are sent as a BLOB in the "Send" request. This BLOB is Shell-specific and is transparent to the protocol. In case of Custom Remote Shell, the "Send" is targeted at the Shell itself, which decodes the BLOB.
 The user then provides a resource URI that is mapped to a custom Shell and the server executes the Shell remotely on behalf of the user.
 
 The processing sequence for creating and interacting with remote shells is defined in the following figure.
@@ -6049,7 +6049,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/service/security resource U
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD<100>be used to manipulate **CustomRemoteShells**. By default, this table does not exist on the server, and the administrator MUST set this table up for the user to execute the custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Get operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when selecting a row from **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to retrieve.
+The data that is passed as part of the request is used when selecting a row from **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to retrieve.
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6161,7 +6161,7 @@ The http://schemas.microsoft.com/wbem/wsman/1/config/service/security resource U
 
 The resource URI `http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell` SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Put operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when selecting and modifying a row from CustomRemoteShells (see section [3.1.1](#Section_3.1.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to modify.
+The data that is passed as part of the request is used when selecting and modifying a row from CustomRemoteShells (see section [3.1.1](#Section_3.2.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to modify.
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6200,7 +6200,7 @@ When a Web Services Management Protocol Extensions for Windows Vista server rece
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute a custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Delete operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when deleting a row from CustomRemoteShells (see section [3.1.1](#Section_3.1.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to delete.
+The data that is passed as part of the request is used when deleting a row from CustomRemoteShells (see section [3.1.1](#Section_3.2.1) for details). The Uri property is compared to the **Uri** element in order to identify the row to delete.
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6208,7 +6208,7 @@ The data that is passed as part of the request is used when deleting a row from 
 
 The CIM binding for WS-Management defines which operations can be used on which ResourceURIs when referencing [**CIM object**](#gt_cim-object)s. More information is specified in [[DMTF-DSP0227]](https://go.microsoft.com/fwlink/?LinkId=89851) section 7.
 
-The Web Services Management Protocol Extensions for Windows Vista service SHOULD<107> support WS-Transfer Delete when the class name in the resource URI and the selectors identify an instance of a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.1).
+The Web Services Management Protocol Extensions for Windows Vista service SHOULD<107> support WS-Transfer Delete when the class name in the resource URI and the selectors identify an instance of a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 <a id="Section_3.1.4.4.1"></a>
 ##### 3.1.4.4.1 Remote Shells
@@ -6256,7 +6256,7 @@ When a Web Services Management Protocol Extensions for Windows Vista server rece
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute a custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Create operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-The data that is passed as part of the request is used when creating a row in **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details).
+The data that is passed as part of the request is used when creating a row in **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details).
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6264,7 +6264,7 @@ The data that is passed as part of the request is used when creating a row in **
 
 The CIM binding for WS-Management defines which operations can be used on which ResourceURIs when referencing [**CIM object**](#gt_cim-object)s. More information is specified in [[DMTF-DSP0227]](https://go.microsoft.com/fwlink/?LinkId=89851) section 7.
 
-The Web Services Management Protocol Extensions for Windows Vista service SHOULD<109> support WS-Transfer Create when the resource URI identifies a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.1).
+The Web Services Management Protocol Extensions for Windows Vista service SHOULD<109> support WS-Transfer Create when the resource URI identifies a [**CIM class**](#gt_cim-class), as specified in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 <a id="Section_3.1.4.5.1"></a>
 ##### 3.1.4.5.1 Messages
@@ -6429,7 +6429,7 @@ The following describes the additional normative constraints on the Shell EPR:
 - **SelectorSet**: This value of the Name attribute of Selector element MUST contain the [**GUID**](#gt_globally-unique-identifier-guid) identifying the new Shell.
 The client extracts this new EPR and uses it in all subsequent messages, as it refers to the Shell instance that was just created.
 
-The client MUST use the same [wsman:Locale (section 3.2.4.1.4)](#Section_3.2.4.1.4), [wsmv:DataLocale (section 3.2.4.1.5)](#Section_3.1.4.1.9) and encoding (as described in [DMTF-DSP0226] section 13.1) in all subsequent messages of the Remote Shell protocol, as those values refer to the Shell instance that was just created. The server behavior is undefined if any of these properties change.
+The client MUST use the same [wsman:Locale (section 3.2.4.1.4)](#Section_3.1.4.1.8), [wsmv:DataLocale (section 3.2.4.1.5)](#Section_3.1.4.1.9) and encoding (as described in [DMTF-DSP0226] section 13.1) in all subsequent messages of the Remote Shell protocol, as those values refer to the Shell instance that was just created. The server behavior is undefined if any of these properties change.
 
 <a id="Section_3.1.4.5.2.1"></a>
 ###### 3.1.4.5.2.1 wsman:QuotaLimit
@@ -6543,7 +6543,7 @@ The set of resource URIs on which Web Services Management Protocol Extensions fo
 
 The resource URI http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute a custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Enumerate operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details).
+This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details).
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6591,7 +6591,7 @@ In order to enumerate the commands in an active shell instance, Web Services Man
 <a id="Section_3.1.4.8.3"></a>
 ##### 3.1.4.8.3 Publisher-Initiated Subscriptions
 
-When the Web Services Management Protocol Extensions for Windows Vista server receives an Enumerate request with a resource URI equal to http://schemas.microsoft.com/wbem/wsman/1/SubscriptionManager/Subscription, the server MUST retrieve the data in **PubInitSubscriptions** and return them as a result of the Enumeration (see Section [3.1.4.1.30](#Section_3.1.4.1.30.2) for details). The data MUST be returned as objects of type SubscriptionType, as specified in Section [2.2.4.41](#Section_2.2.4.41).
+When the Web Services Management Protocol Extensions for Windows Vista server receives an Enumerate request with a resource URI equal to http://schemas.microsoft.com/wbem/wsman/1/SubscriptionManager/Subscription, the server MUST retrieve the data in **PubInitSubscriptions** and return them as a result of the Enumeration (see Section [3.1.4.1.30](#Section_3.1.4.1.30) for details). The data MUST be returned as objects of type SubscriptionType, as specified in Section [2.2.4.41](#Section_2.2.4.41).
 
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 Pull
@@ -6619,7 +6619,7 @@ The set of resource URIs on which Web Services Management Protocol Extensions fo
 
 The resource URI `http://schemas.microsoft.com/wbem/wsman/1/config/winrs/customremoteshell` SHOULD be used to manipulate the **CustomRemoteShells** table. By default, this table does not exist on the server and the administrator MUST set this table up for the user to execute custom remote Shell. If this URI is used to manipulate the **CustomRemoteShells** table, the Web Services Management Protocol Extensions for Windows Vista servers MUST support the Pull operation as defined in the following table, where the Xml Schema Definition (XSD) type for the data that is passed as part of the request or response is referenced.
 
-This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.1.1) for details).
+This request is used when enumerating the data stored in the rows in **CustomRemoteShells** (see section [3.1.1](#Section_3.2.1) for details).
 
 | Resource URI | Input data type | Output data type |
 | --- | --- | --- |
@@ -6699,7 +6699,7 @@ The set of [**resource URIs**](#gt_resource-uri) on which Web Services Managemen
 | --- | --- | --- |
 | http://schemas.microsoft.com/wbem/wsman/1/windows/shell/cmd | rsp:CommandLine | rsp:CommandResponse |
 
-This operation is applicable for the Text-based Command Shell scenario only. The Custom Shell scenario uses Send to execute the command as specified in Section [3.1.4.13](#Section_3.1.4.13.1). To execute a command within a Shell, the Command message MUST be sent to the [**EPR**](#gt_endpoint-reference-epr) of an existing Shell instance.<116>. This EPR was obtained from a wst:ResourceCreated message during Shell instance creation.
+This operation is applicable for the Text-based Command Shell scenario only. The Custom Shell scenario uses Send to execute the command as specified in Section [3.1.4.13](#Section_3.1.4.13). To execute a command within a Shell, the Command message MUST be sent to the [**EPR**](#gt_endpoint-reference-epr) of an existing Shell instance.<116>. This EPR was obtained from a wst:ResourceCreated message during Shell instance creation.
 
 The Command message MUST be of the following form.
 
@@ -7427,7 +7427,7 @@ Web Services Management Protocol Extensions for Windows Vista client extends the
 
 Web Services Management Protocol Extensions for Windows Vista extends the behavior of the WS-Management Protocol, as specified in [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849), by defining one timer.
 
-**Client Operation Timeout timer:** A timer used to trigger cleanup of any state associated with an outstanding operation Request if a corresponding Response message is not received from the server in a timely manner. When any WSDL Request is sent, the client instantiates a new timer and starts it. When a Response is received, the client halts the timer that is associated with the initial Request. For more details see section [3.2.5](#Section_3.2.5). The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.2)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)). The minimum value MUST be 500. The maximum value MUST be 4294967295. The default value MUST be 65000.
+**Client Operation Timeout timer:** A timer used to trigger cleanup of any state associated with an outstanding operation Request if a corresponding Response message is not received from the server in a timely manner. When any WSDL Request is sent, the client instantiates a new timer and starts it. When a Response is received, the client halts the timer that is associated with the initial Request. For more details see section [3.2.5](#Section_3.2.5). The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.23)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)). The minimum value MUST be 500. The maximum value MUST be 4294967295. The default value MUST be 65000.
 
 **Connection KeepAlive Timer:** A timer used to trigger sending of a KeepAlive message. The timer is started after sending any message to the server and is restarted when any message other than a KeepAlive message is sent to the server. The timer interval is implementation-specific but SHOULD be less than the client's HTTP connection time-out value.<130>
 
@@ -7456,7 +7456,7 @@ This section describes changes made by Web Services Management Protocol Extensio
 
 This section describes protocol details that are common across WSDL operations.
 
-When the Web Services Management Protocol Extensions for Windows Vista client sends any request message, the client MUST create a new Client Operation Timeout timer, associate it with the request, and start the timer. The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.2)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)).
+When the Web Services Management Protocol Extensions for Windows Vista client sends any request message, the client MUST create a new Client Operation Timeout timer, associate it with the request, and start the timer. The timer interval MUST be set to the number of milliseconds given by the sum of the wsman:OperationTimeout header value (as specified in section [3.2.4.1.2](#Section_3.2.4.1.23)) and the NetworkDelayms configuration setting (as specified in section [2.2.4.6](#Section_2.2.4.6)).
 
 On receipt of a response message, the Client Operation Timeout timer for that related request MUST be canceled.
 
@@ -7652,7 +7652,7 @@ Web Services Management Protocol Extensions for Windows Vista client MAY<136> se
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Multiple Message Operations
 
-Some operations involve multiple messages being sent from the client to the server or from the server to the client. To support such operations, the client and server both MUST<137> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1.2).
+Some operations involve multiple messages being sent from the client to the server or from the server to the client. To support such operations, the client and server both MUST<137> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1.3).
 
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 Full Duplex
@@ -7988,7 +7988,7 @@ When this timer expires, if the current time is less than or equal to (RetryStar
 
 A higher layer can set the value of **EventCollectorEPR**. The higher layer passes an EPR.
 
-The client MUST set the value of **EventCollectorEPR** to the EPR, and then issue an Enumerate request to the event collector as specified in Section [3.1.4.1.30](#Section_3.1.4.1.30.2).<139>
+The client MUST set the value of **EventCollectorEPR** to the EPR, and then issue an Enumerate request to the event collector as specified in Section [3.1.4.1.30](#Section_3.1.4.1.30).<139>
 
 <a id="Section_3.2.6.2"></a>
 #### 3.2.6.2 Connect to a Remote Shell
@@ -8136,7 +8136,7 @@ When the i:EventType value of a SOAP response is StreamingOutput, the client SHO
 
 All required sub-elements MUST be present, as specified in section [2.2.4.49](#Section_2.2.4.49). Otherwise, the client MUST delete the entry in the CimOperations table and report an error to the higher layer protocol.
 
-Some operations involve multiple messages being sent from the client to the server. To support such operations, the client SHOULD<141> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1.2).
+Some operations involve multiple messages being sent from the client to the server. To support such operations, the client SHOULD<141> implement the full-duplex functionality specified in section [3.2.4.2.1](#Section_3.2.4.2.1.3).
 
 <a id="Section_3.2.7.9"></a>
 #### 3.2.7.9 Non-InteractiveEvent Response
@@ -14711,7 +14711,7 @@ The Web Services Management Protocol Extensions for Windows Vista service can im
 | Server Configuration Data Types | Section 2.2.4.36 |
 | ServiceType | Section 2.2.4.36 |
 | Encrypted Message Types | Section [2.2.9.1](#Section_2.2.9.1) |
-| Server Configuration | Section [3.1.4.1.29](#Section_3.1.4.1.29.1) |
+| Server Configuration | Section [3.1.4.1.29](#Section_3.1.4.1.29) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full WSDL
@@ -17005,7 +17005,7 @@ After the value of ListeningOn is set, the list of IP addresses is filtered base
 
 Windows Server 2003 R2 and later and Windows Vista SP1 and later do not send an HTTP cookie unless KB968930 is installed.
 
-<91> Section 3.1.4.1.33: Windows Server 2003 R2, Windows Vista SP1, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support the ShowExtensions option. Windows 8 and later and Windows Server 2012 and later support the ShowExtensions option on WMI classes accessed by using a ResourceURI formatted as specified in section [3.1.4.1.1](#Section_3.1.4.1.1).
+<91> Section 3.1.4.1.33: Windows Server 2003 R2, Windows Vista SP1, Windows Server 2008, Windows 7, and Windows Server 2008 R2 do not support the ShowExtensions option. Windows 8 and later and Windows Server 2012 and later support the ShowExtensions option on WMI classes accessed by using a ResourceURI formatted as specified in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 <92> Section 3.1.4.1.34.3: Windows Server 2003 R2 without the KB968930, Windows Vista SP1 without the KB968930, and Windows Server 2008 without the KB968930 do not implement the microsoft.powershell plugin.
 

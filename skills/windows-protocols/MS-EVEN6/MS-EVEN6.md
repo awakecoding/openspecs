@@ -1406,7 +1406,7 @@ Emitting is suppressed by this rule or any rules invoked recursively.
 
 The Event type is specified to be well-formed XML fragments, as specified in [[XML10]](https://go.microsoft.com/fwlink/?LinkId=90600). The Event type MUST also conform to the following XML schema, as specified in [[XMLSCHEMA2/2]](https://go.microsoft.com/fwlink/?LinkId=90609).
 
-The protocol does not interpret any of the fields in the XML fragment. Client applications (that is, the higher-layer application using the protocol client) that call [EvtRpcMessageRender](#Section_3.1.4.32) or [EvtRpcMessageRenderDefault](#Section_3.1.4.32) MUST extract the values specified in the EVENT_DESCRIPTOR structure specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.1. But client applications do not need to interpret these values to call these functions.
+The protocol does not interpret any of the fields in the XML fragment. Client applications (that is, the higher-layer application using the protocol client) that call [EvtRpcMessageRender](#Section_3.1.4.31) or [EvtRpcMessageRenderDefault](#Section_3.1.4.32) MUST extract the values specified in the EVENT_DESCRIPTOR structure specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.1. But client applications do not need to interpret these values to call these functions.
 
 <xs:schema
 
@@ -2766,7 +2766,7 @@ The publisher parameter file has the same format as the publisher message file a
 
 <Value n><String n>
 
-The strings in the publisher parameter file cannot be localized. It is used for parameter substitution. For example, if a publisher defines the description string of an event as "The system has found %%2", when the server tries to expand the string with the **EvtRpcMessageRender** method (section [3.1.4.31](#Section_3.1.4.32)), it sees %%2 and knows that this part is replaced with a real string from the publisher's parameter file. It then uses 2 as the index and finds the string for the value 2 in the parameter file and replaces %%2 with that string.
+The strings in the publisher parameter file cannot be localized. It is used for parameter substitution. For example, if a publisher defines the description string of an event as "The system has found %%2", when the server tries to expand the string with the **EvtRpcMessageRender** method (section [3.1.4.31](#Section_3.1.4.31)), it sees %%2 and knows that this part is replaced with a real string from the publisher's parameter file. It then uses 2 as the index and finds the string for the value 2 in the parameter file and replaces %%2 with that string.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -2800,7 +2800,7 @@ Methods in RPC Opnum Order
 | [EvtRpcClearLog](#Section_3.1.4.16) | Instructs the server to clear a [**live event log**](#gt_live-event-log). Opnum: 6 |
 | [EvtRpcExportLog](#Section_3.1.4.17) | Instructs the server to create a [**backup event log**](#gt_backup-event-log) at a specified file name. Opnum: 7 |
 | [EvtRpcLocalizeExportLog](#Section_3.1.4.18) | Used by a client to add localized information to a previously created backup event log. Opnum: 8 |
-| [EvtRpcMessageRender](#Section_3.1.4.32) | Used by a client to get localized descriptive strings for an event. Opnum: 9 |
+| [EvtRpcMessageRender](#Section_3.1.4.31) | Used by a client to get localized descriptive strings for an event. Opnum: 9 |
 | [EvtRpcMessageRenderDefault](#Section_3.1.4.32) | Used by a client to get localized strings for common values of opcodes, tasks, or keywords, as specified in section 3.1.4.31. Opnum: 10 |
 | [EvtRpcQueryNext](#Section_3.1.4.13) | Used by a client to get the next batch of records from a query [**result set**](#gt_result-set). Opnum: 11 |
 | [EvtRpcQuerySeek](#Section_3.1.4.14) | Used by a client to move a query cursor within a result set. Opnum: 12 |
@@ -2873,7 +2873,7 @@ Finally, the application closes the handle by using the [EvtRpcClose (section 
 
 To get information on a publisher, a client application calls the [EvtRpcGetPublisherMetadata (section 3.1.4.25)](#Section_3.1.4.25) method to get a handle of type CONTEXT_HANDLE_PUBLISHER_METADATA.
 
-The application can then use the handle for subsequent calls to the [EvtRpcMessageRender (section 3.1.4.31)](#Section_3.1.4.32), [EvtRpcGetPublisherResourceMetadata (section 3.1.4.26)](#Section_3.1.4.26), and EvtRpcGetEventMetadataEnum (Opnum 26) methods.
+The application can then use the handle for subsequent calls to the [EvtRpcMessageRender (section 3.1.4.31)](#Section_3.1.4.31), [EvtRpcGetPublisherResourceMetadata (section 3.1.4.26)](#Section_3.1.4.26), and EvtRpcGetEventMetadataEnum (Opnum 26) methods.
 
 Finally, the application closes the handle by using the [EvtRpcClose (section 3.1.4.33)](#Section_3.1.4.33) method.
 
@@ -3921,7 +3921,7 @@ If the checks above are successful, the server MUST perform the following operat
 
 - The server creates a subdirectory "LocaleMetaData", if the directory does not exist, under the directory where the backup event log file is located (see [[PRA-CreateDirectory]](https://go.microsoft.com/fwlink/?LinkId=215127)). If the directory already exists, the server does nothing. The only expected failures for subdirectory creation are critical system errors, such as file system errors. If the server cannot create the directory, it MUST return the error from the CreateDirectory method that is reporting the error. Otherwise, the server MUST successfully create the subdirectory.
 - The server creates a file with the name *LogFilePath_<Locale>*.MTA under the directory LocaleMetaData (see [[PRA-CreateFile]](https://go.microsoft.com/fwlink/?LinkId=215125)). If the file already exists, the server SHOULD always overwrite it. The only expected failures for file creation or overwriting are critical system errors, such as file system errors. If the server can't create the file or overwrite an existing one, it MUST return the error from the CreateFile method that is reporting the error. Otherwise, the server MUST successfully create the file.
-- The server then opens the backup event log file, reads every event and uses the same internal functionality by which it implements the **EvtRpcMessageRender** method (section [3.1.4.31](#Section_3.1.4.32)) to obtain the localized strings for event levels, keywords, tasks, opcode, and descriptions. The server then saves those localized strings of each event in the newly created file. Note that the **EvtRpcMessageRender** method needs the PCONTEXT_HANDLE_PUBLISHER_METADATA handle as its first parameter. When the server gets each event, it can get the event publisher name from the event content (see section [2.2.13](#Section_2.2.13)), thus the server is able to get the context handle by using the internal functionality by which it implements the **EvtRpcGetPublisherMetadata** method (specified in section [3.1.4.25](#Section_3.1.4.25)). The internal functionality by which the server implements **EvtRpcGetPublisherMetadata** SHOULD use the value of the *locale* parameter in its processing; the server SHOULD make this value available to that internal functionality by appropriate platform-specific means so that the value can be stored in the [**publisher metadata**](#gt_publisher-metadata) object.
+- The server then opens the backup event log file, reads every event and uses the same internal functionality by which it implements the **EvtRpcMessageRender** method (section [3.1.4.31](#Section_3.1.4.31)) to obtain the localized strings for event levels, keywords, tasks, opcode, and descriptions. The server then saves those localized strings of each event in the newly created file. Note that the **EvtRpcMessageRender** method needs the PCONTEXT_HANDLE_PUBLISHER_METADATA handle as its first parameter. When the server gets each event, it can get the event publisher name from the event content (see section [2.2.13](#Section_2.2.13)), thus the server is able to get the context handle by using the internal functionality by which it implements the **EvtRpcGetPublisherMetadata** method (specified in section [3.1.4.25](#Section_3.1.4.25)). The internal functionality by which the server implements **EvtRpcGetPublisherMetadata** SHOULD use the value of the *locale* parameter in its processing; the server SHOULD make this value available to that internal functionality by appropriate platform-specific means so that the value can be stored in the [**publisher metadata**](#gt_publisher-metadata) object.
 After getting the publisher metadata context handle, the server SHOULD extract the eventId, level, keywords, tasks, and opcode values from the event and fill an **EVENT_DESCRIPTOR** structure, specified in [MS-DTYP] section 2.3.1. With the context handle and the **EVENT_DESCRIPTOR** structure, the server can use the internal functionality by which it implements the **EvtRpcMessageRender** method five times to obtain the localized level, keyword, tasks, opcode, and event description strings. If the server receives an error from the internal functionality by which it implements the **EvtRpcMessageRender** method, it SHOULD ignore the error and continue processing the next event.
 
 During the preceding process, the server SHOULD check the **Canceled** field of the operation control object in the *control* parameter periodically, for example, once every 100 milliseconds. If the **Canceled** field becomes TRUE and the whole operation has not been finished, the server SHOULD abandon the current operation and return to the client immediately with the error code ERROR_CANCELLED (0x000004C7) without updating any state. Any directory or file that has been created SHOULD be deleted. Failure to delete the directory or file SHOULD NOT trigger the server to take any further actions in response.
@@ -4762,7 +4762,7 @@ The server MUST return a value indicating success or failure for this operation.
 <a id="Section_3.1.4.32"></a>
 #### 3.1.4.32 EvtRpcMessageRenderDefault (Opnum 10)
 
-The EvtRpcMessageRenderDefault (Opnum 10) method is used by a client to get localized strings for common values of opcodes, tasks, or keywords, as specified in section [3.1.4.31](#Section_3.1.4.32).
+The EvtRpcMessageRenderDefault (Opnum 10) method is used by a client to get localized strings for common values of opcodes, tasks, or keywords, as specified in section [3.1.4.31](#Section_3.1.4.31).
 
 error_status_t EvtRpcMessageRenderDefault(
 
@@ -5899,7 +5899,7 @@ EvtVarTypeUInt32Array
 
 1002 (message Id for the channel)
 
-- After the client gets the publisher metadata context handle, it calls the **EvtRpcMessageRender** method (section [3.1.4.31](#Section_3.1.4.32)) to render the desired event description.
+- After the client gets the publisher metadata context handle, it calls the **EvtRpcMessageRender** method (section [3.1.4.31](#Section_3.1.4.31)) to render the desired event description.
 error_status_t EvtRpcMessageRender(
 
 [in, context_handle] PCONTEXT_HANDLE_PUBLISHER_METADATA pubCfgObj = {handlefrom step 2},

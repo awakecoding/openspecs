@@ -245,7 +245,7 @@ The initialization sequence has the following goals:
 - To establish the client and server protocol versions and capabilities.
 - To establish a list of [**audio formats**](#gt_audio-format) supported by both the client and the server.
 - To begin recording audio data.
-Initially, the server sends a [Version PDU](#Section_4.1.1) to the client within the already established [**dynamic virtual channel**](#gt_dynamic-virtual-channel). The client will respond with its own Version PDU. Next, the server will send a [Sound Formats PDU](#Section_4.1.5), which contains a list of the audio formats the server supports. The client sends its own Sound Formats PDU to the server, establishing the common list of audio formats. All audio data will be encoded using one of the formats in this list.
+Initially, the server sends a [Version PDU](#Section_3.3.5.1.1) to the client within the already established [**dynamic virtual channel**](#gt_dynamic-virtual-channel). The client will respond with its own Version PDU. Next, the server will send a [Sound Formats PDU](#Section_4.1.3), which contains a list of the audio formats the server supports. The client sends its own Sound Formats PDU to the server, establishing the common list of audio formats. All audio data will be encoded using one of the formats in this list.
 
 Once the audio formats have been exchanged, the server will indicate that it has requested to begin recording, by sending an [Open PDU](#Section_4.1.6). The client will attempt to start recording from an attached audio capture device and return the result to the server in an [Open Reply PDU](#Section_4.1.8). At this point, the client will begin sending audio data.
 
@@ -291,7 +291,7 @@ The Remote Desktop Protocol: Audio Input Redirection Virtual Channel Extension i
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The Remote Desktop Protocol: Audio Input Redirection Virtual Channel Extension is capability-based. The client and the server exchange capabilities during the protocol initialization sequence (as specified in section [3.2.5.1](#Section_3.3.5.1), and section [3.3.5.1](#Section_3.3.5.1)). After the capabilities have been exchanged, the client and server do not send [**protocol data units (PDUs)**](#gt_protocol-data-unit-pdu) or data formats that cannot be processed by the other.
+The Remote Desktop Protocol: Audio Input Redirection Virtual Channel Extension is capability-based. The client and the server exchange capabilities during the protocol initialization sequence (as specified in section [3.2.5.1](#Section_1.3.1), and section [3.3.5.1](#Section_1.3.1)). After the capabilities have been exchanged, the client and server do not send [**protocol data units (PDUs)**](#gt_protocol-data-unit-pdu) or data formats that cannot be processed by the other.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -330,8 +330,8 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| MSG_SNDIN_VERSION 0x01 | [Version PDU](#Section_4.1.1) |
-| MSG_SNDIN_FORMATS 0x02 | [Sound Formats PDU](#Section_4.1.5) |
+| MSG_SNDIN_VERSION 0x01 | [Version PDU](#Section_3.3.5.1.1) |
+| MSG_SNDIN_FORMATS 0x02 | [Sound Formats PDU](#Section_4.1.3) |
 | MSG_SNDIN_OPEN 0x03 | [Open PDU](#Section_4.1.6) |
 | MSG_SNDIN_OPEN_REPLY 0x04 | [Open Reply PDU](#Section_4.1.8) |
 | MSG_SNDIN_DATA_INCOMING 0x05 | [Incoming Data PDU](#Section_4.1.4) |
@@ -488,12 +488,12 @@ packet-beta
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Data Transfer Messages
 
-The following sections contain the Remote Desktop Protocol: Audio Input Redirection Virtual Channel Extension message syntax for transferring audio data from client to server. For more information, see section [3.2.5.2](#Section_3.3.5.2).
+The following sections contain the Remote Desktop Protocol: Audio Input Redirection Virtual Channel Extension message syntax for transferring audio data from client to server. For more information, see section [3.2.5.2](#Section_1.3.2).
 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Incoming Data PDU (MSG_SNDIN_DATA_INCOMING)
 
-The Incoming Data PDU is sent by the client to indicate that the next packet sent MUST either be a [Data PDU](#Section_4.2.2) or a [Sound Formats PDU](#Section_4.1.5). This [**PDU**](#gt_protocol-data-unit-pdu) is used for diagnostic purposes. The time used to transmit a Data PDU/Sound Formats PDU can be found out by comparing the time between receiving a Data PDU/Sound Formats PDU and receiving an Incoming Data PDU. The server MAY use this time and the data size of a Data PDU/Sound Formats PDU to calculate how fast the network is transmitting data. The result of this calculation MAY then be used to determine the audio format to use.
+The Incoming Data PDU is sent by the client to indicate that the next packet sent MUST either be a [Data PDU](#Section_4.2.2) or a [Sound Formats PDU](#Section_4.1.3). This [**PDU**](#gt_protocol-data-unit-pdu) is used for diagnostic purposes. The time used to transmit a Data PDU/Sound Formats PDU can be found out by comparing the time between receiving a Data PDU/Sound Formats PDU and receiving an Incoming Data PDU. The server MAY use this time and the data size of a Data PDU/Sound Formats PDU to calculate how fast the network is transmitting data. The result of this calculation MAY then be used to determine the audio format to use.
 
 ```mermaid
 packet-beta
@@ -535,7 +535,7 @@ packet-beta
 
 **Header (1 byte):** An [SNDIN_PDU](#Section_2.2.1) header (section 2.2.1). The **MessageId** field of the SNDIN_PDU header MUST be set to MSG_SNDIN_FORMATCHANGE (0x07).
 
-**NewFormat (4 bytes):** A 32-bit unsigned integer that represents an index into the list of audio formats exchanged between the client and server during the initialization phase, as specified in section [3.1.1](#Section_3.1.1). For more information about changing audio formats, see sections [3.2.5.3](#Section_1.3.3) and [3.3.5.3](#Section_1.3.3).
+**NewFormat (4 bytes):** A 32-bit unsigned integer that represents an index into the list of audio formats exchanged between the client and server during the initialization phase, as specified in section [3.1.1](#Section_3.1.1). For more information about changing audio formats, see sections [3.2.5.3](#Section_3.3.5.3) and [3.3.5.3](#Section_3.3.5.3).
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -566,7 +566,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Before this protocol begins, the [**dynamic virtual channel**](#gt_dynamic-virtual-channel) transport MUST be established as specified in section [2.1](#Section_2.1). The server and client also need to negotiate the protocol version and a common list of [**audio formats**](#gt_audio-format) by exchanging [Version PDUs](#Section_4.1.1) and [Sound Formats PDUs](#Section_4.1.5). Once the protocol version and audio formats list have been exchanged, the server sends an [Open PDU](#Section_4.1.6) to the client to indicate that the server requests to start recording. The client attempts to start recording and returns the result to the server in an [Open Reply PDU](#Section_4.1.8) message.
+Before this protocol begins, the [**dynamic virtual channel**](#gt_dynamic-virtual-channel) transport MUST be established as specified in section [2.1](#Section_2.1). The server and client also need to negotiate the protocol version and a common list of [**audio formats**](#gt_audio-format) by exchanging [Version PDUs](#Section_3.3.5.1.1) and [Sound Formats PDUs](#Section_4.1.3). Once the protocol version and audio formats list have been exchanged, the server sends an [Open PDU](#Section_4.1.6) to the client to indicate that the server requests to start recording. The client attempts to start recording and returns the result to the server in an [Open Reply PDU](#Section_4.1.8) message.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -588,7 +588,7 @@ Figure 4: State transition diagram
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Protocol Initialization
 
-The protocol begins when the server opens the [**dynamic virtual channel**](#gt_dynamic-virtual-channel). The first [**PDU**](#gt_protocol-data-unit-pdu) sent is always the [Version PDU](#Section_4.1.1).
+The protocol begins when the server opens the [**dynamic virtual channel**](#gt_dynamic-virtual-channel). The first [**PDU**](#gt_protocol-data-unit-pdu) sent is always the [Version PDU](#Section_3.3.5.1.1).
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Protocol Termination
@@ -637,21 +637,21 @@ See section [3.1.4](#Section_3.1.4) for more information.
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Processing a Version PDU
 
-The structure and fields of the [Version PDU](#Section_4.1.1) are specified in section 2.2.2.1.
+The structure and fields of the [Version PDU](#Section_3.3.5.1.1) are specified in section 2.2.2.1.
 
 The Version PDU MUST be the first [**PDU**](#gt_protocol-data-unit-pdu) received by the client. The client MUST store the protocol version and use this to determine which messages are supported by the server.
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Sending a Version PDU
 
-The structure and fields of the [Version PDU](#Section_4.1.1) are specified in section 2.2.2.1.
+The structure and fields of the [Version PDU](#Section_3.3.5.1.1) are specified in section 2.2.2.1.
 
 The client MUST acknowledge the Version PDU sent by the server by sending its own Version PDU to the server.
 
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Processing a Sound Formats PDU
 
-The structure and fields of the [Sound Formats PDU](#Section_4.1.5) are specified in section 2.2.2.2.
+The structure and fields of the [Sound Formats PDU](#Section_4.1.3) are specified in section 2.2.2.2.
 
 The client uses the [**audio formats**](#gt_audio-format) sent by the server when selecting which formats will be used.
 
@@ -660,12 +660,12 @@ The client uses the [**audio formats**](#gt_audio-format) sent by the server whe
 
 The structure and format of the [Incoming Data PDU](#Section_4.1.4) are specified in section 2.2.3.1.
 
-The client MUST send an Incoming Data PDU before responding to the server with a [Sound Formats PDU](#Section_4.1.5).
+The client MUST send an Incoming Data PDU before responding to the server with a [Sound Formats PDU](#Section_4.1.3).
 
 <a id="Section_3.2.5.1.5"></a>
 ##### 3.2.5.1.5 Sending a Sound Formats PDU
 
-The structure and fields of the [Sound Formats PDU](#Section_4.1.5) are specified in section 2.2.2.2.
+The structure and fields of the [Sound Formats PDU](#Section_4.1.3) are specified in section 2.2.2.2.
 
 The client MUST respond to the Sound Formats PDU sent by the server by replying with its own Sound Formats PDU. The list of [**audio formats**](#gt_audio-format) that the client sends back to the server MUST be a subset of the list sent by the server. Formats that are not in the server's list MUST NOT be included in the client's audio format list.
 
@@ -751,9 +751,9 @@ The abstract data model is specified in section [3.1.1](#Section_3.1.1).
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
 
-After sending [Version PDU](#Section_4.1.1), the server MAY use a time-out when waiting for the client's Version PDU.<2>
+After sending [Version PDU](#Section_3.3.5.1.1), the server MAY use a time-out when waiting for the client's Version PDU.<2>
 
-After sending [Sound Formats PDU](#Section_4.1.5), the server MAY use a time-out when waiting for the client's Sound Formats PDU.<3>
+After sending [Sound Formats PDU](#Section_4.1.3), the server MAY use a time-out when waiting for the client's Sound Formats PDU.<3>
 
 After sending [Open PDU](#Section_4.1.6), the server MAY use a time-out when waiting for the client's Open Reply PDU.<4>
 
@@ -776,35 +776,35 @@ See section [3.1.4](#Section_3.1.4) for more information.
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Sending a Version PDU
 
-The structure and fields of the [Version PDU](#Section_4.1.1) are specified in section 2.2.2.1.
+The structure and fields of the [Version PDU](#Section_3.3.5.1.1) are specified in section 2.2.2.1.
 
 The Version PDU MUST be the first [**PDU**](#gt_protocol-data-unit-pdu) sent by the server.
 
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 Processing a Version PDU
 
-The structure and fields of the [Version PDU](#Section_4.1.1) are specified in section 2.2.2.1.
+The structure and fields of the [Version PDU](#Section_3.3.5.1.1) are specified in section 2.2.2.1.
 
 The server MUST store the protocol version sent by the client.
 
 <a id="Section_3.3.5.1.3"></a>
 ##### 3.3.5.1.3 Sending a Sound Formats PDU
 
-The structure and fields of the [Sound Formats PDU](#Section_4.1.5) are specified in section 2.2.2.2.
+The structure and fields of the [Sound Formats PDU](#Section_4.1.3) are specified in section 2.2.2.2.
 
-The server MUST send a Sound Formats PDU after processing the client's [Version PDU](#Section_4.1.1). The Sound Formats PDU informs the client of the [**audio formats**](#gt_audio-format) that are supported by the server.
+The server MUST send a Sound Formats PDU after processing the client's [Version PDU](#Section_3.3.5.1.1). The Sound Formats PDU informs the client of the [**audio formats**](#gt_audio-format) that are supported by the server.
 
 <a id="Section_3.3.5.1.4"></a>
 ##### 3.3.5.1.4 Processing an Incoming Data PDU
 
 The structure and format of the [Incoming Data PDU](#Section_4.1.4) are specified in section 2.2.3.1.
 
-The client sends an Incoming Data PDU to inform the server that it is about to respond with its [Sound Formats PDU](#Section_4.1.5). This [**PDU**](#gt_protocol-data-unit-pdu) is used for diagnostic purposes. An Incoming Data PDU also precedes a Data PDU (see section [3.3.5.2.1](#Section_3.3.5.2.1)).
+The client sends an Incoming Data PDU to inform the server that it is about to respond with its [Sound Formats PDU](#Section_4.1.3). This [**PDU**](#gt_protocol-data-unit-pdu) is used for diagnostic purposes. An Incoming Data PDU also precedes a Data PDU (see section [3.3.5.2.1](#Section_3.3.5.2.1)).
 
 <a id="Section_3.3.5.1.5"></a>
 ##### 3.3.5.1.5 Processing a Sound Formats PDU
 
-The structure and fields of the [Sound Formats PDU](#Section_4.1.5) are specified in section 2.2.2.2.
+The structure and fields of the [Sound Formats PDU](#Section_4.1.3) are specified in section 2.2.2.2.
 
 The server MUST store the list of [**audio formats**](#gt_audio-format) sent by the client. This list is the final list of formats that can be used during this protocol session.
 
@@ -837,7 +837,7 @@ The Open Reply PDU contains the result of the client’s attempt to open the aud
 
 The structure and format of the [Incoming Data PDU](#Section_4.1.4) are specified in section 2.2.3.1.
 
-The Incoming Data PDU indicates that the client is about to send a packet of audio data. The server uses this information for diagnostic purposes. An Incoming Data PDU also precedes a [Sound Formats PDU](#Section_4.1.5) (see section [3.3.5.1.4](#Section_3.3.5.1.4)).
+The Incoming Data PDU indicates that the client is about to send a packet of audio data. The server uses this information for diagnostic purposes. An Incoming Data PDU also precedes a [Sound Formats PDU](#Section_4.1.3) (see section [3.3.5.1.4](#Section_3.3.5.1.4)).
 
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Processing a Data PDU
@@ -858,7 +858,7 @@ When the server determines that a new format is necessary, it MUST choose one fr
 
 The server MUST continue to decode any audio data that arrives using the old audio format until it receives the confirmation Format Change PDU from the client.
 
-If the originally selected format was an AAC format, then the version advertised by the server and client in the Version PDU (section [2.2.2.1](#Section_4.1.1)) affects the usage of the Format Change PDU:
+If the originally selected format was an AAC format, then the version advertised by the server and client in the Version PDU (section [2.2.2.1](#Section_3.3.5.1.1)) affects the usage of the Format Change PDU:
 
 - If the client advertised support for version 0x00000001 in the Version PDU (section 2.2.2.1), the server SHOULD NOT send a Format Change PDU.
 - If both the client and server advertised support for version 0x00000002 or greater, the server SHOULD send the Format Change PDU to request that the client use a different AAC format if changes in network conditions require using an AAC codec with different parameters.
@@ -890,12 +890,12 @@ None.
 <a id="Section_4.1"></a>
 ## 4.1 Annotated Initialization Sequence
 
-The following is an annotated dump of an initialization sequence, as described in section [1.3.1](#Section_3.3.5.1).
+The following is an annotated dump of an initialization sequence, as described in section [1.3.1](#Section_1.3.1).
 
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Server Version PDU
 
-The following is an annotated dump of a [Version PDU](#Section_4.1.1).
+The following is an annotated dump of a [Version PDU](#Section_3.3.5.1.1).
 
 00000000 01 01 00 00 00
 
@@ -906,7 +906,7 @@ The following is an annotated dump of a [Version PDU](#Section_4.1.1).
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Client Version PDU
 
-The following is an annotated dump of a [Version PDU](#Section_4.1.1).
+The following is an annotated dump of a [Version PDU](#Section_3.3.5.1.1).
 
 00000000 01 01 00 00 00
 
@@ -917,7 +917,7 @@ The following is an annotated dump of a [Version PDU](#Section_4.1.1).
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Server Sound Formats PDU
 
-The following is an annotated dump of a [Sound Formats PDU](#Section_4.1.5).
+The following is an annotated dump of a [Sound Formats PDU](#Section_4.1.3).
 
 00000000 02 15 00 00 00 00 00 00 80 01 00 02 00 44 ac 00
 
@@ -1437,7 +1437,7 @@ The following is an annotated dump of an [Incoming Data PDU](#Section_4.1.4).
 <a id="Section_4.1.5"></a>
 ### 4.1.5 Client Sound Formats PDU
 
-The following is an annotated dump of a [Sound Formats PDU](#Section_4.1.5).
+The following is an annotated dump of a [Sound Formats PDU](#Section_4.1.3).
 
 00000000 02 15 00 00 00 9b 02 00 00 01 00 02 00 44 ac 00
 
@@ -2031,7 +2031,7 @@ The following is an annotated dump of an [Open Reply PDU](#Section_4.1.8).
 <a id="Section_4.2"></a>
 ## 4.2 Annotated Data Transfer Sequence
 
-The following is an annotated dump of a data transfer sequence as described in section [1.3.2](#Section_3.3.5.2).
+The following is an annotated dump of a data transfer sequence as described in section [1.3.2](#Section_1.3.2).
 
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Incoming Data PDU
@@ -2104,7 +2104,7 @@ d6... 23 b4 4d -> Data
 <a id="Section_4.3"></a>
 ## 4.3 Annotated Format Change Sequence
 
-The following is an annotated format change sequence as described in section [1.3.3](#Section_1.3.3).
+The following is an annotated format change sequence as described in section [1.3.3](#Section_3.3.5.3).
 
 <a id="Section_4.3.1"></a>
 ### 4.3.1 Server Format Change PDU

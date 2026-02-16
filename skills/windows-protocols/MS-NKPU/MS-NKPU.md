@@ -265,7 +265,7 @@ The NKPU Protocol relies on and is transported within DHCPv4 vendor-specific opt
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-The behavior of the NKPU Protocol described in this specification assumes that the client and server ADM elements are all populated, as specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.1.1). This means that the following conditions apply:
+The behavior of the NKPU Protocol described in this specification assumes that the client and server ADM elements are all populated, as specified in sections [3.1.1](#Section_3.2.1) and [3.2.1](#Section_3.2.1). This means that the following conditions apply:
 
 - The client and the server share an RSA [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) [**public key**](#gt_public-key) [**certificate**](#gt_certificate) for the protocol.
 - The client and the server have the [**thumbprint**](#gt_thumbprint) of the certificate.
@@ -370,7 +370,7 @@ packet-beta
 
 **Enterprise Number (4 bytes):** This field MUST be set to 0x00000137 (decimal 311), which is the Microsoft Enterprise number [[IANA-ENT]](https://go.microsoft.com/fwlink/?LinkId=89883) assigned by the Internet Assigned Numbers Authority (IANA).
 
-**Option Data (variable):** This field contains the values of the **Thumbprint** and **KP** ADM elements (section [3.1.1](#Section_3.1.1)) data as suboptions, as described in [RFC3315] section 22.17. It has the following two possible NKPU suboptions:
+**Option Data (variable):** This field contains the values of the **Thumbprint** and **KP** ADM elements (section [3.1.1](#Section_3.2.1)) data as suboptions, as described in [RFC3315] section 22.17. It has the following two possible NKPU suboptions:
 
 **Certificate Thumbprint Suboption:** This suboption MUST only be used in the client request.
 
@@ -382,7 +382,7 @@ packet-beta
 
 **Encrypted Buffer Suboption: Opt-Code (2 bytes):** This field MUST be set to 2 (0x0002).
 
-**Option-Len (2 bytes):** In the client request, this field MUST be set to 256 (0x0100), which is the length of the **KP** ADM element data as specified in section 3.1.1. In the server response, this field MUST be set to the length of the **KPR** ADM element as specified in section [3.2.1](#Section_3.1.1).
+**Option-Len (2 bytes):** In the client request, this field MUST be set to 256 (0x0100), which is the length of the **KP** ADM element data as specified in section 3.1.1. In the server response, this field MUST be set to the length of the **KPR** ADM element as specified in section [3.2.1](#Section_3.2.1).
 
 **Option-Data:** In a client request, this field contains the **KP** ADM element data. In a server response, this field contains the **KPR** ADM element.
 
@@ -421,7 +421,7 @@ packet-beta
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 DHCPv4 Vendor Specific Information Option Structure
 
-DHCPv4 options are constrained to be of maximum size of 255 bytes due to the length of the 8-bit **Option Length** field that the protocol defines. NKPU data is therefore split across Option 43 and Option 125 when delivered by DHCPv4. Option 43 carries the [**certificate**](#gt_certificate) **Thumbprint** ADM element (section [3.1.1](#Section_3.1.1)) data and the first part of the **Key Protector (KP)** ADM element (section 3.1.1) data. The **DHCPv4 Vendor Specific Information Option** structure consists of the following fields.
+DHCPv4 options are constrained to be of maximum size of 255 bytes due to the length of the 8-bit **Option Length** field that the protocol defines. NKPU data is therefore split across Option 43 and Option 125 when delivered by DHCPv4. Option 43 carries the [**certificate**](#gt_certificate) **Thumbprint** ADM element (section [3.1.1](#Section_3.2.1)) data and the first part of the **Key Protector (KP)** ADM element (section 3.1.1) data. The **DHCPv4 Vendor Specific Information Option** structure consists of the following fields.
 
 ```mermaid
 packet-beta
@@ -448,7 +448,7 @@ packet-beta
 
 **Suboption Code (1 byte):** This field MUST be set to 2 (0x02).
 
-**Suboption Length (1 byte):** In the client request, this field MUST be set to 128 (0x80), which is half the length of the **KP** ADM element data as specified in section 3.1.1. In the server response, this field MUST be set to the length of the **KPR** ADM element as specified in section [3.2.1](#Section_3.1.1).
+**Suboption Length (1 byte):** In the client request, this field MUST be set to 128 (0x80), which is half the length of the **KP** ADM element data as specified in section 3.1.1. In the server response, this field MUST be set to the length of the **KPR** ADM element as specified in section [3.2.1](#Section_3.2.1).
 
 **Suboption Data:** In a client request, this field contains the first 128 bytes of the **KP** ADM element data. In a server response, this field contains the **KPR** ADM element.
 
@@ -491,7 +491,7 @@ As a protocol that uses DHCP as a transport, NKPU relies on the [**DHCP**](#gt_d
 
 NKPU clients also maintain the following state:
 
-**Client Key (CK):** The key data that the client sends to the server in the **KP** ADM element and expects the server to return in the **KPR** ADM element (section [3.2.1](#Section_3.1.1)). It is RSA-encrypted [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) with the **PK** ADM element content in the **KP** ADM element data that is sent to the server in the NKPU client request, and is AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870) [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733) encrypted with the 256-bit **SK** ADM element content in the **KPR** server response received by the client.
+**Client Key (CK):** The key data that the client sends to the server in the **KP** ADM element and expects the server to return in the **KPR** ADM element (section [3.2.1](#Section_3.2.1)). It is RSA-encrypted [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) with the **PK** ADM element content in the **KP** ADM element data that is sent to the server in the NKPU client request, and is AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870) [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733) encrypted with the 256-bit **SK** ADM element content in the **KPR** server response received by the client.
 
 **Key Protector (KP):** An encrypted package composed of the 256-bit **CK** ADM element data concatenated with the 256-bit **SK** ADM element data and all encrypted with the RSA 2,048-bit server **PK** ADM element content, as defined in [RFC8017] section 7.2.1. Using the terminology from [RFC8017], this can be expressed as the following, where the plus symbol (+) denotes concatenation:
 
@@ -573,7 +573,7 @@ Clients on DHCPv4 send an NKPU request via a **DHCPDISCOVER** message, as specif
 **Note** The client’s IPv4 address MUST be configured prior to sending an NKPU request.
 
 - Set the **Vendor Class Identifier Option** as described in section [2.2.1.5](#Section_2.2.1.5).
-- Set the **DHCPv4 Vendor Specific Information Option** as described in section [2.2.1.4](#Section_2.2.1.4) by placing the value of the **Thumbprint** ADM element and the value of the first part of the first unused **KP** data element in the **Key Protector List (KPL)** ADM element (section [3.1.1](#Section_3.1.1)) in the **Option Data** field.
+- Set the **DHCPv4 Vendor Specific Information Option** as described in section [2.2.1.4](#Section_2.2.1.4) by placing the value of the **Thumbprint** ADM element and the value of the first part of the first unused **KP** data element in the **Key Protector List (KPL)** ADM element (section [3.1.1](#Section_3.2.1)) in the **Option Data** field.
 - Set the **DHCPv4 Vendor-Identifying Vendor-Specific Information Option** as described in section [2.2.1.3](#Section_2.2.1.3) with its **Option Data** field containing the second part of the same **KP** ADM element value that was used to set the **DHCPv4 Vendor Specific Information Option**.
 - In the **KPL** ADM element, mark the sent **KP** data item as used.
 <a id="Section_3.1.5.2"></a>
@@ -622,7 +622,7 @@ As a protocol that uses [**DHCP**](#gt_dynamic-host-configuration-protocol-dhcp)
 
 NKPU servers also maintain the following state:
 
-**Key Protector Response (KPR)**: The key data that the server returns to the client, encrypted with the **SK** ADM element (section [3.1.1](#Section_3.1.1)) content by using the AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870), [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733), mode of encryption. The server uses AES-CCM to encrypt the concatenation of an implementation-specific<2> header and the **CK** ADM element (section 3.1.1) and to produce the MAC. When calling AES-CCM, there is no authentication data and the nonce used is 12 bytes, all zeros, and is not transmitted. The **KPR** is the encrypted output prepended with the 16-byte MAC.
+**Key Protector Response (KPR)**: The key data that the server returns to the client, encrypted with the **SK** ADM element (section [3.1.1](#Section_3.2.1)) content by using the AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870), [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733), mode of encryption. The server uses AES-CCM to encrypt the concatenation of an implementation-specific<2> header and the **CK** ADM element (section 3.1.1) and to produce the MAC. When calling AES-CCM, there is no authentication data and the nonce used is 12 bytes, all zeros, and is not transmitted. The **KPR** is the encrypted output prepended with the 16-byte MAC.
 
 **Public Key (PK):** As defined in section 3.1.1.
 
@@ -677,32 +677,32 @@ A server implementing this protocol MUST ignore all DHCPv4 message types except 
 Compose and send a DHCPv4 **BOOTREPLY** to the client, as specified in [[RFC2131]](https://go.microsoft.com/fwlink/?LinkId=90318) section 2, with the following additions:
 
 - Include the **DHCPv4 Vendor-Identifying Vendor-Specific Information Option**, as specified in section [2.2.1.3](#Section_2.2.1.3).
-- Include the value of the **KPR** ADM element (section [3.2.1](#Section_3.1.1)) in the **DHCPv4 Vendor Specific Information Option** structure, as specified in section [2.2.1.4](#Section_2.2.1.4), for the server response.
+- Include the value of the **KPR** ADM element (section [3.2.1](#Section_3.2.1)) in the **DHCPv4 Vendor Specific Information Option** structure, as specified in section [2.2.1.4](#Section_2.2.1.4), for the server response.
 - Include the **DHCPv4 Vendor Class Identifier Option**, as specified in section [2.2.1.5](#Section_2.2.1.5).
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Sending a DHCPv6 Reply for NKPU
 
 Compose and send a DHCPv6 **Reply** to the client, as specified in [[RFC3315]](https://go.microsoft.com/fwlink/?LinkId=90417) section 18.2.8, with the following additions:
 
-- Include the value of the **KPR** ADM element (section [3.2.1](#Section_3.1.1)) in the **DHCPv6 Vendor Specific Information Option** structure, as specified in section [2.2.1.2](#Section_2.2.1.2), for the server response.
+- Include the value of the **KPR** ADM element (section [3.2.1](#Section_3.2.1)) in the **DHCPv6 Vendor Specific Information Option** structure, as specified in section [2.2.1.2](#Section_2.2.1.2), for the server response.
 - Include the **DHCPv6 Vendor Class Option** structure, as specified in section [2.2.1.1](#Section_2.2.1.1).
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving a DHCPDISCOVER Message for NKPU
 
-If the **IPv4 Allow List** ADM element (section [3.2.1](#Section_3.1.1)) is implemented and the [**IPv4**](#gt_internet-protocol-version-4-ipv4) address of the request is not from a listed subnet, the server MUST ignore the request and take no further action. Note that the client MUST be authorized to contact the NKPU server on a listed subnet.
+If the **IPv4 Allow List** ADM element (section [3.2.1](#Section_3.2.1)) is implemented and the [**IPv4**](#gt_internet-protocol-version-4-ipv4) address of the request is not from a listed subnet, the server MUST ignore the request and take no further action. Note that the client MUST be authorized to contact the NKPU server on a listed subnet.
 
-If the **DHCPDISCOVER** message is valid according to the rules in section [3.2.5](#Section_3.1.5), determine whether the value of the **Thumbprint** ADM element matches the server's **PK** ADM element value. If not, the server MUST ignore the request and take no further action. Otherwise, the server MUST do the following:
+If the **DHCPDISCOVER** message is valid according to the rules in section [3.2.5](#Section_3.2.5), determine whether the value of the **Thumbprint** ADM element matches the server's **PK** ADM element value. If not, the server MUST ignore the request and take no further action. Otherwise, the server MUST do the following:
 
-- Decrypt the value of the **KP** ADM element (section [3.1.1](#Section_3.1.1)) with the **Private Key** ADM element (section 3.2.1) value.
+- Decrypt the value of the **KP** ADM element (section [3.1.1](#Section_3.2.1)) with the **Private Key** ADM element (section 3.2.1) value.
 - Extract the values of the **CK** and **SK** ADM elements (section 3.1.1).
 - Construct the **KPR** ADM element as specified in section 3.2.1.
 - Reply to the client by sending the message specified in section [3.2.5.1](#Section_3.2.5.1).
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Receiving a DHCPv6 Information-Request Message for NKPU
 
-If the **IPv6 Allow List** ADM element (section [3.2.1](#Section_3.1.1)) is implemented and the [**IPv6**](#gt_internet-protocol-version-6-ipv6) address of the request is not from a listed subnet, the server MUST ignore the request and take no further action. Note that the client MUST be authorized to contact the NKPU server on a listed subnet.
+If the **IPv6 Allow List** ADM element (section [3.2.1](#Section_3.2.1)) is implemented and the [**IPv6**](#gt_internet-protocol-version-6-ipv6) address of the request is not from a listed subnet, the server MUST ignore the request and take no further action. Note that the client MUST be authorized to contact the NKPU server on a listed subnet.
 
-If the **DHCPv6 Information-Request** message, as specified in [[RFC3315]](https://go.microsoft.com/fwlink/?LinkId=90417) section 15.12, is valid according to the rules in section [3.2.5](#Section_3.1.5), determine whether the value of the **Thumbprint** ADM element matches the server's **PK** ADM element value (section [3.1.1](#Section_3.1.1)). If not, the server MUST ignore the request and take no further action. Otherwise, the server MUST do the following:
+If the **DHCPv6 Information-Request** message, as specified in [[RFC3315]](https://go.microsoft.com/fwlink/?LinkId=90417) section 15.12, is valid according to the rules in section [3.2.5](#Section_3.2.5), determine whether the value of the **Thumbprint** ADM element matches the server's **PK** ADM element value (section [3.1.1](#Section_3.2.1)). If not, the server MUST ignore the request and take no further action. Otherwise, the server MUST do the following:
 
 - Decrypt the value of the **KP** ADM element (section 3.1.1) with the **Private Key** ADM element (section 3.2.1) value.
 - Extract the values of the **CK** and **SK** ADM elements (section 3.1.1).
@@ -760,11 +760,11 @@ packet-beta
   16-95: "Value (variable): "BITLOCKER""
 ```
 
-- The NKPU server receives the **DHCPDISCOVER** message that includes a **Vendor Class Identifier Option** structure with the vendor class set to "BITLOCKER", and with other fields of the **DHCPDISCOVER** message meeting the requirements specified in section [3.2.5](#Section_3.1.5). To process this message, the NKPU server is required to do the following:
+- The NKPU server receives the **DHCPDISCOVER** message that includes a **Vendor Class Identifier Option** structure with the vendor class set to "BITLOCKER", and with other fields of the **DHCPDISCOVER** message meeting the requirements specified in section [3.2.5](#Section_3.2.5). To process this message, the NKPU server is required to do the following:
 - Extract the value of the **Thumbprint** ADM element from the **DHCPv4 Vendor Specific Information Option** structure.
 - Using the value of the **Thumbprint** ADM element, locate the **Public Key** ADM element and related **Private Key** ADM element in the local data store.
-- Concatenate the value of the **KP** ADM element (section [3.1.1](#Section_3.1.1)) in Option 43 (0x2B) and Option 125 (0x7D) and then decrypt it.
-- Using AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870), [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733), construct the **KPR** ADM element (section [3.2.1](#Section_3.1.1)), in preparation for the reply of the next step.
+- Concatenate the value of the **KP** ADM element (section [3.1.1](#Section_3.2.1)) in Option 43 (0x2B) and Option 125 (0x7D) and then decrypt it.
+- Using AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870), [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733), construct the **KPR** ADM element (section [3.2.1](#Section_3.2.1)), in preparation for the reply of the next step.
 - The NKPU server responds with a **BOOTREPLY** message, which includes the following:
 - The **DHCPv4 Vendor Specific Information Option** structure (section 2.2.1.4) containing the **KPR** ADM element value.
 - The **DHCPv4 Vendor Class Identifier Option** structure, as defined in section 2.2.1.5.
@@ -812,11 +812,11 @@ packet-beta
   208-319: "Suboption Length = 0x0100"
 ```
 
-- The NKPU server receives the DHCPv6 **Information-Request** message that includes a **Vendor Class Identifier Option** structure with the **vendor class** set to "BITLOCKER", and with other fields of the **Information-Request** message meeting the requirements specified in section [3.2.5](#Section_3.1.5).
+- The NKPU server receives the DHCPv6 **Information-Request** message that includes a **Vendor Class Identifier Option** structure with the **vendor class** set to "BITLOCKER", and with other fields of the **Information-Request** message meeting the requirements specified in section [3.2.5](#Section_3.2.5).
 To process this message, the NKPU server is required to do the following:
 
 - Extract the value of the **Thumbprint** ADM element from **DHCPv6 Vendor Specific Information Option** structure Option 17 (0x0011), suboption 1 (0x0001).
-- Using the value of the **Thumbprint** ADM element (section [3.1.1](#Section_3.1.1)), locate the **Public Key** ADM element (section 3.1.1) and the related **Private Key** ADM element (section [3.2.1](#Section_3.1.1)) in the local data store.
+- Using the value of the **Thumbprint** ADM element (section [3.1.1](#Section_3.2.1)), locate the **Public Key** ADM element (section 3.1.1) and the related **Private Key** ADM element (section [3.2.1](#Section_3.2.1)) in the local data store.
 - Decrypt the **KP** ADM element (section 3.1.1) data in Option 17 (0x0011), suboption 2 (0x0002).
 - Using AES-CCM [[FIPS197]](https://go.microsoft.com/fwlink/?LinkId=89870), [[RFC3610]](https://go.microsoft.com/fwlink/?LinkId=229733), encrypt the value of the **KPR** ADM element (section 3.2.1), in preparation for the reply of the next step.
 - The NKPU server responds with a DHCPv6 **Reply** message that includes the **DHCPv6 Vendor Class Option** structure (section 2.2.1.1) and **DHCPv6 Vendor Specific Information Option** structure (section 2.2.1.2) containing the **KPR** ADM element value as the **Encrypted Buffer Suboption** in the **Option Data** field.
@@ -862,11 +862,11 @@ To resist two-touch replay attacks, where an attacker on the physical network fi
 
 | Security parameter | Section |
 | --- | --- |
-| RSA Public Key – an [**X.509**](#gt_x509) encryption certificate for creating the **KP** data element value. | [3.1.1](#Section_3.1.1) |
-| RSA Private Key – a [**private key**](#gt_private-key) associated with the certificate that created the **KP** data element value. | [3.2.1](#Section_3.1.1) |
+| RSA Public Key – an [**X.509**](#gt_x509) encryption certificate for creating the **KP** data element value. | [3.1.1](#Section_3.2.1) |
+| RSA Private Key – a [**private key**](#gt_private-key) associated with the certificate that created the **KP** data element value. | [3.2.1](#Section_3.2.1) |
 | Session Key – an AES 256-bit key that protects the **CK** data element value in the server response. | 3.1.1 |
-| Client message processing rules | [3.1.5](#Section_3.1.5), [3.1.5.3](#Section_3.1.5.3), [3.1.5.4](#Section_3.1.5.4), 3.1.5.3, 3.1.5.4 |
-| Server message processing rules | [3.2.5](#Section_3.1.5), [3.2.5.3](#Section_3.2.5.3), [3.2.5.4](#Section_3.2.5.4), 3.2.5.3, 3.2.5.4 |
+| Client message processing rules | [3.1.5](#Section_3.2.5), [3.1.5.3](#Section_3.1.5.3), [3.1.5.4](#Section_3.1.5.4), 3.1.5.3, 3.1.5.4 |
+| Server message processing rules | [3.2.5](#Section_3.2.5), [3.2.5.3](#Section_3.2.5.3), [3.2.5.4](#Section_3.2.5.4), 3.2.5.3, 3.2.5.4 |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

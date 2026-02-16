@@ -533,7 +533,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetOCSPProperty](#Section_3.2.4.1.10) | Opnum: 3 |
+| [GetOCSPProperty](#Section_3.2.4.1.1) | Opnum: 3 |
 | [SetOCSPProperty](#Section_3.2.4.1.2) | Opnum: 4 |
 | [GetCAConfigInformation](#Section_3.2.4.1.3) | Opnum: 5 |
 | [SetCAConfigInformation](#Section_3.2.4.1.4) | Opnum: 6 |
@@ -609,7 +609,7 @@ HRESULT SetOCSPProperty(
 
 The following processing rules apply:
 
-- The vt member of the VARIANT referenced by pEntryValue SHOULD match the type specified in section [3.2.4.1.1](#Section_3.2.4.1.10) for the property corresponding to the bstrEntryName value.<15>
+- The vt member of the VARIANT referenced by pEntryValue SHOULD match the type specified in section [3.2.4.1.1](#Section_3.2.4.1.1) for the property corresponding to the bstrEntryName value.<15>
 - If the **vt** member of the VARIANT referenced by *pEntryValue* is VT_EMPTY and the server has a property configured with the same name as the value of *bstrEntryName*, the server MUST delete the property identified by *bstrEntryName* and return success.
 - If the **vt** member of the VARIANT referenced by *pEntryValue* is VT_EMPTY and the server does not have a property configured with the same name as the value of *bstrEntryName*, the server MUST return an error. The error code SHOULD be 0x80070002.
 - If *bstrEntryName* matches one of the properties specified in section 3.2.1.2:
@@ -824,7 +824,7 @@ CA1 is configured to issue certificates based on a [**certificate template**](#g
 
 This means that the administrator needs to create a new [**revocation configuration**](#gt_revocation-configuration) on the responder, configured for the CA certificate of CA1.
 
-- The client needs to query all the revocation configuration IDs currently configured on the responder to ensure that it does not overwrite an existing entry. The client queries the responder revocation configuration list using the [GetOCSPProperty](#Section_3.2.4.1.10) method, with *bstrEntryName* of "CAEntries".
+- The client needs to query all the revocation configuration IDs currently configured on the responder to ensure that it does not overwrite an existing entry. The client queries the responder revocation configuration list using the [GetOCSPProperty](#Section_3.2.4.1.1) method, with *bstrEntryName* of "CAEntries".
 - The server returns the list of revocation configuration IDs currently on the server as the variant referenced by parameter *pEntryValue* (for each revocation configuration in [RevocationConfigurationList](#Section_3.2.1.1), there is an element in the safearray referenced by pArray that contains the [BSTR](#Section_2.2.1.2) for the Unicode string value of the RevocationConfigurationId).
 - The client reads the list of revocation configuration IDs returned by the server and creates a unique RevocationConfigurationId (that is, not a duplicate of any existing entry).
 - The client then constructs a variant of type VT_ARRAY|VT_VARIANT whose pArray member points to a two-dimensional array. The two-dimensional array will have one element of the first dimension (that is, one row) for each revocation configuration property the administrator wishes to set. The array will have two elements of the second dimension (that is, columns) for each element of the first dimension: one containing a variant of type VT_BSTR whose **bstrVal** contains the name of a revocation configuration property, and one containing a variant with the value for that property. The property value variants are constructed as follows:
@@ -1048,7 +1048,7 @@ The responder can enforce Online Responder security for each of the following me
 
 | Method name | Acceptable permissions |
 | --- | --- |
-| [GetOCSPProperty](#Section_3.2.4.1.10) | Read |
+| [GetOCSPProperty](#Section_3.2.4.1.1) | Read |
 | [SetOCSPProperty](#Section_3.2.4.1.2) | Administrator |
 | [GetCAConfigInformation](#Section_3.2.4.1.3) | Read |
 | [SetCAConfigInformation](#Section_3.2.4.1.4) | Administrator |

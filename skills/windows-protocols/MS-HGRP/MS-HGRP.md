@@ -1082,7 +1082,7 @@ packet-beta
 <a id="Section_2.2.2.2.5.1"></a>
 ###### 2.2.2.2.5.1 RSAKeyBlob Structure
 
-This section provides the definition for the **RSAKeyBlob** structure that is used to encode the value of the **EncodedKeyBlob** field of the [**HomeGroup**](#gt_homegroup) Signing Key messages defined in section [2.2.2.2.5](#Section_2.2.2.2.5.1).
+This section provides the definition for the **RSAKeyBlob** structure that is used to encode the value of the **EncodedKeyBlob** field of the [**HomeGroup**](#gt_homegroup) Signing Key messages defined in section [2.2.2.2.5](#Section_2.2.2.2.5).
 
 ```mermaid
 packet-beta
@@ -1153,7 +1153,7 @@ None.
 
 This protocol is initialized when a machine creates or joins a [**homegroup**](#gt_homegroup). When this protocol is first initialized, the machine SHOULD check for the HomeGroup Invitation WSD message (section [2.2.1.1](#Section_3.1.5.1)). If a HomeGroup Invitation is detected, then the machine MAY join the homegroup, as described in section [3.1.4.2](#Section_3.1.4.2).
 
-If no invitation is detected, then the machine MAY create a homegroup, as described in section [3.1.4.1](#Section_1.3.3.1).
+If no invitation is detected, then the machine MAY create a homegroup, as described in section [3.1.4.1](#Section_3.1.4.1).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -1165,7 +1165,7 @@ To participate in a [**homegroup**](#gt_homegroup), a machine MUST create the ho
 
 A new homegroup is created by creating a new [**PeerGroup**](#gt_peergroup) with a secure Peer ID [MS-PPSEC](#Section_5). The Peer ID is a unique identifier that other members in the PeerGroup can use to identify a particular member [MS-PPSEC]. The machine then generates the signing keys, as described in section [3.1.4.5.2](#Section_3.1.4.5.2). The machine MUST then take the following actions:
 
-- Send a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5.1)), a HomeGroup Member Info message (section [2.2.2.1](#Section_2.2.2.1)), a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2.2)) for each user on the machine, a HomeGroup Credentials message (section [2.2.2.2.1](#Section_2.2.2.2.1)), and a HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.2.3)) to the PeerGroup. If the data contained in a message changes, the machine MUST create new messages and send them to the PeerGroup.
+- Send a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5)), a HomeGroup Member Info message (section [2.2.2.1](#Section_2.2.2.1)), a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2)) for each user on the machine, a HomeGroup Credentials message (section [2.2.2.2.1](#Section_2.2.2.2.1)), and a HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.3)) to the PeerGroup. If the data contained in a message changes, the machine MUST create new messages and send them to the PeerGroup.
 - Publish a HomeGroup Invitation [**WSD**](#gt_web-services-on-devices-wsd) message (section 2.2.1.1). If the data contained in the HomeGroup Invitation WSD message changes, the machine MUST create a new HomeGroup Invitation WSD message and publish it on the WSD channel.
 - When a printer is attached to the machine that is to be shared, the machine SHOULD also publish a HomeGroup Printer WSD message (section [2.2.1.2](#Section_2.2.1.2)) on the WSD channel. If the printer is unshared, the machine SHOULD remove the printer from the HomeGroup Printer WSD message.
 - If a new user is created on the machine, a HomeGroup User Info record (section 2.2.2.2.2) MUST be sent to the PeerGroup for that user account. If a user is deleted from the machine, the HomeGroup User Info record corresponding to that user account MUST be removed from the PeerGroup.
@@ -1180,14 +1180,14 @@ The machine joins the PeerGroup in the manner described in [MS-PPSEC](#Section_5
 
 After joining the PeerGroup, the machine MUST then take the following actions:
 
-- Send a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5.1)), a HomeGroup Member Info message (section [2.2.2.1](#Section_2.2.2.1)), a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2.2)) for each user on the machine, and a HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.2.3)) to the PeerGroup. If the data contained in a message changes, the machine MUST create new messages and send them to the PeerGroup.
+- Send a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5)), a HomeGroup Member Info message (section [2.2.2.1](#Section_2.2.2.1)), a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2)) for each user on the machine, and a HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.3)) to the PeerGroup. If the data contained in a message changes, the machine MUST create new messages and send them to the PeerGroup.
 - Publish a HomeGroup Invitation [**WSD**](#gt_web-services-on-devices-wsd) message (section 2.2.1.1). If the data contained in the HomeGroup Invitation WSD message changes, the machine MUST create a new HomeGroup Invitation WSD message and publish it on the WSD channel.
 - When a printer is attached to the machine that is to be shared, the machine SHOULD also publish a HomeGroup Printer WSD message (section [2.2.1.2](#Section_2.2.1.2)) on the WSD channel. If the printer is unshared, the machine SHOULD remove the printer from the HomeGroup Printer WSD message.
 - If a new user is created on the machine, a HomeGroup User Info record (section 2.2.2.2.2) MUST be sent to the PeerGroup for that user account. If a user is deleted from the machine, the HomeGroup User Info record corresponding to that user account MUST be removed from the PeerGroup.
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Departing the Homegroup
 
-To depart from the [**homegroup**](#gt_homegroup), the machine MUST remove all messages that it sent to the [**PeerGroup**](#gt_peergroup) from the group [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md), except those that are flagged to persist after the machine's departure, as described in sections [2.2.2.2.1](#Section_2.2.2.2.1) and [2.2.2.2.5](#Section_2.2.2.2.5.1) and [MS-PPGRH].
+To depart from the [**homegroup**](#gt_homegroup), the machine MUST remove all messages that it sent to the [**PeerGroup**](#gt_peergroup) from the group [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md), except those that are flagged to persist after the machine's departure, as described in sections [2.2.2.2.1](#Section_2.2.2.2.1) and [2.2.2.2.5](#Section_2.2.2.2.5) and [MS-PPGRH].
 
 The machine MUST stop publishing the HomeGroup Invitation WSD message and, if applicable, the HomeGroup Printer WSD message.
 
@@ -1198,7 +1198,7 @@ The machine MAY then close and delete the PeerGroup [MS-PPGRH].<11>
 
 Changing the [**homegroup**](#gt_homegroup) password is accomplished by departing the homegroup and creating a new homegroup with the new password.
 
-To change the homegroup password, the machine departs the homegroup, as described in section [3.1.4.3](#Section_3.1.4.3). The machine then creates a new homegroup, as described in section [3.1.4.1](#Section_1.3.3.1). When doing so, both the GUIDNAME name and the signing keys MUST be reused from the departed homegroup. This is done so that when the new homegroup broadcasts its invitation, it will contain the old homegroup name and the digital signature will be signed with the signing keys of the previous homegroup.
+To change the homegroup password, the machine departs the homegroup, as described in section [3.1.4.3](#Section_3.1.4.3). The machine then creates a new homegroup, as described in section [3.1.4.1](#Section_3.1.4.1). When doing so, both the GUIDNAME name and the signing keys MUST be reused from the departed homegroup. This is done so that when the new homegroup broadcasts its invitation, it will contain the old homegroup name and the digital signature will be signed with the signing keys of the previous homegroup.
 
 The other homegroup machines then detect the new HomeGroup Invitation WSD message and can join the homegroup by supplying the new password, as described in section [3.1.4.2](#Section_3.1.4.2).
 
@@ -1208,7 +1208,7 @@ The other homegroup machines then detect the new HomeGroup Invitation WSD messag
 <a id="Section_3.1.4.5.1"></a>
 ##### 3.1.4.5.1 Encryption Key
 
-An encryption key is generated when a [**homegroup**](#gt_homegroup) is created. The key is formed as specified in the description for the [EncodedKeyBlob](#Section_2.2.2.2.5.1) structure (step 2) in section 2.2.2.2.5.
+An encryption key is generated when a [**homegroup**](#gt_homegroup) is created. The key is formed as specified in the description for the [EncodedKeyBlob](#Section_2.2.2.2.5) structure (step 2) in section 2.2.2.2.5.
 
 This encryption key is used to encrypt the HomeGroup Credentials message (section [2.2.2.2.1](#Section_2.2.2.2.1)) account credentials, as well as the public/private signing keys, before sending over the network.
 
@@ -1217,7 +1217,7 @@ This encryption key is used to encrypt the HomeGroup Credentials message (sectio
 
 The creator of the [**homegroup**](#gt_homegroup) generates a 2048-bit [**RSA**](#gt_rivest-shamir-adleman-rsa) key pair, as specified in [[RFC3447]](https://go.microsoft.com/fwlink/?LinkId=90422) and [[PKCS1]](https://go.microsoft.com/fwlink/?LinkId=90248).
 
-These keys are encrypted, as described in section [3.1.4.5.5](#Section_3.1.4.5.5), and sent to the other members of the homegroup over the [**PeerGroup**](#gt_peergroup) channel via a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5.1)).
+These keys are encrypted, as described in section [3.1.4.5.5](#Section_3.1.4.5.5), and sent to the other members of the homegroup over the [**PeerGroup**](#gt_peergroup) channel via a HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5)).
 
 The keys are used to sign or verify the integrity of signed [**WSD**](#gt_web-services-on-devices-wsd) messages sent over the homegroup.
 
@@ -1443,7 +1443,7 @@ F1hbES7WM3Cz+2URsfhdMI+cb8NvdXc231a3QC..p3e6pvRBy5AOPcKmX5mEPyeNtoYxtV8ckm23WT3
 <a id="Section_4.4"></a>
 ## 4.4 HomeGroup User Info
 
-The following is an example of a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2.2)).
+The following is an example of a HomeGroup User Info record (section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
 <?xml version="1.0" encoding="UTF-16"?>
 
@@ -1496,7 +1496,7 @@ The following is an example of a HomeGroup User Info record (section [2.2.2.2.
 <a id="Section_4.5"></a>
 ## 4.5 HomeGroup MAC Address
 
-The following is an example HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.2.3)).
+The following is an example HomeGroup MAC Address message (section [2.2.2.2.3](#Section_2.2.2.2.3)).
 
 <?xml version="1.0" encoding="UTF-16"?>
 
@@ -1566,7 +1566,7 @@ The following is an example of a Data Protection Listener message (section [2.
 <a id="Section_4.7"></a>
 ## 4.7 HomeGroup Signing Key
 
-The following is an example (in base64-encoded representation) of the HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5.1)).
+The following is an example (in base64-encoded representation) of the HomeGroup Signing Key message (section [2.2.2.2.5](#Section_2.2.2.2.5)).
 
 <SIGNINGKEYS>
 
@@ -1641,7 +1641,7 @@ The HomeGroup Protocol relies partially on the Peer-to-Peer Grouping Security Pr
 | --- | --- |
 | <DIGITALHASH> | Section [2.2.1.1](#Section_3.1.5.1) |
 | <PASSWORD> | Section [2.2.2.2.1](#Section_2.2.2.2.1) |
-| <SIGNINGKEYS> | Section [2.2.2.2.5](#Section_2.2.2.2.5.1) |
+| <SIGNINGKEYS> | Section [2.2.2.2.5](#Section_2.2.2.2.5) |
 | Message Signing and Encryption | Section [3.1.4.5](#Section_3.1.4.5) |
 
 <a id="Section_6"></a>

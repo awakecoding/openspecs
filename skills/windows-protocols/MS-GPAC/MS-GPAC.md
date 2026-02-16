@@ -814,7 +814,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The process for reading the settings from the GPO for administrative purposes MUST be the same as those as specified in section [3.2.5](#Section_3.1.5), steps 1-3.
+The process for reading the settings from the GPO for administrative purposes MUST be the same as those as specified in section [3.2.5](#Section_3.2.5), steps 1-3.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -879,7 +879,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-When invoked by the Group Policy framework with a list of one or more applicable GPOs, the audit configuration protocol client-side plug-in MUST do the following: locate all the advanced audit policy files within those GPOs, copy the policies to the local machine, read the policies, and apply them as specified in section [3.2.5](#Section_3.1.5).
+When invoked by the Group Policy framework with a list of one or more applicable GPOs, the audit configuration protocol client-side plug-in MUST do the following: locate all the advanced audit policy files within those GPOs, copy the policies to the local machine, read the policies, and apply them as specified in section [3.2.5](#Section_3.2.5).
 
 Locating advanced audit policy files MUST be done by using the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1, and the LDAP search protocol, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.5. The policy files MUST be copied and read by using file access protocol sequences.
 
@@ -891,7 +891,7 @@ This plug-in implements one higher-layer triggered event: [Process Group Policy]
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Process Group Policy
 
-The plug-in implements the Process Group Policy abstract event interface, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1. The plug-in does not make use of the *Deleted GPOs*, the flags, or the security tokens arguments. When the event is triggered, the audit configuration protocol client-side plug-in MUST take the actions described in the section [3.2.5](#Section_3.1.5).
+The plug-in implements the Process Group Policy abstract event interface, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1. The plug-in does not make use of the *Deleted GPOs*, the flags, or the security tokens arguments. When the event is triggered, the audit configuration protocol client-side plug-in MUST take the actions described in the section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules

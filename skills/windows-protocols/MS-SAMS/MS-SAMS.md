@@ -316,7 +316,7 @@ Those messages that do not use the NetrLogonSendToSam method (in particular, for
 This section specifies the format of the bytes in the protocol. Bytes are presented as variable-length structures.
 
 - Details about a base format that is used for all messages are specified in Base Request Message (section [2.2.1](#Section_2.2.1)).
-- Details about specific messages are specified in PasswordUpdate Request Message (section [2.2.2](#Section_3.3.5.2)), ResetBadPwdCount Request Message (section [2.2.3](#Section_2.2.3)), PasswordUpdateForward Request Message (section [2.2.4](#Section_2.2.4)), and ResetSmartCardAccountPassword Request Message (section [2.2.8](#Section_3.3.5.7)).
+- Details about specific messages are specified in PasswordUpdate Request Message (section [2.2.2](#Section_2.2.2)), ResetBadPwdCount Request Message (section [2.2.3](#Section_3.3.5.3)), PasswordUpdateForward Request Message (section [2.2.4](#Section_3.2.4.4)), and ResetSmartCardAccountPassword Request Message (section [2.2.8](#Section_2.2.8)).
 - Details about forwarding password-change request messages are specified in section [2.2.5](#Section_2.2.5).
 - The format of the return value and values used in this protocol is specified in Return Codes (section [2.2.9](#Section_2.2.9)).
 <a id="Section_2.2.1"></a>
@@ -337,11 +337,11 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| PASSWORD_UPDATE_MSG 0x00000000 | Message is a [PasswordUpdate](#Section_3.3.5.2) request. |
-| RESET_PWD_COUNT_MSG 0x00000001 | Message is a [ResetBadPwdCount](#Section_2.2.3) request. |
-| FWD_PASSWORD_UPDATE_MSG 0x00000002 | Message is a [PasswordUpdateForward](#Section_2.2.4) request.<1> |
-| FWD_LASTLOGON_TS_UPDATE_MSG 0x00000003 | Message is a [LastLogonTimeStampUpdatesForward](#Section_2.2.7) request. |
-| RESET_SMART_CARD_ONLY_PWD 0x00000004 | Message is a [ResetSmartCardAccountPassword](#Section_3.3.5.7) request. |
+| PASSWORD_UPDATE_MSG 0x00000000 | Message is a [PasswordUpdate](#Section_2.2.2) request. |
+| RESET_PWD_COUNT_MSG 0x00000001 | Message is a [ResetBadPwdCount](#Section_3.3.5.3) request. |
+| FWD_PASSWORD_UPDATE_MSG 0x00000002 | Message is a [PasswordUpdateForward](#Section_3.2.4.4) request.<1> |
+| FWD_LASTLOGON_TS_UPDATE_MSG 0x00000003 | Message is a [LastLogonTimeStampUpdatesForward](#Section_3.2.4.6) request. |
+| RESET_SMART_CARD_ONLY_PWD 0x00000004 | Message is a [ResetSmartCardAccountPassword](#Section_2.2.8) request. |
 
 **MessageSize (4 bytes):** A 32-bit, unsigned integer that specifies the size of the **Message** field, in bytes.
 
@@ -704,7 +704,7 @@ If more than one update occurs in a given transaction, the updates described abo
 
 This message is used to communicate to the [**PDC**](#gt_primary-domain-controller-pdc) if the badPwdCount attribute must be reset to 0. This message MUST be triggered by the following database update on a non-PDC.
 
-When a non-PDC services a successful logon from either the Kerberos Protocol Extensions (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) or the Netlogon Remote Protocol (as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md)), the previous value of the local badPwdCount attribute was nonzero, and the local badPwdCount attribute is set to 0 as a result of the successful logon, the non-PDC MUST issue a [ResetBadPwdCount](#Section_2.2.3) request to the PDC on a best-effort basis; if the PDC cannot be reached or the update fails for any reason, the resulting error MUST be ignored.
+When a non-PDC services a successful logon from either the Kerberos Protocol Extensions (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) or the Netlogon Remote Protocol (as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md)), the previous value of the local badPwdCount attribute was nonzero, and the local badPwdCount attribute is set to 0 as a result of the successful logon, the non-PDC MUST issue a [ResetBadPwdCount](#Section_3.3.5.3) request to the PDC on a best-effort basis; if the PDC cannot be reached or the update fails for any reason, the resulting error MUST be ignored.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 PasswordUpdateForward Request
@@ -793,7 +793,7 @@ None.
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
 
-In the following sections, the notation "Message.PasswordUpdate" is used to refer to the PasswordUpdate request message (section [2.2.2](#Section_3.3.5.2)). By using this convention, Message.PasswordUpdate.Flags, for example, refers to the **Flags** field of the PasswordUpdate request message. Similarly, "Message.ResetBadPwdCount" refers to the ResetBadPwdCount request message (section [2.2.3](#Section_2.2.3)), "Message.PasswordUpdateForward" refers to the PasswordUpdateForward request message (section [2.2.4](#Section_2.2.4)), and "Message.ResetSmartCardAccountPassword" refers to the ResetSmartCardAccountPassword request message (section [2.2.8](#Section_3.3.5.7)).
+In the following sections, the notation "Message.PasswordUpdate" is used to refer to the PasswordUpdate request message (section [2.2.2](#Section_2.2.2)). By using this convention, Message.PasswordUpdate.Flags, for example, refers to the **Flags** field of the PasswordUpdate request message. Similarly, "Message.ResetBadPwdCount" refers to the ResetBadPwdCount request message (section [2.2.3](#Section_3.3.5.3)), "Message.PasswordUpdateForward" refers to the PasswordUpdateForward request message (section [2.2.4](#Section_3.2.4.4)), and "Message.ResetSmartCardAccountPassword" refers to the ResetSmartCardAccountPassword request message (section [2.2.8](#Section_2.2.8)).
 
 For each message in this section, an informative description of the message is presented first; then, a normative description about how the message must be processed is given.
 
@@ -832,7 +832,7 @@ This message is used by [**DCs**](#gt_domain-controller-dc) to communicate to th
 On receiving this message, the [**responder**](#gt_responder) SHOULD<11> return STATUS_NOT_SUPPORTED if either the responder is not the [**PDC**](#gt_primary-domain-controller-pdc) or the [**requestor**](#gt_requestor) is an [**RODC**](#gt_read-only-domain-controller-rodc). Otherwise, the responder MUST process the data from the message subject to all of the following constraints. All of the following actions MUST be performed in the same transaction:
 
 - The responder SHOULD validate the integrity of the message with respect to embedded offsets and sizes. Responder implementations SHOULD return STATUS_INVALID_PARAMETER upon receiving malformed messages.<12>
-- If no bits are set in Message.PasswordUpdate.Flags, no action MUST be performed, and the responder MUST return STATUS_INVALID_PARAMETER to the requestor. If bits are set in Message.PasswordUpdateFlags that MUST be 0 (as specified in section [2.2.2](#Section_3.3.5.2)), STATUS_REVISION_MISMATCH MUST be returned.
+- If no bits are set in Message.PasswordUpdate.Flags, no action MUST be performed, and the responder MUST return STATUS_INVALID_PARAMETER to the requestor. If bits are set in Message.PasswordUpdateFlags that MUST be 0 (as specified in section [2.2.2](#Section_2.2.2)), STATUS_REVISION_MISMATCH MUST be returned.
 - The responder SHOULD return STATUS_SUCCESS to the requestor, and, as a background operation, SHOULD<13> perform a "replicateSingleObject" operation with the DN of the DSA object of the requestor [**DC**](#gt_domain-controller-dc), and the DN of the object that has an objectSid attribute value that corresponds to the value constructed by concatenating the Message.PasswordUpdate.Rid field with the configured [**domain**](#gt_domain) [**SID**](#gt_security-identifier-sid).<14> This operation is specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.3.18.
 - If no errors occur during the message processing, the responder MUST return STATUS_SUCCESS; otherwise, the responder MUST return an error code, as specified in section [2.2.9](#Section_2.2.9).
 - If the background operation fails for any reason, the responder MUST perform the following tasks in the background.
@@ -874,7 +874,7 @@ Upon receiving this message, the [**responder**](#gt_responder) SHOULD<17> retur
 
 - The responder SHOULD validate the integrity of the message with respect to embedded offsets and sizes. Responder implementations SHOULD return STATUS_INVALID_PARAMETER upon receiving malformed messages.<18>
 - If either FLAG_ACCOUNT_NAME or FLAG_CLEAR_TEXT_PASSWORD is not set, the responder SHOULD<19> return STATUS_REVISION_MISMATCH to the requestor.
-- If any reserved flag (marked as X in [PasswordUpdateForward Request Message (section 2.2.4)](#Section_2.2.4)) is set, the responder SHOULD return STATUS_REVISION_MISMATCH.<20>
+- If any reserved flag (marked as X in [PasswordUpdateForward Request Message (section 2.2.4)](#Section_3.2.4.4)) is set, the responder SHOULD return STATUS_REVISION_MISMATCH.<20>
 - If there is no object in the database that has a sAMAccountName attribute value that corresponds to the data value supplied in Message.PasswordUpdateForward.Data that is specified by the first array element in Message.PasswordUpdateForward.OffsetLengthArray, the responder MUST return STATUS_NOT_FOUND.
 - If the responder is not a [**writable NC replica**](#gt_writable-naming-context-nc-replica) in the same [**domain**](#gt_domain) as the RODC, the responder MUST return an error.
 - If RODC is not allowed to cache credentials for the target user account, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.5.15, the responder MUST return STATUS_ACCESS_DENIED.
@@ -909,7 +909,7 @@ Upon receiving this message, the [**responder**](#gt_responder) SHOULD<21> retur
 
 - The responder SHOULD validate the integrity of the message with respect to embedded offsets and sizes. Responder implementations SHOULD return STATUS_INVALID_PARAMETER upon receiving malformed messages.<22>
 - If the responder is not a [**writable NC replica**](#gt_writable-naming-context-nc-replica) in the same [**domain**](#gt_domain) as the [**RODC**](#gt_read-only-domain-controller-rodc), then the responder SHOULD<23> return an error.
-- For each individual update contained in the **Updates** field of the [LastLogonTimeStampUpdatesForward message (section 2.2.7)](#Section_2.2.7), the responder MUST do the following:
+- For each individual update contained in the **Updates** field of the [LastLogonTimeStampUpdatesForward message (section 2.2.7)](#Section_3.2.4.6), the responder MUST do the following:
 - If there is no object in the database that has an objectSid attribute value that corresponds to the value constructed by concatenating the LastLogonTimeStampUpdate.AccountRid field with the configured domain [**SID**](#gt_security-identifier-sid), skip this update and go to the next one.
 - Verify that the RODC is allowed to cache credentials for the object found, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.5.15; otherwise, skip this update request and go to the next one.
 - Update the lastLogonTimeStamp attribute of the directory entry in accordance with the algorithm specified for that attribute in [MS-ADA1]. This MUST be an [**originating update**](#gt_originating-update).
@@ -963,7 +963,7 @@ None.
 <a id="Section_4.1"></a>
 ## 4.1 SAM Server-to-Server Request Example
 
-The following example shows a [**requestor**](#gt_requestor) successfully making a [PasswordUpdate (section 2.2.2)](#Section_3.3.5.2) request.
+The following example shows a [**requestor**](#gt_requestor) successfully making a [PasswordUpdate (section 2.2.2)](#Section_2.2.2) request.
 
 The message flow is trivial: The requestor makes a PasswordUpdate request (arrow A in the following figure), and the [**responder**](#gt_responder) returns a status code (arrow B in the figure), as specified in section 2.2.2.
 

@@ -892,14 +892,14 @@ If the higher layer specifies a "template" publishing point on the server, the n
 
 If the higher layer requests that the publishing point identified by the URL on the HTTP request line be removed at the end of the [**streaming**](#gt_streaming) [**session**](#gt_session), the message body of the POST request MUST include the [AutoDestroy (section 2.2.2.1.2)](#Section_2.2.2.1.2) directive. If the Template-URL directive is included in the message body, the AutoDestroy directive SHOULD also be included, even if the higher layer does not request the publishing point to be removed.
 
-After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.1](#Section_2.2.2.1).
+After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.1](#Section_2.2.1.1.1).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Request to Start Streaming Content
 
 When a higher layer requests that the [**streaming**](#gt_streaming) of [**content**](#gt_content) starts, it causes the client to send a [PushStart request](#Section_2.2.2.2) to the server.
 
-As a prerequisite for this event, the higher layer MUST already have configured the server to receive content, as specified in section [3.1.4.1](#Section_3.1.4.1), and the client MUST have received a response to the [PushSetup request](#Section_2.2.2.1) indicating that the PushSetup request succeeded (as specified in section [3.1.5.1](#Section_2.2.2.1)), but the client MUST NOT have sent any PushStart requests previously.
+As a prerequisite for this event, the higher layer MUST already have configured the server to receive content, as specified in section [3.1.4.1](#Section_3.1.4.1), and the client MUST have received a response to the [PushSetup request](#Section_2.2.2.1) indicating that the PushSetup request succeeded (as specified in section [3.1.5.1](#Section_2.2.1.1.1)), but the client MUST NOT have sent any PushStart requests previously.
 
 The higher layer MUST provide an ASF file header to send to the server. The client MUST encapsulate it in an [$H](#Section_2.2.3.6) packet, according to the rules specified in section 2.2.3.6.
 
@@ -940,7 +940,7 @@ If a PushStart request has not been previously and successfully sent, then the c
 
 The client MUST then notify the higher layer that it has sent the PushStart request because the sending of this request might trigger events from the higher layer.
 
-The client MUST then wait for a higher-layer triggered event or for the response to the PushStart request to be received. How to process the response is specified in section [3.1.5.2](#Section_3.2.5.2.1).
+The client MUST then wait for a higher-layer triggered event or for the response to the PushStart request to be received. How to process the response is specified in section [3.1.5.2](#Section_3.1.5.2).
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 ASF Packet Is Available to Send
@@ -963,7 +963,7 @@ If the value of **Length-Remaining** is now equal to zero, the client MUST wait 
 
 Otherwise, the client MUST wait for either another higher-layer triggered event or for the response to the PushStart request to be received.
 
-How to process the response to the PushStart request is specified in section [3.1.5.2](#Section_3.2.5.2.1).
+How to process the response to the PushStart request is specified in section [3.1.5.2](#Section_3.1.5.2).
 
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 Notification of the Last Packet
@@ -988,7 +988,7 @@ If the TCP connection to the server is still open, and if the value of Length-Re
 
 Otherwise, as long as the TCP connection is still open, the client MUST wait for either another higher-layer triggered event or for the response to the PushStart request to be received.
 
-How to process the response to the PushStart request is specified in section [3.1.5.2](#Section_3.2.5.2.1).
+How to process the response to the PushStart request is specified in section [3.1.5.2](#Section_3.1.5.2).
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 Notification of New ASF Header File
@@ -1011,7 +1011,7 @@ If the value of **Length-Remaining** is now equal to zero, the client MUST wait 
 
 Otherwise, the client MUST wait for either another higher-layer triggered event or for the response to the PushStart request to be received.
 
-How to process the response to the PushStart request is specified in section [3.1.5.2](#Section_3.2.5.2.1).
+How to process the response to the PushStart request is specified in section [3.1.5.2](#Section_3.1.5.2).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -1148,7 +1148,7 @@ If the [AutoDestroy](#Section_2.2.2.1.2) directive is present in the message bod
 
 If the server is not sending a response with an error status code (for example, 302 or 305), and if the request does not specify a push-id cookie on a Cookie header, or if the value of the push-id cookie is "0", the server MUST create a new state by performing the initialization procedure as specified in section [3.2.3](#Section_2.2.1.5).
 
-The [PushSetup](#Section_2.2.2.1) response MUST follow the rules in PushSetup request (section 2.2.2.1).
+The [PushSetup](#Section_2.2.1.1.1) response MUST follow the rules in PushSetup request (section 2.2.2.1).
 
 Because the PushSetup response does not have a message body, the status code in the response SHOULD be 204. The status code MAY be 200.
 
@@ -1183,7 +1183,7 @@ The server MUST check with the higher layer that the URL that the client specifi
 
 The Idle-Timeout and Inactivity-Timeout timer MUST be stopped.
 
-If the server is sending a response with an error status code, or if the entire message body of the PushStart request has been received, as determined by the Content-Length header (as specified in [RFC2616] section 14.13), the server MUST send a [PushStart](#Section_3.2.5.2.1) response. How to send a PushStart response is specified in section [3.2.5.2.1](#Section_3.2.5.2.1).
+If the server is sending a response with an error status code, or if the entire message body of the PushStart request has been received, as determined by the Content-Length header (as specified in [RFC2616] section 14.13), the server MUST send a [PushStart](#Section_3.1.5.2) response. How to send a PushStart response is specified in section [3.2.5.2.1](#Section_3.2.5.2.1).
 
 Otherwise, the Idle-Timeout timer MUST be started, and the server MUST wait for a higher-layer triggered event or one of the packet types specified in section [2.2.3](#Section_2.2.3) to be received as part of the HTTP message body. If this is the first PushStart request received for this [**session**](#gt_session), the first packet MUST be an [$H](#Section_2.2.3.6) packet.
 
@@ -1494,7 +1494,7 @@ All requests illustrated in the diagram are sent by the client to the server in 
 
 Following the [PushSetup request](#Section_2.2.2.1), the client verifies that the response adheres to the syntax specified in section [2.2.2.2](#Section_2.2.2.2).
 
-If the response received by the client is a 401 or 407, then authentication is required as specified in section [3.1.5.2](#Section_3.2.5.2.1). When the client is ready, the client shall resubmit the HTTP request with the authentication credentials that the server requested. In the event the HTTP response indicates an error other than 401 or 407, the [**session**](#gt_session) ends.
+If the response received by the client is a 401 or 407, then authentication is required as specified in section [3.1.5.2](#Section_3.1.5.2). When the client is ready, the client shall resubmit the HTTP request with the authentication credentials that the server requested. In the event the HTTP response indicates an error other than 401 or 407, the [**session**](#gt_session) ends.
 
 After the client has received a successful response from the server, the client evaluates the response, and then send a PushStart request to the server, as specified in section [3.1.4.2.1](#Section_3.1.4.2.1). The client then begins sending packets as specified in section [3.1.4.3](#Section_3.1.4.3).
 

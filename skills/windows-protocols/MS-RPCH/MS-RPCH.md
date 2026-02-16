@@ -646,7 +646,7 @@ Each connection-oriented transport must meet the requirements specified in [MS-R
 
 The RPC over HTTP Protocol defines the role of an [**RPC over HTTP proxy**](#gt_rpc-over-http-proxy) that can be deployed to relay network traffic between a [**client**](#gt_client) and a [**server**](#gt_server) residing on networks separated by a firewall through which HTTP or HTTPS traffic is permitted to flow.
 
-RPC over HTTP Protocol has two main [**protocol dialects**](#gt_protocol-dialect): [RPC over HTTP v1](#Section_3.1) and [RPC over HTTP v2](#Section_3.2). Different roles are defined for each dialect.
+RPC over HTTP Protocol has two main [**protocol dialects**](#gt_protocol-dialect): [RPC over HTTP v1](#Section_3.1) and [RPC over HTTP v2](#Section_2.1.2). Different roles are defined for each dialect.
 
 RPC over HTTP v1 defines the roles of a client, a server, and an RPC over HTTP proxy, called a [**mixed proxy**](#gt_mixed-proxy) in this specification. The following diagram shows the different roles and their relationships.
 
@@ -687,7 +687,7 @@ The RPC over HTTP Protocol takes an [**RPC PDU**](#gt_rpc-pdu) that is generated
 
 The most common deployment configuration, even though it is not a requirement for this protocol, is for the [**client**](#gt_client) to be separated from the RPC over HTTP proxy by a wide area network (WAN) such as the Internet where the network traffic for this protocol travels over HTTP or HTTPS. The RPC over HTTP proxy and the RPC server are usually connected through a local area network (LAN) where the network traffic for this protocol travels over TCP/IP.
 
-The RPC PDUs are conceptually viewed by the RPC over HTTP Protocol as an ordered sequence or stream of PDUs that can travel from RPC client to RPC server or from RPC server to RPC client. This protocol does not modify or consume RPC PDUs. The only exception to this rule is when using HTTPS and [RPC over HTTP v2](#Section_3.2). In this case, RPC PDUs will be encrypted at the [**HTTP client**](#gt_http-client) and decrypted at the [**inbound**](#gt_inbound) or [**outbound proxy**](#gt_outbound-proxy) when traveling between an HTTP client and an [**inbound proxy**](#gt_inbound-proxy) or outbound proxy.
+The RPC PDUs are conceptually viewed by the RPC over HTTP Protocol as an ordered sequence or stream of PDUs that can travel from RPC client to RPC server or from RPC server to RPC client. This protocol does not modify or consume RPC PDUs. The only exception to this rule is when using HTTPS and [RPC over HTTP v2](#Section_2.1.2). In this case, RPC PDUs will be encrypted at the [**HTTP client**](#gt_http-client) and decrypted at the [**inbound**](#gt_inbound) or [**outbound proxy**](#gt_outbound-proxy) when traveling between an HTTP client and an [**inbound proxy**](#gt_inbound-proxy) or outbound proxy.
 
 The RPC over HTTP Protocol inserts its own PDUs into the RPC [**PDU stream**](#gt_pdu-stream) and routes the resulting stream of PDUs over HTTP requests and responses or TCP/IP connections as defined throughout this specification. Using [**Augmented Backus-Naur Form (ABNF)**](#gt_augmented-backus-naur-form-abnf) notation [[RFC5234]](https://go.microsoft.com/fwlink/?LinkId=123096), the definition of the resulting stream of RPC and RPC over HTTP PDUs outside the protocol sequences specified in section [3](#Section_1.3) of this specification is as follows.
 
@@ -734,7 +734,7 @@ Figure 7: Protocol layering on server
 
 A consequence of this protocol layering is that an [**RPC client**](#gt_rpc-client) using [**RPC**](#gt_remote-procedure-call-rpc) over TCP (ncacn_ip_tcp) predecessor [**RPC protocol sequence**](#gt_rpc-protocol-sequence) cannot interoperate with an [**RPC server**](#gt_rpc-server) using RPC over HTTP (ncacn_http) RPC protocol sequence and vice versa.
 
-[RPC over HTTP v1](#Section_3.1) can run on HTTP only. [RPC over HTTP v2](#Section_3.2) can run over either HTTP or HTTPS. The decision on whether to use HTTP or HTTPS is made by the client based on information provided by higher-layer protocols.
+[RPC over HTTP v1](#Section_3.1) can run on HTTP only. [RPC over HTTP v2](#Section_2.1.2) can run over either HTTP or HTTPS. The decision on whether to use HTTP or HTTPS is made by the client based on information provided by higher-layer protocols.
 
 RPC over HTTP v2 transmits error information encoded using the ExtendedError Remote Data Structure, as specified in [MS-EERR](../MS-EERR/MS-EERR.md).
 
@@ -743,7 +743,7 @@ RPC over HTTP v2 transmits error information encoded using the ExtendedError Rem
 
 If HTTPS transport is used, a [**certificate**](#gt_certificate) is deployed on the [**inbound**](#gt_inbound) and [**outbound proxies**](#gt_outbound-proxy).
 
-The RPC over HTTP Protocol does not define any means for activating a [**server**](#gt_server) or [**proxy**](#gt_proxy), and thus the server and all proxies are fully initialized and listening before the RPC over HTTP Protocol can start operating. The server is listening on a well-known or [**dynamic endpoint**](#gt_dynamic-endpoint). RPC over HTTP proxies listen in an implementation-specific way on the [**URIs**](#gt_uniform-resource-identifier-uri) specified in sections [3.1.2.3](#Section_3.1.2) and [3.2.3.3](#Section_3.2.3.3).
+The RPC over HTTP Protocol does not define any means for activating a [**server**](#gt_server) or [**proxy**](#gt_proxy), and thus the server and all proxies are fully initialized and listening before the RPC over HTTP Protocol can start operating. The server is listening on a well-known or [**dynamic endpoint**](#gt_dynamic-endpoint). RPC over HTTP proxies listen in an implementation-specific way on the [**URIs**](#gt_uniform-resource-identifier-uri) specified in sections [3.1.2.3](#Section_2.1.1.1) and [3.2.3.3](#Section_3.2.3.3).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -752,12 +752,12 @@ The RPC over HTTP Protocol is applicable to scenarios where an [**RPC client**](
 
 This protocol is also applicable when data is received from the Internet or other public networks and additional protection for the RPC server is required. RPC over HTTP is generally not applicable in cases where a single [**RPC**](#gt_remote-procedure-call-rpc) method call will be executed with little data exchanged by the RPC client and the RPC server. The reason is that the additional security provisions of this protocol and the additional synchronization required by [**inbound**](#gt_inbound) and [**outbound proxies**](#gt_outbound-proxy) introduce significant overhead on the initial connection establishment. Once a connection is established, RPC over HTTP is very efficient in transmitting data between RPC clients and RPC servers.
 
-[RPC over HTTP v1](#Section_3.1) is superseded by [RPC over HTTP v2](#Section_3.2) and cannot be used unless maintaining backward compatibility with RPC over HTTP v1 is required.<2> RPC over HTTP v1 has weak security and poor compatibility with existing HTTP infrastructure, and it deviates from RPC connection-oriented protocol requirements ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.1.1). More specifically, RPC over HTTP v1 does not meet the second requirement in the bulleted list in [MS-RPCE] section 2.1.1 because it fails to maintain a reliable communication session. RPC over HTTP v1 fails to keep the communication session open if the network agents deem the communication session idle.
+[RPC over HTTP v1](#Section_3.1) is superseded by [RPC over HTTP v2](#Section_2.1.2) and cannot be used unless maintaining backward compatibility with RPC over HTTP v1 is required.<2> RPC over HTTP v1 has weak security and poor compatibility with existing HTTP infrastructure, and it deviates from RPC connection-oriented protocol requirements ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.1.1). More specifically, RPC over HTTP v1 does not meet the second requirement in the bulleted list in [MS-RPCE] section 2.1.1 because it fails to maintain a reliable communication session. RPC over HTTP v1 fails to keep the communication session open if the network agents deem the communication session idle.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-**Supported Transports:** The RPC over HTTP Protocol can run on top of HTTP 1.0 or HTTPS. [RPC over HTTP v2](#Section_3.2) requires HTTP 1.1 connection keep-alive support. Details are provided in section [2.1.2.1](#Section_3.2.3). For historical reasons related to how this protocol has evolved, some HTTP requests and HTTP responses are versioned as 1.0 and some are versioned as 1.1. When not specified explicitly in this specification, version 1.1 is assumed to be the default.
+**Supported Transports:** The RPC over HTTP Protocol can run on top of HTTP 1.0 or HTTPS. [RPC over HTTP v2](#Section_2.1.2) requires HTTP 1.1 connection keep-alive support. Details are provided in section [2.1.2.1](#Section_3.2.3). For historical reasons related to how this protocol has evolved, some HTTP requests and HTTP responses are versioned as 1.0 and some are versioned as 1.1. When not specified explicitly in this specification, version 1.1 is assumed to be the default.
 
 - **Protocol Versions:** This protocol supports the following explicit [**protocol dialects**](#gt_protocol-dialect): RPC over HTTP v1 and RPC over HTTP v2. These protocol dialects are defined in section [1.3.2](#Section_1.3). RPC over HTTP v2 supports versioning within RPC over HTTP v2 as defined in section [2.2.3.5.7](#Section_2.2.3.5.7). [RPC over HTTP v1](#Section_3.1) has no support for versioning.
 - **Security and Authentication Methods:** This protocol relies on the security provided by HTTPS and HTTP Basic, or NTLM authentication [MS-NTHT](../MS-NTHT/MS-NTHT.md), and acts as a pass-through for the security provided by [**RPC**](#gt_remote-procedure-call-rpc). The RPC over HTTP Protocol does not have security and authentication provisions of its own.
@@ -786,7 +786,7 @@ This protocol references commonly used data types as defined in [MS-DTYP](../MS-
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-Both [RPC over HTTP v1](#Section_3.1) and [RPC over HTTP v2](#Section_3.2) start their transport mapping process from a stream of [**RPC**](#gt_remote-procedure-call-rpc) and RPC over HTTP [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) that need to be mapped to one or more HTTP or HTTPS requests and TCP/IP connections. Both [**protocol dialects**](#gt_protocol-dialect) also share the following characteristics:
+Both [RPC over HTTP v1](#Section_3.1) and [RPC over HTTP v2](#Section_2.1.2) start their transport mapping process from a stream of [**RPC**](#gt_remote-procedure-call-rpc) and RPC over HTTP [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) that need to be mapped to one or more HTTP or HTTPS requests and TCP/IP connections. Both [**protocol dialects**](#gt_protocol-dialect) also share the following characteristics:
 
 - An [**endpoint**](#gt_endpoint) mapper with a [**well-known endpoint**](#gt_well-known-endpoint) of 593.
 - An RPC protocol identifier of 0x1F.
@@ -806,7 +806,7 @@ The following sections define the mapping of the [**RPC**](#gt_remote-procedure-
 
 [RPC over HTTP v1](#Section_3.1) MUST use HTTP between the [**client**](#gt_client) and the [**mixed proxy**](#gt_mixed-proxy). It MUST use a single HTTP request to map both [**inbound**](#gt_inbound) and [**outbound**](#gt_outbound) traffic to the [**server**](#gt_server). The HTTP request MUST be initiated from the client and MUST be received by an [**HTTP server**](#gt_http-server) that runs on the mixed proxy. The address of the HTTP server is provided by a higher-layer protocol as specified in section [2.1](#Section_2.1). RPC over HTTP v1 MUST use port 80 for the HTTP traffic.
 
-The syntax of the HTTP requests and HTTP response used by the RPC over HTTP Protocol are defined in [RPC Connect Request (section 2.1.1.1.1)](#Section_2.1.1.1.1) and [RPC Connect Response (section 2.1.1.1.2)](#Section_2.1.1.1.2). [Inbound PDU Stream (section 2.1.1.1.3)](#Section_2.1.1.1.3) and [Outbound PDU Stream (section 2.1.1.1.4)](#Section_2.1.1.1.4) define how [**RPC PDUs**](#gt_remote-procedure-call-rpc) are mapped to an HTTP request or an HTTP response.
+The syntax of the HTTP requests and HTTP response used by the RPC over HTTP Protocol are defined in [RPC Connect Request (section 2.1.1.1.1)](#Section_2.1.1.1.1) and [RPC Connect Response (section 2.1.1.1.2)](#Section_2.1.1.1.2). [Inbound PDU Stream (section 2.1.1.1.3)](#Section_2.1.2.1.7) and [Outbound PDU Stream (section 2.1.1.1.4)](#Section_2.1.1.1.4) define how [**RPC PDUs**](#gt_remote-procedure-call-rpc) are mapped to an HTTP request or an HTTP response.
 
 <a id="Section_2.1.1.1.1"></a>
 ##### 2.1.1.1.1 RPC Connect Request
@@ -823,7 +823,7 @@ The [**RPC**](#gt_remote-procedure-call-rpc) connect request is an HTTP request 
 
 **User-Agent:** MUST be set to the string "RPC".
 
-**Message Body:** MUST be composed as specified in section [2.1.1.1.3](#Section_2.1.1.1.3).
+**Message Body:** MUST be composed as specified in section [2.1.1.1.3](#Section_2.1.2.1.7).
 
 This request MUST not use the **Content-Type** and **Content-Length** header fields. It also MUST NOT use transfer coding or specify a MIME type.
 
@@ -889,7 +889,7 @@ The following sections define the mapping of the RPC over HTTP v2 [**protocol di
 <a id="Section_2.1.2.1"></a>
 #### 2.1.2.1 Client to Inbound or Outbound Proxy
 
-[RPC over HTTP v2](#Section_3.2) MUST operate either on top of HTTP or on top of HTTPS. It requires HTTP 1.0 plus connection keep-alive support from HTTP 1.1. Mapping to both protocols happens identically. In this section, mapping is defined only on HTTP, but the same rules apply for HTTPS.<5>
+[RPC over HTTP v2](#Section_2.1.2) MUST operate either on top of HTTP or on top of HTTPS. It requires HTTP 1.0 plus connection keep-alive support from HTTP 1.1. Mapping to both protocols happens identically. In this section, mapping is defined only on HTTP, but the same rules apply for HTTPS.<5>
 
 If instructed by a higher-level protocol in an implementation-specific way, implementations of this protocol MUST require the HTTP implementation on the [**client**](#gt_client) to authenticate to the [**HTTP server**](#gt_http-server) running on the [**inbound proxy**](#gt_inbound-proxy) or [**outbound proxy**](#gt_outbound-proxy) using basic authentication for HTTP [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373) or NTLM authentication for HTTP [MS-NTHT](../MS-NTHT/MS-NTHT.md).
 
@@ -1096,7 +1096,7 @@ By using the message body of the OUT channel to transmit PDUs over HTTP/HTTPS, t
 <a id="Section_2.1.2.2"></a>
 #### 2.1.2.2 Inbound or Outbound Proxy to Server
 
-[RPC over HTTP v2](#Section_3.2) uses TCP/IP between the [**inbound**](#gt_inbound) or outbound proxy and the server. The same mapping is applied for both the inbound and the outbound proxy.
+[RPC over HTTP v2](#Section_2.1.2) uses TCP/IP between the [**inbound**](#gt_inbound) or outbound proxy and the server. The same mapping is applied for both the inbound and the outbound proxy.
 
 The TCP connection is initiated by the inbound or outbound proxy. The server name and port to be used for setting up the TCP connection are extracted from the URL of the HTTP request as specified in section [2.1.1.1](#Section_2.1.1.1). Once the connection is established, the [**inbound proxy**](#gt_inbound-proxy) or outbound proxy and the server use this connection for transmission of all the [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) of the [**PDU stream**](#gt_pdu-stream).
 
@@ -1119,7 +1119,7 @@ All data structures described in this section share the following common charact
 
 - All numeric fields MUST be encoded using [**little-endian**](#gt_little-endian) byte ordering.
 - Alignment for all data structures except the [**URI**](#gt_uniform-resource-identifier-uri) MUST be 4 bytes.
-- All structures in this section except the URI are used for [RPC over HTTP v2](#Section_3.2) only.
+- All structures in this section except the URI are used for [RPC over HTTP v2](#Section_2.1.2) only.
 <a id="Section_2.2.2"></a>
 ### 2.2.2 URI Encoding
 
@@ -1129,7 +1129,7 @@ http-URL = "http:" "//" host [ ":" port ] [ abs-path
 
 [ "?" query ]]
 
-This protocol specifies that **abs-path** MUST be present for [RPC over HTTP v2](#Section_3.2) and MUST have the following form.
+This protocol specifies that **abs-path** MUST be present for [RPC over HTTP v2](#Section_2.1.2) and MUST have the following form.
 
 nocert-path = "/rpc/rpcproxy.dll"
 
@@ -1254,7 +1254,7 @@ packet-beta
 
 The [**RTS PDUs**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) contain a series of commands. This section defines the valid RTS commands. Section [2.2.3.6](#Section_2.2.3.6) defines how the commands are ordered in a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu).
 
-The type of each command in an RTS PDU is identified by a numeric value. Each command is used in one or more RTS PDUs as defined in sections [2.2.4.2](#Section_2.2.4.2) through [2.2.4.50](#Section_2.2.4.50). Section [3.2](#Section_3.2) defines when each RTS PDU is used, who sends it, and who receives it. The following table specifies the numeric value and meaning of each command type.
+The type of each command in an RTS PDU is identified by a numeric value. Each command is used in one or more RTS PDUs as defined in sections [2.2.4.2](#Section_3.2.4.5.3) through [2.2.4.50](#Section_2.2.4.50). Section [3.2](#Section_3.2) defines when each RTS PDU is used, who sends it, and who receives it. The following table specifies the numeric value and meaning of each command type.
 
 | Value | Meaning |
 | --- | --- |
@@ -1264,12 +1264,12 @@ The type of each command in an RTS PDU is identified by a numeric value. Each co
 | Cookie (0x00000003) | The [Cookie](#Section_2.2.3.5.4) command carries an [**RTS cookie**](#gt_578c1075-051d-40c2-9fa4-0aeb1ca20002). |
 | ChannelLifetime (0x00000004) | The [ChannelLifetime](#Section_3.2.3.1.1) command specifies the [**channel lifetime**](#gt_channel-lifetime). |
 | ClientKeepalive (0x00000005) | The [ClientKeepalive](#Section_2.2.3.5.6) command carries the desired interval for sending keep-alive PDUs. |
-| Version (0x00000006) | The [Version](#Section_2.2.3.5.7) command carries the [RPC over HTTP v2](#Section_3.2) version number for the sender of the PDU that contains this command. |
+| Version (0x00000006) | The [Version](#Section_2.2.3.5.7) command carries the [RPC over HTTP v2](#Section_2.1.2) version number for the sender of the PDU that contains this command. |
 | Empty (0x00000007) | [Empty](#Section_2.2.3.5.8) command. |
 | Padding (0x00000008) | [Padding](#Section_2.2.3.5.9) is a variable-size command used to pad the size of an RTS PDU to a desired size. |
 | NegativeANCE (0x00000009) | The [NegativeANCE](#Section_2.2.3.5.10) command indicates that a [**successor channel**](#gt_successor-channel) was not established successfully. |
 | ANCE (0x0000000A) | The [ANCE](#Section_2.2.3.5.11) command indicates that a successor channel was established successfully. |
-| ClientAddress (0x0000000B) | The [ClientAddress](#Section_2.2.3.5.12) command carries the client IP address. The IP address is encoded as specified in section [2.2.3.2](#Section_2.2.3.2). Regardless of who sends this PDU, the address MUST be interpreted to be the address of the client. |
+| ClientAddress (0x0000000B) | The [ClientAddress](#Section_3.2.3.1.3) command carries the client IP address. The IP address is encoded as specified in section [2.2.3.2](#Section_2.2.3.2). Regardless of who sends this PDU, the address MUST be interpreted to be the address of the client. |
 | AssociationGroupId (0x0000000C) | The [AssociationGroupId](#Section_2.2.3.5.13) command carries the client association group ID as specified in section 2.2.3.5.13. Regardless of who sends this PDU, the association group ID MUST be interpreted to be that of the client. |
 | Destination (0x0000000D) | The [Destination](#Section_2.2.3.5.14) command carries the destination to which a PDU MUST be forwarded. |
 | PingTrafficSentNotify (0x0000000E) | The [PingTrafficSentNotify](#Section_2.2.3.5.15) command carries the number of bytes sent by the outbound proxy to the client as part of ping traffic. |
@@ -1290,7 +1290,7 @@ packet-beta
 
 **ReceiveWindowSize (4 bytes):** The size of the **ReceiveWindow**, in bytes. It MUST be in the inclusive range of 8 kilobytes to 256 kilobytes. The **ReceiveWindow** MUST be greater than or equal to the [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) fragment size transmitted in the bind/bind_ack packets at the [**RPC**](#gt_remote-procedure-call-rpc) layer ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 12.4).<15>
 
-The **ReceiveWindowSize** field from this PDU MUST be used to set the ReceiveWindowSize ADM from section [3.2.1.1.5.1.1](#Section_2.2.3.5.1).
+The **ReceiveWindowSize** field from this PDU MUST be used to set the ReceiveWindowSize ADM from section [3.2.1.1.5.1.1](#Section_3.2.1.1.5.1).
 
 <a id="Section_2.2.3.5.2"></a>
 ##### 2.2.3.5.2 FlowControlAck
@@ -1370,7 +1370,7 @@ packet-beta
 <a id="Section_2.2.3.5.7"></a>
 ##### 2.2.3.5.7 Version
 
-The Version command specifies an [RPC over HTTP v2](#Section_3.2) version number. This version number allows versioning within RPC over HTTP v2. Version information MUST be interpreted to refer to the sender of the [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu).
+The Version command specifies an [RPC over HTTP v2](#Section_2.1.2) version number. This version number allows versioning within RPC over HTTP v2. Version information MUST be interpreted to refer to the sender of the [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu).
 
 ```mermaid
 packet-beta
@@ -1582,7 +1582,7 @@ The [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) body MUST be compose
 <a id="Section_2.2.4"></a>
 ### 2.2.4 RTS PDUs
 
-This protocol defines specific sequence of [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) commands that are combined into single PDUs. These PDUs are referred to as [**RTS PDUs**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) and form the basis of routing and control flow in [RPC over HTTP v2](#Section_3.2).
+This protocol defines specific sequence of [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) commands that are combined into single PDUs. These PDUs are referred to as [**RTS PDUs**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) and form the basis of routing and control flow in [RPC over HTTP v2](#Section_2.1.2).
 
 This section defines the syntax of the RTS PDUs using the common structure and command definitions specified earlier in this section.
 
@@ -1625,7 +1625,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of RTS Header MUST be the value of RTS_FLAG_NONE. The **NumberOfCommands** field of the RTS Header MUST be the value 4.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command indicating the [RPC over HTTP v2](#Section_3.2) protocol Version as specified in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command indicating the [RPC over HTTP v2](#Section_2.1.2) protocol Version as specified in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command identifying the virtual connection that is being established by this protocol sequence. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -1650,7 +1650,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_OUT_CHANNEL. The **NumberOfCommands** field of the RTS Header MUST be the value 5.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lower of the outbound proxy version and the client version reported in the [CONN/A1 RTS PDU](#Section_2.2.4.2). The format for the [RPC over HTTP v2](#Section_3.2) protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lower of the outbound proxy version and the client version reported in the [CONN/A1 RTS PDU](#Section_3.2.4.5.3). The format for the [RPC over HTTP v2](#Section_2.1.2) protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command identifying the virtual connection that this protocol sequence is trying to establish. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -1693,7 +1693,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_NONE. The **NumberOfCommands** field of the RTS Header MUST be the value 6.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the version of [RPC over HTTP v2](#Section_3.2) that the client supports, formatted as specified in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the version of [RPC over HTTP v2](#Section_2.1.2) that the client supports, formatted as specified in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command identifying the virtual connection that this protocol sequence is trying to establish. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -1724,7 +1724,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_IN_CHANNEL. The **NumberOfCommands** field of the RTS Header MUST be the value 7.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lower of the inbound proxy version and the client version reported in CONN/B1 [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd). The format for the [RPC over HTTP v2](#Section_3.2) protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lower of the inbound proxy version and the client version reported in CONN/B1 [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd). The format for the [RPC over HTTP v2](#Section_2.1.2) protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command for the virtual connection this protocol sequence is trying to establish. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -1736,7 +1736,7 @@ packet-beta
 
 **AssociationGroupId (20 bytes):** MUST be an [AssociationGroupId](#Section_2.2.3.5.13) command containing the association group ID for the client. The AssociationGroupId command format is defined in section 2.2.3.5.13.
 
-**ClientAddress (variable):** MUST be a [ClientAddress](#Section_2.2.3.5.12) command containing the IP address of the client as seen by the inbound proxy. The ClientAddress command format is defined in section 2.2.3.5.12.
+**ClientAddress (variable):** MUST be a [ClientAddress](#Section_3.2.3.1.3) command containing the IP address of the client as seen by the inbound proxy. The ClientAddress command format is defined in section 2.2.3.5.12.
 
 <a id="Section_2.2.4.7"></a>
 #### 2.2.4.7 CONN/B3 RTS PDU
@@ -1754,7 +1754,7 @@ packet-beta
 
 **ReceiveWindowSize (8 bytes):** MUST be a [ReceiveWindowSize](#Section_2.2.3.5.1) command containing the size of the **ReceiveWindow** for the server IN channel. The ReceiveWindowSize command format is defined in section 2.2.3.5.1.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lowest of the [CONN/B2 RTS PDU (section 2.2.4.6)](#Section_2.2.4.6) version, the [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_2.2.4.3) version, and the server [RPC over HTTP v2](#Section_3.2) version. The format for the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lowest of the [CONN/B2 RTS PDU (section 2.2.4.6)](#Section_2.2.4.6) version, the [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_3.2.5.5.3) version, and the server [RPC over HTTP v2](#Section_2.1.2) version. The format for the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 <a id="Section_2.2.4.8"></a>
 #### 2.2.4.8 CONN/C1 RTS PDU
@@ -1771,7 +1771,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_NONE. The **NumberOfCommands** field of the RTS Header MUST be the value 3.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lowest of the [CONN/B2 RTS PDU (section 2.2.4.6)](#Section_2.2.4.6) version, the [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_2.2.4.3) version, and the server [RPC over HTTP v2](#Section_3.2) version. The format for the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lowest of the [CONN/B2 RTS PDU (section 2.2.4.6)](#Section_2.2.4.6) version, the [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_3.2.5.5.3) version, and the server [RPC over HTTP v2](#Section_2.1.2) version. The format for the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **ReceiveWindowSize (8 bytes):** MUST be a [ReceiveWindowSize](#Section_2.2.3.5.1) command containing the size of the **ReceiveWindow** for the IN channel to the [**inbound proxy**](#gt_inbound-proxy). The ReceiveWindowSize command format is defined in section 2.2.3.5.1.
 
@@ -1792,7 +1792,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_NONE. The **NumberOfCommands** field of the RTS Header MUST be the value 3.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the CONN/C1 version. The format of the [RPC over HTTP v2](#Section_3.2) protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the CONN/C1 version. The format of the [RPC over HTTP v2](#Section_2.1.2) protocol Version command is defined in section 2.2.3.5.7.
 
 **ReceiveWindowSize (8 bytes):** MUST be a [ReceiveWindowSize](#Section_2.2.3.5.1) command containing the size of the **ReceiveWindow** for the IN channel to the [**inbound proxy**](#gt_inbound-proxy). The ReceiveWindowSize command format is defined in section 2.2.3.5.1.
 
@@ -1814,7 +1814,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_RECYCLE_CHANNEL. The **NumberOfCommands** field of the RTS Header MUST be the value 4.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the client [RPC over HTTP v2](#Section_3.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the client [RPC over HTTP v2](#Section_2.1.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command for the [**virtual connection**](#gt_virtual-connection) that this IN channel belongs to. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -1840,7 +1840,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the bit-wise OR of the values "RTS_FLAG_IN_CHANNEL" and "RTS_FLAG_RECYCLE_CHANNEL". The **NumberOfCommands** field of the RTS Header MUST be the value 6.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lower of the IN_R1/A1 version and the [**inbound proxy**](#gt_inbound-proxy) version. The format of the [RPC over HTTP v2](#Section_3.2) protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command containing the lower of the IN_R1/A1 version and the [**inbound proxy**](#gt_inbound-proxy) version. The format of the [RPC over HTTP v2](#Section_2.1.2) protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command for the [**virtual connection**](#gt_virtual-connection) this IN channel belongs to. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -1870,7 +1870,7 @@ packet-beta
 
 **Destination (8 bytes):** MUST be a [Destination](#Section_2.2.3.5.14) command. The **Destination** field for the Destination command MUST be set to value FDClient as specified in section [2.2.3.3](#Section_2.2.3.3). The Destination command format is defined in section 2.2.3.5.14.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the IN_R1/A2 and the server version. The format of the [RPC over HTTP v2](#Section_3.2) protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the IN_R1/A2 and the server version. The format of the [RPC over HTTP v2](#Section_2.1.2) protocol Version command is defined in section 2.2.3.5.7.
 
 **InboundProxyReceiveWindowSize (8 bytes):** MUST be a [ReceiveWindowSize](#Section_2.2.3.5.1) command specifying the size of the **ReceiveWindow** for the successor IN channel to the [**inbound proxy**](#gt_inbound-proxy). The ReceiveWindowSize command format is defined in section 2.2.3.5.1.
 
@@ -1894,7 +1894,7 @@ packet-beta
 
 **Destination (8 bytes):** MUST be a [Destination](#Section_2.2.3.5.14) command. The **Destination** field for the Destination command MUST be set to value FDClient as specified in section [2.2.3.3](#Section_2.2.3.3). The Destination command format is defined in section 2.2.3.5.14.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the [IN_R1/A2](#Section_3.2.5.5.5) version and the server version. The format of the [RPC over HTTP v2](#Section_3.2) protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the [IN_R1/A2](#Section_2.2.4.11) version and the server version. The format of the [RPC over HTTP v2](#Section_2.1.2) protocol Version command is defined in section 2.2.3.5.7.
 
 **InboundProxyReceiveWindowSize (8 bytes):** MUST be a [ReceiveWindowSize](#Section_2.2.3.5.1) command specifying the size of the **ReceiveWindow** for the IN channel to the [**inbound proxy**](#gt_inbound-proxy). The ReceiveWindowSize command format is defined in section 2.2.3.5.1.
 
@@ -1976,7 +1976,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_RECYCLE_CHANNEL. The **NumberOfCommands** field of the RTS Header MUST be the value 4.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the client [RPC over HTTP v2](#Section_3.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the client [RPC over HTTP v2](#Section_2.1.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command that is the cookie of the [**virtual connection**](#gt_virtual-connection) to which this IN channel belongs. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -2091,7 +2091,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_RECYCLE_CHANNEL. The **NumberOfCommands** field of the RTS Header MUST be the value 5.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the client [RPC over HTTP v2](#Section_3.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the client [RPC over HTTP v2](#Section_2.1.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command that is the cookie of the [**virtual connection**](#gt_virtual-connection) that this OUT channel belongs to. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -2120,7 +2120,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the bit-wise OR of the values "RTS_FLAG_RECYCLE_CHANNEL" and "RTS_FLAG_OUT_CHANNEL". The **NumberOfCommands** field of the RTS Header MUST be the value 7.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the outbound proxy [RPC over HTTP v2](#Section_3.2) protocol version and [OUT_R1/A3](#Section_3.2.4.5.6) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the outbound proxy [RPC over HTTP v2](#Section_2.1.2) protocol version and [OUT_R1/A3](#Section_3.2.4.5.6) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command that is the cookie of the [**virtual connection**](#gt_virtual-connection) that this OUT channel belongs to. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -2151,7 +2151,7 @@ packet-beta
 
 **Destination (8 bytes):** MUST be a [Destination](#Section_2.2.3.5.14) command. The **Destination** field for the Destination command MUST be set to the value FDClient as specified in section [2.2.3.3](#Section_2.2.3.3). The Destination command format is defined in section 2.2.3.5.14.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the server [RPC over HTTP v2](#Section_3.2) protocol version and [OUT_R1/A4](#Section_2.2.4.26) version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the server [RPC over HTTP v2](#Section_2.1.2) protocol version and [OUT_R1/A4](#Section_2.2.4.26) version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **OutboundProxyConnectionTimeout (8 bytes):** MUST be a [ConnectionTimeout](#Section_3.2.1.1.6.1) command specifying the connection time-out for the OUT channel between the [**successor outbound proxy**](#gt_successor-outbound-proxy) and the client. The ConnectionTimeout command format is defined in section 2.2.3.5.3. This command is used for troubleshooting purposes only and has no protocol significance. The predecessor outbound proxy SHOULD ignore this value.
 
@@ -2172,7 +2172,7 @@ packet-beta
 
 **Destination (8 bytes):** MUST be a [Destination](#Section_2.2.3.5.14) command. The **Destination** field of the Destination command MUST be set to value FDClient as specified in section [2.2.3.3](#Section_2.2.3.3). The Destination command format is defined in section 2.2.3.5.14.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the server [RPC over HTTP v2 Protocol](#Section_3.2) version and [OUT_R1/A4](#Section_2.2.4.26) version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the lower of the server [RPC over HTTP v2 Protocol](#Section_2.1.2) version and [OUT_R1/A4](#Section_2.2.4.26) version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **OutboundProxyConnectionTimeout (8 bytes):** MUST be a [ConnectionTimeout](#Section_3.2.1.1.6.1) command specifying the connection time-out for the OUT channel between the [**successor outbound proxy**](#gt_successor-outbound-proxy) and the client. The ConnectionTimeout command format is defined in section 2.2.3.5.3. This command is useful for troubleshooting purposes only and has no protocol significance. The client SHOULD ignore this value.
 
@@ -2304,7 +2304,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_RECYCLE_CHANNEL. The **NumberOfCommands** field of the RTS Header MUST be the value 5.
 
-**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the client [RPC over HTTP v2](#Section_3.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
+**Version (8 bytes):** MUST be a [Version](#Section_2.2.3.5.7) command specifying the client [RPC over HTTP v2](#Section_2.1.2) protocol version. The format of the RPC over HTTP v2 protocol Version command is defined in section 2.2.3.5.7.
 
 **VirtualConnectionCookie (20 bytes):** MUST be a [Cookie](#Section_2.2.3.5.4) command that contains the cookie of the [**virtual connection**](#gt_virtual-connection) that this OUT channel belongs to. The Cookie command format is defined in section 2.2.3.5.4.
 
@@ -2462,7 +2462,7 @@ packet-beta
 
 **RTS Header (20 bytes):** See section [2.2.3.6.1](#Section_2.2.3.6.1). The **Flags** field of the RTS Header MUST be the value RTS_FLAG_PING. The **NumberOfCommands** field of the RTS Header MUST be the value 1.
 
-**EmptyOrPadding (variable):** MUST be an [Empty](#Section_2.2.3.5.8) command or a [Padding](#Section_2.2.3.5.9) command. This [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) MUST be exactly the same size as [OUT_R1/A11](#Section_3.2.4.5.9). Whichever of the two commands produces the desired [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) size MUST be used. If the Padding command is used, the value for the **ConformanceCount** field MUST be chosen such that PDU has a size equal to the size of OUT_R1/A11. The Empty command format is defined in section 2.2.3.5.8. The Padding command format is defined in section 2.2.3.5.9.
+**EmptyOrPadding (variable):** MUST be an [Empty](#Section_2.2.3.5.8) command or a [Padding](#Section_2.2.3.5.9) command. This [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) MUST be exactly the same size as [OUT_R1/A11](#Section_2.2.4.33). Whichever of the two commands produces the desired [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) size MUST be used. If the Padding command is used, the value for the **ConformanceCount** field MUST be chosen such that PDU has a size equal to the size of OUT_R1/A11. The Empty command format is defined in section 2.2.3.5.8. The Padding command format is defined in section 2.2.3.5.9.
 
 <a id="Section_2.2.4.46"></a>
 #### 2.2.4.46 Keep-Alive RTS PDU
@@ -2554,7 +2554,7 @@ packet-beta
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-This section is divided into two parts. The first part defines the protocol roles and processing for [RPC over HTTP v1](#Section_3.1). The second part deals with roles and processing for [RPC over HTTP v2](#Section_3.2). The next paragraph specifies how the roles are assigned.
+This section is divided into two parts. The first part defines the protocol roles and processing for [RPC over HTTP v1](#Section_3.1). The second part deals with roles and processing for [RPC over HTTP v2](#Section_2.1.2). The next paragraph specifies how the roles are assigned.
 
 A client node SHOULD be capable of using both RPC over HTTP v1 and RPC over HTTP v2 [**protocol dialects**](#gt_protocol-dialect). A client node SHOULD try to use the RPC over HTTP v2 protocol dialect first; if that fails, it SHOULD fall back to the RPC over HTTP v1 protocol dialect, unless it has knowledge obtained outside this protocol that RPC over HTTP v1 will not work. In this case, it MUST return an implementation-specific error to a higher-level protocol and not try RPC over HTTP v1.<18>
 
@@ -2619,7 +2619,7 @@ If a connection is successfully opened, the protocol MUST cancel the Connection 
 <a id="Section_3.1.1.4.2"></a>
 ##### 3.1.1.4.2 Sending a PDU
 
-When an implementation of a higher-level protocol calls an implementation of this protocol to send a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) to the server, an implementation of this protocol MUST copy the PDU as a BLOB in the message body of the [**RPC**](#gt_remote-procedure-call-rpc) connect request as specified in section [2.1.1.1.3](#Section_2.1.1.1.3) and MUST send it to the [**mixed proxy**](#gt_mixed-proxy).
+When an implementation of a higher-level protocol calls an implementation of this protocol to send a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) to the server, an implementation of this protocol MUST copy the PDU as a BLOB in the message body of the [**RPC**](#gt_remote-procedure-call-rpc) connect request as specified in section [2.1.1.1.3](#Section_2.1.2.1.7) and MUST send it to the [**mixed proxy**](#gt_mixed-proxy).
 
 <a id="Section_3.1.1.4.3"></a>
 ##### 3.1.1.4.3 Closing a Connection
@@ -2690,12 +2690,12 @@ A [**mixed proxy**](#gt_mixed-proxy) that implements the [RPC over HTTP v1](#Sec
 <a id="Section_3.1.2.5.1"></a>
 ##### 3.1.2.5.1 RPC Connect Request Received
 
-When a [**mixed proxy**](#gt_mixed-proxy) receives an [**RPC**](#gt_remote-procedure-call-rpc) connect request, it MUST retrieve the server name and server port from the [**URI**](#gt_uniform-resource-identifier-uri) of the RPC connect request as specified in section [2.2.2](#Section_2.2.2). It MUST establish a TCP connection to the server using the server name and port. It then waits for the server legacy response defined in section [2.1.1.2.1](#Section_2.1.1.2.1). The mixed proxy MUST NOT respond to [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) received from the client as specified in section [3.1.2.5.2](#Section_3.1.2.5.2) until a server legacy response is received. When a server legacy response is received, the mixed proxy MUST respond to the client with the header of an RPC connect response as specified in section [2.1.1.1.2](#Section_2.1.1.1.2). It MUST also begin processing PDUs received in the message body of the RPC connect request from the client, as specified in section [2.1.1.1.3](#Section_2.1.1.1.3), as well as PDUs coming from the server.
+When a [**mixed proxy**](#gt_mixed-proxy) receives an [**RPC**](#gt_remote-procedure-call-rpc) connect request, it MUST retrieve the server name and server port from the [**URI**](#gt_uniform-resource-identifier-uri) of the RPC connect request as specified in section [2.2.2](#Section_2.2.2). It MUST establish a TCP connection to the server using the server name and port. It then waits for the server legacy response defined in section [2.1.1.2.1](#Section_2.1.1.2.1). The mixed proxy MUST NOT respond to [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) received from the client as specified in section [3.1.2.5.2](#Section_3.1.2.5.2) until a server legacy response is received. When a server legacy response is received, the mixed proxy MUST respond to the client with the header of an RPC connect response as specified in section [2.1.1.1.2](#Section_2.1.1.1.2). It MUST also begin processing PDUs received in the message body of the RPC connect request from the client, as specified in section [2.1.1.1.3](#Section_2.1.2.1.7), as well as PDUs coming from the server.
 
 <a id="Section_3.1.2.5.2"></a>
 ##### 3.1.2.5.2 PDU Received
 
-A [**mixed proxy**](#gt_mixed-proxy) can receive a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) from the client or server. If a PDU is received from the client as defined in section [2.1.1.1.3](#Section_2.1.1.1.3), it MUST forward the PDU to the server. If a PDU is received from the server, it MUST forward it to the client as specified in section [2.1.1.1.4](#Section_2.1.1.1.4).
+A [**mixed proxy**](#gt_mixed-proxy) can receive a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) from the client or server. If a PDU is received from the client as defined in section [2.1.1.1.3](#Section_2.1.2.1.7), it MUST forward the PDU to the server. If a PDU is received from the server, it MUST forward it to the client as specified in section [2.1.1.1.4](#Section_2.1.1.1.4).
 
 <a id="Section_3.1.2.5.3"></a>
 ##### 3.1.2.5.3 Connection Close or Connection Error Encountered
@@ -2788,12 +2788,12 @@ The [**inbound proxies**](#gt_inbound-proxy) and outbound proxies are software p
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Common Details
 
-Several processing aspects are either common between all [RPC over HTTP v2](#Section_3.2) protocol roles or impact multiple roles. They are described in this section.
+Several processing aspects are either common between all [RPC over HTTP v2](#Section_2.1.2) protocol roles or impact multiple roles. They are described in this section.
 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Abstract Data Model
 
-This section specifies the elements of the abstract data model for [RPC over HTTP v2](#Section_3.2). Those elements include the relationship between the different abstractions (section [3.2.1.1.1](#Section_3.2.1.1.1)), [**receive windows**](#gt_receive-window) and flow control (section [3.2.1.1.4](#Section_3.2.1.1.4)), and connection time-out (section [3.2.1.1.6.1](#Section_3.2.1.1.6.1)).
+This section specifies the elements of the abstract data model for [RPC over HTTP v2](#Section_2.1.2). Those elements include the relationship between the different abstractions (section [3.2.1.1.1](#Section_3.2.1.1.1)), [**receive windows**](#gt_receive-window) and flow control (section [3.2.1.1.4](#Section_3.2.1.1.4)), and connection time-out (section [3.2.1.1.6.1](#Section_3.2.1.1.6.1)).
 
 <a id="Section_3.2.1.1.1"></a>
 ##### 3.2.1.1.1 Virtual Connection, Virtual Channel Hierarchy, and Protocol Variables
@@ -2996,7 +2996,7 @@ The connection timeout timer interval is controlled by the [ConnectionTimeout (
 <a id="Section_3.2.1.3"></a>
 #### 3.2.1.3 Initialization
 
-This section specifies the initialization steps that are common among all roles in the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect).
+This section specifies the initialization steps that are common among all roles in the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect).
 
 - [BytesSent (section 3.2.1.1.4)](#Section_3.2.1.1.4) is initialized to 0 bytes.
 - [Recipient BytesReceived (section 3.2.1.1.5.1.3)](#Section_3.2.1.1.5.1.3) is initialized to 0 bytes.
@@ -3020,7 +3020,7 @@ The abstract data model MUST initialize [BytesSent (section 3.2.1.1.4)](#Secti
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 Higher-Layer Triggered Events
 
-This section specifies the flow control and **ReceiveWindow** processing rules that are common among all roles in the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect).
+This section specifies the flow control and **ReceiveWindow** processing rules that are common among all roles in the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect).
 
 <a id="Section_3.2.1.4.1"></a>
 ##### 3.2.1.4.1 Flow Control and ReceiveWindow Higher-Layer Triggered Events
@@ -3051,12 +3051,12 @@ Each time an RPC PDU is dequeued, an implementation MUST do the following:
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 Message Processing Events and Sequencing Rules
 
-This section specifies flow control and receive-window processing rules, [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) forwarding rules, and protocol sequences that are common among all roles in the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect).
+This section specifies flow control and receive-window processing rules, [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) forwarding rules, and protocol sequences that are common among all roles in the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect).
 
 <a id="Section_3.2.1.5.1"></a>
 ##### 3.2.1.5.1 Flow Control and ReceiveWindow Processing
 
-This section specifies flow control (section [3.2.1.5.1.2](#Section_3.2.1.5.1.2)) and **ReceiveWindow** (section [3.2.1.5.1.1](#Section_3.2.1.5.1.1)) processing rules common among all roles in the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect).
+This section specifies flow control (section [3.2.1.5.1.2](#Section_3.2.1.5.1.2)) and **ReceiveWindow** (section [3.2.1.5.1.1](#Section_3.2.1.5.1.1)) processing rules common among all roles in the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect).
 
 <a id="Section_3.2.1.5.1.1"></a>
 ###### 3.2.1.5.1.1 Receiving RPC PDUs
@@ -3098,12 +3098,12 @@ BytesReceived_from_ack is the Bytes Received field in the Flow Control Acknowled
 <a id="Section_3.2.1.5.1.3"></a>
 ###### 3.2.1.5.1.3 ReceiveWindowSize
 
-When processing a **ReceiveWindowSize** RTS command ([2.2.3.5.1](#Section_2.2.3.5.1)), an implementation of this protocol MUST set its **ReceiveWindowSize** ADM ([3.2.1.1.5.1.1](#Section_2.2.3.5.1)) to the value of the **ReceiveWindowSize** field in this command.
+When processing a **ReceiveWindowSize** RTS command ([2.2.3.5.1](#Section_2.2.3.5.1)), an implementation of this protocol MUST set its **ReceiveWindowSize** ADM ([3.2.1.1.5.1.1](#Section_3.2.1.1.5.1)) to the value of the **ReceiveWindowSize** field in this command.
 
 <a id="Section_3.2.1.5.2"></a>
 ##### 3.2.1.5.2 PDU Forwarding
 
-The [RPC over HTTP v2](#Section_3.2) [**IN channels**](#gt_in-channel) and [**OUT channels**](#gt_out-channel) that are based on an HTTP or HTTPS transport are half duplex. This means that one party might not be able to send a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) to another party if the half-duplex channel is going in the other direction. To resolve this problem, RPC over HTTP v2 uses the concept of [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) forwarding. When RTS PDU forwarding is used, a sender MUST mark a PDU as needing forwarding by setting an RTS destination command in the PDU. An implementation of this protocol MUST NOT add a destination command to a RTS PDU that does not have a destination command already. Only RTS PDUs that already have a destination command are subject to forwarding. Once the RTS PDU is marked for forwarding, a sender acts on the fact that only the IN channel between client and [**inbound proxy**](#gt_inbound-proxy) and the OUT channel between the client and the outbound proxy are half duplex and MUST send the RTS PDU to the next hop according to the following table.
+The [RPC over HTTP v2](#Section_2.1.2) [**IN channels**](#gt_in-channel) and [**OUT channels**](#gt_out-channel) that are based on an HTTP or HTTPS transport are half duplex. This means that one party might not be able to send a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) to another party if the half-duplex channel is going in the other direction. To resolve this problem, RPC over HTTP v2 uses the concept of [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) forwarding. When RTS PDU forwarding is used, a sender MUST mark a PDU as needing forwarding by setting an RTS destination command in the PDU. An implementation of this protocol MUST NOT add a destination command to a RTS PDU that does not have a destination command already. Only RTS PDUs that already have a destination command are subject to forwarding. Once the RTS PDU is marked for forwarding, a sender acts on the fact that only the IN channel between client and [**inbound proxy**](#gt_inbound-proxy) and the OUT channel between the client and the outbound proxy are half duplex and MUST send the RTS PDU to the next hop according to the following table.
 
 | Sender | Destination | Next hop |
 | --- | --- | --- |
@@ -3152,14 +3152,14 @@ The references for the PDUs used in this protocol sequence are as follows.
 | OUT channel request | [OUT Channel Request (section 2.1.2.1.2)](#Section_2.1.2.1.2) |
 | OUT channel response | [Out Channel Response (section 2.1.2.1.4)](#Section_2.1.2.1.4) |
 | Legacy server response | [Legacy Server Response (section 2.1.2.2.1)](#Section_2.1.2.2.1) |
-| A1 | [CONN/A1 RTS PDU (section 2.2.4.2)](#Section_2.2.4.2) |
-| A2 | [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_2.2.4.3) |
-| A3 | [CONN/A3 RTS PDU (section 2.2.4.4)](#Section_2.2.4.4) |
-| B1 | [CONN/B1 RTS PDU (section 2.2.4.5)](#Section_3.2.3.5.3) |
+| A1 | [CONN/A1 RTS PDU (section 2.2.4.2)](#Section_3.2.4.5.3) |
+| A2 | [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_3.2.5.5.3) |
+| A3 | [CONN/A3 RTS PDU (section 2.2.4.4)](#Section_3.2.2.5.3) |
+| B1 | [CONN/B1 RTS PDU (section 2.2.4.5)](#Section_2.2.4.5) |
 | B2 | [CONN/B2 RTS PDU (section 2.2.4.6)](#Section_2.2.4.6) |
-| B3 | [CONN/B3 RTS PDU (section 2.2.4.7)](#Section_2.2.4.7) |
+| B3 | [CONN/B3 RTS PDU (section 2.2.4.7)](#Section_3.2.3.5.4) |
 | C1 | [CONN/C1 RTS PDU (section 2.2.4.8)](#Section_3.2.4.5.4) |
-| C2 | [CONN/C2 RTS PDU (section 2.2.4.9)](#Section_2.2.4.9) |
+| C2 | [CONN/C2 RTS PDU (section 2.2.4.9)](#Section_3.2.2.5.4) |
 
 The processing rules for this protocol sequence are specified in sections [3.2.2](#Section_3.2.2) through [3.2.5](#Section_3.2.5) of this specification.
 
@@ -3188,13 +3188,13 @@ The references for the PDUs used in this protocol sequence are shown in the foll
 | IN channel request | [IN Channel Request (section 2.1.2.1.1)](#Section_2.1.2.1.1) |
 | Legacy server response | [Legacy Server Response (section 2.1.2.2.1)](#Section_2.1.2.2.1) |
 | A1 | [IN_R1/A1 RTS PDU (section 2.2.4.10)](#Section_2.2.4.10) |
-| A2 | [IN_R1/A2 RTS PDU (section 2.2.4.11)](#Section_3.2.5.5.5) |
+| A2 | [IN_R1/A2 RTS PDU (section 2.2.4.11)](#Section_2.2.4.11) |
 | A3 | [IN_R1/A3 RTS PDU (section 2.2.4.12)](#Section_2.2.4.12) |
 | A4 | [IN_R1/A4 RTS PDU (section 2.2.4.13)](#Section_2.2.4.13) |
-| A5 | [IN_R1/A5 RTS PDU (section 2.2.4.14)](#Section_2.2.4.14) |
-| A6 | [IN_R1/A6 RTS PDU (section 2.2.4.15)](#Section_3.2.5.5.6) |
-| B1 | [IN_R1/B1 RTS PDU (section 2.2.4.16)](#Section_3.2.5.5.7) |
-| B2 | [IN_R1/B2 RTS PDU (section 2.2.4.17)](#Section_2.2.4.17) |
+| A5 | [IN_R1/A5 RTS PDU (section 2.2.4.14)](#Section_3.2.3.5.6) |
+| A6 | [IN_R1/A6 RTS PDU (section 2.2.4.15)](#Section_2.2.4.15) |
+| B1 | [IN_R1/B1 RTS PDU (section 2.2.4.16)](#Section_2.2.4.16) |
+| B2 | [IN_R1/B2 RTS PDU (section 2.2.4.17)](#Section_3.2.3.5.7) |
 
 The processing rules for this protocol sequence are specified in sections [3.2.2](#Section_3.2.2) through [3.2.5](#Section_3.2.5) of this specification.
 
@@ -3217,10 +3217,10 @@ The references for the PDUs used in this protocol sequence are as follows.
 | --- | --- |
 | IN channel request | [IN Channel Request (section 2.1.2.1.1)](#Section_2.1.2.1.1) |
 | A1 | [IN_R2/A1 RTS PDU (section 2.2.4.18)](#Section_2.2.4.18) |
-| A2 | [IN_R2/A2 RTS PDU (section 2.2.4.19)](#Section_3.2.5.5.8) |
+| A2 | [IN_R2/A2 RTS PDU (section 2.2.4.19)](#Section_2.2.4.19) |
 | A3 | [IN_R2/A3 RTS PDU (section 2.2.4.20)](#Section_2.2.4.20) |
 | A4 | [IN_R2/A4 RTS PDU (section 2.2.4.21)](#Section_2.2.4.21) |
-| A5 | [IN_R2/A5 RTS PDU (section 2.2.4.22)](#Section_3.2.3.5.8) |
+| A5 | [IN_R2/A5 RTS PDU (section 2.2.4.22)](#Section_2.2.4.22) |
 
 The processing rules for this protocol sequence are specified in sections [3.2.2](#Section_3.2.2) through [3.2.5](#Section_3.2.5) of this specification.
 
@@ -3251,10 +3251,10 @@ The references for the PDUs used in this protocol sequence are as follows.
 | A5 | [OUT_R1/A5 RTS PDU (section 2.2.4.27)](#Section_2.2.4.27) |
 | A6 | [OUT_R1/A6 RTS PDU (section 2.2.4.28)](#Section_2.2.4.28) |
 | A7 | [OUT_R1/A7 RTS PDU (section 2.2.4.29)](#Section_2.2.4.29) |
-| A8 | [OUT_R1/A8 RTS PDU (section 2.2.4.30)](#Section_3.2.5.5.10) |
-| A9 | [OUT_R1/A9 RTS PDU (section 2.2.4.31)](#Section_2.2.4.31) |
-| A10 | [OUT_R1/A10 RTS PDU (section 2.2.4.32)](#Section_3.2.2.5.8) |
-| A11 | [OUT_R1/A11 RTS PDU (section 2.2.4.33)](#Section_3.2.4.5.9) |
+| A8 | [OUT_R1/A8 RTS PDU (section 2.2.4.30)](#Section_2.2.4.30) |
+| A9 | [OUT_R1/A9 RTS PDU (section 2.2.4.31)](#Section_3.2.4.5.8) |
+| A10 | [OUT_R1/A10 RTS PDU (section 2.2.4.32)](#Section_2.2.4.32) |
+| A11 | [OUT_R1/A11 RTS PDU (section 2.2.4.33)](#Section_2.2.4.33) |
 
 The processing rules for this protocol sequence are specified in sections [3.2.2](#Section_3.2.2) through [3.2.5](#Section_3.2.5) of this specification.
 
@@ -3263,7 +3263,7 @@ The processing rules for this protocol sequence are specified in sections [3.2.2
 <a id="Section_3.2.1.5.3.5"></a>
 ###### 3.2.1.5.3.5 OUT Channel Recycling 2
 
-The OUT channel recycling 2 protocol sequence recycles a [**virtual OUT channel**](#gt_virtual-out-channel). The name of this sequence is OUT_R2. This protocol sequence is very similar to protocol sequence OUT_R1. The two start identically, and while processing [OUT_R1/A3 RTS PDU](#Section_3.2.4.5.6) they diverge based on dynamic decisions made by the outbound proxy as specified in section [3.2.4.5.6](#Section_3.2.4.5.6). It has two [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) groups.
+The OUT channel recycling 2 protocol sequence recycles a [**virtual OUT channel**](#gt_virtual-out-channel). The name of this sequence is OUT_R2. This protocol sequence is very similar to protocol sequence OUT_R1. The two start identically, and while processing [OUT_R1/A3 RTS PDU](#Section_3.2.4.5.6) they diverge based on dynamic decisions made by the outbound proxy as specified in section [3.2.4.5.6](#Section_3.2.4.5.6.2). It has two [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) groups.
 
 | Group name | Meaning |
 | --- | --- |
@@ -3287,11 +3287,11 @@ The references for the PDUs used in this protocol sequence are as follows.
 | A3 | [OUT_R2/A3 RTS PDU (section 2.2.4.36)](#Section_2.2.4.36) |
 | A4 | [OUT_R2/A4 RTS PDU (section 2.2.4.37)](#Section_3.2.5.5.11) |
 | A5 | [OUT_R2/A5 RTS PDU (section 2.2.4.38)](#Section_2.2.4.38) |
-| A6 | [OUT_R2/A6 RTS PDU (section 2.2.4.39)](#Section_2.2.4.39) |
+| A6 | [OUT_R2/A6 RTS PDU (section 2.2.4.39)](#Section_3.2.2.5.9) |
 | A7 | [OUT_R2/A7 RTS PDU (section 2.2.4.40)](#Section_2.2.4.40) |
-| A8 | [OUT_R2/A8 RTS PDU (section 2.2.4.41)](#Section_2.2.4.41) |
-| B1 | [OUT_R2/B1 RTS PDU (section 2.2.4.42)](#Section_2.2.4.42) |
-| B3 | [OUT_R2/B3 RTS PDU (section 2.2.4.44)](#Section_3.2.2.5.10) |
+| A8 | [OUT_R2/A8 RTS PDU (section 2.2.4.41)](#Section_3.2.5.5.12) |
+| B1 | [OUT_R2/B1 RTS PDU (section 2.2.4.42)](#Section_3.2.4.5.10) |
+| B3 | [OUT_R2/B3 RTS PDU (section 2.2.4.44)](#Section_2.2.4.44) |
 | C1 | [OUT_R2/C1 RTS PDU (section 2.2.4.45)](#Section_2.2.4.45) |
 
 The processing rules for this protocol sequence are specified in sections [3.2.2](#Section_3.2.2) through [3.2.5](#Section_3.2.5) of this specification.
@@ -3311,7 +3311,7 @@ None.
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Client Details
 
-This section defines the protocol details for the client role in the [RPC over HTTP v2](#Section_3.2) [**protocol dialects**](#gt_protocol-dialect).
+This section defines the protocol details for the client role in the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialects**](#gt_protocol-dialect).
 
 An implementation of this protocol on the client MUST conform to the state machines given in this section. The first state machine is the overall client state machine for the [**virtual connection**](#gt_virtual-connection).
 
@@ -3405,7 +3405,7 @@ Implementations of this protocol MUST maintain a protocol variable that contains
 <a id="Section_3.2.2.2"></a>
 #### 3.2.2.2 Timers
 
-An implementation of the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect) on the client SHOULD implement the following timers:
+An implementation of the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect) on the client SHOULD implement the following timers:
 
 - Connection time-out timer (section [3.2.2.2.1](#Section_3.2.2.2.1))
 - Keep-alive timer (section [3.2.2.2.2](#Section_3.2.2.2.2))
@@ -3413,7 +3413,7 @@ An implementation of the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**]
 <a id="Section_3.2.2.2.1"></a>
 ##### 3.2.2.2.1 Connection Time-Out Timer
 
-The connection time-out timer is a recurring timer set to an interval equal to the value of the **ConnectionTimeout** field value from [CONN/A3 RTS PDU](#Section_2.2.4.4), [IN_R1/A4 RTS PDU](#Section_2.2.4.13), or [IN_R2/A4 RTS PDU](#Section_2.2.4.21) as specified in section [2.2.4](#Section_2.2.4). A client implementation MAY choose a lower value for this timer.<28>
+The connection time-out timer is a recurring timer set to an interval equal to the value of the **ConnectionTimeout** field value from [CONN/A3 RTS PDU](#Section_3.2.2.5.3), [IN_R1/A4 RTS PDU](#Section_2.2.4.13), or [IN_R2/A4 RTS PDU](#Section_2.2.4.21) as specified in section [2.2.4](#Section_2.2.4). A client implementation MAY choose a lower value for this timer.<28>
 
 <a id="Section_3.2.2.2.2"></a>
 ##### 3.2.2.2.2 Keep-Alive Timer
@@ -3445,7 +3445,7 @@ The **CurrentKeepAliveInterval** is set to 0. The CurrentKeepAliveTimeInterval c
 <a id="Section_3.2.2.4"></a>
 #### 3.2.2.4 Higher-Layer Triggered Events
 
-This section defines the higher-layer triggered events for the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect). These events include opening a connection (section [3.2.2.4.1](#Section_3.2.2.4.1.2)), sending a PDU (section [3.2.2.4.2](#Section_3.2.2.4.2)), closing a connection (section [3.2.2.4.3](#Section_3.2.2.4.3)), and setting the keep-alive interval protocol variable (section [3.2.2.4.4](#Section_3.2.2.4.4)).
+This section defines the higher-layer triggered events for the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect). These events include opening a connection (section [3.2.2.4.1](#Section_3.2.2.4.1.1)), sending a PDU (section [3.2.2.4.2](#Section_3.2.2.4.2)), closing a connection (section [3.2.2.4.3](#Section_3.2.2.4.3)), and setting the keep-alive interval protocol variable (section [3.2.2.4.4](#Section_3.2.2.4.4)).
 
 <a id="Section_3.2.2.4.1"></a>
 ##### 3.2.2.4.1 Opening a Connection
@@ -3477,8 +3477,8 @@ When opening a virtual connection to the server, an implementation of this proto
 
 - Send an IN channel request as specified in section [2.1.2.1.1](#Section_2.1.2.1.1), containing the connection timeout, ResourceType UUID, and Session UUID values, if any, supplied by the higher-layer protocol or application.
 - Send an OUT channel request as specified in section [2.1.2.1.2](#Section_2.1.2.1.2).
-- Send a CONN/A1 RTS PDU as specified in section [2.2.4.2](#Section_2.2.4.2)
-- Send a CONN/B1 RTS PDU as specified in section [2.2.4.5](#Section_3.2.3.5.3)
+- Send a CONN/A1 RTS PDU as specified in section [2.2.4.2](#Section_3.2.4.5.3)
+- Send a CONN/B1 RTS PDU as specified in section [2.2.4.5](#Section_2.2.4.5)
 - Wait for the connection establishment protocol sequence as specified in [3.2.1.5.3.1](#Section_3.2.1.5.3.1) to complete
 An implementation MAY execute steps 1 and 2 in parallel. An implementation SHOULD execute steps 3 and 4 in parallel. An implementation MUST execute step 3 after completion of step 1 and execute step 4 after completion of step 2.
 
@@ -3549,7 +3549,7 @@ If the status code is not set to 200, the client MUST interpret this as a failur
 <a id="Section_3.2.2.5.3"></a>
 ##### 3.2.2.5.3 CONN/A3 RTS PDU
 
-A client implementation MUST NOT accept the [CONN/A3 RTS PDU](#Section_2.2.4.4) in any state other than Wait_A3W. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the client MUST consider the [**virtual connection**](#gt_virtual-connection) opening a failure and indicate this to higher layers in an implementation-specific way.
+A client implementation MUST NOT accept the [CONN/A3 RTS PDU](#Section_3.2.2.5.3) in any state other than Wait_A3W. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the client MUST consider the [**virtual connection**](#gt_virtual-connection) opening a failure and indicate this to higher layers in an implementation-specific way.
 
 - Set the ConnectionTimeout in the Ping Originator of the Client's IN Channel to the ConnectionTimeout in the CONN/A3 PDU.
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Wait_A3W state, the client MUST transition the state machine to Wait_C2 state and wait for network events.
@@ -3557,7 +3557,7 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in W
 <a id="Section_3.2.2.5.4"></a>
 ##### 3.2.2.5.4 CONN/C2 RTS PDU
 
-A client implementation MUST NOT accept the [CONN/C2 RTS PDU](#Section_2.2.4.9) in any state other than Wait_C2. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the client MUST consider the [**virtual connection**](#gt_virtual-connection) opening a failure and indicate this to higher layers in an implementation-specific way.
+A client implementation MUST NOT accept the [CONN/C2 RTS PDU](#Section_3.2.2.5.4) in any state other than Wait_C2. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the client MUST consider the [**virtual connection**](#gt_virtual-connection) opening a failure and indicate this to higher layers in an implementation-specific way.
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Wait_C2 state, the client implementation MUST do the following:
 
@@ -3581,7 +3581,7 @@ If this RTS PDU is received in Opened_A4W, the client implementation MUST perfor
 - Set the ConnectionTimeout of the Ping Originator in the Client IN Channel to the value of the **InboundProxyConnectionTimeout** field in the IN_R1/A4 PDU.
 - Set the PeerReceiveWindow in the Client IN Channel SendingChannel to the value of the **InboundProxyReceiveWindowSize** field in the IN_R1/A4 PDU.
 - Wait until all RTS and [**RPC PDUs**](#gt_remote-procedure-call-rpc) on the predecessor IN channel are sent.
-- Send [IN_R1/A5 RTS PDU](#Section_2.2.4.14) on the predecessor IN channel. Set the value of SuccessorInChannelCookie in the IN R1/A5 RTS PDU to the value of DefaultInChannelCookie in the Client Virtual Connection.
+- Send [IN_R1/A5 RTS PDU](#Section_3.2.3.5.6) on the predecessor IN channel. Set the value of SuccessorInChannelCookie in the IN R1/A5 RTS PDU to the value of DefaultInChannelCookie in the Client Virtual Connection.
 - Unplug the successor IN channel.
 <a id="Section_3.2.2.5.6"></a>
 ##### 3.2.2.5.6 OUT_R1/A2 and OUT_R2/A2 RTS PDUs
@@ -3612,19 +3612,19 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 <a id="Section_3.2.2.5.8"></a>
 ##### 3.2.2.5.8 OUT_R1/A10 RTS PDU
 
-A client implementation MUST NOT accept the [OUT_R1/A10 RTS PDU](#Section_3.2.2.5.8) in any state of the [**virtual OUT channel**](#gt_virtual-out-channel) other than Opened_A10W. If it is received in any other state, the client MUST treat it as a protocol error as specified in section [3.2.2.5.11](#Section_3.2.2.5.11).
+A client implementation MUST NOT accept the [OUT_R1/A10 RTS PDU](#Section_2.2.4.32) in any state of the [**virtual OUT channel**](#gt_virtual-out-channel) other than Opened_A10W. If it is received in any other state, the client MUST treat it as a protocol error as specified in section [3.2.2.5.11](#Section_3.2.2.5.11).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Opened_A10W, the client implementation MUST perform the following actions in the sequence given:
 
 - Set the successor OUT channel as the default OUT channel.
-- Send [OUT_R1/A11 RTS PDU](#Section_3.2.4.5.9) on the successor OUT channel.
+- Send [OUT_R1/A11 RTS PDU](#Section_2.2.4.33) on the successor OUT channel.
 - Transition the virtual OUT channel state machine to opened state.
 - Implementations MUST ignore any subsequent bytes received on the predecessor channel.
 - Close the predecessor OUT channel.
 <a id="Section_3.2.2.5.9"></a>
 ##### 3.2.2.5.9 OUT_R2/A6 RTS PDU
 
-A client implementation MUST NOT accept the [OUT_R2/A6 RTS PDU](#Section_2.2.4.39) in any state of the [**virtual OUT channel**](#gt_virtual-out-channel) other than Opened_A6W. If it is received in any other state, the client MUST treat it as a protocol error as specified in section [3.2.2.5.11](#Section_3.2.2.5.11).
+A client implementation MUST NOT accept the [OUT_R2/A6 RTS PDU](#Section_3.2.2.5.9) in any state of the [**virtual OUT channel**](#gt_virtual-out-channel) other than Opened_A6W. If it is received in any other state, the client MUST treat it as a protocol error as specified in section [3.2.2.5.11](#Section_3.2.2.5.11).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Opened_A6W, the client implementation MUST perform the following actions in the sequence given:
 
@@ -3634,7 +3634,7 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 <a id="Section_3.2.2.5.10"></a>
 ##### 3.2.2.5.10 OUT_R2/B3 RTS PDU
 
-A client implementation MUST NOT accept the [OUT_R2/B3 RTS PDU](#Section_3.2.2.5.10) in any state of the [**virtual OUT channel**](#gt_virtual-out-channel) other than B3W. If it is received in any other state, the client MUST treat it as a protocol error as specified in section [3.2.2.5.11](#Section_3.2.2.5.11).
+A client implementation MUST NOT accept the [OUT_R2/B3 RTS PDU](#Section_2.2.4.44) in any state of the [**virtual OUT channel**](#gt_virtual-out-channel) other than B3W. If it is received in any other state, the client MUST treat it as a protocol error as specified in section [3.2.2.5.11](#Section_3.2.2.5.11).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in B3W, the client implementation MUST perform the following actions in the sequence given:
 
@@ -3685,7 +3685,7 @@ An implementation of this protocol MUST start IN channel recycling by sending ou
 <a id="Section_3.2.2.6"></a>
 #### 3.2.2.6 Timer Events
 
-An implementation of an [RPC over HTTP v2](#Section_3.2) client SHOULD implement the following timers:
+An implementation of an [RPC over HTTP v2](#Section_2.1.2) client SHOULD implement the following timers:
 
 - Connection Time-Out Timer Expiry (section [3.2.2.6.1](#Section_3.2.2.6.1))
 - Keep-Alive Timer Expiry (section [3.2.2.6.2](#Section_3.2.2.6.2))
@@ -3774,12 +3774,12 @@ During [**channel recycling**](#gt_channel-recycling), an [**inbound proxy**](#g
 <a id="Section_3.2.3.2"></a>
 #### 3.2.3.2 Timers
 
-An implementation of the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect) on the [**inbound proxy**](#gt_inbound-proxy) SHOULD implement the keep-alive timer as defined in section [3.2.3.2.1](#Section_3.2.3.2.1).
+An implementation of the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect) on the [**inbound proxy**](#gt_inbound-proxy) SHOULD implement the keep-alive timer as defined in section [3.2.3.2.1](#Section_3.2.3.2.1).
 
 <a id="Section_3.2.3.2.1"></a>
 ##### 3.2.3.2.1 Keep-Alive Timer
 
-The recurring keep-alive timer MUST be first set when an IN channel from the [**inbound proxy**](#gt_inbound-proxy) to the server is opened. The interval MUST be equal to the keep-alive interval protocol variable that is set through network events. This timer is set in the [RPC over HTTP v2](#Section_3.2) protocol layer but is implemented by the TCP implementation on the inbound proxy, and its expiry shows up as a connection error on the IN channel to the server.
+The recurring keep-alive timer MUST be first set when an IN channel from the [**inbound proxy**](#gt_inbound-proxy) to the server is opened. The interval MUST be equal to the keep-alive interval protocol variable that is set through network events. This timer is set in the [RPC over HTTP v2](#Section_2.1.2) protocol layer but is implemented by the TCP implementation on the inbound proxy, and its expiry shows up as a connection error on the IN channel to the server.
 
 <a id="Section_3.2.3.3"></a>
 #### 3.2.3.3 Initialization
@@ -3835,7 +3835,7 @@ If the [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is received fro
 <a id="Section_3.2.3.5.3"></a>
 ##### 3.2.3.5.3 CONN/B1 RTS PDU
 
-An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [CONN/B1 RTS PDU](#Section_3.2.3.5.3) in any state other than Open_Start. If it is received in any other state, the inbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as defined in section [3.2.3.5.10](#Section_3.2.3.5.10).
+An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [CONN/B1 RTS PDU](#Section_2.2.4.5) in any state other than Open_Start. If it is received in any other state, the inbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as defined in section [3.2.3.5.10](#Section_3.2.3.5.10).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Open_Start state, the inbound proxy implementation MUST perform the following actions in the sequence given:
 
@@ -3856,7 +3856,7 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 <a id="Section_3.2.3.5.4"></a>
 ##### 3.2.3.5.4 CONN/B3 RTS PDU
 
-An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [CONN/B3 RTS PDU](#Section_2.2.4.7) in any state other than B3W. If it is received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as a protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
+An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [CONN/B3 RTS PDU](#Section_3.2.3.5.4) in any state other than B3W. If it is received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as a protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in B3W state, the inbound proxy implementation MUST perform the following actions in the sequence given:
 
@@ -3891,8 +3891,8 @@ If the [**virtual connection**](#gt_virtual-connection) cookie is not found in t
 - The [**inbound proxy**](#gt_inbound-proxy) MUST conform to IN_R1 protocol sequence.
 - Establish a TCP connection to the server using the server name and port from the IN channel request, as specified in section [2.2.2](#Section_2.2.2).
 - Add the virtual connection cookie to the virtual connection cookie table.
-- Send [IN_R1/A2 RTS PDU](#Section_3.2.5.5.5), as specified in section 2.2.4.11, to the server.
-The IN_R1/A2 RTS PDU **InboundProxyReceiveWindowSize** and **InboundProxyConnectionTimeout** fields come from the IN channel protocol variables [ReceiveWindowSize (section 3.2.1.1.5.1.1)](#Section_2.2.3.5.1) and [ConnectionTimeout (section 3.2.1.1.6.1)](#Section_3.2.1.1.6.1), respectively.
+- Send [IN_R1/A2 RTS PDU](#Section_2.2.4.11), as specified in section 2.2.4.11, to the server.
+The IN_R1/A2 RTS PDU **InboundProxyReceiveWindowSize** and **InboundProxyConnectionTimeout** fields come from the IN channel protocol variables [ReceiveWindowSize (section 3.2.1.1.5.1.1)](#Section_3.2.1.1.5.1) and [ConnectionTimeout (section 3.2.1.1.6.1)](#Section_3.2.1.1.6.1), respectively.
 
 - Set the value of ProtocolVersion in the IN_R1/A2 RTS PDU to the value of ProtocolVersion from the inbound proxy Virtual Connection.
 - Set the value of NonDefaultInChannelCookie in the inbound proxy Virtual Connection to the value of PredecessorChannelCookie from the IN_R1/A1 PDU.
@@ -3902,19 +3902,19 @@ The IN_R1/A2 RTS PDU **InboundProxyReceiveWindowSize** and **InboundProxyConnect
 <a id="Section_3.2.3.5.6"></a>
 ##### 3.2.3.5.6 IN_R1/A5 RTS PDU
 
-An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [IN_R1/A5 RTS PDU](#Section_2.2.4.14) in any state other than opened. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as a protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
+An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [IN_R1/A5 RTS PDU](#Section_3.2.3.5.6) in any state other than opened. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as a protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in opened state, the inbound proxy implementation MUST perform the following actions in the sequence given:
 
-- Send [IN_R1/A6 RTS PDU](#Section_3.2.5.5.6) to the server. The IN_R1/A6 PDU is initialized by using the elements of the IN_R1/A5 RTS PDU.
+- Send [IN_R1/A6 RTS PDU](#Section_2.2.4.15) to the server. The IN_R1/A6 PDU is initialized by using the elements of the IN_R1/A5 RTS PDU.
 - Send RPC PDUs queued due to flow control, if it has any, to the server as specified in section [3.2.1.4.1.3](#Section_3.2.1.4.1.3).
-- Send [IN_R1/B1 RTS PDU](#Section_3.2.5.5.7) to the server.
+- Send [IN_R1/B1 RTS PDU](#Section_2.2.4.16) to the server.
 - Close the connection to the client and to the server.
 - Transition to the finished state.
 <a id="Section_3.2.3.5.7"></a>
 ##### 3.2.3.5.7 IN_R1/B2 RTS PDU
 
-An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [IN_R1/B2 RTS PDU](#Section_2.2.4.17) in any state other than Wait_B2. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as a protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
+An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [IN_R1/B2 RTS PDU](#Section_3.2.3.5.7) in any state other than Wait_B2. If received in any other state, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as a protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Wait_B2 state, the inbound proxy implementation MUST perform the following actions in the sequence given:
 
@@ -3924,7 +3924,7 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in W
 <a id="Section_3.2.3.5.8"></a>
 ##### 3.2.3.5.8 IN_R2/A5 RTS PDU
 
-An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [IN_R2/A5 RTS PDU](#Section_3.2.3.5.8) in any state other than Opened_A5W, and it MUST NOT accept this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) unless it is sent on the predecessor IN channel from the client to the inbound proxy. If either of these conditions is not met, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
+An [**inbound proxy**](#gt_inbound-proxy) implementation MUST NOT accept the [IN_R2/A5 RTS PDU](#Section_2.2.4.22) in any state other than Opened_A5W, and it MUST NOT accept this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) unless it is sent on the predecessor IN channel from the client to the inbound proxy. If either of these conditions is not met, this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is a protocol error and the inbound proxy MUST treat it as protocol error as specified in section [3.2.3.5.10](#Section_3.2.3.5.10).
 
 If this RTS PDU is received in Opened_A5W state, the inbound proxy implementation MUST perform the following actions in the sequence given:
 
@@ -3984,7 +3984,7 @@ This section gives details specific to an implementation of an outbound proxy. T
 
 Figure 28: Outbound proxy state machine
 
-The outbound proxy state machine is used when the outbound proxy is processing messages and [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) coming from the network. When the state machine transitions to "Use Matching Channel State Machine", this means the state machine execution for this state machine stops and the current event (OUT_R1/A3 with Cookie Match) is interpreted as OUT_R2/A3 event for the state machine of the matching IN channel as specified in section [3.2.4.5.6](#Section_3.2.4.5.6).
+The outbound proxy state machine is used when the outbound proxy is processing messages and [**PDUs**](#gt_request-to-send-rts-protocol-data-unit-pdu) coming from the network. When the state machine transitions to "Use Matching Channel State Machine", this means the state machine execution for this state machine stops and the current event (OUT_R1/A3 with Cookie Match) is interpreted as OUT_R2/A3 event for the state machine of the matching IN channel as specified in section [3.2.4.5.6](#Section_3.2.4.5.6.2).
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Abstract Data Model
@@ -4013,7 +4013,7 @@ Implementations of this protocol MAY maintain a protocol variable, called Sessio
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Timers
 
-An implementation of the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect) on the outbound proxy SHOULD implement the connection time-out timer defined in section [3.2.1.2.2](#Section_3.2.1.2.2).
+An implementation of the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect) on the outbound proxy SHOULD implement the connection time-out timer defined in section [3.2.1.2.2](#Section_3.2.1.2.2).
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Initialization
@@ -4060,17 +4060,17 @@ When an [**RPC over HTTP v2 proxy**](#gt_rpc-over-http-proxy) receives the RPC O
 
 An [**RPC PDU**](#gt_rpc-pdu) MUST be received from the server only and MUST NOT be received from the client. If the RPC PDU is received on an OUT channel from the client, the outbound proxy MUST close the OUT channel to the client and the OUT channel to the server for the [**virtual OUT channel**](#gt_virtual-out-channel) to which the OUT channel to the client belongs.
 
-If the [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is received from the server on a given connection, an implementation of this protocol MUST find the default OUT channel that belongs to the same [**virtual connection**](#gt_virtual-connection) as the connection on which the PDU from the server was received. Once the OUT channel is found, an implementation of this protocol MUST copy the PDU as a BLOB in the message body of this OUT channel request as defined in section [2.1.2.1.2](#Section_2.1.2.1.2) and send the PDU subject to flow control requirements as specified in section [3.2.1.5.1](#Section_3.2.1.5.1).
+If the [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) is received from the server on a given connection, an implementation of this protocol MUST find the default OUT channel that belongs to the same [**virtual connection**](#gt_virtual-connection) as the connection on which the PDU from the server was received. Once the OUT channel is found, an implementation of this protocol MUST copy the PDU as a BLOB in the message body of this OUT channel request as defined in section [2.1.2.1.2](#Section_2.1.2.1.2) and send the PDU subject to flow control requirements as specified in section [3.2.1.5.1](#Section_3.2.1.5.1.1).
 
 <a id="Section_3.2.4.5.3"></a>
 ##### 3.2.4.5.3 CONN/A1 RTS PDU
 
-An outbound proxy implementation MUST NOT accept the [CONN/A1 RTS PDU](#Section_2.2.4.2) in any state other than Open_Start. If it is received in any other state, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
+An outbound proxy implementation MUST NOT accept the [CONN/A1 RTS PDU](#Section_3.2.4.5.3) in any state other than Open_Start. If it is received in any other state, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Open_Start state, the outbound proxy implementation MUST perform the following actions in the sequence given:
 
 - Establish a TCP connection to the server using the server name and port from the OUT channel request as specified in section [2.2.2](#Section_2.2.2).
-- Send [CONN/A2 RTS PDU](#Section_2.2.4.3) to the server, setting the **ChannelLifetime** field to the value of the ChannelLifetime protocol variable of the Virtual OUT Channel.
+- Send [CONN/A2 RTS PDU](#Section_3.2.5.5.3) to the server, setting the **ChannelLifetime** field to the value of the ChannelLifetime protocol variable of the Virtual OUT Channel.
 - Set the value of OutChannelCookie in the CONN/A2 RTS PDU to the value of DefaultOutChannelCookie from the outbound proxy [**Virtual Connection**](#gt_virtual-connection).
 - Set the value of ReceiveWindowSize in the CONN/A2 RTS PDU to the value of ReceiveWindow from the outbound proxy Virtual Connection.
 - Set the value of ProtocolVersion in the CONN/A2 RTS PDU to the value of ProtocolVersion from the outbound proxy Virtual Connection.
@@ -4082,9 +4082,9 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 - Content-Length: Outbound proxies MUST set this field to an implementation-specific value in the inclusive range of 128 kilobytes to 2 gigabytes.<45>
 In failure case, the outbound proxy MUST use the same processing rules as the [**inbound proxy**](#gt_inbound-proxy) as defined in section [3.2.3.5.11](#Section_3.2.3.5.11) and skip the rest of the processing in this section.
 
-- Send [CONN/A3 RTS PDU](#Section_2.2.4.4) on the OUT channel to the client. Set the value of ConnectionTimeout in the CONN/A3 RTS PDU to the value of ConnectionTimeout from the outbound proxy Virtual Connection.
+- Send [CONN/A3 RTS PDU](#Section_3.2.2.5.3) on the OUT channel to the client. Set the value of ConnectionTimeout in the CONN/A3 RTS PDU to the value of ConnectionTimeout from the outbound proxy Virtual Connection.
 - Add the virtual connection cookie to the virtual connection cookie table.
-- The ReceiveWindowSize from this PDU MUST be used to set the **ReceiveWindowSize** ADM from section [3.2.1.1.5.1.1](#Section_2.2.3.5.1).
+- The ReceiveWindowSize from this PDU MUST be used to set the **ReceiveWindowSize** ADM from section [3.2.1.1.5.1.1](#Section_3.2.1.1.5.1).
 - Set the value of DefaultOutChannelCookie in the outbound proxy Virtual Connection to the value of OutChannelCookie in the CONN/A1 RTS PDU.
 - Transition the state to C1W and wait for further network events.
 <a id="Section_3.2.4.5.4"></a>
@@ -4094,7 +4094,7 @@ An outbound proxy implementation MUST NOT accept the [CONN/C1 RTS PDU](#Section_
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in C1W state, the outbound proxy implementation MUST perform the following actions in the sequence given:
 
-- Send [CONN/C2 RTS PDU](#Section_2.2.4.9) on the OUT channel to the client. The CONN/C2 RTS PDU is initialized using the elements of the CONN/C1 RTS PDU.
+- Send [CONN/C2 RTS PDU](#Section_3.2.2.5.4) on the OUT channel to the client. The CONN/C2 RTS PDU is initialized using the elements of the CONN/C1 RTS PDU.
 - Set the value of ProtocolVersion in the CONN/C2 RTS PDU to the value of ProtocolVersion in the outbound proxy [**Virtual Connection**](#gt_virtual-connection).
 - Set the value of ReceiveWindowSize in the CONN/C2 RTS PDU to the value of ReceiveWindowSize in the Outbound Proxy In Channel.
 - Set the value of ConnectionTimeout in the CONN/C2 RTS PDU to the value of ConnectionTimeout in the Outbound Proxy Virtual Connection.
@@ -4155,18 +4155,18 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in o
 <a id="Section_3.2.4.5.8"></a>
 ##### 3.2.4.5.8 OUT_R1/A9 RTS PDU
 
-An outbound proxy implementation MUST NOT accept the [OUT_R1/A9 RTS PDU](#Section_2.2.4.31) in any state other than opened. If it is received in any other state, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
+An outbound proxy implementation MUST NOT accept the [OUT_R1/A9 RTS PDU](#Section_3.2.4.5.8) in any state other than opened. If it is received in any other state, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in opened state, an implementation of the outbound proxy implementation MUST execute these steps:
 
 - Send [**RPC PDUs**](#gt_remote-procedure-call-rpc) that might be queued due to flow control to the client on the default OUT channel, observing flow control rules as specified in section [3.2.1.4.1.3](#Section_3.2.1.4.1.3).
-- Send [OUT_R1/A10 RTS PDU](#Section_3.2.2.5.8) to the client on the default OUT channel. Implementations SHOULD NOT send any additional bytes on the connection.<46>
+- Send [OUT_R1/A10 RTS PDU](#Section_2.2.4.32) to the client on the default OUT channel. Implementations SHOULD NOT send any additional bytes on the connection.<46>
 - Close the connection to the client and to the server.
 - Transition the state to the finished state.
 <a id="Section_3.2.4.5.9"></a>
 ##### 3.2.4.5.9 OUT_R1/A11 RTS PDU
 
-An outbound proxy implementation MUST NOT accept the [OUT_R1/A11 RTS PDU](#Section_3.2.4.5.9) in any state other than A11W. If it is received in another state, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
+An outbound proxy implementation MUST NOT accept the [OUT_R1/A11 RTS PDU](#Section_2.2.4.33) in any state other than A11W. If it is received in another state, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in A11W state, the outbound proxy implementation MUST perform the following actions in the sequence given:
 
@@ -4181,12 +4181,12 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in A
 <a id="Section_3.2.4.5.10"></a>
 ##### 3.2.4.5.10 OUT_R2/B1 RTS PDU
 
-An outbound proxy implementation MUST NOT accept the [OUT_R2/B1 RTS PDU](#Section_2.2.4.42) in any state other than B1W or B1OrC1W. If this condition is not met, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
+An outbound proxy implementation MUST NOT accept the [OUT_R2/B1 RTS PDU](#Section_3.2.4.5.10) in any state other than B1W or B1OrC1W. If this condition is not met, the outbound proxy MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.4.5.14](#Section_3.2.4.5.14).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in B1W state, the outbound proxy implementation MUST perform the following actions in the sequence given:
 
 - Send all [**RPC PDUs**](#gt_remote-procedure-call-rpc) that might be queued due to flow control to the client on the default OUT channel, observing flow control rules as specified in section [3.2.1.4.1.3](#Section_3.2.1.4.1.3).
-- Send [OUT_R2/B3 RTS PDU](#Section_3.2.2.5.10) to the client on the default OUT channel. Implementations SHOULD NOT send any additional bytes on the channel after the OUT_R2/B3 RTS PDU.<48>
+- Send [OUT_R2/B3 RTS PDU](#Section_2.2.4.44) to the client on the default OUT channel. Implementations SHOULD NOT send any additional bytes on the channel after the OUT_R2/B3 RTS PDU.<48>
 - Switch the default OUT channel to the successor OUT channel instance.
 - Switch the default OUT channel to [**unplugged channel mode**](#gt_unplugged-channel-mode).
 - Send OUT channel response header as specified in section [2.1.2.1.4](#Section_2.1.2.1.4) on the successor OUT channel instance.
@@ -4290,7 +4290,7 @@ When functioning in the server role, this protocol maintains a number of variabl
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Timers
 
-An implementation of the [RPC over HTTP v2](#Section_3.2) [**protocol dialect**](#gt_protocol-dialect) on the server SHOULD implement the connection setup timer defined in section [3.2.5.2.1](#Section_3.2.5.2.1).
+An implementation of the [RPC over HTTP v2](#Section_2.1.2) [**protocol dialect**](#gt_protocol-dialect) on the server SHOULD implement the connection setup timer defined in section [3.2.5.2.1](#Section_3.2.5.2.1).
 
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 Connection Setup Timer
@@ -4316,7 +4316,7 @@ The Server Virtual Connection Cookie table is initialized to an empty state.
 <a id="Section_3.2.5.3.2"></a>
 ##### 3.2.5.3.2 Server Virtual Connection
 
-The Server Virtual Connection is initialized from a CONN/A2, as defined in section [3.2.5.5.3](#Section_3.2.5.5.3), or a CONN/B2 PDU, as defined in section [3.2.5.5.4](#Section_3.2.5.5.4.2).
+The Server Virtual Connection is initialized from a CONN/A2, as defined in section [3.2.5.5.3](#Section_3.2.5.5.3), or a CONN/B2 PDU, as defined in section [3.2.5.5.4](#Section_3.2.5.5.4.1).
 
 - Server Virtual Connection Cookie - the cookie is copied from the VirtualConnectionCookie in either the CONN/A2 or CONN/B2 packet.
 - Default In Channel Reference - If this is a CONN/B2 packet, then a Server In Channel is initialized from the CONN/B2 packet and set; otherwise, this is set to an empty reference.
@@ -4338,7 +4338,7 @@ An implementation of this [**protocol dialect**](#gt_protocol-dialect) on the se
 <a id="Section_3.2.5.4.1"></a>
 ##### 3.2.5.4.1 Sending a PDU
 
-When an implementation of a higher-level protocol calls to an implementation of this protocol to send a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) to the client, the implementation of this protocol MUST send the PDU on the default OUT channel to the outbound proxy, subject to flow control requirements as specified in section [3.2.1.5.1](#Section_3.2.1.5.1).
+When an implementation of a higher-level protocol calls to an implementation of this protocol to send a [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) to the client, the implementation of this protocol MUST send the PDU on the default OUT channel to the outbound proxy, subject to flow control requirements as specified in section [3.2.1.5.1](#Section_3.2.1.5.1.1).
 
 If the implementation of this protocol encounters an error while sending the data, it MUST take the following actions:
 
@@ -4369,7 +4369,7 @@ When an implementation of this protocol receives an [**RPC PDU**](#gt_rpc-pdu), 
 <a id="Section_3.2.5.5.3"></a>
 ##### 3.2.5.5.3 CONN/A2 RTS PDU
 
-A server implementation MUST NOT accept the [CONN/A2 RTS PDU](#Section_2.2.4.3) in any state other than Open_Start or A2W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [CONN/A2 RTS PDU](#Section_3.2.5.5.3) in any state other than Open_Start or A2W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 A server implementation MUST extract the [**virtual connection**](#gt_virtual-connection) cookie from the CONN/A2 RTS PDU and search for this cookie value in the virtual connection cookie table. If found, the virtual connection is called the existing virtual connection. In such a case, the server implementation MUST verify that the existing virtual connection is in state A2W. If it is, the server implementation MUST continue execution on the state machine of the existing virtual connection and MUST continue processing this PDU as specified in section [3.2.5.5.3.2](#Section_3.2.5.5.3.2). If this condition is not met, the server MUST treat this PDU as a protocol error, as specified in section 3.2.5.5.13.
 
@@ -4398,7 +4398,7 @@ If the [**virtual connection**](#gt_virtual-connection) is found in the virtual 
 - Set the value of ProtocolVersion in the CONN/C1 RTS PDU to the value of ProtocolVersion from the server Virtual Connection.
 - Set the value of ReceiveWindowSize in the CONN/C1 RTS PDU to the value of InProxyReceiveWindowSize in the server Virtual Connection.
 - Set the value of ConnectionTimeout in the CONN/C1 RTS PDU to the value of InProxyConnectionTimeout from the server Virtual Connection.
-- Send [CONN/B3 RTS PDU](#Section_2.2.4.7) on the IN channel to the [**inbound proxy**](#gt_inbound-proxy).
+- Send [CONN/B3 RTS PDU](#Section_3.2.3.5.4) on the IN channel to the [**inbound proxy**](#gt_inbound-proxy).
 - Set the value of ReceiveWindowSize in the CONN/B3 RTS PDU to the value of ReceiveWindow from the server IN Channel.
 - Set the value of **Version** in the CONN/B3 RTS PDU to the value of **Protocol Version** from the Server Virtual Connection.
 - Transition to opened state.
@@ -4437,7 +4437,7 @@ If the [**virtual connection**](#gt_virtual-connection) is found in the virtual 
 - Set the value of **ProtocolVersion** in the CONN/C1 RTS PDU to the value of **ProtocolVersion** from the server Virtual Connection.
 - Set the value of the **ReceiveWindowSize** in the CONN/C1 RTS PDU to the value of **InProxyReceiveWindowSize** in the server Virtual Connection.
 - Set the value of **ConnectionTimeout** in the CONN/C1 RTS PDU to the value of **InProxyConnectionTimeout** from the server Virtual Connection.
-- Send [CONN/B3 RTS PDU](#Section_2.2.4.7) on the IN channel to the [**inbound proxy**](#gt_inbound-proxy).
+- Send [CONN/B3 RTS PDU](#Section_3.2.3.5.4) on the IN channel to the [**inbound proxy**](#gt_inbound-proxy).
 - Set the value of **ReceiveWindowSize** in the CONN/B3 RTS PDU to the value of **ReceiveWindow** from the server IN Channel.
 - Set the value of **Version** in the CONN/B3 RTS PDU to the value of **Protocol Version** from the Server Virtual Connection.
 - Set the value of ProtocolVersion in the CONN/B3 RTS PDU to the value of ProtocolVersion from the server Virtual Connection.
@@ -4446,7 +4446,7 @@ If the [**virtual connection**](#gt_virtual-connection) is found in the virtual 
 <a id="Section_3.2.5.5.5"></a>
 ##### 3.2.5.5.5 IN_R1/A2 RTS PDU
 
-A server implementation MUST NOT accept the [IN_R1/A2 RTS PDU](#Section_3.2.5.5.5) in any state other than Open_Start. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [IN_R1/A2 RTS PDU](#Section_2.2.4.11) in any state other than Open_Start. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Open_Start state, an implementation of this protocol MUST perform the following actions in the sequence given:
 
@@ -4455,14 +4455,14 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 - Verify that the **PredecessorChannelCookie** from this RTS PDU matches the IN channel cookie on the predecessor IN channel. If they do not match, an implementation of this protocol MUST treat this as a protocol error, MUST handle this as specified in section 3.2.5.5.13, and MUST skip the rest of the processing in this section. If they match, an implementation of this protocol MUST execute steps four through six.
 - Set up the connection setup timer defined in section [3.2.5.2.1](#Section_3.2.5.2.1).
 - Send [IN_R1/A3 RTS PDU](#Section_2.2.4.12) on the default OUT channel to the outbound proxy.
-Incoming IN_R1/A2 RTS PDU elements MUST be copied to the IN_R1/A3 RTS PDU and MUST be copied to the virtual connection **ReceiveWindowSize** ([3.2.1.1.5.1.1](#Section_2.2.3.5.1)) and **ConnectionTimeout** ([3.2.1.1.6.1](#Section_3.2.1.1.6.1)) ADM elements.
+Incoming IN_R1/A2 RTS PDU elements MUST be copied to the IN_R1/A3 RTS PDU and MUST be copied to the virtual connection **ReceiveWindowSize** ([3.2.1.1.5.1.1](#Section_3.2.1.1.5.1)) and **ConnectionTimeout** ([3.2.1.1.6.1](#Section_3.2.1.1.6.1)) ADM elements.
 
 - Set the value of ProtocolVersion in the IN_R1/A3 RTS PDU to the value of ProtocolVersion from the server Virtual Connection.
 - Transition to the A6W state.
 <a id="Section_3.2.5.5.6"></a>
 ##### 3.2.5.5.6 IN_R1/A6 RTS PDU
 
-A server implementation MUST NOT accept the [IN_R1/A6 RTS PDU](#Section_3.2.5.5.6) in any state other than A6W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [IN_R1/A6 RTS PDU](#Section_2.2.4.15) in any state other than A6W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in A6W state, an implementation of this protocol MUST perform the following actions in the sequence given:
 
@@ -4472,19 +4472,19 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in A
 <a id="Section_3.2.5.5.7"></a>
 ##### 3.2.5.5.7 IN_R1/B1 RTS PDU
 
-A server implementation MUST NOT accept the [IN_R1/B1 RTS PDU](#Section_3.2.5.5.7) in any state other than Opened_B1W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [IN_R1/B1 RTS PDU](#Section_2.2.4.16) in any state other than Opened_B1W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Opened_B1W state, an implementation of this protocol MUST perform the following actions in the sequence given:
 
 - Switch the default IN channel from the predecessor IN channel to the successor IN channel.
-- Send [IN_R1/B2 RTS PDU](#Section_2.2.4.17) on the successor IN channel to the [**inbound proxy**](#gt_inbound-proxy).
+- Send [IN_R1/B2 RTS PDU](#Section_3.2.3.5.7) on the successor IN channel to the [**inbound proxy**](#gt_inbound-proxy).
 - Set the value of ServerReceiveWindowSize in the IN R1/B2 RTS PDU to the value of ReceiveWindowSize from the server [**Virtual Connection**](#gt_virtual-connection).
 - Close the IN channel connection to the [**predecessor inbound proxy**](#gt_predecessor-inbound-proxy).
 - Transition to the opened state.
 <a id="Section_3.2.5.5.8"></a>
 ##### 3.2.5.5.8 IN_R2/A2 RTS PDU
 
-A server implementation MUST NOT accept the [IN_R2/A2 RTS PDU](#Section_3.2.5.5.8) in any state other than opened. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [IN_R2/A2 RTS PDU](#Section_2.2.4.19) in any state other than opened. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in opened state, an implementation of this protocol MUST perform the following actions in the sequence given:
 
@@ -4511,14 +4511,14 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 <a id="Section_3.2.5.5.10"></a>
 ##### 3.2.5.5.10 OUT_R1/A8 RTS PDU
 
-A server implementation MUST NOT accept the [OUT_R1/A8 RTS PDU](#Section_3.2.5.5.10) in any state other than Opened_A8W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [OUT_R1/A8 RTS PDU](#Section_2.2.4.30) in any state other than Opened_A8W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Opened_A8W state, an implementation of this protocol MUST perform the following actions in the sequence given:
 
 - Transition to opened state.
 - Compare the value of NoNDefaultOutChannelCookie in the server [**Virtual Connection**](#gt_virtual-connection) to the value of SuccessorChannelCookie from the OUT R1/A8 PDU. If this condition is not met, the server MUST treat this PDU as a protocol error as specified in section 3.2.5.5.13.
 - Switch the default OUT channel from the predecessor OUT channel to the successor OUT channel.
-- Send [OUT_R1/A9 RTS PDU](#Section_2.2.4.31) on the predecessor OUT channel to the outbound proxy.
+- Send [OUT_R1/A9 RTS PDU](#Section_3.2.4.5.8) on the predecessor OUT channel to the outbound proxy.
 <a id="Section_3.2.5.5.11"></a>
 ##### 3.2.5.5.11 OUT_R2/A4 RTS PDU
 
@@ -4532,7 +4532,7 @@ If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in O
 <a id="Section_3.2.5.5.12"></a>
 ##### 3.2.5.5.12 OUT_R2/A8 RTS PDU
 
-A server implementation MUST NOT accept the [OUT_R2/A8 RTS PDU](#Section_2.2.4.41) in any state other than Opened_R2A8W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
+A server implementation MUST NOT accept the [OUT_R2/A8 RTS PDU](#Section_3.2.5.5.12) in any state other than Opened_R2A8W. If this condition is not met, the server MUST treat this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu) as a protocol error as specified in section [3.2.5.5.13](#Section_3.2.5.5.13).
 
 If this [**RTS PDU**](#gt_682437f3-1c41-420d-ae08-3178f5611ddd) is received in Opened_R2A8W state, an implementation of this protocol MUST compare the **channel cookie** from this RTS PDU to the one stored in the temporary cookie variable as specified in section [3.2.1.1.2](#Section_3.2.1.1.2). If the cookies match, implementations of this protocol MUST send OUT_R2/B1 RTS PDU on the OUT channel to the outbound proxy, transition to opened state, and update the **channel cookie** on the OUT channel with the one from this RTS PDU. If the cookies do not match, this protocol MUST send [OUT_R2/B2 RTS PDU](#Section_3.2.4.5.12) on the OUT channel and handle this as a protocol error as specified in section 3.2.5.5.13.
 
@@ -4591,23 +4591,23 @@ As a first step, an implementation of this protocol determines whether or not it
 
 Then the client transitions to the wait state in the proxy use determination state machine defined in section [3.2.2](#Section_3.2.2) and waits for an [**echo response**](#gt_echo-response) message. The inbound proxy replies first with an echo response message, and the proxy use determination is completed. The proxy use protocol variable defined in section [3.2.2.1.2](#Section_3.2.2.1.2) is set to "direct connection," and the client implementation proceeds to the next step and state machine, that is, connection opening.
 
-Connection opening is started by the client implementation sending an IN channel request and an OUT channel request to the inbound proxy and outbound proxy respectively. Then it sends [CONN/A1 RTS PDU](#Section_2.2.4.2) to the outbound proxy and [CONN/B1 RTS PDU](#Section_3.2.3.5.3) to the inbound proxy. Then it transitions to the "OUT Channel Wait" state in the virtual connection open in the state machine shown in section 3.2.2.
+Connection opening is started by the client implementation sending an IN channel request and an OUT channel request to the inbound proxy and outbound proxy respectively. Then it sends [CONN/A1 RTS PDU](#Section_3.2.4.5.3) to the outbound proxy and [CONN/B1 RTS PDU](#Section_2.2.4.5) to the inbound proxy. Then it transitions to the "OUT Channel Wait" state in the virtual connection open in the state machine shown in section 3.2.2.
 
 The inbound proxy receives the IN channel request and transitions to the Open_Start state. Then it receives CONN/B1 RTS PDU. It extracts the server name and port from the URL part of the IN channel request as specified in section [2.2.2](#Section_2.2.2) and establishes a TCP connection to that server and port. The inbound proxy sends [CONN/B2 RTS PDU (section 2.2.4.6)](#Section_2.2.4.6) to the server and sets the keep-alive protocol variable to the value from the ClientKeepalive command from the CONN/B1 RTS PDU. As a final processing step for this [**PDU**](#gt_request-to-send-rts-protocol-data-unit-pdu), the inbound proxy adds a row in the virtual connection cookie table for the inbound proxy with the virtual connection cookie extracted from the CONN/B1 RTS PDU, switches the IN channel to the server to [**plugged channel mode**](#gt_plugged-channel-mode), and transitions to state B3W.
 
-The outbound proxy receives the OUT channel request and transitions to the Open_Start state. Then it receives CONN/A1 RTS PDU. It extracts the server name and port from the URL part of the OUT channel request as specified in section 2.2.2 and establishes a TCP connection to that server and port. The outbound proxy sends [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_2.2.4.3) to the server, sends an OUT channel response to the client, adds a row in the virtual connection cookie table for the outbound proxy with the virtual connection cookie extracted from the CONN/A1 RTS PDU, and transitions to the C1W state.
+The outbound proxy receives the OUT channel request and transitions to the Open_Start state. Then it receives CONN/A1 RTS PDU. It extracts the server name and port from the URL part of the OUT channel request as specified in section 2.2.2 and establishes a TCP connection to that server and port. The outbound proxy sends [CONN/A2 RTS PDU (section 2.2.4.3)](#Section_3.2.5.5.3) to the server, sends an OUT channel response to the client, adds a row in the virtual connection cookie table for the outbound proxy with the virtual connection cookie extracted from the CONN/A1 RTS PDU, and transitions to the C1W state.
 
 When the TCP connection from the inbound proxy to the server is established, the server transitions to the Open_Start state for that connection. Then it receives the CONN/B2 RTS PDU and searches for the virtual connection cookie from the CONN/B2 RTS PDU in its virtual connection table. It is not found, so the connection setup timer is started and the virtual connection is transitioned to the A2W state.
 
 When the TCP connection from the outbound proxy to the server is established, the server transitions to the Open_Start state for that connection. Then it receives the CONN/A2 RTS PDU and searches for the virtual connection cookie from the CONN/A2 RTS PDU in its virtual connection table. It is not found, so the connection setup timer is started and the virtual connection is transitioned to the B2W state.
 
-When the TCP connection from the inbound proxy to the server is established, the server transitions to the Open_Start state for that connection. Then it receives the CONN/B2 RTS PDU and searches for the virtual connection cookie from the CONN/B2 RTS PDU in its virtual connection table. It is found, so the connection setup timer is canceled and execution continues on the state machine of the existing virtual connection, which is A2W. The server implementation sends [CONN/C1 RTS PDU](#Section_3.2.4.5.4) on its OUT channel to the outbound proxy, sends [CONN/B3 RTS PDU](#Section_2.2.4.7) on the IN channel to the inbound proxy, and transitions to the opened state.
+When the TCP connection from the inbound proxy to the server is established, the server transitions to the Open_Start state for that connection. Then it receives the CONN/B2 RTS PDU and searches for the virtual connection cookie from the CONN/B2 RTS PDU in its virtual connection table. It is found, so the connection setup timer is canceled and execution continues on the state machine of the existing virtual connection, which is A2W. The server implementation sends [CONN/C1 RTS PDU](#Section_3.2.4.5.4) on its OUT channel to the outbound proxy, sends [CONN/B3 RTS PDU](#Section_3.2.3.5.4) on the IN channel to the inbound proxy, and transitions to the opened state.
 
 When the inbound proxy receives the CONN/B3 RTS PDU, it switches the IN channel to the server to [**unplugged channel mode**](#gt_unplugged-channel-mode) and transitions to opened state.
 
-When the outbound proxy receives the CONN/C1 RTS PDU, it sends [CONN/C2 RTS PDU](#Section_2.2.4.9) on the OUT channel to the client and transitions to the opened state.
+When the outbound proxy receives the CONN/C1 RTS PDU, it sends [CONN/C2 RTS PDU](#Section_3.2.2.5.4) on the OUT channel to the client and transitions to the opened state.
 
-When the client receives the OUT channel response, it transitions to the Wait_A3W state. When it receives [CONN/A3 RTS PDU](#Section_2.2.4.4), it transitions to the Wait_C2 state. When it receives CONN/C2 RTS PDU, it transitions to the opened state, sets the connection time-out protocol variable to the value of the **ConnectionTimeout** field from the CONN/C2 RTS PDU, and indicates to a higher-layer protocol that the connection is opened.
+When the client receives the OUT channel response, it transitions to the Wait_A3W state. When it receives [CONN/A3 RTS PDU](#Section_3.2.2.5.3), it transitions to the Wait_C2 state. When it receives CONN/C2 RTS PDU, it transitions to the opened state, sets the connection time-out protocol variable to the value of the **ConnectionTimeout** field from the CONN/C2 RTS PDU, and indicates to a higher-layer protocol that the connection is opened.
 
 <a id="Section_4.2"></a>
 ## 4.2 Flow Control and Receive Windows Example
@@ -4634,7 +4634,7 @@ This example demonstrates how flow control and [**receive windows**](#gt_receive
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-[RPC over HTTP v1](#Section_3.1) has inadequate security. It is recommended that implementers consider using and implementing [RPC over HTTP v2](#Section_3.2).
+[RPC over HTTP v1](#Section_3.1) has inadequate security. It is recommended that implementers consider using and implementing [RPC over HTTP v2](#Section_2.1.2).
 
 It is recommended that implementers consider building implementations that use or encourage the use of RPC over HTTP v2 built on top of HTTPS and enforce the use of HTTP authentication and mandate authorization of the client on the [**inbound**](#gt_inbound) and outbound proxies.
 
@@ -4765,11 +4765,11 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <45> Section 3.2.4.5.3: Windows outbound proxies will set the value of the Content-Length field to 1 gigabyte by default, but this setting can be overridden by the outbound proxy configuration.
 
-<46> Section 3.2.4.5.8: Windows Server 2003 and Windows Server 2008 send UNDEFINED additional bytes after the [OUT_R1/A10 RTS PDU](#Section_3.2.2.5.8) and before closing the connection.
+<46> Section 3.2.4.5.8: Windows Server 2003 and Windows Server 2008 send UNDEFINED additional bytes after the [OUT_R1/A10 RTS PDU](#Section_2.2.4.32) and before closing the connection.
 
 <47> Section 3.2.4.5.9: Windows outbound proxies will set the value of the Content-Length field to 1 gigabyte by default, but this setting can be overridden by the outbound proxy configuration.
 
-<48> Section 3.2.4.5.10: Windows Server 2003 and Windows Server 2008 send UNDEFINED additional bytes after the [OUT_R2/B3 RTS PDU](#Section_3.2.2.5.10) and before closing the connection.
+<48> Section 3.2.4.5.10: Windows Server 2003 and Windows Server 2008 send UNDEFINED additional bytes after the [OUT_R2/B3 RTS PDU](#Section_2.2.4.44) and before closing the connection.
 
 <49> Section 3.2.4.5.10: Windows Server 2003 and Windows Server 2008 send UNDEFINED additional bytes after the OUT_R2/B3 RTS PDU and before closing the connection.
 

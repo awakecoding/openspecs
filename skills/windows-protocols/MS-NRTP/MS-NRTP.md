@@ -535,7 +535,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 The .NET Remoting Protocol specifies a mechanism by which a calling program on one machine can invoke a method on a different machine. [**Arguments**](#gt_argument) are passed along as part of the invocation message, and [**Return Values**](#gt_return-value) are sent in the response.
 
-This protocol defines a simple type system that is a generalization of the common features found in type systems in programming languages. The components of the type system are specified in [Abstract Data Model (section 3.1.1)](#Section_3.1.1). If data can be represented as a [**Remoting Type**](#gt_remoting-type), it can be serialized into the .NET Remoting Binary Format, as defined in [MS-NRBF](../MS-NRBF/MS-NRBF.md), or the SOAP format as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520). The rules for serialization of data that is represented using the [**Remoting Data Model**](#gt_remoting-data-model) into the .NET Remoting Binary Format are specified in [Mapping to Binary Format (section 3.1.5.1)](#Section_3.1.5.1). The rules for serialization of data represented using the Remoting Data Model into the [**SOAP**](#gt_soap) format are defined in [Mapping Remoting Data Model to SOAP Format (section 3.1.5.2)](#Section_3.1.5.2). The .NET Remoting: Core Protocol Specification introduces a notation for the higher layer to define types and methods in the Remoting Data Model. The grammar for the notation is given in [.NET Remoting Description Notation (section 2.2.5)](#Section_2.2.5). This notation can be used by any protocol that depends on the .NET Remoting Protocol. The notation is used in this specification and in [MS-NRLS](../MS-NRLS/MS-NRLS.md).
+This protocol defines a simple type system that is a generalization of the common features found in type systems in programming languages. The components of the type system are specified in [Abstract Data Model (section 3.1.1)](#Section_3.3.1). If data can be represented as a [**Remoting Type**](#gt_remoting-type), it can be serialized into the .NET Remoting Binary Format, as defined in [MS-NRBF](../MS-NRBF/MS-NRBF.md), or the SOAP format as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520). The rules for serialization of data that is represented using the [**Remoting Data Model**](#gt_remoting-data-model) into the .NET Remoting Binary Format are specified in [Mapping to Binary Format (section 3.1.5.1)](#Section_3.1.5.1). The rules for serialization of data represented using the Remoting Data Model into the [**SOAP**](#gt_soap) format are defined in [Mapping Remoting Data Model to SOAP Format (section 3.1.5.2)](#Section_3.1.5.2). The .NET Remoting: Core Protocol Specification introduces a notation for the higher layer to define types and methods in the Remoting Data Model. The grammar for the notation is given in [.NET Remoting Description Notation (section 2.2.5)](#Section_2.2.5). This notation can be used by any protocol that depends on the .NET Remoting Protocol. The notation is used in this specification and in [MS-NRLS](../MS-NRLS/MS-NRLS.md).
 
 This section presents a brief overview of the following:
 
@@ -596,7 +596,7 @@ Some Server Objects are created by a higher-layer on the server, and not in resp
 
 This protocol defines the central mechanisms of the .NET Remoting Protocol stack, which convert a [**Remote Method**](#gt_remote-method) invocation into an exchange of encoded messages. This protocol depends on other structures and protocols for the encoding and transport of its messages. Further protocols can extend this protocol to provide additional services, such as .NET Remoting Lifetime Services [MS-NRLS](../MS-NRLS/MS-NRLS.md) which defines additional message and semantics to add activation and distributed lifetime management to .NET Remoting. User applications are layered on top of this protocol and use its services for application-specific purposes.
 
-Before a message is sent, the Remote Method is converted to a [**serialized**](#gt_serialize) form for transmission on the wire. A binary encoding for .NET Remoting is specified in .NET Remoting Binary Format [MS-NRBF](../MS-NRBF/MS-NRBF.md). When the binary encoding is used, .NET Remoting can be bound to either TCP [[RFC793]](https://go.microsoft.com/fwlink/?LinkId=150872) or [**HTTP**](#gt_hypertext-transfer-protocol-http) [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The TCP binding is specified in [TCP Transport (section 2.1.1)](#Section_2.1.1), and the HTTP binding is specified in [HTTP Transport (section 2.1.2)](#Section_2.1).
+Before a message is sent, the Remote Method is converted to a [**serialized**](#gt_serialize) form for transmission on the wire. A binary encoding for .NET Remoting is specified in .NET Remoting Binary Format [MS-NRBF](../MS-NRBF/MS-NRBF.md). When the binary encoding is used, .NET Remoting can be bound to either TCP [[RFC793]](https://go.microsoft.com/fwlink/?LinkId=150872) or [**HTTP**](#gt_hypertext-transfer-protocol-http) [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The TCP binding is specified in [TCP Transport (section 2.1.1)](#Section_2.1), and the HTTP binding is specified in [HTTP Transport (section 2.1.2)](#Section_2.1).
 
 .NET remoting can also use SOAP1.1, which includes both encoding semantics and transport bindings. The [**SOAP**](#gt_soap) encoding is specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520), with .NET remoting-specific portions of the mapping specified in [SOAP Serialization Format (section 2.2.4)](#Section_2.2.4) of this specification. When SOAP is used, .NET remoting can be bound to either TCP [RFC793] or HTTP [RFC2616]. The TCP binding to SOAP is specified in [SOAP on TCP (section 2.1.3.2)](#Section_2.1.3.2), and the HTTP binding can be found in [SOAP1.1] section 6, with .NET remoting-specific portions of the mapping specified in [SOAP on HTTP (section 2.1.3.1)](#Section_2.1.3.1) of this specification.
 
@@ -609,7 +609,7 @@ Figure 4: Relationships between .NET Remoting protocols
 
 If the HTTPS transport is used, a server [**certificate**](#gt_certificate) must be deployed and a client certificate can be deployed.
 
-This protocol does not define any means for activating a server or a client. The server must be configured and begin listening in an implementation-specific way on a [**Channel**](#gt_channel). For more information on Channels, see [Initialization (section 3.2.3)](#Section_3.3.3). The client must know the format and transport used by the server (for example, binary format over [**HTTP**](#gt_hypertext-transfer-protocol-http)).
+This protocol does not define any means for activating a server or a client. The server must be configured and begin listening in an implementation-specific way on a [**Channel**](#gt_channel). For more information on Channels, see [Initialization (section 3.2.3)](#Section_3.2.3). The client must know the format and transport used by the server (for example, binary format over [**HTTP**](#gt_hypertext-transfer-protocol-http)).
 
 The client needs the [**Request URI**](#gt_request-uri) of the server, and both the client and server need to agree on the following:
 
@@ -695,13 +695,13 @@ An implementation of the protocol MAY cache the connection after reading the rep
 <a id="Section_2.1.1.2.1"></a>
 ##### 2.1.1.2.1 Receiving Request
 
-The server implementation of this protocol MUST listen on the TCP port as specified in section [3.2.3](#Section_3.3.3). When a connection is available, the implementation of the protocol MUST process the message from the connection stream as follows. An implementation MUST NOT send anything other than the reply to this request in this connection.
+The server implementation of this protocol MUST listen on the TCP port as specified in section [3.2.3](#Section_3.2.3). When a connection is available, the implementation of the protocol MUST process the message from the connection stream as follows. An implementation MUST NOT send anything other than the reply to this request in this connection.
 
 If the [**message frame**](#gt_message-frame) of the request message does not conform to the structure specified in [Message Frame Structure (section 2.2.3.3)](#Section_2.2.3.3) or if the **OperationType** field of the message frame is neither Request(0) nor OneWayRequest(1) then an implementation MUST send back a fault as specified below.
 
 An implementation MAY process implementation-defined [CustomHeaders](#Section_2.2.3.3.3.2) in an implementation-specific way. The implementation MUST ignore any CustomHeaders that it does not understand.<6>
 
-A transport fault MUST be sent as a reply as specified in [Sending Reply (section 2.1.1.2.2)](#Section_2.1.2.2.2) with additional constraints on the message frame construction as follows:
+A transport fault MUST be sent as a reply as specified in [Sending Reply (section 2.1.1.2.2)](#Section_3.2.5.1.6) with additional constraints on the message frame construction as follows:
 
 - The **ContentDistribution** field MUST be written as NotChunked.
 - The **ContentLength** field MUST be written as zero.
@@ -726,7 +726,7 @@ A server implementation MUST send the reply in the same connection that the requ
 <a id="Section_2.1.2"></a>
 ### 2.1.2 HTTP Transport
 
-This section specifies the protocol to use [**HTTP**](#gt_hypertext-transfer-protocol-http) transport as specified in [[RFC1945]](https://go.microsoft.com/fwlink/?LinkId=90300) and [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) to transmit method invocation and return information. At a high level, the message request of a [**Remote Method**](#gt_remote-method) invocation MUST be sent as part of an HTTP request and the reply from the server MUST be sent as part of the HTTP response. In the case of a [**one-way method**](#gt_one-way-method), the HTTP response body MUST be empty, as specified in [Sending Reply (section 2.1.2.2.2)](#Section_2.1.2.2.2).
+This section specifies the protocol to use [**HTTP**](#gt_hypertext-transfer-protocol-http) transport as specified in [[RFC1945]](https://go.microsoft.com/fwlink/?LinkId=90300) and [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) to transmit method invocation and return information. At a high level, the message request of a [**Remote Method**](#gt_remote-method) invocation MUST be sent as part of an HTTP request and the reply from the server MUST be sent as part of the HTTP response. In the case of a [**one-way method**](#gt_one-way-method), the HTTP response body MUST be empty, as specified in [Sending Reply (section 2.1.2.2.2)](#Section_3.2.5.1.6).
 
 Port 80 is the standard port assignment for HTTP and port 443 is the standard port assignment for HTTPS. However, an implementation MUST support other ports if specified by a higher-level protocol in an implementation-defined way.
 
@@ -800,7 +800,7 @@ A response message MUST be constructed as follows:
 When using .NET Remoting over the SOAP protocol, .NET Remoting can be bound to [**HTTP**](#gt_hypertext-transfer-protocol-http) or TCP.
 
 - For HTTP, .NET Remoting method invocation MUST be bound to an HTTP request/response pair per [SOAP1.1] section 6.
-- For TCP, see section [2.1.1](#Section_2.1.1) (raw TCP binding).
+- For TCP, see section [2.1.1](#Section_2.1) (raw TCP binding).
 <a id="Section_2.1.3.1"></a>
 #### 2.1.3.1 SOAP on HTTP
 
@@ -853,13 +853,13 @@ This section specifies a binding of [**SOAP**](#gt_soap) to TCP for use in .NET 
 <a id="Section_2.1.3.2.1.1"></a>
 ###### 2.1.3.2.1.1 Sending Request
 
-A [**SOAP**](#gt_soap) request parameter using TCP transport MUST be sent as specified in the [Sending Request](#Section_2.1.1.1.1) subsection under the [TCP Transport](#Section_2.1.1) section with the following additional constraint:
+A [**SOAP**](#gt_soap) request parameter using TCP transport MUST be sent as specified in the [Sending Request](#Section_2.1.3.2.1.1) subsection under the [TCP Transport](#Section_2.1) section with the following additional constraint:
 
 - The Content-Type header MUST be set to a [**SOAP format identifier**](#gt_soap-format-identifier).
 <a id="Section_2.1.3.2.1.2"></a>
 ###### 2.1.3.2.1.2 Receiving Reply
 
-A [**SOAP**](#gt_soap) reply using TCP transport MUST be processed as specified in the [Receiving Reply](#Section_2.1.1.1.2) subsection under the [TCP Transport](#Section_2.1.1) section.
+A [**SOAP**](#gt_soap) reply using TCP transport MUST be processed as specified in the [Receiving Reply](#Section_2.1.3.2.1.2) subsection under the [TCP Transport](#Section_2.1) section.
 
 <a id="Section_2.1.3.2.2"></a>
 ##### 2.1.3.2.2 Server Details
@@ -867,13 +867,13 @@ A [**SOAP**](#gt_soap) reply using TCP transport MUST be processed as specified 
 <a id="Section_2.1.3.2.2.1"></a>
 ###### 2.1.3.2.2.1 Receiving Request
 
-A [**SOAP**](#gt_soap) request parameter using TCP transport MUST be processed as specified in the [Receiving Request](#Section_2.1.3.2.2.1) subsection under the [TCP Transport](#Section_2.1.1) section with the following additional constraint:
+A [**SOAP**](#gt_soap) request parameter using TCP transport MUST be processed as specified in the [Receiving Request](#Section_2.1.1.2.1) subsection under the [TCP Transport](#Section_2.1) section with the following additional constraint:
 
 - If the Content-Type is not a [**SOAP format identifier**](#gt_soap-format-identifier), the message does not belong to this transport protocol. A transport fault MUST be sent back as specified in the Receiving Request subsection under the TCP Transport section.
 <a id="Section_2.1.3.2.2.2"></a>
 ###### 2.1.3.2.2.2 Sending Reply
 
-A [**SOAP**](#gt_soap) reply parameter using TCP transport MUST be sent as specified in the [Sending Reply](#Section_2.1.2.2.2) subsection under the [TCP Transport](#Section_2.1.1) section.
+A [**SOAP**](#gt_soap) reply parameter using TCP transport MUST be sent as specified in the [Sending Reply](#Section_3.2.5.1.6) subsection under the [TCP Transport](#Section_2.1) section.
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -1883,7 +1883,7 @@ The [**Call Context**](#gt_call-context) MUST be encoded as a [**SOAP**](#gt_soa
 
 This section specifies a description notation to describe the metadata of the [**Remoting Data Model**](#gt_remoting-data-model). The notation is meant for higher-level services such as [MS-NRLS](../MS-NRLS/MS-NRLS.md) that are layered on top of this protocol to define their protocol in a remote procedure call (RPC) style.
 
-The notation provides a way to describe the following components of the Remoting Data Model that is defined in [Abstract Data Model (section 3.1.1)](#Section_3.1.1).
+The notation provides a way to describe the following components of the Remoting Data Model that is defined in [Abstract Data Model (section 3.1.1)](#Section_3.3.1).
 
 [**Primitive Types**](#gt_primitive-type) are mapped to the following keywords in the notation:
 
@@ -2294,7 +2294,7 @@ The [**message content**](#gt_message-content) of a [**Remote Method**](#gt_remo
 - The encodingStyle attribute SHOULD be written as part of the SOAP Envelope element with a value of http://schemas.xmlsoap.org/soap/encoding/.
 - The [**Call Context**](#gt_call-context) of a Remote Method call MUST be encoded as specified in [Call Context SOAP Header (section 2.2.4.5)](#Section_2.2.4.5)
 - The implementation MAY add implementation-defined SOAP header elements (children of the soap:Header element) to the SOAP request in order to transmit implementation-specific information to the server. Any implementation-defined SOAP header elements SHOULD use the namepace "http://schemas.microsoft.com/clr/soap/messageProperties".<38>
-- If a [**Method Signature**](#gt_method-signature) is present then it MUST be mapped as a SOAP header element as specified in [Method Signature SOAP Header (section 2.2.4.4)](#Section_2.2.4.4) with additional constraint that the order of the qualified names MUST match the parameter order.
+- If a [**Method Signature**](#gt_method-signature) is present then it MUST be mapped as a SOAP header element as specified in [Method Signature SOAP Header (section 2.2.4.4)](#Section_2.2.1.4) with additional constraint that the order of the qualified names MUST match the parameter order.
 - The qualified name of the method struct MUST be derived as specified in [Method Name Encoding (section 2.2.4.3)](#Section_2.2.4.3).
 - The [**Input Arguments**](#gt_input-argument) MUST be mapped as specified in [SOAP1.1] section 7.1.
 - Each [**Data Value**](#gt_data-value) in the Arguments MUST be encoded by using the SOAP encoding style. The specification for SOAP encoding is specified in [SOAP1.1] section 5.
@@ -2476,10 +2476,10 @@ An implementation MUST determine the [**Channel**](#gt_channel) associated with 
 
 | Transport | Section specifying the process | Server Object URI | Format identifier |
 | --- | --- | --- | --- |
-| **TCP** | [Receiving Request](#Section_2.1.3.2.2.1) under [TCP Transport](#Section_2.1.1) | The path subcomponent of the [**URI**](#gt_uniform-resource-identifier-uri) extracted from the [RequestURIHeader](#Section_2.2.3.3.3.5) of the [**message frame**](#gt_message-frame) | The **Content Type** field of the [ContentTypeHeader](#Section_2.2.3.3.3.7) |
-| **SOAP-** **TCP** | [Receiving Request](#Section_2.1.3.2.2.1) under [SOAP on TCP](#Section_2.1.3.2) | The path subcomponent of the URI extracted from the RequestURIHeader of the message frame | The **Content Type** field of the ContentTypeHeader |
-| **HTTP** | [Receiving Request](#Section_2.1.3.2.2.1) under [HTTP Transport](#Section_2.1) | [**Request URI**](#gt_request-uri) in the Request-Line of the [**HTTP**](#gt_hypertext-transfer-protocol-http) message | Content-Type entity-header field |
-| **SOAP-HTTP** | [Receiving Request](#Section_2.1.3.2.2.1) under [SOAP on HTTP](#Section_2.1.3.1) | Request URI in the Request-Line of the HTTP message | Content-Type entity-header field |
+| **TCP** | [Receiving Request](#Section_2.1.1.2.1) under [TCP Transport](#Section_2.1) | The path subcomponent of the [**URI**](#gt_uniform-resource-identifier-uri) extracted from the [RequestURIHeader](#Section_2.2.3.3.3.5) of the [**message frame**](#gt_message-frame) | The **Content Type** field of the [ContentTypeHeader](#Section_2.2.3.3.3.7) |
+| **SOAP-** **TCP** | [Receiving Request](#Section_2.1.1.2.1) under [SOAP on TCP](#Section_2.1.3.2) | The path subcomponent of the URI extracted from the RequestURIHeader of the message frame | The **Content Type** field of the ContentTypeHeader |
+| **HTTP** | [Receiving Request](#Section_2.1.1.2.1) under [HTTP Transport](#Section_2.1) | [**Request URI**](#gt_request-uri) in the Request-Line of the [**HTTP**](#gt_hypertext-transfer-protocol-http) message | Content-Type entity-header field |
+| **SOAP-HTTP** | [Receiving Request](#Section_2.1.1.2.1) under [SOAP on HTTP](#Section_2.1.3.1) | Request URI in the Request-Line of the HTTP message | Content-Type entity-header field |
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Binding to Server Object
@@ -2524,12 +2524,12 @@ The completion of a [**Remote Method**](#gt_remote-method) can yield a Return Va
 <a id="Section_3.2.5.1.5.1"></a>
 ###### 3.2.5.1.5.1 Serializing to Binary Serialization Format
 
-An implementation MUST construct a BinaryMethodReturn record and insert any additional required records as defined in [Mapping Remote Method Invocation Reply (section 3.1.5.1.2)](#Section_3.3.4.2) using the [**Return Value**](#gt_return-value), [**Output Arguments**](#gt_output-argument), [**Call Context**](#gt_call-context), and [**Exception**](#gt_exception) values.
+An implementation MUST construct a BinaryMethodReturn record and insert any additional required records as defined in [Mapping Remote Method Invocation Reply (section 3.1.5.1.2)](#Section_3.1.5.1.2) using the [**Return Value**](#gt_return-value), [**Output Arguments**](#gt_output-argument), [**Call Context**](#gt_call-context), and [**Exception**](#gt_exception) values.
 
 <a id="Section_3.2.5.1.5.2"></a>
 ###### 3.2.5.1.5.2 Serializing to SOAP Serialization Format
 
-An implementation MUST [**serialize**](#gt_serialize) the [**Return Value**](#gt_return-value), [**Output Arguments**](#gt_output-argument), [**Call Context**](#gt_call-context), and [**Exception**](#gt_exception) values as specified in [Mapping Remote Method Invocation Reply (section 3.1.5.2.2)](#Section_3.3.4.2).
+An implementation MUST [**serialize**](#gt_serialize) the [**Return Value**](#gt_return-value), [**Output Arguments**](#gt_output-argument), [**Call Context**](#gt_call-context), and [**Exception**](#gt_exception) values as specified in [Mapping Remote Method Invocation Reply (section 3.1.5.2.2)](#Section_3.1.5.1.2).
 
 <a id="Section_3.2.5.1.5.3"></a>
 ###### 3.2.5.1.5.3 Marshaling Server Objects and Proxy Instances
@@ -2565,7 +2565,7 @@ The [**serialized**](#gt_serialize) [**message content**](#gt_message-content) o
 
 | Transport | Section specifying the process |
 | --- | --- |
-| TCP | Sending Reply under [TCP Transport (section 2.1.1)](#Section_2.1.1) |
+| TCP | Sending Reply under [TCP Transport (section 2.1.1)](#Section_2.1) |
 | SOAP-TCP | Sending Reply under the [SOAP on TCP (section 2.1.3.2)](#Section_2.1.3.2) |
 | HTTP | Sending Reply under [HTTP Transport (section 2.1.2)](#Section_2.1) |
 | SOAP-HTTP | Sending Reply under the [SOAP on HTTP (section 2.1.3.1)](#Section_2.1.3.1) |
@@ -2669,7 +2669,7 @@ An implementation MUST construct a BinaryMethodCall record and insert any additi
 <a id="Section_3.3.4.2.1.2"></a>
 ###### 3.3.4.2.1.2 Serializing to SOAP Serialization Format
 
-An implementation MUST [**serialize**](#gt_serialize) the [**Server Type**](#gt_server-type) name, [**Remote Method**](#gt_remote-method) name, [**Method Signature**](#gt_method-signature), [**Input Arguments**](#gt_input-argument), and [**Call Context**](#gt_call-context) as specified in [Mapping Remote Method Invocation (section 3.1.5.2.1)](#Section_3.3.4.2).
+An implementation MUST [**serialize**](#gt_serialize) the [**Server Type**](#gt_server-type) name, [**Remote Method**](#gt_remote-method) name, [**Method Signature**](#gt_method-signature), [**Input Arguments**](#gt_input-argument), and [**Call Context**](#gt_call-context) as specified in [Mapping Remote Method Invocation (section 3.1.5.2.1)](#Section_3.1.5.2.1).
 
 When using the [**SOAP**](#gt_soap) protocol, the value of the SOAP Action MUST be encoded as specified in [Soap Action String (section 2.2.4.1)](#Section_2.2.4.1) and set in the [**message frame**](#gt_message-frame) as specified in the following list:
 
@@ -2684,8 +2684,8 @@ How the [**Request URI**](#gt_request-uri) and Content-Type are transmitted depe
 
 | Transport | Request URI | Content Type | Specification for sending message |
 | --- | --- | --- | --- |
-| **TCP** | MUST be set in the [RequestURIHeader](#Section_2.2.3.3.3.5) of the [**message frame**](#gt_message-frame). | MUST be set in the [ContentTypeHeader](#Section_2.2.3.3.3.7) of the message frame. | [Sending Request](#Section_2.1.1.1.1) under [TCP Transport](#Section_2.1.1) |
-| **SOAP-** **TCP** | MUST be set in the RequestURIHeader of the message frame. | MUST be set in the ContentTypeHeader of the message frame. | [Sending Request](#Section_2.1.1.1.1) under [SOAP on TCP](#Section_2.1.3.2) |
+| **TCP** | MUST be set in the [RequestURIHeader](#Section_2.2.3.3.3.5) of the [**message frame**](#gt_message-frame). | MUST be set in the [ContentTypeHeader](#Section_2.2.3.3.3.7) of the message frame. | [Sending Request](#Section_2.1.3.2.1.1) under [TCP Transport](#Section_2.1) |
+| **SOAP-** **TCP** | MUST be set in the RequestURIHeader of the message frame. | MUST be set in the ContentTypeHeader of the message frame. | [Sending Request](#Section_2.1.3.2.1.1) under [SOAP on TCP](#Section_2.1.3.2) |
 | **HTTP** | The [**Server Object URI**](#gt_server-object-uri)part of the Request URI MUST be set as the Request-URI in the Request-Line of the [**HTTP**](#gt_hypertext-transfer-protocol-http) Request. | MUST be set in the Content-Type entity-header field. | Sending Request under [HTTP Transport](#Section_2.1) |
 | **SOAP-HTTP** | The Server Object URI part of the Request URI MUST be set as the Request-URI in the Request-Line of the HTTP Request. | MUST be set in the Content-Type entity-header field section. | Sending Request under [SOAP on HTTP](#Section_2.1.3.1) |
 
@@ -2696,10 +2696,10 @@ For a [**One-Way Method**](#gt_one-way-method), there is no reply message and he
 
 | Transport | Section specifying the process |
 | --- | --- |
-| TCP | [Receiving Reply](#Section_2.1.1) under [TCP Transport](#Section_2.1.1.1.2) section |
-| SOAP-TCP | [Receiving Reply](#Section_2.1.1.1.2) under the [SOAP on TCP](#Section_2.1.3.2) section |
-| HTTP | [Receiving Reply](#Section_2.1.1.1.2) under [HTTP Transport](#Section_2.1) section |
-| SOAP-HTTP | [Receiving Reply](#Section_2.1.1.1.2) under the [SOAP on HTTP](#Section_2.1.3.1) section |
+| TCP | [Receiving Reply](#Section_2.1) under [TCP Transport](#Section_2.1.3.2.1.2) section |
+| SOAP-TCP | [Receiving Reply](#Section_2.1.3.2.1.2) under the [SOAP on TCP](#Section_2.1.3.2) section |
+| HTTP | [Receiving Reply](#Section_2.1.3.2.1.2) under [HTTP Transport](#Section_2.1) section |
+| SOAP-HTTP | [Receiving Reply](#Section_2.1.3.2.1.2) under the [SOAP on HTTP](#Section_2.1.3.1) section |
 
 <a id="Section_3.3.4.2.4"></a>
 ##### 3.3.4.2.4 De-Serializing the Response
@@ -3356,7 +3356,7 @@ SOAP-ENC:arrayType="xsd:int[10,2]" SOAP-ENC:offset="[-1,4]">
 
 </SOAP-ENV:Envelope>
 
-The message is a SOAP envelope. There are two SOAP headers: MethodSignature and CallContext. The MethodSignature header contains the string "a1:Array xsd:int", which is a list of qualified names as specified in [Mapping Remoting Data Model to SOAP Format (section 3.1.5.2)](#Section_3.1.5.2), subsection [Mapping Remote Method Invocation (section 3.1.5.2.1)](#Section_3.3.4.2). The CallContext header contains a single name-value pair encoded as specified in [Call Context SOAP Header (section 2.2.4.5)](#Section_2.2.4.5). The name is "Hdr1" and the value is "HeaderValue". The SOAP body consists of a single element called "DoIt" from the "http://schemas.microsoft.com/clr/nsassem/RemotingTest.MyServer/RemotingTest" namespace. The [**local name**](#gt_local-name) and the [**XML namespace**](#gt_xml-namespace) of this element are encoded as specified in the Windows behavior of [Method Name Encoding (section 2.2.4.3)](#Section_2.2.4.3). The Arguments "a" and "I" are represented by the two child elements of DoIt. [**Argument**](#gt_argument) "I" is a simple value (42). Argument "a" is a two-dimensional [**Array**](#gt_array) with the dimension of the first Array spanning from -1 to 8 (10 items) and the second Array spanning from 4 to 5 (2 items). The 20 items of the Array are encoded inside the Array element.
+The message is a SOAP envelope. There are two SOAP headers: MethodSignature and CallContext. The MethodSignature header contains the string "a1:Array xsd:int", which is a list of qualified names as specified in [Mapping Remoting Data Model to SOAP Format (section 3.1.5.2)](#Section_3.1.5.2), subsection [Mapping Remote Method Invocation (section 3.1.5.2.1)](#Section_3.1.5.2.1). The CallContext header contains a single name-value pair encoded as specified in [Call Context SOAP Header (section 2.2.4.5)](#Section_2.2.4.5). The name is "Hdr1" and the value is "HeaderValue". The SOAP body consists of a single element called "DoIt" from the "http://schemas.microsoft.com/clr/nsassem/RemotingTest.MyServer/RemotingTest" namespace. The [**local name**](#gt_local-name) and the [**XML namespace**](#gt_xml-namespace) of this element are encoded as specified in the Windows behavior of [Method Name Encoding (section 2.2.4.3)](#Section_2.2.4.3). The Arguments "a" and "I" are represented by the two child elements of DoIt. [**Argument**](#gt_argument) "I" is a simple value (42). Argument "a" is a two-dimensional [**Array**](#gt_array) with the dimension of the first Array spanning from -1 to 8 (10 items) and the second Array spanning from 4 to 5 (2 items). The 20 items of the Array are encoded inside the Array element.
 
 The server returns an instance of the Address Class as [**Return Value**](#gt_return-value) as follows:
 
@@ -3368,7 +3368,7 @@ Address.State = "WA"
 
 Address.Zip = "98054".
 
-The HTTP headers of the reply message are shown as follows. The reply message is encoded as specified in the [Sending Reply](#Section_2.1.2.2.2) subsection under SOAP on HTTP (section 2.1.3.1). The StatusCode is 200. The Content-Type is text/xml;charset="utf-8" which is the [**SOAP Format Identifier**](#gt_soap-format-identifier).
+The HTTP headers of the reply message are shown as follows. The reply message is encoded as specified in the [Sending Reply](#Section_3.2.5.1.6) subsection under SOAP on HTTP (section 2.1.3.1). The StatusCode is 200. The Content-Type is text/xml;charset="utf-8" which is the [**SOAP Format Identifier**](#gt_soap-format-identifier).
 
 Version=1.1, Status-Code=200, Reason-Phrase=OK.
 
@@ -3461,7 +3461,7 @@ nsassem/RemotingTest/RemotingTest%2C%20Version%3D1.0.0.0%2C%20Culture%
 <a id="Section_4.3"></a>
 ## 4.3 Faults in SOAP Over HTTP
 
-If the Remoting Method implementation of "DoIt" throws an [**Exception**](#gt_exception), then it is returned to the client as a [**SOAP**](#gt_soap) fault. The [**HTTP**](#gt_hypertext-transfer-protocol-http) headers of the reply message are shown in the following code example. The reply message is encoded as specified in [Sending Reply (section 2.1.3.1.2.2)](#Section_2.1.2.2.2) under [SOAP on HTTP (section 2.1.3.1)](#Section_2.1.3.1). The Status-Code is 500. The Content-Type is text/xml;charset="utf-8" which is the [**SOAP Format Identifier**](#gt_soap-format-identifier).
+If the Remoting Method implementation of "DoIt" throws an [**Exception**](#gt_exception), then it is returned to the client as a [**SOAP**](#gt_soap) fault. The [**HTTP**](#gt_hypertext-transfer-protocol-http) headers of the reply message are shown in the following code example. The reply message is encoded as specified in [Sending Reply (section 2.1.3.1.2.2)](#Section_3.2.5.1.6) under [SOAP on HTTP (section 2.1.3.1)](#Section_2.1.3.1). The Status-Code is 500. The Content-Type is text/xml;charset="utf-8" which is the [**SOAP Format Identifier**](#gt_soap-format-identifier).
 
 Version=1.1, Status-Code=500, Reason-Phrase=Internal Server Error.Content-Length: 2312
 
@@ -3592,7 +3592,7 @@ MyServer.RemotingTest.Method1 DoIt(System.Array, Int32)</ExceptionMethod>
 <a id="Section_4.4"></a>
 ## 4.4 One-Way Method Invocation Using SOAP Over TCP
 
-The SOAP envelope is constructed in the same way as SOAP over HTTP. However, a TCP [**message frame**](#gt_message-frame) is used as specified in the [Sending Request](#Section_2.1.1.1.1) subsection under the [SOAP on TCP](#Section_2.1.3.2) section.
+The SOAP envelope is constructed in the same way as SOAP over HTTP. However, a TCP [**message frame**](#gt_message-frame) is used as specified in the [Sending Request](#Section_2.1.3.2.1.1) subsection under the [SOAP on TCP](#Section_2.1.3.2) section.
 
 The TCP message frame for a [**One-Way Method**](#gt_one-way-method) with SOAP payload is as follows.
 
@@ -3687,7 +3687,7 @@ The key field to note for a One-Way Method request is the **OperationType** fiel
 <a id="Section_4.5"></a>
 ## 4.5 One-Way Method Invocation Using HTTP-Binary
 
-The binary [**message content**](#gt_message-content) of [**HTTP**](#gt_hypertext-transfer-protocol-http) with binary is constructed the same way as TCP with binary as shown in the [Two-Way Method Invocation Using TCP-Binary](#Section_4.1) section. However, the **message frame** is made of HTTP headers as specified in the [Sending Request](#Section_2.1.1.1.1) subsection under the [HTTP Transport](#Section_2.1) section.
+The binary [**message content**](#gt_message-content) of [**HTTP**](#gt_hypertext-transfer-protocol-http) with binary is constructed the same way as TCP with binary as shown in the [Two-Way Method Invocation Using TCP-Binary](#Section_4.1) section. However, the **message frame** is made of HTTP headers as specified in the [Sending Request](#Section_2.1.3.2.1.1) subsection under the [HTTP Transport](#Section_2.1) section.
 
 The HTTP headers for a [**One-Way Method**](#gt_one-way-method) with Binary payload is shown as follows.
 
@@ -3734,7 +3734,7 @@ The .NET Remoting Protocol allows [**Server Objects**](#gt_server-object) to be 
 
 | Security parameter | Section |
 | --- | --- |
-| TCP [**authentication**](#gt_authentication) | [TCP Transport (section 2.1.1)](#Section_2.1.1) |
+| TCP [**authentication**](#gt_authentication) | [TCP Transport (section 2.1.1)](#Section_2.1) |
 | [**HTTP**](#gt_hypertext-transfer-protocol-http) authentication | [HTTP Transport (section 2.1.2)](#Section_2.1) |
 | HTTPS | HTTP Transport (section 2.1.2) |
 

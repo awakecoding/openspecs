@@ -403,7 +403,7 @@ The .NET NegotiateStream Protocol does not use timers. Protocols above and below
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The .NET NegotiateStream Protocol initialization for the client role is triggered by an application event. See section [3.1.4.1](#Section_3.1.4.1) for more details.
+The .NET NegotiateStream Protocol initialization for the client role is triggered by an application event. See section [3.1.4.1](#Section_3.2.4.1) for more details.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -444,7 +444,7 @@ If any other major_status is returned, an HRESULT error code describing the erro
 
 The first five bytes received MUST be interpreted as the header of a **Handshake** message (as specified in section [2.2](#Section_2.2)). The payload size MUST be reassembled from the **HighByteOfPayloadSize** and **LowByteOfPayloadSize** fields. The **MajorVersion** and **MinorVersion** MUST be ignored. The implementation MUST continue to receive data from the **Underlying TCP Connection** (storing it in the **Framing Buffer**) until the entire payload has been received. When a full frame has been received, the client MUST check the **HandshakeId** field of the message to see if it matches one of the three known message IDs for .NET NegotiateStream Handshake messages. If the message ID received matches the message ID for:
 
-- A HandshakeInProgress message: Upon receipt of a message of this type, the **Stream State** MUST be set to CreatingSecurityToken. The client MUST take the token from the **AuthPayload** field of the message and pass it to the **GSS_Init_sec_context** function ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.1), along with the **Security Provider Context**, **Client Credentials**, **Target Name**, **Channel Binding Token**, and the same other parameters as the first call to **GSS_Init_sec_context** (see section [3.1.4.1](#Section_3.1.4.1)).
+- A HandshakeInProgress message: Upon receipt of a message of this type, the **Stream State** MUST be set to CreatingSecurityToken. The client MUST take the token from the **AuthPayload** field of the message and pass it to the **GSS_Init_sec_context** function ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 2.2.1), along with the **Security Provider Context**, **Client Credentials**, **Target Name**, **Channel Binding Token**, and the same other parameters as the first call to **GSS_Init_sec_context** (see section [3.1.4.1](#Section_3.2.4.1)).
 - A HandshakeDone message:Upon receipt of a message of this type, the **Stream State** MUST be set to ProcessingFinalToken. The client MUST take the token from the **AuthPayload** field of the message and pass it to the **GSS_Init_sec_context** function ([RFC2743] section 2.2.1) along with the **Security Provider Context**, **Client Credentials**, **Target Name**, **Channel Binding Token**, and the same other parameters as the first call to **GSS_Init_sec_context** (see section 3.1.4.1).
 - A HandshakeError message: Upon receipt of a message of this type, the **Security Provider Context** MUST be deleted, the **Underlying TCP Connection** MUST be closed, and the **Stream State** MUST be set to Closed. The application MUST be notified of the HRESULT contained in the **AuthPayload** field. (If the application wishes to retry the authentication, it can do so by invoking a new instance of the protocol with a new **Underlying TCP Connection**.)
 - None of the preceding handshake message types: The message type is invalid. The **Security Provider Context** MUST be deleted, the **Underlying TCP Connection** MUST be closed, and the **Stream State** MUST be set to Closed. The application MUST be notified of the failure. (If the application wishes to retry the authentication, it can do so by invoking a new instance of the protocol with a new **Underlying TCP Connection**.)
@@ -565,7 +565,7 @@ The .NET NegotiateStream Protocol does not use timers. Protocols above and below
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The .NET NegotiateStream Protocol initialization for the server role is triggered by an application event. See section [3.2.4.1](#Section_3.1.4.1) for more details.
+The .NET NegotiateStream Protocol initialization for the server role is triggered by an application event. See section [3.2.4.1](#Section_3.2.4.1) for more details.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -694,8 +694,8 @@ The .NET NegotiateStream Protocol is dependent on the security services of the S
 
 | Security Parameter | Section |
 | --- | --- |
-| Client Role: Credentials, Required Protection Level, Allowed Impersonation Level, Channel Binding Token, Target Name | [3.1.4.1](#Section_3.1.4.1) |
-| Server Role: Credentials, Required Protection Level, Required Impersonation Level, Expected Channel Binding | [3.2.4.1](#Section_3.1.4.1) |
+| Client Role: Credentials, Required Protection Level, Allowed Impersonation Level, Channel Binding Token, Target Name | [3.1.4.1](#Section_3.2.4.1) |
+| Server Role: Credentials, Required Protection Level, Required Impersonation Level, Expected Channel Binding | [3.2.4.1](#Section_3.2.4.1) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

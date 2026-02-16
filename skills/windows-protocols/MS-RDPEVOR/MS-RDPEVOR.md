@@ -245,7 +245,7 @@ packet-beta
 
 | Value | Symbolic name | Meaning |
 | --- | --- | --- |
-| 1 | TSMM_PACKET_TYPE_PRESENTATION_REQUEST | Indicates that this message is interpreted as a [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) structure. |
+| 1 | TSMM_PACKET_TYPE_PRESENTATION_REQUEST | Indicates that this message is interpreted as a [TSMM_PRESENTATION_REQUEST](#Section_4.4) structure. |
 | 2 | TSMM_PACKET_TYPE_PRESENTATION_RESPONSE | Indicates that this message is interpreted as a [TSMM_PRESENTATION_RESPONSE](#Section_4.2) structure. |
 | 3 | TSMM_PACKET_TYPE_CLIENT_NOTIFICATION | Indicates that this message is interpreted as a [TSMM_CLIENT_NOTIFICATION](#Section_2.2.1.4) structure. |
 | 4 | TSMM_PACKET_TYPE_VIDEO_DATA | Indicates that this message is interpreted as a [TSMM_VIDEO_DATA](#Section_4.3) structure. |
@@ -314,7 +314,7 @@ If the command is to stop the presentation, only the **Header**, **PresentationI
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 TSMM_PRESENTATION_RESPONSE Structure
 
-This message is sent from the client to the server in response to a [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) message with the **Command** field set to 0x01 (Start Presentation). This message MUST be sent when the client is fully prepared to start rendering samples. If this packet is not delivered to the server, the server will not stream video data to the client. Therefore, this packet SHOULD be sent on the control channel.
+This message is sent from the client to the server in response to a [TSMM_PRESENTATION_REQUEST](#Section_4.4) message with the **Command** field set to 0x01 (Start Presentation). This message MUST be sent when the client is fully prepared to start rendering samples. If this packet is not delivered to the server, the server will not stream video data to the client. Therefore, this packet SHOULD be sent on the control channel.
 
 ```mermaid
 packet-beta
@@ -349,7 +349,7 @@ packet-beta
 
 **Header (8 bytes):** TSMM_VIDEO_PACKET_HEADER defined in [2.2.1.1](#Section_2.2.1.1).
 
-**A - PresentationId (1 byte):** UINT8 ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.47). This is the same number as the **PresentationId** field in the [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) message.
+**A - PresentationId (1 byte):** UINT8 ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.47). This is the same number as the **PresentationId** field in the [TSMM_PRESENTATION_REQUEST](#Section_4.4) message.
 
 **B - NotificationType (1 byte):** UINT8. A number that identifies which notification type the client is sending. The following values are supported:
 
@@ -391,7 +391,7 @@ The incoming frame rate is capped by the rate at which the server encodes graphi
 <a id="Section_2.2.1.6"></a>
 #### 2.2.1.6 TSMM_VIDEO_DATA Structure
 
-This message contains a potentially fragmented [**video sample**](#gt_video-sample). If the **VideoSubtypeId** of the TSMM_PRESENTATION_REQUEST (section [2.2.1.2](#Section_2.2.1.2)) message is set to MFVideoFormat_H264 ({34363248-0000-0010-8000-00AA00389B71}), then the sample (before fragmentation and encoding) is derived from RGB data that has been converted to the YUV color space by using the method outlined in [[ITU-BT601-7]](https://go.microsoft.com/fwlink/?LinkId=309941) section 2.5.4 and annex 2.1.
+This message contains a potentially fragmented [**video sample**](#gt_video-sample). If the **VideoSubtypeId** of the TSMM_PRESENTATION_REQUEST (section [2.2.1.2](#Section_4.4)) message is set to MFVideoFormat_H264 ({34363248-0000-0010-8000-00AA00389B71}), then the sample (before fragmentation and encoding) is derived from RGB data that has been converted to the YUV color space by using the method outlined in [[ITU-BT601-7]](https://go.microsoft.com/fwlink/?LinkId=309941) section 2.5.4 and annex 2.1.
 
 ```mermaid
 packet-beta
@@ -458,7 +458,7 @@ Figure 1: Playback initialization, streaming, and termination
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-**PresentationId:** For each presentation that is to be redirected, the server generates a unique presentation ID. The server sends this ID to the client in the **PresentationId** field of the [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) message. This ID is then used in all subsequent messages for a presentation and is used by the client to refer all messages to the correct presentation.
+**PresentationId:** For each presentation that is to be redirected, the server generates a unique presentation ID. The server sends this ID to the client in the **PresentationId** field of the [TSMM_PRESENTATION_REQUEST](#Section_4.4) message. This ID is then used in all subsequent messages for a presentation and is used by the client to refer all messages to the correct presentation.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -515,7 +515,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-Clients initialize in two phases. The first phase occurs when the virtual channels are opened. The client has the option to indicate support for the Remote Desktop Protocol: Video Optimized Remoting Virtual Channel Extension by allowing or disallowing the virtual channel to connect. The second phase occurs when the client receives a [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) message from the server with the **Command** field set to 0x01 – Start Presentation. The client performs all initialization required to begin decoding and rendering data and then sends a [TSMM_PRESENTATION_RESPONSE](#Section_4.2) message to the server. Only after this has completed will the server begin streaming data.
+Clients initialize in two phases. The first phase occurs when the virtual channels are opened. The client has the option to indicate support for the Remote Desktop Protocol: Video Optimized Remoting Virtual Channel Extension by allowing or disallowing the virtual channel to connect. The second phase occurs when the client receives a [TSMM_PRESENTATION_REQUEST](#Section_4.4) message from the server with the **Command** field set to 0x01 – Start Presentation. The client performs all initialization required to begin decoding and rendering data and then sends a [TSMM_PRESENTATION_RESPONSE](#Section_4.2) message to the server. Only after this has completed will the server begin streaming data.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -560,7 +560,7 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-When a video presentation is started on the server, the server MUST send a [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) message with the **Command** field set to TSMM_VIDEO_PLAYBACK_COMMAND_START to the client and the **PresentationId** field set to a value that is unique to all video presentations in the current session. The server then MUST wait for the client to return a [TSMM_PRESENTATION_RESPONSE](#Section_4.2) message indicating whether or not to proceed with the presentation. After the server has received a TSMM_PRESENTATION_RESPONSE message indicating that it can proceed, it MAY start sending [TSMM_VIDEO_DATA](#Section_4.3) messages to the client. When the server is about to end the presentation, it MUST send a TSMM_PRESENTATION_REQUEST message with the **Command** field set to TSMM_VIDEO_PLAYBACK_COMAND_STOP.
+When a video presentation is started on the server, the server MUST send a [TSMM_PRESENTATION_REQUEST](#Section_4.4) message with the **Command** field set to TSMM_VIDEO_PLAYBACK_COMMAND_START to the client and the **PresentationId** field set to a value that is unique to all video presentations in the current session. The server then MUST wait for the client to return a [TSMM_PRESENTATION_RESPONSE](#Section_4.2) message indicating whether or not to proceed with the presentation. After the server has received a TSMM_PRESENTATION_RESPONSE message indicating that it can proceed, it MAY start sending [TSMM_VIDEO_DATA](#Section_4.3) messages to the client. When the server is about to end the presentation, it MUST send a TSMM_PRESENTATION_REQUEST message with the **Command** field set to TSMM_VIDEO_PLAYBACK_COMAND_STOP.
 
 If the client encounters an error in the TSMM_PRESENTATION_REQUEST message (for example, the **VideoSubtypeId** is not set to MFVideoFormat_H264), then it SHOULD ignore the message and not send a TSMM_PRESENTATION_RESPONSE message. The server MUST NOT send TSMM_VIDEO_DATA messages to the client in this case.
 
@@ -580,7 +580,7 @@ Throughout the video presentation, the server will send many [TSMM_VIDEO_DATA](#
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Video Presentation Shutdown
 
-When a video presentation is stopping on the server, the server MUST send a [TSMM_PRESENTATION_REQUEST](#Section_2.2.1.2) message with the **Command** field set to TSMM_VIDEO_PLAYBACK_COMMAND_STOP and the presentation ID matching a TSMM_PRESENTATION_REQUEST to start sent earlier to the client.
+When a video presentation is stopping on the server, the server MUST send a [TSMM_PRESENTATION_REQUEST](#Section_4.4) message with the **Command** field set to TSMM_VIDEO_PLAYBACK_COMMAND_STOP and the presentation ID matching a TSMM_PRESENTATION_REQUEST to start sent earlier to the client.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events

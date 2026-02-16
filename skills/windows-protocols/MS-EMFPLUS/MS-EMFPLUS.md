@@ -810,7 +810,7 @@ The EMF+ [**metafile**](#gt_metafile) format includes the following vendor-exten
 - Arbitrary private data in an [EmfPlusComment](#Section_2.3.2.1) record
 - The graphics version in an [EmfPlusGraphicsVersion](#Section_2.2.2.19) object
 - The language identifier in an [EmfPlusLanguageIdentifier](#Section_2.2.2.23) object
-- Digit substitution in an [EmfPlusStringFormat](#Section_2.2.2.44) object
+- Digit substitution in an [EmfPlusStringFormat](#Section_2.2.1.9) object
 <a id="Section_2"></a>
 # 2 Structures
 
@@ -849,7 +849,7 @@ The following enumerations are defined:
 | BrushType | [2.1.1.3](#Section_2.1.1.3) | Types of graphics brushes, which are used to fill graphics regions. |
 | CombineMode | [2.1.1.4](#Section_2.1.1.4) | Modes for combining two graphics regions. |
 | CompositingMode | [2.1.1.5](#Section_2.1.1.5) | Modes for combining source colors with background colors. The [**compositing**](#gt_compositing) mode represents the enable state of [**alpha blending**](#gt_alpha-blending). |
-| CompositingQuality | [2.1.1.6](#Section_3.2.32.12) | Levels of quality for creating composite images. |
+| CompositingQuality | [2.1.1.6](#Section_2.3.6.3) | Levels of quality for creating composite images. |
 | CurveAdjustments | [2.1.1.7](#Section_2.1.1.7) | Color curve effects that can be applied to an image. |
 | CurveChannel | [2.1.1.8](#Section_2.1.1.8) | Color channels that can be affected by a [**color curve effect**](#gt_color-curve-effect) adjustment to an image. |
 | CustomLineCapDataType | [2.1.1.9](#Section_2.1.1.9) | Types of custom [**line cap**](#gt_line-cap) data, which specify styles and shapes for the ends of graphics lines. |
@@ -859,7 +859,7 @@ The following enumerations are defined:
 | HatchStyle | [2.1.1.13](#Section_2.1.1.13) | Hatch patterns used by graphics brushes. A hatch pattern consists of a solid background color and lines drawn over the background. |
 | HotkeyPrefix | [2.1.1.14](#Section_2.1.1.14) | Output options for [**hotkey prefixes**](#gt_384ad4b0-b61b-4bd7-9abe-4a8d711be8db) in graphics text. |
 | ImageDataType | [2.1.1.15](#Section_2.1.1.15) | Types of image data formats. |
-| InterpolationMode | [2.1.1.16](#Section_2.3.6.4) | Ways to perform [**scaling**](#gt_f3f5f638-16f6-4159-a3f1-9d845b1196f5), including stretching and shrinking. |
+| InterpolationMode | [2.1.1.16](#Section_3.2.32.13) | Ways to perform [**scaling**](#gt_f3f5f638-16f6-4159-a3f1-9d845b1196f5), including stretching and shrinking. |
 | LineCapType | [2.1.1.17](#Section_2.1.1.17) | Types of line caps to use at the ends of lines that are drawn with graphics pens. |
 | LineJoinType | [2.1.1.18](#Section_2.1.1.18) | Ways to join two lines that are drawn by the same graphics pen and whose ends meet. |
 | LineStyle | [2.1.1.19](#Section_2.1.1.19) | Styles of lines that are drawn with graphics pens. |
@@ -868,13 +868,13 @@ The following enumerations are defined:
 | PathPointType | [2.1.1.22](#Section_2.1.1.22) | Types of points on a graphics [**path**](#gt_path). |
 | PenAlignment | [2.1.1.23](#Section_2.1.1.23) | The distribution of the width of the pen with respect to the line being drawn. |
 | PixelFormat | [2.1.1.24](#Section_2.1.1.24) | Pixel formats that are supported in EMF+ bitmaps. |
-| PixelOffsetMode | [2.1.1.25](#Section_3.2.32.14) | How pixels are offset, which specifies the trade-off between rendering speed and quality. |
+| PixelOffsetMode | [2.1.1.25](#Section_3.2.32.4) | How pixels are offset, which specifies the trade-off between rendering speed and quality. |
 | RegionNodeDataType | [2.1.1.26](#Section_2.1.1.26) | Types of [**region**](#gt_region) node data. |
 | SmoothingMode | [2.1.1.27](#Section_2.1.1.27) | Types of smoothing to apply to lines, curves and the edges of filled areas to make them appear more continuous or sharply defined. |
 | StringAlignment | [2.1.1.28](#Section_2.1.1.28) | Ways to align strings with respect to a text layout rectangle. |
 | StringDigitSubstitution | [2.1.1.29](#Section_2.1.1.29) | Ways to substitute digits in a string according to a user's locale or language. |
 | StringTrimming | [2.1.1.30](#Section_2.1.1.30) | How to trim characters from a string that is too large for the text layout rectangle. |
-| TextRenderingHint | [2.1.1.31](#Section_2.1.1.31) | Types of [**text hinting**](#gt_text-hinting) and [**anti-aliasing**](#gt_anti-aliasing), which affects the quality of text rendering. |
+| TextRenderingHint | [2.1.1.31](#Section_3.2.32.5) | Types of [**text hinting**](#gt_text-hinting) and [**anti-aliasing**](#gt_anti-aliasing), which affects the quality of text rendering. |
 | UnitType | [2.1.1.32](#Section_2.1.1.32) | Units of measurement in different coordinate systems. |
 | WrapMode | [2.1.1.33](#Section_2.1.1.33) | How the pattern from a texture or gradient brush is tiled across a shape or at shape boundaries. |
 
@@ -1055,7 +1055,7 @@ EmfPlusSetTSClip = 0x403A
 
 **EmfPlusDrawBeziers:** This record defines the pen strokes for drawing a [**Bezier**](#gt_bezier-curve) [**spline**](#gt_spline).
 
-**EmfPlusDrawImage:** This record defines a scaled [EmfPlusImage](#Section_2.2.1.4) object. An image can consist of either [**bitmap**](#gt_bitmap) or metafile data.
+**EmfPlusDrawImage:** This record defines a scaled [EmfPlusImage](#Section_2.2.1.5) object. An image can consist of either [**bitmap**](#gt_bitmap) or metafile data.
 
 **EmfPlusDrawImagePoints:** This record defines a scaled EmfPlusImage object inside a parallelogram. An image can consist of either bitmap or metafile data.
 
@@ -1077,7 +1077,7 @@ EmfPlusSetTSClip = 0x403A
 
 **EmfPlusSetCompositingQuality:** This record defines the compositing quality, which describes the desired level of quality for creating composite images from multiple objects.
 
-**EmfPlusSave:** This record saves the graphics state, identified by a specified index, on a stack of saved graphics states. Each stack index is associated with a particular saved state, and the index is used by an [EmfPlusRestore](#Section_3.2.67.2) record to restore the state.
+**EmfPlusSave:** This record saves the graphics state, identified by a specified index, on a stack of saved graphics states. Each stack index is associated with a particular saved state, and the index is used by an [EmfPlusRestore](#Section_2.3.7.4) record to restore the state.
 
 **EmfPlusRestore:** This record restores the graphics state, identified by a specified index, from a stack of saved graphics states. Each stack index is associated with a particular saved state, and the index is defined by an [EmfPlusSave](#Section_3.2.32.7) record to save the state.
 
@@ -1381,7 +1381,7 @@ CustomLineCapDataTypeAdjustableArrow = 0x00000001
 
 **CustomLineCapDataTypeAdjustableArrow:** An adjustable arrow custom line cap.
 
-Custom line cap data is specified by [EmfPlusCustomLineCap](#Section_2.2.2.14) objects.
+Custom line cap data is specified by [EmfPlusCustomLineCap](#Section_2.2.2.13) objects.
 
 See section [2.1.1](#Section_2.1.1) for the specification of additional enumerations.
 
@@ -1726,7 +1726,7 @@ HotkeyPrefixHide = 0x00000002
 
 **HotkeyPrefixHide:** The hotkey prefix SHOULD be displayed.
 
-Graphics text is specified by [EmfPlusStringFormat](#Section_2.2.2.44) objects.
+Graphics text is specified by [EmfPlusStringFormat](#Section_2.2.1.9) objects.
 
 See section [2.1.1](#Section_2.1.1) for the specification of additional enumerations.
 
@@ -1753,7 +1753,7 @@ ImageDataTypeMetafile = 0x00000002
 
 **ImageDataTypeMetafile:** A [**metafile**](#gt_metafile) image.
 
-Graphics images are specified by [EmfPlusImage](#Section_2.2.1.4) objects.
+Graphics images are specified by [EmfPlusImage](#Section_2.2.1.5) objects.
 
 See section [2.1.1](#Section_2.1.1) for the specification of additional enumerations.
 
@@ -2005,21 +2005,21 @@ ObjectTypeCustomLineCap = 0x00000009
 
 **ObjectTypePen:** An [EmfPlusPen](#Section_2.2.1.7) object. Pen objects draw graphics lines.
 
-**ObjectTypePath:** An [EmfPlusPath](#Section_2.2.2.32) object. Path objects specify sequences of lines, curves, and shapes.
+**ObjectTypePath:** An [EmfPlusPath](#Section_2.2.2.29) object. Path objects specify sequences of lines, curves, and shapes.
 
 **ObjectTypeRegion:** An [EmfPlusRegion](#Section_2.2.2.41) object. Region objects specify areas of the output surface.
 
-**ObjectTypeImage:** An [EmfPlusImage](#Section_2.2.1.4) object. Image objects encapsulate [**bitmaps**](#gt_bitmap) and metafiles.
+**ObjectTypeImage:** An [EmfPlusImage](#Section_2.2.1.5) object. Image objects encapsulate [**bitmaps**](#gt_bitmap) and metafiles.
 
 **ObjectTypeFont:** An [EmfPlusFont](#Section_2.2.1.3) object. Font objects specify font properties, including [**typeface**](#gt_typeface) style, [**em size**](#gt_em-size), and [**font family**](#gt_font-family).
 
-**ObjectTypeStringFormat:** An [EmfPlusStringFormat](#Section_2.2.2.44) object. String format objects specify text layout, including alignment, orientation, tab stops, clipping, and digit substitution for languages that do not use Western European digits.
+**ObjectTypeStringFormat:** An [EmfPlusStringFormat](#Section_2.2.1.9) object. String format objects specify text layout, including alignment, orientation, tab stops, clipping, and digit substitution for languages that do not use Western European digits.
 
 **ObjectTypeImageAttributes:** An [EmfPlusImageAttributes](#Section_2.2.1.5) object. Image attribute objects specify operations on pixels during image rendering, including color adjustment, [**grayscale**](#gt_grayscale) adjustment, [**gamma correction**](#gt_gamma-correction), and [**color mapping**](#gt_color-mapping).
 
-**ObjectTypeCustomLineCap:** An [EmfPlusCustomLineCap](#Section_2.2.2.14) object. Custom [**line cap**](#gt_line-cap) objects specify shapes to draw at the ends of a graphics line, including squares, circles, and diamonds.
+**ObjectTypeCustomLineCap:** An [EmfPlusCustomLineCap](#Section_2.2.2.13) object. Custom [**line cap**](#gt_line-cap) objects specify shapes to draw at the ends of a graphics line, including squares, circles, and diamonds.
 
-Graphics objects are specified by [EmfPlusObject](#Section_2.3.5.1) records.
+Graphics objects are specified by [EmfPlusObject](#Section_3.2.32.21) records.
 
 See section [2.1.1](#Section_2.1.1) for the specification of additional enumerations.
 
@@ -2046,7 +2046,7 @@ PathPointTypeBezier = 0x03
 
 **PathPointTypeBezier:** The point is an endpoint or control point of a cubic [**Bezier curve**](#gt_bezier-curve).
 
-Graphics path point types are specified by [EmfPlusPathPointType](#Section_2.2.2.32) objects.
+Graphics path point types are specified by [EmfPlusPathPointType](#Section_2.2.2.31) objects.
 
 See section [2.1.1](#Section_2.1.1) for the specification of additional enumerations.
 
@@ -2539,7 +2539,7 @@ The CustomLineCapData flags specify data for custom [**line caps**](#gt_line-cap
 | CustomLineCapDataFillPath 0x00000001 | If set, an [EmfPlusFillPath](#Section_2.2.2.17) object is specified in the **OptionalData** field of the [EmfPlusCustomLineCapData](#Section_2.2.2.13) object for filling the custom line cap. |
 | CustomLineCapDataLinePath 0x00000002 | If set, an [EmfPlusLinePath](#Section_2.2.2.26) object is specified in the **OptionalData** field of the EmfPlusCustomLineCapData object for outlining the custom line cap. |
 
-Custom graphics line caps are specified by [EmfPlusCustomLineCap](#Section_2.2.2.14) objects.
+Custom graphics line caps are specified by [EmfPlusCustomLineCap](#Section_2.2.2.13) objects.
 
 See section [2.1.2](#Section_2.1.2) for the specification of additional bit flags.
 
@@ -2601,7 +2601,7 @@ The PathPointType flags specify type properties of points on graphics paths. The
 | PathPointTypePathMarker 0x02 | The point is a position marker. |
 | PathPointTypeCloseSubpath 0x08 | The point is the endpoint of a subpath. |
 
-Graphics paths are specified by [EmfPlusPath](#Section_2.2.2.32) objects.
+Graphics paths are specified by [EmfPlusPath](#Section_2.2.2.29) objects.
 
 See section [2.1.2](#Section_2.1.2) for the specification of additional bit flags.
 
@@ -2648,7 +2648,7 @@ The StringFormat flags specify options for graphics text layout, including direc
 | StringFormatNoClip 0x00004000 | If set, text extending outside the string layout rectangle SHOULD be allowed to show. If clear, all text that extends outside the layout rectangle SHOULD be clipped. |
 | StringFormatBypassGDI 0x80000000 | This flag MAY be used to specify an implementation-specific process for rendering text.<9> |
 
-Graphics text layout is specified by [EmfPlusStringFormat](#Section_2.2.2.44) objects.
+Graphics text layout is specified by [EmfPlusStringFormat](#Section_2.2.1.9) objects.
 
 See section [2.1.2](#Section_2.1.2) for the specification of additional bit flags.
 
@@ -2705,16 +2705,16 @@ The following types of graphics objects are defined:
 | Name | Section | Description |
 | --- | --- | --- |
 | EmfPlusBrush | [2.2.1.1](#Section_2.2.1.1) | A graphics brush for the filling of figures. |
-| EmfPlusCustomLineCap | [2.2.1.2](#Section_2.2.2.14) | The shape to use at the ends of a line drawn by a graphics pen. |
+| EmfPlusCustomLineCap | [2.2.1.2](#Section_2.2.2.13) | The shape to use at the ends of a line drawn by a graphics pen. |
 | EmfPlusFont | [2.2.1.3](#Section_2.2.1.3) | Properties that determine the appearance of text, including [**typeface**](#gt_typeface), size, and style. |
-| EmfPlusImage | [2.2.1.4](#Section_2.2.1.4) | A graphics image in the form of a [**bitmap**](#gt_bitmap) or metafile. |
+| EmfPlusImage | [2.2.1.4](#Section_2.2.1.5) | A graphics image in the form of a [**bitmap**](#gt_bitmap) or metafile. |
 | EmfPlusImageAttributes | [2.2.1.5](#Section_2.2.1.5) | How bitmap and metafile image colors are manipulated during rendering. |
-| EmfPlusPath | [2.2.1.6](#Section_2.2.2.32) | A series of line and curve segments. |
+| EmfPlusPath | [2.2.1.6](#Section_2.2.2.29) | A series of line and curve segments. |
 | EmfPlusPen | [2.2.1.7](#Section_2.2.1.7) | A graphics pen for the drawing of lines. |
 | EmfPlusRegion | [2.2.1.8](#Section_2.2.2.41) | Line and curve segments that define a nonrectilinear shape. |
-| EmfPlusStringFormat | [2.2.1.9](#Section_2.2.2.44) | Text layout, display manipulations, and language identification. |
+| EmfPlusStringFormat | [2.2.1.9](#Section_2.2.1.9) | Text layout, display manipulations, and language identification. |
 
-Graphics objects are explicitly created by EmfPlusObject records (section [2.3.5.1](#Section_2.3.5.1)), and they can be used in any number of graphics operations. An implementation is responsible for keeping track of graphics objects during playback of the metafile. A conceptual model for managing EMF+ graphics objects is described in Managing Graphics Objects (section [3.1.2](#Section_3.1.2)).
+Graphics objects are explicitly created by EmfPlusObject records (section [2.3.5.1](#Section_3.2.32.21)), and they can be used in any number of graphics operations. An implementation is responsible for keeping track of graphics objects during playback of the metafile. A conceptual model for managing EMF+ graphics objects is described in Managing Graphics Objects (section [3.1.2](#Section_3.1.2)).
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 EmfPlusBrush Object
@@ -2926,7 +2926,7 @@ packet-beta
 **PathPointTypes (variable):** An array of **PathPointCount** objects that specifies how the points in the **PathPoints** field are used to draw the path. The type of objects in this array is specified by the **PathPointFlags** field, as follows:
 
 - If the **R** flag is set, the point types are specified by EmfPlusPathPointTypeRLE objects (section [2.2.2.32](#Section_2.2.2.32)), which use [**run-length encoding (RLE) compression**](#gt_run-length-encoding-rle-compression) ([MS-WMF](../MS-WMF/MS-WMF.md) section 3.1.6).
-- If the **R** flag is clear, the point types are specified by EmfPlusPathPointType objects (section [2.2.2.31](#Section_2.2.2.32)).
+- If the **R** flag is clear, the point types are specified by EmfPlusPathPointType objects (section [2.2.2.31](#Section_2.2.2.31)).
 **AlignmentPadding (variable):** An optional array of up to 3 bytes that pads the record so that its total size is a multiple of 4 bytes. This field MUST be ignored.
 
 See section [2.2.1](#Section_2.2.1) for the specification of additional graphics objects.
@@ -3072,7 +3072,7 @@ The following types of structure objects are defined.
 | EmfPlusPalette | [2.2.2.28](#Section_2.2.2.28) | The colors that make up a [**palette**](#gt_palette). |
 | EmfPlusPathGradientBrushData | [2.2.2.29](#Section_2.2.2.29) | A path gradient for a graphics brush. |
 | EmfPlusPathGradientBrushOptionalData | [2.2.2.30](#Section_2.2.2.30) | Optional data for a path gradient brush. |
-| EmfPlusPathPointType | [2.2.2.31](#Section_2.2.2.32) | A type value associated with a point on a graphics path. |
+| EmfPlusPathPointType | [2.2.2.31](#Section_2.2.2.31) | A type value associated with a point on a graphics path. |
 | EmfPlusPathPointTypeRLE | [2.2.2.32](#Section_2.2.2.32) | Type values associated with points on a graphics path using [**RLE compression**](#gt_run-length-encoding-rle-compression) ([MS-WMF](../MS-WMF/MS-WMF.md) section 3.1.6). |
 | EmfPlusPenData | [2.2.2.33](#Section_2.2.2.33) | Properties of a graphics pen. |
 | EmfPlusPenOptionalData | [2.2.2.34](#Section_2.2.2.34) | Optional data for a graphics pen. |
@@ -3200,7 +3200,7 @@ If clear, the pixel values are actual colors.
 
 **BitmapData (variable):** Variable-length data that defines the bitmap data object specified in the **Type** field. The content and format of the data can be different for every bitmap type.
 
-Graphics images are specified by EmfPlusImage objects (section [2.2.1.4](#Section_2.2.1.4)). An EmfPlusBitmap object MUST be present in the **ImageData** field of an EmfPlusImage object if ImageTypeBitmap is specified in its **Type** field.
+Graphics images are specified by EmfPlusImage objects (section [2.2.1.4](#Section_2.2.1.5)). An EmfPlusBitmap object MUST be present in the **ImageData** field of an EmfPlusImage object if ImageTypeBitmap is specified in its **Type** field.
 
 This object is generic and is used to specify different types of bitmap data, including:
 
@@ -3298,7 +3298,7 @@ packet-beta
 
 **BoundaryPathSize (4 bytes):** A signed integer that specifies the size in bytes of the **BoundaryPathData** field.
 
-**BoundaryPathData (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.32)), which specifies the boundary of the brush.
+**BoundaryPathData (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.29)), which specifies the boundary of the brush.
 
 Boundary path data is specified in the **BoundaryData** field of an EmfPlusPathGradientBrushData object (section [2.2.2.29](#Section_2.2.2.29)).
 
@@ -3338,7 +3338,7 @@ packet-beta
 
 **Length (4 bytes):** A signed integer that specifies the number of positions in this range.
 
-Graphics strings are specified by EmfPlusStringFormat objects (section [2.2.1.9](#Section_2.2.2.44)).
+Graphics strings are specified by EmfPlusStringFormat objects (section [2.2.1.9](#Section_2.2.1.9)).
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3401,7 +3401,7 @@ packet-beta
 
 **CustomEndCap (variable):** A custom line cap that defines the shape to draw at the end of a line. It can be any of various shapes, including a square, circle, or diamond.
 
-Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.14)). An EmfPlusCustomEndCapData object MUST be present in the **OptionalData** field of an EmfPlusPenData object (section [2.2.2.33](#Section_2.2.2.33)), if the **PenDataEndCap** flag (section [2.1.2.7](#Section_2.1.2.7)) is set in its **PenDataFlags** field.
+Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.13)). An EmfPlusCustomEndCapData object MUST be present in the **OptionalData** field of an EmfPlusPenData object (section [2.2.2.33](#Section_2.2.2.33)), if the **PenDataEndCap** flag (section [2.1.2.7](#Section_2.1.2.7)) is set in its **PenDataFlags** field.
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3445,7 +3445,7 @@ The height of the arrow cap is scaled by the width of the EmfPlusPen object that
 
 **LineMiterLimit (4 bytes):** A floating-point value that specifies the limit of the thickness of the join on a mitered corner by setting the maximum allowed ratio of [**miter length**](#gt_miter-length) to line width.
 
-**WidthScale (4 bytes):** A floating-point value that specifies the amount by which to scale an EmfPlusCustomLineCap object (section [2.2.1.2](#Section_2.2.2.14)) with respect to the width of the graphics pen that is used to draw the lines.
+**WidthScale (4 bytes):** A floating-point value that specifies the amount by which to scale an EmfPlusCustomLineCap object (section [2.2.1.2](#Section_2.2.2.13)) with respect to the width of the graphics pen that is used to draw the lines.
 
 **FillHotSpot (8 bytes):** An EmfPlusPointF object (section [2.2.2.36](#Section_2.2.2.36)) that is not currently used. It MUST be set to {0.0, 0.0}.
 
@@ -3497,7 +3497,7 @@ packet-beta
 
 **OptionalData (variable):** An optional EmfPlusCustomLineCapOptionalData object (section [2.2.2.14](#Section_2.2.2.14)) that specifies additional data for the custom graphics line cap. The specific contents of this field are determined by the value of the **CustomLineCapDataFlags** field.
 
-Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.14)).
+Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.13)).
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3518,7 +3518,7 @@ packet-beta
 
 **OutlineData (variable):** An optional EmfPlusLinePath object (section [2.2.2.26](#Section_2.2.2.26)) that specifies the path for outlining a custom graphics line cap. This field MUST be present if the CustomLineCapDataLinePath flag is set in the **CustomLineCapDataFlags** field of the EmfPlusCustomLineCapData object.
 
-Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.14)).
+Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.13)).
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3537,7 +3537,7 @@ packet-beta
 
 **CustomStartCap (variable):** A custom graphics line cap that defines the shape to draw at the start of a line. It can be any of various shapes, including a square, circle or diamond.
 
-Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.14)). If the PenDataStartCap flag (section [2.1.2.7](#Section_2.1.2.7)) is set in its **PenDataFlags** field, an EmfPlusCustomStartCapData object MUST be present in the **OptionalData** field of an EmfPlusPenData object (section [2.2.2.33](#Section_2.2.2.33)).
+Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.13)). If the PenDataStartCap flag (section [2.1.2.7](#Section_2.1.2.7)) is set in its **PenDataFlags** field, an EmfPlusCustomStartCapData object MUST be present in the **OptionalData** field of an EmfPlusPenData object (section [2.2.2.33](#Section_2.2.2.33)).
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3573,9 +3573,9 @@ packet-beta
 
 **FillPathLength (4 bytes):** A signed integer that specifies the length in bytes of the **FillPath** field.
 
-**FillPath (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.32)), which specifies the area to fill.
+**FillPath (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.29)), which specifies the area to fill.
 
-Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.14)). An EmfPlusFillPath object (section 2.2.2.17) MUST be present if the **CustomLineCapDataFillPath** flag is set in the **CustomLineCapDataFlags** field of an EmfPlusCustomLineCapData object (section [2.2.2.13](#Section_2.2.2.13)).
+Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.13)). An EmfPlusFillPath object (section 2.2.2.17) MUST be present if the **CustomLineCapDataFillPath** flag is set in the **CustomLineCapDataFlags** field of an EmfPlusCustomLineCapData object (section [2.2.2.13](#Section_2.2.2.13)).
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3792,9 +3792,9 @@ packet-beta
 
 **LinePathLength (4 bytes):** A signed integer that defines the length in bytes of the **LinePath** field.
 
-**LinePath (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.32)) that defines the outline.
+**LinePath (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.29)) that defines the outline.
 
-Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.14)). An EmfPlusLinePath object MUST be present if the CustomLineCapDataLinePath flag (section [2.1.2.2](#Section_2.1.2.2)) is set in the **CustomLineCapDataFlags** field of an EmfPlusCustomLineCapData object (section [2.2.2.13](#Section_2.2.2.13)).
+Custom line caps are specified by EmfPlusCustomLineCap objects (section [2.2.1.2](#Section_2.2.2.13)). An EmfPlusLinePath object MUST be present if the CustomLineCapDataLinePath flag (section [2.1.2.2](#Section_2.1.2.2)) is set in the **CustomLineCapDataFlags** field of an EmfPlusCustomLineCapData object (section [2.2.2.13](#Section_2.2.2.13)).
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3816,7 +3816,7 @@ packet-beta
 
 **MetafileData (variable):** Variable-length data that specifies the embedded metafile. The content and format of the data can be different for each metafile type.
 
-Graphics images are specified by EmfPlusImage objects (section [2.2.1.4](#Section_2.2.1.4)). An EmfPlusMetafile object MUST be present in the **ImageData** field of an EmfPlusImage object if ImageTypeMetafile is specified in its **Type** field.
+Graphics images are specified by EmfPlusImage objects (section [2.2.1.4](#Section_2.2.1.5)). An EmfPlusMetafile object MUST be present in the **ImageData** field of an EmfPlusImage object if ImageTypeMetafile is specified in its **Type** field.
 
 This object is generic and is used for different types of data, including:
 
@@ -3940,7 +3940,7 @@ packet-beta
 
 **Type (4 bits):** An unsigned integer path point type. This value is defined in the PathPointType enumeration (section [2.1.1.22](#Section_2.1.1.22)).
 
-Graphics paths are specified by EmfPlusPath objects (section [2.2.1.6](#Section_2.2.2.32)). Every point on a graphics path MUST have a type value associated with it.
+Graphics paths are specified by EmfPlusPath objects (section [2.2.1.6](#Section_2.2.2.29)). Every point on a graphics path MUST have a type value associated with it.
 
 See section [2.2.2](#Section_2.2.2) for the specification of additional structure objects.
 
@@ -3963,9 +3963,9 @@ If clear, the path points are on a graphics line.
 
 **RunCount (6 bits):** The run count, which is the number of path points to be associated with the type in the **PointType** field.
 
-**PointType (1 byte):** An EmfPlusPathPointType object (section [2.2.2.31](#Section_2.2.2.32)) that specifies the type to associate with the path points.
+**PointType (1 byte):** An EmfPlusPathPointType object (section [2.2.2.31](#Section_2.2.2.31)) that specifies the type to associate with the path points.
 
-Graphics paths are specified by EmfPlusPath objects (section [2.2.1.6](#Section_2.2.2.32)). Every point on a graphics path MUST have a type value associated with it.
+Graphics paths are specified by EmfPlusPath objects (section [2.2.1.6](#Section_2.2.2.29)). Every point on a graphics path MUST have a type value associated with it.
 
 RLE compression makes it possible to specify an arbitrary number of identical values without a proportional increase in storage requirements.
 
@@ -4207,7 +4207,7 @@ packet-beta
 
 **RegionNodePathLength (4 bytes):** A signed integer that specifies the length in bytes of the **RegionNodePath** field.
 
-**RegionNodePath (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.32)) that specifies the boundary of the region node.
+**RegionNodePath (variable):** An EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.29)) that specifies the boundary of the region node.
 
 Region nodes are specified by EmfPlusRegion objects (section [2.2.1.8](#Section_2.2.2.41)). An EmfPlusRegionNodePath object MUST be present in the **RegionNodeData** field of an EmfPlusRegionNode object (section [2.2.2.40](#Section_2.2.2.41)) if its **Type** field is set to the **RegionNodeDataTypePath** value from the RegionNodeDataType enumeration (section [2.1.1.26](#Section_2.1.1.26)).
 
@@ -4242,7 +4242,7 @@ packet-beta
 
 **TabStops (variable):** An optional array of 32-bit floating-point values that specify the optional tab stop locations for this object. Each tab stop value represents the number of spaces between tab stops or, for the first tab stop, the number of spaces between the beginning of a line of text and the first tab stop.
 
-This field MUST be present if the value of the **TabStopCount** field in the EmfPlusStringFormat object (section [2.2.1.9](#Section_2.2.2.44)) is greater than 0.
+This field MUST be present if the value of the **TabStopCount** field in the EmfPlusStringFormat object (section [2.2.1.9](#Section_2.2.1.9)) is greater than 0.
 
 **CharRange (variable):** An optional array of **RangeCount** EmfPlusCharacterRange objects (section [2.2.2.8](#Section_2.2.2.8)) that specify the range of character positions within a string of text. The bounding [**region**](#gt_region) is defined by the area of the display that is occupied by a group of characters specified by the character range.
 
@@ -4276,7 +4276,7 @@ packet-beta
 
 **OptionalData (variable):** An optional EmfPlusTextureBrushOptionalData object (section [2.2.2.46](#Section_2.2.2.46)) that specifies additional data for the texture brush. The specific contents of this field are determined by the value of the **BrushDataFlags** field.
 
-Graphics brushes are specified by EmfPlusBrush objects (section [2.2.1.1](#Section_2.2.1.1)). A texture brush paints an image, which in this context is called a "texture". The texture consists of either a portion of an image or a scaled version of an image, which is specified by an EmfPlusImage object (section [2.2.1.4](#Section_2.2.1.4)) in the **OptionalData** field.
+Graphics brushes are specified by EmfPlusBrush objects (section [2.2.1.1](#Section_2.2.1.1)). A texture brush paints an image, which in this context is called a "texture". The texture consists of either a portion of an image or a scaled version of an image, which is specified by an EmfPlusImage object (section [2.2.1.4](#Section_2.2.1.5)) in the **OptionalData** field.
 
 [**Gamma correction**](#gt_gamma-correction) controls the overall [**brightness**](#gt_brightness) and [**intensity**](#gt_intensity) of an image. Uncorrected images can look either bleached out or too dark. Varying the amount of gamma correction changes not only the brightness but also the ratios of red to green to blue. The need for gamma correction arises because an output device might not render colors in the same intensity as the input image.
 
@@ -4297,7 +4297,7 @@ packet-beta
 
 **TransformMatrix (24 bytes):** An optional EmfPlusTransformMatrix object (section [2.2.2.47](#Section_2.2.2.47)) that specifies a [**world space**](#gt_world-space) to [**device space**](#gt_device-space) [**transform**](#gt_transform) for the texture brush. This field MUST be present if the **BrushDataTransform** flag is set in the **BrushDataFlags** field of the EmfPlusTextureBrushData object.
 
-**ImageObject (variable):** An optional EmfPlusImage object (section [2.2.1.4](#Section_2.2.1.4)) that specifies the brush texture. This field MUST be present if the size of the EmfPlusObject record (section [2.3.5.1](#Section_2.3.5.1)) that defines this texture brush is large enough to accommodate an EmfPlusImage object in addition to the required fields of the EmfPlusTextureBrushData object and optionally an EmfPlusTransformMatrix object.
+**ImageObject (variable):** An optional EmfPlusImage object (section [2.2.1.4](#Section_2.2.1.5)) that specifies the brush texture. This field MUST be present if the size of the EmfPlusObject record (section [2.3.5.1](#Section_3.2.32.21)) that defines this texture brush is large enough to accommodate an EmfPlusImage object in addition to the required fields of the EmfPlusTextureBrushData object and optionally an EmfPlusTransformMatrix object.
 
 Graphics brushes are specified by EmfPlusBrush objects (section [2.2.1.1](#Section_2.2.1.1)).
 
@@ -4969,7 +4969,7 @@ packet-beta
 
 **CM (4 bits):** The logical operation for combining two regions. See the [CombineMode](#Section_2.1.1.4) enumeration for the meanings of the values.
 
-**ObjectID (1 byte):** The index of an [EmfPlusPath](#Section_2.2.2.32) object in the [**EMF+**](#gt_enhanced-metafile-format-plus-extensions-emf) Object Table (section [3.1.2](#Section_3.1.2)). The value MUST be zero to 63, inclusive.
+**ObjectID (1 byte):** The index of an [EmfPlusPath](#Section_2.2.2.29) object in the [**EMF+**](#gt_enhanced-metafile-format-plus-extensions-emf) Object Table (section [3.1.2](#Section_3.1.2)). The value MUST be zero to 63, inclusive.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned size of the entire record in bytes, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x0000000C.
 
@@ -5869,7 +5869,7 @@ packet-beta
 
 If set, **RectData** contains an [EmfPlusRect](#Section_2.2.2.39) object. If clear, **RectData** contains an [EmfPlusRectF](#Section_2.2.2.39) object.
 
-**ObjectID (1 byte):** The index of an [EmfPlusImage](#Section_2.2.1.4) object in the [EMF+ Object Table](#Section_52fff99070494fffb6c63131ac024090), which specifies the image to render. The value MUST be zero to 63, inclusive.
+**ObjectID (1 byte):** The index of an [EmfPlusImage](#Section_2.2.1.5) object in the [EMF+ Object Table](#Section_52fff99070494fffb6c63131ac024090), which specifies the image to render. The value MUST be zero to 63, inclusive.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be one of the following:
 
@@ -5952,7 +5952,7 @@ If set, each element in **PointData** specifies a location in the coordinate spa
 
 **Note:** If this flag is set, the **C** flag (above) is undefined and MUST be ignored.<22>
 
-**ObjectID (1 byte):** The index of an [EmfPlusImage](#Section_2.2.1.4) object in the [EMF+ Object Table](#Section_52fff99070494fffb6c63131ac024090), which specifies the image to render. The value MUST be zero to 63, inclusive.
+**ObjectID (1 byte):** The index of an [EmfPlusImage](#Section_2.2.1.5) object in the [EMF+ Object Table](#Section_52fff99070494fffb6c63131ac024090), which specifies the image to render. The value MUST be zero to 63, inclusive.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record. For this record type, the value MUST be one of the following.
 
@@ -6107,7 +6107,7 @@ packet-beta
 
 **X (1 bit):** Reserved and MUST be ignored.
 
-**ObjectId (1 byte):** The index of the [EmfPlusPath](#Section_2.2.2.32) object to draw, in the [EMF+ Object Table](#Section_52fff99070494fffb6c63131ac024090). The value MUST be zero to 63, inclusive.
+**ObjectId (1 byte):** The index of the [EmfPlusPath](#Section_2.2.2.29) object to draw, in the [EMF+ Object Table](#Section_52fff99070494fffb6c63131ac024090). The value MUST be zero to 63, inclusive.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x00000010.
 
@@ -6302,7 +6302,7 @@ If set, **BrushId** specifies a color as an [EmfPlusARGB](#Section_2.2.2.1) obje
 
 **BrushId (4 bytes):** An unsigned integer that specifies the brush, the content of which is determined by the **S** bit in the **Flags** field. This definition is used to paint the foreground text color; that is, just the glyphs themselves.
 
-**FormatID (4 bytes):** An unsigned integer that specifies the index of an optional [EmfPlusStringFormat](#Section_2.2.2.44) object in the EMF+ Object Table. This object specifies text layout information and display manipulations to be applied to a string.
+**FormatID (4 bytes):** An unsigned integer that specifies the index of an optional [EmfPlusStringFormat](#Section_2.2.1.9) object in the EMF+ Object Table. This object specifies text layout information and display manipulations to be applied to a string.
 
 **Length (4 bytes):** An unsigned integer that specifies the number of characters in the string.
 
@@ -6521,7 +6521,7 @@ If set, **BrushId** specifies a color as an [EmfPlusARGB](#Section_2.2.2.1) obje
 
 **X (1 bit):** Reserved and MUST be ignored.
 
-**ObjectId (1 byte):** The index of the [EmfPlusPath](#Section_2.2.2.32) object to fill, in the EMF+ Object Table. The value MUST be zero to 63, inclusive.
+**ObjectId (1 byte):** The index of the [EmfPlusPath](#Section_2.2.2.29) object to fill, in the EMF+ Object Table. The value MUST be zero to 63, inclusive.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x00000010.
 
@@ -6826,7 +6826,7 @@ The Object Record Types define reusable graphics objects. The following are [**E
 
 | Name | Section | Description |
 | --- | --- | --- |
-| EmfPlusObject | [2.3.5.1](#Section_2.3.5.1) | Defines an object for use in graphics operations. |
+| EmfPlusObject | [2.3.5.1](#Section_3.2.32.21) | Defines an object for use in graphics operations. |
 | EmfPlusSerializableObject | [2.3.5.2](#Section_2.3.5.2) | Defines an object that has been serialized into a data buffer. |
 
 The generic structure of EMF+ object records is specified as follows:
@@ -7100,7 +7100,7 @@ packet-beta
 
 **X (1 bit):** Reserved and MUST be ignored.
 
-**CompositingQuality (1 byte):** The [**compositing**](#gt_compositing) quality value, from the [CompositingQuality](#Section_3.2.32.12) enumeration.
+**CompositingQuality (1 byte):** The [**compositing**](#gt_compositing) quality value, from the [CompositingQuality](#Section_2.3.6.3) enumeration.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x0000000C.
 
@@ -7140,7 +7140,7 @@ packet-beta
 
 **X (1 bit):** Reserved and MUST be ignored.
 
-**InterpolationMode (1 byte):** The interpolation mode value, from the [InterpolationMode](#Section_2.3.6.4) enumeration.
+**InterpolationMode (1 byte):** The interpolation mode value, from the [InterpolationMode](#Section_3.2.32.13) enumeration.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x0000000C.
 
@@ -7180,7 +7180,7 @@ packet-beta
 
 **X (1 bit):** Reserved and MUST be ignored.
 
-**PixelOffsetMode (1 byte):** The pixel offset mode value, from the [PixelOffsetMode](#Section_3.2.32.14) enumeration.
+**PixelOffsetMode (1 byte):** The pixel offset mode value, from the [PixelOffsetMode](#Section_3.2.32.4) enumeration.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x0000000C.
 
@@ -7285,7 +7285,7 @@ packet-beta
 
 **X (1 bit):** Reserved and MUST be ignored.
 
-**TextRenderingHint (1 byte):** The text rendering hint value, from the [TextRenderingHint](#Section_2.1.1.31) enumeration, which specifies the quality to use in subsequent text rendering.
+**TextRenderingHint (1 byte):** The text rendering hint value, from the [TextRenderingHint](#Section_3.2.32.5) enumeration, which specifies the quality to use in subsequent text rendering.
 
 **Size (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes in the entire record, including the 12-byte record header and record-specific data. For this record type, the value MUST be 0x0000000C.
 
@@ -7300,10 +7300,10 @@ The State Record Types specify operations on the state of the [**playback device
 
 | Name | Section | Description |
 | --- | --- | --- |
-| EmfPlusBeginContainer | [2.3.7.1](#Section_2.3.7.2) | Starts a new graphics state container with a transformation. |
-| EmfPlusBeginContainerNoParams | [2.3.7.2](#Section_2.3.7.2) | Starts a new graphics state container. |
+| EmfPlusBeginContainer | [2.3.7.1](#Section_3.2.32.10) | Starts a new graphics state container with a transformation. |
+| EmfPlusBeginContainerNoParams | [2.3.7.2](#Section_3.2.32.10) | Starts a new graphics state container. |
 | EmfPlusEndContainer | [2.3.7.3](#Section_2.3.7.3) | Closes a graphics state container that was previously opened by a begin container operation. |
-| EmfPlusRestore | [2.3.7.4](#Section_3.2.67.2) | Restores a saved graphics state. |
+| EmfPlusRestore | [2.3.7.4](#Section_2.3.7.4) | Restores a saved graphics state. |
 | EmfPlusSave | [2.3.7.5](#Section_3.2.32.7) | Saves the current graphics state. |
 
 The generic structure of EMF+ state records is specified as follows:
@@ -7434,7 +7434,7 @@ packet-beta
 
 **DataSize (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes of record-specific data that follows. For this record type, this value is 0x00000004.
 
-**StackIndex (4 bytes):** An unsigned integer that specifies the index of a graphics state container. The index MUST match the value associated with a graphics state container opened by a previous [EmfPlusBeginContainer](#Section_2.3.7.2) or [EmfPlusBeginContainerNoParams](#Section_2.3.7.2) record.
+**StackIndex (4 bytes):** An unsigned integer that specifies the index of a graphics state container. The index MUST match the value associated with a graphics state container opened by a previous [EmfPlusBeginContainer](#Section_3.2.32.10) or [EmfPlusBeginContainerNoParams](#Section_3.2.32.10) record.
 
 Each graphics state container MUST be added to an array of saved graphics containers. The graphics state container is not written to the [**EMF+**](#gt_enhanced-metafile-format-plus-extensions-emf) [**metafile**](#gt_metafile), so its format can be determined by the implementation.
 
@@ -7490,7 +7490,7 @@ packet-beta
 
 **DataSize (4 bytes):** An unsigned integer that specifies the 32-bit-aligned number of bytes of record-specific data that follows. For this record type, the value MUST be 0x00000004.
 
-**StackIndex (4 bytes):** An unsigned integer that specifies a level to associate with the graphics state. The level value can be used by a subsequent [EmfPlusRestore](#Section_3.2.67.2) record to retrieve the graphics state.
+**StackIndex (4 bytes):** An unsigned integer that specifies a level to associate with the graphics state. The level value can be used by a subsequent [EmfPlusRestore](#Section_2.3.7.4) record to retrieve the graphics state.
 
 Each saved graphics state MUST be pushed onto a stack of saved graphics states. The graphics state information is not written to the [**EMF+**](#gt_enhanced-metafile-format-plus-extensions-emf) [**metafile**](#gt_metafile), so its format can be determined by the implementation.
 
@@ -7642,11 +7642,11 @@ packet-beta
 
 **AntiAliasMode (1 byte):** An unsigned integer that specifies the quality of line rendering, including the type of line [**anti-aliasing**](#gt_anti-aliasing). It is defined in the [SmoothingMode](#Section_2.1.1.27) enumeration.
 
-**TextRenderHint (1 byte):** An unsigned integer that specifies the quality of text rendering, including the type of text anti-aliasing. It is defined in the [TextRenderingHint](#Section_2.1.1.31) enumeration.
+**TextRenderHint (1 byte):** An unsigned integer that specifies the quality of text rendering, including the type of text anti-aliasing. It is defined in the [TextRenderingHint](#Section_3.2.32.5) enumeration.
 
 **CompositingMode (1 byte):** An unsigned integer that specifies how source colors are combined with background colors. It MUST be a value in the [CompositingMode](#Section_2.1.1.5) enumeration.
 
-**CompositingQuality (1 byte):** An unsigned integer that specifies the degree of smoothing to apply to lines, curves and the edges of filled areas to make them appear more continuous or sharply defined. It MUST be a value in the [CompositingQuality](#Section_3.2.32.12) enumeration.
+**CompositingQuality (1 byte):** An unsigned integer that specifies the degree of smoothing to apply to lines, curves and the edges of filled areas to make them appear more continuous or sharply defined. It MUST be a value in the [CompositingQuality](#Section_2.3.6.3) enumeration.
 
 **RenderOriginX (2 bytes):** A signed integer, which is the horizontal coordinate of the origin for rendering [**halftoning**](#gt_halftoning) and [**dithering**](#gt_dithering) matrixes.
 
@@ -7656,7 +7656,7 @@ packet-beta
 
 **FilterType (1 byte):** An unsigned integer that specifies how [**scaling**](#gt_f3f5f638-16f6-4159-a3f1-9d845b1196f5), including stretching and shrinking, is performed. It MUST be a value in the [FilterType](#Section_2.1.1.11) enumeration.
 
-**PixelOffset (1 byte):** An unsigned integer that specifies the overall quality of the image and text-rendering process. It MUST be a value in the [PixelOffsetMode](#Section_3.2.32.14) enumeration.
+**PixelOffset (1 byte):** An unsigned integer that specifies the overall quality of the image and text-rendering process. It MUST be a value in the [PixelOffsetMode](#Section_3.2.32.4) enumeration.
 
 **WorldToDevice (24 bytes):** An 192-bit [EmfPlusTransformMatrix](#Section_2.2.2.47) object that specifies the [**world space**](#gt_world-space) to [**device space**](#gt_device-space) transforms.
 
@@ -8080,7 +8080,7 @@ Because metafiles were developed and written with little-endian computers, machi
 
 This section describes a conceptual model for managing graphics objects that an [**EMF+**](#gt_enhanced-metafile-format-plus-extensions-emf) implementation can maintain during metafile playback. The described organization is provided to facilitate the explanation of the file format. This specification does not mandate that implementations adhere to this model as long as their external behavior is consistent with that defined in this specification.
 
-The EmfPlusObject record (section [2.3.5.1](#Section_2.3.5.1)) creates graphics objects of the types defined in the ObjectType enumeration (section [2.1.1.21](#Section_2.1.1.21)), and the objects themselves are specified in Graphics Objects (section [2.2.1](#Section_2.2.1)). Once created, graphics objects can be reused any number of times in graphics operations.
+The EmfPlusObject record (section [2.3.5.1](#Section_3.2.32.21)) creates graphics objects of the types defined in the ObjectType enumeration (section [2.1.1.21](#Section_2.1.1.21)), and the objects themselves are specified in Graphics Objects (section [2.2.1](#Section_2.2.1)). Once created, graphics objects can be reused any number of times in graphics operations.
 
 An implementation is responsible for keeping track of graphics objects during metafile playback. A model for managing graphics objects is described below. This model minimizes the space needed by the graphics object table during playback.
 
@@ -9422,7 +9422,7 @@ packet-beta
 
 **Type (2 bytes):** 0x4021 identifies the record type as EmfPlusSetInterpolationMode.
 
-**Flags (2 bytes):** 0x0007 specifies InterpolationModeHighQualityBicubic from the InterpolationMode enumeration (section [2.1.1.16](#Section_2.3.6.4)).
+**Flags (2 bytes):** 0x0007 specifies InterpolationModeHighQualityBicubic from the InterpolationMode enumeration (section [2.1.1.16](#Section_3.2.32.13)).
 
 **Size (4 bytes):** 0x0000000C specifies the size in bytes of this record.
 
@@ -9539,7 +9539,7 @@ packet-beta
 
 **DataSize (4 bytes):** 0x00000004 specifies the 32-bit-aligned number of bytes of data in the **PointData** member that follows. This number does not include the size of the invariant part of this record.
 
-**StackIndex (4 bytes):** 0x00000000 specifies the identifier used by the corresponding EmfPlusRestore operation (section [2.3.7.4](#Section_3.2.67.2)) to retrieve the graphics state from the correct save level on the graphics state stack.
+**StackIndex (4 bytes):** 0x00000000 specifies the identifier used by the corresponding EmfPlusRestore operation (section [2.3.7.4](#Section_2.3.7.4)) to retrieve the graphics state from the correct save level on the graphics state stack.
 
 <a id="Section_3.2.32.8"></a>
 #### 3.2.32.8 EmfPlusMultiplyWorldTransform Example 2
@@ -9614,7 +9614,7 @@ packet-beta
 <a id="Section_3.2.32.10"></a>
 #### 3.2.32.10 EmfPlusBeginContainerNoParams Example
 
-This section provides an example of the EmfPlusBeginContainerNoParams record (section [2.3.7.2](#Section_2.3.7.2)).
+This section provides an example of the EmfPlusBeginContainerNoParams record (section [2.3.7.2](#Section_3.2.32.10)).
 
 00000450: 28 40 00 00 10 00 00 00 04 00 00 00 01 00 00 00
 
@@ -9704,7 +9704,7 @@ packet-beta
 
 **Type (2 bytes):** 0x4021 identifies the record type as EmfPlusSetInterpolationMode.
 
-**Flags (2 bytes):** 0x0007 specifies InterpolationModeHighQualityBicubic from the InterpolationMode enumeration (section [2.1.1.16](#Section_2.3.6.4)).
+**Flags (2 bytes):** 0x0007 specifies InterpolationModeHighQualityBicubic from the InterpolationMode enumeration (section [2.1.1.16](#Section_3.2.32.13)).
 
 **Size (4 bytes):** 0x0000000C specifies the size in bytes of this record.
 
@@ -9727,7 +9727,7 @@ packet-beta
 
 **Type (2 bytes):** 0x4022 identifies the record type as EmfPlusSetPixelOffsetMode.
 
-**Flags (2 bytes):** 0x0003 specifies PixelOffsetModeNone from the PixelOffsetMode enumeration (section [2.1.1.25](#Section_3.2.32.14)).
+**Flags (2 bytes):** 0x0003 specifies PixelOffsetModeNone from the PixelOffsetMode enumeration (section [2.1.1.25](#Section_3.2.32.4)).
 
 **Size (4 bytes):** 0x0000000C specifies the size in bytes of this record.
 
@@ -9750,7 +9750,7 @@ packet-beta
 
 **Type (2 bytes):** 0x401F identifies the record type as EmfPlusSetTextRenderingHint.
 
-**Flags (2 bytes):** 0x0005 specifies TextRenderingHintClearTypeGridFit from the TextRenderingHint enumeration (section [2.1.1.31](#Section_2.1.1.31)).
+**Flags (2 bytes):** 0x0005 specifies TextRenderingHintClearTypeGridFit from the TextRenderingHint enumeration (section [2.1.1.31](#Section_3.2.32.5)).
 
 **Size (4 bytes):** 0x0000000C specifies the size in bytes of this record.
 
@@ -9927,7 +9927,7 @@ packet-beta
 <a id="Section_3.2.32.21"></a>
 #### 3.2.32.21 EmfPlusObject Example
 
-This section provides an example of the EmfPlusObject record (section [2.3.5.1](#Section_2.3.5.1)).
+This section provides an example of the EmfPlusObject record (section [2.3.5.1](#Section_3.2.32.21)).
 
 00000530: 08 40 00 03
 
@@ -9966,7 +9966,7 @@ packet-beta
 
 **Type (2 bytes):** 0x4008 identifies the record type as EmfPlusObject.
 
-**Flags (2 bytes):** 0x0300 specifies an EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.32)) from the ObjectType enumeration (section [2.1.1.21](#Section_2.1.1.21)), and index 0x00 for the graphics object in the EMF+ Object Table (section [3.1.2](#Section_3.1.2)).
+**Flags (2 bytes):** 0x0300 specifies an EmfPlusPath object (section [2.2.1.6](#Section_2.2.2.29)) from the ObjectType enumeration (section [2.1.1.21](#Section_2.1.1.21)), and index 0x00 for the graphics object in the EMF+ Object Table (section [3.1.2](#Section_3.1.2)).
 
 **Size (4 bytes):** 0x000000C4 specifies the size in bytes of the entire record.
 
@@ -10050,7 +10050,7 @@ The embedded EMF+ records are presented in the sections that follow.
 <a id="Section_3.2.33.1"></a>
 #### 3.2.33.1 EmfPlusObject Example
 
-This section provides an example of the EmfPlusObject record (section [2.3.5.1](#Section_2.3.5.1)).
+This section provides an example of the EmfPlusObject record (section [2.3.5.1](#Section_3.2.32.21)).
 
 00000620: 08 40 01 02 30 00 00 00 24 00 00 00 02 10 C0 DB
 
@@ -10997,7 +10997,7 @@ packet-beta
 <a id="Section_3.2.67.2"></a>
 #### 3.2.67.2 EmfPlusRestore Example
 
-This section provides an example of the EmfPlusRestore record (section [2.3.7.4](#Section_3.2.67.2)).
+This section provides an example of the EmfPlusRestore record (section [2.3.7.4](#Section_2.3.7.4)).
 
 00000980: 26 40 00 00 10 00 00 00
 

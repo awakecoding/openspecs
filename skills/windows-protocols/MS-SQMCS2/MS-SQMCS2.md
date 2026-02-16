@@ -740,7 +740,7 @@ The **namespace** element MUST be the identical namespace as defined in the corr
 
 The command (**cmd**) element schema is specified in [MS-TPXS](../MS-TPXS/MS-TPXS.md) section 2.2.1.1.1.1.2. The **cmd** element is the parent of a set of child **arg** elements with key-value attribute pairs specifying the command arguments (if any). The **cmd** element has one attribute, **nm**, specifying the command name value.
 
-The response **cmd** element is the server response to the client request **cmd** (see section [2.2.2.16](#Section_2.2.2.16.3)). One or more **cmd** elements are required. The response commands are specified in the following sections.
+The response **cmd** element is the server response to the client request **cmd** (see section [2.2.2.16](#Section_2.2.2.16)). One or more **cmd** elements are required. The response commands are specified in the following sections.
 
 <a id="Section_2.2.3.6.1"></a>
 ##### 2.2.3.6.1 receipt Command
@@ -780,7 +780,7 @@ The **rsrc** command specifies the A-SQM resource version and path for the SQM c
 <a id="Section_2.2.3.6.4"></a>
 ##### 2.2.3.6.4 error Command
 
-The **error** command specifies that the server failed to process the SQM client request. This command is valid for all client request commands as specified in section [2.2.2.16](#Section_2.2.2.16.3). The **error** command MUST include the following **arg** element.
+The **error** command specifies that the server failed to process the SQM client request. This command is valid for all client request commands as specified in section [2.2.2.16](#Section_2.2.2.16). The **error** command MUST include the following **arg** element.
 
 **cmd arg** element:
 
@@ -961,7 +961,7 @@ The SQM client creates a SQM XML message as specified in section [2.2.2](#Sectio
 - **gp**: The client sets this value to a SQM client-defined value as specified in section [2.2.2.13.3](#Section_2.2.2.13.3).
 - **app**: The client sets this value to a SQM client-defined value as specified in section [2.2.2.13.4](#Section_2.2.2.13.4).
 - The client constructs a **ctrl** element, as a child element of **req**, as specified in section [2.2.2.14](#Section_2.2.2.14).
-- The client constructs a **cmd** element, as a child element of **req**, as specified in section [2.2.2.16](#Section_2.2.2.16.3) with the command **dataupload** as specified in section 2.2.2.16.2.
+- The client constructs a **cmd** element, as a child element of **req**, as specified in section [2.2.2.16](#Section_2.2.2.16) with the command **dataupload** as specified in section 2.2.2.16.2.
 - The client creates a command argument **tm**, setting the value to the current system [**UTC**](#gt_coordinated-universal-time-utc) time as specified in 2.2.2.16.2.
 - The client creates a command argument **token**, setting the value to the token string as specified in 2.2.2.16.2.
 - The client creates a command argument **size**, setting the value to the SQM session length as specified in 2.2.2.16.2 and specified in section 3.1.5.3.1.

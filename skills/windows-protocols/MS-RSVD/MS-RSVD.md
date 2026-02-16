@@ -1804,7 +1804,7 @@ The application provides:
 - Stage 5 value
 - Stage 6 value
 - **SnapshotId**: A GUID to uniquely identify the snapshot.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1) as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3) as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1845,7 +1845,7 @@ The application provides:
 - Stage 6 value
 - **SnapshotId**: A GUID to uniquely identify the snapshot.
 - **LogFileID**: A GUID to identify the log file.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1882,7 +1882,7 @@ The application provides:
 
 - A handle to the **Open** identifying a VHD set.
 - **TransactionId**: A GUID used to uniquely identify the start operation.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1910,7 +1910,7 @@ The application provides:
 - **SnapshotId**: A GUID to identify the first snapshot data to include in the extract.
 - **SnapshotLimitId**: A GUID to identify the last snapshot data to include in the extract.
 - **DestinationFileName**: A VHD file name into which the difference data will be written.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1941,7 +1941,7 @@ The application provides:
 - A handle to the **Open** identifying a shared virtual disk.
 - **TransactionId**: A GUID used to uniquely identify the start operation.
 - **DestinationVhdSetName**: A name for the VHD set.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -1971,7 +1971,7 @@ The application provides:
 - **ExpandOnly**: Indicates that a size can only be expanded.
 - **AllowUnsafeVirtualSize**: Indicates that the new size can be less than the data on the disk.
 - **ShrinkToMinimumSafeSize**: Indicates that the server automatically shrinks the virtual disk to the minimum safe virtual size.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -2169,7 +2169,7 @@ The application provides:
 
 - A handle to the **Open** identifying a VHD set.
 - **SnapshotId**: A GUID to uniquely identify the snapshot.
-The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.1.1), as follows:
+The client MUST construct an SVHDX_META_OPERATION_START_REQUEST structure, as specified in section [2.2.4.17](#Section_2.2.4.17.3), as follows:
 
 The SVHDX_TUNNEL_OPERATION_HEADER MUST be initialized as follows:
 
@@ -2861,7 +2861,7 @@ If **Open.IsVHDSet** is FALSE, the server MUST fail the request with STATUS_INVA
 
 The server MUST issue a Create Snapshot request to the virtual SCSI disk in an implementation-specific manner.
 
-If the snapshot creation operation of type **SvhdxSnapshotTypeCDP** is aborted after completion of stage **SvhdxSnapshotStageBlockIO**, due to a server-defined time-out as specified in section [3.2.2](#Section_3.1.2), the server MUST fail any optional, subsequent stages of the snapshot creation with STATUS_IO_TIMEOUT.
+If the snapshot creation operation of type **SvhdxSnapshotTypeCDP** is aborted after completion of stage **SvhdxSnapshotStageBlockIO**, due to a server-defined time-out as specified in section [3.2.2](#Section_3.2.2), the server MUST fail any optional, subsequent stages of the snapshot creation with STATUS_IO_TIMEOUT.
 
 If the snapshot creation of type **SvhdxSnapshotTypeCDP** fails after completion of stage **SvhdxSnapshotStageUnblockIO**, the server MUST set **Snapshot.ChangeTracking** to FALSE and MUST fail the change tracking with error STATUS_FILE_FORCED_CLOSED.
 

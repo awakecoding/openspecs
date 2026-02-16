@@ -259,7 +259,7 @@ The Internet Information Services (IIS) Inetinfo Remote Protocol is appropriate 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The Internet Information Services (IIS) Inetinfo Remote Protocol has been modified between versions of [**IIS**](#gt_internet-information-services-iis) in ways that make interoperability between different server implementations difficult. Modifications to the interface between IIS versions will be noted in section [2.2](#Section_2.2) or section [3.1](#Section_3.1.5.8).<1>
+The Internet Information Services (IIS) Inetinfo Remote Protocol has been modified between versions of [**IIS**](#gt_internet-information-services-iis) in ways that make interoperability between different server implementations difficult. Modifications to the interface between IIS versions will be noted in section [2.2](#Section_2.2) or section [3.1](#Section_3.1.5.10).<1>
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields

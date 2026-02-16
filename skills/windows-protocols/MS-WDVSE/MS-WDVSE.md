@@ -202,7 +202,7 @@ These protocol server extensions specify the following extensions to the base We
 
 - An [**HTTP**](#gt_hypertext-transfer-protocol-http) method that serves as the transport vehicle for search functionality in external processes.
 - An HTTP request header that indicates whether an [**entity**](#gt_entity) is to be returned as-is, or whether any associated programmatic processing is to be performed and the result returned.
-- The [MS-Author-Via Response header](#Section_3.2.5.2), which specifies to the client application what the preferred protocol mechanism is for authoring documents in a specific namespace. The namespace is the entire collection of items under a request URI ([RFC4918] section 5.2). For example, a client might have multiple authoring tools available to it, each possibly supported by a different network authoring protocol.
+- The [MS-Author-Via Response header](#Section_4.1), which specifies to the client application what the preferred protocol mechanism is for authoring documents in a specific namespace. The namespace is the entire collection of items under a request URI ([RFC4918] section 5.2). For example, a client might have multiple authoring tools available to it, each possibly supported by a different network authoring protocol.
 - An extension to the existing Depth HTTP request header that indicates whether the root of a resource is to be included in the results.
 - Additional properties in the DAV namespace that describe additional file characteristics.
 <a id="Section_1.4"></a>
@@ -229,12 +229,12 @@ Supported Transports: WebDAV Protocol: Server Extensions use [**HTTP**](#gt_hype
 
 Versioning: No new versioning mechanisms have been introduced beyond those that already exist in [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) and HTTP.
 
-Capability Negotiation: Negotiation of WebDAV and HTTP capabilities is via the OPTIONS method. These server extensions extends the OPTIONS method that uses an HTTP response header to indicate which authoring tools are to be used. For more information about authoring, see section [2.2.2](#Section_3.2.5.2).
+Capability Negotiation: Negotiation of WebDAV and HTTP capabilities is via the OPTIONS method. These server extensions extends the OPTIONS method that uses an HTTP response header to indicate which authoring tools are to be used. For more information about authoring, see section [2.2.2](#Section_4.1).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-These protocol server extensions can be extended by adding new tokens to the [MS-Author-Via](#Section_3.2.5.2) field value, section 2.2.2.
+These protocol server extensions can be extended by adding new tokens to the [MS-Author-Via](#Section_4.1) field value, section 2.2.2.
 
 These protocol server extensions use [**HTTP**](#gt_hypertext-transfer-protocol-http) status codes [[RFC2068]](https://go.microsoft.com/fwlink/?LinkId=90310) section 10 and [[RFC4918]](https://go.microsoft.com/fwlink/?LinkId=151240) section 11.
 
@@ -265,8 +265,8 @@ The extension headers in this protocol conform to the form and behavior of other
 This section specifies the following header extensions:
 
 - The [Translate request header (section 2.2.1)](#Section_3.2.5.1) allows the [**WebDAV client**](#gt_webdav-client) to request the source of an [**entity**](#gt_entity).
-- The header field [MS-Author-Via](#Section_3.2.5.2) is returned as a response-header field to a client that has issued an **OPTIONS** command to the server. The syntax of the **OPTIONS** command is specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 9.2. The syntax of the MS-Author-Via header is specified using the [**Augmented Backus-Naur Form (ABNF)**](#gt_augmented-backus-naur-form-abnf), as defined in [RFC2616] section 2.1.
-- The "[noroot (section 2.2.3)](#Section_3.2.5.3)" extension to the Depth request header extends the functionality that is specified in [RFC4918] section 10.2, allowing a WebDAV client to request the children of a requested entity, but not to include the requested entity itself.
+- The header field [MS-Author-Via](#Section_4.1) is returned as a response-header field to a client that has issued an **OPTIONS** command to the server. The syntax of the **OPTIONS** command is specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 9.2. The syntax of the MS-Author-Via header is specified using the [**Augmented Backus-Naur Form (ABNF)**](#gt_augmented-backus-naur-form-abnf), as defined in [RFC2616] section 2.1.
+- The "[noroot (section 2.2.3)](#Section_3.1.5.3)" extension to the Depth request header extends the functionality that is specified in [RFC4918] section 10.2, allowing a WebDAV client to request the children of a requested entity, but not to include the requested entity itself.
 This section specifies the following method:
 
 - The [SEARCH method (section 2.2.4)](#Section_2.2.4) is used to transport search-related commands to external search providers.
@@ -414,7 +414,7 @@ As specified in [[RFC4918]](https://go.microsoft.com/fwlink/?LinkId=151240), [**
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-A [**WebDAV client**](#gt_webdav-client) SHOULD maintain a variable for each server with which it communicates that contains the value of the [MS-Author-Via response header](#Section_3.2.5.2).
+A [**WebDAV client**](#gt_webdav-client) SHOULD maintain a variable for each server with which it communicates that contains the value of the [MS-Author-Via response header](#Section_4.1).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -424,7 +424,7 @@ No new timers are required beyond those specified in [[RFC2068]](https://go.micr
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Prior to general interaction with a [**WebDAV server**](#gt_webdav-server), the [**WebDAV client**](#gt_webdav-client) SHOULD perform an OPTIONS request to determine the current authoring implementation using the [MS-Author-Via response header](#Section_3.2.5.2).<8>
+Prior to general interaction with a [**WebDAV server**](#gt_webdav-server), the [**WebDAV client**](#gt_webdav-client) SHOULD perform an OPTIONS request to determine the current authoring implementation using the [MS-Author-Via response header](#Section_4.1).<8>
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -447,7 +447,7 @@ The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Translate request hea
 A [**WebDAV client**](#gt_webdav-client) MAY send an OPTIONS request to the server and query the response headers for the presence of the MS-Author-Via header. The WebDAV client SHOULD use the following information to determine the best method to send requests to the server:
 
 - The WebDAV client SHOULD NOT use [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) commands when communicating with a server that responds to the OPTIONS command with only the MS-Author-Via: MS-FP/4.0 response header.
-- The WebDAV client MAY use WebDAV commands when communicating with a server that responds to the OPTIONS command with any of the following [MS-Author-Via response header](#Section_3.2.5.2) values:
+- The WebDAV client MAY use WebDAV commands when communicating with a server that responds to the OPTIONS command with any of the following [MS-Author-Via response header](#Section_4.1) values:
 - MS-Author-Via: DAV
 - MS-Author-Via: DAV, MS-FP/4.0
 - MS-Author-Via: MS-FP/4.0, DAV
@@ -456,7 +456,7 @@ A [**WebDAV client**](#gt_webdav-client) MAY send an OPTIONS request to the serv
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Depth "noroot" Request Header Extension
 
-The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Depth request header](#Section_3.2.5.3) with a value of '1,noroot' or 'infinity,noroot' to a request if the WebDAV client needs the resources that are in the container, but not in the container itself; otherwise this header SHOULD be omitted.<9> A resource is an entity that can be identified by a URI. A resource is used as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 1.3.
+The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Depth request header](#Section_3.1.5.3) with a value of '1,noroot' or 'infinity,noroot' to a request if the WebDAV client needs the resources that are in the container, but not in the container itself; otherwise this header SHOULD be omitted.<9> A resource is an entity that can be identified by a URI. A resource is used as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 1.3.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 SEARCH Method
@@ -511,7 +511,7 @@ To maintain consistency with web browsers, the default behavior if this request 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 MS-Author-Via Response Header
 
-The [**WebDAV server**](#gt_webdav-server) SHOULD respond with the [MS-Author-Via response header](#Section_3.2.5.2) when a [**WebDAV client**](#gt_webdav-client) sends an OPTIONS request.<12> The WebDAV server responds with the appropriate information when the following conditions are true:
+The [**WebDAV server**](#gt_webdav-server) SHOULD respond with the [MS-Author-Via response header](#Section_4.1) when a [**WebDAV client**](#gt_webdav-client) sends an OPTIONS request.<12> The WebDAV server responds with the appropriate information when the following conditions are true:
 
 - "MS-Author-Via: DAV" The WebDAV server responds with this header when [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) is enabled and the FrontPage Server Extensions protocol is not enabled.
 - "MS-Author-Via: MS-FP/4.0" The [**web server**](#gt_web-server) responds with this header when the FrontPage Server Extensions protocol is enabled and WebDAV is not enabled.
@@ -521,7 +521,7 @@ The [**WebDAV server**](#gt_webdav-server) SHOULD respond with the [MS-Author-Vi
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Depth "noroot" Request Header Extension
 
-If the [**WebDAV server**](#gt_webdav-server) supports the [Depth "noroot" request header extension](#Section_3.2.5.3), the WebDAV server SHOULD respond appropriately depending on the [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) command that the [**WebDAV client**](#gt_webdav-client) is sending.<13>
+If the [**WebDAV server**](#gt_webdav-server) supports the [Depth "noroot" request header extension](#Section_3.1.5.3), the WebDAV server SHOULD respond appropriately depending on the [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) command that the [**WebDAV client**](#gt_webdav-client) is sending.<13>
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 SEARCH Method
@@ -546,7 +546,7 @@ This section provides examples of the protocol extensions.
 <a id="Section_4.1"></a>
 ## 4.1 MS-Author-Via Response Header
 
-The following example shows an OPTIONS request from a [**WebDAV client**](#gt_webdav-client) and the response from the [**WebDAV server**](#gt_webdav-server) that contains the [MS-Author-Via response header](#Section_3.2.5.2).
+The following example shows an OPTIONS request from a [**WebDAV client**](#gt_webdav-client) and the response from the [**WebDAV server**](#gt_webdav-server) that contains the [MS-Author-Via response header](#Section_4.1).
 
 Request:
 
@@ -684,7 +684,7 @@ The difference between these two requests is that the second one is requesting t
 <a id="Section_4.3"></a>
 ## 4.3 Depth "noroot" Request Header Extension
 
-The following example shows a PROPFIND request from a [**WebDAV client**](#gt_webdav-client) and the response from the [**WebDAV server**](#gt_webdav-server) that contains the [Depth "noroot" Request Header Extension](#Section_3.2.5.3).
+The following example shows a PROPFIND request from a [**WebDAV client**](#gt_webdav-client) and the response from the [**WebDAV server**](#gt_webdav-server) that contains the [Depth "noroot" Request Header Extension](#Section_3.1.5.3).
 
 PROPFIND request with Depth: 1
 
@@ -973,13 +973,13 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 3.1.3: The WebDAV server in Windows 2000, Windows XP, and Windows based servers Windows Server 2003 and later can return the MS-Author-Via: DAV response header if [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) is enabled on the server.
 
-<9> Section 3.1.5.3: The Depth header field is used with several WebDAV commands. However, Windows implementations only support the "noroot" extension on two verbs: **DELETE** and **PROPFIND**. "1,noroot" is supported for **PROPFIND** and "infinity,noroot" is supported on **DELETE**. Attempting to specify "noroot" on other verbs that support the [Depth header](#Section_3.2.5.3) field will result in a "400 Bad Request" error being returned.
+<9> Section 3.1.5.3: The Depth header field is used with several WebDAV commands. However, Windows implementations only support the "noroot" extension on two verbs: **DELETE** and **PROPFIND**. "1,noroot" is supported for **PROPFIND** and "infinity,noroot" is supported on **DELETE**. Attempting to specify "noroot" on other verbs that support the [Depth header](#Section_3.1.5.3) field will result in a "400 Bad Request" error being returned.
 
 <10> Section 3.2.5.1: The WebDAV server in IIS for Windows 2000, Windows XP, and Windows Server 2003 requires WRITE access to the file to return the source of the file.
 
 <11> Section 3.2.5.1: The WebDAV server in IIS for Windows 2000, Windows XP, and Windows based servers Windows Server 2003 and later assumes the header as Translate: t by default.
 
-<12> Section 3.2.5.2: The WebDAV server in IIS for Windows 2000, Windows XP, and Windows based servers Windows Server 2003 and later can return the [MS-Author-Via response header](#Section_3.2.5.2) in response to an OPTIONS request.
+<12> Section 3.2.5.2: The WebDAV server in IIS for Windows 2000, Windows XP, and Windows based servers Windows Server 2003 and later can return the [MS-Author-Via response header](#Section_4.1) in response to an OPTIONS request.
 
 <13> Section 3.2.5.3: The WebDAV server in IIS for Windows 2000, Windows XP, and Windows Server 2003 supports the Depth "noroot" request header extension.
 

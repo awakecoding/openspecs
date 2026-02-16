@@ -1869,7 +1869,7 @@ For the following methods, the server MUST require that the value of **ClusPrepD
 - [CprepDiskRawWrite (section 3.2.4.2)](#Section_3.2.4.2)
 - [CprepDiskVerifyUnique (section 3.2.4.8)](#Section_3.2.4.8)
 - [CprepDiskPRArbitrate (section 3.2.4.15)](#Section_3.2.4.15)
-- [CprepDiskPRRegister (section 3.2.4.16)](#Section_3.4.4.9)
+- [CprepDiskPRRegister (section 3.2.4.16)](#Section_3.2.4.16)
 - [CprepDiskPRUnRegister (section 3.2.4.17)](#Section_3.2.4.17)
 - [CprepDiskPRReserve (section 3.2.4.18)](#Section_3.4.4.12)
 - [CprepDiskPRRelease (section 3.2.4.19)](#Section_3.2.4.19)
@@ -3246,7 +3246,7 @@ Certain methods in the interface require the server and a disk to fulfill the [*
 
 For a particular disk, assuming that the server behaves correctly as an initiator and the disk behaves correctly as a target, a client SHOULD adhere to the following sequencing for successful execution of methods:
 
-- [CprepDiskPRRegister](#Section_3.4.4.9) SHOULD be called before [CprepDiskPRUnRegister](#Section_3.2.4.17).
+- [CprepDiskPRRegister](#Section_3.2.4.16) SHOULD be called before [CprepDiskPRUnRegister](#Section_3.2.4.17).
 - CprepDiskPRRegister SHOULD be called before [CprepDiskPRReserve](#Section_3.4.4.12).
 - CprepDiskPRReserve SHOULD be called before [CprepDiskPRPreempt](#Section_3.2.4.23).
 - [CprepDiskPRArbitrate](#Section_3.2.4.15) and [CprepDiskOffline](#Section_3.2.4.12) MUST be called before [CprepDiskStopDefense](#Section_3.2.4.6).
@@ -3354,7 +3354,7 @@ For the following methods, the server MUST require the value of **ClusPrepDisk.A
 - [CprepDiskRawWrite (section 3.2.4.2)](#Section_3.2.4.2)
 - [CprepDiskVerifyUnique (section 3.2.4.8)](#Section_3.2.4.8)
 - [CprepDiskPRArbitrate (section 3.2.4.15)](#Section_3.2.4.15)
-- [CprepDiskPRRegister (section 3.2.4.16)](#Section_3.4.4.9)
+- [CprepDiskPRRegister (section 3.2.4.16)](#Section_3.2.4.16)
 - [CprepDiskPRUnRegister (section 3.2.4.17)](#Section_3.2.4.17)
 - [CprepDiskPRReserve (section 3.2.4.18)](#Section_3.4.4.12)
 - [CprepDiskPRRelease (section 3.2.4.19)](#Section_3.2.4.19)
@@ -4064,7 +4064,7 @@ Certain methods in the [**interface**](#gt_interface) require the server and a [
 
 For a particular disk, assuming that the server behaves correctly as an initiator and the disk behaves correctly as a target, a client SHOULD adhere to the following sequencing for successful execution of methods:
 
-- [CprepDiskPRRegister](#Section_3.4.4.9) SHOULD be called before [CprepDiskPRUnRegister](#Section_3.2.4.17).
+- [CprepDiskPRRegister](#Section_3.2.4.16) SHOULD be called before [CprepDiskPRUnRegister](#Section_3.2.4.17).
 - CprepDiskPRRegister SHOULD be called before [CprepDiskPRReserve](#Section_3.4.4.12).
 - CprepDiskPRReserve SHOULD be called before [CprepDiskPRPreempt](#Section_3.2.4.23).
 - [CprepDiskPRArbitrate](#Section_3.2.4.15) and [CprepDiskOffline](#Section_3.2.4.12) MUST be called before [CprepDiskStopDefense](#Section_3.2.4.6).
@@ -4615,7 +4615,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with nonzero conformant value, as specified in section 3 of [MS-RPCE].
 
-The [IClusterCleanup](#Section_3.8) [**interface**](#gt_interface) methods do not have any dependencies, including:
+The [IClusterCleanup](#Section_3.9) [**interface**](#gt_interface) methods do not have any dependencies, including:
 
 - CleanUpEvictedNode (Opnum 3)
 - ClearPR (Opnum 4)
@@ -4675,7 +4675,7 @@ The [**opnum**](#gt_opnum) field value for this method is 3.
 When processing this call the server MUST do the following:
 
 - Initialize the Cleanup Timer to the value specified in the *Timeout* parameter.
-- Initialize the [Delay Cleanup Timer (section 3.8.2.1)](#Section_3.8.2.2) to the value specified in the *DelayBeforeCleanup* parameter.
+- Initialize the [Delay Cleanup Timer (section 3.8.2.1)](#Section_3.8.2.1) to the value specified in the *DelayBeforeCleanup* parameter.
 - Wait for the Delay Cleanup Timer to expire.
 - Remove all artifacts on the server that make it part of a cluster.
 - At any time during execution of the previous steps, if the Cleanup Timer expires, the server MUST complete the method, even though cleanup operations continue.
@@ -5249,7 +5249,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GenerateClusterLog](#Section_3.12.4.3) | Creates a file with log entries. Opnum: 3 |
+| [GenerateClusterLog](#Section_3.12.4.1) | Creates a file with log entries. Opnum: 3 |
 | [GenerateTimeSpanLog](#Section_3.12.4.2) | Creates a file with log entries that date back only for the specified number of minutes. Opnum: 4 |
 | [GenerateClusterLogInLocalTime](#Section_3.12.4.3) | Creates a file with log entries using local time instead of GMT. Opnum: 5 |
 | [GeneratetimeSpanLogInLocalTime](#Section_3.12.4.4) | Creates a file with log entries that date back only for the specified number of minutes. Uses local time instead of GMT. Opnum: 6 |
@@ -5301,7 +5301,7 @@ HRESULT GenerateTimeSpanLog(
 
 **SpanMinutes:** A value, in minutes, that indicates those values that SHOULD be in the log. Events that occurred in the range of **Now** to (**Now** - *SpanMinutes*) MUST be in the log and no others. **Now** is the GMT on the server.
 
-**LogFilePath:** Has the same meaning as parameter *LogFilePath* for the [GenerateClusterLog](#Section_3.12.4.3) method specified in section 3.12.4.1.
+**LogFilePath:** Has the same meaning as parameter *LogFilePath* for the [GenerateClusterLog](#Section_3.12.4.1) method specified in section 3.12.4.1.
 
 **Return Values:** Return values are the same as the return values for the GenerateClusterLog method specified in section 3.12.4.1.
 
@@ -5370,7 +5370,7 @@ HRESULT GenerateTimeSpanLogInLocalTime {
 
 **SpanMinutes:** A value, in minutes, that indicates those values that SHOULD be in the log. Events that occurred in the range of **Now** to (**Now** - *SpanMinutes*) MUST be in the log and no others. **Now** is the local time on the server.
 
-**LogFilePath:** Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.3).
+**LogFilePath:** Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.1).
 
 **Return Values:** Return values are the same as the return values for the **GenerateClusterLog** method specified in section 3.12.4.1.
 
@@ -5447,7 +5447,7 @@ The server SHOULD<41> support the IClusterFirewall [**DCOM**](#gt_distributed-co
 <a id="Section_3.14.1"></a>
 ### 3.14.1 Abstract Data Model
 
-The abstract data model for [IClusterFirewall](#Section_3.14) is the same as the abstract data model for [IClusterNetwork2](#Section_3.7) in section [3.6.1](#Section_3.7).
+The abstract data model for [IClusterFirewall](#Section_3.15) is the same as the abstract data model for [IClusterNetwork2](#Section_3.7) in section [3.6.1](#Section_3.7).
 
 <a id="Section_3.14.2"></a>
 ### 3.14.2 Timers
@@ -5466,7 +5466,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with nonzero conformant value, as specified in [MS-RPCE] section 3.
 
-The order in which [IClusterFirewall](#Section_3.14) [**interface**](#gt_interface) methods are invoked becomes a precondition for subsequent methods. Preconditions include the following:
+The order in which [IClusterFirewall](#Section_3.15) [**interface**](#gt_interface) methods are invoked becomes a precondition for subsequent methods. Preconditions include the following:
 
 - The InitializeAdapterConfiguration (Opnum 3) method MUST be called before other methods defined in section 3.14.
 All methods MUST NOT throw exceptions.
@@ -5589,12 +5589,12 @@ None.
 <a id="Section_3.15"></a>
 ## 3.15 IClusterFirewall Client Details
 
-The client SHOULD<42> support the [IClusterFirewall](#Section_3.14) [**DCOM**](#gt_distributed-component-object-model-dcom) [**interface**](#gt_interface).
+The client SHOULD<42> support the [IClusterFirewall](#Section_3.15) [**DCOM**](#gt_distributed-component-object-model-dcom) [**interface**](#gt_interface).
 
 <a id="Section_3.15.1"></a>
 ### 3.15.1 Abstract Data Model
 
-The client can use the abstract data model defined by the server; see section [3.14.1](#Section_3.14).
+The client can use the abstract data model defined by the server; see section [3.14.1](#Section_3.15).
 
 <a id="Section_3.15.2"></a>
 ### 3.15.2 Timers
@@ -5909,7 +5909,7 @@ HRESULT GenerateClusterHealthLog {
 
 **Flags:** Is the type **ClusterLogExFlag** enum as specified in section [2.2.25](#Section_2.2.25).
 
-**LogFilePath:** Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.3).
+**LogFilePath:** Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.1).
 
 **Return Values:** Return values are the same as the return values for the **GenerateClusterLog** method specified in section 3.12.4.1.
 
@@ -5951,7 +5951,7 @@ HRESULT GenerateClusterSetLog {
 
 **Flags**: Is the type **ClusterLogExFlag** enum as specified in section [2.2.25](#Section_2.2.25).
 
-**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.3).
+**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.1).
 
 **Return Values**: Return values are the same as the return values for the **GenerateClusterLog** method specified in section 3.12.4.1.
 
@@ -5993,7 +5993,7 @@ HRESULT GenerateClusterNetworkLog {
 
 **Flags**: Is the type **ClusterLogExFlag** enum as specified in section [2.2.25](#Section_2.2.25).
 
-**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.3).
+**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.1).
 
 **Return Values**: Return values are the same as the return values for the **GenerateClusterLog** method specified in section 3.12.4.1.
 
@@ -6039,7 +6039,7 @@ HRESULT ExportClusterPerformanceHistory {
 
 **Flags**: Is the type **ClusterLogExFlag** enum as specified in section [2.2.25](#Section_2.2.25).
 
-**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.3).
+**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.1).
 
 **Return Values**: Return values are the same as the return values for the **GenerateClusterLog** method specified in section 3.12.4.1.
 
@@ -6081,7 +6081,7 @@ HRESULT GenerateNeftLog {
 
 **Flags**: Is the type **ClusterLogExFlag** enum as specified in section [2.2.25](#Section_2.2.25).
 
-**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.3).
+**LogFilePath**: Has the same meaning as parameter *LogFilePath* for the **GenerateClusterLog** method specified in section [3.12.4.1](#Section_3.12.4.1).
 
 **Return Values**: Return values are the same as the return values for the **GenerateClusterLog** method specified in section 3.12.4.1.
 
@@ -7818,7 +7818,7 @@ The upgrade version is set based on the following table.
 
 <40> Section 3.12.4.4: The **GenerateTimeSpanLogInLocalTime** method is implemented in Windows Server v1709 and later.
 
-<41> Section 3.14: Windows Server 2008 operating system does not support the [IClusterFirewall](#Section_3.14) [**DCOM**](#gt_distributed-component-object-model-dcom) interface.
+<41> Section 3.14: Windows Server 2008 operating system does not support the [IClusterFirewall](#Section_3.15) [**DCOM**](#gt_distributed-component-object-model-dcom) interface.
 
 <42> Section 3.15: Windows Server 2008 and Windows Vista SP1 do not support the IClusterFirewall DCOM interface.
 

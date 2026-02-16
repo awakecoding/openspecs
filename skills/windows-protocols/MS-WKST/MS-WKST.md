@@ -862,17 +862,17 @@ LPWKSTA_INFO_1046 WkstaInfo1046;
 
 **WkstaInfo100:** Details about the computer environment (section [2.2.5.1](#Section_2.2.4.1))
 
-**WkstaInfo101:** Details about the computer environment (section [2.2.5.2](#Section_2.2.4.1)).
+**WkstaInfo101:** Details about the computer environment (section [2.2.5.2](#Section_2.2.5.2)).
 
 **WkstaInfo102:** Details about the computer environment (section [2.2.5.3](#Section_2.2.4.1)).
 
-**WkstaInfo502:** Details about the computer environment (section [2.2.5.4](#Section_2.2.4.1)).
+**WkstaInfo502:** Details about the computer environment (section [2.2.5.4](#Section_2.2.5.4)).
 
-**WkstaInfo1013:** Details about the state of the [**SMB**](#gt_server-message-block-smb) [**network redirector**](#gt_network-redirector) (section [2.2.5.5](#Section_2.2.4.1)).
+**WkstaInfo1013:** Details about the state of the [**SMB**](#gt_server-message-block-smb) [**network redirector**](#gt_network-redirector) (section [2.2.5.5](#Section_2.2.5.2)).
 
-**WkstaInfo1018:** Details about the state of the SMB network redirector (section [2.2.5.6](#Section_2.2.4.1)).
+**WkstaInfo1018:** Details about the state of the SMB network redirector (section [2.2.5.6](#Section_2.2.5.2)).
 
-**WkstaInfo1046:** Details about the state of the SMB network redirector (section [2.2.5.7](#Section_2.2.4.1)).
+**WkstaInfo1046:** Details about the state of the SMB network redirector (section [2.2.5.7](#Section_2.2.5.7)).
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 USE_INFO
@@ -1572,7 +1572,7 @@ LPWKSTA_USER_INFO_1_CONTAINER Level1;
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000000 | Specifies the **WKSTA_USER_INFO_0_CONTAINER** structure (section [2.2.5.12](#Section_2.2.5.12)). |
+| 0x00000000 | Specifies the **WKSTA_USER_INFO_0_CONTAINER** structure (section [2.2.5.12](#Section_2.2.5.9)). |
 | 0x00000001 | Specifies the **WKSTA_USER_INFO_1_CONTAINER** structure (section [2.2.5.13](#Section_2.2.5.13)). |
 
 **WkstaUserInfo:** A **WKSTA_USER_INFO_0_CONTAINER** structure or a **WKSTA_USER_INFO_1_CONTAINER** structure.
@@ -1580,7 +1580,7 @@ LPWKSTA_USER_INFO_1_CONTAINER Level1;
 <a id="Section_2.2.5.15"></a>
 #### 2.2.5.15 WKSTA_TRANSPORT_INFO_0_CONTAINER
 
-The **WKSTA_TRANSPORT_INFO_0_CONTAINER** structure is used by the **NetrWkstaTransportEnum** method (section [3.2.4.4](#Section_3.2.4.4)) to specify the number of entries and a pointer to the base **WKSTA_TRANSPORT_INFO_0** structure (section [2.2.5.8](#Section_2.1)) that the method returns.
+The **WKSTA_TRANSPORT_INFO_0_CONTAINER** structure is used by the **NetrWkstaTransportEnum** method (section [3.2.4.4](#Section_3.2.4.4)) to specify the number of entries and a pointer to the base **WKSTA_TRANSPORT_INFO_0** structure (section [2.2.5.8](#Section_2.2.5.8)) that the method returns.
 
 typedef struct _WKSTA_TRANSPORT_INFO_0_CONTAINER {
 
@@ -2451,7 +2451,7 @@ The [**server (2)**](#gt_434b0234-e970-4e8c-bdfa-e16a30d96703) SHOULD initialize
 
 The server MUST enable advertising of the workstation service by invoking [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.12, passing SV_TYPE_WORKSTATION as the input parameter.
 
-The initialization of the server ADM (section [3.2.1](#Section_3.1.1)) is defined as follows:
+The initialization of the server ADM (section [3.2.1](#Section_3.2.1)) is defined as follows:
 
 **Connection:** Set to empty.
 
@@ -2561,9 +2561,9 @@ unsigned long NetrWkstaGetInfo(
 | Value | Meaning |
 | --- | --- |
 | 0x00000064 | Details are returned in a **WKSTA_INFO_100** structure (section [2.2.5.1](#Section_2.2.4.1)). |
-| 0x00000065 | Details are returned in a **WKSTA_INFO_101** structure (section [2.2.5.2](#Section_2.2.4.1)). |
+| 0x00000065 | Details are returned in a **WKSTA_INFO_101** structure (section [2.2.5.2](#Section_2.2.5.2)). |
 | 0x00000066 | Details are returned in a **WKSTA_INFO_102** structure (section [2.2.5.3](#Section_2.2.4.1)). |
-| 0x000001F6 | Details are returned in a **WKSTA_INFO_502** structure (section [2.2.5.4](#Section_2.2.4.1)). |
+| 0x000001F6 | Details are returned in a **WKSTA_INFO_502** structure (section [2.2.5.4](#Section_2.2.5.4)). |
 
 **WkstaInfo:** A pointer to the buffer that receives the data. The format of this data depends on the value of the *level* parameter.
 
@@ -2583,7 +2583,7 @@ If the *Level* parameter equals 0x00000064, the server MUST fill in the **WKSTA_
 
 - **wki100_computername** is set to **ComputerNameNetBIOS** (section [3.2.1.5](#Section_3.2.1.5))
 - **wki100_langroup** is set to **DomainNameFQDN** (section 3.2.1.5)
-- **wki100_platform_id** is set to **Platform_Id** (section [3.2.1](#Section_3.1.1))
+- **wki100_platform_id** is set to **Platform_Id** (section [3.2.1](#Section_3.2.1))
 - **wki100_ver_major** is set to **Ver_Major** (section 3.2.1)
 - **wki100_ver_minor** is set to **Ver_Minor** (section 3.2.1)
 If the *Level* parameter equals 0x00000065, the server MUST fill in the **WKSTA_INFO_101** structure **WkstaInfo101** member (section 2.2.4.1) of the *WkstaInfo* parameter as follows:
@@ -2632,10 +2632,10 @@ unsigned long NetrWkstaSetInfo(
 
 | Value | Meaning |
 | --- | --- |
-| 0x000001F6 | The *WkstaInfo* parameter points to a **WKSTA_INFO_502** structure (section [2.2.5.4](#Section_2.2.4.1)). |
-| 0x000003F5 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1013** structure (section [2.2.5.5](#Section_2.2.4.1)). |
-| 0x000003FA | The *WkstaInfo* parameter points to a **WKSTA_INFO_1018** structure (section [2.2.5.6](#Section_2.2.4.1)). |
-| 0x00000416 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1046** structure (section [2.2.5.7](#Section_2.2.4.1)). |
+| 0x000001F6 | The *WkstaInfo* parameter points to a **WKSTA_INFO_502** structure (section [2.2.5.4](#Section_2.2.5.4)). |
+| 0x000003F5 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1013** structure (section [2.2.5.5](#Section_2.2.5.2)). |
+| 0x000003FA | The *WkstaInfo* parameter points to a **WKSTA_INFO_1018** structure (section [2.2.5.6](#Section_2.2.5.2)). |
+| 0x00000416 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1046** structure (section [2.2.5.7](#Section_2.2.5.7)). |
 
 **WkstaInfo:** A pointer to a buffer that specifies the data. The format of this data depends on the value of the *Level* parameter.
 
@@ -2661,7 +2661,7 @@ If the *Level* parameter value is not valid, the server MUST fail the call as fo
 | --- | --- |
 | 0x00000000--0x000001F5, 0x000001F7--0x000003F4, 0x000003F6--0x000003F9, 0x000003FB--0x00000415 0x00000417--0xFFFFFFFF | The server SHOULD return ERROR_INVALID_LEVEL.<31> |
 
-Otherwise, if the *Level* parameter equals 0x000001F6, the server MUST store values from the **WKSTA_INFO_502** structure **WkstaInfo502** member (section 2.2.4.1) specified by the *WkstaInfo* parameter into elements of the ADM (section [3.2.1](#Section_3.1.1)) as follows:
+Otherwise, if the *Level* parameter equals 0x000001F6, the server MUST store values from the **WKSTA_INFO_502** structure **WkstaInfo502** member (section 2.2.4.1) specified by the *WkstaInfo* parameter into elements of the ADM (section [3.2.1](#Section_3.2.1)) as follows:
 
 - **wki502_keep_conn** stored in **Keep_Connection**
 - **wki502_max_cmds** stored in **Max_Commands**
@@ -2879,7 +2879,7 @@ unsigned long NetrWkstaTransportAdd(
 
 **ServerName:** A **WKSSVC_IDENTIFY_HANDLE** structure (section [2.2.2.1](#Section_2.2.2.1)) that identifies the [**server (2)**](#gt_434b0234-e970-4e8c-bdfa-e16a30d96703). The [**client**](#gt_client) MUST map this structure to an [**RPC**](#gt_remote-procedure-call-rpc) binding [**handle**](#gt_handle) ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2). The server MUST ignore this parameter.
 
-**Level:** The information level of the data. *Level* is set to zero, meaning the *TransportInfo* parameter points to a **WKSTA_TRANSPORT_INFO_0** structure (section [2.2.5.8](#Section_2.1)).
+**Level:** The information level of the data. *Level* is set to zero, meaning the *TransportInfo* parameter points to a **WKSTA_TRANSPORT_INFO_0** structure (section [2.2.5.8](#Section_2.2.5.8)).
 
 **TransportInfo:** A pointer to a **WKSTA_TRANSPORT_INFO_0** structure.
 
@@ -6314,12 +6314,12 @@ The calling application provides a list of [**NetBIOS**](#gt_netbios) domains in
 <a id="Section_3.2.6.3"></a>
 #### 3.2.6.3 Administrator Requests Redirection to Be Paused
 
-If the administrator requests to pause redirection of printer and serial communication, the server sets **IsWorkstationPaused** to TRUE (section [3.2.1](#Section_3.1.1)).
+If the administrator requests to pause redirection of printer and serial communication, the server sets **IsWorkstationPaused** to TRUE (section [3.2.1](#Section_3.2.1)).
 
 <a id="Section_3.2.6.4"></a>
 #### 3.2.6.4 Administrator Requests Redirection to Be Resumed
 
-If administrator requests to resume redirection of printer and serial communication, the server sets **IsWorkstationPaused** to FALSE (section [3.2.1](#Section_3.1.1)).
+If administrator requests to resume redirection of printer and serial communication, the server sets **IsWorkstationPaused** to FALSE (section [3.2.1](#Section_3.2.1)).
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -7653,7 +7653,7 @@ Note that the names are driver-specific.
 
 <22> Section 3.2.3: Windows server implementations set this to hexadecimal string representation of the 6-byte physical address of the interface.
 
-<23> Section 3.2.3: Windows server implementations use the name of the transport device name associated with the transport specified in the **WKSTA_TRANSPORT_INFO_0** structure (section [2.2.5.8](#Section_2.1)).
+<23> Section 3.2.3: Windows server implementations use the name of the transport device name associated with the transport specified in the **WKSTA_TRANSPORT_INFO_0** structure (section [2.2.5.8](#Section_2.2.5.8)).
 
 <24> Section 3.2.3: Windows server implementations set this to any value.
 

@@ -1184,7 +1184,7 @@ ULONG DomainGroupCount;
 
 **DomainGroupCount:** A 32-bit unsigned integer that contains the number of domains with groups to which the account belongs.
 
-**DomainGroup:** A pointer to a list of **DOMAIN_GROUP_MEMBERSHIP** structures (section [2.2.3](#Section_2.2.2)) that contains the domains to which the account belongs to a group. The number of sets in this list MUST be equal to **DomainCount**.
+**DomainGroup:** A pointer to a list of **DOMAIN_GROUP_MEMBERSHIP** structures (section [2.2.3](#Section_2.2.3)) that contains the domains to which the account belongs to a group. The number of sets in this list MUST be equal to **DomainCount**.
 
 <a id="Section_2.13"></a>
 ## 2.13 PAC_DEVICE_CLAIMS_INFO

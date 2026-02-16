@@ -429,7 +429,7 @@ The Remote Mailslot Protocol server MUST expose interfaces to upper-layer applic
 The application provides the following data:
 
 - The name of the mailslot in the format specified in section [3.2.1](#Section_1.3).
-On a mailslot create request from an application running on the server, the server MUST search through the mailslots contained in **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) to find a mailslot for which **Mailslot.Name** (section [3.2.1.2](#Section_3.2.1.2)) matches the application-supplied name.
+On a mailslot create request from an application running on the server, the server MUST search through the mailslots contained in **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) to find a mailslot for which **Mailslot.Name** (section [3.2.1.2](#Section_3.2.4.3)) matches the application-supplied name.
 
 - If a match is found, the server MUST fail the request with an implementation-specific error.
 - If a match is not found, the server MUST create a new mailslot, initialize **Mailslot.MessageQueue** (section 3.2.1.2) to an empty queue, and add the newly-created mailslot to **MailslotList**.
@@ -439,7 +439,7 @@ On a mailslot create request from an application running on the server, the serv
 The application provides the following data:
 
 - The name of the mailslot to read from, in the format specified in section [3.2.1](#Section_1.3).
-The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.1.2)) matches the application-supplied name.
+The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.4.3)) matches the application-supplied name.
 
 - If a match is not found, the server MUST return an implementation-specific error to the caller.
 - If a match is found and **Mailslot.MessageQueue** (section 3.2.1.2) is empty, the server MAY block until a message arrives in the queue, wait for an implementation-specific timeout interval, or return an error.<16>
@@ -451,7 +451,7 @@ If a message is available in **Mailslot.MessageQueue**, the message MUST be dele
 The application provides the following data:
 
 - The name of the mailslot to close, in the format specified in section [3.2.1](#Section_1.3).
-The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.1.2)) matches the application-supplied name.
+The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.4.3)) matches the application-supplied name.
 
 - If the server does not find a match, it MUST return an implementation-specific error to the caller.
 - If the server finds a match, it MUST perform the following steps:
@@ -468,7 +468,7 @@ On receiving a mailslot write request from a client, the mailslot server MUST ve
 
 For all valid requests, the mailslot server MUST read the name of the mailslot from the **MailslotName** field of the request (see section 2.2.1).
 
-The mailslot server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.1.2)) matches the name of the mailslot in the request.
+The mailslot server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.4.3)) matches the name of the mailslot in the request.
 
 - If the server does not find a match, it MUST ignore and discard the request.
 - If the server finds a match, it MUST read the **DataOffset** field of the request (see section 3.2.1.2) to calculate the offset from the beginning of the SMB_COM_TRANSACTION message to the **Databytes** field (see section 3.2.1.2) that contains the mailslot message.

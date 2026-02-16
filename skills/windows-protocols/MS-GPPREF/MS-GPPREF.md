@@ -2240,7 +2240,7 @@ use="optional" />
 <a id="Section_2.2.1.10"></a>
 #### 2.2.1.10 InternetSettings
 
-The InternetSettings element is composed of all [**registry**](#gt_registry) key and registry value settings. The examples provided in section [4.2](#Section_4.2) include all available settings. For the structure of the registry elements, see section [2.2.1.17](#Section_2.2.1.17).<8>
+The InternetSettings element is composed of all [**registry**](#gt_registry) key and registry value settings. The examples provided in section [4.2](#Section_4.2) include all available settings. For the structure of the registry elements, see section [2.2.1.17](#Section_2.2.1.17.2).<8>
 
 For information on Internet settings, refer to the following documents:[[MSDN-INF]](https://go.microsoft.com/fwlink/?LinkId=90025), [[MSDN-RAS]](https://go.microsoft.com/fwlink/?LinkId=90071), [[MSDN-RAS2]](https://go.microsoft.com/fwlink/?LinkId=90072), [[MSDN-SECZONES]](https://go.microsoft.com/fwlink/?LinkId=90660), [[MSDN-WININET1]](https://go.microsoft.com/fwlink/?LinkId=90164), [[MSDN-WININET2]](https://go.microsoft.com/fwlink/?LinkId=90165), [[MSFT-IEM]](https://go.microsoft.com/fwlink/?LinkId=90186), and [[MSFT-IESECZNREGENTRY]](https://go.microsoft.com/fwlink/?LinkId=94582).
 
@@ -13170,7 +13170,7 @@ phoneNumber="1-555-1212"/>
 <a id="Section_4.2.12"></a>
 ### 4.2.12 NetworkShareSettings XML Example
 
-The following is an example of a [NetworkShareSettings](#Section_4.2.12) configuration XML. The XML in this example defines a share named "Products" that points to the UNC path "\\Products" with a comment of "Testing MSI Packages".
+The following is an example of a [NetworkShareSettings](#Section_2.2.1.13) configuration XML. The XML in this example defines a share named "Products" that points to the UNC path "\\Products" with a comment of "Testing MSI Packages".
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -13704,7 +13704,7 @@ dateLongFormat="dddd, MMMM dd, yyyy"/>
 <a id="Section_4.2.16"></a>
 ### 4.2.16 RegistrySettings XML Example
 
-The following is an example of a [RegistrySettings](#Section_2.2.1.17) configuration XML. The XML in this example creates a key in "HKEY_CURRENT_USER" with the name "MP3", and it sets the DWORD value "Disallowed" to "00000001". It also creates a set of keys that are grouped as a collection.
+The following is an example of a [RegistrySettings](#Section_2.2.1.17.2) configuration XML. The XML in this example creates a key in "HKEY_CURRENT_USER" with the name "MP3", and it sets the DWORD value "Disallowed" to "00000001". It also creates a set of keys that are grouped as a collection.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -13827,7 +13827,7 @@ value=""/>
 <a id="Section_4.2.17"></a>
 ### 4.2.17 ScheduledTasks XML Example
 
-The following is an example of a ScheduledTasks (section [2.2.1.18](#Section_2.2.1.18)) configuration XML. The XML in this example creates a task named "Cleanup" that runs the application "\\scratch\filecleanup.exe" on a daily basis starting on July 6, 2007, at 10:00 UTC. It also creates an ImmediateTask called "PingCorporate" that executes the application "c:\ping.exe" with argument "-ip 10.10.10.10", with various attributes to control the maximum run time and behavior if the system begins to be operated on battery power.
+The following is an example of a ScheduledTasks (section [2.2.1.18](#Section_2.2.1.18.2)) configuration XML. The XML in this example creates a task named "Cleanup" that runs the application "\\scratch\filecleanup.exe" on a daily basis starting on July 6, 2007, at 10:00 UTC. It also creates an ImmediateTask called "PingCorporate" that executes the application "c:\ping.exe" with argument "-ip 10.10.10.10", with various attributes to control the maximum run time and behavior if the system begins to be operated on battery power.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -14362,7 +14362,7 @@ logonType="InteractiveToken">
 <a id="Section_4.2.18"></a>
 ### 4.2.18 NTServices XML Example
 
-The following is an example of an [NTServices](#Section_2.2.1.19) configuration XML. The XML in this example updates the NT service "Computer Browser" to run under the "LocalSystem" account with a restart after the third failure after a delay.
+The following is an example of an [NTServices](#Section_4.2.18) configuration XML. The XML in this example updates the NT service "Computer Browser" to run under the "LocalSystem" account with a restart after the third failure after a delay.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -14470,7 +14470,7 @@ shortcutPath="%DesktopDir%\Temp Files"/>
 <a id="Section_4.2.20"></a>
 ### 4.2.20 StartMenu XML Example
 
-The following is an example of a [StartMenu](#Section_2.2.1.21.4) configuration XML. The XML in this example sets various attributes of the desktop Start menu, such as hiding the Favorites menu, using large icons, showing My Music as a link, and showing the Search option on the Start menu.
+The following is an example of a [StartMenu](#Section_2.2.1.21.1) configuration XML. The XML in this example sets various attributes of the desktop Start menu, such as hiding the Favorites menu, using large icons, showing My Music as a link, and showing the Search option on the Start menu.
 
 <?xml version="1.0" encoding="utf-8"?>
 

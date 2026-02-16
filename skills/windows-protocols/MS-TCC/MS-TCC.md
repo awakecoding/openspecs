@@ -657,7 +657,7 @@ The higher layer can terminate the client’s connection while the client is wai
 
 Messages in the Tethering Control Channel Protocol are identified by the values specified in the **CommonHeader** structure (section [2.2.2.2](#Section_2.2.2.2)) contained in each message. A message is only processed after the entire contents of the message have been received as indicated by the value of the **Length** field specified within the **CommonHeader**.
 
-When the client receives a message, the **MessageTimer** (see section [3.1.2](#Section_3.2.2)) is started or restarted.
+When the client receives a message, the **MessageTimer** (see section [3.1.2](#Section_3.1.2)) is started or restarted.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 BringUpSuccessResponse
@@ -689,7 +689,7 @@ When the client receives a message that cannot be parsed according to the messag
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
-After the **MessageTimer** (section [3.1.2](#Section_3.2.2)) expires, the client sends the time-out to the higher layer then disconnects and terminates the connection.
+After the **MessageTimer** (section [3.1.2](#Section_3.1.2)) expires, the client sends the time-out to the higher layer then disconnects and terminates the connection.
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -761,7 +761,7 @@ If the higher layer failed to start tethering, the higher layer provides a reaso
 
 Messages in the Tethering Control Channel Protocol are identified by the values specified in the **CommonHeader** structure (section [2.2.2.2](#Section_2.2.2.2)) contained in each message. A message is only processed after the entire contents of the message have been received as indicated by the value of the **Length** field specified within the **CommonHeader**.
 
-When the server receives a message, the **ServerTimer** (see section [3.2.2](#Section_3.2.2)) is started or restarted.
+When the server receives a message, the **ServerTimer** (see section [3.2.2](#Section_3.1.2)) is started or restarted.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 BringUpStartRequest
@@ -789,7 +789,7 @@ When the server receives a message that cannot be parsed according to the messag
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-After the **ServerTimer** (section [3.2.2](#Section_3.2.2)) expires, the server disconnects from the client and terminates the connection.
+After the **ServerTimer** (section [3.2.2](#Section_3.1.2)) expires, the server disconnects from the client and terminates the connection.
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events

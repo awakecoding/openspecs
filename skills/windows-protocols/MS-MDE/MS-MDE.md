@@ -1198,7 +1198,7 @@ MDE does not modify the RequestSecurityToken operation for the [**certificate**]
 <a id="Section_3.5.4.1.1"></a>
 ##### 3.5.4.1.1 Messages
 
-MDE does not modify the set of messages for the RequestSecurityToken operation for the [**certificate**](#gt_certificate) renewal process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.2).
+MDE does not modify the set of messages for the RequestSecurityToken operation for the [**certificate**](#gt_certificate) renewal process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.1).
 
 <a id="Section_3.5.4.1.1.1"></a>
 ###### 3.5.4.1.1.1 RequestSecurityToken

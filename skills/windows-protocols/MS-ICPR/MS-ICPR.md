@@ -224,7 +224,7 @@ The ICertPassage Remote Protocol depends on the Remote Procedure Call Protocol E
 
 Figure 1: ICRP Protocol Stack
 
-The ICertPassage Remote Protocol shares ADM elements with Windows Client Certificate Enrollment Protocol [MS-WCCE](../MS-WCCE/MS-WCCE.md) as specified in section [3.1.1](#Section_3.1.1) and section [3.2.1](#Section_3.1.1). The ICertPassage Remote Protocol, the Certificate Services Remote Administration Protocol, and the Windows Client Certificate Enrollment Protocol use a common list of configuration data elements, defined in [MS-WCCE] section 3.2.1.1.4.
+The ICertPassage Remote Protocol shares ADM elements with Windows Client Certificate Enrollment Protocol [MS-WCCE](../MS-WCCE/MS-WCCE.md) as specified in section [3.1.1](#Section_3.2.1) and section [3.2.1](#Section_3.2.1). The ICertPassage Remote Protocol, the Certificate Services Remote Administration Protocol, and the Windows Client Certificate Enrollment Protocol use a common list of configuration data elements, defined in [MS-WCCE] section 3.2.1.1.4.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites and Preconditions

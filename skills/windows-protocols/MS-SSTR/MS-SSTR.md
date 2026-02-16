@@ -326,7 +326,7 @@ This document covers versioning issues in the following areas:
 
 The following fields in this protocol can be extended by vendors:
 
-- **Custom Attributes in the Manifest Response:** This capability is provided by the **VendorExtensionAttributes** field, as specified in section [2.2.2](#Section_4.1). Implementers can ensure that extensions do not conflict by assigning extensions an XML namespace that is unique to their implementation.
+- **Custom Attributes in the Manifest Response:** This capability is provided by the **VendorExtensionAttributes** field, as specified in section [2.2.2](#Section_2.2.2). Implementers can ensure that extensions do not conflict by assigning extensions an XML namespace that is unique to their implementation.
 - **Custom Data Elements in the Manifest Response:** This capability is provided by the **VendorExtensionDataElement** field, as specified in section [2.2.2.6.1](#Section_2.2.2.6.1). Implementers can ensure that extensions do not conflict by assigning extensions an XML namespace that is unique to their implementation.
 - **Custom Boxes in the Fragment Response:** This capability is provided by the **VendorExtensionUUID** field, as specified in section [2.2.4](#Section_2.2.4).
 - **Custom Media Formats for Audio:** This capability is provided by the **AudioTag** and **CodecPrivateData** fields, as specified in section [2.2.2.5](#Section_2.2.2.5). Implementers can ensure that extensions do not conflict by assigning extensions a GUID (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.1) that is embedded in the **CodecPrivateData** field, as specified in [[WFEX]](https://go.microsoft.com/fwlink/?LinkId=184570).
@@ -355,7 +355,7 @@ The Manifest Request and Fragment Request messages MUST be represented as HTTP r
 The Manifest Response and Fragment Response messages MUST be represented as HTTP response messages, as specified by the Response rule of [RFC2616], subject to the following constraints:
 
 - The Status-Code SHOULD be 200.
-- For the Manifest Response message, the message body MUST adhere to the syntax of the **ManifestResponse** field, specified in section [2.2.2](#Section_4.1).
+- For the Manifest Response message, the message body MUST adhere to the syntax of the **ManifestResponse** field, specified in section [2.2.2](#Section_2.2.2).
 - For the Fragment Response message, the message body MUST adhere to the syntax to the **FragmentResponse** field, specified in section [2.2.4](#Section_2.2.4).
 - The HTTP-Version SHOULD be HTTP/1.1.
 The Live Ingest Request MUST be represented as an HTTP request message, as specified by the Request rule of [RFC2616], subject to the following constraints:
@@ -370,7 +370,7 @@ The Live Ingest Request MUST be represented as an HTTP request message, as speci
 The Smooth Streaming Transport Protocol defines five types of messages:
 
 - **Manifest Request** (section [2.2.1](#Section_2.2.1))
-- **Manifest Response** (section [2.2.2](#Section_4.1))
+- **Manifest Response** (section [2.2.2](#Section_2.2.2))
 - **Fragment Request** (section [2.2.3](#Section_2.2.3))
 - **Fragment Response** (section [2.2.4](#Section_2.2.4))
 - **Live Ingest Request** (section [2.2.7](#Section_2.2.7))
@@ -2340,7 +2340,7 @@ Figure 3: Client state machine diagram
 The main data elements that are required by any implementation are:
 
 - Presentation Description: A hierarchical data element that encapsulates metadata from the [**presentation**](#gt_presentation), as specified in section [3.1.1.1](#Section_3.1.1.1).
-- Fragment Description: Metadata and [**samples**](#gt_sample) for a single fragment, as specified in section [3.1.1.2](#Section_3.1.1.2).
+- Fragment Description: Metadata and [**samples**](#gt_sample) for a single fragment, as specified in section [3.1.1.2](#Section_2.2.7.5).
 - Active Presentation: An instance of the Presentation Description data element. This data element is maintained as state by the client.
 - Presentation Available: A flag that indicates whether the Active Presentation has been successfully initialized. This data element is maintained as state by the client.
 - Sparse Stream Pointer Header: A string that contains the name of the HTTP header that is used to carry the Sparse Stream Pointer message, specified in section [2.2.5](#Section_2.2.5).
@@ -2358,7 +2358,7 @@ Presentation Metadata: A set of metadata that is common to all streams in the pr
 - **IsLive**
 - **LookaheadCount**
 - **DVRWindowLength**
-Stream Collection: A collection of Stream Description data elements, as specified in section [3.1.1.1.2](#Section_3.1.1.1.2.1).
+Stream Collection: A collection of Stream Description data elements, as specified in section [3.1.1.1.2](#Section_3.1.1.1.2).
 
 Protection Description: A collection of Protection System Metadata Description data elements, as specified in section [3.1.1.1.1](#Section_3.1.1.1.1).
 
@@ -2391,7 +2391,7 @@ Stream Metadata: A set of metadata that is common to all [**tracks**](#gt_track)
 - **DisplayHeight**
 Track Collection: A collection of Track Description data elements, as specified in section [3.1.1.1.2.1](#Section_3.1.1.1.2.1).
 
-Fragment Reference Collection: An ordered collection of Fragment Reference Description data elements, as specified in section [3.1.1.1.3](#Section_3.1.1.1.3.1).
+Fragment Reference Collection: An ordered collection of Fragment Reference Description data elements, as specified in section [3.1.1.1.3](#Section_3.1.1.1.3).
 
 Sparse Stream Flag: A Boolean flag that specifies whether the stream is a [**sparse stream**](#gt_sparse-stream).
 
@@ -2493,7 +2493,7 @@ The Sparse Stream Pointer Header is initialized from configuration above the Smo
 The client is initiated by a higher-layer implementation that [**decodes**](#gt_decoding) [**samples**](#gt_sample) for playback to the end user and uses the state of playback and end-user interaction to initiate Fragment Requests by the client. The following events trigger specific behavior on the client:
 
 - Open Presentation, specified in section [3.1.4.1](#Section_3.1.4.1)
-- Get Fragment, specified in section [3.1.4.2](#Section_3.1.4.2)
+- Get Fragment, specified in section [3.1.4.2](#Section_2.2.7.5)
 - Close Presentation, specified in section [3.1.4.3](#Section_3.1.4.3)
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Open Presentation
@@ -2560,14 +2560,14 @@ If the underlying transport returns a Response that adheres to the syntax of the
 - The Presentation Metadata data element is populated by using data in the **SmoothStreamingMedia** field, as specified in section [2.2.2.1](#Section_2.2.2.1), subject to the field mapping rules that are specified in section [3.1.1.1](#Section_3.1.1.1).
 - The Protection Description data element is populated by using data in the **ProtectionElement** field, as specified in section [2.2.2.2](#Section_2.2.2.2), subject to the field mapping rules that are specified in section [3.1.1.1.1](#Section_3.1.1.1.1).
 - The Stream Collection data element is populated by creating one Stream Description data element per instance of the **StreamElement** field, specified in section [2.2.2.3](#Section_2.2.2.3).
-- Each Stream Description data element is populated by using data in the corresponding **StreamElement** field, subject to the field mapping rules that are specified in section [3.1.1.1.2](#Section_3.1.1.1.2.1).
+- Each Stream Description data element is populated by using data in the corresponding **StreamElement** field, subject to the field mapping rules that are specified in section [3.1.1.1.2](#Section_3.1.1.1.2).
 - If the Stream Description data element's [**Parent Track**](#gt_parent-track) field is set, its Sparse Stream Flag is set to true. Otherwise, the Sparse Stream Flag is set to false.
 - The Track Collection data element of each Stream Description data element is populated by creating one Track Description data element per instance of the **TrackElement** field, specified in section [2.2.2.5](#Section_2.2.2.5), in the corresponding **StreamElement** field.
 - Each Track Description data element is populated by using data in the corresponding **TrackElement** field, subject to the field mapping rules that are specified in section [3.1.1.1.2.1](#Section_3.1.1.1.2.1).
 - The Custom Attributes Collection data element of each Track Description data element is populated by creating one Custom Attribute Description data element per instance of the **CustomAttributesElement** field, specified in section [2.2.2.5.1](#Section_2.2.2.5.1), in the corresponding **TrackElement** field.
 - Each Custom Attribute Description data element is populated by using data in the corresponding **CustomAttributesElement** field, subject to the field mapping rules that are specified in section 2.2.2.5.1.
 - The Fragment Reference Collection data element of each Stream Description data element is populated by creating one Fragment Reference Description data element per instance of the **StreamFragmentElement** field, specified in section [2.2.2.6](#Section_2.2.2.6), in the corresponding **StreamElement** field.
-- Each Fragment Reference Description data element is populated by using data in the corresponding **StreamFragmentElement** field, subject to the field mapping rules that are specified in section [3.1.1.1.3](#Section_3.1.1.1.3.1).
+- Each Fragment Reference Description data element is populated by using data in the corresponding **StreamFragmentElement** field, subject to the field mapping rules that are specified in section [3.1.1.1.3](#Section_3.1.1.1.3).
 - The Fragment Reference Collection data element of each Stream Description data element is populated by creating one Fragment Reference Description data element per instance of the **StreamFragmentElement** field, specified in section 2.2.2.6, in the corresponding **StreamElement** field.
 - Each Fragment Reference Description data element is populated by using data in the corresponding **StreamFragmentElement** field, subject to the field mapping rules that are specified in section 3.1.1.1.3.
 - The Track-Specific Fragment Reference Collection data element of each Fragment Reference Description data element is populated by creating one Track-Specific Fragment Reference Description data element per instance of the **TrackFragmentElement** field, specified in section [2.2.2.6.1](#Section_2.2.2.6.1), in the corresponding **StreamFragmentElement** field.
@@ -2603,9 +2603,9 @@ Sparse Stream Notifications: A collection in which each entry contains two data 
 - Timestamp: A 64-bit, unsigned integer that represents the timestamp of the new fragment.
 If the underlying transport returns a Response that adheres to the syntax of the Fragment Response message, the message is processed to yield a Presentation Description, subject to the following processing rules:
 
-- The Fragment Description data element is using data in the **FragmentMetadata** field, as specified in section [2.2.4](#Section_2.2.4), subject to the field mapping rules that are specified in section [3.1.1.2](#Section_3.1.1.2).
+- The Fragment Description data element is using data in the **FragmentMetadata** field, as specified in section [2.2.4](#Section_2.2.4), subject to the field mapping rules that are specified in section [3.1.1.2](#Section_2.2.7.5).
 - The Sample Collection data element is populated by creating a Sample Description data element per instance of the TrunBoxPerSampleFields field, specified in section [2.2.4.5](#Section_2.2.4.5).
-- Each Sample Description data element is populated by using data in the **FragmentMetadata** field, as specified in section 2.2.4.5, subject to the field mapping rules that are specified in section [3.1.1.1.2](#Section_3.1.1.1.2.1).
+- Each Sample Description data element is populated by using data in the **FragmentMetadata** field, as specified in section 2.2.4.5, subject to the field mapping rules that are specified in section [3.1.1.1.2](#Section_3.1.1.1.2).
 After the population of the Fragment Description, the following rules MUST be applied:
 
 - If the **FirstSampleFlags** field of the Fragment Description is not set, the value of this field is set to the value of the **DefaultSampleFlags** field.
@@ -2780,7 +2780,7 @@ None.
 <a id="Section_4.1"></a>
 ## 4.1 Manifest Response
 
-The following is an example of a [Manifest Response (section 2.2.2)](#Section_4.1) message.
+The following is an example of a [Manifest Response (section 2.2.2)](#Section_2.2.2) message.
 
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -2861,7 +2861,7 @@ CodecPrivateData = "270000010FCBEE1670EF8A16783BF180C9089CC4AFA11C0000010E1207F8
 <a id="Section_4.2"></a>
 ## 4.2 Fragment Request
 
-The following is an example of a [Fragment Request (section 2.2.3)](#Section_2.2.3) message. It follows the [Manifest Response (section 4.1)](#Section_4.1) message example, in compliance with the sequencing rules that are specified in section [3.1.5](#Section_1.3).
+The following is an example of a [Fragment Request (section 2.2.3)](#Section_2.2.3) message. It follows the [Manifest Response (section 4.1)](#Section_2.2.2) message example, in compliance with the sequencing rules that are specified in section [3.1.5](#Section_1.3).
 
 /PubPoint.ism/QualityLevels(307200,Compatibility=Handheld)/Fragments(video=1968000)
 

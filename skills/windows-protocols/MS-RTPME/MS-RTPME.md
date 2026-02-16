@@ -521,7 +521,7 @@ RTPME has no additional local RTP-related events, beyond those specified in [[RF
 
 The bandwidth estimation works as follows: One host sends a pair of packets to another host, back to back. The receiver calculates the bandwidth on the link, based on the reception times and packet sizes. The receiver then combines multiple measurements to arrive at a bandwidth estimate that is communicated back to the sender through an extension to the RTCP report.
 
-In order to accelerate bandwidth estimation, the session starts in a "normal" RTCP sending rate. Once enough [RTCP packet pairs](#Section_2.2.4) have been sent, or the receiver has successfully estimated the bandwidth, the session changes to the "fast" RTCP sending rate. A high-level overview of this behavior is illustrated in the following diagram. Detailed specifications of the states, transitions and actions are given in sections [3.2.1](#Section_3.1.1) to [3.2.7](#Section_3.1.7).
+In order to accelerate bandwidth estimation, the session starts in a "normal" RTCP sending rate. Once enough [RTCP packet pairs](#Section_2.2.4) have been sent, or the receiver has successfully estimated the bandwidth, the session changes to the "fast" RTCP sending rate. A high-level overview of this behavior is illustrated in the following diagram. Detailed specifications of the states, transitions and actions are given in sections [3.2.1](#Section_3.2.1) to [3.2.7](#Section_3.1.7).
 
 ![Bandwidth estimation](media/image2.png)
 

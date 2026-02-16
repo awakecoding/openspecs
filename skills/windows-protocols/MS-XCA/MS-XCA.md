@@ -1222,7 +1222,7 @@ The changes made to this document are listed in the following table. For more in
 | --- | --- | --- |
 | [2.1.4.3](#Section_2.1.4.3) Final Encoding Phase | 11485 : Removed statement about checking match lengths as no checks are performed. | Major |
 | 2.1.4.3 Final Encoding Phase | 11618 : Revised pseudocode to take account of cases where the length will exceed two bytes. | Major |
-| [2.2.4](#Section_2.5.4) Processing | 11487 : Added terminating condition to pseudocode for when the input buffer does not have enough room for the Huffman table. | Major |
+| [2.2.4](#Section_2.4.4) Processing | 11487 : Added terminating condition to pseudocode for when the input buffer does not have enough room for the Huffman table. | Major |
 | 2.2.4 Processing | 11492 : Clarified processing of blocks for decompression. | Major |
 | [5](#Section_5) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
 

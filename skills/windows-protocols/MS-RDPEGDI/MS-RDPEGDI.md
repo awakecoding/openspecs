@@ -1441,7 +1441,7 @@ For the use of the TS_ZERO_FIELD_BYTE_BIT0 (0x40) and TS_ZERO_FIELD_BYTE_BIT1 (0
 | TS_ENC_MULTIDSTBLT_ORDER 0x0F | [MultiDstBlt (section 2.2.2.2.1.1.2.2)](#Section_4.1.2) Primary Drawing Order. |
 | TS_ENC_MULTIPATBLT_ORDER 0x10 | [MultiPatBlt (section 2.2.2.2.1.1.2.4)](#Section_4.1.4) Primary Drawing Order. |
 | TS_ENC_MULTISCRBLT_ORDER 0x11 | [MultiScrBlt (section 2.2.2.2.1.1.2.8)](#Section_4.1.8) Primary Drawing Order. |
-| TS_ENC_MULTIOPAQUERECT_ORDER 0x12 | [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_4.1.6) Primary Drawing Order. |
+| TS_ENC_MULTIOPAQUERECT_ORDER 0x12 | [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_4.1.5) Primary Drawing Order. |
 | TS_ENC_FAST_INDEX_ORDER 0x13 | [FastIndex (section 2.2.2.2.1.1.2.14)](#Section_4.1.14) Primary Drawing Order. |
 | TS_ENC_POLYGON_SC_ORDER 0x14 | [PolygonSC (section 2.2.2.2.1.1.2.16)](#Section_4.1.16) Primary Drawing Order. |
 | TS_ENC_POLYGON_CB_ORDER 0x15 | [PolygonCB (section 2.2.2.2.1.1.2.17)](#Section_4.1.17) Primary Drawing Order. |
@@ -3489,7 +3489,7 @@ packet-beta
   2-7: "orderType"
 ```
 
-**class (2 bits):** A 2-bit, unsigned integer. This field MUST contain only the TS_SECONDARY (0x02) flag to indicate that the order is an alternate secondary drawing order (see section [2.2.2.2.1](#Section_2.2.2.2.1.3)).
+**class (2 bits):** A 2-bit, unsigned integer. This field MUST contain only the TS_SECONDARY (0x02) flag to indicate that the order is an alternate secondary drawing order (see section [2.2.2.2.1](#Section_2.2.2.2.1)).
 
 **orderType (6 bits):** A 6-bit, unsigned integer. Identifies the type of alternate secondary drawing order.
 
@@ -4236,7 +4236,7 @@ The **Level2ComprFlags** field MUST be ignored if the L1_INNER_COMPRESSION flag 
 <a id="Section_2.2.2.4.1.1"></a>
 ###### 2.2.2.4.1.1 RDP 6.1 Match Details (RDP61_MATCH_DETAILS)
 
-The RDP61_MATCH_DETAILS structure encapsulates all of the details, which describes a compression match in a history buffer. (See section [3.1.8.2.2](#Section_3.1.8.2.2) for a description of how matches are employed within the RDP 6.1 Compression Engine.)
+The RDP61_MATCH_DETAILS structure encapsulates all of the details, which describes a compression match in a history buffer. (See section [3.1.8.2.2](#Section_3.1.8.2.2.1) for a description of how matches are employed within the RDP 6.1 Compression Engine.)
 
 ```mermaid
 packet-beta
@@ -4317,7 +4317,7 @@ Depending on the values of the **CLL** and **CS** subfields of the FormatHeader 
 <a id="Section_2.2.2.5.1.1"></a>
 ###### 2.2.2.5.1.1 RDP 6.0 RLE Segments (RDP6_RLE_SEGMENTS)
 
-The RDP6_RLE_SEGMENTS structure contains the run-length encoded contents of a color plane and consists of a collection of [RDP6_RLE_SEGMENT](#Section_2.2.2.5.1.2) structures.
+The RDP6_RLE_SEGMENTS structure contains the run-length encoded contents of a color plane and consists of a collection of [RDP6_RLE_SEGMENT](#Section_2.2.2.5.1.1) structures.
 
 ```mermaid
 packet-beta
@@ -4968,7 +4968,7 @@ The shared state necessary to support the transmission and reception of RDP6.1-B
 
 The shared state necessary to support the level-2 RDP 5.0 bulk compressor is described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.8.
 
-The level-1 compressor attempts to describe large matches (lengths of up to 16,382 bytes or offsets of up to 2,000,000 bytes) using RDP61_MATCH_DETAILS (section [2.2.2.4.1.1](#Section_2.2.2.4.1.1)) structures. The matches could have been found anywhere in the 2,000,000-byte history buffer, including data realized earlier within the same block. Any such matches are encoded in the **MatchDetails** field of the RDP61_COMPRESSED_DATA (section [2.2.2.4.1](#Section_2.2.2.4.1.1)) structure, and all remaining data is collapsed into the **Literals** field. The match count, details, and literals data are then presented to the level-2 compressor for more granular compression.
+The level-1 compressor attempts to describe large matches (lengths of up to 16,382 bytes or offsets of up to 2,000,000 bytes) using RDP61_MATCH_DETAILS (section [2.2.2.4.1.1](#Section_2.2.2.4.1.1)) structures. The matches could have been found anywhere in the 2,000,000-byte history buffer, including data realized earlier within the same block. Any such matches are encoded in the **MatchDetails** field of the RDP61_COMPRESSED_DATA (section [2.2.2.4.1](#Section_2.2.2.4.1)) structure, and all remaining data is collapsed into the **Literals** field. The match count, details, and literals data are then presented to the level-2 compressor for more granular compression.
 
 When compressing data, the sender MUST first check that the uncompressed data can be inserted into the level-1 history buffer at the position in the history buffer given by the HistoryOffset. If the data will not fit into the history buffer (the sum of the HistoryOffset and the size of the uncompressed data exceeds the size of the history buffer), then the HistoryOffset MUST be reset to the start of the history buffer (offset 0). If the data will fit into the history buffer, then the sender endpoint inserts the uncompressed data at the position in the history buffer given by the HistoryOffset, and then advances the HistoryOffset by the amount of data added.
 
@@ -4993,7 +4993,7 @@ Figure 11: Chained decompression with the RDP 6.1 and RDP 5.0 bulk decompressors
 <a id="Section_3.1.8.2.2"></a>
 ##### 3.1.8.2.2 Compressing Data
 
-Compression using RDP6.1-BC is based on the principles outlined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.8 with literals and copy-tuples (matches) being encoded using the scheme described in section [2.2.2.4.1](#Section_2.2.2.4.1.1). The RDP6.1-BC compressor is stream-based and, as such, is able to include copy-tuples (referred to as "history matches") that have just been added to the current packet being processed; that is, as data is appended to the local history buffer, it can immediately be referenced in the next match. Matches MUST be in stream-order so that a match does not refer to any data not yet received by the target endpoint. Note that every encoded match incurs an overhead of 8 bytes when it is described by the RDP 6.1 Match Details (section [2.2.2.4.1.1](#Section_2.2.2.4.1.1)) structure. For this reason, an RDP 6.1 compliant compressor SHOULD exclude matches that result in expansion.
+Compression using RDP6.1-BC is based on the principles outlined in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.8 with literals and copy-tuples (matches) being encoded using the scheme described in section [2.2.2.4.1](#Section_2.2.2.4.1). The RDP6.1-BC compressor is stream-based and, as such, is able to include copy-tuples (referred to as "history matches") that have just been added to the current packet being processed; that is, as data is appended to the local history buffer, it can immediately be referenced in the next match. Matches MUST be in stream-order so that a match does not refer to any data not yet received by the target endpoint. Note that every encoded match incurs an overhead of 8 bytes when it is described by the RDP 6.1 Match Details (section [2.2.2.4.1.1](#Section_2.2.2.4.1.1)) structure. For this reason, an RDP 6.1 compliant compressor SHOULD exclude matches that result in expansion.
 
 The following flowchart describes how the RDP6.1-BC compression algorithm operates.
 
@@ -5061,7 +5061,7 @@ Notice that the two matches are grouped together and are not present in line wit
 <a id="Section_3.1.8.2.2.2"></a>
 ###### 3.1.8.2.2.2 Setting Compression and Extended Compression Flags
 
-Once data has been compressed, the RDP6.1-BC compressor (the level-1 compressor) MUST call (or chain) another compressor (the level-2 compressor) to further compress the compressed output. The L1_INNER_COMPRESSION flag (0x10) MUST be set in the Level1ComprFlags field (see section [2.2.2.4.1](#Section_2.2.2.4.1.1)) if a level-2 compressor is called.
+Once data has been compressed, the RDP6.1-BC compressor (the level-1 compressor) MUST call (or chain) another compressor (the level-2 compressor) to further compress the compressed output. The L1_INNER_COMPRESSION flag (0x10) MUST be set in the Level1ComprFlags field (see section [2.2.2.4.1](#Section_2.2.2.4.1)) if a level-2 compressor is called.
 
 If the level-1 compressor determines that applying compression will result in an expansion of the data size, it MAY instead pass the original data that it was asked to compress directly to the level-2 compressor. If the RDP6.1-BC compressor compresses the original data it MUST set the L1 COMPRESSED flag (0x01). If the RDP6.1-BC compressor reverts to the original data (no compression is possible) it MUST set the L1_NO_COMPRESSION flag (0x02). Either one of these flags MUST be set if the RDP6.1-BC compressor updates the level-1 history buffer. This ensures that the receiver is able to update its level-1 history buffer accordingly.
 
@@ -5083,14 +5083,14 @@ The level-2 compression flags are described in [MS-RDPBCGR] sections 3.1.8.2.1 a
 <a id="Section_3.1.8.2.3"></a>
 ##### 3.1.8.2.3 Decompressing Data
 
-Decompression with RDP6.1-BC is based on the principles specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.8.3 with the compressed stream being decoded using the scheme described in section [2.2.2.4.1](#Section_2.2.2.4.1.1) under the control of the level-1 and level-2 compression flags. For a general description of how compression chaining works during decompression, refer to section [3.1.8.1.3](#Section_3.1.8.1.3).
+Decompression with RDP6.1-BC is based on the principles specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.8.3 with the compressed stream being decoded using the scheme described in section [2.2.2.4.1](#Section_2.2.2.4.1) under the control of the level-1 and level-2 compression flags. For a general description of how compression chaining works during decompression, refer to section [3.1.8.1.3](#Section_3.1.8.1.3).
 
 | Compression Flag | Meaning |
 | --- | --- |
 | L1_PACKET_AT_FRONT 0x04 | The level-1 history buffer MUST be reinitialized (by filling it with zeros). This flag indicates that the data to be decompressed will not fit into the local level-1 history buffer at the current offset. |
 | L1_NO_COMPRESSION 0x02 | No compression was performed. The input data consists of raw literals that MUST be appended to the local level-1 history buffer. |
 | L1_COMPRESSED 0x01 | Compression with the level-1 compressor was performed. The input data MUST contain at least one match. The uncompressed data MUST be appended to the level-1 history buffer. |
-| L1_INNER_COMPRESSION 0x10 | Indicates that additional level-2 compression (using RDP 5.0 bulk compression) has been performed on the level-1 compressor output. If the L1_INNER_COMPRESSION flag is set, the data following the Level2ComprFlags field in the RDP 6.1 Compressed Data structure (see sections 2.2.2.4.1 and [2.2.2.5.1](#Section_2.2.2.5.1)) MUST first be passed to the chained level-2 RDP 5.0 bulk decompressor. The level-2 decompression MUST be controlled by the contents of the Level2ComprFlags field. After this decompression phase the output MUST then be processed by the RDP6.1-BC decompressor using the Level1ComprFlags field to control the decompression. |
+| L1_INNER_COMPRESSION 0x10 | Indicates that additional level-2 compression (using RDP 5.0 bulk compression) has been performed on the level-1 compressor output. If the L1_INNER_COMPRESSION flag is set, the data following the Level2ComprFlags field in the RDP 6.1 Compressed Data structure (see sections 2.2.2.4.1 and [2.2.2.5.1](#Section_2.2.2.5.1.1)) MUST first be passed to the chained level-2 RDP 5.0 bulk decompressor. The level-2 decompression MUST be controlled by the contents of the Level2ComprFlags field. After this decompression phase the output MUST then be processed by the RDP6.1-BC decompressor using the Level1ComprFlags field to control the decompression. |
 
 The following flowchart describes how the RDP6.1-BC decompression algorithm operates.
 
@@ -5343,12 +5343,12 @@ RAW [-5]; RUN [5]
 
 RAW [<none>]; RUN [6] (Previous base value assumed to be 0.)
 
-Due to the fact that the lengths of RAW and RUN components are limited to 4-bit values (see section [2.2.2.5.1.2](#Section_2.2.2.5.1.2)), individual segments can be broken up further into subsegments during encoding to produce RUN sequences consisting of more than 16 values.
+Due to the fact that the lengths of RAW and RUN components are limited to 4-bit values (see section [2.2.2.5.1.2](#Section_2.2.2.5.1.1)), individual segments can be broken up further into subsegments during encoding to produce RUN sequences consisting of more than 16 values.
 
 <a id="Section_3.1.9.2.1"></a>
 ##### 3.1.9.2.1 Encoding Run-Length Sequences
 
-Once a run-length encoder has broken up a scan-line into segments, it MUST encode each segment as one or more subsegments. The structure of segments and subsegments is the same and is defined in section [2.2.2.5.1.2](#Section_2.2.2.5.1.2).
+Once a run-length encoder has broken up a scan-line into segments, it MUST encode each segment as one or more subsegments. The structure of segments and subsegments is the same and is defined in section [2.2.2.5.1.2](#Section_2.2.2.5.1.1).
 
 The process of encoding scan-lines using RDP 6.0 RLE is best illustrated with a practical example. Assume that the following three scan-lines are present in a bitmap.
 
@@ -5425,7 +5425,7 @@ Figure 15: Encoding data using RDP 6.0 Run-Length Encoding (RLE)
 <a id="Section_3.1.9.2.2"></a>
 ##### 3.1.9.2.2 Extra Long RUN Sequences
 
-The lengths of RAW and RUN components are limited to 4-bit values and, as a result, encoding of run-lengths greater than 15 values requires special casing, as described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.2).
+The lengths of RAW and RUN components are limited to 4-bit values and, as a result, encoding of run-lengths greater than 15 values requires special casing, as described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.1).
 
 Encoding of an extra long RUN sequence is best described with an example. Assume that there is a pattern consisting of the letter A repeated 100 times. The resulting RLE segments are the following:
 
@@ -5450,7 +5450,7 @@ In hexadecimal, this becomes the following:
 <a id="Section_3.1.9.2.3"></a>
 ##### 3.1.9.2.3 Decoding Run-Length Sequences
 
-Encoding of run-length sequences ensures that there is at least one subsegment per scan-line. The control byte described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.2) contains all of the information necessary to decode the sequence bytes.
+Encoding of run-length sequences ensures that there is at least one subsegment per scan-line. The control byte described in section [2.2.2.5.1.2](#Section_2.2.2.5.1.1) contains all of the information necessary to decode the sequence bytes.
 
 The process of decoding an encoded sequence of bytes for a color plane using RDP 6.0 RLE is best illustrated with a practical example. Assume that the following bytes are from a color plane in a bitmap that is 6 pixels wide by 3 pixels high.
 
@@ -5560,7 +5560,7 @@ Figure 16: Compressing a bitmap using RDP 6.0 Bitmap Compression
 <a id="Section_3.1.9.4"></a>
 #### 3.1.9.4 Decompressing a Bitmap
 
-The decision-flow used to decompress a bitmap that is compressed with RDP 6.0 Bitmap Compression is illustrated in the following figure. The flags describing the bitmap data (present in the compressed data format header) are defined in section [2.2.2.5.1](#Section_2.2.2.5.1).
+The decision-flow used to decompress a bitmap that is compressed with RDP 6.0 Bitmap Compression is illustrated in the following figure. The flags describing the bitmap data (present in the compressed data format header) are defined in section [2.2.2.5.1](#Section_2.2.2.5.1.1).
 
 ![Decompression of a bitmap compressed with RDP 6.0 Bitmap Compression](media/image17.png)
 
@@ -5631,9 +5631,9 @@ All drawing orders are encapsulated in an [Orders Update (section 2.2.2.1)](..
 
 There are three classes of drawing orders:
 
-- [Primary Drawing Orders (section 2.2.2.2.1.1)](#Section_3.2.5.1)
-- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_3.2.5.1)
-- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_1.3.1.2.3)
+- [Primary Drawing Orders (section 2.2.2.2.1.1)](#Section_3.3.5.1)
+- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_3.3.5.1)
+- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_3.3.5.1)
 Orders belonging to each of these classes are packed together into an Orders Update structure or a Fast-Path Orders Update structure, each order being aligned on a byte boundary.
 
 <a id="Section_3.2.5.1.1"></a>
@@ -5644,7 +5644,7 @@ Orders belonging to each of these classes are packed together into an Orders Upd
 
 All primary drawing orders MUST conform to the structure and rules defined in section [2.2.2.2.1.1.2](#Section_2.2.2.2.1.1.2).
 
-To efficiently decode and process a primary drawing order, the client MUST use a [Primary Drawing Order History (section 3.2.1.1)](#Section_3.3.1.2) store. This store holds three pieces of information:
+To efficiently decode and process a primary drawing order, the client MUST use a [Primary Drawing Order History (section 3.2.1.1)](#Section_3.2.1.1) store. This store holds three pieces of information:
 
 - Last primary order type processed
 - Current bounding rectangle
@@ -5663,7 +5663,7 @@ The basic process to decode a primary drawing order begins with reading the cont
 - If support for the primary drawing order was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3), the client SHOULD ignore the order, and processing SHOULD cease.
 - Determine whether or not all of the data required to decode and process the order has been received in the [Orders Update (section 2.2.2.1)](#Section_2.2.2.1) structure or the [Fast-Path Orders Update (section 2.2.2.2)](#Section_2.2.2.2) structure. If the packet does not contain enough data, processing SHOULD cease, and the order update SHOULD be ignored.
 - Read the order data, and validate the fields to make sure all the field data is consistent with the order specification (for example, the maximum number of fields and maximum order size MUST conform to the order specification). If any of the field data for a given order is inconsistent or refers to non-existent or invalid items (such as a non-existent cache entry or invalid [**brush**](#gt_brush) format), processing of the order SHOULD terminate, and it SHOULD also be ignored.
-Once the order has been decoded, and all of the information necessary to process it has been collected, the data MUST be handed off to a graphics rendering module so that the images from the remote system can be displayed locally on the client system. The client MUST also update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.3.1.2) to ensure that future orders can be decoded correctly.
+Once the order has been decoded, and all of the information necessary to process it has been collected, the data MUST be handed off to a graphics rendering module so that the images from the remote system can be displayed locally on the client system. The client MUST also update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.2.1.1) to ensure that future orders can be decoded correctly.
 
 <a id="Section_3.2.5.1.1.1.1"></a>
 Processing of DstBlt
@@ -5697,7 +5697,7 @@ The structure and fields of the OpaqueRect Primary Drawing Order are specified i
 <a id="Section_3.2.5.1.1.1.6"></a>
 Processing of MultiOpaqueRect
 
-The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_4.1.6), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
+The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_4.1.5), and the techniques described in section [3.2.5.1.1.1](#Section_3.2.5.1.1.1) demonstrate how to decode and process the order.
 
 <a id="Section_3.2.5.1.1.1.7"></a>
 Processing of ScrBlt
@@ -5974,7 +5974,7 @@ The Offscreen Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) SHOULD be
 
 Creation of an offscreen bitmap is accomplished by using the [Create Offscreen Bitmap (section 2.2.2.2.1.3.2)](#Section_4.3.1) Alternate Secondary Drawing Order. The client SHOULD send the Offscreen Bitmap Cache Error PDU to the server to request that it disable offscreen bitmap caching and resend the drawing updates associated with the affected area. Any further errors related to the offscreen bitmap caching MUST be ignored by the client.
 
-The structure and fields of the Offscreen Bitmap Cache Error PDU are specified in section [2.2.2.3.2](#Section_2.2.2.3.2), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
+The structure and fields of the Offscreen Bitmap Cache Error PDU are specified in section [2.2.2.3.2](#Section_2.2.2.3.2.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
 
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Sending of the DrawNineGrid Cache Error PDU
@@ -5992,7 +5992,7 @@ The GDI+ Error [**PDU**](#gt_protocol-data-unit-pdu) SHOULD be sent to a server 
 
 The client SHOULD send the GDI+ Error PDU to the server to request that it resend all GDI+ content as bitmaps and not rely on the local client side GDI+ rendering. (The six GDI+ PDUs that are used to cache and render GDI+ primitives are specified in section [2.2.2.2.1.3.6](#Section_2.2.2.2.1.3.6).) Any further errors related to GDI+ rendering SHOULD be ignored by the client.
 
-The structure and fields of the GDI+ Error PDU are specified in section [2.2.2.3.4](#Section_2.2.2.3.4), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
+The structure and fields of the GDI+ Error PDU are specified in section [2.2.2.3.4](#Section_2.2.2.3.4.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.2.5.1 demonstrate how to initialize the contents of the PDU. The contents of this PDU MAY be compressed.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -6063,9 +6063,9 @@ All drawing orders are encapsulated in an [Orders Update (section 2.2.2.1)](..
 
 There are three classes of drawing orders:
 
-- [Primary Drawing Orders (section 3.2.5.1.1)](#Section_3.2.5.1)
-- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_3.2.5.1)
-- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_1.3.1.2.3)
+- [Primary Drawing Orders (section 3.2.5.1.1)](#Section_3.3.5.1)
+- [Secondary Drawing Orders (section 2.2.2.2.1.2)](#Section_3.3.5.1)
+- [Alternate Secondary Drawing Orders (section 2.2.2.2.1.3)](#Section_3.3.5.1)
 Orders belonging to each of these classes are packed together into an Orders Update structure or a Fast-Path Orders Update structure, each order being aligned on a byte boundary.
 
 <a id="Section_3.3.5.1.1"></a>
@@ -6076,7 +6076,7 @@ Orders belonging to each of these classes are packed together into an Orders Upd
 
 All primary drawing orders MUST conform to the structure and rules defined in section [2.2.2.2.1.1.2](#Section_2.2.2.2.1.1.2).
 
-To efficiently construct a primary drawing order, the server MUST use a [Primary Drawing Order History (section 3.2.1.1)](#Section_3.3.1.2) store. This store holds three pieces of information:
+To efficiently construct a primary drawing order, the server MUST use a [Primary Drawing Order History (section 3.2.1.1)](#Section_3.2.1.1) store. This store holds three pieces of information:
 
 - Last primary order type constructed.
 - Current bounding rectangle.
@@ -6087,7 +6087,7 @@ If all of the Coord-type fields (see section [2.2.2.2.1.1.1.1](#Section_2.2.2.2.
 
 Before a given order is sent, the server MUST also ensure that all of the data required to process the order is accessible to the client. For example, if the order refers to a cached item, that item MUST be present in the client-side cache when the order is processed. Or, if palettized color is being used, the correct palette MUST be applied at the client-side.
 
-Once a primary drawing order has been constructed and transmitted to the client, the server MUST update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.3.1.2) to ensure that future encodings use the minimum fields and data required.
+Once a primary drawing order has been constructed and transmitted to the client, the server MUST update the records in the [Primary Drawing Order History (section 3.3.1.2)](#Section_3.2.1.1) to ensure that future encodings use the minimum fields and data required.
 
 <a id="Section_3.3.5.1.1.1.1"></a>
 Construction of DstBlt
@@ -6131,7 +6131,7 @@ The OpaqueRect Order MUST NOT be sent to the client if support for it was not sp
 <a id="Section_3.3.5.1.1.1.6"></a>
 Construction of MultiOpaqueRect
 
-The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_4.1.6). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
+The structure and fields of the MultiOpaqueRect Primary Drawing Order are specified in section [2.2.2.2.1.1.2.6](#Section_4.1.5). The order fields MUST be populated in accordance with this description and the instructions detailed in section [3.3.5.1.1.1](#Section_3.3.5.1.1.1).
 
 The MultiOpaqueRect Order MUST NOT be sent to the client if support for it was not specified in the Order Capability Set (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.7.1.3).
 
@@ -6450,7 +6450,7 @@ The Draw GDI+ Orders MUST NOT be sent to the client if support for GDI+ 1.1 rend
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Processing of Bitmap Cache Error PDU
 
-The structure and fields of the Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.1](#Section_2.2.2.3.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.1](#Section_2.2.2.3.1.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST flush the appropriate Bitmap Cache entries (see section [3.1.1.1.1](#Section_3.1.1.1.1)) and resend the graphics data associated with the affected area.
 
@@ -6459,7 +6459,7 @@ The server SHOULD honor up to five Bitmap Cache Error PDUs for a given connectio
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Processing of the Offscreen Bitmap Cache Error PDU
 
-The structure and fields of the Offscreen Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.2](#Section_2.2.2.3.2), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the Offscreen Bitmap Cache Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.2](#Section_2.2.2.3.2.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST disable offscreen bitmap caching for the duration of the connection and resend the graphics data associated with the affected area.
 
@@ -6477,7 +6477,7 @@ Once NineGrid bitmap caching has been disabled, the server MUST NOT send the [Cr
 <a id="Section_3.3.5.2.4"></a>
 ##### 3.3.5.2.4 Processing of the GDI+ Error PDU
 
-The structure and fields of the GDI+ Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.4](#Section_2.2.2.3.4), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
+The structure and fields of the GDI+ Error [**PDU**](#gt_protocol-data-unit-pdu) are specified in section [2.2.2.3.4](#Section_2.2.2.3.4.1), and the techniques described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.3.5.2 demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the server MUST disable GDI+ 1.1 rendering for the duration of the connection. All future GDI+ content MUST be sent as bitmaps so that local client-side GDI+ rendering is not required.
 
@@ -6845,7 +6845,7 @@ OPAQUERECT_ORDER::nTopRect not present
 <a id="Section_4.1.6"></a>
 ### 4.1.6 MultiOpaqueRect
 
-The following is an annotated dump of a [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_4.1.6) Primary Drawing Order.
+The following is an annotated dump of a [MultiOpaqueRect (section 2.2.2.2.1.1.2.6)](#Section_4.1.5) Primary Drawing Order.
 
 00000000 09 12 bf 01 87 01 1c 01 f1 00 12 00 5c ef 04 16 ............\...
 

@@ -2169,10 +2169,10 @@ The **LU Transactions Enabled** flag is initialized based on the value of the **
 
 The [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST act as an initiator for the CONNTYPE_TXUSER_DTCLUCONFIGURE connection type. In this role, an LU 6.2 implementation MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Add Response](#Section_3.2.1.1.2)
 - [Awaiting Delete Response](#Section_3.2.1.1.3)
-- [Ended](#Section_3.2.1.5.10)
+- [Ended](#Section_3.2.1.1.4)
 The following figure shows the relationship between the CONNTYPE_TXUSER_DTCLUCONFIGURE initiator states.
 
 ![CONNTYPE_TXUSER_DTCLUCONFIGURE initiator states](media/image5.png)
@@ -2194,7 +2194,7 @@ The following events are processed in the Awaiting Add Response state:
 - [Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_ADD_DUPLICATE message](#Section_3.2.5.1.1)
 - [Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_REQUEST_COMPLETED message](#Section_3.2.5.1.5)
 - [Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_ADD_LOG_FULL Message](#Section_3.2.5.1.6)
-- [Connection Disconnected (section 3.2.5.1.7)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.1.7)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.1.3"></a>
 ##### 3.2.1.1.3 Awaiting Delete Response
 
@@ -2204,7 +2204,7 @@ The following events are processed in the Awaiting Delete Response state:
 - [Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_DELETE_UNRECOVERED_TRANS message](#Section_3.2.5.1.3)
 - [Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_DELETE_INUSE message](#Section_3.2.5.1.4)
 - [Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_REQUEST_COMPLETED message](#Section_3.2.5.1.5)
-- [Connection Disconnected (section 3.2.5.1.7)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.1.7)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.1.4"></a>
 ##### 3.2.1.1.4 Ended
 
@@ -2215,10 +2215,10 @@ Ended is the final state.
 
 The [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST act as an initiator for the CONNTYPE_TXUSER_DTCLURECOVERY connection type. In this role, an LU 6.2 implementation MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Register Response](#Section_3.2.1.2.2)
-- [Registered](#Section_3.2.1.2.3)
-- [Ended](#Section_3.2.1.5.10)
+- [Registered](#Section_3.3.1.3.3)
+- [Ended](#Section_3.2.1.1.4)
 The following figure shows the relationship between the CONNTYPE_TXUSER_DTCLURECOVERY initiator states.
 
 ![CONNTYPE_TXUSER_DTCLURECOVERY initiator states](media/image6.png)
@@ -2239,7 +2239,7 @@ The following events are processed in the Awaiting Register Response state:
 - [Receiving a TXUSER_DTCLURMRECOVERY_MTAG_ATTACH_NOT_FOUND message](#Section_3.2.5.2.1)
 - [Receiving a TXUSER_DTCLURMRECOVERY_MTAG_ATTACH_DUPLICATE message](#Section_3.2.5.2.2)
 - [Receiving a TXUSER_DTCLURMRECOVERY_MTAG_ REQUEST_COMPLETED message](#Section_5ab6d58c17904ff5a1075a26ad8a60e7)
-- [Connection Disconnected (section 3.2.5.2.4)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.2.4)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.2.3"></a>
 ##### 3.2.1.2.3 Registered
 
@@ -2255,7 +2255,7 @@ Ended is the final state.
 
 The [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST act as an initiator for the CONNTYPE_TXUSER_DTCLURMENLISTMENT connection type. In this role, an LU 6.2 implementation MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Enlistment Response](#Section_3.2.1.3.2)
 - [Active](#Section_3.2.1.3.3)
 - [Preparing for Transaction Commit](#Section_3.2.1.3.4)
@@ -2263,7 +2263,7 @@ The [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.
 - [Awaiting Transaction Outcome](#Section_3.2.1.3.6)
 - [Finalizing Abort Operations](#Section_3.2.1.3.7)
 - [Finalizing Commit Operations](#Section_3.2.1.3.8)
-- [Ended](#Section_3.2.1.5.10)
+- [Ended](#Section_3.2.1.1.4)
 The following figure shows the relationship between the CONNTYPE_TXUSER_DTCLURMENLISTMENT initiator states.
 
 ![CONNTYPE_TXUSER_DTCLURMENLISTMENT initiator states](media/image7.png)
@@ -2287,7 +2287,7 @@ The following events are processed in the Awaiting Enlistment Response state:
 - [Receiving Other TXUSER_DTCLURMENLISTMENT_MTAG messages](#Section_3.2.5.3.2)
 - [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment Conversation Lost
 - Unplugging LU 6.2 Subordinate Enlistment
-- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.3.3"></a>
 ##### 3.2.1.3.3 Active
 
@@ -2298,7 +2298,7 @@ The following events are processed in the Active state:
 - Aborting [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment
 - LU 6.2 Subordinate Enlistment-Conversation Lost
 - Unplugging LU 6.2 Subordinate Enlistment
-- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.3.4"></a>
 ##### 3.2.1.3.4 Preparing for Transaction Commit
 
@@ -2315,7 +2315,7 @@ The following events are processed in the Awaiting Backout Response state:
 - [Receiving a TXUSER_DTCLURMENLISTMENT_MTAG_TO_LU_BACKEDOUT message](#Section_3.2.5.3.4)
 - [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment-Conversation Lost
 - Unplugging LU 6.2 Subordinate Enlistment
-- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.3.6"></a>
 ##### 3.2.1.3.6 Awaiting Transaction Outcome
 
@@ -2325,7 +2325,7 @@ The following events are processed in the Awaiting Transaction Outcome state:
 - [Receiving a TXUSER_DTCLURMENLISTMENT_MTAG_TO_LU_COMMITTED message](#Section_3.2.5.3.6)
 - [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment-Conversation Lost
 - Unplugging LU 6.2 Subordinate Enlistment
-- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.3.7)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.3.7"></a>
 ##### 3.2.1.3.7 Finalizing Abort Operations
 
@@ -2352,20 +2352,20 @@ Ended is the final state.
 
 The [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST act as an initiator for the CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC connection type. In this role, the LU 6.2 implementation MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Response to Work Query](#Section_3.2.1.4.2)
 - [Processing Cold XLN Request](#Section_3.2.1.4.3)
 - [Processing Warm XLN Request](#Section_3.2.1.4.4)
-- [Awaiting Response to XLN Confirmation](#Section_3.2.1.5.4)
+- [Awaiting Response to XLN Confirmation](#Section_3.2.1.4.5)
 - [Awaiting Response to XLN](#Section_3.2.1.4.6)
 - [Awaiting Response to Compare States Query During Warm XLN](#Section_3.2.1.4.7)
-- [XLN Exchange Complete](#Section_3.2.1.4.8)
+- [XLN Exchange Complete](#Section_3.2.1.5.6)
 - [Awaiting Response to Compare States Query](#Section_3.2.1.4.9)
 - [Processing Compare States Request](#Section_3.3.1.6.6)
-- [Awaiting Response to Compare States](#Section_3.2.1.5.7)
+- [Awaiting Response to Compare States](#Section_3.2.1.4.11)
 - [Processing LU Status Check](#Section_3.2.1.4.12)
-- [Awaiting Request Complete](#Section_3.2.1.5.9)
-- [Ended](#Section_3.2.1.5.10)
+- [Awaiting Request Complete](#Section_3.2.1.4.13)
+- [Ended](#Section_3.2.1.1.4)
 The following figure shows the relationship between the CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC initiator states.
 
 ![CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC initiator states, part 1](media/image8.png)
@@ -2392,7 +2392,7 @@ The following events are processed in the Awaiting Response to Work Query state:
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_WORK_CHECKLUSTATUS message](#Section_3.2.5.4.2)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_WORK_TRANS message](#Section_3.2.5.4.3)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.3"></a>
 ##### 3.2.1.4.3 Processing Cold XLN Request
 
@@ -2420,7 +2420,7 @@ The following events are processed in the Awaiting Response to XLN Confirmation 
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_REQUESTCOMPLETE message](#Section_3.2.5.4.8)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.6"></a>
 ##### 3.2.1.4.6 Awaiting Response to XLN
 
@@ -2428,7 +2428,7 @@ The following events are processed in the Awaiting Response to XLN state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CONFIRMATION_FOR_THEIR_XLN message](#Section_3.2.5.4.4)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.7"></a>
 ##### 3.2.1.4.7 Awaiting Response to Compare States Query During Warm XLN
 
@@ -2437,7 +2437,7 @@ The following events are processed in the Awaiting Response to Compare States Qu
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_NO_COMPARESTATES message](#Section_3.2.5.4.5)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_COMPARESTATES_INFO message](#Section_3.2.5.4.6)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.8"></a>
 ##### 3.2.1.4.8 XLN Exchange Complete
 
@@ -2453,7 +2453,7 @@ The following events are processed in the Awaiting Response to Compare States Qu
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_NO_COMPARESTATES message](#Section_3.2.5.4.5)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_COMPARESTATES_INFO message](#Section_3.2.5.4.6)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.10"></a>
 ##### 3.2.1.4.10 Processing Compare States Request
 
@@ -2469,7 +2469,7 @@ The following events are processed in Awaiting Response to Compare States state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CONFIRMATION_FOR_THEIR_COMPARESTATES message](#Section_3.2.5.4.7)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.12"></a>
 ##### 3.2.1.4.12 Processing LU Status Check
 
@@ -2484,7 +2484,7 @@ The following events are processed in the Awaiting Request Complete state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_REQUESTCOMPLETE message](#Section_3.2.5.4.8)
 - [Local LU Initiated Recovery Conversation Lost](#Section_3.2.4.22)
-- [Connection Disconnected](#Section_3.3.5.2.2)
+- [Connection Disconnected](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.4.14"></a>
 ##### 3.2.1.4.14 Ended
 
@@ -2495,16 +2495,16 @@ Ended is the final state.
 
 The [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST act as an initiator for the CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU connection type. In this role, the LU 6.2 implementation MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Response to XLN Request](#Section_3.2.1.5.2)
 - [Processing XLN Confirmation](#Section_3.3.1.6.4)
-- [Awaiting Response to XLN Confirmation](#Section_3.2.1.5.4)
+- [Awaiting Response to XLN Confirmation](#Section_3.2.1.4.5)
 - [Awaiting Response to XLN Confirmation With Error](#Section_3.2.1.5.5)
-- [XLN Exchange Complete](#Section_3.2.1.4.8)
-- [Awaiting Response To Compare States](#Section_3.2.1.5.7)
-- [Processing Compare States Response](#Section_3.3.1.5.13)
-- [Awaiting Request Complete](#Section_3.2.1.5.9)
-- [Ended](#Section_3.2.1.5.10)
+- [XLN Exchange Complete](#Section_3.2.1.5.6)
+- [Awaiting Response To Compare States](#Section_3.2.1.4.11)
+- [Processing Compare States Response](#Section_3.2.1.5.8)
+- [Awaiting Request Complete](#Section_3.2.1.4.13)
+- [Ended](#Section_3.2.1.1.4)
 The following figure shows the relationship between the CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU initiator states.
 
 ![CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU initiator states](media/image10.png)
@@ -2526,7 +2526,7 @@ The following events are processed in the Awaiting Response to XLN Request state
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_THEIR_XLN_NOT_FOUND message](#Section_3.2.5.5.1)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_RESPONSE_FOR_THEIR_XLN message](#Section_3.2.5.5.2)
 - [Remote LU Initiated Recovery Conversation Lost](#Section_3.2.4.28)
-- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.5.3"></a>
 ##### 3.2.1.5.3 Processing XLN Confirmation
 
@@ -2541,7 +2541,7 @@ The following events are processed in the Awaiting Response to XLN Confirmation 
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_REQUESTCOMPLETE message](#Section_3.2.5.5.4)
 - [Remote LU Initiated Recovery Conversation Lost](#Section_3.2.4.28)
-- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.5.5"></a>
 ##### 3.2.1.5.5 Awaiting Response to XLN Confirmation with Error
 
@@ -2549,7 +2549,7 @@ The following events are processed in the Awaiting Response to XLN Confirmation 
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_REQUESTCOMPLETE message](#Section_3.2.5.5.4)
 - [Remote LU Initiated Recovery Conversation Lost](#Section_3.2.4.28)
-- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.5.6"></a>
 ##### 3.2.1.5.6 XLN Exchange Complete
 
@@ -2564,7 +2564,7 @@ The following events are processed in the Awaiting Response to Compare States st
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_RESPONSE_FOR_THEIR_COMPARESTATES message](#Section_3.2.5.5.3)
 - [Remote LU Initiated Recovery Conversation Lost](#Section_3.2.4.28)
-- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.5.8"></a>
 ##### 3.2.1.5.8 Processing Compare States Response
 
@@ -2580,7 +2580,7 @@ The following events are processed in the Awaiting Request Complete state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_REQUESTCOMPLETE message](#Section_3.2.5.5.4)
 - [Remote LU Initiated Recovery Conversation Lost](#Section_3.2.4.28)
-- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.2.5.5.5)](#Section_3.3.5.4.10)
 <a id="Section_3.2.1.5.10"></a>
 ##### 3.2.1.5.10 Ended
 
@@ -2707,7 +2707,7 @@ If the [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment Prepare Request
 - Set the connection state to [Awaiting Backout Response](#Section_3.2.1.3.5).
 - Otherwise, if the request outcome is Forget:
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_TO_DTC_FORGET](#Section_2.2.3.3.7) message using the provided connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.8"></a>
 #### 3.2.4.8 LU 6.2 Subordinate Enlistment Conversation Lost
 
@@ -2717,7 +2717,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 If the [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment Conversation Lost event is signaled, the LU 6.2 Implementation MUST perform the following actions:
 
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_TO_DTC_CONVERSATIONLOST](#Section_2.2.3.3.3) message using the provided connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.9"></a>
 #### 3.2.4.9 Unplugging LU 6.2 Subordinate Enlistment
 
@@ -2727,7 +2727,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 If the Unplugging [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment event is signaled, the LU 6.2 implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_UNPLUG](#Section_2.2.3.3.18) message using the provide connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.10"></a>
 #### 3.2.4.10 LU 6.2 Subordinate Enlistment Abort Request Completed
 
@@ -2740,7 +2740,7 @@ If the [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment Abort Request C
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_TO_DTC_BACKEDOUT](#Section_2.2.3.3.4) message using the provided connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.11"></a>
 #### 3.2.4.11 LU 6.2 Subordinate Enlistment Commit Request Completed
 
@@ -2753,7 +2753,7 @@ If the [**LU 6.2**](#gt_lu-type-62-lu-62) Subordinate Enlistment Commit Request 
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_TO_DTC_FORGET](#Section_2.2.3.3.7) message using the provided connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.12"></a>
 #### 3.2.4.12 LU 6.2 Subordinate Enlistment Single-Phase Commit Request Completed
 
@@ -2794,7 +2794,7 @@ If the Local LU Initiated Recovery Sending New Recovery Sequence Number event is
 - Update the recovery sequence number keyed by the LU Name Pair in the Recovery Sequence Number Table with the provided new recovery sequence number.
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_NEW_RECOVERY_SEQ_NUM](#Section_2.2.3.4.18) message using the provided connection:
 - The **RecoverySeqNum** field MUST be set to the provided new recovery sequence number.
-- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.4.13).
 <a id="Section_3.2.4.15"></a>
 #### 3.2.4.15 Local LU Initiated Recovery Sending XLN Error
 
@@ -2815,7 +2815,7 @@ If the Local LU Initiated Recovery Sending XLN Error event is signaled, the [**L
 - DTCLUXLNERROR_LOGNAMEMISMATCH if the provided Error Reason value is Log Name Mismatch
 - DTCLUXLNERROR_COLDWARMMISMATCH if the provided Error Reason value is Cold Warm Mismatch
 - DTCLUXLNERROR_PROTOCOL if the provided Error Reason value is Protocol Error
-- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.4.13).
 <a id="Section_3.2.4.16"></a>
 #### 3.2.4.16 Local LU Initiated Recovery Sending XLN Response
 
@@ -2862,11 +2862,11 @@ If the Local LU Initiated Recovery Sending XLN Confirmation event is signaled, t
 - DTCLUXLNCONFIRMATION_COLDWARMMISMATCH if the provided XLN Response value is Cold Warm Mismatch
 - DTCLUXLNCONFIRMATION_OBSOLETE if the provided XLN Response value is Obsolete
 - If the provided XLN Response value is Confirm:
-- Set the connection state to [Awaiting Response To XLN Confirmation](#Section_3.2.1.5.4).
+- Set the connection state to [Awaiting Response To XLN Confirmation](#Section_3.2.1.4.5).
 - Otherwise, if the provided XLN Response value is either Log Name Mismatch or Cold Warm Mismatch:
-- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.4.13).
 - Otherwise:
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.18"></a>
 #### 3.2.4.18 Local LU Initiated Recovery Sending Compare States Query
 
@@ -2875,7 +2875,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - A connection object of type [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC](#Section_2.2.3.4)
 If the Local LU Initiated Recovery Sending Compare States Query event is signaled, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
-- If the provided connection state is not set to either [Processing Warm XLN Request](#Section_3.2.1.4.4) or [XLN Exchange Complete](#Section_3.2.1.4.8):
+- If the provided connection state is not set to either [Processing Warm XLN Request](#Section_3.2.1.4.4) or [XLN Exchange Complete](#Section_3.2.1.5.6):
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
 - If the connection state is Processing Warm XLN Request:
@@ -2911,7 +2911,7 @@ If the Local LU Initiated Recovery Sending Compare States event is signaled, the
 - DTCLUCOMPARESTATE_HEURISTICRESET if the provided LUW Status value is Heuristic Reset
 - DTCLUCOMPARESTATE_INDOUBT if the provided LUW Status value is In Doubt
 - DTCLUCOMPARESTATE_RESET if the provided LUW Status value is Reset
-- Set the connection state to [Awaiting Response To Compare States](#Section_3.2.1.5.7).
+- Set the connection state to [Awaiting Response To Compare States](#Section_3.2.1.4.11).
 <a id="Section_3.2.4.20"></a>
 #### 3.2.4.20 Local LU Initiated Recovery Sending Compare States Error
 
@@ -2925,7 +2925,7 @@ If the Local LU Initiated Recovery Sending Compare States Error event is signale
 - Otherwise:
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_ERROR_FROM_OUR_COMPARESTATES](#Section_2.2.3.4.16) message using the provided connection:
 - The **CompareStatesError** field MUST be set to [DTCLUCOMPARESTATESERROR_PROTOCOL](#Section_2.2.2.3).
-- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.4.13).
 <a id="Section_3.2.4.21"></a>
 #### 3.2.4.21 Local LU Initiated Recovery Sending LU Status
 
@@ -2944,7 +2944,7 @@ If the Local LU Initiated Recovery Sending LU Status event is signaled, the [**L
 - Otherwise:
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_LUSTATUS](#Section_2.2.3.4.5) message using the provided connection:
 - The **RecoverySeqNum** field MUST be set to the found recovery sequence number.
-- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.4.13).
 <a id="Section_3.2.4.22"></a>
 #### 3.2.4.22 Local LU Initiated Recovery Conversation Lost
 
@@ -2954,7 +2954,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 If the Local LU Initiated Recovery Conversation Lost event is signaled, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CONVERSATION_LOST](#Section_2.2.3.4.17) message using the provided connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.23"></a>
 #### 3.2.4.23 Remote LU Initiated Recovery Sending XLN
 
@@ -3009,11 +3009,11 @@ If the Remote LU Initiated Recovery Sending XLN Confirmation event is signaled, 
 - DTCLUXLNCONFIRMATION_COLDWARMMISMATCH if the provided XLN Response value is Cold Warm Mismatch.
 - DTCLUXLNCONFIRMATION_OBSOLETE if the provided XLN Response value is Obsolete.
 - If the provided XLN Response value is set to Confirm:
-- Set the connection state to [Awaiting Response To XLN Confirmation](#Section_3.2.1.5.4).
+- Set the connection state to [Awaiting Response To XLN Confirmation](#Section_3.2.1.4.5).
 - Otherwise, if the provided XLN Response value is set to Log Name Mismatch or Cold Warm Mismatch:
 - Set the connection state to [Awaiting Response To XLN Confirmation With Error](#Section_3.2.1.5.5).
 - Otherwise, if the provided XLN Response value is set to Obsolete:
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.4.25"></a>
 #### 3.2.4.25 Remote LU Initiated Recovery Sending Compare States
 
@@ -3030,7 +3030,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - LUW Identifier
 If the Remote LU Initiated Recovery Sending Compare States event is signaled, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
-- If the provided connection state is not set to [XLN Exchange Complete](#Section_3.2.1.4.8):
+- If the provided connection state is not set to [XLN Exchange Complete](#Section_3.2.1.5.6):
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_THEIR_COMPARESTATES](#Section_2.2.3.5.4) message using the provided connection:
@@ -3043,7 +3043,7 @@ If the Remote LU Initiated Recovery Sending Compare States event is signaled, th
 - DTCLUCOMPARESTATE_RESET if the provided **Remote LUW Status** value is Reset
 - The **cbLength** field of the [DTCLU_VARLEN_BYTEARRAY](#Section_2.2.1.2) structure (contained in the **LuTransId** field) MUST be set to the number of bytes in the provided [**LUW identifier**](#gt_luw-identifier).
 - The first **cbLength** bytes of the **rgbBlob** field of the DTCLU_VARLEN_BYTEARRAY structure (contained in the **LuTransId** field) MUST be set to the provided LUW identifier.
-- Set the connection state to [Awaiting Response To Compare States](#Section_3.2.1.5.7).
+- Set the connection state to [Awaiting Response To Compare States](#Section_3.2.1.4.11).
 <a id="Section_3.2.4.26"></a>
 #### 3.2.4.26 Remote LU Initiated Recovery Sending Compare States Confirmation
 
@@ -3055,14 +3055,14 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - Protocol Error
 If the Remote LU Initiated Recovery Sending Compare States Confirmation event is signaled, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
-- If the provided connection state is not set to [Processing Compare States Response](#Section_3.3.1.5.13):
+- If the provided connection state is not set to [Processing Compare States Response](#Section_3.2.1.5.8):
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_CONFIRMATION_OF_OUR_COMPARESTATES](#Section_2.2.3.5.6) message using the provided connection:
 - The **CompareStatesConfirmation** field MUST be set to one of the following elements of the [**DTCLUCOMPARESTATESCONFIRMATION**](#Section_2.2.2.2) enumeration:
 - DTCLUCOMPARESTATESCONFIRMATION_CONFIRM if the provided Compare States Confirmation value is Confirm
 - DTCLUCOMPARESTATESCONFIRMATION_PROTOCOL if the provided Compare States Confirmation value is Protocol Error
-- The connection state SHOULD be set to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- The connection state SHOULD be set to [Awaiting Request Complete](#Section_3.2.1.4.13).
 <a id="Section_3.2.4.27"></a>
 #### 3.2.4.27 Remote LU Initiated Recovery Sending Compare States Error
 
@@ -3071,12 +3071,12 @@ This event MUST be signaled by the higher-layer business logic with the followin
 - A connection object of type [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU](#Section_2.2.3.5)
 If the Remote LU Initiated Recovery Sending Compare States Error event is signaled, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
-- If the provided connection state is not set to [Processing Compare States Response](#Section_3.3.1.5.13):
+- If the provided connection state is not set to [Processing Compare States Response](#Section_3.2.1.5.8):
 - Return a failure result to the higher-layer business logic.
 - Otherwise:
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_ERROR_OF_OUR_COMPARESTATES](#Section_2.2.3.5.7) message using the provided connection:
 - The **CompareStatesError** field MUST be set to [DTCLUCOMPARESTATESERROR_PROTOCOL](#Section_2.2.2.3).
-- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.5.9).
+- Set the connection state to [Awaiting Request Complete](#Section_3.2.1.4.13).
 <a id="Section_3.2.4.28"></a>
 #### 3.2.4.28 Remote LU Initiated Recovery Conversation Lost
 
@@ -3086,7 +3086,7 @@ This event MUST be signaled by the higher-layer business logic with the followin
 If the Remote LU Initiated Recovery Conversation Lost event is signaled, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_CONVERSATION_LOST](#Section_2.2.3.5.8) message using the provided connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
@@ -3102,7 +3102,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Add Response](#Section_3.2.1.1.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_DELETE_NOT_FOUND Message
@@ -3111,7 +3111,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Delete Response](#Section_3.2.1.1.3):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_DELETE_UNRECOVERED_TRANS Message
@@ -3120,7 +3120,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Delete Response](#Section_3.2.1.1.3):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_DELETE_INUSE Message
@@ -3129,7 +3129,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Delete Response](#Section_3.2.1.1.3):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.1.5"></a>
 ##### 3.2.5.1.5 Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_REQUEST_COMPLETED Message
@@ -3138,7 +3138,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is either [Awaiting Add Response](#Section_3.2.1.1.2) or [Awaiting Delete Response](#Section_3.2.1.1.3):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.1.6"></a>
 ##### 3.2.5.1.6 Receiving a TXUSER_DTCLURMCONFIGURE_MTAG_ADD_LOG_FULL Message
@@ -3147,7 +3147,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Add Response](#Section_3.2.1.1.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.1.7"></a>
 ##### 3.2.5.1.7 Connection Disconnected
@@ -3169,7 +3169,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Register Response](#Section_3.2.1.2.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Receiving a TXUSER_DTCLURMRECOVERY_MTAG_ATTACH_DUPLICATE Message
@@ -3178,7 +3178,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Register Response](#Section_3.2.1.2.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 Receiving a TXUSER_DTCLURMRECOVERY_MTAG_REQUEST_COMPLETED Message
@@ -3188,7 +3188,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 - If the connection state is [Awaiting Register Response](#Section_3.2.1.2.2):
 - Add an entry for the [**LU Name Pair**](#gt_lu-name-pair) associated with the connection object in the Recovery Sequence Number Table with the [**recovery sequence number**](#gt_recovery-sequence-number) initialized to 1.
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Registered](#Section_3.2.1.2.3).
+- Set the connection state to [Registered](#Section_3.3.1.3.3).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.2.4"></a>
 ##### 3.2.5.2.4 Connection Disconnected
@@ -3232,7 +3232,7 @@ the LU 6.2 Implementation MUST perform the following actions:
 
 - If the connection state is [Awaiting Enlistment Response](#Section_3.2.1.3.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.3.3"></a>
 ##### 3.2.5.3.3 Receiving a TXUSER_DTCLURMENLISTMENT_MTAG_TO_LU_PREPARE Message
@@ -3250,7 +3250,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Backout Response](#Section_3.2.1.3.5):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.3.5"></a>
 ##### 3.2.5.3.5 Receiving a TXUSER_DTCLURMENLISTMENT_MTAG_TO_LU_BACKOUT Message
@@ -3290,7 +3290,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 - If the connection state is [Awaiting Response To Work Query](#Section_3.2.1.4.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.4.2"></a>
 ##### 3.2.5.4.2 Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_WORK_CHECKLUSTATUS Message
@@ -3331,10 +3331,10 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 - Set the connection state to [Processing Compare States Request](#Section_3.3.1.6.6).
 - Otherwise:
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise:
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.4.8).
+- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.5.6).
 - Otherwise:
 - Return a failure result and the following message information to the higher-layer business logic:
 - The **XlnConfirmation** field.
@@ -3351,7 +3351,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 - Set the connection state to [Processing Warm XLN Request](#Section_3.2.1.4.4).
 - Otherwise, if the connection state is [Awaiting Response to Compare States Query](#Section_3.2.1.4.9):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.4.6"></a>
 ##### 3.2.5.4.6 Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_COMPARESTATES_INFO Message
@@ -3375,29 +3375,29 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) receives a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CONFIRMATION_FOR_THEIR_COMPARESTATES](#Section_2.2.3.4.15) message, it MUST perform the following actions:
 
-- If the connection state is [Awaiting Response To Compare States](#Section_3.2.1.5.7):
+- If the connection state is [Awaiting Response To Compare States](#Section_3.2.1.4.11):
 - Return a success result and the following message information to the higher-layer business logic:
 - The **CompareStatesConfirmation** field
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.4.8"></a>
 ##### 3.2.5.4.8 Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_REQUESTCOMPLETE Message
 
 When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) receives a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_REQUESTCOMPLETE](#Section_2.2.3.4.6) message, it MUST perform the following actions:
 
-- If the connection state is [Awaiting Request Complete](#Section_3.2.1.5.9):
+- If the connection state is [Awaiting Request Complete](#Section_3.2.1.4.13):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
-- Otherwise, if the connection state is [Awaiting Response To XLN Confirmation](#Section_3.2.1.5.4):
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
+- Otherwise, if the connection state is [Awaiting Response To XLN Confirmation](#Section_3.2.1.4.5):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.4.8).
+- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.5.6).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.4.9"></a>
 ##### 3.2.5.4.9 Connection Disconnected
 
 When a [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC](#Section_2.2.3.4) is disconnected, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
-- If the connection state is either [Awaiting Response To Work Query](#Section_3.2.1.4.2), [Awaiting Response To XLN Confirmation](#Section_3.2.1.5.4), [Awaiting Response To XLN](#Section_3.2.1.4.6), [Awaiting Response To Compare States Query During Warm XLN](#Section_3.2.1.4.7), [Awaiting Response To Compare States Query](#Section_3.2.1.4.9), [Awaiting Response To Compare States](#Section_3.2.1.5.7), or [Awaiting Request Complete](#Section_3.2.1.5.9):
+- If the connection state is either [Awaiting Response To Work Query](#Section_3.2.1.4.2), [Awaiting Response To XLN Confirmation](#Section_3.2.1.4.5), [Awaiting Response To XLN](#Section_3.2.1.4.6), [Awaiting Response To Compare States Query During Warm XLN](#Section_3.2.1.4.7), [Awaiting Response To Compare States Query](#Section_3.2.1.4.9), [Awaiting Response To Compare States](#Section_3.2.1.4.11), or [Awaiting Request Complete](#Section_3.2.1.4.13):
 - Return a failure result to the higher-layer business logic.
 - Otherwise, the event MUST be processed as specified in section [3.1.8](#Section_3.1.8).
 <a id="Section_3.2.5.5"></a>
@@ -3412,7 +3412,7 @@ When an [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Sectio
 
 - If the connection state is [Awaiting Response To XLN Request](#Section_3.2.1.5.2):
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.5.2"></a>
 ##### 3.2.5.5.2 Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_RESPONSE_FOR_THEIR_XLN Message
@@ -3422,14 +3422,14 @@ When an [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Sectio
 - If the connection state is [Awaiting Response To XLN Request](#Section_3.2.1.5.2):
 - If the **XlnResponse** field of the message is set to either DTCLUXLNRESPONSE_LOGNAMEMISMATCH or DTCLUXLNRESPONSE_COLDWARMMISMATCH:
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise:
 - Return a success result, the connection object, and the following message information to the higher-layer business logic:
 - The **XlnResponse** field
 - The **Xln** field
 - The **OurLogName** field
 - If the **XlnResponse** field of the message is set to DTCLUXLNRESPONSE_OK_SENDCONFIRMATION:
-- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.4.8).
+- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.5.6).
 - Otherwise, if the **XlnResponse** field of the message is set to DTCLUXLNRESPONSE_OK_SENDOURXLNBACK:
 - Set the connection state to [Processing XLN Confirmation](#Section_3.3.1.6.4).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
@@ -3438,26 +3438,26 @@ When an [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Sectio
 
 When an [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) receives a [TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_RESPONSE_FOR_THEIR_COMPARESTATES](#Section_2.2.3.5.5) message, it MUST perform the following actions:
 
-- If the connection state is [Awaiting Response To Compare States](#Section_3.2.1.5.7):
+- If the connection state is [Awaiting Response To Compare States](#Section_3.2.1.4.11):
 - If the **CompareStatesResponse** field of the message is set to DTCLUCOMPARESTATESRESPONSE_PROTOCOL:
 - Return a failure result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the **CompareStatesResponse** field of the message is set to DTCLUCOMPARESTATESRESPONSE_OK:
 - Return a success result and the following message information to the higher-layer business logic:
 - The **CompareStates** field
-- Set the connection state to [Processing Compare States Response](#Section_3.3.1.5.13).
+- Set the connection state to [Processing Compare States Response](#Section_3.2.1.5.8).
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
 <a id="Section_3.2.5.5.4"></a>
 ##### 3.2.5.5.4 Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_REQUESTCOMPLETE Message
 
 When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) receives a [TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_REQUESTCOMPLETE](#Section_2.2.3.5.9) message, the LU 6.2 implementation MUST perform the following actions:
 
-- If the connection state is [Awaiting Response To XLN Confirmation](#Section_3.2.1.5.4):
+- If the connection state is [Awaiting Response To XLN Confirmation](#Section_3.2.1.4.5):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.4.8).
-- Otherwise, if the connection state is [Awaiting Request Complete](#Section_3.2.1.5.9):
+- Set the connection state to [XLN Exchange Complete](#Section_3.2.1.5.6).
+- Otherwise, if the connection state is [Awaiting Request Complete](#Section_3.2.1.4.13):
 - Return a success result to the higher-layer business logic.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is [Awaiting Response To XLN Confirmation With Error](#Section_3.2.1.5.5):
 - Return a failure result to the higher-layer business logic
 - Set the connection state to Ended.
@@ -3467,7 +3467,7 @@ When the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Secti
 
 When a [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU](#Section_2.2.3.5) is disconnected, the [**LU 6.2**](#gt_lu-type-62-lu-62) implementation (section [3.2](#Section_3.2)) MUST perform the following actions:
 
-- If the connection state is either [Awaiting Response To XLN Request](#Section_3.2.1.5.2), [Awaiting Response To XLN Confirmation](#Section_3.2.1.5.4), [Awaiting Response To XLN Confirmation With Error](#Section_3.2.1.5.5), [Awaiting Response To Compare States](#Section_3.2.1.5.7), or [Awaiting Request Complete](#Section_3.2.1.5.9):
+- If the connection state is either [Awaiting Response To XLN Request](#Section_3.2.1.5.2), [Awaiting Response To XLN Confirmation](#Section_3.2.1.4.5), [Awaiting Response To XLN Confirmation With Error](#Section_3.2.1.5.5), [Awaiting Response To Compare States](#Section_3.2.1.4.11), or [Awaiting Request Complete](#Section_3.2.1.4.13):
 - Return a failure result to the higher-layer business logic.
 - Otherwise, the event MUST be processed as specified in section [3.1.8](#Section_3.1.8).
 <a id="Section_3.2.6"></a>
@@ -3572,10 +3572,10 @@ When a connection object is retrieved from the log, the Transaction Manager Comm
 
 The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST act as an acceptor for the [CONNTYPE_TXUSER_DTCLUCONFIGURE](#Section_2.2.3.1) connection type. In this role, the Transaction Manager Communicating with an LU 6.2 Implementation Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Add Request](#Section_3.3.1.2.2)
 - [Processing Delete Request](#Section_3.3.1.2.3)
-- [Ended](#Section_3.2.1.5.10)
+- [Ended](#Section_3.2.1.1.4)
 <a id="Section_3.3.1.2.1"></a>
 ##### 3.3.1.2.1 Idle
 
@@ -3612,10 +3612,10 @@ Figure 11: CONNTYPE_TXUSER_DTCLUCONFIGURE acceptor states
 
 The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST act as an acceptor for the [CONNTYPE_TXUSER_DTCLURECOVERY](#Section_2.2.3.2) connection type. In this role, the Transaction Manager Communicating with an LU 6.2 Implementation Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Register Request](#Section_3.3.1.3.2)
-- [Registered](#Section_3.2.1.2.3)
-- [Ended](#Section_3.2.1.5.10)
+- [Registered](#Section_3.3.1.3.3)
+- [Ended](#Section_3.2.1.1.4)
 <a id="Section_3.3.1.3.1"></a>
 ##### 3.3.1.3.1 Idle
 
@@ -3632,7 +3632,7 @@ This is a transient state that is assumed during the synchronous processing of a
 
 The following event is processed in this state:
 
-- [Connection Disconnected (section 3.3.5.2.2)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.2.2)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.3.4"></a>
 ##### 3.3.1.3.4 Ended
 
@@ -3652,7 +3652,7 @@ Figure 12: CONNTYPE_TXUSER_DTCLURECOVERY acceptor states
 
 The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST act as an acceptor for the [CONNTYPE_TXUSER_DTCLURMENLISTMENT](#Section_2.2.3.3) connection type. In this role, the Transaction Manager Communicating with an LU 6.2 Implementation Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Enlistment Request](#Section_3.3.1.4.2)
 - [Active](#Section_3.2.1.3.3)
 - [Awaiting Prepare Response](#Section_3.3.1.4.4)
@@ -3660,7 +3660,7 @@ The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62)
 - [Prepared](#Section_3.3.1.4.6)
 - [Awaiting Commit Response](#Section_3.3.1.4.7)
 - [Awaiting Abort Response](#Section_3.3.1.4.8)
-- [Ended](#Section_3.2.1.5.10)
+- [Ended](#Section_3.2.1.1.4)
 <a id="Section_3.3.1.4.1"></a>
 ##### 3.3.1.4.1 Idle
 
@@ -3742,7 +3742,7 @@ Figure 13: CONNTYPE_TXUSER_DTCLURMENLISTMENT acceptor states
 
 The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST act as an acceptor for the [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC](#Section_2.2.3.4) connection type. In this role, the Transaction Manager Communicating with an LU 6.2 Implementation Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Work Query](#Section_3.3.1.5.2)
 - [Awaiting Response To Cold XLN](#Section_3.3.1.5.3)
 - [Processing Response To Cold XLN](#Section_3.3.1.5.4)
@@ -3754,20 +3754,20 @@ The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62)
 - [Awaiting Compare States Query](#Section_3.3.1.5.10)
 - [Processing Compare States Query](#Section_3.3.1.5.11)
 - [Awaiting Compare States Response](#Section_3.3.1.5.12)
-- [Processing Compare States Response](#Section_3.3.1.5.13)
+- [Processing Compare States Response](#Section_3.2.1.5.8)
 - [Is Obsolete Awaiting Response To Cold XLN](#Section_3.3.1.5.15)
 - [Is Obsolete Awaiting Response To Warm XLN](#Section_3.3.1.5.16)
 - [Is Obsolete Awaiting LU Status Response](#Section_3.3.1.5.17)
 - [Is Obsolete Processing Response](#Section_3.3.1.5.18)
 - [Is Obsolete Processing Compare State Query During Warm XLN](#Section_3.3.1.5.19)
-- [Ended](#Section_3.2.1.5.10)
+- [Ended](#Section_3.2.1.1.4)
 <a id="Section_3.3.1.5.1"></a>
 ##### 3.3.1.5.1 Idle
 
 This is the initial state. The following events are processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_GETWORK message](#Section_3.3.5.4.1)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.2"></a>
 ##### 3.3.1.5.2 Processing Work Query
 
@@ -3777,7 +3777,7 @@ The following events are processed in this state:
 - [Send Warm XLN](#Section_3.3.7.8)
 - [Send Check LU Status](#Section_3.3.7.9)
 - [Recovery Work Ready](#Section_3.3.7.11)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.3"></a>
 ##### 3.3.1.5.3 Awaiting Response To Cold XLN
 
@@ -3787,7 +3787,7 @@ The following events are processed in this state:
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_NEW_RECOVERY_SEQ_NUM message](#Section_3.3.5.4.2)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_ERROR_FROM_OUR_XLN message](#Section_3.3.5.4.4)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_THEIR_XLN_RESPONSE message](#Section_3.3.5.4.5)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.4"></a>
 ##### 3.3.1.5.4 Processing Response To Cold XLN
 
@@ -3804,7 +3804,7 @@ The following events are processed in this state:
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_ERROR_FROM_OUR_XLN message](#Section_3.3.5.4.4)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_THEIR_XLN_RESPONSE message](#Section_3.3.5.4.5)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CHECK_FOR_COMPARESTATES message](#Section_3.3.5.4.6)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.6"></a>
 ##### 3.3.1.5.6 Processing Response to Warm XLN
 
@@ -3822,7 +3822,7 @@ The following events are processed in this state:
 
 - [Local LU Initiated Recovery Obsolete XLN Exchange](#Section_3.3.7.6)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_LUSTATUS message](#Section_3.3.5.4.9)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.9"></a>
 ##### 3.3.1.5.9 Processing LU Status Response
 
@@ -3834,7 +3834,7 @@ This is a transient state that is assumed during the synchronous processing of a
 The following events are processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CHECK_FOR_COMPARESTATES message](#Section_3.3.5.4.6)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.11"></a>
 ##### 3.3.1.5.11 Processing Compare States Query
 
@@ -3865,7 +3865,7 @@ The following events are processed in this state:
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_NEW_RECOVERY_SEQ_NUM message](#Section_3.3.5.4.2)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_ERROR_FROM_OUR_XLN message](#Section_3.3.5.4.4)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_THEIR_XLN_RESPONSE message](#Section_3.3.5.4.5)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.16"></a>
 ##### 3.3.1.5.16 Is Obsolete Awaiting Response To Warm XLN
 
@@ -3876,14 +3876,14 @@ The following events are processed in this state:
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_ERROR_FROM_OUR_XLN message](#Section_3.3.5.4.4)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_THEIR_XLN_RESPONSE message](#Section_3.3.5.4.5)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CHECK_FOR_COMPARESTATES message](#Section_3.3.5.4.6)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.17"></a>
 ##### 3.3.1.5.17 Is Obsolete Awaiting LU Status Response
 
 The following events are processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_LUSTATUS message](#Section_3.3.5.4.9)
-- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.5.18"></a>
 ##### 3.3.1.5.18 Is Obsolete Processing Response
 
@@ -3925,7 +3925,7 @@ Figure 17: CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC, Part 4
 
 The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST act as an acceptor for the [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU](#Section_2.2.3.5) connection type. In this role, the Transaction Manager Communicating with an LU 6.2 Implementation Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.3.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing XLN Request](#Section_3.3.1.6.2)
 - [Awaiting XLN Confirmation](#Section_3.3.1.6.3)
 - [Processing XLN Confirmation](#Section_3.3.1.6.4)
@@ -3934,13 +3934,13 @@ The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62)
 - [Awaiting Compare States Confirmation](#Section_3.3.1.6.7)
 - [Processing Compare States Confirmation](#Section_3.3.1.6.8)
 - [Is Obsolete Awaiting XLN Confirmation](#Section_3.3.1.6.9)
-- [Ended](#Section_3.2.1.5.10)
+- [Ended](#Section_3.2.1.1.4)
 <a id="Section_3.3.1.6.1"></a>
 ##### 3.3.1.6.1 Idle
 
 This is the initial state. The following event is processed in this state:
 
-- [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_THEIR_XLN message (section 3.3.5.5.1)](#Section_2.2.3.5.1)
+- [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_THEIR_XLN message (section 3.3.5.5.1)](#Section_3.3.5.5.1)
 <a id="Section_3.3.1.6.2"></a>
 ##### 3.3.1.6.2 Processing XLN Request
 
@@ -3953,7 +3953,7 @@ The following events are processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_CONFIRMATION_OF_OUR_XLN message (section 3.3.5.5.2)](#Section_3.3.5.5.2)
 - [Remote LU Initiated Recovery Obsolete XLN Exchange](#Section_3.3.7.10)
-- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.6.4"></a>
 ##### 3.3.1.6.4 Processing XLN Confirmation
 
@@ -3965,7 +3965,7 @@ This is a transient state that is assumed during the synchronous processing of a
 The following event is processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_THEIR_COMPARESTATES message (section 3.3.5.5.3)](#Section_3.3.5.5.3)
-- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.6.6"></a>
 ##### 3.3.1.6.6 Processing Compare States Request
 
@@ -3978,7 +3978,7 @@ The following events are processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_CONFIRMATION_OF_OUR_COMPARESTATES message (section 3.3.5.5.4)](#Section_2.2.3.5.6)
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_ERROR_OF_OUR_COMPARESTATES message (section 3.3.5.5.5)](#Section_2.2.3.5.7)
-- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.6.8"></a>
 ##### 3.3.1.6.8 Processing Compare States Confirmation
 
@@ -3990,7 +3990,7 @@ This is a transient state that is assumed during the synchronous processing of a
 The following events are processed in this state:
 
 - [Receiving a TXUSER_DTCLURECOVERYINITIATEDBYLU_MTAG_CONFIRMATION_OF_OUR_XLN message (section 3.3.5.5.2)](#Section_3.3.5.5.2)
-- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.2.2)
+- [Connection Disconnected (section 3.3.5.5.6)](#Section_3.3.5.4.10)
 <a id="Section_3.3.1.6.10"></a>
 ##### 3.3.1.6.10 Ended
 
@@ -4080,7 +4080,7 @@ For all messages received in this [**Connection Type**](#gt_connection-type), th
 
 When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet receives a [TXUSER_DTCLURMCONFIGURE_MTAG_ADD (section 2.2.3.1.1)](#Section_2.2.3.1.1) message, it MUST perform the following actions:
 
-- If the connection state is [Idle](#Section_3.3.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Add Request](#Section_3.3.1.2.2).
 - Attempt to find the **LU Pair** object keyed by the first **cbLength** bytes of the **rgbBlob** field of the [DTCLU_VARLEN_BYTEARRAY](#Section_2.2.1.2) structure (contained in the **LuNamePair** field) of the message in the LU Pair Table.
 - If the **LU Pair** object is found:
@@ -4099,7 +4099,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Send the [TXUSER_DTCLURMCONFIGURE_MTAG_REQUEST_COMPLETED (section 2.2.3.1.3)](#Section_2.2.3.1.3) message using the connection.
 - Otherwise:
 - Send the [TXUSER_DTCLURMCONFIGURE_MTAG_ADD_LOG_FULL](#Section_2.2.3.1.8) message using the connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Ended:
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
@@ -4108,7 +4108,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 
 The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST perform the following actions when it receives a [TXUSER_DTCLURMCONFIGURE_MTAG_DELETE](#Section_2.2.3.1.2) message:
 
-- If the connection state is [Idle](#Section_3.3.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Delete Request](#Section_3.3.1.2.3).
 - Attempt to find the **LU Pair** object keyed by the first **cbLength** bytes of the **rgbBlob** field of the [DTCLU_VARLEN_BYTEARRAY](#Section_2.2.1.2) structure (contained in the **LuNamePair** field) of the message in the LU Pair Table.
 - If the **LU Pair** object is not found:
@@ -4122,7 +4122,7 @@ The Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62)
 - Otherwise:
 - Remove the found **LU Pair** object from the LU Pair Table and the log.
 - Send the [TXUSER_DTCLURMCONFIGURE_MTAG_REQUEST_COMPLETED](#Section_2.2.3.1.3) message using the connection.
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Ended:
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
@@ -4136,17 +4136,17 @@ For all messages received in this connection type, the Transaction Manager Commu
 
 A Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST perform the following actions to attempt to register the connection's MSDTC Connection Manager: OleTx Transports Protocol (as specified in [MS-CMPO](#Section_2.1)) [**session**](#gt_session) for all recovery processing associated with the [**LU Name Pair**](#gt_lu-name-pair) when it receives a [TXUSER_DTCLURMRECOVERY_MTAG_ATTACH (section 2.2.3.2.1)](#Section_2.2.3.2.1) message:
 
-- If the connection state is [Idle](#Section_3.3.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Register Request](#Section_3.3.1.3.2).
 - Attempt to find the **LU Pair** object keyed by the first **cbLength** bytes of the **rgbBlob** field of the [DTCLU_VARLEN_BYTEARRAY](#Section_2.2.1.2) structure (contained in the **LuNamePair** field) of the message in the LU Pair Table.
 - If the **LU Pair** object is not found:
 - Send the [TXUSER_DTCLURMRECOVERY_MTAG_ATTACH_NOT_FOUND (section 2.2.3.2.4)](#Section_2.2.3.2.4) message using the connection.
-- Set the connection state to [Ended (section 3.3.1.3.4)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.3.4)](#Section_3.2.1.1.4).
 - Otherwise:
 - If the **LU Pair Recovery State** field of the found **LU Pair** object is set to Recovery Process Not Attached:
 - Set the **LU Pair Recovery State** field of the found **LU Pair** object to Not Synchronized.
 - Send the [TXUSER_DTCLURMRECOVERY_MTAG_REQUEST_COMPLETED (section 2.2.3.2.2)](#Section_2.2.3.2.2) message using the connection.
-- Set the connection state to [Registered](#Section_3.2.1.2.3).
+- Set the connection state to [Registered](#Section_3.3.1.3.3).
 - Otherwise:
 - Send the [TXUSER_DTCLURMRECOVERY_MTAG_ATTACH_DUPLICATE (section 2.2.3.2.3)](#Section_2.2.3.2.3) message using the connection.
 - Set the connection state to Ended.
@@ -4160,7 +4160,7 @@ When a [CONNTYPE_TXUSER_DTCLURECOVERY](#Section_2.2.3.2) connection is disconnec
 
 - If the connection state is Registered:
 - Set the **LU Pair Recovery State** field of the **LU Pair** object referenced by this connection to Recovery Process Not Attached.
-- Set the connection state to [Ended (section 3.3.1.3.4)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.3.4)](#Section_3.2.1.1.4).
 - Otherwise, the event MUST be processed as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.1.8.3
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 CONNTYPE_TXUSER_DTCLURMENLISTMENT as Acceptor
@@ -4177,7 +4177,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Attempt to find the **LU Pair** object keyed by the value of the first **cbLength** bytes of the **rgbBlob** field of the [DTCLU_VARLEN_BYTEARRAY](#Section_2.2.1.2) structure (contained in the **LuNamePair** field) of the message in the LU Pair Table.
 - If the **LU Pair** object is not found:
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_CREATE_LU_NOT_FOUND (section 2.2.3.3.17)](#Section_2.2.3.3.17) message using the connection.
-- Set the connection state to [Ended (section 3.3.1.4.9)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.4.9)](#Section_3.2.1.1.4).
 - Otherwise:
 - Set the **LU Pair** field of the connection object to the found **LU Pair** object.
 - If the **LU Pair Recovery State** field of the found **LU Pair** object is set to Recovery Process Not Attached:
@@ -4233,7 +4233,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - The [**Enlistment**](#gt_enlistment) object of the [**LUW**](#gt_logical-unit-of-work-luw) object referenced by this connection
 - The [**Phase One**](#gt_phase-one) outcome set to Prepared
 - Set the connection state to Prepared.
-- Otherwise, if the [**connection**](#gt_connection) state is [Ended](#Section_3.2.1.5.10):
+- Otherwise, if the [**connection**](#gt_connection) state is [Ended](#Section_3.2.1.1.4):
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO], section 3.1.6.
 <a id="Section_3.3.5.3.3"></a>
@@ -4252,7 +4252,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - The Enlistment object of the LUW object referenced by this connection
 - The [**Phase One**](#gt_phase-one) [**outcome**](#gt_outcome) set to Aborted.
 - Set the connection state to Processing Backout Request.
-- Otherwise, if the connection state is [Ended](#Section_3.2.1.5.10):
+- Otherwise, if the connection state is [Ended](#Section_3.2.1.1.4):
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO], section 3.1.6.
 <a id="Section_3.3.5.3.4"></a>
@@ -4265,7 +4265,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the Enlistment Phase One Complete event (as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.16) on the Core Transaction Manager Facet with the following arguments:
 - The [**Enlistment**](#gt_enlistment) object of the LUW object referenced by this connection
 - The [**Phase One**](#gt_phase-one) [**outcome**](#gt_outcome) set to Read Only
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Awaiting Commit Response:
 - Set the [**Local LU**](#gt_local-lu) LUW State of the LUW object referenced by this connection to Forget.
 - Signal the Enlistment Commit Complete event (as specified in [MS-DTCO] section 3.2.7.15) on the Core Transaction Manager Facet with the following argument:
@@ -4283,7 +4283,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Set the [**Local LU**](#gt_local-lu) [**LUW**](#gt_logical-unit-of-work-luw) State of the LUW object referenced by this connection to Forget.
 - Signal the Enlistment Rollback Complete event (as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.7.18) on the Core Transaction Manager Facet with the following argument:
 - The [**Enlistment**](#gt_enlistment) object of the LUW object referenced by this connection
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Ended:
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO], section 3.1.6.
@@ -4292,8 +4292,8 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 
 When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet receives a [TXUSER_DTCLURMENLISTMENT_MTAG_TO_DTC_CONVERSATIONLOST](#Section_2.2.3.3.3) message, it MUST perform the following actions:
 
-- If the connection state is either [Idle](#Section_3.3.1.3.1) or [Processing Enlistment Request](#Section_3.3.1.4.2):
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- If the connection state is either [Idle](#Section_3.2.1.2.1) or [Processing Enlistment Request](#Section_3.3.1.4.2):
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is either [Active](#Section_3.2.1.3.3) or [Processing Backout Request](#Section_3.3.1.4.5):
 - If the [**Local LU**](#gt_local-lu) [**LUW**](#gt_logical-unit-of-work-luw) State of the LUW object referenced by this connection is Active:
 - Set the Local LU LUW State of the LUW object referenced by this connection to Reset.
@@ -4317,8 +4317,8 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 
 When a [CONNTYPE_TXUSER_DTCLURMENLISTMENT](#Section_2.2.3.3) connection is disconnected, the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-lu-62) Implementation Facet MUST perform the following actions:
 
-- If the connection state is either [Idle](#Section_3.3.1.3.1) or [Processing Enlistment Request](#Section_3.3.1.4.2):
-- Set the connection state to [Ended](#Section_3.2.1.5.10).
+- If the connection state is either [Idle](#Section_3.2.1.2.1) or [Processing Enlistment Request](#Section_3.3.1.4.2):
+- Set the connection state to [Ended](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is either [Active](#Section_3.2.1.3.3) or [Processing Backout Request](#Section_3.3.1.4.5):
 - If the [**Local LU**](#gt_local-lu) [**LUW**](#gt_logical-unit-of-work-luw) State of the LUW object referenced by this connection is Active:
 - Set the Local LU LUW State of the LUW object referenced by this connection to Reset.
@@ -4352,7 +4352,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Attempt to find the LU Pair object keyed by the value of the first **cbLength** bytes of the **rgbBlob** field of the [DTCLU_VARLEN_BYTEARRAY](#Section_2.2.1.2) structure (contained in the **LuNamePair** field) of the message in the LU Pair Table.
 - If the LU Pair object is not found:
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_GETWORK_NOT_FOUND](#Section_2.2.3.4.2) message using the connection.
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the LU Pair object is found:
 - Set the **LU Pair** field of the connection object to the LU Pair object found in the LU Pair Table.
 - Set the **Recovery Sequence Number For Connection** field of the connection object to the **Recovery Sequence Number** field of the LU Pair object referenced by the connection.
@@ -4380,7 +4380,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Awaiting Response To Warm XLN:
 - Signal the Received New Recovery Sequence Number event with the following arguments:
 - The LU Pair object referenced by this connection
@@ -4422,7 +4422,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the **XlnConfirmation** field of the message is set to either DTCLUXLNCONFIRMATION_LOGNAMEMISMATCH or DTCLUXLNCONFIRMATION_COLDWARMMISMATCH:
 - Signal the [Synchronization Inconsistent](#Section_3.3.7.18) event with the following argument:
 - The LU Pair object referenced by this connection
@@ -4467,7 +4467,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Awaiting Response To Warm XLN:
 - Set the connection state to Processing Response To Warm XLN.
 - Signal the Synchronization Inconsistent event with the following arguments:
@@ -4506,7 +4506,7 @@ Then perform the following actions:
 - The LU Pair object referenced by this connection
 - Send a [TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CONFIRMATION_FOR_THEIR_XLN](#Section_2.2.3.4.9) message using the connection.
 - The **XlnConfirmation** field MUST be set to DTCLUXLNCOMFIRMATION_LOGNAMEMISMATCH.
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the following conditions are both TRUE:
 - The **Is Warm** field of the LU Pair object referenced by this connection is TRUE.
 - The LUW List of the LU Pair object is not empty.
@@ -4601,7 +4601,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise:
 - Set the **LUW Recovery State** field of the LUW object to Recovering.
 - Set the **LUW To Recover** field of the current connection object to the previously found LUW object.
@@ -4700,8 +4700,8 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - The Enlistment object of the LUW object referenced by the **LUW To Recover** field of the connection.
 - Send a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_CONFIRMATION_FOR_THEIR_COMPARESTATES message using the connection.
 - The **CompareStatesConfirmation** field MUST be set to DTCLUCOMPARESTATESCONFIRMATION_CONFIRM.
-- Otherwise, the transaction manager that communicates with an LU 6.2 Implementation MUST drop the connection as specified in the [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.2.2) event.
-- Otherwise, if the connection state is [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10):
+- Otherwise, the transaction manager that communicates with an LU 6.2 Implementation MUST drop the connection as specified in the [Connection Disconnected (section 3.3.5.4.10)](#Section_3.3.5.4.10) event.
+- Otherwise, if the connection state is [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4):
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO], section 3.1.6.
 <a id="Section_3.3.5.4.8"></a>
@@ -4715,7 +4715,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this [**connection**](#gt_connection)
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Ended (section 3.3.1.5.20):
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
@@ -4736,7 +4736,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Is Obsolete Awaiting LU Status Response:
 - Set the connection state to Is Obsolete Processing Response.
 - Send a TXUSER_DTCLURECOVERYINITIATEDBYDTC_MTAG_REQUESTCOMPLETE message using the connection.
@@ -4756,10 +4756,10 @@ When a [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYDTC](#Section_2.2.3.4) [**connec
 - Signal the [Local LU Initiated Recovery Worker Ended](#Section_3.3.7.20) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.5.20)](#Section_3.2.1.1.4).
 - Signal the [Synchronization Connection Down](#Section_3.3.7.21) event with the following arguments:
 - The LU Pair object referenced by this connection
-- Otherwise, if the connection state is either [Idle](#Section_3.3.1.3.1), [Awaiting Compare States Query](#Section_3.3.1.5.10), [Awaiting Compare States Response](#Section_3.3.1.5.12), [Is Obsolete Awaiting Response To Cold XLN](#Section_3.3.1.5.15), [Is Obsolete Awaiting Response To Warm XLN](#Section_3.3.1.5.16), or [Is Obsolete Awaiting LU Status Response](#Section_3.3.1.5.17):
+- Otherwise, if the connection state is either [Idle](#Section_3.2.1.2.1), [Awaiting Compare States Query](#Section_3.3.1.5.10), [Awaiting Compare States Response](#Section_3.3.1.5.12), [Is Obsolete Awaiting Response To Cold XLN](#Section_3.3.1.5.15), [Is Obsolete Awaiting Response To Warm XLN](#Section_3.3.1.5.16), or [Is Obsolete Awaiting LU Status Response](#Section_3.3.1.5.17):
 - Signal the Local LU Initiated Recovery Worker Ended event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
@@ -4785,7 +4785,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Remote LU Initiated Recovery Ended](#Section_3.3.7.22) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.1.4).
 - Otherwise, if the LU Pair object is found:
 - Set the **LU Pair** field of the connection object to the found LU Pair object.
 - Signal the [Received New Recovery Sequence Number](#Section_3.3.7.12) event with the following arguments:
@@ -4885,7 +4885,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Remote LU Initiated Recovery Ended](#Section_3.3.7.22) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.1.4).
 - Otherwise:
 - The [**transaction manager**](#gt_transaction-manager) that communicates with an LU 6.2 implementation (section [3.2](#Section_3.2)) MUST drop the connection.
 - Set the connection state to Awaiting XLN Confirmation.
@@ -4921,7 +4921,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Remote LU Initiated Recovery Ended](#Section_3.3.7.22) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.1.4).
 - Otherwise:
 - If the **Local LU LUW State** field of the LUW object referenced by the **LUW To Recover** field of the connection is set to Active:
 - If the **CompareStates** field of the message is set to DTCLUCOMPARESTATE_COMMITTED:
@@ -4987,7 +4987,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Remote LU Initiated Recovery Ended](#Section_3.3.7.22) event with the following arguments:
 - The LU Pair object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Ended (section 3.3.1.6.10):
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
@@ -5002,7 +5002,7 @@ When the Transaction Manager Communicating with an [**LU 6.2**](#gt_lu-type-62-l
 - Signal the [Remote LU Initiated Recovery Ended](#Section_3.3.7.22) event with the following arguments:
 - The **LU Pair** object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.1.4).
 - Otherwise, if the connection state is Ended (section 3.3.1.6.10):
 - Ignore the message.
 - Otherwise, the message MUST be processed as an invalid message, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.1.6.
@@ -5015,7 +5015,7 @@ When a [CONNTYPE_TXUSER_DTCLURECOVERYINITIATEDBYLU](#Section_2.2.3.5) [**connect
 - Signal the [Remote LU Initiated Recovery Ended](#Section_3.3.7.22) event with the following arguments:
 - The **LU Pair** object referenced by this connection
 - The connection object
-- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.6.10)](#Section_3.2.1.1.4).
 - Signal the [Synchronization Connection Down](#Section_3.3.7.21) event with the following argument:
 - The **LU Pair** object referenced by this connection
 - Otherwise, if the connection state is either Idle, Awaiting Compare States Request, Awaiting Compare States Confirmation, or Is Obsolete Awaiting XLN Confirmation:
@@ -5076,7 +5076,7 @@ If the Create Subordinate Enlistment Failure event is signaled, the Transaction 
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_CREATE_TOO_LATE](#Section_2.2.3.3.14) message using the connection of the provided Enlistment object.
 - Otherwise, if the failure reason is Too Many:
 - Send a [TXUSER_DTCLURMENLISTMENT_MTAG_CREATE_TOO_MANY](#Section_2.2.3.3.16) message using the connection of the provided Enlistment object.
-- Set the connection state to [Ended (section 3.3.1.4.9)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.4.9)](#Section_3.2.1.1.4).
 - Otherwise, ignore the event.
 <a id="Section_3.3.7.3"></a>
 #### 3.3.7.3 Begin Phase One
@@ -5118,7 +5118,7 @@ If the Begin Rollback event is signaled, the Transaction Manager Communicating w
 - Set the Local LU LUW State field of the LUW object of the provided Enlistment object to Forget.
 - Signal the Enlistment Rollback Complete event on the Core Transaction Manager Facet with the following argument:
 - The provided [**Active Phase**](#gt_active-phase) Enlistment object.
-- Set the connection state to [Ended (section 3.3.1.4.9)](#Section_3.2.1.5.10).
+- Set the connection state to [Ended (section 3.3.1.4.9)](#Section_3.2.1.1.4).
 - Otherwise, ignore the event.
 <a id="Section_3.3.7.5"></a>
 #### 3.3.7.5 Begin Commit
@@ -5737,7 +5737,7 @@ When the LU 6.2 implementation receives the TXUSER_DTCLURECOVERYINITIATEDBYDTC_M
 <a id="Section_4.4"></a>
 ## 4.4 Enlisting in an OleTx Transaction as an LU 6.2 Implementation Scenario
 
-This scenario shows how an [**LU 6.2**](#gt_lu-type-62-lu-62) implementation enlists in an OleTx [**transaction**](#gt_transaction), and then participates in the [**Two-Phase Commit**](#gt_two-phase-commit) protocol. The scenario begins by the LU 6.2 implementation establishing a transport [**session**](#gt_session) with a [**transaction manager**](#gt_transaction-manager) and negotiating its [**connection**](#gt_connection) resources. It assumes that an LU 6.2 implementation has already registered a connection as the [**recovery**](#gt_recovery) process for the [**LU Name Pair**](#gt_lu-name-pair) [Registering the Recovery Process (section 4.2.1)](#Section_4.2.1), is maintaining that connection, and has performed recovery [Performing Cold Recovery for an LU Name Pair Scenario (section 4.3)](#Section_4.3). For this example, it is also assumed that a [**transaction program**](#gt_transaction-program) has begun an OleTx transaction and that it will commit the transaction (for more information, see [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 4.1).
+This scenario shows how an [**LU 6.2**](#gt_lu-type-62-lu-62) implementation enlists in an OleTx [**transaction**](#gt_transaction), and then participates in the [**Two-Phase Commit**](#gt_two-phase-commit) protocol. The scenario begins by the LU 6.2 implementation establishing a transport [**session**](#gt_session) with a [**transaction manager**](#gt_transaction-manager) and negotiating its [**connection**](#gt_connection) resources. It assumes that an LU 6.2 implementation has already registered a connection as the [**recovery**](#gt_recovery) process for the [**LU Name Pair**](#gt_lu-name-pair) [Registering the Recovery Process (section 4.2.1)](#Section_4.2.1), is maintaining that connection, and has performed recovery [Performing Cold Recovery for an LU Name Pair Scenario (section 4.3)](#Section_4.3.1). For this example, it is also assumed that a [**transaction program**](#gt_transaction-program) has begun an OleTx transaction and that it will commit the transaction (for more information, see [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 4.1).
 
 <a id="Section_4.4.1"></a>
 ### 4.4.1 Enlisting an LUW on an OleTx Transaction

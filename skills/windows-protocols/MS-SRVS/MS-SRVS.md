@@ -519,7 +519,7 @@ The Server Service Remote Protocol endpoint is available only over named pipes. 
 
 This protocol MUST use the [**UUID**](#gt_universally-unique-identifier-uuid) as specified in section [1.9](#Section_1.9). The RPC version number is 3.0.
 
-This protocol allows any user to establish a [**connection**](#gt_connection) to the RPC [**server**](#gt_server). The protocol uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.1.4).<2>
+This protocol allows any user to establish a [**connection**](#gt_connection) to the RPC [**server**](#gt_server). The protocol uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.2.4).<2>
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -583,7 +583,7 @@ The following table describes the MAX_PREFERRED_LENGTH constant.
 
 | Constant/value | Description |
 | --- | --- |
-| MAX_PREFERRED_LENGTH -1 | A constant of type DWORD that is set to –1. This value is valid as an input parameter to any method in section [3.1.4](#Section_3.1.4) that takes a *PreferedMaximumLength* parameter. When specified as an input parameter, this value indicates that the method MUST allocate as much space as the data requires. |
+| MAX_PREFERRED_LENGTH -1 | A constant of type DWORD that is set to –1. This value is valid as an input parameter to any method in section [3.1.4](#Section_3.2.4) that takes a *PreferedMaximumLength* parameter. When specified as an input parameter, this value indicates that the method MUST allocate as much space as the data requires. |
 
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Session User Flags
@@ -983,9 +983,9 @@ LPFILE_INFO_3 FileInfo3;
 
 *LPFILE_INFO;
 
-**FileInfo2:** A pointer to a structure that contains information about a file, device, or pipe. For more details, see [FILE_INFO_2 (section 2.2.4.6)](#Section_2.2.4.6).
+**FileInfo2:** A pointer to a structure that contains information about a file, device, or pipe. For more details, see [FILE_INFO_2 (section 2.2.4.6)](#Section_2.2.3.3).
 
-**FileInfo3:** A pointer to a structure that contains information about a file, device, or pipe. For more details, see [FILE_INFO_3 (section 2.2.4.7)](#Section_2.2.3.3).
+**FileInfo3:** A pointer to a structure that contains information about a file, device, or pipe. For more details, see [FILE_INFO_3 (section 2.2.4.7)](#Section_2.2.4.7).
 
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 SESSION_ENUM_UNION
@@ -1790,7 +1790,7 @@ DWORD EntriesRead;
 
 **EntriesRead:** The number of entries returned by the method.
 
-**Buffer:** A pointer to the [FILE_INFO_2](#Section_2.2.4.6) entries returned by the method.
+**Buffer:** A pointer to the [FILE_INFO_2](#Section_2.2.3.3) entries returned by the method.
 
 <a id="Section_2.2.4.9"></a>
 #### 2.2.4.9 FILE_INFO_3_CONTAINER
@@ -1811,7 +1811,7 @@ DWORD EntriesRead;
 
 **EntriesRead:** The number of entries returned by the method.
 
-**Buffer:** A pointer to the [FILE_INFO_3](#Section_2.2.3.3) entries returned by the method.
+**Buffer:** A pointer to the [FILE_INFO_3](#Section_2.2.4.7) entries returned by the method.
 
 <a id="Section_2.2.4.10"></a>
 #### 2.2.4.10 FILE_ENUM_STRUCT
@@ -2418,7 +2418,7 @@ DWORD shi1501_reserved;
 <a id="Section_2.2.4.32"></a>
 #### 2.2.4.32 SHARE_INFO_0_CONTAINER
 
-The SHARE_INFO_0_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.8) method returns and a pointer to the buffer that contains the entries.
+The SHARE_INFO_0_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.9) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SHARE_INFO_0_CONTAINER {
 
@@ -2435,7 +2435,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.33"></a>
 #### 2.2.4.33 SHARE_INFO_1_CONTAINER
 
-The SHARE_INFO_1_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.8) method returns and a pointer to the buffer that contains the entries.
+The SHARE_INFO_1_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.9) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SHARE_INFO_1_CONTAINER {
 
@@ -2452,7 +2452,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.34"></a>
 #### 2.2.4.34 SHARE_INFO_2_CONTAINER
 
-The SHARE_INFO_2_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.8) method returns and a pointer to the buffer that contains the entries.
+The SHARE_INFO_2_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.9) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SHARE_INFO_2_CONTAINER {
 
@@ -2473,7 +2473,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.35"></a>
 #### 2.2.4.35 SHARE_INFO_501_CONTAINER
 
-The SHARE_INFO_501_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.8) method returns and a pointer to the buffer that contains the entries.
+The SHARE_INFO_501_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.9) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SHARE_INFO_501_CONTAINER {
 
@@ -2494,7 +2494,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.36"></a>
 #### 2.2.4.36 SHARE_INFO_502_CONTAINER
 
-The SHARE_INFO_502_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.8) method returns and a pointer to the buffer that contains the entries.
+The SHARE_INFO_502_CONTAINER structure contains a value that indicates the number of entries that the [NetrShareEnum](#Section_3.1.4.9) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SHARE_INFO_502_CONTAINER {
 
@@ -2515,7 +2515,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.37"></a>
 #### 2.2.4.37 SHARE_INFO_503_CONTAINER
 
-The SHARE_INFO_503_CONTAINER structure contains a value that indicates the number of entries the [NetrShareEnum](#Section_3.1.4.8) method returns and a pointer to the buffer that contains the entries.
+The SHARE_INFO_503_CONTAINER structure contains a value that indicates the number of entries the [NetrShareEnum](#Section_3.1.4.9) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SHARE_INFO_503_CONTAINER {
 
@@ -2536,7 +2536,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.38"></a>
 #### 2.2.4.38 SHARE_ENUM_STRUCT
 
-The SHARE_ENUM_STRUCT structure specifies the information level that the [**client**](#gt_client) requests in the [NetrShareEnum](#Section_3.1.4.8) method and encapsulates the [SHARE_ENUM_UNION](#Section_2.2.3.5) union that receives the entries enumerated by the [**server**](#gt_server).
+The SHARE_ENUM_STRUCT structure specifies the information level that the [**client**](#gt_client) requests in the [NetrShareEnum](#Section_3.1.4.9) method and encapsulates the [SHARE_ENUM_UNION](#Section_2.2.3.5) union that receives the entries enumerated by the [**server**](#gt_server).
 
 typedef struct _SHARE_ENUM_STRUCT {
 
@@ -4110,7 +4110,7 @@ This member is usually the NetBIOS name that the server is using. In these insta
 <a id="Section_2.2.4.97"></a>
 #### 2.2.4.97 SERVER_XPORT_INFO_0_CONTAINER
 
-The SERVER_XPORT_INFO_0_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_3.1.4.24) method returns and a pointer to the buffer that contains the entries.
+The SERVER_XPORT_INFO_0_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_2.1) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SERVER_XPORT_INFO_0_CONTAINER {
 
@@ -4129,7 +4129,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.98"></a>
 #### 2.2.4.98 SERVER_XPORT_INFO_1_CONTAINER
 
-The SERVER_XPORT_INFO_1_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_3.1.4.24) method returns and a pointer to the buffer that contains the entries.
+The SERVER_XPORT_INFO_1_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_2.1) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SERVER_XPORT_INFO_1_CONTAINER {
 
@@ -4148,7 +4148,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.99"></a>
 #### 2.2.4.99 SERVER_XPORT_INFO_2_CONTAINER
 
-The SERVER_XPORT_INFO_2_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_3.1.4.24) method returns and a pointer to the buffer that contains the entries.
+The SERVER_XPORT_INFO_2_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_2.1) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SERVER_XPORT_INFO_2_CONTAINER {
 
@@ -4167,7 +4167,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.100"></a>
 #### 2.2.4.100 SERVER_XPORT_INFO_3_CONTAINER
 
-The SERVER_XPORT_INFO_3_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_3.1.4.24) method returns and a pointer to the buffer that contains the entries.
+The SERVER_XPORT_INFO_3_CONTAINER structure contains a value that indicates the number of entries that the [NetrServerTransportEnum](#Section_2.1) method returns and a pointer to the buffer that contains the entries.
 
 typedef struct _SERVER_XPORT_INFO_3_CONTAINER {
 
@@ -4186,7 +4186,7 @@ DWORD EntriesRead;
 <a id="Section_2.2.4.101"></a>
 #### 2.2.4.101 SERVER_XPORT_ENUM_STRUCT
 
-The SERVER_XPORT_ENUM_STRUCT structure specifies the information level that the [**client**](#gt_client) requests in the [NetrServerTransportEnum](#Section_3.1.4.24) method and encapsulates the [SERVER_XPORT_ENUM_UNION](#Section_2.2.3.8) union that receives the entries that are enumerated by the [**server**](#gt_server).
+The SERVER_XPORT_ENUM_STRUCT structure specifies the information level that the [**client**](#gt_client) requests in the [NetrServerTransportEnum](#Section_2.1) method and encapsulates the [SERVER_XPORT_ENUM_UNION](#Section_2.2.3.8) union that receives the entries that are enumerated by the [**server**](#gt_server).
 
 typedef struct _SERVER_XPORT_ENUM_STRUCT {
 
@@ -4236,7 +4236,7 @@ ULONG srvai0_reserved;
 
 **srvai0_target:** A pointer to a null-terminated Unicode UTF-16 string. It specifies the server name that alias is attached to. The server MUST ignore this member when processing the **NetrServerAliasDel** method.
 
-**srvai0_default:** A BOOLEAN value. If it is set to TRUE, **srvai0_target** MUST replace the default server name that is used to locate a [**scoped share**](#gt_scoped-share) in [NetrShareAdd](#Section_3.1.4.7)/[NetrShareDel](#Section_3.1.4.12)/[NetrShareSetInfo](#Section_3.1.4.11). If a scoped share cannot be found through a tuple of <share name, server name> due to a server name mismatch, the default server name is used in <share name, default server name> to continue scoped share searching. The server MUST ignore **srvai0_default** when processing the [NetrServerAliasDel](#Section_3.1.4.46) method.
+**srvai0_default:** A BOOLEAN value. If it is set to TRUE, **srvai0_target** MUST replace the default server name that is used to locate a [**scoped share**](#gt_scoped-share) in [NetrShareAdd](#Section_3.1.4.7)/[NetrShareDel](#Section_3.1.4.15)/[NetrShareSetInfo](#Section_3.1.4.11). If a scoped share cannot be found through a tuple of <share name, server name> due to a server name mismatch, the default server name is used in <share name, default server name> to continue scoped share searching. The server MUST ignore **srvai0_default** when processing the [NetrServerAliasDel](#Section_3.1.4.46) method.
 
 **srvai0_reserved:** This field is not used. The server MUST ignore the value of this parameter on receipt.
 
@@ -4506,7 +4506,7 @@ The server MUST implement the following:
 
 **PrinterShareCount:** A numeric value that indicates the number of printer shares on the server.
 
-**ShareList:** A list of shares. Each element in the list is a **Share** as defined in section [3.1.1.7](#Section_3.1.1.7). Entries are inserted into the list as specified in section [3.1.4.7](#Section_3.1.4.7) and removed as specified in section [3.1.4.12](#Section_3.1.4.12) and section [3.1.4.15](#Section_3.1.4.15).
+**ShareList:** A list of shares. Each element in the list is a **Share** as defined in section [3.1.1.7](#Section_3.1.1.7). Entries are inserted into the list as specified in section [3.1.4.7](#Section_3.1.4.7) and removed as specified in section [3.1.4.12](#Section_3.1.4.15) and section [3.1.4.15](#Section_3.1.4.15).
 
 **SessionList:** A list of sessions. Each element in the list is a **Session** as defined in section [3.1.1.8](#Section_3.1.1.8). Entries are inserted into the list as specified in section [3.1.6.2](#Section_3.1.6.2) and removed as specified in section [3.1.6.3](#Section_3.1.6.3).
 
@@ -4516,7 +4516,7 @@ The server MUST implement the following:
 
 **TransportList:** A list of transports. Each element in the list is a **Transport** ADM element as defined in section [3.1.1.2](#Section_3.1.1.2).
 
-**TreeConnectList:** A list of tree connects. Each element in the list is a **TreeConnect** element defined in section [3.1.1.5](#Section_3.1.1.5). Entries are inserted into the list as specified in section [3.1.6.6](#Section_3.1.1.5) and removed as specified in section [3.1.6.7](#Section_3.1.1.5).
+**TreeConnectList:** A list of tree connects. Each element in the list is a **TreeConnect** element defined in section [3.1.1.5](#Section_3.1.1.5). Entries are inserted into the list as specified in section [3.1.6.6](#Section_3.1.6.7) and removed as specified in section [3.1.6.7](#Section_3.1.6.7).
 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 Per Transport
@@ -4894,19 +4894,19 @@ Methods in RPC Opnum Order
 | [NetrSessionEnum](#Section_3.1.4.5) | Provides information about sessions that are established on a server. Opnum: 12 |
 | [NetrSessionDel](#Section_3.1.4.6) | Ends a network session between a server and a [**client**](#gt_client). Opnum: 13 |
 | [NetrShareAdd](#Section_3.1.4.7) | Shares a server resource. Opnum: 14 |
-| [NetrShareEnum](#Section_3.1.4.8) | Retrieves information about each shared resource on a server. Opnum: 15 |
+| [NetrShareEnum](#Section_3.1.4.9) | Retrieves information about each shared resource on a server. Opnum: 15 |
 | [NetrShareGetInfo](#Section_3.1.4.10) | Retrieves information about a particular shared resource on the server. Opnum: 16 |
 | [NetrShareSetInfo](#Section_3.1.4.11) | Sets the parameters of a shared resource. Opnum: 17 |
-| [NetrShareDel](#Section_3.1.4.12) | Deletes a share name from a server’s list of shared resources, which disconnects all connections to the shared resource. Opnum: 18 |
+| [NetrShareDel](#Section_3.1.4.15) | Deletes a share name from a server’s list of shared resources, which disconnects all connections to the shared resource. Opnum: 18 |
 | [NetrShareDelSticky](#Section_3.1.4.13) | Deletes a [**sticky share**](#gt_sticky-share) name from a server’s list of shared resources, which disconnects all connections to the shared resource. Opnum: 19 |
 | [NetrShareCheck](#Section_3.1.4.16) | Checks whether a server is sharing a device. Opnum: 20 |
 | [NetrServerGetInfo](#Section_3.1.4.17) | Retrieves current configuration information for the specified server. Opnum: 21 |
 | [NetrServerSetInfo](#Section_3.1.4.18) | Sets a server’s operating parameters. Opnum: 22 |
 | [NetrServerDiskEnum](#Section_3.1.4.19) | Retrieves a list of disk drives on a server. Opnum: 23 |
 | [NetrServerStatisticsGet](#Section_3.1.4.20) | Retrieves operating statistics for a service. Opnum: 24 |
-| [NetrServerTransportAdd](#Section_3.1.4.22) | Binds the server to the transport protocol. Opnum: 25 |
-| [NetrServerTransportEnum](#Section_3.1.4.24) | Supplies information about transport protocols that the server manages. Opnum: 26 |
-| [NetrServerTransportDel](#Section_3.1.4.25) | Unbinds (disconnects) the transport protocol from the server. Opnum: 27 |
+| [NetrServerTransportAdd](#Section_2.1) | Binds the server to the transport protocol. Opnum: 25 |
+| [NetrServerTransportEnum](#Section_2.1) | Supplies information about transport protocols that the server manages. Opnum: 26 |
+| [NetrServerTransportDel](#Section_2.1) | Unbinds (disconnects) the transport protocol from the server. Opnum: 27 |
 | [NetrRemoteTOD](#Section_3.1.4.21) | Returns the time of day information from a specified server. Opnum: 28 |
 | Opnum29NotUsedOnWire | Only used locally, never remotely. Opnum: 29 |
 | [NetprPathType](#Section_3.1.4.29) | Checks a path name to determine its type. Opnum: 30 |
@@ -5081,10 +5081,10 @@ The *InfoStruct* parameter has a **Level** member. The valid values of **Level**
 
 The server MUST fill the return structures as follows.
 
-If the **Level** member is 2, the server MUST return the information about **Opens** by filling the [FILE_INFO_2_CONTAINER](#Section_2.2.4.8) structure in the FileInfo field of the *InfoStruct* parameter as follows. The FILE_INFO_2_CONTAINER structure contains an array of [FILE_INFO_2](#Section_2.2.4.6) structures.
+If the **Level** member is 2, the server MUST return the information about **Opens** by filling the [FILE_INFO_2_CONTAINER](#Section_2.2.4.8) structure in the FileInfo field of the *InfoStruct* parameter as follows. The FILE_INFO_2_CONTAINER structure contains an array of [FILE_INFO_2](#Section_2.2.3.3) structures.
 
 - **fi2_id** MUST be set to **open.fi3_id**.
-If the **Level** member is 3, the server MUST return **Opens** directly by filling the [FILE_INFO_3_CONTAINER](#Section_2.2.4.9) structure in the **FileInfo** field of the *InfoStruct* parameter. The FILE_INFO_3_CONTAINER structure contains an array of [FILE_INFO_3](#Section_2.2.3.3) structures.
+If the **Level** member is 3, the server MUST return **Opens** directly by filling the [FILE_INFO_3_CONTAINER](#Section_2.2.4.9) structure in the **FileInfo** field of the *InfoStruct* parameter. The FILE_INFO_3_CONTAINER structure contains an array of [FILE_INFO_3](#Section_2.2.4.7) structures.
 
 The *PreferedMaximumLength* parameter specifies the maximum number of bytes that the server can return for the **FileInfo** buffer.
 
@@ -5132,8 +5132,8 @@ NET_API_STATUS NetrFileGetInfo(
 
 | Value | Meaning |
 | --- | --- |
-| 2 | [FILE_INFO_2](#Section_2.2.4.6) |
-| 3 | [FILE_INFO_3](#Section_2.2.3.3) |
+| 2 | [FILE_INFO_2](#Section_2.2.3.3) |
+| 3 | [FILE_INFO_3](#Section_2.2.4.7) |
 
 **InfoStruct:** This parameter is of type [LPFILE_INFO](#Section_2.2.3.3), which is defined in section 2.2.3.3. Its contents are determined by the value of the **Level** member, as shown in the previous parameter table.
 
@@ -5622,7 +5622,7 @@ If this parameter is NULL or points to 0x00000000, the enumeration starts from t
 
 In response to a NetrShareEnumSticky message, the server MUST enumerate all the sticky shares in the **ShareList** whose **IsPersistent** setting is set, or return an error code. If the server is restarted, any shares that are created before the restart that are not sticky MUST be forgotten. Information about sticky shares MUST be stored in a persistent store,<60> and the shares MUST be restored (that is, re-created on the server) after the server is restarted.
 
-The NetrShareEnumSticky method MUST NOT support Level 501 and MUST enumerate only sticky shares. Other than this difference, the server MUST process this message in exactly the same manner as the [NetrShareEnum](#Section_3.1.4.8) message.
+The NetrShareEnumSticky method MUST NOT support Level 501 and MUST enumerate only sticky shares. Other than this difference, the server MUST process this message in exactly the same manner as the [NetrShareEnum](#Section_3.1.4.9) message.
 
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 NetrShareGetInfo (Opnum 16)
@@ -6554,7 +6554,7 @@ The server MAY<92> enforce security measures to verify that the caller has the r
 <a id="Section_3.1.4.23"></a>
 #### 3.1.4.23 NetrServerTransportAddEx (Opnum 41)
 
-The NetrServerTransportAddEx method binds the specified [**server**](#gt_server) to the transport protocol. This extended method allows the caller to specify information levels 1, 2, and 3 beyond what the [NetrServerTransportAdd](#Section_3.1.4.22) method allows.
+The NetrServerTransportAddEx method binds the specified [**server**](#gt_server) to the transport protocol. This extended method allows the caller to specify information levels 1, 2, and 3 beyond what the [NetrServerTransportAdd](#Section_2.1) method allows.
 
 NET_API_STATUS NetrServerTransportAddEx(
 
@@ -6728,7 +6728,7 @@ The server MAY<98> enforce security measures to verify that the caller has the r
 <a id="Section_3.1.4.26"></a>
 #### 3.1.4.26 NetrServerTransportDelEx (Opnum 53)
 
-The [**server**](#gt_server) receives the NetrServerTransportDelEx method in an RPC_REQUEST packet. In response, the server unbinds (or disconnects) the transport protocol from the server. If this method succeeds, the server can no longer communicate with [**clients**](#gt_client) by using the specified transport protocol (such as TCP or XNS). This extended method allows level 1 beyond what the [NetrServerTransportDel](#Section_3.1.4.25) method allows.
+The [**server**](#gt_server) receives the NetrServerTransportDelEx method in an RPC_REQUEST packet. In response, the server unbinds (or disconnects) the transport protocol from the server. If this method succeeds, the server can no longer communicate with [**clients**](#gt_client) by using the specified transport protocol (such as TCP or XNS). This extended method allows level 1 beyond what the [NetrServerTransportDel](#Section_2.1) method allows.
 
 NET_API_STATUS NetrServerTransportDelEx(
 
@@ -8036,7 +8036,7 @@ Figure 3: Message sequence for adding a scoped share with an alias to a server
 - The server processes the share add and returns the status NERR_Success.
 - The client calls NetrServerAliasAdd (Opnum 54) to add an alias, with srvai0_alias set to "server.example.com", srvai0_target set to "server", and srvai0_default set to FALSE.
 - The server processes the alias add, and returns the status NERR_Success.
-On completion of these steps, a client connecting to the server and attempting to enumerate shares on this server and passing in "server" or "server.example.com" for the *ServerName* parameter for [NetrShareEnum](#Section_3.1.4.8), would find only those shares that were added as specified in step 3 above. Clients connecting and attempting to enumerate shares on this server and passing in any other name for the *ServerName* parameter for NetrShareEnum would not see the shares added as specified in step 3 above. (Note that the administrator is responsible for configuring the network such that the names "server" and "server.example.com" correctly resolve to the server above. This is not handled by NetrServerTransportAddEx (Opnum 41).)
+On completion of these steps, a client connecting to the server and attempting to enumerate shares on this server and passing in "server" or "server.example.com" for the *ServerName* parameter for [NetrShareEnum](#Section_3.1.4.9), would find only those shares that were added as specified in step 3 above. Clients connecting and attempting to enumerate shares on this server and passing in any other name for the *ServerName* parameter for NetrShareEnum would not see the shares added as specified in step 3 above. (Note that the administrator is responsible for configuring the network such that the names "server" and "server.example.com" correctly resolve to the server above. This is not handled by NetrServerTransportAddEx (Opnum 41).)
 
 <a id="Section_5"></a>
 # 5 Security
@@ -11208,7 +11208,7 @@ The following table lists the named pipe names that an anonymous user is allowed
 
 <70> Section 3.1.4.12: If the specified share is a file share, the Windows implementation checks to see whether the caller is a member of the Administrators, Server Operators, or Power Users local group. If the specified share is a printer share, the Windows implementation checks to see whether the caller is a member of the Print Operator group.
 
-<71> Section 3.1.4.12: Only members of the Administrators, Server Operators, or Power Users local group can successfully delete file shares by using a [NetrShareDel](#Section_3.1.4.12) message call. The Print Operator can delete printer shares. If the caller does not meet these requirements, Windows-based servers fail the call with the error code ERROR_ACCESS_DENIED.
+<71> Section 3.1.4.12: Only members of the Administrators, Server Operators, or Power Users local group can successfully delete file shares by using a [NetrShareDel](#Section_3.1.4.15) message call. The Print Operator can delete printer shares. If the caller does not meet these requirements, Windows-based servers fail the call with the error code ERROR_ACCESS_DENIED.
 
 <72> Section 3.1.4.13: Windows-based clients set this field to an arbitrary value. The actual value does not affect server behavior because the server is required to ignore this field.
 

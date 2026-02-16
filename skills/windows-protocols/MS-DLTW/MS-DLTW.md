@@ -281,7 +281,7 @@ The Distributed Link Tracking: Workstation Protocol is applicable to computers i
 - References are made to files.
 - Files are moved to new locations within the computer or to a new computer.
 - It is expected that file references are to be found after the referent file has been moved in this way.
-This protocol is less likely to be useful in situations where large numbers of files are being moved between [**volumes**](#gt_volume). The server maintains a table of files, as specified in section [3.1.1](#Section_3.1.1), that have been linked to and have been moved off a volume. This table is limited to 10,000 entries. When it exceeds this limit, the oldest entries are reused. If an entry in the table for a file has been overwritten, it might not be possible for a server to return information about the location to which a file has been moved. If the Distributed Link Tracking: Central Manager Protocol is being used in conjunction with this protocol, it might not be necessary to use the tables for this protocol. However, the tables of the DLT Central Manager also have size limits, as specified in [MS-DLTM](../MS-DLTM/MS-DLTM.md) section 3.1.1.
+This protocol is less likely to be useful in situations where large numbers of files are being moved between [**volumes**](#gt_volume). The server maintains a table of files, as specified in section [3.1.1](#Section_3.2.1), that have been linked to and have been moved off a volume. This table is limited to 10,000 entries. When it exceeds this limit, the oldest entries are reused. If an entry in the table for a file has been overwritten, it might not be possible for a server to return information about the location to which a file has been moved. If the Distributed Link Tracking: Central Manager Protocol is being used in conjunction with this protocol, it might not be necessary to use the tables for this protocol. However, the tables of the DLT Central Manager also have size limits, as specified in [MS-DLTM](../MS-DLTM/MS-DLTM.md) section 3.1.1.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -375,7 +375,7 @@ GUID _volume;
 
 } CVolumeId;
 
-**_volume:** This field MUST contain a [**GUID**](#gt_globally-unique-identifier-guid) for a volume. The lowest-order bit of this value MUST be zero. Further restrictions on the value of a VolumeID are defined in section [3.1.1](#Section_3.1.1).
+**_volume:** This field MUST contain a [**GUID**](#gt_globally-unique-identifier-guid) for a volume. The lowest-order bit of this value MUST be zero. Further restrictions on the value of a VolumeID are defined in section [3.1.1](#Section_3.2.1).
 
 <a id="Section_2.2.5"></a>
 ### 2.2.5 CObjId
@@ -388,7 +388,7 @@ GUID _object;
 
 } CObjId;
 
-**_object:** This field MUST contain an identifier for a file. It is unique within the volume on which the file was created. Restrictions on the value of a [**VolumeID**](#gt_volumeid) are defined in section [3.1.1](#Section_3.1.1).
+**_object:** This field MUST contain an identifier for a file. It is unique within the volume on which the file was created. Restrictions on the value of a [**VolumeID**](#gt_volumeid) are defined in section [3.1.1](#Section_3.2.1).
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -502,7 +502,7 @@ The server responds to this call by attempting to find the requested file in one
 
 The server SHOULD<10> return a failure value, if the file is found, but the length of the path to be returned in the *pstszPath* argument exceeds 261 characters (where the 261 characters does not include a string terminator character).
 
-For each of the possible return values, the output parameters of this call MUST be set as specified in the following list. In these specifications, the requested [**ObjectID**](#gt_objectid) MUST correspond to the **Object** field of the *pDroidLast* parameter, the requested [**VolumeID**](#gt_volumeid) MUST correspond to the **Volume** field of the *pDroidLast* parameter, and the FileID requested MUST correspond to the value of the *pDroidBirthLast* parameter. The numeric values corresponding to these returns are defined in section [3.1.1](#Section_3.1.1):
+For each of the possible return values, the output parameters of this call MUST be set as specified in the following list. In these specifications, the requested [**ObjectID**](#gt_objectid) MUST correspond to the **Object** field of the *pDroidLast* parameter, the requested [**VolumeID**](#gt_volumeid) MUST correspond to the **Volume** field of the *pDroidLast* parameter, and the FileID requested MUST correspond to the value of the *pDroidBirthLast* parameter. The numeric values corresponding to these returns are defined in section [3.1.1](#Section_3.2.1):
 
 - Success: A success value MUST be returned if the server finds the file, and the client is authorized to get information about the file via a UNC path. The file MUST be found by searching all volumes on the server computer for a file whose ObjectID is equal to the ObjectID of the request, and whose FileID is equal to the FileID of the request. To perform the authorization check, the server MUST use the client's identity (obtained as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3) to determine, based on local policy, whether or not the client is authorized to get the UNC of the file.
 If there is more than one file on the server computer that satisfies these conditions, the file MUST be selected as follows:
@@ -593,7 +593,7 @@ If a file is moved between volumes on the local machine, the following updates t
 - If the target [**volume**](#gt_volume) does not already have a file with this [**ObjectID**](#gt_objectid), the ObjectID MUST be set on the new file. Otherwise, a new, unique ObjectID MUST be created for the new file.
 - The [**CrossVolumeMoveFlag**](#gt_crossvolumemoveflag) MUST be set to 1 on the target file.
 - The [**FileID**](#gt_fileid) of the source file MUST be set as the FileID of the target file.
-- An entry MUST be added to the **MoveTable** (section [3.1.1](#Section_3.1.1)) for the source file's ObjectID. The [**MachineID**](#gt_machineid) field of that entry MUST be the local machine's MachineID. The [**FileLocation**](#gt_filelocation) field of that entry MUST be set to a value such that the [**VolumeID**](#gt_volumeid) field is the target volume's VolumeID, and the ObjectID field is the target file's ObjectID.
+- An entry MUST be added to the **MoveTable** (section [3.1.1](#Section_3.2.1)) for the source file's ObjectID. The [**MachineID**](#gt_machineid) field of that entry MUST be the local machine's MachineID. The [**FileLocation**](#gt_filelocation) field of that entry MUST be set to a value such that the [**VolumeID**](#gt_volumeid) field is the target volume's VolumeID, and the ObjectID field is the target file's ObjectID.
 <a id="Section_3.1.6.2"></a>
 #### 3.1.6.2 File Is Moved from Local Machine to Remote Machine
 
@@ -601,7 +601,7 @@ If a file is moved from the local machine to a remote machine, the following pro
 
 - The [**ObjectID**](#gt_objectid) of the target file SHOULD be retrieved by sending an FSCTL_CREATE_OR_GET_OBJECT_ID request.<15>
 - If this step is successful, the [**VolumeID**](#gt_volumeid) of the target file's [**volume**](#gt_volume) MUST be retrieved by sending a request for an instance of the **FileFsObjectIdInformation** class, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.5.6, and by interpreting the **ObjectId** field of the returned **FILE_FS_OBJECTID_INFORMATION** structure as the VolumeID. If the connection to the remote machine is using the [MS-SMB](../MS-SMB/MS-SMB.md) protocol, this request MUST be sent by specifying **FileFsObjectIdInformation** as the **InformationLevel** of a **TRANS2_QUERY_FS_INFORMATION** request, specified in [MS-SMB] section 2.2.6.3.1. Otherwise, the connection to the remote machine is using the [MS-SMB2](../MS-SMB2/MS-SMB2.md) protocol, and this request MUST be sent by specifying **FileFsObjectidInformation** as the **FileInfoClass** of an **SMB2_QUERY_INFO** request, specified in [MS-SMB2] section 2.2.37.<16>
-- If the preceding step is successful, an entry MUST be added to the **MoveTable** (section [3.1.1](#Section_3.1.1)) for the source file's ObjectID. The [**MachineID**](#gt_machineid) field of that entry MUST be the target machine's MachineID. The [**FileLocation**](#gt_filelocation) field of that entry MUST be composed of the target volume's VolumeID and the target file's ObjectID.
+- If the preceding step is successful, an entry MUST be added to the **MoveTable** (section [3.1.1](#Section_3.2.1)) for the source file's ObjectID. The [**MachineID**](#gt_machineid) field of that entry MUST be the target machine's MachineID. The [**FileLocation**](#gt_filelocation) field of that entry MUST be composed of the target volume's VolumeID and the target file's ObjectID.
 - If the preceding step is successful, the [**FileID**](#gt_fileid) of the source file MUST be set on the target file by sending an FSCTL_SET_OBJECT_ID_EXTENDED request for the target file. In this request, the [**CrossVolumeMoveFlag**](#gt_crossvolumemoveflag) MUST be set to 1, and the VolumeID and ObjectID fields MUST be those of the corresponding components of the source file's FileID.
 <a id="Section_3.1.6.3"></a>
 #### 3.1.6.3 File Is Moved from Remote Machine to Local Machine
@@ -1020,7 +1020,7 @@ Otherwise, Windows: The server listens only on the "\\pipe\trkwks" endpoint.
 
 <4> Section 3.1.1: In a configuration where a DLT Central Manager server is available, the [**VolumeID**](#gt_volumeid) is generated by using that protocol. Otherwise, an arbitrary VolumeID is generated.
 
-<5> Section 3.1.1: All versions of Windows listed in the supported products list in Appendix B: Product Behavior: The [**CrossVolumeMoveFlag**](#gt_crossvolumemoveflag) is stored as the low-order bit of the first byte of the **CVolumeID**, as specified in section [3.1.1](#Section_3.1.1).
+<5> Section 3.1.1: All versions of Windows listed in the supported products list in Appendix B: Product Behavior: The [**CrossVolumeMoveFlag**](#gt_crossvolumemoveflag) is stored as the low-order bit of the first byte of the **CVolumeID**, as specified in section [3.1.1](#Section_3.2.1).
 
 <6> Section 3.1.1: Not all files on a [**volume**](#gt_volume) have an [**ObjectID**](#gt_objectid). Those files without an ObjectID are not considered part of this abstract data model.
 

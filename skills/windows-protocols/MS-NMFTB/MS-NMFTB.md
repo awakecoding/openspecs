@@ -429,7 +429,7 @@ CONNECTED is the initial state. The following events are processed in the CONNEC
 
 The following events are processed in the BUSY state:
 
-- End the framing session, as specified in section [3.2.6.1](#Section_3.2.6.1)
+- End the framing session, as specified in section [3.2.6.1](#Section_3.3.6.1)
 - Abort the TCP connection, as specified in section [3.1.6.2.1](#Section_3.1.6.2.1)
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers

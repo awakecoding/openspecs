@@ -546,7 +546,7 @@ The following table summarizes the data structures defined in this section.
 | [CCoercionRestriction](#Section_2.2.1.12) | Contains a coercion restriction that affects ranking of query results. |
 | [CFeedbackRestriction](#Section_2.2.1.15) | Contains a set of feedback documents for relevance feedback queries (for more information, see [Jones]). |
 | [CProbRestriction](#Section_2.2.1.14) | Contains probabilistic rank parameters (for more information, see [Jones]). |
-| [CRelDocRestriction](#Section_2.2.1.13) | Contains a relevant document for relevance feedback queries (for more information, see [Jones]). |
+| [CRelDocRestriction](#Section_2.2.1.17) | Contains a relevant document for relevance feedback queries (for more information, see [Jones]). |
 | [CAggregSet](#Section_2.2.1.24) | Contains a set of aggregate specifications. |
 | [CAggregSpec](#Section_2.2.1.25) | Contains a single aggregate or column specification. |
 | [CAggregSortKey](#Section_2.2.1.27) | Contains a single grouping sort key. |
@@ -1353,7 +1353,7 @@ packet-beta
 | RTCoerce_Absolute 0x0000000C | The node contains a CCoercionRestriction structure with operation ABSOLUTE, as specified in section 2.2.1.12. |
 | RTProb 0x0000000D | The node contains a [CProbRestriction](#Section_2.2.1.14) structure. |
 | RTFeedback 0x0000000E | The node contains a [CFeedbackRestriction](#Section_2.2.1.15) structure. |
-| RTReldoc 0x0000000F | The node contains a [CRelDocRestriction](#Section_2.2.1.13) structure. |
+| RTReldoc 0x0000000F | The node contains a [CRelDocRestriction](#Section_2.2.1.17) structure. |
 | RTCoerce_MinMax 0x00000012 | The node contains a CCoercionRestriction structure with operation MINMAX, as specified section 2.2.1.12.<5> |
 | RTRankMerge 0x00000013 | The node contains a CRankMergeRestriction structure, as specified in section [2.2.1.46](#Section_2.2.1.46).<6> |
 
@@ -2182,7 +2182,7 @@ packet-beta
 
 **_status (4 bytes):** An [**HRESULT**](#gt_hresult), indicating the status of the requested operation. The client MUST initialize this value to 0x00000000. The server then changes it as the status of the requested operation changes.
 
-**_ulChecksum (4 bytes):** The _ulChecksum MUST be calculated as specified in section [3.2.4](#Section_3.1.4) for the following messages:
+**_ulChecksum (4 bytes):** The _ulChecksum MUST be calculated as specified in section [3.2.4](#Section_3.2.4) for the following messages:
 
 - CPMConnectIn
 - CPMCreateQueryIn
@@ -2304,7 +2304,7 @@ packet-beta
 - [CPMFetchValueIn](#Section_2.2.3.15)
 - [CPMGetRowsIn](#Section_2.2.3.11)
 - [CPMSetBindingsIn](#Section_2.2.3.10)
-For details on how the server validates the value specified by the client in the **_ulChecksum** field for the messages previously listed, see section [3.2.4](#Section_3.1.4).
+For details on how the server validates the value specified by the client in the **_ulChecksum** field for the messages previously listed, see section [3.2.4](#Section_3.2.4).
 
 If the lowest 2 bytes are greater than 0x00000109, the client is assumed to be capable of handling 64-bit offsets in [CPMGetRowsOut](#Section_2.2.3.12) messages.<9>
 
@@ -3948,7 +3948,7 @@ The server MUST then validate the **_ulChecksum** field value if the message typ
 - [CPMFetchValueIn](#Section_2.2.3.15) (0x000000E4)
 To validate the **_ulChecksum** field value, the server MUST check the value that the client specified in the **_iClientVersion** field in the CPMConnectIn message.
 
-If the value of the **_iClientVersion** field's last 2 bytes is 0x00000109 or greater and **_ulChecksum** is not equal to zero, the server MUST validate that the **_ulChecksum** field was calculated as specified in section [3.2.4](#Section_3.1.4). If the **_ulChecksum** value is invalid, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
+If the value of the **_iClientVersion** field's last 2 bytes is 0x00000109 or greater and **_ulChecksum** is not equal to zero, the server MUST validate that the **_ulChecksum** field was calculated as specified in section [3.2.4](#Section_3.2.4). If the **_ulChecksum** value is invalid, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
 
 Next, the server checks which state it is in. If its state is "not initialized", the server MUST report a CI_E_NOT_INITIALIZED (0x8004180B) error. If the state is "shutting down", the server MUST report a CI_E_SHUTDOWN (0x80041812) error.
 
@@ -4327,7 +4327,7 @@ This message is currently implemented only in the Windows 7 operating system. If
 - Search the **ConnectedClientsIdentifiers** list for the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message. If it is not present, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
 - Prepare a [CPMSetScopePrioritizationOut](#Section_2.2.3.32) message. If this step fails for any reason, the server MUST report any error code encountered in performing the request in accordance with Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 - Call the **SetScopePriority** abstract interface of the [**GSS**](#gt_generic-security-services-gss), with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message and the **priority** field as arguments.
-- If **eventFrequency** is not zero, start an [EventTimer](#Section_3.1.2) timer that expires after an interval defined by **eventFrequency**, in milliseconds. Otherwise, if **eventFrequency** is zero, then call the **FilterOutScopeStatisticsMessages** abstract interface of the GSS, with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message as the argument for the call.
+- If **eventFrequency** is not zero, start an [EventTimer](#Section_3.2.2) timer that expires after an interval defined by **eventFrequency**, in milliseconds. Otherwise, if **eventFrequency** is zero, then call the **FilterOutScopeStatisticsMessages** abstract interface of the GSS, with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message as the argument for the call.
 - The CPMSetScopePrioritizationOut message MUST simply acknowledge successful receipt of the CPMSetScopePrioritizationIn message and that the **SetScopePriority** abstract interface has been called, with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message and the **priority** field as arguments to the call.
 - Report any errors encountered during message preparation or during any abstract interface call to the GSS. Errors that are specific to this request:
 - E_OUTOFMEMORY: generated by any resource allocation failure on the server or service side.
@@ -5047,7 +5047,7 @@ When this request is received from the higher layer, the client MUST perform the
 
 - Calculate the number of CTableColumn structures in the **aColumns** array, and set the **cColumns** field to this value.
 - Calculate the total size in bytes of the **cColumns** and **aColumns** fields, and set the **_cbBindingDesc** field to this value.
-- Set the specified fields in the [CPMSetBindingsIn](#Section_2.2.3.10) message to the values provided by the higher application layer. Set the **_ulChecksum** field to the value calculated, as specified in section [3.2.4](#Section_3.1.4).
+- Set the specified fields in the [CPMSetBindingsIn](#Section_2.2.3.10) message to the values provided by the higher application layer. Set the **_ulChecksum** field to the value calculated, as specified in section [3.2.4](#Section_3.2.4).
 - Send the completed CPMSetBindingsIn message to the server.
 - Wait to receive a CPMSetBindingsIn message from the server, discarding all other messages.
 - Indicate the status from the **_status** field of the response to the higher layer.
@@ -5253,7 +5253,7 @@ Assume that machine UserA-2A is running a 32-bit Windows Vista operating system,
 - The header of the message is populated as follows:
 - **_msg** is set to 0x000000C8, indicating that this is a CPMConnectIn message.
 - **_status** is set to 0x00000000.
-- **_ulChecksum** contains the checksum, computed as specified in section [3.2.4](#Section_3.1.4).
+- **_ulChecksum** contains the checksum, computed as specified in section [3.2.4](#Section_3.2.4).
 - **_ulReserved2** is set to 0x00000000.
 - The body of the message is populated as follows:
 - **_iClientVersion** is set to 0x00000109, indicating that the server is to validate the **checksum** field and that the client is running Windows Search 4.0.

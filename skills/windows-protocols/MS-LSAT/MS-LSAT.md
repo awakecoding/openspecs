@@ -355,7 +355,7 @@ This document covers versioning issues in the following areas:
 
 - Supported Transports: The protocol uses [**RPC**](#gt_remote-procedure-call-rpc) over [**SMB**](#gt_server-message-block-smb) and TCP/IP, as specified in section [2.1](#Section_2.1).
 - Protocol Version: This protocol's RPC interface has a single version number, but that interface has been extended by adding methods at the end. The use of these methods is specified in section [3.1](#Section_3.1).
-- Structure Version: The [LSAPR_ACL (section 2.2.3)](#Section_2.2.3) and [LSAPR_SECURITY_DESCRIPTOR (section 2.2.5)](#Section_5) structures are versioned using the first field in the structure. The structure version is not used in this protocol.
+- Structure Version: The [LSAPR_ACL (section 2.2.3)](#Section_2.2.3) and [LSAPR_SECURITY_DESCRIPTOR (section 2.2.5)](#Section_2.2.5) structures are versioned using the first field in the structure. The structure version is not used in this protocol.
 - Capabilities: The [**RPC client**](#gt_rpc-client) passes its capabilities in the appropriate parameter when possible, as specified in sections [3.1.4.5](#Section_3.1.4.5), [3.1.4.6](#Section_3.1.4.6), [3.1.4.7](#Section_3.1.4.7), [3.1.4.9](#Section_3.1.4.9), and [3.1.4.10](#Section_3.1.4.10).
 The [**RPC server**](#gt_rpc-server) takes actions according to the capabilities parameter of an RPC message, if present, as specified in the previous paragraph.
 
@@ -383,7 +383,7 @@ This protocol MUST use [**RPC dynamic endpoints**](#gt_rpc-dynamic-endpoint), as
 
 This protocol MUST use "\PIPE\lsarpc" as the [**RPC endpoint**](#gt_rpc-endpoint) when using RPC over SMB.<2>
 
-[**RPC clients**](#gt_rpc-client) for this protocol MUST use RPC over SMB for the [LsarOpenPolicy2](#Section_3.1.4.1), [LsarOpenPolicy](#Section_3.1.4.2), [LsarClose](#Section_3.1.4.3), [LsarGetUserName](#Section_3.1.4.4), [LsarLookupNames](#Section_3.1.4.5), [LsarLookupNames2](#Section_3.1.4.7), [LsarLookupNames3](#Section_3.1.4.6), [LsarLookupSids](#Section_3.1.4.10), and [LsarLookupSids2](#Section_3.1.4.10) methods. RPC clients MUST use RPC over TCP/IP for the [LsarLookupNames4](#Section_3.1.4.5) and [LsarLookupSids3](#Section_3.1.4.9) methods.<3>
+[**RPC clients**](#gt_rpc-client) for this protocol MUST use RPC over SMB for the [LsarOpenPolicy2](#Section_3.1.4.1), [LsarOpenPolicy](#Section_3.1.4.2), [LsarClose](#Section_3.1.4.3), [LsarGetUserName](#Section_3.1.4.4), [LsarLookupNames](#Section_3.1.4.8), [LsarLookupNames2](#Section_3.1.4.7), [LsarLookupNames3](#Section_3.1.4.6), [LsarLookupSids](#Section_3.1.4.11), and [LsarLookupSids2](#Section_3.1.4.10) methods. RPC clients MUST use RPC over TCP/IP for the [LsarLookupNames4](#Section_3.1.4.5) and [LsarLookupSids3](#Section_3.1.4.9) methods.<3>
 
 The server SHOULD<4> reject calls that do not use an authentication level of RPC_C_AUTHN_LEVEL_NONE, RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, or RPC_C_AUTHN_LEVEL_PKT_PRIVACY ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8).
 
@@ -419,18 +419,18 @@ The following table summarizes the types that are defined in this specification.
 | [LSAPR_HANDLE (section 2.2.1)](#Section_2.2.1) | Defines a context handle. |
 | [LSAPR_OBJECT_ATTRIBUTES (section 2.2.9)](#Section_2.2.9) | Specifies an object and its handle's properties. |
 | [LSAPR_REFERENCED_DOMAIN_LIST (section 2.2.12)](#Section_2.2.12) | Contains information about the [**domains**](#gt_domain) referenced in a lookup operation. |
-| [LSAPR_SECURITY_DESCRIPTOR (section 2.2.5)](#Section_5) | Defines an object's security descriptor. |
+| [LSAPR_SECURITY_DESCRIPTOR (section 2.2.5)](#Section_2.2.5) | Defines an object's security descriptor. |
 | [LSAPR_SID_ENUM_BUFFER (section 2.2.18)](#Section_2.2.18) | Defines a set of [**SIDs**](#gt_security-identifier-sid). |
 | [LSAPR_SID_INFORMATION (section 2.2.17)](#Section_2.2.17) | Contains a SID value. |
 | [LSAPR_TRANSLATED_NAME (section 2.2.19)](#Section_2.2.19) | Contains human-readable name information about a security principal. |
-| [LSAPR_TRANSLATED_NAME_EX (section 2.2.21)](#Section_2.2.19) | Contains human-readable name information about a security principal. |
-| [LSAPR_TRANSLATED_NAMES (section 2.2.20)](#Section_2.2.19) | Defines a set of translated names. |
-| [LSAPR_TRANSLATED_NAMES_EX (section 2.2.22)](#Section_2.2.22) | Contains a set of translated names. |
+| [LSAPR_TRANSLATED_NAME_EX (section 2.2.21)](#Section_2.2.21) | Contains human-readable name information about a security principal. |
+| [LSAPR_TRANSLATED_NAMES (section 2.2.20)](#Section_2.2.20) | Defines a set of translated names. |
+| [LSAPR_TRANSLATED_NAMES_EX (section 2.2.22)](#Section_2.2.20) | Contains a set of translated names. |
 | [LSAPR_TRANSLATED_SID_EX (section 2.2.23)](#Section_2.2.23) | Contains machine-readable identifier information about a security principal. |
 | [LSAPR_TRANSLATED_SID_EX2 (section 2.2.25)](#Section_2.2.25) | Contains machine-readable identifier information about a security principal. |
 | [LSAPR_TRANSLATED_SIDS (section 2.2.15)](#Section_2.2.15) | Defines a set of translated SIDs. |
-| [LSAPR_TRANSLATED_SIDS_EX (section 2.2.24)](#Section_2.2.24) | Contains a set of translated SIDs. |
-| [LSAPR_TRANSLATED_SIDS_EX2 (section 2.2.26)](#Section_2.2.24) | Contains a set of translated SIDs. |
+| [LSAPR_TRANSLATED_SIDS_EX (section 2.2.24)](#Section_2.2.15) | Contains a set of translated SIDs. |
+| [LSAPR_TRANSLATED_SIDS_EX2 (section 2.2.26)](#Section_2.2.26) | Contains a set of translated SIDs. |
 | [LSAPR_TRUST_INFORMATION (section 2.2.11)](#Section_2.2.11) | Contains information about a domain. |
 | [SECURITY_CONTEXT_TRACKING_MODE (section 2.2.7)](#Section_2.2.7) | Specifies whether user security attributes are updated on a server when they change on the client. |
 | [SECURITY_DESCRIPTOR_CONTROL (section 2.2.4)](#Section_2.2.4) | Qualifies the meaning of a security descriptor or its components. |
@@ -930,7 +930,7 @@ typedef struct _LSAPR_TRANSLATED_NAMES_EX {
 
 **Entries:** Contains the number of translated names.<12>
 
-**Names:** Contains a set of structures that contain translated names, as specified in section [2.2.21](#Section_2.2.19). If the **Entries** field in this structure is not 0, this field MUST be non-NULL. If **Entries** is 0, this field MUST be ignored.
+**Names:** Contains a set of structures that contain translated names, as specified in section [2.2.21](#Section_2.2.21). If the **Entries** field in this structure is not 0, this field MUST be non-NULL. If **Entries** is 0, this field MUST be ignored.
 
 <a id="Section_2.2.23"></a>
 ### 2.2.23 LSAPR_TRANSLATED_SID_EX
@@ -1567,8 +1567,8 @@ Methods in RPC Opnum Order
 | Lsar_LSA_DP_11 | Opnum: 11 |
 | Lsar_LSA_DP_12 | Opnum: 12 |
 | Lsar_LSA_DP_13 | Opnum: 13 |
-| [LsarLookupNames](#Section_3.1.4.5) | Translates a batch of [**security principal**](#gt_security-principal) names. For information on selecting which version to use, see section [3](#Section_1.3). Opnum: 14 |
-| [LsarLookupSids](#Section_3.1.4.10) | Translates a batch of security principal [**SIDs**](#gt_security-identifier-sid). For information on selecting which version to use, see section 3. Opnum: 15 |
+| [LsarLookupNames](#Section_3.1.4.8) | Translates a batch of [**security principal**](#gt_security-principal) names. For information on selecting which version to use, see section [3](#Section_1.3). Opnum: 14 |
+| [LsarLookupSids](#Section_3.1.4.11) | Translates a batch of security principal [**SIDs**](#gt_security-identifier-sid). For information on selecting which version to use, see section 3. Opnum: 15 |
 | Lsar_LSA_DP_16 | Opnum: 16 |
 | Lsar_LSA_DP_17 | Opnum: 17 |
 | Lsar_LSA_DP_18 | Opnum: 18 |
@@ -2287,7 +2287,7 @@ The client side of this protocol is simply a pass-through between the transport 
 
 There are several versions of messages that provide similar functionality. Higher-level protocols or applications can use the following guidelines when deciding what message to send.<36>
 
-For selecting between [LsarLookupNames4](#Section_3.1.4.5), [LsarLookupNames3](#Section_3.1.4.6), [LsarLookupNames2](#Section_3.1.4.7), and [LsarLookupNames](#Section_3.1.4.5):
+For selecting between [LsarLookupNames4](#Section_3.1.4.5), [LsarLookupNames3](#Section_3.1.4.6), [LsarLookupNames2](#Section_3.1.4.7), and [LsarLookupNames](#Section_3.1.4.8):
 
 - Only a [**domain controller**](#gt_domain-controller-dc) can process an LsarLookupNames4 message.
 - LsarLookupNames4 requires an [**RPC**](#gt_remote-procedure-call-rpc) handle (specified in its *RpcHandle* parameter) and that the connection is authenticated using the RPC_C_AUTHN_NETLOGON security provider, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7.
@@ -2295,7 +2295,7 @@ For selecting between [LsarLookupNames4](#Section_3.1.4.5), [LsarLookupNames3](#
 - Domain controllers and non–domain controllers can process LsarLookupNames3, LsarLookupNames2, and LsarLookupNames messages.
 For specifics on each message, see sections 3.1.4.5, 3.1.4.6, 3.1.4.7, and 3.1.4.8.
 
-For selecting between [LsarLookupSids3](#Section_3.1.4.9), [LsarLookupSids2](#Section_3.1.4.10), and [LsarLookupSids](#Section_3.1.4.10):
+For selecting between [LsarLookupSids3](#Section_3.1.4.9), [LsarLookupSids2](#Section_3.1.4.10), and [LsarLookupSids](#Section_3.1.4.11):
 
 - Only a domain controller can process an LsarLookupSids3 message.
 - LsarLookupSids3 requires an RPC handle (specified in its RpcHandle parameter) and that the connection is authenticated using the RPC_C_AUTHN_NETLOGON security provider, as specified in [MS-RPCE] section 2.2.1.1.7.

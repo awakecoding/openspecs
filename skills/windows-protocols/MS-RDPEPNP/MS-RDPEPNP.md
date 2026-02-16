@@ -251,7 +251,7 @@ The Remote Desktop Protocol: Plug and Play Devices Virtual Channel Extension con
 <a id="Section_1.3.1"></a>
 ### 1.3.1 PNP Device Info Subprotocol
 
-The [PNP Device Info Subprotocol](#Section_3.3.5.1) specifies the communication between the [**terminal server**](#gt_terminal-server) client and the terminal server component that handles the creation and removal of [**remote devices**](#gt_remote-device) on the server side. This subprotocol is used to create remote device instances on the server machine that correspond to the physical devices on the client machine. The following illustration shows the PNP Device Info Subprotocol message sequence. This subprotocol uses a dynamic virtual channel named PNPDR for communication between client and server.
+The [PNP Device Info Subprotocol](#Section_2.2.1) specifies the communication between the [**terminal server**](#gt_terminal-server) client and the terminal server component that handles the creation and removal of [**remote devices**](#gt_remote-device) on the server side. This subprotocol is used to create remote device instances on the server machine that correspond to the physical devices on the client machine. The following illustration shows the PNP Device Info Subprotocol message sequence. This subprotocol uses a dynamic virtual channel named PNPDR for communication between client and server.
 
 ![PNP Device Info Subprotocol message sequence](media/image1.png)
 
@@ -262,13 +262,13 @@ This subprotocol consists of a versioning and capabilities negotiation phase, in
 <a id="Section_1.3.2"></a>
 ### 1.3.2 PNP Device I/O Subprotocol
 
-The [PNP Device I/O Subprotocol](#Section_3.2.5.2) specifies the communication between the [**terminal client**](#gt_terminal-client) and the [**remote devices**](#gt_remote-device) on the [**terminal server**](#gt_terminal-server), for handling I/O requests. This subprotocol is used to redirect the I/O calls from applications on the terminal server side to a [**device driver**](#gt_device-driver) on the terminal client side. The following illustration shows a typical PNP Device I/O Subprotocol message sequence. This subprotocol uses a dynamic virtual channel named **FileRedirectorChannel** for communication between client and server.
+The [PNP Device I/O Subprotocol](#Section_1.3.2) specifies the communication between the [**terminal client**](#gt_terminal-client) and the [**remote devices**](#gt_remote-device) on the [**terminal server**](#gt_terminal-server), for handling I/O requests. This subprotocol is used to redirect the I/O calls from applications on the terminal server side to a [**device driver**](#gt_device-driver) on the terminal client side. The following illustration shows a typical PNP Device I/O Subprotocol message sequence. This subprotocol uses a dynamic virtual channel named **FileRedirectorChannel** for communication between client and server.
 
 ![PNP Device I/O Subprotocol message sequence](media/image2.png)
 
 Figure 2: PNP Device I/O Subprotocol message sequence
 
-For devices redirected using the [PNP Device Info Subprotocol](#Section_3.3.5.1), I/O redirection takes place using the PNP Device I/O Subprotocol. The server creates a new subchannel within the **FileRedirectorChannel** main channel for each [CreateFile Request](#Section_3.2.5.2.2.1). Subsequent I/O operations related to the file created are passed on this subchannel. The server sends the I/O requests to the client on behalf of applications running on the server. The client completes the I/O requests and passes the results back to the server.
+For devices redirected using the [PNP Device Info Subprotocol](#Section_2.2.1), I/O redirection takes place using the PNP Device I/O Subprotocol. The server creates a new subchannel within the **FileRedirectorChannel** main channel for each [CreateFile Request](#Section_3.2.5.2.2.1). Subsequent I/O operations related to the file created are passed on this subchannel. The server sends the I/O requests to the client on behalf of applications running on the server. The client completes the I/O requests and passes the results back to the server.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -330,7 +330,7 @@ The messages in the following sections specify the common header and specific me
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Shared Message Header (PNP_INFO_HEADER)
 
-All messages in the [PNP Device Info Subprotocol](#Section_3.3.5.1) have a common header, which is followed by a message-specific payload, as described in the following sections.
+All messages in the [PNP Device Info Subprotocol](#Section_2.2.1) have a common header, which is followed by a message-specific payload, as described in the following sections.
 
 ```mermaid
 packet-beta
@@ -355,7 +355,7 @@ packet-beta
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 PNP Device Info Initialization Messages
 
-The messages in the following sections are used to initialize the [PNP Device Info Subprotocol](#Section_3.3.5.1).
+The messages in the following sections are used to initialize the [PNP Device Info Subprotocol](#Section_2.2.1).
 
 <a id="Section_2.2.1.2.1"></a>
 ##### 2.2.1.2.1 Server Version Message
@@ -536,7 +536,7 @@ The messages in the following sections specify the common header and specific me
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 Shared Message Headers
 
-All messages sent in the [PNP Device I/O Subprotocol](#Section_3.2.5.2) use either a Request or a Reply header, as specified in the following sections.
+All messages sent in the [PNP Device I/O Subprotocol](#Section_1.3.2) use either a Request or a Reply header, as specified in the following sections.
 
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 Server Message Header (SERVER_IO_HEADER)
@@ -588,7 +588,7 @@ packet-beta
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 Initialization Messages
 
-The messages in the following sections are used to initialize the [PNP Device I/O Subprotocol](#Section_3.2.5.2).
+The messages in the following sections are used to initialize the [PNP Device I/O Subprotocol](#Section_1.3.2).
 
 <a id="Section_2.2.2.2.1"></a>
 ##### 2.2.2.2.1 Server Capabilities Request Message
@@ -603,7 +603,7 @@ packet-beta
 
 **Header (8 bytes):** A [SERVER_IO_HEADER](#Section_2.2.2.1.1) request header. The **FunctionId** field MUST be set to CAPABILITIES_REQUEST (0x00000005).
 
-**Version (2 bytes):** A 16-bit unsigned integer. This field SHOULD indicate the version of the server-side implementation of the [PNP Device I/O Subprotocol](#Section_3.2.5.2).
+**Version (2 bytes):** A 16-bit unsigned integer. This field SHOULD indicate the version of the server-side implementation of the [PNP Device I/O Subprotocol](#Section_1.3.2).
 
 | Value | Meaning |
 | --- | --- |
@@ -623,7 +623,7 @@ packet-beta
 
 **Header (4 bytes):** A [CLIENT_IO_HEADER](#Section_2.2.2.1.2) reply header. The **PacketType** field MUST be set to RESPONSE_PACKET (0x00). The **RequestId** field MUST match the value in the **RequestId** field in the [SERVER_IO_HEADER](#Section_2.2.2.1.1) request header of the corresponding request packet.
 
-**Version (2 bytes):** A 16-bit unsigned integer. This field SHOULD indicate the version of the client-side implementation of the [PNP Device I/O Subprotocol](#Section_3.2.5.2).
+**Version (2 bytes):** A 16-bit unsigned integer. This field SHOULD indicate the version of the client-side implementation of the [PNP Device I/O Subprotocol](#Section_1.3.2).
 
 | Value | Meaning |
 | --- | --- |
@@ -633,7 +633,7 @@ packet-beta
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Device I/O Messages
 
-The messages in the following sections are used for device input and output operations in the [PNP Device I/O Subprotocol](#Section_3.2.5.2).
+The messages in the following sections are used for device input and output operations in the [PNP Device I/O Subprotocol](#Section_1.3.2).
 
 <a id="Section_2.2.2.3.1"></a>
 ##### 2.2.2.3.1 CreateFile Request Message
@@ -652,7 +652,7 @@ packet-beta
 
 **Header (8 bytes):** A [SERVER_IO_HEADER](#Section_2.2.2.1.1) request header. The **FunctionId** field MUST be set to CREATE_FILE_REQUEST (0x00000004).
 
-**DeviceId (4 bytes):** A 32-bit unsigned integer. This field MUST identify the device redirected by the client. Device IDs are initially established as described in section [2.2.1.3.1](#Section_2.2.1.3.1).
+**DeviceId (4 bytes):** A 32-bit unsigned integer. This field MUST identify the device redirected by the client. Device IDs are initially established as described in section [2.2.1.3.1](#Section_2.2.1.3.1.1).
 
 **dwDesiredAccess (4 bytes):** A 32-bit unsigned integer. This is a flag field that indicates various access modes to use for creating and opening the file. This value SHOULD be set to 0xC0000000, meaning generic read and generic write.<9>
 
@@ -905,7 +905,7 @@ packet-beta
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document. An implementation maintains the following data.
 
-**Client device ID:** Both client and server maintain a list of client devices being redirected. The client generates this ID for each device when it sends device information in a [Client Device Addition message](#Section_2.2.1.3.1). For subsequent operations on the devices, both client and server use this ID to refer to the device.
+**Client device ID:** Both client and server maintain a list of client devices being redirected. The client generates this ID for each device when it sends device information in a [Client Device Addition message](#Section_2.2.1.3.1.1). For subsequent operations on the devices, both client and server use this ID to refer to the device.
 
 **Client device list:** Both client and server maintain a list of devices being redirected. This list contains the **client device ID** for each redirected device announced in a Client Device Addition message. Devices are added to the list when they are redirected and removed when either the device is removed with a [Client Device Remove message](#Section_2.2.1.3.2), or redirection is canceled.
 
@@ -998,7 +998,7 @@ No client-specific events or rules are required.
 
 The structure and fields of the [Authenticated Client message](#Section_2.2.1.2.3) are specified in section 2.2.1.2.3.
 
-The server sends the Authenticated Client message after it authenticates the client to the server session. The client MUST NOT send any device addition or removal messages until it receives this message. Only after receiving this message MAY the client send one or more [Client Device Addition messages](#Section_2.2.1.3.1).
+The server sends the Authenticated Client message after it authenticates the client to the server session. The client MUST NOT send any device addition or removal messages until it receives this message. Only after receiving this message MAY the client send one or more [Client Device Addition messages](#Section_2.2.1.3.1.1).
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Device Addition and Removal Messages
@@ -1006,7 +1006,7 @@ The server sends the Authenticated Client message after it authenticates the cli
 <a id="Section_3.2.5.1.2.1"></a>
 ###### 3.2.5.1.2.1 Sending a Client Device Addition Message
 
-The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1) are as specified in section 2.2.1.3.1.
+The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1.1) are as specified in section 2.2.1.3.1.
 
 The client MUST generate and assign a unique client device ID for each of the devices in its Client device list that it wants to redirect to the server. This message MUST be sent only after the client receives an [Authenticated Client message](#Section_2.2.1.2.3).
 
@@ -1015,7 +1015,7 @@ The client MUST generate and assign a unique client device ID for each of the de
 
 The structure and fields of the [Client Device Removal message](#Section_2.2.1.3.2) are as specified in section 2.2.1.3.2.
 
-Before the client sends this message to stop redirecting a particular device, the corresponding device MUST have previously been sent as part of a [Client Device Addition message](#Section_2.2.1.3.1). The client also removes the device from its Client device list.
+Before the client sends this message to stop redirecting a particular device, the corresponding device MUST have previously been sent as part of a [Client Device Addition message](#Section_2.2.1.3.1.1). The client also removes the device from its Client device list.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 PNP Device I/O Subprotocol
@@ -1030,7 +1030,7 @@ These messages establish the logical connection between server and client, in ad
 
 The structure and fields of the [Server Capabilities Request message](#Section_2.2.2.2.1) are defined in section 2.2.2.2.1.
 
-This MUST be the first message that a client receives on each connection within the [PNP Device I/O Subprotocol](#Section_3.2.5.2). The client inspects the version field. For example, if the client receives a version of 6 or later (future versions of the protocol MAY send a later version, although current ones do not) from the packet described in section 2.2.2.2.1, the client MAY send packets that describe custom events, as described in section [2.2.2.3.10](#Section_2.2.2.3.10). However, if the version is earlier than 6, the client MUST NOT send packets that describe custom events.
+This MUST be the first message that a client receives on each connection within the [PNP Device I/O Subprotocol](#Section_1.3.2). The client inspects the version field. For example, if the client receives a version of 6 or later (future versions of the protocol MAY send a later version, although current ones do not) from the packet described in section 2.2.2.2.1, the client MAY send packets that describe custom events, as described in section [2.2.2.3.10](#Section_2.2.2.3.10). However, if the version is earlier than 6, the client MUST NOT send packets that describe custom events.
 
 The client MUST reply with its own version by sending a [Client Capabilities Reply message](#Section_2.2.2.2.2).
 
@@ -1044,7 +1044,7 @@ This message MUST be sent only after receiving a [Server Capabilities Request me
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Device I/O Messages
 
-The device I/O messages in the [PNP Device I/O Subprotocol](#Section_3.2.5.2) are used to perform real I/O operations on the client devices and to return the result to the server.
+The device I/O messages in the [PNP Device I/O Subprotocol](#Section_1.3.2) are used to perform real I/O operations on the client devices and to return the result to the server.
 
 <a id="Section_3.2.5.2.2.1"></a>
 ###### 3.2.5.2.2.1 Processing a CreateFile Request Message
@@ -1197,7 +1197,7 @@ The following messages are processed only after the client and server have compl
 <a id="Section_3.3.5.1.2.1"></a>
 ###### 3.3.5.1.2.1 Processing a Client Device Addition Message
 
-The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1) are described in section 2.2.1.3.1.
+The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1.1) are described in section 2.2.1.3.1.
 
 For each device contained in the **DeviceDescriptions** field of the Client Device Addition message, the server MUST create a [**remote device**](#gt_remote-device) instance on the server to represent the client-side physical devices and add it to its Client device list. The server MUST also maintain a client device ID for each device. A one-to-one correspondence exists between remote devices and client device IDs. This ID MUST be used to refer to a particular device when making I/O calls.
 

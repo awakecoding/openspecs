@@ -1118,9 +1118,9 @@ Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data mo
 - [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.5)
 - [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5)
 - [CursorProxy (section 3.1.1.6)](#Section_3.1.1.6)
-- [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.7)
+- [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.8)
 - [RemoteQueueOpenContextHandle (section 3.1.1.8)](#Section_3.1.1.8)
-- [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.9)
+- [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.10)
 - TransactionHandle (section 3.1.1.10)
 - [Message to CACTransferBufferV2 Translation (section 3.1.1.11)](#Section_3.1.1.11)
 - [Queue PROPID to Abstract Queue Property Translations (section 3.1.1.12)](#Section_3.1.1.12)
@@ -1196,7 +1196,7 @@ The **RemoteQueueOpenContextHandleTable** ADM element contains a table of [Remot
 
 The **RemoteQueueOpenContextHandle** ADM element associates a [PCTX_OPENREMOTE_HANDLE_TYPE (section 2.2.1.1.3)](#Section_2.2.1.1.3) context handle with a reference to an **OpenQueueDescriptor** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.16) ADM element instance created for [**remote read**](#gt_remote-read). This ADM element MUST contain the following attributes:
 
-**Handle:** A PCTX_OPENREMOTE_HANDLE_TYPE context handle that uniquely identifies the **RemoteQueueOpenContextHandle** ADM element instance within its [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.7) ADM element instance.
+**Handle:** A PCTX_OPENREMOTE_HANDLE_TYPE context handle that uniquely identifies the **RemoteQueueOpenContextHandle** ADM element instance within its [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.8) ADM element instance.
 
 **OpenQueueDescriptorReference:** A reference to an **OpenQueueDescriptor** ADM element instance created for remote read.
 
@@ -1210,7 +1210,7 @@ The **TransactionHandleTable** ADM element contains a table of [TransactionHandl
 
 The **TransactionHandle** ADM element represents a handle that contains a reference to a **Transaction** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.14) ADM element instance. This ADM element MUST contain the following attributes:
 
-**Handle:** An [RPC_INT_XACT_HANDLE (section 2.2.1.1.1)](#Section_2.2.1.1.1) that uniquely identifies the TransactionHandleEntry within the [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.9) ADM element.
+**Handle:** An [RPC_INT_XACT_HANDLE (section 2.2.1.1.1)](#Section_2.2.1.1.1) that uniquely identifies the TransactionHandleEntry within the [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.10) ADM element.
 
 **TransactionReference:** A reference to a **Transaction** ADM element instance.
 
@@ -1340,8 +1340,8 @@ Methods in RPC Opnum Order
 | [R_QMCreateRemoteCursor](#Section_3.1.4.4) | Creates a [**cursor**](#gt_cursor) for a [**remote queue**](#gt_remote-queue). Opnum: 4 |
 | Opnum5NotUsedOnWire | Reserved for local use. Opnum: 5 |
 | [R_QMCreateObjectInternal](#Section_3.1.4.5) | Creates a local [**private queue**](#gt_private-queue). Opnum: 6 |
-| [R_QMSetObjectSecurityInternal](#Section_5) | Updates the security configuration of a local private queue. Opnum: 7 |
-| [R_QMGetObjectSecurityInternal](#Section_5) | Retrieves the security configuration of a local private queue. Opnum: 8 |
+| [R_QMSetObjectSecurityInternal](#Section_3.1.4.6) | Updates the security configuration of a local private queue. Opnum: 7 |
+| [R_QMGetObjectSecurityInternal](#Section_3.1.4.7) | Retrieves the security configuration of a local private queue. Opnum: 8 |
 | [R_QMDeleteObject](#Section_3.1.4.8) | Deletes a local private queue. Opnum: 9 |
 | [R_QMGetObjectProperties](#Section_3.1.4.9) | Retrieves [**queue properties**](#gt_queue-property) from local private queues. Opnum: 10 |
 | [R_QMSetObjectProperties](#Section_3.1.4.10) | Updates queue properties of local private queues. Opnum: 11 |
@@ -1561,7 +1561,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the [**server**](#gt_server) MUST:
 
-- Locate the [RemoteQueueOpenContextHandle (section 3.1.1.8)](#Section_3.1.1.8) ADM element instance in the *iRemoteQueueOpenContextHandleTable* (section [3.1.1.7](#Section_3.1.1.7)) of the server where the value of the **Handle** attribute of the **RemoteQueueOpenContextHandle** ADM element instance equals *pphContext*.
+- Locate the [RemoteQueueOpenContextHandle (section 3.1.1.8)](#Section_3.1.1.8) ADM element instance in the *iRemoteQueueOpenContextHandleTable* (section [3.1.1.7](#Section_3.1.1.8)) of the server where the value of the **Handle** attribute of the **RemoteQueueOpenContextHandle** ADM element instance equals *pphContext*.
 - If no such **RemoteQueueOpenContextHandle** ADM element instance exists, take no further action and immediately return.
 - Declare *iLocatedRemoteQueueOpenContextHandle* and set it to a reference to the located **RemoteQueueOpenContextHandle** ADM element instance.
 - If *iLocatedRemoteQueueOpenContextHandle*. **OpenQueueDescriptorReference.RemoteReadState** is **Opened**:
@@ -2081,7 +2081,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the server MUST:
 
-- Locate the [TransactionHandle (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance in the server's *iTransactionHandleTable* (section [3.1.1.9](#Section_3.1.1.9)) where the value of the **Handle** attribute of the **TransactionHandle** ADM element instance equals the *phIntXact* parameter.
+- Locate the [TransactionHandle (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance in the server's *iTransactionHandleTable* (section [3.1.1.9](#Section_3.1.1.10)) where the value of the **Handle** attribute of the **TransactionHandle** ADM element instance equals the *phIntXact* parameter.
 - If no such **TransactionHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedTransactionHandle* and set it to a reference to the located **TransactionHandle** ADM element instance.
 - Generate a Transaction Commit ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.4.4) event with the following argument value:
@@ -2609,7 +2609,7 @@ DWORD R_QMGetRTQMServerPort(
 
 Exceptions Thrown: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE].
 
-As specified in section [3.1.3](#Section_3.1.3), this protocol configures a fixed listening [**endpoint**](#gt_endpoint) at an RPC port number. For the interface and protocol specified by the *fIP* parameter, this method returns the RPC port number determined at server initialization time. If the default port is already in use, the server SHOULD increment the port number by 11 until an unused port is found.
+As specified in section [3.1.3](#Section_3.2.3), this protocol configures a fixed listening [**endpoint**](#gt_endpoint) at an RPC port number. For the interface and protocol specified by the *fIP* parameter, this method returns the RPC port number determined at server initialization time. If the default port is already in use, the server SHOULD increment the port number by 11 until an unused port is found.
 
 Security consideration: Servers MUST NOT enforce security limitations for this method, since [**clients**](#gt_client) can call this method before configuring RPC binding security. See section [5.1](#Section_5) for details.
 
@@ -3202,7 +3202,7 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](
 
 - The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ] section 2.1.
 - The given SECURITY_DESCRIPTOR MUST be in self-relative form.
-- The [**client**](#gt_client) MUST call [R_QMSetObjectSecurityInternal](#Section_5), supplying the following parameter values:
+- The [**client**](#gt_client) MUST call [R_QMSetObjectSecurityInternal](#Section_3.1.4.6), supplying the following parameter values:
 - A pointer to an [OBJECT_FORMAT](#Section_2.2.3.5) structure containing the format name of the queue, as specified in section 3.1.4.6.
 - The SecurityInformation, SDSize, and pSecurityDescriptor parameters MUST be supplied as specified in section 3.1.4.6.
 <a id="Section_3.2.4.4"></a>
@@ -3211,7 +3211,7 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](
 The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) and a SECURITY_INFORMATION value indicating which portions of the security configuration to retrieve. The [**client**](#gt_client) can provide a buffer into which the [**server**](#gt_server) returns a SECURITY_DESCRIPTOR. SECURITY_DESCRIPTOR is specified in [MS-DTYP](#Section_2.2.1) section 2.4.6 and SECURITY_INFORMATION as specified in [MS-MQMQ](#Section_2.2.3) section 2.1.
 
 - The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ] section 2.1.2.
-- The client MUST call [R_QMGetObjectSecurityInternal](#Section_5), specifying the following parameter values:
+- The client MUST call [R_QMGetObjectSecurityInternal](#Section_3.1.4.7), specifying the following parameter values:
 - A pointer to an [OBJECT_FORMAT](#Section_2.2.3.5) structure containing the format name of the [**queue**](#gt_queue), as specified in section 3.1.4.7.
 - pSecurityDescriptor can be NULL, in which case nLength MUST be NULL. If pSecurityDescriptor is not NULL, it points to an array of bytes and nLength MUST specify the byte length of the array.
 - lpnLengthNeeded MUST point to a DWORD that receives the actual byte length of the requested SECURITY_DESCRIPTOR.
@@ -3268,7 +3268,7 @@ The client MUST execute the following steps:
 - *iOpenQueueContext*.**Context** := *pdwQMContext*
 - Take no further action. The queue has been successfully opened. Use *iOpenQueueContext* for subsequent [**message**](#gt_message) operations against the queue.
 - Else, if MQ_OK (0x00000000) is returned, and the out-parameter value for *lplpRemoteQueueName* is non-NULL:
-- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.2.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
+- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.1.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
 - At the remote server, invoke the [R_QMOpenRemoteQueue](#Section_3.1.4.2) method, supplying the following parameter values:
 - *pphContext* := Output parameter. Retrieve this value from the server.
 - *pdwContext* := Output parameter. Retrieve this value from the server.
@@ -3321,7 +3321,7 @@ The [**client**](#gt_client) MUST execute the following steps:
 - *lplpRemoteQueueName* := in/out parameter:
 - In: NULL.
 - Out: Retrieve this value from the server.
-- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.2.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
+- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.1.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
 - At the remote server, invoke the [R_QMCreateRemoteCursor](#Section_3.1.4.4) method, supplying the following parameter values:
 - *hQueue* := *pcc*.**srv_hACQueue** (out-parameter value from the rpc_ACCreateCursorEx method)
 - *phCursor* := Retrieve this out-parameter value from the server.
@@ -4503,7 +4503,7 @@ For Windows NT and Windows 2000 servers, the method [rpc_ACCreateCursorEx](#Sect
 | --- | --- |
 | MQ_ERROR_FORMATNAME_BUFFER_TOO_SMALL | 0xc00e001f |
 
-<32> Section 3.1.4.6: Windows applications typically invoke [R_QMSetObjectSecurityInternal](#Section_5) indirectly via the Windows API function MQSetQueueSecurity. The Windows API documentation for MQSetQueueSecurity includes the following error codes. For descriptions of the following error codes, see [MS-MQMQ] section 2.4. For error codes not described in [MS-MQMQ], refer to [MSDN-MQEIC].
+<32> Section 3.1.4.6: Windows applications typically invoke [R_QMSetObjectSecurityInternal](#Section_3.1.4.6) indirectly via the Windows API function MQSetQueueSecurity. The Windows API documentation for MQSetQueueSecurity includes the following error codes. For descriptions of the following error codes, see [MS-MQMQ] section 2.4. For error codes not described in [MS-MQMQ], refer to [MSDN-MQEIC].
 
 | Name | Value |
 | --- | --- |

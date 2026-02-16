@@ -358,7 +358,7 @@ request-id = String
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 api-version
 
-The api-version header is an integer that indicates the API version that is expected by the client. Either this header or the api-version query parameter (section [2.2.2.1](#Section_2.2.2.1)) MUST be included in all client requests.
+The api-version header is an integer that indicates the API version that is expected by the client. Either this header or the api-version query parameter (section [2.2.2.1](#Section_2.2.1.4)) MUST be included in all client requests.
 
 **Note** The api-version header and the api-version query parameter defined in section 2.2.2.1 are mutually exclusive. The client is expected to specify an API version by using either one of these mechanisms, but not both.
 
@@ -400,7 +400,7 @@ The following table summarizes the set of common URI parameters defined by this 
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 api-version
 
-The api-version parameter is an integer that indicates the API version that is expected by the client. Either this header or the api-version HTTP header (section [2.2.1.4](#Section_2.2.2.1)) MUST be included in all client requests.
+The api-version parameter is an integer that indicates the API version that is expected by the client. Either this header or the api-version HTTP header (section [2.2.1.4](#Section_2.2.1.4)) MUST be included in all client requests.
 
 The format of the api-version parameter, in [**ABNF**](#gt_augmented-backus-naur-form-abnf), is as follows.
 
@@ -647,7 +647,7 @@ The HTTP POST request is processed as follows.
 - The api-version parameter MUST be present and contain the value "1.0".
 - The accept HTTP header MUST be present and contain the value "application/json".
 - The kngc property (section [3.1.5.1.1.1](#Section_3.1.5.1.1.1)) MUST be present and base64-encoded.
-If any of these constraints are not met, the server MUST respond to the HTTP POST with the HTTP status code set to 400 and the body of the response MUST contain an ErrorDetails object populated according to section [2.2.3.1](#Section_2.2.3).
+If any of these constraints are not met, the server MUST respond to the HTTP POST with the HTTP status code set to 400 and the body of the response MUST contain an ErrorDetails object populated according to section [2.2.3.1](#Section_2.2.3.1).
 
 - The key provisioning server verifies that the authorization HTTP header is present and contains a JSON Web Token with the following claims:
 | Claim | Value |
@@ -729,9 +729,9 @@ The HTTP methods allowed for this resource are defined in section [3.1.5.1](#Sec
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 POST
 
-The POST message, including request and response body information, is defined in section [3.1.5.1.1](#Section_3.1.5.1.1.1) and subsections.
+The POST message, including request and response body information, is defined in section [3.1.5.1.1](#Section_3.1.5.1.1.3) and subsections.
 
-When the client receives the response from the POST message, it SHOULD<3> check for the **pctx** property. If this property exists in the response, the client stores its value in the **Data Store Information** abstract data model element (section [3.2.1](#Section_3.1.1)).
+When the client receives the response from the POST message, it SHOULD<3> check for the **pctx** property. If this property exists in the response, the client stores its value in the **Data Store Information** abstract data model element (section [3.2.1](#Section_3.2.1)).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events

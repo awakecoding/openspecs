@@ -407,9 +407,9 @@ packet-beta
 
 **Padding1 (2 bytes):** Padding MAY be set to zero and MUST be ignored by receiver.
 
-**Variable-Type (4 bytes):** MUST be set to the data type of the variable as specified in section [2.2.1.3.2](#Section_2.2.1.3.2).
+**Variable-Type (4 bytes):** MUST be set to the data type of the variable as specified in section [2.2.1.3.2](#Section_2.2.1.3.2.2).
 
-**Value-Length (4 bytes):** This field MUST be set as specified in section [2.2.1.3.3](#Section_2.2.1.3.3).
+**Value-Length (4 bytes):** This field MUST be set as specified in section [2.2.1.3.3](#Section_2.2.1.3.3.2).
 
 **Array-Size (4 bytes):** This field MUST be set as specified in section 2.2.1.3.3.
 

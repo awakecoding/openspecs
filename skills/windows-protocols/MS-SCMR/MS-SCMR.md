@@ -865,7 +865,7 @@ DWORD Delay;
 
 *LPSC_ACTION;
 
-**Type:** The action to be performed. This member MUST be one of the values from the [SC_ACTION_TYPE (section 2.2.18)](#Section_2.2.18) enumeration.
+**Type:** The action to be performed. This member MUST be one of the values from the [SC_ACTION_TYPE (section 2.2.18)](#Section_2.2.19) enumeration.
 
 **Delay:** The time, in milliseconds, to wait before performing the specified action.
 
@@ -953,7 +953,7 @@ The following structures SHOULD<2> be available:
 
 **psps:** A structure that defines the pre-shutdown settings for the service, as specified in section [2.2.45](#Section_2.2.45).
 
-**psti:** A structure that defines the trigger settings for the service, as specified in section [2.2.54](#Section_2.2.53).
+**psti:** A structure that defines the trigger settings for the service, as specified in section [2.2.54](#Section_2.2.54).
 
 **pspn:** A structure that defines the preferred node information for the service, as specified in section [2.2.55](#Section_2.2.55).
 
@@ -1024,7 +1024,7 @@ LPSERVICE_PREFERRED_NODE_INFO pspn;
 
 **psps:** A structure that defines the pre-shutdown settings for the service, as specified in section [2.2.45](#Section_2.2.45).
 
-**psti:** A structure that defines the trigger settings for the service, as specified in section [2.2.54](#Section_2.2.53).<4>
+**psti:** A structure that defines the trigger settings for the service, as specified in section [2.2.54](#Section_2.2.54).<4>
 
 **pspn:** A structure that defines the preferred node information for the service, as specified in section [2.2.55](#Section_2.2.55).<5>
 
@@ -1411,7 +1411,7 @@ DWORD dwsaActionsOffset;
 
 **dwResetPeriod:** The time, in seconds, after which to reset the failure count to zero if there are no failures.
 
-**dwRebootMsgOffset:** The offset for the buffer containing the message that is broadcast in response to the SC_ACTION_REBOOT service controller action (section [2.2.18](#Section_2.2.18)) to all server users prior to a server reboot.
+**dwRebootMsgOffset:** The offset for the buffer containing the message that is broadcast in response to the SC_ACTION_REBOOT service controller action (section [2.2.18](#Section_2.2.19)) to all server users prior to a server reboot.
 
 **dwCommandOffset:** The offset for the buffer that contains the [**Unicode**](#gt_unicode) command line of the process that the process creation function executes in response to the SC_ACTION_RUN_COMMAND service controller action (section 2.2.18).
 
@@ -2128,7 +2128,7 @@ The Service Record maintains the following ADM elements.
 | **Type** | Type of service. |
 | **TriggerInfo** | Trigger setting of the service.<30> |
 | **PreferredNode** | Preferred node setting of the service.<31> |
-| **Tag** | A number that is unique within the Group. Refer to the definition of Group as defined previously in this table. For driver services that have SERVICE_BOOT_START or SERVICE_SYSTEM_START start types [see *dwStartType* in RChangeServiceConfigW (section 3.1.4.11), RCreateServiceW (section [3.1.4.12](#Section_3.1.4.41)), RChangeServiceConfigA (section [3.1.4.22](#Section_3.1.4.22)), RCreateServiceA (section [3.1.4.23](#Section_3.1.4.23)), and RCreateServiceWOW64A (section [3.1.4.41](#Section_3.1.4.41))], the server starts each service based on its Tag's position within the Group. |
+| **Tag** | A number that is unique within the Group. Refer to the definition of Group as defined previously in this table. For driver services that have SERVICE_BOOT_START or SERVICE_SYSTEM_START start types [see *dwStartType* in RChangeServiceConfigW (section 3.1.4.11), RCreateServiceW (section [3.1.4.12](#Section_3.1.4.12)), RChangeServiceConfigA (section [3.1.4.22](#Section_3.1.4.22)), RCreateServiceA (section [3.1.4.23](#Section_3.1.4.23)), and RCreateServiceWOW64A (section [3.1.4.41](#Section_3.1.4.41))], the server starts each service based on its Tag's position within the Group. |
 | **SecurityDescriptor** | A security descriptor, as specified in [MS-AZOD] section 1.1.1.3, that describes the client access rights for changing service configuration. |
 | **ServiceStatus** | The server maintains a SERVICE_STATUS (section [2.2.47](#Section_2.2.47)) to keep track of the service runtime information. |
 | **HandleCount** | Counter for the number of RPC context handles currently created for this service record. This element is not accessible via any method and is internal to the protocol implementation. |
@@ -2200,7 +2200,7 @@ Methods in RPC Opnum Order
 | RNotifyBootConfigStatus | Reports the boot status to the SCM. Opnum: 9 |
 | Opnum10NotUsedOnWire | Reserved for local use. Opnum: 10 |
 | [RChangeServiceConfigW](#Section_3.1.4.11) | Changes the configuration parameters of a service. Opnum: 11 |
-| [RCreateServiceW](#Section_3.1.4.41) | Creates a service and adds it to the specified SCM database. Opnum: 12 |
+| [RCreateServiceW](#Section_3.1.4.12) | Creates a service and adds it to the specified SCM database. Opnum: 12 |
 | [REnumDependentServicesW](#Section_3.1.4.13) | Returns the name and status of each service that depends on the specified service. Opnum: 13 |
 | [REnumServicesStatusW](#Section_3.1.4.14) | Enumerates services in the specified SCM database. Opnum: 14 |
 | [ROpenSCManagerW](#Section_3.1.4.15) | Establishes a connection to the SCM on the specified computer and opens the specified SCM database. Opnum: 15 |
@@ -3726,7 +3726,7 @@ DWORD REnumDependentServicesA(
 | SERVICE_INACTIVE 0x00000002 | Enumerates service records that have ServiceStatus.dwCurrentState equal to SERVICE_STOPPED. |
 | SERVICE_STATE_ALL 0x00000003 | Enumerates services that have ServiceStatus.dwCurrentState equal to one of the following: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, SERVICE_PAUSED, and SERVICE_STOPPED. |
 
-**lpServices:** A pointer to an array of [ENUM_SERVICE_STATUSA (section 2.2.10)](#Section_2.2.47) structures that contain the name and service status information for each dependent service record in the database.
+**lpServices:** A pointer to an array of [ENUM_SERVICE_STATUSA (section 2.2.10)](#Section_2.2.10) structures that contain the name and service status information for each dependent service record in the database.
 
 **cbBufSize:** The size, in bytes, of the array pointed to by *lpServices*.
 
@@ -3800,7 +3800,7 @@ DWORD REnumServicesStatusA(
 | SERVICE_INACTIVE 0x00000002 | Enumerates services that have ServiceStatus.dwCurrentState equal to SERVICE_STOPPED. |
 | SERVICE_STATE_ALL 0x00000003 | Enumerates services that have ServiceStatus.dwCurrentState equal to one of the following: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, SERVICE_PAUSED, and SERVICE_STOPPED. |
 
-**lpBuffer:** A pointer to an array of [ENUM_SERVICE_STATUSA (section 2.2.10)](#Section_2.2.47) structures that contain the name and service status information for each dependent service in the database.
+**lpBuffer:** A pointer to an array of [ENUM_SERVICE_STATUSA (section 2.2.10)](#Section_2.2.10) structures that contain the name and service status information for each dependent service in the database.
 
 **cbBufSize:** The size, in bytes, of the array pointed to by *lpBuffer*.
 
@@ -4154,7 +4154,7 @@ The server MUST return the ServiceName from the found service record in the *lpK
 
 If the *lpKeyName* buffer is insufficient to hold the complete service name of the service, the server MUST fail the call with ERROR_INSUFFICIENT_BUFFER (122) and set the required size in chars of the service name excluding the terminating null character in *lpcchBuffer*.<50> If the size is sufficient for data returned, the server also returns the size that was set in *lpcchBuffer*.
 
-If a service record is created with a [**Unicode**](#gt_unicode)-encoded display name using the [RCreateServiceW](#Section_3.1.4.41) method, then the server MUST convert the service name to an [**ANSI**](#gt_american-national-standards-institute-ansi-character-set) string before returning it. The conversion process is specified in [MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md) section 3.1.5.1.1.2, Pseudocode for Mapping a UTF-16 String to an ANSI Codepage.
+If a service record is created with a [**Unicode**](#gt_unicode)-encoded display name using the [RCreateServiceW](#Section_3.1.4.12) method, then the server MUST convert the service name to an [**ANSI**](#gt_american-national-standards-institute-ansi-character-set) string before returning it. The conversion process is specified in [MS-UCODEREF](../MS-UCODEREF/MS-UCODEREF.md) section 3.1.5.1.1.2, Pseudocode for Mapping a UTF-16 String to an ANSI Codepage.
 
 The server MUST use the process described in [Conversion Between ANSI and Unicode String Formats (section 3.1.7)](#Section_3.1.7) to convert a string to the appropriate format.
 
@@ -4529,7 +4529,7 @@ LPCSTR pszGroupName
 | SERVICE_INACTIVE 0x00000002 | Enumerates service records with the **ServiceStatus.dwCurrentState** value SERVICE_STOPPED. |
 | SERVICE_STATE_ALL 0x00000003 | Enumerates service records with **ServiceStatus.dwCurrentState** values from the following: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, SERVICE_PAUSED, and SERVICE_STOPPED. |
 
-**lpBuffer:** A pointer to the buffer that contains the status information in the form of an array of [ENUM_SERVICE_STATUS_PROCESSA (section 2.2.12)](#Section_2.2.47) structures.
+**lpBuffer:** A pointer to the buffer that contains the status information in the form of an array of [ENUM_SERVICE_STATUS_PROCESSA (section 2.2.12)](#Section_2.2.12) structures.
 
 **cbBufSize:** The size, in bytes, of the buffer pointed to by *lpBuffer*.
 
@@ -4621,7 +4621,7 @@ LPCWSTR pszGroupName
 | SERVICE_INACTIVE 0x00000002 | Enumerates service records with the **ServiceStatus.dwCurrentState** value SERVICE_STOPPED. |
 | SERVICE_STATE_ALL 0x00000003 | Enumerates service records with **ServiceStatus.dwCurrentState** values from the following: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, SERVICE_PAUSED, and SERVICE_STOPPED. |
 
-**lpBuffer:** A pointer to the buffer that contains the status information in the form of an array of [ENUM_SERVICE_STATUS_PROCESSW (section 2.2.13)](#Section_2.2.47) structures.
+**lpBuffer:** A pointer to the buffer that contains the status information in the form of an array of [ENUM_SERVICE_STATUS_PROCESSW (section 2.2.13)](#Section_2.2.13) structures.
 
 **cbBufSize:** The size, in bytes, of the buffer pointed to by *lpBuffer*.
 

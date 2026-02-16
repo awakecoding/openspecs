@@ -233,7 +233,7 @@ The following table lists the currently defined facility codes:
 <a id="Section_2.1.1"></a>
 ### 2.1.1 HRESULT Values
 
-Combining the fields of an [**HRESULT**](#gt_hresult) into a single, 32-bit numbering space, the following HRESULT values are defined, in addition to those derived from [NTSTATUS values (section 2.3.1)](#Section_2.3.1) and [Win32 error codes (section 2.2)](#Section_2.2). This document provides the common usage details of the HRESULTs; individual protocol specifications provide expanded or modified definitions.
+Combining the fields of an [**HRESULT**](#gt_hresult) into a single, 32-bit numbering space, the following HRESULT values are defined, in addition to those derived from [NTSTATUS values (section 2.3.1)](#Section_2.3) and [Win32 error codes (section 2.2)](#Section_2.2). This document provides the common usage details of the HRESULTs; individual protocol specifications provide expanded or modified definitions.
 
 Most values also have a default message defined, which can be used to map the value to a human-readable text message; when this is done, the HRESULT value is also known as a message identifier.
 
@@ -7956,7 +7956,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.3.1](#Section_2.3.1) NTSTATUS Values | 11820 : Added STATUS_SMB_BAD_CLUSTER_DIALECT and STATUS_SMB_NO_PREAUTH_INTEGRITY_HASH_OVERLAP to the table of NTSTATUS values. | Major |
+| [2.3.1](#Section_2.3) NTSTATUS Values | 11820 : Added STATUS_SMB_BAD_CLUSTER_DIALECT and STATUS_SMB_NO_PREAUTH_INTEGRITY_HASH_OVERLAP to the table of NTSTATUS values. | Major |
 
 <a id="revision-history"></a>
 

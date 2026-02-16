@@ -937,7 +937,7 @@ The following table summarizes the set of common simple type definitions that ar
 | EncryptedTransferKey | [2.2.3.7](#Section_2.2.3.7) | A base64-encoded string of type UTF-8 format, which contains the wrapping key's transfer key encrypted by the health certificate. |
 | EncryptedWrappingKey | [2.2.3.8](#Section_2.2.3.8) | A base64-encoded string of type UTF-8 format, which contains the transport keys’ wrapping key that is encrypted by the transfer key. |
 | EncryptedTransportKeys | [2.2.3.9](#Section_2.2.3.9) | A base64-encoded string of type UTF-8 format, which contains the ingress and egress transport keys, which are encrypted by the transport keys' wrapping key. |
-| Version | [2.2.3.10](#Section_2.2.3.10.2) | Version of the **TransportKey** BLOB. |
+| Version | [2.2.3.10](#Section_2.2.3.10.2.1) | Version of the **TransportKey** BLOB. |
 | Certificate | [2.2.3.11](#Section_2.2.3.11) | Certificate used to generate the [**key protectors**](#gt_key-protector) . |
 | Algorithm | [2.2.3.12](#Section_2.2.3.12) | Cryptographic algorithm used to perform Key Protection Services. |
 
@@ -1344,8 +1344,8 @@ The following HTTP methods are allowed to be performed on this resource.
 
 | HTTP method | Section | Description |
 | --- | --- | --- |
-| RollTransportKey | [3.1.5.1.1](#Section_3.1.5.1.1.1) | Used to protect the keys by KPS. |
-| GetMetaData | [3.1.5.1.2](#Section_3.1.5.1.2) | Retrieves the list of valid certificates present in the KPS. |
+| RollTransportKey | [3.1.5.1.1](#Section_3.1.5.1.1) | Used to protect the keys by KPS. |
+| GetMetaData | [3.1.5.1.2](#Section_3.1.5.1.2.2) | Retrieves the list of valid certificates present in the KPS. |
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 RollTransportKey
@@ -1362,7 +1362,7 @@ The operation can be invoked through the following URI.
 
 http://<server>/keyprotection/service/{version}/rolltransportkey
 
-**Version**: Version of the **RollTransportKey** request as defined in section [2.2.3.10](#Section_2.2.3.10.2).
+**Version**: Version of the **RollTransportKey** request as defined in section [2.2.3.10](#Section_2.2.3.10.2.1).
 
 <a id="Section_3.1.5.1.1.1"></a>
 ###### 3.1.5.1.1.1 Request Body
@@ -1536,7 +1536,7 @@ The application provides the following:
 The client MUST perform the following:
 
 - Create a valid XML [**BLOB**](#gt_binary-large-object-blob) containing **RollTransportKeyRequest** as defined in section [2.2.2.1](#Section_2.2.2.1).
-- Perform the steps as specified in section [3.2.5.1](#Section_3.2.5.1).
+- Perform the steps as specified in section [3.2.5.1](#Section_2.2.1.1).
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Application Requests GetMetaData
 
@@ -1545,7 +1545,7 @@ The application provides the following:
 - A **GetMetaData** request to retrieve the list of KPS-supported certificates, as defined in section [2.2.1.2](#Section_2.2.1.2), to verify that the **Protector** was properly signed by the KPS.
 The client MUST perform the following:
 
-- Perform the steps as specified in section [3.2.5.2](#Section_2.2.1.2).
+- Perform the steps as specified in section [3.2.5.2](#Section_3.1.5.1.2).
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
@@ -1554,7 +1554,7 @@ The following sections describe the sequence of operations performed by the clie
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 RollTransportKey
 
-The client MUST send a POST request on the **RollTransportKey** resource as specified in section [3.1.5.1.1](#Section_3.1.5.1.1.1) by using the URI specified.
+The client MUST send a POST request on the **RollTransportKey** resource as specified in section [3.1.5.1.1](#Section_3.1.5.1.1) by using the URI specified.
 
 If the client receives the **RollTransportKeyResponse** specified in section [2.2.2.2](#Section_2.2.2.2) with the status code 200(OK), the client’s health certificate is protected and the guarded host is enabled to run securely on a VM.
 
@@ -1563,7 +1563,7 @@ If the client receives an error, the client MAY retry sending the **RollTranspor
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 GetMetaData
 
-The client MUST send a POST request on the **GetMetaData** resource as specified in section [3.1.5.1.2](#Section_3.1.5.1.2) by using the URI specified.
+The client MUST send a POST request on the **GetMetaData** resource as specified in section [3.1.5.1.2](#Section_3.1.5.1.2.2) by using the URI specified.
 
 If the operation is successful, the client receives the metadata content with status code 200(OK).
 

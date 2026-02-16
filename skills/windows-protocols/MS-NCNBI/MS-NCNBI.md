@@ -1834,7 +1834,7 @@ Every resource that supports [**CRUD**](#gt_create-retrieve-update-delete-crud) 
 | --- | --- | --- |
 | **resourceId** | Optional or Required | The resource ID is the identifier for the resource. The value MUST be unique in the context of the resource if it is a [**top-level resource**](#gt_top-level-resource), or in the context of the direct parent resource if it is a child resource. When optional for ancestor resource, then required for descendant resource. See section [2.2.3](#Section_2.2.3). |
 | **resourceRef** | Read-only Optional or Required | A relative URI to an associated resource. See section 1.3.3.2. |
-| **instanceId** | Read-only | This is the globally unique Id generated and used internally by the Network Controller. This value is a GUID in the form of XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX. It is possible to do a reverse mapping from **instanceId** to **resourceId** with the **internalResourceInstances** resource, section [3.1.5.24](#Section_6.22). The *instanceId* element cannot be used directly in the API. |
+| **instanceId** | Read-only | This is the globally unique Id generated and used internally by the Network Controller. This value is a GUID in the form of XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX. It is possible to do a reverse mapping from **instanceId** to **resourceId** with the **internalResourceInstances** resource, section [3.1.5.24](#Section_3.1.5.24). The *instanceId* element cannot be used directly in the API. |
 | **tags** | Optional | Key-value pairs of arbitrary data that the client stores with the resource on the controller. |
 | **resourceMetadata** | Optional | Structured data that the client provides to the server. This is an optional element, but it is suggested that all clients fill in the data that is applicable to them. |
 | **resourceMetadata.client** | Optional | Indicates the client that creates or updates the resource. Although this element is optional, it is strongly recommended that it contain an appropriate value. |
@@ -1858,7 +1858,7 @@ Every resource that supports [**CRUD**](#gt_create-retrieve-update-delete-crud) 
 | *operationId* | [2.2.3.2](#Section_2.2.3.2) | The value of the **x-ms-request-id** header returned by the resource provider. |
 | *parentResourceId* | [2.2.3.3](#Section_2.2.3.3) | The user-defined resource ID of the network resource that is the ancestor of the descendant resource. Depending on the type of resource, it can be: User-defined, system-defined, or both Unique across all resources of the same type Unique across all resources of the same type in the context of the specific grandparent resource. |
 | *resourceId* | [2.2.3.4](#Section_2.2.3.4) | The resource ID of the network resource to create, retrieve, update or delete. Depending on the type of resource, it can be: User-defined, system-defined, or both Unique across all resources of the same type Unique across all resources of the same type in the context of the specific ancestor resource. When the *resourceId* is optional for an ancestor resource, it is required for the descendant resources. |
-| *instanceId* | [3.1.5.24](#Section_6.22) | The globally unique Id generated and used internally by the Network Controller. The mapping resource that enables the client to map between the **instanceId** and the **resourceId**. |
+| *instanceId* | [3.1.5.24](#Section_3.1.5.24) | The globally unique Id generated and used internally by the Network Controller. The mapping resource that enables the client to map between the **instanceId** and the **resourceId**. |
 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 grandParentResourceId
@@ -1937,26 +1937,26 @@ The following table summarizes the set of common data structures that are consum
 
 | Data structure | Section | Description |
 | --- | --- | --- |
-| **accessControlLists** | In the **networkInterfaces** resource, the **ipConfigurations** resource, section [3.1.5.11.2](#Section_3.1.5.11.2.1). In the **virtualNetworks** resource, the **subnets** resource section [3.1.5.18.2](#Section_3.1.5.18.2). | Contains an **accessControlLists** resource that defines the [**access control lists (ACLs)**](#gt_access-control-list-acl) in and out of the IP Configuration. |
-| **aclRules** | The **aclRules** resource, section [3.1.5.1.2](#Section_3.1.5.1.2.1). | Indicates the rules in an access control list, Indicates the action the ACL Rule will take. |
+| **accessControlLists** | In the **networkInterfaces** resource, the **ipConfigurations** resource, section [3.1.5.11.2](#Section_3.1.5.11.2). In the **virtualNetworks** resource, the **subnets** resource section [3.1.5.18.2](#Section_6.8.4). | Contains an **accessControlLists** resource that defines the [**access control lists (ACLs)**](#gt_access-control-list-acl) in and out of the IP Configuration. |
+| **aclRules** | The **aclRules** resource, section [3.1.5.1.2](#Section_3.1.5.1.2). | Indicates the rules in an access control list, Indicates the action the ACL Rule will take. |
 | **addressPrefixes** | The **addressSpace** resource in the **virtualNetworks** resource, section [3.1.5.18](#Section_3.1.5.18). | Indicates the valid list of address prefixes that can make up this virtual network. |
 | **addressSpace** | The **virtualNetworks** resource, section 3.1.5.18. | Required. Indicates the address space of the virtual network. |
-| **backendAddressPools** | The **outboundNatRules** resource, section [3.1.5.5.6](#Section_3.1.5.5.6). The **loadBalancingRules** resource, section [3.1.5.5.5](#Section_6.5.7). | Indicates an array of references to a **backendAddressPools** resource. [**Inbound**](#gt_inbound) traffic is randomly load balanced across IPs in the backend pool. Indicates a reference to the pool of IP addresses where [**outbound**](#gt_outbound) traffic originates. |
-| **backendIPConfigurations** | The **backendAddressPools** resource, section [3.1.5.5.2](#Section_6.5.4). | An array of references to **ipConfigurations** resources. There is no restriction on having the same IP configurations in multiple **backendAddressPools**. |
-| **bgpPeers** | In the **VirtualGateways** resource, in the **bgpPeers** resource, the **bgpRouters** resource, section [3.1.5.17.2.2](#Section_3.1.5.17.2.2). | A collection of [**Border Gateway Protocol (BGP)**](#gt_border-gateway-protocol-bgp) peers associated with the **bgpRouters** resource. |
-| **bgpRouters** | The **VirtualGateways** resource, section [3.1.5.17](#Section_3.1.5.17.2.2). | An array of **bgpRouters** on the physical switch. |
+| **backendAddressPools** | The **outboundNatRules** resource, section [3.1.5.5.6](#Section_3.1.5.5.6). The **loadBalancingRules** resource, section [3.1.5.5.5](#Section_3.1.5.5.5). | Indicates an array of references to a **backendAddressPools** resource. [**Inbound**](#gt_inbound) traffic is randomly load balanced across IPs in the backend pool. Indicates a reference to the pool of IP addresses where [**outbound**](#gt_outbound) traffic originates. |
+| **backendIPConfigurations** | The **backendAddressPools** resource, section [3.1.5.5.2](#Section_3.1.5.5.2). | An array of references to **ipConfigurations** resources. There is no restriction on having the same IP configurations in multiple **backendAddressPools**. |
+| **bgpPeers** | In the **VirtualGateways** resource, in the **bgpPeers** resource, the **bgpRouters** resource, section [3.1.5.17.2.2](#Section_6.15.4.4). | A collection of [**Border Gateway Protocol (BGP)**](#gt_border-gateway-protocol-bgp) peers associated with the **bgpRouters** resource. |
+| **bgpRouters** | The **VirtualGateways** resource, section [3.1.5.17](#Section_3.1.5.17.4). | An array of **bgpRouters** on the physical switch. |
 | **connections** | The **gateways** resource, section [3.1.5.4](#Section_3.1.5.4). | A collection of all the connections on the gateway. |
-| **connections** | The **servers** resource, section [3.1.5.15](#Section_3.1.5.15). The **loadBalancerMuxes** resource, section [3.1.5.7](#Section_3.1.5.7). The **iDnsServers** resource, section [3.1.5.25](#Section_6.23). The **virtualServers** resource, section [3.1.5.21](#Section_3.1.5.21). | An array of **connections** that specify the information needed to connect to the specific device to manage and control it. |
+| **connections** | The **servers** resource, section [3.1.5.15](#Section_3.1.5.15). The **loadBalancerMuxes** resource, section [3.1.5.7](#Section_3.1.5.7). The **iDnsServers** resource, section [3.1.5.25](#Section_3.1.5.25). The **virtualServers** resource, section [3.1.5.21](#Section_6.19). | An array of **connections** that specify the information needed to connect to the specific device to manage and control it. |
 | **destinationSubnets** | The **rules** resource in the **serviceInsertions** resource, section [3.1.5.16](#Section_6.14). | An array of **subnets** to match as the destination subnet. |
 | **details** | The **operations** resource, section [3.1.5.12](#Section_3.1.5.12). The **operationResults** resource, section [3.1.5.13](#Section_3.1.5.13). | Contains detailed information about the error. |
 | **dhcpOptions** | The **virtualNetworks** resource, section 3.1.5.18. | Indicates the [**DHCP**](#gt_dynamic-host-configuration-protocol-dhcp) options used by servers in the virtual network. |
-| **dnsRecord** | The **publicIPAddresses** resource, section [3.1.5.14](#Section_6.12). | Properties of a [**DNS**](#gt_domain-name-system-dns) record associated with this public IP address. This field is not supported. |
+| **dnsRecord** | The **publicIPAddresses** resource, section [3.1.5.14](#Section_3.1.5.14). | Properties of a [**DNS**](#gt_domain-name-system-dns) record associated with this public IP address. This field is not supported. |
 | **dnsServers** | The **subnets** resource, section [3.1.5.8.2](#Section_3.1.5.8.2). In the **virtualNetworks** resource, the **dhcpOptions** resource section 3.1.5.18. | An an array of IP Addresses for the DNS servers that this resource uses to resolve DNS queries by devices or hosts. |
 | **dnsSettings** | The **networkInterfaces** resource, section [3.1.5.11](#Section_3.1.5.11.1.2) | Indicates the DNS settings of this network interface. |
 | **error** | The **operations** resource, section 3.1.5.12. The **operationResults** resource, section 3.1.5.13. | A group of elements that contain information about an error and its cause when the request was in error or could not be processed. |
 | **etag** | The **etag** header, section [2.2.1.3.4](#Section_2.2.1.3.4) | The Network Controller returns an **etag** in the response body as the **etag** property of the resource. |
 | **externalIPAddress** | The **gateways** resource, section 3.1.5.4. | A collection of IP address information. |
-| **frontendIPConfigurations** | The **loadBalancers** resource, section [3.1.5.5](#Section_6.5). The **frontendIPConfigurations** resource, section [3.1.5.5.3](#Section_6.5.5). | Indicates the front-end IP addresses of the load balancer. |
+| **frontendIPConfigurations** | The **loadBalancers** resource, section [3.1.5.5](#Section_3.1.5.5). The **frontendIPConfigurations** resource, section [3.1.5.5.3](#Section_3.1.5.5.3). | Indicates the front-end IP addresses of the load balancer. |
 | **frontendIPConfigurations** | The **inboundNatRules** resource, section [3.1.5.5.4](#Section_3.1.5.5.4). The **outboundNatRules,** section 3.1.5.5.6. The **loadBalancingRules** resource, section 3.1.5.5.5. | Indicates an array of references to **frontendIPConfigurations** resources. |
 | **gatewayCapacityKiloBitsPerSecond** | The **GatewayPools** resource, section [3.1.5.3](#Section_6.3). | Indicates the total capacity of the gateway pool in kilobits per second. |
 | **GatewayPools** | The **VirtualGateways** resource, section 3.1.5.17. | The collection of references to **GatewayPools** resources in which connections can be created. This information is populated at the time of subscription and can be changed only by using the Service administrator portal. |
@@ -1967,7 +1967,7 @@ The following table summarizes the set of common data structures that are consum
 | **iDnsServer** | The **iDnsServer** resource, section 3.1.5.25. | Indicates the configuration details for the DNS server in the internal DNS service. |
 | **inboundNatRules** | The **loadBalancers** resource, section 3.1.5.5. The **inboundNatRules** resource, section 3.1.5.5.4. | Indicates an array of inbound [**network address translation (NAT)**](#gt_network-address-translation-nat) rules configured for the load balancer. |
 | **ipConfiguration** | The **networkInterfaces** resource, section [3.1.5.15.2](#Section_3.1.5.15.2). | Indicates an array of IP configurations. |
-| **ipConfigurations** | The **accessControlLists** resource, section [3.1.5.1](#Section_3.1.5.1). | Indicates references to the IP addresses of **networkInterfaces** resources that are associated with an **accessControlLists** resource. |
+| **ipConfigurations** | The **accessControlLists** resource, section [3.1.5.1](#Section_6.1). | Indicates references to the IP addresses of **networkInterfaces** resources that are associated with an **accessControlLists** resource. |
 | **ipConfigurations** | The **subnets** resource in the **virtualNetworks** resource, section 3.1.5.18.2. | Indicates an array of references of **networkInterfaces** resources that are connected to the subnet. |
 | **ipPools** | The **ipPools** resource, section [3.1.5.8.2.2](#Section_3.1.5.8.2.2). The **subnets** resource, section 3.1.5.8.2. | Indicates the IP Pools that are contained in the logical subnet. |
 | **ipsecConfiguration** | The **networkConnections** resource, section 3.1.5.17.4. | Details of [**IPsec**](#gt_internet-protocol-security-ipsec) configuration. |
@@ -1998,7 +1998,7 @@ The following table summarizes the set of common data structures that are consum
 | **remoteVpnTrafficSelector** | The **ipsecConfiguration** resource in the **networkConnections** resource, section 3.1.5.17.4. | Indicates collection of IPSec **TrafficSelectors** on the host side. |
 | **resourceMetadata** | Specified in Common JSON Elements, section 2.2.2. | An array of structured data that client sends to the server. |
 | **routerConfiguration** | The **loadBalancerMuxes** resource, section 3.1.5.7. | Provides the BGP router configuration to the MUX to ensure that it peers with the datacenter routing infrastructure and properly advertises routes. |
-| **routerIP** | The **bgpRouters** resource in the **VirtualGateways** resource, section [3.1.5.17.2](#Section_6.15.4). | Indicates IP addresses to which BGP peering can be established. |
+| **routerIP** | The **bgpRouters** resource in the **VirtualGateways** resource, section [3.1.5.17.2](#Section_3.1.5.17.2). | Indicates IP addresses to which BGP peering can be established. |
 | **routes** | The **routeTables** resource, section [3.1.5.10](#Section_3.1.5.10). | The routes that are contained in a route table. |
 | **routes** | The **routes** resource in the **subnets** resource, section [3.1.5.8.2.3](#Section_3.1.5.8.2.3). | The routes that are contained in the logical subnet. |
 | **routes** | The **networkConnections** resource, section 3.1.5.17.4. | All the routes (static and those learned via BGP) on the network Interface. Traffic that matches the routes is transmitted on the network Interface. |
@@ -2009,7 +2009,7 @@ The following table summarizes the set of common data structures that are consum
 | **configurationState.lastUpdatedTime** | Resources where **configurationState** might be present. | A timestamp that is used to order the sequence of events. The representation is implementation-specific. |
 | **configurationState.id** | Resources where **configurationState** might be present. | Certain resources use the **id** field. It is discussed in the section where it is applicable. The **id** is an instance ID for a resource. See the following sections for definitions of instance IDs. See **instanceId** specified in Common JSON Elements, section 2.2.2. |
 | **configurationState** | The **loadBalancers** resource section 3.1.5.5. The **frontendIPConfigurations** resource section 3.1.5.5.3. The **publicIPAddresses** resource section 3.1.5.14. | A **LoadBalancerVipConfigurationState** structure that represents the running state of a VIP endpoint. This structure extends the base **configurationState** and adds a **LoadBalancerVipEndPointConfigurationState** type array that is a list of **VipEndpointStates**. See **frontendIPConfigurations** section 3.1.5.5.3 for more details. |
-| **configurationState** | The multisite resource, section [3.1.5.33](#Section_3.1.5.33). | A **NetworkControllerSiteConfigurationState** structure that represents the resource synchronization running state. This structure extends the base **configurationState** and adds the following properties: - **failedResources**: Contains set of failed resources during peering. - **conflictingResources**: Contains set of conflicting resources during peering. |
+| **configurationState** | The multisite resource, section [3.1.5.33](#Section_3.1.5.33.1.1). | A **NetworkControllerSiteConfigurationState** structure that represents the resource synchronization running state. This structure extends the base **configurationState** and adds the following properties: - **failedResources**: Contains set of failed resources during peering. - **conflictingResources**: Contains set of conflicting resources during peering. |
 | **securityTags** | The **networkInterfaces** resource, section 3.1.5.11. | An array of **securityTag** resources that are associated with a **networkInterfaces** resource. |
 | **serviceInsertionElements** | The **networkInterfaces** resource, section 3.1.5.11. | Indicates an array of **serviceInsertions** resources that contains this **networkInterfaces** resource. |
 | **serviceInsertionElements** | The **serviceInsertions** resource, section 3.1.5.16. | Indicates an array of service insertion elements through which to send packets that match the rules. |
@@ -2021,7 +2021,7 @@ The following table summarizes the set of common data structures that are consum
 | **subnets** | The **serviceInsertions** resource, section 3.1.5.16. | Indicates an array of references to **subnets** resources this **serviceInsertions** resource is associated with. |
 | **subnets** | The **routeTables** resource, section 3.1.5.10. | Indicates an array of references to **subnets** resources this routeTables configuration is associated with. |
 | **tags** | Most resources. | Key-value pairs of arbitrary data that the client stores with the resource. |
-| **usage** | The **ipPools** resource, section 3.1.5.8.2.2. The **macPools** resource, section [3.1.5.9](#Section_3.1.1.1). | Indicates the usage statistics of the IP pool or the [**MAC address**](#gt_5f9ccdf4-2607-4855-9a72-2010aa3300bf) pool. |
+| **usage** | The **ipPools** resource, section 3.1.5.8.2.2. The **macPools** resource, section [3.1.5.9](#Section_2.2.3.3). | Indicates the usage statistics of the IP pool or the [**MAC address**](#gt_5f9ccdf4-2607-4855-9a72-2010aa3300bf) pool. |
 | **vipIpPools** | The **loadBalancerManager** resource, section [3.1.5.6](#Section_6.6). | An array of references to **ipPools** resources to use for the frontend IP Addresses. |
 | **VirtualGateways** | The **gateways** resource, section 3.1.5.4. The **GatewayPools** resource, section 3.1.5.3. | A collection of virtual gateways for a tenant. This enumerates the tenants that are dependent on this gateway. |
 | **virtualNetworks** | The **logicalNetworks** resource, section 3.1.5.8. | An array of **virtualNetworks** resources that are using the network. |
@@ -2107,59 +2107,59 @@ Resources are processed one at a time. However, the **GET** method can act on al
 
 | Resource | Section | Description |
 | --- | --- | --- |
-| **accessControlLists** | [3.1.5.1](#Section_3.1.5.1) | Contains a list of [**access control list (ACL)**](#gt_access-control-list-acl) rules that can be assigned to subnets or individual NICs and IP addresses. |
-| **aclRules** | [3.1.5.1.2](#Section_3.1.5.1.2.1) | Describes the network traffic that is allowed or denied for a network interface of a virtual machine. |
+| **accessControlLists** | [3.1.5.1](#Section_6.1) | Contains a list of [**access control list (ACL)**](#gt_access-control-list-acl) rules that can be assigned to subnets or individual NICs and IP addresses. |
+| **aclRules** | [3.1.5.1.2](#Section_3.1.5.1.2) | Describes the network traffic that is allowed or denied for a network interface of a virtual machine. |
 | **auditingSettings** | [3.1.5.20](#Section_3.1.5.20) | Contains configuration related to auditing network traffic on hosts. |
-| **backendAddressPools** | [3.1.5.5.2](#Section_6.5.4) | This resource represents the list of IPs that can receive network traffic that comes via the front-end IPs. The Load Balancing [**multiplexer (MUX)**](#gt_multiplexer-mux) handles incoming traffic via the front-end IPs and distributes them to backend IPs based on load balancing configuration. |
-| **bgpPeers** | [3.1.5.17.2.2](#Section_3.1.5.17.2.2) | The **bgpPeers** resource of the **bgpRouters** resource of the **VirtualGateways** resource. Configures [**Border Gateway Protocol (BGP)**](#gt_border-gateway-protocol-bgp) peers of the **VirtualGateways** resource. |
-| **bgpRouters** | [3.1.5.17.2](#Section_6.15.4) | The **bgpRouters** resource of the **VirtualGateways** resource. Contains the configuration for the BGP router in the virtual gateway. |
-| **credentials** | [3.1.5.2](#Section_6.2) | Contains the credential information needed to connect to a southbound device, with the appropriate permissions to manage the device, or enabling the Network Controller to connect to and configure a device in the network. |
+| **backendAddressPools** | [3.1.5.5.2](#Section_3.1.5.5.2) | This resource represents the list of IPs that can receive network traffic that comes via the front-end IPs. The Load Balancing [**multiplexer (MUX)**](#gt_multiplexer-mux) handles incoming traffic via the front-end IPs and distributes them to backend IPs based on load balancing configuration. |
+| **bgpPeers** | [3.1.5.17.2.2](#Section_6.15.4.4) | The **bgpPeers** resource of the **bgpRouters** resource of the **VirtualGateways** resource. Configures [**Border Gateway Protocol (BGP)**](#gt_border-gateway-protocol-bgp) peers of the **VirtualGateways** resource. |
+| **bgpRouters** | [3.1.5.17.2](#Section_3.1.5.17.2) | The **bgpRouters** resource of the **VirtualGateways** resource. Contains the configuration for the BGP router in the virtual gateway. |
+| **credentials** | [3.1.5.2](#Section_3.1.5.2) | Contains the credential information needed to connect to a southbound device, with the appropriate permissions to manage the device, or enabling the Network Controller to connect to and configure a device in the network. |
 | **diagnostics/ConnectivityCheck** | [3.1.5.22.1](#Section_6.20) | This resource initiates a **diagnostics Action** to check data path connectivity between two endpoints. |
 | **diagnostics/ConnectivityCheckResults** | [3.1.5.22.2](#Section_6.20) | This resource queries the result of a previously initiated **diagnostics Action** between two endpoints. |
-| **diagnostics/NetworkControllerState** | [3.1.5.22.5](#Section_6.20.5) | This resource creates a dump of internal server data that can be used for troubleshooting. |
-| **diagnostics/SlbState** | [3.1.5.22.3](#Section_3.1.5.22.3) | This resource initiates a **diagnostics Action** to collect internal state for the software load Balancer. |
+| **diagnostics/NetworkControllerState** | [3.1.5.22.5](#Section_3.1.5.22.5) | This resource creates a dump of internal server data that can be used for troubleshooting. |
+| **diagnostics/SlbState** | [3.1.5.22.3](#Section_6.20.4) | This resource initiates a **diagnostics Action** to collect internal state for the software load Balancer. |
 | **diagnostics/SlbStateResults** | [3.1.5.22.4](#Section_6.20.4) | This resource queries the result of a previously initiated diagnostics slbState action. |
 | **discovery** | [3.1.5.30](#Section_3.1.5.30) | This resource provides versioning information. |
-| **frontendIPConfigurations** | [3.1.5.5.3](#Section_6.5.5) | This resource represents the front-end IP addresses of the load Balancer. |
+| **frontendIPConfigurations** | [3.1.5.5.3](#Section_3.1.5.5.3) | This resource represents the front-end IP addresses of the load Balancer. |
 | **GatewayPools** | [3.1.5.3](#Section_6.3) | Contains an array of gateways that provide the infrastructure for **VirtualGateways** resources for tenant virtual networks. |
 | **gateways** | [3.1.5.4](#Section_3.1.5.4) | Provides gateway services to one or more **virtualNetworks** resources. |
-| **iDnsServer** | [3.1.5.25](#Section_6.23) | Contains the configuration details for the DNS server in the internal DNS (iDNS) service. |
+| **iDnsServer** | [3.1.5.25](#Section_3.1.5.25) | Contains the configuration details for the DNS server in the internal DNS (iDNS) service. |
 | **inboundNatRules** | [3.1.5.5.4](#Section_3.1.5.5.4) | This resource is used to configure the load balancer to apply Network Address Translation (NAT) of inbound traffic. |
-| **internalResourceInstances** | [3.1.5.24](#Section_6.22) | This resource provides a means to map instance IDs to resource IDs or to get all the mappings. |
-| **ipConfigurations** | [3.1.5.11.2](#Section_3.1.5.11.2.1) | This resource represents configuration information for IP addresses: allocation method, actual IP address, membership of a logical or virtual subnet, load balancing and access control information. |
+| **internalResourceInstances** | [3.1.5.24](#Section_3.1.5.24) | This resource provides a means to map instance IDs to resource IDs or to get all the mappings. |
+| **ipConfigurations** | [3.1.5.11.2](#Section_3.1.5.11.2) | This resource represents configuration information for IP addresses: allocation method, actual IP address, membership of a logical or virtual subnet, load balancing and access control information. |
 | **ipPools** | [3.1.5.8.2.2](#Section_3.1.5.8.2.2) | The **ipPools** resource represents the range from which IP addresses will be allocated for nodes within a subnet. The start and end IP addresses of the pool for a virtual subnet are based on the IP prefix of the virtual subnet. |
 | **loadBalancerManager** | [3.1.5.6](#Section_6.6) | The **loadBalancerManager** resource is a singleton resource that configures the load balancing service of the Network Controller. |
 | **loadBalancerMuxes** | [3.1.5.7](#Section_3.1.5.7) | The **loadBalancerMuxes** resource represents a MUX VM deployed in the Network Controller's stamp. |
-| **loadBalancers** | [3.1.5.5](#Section_6.5) | Consists of a frontend and a backend configuration. The frontend configuration exposes the IP address of the load Balancer. The backend configuration specifies the distribution of traffic across VM instances and how to determine the health of VM instances or endpoints. |
-| **loadBalancingRules** | [3.1.5.5.5](#Section_6.5.7) | This resource is used to configure load balancing policies. The policies dictate the kind of traffic that is load-balanced, and port mapping between frontend IPs and backend IPs. |
+| **loadBalancers** | [3.1.5.5](#Section_3.1.5.5) | Consists of a frontend and a backend configuration. The frontend configuration exposes the IP address of the load Balancer. The backend configuration specifies the distribution of traffic across VM instances and how to determine the health of VM instances or endpoints. |
+| **loadBalancingRules** | [3.1.5.5.5](#Section_3.1.5.5.5) | This resource is used to configure load balancing policies. The policies dictate the kind of traffic that is load-balanced, and port mapping between frontend IPs and backend IPs. |
 | **logicalNetworks** | [3.1.5.8](#Section_6.8) | A collection of logical subnets or a logical partition of physical network that is dedicated for a specific purpose. |
 | **subnets** | [3.1.5.8.2](#Section_3.1.5.8.2) | A **subnets** resource consists of a subnet/VLAN pair. The **vlanId** resource is required; however, it MAY contain a value of zero if the subnet is not associated with a vlan. |
-| **macPools** | [3.1.5.9](#Section_3.1.1.1) | The **macPools** resource specifies one or more ranges of MAC addresses, which are used internally by the Network Controller. The MAC addresses are used for both overlay and underlay needs. |
-| **multisite** | [3.1.5.33](#Section_3.1.5.33) | The **multisite** resource is a singleton resource that configures the synchronization of two Network Controller—managed sites. |
-| **multisitePrimary** | [3.1.5.34](#Section_3.1.5.33) | The **multisitePrimary** resource is a singleton resource that represents a mechanism to set a Network Controller—managed site as the primary site in the context of multisite. |
-| **monitoring/NetworkControllerStatistics** | [3.1.5.23](#Section_3.1.5.23) | This resource provides a means to get usage and health information for a few resources. |
+| **macPools** | [3.1.5.9](#Section_2.2.3.3) | The **macPools** resource specifies one or more ranges of MAC addresses, which are used internally by the Network Controller. The MAC addresses are used for both overlay and underlay needs. |
+| **multisite** | [3.1.5.33](#Section_3.1.5.33.1.1) | The **multisite** resource is a singleton resource that configures the synchronization of two Network Controller—managed sites. |
+| **multisitePrimary** | [3.1.5.34](#Section_6.30) | The **multisitePrimary** resource is a singleton resource that represents a mechanism to set a Network Controller—managed site as the primary site in the context of multisite. |
+| **monitoring/NetworkControllerStatistics** | [3.1.5.23](#Section_6.21) | This resource provides a means to get usage and health information for a few resources. |
 | **networkConnections** | [3.1.5.17.4](#Section_3.1.5.17.4) | Specifies a connection from a virtual network to external networks. |
 | **networkControllerSite** | [3.1.5.33.2](#Section_3.1.5.33.2) | The **networkControllerSite** resource represents configuration information regarding a remote Network Controller—managed site. |
 | **networkInterfaces** | [3.1.5.11](#Section_3.1.5.11.1.2) | Specifies the configuration of either a host virtual network interface card (host vNIC) or a virtual server NIC (VMNIC). |
 | **operationResults** | [3.1.5.13](#Section_3.1.5.13) | Provides the status of a specific [**asynchronous operation**](#gt_asynchronous-operation). The URL for a specific **operations** resource is returned in the **Location** header of that operation. |
 | **operations** | [3.1.5.12](#Section_3.1.5.12) | Provides the status of a specific asynchronous operation. The URL for a specific **operations** resource is returned in the **Azure-AsyncOperation** header of that operation. |
 | **outboundNatRules** | [3.1.5.5.6](#Section_3.1.5.5.6) | This resource is used to configure the load Balancer to apply Network Address Translation (NAT) to outbound traffic. |
-| **policyMaps** | [3.1.5.17.3](#Section_6.15.5) | The **policyMaps** resource of the **VirtualGateways** resource. Contains the routing policies that enable the BGP routers in the virtual gateway to exchange information as specified with peers. A routing policy consists of match criteria and actions that are executed when the conditions specified in the match criteria are satisfied. |
+| **policyMaps** | [3.1.5.17.3](#Section_3.1.5.17.3) | The **policyMaps** resource of the **VirtualGateways** resource. Contains the routing policies that enable the BGP routers in the virtual gateway to exchange information as specified with peers. A routing policy consists of match criteria and actions that are executed when the conditions specified in the match criteria are satisfied. |
 | **probes** | [3.1.5.5.7](#Section_3.1.5.5.7) | Configures the mechanism of detection of connectivity issues with load balanced IPs. |
-| **publicIPAddresses** | [3.1.5.14](#Section_6.12) | Specifies an IP Address that can be used to communicate with the virtual network from outside it. This address is publically available for use by the **VirtualGateways** resource and the **loadBalancers** resource. |
-| **routes** | [3.1.5.10.2](#Section_3.1.5.8.2.3) | Create **routes** under a tenant's Route Table. |
+| **publicIPAddresses** | [3.1.5.14](#Section_3.1.5.14) | Specifies an IP Address that can be used to communicate with the virtual network from outside it. This address is publically available for use by the **VirtualGateways** resource and the **loadBalancers** resource. |
+| **routes** | [3.1.5.10.2](#Section_3.1.5.10.2) | Create **routes** under a tenant's Route Table. |
 | **routes** | [3.1.5.8.2.3](#Section_3.1.5.8.2.3) | Represents a provider route that the host uses to route traffic to a specific destination. If a host connects to a logical subnet as part of hosting a virtual network, then all routes in that logical subnet are applied to the host. |
 | **routeTables** | [3.1.5.10](#Section_3.1.5.10) | Contains a list of tenant routes that can be assigned to virtual subnets to control routing within a virtual network. |
-| **securityTags** | [3.1.5.31](#Section_3.1.5.31) | A grouping of network interfaces used to manage and apply firewall policies. |
+| **securityTags** | [3.1.5.31](#Section_3.1.5.31.1.4) | A grouping of network interfaces used to manage and apply firewall policies. |
 | **servers** | [3.1.5.15](#Section_3.1.5.15) | Represents a physical server that is being controlled by the Network Controller. |
 | **serviceInsertions** | [3.1.5.16](#Section_6.14) | Specifies the relationship between the service insertion and the service insertion rule. |
-| **subnets** | [3.1.5.18.2](#Section_3.1.5.18.2) | Contains the Virtual Subnet IDs (VSIDs) under a tenant's Virtual Network Routing Domain ID (RDID). User can specify the addressPrefix to use for the **subnets**, the **accessControlLists** to protect the **subnets**, the **routeTable** to apply to the subnet, and optionally **serviceInsertions** to use within the subnet. |
-| **VirtualGateways** | [3.1.5.17](#Section_3.1.5.17.2.2) | A logical entity that runs on multiple gateways in the **GatewayPools** resource, the **VirtualGateways** resource describes the gateway used for cross-premises connectivity from the virtual network. |
+| **subnets** | [3.1.5.18.2](#Section_6.8.4) | Contains the Virtual Subnet IDs (VSIDs) under a tenant's Virtual Network Routing Domain ID (RDID). User can specify the addressPrefix to use for the **subnets**, the **accessControlLists** to protect the **subnets**, the **routeTable** to apply to the subnet, and optionally **serviceInsertions** to use within the subnet. |
+| **VirtualGateways** | [3.1.5.17](#Section_3.1.5.17.4) | A logical entity that runs on multiple gateways in the **GatewayPools** resource, the **VirtualGateways** resource describes the gateway used for cross-premises connectivity from the virtual network. |
 | **virtualNetworkManager** | [3.1.5.19](#Section_3.1.5.19) | A singleton resource that configures the virtual network service of the Network Controller. The properties in this resource are global for all virtual networks managed by the Network Controller. |
 | **virtualNetworkPeerings** | [3.1.5.18.3](#Section_3.1.5.18.3) | Peers virtual networks so that network traffic can be shared without the need of a gateway resource. |
 | **virtualNetworks** | [3.1.5.18](#Section_3.1.5.18) | Creates a Virtual Network using Hyper-V Network Virtualization (HNV) for tenant overlays. |
-| **virtualServers** | [3.1.5.21](#Section_3.1.5.21) | A resource that corresponds to a VM. Such resources need to be created for VMs that correspond to **gateways** (section 3.1.5.4) and **loadBalancerMuxes** resources (section 3.1.5.7). |
-| **virtualSwitchManager** | [3.1.5.26](#Section_3.1.5.26) | Configures the virtual switch properties on every server managed by the Network Controller. |
+| **virtualServers** | [3.1.5.21](#Section_6.19) | A resource that corresponds to a VM. Such resources need to be created for VMs that correspond to **gateways** (section 3.1.5.4) and **loadBalancerMuxes** resources (section 3.1.5.7). |
+| **virtualSwitchManager** | [3.1.5.26](#Section_6.24) | Configures the virtual switch properties on every server managed by the Network Controller. |
 
 The responses to all the resources can result in the following status codes.
 
@@ -2208,7 +2208,7 @@ The following property elements are valid.
 | --- | --- | --- |
 | **etag** | Read-only | Specified in Common JSON Elements, section [2.2.2](#Section_2.2.2). |
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
-| **aclRules** | Optional | Indicates the rules in an access control list. See section [3.1.5.1.2](#Section_3.1.5.1.2.1) for full details on this element. |
+| **aclRules** | Optional | Indicates the rules in an access control list. See section [3.1.5.1.2](#Section_3.1.5.1.2) for full details on this element. |
 | **inboundDefaultAction** | Optional | Indicates the default action for [**inbound**](#gt_inbound) rules. Valid values are Permit or Deny. The default value is Permit. |
 | **ipConfigurations** | Read-only | Indicates references to IP addresses of **networkInterfaces** resources this access control list is associated with. |
 | **outboundDefaultAction** | Optional | Indicates the default action for [**outbound**](#gt_outbound) rules. Valid values are Permit or Deny. The default value is Permit. |
@@ -2216,7 +2216,7 @@ The following property elements are valid.
 | **configurationState** | Optional Read-only | See **configurationState** in section [2.2.4](#Section_2.2.4). |
 | **configurationState.id** | Optional Read-only | This is the instance ID of the access control list. |
 | **virtualNetworkInterfaceErrors** | Optional Read-only | An array of **configurationState** objects as defined in section 2.2.4. |
-| **securityTags** | Optional | An array of security tags (section [3.1.5.31](#Section_3.1.5.31)) to which the parent access control list is applied. That is, the parent access control list will be applied to all virtual interfaces associated with each security tag. |
+| **securityTags** | Optional | An array of security tags (section [3.1.5.31](#Section_3.1.5.31.1.4)) to which the parent access control list is applied. That is, the parent access control list will be applied to all virtual interfaces associated with each security tag. |
 
 <a id="Section_3.1.5.1.1"></a>
 <a id="Section_3.1.5.8.2.2.1"></a>
@@ -2502,7 +2502,7 @@ Processing Details
 
 The server uses the **resourceId** contained in the body of the message to locate the **accessControlLists** resource to send to the client. The server MUST return a status code of 200 (OK) if the operation succeeds, and the server MUST return a status code of 404 (Not Found) if the resource does not exist.
 
-The properties that are associated with the **accessControlLists** resource are in section [3.1.5.1](#Section_3.1.5.1).
+The properties that are associated with the **accessControlLists** resource are in section [3.1.5.1](#Section_6.1).
 
 The server returns configuration state only if it has already attempted to configure settings according to the REST resource properties that were created or updated by using the **PUT** method. **configurationState.id** MUST be set to the access control list resource identifier. **configurationState.lastUpdatedTime** is set to a value that is implementation-specific.
 
@@ -7553,8 +7553,8 @@ The following property elements are valid.
 | --- | --- | --- |
 | **etag** | Read-only | Specified in Common JSON Elements, section [2.2.2](#Section_2.2.2). |
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
-| **backendAddressPools** | Optional | Indicates the back-end Address Pool of the load balancer, see section [3.1.5.5.2](#Section_6.5.4) for full details on this element. |
-| **frontendIPConfigurations** | Required | Indicates the front-end IP addresses of the load balancer, see section [3.1.5.5.3](#Section_6.5.5) for full details on this element. |
+| **backendAddressPools** | Optional | Indicates the back-end Address Pool of the load balancer, see section [3.1.5.5.2](#Section_3.1.5.5.2) for full details on this element. |
+| **frontendIPConfigurations** | Required | Indicates the front-end IP addresses of the load balancer, see section [3.1.5.5.3](#Section_3.1.5.5.3) for full details on this element. |
 | **loadBalancingRules** | Optional | A list of load balancing configurations. Each configuration describes what traffic and how it gets load balanced between back-end IPs. |
 | **inboundNatRules** | Optional | Indicates an array of [**inbound**](#gt_inbound) NAT rules configured for the load balancer, see section [3.1.5.5.4](#Section_3.1.5.5.4) for full details on this element. |
 | **outboundNatRules** | Optional | Indicates an array of [**outbound**](#gt_outbound) NAT rules configured for the load balancer, see section [3.1.5.5.6](#Section_3.1.5.5.6) for full details on this element. |
@@ -9395,7 +9395,7 @@ The following property elements are valid.
 | **inboundNatRules** | Read-only | Indicates a reference to the **inboundNatRules** resource used by the **frontEndIPConfigurations** resource. |
 | **loadBalancingRules** | Read-only | Indicates a reference to the **loadBalancingRules** resource used by the **frontendIPConfigurations** resource. |
 | **outboundNatRules** | Read-only | Indicates a reference to the **outboundNatRules** resource used by the **frontendIPConfigurations** resource. |
-| **publicIPAddress** | Optional | Indicates a reference to the **publicIPAddresses** resource (section [3.1.5.14](#Section_6.12)) used by the **frontendIPConfigurations** resource. If a **publicIPAddress** is specified, then a **privateIPaddress** is not specified. When a **publicIPAddress** is specified, the **privateIPAllocationMethod** is set to Dynamic. IPv6 addresses are supported with URI version v2 or later. |
+| **publicIPAddress** | Optional | Indicates a reference to the **publicIPAddresses** resource (section [3.1.5.14](#Section_3.1.5.14)) used by the **frontendIPConfigurations** resource. If a **publicIPAddress** is specified, then a **privateIPaddress** is not specified. When a **publicIPAddress** is specified, the **privateIPAllocationMethod** is set to Dynamic. IPv6 addresses are supported with URI version v2 or later. |
 | **privateIPAddress** | Optional | This is only specified if a specific private IP address identifies an IP address which is statically configured for use with this **frontendIPConfigurations** resource. The **privateIPAllocationMethod** MUST be allocated static for this case. If a **privateIPAddress** is specified, a reference to a **publicIPaddress** cannot be specified at the same time. The private IP address can be either from the infrastructure address space or from a tenant address space, in either case they MUST be accompanied with a valid subnet specified in the **subnet** element reference. IPv6 addresses are supported with URI version v2 or later. |
 | **privateIPAllocationMethod** | Optional | Static or Dynamic |
 | **subnet** | Optional | Indicates a reference to the **subnet** resource used by the **frontendIPConfigurations** resource. MUST be specified if a **privateIPaddress** is specified. A subnet reference to a logical network subnet is needed if the **privateIPAddress** is from the infrastructure address space. A subnet reference to a virtual network subnet is needed if the **privateIPAddress** is from a tenant address space. The subnet MUST include the IP address specified in **privateIPAddress**. |
@@ -14177,7 +14177,7 @@ The following property elements are valid.
 | --- | --- | --- |
 | **etag** | Read-only | Specified in Common JSON Elements, section [2.2.2](#Section_2.2.2). |
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
-| **routes** | Optional | Indicates the **routes** in a route table, see **routes** resource section [3.1.5.10.2](#Section_3.1.5.8.2.3) for full details on this element.<18> |
+| **routes** | Optional | Indicates the **routes** in a route table, see **routes** resource section [3.1.5.10.2](#Section_3.1.5.10.2) for full details on this element.<18> |
 | **subnets** | Read-only | Indicates an array of references to **subnets** resources this route table is associated with. |
 
 <a id="Section_3.1.5.10.1"></a>
@@ -14873,7 +14873,7 @@ The following property elements are valid.
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
 | **dnsSettings** | Optional | Indicates the [**DNS**](#gt_domain-name-system-dns) settings of this network interface. |
 | **dnsSettings.dnsServers** | Optional | Indicates an array of IP Addresses that this network interface resource will use for the DNS servers. |
-| **ipConfigurations** | Read-only | Indicates an array of IP configurations that are contained in the network interface. See section [3.1.5.11.2](#Section_3.1.5.11.2.1) for full details on this element. |
+| **ipConfigurations** | Read-only | Indicates an array of IP configurations that are contained in the network interface. See section [3.1.5.11.2](#Section_3.1.5.11.2) for full details on this element. |
 | **isHostVirtualNetworkInterface** | Optional | TRUE – this is a host virtual network interface card (host vNIC). FALSE – this is a virtual server NIC (VMNIC) (default). Cannot be changed after creation. |
 | **internalDnsNameLabel** | Optional | Determines the name that will be registered in the internal Domain Name Service (iDNS) when the **iDnsServer** resource is configured. The host address record that contains the **internalDnsNameLabel** string is in addition to that which contains the virtual machine host name string. The names in the two records are the **internalDnsNameLabel** and the virtual machine hostname, respectively, followed by the virtual network resource ID, which is followed by the global zone name. The **internalDnsNameLabel** can be set only for primary interfaces (meaning interfaces for which the **isPrimary** property is TRUE). When the iDnsServer is configured and the **internalDnsNameLabel** is specified, it is guaranteed that the label will be registered. The virtual machine guest operating system might not provide a host name part of the DHCP negotiation. |
 | **isPrimary** | Optional | TRUE – this is the primary interface and the default value if the property is not set. FALSE - this is a secondary interface. The distinction is important if a virtual machine has more than one network interface. This property cannot be changed after the resource is created. |
@@ -17655,7 +17655,7 @@ Retrieves an **operationResults** resource.
 <a id="Section_3.1.5.14"></a>
 #### 3.1.5.14 publicIPAddresses
 
-The **publicIPAddresses** resource specifies an IP Address which is publically available. This **publicIPAddresses** resource is used by the **VirtualGateways** (section [3.1.5.17](#Section_3.1.5.17.2.2)) resource and the **loadBalancers** resource (section [3.1.5.5](#Section_6.5)) to indicate the IP Address that can be used to communicate with the virtual network from outside it.
+The **publicIPAddresses** resource specifies an IP Address which is publically available. This **publicIPAddresses** resource is used by the **VirtualGateways** (section [3.1.5.17](#Section_3.1.5.17.4)) resource and the **loadBalancers** resource (section [3.1.5.5](#Section_3.1.5.5)) to indicate the IP Address that can be used to communicate with the virtual network from outside it.
 
 It is invoked through the following URI.
 
@@ -17688,7 +17688,7 @@ The following property elements are valid.
 | **IdleTimeoutInMinutes** | Optional | Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default is 4 minutes. If public IP is used as a frontend IP of a load Balancer this value is ignored. |
 | **ipConfiguration** | Read-only | Reference to an **ipConfigurations** resource. Relative URI of the private IP address with which this public IP is associated. Private IP can be defined on NIC, **loadBalancers**, or **gateways**. |
 | **publicIPAddressVersion** | Option on PUT | If present it, MUST be one of the following values: IPv6 or IPv4. The default is IPv4. This property is supported with URI version v2 or later. |
-| **configurationState** | Read-only | A **LoadBalancerVipConfigurationState** structure that represents the running state of a VIP endpoint. This structure extends the base **configurationState** (section [2.2.4](#Section_2.2.4)) and adds a **LoadBalancerVipEndPointConfigurationState** type array that is a list of **VipEndpointStates**. See **frontendIPConfigurations** section [3.1.5.5.3](#Section_6.5.5). More details are given in the section for the **GET** operation section 3.1.5.14.1.2. This property is supported with URI version v2 or later. |
+| **configurationState** | Read-only | A **LoadBalancerVipConfigurationState** structure that represents the running state of a VIP endpoint. This structure extends the base **configurationState** (section [2.2.4](#Section_2.2.4)) and adds a **LoadBalancerVipEndPointConfigurationState** type array that is a list of **VipEndpointStates**. See **frontendIPConfigurations** section [3.1.5.5.3](#Section_3.1.5.5.3). More details are given in the section for the **GET** operation section 3.1.5.14.1.2. This property is supported with URI version v2 or later. |
 | **counters** | Optional | Array of **ResourceCounter** structures (section [3.1.1.1](#Section_3.1.1.1)). The supported properties are documented in the following table. This property is supported with URI version v2 or later. |
 
 Properties supported in the **counters** for the **publicIPAddresses**. The following property elements are valid where **source** is **SoftwareLoadBalancer** and **category** is Performance.
@@ -18180,7 +18180,7 @@ The following property elements are valid.
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
 | **connections** | - | Indicates an array of **connections** that specifies the information needed to connect to the specific device for the purposes of managing and controlling the device. |
 | **connections.credential** | - | Reference to a **credentials** resource that can be used to connect to the device for management purposes. |
-| **connections.credentialType** | - | See **credentials** resource, section [3.1.5.2](#Section_6.2). |
+| **connections.credentialType** | - | See **credentials** resource, section [3.1.5.2](#Section_3.1.5.2). |
 | **connections.managementAddresses** | - | The management address used to connect to the server. This can be in the form of an IPv4 IP address, an IPv6 IP address, or a DNS name. |
 | **model** | Optional | Model number of the server. |
 | **networkInterfaces** | Optional | An array of network interfaces this server has. See **networkInterfaces** resource, section [3.1.5.15.2](#Section_3.1.5.15.2), for more details. These **networkInterfaces** resources will be automatically created based on the physical network interface cards the server has. They cannot be created or deleted but can have their properties updated. |
@@ -19841,8 +19841,8 @@ The following property elements are valid.
 | **vpnConfiguration.IPv6AddressPrefixes** | Read/write | Indicates IPv6 prefix advertised to remote access VPN clients. |
 | **vpnConfiguration.capacity** | Read/write | Aggregate bandwidth capacity of VPN Clients in Kbps. |
 | **vpnConfiguration.Realm** | Read/write | **Realm** used to identify tenants. E.g. contoso, Woodgrove. |
-| **bgpRouters** | Optional Read/write | Indicates the BGP peering information. See section [3.1.5.17.2](#Section_6.15.4) for full details on this element. |
-| **policyMaps** | Optional Read/write | Indicates BGP policy maps. See section [3.1.5.17.3](#Section_6.15.5) for details. |
+| **bgpRouters** | Optional Read/write | Indicates the BGP peering information. See section [3.1.5.17.2](#Section_3.1.5.17.2) for full details on this element. |
+| **policyMaps** | Optional Read/write | Indicates BGP policy maps. See section [3.1.5.17.3](#Section_3.1.5.17.3) for details. |
 | **GatewayPools** | Required Read/write | Indicates a collection of references to **GatewayPools** resources in which connections can be created. This information is populated at the time of subscription and can be changed only via the Service administrator portal. |
 | **routingType** | Read-only | Dynamic is the only support value for this field. |
 | **configurationState** | Optional Read-only | Indicates the last known running state of this virtual gateway. See specification in section [2.2.4](#Section_2.2.4). More details are given in the section for the **GET** operation section 3.1.5.17.1.2. |
@@ -26586,7 +26586,7 @@ The following property elements are valid.
 | **routerId** | Read/write | Indicates Router ID. |
 | **routerIP** | Read/write | Indicates an array of IP addresses to which BGP peering can be established. |
 | **isGenerated** | Read-only | If this BGP router is automatically enabled, without making any REST calls then **isGenerated** is set to TRUE. |
-| **bgpPeers** | Read/write | Collection array of BGP peers associated with the **bgpRouters** resource. See section [3.1.5.17.2.2](#Section_3.1.5.17.2.2) for details. |
+| **bgpPeers** | Read/write | Collection array of BGP peers associated with the **bgpRouters** resource. See section [3.1.5.17.2.2](#Section_6.15.4.4) for details. |
 | **configurationState** | Optional Read-only | Indicates the last known running state of this router. See specification in section [2.2.4](#Section_2.2.4). More details are given in the section for the **GET** operation section 3.1.5.17.2.1.2. |
 
 <a id="Section_3.1.5.17.2.1"></a>
@@ -29527,7 +29527,7 @@ The following property elements are valid.
 | **etag** | Read-only | Specified in Common JSON Elements, section [2.2.2](#Section_2.2.2). |
 | **provisioningState** | Read-only | Specified in Common JSON Elements, section 2.2.2. |
 | **logicalNetwork** | Required | Indicates a reference to the **networks** resource that is the underlay network which the virtual network runs on. |
-| **subnets** | Optional | Indicates an array of the subnets that are on the virtual network. For more details see section [3.1.5.18.2](#Section_3.1.5.18.2). |
+| **subnets** | Optional | Indicates an array of the subnets that are on the virtual network. For more details see section [3.1.5.18.2](#Section_6.8.4). |
 | **addressSpace** | Required | Indicates the address space of the virtual network. |
 | **addressSpace.addressPrefixes** | Required | Indicates an array of the valid list of address prefixes that can make up this virtual network. The value is an array of address prefixes in the IPv4 or IPv6 format. The space cannot be shrunk if addresses are in use in a subnet belonging to the virtual network. |
 | **dhcpOptions** | Optional | Indicates the DHCP options used by servers in the virtual network. |
@@ -33795,7 +33795,7 @@ Retrieves the **virtualSwitchManager** configuration.
 <a id="Section_3.1.5.27"></a>
 #### 3.1.5.27 networkControllerBackup
 
-The **networkControllerBackup** resource SHOULD<24> be used to persist to disk all the applicable configuration data for a network controller. The backed-up data can be used to restore the configuration of the network controller. For more details, see **networkControllerRestore** section [3.1.5.28](#Section_3.1.5.28.1). The format of the backed-up data is implementation-specific and is treated as opaque data.
+The **networkControllerBackup** resource SHOULD<24> be used to persist to disk all the applicable configuration data for a network controller. The backed-up data can be used to restore the configuration of the network controller. For more details, see **networkControllerRestore** section [3.1.5.28](#Section_3.1.5.28.1.1). The format of the backed-up data is implementation-specific and is treated as opaque data.
 
 It is invoked through the following URI.
 
@@ -33993,7 +33993,7 @@ Retrieves the status of the backup operation that was launched when the first **
 <a id="Section_3.1.5.28"></a>
 #### 3.1.5.28 networkControllerRestore
 
-The **networkControllerRestore** resource SHOULD<28> be used to restore from disk all the applicable configuration data for a network controller. The configuration of the network controller MUST first be backed up via a PUT operation on a **networkControllerBackup** resource. For more details, see **networkControllerBackup** section [3.1.5.27](#Section_3.1.5.27.1.1).
+The **networkControllerRestore** resource SHOULD<28> be used to restore from disk all the applicable configuration data for a network controller. The configuration of the network controller MUST first be backed up via a PUT operation on a **networkControllerBackup** resource. For more details, see **networkControllerBackup** section [3.1.5.27](#Section_3.1.5.27).
 
 It is invoked through the following URI.
 
@@ -34438,7 +34438,7 @@ Retrieves the **discovery** resource.
 <a id="Section_3.1.5.31"></a>
 #### 3.1.5.31 securityTags
 
-A **securityTags** resource represents a mechanism to modify and apply firewall policies to a group of network interface cards (NICs). **securityTags** resources can be assigned to network interfaces (section [3.1.5.11](#Section_3.1.5.11.1.2)). This means that any access control list (ACL) (section [3.1.5.1](#Section_3.1.5.1)) associated with the security tag are also applied to each NIC associated with the security tag. Also, security tags can be used as the source or destination field of an ACL rule (section [3.1.5.1.2](#Section_3.1.5.1.2.1)). If this happens, then the IP addresses of newly associated NICs are included in the source or destination field of that ACL rule.
+A **securityTags** resource represents a mechanism to modify and apply firewall policies to a group of network interface cards (NICs). **securityTags** resources can be assigned to network interfaces (section [3.1.5.11](#Section_3.1.5.11.1.2)). This means that any access control list (ACL) (section [3.1.5.1](#Section_6.1)) associated with the security tag are also applied to each NIC associated with the security tag. Also, security tags can be used as the source or destination field of an ACL rule (section [3.1.5.1.2](#Section_3.1.5.1.2)). If this happens, then the IP addresses of newly associated NICs are included in the source or destination field of that ACL rule.
 
 It is invoked through the following v5 URI.
 
@@ -34642,7 +34642,7 @@ Processing Details
 
 The server uses the **resourceId** contained in the body of the message to locate the **securityTags** resource to send to the client. The server MUST return a status code of 200 (OK) if the operation succeeds, and the server MUST return a status code of 404 (Not Found) if the resource does not exist.
 
-The properties that are associated with the **securityTags** resource are in section [3.1.5.31](#Section_3.1.5.31).
+The properties that are associated with the **securityTags** resource are in section [3.1.5.31](#Section_3.1.5.31.1.4).
 
 <a id="Section_3.1.5.31.1.3"></a>
 ###### 3.1.5.31.1.3 GET ALL
@@ -34928,7 +34928,7 @@ Deletes a **securityTags** resource.
 <a id="Section_3.1.5.32"></a>
 #### 3.1.5.32 learnedIPAddresses
 
-The **learnedIPaddresses** resource represents a virtual network IP address which may be dynamically moved across different virtual machines and is automatically detected by software defined networking (SDN)stack. This resource is referenced by **ipConfigurations** resource (section [3.1.5.11.2](#Section_3.1.5.11.2.1)) referenced in **networkInterfaces** resource (section [3.1.5.11](#Section_3.1.5.11.1.2)).
+The **learnedIPaddresses** resource represents a virtual network IP address which may be dynamically moved across different virtual machines and is automatically detected by software defined networking (SDN)stack. This resource is referenced by **ipConfigurations** resource (section [3.1.5.11.2](#Section_3.1.5.11.2)) referenced in **networkInterfaces** resource (section [3.1.5.11](#Section_3.1.5.11.1.2)).
 
 It is invoked through the following URI.
 
@@ -35513,7 +35513,7 @@ The server retrieves the **multisite** resource.
 
 The **networkControllerSite** resource contains configuration information used to connect to a remote Network Controller—managed site.
 
-HTTP methods cannot be directly performed on this resource. To retrieve or modify this resource, HTTP methods need to be performed on the parent **multisite** resource (section [3.1.5.33](#Section_3.1.5.33)).
+HTTP methods cannot be directly performed on this resource. To retrieve or modify this resource, HTTP methods need to be performed on the parent **multisite** resource (section [3.1.5.33](#Section_3.1.5.33.1.1)).
 
 The following property elements are valid.
 
@@ -85612,20 +85612,20 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | Operating system versions | Protocol versions | Resources and properties available |
 | --- | --- | --- |
 | Windows Server 2016 | v1 | All original v1 resources |
-| Windows Server 2016 with the [MSKB-3216755] update | v1 | Added v1 resources: **networkControllerBackup** (section [3.1.5.27](#Section_3.1.5.27.1.1)) **networkControllerRestore** (section [3.1.5.28](#Section_3.1.5.28.1)) **Response Content for Errors** (section [3.1.5.35](#Section_3.1.5.35)) Added v1 properties to resources: **accessControlLists** (section [3.1.5.1](#Section_3.1.5.1)) **gateways** (section [3.1.5.4](#Section_3.1.5.4)) **loadBalancerMuxes** (section [3.1.5.7](#Section_3.1.5.7)) **networkInterfaces** (section [3.1.5.11](#Section_3.1.5.11.1.2)) **ipConfigurations** (section [3.1.5.11.2](#Section_3.1.5.11.2.1)) **virtualNetworks** (section [3.1.5.18](#Section_3.1.5.18)) |
+| Windows Server 2016 with the [MSKB-3216755] update | v1 | Added v1 resources: **networkControllerBackup** (section [3.1.5.27](#Section_3.1.5.27)) **networkControllerRestore** (section [3.1.5.28](#Section_3.1.5.28.1.1)) **Response Content for Errors** (section [3.1.5.35](#Section_3.1.5.35)) Added v1 properties to resources: **accessControlLists** (section [3.1.5.1](#Section_6.1)) **gateways** (section [3.1.5.4](#Section_3.1.5.4)) **loadBalancerMuxes** (section [3.1.5.7](#Section_3.1.5.7)) **networkInterfaces** (section [3.1.5.11](#Section_3.1.5.11.1.2)) **ipConfigurations** (section [3.1.5.11.2](#Section_3.1.5.11.2)) **virtualNetworks** (section [3.1.5.18](#Section_3.1.5.18)) |
 | Windows Server v1709 | v1 | All previous v1 resources |
-| - | v2 | Added v2 resource: **SubnetEgressReset** (section [3.1.5.29](#Section_3.1.5.29)) **Note** available in v1 or later. Added v2 properties to resources: **credentials** (section [3.1.5.2](#Section_6.2)) **frontendIpConfigurations** (section [3.1.5.5.3](#Section_6.5.5)) **virtualNetworks** (section 3.1.5.18) **subnets** (section [3.1.5.18.2](#Section_3.1.5.18.2)) **virtualNetworkManager** (section [3.1.5.19](#Section_3.1.5.19)) **Response Content for Errors** (section 3.1.5.35) |
+| - | v2 | Added v2 resource: **SubnetEgressReset** (section [3.1.5.29](#Section_3.1.5.29)) **Note** available in v1 or later. Added v2 properties to resources: **credentials** (section [3.1.5.2](#Section_3.1.5.2)) **frontendIpConfigurations** (section [3.1.5.5.3](#Section_3.1.5.5.3)) **virtualNetworks** (section 3.1.5.18) **subnets** (section [3.1.5.18.2](#Section_6.8.4)) **virtualNetworkManager** (section [3.1.5.19](#Section_3.1.5.19)) **Response Content for Errors** (section 3.1.5.35) |
 | Windows Server v1809 and Windows Server 2019 | v1 | All previous v1 resources |
-| - | v2 | All previous v2 resources Added v2 resource: **Resource Counters** structure (section [3.1.1.1](#Section_3.1.1.1)) Added v2 properties to resources: **frontendIPConfigurations** (section 3.1.5.5.3) **loadBalancerMuxes** (section 3.1.5.7) **networkInterfaces** (section 3.1.5.11) **publicIpAddresses** (section [3.1.5.14](#Section_6.12)) **virtualNetworkManager** (section 3.1.5.19) **networkControllerStatistics** (section [3.1.5.23](#Section_3.1.5.23)) |
+| - | v2 | All previous v2 resources Added v2 resource: **Resource Counters** structure (section [3.1.1.1](#Section_3.1.1.1)) Added v2 properties to resources: **frontendIPConfigurations** (section 3.1.5.5.3) **loadBalancerMuxes** (section 3.1.5.7) **networkInterfaces** (section 3.1.5.11) **publicIpAddresses** (section [3.1.5.14](#Section_3.1.5.14)) **virtualNetworkManager** (section 3.1.5.19) **networkControllerStatistics** (section [3.1.5.23](#Section_6.21)) |
 | - | v3 | All v1 and v2 resources can be retrieved via v3 URI even if there is no change in the data format. Added v3 resources: **virtualNetworkPeerings** (section [3.1.5.18.3](#Section_3.1.5.18.3)) **auditingSettings** (section [3.1.5.20](#Section_3.1.5.20)) **discovery** (section [3.1.5.30](#Section_3.1.5.30)) returns all supported URI versions Added v3 properties to resources: **credentials** (section 3.1.5.2) **servers** (section [3.1.5.15](#Section_3.1.5.15)) **virtualNetworks** (section 3.1.5.18) **subnets** (section 3.1.5.18.2) **Response Content for Errors** (section 3.1.5.35) |
-| June 2021 patch for Windows Server 2022 April 2022 applied to Windows 10 v1809 operating system and Windows Server 2019 | v3.1 | Updated to v3.1 property: **PortDefaultState** (section [3.1.5.26](#Section_3.1.5.26)) Added v1 property: **numInterfacesHavingQos** (section 3.1.5.26) |
-| August 2021 patch for Windows Server 2022 April 2022 applied to Windows 10 v1809 and to Windows Server 2019 | v3.2 | Updated to v3.2 property: **enableTcpReset** (section [3.1.5.5.4](#Section_3.1.5.5.4), section [3.1.5.5.5](#Section_6.5.7), and section [3.1.5.5.6](#Section_3.1.5.5.6)) |
-| Windows Server 2022 | v4 | All previous v1, v2, and v3 resources are available except the following removals, updates, and additions: Removed properties: **counters** (section [3.1.1](#Section_3.1.1)) **failedResourcesList** (section 3.1.5.27) **successfulResourcesList** (section 3.1.5.27) **inProgressResourcesList** (section 3.1.5.27) Updated v3 properties: **protocol –** added ICMPv4 and ICMPv6 (section [3.1.5.1.2](#Section_3.1.5.1.2.1)) Added v4 properties: **enableHardwareLimits** (section 3.1.5.11) Added v4 properties: **isPrimary** (section 3.1.5.11.2) |
+| June 2021 patch for Windows Server 2022 April 2022 applied to Windows 10 v1809 operating system and Windows Server 2019 | v3.1 | Updated to v3.1 property: **PortDefaultState** (section [3.1.5.26](#Section_6.24)) Added v1 property: **numInterfacesHavingQos** (section 3.1.5.26) |
+| August 2021 patch for Windows Server 2022 April 2022 applied to Windows 10 v1809 and to Windows Server 2019 | v3.2 | Updated to v3.2 property: **enableTcpReset** (section [3.1.5.5.4](#Section_3.1.5.5.4), section [3.1.5.5.5](#Section_3.1.5.5.5), and section [3.1.5.5.6](#Section_3.1.5.5.6)) |
+| Windows Server 2022 | v4 | All previous v1, v2, and v3 resources are available except the following removals, updates, and additions: Removed properties: **counters** (section [3.1.1](#Section_3.1.1)) **failedResourcesList** (section 3.1.5.27) **successfulResourcesList** (section 3.1.5.27) **inProgressResourcesList** (section 3.1.5.27) Updated v3 properties: **protocol –** added ICMPv4 and ICMPv6 (section [3.1.5.1.2](#Section_3.1.5.1.2)) Added v4 properties: **enableHardwareLimits** (section 3.1.5.11) Added v4 properties: **isPrimary** (section 3.1.5.11.2) |
 | Windows Server 2022 patch February 2023 | v4.2 | Added v4.2 property **idleTimeoutInMinutes** (section 3.1.5.5.6) Removed in version 6. |
-| Windows Server 2022, 23H2 operating system | v5 | Added v5 resources: **securityTags** (section [3.1.5.31](#Section_3.1.5.31)) **learnedIpAddresses** (section [3.1.5.32](#Section_6.32)) Added v5 properties: **destinationSecurityTags** and **sourceSecurityTags** (section 3.1.5.1.2) **securityTags** (section 3.1.5.1 and 3.1.5.11) **learnedIp** (section 3.1.5.11.2) **learnedIpAddresses** (section 3.1.5.18.2) |
-| Windows Server 2022, 23H2 | v6 | Removed v4.2 property **idleTimeoutInMinutes** (section 3.1.5.5.6) Added v6 resources: **multisite** (section [3.1.5.33](#Section_3.1.5.33)) **networkControllerSite** (section [3.1.5.33.2](#Section_3.1.5.33.2)) **multisitePrimary** (section [3.1.5.34](#Section_3.1.5.33)) Added v6 properties: **loadBalancerMuxMode** (section [3.1.5.6](#Section_6.6)) **enableMetering** (section 3.1.5.19) |
+| Windows Server 2022, 23H2 operating system | v5 | Added v5 resources: **securityTags** (section [3.1.5.31](#Section_3.1.5.31.1.4)) **learnedIpAddresses** (section [3.1.5.32](#Section_3.1.5.32)) Added v5 properties: **destinationSecurityTags** and **sourceSecurityTags** (section 3.1.5.1.2) **securityTags** (section 3.1.5.1 and 3.1.5.11) **learnedIp** (section 3.1.5.11.2) **learnedIpAddresses** (section 3.1.5.18.2) |
+| Windows Server 2022, 23H2 | v6 | Removed v4.2 property **idleTimeoutInMinutes** (section 3.1.5.5.6) Added v6 resources: **multisite** (section [3.1.5.33](#Section_3.1.5.33.1.1)) **networkControllerSite** (section [3.1.5.33.2](#Section_3.1.5.33.2)) **multisitePrimary** (section [3.1.5.34](#Section_6.30)) Added v6 properties: **loadBalancerMuxMode** (section [3.1.5.6](#Section_6.6)) **enableMetering** (section 3.1.5.19) |
 | Windows Server 2025 | v6.1 | Added v6.1 properties: type: X509CertificateSubjectName (section 3.1.5.2) value: X509CertificateSubjectName (section 3.1.5.2) |
-| Windows Server 2025 | v7 | Added v6 property: **activityState**: NA, Active, or Standby (section 3.1.5.7) Added v7 properties: **updateBackendAddressPools** (section [3.1.5.5](#Section_6.5)) **backendIPConfigurations**: Read/write - to add/remove IP configurations (section [3.1.5.5.2](#Section_6.5.4)) Error codes (section 3.1.5.35) CommonNameExtractionFailed UpdateBackendAddressPoolsNotAllowed |
+| Windows Server 2025 | v7 | Added v6 property: **activityState**: NA, Active, or Standby (section 3.1.5.7) Added v7 properties: **updateBackendAddressPools** (section [3.1.5.5](#Section_3.1.5.5)) **backendIPConfigurations**: Read/write - to add/remove IP configurations (section [3.1.5.5.2](#Section_3.1.5.5.2)) Error codes (section 3.1.5.35) CommonNameExtractionFailed UpdateBackendAddressPoolsNotAllowed |
 | Windows Server 2025 with [[MSKB-5055627]](https://go.microsoft.com/fwlink/?linkid=2313107) | v7.1 | Added v7.1 properties: **localASN4** (section 3.1.5.7) **peerASN4** (section 3.1.5.7) |
 
 <3> Section 3.1: In applicable Windows Server releases, the server does not paginate, and "nextLink" is always set to empty string ("").

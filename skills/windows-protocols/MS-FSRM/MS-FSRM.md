@@ -809,7 +809,7 @@ This document uses the following terms:
 **file screen template**: An [**FSRM object**](#gt_fsrm-object) that captures all the properties of a [**file screen**](#gt_file-screens) but is not associated with a specific [**file system**](#gt_file-system) directory. Templates are identified by a name and are used to simplify configuration of [**file screens**](#gt_file-screens). See section 3.2.1.3.3 for details.
 
 <a id="gt_file-security-descriptor"></a>
-**file security descriptor**: A data structure containing the security information associated with a securable object. See [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.3 for more information. Identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). The format of the structure is as specified in [MS-DTYP](#Section_2.2.1.1) section 2.4.6.
+**file security descriptor**: A data structure containing the security information associated with a securable object. See [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.3 for more information. Identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). The format of the structure is as specified in [MS-DTYP](#Section_2.2.2.2.1) section 2.4.6.
 
 <a id="gt_file-system"></a>
 **file system**: A set of data structures for naming, organizing, and storing files in a [**volume**](#gt_volume). [**NTFS**](#gt_nt-file-system-ntfs), FAT, and FAT32 are examples of file system types.
@@ -932,7 +932,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DCOM] Microsoft Corporation, "[Distributed Component Object Model (DCOM) Remote Protocol](../MS-DCOM/MS-DCOM.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.2.2.1)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.2.4)".
 
@@ -1063,7 +1063,7 @@ The FSRM protocol assumes that a client has obtained the name of a server that s
 
 An operating system on which an implementation of this protocol runs is required to support the dynamic enumeration of [**directory quotas**](#gt_directory-quotas), [**file screens**](#gt_file-screens), and [**report jobs**](#gt_report-jobs) that are configured on the server at run time. See sections [3.2.1.2](#Section_3.2.1.2), [3.2.1.3](#Section_3.2.1.3.1), [3.2.1.5](#Section_3.2.1.5), and [3.2.1.4](#Section_3.2.4.2.48.13), for more information about these requirements.
 
-The FSRM protocol classification functionality relies on [**COM**](#gt_component-object-model-com) servers that implement the functionality for [**classification modules**](#gt_classification-module) (section [3.2.4.2.44](#Section_3.2.4.2.44)) and [**storage modules**](#gt_storage-module) (section [3.2.4.2.47](#Section_3.2.4.2.47.2)). As a prerequisite for using these modules within FSRM, the necessary COM servers are required to be deployed and registered with the COM infrastructure.<4> See section [3.2.1.6.2](#Section_3.2.1.6.2.1) for more information about this requirement.
+The FSRM protocol classification functionality relies on [**COM**](#gt_component-object-model-com) servers that implement the functionality for [**classification modules**](#gt_classification-module) (section [3.2.4.2.44](#Section_3.2.4.2.44.4)) and [**storage modules**](#gt_storage-module) (section [3.2.4.2.47](#Section_3.2.4.2.47.1)). As a prerequisite for using these modules within FSRM, the necessary COM servers are required to be deployed and registered with the COM infrastructure.<4> See section [3.2.1.6.2](#Section_3.2.1.6.2.2) for more information about this requirement.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -1092,37 +1092,37 @@ This protocol does not define any vendor-extensible fields.
 | Parameter | Value | Reference |
 | --- | --- | --- |
 | RPC Interface UUID for [IFsrmCollection](#Section_3.2.4.2.1) | F76FBF3B-8DDD-4B42-B05A-CB1C3FF1FEE8 | None |
-| RPC Interface UUID for [IFsrmMutableCollection](#Section_3.2.4.2.27.4) | 1BB617B8-3886-49DC-AF82-A6C90FA35DDA | None |
+| RPC Interface UUID for [IFsrmMutableCollection](#Section_3.2.4.2.2.1) | 1BB617B8-3886-49DC-AF82-A6C90FA35DDA | None |
 | RPC Interface UUID for [IFsrmCommittableCollection](#Section_3.2.4.2.3) | 96DEB3B5-8B91-4A2A-9D93-80A35D8AA847 | None |
-| RPC Interface UUID for [IFsrmAction](#Section_3.2.4.2.41.5) | 6CD6408A-AE60-463B-9EF1-E117534D69DC | None |
-| RPC Interface UUID for [IFsrmActionEmail](#Section_3.2.4.2.5.5) | D646567D-26AE-4CAA-9F84-4E0AAD207FCA | None |
-| RPC Interface UUID for [IFsrmActionEmail2](#Section_3.2.4.2.6.1) | 8276702F-2532-4839-89BF-4872609A2EA4 | None |
-| RPC Interface UUID for [IFsrmActionReport](#Section_3.2.4.2.7.4) | 2DBE63C4-B340-48A0-A5B0-158E07FC567E | None |
-| RPC Interface UUID for [IFsrmActionEventLog](#Section_3.2.4.2.8.3) | 4C8F96C3-5D94-4F37-A4F4-F56AB463546F | None |
-| RPC Interface UUID for [IFsrmActionCommand](#Section_3.2.4.2.9.5) | 12937789-E247-4917-9C20-F3EE9C7EE783 | None |
-| RPC Interface UUID for [IFsrmObject](#Section_3.2.4.2.10.4) | 22BCEF93-4A3F-4183-89F9-2F8B8A628AEE | None |
+| RPC Interface UUID for [IFsrmAction](#Section_3.2.4.2.48.13) | 6CD6408A-AE60-463B-9EF1-E117534D69DC | None |
+| RPC Interface UUID for [IFsrmActionEmail](#Section_3.2.4.2.5.14) | D646567D-26AE-4CAA-9F84-4E0AAD207FCA | None |
+| RPC Interface UUID for [IFsrmActionEmail2](#Section_3.2.4.2.6) | 8276702F-2532-4839-89BF-4872609A2EA4 | None |
+| RPC Interface UUID for [IFsrmActionReport](#Section_3.2.4.2.7.3) | 2DBE63C4-B340-48A0-A5B0-158E07FC567E | None |
+| RPC Interface UUID for [IFsrmActionEventLog](#Section_3.2.4.2.8.1) | 4C8F96C3-5D94-4F37-A4F4-F56AB463546F | None |
+| RPC Interface UUID for [IFsrmActionCommand](#Section_3.2.4.2.9.7) | 12937789-E247-4917-9C20-F3EE9C7EE783 | None |
+| RPC Interface UUID for [IFsrmObject](#Section_3.2.4.2.10.2) | 22BCEF93-4A3F-4183-89F9-2F8B8A628AEE | None |
 | RPC Interface UUID for [IFsrmSetting](#Section_3.2.4.2.11) | F411D4FD-14BE-4260-8C40-03B7C95E608A | None |
 | Class ID for IFsrmSetting | F556D708-6D4D-4594-9C61-7DBB0DAE2A46 | None |
 | RPC Interface UUID for [IFsrmPathMapper](#Section_3.2.4.2.12) | 6F4DBFFF-6920-4821-A6C3-B7E94C1FD60C | None |
 | Class ID for IFsrmPathMapper | F3BE42BD-8AC2-409E-BBD8-FAF9B6B41FEB | None |
-| RPC Interface UUID for [IFsrmDerivedObjectsResult](#Section_3.2.4.2.13.1) | 39322A2D-38EE-4D0D-8095-421A80849A82 | None |
-| RPC Interface UUID for [IFsrmQuotaBase](#Section_3.2.4.2.14.4) | 1568A795-3924-4118-B74B-68D8F0FA5DAF | None |
-| RPC Interface UUID for [IFsrmQuotaObject](#Section_3.2.4.2.15) | 42DC3511-61D5-48AE-B6DC-59FC00C0A8D6 | None |
-| RPC Interface UUID for [IFsrmQuota](#Section_3.2.4.2.15) | 377F739D-9647-4B8E-97D2-5FFCE6D759CD | None |
-| RPC Interface UUID for [IFsrmAutoApplyQuota](#Section_3.2.4.2.17.2) | F82E5729-6ABA-4740-BFC7-C7F58F75FB7B | None |
-| RPC Interface UUID for [IFsrmQuotaManager](#Section_3.2.4.2.18) | 8BB68C7D-19D8-4FFB-809E-BE4FC1734014 | None |
+| RPC Interface UUID for [IFsrmDerivedObjectsResult](#Section_3.2.4.2.13.2) | 39322A2D-38EE-4D0D-8095-421A80849A82 | None |
+| RPC Interface UUID for [IFsrmQuotaBase](#Section_3.2.4.2.14.2) | 1568A795-3924-4118-B74B-68D8F0FA5DAF | None |
+| RPC Interface UUID for [IFsrmQuotaObject](#Section_3.2.4.2.15.5) | 42DC3511-61D5-48AE-B6DC-59FC00C0A8D6 | None |
+| RPC Interface UUID for [IFsrmQuota](#Section_3.2.4.2.14) | 377F739D-9647-4B8E-97D2-5FFCE6D759CD | None |
+| RPC Interface UUID for [IFsrmAutoApplyQuota](#Section_3.2.4.2.17.3) | F82E5729-6ABA-4740-BFC7-C7F58F75FB7B | None |
+| RPC Interface UUID for [IFsrmQuotaManager](#Section_3.2.4.2.19) | 8BB68C7D-19D8-4FFB-809E-BE4FC1734014 | None |
 | Class ID for IFsrmQuotaManager | 90DCAB7F-347C-4BFC-B543-540326305FBE | None |
 | RPC Interface UUID for [IFsrmQuotaManagerEx](#Section_3.2.4.2.19) | 4846CB01-D430-494F-ABB4-B1054999FB09 | None |
-| RPC Interface UUID for [IFsrmQuotaTemplate](#Section_3.2.4.2.20) | A2EFAB31-295E-46BB-B976-E86D58B52E8B | None |
+| RPC Interface UUID for [IFsrmQuotaTemplate](#Section_3.2.4.2.22) | A2EFAB31-295E-46BB-B976-E86D58B52E8B | None |
 | RPC Interface UUID for [IFsrmQuotaTemplateImported](#Section_3.2.4.2.21) | 9A2BF113-A329-44CC-809A-5C00FCE8DA40 | None |
 | RPC Interface UUID for [IFsrmQuotaTemplateManager](#Section_3.2.4.2.22) | 4173AC41-172D-4D52-963C-FDC7E415F717 | None |
 | Class ID for IFsrmQuotaTemplateManager | 97D3D443-251C-4337-81E7-B32E8F4EE65E | None |
-| RPC Interface UUID for [IFsrmFileGroup](#Section_3.2.4.2.23) | 8DD04909-0E34-4D55-AFAA-89E1F1A1BBB9 | None |
+| RPC Interface UUID for [IFsrmFileGroup](#Section_3.2.4.2.24) | 8DD04909-0E34-4D55-AFAA-89E1F1A1BBB9 | None |
 | RPC Interface UUID for [IFsrmFileGroupImported](#Section_3.2.4.2.24) | AD55F10B-5F11-4BE7-94EF-D9EE2E470DED | None |
 | RPC Interface UUID for [IFsrmFileGroupManager](#Section_3.2.4.2.25) | 426677D5-018C-485C-8A51-20B86D00BDC4 | None |
 | Class ID for IFsrmFileGroupManager | 8F1363F6-656F-4496-9226-13AECBD7718F | None |
-| RPC Interface UUID for [IFsrmFileScreenBase](#Section_3.2.4.2.26.5) | F3637E80-5B22-4A2B-A637-BBB642B41CFC | None |
-| RPC Interface UUID for [IFsrmFileScreen](#Section_3.2.4.2.32) | 5F6325D3-CE88-4733-84C1-2D6AEFC5EA07 | None |
+| RPC Interface UUID for [IFsrmFileScreenBase](#Section_3.2.4.2.26) | F3637E80-5B22-4A2B-A637-BBB642B41CFC | None |
+| RPC Interface UUID for [IFsrmFileScreen](#Section_3.2.4.2.28) | 5F6325D3-CE88-4733-84C1-2D6AEFC5EA07 | None |
 | RPC Interface UUID for [IFsrmFileScreenException](#Section_3.2.4.2.28) | BEE7CE02-DF77-4515-9389-78F01C5AFC1A | None |
 | RPC Interface UUID for [IFsrmFileScreenManager](#Section_3.2.4.2.29) | FF4FA04E-5A94-4BDA-A3A0-D5B4D3C52EBA | None |
 | Class ID for IFsrmFileScreenManager | 95941183-DB53-4C5F-B37B-7D0921CF9DC7 | None |
@@ -1133,21 +1133,21 @@ This protocol does not define any vendor-extensible fields.
 | RPC Interface UUID for [IFsrmReportManager](#Section_3.2.4.2.33) | 27B899FE-6FFA-4481-A184-D3DAADE8A02B | None |
 | Class ID for IFsrmReportManager | 0058EF37-AA66-4C48-BD5B-2FCE432AB0C8 | None |
 | RPC Interface UUID for [IFsrmReportJob](#Section_3.2.4.2.34) | 38E87280-715C-4C7D-A280-EA1651A19FEF | None |
-| RPC Interface UUID for [IFsrmReport](#Section_3.2.4.2.33) | D8CC81D9-46B8-4FA4-BFA5-4AA9DEC9B638 | None |
+| RPC Interface UUID for [IFsrmReport](#Section_3.2.4.2.35) | D8CC81D9-46B8-4FA4-BFA5-4AA9DEC9B638 | None |
 | RPC Interface UUID for [IFsrmReportScheduler](#Section_3.2.4.2.36) | 6879CAF9-6617-4484-8719-71C3D8645F94 | None |
 | Class ID for IFsrmReportScheduler | EA25F1B8-1B8D-4290-8EE8-E17C12C2FE20 | None |
 | RPC Interface UUID for [IFsrmFileManagementJobManager](#Section_3.2.4.2.50) | EE321ECB-D95E-48E9-907C-C7685A013235 | None |
 | Class ID for IFsrmFileManagementJobManager | EB18F9B2-4C3A-4321-B203-205120CFF614 | None |
-| RPC Interface UUID for [IFsrmFileManagementJob](#Section_3.2.4.2.48.8) | 0770687E-9F36-4D6F-8778-599D188461C9 | None |
-| RPC Interface UUID for [IFsrmPropertyCondition](#Section_3.2.4.2.49.7) | 326AF66F-2AC0-4F68-BF8C-4759F054FA29 | None |
-| RPC Interface UUID for [IFsrmPropertyDefinition](#Section_3.2.4.2.37.5) | EDE0150F-E9A3-419C-877C-01FE5D24C5D3 | None |
+| RPC Interface UUID for [IFsrmFileManagementJob](#Section_3.2.4.2.48.13) | 0770687E-9F36-4D6F-8778-599D188461C9 | None |
+| RPC Interface UUID for [IFsrmPropertyCondition](#Section_3.2.4.2.49) | 326AF66F-2AC0-4F68-BF8C-4759F054FA29 | None |
+| RPC Interface UUID for [IFsrmPropertyDefinition](#Section_3.2.4.2.37.7) | EDE0150F-E9A3-419C-877C-01FE5D24C5D3 | None |
 | RPC Interface UUID for [IFsrmProperty](#Section_3.2.4.2.40.1) | 4A73FEE4-4102-4FCC-9FFB-38614F9EE768 | None |
 | RPC Interface UUID for [IFsrmRule](#Section_3.2.4.2.41) | CB0DF960-16F5-4495-9079-3F9360D831DF | None |
-| RPC Interface UUID for [IFsrmClassificationRule](#Section_3.2.4.2.42.4) | AFC052C2-5315-45AB-841B-C6DB0E120148 | None |
+| RPC Interface UUID for [IFsrmClassificationRule](#Section_3.2.4.2.42.6) | AFC052C2-5315-45AB-841B-C6DB0E120148 | None |
 | RPC Interface UUID for [IFsrmPipelineModuleDefinition](#Section_3.2.4.2.43) | 515C1277-2C81-440E-8FCF-367921ED4F59 | None |
-| RPC Interface UUID for [IFsrmClassifierModuleDefinition](#Section_3.2.4.2.44) | BB36EA26-6318-4B8C-8592-F72DD602E7A5 | None |
+| RPC Interface UUID for [IFsrmClassifierModuleDefinition](#Section_3.2.4.2.44.4) | BB36EA26-6318-4B8C-8592-F72DD602E7A5 | None |
 | RPC Interface UUID for [IFsrmStorageModuleDefinition](#Section_3.2.4.2.47) | 15A81350-497D-4ABA-80E9-D4DBCC5521FE | None |
-| Class ID for [IFsrmClassificationManager](#Section_3.2.4.2.45.12) | B15C0E47-C391-45B9-95C8-EB596C853F3A | None |
+| Class ID for [IFsrmClassificationManager](#Section_3.2.4.2.45.20) | B15C0E47-C391-45B9-95C8-EB596C853F3A | None |
 | RPC Interface UUID for IFsrmClassificationManager | D2DC89DA-EE91-48A0-85D8-CC72A56F7D04 | None |
 
 <a id="Section_2"></a>
@@ -1167,7 +1167,7 @@ The RPC version number for all interfaces is 5.0.
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
 
-The FSRM protocol references commonly used data types as defined in [MS-DTYP](#Section_2.2.1.1), in addition to [**RPC**](#gt_remote-procedure-call-rpc) base types and definitions specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-RPCE](../MS-RPCE/MS-RPCE.md). Protocol-specific data types are defined in this section.
+The FSRM protocol references commonly used data types as defined in [MS-DTYP](#Section_2.2.2.2.1), in addition to [**RPC**](#gt_remote-procedure-call-rpc) base types and definitions specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-RPCE](../MS-RPCE/MS-RPCE.md). Protocol-specific data types are defined in this section.
 
 The following table summarizes the types that are defined in this specification.<9>
 
@@ -1186,7 +1186,7 @@ This section describes the data types, enumerations, and structures used in this
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Data Types
 
-The following data types are specified in [MS-DTYP](#Section_2.2.1.1):
+The following data types are specified in [MS-DTYP](#Section_2.2.2.2.1):
 
 - BSTR
 - DWORD
@@ -1204,7 +1204,7 @@ The following data types are specified in this document:
 <a id="Section_2.2.1.1.1"></a>
 ##### 2.2.1.1.1 FSRM_OBJECT_ID
 
-The FSRM_OBJECT_ID data type defines the [**FSRM object**](#gt_fsrm-object) identifier (ID) as a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid), as defined in [MS-DTYP](#Section_2.2.1.1) sections 2.3.4, 2.3.4.2, and 2.3.4.3, for FSRM storage objects.
+The FSRM_OBJECT_ID data type defines the [**FSRM object**](#gt_fsrm-object) identifier (ID) as a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid), as defined in [MS-DTYP](#Section_2.2.2.2.1) sections 2.3.4, 2.3.4.2, and 2.3.4.3, for FSRM storage objects.
 
 This type is declared as follows:
 
@@ -1837,7 +1837,7 @@ The File Server Resource Manager Protocol uses the VARIANT structure as specifie
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 IFsrmActionEventLog Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmActionEventLog** interface (section [3.2.4.2.8](#Section_3.2.4.2.8.3)).
+This section lists data types that are used exclusively by methods in the **IFsrmActionEventLog** interface (section [3.2.4.2.8](#Section_3.2.4.2.8.1)).
 
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 Enumerations
@@ -1872,7 +1872,7 @@ FsrmEventType_Error = 3
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 IFsrmAutoApplyQuota Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmAutoApplyQuota** interface (section [3.2.4.2.17](#Section_3.2.4.2.17.2)).
+This section lists data types that are used exclusively by methods in the **IFsrmAutoApplyQuota** interface (section [3.2.4.2.17](#Section_3.2.4.2.17.3)).
 
 <a id="Section_2.2.2.2.1"></a>
 ##### 2.2.2.2.1 Data Types
@@ -1889,7 +1889,7 @@ typedef ULONG FsrmMaxExcludeFolders;
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 IFsrmPropertyDefinition Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmPropertyDefinition** interface (section [3.2.4.2.37](#Section_3.2.4.2.37.5)).
+This section lists data types that are used exclusively by methods in the **IFsrmPropertyDefinition** interface (section [3.2.4.2.37](#Section_3.2.4.2.37.7)).
 
 <a id="Section_2.2.2.3.1"></a>
 ##### 2.2.2.3.1 Enumerations
@@ -1944,7 +1944,7 @@ FsrmPropertyDefinitionType_Date = 8
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 IFsrmPropertyDefinition2 Data Types
 
-This section lists data types that are used exclusively by methods in the interface IFsrmPropertyDefinition2 (section [3.2.4.2.38](#Section_3.2.4.2.38.4)).<19>
+This section lists data types that are used exclusively by methods in the interface IFsrmPropertyDefinition2 (section [3.2.4.2.38](#Section_3.2.4.2.38)).<19>
 
 <a id="Section_2.2.2.4.1"></a>
 ##### 2.2.2.4.1 Enumerations
@@ -1994,7 +1994,7 @@ FsrmPropertyDefinitionAppliesTo_Folders = 0x00000002
 <a id="Section_2.2.2.5"></a>
 #### 2.2.2.5 IFsrmClassificationRule Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmClassificationRule** interface (section [3.2.4.2.42](#Section_3.2.4.2.42.4)).
+This section lists data types that are used exclusively by methods in the **IFsrmClassificationRule** interface (section [3.2.4.2.42](#Section_3.2.4.2.42.6)).
 
 <a id="Section_2.2.2.5.1"></a>
 ##### 2.2.2.5.1 Enumerations
@@ -2141,7 +2141,7 @@ FsrmPropertyFlags_PropertySourceMask = 0x0000000E
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 IFsrmClassificationManager Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.12)).
+This section lists data types that are used exclusively by methods in the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.20)).
 
 <a id="Section_2.2.2.7.1"></a>
 ##### 2.2.2.7.1 Enumerations
@@ -2180,7 +2180,7 @@ FsrmClassificationLoggingFlags_ErrorsInSystemLog = 0x00000008
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 IFsrmStorageModuleDefinition Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmStorageModuleDefinition** interface (section [3.2.4.2.47](#Section_3.2.4.2.47.2)).
+This section lists data types that are used exclusively by methods in the **IFsrmStorageModuleDefinition** interface (section [3.2.4.2.47](#Section_3.2.4.2.47.1)).
 
 <a id="Section_2.2.2.8.1"></a>
 ##### 2.2.2.8.1 Enumerations
@@ -2250,7 +2250,7 @@ FsrmStorageModuleType_System = 0x00000064
 <a id="Section_2.2.2.9"></a>
 #### 2.2.2.9 IFsrmFileManagementJob Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmFileManagementJob** interface (section [3.2.4.2.48](#Section_3.2.4.2.48.8)).
+This section lists data types that are used exclusively by methods in the **IFsrmFileManagementJob** interface (section [3.2.4.2.48](#Section_3.2.4.2.48.13)).
 
 <a id="Section_2.2.2.9.1"></a>
 ##### 2.2.2.9.1 Enumerations
@@ -2312,7 +2312,7 @@ FsrmFileManagementLoggingFlags_Audit = 0x00000004
 <a id="Section_2.2.2.10"></a>
 #### 2.2.2.10 IFsrmPropertyCondition Data Types
 
-This section lists data types that are used exclusively by methods in the **IFsrmPropertyCondition** interface (section [3.2.4.2.49](#Section_3.2.4.2.49.7)).
+This section lists data types that are used exclusively by methods in the **IFsrmPropertyCondition** interface (section [3.2.4.2.49](#Section_3.2.4.2.49)).
 
 <a id="Section_2.2.2.10.1"></a>
 ##### 2.2.2.10.1 Enumerations
@@ -2400,7 +2400,7 @@ Export and import XML documents MUST adhere to the [**XML schema (XSD)**](#gt_xm
 
 This section specifies the following common data types used in the FSRM [**XML schema**](#gt_xml-schema):
 
-- Standard Data Types (section [2.2.3.1.1](#Section_2.2.3.1.1))
+- Standard Data Types (section [2.2.3.1.1](#Section_2.2.2.3.1.1))
 - guidType Simple Type (section [2.2.3.1.2](#Section_2.2.3.1.2))
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 Standard Data Types
@@ -3294,14 +3294,14 @@ A client initializes by creating an [**RPC**](#gt_remote-procedure-call-rpc) bin
 
 - [IFsrmSetting](#Section_3.2.4.2.11): Create an RPC binding handle to IFsrmSetting to manage service settings, such as email settings and run limit intervals for actions.
 - [IFsrmPathMapper](#Section_3.2.4.2.12): Create an RPC binding handle to IFsrmPathMapper to get network shares for local paths.
-- [IFsrmQuotaManager](#Section_3.2.4.2.18): Create an RPC binding handle to IFsrmQuotaManager to manage quota objects.
+- [IFsrmQuotaManager](#Section_3.2.4.2.19): Create an RPC binding handle to IFsrmQuotaManager to manage quota objects.
 - [IFsrmQuotaTemplateManager](#Section_3.2.4.2.22): Create an RPC binding handle to IFsrmQuotaTemplateManager to manage quota templates.
 - [IFsrmFileGroupManager](#Section_3.2.4.2.25): Create an RPC binding handle to IFsrmFileGroupManager to manage file groups.
 - [IFsrmFileScreenManager](#Section_3.2.4.2.29): Create an RPC binding handle to IFsrmFileScreenManager to manage file screens and file screen exceptions.
 - [IFsrmFileScreenTemplateManager](#Section_3.2.4.2.32): Create an RPC binding handle to IFsrmFileScreenTemplateManager to manage file screen templates.
 - [IFsrmReportManager](#Section_3.2.4.2.33): Create an RPC binding handle to IFsrmReportManager to manage reports and report jobs.
 - [IFsrmReportScheduler](#Section_3.2.4.2.36): Create an RPC binding handle to IFsrmReportScheduler to manage scheduled tasks for report jobs.
-- [IFsrmClassificationManager](#Section_3.2.4.2.45.12): Create an RPC binding handle to IFsrmClassificationManager to manage property definitions, module definitions, and rules and also to get and set properties on an individual file.
+- [IFsrmClassificationManager](#Section_3.2.4.2.45.20): Create an RPC binding handle to IFsrmClassificationManager to manage property definitions, module definitions, and rules and also to get and set properties on an individual file.
 - [IFsrmFileManagementJobManager](#Section_3.2.4.2.50): Create an RPC binding handle to IFsrmFileManagementJobManager to manage file management jobs.
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Message Processing Events and Sequencing Rules
@@ -3320,13 +3320,13 @@ Some FSRM method calls require no prerequisite calls against the server and simp
 
 The following describes the hierarchy of interfaces and objects used by the File Server Resource Manager Protocol and the relationships between those objects.
 
-**Service and Quotas:** The first interface obtained by the client is the [IFsrmQuotaManager](#Section_3.2.4.2.18) interface (section 3.2.4.2.18). The client invokes the [IFsrmQuotaManager::CreateQuota](#Section_f8d6798fa4e447c695f164032c569536) method (section 3.2.4.2.18.3) to create a quota on a directory on a volume. The server MUST respond with an [IFsrmQuota](#Section_3.2.4.2.15) interface (section 3.2.4.2.16) on which the client can call methods to configure the quota. The client invokes the [IFsrmQuotaManager::GetQuota](#Section_062f4e34857344e2b1ff464b4cc7fb6b) method (section 3.2.4.2.18.5) to get a quota for a directory on a volume. The server MUST respond with an IFsrmQuota interface (section 3.2.4.2.16) on which the client can call methods to configure the quota. The client invokes the IFsrmQuotaManager::EnumQuotas (section [3.2.4.2.18.8](#Section_3.2.4.2.18.8)) or **IFsrmQuotaManager::EnumXXXQuotas** method, where *XXX* is a placeholder for "Effective" or "AutoApply", to get an enumeration of quotas. The server MUST respond with an [IFsrmCommittableCollection](#Section_3.2.4.2.3) interface (section 3.2.4.2.3) that enumerates a list of IFsrmQuota interfaces, one for each quota that matches the parameters of the **IFsrmQuotaManager::EnumXXXQuotas** call.
+**Service and Quotas:** The first interface obtained by the client is the [IFsrmQuotaManager](#Section_3.2.4.2.19) interface (section 3.2.4.2.18). The client invokes the [IFsrmQuotaManager::CreateQuota](#Section_f8d6798fa4e447c695f164032c569536) method (section 3.2.4.2.18.3) to create a quota on a directory on a volume. The server MUST respond with an [IFsrmQuota](#Section_3.2.4.2.14) interface (section 3.2.4.2.16) on which the client can call methods to configure the quota. The client invokes the [IFsrmQuotaManager::GetQuota](#Section_062f4e34857344e2b1ff464b4cc7fb6b) method (section 3.2.4.2.18.5) to get a quota for a directory on a volume. The server MUST respond with an IFsrmQuota interface (section 3.2.4.2.16) on which the client can call methods to configure the quota. The client invokes the IFsrmQuotaManager::EnumQuotas (section [3.2.4.2.18.8](#Section_3.2.4.2.18.8)) or **IFsrmQuotaManager::EnumXXXQuotas** method, where *XXX* is a placeholder for "Effective" or "AutoApply", to get an enumeration of quotas. The server MUST respond with an [IFsrmCommittableCollection](#Section_3.2.4.2.3) interface (section 3.2.4.2.3) that enumerates a list of IFsrmQuota interfaces, one for each quota that matches the parameters of the **IFsrmQuotaManager::EnumXXXQuotas** call.
 
-**Service and Quota Templates:** The first interface obtained by the client is the [IFsrmQuotaTemplateManager](#Section_3.2.4.2.22) interface (section 3.2.4.2.22). The client invokes the [IFsrmQuotaTemplateManager::CreateTemplate](#Section_fa6c15b6233b48829086ba1aae78ca62) method (section 3.2.4.2.22.1) to create a quota template. The server MUST respond with an [IFsrmQuotaTemplate](#Section_3.2.4.2.20) interface (section 3.2.4.2.20) on which the client can call methods to configure the quota template. The client invokes the [IFsrmQuotaTemplateManager::GetTemplate](#Section_a65d5b44112e4baba91692ae37fb63bf) method (section 3.2.4.2.22.2) to get a quota template with a specific name. The server MUST respond with an IFsrmQuotaTemplate interface on which the client can call methods to configure the quota template. The client invokes the [IFsrmQuotaTemplateManager::EnumTemplates](#Section_a8977a161bdb4af29f02d3474950cf9f) method (section 3.2.4.2.22.3) to get an enumeration of quota templates. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmQuotaTemplate interfaces, one for each quota template on the server.
+**Service and Quota Templates:** The first interface obtained by the client is the [IFsrmQuotaTemplateManager](#Section_3.2.4.2.22) interface (section 3.2.4.2.22). The client invokes the [IFsrmQuotaTemplateManager::CreateTemplate](#Section_fa6c15b6233b48829086ba1aae78ca62) method (section 3.2.4.2.22.1) to create a quota template. The server MUST respond with an [IFsrmQuotaTemplate](#Section_3.2.4.2.22) interface (section 3.2.4.2.20) on which the client can call methods to configure the quota template. The client invokes the [IFsrmQuotaTemplateManager::GetTemplate](#Section_a65d5b44112e4baba91692ae37fb63bf) method (section 3.2.4.2.22.2) to get a quota template with a specific name. The server MUST respond with an IFsrmQuotaTemplate interface on which the client can call methods to configure the quota template. The client invokes the [IFsrmQuotaTemplateManager::EnumTemplates](#Section_a8977a161bdb4af29f02d3474950cf9f) method (section 3.2.4.2.22.3) to get an enumeration of quota templates. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmQuotaTemplate interfaces, one for each quota template on the server.
 
-**Service and File Groups:** The first interface obtained by the client is the [IFsrmFileGroupManager](#Section_3.2.4.2.25) interface (section 3.2.4.2.25). The client invokes the [IFsrmFileGroupManager::CreateFileGroup](#Section_5389a349e2284c08947489f90fb4d98a) method (section 3.2.4.2.25.1) to create a file group. The server MUST respond with an [IFsrmFileGroup](#Section_3.2.4.2.23) interface (section 3.2.4.2.23) on which the client can call methods to configure the file group. The client invokes the [IFsrmFileGroupManager::GetFileGroup](#Section_680eb944ffd84ea3b92a4b3419ba638d) method (section 3.2.4.2.25.2) to get a file group with a specific name. The server MUST respond with an IFsrmFileGroup interface on which the client can call methods to configure the file group. The client invokes the [IFsrmFileGroupManager::EnumFileGroups](#Section_84dd5f166417490c85bd7cf462f9f704) method (section 3.2.4.2.25.3) to get an enumeration of file groups. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmFileGroup interfaces, one for each file group on the server.
+**Service and File Groups:** The first interface obtained by the client is the [IFsrmFileGroupManager](#Section_3.2.4.2.25) interface (section 3.2.4.2.25). The client invokes the [IFsrmFileGroupManager::CreateFileGroup](#Section_5389a349e2284c08947489f90fb4d98a) method (section 3.2.4.2.25.1) to create a file group. The server MUST respond with an [IFsrmFileGroup](#Section_3.2.4.2.24) interface (section 3.2.4.2.23) on which the client can call methods to configure the file group. The client invokes the [IFsrmFileGroupManager::GetFileGroup](#Section_680eb944ffd84ea3b92a4b3419ba638d) method (section 3.2.4.2.25.2) to get a file group with a specific name. The server MUST respond with an IFsrmFileGroup interface on which the client can call methods to configure the file group. The client invokes the [IFsrmFileGroupManager::EnumFileGroups](#Section_84dd5f166417490c85bd7cf462f9f704) method (section 3.2.4.2.25.3) to get an enumeration of file groups. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmFileGroup interfaces, one for each file group on the server.
 
-**Service and File Screens:** The first interface obtained by the client is the [IFsrmFileScreenManager](#Section_3.2.4.2.29) interface (section 3.2.4.2.29). The client invokes the [IFsrmFileScreenManager::CreateFileScreen](#Section_c30e460d04a040bd9fd703eca10e0cd2) method (section 3.2.4.2.29.3) to create a file screen. The server MUST respond with an [IFsrmFileScreen](#Section_3.2.4.2.32) interface (section 3.2.4.2.27) on which the client can call methods to configure the file screen. The client invokes the [IFsrmFileScreenManager::GetFileScreen](#Section_bc92d68761a343c0a95e22e683dc137b) method (section 3.2.4.2.11.1) to get a file screen with a specific name. The server MUST respond with an IFsrmFileScreen interface on which the client can call methods to configure the file screen. The client invokes the [IFsrmFileScreenManager::EnumFileScreens](#Section_fd9e9214125146a8b439c57487dfe266) method (section 3.2.4.2.29.5) to get an enumeration of file screens. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmFileScreen interfaces, one for each file screen that matches the parameters of the EnumFileScreens call.
+**Service and File Screens:** The first interface obtained by the client is the [IFsrmFileScreenManager](#Section_3.2.4.2.29) interface (section 3.2.4.2.29). The client invokes the [IFsrmFileScreenManager::CreateFileScreen](#Section_c30e460d04a040bd9fd703eca10e0cd2) method (section 3.2.4.2.29.3) to create a file screen. The server MUST respond with an [IFsrmFileScreen](#Section_3.2.4.2.28) interface (section 3.2.4.2.27) on which the client can call methods to configure the file screen. The client invokes the [IFsrmFileScreenManager::GetFileScreen](#Section_bc92d68761a343c0a95e22e683dc137b) method (section 3.2.4.2.11.1) to get a file screen with a specific name. The server MUST respond with an IFsrmFileScreen interface on which the client can call methods to configure the file screen. The client invokes the [IFsrmFileScreenManager::EnumFileScreens](#Section_fd9e9214125146a8b439c57487dfe266) method (section 3.2.4.2.29.5) to get an enumeration of file screens. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmFileScreen interfaces, one for each file screen that matches the parameters of the EnumFileScreens call.
 
 **Service and File Screen Exceptions:** The first interface obtained by the client is the IFsrmFileScreenManager interface. The client invokes the [IFsrmFileScreenManager::CreateFileScreenException](#Section_77d7a3fa88b549eaa88671411e5b0ab2) method (section 3.2.4.2.29.6) to create a file screen exception. The server MUST respond with an [IFsrmFileScreenException](#Section_3.2.4.2.28) interface (section 3.2.4.2.28) on which the client can call methods to configure the file screen exception. The client invokes the [IFsrmFileScreenManager::GetFileScreenException](#Section_c594e9fa2f4b4e3b98a7b68442ba019d) method (section 3.2.4.2.29.7) to get a file screen exception with a specific name. The server MUST respond with an IFsrmFileScreenException interface on which the client can call methods to configure the file screen exception. The client invokes the [IFsrmFileScreenManager::EnumFileScreenExceptions](#Section_69f69afec00f4f6da9211e5d671e465f) method (section 3.2.4.2.29.8) to get an enumeration of file screen exceptions. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmFileScreenException interfaces, one for each file screen exception that matches the parameters of the EnumFileScreenExceptions call.
 
@@ -3334,13 +3334,13 @@ The following describes the hierarchy of interfaces and objects used by the File
 
 **Service and Report Jobs:** The first interface obtained by the client is the [IFsrmReportManager](#Section_3.2.4.2.33) interface (section 3.2.4.2.33). The client invokes the [IFsrmReportManager::CreateReportJob](#Section_c16d5b167d9340a7b7f3222fad915695) method (section 3.2.4.2.33.2) to create a report job. The server MUST respond with an [IFsrmReportJob](#Section_3.2.4.2.34) interface (section 3.2.4.2.34) on which the client can call methods to configure the report job. The client invokes the [IFsrmReportManager::GetReportJob](#Section_c9bcd39987c546779a825cac9da967e8) method (section 3.2.4.2.33.3) to get a report job with a specific name. The server MUST respond with an IFsrmReportJob interface on which the client can call methods to configure the report job. The client invokes the [IFsrmReportManager::EnumReportJobs](#Section_d907cfd6b796484f9ca215be8b4a0385) method (section 3.2.4.2.33.1) to get an enumeration of report jobs. The server MUST respond with an IFsrmCommittableCollection interface that enumerates a list of IFsrmReportJob interfaces, one for each report job on the server.
 
-**Service and Property Definitions:** The first interface obtained by the client is the [IFsrmClassificationManager](#Section_3.2.4.2.45.12) interface (section 3.2.4.2.45). The client invokes the [IFsrmClassificationManager::CreatePropertyDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.13) to create a property definition. The server MUST respond with an IFsrmPropertyDefinition (section [3.2.4.2.37](#Section_3.2.4.2.37.5)) interface (section 3.2.4.2.37) on which the client can call methods to configure the property definition. The client invokes the [IFsrmClassificationManager::GetPropertyDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.14) to get a property definition with a specific name. The server MUST respond with an IFsrmPropertyDefinition interface on which the client can call methods to configure the property definition. The client invokes the [IFsrmClassificationManager:: EnumPropertyDefinitions](#Section_3.2.4.2.45) method (section 3.2.4.2.45.12) to get an enumeration of property definitions. The server MUST respond with an [IFsrmCollection](#Section_3.2.4.2.1) interface (section 3.2.4.2.1) that enumerates a list of IFsrmPropertyDefinition interfaces, one for each property definition on the server.
+**Service and Property Definitions:** The first interface obtained by the client is the [IFsrmClassificationManager](#Section_3.2.4.2.45.20) interface (section 3.2.4.2.45). The client invokes the [IFsrmClassificationManager::CreatePropertyDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.13) to create a property definition. The server MUST respond with an IFsrmPropertyDefinition (section [3.2.4.2.37](#Section_3.2.4.2.37.7)) interface (section 3.2.4.2.37) on which the client can call methods to configure the property definition. The client invokes the [IFsrmClassificationManager::GetPropertyDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.14) to get a property definition with a specific name. The server MUST respond with an IFsrmPropertyDefinition interface on which the client can call methods to configure the property definition. The client invokes the [IFsrmClassificationManager:: EnumPropertyDefinitions](#Section_3.2.4.2.45) method (section 3.2.4.2.45.12) to get an enumeration of property definitions. The server MUST respond with an [IFsrmCollection](#Section_3.2.4.2.1) interface (section 3.2.4.2.1) that enumerates a list of IFsrmPropertyDefinition interfaces, one for each property definition on the server.
 
 **Service and Module Definitions:** The first interface obtained by the client is the IFsrmClassificationManager interface. The client invokes the [IFsrmClassificationManager::CreateModuleDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.19) to create a module definition. The server MUST respond with an [IFsrmPipelineModuleDefinition](#Section_3.2.4.2.43) interface (section 3.2.4.2.43) on which the client can call methods to configure the module definition. The client invokes the [IFsrmClassificationManager::GetModuleDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.20) to get a module definition with a specific name. The server MUST respond with an **IFsrmPipelineModuleDefinition** interface on which the client can call methods to configure the module definition. The client invokes the [IFsrmClassificationManager::EnumModuleDefinitions](#Section_3.2.4.2.45) method (section 3.2.4.2.45.18) to get an enumeration of module definitions. The server MUST respond with an IFsrmCollection interface that enumerates a list of **IFsrmPipelineModuleDefinition** interfaces, one for each module definition on the server.
 
 **Service and Rules:** The first interface obtained by the client is the IFsrmClassificationManager interface. The client invokes the [IFsrmClassificationManager::CreateRule](#Section_3.2.4.2.45) method (section 3.2.4.2.45.16) to create a rule. The server MUST respond with an [IFsrmRule](#Section_3.2.4.2.41) interface (section 3.2.4.2.41) on which the client can call methods to configure the rule. The client invokes the [IFsrmClassificationManager::GetRule](#Section_3.2.4.2.45) method (section 3.2.4.2.45.17) to get a rule with a specific name. The server MUST respond with an IFsrmRule interface on which the client can call methods to configure the rule. The client invokes the [IFsrmClassificationManager::EnumRules](#Section_3.2.4.2.45) method (section 3.2.4.2.45.15) to get an enumeration of rules. The server MUST respond with an IFsrmCollection interface that enumerates a list of IFsrmRule interfaces, one for each rule on the server.
 
-**Service and File Management Jobs:** The first interface obtained by the client is the IFsrmFileManagementJobManager (section [3.2.4.2.50](#Section_3.2.4.2.50)) interface (section 3.2.4.2.50). The client invokes the [IFsrmFileManagementJobManager::CreateFileManagementJob](#Section_3.2.4.2.50) method (section 3.2.4.2.50.2) to create a file management job. The server MUST respond with an [IFsrmFileManagementJob](#Section_3.2.4.2.48.8) interface (section 3.2.4.2.48) on which the client can call methods to configure the file management job. The client invokes the [IFsrmFileManagementJobManager::GetFileManagementJob](#Section_3.2.4.2.50) method (section 3.2.4.2.50.3) to get a file management job with a specific name. The server MUST respond with an IFsrmFileManagementJob interface (section 3.2.4.2.48) on which the client can call methods to configure the file management job. The client invokes the [IFsrmFileManagementJobManager::EnumFileManagementJobs](#Section_3.2.4.2.50) method (section 3.2.4.2.50.1) to get an enumeration of file management jobs. The server MUST respond with an IFsrmCollection interface (section 3.2.4.2.1) that enumerates a list of IFsrmFileManagementJob interfaces (section 3.2.4.2.48), one for each file management job on the server.
+**Service and File Management Jobs:** The first interface obtained by the client is the IFsrmFileManagementJobManager (section [3.2.4.2.50](#Section_3.2.4.2.50)) interface (section 3.2.4.2.50). The client invokes the [IFsrmFileManagementJobManager::CreateFileManagementJob](#Section_3.2.4.2.48) method (section 3.2.4.2.50.2) to create a file management job. The server MUST respond with an [IFsrmFileManagementJob](#Section_3.2.4.2.48.13) interface (section 3.2.4.2.48) on which the client can call methods to configure the file management job. The client invokes the [IFsrmFileManagementJobManager::GetFileManagementJob](#Section_3.2.4.2.48) method (section 3.2.4.2.50.3) to get a file management job with a specific name. The server MUST respond with an IFsrmFileManagementJob interface (section 3.2.4.2.48) on which the client can call methods to configure the file management job. The client invokes the [IFsrmFileManagementJobManager::EnumFileManagementJobs](#Section_3.2.4.2.48) method (section 3.2.4.2.50.1) to get an enumeration of file management jobs. The server MUST respond with an IFsrmCollection interface (section 3.2.4.2.1) that enumerates a list of IFsrmFileManagementJob interfaces (section 3.2.4.2.48), one for each file management job on the server.
 
 <a id="Section_3.1.4.1.2"></a>
 ##### 3.1.4.1.2 Quota Objects
@@ -3355,16 +3355,16 @@ The following describes the hierarchy of interfaces and objects used by the File
 
 [IFsrmQuotaObject::ApplyTemplate](#Section_b45d561734b0407191e822536d30eeb3)**:** Prior to invoking the ApplyTemplate (section 3.2.4.2.15.7) method, the client calls the [IFsrmQuotaTemplateManager::EnumTemplates](#Section_a8977a161bdb4af29f02d3474950cf9f) method (section 3.2.4.2.22.3). The server MUST respond with a collection of quota templates. The client calls the IFsrmQuotaTemplate::Name (get) (section [3.2.4.2.20.3](#Section_3.2.4.2.20.3)) method. The server MUST return the name of the quota template. The client MUST pass the name of the template returned from Name (get) as the *quotaTemplateName* input parameter to ApplyTemplate.
 
-[IFsrmQuota::Commit](#Section_3.2.4.2.10.4)**:** The Commit (section 3.2.4.2.10) method is inherited from [IFsrmObject::Commit (section 3.2.4.2.10.5)](#Section_3.2.4.2.10.5). Before calling this method on an [IFsrmQuota (section 3.2.4.2.16)](#Section_3.2.4.2.15) interface returned from the [IFsrmQuotaManager::CreateQuota](#Section_f8d6798fa4e447c695f164032c569536) method (section 3.2.4.2.18.3), the client MUST call the [IFsrmQuota::QuotaLimit (put) (section 3.2.4.2.14.3)](#Section_3.2.4.2.14.3) method (section 3.2.4.2.14.3) with a valid quota limit.
+[IFsrmQuota::Commit](#Section_3.2.4.2.10.2)**:** The Commit (section 3.2.4.2.10) method is inherited from [IFsrmObject::Commit (section 3.2.4.2.10.5)](#Section_3.2.4.2.10.5). Before calling this method on an [IFsrmQuota (section 3.2.4.2.16)](#Section_3.2.4.2.14) interface returned from the [IFsrmQuotaManager::CreateQuota](#Section_f8d6798fa4e447c695f164032c569536) method (section 3.2.4.2.18.3), the client MUST call the [IFsrmQuota::QuotaLimit (put) (section 3.2.4.2.14.3)](#Section_3.2.4.2.14.3) method (section 3.2.4.2.14.3) with a valid quota limit.
 
 [IFsrmQuotaTemplate::CopyTemplate](#Section_cd22c1154f804d6289ba33c6a54cd334)**:** The CopyTemplate (section 3.2.4.2.20.5) method has the same call sequence description as IFsrmQuotaObject::ApplyTemplate.
 
-[IFsrmQuotaTemplate::Commit](#Section_80c6675ef3fa479b844223c546064bbb)**:** The Commit (section 3.2.4.2.20.1) method is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmQuotaTemplate](#Section_3.2.4.2.20) interface (section 3.2.4.2.20) returned from the [IFsrmQuotaTemplateManager::CreateTemplate](#Section_fa6c15b6233b48829086ba1aae78ca62) method (section 3.2.4.2.22.1), the client MUST call IFsrmQuotaTemplate::QuotaLimit (put) (section 3.2.4.2.14.3) with a valid quota limit.
+[IFsrmQuotaTemplate::Commit](#Section_80c6675ef3fa479b844223c546064bbb)**:** The Commit (section 3.2.4.2.20.1) method is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmQuotaTemplate](#Section_3.2.4.2.22) interface (section 3.2.4.2.20) returned from the [IFsrmQuotaTemplateManager::CreateTemplate](#Section_fa6c15b6233b48829086ba1aae78ca62) method (section 3.2.4.2.22.1), the client MUST call IFsrmQuotaTemplate::QuotaLimit (put) (section 3.2.4.2.14.3) with a valid quota limit.
 
 <a id="Section_3.1.4.1.3"></a>
 ##### 3.1.4.1.3 File Screen Objects
 
-[IFsrmFileGroup::Commit](#Section_db47481008b9419682ed04d379a3654f)**:** The Commit method (section 3.2.4.2.23.1) is inherited from the [IFsrmObject::Commit](#Section_3.2.4.2.10.5) method (section 3.2.4.2.10.5). Before calling this method on an [IFsrmFileGroup](#Section_3.2.4.2.23) interface (section 3.2.4.2.23) returned from the [IFsrmFileGroupManager::CreateFileGroup](#Section_5389a349e2284c08947489f90fb4d98a) method (section 3.2.4.2.25.1), the client MUST call the [IFsrmFileGroup::Name (put) (section 3.2.4.2.23.3)](#Section_3.2.4.2.23.3) and [IFsrmFileGroup::Members (put) (section 3.2.4.2.23.5)](#Section_3.2.4.2.23.5) methods with valid values for each call.
+[IFsrmFileGroup::Commit](#Section_db47481008b9419682ed04d379a3654f)**:** The Commit method (section 3.2.4.2.23.1) is inherited from the [IFsrmObject::Commit](#Section_3.2.4.2.10.5) method (section 3.2.4.2.10.5). Before calling this method on an [IFsrmFileGroup](#Section_3.2.4.2.24) interface (section 3.2.4.2.23) returned from the [IFsrmFileGroupManager::CreateFileGroup](#Section_5389a349e2284c08947489f90fb4d98a) method (section 3.2.4.2.25.1), the client MUST call the [IFsrmFileGroup::Name (put) (section 3.2.4.2.23.3)](#Section_3.2.4.2.23.3) and [IFsrmFileGroup::Members (put) (section 3.2.4.2.23.5)](#Section_3.2.4.2.23.5) methods with valid values for each call.
 
 [IFsrmFileScreenBase::BlockedFileGroups (put)](#Section_3.2.4.2.26.2)**:** Prior to invoking the BlockedFileGroups (put) method (section 3.2.4.2.26.2), the client calls the [IFsrmFileGroupManager::EnumFileGroups](#Section_84dd5f166417490c85bd7cf462f9f704) method (section 3.2.4.2.25.3). The server MUST respond with a collection of file groups. The client calls the [IFsrmFileGroup::Name (get)](#Section_3.2.4.2.23.2) method (server 3.2.4.2.23.2). The server MUST return the name of the file group. The client builds a SAFEARRAY by using the names of the file groups returned from Name (get) as the *blockedFileGroups* input parameter to BlockedFileGroups (put) (section 3.2.4.2.26.2).
 
@@ -3372,7 +3372,7 @@ The following describes the hierarchy of interfaces and objects used by the File
 
 [IFsrmFileScreenException::AllowedFileGroups (put)](#Section_3.2.4.2.28.4)**:** The AllowedFileGroups (put) (section 3.2.4.2.28.4) method has the same call sequence description as IFsrmFileScreenBase::BlockedFileGroups (put).
 
-[IFsrmFileScreen::Commit](#Section_4c8f4ba6bc5743f5ac0bddfda0b36982)**:** The Commit method (section 3.2.4.2.27.1) is inherited from the IFsrmObject::Commit method. Before calling this method on an [IFsrmFileScreen](#Section_3.2.4.2.32) interface (section 3.2.4.2.27) returned from the [IFsrmFileScreenManager::CreateFileScreen](#Section_c30e460d04a040bd9fd703eca10e0cd2) method (section 3.2.4.2.29.3), the client MUST call the IFsrmFileScreenBase::BlockedFileGroups (put) method (section 3.2.4.2.26.2) with a valid collection of file groups.
+[IFsrmFileScreen::Commit](#Section_4c8f4ba6bc5743f5ac0bddfda0b36982)**:** The Commit method (section 3.2.4.2.27.1) is inherited from the IFsrmObject::Commit method. Before calling this method on an [IFsrmFileScreen](#Section_3.2.4.2.28) interface (section 3.2.4.2.27) returned from the [IFsrmFileScreenManager::CreateFileScreen](#Section_c30e460d04a040bd9fd703eca10e0cd2) method (section 3.2.4.2.29.3), the client MUST call the IFsrmFileScreenBase::BlockedFileGroups (put) method (section 3.2.4.2.26.2) with a valid collection of file groups.
 
 [IFsrmFileScreenException::Commit](#Section_9565283135284d318bdcd0745ec94007)**:** The Commit method (section 3.2.4.2.28.1) is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmFileScreenException](#Section_3.2.4.2.28) interface (section 3.2.4.2.28) returned from the [IFsrmFileScreenManager::CreateFileScreenException](#Section_77d7a3fa88b549eaa88671411e5b0ab2) method (section 3.2.4.2.29.6), the client MUST call the IFsrmFileScreenException::AllowedFileGroups (put) (section 3.2.4.2.28.4) method with a valid collection of file groups.
 
@@ -3383,20 +3383,20 @@ The following describes the hierarchy of interfaces and objects used by the File
 <a id="Section_3.1.4.1.4"></a>
 ##### 3.1.4.1.4 Storage Report Objects
 
-**Report Jobs and Reports:** The client MUST first get an [IFsrmReportJob](#Section_3.2.4.2.34) interface (section 3.2.4.2.34) by using the relationship specified in section [3.1.4.1.1](#Section_3.1.4.1.1) under *"Service and Report Jobs".* The client invokes the [IFsrmReportJob::CreateReport](#Section_3.2.4.2.34.15) method (section 3.2.4.2.34.15) to create a report. The server MUST respond with an [IFsrmReport](#Section_3.2.4.2.33) interface (section 3.2.4.2.35) on which the client can call methods to configure the report. The client invokes the [IFsrmReportJob::EnumReports](#Section_3.2.4.2.34.14) method (section 3.2.4.2.34.14) to get an enumeration of reports. The server MUST respond with an [IFsrmCollection](#Section_3.2.4.2.1) interface (section 3.2.4.2.1) that enumerates a list of IFsrmReport interfaces, one for each report configured for the report job.
+**Report Jobs and Reports:** The client MUST first get an [IFsrmReportJob](#Section_3.2.4.2.34) interface (section 3.2.4.2.34) by using the relationship specified in section [3.1.4.1.1](#Section_3.1.4.1.1) under *"Service and Report Jobs".* The client invokes the [IFsrmReportJob::CreateReport](#Section_3.2.4.2.34.15) method (section 3.2.4.2.34.15) to create a report. The server MUST respond with an [IFsrmReport](#Section_3.2.4.2.35) interface (section 3.2.4.2.35) on which the client can call methods to configure the report. The client invokes the [IFsrmReportJob::EnumReports](#Section_3.2.4.2.34.14) method (section 3.2.4.2.34.14) to get an enumeration of reports. The server MUST respond with an [IFsrmCollection](#Section_3.2.4.2.1) interface (section 3.2.4.2.1) that enumerates a list of IFsrmReport interfaces, one for each report configured for the report job.
 
 [IFsrmReportJob::Commit](#Section_2d4215d667074240ad793d41029d711a)**:** The Commit method (section 3.2.4.2.34.1) is inherited from the [IFsrmObject::Commit](#Section_3.2.4.2.10.5) method (section 3.2.4.2.10.5). Before calling this method on an IFsrmReportJob interface returned from [IFsrmReportManager::CreateReportJob (section 3.2.4.2.33.2)](#Section_3.2.4.2.33.2), the client MUST call the [IFsrmReportJob::NamespaceRoots (put) (section 3.2.4.2.34.5)](#Section_3.2.4.2.34.5), [IFsrmReportJob::Task (put) (section 3.2.4.2.34.3)](#Section_3.2.4.2.34.3), and IFsrmReportJob::CreateReport methods with valid values for each method.
 
 <a id="Section_3.1.4.1.5"></a>
 ##### 3.1.4.1.5 Classification Objects
 
-[IFsrmPropertyDefinition::Commit](#Section_3.2.4.2.37)**:** The Commit method (section 3.2.4.2.37.1) is inherited from the [IFsrmObject::Commit](#Section_3.2.4.2.10.5) method (section 3.2.4.2.10.5). Before calling this method on an [IFsrmPropertyDefinition](#Section_3.2.4.2.37.5) interface (section 3.2.4.2.37) returned from the [IFsrmClassificationManager::CreatePropertyDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.13), the client MUST call the [IFsrmPropertyDefinition::Name (put) (section 3.2.4.2.37.3)](#Section_3.2.4.2.37) and [IFsrmPropertyDefinition::Type (put) (section 3.2.4.2.37.5)](#Section_3.2.4.2.37) methods, and MAY call the [IFsrmPropertyDefinition::PossibleValues (put)](#Section_3.2.4.2.37) method (section 3.2.4.2.37.7), with valid values for each method.
+[IFsrmPropertyDefinition::Commit](#Section_3.2.4.2.40)**:** The Commit method (section 3.2.4.2.37.1) is inherited from the [IFsrmObject::Commit](#Section_3.2.4.2.10.5) method (section 3.2.4.2.10.5). Before calling this method on an [IFsrmPropertyDefinition](#Section_3.2.4.2.37.7) interface (section 3.2.4.2.37) returned from the [IFsrmClassificationManager::CreatePropertyDefinition](#Section_3.2.4.2.45) method (section 3.2.4.2.45.13), the client MUST call the [IFsrmPropertyDefinition::Name (put) (section 3.2.4.2.37.3)](#Section_3.2.4.2.40) and [IFsrmPropertyDefinition::Type (put) (section 3.2.4.2.37.5)](#Section_3.2.4.2.40) methods, and MAY call the [IFsrmPropertyDefinition::PossibleValues (put)](#Section_3.2.4.2.40) method (section 3.2.4.2.37.7), with valid values for each method.
 
-[IFsrmClassificationRule::Commit](#Section_3.2.4.2.42)**:** The Commit (section 3.2.4.2.42.1) method is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmClassificationRule](#Section_3.2.4.2.42.4) interface (section 3.2.4.2.42) returned from the [IFsrmClassificationManager::CreateRule](#Section_3.2.4.2.45) method (section 3.2.4.2.45.16), the client MUST call the [IFsrmRule::NamespaceRoots (put) (section 3.2.4.2.41.7)](#Section_3.2.4.2.41), [IFsrmRule::Name (put) (section 3.2.4.2.41.2)](#Section_3.2.4.2.41), [IFsrmRule::ModuleDefinitionName (put) (section 3.2.4.2.41.5)](#Section_3.2.4.2.41), and [IFsrmClassificationRule::PropertyAffected (put) (section 3.2.4.2.42.5)](#Section_3.2.4.2.42) methods. The client MAY call the [IFsrmClassificationRule::Value (put)](#Section_3.2.4.2.42) method (section 3.2.4.2.42.7) with valid values for each method.
+[IFsrmClassificationRule::Commit](#Section_3.2.4.2.42)**:** The Commit (section 3.2.4.2.42.1) method is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmClassificationRule](#Section_3.2.4.2.42.6) interface (section 3.2.4.2.42) returned from the [IFsrmClassificationManager::CreateRule](#Section_3.2.4.2.45) method (section 3.2.4.2.45.16), the client MUST call the [IFsrmRule::NamespaceRoots (put) (section 3.2.4.2.41.7)](#Section_3.2.4.2.41), [IFsrmRule::Name (put) (section 3.2.4.2.41.2)](#Section_3.2.4.2.41), [IFsrmRule::ModuleDefinitionName (put) (section 3.2.4.2.41.5)](#Section_3.2.4.2.41), and [IFsrmClassificationRule::PropertyAffected (put) (section 3.2.4.2.42.5)](#Section_3.2.4.2.42) methods. The client MAY call the [IFsrmClassificationRule::Value (put)](#Section_3.2.4.2.42) method (section 3.2.4.2.42.7) with valid values for each method.
 
-[IFsrmClassifierModuleDefinition::Commit](#Section_3.2.4.2.44)**:** The Commit method (section 3.2.4.2.44.1) is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmClassifierModuleDefinition](#Section_3.2.4.2.44) interface 3.2.4.2.44 returned from the [IFsrmClassificationManager::CreateModuleDefinition](#Section_3.2.4.2.45) method, the client MUST call the [IFsrmPipelineModuleDefinition::Name (put) (section 3.2.4.2.43.4)](#Section_3.2.4.2.43), and [IFsrmPipelineModuleDefinition::ModuleClsid (put) (section 3.2.4.2.43.2)](#Section_3.2.4.2.43) methods with valid values for each method.
+[IFsrmClassifierModuleDefinition::Commit](#Section_3.2.4.2.44)**:** The Commit method (section 3.2.4.2.44.1) is inherited from IFsrmObject::Commit. Before calling this method on an [IFsrmClassifierModuleDefinition](#Section_3.2.4.2.44.4) interface 3.2.4.2.44 returned from the [IFsrmClassificationManager::CreateModuleDefinition](#Section_3.2.4.2.45) method, the client MUST call the [IFsrmPipelineModuleDefinition::Name (put) (section 3.2.4.2.43.4)](#Section_3.2.4.2.43), and [IFsrmPipelineModuleDefinition::ModuleClsid (put) (section 3.2.4.2.43.2)](#Section_3.2.4.2.43) methods with valid values for each method.
 
-[IFsrmStorageModuleDefinition::Commit](#Section_3.2.4.2.47)**:** The Commit method (section 3.2.4.2.47.1) is inherited from IFsrmObject::Commit.<22> Before calling this method on an [IFsrmStorageModuleDefinition](#Section_3.2.4.2.47.2) interface (section 3.2.4.2.47) returned from the IFsrmClassificationManager::CreateModuleDefinition method, the client MUST call the IFsrmPipelineModuleDefinition::Name (put), IFsrmPipelineModuleDefinition::ModuleClsid (put), [IFsrmStorageModuleDefinition::Capabilities (put) (section 3.2.4.2.47.3)](#Section_3.2.4.2.47), and [IFsrmStorageModuleDefinition::StorageType (put) (section 3.2.4.2.47.5)](#Section_3.2.4.2.47) methods with valid values for each method.
+[IFsrmStorageModuleDefinition::Commit](#Section_3.2.4.2.47)**:** The Commit method (section 3.2.4.2.47.1) is inherited from IFsrmObject::Commit.<22> Before calling this method on an [IFsrmStorageModuleDefinition](#Section_3.2.4.2.47.1) interface (section 3.2.4.2.47) returned from the IFsrmClassificationManager::CreateModuleDefinition method, the client MUST call the IFsrmPipelineModuleDefinition::Name (put), IFsrmPipelineModuleDefinition::ModuleClsid (put), [IFsrmStorageModuleDefinition::Capabilities (put) (section 3.2.4.2.47.3)](#Section_3.2.4.2.47), and [IFsrmStorageModuleDefinition::StorageType (put) (section 3.2.4.2.47.5)](#Section_3.2.4.2.47) methods with valid values for each method.
 
 <a id="Section_3.1.4.1.6"></a>
 ##### 3.1.4.1.6 File Management Job Objects
@@ -3409,7 +3409,7 @@ The following describes the hierarchy of interfaces and objects used by the File
 
 [IFsrmFileManagementJob::EnumNotificationActions](#Section_3.2.4.2.48)**:** The EnumNotificationActions method (section 3.2.4.2.48.48) has the same call sequence description as IFsrmFileManagementJob::DeleteNotification.
 
-[IFsrmFileManagementJob::Commit](#Section_3.2.4.2.48)**:** The Commit method (section 3.2.4.2.48.1) is inherited from [IFsrmObject::Commit (section 3.2.4.2.10)](#Section_3.2.4.2.10.4). Before calling this method on an [IFsrmFileManagementJob](#Section_3.2.4.2.48.8) interface returned from the [IFsrmFileManagementJobManager::CreateFileManagementJob](#Section_3.2.4.2.50) method (section 3.2.4.2.50.2), the client MUST call the [IFsrmFileManagementJob::Name (put) (section 3.2.4.2.48.3)](#Section_3.2.4.2.48), [IFsrmFileManagementJob::NamespaceRoots (put) (section 3.2.4.2.48.5)](#Section_3.2.4.2.48) and [IFsrmFileManagementJob::Formats (put) (section 3.2.4.2.48.19)](#Section_3.2.4.2.48) methods, and MAY call the [IFsrmFileManagementJob::ExpirationDirectory (put) (section 3.2.4.2.48.11)](#Section_3.2.4.2.48) or [IFsrmFileManagementJob::CreateCustomAction (section 3.2.4.2.48.50)](#Section_3.2.4.2.48) methods, with valid values for each method.
+[IFsrmFileManagementJob::Commit](#Section_3.2.4.2.48)**:** The Commit method (section 3.2.4.2.48.1) is inherited from [IFsrmObject::Commit (section 3.2.4.2.10)](#Section_3.2.4.2.10.2). Before calling this method on an [IFsrmFileManagementJob](#Section_3.2.4.2.48.13) interface returned from the [IFsrmFileManagementJobManager::CreateFileManagementJob](#Section_3.2.4.2.48) method (section 3.2.4.2.50.2), the client MUST call the [IFsrmFileManagementJob::Name (put) (section 3.2.4.2.48.3)](#Section_3.2.4.2.48), [IFsrmFileManagementJob::NamespaceRoots (put) (section 3.2.4.2.48.5)](#Section_3.2.4.2.48) and [IFsrmFileManagementJob::Formats (put) (section 3.2.4.2.48.19)](#Section_3.2.4.2.48) methods, and MAY call the [IFsrmFileManagementJob::ExpirationDirectory (put) (section 3.2.4.2.48.11)](#Section_3.2.4.2.48) or [IFsrmFileManagementJob::CreateCustomAction (section 3.2.4.2.48.50)](#Section_3.2.4.2.48) methods, with valid values for each method.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Processing Notifications Sent from the Server to the Client
@@ -3446,7 +3446,7 @@ A server implementing the FSRM protocol maintains the persistent configuration o
 - [Report jobs (section 3.2.1.5.1)](#Section_3.2.1.5.1)
 - [Reports (section 3.2.1.5.2)](#Section_3.2.1.5.2)
 - [Property definitions (section 3.2.1.6.1)](#Section_3.2.1.6.1)
-- [Module definitions (section 3.2.1.6.2)](#Section_3.2.1.6.2.1)
+- [Module definitions (section 3.2.1.6.2)](#Section_3.2.1.6.2.2)
 - [Rules (section 3.2.1.6.3)](#Section_3.2.1.6.3)
 - [File management jobs (section 3.2.1.7.1)](#Section_3.2.1.7.1)
 A server implementation also maintains some volatile status data and tracks all relevant file system I/O necessary to maintain accurate quota accounting and file screen prohibitions. In addition to maintaining configuration and state for the objects mentioned earlier, a server implementation also provides a set of interfaces for enumerating collections of objects and an abstraction for manipulating action objects, which are used in quotas, file screens, and file management jobs.
@@ -3457,7 +3457,7 @@ With four exceptions, the abstract data model can be manipulated only through th
 - Folder creation, where the folder's parent folder has auto apply quota configured;
 - Folder rename, where the folder has a quota, file screen, or file screen exception configured;
 - Volume discovery, where the volume contains folders that have quotas, file screens, or file screen exceptions configured.
-These exceptions are discussed in more detail in section [3.2.7](#Section_3.2.7).
+These exceptions are discussed in more detail in section [3.2.7](#Section_3.1.6).
 
 The abstract model that the server maintains is not made available directly through the protocol. The protocol is an OLE Automation style [**DCOM**](#gt_distributed-component-object-model-dcom) protocol, as specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md). With this type of protocol, the server maintains an implementation of the abstract data model and provides access to the model strictly through GET and SET operations on standard Automation data types (BSTR, **long**, SAFEARRAY, IDispatch, and so on) and [**RPC**](#gt_remote-procedure-call-rpc) methods where the method parameter types are restricted to the same set of standard Automation data types. The result of the OLE Automation style interface is that the wire protocol is restricted to standard RPC method calls using only standard data types; no custom-marshaled data structures are possible on the wire with OLE Automation DCOM protocols. See [MS-OAUT] for details on OLE Automation and the standard OLE data types used by the FSRM protocol.
 
@@ -3477,7 +3477,7 @@ The server maintains the following object used by multiple models:
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 FSRM Base Object
 
-The FRSM Base Object is an ADM element used for all objects used by the functional areas of the FSRM protocol feature set defined in the [Abstract Data Model (section 3.2.1)](#Section_3.1.1). Objects used by each functional area of the FSRM protocol derive from this ADM element.
+The FRSM Base Object is an ADM element used for all objects used by the functional areas of the FSRM protocol feature set defined in the [Abstract Data Model (section 3.2.1)](#Section_3.2.1). Objects used by each functional area of the FSRM protocol derive from this ADM element.
 
 The following configuration data is maintained by the server for each FSRM Base Object on the system.
 
@@ -3495,7 +3495,7 @@ The following is the list of objects used by the functional areas which derive f
 - [File Group (section 3.2.1.3.4)](#Section_3.2.1.3.4)
 - [Report Job (section 3.2.1.5.1)](#Section_3.2.1.5.1)
 - [Property Definition (section 3.2.1.6.1)](#Section_3.2.1.6.1)
-- [Module Definition (section 3.2.1.6.2)](#Section_3.2.1.6.2.1)
+- [Module Definition (section 3.2.1.6.2)](#Section_3.2.1.6.2.2)
 - [Rule (section 3.2.1.6.3)](#Section_3.2.1.6.3)
 - [File Management Job (section 3.2.1.7.1)](#Section_3.2.1.7.1)
 <a id="Section_3.2.1.2"></a>
@@ -3505,22 +3505,22 @@ The server maintains the following lists of persisted objects for the quota mode
 
 **List of Persisted Directory Quotas:** This is a volatile list of all the [Persisted Directory Quotas (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) configured on the server. The server maintains only one **List of Persisted Directory Quotas**.
 
-**List of Persisted Auto Apply Quotas:** This is a volatile list of all the [Persisted Auto Apply Quotas (section 3.2.1.2.2.1)](#Section_3.2.1.2.2) configured on the server. The server maintains only one **List of Persisted Auto Apply Quotas**.
+**List of Persisted Auto Apply Quotas:** This is a volatile list of all the [Persisted Auto Apply Quotas (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1) configured on the server. The server maintains only one **List of Persisted Auto Apply Quotas**.
 
 **List of Persisted Directory Quota Templates:** This is a volatile list of all the [Persisted Directory Quota Templates (section 3.2.1.2.3.1)](#Section_3.2.1.2.3.1) configured on the server. The server maintains only one **List of Persisted Directory Quota Templates**.
 
 The server maintains the following lists of non-persisted objects for the quota model. Lists of non-persisted objects contain copies of the objects from the lists of persisted objects. The non-persisted objects are used by clients to make changes that are propagated to the lists of persisted objects when the client commits the non-persisted objects.
 
-**List of Non-Persisted Directory Quota Instances:** This is a volatile list of [Non-Persisted Directory Quota Instances (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.1) configured on the server. The server maintains zero or more **List of Non-Persisted Directory Quota Instances**.
+**List of Non-Persisted Directory Quota Instances:** This is a volatile list of [Non-Persisted Directory Quota Instances (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.2) configured on the server. The server maintains zero or more **List of Non-Persisted Directory Quota Instances**.
 
-**List of Non-Persisted Auto Apply Quota Instances:** This is a volatile list of [Non-Persisted Auto Apply Quota Instances (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.1) configured on the server. The server maintains zero or more **List of Non-Persisted Auto Apply Quota Instances**.
+**List of Non-Persisted Auto Apply Quota Instances:** This is a volatile list of [Non-Persisted Auto Apply Quota Instances (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.2) configured on the server. The server maintains zero or more **List of Non-Persisted Auto Apply Quota Instances**.
 
 **List of Non-Persisted Directory Quota Template Instances:** This is a volatile list of [Non-Persisted Directory Quota Template Instances (section 3.2.1.2.3.2)](#Section_3.2.1.2.3.1) configured on the server. The server maintains zero or more **List of Non-Persisted Directory Quota Template Instances**.
 
 <a id="Section_3.2.1.2.1"></a>
 ##### 3.2.1.2.1 Directory Quotas
 
-For each [**directory quota**](#gt_directory-quotas), a minimal set of configuration and state properties is maintained by the server. The configuration of a directory quota consists of all of the information required to define the quota, and the state consists of the properties that are tracked in real time to maintain, enforce, and report on quota usage. A directory quota configuration is maintained only for objects with a path on a [**volume**](#gt_volume) in the **Volume List** (section [3.2.1](#Section_3.1.1)).
+For each [**directory quota**](#gt_directory-quotas), a minimal set of configuration and state properties is maintained by the server. The configuration of a directory quota consists of all of the information required to define the quota, and the state consists of the properties that are tracked in real time to maintain, enforce, and report on quota usage. A directory quota configuration is maintained only for objects with a path on a [**volume**](#gt_volume) in the **Volume List** (section [3.2.1](#Section_3.2.1)).
 
 A Directory Quota is a type of [FSRM Base Object (section 3.2.1.1)](#Section_3.2.1.1) that has all the properties and state of a FSRM Base Object. The following configuration data is maintained for each directory quota on the system.
 
@@ -3542,7 +3542,7 @@ A Directory Quota is a type of [FSRM Base Object (section 3.2.1.1)](#Section_3
 
 - Create a notification for a specific **threshold**. See section [3.2.4.2.14.10](#Section_3.2.4.2.14.10) for more details.
 - Enumerate a list of all the notifications for a specific **threshold**. See section [3.2.4.2.14.11](#Section_3.2.4.2.14.11) for more details.
-- Change the configuration data of a notification for a specific threshold. For details, see sections [3.2.4.2.5](#Section_3.2.4.2.5.5), [3.2.4.2.6](#Section_3.2.4.2.6.1), [3.2.4.2.7](#Section_3.2.4.2.7.4), [3.2.4.2.8](#Section_3.2.4.2.8.3), and [3.2.4.2.9](#Section_3.2.4.2.9.5).
+- Change the configuration data of a notification for a specific threshold. For details, see sections [3.2.4.2.5](#Section_3.2.4.2.5.14), [3.2.4.2.6](#Section_3.2.4.2.6), [3.2.4.2.7](#Section_3.2.4.2.7.3), [3.2.4.2.8](#Section_3.2.4.2.8.1), and [3.2.4.2.9](#Section_3.2.4.2.9.7).
 - Delete a notification for a specific **threshold**. See section [3.2.4.2.4.5](#Section_3.2.4.2.4.5) for more details.
 - Change the **Notification status** for a **notification** for a specific **threshold** whenever required. See section [3.2.4.2.14.9](#Section_3.2.4.2.14.9) for more details.
 **Template id:** If the quota configuration was copied from a quota template, this property is the ID of the **directory quota template** that the quota configuration was copied from.
@@ -3588,7 +3588,7 @@ A protocol client can perform the following management operations involving Non-
 <a id="Section_3.2.1.2.2"></a>
 ##### 3.2.1.2.2 Auto Apply Quotas
 
-For each [**auto apply quota**](#gt_auto-apply-quota), a minimal set of configuration properties is maintained by the server. An auto apply quota is similar to a [**directory quota**](#gt_directory-quotas) in terms of the abstract data model maintained by the server implementation; however, the behavior is fundamentally different. A directory quota configuration is applied to a particular folder; an auto apply quota configuration results in the application of directory quota configurations to the subfolders of the folder on which the auto apply quota is configured. An auto apply quota configuration is maintained only for objects with paths on a [**volume**](#gt_volume) in the **Volume List** (section [3.2.1](#Section_3.1.1)).
+For each [**auto apply quota**](#gt_auto-apply-quota), a minimal set of configuration properties is maintained by the server. An auto apply quota is similar to a [**directory quota**](#gt_directory-quotas) in terms of the abstract data model maintained by the server implementation; however, the behavior is fundamentally different. A directory quota configuration is applied to a particular folder; an auto apply quota configuration results in the application of directory quota configurations to the subfolders of the folder on which the auto apply quota is configured. An auto apply quota configuration is maintained only for objects with paths on a [**volume**](#gt_volume) in the **Volume List** (section [3.2.1](#Section_3.2.1)).
 
 There is no state data for an auto apply quota. With the exception of the **Auto apply quota id**, the configuration data of an auto apply quota is the same as that is specified for a directory quota (section [3.2.1.2.1](#Section_3.2.1.2.1)), with the following addition:
 
@@ -3606,7 +3606,7 @@ A protocol client can perform the following management operations involving Pers
 <a id="Section_3.2.1.2.2.2"></a>
 ###### 3.2.1.2.2.2 Non-Persisted Auto Apply Quota Instance
 
-A **Non-Persisted Auto Apply Quota Instance** is a type of [Auto Apply Quota (section 3.2.1.2.2)](#Section_3.2.1.2.2), which has all the properties of an [**auto apply quota**](#gt_auto-apply-quota). A Non-Persisted Auto Apply Quota Instance is a copy, in memory, of an instance of a [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2), and it is used by a client to make changes to that Persisted Auto Apply Quota. Changes, including deletion, that are made to a Non-Persisted Auto Apply Quota Instance are either discarded after use or applied to the associated Persisted Auto Apply Quota. There can be zero or more Non-Persisted Auto Apply Quota Instances for each Persisted Auto Apply Quota.
+A **Non-Persisted Auto Apply Quota Instance** is a type of [Auto Apply Quota (section 3.2.1.2.2)](#Section_3.2.1.2.2), which has all the properties of an [**auto apply quota**](#gt_auto-apply-quota). A Non-Persisted Auto Apply Quota Instance is a copy, in memory, of an instance of a [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1), and it is used by a client to make changes to that Persisted Auto Apply Quota. Changes, including deletion, that are made to a Non-Persisted Auto Apply Quota Instance are either discarded after use or applied to the associated Persisted Auto Apply Quota. There can be zero or more Non-Persisted Auto Apply Quota Instances for each Persisted Auto Apply Quota.
 
 A protocol client can perform the following management operations involving Non-Persisted Auto Apply Quota Instances:
 
@@ -3661,26 +3661,26 @@ The server maintains the following lists of persisted objects for the [**file sc
 
 **List of Persisted File Screens:** This is a volatile list of all the [Persisted File Screens (section 3.2.1.3.1.1)](#Section_3.2.1.3.1.1) configured on the server. The server maintains only one **List of Persisted File Screens**.
 
-**List of Persisted File Screen Exceptions:** This is a volatile list of all the [Persisted File Screen Exceptions (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1) configured on the server. The server maintains only one **List of Persisted File Screen Exceptions**.
+**List of Persisted File Screen Exceptions:** This is a volatile list of all the [Persisted File Screen Exceptions (section 3.2.1.3.2.1)](#Section_3.2.1.3.2) configured on the server. The server maintains only one **List of Persisted File Screen Exceptions**.
 
 **List of Persisted File Screen Templates:** This is a volatile list of all the [Persisted File Screen Templates (section 3.2.1.3.3.1)](#Section_3.2.1.3.1.1) configured on the server. The server maintains only one **List of Persisted File Screen Templates**.
 
-**List of Persisted File Groups:** This is a volatile list of all the [Persisted File Groups (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1) configured on the server. The server maintains only one **List of Persisted File Groups**.
+**List of Persisted File Groups:** This is a volatile list of all the [Persisted File Groups (section 3.2.1.3.4.1)](#Section_3.2.1.3.4) configured on the server. The server maintains only one **List of Persisted File Groups**.
 
 The server maintains the following lists of non-persisted objects for the file screen model. Lists of non-persisted objects contain copies of the objects from the lists of persisted objects. The non-persisted objects are used by clients to make changes that are propagated to the lists of persisted objects when the client commits the non-persisted objects.
 
 **List of Non-persisted File Screen Instances:** This is a volatile list of all the [Non-Persisted File Screen Instances (section 3.2.1.3.1.2)](#Section_3.2.1.3.1.1) configured on the server. The server maintains zero or more **List of Non-Persisted File Screen Instances**.
 
-**List of Non-persisted File Screen Exception Instances:** This is a volatile list of all the [Non-Persisted File Screen Exception Instances (section 3.2.1.3.2.2)](#Section_3.2.1.3.1.1) configured on the server. The server maintains zero or more **List of Non-Persisted File Screen Exception Instances**.
+**List of Non-persisted File Screen Exception Instances:** This is a volatile list of all the [Non-Persisted File Screen Exception Instances (section 3.2.1.3.2.2)](#Section_3.2.1.3.2.1) configured on the server. The server maintains zero or more **List of Non-Persisted File Screen Exception Instances**.
 
 **List of Non-persisted File Screen Template Instance:** This is a volatile list of all the [Non-Persisted File Screen Template Instances (section 3.2.1.3.3.2)](#Section_3.2.1.3.1.1) configured on the server. The server maintains zero or more **List of Non-Persisted File Screen Template Instances**.
 
-**List of Non-Persisted File Group Instance:** This is a volatile list of all the [Non-Persisted File Group Instances (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1) configured on the server. The server maintains zero or more **List of Non-Persisted File Group Instances**.
+**List of Non-Persisted File Group Instance:** This is a volatile list of all the [Non-Persisted File Group Instances (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2) configured on the server. The server maintains zero or more **List of Non-Persisted File Group Instances**.
 
 <a id="Section_3.2.1.3.1"></a>
 ##### 3.2.1.3.1 File Screens
 
-For each [**file screen**](#gt_file-screens), a minimal set of configuration properties is maintained by the server. The configuration of a file screen consists of all of the information required to define the file screen. A file screen configuration is maintained only for objects with a path on a [**volume**](#gt_volume) in the **Volume List** (section [3.2.1](#Section_3.1.1)).
+For each [**file screen**](#gt_file-screens), a minimal set of configuration properties is maintained by the server. The configuration of a file screen consists of all of the information required to define the file screen. A file screen configuration is maintained only for objects with a path on a [**volume**](#gt_volume) in the **Volume List** (section [3.2.1](#Section_3.2.1)).
 
 A File Screen is a type of [FSRM Base Object (section 3.2.1.1)](#Section_3.2.1.1) that has all the properties and state of a FSRM Base Object. The following configuration data is maintained for each file screen on the system.
 
@@ -3695,7 +3695,7 @@ A File Screen is a type of [FSRM Base Object (section 3.2.1.1)](#Section_3.2.1
 **Notifications (Actions):** The file screen can be associated with between zero and four actions that apply if the file screen is violated. A file screen can be associated with at most one notification of each of the four distinct FSRM notification types. See section [3.2.1.4](#Section_3.2.4.2.48.13) for more information. A protocol client can perform the following management operations involving file screen notifications:
 
 - Create a notification. See section [3.2.4.2.26.5](#Section_3.2.4.2.26.5) for details.
-- Change the configuration data of notification for a file screen. See sections [3.2.4.2.5](#Section_3.2.4.2.5.5), [3.2.4.2.6](#Section_3.2.4.2.6.1), [3.2.4.2.7](#Section_3.2.4.2.7.4), [3.2.4.2.8](#Section_3.2.4.2.8.3), and [3.2.4.2.9](#Section_3.2.4.2.9.5) for details.
+- Change the configuration data of notification for a file screen. See sections [3.2.4.2.5](#Section_3.2.4.2.5.14), [3.2.4.2.6](#Section_3.2.4.2.6), [3.2.4.2.7](#Section_3.2.4.2.7.3), [3.2.4.2.8](#Section_3.2.4.2.8.1), and [3.2.4.2.9](#Section_3.2.4.2.9.7) for details.
 - Enumerate a list of all the notifications. See section [3.2.4.2.26.6](#Section_3.2.4.2.26.6) for details.
 - Delete a notification. See section [3.2.4.2.4.5](#Section_3.2.4.2.4.5) for details.
 **File screen mode:** This property controls the behavior of the file screen when a prohibited file is detected. There are two modes available:
@@ -3764,7 +3764,7 @@ A protocol client can perform the following management operations involving Pers
 <a id="Section_3.2.1.3.2.2"></a>
 ###### 3.2.1.3.2.2 Non-Persisted File Screen Exception Instance
 
-A **Non-Persisted File Screen Exception Instance** is a type of [File Screen Exception (section 3.2.1.3.2)](#Section_3.2.1.3.2), which has all the properties of a [**file screen exception**](#gt_file-screen-exception). A Non-Persisted File Screen Exception Instance is a copy, in memory, of an instance of a [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1), and it is used by a client to make changes to that Persisted File Screen Exception. Changes, including deletion, that are made to a Non-Persisted File Screen Exception Instance are either discarded after use or applied to the associated persisted file screen. There can be zero or more Non-Persisted File Screen Exception Instances for each Persisted File Screen Exception.
+A **Non-Persisted File Screen Exception Instance** is a type of [File Screen Exception (section 3.2.1.3.2)](#Section_3.2.1.3.2), which has all the properties of a [**file screen exception**](#gt_file-screen-exception). A Non-Persisted File Screen Exception Instance is a copy, in memory, of an instance of a [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.2), and it is used by a client to make changes to that Persisted File Screen Exception. Changes, including deletion, that are made to a Non-Persisted File Screen Exception Instance are either discarded after use or applied to the associated persisted file screen. There can be zero or more Non-Persisted File Screen Exception Instances for each Persisted File Screen Exception.
 
 A protocol client can perform the following management operations involving Non-Persisted File Screen Exception Instances:
 
@@ -3841,7 +3841,7 @@ A protocol client can perform the following management operations involving Pers
 <a id="Section_3.2.1.3.4.2"></a>
 ###### 3.2.1.3.4.2 Non-Persisted File Group Instance
 
-A **Non-Persisted File Group Instance** is a type of [File Group (section 3.2.1.3.4)](#Section_3.2.1.3.4), which has all the properties of a [**file group**](#gt_file-group). A Non-Persisted File Group Instance is a copy, in memory, of an instance of a [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1), and it is used by a client to make changes to that Persisted File Group. Changes, including deletion, that are made to a Non-Persisted File Group Instance are either discarded after use or applied to the associated persisted file screen. There can be zero or more Non-Persisted File Group Instances for each Persisted File Group.
+A **Non-Persisted File Group Instance** is a type of [File Group (section 3.2.1.3.4)](#Section_3.2.1.3.4), which has all the properties of a [**file group**](#gt_file-group). A Non-Persisted File Group Instance is a copy, in memory, of an instance of a [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4), and it is used by a client to make changes to that Persisted File Group. Changes, including deletion, that are made to a Non-Persisted File Group Instance are either discarded after use or applied to the associated persisted file screen. There can be zero or more Non-Persisted File Group Instances for each Persisted File Group.
 
 A protocol client can perform the following management operations involving Non-Persisted File Group Instances:
 
@@ -4066,17 +4066,17 @@ The server maintains the following lists of persisted objects for the classifica
 
 **List of Persisted Property Definitions:** This is a volatile list of all the [Persisted Property Definitions (section 3.2.1.6.1.1)](#Section_3.2.1.6.1.1) configured on the server. The server maintains only one **List of Persisted Property Definitions**.
 
-**List of Persisted Module Definitions:** This is a volatile list of all the [Persisted Module Definitions (section 3.2.1.6.2.1)](#Section_3.2.1.6.2.1) configured on the server. The server maintains only one **List of Persisted Module Definitions**.
+**List of Persisted Module Definitions:** This is a volatile list of all the [Persisted Module Definitions (section 3.2.1.6.2.1)](#Section_3.2.1.6.2) configured on the server. The server maintains only one **List of Persisted Module Definitions**.
 
 **List of Persisted Rules:** This is a volatile list of all the [Persisted Rules (section 3.2.1.6.3.1)](#Section_3.2.1.6.3.1) configured on the server. The server maintains only one **List of Persisted Rules**.
 
 The server maintains the following lists of non-persisted objects for the classification model. Lists of non-persisted objects contain copies of the objects from the lists of persisted objects. The non-persisted objects are used by clients to make changes that are propagated to the lists of persisted objects when the client commits the non-persisted objects.
 
-**List of Non-Persisted Property Definition Instances:** This is a volatile list of all the [Non-Persisted Property Definition Instances (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1) configured on the server. The server maintains zero or more **List of Non-Persisted Property Definition Instances**.
+**List of Non-Persisted Property Definition Instances:** This is a volatile list of all the [Non-Persisted Property Definition Instances (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2) configured on the server. The server maintains zero or more **List of Non-Persisted Property Definition Instances**.
 
 **List of Non-Persisted Module Definition Instances:** This is a volatile list of all the [Non-Persisted Module Definition Instances (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1) configured on the server. The server maintains zero or more **List of Non-Persisted Module Definition Instances**.
 
-**List of Non-Persisted Rule Instances:** This is a volatile list of all the [Non-Persisted Rule Instances (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.2) configured on the server. The server maintains zero or more **List of Non-Persisted Rule Instances**.
+**List of Non-Persisted Rule Instances:** This is a volatile list of all the [Non-Persisted Rule Instances (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.1) configured on the server. The server maintains zero or more **List of Non-Persisted Rule Instances**.
 
 The server also maintains the following list of property definition instances.
 
@@ -4192,7 +4192,7 @@ A Module Definition is a type of [FSRM Base Object (section 3.2.1.1)](#Section
 <a id="Section_3.2.1.6.2.1"></a>
 ###### 3.2.1.6.2.1 Persisted Module Definition
 
-A Persisted Module Definition is a type of [Module Definition (section 3.2.1.6.2)](#Section_3.2.1.6.2.1) that has all the properties of a [**module definition**](#gt_module-definition), represents the persisted configuration of a module definition on the server and is stored in nonvolatile storage.
+A Persisted Module Definition is a type of [Module Definition (section 3.2.1.6.2)](#Section_3.2.1.6.2.2) that has all the properties of a [**module definition**](#gt_module-definition), represents the persisted configuration of a module definition on the server and is stored in nonvolatile storage.
 
 A protocol client can perform the following management operations involving Persisted Module Definitions:
 
@@ -4200,7 +4200,7 @@ A protocol client can perform the following management operations involving Pers
 <a id="Section_3.2.1.6.2.2"></a>
 ###### 3.2.1.6.2.2 Non-Persisted Module Definition Instance
 
-A **Non-Persisted Module Definition Instance** is a type of [Module Definition (section 3.2.1.6.2)](#Section_3.2.1.6.2.1), which has all the properties of a [**module definition**](#gt_module-definition). A Non-Persisted Module Definition Instance is a copy, in memory, of an instance of a [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2.1), and it is used by a client to make changes to that Persisted Module Definition. Changes, including deletion, that are made to a Non-Persisted Module Definition Instance are either discarded after use or applied to the associated Persisted Module Definition. There can be zero or more Non-Persisted Module Definition Instances for each Persisted Module Definition.
+A **Non-Persisted Module Definition Instance** is a type of [Module Definition (section 3.2.1.6.2)](#Section_3.2.1.6.2.2), which has all the properties of a [**module definition**](#gt_module-definition). A Non-Persisted Module Definition Instance is a copy, in memory, of an instance of a [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2), and it is used by a client to make changes to that Persisted Module Definition. Changes, including deletion, that are made to a Non-Persisted Module Definition Instance are either discarded after use or applied to the associated Persisted Module Definition. There can be zero or more Non-Persisted Module Definition Instances for each Persisted Module Definition.
 
 A protocol client can perform the following management operations involving Non-Persisted Module Definition Instances:
 
@@ -4312,7 +4312,7 @@ The following state data is maintained for the property definition instance:
 
 **Property definition instance.Value:** This property is a Unicode string indicating the value of the property definition instance.
 
-**Sources:** This property is an array of case-insensitive Unicode strings that are **module definition.Names** of the [module definitions](#Section_3.2.1.6.2.1) that provided the **property definition instance.Value**.
+**Sources:** This property is an array of case-insensitive Unicode strings that are **module definition.Names** of the [module definitions](#Section_3.2.1.6.2.2) that provided the **property definition instance.Value**.
 
 **Property definition instance.Flags:** This property is a numeric value indicating the flags of the property definition instance. It is a bitwise combination (using the bitwise-OR operator) of values of the [FsrmPropertyFlags](#Section_2.2.2.6.1.1) enumeration (see section 2.2.2.6.1.1).
 
@@ -4348,7 +4348,7 @@ A File Management Job is a type of [FSRM Base Object (section 3.2.1.1)](#Secti
 
 **Custom:**
 
-**Custom action:** This property is a handle to an [IFsrmActionCommand](#Section_3.2.4.2.9.5) interface pointer (section 3.2.4.2.9) that points to a **command line action type notification** object that is called when all the file management job **conditions** are met by a file. A protocol client can initiate a change to a custom action and can delete the custom action. See section [3.2.1.4](#Section_3.2.4.2.48.13) for more information about data required for the action.
+**Custom action:** This property is a handle to an [IFsrmActionCommand](#Section_3.2.4.2.9.7) interface pointer (section 3.2.4.2.9) that points to a **command line action type notification** object that is called when all the file management job **conditions** are met by a file. A protocol client can initiate a change to a custom action and can delete the custom action. See section [3.2.1.4](#Section_3.2.4.2.48.13) for more information about data required for the action.
 
 **Notification periods:** This property is a list of zero or more **notification period** objects. A protocol client can initiate a change to a **notification period** value and can delete the **notification period**.
 
@@ -4404,8 +4404,8 @@ A Persisted File Management Job is a type of [File Management Job (section 3.2
 
 A protocol client can perform the following management operations involving Persisted File Management Jobs:
 
-- Enumerate the **List of Persisted File Management Jobs** abstract data object (section [3.2.1.7](#Section_3.2.1.7.1)) on the server. See EnumFileManagementJobs (Opnum 7) (section [3.2.4.2.50.1](#Section_3.2.4.2.50)[)](#Section_3.2.4.2.50) for details.
-- Get the configuration of a particular Persisted File Management Job. See GetFileManagementJob (Opnum 9) (section [3.2.4.2.50.3)](#Section_3.2.4.2.50) for details.
+- Enumerate the **List of Persisted File Management Jobs** abstract data object (section [3.2.1.7](#Section_3.2.1.7.1)) on the server. See EnumFileManagementJobs (Opnum 7) (section [3.2.4.2.50.1](#Section_3.2.4.2.48)[)](#Section_3.2.4.2.48) for details.
+- Get the configuration of a particular Persisted File Management Job. See GetFileManagementJob (Opnum 9) (section [3.2.4.2.50.3)](#Section_3.2.4.2.48) for details.
 <a id="Section_3.2.1.7.1.2"></a>
 ###### 3.2.1.7.1.2 Non-Persisted File Management Job Instance
 
@@ -4413,7 +4413,7 @@ A **Non-Persisted File Management Job Instance** is a type of [File Management J
 
 A protocol client can perform the following management operations involving Non-Persisted File Management Job Instances:
 
-- Create or change the configuration data for a Non-Persisted File Management Job Instance. See CreateFileManagementJob (Opnum 8) (section [3.2.4.2.50.2)](#Section_3.2.4.2.50) and Commit (Opnum 11) (section [3.2.4.2.10.5)](#Section_3.2.4.2.10.5) for details.
+- Create or change the configuration data for a Non-Persisted File Management Job Instance. See CreateFileManagementJob (Opnum 8) (section [3.2.4.2.50.2)](#Section_3.2.4.2.48) and Commit (Opnum 11) (section [3.2.4.2.10.5)](#Section_3.2.4.2.10.5) for details.
 - Commit changes, including deletion, from a Non-Persisted File Management Job Instance into the associated Persisted File Management Job. See Delete (Opnum 10) (section [3.2.4.2.10.4)](#Section_3.2.4.2.10.4) and Commit (Opnum 11) (section 3.2.4.2.10.5) for details.
 <a id="Section_3.2.1.7.2"></a>
 ##### 3.2.1.7.2 Property Condition
@@ -4454,7 +4454,7 @@ A **Notification period** is a volatile object that represents a set of **Notifi
 A protocol client can perform the following management operations involving a **Notification period**:
 
 - Create a notification for a specific **notification period**. See section [3.2.4.2.48.47](#Section_3.2.4.2.48) for more details.
-- Change the configuration data of a notification for a specific **notification period**. For details, see sections [3.2.4.2.5](#Section_3.2.4.2.5.5), [3.2.4.2.6](#Section_3.2.4.2.6.1), [3.2.4.2.7](#Section_3.2.4.2.7.4), [3.2.4.2.8](#Section_3.2.4.2.8.3), and [3.2.4.2.9](#Section_3.2.4.2.9.5).
+- Change the configuration data of a notification for a specific **notification period**. For details, see sections [3.2.4.2.5](#Section_3.2.4.2.5.14), [3.2.4.2.6](#Section_3.2.4.2.6), [3.2.4.2.7](#Section_3.2.4.2.7.3), [3.2.4.2.8](#Section_3.2.4.2.8.1), and [3.2.4.2.9](#Section_3.2.4.2.9.7).
 - Enumerate a list of all the notifications for a specific **notification period**. See section [3.2.4.2.48.48](#Section_3.2.4.2.48) for more details.
 - Delete a notification for a specific **notification period**. See section 3.2.4.2.5 for details.
 A **notification period** can be referenced with at most one notification of each of the four distinct File Server Resource Manager Protocol notification action types.
@@ -4499,21 +4499,21 @@ The following general configuration settings data is maintained:
 <a id="Section_3.2.1.10"></a>
 #### 3.2.1.10 Management of FSRM Objects
 
-All objects listed in section [3.2.1](#Section_3.1.1) are created and returned through manager interfaces. Manager interfaces have methods that can create or return individual objects or return a collection of objects, which can be enumerated (see section [3.2.1.11](#Section_3.2.1.11) for details on enumerations of FSRM objects). The following interfaces allow management of FSRM objects:
+All objects listed in section [3.2.1](#Section_3.2.1) are created and returned through manager interfaces. Manager interfaces have methods that can create or return individual objects or return a collection of objects, which can be enumerated (see section [3.2.1.11](#Section_3.2.1.11) for details on enumerations of FSRM objects). The following interfaces allow management of FSRM objects:
 
-- [IFsrmQuotaManager](#Section_3.2.4.2.18)—Manages quota and auto apply quota objects.
+- [IFsrmQuotaManager](#Section_3.2.4.2.19)—Manages quota and auto apply quota objects.
 - [IFsrmQuotaTemplateManager](#Section_3.2.4.2.22)—Manages quota template objects.
 - [IFsrmFileGroupManager](#Section_3.2.4.2.25)—Manages file group objects.
 - [IFsrmFileScreenManager](#Section_3.2.4.2.29)—Manages file screen and file screen exception objects.
 - [IFsrmFileScreenTemplateManager](#Section_3.2.4.2.32)—Manages file screen template objects.
 - [IFsrmReportManager](#Section_3.2.4.2.33)—Manages report job objects.
-- [IFsrmClassificationManager](#Section_3.2.4.2.45.12)—Manages property definition, module definition, and rule objects.
+- [IFsrmClassificationManager](#Section_3.2.4.2.45.20)—Manages property definition, module definition, and rule objects.
 - [IFsrmFileManagementJobManager](#Section_3.2.4.2.50)—Manages file management job objects.
 - [IFsrmSetting](#Section_3.2.4.2.11)—Manages general FSRM settings.
 <a id="Section_3.2.1.11"></a>
 #### 3.2.1.11 Enumeration of FSRM Objects
 
-All FSRM objects listed in section [3.2.1](#Section_3.1.1) can be returned via [**collection objects**](#gt_collection-object). Section [4.1](#Section_3.1.4.1.2) also contains an example of how a collection object is created and used. When the client calls a method to request a collection, the server creates a collection object implementing the **IFsrmCollection** interface (section [3.2.4.2.1](#Section_3.2.4.2.1)) and returns the interface pointer to the client to allow it to enumerate through the requested objects. The collection remains valid until the client releases all of its references to the interface. For each collection object, the server maintains the following information:
+All FSRM objects listed in section [3.2.1](#Section_3.2.1) can be returned via [**collection objects**](#gt_collection-object). Section [4.1](#Section_3.1.4.1.2) also contains an example of how a collection object is created and used. When the client calls a method to request a collection, the server creates a collection object implementing the **IFsrmCollection** interface (section [3.2.4.2.1](#Section_3.2.4.2.1)) and returns the interface pointer to the client to allow it to enumerate through the requested objects. The collection remains valid until the client releases all of its references to the interface. For each collection object, the server maintains the following information:
 
 **Objects Being Enumerated:** A list of pointers to the FSRM objects being enumerated with the following requirements:
 
@@ -4724,7 +4724,7 @@ Synchronization of the property definition from [**Active Directory**](#gt_activ
 
 The following sequence of actions occurs during synchronization.
 
-The [Resource Property List](#Section_2.3.3) name contained in [ADSyncListName](#Section_3.1.1) is used to synchronize the property definitions from Active Directory.
+The [Resource Property List](#Section_2.3.3) name contained in [ADSyncListName](#Section_3.2.1) is used to synchronize the property definitions from Active Directory.
 
 - The server MUST iterate through each of the [**Active Directory property definitions**](#gt_active-directory-property-definition) in the retrieved resource property list. For each Active Directory property definition found in the resource properties object whose **Enabled** attribute is set to true, the server MUST perform the following steps in sequence:
 - If there is a [persisted property definition](#Section_3.2.1.6.1.1) with the same **property definition.GlobalGUID** as the objectGUID of the Active Directory property definition, refer to this as the **Relevant Property Definition**. Otherwise, the server MUST create a new persisted property definition and add it to the [List of Persisted Property Definitions](#Section_3.2.1.6.1.1). The new persisted property definition needs to be referred to as the **Relevant Property Definition** and be initialized as follows:
@@ -4796,7 +4796,7 @@ For objects that are stored on volumes (see [Message Processing Details (sectio
 
 - **List of Persisted File Screens**
 - **List of Persisted File Screen Exceptions**
-The server MUST create a [Volume List (section 3.2.1)](#Section_3.1.1) that contains all [**volumes**](#gt_volume) on the server. For each volume that contains persisted FSRM information for objects stored on volumes, see Message Processing Details (section 3.2.4.2), the server MUST concatenate the following persisted object lists with the corresponding persisted objects on the volume.
+The server MUST create a [Volume List (section 3.2.1)](#Section_3.2.1) that contains all [**volumes**](#gt_volume) on the server. For each volume that contains persisted FSRM information for objects stored on volumes, see Message Processing Details (section 3.2.4.2), the server MUST concatenate the following persisted object lists with the corresponding persisted objects on the volume.
 
 Quota Model (section 3.2.1.2):
 
@@ -4877,14 +4877,14 @@ After creating the new Persisted Directory Quota, the server MUST start a quota 
 **Responding to Directory Deletion Events**: If a [Directory Deletion Event (section 3.2.7.6)](#Section_3.2.7.6) occurs, the server MUST remove from the associated list any of the following objects configured with the deleted directory as their **Folder path**:
 
 - Any Persisted Directory Quota for the deleted directory MUST be removed from the **List of Persisted Directory Quotas**.
-- Any [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2) for the deleted directory MUST be removed from the **List of Persisted Auto Apply Quota** (section 3.2.1.2.2).
+- Any [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1) for the deleted directory MUST be removed from the **List of Persisted Auto Apply Quota** (section 3.2.1.2.2).
 - Any [Persisted File Screen (section 3.2.1.3.1.1)](#Section_3.2.1.3.1.1) for the deleted directory MUST be removed from the **List of Persisted File Screen** (section 3.2.1.3.1).
-- Any [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1) for the deleted directory MUST be removed from the **List of Persisted File Screen Exceptions** (section [3.2.1.3.2](#Section_3.2.1.3.2)).
+- Any [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.2) for the deleted directory MUST be removed from the **List of Persisted File Screen Exceptions** (section [3.2.1.3.2](#Section_3.2.1.3.2)).
 Any non-persisted objects with the deleted directory configured as their **Folder path** MUST NOT be changed. Any persisted or non-persisted object where the deleted directory is a value in the namespace roots of the object MUST NOT be changed. Any Persisted Auto Apply Quota where the deleted directory is a value of the **Exclude folders** MUST NOT be changed.
 
 **Responding to Directory Rename Events**: If a [Directory Rename Event (section 3.2.7.7)](#Section_3.2.7.7) occurs, the server MUST update the **Folder path** of any Persisted Directory Quotas, Persisted Auto Apply Quota, Persisted File Screens, or Persisted File Screen Exceptions where the **Folder path** equals the old directory path, to the new directory path, without any manual configuration changes from the client. Any non-persisted objects with the renamed directory configured as their **Folder path** MUST NOT be changed. Any persisted or non-persisted object where the renamed directory is a value in the namespace roots of the object MUST NOT be changed. Any Persisted Auto Apply Quota where the renamed directory is a value of the **Exclude folders** MUST NOT be changed.
 
-**Responding to Volume Discovery Events**: If a [Volume Discovery Event (section 3.2.7.8)](#Section_3.2.7.8) occurs, the server MUST add the [**volume**](#gt_volume) to the **Volume List** (section [3.2.1](#Section_3.1.1)). If the server has previously stored Persisted Directory Quotas on that volume, the server MUST concatenate the **List of Persisted Directory Quotas** with the Persisted Directory Quotas on the volume. If the server has previously stored Persisted Auto Apply Quota on that volume, the server MUST concatenate the **List of Persisted Auto Apply Quotas** with the Persisted Auto Apply Quota on the volume. If the server has previously stored Persisted File Screens on that volume, the server MUST concatenate the **List of Persisted File Screens** with the Persisted File Screens on the volume. If the server has previously stored Persisted File Screen Exceptions on that volume, the server MUST concatenate the **List of Persisted File Screen Exceptions** with the Persisted File Screen Exceptions on the volume.
+**Responding to Volume Discovery Events**: If a [Volume Discovery Event (section 3.2.7.8)](#Section_3.2.7.8) occurs, the server MUST add the [**volume**](#gt_volume) to the **Volume List** (section [3.2.1](#Section_3.2.1)). If the server has previously stored Persisted Directory Quotas on that volume, the server MUST concatenate the **List of Persisted Directory Quotas** with the Persisted Directory Quotas on the volume. If the server has previously stored Persisted Auto Apply Quota on that volume, the server MUST concatenate the **List of Persisted Auto Apply Quotas** with the Persisted Auto Apply Quota on the volume. If the server has previously stored Persisted File Screens on that volume, the server MUST concatenate the **List of Persisted File Screens** with the Persisted File Screens on the volume. If the server has previously stored Persisted File Screen Exceptions on that volume, the server MUST concatenate the **List of Persisted File Screen Exceptions** with the Persisted File Screen Exceptions on the volume.
 
 **Responding to Volume Removal Events**: If a [Volume Removal Event (section 3.2.7.9)](#Section_3.2.7.9) occurs, the server MUST remove the volume from the **Volume List**. If there are any Persisted Directory Quotas with a **Folder path** on the volume, the server MUST remove the Persisted Directory Quota from the **List of Persisted Directory Quotas**. If there are any Persisted Auto Apply Quotas with a path on the volume, the server MUST remove the Persisted Auto Apply Quota from the **List of Persisted Auto Apply Quotas**. If there are any Persisted File Screens with a path on the volume, the server MUST remove the Persisted File Screen from the **List of Persisted File Screens**. If there are any Persisted File Screen Exceptions with a path on the volume, the server MUST remove the Persisted File Screen Exceptions from **List of Persisted File Screen Exceptions**. Any **Non-Persisted Directory Quotas**, **Non-Persisted Auto Apply Quotas**, **Non-Persisted File Screens**, or **Non-Persisted File Screen Exceptions** that have a **Folder path** on the removed volume MUST NOT be removed from any lists of non-persisted objects they are a member of.
 
@@ -4941,7 +4941,7 @@ The storage location is not dictated for all other FSRM objects, which include t
 - [Report Jobs (section 3.2.1.5.1)](#Section_3.2.1.5.1)
 - [Report Settings (section 3.2.1.5.3)](#Section_3.2.1.5.3)
 - [Property Definitions (section 3.2.1.6.1)](#Section_3.2.1.6.1)
-- [Module Definitions (section 3.2.1.6.2)](#Section_3.2.1.6.2.1)
+- [Module Definitions (section 3.2.1.6.2)](#Section_3.2.1.6.2.2)
 - [Rules (section 3.2.1.6.3)](#Section_3.2.1.6.3)
 - [Classification Job (section 3.2.1.6.4)](#Section_3.2.1.6.4)
 - [File Management Job (section 3.2.1.7.1)](#Section_3.2.1.7.1)
@@ -5255,14 +5255,14 @@ The Clone method returns a copy of the collection of **Objects Being Enumerated*
 
 );
 
-**collection:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.27.4)) that upon successful completion contains the **IFsrmMutableCollection** pointer of a copy of this collection of **Objects Being Enumerated**.
+**collection:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.2.1)) that upon successful completion contains the **IFsrmMutableCollection** pointer of a copy of this collection of **Objects Being Enumerated**.
 
 **Return Values:** The method MUST return a nonzero error code. Upon receiving this message, the server MUST return E_NOTIMPL.
 
 <a id="Section_3.2.4.2.3"></a>
 ##### 3.2.4.2.3 IFsrmCommittableCollection Methods
 
-The **IFsrmCommittableCollection** interface inherits the **IFsrmMutableCollection** interface (section [3.2.4.2.2](#Section_3.2.4.2.27.4)). Method opnum field values start with 18.
+The **IFsrmCommittableCollection** interface inherits the **IFsrmMutableCollection** interface (section [3.2.4.2.2](#Section_3.2.4.2.2.1)). Method opnum field values start with 18.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM object using the UUID {96deb3b5-8b91-4a2a-9d93-80a35d8aa847}.
 
@@ -5451,7 +5451,7 @@ The server MUST remove the action from the parent object's list of actions or re
 <a id="Section_3.2.4.2.5"></a>
 ##### 3.2.4.2.5 IFsrmActionEmail Methods
 
-The **IFsrmActionEmail** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.41.5)), as well as those listed in the following table.
+The **IFsrmActionEmail** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.48.13)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -5843,7 +5843,7 @@ The server MUST NOT alter the stored **message text** of the action when the mac
 <a id="Section_3.2.4.2.6"></a>
 ##### 3.2.4.2.6 IFsrmActionEmail2 Methods
 
-The **IFsrmActionEmail2** interface implements all the methods of the **IFsrmActionEmail** interface (section [3.2.4.2.5](#Section_3.2.4.2.5.5)), as well as those listed in the following table.
+The **IFsrmActionEmail2** interface implements all the methods of the **IFsrmActionEmail** interface (section [3.2.4.2.5](#Section_3.2.4.2.5.14)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -5902,7 +5902,7 @@ The server MUST use *attachmentFileListSize* as the **attachment file list size*
 <a id="Section_3.2.4.2.7"></a>
 ##### 3.2.4.2.7 IFsrmActionReport Methods
 
-The **IFsrmActionReport** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.41.5)), as well as those listed in the following table.
+The **IFsrmActionReport** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.48.13)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -6019,7 +6019,7 @@ If *mailTo* contains the string "[ADMIN EMAIL]", the server MUST send the email 
 <a id="Section_3.2.4.2.8"></a>
 ##### 3.2.4.2.8 IFsrmActionEventLog Methods
 
-The **IFsrmActionEventLog** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.41.5)), as well as those listed in the following table.
+The **IFsrmActionEventLog** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.48.13)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -6139,7 +6139,7 @@ The server MUST NOT alter the stored **message text** of the action when the mac
 <a id="Section_3.2.4.2.9"></a>
 ##### 3.2.4.2.9 IFsrmActionCommand Methods
 
-The **IFsrmActionCommand** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.41.5)), as well as those listed in the following table.
+The **IFsrmActionCommand** interface implements all the methods of the **IFsrmAction** interface (section [3.2.4.2.4](#Section_3.2.4.2.48.13)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -6664,7 +6664,7 @@ The specifics for deleting the persisted object or applying the non-persisted st
 - File Screen Exception: [IFsrmFileScreenException::Commit (section 3.2.4.2.28.1)](#Section_3.2.4.2.28.1)
 - File Screen Template: [IFsrmFileScreenTemplate::Commit (section 3.2.4.2.30.1)](#Section_3.2.4.2.30.1)
 - Report Job: [IFsrmReportJob::Commit (section 3.2.4.2.34.1)](#Section_3.2.4.2.34.1)
-- Property Definition: [IFsrmPropertyDefinition::Commit (section 3.2.4.2.37.1)](#Section_3.2.4.2.37)
+- Property Definition: [IFsrmPropertyDefinition::Commit (section 3.2.4.2.37.1)](#Section_3.2.4.2.40)
 - Classification Type Rule: [IFsrmClassificationRule::Commit (section 3.2.4.2.42.1)](#Section_3.2.4.2.42)
 - Classifier Type Module Definition: [IFsrmClassifierModuleDefinition::Commit (section 3.2.4.2.44.1)](#Section_3.2.4.2.44)
 - Storage Type Module Definition: [IFsrmStorageModuleDefinition::Commit (section 3.2.4.2.47.1)](#Section_3.2.4.2.47)
@@ -7045,7 +7045,7 @@ The server MUST populate *sharePaths* with all the network share paths that have
 <a id="Section_3.2.4.2.13"></a>
 ##### 3.2.4.2.13 IFsrmDerivedObjectsResult Methods
 
-The **IFsrmDerivedObjectsResult** interface is returned from the **CommitAndUpdateDerived** methods of the **IFsrmAutoApplyQuota** (section [3.2.4.2.17](#Section_3.2.4.2.17.2)), **IFsrmQuotaTemplate** (section [3.2.4.2.20](#Section_3.2.4.2.20)), and **IFsrmFileScreenTemplate** (section [3.2.4.2.30](#Section_3.2.4.2.32)) interfaces.
+The **IFsrmDerivedObjectsResult** interface is returned from the **CommitAndUpdateDerived** methods of the **IFsrmAutoApplyQuota** (section [3.2.4.2.17](#Section_3.2.4.2.17.3)), **IFsrmQuotaTemplate** (section [3.2.4.2.20](#Section_3.2.4.2.22)), and **IFsrmFileScreenTemplate** (section [3.2.4.2.30](#Section_3.2.4.2.32)) interfaces.
 
 Methods in RPC Opnum Order
 
@@ -7080,8 +7080,8 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 The server MUST do one of the following:
 
-- Set *derivedObjects* to [DerivedAutoApplyQuotaObjects](#Section_3.2.1.2.2.1) if the calling template is an [auto apply quota](#Section_3.2.1.2.2).
-- Set *derivedObjects* to [DerivedQuotaObjects](#Section_3.1.1) if the calling template is a [**directory quota template**](#gt_directory-quota-template).
+- Set *derivedObjects* to [DerivedAutoApplyQuotaObjects](#Section_3.2.1.2.2.2) if the calling template is an [auto apply quota](#Section_3.2.1.2.2).
+- Set *derivedObjects* to [DerivedQuotaObjects](#Section_3.2.1) if the calling template is a [**directory quota template**](#gt_directory-quota-template).
 - Set *derivedObjects* to [DerivedFileScreenObjects](#Section_3.2.1.3.1.1) if the calling template is a [**file screen template**](#gt_file-screen-template).
 <a id="Section_3.2.4.2.13.2"></a>
 ###### 3.2.4.2.13.2 Results (get) (Opnum 8)
@@ -7107,23 +7107,23 @@ Upon receiving this message, the server MUST validate parameters:
 - Verify that *results* is not NULL.
 If any validation fails, the server MUST terminate processing and return a nonzero error code.
 
-The server MUST set *results* to [DerivedQuotaResults](#Section_3.1.1).
+The server MUST set *results* to [DerivedQuotaResults](#Section_3.2.1).
 
 The server MUST do one of the following or return a nonzero error code:
 
-- Set *results* to [DerivedAutoApplyQuotaResults](#Section_3.2.1.2.2.1) if the calling template is [**auto apply quota**](#gt_auto-apply-quota).
+- Set *results* to [DerivedAutoApplyQuotaResults](#Section_3.2.1.2.2.2) if the calling template is [**auto apply quota**](#gt_auto-apply-quota).
 - Set *results* to [DerivedQuotaResults](#Section_3.2.1.2.3.1) if the calling template is a [**directory quota template**](#gt_directory-quota-template).
 - Set *results* to [DerivedFileScreenResults](#Section_3.2.1.3.1.1) if the calling template is a [**file screen template**](#gt_file-screen-template).
 <a id="Section_3.2.4.2.14"></a>
 ##### 3.2.4.2.14 IFsrmQuotaBase Methods
 
-**IFsrmQuotaBase** is the base interface for all the File Server Resource Manager Protocol quota objects. **IFsrmQuotaBase** implements the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+**IFsrmQuotaBase** is the base interface for all the File Server Resource Manager Protocol quota objects. **IFsrmQuotaBase** implements the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Commit](#Section_3.2.4.2.14.11) | Opnum: 11 |
+| [Commit](#Section_3.2.4.2.14.10) | Opnum: 11 |
 | [QuotaLimit (get)](#Section_3.2.4.2.14.2) | Opnum: 12 |
 | [QuotaLimit (put)](#Section_3.2.4.2.14.3) | Opnum: 13 |
 | [QuotaFlags (get)](#Section_3.2.4.2.14.4) | Opnum: 14 |
@@ -7138,7 +7138,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.14.1"></a>
 ###### 3.2.4.2.14.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additional behavior:
 
 - If **quota limit** is zero, the server MUST return E_INVALIDARG.
 <a id="Section_3.2.4.2.14.2"></a>
@@ -7382,7 +7382,7 @@ The CreateThresholdAction method creates an action and associates it with the sp
 
 **actionType:** Contains the type of action to be created.
 
-**action:** Pointer to an **IFsrmAction** interface pointer (section [3.2.4.2.4](#Section_3.2.4.2.41.5)) that upon completion points to the newly created action. The caller MUST release the object when it is done with it.
+**action:** Pointer to an **IFsrmAction** interface pointer (section [3.2.4.2.4](#Section_3.2.4.2.48.13)) that upon completion points to the newly created action. The caller MUST release the object when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -7417,7 +7417,7 @@ The EnumThresholdActions method enumerates all the actions for the specified **t
 
 **threshold:** The **threshold** for which the associated actions will be enumerated.
 
-**actions:** Pointer to an **IFsrmCollection** interface pointer (section [3.2.4.2.1](#Section_3.2.4.2.1)) that upon completion contains **IFsrmAction** interface pointers (section [3.2.4.2.4](#Section_3.2.4.2.41.5)) of all the actions for the specified action. The caller MUST release the collection when it is done with it.
+**actions:** Pointer to an **IFsrmCollection** interface pointer (section [3.2.4.2.1](#Section_3.2.4.2.1)) that upon completion contains **IFsrmAction** interface pointers (section [3.2.4.2.4](#Section_3.2.4.2.48.13)) of all the actions for the specified action. The caller MUST release the collection when it is done with it.
 
 To get the specific action interface for the action, the caller MUST call **QueryInterface** for the interface corresponding to the **action type** of the actions.
 
@@ -7440,7 +7440,7 @@ The server MUST create a new **IFsrmCollection** object and populate it with the
 <a id="Section_3.2.4.2.15"></a>
 ##### 3.2.4.2.15 IFsrmQuotaObject Methods
 
-The **IFsrmQuotaObject** interface exposes methods for quota objects associated with a specific directory path. **IFsrmQuotaObject** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)) and **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.4)) interfaces, as well as those listed in the following table.
+The **IFsrmQuotaObject** interface exposes methods for quota objects associated with a specific directory path. **IFsrmQuotaObject** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)) and **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.2)) interfaces, as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -7457,7 +7457,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.15.1"></a>
 ###### 3.2.4.2.15.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the same behavior as described in [3.2.4.2.10.5](#Section_3.2.4.2.10.5) and [3.2.4.2.14.1](#Section_3.2.4.2.14.11) with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the same behavior as described in [3.2.4.2.10.5](#Section_3.2.4.2.10.5) and [3.2.4.2.14.1](#Section_3.2.4.2.14.10) with the following additional behavior:
 
 - If a quota already exists for the path specified, the server MUST return E_FSRM_ALREADY_EXISTS.
 <a id="Section_3.2.4.2.15.2"></a>
@@ -7489,7 +7489,7 @@ The server MUST set *path* to the [Directory Quota.Folder path](#Section_3.2.1.2
 <a id="Section_3.2.4.2.15.3"></a>
 ###### 3.2.4.2.15.3 UserSid (get) (Opnum 23)
 
-The UserSid (get) method returns a string representation of the read-only user [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.1.1) section 2.4.2.4).
+The UserSid (get) method returns a string representation of the read-only user [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.2.2.1) section 2.4.2.4).
 
 [propget, id(FSRM_PROPERTY(FSRM_DISPID_QUOTA_OBJECT | 0x02))] HRESULT UserSid(
 
@@ -7515,7 +7515,7 @@ The server MUST set *userSid* to the string representation of the user SID of NU
 <a id="Section_3.2.4.2.15.4"></a>
 ###### 3.2.4.2.15.4 UserAccount (get) (Opnum 24)
 
-The UserAccount (get) method returns a string representation of the user account corresponding to the well-known [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.1.1) section 2.4.2.4).
+The UserAccount (get) method returns a string representation of the user account corresponding to the well-known [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.2.2.1) section 2.4.2.4).
 
 [propget, id(FSRM_PROPERTY(FSRM_DISPID_QUOTA_OBJECT | 0x03))] HRESULT UserAccount(
 
@@ -7625,9 +7625,9 @@ The server MUST do one of the following or return a nonzero error code.
 <a id="Section_3.2.4.2.16"></a>
 ##### 3.2.4.2.16 IFsrmQuota Methods
 
-The **IFsrmQuota** interface exposes methods for quotas associated with a specific directory path. **IFsrmQuota** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.4)), and **IFsrmQuotaObject** (section [3.2.4.2.15](#Section_3.2.4.2.15)) interfaces, as well as those listed in the following table.
+The **IFsrmQuota** interface exposes methods for quotas associated with a specific directory path. **IFsrmQuota** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.2)), and **IFsrmQuotaObject** (section [3.2.4.2.15](#Section_3.2.4.2.15.5)) interfaces, as well as those listed in the following table.
 
-Each instance of **IFsrmQuota** is associated with one [Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.1).
+Each instance of **IFsrmQuota** is associated with one [Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.2).
 
 Methods in RPC Opnum Order
 
@@ -7643,9 +7643,9 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.16.1"></a>
 ###### 3.2.4.2.16.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in sections [3.2.4.2.10.5](#Section_3.2.4.2.10.5), [3.2.4.2.14.1](#Section_3.2.4.2.14.11), and [3.2.4.2.15.1](#Section_3.2.4.2.15.1), with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in sections [3.2.4.2.10.5](#Section_3.2.4.2.10.5), [3.2.4.2.14.1](#Section_3.2.4.2.14.10), and [3.2.4.2.15.1](#Section_3.2.4.2.15.1), with the following additional behavior:
 
-- If the **FSRM Base Object.Deleted** property is set to true for this [Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.1), the server MUST remove the [Persisted Directory Quota (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) from the **List of Persisted Directory Quotas** (section [3.2.1.2](#Section_3.2.1.2)) that has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Directory Quota Instance. If there is no Persisted Directory Quota (section 3.2.1.2.1.1) in the **List of Persisted Directory Quotas** (section 3.2.1.2) that has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If the **FSRM Base Object.Deleted** property is set to true for this [Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.2), the server MUST remove the [Persisted Directory Quota (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) from the **List of Persisted Directory Quotas** (section [3.2.1.2](#Section_3.2.1.2)) that has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Directory Quota Instance. If there is no Persisted Directory Quota (section 3.2.1.2.1.1) in the **List of Persisted Directory Quotas** (section 3.2.1.2) that has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If the **FSRM Base Object.Deleted** property is set to false for this Non-Persisted Directory Quota Instance, the server MUST update the configuration data of the Persisted Directory Quota in the **List of Persisted Directory Quotas** that has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted Directory Quota does not exist with the same **Directory Quota.Folder path** property, and the **FSRM Base Object.Deleted** property is set to false, the server MUST perform the following steps:
 - Create a new Persisted Directory Quota.
@@ -7772,16 +7772,16 @@ This method has no parameters.
 
 There are no parameters for this method.
 
-If no [Persisted Directory Quota](#Section_3.2.1.2.1.1) exists that has the same [Directory Quota.Folder path](#Section_3.2.1.2.1) property as [Non-Persisted Directory Quota Instance](#Section_3.2.1.2.1.1), the server MUST return FSRM_E_NOT_FOUND.
+If no [Persisted Directory Quota](#Section_3.2.1.2.1.1) exists that has the same [Directory Quota.Folder path](#Section_3.2.1.2.1) property as [Non-Persisted Directory Quota Instance](#Section_3.2.1.2.1.2), the server MUST return FSRM_E_NOT_FOUND.
 
 Otherwise, the server MUST reset the **quota usage**, **quota peak usage**, and **quota peak usage time** of the Non-Persisted Directory Quota Instance to the current values stored in the corresponding properties of the Persisted Directory Quota that has the same Directory Quota.Folder path property as this Non-Persisted Directory Quota Instance.
 
 <a id="Section_3.2.4.2.17"></a>
 ##### 3.2.4.2.17 IFsrmAutoApplyQuota Methods
 
-The **IFsrmAutoApplyQuota** interface exposes methods for quotas to be automatically applied to subdirectories of a specific directory path. **IFsrmAutoApplyQuota** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.4)), and **IFsrmQuotaObject** (section [3.2.4.2.15](#Section_3.2.4.2.15)) interfaces, as well as those listed in the following table.
+The **IFsrmAutoApplyQuota** interface exposes methods for quotas to be automatically applied to subdirectories of a specific directory path. **IFsrmAutoApplyQuota** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.2)), and **IFsrmQuotaObject** (section [3.2.4.2.15](#Section_3.2.4.2.15.5)) interfaces, as well as those listed in the following table.
 
-Each instance of **IFsrmAutoApplyQuota** is associated with one [Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.1).
+Each instance of **IFsrmAutoApplyQuota** is associated with one [Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.2).
 
 Methods in RPC Opnum Order
 
@@ -7795,9 +7795,9 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.17.1"></a>
 ###### 3.2.4.2.17.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in sections [3.2.4.2.10.5](#Section_3.2.4.2.10.5), [3.2.4.2.14.1](#Section_3.2.4.2.14.11), and [3.2.4.2.15.1](#Section_3.2.4.2.15.1), with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in sections [3.2.4.2.10.5](#Section_3.2.4.2.10.5), [3.2.4.2.14.1](#Section_3.2.4.2.14.10), and [3.2.4.2.15.1](#Section_3.2.4.2.15.1), with the following additional behavior:
 
-- If the **FSRM Base Object.Deleted** property is set to true for this [Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.1), the server MUST remove the [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2) from the **List of Persisted Auto Apply Quotas** (section [3.2.1.2](#Section_3.2.1.2)) that has the same **Directory Quota.Folder path** property as this Non-Persisted Auto Apply Quota Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Auto Apply Quota Instance If there is no Persisted Auto Apply Quota (section 3.2.1.2.2.1) in the **List of Persisted Auto Apply Quotas** (section 3.2.1.2) that has the same **Directory Quota.Folder path** property as this Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If the **FSRM Base Object.Deleted** property is set to true for this [Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.2), the server MUST remove the [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1) from the **List of Persisted Auto Apply Quotas** (section [3.2.1.2](#Section_3.2.1.2)) that has the same **Directory Quota.Folder path** property as this Non-Persisted Auto Apply Quota Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Auto Apply Quota Instance If there is no Persisted Auto Apply Quota (section 3.2.1.2.2.1) in the **List of Persisted Auto Apply Quotas** (section 3.2.1.2) that has the same **Directory Quota.Folder path** property as this Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If the **FSRM Base Object.Deleted** property is set to false for this Non-Persisted Auto Apply Quota Instance, the server MUST update the configuration data of the Persisted Auto Apply Quota in the **List of Persisted Auto Apply Quotas** that has the same **Directory Quota.Folder path** property as this Non-Persisted Auto Apply Quota Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted Auto Apply Quota does not exist with the same **Directory Quota.Folder path** property, and the **FSRM Base Object.Deleted** property is set to false, the server MUST create a new Persisted Auto Apply Quota, populate its configuration with the configuration from this Non-Persisted Auto Apply Quota Instance, and add the new Persisted Auto Apply Quota to the **List of Persisted Auto Apply Quotas**.
 To update or populate the configuration data from a Non-Persisted Auto Apply Quota Instance to a Persisted Auto Apply Quota, the server MUST assign the values of all the properties in the list that follows, of the Non-Persisted Auto Apply Quota Instance to the corresponding properties of the Persisted Auto Apply Quota.
@@ -7877,7 +7877,7 @@ The CommitAndUpdateDerived method commits the quota template and applies the tem
 
 **applyOptions:** Contains the apply options to use when building the collection of derived objects.
 
-**derivedObjectsResult:** Pointer to an **IFsrmDerivedObjectsResult** interface pointer (section [3.2.4.2.13](#Section_3.2.4.2.13.1)) that upon completion points to derived objects result interface for the derived objects updated with this method. A caller MUST release the collection received when it is done with it.
+**derivedObjectsResult:** Pointer to an **IFsrmDerivedObjectsResult** interface pointer (section [3.2.4.2.13](#Section_3.2.4.2.13.2)) that upon completion points to derived objects result interface for the derived objects updated with this method. A caller MUST release the collection received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -7974,7 +7974,7 @@ The server MUST populate *descriptions* with the descriptions for the macros (se
 <a id="Section_3.2.4.2.18.3"></a>
 ###### 3.2.4.2.18.3 CreateQuota (Opnum 9)
 
-The CreateQuota method creates a blank [Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.1) for the specified path.
+The CreateQuota method creates a blank [Non-Persisted Directory Quota Instance (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.2) for the specified path.
 
 [id(FSRM_DISPID_QUOTA_MANAGER | 0x01)] HRESULT CreateQuota(
 
@@ -7986,7 +7986,7 @@ The CreateQuota method creates a blank [Non-Persisted Directory Quota Instance 
 
 **path:** Contains the path of the local directory for the [**directory quota**](#gt_directory-quotas). The maximum length of this string MUST be 260 characters.
 
-**quota:** Pointer to an **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.15)) that upon completion points to the newly created Non-Persisted Directory Quota Instance. To have the Non-Persisted Directory Quota Instance added to the server's **List of Persisted Directory Quota Instances** (section [3.2.4.2.16.1](#Section_3.2.4.2.16.1)), the caller MUST call [Commit (section 3.2.4.2.10.5)](#Section_3.2.4.2.10.5).
+**quota:** Pointer to an **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.14)) that upon completion points to the newly created Non-Persisted Directory Quota Instance. To have the Non-Persisted Directory Quota Instance added to the server's **List of Persisted Directory Quota Instances** (section [3.2.4.2.16.1](#Section_3.2.4.2.16.1)), the caller MUST call [Commit (section 3.2.4.2.10.5)](#Section_3.2.4.2.10.5).
 
 The caller MUST release the Non-Persisted Directory Quota Instance when the caller is done with it.
 
@@ -8025,7 +8025,7 @@ The new Non-Persisted Directory Quota Instance MUST NOT be associated with an ex
 <a id="Section_3.2.4.2.18.4"></a>
 ###### 3.2.4.2.18.4 CreateAutoApplyQuota (Opnum 10)
 
-The CreateAutoApplyQuota method creates a [Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.1) for the specified path.
+The CreateAutoApplyQuota method creates a [Non-Persisted Auto Apply Quota Instance (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.2) for the specified path.
 
 [id(FSRM_DISPID_QUOTA_MANAGER | 0x02)] HRESULT CreateAutoApplyQuota(
 
@@ -8041,7 +8041,7 @@ The CreateAutoApplyQuota method creates a [Non-Persisted Auto Apply Quota Instan
 
 **path:** Contains the path of the local directory for the auto apply quota. The maximum length of this string MUST be 260 characters.
 
-**quota:** Pointer to an **IFsrmAutoApplyQuota** interface pointer (section [3.2.4.2.17](#Section_3.2.4.2.17.2)) that upon completion points to the newly created Non-Persisted Auto Apply Quota Instance. To have the Non-Persisted Auto Apply Quota Instance added to the server's **List of Persisted Auto Apply Quota Instances** (section [3.2.1.2](#Section_3.2.1.2)), the caller MUST call [Commit (section 3.2.4.2.17.1)](#Section_3.2.4.2.17.1).
+**quota:** Pointer to an **IFsrmAutoApplyQuota** interface pointer (section [3.2.4.2.17](#Section_3.2.4.2.17.3)) that upon completion points to the newly created Non-Persisted Auto Apply Quota Instance. To have the Non-Persisted Auto Apply Quota Instance added to the server's **List of Persisted Auto Apply Quota Instances** (section [3.2.1.2](#Section_3.2.1.2)), the caller MUST call [Commit (section 3.2.4.2.17.1)](#Section_3.2.4.2.17.1).
 
 The caller MUST release the Non-Persisted Auto Apply Quota Instance when the caller is done with it.
 
@@ -8062,7 +8062,7 @@ Upon successful validation of parameters, the server MUST perform the following 
 
 - Create a new Non-Persisted Auto Apply Quota Instance with the properties of the named directory quota template and the **Folder path** set to *path*.
 - Set *quota* to the **IFsrmAutoApplyQuota** interface of the new Non-Persisted Auto Apply Quota Instance.
-The new Non-Persisted Auto Apply Quota Instance MUST NOT be associated with an existing [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2).
+The new Non-Persisted Auto Apply Quota Instance MUST NOT be associated with an existing [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1).
 
 If a directory quota template with the specified name does not exist, the server MUST return FSRM_E_NOT_FOUND.
 
@@ -8081,7 +8081,7 @@ The GetQuota method returns the [**directory quota**](#gt_directory-quotas) from
 
 **path:** Contains the path to the requested directory quota.
 
-**quota:** Pointer to an **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.15)) that upon completion points to the directory quota for the specified path. The caller MUST release the quota when it is done with it.
+**quota:** Pointer to an **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.14)) that upon completion points to the directory quota for the specified path. The caller MUST release the quota when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8099,7 +8099,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions or return a nonzero error code.
 
-- Create a new [Non-Persisted Directory Quota Instance](#Section_3.2.1.2.1.1) and populate its configuration and state data from the [Persisted Directory Quota (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) in the **List of Persisted Directory Quotas** with the specified path.
+- Create a new [Non-Persisted Directory Quota Instance](#Section_3.2.1.2.1.2) and populate its configuration and state data from the [Persisted Directory Quota (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) in the **List of Persisted Directory Quotas** with the specified path.
 - Set *quota* to the **IFsrmQuota** interface of the new Non-Persisted Directory Quota Instance.
 If a directory quota does not exist for the specified path, the server MUST return FSRM_E_NOT_FOUND.
 
@@ -8118,7 +8118,7 @@ The GetAutoApplyQuota method returns the [**auto apply quota**](#gt_auto-apply-q
 
 **path:** Contains the path to the requested auto apply quota.
 
-**quota:** Pointer to an **IFsrmAutoApplyQuota** interface pointer (section [3.2.4.2.17](#Section_3.2.4.2.17.2)) that upon completion points to the auto apply quota for the specified path. The caller MUST release the quota when it is done with it.
+**quota:** Pointer to an **IFsrmAutoApplyQuota** interface pointer (section [3.2.4.2.17](#Section_3.2.4.2.17.3)) that upon completion points to the auto apply quota for the specified path. The caller MUST release the quota when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8136,7 +8136,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions or return a nonzero error code.
 
-- Create a new [Non-Persisted Auto Apply Quota Instance](#Section_3.2.1.2.2.1) and populate its configuration and state data from the [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2) in the **List of Persisted Auto Apply Quotas** with the specified path.
+- Create a new [Non-Persisted Auto Apply Quota Instance](#Section_3.2.1.2.2.2) and populate its configuration and state data from the [Persisted Auto Apply Quota (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1) in the **List of Persisted Auto Apply Quotas** with the specified path.
 - Set *quota* to the **IFsrmAutoApplyQuota** interface of the new Non-Persisted Auto Apply Quota Instance.
 If an auto apply quota does not exist for the specified path, the server MUST return FSRM_E_NOTFOUND.
 
@@ -8155,7 +8155,7 @@ The GetRestrictiveQuota method returns the [**directory quota**](#gt_directory-q
 
 **path:** Contains the path to return for the restrictive quota. The maximum length of this string MUST be 260 characters.
 
-**quota:** Pointer to an **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.15)) that upon completion points to the most restrictive quota for the specified path. The caller MUST release the quota when it is done with it.
+**quota:** Pointer to an **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.14)) that upon completion points to the most restrictive quota for the specified path. The caller MUST release the quota when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8174,7 +8174,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions or return a nonzero error code.
 
-- Create a new [Non-Persisted Directory Quota Instance](#Section_3.2.1.2.1.1) and populate its configuration and state data from the [Persisted Directory Quota (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) that has the most restrictive quota limit, in the **List of Persisted Directory Quotas** with the specified path.
+- Create a new [Non-Persisted Directory Quota Instance](#Section_3.2.1.2.1.2) and populate its configuration and state data from the [Persisted Directory Quota (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) that has the most restrictive quota limit, in the **List of Persisted Directory Quotas** with the specified path.
 - Set *quota* to the **IFsrmQuota** interface of the new Non-Persisted Directory Quota Instance.
 If a directory quota does not exist for the specified path, the server MUST return FSRM_E_NOTFOUND.
 
@@ -8214,12 +8214,12 @@ Upon receiving this message, the server MUST validate parameters:
 - If *options* contains **FsrmEnumOptions_Asynchronous** or any value other than specified in section 2.2.1.2.5, the server MUST return FSRM_E_NOT_SUPPORTED.
 Upon successful validation of parameters, the server MUST perform all of the following actions or return a nonzero error code:
 
-- Create a **List of Non-Persisted Directory Quota Instances** (section 3.2.1.2) and populate it with [Non-Persisted Directory Quota Instances (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.1) copied from the [Persisted Directory Quotas (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) in the **List of Persisted Directory Quotas**, according to the following rules:
+- Create a **List of Non-Persisted Directory Quota Instances** (section 3.2.1.2) and populate it with [Non-Persisted Directory Quota Instances (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.2) copied from the [Persisted Directory Quotas (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) in the **List of Persisted Directory Quotas**, according to the following rules:
 - If *path* ends with "\*", the server MUST populate the **List of Non-Persisted Directory Quota Instances** with a copy of every Persisted Directory Quota from the **List of Persisted Directory Quotas** that belongs to a subdirectory of *path*.
 - If *path* ends with "\...", the server MUST populate the **List of Non-Persisted Directory Quota Instances** with a copy of every Persisted Directory Quota from the **List of Persisted Directory Quotas** that recursively belongs to a subdirectory of path.
 - If *path* does not end with "\*" or "\...", the server MUST populate the **List of Non-Persisted Directory Quota Instances** with a copy of only the Persisted Directory Quota from the **List of Persisted Directory Quotas** for *path*.
 - If a Persisted Directory Quota does not exist for *path*, the server MUST return S_OK and set *quotas* to an empty **IFsrmCommittableCollection**.
-- After populating the **List of Non-Persisted Directory Quota Instances**, the server MUST populate *quotas* with the **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.15)) of every Non-Persisted Directory Quota Instance in the **List of Non-Persisted Directory Quota Instances**.
+- After populating the **List of Non-Persisted Directory Quota Instances**, the server MUST populate *quotas* with the **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.14)) of every Non-Persisted Directory Quota Instance in the **List of Non-Persisted Directory Quota Instances**.
 <a id="Section_3.2.4.2.18.9"></a>
 ###### 3.2.4.2.18.9 EnumAutoApplyQuotas (Opnum 15)
 
@@ -8256,12 +8256,12 @@ Upon receiving this message, the server MUST validate parameters:
 - If *options* contains **FsrmEnumOptions_Asynchronous** or any value other than what is specified in section 2.2.1.2.5, the server MUST return FSRM_E_NOT_SUPPORTED.
 Upon successful validation of parameters, the server MUST perform all of the following actions:
 
-- Create a **List of Non-Persisted Auto Apply Quota Instances** (section 3.2.1.2) and populate it with [Non-Persisted Auto Apply Quota Instances (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.1) copied from the [Persisted Auto Apply Quotas (section 3.2.1.2.2.1)](#Section_3.2.1.2.2) in the **List of Persisted Auto Apply Quotas**, according to the following rules:
+- Create a **List of Non-Persisted Auto Apply Quota Instances** (section 3.2.1.2) and populate it with [Non-Persisted Auto Apply Quota Instances (section 3.2.1.2.2.2)](#Section_3.2.1.2.2.2) copied from the [Persisted Auto Apply Quotas (section 3.2.1.2.2.1)](#Section_3.2.1.2.2.1) in the **List of Persisted Auto Apply Quotas**, according to the following rules:
 - If *path* ends with "\*", the server MUST populate the **List of Non-Persisted Auto Apply Quota Instances** with a copy of every Persisted Auto Apply Quota from the **List of Persisted Auto Apply Quotas** that belongs to a subdirectory of *path*.
 - If *path* ends with "\...", the server MUST populate the **List of Non-Persisted Auto Apply Quota Instances** with a copy of every Persisted Auto Apply Quota from the **List of Persisted Auto Apply Quotas** that recursively belongs to a subdirectory of *path*.
 - If *path* does not end with "\*" or "\...", the server MUST populate the **List of Non-Persisted Auto Apply Quota Instances** with a copy of only the Persisted Auto Apply Quota from the **List of Persisted Auto Apply Quotas** for *path*.
 - If a Persisted Auto Apply Quota does not exist for *path*, the server MUST return S_OK and set *quotas* to an empty **IFsrmCommittableCollection**.
-- After populating the **List of Non-Persisted Auto Apply Quota Instances**, the server MUST populate *quotas* with the **IFsrmAutoApplyQuota** interface pointer (section [3.2.4.2.17](#Section_3.2.4.2.17.2)) of every Non-Persisted Auto Apply Quota Instance in this **List of Non-Persisted Auto Apply Quota Instances**.
+- After populating the **List of Non-Persisted Auto Apply Quota Instances**, the server MUST populate *quotas* with the **IFsrmAutoApplyQuota** interface pointer (section [3.2.4.2.17](#Section_3.2.4.2.17.3)) of every Non-Persisted Auto Apply Quota Instance in this **List of Non-Persisted Auto Apply Quota Instances**.
 <a id="Section_3.2.4.2.18.10"></a>
 ###### 3.2.4.2.18.10 EnumEffectiveQuotas (Opnum 16)
 
@@ -8298,9 +8298,9 @@ Upon receiving this message, the server MUST validate parameters:
 - If *options* contains **FsrmEnumOptions_Asynchronous** or any value other than what is specified in section 2.2.1.2.5, the server MUST return FSRM_E_NOT_SUPPORTED.
 Upon successful validation of parameters, the server MUST perform all of the following actions.
 
-- Create a **List of Non-Persisted Directory Quota Instances** (section 3.2.1.2) and populate it with [Non-Persisted Directory Quota Instances (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.1) copied from the particular [Persisted Directory Quotas (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) in the **List of Persisted Directory Quotas** whose [Directory Quota.Folder path](#Section_3.2.1.2.1) matches the specified path.
+- Create a **List of Non-Persisted Directory Quota Instances** (section 3.2.1.2) and populate it with [Non-Persisted Directory Quota Instances (section 3.2.1.2.1.2)](#Section_3.2.1.2.1.2) copied from the particular [Persisted Directory Quotas (section 3.2.1.2.1.1)](#Section_3.2.1.2.1.1) in the **List of Persisted Directory Quotas** whose [Directory Quota.Folder path](#Section_3.2.1.2.1) matches the specified path.
 - If no Persisted Directory Quota affects the specified path, the server MUST return S_OK and set *quotas* to an empty **IFsrmCommittableCollection**.
-- After populating the **List of Non-Persisted Directory Quota Instances**, the server MUST populate *quotas* with the **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.15)) of every Non-Persisted Directory Quota Instance in the **List of Non-Persisted Directory Quota Instances**.
+- After populating the **List of Non-Persisted Directory Quota Instances**, the server MUST populate *quotas* with the **IFsrmQuota** interface pointer (section [3.2.4.2.16](#Section_3.2.4.2.14)) of every Non-Persisted Directory Quota Instance in the **List of Non-Persisted Directory Quota Instances**.
 <a id="Section_3.2.4.2.18.11"></a>
 ###### 3.2.4.2.18.11 Scan (Opnum 17)
 
@@ -8355,7 +8355,7 @@ The server MUST create a new [**collection object**](#gt_collection-object) and 
 <a id="Section_3.2.4.2.19"></a>
 ##### 3.2.4.2.19 IFsrmQuotaManagerEx Methods
 
-The **IFsrmQuotaManagerEx** interface exposes additional methods for managing quota objects. **IFsrmQuotaManagerEx** implements methods for the **IFsrmQuotaManager** interface (section [3.2.4.2.18](#Section_3.2.4.2.18)).
+The **IFsrmQuotaManagerEx** interface exposes additional methods for managing quota objects. **IFsrmQuotaManagerEx** implements methods for the **IFsrmQuotaManager** interface (section [3.2.4.2.18](#Section_3.2.4.2.19)).
 
 Methods in RPC Opnum Order
 
@@ -8403,7 +8403,7 @@ The server MUST set *affected* to VARIANT_TRUE if the [Directory Quota.Folder pa
 <a id="Section_3.2.4.2.20"></a>
 ##### 3.2.4.2.20 IFsrmQuotaTemplate Methods
 
-The **IFsrmQuotaTemplate** interface exposes methods for configuring templates that describe quota objects. **IFsrmQuotaTemplate** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)) and **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.4)) interfaces, as well as those listed in the following table.
+The **IFsrmQuotaTemplate** interface exposes methods for configuring templates that describe quota objects. **IFsrmQuotaTemplate** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)) and **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.2)) interfaces, as well as those listed in the following table.
 
 Each instance of **IFsrmQuotaTemplate** is associated with one [Non-Persisted Directory Quota Template Instance (section 3.2.1.2.3.2)](#Section_3.2.1.2.3.1).
 
@@ -8421,7 +8421,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.20.1"></a>
 ###### 3.2.4.2.20.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in sections [3.2.4.2.10.5](#Section_3.2.4.2.10.5) and [3.2.4.2.14.1](#Section_3.2.4.2.14.11) with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in sections [3.2.4.2.10.5](#Section_3.2.4.2.10.5) and [3.2.4.2.14.1](#Section_3.2.4.2.14.10) with the following additions:
 
 - If **quota limit** is zero, the server MUST return E_INVALIDARG.
 - If the **FSRM Base Object.Deleted** property is set to true for this [Non-Persisted Directory Quota Template Instance (section 3.2.1.2.3.2)](#Section_3.2.1.2.3.1), the server MUST remove the [Persisted Directory Quota Template (section 3.2.1.2.3.1)](#Section_3.2.1.2.3.1) from the **List of Persisted Directory Quota Templates** (section [3.2.1.2](#Section_3.2.1.2)), which has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Template Instance, if one exists. This removal MUST occur even if other changes are made to the configuration of the Non-Persisted Directory Quota Template Instance. If there is no Persisted Directory Quota Template (section 3.2.1.2.3.1) from the **List of Persisted Directory Quota Templates** (section 3.2.1.2), which has the same **Directory Quota.Folder path** property as this Non-Persisted Directory Quota Template Instance (section 3.2.1.2.3.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
@@ -8439,7 +8439,7 @@ To update or populate the configuration data from a Non-Persisted Directory Quot
 <a id="Section_3.2.4.2.20.2"></a>
 ###### 3.2.4.2.20.2 QuotaFlags (put) (Opnum 15)
 
-The QuotaFlags (put) method is implemented as one of the methods derived from the **IFsrmQuotaObject** interface (section [3.2.4.2.15](#Section_3.2.4.2.15)). This method is implemented with the same behavior as described in IFsrmQuotaBase::QuotaFlags (put) (section [3.2.4.2.14.5](#Section_3.2.4.2.14.5)), and with the following additional behavior:
+The QuotaFlags (put) method is implemented as one of the methods derived from the **IFsrmQuotaObject** interface (section [3.2.4.2.15](#Section_3.2.4.2.15.5)). This method is implemented with the same behavior as described in IFsrmQuotaBase::QuotaFlags (put) (section [3.2.4.2.14.5](#Section_3.2.4.2.14.5)), and with the following additional behavior:
 
 - If *quotaFlags* contains FsrmQuotaFlags_Disable, the server MUST return E_INVALIDARG.
 <a id="Section_3.2.4.2.20.3"></a>
@@ -8536,7 +8536,7 @@ The CommitAndUpdateDerived method commits the quota template and applies the tem
 
 **applyOptions:** Contains the apply options to use when building the collection of derived objects.
 
-**derivedObjectsResult:** Pointer to an **IFsrmDerivedObjectsResult** interface pointer (section [3.2.4.2.13](#Section_3.2.4.2.13.1)) that upon completion, points to a derived objects result interface for the derived objects that have been updated by this method. A caller MUST release the collection received when the caller is done with the collection.
+**derivedObjectsResult:** Pointer to an **IFsrmDerivedObjectsResult** interface pointer (section [3.2.4.2.13](#Section_3.2.4.2.13.2)) that upon completion, points to a derived objects result interface for the derived objects that have been updated by this method. A caller MUST release the collection received when the caller is done with the collection.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8558,7 +8558,7 @@ If *applyOptions* equals **FsrmTemplateApplyOptions_ApplyToDerivedMatching**, th
 <a id="Section_3.2.4.2.21"></a>
 ##### 3.2.4.2.21 IFsrmQuotaTemplateImported Methods
 
-The **IFsrmQuotaTemplateImported** interface exposes methods for configuring imported quota template objects. **IFsrmQuotaTemplateImported** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.4)), and **IFsrmQuotaTemplate** (section [3.2.4.2.20](#Section_3.2.4.2.20)) interfaces, as well as those listed in the following table.
+The **IFsrmQuotaTemplateImported** interface exposes methods for configuring imported quota template objects. **IFsrmQuotaTemplateImported** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), **IFsrmQuotaBase** (section [3.2.4.2.14](#Section_3.2.4.2.14.2)), and **IFsrmQuotaTemplate** (section [3.2.4.2.20](#Section_3.2.4.2.22)) interfaces, as well as those listed in the following table.
 
 Each instance of **IFsrmQuotaTemplateImported** is associated with one [Non-Persisted Directory Quota Template Instance (section 3.2.1.2.3.2)](#Section_3.2.1.2.3.1).
 
@@ -8644,7 +8644,7 @@ The CreateTemplate method creates a blank [Non-Persisted Directory Quota Templat
 
 );
 
-**quotaTemplate:** Pointer to an **IFsrmQuotaTemplate** interface pointer (section [3.2.4.2.20](#Section_3.2.4.2.20)) that upon completion points to a blank [**directory quota template**](#gt_directory-quota-template). The caller MUST release the template when it is done with it.
+**quotaTemplate:** Pointer to an **IFsrmQuotaTemplate** interface pointer (section [3.2.4.2.20](#Section_3.2.4.2.22)) that upon completion points to a blank [**directory quota template**](#gt_directory-quota-template). The caller MUST release the template when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8693,7 +8693,7 @@ The GetTemplate method returns a pointer to the [**directory quota template**](#
 
 **name:** Contains the **Name** property of the directory quota template to return.
 
-**quotaTemplate:** Pointer to an **IFsrmQuotaTemplate** interface pointer (section [3.2.4.2.20](#Section_3.2.4.2.20)) that upon completion points to the directory quota template with the specified **Name**. The caller MUST release the quota template when it is done with it.
+**quotaTemplate:** Pointer to an **IFsrmQuotaTemplate** interface pointer (section [3.2.4.2.20](#Section_3.2.4.2.22)) that upon completion points to the directory quota template with the specified **Name**. The caller MUST release the quota template when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8750,7 +8750,7 @@ Upon successful validation of parameters, the server MUST perform the following 
 
 - Create a **List of Non-Persisted Directory Quota Template Instances** (section 3.2.1.2.
 - Populate the newly created instances list with [Non-Persisted Directory Quota Template Instances (section 3.2.1.2.3.2)](#Section_3.2.1.2.3.1) copied from every [Persisted Directory Quota Templates (section 3.2.1.2.3.1)](#Section_3.2.1.2.3.1) in the **List of Persisted Directory Quota Templates**.
-- Populate *quotaTemplate* with the **IFsrmQuotaTemplate** interface pointer (section [3.2.4.2.20](#Section_3.2.4.2.20)) of every Non-Persisted Directory Quota Template Instance in this **List of Non-Persisted Directory Quota Template Instances**.
+- Populate *quotaTemplate* with the **IFsrmQuotaTemplate** interface pointer (section [3.2.4.2.20](#Section_3.2.4.2.22)) of every Non-Persisted Directory Quota Template Instance in this **List of Non-Persisted Directory Quota Template Instances**.
 <a id="Section_3.2.4.2.22.4"></a>
 ###### 3.2.4.2.22.4 ExportTemplates (Opnum 10)
 
@@ -8803,7 +8803,7 @@ The ImportTemplates method imports [**directory quota templates**](#gt_directory
 
 **quotaTemplateNamesArray:** Pointer to a SAFEARRAY that contains the names of *quotaTemplates* to import.
 
-**quotaTemplates:** Pointer to an **IFsrmCommittableCollection** interface pointer (section [3.2.4.2.3](#Section_3.2.4.2.3)) that upon completion contains **IFsrmQuotaTemplate** interface pointers (section [3.2.4.2.20](#Section_3.2.4.2.20)) for each of the imported *quotaTemplates*. The caller MUST release the collection when it is done with it.
+**quotaTemplates:** Pointer to an **IFsrmCommittableCollection** interface pointer (section [3.2.4.2.3](#Section_3.2.4.2.3)) that upon completion contains **IFsrmQuotaTemplate** interface pointers (section [3.2.4.2.20](#Section_3.2.4.2.22)) for each of the imported *quotaTemplates*. The caller MUST release the collection when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8825,9 +8825,9 @@ Upon successful validation of parameters, the server MUST perform one of the fol
 <a id="Section_3.2.4.2.23"></a>
 ##### 3.2.4.2.23 IFsrmFileGroup Methods
 
-The **IFsrmFileGroup** interface exposes methods for configuring file group objects. **IFsrmFileGroup** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmFileGroup** interface exposes methods for configuring file group objects. **IFsrmFileGroup** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
-Each instance of **a IFsrmFileGroup** is associated with one [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1).
+Each instance of **a IFsrmFileGroup** is associated with one [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2).
 
 Methods in RPC Opnum Order
 
@@ -8844,11 +8844,11 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.23.1"></a>
 ###### 3.2.4.2.23.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5), with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5), with the following additions:
 
 - If **FileGroup.Name** is an empty string, the server MUST return FSRM_E_INVALID_NAME.
 - If **Members** is an empty list, the server MUST return FSRM_E_INVALID_FILEGROUP_DEFINITION.
-- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1), the server MUST remove the [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1) from the **List of Persisted File Groups** that has the same **File Group.Name** as this Non-Persisted File Group Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted File Group Instance. If there is no Persisted File Group in the **List of Persisted File Groups** that has the same **File Group.Name** as this Non-Persisted File Group Instance being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2), the server MUST remove the [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4) from the **List of Persisted File Groups** that has the same **File Group.Name** as this Non-Persisted File Group Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted File Group Instance. If there is no Persisted File Group in the **List of Persisted File Groups** that has the same **File Group.Name** as this Non-Persisted File Group Instance being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted File Group Instance, the server MUST update the configuration data of the Persisted File Group in the **List of Persisted File Groups** that has the same **File Group.Name** as this Non-Persisted File Group Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted File Group (section 3.2.1.3.4.1) exists on the server with the same name as the imported [file group](#Section_3.2.1.3.4) and its File Group.Overwrite on commit property is set to true, the existing Persisted File Group is overwritten with the imported file group.
 - If a Persisted File Group does not exist with the same **File Group.Name** and **FSRM Base Object.Deleted** is set to false, the server MUST perform the following actions:
@@ -8918,7 +8918,7 @@ The Members (get) method returns **members** of the file group.
 
 );
 
-**members:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.27.4)) that upon completion contains a list of all the file groups that are **members** of the file group. A caller MUST release the collection received when it is done with it.
+**members:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.2.1)) that upon completion contains a list of all the file groups that are **members** of the file group. A caller MUST release the collection received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -8966,7 +8966,7 @@ The NonMembers (get) method returns the **non-members** of the file group.
 
 );
 
-**nonMembers:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.27.4)) that upon completion contains a list of all the [**file name patterns**](#gt_file-name-pattern) that are **non-members** of the file group. A caller MUST release the collection received when it is done with it.
+**nonMembers:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.2.1)) that upon completion contains a list of all the [**file name patterns**](#gt_file-name-pattern) that are **non-members** of the file group. A caller MUST release the collection received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9006,7 +9006,7 @@ The server MUST use the file name patterns in nonmembers as **non-members** for 
 <a id="Section_3.2.4.2.24"></a>
 ##### 3.2.4.2.24 IFsrmFileGroupImported Methods
 
-The **IFsrmFileGroupImported** interface exposes methods for configuring imported file group objects. **IFsrmFileGroupImported** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)) and **IFsrmFileGroup** (section [3.2.4.2.23](#Section_3.2.4.2.23)) interfaces, as well as those listed in the following table.
+The **IFsrmFileGroupImported** interface exposes methods for configuring imported file group objects. **IFsrmFileGroupImported** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)) and **IFsrmFileGroup** (section [3.2.4.2.23](#Section_3.2.4.2.24)) interfaces, as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -9082,7 +9082,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.25.1"></a>
 ###### 3.2.4.2.25.1 CreateFileGroup (Opnum 7)
 
-The CreateFileGroup method creates a blank [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1).
+The CreateFileGroup method creates a blank [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2).
 
 [id(FSRM_DISPID_FILEGROUP_MANAGER | 0x01)] HRESULT CreateFileGroup(
 
@@ -9090,7 +9090,7 @@ The CreateFileGroup method creates a blank [Non-Persisted File Group Instance (
 
 );
 
-**fileGroup:** Pointer to an **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.23)) that upon completion points to a blank [**file group**](#gt_file-group). To have the server add the file group to its **List of Persisted File Groups** (section [3.2.1.3](#Section_3.2.1.3.1)), the caller MUST call [Commit (section 3.2.4.2.23.1)](#Section_3.2.4.2.23.1) on the file group. The caller MUST release the file group received when it is done with it.
+**fileGroup:** Pointer to an **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.24)) that upon completion points to a blank [**file group**](#gt_file-group). To have the server add the file group to its **List of Persisted File Groups** (section [3.2.1.3](#Section_3.2.1.3.1)), the caller MUST call [Commit (section 3.2.4.2.23.1)](#Section_3.2.4.2.23.1) on the file group. The caller MUST release the file group received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9111,7 +9111,7 @@ Upon successful validation of parameters, the server MUST perform the following 
 - Set **Members** to an empty list.
 - Set **Non-members** to an empty list.
 - Set *fileGroup* to the **IFsrmFileGroup** interface pointer for the newly created instance.
-The new Non-Persisted File Group Instance MUST NOT be associated with an existing [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1).
+The new Non-Persisted File Group Instance MUST NOT be associated with an existing [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4).
 
 <a id="Section_3.2.4.2.25.2"></a>
 ###### 3.2.4.2.25.2 GetFileGroup (Opnum 8)
@@ -9128,7 +9128,7 @@ The GetFileGroup method returns a pointer to the [**file group**](#gt_file-group
 
 **name:** Contains the **Name** of the file group to return. The maximum length of this string MUST be 4,000 characters.
 
-**fileGroup:** Pointer to an **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.23)) that upon completion points to the file group with the specified **Name** property. The caller MUST release the file group when it is done with it.
+**fileGroup:** Pointer to an **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.24)) that upon completion points to the file group with the specified **Name** property. The caller MUST release the file group when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9146,8 +9146,8 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions or return a nonzero error code.
 
-- Create a new [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1)
-- Populate its configuration data from the [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1) in the **List of Persisted File Groups** with the specified **Name**.
+- Create a new [Non-Persisted File Group Instance (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2)
+- Populate its configuration data from the [Persisted File Group (section 3.2.1.3.4.1)](#Section_3.2.1.3.4) in the **List of Persisted File Groups** with the specified **Name**.
 - Set *fileGroup* to the **IFsrmFileGroup** interface pointer of the newly created instance.
 If a Persisted File Group with the specified **Name** property does not exist, the server MUST return FSRM_E_NOT_FOUND.
 
@@ -9184,8 +9184,8 @@ Upon receiving this message, the server MUST validate parameters:
 Upon successful validation of parameters, the server MUST perform the following actions:
 
 - Create a **List of Non-Persisted File Group Instance** (section 3.2.1.3).
-- Populate the newly created instance list with [Non-Persisted File Group Instances (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1) copied from the [Persisted File Groups (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1) in the **List of Persisted File Groups** (section 3.2.1.3).
-- Populate *fileGroups* with the **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.23)) of every Non-Persisted File Group Instance in this **List of Non-Persisted File Group Instance**.
+- Populate the newly created instance list with [Non-Persisted File Group Instances (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2) copied from the [Persisted File Groups (section 3.2.1.3.4.1)](#Section_3.2.1.3.4) in the **List of Persisted File Groups** (section 3.2.1.3).
+- Populate *fileGroups* with the **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.24)) of every Non-Persisted File Group Instance in this **List of Non-Persisted File Group Instance**.
 <a id="Section_3.2.4.2.25.4"></a>
 ###### 3.2.4.2.25.4 ExportFileGroups (Opnum 10)
 
@@ -9217,7 +9217,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform one of the following actions.
 
-- If *fileGroupNamesArray* is NULL, the server MUST return the XML string representation of all [Persisted File Groups (section 3.2.1.3.4.1)](#Section_3.2.1.3.4.1) on the server.
+- If *fileGroupNamesArray* is NULL, the server MUST return the XML string representation of all [Persisted File Groups (section 3.2.1.3.4.1)](#Section_3.2.1.3.4) on the server.
 - If *fileGroupNamesArray* is not NULL, the server MUST return the XML string representation of only those Persisted File Groups specified in *fileGroupNamesArray*.
 <a id="Section_3.2.4.2.25.5"></a>
 ###### 3.2.4.2.25.5 ImportFileGroups (Opnum 11)
@@ -9238,7 +9238,7 @@ The ImportFileGroups method imports [**file groups**](#gt_file-group) from the [
 
 **fileGroupNamesArray:** Pointer to a SAFEARRAY that contains the names of file groups to import.
 
-**fileGroups:** Pointer to an **IFsrmCommittableCollection** interface pointer (section [3.2.4.2.3](#Section_3.2.4.2.3)) that upon completion contains an **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.23)) for each of the imported file groups. The caller MUST release the collection when it is done with it.
+**fileGroups:** Pointer to an **IFsrmCommittableCollection** interface pointer (section [3.2.4.2.3](#Section_3.2.4.2.3)) that upon completion contains an **IFsrmFileGroup** interface pointer (section [3.2.4.2.23](#Section_3.2.4.2.24)) for each of the imported file groups. The caller MUST release the collection when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9256,12 +9256,12 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform one of the following actions.
 
-- If *fileGroupNamesArray* is NULL, the server MUST create new [Non-Persisted File Group Instances (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.1) for each file group in the XML string, and populate *fileGroups* with the **IFsrmFileGroup** interface pointers for those Non-Persisted File Group Instances.
+- If *fileGroupNamesArray* is NULL, the server MUST create new [Non-Persisted File Group Instances (section 3.2.1.3.4.2)](#Section_3.2.1.3.4.2) for each file group in the XML string, and populate *fileGroups* with the **IFsrmFileGroup** interface pointers for those Non-Persisted File Group Instances.
 - If *fileGroupNamesArray* is not NULL, the server MUST create new Non-Persisted File Group Instances for file groups in the XML string, whose names are included in *fileGroupNamesArray*, and populate *fileGroups* with the **IFsrmFileGroup** interface pointers for those Non-Persisted File Group Instances.
 <a id="Section_3.2.4.2.26"></a>
 ##### 3.2.4.2.26 IFsrmFileScreenBase Methods
 
-The **IFsrmFileScreenBase** interface is the base interface for file screen objects. **IFsrmFileScreenBase** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmFileScreenBase** interface is the base interface for file screen objects. **IFsrmFileScreenBase** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -9285,7 +9285,7 @@ The BlockedFileGroups (get) method returns the list of names of file groups bloc
 
 );
 
-**blockList:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.27.4)) that upon completion contains the names of all the [**file groups**](#gt_file-group) blocked by this object. A caller MUST release the collection received when it is done with it.
+**blockList:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.2.1)) that upon completion contains the names of all the [**file groups**](#gt_file-group) blocked by this object. A caller MUST release the collection received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9395,7 +9395,7 @@ The CreateAction method creates an action for this file screen object.
 
 **actionType:** Contains the type of action to be created.
 
-**action:** Pointer to an **IFsrmAction** interface pointer (section [3.2.4.2.4](#Section_3.2.4.2.41.5)) that upon completion points to the newly created action. A caller MUST release the object received when the caller is done with it.
+**action:** Pointer to an **IFsrmAction** interface pointer (section [3.2.4.2.4](#Section_3.2.4.2.48.13)) that upon completion points to the newly created action. A caller MUST release the object received when the caller is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9441,7 +9441,7 @@ The server MUST create a new **IFsrmCollection** object and populate it with the
 <a id="Section_3.2.4.2.27"></a>
 ##### 3.2.4.2.27 IFsrmFileScreen Methods
 
-The **IFsrmFileScreen** interface exposes methods for configuring file screen objects. **IFsrmFileScreen** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)) and **IFsrmFileScreenBase** (section [3.2.4.2.26](#Section_3.2.4.2.26.5)) interfaces, as well as those listed in the following table.
+The **IFsrmFileScreen** interface exposes methods for configuring file screen objects. **IFsrmFileScreen** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)) and **IFsrmFileScreenBase** (section [3.2.4.2.26](#Section_3.2.4.2.26)) interfaces, as well as those listed in the following table.
 
 Each **IFsrmFileScreen** instance is associated with one [Non-Persisted File Screen Instance (section 3.2.1.3.1.2)](#Section_3.2.1.3.1.1).
 
@@ -9460,7 +9460,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.27.1"></a>
 ###### 3.2.4.2.27.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additional behavior:
 
 - If **blocked file groups** is an empty list, the server MUST return FSRM_E_INVALID_DATASCREEN_DEFINITION.
 - If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted File Screen Instance (section 3.2.1.3.1.2)](#Section_3.2.1.3.1.1), the server MUST remove the [Persisted File Screen (section 3.2.1.3.1.1)](#Section_3.2.1.3.1.1) from the **List of Persisted File Screens** (section [3.2.1.3](#Section_3.2.1.3.1)) that has the same **File Screen.Folder path** as this Non-Persisted File Screen Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted File Screen Instance. If there is no Persisted File Screen in the **List of Persisted File Screens** that has the same **File Screen.Folder path** as this Persisted File Screen being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
@@ -9559,7 +9559,7 @@ The server MUST do one of the following or return a nonzero error code.
 <a id="Section_3.2.4.2.27.5"></a>
 ###### 3.2.4.2.27.5 UserSid (get) (Opnum 21)
 
-The UserSid (get) method returns a string representation of the read-only user [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.1.1) section 2.4.2.4).
+The UserSid (get) method returns a string representation of the read-only user [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.2.2.1) section 2.4.2.4).
 
 [propget, id(FSRM_PROPERTY(FSRM_DISPID_FILESCREEN | 0x04))] HRESULT UserSid(
 
@@ -9583,7 +9583,7 @@ The server MUST set *userSid* to the string representation of the user SID of NU
 <a id="Section_3.2.4.2.27.6"></a>
 ###### 3.2.4.2.27.6 UserAccount (get) (Opnum 22)
 
-The UserAccount (get) method returns a string representation of the user account corresponding to the well-known [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.1.1) section 2.4.2.4).
+The UserAccount (get) method returns a string representation of the user account corresponding to the well-known [**SID**](#gt_security-identifier-sid) of NULL ([MS-DTYP](#Section_2.2.2.2.1) section 2.4.2.4).
 
 [propget, id(FSRM_PROPERTY(FSRM_DISPID_FILESCREEN | 0x05))] HRESULT UserAccount(
 
@@ -9635,7 +9635,7 @@ The server MUST do one of the following or return a nonzero error code.
 <a id="Section_3.2.4.2.28"></a>
 ##### 3.2.4.2.28 IFsrmFileScreenException Methods
 
-The **IFsrmFileScreenException** interface exposes methods for configuring [**file screen exception**](#gt_file-screen-exception) objects. **IFsrmFileScreenException** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmFileScreenException** interface exposes methods for configuring [**file screen exception**](#gt_file-screen-exception) objects. **IFsrmFileScreenException** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Each **IFsrmFileScreenException** instance is associated with one [Non-Persisted File Screen Exception Instance (section 3.2.1.3.1.2)](#Section_3.2.1.3.1.1).
 
@@ -9651,10 +9651,10 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.28.1"></a>
 ###### 3.2.4.2.28.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
 
 - If **Allowed File groups** is an empty list, the server MUST return FSRM_E_ALREADY_EXISTS.
-- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted File Screen Exception Instance (section 3.2.1.3.2.2)](#Section_3.2.1.3.1.1), the server MUST remove the [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1) from the **List of Persisted File Screen Exceptions** ([3.2.1.3](#Section_3.2.1.3.1)) that has the same **File Screen Exception.Folder path** as this Non-Persisted File Screen Exception Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted File Screen Exception Instance. If there is no Persisted File Screen Exception in the **List of Persisted File Screen Exceptions** that has the same **File Screen Exception.Folder path** as this Persisted File Screen Exception being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted File Screen Exception Instance (section 3.2.1.3.2.2)](#Section_3.2.1.3.2.1), the server MUST remove the [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.2) from the **List of Persisted File Screen Exceptions** ([3.2.1.3](#Section_3.2.1.3.1)) that has the same **File Screen Exception.Folder path** as this Non-Persisted File Screen Exception Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted File Screen Exception Instance. If there is no Persisted File Screen Exception in the **List of Persisted File Screen Exceptions** that has the same **File Screen Exception.Folder path** as this Persisted File Screen Exception being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted File Screen Exception Instance, the server MUST update the configuration data of the Persisted File Screen Exception in the **List of Persisted File Screen Exceptions** that has the same **File Screen Exception.Folder path** as this Non-Persisted File Screen Exception Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted File Screen Exception does not exist with the same **File Screen Exception.Folder path** and with **FSRM Base Object.Deleted** is set to false, the server MUST create a new Persisted File Screen Exception, populate its configuration with the configuration from this Non-Persisted File Screen Exception Instance, and add the new Persisted File Screen Exception to the **List of Persisted File Screen Exceptions**.
 To update or populate the configuration data from a Non-Persisted File Screen Exception Instance to a Persisted File Screen Exception, the server MUST assign the values of all the properties shown in the list that follows, of the Non-Persisted File Screen Exception Instance to the corresponding properties of the Persisted File Screen Exception.
@@ -9698,7 +9698,7 @@ The AllowedFileGroups (get) method returns the list of names of file groups allo
 
 );
 
-**allowList:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.27.4)) that upon completion contains the names of all the file groups allowed by this object. A caller MUST release the collection received when it is done with it.
+**allowList:** Pointer to an **IFsrmMutableCollection** interface pointer (section [3.2.4.2.2](#Section_3.2.4.2.2.1)) that upon completion contains the names of all the file groups allowed by this object. A caller MUST release the collection received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9820,7 +9820,7 @@ The CreateFileScreen method creates a [Non-Persisted File Screen Instance (sect
 
 **path:** Contains the path of the local directory to put the [**file screen**](#gt_file-screens) on.
 
-**fileScreen:** Pointer to an **IFsrmFileScreen** interface pointer (section [3.2.4.2.27](#Section_3.2.4.2.32)) that upon completion contains a pointer to the newly created file screen. To have the file screen added to the server's **List of Persisted File Screens** (section [3.2.1.3](#Section_3.2.1.3.1)), the caller MUST call [Commit (section 3.2.4.2.27.1)](#Section_3.2.4.2.27.1). The caller MUST release the file screen when it is done with it.
+**fileScreen:** Pointer to an **IFsrmFileScreen** interface pointer (section [3.2.4.2.27](#Section_3.2.4.2.28)) that upon completion contains a pointer to the newly created file screen. To have the file screen added to the server's **List of Persisted File Screens** (section [3.2.1.3](#Section_3.2.1.3.1)), the caller MUST call [Commit (section 3.2.4.2.27.1)](#Section_3.2.4.2.27.1). The caller MUST release the file screen when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9861,7 +9861,7 @@ The GetFileScreen method returns the [**file screen**](#gt_file-screens) from th
 
 **path:** Contains the path of the file screen to return.
 
-**fileScreen:** Pointer to an **IFsrmFileScreen** interface pointer (section [3.2.4.2.27](#Section_3.2.4.2.32)) that upon completion contains a pointer to the file screen for the specified path. The caller MUST release the file screen when it is done with it.
+**fileScreen:** Pointer to an **IFsrmFileScreen** interface pointer (section [3.2.4.2.27](#Section_3.2.4.2.28)) that upon completion contains a pointer to the file screen for the specified path. The caller MUST release the file screen when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -9927,11 +9927,11 @@ Upon successful validation of parameters, the server MUST perform the following 
 - If *path* ends with "\...", the server MUST populate this **List of Non-Persisted File Screen Instances** with a copy of every Persisted File Screen from the **List of Persisted File Screens** that recursively belongs to a subdirectory of *path*.
 - If *path* does not end with "\*" or "\...", the server MUST populate this **List of Non-Persisted File Screen Instances** with a copy of only the file screen for *path*.
 - If a file screen does not exist for *path*, the server MUST return S_OK and MUST set *fileScreenExceptions* to an empty **IFsrmCommittableCollection**.
-- Populate *fileScreens* with the **IFsrmFileScreen** interface pointer (section [3.2.4.2.27](#Section_3.2.4.2.32)) of every Non-Persisted File Screen Instance in this **List of Non-Persisted File Screen Instances**.
+- Populate *fileScreens* with the **IFsrmFileScreen** interface pointer (section [3.2.4.2.27](#Section_3.2.4.2.28)) of every Non-Persisted File Screen Instance in this **List of Non-Persisted File Screen Instances**.
 <a id="Section_3.2.4.2.29.6"></a>
 ###### 3.2.4.2.29.6 CreateFileScreenException (Opnum 12)
 
-The CreateFileScreenException method creates a [Non-Persisted File Screen Exception Instance (section 3.2.1.3.2.2)](#Section_3.2.1.3.1.1) on the specified path.
+The CreateFileScreenException method creates a [Non-Persisted File Screen Exception Instance (section 3.2.1.3.2.2)](#Section_3.2.1.3.2.1) on the specified path.
 
 [id(FSRM_DISPID_FILESCREEN_MANAGER | 0x04)] HRESULT CreateFileScreenException(
 
@@ -9963,7 +9963,7 @@ Upon successful validation of parameters, the server MUST perform the following 
 - Set **FSRM Base Object.Id** to a [**GUID**](#gt_globally-unique-identifier-guid).
 - Set **Allowed file groups** to an empty list.
 - Set *fileScreenException* to the **IFsrmFileScreenException** interface pointer of the newly created Non-Persisted File Screen Exception Instance.
-The new Non-Persisted File Screen Exception Instance MUST NOT be associated with an existing [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1).
+The new Non-Persisted File Screen Exception Instance MUST NOT be associated with an existing [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.2).
 
 <a id="Section_3.2.4.2.29.7"></a>
 ###### 3.2.4.2.29.7 GetFileScreenException (Opnum 13)
@@ -9999,8 +9999,8 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions or return a nonzero error code.
 
-- Create a new [Non-Persisted File Screen Exception Instance (section 3.2.1.3.2.2)](#Section_3.2.1.3.1.1).
-- Populate its configuration data from the [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1) in the **List of Persisted File Screen Exceptions** with the specified path.
+- Create a new [Non-Persisted File Screen Exception Instance (section 3.2.1.3.2.2)](#Section_3.2.1.3.2.1).
+- Populate its configuration data from the [Persisted File Screen Exception (section 3.2.1.3.2.1)](#Section_3.2.1.3.2) in the **List of Persisted File Screen Exceptions** with the specified path.
 - Set *fileScreenException* to the **IFsrmFileScreenException** interface pointer of the newly created Non-Persisted File Screen Exception Instance.
 If a file screen exception does not exist for the specified path, the server MUST return FSRM_E_NOT_FOUND.
 
@@ -10042,7 +10042,7 @@ Upon receiving this message, the server MUST validate parameters:
 Upon successful validation of parameters, the server MUST perform the following actions:
 
 - Create a new **List of Non-Persisted File Screen Exception Instances** (section 3.2.1.3).
-- Populate it with [Non-Persisted File Screen Exception Instances (section 3.2.1.3.2.2)](#Section_3.2.1.3.1.1) copied from the [Persisted File Screen Exceptions (section 3.2.1.3.2.1)](#Section_3.2.1.3.1.1) in the **List of Persisted File Screen Exceptions** according to the following rules:
+- Populate it with [Non-Persisted File Screen Exception Instances (section 3.2.1.3.2.2)](#Section_3.2.1.3.2.1) copied from the [Persisted File Screen Exceptions (section 3.2.1.3.2.1)](#Section_3.2.1.3.2) in the **List of Persisted File Screen Exceptions** according to the following rules:
 - If *path* ends with "\*", the server MUST populate this new **List of Non-Persisted File Screen Exception Instances** with a copy of every Persisted File Screen Exception from the **List of Persisted File Screen Exceptions** that belongs to an immediate subdirectory of *path*.
 - If *path* ends with "\...", the server MUST populate this new **List of Non-Persisted File Screen Exception Instances** with a copy of every Persisted File Screen Exception from the **List of Persisted File Screen Exceptions** that recursively belongs to a subdirectory of *path*.
 - If *path* does not end with "\*" or "\...", the server MUST populate this new **List of Non-Persisted File Screen Exception Instances** with a copy of the only Persisted File Screen Exception for *path*.
@@ -10077,7 +10077,7 @@ The server MUST create a new [**collection object**](#gt_collection-object) and 
 <a id="Section_3.2.4.2.30"></a>
 ##### 3.2.4.2.30 IFsrmFileScreenTemplate Methods
 
-The **IFsrmFileScreenTemplate** interface exposes methods for configuring templates that describe file screen objects. **IFsrmFileScreenTemplate** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)) and **IFsrmFileScreenBase** (section [3.2.4.2.26](#Section_3.2.4.2.26.5)) interfaces, as well as those listed in the following table.
+The **IFsrmFileScreenTemplate** interface exposes methods for configuring templates that describe file screen objects. **IFsrmFileScreenTemplate** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)) and **IFsrmFileScreenBase** (section [3.2.4.2.26](#Section_3.2.4.2.26)) interfaces, as well as those listed in the following table.
 
 Each **IFsrmFileScreenTemplate** instance is associated with one [Non-Persisted File Screen Template Instance (section 3.2.1.3.3.2)](#Section_3.2.1.3.1.1).
 
@@ -10094,7 +10094,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.30.1"></a>
 ###### 3.2.4.2.30.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additional behavior:
 
 - If **Blocked file groups** is an empty list, the server MUST return FSRM_E_INVALID_DATASCREEN_DEFINITION.
 - If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted File Screen Template Instance (section 3.2.1.3.3.2)](#Section_3.2.1.3.1.1), the server MUST remove the [Persisted File Screen Template (section 3.2.1.3.3.1)](#Section_3.2.1.3.1.1) from the **List of Persisted File Screen Templates** (section [3.2.1.3](#Section_3.2.1.3.1)) that has the same **File Screen Template.Name** as this Non-Persisted File Screen Template Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted File Screen Template Instance. If there is no Persisted File Screen Template in the **List of Persisted File Screen Templates** that has the same **File Screen Template.Name** as this Non-Persisted File Screen Template Instance being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
@@ -10205,7 +10205,7 @@ The CommitAndUpdateDerived method commits the file screen template and applies t
 
 **applyOptions:** Contains the apply options to use when building the collection of derived objects.
 
-**derivedObjectsResult:** Pointer to an **IFsrmDerivedObjectsResult** interface pointer (section [3.2.4.2.13](#Section_3.2.4.2.13.1)) that upon completion points to derived objects result interface for the derived objects updated with this method. A caller MUST release the collection received when it is done with it.
+**derivedObjectsResult:** Pointer to an **IFsrmDerivedObjectsResult** interface pointer (section [3.2.4.2.13](#Section_3.2.4.2.13.2)) that upon completion points to derived objects result interface for the derived objects updated with this method. A caller MUST release the collection received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -10228,7 +10228,7 @@ If *applyOptions* equals FsrmTemplateApplyOptions_ApplyToDerivedMatching, the se
 <a id="Section_3.2.4.2.31"></a>
 ##### 3.2.4.2.31 IFsrmFileScreenTemplateImported Methods
 
-The **IFsrmFileScreenTemplateImported** interface exposes methods for configuring imported file screen templates. **IFsrmFileScreenTemplateImported** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), **IFsrmFileScreenBase** (section [3.2.4.2.26](#Section_3.2.4.2.26.5)), and **IFsrmFileScreenTemplate** (section [3.2.4.2.30](#Section_3.2.4.2.32)) interfaces, as well as those listed in the following table.
+The **IFsrmFileScreenTemplateImported** interface exposes methods for configuring imported file screen templates. **IFsrmFileScreenTemplateImported** implements methods for the **IFsrmObject** (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), **IFsrmFileScreenBase** (section [3.2.4.2.26](#Section_3.2.4.2.26)), and **IFsrmFileScreenTemplate** (section [3.2.4.2.30](#Section_3.2.4.2.32)) interfaces, as well as those listed in the following table.
 
 Each **IFsrmFileScreenTemplateImported** instance is associated with one [Non-Persisted File Screen Template Instance (section 3.2.1.3.3.2)](#Section_3.2.1.3.1.1).
 
@@ -10866,7 +10866,7 @@ The server MUST use *limitValue* as the **report size limit** for the specified 
 <a id="Section_3.2.4.2.34"></a>
 ##### 3.2.4.2.34 IFsrmReportJob Methods
 
-The **IFsrmReportJob** interface exposes methods for configuring report jobs. **IFsrmReportJob** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmReportJob** interface exposes methods for configuring report jobs. **IFsrmReportJob** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Each **IFsrmReportJob** instance is associated with one [Non-Persisted Report Job Instance (section 3.2.1.5.1.2)](#Section_3.2.1.5.1.2).
 
@@ -10896,7 +10896,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.34.1"></a>
 ###### 3.2.4.2.34.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
 
 - If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Report Job Instance (section 3.2.1.5.1.2)](#Section_3.2.1.5.1.2), the server MUST remove the [Persisted Report Job (section 3.2.1.5.1.1)](#Section_3.2.1.5.1) from the **List of Persisted Report Jobs** (section [3.2.1.5](#Section_3.2.1.5)) that has the same **Task name** as this Non-Persisted Report Job Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Report Job Instance. If a Persisted Report Job does not exist, removal is not performed and the server MUST return 0. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted Report Job Instance, the server MUST perform the following actions:
@@ -11257,7 +11257,7 @@ Upon receiving this message, the server MUST validate parameters:
 - Verify that *reports* is not NULL.
 If any validation fails, the server MUST terminate processing and return a nonzero error code.
 
-The server MUST populate *reports* with the **IFsrmReport** interface pointer (section [3.2.4.2.35](#Section_3.2.4.2.33)) of each report configured for the report job object.
+The server MUST populate *reports* with the **IFsrmReport** interface pointer (section [3.2.4.2.35](#Section_3.2.4.2.35)) of each report configured for the report job object.
 
 If there are no reports configured for the report job (that is, the **Report Job.Reports** list is empty), the server MUST return an **IFsrmCollection** object that contains zero objects.
 
@@ -11276,7 +11276,7 @@ The CreateReport method adds a report of the specified type to a [**report job**
 
 **reportType:** An [FsrmReportType (section 2.2.1.2.10)](#Section_2.2.1.2.10) enumeration value that identifies the type of report contained in the *report* parameter.
 
-**report:** A pointer to an **IFsrmReport** interface pointer (section [3.2.4.2.35](#Section_3.2.4.2.33)) that upon completion contains a pointer to the newly created report of the specified type. The caller MUST release the report job when it is done with it.
+**report:** A pointer to an **IFsrmReport** interface pointer (section [3.2.4.2.35](#Section_3.2.4.2.35)) that upon completion contains a pointer to the newly created report of the specified type. The caller MUST release the report job when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -11775,21 +11775,21 @@ The server MUST delete the specified task.
 <a id="Section_3.2.4.2.37"></a>
 ##### 3.2.4.2.37 IFsrmPropertyDefinition
 
-The **IFsrmPropertyDefinition** interface exposes methods for configuring property definitions. **IFsrmPropertyDefinition** implements the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmPropertyDefinition** interface exposes methods for configuring property definitions. **IFsrmPropertyDefinition** implements the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
-Each **IFsrmPropertyDefinition** instance is associated with one [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1).
+Each **IFsrmPropertyDefinition** instance is associated with one [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2).
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Commit](#Section_3.2.4.2.37) | Opnum: 11 |
+| [Commit](#Section_3.2.4.2.40) | Opnum: 11 |
 | [Name (get)](#Section_3.2.4.2.20.3) | Opnum: 12 |
-| [Name (put)](#Section_3.2.4.2.37) | Opnum: 13 |
+| [Name (put)](#Section_3.2.4.2.40) | Opnum: 13 |
 | [Type (get)](#Section_3.2.4.2.35.1) | Opnum: 14 |
-| [Type (put)](#Section_3.2.4.2.37) | Opnum: 15 |
+| [Type (put)](#Section_3.2.4.2.40) | Opnum: 15 |
 | [PossibleValues (get)](#Section_3.2.4.2.37.6) | Opnum: 16 |
-| [PossibleValues (put)](#Section_3.2.4.2.37) | Opnum: 17 |
+| [PossibleValues (put)](#Section_3.2.4.2.40) | Opnum: 17 |
 | [ValueDescriptions (get)](#Section_3.2.4.2.37.8) | Opnum: 18 |
 | [ValueDescriptions (put)](#Section_3.2.4.2.37.9) | Opnum: 19 |
 | [Parameters (get)](#Section_3.2.4.2.37.10) | Opnum: 20 |
@@ -11798,14 +11798,14 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.37.1"></a>
 ###### 3.2.4.2.37.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
 
 - If the **Property Definition.Name** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If the **Property Definition.Type** is not a valid [FsrmPropertyDefinitionType (section 2.2.2.3.1.1)](#Section_2.2.2.3.1.1) value or is FsrmPropertyDefinitionType_Unknown, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If Property **Definition.Possible values** is an empty list and **Property Definition.Type** is FsrmPropertyDefinitionType_OrderedList or FsrmPropertyDefinitionType_MultiChoiceList (FsrmPropertyDefinitionType (section 2.2.2.3.1.1)), the server MUST return E_INVALIDARG.
 Additionally, if Property **Definition.Possible values** is an empty list and [Property Definition.Type](#Section_3.2.1.6.1) is FsrmPropertyDefinitionType_SingleChoiceList, the server SHOULD return E_INVALIDARG. <65>
 
-- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1), the server MUST remove the [Persisted Property Definition (section 3.2.1.6.1.1)](#Section_3.2.1.6.1.1) from the **List of Persisted Property Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Property Definiton.Name** as this Non-Persisted Property Definition Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Property Definition Instance. If there is no Persisted Property Definition (section 3.2.1.6.1.1) in the List of Persisted Property Definitions (section 3.2.1.6) that has the same **Property Definition.Name** as this Non-Persisted Property Definition Instance being deleted, the server doesn't perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2), the server MUST remove the [Persisted Property Definition (section 3.2.1.6.1.1)](#Section_3.2.1.6.1.1) from the **List of Persisted Property Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Property Definiton.Name** as this Non-Persisted Property Definition Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Property Definition Instance. If there is no Persisted Property Definition (section 3.2.1.6.1.1) in the List of Persisted Property Definitions (section 3.2.1.6) that has the same **Property Definition.Name** as this Non-Persisted Property Definition Instance being deleted, the server doesn't perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted Property Definition Instance, the server MUST update the configuration data of the Persisted Property Definition in the **List of Persisted Property Definitions** that has the same **Property Definition.Name** as this Non-Persisted Property Definition Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If there is a Persisted Property Definition in the List of Persisted Property Definitions that has the same **Property Definition.Name** as the one being committed but with a different **FSRM Base Object.Id**, the server MUST return FSRM_E_ALREADY_EXISTS.
 - If a Persisted Property Definition does not exist with the same **Property Definition.Name** and with **FSRM Base Object.Deleted** is set to false, the server MUST create a new Persisted Property Definition, populate its configuration with the configuration from this Non-Persisted Property Definition Instance, and add the new Persisted Property Definition to the **List of Persisted Property Definitions**.
@@ -12064,7 +12064,7 @@ The server MUST set the list of **Property Definition.Parameters** for the prope
 
 The IFsrmPropertyDefinition2 interface exposes methods for configuring property definitions. **IFsrmPropertyDefinition2** implements the methods of the **IFsrmPropertyDefinition** interface as well as those listed in the following table.
 
-Each **IFsrmPropertyDefinition2** instance is associated with one [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1).
+Each **IFsrmPropertyDefinition2** instance is associated with one [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2).
 
 Methods in RPC Opnum Order
 
@@ -12468,7 +12468,7 @@ The server MUST set *flags* to the **property definition instance.flags** of the
 <a id="Section_3.2.4.2.41"></a>
 ##### 3.2.4.2.41 IFsrmRule
 
-The **IFsrmRule** interface is the base interface for all the File Server Resource Manager Protocol rule objects. **IFsrmRule** implements the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmRule** interface is the base interface for all the File Server Resource Manager Protocol rule objects. **IFsrmRule** implements the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -12790,7 +12790,7 @@ The server MUST set *lastModified* to the **last modified time** when the rule w
 
 The **IFsrmClassificationRule** interface exposes methods for configuring a [**classification rule**](#gt_classification-rules). **IFsrmClassificationRule** implements the methods of the **IFsrmRule** interface (section [3.2.4.2.41](#Section_3.2.4.2.41)), as well as those listed in the following table.
 
-Each **IFsrmClassificationRule** instance is associated with one [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.2).
+Each **IFsrmClassificationRule** instance is associated with one [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.1).
 
 Methods in RPC Opnum Order
 
@@ -12807,18 +12807,18 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.42.1"></a>
 ###### 3.2.4.2.42.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
 
 - If **Rule.Deprecated** is true, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If **Namespace roots** is an empty list, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If **Rule.Name** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If **Module Definition.Name** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If the module definition specified by **Module Definition.Name** does not have the *Module type* **FsrmPipelineModuleType_Classifier**, the server MUST return E_INVALIDARG.
-- If the module definition that the rule will use during classification has **Needs explicit value** (section [3.2.1.6.2](#Section_3.2.1.6.2.1)) set to true, and if **Rule.Value** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
+- If the module definition that the rule will use during classification has **Needs explicit value** (section [3.2.1.6.2](#Section_3.2.1.6.2.2)) set to true, and if **Rule.Value** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If **Rule.Value** is not a valid value for the [Persisted Property Definition](#Section_3.2.1.6.1.1) identified by **Rule.Property Affected** , the server MUST return E_INVALIDARG.
 - If **property affected** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If **property affected** is not contained in the **properties affected** of the classifier module specified by **Module Definition.Name**, the server MUST return FSRM_E_NOT_FOUND.
-- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.2), the server MUST remove the [Persisted Rule (section 3.2.1.6.3.1)](#Section_3.2.1.6.3.1) from the **List of Persisted Rules** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Rule.Name** as this Non-Persisted Rule Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Rule Instance. If there is no Persisted Rule in the **List of Persisted Rules** that has the same **Rule.Name** as this Non-Persisted Rule Instance being deleted, the server doesn't perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.1), the server MUST remove the [Persisted Rule (section 3.2.1.6.3.1)](#Section_3.2.1.6.3.1) from the **List of Persisted Rules** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Rule.Name** as this Non-Persisted Rule Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Rule Instance. If there is no Persisted Rule in the **List of Persisted Rules** that has the same **Rule.Name** as this Non-Persisted Rule Instance being deleted, the server doesn't perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted Rule Instance, the server MUST update the configuration data of the Persisted Rule in the **List of Persisted Rules** that has the same **Rule.Name** as this Non-Persisted Rule Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted Rule does not exist with the same **Rule.Name** and with **FSRM Base Object.Deleted** is set to false, the server MUST create a new Persisted Rule, populate its configuration with the configuration from this Non-Persisted Rule Instance, and add the new Persisted Rule to the **List of Persisted Rules**.
 - If the [Property Definition](#Section_3.2.1.6.1) identified by **Rule.Property Affected** has **Property Definition.Type** as **FsrmPropertyDefinitionType_OrderedList**, [FsrmPropertyDefinitionType_SingleChoiceList](#Section_2.2.2.3.1.1), or **FsrmPropertyDefinitionType_MultiChoiceList**, then the **Rule.Value** applied by the rule MUST be one of the Property Definition's possible values.
@@ -12997,7 +12997,7 @@ The server MUST use *value* as the **Rule.Value** applied by the rule. The serve
 <a id="Section_3.2.4.2.43"></a>
 ##### 3.2.4.2.43 IFsrmPipelineModuleDefinition
 
-The **IFsrmPipelineModuleDefinition** interface provides methods for configuring [**module definitions**](#gt_module-definition). **IFsrmPipelineModuleDefinition** implements the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmPipelineModuleDefinition** interface provides methods for configuring [**module definitions**](#gt_module-definition). **IFsrmPipelineModuleDefinition** implements the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Methods in RPC Opnum Order
 
@@ -13475,11 +13475,11 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.44.1"></a>
 ###### 3.2.4.2.44.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the behavior specified in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5) with the following additions:
 
 - If the **Module Definition.Name** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
 - If **ModuleClsid** is an empty string, the server MUST return FSRM_E_REQD_PARAM_MISSING.
-- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Module Definition Instance (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1), the server MUST remove the [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2.1) from the **List of Persisted Module Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Module Definition Instance. If there is no Persisted Module Definition in **List of Persisted Module Definitions** that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance being deleted, the server doesn’t perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Module Definition Instance (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1), the server MUST remove the [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2) from the **List of Persisted Module Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Module Definition Instance. If there is no Persisted Module Definition in **List of Persisted Module Definitions** that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance being deleted, the server doesn’t perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted Module Definition Instance, the server MUST update the configuration data of the Persisted Module Definition in the **List of Persisted Module Definitions** that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted Module Definition does not exist with the same **Module Definition.Name** and with **FSRM Base Object.Deleted** is set to false, the server MUST create a new Persisted Module Definition, populate its configuration with the configuration from this Non-Persisted Module Definition Instance, and add the new Persisted Module Definition to the **List of Persisted Module Definitions**.
 To update or populate the configuration data from Non-Persisted Module Definition Instance to a Persisted Module Definition, the server MUST assign the values of all the properties in the list that follows, of the Non-Persisted Module Definition Instance to the corresponding properties of the Persisted Module Definition.
@@ -13974,13 +13974,13 @@ Upon receiving this message, the server MUST validate parameters:
 Upon successful validation of parameters, the server MUST perform the following actions:
 
 - Create a new **List of Non-Persisted Property Definition Instances** (section 3.2.1.6).
-- Populate it with [Non-Persisted Property Definition Instances (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1) copied from the [Persisted Property Definitions (section 3.2.1.6.1.1)](#Section_3.2.1.6.1.1) in the **List of Persisted Property Definitions**.
+- Populate it with [Non-Persisted Property Definition Instances (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2) copied from the [Persisted Property Definitions (section 3.2.1.6.1.1)](#Section_3.2.1.6.1.1) in the **List of Persisted Property Definitions**.
 - If *options* did not include FsrmEnumOptions_IncludeDeprecatedObjects, remove all Non-Persisted Property Definition Instances that have [Property Definition.Deprecated](#Section_3.2.1.6.1) set to true.
-- Populate *propertyDefinitions* with objects that MUST implement the **IFsrmPropertyDefiniton** interface pointer (section [3.2.4.2.37](#Section_3.2.4.2.37.5)) and SHOULD<67> implement the [IFsrmPropertyDefinition2 (section 3.2.4.2.38)](#Section_3.2.4.2.38.4) interface of every Non-Persisted Property Definition Instance in this **List of Non-Persisted Property Definition Instances**.
+- Populate *propertyDefinitions* with objects that MUST implement the **IFsrmPropertyDefiniton** interface pointer (section [3.2.4.2.37](#Section_3.2.4.2.37.7)) and SHOULD<67> implement the [IFsrmPropertyDefinition2 (section 3.2.4.2.38)](#Section_3.2.4.2.38) interface of every Non-Persisted Property Definition Instance in this **List of Non-Persisted Property Definition Instances**.
 <a id="Section_3.2.4.2.45.13"></a>
 ###### 3.2.4.2.45.13 CreatePropertyDefinition (Opnum 19)
 
-The CreatePropertyDefinition method creates a blank [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1) and returns S_OK upon successful completion.
+The CreatePropertyDefinition method creates a blank [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2) and returns S_OK upon successful completion.
 
 [id(FSRM_DISPID_CLASSIFICATION_MANAGER | 0x02)] HRESULT CreatePropertyDefinition(
 
@@ -13988,7 +13988,7 @@ The CreatePropertyDefinition method creates a blank [Non-Persisted Property Defi
 
 );
 
-**propertyDefinition:** Pointer to an **IFsrmPropertyDefinition** interface pointer (section [3.2.4.2.37](#Section_3.2.4.2.37.5)) that upon completion points to a blank [**property definition**](#gt_property-definition). To have the property definition added to the server's **List of Persisted Property Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)), the client MUST call [Commit (section 3.2.4.2.37.1)](#Section_3.2.4.2.37). The caller MUST release the property definition when the caller is done with it.
+**propertyDefinition:** Pointer to an **IFsrmPropertyDefinition** interface pointer (section [3.2.4.2.37](#Section_3.2.4.2.37.7)) that upon completion points to a blank [**property definition**](#gt_property-definition). To have the property definition added to the server's **List of Persisted Property Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)), the client MUST call [Commit (section 3.2.4.2.37.1)](#Section_3.2.4.2.40). The caller MUST release the property definition when the caller is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -14029,7 +14029,7 @@ The GetPropertyDefinition method returns a pointer to the [**property definition
 
 **propertyName:** Contains the name of the property definition to return.
 
-**propertyDefinition:** Pointer to an **IFsrmPropertyDefinition** interface pointer (section [3.2.4.2.37](#Section_3.2.4.2.37.5)) that upon completion points to the **IFsrmPropertyDefinition** with the specified name. Additionally, the server SHOULD implement [IFsrmPropertyDefinition2](#Section_3.2.4.2.38.4) for the same interface pointer.<68> The caller MUST release the property definition when the caller is done with it.
+**propertyDefinition:** Pointer to an **IFsrmPropertyDefinition** interface pointer (section [3.2.4.2.37](#Section_3.2.4.2.37.7)) that upon completion points to the **IFsrmPropertyDefinition** with the specified name. Additionally, the server SHOULD implement [IFsrmPropertyDefinition2](#Section_3.2.4.2.38) for the same interface pointer.<68> The caller MUST release the property definition when the caller is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -14047,7 +14047,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions.
 
-- Create a new [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.1).
+- Create a new [Non-Persisted Property Definition Instance (section 3.2.1.6.1.2)](#Section_3.2.1.6.1.2).
 - Populate its configuration data from the [Persisted Property Definition (section 3.2.1.6.1.1)](#Section_3.2.1.6.1.1) in the **List of Persisted Property Definitions** whose **Property Definition.Name** is equivalent to *propertyName*.
 - Set *propertyDefinition* to the **IFsrmPropertyDefinition** interface pointer of the newly created Non-Persisted Property Definition Instance.
 If a property definition with the specified name does not exist, the server MUST return **FSRM_E_NOT_FOUND**.
@@ -14090,13 +14090,13 @@ Upon receiving this message, the server MUST validate parameters:
 Upon successful validation of parameters, the server MUST perform the following actions:
 
 - Create a new **List of Non-Persisted Rule Instances** (section 3.2.1.6).
-- Populate the newly created list with [Non-Persisted Rule Instances (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.2) copied from the [Persisted Rules (section 3.2.1.6.3.1)](#Section_3.2.1.6.3.1) in the **List of Persisted Rules** where each copied instance's **Rule Type** is equivalent to *ruleType*.
+- Populate the newly created list with [Non-Persisted Rule Instances (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.1) copied from the [Persisted Rules (section 3.2.1.6.3.1)](#Section_3.2.1.6.3.1) in the **List of Persisted Rules** where each copied instance's **Rule Type** is equivalent to *ruleType*.
 - If **options** did not include FsrmEnumOptions_IncludeDeprecatedObjects, remove all Non-Persisted Rule Instances that have [Rule.Deprecated](#Section_e096822f67f44a429fe65ee194ad8581) set to true.
 - Populate *Rules* with the **IFsrmRule** interface pointer (section [3.2.4.2.41](#Section_3.2.4.2.41)) of every Non-Persisted Rule Instance in this **List of Non-Persisted Rule Instances**.
 <a id="Section_3.2.4.2.45.16"></a>
 ###### 3.2.4.2.45.16 CreateRule (Opnum 22)
 
-The CreateRule method creates a blank [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.2) with the specified [**classification rule**](#gt_classification-rules) type and returns S_OK upon successful completion.
+The CreateRule method creates a blank [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.1) with the specified [**classification rule**](#gt_classification-rules) type and returns S_OK upon successful completion.
 
 [id(FSRM_DISPID_CLASSIFICATION_MANAGER | 0x05)] HRESULT CreateRule(
 
@@ -14180,7 +14180,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 
 Upon successful validation of parameters, the server MUST perform the following actions or return a nonzero error code.
 
-- Create a new [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.2).
+- Create a new [Non-Persisted Rule Instance (section 3.2.1.6.3.2)](#Section_3.2.1.6.3.1).
 - Populate the configuration data of the Non-Persisted Rule Instance from the [Persisted Rule (section 3.2.1.6.3.1)](#Section_3.2.1.6.3.1) in the **List of Persisted Rules** whose **Rule.Name** is equivalent to *ruleName* and whose **Rule.Type** is equivalent to *ruleType*.
 - Set *Rule* to the **IFsrmRule** interface pointer of the newly created Non-Persisted Rule Instance.
 If a classification rule with the specified **Name** and **Rule type** does not exist, the server MUST return **FSRM_E_NOT_FOUND**.
@@ -14223,7 +14223,7 @@ Upon receiving this message, the server MUST validate parameters:
 Upon successful validation of parameters, the server MUST perform the following actions:
 
 - Create a **List of Non-Persisted Module Definition Instances** (section 3.2.1.6).
-- Populate it with [Non-Persisted Module Definition Instances (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1) copied from the [Persisted Module Definitions (section 3.2.1.6.2.1)](#Section_3.2.1.6.2.1) in the **List of Persisted Module Definitions** where each copied instance's **Module Type** is equivalent to *moduleType*.
+- Populate it with [Non-Persisted Module Definition Instances (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1) copied from the [Persisted Module Definitions (section 3.2.1.6.2.1)](#Section_3.2.1.6.2) in the **List of Persisted Module Definitions** where each copied instance's **Module Type** is equivalent to *moduleType*.
 - Populate *moduleDefinitions* with the **IFsrmPipelineModuleDefinition** interface pointer (section [3.2.4.2.43](#Section_3.2.4.2.43)) of every Non-Persisted Module Definition Instance in this newly created **List of Non-Persisted Module Definition Instances**.
 <a id="Section_3.2.4.2.45.19"></a>
 ###### 3.2.4.2.45.19 CreateModuleDefinition (Opnum 25)
@@ -14317,7 +14317,7 @@ If any validation fails, the server MUST terminate processing and return a nonze
 Upon successful validation of parameters, the server MUST perform the following actions.
 
 - Create a new [Non-Persisted Module Definition Instance (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1).
-- Populate the configuration data of the Non-Persisted Module Definition Instance from the [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2.1) in the **List of Persisted Module Definitions** with the specified module name.
+- Populate the configuration data of the Non-Persisted Module Definition Instance from the [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2) in the **List of Persisted Module Definitions** with the specified module name.
 - Set *moduleDefinition* to the **IFsrmPipelineModuleDefinition** interface pointer of the newly created Non-Persisted Module Definition Instance.
 <a id="Section_3.2.4.2.45.21"></a>
 ###### 3.2.4.2.45.21 RunClassification (Opnum 27)
@@ -14664,9 +14664,9 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.47.1"></a>
 ###### 3.2.4.2.47.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)).<72> This method has the same behavior as described in [IFsrmObject::Commit (section 3.2.4.2.10.5)](#Section_3.2.4.2.10.5) with the following additional behavior:
+The Commit method is implemented as one of the methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)).<72> This method has the same behavior as described in [IFsrmObject::Commit (section 3.2.4.2.10.5)](#Section_3.2.4.2.10.5) with the following additional behavior:
 
-- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Module Definition Instance (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1), the server MUST remove the [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2.1) from the **List of Persisted Module Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Module Definition Instance (section 3.2.1.6.2.2). If there is no Persisted Module Definition (section 3.2.1.6.2.1) in the List of Persisted Module Definitions (section 3.2.1.6) that has the same **Module Definition.Name** as the Non-Persisted Module Definition Instance (section 3.2.1.6.2.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
+- If **FSRM Base Object.Deleted** is set to true for this [Non-Persisted Module Definition Instance (section 3.2.1.6.2.2)](#Section_3.2.1.6.2.1), the server MUST remove the [Persisted Module Definition (section 3.2.1.6.2.1)](#Section_3.2.1.6.2) from the **List of Persisted Module Definitions** (section [3.2.1.6](#Section_3.2.1.6.1.1)) that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance, if one exists. This removal MUST occur even if other changes were made to the configuration of the Non-Persisted Module Definition Instance (section 3.2.1.6.2.2). If there is no Persisted Module Definition (section 3.2.1.6.2.1) in the List of Persisted Module Definitions (section 3.2.1.6) that has the same **Module Definition.Name** as the Non-Persisted Module Definition Instance (section 3.2.1.6.2.2) being deleted, the server does not perform any action and MUST return zero. The server MUST return a nonzero error code if removal fails.
 - If **FSRM Base Object.Deleted** is set to false for this Non-Persisted Module Definition Instance, the server MUST update the configuration data of the Persisted Module Definition in the **List of Persisted Module Definitions** that has the same **Module Definition.Name** as this Non-Persisted Module Definition Instance, if one exists, with the configuration data from this instance, or return a nonzero error code.
 - If a Persisted Module Definition does not exist with the same **Module Definition.Name** and **FSRM Base Object.Deleted** is set to false, the server MUST perform the following actions:
 - Create a new Persisted Module Definition.
@@ -14817,7 +14817,7 @@ The server MUST perform the following actions or return a nonzero error code:
 <a id="Section_3.2.4.2.48"></a>
 ##### 3.2.4.2.48 IFsrmFileManagementJob
 
-The **IFsrmFileManagementJob** interface exposes methods for configuring file management jobs. **IFsrmFileManagementJob** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)), as well as those listed in the following table.
+The **IFsrmFileManagementJob** interface exposes methods for configuring file management jobs. **IFsrmFileManagementJob** implements methods for the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)), as well as those listed in the following table.
 
 Each **IFsrmFileManagementJob** instance is associated with one [Non-Persisted File Management Job Instance (section 3.2.1.7.1.2)](#Section_3.2.1.7.1.2).
 
@@ -14879,7 +14879,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.2.4.2.48.1"></a>
 ###### 3.2.4.2.48.1 Commit (Opnum 11)
 
-The Commit method is implemented as one of the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.4)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5), with the following additional behavior:
+The Commit method is implemented as one of the methods of the **IFsrmObject** interface (section [3.2.4.2.10](#Section_3.2.4.2.10.2)). This method has the same behavior as described in section [3.2.4.2.10.5](#Section_3.2.4.2.10.5), with the following additional behavior:
 
 - For the following, the [Property definition](#Section_3.2.1.6.1) that has a **Name** with the same value as the **Name** on a given [**Property Condition**](#gt_property-condition) will be referred to as the **Relevant Property Definition** for that Property Condition.
 - If any Property Condition in [Property conditions](#Section_3.2.1.7.1) does not have a **Relevant Property Definition**, the server MUST return E_INVALIDARG.
@@ -15191,7 +15191,7 @@ The CustomAction (get) method retrieves the **custom action** of the file manage
 
 );
 
-**action:** Pointer to an **IFsrmActionCommand** interface pointer (section [3.2.4.2.9](#Section_3.2.4.2.9.5)) that upon completion contains the **custom action** of the file management job.
+**action:** Pointer to an **IFsrmActionCommand** interface pointer (section [3.2.4.2.9](#Section_3.2.4.2.9.7)) that upon completion contains the **custom action** of the file management job.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -15621,7 +15621,7 @@ Upon receiving this message, the server MUST validate parameters:
 - Verify that *propertyCondtions* is not NULL.
 If any validation fails, the server MUST terminate processing and return a nonzero error code.
 
-The server MUST populate *propertyCondtions* with the **IFsrmPropertyCondition** interface pointer (section [3.2.4.2.49](#Section_3.2.4.2.49.7)) of each property condition configured for the file management job.
+The server MUST populate *propertyCondtions* with the **IFsrmPropertyCondition** interface pointer (section [3.2.4.2.49](#Section_3.2.4.2.49)) of each property condition configured for the file management job.
 
 If there are no property conditions configured for the file management job, the server MUST return an **IFsrmCollection** object that contains zero objects.
 
@@ -16134,7 +16134,7 @@ The CreateNotificationAction method creates a **notification** and associates it
 
 **actionType:** The *actionType* parameter contains the type of **notification** being created.
 
-**action:** Pointer to an **IFsrmAction** interface pointer (section [3.2.4.2.4](#Section_3.2.4.2.41.5)) that upon completion points to the newly created action. A caller MUST release the SAFEARRAY received when the caller is done with it.
+**action:** Pointer to an **IFsrmAction** interface pointer (section [3.2.4.2.4](#Section_3.2.4.2.48.13)) that upon completion points to the newly created action. A caller MUST release the SAFEARRAY received when the caller is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -16232,7 +16232,7 @@ The CreatePropertyCondition method creates a [**property condition**](#gt_proper
 
 **name:** Contains the **name** of the property condition to create.
 
-**propertyCondition:** Pointer to an **IFsrmPropertyCondition** interface pointer (section [3.2.4.2.49](#Section_3.2.4.2.49.7)) that upon completion points to the newly created property condition. A caller MUST release the SAFEARRAY received when it is done with it.
+**propertyCondition:** Pointer to an **IFsrmPropertyCondition** interface pointer (section [3.2.4.2.49](#Section_3.2.4.2.49)) that upon completion points to the newly created property condition. A caller MUST release the SAFEARRAY received when it is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -16266,7 +16266,7 @@ The CreateCustomAction method creates a **command line action type notification*
 
 );
 
-**customAction:** Pointer to an **IFsrmActionCommand** interface pointer (section [3.2.4.2.9](#Section_3.2.4.2.9.5)) that upon completion points to the newly created **notification**. A caller MUST release the **IFsrmActionCommand** received when the caller is done with it.
+**customAction:** Pointer to an **IFsrmActionCommand** interface pointer (section [3.2.4.2.9](#Section_3.2.4.2.9.7)) that upon completion points to the newly created **notification**. A caller MUST release the **IFsrmActionCommand** received when the caller is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -16294,9 +16294,9 @@ Methods in RPC Opnum Order
 | [Name (get)](#Section_3.2.4.2.20.3) | Opnum: 7 |
 | [Name (put)](#Section_3.2.4.2.20.4) | Opnum: 8 |
 | [Type (get)](#Section_3.2.4.2.35.1) | Opnum: 9 |
-| [Type (put)](#Section_3.2.4.2.49) | Opnum: 10 |
+| [Type (put)](#Section_3.2.4.2.40) | Opnum: 10 |
 | [Value (get)](#Section_3.2.4.2.40.2) | Opnum: 11 |
-| [Value (put)](#Section_3.2.4.2.49) | Opnum: 12 |
+| [Value (put)](#Section_3.2.4.2.40) | Opnum: 12 |
 | [Delete](#Section_3.2.4.2.4.5) | Opnum: 13 |
 
 <a id="Section_3.2.4.2.49.1"></a>
@@ -16475,9 +16475,9 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [EnumFileManagementJobs](#Section_3.2.4.2.50) | Opnum: 7 |
-| [CreateFileManagementJob](#Section_3.2.4.2.50) | Opnum: 8 |
-| [GetFileManagementJob](#Section_3.2.4.2.50) | Opnum: 9 |
+| [EnumFileManagementJobs](#Section_3.2.4.2.48) | Opnum: 7 |
+| [CreateFileManagementJob](#Section_3.2.4.2.48) | Opnum: 8 |
+| [GetFileManagementJob](#Section_3.2.4.2.48) | Opnum: 9 |
 
 <a id="Section_3.2.4.2.50.1"></a>
 ###### 3.2.4.2.50.1 EnumFileManagementJobs (Opnum 7)
@@ -16510,7 +16510,7 @@ Upon successful validation of parameters, the server MUST perform the following 
 - Create a new **List of Non-Persisted File Management Jobs Instance** (section 3.2.1.7).
 - Populate it with [Non-Persisted File Management Job Instances (section 3.2.1.7.1.2)](#Section_3.2.1.7.1.2) copied from the [Persisted File Management Jobs (section 3.2.1.7.1.1)](#Section_3.2.1.7.1.1) in the **List of Persisted File Management Jobs**.
 - If *options* does not contain FsrmEnumOptions_IncludeClusterNodes, remove any Non-Persisted File Management Job Instances from this List of Non-Persisted File Management Jobs Instances where the Non-Persisted File Management Job Instances **Namespace roots** include a path located on a volume not present on this machine, that is, the path is not prefixed by any volume in **Volume List**.
-- Populate *fileManagementJobs* with the **IFsrmFileManagementJob** interface pointer (section [3.2.4.2.48](#Section_3.2.4.2.48.8)) of every Non-Persisted File Management Job Instance in this **List of Non-Persisted File Management Jobs Instance**.
+- Populate *fileManagementJobs* with the **IFsrmFileManagementJob** interface pointer (section [3.2.4.2.48](#Section_3.2.4.2.48.13)) of every Non-Persisted File Management Job Instance in this **List of Non-Persisted File Management Jobs Instance**.
 <a id="Section_3.2.4.2.50.2"></a>
 ###### 3.2.4.2.50.2 CreateFileManagementJob (Opnum 8)
 
@@ -16522,7 +16522,7 @@ The CreateFileManagementJob method creates a blank [Non-Persisted File Managemen
 
 );
 
-**fileManagementJob:** Pointer to an **IFsrmFileManagementJob** interface pointer (section [3.2.4.2.48](#Section_3.2.4.2.48.8)) that upon completion points to a blank *fileManagementJob*. A caller MUST release the *fileManagementJob* received when the caller is done with it. To have the *fileManagementJob* added to the server's **List of Persisted File Management Jobs** (section [3.2.1.7](#Section_3.2.1.7.1)), the client MUST call [Commit](#Section_3.2.4.2.48) (section 3.2.4.2.48.1).
+**fileManagementJob:** Pointer to an **IFsrmFileManagementJob** interface pointer (section [3.2.4.2.48](#Section_3.2.4.2.48.13)) that upon completion points to a blank *fileManagementJob*. A caller MUST release the *fileManagementJob* received when the caller is done with it. To have the *fileManagementJob* added to the server's **List of Persisted File Management Jobs** (section [3.2.1.7](#Section_3.2.1.7.1)), the client MUST call [Commit](#Section_3.2.4.2.48) (section 3.2.4.2.48.1).
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -16582,7 +16582,7 @@ The GetFileManagementJob method returns a pointer to the *fileManagementJob* wit
 
 **name:** Contains the **name** of the *fileManagementJob* to return.
 
-**fileManagementJob:** Pointer to an **IFsrmFileManagementJob** interface pointer (section [3.2.4.2.48](#Section_3.2.4.2.48.8)) that upon completion points to the *fileManagementJob* with the specified **name**. A caller MUST release the *fileManagementJob* received when the caller is done with it.
+**fileManagementJob:** Pointer to an **IFsrmFileManagementJob** interface pointer (section [3.2.4.2.48](#Section_3.2.4.2.48.13)) that upon completion points to the *fileManagementJob* with the specified **name**. A caller MUST release the *fileManagementJob* received when the caller is done with it.
 
 **Return Values:** The method MUST return zero on success, or a nonzero error code on failure.
 
@@ -16882,7 +16882,7 @@ To perform this action, the server MUST perform the following steps in sequence:
 
 - The server builds a list of all **storage modules** that have **Enabled/Disabled** set to enabled and **Capabilities** that include [FsrmStorageModuleCaps_CanGet](#Section_2.2.2.7.1.1). This list will be referred to as the **Retrieval Storage Module**.
 - If the list of **Retrieval Storage Modules** is empty, the action results in an empty list of Property Definition Instances.
-- For each **Retrieval Storage Modules**, the server executes the **software module** identified by the [ModuleClsid](#Section_3.2.1.6.2.1) of the **storage module**. The **software module** is executed in a process specified by Module Definition.Account. The parameters for the **software module** are the given local file or folder path and instructions to return existing name/value pairs. If the **storage module**'s **Needs** file content is true, the server provides the contents of the file as an additional parameter. In turn, the **software module** returns a set of name/value pairs for the file path to the server.
+- For each **Retrieval Storage Modules**, the server executes the **software module** identified by the [ModuleClsid](#Section_3.2.1.6.2.2) of the **storage module**. The **software module** is executed in a process specified by Module Definition.Account. The parameters for the **software module** are the given local file or folder path and instructions to return existing name/value pairs. If the **storage module**'s **Needs** file content is true, the server provides the contents of the file as an additional parameter. In turn, the **software module** returns a set of name/value pairs for the file path to the server.
 - If the [**file extension**](#gt_file-extension) of the file does not match any of the **storage module**'s Supported extensions, the server skips the **storage module**.
 - For each unique name in the lists of name/value pairs, the server creates a Property Definition Instance and sets property definition instance.name to the unique name. The property definition instance.value is set to the [aggregated value (section 3.2.4.5)](#Section_3.2.4.5) of all values returned from all **Retrieval Storage Modules**.
 - If the property definition instance.value equals or contains the value returned from a **storage module**, the name of the **storage module** is appended to the property definition instance's sources.
@@ -16904,7 +16904,7 @@ To perform this action, the server MUST perform the following steps in sequence:
 - If the [**file extension**](#gt_file-extension) of the file does not match any of the classification module's [Supported extensions](#Section_3.1.5), the server skips the classification module.
 - If the classification rule's [execution option](#Section_e096822f67f44a429fe65ee194ad8581) is Evaluate unset and the file already has a Property Definition Instance with the property definition instance.Name that is the same as the classification rule's property affected, then the server does not execute the classification module specified by the rule's Module definition name for this and the server goes to the next classification rule.
 - Refer to the classification module in the **list of classification modules** with the property definition instance.Name as provided by the rule's Module definition name as the relevant classification module.
-- The server executes the **software module** identified by the [ModuleClsid](#Section_3.2.4.2.43.1) of the classification module. The **software module** is executed in a process specified by [Module Definition.Account](#Section_3.2.1.6.2.1). The parameters for the **software module** are the given **local file path**, the rule's Rule.Parameters, and instructions to determine the value for the name specified by the classification rule's property affected. If the classification module's Needs file content is true, the server provides the contents of the file as an additional parameter.
+- The server executes the **software module** identified by the [ModuleClsid](#Section_3.2.4.2.43.1) of the classification module. The **software module** is executed in a process specified by [Module Definition.Account](#Section_3.2.1.6.2.2). The parameters for the **software module** are the given **local file path**, the rule's Rule.Parameters, and instructions to determine the value for the name specified by the classification rule's property affected. If the classification module's Needs file content is true, the server provides the contents of the file as an additional parameter.
 - If the relevant classification module's Module Definition.Parameters contains a value that is `"StaticModuleName=Folder Classifier"`, the executed **software module** MUST return true.
 - If the relevant classification module's Module Definition.Parameters contains a value that is `"StaticModuleName=Content Classifier"`, the executed **software module** MUST perform the following steps in sequence:
 - The executed **software module** builds a list of all values in the rule's **Rule.Parameters** that start with `"String="` but stores only the remainder of the value after `"String="` in the list and refers to this list as the **Parameter string list**. The executed **software module** builds a list of all values in the rule's **Rule.Parameters** that start with `"StringWithCase="` but stores only the remainder of the value after `"StringWithCase="` in the list and refers to this list as **Parameter case-sensitive string list**.
@@ -16919,7 +16919,7 @@ To perform this action, the server MUST perform the following steps in sequence:
 - If the classification rule's execution option is [Reevaluate and consider existing](#Section_3.2.1.7.1), the [server aggregates (section 3.2.4.5)](#Section_3.2.4.5) the value returned from the classification module with the existing Property Definition Instance for the classification rule's property affected and, if the file has not yet been added to the **Report item list**, adds the file to the **Report item list**.
 - If the classification rule's execution option is Reevaluate and ignore existing, the server replaces the existing property definition instance.value for the classification rule's property affected with the value returned from the classification module and, if the file has not yet been added to the **Report item list**, adds the file to the **Report item list**. The server SHOULD<83> set ClearProperty to true.
 - If the property definition instance.value equals or contains the value returned from the classification module, the [FsrmPropertyFlags_SetByClassifier](#Section_2.2.2.6.1.1) flag is added to the property definition instance.flags using a bitwise-OR and Property Definition Instance's sources is cleared and the name of the classification module and classification rule are added to it.
-- If property definition instance.flags contains the flags FsrmPropertyFlags_Existing and FsrmPropertyFlags_SetByClassifier using a bitwise-AND comparison and property definition instance.value differs from the value supplied from the [storage modules](#Section_3.2.4.2.47.2), the flag FsrmPropertyFlags_Reclassified is added to the property definition instance.flags using a bitwise-OR.
+- If property definition instance.flags contains the flags FsrmPropertyFlags_Existing and FsrmPropertyFlags_SetByClassifier using a bitwise-AND comparison and property definition instance.value differs from the value supplied from the [storage modules](#Section_3.2.4.2.47.1), the flag FsrmPropertyFlags_Reclassified is added to the property definition instance.flags using a bitwise-OR.
 - If the rule type is Classification and ClearProperty is set to true, the server SHOULD<84> do the following:
 - If the property definition instance.flags contains the flag FsrmPropertyFlags_SetByClassifier, and Rule.ClearAutoProperty is true, the server MUST clear the property value for the property definition instance.
 - If the property definition instance.flags doesn't contain the flag FsrmPropertyFlags_SetByClassifier, and Rule.ClearManualProperty is true, the server MUST clear the property value for the property definition instance.
@@ -16931,7 +16931,7 @@ This action is performed on a single file or folder and a list of **Property Def
 
 To perform this action, the server MUST perform the following steps in sequence:
 
-- The server builds a list of all **storage modules** that have [Enabled/Disabled](#Section_3.2.1.6.2.1) set to enabled and Capabilities that include [FsrmStorageModuleCaps_CanSet](#Section_2.2.2.8.1.1). This list is referred to as the **Setting Storage Modules**.
+- The server builds a list of all **storage modules** that have [Enabled/Disabled](#Section_3.2.1.6.2.2) set to enabled and Capabilities that include [FsrmStorageModuleCaps_CanSet](#Section_2.2.2.8.1.1). This list is referred to as the **Setting Storage Modules**.
 - If the list of **Setting Storage Modules** is empty, the action completes successfully.
 - For each **Setting Storage Modules**, the server executes the **software module** identified by the ModuleClsid of the **storage module**. The **software module** is executed in a process specified by Module Definition.Account. The parameters for the **software module** are the given local file or folder path, instructions to save name/value pairs, and all **Property Definition Instances** for the file. If the **storage module's** Needs file content is true, the server provides the contents of the file as an additional parameter.
 - If the file extension of the file does not match any of the **storage module's** Supported extensions, the server skips the **storage module**.
@@ -17021,7 +17021,7 @@ If an I/O operation that happens on the server modifies a file's [**FCI Alternat
 
 When an I/O operation modifies a file on a path that is within the scope of a path in the [Namespace roots](#Section_3.2.1.5.1) of any [**classification rule**](#gt_classification-rules) whose [Enabled/Disabled](#Section_3.2.7.3) member is set to true, the server MUST then do one of the following for that file or return a nonzero error code:
 
-- If there is already a [Running Job](#Section_3.2.1.5.1.3) in the [Classification Job Queue](#Section_3.2.1.6.1.1), the server MUST return [FSRM_E_CLASSIFICATION_ALREADY_RUNNING](#Section_3.2.4.2.45.12).
+- If there is already a [Running Job](#Section_3.2.1.5.1.3) in the [Classification Job Queue](#Section_3.2.1.6.1.1), the server MUST return [FSRM_E_CLASSIFICATION_ALREADY_RUNNING](#Section_3.2.4.2.45.20).
 - If the Classification Job Queue does not contain a Running Job, the server MUST:
 - Create a Running Job and set its properties as follows:
 - Running Job.Parent: Create a new [Classification job](#Section_3.2.1.6.4) object and initialize it as follows:
@@ -17053,7 +17053,7 @@ The order in which a File Server Resource Manager Protocol client would typicall
 <a id="Section_4.1"></a>
 ## 4.1 Query Enumeration of File Server Resource Manager Protocol Directory Quotas
 
-File Server Resource Manager Protocol directory quota objects are retrievable through an enumeration via the **IFsrmQuotaManager** interface (section [3.2.4.2.18](#Section_3.2.4.2.18)). The following describes how a client can enumerate FSRM directory quota objects:
+File Server Resource Manager Protocol directory quota objects are retrievable through an enumeration via the **IFsrmQuotaManager** interface (section [3.2.4.2.18](#Section_3.2.4.2.19)). The following describes how a client can enumerate FSRM directory quota objects:
 
 - The client requests the creation of an instance of the Quota Manager on the local machine by calling **CoCreateInstance** with the class GUID of the Quota Manager, requesting an instance of the Quota Manager on the server.
 - The server returns a reference to the **IFsrmQuotaManager** interface.
@@ -17063,7 +17063,7 @@ File Server Resource Manager Protocol directory quota objects are retrievable th
 - The server replies to the client with the number of quotas in the collection.
 - The client calls [IFsrmCollection::Item (section 3.2.4.2.1.2)](#Section_3.2.4.2.1.2) with the index set to 1 to get the first quota in the collection.
 - The server returns a VARIANT with the *pDispVal* element set to the IDispatch interface for the first quota in the collection.
-- The client calls VARIANT.**pDispVal**::**QueryInterface** with the GUID of the **IFsrmQuota** interface (section [3.2.4.2.16](#Section_3.2.4.2.15)).
+- The client calls VARIANT.**pDispVal**::**QueryInterface** with the GUID of the **IFsrmQuota** interface (section [3.2.4.2.16](#Section_3.2.4.2.14)).
 - The server returns the **IFsrmQuota** interface of the quota.
 - The client can make calls to any of the methods implemented by **IFsrmQuota**.
 - The server responds appropriately to the client call.
@@ -17087,11 +17087,11 @@ File Server Resource Manager Protocol directory file screen objects are retrieva
 - The client requests the creation of an instance of the File Screen Manager on the local machine by calling **CoCreateInstance** with the class GUID of the File Screen Manager, requesting an instance of the File Screen Manager on the server.
 - The server returns a reference to the **IFsrmFileScreenManager** interface.
 - The client calls the method [IFsrmFileScreenManager::GetFileScreen (section 3.2.4.2.29.4)](#Section_3.2.4.2.29.4), passing in the path on a volume on the server for which the client wants to get the file screen.
-- The server returns a reference to the **IFsrmFileScreen** interface (section [3.2.4.2.27](#Section_3.2.4.2.32)) of the file screen for the specified path back to the client.
+- The server returns a reference to the **IFsrmFileScreen** interface (section [3.2.4.2.27](#Section_3.2.4.2.28)) of the file screen for the specified path back to the client.
 - The client calls the [IFsrmFileScreenBase::FileScreenFlags (get) (section 3.2.4.2.26.3)](#Section_3.2.4.2.26.3) method.
 - The server returns the file screen flags for the file screen.
 - The client calls the [IFsrmFileScreenBase::EnumActions (section 3.2.4.2.26.6)](#Section_3.2.4.2.26.6) method.
-- The server collects all the actions for the file screen and returns an **IFsrmMutableCollection** interface (section [3.2.4.2.2](#Section_3.2.4.2.27.4)) containing the actions for the file screen.
+- The server collects all the actions for the file screen and returns an **IFsrmMutableCollection** interface (section [3.2.4.2.2](#Section_3.2.4.2.2.1)) containing the actions for the file screen.
 - The client can enumerate the actions in the collection by following steps 5 through 15 of section [4.1](#Section_3.1.4.1.2).
 ![Flow diagram for querying file screen properties](media/image2.png)
 
@@ -17100,7 +17100,7 @@ Figure 2: Flow diagram for querying file screen properties
 <a id="Section_4.3"></a>
 ## 4.3 Modifying File Server Resource Manager Protocol Directory Quota Properties Derived from Templates
 
-File Server Resource Manager Protocol directory quota screen object properties can be modified through method calls on the **IFsrmQuotaTemplate** interface (section [3.2.4.2.20](#Section_3.2.4.2.20)) of the source template for the quota. The following describes how a client can change the properties of all the quotas derived from a particular template:
+File Server Resource Manager Protocol directory quota screen object properties can be modified through method calls on the **IFsrmQuotaTemplate** interface (section [3.2.4.2.20](#Section_3.2.4.2.22)) of the source template for the quota. The following describes how a client can change the properties of all the quotas derived from a particular template:
 
 - The client requests the creation of an instance of the Quota Template Manager on the local machine by calling **CoCreateInstance** with the class GUID of the Quota Template Manager, requesting an instance of the Quota Template Manager on the server.
 - The server returns a reference to the **IFsrmQuotaTemplateManager** interface (section [3.2.4.2.22](#Section_3.2.4.2.22)).
@@ -17154,7 +17154,7 @@ File Server Resource Manager Protocol global settings are retrievable through me
 <a id="Section_4.6"></a>
 ## 4.6 Enumerating Classification Properties
 
-File Server Resource Manager Protocol classification properties registered on the server are retrievable through an enumeration via the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.12)). The following describes how a client can enumerate FSRM classification property objects:
+File Server Resource Manager Protocol classification properties registered on the server are retrievable through an enumeration via the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.20)). The following describes how a client can enumerate FSRM classification property objects:
 
 - The client requests the creation of an instance of the Classification Manager on the local machine by calling **CoCreateInstance** with the class GUID of the Classification Manager, requesting an instance of the Classification Manager on the server.
 - The server returns a reference to the **IFsrmClassificationManager** interface.
@@ -17164,7 +17164,7 @@ File Server Resource Manager Protocol classification properties registered on th
 - The server replies to the client with the number of quotas in the collection.
 - The client calls the method [IFsrmCollection::Item (section 3.2.4.2.1.2)](#Section_3.2.4.2.1.2) with the index set to 1 to get the first classification property in the collection.
 - The server returns a VARIANT with the **pDispVal** element set to the IDispatch interface for the first classification property in the collection.
-- The client calls the method VARIANT.**pDispVal**::**QueryInterface** with the GUID of the **IFsrmPropertyDefinition** interface (section [3.2.4.2.37](#Section_3.2.4.2.37.5)).
+- The client calls the method VARIANT.**pDispVal**::**QueryInterface** with the GUID of the **IFsrmPropertyDefinition** interface (section [3.2.4.2.37](#Section_3.2.4.2.37.7)).
 - The server returns the **IFsrmPropertyDefinition** interface of the property definition.
 - The client can make calls to any of the methods implemented by **IFsrmPropertyDefinition**.
 - The server responds appropriately to the client call.
@@ -17181,7 +17181,7 @@ Figure 5: Flow diagram for query enumeration
 <a id="Section_4.7"></a>
 ## 4.7 Adding Classification Rules
 
-File Server Resource Manager Protocol [**classification rules**](#gt_classification-rules) can be registered on the server via the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.12)). The following describes how a client can add a new FSRM classification rule object:
+File Server Resource Manager Protocol [**classification rules**](#gt_classification-rules) can be registered on the server via the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.20)). The following describes how a client can add a new FSRM classification rule object:
 
 - The client requests the creation of an instance of the Classification Manager on the local machine by calling **CoCreateInstance** with the class GUID of the Classification Manager, requesting an instance of the Classification Manager on the server.
 - The server returns a reference to the **IFsrmClassificationManager** interface.
@@ -17204,13 +17204,13 @@ File Server Resource Manager Protocol file management jobs registered on the ser
 
 - The client requests the creation of an instance of the File Management Job Manager on the local machine by calling **CoCreateInstance** with the class GUID of the File Management Job Manager, requesting an instance of the File Management Job Manager on the server.
 - The server returns a reference to the **IFsrmFileManagementJobManager** interface.
-- The client calls the method [IFsrmFileManagementJobManager::GetFileManagementJob (section 3.2.4.2.50.3)](#Section_3.2.4.2.50) with the name of the file management job that it intends to modify.
-- The server returns a reference to the requested **IFsrmFileManagementJob** interface (section [3.2.4.2.48](#Section_3.2.4.2.48.8)) back to the client.
+- The client calls the method [IFsrmFileManagementJobManager::GetFileManagementJob (section 3.2.4.2.50.3)](#Section_3.2.4.2.48) with the name of the file management job that it intends to modify.
+- The server returns a reference to the requested **IFsrmFileManagementJob** interface (section [3.2.4.2.48](#Section_3.2.4.2.48.13)) back to the client.
 - The client calls the method [IFsrmFileManagementJob::CreatePropertyCondition (section 3.2.4.2.48.49)](#Section_3.2.4.2.48) with the name of a valid classification property on the server.
-- The server returns a reference to a new **IFsrmPropertyCondition** interface (section [3.2.4.2.49](#Section_3.2.4.2.49.7)) back to the client.
-- The client calls the method implemented by [IFsrmPropertyCondition::Type (put) (section 3.2.4.2.49.4)](#Section_3.2.4.2.49) with the value of [FsrmPropertyConditionType (section 2.2.2.10.1.1)](#Section_2.2.2.10.1.1) that is desired for the new condition.
+- The server returns a reference to a new **IFsrmPropertyCondition** interface (section [3.2.4.2.49](#Section_3.2.4.2.49)) back to the client.
+- The client calls the method implemented by [IFsrmPropertyCondition::Type (put) (section 3.2.4.2.49.4)](#Section_3.2.4.2.40) with the value of [FsrmPropertyConditionType (section 2.2.2.10.1.1)](#Section_2.2.2.10.1.1) that is desired for the new condition.
 - The server maintains the condition type.
-- The client calls the method [IFsrmPropertyCondition::Value (put) (section 3.2.4.2.49.6)](#Section_3.2.4.2.49) with the value that is desired for the new condition.
+- The client calls the method [IFsrmPropertyCondition::Value (put) (section 3.2.4.2.49.6)](#Section_3.2.4.2.40) with the value that is desired for the new condition.
 - The server maintains the condition value.
 - The client calls the method [IFsrmFileManagementJob::Commit](#Section_3.2.4.2.48).
 - The server stores the new definition of the file management job.
@@ -17223,7 +17223,7 @@ Figure 7: Flow diagram for File Management Job modification
 <a id="Section_4.9"></a>
 ## 4.9 Updating Property Values for a File
 
-File Server Resource Manager Protocol can query and modify classification properties for files on the server via the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.12)). The following describes how a client can retrieve and modify a classification property for a file on a server:
+File Server Resource Manager Protocol can query and modify classification properties for files on the server via the **IFsrmClassificationManager** interface (section [3.2.4.2.45](#Section_3.2.4.2.45.20)). The following describes how a client can retrieve and modify a classification property for a file on a server:
 
 - The client requests the creation of an instance of the Classification Manager on the local machine by calling **CoCreateInstance** with the class GUID of the Classification Manager, requesting an instance of the Classification Manager on the server.
 - The server returns a reference to the **IFsrmClassificationManager** interface.
@@ -17257,7 +17257,7 @@ This protocol introduces no security considerations beyond those applicable to D
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full interface definition language (IDL) is provided as follows, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](#Section_2.2.1.1) section 5 and "ms-oaut.idl" is the IDL found in [MS-OAUT](../MS-OAUT/MS-OAUT.md).
+For ease of implementation, the full interface definition language (IDL) is provided as follows, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](#Section_2.2.2.2.1) section 5 and "ms-oaut.idl" is the IDL found in [MS-OAUT](../MS-OAUT/MS-OAUT.md).
 
 This IDL does not include a pointer_default declaration. As noted in [MS-RPCE](../MS-RPCE/MS-RPCE.md), this declaration is not required in MIDL, and, in this case, pointer_default(unique) is assumed.
 
@@ -21337,7 +21337,7 @@ If this key is not available, the **ADSyncListName** is set to "Global Resource 
 
 <58> Section 3.2.4.2.17.3: Windows will only exclude subdirectories that exist at the time when the **IFsrmAutoApplyQuota** object is committed. Folders that are created after the commit that match an entry of the exclude folder array are not excluded.
 
-<59> Section 3.2.4.2.17.4: When this method is called, the [IFsrmAutoApplyQuota (section 3.2.4.2.17)](#Section_3.2.4.2.17.2) object is committed. However, only changes made using the [IFsrmQuotaObject::ApplyTemplate (section 3.2.4.2.15.7)](#Section_3.2.4.2.15.7) method are applied to quota objects derived from this **IFsrmAutoApplyQuota** object, based on the value of *applyOptions* supplied by the client.
+<59> Section 3.2.4.2.17.4: When this method is called, the [IFsrmAutoApplyQuota (section 3.2.4.2.17)](#Section_3.2.4.2.17.3) object is committed. However, only changes made using the [IFsrmQuotaObject::ApplyTemplate (section 3.2.4.2.15.7)](#Section_3.2.4.2.15.7) method are applied to quota objects derived from this **IFsrmAutoApplyQuota** object, based on the value of *applyOptions* supplied by the client.
 
 <60> Section 3.2.4.2.33.2: Windows-based servers use "01/01/1900 12:00AM" for this value.
 
@@ -21353,7 +21353,7 @@ If this key is not available, the **ADSyncListName** is set to "Global Resource 
 
 <66> Section 3.2.4.2.37.5: **FsrmPropertyDefinitionType_SingleChoiceList** is not supported in Windows Vista operating system and later, and Windows Server 2008 operating system and later support **FsrmPropertyDefinitionType_SingleChoiceList**.
 
-<67> Section 3.2.4.2.45.12: Windows Server 2012 operating system and later, Windows Server 2012 R2 operating system and later are the only versions of Windows that implement [IFsrmPropertyDefinition2](#Section_3.2.4.2.38.4).
+<67> Section 3.2.4.2.45.12: Windows Server 2012 operating system and later, Windows Server 2012 R2 operating system and later are the only versions of Windows that implement [IFsrmPropertyDefinition2](#Section_3.2.4.2.38).
 
 <68> Section 3.2.4.2.45.14: Windows 8 operating system and later, and Windows Server 2012 operating system and later are the only versions of Windows that implement IFsrmPropertyDefinition2.
 
@@ -21379,7 +21379,7 @@ If this key is not available, the **ADSyncListName** is set to "Global Resource 
 
 <79> Section 3.2.4.2.48.47: Windows-based servers use "01/01/1900 12:00AM" for this value.
 
-<80> Section 3.2.5.2: If the relevant classification module has a value in its [Module Definition.Parameters](#Section_3.2.1.6.2.1) containing `"StaticModuleName=Content Classifier"`, Windows can also process values in the relevant classification module's Module Definition.Parameters that start with `"IFilterInitFlags"`, `"MaxTokenSize"`, `"ReadBufferSize"`, `"ChunkBreakType"`, `"RegexOptions"`, or `"AppDomain"` for performance purposes. However, these have no impact on functionality.
+<80> Section 3.2.5.2: If the relevant classification module has a value in its [Module Definition.Parameters](#Section_3.2.1.6.2.2) containing `"StaticModuleName=Content Classifier"`, Windows can also process values in the relevant classification module's Module Definition.Parameters that start with `"IFilterInitFlags"`, `"MaxTokenSize"`, `"ReadBufferSize"`, `"ChunkBreakType"`, `"RegexOptions"`, or `"AppDomain"` for performance purposes. However, these have no impact on functionality.
 
 <81> Section 3.2.5.2: Only Windows 8.1 operating system and later, and Windows Server 2012 R2 operating system and later support the ClearProperty.
 

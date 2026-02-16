@@ -260,7 +260,7 @@ Queues are typically hosted by a communications service called a [**queue manage
 
 The queue manager can perform operations on a [**remote queue**](#gt_remote-queue). When this scenario occurs, a protocol is required to insert messages into the remote queue, and another protocol is required to consume messages from the remote queue. The Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol provides a protocol for consuming messages from a remote queue.
 
-The Queue Manager to Queue Manager Protocol is used only to read messages from a queue or to [**purge**](#gt_purge) messages from the queue. Reading a message also implies deleting the message after it is read, as specified in Queue Operations (section [1.3.3](#Section_1.3.3)).
+The Queue Manager to Queue Manager Protocol is used only to read messages from a queue or to [**purge**](#gt_purge) messages from the queue. Reading a message also implies deleting the message after it is read, as specified in Queue Operations (section [1.3.3](#Section_1.3)).
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Messages
@@ -395,7 +395,7 @@ The following table summarizes the types defined in this specification.
 | [PCTX_REMOTEREAD_HANDLE_TYPE](#Section_2.2.1.2) | A context handle representing a read session. |
 | [REMOTEREADACK](#Section_2.2.1.3) | An enumeration that represents an acknowledgment (ACK) or a negative acknowledgment (NACK). |
 | [REMOTEREADDESC](#Section_2.2.2.1) | A structure used for receiving [**messages**](#gt_message) from a queue. |
-| [REMOTEREADDESC2](#Section_2.2.2.1) | A structure containing the REMOTEREADDESC structure and defining an additional element for tracking transaction-related information. |
+| [REMOTEREADDESC2](#Section_2.2.2.2) | A structure containing the REMOTEREADDESC structure and defining an additional element for tracking transaction-related information. |
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Data Types
@@ -1115,7 +1115,7 @@ HRESULT RemoteQMStartReceive2(
 
 **pphContext:** The server MUST return a non-NULL value for this handle upon success for receive calls. This handle will be used by the client in subsequent calls to [RemoteQMEndReceive (section 3.1.4.2)](#Section_3.1.4.2). This handle MUST NOT be set upon failure or for peek calls. If this method returns an error, *pphContext* is undefined and MUST NOT be used as an argument for a call to RemoteQMEndReceive.
 
-**lpRemoteReadDesc2:** A pointer to an instance of a [REMOTEREADDESC2 (section 2.2.2.2)](#Section_2.2.2.1) structure. The **SequentialId** member MUST be set to the least significant 7 bytes of the **Message.LookupIdentifier** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) of the message that is returned by this method.
+**lpRemoteReadDesc2:** A pointer to an instance of a [REMOTEREADDESC2 (section 2.2.2.2)](#Section_2.2.2.2) structure. The **SequentialId** member MUST be set to the least significant 7 bytes of the **Message.LookupIdentifier** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) of the message that is returned by this method.
 
 The client MUST provide all parameters of *lpRemoteReadDesc2.pRemoteReadDesc* that are marked as to be set by the client in section [2.2.2.1](#Section_2.2.2.1).
 
@@ -1205,7 +1205,7 @@ HRESULT RemoteQMStartReceiveByLookupId(
 
 **pphContext:** The server MUST return a non-NULL value for this handle, on success for receive calls. This handle is used by the client in subsequent calls to [RemoteQMEndReceive](#Section_3.1.4.2). This handle MUST NOT be set on failure, or for peek calls. If this method returns an error, *pphContext* is undefined and MUST NOT be used as an argument for a call to RemoteQMEndReceive.
 
-**lpRemoteReadDesc2:** A [REMOTEREADDESC2 (section 2.2.2.2)](#Section_2.2.2.1) instance that contains the remote description accompanied by a sequential ID. The members of the **pRemoteReadDesc** member of the *lpRemoteReadDesc2* parameter MUST be assigned in the same manner as that specified in [RemoteQMStartReceive](#Section_3.1.4.1) and section [2.2.2.1](#Section_2.2.2.1). In addition, the **SequentialId** member MUST be set to the least significant 7 bytes of the **Message.LookupIdentifier** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) of the message that is returned by this method.
+**lpRemoteReadDesc2:** A [REMOTEREADDESC2 (section 2.2.2.2)](#Section_2.2.2.2) instance that contains the remote description accompanied by a sequential ID. The members of the **pRemoteReadDesc** member of the *lpRemoteReadDesc2* parameter MUST be assigned in the same manner as that specified in [RemoteQMStartReceive](#Section_3.1.4.1) and section [2.2.2.1](#Section_2.2.2.1). In addition, the **SequentialId** member MUST be set to the least significant 7 bytes of the **Message.LookupIdentifier** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) of the message that is returned by this method.
 
 The client must provide all parameters of *lpRemoteReadDesc2.pRemoteReadDesc* that are marked as to be set by the client in section 2.2.2.1.
 
@@ -1422,7 +1422,7 @@ If any of the above conditions are satisfied, the client MUST:
 - *dwRequestID* set to **rPendingRemoteReadEntry.RequestId**.
 Else if none of the above conditions are satisfied, the client MUST:
 
-- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.1) structure (lpRemoteReadDesc2):
+- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.2) structure (lpRemoteReadDesc2):
 - *hRemoteQueue* set to the *phQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *dwQueue* set to the **DWORD** pointed to by the *dwpQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *dwSize* set to 0.
@@ -1470,7 +1470,7 @@ If any of the above conditions are satisfied, the client MUST:
 - *dwRequestID* set to **rPendingRemoteReadEntry.RequestId**.
 Else if none of the above conditions are satisfied, the client MUST:
 
-- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.1) structure (lpRemoteReadDesc2):
+- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.2) structure (lpRemoteReadDesc2):
 - *hRemoteQueue* set to the *phQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *dwQueue* set to the **DWORD** pointed to by the *dwpQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *hCursor* set to NULL.
@@ -1533,7 +1533,7 @@ If any of the above conditions are satisfied, the client MUST:
 - *dwRequestID* set to **rPendingRemoteReadEntry.RequestId**.
 Else if none of the above conditions are satisfied, the client MUST:
 
-- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.1) structure (lpRemoteReadDesc2):
+- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.2) structure (lpRemoteReadDesc2):
 - *hRemoteQueue* set to the *phQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *dwQueue* set to the **DWORD** pointed to by the *dwpQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *hCursor* set to the cursor handle obtained from qmcomm:R_QMCreateRemoteCursor, as specified in [MS-MQMP] section 3.1.4.4.
@@ -1581,7 +1581,7 @@ If any of the above conditions are satisfied, the client MUST:
 - *dwRequestID* set to **rPendingRemoteReadEntry.RequestId**.
 Else if none of the above conditions is satisfied, the client MUST:
 
-- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.1) structure (lpRemoteReadDesc2):
+- Call the [RemoteQMStartReceive2](#Section_3.1.4.10) method and MUST specify the following parameter values for the [REMOTEREADDESC2](#Section_2.2.2.2) structure (lpRemoteReadDesc2):
 - *hRemoteQueue* set to the *phQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *dwQueue* set to the **DWORD** pointed to by the *dwpQueue* out parameter of the qmcomm:R_QMOpenRemoteQueue, as specified in [MS-MQMP] section 3.1.4.2.
 - *hCursor* set to the cursor handle obtained from qmcomm:R_QMCreateRemoteCursor, as specified in [MS-MQMP] section 3.1.4.4.

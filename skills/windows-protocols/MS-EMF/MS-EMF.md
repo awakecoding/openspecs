@@ -673,7 +673,7 @@ EMF records are contiguous because the information that is available for travers
 
 Graphics objects are used by the drawing and painting operations specified in an [**EMF**](#gt_enhanced-metafile-format-emf) [**metafile**](#gt_metafile). They are created by object creation records (section [2.3.7](#Section_2.3.7)) during the metafile playback and saved for later use.
 
-When needed, a graphics object is be retrieved and selected into the [**playback device context**](#gt_playback-device-context) by using an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.18)).
+When needed, a graphics object is be retrieved and selected into the [**playback device context**](#gt_playback-device-context) by using an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.12)).
 
 The types of reusable objects include:
 
@@ -1187,7 +1187,7 @@ EMR_CREATECOLORSPACEW = 0x0000007A
 
 **EMR_POLYTEXTOUTA:** This record draws one or more ASCII text strings using the current font and text colors.
 
-**Note:** [EMR_POLYTEXTOUTA](#Section_2.3.5.32) SHOULD be emulated with a series of [EMR_EXTTEXTOUTW](#Section_2.3.5.8) records, one per string.<3>
+**Note:** [EMR_POLYTEXTOUTA](#Section_2.3.5.32) SHOULD be emulated with a series of [EMR_EXTTEXTOUTW](#Section_3.2.10) records, one per string.<3>
 
 **EMR_POLYTEXTOUTW:** This record draws one or more Unicode text strings using the current font and text colors.
 
@@ -1201,7 +1201,7 @@ EMR_CREATECOLORSPACEW = 0x0000007A
 
 **EMR_DELETECOLORSPACE:** This record deletes a logical color space object.<8>
 
-**Note:** An [EMR_DELETEOBJECT](#Section_3.2.20) record SHOULD be used instead of [EMR_DELETECOLORSPACE](#Section_2.3.8.2) to delete a logical color space object.<9>
+**Note:** An [EMR_DELETEOBJECT](#Section_3.2.19) record SHOULD be used instead of [EMR_DELETECOLORSPACE](#Section_2.3.8.2) to delete a logical color space object.<9>
 
 **EMR_GLSRECORD:** This record specifies an [**OpenGL**](#gt_opengl) function.<10>
 
@@ -2692,7 +2692,7 @@ packet-beta
 
 The ColorAdjustment object is used in bit-block transfers performed by [EMR_STRETCHBLT](#Section_2.3.1.6) and [EMR_STRETCHDIBITS](#Section_2.3.1.7) records when the [StretchMode](#Section_2.1.32) enumeration (section 2.1.32) value is **STRETCH_HALFTONE**. The color adjustment values can apply a color filter or lighten or darken an image.
 
-An [EMR_SETCOLORADJUSTMENT](#Section_2.3.11.13) record (section 2.3.11.13) sets the current ColorAdjustment object in the [**playback device context**](#gt_playback-device-context). That ColorAdjustment object affects all subsequent EMR_STRETCHBLT and EMR_STRETCHDIBITS records until a different ColorAdjustment object is specified by another EMR_SETCOLORADJUSTMENT record, or until the object is removed by a [EMR_DELETEOBJECT](#Section_3.2.20) record.
+An [EMR_SETCOLORADJUSTMENT](#Section_2.3.11.13) record (section 2.3.11.13) sets the current ColorAdjustment object in the [**playback device context**](#gt_playback-device-context). That ColorAdjustment object affects all subsequent EMR_STRETCHBLT and EMR_STRETCHDIBITS records until a different ColorAdjustment object is specified by another EMR_SETCOLORADJUSTMENT record, or until the object is removed by a [EMR_DELETEOBJECT](#Section_3.2.19) record.
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 DesignVector Object
@@ -2793,7 +2793,7 @@ If ETO_RTLREADING is specified, characters are laid right to left instead of lef
 The size and encoding of the characters in the **OutputString** is determined by the type of record that contains this object, as follows:
 
 - EMR_EXTTEXTOUTA (section [2.3.5.7](#Section_2.3.5.7)) and EMR_POLYTEXTOUTA (section [2.3.5.32](#Section_2.3.5.32)) records: 8-bit [**ASCII**](#gt_ascii) characters.
-- EMR_EXTTEXTOUTW (section [2.3.5.8](#Section_2.3.5.8)) and EMR_POLYTEXTOUTW (section [2.3.5.33](#Section_2.3.5.33)) records: 16-bit [**Unicode**](#gt_unicode) [**UTF16-LE**](#gt_f25550c9-f84f-4eb2-8156-14794a7e3059) characters.
+- EMR_EXTTEXTOUTW (section [2.3.5.8](#Section_3.2.10)) and EMR_POLYTEXTOUTW (section [2.3.5.33](#Section_2.3.5.33)) records: 16-bit [**Unicode**](#gt_unicode) [**UTF16-LE**](#gt_f25550c9-f84f-4eb2-8156-14794a7e3059) characters.
 <a id="Section_2.2.6"></a>
 ### 2.2.6 EpsData Object
 
@@ -5220,7 +5220,7 @@ The following are [**EMF**](#gt_enhanced-metafile-format-emf) drawing record typ
 | EMR_ELLIPSE | [2.3.5.5](#Section_2.3.5.5) | Draws an ellipse. |
 | EMR_EXTFLOODFILL | 2.3.5.1 | Draws a line segment of an arc. |
 | EMR_EXTTEXTOUTA | [2.3.5.7](#Section_2.3.5.7) | Draws an [**ASCII**](#gt_ascii) text string using the current font and text colors. |
-| EMR_EXTTEXTOUTW | [2.3.5.8](#Section_2.3.5.8) | Draws a [**Unicode**](#gt_unicode) text string using the current font and text colors. |
+| EMR_EXTTEXTOUTW | [2.3.5.8](#Section_3.2.10) | Draws a [**Unicode**](#gt_unicode) text string using the current font and text colors. |
 | EMR_FILLPATH | [2.3.5.9](#Section_2.3.5.9) | Closes any open figures in the current [**path bracket**](#gt_path-bracket) and fills the path's interior with the current brush. |
 | EMR_FILLRGN | [2.3.5.10](#Section_2.3.5.10) | Fills the specified region with the specified brush. |
 | EMR_FRAMERGN | [2.3.5.11](#Section_2.3.5.11) | Draws a border around the specified region with the specified brush. |
@@ -5518,7 +5518,7 @@ packet-beta
 
 The font and text colors used for output are specified by the state of the current graphics environment (section [3.1.1.2](#Section_3.1.1.2)). A rectangle for clipping and/or opaquing can be defined in the EmrText object in the **aEmrText** field.
 
-This record SHOULD<64> be emulated with an EMR_EXTTEXTOUTW record (section [2.3.5.8](#Section_2.3.5.8)), which requires the ASCII text string in the EmrText object to be converted to [**Unicode**](#gt_unicode) [**UTF16-LE**](#gt_f25550c9-f84f-4eb2-8156-14794a7e3059) encoding.
+This record SHOULD<64> be emulated with an EMR_EXTTEXTOUTW record (section [2.3.5.8](#Section_3.2.10)), which requires the ASCII text string in the EmrText object to be converted to [**Unicode**](#gt_unicode) [**UTF16-LE**](#gt_f25550c9-f84f-4eb2-8156-14794a7e3059) encoding.
 
 See section 2.3.5 for more drawing record types.
 
@@ -6324,7 +6324,7 @@ packet-beta
 
 The font and text colors used for output are specified by properties in the current state of EMF metafile playback (section [3.1](#Section_3.1)).
 
-EMR_POLYTEXTOUTA SHOULD<70> be emulated with a series of [EMR_EXTTEXTOUTW](#Section_2.3.5.8) records (section [2.3.5.7](#Section_2.3.5.7)), one per string. This requires the ASCII text string in each EmrText object to be converted to [**Unicode**](#gt_unicode) [**UTF16-LE**](#gt_f25550c9-f84f-4eb2-8156-14794a7e3059) encoding.
+EMR_POLYTEXTOUTA SHOULD<70> be emulated with a series of [EMR_EXTTEXTOUTW](#Section_3.2.10) records (section [2.3.5.7](#Section_2.3.5.7)), one per string. This requires the ASCII text string in each EmrText object to be converted to [**Unicode**](#gt_unicode) [**UTF16-LE**](#gt_f25550c9-f84f-4eb2-8156-14794a7e3059) encoding.
 
 See section 2.3.5 for more drawing record types.
 
@@ -6363,7 +6363,7 @@ packet-beta
 
 The font and text colors used for output are specified by properties in the current state of the [**playback device context**](#gt_playback-device-context).
 
-EMR_POLYTEXTOUTW SHOULD be emulated with a series of [EMR_EXTTEXTOUTW](#Section_2.3.5.8) records (section [2.3.5.7](#Section_2.3.5.7)), one per string.<71>
+EMR_POLYTEXTOUTW SHOULD be emulated with a series of [EMR_EXTTEXTOUTW](#Section_3.2.10) records (section [2.3.5.7](#Section_2.3.5.7)), one per string.<71>
 
 See section 2.3.5 for more drawing record types.
 
@@ -6661,14 +6661,14 @@ The following are [**EMF**](#gt_enhanced-metafile-format-emf) object creation re
 
 | Name | Section | Description |
 | --- | --- | --- |
-| EMR_CREATEBRUSHINDIRECT | [2.3.7.1](#Section_2.3.7.1) | Defines a logical brush with a LogBrushEx object (section [2.2.12](#Section_2.2.12)). |
+| EMR_CREATEBRUSHINDIRECT | [2.3.7.1](#Section_3.2.2) | Defines a logical brush with a LogBrushEx object (section [2.2.12](#Section_2.2.12)). |
 | EMR_CREATECOLORSPACE | [2.3.7.2](#Section_2.3.7.2) | Defines a logical [**color space**](#gt_color-space) with a LogColorSpace object ([MS-WMF](../MS-WMF/MS-WMF.md) section 2.2.2.11). |
 | EMR_CREATECOLORSPACEW | [2.3.7.3](#Section_2.3.7.3) | Defines a logical color space with a LogColorSpaceW object ([MS-WMF] section 2.2.2.12). |
 | EMR_CREATEDIBPATTERNBRUSHPT | [2.3.7.4](#Section_2.3.7.4) | Defines a pattern brush with a DeviceIndependentBitmap object ([MS-WMF] section 2.2.2.9). |
 | EMR_CREATEMONOBRUSH | [2.3.7.5](#Section_2.3.7.5) | Defines a monochrome pattern brush with a monochrome DeviceIndependentBitmap object. |
 | EMR_CREATEPALETTE | [2.3.7.6](#Section_2.3.7.6) | Defines a [**logical palette**](#gt_logical-palette) with a LogPalette object (section [2.2.17](#Section_2.2.18)). |
 | EMR_CREATEPEN | [2.3.7.7](#Section_2.3.7.7) | Defines a logical pen with a LogPen object (section [2.2.19](#Section_2.2.19)). |
-| EMR_EXTCREATEFONTINDIRECTW | [2.3.7.8](#Section_3.2.8) | Defines a logical font with either a LogFont object (section [2.2.13](#Section_2.2.13)) or LogFontExDv object (section [2.2.15](#Section_2.2.15)). |
+| EMR_EXTCREATEFONTINDIRECTW | [2.3.7.8](#Section_2.3.7.8) | Defines a logical font with either a LogFont object (section [2.2.13](#Section_2.2.13)) or LogFontExDv object (section [2.2.15](#Section_2.2.15)). |
 | EMR_EXTCREATEPEN | [2.3.7.9](#Section_2.3.7.9) | Defines a logical pen with a LogPenEx object (section [2.2.20](#Section_2.2.20)) and optional DeviceIndependentBitmap object. |
 
 The generic structure of object creation records is specified as follows.
@@ -6849,7 +6849,7 @@ packet-beta
 
 **BitsSrc (variable):** The DIB bits, which is the **aData** field of a DeviceIndependentBitmap object.
 
-The pattern brush object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.18)), which specifies the pattern brush to use in subsequent graphics operations.
+The pattern brush object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.12)), which specifies the pattern brush to use in subsequent graphics operations.
 
 See section 2.3.7 for more object creation record types.
 
@@ -6902,7 +6902,7 @@ packet-beta
 
 **BitsSrc (variable):** The DIB bits, which is the **aData** field of a DeviceIndependentBitmap object.
 
-The monochrome pattern brush object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.18)), which specifies the pattern brush to use in subsequent graphics operations.
+The monochrome pattern brush object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.12)), which specifies the pattern brush to use in subsequent graphics operations.
 
 See section 2.3.7 for more object creation record types.
 
@@ -6952,7 +6952,7 @@ packet-beta
 
 **LogPen (16 bytes):** A [LogPen](#Section_2.2.19) object (section 2.2.19) that specifies the style, width, and color of the logical pen.
 
-The logical pen object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5), which specifies the logical pen to use in subsequent graphics operations.
+The logical pen object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5), which specifies the logical pen to use in subsequent graphics operations.
 
 See section [2.3.7](#Section_2.3.7) for more object creation record types.
 
@@ -6977,7 +6977,7 @@ packet-beta
 
 **elw (variable):** A LogFontExDv object (section [2.2.15](#Section_2.2.15)), which specifies the logical font. A LogFont object (section [2.2.13](#Section_2.2.13)) MAY<74> be present instead. The process for determining the type of object in this field is described below.
 
-The logical font object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.18)), which specifies the logical font to use in subsequent graphics operations.
+The logical font object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.12)), which specifies the logical font to use in subsequent graphics operations.
 
 The type of logical font object in the **elw** field of this record is determined by the following algorithm (all size and length values are in bytes):
 
@@ -7048,7 +7048,7 @@ packet-beta
 
 **BitsSrc (variable):** The DIB bits, which is the **aData** field of a DeviceIndependentBitmap object.
 
-The extended logical pen object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.18)), which specifies the logical pen to use in subsequent graphics operations.
+The extended logical pen object defined by this record can be selected into the [**playback device context**](#gt_playback-device-context) by an EMR_SELECTOBJECT record (section [2.3.8.5](#Section_3.2.12)), which specifies the logical pen to use in subsequent graphics operations.
 
 See section 2.3.7 for more object creation record types.
 
@@ -7063,9 +7063,9 @@ The following are [**EMF**](#gt_enhanced-metafile-format-emf) object manipulatio
 | --- | --- | --- |
 | EMR_COLORCORRECTPALETTE | [2.3.8.1](#Section_2.3.8.1) | Specifies how to correct the entries of a LogPalette object (section [2.2.17](#Section_2.2.18)) by using [**WCS**](#gt_windows-color-system-wcs) values. |
 | EMR_DELETECOLORSPACE | [2.3.8.2](#Section_2.3.8.2) | Specifies how to delete a logical color space from the EMF object table (section [3.1.1.1](#Section_3.1.1.1)). |
-| EMR_DELETEOBJECT | [2.3.8.3](#Section_3.2.20) | Specifies the index of the object to be deleted from the EMF object table. |
+| EMR_DELETEOBJECT | [2.3.8.3](#Section_3.2.19) | Specifies the index of the object to be deleted from the EMF object table. |
 | EMR_RESIZEPALETTE | [2.3.8.4](#Section_2.3.8.4) | Increases or decreases the size of an existing LogPalette object. |
-| EMR_SELECTOBJECT | [2.3.8.5](#Section_3.2.18) | Specifies an existing object based on its index in the EMF object table and selects it into the [**playback device context**](#gt_playback-device-context) |
+| EMR_SELECTOBJECT | [2.3.8.5](#Section_3.2.12) | Specifies an existing object based on its index in the EMF object table and selects it into the [**playback device context**](#gt_playback-device-context) |
 | EMR_SELECTPALETTE | [2.3.8.6](#Section_2.3.8.6) | Selects the specified LogPalette object into the playback device context. |
 | EMR_SETCOLORSPACE | [2.3.8.7](#Section_2.3.8.7) | Specifies a logical color space, based on its index in the EMF object table. |
 | EMR_SETPALETTEENTRIES | [2.3.8.8](#Section_2.3.8.8) | Defines [**RGB**](#gt_red-green-blue-rgb) color values in a range of entries for an existing LogPalette object. |
@@ -7157,7 +7157,7 @@ packet-beta
 
 The color space is specified by either a LogColorSpace or LogColorSpaceW object ([MS-WMF](../MS-WMF/MS-WMF.md) sections 2.2.2.11 and 2.2.2.12, respectively). If the deleted color space is currently selected into the [**playback device context**](#gt_playback-device-context), the default object MUST be restored.
 
-An EMR_DELETEOBJECT record (section [2.3.8.3](#Section_3.2.20)) SHOULD be used instead of this record to delete a logical color space object.
+An EMR_DELETEOBJECT record (section [2.3.8.3](#Section_3.2.19)) SHOULD be used instead of this record to delete a logical color space object.
 
 See section [2.3.8](#Section_2.3.8) for more object manipulation record types.
 
@@ -7888,7 +7888,7 @@ packet-beta
 
 Color adjustment values are used to adjust the input color of the source [**bitmap**](#gt_bitmap) for graphics operations performed by [EMR_STRETCHBLT](#Section_2.3.1.6) and [EMR_STRETCHDIBITS](#Section_2.3.1.7) records when **STRETCH_HALFTONE** mode is set from the [StretchMode](#Section_2.1.32) enumeration (section 2.1.32).
 
-The ColorAdjustment object specified by this record MUST be used in graphics operations that require a ColorAdjustment object, until a different ColorAdjustment object is specified by another EMR_SETCOLORADJUSTMENT record, or until the object is removed by a [EMR_DELETEOBJECT](#Section_3.2.20) record.
+The ColorAdjustment object specified by this record MUST be used in graphics operations that require a ColorAdjustment object, until a different ColorAdjustment object is specified by another EMR_SETCOLORADJUSTMENT record, or until the object is removed by a [EMR_DELETEOBJECT](#Section_3.2.19) record.
 
 See section [2.3.11](#Section_2.3.11) more state record types.
 
@@ -8236,7 +8236,7 @@ packet-beta
 
 **nBreakCount (4 bytes):** A signed integer that specifies the number of break characters.
 
-Instead of using this record, an implementation SHOULD use EMR_EXTTEXTOUTW (section [2.3.5.8](#Section_2.3.5.8)) to perform this function.
+Instead of using this record, an implementation SHOULD use EMR_EXTTEXTOUTW (section [2.3.5.8](#Section_3.2.10)) to perform this function.
 
 See section [2.3.11](#Section_2.3.11) for more state record types.
 
@@ -8558,7 +8558,7 @@ The **Text** group of elements define the current font and text properties in th
 **Text** elements are used by the following [**EMF**](#gt_enhanced-metafile-format-emf) text drawing records.
 
 - EMR_EXTTEXTOUTA (section [2.3.5.7](#Section_2.3.5.7))
-- EMR_EXTTEXTOUTW (section [2.3.5.8](#Section_2.3.5.8))
+- EMR_EXTTEXTOUTW (section [2.3.5.8](#Section_3.2.10))
 - EMR_POLYTEXTOUTA (section [2.3.5.32](#Section_2.3.5.32))
 - EMR_POLYTEXTOUTW (section [2.3.5.33](#Section_2.3.5.33))
 - EMR_SMALLTEXTOUT (section [2.3.5.37](#Section_2.3.5.37))
@@ -10573,7 +10573,7 @@ packet-beta
 <a id="Section_3.2.2"></a>
 ### 3.2.2 EMR_CREATEBRUSHINDIRECT Example
 
-This section provides an example of an [EMR_CREATEBRUSHINDIRECT](#Section_2.3.7.1) record (section 2.3.7.1).
+This section provides an example of an [EMR_CREATEBRUSHINDIRECT](#Section_3.2.2) record (section 2.3.7.1).
 
 000000D0: 27 00 00 00 18 00 00 00 01 00 00 00
 
@@ -10613,7 +10613,7 @@ packet-beta
 <a id="Section_3.2.3"></a>
 ### 3.2.3 EMR_SELECTOBJECT Example 1
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 000000E0: 25 00 00 00
 
@@ -10725,7 +10725,7 @@ packet-beta
 <a id="Section_3.2.5"></a>
 ### 3.2.5 EMR_SELECTOBJECT Example 2
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 00000150: 25 00 00 00
 
@@ -12369,7 +12369,7 @@ packet-beta
 <a id="Section_3.2.8"></a>
 ### 3.2.8 EMR_EXTCREATEFONTINDIRECTW Example 1
 
-This section provides an example of an EMR_EXTCREATEFONTINDIRECTW record (section [2.3.7.8](#Section_3.2.8)).
+This section provides an example of an EMR_EXTCREATEFONTINDIRECTW record (section [2.3.7.8](#Section_2.3.7.8)).
 
 00003110: 52 00 00 00
 
@@ -12503,7 +12503,7 @@ packet-beta
 <a id="Section_3.2.9"></a>
 ### 3.2.9 EMR_SELECTOBJECT Example 3
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 00003280: 25 00 00 00
 
@@ -12525,7 +12525,7 @@ packet-beta
 <a id="Section_3.2.10"></a>
 ### 3.2.10 EMR_EXTTEXTOUTW Example
 
-This section provides an example of an [EMR_EXTTEXTOUTW](#Section_2.3.5.8) record (section 2.3.5.8).
+This section provides an example of an [EMR_EXTTEXTOUTW](#Section_3.2.10) record (section 2.3.5.8).
 
 00003290: 54 00 00 00 A0 00 00 00
 
@@ -12609,7 +12609,7 @@ packet-beta
 <a id="Section_3.2.11"></a>
 ### 3.2.11 EMR_EXTCREATEFONTINDIRECTW Example 2
 
-This section provides an example of an [EMR_EXTCREATEFONTINDIRECTW](#Section_3.2.8) record (section 2.3.7.8).
+This section provides an example of an [EMR_EXTCREATEFONTINDIRECTW](#Section_2.3.7.8) record (section 2.3.7.8).
 
 00003330: 52 00 00 00 70 01 00 00
 
@@ -12743,7 +12743,7 @@ packet-beta
 <a id="Section_3.2.12"></a>
 ### 3.2.12 EMR_SELECTOBJECT Example 4
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 000034A0: 25 00 00 00 0C 00 00 00
 
@@ -12765,7 +12765,7 @@ packet-beta
 <a id="Section_3.2.13"></a>
 ### 3.2.13 EMR_EXTCREATEFONTINDIRECTW Example 3
 
-This section provides an example of an EMR_EXTCREATEFONTINDIRECTW record (section [2.3.7.8](#Section_3.2.8)).
+This section provides an example of an EMR_EXTCREATEFONTINDIRECTW record (section [2.3.7.8](#Section_2.3.7.8)).
 
 000034B0: 52 00 00 00 70 01 00 00 04 00 00 00
 
@@ -12899,7 +12899,7 @@ packet-beta
 <a id="Section_3.2.14"></a>
 ### 3.2.14 EMR_SELECTOBJECT Example 5
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 00003620: 25 00 00 00 0C 00 00 00 04 00 00 00
 
@@ -12919,7 +12919,7 @@ packet-beta
 <a id="Section_3.2.15"></a>
 ### 3.2.15 EMR_DELETEOBJECT Example 1
 
-This section provides an example of an [EMR_DELETEOBJECT](#Section_3.2.20) record (section 2.3.8.3).
+This section provides an example of an [EMR_DELETEOBJECT](#Section_3.2.19) record (section 2.3.8.3).
 
 00003630:28 00 00 00 0C 00 00 00 03 00 00 00
 
@@ -12939,7 +12939,7 @@ packet-beta
 <a id="Section_3.2.16"></a>
 ### 3.2.16 EMR_EXTCREATEFONTINDIRECTW Example 4
 
-This section provides an example of an [EMR_EXTCREATEFONTINDIRECTW](#Section_3.2.8) record (section 2.3.7.8).
+This section provides an example of an [EMR_EXTCREATEFONTINDIRECTW](#Section_2.3.7.8) record (section 2.3.7.8).
 
 00003630: 52 00 00 00
 
@@ -13073,7 +13073,7 @@ packet-beta
 <a id="Section_3.2.17"></a>
 ### 3.2.17 EMR_SELECTOBJECT Example 6
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 000037A0: 25 00 00 00
 
@@ -13095,7 +13095,7 @@ packet-beta
 <a id="Section_3.2.18"></a>
 ### 3.2.18 EMR_SELECTOBJECT Example 7
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 000037B0: 25 00 00 00 0C 00 00 00
 
@@ -13117,7 +13117,7 @@ packet-beta
 <a id="Section_3.2.19"></a>
 ### 3.2.19 EMR_DELETEOBJECT Example 2
 
-This section provides an example of an [EMR_DELETEOBJECT](#Section_3.2.20) record (section 2.3.8.3).
+This section provides an example of an [EMR_DELETEOBJECT](#Section_3.2.19) record (section 2.3.8.3).
 
 000037C0: 28 00 00 00 0C 00 00 00 04 00 00 00
 
@@ -13137,7 +13137,7 @@ packet-beta
 <a id="Section_3.2.20"></a>
 ### 3.2.20 EMR_DELETEOBJECT Example 3
 
-This section provides an example of an [EMR_DELETEOBJECT](#Section_3.2.20) record (section 2.3.8.3).
+This section provides an example of an [EMR_DELETEOBJECT](#Section_3.2.19) record (section 2.3.8.3).
 
 000037D0:28 00 00 00 0C 00 00 00 03 00 00 00
 
@@ -13157,7 +13157,7 @@ packet-beta
 <a id="Section_3.2.21"></a>
 ### 3.2.21 EMR_SELECTOBJECT Example 8
 
-This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.18) record (section 2.3.8.5).
+This section provides an example of an [EMR_SELECTOBJECT](#Section_3.2.12) record (section 2.3.8.5).
 
 000037D0: 25 00 00 00
 
@@ -13246,7 +13246,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <2> Section 1.4: Windows applications that use the [**GDI+**](#gt_graphics-device-interface-extended-gdi) API [[MSDN-GDI+]](https://go.microsoft.com/fwlink/?LinkId=90013) can create EMF metafiles that contain [**EMF+**](#gt_enhanced-metafile-format-plus-extensions-emf) records ([MS-EMFPLUS](../MS-EMFPLUS/MS-EMFPLUS.md) section 2.3).
 
-<3> Section 2.1.1: Windows NT 3.1 is the only Windows version in which [**GDI**](#gt_graphics-device-interface-gdi) uses [EMR_POLYTEXTOUTA](#Section_2.3.5.32) records for text output. All other versions emulate EMR_POLYTEXTOUTA with [EMR_EXTTEXTOUTW](#Section_2.3.5.8) records.
+<3> Section 2.1.1: Windows NT 3.1 is the only Windows version in which [**GDI**](#gt_graphics-device-interface-gdi) uses [EMR_POLYTEXTOUTA](#Section_2.3.5.32) records for text output. All other versions emulate EMR_POLYTEXTOUTA with [EMR_EXTTEXTOUTW](#Section_3.2.10) records.
 
 <4> Section 2.1.1: Windows NT 3.1 is the only Windows version in which GDI uses EMR_POLYTEXTOUTW records for text output. All other versions emulate EMR_POLYTEXTOUTW with EMR_EXTTEXTOUTW records.
 
@@ -13258,7 +13258,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 2.1.1: Windows NT 3.1, Windows NT 3.5, and Windows NT 3.51 do not support EMR_DELETECOLORSPACE.
 
-<9> Section 2.1.1: Windows uses an [EMR_DELETEOBJECT](#Section_3.2.20) record to delete a logical color space object.
+<9> Section 2.1.1: Windows uses an [EMR_DELETEOBJECT](#Section_3.2.19) record to delete a logical color space object.
 
 <10> Section 2.1.1: Windows NT 3.1, Windows NT 3.5, and Windows NT 3.51 do not support EMR_GLSRECORD.
 

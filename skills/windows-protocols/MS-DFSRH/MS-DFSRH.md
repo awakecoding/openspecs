@@ -1588,7 +1588,7 @@ Attributes
 <a id="Section_2.2.1.5.14"></a>
 ##### 2.2.1.5.14 ref Element
 
-The ref XML element represents information about an error parameter. Depending on what the error is, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17.31).
+The ref XML element represents information about an error parameter. Depending on what the error is, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17.8).
 
 <xs:element name="ref"
 
@@ -1730,7 +1730,7 @@ Child Elements
 | --- | --- | --- |
 | timestamp | timestamp | MUST be the time when the error occurred. The format of this element is specified in section [2.2.1.5.2](#Section_2.2.1.5.2). |
 | affectedContentSets | affectedContentSets | MUST be information about content sets that are affected by this problem. The type of information contained in this field MUST be as specified in the section [2.2.1.5.13](#Section_2.2.1.5.13). |
-| errorReferences | errorReferences | MUST be the error parameters. The format of this element is specified in section [2.2.1.5.15](#Section_2.2.1.5.15). Depending on the error ID, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17.31). |
+| errorReferences | errorReferences | MUST be the error parameters. The format of this element is specified in section [2.2.1.5.15](#Section_2.2.1.5.15). Depending on the error ID, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17.8). |
 
 Attributes
 
@@ -3046,7 +3046,7 @@ The server MUST also generate report XML. The server MUST get the following info
 
 - Information about the configuration of the replicated folder (replicated folder root path, staging folder path, conflict folder path, and configured staging size).
 - Information about files that were received from other DFS-R members since the DFS-R service started, which SHOULD occur when the system is booted. The required information is the count and cumulative compressed size of the files received, as well as the cumulative compressed size of the files received from other members.
-- Information about available errors that were encountered by the DFS-R service since the server started, as well as errors encountered during report generation while retrieving information about the replication group supplied by the *replicationGroupGuid* parameter. These errors are specified in section [2.2.1.5.17](#Section_2.2.1.5.17.31).
+- Information about available errors that were encountered by the DFS-R service since the server started, as well as errors encountered during report generation while retrieving information about the replication group supplied by the *replicationGroupGuid* parameter. These errors are specified in section [2.2.1.5.17](#Section_2.2.1.5.17.8).
 - If the REPORTING_FLAGS_BACKLOG flag was specified in message parameters, the server MUST also get the count of pending incoming changes that are known to the reference member (as specified by the version vectors passed in the method parameters) but that are not yet received on the local member.
 - If the REPORTING_FLAGS_FILES flag was specified in message parameters, the server MUST also count the number of files and cumulative file sizes for:
 - Files under the replicated folder root that are available for replication. The server MUST NOT count any files that are excluded from replication.

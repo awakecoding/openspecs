@@ -634,7 +634,7 @@ Messages sent from the client to the server are as follows:
 - [Login](#Section_2.2.1.2)
 - [Federated Authentication Token](#Section_2.2.6.3)
 - [SQL Batch](#Section_2.2.1.4)
-- [Bulk Load](#Section_2.2.1.5)
+- [Bulk Load](#Section_4.12)
 - [Remote Procedure Call](#Section_2.2.1.6)
 - [Attention](#Section_2.2.1.7)
 - [Transaction Manager Request](#Section_2.2.6.9)
@@ -817,7 +817,7 @@ The following table highlights which messages, as described previously in sectio
 | [Login](#Section_2.2.1.2) | Client | 16 + 17 (if Integrated authentication) |
 | [Federated Authentication Token](#Section_2.2.6.3) | Client | 8 |
 | [SQL Batch](#Section_2.2.1.4) | Client | 1 |
-| [Bulk Load](#Section_2.2.1.5) | Client | 7 |
+| [Bulk Load](#Section_4.12) | Client | 7 |
 | [RPC](#Section_2.2.1.6) | Client | 3 |
 | [Attention](#Section_2.2.1.7) | Client | 6 |
 | [Transaction Manager Request](#Section_2.2.6.9) | Client | 14 |
@@ -5165,7 +5165,7 @@ See sections [3.2.6](#Section_3.2.6) and [3.3.6](#Section_3.3.6) for the timer e
 
 A TDS session is tied to the underlying established network protocol session. As such, loss or termination of a network connection is equivalent to immediate termination of a TDS session.
 
-See sections [3.2.7](#Section_3.3.7) and [3.3.7](#Section_3.3.7) for the other local events of the client and server, respectively.
+See sections [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.2.7) for the other local events of the client and server, respectively.
 
 <a id="Section_3.2"></a>
 ## 3.2 Client Details
@@ -5197,7 +5197,7 @@ A TDS client SHOULD maintain the following states:
 - [Sent Client Request State](#Section_3.2.5.8)
 - [Sent Attention State](#Section_3.2.5.9)
 - [Routing Completed State](#Section_3.2.5.10)
-- [Final State](#Section_3.3.5.11)
+- [Final State](#Section_3.2.5.11)
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
@@ -5428,7 +5428,7 @@ The server SHOULD maintain the following states:
 - [Logged In State](#Section_3.3.5.8)
 - [Client Request Execution State](#Section_3.3.5.9)
 - [Routing Completed State](#Section_3.2.5.10)
-- [Final State](#Section_3.3.5.11)
+- [Final State](#Section_3.2.5.11)
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
 
@@ -13804,7 +13804,7 @@ The following table lists the sections in this document in which the available T
 | --- | --- |
 | TLS Negotiation | [2.1](#Section_2.1) Transport [3.2.5.1](#Section_3.2.5.1) Sent Initial TLS Negotiation Packet State [3.2.5.2](#Section_3.2.5.2) Sent Initial PRELOGIN Packet State [3.2.5.3](#Section_3.2.5.3) Sent TLS/SSL Negotiation Packet State [3.3.5.1](#Section_3.3.5.1) Initial State [3.3.5.2](#Section_3.3.5.3) TLS/SSL Negotiation State [3.3.5.3](#Section_3.3.5.2) TLS Negotiation State [3.3.5.4](#Section_3.3.5.4) PRELOGIN Ready State [3.3.5.5](#Section_3.3.5.5) Login Ready State |
 | SSPI Authentication | [2.2.1.2](#Section_2.2.1.2) Login [2.2.3.1.1](#Section_2.2.3.1.1) Type [2.2.5.8](#Section_2.2.5.8) Data Packet Stream Tokens [2.2.6.4](#Section_2.2.6.4) LOGIN7 [2.2.6.5](#Section_2.2.6.5) PRELOGIN [2.2.6.8](#Section_4.11) SSPI Message [2.2.7.22](#Section_2.2.7.22) SSPI 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.5](#Section_3.2.5.5) Sent LOGIN7 Record with SPNEGO Packet State 3.3.5.5 Login Ready State [4.2](#Section_4.2) Login Request [4.3](#Section_4.3) Login Request with Federated Authentication [4.11](#Section_4.11) SSPI Message [4.16](#Section_4.16) FeatureExt with SESSIONRECOVERY Feature Data [4.20](#Section_4.20) FeatureExt with AZURESQLSUPPORT Feature Data |
-| Federated Authentication | 2.2.1.2 Login [2.2.1.3](#Section_2.2.6.3) Federated Authentication Token [2.2.2.3](#Section_2.2.2.3) Federated Authentication Information 2.2.3.1.1 Type [2.2.4](#Section_2.2.4) Packet Data Token and Tokenless Data Streams [2.2.6.3](#Section_2.2.6.3) Federated Authentication Token 2.2.6.4 LOGIN7 2.2.6.5 PRELOGIN [2.2.7.11](#Section_2.2.7.11) FEATUREEXTACK [2.2.7.12](#Section_2.2.7.12) FEDAUTHINFO [3.1.5](#Section_3.1.5) Message Processing Events and Sequencing Rules 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.4](#Section_3.2.5.4) Sent LOGIN7 Record with Complete Authentication Token State [3.2.5.6](#Section_3.2.5.6) Sent LOGIN7 Record with Federated Authentication Information Request State 3.3.5.1 Initial State 3.3.5.5 Login Ready State [3.3.5.7](#Section_3.3.5.7) Federated Authentication Ready State 4.3 Login Request with Federated Authentication [4.5](#Section_4.5) Login Response with Federated Authentication Feature Extension Acknowledgement |
+| Federated Authentication | 2.2.1.2 Login [2.2.1.3](#Section_2.2.6.3) Federated Authentication Token [2.2.2.3](#Section_2.2.2.3) Federated Authentication Information 2.2.3.1.1 Type [2.2.4](#Section_2.2.4) Packet Data Token and Tokenless Data Streams [2.2.6.3](#Section_2.2.6.3) Federated Authentication Token 2.2.6.4 LOGIN7 2.2.6.5 PRELOGIN [2.2.7.11](#Section_2.2.7.11) FEATUREEXTACK [2.2.7.12](#Section_2.2.7.12) FEDAUTHINFO [3.1.5](#Section_3.1.5) Message Processing Events and Sequencing Rules 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.4](#Section_3.2.5.4) Sent LOGIN7 Record with Complete Authentication Token State [3.2.5.6](#Section_3.2.5.6) Sent LOGIN7 Record with Federated Authentication Information Request State 3.3.5.1 Initial State 3.3.5.5 Login Ready State [3.3.5.7](#Section_3.3.5.7) Federated Authentication Ready State 4.3 Login Request with Federated Authentication [4.5](#Section_2.2.2.2) Login Response with Federated Authentication Feature Extension Acknowledgement |
 | Data classification | [2.2.4.2.1.3](#Section_2.2.4.2.1.3) Variable Length Tokens(xx10xxxx) 2.2.5.8 Data Packet Stream Tokens 2.2.6.4 LOGIN7 [2.2.7.5](#Section_2.2.7.5) DATACLASSIFICATION 2.2.7.11 FEATUREEXTACK |
 
 <a id="Section_6"></a>

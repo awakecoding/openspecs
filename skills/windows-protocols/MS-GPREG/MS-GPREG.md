@@ -988,7 +988,7 @@ At initialization, the Group Policy: Core Protocol (as specified in [MS-GPOL](..
 
 Higher-layer triggered events occur in the following situations:
 
-- An administrator makes a change to any Registry Policy Setting. The sequence of events would include, if the Registry Administrative Plug-in was used to make the change, the [ADM-Based Policy Description Load Event](#Section_3.1.4.5) defined in section 3.1.4.5 and/or the [ADMX-Based Policy Description Load Event](#Section_3.1.4.6) defined in section 3.1.4.6, and the [Load Policy Settings Event](#Section_3.1.4.1) defined in section 3.1.4.1, and, after updates were made, the Update Policy Settings Event defined in section [3.1.4.2](#Section_3.1.4.1).
+- An administrator makes a change to any Registry Policy Setting. The sequence of events would include, if the Registry Administrative Plug-in was used to make the change, the [ADM-Based Policy Description Load Event](#Section_3.1.4.5) defined in section 3.1.4.5 and/or the [ADMX-Based Policy Description Load Event](#Section_3.1.4.6) defined in section 3.1.4.6, and the [Load Policy Settings Event](#Section_3.1.4.1) defined in section 3.1.4.1, and, after updates were made, the Update Policy Settings Event defined in section [3.1.4.2](#Section_3.1.4.2).
 - The Registry Policy Setting is viewed. The sequence would include, if the Registry Administrative Plug-in was used to view the setting, the ADM-Based Policy Description Load Event defined in section 3.1.4.5 and/or the ADMX-Based Policy Description Load Event defined in section 3.1.4.6, the Load Policy Settings Event defined in section 3.1.4.1.
 - An administrator makes a change to any Registry Policy Comments. The sequence of events would include the [Load Policy Comments Event](#Section_3.1.4.3) defined in section 3.1.4.3, and after updates were made, the [Update Policy Comments Event](#Section_3.1.4.4) defined in section 3.1.4.4.
 - The Registry Policy Comments are viewed. The sequence would include the Load Policy Comments Event defined in section 3.1.4.3.
@@ -1001,7 +1001,7 @@ The Load Policy Settings event can be invoked by Group Policy Extensions to read
 
 **Policy Setting State:** The value of the settings in the GPO as described in Computer Policy Setting State (section [3.1.1.3](#Section_3.1.1.3)) and [User Policy Setting State (section 3.1.1.4](#Section_3.1.1.4)).
 
-This event causes the Policy Administration Load Message Sequence (section [3.1.5.3](#Section_3.1.5.3)) to be performed using the <gpo path> and **Policy Setting State** logical parameters from this event.
+This event causes the Policy Administration Load Message Sequence (section [3.1.5.3](#Section_3.1.5.5)) to be performed using the <gpo path> and **Policy Setting State** logical parameters from this event.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Update Policy Settings Event
@@ -1023,7 +1023,7 @@ The Load Policy Comments event is invoked by the Group Policy Registry Administr
 
 **Policy Comment State**: The value of the comments in the GPO as described in Policy Comment State (section [3.1.1.5](#Section_3.1.1.5)).
 
-This event causes the Policy Administration Comments Load Message Sequence (section [3.1.5.5](#Section_3.1.5.3)) to be performed using the <gpo path> and **Policy Comment State** logical parameters from this event.
+This event causes the Policy Administration Comments Load Message Sequence (section [3.1.5.5](#Section_3.1.5.5)) to be performed using the <gpo path> and **Policy Comment State** logical parameters from this event.
 
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 Update Policy Comments Event
@@ -1055,7 +1055,7 @@ This event causes the Policy Description Sequence for ADMX-Based Administrative 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-Messages MUST be processed in the order of these subsections: [3.1.5.1](#Section_3.1.5.1) and/or [3.1.5.2](#Section_3.1.5.2) in any order, and [3.1.5.3](#Section_3.1.5.3) followed by [3.1.5.4](#Section_3.1.5.4) if applicable. The administrative plug-in executes the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates. All administrative template settings created by the execution of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates are serialized to and deserialized from the registry.pol file. The sequencing of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates can therefore occur in any order. When an administrator loads any Registry Policy Setting, the Policy Administration Load Message Sequencing is executed by the administrative plug-in. When an administrator makes a change to any Registry Policy Setting, the Policy Administration Update Message Sequencing is executed by the administrative plug-in.
+Messages MUST be processed in the order of these subsections: [3.1.5.1](#Section_3.1.5.1) and/or [3.1.5.2](#Section_3.1.5.2) in any order, and [3.1.5.3](#Section_3.1.5.5) followed by [3.1.5.4](#Section_3.1.5.4) if applicable. The administrative plug-in executes the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates. All administrative template settings created by the execution of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates are serialized to and deserialized from the registry.pol file. The sequencing of the Policy Description Sequence for ADM-Based Administrative Templates and the Policy Description Sequence for ADMX-Based Administrative Templates can therefore occur in any order. When an administrator loads any Registry Policy Setting, the Policy Administration Load Message Sequencing is executed by the administrative plug-in. When an administrator makes a change to any Registry Policy Setting, the Policy Administration Update Message Sequencing is executed by the administrative plug-in.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Policy Description Sequences for ADM-Based Administrative Templates
@@ -1263,7 +1263,7 @@ The NAP Group Policy administrative plug-in MUST invoke the following event to l
 - Load Policy Settings Event (section [3.1.4.1](#Section_3.1.4.1)).
 The NAP Group Policy administrative plug-in MUST invoke the following events to update the registry.pol file:
 
-- Update Policy Settings Event (section [3.1.4.2](#Section_3.1.4.1)).
+- Update Policy Settings Event (section [3.1.4.2](#Section_3.1.4.2)).
 - Update Group Policy Extension event specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.4.4 with the following parameters:
 - GPO DN is set to the distinguished name of the Administered [**GPO**](#gt_group-policy-object-gpo) (the GPO targeted by the [**Network Access Protection (NAP)**](#gt_network-access-protection-nap) administrative plug-in)
 - "Is User Policy" is set to FALSE.
@@ -3235,7 +3235,7 @@ name.</xs:documentation>
 <a id="Section_7.2"></a>
 ## 7.2 ADMX Policy Definition Schema
 
-The [**ADMX**](#gt_extended-administrative-template-admx) Policy Definition Types Schema provides the schema elements and types used to define the required information for creating individual [**policy settings**](#gt_policy-setting). These elements define the category, supported on and individual policy setting definition information, including the localized presentation portions. Also defined are elements in the ADMX File Schema (section [7.3](#Section_7.3)).
+The [**ADMX**](#gt_extended-administrative-template-admx) Policy Definition Types Schema provides the schema elements and types used to define the required information for creating individual [**policy settings**](#gt_policy-setting). These elements define the category, supported on and individual policy setting definition information, including the localized presentation portions. Also defined are elements in the ADMX File Schema (section [7.3](#Section_7.4)).
 
 | ADMX Policy Definition Types Schema Element/Group Name (Parent Elements or Types) | Description |
 | --- | --- |

@@ -237,7 +237,7 @@ The File Server Remote VSS Protocol is applicable in environments in which shado
 
 This document covers versioning in the following areas:
 
-- Protocol Versions: This protocol currently supports one version. The operations listed in section [3.1.4](#Section_3.1) are applicable for version 1 of the protocol as defined in section [2.2.2.4](#Section_2.2.2.4). The client queries the minimum and maximum versions supported by server through the RPC method **GetSupportedVersion (Opnum 0)**.
+- Protocol Versions: This protocol currently supports one version. The operations listed in section [3.1.4](#Section_3.2) are applicable for version 1 of the protocol as defined in section [2.2.2.4](#Section_2.2.2.4). The client queries the minimum and maximum versions supported by server through the RPC method **GetSupportedVersion (Opnum 0)**.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor Extensible Fields
 
@@ -264,7 +264,7 @@ The File Server Remote VSS Protocol endpoint is available only on RPC over named
 
 This protocol MUST use the UUID as specified in section [1.9](#Section_1.9). The RPC version number is 3.0.
 
-This protocol allows any user to establish a connection to the RPC server. The protocol requires the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.1).
+This protocol allows any user to establish a connection to the RPC server. The protocol requires the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks as specified in section [3.1.4](#Section_3.2).
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -410,7 +410,7 @@ The following error codes are specific to File Server Remote VSS Protocol (FSRVP
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The methods in this RPC interface MUST return ZERO (0x00000000) or a nonerror [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.4) section 2.1) to indicate success or a nonzero error code as specified in section [2.2.4](#Section_2.2.4), to indicate failure. Unless otherwise specified in section [3.2.4](#Section_3.2.4), the client-side of the File Server Remote VSS Protocol MUST NOT interpret returned error codes and MUST simply return error codes to the invoking application.
+The methods in this RPC interface MUST return ZERO (0x00000000) or a nonerror [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.4) section 2.1) to indicate success or a nonzero error code as specified in section [2.2.4](#Section_2.2.4), to indicate failure. Unless otherwise specified in section [3.2.4](#Section_3.1.4), the client-side of the File Server Remote VSS Protocol MUST NOT interpret returned error codes and MUST simply return error codes to the invoking application.
 
 The following diagram describes the typical client and server environments and the interactions between various components.
 
@@ -423,7 +423,7 @@ The application server hosts VSS writers that are components of the applications
 <a id="Section_3.1"></a>
 ## 3.1 FileServerVssAgent Server Details
 
-The server implementing this interface responds to the client's requests as specified in section [3.1.4](#Section_3.1). Upon the client's request, the server initiates a [**shadow copy**](#gt_shadow-copy) set (see section [3.1.1.2](#Section_3.1.1.2)) and performs shadow copy operations on that set.
+The server implementing this interface responds to the client's requests as specified in section [3.1.4](#Section_3.2). Upon the client's request, the server initiates a [**shadow copy**](#gt_shadow-copy) set (see section [3.1.1.2](#Section_3.1.1.2)) and performs shadow copy operations on that set.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -489,7 +489,7 @@ The **MappedShare** element consists of the following properties:
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-**Message Sequence Timer**: This timer controls the amount of time the server waits between successive messages received from the client. The values taken by this timer for individual messages are specified in section [3.1.4](#Section_3.1).
+**Message Sequence Timer**: This timer controls the amount of time the server waits between successive messages received from the client. The values taken by this timer for individual messages are specified in section [3.1.4](#Section_3.2).
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization

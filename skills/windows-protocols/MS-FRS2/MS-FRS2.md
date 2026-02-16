@@ -501,7 +501,7 @@ This document covers versioning issues in the following areas:
 - Security and authentication methods: DFS-R supports the NTLM (as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md)) and Kerberos (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) authentication methods. These are specified in section 2.1.
 - Localization: DFS-R does not expose any functionality that is localization-dependent.
 - Capability negotiation: DFS-R performs explicit capability negotiation as part of the protocol-version negotiation. Furthermore, on Windows, [**RDC**](#gt_remote-differential-compression-rdc) similarity (as specified in [MS-RDC](#Section_3.1.1.1) section 3.1.5.4) is enabled only for Enterprise SKUs, as specified in sections [2.2.1.2.1](#Section_2.2.1.2.1) and 3.2.4.1.2.
-DFS-R registers itself with RPC using a single [**UUID**](#gt_universally-unique-identifier-uuid), as specified in section 2.1. It always uses the same RPC Protocol version 1.0 and negotiates specific extensions using the custom protocol negotiation scheme that uses the method EstablishConnection (section 3.2.4.1.2) to establish the further set of methods that can be used between a DFS-R client and a [**server**](#gt_server). All but two methods can be used in the current two existing protocol versions, 0x00050000 and 0x00050002. The methods applicable to both protocol versions are specified in sections [3.2.4.1.1](#Section_3.2.4.1.14) through [3.2.4.1.14](#Section_3.2.4.1.14). The only method that is specific to protocol version 0x00050002 is specified in section [3.2.4.1.15](#Section_3.2.4.1.15). The capability of using similarity for speeding up downloads of RDC files can be controlled by using flags specified in section 2.2.1.2.1; the flags are communicated using the EstablishConnection method.
+DFS-R registers itself with RPC using a single [**UUID**](#gt_universally-unique-identifier-uuid), as specified in section 2.1. It always uses the same RPC Protocol version 1.0 and negotiates specific extensions using the custom protocol negotiation scheme that uses the method EstablishConnection (section 3.2.4.1.2) to establish the further set of methods that can be used between a DFS-R client and a [**server**](#gt_server). All but two methods can be used in the current two existing protocol versions, 0x00050000 and 0x00050002. The methods applicable to both protocol versions are specified in sections [3.2.4.1.1](#Section_3.2.4.1.14.1) through [3.2.4.1.14](#Section_3.2.4.1.14.1). The only method that is specific to protocol version 0x00050002 is specified in section [3.2.4.1.15](#Section_3.2.4.1.15). The capability of using similarity for speeding up downloads of RDC files can be controlled by using flags specified in section 2.2.1.2.1; the flags are communicated using the EstablishConnection method.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -672,7 +672,7 @@ This indicates the size, in bytes, of the full file [**hash**](#gt_hash).
 
 #define FRS_UPDATE_FLAG_GHOSTED_HEADER (0x04)
 
-The update request is for ghosted header only. A ghosted header consists of the portion of a file data that excludes the main data stream. Section [3.2.4.1.14](#Section_3.2.4.1.14) specifies the required format of the data stream transmitted by DFS-R. In this context, [MS-BKUP](../MS-BKUP/MS-BKUP.md) specifies the format of the backup data stream, which is part of the transmitted data stream. The main data stream is composed of bytes identified by the DATA stream ID, as specified in [MS-BKUP].
+The update request is for ghosted header only. A ghosted header consists of the portion of a file data that excludes the main data stream. Section [3.2.4.1.14](#Section_3.2.4.1.14.1) specifies the required format of the data stream transmitted by DFS-R. In this context, [MS-BKUP](../MS-BKUP/MS-BKUP.md) specifies the format of the backup data stream, which is part of the transmitted data stream. The main data stream is composed of bytes identified by the DATA stream ID, as specified in [MS-BKUP].
 
 Notice that hexadecimal notation for flags is used. Flags can be combined using the bitwise OR operation.
 
@@ -1363,7 +1363,7 @@ RDC_FILE_COMPRESSION_TYPES compressionAlgorithm;
 
 A value of 0 indicates that the file to be served is not suitable for the RDC protocol, or a non-RDC file transfer is required.
 
-**compressionAlgorithm:** This field MUST be set to RDC_UNCOMPRESSED and MUST be ignored on receipt. Despite the name of this field, data compression is always used as specified in section [3.2.4.1.14](#Section_3.2.4.1.14).
+**compressionAlgorithm:** This field MUST be set to RDC_UNCOMPRESSED and MUST be ignored on receipt. Despite the name of this field, data compression is always used as specified in section [3.2.4.1.14](#Section_3.2.4.1.14.1).
 
 **rdcFilterParameters:** The array of RDC chunker parameters used, one each for the levels of RDC signatures that are available.
 
@@ -1829,7 +1829,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [CheckConnectivity](#Section_3.2.4.1.14) | Called by a client to check whether the server is reachable and has been configured to replicate with the client. Opnum: 0 |
+| [CheckConnectivity](#Section_3.2.4.1.14.1) | Called by a client to check whether the server is reachable and has been configured to replicate with the client. Opnum: 0 |
 | [EstablishConnection](#Section_3.2.4.1.2) | Establishes a [**logical connection**](#gt_logical-connection) from a client to a server. Opnum: 1 |
 | [EstablishSession](#Section_3.3.4.3) | Establishes a logical relationship on the server for a [**replicated folder**](#gt_replicated-folder). Opnum: 2 |
 | [RequestUpdates](#Section_3.3.4.6) | Obtains file metadata in the form of updates from a server. Opnum: 3 |
@@ -1837,15 +1837,15 @@ Methods in RPC Opnum Order
 | [AsyncPoll](#Section_3.3.4.5) | Registers an asynchronous callback for a server to provide version chain vectors. Opnum: 5 |
 | [RequestRecords](#Section_3.2.4.1.7) | Retrieves [**UIDs**](#gt_unique-identifier-uid) and [**GVSNs**](#gt_global-version-sequence-numbers-gvsn) that a server persists. Opnum: 6 |
 | [UpdateCancel](#Section_3.3.4.17) | Used by a client to indicate to a server that it could not process an update. Opnum: 7 |
-| [RawGetFileData](#Section_3.3.4.11) | Transfers successive segments from a file. Opnum: 8 |
+| [RawGetFileData](#Section_3.3.4.9) | Transfers successive segments from a file. Opnum: 8 |
 | [RdcGetSignatures](#Section_3.3.4.12) | Obtains [**RDC**](#gt_remote-differential-compression-rdc) signature data from a server. Opnum: 9 |
-| [RdcPushSourceNeeds](#Section_3.2.4.1.11) | Registers requests for file ranges on a server. Opnum: 10 |
+| [RdcPushSourceNeeds](#Section_3.3.4.13) | Registers requests for file ranges on a server. Opnum: 10 |
 | [RdcGetFileData](#Section_3.2.4.1.12) | Obtains file ranges whose requests have previously been registered on a server. Opnum: 11 |
-| [RdcClose](#Section_3.2.4.1.13) | Informs the server that the server context information can be released. Opnum: 12 |
-| [InitializeFileTransferAsync](#Section_3.2.4.1.14) | Used by a client to start a file download. Opnum: 13 |
+| [RdcClose](#Section_3.3.4.10) | Informs the server that the server context information can be released. Opnum: 12 |
+| [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) | Used by a client to start a file download. Opnum: 13 |
 | Opnum14NotUsedOnWire | Reserved for local use. Opnum: 14 |
 | [RawGetFileDataAsync](#Section_3.2.4.1.15) | Used instead of calling RawGetFileData multiple times to obtain file data. This method is not applicable for protocol version 0x00050000. Opnum: 15 |
-| [RdcGetFileDataAsync](#Section_3.3.4.15) | Used instead of calling RdcGetFileData multiple times to obtain file data. This method is not applicable for protocol version 0x00050000. Opnum: 16 |
+| [RdcGetFileDataAsync](#Section_3.2.4.1.16) | Used instead of calling RdcGetFileData multiple times to obtain file data. This method is not applicable for protocol version 0x00050000. Opnum: 16 |
 | [RdcFileDataTransferKeepAlive](#Section_3.2.4.1.17) | Informs the server to keep the context information alive. This method is not applicable for protocol versions 0x00050000 and 0x00050002. Opnum: 17 |
 
 In the previous table, the term "Reserved for local use" means that the client MUST NOT send the opnum, and the server behavior is undefined as it does not affect interoperability. <21>
@@ -1908,7 +1908,7 @@ DWORD EstablishConnection(
 
 **connectionId:** The GUID of the outbound connection (see the **objectGUID** attribute specified in section [2.3.11](#Section_2.3.11)) in the specified replication group.
 
-**downstreamProtocolVersion:** Identifies the version of the [**DFS-R**](#gt_member-dfs-r) protocol implemented by the client. Currently implemented protocol versions are specified in section [2.2.1.1.1](#Section_2.2.1.1.11).
+**downstreamProtocolVersion:** Identifies the version of the [**DFS-R**](#gt_member-dfs-r) protocol implemented by the client. Currently implemented protocol versions are specified in section [2.2.1.1.1](#Section_2.2.1.1.16).
 
 **downstreamFlags:** This parameter is unused and SHOULD be set to 0 by the client. <22>
 
@@ -2296,7 +2296,7 @@ DWORD bufferSize,
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a pointer to a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method. The server MUST NOT change the value of serverContext and then return the same serverContext that was passed in.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a pointer to a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method. The server MUST NOT change the value of serverContext and then return the same serverContext that was passed in.
 
 **dataBuffer:** The file data received from the server.
 
@@ -2354,7 +2354,7 @@ DWORD length,
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to [InitializeFileTransferAsync](#Section_3.2.4.1.14) method in which the client set the *rdcDesired* parameter to TRUE.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method in which the client set the *rdcDesired* parameter to TRUE.
 
 **level:** The RDC recursion level being requested. A client MUST specify a number in the range of 1 to x, where x is the value of the **rdcSignatureLevels** field of the **rdcInfo** structure that was returned by the InitializeFileTransferAsync method call associated with the specified server context.
 
@@ -2411,7 +2411,7 @@ DWORD needCount
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method in which the client set the *rdcDesired* parameter to TRUE.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method in which the client set the *rdcDesired* parameter to TRUE.
 
 **sourceNeeds:** The pointer to a set of [FRS_RDC_SOURCE_NEED](#Section_2.2.1.4.6) structures that indicate the offsets and lengths of file data that is sent from the server to the client.
 
@@ -2436,7 +2436,7 @@ DWORD needCount
 - If the server is not currently participating in the replication of the [**replicated folder**](#gt_replicated-folder) that is associated with the specified server context, then the server MUST fail the call with the FRS_ERROR_CONTENTSET_NOT_FOUND failure value.
 **Actions Triggered:** Upon successfully validating the [**RDC**](#gt_remote-differential-compression-rdc) source needs request, the server queues up the requested file offset/length pairs, also known as RDC source needs. The number of RDC source needs queued by the server MUST NOT exceed the value of CONFIG_RDC_NEED_QUEUE_SIZE. The client MAY send multiple RdcPushSourceNeeds requests. If the server receives a request that causes the total number of RDC source needs already in the queue plus the value of the *needCount* parameter to be greater than the value of CONFIG_RDC_NEED_QUEUE_SIZE, then the server MUST fail the request with an implementation-defined failure value.
 
-The server uses the queued RDC source needs to form a stream of data from the marshaled source file. The format of this data stream is specified in section [3.2.4.1.12](#Section_3.2.4.1.12) and is returned in the buffer supplied by the RdcGetFileData method or the [RdcGetFileDataAsync](#Section_3.3.4.15) method.
+The server uses the queued RDC source needs to form a stream of data from the marshaled source file. The format of this data stream is specified in section [3.2.4.1.12](#Section_3.2.4.1.12) and is returned in the buffer supplied by the RdcGetFileData method or the [RdcGetFileDataAsync](#Section_3.2.4.1.16) method.
 
 **Remarks:** If the *needSize* parameter in FRS_RDC_SOURCE_NEED has a value of zero, then the server SHOULD fail the request to queue RDC source needs, with an implementation-defined failure value.
 
@@ -2447,7 +2447,7 @@ If any of the RDC source needs in the *sourceNeeds* buffer specifies a range of 
 <a id="Section_3.2.4.1.12"></a>
 ##### 3.2.4.1.12 RdcGetFileData (Opnum 11)
 
-The RdcGetFileData method is used to obtain file ranges whose requests have previously been queued on a server by calling the [RdcPushSourceNeeds](#Section_3.2.4.1.11) method.
+The RdcGetFileData method is used to obtain file ranges whose requests have previously been queued on a server by calling the [RdcPushSourceNeeds](#Section_3.3.4.13) method.
 
 DWORD RdcGetFileData(
 
@@ -2465,7 +2465,7 @@ DWORD bufferSize,
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method in which the client set the *rdcDesired* parameter to TRUE.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method in which the client set the *rdcDesired* parameter to TRUE.
 
 **dataBuffer:** The file data received from the server.
 
@@ -2541,7 +2541,7 @@ packet-beta
 
 **FragmentSize:** The number of uncompressed bytes that the server instructs the client to extract. The uncompressed bytes start from BlockOffset and include at most, X_CONFIG_XPRESS_BLOCK_SIZE-blockOffset-1 bytes. The valid range of this field is 1 to X_CONFIG_XPRESS_BLOCK_SIZE. Additionally, for each fragment, the sum of the **BlockOffset** field and the **FragmentSize** field MUST be less or equal to X_CONFIG_XPRESS_BLOCK_SIZE.
 
-**XPRESS Block:** Following the optional list of fragments is a variable size XPRESS Block, as specified in section [2.2.1.4.15](#Section_2.2.1.4.15.1).
+**XPRESS Block:** Following the optional list of fragments is a variable size XPRESS Block, as specified in section [2.2.1.4.15](#Section_2.2.1.4.15).
 
 All the data is tightly packed—no padding bytes are added for alignment purposes.
 
@@ -2556,7 +2556,7 @@ DWORD RdcClose(
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method.
 
 **Return Values:** This method MUST return 0 on success or a nonzero error code on failure. For protocol purposes all nonzero values MUST be treated as equivalent failures unless otherwise specified.
 
@@ -2657,7 +2657,7 @@ If bufferSize is zero then the server SHOULD complete the call successfully with
 
 In the case where the client requests an RDC transfer, the server informs the client of the RDC parameters that were used for the signatures for the file being transferred. Typically, the parameters are different for the first recursion level and for all other levels <30> The server limits the number of simultaneous outstanding file downloads and returns an implementation-defined failure value when a file download is attempted while a configured threshold<31> of simultaneous downloads has been reached.
 
-If a client issues multiple simultaneous calls to any of the RPC methods taking a server context as an input parameter ([RawGetFileData](#Section_3.3.4.11), [RdcGetSignatures](#Section_3.3.4.12), [RdcPushSourceNeeds](#Section_3.2.4.1.11), [RdcGetFileData](#Section_3.2.4.1.12), [RawGetFileDataAsync](#Section_3.2.4.1.15) or [RdcGetFileDataAsync](#Section_3.3.4.15)) with the same server context, then the server MUST ensure that only the first call is processed and all other calls are failed with an implementation-defined failure value.
+If a client issues multiple simultaneous calls to any of the RPC methods taking a server context as an input parameter ([RawGetFileData](#Section_3.3.4.9), [RdcGetSignatures](#Section_3.3.4.12), [RdcPushSourceNeeds](#Section_3.3.4.13), [RdcGetFileData](#Section_3.2.4.1.12), [RawGetFileDataAsync](#Section_3.2.4.1.15) or [RdcGetFileDataAsync](#Section_3.2.4.1.16)) with the same server context, then the server MUST ensure that only the first call is processed and all other calls are failed with an implementation-defined failure value.
 
 <a id="Section_3.2.4.1.14.1"></a>
 ###### 3.2.4.1.14.1 Custom Marshaling Format
@@ -2751,7 +2751,7 @@ The file hash is included in the hash field of FRS_UPDATE.
 <a id="Section_3.2.4.1.14.2"></a>
 ###### 3.2.4.1.14.2 Compressed Data Format
 
-The compressed data stream starts with a header, which is followed by a series of one or more XPRESS Blocks (as specified in section [2.2.1.4.15](#Section_2.2.1.4.15.1)) containing the stream's data.
+The compressed data stream starts with a header, which is followed by a series of one or more XPRESS Blocks (as specified in section [2.2.1.4.15](#Section_2.2.1.4.15)) containing the stream's data.
 
 The data stream header MUST consist of a 4-byte signature, composed of the four bytes 0x46, 0x52, 0x53, and 0x58 (in ASCII, that is 'F', 'R', 'S', and 'X') as follows.
 
@@ -2768,7 +2768,7 @@ The size of the uncompressed XPRESS block data MUST be equal to 8192 bytes, exce
 <a id="Section_3.2.4.1.15"></a>
 ##### 3.2.4.1.15 RawGetFileDataAsync (Opnum 15)
 
-The RawGetFileDataAsync method is used instead of calling [RawGetFileData](#Section_3.3.4.11) multiple times to obtain file data. As specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), the specification for asynchronous [**RPC**](#gt_remote-procedure-call-rpc), an RPC client pulls file data from the byte pipe until receiving an end-of-file notification from the pipe.
+The RawGetFileDataAsync method is used instead of calling [RawGetFileData](#Section_3.3.4.9) multiple times to obtain file data. As specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), the specification for asynchronous [**RPC**](#gt_remote-procedure-call-rpc), an RPC client pulls file data from the byte pipe until receiving an end-of-file notification from the pipe.
 
 DWORD RawGetFileDataAsync(
 
@@ -2778,7 +2778,7 @@ DWORD RawGetFileDataAsync(
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method.
 
 **bytePipe:** The asynchronous RPC byte pipe that contains returned file data.
 
@@ -2811,7 +2811,7 @@ DWORD RdcGetFileDataAsync(
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method in which the client set the *rdcDesired* parameter to TRUE.
+**serverContext:** The context handle that represents the requested file replication operation. The client MUST specify a server context that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method in which the client set the *rdcDesired* parameter to TRUE.
 
 **bytePipe:** The asynchronous RPC byte pipe that contains returned file data.
 
@@ -2829,7 +2829,7 @@ DWORD RdcGetFileDataAsync(
 
 **Validating the file transfer request:** The server MUST validate the file transfer request by performing the same checks as the RdcGetFileData method, except for the checks related to input parameters that exist in the RdcGetFileData method but not in the RdcGetFileDataAsync method.
 
-**Actions Triggered:** Upon successfully validating the RDC file data request, the server serves file data from the source needs that were queued by the [RdcPushSourceNeeds](#Section_3.2.4.1.11) method.
+**Actions Triggered:** Upon successfully validating the RDC file data request, the server serves file data from the source needs that were queued by the [RdcPushSourceNeeds](#Section_3.3.4.13) method.
 
 **Remarks:** The data stream returned by the RdcGetFileDataAsync method is identical to the format of the data received by a single call to the RdcGetFileData method if the RdcGetFileData method is passed a buffer large enough to hold all the data returned by the pipe.
 
@@ -2844,7 +2844,7 @@ DWORD RdcFileDataTransferKeepAlive(
 
 );
 
-**serverContext:** The context handle that represents the requested file replication operation that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method.
+**serverContext:** The context handle that represents the requested file replication operation that was retrieved by a previously successful call to the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method.
 
 **Return Values:** This method MUST return 0 on success or a nonzero error code on failure. For protocol purposes all nonzero values MUST be treated as equivalent failures unless otherwise specified.
 
@@ -2905,7 +2905,7 @@ The refined synopsis proceeds as a client as follows:
 - When receiving an asynchronous poll response, a client SHOULD field a new asynchronous poll request to handle other or later-version vector requests.
 - When the client receives a version chain vector from the server, it calculates the versions that are not known to it and requests updates from the server pertaining to these versions.
 - When the client receives updates from the server, it processes these. While processing a requested update, the client machine can decide that the server updates correspond to file content that it needs to replicate in. It then requests the server to send the file.
-- A file transfer starts with an initialization of file transfer ([InitializeFileTransferAsync](#Section_3.2.4.1.14)). This establishes a context handle for the file transfer.
+- A file transfer starts with an initialization of file transfer ([InitializeFileTransferAsync](#Section_3.2.4.1.14.1)). This establishes a context handle for the file transfer.
 - A raw file transfer proceeds when the client requests chunks of a file by using the context handle.
 - When the file transfer has been completed by reaching the end of file or as a result of cancellation, a client MUST close the context handle by using RdcClose.
 - The client registers a request for updated version chain vectors from the server when it has received all updates from the previous version chain vector.
@@ -2962,7 +2962,7 @@ Figure 7: Slow Sync state machine
 <a id="Section_3.3.1.4"></a>
 #### 3.3.1.4 Raw File Transfer
 
-A direct file transfer (one that does not use [**RDC**](#gt_remote-differential-compression-rdc)) starts by a call to [InitializeFileTransferAsync](#Section_3.2.4.1.14) with rdcDesired set to 0. The transfer might be fully finished when this call completes, or it might have to be finished by using either [RawGetFileData](#Section_3.3.4.11) or [RawGetFileDataAsync](#Section_3.2.4.1.15). When the server signals the end of file, the client uses [RdcClose](#Section_3.2.4.1.13) to dispose of the context handle associated with the file download. The state transitions associated with a raw file download are illustrated in the following state diagram.
+A direct file transfer (one that does not use [**RDC**](#gt_remote-differential-compression-rdc)) starts by a call to [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) with rdcDesired set to 0. The transfer might be fully finished when this call completes, or it might have to be finished by using either [RawGetFileData](#Section_3.3.4.9) or [RawGetFileDataAsync](#Section_3.2.4.1.15). When the server signals the end of file, the client uses [RdcClose](#Section_3.3.4.10) to dispose of the context handle associated with the file download. The state transitions associated with a raw file download are illustrated in the following state diagram.
 
 ![Raw file transfer state machine](media/image8.png)
 
@@ -2971,7 +2971,7 @@ Figure 8: Raw file transfer state machine
 <a id="Section_3.3.1.5"></a>
 #### 3.3.1.5 RDC File Transfer
 
-A transfer over the [**RDC**](#gt_remote-differential-compression-rdc) protocol starts and finishes similarly to a direct file transfer. The client first uses an [InitializeFileTransferAsync](#Section_3.2.4.1.14) to establish a context handle for the file, and then calls [RdcGetSignatures](#Section_3.3.4.12) to retrieve the signatures (possibly at recursive levels) that pertain to the file being transferred. To retrieve file data at given offsets and lengths, the client uses [RdcPushSourceNeeds](#Section_3.2.4.1.11) to indicate which data ranges are requested from the file to be transferred. Notice that several ranges might be coalesced in a single call to RdcPushSourceNeeds. To retrieve actual file data, the client uses separate calls, [RdcGetFileData](#Section_3.2.4.1.12), or a single call to [RdcGetFileDataAsync](#Section_3.3.4.15). When the file transfer is done, the client is required to use [RdcClose](#Section_3.2.4.1.13) to context handle gracefully.
+A transfer over the [**RDC**](#gt_remote-differential-compression-rdc) protocol starts and finishes similarly to a direct file transfer. The client first uses an [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) to establish a context handle for the file, and then calls [RdcGetSignatures](#Section_3.3.4.12) to retrieve the signatures (possibly at recursive levels) that pertain to the file being transferred. To retrieve file data at given offsets and lengths, the client uses [RdcPushSourceNeeds](#Section_3.3.4.13) to indicate which data ranges are requested from the file to be transferred. Notice that several ranges might be coalesced in a single call to RdcPushSourceNeeds. To retrieve actual file data, the client uses separate calls, [RdcGetFileData](#Section_3.2.4.1.12), or a single call to [RdcGetFileDataAsync](#Section_3.2.4.1.16). When the file transfer is done, the client is required to use [RdcClose](#Section_3.3.4.10) to context handle gracefully.
 
 RDC allows the application to choose the recursion depth arbitrarily. Choosing an optimum recursion depth is difficult because many factors are involved, including the available network bandwidth and network latency, the speed and load of the disk storage systems on the server and client machines, as well as available CPU time for computing signatures, if necessary.<35>
 
@@ -3014,7 +3014,7 @@ In DFS-R, the client initiates all communication with the server. Only in a few 
 
 **Actions Triggered:** A client MUST, possibly with a delay induced by a schedule, call [EstablishConnection](#Section_3.2.4.1.2) to establish connection objects with each configured inbound connection. For SYSVOL replication, the client MUST set connectionId to objectGUID of nTDSConnection object. Otherwise, the client MUST set connectionId to objectGUID of msDFSR-Connection object.
 
-**Sequencing:** All [**RPC**](#gt_remote-procedure-call-rpc) traffic, other than [CheckConnectivity](#Section_3.2.4.1.14), with the server has to have been preceded by an EstablishConnection method.
+**Sequencing:** All [**RPC**](#gt_remote-procedure-call-rpc) traffic, other than [CheckConnectivity](#Section_3.2.4.1.14.1), with the server has to have been preceded by an EstablishConnection method.
 
 **Error Handling:** None.
 
@@ -3205,7 +3205,7 @@ VSNs 0–8 are reserved; therefore, the versions of all other UIDs that correspo
 <a id="Section_3.3.4.7"></a>
 #### 3.3.4.7 File Downloads
 
-If a client receives an update whose gvsnVersion is larger than any corresponding update that it already has for the same [**UID**](#gt_unique-identifier-uid) and if the received update has the **present** field set to a nonzero value, the client MUST download and [**persist**](#gt_persist) file contents pertaining to the file. The client MUST either use raw file transfer or use [**RDC**](#gt_remote-differential-compression-rdc) file transfer to download the file. A file transfer with either protocol is initiated by a call to [InitializeFileTransferAsync](#Section_3.2.4.1.14).
+If a client receives an update whose gvsnVersion is larger than any corresponding update that it already has for the same [**UID**](#gt_unique-identifier-uid) and if the received update has the **present** field set to a nonzero value, the client MUST download and [**persist**](#gt_persist) file contents pertaining to the file. The client MUST either use raw file transfer or use [**RDC**](#gt_remote-differential-compression-rdc) file transfer to download the file. A file transfer with either protocol is initiated by a call to [InitializeFileTransferAsync](#Section_3.2.4.1.14.1).
 
 <a id="Section_3.3.4.7.1"></a>
 ##### 3.3.4.7.1 stagingPolicy Parameter
@@ -3219,13 +3219,13 @@ This does not affect the format of the data sent. The server SHOULD honor the re
 
 Upon successful completion, the client MUST proceed to download the full file contents.
 
-**Actions Triggered:** If the server context handle returned by the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method is set to 0, the entire contents of the downloaded file fit in the buffer provided as part of the output parameters of the InitializeFileTransferAsync method. The client MUST assume that the returned value of *frsUpdate* holds the authoritative metadata for the file contents that correspond to the time that the file download took place.
+**Actions Triggered:** If the server context handle returned by the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method is set to 0, the entire contents of the downloaded file fit in the buffer provided as part of the output parameters of the InitializeFileTransferAsync method. The client MUST assume that the returned value of *frsUpdate* holds the authoritative metadata for the file contents that correspond to the time that the file download took place.
 
 **Sequencing:** If the returned context handle is nonzero, the client MUST proceed to download the file contents fully.
 
 - If the call to the InitializeFileTransferAsync method had set the *rdcDesired* parameter to one and the server sets the **rdcSignatureLevels** member in the [FRS_RDC_FILEINFO](#Section_2.2.1.4.11) structure to a number greater than zero, the client MUST proceed by downloading the file contents over the [**RDC**](#gt_remote-differential-compression-rdc) Protocol. It MUST use the FRS_RDC_FILEINFO structure to obtain signatures at the level dictated by rdcFileInfo. Signatures on the server are retrieved by calling the [RdcGetSignatures](#Section_3.3.4.12) method.
 - The client MUST ensure that the parameters of the remote signatures match the parameters of the local signatures. If the parameters do not match, the client MUST either generate signatures with the correct parameters or download the file contents using the **RawGetFileData** method or the **RawGetFileDataAsync** method.
-- If the call to the InitializeFileTransferAsync method had set the *rdcDesired* parameter to 0 or if the server set the **rdcSignatureLevels** member in the FRS_RDC_FILEINFO structure to 0, the client MUST proceed by downloading the file contents using the [RawGetFileData](#Section_3.3.4.11) method or the [RawGetFileDataAsync](#Section_3.2.4.1.15) method.
+- If the call to the InitializeFileTransferAsync method had set the *rdcDesired* parameter to 0 or if the server set the **rdcSignatureLevels** member in the FRS_RDC_FILEINFO structure to 0, the client MUST proceed by downloading the file contents using the [RawGetFileData](#Section_3.3.4.9) method or the [RawGetFileDataAsync](#Section_3.2.4.1.15) method.
 Recall that the RawGetFileDataAsync method is supported only in protocol version 0x00050002.
 
 **Error Handling:** The following table summarizes the set of errors returned by the InitializeFileTransferAsync method that cause a client to behave in specific ways. A client MUST retry the download on all other error codes.
@@ -3242,11 +3242,11 @@ Recall that the RawGetFileDataAsync method is supported only in protocol version
 <a id="Section_3.3.4.9"></a>
 #### 3.3.4.9 RawGetFileData Completes
 
-Upon successful completion, the client has received the next buffer of marshaled data (as specified in section [3.2.4.1.14](#Section_3.2.4.1.14)) from the file identified by the specified server context.
+Upon successful completion, the client has received the next buffer of marshaled data (as specified in section [3.2.4.1.14](#Section_3.2.4.1.14.1)) from the file identified by the specified server context.
 
 The marshaled file data received from this call does not use the Remote Differential Compression Algorithm (as specified in [MS-RDC](#Section_3.1.1.1)) when replicating a changed file.
 
-**Actions Triggered:** In order to receive the full file contents, the client MUST create another call to the [RawGetFileData](#Section_3.3.4.11) method if the output value of the *isEndOfFile* parameter is 0. If the output value of *isEndOfFile* is 1, the client MUST call the [RdcClose](#Section_3.2.4.1.13) method on the context handle associated with the file download.
+**Actions Triggered:** In order to receive the full file contents, the client MUST create another call to the [RawGetFileData](#Section_3.3.4.9) method if the output value of the *isEndOfFile* parameter is 0. If the output value of *isEndOfFile* is 1, the client MUST call the [RdcClose](#Section_3.3.4.10) method on the context handle associated with the file download.
 
 **Sequencing:** The client MUST NOT issue another call to the RawGetFileData method on the same file before the previous call has completed.
 
@@ -3266,7 +3266,7 @@ Upon successful completion, the client has terminated the file transfer associat
 
 **Actions Triggered:** None.
 
-**Sequencing:** A client MUST NOT use the context handle after it has been closed using the [RdcClose](#Section_3.2.4.1.13) method.
+**Sequencing:** A client MUST NOT use the context handle after it has been closed using the [RdcClose](#Section_3.3.4.10) method.
 
 **Error Handling:** The following table summarizes the set of errors returned by the RdcClose method that cause a client to behave in specific ways.
 
@@ -3280,15 +3280,15 @@ Upon successful completion, the client has terminated the file transfer associat
 
 Recall that the [RawGetFileDataAsync](#Section_3.2.4.1.15) method is supported only in protocol version 0x00050002.
 
-Upon successful completion, the client has received the entire marshaled data (as specified in section [3.2.4.1.14](#Section_3.2.4.1.14)) from the file identified by the specified server context.
+Upon successful completion, the client has received the entire marshaled data (as specified in section [3.2.4.1.14](#Section_3.2.4.1.14.1)) from the file identified by the specified server context.
 
 The marshaled file data received from this call does not use the Remote Differential Compression Algorithm (as specified in [MS-RDC](#Section_3.1.1.1)) when replicating a changed file.
 
-**Actions Triggered:** The client MUST [**persist**](#gt_persist) the data received in the call and MUST call the [RdcClose](#Section_3.2.4.1.13) method to dispose of the context handle.
+**Actions Triggered:** The client MUST [**persist**](#gt_persist) the data received in the call and MUST call the [RdcClose](#Section_3.3.4.10) method to dispose of the context handle.
 
 **Sequencing:** The client MUST NOT issue any other method call with this server context except RdcClose.
 
-**Error Handling:** Same as for the [RawGetFileData](#Section_3.3.4.11) method.
+**Error Handling:** Same as for the [RawGetFileData](#Section_3.3.4.9) method.
 
 <a id="Section_3.3.4.12"></a>
 #### 3.3.4.12 RdcGetSignatures Completes
@@ -3301,7 +3301,7 @@ This method uses the Remote Differential Compression Algorithm, as specified in 
 
 When making multiple calls to the RdcGetSignatures method for a given level, the value of the input parameter *offset* MUST be the sum of the values of the output parameter *sizeRead* for all the previous completed calls.
 
-The client can use the requested signature data to reconstruct the file being downloaded by using the RDC Algorithm. After comparing the source signatures to the seed signatures (as specified in [MS-RDC]), the client produces a list of needs (list of file ranges that the client needs in order to reconstruct the file). The client separates the seed and source needs and then sends the source needs to the server with the [RdcPushSourceNeeds](#Section_3.2.4.1.11) method.
+The client can use the requested signature data to reconstruct the file being downloaded by using the RDC Algorithm. After comparing the source signatures to the seed signatures (as specified in [MS-RDC]), the client produces a list of needs (list of file ranges that the client needs in order to reconstruct the file). The client separates the seed and source needs and then sends the source needs to the server with the [RdcPushSourceNeeds](#Section_3.3.4.13) method.
 
 Thus, file reconstruction proceeds by submitting further calls to the RdcGetSignatures method or calling the RdcPushSourceNeeds method with data ranges of bytes that the client requests to be downloaded.
 
@@ -3324,9 +3324,9 @@ The source needs specify byte ranges from the marshaled source file being transf
 
 Upon successful completion, the client has requested a set of data ranges from the source file being transferred.
 
-**Actions Triggered:** A client MUST call the [RdcGetFileData](#Section_3.2.4.1.12) method or the [RdcGetFileDataAsync](#Section_3.3.4.15) method in order to obtain the file data specified by the [RdcPushSourceNeeds](#Section_3.2.4.1.11) method calls.
+**Actions Triggered:** A client MUST call the [RdcGetFileData](#Section_3.2.4.1.12) method or the [RdcGetFileDataAsync](#Section_3.2.4.1.16) method in order to obtain the file data specified by the [RdcPushSourceNeeds](#Section_3.3.4.13) method calls.
 
-**Sequencing:** This method is used after a server context is established with the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method of the **FrsTransport** interface.
+**Sequencing:** This method is used after a server context is established with the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method of the **FrsTransport** interface.
 
 The client MAY call this function multiple times but MUST NOT exceed more than CONFIG_RDC_NEED_QUEUE_SIZE (see section [2.2.1.1.6](#Section_2.2.1.1.6)) source needs outstanding before retrieving them with the RdcGetFileData method or the RdcGetFileDataAsync method.
 
@@ -3344,11 +3344,11 @@ The client MAY call this function multiple times but MUST NOT exceed more than C
 
 This method uses the Remote Differential Compression Algorithm (as specified in [MS-RDC](#Section_3.1.1.1)) when replicating a changed file. The data stream returned by the [RdcGetFileData](#Section_3.2.4.1.12) method is composed of ranges from the marshaled source file.
 
-Upon successful completion, the client has successfully received file data as specified by previous calls to the [RdcPushSourceNeeds](#Section_3.2.4.1.11) method.
+Upon successful completion, the client has successfully received file data as specified by previous calls to the [RdcPushSourceNeeds](#Section_3.3.4.13) method.
 
 **Actions Triggered:** The data stream is broken into blocks of compressed and uncompressed data. To receive all the source data requested by the RdcPushSourceNeeds method call, a client MUST call the RdcGetFileData method, possibly repeatedly, until the server returns zero as the value of the RdcGetFileData method’s *sizeReturned* output parameter.
 
-**Sequencing:** This method is used after a server context is established via the [InitializeFileTransferAsync](#Section_3.2.4.1.14) method and after the set of source needs for this file has been sent to the server via the RdcPushSourceNeeds method.
+**Sequencing:** This method is used after a server context is established via the [InitializeFileTransferAsync](#Section_3.2.4.1.14.1) method and after the set of source needs for this file has been sent to the server via the RdcPushSourceNeeds method.
 
 **Error Handling:** The following table summarizes the set of errors returned by the RdcGetFileData method that cause a client to behave in specific ways.
 
@@ -3363,11 +3363,11 @@ Upon successful completion, the client has successfully received file data as sp
 <a id="Section_3.3.4.15"></a>
 #### 3.3.4.15 RdcGetFileDataAsync Completes
 
-Recall that [RdcGetFileDataAsync](#Section_3.3.4.15) is supported only in protocol version 0x00050002.
+Recall that [RdcGetFileDataAsync](#Section_3.2.4.1.16) is supported only in protocol version 0x00050002.
 
-**Message Handling:** Upon successful completion, the client has successfully received file data, as requested by previous calls to the [RdcPushSourceNeeds](#Section_3.2.4.1.11) method.
+**Message Handling:** Upon successful completion, the client has successfully received file data, as requested by previous calls to the [RdcPushSourceNeeds](#Section_3.3.4.13) method.
 
-**Actions Triggered:** The client MUST [**persist**](#gt_persist) the data received in the call and MUST call the [RdcClose](#Section_3.2.4.1.13) method to dispose of the context handle.
+**Actions Triggered:** The client MUST [**persist**](#gt_persist) the data received in the call and MUST call the [RdcClose](#Section_3.3.4.10) method to dispose of the context handle.
 
 **Sequencing:** The client MUST NOT issue any other method call with this server context except RdcClose.
 

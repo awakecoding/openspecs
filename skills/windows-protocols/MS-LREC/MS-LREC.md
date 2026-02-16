@@ -540,8 +540,8 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| NetEventDataEventRecord 0x0001 | The data is an **EventRecord** (section [2.3.2.1](#Section_2.2.2)) structure. |
-| NetEventDataLost 0x0002 | The data is a **NET_EVENT_LOST** (section [2.3.2.3](#Section_2.2.2)) structure. |
+| NetEventDataEventRecord 0x0001 | The data is an **EventRecord** (section [2.3.2.1](#Section_2.3.2.1)) structure. |
+| NetEventDataLost 0x0002 | The data is a **NET_EVENT_LOST** (section [2.3.2.3](#Section_2.3.2.3)) structure. |
 
 **Reserved1 (7 bits):** This field MUST be set to zero when sent and ignored upon receipt.
 
@@ -766,7 +766,7 @@ When processing this call, the server MUST do the following:
 
 - When the **RpcNetEventReceiveData** method is called, the server MUST first check its **Session Table** for an [**event session**](#gt_event-session) object where the **Session Handle** matches the value supplied in the **SessionHandle** member, and if a match cannot be found, fail the call.
 - When a match can be found, if the **Outstanding RpcNetEventReceiveData Call** of the event session is not empty, the server MUST fail this call to **RpcNetEventReceiveData**.
-- When the **Outstanding RpcNetEventReceiveData Call** of the event session is empty, the server MUST determine, in any implementation-specific manner, an appropriate number of events to return. If enough events are already in the **Queued Event List**, the events MUST be removed from the list and returned in the **EventBuffer** member. If the **Lost Event Count** is nonzero, the server MUST also include a **NET_EVENT_LOST** structure (section [2.3.2.3](#Section_2.2.2)) at the end of the **EventBuffer**.
+- When the **Outstanding RpcNetEventReceiveData Call** of the event session is empty, the server MUST determine, in any implementation-specific manner, an appropriate number of events to return. If enough events are already in the **Queued Event List**, the events MUST be removed from the list and returned in the **EventBuffer** member. If the **Lost Event Count** is nonzero, the server MUST also include a **NET_EVENT_LOST** structure (section [2.3.2.3](#Section_2.3.2.3)) at the end of the **EventBuffer**.
 - When the **Outstanding RpcNetEventReceiveData Call** of the event session is not empty, the server MUST store the pending call in the **Outstanding RpcNetEventReceiveData Call** of the event session to be completed later when enough events are collected in the **Queued Event List** or the **Data Completion Timer** expires.
 **Exceptions Thrown:** Exceptions SHOULD NOT be thrown beyond those thrown by the underlying RPC protocol specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -834,7 +834,7 @@ According to the [**provider manifests**](#gt_provider-manifest), the provider G
 - The server searches its **Session Table** for a session with a matching name, and when one is located, allocates a **Session Handle** and stores it in the session entry. The server then begins collecting events from the associated event providers into the event session entry’s **Queued Event List** and returns the **Session Handle** to the client.
 - In this example, the server collects more events than the maximum amount specified for storage in the **Queued Event List**. Therefore, after the **Queued Event List** is full, the server starts incrementing the event session entry’s **Lost Event Count**.
 - The client calls the **RpcNetEventReceiveData** (section [3.1.4.2.2](#Section_3.1.4.2.2)) method to retrieve the events, passing in the **Session Handle** acquired in step 10.
-- The server locates the event session entry corresponding to the specified **Session Handle** and determines that the **Queued Event List** is full. The server immediately completes the call to **RpcNetEventReceiveData** with an **EVENT_BUFFER** (section [2.2.2.1](#Section_2.2.2.1)) containing 11 structures. The first ten structures are **EventRecord** structures (section [2.3.2.1](#Section_2.2.2)) holding the 10 queued events, and the last is a **NET_EVENT_LOST** structure (section [2.3.2.3](#Section_2.2.2)) containing the number of lost events. The events are removed from the **Queued Event List**, allowing more events to start being queued for delivery in the next call from the client.
+- The server locates the event session entry corresponding to the specified **Session Handle** and determines that the **Queued Event List** is full. The server immediately completes the call to **RpcNetEventReceiveData** with an **EVENT_BUFFER** (section [2.2.2.1](#Section_2.2.2.1)) containing 11 structures. The first ten structures are **EventRecord** structures (section [2.3.2.1](#Section_2.3.2.1)) holding the 10 queued events, and the last is a **NET_EVENT_LOST** structure (section [2.3.2.3](#Section_2.3.2.3)) containing the number of lost events. The events are removed from the **Queued Event List**, allowing more events to start being queued for delivery in the next call from the client.
 - The client determines that the call to **RpcNetEventReceiveData** has completed and then calls the **MSFT_NetEventSession Stop** (section [3.1.4.1.3](#Section_3.1.4.1.3)) method.
 - The server stops the RPC endpoint, removes all state for the event session, including any queued events, and completes the call to **RpcNetEventReceiveData** as successful.
 In the example above, the client could have called the **RpcNetEventCloseSession** (section [3.1.4.2.3](#Section_3.1.4.2.3)) method. However, calling this method was not necessary because the call to **MSFT_NetEventSession Stop** removed all of the resources that this method would have removed.

@@ -745,7 +745,7 @@ typedef WCHAR* NETDFS_SERVER_OR_DOMAIN_HANDLE;
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 DFS_INFO_STRUCT
 
-The DFS_INFO_STRUCT union relates to the [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.1.4.1.5), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set the configuration of the [**DFS server**](#gt_dfs-server). The usage model of this union is for the client to specify a *Level* parameter to determine which case of the DFS_INFO_STRUCT to use.
+The DFS_INFO_STRUCT union relates to the [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.2.4.1.3), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set the configuration of the [**DFS server**](#gt_dfs-server). The usage model of this union is for the client to specify a *Level* parameter to determine which case of the DFS_INFO_STRUCT to use.
 
 The DFS_INFO_STRUCT union has the following format.
 
@@ -1013,7 +1013,7 @@ DFS_TARGET_PRIORITY TargetPriority;
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 DFS_TARGET_PRIORITY
 
-The DFS_TARGET_PRIORITY structure relates to the [NetrDfsSetInfo](#Section_3.1.4.1.5) and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to set the priority of a [**DFS target**](#gt_dfs-target) in referrals from a server. It also relates to the [DFS_STORAGE_INFO_1](#Section_2.2.2.6) structure that the [NetrDfsEnum](#Section_3.1.4.2.3), [NetrDfsEnumEx](#Section_3.1.4.2.3), and [NetrDfsGetInfo](#Section_3.1.4.1.6) methods return. The structure defines the priority of a DFS target. The DFS targets can be prioritized independently of [**site cost**](#gt_site-cost). The DFS target priority is manually assigned to link targets and root targets and allows for load balancing of clients.
+The DFS_TARGET_PRIORITY structure relates to the [NetrDfsSetInfo](#Section_3.2.4.1.3) and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to set the priority of a [**DFS target**](#gt_dfs-target) in referrals from a server. It also relates to the [DFS_STORAGE_INFO_1](#Section_2.2.2.6) structure that the [NetrDfsEnum](#Section_3.1.4.2.3), [NetrDfsEnumEx](#Section_3.1.4.2.3), and [NetrDfsGetInfo](#Section_3.1.4.1.6) methods return. The structure defines the priority of a DFS target. The DFS targets can be prioritized independently of [**site cost**](#gt_site-cost). The DFS target priority is manually assigned to link targets and root targets and allows for load balancing of clients.
 
 The DFS_TARGET_PRIORITY structure has the following format.
 
@@ -1036,7 +1036,7 @@ unsigned short Reserved;
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 DFS_TARGET_PRIORITY_CLASS
 
-The DFS_TARGET_PRIORITY_CLASS enumeration relates to the [NetrDfsSetInfo](#Section_3.1.4.1.5) and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to set the priority of [**DFS targets**](#gt_dfs-target) in referrals from a server. For more information on prioritization, see section [2.2.2.7](#Section_2.2.2.7). The enumeration defines five possible DFS target priority class settings.
+The DFS_TARGET_PRIORITY_CLASS enumeration relates to the [NetrDfsSetInfo](#Section_3.2.4.1.3) and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to set the priority of [**DFS targets**](#gt_dfs-target) in referrals from a server. For more information on prioritization, see section [2.2.2.7](#Section_2.2.2.7). The enumeration defines five possible DFS target priority class settings.
 
 typedef [v1_enum] enum _DFS_TARGET_PRIORITY_CLASS
 
@@ -1594,7 +1594,7 @@ unsigned __int64 NamespaceCapabilities;
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Set Info Data Types
 
-The structures in this section relate to the [NetrDfsSetInfo](#Section_3.1.4.1.5) and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set the configuration of the [**DFS server**](#gt_dfs-server). The usage model of these structures is for the client to specify a *Level* parameter to indicate which [DFS_INFO_STRUCT](#Section_2.2.2.3) case to use.
+The structures in this section relate to the [NetrDfsSetInfo](#Section_3.2.4.1.3) and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set the configuration of the [**DFS server**](#gt_dfs-server). The usage model of these structures is for the client to specify a *Level* parameter to indicate which [DFS_INFO_STRUCT](#Section_2.2.2.3) case to use.
 
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 DFS_INFO_101
@@ -1807,12 +1807,12 @@ PUCHAR pSecurityDescriptor;
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Special Info Data Types
 
-The structures in this section relate to the [NetrDfsEnum](#Section_3.1.4.2.3), NetrDfsEnumEx, [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.1.4.1.5), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set the [**DFS server**](#gt_dfs-server) configuration. The usage model of these structures is for the client to specify a *Level* parameter to indicate which case of the [DFS_INFO_STRUCT](#Section_2.2.2.3) to use.
+The structures in this section relate to the [NetrDfsEnum](#Section_3.1.4.2.3), NetrDfsEnumEx, [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.2.4.1.3), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set the [**DFS server**](#gt_dfs-server) configuration. The usage model of these structures is for the client to specify a *Level* parameter to indicate which case of the [DFS_INFO_STRUCT](#Section_2.2.2.3) to use.
 
 <a id="Section_2.2.5.1"></a>
 #### 2.2.5.1 DFS_INFO_100
 
-The DFS_INFO_100 structure relates to the [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.1.4.1.5), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set comment text about a [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) or a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619). The structure contains a comment associated with a DFS root or a DFS link.
+The DFS_INFO_100 structure relates to the [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.2.4.1.3), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set comment text about a [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) or a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619). The structure contains a comment associated with a DFS root or a DFS link.
 
 The DFS_INFO_100 structure has the following format.
 
@@ -1827,7 +1827,7 @@ typedef struct _DFS_INFO_100 {
 <a id="Section_2.2.5.2"></a>
 #### 2.2.5.2 DFS_INFO_150
 
-The DFS_INFO_150 structure relates to the [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.1.4.1.5), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set security descriptors associated with a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619). The structure contains the self-relative security descriptor associated with a DFS link.
+The DFS_INFO_150 structure relates to the [NetrDfsGetInfo](#Section_3.1.4.1.6), [NetrDfsSetInfo](#Section_3.2.4.1.3), and [NetrDfsSetInfo2](#Section_3.1.4.2.4) methods when used to retrieve or set security descriptors associated with a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619). The structure contains the self-relative security descriptor associated with a DFS link.
 
 The DFS_INFO_150 structure has the following format.
 
@@ -2256,7 +2256,7 @@ packet-beta
 
 **Type (4 bytes):** A bit field, stored as 32-bits in little-endian order, which describes this BLOB.
 
-For domainv1 roots, the **Type** field parallels the functionality of the **msDFS-Propertiesv2** attribute used for [**domainv2-based DFS namespaces**](#gt_domainv2-based-dfs-namespace) (see section [2.3.4.2](#Section_2.3.4)) and domainv2-based DFS links (see section [2.3.4.3](#Section_2.3.4.3)).
+For domainv1 roots, the **Type** field parallels the functionality of the **msDFS-Propertiesv2** attribute used for [**domainv2-based DFS namespaces**](#gt_domainv2-based-dfs-namespace) (see section [2.3.4.2](#Section_2.3.4.1)) and domainv2-based DFS links (see section [2.3.4.3](#Section_2.3.4.3)).
 
 | Value | Meaning |
 | --- | --- |
@@ -2653,8 +2653,8 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [NetrDfsManagerGetVersion](#Section_3.1.4.1.2) | A basic method that returns the version number of the DFS server. Opnum: 0 |
 | [NetrDfsAdd](#Section_3.1.4.2.1) | A basic method that creates a new [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) or that adds a new target to an existing link of a [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890). Opnum: 1 |
-| [NetrDfsRemove](#Section_3.2.4.3.2) | A basic method that removes a link or a link target from a DFS namespace. Opnum: 2 |
-| [NetrDfsSetInfo](#Section_3.1.4.1.5) | A basic method that sets or modifies information relevant to a specific [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d), [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671), DFS link, or [**DFS link target**](#gt_44e2f830-c28b-41e3-8c3c-d0bb576ed9fb). Opnum: 3 |
+| [NetrDfsRemove](#Section_3.3.4.1.1) | A basic method that removes a link or a link target from a DFS namespace. Opnum: 2 |
+| [NetrDfsSetInfo](#Section_3.2.4.1.3) | A basic method that sets or modifies information relevant to a specific [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d), [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671), DFS link, or [**DFS link target**](#gt_44e2f830-c28b-41e3-8c3c-d0bb576ed9fb). Opnum: 3 |
 | [NetrDfsGetInfo](#Section_3.1.4.1.6) | A basic method that returns information about a DFS root, a DFS link, or a DFS namespace. Opnum: 4 |
 | [NetrDfsEnum](#Section_3.1.4.2.3) | A basic method that enumerates the DFS roots hosted on a server or the DFS links of a namespace on the server. Opnum: 5 |
 | [NetrDfsMove](#Section_3.1.4.1.8) | A basic method that renames or moves one or more DFS links. <30> Opnum: 6 |
@@ -2907,7 +2907,7 @@ If the dynamic object is created successfully, the original link LDAP entry is t
 
 The server MUST synchronously update the DFS metadata of a domain-based DFS namespace.
 
-If [**DFS root scalability mode**](#gt_cf94d206-f71c-4ca1-891a-24c83f533e45) is not enabled for the domain-based DFS namespace, the server MUST notify other [**DFS root targets**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) of the change in DFS metadata by asynchronously issuing a [NetrDfsSetInfo](#Section_3.1.4.1.5) method with the *Level* parameter 101, and with the **State** field of [DFS_INFO_101](#Section_2.2.4.1) set to DFS_VOLUME_STATE_RESYNCHRONIZE.<50><51>
+If [**DFS root scalability mode**](#gt_cf94d206-f71c-4ca1-891a-24c83f533e45) is not enabled for the domain-based DFS namespace, the server MUST notify other [**DFS root targets**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) of the change in DFS metadata by asynchronously issuing a [NetrDfsSetInfo](#Section_3.2.4.1.3) method with the *Level* parameter 101, and with the **State** field of [DFS_INFO_101](#Section_2.2.4.1) set to DFS_VOLUME_STATE_RESYNCHRONIZE.<50><51>
 
 <a id="Section_3.1.4.1.5"></a>
 ##### 3.1.4.1.5 NetrDfsSetInfo (Opnum 3)
@@ -3602,7 +3602,7 @@ The server MUST synchronously update the DFS metadata of a domain-based DFS name
 
 If [**DFS root scalability mode**](#gt_cf94d206-f71c-4ca1-891a-24c83f533e45) is not enabled for the domain-based DFS namespace, the server MUST do one of the following:
 
-- Notify other DFS root targets of the change in DFS metadata by asynchronously issuing a [NetrDfsSetInfo](#Section_3.1.4.1.5) method with the *Level* parameter 101 and with the **State** field of [DFS_INFO_101](#Section_2.2.4.1) set to DFS_VOLUME_STATE_RESYNCHRONIZE. The returned *ppRootList* parameter MUST be empty.
+- Notify other DFS root targets of the change in DFS metadata by asynchronously issuing a [NetrDfsSetInfo](#Section_3.2.4.1.3) method with the *Level* parameter 101 and with the **State** field of [DFS_INFO_101](#Section_2.2.4.1) set to DFS_VOLUME_STATE_RESYNCHRONIZE. The returned *ppRootList* parameter MUST be empty.
 - Perform no notification of the other root targets, returning a list of DFS root targets to the client in the *ppRootList* parameter.
 <a id="Section_3.1.4.2.2"></a>
 ##### 3.1.4.2.2 NetrDfsRemove2 (Opnum 20)
@@ -3657,13 +3657,13 @@ The server MUST verify the existence of the DFS link target of the DFS link that
 
 If the *ServerName* and *ShareName* parameters are both NULL, the server MUST remove the link and all its link targets. If the *ServerName* and *ShareName* are not NULL, the server MUST remove the specified link target. If the specific target is the last target of the link, the server MUST remove the link as well. If only one of *ServerName* or *ShareName* is NULL, the server MUST return ERROR_INVALID_PARAMETER.
 
-The server MUST update the same fields in the [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea) for a domain-based DFS namespace, as specified in the [NetrDfsRemove](#Section_3.2.4.3.2) method.
+The server MUST update the same fields in the [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea) for a domain-based DFS namespace, as specified in the [NetrDfsRemove](#Section_3.3.4.1.1) method.
 
 The server MUST synchronously update the DFS metadata of a domain-based DFS namespace.
 
 If [**DFS root scalability mode**](#gt_cf94d206-f71c-4ca1-891a-24c83f533e45) is not enabled for the domain-based DFS namespace, the server MUST do one of the following:
 
-- Notify other DFS root targets of the change in DFS metadata by asynchronously issuing a [NetrDfsSetInfo](#Section_3.1.4.1.5) method with the *Level* parameter 101, and with the **State** field of [DFS_INFO_101](#Section_2.2.4.1) set to DFS_VOLUME_STATE_RESYNCHRONIZE. The returned *ppRootList* parameter MUST be empty.
+- Notify other DFS root targets of the change in DFS metadata by asynchronously issuing a [NetrDfsSetInfo](#Section_3.2.4.1.3) method with the *Level* parameter 101, and with the **State** field of [DFS_INFO_101](#Section_2.2.4.1) set to DFS_VOLUME_STATE_RESYNCHRONIZE. The returned *ppRootList* parameter MUST be empty.
 - Perform no notification of the other root targets, returning a list of DFS root targets to the client in the *ppRootList* parameter.
 <a id="Section_3.1.4.2.3"></a>
 ##### 3.1.4.2.3 NetrDfsEnumEx (Opnum 21)
@@ -3834,7 +3834,7 @@ With the *Level* parameter 101 and the **State** field in the DFS_INFO_101 struc
 
 When *level* parameter 107 is used for a DFS namespace root or for a domainv1-based DFS link, the *pSecurityDescriptor* parameter has no meaning because security descriptors cannot be associated with those objects. In these cases, if pSecurityDescriptor is not NULL, the server MUST fail with ERROR_NOT_SUPPORTED.
 
-The server MUST update the same fields in the DFS metadata for a [**domain-basedv1 DFS namespace**](#gt_domainv1-based-dfs-namespace) as for the NetrDfsSetInfo (Opnum 3) method, as specified in section [3.1.4.1.5](#Section_3.1.4.1.5).
+The server MUST update the same fields in the DFS metadata for a [**domain-basedv1 DFS namespace**](#gt_domainv1-based-dfs-namespace) as for the NetrDfsSetInfo (Opnum 3) method, as specified in section [3.1.4.1.5](#Section_3.2.4.1.3).
 
 The server MUST synchronously update the DFS metadata of a domain-based DFS namespace.
 
@@ -4387,7 +4387,7 @@ A [**DC**](#gt_domain-controller-dc) hosting a [**DFS root target**](#gt_ac90b49
 In addition, the [**DFS server**](#gt_dfs-server) on a DC MUST do the following:
 
 - Receive and respond to [**DFS root**](#gt_639b7503-b879-4ef7-98a8-14adf85bc16d) and [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) referral requests for any [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace) in the [**domain**](#gt_domain). The DC need not be a DFS root target for the domain-based DFS namespace identified in the referral request.
-- Receive and respond to the [**RPC**](#gt_remote-procedure-call-rpc) methods, as specified in section [3.3.4](#Section_3.1.4).
+- Receive and respond to the [**RPC**](#gt_remote-procedure-call-rpc) methods, as specified in section [3.3.4](#Section_3.2.4).
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
@@ -4529,7 +4529,7 @@ Figure 3: Adding a root target to an existing domainv1-based DFS namespace
 <a id="Section_4.3"></a>
 ## 4.3 Adding a New Link to a Domain-Based DFS Namespace
 
-The following example describes the steps for adding a new [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) to an existing [**domainv1-based DFS namespace**](#gt_domainv1-based-dfs-namespace) that has two root targets. The illustration in this example also shows how the [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) uses [NetrDfsSetInfo](#Section_3.1.4.1.5), *Level* parameter 101, and DFS_VOLUME_STATE_RESYNCHRONIZE to update the [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea) of the [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace) with the new DFS link information, and then notifies the other root targets.
+The following example describes the steps for adding a new [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) to an existing [**domainv1-based DFS namespace**](#gt_domainv1-based-dfs-namespace) that has two root targets. The illustration in this example also shows how the [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) uses [NetrDfsSetInfo](#Section_3.2.4.1.3), *Level* parameter 101, and DFS_VOLUME_STATE_RESYNCHRONIZE to update the [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea) of the [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace) with the new DFS link information, and then notifies the other root targets.
 
 - A client issues a [NetrDfsAdd](#Section_3.1.4.2.1) [**RPC**](#gt_remote-procedure-call-rpc) method to the DFS root target CFS-41X-2C02 for the domainv1-based DFS namespace.
 - The DFS root target CFS-41X-2C02 issues an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search operation to retrieve the **pKTGuid** attribute in the [**object**](#gt_object) for the domainv1-based DFS namespace to the [**PDC**](#gt_primary-domain-controller-pdc) for the [**domain**](#gt_domain). The following illustration shows the [**DN**](#gt_distinguished-name-dn) of the object and the attribute searched.
@@ -4592,7 +4592,7 @@ Figure 6: Adding a root target to an existing domainv2-based DFS namespace
 <a id="Section_4.6"></a>
 ## 4.6 Adding a New Link to a Domainv2-Based DFS Namespace
 
-The following example describes the steps used to add a new [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) to an existing [**domainv2-based DFS namespace**](#gt_domainv2-based-dfs-namespace) with two root targets. The illustration in this example also shows how the [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) uses [NetrDfsSetInfo](#Section_3.1.4.1.5), *Level* parameter 101, and DFS_VOLUME_STATE_RESYNCHRONIZE, to update the [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea) of the [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace) with the new DFS link information, and then notifies the other root targets.
+The following example describes the steps used to add a new [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) to an existing [**domainv2-based DFS namespace**](#gt_domainv2-based-dfs-namespace) with two root targets. The illustration in this example also shows how the [**DFS root target**](#gt_ac90b498-3ba4-48d6-bcd6-5495f1654671) uses [NetrDfsSetInfo](#Section_3.2.4.1.3), *Level* parameter 101, and DFS_VOLUME_STATE_RESYNCHRONIZE, to update the [**DFS metadata**](#gt_e8de88fd-d760-46fa-ad77-76961fa20aea) of the [**domain-based DFS namespace**](#gt_domain-based-dfs-namespace) with the new DFS link information, and then notifies the other root targets.
 
 - A client issues a [NetrDfsAdd](#Section_3.1.4.2.1) [**RPC**](#gt_remote-procedure-call-rpc) method to the DFS root target CFS-41X-2C02 for the domainv2-based DFS namespace.
 - The DFS root target CFS-41X-2C02 performs either a full synchronization or an incremental synchronization. A full synchronization is performed if the DFS root target server is switching to a new [**PDC**](#gt_primary-domain-controller-pdc) or if the [**DC**](#gt_domain-controller-dc) that the synchronization operation is currently using is different from that in the <uSNChanged, DC invocation ID> tuple that was saved at the start of a previous full synchronization for the [**DFS namespace**](#gt_6a3f0be9-b9b4-49df-9d1c-a3b89e4e9890). An incremental synchronization is performed if the DFS root target server is already syncing with the PDC.
@@ -5759,9 +5759,9 @@ Windows-based servers check whether a folder or a file that has the same name as
 
 <48> Section 3.1.4.1.3: In Windows Server 2003 operating system and later, NetrDfsAdd supports both stand-alone and [**domain-based DFS namespaces**](#gt_domain-based-dfs-namespace).
 
-<49> Section 3.1.4.1.4: Windows 2000 Server does not support a domain-based DFS namespace in the [NetrDfsRemove](#Section_3.2.4.3.2) method.
+<49> Section 3.1.4.1.4: Windows 2000 Server does not support a domain-based DFS namespace in the [NetrDfsRemove](#Section_3.3.4.1.1) method.
 
-<50> Section 3.1.4.1.4: This method does not support domain-based DFS namespaces in Windows 2000 Server; [NetrDfsRemove2](#Section_3.1.4.2.2) is used instead. Windows 2000 Server will return ERROR_NOT_SUPPORTED (0x00000032) if [NetrDfsRemove](#Section_3.2.4.3.2) is called on a domain-based DFS namespace.
+<50> Section 3.1.4.1.4: This method does not support domain-based DFS namespaces in Windows 2000 Server; [NetrDfsRemove2](#Section_3.1.4.2.2) is used instead. Windows 2000 Server will return ERROR_NOT_SUPPORTED (0x00000032) if [NetrDfsRemove](#Section_3.3.4.1.1) is called on a domain-based DFS namespace.
 
 <51> Section 3.1.4.1.4: In Windows Server 2003, the NetrDfsRemove method is functionally equivalent to NetrDfsRemove2.
 
@@ -5779,9 +5779,9 @@ Windows 2000 Server does not support DFS_VOLUME_STATE_RESYNCHRONIZE for the **St
 
 <55> Section 3.1.4.1.5: On Windows NT Server 4.0 and Windows 2000 Server, the server returns error code ERROR_INVALID_LEVEL.
 
-<56> Section 3.1.4.1.5: Windows 2000 Server does not support a domain-based DFS namespace in the [NetrDfsSetInfo](#Section_3.1.4.1.5) method.
+<56> Section 3.1.4.1.5: Windows 2000 Server does not support a domain-based DFS namespace in the [NetrDfsSetInfo](#Section_3.2.4.1.3) method.
 
-<57> Section 3.1.4.1.5: The [NetrDfsSetInfo](#Section_3.1.4.1.5) method supports only the stand-alone DFS namespace on Windows 2000 Server. NetrDfsSetInfo supports both stand-alone and domain-based DFS namespaces on Windows Server 2003 operating system and later. *Level* parameter values 103, 104, 105, and 106 are valid only on Windows Server 2003 with SP1, Windows Server 2003 SP2, Windows Server 2003 R2 operating system and later. *Level* parameter values 107 and 150 are supported only on Windows Server 2008 operating system and later.
+<57> Section 3.1.4.1.5: The [NetrDfsSetInfo](#Section_3.2.4.1.3) method supports only the stand-alone DFS namespace on Windows 2000 Server. NetrDfsSetInfo supports both stand-alone and domain-based DFS namespaces on Windows Server 2003 operating system and later. *Level* parameter values 103, 104, 105, and 106 are valid only on Windows Server 2003 with SP1, Windows Server 2003 SP2, Windows Server 2003 R2 operating system and later. *Level* parameter values 107 and 150 are supported only on Windows Server 2008 operating system and later.
 
 <58> Section 3.1.4.1.6: This level is supported only on Windows Server 2008 operating system and later.
 

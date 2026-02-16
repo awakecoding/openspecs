@@ -309,7 +309,7 @@ Figure 4: Sequence of drawing operations on a redirection surface
 
 Drawing to a redirection surface can happen only after a redirection surface is created and is attached to a logical surface.
 
-The **FLUSH_COMPOSEONCE** command causes an explicit flush for the compose-once sprite. See [Drawing Operations Management](#Section_1.3.3.3) in section 3.2.5.3 for more detail.
+The **FLUSH_COMPOSEONCE** command causes an explicit flush for the compose-once sprite. See [Drawing Operations Management](#Section_3.3.5.3) in section 3.2.5.3 for more detail.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -601,7 +601,7 @@ Each logical surface can be associated with only one redirection surface at any 
 
 **Cache ID:** A 32-bit unsigned integer that is unique within a connection. The server generates this to identify a redirection surface. Only 31 of the 32 bits are used as an identifier. The highest bit of the cacheId field is used to indicate a redirection surface creation when set to 0 and a redirection surface destroy when set to 1.
 
-The [**compose desktop mediator**](#gt_compose-desktop-mediator), driven by the graphics subsystem on the server, sends the surface creation, association, and deletion messages (see section [2.2.2](#Section_3.3.5.2)) to the [**surface manager proxy**](#gt_surface-manager-proxy) on the client, which MAY create corresponding data structures for the surfaces on the client.
+The [**compose desktop mediator**](#gt_compose-desktop-mediator), driven by the graphics subsystem on the server, sends the surface creation, association, and deletion messages (see section [2.2.2](#Section_2.2.2)) to the [**surface manager proxy**](#gt_surface-manager-proxy) on the client, which MAY create corresponding data structures for the surfaces on the client.
 
 Each redirection surface MAY be targeted by a set of immediate-mode drawing primitives such as those specified in Remote Desktop Protocol: Graphics Device Interface (GDI) Acceleration Extensions [MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md). These updates will result in updates to the data structure created on the client. A composition engine on the client, such as that specified in [MS-RDPCR2](../MS-RDPCR2/MS-RDPCR2.md), MAY access the content of the surfaces and receive update notifications through the logical surface handle values (see [MS-RDPCR2] section 3.1.1.8).
 

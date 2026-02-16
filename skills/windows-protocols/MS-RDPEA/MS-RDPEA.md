@@ -291,7 +291,7 @@ Remote Desktop Protocol: Audio Output Virtual Channel Extension is divided into 
 - [Initialization Sequence (section 1.3.2.1)](#Section_3.2.3)
 The connection is established and capabilities and settings are exchanged.
 
-- [Data Transfer Sequences (section 1.3.2.2)](#Section_3.3.5.2)
+- [Data Transfer Sequences (section 1.3.2.2)](#Section_1.3.2.2)
 Audio data is transferred.
 
 - [Audio Setting Transfer Sequences (section 1.3.2.3)](#Section_1.3.2.3)
@@ -354,12 +354,12 @@ Figure 6: Data transfer sequence over UDP when protocol version is at least 5
 
 During the [initialization sequence (section 1.3.2.1)](#Section_3.2.3), the server uses the [Crypt Key PDU (section 2.2.2.4)](#Section_3.3.5.1.1.6) to send a 32-byte private key over a virtual channel to the client. Some audio data is encrypted using this key.
 
-At the end of the audio data transfer, the server notifies the client by sending a [Close PDU (section 2.2.3.9)](#Section_2.2.3.9) over a virtual channel.
+At the end of the audio data transfer, the server notifies the client by sending a [Close PDU (section 2.2.3.9)](#Section_3.2.5.2.1.7) over a virtual channel.
 
 <a id="Section_1.3.2.3"></a>
 #### 1.3.2.3 Audio Setting Transfer Sequences
 
-The audio setting transfer sequence has the goal of transferring audio setting changes from the server to the client. Two different settings can be redirected: Volume and Pitch. All audio setting transfer sequences are sent over virtual channels. The settings are redirected using the [Volume PDU (section 2.2.4.1)](#Section_2.2.4.1) and [Pitch PDU (section 2.2.4.2)](#Section_3.2.5.3.1.2), respectively.
+The audio setting transfer sequence has the goal of transferring audio setting changes from the server to the client. Two different settings can be redirected: Volume and Pitch. All audio setting transfer sequences are sent over virtual channels. The settings are redirected using the [Volume PDU (section 2.2.4.1)](#Section_3.2.5.3.1.1) and [Pitch PDU (section 2.2.4.2)](#Section_3.2.5.3.1.2), respectively.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -427,9 +427,9 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| SNDC_CLOSE 0x01 | [Close PDU](#Section_2.2.3.9) |
+| SNDC_CLOSE 0x01 | [Close PDU](#Section_3.2.5.2.1.7) |
 | SNDC_WAVE 0x02 | [WaveInfo PDU](#Section_4.2.1) |
-| SNDC_SETVOLUME 0x03 | [Volume PDU](#Section_2.2.4.1) |
+| SNDC_SETVOLUME 0x03 | [Volume PDU](#Section_3.2.5.3.1.1) |
 | SNDC_SETPITCH 0x04 | [Pitch PDU](#Section_3.2.5.3.1.2) |
 | SNDC_WAVECONFIRM 0x05 | [Wave Confirm PDU](#Section_4.2.3) |
 | SNDC_TRAINING 0x06 | [Training PDU](#Section_4.1.3) or [Training Confirm PDU](#Section_4.1.4) |
@@ -617,7 +617,7 @@ packet-beta
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Data Sequence
 
-The following sections contain the Remote Desktop Protocol: Audio Output Virtual Channel Extension message syntax for the data transfer sequence. The data transfer sequence is used to transfer audio data from server to client. To receive audio data from the server, the client MUST have set the flag TSSNDCAPS_ALIVE (0x0000001) in the [Client Audio Formats and Version PDU](#Section_4.1.2) sent during the initialization sequence described in section [2.2.2](#Section_3.3.5.1).
+The following sections contain the Remote Desktop Protocol: Audio Output Virtual Channel Extension message syntax for the data transfer sequence. The data transfer sequence is used to transfer audio data from server to client. To receive audio data from the server, the client MUST have set the flag TSSNDCAPS_ALIVE (0x0000001) in the [Client Audio Formats and Version PDU](#Section_4.1.2) sent during the initialization sequence described in section [2.2.2](#Section_2.2.2).
 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Training PDU (SNDTRAINING)
@@ -683,7 +683,7 @@ packet-beta
 
 **bPad (3 bytes):** A 24-bit unsigned integer. This field is unused. The value is arbitrary and MUST be ignored on receipt.
 
-**Data (4 bytes):** The first four bytes of the audio data. The rest of the audio data arrives in the next PDU, which MUST be a Wave PDU. The audio data MUST be in the audio format from the list of formats exchanged during the Initialization Sequence (section [2.2.2](#Section_3.3.5.1)); this list is found at the index specified in the **wFormatNo** field.
+**Data (4 bytes):** The first four bytes of the audio data. The rest of the audio data arrives in the next PDU, which MUST be a Wave PDU. The audio data MUST be in the audio format from the list of formats exchanged during the Initialization Sequence (section [2.2.2](#Section_2.2.2)); this list is found at the index specified in the **wFormatNo** field.
 
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 Wave PDU (SNDWAV)
@@ -698,7 +698,7 @@ packet-beta
 
 **bPad (4 bytes):** A 32-bit unsigned integer that MUST be set to 0x00000000.
 
-**data (variable):** The rest of the audio data. The size of the audio data MUST be equal to the **BodySize** field of the [RDPSND PDU header](#Section_2.2.1) of the WaveInfo PDU that immediately preceded this packet, minus the size of the preceding WaveInfo PDU packet (not including the size of its Header field). The format of the audio data MUST be the format specified in the list of formats exchanged during the [Initialization Sequence](#Section_3.3.5.1) and found at the index specified in the **wFormatNo** field of the preceding WaveInfo PDU.
+**data (variable):** The rest of the audio data. The size of the audio data MUST be equal to the **BodySize** field of the [RDPSND PDU header](#Section_2.2.1) of the WaveInfo PDU that immediately preceded this packet, minus the size of the preceding WaveInfo PDU packet (not including the size of its Header field). The format of the audio data MUST be the format specified in the list of formats exchanged during the [Initialization Sequence](#Section_2.2.2) and found at the index specified in the **wFormatNo** field of the preceding WaveInfo PDU.
 
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 Wave Encrypt PDU (SNDWAVCRYPT)
@@ -871,7 +871,7 @@ The following sections contain the message syntax for the audio setting transfer
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 Volume PDU (SNDVOL)
 
-The Volume PDU is a [**PDU**](#gt_protocol-data-unit-pdu) sent from the server to the client to specify the volume to be set on the audio stream. For this packet to be sent, the client MUST have set the flag TSSNDCAPS_VOLUME (0x0000002) in the [Client Audio Formats and Version PDU (section 2.2.2.2)](#Section_4.1.2) that is sent during the initialization sequence described in section [2.2.2](#Section_3.3.5.1).
+The Volume PDU is a [**PDU**](#gt_protocol-data-unit-pdu) sent from the server to the client to specify the volume to be set on the audio stream. For this packet to be sent, the client MUST have set the flag TSSNDCAPS_VOLUME (0x0000002) in the [Client Audio Formats and Version PDU (section 2.2.2.2)](#Section_4.1.2) that is sent during the initialization sequence described in section [2.2.2](#Section_2.2.2).
 
 ```mermaid
 packet-beta
@@ -886,7 +886,7 @@ packet-beta
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 Pitch PDU (SNDPITCH)
 
-The Pitch PDU is a [**PDU**](#gt_protocol-data-unit-pdu) sent from the server to the client to specify the pitch to be set on the audio stream. For this packet to be sent, the client MUST have set the flag TSSNDCAPS_PITCH (0x0000004) in the [Client Audio Formats and Version PDU (section 2.2.2.2)](#Section_4.1.2) that is sent during the initialization sequence specified in section [2.2.2](#Section_3.3.5.1).
+The Pitch PDU is a [**PDU**](#gt_protocol-data-unit-pdu) sent from the server to the client to specify the pitch to be set on the audio stream. For this packet to be sent, the client MUST have set the flag TSSNDCAPS_PITCH (0x0000004) in the [Client Audio Formats and Version PDU (section 2.2.2.2)](#Section_4.1.2) that is sent during the initialization sequence specified in section [2.2.2](#Section_2.2.2).
 
 ```mermaid
 packet-beta
@@ -954,7 +954,7 @@ Before protocol operation can commence, the static or dynamic virtual channel MU
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Playing Audio
 
-When audio is played on the server (for example, when the server opens an MP3 file in Windows Media Player), the server MUST start redirecting the audio data. If the initialization sequence (section [2.2.2](#Section_3.3.5.1)) has not transpired, the server MUST start the initialization sequence and then proceed to start the data transfer sequence (section [2.2.3](#Section_2.2.3)).
+When audio is played on the server (for example, when the server opens an MP3 file in Windows Media Player), the server MUST start redirecting the audio data. If the initialization sequence (section [2.2.2](#Section_2.2.2)) has not transpired, the server MUST start the initialization sequence and then proceed to start the data transfer sequence (section [2.2.3](#Section_2.2.3)).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -1091,7 +1091,7 @@ The structure and fields of the [Client Audio Formats and Version PDU](#Section_
 
 The client MUST acknowledge the [Server Audio Formats and Version PDU](#Section_4.1.1) message by sending its own version and capabilities information, in a Client Audio Formats and Version PDU. The list of formats sent by the client MUST be a subset of the list of formats that was sent by the server in the preceding Server Audio Formats and Version PDU. Formats that do not appear in the server list MUST NOT be sent by the client in this message.
 
-The list of formats sent by the client will be referenced in the [data transfer sequence](#Section_3.3.5.2). The **wFormatNo** field of the [WaveInfo PDU](#Section_4.2.1), the [Wave2 PDU](#Section_4.2.4), the [UDP Wave Last PDU](#Section_4.4.2), and the [Wave Encrypt PDU](#Section_4.3.1) messages all represent an index into this list. A value of **I** refers to the **I**th format of this list and means that the audio data is encoded in the **I**th format of the list.
+The list of formats sent by the client will be referenced in the [data transfer sequence](#Section_1.3.2.2). The **wFormatNo** field of the [WaveInfo PDU](#Section_4.2.1), the [Wave2 PDU](#Section_4.2.4), the [UDP Wave Last PDU](#Section_4.4.2), and the [Wave Encrypt PDU](#Section_4.3.1) messages all represent an index into this list. A value of **I** refers to the **I**th format of this list and means that the audio data is encoded in the **I**th format of the list.
 
 If the client wants to allow the server to send audio data over [**UDP**](#gt_user-datagram-protocol-udp), as described in the data transfer sequence, the client MUST set the **wDGramPort** field to a valid nonzero UDP port on the client machine. However, setting the **wDGramPort** field to a valid nonzero UDP port on the client machine does not guarantee that the server will send audio data over UDP. The server MAY<12> send all audio data over virtual channels and no data over UDP.
 
@@ -1221,7 +1221,7 @@ The client MUST send the Wave Confirm PDU immediately after consuming the audio 
 <a id="Section_3.2.5.2.1.7"></a>
 ###### 3.2.5.2.1.7 Processing a Close PDU
 
-The structure and fields of the [Close PDU](#Section_2.2.3.9) are specified in section 2.2.3.9. The Close PDU is sent when the server intends to stop rendering audio (for example, just before a disconnect).
+The structure and fields of the [Close PDU](#Section_3.2.5.2.1.7) are specified in section 2.2.3.9. The Close PDU is sent when the server intends to stop rendering audio (for example, just before a disconnect).
 
 Upon receiving the Close PDU, the client MUST NOT render any audio received after the Close PDU. The client finishes any audio that arrived before this PDU and that remains to be rendered. This [**PDU**](#gt_protocol-data-unit-pdu) signals the end of audio transfer. As a result, the server side MUST NOT send any PDUs except a [Training PDU](#Section_4.1.3) and a [Server Audio Formats and Version PDU](#Section_4.1.1) (which will restart the entire audio output redirection protocol).
 
@@ -1230,7 +1230,7 @@ This packet MUST be received over virtual channels.
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Settings Transfer Sequence
 
-The Settings Transfer Sequence messages are used to send audio settings changes from the server to the client. These packets are sent any time after the initialization sequence or any time before the server sends a [Close PDU](#Section_2.2.3.9).
+The Settings Transfer Sequence messages are used to send audio settings changes from the server to the client. These packets are sent any time after the initialization sequence or any time before the server sends a [Close PDU](#Section_3.2.5.2.1.7).
 
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 Messages
@@ -1238,7 +1238,7 @@ The Settings Transfer Sequence messages are used to send audio settings changes 
 <a id="Section_3.2.5.3.1.1"></a>
 ###### 3.2.5.3.1.1 Processing a Volume PDU
 
-The structure and fields of the [Volume PDU](#Section_2.2.4.1) are specified in section 2.2.4.1.
+The structure and fields of the [Volume PDU](#Section_3.2.5.3.1.1) are specified in section 2.2.4.1.
 
 On receiving a Volume PDU, the client MUST adjust the volume to the value specified in the **Volume** field.
 
@@ -1303,7 +1303,7 @@ The first message the server sends to the client MUST be a Server Audio Formats 
 
 The structure and fields of the [Client Audio Formats and Version PDU](#Section_4.1.2) (client PDU) are specified in section 2.2.2.2. The server MUST receive this message prior to receiving any other message that is sent by the client. If the client sends this PDU out of sequence (section [3.1.5](#Section_3.1.5)), for example, before the server sends the [Server Audio Formats and Version PDU](#Section_4.1.1) (server PDU) to the client, the server can make a best effort to process the client PDU as if it had arrived after the server PDU was sent.<17>
 
-The list of formats that are sent by the client are referenced in the [data transfer sequence](#Section_3.3.5.2). The **wFormatNo** field of the [WaveInfo PDU](#Section_4.2.1), the [UDP Wave Last PDU](#Section_4.4.2), and the [Wave Encrypt PDU](#Section_4.3.1) all represent an index into this list. A value of **I** refers to the **I**th format of this list, which means that the audio data is encoded in the **I**th format of the list.
+The list of formats that are sent by the client are referenced in the [data transfer sequence](#Section_1.3.2.2). The **wFormatNo** field of the [WaveInfo PDU](#Section_4.2.1), the [UDP Wave Last PDU](#Section_4.4.2), and the [Wave Encrypt PDU](#Section_4.3.1) all represent an index into this list. A value of **I** refers to the **I**th format of this list, which means that the audio data is encoded in the **I**th format of the list.
 
 The **wDGramPort** field holds the value of the port that the server MUST use to send data over [**UDP**](#gt_user-datagram-protocol-udp). If the value is set to 0, the server MUST use virtual channels for the data transfer sequence. If the field is not set to 0, the server SHOULD<18> use UDP.
 
@@ -1350,7 +1350,7 @@ A Crypt Key PDU MUST only be sent over virtual channels. The server SHOULD send 
 
 The data transfer sequence messages are used to send audio data from the server to the client.
 
-As specified in section [1.3.2.2](#Section_3.3.5.2), there are three distinct sequences for the exchange of audio data:
+As specified in section [1.3.2.2](#Section_1.3.2.2), there are three distinct sequences for the exchange of audio data:
 
 - The first involves sending a [WaveInfo PDU](#Section_4.2.1) and a [Wave PDU](#Section_4.2.2), and receiving a [Wave Confirm PDU](#Section_4.2.3) over virtual channels.
 - The second involves sending a [Wave Encrypt PDU](#Section_4.3.1) and receiving a Wave Confirm PDU over [**UDP**](#gt_user-datagram-protocol-udp).
@@ -1456,7 +1456,7 @@ If the server sent the audio sample using UDP and does not receive a Wave Confir
 <a id="Section_3.3.5.2.1.7"></a>
 ###### 3.3.5.2.1.7 Sending a Close PDU
 
-The structure and fields of the [Close PDU](#Section_2.2.3.9) are specified in section 2.2.3.9.
+The structure and fields of the [Close PDU](#Section_3.2.5.2.1.7) are specified in section 2.2.3.9.
 
 To stop sending audio, the server sends this [**PDU**](#gt_protocol-data-unit-pdu).
 
@@ -1486,7 +1486,7 @@ The audio settings transfer sequence messages are used to send audio setting cha
 <a id="Section_3.3.5.3.1.1"></a>
 ###### 3.3.5.3.1.1 Sending a Volume PDU
 
-The structure and fields of the [Volume PDU](#Section_2.2.4.1) are specified in section 2.2.4.1.
+The structure and fields of the [Volume PDU](#Section_3.2.5.3.1.1) are specified in section 2.2.4.1.
 
 For the server to send this packet, the client MUST have had the TSSNDCAPS_VOLUME (0x00000002) flag set in the **dwFlags** field of the [Client Audio Formats and Version PDU](#Section_4.1.2) sent during the [initialization sequence](#Section_3.2.3).
 
@@ -1846,7 +1846,7 @@ da 89 -> SNDTRAINING::wTimeStamp = 0x89da
 <a id="Section_4.2"></a>
 ## 4.2 Annotated Virtual Channel Data Transfer Sequence
 
-The following is an annotated dump of a data transfer sequence over virtual channels, as specified in section [1.3.2.2](#Section_3.3.5.2).
+The following is an annotated dump of a data transfer sequence over virtual channels, as specified in section [1.3.2.2](#Section_1.3.2.2).
 
 <a id="Section_4.2.1"></a>
 ### 4.2.1 WaveInfo PDU
@@ -1957,7 +1957,7 @@ c2 b8 ac 0d -> SNDWAVE2::dwAudioTimeStamp = 0xdacb8c2 = 229423298
 <a id="Section_4.3"></a>
 ## 4.3 Annotated UDP Data Transfer Sequence Using Wave Encrypt PDU
 
-The following is an annotated dump of a data transfer sequence over UDP when the client and server versions are both less than 5, as specified in section [1.3.2.2](#Section_3.3.5.2).
+The following is an annotated dump of a data transfer sequence over UDP when the client and server versions are both less than 5, as specified in section [1.3.2.2](#Section_1.3.2.2).
 
 <a id="Section_4.3.1"></a>
 ### 4.3.1 Wave Encrypt PDU
@@ -2008,7 +2008,7 @@ b7 5a -> SNDWAV_CONFIRM::wTimeStamp = 0x5ab7
 <a id="Section_4.4"></a>
 ## 4.4 Annotated UDP Data Transfer Sequence Using UPD Wave PDU
 
-The following is an annotated dump of a data transfer sequence over UDP when the client and server versions are both at least 5, as specified in section [1.3.2.2](#Section_3.3.5.2).
+The following is an annotated dump of a data transfer sequence over UDP when the client and server versions are both at least 5, as specified in section [1.3.2.2](#Section_1.3.2.2).
 
 <a id="Section_4.4.1"></a>
 ### 4.4.1 UDP Wave PDU

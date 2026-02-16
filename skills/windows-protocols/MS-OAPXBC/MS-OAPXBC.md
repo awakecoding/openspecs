@@ -409,7 +409,7 @@ grant_type={grant_type}&client_id={client_id}&redirect_uri={redirect_uri}&reques
 
 OPTIONAL
 
-The *krctx* parameter is optional and can be specified by the client role of the OAuth 2.0 Protocol Extensions for Broker Clients in the POST body when making a request to the token endpoint (section [3.1.5.1](#Section_3.1.5.1)). The client provides a [**base64-encoded**](#gt_179b9392-9019-45a3-880b-26f6890522b7) [**JSON**](#gt_javascript-object-notation-json) value in the *krctx* parameter when making an [**OAuth logon certificate request**](#gt_oauth-logon-certificate-request).
+The *krctx* parameter is optional and can be specified by the client role of the OAuth 2.0 Protocol Extensions for Broker Clients in the POST body when making a request to the token endpoint (section [3.1.5.1](#Section_3.2.5.1)). The client provides a [**base64-encoded**](#gt_179b9392-9019-45a3-880b-26f6890522b7) [**JSON**](#gt_javascript-object-notation-json) value in the *krctx* parameter when making an [**OAuth logon certificate request**](#gt_oauth-logon-certificate-request).
 
 The [**AD FS server**](#gt_ad-fs-server) ignores this parameter unless its [**AD FS behavior level**](#gt_ad-fs-behavior-level) is AD_FS_BEHAVIOR_LEVEL_3 or higher ([MS-OAPX] section 3.2.1.1) and the AD FS server is capable of processing the parameter, as indicated by the value "winhello_cert_kr" being included in the **capabilities** field of the OpenID Provider Metadata ([MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.2).<1>
 
@@ -515,7 +515,7 @@ The resources that are accessed and manipulated by this protocol are defined in 
 
 | Resource | Description |
 | --- | --- |
-| Token endpoint (/token) | For a description, see section [3.2.5](#Section_3.2.5). |
+| Token endpoint (/token) | For a description, see section [3.2.5](#Section_3.1.5). |
 | Authorization endpoint (/authorize) | For a description, see section 3.2.5. |
 
 The HTTP responses to all the HTTP methods are defined in corresponding sections of [RFC6749].
@@ -527,12 +527,12 @@ The following HTTP method is allowed to be performed on this resource.
 
 | HTTP method | Description |
 | --- | --- |
-| POST | For a description, see section [3.2.5.1](#Section_3.1.5.1). |
+| POST | For a description, see section [3.2.5.1](#Section_3.2.5.1). |
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 POST (Request for Nonce)
 
-This method requests a nonce value from the server that the client then includes in a future request for a primary refresh token, as defined in section [3.1.5.1.2](#Section_3.1.5.1.2).
+This method requests a nonce value from the server that the client then includes in a future request for a primary refresh token, as defined in section [3.1.5.1.2](#Section_3.1.5.1.2.2).
 
 This operation is transported by an HTTP **POST** and can be invoked through the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -551,12 +551,12 @@ The format of the response is defined in section [3.2.5.1.1.2](#Section_3.2.5.1.
 <a id="Section_3.1.5.1.1.3"></a>
 ###### 3.1.5.1.1.3 Processing Details
 
-The nonce that is received in the response body of this request is stored in the **Nonce** abstract data model element (section [3.1.1](#Section_3.1.1)). This nonce is used in a future request for a primary refresh token, as defined in section [3.1.5.1.2](#Section_3.1.5.1.2).
+The nonce that is received in the response body of this request is stored in the **Nonce** abstract data model element (section [3.1.1](#Section_3.1.1)). This nonce is used in a future request for a primary refresh token, as defined in section [3.1.5.1.2](#Section_3.1.5.1.2.2).
 
 <a id="Section_3.1.5.1.2"></a>
 ##### 3.1.5.1.2 POST (Request for Primary Refresh Token)
 
-This method requests a primary refresh token that the client can then exchange for access tokens or user authentication certificates, as defined in sections [3.1.5.1.3](#Section_3.1.5.1.3.2) and [3.1.5.1.4](#Section_3.1.5.1.4.2).
+This method requests a primary refresh token that the client can then exchange for access tokens or user authentication certificates, as defined in sections [3.1.5.1.3](#Section_3.1.5.1.3.1) and [3.1.5.1.4](#Section_3.1.5.1.4.3).
 
 This operation is transported by an HTTP **POST** and can be invoked through the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -577,7 +577,7 @@ The format of the response is defined in section [3.2.5.1.2.2](#Section_3.2.5.1.
 
 Request processing:
 
-The client uses the **Nonce** abstract data model (ADM) element value (section [3.1.1](#Section_3.1.1)) that it received from the server in a previous nonce request (section [3.1.5.1.1](#Section_3.1.5.1.1.1)) to populate the **request_nonce** field of the request. If using user [**JSON Web Token (JWT)**](#gt_json-web-token-jwt) authentication, as described in section [3.2.5.1.2.1.2](#Section_3.2.5.1.2.1.2), the same **Nonce** should be populated as a **request_nonce** field in the JWT assertion before signing it.
+The client uses the **Nonce** abstract data model (ADM) element value (section [3.1.1](#Section_3.1.1)) that it received from the server in a previous nonce request (section [3.1.5.1.1](#Section_3.1.5.1.1)) to populate the **request_nonce** field of the request. If using user [**JSON Web Token (JWT)**](#gt_json-web-token-jwt) authentication, as described in section [3.2.5.1.2.1.2](#Section_3.2.5.1.2.1.2), the same **Nonce** should be populated as a **request_nonce** field in the JWT assertion before signing it.
 
 **Note**: This feature is supported by the operating systems specified in [[MSFT-CVE-2023-35348]](https://go.microsoft.com/fwlink/?linkid=2241213), each with its related KB article download installed.
 
@@ -613,7 +613,7 @@ The format of the response is defined in section [3.2.5.1.3.2](#Section_3.2.5.1.
 <a id="Section_3.1.5.1.3.3"></a>
 ###### 3.1.5.1.3.3 Processing Details
 
-The client first requests a primary refresh token from the server as defined in sections [3.1.5.1.2](#Section_3.1.5.1.2) and [3.2.5.1.2](#Section_3.2.5.1.2.2). It then uses the **Primary Refresh Token** ADM element (section [3.1.1](#Section_3.1.1)) to populate the **refresh_token** field in this request for the access token.
+The client first requests a primary refresh token from the server as defined in sections [3.1.5.1.2](#Section_3.1.5.1.2.2) and [3.2.5.1.2](#Section_3.2.5.1.2.1). It then uses the **Primary Refresh Token** ADM element (section [3.1.1](#Section_3.1.1)) to populate the **refresh_token** field in this request for the access token.
 
 The client derives a signing key from the **Session Key** ADM element (section 3.1.1), the constant label "AzureAD-SecureConversation", and the *ctx* value provided in the [**JWT**](#gt_json-web-token-jwt) header of the request by using the process described in [[SP800-108]](https://go.microsoft.com/fwlink/?LinkId=186039). The client uses this signing key to sign the request. If the capabilities field of the OpenID Provider Metadata ([MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.2) from the server includes the value "kdf_ver2", the client can use KDFv2 version<2> for deriving the **Session Key**. If the client chooses to use KDFv2, the client MUST use SHA256(ctx || assertion payload) instead of ctx as the context for deriving the signing key. The client MUST also add the JWT header field "kdf_ver" with value set to 2 to communicate that KDFv2 was used to create the derived signing key.
 
@@ -641,7 +641,7 @@ The format of the response is defined in section [3.2.5.1.4.2](#Section_3.2.5.1.
 
 When the client obtains the OpenID Provider Metadata from the server ([MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.2), it checks for the **capabilities** field. If the field exists in the metadata and includes the value "winhello_cert", the client can proceed with this request for a user authentication certificate.
 
-The client first requests a primary refresh token from the server as defined in sections [3.1.5.1.2](#Section_3.1.5.1.2) and [3.2.5.1.2](#Section_3.2.5.1.2.2). It then uses the **Primary Refresh Token** ADM element (section [3.1.1](#Section_3.1.1)) to populate the **refresh_token** field in this request for the user authentication certificate. If the capabilities field of the OpenID Provider Metadata ([MS-OIDCE] section 2.2.3.2) from the server includes the value "kdf_ver2", the client can use KDFv2 version for deriving the **Session Key**. If the client chooses to use KDFv2, the client MUST use SHA256(ctx || assertion payload) instead of ctx as the context for deriving the signing key. The client MUST also add the [**JWT**](#gt_json-web-token-jwt) header field "kdf_ver" with the value set to 2 to communicate that KDFv2 was used for creating the derived signing key.
+The client first requests a primary refresh token from the server as defined in sections [3.1.5.1.2](#Section_3.1.5.1.2.2) and [3.2.5.1.2](#Section_3.2.5.1.2.1). It then uses the **Primary Refresh Token** ADM element (section [3.1.1](#Section_3.1.1)) to populate the **refresh_token** field in this request for the user authentication certificate. If the capabilities field of the OpenID Provider Metadata ([MS-OIDCE] section 2.2.3.2) from the server includes the value "kdf_ver2", the client can use KDFv2 version for deriving the **Session Key**. If the client chooses to use KDFv2, the client MUST use SHA256(ctx || assertion payload) instead of ctx as the context for deriving the signing key. The client MUST also add the [**JWT**](#gt_json-web-token-jwt) header field "kdf_ver" with the value set to 2 to communicate that KDFv2 was used for creating the derived signing key.
 
 The client constructs a [**base64-encoded**](#gt_179b9392-9019-45a3-880b-26f6890522b7) PKCS #10 certificate request ([MS-WCCE](../MS-WCCE/MS-WCCE.md) section 2.2.2.6.1) using the **User Authentication Key** ADM element (section 3.1.1), and uses it to populate the **csr** field in this request for the user authentication certificate.
 
@@ -685,7 +685,7 @@ The processing details are the same as those specified in [MS-OAPX](../MS-OAPX/M
 If a primary refresh token is available to the client in the **Primary Refresh Token** ADM element (section [3.1.1](#Section_3.1.1)), the client can choose to include the token in the optional [x-ms-RefreshTokenCredential](#Section_2.2.1.1) HTTP header. The format of the x-ms-RefreshTokenCredential HTTP header is a signed [**JWT**](#gt_json-web-token-jwt) as defined in section 2.2.1.1, with the fields described in section [3.2.5.2.1.1.1](#Section_2.2.1.1). The client populates the header as follows:
 
 - The client uses the **Primary Refresh Token** ADM element to populate the required **refresh_token** field of the x-ms-RefreshTokenCredential HTTP header.
-- The client uses the **Nonce** ADM element value (section 3.1.1) that it received from the server in a previous nonce request (section [3.1.5.1.1](#Section_3.1.5.1.1.1)) to populate the required **request_nonce** field of the x-ms-RefreshTokenCredential HTTP header.
+- The client uses the **Nonce** ADM element value (section 3.1.1) that it received from the server in a previous nonce request (section [3.1.5.1.1](#Section_3.1.5.1.1)) to populate the required **request_nonce** field of the x-ms-RefreshTokenCredential HTTP header.
 The client derives a signing key from the **Session Key** ADM element (section 3.1.1), the constant label "AzureAD-SecureConversation", and the *ctx* value provided in the JWT header of the request by using the process described in [[SP800-108]](https://go.microsoft.com/fwlink/?LinkId=186039). The client uses this signing key to sign the JWT. If the capabilities field of the OpenID Provider Metadata ([MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.2) from the server includes the value "kdf_ver2", the client can use KDFv2 version for deriving the **Session Key**. If the client chooses to use KDFv2, the client MUST use SHA256(ctx || assertion payload) instead of ctx as the context for deriving the signing key. The client MUST also add the JWT header field "kdf_ver" with value set to 2 to communicate that KDFv2 was used for creating the derived signing key.
 
 If a certificate is available to the client in the **Device Certificate** ADM element (section 3.1.1), the client can include the optional [x-ms-DeviceCredential](#Section_2.2.1.2) HTTP header. The format of the x-ms-DeviceCredential HTTP header is a signed JWT as defined in section 2.2.1.2, with the fields described in section [3.2.5.2.1.1.2](#Section_2.2.1.2). The client populates the header as follows:
@@ -754,7 +754,7 @@ As defined in [[RFC6749]](https://go.microsoft.com/fwlink/?LinkId=301486) sectio
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 POST (Request for Nonce)
 
-This method requests a nonce value from the server that the client then includes in a future request for a primary refresh token, as defined in section [3.2.5.1.2](#Section_3.2.5.1.2.2).
+This method requests a nonce value from the server that the client then includes in a future request for a primary refresh token, as defined in section [3.2.5.1.2](#Section_3.2.5.1.2.1).
 
 This operation is transported by an HTTP **POST** and can be invoked through the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -795,13 +795,13 @@ The response contains a [**JSON**](#gt_javascript-object-notation-json) object w
 
 Generation of the **Nonce** field of the response is implementation specific, provided that the nonce meets the following requirements:
 
-- The server MUST be able to verify that any nonce value received from the client in a request for a primary refresh token (section [3.2.5.1.2](#Section_3.2.5.1.2.2)) matches a nonce that was previously issued by the server.
+- The server MUST be able to verify that any nonce value received from the client in a request for a primary refresh token (section [3.2.5.1.2](#Section_3.2.5.1.2.1)) matches a nonce that was previously issued by the server.
 - The server SHOULD be able to verify that any nonce value received from the client in a request for a primary refresh token matches a nonce that was issued recently (see section [3.2.5.1.2.3](#Section_3.2.5.1.2.3)).
 - The server SHOULD use a method that makes it difficult for an attacker to guess valid nonce values.
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 POST (Request for Primary Refresh Token)
 
-This method requests a primary refresh token that the client can then exchange for access tokens or user authentication certificates, as defined in sections [3.2.5.1.3](#Section_3.2.5.1.3.2) and [3.2.5.1.4](#Section_3.2.5.1.4.1).
+This method requests a primary refresh token that the client can then exchange for access tokens or user authentication certificates, as defined in sections [3.2.5.1.3](#Section_3.2.5.1.3) and [3.2.5.1.4](#Section_3.2.5.1.4).
 
 This operation is transported by an HTTP **POST** and can be invoked through the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -828,7 +828,7 @@ The JWT fields MUST be given the following values:
 
 **scope** (REQUIRED): MUST contain at least the scopes "aza" and "openid". Additional scopes can be included and follow the format described in [[RFC6749]](https://go.microsoft.com/fwlink/?LinkId=301486) section 3.3.
 
-**request_nonce** (REQUIRED): A nonce previously obtained from the server by making the request described in section [3.1.5.1.1](#Section_3.1.5.1.1.1).
+**request_nonce** (REQUIRED): A nonce previously obtained from the server by making the request described in section [3.1.5.1.1](#Section_3.1.5.1.1).
 
 Additionally, the client MUST provide user authentication in the request. The client does this by including the JWT fields from one of the following:
 
@@ -843,7 +843,7 @@ The signature header fields MUST be given the following values:
 
 **x5c** (REQUIRED): The certificate used to sign the request, following the format described in [[RFC7515]](https://go.microsoft.com/fwlink/?LinkId=691168) section 4.1.6.
 
-**kdf_ver** (OPTIONAL): If the capabilities field of the OpenID Provider Metadata ([MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.2) from the server includes the value "kdf_ver2", the client can use KDFv2 version for creating context, which is used in deriving the Session Key. This is used in flows to exchange a Primary Refresh token for another token or user authentication certificate, as defined in sections [3.1.5.1.3](#Section_3.1.5.1.3.2) and [3.1.5.1.4](#Section_3.1.5.1.4.2).
+**kdf_ver** (OPTIONAL): If the capabilities field of the OpenID Provider Metadata ([MS-OIDCE](../MS-OIDCE/MS-OIDCE.md) section 2.2.3.2) from the server includes the value "kdf_ver2", the client can use KDFv2 version for creating context, which is used in deriving the Session Key. This is used in flows to exchange a Primary Refresh token for another token or user authentication certificate, as defined in sections [3.1.5.1.3](#Section_3.1.5.1.3.1) and [3.1.5.1.4](#Section_3.1.5.1.4.3).
 
 <a id="Section_3.2.5.1.2.1.1"></a>
 Username Password Authentication
@@ -932,11 +932,11 @@ The response to the request is a [**JSON**](#gt_javascript-object-notation-json)
 
 **token_type** (REQUIRED): The string "pop", indicating that the returned refresh token requires proof of possession.
 
-**refresh_token** (REQUIRED): A primary refresh token. Like a refresh token described in [[RFC6749]](https://go.microsoft.com/fwlink/?LinkId=301486) section 1.5, this can be used by clients to obtain fresh access tokens. Unlike the refresh tokens described in [RFC6749], the primary refresh token requires additional proof of possession to use as described in section [3.2.5.1.3](#Section_3.2.5.1.3.2), and can be used by any client known to the server.
+**refresh_token** (REQUIRED): A primary refresh token. Like a refresh token described in [[RFC6749]](https://go.microsoft.com/fwlink/?LinkId=301486) section 1.5, this can be used by clients to obtain fresh access tokens. Unlike the refresh tokens described in [RFC6749], the primary refresh token requires additional proof of possession to use as described in section [3.2.5.1.3](#Section_3.2.5.1.3), and can be used by any client known to the server.
 
 **refresh_token_expires_in** (REQUIRED): The validity interval for the primary refresh token in seconds, as an integer.
 
-**session_key_jwe** (REQUIRED): A base64 URL–encoded and encrypted key value. The key is encrypted using the JSON Web Encryption (JWE) standard [[RFC7516]](https://go.microsoft.com/fwlink/?LinkId=691164). The relevant part of the JWE is the encrypted key section, which the client will use for future signature and decryption operations as described in section [3.1.5.1.3](#Section_3.1.5.1.3.2).
+**session_key_jwe** (REQUIRED): A base64 URL–encoded and encrypted key value. The key is encrypted using the JSON Web Encryption (JWE) standard [[RFC7516]](https://go.microsoft.com/fwlink/?LinkId=691164). The relevant part of the JWE is the encrypted key section, which the client will use for future signature and decryption operations as described in section [3.1.5.1.3](#Section_3.1.5.1.3.1).
 
 **id_token** (REQUIRED): An ID token for the user that is authenticated in the request, as described in [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840). The audience for the ID token, that is, the **aud** field, is the same value given in section [3.2.5.1.2.1](#Section_3.2.5.1.2.1) for the **client_id** field. The token does not need to be signed.
 
@@ -972,7 +972,7 @@ The server finds the msDS-Device object in Active Directory that has an altSecur
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 POST (Exchange Primary Refresh Token for Access Token)
 
-Given the primary refresh token that was obtained in section [3.2.5.1.2](#Section_3.2.5.1.2.2), this method requests an access token.
+Given the primary refresh token that was obtained in section [3.2.5.1.2](#Section_3.2.5.1.2.1), this method requests an access token.
 
 This operation is transported by an HTTP **POST** and can be invoked through the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -1007,7 +1007,7 @@ The JWT fields MUST be given the following values:
 
 **grant_type** (REQUIRED): "refresh_token"
 
-**refresh_token** (REQUIRED): A primary refresh token that was previously received from the server. See section [3.1.5.1.2](#Section_3.1.5.1.2).
+**refresh_token** (REQUIRED): A primary refresh token that was previously received from the server. See section [3.1.5.1.2](#Section_3.1.5.1.2.2).
 
 The JWT header fields MUST be given the following values:
 
@@ -1067,7 +1067,7 @@ The server encrypts the response using a key that was derived by using the same 
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 POST (Exchange Primary Refresh Token for User Authentication Certificate)
 
-Given the primary refresh token that was obtained in section [3.2.5.1.2](#Section_3.2.5.1.2.2), this method requests a certificate that can be used to authenticate the user.<6>
+Given the primary refresh token that was obtained in section [3.2.5.1.2](#Section_3.2.5.1.2.1), this method requests a certificate that can be used to authenticate the user.<6>
 
 This operation is transported by an HTTP **POST** and can be invoked through the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -1112,7 +1112,7 @@ The JWT fields MUST be given the following values:
 
 **grant_type** (REQUIRED): "refresh_token"
 
-**refresh_token** (REQUIRED): A primary refresh token that was previously received from the server. See section [3.1.5.1.2](#Section_3.1.5.1.2).
+**refresh_token** (REQUIRED): A primary refresh token that was previously received from the server. See section [3.1.5.1.2](#Section_3.1.5.1.2.2).
 
 The JWT header fields MUST be given the following values:
 
@@ -1161,7 +1161,7 @@ The server verifies that the request was signed by the client with a key derived
 If the request includes the *krctx* parameter, the server uses the following rules to verify the [**JWT**](#gt_json-web-token-jwt) contained in the parameter, and then uses the claims in the JWT to authorize the request:
 
 - The JWT MUST contain the ngc_key claim whose value matches the PKCS #10 [**public key**](#gt_public-key) value from the **csr** field.
-- The JWT MUST contain the onprem_sid claim whose value matches the sid claim value from the primary refresh token that the client previously received from the [**AD FS server**](#gt_ad-fs-server) (section [3.2.5.1.2](#Section_3.2.5.1.2.2)).
+- The JWT MUST contain the onprem_sid claim whose value matches the sid claim value from the primary refresh token that the client previously received from the [**AD FS server**](#gt_ad-fs-server) (section [3.2.5.1.2](#Section_3.2.5.1.2.1)).
 - The JWT MUST be signed with a certificate that is trusted by the server.
 If the *resource* parameter is invalid, the AD FS server responds to the OAuth 2.0 client according to the requirements of [RFC6749] section 4.1.2.1 (Error Response). The REQUIRED error parameter of the response MUST be set to the invalid_resource error code, which is defined in [MS-OAPX](../MS-OAPX/MS-OAPX.md) section 2.2.4.1.
 
@@ -1219,9 +1219,9 @@ The JWT fields MUST be given the following values:
 
 **iat** (OPTIONAL): See [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840) section 2.
 
-**refresh_token** (REQUIRED): A primary refresh token that was previously received from the server. See section [3.1.5.1.2](#Section_3.1.5.1.2).
+**refresh_token** (REQUIRED): A primary refresh token that was previously received from the server. See section [3.1.5.1.2](#Section_3.1.5.1.2.2).
 
-**request_nonce** (REQUIRED): A nonce previously obtained from the server by making the request. See section [3.1.5.1.1](#Section_3.1.5.1.1.1).
+**request_nonce** (REQUIRED): A nonce previously obtained from the server by making the request. See section [3.1.5.1.1](#Section_3.1.5.1.1).
 
 **ua_client_id** (OPTIONAL): A client_id of the user-agent using this header.
 
@@ -1252,7 +1252,7 @@ The JWT fields MUST be given the following values:<9>
 
 **iss** (OPTIONAL): Set to "aad:brokerplugin" if present.
 
-**request_nonce** (REQUIRED): A nonce previously obtained from the server by making the request. See section [3.1.5.1.1](#Section_3.1.5.1.1.1).
+**request_nonce** (REQUIRED): A nonce previously obtained from the server by making the request. See section [3.1.5.1.1](#Section_3.1.5.1.1).
 
 **ua_client_id** (OPTIONAL): A client_id of the user-agent using this header.
 

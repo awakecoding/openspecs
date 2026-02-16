@@ -296,8 +296,8 @@ It is appropriate to allow use of this extension only by higher-layer protocols 
 
 | Security parameter | Section |
 | --- | --- |
-| **set-mask-to-zero** | [3.1.1](#Section_3.1.1) |
-| **accept-unmasked-frame** | [3.2.1](#Section_3.1.1) |
+| **set-mask-to-zero** | [3.1.1](#Section_3.2.1) |
+| **accept-unmasked-frame** | [3.2.1](#Section_3.2.1) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

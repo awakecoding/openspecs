@@ -304,7 +304,7 @@ A Sink is selected from those discovered; for example, by asking a user to pick 
 
 If the Vendor Extension attribute contains one or more IP Address attributes (section [2.2.8.5](#Section_2.2.8.5)), the Source optionally skips the host name resolution phase and proceeds to the projection phase.
 
-In the host name resolution phase, name resolution is performed on the name in a Host Name attribute (section [2.2.8.2](#Section_3.2.5.3)) in the Vendor Extension attribute. If name resolution is unsuccessful, the Source again falls back to using standard Miracast.
+In the host name resolution phase, name resolution is performed on the name in a Host Name attribute (section [2.2.8.2](#Section_2.2.8.2)) in the Vendor Extension attribute. If name resolution is unsuccessful, the Source again falls back to using standard Miracast.
 
 In the projection phase, the Source attempts a connection to the Sink for sending Miracast over Infrastructure messages (section [2.2](#Section_2.2)). Finally, the Sink establishes a connection with the Source for streaming multimedia data. If that connection cannot be established, the entire process fails.
 
@@ -385,7 +385,7 @@ packet-beta
 
 | Message type | Section | Description |
 | --- | --- | --- |
-| SOURCE_READY 0x01 | [2.2.1](#Section_3.1.5.3) | Indicates the Miracast Source is ready to accept a connection on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port. |
+| SOURCE_READY 0x01 | [2.2.1](#Section_2.2.1) | Indicates the Miracast Source is ready to accept a connection on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port. |
 | STOP_PROJECTION 0x02 | [2.2.2](#Section_3.1.5.7) | Indicates the end of the projection. |
 | SECURITY_HANDSHAKE 0x03 | [2.2.3](#Section_2.2.3) | Used to exchange DTLS handshake messages to initiate a connection with encryption of the multimedia stream. |
 | SESSION_REQUEST 0x04 | [2.2.4](#Section_2.2.4) | Indicates the Miracast Source intends to connect to the Sink using the specified options. |
@@ -869,7 +869,7 @@ A Miracast over Infrastructure session consists of three phases: device discover
 
 The Miracast over Infrastructure session starts with [**peer to peer (P2P)**](#gt_peer-to-peer-p2p) device discovery ([[WF-P2P1.2]](https://go.microsoft.com/fwlink/?LinkId=225584) section 3.1.2), which a Miracast Source uses to find a device capable of performing the functions of a Miracast Sink. This includes the Source sending [**Probe Request**](#gt_probe-request) frames ([WF-P2P1.2] section 4.2.2) and listening for [**Probe Response**](#gt_probe-response) frames ([WF-P2P1.2] section 4.2.3) and [**Beacon**](#gt_beacon) frames ([WF-P2P1.2] section 4.2.1).
 
-Beacon frames are unsolicited broadcasts that advertise P2P devices. Probe Response frames are sent by a Sink in response to Probe Request frames sent by the Source. If the Source receives a Beacon or Probe Response that contains a WSC [**IE**](#gt_information-element-ie) [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666) Vendor Extension attribute (section [2.2.8](#Section_2.2.8)), the Source checks the Capability attribute (section [2.2.8.1](#Section_1.7)) for Miracast over Infrastructure support.
+Beacon frames are unsolicited broadcasts that advertise P2P devices. Probe Response frames are sent by a Sink in response to Probe Request frames sent by the Source. If the Source receives a Beacon or Probe Response that contains a WSC [**IE**](#gt_information-element-ie) [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666) Vendor Extension attribute (section [2.2.8](#Section_2.2.8)), the Source checks the Capability attribute (section [2.2.8.1](#Section_2.2.8.1)) for Miracast over Infrastructure support.
 
 If the Capability attribute specifies that Miracast over Infrastructure is not supported, the Source falls back to standard Miracast [WF-WSC2.0.2].
 
@@ -881,7 +881,7 @@ The host name received by the Source during device discovery specifies the unqua
 
 When host name resolution is complete, the session proceeds to the Projection phase.
 
-The Source uses a **Discovery timer** (section [3.2.2](#Section_3.2.2)) to limit the time it spends on host name resolution. If this timer reaches its timeout, the host name resolution fails, and the Source falls back to standard Miracast.
+The Source uses a **Discovery timer** (section [3.2.2](#Section_3.1.2)) to limit the time it spends on host name resolution. If this timer reaches its timeout, the host name resolution fails, and the Source falls back to standard Miracast.
 
 **Projection**
 
@@ -893,7 +893,7 @@ This phase is further subdivided into optional sections depending on the protoco
 
 Figure 3: Projection setup phase
 
-The Sink is expected to be listening for messages on TCP port 7250. The Sink listens for Source Ready messages (section [2.2.1](#Section_3.1.5.3)). If the Sink supports stream encryption, it also listens for Security Handshake messages (section [2.2.3](#Section_2.2.3)). If the sink supports PIN entry, it also listens for Session Request messages (section [2.2.4](#Section_2.2.4)).
+The Sink is expected to be listening for messages on TCP port 7250. The Sink listens for Source Ready messages (section [2.2.1](#Section_2.2.1)). If the Sink supports stream encryption, it also listens for Security Handshake messages (section [2.2.3](#Section_2.2.3)). If the sink supports PIN entry, it also listens for Session Request messages (section [2.2.4](#Section_2.2.4)).
 
 The Source will either begin at the Session Request step, Security Handshake step, or Begin Session step, depending on what it supports and what support was indicated by the sink in the Vendor Specific attribute.
 
@@ -967,7 +967,7 @@ When the higher-layer application or protocol requests to disconnect the Miracas
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Receive Probe Request
 
-When a Miracast Sink receives a [**Probe Request**](#gt_probe-request) message, the Sink MUST send a [**Probe Response**](#gt_probe-response) message [[WF-P2P1.2]](https://go.microsoft.com/fwlink/?LinkId=225584) and include a WSC IE [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666) Vendor Extension attribute (section [2.2.8](#Section_2.2.8)) with a Capability Attribute (section [2.2.8.1](#Section_1.7)) that indicates support for Miracast over Infrastructure.
+When a Miracast Sink receives a [**Probe Request**](#gt_probe-request) message, the Sink MUST send a [**Probe Response**](#gt_probe-response) message [[WF-P2P1.2]](https://go.microsoft.com/fwlink/?LinkId=225584) and include a WSC IE [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666) Vendor Extension attribute (section [2.2.8](#Section_2.2.8)) with a Capability Attribute (section [2.2.8.1](#Section_2.2.8.1)) that indicates support for Miracast over Infrastructure.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Receive Connection Request
@@ -977,7 +977,7 @@ When a Miracast Sink receives a new [**TCP**](#gt_transmission-control-protocol-
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Receive Source Ready Message
 
-When a Miracast Sink receives a Source Ready message (section [2.2.1](#Section_3.1.5.3)) while it is in the Socket Connected, Session Requested, DTLS Handshake Complete, or PIN Challenge state (section [3.1.1](#Section_3.1)), it MUST connect back to the Source over [**TCP**](#gt_transmission-control-protocol-tcp) on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port specified in the message.
+When a Miracast Sink receives a Source Ready message (section [2.2.1](#Section_2.2.1)) while it is in the Socket Connected, Session Requested, DTLS Handshake Complete, or PIN Challenge state (section [3.1.1](#Section_3.1)), it MUST connect back to the Source over [**TCP**](#gt_transmission-control-protocol-tcp) on the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) port specified in the message.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receive Session Request Message
@@ -1057,7 +1057,7 @@ When the Miracast Sink receives an unknown message type or a message type that i
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
-If either of the Miracast Sink timers (section [3.1.2](#Section_3.2.2)) reaches its timeout, the Sink MUST tear down the connection on TCP port 7250.
+If either of the Miracast Sink timers (section [3.1.2](#Section_3.1.2)) reaches its timeout, the Sink MUST tear down the connection on TCP port 7250.
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -1090,7 +1090,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Source ID:** A Source ID [**TLV**](#gt_type-length-value-tlv) (section [2.2.7.3](#Section_2.2.7.3)) is maintained throughout the lifetime of the Miracast session. It is included in all Miracast messages (section [2.2](#Section_2.2)) to identify the Miracast Source.
 
-**Sink Capabilities**: The data within a Capability attribute (section [2.2.8.1](#Section_1.7)) received from a Sink is maintained from the discovery phase until the connection setup is complete. It is used to determine what connection features the Sink supports.
+**Sink Capabilities**: The data within a Capability attribute (section [2.2.8.1](#Section_2.2.8.1)) received from a Sink is maintained from the discovery phase until the connection setup is complete. It is used to determine what connection features the Sink supports.
 
 **Selected Sink Capabilities**: For each Sink Capability, the Source stores whether it is using that capability for this connection.
 
@@ -1142,18 +1142,18 @@ When the higher-layer application or protocol requests to disconnect the Miracas
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receive Beacon with Vendor Extension Attribute
 
-When a Miracast Source receives a [**Beacon**](#gt_beacon) message that includes a Vendor Extension Attribute (section [2.2.8](#Section_2.2.8)), it MUST read the Capability attribute (section [2.2.8.1](#Section_1.7)), and store this information in the Sink Capabilities (section [3.2.1](#Section_3.2)). If the **MiracastOverInfrastructureSupport** bit is not set, the Source MUST fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
+When a Miracast Source receives a [**Beacon**](#gt_beacon) message that includes a Vendor Extension Attribute (section [2.2.8](#Section_2.2.8)), it MUST read the Capability attribute (section [2.2.8.1](#Section_2.2.8.1)), and store this information in the Sink Capabilities (section [3.2.1](#Section_3.2)). If the **MiracastOverInfrastructureSupport** bit is not set, the Source MUST fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
 
 If Miracast over Infrastructure is supported by the Sink, the Source MUST do the following.
 
 - If one or more IP Address attributes (section [2.2.8.5](#Section_2.2.8.5)) are present in the message, the Source SHOULD<5> skip name resolution and treat the addresses as the result of host name resolution, by proceeding as specified in section [3.2.5.3](#Section_3.2.5.3); however, the Source MAY instead ignore them and continue as if they were not present.
 - If host name resolution was not skipped, the Source MUST do the following.
-- Start its **Discovery timer** (section [3.2.2](#Section_3.2.2)) to expire after an implementation-specific<6> period of time if host name resolution does not complete.
-- Begin host name resolution on the name in the Host Name Attribute (section [2.2.8.2](#Section_3.2.5.3)), using DNS and/or mDNS, the choice of which is implementation-specific.<7>
+- Start its **Discovery timer** (section [3.2.2](#Section_3.1.2)) to expire after an implementation-specific<6> period of time if host name resolution does not complete.
+- Begin host name resolution on the name in the Host Name Attribute (section [2.2.8.2](#Section_2.2.8.2)), using DNS and/or mDNS, the choice of which is implementation-specific.<7>
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Receive Probe Response with Vendor Extension Attribute
 
-When a Miracast Source receives a [**Probe Response**](#gt_probe-response) message that includes a Vendor Extension Attribute (section [2.2.8](#Section_2.2.8)), the Source MUST store the Capability attribute (section [2.2.8.1](#Section_1.7)), which includes the **MiracastOverInfrastructureSupport** bit, **Version** field, **StreamEncryptionSupported** bit, and **PinSupported** bit.
+When a Miracast Source receives a [**Probe Response**](#gt_probe-response) message that includes a Vendor Extension Attribute (section [2.2.8](#Section_2.2.8)), the Source MUST store the Capability attribute (section [2.2.8.1](#Section_2.2.8.1)), which includes the **MiracastOverInfrastructureSupport** bit, **Version** field, **StreamEncryptionSupported** bit, and **PinSupported** bit.
 
 If Miracast over Infrastructure is supported by the Sink, the Source MUST perform the actions specified in section [3.2.5.1](#Section_3.2.5.1), as if it had received a [**Beacon**](#gt_beacon) message indicating that the Sink supports Miracast over Infrastructure.
 
@@ -1162,7 +1162,7 @@ If Miracast over Infrastructure is supported by the Sink, the Source MUST perfor
 
 When a Miracast Source obtains a set of one or more IP addresses of the Miracast Sink, the Source MUST do the following.
 
-- Cancel its **Discovery timer** (section [3.2.2](#Section_3.2.2)).
+- Cancel its **Discovery timer** (section [3.2.2](#Section_3.1.2)).
 - Start its **Control Channel Connection timer**, which will expire after an implementation-specific<8> time unless it receives a connection over the [**RTSP**](#gt_real-time-streaming-protocol-rtsp) control channel.
 - Attempt a connection to one of the IP addresses over [**TCP**](#gt_transmission-control-protocol-tcp) port 7250. The method of choosing a Sink IP address is implementation-specific.<9>
 <a id="Section_3.2.5.4"></a>
@@ -1174,14 +1174,14 @@ When the connection to the Sink over [**TCP**](#gt_transmission-control-protocol
 - Fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
 If the connection attempt succeeds, the Source MUST do the following.
 
-- Determine the optional features of the protocol to use and store them for the session (section [3.2.1](#Section_3.2)). If the Sink had the StreamEncryptionSupported bit set in the Capability Attribute (section [2.2.8.1](#Section_1.7)) the Source SHOULD<10> use stream encryption in the connection setup. If the Sink had the PinSupported bit set in the Capability Attribute, the Source SHOULD<11> use PIN display for the connection. The decision to use these capabilities is implementation specific and the result is stored in Selected Sink Capabilities (section 3.2.1).
+- Determine the optional features of the protocol to use and store them for the session (section [3.2.1](#Section_3.2)). If the Sink had the StreamEncryptionSupported bit set in the Capability Attribute (section [2.2.8.1](#Section_2.2.8.1)) the Source SHOULD<10> use stream encryption in the connection setup. If the Sink had the PinSupported bit set in the Capability Attribute, the Source SHOULD<11> use PIN display for the connection. The decision to use these capabilities is implementation specific and the result is stored in Selected Sink Capabilities (section 3.2.1).
 - If PIN entry is set in Selected Sink Capabilities (section 3.2.1):
 - The Source MUST send a Session Request message (section [2.2.4](#Section_2.2.4)) over the TCP session. The Security Option TLV (section [2.2.7.5](#Section_2.2.7.5)) in this message MUST contain the appropriate bits based on the Selected Sink Capabilities (section 3.2.1).
 - If Stream Encryption is set in Selected Sink Capabilities (section 3.2.1):
 - Send a Security Handshake message (section [2.2.3](#Section_2.2.3)) containing the first DTLS handshake message [[RFC6347]](https://go.microsoft.com/fwlink/?linkid=874835) over the TCP session.
 - If Stream Encryption is not set in Selected Sink Capabilities (section 3.2.1):
 - Begin listening on [**RTSP**](#gt_real-time-streaming-protocol-rtsp) control port 7236 for a connection request.
-- Send a Source Ready message (section [2.2.1](#Section_3.1.5.3)) over the TCP session.
+- Send a Source Ready message (section [2.2.1](#Section_2.2.1)) over the TCP session.
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Receive Security Handshake Message
 
@@ -1202,7 +1202,7 @@ If PIN entry is set in **Selected Sink Capabilities** (section 3.2.1):
 If PIN entry is not set in **Selected Sink Capabilities** (section 3.2.1):
 
 - Begin listening on RTSP control port 7236 for a connection request.
-- Send a Source Ready message (section [2.2.1](#Section_3.1.5.3)) over the TCP session.
+- Send a Source Ready message (section [2.2.1](#Section_2.2.1)) over the TCP session.
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Receive PIN Response Message
 
@@ -1213,7 +1213,7 @@ The salted hash of the PIN is derived as defined in section [3.1.5.6.1](#Section
 If the PIN Challenge TLV contains the correct hash value, then the Source MUST do the following:
 
 - Begin listening on RTSP control port 7236 for a connection request.
-- Send a Source Ready message (section [2.2.1](#Section_3.1.5.3)) over the TCP session.
+- Send a Source Ready message (section [2.2.1](#Section_2.2.1)) over the TCP session.
 In all other cases, the Source MUST:
 
 - Abandon its attempt to start a Miracast over Infrastructure session by closing any connections to the Sink and deleting its state.
@@ -1223,7 +1223,7 @@ In all other cases, the Source MUST:
 
 When a Miracast Sink accepts an [**RTSP**](#gt_real-time-streaming-protocol-rtsp) connection, the Miracast Source MUST do the following.
 
-- Cancel the **Control Channel Connection** timer (section [3.2.2](#Section_3.2.2)).
+- Cancel the **Control Channel Connection** timer (section [3.2.2](#Section_3.1.2)).
 - Perform standard RTSP behavior.
 If Stream Encryption is set in **Selected Sink Capabilities** (section [3.2.1](#Section_3.2)), then the Miracast protocol is modified as follows:
 
@@ -1239,7 +1239,7 @@ When the Miracast Source receives an unknown message type or a message type that
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-If any of the Miracast Source timers (section [3.2.2](#Section_3.2.2)) reaches its timeout, the Source MUST do the following.
+If any of the Miracast Source timers (section [3.2.2](#Section_3.1.2)) reaches its timeout, the Source MUST do the following.
 
 - Abandon its attempt to start a Miracast over Infrastructure session by closing any connections to the Sink and deleting its state.
 - Fall back to using standard Miracast [[WF-WSC2.0.2]](https://go.microsoft.com/fwlink/?LinkId=282666).
@@ -1284,7 +1284,7 @@ This is an example of the Vendor Extension attribute (section [2.2.8](#Section_2
 <a id="Section_4.2"></a>
 ## 4.2 Source Ready Message Example
 
-This is an example of the Source Ready message (section [2.2.1](#Section_3.1.5.3)).
+This is an example of the Source Ready message (section [2.2.1](#Section_2.2.1)).
 
 00 3D // Length (61 bytes)
 
@@ -1458,7 +1458,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 2.2.8.5: The Windows Sink implementation adds a single IP Address attribute with an [**IPv4**](#gt_internet-protocol-version-4-ipv4) address.
 
-<2> Section 3.1.3: The Windows 10 v1703 through Windows 10 v1803 operating system Sink implementation does not support stream encryption, therefore it will not set the **StreamSecuritySupported** bit in the Capability attribute (section [2.2.8.1](#Section_1.7)).
+<2> Section 3.1.3: The Windows 10 v1703 through Windows 10 v1803 operating system Sink implementation does not support stream encryption, therefore it will not set the **StreamSecuritySupported** bit in the Capability attribute (section [2.2.8.1](#Section_2.2.8.1)).
 
 <3> Section 3.1.3: The Windows 10 v1703 through Windows 10 v1803 does not support PIN entry, therefore it will not set the **PinSupported** bit in the Capability attribute (section 2.2.8.1). The Windows 10 v1809 operating system and later and Windows Server 2019 and later Sink implementation allows the **PinSupported** bit to be configurable.
 

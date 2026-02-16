@@ -664,7 +664,7 @@ This section describes the versioning and capability negotiation performed durin
 - Protocol Versions: There are four versions of this protocol and the associated fax API. Section [2.2.85](#Section_2.2.85) defines the identifiers of these four protocol and API versions.
 When the fax client calls **FAX_ConnectFaxServer** (section [3.1.4.1.10](#Section_3.1.4.1.100)) to create a new connection to a fax server, the fax client communicates its protocol and API version. On return, the fax server answers with its own protocol and API version. The **FAX_ConnectFaxServer** section describes the fax-specific error codes that are defined for each protocol and fax API version. The methods that are to be implemented differently, depending on the protocol and fax API version, have these differences documented in their respective subsections.
 
-There are two server interfaces and one client interface for this protocol. Both server interfaces share the same RPC [**UUID**](#gt_universally-unique-identifier-uuid) and version numbers, but are otherwise incompatible with each other. The **FaxObs Server Interface** (section [3.1.4.2](#Section_3.1.4.2)) is a now obsolete interface implemented by server implementations of the first version of this protocol. The **Fax Server Interface** (section [3.1.4.1](#Section_3.1.4.1)) is the current interface implemented by subsequent versions up to and including the current version of this protocol. All clients implement the same FAX client interface (section [3.2.4](#Section_3.1.4)).
+There are two server interfaces and one client interface for this protocol. Both server interfaces share the same RPC [**UUID**](#gt_universally-unique-identifier-uuid) and version numbers, but are otherwise incompatible with each other. The **FaxObs Server Interface** (section [3.1.4.2](#Section_3.1.4.2)) is a now obsolete interface implemented by server implementations of the first version of this protocol. The **Fax Server Interface** (section [3.1.4.1](#Section_3.1.4.1)) is the current interface implemented by subsequent versions up to and including the current version of this protocol. All clients implement the same FAX client interface (section [3.2.4](#Section_3.2.4)).
 
 - A server in a domain uses the default server principal name for the Simple and Protected GSSAPI Negotiation Mechanism (SPNEGO) [**security provider**](#gt_security-provider), the [**Authentication Service (AS)**](#gt_authentication-service-as) constant RPC_C_AUTHN_LEVEL_PKT_PRIVACY. For general information concerning Windows AS constants, see [[MSDN-AUTHN]](https://go.microsoft.com/fwlink/?LinkId=89957).
 - An RPC client uses the default server principal name for the SPNEGO security provider, the AS constant RPC_C_AUTHN_LEVEL_PKT_PRIVACY. An RPC client always uses the packet [**authentication level**](#gt_authentication-level), as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.1.5.2.
@@ -2456,7 +2456,7 @@ packet-beta
 
 **PauseServerQueue (4 bytes):** A Boolean flag that specifies whether the fax server has paused the outgoing [**fax queue**](#gt_fax-queue). If this field is TRUE, the outgoing fax queue is paused and the **Queue State** (section 3.1.1) is set to FAX_OUTBOX_PAUSED (0x00000004). If this field is FALSE, the outgoing fax queue is not paused, and the **Queue State** is either 0x00000000 or FAX_OUTBOX_BLOCKED (0x00000002).
 
-**Fixed_Portion_of_StartCheapTime (4 bytes):** The **Fixed_Portion** block of a **_FAX_TIME** (section [2.2.62](#Section_2.2.61)) structure that indicates the hour and minute values of the current **start cheap time** fax server configuration setting.
+**Fixed_Portion_of_StartCheapTime (4 bytes):** The **Fixed_Portion** block of a **_FAX_TIME** (section [2.2.62](#Section_2.2.62)) structure that indicates the hour and minute values of the current **start cheap time** fax server configuration setting.
 
 **Fixed_Portion_of_StopCheapTime (4 bytes):** The **Fixed_Portion** block of a **_FAX_TIME** that indicates the hour and minute values of the **stop cheap time** fax server configuration setting.
 
@@ -2957,7 +2957,7 @@ packet-beta
 <a id="Section_2.2.36"></a>
 ### 2.2.36 FAX_JOB_STATUS
 
-The **FAX_JOB_STATUS** data type can be passed as a pointer reference inside **FAX_JOB_ENTRY_EXW** (section [2.2.35](#Section_2.2.35)) or **FAX_JOB_ENTRY_EX_1** (section [2.2.34](#Section_2.2.34)).
+The **FAX_JOB_STATUS** data type can be passed as a pointer reference inside **FAX_JOB_ENTRY_EXW** (section [2.2.35](#Section_2.2.5)) or **FAX_JOB_ENTRY_EX_1** (section [2.2.34](#Section_2.2.34)).
 
 This data structure is custom marshaled as follows and uses the custom-marshaling rules defined in section [2.2.1](#Section_2.2.1).
 
@@ -4868,7 +4868,7 @@ packet-beta
   128-255: "Padding (24 bytes)"
 ```
 
-**Fixed_Portion of JobInfo (16 bytes):** The **Fixed_Portion** of a **FAX_EVENT_JOB** (section [2.2.80](#Section_2.2.80)) structure describing the status of an existing job in the queue or archives.
+**Fixed_Portion of JobInfo (16 bytes):** The **Fixed_Portion** of a **FAX_EVENT_JOB** (section [2.2.80](#Section_2.2.66)) structure describing the status of an existing job in the queue or archives.
 
 **Padding (24 bytes):** Padding to align the size of the **Fixed_Portion** of this data structure to the required size of 40 bytes. For more information, see **FAX_EVENT_EX** (section [2.2.67](#Section_2.2.67)).
 
@@ -4940,7 +4940,7 @@ packet-beta
   96-223: "Padding (28 bytes)"
 ```
 
-**Fixed_Portion of NewCall (12 bytes):** A **FAX_EVENT_NEW_CALL** (section [2.2.72](#Section_2.2.72)) structure that contains information about the new incoming call detected by the fax service.
+**Fixed_Portion of NewCall (12 bytes):** A **FAX_EVENT_NEW_CALL** (section [2.2.72](#Section_2.2.66)) structure that contains information about the new incoming call detected by the fax service.
 
 **Padding (28 bytes):** Padding to align the size of the **Fixed_Portion** of this data structure to the required size of 40 bytes. For more information, see **FAX_EVENT_EX** (section [2.2.67](#Section_2.2.67)).
 
@@ -4990,7 +4990,7 @@ packet-beta
   64-191: "Padding (32 bytes)"
 ```
 
-**DeviceStatus (8 bytes):** The **DeviceStatus** field contains a **FAX_EVENT_DEVICE_STATUS** (section [2.2.69](#Section_2.2.69)) structure that indicates the status of the fax device.
+**DeviceStatus (8 bytes):** The **DeviceStatus** field contains a **FAX_EVENT_DEVICE_STATUS** (section [2.2.69](#Section_2.2.66)) structure that indicates the status of the fax device.
 
 **Padding (32 bytes):** Padding to align the size of the **Fixed_Portion** of this data structure to the required size of 40 bytes. For more information, see **FAX_EVENT_EX** (section [2.2.67](#Section_2.2.67)).
 
@@ -5067,7 +5067,7 @@ packet-beta
   128-255: "Padding (16 bytes)"
 ```
 
-**Fixed_Portion of JobInfo (24 bytes):** The **Fixed_Portion** of a **FAX_EVENT_JOB_1** (section [2.2.70](#Section_2.2.80)) structure with status about an existing job in the queue or archives.
+**Fixed_Portion of JobInfo (24 bytes):** The **Fixed_Portion** of a **FAX_EVENT_JOB_1** (section [2.2.70](#Section_2.2.66)) structure with status about an existing job in the queue or archives.
 
 **Padding (16 bytes):** Padding to align the size of the **Fixed_Portion** of this data structure to the required size of 40 bytes. For more information, see **FAX_EVENT_EX_1** (section [2.2.68](#Section_2.2.68)).
 
@@ -5139,7 +5139,7 @@ packet-beta
   96-223: "Padding (28 bytes)"
 ```
 
-**Fixed_Portion of NewCall (12 bytes):** The **Fixed_Portion** of a **FAX_EVENT_NEW_CALL** (section [2.2.72](#Section_2.2.72)) structure that contains information about the new incoming call detected by the fax service.
+**Fixed_Portion of NewCall (12 bytes):** The **Fixed_Portion** of a **FAX_EVENT_NEW_CALL** (section [2.2.72](#Section_2.2.66)) structure that contains information about the new incoming call detected by the fax service.
 
 **Padding (28 bytes):** Padding to align the size of the **Fixed_Portion** of this data structure to the required size of 40 bytes. For more information, see **FAX_EVENT_EX_1** (section [2.2.68](#Section_2.2.68)).
 
@@ -5190,7 +5190,7 @@ packet-beta
   64-191: "Padding (32 bytes)"
 ```
 
-**DeviceStatus (8 bytes):** The **DeviceStatus** field contains a **FAX_EVENT_DEVICE_STATUS** (section [2.2.69](#Section_2.2.69)) structure that indicates the status of the fax device.
+**DeviceStatus (8 bytes):** The **DeviceStatus** field contains a **FAX_EVENT_DEVICE_STATUS** (section [2.2.69](#Section_2.2.66)) structure that indicates the status of the fax device.
 
 **Padding (32 bytes):** Padding to align the size of the **Fixed_Portion** of this data structure to the required size of 40 bytes. For more information, see **FAX_EVENT_EX_1** (section [2.2.68](#Section_2.2.68)).
 
@@ -6230,13 +6230,13 @@ Methods in RPC Opnum Order
 | [FAX_GetServicePrinters](#Section_3.1.4.1.63) | This method is called by the client to obtain a list of printers that are visible to the fax service. Opnum: 0 |
 | [FAX_ConnectionRefCount](#Section_3.1.4.1.11) | This method is called by the client to connect, disconnect, or release a connection between the fax client and the fax server. Opnum: 1 |
 | [FAX_OpenPort](#Section_3.1.4.1.65) | This method is called by the client to open a fax port and obtain a fax port handle for subsequent use in other fax methods. Opnum: 2 |
-| [FAX_ClosePort](#Section_3.1.4.1.91) | This method is called by the client to close an opened fax port. Opnum: 3 |
+| [FAX_ClosePort](#Section_3.1.4.1.90) | This method is called by the client to close an opened fax port. Opnum: 3 |
 | [FAX_EnumJobs](#Section_3.1.4.1.21) | This method is called by the client to enumerate all the fax jobs on the specified fax server. Opnum: 4 |
 | [FAX_GetJob](#Section_3.1.4.1.41) | This method is called by the client to retrieve information about a specified fax job. Opnum: 5 |
 | [FAX_SetJob](#Section_3.1.4.1.82) | This method is called by the client to pause, resume, cancel, or restart a specified fax job. Opnum: 6 |
 | [FAX_GetPageData](#Section_3.1.4.1.48) | This method is called by the client to retrieve data in the first page of an outgoing fax job. Opnum: 7 |
 | [FAX_GetDeviceStatus](#Section_3.1.4.1.38) | This method is called by the client to retrieve information about a specified fax device (port). Opnum: 8 |
-| [FAX_Abort](#Section_3.1.4.1.29) | This method is called by the client to abort a specified fax job on the server. Opnum: 9 |
+| [FAX_Abort](#Section_3.1.4.1.2) | This method is called by the client to abort a specified fax job on the server. Opnum: 9 |
 | [FAX_EnumPorts](#Section_3.1.4.1.28) | This method is called by the client to enumerate and obtain information about all the devices (ports) on the server. Opnum: 10 |
 | [FAX_GetPort](#Section_3.1.4.1.51) | This method is called by the client to retrieve port status information for a specified port at the server. Opnum: 11 |
 | [FAX_SetPort](#Section_3.1.4.1.88) | This method is called by the client to set fax device information for a specified port at the server. Opnum: 12 |
@@ -6252,8 +6252,8 @@ Methods in RPC Opnum Order
 | [FAX_SetLoggingCategories](#Section_3.1.4.1.83) | This method is called by the client to modify the current logging categories for the fax server. Opnum: 22 |
 | [FAX_GetSecurity](#Section_3.1.4.1.58) | This method is called by the client to retrieve information regarding the fax server's security descriptor. Opnum: 23 |
 | [FAX_SetSecurity](#Section_3.1.4.1.94) | This method is called by the client to set the fax server's security descriptor. Opnum: 24 |
-| [FAX_AccessCheck](#Section_3.1.4.1.30) | This method is called by the client to check whether it has access permissions to do a particular server operation. Opnum: 25 |
-| [FAX_CheckServerProtSeq](#Section_3.1.4.1.74) | This method is called by the client to validate whether a specified protocol sequence is supported by the fax server. Opnum: 26 |
+| [FAX_AccessCheck](#Section_3.1.4.1.39) | This method is called by the client to check whether it has access permissions to do a particular server operation. Opnum: 25 |
+| [FAX_CheckServerProtSeq](#Section_3.1.4.1.71) | This method is called by the client to validate whether a specified protocol sequence is supported by the fax server. Opnum: 26 |
 | [FAX_SendDocumentEx](#Section_3.1.4.1.73) | This method is called by the client to send a specified fax job. Opnum: 27 |
 | [FAX_EnumJobsEx](#Section_3.1.4.1.22) | This method is called by the client to enumerate a specified set of jobs on the server's [**queue**](#gt_queue). Opnum: 28 |
 | [FAX_GetJobEx](#Section_3.1.4.1.42) | This method is called by the client to retrieve information regarding a specified job at the server. Opnum: 29 |
@@ -6278,12 +6278,12 @@ Methods in RPC Opnum Order
 | [FAX_EnumPortsEx](#Section_3.1.4.1.29) | This method is called by the client to enumerate detailed port state information for each device connected to the fax server. Opnum: 48 |
 | [FAX_GetExtensionData](#Section_3.1.4.1.39) | This method is called by the client to retrieve the extension data for a device. Opnum: 49 |
 | [FAX_SetExtensionData](#Section_3.1.4.1.79) | This method is called by the client to write the extension data for a device. Opnum: 50 |
-| [FAX_AddOutboundGroup](#Section_3.1.4.1.56) | This method is called by the client to add a new outbound [**routing group**](#gt_routing-group) on the fax server. Opnum: 51 |
+| [FAX_AddOutboundGroup](#Section_3.1.4.1.51) | This method is called by the client to add a new outbound [**routing group**](#gt_routing-group) on the fax server. Opnum: 51 |
 | [FAX_SetOutboundGroup](#Section_3.1.4.1.85) | This method is called by the client to set a new device list to an existing outbound routing group. Opnum: 52 |
 | [FAX_RemoveOutboundGroup](#Section_3.1.4.1.71) | This method is called by the client to remove an existing outbound routing group from the fax server. Opnum: 53 |
 | [FAX_EnumOutboundGroups](#Section_3.1.4.1.26) | This method is called by the client to enumerate the outbound routing groups on the fax server. Opnum: 54 |
 | [FAX_SetDeviceOrderInGroup](#Section_3.1.4.1.78) | This method is called by the client to set the order of a single device in a group of outbound routing devices. Opnum: 55 |
-| [FAX_AddOutboundRule](#Section_3.1.4.1.6) | This method is called by the client to add a new outbound [**routing rule**](#gt_routing-rule). Opnum: 56 |
+| [FAX_AddOutboundRule](#Section_3.1.4.1.63) | This method is called by the client to add a new outbound [**routing rule**](#gt_routing-rule). Opnum: 56 |
 | [FAX_RemoveOutboundRule](#Section_3.1.4.1.72) | This method is called by the client to remove an existing outbound routing rule. Opnum: 57 |
 | [FAX_SetOutboundRule](#Section_3.1.4.1.86) | This method is called by the client to set the information about an individual fax outbound routing rule. Opnum: 58 |
 | [FAX_EnumOutboundRules](#Section_3.1.4.1.27) | This method is called by the client to enumerate all the outbound routing rules that are present on the fax server. Opnum: 59 |
@@ -6313,7 +6313,7 @@ Methods in RPC Opnum Order
 | [FAX_SetRecipientsLimit](#Section_3.1.4.1.92) | This method is called by the client to set the recipients limit of a single [**broadcast**](#gt_broadcast) job. Opnum: 83 |
 | [FAX_GetRecipientsLimit](#Section_3.1.4.1.56) | This method is called by the client to retrieve the recipients limit of a single broadcast job. Opnum: 84 |
 | [FAX_GetServerSKU](#Section_3.1.4.1.62) | This method is called by the client to retrieve the [**SKU**](#gt_stock-keeping-unit-sku) of the fax server operating system. Opnum: 85 |
-| [FAX_CheckValidFaxFolder](#Section_3.1.4.1.84) | This method is called by the client to check whether the specified path is accessible to the fax server. Opnum: 86 |
+| [FAX_CheckValidFaxFolder](#Section_3.1.4.1.88) | This method is called by the client to check whether the specified path is accessible to the fax server. Opnum: 86 |
 | [FAX_GetJobEx2](#Section_3.1.4.1.43) | This method is called by the client to retrieve information about a specified job. Opnum: 87 |
 | [FAX_EnumJobsEx2](#Section_3.1.4.1.23) | This method is called by the client to enumerate a specified set of jobs on the server's queue for a specific fax account. Opnum: 88 |
 | [FAX_GetMessageEx](#Section_3.1.4.1.46) | This method is called by the client to retrieve a particular message from one of the specified fax message archives. Opnum: 89 |
@@ -6328,7 +6328,7 @@ Methods in RPC Opnum Order
 | [FAX_SetGeneralConfiguration](#Section_3.1.4.1.80) | This method is called by the client to set the general configuration options for the server. Opnum: 98 |
 | [FAX_GetSecurityEx2](#Section_3.1.4.1.60) | This method is called by the client to retrieve information about the fax security descriptor from the fax server. Opnum: 99 |
 | [FAX_SetSecurityEx2](#Section_3.1.4.1.95) | This method is called by the client to set the security descriptor of the fax server. Opnum: 100 |
-| [FAX_AccessCheckEx2](#Section_3.1.4.1.46) | This method is called by the client to check whether it has access permissions for a particular server operation. Opnum: 101 |
+| [FAX_AccessCheckEx2](#Section_3.1.4.1.40) | This method is called by the client to check whether it has access permissions for a particular server operation. Opnum: 101 |
 | [FAX_ReAssignMessage](#Section_3.1.4.1.67) | This method is called by the client to assign the specified fax message to a set of users. Opnum: 102 |
 | [FAX_SetMessage](#Section_3.1.4.1.84) | This method is called by the client to set message properties for a specified message. Opnum: 103 |
 | [FAX_GetConfigOption](#Section_3.1.4.1.35) | This method is called by the client to retrieve a configuration setting at the server. Opnum: 104 |
@@ -6353,7 +6353,7 @@ The **FAX_ConnectFaxServer** method or the **FAX_ConnectionRefCount** method MUS
 - **FAX_GetJob** (section [3.1.4.1.41](#Section_3.1.4.1.41))
 - **FAX_SetJob** (section [3.1.4.1.82](#Section_3.1.4.1.82))
 - **FAX_GetPageData** (section [3.1.4.1.48](#Section_3.1.4.1.48))
-- **FAX_Abort** (section [3.1.4.1.2](#Section_3.1.4.1.29))
+- **FAX_Abort** (section [3.1.4.1.2](#Section_3.1.4.1.2))
 - **FAX_EnumPorts** (section [3.1.4.1.28](#Section_3.1.4.1.28))
 - **FAX_EnumGlobalRoutingInfo** (section [3.1.4.1.20](#Section_3.1.4.1.20))
 - **FAX_SetGlobalRoutingInfo** (section [3.1.4.1.81](#Section_3.1.4.1.81))
@@ -6363,8 +6363,8 @@ The **FAX_ConnectFaxServer** method or the **FAX_ConnectionRefCount** method MUS
 - **FAX_SetLoggingCategories** (section [3.1.4.1.83](#Section_3.1.4.1.83))
 - **FAX_GetSecurity** (section [3.1.4.1.58](#Section_3.1.4.1.58))
 - **FAX_SetSecurity** (section [3.1.4.1.94](#Section_3.1.4.1.94))
-- **FAX_AccessCheck** (section [3.1.4.1.3](#Section_3.1.4.1.30))
-- **FAX_CheckServerProtSeq** (section [3.1.4.1.7](#Section_3.1.4.1.74))
+- **FAX_AccessCheck** (section [3.1.4.1.3](#Section_3.1.4.1.39))
+- **FAX_CheckServerProtSeq** (section [3.1.4.1.7](#Section_3.1.4.1.71))
 - **FAX_SendDocumentEx** (section [3.1.4.1.73](#Section_3.1.4.1.73))
 - **FAX_EnumJobsEx** (section [3.1.4.1.22](#Section_3.1.4.1.22))
 - **FAX_GetJobEx** (section [3.1.4.1.42](#Section_3.1.4.1.42))
@@ -6389,12 +6389,12 @@ The **FAX_ConnectFaxServer** method or the **FAX_ConnectionRefCount** method MUS
 - **FAX_EnumPortsEx** (section [3.1.4.1.29](#Section_3.1.4.1.29))
 - **FAX_GetExtensionData** (section [3.1.4.1.39](#Section_3.1.4.1.39))
 - **FAX_SetExtensionData** (section [3.1.4.1.79](#Section_3.1.4.1.79))
-- **FAX_AddOutboundGroup** (section [3.1.4.1.5](#Section_3.1.4.1.56))
+- **FAX_AddOutboundGroup** (section [3.1.4.1.5](#Section_3.1.4.1.51))
 - **FAX_SetOutboundGroup** (section [3.1.4.1.85](#Section_3.1.4.1.85))
 - **FAX_RemoveOutboundGroup** (section [3.1.4.1.71](#Section_3.1.4.1.71))
 - **FAX_EnumOutboundGroups** (section [3.1.4.1.26](#Section_3.1.4.1.26))
 - **FAX_SetDeviceOrderInGroup** (section [3.1.4.1.78](#Section_3.1.4.1.78))
-- **FAX_AddOutboundRule** (section [3.1.4.1.6](#Section_3.1.4.1.6))
+- **FAX_AddOutboundRule** (section [3.1.4.1.6](#Section_3.1.4.1.63))
 - **FAX_RemoveOutboundRule** section [3.1.4.1.72](#Section_3.1.4.1.72))
 - **FAX_SetOutboundRule** (section [3.1.4.1.86](#Section_3.1.4.1.86))
 - **FAX_EnumOutboundRules** (section [3.1.4.1.27](#Section_3.1.4.1.27))
@@ -6411,7 +6411,7 @@ The **FAX_ConnectFaxServer** method or the **FAX_ConnectionRefCount** method MUS
 - **FAX_SetRecipientsLimit** (section [3.1.4.1.92](#Section_3.1.4.1.92))
 - **FAX_GetRecipientsLimit** (section [3.1.4.1.56](#Section_3.1.4.1.56))
 - **FAX_GetServerSKU** (section [3.1.4.1.62](#Section_3.1.4.1.62))
-- **FAX_CheckValidFaxFolder** (section [3.1.4.1.8](#Section_3.1.4.1.84))
+- **FAX_CheckValidFaxFolder** (section [3.1.4.1.8](#Section_3.1.4.1.88))
 - **FAX_GetJobEx2** (section [3.1.4.1.43](#Section_3.1.4.1.43))
 - **FAX_EnumJobsEx2** (section [3.1.4.1.23](#Section_3.1.4.1.23))
 - **FAX_GetMessageEx** (section [3.1.4.1.46](#Section_3.1.4.1.46))
@@ -6423,14 +6423,14 @@ The **FAX_ConnectFaxServer** method or the **FAX_ConnectionRefCount** method MUS
 - **FAX_SetGeneralConfiguration** (section [3.1.4.1.80](#Section_3.1.4.1.80))
 - **FAX_GetSecurityEx2** (section [3.1.4.1.60](#Section_3.1.4.1.60))
 - **FAX_SetSecurityEx2** (section [3.1.4.1.95](#Section_3.1.4.1.95))
-- **FAX_AccessCheckEx2** (section [3.1.4.1.4](#Section_3.1.4.1.46))
+- **FAX_AccessCheckEx2** (section [3.1.4.1.4](#Section_3.1.4.1.40))
 - **FAX_ReAssignMessage** (section [3.1.4.1.67](#Section_3.1.4.1.67))
 - **FAX_SetMessage** (section [3.1.4.1.84](#Section_3.1.4.1.84))
 - **FAX_GetConfigOption** (section [3.1.4.1.35](#Section_3.1.4.1.35))
 The following methods MUST be used by the fax client to open or close a fax port.
 
 - **FAX_OpenPort** (section [3.1.4.1.65](#Section_3.1.4.1.65))
-- **FAX_ClosePort** (section [3.1.4.1.9](#Section_3.1.4.1.91))
+- **FAX_ClosePort** (section [3.1.4.1.9](#Section_3.1.4.1.90))
 The **FAX_OpenPort** method MUST be called to open a fax port and obtain a fax port handle for use with the following methods. The port MUST be closed using **FAX_ClosePort**.
 
 - **FAX_GetDeviceStatus** (section [3.1.4.1.38](#Section_3.1.4.1.38))
@@ -6802,7 +6802,7 @@ The **FAX_ConnectFaxServer (Opnum 80)** method is called by the client to create
 
 Protocol version FAX_API_VERSION_0 (0x00000000) fax servers SHOULD NOT implement this method.
 
-If the underlying RPC layer fails this call by returning RPC_S_PROCNUM_OUT_OF_RANGE (0x000006D1), the fax client SHOULD consider the server protocol (and API version) to be FAX_API_VERSION_0 and MAY retry this request by switching to the **FaxObs Server Interface** (section [3.1.4.2](#Section_3.1.4.2)) and calling the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method.
+If the underlying RPC layer fails this call by returning RPC_S_PROCNUM_OUT_OF_RANGE (0x000006D1), the fax client SHOULD consider the server protocol (and API version) to be FAX_API_VERSION_0 and MAY retry this request by switching to the **FaxObs Server Interface** (section [3.1.4.2](#Section_3.1.4.2)) and calling the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method.
 
 In response, if the **bAutoCreateAccountOnConnect** field of the **FAX_GENERAL_CONFIG** (section [2.2.31](#Section_2.2.31)) structure is set to FALSE, the server MUST validate whether the calling user's authenticated user identity has a fax user account associated on the fax server and MUST validate whether this client's fax user account has any fax user access rights. On success, the server MUST create a connection handle.
 
@@ -7313,7 +7313,7 @@ error_status_t FAX_EnumJobsEx(
 
 **dwJobTypes:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) value. The *dwJobTypes* parameter SHOULD be a bitwise combination of job types defined in section [3.1.1](#Section_3.1.1). Only jobs that are of the requested types SHOULD be returned in the buffer. If zero is passed as a value for the parameter (0 is not a valid job type), the server will return success, but with a zero-byte buffer.
 
-**Buffer:** A pointer to the address of a buffer to receive an array of **FAX_JOB_ENTRY_EXW** (section [2.2.35](#Section_2.2.35)) structures followed by an array of the same number of **FAX_JOB_STATUS** (section [2.2.36](#Section_2.2.36)) structures, followed by other data pointed at from these structures (from pointer type fields). Each **FAX_JOB_ENTRY_EXW** and **FAX_JOB_STATUS** pair describes one [**fax job**](#gt_fax-job). For each returned **FAX_JOB_ENTRY_EXW**, if the **pStatus** pointer is not NULL, it MUST point to one of the **FAX_JOB_STATUS** in the buffer. If the **pStatus** pointer is NULL, the **FAX_JOB_STATUS** attached to the current **FAX_JOB_ENTRY_EXW** is located at the corresponding index position in the structure array. This data is serialized on the wire. The field length MUST be clamped to 32 bits before serialization.
+**Buffer:** A pointer to the address of a buffer to receive an array of **FAX_JOB_ENTRY_EXW** (section [2.2.35](#Section_2.2.5)) structures followed by an array of the same number of **FAX_JOB_STATUS** (section [2.2.36](#Section_2.2.36)) structures, followed by other data pointed at from these structures (from pointer type fields). Each **FAX_JOB_ENTRY_EXW** and **FAX_JOB_STATUS** pair describes one [**fax job**](#gt_fax-job). For each returned **FAX_JOB_ENTRY_EXW**, if the **pStatus** pointer is not NULL, it MUST point to one of the **FAX_JOB_STATUS** in the buffer. If the **pStatus** pointer is NULL, the **FAX_JOB_STATUS** attached to the current **FAX_JOB_ENTRY_EXW** is located at the corresponding index position in the structure array. This data is serialized on the wire. The field length MUST be clamped to 32 bits before serialization.
 
 For example, when three jobs are successfully enumerated, the call returns ERROR_SUCCESS with a value of 3 for the **lpdwJobs* output argument. The returned data is arranged in memory as follows, from the start of the address specified by the *Buffer* parameter:
 
@@ -7542,7 +7542,7 @@ LPBYTE* ppData,
 
 **hFaxHandle:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FAX_ConnectFaxServer** (section [3.1.4.1.10](#Section_3.1.4.1.100)) or **FAX_ConnectionRefCoun**t (section [3.1.4.1.11](#Section_3.1.4.1.11)) method call used to connect to the fax server.
 
-**ppData:** The address of a pointer to a buffer containing an array of **_RPC_FAX_OUTBOUND_ROUTING_GROUPW** (section [2.2.40](#Section_2.2.40)) structures.
+**ppData:** The address of a pointer to a buffer containing an array of **_RPC_FAX_OUTBOUND_ROUTING_GROUPW** (section [2.2.40](#Section_2.2.39)) structures.
 
 **lpdwDataSize:** The size, in bytes, of the returned *ppData* buffer.
 
@@ -7664,7 +7664,7 @@ error_status_t FAX_EnumPortsEx(
 
 **hFaxHandle:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FAX_ConnectFaxServer** (section [3.1.4.1.10](#Section_3.1.4.1.100)) or **FAX_ConnectionRefCount** (section [3.1.4.1.11](#Section_3.1.4.1.11)) method call used to connect to the fax server.
 
-**Buffer:** A pointer to the address of a buffer to receive an array of **_FAX_PORT_INFO_EXW** (section [2.2.46](#Section_2.2.45)) structures. Each structure describes one fax port. The data includes, among other items, the line identifier and the current status and capability of the port.
+**Buffer:** A pointer to the address of a buffer to receive an array of **_FAX_PORT_INFO_EXW** (section [2.2.46](#Section_2.2.8)) structures. Each structure describes one fax port. The data includes, among other items, the line identifier and the current status and capability of the port.
 
 **BufferSize:** A pointer to a **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) in which to return the size, in bytes, of the buffer.
 
@@ -8227,7 +8227,7 @@ In response, the server MUST validate that the message ID is for a valid job. Th
 
 On success, the server MUST return the queued job's job information and the size of the job information.
 
-This method is an extended version of **FAX_GetJob** (section [3.1.4.1.41](#Section_3.1.4.1.41)), which returns a **FAX_JOB_ENTRY_EXW** (section [2.2.35](#Section_2.2.35)) structure for the specified message.
+This method is an extended version of **FAX_GetJob** (section [3.1.4.1.41](#Section_3.1.4.1.41)), which returns a **FAX_JOB_ENTRY_EXW** (section [2.2.35](#Section_2.2.5)) structure for the specified message.
 
 The client SHOULD free the returned buffer.
 
@@ -8676,7 +8676,7 @@ error_status_t FAX_GetPortEx(
 
 **dwDeviceId:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) that indicates a unique identifier that distinguishes the device. The value of *dwDeviceId* MUST be greater than zero.
 
-**Buffer:** A pointer to a buffer to hold a **_FAX_PORT_INFO_EXW** (section [2.2.46](#Section_2.2.45)) structure.
+**Buffer:** A pointer to a buffer to hold a **_FAX_PORT_INFO_EXW** (section [2.2.46](#Section_2.2.8)) structure.
 
 **BufferSize:** A pointer to a **DWORD** in which to return the size, in bytes, of the buffer.
 
@@ -9847,7 +9847,7 @@ error_status_t FAX_SetJob(
 
 | Value/code | Meaning |
 | --- | --- |
-| JC_DELETE 0x00000001 | The fax server MUST cancel the specified fax job. This job can be in an active or [**queued**](#gt_queue) state. This is equivalent with the **FAX_Abort** (section [3.1.4.1.2](#Section_3.1.4.1.29)) call. |
+| JC_DELETE 0x00000001 | The fax server MUST cancel the specified fax job. This job can be in an active or [**queued**](#gt_queue) state. This is equivalent with the **FAX_Abort** (section [3.1.4.1.2](#Section_3.1.4.1.2)) call. |
 | JC_PAUSE 0x00000002 | The fax server MUST pause the specified fax job if the job status is JS_PENDING or JS_RETRYING. |
 | JC_RESUME 0x00000003 | The fax server MUST resume the specified fax job if it is in a paused state and return the job status to the value it had when the job was paused: JS_PENDING or JS_RETRYING. |
 | JC_RESTART 0x00000003 | The fax server MUST restart the specified fax job. |
@@ -10743,7 +10743,7 @@ The **FAX_WriteFile (Opnum 70)** method is called by the client.
 
 The server MUST validate the *hCopy* handle to be a copy handle that has been returned by a previous call to **FAX_StartCopyToServer** (section [3.1.4.1.97](#Section_3.1.4.1.97)) in the *lpHandle* output argument. The server MUST validate that the data size is not 0. On success, the server MUST copy the specified data to the file specified by the *hCopy* copy handle in the **server queue directory** (section [3.1.1](#Section_3.1.1)).
 
-The fax client SHOULD split the contents of the file in one or multiple parts (chunks) and individually copy each part (chunk) with a **FAX_WriteFile** call<180> until the entire file contents are copied. When the entire contents of the file are copied, the fax client MUST notify the fax server by calling the **FAX_EndCopy** (section [3.1.4.1.15](#Section_3.1.4.1.15)) method as described in **Sequencing Rules** (section [3.1.4.1.1](#Section_3.1.4.1.100)).
+The fax client SHOULD split the contents of the file in one or multiple parts (chunks) and individually copy each part (chunk) with a **FAX_WriteFile** call<180> until the entire file contents are copied. When the entire contents of the file are copied, the fax client MUST notify the fax server by calling the **FAX_EndCopy** (section [3.1.4.1.15](#Section_3.1.4.1.15)) method as described in **Sequencing Rules** (section [3.1.4.1.1](#Section_3.1.4.1.16)).
 
 If the fax server fails a **FAX_WriteFile** call returning ERROR_INVALID_HANDLE during a copy file operation successfully started by the fax client with **FAX_StartCopyToServer**, the fax client MAY call **FAX_StartCopyToServer** again to restart the copy file operation from the beginning of the file.
 
@@ -10786,8 +10786,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [FaxObs_ConnectionRefCount](#Section_3.1.4.2.23) | Called by the client to connect or disconnect from the server. Opnum: 0 |
-| [FaxObs_GetVersion](#Section_3.1.4.2.3) | Called by the client to obtain the version number of the server. Opnum: 1 |
+| [FaxObs_ConnectionRefCount](#Section_3.1.4.2.26) | Called by the client to connect or disconnect from the server. Opnum: 0 |
+| [FaxObs_GetVersion](#Section_3.1.4.2.33) | Called by the client to obtain the version number of the server. Opnum: 1 |
 | [FaxObs_GetInstallType](#Section_3.1.4.2.4) | Called by the client to obtain information about the fax server installation. Opnum: 2 |
 | [FaxObs_OpenPort](#Section_3.1.4.2.5) | Called by the client to open a fax port and obtain a fax port handle. Opnum: 3 |
 | [FaxObs_ClosePort](#Section_3.1.4.2.6) | Called by the client to close a fax port and release the fax port handle obtained with a **FaxObs_OpenPort** (section 3.1.4.2.5) call. Opnum: 4 |
@@ -10831,9 +10831,9 @@ All methods MUST NOT throw exceptions except those that are thrown by the underl
 
 The successful outcome of a series of [**RPC**](#gt_remote-procedure-call-rpc) method calls depends on the sequence of calls made; this is because state is maintained on the server throughout the method invocations. It is valid to call RPC methods concurrently; when this happens, the server MUST ensure that it remains in a consistent state while processing the concurrent method calls.
 
-The client MUST call the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method to connect to the server. The client MUST call the same **FaxObs_ConnectionRefCount** method to close this connection. The client MUST successfully call the **FaxObs_ConnectionRefCount** method before calling any of the following methods:
+The client MUST call the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method to connect to the server. The client MUST call the same **FaxObs_ConnectionRefCount** method to close this connection. The client MUST successfully call the **FaxObs_ConnectionRefCount** method before calling any of the following methods:
 
-- **FaxObs_GetVersion** (section [3.1.4.2.3](#Section_3.1.4.2.3))
+- **FaxObs_GetVersion** (section [3.1.4.2.3](#Section_3.1.4.2.33))
 - **FaxObs_GetInstallType** (section [3.1.4.2.4](#Section_3.1.4.2.4))
 - **FaxObs_OpenPort** (section [3.1.4.2.5](#Section_3.1.4.2.5))
 - **FaxObs_ClosePort** (section [3.1.4.2.6](#Section_3.1.4.2.6))
@@ -10934,7 +10934,7 @@ error_status_t FaxObs_GetVersion(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCoun**t (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCoun**t (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **Version:** A pointer to a **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) value where on return from this call, the server MUST write its version number. The server MUST write to the low-order **WORD** ([MS-DTYP] section 2.2.61) of this **DWORD** value the major version number and to the high-order **WORD** the minor version number. The returned **DWORD** value format is as follows:
 
@@ -10971,7 +10971,7 @@ error_status_t FaxObs_GetInstallType(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **InstallType:** A pointer to a **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) value where, upon return from this call, the fax server MUST write the install type of the fax server. This value MUST be 0x00000002 for FAX_INSTALL_SERVER. The values 0x00000001, 0x00000004, and 0x00000008 are reserved for local use.
 
@@ -11020,7 +11020,7 @@ error_status_t FaxObs_OpenPort(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **DeviceId:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) variable that contains the line identifier for the receiving device (port). The client SHOULD call the **FaxObs_EnumPorts** (section [3.1.4.2.15](#Section_3.1.4.2.15)) method to retrieve a valid value for this parameter.
 
@@ -11095,7 +11095,7 @@ error_status_t FaxObs_SendDocument(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **FileName:** A null-terminated character string that contains the name of the file, without path information, of the fax document in TIFF format. The server checks the **server queue directory** for this file. Before making this call, the client can create a file on the server by calling **FaxObs_GetQueueFileName** (section [3.1.4.2.8](#Section_3.1.4.2.8)) and then provide content for the file by using a protocol outside of this specification, such as [MS-SMB](../MS-SMB/MS-SMB.md).
 
@@ -11137,7 +11137,7 @@ LPWSTR FileName,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **FileName:** A buffer that MUST be allocated by the client to hold *FileNameSize* characters. On successful return from this call the server MUST write to this buffer a null-terminated character string containing the path name, including file name and extension, for a new unique file name within the fax **server queue directory**.<192>
 
@@ -11170,7 +11170,7 @@ LPBYTE* Buffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **Buffer:** A pointer to the address of the returned buffer containing an array of **_FAX_JOB_ENTRY** (section [2.2.6](#Section_2.2.6)) structures.
 
@@ -11213,7 +11213,7 @@ LPBYTE* Buffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **JobId:** A number that uniquely identifies a queued or active fax job on the server.
 
@@ -11249,7 +11249,7 @@ error_status_t FaxObs_SetJob(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **JobId:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) containing a value that uniquely identifies the fax job to modify.
 
@@ -11303,7 +11303,7 @@ LPBYTE* Buffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **JobId:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) containing the unique number identifying the fax job that is associated with the page of data.
 
@@ -11380,7 +11380,7 @@ error_status_t FaxObs_Abort(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **JobId:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) containing a unique number that identifies the fax job to terminate.
 
@@ -11416,7 +11416,7 @@ LPBYTE* PortBuffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **PortBuffer:** A pointer to the address of the returned buffer containing an array of **_FAX_PORT_INFO** (section [2.2.8](#Section_2.2.8)) structures. Each structure describes one fax port (device).
 
@@ -11690,7 +11690,7 @@ LPBYTE* RoutingInfoBuffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **RoutingInfoBuffer:** A pointer to the address of the returned buffer containing an array of **_FAX_GLOBAL_ROUTING_INFOW** (section [2.2.33](#Section_2.2.32)) structures. Each structure contains information about one fax routing method, as it pertains to the entire fax server.
 
@@ -11724,7 +11724,7 @@ error_status_t FaxObs_SetGlobalRoutingInfo(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **RoutingInfo:** A pointer to a buffer that contains a **FAX_GLOBAL_ROUTING_INFOW** (section [2.2.32](#Section_2.2.32)) structure.
 
@@ -11761,7 +11761,7 @@ LPBYTE* Buffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **Buffer:** A pointer to the address of the returned buffer containing a **_FAX_CONFIGURATIONW** (section [2.2.29](#Section_2.2.28)) structure. The structure contains the current configuration settings for the fax server.
 
@@ -11792,7 +11792,7 @@ error_status_t FaxObs_SetConfiguration(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **FaxConfig:** A pointer to a **FAX_CONFIGURATIONW** (section [2.2.28](#Section_2.2.28)) structure. If the **Branding** structure member is TRUE, the fax server SHOULD generate a brand that contains transmission-related information, such as the transmitting subscriber identifier, date, time, and page count. If the **UseDeviceTsid** structure member is TRUE, the server SHOULD use the device's transmitting subscriber identifier. If the **ServerCp** structure member is TRUE, the client SHOULD use a common cover page stored on the fax server; if this member is FALSE, the client SHOULD use a personal cover page template. If the **PauseServerQueue** structure member is TRUE, the server SHOULD pause the outgoing [**fax queue**](#gt_fax-queue). If the **ArchiveOutgoingFaxes** structure member is TRUE, the server SHOULD archive transmissions in the directory specified by the **ArchiveDirectory** member. The fax server SHOULD ignore the **ArchiveDirectory** structure member if the **ArchiveOutgoingFaxes** member is FALSE. The fax server SHOULD retain the discount time period submitted by the client with the **StartCheapTime** and **StopCheapTime** structure members. <209>
 
@@ -11829,7 +11829,7 @@ LPBYTE* Buffer,
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **Buffer:** A pointer to the address of the returned buffer containing an array of **FAX_LOG_CATEGORY** (section [2.2.11](#Section_2.2.11)) structures. The number of structures included in the array is set by *NumberCategories*. Each structure describes one current logging category. The *Name* strings are appended after the **FAX_LOG_CATEGORY** entries.
 
@@ -12152,7 +12152,7 @@ error_status_t FaxObs_AccessCheck(
 
 );
 
-**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.23)) method call used to connect to the fax server.
+**hBinding:** The RPC binding handle for this call. The client SHOULD reuse the RPC binding handle used as an input *hBinding* argument for the **FaxObs_ConnectionRefCount** (section [3.1.4.2.2](#Section_3.1.4.2.26)) method call used to connect to the fax server.
 
 **AccessMask:** A **DWORD** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.9) containing a set of bit flags that define the fax access permissions to check for the fax client user account. This parameter MUST be a bitwise OR combination of generic FaxObs access rights and specific FaxObs access rights that are described in the following tables.
 
@@ -12459,7 +12459,7 @@ Figure 5: Message exchanges when adding an outbound routing rule
 A fax client can add an outbound [**routing rule**](#gt_routing-rule) on the server. To do so, the fax client performs the following steps:
 
 - The client calls **FAX_ConnectFaxServer** (section [3.1.4.1.10](#Section_3.1.4.1.100)) to establish a connection to the fax server. The parameters supplied to this function are the server name and a fax connection handle object. The server tries to establish the connection and returns **false** if the call fails or sets the fax connection handle object if successful.
-- The client calls **FAX_AddOutboundRule** (section [3.1.4.1.6](#Section_3.1.4.1.6)) to add an outbound routing rule on the server. The client passes the following parameters:
+- The client calls **FAX_AddOutboundRule** (section [3.1.4.1.6](#Section_3.1.4.1.63)) to add an outbound routing rule on the server. The client passes the following parameters:
 - A handle to the fax connection
 - The area code of the outbound routing rule
 - The country/region code of the outbound routing rule
@@ -15154,8 +15154,8 @@ The fax server opens the underlying RPC over SMB transport for communication wit
 
 Windows implementations of the fax service check local configuration data, including policy information and operating system information, to determine whether the service is running on a client operating system or a server operating system. The Windows Client operating system returns an error upon receipt of the following method calls:
 
-- **FAX_AddOutboundGroup** (section [3.1.4.1.5](#Section_3.1.4.1.56))
-- **FAX_AddOutboundRule** (section [3.1.4.1.6](#Section_3.1.4.1.6))
+- **FAX_AddOutboundGroup** (section [3.1.4.1.5](#Section_3.1.4.1.51))
+- **FAX_AddOutboundRule** (section [3.1.4.1.6](#Section_3.1.4.1.63))
 - **FAX_EnumOutboundGroups** (section [3.1.4.1.26](#Section_3.1.4.1.26))
 - **FAX_EnumOutboundRules** (section [3.1.4.1.27](#Section_3.1.4.1.27))
 - **FAX_RemoveOutboundRule** (section [3.1.4.1.72](#Section_3.1.4.1.72))
@@ -15265,7 +15265,7 @@ The server returns ERROR_INVALID_PARAMETER to FAX_API_VERSION_0 to clients. The 
 
 <64> Section 3.1.4.1.1: In Windows, the maximum size of each part (chunk) copied in one single **FAX_WriteFile** (section [3.1.4.1.105](#Section_3.1.4.1.105)) or **FAX_ReadFile** (section [3.1.4.1.66](#Section_3.1.4.1.66)) method call is 16,384 bytes.
 
-<65> Section 3.1.4.1.3: The implementation of the **FAX_AccessCheck** (section [3.1.4.1.3](#Section_3.1.4.1.30)) method checks for the presence of a valid fax user account and returns ERROR_ACCESS_DENIED if the calling user (the user logged on the client computer at the time the **FAX_AccessCheck** request is made) does not have a valid fax user account on the server. This feature is not supported on the following versions of Windows: BackOffice Server 2000, Small Business Server 2000, Windows SBS 2003, Windows Home Server, Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
+<65> Section 3.1.4.1.3: The implementation of the **FAX_AccessCheck** (section [3.1.4.1.3](#Section_3.1.4.1.39)) method checks for the presence of a valid fax user account and returns ERROR_ACCESS_DENIED if the calling user (the user logged on the client computer at the time the **FAX_AccessCheck** request is made) does not have a valid fax user account on the server. This feature is not supported on the following versions of Windows: BackOffice Server 2000, Small Business Server 2000, Windows SBS 2003, Windows Home Server, Windows NT, Windows 2000, Windows XP, and Windows Server 2003.
 
 <66> Section 3.1.4.1.3: In Windows, the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md) implementation can stop the invalid call and throw an exception before the call reaches the fax server.
 

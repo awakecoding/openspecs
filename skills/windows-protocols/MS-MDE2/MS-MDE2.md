@@ -3443,7 +3443,7 @@ MDE2 does not modify the RequestSecurityToken operation for the certificate rene
 <a id="Section_3.5.4.1.1"></a>
 ##### 3.5.4.1.1 Messages
 
-MDE2 does not modify the set of messages for the RequestSecurityToken operation for the certificate renewal process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.2).
+MDE2 does not modify the set of messages for the RequestSecurityToken operation for the certificate renewal process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.1).
 
 <a id="Section_3.5.4.1.1.1"></a>
 ###### 3.5.4.1.1.1 RequestSecurityToken
@@ -3622,7 +3622,7 @@ MDE2 does not modify the **RequestSecurityToken** operation for the certificate 
 <a id="Section_3.6.4.1.1"></a>
 ##### 3.6.4.1.1 Messages
 
-MDE2 does not modify the set of messages for the **RequestSecurityToken** operation for the certificate recovery process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.2).
+MDE2 does not modify the set of messages for the **RequestSecurityToken** operation for the certificate recovery process. The set of messages are as specified in section [3.4.4.1.1](#Section_3.4.4.1.1.1).
 
 <a id="Section_3.6.4.1.1.1"></a>
 ###### 3.6.4.1.1.1 RequestSecurityToken

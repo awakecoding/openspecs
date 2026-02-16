@@ -354,7 +354,7 @@ This document uses the following terms:
 **Enrollment Agent rights**: A list of administrator-defined rights or [**ACLs**](#gt_access-control-list-acl) that define the capability of a particular [**principal**](#gt_principal) to obtain a [**certificate**](#gt_certificate), with subject information pertaining to a different [**principal**](#gt_principal), from a [**CA**](#gt_certification-authority-ca). Enrollment Agent is not one of the roles defined in [CIMC-PP].
 
 <a id="gt_enterprise-certificate-authority-enterprise-ca"></a>
-**enterprise certificate authority (enterprise CA)**: A [**certificate authority (CA)**](#gt_certification-authority-ca) that is a member of a [**domain**](#gt_domain) and that uses the [**domain's**](#gt_domain) [**Active Directory**](#gt_active-directory) service to store policy, authentication, and other information related to the operation of the [**CA**](#gt_certification-authority-ca). Specifically, the enterprise CA is a server implementation of the Windows Client Certificate Enrollment Protocol that uses the certificate template data structure (see [MS-CRTD](#Section_1.5.1)) in its [**CA policy algorithm**](#gt_ca-policy-algorithm) implementation.
+**enterprise certificate authority (enterprise CA)**: A [**certificate authority (CA)**](#gt_certification-authority-ca) that is a member of a [**domain**](#gt_domain) and that uses the [**domain's**](#gt_domain) [**Active Directory**](#gt_active-directory) service to store policy, authentication, and other information related to the operation of the [**CA**](#gt_certification-authority-ca). Specifically, the enterprise CA is a server implementation of the Windows Client Certificate Enrollment Protocol that uses the certificate template data structure (see [MS-CRTD](#Section_1.3.1.5)) in its [**CA policy algorithm**](#gt_ca-policy-algorithm) implementation.
 
 <a id="gt_exchange-certificate"></a>
 **exchange certificate**: A [**certificate**](#gt_certificate) that can be used for [**encryption**](#gt_encryption) purposes. This [**certificate**](#gt_certificate) can be used by [**clients**](#gt_client) to encrypt their private keys as part of their [**certificate**](#gt_certificate) request. In Windows environments, an enterprise [**certificate authority (CA)**](#gt_certification-authority-ca) creates an [**exchange certificate**](#gt_exchange-certificate) periodically (by default, weekly), and returns the [**exchange certificate**](#gt_exchange-certificate) upon request of a [**client**](#gt_client). For more information, see [[MSFT-ARCHIVE]](https://go.microsoft.com/fwlink/?LinkId=90177).
@@ -513,7 +513,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-CRTD] Microsoft Corporation, "[Certificate Templates Structure](#Section_1.5.1)".
+[MS-CRTD] Microsoft Corporation, "[Certificate Templates Structure](#Section_1.3.1.5)".
 
 [MS-DCOM] Microsoft Corporation, "[Distributed Component Object Model (DCOM) Remote Protocol](../MS-DCOM/MS-DCOM.md)".
 
@@ -612,12 +612,12 @@ In the preceding figure, the principal components are:
 - CA: The certification authority (CA) that receives configuration and administration tasks. The remote administration protocol that is defined in this document covers the interactions that are shown as a solid line in this figure.
 - Administrator's computer: A client to the CA that performs remote configuration or administration tasks.
 - [**DC**](#gt_domain-controller-dc): An [**Active Directory**](#gt_active-directory) domain controller (DC) includes a [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) as specified in [MS-KILE](../MS-KILE/MS-KILE.md). In most cases, a Kerberos KDC is used to authenticate the parties for authenticated DCOM messages. The protocol that is documented here is built on top of authenticated DCOM messages. Interactions with the DC are shown in the figure as dashed lines. DCOM is documented as specified in [MS-DCOM], which in turn references interactions with the DC.
-The protocol uses two DCOM interfaces: [ICertAdminD (section 3.1.4.1)](#Section_3.2.4.1.5) and [ICertAdminD2 (section 3.1.4.2)](#Section_3.1.4.2.2), which offer additional methods. The two interfaces define a total of 46 methods.
+The protocol uses two DCOM interfaces: [ICertAdminD (section 3.1.4.1)](#Section_3.1.4.2.1) and [ICertAdminD2 (section 3.1.4.2)](#Section_3.1.4.2.1), which offer additional methods. The two interfaces define a total of 46 methods.
 
 The methods of the Certificate Services Remote Administration Protocol fall into the following categories:
 
 - Managing pending certificate requests: A certificate request can be fulfilled immediately or can be held for human administrator approval or other action. When a request is pending human approval, there are ICertAdminD methods that allow the human's administrative console to interact with the CA to query and modify pending requests. For additional information on pending requests, see section [3.1.1.1.1](#Section_3.1.1.1.1) and also [MS-WCCE].
-- Configuring or retrieving data from CA databases: For purposes of this protocol, a CA is built around a logical database, as specified in section [1.3.1.3](#Section_1.3.1.3). A number of methods in this protocol deal with configuration or data retrieval of particular rows or columns of [**tables**](#gt_table) in the logical database.
+- Configuring or retrieving data from CA databases: For purposes of this protocol, a CA is built around a logical database, as specified in section [1.3.1.3](#Section_1.5.4). A number of methods in this protocol deal with configuration or data retrieval of particular rows or columns of [**tables**](#gt_table) in the logical database.
 - Managing [**revocation**](#gt_revocation): This protocol includes methods to tell the CA to revoke a certificate, to query the validity of a certificate, and to deal with the mechanics of publication of [**CRLs**](#gt_certificate-revocation-list-crl).
 - Managing audit: This protocol includes methods that allow the administrator to learn and specify which classes of events generate audit trail entries.
 - Archived [**key**](#gt_key) retrieval: This protocol defines one method for retrieving a private key that was archived as part of a certificate request.
@@ -648,7 +648,7 @@ The following list contains additional details about the four tables:
 - Attribute table: The Attribute table holds the attributes, as specified in [[RFC2986]](https://go.microsoft.com/fwlink/?LinkId=90401), that are contained within a specified [**certificate**](#gt_certificate) request.
 - Extension table: The Extension table holds the X.509 extensions, as specified in [[X509]](https://go.microsoft.com/fwlink/?LinkId=90590), that are contained within a specified certificate request.
 - CRL table: The CRL table holds the [**revocation**](#gt_revocation) data and status for the CA. The CA maintains a CRL database in the form of a table that holds all CRLs (both base and delta, as defined in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 5) that have been issued.
-Methods of this protocol refer to the preceding four tables, which are specified in section [3.1.1](#Section_3.1.1).
+Methods of this protocol refer to the preceding four tables, which are specified in section [3.1.1](#Section_3.2.1).
 
 <a id="Section_1.3.1.4"></a>
 #### 1.3.1.4 CA Roles and Officer Rights
@@ -658,7 +658,7 @@ The Certificate Services Remote Administration Protocol includes methods to get 
 <a id="Section_1.3.1.5"></a>
 #### 1.3.1.5 Certificate Templates
 
-An [**enterprise certificate authority (enterprise CA)**](#gt_enterprise-certificate-authority-enterprise-ca) has to use [**certificate templates**](#gt_certificate-template) that are configured locally in order to support [**certificate**](#gt_certificate) [**enrollment**](#gt_3edb3c30-bb82-4782-9777-19c5006965ef) requests, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md). The complete definition of certificate templates, including the list of [**attributes**](#gt_attribute), flags, and extensions that have been implemented in applicable Windows Server releases , is specified in [MS-CRTD](#Section_1.5.1) and [MS-WCCE].
+An [**enterprise certificate authority (enterprise CA)**](#gt_enterprise-certificate-authority-enterprise-ca) has to use [**certificate templates**](#gt_certificate-template) that are configured locally in order to support [**certificate**](#gt_certificate) [**enrollment**](#gt_3edb3c30-bb82-4782-9777-19c5006965ef) requests, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md). The complete definition of certificate templates, including the list of [**attributes**](#gt_attribute), flags, and extensions that have been implemented in applicable Windows Server releases , is specified in [MS-CRTD](#Section_1.3.1.5) and [MS-WCCE].
 
 <a id="Section_1.3.1.6"></a>
 #### 1.3.1.6 Sanitizing Common Names
@@ -690,7 +690,7 @@ Using input from a higher-layer protocol or application, the DCOM Remote Protoco
 
 This protocol depends on the Netlogon Remote Protocol Specification, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md), for locating the [**domain controller**](#gt_domain-controller-dc).
 
-No other Windows protocol directly depends on the Certificate Services Remote Administration Protocol. However, this protocol is designed to manage a server that implements the Windows Client Certificate Enrollment Protocol, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) as well as the ICertPassage Remote Protocol, as specified in [MS-ICPR](../MS-ICPR/MS-ICPR.md). Certificate Services Remote Administration Protocol shares an ADM with the ICertPassage Remote Protocol and the Windows Client Certificate Enrollment Protocol, as specified in sections [3.1.1.10](#Section_3.1.1.10), [3.1.3](#Section_3.2.3), [3.1.4](#Section_3.1.4), and [3.1.5](#Section_3.2.5). The Certificate Services Remote Administration Protocol, the Windows Client Certificate Enrollment Protocol, and the ICertPassage Remote Protocol use a common list of configuration data elements, defined in sections [3.1.1.6](../MS-WCCE/MS-WCCE.md), [3.1.1.7](../MS-WCCE/MS-WCCE.md), [3.1.1.8](../MS-WCCE/MS-WCCE.md), [3.1.1.9](../MS-WCCE/MS-WCCE.md), and 3.1.1.10.
+No other Windows protocol directly depends on the Certificate Services Remote Administration Protocol. However, this protocol is designed to manage a server that implements the Windows Client Certificate Enrollment Protocol, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) as well as the ICertPassage Remote Protocol, as specified in [MS-ICPR](../MS-ICPR/MS-ICPR.md). Certificate Services Remote Administration Protocol shares an ADM with the ICertPassage Remote Protocol and the Windows Client Certificate Enrollment Protocol, as specified in sections [3.1.1.10](#Section_3.1.1.10), [3.1.3](#Section_3.2.3), [3.1.4](#Section_3.2.4), and [3.1.5](#Section_3.1.5). The Certificate Services Remote Administration Protocol, the Windows Client Certificate Enrollment Protocol, and the ICertPassage Remote Protocol use a common list of configuration data elements, defined in sections [3.1.1.6](../MS-WCCE/MS-WCCE.md), [3.1.1.7](../MS-WCCE/MS-WCCE.md), [3.1.1.8](../MS-WCCE/MS-WCCE.md), [3.1.1.9](../MS-WCCE/MS-WCCE.md), and 3.1.1.10.
 
 The following diagram illustrates the layering of the protocol in this section with other protocols in its stack.
 
@@ -709,7 +709,7 @@ The Certificate Services Remote Administration Protocol enables the configuratio
 <a id="Section_1.5.2"></a>
 ### 1.5.2 CA Name
 
-The Certificate Services Remote Administration Protocol assumes that the client knows the name of the [**CA**](#gt_certification-authority-ca) server that implements the [**DCOM**](#gt_distributed-component-object-model-dcom) interfaces specified in section [3.2.4](#Section_3.1.4). Windows-based clients discover Microsoft CAs by reading the [**certificate**](#gt_certificate) [**enrollment**](#gt_3edb3c30-bb82-4782-9777-19c5006965ef) [**object**](#gt_object) in [**Active Directory**](#gt_active-directory) (as specified by [MS-ADTS](../MS-ADTS/MS-ADTS.md)) and by using [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) (as specified in [[RFC2559]](https://go.microsoft.com/fwlink/?LinkId=90368)).
+The Certificate Services Remote Administration Protocol assumes that the client knows the name of the [**CA**](#gt_certification-authority-ca) server that implements the [**DCOM**](#gt_distributed-component-object-model-dcom) interfaces specified in section [3.2.4](#Section_3.2.4). Windows-based clients discover Microsoft CAs by reading the [**certificate**](#gt_certificate) [**enrollment**](#gt_3edb3c30-bb82-4782-9777-19c5006965ef) [**object**](#gt_object) in [**Active Directory**](#gt_active-directory) (as specified by [MS-ADTS](../MS-ADTS/MS-ADTS.md)) and by using [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) (as specified in [[RFC2559]](https://go.microsoft.com/fwlink/?LinkId=90368)).
 
 The enrollment object that defines the names of the CAs is located under the CN=Enrollment Services, CN=Public Key Services, CN=Services, CN=Configuration, DC=ForestRootDomain [**container**](#gt_container) of Active Directory. Each CA has an entry with a class of pKIEnrollmentService, as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.223.
 
@@ -723,7 +723,7 @@ The [**CA**](#gt_certification-authority-ca) MUST have access to the entire [Sig
 <a id="Section_1.5.4"></a>
 ### 1.5.4 Database
 
-The [**tables**](#gt_table) and fields defined in section [3.1.1](#Section_3.1.1) are available.
+The [**tables**](#gt_table) and fields defined in section [3.1.1](#Section_3.2.1) are available.
 
 <a id="Section_1.5.5"></a>
 ### 1.5.5 Configuration
@@ -740,7 +740,7 @@ The Certificate Services Remote Administration Protocol provides clients with th
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The Certificate Services Remote Administration Protocol is based on [**DCOM**](#gt_distributed-component-object-model-dcom) technology, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), which provides capabilities to query for interface versions. [**Clients**](#gt_client) use the IUnknown.QueryInterface method to determine the supported server interface version. If [**Certificate Services**](#gt_certificate-services) supports [ICertAdminD2](#Section_3.1.4.2.2), then ICertAdminD2 is used; otherwise, [ICertAdminD](#Section_3.2.4.1.5) is used.
+The Certificate Services Remote Administration Protocol is based on [**DCOM**](#gt_distributed-component-object-model-dcom) technology, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), which provides capabilities to query for interface versions. [**Clients**](#gt_client) use the IUnknown.QueryInterface method to determine the supported server interface version. If [**Certificate Services**](#gt_certificate-services) supports [ICertAdminD2](#Section_3.1.4.2.1), then ICertAdminD2 is used; otherwise, [ICertAdminD](#Section_3.1.4.2.1) is used.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -802,7 +802,7 @@ Default values, as specified in [MS-DCOM], are used for all DCOM inputs not spec
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Common Structures
 
-This section defines the structures used by the Certificate Services Remote Administration Protocol. These structures are used when performing various operations (using interface methods specified in section [3.1.4](#Section_3.1.4)) on the server and as part of the server's response. This protocol shares a number of structures with the Windows Client Certificate Enrollment Protocol (as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md)), which are specified in the following sections.
+This section defines the structures used by the Certificate Services Remote Administration Protocol. These structures are used when performing various operations (using interface methods specified in section [3.1.4](#Section_3.2.4)) on the server and as part of the server's response. This protocol shares a number of structures with the Windows Client Certificate Enrollment Protocol (as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md)), which are specified in the following sections.
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 BYTE
@@ -904,7 +904,7 @@ Defines a basic informational block describing a [**CA**](#gt_certification-auth
 <a id="Section_2.2.1.7"></a>
 #### 2.2.1.7 CERTTRANSDBCOLUMN
 
-The CERTTRANSDBCOLUMN structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBCOLUMN structure contains [**schema**](#gt_schema) information about a particular database column that is associated with a specific [**table**](#gt_table) to the client. This associated table is invoked when the client queries the [EnumViewColumn](#Section_3.2.4.2.5) or [EnumViewColumnTable](#Section_3.2.4.2.5) method of the [ICertAdminD](#Section_3.2.4.1.5) and [ICertAdminD2](#Section_3.1.4.2.2) interfaces, respectively.
+The CERTTRANSDBCOLUMN structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBCOLUMN structure contains [**schema**](#gt_schema) information about a particular database column that is associated with a specific [**table**](#gt_table) to the client. This associated table is invoked when the client queries the [EnumViewColumn](#Section_3.1.4.2.5) or [EnumViewColumnTable](#Section_3.1.4.2.5) method of the [ICertAdminD](#Section_3.1.4.2.1) and [ICertAdminD2](#Section_3.1.4.2.1) interfaces, respectively.
 
 typedef struct _CERTTRANSDBCOLUMN {
 
@@ -978,7 +978,7 @@ All other bits are reserved and MUST be set to 0.
 
 The [CERTTRANSDBCOLUMN](#Section_2.2.1.7) structure (section 2.2.1.7) is encoded within the byte array that is referenced by the **pb** member of a [CERTTRANSBLOB](#Section_2.2.1.4) structure (section 2.2.1.4).
 
-The packet that contains an array of some number, "N", of CERTTRANSDBCOLUMN structures is specified in the following packet diagrams. The actual value of "N" is a separate return parameter for the [EnumViewColumn](#Section_3.2.4.2.5) (section 3.1.4.1.9) and [EnumViewColumnTable](#Section_3.2.4.2.5) (section 3.2.4.2.5) methods.
+The packet that contains an array of some number, "N", of CERTTRANSDBCOLUMN structures is specified in the following packet diagrams. The actual value of "N" is a separate return parameter for the [EnumViewColumn](#Section_3.1.4.2.5) (section 3.1.4.1.9) and [EnumViewColumnTable](#Section_3.1.4.2.5) (section 3.2.4.2.5) methods.
 
 ```mermaid
 packet-beta
@@ -1014,7 +1014,7 @@ packet-beta
 <a id="Section_2.2.1.8"></a>
 #### 2.2.1.8 CERTTRANSDBATTRIBUTE
 
-The CERTTRANSDBATTRIBUTE structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBATTRIBUTE structure is used by the server to return [**attribute**](#gt_attribute) information that is associated with a request to the client (upon the client's query via invocation of the [EnumAttributesOrExtensions](#Section_3.2.4.1.11) method of the [ICertAdminD](#Section_3.2.4.1.5) interface).
+The CERTTRANSDBATTRIBUTE structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBATTRIBUTE structure is used by the server to return [**attribute**](#gt_attribute) information that is associated with a request to the client (upon the client's query via invocation of the [EnumAttributesOrExtensions](#Section_3.2.4.1.11) method of the [ICertAdminD](#Section_3.1.4.2.1) interface).
 
 typedef struct _CERTTRANSDBATTRIBUTE {
 
@@ -1058,7 +1058,7 @@ packet-beta
 <a id="Section_2.2.1.9"></a>
 #### 2.2.1.9 CERTTRANSDBEXTENSION
 
-The CERTTRANSDBEXTENSION structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBEXTENSION structure is used by the server to return [**certificate**](#gt_certificate) extension information, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4, that is associated with a request. This associated request to the client occurs when the client performs a query by invoking the [EnumAttributesOrExtensions](#Section_3.2.4.1.11) method of the [ICertAdminD](#Section_3.2.4.1.5) interface.
+The CERTTRANSDBEXTENSION structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBEXTENSION structure is used by the server to return [**certificate**](#gt_certificate) extension information, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4, that is associated with a request. This associated request to the client occurs when the client performs a query by invoking the [EnumAttributesOrExtensions](#Section_3.2.4.1.11) method of the [ICertAdminD](#Section_3.1.4.2.1) interface.
 
 typedef struct _CERTTRANSDBEXTENSION {
 
@@ -1097,7 +1097,7 @@ packet-beta
   16-31: "Nigiro"
 ```
 
-**C (1 bit):** C is the ExtensionCriticalFlag, as defined in section [3.1.1.3](#Section_2.2.1.9), the **Extension_Flags** ADM element. A value of 0 means the extension is not critical. A value of 1 means the extension is critical.
+**C (1 bit):** C is the ExtensionCriticalFlag, as defined in section [3.1.1.3](#Section_3.2.4.1.11), the **Extension_Flags** ADM element. A value of 0 means the extension is not critical. A value of 1 means the extension is critical.
 
 **D (1 bit):** D is the ExtensionDisabledFlag, as defined in section 3.1.1.3, the **Extension_Flags** ADM element. A value of 0 means the extension is not disabled. A value of 1 means the extension is disabled.
 
@@ -1155,7 +1155,7 @@ packet-beta
 <a id="Section_2.2.1.10"></a>
 #### 2.2.1.10 CERTTRANSDBRESULTCOLUMN
 
-The CERTTRANSDBRESULTCOLUMN structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBRESULTCOLUMN structure is used by the server to return the result of a [**CA**](#gt_certification-authority-ca) database query that is done by the client (upon the client's query via invocation of the [OpenView](#Section_3.1.4.1.12) or [EnumView](#Section_3.2.4.1.13) method of the [ICertAdminD](#Section_3.2.4.1.5) interface).
+The CERTTRANSDBRESULTCOLUMN structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBRESULTCOLUMN structure is used by the server to return the result of a [**CA**](#gt_certification-authority-ca) database query that is done by the client (upon the client's query via invocation of the [OpenView](#Section_3.2.4.1.12) or [EnumView](#Section_3.2.4.1.13) method of the [ICertAdminD](#Section_3.1.4.2.1) interface).
 
 The OpenView and EnumView methods return data in the form of a CERTTRANSBLOB structure whose **pb** member points to an array of one or more [CERTTRANSDBRESULTROW](#Section_2.2.3) structures. Each CERTTRANSDBRESULTROW structure contains one or more CERTTRANSDBRESULTCOLUMN structures.
 
@@ -1269,7 +1269,7 @@ packet-beta
 <a id="Section_2.2.1.11"></a>
 #### 2.2.1.11 Officer and Enrollment Agent Access Rights
 
-Officer and Enrollment Agent access rights structures are used by the server to return the results of a client query; for example, the client's invocation of the **GetOfficerRights** method (section [3.1.4.2.12](#Section_3.1.4.2.12)) of the **ICertAdminD2** interface (sections [3.1.4.2](#Section_3.1.4.2.2) and [3.2.4.2](#Section_3.1.4.2.2)).
+Officer and Enrollment Agent access rights structures are used by the server to return the results of a client query; for example, the client's invocation of the **GetOfficerRights** method (section [3.1.4.2.12](#Section_3.1.4.2.12)) of the **ICertAdminD2** interface (sections [3.1.4.2](#Section_3.1.4.2.1) and [3.2.4.2](#Section_3.1.4.2.1)).
 
 [**Officer rights**](#gt_officer-rights) and [**Enrollment Agent rights**](#gt_enrollment-agent-rights) are security descriptors. Security descriptor structures are defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6 and can contain **SID** structures ([MS-DTYP] section 2.4.2). Officer rights and Enrollment Agent rights security descriptors have the following properties:
 
@@ -1290,7 +1290,7 @@ packet-beta
 
 **Array of SIDs (variable):** An array of SID structures marshaled in packet representation ([MS-DTYP] section 2.4.2.2) that identify either (i) [**principals**](#gt_principal) for whom the officer can approve requests; or (ii) principals on whose behalf the [**enrollment**](#gt_3edb3c30-bb82-4782-9777-19c5006965ef) agent can obtain [**certificates**](#gt_certificate). For an Officer rights security descriptor, case (i) applies. For an Enrollment Agent rights security descriptor, case (ii) applies.
 
-**TemplateName (variable):** A little-endian encoded Unicode and null-terminated string that identifies the [**common name (CN)**](#gt_common-name-cn) of the template (as defined in [MS-CRTD](#Section_1.5.1)) for which the officer is authorized to approve requests.
+**TemplateName (variable):** A little-endian encoded Unicode and null-terminated string that identifies the [**common name (CN)**](#gt_common-name-cn) of the template (as defined in [MS-CRTD](#Section_1.3.1.5)) for which the officer is authorized to approve requests.
 
 <a id="Section_2.2.1.11.1"></a>
 ##### 2.2.1.11.1 Marshaling Format for Officer and Enrollment Agent Rights
@@ -1421,7 +1421,7 @@ A key recovery certificate contains the following X.509v3 extensions identified 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 CERTTRANSDBRESULTROW
 
-The CERTTRANSDBRESULTROW structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBRESULTROW structure is used by the server to return the result of the database query done by the client (upon the client's query via invocation of [OpenView](#Section_3.1.4.1.12) or [EnumView](#Section_3.2.4.1.13) methods of the [ICertAdminD](#Section_3.2.4.1.5) interface). This structure contains data for a specific row.
+The CERTTRANSDBRESULTROW structure is encoded within a [CERTTRANSBLOB](#Section_2.2.1.4) structure. The CERTTRANSDBRESULTROW structure is used by the server to return the result of the database query done by the client (upon the client's query via invocation of [OpenView](#Section_3.2.4.1.12) or [EnumView](#Section_3.2.4.1.13) methods of the [ICertAdminD](#Section_3.1.4.2.1) interface). This structure contains data for a specific row.
 
 typedef struct _CERTTRANSDBRESULTROW {
 
@@ -1517,7 +1517,7 @@ The Certificate Services Remote Administration Protocol is a request-response pr
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-This section details the data that is maintained by the [**CA**](#gt_certification-authority-ca). The [Request](#Section_3.1.1.1) [**table**](#gt_table), [Attribute](#Section_3.1.4.1.2) table, [Extension](#Section_2.2.1.9) table, and [CRL](#Section_3.1.1.4.1) table data elements are implemented in the form of tables with columns. Each column has a numerical column identifier that is unique across all the data tables and is stored as an unsigned integer. Each column has a column name that is identified in the following sections.<4>
+This section details the data that is maintained by the [**CA**](#gt_certification-authority-ca). The [Request](#Section_3.1.1.1) [**table**](#gt_table), [Attribute](#Section_3.2.4.1.11) table, [Extension](#Section_3.2.4.1.11) table, and [CRL](#Section_3.1.1.4.2) table data elements are implemented in the form of tables with columns. Each column has a numerical column identifier that is unique across all the data tables and is stored as an unsigned integer. Each column has a column name that is identified in the following sections.<4>
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Request Table
@@ -1529,7 +1529,7 @@ The Request table holds the history of all [**CA**](#gt_certification-authority-
 
 Values for the following elements are required in the Request [**table**](#gt_table):
 
-**Request_Request_ID:** Column name "Request.RequestID". A field that is used to uniquely identify the request in the table and to link to the [Attribute](#Section_3.1.4.1.2) and [Extension](#Section_2.2.1.9) tables. This field MUST have a positive value.
+**Request_Request_ID:** Column name "Request.RequestID". A field that is used to uniquely identify the request in the table and to link to the [Attribute](#Section_3.2.4.1.11) and [Extension](#Section_3.2.4.1.11) tables. This field MUST have a positive value.
 
 **Request_Raw_Request:** Column name "Request.RawRequest". The raw request, as delivered by ICertRequestD or ICertRequestD2, as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 2.2.2.6.
 
@@ -1701,7 +1701,7 @@ The value is 0 if the request processed successfully. Otherwise, this field cont
 
 **Certificate_Template:** Column name "CertificateTemplate". extnValue of extension with OID (1) 1.3.6.1.4.1.311.20.2 of issued certificate.
 
-**Enrollment_Flags:** Column name "EnrollmentFlags". The values that are defined in "EnrollmentFlags" from [MS-CRTD](#Section_1.5.1).
+**Enrollment_Flags:** Column name "EnrollmentFlags". The values that are defined in "EnrollmentFlags" from [MS-CRTD](#Section_1.3.1.5).
 
 **General_Flags:** Column name "GeneralFlags". The values that are defined in "GeneralFlags" from [MS-CRTD].
 
@@ -1807,7 +1807,7 @@ Each entry in the [**table**](#gt_table) represents a CRL and has associated pro
 <a id="Section_3.1.1.4.1"></a>
 ##### 3.1.1.4.1 CRL Table Required Data Elements
 
-If the [**CA**](#gt_certification-authority-ca) maintains a [CRL table](#Section_3.1.1.4.1), values for the following elements of the CRL table MUST be maintained:
+If the [**CA**](#gt_certification-authority-ca) maintains a [CRL table](#Section_3.1.1.4.2), values for the following elements of the CRL table MUST be maintained:
 
 **CRL_Row_Id:** Column name "CRLRowId". The unique identifier for the [**CRL**](#gt_certificate-revocation-list-crl) in the [**table**](#gt_table).
 
@@ -1848,7 +1848,7 @@ For the CRL_Publish_Flags element, the following values are defined:
 | CPF_BASE | 0x1 – A base CRL. |
 | CPF_DELTA | 0x2 – A delta CRL. |
 | CPF_COMPLETE | 0x4 – The CRL published successfully. |
-| CPF_MANUAL | 0x40 – The caller who initiated the generation of the CRL (via the [PublishCRLs](#Section_3.1.4.2.14) method) was running as an interactive user and was not launched by a timer on the CA. |
+| CPF_MANUAL | 0x40 – The caller who initiated the generation of the CRL (via the [PublishCRLs](#Section_3.1.4.2.13) method) was running as an interactive user and was not launched by a timer on the CA. |
 | CPF_SHADOW | 0x8 – A blank delta CRL with new delta CRL indicator extension (CRL_Min_Base value). When delta CRLs have just been disabled (Config_Delta_CRL_Validity_Period has just been set to 0), the CA publishes this type of CRL to force clients to retrieve a new base CRL. |
 | CPF_BADURL_ERROR | 0x20 – A [**URI**](#gt_uniform-resource-identifier-uri) that does not meet the format requirements specified in section [3.1.1.8](#Section_3.1.1.8) for Config_CA_CDP_Publish_To_Base and Config_CA_CDP_Publish_To_Delta was encountered during publishing of the CRL. |
 | CPF_FILE_ERROR | 0x200 – A file URI that does not meet the format requirements specified in section 3.1.1.8 for Config_CA_CDP_Publish_To_Base and Config_CA_CDP_Publish_To_Delta for a file location was encountered during publishing of the CRL, or the CA encountered an error trying to write the CRL to a file location. |
@@ -1863,7 +1863,7 @@ For the CRL_Publish_Flags element, the following values are defined:
 <a id="Section_3.1.1.4.2"></a>
 ##### 3.1.1.4.2 CRL Table Recommended Data Elements
 
-If the [**CA**](#gt_certification-authority-ca) maintains a [CRL table](#Section_3.1.1.4.1), values for the following elements of the CRL table SHOULD be maintained by the CA:
+If the [**CA**](#gt_certification-authority-ca) maintains a [CRL table](#Section_3.1.1.4.2), values for the following elements of the CRL table SHOULD be maintained by the CA:
 
 **CRL_Effective:** Column name "CRLEffective". The [CERTTIME](#Section_2.2.1.12) at which the validity period of the [**CRL**](#gt_certificate-revocation-list-crl) identified by CRL_Min_Base began. Used only for delta CRLs.
 
@@ -1945,7 +1945,7 @@ The [**CA**](#gt_certification-authority-ca) SHOULD store the following sets of 
 
 **Config_Permissions_Enrollment_Agent_Rights:** A list, shared from the Config_Permissions_Enrollment_Agent_Rights list defined in [MS-WCCE] section 3.2.1.1.4.
 
-The permissions are used to enforce that the caller has particular permissions for any method specified in section [3.1.4](#Section_3.1.4).
+The permissions are used to enforce that the caller has particular permissions for any method specified in section [3.1.4](#Section_3.2.4).
 
 On Windows, the CA defines six permissions: Enroll, Read, Officer, Administrator, Operator, and Auditor.<13>
 
@@ -2332,14 +2332,14 @@ CRL creation and/or publishing that results in a nonzero CRL_Publish_Status_Code
 
 This timer represents the next time the [**CA**](#gt_certification-authority-ca) will wake up and publish a base [**CRL**](#gt_certificate-revocation-list-crl) again. The next timeout value for the Base CRL Next Publish Timer is contained in the configuration data element Config_CA_CRL_Next_Publish, which is updated at base CRL creation time.
 
-For details about how the CA computes the Config_CA_CRL_Next_Publish value upon base CRL creation, see the server processing rules for the PublishCRL method (section [3.1.4.1.6](#Section_3.1.4.1.6)) or the PublishCRLs method (section [3.1.4.2.1](#Section_3.1.4.2.14)).
+For details about how the CA computes the Config_CA_CRL_Next_Publish value upon base CRL creation, see the server processing rules for the PublishCRL method (section [3.1.4.1.6](#Section_3.1.4.1.6)) or the PublishCRLs method (section [3.1.4.2.1](#Section_3.1.4.2.13)).
 
 <a id="Section_3.1.2.1.2"></a>
 ##### 3.1.2.1.2 Delta CRL Next Publish Timer
 
 This timer represents the next time the [**CA**](#gt_certification-authority-ca) will wake up and publish a delta again. The next timeout value for the Delta CRL Next Publish Timer is contained in the configuration data element Config_CA_CRL_Delta_Next_Publish, which is updated at delta [**CRL**](#gt_certificate-revocation-list-crl) creation time.
 
-For details about how the CA computes the Config_CA_CRL_Delta_Next_Publish value upon delta CRL creation, see the server processing rules for the PublishCRL method (section [3.1.4.1.6](#Section_3.1.4.1.6)) or the PublishCRLs method (section [3.1.4.2.1](#Section_3.1.4.2.14)).
+For details about how the CA computes the Config_CA_CRL_Delta_Next_Publish value upon delta CRL creation, see the server processing rules for the PublishCRL method (section [3.1.4.1.6](#Section_3.1.4.1.6)) or the PublishCRLs method (section [3.1.4.2.1](#Section_3.1.4.2.13)).
 
 <a id="Section_3.1.2.2"></a>
 #### 3.1.2.2 CRL Publication Retry Timer
@@ -2374,7 +2374,7 @@ If none of the CA signing certificates in the Signing_Cert [**table**](#gt_table
 - If there are six certificates and only one passes, the CA starts.
 - If there are six certificates and five pass, the CA starts.
 - If there are six certificates and none of them passes, the CA MUST NOT start processing messages.
-Database Initialization: The CA MUST ensure that the database is available for use and that the tables and fields that are defined in section [3.1.1](#Section_3.1.1) exist. If the database is not available, the CA MUST NOT start processing messages.
+Database Initialization: The CA MUST ensure that the database is available for use and that the tables and fields that are defined in section [3.1.1](#Section_3.2.1) exist. If the database is not available, the CA MUST NOT start processing messages.
 
 Configuration Initialization: The CA MUST initialize the configuration data elements defined in section [3.1.1.10](#Section_3.1.1.10). Each element defined in section 3.1.1.10 as "OnNextRestart_{Config_Element_Name}" will be used to initialize the corresponding data element "{Config_Element_Name}" upon CA startup. <24>
 
@@ -2388,7 +2388,7 @@ The Certificate Services Remote Administration Protocol defines the following in
 | Interface | Description |
 | --- | --- |
 | ICertAdminD | Defines methods that enable a client to manage a [**CA**](#gt_certification-authority-ca). |
-| ICertAdminD2 | Extends the [ICertAdminD](#Section_3.2.4.1.5) interface. |
+| ICertAdminD2 | Extends the [ICertAdminD](#Section_3.1.4.2.1) interface. |
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Processing Rules for ICertAdminD
@@ -2403,7 +2403,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [SetExtension](#Section_3.1.4.1.19) | The SetExtension method allows adding, modifying, or disabling extensions, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414); a [**CA**](#gt_certification-authority-ca) can include an extension in an issued certificate for a particular pending request. Opnum: 3 |
+| [SetExtension](#Section_3.1.4.1.12) | The SetExtension method allows adding, modifying, or disabling extensions, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414); a [**CA**](#gt_certification-authority-ca) can include an extension in an issued certificate for a particular pending request. Opnum: 3 |
 | [SetAttributes](#Section_68df1cdfc5544734b7b83ffc4faa305b) | The SetAttributes method sets [**attributes**](#gt_attribute) in the specified pending certificate request. Opnum: 4 |
 | [ResubmitRequest](#Section_3.1.4.1.3) | The ResubmitRequest method resubmits a specific pending or denied certificate request to the CA. Opnum: 5 |
 | [DenyRequest](#Section_3.1.4.1.4) | The DenyRequest method denies a specific certificate request that is pending. Opnum: 6 |
@@ -2411,22 +2411,22 @@ Methods in RPC Opnum Order
 | [PublishCRL](#Section_3.1.4.1.6) | The PublishCRL method sends a request to the CA server to publish a new [**CRL**](#gt_certificate-revocation-list-crl), as specified in [RFC3280] section 5. Opnum: 8 |
 | [GetCRL](#Section_098c286c873e45a585049691a6c5cd6c) | The GetCRL method retrieves the current CRL for the CA server. Opnum: 9 |
 | [RevokeCertificate](#Section_3.1.4.1.8) | The RevokeCertificate method revokes a certificate either immediately or on a specified date. Opnum: 10 |
-| [EnumViewColumn](#Section_3.2.4.2.5) | The EnumViewColumn method returns an array of column information. Opnum: 11 |
+| [EnumViewColumn](#Section_3.1.4.2.5) | The EnumViewColumn method returns an array of column information. Opnum: 11 |
 | [GetViewDefaultColumnSet](#Section_105e87c4161a483b99ca237a77105bf9) | The GetViewDefaultColumnSet method returns an array of the column set identifiers associated with a specific view. Opnum: 12 |
 | [EnumAttributesOrExtensions](#Section_3.2.4.1.11) | The EnumAttributesOrExtensions method is used to access sets of attributes or extensions for a particular row ID. Opnum: 13 |
-| [OpenView](#Section_3.1.4.1.12) | The OpenView method opens a view into the database and returns a set of resultant rows data. Opnum: 14 |
+| [OpenView](#Section_3.2.4.1.12) | The OpenView method opens a view into the database and returns a set of resultant rows data. Opnum: 14 |
 | [EnumView](#Section_3.2.4.1.13) | The EnumView method returns a set of resultant rows data for the opened view. Opnum: 15 |
 | [CloseView](#Section_3.1.4.1.14) | The CloseView method closes a view previously opened with the OpenView method call. Opnum: 16 |
 | [ServerControl](#Section_f2f0e4b8b4fe441a819178caec425585) | The ServerControl method is used to force the CA server to unregister the ICertAdminD and ICertAdminD2 interfaces. Opnum: 17 |
 | [Ping](#Section_83e0f43de45c4821a66d578855bb62d0) | The Ping method is used to test whether the Certificate server is alive. Opnum: 18 |
 | [GetServerState](#Section_babc0fb84cbc4527ae093c4433c300a9) | The GetServerState method is used to validate "Read". Opnum: 19 |
 | [BackupPrepare](#Section_3.1.4.1.18) | The BackupPrepare method is used to prepare the database for performing further backup operations. Opnum: 20 |
-| [BackupEnd](#Section_3.2.4.1.19) | The BackupEnd method completes the backup process started via a call to ICertAdminD::BackupPrepare. Opnum: 21 |
-| [BackupGetAttachmentInformation](#Section_3.2.4.1.20) | The BackupGetAttachmentInformation method is used to query the CA for the names of database files that are to become part of the backup file set. Opnum: 22 |
-| [BackupGetBackupLogs](#Section_3.2.4.1.21) | The BackupGetBackupLogs method queries the CA for the names of database transaction [**log files**](#gt_log-files) that are to become part of the backup file set. Opnum: 23 |
-| [BackupOpenFile](#Section_3.1.4.1.22) | The BackupOpenFile method opens a file for backup. Opnum: 24 |
-| [BackupReadFile](#Section_3.1.4.1.23) | The BackupReadFile method reads the database file and loads the content into the buffer provided. Opnum: 25 |
-| [BackupCloseFile](#Section_3.2.4.1.24) | The BackupCloseFile method closes the database file that was initialized by a prior call to BackupOpenFile. Opnum: 26 |
+| [BackupEnd](#Section_3.1.4.1.19) | The BackupEnd method completes the backup process started via a call to ICertAdminD::BackupPrepare. Opnum: 21 |
+| [BackupGetAttachmentInformation](#Section_3.1.4.1.20) | The BackupGetAttachmentInformation method is used to query the CA for the names of database files that are to become part of the backup file set. Opnum: 22 |
+| [BackupGetBackupLogs](#Section_3.1.4.1.21) | The BackupGetBackupLogs method queries the CA for the names of database transaction [**log files**](#gt_log-files) that are to become part of the backup file set. Opnum: 23 |
+| [BackupOpenFile](#Section_3.2.4.1.22) | The BackupOpenFile method opens a file for backup. Opnum: 24 |
+| [BackupReadFile](#Section_3.2.4.1.23) | The BackupReadFile method reads the database file and loads the content into the buffer provided. Opnum: 25 |
+| [BackupCloseFile](#Section_3.1.4.1.24) | The BackupCloseFile method closes the database file that was initialized by a prior call to BackupOpenFile. Opnum: 26 |
 | [BackupTruncateLogs](#Section_3.2.4.1.25) | The BackupTruncateLogs method function eliminates redundant records from the log files and reduces the disk storage space used by log files. Opnum: 27 |
 | [ImportCertificate](#Section_ed01d4b2b77f496e8fb18f9a0432c592) | The ImportCertificate method imports a certificate into the CA database. Opnum: 28 |
 | [BackupGetDynamicFiles](#Section_17bf1cb086a746a1afd0f983d9a96b2c) | The BackupGetDynamicFiles method retrieves the list of CA dynamic file names that need to be backed up. Opnum: 29 |
@@ -2522,7 +2522,7 @@ HRESULT SetAttributes(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **dwRequestId:** A 32-bit nonzero unsigned integer value that specifies the ID of the certificate request.
 
@@ -2536,7 +2536,7 @@ The following processing rules apply:
 - If the request is found in the CA database, the CA MUST verify that the value of the Request_Disposition column is "request pending". If the value of the Request_Disposition column is not "request pending", the CA MUST fail the request.
 - The CA MUST parse the **pwszAttributes** string, as is done for the ICertRequestD::Request and ICertRequestD2::Request2 methods as specified in [MS-WCCE] section 3.2.1.4.3.
 - The CA MUST ignore invalid name-value pair entries.
-- The CA MUST associate the valid name-value pair entries with the pending requests, for possible later impact on the issued certificate, by adding the entries in the [Attribute table](#Section_3.1.4.1.2).
+- The CA MUST associate the valid name-value pair entries with the pending requests, for possible later impact on the issued certificate, by adding the entries in the [Attribute table](#Section_3.2.4.1.11).
 <a id="Section_3.1.4.1.3"></a>
 ##### 3.1.4.1.3 ICertAdminD::ResubmitRequest (Opnum 5)
 
@@ -2552,7 +2552,7 @@ HRESULT ResubmitRequest(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **dwRequestId:** A 32-bit nonzero unsigned integer value that specifies the ID of the certificate request.
 
@@ -2623,7 +2623,7 @@ HRESULT DenyRequest(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **dwRequestId:** A 32-bit nonzero unsigned integer value that specifies the ID of the certificate request.
 
@@ -2651,7 +2651,7 @@ HRESULT IsValidCertificate(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **pSerialNumber:** A null-terminated Unicode string specifying a serial number that identifies the certificate to be reviewed. The string MUST specify the serial number as an even number of hexadecimal digits. If necessary, a zero can be prefixed to the number to produce an even number of digits. The string MUST NOT contain more than one leading zero. Information about the serial number is as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.1.2.2.
 
@@ -2698,7 +2698,7 @@ HRESULT PublishCRL(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **FileTime:** Contains a 64-bit value that represents the number of 100-nanosecond intervals since January 1, 1601, according to [**Coordinated Universal Time (UTC)**](#gt_coordinated-universal-time-utc). This is used to calculate the nextUpdate value of the CRL as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 5 in UTC-Greenwich Mean Time.
 
@@ -2726,7 +2726,7 @@ An implication of this rule is that, if a previously revoked certificate is both
 - If the Publish_Expired_Cert_in_CRL column is not set to 1:
 - If the certificate's **NotAfter** time is before the CRL_This_Publish of the last CRL, do not include the certificate's Serial_Number in the CRL.
 - If the certificate's **NotAfter** time is after or equal to the CRL_This_Publish of the last CRL, include the certificate's Serial_Number in the CRL.
-- At CRL creation time, the CA SHOULD create a new [CRL table](#Section_3.1.1.4.1) entry for each type of CRL (base, and if enabled, delta) for each CA key and for each partition. For each CRL table entry it creates, the CA MUST use the following rules to populate the individual data elements:<34>
+- At CRL creation time, the CA SHOULD create a new [CRL table](#Section_3.1.1.4.2) entry for each type of CRL (base, and if enabled, delta) for each CA key and for each partition. For each CRL table entry it creates, the CA MUST use the following rules to populate the individual data elements:<34>
 - **CRL_Number:** The CA MUST set this value to the CRL_Number of the last CRL created plus one. The same CRL_Number MUST be set on the CRLs generated for each CA key and type (base or delta). Similarly, the same CRL_Number MUST be set on the CRLs generated for each CA key, partition and type (base or delta).
 - **CRL_Name_Id:** The CA MUST set this value to the number that uniquely identifies the CA key for which the CRL is being created.
 - **CRL_Min_Base:** (only for a delta CRL). If all of the following conditions are true:
@@ -2971,7 +2971,7 @@ HRESULT GetCRL(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pctbCRL:** If the function succeeds, this method MUST return a [CERTTRANSBLOB](#Section_2.2.1.4) structure that contains the ASN.1 DER (as specified in [[X660]](https://go.microsoft.com/fwlink/?LinkId=90592) and [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593)) encoded CRL (CRLRawCRL) for the CA server's current [**signing certificate**](#gt_signing-certificates).
 
@@ -2996,7 +2996,7 @@ HRESULT RevokeCertificate(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **pwszSerialNumber:** A null-terminated Unicode string that specifies a serial number that identifies the certificate to be revoked. The string MUST specify the serial number as plain hexadecimal digits (no leading 0x) as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.1.2.2.<46>
 
@@ -3061,7 +3061,7 @@ HRESULT EnumViewColumn(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **iColumn:** An unsigned integer that specifies the identifier of the column with which to begin the enumeration. Valid values are from 0 to one less than the maximum number of columns for the [Request](#Section_3.1.1.1) [**table**](#gt_table).
 
@@ -3071,7 +3071,7 @@ HRESULT EnumViewColumn(
 
 **pctbColumnInfo:** A pointer to a [CERTTRANSBLOB](#Section_2.2.1.4) structure. Upon return, the **pb** member of this structure points to an array of the marshaled CERTTRANSDBCOLUMN structures as described in section 2.2.1.7.
 
-The [EnumViewColumn](#Section_3.2.4.2.5) method returns information about the columns that are associated with the Request table to the client. The processing rules for this method are the same as for the EnumViewColumnTable method with the *iTable* parameter set to 0x00000000.
+The [EnumViewColumn](#Section_3.1.4.2.5) method returns information about the columns that are associated with the Request table to the client. The processing rules for this method are the same as for the EnumViewColumnTable method with the *iTable* parameter set to 0x00000000.
 
 <a id="Section_3.1.4.1.10"></a>
 ##### 3.1.4.1.10 ICertAdminD::GetViewDefaultColumnSet (Opnum 12)
@@ -3090,7 +3090,7 @@ HRESULT GetViewDefaultColumnSet(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **iColumnSetDefault:** An unsigned integer value that specifies the requested default column set to get. The value MUST be one of the values in the following table. If a value other than one of the listed values is used, the error E_INVALIDARG is returned.
 
@@ -3115,9 +3115,9 @@ The [**CA**](#gt_certification-authority-ca) server MUST return the array of ass
 | 0xFFFFFFFF | The CA MUST return a subset of column identifiers for a pending request view from the [Request table](#Section_3.1.1.1).<49> |
 | 0xFFFFFFFE | The CA MUST return a subset of column identifiers for issued and revoked certificate views and failed request view from the Request table.<50> |
 | 0xFFFFFFFD | The CA MUST return a subset of column identifiers for a failed request view from the Request table.<51> |
-| 0xFFFFFFFC | The CA MUST return a subset of column identifiers for an extension view from the [Extension table](#Section_2.2.1.9).<52> |
-| 0xFFFFFFFB | The CA MUST return a subset of column identifiers for an attribute view from the [Attribute table](#Section_3.1.4.1.2).<53> |
-| 0xFFFFFFFA | The CA MUST return a subset of column identifiers for a CRL view from the [CRL table](#Section_3.1.1.4.1).<54> |
+| 0xFFFFFFFC | The CA MUST return a subset of column identifiers for an extension view from the [Extension table](#Section_3.2.4.1.11).<52> |
+| 0xFFFFFFFB | The CA MUST return a subset of column identifiers for an attribute view from the [Attribute table](#Section_3.2.4.1.11).<53> |
+| 0xFFFFFFFA | The CA MUST return a subset of column identifiers for a CRL view from the [CRL table](#Section_3.1.1.4.2).<54> |
 | 0xFFFFFFF9 | The CA MUST return a subset of column identifiers for a revoked certificate view from the Request table.<55> |
 
 <a id="Section_3.1.4.1.11"></a>
@@ -3143,7 +3143,7 @@ HRESULT EnumAttributesOrExtensions(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [ICertAdminD::SetExtension (section 3.1.4.1.1)](#Section_3.1.4.1.12).
 
 **RowId:** An unsigned integer that specifies the **RequestID** value of the row to retrieve attributes or extensions.
 
@@ -3204,7 +3204,7 @@ HRESULT OpenView(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **ccvr:** An unsigned integer value that specifies the count of a [CERTVIEWRESTRICTION](#Section_2.2.1.3) structure array that is pointed to by the *acvr* parameter.
 
@@ -3231,7 +3231,7 @@ The [**CA**](#gt_certification-authority-ca) server MUST enforce the following s
 The CA server MUST apply the following processing rules:
 
 - The CA server MUST ensure that sortOrder is specified in only one of the restrictions that are specified in the *acvr* parameter. If more than one column specifies sort order, the server MUST reject the request by using the error ERROR_INVALID_PARAMETER.
-- The CA server MUST also ensure that all the column identifiers that are specified in the restrictions and the *acolOut* parameter are valid and associated with only one database [**table**](#gt_table). The table MUST be either the [Request table (section 3.1.1.1)](#Section_3.1.1.1) or the [CRL table (section 3.1.1.4)](#Section_3.1.1.4.1). If the table is not the Request table or the CRL table, the CA MUST return ERROR_INVALID_PARAMETER.
+- The CA server MUST also ensure that all the column identifiers that are specified in the restrictions and the *acolOut* parameter are valid and associated with only one database [**table**](#gt_table). The table MUST be either the [Request table (section 3.1.1.1)](#Section_3.1.1.1) or the [CRL table (section 3.1.1.4)](#Section_3.1.1.4.2). If the table is not the Request table or the CRL table, the CA MUST return ERROR_INVALID_PARAMETER.
 - The CA server MUST compute the resultant set of rows to return, after applying the restrictions on the row set that is associated with the table and sorting the resultant rows based on the restriction information. If no sort ordering is provided in the restriction set, the sorting MUST be done based on the primary [**index**](#gt_index) column of the table. If no restriction set is given, the resultant set of rows to return is the entire row set that is associated with the table.
 Each restriction MUST be processed in the following manner:
 
@@ -3259,7 +3259,7 @@ HRESULT EnumView(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **ielt:** An unsigned integer value that specifies the identifier of the first row to return from the resultant set of rows.
 
@@ -3273,7 +3273,7 @@ The [**CA**](#gt_certification-authority-ca) server MUST enforce the following s
 
 - If the EnumView method is called when the value of Config_Database_View_Open is **False**, the server MUST return an error. The error code SHOULD be ERROR_INVALID_HANDLE.
 - If the EnumView method is called when the value of Config_Database_View_Open is **True**, the server MUST continue with the following processing rules.
-- The CA server MUST use the resultant set of rows as obtained via the [OpenView](#Section_3.1.4.1.12) method call.
+- The CA server MUST use the resultant set of rows as obtained via the [OpenView](#Section_3.2.4.1.12) method call.
 - The CA server MUST use the value of *ielt* as an [**index**](#gt_index) to this resultant set of rows.
 - The number of resultant rows returned MUST be a minimum of the *celt* parameter value and the remaining number of rows in the set (starting from *ielt*). The value of the **pceltFetched* parameter MUST be set to the number of resultant rows returned.
 - When the server encounters the end of the enumeration, the server MUST add an extra CERTTRANSDBRESULTROW structure at the end of the array.
@@ -3282,7 +3282,7 @@ The [**CA**](#gt_certification-authority-ca) server MUST enforce the following s
 <a id="Section_3.1.4.1.14"></a>
 ##### 3.1.4.1.14 ICertAdminD::CloseView (Opnum 16)
 
-The CloseView method closes a view that was previously opened by using the [OpenView](#Section_3.1.4.1.12) method call.
+The CloseView method closes a view that was previously opened by using the [OpenView](#Section_3.2.4.1.12) method call.
 
 HRESULT CloseView(
 
@@ -3290,7 +3290,7 @@ HRESULT CloseView(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 The [**CA**](#gt_certification-authority-ca) server MUST release the resources associated with storing the resultant set of rows obtained via the OpenView method call. If the [**DCOM**](#gt_distributed-component-object-model-dcom) connection to a Windows CA on which OpenView was called is terminated before a call to CloseView is made, DCOM eventually releases the resources, but might not release the resources immediately.
 
@@ -3313,7 +3313,7 @@ HRESULT ServerControl(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **dwControlFlags:** An unsigned integer value that specifies the control to be sent to the [**certificate**](#gt_certificate) server. It MUST take one of the following values.
 
@@ -3343,7 +3343,7 @@ HRESULT Ping(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 Windows formats return values per the definition of HRESULT as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Negative values indicate errors, positive values indicate success. Specific values are as specified in [MS-ERREF].
 
@@ -3362,7 +3362,7 @@ HRESULT GetServerState(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pdwState:** A pointer to an unsigned integer value that specifies whether the caller has permission to read from the CA database.
 
@@ -3371,7 +3371,7 @@ The CA MUST return 1 for *pdwState* if the caller has permission to read from th
 <a id="Section_3.1.4.1.18"></a>
 ##### 3.1.4.1.18 ICertAdminD::BackupPrepare (Opnum 20)
 
-The BackupPrepare method is used to prepare the database for performing further backup operations, such as [BackupEnd](#Section_3.2.4.1.19), [BackupGetAttachmentInformation](#Section_3.2.4.1.20), [BackupGetBackupLogs](#Section_3.2.4.1.21), [BackupOpenFile](#Section_3.1.4.1.22), [BackupReadFile](#Section_3.1.4.1.23), [BackupCloseFile](#Section_3.2.4.1.24), and [BackupTruncateLogs](#Section_3.2.4.1.25).
+The BackupPrepare method is used to prepare the database for performing further backup operations, such as [BackupEnd](#Section_3.1.4.1.19), [BackupGetAttachmentInformation](#Section_3.1.4.1.20), [BackupGetBackupLogs](#Section_3.1.4.1.21), [BackupOpenFile](#Section_3.2.4.1.22), [BackupReadFile](#Section_3.2.4.1.23), [BackupCloseFile](#Section_3.1.4.1.24), and [BackupTruncateLogs](#Section_3.2.4.1.25).
 
 HRESULT BackupPrepare(
 
@@ -3387,7 +3387,7 @@ HRESULT BackupPrepare(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **grbitJet:** An unsigned long value. This MUST be one of the following values.
 
@@ -3503,13 +3503,13 @@ The [**CA**](#gt_certification-authority-ca) server MUST enforce the sequencing 
 The CA server MUST apply the following processing rules:
 
 - If Config_CA_Interface_Flags contains the value IF_NOREMOTEICERTADMINBACKUP, the server SHOULD return an error.<65>
-- The CA server MUST enforce that FileName is one of the file names (without the prefix) that could be returned via a call to [BackupGetAttachmentInformation](#Section_3.2.4.1.20) or [BackupGetBackupLogs](#Section_3.2.4.1.21).
+- The CA server MUST enforce that FileName is one of the file names (without the prefix) that could be returned via a call to [BackupGetAttachmentInformation](#Section_3.1.4.1.20) or [BackupGetBackupLogs](#Section_3.1.4.1.21).
 - The CA server MUST enforce that the file corresponding to FileName is accessible to the CA.
 - Upon successful return, the CA MUST return the size, in bytes, of the file content in the **pliLength* parameter.
 <a id="Section_3.1.4.1.23"></a>
 ##### 3.1.4.1.23 ICertAdminD::BackupReadFile (Opnum 25)
 
-The BackupReadFile method reads the database file and loads the contents into the buffer that is provided. The file MUST be initialized by a prior call to [BackupOpenFile](#Section_3.1.4.1.22).
+The BackupReadFile method reads the database file and loads the contents into the buffer that is provided. The file MUST be initialized by a prior call to [BackupOpenFile](#Section_3.2.4.1.22).
 
 HRESULT BackupReadFile(
 
@@ -3538,7 +3538,7 @@ The CA server MUST apply the following processing rules:
 <a id="Section_3.1.4.1.24"></a>
 ##### 3.1.4.1.24 ICertAdminD::BackupCloseFile (Opnum 26)
 
-The BackupCloseFile method closes the database file that was initialized by a prior call to the [BackupOpenFile](#Section_3.1.4.1.22).
+The BackupCloseFile method closes the database file that was initialized by a prior call to the [BackupOpenFile](#Section_3.2.4.1.22).
 
 HRESULT BackupCloseFile();
 
@@ -3580,7 +3580,7 @@ HRESULT ImportCertificate(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pctbCertificate:** A [CERTTRANSBLOB](#Section_2.2.1.4) that contains an ASN.1 DER–encoded (as specified in [[X660]](https://go.microsoft.com/fwlink/?LinkId=90592) and [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593)) certificate that is inserted into the CA database.
 
@@ -3667,7 +3667,7 @@ The certificate fields and extensions SHOULD be processed and stored in individu
 <a id="Section_3.1.4.1.27"></a>
 ##### 3.1.4.1.27 ICertAdminD::BackupGetDynamicFiles (Opnum 29)
 
-The BackupGetDynamicFiles method retrieves the list of [**CA**](#gt_certification-authority-ca) dynamic file names that need to be backed up. The dynamic files are those that are not included in the CA database backup and are created dynamically by the CA, for example: [**CRL**](#gt_certificate-revocation-list-crl) files created by the CA. Note that [BackupOpenFile](#Section_3.1.4.1.22) and [BackupReadFile](#Section_3.1.4.1.23) cannot be used to open and read the dynamic files whose names are returned by this method. Dynamic files must be backed up by means outside this protocol.
+The BackupGetDynamicFiles method retrieves the list of [**CA**](#gt_certification-authority-ca) dynamic file names that need to be backed up. The dynamic files are those that are not included in the CA database backup and are created dynamically by the CA, for example: [**CRL**](#gt_certificate-revocation-list-crl) files created by the CA. Note that [BackupOpenFile](#Section_3.2.4.1.22) and [BackupReadFile](#Section_3.2.4.1.23) cannot be used to open and read the dynamic files whose names are returned by this method. Dynamic files must be backed up by means outside this protocol.
 
 HRESULT BackupGetDynamicFiles(
 
@@ -3709,7 +3709,7 @@ The CA server MUST apply the following processing rules:
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Processing Rules for ICertAdminD2
 
-The ICertAdminD2 interface extends the [ICertAdminD](#Section_3.2.4.1.5) interface described in the preceding section.<75>
+The ICertAdminD2 interface extends the [ICertAdminD](#Section_3.1.4.2.1) interface described in the preceding section.<75>
 
 The version number for this interface is "1.0". The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is: "7fe0d935-dda6-443f-85d0-1cfb58fe41dd".
 
@@ -3719,11 +3719,11 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [PublishCRLs](#Section_3.1.4.2.14) | The PublishCRLs method forces a [**CA**](#gt_certification-authority-ca) to publish [**CRLs**](#gt_certificate-revocation-list-crl) and delta CRLs. Opnum: 31 |
+| [PublishCRLs](#Section_3.1.4.2.13) | The PublishCRLs method forces a [**CA**](#gt_certification-authority-ca) to publish [**CRLs**](#gt_certificate-revocation-list-crl) and delta CRLs. Opnum: 31 |
 | [GetCAProperty](#Section_cf0c39e4ca1442bc9df5fbb7b2b02ae9) | The GetCAProperty method is used to retrieve a given property's value from the CA. Opnum: 32 |
 | [SetCAProperty](#Section_fcafda53673a4332b9433f5ba7fb8eeb) | The SetCAProperty method is used to set CA properties. Opnum: 33 |
 | [GetCAPropertyInfo](#Section_85a1e57d3f1246c5956cdb68eb31ec7d) | The GetCAPropertyInfo method is used to retrieve information about a property on the CA, such as its type and length. Opnum: 34 |
-| [EnumViewColumnTable](#Section_3.2.4.2.5) | The EnumViewColumnTable method retrieves information about one or more columns from the specified CA database [**table**](#gt_table). Opnum: 35 |
+| [EnumViewColumnTable](#Section_3.1.4.2.5) | The EnumViewColumnTable method retrieves information about one or more columns from the specified CA database [**table**](#gt_table). Opnum: 35 |
 | [GetCASecurity](#Section_3.1.4.2.6) | The GetCASecurity method is used to retrieve CA server's security descriptor. Opnum: 36 |
 | [SetCASecurity](#Section_3.1.4.2.7) | The SetCASecurity method is used to set CA server's security descriptor. Opnum: 37 |
 | [Ping2](#Section_26463dce4b5d4f4da2a95561f8af1f77) | The Ping2 method is used to determine whether the CA service is started and responding. Opnum: 38 |
@@ -3763,7 +3763,7 @@ HRESULT PublishCRLs(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **FileTime:** Contains a 64-bit value that represents the number of 100-nanosecond intervals since January 1, 1601 ([**UTC**](#gt_coordinated-universal-time-utc)). Specifies the nextUpdate value of the CRL, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 5.1.2.5, in Greenwich Mean Time.
 
@@ -3845,7 +3845,7 @@ HRESULT GetCAProperty(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **PropId:** An integer value specifying the property to be returned. The *PropID* value MUST be one of the values in the table labeled PropId in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.2.1.4.3.2. If a value other than one of the listed values is used, the error E_INVALIDARG is returned.
 
@@ -3933,7 +3933,7 @@ HRESULT SetCAProperty(
 
 );
 
-**pwszAuthority:** See *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **PropId:** A LONG value that specifies one and exactly one of the following property identifiers. The use of PropIds, is as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.2.1.4.3.2. If a value other than one of the listed values is used, the error E_INVALIDARG is returned.
 
@@ -4008,7 +4008,7 @@ HRESULT GetCAPropertyInfo(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in [ICertAdminD::SetExtension](#Section_3.1.4.1.12).
 
 **pcProperty:** An integer value containing the number of property structures returned.
 
@@ -4037,16 +4037,16 @@ HRESULT EnumViewColumnTable(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **iTable:** An unsigned integer that specifies the database table to be used for the enumeration. This MUST be set from the following values.
 
 | Value | Meaning |
 | --- | --- |
 | 0x00000000 | [Request](#Section_3.1.1.1) table |
-| 0x00003000 | [Extension](#Section_2.2.1.9) table |
-| 0x00004000 | [Attribute](#Section_3.1.4.1.2) table |
-| 0x00005000 | [CRL](#Section_3.1.1.4.1) table |
+| 0x00003000 | [Extension](#Section_3.2.4.1.11) table |
+| 0x00004000 | [Attribute](#Section_3.2.4.1.11) table |
+| 0x00005000 | [CRL](#Section_3.1.1.4.2) table |
 
 **iColumn:** An unsigned integer that specifies the column number with which to begin the enumeration. Valid values are from 0 to one less than the maximum number of columns for the table.
 
@@ -4066,7 +4066,7 @@ The EnumViewColumnTable method returns information to the client about columns t
 <a id="Section_3.1.4.2.6"></a>
 ##### 3.1.4.2.6 ICertAdminD2::GetCASecurity (Opnum 36)
 
-The GetCASecurity method is used to retrieve [**CA**](#gt_certification-authority-ca) security, as defined in [Abstract Data Model (section 3.1.1)](#Section_3.1.1).
+The GetCASecurity method is used to retrieve [**CA**](#gt_certification-authority-ca) security, as defined in [Abstract Data Model (section 3.1.1)](#Section_3.2.1).
 
 HRESULT GetCASecurity(
 
@@ -4076,14 +4076,14 @@ HRESULT GetCASecurity(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pctbSD:** A pointer to a [CERTTRANSBLOB](#Section_2.2.1.4) data structure that contains the CA's security descriptor. Security descriptors are specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 
 <a id="Section_3.1.4.2.7"></a>
 ##### 3.1.4.2.7 ICertAdminD2::SetCASecurity (Opnum 37)
 
-The SetCASecurity method is used to set the [**CA**](#gt_certification-authority-ca) security, as defined in the [Abstract Data Model (section 3.1.1)](#Section_3.1.1).
+The SetCASecurity method is used to set the [**CA**](#gt_certification-authority-ca) security, as defined in the [Abstract Data Model (section 3.1.1)](#Section_3.2.1).
 
 HRESULT SetCASecurity(
 
@@ -4093,7 +4093,7 @@ HRESULT SetCASecurity(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pctbSD:** A pointer to a [CERTTRANSBLOB](#Section_2.2.1.4) data structure that holds the security descriptor. Security descriptors are specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 
@@ -4110,7 +4110,7 @@ HRESULT Ping2(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 ICertAdminD2::Ping2 is as specified in [MS-WCCE](../MS-WCCE/MS-WCCE.md) section 3.2.1.4.3.4.
 
@@ -4129,7 +4129,7 @@ HRESULT GetArchivedKey(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **dwRequestId:** An unsigned integer value that specifies the RequestId of the certificate request for which the archived private key and associated certificate are being requested.
 
@@ -4146,7 +4146,7 @@ The [**CA**](#gt_certification-authority-ca) server MUST create the ArchivedKey 
 - Content: This field MUST be the value that was read in step 1 from the Request_Raw_Archived_Key column.
 - Certificates: This field MUST include the current CA [**signing certificate**](#gt_signing-certificates) that is used to verify this PKCS#7 message.
 - SignerInfos: The first SignerInfo in the SignerInfos collection MUST use the [**key**](#gt_key) that is associated with the current CA signing certificate.
-- The ASN.1 DER–encoded PKCS#7 signed data that was created in step 2 MUST be the value of the ArchivedKey property in the request table (see section [3.1.1](#Section_3.1.1)).
+- The ASN.1 DER–encoded PKCS#7 signed data that was created in step 2 MUST be the value of the ArchivedKey property in the request table (see section [3.1.1](#Section_3.2.1)).
 The GetArchivedKey method is used to retrieve the archived private key and issued certificate from the CA's database.
 
 The CA server MUST enforce the following processing rules:
@@ -4169,13 +4169,13 @@ HRESULT GetAuditFilter(
 
 );
 
-**pwszAuthority:** See *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pdwFilter:** An unsigned integer that specifies the current audit settings. This is a bitwise-OR combination of zero or more of the following values.
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000001 | Audit CA server for the following events: ServerControl Registration of the [ICertAdminD](#Section_3.2.4.1.5) interface. Unregistration of the ICertAdminD interface. |
+| 0x00000001 | Audit CA server for the following events: ServerControl Registration of the [ICertAdminD](#Section_3.1.4.2.1) interface. Unregistration of the ICertAdminD interface. |
 | 0x00000002 | Audit CA server for the following method calls: BackupPrepare BackupEnd |
 | 0x00000004 | Audit CA server for the following method calls: ICertRequestD::Request ResubmitRequest DenyRequest SetAttributes SetExtensions ImportCertificate DeleteRow |
 | 0x00000008 | Audit CA server for the following method calls: RevokeCertificate PublishCRL PublishCRLs |
@@ -4198,7 +4198,7 @@ HRESULT SetAuditFilter(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **dwFilter:** An unsigned integer that specifies the events to be audited by the CA. For possible values, see section [3.1.4.2.10](#Section_3.1.4.2.10).
 
@@ -4223,7 +4223,7 @@ HRESULT GetOfficerRights(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pfEnabled:** A pointer to a Boolean value.
 
@@ -4254,7 +4254,7 @@ HRESULT SetOfficerRights(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **fEnable:** A 32-bit BOOL parameter composed of two 16-bit fields. Each of these fields can be set to zero or to a nonzero value as follows.
 
@@ -4325,7 +4325,7 @@ HRESULT GetConfigEntry(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pwszNodePath:** A string value that represents the node path for the configuration information. This parameter can be an empty string and MUST NOT be NULL.<85>
 
@@ -4400,7 +4400,7 @@ HRESULT SetConfigEntry(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pwszNodePath:** A string value that represents the node path for the configuration information. This parameter can be an EMPTY string and MUST NOT be NULL.
 
@@ -4427,7 +4427,7 @@ The following processing rules apply:
 | pwszEntry is "ProviderType" and pwszNodePath is "CSP" | OnNextRestart_Config_CSP_ProviderType |
 | pwszEntry is "HashAlgorithm" and pwszNodePath is "CSP" | OnNextRestart_Config_CSP_Hash_Algorithm |
 | pwszEntry is "CNGHashAlgorithm" and pwszNodePath is "CSP" | OnNextRestart_Config_CSP_CNG_Hash_Algorithm |
-| pwszNodePath is EMPTY and pwszEntry is "CRLPeriodUnits" | The numeric value of the Config_Base_CRL_Validity_Period ADM element. Changing the value with this method MUST affect the validity period of published base [**CRLs**](#gt_certificate-revocation-list-crl) (the use of this ADM element in sections [3.1.4.1.6](#Section_3.1.4.1.6) and [3.1.4.2.1](#Section_3.1.4.2.14)) immediately, without a CA restart. |
+| pwszNodePath is EMPTY and pwszEntry is "CRLPeriodUnits" | The numeric value of the Config_Base_CRL_Validity_Period ADM element. Changing the value with this method MUST affect the validity period of published base [**CRLs**](#gt_certificate-revocation-list-crl) (the use of this ADM element in sections [3.1.4.1.6](#Section_3.1.4.1.6) and [3.1.4.2.1](#Section_3.1.4.2.13)) immediately, without a CA restart. |
 | pwszNodePath is EMPTY and pwszEntry is "CRLPeriod" | The units of time with which the Config_Base_CRL_Validity_Period ADM element is counted. Changing the value with this method MUST affect the validity period of published base CRLs (the use of this ADM element in sections 3.1.4.1.6 and 3.1.4.2.1) immediately, without a CA restart. |
 | pwszNodePath is EMPTY and pwszEntry is "CRLDeltaPeriodUnits" | The numeric value of the Config_Delta_CRL_Validity_Period ADM element. Changing the value with this method MUST affect the validity period of published delta CRLs (the use of this ADM element in sections 3.1.4.1.6 and 3.1.4.2.1) immediately, without a CA restart. |
 | pwszNodePath is EMPTY and pwszEntry is "CRLDeltaPeriod" | The units of time with which the Config_Delta_CRL_Validity_Period ADM element is counted. Changing the value with this method MUST affect the validity period of published delta CRLs (the use of this ADM element in sections 3.1.4.1.6 and 3.1.4.2.1) immediately, without a CA restart. |
@@ -4460,7 +4460,7 @@ HRESULT ImportKey(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **dwRequestId:** An unsigned integer value that represents the [**certificate**](#gt_certificate) request ID in the CA database.
 
@@ -4500,7 +4500,7 @@ HRESULT GetMyRoles(
 
 );
 
-**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **pdwRoles:** A bitwise-OR combination of zero or more [**CA**](#gt_certification-authority-ca) security values based on the CA implementation. Microsoft CA permissions are defined in section [3.1.1.7](#Section_3.1.1.7).
 
@@ -4527,7 +4527,7 @@ HRESULT DeleteRow(
 
 );
 
-**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.19).
+**pwszAuthority:** See the definition of the *pwszAuthority* parameter in section [3.1.4.1.1](#Section_3.1.4.1.12).
 
 **dwFlags:** An unsigned integer value that specifies the type of rows to be deleted. This parameter can be one of the following values.
 
@@ -4544,9 +4544,9 @@ HRESULT DeleteRow(
 | Value | Meaning |
 | --- | --- |
 | 0x00000000 | Delete the [Request table](#Section_3.1.1.1) rows. |
-| 0x00003000 | Delete the [Extension table](#Section_2.2.1.9) rows. |
-| 0x00004000 | Delete the [Attribute table](#Section_3.1.4.1.2) rows. |
-| 0x00005000 | Delete the [CRL table](#Section_3.1.1.4.1) rows. |
+| 0x00003000 | Delete the [Extension table](#Section_3.2.4.1.11) rows. |
+| 0x00004000 | Delete the [Attribute table](#Section_3.2.4.1.11) rows. |
+| 0x00005000 | Delete the [CRL table](#Section_3.1.1.4.2) rows. |
 
 **dwRowId:** An unsigned integer value that represents the row identifier in the [**CA**](#gt_certification-authority-ca) data table. MUST be set to 0 if *FileTime* is nonzero.
 
@@ -4592,7 +4592,7 @@ The following processing rules apply:
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 CRL Next Publish Timer Events
 
-When either the Base or Delta CRL Next Publish Timer reaches its next timeout value, the [**CA**](#gt_certification-authority-ca) SHOULD stop all republishing attempts that might be in progress as a result of the [CRL Publication Retry Timer](#Section_3.1.2.2) and rebuild and republish [**CRLs**](#gt_certificate-revocation-list-crl) using the processing rules in ICertAdminD2::PublishCRLs (Opnum 31) (section [3.1.4.2.1)](#Section_3.1.4.2.14), with the following input values:
+When either the Base or Delta CRL Next Publish Timer reaches its next timeout value, the [**CA**](#gt_certification-authority-ca) SHOULD stop all republishing attempts that might be in progress as a result of the [CRL Publication Retry Timer](#Section_3.1.2.2) and rebuild and republish [**CRLs**](#gt_certificate-revocation-list-crl) using the processing rules in ICertAdminD2::PublishCRLs (Opnum 31) (section [3.1.4.2.1)](#Section_3.1.4.2.13), with the following input values:
 
 - Filetime: This parameter is set to 0.
 - Flags: In this parameter, the F bit is not set. If the [Base CRL Next Publish Timer (section 3.1.2.1.1)](#Section_3.1.2.1.1) has been reached, the B bit is set. If the [Delta CRL Next Publish Timer (section 3.1.2.1.2)](#Section_3.1.2.1.2) has been reached, the D bit is set.
@@ -4710,7 +4710,7 @@ No specific processing rules.
 <a id="Section_3.2.4.1.9"></a>
 ##### 3.2.4.1.9 ICertAdminD::EnumViewColumn (Opnum 11)
 
-See [ICertAdminD2::EnumViewColumnTable](#Section_3.2.4.2.5).
+See [ICertAdminD2::EnumViewColumnTable](#Section_3.1.4.2.5).
 
 <a id="Section_3.2.4.1.10"></a>
 ##### 3.2.4.1.10 ICertAdminD::GetViewDefaultColumnSet (Opnum 12)
@@ -4727,26 +4727,26 @@ No specific processing rules.
 
 The OpenView method obtains the column values for rows associated with a particular resultant set of rows from a [**table**](#gt_table):
 
-- *pwszAuthority*: See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.19).
+- *pwszAuthority*: See the *pwszAuthority* definition in section [3.1.4.1.1](#Section_3.1.4.1.12).
 - *acvr*: Each structure in the array MUST contain the information for individual restrictions on a specific column to be applied to the associated table data before the resultant data is returned by the [**CA**](#gt_certification-authority-ca). The array of restrictions MUST be encoded as specified in [CERTVIEWRESTRICTION](#Section_2.2.1.3).
-- *acolOut*: Each DWORD value specifies the column identifier for the output. Column identifiers MUST be obtained by using one of the following methods: [EnumViewColumn](#Section_3.2.4.2.5), [EnumViewColumnTable](#Section_3.2.4.2.5), or [GetViewDefaultColumnSet](#Section_3.2.4.1.10).
+- *acolOut*: Each DWORD value specifies the column identifier for the output. Column identifiers MUST be obtained by using one of the following methods: [EnumViewColumn](#Section_3.1.4.2.5), [EnumViewColumnTable](#Section_3.1.4.2.5), or [GetViewDefaultColumnSet](#Section_3.1.4.1.10).
 If the marshaled data buffer returned in *pctbResultRows* includes space for an extra [CERTTRANSDBRESULTROW](#Section_2.2.3) structure in addition to the row count returned in *pcelt, and if the extra CERTTRANSDBRESULTROW structure's **rowid** and **ccol** fields are bitwise inverses of each other, then the field can be relied upon by the client as the total number of rows in the currently active view.
 
-The client SHOULD invoke calls to OpenView, [EnumView](#Section_3.2.4.1.13), and [CloseView](#Section_3.2.4.1.14) in the proper sequence, defined as the sequence enforced by the server and documented in sequencing rules in sections [3.1.4.1.12](#Section_3.1.4.1.12), [3.1.4.1.13](#Section_3.2.4.1.13), and [3.1.4.1.14](#Section_3.1.4.1.14).
+The client SHOULD invoke calls to OpenView, [EnumView](#Section_3.2.4.1.13), and [CloseView](#Section_3.2.4.1.14) in the proper sequence, defined as the sequence enforced by the server and documented in sequencing rules in sections [3.1.4.1.12](#Section_3.2.4.1.12), [3.1.4.1.13](#Section_3.2.4.1.13), and [3.1.4.1.14](#Section_3.1.4.1.14).
 
 If the sequence is not followed, the server responds as documented in the server processing rules in section 3.1.4.1.12, 3.1.4.1.13, and 3.1.4.1.14.
 
 <a id="Section_3.2.4.1.13"></a>
 ##### 3.2.4.1.13 ICertAdminD::EnumView (Opnum 15)
 
-See section [3.1.4.1.12](#Section_3.1.4.1.12) for sequencing rules.
+See section [3.1.4.1.12](#Section_3.2.4.1.12) for sequencing rules.
 
-See [ICertAdminD::OpenView](#Section_3.1.4.1.12) for client processing rules.
+See [ICertAdminD::OpenView](#Section_3.2.4.1.12) for client processing rules.
 
 <a id="Section_3.2.4.1.14"></a>
 ##### 3.2.4.1.14 ICertAdminD::CloseView (Opnum 16)
 
-See section [3.1.4.1.12](#Section_3.1.4.1.12) for sequencing rules.
+See section [3.1.4.1.12](#Section_3.2.4.1.12) for sequencing rules.
 
 <a id="Section_3.2.4.1.15"></a>
 ##### 3.2.4.1.15 ICertAdminD::ServerControl (Opnum 17)
@@ -4769,11 +4769,11 @@ No specific processing rules.
 Sequencing rules are as follows:
 
 - Before a [**certificate services**](#gt_certificate-services) backup can occur, a call to BackupPrepare MUST be made to notify the [**CA**](#gt_certification-authority-ca) that a backup of the CA is about to happen.
-- The functions [BackupGetAttachmentInformation](#Section_3.2.4.1.20) and [BackupGetBackupLogs](#Section_3.2.4.1.21) are used after BackupPrepare to retrieve the certificate services list of database file names and database [**log file**](#gt_log-files) names.
-- To open a file for backup purposes, [BackupOpenFile](#Section_3.1.4.1.22) MUST be used before [BackupReadFile](#Section_3.1.4.1.23) or [BackupCloseFile](#Section_3.2.4.1.24).
+- The functions [BackupGetAttachmentInformation](#Section_3.1.4.1.20) and [BackupGetBackupLogs](#Section_3.1.4.1.21) are used after BackupPrepare to retrieve the certificate services list of database file names and database [**log file**](#gt_log-files) names.
+- To open a file for backup purposes, [BackupOpenFile](#Section_3.2.4.1.22) MUST be used before [BackupReadFile](#Section_3.2.4.1.23) or [BackupCloseFile](#Section_3.1.4.1.24).
 - After opening the file for backup purposes (using BackupOpenFile), BackupReadFile is used to retrieve the contents of the file and call an application-specific routine to write the contents to a backup medium.
 - Before reading another file, BackupCloseFile MUST be called to close the already read file.
-- When the backup session is completed, [BackupEnd](#Section_3.2.4.1.19) MUST be invoked.
+- When the backup session is completed, [BackupEnd](#Section_3.1.4.1.19) MUST be invoked.
 The client MUST follow the preceding sequencing rules. If BackupPrepare returns a failure, the client MUST NOT make any further method calls related to backup. If the sequencing rules are not met, the server returns [ERROR_UNEXPECTED_ERROR](#Section_2.2.5).
 
 The client application MUST ensure that a full backup (*grbit* parameter with value 0) has already happened before calling the server for incremental backup (*grbit* parameter with value 1).
@@ -4796,19 +4796,19 @@ The client MUST enforce the sequencing rules as described in [BackupPrepare (se
 <a id="Section_3.2.4.1.22"></a>
 ##### 3.2.4.1.22 ICertAdminD::BackupOpenFile (Opnum 24)
 
-The client MUST enforce the sequencing rules as described in [BackupPrepare (section 3.2.4.1.18)](#Section_3.1.4.1.18). The client MUST call this with the file names obtained from one of the following methods: [BackupGetAttachmentInformation](#Section_3.2.4.1.20), [BackupGetBackupLogs](#Section_3.2.4.1.21), or [BackupGetDynamicFiles](#Section_3.2.4.1.27).
+The client MUST enforce the sequencing rules as described in [BackupPrepare (section 3.2.4.1.18)](#Section_3.1.4.1.18). The client MUST call this with the file names obtained from one of the following methods: [BackupGetAttachmentInformation](#Section_3.1.4.1.20), [BackupGetBackupLogs](#Section_3.1.4.1.21), or [BackupGetDynamicFiles](#Section_3.1.4.1.27).
 
 The client MUST remove the prefix "D" and "!" from the file names obtained through the method calls to BackupGetAttachmentInformation or BackupGetBackupLogs.
 
 <a id="Section_3.2.4.1.23"></a>
 ##### 3.2.4.1.23 ICertAdminD::BackupReadFile (Opnum 25)
 
-The client MUST enforce the sequencing rules as described in [BackupPrepare (section 3.2.4.1.18)](#Section_3.1.4.1.18). After opening the file for backup purposes (by using [BackupOpenFile](#Section_3.1.4.1.22)), the client MUST call BackupReadFile to retrieve the contents of the file and call an application-specific routine to write the contents to a backup medium. The client can call this API multiple times to read the entire content of the file. Upon successful return, if the value of **pcbRead* is less than *cbRead* or is 0, the client MUST assume that the entire contents of the file has been read and MUST call [BackupCloseFile](#Section_3.2.4.1.24).
+The client MUST enforce the sequencing rules as described in [BackupPrepare (section 3.2.4.1.18)](#Section_3.1.4.1.18). After opening the file for backup purposes (by using [BackupOpenFile](#Section_3.2.4.1.22)), the client MUST call BackupReadFile to retrieve the contents of the file and call an application-specific routine to write the contents to a backup medium. The client can call this API multiple times to read the entire content of the file. Upon successful return, if the value of **pcbRead* is less than *cbRead* or is 0, the client MUST assume that the entire contents of the file has been read and MUST call [BackupCloseFile](#Section_3.1.4.1.24).
 
 <a id="Section_3.2.4.1.24"></a>
 ##### 3.2.4.1.24 ICertAdminD::BackupCloseFile (Opnum 26)
 
-The client MUST enforce the sequencing rules as described in [BackupPrepare (section 3.2.4.1.18)](#Section_3.1.4.1.18). The client MUST call BackupCloseFile for each corresponding [BackupOpenFile](#Section_3.1.4.1.22) (and after [BackupReadFile](#Section_3.1.4.1.23) is done).
+The client MUST enforce the sequencing rules as described in [BackupPrepare (section 3.2.4.1.18)](#Section_3.1.4.1.18). The client MUST call BackupCloseFile for each corresponding [BackupOpenFile](#Section_3.2.4.1.22) (and after [BackupReadFile](#Section_3.2.4.1.23) is done).
 
 <a id="Section_3.2.4.1.25"></a>
 ##### 3.2.4.1.25 ICertAdminD::BackupTruncateLogs (Opnum 27)
@@ -4956,24 +4956,24 @@ ICertAdminD::BackupPrepare( L"RootCA", 0, 0, NULL, 0 )
 
 The client verifies that the return value from this method is S_OK (0).
 
-- The client retrieves the database file names. The client calls the [BackupGetAttachmentInformation](#Section_3.2.4.1.20) method with the following parameters.
+- The client retrieves the database file names. The client calls the [BackupGetAttachmentInformation](#Section_3.1.4.1.20) method with the following parameters.
 ICertAdminD::BackupGetAttachmentInformation
 
 (&pwszFileList,&cwList)
 
 - The server returns the number of database and [**log files**](#gt_log-files) by setting the out cwList parameter (in this example, it is set to 1) and pwszFileList parameter (in this example, it is set to L"\\servername\e$\winnt\system32\certlog\rootca.edb").
-- The client opens the specific database file returned in the preceding step. The client needs to learn the length of the file. The client calls the [BackupOpenFile](#Section_3.1.4.1.22) method with the following parameters.
+- The client opens the specific database file returned in the preceding step. The client needs to learn the length of the file. The client calls the [BackupOpenFile](#Section_3.2.4.1.22) method with the following parameters.
 ICertAdminD::BackupOpenFile
 
 (L"\\servername\e$\winnt\system32\certlog\rootca.edb",&Length)
 
 - The server returns the length of the requested file in the *Length* parameter. In this example, the length is 123456.
-- The client allocated the required buffer and reads the content of the DB file. The client calls the [BackupReadFile](#Section_3.1.4.1.23) method with the following parameters.
+- The client allocated the required buffer and reads the content of the DB file. The client calls the [BackupReadFile](#Section_3.2.4.1.23) method with the following parameters.
 ICertAdminD::BackupReadFile(pbData,123456,&Read)
 
 - The server copies the content of the requested file to the *pbData* parameter and sets the length of the actual read operation into the *Read* parameter.
-- The client closes the DB file. The client calls [BackupCloseFile](#Section_3.2.4.1.24) with no parameters. The client verifies that the return value from this method is S_OK (0).
-- The client ends the backup operation by calling the [BackupEnd](#Section_3.2.4.1.19) method with no parameters.
+- The client closes the DB file. The client calls [BackupCloseFile](#Section_3.1.4.1.24) with no parameters. The client verifies that the return value from this method is S_OK (0).
+- The client ends the backup operation by calling the [BackupEnd](#Section_3.1.4.1.19) method with no parameters.
 <a id="Section_5"></a>
 # 5 Security
 
@@ -5712,7 +5712,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 - Certificate Template Information
 Key recovery certificates, when issued by a Windows [**enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca), are automatically written to the configuration [**container**](#gt_container) of [**Active Directory**](#gt_active-directory). The actual [**certificates**](#gt_certificate) are published to the userCertificate [**attribute**](#gt_attribute) (as specified in [[RFC4523]](https://go.microsoft.com/fwlink/?LinkId=90479)) of the [**key recovery agent (KRA)**](#gt_key-recovery-agent-kra) [**object**](#gt_object) when issued to a member of the [**domain**](#gt_domain) administrators group in Active Directory.
 
-<4> Section 3.1.1: Windows implements the version-specific [Request](#Section_3.1.1.1), [Attribute](#Section_3.1.4.1.2), [Extension](#Section_2.2.1.9), and [CRL](#Section_3.1.1.4.1) database [**tables**](#gt_table) as detailed in the following tables.
+<4> Section 3.1.1: Windows implements the version-specific [Request](#Section_3.1.1.1), [Attribute](#Section_3.2.4.1.11), [Extension](#Section_3.2.4.1.11), and [CRL](#Section_3.1.1.4.2) database [**tables**](#gt_table) as detailed in the following tables.
 
 **Request Tables**
 
@@ -6369,7 +6369,7 @@ Where the <Numeric Prefix Value> is a binary OR of the values in the following t
 
 **Default Value:** None.
 
-**Registry Value Mapping to ADM**: A binary security descriptor that is defined in section [2.2.1.11](#Section_2.2.1.11).
+**Registry Value Mapping to ADM**: A binary security descriptor that is defined in section [2.2.1.11](#Section_2.2.1.11.1).
 
 **No Value Semantics**: No Enrollment Agent permissions are defined.
 

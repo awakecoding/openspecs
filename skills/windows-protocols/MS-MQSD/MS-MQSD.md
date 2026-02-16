@@ -406,7 +406,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared among multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
 
-Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.1.1.2](#Section_3.2.1.2) details the data model elements that are private to this protocol.
+Section [3.1.1.1](#Section_3.2.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.1.1.2](#Section_3.2.1.2) details the data model elements that are private to this protocol.
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Shared Data Elements
@@ -566,7 +566,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared among multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
 
-Section [3.2.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.2.1.2](#Section_3.2.1.2) details the data model elements that are private to this protocol.
+Section [3.2.1.1](#Section_3.2.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.2.1.2](#Section_3.2.1.2) details the data model elements that are private to this protocol.
 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Shared Data Elements

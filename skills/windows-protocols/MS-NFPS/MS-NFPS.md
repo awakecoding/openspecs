@@ -454,7 +454,7 @@ The following elements are specific to this protocol:
 | --- | --- |
 | WaitingForSession | The object has created the **SessionFactory**, and is waiting for a **Session**. |
 | SetupSocket | The object has received a **Session** from the **SessionFactory**, and is attempting to set up a **Socket** to the peer for transmission of the **Package**. |
-| SendingBody | The object's **Socket** is successfully set up and the object is now transmitting the **Share** header (section [2.2.2](#Section_4.1.3)), waiting for the **Reply** header (section [2.2.3](#Section_2.2.3)), sending the **IV** object, or sending the encrypted OPC package over the socket. |
+| SendingBody | The object's **Socket** is successfully set up and the object is now transmitting the **Share** header (section [2.2.2](#Section_2.2.2)), waiting for the **Reply** header (section [2.2.3](#Section_4.1.4)), sending the **IV** object, or sending the encrypted OPC package over the socket. |
 | SendingFooter | The object is transmitting the **Share Protocol** footer (section [2.2.4](#Section_2.2.4)). |
 
 The following diagram shows the state transitions for the Share Sender.
@@ -521,11 +521,11 @@ The behavior for the SetupSocket state is specified in section [3.1.7](#Section_
 
 When a Share Sender's **Socket** object has been successfully set up (section [3.1.7](#Section_3.1.7)), the Share Sender state MUST transition to SendingBody, and the following actions MUST be performed:
 
-- Create a **Share** header (section [2.2.2](#Section_4.1.3)) with the following values:
+- Create a **Share** header (section [2.2.2](#Section_2.2.2)) with the following values:
 - **HeaderSize:** The value 10 in [**little-endian**](#gt_little-endian) encoding (0x0A, 0x00). No other value is valid.
 - **TotalContentSizeEstimate:** An estimate of the size of the [**OPC package**](#gt_opc-package). If an estimate cannot be determined, this value MUST be zero.
 - Send the **Share** header over the **Socket**.
-- Synchronously read 2 bytes for the **HeaderSize** field of a **Reply** header (section [2.2.3](#Section_2.2.3)) from the **Socket**.
+- Synchronously read 2 bytes for the **HeaderSize** field of a **Reply** header (section [2.2.3](#Section_4.1.4)) from the **Socket**.
 - Interpret the 2 bytes as a little-endian encoded 16-bit unsigned integer that specifies how many bytes to read for the rest of the message.
 - If nonzero length, synchronously read (**HeaderSize** – 2) bytes from the **Socket**.
 **Note** If the **HeaderSize** is exactly 2, there is nothing to read.
@@ -573,8 +573,8 @@ The following elements are specific to this protocol:
 | Value | Meaning |
 | --- | --- |
 | SetupSocket | The object has received its **Session** from the **SessionFactory**, and is attempting to set up a **Socket** to the peer for transmission of the **Package**. |
-| ReceivingHeader | The object's **Socket** is successfully set up and the object is now waiting for the **Share** header (section [2.2.2](#Section_4.1.3)) over this socket. |
-| ReplyHeaderAndReceivingIV | The **Share** header has been successfully received and the object is now transmitting the **Reply** header (section [2.2.3](#Section_2.2.3)) and receiving the **IV** over this socket. |
+| ReceivingHeader | The object's **Socket** is successfully set up and the object is now waiting for the **Share** header (section [2.2.2](#Section_2.2.2)) over this socket. |
+| ReplyHeaderAndReceivingIV | The **Share** header has been successfully received and the object is now transmitting the **Reply** header (section [2.2.3](#Section_4.1.4)) and receiving the **IV** over this socket. |
 | ReceivingPackage | The object has received the **IV** and is now receiving the encrypted [**OPC package**](#gt_opc-package) over this socket. |
 
 The following diagram shows the state transitions for the Share Receiver:
@@ -638,14 +638,14 @@ The behavior for the SetupSocket state is specified in section [3.1.7](#Section_
 
 When a Share Receiver's **Socket** has been successfully set up (section [3.1.7](#Section_3.1.7)), the Share Receiver state MUST transition to ReplyHeaderAndReceivingIV (section [3.3.1](#Section_3.3.1)), and the following actions MUST be performed:
 
-- Synchronously read 2 bytes for the **HeaderSize** field of a **Share** header (section [2.2.2](#Section_4.1.3)) from the **Socket**.
+- Synchronously read 2 bytes for the **HeaderSize** field of a **Share** header (section [2.2.2](#Section_2.2.2)) from the **Socket**.
 - Interpret the 2 bytes as a [**little-endian**](#gt_little-endian) encoded 16-bit unsigned integer that specifies how many bytes to read for the rest of the message.
 - If nonzero length, synchronously read (**HeaderSize** – 2) bytes from the **Socket**.
 **Note** If the **HeaderSize** value is exactly 2, there is nothing to read.
 
 - If the total received **HeaderSize** value is greater than or equal to 10 (0x0A, 0x00), bytes 3 through 10 are to be interpreted as the **TotalContentSizeEstimate** field of the message, which is a little-endian encoded 64-bit unsigned integer.
 - All bytes received in the **Share** header after the 10th byte MUST be ignored.
-- Create a **Reply** header (section [2.2.3](#Section_2.2.3)) with the following value:
+- Create a **Reply** header (section [2.2.3](#Section_4.1.4)) with the following value:
 - **HeaderSize**: The value 2 in little-endian encoding (0x02, 0x00). No other value is valid.
 - Set the Share Receiver's **SymmetricKey** element to a 128-bit key derived by taking the SHA256 hash of the **Session** object's **SharedSecretKey** element.
 - Prepare the Share Receiver to receive the **IV** as the next 16 bytes of the data stream.
@@ -733,7 +733,7 @@ The third connection, which would have been successful given enough time, did no
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Share Header
 
-Upon receipt of the reply **Socket Connect** header (section [2.2.1](#Section_2.2.1)), the Share Sender sends the **Share** header (section [2.2.2](#Section_4.1.3)). The Share Sender has the size of the [**OPC package**](#gt_opc-package) to be sent, so it sets the **TotalContentSizeEstimate** field of the **Share** header appropriately. In this case, the **Share** header contains the following values in byte order: 0x0A, 0x00, 0xF4, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00. The following packet diagram shows the values in [**little-endian**](#gt_little-endian) 16-bit word order.
+Upon receipt of the reply **Socket Connect** header (section [2.2.1](#Section_2.2.1)), the Share Sender sends the **Share** header (section [2.2.2](#Section_2.2.2)). The Share Sender has the size of the [**OPC package**](#gt_opc-package) to be sent, so it sets the **TotalContentSizeEstimate** field of the **Share** header appropriately. In this case, the **Share** header contains the following values in byte order: 0x0A, 0x00, 0xF4, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00. The following packet diagram shows the values in [**little-endian**](#gt_little-endian) 16-bit word order.
 
 ```mermaid
 packet-beta
@@ -746,7 +746,7 @@ packet-beta
 <a id="Section_4.1.4"></a>
 ### 4.1.4 Reply Header
 
-Upon receipt of the complete **Share** header (section [2.2.2](#Section_4.1.3)), the Share Receiver responds with a **Reply** header (section [2.2.3](#Section_2.2.3)). The **Reply** header contains no useful information in this version of the protocol and is provided for future versions of the protocol. The **Reply** header contains the following values: 0x02, 0x00. The following packet diagram shows the values in [**little-endian**](#gt_little-endian) 16-bit word order.
+Upon receipt of the complete **Share** header (section [2.2.2](#Section_2.2.2)), the Share Receiver responds with a **Reply** header (section [2.2.3](#Section_4.1.4)). The **Reply** header contains no useful information in this version of the protocol and is provided for future versions of the protocol. The **Reply** header contains the following values: 0x02, 0x00. The following packet diagram shows the values in [**little-endian**](#gt_little-endian) 16-bit word order.
 
 ```mermaid
 packet-beta
@@ -756,7 +756,7 @@ packet-beta
 <a id="Section_4.1.5"></a>
 ### 4.1.5 Share Data
 
-Upon receipt of the **Reply** header (section [2.2.3](#Section_2.2.3)), the Share Receiver starts streaming the **IV** () followed by the encrypted blocks of OPC data (except any remainder bytes that do not fill a full 16-byte block; these are included instead within the Share Protocol footer). Once it is done streaming the main OPC data, it constructs the **Share Protocol** footer (section [2.2.4](#Section_2.2.4)) and sends it on the socket, and then gracefully closes the socket.
+Upon receipt of the **Reply** header (section [2.2.3](#Section_4.1.4)), the Share Receiver starts streaming the **IV** () followed by the encrypted blocks of OPC data (except any remainder bytes that do not fill a full 16-byte block; these are included instead within the Share Protocol footer). Once it is done streaming the main OPC data, it constructs the **Share Protocol** footer (section [2.2.4](#Section_2.2.4)) and sends it on the socket, and then gracefully closes the socket.
 
 <a id="Section_4.1.5.1"></a>
 #### 4.1.5.1 Base Case

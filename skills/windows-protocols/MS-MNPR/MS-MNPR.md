@@ -4762,7 +4762,7 @@ packet-beta
 
 **dataLength (4 bytes):** The total byte length of the following data packet.
 
-**data (variable):** Data packet containing a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22.7) and subsections.
+**data (variable):** Data packet containing a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22) and subsections.
 
 <a id="Section_2.2.5.7"></a>
 #### 2.2.5.7 NetMeeting Object Manager Object Add
@@ -4830,7 +4830,7 @@ packet-beta
 
 **dataLength (4 bytes):** The total byte length of the following data packet.
 
-**data (variable):** A data packet that contains a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22.7) and its subsections.
+**data (variable):** A data packet that contains a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22) and its subsections.
 
 <a id="Section_2.2.5.8"></a>
 #### 2.2.5.8 NetMeeting Object Manager Object Catchup
@@ -4921,7 +4921,7 @@ packet-beta
 
 **dataLength (4 bytes):** The total byte length of the following data packet.
 
-**data (variable):** Data packet containing a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22.7) and subsections.
+**data (variable):** Data packet containing a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22) and subsections.
 
 <a id="Section_2.2.5.9"></a>
 #### 2.2.5.9 NetMeeting Object Manager Object Delete
@@ -5072,7 +5072,7 @@ packet-beta
 
 **dataLength (4 bytes):** The total byte length of the following data packet.
 
-**data (variable):** The data packet that contains a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22.7) and subsections.
+**data (variable):** The data packet that contains a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22) and subsections.
 
 <a id="Section_2.2.5.12"></a>
 #### 2.2.5.12 NetMeeting Object Manager Object Update
@@ -5126,7 +5126,7 @@ packet-beta
 
 **dataLength (4 bytes):** The total byte length of the following data packet.
 
-**data (variable):** The data packet that contains a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22.7) and its subsections.
+**data (variable):** The data packet that contains a full or partial workset object, as specified in section [2.2.5.22](#Section_2.2.5.22) and its subsections.
 
 <a id="Section_2.2.5.13"></a>
 #### 2.2.5.13 NetMeeting Object Manager Unlock

@@ -1131,7 +1131,7 @@ The following concepts are pervasive throughout this specification.
 
 This specification uses [KNUTH1] section 2.3.4.2 as a reference for the graph-related terms [**oriented tree**](#gt_oriented-tree), root, vertex, arc, initial vertex, and final vertex.
 
-Authentication concepts for domains, account domains, domain controllers, security principals, and user objects can be found in [MS-AUTHSOD](#Section_1.3) section 1.1.1 and subsections.
+Authentication concepts for domains, account domains, domain controllers, security principals, and user objects can be found in [MS-AUTHSOD](#Section_5.1.1) section 1.1.1 and subsections.
 
 **replica:** A variable containing a set of [**objects**](#gt_object).
 
@@ -1348,7 +1348,7 @@ This document uses the following terms:
 **DNS name**: A [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn).
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides [**authentication**](#gt_authentication) of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS].
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides [**authentication**](#gt_authentication) of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_5.1.1) section 1.1.1.5 and [MS-ADTS].
 
 <a id="gt_domain-controller-dc"></a>
 **domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for [**objects**](#gt_object) and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an [**object**](#gt_object) replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds), the [**DC**](#gt_domain-controller-dc) contains [**full NC replicas**](#gt_full-nc-replica) of the [**configuration naming context (config NC)**](#gt_configuration-naming-context-config-nc), [**schema naming context (schema NC)**](#gt_schema-naming-context-schema-nc), and one of the [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). If the [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) is a [**global catalog server (GC server)**](#gt_global-catalog-server-gc-server), it contains [**partial NC replicas**](#gt_partial-nc-replica) of the remaining [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds), only one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) can run on one server. However, several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can coexist with one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) on one server. The [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DC**](#gt_domain-controller-dc) contains [**full NC replicas**](#gt_full-nc-replica) of the [**config NC**](#gt_configuration-naming-context-config-nc) and the [**schema NC**](#gt_schema-naming-context-schema-nc) in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](#Section_5.1.1).
@@ -2113,7 +2113,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_6.1.1.2.4)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_5.1.1)".
 
 [MS-DSSP] Microsoft Corporation, "[Directory Services Setup Remote Protocol](#Section_6.1.1.2.4)".
 
@@ -2202,7 +2202,7 @@ One of the update behaviors is the maintenance of the change log for use by Wind
 
 The security services that Active Directory offers clients of LDAP are specified in section [5.1](#Section_5).
 
-Active Directory contains a number of [**objects**](#gt_object), visible through LDAP, that have special significance to the system. Section [6.1](#Section_3.1.1.2.2.1) specifies these objects.
+Active Directory contains a number of [**objects**](#gt_object), visible through LDAP, that have special significance to the system. Section [6.1](#Section_1) specifies these objects.
 
 A server running Active Directory is part of a distributed system that performs replication. The [**Knowledge Consistency Checker (KCC)**](#gt_knowledge-consistency-checker-kcc) is a component that is used to create spanning trees for [**DC**](#gt_domain-controller-dc)-to-DC replication and is specified in section [6.2](#Section_6.2).
 
@@ -2239,7 +2239,7 @@ Other protocols make use of implementations of the Active Directory Technical Sp
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-Capability negotiation is performed using the root DSE as described in section [3.1.1.3.2](#Section_3.1.1.3.2.60).
+Capability negotiation is performed using the root DSE as described in section [3.1.1.3.2](#Section_3.1.1.3.2.1).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -2279,7 +2279,7 @@ This section specifies types and data structures used in the remainder of this d
 <a id="Section_2.2.1"></a>
 ### 2.2.1 LCID-Locale Mapping Table
 
-The following table maps Windows locales (for example, French - France, Irish - Ireland) to numeric identifiers called locale identifiers (LCIDs). These numeric identifiers are used as input to the [**Unicode**](#gt_unicode) string comparison function specified in section [6.5](#Section_1.3). They are also used to name Display Specifier [**containers**](#gt_container), specified in section [6.1.1.2.3](#Section_6.1.1.2.3), "Display Specifiers Container".
+The following table maps Windows locales (for example, French - France, Irish - Ireland) to numeric identifiers called locale identifiers (LCIDs). These numeric identifiers are used as input to the [**Unicode**](#gt_unicode) string comparison function specified in section [6.5](#Section_1.3). They are also used to name Display Specifier [**containers**](#gt_container), specified in section [6.1.1.2.3](#Section_6.1.1.2.3.1), "Display Specifiers Container".
 
 | LCID | Language | Location |
 | --- | --- | --- |
@@ -2809,7 +2809,7 @@ All multibyte fields have little-endian byte ordering.
 <a id="Section_2.2.9"></a>
 ### 2.2.9 Search Flags
 
-The following table defines the valid search flags used on [**attributes**](#gt_attribute), as specified in section [3.1.1.2.3](#Section_3.1.1.2.3.4). The flags are presented in [**big-endian**](#gt_big-endian) byte order.
+The following table defines the valid search flags used on [**attributes**](#gt_attribute), as specified in section [3.1.1.2.3](#Section_3.1.1.2.3.1). The flags are presented in [**big-endian**](#gt_big-endian) byte order.
 
 ```mermaid
 packet-beta
@@ -2951,7 +2951,7 @@ packet-beta
 <a id="Section_2.2.11"></a>
 ### 2.2.11 schemaFlagsEx Flags
 
-The following table defines the valid schemaFlagsEx flags that are used on [**attributes**](#gt_attribute), as specified in section [3.1.1.2.3](#Section_3.1.1.2.3.4). The flags are presented in [**big-endian**](#gt_big-endian) byte order.
+The following table defines the valid schemaFlagsEx flags that are used on [**attributes**](#gt_attribute), as specified in section [3.1.1.2.3](#Section_3.1.1.2.3.1). The flags are presented in [**big-endian**](#gt_big-endian) byte order.
 
 ```mermaid
 packet-beta
@@ -3022,7 +3022,7 @@ Constants for defining [**group**](#gt_group) type. These constants define the v
 
 **GROUP_TYPE_SECURITY_ENABLED:** Specifies a [**security-enabled group**](#gt_security-enabled-group).
 
-The flag GROUP_TYPE_BUILTIN_LOCAL_GROUP is reserved for use by the system, and can be set in combination with other flags on system-created **Builtin** [**objects**](#gt_object) (see section [6.1.1.4.12](#Section_6.1.1.4.12.12)). The flag GROUP_TYPE_BUILTIN_LOCAL_GROUP cannot be set by clients.
+The flag GROUP_TYPE_BUILTIN_LOCAL_GROUP is reserved for use by the system, and can be set in combination with other flags on system-created **Builtin** [**objects**](#gt_object) (see section [6.1.1.4.12](#Section_6.1.1.4.12.6)). The flag GROUP_TYPE_BUILTIN_LOCAL_GROUP cannot be set by clients.
 
 Otherwise, the flags GROUP_TYPE_ACCOUNT_GROUP, GROUP_TYPE_RESOURCE_GROUP, GROUP_TYPE_UNIVERSAL_GROUP, GROUP_TYPE_APP_BASIC_GROUP, and GROUP_TYPE_APP_QUERY_GROUP are mutually exclusive, and only one value MUST be set. The flag GROUP_TYPE_SECURITY_ENABLED can be combined using a bitwise OR with flags GROUP_TYPE_BUILTIN_LOCAL_GROUP, GROUP_TYPE_ACCOUNT_GROUP, GROUP_TYPE_RESOURCE_GROUP, and GROUP_TYPE_UNIVERSAL_GROUP.
 
@@ -3213,7 +3213,7 @@ The optional feature values are constants for defining behaviors of [**optional 
 
 **SERVER_OPTIONAL_FEATURE:** Specifies that the scope of the optional feature is server-wide.
 
-For more details, see section [3.1.1.9](#Section_2.2.17).
+For more details, see section [3.1.1.9](#Section_3.1.1.9.2).
 
 <a id="Section_2.2.18"></a>
 ### 2.2.18 Claims Wire Structures
@@ -3932,7 +3932,7 @@ This defines **DSName** as a type of tuple with a DN–valued field *dn*, a **GU
 
 The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) data model is defined by [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337). Because the LDAP RFCs and their underlying ITU specifications have been interpreted in a variety of ways, this section defines a more specific model that correctly represents the behavior of [**Active Directory**](#gt_active-directory) [**objects**](#gt_object) and [**attributes**](#gt_attribute) and describes the correspondence between this model and the LDAP model.
 
-The model is based on the general definitions of Replica, Object, and Attribute given in section [1](#Section_3.1.1.2.2.1), and repeated here for convenience:
+The model is based on the general definitions of Replica, Object, and Attribute given in section [1](#Section_1), and repeated here for convenience:
 
 A *replica* is a variable containing a set of objects.
 
@@ -4154,7 +4154,7 @@ Replicas of a domain NC have one of these two subtypes:
 - [**Filtered GC partial NC replica**](#gt_filtered-gc-partial-nc-replica): The filter removes all the attributes (and their values) that are not in the partial replica's GC partial attribute set, as well as all the attributes (and their values) in the filtered attribute set. Domain NCs, excluding the [**default domain NC**](#gt_default-domain-naming-context-default-domain-nc), that are hosted on an RODC are filtered GC partial NC replicas. Such domain NCs will exist on the RODC when the RODC is a [**GC**](#gt_global-catalog-gc).
 Replicas of other NC types are always full. A full replica is either *writable*, that is, it accepts originating updates, or is read-only. A partial replica is read-only.
 
-This section has introduced many concepts without describing how they are reflected in the state model. To a great extent this obligation will be discharged in other sections of this document. The schema NC is described in section [3.1.1.2](#Section_1.3), while the other NC types are described in section [6.1](#Section_3.1.1.2.2.1). Here are three elaborations of the state model that can be explained without making a forward reference:
+This section has introduced many concepts without describing how they are reflected in the state model. To a great extent this obligation will be discharged in other sections of this document. The schema NC is described in section [3.1.1.2](#Section_1.3), while the other NC types are described in section [6.1](#Section_1). Here are three elaborations of the state model that can be explained without making a forward reference:
 
 - NC replicas are modeled by making a **DSName**, converted into a string formatted as specified in [MS-DRSR] section 5.16.2.1, the first element of a replica.
 - The root object of a domain NC or an AD DS application NC has class domainDNS. The [**RDN attribute**](#gt_rdn-attribute) of domainDNS is dc. Therefore both the dc and name attributes of the root object of a domain NC or an AD DS application NC equal the first component (for example, *n*1 for DNS name *n*1.*n*2. ... .*n*k) of the NC's DNS name. The root object of an AD LDS application NC can have any object class except dMD or configuration.
@@ -4416,7 +4416,7 @@ cn=Peter Houston,ou=NTDEV,dc=microsoft,dc=com" ) )
 
 )
 
-This example illustrates the *dn* relationships between the root domain NC, config NC, and schema NC. It shows that in a forest, the parent relationship does not cross NC boundaries. It also illustrates the [**object classes**](#gt_object-class) of the config NC and schema NC root objects and the lack of a *sid* in these NCs. It does not show the contents of these NCs, which are specified in sections [6.1](#Section_3.1.1.2.2.1) and [3.1.1.2](#Section_1.3).
+This example illustrates the *dn* relationships between the root domain NC, config NC, and schema NC. It shows that in a forest, the parent relationship does not cross NC boundaries. It also illustrates the [**object classes**](#gt_object-class) of the config NC and schema NC root objects and the lack of a *sid* in these NCs. It does not show the contents of these NCs, which are specified in sections [6.1](#Section_1) and [3.1.1.2](#Section_1.3).
 
 Every [**object**](#gt_object) in a forest has a [**canonical name**](#gt_canonical-name). The canonical name of an object is a syntactic transformation of its DN into something resembling a pathname that still identifies the object. A canonical name is a DNS name, followed by a "/", followed by a sequence of zero or more names separated by "/". The DNS name is the translation of the final sequence of "dc=" DN components into an equivalent DNS name (following [[RFC2247]](https://go.microsoft.com/fwlink/?LinkId=91344)). The sequence of names is the sequence of names in the non-"dc=" DN components, appearing in the reverse order to the order they appeared in the DN. Here are several examples of this translation drawn from the preceding example.
 
@@ -4807,7 +4807,7 @@ Since a DC operating as [**AD LDS**](#gt_active-directory-lightweight-directory-
 
 In a given NC, each FSMO role is represented by an object. [MS-DRSR] section 4.1.10.5.3 (GetReplScope) specifies these objects, which are called [**FSMO role objects**](#gt_fsmo-role-object).
 
-The fSMORoleOwner attribute of each FSMO role object is an [**object reference**](#gt_object-reference) to the nTDSDSA object of the DC that owns the role; that is, the DC that performs updates to objects in the role. nTDSDSA objects and how they represent DCs are specified in section [6.1](#Section_3.1.1.2.2.1).
+The fSMORoleOwner attribute of each FSMO role object is an [**object reference**](#gt_object-reference) to the nTDSDSA object of the DC that owns the role; that is, the DC that performs updates to objects in the role. nTDSDSA objects and how they represent DCs are specified in section [6.1](#Section_1).
 
 An originating update to an object within a FSMO role generates an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) referral if the DC that receives the request cannot perform the update; the referral is to the DC represented by the nTDSDSA object referenced by the FSMO role object's fSMORoleOwner attribute on the DC that received the request.
 
@@ -4837,7 +4837,7 @@ This section uses directed graphs to model [**replication**](#gt_replication) to
 
 This section introduces concepts that are used in specifying the KCC in section [6.2](../MS-SRPL/MS-SRPL.md). The concepts are simplified here because this section ignores the [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) replication transport [MS-SRPL](../MS-SRPL/MS-SRPL.md) and [**RODCs**](#gt_read-only-domain-controller-rodc). Section 6.2 specifies the concepts in full generality.
 
-Associated with each [**NC replica**](#gt_nc-replica) is a repsFrom abstract [**attribute**](#gt_attribute) as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 5.172. The value of this attribute is a set of tuples. Each tuple contains a field *uuidDsa* that contains the objectGUID of an nTDSDSA object. The nTDSDSA object represents a [**DC**](#gt_domain-controller-dc) as specified in section [6.1](#Section_3.1.1.2.2.1).
+Associated with each [**NC replica**](#gt_nc-replica) is a repsFrom abstract [**attribute**](#gt_attribute) as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 5.172. The value of this attribute is a set of tuples. Each tuple contains a field *uuidDsa* that contains the objectGUID of an nTDSDSA object. The nTDSDSA object represents a [**DC**](#gt_domain-controller-dc) as specified in section [6.1](#Section_1).
 
 Given a [**forest**](#gt_forest) and an [**NC**](#gt_naming-context-nc) within the forest, define the [**NC replica graph**](#gt_nc-replica-graph) as follows:
 
@@ -4877,7 +4877,7 @@ If *client* and *server* are two [**DCs**](#gt_domain-controller-dc) in the [**N
 
 - The DC *client's* repsFrom tuple for *server* contains a *schedule* field that calls for [**replication**](#gt_replication) at the current time. The *schedule* contains a REPLTIMES structure as specified in [MS-DRSR] section 5.165. This is *scheduled replication*.
 - The DC *server* calls the IDL_DRSReplicaSync method ([MS-DRSR] section 4.1.23.2) on the *client*. This is *event-driven replication*. The events that cause this form of replication are specified later in this section.
-A precondition for event-driven replication involves *server's* repsTo abstract [**attribute**](#gt_attribute), specified in [MS-DRSR] section 5.173. The repsTo abstract attribute is a sequence tuples, like repsFrom. Like repsFrom, each repsTo tuple contains a field *uuidDsa* that contains the objectGUID of an nTDSDSA object. The nTDSDSA object represents a DC as specified in section [6.1](#Section_3.1.1.2.2.1). If *server's* repsTo abstract attribute contains a tuple whose *uuidDsa* field contains the objectGUID of client's nTDSDSA object, *server* performs event-driven replication to *client*.
+A precondition for event-driven replication involves *server's* repsTo abstract [**attribute**](#gt_attribute), specified in [MS-DRSR] section 5.173. The repsTo abstract attribute is a sequence tuples, like repsFrom. Like repsFrom, each repsTo tuple contains a field *uuidDsa* that contains the objectGUID of an nTDSDSA object. The nTDSDSA object represents a DC as specified in section [6.1](#Section_1). If *server's* repsTo abstract attribute contains a tuple whose *uuidDsa* field contains the objectGUID of client's nTDSDSA object, *server* performs event-driven replication to *client*.
 
 It remains to specify how a DC's repsTo abstract attribute is populated, and to specify the events that trigger event-driven replication.
 
@@ -4898,7 +4898,7 @@ The events that trigger event-driven replication from a DC *server* are as follo
 
 [**Replication latency**](#gt_replication-latency) is the delay between the time of an [**originating update**](#gt_originating-update) to an [**NC**](#gt_naming-context-nc) and the time when this [**update**](#gt_update) is reflected in all [**replicas**](#gt_replica) of that NC. Some updates are superseded before reaching all replicas, but for the purposes of this simplified definition, consider an [**attribute**](#gt_attribute) update that is not followed by other updates to that attribute for a long time.
 
-Administrators of [**Active Directory**](#gt_active-directory) control [**replication**](#gt_replication) latency by setting several variables, specified in section [6.1](#Section_3.1.1.2.2.1) and section [6.2](#Section_6.2). These variables ultimately control the schedules used for scheduled replication, and they control the use of event-driven replication. Replication latency is not fully predictable in a real system, because it depends upon the volume of read requests to [**DCs**](#gt_domain-controller-dc), the volume of originating update requests to DCs, and the availability of DCs and communications links.
+Administrators of [**Active Directory**](#gt_active-directory) control [**replication**](#gt_replication) latency by setting several variables, specified in section [6.1](#Section_1) and section [6.2](#Section_6.2). These variables ultimately control the schedules used for scheduled replication, and they control the use of event-driven replication. Replication latency is not fully predictable in a real system, because it depends upon the volume of read requests to [**DCs**](#gt_domain-controller-dc), the volume of originating update requests to DCs, and the availability of DCs and communications links.
 
 If the typical replication latency is larger than the [**tombstone lifetime**](#gt_tombstone-lifetime) (the value of the tombstoneLifetime attribute of the Directory Services [**object**](#gt_object) specified in section [6.1.1.2.4.1.1](#Section_6.1.1.2.4.1.1), interpreted as a number of days), some [**tombstones**](#gt_tombstone) or [**recycled-objects**](#gt_recycled-object) will be garbage collected before they have replicated to every [**NC replica**](#gt_nc-replica). As a result, some objects will never be deleted in some replicas. To restore consistency of object existence, an administrator cleans up such *lingering objects* with utility programs.
 
@@ -4969,7 +4969,7 @@ After a schema change is done on the schema master, the following is the new val
 
 0xFF 0x00 0x00 0x07 0xC8 0x20 0x79 0x92 0xE6 0x84 0xB6 0xF6 0x40 0x99 0x47 0x21 0x8B 0xC9 0xE0 0xF1 0xF3
 
-There is a child of the schema container with [**RDN**](#gt_relative-distinguished-name-rdn) cn=Aggregate and class subSchema. This object has several [**constructed attributes**](#gt_constructed-attribute) that are compliant with [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.5.2, through which the client can retrieve the forest's current schema. See constructed attributes in section [3.1.1.4.5](#Section_3.1.1.4.5.23). This object cannot be modified.
+There is a child of the schema container with [**RDN**](#gt_relative-distinguished-name-rdn) cn=Aggregate and class subSchema. This object has several [**constructed attributes**](#gt_constructed-attribute) that are compliant with [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.5.2, through which the client can retrieve the forest's current schema. See constructed attributes in section [3.1.1.4.5](#Section_3.1.1.4.5.1). This object cannot be modified.
 
 <a id="Section_3.1.1.2.2"></a>
 ##### 3.1.1.2.2 Syntaxes
@@ -5289,7 +5289,7 @@ This comparison rule is identical to the CaseString comparison rule, except that
 <a id="Section_3.1.1.2.2.4.13"></a>
 UnicodeString Comparison Rule
 
-Comparison of values using this comparison rule is performed via [**Unicode**](#gt_unicode) comparison, which is specified in section [6.5](#Section_1.3). If an LDAP_SERVER_SORT_OID extended control (see section [3.1.1.3.4](#Section_3.1.1.3.4.8)) is attached to the search request and specifies a locale in its orderingRule field, the locale specified is used for the Unicode comparison. Otherwise, the Unicode comparison is performed using United States English (LCID 0409). The comparison function is independent of the server locale and therefore gives the same result on all [**DCs**](#gt_domain-controller-dc). The comparison function operates on Unicode strings containing characters from all alphabets and does not, for instance, involve reducing the string to the alphabet used by United States English before performing the comparison. This comparison function is used to determine both equality and ordering (greater-than-or-equals and less-than-or-equals), as well as to determine equality of substrings when performing a substring comparison.
+Comparison of values using this comparison rule is performed via [**Unicode**](#gt_unicode) comparison, which is specified in section [6.5](#Section_1.3). If an LDAP_SERVER_SORT_OID extended control (see section [3.1.1.3.4](#Section_3.1.1.3.4.2)) is attached to the search request and specifies a locale in its orderingRule field, the locale specified is used for the Unicode comparison. Otherwise, the Unicode comparison is performed using United States English (LCID 0409). The comparison function is independent of the server locale and therefore gives the same result on all [**DCs**](#gt_domain-controller-dc). The comparison function operates on Unicode strings containing characters from all alphabets and does not, for instance, involve reducing the string to the alphabet used by United States English before performing the comparison. This comparison function is used to determine both equality and ordering (greater-than-or-equals and less-than-or-equals), as well as to determine equality of substrings when performing a substring comparison.
 
 This comparison rule is used in processing search [**filters**](#gt_filter), *not* in sorting search results. See section [3.1.1.3.4.1.13](#Section_3.1.1.3.4.1.13) for per-locale sorting of search results.
 
@@ -5320,11 +5320,11 @@ The term system-only in the following table means that the attribute is defined 
 | msDS-IntId | Not specified on Add (if specified in the Add request, the DC returns error *unwillingToPerform* / *<unrestricted>*); the value (a 32-bit unsigned integer in the subrange [0x80000000..0xBFFFFFFF]) is generated by the DC. Present on attributeSchema objects added when forest functional level is DS_BEHAVIOR_WIN2003 or greater with FLAG_SCHEMA_BASE_OBJECT not present in systemFlags (below). The value of msDS-IntId is the [ATTRTYP](#Section_3.1.1.2.6) of this attributeSchema object. Unique among all values of this attribute on objects in the schema NC, regardless of forest functional level. System-only. |
 | linkID | Optional. If present, and not zero, this is a [**link attribute**](#gt_link-attribute), and the linkID value is unique among all values of this attribute on objects in the schema NC, regardless of forest functional level. If linkID is even, the attribute is a [**forward link attribute**](#gt_forward-link-attribute); otherwise it is a [**back link attribute**](#gt_back-link-attribute). The linkID for back link attribute equals to the linkID of the corresponding forward link attribute plus one. Special auto-generation behavior for the linkID attribute is specified in section [3.1.1.2.3.1](#Section_3.1.1.2.3.1). System-only. |
 | mAPIID | Optional. "Unique" integer that identifies this attribute, used by [**Messaging Application Programming Interface (MAPI)**](#gt_messaging-application-programming-interface-mapi) clients. Not present on attributeSchema objects in [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds). Special auto-generation behavior for the mAPIID attribute is specified in section [3.1.1.2.3.2](#Section_3.1.1.2.3.2). System-only. If the [**DC functional level**](#gt_dc-functional-level) is DS_BEHAVIOR_WIN2008 or greater, the mAPIID attribute can be modified on attributeSchema objects that do not include FLAG_SCHEMA_BASE_OBJECT as the systemFlags attribute. Otherwise, the mAPIID attribute cannot be modified. |
-| attributeSyntax | One of the three attributes that identify the syntax of the attribute. See section [3.1.1.2.2](#Section_3.1.1.2.2.2). System-only. |
+| attributeSyntax | One of the three attributes that identify the syntax of the attribute. See section [3.1.1.2.2](#Section_3.1.1.2.2.1). System-only. |
 | oMSyntax | One of the three attributes that identify the syntax of the attribute. See section 3.1.1.2.2. System-only. |
 | oMObjectClass | Optional. One of the three attributes that identify the syntax of the attribute. See section 3.1.1.2.2. System-only. |
 | isSingleValued | TRUE if this attribute is single-valued; FALSE, if it is multivalued. If an attribute is multivalued, all values have the syntax specified for the attribute. System-only. |
-| systemFlags | Optional. Flags that determine specific system operations; see section [2.2.10](#Section_6.1.1.2.6.25) for values. The systemFlags values specific to an attributeSchema object are: FLAG_ATTR_NOT_REPLICATED: This attribute is [**nonreplicated**](#gt_nonreplicated-attribute). **Note** If the FLAG_ATTR_NOT_REPLICATED bit is not specified on Add and the linkID value is odd (denoting a back link attribute), the DC adds the FLAG_ATTR_NOT_REPLICATED bit to the systemFlags value using a bitwise OR. FLAG_ATTR_REQ_PARTIAL_SET_MEMBER: This attribute is a member of [**PAS**](#gt_partial-attribute-set-pas) regardless the value of attribute isMemberOfPartialAttributeSet. FLAG_ATTR_IS_CONSTRUCTED: This attribute is a [**constructed attribute**](#gt_constructed-attribute). FLAG_ATTR_IS_OPERATIONAL: This attribute is an [**operational attribute**](#gt_operational-attribute), as defined in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 3.2.1. FLAG_SCHEMA_BASE_OBJECT: This class is part of the base [**schema**](#gt_schema). Modifications to a base [**schema object**](#gt_schema-object) are restricted as described in section [3.1.1.2.5](#Section_3.1.1.2.5.3). FLAG_ATTR_IS_RDN: This attribute can be used as an [**RDN attribute**](#gt_rdn-attribute) of a class. System-only. |
+| systemFlags | Optional. Flags that determine specific system operations; see section [2.2.10](#Section_6.1.1.2.6.25) for values. The systemFlags values specific to an attributeSchema object are: FLAG_ATTR_NOT_REPLICATED: This attribute is [**nonreplicated**](#gt_nonreplicated-attribute). **Note** If the FLAG_ATTR_NOT_REPLICATED bit is not specified on Add and the linkID value is odd (denoting a back link attribute), the DC adds the FLAG_ATTR_NOT_REPLICATED bit to the systemFlags value using a bitwise OR. FLAG_ATTR_REQ_PARTIAL_SET_MEMBER: This attribute is a member of [**PAS**](#gt_partial-attribute-set-pas) regardless the value of attribute isMemberOfPartialAttributeSet. FLAG_ATTR_IS_CONSTRUCTED: This attribute is a [**constructed attribute**](#gt_constructed-attribute). FLAG_ATTR_IS_OPERATIONAL: This attribute is an [**operational attribute**](#gt_operational-attribute), as defined in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 3.2.1. FLAG_SCHEMA_BASE_OBJECT: This class is part of the base [**schema**](#gt_schema). Modifications to a base [**schema object**](#gt_schema-object) are restricted as described in section [3.1.1.2.5](#Section_3.1.1.2.5.2). FLAG_ATTR_IS_RDN: This attribute can be used as an [**RDN attribute**](#gt_rdn-attribute) of a class. System-only. |
 | systemOnly | Optional. The value of a system-only attribute cannot be modified on existing objects by LDAP Modify requests (except as specified in section 3.1.1.5.3.2), only by the system. System-only. |
 | cn | [**RDN**](#gt_relative-distinguished-name-rdn) for the schema object. |
 | lDAPDisplayName | "Unique" name that identifies this attribute, used by [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) clients. If not specified on Add, the DC generates a value as specified in section [3.1.1.2.3.4](#Section_3.1.1.2.3.4). The syntax of lDAPDisplayName is described in [RFC2251] section 4.1.4. |
@@ -5527,7 +5527,7 @@ Each class designates an [**RDN attribute**](#gt_rdn-attribute). The RDN attribu
 
 The [**attributes**](#gt_attribute) of class classSchema are specified in the following table.
 
-The term "Unique" (in quotation marks) in the table is defined in section [3.1.1.2.3](#Section_3.1.1.2.3.4).
+The term "Unique" (in quotation marks) in the table is defined in section [3.1.1.2.3](#Section_3.1.1.2.3.1).
 
 The term system-only in the table is defined in section 3.1.1.2.3.
 
@@ -5544,7 +5544,7 @@ The term system-only in the table is defined in section 3.1.1.2.3.
 | systemPossSuperiors | Optional. governsIDs of the classes that can be parents of this class within an [**NC**](#gt_naming-context-nc) tree. This attribute is system-only. |
 | systemAuxiliaryClass | Optional. governsIDs of the [**auxiliary classes**](#gt_auxiliary-object-class) that are statically linked to this class. This attribute is system-only. |
 | objectClassCategory | Class category (section [3.1.1.2.4.1](#Section_3.1.1.2.4.1)), encoded as follows: 0: 88 Class 1: Structural class 2: [**Abstract class**](#gt_abstract-classes) 3: Auxiliary class System-only. |
-| systemFlags | Optional. Flags that determine specific system operations; see section [2.2.10](#Section_6.1.1.2.6.25) for values. The single systemFlags value specific to a classSchema object is: FLAG_SCHEMA_BASE_OBJECT: this class is part of the base [**schema**](#gt_schema). Modifications to a base [**schema object**](#gt_schema-object) are restricted as described in section [3.1.1.2.5](#Section_3.1.1.2.5.3). System-only. |
+| systemFlags | Optional. Flags that determine specific system operations; see section [2.2.10](#Section_6.1.1.2.6.25) for values. The single systemFlags value specific to a classSchema object is: FLAG_SCHEMA_BASE_OBJECT: this class is part of the base [**schema**](#gt_schema). Modifications to a base [**schema object**](#gt_schema-object) are restricted as described in section [3.1.1.2.5](#Section_3.1.1.2.5.2). System-only. |
 | systemOnly | Optional. Only a DC can create (section [3.1.1.5.2.2](#Section_3.1.1.5.2.2)) and modify (section [3.1.1.5.3.2](#Section_3.1.1.5.3.2)) instances of a system-only class. System-only. |
 | cn | [**RDN**](#gt_relative-distinguished-name-rdn) for the schema object. |
 | lDAPDisplayName | "Unique" name that identifies this class, used by [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) clients. If not specified on Add, the DC generates a value as specified in section [3.1.1.2.3.4](#Section_3.1.1.2.3.4). The syntax of lDAPDisplayName is described in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.1.4. |
@@ -5566,7 +5566,7 @@ Only the [**DC**](#gt_domain-controller-dc) that owns the Schema Master FSMO rol
 
 All transactions that perform originating updates to objects in the schema NC are serialized, even if the updates do not appear to conflict and thus do not seem to require serialization.
 
-Many [**attributes**](#gt_attribute) of attributeSchema and classSchema objects are system-only, as specified in sections [3.1.1.2.3](#Section_3.1.1.2.3.4) and [3.1.1.2.4](#Section_3.1.1.2.4). An LDAP Modify request that attempts to modify a system-only attribute (except as specified in section [3.1.1.5.3.2](#Section_3.1.1.5.3.2)) fails with error *constraintViolation* / *ERROR_DS_CANT_MOD_SYSTEM_ONLY*.
+Many [**attributes**](#gt_attribute) of attributeSchema and classSchema objects are system-only, as specified in sections [3.1.1.2.3](#Section_3.1.1.2.3.1) and [3.1.1.2.4](#Section_3.1.1.2.4.4). An LDAP Modify request that attempts to modify a system-only attribute (except as specified in section [3.1.1.5.3.2](#Section_3.1.1.5.3.2)) fails with error *constraintViolation* / *ERROR_DS_CANT_MOD_SYSTEM_ONLY*.
 
 A Delete of an attributeSchema or classSchema object fails, with error *unwillingToPerform* / *ERROR_DS_CANT_DELETE*.
 
@@ -5591,14 +5591,14 @@ If an Add or Modify request fails either a consistency or a safety check, the re
 <a id="Section_3.1.1.2.5.1.1"></a>
 Consistency Checks
 
-The term "Unique" (in quotation marks) in the following statements is defined in section [3.1.1.2.3](#Section_3.1.1.2.3.4).
+The term "Unique" (in quotation marks) in the following statements is defined in section [3.1.1.2.3](#Section_3.1.1.2.3.1).
 
 An Add or Modify request on an attributeSchema [**object**](#gt_object) succeeds only if the resulting object passes all of the following tests:
 
 - The value of lDAPDisplayName is syntactically valid, per [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.1.4.
 - The values of attributeID, lDAPDisplayName, mAPIID (if present) and schemaIDGUID are "Unique".
 - A nonzero linkID, if any, is unique among all values of the linkID [**attribute**](#gt_attribute) on objects in the [**schema NC**](#gt_schema-naming-context-schema-nc), regardless of [**forest functional level**](#gt_forest-functional-level). If a linkID is an odd number, it is not one, and an object exists whose linkID is the even number one smaller.
-- The values of attributeSyntax, oMSyntax, and oMObjectClass match some defined syntax (section [3.1.1.2.2](#Section_3.1.1.2.2.2)).
+- The values of attributeSyntax, oMSyntax, and oMObjectClass match some defined syntax (section [3.1.1.2.2](#Section_3.1.1.2.2.1)).
 - Flag fANR is only present in the searchFlags attribute if the syntax is String(Unicode), String(IA5), String(Printable), String(Teletex) or String(Case).
 - If rangeLower and rangeUpper are present, rangeLower is smaller than or equal to rangeUpper.
 An Add or Modify request on a classSchema object succeeds only if the resulting object passes all of the following tests.
@@ -5654,7 +5654,7 @@ The effect of being defunct depends upon the [**forest functional level**](#gt_f
 - If an LDAP Modify changes the isDefunct attribute (giving it a value of TRUE or FALSE, or removing it), this change MUST be the only change in the LDAP Modify request; otherwise, the request fails with error *unwillingToPerform* / *ERROR_DS_ILLEGAL_MOD_OPERATION*.
 - If a Modify sets isDefunct to TRUE but the attributeSchema or classSchema object is base (that is, it has FLAG_SCHEMA_BASE_OBJECT present in its systemFlags attribute), the Modify fails, with error *unwillingToPerform* / *ERROR_DS_ILLEGAL_BASE_SCHEMA_MOD*.
 - LDAP Add cannot create instances of a defunct class (section [3.1.1.5.2.2](#Section_3.1.1.5.2.2)), and LDAP Add and Modify cannot create instances of a defunct attribute (see sections 3.1.1.5.2.2 and [3.1.1.5.3.2](#Section_3.1.1.5.3.2)).
-- Making an attributeSchema or classSchema object defunct has no effect on the state of existing objects that use the defunct attribute or class, but it changes the behavior of reads and [**updates**](#gt_update) of such objects as described in sections [3.1.1.4.8](#Section_3.1.1.4.8) (Search), 3.1.1.5.2.2 (Add), 3.1.1.5.3.2 (Modify), and [3.1.1.5.5](#Section_3.1.1.5.5.4) (Delete).
+- Making an attributeSchema or classSchema object defunct has no effect on the state of existing objects that use the defunct attribute or class, but it changes the behavior of reads and [**updates**](#gt_update) of such objects as described in sections [3.1.1.4.8](#Section_3.1.1.4.8) (Search), 3.1.1.5.2.2 (Add), 3.1.1.5.3.2 (Modify), and [3.1.1.5.5](#Section_3.1.1.5.5.3) (Delete).
 <a id="Section_3.1.1.2.5.3.1"></a>
 Forest Functional Level Less Than WIN2003
 
@@ -5716,9 +5716,9 @@ Given an OID O, the [**schema object**](#gt_schema-object) X representing the cl
 
 This section is structured as follows:
 
-- Section [3.1.1.3.1](#Section_3.1.1.3.1.3) documents the interpretation of the LDAP RFCs made by Active Directory and deviations from the LDAP RFCs.
-- The [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) (empty [**DN**](#gt_distinguished-name-dn)) is a mechanism for clients of an LDAP server to interact with the server itself, rather than with particular [**objects**](#gt_object) contained by the server. Section [3.1.1.3.2](#Section_3.1.1.3.2.60) specifies the rootDSE reads supported by Active Directory, and section [3.1.1.3.3](#Section_3.1.1.3.3.39) specifies the rootDSE [**updates**](#gt_update).
-- LDAP has several extension mechanisms in addition to the rootDSE. Section [3.1.1.3.4](#Section_3.1.1.3.4.8) specifies the LDAP extensions that Active Directory supports.
+- Section [3.1.1.3.1](#Section_3.1.1.3.1.4) documents the interpretation of the LDAP RFCs made by Active Directory and deviations from the LDAP RFCs.
+- The [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) (empty [**DN**](#gt_distinguished-name-dn)) is a mechanism for clients of an LDAP server to interact with the server itself, rather than with particular [**objects**](#gt_object) contained by the server. Section [3.1.1.3.2](#Section_3.1.1.3.2.1) specifies the rootDSE reads supported by Active Directory, and section [3.1.1.3.3](#Section_3.1.1.3.3.34) specifies the rootDSE [**updates**](#gt_update).
+- LDAP has several extension mechanisms in addition to the rootDSE. Section [3.1.1.3.4](#Section_3.1.1.3.4.2) specifies the LDAP extensions that Active Directory supports.
 <a id="Section_3.1.1.3.1"></a>
 ##### 3.1.1.3.1 LDAP Conformance
 
@@ -5729,7 +5729,7 @@ Active Directory DCs nominally implement support for LDAP v2 [[RFC1777]](https:/
 When processing an LDAP v2 request, Active Directory exhibits the following behavioral differences from processing an LDAP v3 request:
 
 - Instead of using the [**UTF-8**](#gt_utf-8) character encoding for LDAPString [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325), the system's configured [**code page**](#gt_code-page) is used. The code page is configured locally on the DC by the DC's administrator.
-- Referrals and continuation references are generated using the format for LDAP v2 referrals as specified in section [3.1.1.3.4](#Section_3.1.1.3.4.8).
+- Referrals and continuation references are generated using the format for LDAP v2 referrals as specified in section [3.1.1.3.4](#Section_3.1.1.3.4.2).
 All LDAP error codes returned by Active Directory are taken from the resultCode enumeration of the LDAPResult structure defined in [RFC2251] section 4.1.10.
 
 <a id="Section_3.1.1.3.1.1"></a>
@@ -5870,7 +5870,7 @@ Syntaxes
 
 The syntaxes used in [**Active Directory**](#gt_active-directory) are based on [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) section 6. Where Active Directory and [RFC2252] have syntaxes in common, the same means of encoding the value into the syntax is used. However, Active Directory has a number of syntaxes that are not defined in [RFC2252], and vice versa. Additionally, even when Active Directory and [RFC2252] have syntaxes in common, in many cases they use different names for the same syntax, and in all cases they use different [**OIDs**](#gt_object-identifier-oid) to identify the same syntax.
 
-Active Directory does not use the syntaxes defined in [[RFC2256]](https://go.microsoft.com/fwlink/?LinkId=91339) section 6. The list of syntaxes in Active Directory, their encodings, and how they map to the [RFC2252] syntaxes are documented in section [3.1.1.2.2](#Section_3.1.1.2.2.2).
+Active Directory does not use the syntaxes defined in [[RFC2256]](https://go.microsoft.com/fwlink/?LinkId=91339) section 6. The list of syntaxes in Active Directory, their encodings, and how they map to the [RFC2252] syntaxes are documented in section [3.1.1.2.2](#Section_3.1.1.2.2.1).
 
 Attributes
 
@@ -6390,7 +6390,7 @@ The ordering of the values returned in a range retrieval request is arbitrary bu
 <a id="Section_3.1.1.3.1.3.4"></a>
 Ambiguous Name Resolution
 
-[**ANR**](#gt_ambiguous-name-resolution-anr) is a search algorithm in [**Active Directory**](#gt_active-directory) that permits a client to search multiple naming-related [**attributes**](#gt_attribute) on [**objects**](#gt_object) via a single clause in a search [**filter**](#gt_filter). A substring search against the aNR attribute is interpreted by the [**DC**](#gt_domain-controller-dc) as a substring search against a set of attributes, known as the "ANR attribute set". The intent is that the attributes in the ANR attribute set are those attributes that are commonly used to identify an object, such as the displayName and name attributes, thereby permitting a client to query for an object when the client possesses some identifying material related to the object but does not know the attribute of the object that contains that identifying material. The ANR attribute set consists of those attributes whose searchFlags attribute contains the fANR flag (see section [3.1.1.2.3](#Section_3.1.1.2.3.4)).
+[**ANR**](#gt_ambiguous-name-resolution-anr) is a search algorithm in [**Active Directory**](#gt_active-directory) that permits a client to search multiple naming-related [**attributes**](#gt_attribute) on [**objects**](#gt_object) via a single clause in a search [**filter**](#gt_filter). A substring search against the aNR attribute is interpreted by the [**DC**](#gt_domain-controller-dc) as a substring search against a set of attributes, known as the "ANR attribute set". The intent is that the attributes in the ANR attribute set are those attributes that are commonly used to identify an object, such as the displayName and name attributes, thereby permitting a client to query for an object when the client possesses some identifying material related to the object but does not know the attribute of the object that contains that identifying material. The ANR attribute set consists of those attributes whose searchFlags attribute contains the fANR flag (see section [3.1.1.2.3](#Section_3.1.1.2.3.1)).
 
 A server performs an ANR search by rewriting a search filter that contains one or more occurrences of the aNR attribute so that the filter no longer contains any occurrences of the aNR attribute, then performing a regular [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search using the rewritten search filter. The search filter is rewritten according to the following algorithm:
 
@@ -7139,7 +7139,7 @@ This attribute contains information outside the state model. Reading this attrib
 <a id="Section_3.1.1.3.2.46"></a>
 ###### 3.1.1.3.2.46 dumpLdapNotifications
 
-If the requestor is not a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)), attempting to read this attribute will return an error. Reading this attribute returns an XML-formatted string that describes the asynchronous notifications that have been registered with the DC (section [3.1.1.3.4.1.9](#Section_3.1.1.3.4.1.9)). The specific contents of the XML string are implementation-defined.
+If the requestor is not a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)), attempting to read this attribute will return an error. Reading this attribute returns an XML-formatted string that describes the asynchronous notifications that have been registered with the DC (section [3.1.1.3.4.1.9](#Section_3.1.1.3.4.1.9)). The specific contents of the XML string are implementation-defined.
 
 <a id="Section_3.1.1.3.2.47"></a>
 ###### 3.1.1.3.2.47 msDS-ProcessLinksOperations
@@ -7154,7 +7154,7 @@ This attribute contains information that is outside the state model. Reading thi
 <a id="Section_3.1.1.3.2.49"></a>
 ###### 3.1.1.3.2.49 msDS-ThreadStates
 
-If the requestor is not a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns an XML-formatted string that describes memory and processor usage of the instance. The specific contents of the XML string are implementation-defined.
+If the requestor is not a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns an XML-formatted string that describes memory and processor usage of the instance. The specific contents of the XML string are implementation-defined.
 
 <a id="Section_3.1.1.3.2.50"></a>
 ###### 3.1.1.3.2.50 ConfigurableSettingsEffective
@@ -7169,7 +7169,7 @@ This attribute returns a multivalued set of strings that specify the [**LDAP**](
 <a id="Section_3.1.1.3.2.52"></a>
 ###### 3.1.1.3.2.52 msDS-ArenaInfo
 
-If the requestor is not a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns an XML-formatted string that describes memory and processor usage of the instance. The specific contents of the XML string are implementation-defined.
+If the requestor is not a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns an XML-formatted string that describes memory and processor usage of the instance. The specific contents of the XML string are implementation-defined.
 
 <a id="Section_3.1.1.3.2.53"></a>
 ###### 3.1.1.3.2.53 msDS-Anchor
@@ -7194,14 +7194,14 @@ Reading this attribute returns a multivalued string containing the names of all 
 <a id="Section_3.1.1.3.2.57"></a>
 ###### 3.1.1.3.2.57 msDS-DiskUsage
 
-If the requestor is not a member of the **BUILTIN\Administrators** group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns an XML-formatted string that describes the database tables and disk usage of the instance. The specific contents of the XML string are implementation-specific.
+If the requestor is not a member of the **BUILTIN\Administrators** group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns an XML-formatted string that describes the database tables and disk usage of the instance. The specific contents of the XML string are implementation-specific.
 
 **Note**: The rootDSE attributes **msDS-DiskUsage**, **msDS-DatabaseIndices**, and **msDS -DatabaseIndicesWithSize** are supported by the operating systems specified in [[MSKB-5023705]](https://go.microsoft.com/fwlink/?linkid=2227069), [[MSKB-5023702]](https://go.microsoft.com/fwlink/?linkid=2227220), [[MSKB-5023706]](https://go.microsoft.com/fwlink/?linkid=2227221), [[MSKB-5023698]](https://go.microsoft.com/fwlink/?linkid=2227222), and [[MSKB-5023696]](https://go.microsoft.com/fwlink/?linkid=2227070), each with its related KB article download installed.
 
 <a id="Section_3.1.1.3.2.58"></a>
 ###### 3.1.1.3.2.58 msDS-DatabaseIndices
 
-If the requestor is not a member of the **BUILTIN\Administrators** group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns a string with the list of database indices of the instance. The specific contents of the string are implementation-specific.
+If the requestor is not a member of the **BUILTIN\Administrators** group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)), attempting to read this attribute will return an error. This attribute contains information outside the state model. Reading this attribute returns a string with the list of database indices of the instance. The specific contents of the string are implementation-specific.
 
 <a id="Section_3.1.1.3.2.59"></a>
 ###### 3.1.1.3.2.59 msDS-DatabaseIndicesWithSize
@@ -7447,7 +7447,7 @@ doGarbageCollection: 1
 <a id="Section_3.1.1.3.3.9"></a>
 ###### 3.1.1.3.3.9 dumpDatabase
 
-This operation is triggered by setting the [**attribute**](#gt_attribute) to a space-separated list of attributes. The requester MUST be a member of the BUILTIN\Administrators [**group**](#gt_group) (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)).
+This operation is triggered by setting the [**attribute**](#gt_attribute) to a space-separated list of attributes. The requester MUST be a member of the BUILTIN\Administrators [**group**](#gt_group) (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)).
 
 The following shows an LDIF sample that performs this operation for the description attribute ([MS-ADA1](#Section_3.1.1.2) section 2.153) and sn attribute ([MS-ADA3](#Section_3.1.1.2) section 2.275).
 
@@ -7712,7 +7712,7 @@ The effects of doGarbageCollectionPhantomsNow are outside the state model. An [*
 <a id="Section_3.1.1.3.3.21"></a>
 ###### 3.1.1.3.3.21 invalidateGCConnection
 
-The type of modification to the invalidateGCConnection [**attribute**](#gt_attribute) and the values specified in the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Modify operation do not matter. The requester MUST be a member of either the BUILTIN\Administrators [**group**](#gt_group) (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)) or the BUILTIN\Server Operators group (section [6.1.1.4.12.18](#Section_6.1.1.4.12.18)).
+The type of modification to the invalidateGCConnection [**attribute**](#gt_attribute) and the values specified in the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Modify operation do not matter. The requester MUST be a member of either the BUILTIN\Administrators [**group**](#gt_group) (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)) or the BUILTIN\Server Operators group (section [6.1.1.4.12.18](#Section_6.1.1.4.12.18)).
 
 The following shows an LDIF sample that performs this operation.
 
@@ -7832,7 +7832,7 @@ runProtectAdminGroupsTask: 1
 <a id="Section_3.1.1.3.3.27"></a>
 ###### 3.1.1.3.3.27 disableOptionalFeature
 
-This operation requests that an [**optional feature**](#gt_optional-feature) (as described in section [3.1.1.9](#Section_2.2.17)) be disabled for some scope. The requester MUST have the correct "Manage-Optional-Features" control access on the [**object**](#gt_object) representing the scope.
+This operation requests that an [**optional feature**](#gt_optional-feature) (as described in section [3.1.1.9](#Section_3.1.1.9.2)) be disabled for some scope. The requester MUST have the correct "Manage-Optional-Features" control access on the [**object**](#gt_object) representing the scope.
 
 This operation is triggered by setting the disableOptionalFeature [**attribute**](#gt_attribute) to a value that contains the [**DN**](#gt_distinguished-name-dn) of the object that represents the scope, followed by the colon (:) character, followed by the [**GUID**](#gt_globally-unique-identifier-guid) of the optional feature to be disabled, expressed as a [**GUIDString**](#gt_guidstring).
 
@@ -7865,7 +7865,7 @@ disableOptionalFeature: cn=Partitions,cn=Configuration,DC=Contoso,DC=Com:766DDCD
 <a id="Section_3.1.1.3.3.28"></a>
 ###### 3.1.1.3.3.28 enableOptionalFeature
 
-This operation requests that an [**optional feature**](#gt_optional-feature) (as described in section [3.1.1.9](#Section_2.2.17)) be enabled for some scope. The requester MUST have the "Manage-Optional-Features" [**control access right**](#gt_control-access-right) on the [**object**](#gt_object) representing the scope.
+This operation requests that an [**optional feature**](#gt_optional-feature) (as described in section [3.1.1.9](#Section_3.1.1.9.2)) be enabled for some scope. The requester MUST have the "Manage-Optional-Features" [**control access right**](#gt_control-access-right) on the [**object**](#gt_object) representing the scope.
 
 This operation is triggered by setting the enableOptionalFeature [**attribute**](#gt_attribute) to a value that contains the [**DN**](#gt_distinguished-name-dn) of the object that represents the scope, followed by the ':' character, followed by the [**GUID**](#gt_globally-unique-identifier-guid) of the optional feature to be enabled, expressed as a [**GUIDString**](#gt_guidstring).
 
@@ -7987,7 +7987,7 @@ The type of modification made to the null [**attribute**](#gt_attribute) and the
 <a id="Section_3.1.1.3.3.34"></a>
 ###### 3.1.1.3.3.34 dumpQuota
 
-The type of modification made to the dumpQuota attribute and the values specified in the LDAP Modify operation have no significance. The requester MUST be a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)).
+The type of modification made to the dumpQuota attribute and the values specified in the LDAP Modify operation have no significance. The requester MUST be a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)).
 
 The following shows an LDIF sample that performs this operation for the description attribute ([MS-ADA1](#Section_3.1.1.2) section 2.153) and sn attribute ([MS-ADA3](#Section_3.1.1.2) section 2.275).
 
@@ -8006,7 +8006,7 @@ The effects of dumpQuota are outside the state model. An update of dumpQuota cau
 <a id="Section_3.1.1.3.3.35"></a>
 ###### 3.1.1.3.3.35 dumpLinksExtended
 
-This operation is triggered by setting the attribute to a two-digit hexadecimal number followed by the colon (':') character. The requester MUST be a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)).
+This operation is triggered by setting the attribute to a two-digit hexadecimal number followed by the colon (':') character. The requester MUST be a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)).
 
 The following shows an LDIF sample that performs this operation.
 
@@ -8025,7 +8025,7 @@ The effects of dumpLinksExtended are outside the state model. An update of dumpL
 <a id="Section_3.1.1.3.3.36"></a>
 ###### 3.1.1.3.3.36 dumpLDAPState
 
-The type of modification made to the dumpLDAPState attribute and the values specified in the LDAP Modify operation have no significance. The requester MUST be a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)).
+The type of modification made to the dumpLDAPState attribute and the values specified in the LDAP Modify operation have no significance. The requester MUST be a member of the BUILTIN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)).
 
 The following shows an LDIF sample that performs this operation for the description attribute ([MS-ADA1](#Section_3.1.1.2) section 2.153) and sn attribute ([MS-ADA3](#Section_3.1.1.2) section 2.275).
 
@@ -8122,7 +8122,7 @@ The effects of msDS-RunDeletedPhantomsWithLinksTask are outside the state model.
 <a id="Section_3.1.1.3.3.41"></a>
 ###### 3.1.1.3.3.41 dumpDatabaseExtended
 
-This operation is triggered by setting the attribute to an implementation-defined formatted value. The requester MUST be a member of the BUILT-IN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.21)).
+This operation is triggered by setting the attribute to an implementation-defined formatted value. The requester MUST be a member of the BUILT-IN\Administrators group (section [6.1.1.4.12.2](#Section_6.1.1.4.12.20)).
 
 The following shows an LDIF sample that performs this operation for the description attribute ([MS-ADA1](#Section_3.1.1.2) section 2.153) and sn attribute ([MS-ADA3](#Section_3.1.1.2) section 2.275).
 
@@ -8550,7 +8550,7 @@ LDAP_SERVER_DOMAIN_SCOPE_OID
 
 The LDAP_SERVER_DOMAIN_SCOPE_OID control is used to instruct the [**DC**](#gt_domain-controller-dc) not to generate any [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) continuation references when performing an LDAP operation. The effect of this is to limit any search using it to the single [**NC replica**](#gt_nc-replica) in which the [**object**](#gt_object) that serves as the root of the search is located.
 
-When sending this control to the DC, the controlValue field of the Control structure is set to an OctetString of length zero as described in section [2.1](#Section_6.1.6.6). The server MUST ignore any controlValue provided in the request. Sending this control to the DC does not cause the server to include any controls in its response.
+When sending this control to the DC, the controlValue field of the Control structure is set to an OctetString of length zero as described in section [2.1](#Section_2.1). The server MUST ignore any controlValue provided in the request. Sending this control to the DC does not cause the server to include any controls in its response.
 
 <a id="Section_3.1.1.3.4.1.5"></a>
 LDAP_SERVER_EXTENDED_DN_OID
@@ -10221,7 +10221,7 @@ The IP Deny list is only supported on IPv4 connections. [**Active Directory**](#
 **References**:
 
 - [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)
-- Special Objects and Forest Requirements: section [6.1](#Section_3.1.1.2.2.1)
+- Special Objects and Forest Requirements: section [6.1](#Section_1)
 - [MS-DRSR](../MS-DRSR/MS-DRSR.md)
 - [[XMLSCHEMA2/2]](https://go.microsoft.com/fwlink/?LinkId=90609)
 - Quota Calculation: section [3.1.1.5](#Section_3.1.1.5)
@@ -10350,7 +10350,7 @@ The [**security context**](#gt_security-context) of the requester MUST be grante
 <a id="Section_3.1.1.4.5"></a>
 ##### 3.1.1.4.5 Constructed Attributes
 
-Individual [**constructed attributes**](#gt_constructed-attribute), other than [rootDSE Attributes (section 3.1.1.3.2)](#Section_3.1.1.3.2.60), are specified in [MS-ADA1](#Section_3.1.1.2), [MS-ADA2](#Section_3.1.1.2), and [MS-ADA3](#Section_3.1.1.2). But briefly, constructed attributes have the property that they are [**attributes**](#gt_attribute) for which the attribute value is computed by using other attributes, sometimes from other [**objects**](#gt_object). Regardless of this property, constructed attributes are defined to be those attributes that meet one of the following three criteria:
+Individual [**constructed attributes**](#gt_constructed-attribute), other than [rootDSE Attributes (section 3.1.1.3.2)](#Section_3.1.1.3.2.1), are specified in [MS-ADA1](#Section_3.1.1.2), [MS-ADA2](#Section_3.1.1.2), and [MS-ADA3](#Section_3.1.1.2). But briefly, constructed attributes have the property that they are [**attributes**](#gt_attribute) for which the attribute value is computed by using other attributes, sometimes from other [**objects**](#gt_object). Regardless of this property, constructed attributes are defined to be those attributes that meet one of the following three criteria:
 
 - The attributeSchema object's systemFlags attribute has the ATTR_IS_CONSTRUCTED bit (section [2.2.10](#Section_6.1.1.2.6.25)) set to one.
 - The attribute is a rootDSE attribute (section 3.1.1.3.2).
@@ -11356,7 +11356,7 @@ The [**originating update**](#gt_originating-update) is validated for [**schema*
 During an originating update of the Add and Modify operations, the server validates that the [**object**](#gt_object) being added or modified is consistent with the schema definition of the object of the objectClass values that are assigned to the object (see section 3.1.1.2 for more information):
 
 - The mayContain/mustContain constraints that are applicable based on the selected objectClass values are enforced. The computation of the mayContain/mustContain set takes into consideration the complete [**inheritance**](#gt_inheritance) chain of the structural objectClass and the [**88 object class**](#gt_88-object-class) as well as any [**auxiliary classes**](#gt_auxiliary-object-class) supplied. If any [**attributes**](#gt_attribute) in the mustContain set are not provided, the Add fails with *objectClassViolation* / <unrestricted>. If any attributes provided are not present in either the mayContain or mustContain sets, the Add fails with *objectClassViolation* / <unrestricted>. Exception: In [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the objectSid attribute is present on all [**application NC**](#gt_application-nc) roots, even if this violates the schema mayContain/mustContain constraints.
-- All attribute values are formed correctly according to the [**attribute syntax**](#gt_attribute-syntax) and satisfy schema constraints, such as single-valuedness, rangeLower/rangeUpper, and so on. See sections [3.1.1.2.3](#Section_3.1.1.2.3.4) through [3.1.1.2.5](#Section_3.1.1.2.5.3) for more information.
+- All attribute values are formed correctly according to the [**attribute syntax**](#gt_attribute-syntax) and satisfy schema constraints, such as single-valuedness, rangeLower/rangeUpper, and so on. See sections [3.1.1.2.3](#Section_3.1.1.2.3.1) through [3.1.1.2.5](#Section_3.1.1.2.5.2) for more information.
 - All attribute values MUST be compliant with the rangeUpper and rangeLower constraints of the schema (see section 3.1.1.2.3). If a supplied value violates a rangeUpper or rangeLower constraint, then the Add fails with *constraintViolation* / *<unrestricted>*.
 - All attribute values MUST be compliant with the isSingleValued constraint of the schema (see section 3.1.1.2.3). If multiple values are provided for an attribute that is single-valued, then the Add fails with *constraintViolation* / *<unrestricted>*.
 - The attributeType of the first label of the object [**DN**](#gt_distinguished-name-dn) matches the rDNAttID of the [**structural object class**](#gt_structural-object-class) or the 88 object class. Otherwise, *namingViolation* / *ERROR_DS_RDN_DOESNT_MATCH_SCHEMA* is returned. For example, it is not allowed to create an organizationalUnit with CN=test [**RDN**](#gt_relative-distinguished-name-rdn); the correct RDN for an organizationalUnit object is OU=test. If there is no class C for which the attributeType is equal to C!rDNAttID, *namingViolation* / *<unrestricted>* is returned.
@@ -11602,10 +11602,10 @@ If AttributeAuthorizationOnLDAPAdd equals 1, processing proceeds as follows:
 
 - If the requester is a member of either Domain Administrators (section [6.1.1.6.5](#Section_6.1.1.6.5)) or Enterprise Administrators (section [6.1.1.6.10](#Section_6.1.1.6.10)), this check succeeds with no further processing.
 - If the objectClass being added is neither of type computer or a class derived from type computer, this check succeeds with no further processing, otherwise proceed.5
-- Let DefaultSD be a security descriptor created per the algorithm specified in sections [6.1.3](#Section_1.3) and [6.1.3.3](#Section_3.1.1.5.3.3). If the requester submitted an nTSecurityDescriptor attribute as part of the Add request, that attribute MUST be excluded for the purpose of creating DefaultSD.
+- Let DefaultSD be a security descriptor created per the algorithm specified in sections [6.1.3](#Section_1.3) and [6.1.3.3](#Section_6.1.3). If the requester submitted an nTSecurityDescriptor attribute as part of the Add request, that attribute MUST be excluded for the purpose of creating DefaultSD.
 - Check if the requester is granted explicit WRITE_DAC permission on DefaultSD. Explicit means that WRITE_DAC MUST be granted due to the presence of least one access-allowed ACE in the SD, and not due to the requester being an Owner in the DefaultSD.
 - If the requester is granted explicit WRITE_DAC permission on DefaultSD, this check succeeds with no further processing.
-- If the requester is not granted explicit WRITE_DAC permission on DefaultSD, and the requester submitted an nTSecurityDescriptor attribute as part of the Add request, and implicit Owner rights are blocked, as specified in section [6.1.3.5](#Section_3.1.1.5.5.4), and the server returns an error.
+- If the requester is not granted explicit WRITE_DAC permission on DefaultSD, and the requester submitted an nTSecurityDescriptor attribute as part of the Add request, and implicit Owner rights are blocked, as specified in section [6.1.3.5](#Section_3.1.1.5.2.1), and the server returns an error.
 - Let A be the set of attributes included in the requester’s Add request. Remove from A any attributes that are configured in the schema as either systemMustContain or mustContain attributes for the object class being created.
 - Remove from A the unicodePwd or userPassword attributes if present.
 - If A is empty, this check succeeds with no further processing.
@@ -11623,7 +11623,7 @@ These constraints are not enforced for [**replicated updates**](#gt_replicated-u
 - The [**object**](#gt_object) [**DN**](#gt_distinguished-name-dn) value is a syntactically valid DN (see [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), section [3.1.1.3](#Section_1.3)). If it is not, Add returns *namingViolation* / *ERROR_DS_NAME_UNPARSEABLE*.
 - If instanceType [**attribute**](#gt_attribute) value is specified, then the following constraints MUST be satisfied:
 - If the [**DC functional level**](#gt_dc-functional-level) is DS_BEHAVIOR_WIN2000, then multiple integer values are permitted. However, if the DC functional level is DS_BEHAVIOR_WIN2003 or greater, then there MUST be exactly one integer value; otherwise Add returns *unwillingToPerform* / *ERROR_DS_BAD_INSTANCE_TYPE*.
-- If the instanceType value has IT_NC_HEAD bit set, then IT_WRITE MUST be set. If this is the case, then this operation is considered to be an *NC-Add* operation, and additional constraints and processing specifics apply (see [NC-Add Operation (section 3.1.1.5.2.8)](#Section_3.1.1.5.2) for details).
+- If the instanceType value has IT_NC_HEAD bit set, then IT_WRITE MUST be set. If this is the case, then this operation is considered to be an *NC-Add* operation, and additional constraints and processing specifics apply (see [NC-Add Operation (section 3.1.1.5.2.8)](#Section_3.1.1.5.2.8) for details).
 - If IT_NC_HEAD is set, but IT_WRITE is not set, Add returns *unwillingToPerform* / *ERROR_DS_ADD_REPLICA_INHIBITED*.
 - If IT_NC_HEAD is not set in the value, and the DC functional level is DS_BEHAVIOR_WIN2003 or greater, then the only allowed values are zero and IT_WRITE; otherwise Add returns *unwillingToPerform* / *ERROR_DS_BAD_INSTANCE_TYPE*.
 - If the operation is not *NC-Add*, then the [**parent object**](#gt_parent-object) MUST be in an [**NC**](#gt_naming-context-nc) whose [**full replica**](#gt_full-nc-replica) is hosted at this [**DC**](#gt_domain-controller-dc); otherwise *referral* / *ERROR_DS_REFERRAL* is returned.
@@ -11643,7 +11643,7 @@ These constraints are not enforced for [**replicated updates**](#gt_replicated-u
 - All attribute names/[**OIDs**](#gt_object-identifier-oid) refer to attributes that are defined and active in the schema. If an unknown or defunct attribute is referenced, Add returns *noSuchAttribute* / *ERROR_INVALID_PARAMETER*.
 - Object quota requirements are satisfied for the requester in the NC where the object is being added (see section [3.1.1.5.2.5](#Section_3.1.1.5.2.5)).
 - The objectClass being created satisfies the possSuperiors schema constraint (section [3.1.1.2](#Section_1.3)) for the objectClass of the parent object. Otherwise, *objectClassViolation* / *ERROR_DS_ILLEGAL_SUPERIOR* is returned if the DC functional level is DS_BEHAVIOR_WIN2000, and *namingViolation* / *ERROR_DS_ILLEGAL_SUPERIOR* is returned if the DC functional level is DS_BEHAVIOR_WIN2003 or greater.
-- The set of attributes provided for object creation is consistent with the schema as described in section [3.1.1.5.1.1](#Section_3.1.1.5.1.11).
+- The set of attributes provided for object creation is consistent with the schema as described in section [3.1.1.5.1.1](#Section_3.1.1.5.1.1).
 - If the requester has supplied a value for the [**RDN attribute**](#gt_rdn-attribute), then it matches the first label of the supplied DN value in both attribute type and attribute value, according to the LDAP [**Unicode**](#gt_unicode) string comparison rules in section 3.1.1.3.
 - The RDN value satisfies schema constraints (rangeLower/rangeUpper, single-valuedness, syntax, and so on).
 - If a [**site object**](#gt_site-object) is being created, then the RDN value is a valid [**DNS name**](#gt_dns-name) label (according to the [**DNS**](#gt_domain-name-system-dns) RFC [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264)). Otherwise, *invalidDNSyntax* / *ERROR_DS_BAD_NAME_SYNTAX* is returned.
@@ -11768,12 +11768,12 @@ This section also defines one set of [**attributes**](#gt_attribute): [**foreign
 - Any object that is not mentioned above and whose parent is the Sites Container (section [6.1.1.2.2](#Section_6.1.1.2.2.2)) except the Subnets Container (section 6.1.1.2.2.2) and the Inter-Site-Transports Container (section [6.1.1.2.2.3](#Section_6.1.1.2.2.3)): FLAG_CONFIG_ALLOW_RENAME.
 - If a value for the objectCategory attribute was not specified by the requester, then it is defaulted to the current value of the defaultObjectCategory attribute on the classSchema object corresponding to the [**88 object class**](#gt_88-object-class) or the [**most specific structural object class**](#gt_most-specific-object-class) of the object being added.
 - The complete [**inheritance**](#gt_inheritance) chain of [**object classes**](#gt_object-class) (starting from the most specific structural object class or 88 object class as well as from all dynamic [**auxiliary classes**](#gt_auxiliary-object-class) specified by the user) is computed and set. The correct ordering of objectClass values is performed (see section [3.1.1.2.4.3](#Section_3.1.1.2.4.3) for more details).
-- The value of instanceType attribute is written. For originating updates of regular objects, it is IT_WRITE. For NC root object specifics, see [NC-Add Operation (section 3.1.1.5.2.8)](#Section_3.1.1.5.2). For replicated updates, the instanceType value computed by the IDL_DRSGetNCChanges client is written.
+- The value of instanceType attribute is written. For originating updates of regular objects, it is IT_WRITE. For NC root object specifics, see [NC-Add Operation (section 3.1.1.5.2.8)](#Section_3.1.1.5.2.8). For replicated updates, the instanceType value computed by the IDL_DRSGetNCChanges client is written.
 - distinguishedName attribute is written, matching the [**DN**](#gt_distinguished-name-dn) value of the supplied object.
 - The [**RDN attribute**](#gt_rdn-attribute) of the correct attribute type is written, as computed from the DN value of the supplied object.
 - If the showInAdvancedViewOnly value was not provided by the requester and the defaultHidingValue of the objectClass is TRUE, then the showInAdvancedViewOnly attribute value is set to TRUE.
 - If the Add assigns a value to an [**FPO**](#gt_foreign-principal-object-fpo)-enabled attribute (section [3.1.1.5.2.3](#Section_3.1.1.5.2.3)) of the new object, and the DN value in the add request has <SID=stringizedSid> format (section [3.1.1.3.1.2.4](../MS-SAMR/MS-SAMR.md)), then the DC creates a corresponding foreignSecurityPrincipal object in the ForeignSecurityPrincipals [**container**](#gt_container) (section [6.1.1.4.10](#Section_6.1.1.4.10)) and assigns a reference to the new foreignSecurityPrincipal object as the FPO-enabled attribute value. [MS-SAMR] section 3.1.1.8.9 specifies the creation of the foreignSecurityPrincipal object.
-- If attributeSchema or classSchema object is created in schema NC, then apply special processing as described in section [3.1.1.2.5](#Section_3.1.1.2.5.3).
+- If attributeSchema or classSchema object is created in schema NC, then apply special processing as described in section [3.1.1.2.5](#Section_3.1.1.2.5.2).
 - If an infrastructureUpdate object is created, then let O be the object that is created. If (O!dNReferenceUpdate has a value), then for each object P in each [**NC replica**](#gt_nc-replica) on the server, do the following:
 - Let S be the set of all attributes of P with [**attribute syntax**](#gt_attribute-syntax) Object(DS-DN), Object(DN-String), Object(DN-Binary), Object(OR-Name), or Object(Access-Point).
 - For each attribute A in set S and for each value V of A, do the following:
@@ -11783,7 +11783,7 @@ This section also defines one set of [**attributes**](#gt_attribute): [**foreign
 - Let RD be O!dNReferenceUpdate.dn.
 - If (RG = G), then delete V from P.A.
 - If (RG = G) and A is not a [**link value**](#gt_link-value) attribute, then add attribute value of O!dNReferenceUpdate to P.A
-- If (RG = G) and A is a link value attribute and [**RDN**](#gt_relative-distinguished-name-rdn) of RD is not a delete-mangled RDN (see section [3.1.1.5.5](#Section_3.1.1.5.5.4)), then add value of O!dNReferenceUpdate to P.A.
+- If (RG = G) and A is a link value attribute and [**RDN**](#gt_relative-distinguished-name-rdn) of RD is not a delete-mangled RDN (see section [3.1.1.5.5](#Section_3.1.1.5.5.3)), then add value of O!dNReferenceUpdate to P.A.
 - If (RG = G) and A is a link value attribute and RDN of RD is a delete-mangled RDN (see section 3.1.1.5.5) and the [**Recycle Bin**](#gt_recycle-bin) [**optional feature**](#gt_optional-feature) is enabled (see section [3.1.1.9.1](#Section_3.1.1.9.1)), then add the value of O!dNReferenceUpdate to P.A. However, this value is to be treated as a linked value to or from a [**deleted-object**](#gt_deleted-object). That is, the value is not generally visible to LDAP clients unless the LDAP_SHOW_DEACTIVATED_LINK_OID control is used.
 - If a [**crossRef object**](#gt_crossref-object) is being created, the server MUST return ERROR_DS_ROLE_NOT_VERIFIED if the IsEffectiveRoleOwner(RoleObject(Config NC, DomainNamingMasterRole)) function specified in section [3.1.1.5.1.8](#Section_3.1.1.5.1.8) returns FALSE.
 <a id="Section_3.1.1.5.2.5"></a>
@@ -11801,7 +11801,7 @@ The USAGE value is computed as follows:
 
 USAGE = *owned_existing_objects* + ceil(*tombstone-factor*/100 * *owned_deleted_objects*)
 
-In the preceding formula, *owned_existing_objects* is the total number of [**existing-objects**](#gt_existing-object) that the requester owns. *owned_deleted_objects* is the total number of tombstones, deleted-objects, or recycled-objects (see the Delete operation in section [3.1.1.5.5](#Section_3.1.1.5.5.4)) that the requester owns. *tombstone-factor* is the integer value stored in the msDS-TombstoneQuotaFactor [**attribute**](#gt_attribute) on the Quotas [**container**](#gt_container) in the NC. Ceil() is the "ceiling" mathematical function.
+In the preceding formula, *owned_existing_objects* is the total number of [**existing-objects**](#gt_existing-object) that the requester owns. *owned_deleted_objects* is the total number of tombstones, deleted-objects, or recycled-objects (see the Delete operation in section [3.1.1.5.5](#Section_3.1.1.5.5.3)) that the requester owns. *tombstone-factor* is the integer value stored in the msDS-TombstoneQuotaFactor [**attribute**](#gt_attribute) on the Quotas [**container**](#gt_container) in the NC. Ceil() is the "ceiling" mathematical function.
 
 The MAX-USAGE value is computed as follows:
 
@@ -12071,7 +12071,7 @@ When this constraint is violated, the error returned depends on the DC functiona
 - Modifications of systemFlags are permitted only in the following case: the modify is on an attributeSchema object in the [**schema container**](#gt_schema-container), and the change is to set (but not reset) the FLAG_ATTR_IS_RDN bit.
 - Modifications of wellKnownObjects are permitted, subject to additional constraints. See section [3.1.1.5.3.6](#Section_3.1.1.5.3.6), wellKnownObjects Updates, for more details.
 - Modifications of isDeleted and distinguishedName are permitted only when the modify operation is Undelete (section 3.1.1.5.3.7).
-- Modifications of mAPIID are permitted, subject to the constraints described in section [3.1.1.2.3](#Section_3.1.1.2.3.4).
+- Modifications of mAPIID are permitted, subject to the constraints described in section [3.1.1.2.3](#Section_3.1.1.2.3.1).
 Otherwise constraintViolation / ERROR_DS_CANT_MOD_SYSTEM_ONLY is returned.
 
 - The following constraints are enforced if the DC functional level is DS_BEHAVIOR_WIN2003 or greater and the requester is not passing the LDAP_SERVER_PERMISSIVE_MODIFY_OID control:
@@ -12100,7 +12100,7 @@ Otherwise, unwillingToPerform / ERROR_DS_SECURITY_ILLEGAL_MODIFY is returned.
 - The current password value on the object satisfies the current password policy, as reported by SamrValidatePassword ([MS-SAMR] section 3.1.5.13.7).
 If this check fails, the modify returns constraintViolation / ERROR_PASSWORD_RESTRICTION.
 
-- After the modify operation, the object MUST remain compliant with the [**schema**](#gt_schema) as described in section [3.1.1.5.1.1](#Section_3.1.1.5.1.11).
+- After the modify operation, the object MUST remain compliant with the [**schema**](#gt_schema) as described in section [3.1.1.5.1.1](#Section_3.1.1.5.1.1).
 - If the object being modified is a SAM-specific object (section 3.1.1.5.2.3), then additional constraints apply (specified in [MS-SAMR] section 3.1.1.6).
 - If the modify operation affects the nTSecurityDescriptor attribute, then additional constraints apply (see section 6.1.3, "Security Descriptor Requirements", for more details).
 - If the modify operation would require delayed link processing (section [3.1.1.1.16](#Section_3.1.1.1.16)), and such processing is already underway for the object being modified due to a previous update, then the modify returns *busy* / *ERROR_DS_DATABASE_ERROR*.
@@ -12135,7 +12135,7 @@ If any of the operations above fail, then the modify returns *unwillingToPerform
 - For each **msDS-AdditionalDnsHostName** value that is being removed, the server MUST check for a corresponding ‘anyDnsLabel$’ value in the **msDS-AdditionalSamAccountName** attribute, and if found, remove it.
 - In AD LDS, if the pwdLastSet attribute is set to -1 (that is, an unexpire-password operation is performed), then the current time is written as the value of the pwdLastSet attribute.
 - For originating updates, additional operations might be performed if the object being modified is a SAM-specific object (section 3.1.1.5.2.3); [MS-SAMR] section 3.1.1.8 specifies these additional operations.
-- Additional operations might be performed if the object being modified is a [**schema object**](#gt_schema-object) (section 3.1.1.5.2.3); the additional operations are specified in section [3.1.1.2.5](#Section_3.1.1.2.5.3).
+- Additional operations might be performed if the object being modified is a [**schema object**](#gt_schema-object) (section 3.1.1.5.2.3); the additional operations are specified in section [3.1.1.2.5](#Section_3.1.1.2.5.2).
 - If [**link attribute**](#gt_link-attribute) values that refer to [**deleted-objects**](#gt_deleted-object) are not visible to the update operation (section [3.1.1.3.4.1.25](#Section_3.1.1.3.4.1.25)), and the update operation is a complete removal of a link attribute, all existing values of the attribute are removed, including values that refer to deleted-objects. Note that if the update operation is an explicit list of attributes to be removed rather than a directive to completely remove the attribute, then no values that refer to deleted-objects are removed.
 - If link attribute values that refer to deleted-objects are not visible to the update operation (section 3.1.1.3.4.1.25), and the update operation is a complete replacement of a link attribute, all existing values of the attribute including values that refer to deleted-objects are removed before any new values specified by the replacement are added.
 - If link attribute values that refer to deleted-objects are not visible to the update operation (section 3.1.1.3.4.1.25), and the update operation is the addition of a value to a single-valued attribute, and all existing values of the attribute refer to deleted-objects, then all existing values of the attribute (including values that refer to deleted-objects) are removed before the new value is added.
@@ -12210,7 +12210,7 @@ In [**AD DS**](#gt_active-directory-domain-services-ad-ds), when a wellKnownObje
 <a id="Section_3.1.1.5.3.7"></a>
 ###### 3.1.1.5.3.7 Undelete Operation
 
-The undelete operation is used to revert the effects of a delete operation; that is, to turn a [**tombstone**](#gt_tombstone) or [**deleted-object**](#gt_deleted-object) into a regular [**object**](#gt_object) (see section [3.1.1.5.5](#Section_3.1.1.5.5.4) for more details). The undelete operation is represented by a regular [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modify operation, which contains special instructions that are used to distinguish it from a modify operation. These instructions ([**attribute**](#gt_attribute) modifications) are disallowed for regular modify operations.
+The undelete operation is used to revert the effects of a delete operation; that is, to turn a [**tombstone**](#gt_tombstone) or [**deleted-object**](#gt_deleted-object) into a regular [**object**](#gt_object) (see section [3.1.1.5.5](#Section_3.1.1.5.5.3) for more details). The undelete operation is represented by a regular [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modify operation, which contains special instructions that are used to distinguish it from a modify operation. These instructions ([**attribute**](#gt_attribute) modifications) are disallowed for regular modify operations.
 
 The undelete operation is identified by the presence of the following attribute LDAPMods (both MUST be present):
 
@@ -12268,7 +12268,7 @@ The undelete operation comprises two suboperations: modifying the [**object**](#
 - Concrete structure DRS_MSG_MOVEREPLY_V2: see [MS-DRSR] section 4.1.15.1.6.
 - Concrete method IDL_DRSInterDomainMove: see [MS-DRSR] section 4.1.15.
 - Concrete method IDL_DRSBind: see [MS-DRSR] section 4.1.3.
-- Function RoleObject: section [3.1.1.5.1](#Section_3.1.1.5.1.11).
+- Function RoleObject: section [3.1.1.5.1](#Section_3.1.1.5.1.9).
 - Function GetWellknownObject: section [3.1.1.1.6](#Section_3.1.1.1.6).
 - Kerberos delegation: [MS-KILE](../MS-KILE/MS-KILE.md).
 - Glossary terms: [**global group**](#gt_global-group), [**config NC**](#gt_configuration-naming-context-config-nc), [**default NC**](#gt_default-naming-context-default-nc), [**dsname**](#gt_dsname), [**NC replica**](#gt_nc-replica), [**prefix table**](#gt_prefix-table), [**primary group**](#gt_primary-group), [**RID**](#gt_relative-identifier-rid), [**schema NC**](#gt_schema-naming-context-schema-nc), [**SID**](#gt_security-identifier-sid), structural class.
@@ -12582,7 +12582,7 @@ The following requirements apply to all [**tombstones**](#gt_tombstone) except t
 - If any NC replicas contain other objects with nonlinked attribute values referencing a tombstone, then those attribute values on those objects are retained. In other words, when an object is deleted and transformed into a tombstone, any nonlinked attribute values on other objects referencing it are not removed.
 - Except as described in section [3.1.1.5.5.6](#Section_3.1.1.5.5.6), tombstones exist only in the Deleted Objects container of an [**NC**](#gt_naming-context-nc).
 - Except as described in section 3.1.1.5.5.6, tombstones have "delete-mangled RDNs".
-- A protected object cannot be deleted and transformed into a tombstone (see [Protected Objects (section 3.1.1.5.5.3)](#Section_3.1.1.6.1.2)).
+- A protected object cannot be deleted and transformed into a tombstone (see [Protected Objects (section 3.1.1.5.5.3)](#Section_3.1.1.5.5.3)).
 The following requirements apply to the Deleted Objects container when it is a tombstone:
 
 - The isDeleted attribute is set to TRUE.
@@ -12605,7 +12605,7 @@ The following requirements apply to [**deleted-objects**](#gt_deleted-object) ex
 - If any NC replicas contain other objects with nonlinked attribute values referencing a deleted-object, then those attribute values on those objects are retained. In other words, when an object is deleted and transformed into a deleted-object, any nonlinked attribute values on other objects referencing it are not removed.
 - Except as described in section [3.1.1.5.5.6](#Section_3.1.1.5.5.6), deleted-objects exist only in the Deleted Objects container of an [**NC**](#gt_naming-context-nc).
 - Except as described in section 3.1.1.5.5.6, deleted-objects have "delete-mangled RDNs".
-- A protected object cannot be deleted and transformed into a deleted-object (see Protected Objects in section [3.1.1.5.5.3](#Section_3.1.1.6.1.2)).
+- A protected object cannot be deleted and transformed into a deleted-object (see Protected Objects in section [3.1.1.5.5.3](#Section_3.1.1.5.5.3)).
 The following requirements apply to the Deleted Objects container when it is a deleted-object:
 
 - The isDeleted attribute is set to TRUE.
@@ -12782,7 +12782,7 @@ These periodic tasks are specified in the following sections.
 
 **References**
 
-- Special Objects in section [6.1](#Section_3.1.1.2.2.1): Windows NT operating system
+- Special Objects in section [6.1](#Section_1): Windows NT operating system
 Glossary terms: [**Active Directory**](#gt_active-directory), [**security principal**](#gt_security-principal), [**privileges**](#gt_privilege), [**PDC**](#gt_primary-domain-controller-pdc), [**FSMO**](#gt_flexible-single-master-operation-fsmo), [**SD**](#gt_security-descriptor), [**transitive membership**](#gt_transitive-membership), [**RID**](#gt_relative-identifier-rid)
 
 LDAP attributes: nTSecurityDescriptor, groupType, objectClass, member, objectSid, dSHeuristics
@@ -12883,7 +12883,7 @@ Creation of an infrastructureUpdate object *K* with attribute dNReferenceUpdate 
 - Retrieve the dsname *N* and the value *Vgc* of the isRecycled attribute of object with objectGUID *G* from a GC by calling method IDL_DRSVerifyNames. IDL_DRSVerifyNames is explained in [MS-DRSR] section 4.1.27.
 - If *Vgc* is TRUE and attribute *A* is a linked attribute, remove value *V* from attribute *A*. This removal is not replicated to any other DCs.
 - If *N*!name ≠ *D* then replace value *V* of attribute *A* with *N*!name. This replacement is not replicated to any other DCs.
-- If attribute *A* is a [**link value**](#gt_link-value) and the [**RDN**](#gt_relative-distinguished-name-rdn) of *N*!name is a delete-mangled RDN (see section [3.1.1.5.5](#Section_3.1.1.5.5.4)), the value *V* is to be treated as a linked value to or from a [**deleted-object**](#gt_deleted-object). That is, the value is not generally visible to [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) clients unless the LDAP_SHOW_DEACTIVATED_LINK_OID control is used.
+- If attribute *A* is a [**link value**](#gt_link-value) and the [**RDN**](#gt_relative-distinguished-name-rdn) of *N*!name is a delete-mangled RDN (see section [3.1.1.5.5](#Section_3.1.1.5.5.3)), the value *V* is to be treated as a linked value to or from a [**deleted-object**](#gt_deleted-object). That is, the value is not generally visible to [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) clients unless the LDAP_SHOW_DEACTIVATED_LINK_OID control is used.
 - If attribute *A* is a link value and the RDN of *N*!name is not a delete-mangled RDN (see section 3.1.1.5.5), the value *V* is to be treated as a normal linked value. That is, the value is generally visible to LDAP clients.
 <a id="Section_3.1.1.6.3"></a>
 ##### 3.1.1.6.3 Security Descriptor Propagator Update
@@ -13193,7 +13193,7 @@ An AD LDS user object has these special properties and behavior:
 - It can be a member of group [**objects**](#gt_object) in its AD LDS [**forest**](#gt_forest), subject to the limitations on inter-[**NC**](#gt_naming-context-nc) references specified in section [3.1.1.2.2.3](#Section_3.1.1.2.2.3), Referential Integrity.
 - It can be named in an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) bind; section [5.1.1.5](#Section_5.1.1.5) specifies the supported [**authentication**](#gt_authentication) mechanisms and protocols. If the bind succeeds, it creates a [**security context**](#gt_security-context) for the [**LDAP connection**](#gt_ldap-connection) as specified in section [5.1.3.4](#Section_5.1.3.4).
 - Its password can both be assigned an initial value and [**updated**](#gt_update). Special processing is performed on both the initial assignment and on update. Sections [3.1.1.5.2.2](#Section_3.1.1.5.2.2), 3.1.1.5.2.4, [3.1.1.5.3.1](#Section_3.1.1.5.3.1), [3.1.1.5.3.2](#Section_3.1.1.5.3.2), and [3.1.1.5.3.3](#Section_3.1.1.5.3.3) specify this processing.
-- Its objectSid can be written into an AD LDS [**security descriptor**](#gt_security-descriptor), subject to restrictions specified in section [6.1.3.3](#Section_3.1.1.5.3.3).
+- Its objectSid can be written into an AD LDS [**security descriptor**](#gt_security-descriptor), subject to restrictions specified in section [6.1.3.3](#Section_6.1.3).
 <a id="Section_3.1.1.8.2"></a>
 ##### 3.1.1.8.2 Bind Proxies
 
@@ -13217,7 +13217,7 @@ On Windows Server 2008 R2 and later, [**Active Directory**](#gt_active-directory
 
 Optional features are enabled in some scope. A scope defines the set of [**DCs**](#gt_domain-controller-dc) participating in the state-model changes that make up the optional feature. Optional features can be forest-wide, domain-wide, or server-wide in scope. A forest-wide optional feature affects the state model of all DCs in the [**forest**](#gt_forest) when the optional feature is enabled. A domain-wide optional feature affects the state model of all DCs in the [**domain**](#gt_domain) in which the optional feature is enabled. A server-wide optional feature affects the state model of the DCs in which the optional feature is enabled. [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) supports forest-wide and server-wide optional features. In AD LDS, a forest-wide optional feature affects the state model of all AD LDS instances in a configuration set. Domain-wide optional features are not supported in AD LDS.
 
-Scopes are represented by [**objects**](#gt_object) in the [**directory**](#gt_directory) information tree (DIT). The object that represents the forest-wide scope is the Cross-Ref-Container [**container**](#gt_container) (see section [6.1.1.2.1](#Section_6.1.1.2.1)). The object that represents a domain-wide scope is the [**NC**](#gt_naming-context-nc) root object of the domain. The object that represents a server-wide scope is the nTDSDSA object.
+Scopes are represented by [**objects**](#gt_object) in the [**directory**](#gt_directory) information tree (DIT). The object that represents the forest-wide scope is the Cross-Ref-Container [**container**](#gt_container) (see section [6.1.1.2.1](#Section_6.1.1.2.1.1)). The object that represents a domain-wide scope is the [**NC**](#gt_naming-context-nc) root object of the domain. The object that represents a server-wide scope is the nTDSDSA object.
 
 Optional features are represented by instances of the [**object class**](#gt_object-class) msDS-OptionalFeature. Objects representing optional features are stored in the Optional Features container in the Config NC (see section [6.1.1.2.4.1.3](#Section_6.1.1.2.4.1.3)).
 
@@ -13283,7 +13283,7 @@ The [**Recycle Bin**](#gt_recycle-bin) [**optional feature**](#gt_optional-featu
 
 The Recycle Bin optional feature modifies the DRS Remote Protocol and modifies the way [**Active Directory**](#gt_active-directory) processes [**object**](#gt_object) deletion, object undeletion, and referential integrity. When the Recycle Bin optional feature is enabled, [**deleted-objects**](#gt_deleted-object) maintain virtually all of their state, and therefore can be undeleted without loss of information. When the Recycle Bin optional feature is enabled, [**link valued**](#gt_link-value) [**attributes**](#gt_attribute) are maintained both to and from deleted-objects. This is not possible in the unmodified state model. When the Recycle Bin optional feature is enabled, all [**tombstones**](#gt_tombstone) are transformed to be [**recycled-objects**](#gt_recycled-object), and all the requirements for recycled-objects in section [3.1.1.5.5.1.3](#Section_3.1.1.5.5.1.3) are maintained.
 
-The state model modifications that implement the Recycle Bin optional feature are specified throughout this document, with specific details in sections [3.1.1.1.6](#Section_3.1.1.1.6), [3.1.1.4.5.37](#Section_3.1.1.4.5.37), [3.1.1.4.5.38](#Section_3.1.1.4.5.38), [3.1.1.5.3](#Section_3.1.1.5.3.7) (especially [3.1.1.5.3.7](#Section_3.1.1.5.3.7)), [3.1.1.5.5](#Section_3.1.1.5.5.4), [3.1.1.6.2](#Section_3.1.1.6.2), and [6.1.5.5](#Section_3.1.1.3.3.2).
+The state model modifications that implement the Recycle Bin optional feature are specified throughout this document, with specific details in sections [3.1.1.1.6](#Section_3.1.1.1.6), [3.1.1.4.5.37](#Section_3.1.1.4.5.37), [3.1.1.4.5.38](#Section_3.1.1.4.5.38), [3.1.1.5.3](#Section_3.1.1.5.3) (especially [3.1.1.5.3.7](#Section_3.1.1.5.3.7)), [3.1.1.5.5](#Section_3.1.1.5.5.3), [3.1.1.6.2](#Section_3.1.1.6.2), and [6.1.5.5](#Section_6.1.1.4.4).
 
 The Recycle Bin optional feature is identified by the feature [**GUID**](#gt_globally-unique-identifier-guid) {766ddcd8-acd0-445e-f3b9-a7f9b6744f2a}.
 
@@ -13306,7 +13306,7 @@ The Privileged Access Management optional feature is identified by the feature [
 
 The Privileged Access Management optional feature requires a Forest Functional Level of DS_BEHAVIOR_WIN2016 or greater.
 
-The Privileged Access Management optional feature is forest-wide in scope; it cannot be enabled in only a domain-wide scope or server-wide scope. When the [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) modify operation enableOptionalFeature (section [3.1.1.3.3.28](#Section_3.1.1.3.3.28)) is executed on a given DC to enable the Privileged Access Management optional feature, in addition to being added to the list of forest-wide enabled features, the optional feature is also added to the list of server-wide enabled features (see section [3.1.1.9](#Section_2.2.17)).
+The Privileged Access Management optional feature is forest-wide in scope; it cannot be enabled in only a domain-wide scope or server-wide scope. When the [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) modify operation enableOptionalFeature (section [3.1.1.3.3.28](#Section_3.1.1.3.3.28)) is executed on a given DC to enable the Privileged Access Management optional feature, in addition to being added to the list of forest-wide enabled features, the optional feature is also added to the list of server-wide enabled features (see section [3.1.1.9](#Section_3.1.1.9.2)).
 
 The Privileged Access Management optional feature cannot be disabled once it is enabled.
 
@@ -13325,7 +13325,7 @@ The database 32K pages optional feature is identified by the feature GUID 52982a
 
 The database 32K pages optional feature requires a Forest Functional Level of DS_BEHAVIOR_WIN2025 or greater. The database 32K pages optional feature also requires that all servers are advertising support for 32K pages on their DSA object with the msDS-JetDBPageSize attribute.
 
-The database 32K pages optional feature is forest-wide in scope; it cannot be enabled in only a domain-wide scope or server-wide scope. When the rootDSE modify operation enableOptionalFeature (section [3.1.1.3.3.28](#Section_3.1.1.3.3.28)) is executed on a given DC to enable the database 32K pages optional feature, in addition to being added to the list of forest-wide enabled features, the optional feature is also added to the list of server-wide enabled features (see section [3.1.1.9](#Section_2.2.17)).
+The database 32K pages optional feature is forest-wide in scope; it cannot be enabled in only a domain-wide scope or server-wide scope. When the rootDSE modify operation enableOptionalFeature (section [3.1.1.3.3.28](#Section_3.1.1.3.3.28)) is executed on a given DC to enable the database 32K pages optional feature, in addition to being added to the list of forest-wide enabled features, the optional feature is also added to the list of server-wide enabled features (see section [3.1.1.9](#Section_3.1.1.9.2)).
 
 The database 32K pages optional feature cannot be disabled once it is enabled.
 
@@ -13453,7 +13453,7 @@ The Claims Dictionary is a list of [**objects**](#gt_object) of type msDS-ClaimT
 [**Claims**](#gt_claim) have two sources of values:
 
 - **AD**: [**Active Directory**](#gt_active-directory) is the default claim source.
-- **Certificate**: Certificate sourced claims originate from the strings provided to the GetClaimsForPrincipal procedure (section [3.1.1.11.2.1](#Section_3.1.1.11.2.12)) and are single-valued Boolean claims.
+- **Certificate**: Certificate sourced claims originate from the strings provided to the GetClaimsForPrincipal procedure (section [3.1.1.11.2.1](#Section_3.1.1.11.2.18)) and are single-valued Boolean claims.
 Constructed claims are generated dynamically according to a claim-specific algorithm, but are still considered to have **AD** as their source.
 
 <a id="Section_3.1.1.11.1.4"></a>
@@ -13464,7 +13464,7 @@ Constructed claims are generated dynamically according to a claim-specific algor
 - The claim **Type** of the claim is the value of the name [**attribute**](#gt_attribute) of the msDS-ClaimType [**object**](#gt_object).
 - The claim **Value** or **Values** are retrieved from the source specified in the msDS-ClaimSourceType attribute of the msDS-ClaimType object (or computed dynamically in the case of constructed claims). At least one value MUST be present for this claim to be issued.
 - The claim **ValueType** is generated based on the claim **Values**.
-Refer to the GetClaimsForPrincipal claims procedure (section [3.1.1.11.2.1](#Section_3.1.1.11.2.12)) for a normative description of claims issuance.
+Refer to the GetClaimsForPrincipal claims procedure (section [3.1.1.11.2.1](#Section_3.1.1.11.2.18)) for a normative description of claims issuance.
 
 <a id="Section_3.1.1.11.1.5"></a>
 ###### 3.1.1.11.1.5 Claims Transformation Rules
@@ -18382,7 +18382,7 @@ During an access check, the server steps through the ACEs in the order in which 
 
 The order in which ACEs are listed in a DACL is important. For example, an object's DACL might contain one ACE that allows access to a group and another ACE that denies access to a principal who is a member of the group. If the access check process encounters the ACE that allows access to the group before the ACE that denies access to the principal, the principal is allowed access to the object. If the ACEs are encountered in the reverse order, then the principal is denied access to the object.
 
-[**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) security principals cannot appear in an [**AD DS**](#gt_active-directory-domain-services-ad-ds) ACE. Section [6.1.3.3](#Section_3.1.1.5.3.3) specifies a restriction on the AD LDS security principals that can be used in an AD LDS ACE.
+[**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) security principals cannot appear in an [**AD DS**](#gt_active-directory-domain-services-ad-ds) ACE. Section [6.1.3.3](#Section_6.1.3) specifies a restriction on the AD LDS security principals that can be used in an AD LDS ACE.
 
 <a id="Section_5.1.3.2"></a>
 #### 5.1.3.2 Access Rights
@@ -18433,13 +18433,13 @@ packet-beta
 
 **LC (RIGHT_DS_LIST_CONTENTS, 0x00000004)**: The right to list child objects of this object. For more information about this right, see section [3.1.1.4](#Section_1.3).
 
-**VW (RIGHT_DS_WRITE_PROPERTY_EXTENDED, 0x00000008)**: The right to perform an operation controlled by a validated write access right. The ObjectType member of an ACE can contain a GUID that identifies the validated write. If ObjectType does not contain a GUID, the ACE controls the rights to perform all validated write operations associated with the object. For a list of validated write rights, see section [5.1.3.2.2](#Section_5.1.3.2.2). For specifics of validated write processing, see the Modify operation in section [3.1.1.5.3](#Section_3.1.1.5.3.7).
+**VW (RIGHT_DS_WRITE_PROPERTY_EXTENDED, 0x00000008)**: The right to perform an operation controlled by a validated write access right. The ObjectType member of an ACE can contain a GUID that identifies the validated write. If ObjectType does not contain a GUID, the ACE controls the rights to perform all validated write operations associated with the object. For a list of validated write rights, see section [5.1.3.2.2](#Section_5.1.3.2.2). For specifics of validated write processing, see the Modify operation in section [3.1.1.5.3](#Section_3.1.1.5.3).
 
 **RP (RIGHT_DS_READ_PROPERTY, 0x00000010)**: The right to read properties of the object. The ObjectType member of an ACE can contain a GUID that identifies a [**property set**](#gt_property-set) or an [**attribute**](#gt_attribute). If ObjectType does not contain a GUID, the ACE controls the right to read all attributes of the object.
 
 **WP (RIGHT_DS_WRITE_PROPERTY, 0x00000020)**: The right to write properties of the object. The ObjectType member of an ACE can contain a GUID that identifies a property set or an attribute. If ObjectType does not contain a GUID, the ACE controls the right to write all attributes of the object.
 
-**DT (RIGHT_DS_DELETE_TREE, 0x00000040)**: The right to perform a Delete-Tree operation on this object. See the Delete operation in section [3.1.1.5.5](#Section_3.1.1.5.5.4) for more details.
+**DT (RIGHT_DS_DELETE_TREE, 0x00000040)**: The right to perform a Delete-Tree operation on this object. See the Delete operation in section [3.1.1.5.5](#Section_3.1.1.5.5.3) for more details.
 
 **LO (RIGHT_DS_LIST_OBJECT, 0x00000080)**: The right to list a particular object. If the user is not granted this right, and the user is not granted the RIGHT_DS_LIST_CONTENTS right on the object's parent, the object is hidden from the user. Note that LIST_OBJECT rights are not enforced by Active Directory by default. In order to enable LIST_OBJECT enforcement, the fDoListObject heuristic of the dSHeuristics attribute (see section [6.1.1.2.4.1.2](#Section_6.1.1.2.4.1.2)) MUST be TRUE.
 
@@ -18760,7 +18760,7 @@ After a successful [**authentication**](#gt_authentication) to an [**AD LDS**](#
 - If the bind named an AD LDS bind proxy, or the [**SID**](#gt_security-identifier-sid) of some Windows account, the initial security context is the context returned by the Windows login.
 - Extend the security context with well-known SIDs.
 - If the bind named an AD LDS user object or an AD LDS bind proxy object, add the following SIDs to the security context if not already present:
-- Authenticated Users (section [6.1.1.2.6.2](#Section_6.1.1.2.6.27)).
+- Authenticated Users (section [6.1.1.2.6.2](#Section_6.1.1.2.6.25)).
 - Everyone (section [6.1.1.2.6.10](#Section_6.1.1.2.6.10)).
 - Users, for the [**NC**](#gt_naming-context-nc) containing the AD LDS object (section [6.1.1.4.13.3](#Section_6.1.1.4.13.3)).
 - Users, for the [**config NC**](#gt_configuration-naming-context-config-nc) of the [**forest**](#gt_forest) containing the AD LDS object (section 6.1.1.4.13.3).
@@ -19011,7 +19011,7 @@ systemFlags: {FLAG_DISALLOW_DELETE}
 
 msDS-Behavior-Version: This value defines the [**forest functional level**](#gt_forest-functional-level). See section [6.1.4](#Section_1.3).
 
-msDS-EnabledFeature: This value references the [**objects**](#gt_object) that represent [**optional features**](#gt_optional-feature) that are enabled in the [**forest**](#gt_forest). See section [3.1.1.9](#Section_2.2.17).
+msDS-EnabledFeature: This value references the [**objects**](#gt_object) that represent [**optional features**](#gt_optional-feature) that are enabled in the [**forest**](#gt_forest). See section [3.1.1.9](#Section_3.1.1.9.2).
 
 <a id="Section_6.1.1.2.1.1"></a>
 ###### 6.1.1.2.1.1 Cross-Ref Objects
@@ -19068,7 +19068,7 @@ parent: crossRefContainer object
 
 objectClass: crossRef
 
-Enabled: If FALSE, this is a "pre-created" crossRef; that is, the crossRef exists, but the corresponding NC root does not yet exist. See section [3.1.1.5.2.8](#Section_3.1.1.5.2).
+Enabled: If FALSE, this is a "pre-created" crossRef; that is, the crossRef exists, but the corresponding NC root does not yet exist. See section [3.1.1.5.2.8](#Section_3.1.1.5.2.8).
 
 dnsRoot: If Enabled equals FALSE, in [**AD DS**](#gt_active-directory-domain-services-ad-ds) dnsRoot holds the [**DNS name**](#gt_dns-name) of the [**DC**](#gt_domain-controller-dc) that will create the root of this NC. If Enabled equals FALSE, in [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), dnsRoot holds the DNS name of the DC that will create the root of this NC followed by a colon (":"), followed by the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) port number used by the DC, followed by another colon (":"), followed by the [**SSL**](#gt_secure-sockets-layer-ssl) port number used by the DC. If Enabled is not FALSE, in AD DS dnsRoot holds the fully qualified DNS name used for LDAP referrals (section [3.1.1.4.6](#Section_3.1.1.4.6)). If Enabled is not FALSE, in AD LDS dnsRoot is absent.
 
@@ -19262,7 +19262,7 @@ systemFlags: FLAG_DISALLOW_MOVE_ON_DELETE
 <a id="Section_6.1.1.2.2.1.2.1"></a>
 Server Object
 
-Each [**DC**](#gt_domain-controller-dc) in a [**domain**](#gt_domain) has a server [**object**](#gt_object) in the [**config NC**](#gt_configuration-naming-context-config-nc). See requirements in section [6.1.2.1](#Section_6.1.2.1). A server object has the following [**attributes**](#gt_attribute):
+Each [**DC**](#gt_domain-controller-dc) in a [**domain**](#gt_domain) has a server [**object**](#gt_object) in the [**config NC**](#gt_configuration-naming-context-config-nc). See requirements in section [6.1.2.1](#Section_6.1.2.2). A server object has the following [**attributes**](#gt_attribute):
 
 parent: The parent of this object is a serversContainer object.
 
@@ -19279,7 +19279,7 @@ mailAddress: To enable the DC to perform intersite [**replication**](#gt_replica
 <a id="Section_6.1.1.2.2.1.2.1.1"></a>
 nTDSDSA Object
 
-Each [**DC**](#gt_domain-controller-dc) in a [**forest**](#gt_forest) has an [**nTDSDSA object**](#gt_ntdsdsa-object) in the [**config NC**](#gt_configuration-naming-context-config-nc). See requirements in section [6.1.2.1](#Section_6.1.2.1). An nTDSDSA object has the following [**attributes**](#gt_attribute):
+Each [**DC**](#gt_domain-controller-dc) in a [**forest**](#gt_forest) has an [**nTDSDSA object**](#gt_ntdsdsa-object) in the [**config NC**](#gt_configuration-naming-context-config-nc). See requirements in section [6.1.2.1](#Section_6.1.2.2). An nTDSDSA object has the following [**attributes**](#gt_attribute):
 
 name: NTDS Settings
 
@@ -19990,7 +19990,7 @@ The following table describes the characters of the dSHeuristics string.
 <a id="Section_6.1.1.2.4.1.3"></a>
 Optional Features Container
 
-A [**container**](#gt_container) to store the [**optional features**](#gt_optional-feature) [**objects**](#gt_object). See section [3.1.1.9](#Section_2.2.17), Optional Features.
+A [**container**](#gt_container) to store the [**optional features**](#gt_optional-feature) [**objects**](#gt_object). See section [3.1.1.9](#Section_3.1.1.9.2), Optional Features.
 
 parent: Directory Service
 
@@ -20001,7 +20001,7 @@ objectClass: container
 <a id="Section_6.1.1.2.4.1.3.1"></a>
 Recycle Bin Feature Object
 
-An msDS-OptionalFeature [**object**](#gt_object) that represents the [**Recycle Bin**](#gt_recycle-bin) [**optional feature**](#gt_optional-feature). See section [3.1.1.9](#Section_2.2.17) for information on optional features. See section [3.1.1.9.1](#Section_3.1.1.9.1) for the effects of the Recycle Bin optional feature.
+An msDS-OptionalFeature [**object**](#gt_object) that represents the [**Recycle Bin**](#gt_recycle-bin) [**optional feature**](#gt_optional-feature). See section [3.1.1.9](#Section_3.1.1.9.2) for information on optional features. See section [3.1.1.9.1](#Section_3.1.1.9.1) for the effects of the Recycle Bin optional feature.
 
 parent: Optional Features
 
@@ -20018,7 +20018,7 @@ msDS-RequiredForestBehaviorVersion: DS_BEHAVIOR_WIN2008R2
 <a id="Section_6.1.1.2.4.1.3.2"></a>
 Privileged Access Management Feature Object
 
-An msDS-OptionalFeature [**object**](#gt_object) that represents the Privileged Access Management [**optional feature**](#gt_optional-feature). See section [3.1.1.9](#Section_2.2.17) for information on optional features. See section [3.1.1.9.2](#Section_3.1.1.9.2) for the effects of the Privileged Access Management optional feature.
+An msDS-OptionalFeature [**object**](#gt_object) that represents the Privileged Access Management [**optional feature**](#gt_optional-feature). See section [3.1.1.9](#Section_3.1.1.9.2) for information on optional features. See section [3.1.1.9.2](#Section_3.1.1.9.2) for the effects of the Privileged Access Management optional feature.
 
 parent: Optional Features
 
@@ -20035,7 +20035,7 @@ msDS-RequiredForestBehaviorVersion: DS_BEHAVIOR_WIN2016
 <a id="Section_6.1.1.2.4.1.3.3"></a>
 Database 32K Pages Feature
 
-An msDS-OptionalFeature object that represents the Database 32k Pages optional feature. See section [3.1.1.9](#Section_2.2.17) for information about optional features. See section [3.1.1.9.3](#Section_3.1.1.9.3) for the effects of the Database 32k Pages optional feature. Applies to Windows 11, version 24H2 operating system and later, and Windows Server 2025 operating system and later.
+An msDS-OptionalFeature object that represents the Database 32k Pages optional feature. See section [3.1.1.9](#Section_3.1.1.9.2) for information about optional features. See section [3.1.1.9.3](#Section_3.1.1.9.3) for the effects of the Database 32k Pages optional feature. Applies to Windows 11, version 24H2 operating system and later, and Windows Server 2025 operating system and later.
 
 [parent](#Section_3.1.1.4.5.28): Optional Features
 
@@ -20101,7 +20101,7 @@ parent: Services
 
 objectClass: container
 
-Section [3.1.1.11](#Section_3.1.1.11.2.3) specifies additional information on how this container is used.
+Section [3.1.1.11](#Section_3.1.1.11.2.18) specifies additional information on how this container is used.
 
 <a id="Section_6.1.1.2.5"></a>
 ##### 6.1.1.2.5 Physical Locations
@@ -21674,7 +21674,7 @@ Each [**domain NC**](#gt_domain-naming-context-domain-nc) and [**application NC*
 
 [**Deleted-objects**](#gt_deleted-object) are stored until at least an amount of time equal to the [**deleted-object lifetime**](#gt_deleted-object-lifetime) has passed, after which they are transformed into recycled-objects.
 
-To ensure that this container does not get garbage collected, the [**replication**](#gt_replication) metadata for the isDeleted [**attribute**](#gt_attribute) MUST show that the time at which the isDeleted attribute was set to TRUE is 9999-12-29. Furthermore, the isRecycled attribute MUST have no values. See section [3.1.1.5.5](#Section_3.1.1.5.5.4) for more information about the tombstone lifetime, the deleted-object lifetime, and the Deleted Objects container.
+To ensure that this container does not get garbage collected, the [**replication**](#gt_replication) metadata for the isDeleted [**attribute**](#gt_attribute) MUST show that the time at which the isDeleted attribute was set to TRUE is 9999-12-29. Furthermore, the isRecycled attribute MUST have no values. See section [3.1.1.5.5](#Section_3.1.1.5.5.3) for more information about the tombstone lifetime, the deleted-object lifetime, and the Deleted Objects container.
 
 objectClass: container
 
@@ -21861,7 +21861,7 @@ name: Administrators
 
 RID: 544
 
-member: Administrator (section [6.1.1.6.1](#Section_6.1.1.6.10)), Domain Administrators (section [6.1.1.6.5](#Section_6.1.1.6.5)), Enterprise Administrators (section [6.1.1.6.10](#Section_6.1.1.6.10)).
+member: Administrator (section [6.1.1.6.1](#Section_6.1.1.6.16)), Domain Administrators (section [6.1.1.6.5](#Section_6.1.1.6.5)), Enterprise Administrators (section [6.1.1.6.10](#Section_6.1.1.6.10)).
 
 <a id="Section_6.1.1.4.12.3"></a>
 ###### 6.1.1.4.12.3 Backup Operators Group Object
@@ -22561,7 +22561,7 @@ Let U be the user performing the modify operation:
 - U.SID equals OWNER SID.
 - Let G be a group in U.Groups whose SID is being set in the OWNER field. G.Attributes contains SE_GROUP_OWNER but not SE_GROUP_USE_FOR_DENY_ONLY.
 - U.Privileges contains SE_RESTORE_PRIVILEGE.
-This restriction is processed before the security checks described in section [6.1.3.5](#Section_3.1.1.5.5.4).
+This restriction is processed before the security checks described in section [6.1.3.5](#Section_3.1.1.5.2.1).
 
 <a id="Section_6.1.3.4"></a>
 #### 6.1.3.4 Blocking Implicit Owner Rights
@@ -22744,7 +22744,7 @@ The following values are defined.
 <a id="Section_6.1.4.4"></a>
 #### 6.1.4.4 msDS-Behavior-Version: Forest Functional Level
 
-The msDS-Behavior-Version for the [**forest**](#gt_forest) is written on the crossRefContainer [**object**](#gt_object) (see section [6.1.1.2.1](#Section_6.1.1.2.1)). Only the Domain Naming Master FSMO role owner accepts [**updates**](#gt_update) to this [**attribute**](#gt_attribute).
+The msDS-Behavior-Version for the [**forest**](#gt_forest) is written on the crossRefContainer [**object**](#gt_object) (see section [6.1.1.2.1](#Section_6.1.1.2.1.1)). Only the Domain Naming Master FSMO role owner accepts [**updates**](#gt_update) to this [**attribute**](#gt_attribute).
 
 Requirements: The value of msDS-Behavior-Version for the forest is never larger than any functional level of any [**domain NC**](#gt_domain-naming-context-domain-nc) in the forest.
 
@@ -22972,7 +22972,7 @@ The contents of TDOs are described by the trustedDomain [**schema object**](#gt_
 | flatName | MS-ADA1 |
 | isCriticalSystemObject | MS-ADA1 |
 | msDS-SupportedEncryptionTypes | MS-ADA2, MS-ADTS section [6.1.6.9.1](#Section_6.1.6.9.1.1) |
-| msDS-TrustForestTrustInfo | MS-ADA2, MS-ADTS section [6.1.6.9.3](#Section_6.1.6.9.3.2) |
+| msDS-TrustForestTrustInfo | MS-ADA2, MS-ADTS section [6.1.6.9.3](#Section_6.1.6.9.3) |
 | nTSecurityDescriptor | MS-ADA3 |
 | objectCategory | MS-ADA3 |
 | objectClass | MS-ADA3 |
@@ -23009,7 +23009,7 @@ Contains bitmapped values as specified in [MS-KILE](../MS-KILE/MS-KILE.md) secti
 
 Implemented on Windows Server 2003 and later.
 
-The contents of this [**attribute**](#gt_attribute) are fully specified in section [6.1.6.9.3](#Section_6.1.6.9.3.2).
+The contents of this [**attribute**](#gt_attribute) are fully specified in section [6.1.6.9.3](#Section_6.1.6.9.3).
 
 <a id="Section_6.1.6.7.5"></a>
 ##### 6.1.6.7.5 nTSecurityDescriptor
@@ -23886,7 +23886,7 @@ DC1 and DC2 determine that the three sites SHOULD be connected by a minimum cost
 
 DC3, because it is running a different implementation, determines that the three sites SHOULD be connected by a minimum cost spanning tree rooted at site1: DC3 replicates updates from DC1, assuming that DC2 replicates updates from DC1 and DC1 replicates updates from DC2 and DC3.
 
-The minimum cost spanning trees chosen by all the DCs are equally valid. However, the fact that they did not arrive at the same conclusions results in a violation of the first requirement described in section [6.2.1](#Section_1.2):
+The minimum cost spanning trees chosen by all the DCs are equally valid. However, the fact that they did not arrive at the same conclusions results in a violation of the first requirement described in section [6.2.1](#Section_6.2.1):
 
 - DC1 replicates updates from DC3.
 - DC3 replicates updates from DC1.
@@ -23950,7 +23950,7 @@ For each DS_REPL_KCC_DSA_FAILUREW *d* it receives, the KCC [**updates**](#gt_upd
 <a id="Section_6.2.2.3.3"></a>
 ##### 6.2.2.3.3 Site Graph Concepts
 
-For each [**NC**](#gt_naming-context-nc) with an [**NC replica**](#gt_nc-replica) that "SHOULD be present" on the [**local DC**](#gt_local-domain-controller-local-dc) or "is present" on any [**DC**](#gt_domain-controller-dc) in the same [**site**](#gt_site) as the local DC, the [**KCC**](#gt_knowledge-consistency-checker-kcc) constructs a site graph—a precursor to an [**NC replica graph**](#gt_nc-replica-graph). The site connectivity for a site graph is defined by [**objects**](#gt_object) of class interSiteTransport, siteLink, and siteLinkBridge in the [**config NC**](#gt_configuration-naming-context-config-nc). The semantics of these objects are described in section [6.1](#Section_3.1.1.2.2.1).
+For each [**NC**](#gt_naming-context-nc) with an [**NC replica**](#gt_nc-replica) that "SHOULD be present" on the [**local DC**](#gt_local-domain-controller-local-dc) or "is present" on any [**DC**](#gt_domain-controller-dc) in the same [**site**](#gt_site) as the local DC, the [**KCC**](#gt_knowledge-consistency-checker-kcc) constructs a site graph—a precursor to an [**NC replica graph**](#gt_nc-replica-graph). The site connectivity for a site graph is defined by [**objects**](#gt_object) of class interSiteTransport, siteLink, and siteLinkBridge in the [**config NC**](#gt_configuration-naming-context-config-nc). The semantics of these objects are described in section [6.1](#Section_1).
 
 The pseudocode in the next section maps these objects and the various constraints on these objects as follows.
 
@@ -26413,7 +26413,7 @@ The NetBIOS version is required for compatibility with older clients (such as Wi
 
 Both versions of the protocol work in two phases. In the first phase, DCs publish data about themselves (in DNS, or in NBNS, or by local configuration of the responder to NetBIOS broadcasts, depending on which version of publication is being used). In the second phase, clients look up this static data to determine a set of possible DCs and then send small messages to some or all of the set, examining the responses in order to determine liveness, reachability, and suitability. Given their conceptual similarity to an Internet Control Message Protocol (ICMP) ping message, these small messages are referred to as "LDAP ping" and "mailslot ping".
 
-Sections [6.3.1](#Section_6.3.1) through [6.3.7](#Section_3.1.1.11.2.7) specify the precise details about the data that servers publish about themselves. These sections also specify the precise details about the two "ping" protocols.
+Sections [6.3.1](#Section_6.3.1) through [6.3.7](#Section_2.2.18.4) specify the precise details about the data that servers publish about themselves. These sections also specify the precise details about the two "ping" protocols.
 
 - **AD LDS**
 An AD LDS DC does not publish data about itself in name services as in the case of an AD DS DC. An AD LDS DC that is joined to an AD DS [**domain**](#gt_domain) SHOULD publish itself by creating an [**object**](#gt_object) in AD DS; a client MAY then query AD DS and select an AD LDS DC based on the query results. The information that an AD LDS DC publishes about itself is described in section [6.3.8](#Section_6.3.8). An AD LDS DC that is not joined to an AD DS domain does not publish itself at all; a client MUST possess an AD LDS server's IP address or host name and port number. This protocol does not provide a means for a client to obtain this information.
@@ -26580,7 +26580,7 @@ Operation code set in the request and response of an [**LDAP ping**](#gt_ldap-pi
 | LOGON_SAM_LOGON_RESPONSE | 19 (section [6.3.1.8](#Section_6.3.1.8)) |
 | LOGON_SAM_PAUSE_RESPONSE | 20 (section 6.3.1.8) |
 | LOGON_SAM_USER_UNKNOWN | 21 (section 6.3.1.8) |
-| LOGON_SAM_LOGON_RESPONSE_EX | 23 (section [6.3.1.9](#Section_6.3.1.9)) |
+| LOGON_SAM_LOGON_RESPONSE_EX | 23 (section [6.3.1.9](#Section_6.3.1.8)) |
 | LOGON_SAM_PAUSE_RESPONSE_EX | 24 (section 6.3.1.8) |
 | LOGON_SAM_USER_UNKNOWN_EX | 25 (section 6.3.1.8) |
 
@@ -26761,7 +26761,7 @@ packet-beta
 
 **NullGuid (16 bytes):** A [**NULL GUID**](#gt_null-guid). The GUID structure is defined in [MS-DTYP] section 2.3.4. Always set zero values for all fields in the GUID structure.
 
-**DnsForestName (variable):** [**UTF-8**](#gt_utf-8) encoded value of the [**DNS**](#gt_domain-name-system-dns) [**forest**](#gt_forest) name, compressed as specified in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 4.1.4. To get the decompressed string, see section [6.3.7](#Section_3.1.1.11.2.7).
+**DnsForestName (variable):** [**UTF-8**](#gt_utf-8) encoded value of the [**DNS**](#gt_domain-name-system-dns) [**forest**](#gt_forest) name, compressed as specified in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 4.1.4. To get the decompressed string, see section [6.3.7](#Section_2.2.18.4).
 
 **DnsDomainName (variable):** UTF-8 encoded value of the DNS NC name, compressed as specified in [RFC1035] section 4.1.4. To get the decompressed string, see section 6.3.7.
 
@@ -26814,7 +26814,7 @@ packet-beta
 
 **DomainGuid (16 bytes):** The value of the [**NC's**](#gt_naming-context-nc) [**GUID**](#gt_globally-unique-identifier-guid) [**attribute**](#gt_attribute) specified as a GUID structure, which is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.
 
-**DnsForestName (variable):** [**UTF-8**](#gt_utf-8) encoded value of the [**DNS name**](#gt_dns-name) of the [**forest**](#gt_forest), compressed as specified in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 4.1.4. To get the decompressed string, see section [6.3.7](#Section_3.1.1.11.2.7).
+**DnsForestName (variable):** [**UTF-8**](#gt_utf-8) encoded value of the [**DNS name**](#gt_dns-name) of the [**forest**](#gt_forest), compressed as specified in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264) section 4.1.4. To get the decompressed string, see section [6.3.7](#Section_2.2.18.4).
 
 **DnsDomainName (variable):** UTF-8 encoded value of the DNS name of the NC, compressed as specified in [RFC1035] section 4.1.4. To get the decompressed string, see section 6.3.7.
 
@@ -27183,7 +27183,7 @@ The following table describes the other fields of each type A record registered 
 
 This topic describes the usage of [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) to verify the aliveness of the [**domain controller**](#gt_domain-controller-dc) and also check whether the domain controller matches a specific set of requirements. This operation is commonly referred to as [**LDAP ping**](#gt_ldap-ping).
 
-An LDAP [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) search (section [3.1.1.3.2](#Section_3.1.1.3.2.60)) that retrieves the rootDSE [**attribute**](#gt_attribute) [netlogon (section 3.1.1.3.2.14)](#Section_3.1.1.3.2.14) triggers the following processing on the server: Syntactic validation of the [**filter**](#gt_filter) as specified in section [6.3.3.1](#Section_6.3.3.1) and construction of a DC response to the search request as specified in sections [6.3.3.2](#Section_6.3.3.2) and [6.3.3.3](#Section_6.3.3.3).
+An LDAP [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) search (section [3.1.1.3.2](#Section_3.1.1.3.2.1)) that retrieves the rootDSE [**attribute**](#gt_attribute) [netlogon (section 3.1.1.3.2.14)](#Section_3.1.1.3.2.14) triggers the following processing on the server: Syntactic validation of the [**filter**](#gt_filter) as specified in section [6.3.3.1](#Section_6.3.3.1) and construction of a DC response to the search request as specified in sections [6.3.3.2](#Section_6.3.3.2) and [6.3.3.3](#Section_6.3.3.3).
 
 The LDAP search filter included in the SearchRequest is a one-level AND of equalityMatch tests of the following elements:
 
@@ -27451,7 +27451,7 @@ If the opcode is set to LOGON_PRIMARY_QUERY and the server is not the [**PDC**](
 
 If **DomainSidSize** is not zero, it checks whether the [**default NC**](#gt_default-naming-context-default-nc) has the same [**SID**](#gt_security-identifier-sid); if it does not, the server ignores the message without sending a response back to the client.
 
-If **UnicodeUserName** is specified, it is processed in the same way as the User value in section [6.3.3.2](#Section_7.6.3.2).
+If **UnicodeUserName** is specified, it is processed in the same way as the User value in section [6.3.3.2](#Section_6.3.1.5).
 
 Let v be the NtVer requested by the client.
 
@@ -28100,7 +28100,7 @@ ULONG ulReservedFieldSize;
 
 The protocols used by [**Active Directory**](#gt_active-directory) connections can operate on more than one transport. However, not all transports are considered equivalent. In these cases, the client is either encouraged or required to choose a specific transport when performing an operation using the protocol. This section documents these constraints. For information on the transports used by Active Directory connections, see section [7.8](#Section_7.8).
 
-Windows uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as defined in [[RFC1777]](https://go.microsoft.com/fwlink/?LinkId=90290) for LDAP version 2, and [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337) and [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) for LDAP version 3. Clients authenticated to an Active Directory server using the GSS-SPNEGO [**SASL**](#gt_sasl) [**authentication**](#gt_authentication) mechanism (section [5.1.1.1.2](#Section_5.1.1.1.2), SASL Authentication) observe LDAP version 3 compliant semantics, with the extensions and deviations documented in section [3.1.1.3.1](#Section_3.1.1.3.1.3), LDAP Conformance. Unauthenticated clients and clients authenticated under a different authentication mechanism observe LDAP behavior compliant with the requested LDAP version. Windows clients authenticate to the Active Directory server using the GSS-SPNEGO SASL authentication mechanism.
+Windows uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as defined in [[RFC1777]](https://go.microsoft.com/fwlink/?LinkId=90290) for LDAP version 2, and [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337) and [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) for LDAP version 3. Clients authenticated to an Active Directory server using the GSS-SPNEGO [**SASL**](#gt_sasl) [**authentication**](#gt_authentication) mechanism (section [5.1.1.1.2](#Section_5.1.1.1.2), SASL Authentication) observe LDAP version 3 compliant semantics, with the extensions and deviations documented in section [3.1.1.3.1](#Section_3.1.1.3.1.4), LDAP Conformance. Unauthenticated clients and clients authenticated under a different authentication mechanism observe LDAP behavior compliant with the requested LDAP version. Windows clients authenticate to the Active Directory server using the GSS-SPNEGO SASL authentication mechanism.
 
 While the Active Directory system supports both [**TCP**](#gt_transmission-control-protocol-tcp) and [**UDP**](#gt_user-datagram-protocol-udp) transports for LDAP versions 2 and 3, TCP is the preferred transport. LDAP over the UDP transport does not have a mechanism by which clients can authenticate to the [**directory service**](#gt_directory-service-ds) and so clients can only perform two specific anonymous operations. These anonymous operations are [**rootDSE**](#gt_root-directory-system-agent-specific-entry-rootdse) search and LDAP abandon. The UDP transport is primarily intended for use by [**LDAP ping**](#gt_ldap-ping) requests used for the [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**domain controller**](#gt_domain-controller-dc) location mechanism described in section [6.3](#Section_1.3), Publishing and Locating a Domain Controller. LDAP over TCP is described in sections [7.1](#Section_7.1) through [7.6](#Section_7.6), while LDAP over UDP is described in section [7.7](#Section_7.7).
 
@@ -28203,7 +28203,7 @@ The data model defines a set of structures that a client operates on, and also a
 
 **requestTimer:** A timer with second granularity used to track how long the client has waited for a response to **requestMessage**.
 
-**numResends:** An unsigned integer indicating the number of times this request has been resent by the Autoreconnecting to a Directory Server (section [7.6.2.7](#Section_7.6.2.2)) task. It is initialized to 0.
+**numResends:** An unsigned integer indicating the number of times this request has been resent by the Autoreconnecting to a Directory Server (section [7.6.2.7](#Section_7.6.2.7)) task. It is initialized to 0.
 
 **ConnectionInfo**: A structure that tracks a TCP connection to a directory server. It has the following elements:
 
@@ -28655,7 +28655,7 @@ The task performs the following actions:
 
 - Set lr.errorMessage and lr.matchedDN to a zero-length string.
 - Insert the LDAPMessage lm into lrq.resultMessages.
-- If containingADConnection.LDAP_OPT_AUTO_RECONNECT is TRUE, then invoke the [Autoreconnecting to a Directory Server (section 7.6.2.7)](#Section_7.6.2.2) task on *TaskInputConnectionInfo*.
+- If containingADConnection.LDAP_OPT_AUTO_RECONNECT is TRUE, then invoke the [Autoreconnecting to a Directory Server (section 7.6.2.7)](#Section_7.6.2.7) task on *TaskInputConnectionInfo*.
 <a id="Section_7.6.3.2"></a>
 #### 7.6.3.2 Getting an LDAP Response from a Directory Server
 
@@ -28835,7 +28835,7 @@ The task performs the following actions:
 <a id="Section_7.8"></a>
 ## 7.8 Transport Requirements
 
-For information on transport of [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), see section [2.1](#Section_6.1.6.6). For information on how messages are protected when sent over these transports, see section [7.10](#Section_7.10).
+For information on transport of [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), see section [2.1](#Section_2.1). For information on how messages are protected when sent over these transports, see section [7.10](#Section_7.10).
 
 <a id="Section_7.9"></a>
 ## 7.9 Security Elements
@@ -28862,7 +28862,7 @@ Transport- and Message-Level Security Features
 | LDAP | Transport-level Protection is provided by signing and encryption over a [**Secure Sockets Layer**](#gt_secure-sockets-layer-ssl)/[**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) (SSL/TLS)-protected connection. | Section [5.1.2.2](#Section_5.1.2.2), Using SSL/TLS, of this document |
 | - | Message-level Protection is provided by signing and/or encryption using [**SASL**](#gt_sasl). | Section [5.1.2.1](#Section_5.1.2.1), Using SASL, of this document |
 
-In addition to these mechanisms for protecting desirable traffic between the client and the server, LDAP also has mechanisms for rejecting undesirable traffic, that is, traffic that has been judged as potentially harmful to the directory service. The following table lists a summary of the mechanisms used for LDAP and a reference to further information. Note that these mechanisms are in addition to any [**access checks**](#gt_access-check) (section [7.9](#Section_3.1.1.12.1.9)) that are performed by the protocol.
+In addition to these mechanisms for protecting desirable traffic between the client and the server, LDAP also has mechanisms for rejecting undesirable traffic, that is, traffic that has been judged as potentially harmful to the directory service. The following table lists a summary of the mechanisms used for LDAP and a reference to further information. Note that these mechanisms are in addition to any [**access checks**](#gt_access-check) (section [7.9](#Section_3.1.1.12.1.7)) that are performed by the protocol.
 
 Additional Security Mechanisms
 
@@ -28889,9 +28889,9 @@ The changes made to this document are listed in the following table. For more in
 | Section | Description | Revision class |
 | --- | --- | --- |
 | [3](#Section_3) Details | 30594 : Added Windows Server 2025 to table. | Major |
-| [3.1.1.3.2](#Section_3.1.1.3.2.60) rootDSE Attributes | 30594 : Added Windows Server 2025 to table. | Major |
-| [3.1.1.3.3](#Section_3.1.1.3.3.39) rootDSE Modify Operations | 30594 : Added Windows Server 2025 to table. | Major |
-| [3.1.1.9](#Section_2.2.17) Optional Features | 30594 : Completed table entries for Windows Server 2025. | Major |
+| [3.1.1.3.2](#Section_3.1.1.3.2.1) rootDSE Attributes | 30594 : Added Windows Server 2025 to table. | Major |
+| [3.1.1.3.3](#Section_3.1.1.3.3.34) rootDSE Modify Operations | 30594 : Added Windows Server 2025 to table. | Major |
+| [3.1.1.9](#Section_3.1.1.9.2) Optional Features | 30594 : Completed table entries for Windows Server 2025. | Major |
 | [5.1.3.3.1](#Section_5.1.3.3.1) Null vs. Empty DACLs | 30569 : Added additional BlockOwnerImplicitRights value used by Windows 11, version 26H1. | Major |
 | [6.1.1.2.1.1.4](#Section_6.1.1.2.1.1.4) Domain crossRef Object | 30564 : Clarified that trustParent is only filled in when there is a parent-child trust. Added a description of rootTrust. | Major |
 | [6.1.1.2.4.1.2](#Section_6.1.1.2.4.1.2) dSHeuristics | 30569 : Added values used by Windows 11, version 26H1. | Major |

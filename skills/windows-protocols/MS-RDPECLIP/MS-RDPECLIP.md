@@ -374,11 +374,11 @@ The goal of the Initialization Sequence is to establish the [**client**](#gt_cli
 
 Figure 1: Clipboard Redirection Initialization Sequence
 
-- The server sends a [Clipboard Capabilities PDU](#Section_3.2.5.1.3) to the client to advertise the capabilities that it supports.
-- The server sends a [Monitor Ready PDU](#Section_4.1.2) to the client.
+- The server sends a [Clipboard Capabilities PDU](#Section_4.1.1) to the client to advertise the capabilities that it supports.
+- The server sends a [Monitor Ready PDU](#Section_3.2.5.1.2) to the client.
 - Upon receiving the Monitor Ready PDU, the client transmits its capabilities to the server by using a Clipboard Capabilities PDU.
-- The client sends the [Temporary Directory PDU](#Section_2.2.2.3) to inform the server of a location on the client file system that can be used to deposit files being copied to the client. To make use of this location, the server has to be able to access it directly. At this point, the client and the server capability negotiation is complete.
-- The final stage of the Initialization Sequence involves synchronizing the [Clipboard Formats](#Section_1.3.1.2) on the server clipboard with the client. This is accomplished by effectively mimicking a copy operation on the client by forcing it to send a [Format List PDU](#Section_4.2.1).
+- The client sends the [Temporary Directory PDU](#Section_4.1.4) to inform the server of a location on the client file system that can be used to deposit files being copied to the client. To make use of this location, the server has to be able to access it directly. At this point, the client and the server capability negotiation is complete.
+- The final stage of the Initialization Sequence involves synchronizing the [Clipboard Formats](#Section_1.3.1.2) on the server clipboard with the client. This is accomplished by effectively mimicking a copy operation on the client by forcing it to send a [Format List PDU](#Section_4.1.5).
 - The server responds with a [Format List Response PDU](#Section_4.1.6).
 <a id="Section_1.3.2.2"></a>
 #### 1.3.2.2 Data Transfer Sequences
@@ -396,7 +396,7 @@ Figure 2: Data transfer using the shared clipboard
 
 The goal of the Copy Sequence is to synchronize the list of available formats across the client and the server clipboards.
 
-The [Format List PDU](#Section_4.2.1) is sent by the Remote Desktop Protocol: Clipboard Virtual Channel Extension [**virtual channel**](#gt_virtual-channel) [**endpoint**](#gt_endpoint) on which the local clipboard has been updated. This endpoint is called the "Shared Clipboard Owner." The Format List PDU contains a list of the updated formats that are available on the clipboard of the Shared Owner. The recipient of the Format List PDU has to update its local system clipboard with IDs of the [Clipboard Formats](#Section_1.3.1.2) that are available on the Shared Owner, and then send the [Format List Response PDU](#Section_4.1.6) in response. The sender of the Format List Response PDU is called the "Local Clipboard Owner." The format data is delay rendered, as specified in section [1.3.1.4](#Section_1.3.1.4).
+The [Format List PDU](#Section_4.1.5) is sent by the Remote Desktop Protocol: Clipboard Virtual Channel Extension [**virtual channel**](#gt_virtual-channel) [**endpoint**](#gt_endpoint) on which the local clipboard has been updated. This endpoint is called the "Shared Clipboard Owner." The Format List PDU contains a list of the updated formats that are available on the clipboard of the Shared Owner. The recipient of the Format List PDU has to update its local system clipboard with IDs of the [Clipboard Formats](#Section_1.3.1.2) that are available on the Shared Owner, and then send the [Format List Response PDU](#Section_4.1.6) in response. The sender of the Format List Response PDU is called the "Local Clipboard Owner." The format data is delay rendered, as specified in section [1.3.1.4](#Section_1.3.1.4).
 
 <a id="Section_1.3.2.2.2"></a>
 ##### 1.3.2.2.2 Locking and Unlocking Clipboard Data
@@ -425,7 +425,7 @@ The copy phase is performed in steps 1 through 5 and the paste phase is performe
 
 - Local Application A copies data to System Clipboard A.
 - Virtual Channel Endpoint A is notified of the clipboard update.
-- A list of formats on System Clipboard A are sent to Virtual Channel Endpoint B in a [Format List PDU](#Section_4.2.1).
+- A list of formats on System Clipboard A are sent to Virtual Channel Endpoint B in a [Format List PDU](#Section_4.1.5).
 - Virtual Channel Endpoint B updates System Clipboard B.
 - Virtual Channel Endpoint B confirms success of System Clipboard B update in a [Format List Response PDU](#Section_4.1.6).
 - Virtual Channel Endpoint B sends the optional [Lock Clipboard Data PDU](#Section_4.3.1) to request that any File Stream data on System Clipboard A remain accessible until the [Unlock Clipboard Data PDU](#Section_4.3.2) is sent.
@@ -456,7 +456,7 @@ The Remote Desktop Protocol: Clipboard Virtual Channel Extension is designed to 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The Remote Desktop Protocol: Clipboard Virtual Channel Extension is capability-based. The client and the server exchange capabilities during the protocol [Initialization Sequence (section 1.3.2.1)](#Section_3.2.3) by using the [Clipboard Capabilities PDU](#Section_3.2.5.1.3). Capability sets are packaged in a combined capability set structure. This structure contains a count of the number of capability sets, followed by the contents of the individual capability sets.
+The Remote Desktop Protocol: Clipboard Virtual Channel Extension is capability-based. The client and the server exchange capabilities during the protocol [Initialization Sequence (section 1.3.2.1)](#Section_3.2.3) by using the [Clipboard Capabilities PDU](#Section_4.1.1). Capability sets are packaged in a combined capability set structure. This structure contains a count of the number of capability sets, followed by the contents of the individual capability sets.
 
 ![Combined capability set structure](media/image4.png)
 
@@ -503,13 +503,13 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| CB_MONITOR_READY 0x0001 | [Monitor Ready PDU](#Section_4.1.2) |
-| CB_FORMAT_LIST 0x0002 | [Format List PDU](#Section_4.2.1) |
+| CB_MONITOR_READY 0x0001 | [Monitor Ready PDU](#Section_3.2.5.1.2) |
+| CB_FORMAT_LIST 0x0002 | [Format List PDU](#Section_4.1.5) |
 | CB_FORMAT_LIST_RESPONSE 0x0003 | [Format List Response PDU](#Section_4.1.6) |
 | CB_FORMAT_DATA_REQUEST 0x0004 | [Format Data Request PDU](#Section_4.5.3) |
 | CB_FORMAT_DATA_RESPONSE 0x0005 | [Format Data Response PDU](#Section_4.4.2) |
-| CB_TEMP_DIRECTORY 0x0006 | [Temporary Directory PDU](#Section_2.2.2.3) |
-| CB_CLIP_CAPS 0x0007 | [Clipboard Capabilities PDU](#Section_3.2.5.1.3) |
+| CB_TEMP_DIRECTORY 0x0006 | [Temporary Directory PDU](#Section_4.1.4) |
+| CB_CLIP_CAPS 0x0007 | [Clipboard Capabilities PDU](#Section_4.1.1) |
 | CB_FILECONTENTS_REQUEST 0x0008 | [File Contents Request PDU](#Section_4.4.3) |
 | CB_FILECONTENTS_RESPONSE 0x0009 | [File Contents Response PDU](#Section_4.4.4) |
 | CB_LOCK_CLIPDATA 0x000A | [Lock Clipboard Data PDU](#Section_4.3.1) |
@@ -521,7 +521,7 @@ packet-beta
 | --- | --- |
 | CB_RESPONSE_OK 0x0001 | Used by the Format List Response PDU, Format Data Response PDU, and File Contents Response PDU to indicate that the associated request Format List PDU, Format Data Request PDU, and File Contents Request PDU were processed successfully. |
 | CB_RESPONSE_FAIL 0x0002 | Used by the Format List Response PDU, Format Data Response PDU, and File Contents Response PDU to indicate that the associated Format List PDU, Format Data Request PDU, and File Contents Request PDU were not processed successfully. |
-| CB_ASCII_NAMES 0x0004 | Used by the [Short Format Name](#Section_2.2.3.1.1) variant of the Format List Response PDU to indicate that the format names are in ASCII 8. |
+| CB_ASCII_NAMES 0x0004 | Used by the [Short Format Name](#Section_2.2.3.1.1.1) variant of the Format List Response PDU to indicate that the format names are in ASCII 8. |
 
 **dataLen (4 bytes):** An unsigned, 32-bit integer that specifies the size, in bytes, of the data which follows the Clipboard PDU Header.<1>
 
@@ -533,7 +533,7 @@ The following sections contain Remote Desktop Protocol: Desktop Composition Virt
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 Clipboard Capabilities PDU (CLIPRDR_CAPS)
 
-The Clipboard Capabilities PDU is an optional [**PDU**](#gt_protocol-data-unit-pdu) used to exchange capability information. It is first sent from the [**server**](#gt_server) to the [**client**](#gt_client). Upon receipt of the [Monitor Ready PDU](#Section_4.1.2), the client sends the Clipboard Capabilities PDU to the server.
+The Clipboard Capabilities PDU is an optional [**PDU**](#gt_protocol-data-unit-pdu) used to exchange capability information. It is first sent from the [**server**](#gt_server) to the [**client**](#gt_client). Upon receipt of the [Monitor Ready PDU](#Section_3.2.5.1.2), the client sends the Clipboard Capabilities PDU to the server.
 
 If this PDU is not sent by a Remote Desktop Protocol: Clipboard Virtual Channel Extension [**endpoint**](#gt_endpoint), it is assumed that the endpoint is using the default values for each capability field.
 
@@ -603,18 +603,18 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| CB_USE_LONG_FORMAT_NAMES 0x00000002 | The [Long Format Name](#Section_2.2.3.1.2) variant of the [Format List PDU](#Section_4.2.1) is supported for exchanging updated format names. If this flag is not set, the [Short Format Name](#Section_2.2.3.1.1) variant MUST be used. If this flag is set by both protocol endpoints, then the Long Format Name variant MUST be used. |
+| CB_USE_LONG_FORMAT_NAMES 0x00000002 | The [Long Format Name](#Section_2.2.3.1.2) variant of the [Format List PDU](#Section_4.1.5) is supported for exchanging updated format names. If this flag is not set, the [Short Format Name](#Section_2.2.3.1.1.1) variant MUST be used. If this flag is set by both protocol endpoints, then the Long Format Name variant MUST be used. |
 | CB_STREAM_FILECLIP_ENABLED 0x00000004 | File copy and paste using stream-based operations are supported using the [File Contents Request PDU](#Section_4.4.3) and [File Contents Response PDU](#Section_4.4.4). |
 | CB_FILECLIP_NO_FILE_PATHS 0x00000008 | Indicates that any description of files to copy and paste MUST NOT include the source path of the files. |
 | CB_CAN_LOCK_CLIPDATA 0x00000010 | Locking and unlocking of File Stream data on the clipboard is supported using the [Lock Clipboard Data PDU](#Section_4.3.1) and [Unlock Clipboard Data PDU](#Section_4.3.2). |
 | CB_HUGE_FILE_SUPPORT_ENABLED 0x00000020 | Indicates support for transferring files that are larger than 4,294,967,295 bytes in size. If this flag is not set, then only files of size less than or equal to 4,294,967,295 bytes can be exchanged using the **File Contents Request PDU** and **File Contents Response PDU**. |
 
-If the General Capability Set is not present in the [Clipboard Capabilities PDU](#Section_3.2.5.1.3), then the default set of general capabilities MUST be assumed. By definition the default set does not specify any flags in the **generalFlags** field, that is the **generalFlags** field is set to 0x00000000.
+If the General Capability Set is not present in the [Clipboard Capabilities PDU](#Section_4.1.1), then the default set of general capabilities MUST be assumed. By definition the default set does not specify any flags in the **generalFlags** field, that is the **generalFlags** field is set to 0x00000000.
 
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 Server Monitor Ready PDU (CLIPRDR_MONITOR_READY)
 
-The Monitor Ready PDU is sent from the server to the client to indicate that the server is initialized and ready. This [**PDU**](#gt_protocol-data-unit-pdu) is transmitted by the server after it has sent the [Clipboard Capabilities PDU](#Section_3.2.5.1.3) to the client.
+The Monitor Ready PDU is sent from the server to the client to indicate that the server is initialized and ready. This [**PDU**](#gt_protocol-data-unit-pdu) is transmitted by the server after it has sent the [Clipboard Capabilities PDU](#Section_4.1.1) to the client.
 
 ```mermaid
 packet-beta
@@ -626,7 +626,7 @@ packet-beta
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Client Temporary Directory PDU (CLIPRDR_TEMP_DIRECTORY)
 
-The Temporary Directory PDU is an optional [**PDU**](#gt_protocol-data-unit-pdu) sent from the client to the server. This PDU informs the server of a location on the client file system that MUST be used to deposit files being copied to the client. The location MUST be accessible by the server to be useful. Section [3.1.1.3](#Section_3.1.1.3) specifies how direct file access impacts file copy and paste. This PDU is sent by the client after receiving the [Monitor Ready PDU](#Section_4.1.2).
+The Temporary Directory PDU is an optional [**PDU**](#gt_protocol-data-unit-pdu) sent from the client to the server. This PDU informs the server of a location on the client file system that MUST be used to deposit files being copied to the client. The location MUST be accessible by the server to be useful. Section [3.1.1.3](#Section_3.1.1.3) specifies how direct file access impacts file copy and paste. This PDU is sent by the client after receiving the [Monitor Ready PDU](#Section_3.2.5.1.2).
 
 ```mermaid
 packet-beta
@@ -661,7 +661,7 @@ packet-beta
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 Short Format Names (CLIPRDR_SHORT_FORMAT_NAMES)
 
-The CLIPRDR_SHORT_FORMAT_NAMES structure holds a collection of [CLIPRDR_SHORT_FORMAT_NAME](#Section_2.2.3.1.1) structures.
+The CLIPRDR_SHORT_FORMAT_NAMES structure holds a collection of [CLIPRDR_SHORT_FORMAT_NAME](#Section_2.2.3.1.1.1) structures.
 
 ```mermaid
 packet-beta
@@ -715,7 +715,7 @@ packet-beta
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 Format List Response PDU (FORMAT_LIST_RESPONSE)
 
-The Format List Response PDU is sent as a reply to the [Format List PDU](#Section_4.2.1). It is used to indicate whether processing of the Format List PDU was successful.
+The Format List Response PDU is sent as a reply to the [Format List PDU](#Section_4.1.5). It is used to indicate whether processing of the Format List PDU was successful.
 
 ```mermaid
 packet-beta
@@ -765,7 +765,7 @@ The following sections contain Remote Desktop Protocol: Desktop Composition Virt
 <a id="Section_2.2.5.1"></a>
 #### 2.2.5.1 Format Data Request PDU (CLIPRDR_FORMAT_DATA_REQUEST)
 
-The Format Data Request PDU is sent by the recipient of the [Format List PDU](#Section_4.2.1). It is used to request the data for one of the formats that was listed in the Format List PDU.
+The Format Data Request PDU is sent by the recipient of the [Format List PDU](#Section_4.1.5). It is used to request the data for one of the formats that was listed in the Format List PDU.
 
 ```mermaid
 packet-beta
@@ -790,7 +790,7 @@ packet-beta
 
 **clipHeader (8 bytes):** A [Clipboard PDU Header](#Section_2.2.1). The **msgType** field of the Clipboard PDU Header MUST be set to CB_FORMAT_DATA_RESPONSE (0x0005). The CB_RESPONSE_OK (0x0001) or CB_RESPONSE_FAIL (0x0002) flag MUST be set in the **msgFlags** field of the Clipboard PDU Header structure.
 
-**requestedFormatData (variable):** Variable length clipboard format data. The contents of this field MUST be one of the following types: generic, [Packed Metafile Payload](#Section_2.2.5.2.1), or [Packed Palette Payload](#Section_2.2.5.2.2).
+**requestedFormatData (variable):** Variable length clipboard format data. The contents of this field MUST be one of the following types: generic, [Packed Metafile Payload](#Section_1.3.1.1.3), or [Packed Palette Payload](#Section_2.2.5.2.2).
 
 <a id="Section_2.2.5.2.1"></a>
 ##### 2.2.5.2.1 Packed Metafile Payload (CLIPRDR_MFPICT)
@@ -926,7 +926,7 @@ packet-beta
 <a id="Section_2.2.5.3"></a>
 #### 2.2.5.3 File Contents Request PDU (CLIPRDR_FILECONTENTS_REQUEST)
 
-The File Contents Request PDU is sent by the recipient of the [Format List PDU](#Section_4.2.1). It is used to request either the size of a remote file copied to the clipboard or a portion of the data in the file.
+The File Contents Request PDU is sent by the recipient of the [Format List PDU](#Section_4.1.5). It is used to request either the size of a remote file copied to the clipboard or a portion of the data in the file.
 
 ```mermaid
 packet-beta
@@ -955,7 +955,7 @@ packet-beta
 
 The FILECONTENTS_SIZE and FILECONTENTS_RANGE flags MUST NOT be set at the same time.
 
-**nPositionLow (4 bytes):** An unsigned, 32-bit integer that specifies the low bytes of the offset into the remote file, identified by the **lindex** field, from where the data needs to be extracted to satisfy a FILECONTENTS_RANGE operation. This field SHOULD be set to a value less than 2,147,483,648 unless the recipient of the FILECONTENTS_RANGE operation has specified support for huge files by setting the CB_HUGE_FILE_SUPPORT_ENABLED (0x00000020) flag in the **General Capability Set** (section [2.2.2.1.1.1](#Section_2.2.2.1.1.1)) of the **Clipboard Capabilities PDU** (section [2.2.2.1](#Section_3.2.5.1.3)).<2>
+**nPositionLow (4 bytes):** An unsigned, 32-bit integer that specifies the low bytes of the offset into the remote file, identified by the **lindex** field, from where the data needs to be extracted to satisfy a FILECONTENTS_RANGE operation. This field SHOULD be set to a value less than 2,147,483,648 unless the recipient of the FILECONTENTS_RANGE operation has specified support for huge files by setting the CB_HUGE_FILE_SUPPORT_ENABLED (0x00000020) flag in the **General Capability Set** (section [2.2.2.1.1.1](#Section_2.2.2.1.1.1)) of the **Clipboard Capabilities PDU** (section [2.2.2.1](#Section_4.1.1)).<2>
 
 **nPositionHigh (4 bytes):** An unsigned, 32-bit integer that specifies the high bytes of the offset into the remote file, identified by the **lindex** field, from where the data needs to be extracted to satisfy a FILECONTENTS_RANGE operation. This field SHOULD be set to zero unless the recipient of the FILECONTENTS_RANGE operation has specified support for huge files by setting the CB_HUGE_FILE_SUPPORT_ENABLED (0x00000020) flag in the **General Capability Set** (section 2.2.2.1.1.1) of the **Clipboard Capabilities PDU** (section 2.2.2.1).
 
@@ -1003,7 +1003,7 @@ Format X: Local ID 0x00001111 maps to Remote ID 0x00002222
 - On System B, the format map entry for "Format X" would appear as follows:
 Format X: Local ID 0x00002222 maps to Remote ID 0x00001111
 
-The Clipboard Format ID Map is cleared and initialized whenever a [Format List PDU](#Section_4.2.1) is processed (section 3.1.5.2.2).
+The Clipboard Format ID Map is cleared and initialized whenever a [Format List PDU](#Section_4.1.5) is processed (section 3.1.5.2.2).
 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 File List
@@ -1051,7 +1051,7 @@ This section contains details about the higher-layer triggered events.
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Local Clipboard Update
 
-When the local system clipboard is updated, the client or the server associated with the clipboard MUST send the [Format List PDU (section 3.1.5.2.1)](#Section_4.2.1) to ensure that the formats available on the remote clipboards are kept in sync.
+When the local system clipboard is updated, the client or the server associated with the clipboard MUST send the [Format List PDU (section 3.1.5.2.1)](#Section_4.1.5) to ensure that the formats available on the remote clipboards are kept in sync.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Local Paste Operation
@@ -1076,7 +1076,7 @@ After determining that the PDU is in the correct sequence, the **dataLen** field
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Sending a Format List PDU
 
-The fields of the [Format List PDU](#Section_4.2.1) are specified in section 2.2.3.1.
+The fields of the [Format List PDU](#Section_4.1.5) are specified in section 2.2.3.1.
 
 To construct the Format List PDU, the sender MUST enumerate all of the formats that are currently available from the local system clipboard, and for each format:
 
@@ -1087,13 +1087,13 @@ The Format List PDU MUST be populated with this data. The usage of the [Short Fo
 <a id="Section_3.1.5.2.2"></a>
 ##### 3.1.5.2.2 Processing a Format List PDU
 
-The fields of the [Format List PDU](#Section_4.2.1) are specified in section 2.2.3.1.
+The fields of the [Format List PDU](#Section_4.1.5) are specified in section 2.2.3.1.
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the format types present in the PDU MUST be extracted, processed, and placed on the local system clipboard.
 
 For each [Clipboard Format](#Section_1.3.1.2) listed in the Format List PDU, the recipient of the PDU MUST do the following:
 
-- Store the mapping of the remote Clipboard Format ID to the local Clipboard Format ID in the [Clipboard Format ID Map](#Section_3.1.1.1). The remote format ID is specified in the **formatId** field of the [Short Format Name](#Section_2.2.3.1.1) structure and the [Long Format Name](#Section_2.2.3.1.2) structure.
+- Store the mapping of the remote Clipboard Format ID to the local Clipboard Format ID in the [Clipboard Format ID Map](#Section_3.1.1.1). The remote format ID is specified in the **formatId** field of the [Short Format Name](#Section_2.2.3.1.1.1) structure and the [Long Format Name](#Section_2.2.3.1.2) structure.
 - Update the local system clipboard by registering the local Clipboard Format ID as an available format for transfer. The system clipboard MUST support delayed rendering (as specified in section [1.3.1.4](#Section_1.3.1.4)) for this step to be possible.
 If the PDU was processed successfully and the local system clipboard was updated with all the received Clipboard Formats, the recipient MUST send a [Format List Response PDU](#Section_4.1.6) indicating success, as specified in section [3.1.5.2.3](#Section_3.1.5.2.3). If the PDU could not be processed, or the local clipboard could not be updated, a Format List Response PDU indicating failure MUST be sent, as specified in section 3.1.5.2.3.
 
@@ -1102,7 +1102,7 @@ If the PDU was processed successfully and the local system clipboard was updated
 
 The fields of the [Format List Response PDU](#Section_4.1.6) are specified in section 2.2.3.2.
 
-The Format List Response PDU is sent to indicate the success or failure of processing the [Format List PDU](#Section_4.2.1), as specified in section [3.1.5.2.2](#Section_4.2.1). On success, the **msgFlags** field of the **clipHeader** field MUST contain the CB_RESPONSE_OK flag. On failure, it MUST contain the CB_RESPONSE_FAIL flag.
+The Format List Response PDU is sent to indicate the success or failure of processing the [Format List PDU](#Section_4.1.5), as specified in section [3.1.5.2.2](#Section_4.1.5). On success, the **msgFlags** field of the **clipHeader** field MUST contain the CB_RESPONSE_OK flag. On failure, it MUST contain the CB_RESPONSE_FAIL flag.
 
 <a id="Section_3.1.5.2.4"></a>
 ##### 3.1.5.2.4 Processing a Format List Response PDU
@@ -1111,7 +1111,7 @@ The fields of the [Format List Response PDU](#Section_4.1.6) are specified in se
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the response code MUST be extracted from the **msgFlags** field of the **clipHeader** field.
 
-If the response code indicates that the associated [Format List PDU](#Section_4.2.1) was processed successfully, then the recipient MUST be prepared to receive and process a [Format Data Request PDU](#Section_4.5.3) or a [File Contents Request PDU](#Section_4.4.4) with a request for format or file data, respectively.
+If the response code indicates that the associated [Format List PDU](#Section_4.1.5) was processed successfully, then the recipient MUST be prepared to receive and process a [Format Data Request PDU](#Section_4.5.3) or a [File Contents Request PDU](#Section_4.4.4) with a request for format or file data, respectively.
 
 If the response code indicates that processing of the Format List PDU was unsuccessful, then the recipient MUST respond to any subsequent Format Data Request PDUs or File Contents Request PDUs by sending a Format Data Response or File Contents Response indicating failure (sections [3.1.5.4.3](#Section_3.1.5.4.3) and [3.1.5.4.7](#Section_3.1.5.4.7)).
 
@@ -1170,7 +1170,7 @@ The fields of the [Format Data Request PDU](#Section_4.5.3) are specified in sec
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the requested [Clipboard Format](#Section_1.3.1.2) ID MUST be extracted from the PDU and the clipboard data retrieved from the local clipboard. The retrieved clipboard data MUST then be encoded appropriately, depending on the type:
 
-- Metafile data MUST be encoded using the [Packed Metafile Payload](#Section_2.2.5.2.1) structure.
+- Metafile data MUST be encoded using the [Packed Metafile Payload](#Section_1.3.1.1.3) structure.
 - Palette data MUST be encoded using the [Packed Palette Payload](#Section_2.2.5.2.2) structure.
 - File List data MUST be encoded using the [Packed File List](#Section_2.2.5.2.3) structure.
 - If the clipboard data is not a metafile, palette, or file list, it is left unchanged.
@@ -1192,7 +1192,7 @@ The fields of the [Format Data Response PDU](#Section_4.4.2) are specified in se
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the attached data MUST be extracted if the **msgFlags** indicate success:
 
-- Metafile data MUST be decoded using the [Packed Metafile Payload](#Section_2.2.5.2.1) structure.
+- Metafile data MUST be decoded using the [Packed Metafile Payload](#Section_1.3.1.1.3) structure.
 - Palette data MUST be decoded using the [Packed Palette Payload](#Section_2.2.5.2.2) structure.
 - File List data MUST be decoded using the [Packed File List](#Section_2.2.5.2.3) structure.
 - If the data is not a metafile, palette, or file list, it does not need to be decoded.
@@ -1253,7 +1253,7 @@ None.
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Server Capabilities
 
-The Server Capabilities store contains capability data received from the server in the [Clipboard Capabilities PDU](#Section_3.2.5.1.3). The client MUST ensure that it does not violate any of the server capabilities when sending data.
+The Server Capabilities store contains capability data received from the server in the [Clipboard Capabilities PDU](#Section_4.1.1). The client MUST ensure that it does not violate any of the server capabilities when sending data.
 
 If a Clipboard Capabilities PDU is not received from the server, it MUST be assumed that the server is using the default capability values as specified in section 2.2.2.1.
 
@@ -1281,25 +1281,25 @@ None.
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Processing a Server Clipboard Capabilities PDU
 
-The fields of the [Clipboard Capabilities PDU](#Section_3.2.5.1.3) are as specified in section 2.2.2.1.
+The fields of the [Clipboard Capabilities PDU](#Section_4.1.1) are as specified in section 2.2.2.1.
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the capability data MUST be extracted and stored in the [Server Capabilities](#Section_3.2.1.1) store.
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Processing a Monitor Ready PDU
 
-The fields of the [Monitor Ready PDU](#Section_4.1.2) are as specified in section 2.2.2.2.
+The fields of the [Monitor Ready PDU](#Section_3.2.5.1.2) are as specified in section 2.2.2.2.
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the client SHOULD do the following:
 
-- Send a [Clipboard Capabilities PDU](#Section_3.2.5.1.3) (as specified in section [3.2.5.1.3](#Section_3.2.5.1.3)) to the server if it received the capabilities from the server.
-- Send a [Temporary Directory PDU](#Section_2.2.2.3) (as specified in section [3.2.5.1.4](#Section_3.2.5.1.4)) to the server if it is necessary to inform the server of a location on the local client file system that MUST be used to deposit files being copied to the client.
-After possibly sending the Clipboard Capabilities PDU and Temporary Directory PDU, the client MUST send a [Format List PDU](#Section_4.2.1) to the server, as specified in section [3.1.5.2.1](#Section_4.2.1). This ensures that the [**peer**](#gt_peer) system clipboards are in sync.
+- Send a [Clipboard Capabilities PDU](#Section_4.1.1) (as specified in section [3.2.5.1.3](#Section_3.2.5.1.3)) to the server if it received the capabilities from the server.
+- Send a [Temporary Directory PDU](#Section_4.1.4) (as specified in section [3.2.5.1.4](#Section_3.2.5.1.4)) to the server if it is necessary to inform the server of a location on the local client file system that MUST be used to deposit files being copied to the client.
+After possibly sending the Clipboard Capabilities PDU and Temporary Directory PDU, the client MUST send a [Format List PDU](#Section_4.1.5) to the server, as specified in section [3.1.5.2.1](#Section_4.1.5). This ensures that the [**peer**](#gt_peer) system clipboards are in sync.
 
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Sending a Client Clipboard Capabilities PDU
 
-The fields of the [Clipboard Capabilities PDU](#Section_3.2.5.1.3) are as specified in section 2.2.2.1.
+The fields of the [Clipboard Capabilities PDU](#Section_4.1.1) are as specified in section 2.2.2.1.
 
 The client MUST initialize the **generalFlags** field of the General Capability Set (section [2.2.2.1.1.1](#Section_2.2.2.1.1.1)) and indicate whether it supports the following features:
 
@@ -1312,7 +1312,7 @@ If the [Server Capabilities](#Section_3.2.1.1) store indicates that the server d
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 Sending a Temporary Directory PDU
 
-The fields of the [Temporary Directory PDU](#Section_2.2.2.3) are specified in section 2.2.2.3.
+The fields of the [Temporary Directory PDU](#Section_4.1.4) are specified in section 2.2.2.3.
 
 Prior to sending the Temporary Directory PDU, the client MUST ensure that the location specified is accessible to the server. If this location is inaccessible or becomes inaccessible at a later time, all server-to-client file copies using direct file (section [3.1.1.3](#Section_3.1.1.3)) access MUST fail.
 
@@ -1335,14 +1335,14 @@ None.
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Client Capabilities
 
-The Client Capabilities store contains capability data received from the [**client**](#gt_client) in the [Clipboard Capabilities PDU](#Section_3.2.5.1.3). The [**server**](#gt_server) MUST ensure that it does not violate any of the client capabilities when sending data.
+The Client Capabilities store contains capability data received from the [**client**](#gt_client) in the [Clipboard Capabilities PDU](#Section_4.1.1). The [**server**](#gt_server) MUST ensure that it does not violate any of the client capabilities when sending data.
 
 If a Clipboard Capabilities PDU is not received from the client, it MUST be assumed that the client is using the default capability values as specified in section 2.2.2.1.
 
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 Client Temporary Directory
 
-The Client Temporary Directory store holds the path to a location on the client file system that MUST be used to deposit files being copied to the client. This information is received when processing the [Temporary Directory PDU](#Section_2.2.2.3), as specified in section [3.3.5.1.4](#Section_3.3.5.1.4). If the Temporary Directory PDU is not received from the client, the server MUST NOT copy files to the client using direct file access techniques (section [3.1.1.3](#Section_3.1.1.3)).
+The Client Temporary Directory store holds the path to a location on the client file system that MUST be used to deposit files being copied to the client. This information is received when processing the [Temporary Directory PDU](#Section_4.1.4), as specified in section [3.3.5.1.4](#Section_3.3.5.1.4). If the Temporary Directory PDU is not received from the client, the server MUST NOT copy files to the client using direct file access techniques (section [3.1.1.3](#Section_3.1.1.3)).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
@@ -1368,7 +1368,7 @@ None.
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Sending a Server Clipboard Capabilities PDU
 
-The fields of the [Clipboard Capabilities PDU](#Section_3.2.5.1.3) are as specified in section 2.2.2.1.
+The fields of the [Clipboard Capabilities PDU](#Section_4.1.1) are as specified in section 2.2.2.1.
 
 The server MUST initialize the **generalFlags** field of the General Capability Set (section [2.2.2.1.1.1](#Section_2.2.2.1.1.1)) and indicate whether it supports the following features:
 
@@ -1376,26 +1376,26 @@ The server MUST initialize the **generalFlags** field of the General Capability 
 - File copy and paste using stream-based operations
 - The removal of path data from the description of files to copy and paste
 - Locking and unlocking clipboard data
-After sending the Clipboard Capabilities PDU, the server MUST send the [Monitor Ready PDU](#Section_4.1.2) to the client, as specified in section [3.3.5.1.2](#Section_3.3.5.1.2).
+After sending the Clipboard Capabilities PDU, the server MUST send the [Monitor Ready PDU](#Section_3.2.5.1.2) to the client, as specified in section [3.3.5.1.2](#Section_3.3.5.1.2).
 
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 Sending a Monitor Ready PDU
 
-The fields of the [Monitor Ready PDU](#Section_4.1.2) are specified in section 2.2.2.2.
+The fields of the [Monitor Ready PDU](#Section_3.2.5.1.2) are specified in section 2.2.2.2.
 
-After sending the Monitor Ready PDU, the server MUST be prepared to start processing clipboard updates contained in [Format List PDUs](#Section_4.2.1), which it receives from the client, as specified in section [3.1.5.2.2](#Section_4.2.1). The server MUST still be prepared to receive and process the client [Clipboard Capabilities PDU](#Section_3.2.5.1.3) (as specified in section [3.3.5.1.3](#Section_3.3.5.1.3)) and [Temporary Directory PDU](#Section_2.2.2.3), as specified in section [3.3.5.1.4](#Section_3.3.5.1.4).
+After sending the Monitor Ready PDU, the server MUST be prepared to start processing clipboard updates contained in [Format List PDUs](#Section_4.1.5), which it receives from the client, as specified in section [3.1.5.2.2](#Section_4.1.5). The server MUST still be prepared to receive and process the client [Clipboard Capabilities PDU](#Section_4.1.1) (as specified in section [3.3.5.1.3](#Section_3.3.5.1.3)) and [Temporary Directory PDU](#Section_4.1.4), as specified in section [3.3.5.1.4](#Section_3.3.5.1.4).
 
 <a id="Section_3.3.5.1.3"></a>
 ##### 3.3.5.1.3 Processing a Client Clipboard Capabilities PDU
 
-The fields of the [Clipboard Capabilities PDU](#Section_3.2.5.1.3) are specified in section 2.2.2.1.
+The fields of the [Clipboard Capabilities PDU](#Section_4.1.1) are specified in section 2.2.2.1.
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the capability data MUST be extracted and stored in the [Client Capabilities](#Section_3.3.1.1) store as specified in 3.3.1.1.
 
 <a id="Section_3.3.5.1.4"></a>
 ##### 3.3.5.1.4 Processing a Temporary Directory PDU
 
-The fields of the [Temporary Directory PDU](#Section_2.2.2.3) are specified in section 2.2.2.3.
+The fields of the [Temporary Directory PDU](#Section_4.1.4) are specified in section 2.2.2.3.
 
 The **clipHeader** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the [**PDU**](#gt_protocol-data-unit-pdu) is valid, the temporary directory path MUST be extracted and stored in the [Client Temporary Directory store (section 3.3.1.2)](#Section_3.3.1.2).
 
@@ -1420,7 +1420,7 @@ The following is an annotated dump of an [Initialization Sequence (section 1.3
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Server Clipboard Capabilities PDU
 
-The following is an annotated dump of a server-to-client [Clipboard Capabilities PDU (section 2.2.2.1)](#Section_3.2.5.1.3).
+The following is an annotated dump of a server-to-client [Clipboard Capabilities PDU (section 2.2.2.1)](#Section_4.1.1).
 
 00000000 07 00 00 00 10 00 00 00 01 00 00 00 01 00 0c 00 ................
 
@@ -1461,7 +1461,7 @@ CB_FILECLIP_NO_FILE_PATHS
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Server Monitor Ready PDU
 
-The following is an annotated dump of a [Monitor Ready PDU (section 2.2.2.2)](#Section_4.1.2).
+The following is an annotated dump of a [Monitor Ready PDU (section 2.2.2.2)](#Section_3.2.5.1.2).
 
 00000000 01 00 00 00 00 00 00 00 ........
 
@@ -1474,7 +1474,7 @@ The following is an annotated dump of a [Monitor Ready PDU (section 2.2.2.2)](
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Client Clipboard Capabilities PDU
 
-The following is an annotated dump of a client-to-server [Clipboard Capabilities PDU (section 2.2.2.1)](#Section_3.2.5.1.3).
+The following is an annotated dump of a client-to-server [Clipboard Capabilities PDU (section 2.2.2.1)](#Section_4.1.1).
 
 00000000 07 00 00 00 10 00 00 00 01 00 00 00 01 00 0c 00 ................
 
@@ -1515,7 +1515,7 @@ CB_FILECLIP_NO_FILE_PATHS
 <a id="Section_4.1.4"></a>
 ### 4.1.4 Client Temporary Directory PDU
 
-The following is an annotated dump of a [Temporary Directory PDU (section 2.2.2.3)](#Section_2.2.2.3).
+The following is an annotated dump of a [Temporary Directory PDU (section 2.2.2.3)](#Section_4.1.4).
 
 00000000 06 00 00 00 08 02 00 00 43 00 3a 00 5c 00 44 00 ........C.:.\.D.
 
@@ -1660,7 +1660,7 @@ The following is an annotated dump of a [Temporary Directory PDU (section 2.2.
 <a id="Section_4.1.5"></a>
 ### 4.1.5 Format List PDU
 
-The following is an annotated dump of a [Format List PDU (section 2.2.3.1)](#Section_4.2.1).
+The following is an annotated dump of a [Format List PDU (section 2.2.3.1)](#Section_4.1.5).
 
 00000000 02 00 00 00 24 00 00 00 04 c0 00 00 4e 00 61 00 ....$.......N.a.
 
@@ -1711,7 +1711,7 @@ The following is an annotated dump of a [Copy Sequence (section 1.3.2.2.1)](#S
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Format List PDU
 
-The following is an annotated dump of a [Format List PDU (section 2.2.3.1)](#Section_4.2.1).
+The following is an annotated dump of a [Format List PDU (section 2.2.3.1)](#Section_4.1.5).
 
 00000000 02 00 00 00 e0 00 00 00 8a c0 00 00 52 00 69 00 ............R.i.
 
@@ -2001,7 +2001,7 @@ The following is an annotated dump of a [File Contents Response PDU (section 2
 <a id="Section_4.4.5"></a>
 ### 4.4.5 Metafile Data Contained in a Format Data Response PDU
 
-The following is an annotated dump of a [Format Data Response PDU (section 2.2.5.2)](#Section_4.4.2) that contains a Windows metafile ([MS-WMF](#Section_1.3.1.1.3) section 2) wrapped in a [Packed Metafile Payload (section 2.2.5.2.1)](#Section_2.2.5.2.1) structure.
+The following is an annotated dump of a [Format Data Response PDU (section 2.2.5.2)](#Section_4.4.2) that contains a Windows metafile ([MS-WMF](#Section_1.3.1.1.3) section 2) wrapped in a [Packed Metafile Payload (section 2.2.5.2.1)](#Section_1.3.1.1.3) structure.
 
 00000000 05 00 01 00 1a 0a 00 00 08 00 00 00 2c 02 00 00 ............,...
 
@@ -4952,7 +4952,7 @@ The following is an annotated dump that shows the sequence of messages involved 
 <a id="Section_4.5.1"></a>
 ### 4.5.1 Format List PDU
 
-The following is an annotated dump of a [Format List PDU (section 2.2.3.1)](#Section_4.2.1). This format list advertises the fact that File List data is available from the peer (the FileGroupDescriptorW format is a File List).
+The following is an annotated dump of a [Format List PDU (section 2.2.3.1)](#Section_4.1.5). This format list advertises the fact that File List data is available from the peer (the FileGroupDescriptorW format is a File List).
 
 00000000 02 00 00 00 2e 00 00 00 79 c0 00 00 46 00 69 00 ....z...y...F.i.
 

@@ -707,7 +707,7 @@ A component is an indivisible unit of software functionality. Examples of compon
 
 A component configuration entry represents a particular configuration of a component. In general, it is possible for a component to have more than one component configuration entry on a server. It is also possible for a component to have no component configuration entries, in which case it is said to be an [**unconfigured component**](#gt_unconfigured-component).
 
-A conglomeration is a collection of component configuration entries for components that a component developer or administrator wishes to be managed as a group, and is identified by a conglomeration identifier. A component that has a component configuration entry in a conglomeration is said to be configured in that conglomeration. A conglomeration also has a set of configuration properties that apply to members of the collection. The conglomeration model assumes that component developers and administrators group together components based on application architecture, administrative policies, and performance concerns related to the shared use of system resources. Most of the configuration exposed by [MS-COMA](#Section_c5b1ef02e8f641959efe9667928d1bdd) at the conglomeration level is therefore related to broad-level security policy, such as role membership (section [1.3.4](#Section_1.3.4)), and configuration of shared system resources such as compensating resource managers (section [3.1.1.1.1](#Section_3.1.1.1.10)) and queue listeners (section [3.1.1.1.5](#Section_3.1.1.1.5)). Some conglomeration-level configuration properties might not apply to all component configuration entries, as explained in more detail in the sections that follow.
+A conglomeration is a collection of component configuration entries for components that a component developer or administrator wishes to be managed as a group, and is identified by a conglomeration identifier. A component that has a component configuration entry in a conglomeration is said to be configured in that conglomeration. A conglomeration also has a set of configuration properties that apply to members of the collection. The conglomeration model assumes that component developers and administrators group together components based on application architecture, administrative policies, and performance concerns related to the shared use of system resources. Most of the configuration exposed by [MS-COMA](#Section_c5b1ef02e8f641959efe9667928d1bdd) at the conglomeration level is therefore related to broad-level security policy, such as role membership (section [1.3.4](#Section_1.3.4)), and configuration of shared system resources such as compensating resource managers (section [3.1.1.1.1](#Section_3.1.1.1.11)) and queue listeners (section [3.1.1.1.5](#Section_3.1.1.1.5)). Some conglomeration-level configuration properties might not apply to all component configuration entries, as explained in more detail in the sections that follow.
 
 There are two types of component configuration entries, [**component legacy configuration entries**](#gt_component-legacy-configuration-entry) and [**component full configuration entries**](#gt_component-full-configuration-entry), each of which has a different purpose and a different set of configuration properties. Component full configuration entries support configuration for the full set of services provided by the target ORB. Component legacy configuration entries, if supported by the target ORB, enable configuring a component to be part of a conglomeration, where for technical reasons it might not be possible or desirable to create a component full configuration entry for the component.
 
@@ -728,7 +728,7 @@ The singleton machine settings object represents machine-wide configuration for 
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Catalog Versions and Partition Support
 
-This document specifies three [**catalog**](#gt_catalog) versions, which correspond to changes in the configuration state model. Version 3.00 is the initial catalog version. Version 4.00 supports new types of configurable objects, and adds configuration properties to existing types of objects. Version 5.00 is a minor update that adds a configuration property to enable multiple-partition support to the machine settings object. To ensure interoperability, the client and server perform version negotiation (section [1.7](#Section_3.2.4.4)) and use the same catalog version.
+This document specifies three [**catalog**](#gt_catalog) versions, which correspond to changes in the configuration state model. Version 3.00 is the initial catalog version. Version 4.00 supports new types of configurable objects, and adds configuration properties to existing types of objects. Version 5.00 is a minor update that adds a configuration property to enable multiple-partition support to the machine settings object. To ensure interoperability, the client and server perform version negotiation (section [1.7](#Section_1.7)) and use the same catalog version.
 
 One of the biggest differences between catalog version 3.00 and version 4.00 is the addition of explicit support for [**partitions**](#gt_partition). In catalog version 3.00, all [**conglomerations**](#gt_conglomeration) are implicitly contained in the [**global partition**](#gt_global-partition), and the catalog does not represent partitions or support their configuration. In catalog version 4.00, partitions are represented in the catalog and can be configured, and optionally new partitions can be created.
 
@@ -763,11 +763,11 @@ A component is said to be configured for component-level access checks if the co
 
 For technical reasons, a COMA server might to make a distinction between instantiation of [**components**](#gt_component) in a [**process**](#gt_process) with a 32-bit or 64-bit address space. The term [**bitness**](#gt_bitness) refers to the distinction between 32-bit and 64-bit address spaces and the potential differences in instantiation of components that this entails.
 
-For example, the [**target ORB**](#gt_target-object-request-broker-target-orb) can provide a local interoperability mechanism that instantiates a component in its creator's process. In this case, a server that supports both 32-bit and 64-bit address spaces would be required to determine whether a given component supports the creator's bitness. Furthermore, if a component supports multiple bitnesses, the details of its instantiation might be different. For example, each bitness might be implemented in a different [**module**](#gt_module) (section [1.3.6](#Section_4.4)).
+For example, the [**target ORB**](#gt_target-object-request-broker-target-orb) can provide a local interoperability mechanism that instantiates a component in its creator's process. In this case, a server that supports both 32-bit and 64-bit address spaces would be required to determine whether a given component supports the creator's bitness. Furthermore, if a component supports multiple bitnesses, the details of its instantiation might be different. For example, each bitness might be implemented in a different [**module**](#gt_module) (section [1.3.6](#Section_1.3.6)).
 
 To support multiple bitnesses, a COMA server keeps a separate copy of a component's properties for each bitness the component supports and allows each bitness to be configured separately. Bitness is exposed in the [**catalog**](#gt_catalog) as a property of [**component configuration entries**](#gt_component-configuration-entry), and a COMA server enables a bitness-aware client to specify which bitness of a component that it is configuring.
 
-Not all COMA servers support multiple component bitnesses. If a server supports only a single bitness, bitness is opaque to the client, and all flags and configuration options related to bitness are ignored. A bitness-aware client performs capability negotiation for the multiple-bitness capability (section [1.7](#Section_3.2.4.4)) to determine whether it is required to select bitness when performing configuration.
+Not all COMA servers support multiple component bitnesses. If a server supports only a single bitness, bitness is opaque to the client, and all flags and configuration options related to bitness are ignored. A bitness-aware client performs capability negotiation for the multiple-bitness capability (section [1.7](#Section_1.7)) to determine whether it is required to select bitness when performing configuration.
 
 <a id="Section_1.3.6"></a>
 ### 1.3.6 Registration
@@ -898,13 +898,13 @@ Capability Negotiation: This protocol performs explicit negotiation as described
 
 This document specifies three [**catalog**](#gt_catalog) versions: 3.00, 4.00, and 5.00. A COMA server and a COMA client perform catalog version negotiation before exchanging configuration data in the catalog. Except where otherwise noted, catalog version negotiation is completed before the client makes any other calls to the server.
 
-Each COMA client and each COMA server can support a range of catalog versions. Catalog version negotiation is initiated by the client by sending the server its supported range. The catalog server selects the negotiated catalog version as the highest catalog version that both the client and the server support and returns the negotiated version to the client, as specified in section [3.1.4.1](#Section_3.2.4.1).
+Each COMA client and each COMA server can support a range of catalog versions. Catalog version negotiation is initiated by the client by sending the server its supported range. The catalog server selects the negotiated catalog version as the highest catalog version that both the client and the server support and returns the negotiated version to the client, as specified in section [3.1.4.1](#Section_3.1.4.1).
 
 This document specifies two custom marshaling formats for queries, as used in certain server [**interfaces**](#gt_interface). One of the custom marshaling formats is optimized for implementations that use a 32-bit address space and the other for implementations that use a 64-bit address space. A COMA client and a COMA server optionally perform capability negotiation for the 64-bit query marshaling format capability, as specified in section [3.1.4.2](#Section_3.1.4.2).
 
-On behalf of a client application that wishes to configure multiple [**partitions**](#gt_partition), a COMA client and a COMA server can perform capability negotiation for the multiple-partition support capability, as specified in section [3.1.4.3](#Section_3.1.4.3).
+On behalf of a client application that wishes to configure multiple [**partitions**](#gt_partition), a COMA client and a COMA server can perform capability negotiation for the multiple-partition support capability, as specified in section [3.1.4.3](#Section_3.2.4.3).
 
-On behalf of a bitness-aware client application, a COMA client and a COMA server perform capability negotiation for the multiple-bitness capability to determine whether the COMA client needs to select [**bitness**](#gt_bitness) when performing configuration, as specified in section [3.1.4.4](#Section_3.1.4.4).
+On behalf of a bitness-aware client application, a COMA client and a COMA server perform capability negotiation for the multiple-bitness capability to determine whether the COMA client needs to select [**bitness**](#gt_bitness) when performing configuration, as specified in section [3.1.4.4](#Section_3.2.4.4).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -932,13 +932,13 @@ There are no standard assignments for this protocol. The following is a table of
 | RPC IID for [IExport2](#Section_3.1.4.15) interface (IID_IExport2) | {F131EA3E-B7BE-480E-A60D-51CB2785779E} |
 | RPC IID for [IAlternateLaunch](#Section_3.1.4.16) interface (IID_IAlternateLaunch) | {7F43B400-1A0E-4D57-BBC9-6B0C65F7A889} |
 | RPC IID for [ICatalogUtils](#Section_3.1.4.17) interface (IID_ICatalogUtils) | {456129E2-1078-11D2-B0F9-00805FC73204} |
-| RPC IID for [ICatalogUtils2](#Section_3.1.4.17) interface (IID_ICatalogUtils2) | {C726744E-5735-4F08-8286-C510EE638FB6} |
+| RPC IID for [ICatalogUtils2](#Section_3.1.4.18) interface (IID_ICatalogUtils2) | {C726744E-5735-4F08-8286-C510EE638FB6} |
 | RPC IID for [ICapabilitySupport](#Section_3.1.4.19) interface (IID_ICapabilitySupport) | {47CDE9A1-0BF6-11D2-8016-00C04FB9988E} |
 | RPC IID for [IContainerControl](#Section_3.1.4.20) interface (IID_IContainerControl) | {3F3B1B86-DBBE-11D1-9DA6-00805F85CFE3} |
-| RPC IID for [IContainerControl2](#Section_3.1.4.21) interface (IID_IContainerControl2) | {6C935649-30A6-4211-8687-C4C83E5FE1C7} |
+| RPC IID for [IContainerControl2](#Section_3.1.4.20) interface (IID_IContainerControl2) | {6C935649-30A6-4211-8687-C4C83E5FE1C7} |
 | RPC IID for [IReplicationUtil](#Section_3.1.4.22) interface (IID_IReplicationUtil) | {98315903-7BE5-11D2-ADC1-00A02463D6E7} |
 | [**Catalog**](#gt_catalog) identifier for the COMA catalog | {6E38D3C4-C2A7-11D1-8DEC-00C04FC2E0C7} |
-| Table identifier for [ComponentsAndFullConfigurations](#Section_3.1.1.3.18) table | {6E38D3C8-C2A7-11D1-8DEC-00C04FC2E0C7} |
+| Table identifier for [ComponentsAndFullConfigurations](#Section_3.1.1.3.19) table | {6E38D3C8-C2A7-11D1-8DEC-00C04FC2E0C7} |
 | Table identifier for [ComponentFullConfigurationsReadOnly](#Section_3.1.1.3.2) table | {6E38D3CA-C2A7-11D1-8DEC-00C04FC2E0C7} |
 | Table identifier for [ComponentLegacyConfigurations](#Section_3.1.1.3.3) table | {09487519-892D-4CA0-A00B-58EEB1662A68} |
 | Table identifier for [ComponentNativeBitness](#Section_3.1.1.3.4) table | {39344B1F-EFE8-4286-9DB8-AC0A3D791FF2} |
@@ -1123,7 +1123,7 @@ packet-beta
 <a id="Section_2.2.1.6"></a>
 #### 2.2.1.6 QueryComparisonData
 
-The QueryComparisonData structure is part of the representation of a query, as used in the [ICatalogTableInfo::GetClientTableInfo (section 3.1.4.7.1)](#Section_3.1.4.7.1), [ICatalogTableRead::ReadTable (section 3.1.4.8.1)](#Section_3.1.4.8), and [ICatalogTableWrite::WriteTable (section 3.1.4.9.1)](#Section_3.1.4.9) methods. It is always used along with a [QueryCellArray (section 2.2.1.5)](#Section_2.2.1.5) structure.
+The QueryComparisonData structure is part of the representation of a query, as used in the [ICatalogTableInfo::GetClientTableInfo (section 3.1.4.7.1)](#Section_3.1.4.7.1), [ICatalogTableRead::ReadTable (section 3.1.4.8.1)](#Section_3.1.4.8), and [ICatalogTableWrite::WriteTable (section 3.1.4.9.1)](#Section_3.1.4.9) methods. It is always used along with a [QueryCellArray (section 2.2.1.5)](#Section_2.2.1.4) structure.
 
 QueryComparisonData is a custom-marshaled type that is passed in a char* parameter. A QueryComparisonData is marshaled as an array of zero or more custom-marshaled comparison data values, each of which is associated with a [QueryCell](#Section_2.2.1.4). Each non-null comparison data value MUST be marshaled in the same order as the QueryCell to which it is associated and according to the custom marshaling defined as follows for each of the supported types (a query with zero non-null comparison data values MUST be represented by a NULL pointer).
 
@@ -1210,7 +1210,7 @@ Where the bits are defined as:
 <a id="Section_2.2.1.9"></a>
 #### 2.2.1.9 TableEntryFixed
 
-The TableEntryFixed structure is used in the [TableDataFixed (section 2.2.1.10)](#Section_2.2.1.10) and [TableDataFixedWrite (section 2.2.1.13)](#Section_2.2.1.10) structures. These structures are always used along with a [TableDataVariable (section 2.2.1.15)](#Section_2.2.1.15) structure. This type represents fixed-size parts of the data in a table entry:
+The TableEntryFixed structure is used in the [TableDataFixed (section 2.2.1.10)](#Section_2.2.1.10) and [TableDataFixedWrite (section 2.2.1.13)](#Section_2.2.1.13) structures. These structures are always used along with a [TableDataVariable (section 2.2.1.15)](#Section_2.2.1.15) structure. This type represents fixed-size parts of the data in a table entry:
 
 - The status of each property value.
 - The size of each nonfixed size **eDT_BYTES** property.
@@ -1305,7 +1305,7 @@ packet-beta
 
 The TableDataFixedWrite structure represents the fixed-size parts of the data, along with write actions, for a write to zero or more entries in a table, as used in the [ICatalogTableWrite::WriteTable (section 3.1.4.9.1)](#Section_3.1.4.9) method. It is always used along with a [TableDataVariable (section 2.2.1.15)](#Section_2.2.1.15) structure.
 
-TableDataFixedWrite is a custom-marshaled type that is passed in a char* parameter. A TableDataFixedWrite structure is marshaled as a sequence of zero or more [TableEntryFixedWrite (section 2.2.1.12)](#Section_2.2.1.12) structures (a write with zero table entries MUST be represented by a NULL pointer).
+TableDataFixedWrite is a custom-marshaled type that is passed in a char* parameter. A TableDataFixedWrite structure is marshaled as a sequence of zero or more [TableEntryFixedWrite (section 2.2.1.12)](#Section_2.2.1.9) structures (a write with zero table entries MUST be represented by a NULL pointer).
 
 ```mermaid
 packet-beta
@@ -1348,14 +1348,14 @@ packet-beta
 <a id="Section_2.2.1.15"></a>
 #### 2.2.1.15 TableDataVariable
 
-The TableDataVariable structure represents the variable-size parts of the data in zero or more entries in a table, as returned by the [ICatalogTableRead::ReadTable (section 3.1.4.8.1)](#Section_3.1.4.8) method, or in a write to zero or more entries in a table, as used in the [ICatalogTableWrite::WriteTable (section 3.1.4.9.1)](#Section_3.1.4.9) method. It is always used along with a [TableDataFixed (section 2.2.1.10)](#Section_2.2.1.10) or [TableDataFixedWrite (section 2.2.1.13)](#Section_2.2.1.10) structure, which specifies the offsets to each of the values in this structure.
+The TableDataVariable structure represents the variable-size parts of the data in zero or more entries in a table, as returned by the [ICatalogTableRead::ReadTable (section 3.1.4.8.1)](#Section_3.1.4.8) method, or in a write to zero or more entries in a table, as used in the [ICatalogTableWrite::WriteTable (section 3.1.4.9.1)](#Section_3.1.4.9) method. It is always used along with a [TableDataFixed (section 2.2.1.10)](#Section_2.2.1.10) or [TableDataFixedWrite (section 2.2.1.13)](#Section_2.2.1.13) structure, which specifies the offsets to each of the values in this structure.
 
 ```mermaid
 packet-beta
   0-63: "Entry (variable)"
 ```
 
-**Entry (variable):** A sequence of zero or more [TableEntryVariable (section 2.2.1.14)](#Section_2.2.1.14) structures. The order in which these structures appear MUST be the same as the order in which the corresponding [TableEntryFixed (section 2.2.1.9)](#Section_2.2.1.9) or [TableEntryFixedWrite (section 2.2.1.12)](#Section_2.2.1.12) structures appear in the associated TableDataFixed or TableDataFixedWrite structure.
+**Entry (variable):** A sequence of zero or more [TableEntryVariable (section 2.2.1.14)](#Section_2.2.1.14) structures. The order in which these structures appear MUST be the same as the order in which the corresponding [TableEntryFixed (section 2.2.1.9)](#Section_2.2.1.9) or [TableEntryFixedWrite (section 2.2.1.12)](#Section_2.2.1.9) structures appear in the associated TableDataFixed or TableDataFixedWrite structure.
 
 ```mermaid
 packet-beta
@@ -1988,7 +1988,7 @@ The SecurityDescriptorProperty type represents a [**security descriptor**](#gt_s
 
 **Simple type:** eDT_BYTES
 
-**Validity:** If not null, it MUST be a [ComponentSecurityDescriptor (section 2.2.2.21.4)](#Section_2.2.2.21.4).
+**Validity:** If not null, it MUST be a [ComponentSecurityDescriptor (section 2.2.2.21.4)](#Section_5).
 
 **Server validation:** Servers MAY enforce validity constraints.
 
@@ -2393,7 +2393,7 @@ eCT_NATIVE = 0x00001000
 
 **eCT_64BIT:** The server MUST select the 64-bit bitness of the component.
 
-**eCT_NATIVE:** The server MUST select the native bitness (see section [3.1.4.4](#Section_3.1.4.4)) of the component.
+**eCT_NATIVE:** The server MUST select the native bitness (see section [3.1.4.4](#Section_3.2.4.4)) of the component.
 
 <a id="Section_2.2.6"></a>
 ### 2.2.6 SRPLevelInfo
@@ -2532,7 +2532,7 @@ The following sections describe facilities that might be provided by an ORB and 
 
 If the target [**ORB**](#gt_object-request-broker-orb) provides facilities for managing [**atomic transactions**](#gt_atomic-transaction),<39> the following SHOULD be used to configure this facility:
 
-- The Transaction, FlowTransactionIntegratorProperties, TransactionTimeout, and TransactionIsolationLevel properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.18).
+- The Transaction, FlowTransactionIntegratorProperties, TransactionTimeout, and TransactionIsolationLevel properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.19).
 - The TransactionTimeout property of the MachineSettings table, as specified in section [3.1.1.3.8](#Section_3.1.1.3.8).
 Compensation is a well-known technique for guaranteeing atomicity and durability of transactions using a write-ahead log (for an example of this technique, see [[ARIESTrnsRcvr]](https://go.microsoft.com/fwlink/?LinkID=94408)). A compensating resource manager is an ORB facility that applies compensation using an ORB-managed log. If the [**target ORB**](#gt_target-object-request-broker-target-orb) provides compensating resource managers,<40> the following SHOULD be used to configure this facility:
 
@@ -2545,7 +2545,7 @@ An [**ORB**](#gt_object-request-broker-orb) might provide a single [**instance c
 - The ConcurrentApps property of the Conglomerations table, as specified in section [3.1.1.3.6](#Section_3.1.1.3.6).
 [**Instance pooling**](#gt_instance-pooling) refers to enabling [**component instances**](#gt_component-instance) that are no longer active to return to a pool for reuse. If the target ORB provides instance pooling,<42> the following SHOULD be used to configure this facility:
 
-- The MinPoolSize, MaxPoolSize, and EnablePooling properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.18).
+- The MinPoolSize, MaxPoolSize, and EnablePooling properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.19).
 If an ORB provides instance pooling, there is a subtle distinction between instantiation and [**activation**](#gt_activation), as these terms are used in the description of configuration properties. Activation refers to the process of making a component instance active (able to respond to requests), even if the component instance had been created previously (for example, if the instance was pooled). Therefore, activation might involve instantiating a component (if no suitable pooled component instance existed prior to the activation). If the target ORB does not provide instance pooling, these terms can be understood to be interchangeable.
 
 <a id="Section_3.1.1.1.3"></a>
@@ -2553,7 +2553,7 @@ If an ORB provides instance pooling, there is a subtle distinction between insta
 
 If the [**ORB**](#gt_object-request-broker-orb) provides role-based security,<43> the following SHOULD be used to configure this facility:
 
-- The ComponentAccessChecksEnabled property of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.18).
+- The ComponentAccessChecksEnabled property of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.19).
 - The RoleBasedSecurityEnabled property of the Conglomerations table, as specified in section [3.1.1.3.6](#Section_3.1.1.3.6).
 - The Roles (as specified in section [3.1.1.3.9](#Section_3.1.1.3.9)), RoleMembers (as specified in section [3.1.1.3.10](#Section_3.1.1.3.10)), RolesForComponent (as specified in section [3.1.1.3.13](#Section_3.1.1.3.13)), RolesForInterface (as specified in section [3.1.1.3.14](#Section_3.1.1.3.14)), and RolesForMethod tables (as specified in section [3.1.1.3.15](#Section_3.1.1.3.15)).
 <a id="Section_3.1.1.1.4"></a>
@@ -2561,7 +2561,7 @@ If the [**ORB**](#gt_object-request-broker-orb) provides role-based security,<43
 
 If the [**ORB**](#gt_object-request-broker-orb) provides a [**publisher-subscriber framework**](#gt_publisher-subscriber-framework),<44> the following SHOULD be used to configure this facility:
 
-- The IsEventClass, PublisherID, MultiInterfacePublisherFilterCLSID, AllowInprocSubscribers, and FireInParallel properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.18).
+- The IsEventClass, PublisherID, MultiInterfacePublisherFilterCLSID, AllowInprocSubscribers, and FireInParallel properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.19).
 - The EventClasses (as specified in section [3.1.1.3.22](#Section_3.1.1.3.22)), Subscriptions (as specified in section [3.1.1.3.23](#Section_3.1.1.3.23)), SubscriptionPublisherProperties (as specified in section [3.1.1.3.24](#Section_3.1.1.3.24)), SubscriptionSubscriberProperties (as specified in section [3.1.1.3.25](#Section_3.1.1.3.25)) tables.
 <a id="Section_3.1.1.1.5"></a>
 ##### 3.1.1.1.5 Transport Protocols
@@ -2570,7 +2570,7 @@ Although a majority of the configuration specified in this document is independe
 
 If the ORB provides a facility for exposing [**components**](#gt_component) via SOAP [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) or an extension thereof,<45> the following SHOULD be used to configure this facility:
 
-- The SoapAssemblyName and SoapTypeName properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.18).
+- The SoapAssemblyName and SoapTypeName properties of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.19).
 - The SoapActivated, SoapVRoot, SoapMailTo, and SoapBaseUrl properties of the Conglomerations table, as specified in section [3.1.1.3.6](#Section_3.1.1.3.6).
 [**Queuing**](#gt_queuing) generically refers to a transport protocol stack in which an asynchronous [**remote procedure call**](#gt_remote-procedure-call-rpc) protocol is layered over a reliable messaging protocol. The following diagram shows queuing, with the queued components protocol layered over the data structure and the queue manager client protocol. If an ORB enables queuing, a conceptual service that waits for queued messages for one or more components is known as a [**queue listener**](#gt_queue-listener). For more information about queueing protocols, see [MC-COMQC](../MC-COMQC/MC-COMQC.md). For more information about message queuing data structures, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md). For more information about message queueing client protocols, see [MS-MQMP](../MS-MQMP/MS-MQMP.md).
 
@@ -2591,7 +2591,7 @@ Finally, the following SHOULD be managed as ORB-wide configuration of transport 
 
 If the [**ORB**](#gt_object-request-broker-orb) provides [**instance load balancing**](#gt_instance-load-balancing),<47> the following SHOULD be used to configure this facility:
 
-- The LoadBalancingSupported property of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.18).
+- The LoadBalancingSupported property of the ComponentsAndFullConfigurations table, as specified in section [3.1.1.3.1](#Section_3.1.1.3.19).
 - The LoadBalancingCLSID property of the MachineSettings table, as specified in section [3.1.1.3.8](#Section_3.1.1.3.8).
 <a id="Section_3.1.1.1.7"></a>
 ##### 3.1.1.1.7 Configured Proxies
@@ -2631,7 +2631,7 @@ If the target [**ORB**](#gt_object-request-broker-orb) has facilities that requi
 In addition, if the target ORB has the ability to associate users with partitions that are based on either local configuration or configuration that is managed by an active directory, the following SHOULD be used to configure this facility:
 
 - The LocalPartitionLookupEnabled and DSPartitionLookupEnabled properties of the MachineSettings table, as specified in section [3.1.1.3.8](#Section_3.1.1.3.8).
-An ORB that uses an active directory in this manner might keep a local cache of user-partition associations. These associations are not exposed in the COMA [**catalog**](#gt_catalog), but the method [ICatalogUtils2::FlushPartitionCache](#Section_3.1.4.17), as specified in section 3.1.4.18.7, enables clients to flush a server's cache in case this information is stale.
+An ORB that uses an active directory in this manner might keep a local cache of user-partition associations. These associations are not exposed in the COMA [**catalog**](#gt_catalog), but the method [ICatalogUtils2::FlushPartitionCache](#Section_3.1.4.18), as specified in section 3.1.4.18.7, enables clients to flush a server's cache in case this information is stale.
 
 <a id="Section_3.1.1.1.12"></a>
 ##### 3.1.1.1.12 System Services
@@ -2754,7 +2754,7 @@ The following sections specify the schemas and other information for the tables 
 
 **Hidden bitness property:** Specifies whether the table defines a hidden [**bitness**](#gt_bitness) property.
 
-**Supported query templates:** A set of templates from which supported queries can be constructed. Each template is a list of cells, with parameters supplied by the client indicated by <A>, <B>, etc. Empty queries (no query cells) are listed as "Empty query". See [QueryCellArray (section 2.2.1.5)](#Section_2.2.1.5) and [QueryComparisonData (section 2.2.1.6)](#Section_2.2.1.6) for more details about how queries are represented.
+**Supported query templates:** A set of templates from which supported queries can be constructed. Each template is a list of cells, with parameters supplied by the client indicated by <A>, <B>, etc. Empty queries (no query cells) are listed as "Empty query". See [QueryCellArray (section 2.2.1.5)](#Section_2.2.1.4) and [QueryComparisonData (section 2.2.1.6)](#Section_2.2.1.6) for more details about how queries are represented.
 
 **Primary key**: The set of properties in the primary key.
 
@@ -3222,7 +3222,7 @@ In the previous table, internal properties (marked with IN in the Meta column) M
 
 **SurrogatePath:** If not null, an ImplementationSpecificPathProperty providing a path to a file that the ORB is to use to host the module specified in InprocServer.<109>
 
-**RunAs:** If not null, a [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.17) indicating the security principal to be used by the ORB for the process hosting the component.<110>
+**RunAs:** If not null, a [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.6) indicating the security principal to be used by the ORB for the process hosting the component.<110>
 
 **Password:** If not null, a [PasswordProperty (section 2.2.2.18)](#Section_2.2.2.18) indicating the password for the [**security principal**](#gt_security-principal) specified in the RunAs property.<111> Although for historical reasons, this property does not have the fPROPERTY_NOTPERSISTABLE (section [2.2.1.7](#Section_2.2.1.7)) flag, it MUST NOT be persisted in plaintext or returned to the client.
 
@@ -3380,7 +3380,7 @@ Remove MUST be supported if and only if:
 - Deleteable has the value "Y".
 - IsSystem has value "N".
 - Catalog version 4.00 and catalog version 5.00: The partition identified by the PartitionIdentifier property of the new entry has the Changeable property set to TRUE (0x00000001).
-**Cascade:** On removal of an entry, all entries in the [ComponentsAndFullConfigurations (section 3.1.1.3.1)](#Section_3.1.1.3.18), [ComponentLegacyConfigurations (section 3.1.1.3.3)](#Section_3.1.1.3.3), and [Roles (section 3.1.1.3.9)](#Section_3.1.1.3.9) table with identical values for ConglomerationIdentifier property MUST be removed.
+**Cascade:** On removal of an entry, all entries in the [ComponentsAndFullConfigurations (section 3.1.1.3.1)](#Section_3.1.1.3.19), [ComponentLegacyConfigurations (section 3.1.1.3.3)](#Section_3.1.1.3.3), and [Roles (section 3.1.1.3.9)](#Section_3.1.1.3.9) table with identical values for ConglomerationIdentifier property MUST be removed.
 
 **Populate:** None.
 
@@ -3459,7 +3459,7 @@ In the previous table, internal properties (marked with IN in the Meta column) M
 
 **ServiceName:** If not null, an [ORBSpecificAlternateLaunchNameProperty (section 2.2.2.13.4)](#Section_2.2.2.6) corresponding to the AlternateLaunchName property of the alternate launch configuration (section [3.1.1.4](#Section_3.1.1.4)) to be used by the ORB to perform an alternate launch for the conglomeration.<130> This property MUST be read-only if IsProxyApp is TRUE (0x00000001).
 
-**RunAsUser**: If not null, a [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.17) indicating the [**security principal**](#gt_security-principal) to be used by the ORB when creating instance containers for the conglomeration.<131> This property MUST be read-only if IsProxyApp is TRUE (0x00000001).
+**RunAsUser**: If not null, a [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.6) indicating the [**security principal**](#gt_security-principal) to be used by the ORB when creating instance containers for the conglomeration.<131> This property MUST be read-only if IsProxyApp is TRUE (0x00000001).
 
 **Description:** A [DescriptionProperty (section 2.2.2.7)](#Section_2.2.2.7) providing a human-readable description of the conglomeration.<132>
 
@@ -3813,7 +3813,7 @@ In the previous table, internal property (marked with IN in the Meta column) MUS
 
 **RoleName:** A [NameProperty (section 2.2.2.6)](#Section_2.2.2.6) providing the human-readable name of the role to which this role member belongs.
 
-**RoleMemberName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.17) identifying the [**security principal**](#gt_security-principal) of the role member.<204>
+**RoleMemberName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.6) identifying the [**security principal**](#gt_security-principal) of the role member.<204>
 
 <a id="Section_3.1.1.3.11"></a>
 ##### 3.1.1.3.11 ConfiguredInterfaces Table
@@ -3848,7 +3848,7 @@ The entries in the ConfiguredInterfaces table represent [**configured interfaces
 - Catalog version 4.00 and catalog version 5.00: CLSID, PartitionIdentifier, Reserved, IID, ConfigurationBitness
 **Other referential constraints:**
 
-- Catalog version 3.00: There MUST exist a [**component full configuration**](#gt_component-full-configuration-entry) entry in [ComponentsAndFullConfigurations (section 3.1.1.3.1)](#Section_3.1.1.3.18) with an identical value for CLSID.
+- Catalog version 3.00: There MUST exist a [**component full configuration**](#gt_component-full-configuration-entry) entry in [ComponentsAndFullConfigurations (section 3.1.1.3.1)](#Section_3.1.1.3.19) with an identical value for CLSID.
 - Catalog version 4.00 and catalog version 5.00: There MUST exist a component full configuration entry in ComponentsAndFullConfigurations (section 3.1.1.3.1) with identical values for CLSID, PartitionIdentifier, and ConfigurationBitness.
 **Write restrictions:** Add and remove MUST NOT be supported.
 
@@ -4241,7 +4241,7 @@ Add and remove MUST be supported if and only if the partition identified by Part
 
 In the previous table, the internal property (marked with IN in the Meta column) MUST NOT be written to or interpreted by the client. The server's use of this property is implementation-specific as it does not affect interoperability.
 
-**UserName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.17) identifying the user.<219>
+**UserName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.6) identifying the user.<219>
 
 **PartitionIdentifier:** The [**partition identifier**](#gt_partition-identifier) of the partition.<220>
 
@@ -4333,7 +4333,7 @@ Add and remove MUST be supported if and only if the partition identified by Part
 
 **RoleName:** The RoleName property of the partition role.
 
-**RoleMemberName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.17) identifying the name of the [**security principal**](#gt_security-principal) associated with the partition role identified by PartitionIdentifier and RoleName.<223>
+**RoleMemberName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.6) identifying the name of the [**security principal**](#gt_security-principal) associated with the partition role identified by PartitionIdentifier and RoleName.<223>
 
 <a id="Section_3.1.1.3.19"></a>
 ##### 3.1.1.3.19 InstanceLoadBalancingTargets Table
@@ -4493,7 +4493,7 @@ The entries in the EventClasses table represent [**component full configurations
 
 **Primary key:** [**CLSID**](#gt_class-identifier-clsid), ConglomerationIdentifier, PartitionIdentifier, ConfigurationBitness.
 
-**Other referential constraints:** A component full configuration entry MUST exist in the [ComponentsAndFullConfigurations (section 3.1.1.3.1)](#Section_3.1.1.3.18) table with identical values for all common properties (identified by identical property names), and for which the IsEventClass property has the value TRUE (0x00000001).
+**Other referential constraints:** A component full configuration entry MUST exist in the [ComponentsAndFullConfigurations (section 3.1.1.3.1)](#Section_3.1.1.3.19) table with identical values for all common properties (identified by identical property names), and for which the IsEventClass property has the value TRUE (0x00000001).
 
 **Write restrictions:** No writes supported.
 
@@ -4607,7 +4607,7 @@ Internal1 can legally have a maximum size of 4 or 8, at the option of the server
 
 **PerUser:** A [BooleanProperty (section 2.2.2.9)](#Section_2.2.2.9) that indicates whether or not the subscription is to be bound to a user identity.<243>
 
-**UserName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.17) identifying the [**security principal**](#gt_security-principal) that created the subscription.<244>
+**UserName:** A [SecurityPrincipalNameProperty (section 2.2.2.17)](#Section_2.2.2.6) identifying the [**security principal**](#gt_security-principal) that created the subscription.<244>
 
 **Enabled:** A BooleanProperty that indicates whether or not the subscription is enabled such that the [**publisher**](#gt_publisher) applications can publish events to it.<245>
 
@@ -4900,7 +4900,7 @@ Alternate launch configurations are persistent; that is, they retain their state
 
 A COMA server maintains the following state information per session. It is not retained between sessions.
 
-**Negotiated catalog version:** The [**catalog**](#gt_catalog) version that has been negotiated for the session, as specified in section [3.1.4.1](#Section_3.2.4.1), if this negotiation has already been performed. In each session, the initial value is a sentinel indicating that negotiation has not yet been performed.
+**Negotiated catalog version:** The [**catalog**](#gt_catalog) version that has been negotiated for the session, as specified in section [3.1.4.1](#Section_3.1.4.1), if this negotiation has already been performed. In each session, the initial value is a sentinel indicating that negotiation has not yet been performed.
 
 **Import target partition identifier:** A [**GUID**](#gt_globally-unique-identifier-guid) property, set via [IImport2::SetPartition (section 3.1.4.13.1)](#Section_3.1.4.13), that affects the behavior of the [IImport::ImportFromFile (section 3.1.4.12.1)](#Section_3.1.4.12.1) method. In each session, the initial value is the [**partition identifier**](#gt_partition-identifier) of the [**global partition**](#gt_global-partition).
 
@@ -4943,10 +4943,10 @@ A COMA server MAY<279> additionally support one or more of the following interfa
 - [IExport (section 3.1.4.14)](#Section_3.1.4.14)
 - [IExport2 (section 3.1.4.15)](#Section_3.1.4.15)
 - [IAlternateLaunch (section 3.1.4.16)](#Section_3.1.4.16)
-- [ICatalogUtils2 (section 3.1.4.18)](#Section_3.1.4.17)
+- [ICatalogUtils2 (section 3.1.4.18)](#Section_3.1.4.18)
 - [ICapabilitySupport (section 3.1.4.19)](#Section_3.1.4.19)
 - [IContainerControl (section 3.1.4.20)](#Section_3.1.4.20)
-- [IContainerControl2 (section 3.1.4.21)](#Section_3.1.4.21)
+- [IContainerControl2 (section 3.1.4.21)](#Section_3.1.4.20)
 - [IReplicationUtil (section 3.1.4.22)](#Section_3.1.4.22)
 Except where otherwise stated, if a server supports an interface, it MUST implement all of the methods specified for the interface.
 
@@ -4957,7 +4957,7 @@ All COMA servers MUST support [**catalog**](#gt_catalog) version negotiation. Ca
 
 - The client sends the server the lowest and highest catalog version number it supports in a call to [ICatalogSession::InitializeSession (section 3.1.4.5.1)](#Section_3.1.4.5).
 - The server selects the negotiated catalog version and returns this catalog version in the response to ICatalogSession::InitializeSession.
-Each COMA server supports an implementation-specific range of catalog versions.<280> However, not all possible supported ranges are recommended. In particular, the differences in the configuration state models between catalog version 3.00 and version 4.00 are large enough such that no standard mapping between these state models is defined. In addition, catalog version 4.00 does not provide a reliable mechanism for clients to determine whether multiple-partition support (see section [3.1.4.3](#Section_3.1.4.3)) is enabled on the server. If the catalog server supports multiple [**partitions**](#gt_partition), supporting both catalog version 4.00 and version 5.00 is recommended for maximum interoperability.
+Each COMA server supports an implementation-specific range of catalog versions.<280> However, not all possible supported ranges are recommended. In particular, the differences in the configuration state models between catalog version 3.00 and version 4.00 are large enough such that no standard mapping between these state models is defined. In addition, catalog version 4.00 does not provide a reliable mechanism for clients to determine whether multiple-partition support (see section [3.1.4.3](#Section_3.2.4.3)) is enabled on the server. If the catalog server supports multiple [**partitions**](#gt_partition), supporting both catalog version 4.00 and version 5.00 is recommended for maximum interoperability.
 
 In summary, a server's supported range of catalog versions SHOULD be one of the following combinations.
 
@@ -4974,7 +4974,7 @@ A COMA server MAY<281> support capability negotiation for the 64-bit [QueryCell]
 
 This capability negotiation is initiated by the COMA client and is performed as follows:
 
-- The client sends the server a value indicating whether it supports the 64-bit QueryCell marshaling format in a call to [ICatalog64BitSupport::Initialize64BitQueryCellSupport (section 3.1.4.6.2)](#Section_3.1.4.6).
+- The client sends the server a value indicating whether it supports the 64-bit QueryCell marshaling format in a call to [ICatalog64BitSupport::Initialize64BitQueryCellSupport (section 3.1.4.6.2)](#Section_2.2.1.4).
 - The server returns a value indicating whether it supports the 64-bit QueryCell marshaling format in the response to ICatalog64BitSupport::Initialize64BitQueryCellSupport.
 If both client and server support the 64-bit QueryCell marshaling format, then the 64-bit format MUST be used, as specified in section 2.2.1.4.
 
@@ -4999,7 +4999,7 @@ This capability negotiation is initiated by the COMA client and is performed as 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 ICatalogSession
 
-The ICatalogSession [**interface**](#gt_interface) provides methods for [Catalog Version Negotiation (section 3.1.4.1)](#Section_3.2.4.1) and for [Multiple-partition Support Capability Negotiation (section 3.1.4.3)](#Section_3.1.4.3). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
+The ICatalogSession [**interface**](#gt_interface) provides methods for [Catalog Version Negotiation (section 3.1.4.1)](#Section_3.1.4.1) and for [Multiple-partition Support Capability Negotiation (section 3.1.4.3)](#Section_3.2.4.3). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM Object Class with the [**CLSID**](#gt_class-identifier-clsid) CLSID_COMAServer (see section [1.9](#Section_1.9)) using the [**UUID**](#gt_universally-unique-identifier-uuid) {182C40FA-32E4-11D0-818B-00A0C9231C29} for this interface.
 
@@ -5023,7 +5023,7 @@ All methods MUST NOT throw exceptions.
 <a id="Section_3.1.4.5.1"></a>
 ##### 3.1.4.5.1 InitializeSession (Opnum 7)
 
-This method is called by a client to perform [Catalog Version Negotiation (section 3.1.4.1)](#Section_3.2.4.1).
+This method is called by a client to perform [Catalog Version Negotiation (section 3.1.4.1)](#Section_3.1.4.1).
 
 HRESULT InitializeSession(
 
@@ -5056,7 +5056,7 @@ The server then MUST set the value referenced by *pflVerSession* to the negotiat
 <a id="Section_3.1.4.5.2"></a>
 ##### 3.1.4.5.2 GetServerInformation (Opnum 8)
 
-This method is called by a client to perform capability negotiation for the [Multiple-partition Support Capability Negotiation (section 3.1.4.3)](#Section_3.1.4.3).
+This method is called by a client to perform capability negotiation for the [Multiple-partition Support Capability Negotiation (section 3.1.4.3)](#Section_3.2.4.3).
 
 HRESULT GetServerInformation(
 
@@ -5101,7 +5101,7 @@ Otherwise, the server MUST attempt to set the value referenced by *plMultiplePar
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 ICatalog64BitSupport
 
-The ICatalog64BitSupport [**interface**](#gt_interface) provides methods for capability negotiation for the multiple-bitness capability, as specified in section [3.1.4.4](#Section_3.1.4.4), and the 64-bit [QueryCell](#Section_2.2.1.4) marshaling format capability, as specified in section [3.1.4.2](#Section_3.1.4.2). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
+The ICatalog64BitSupport [**interface**](#gt_interface) provides methods for capability negotiation for the multiple-bitness capability, as specified in section [3.1.4.4](#Section_3.2.4.4), and the 64-bit [QueryCell](#Section_2.2.1.4) marshaling format capability, as specified in section [3.1.4.2](#Section_3.1.4.2). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM Object Class with the [**CLSID**](#gt_class-identifier-clsid) CLSID_COMAServer, as specified in section [1.9](#Section_1.9), using the [**UUID**](#gt_universally-unique-identifier-uuid) {1D118904-94B3-4A64-9FA6-ED432666A7B9} for this interface.
 
@@ -5112,14 +5112,14 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [SupportsMultipleBitness](#Section_3.1.4.6) | Performs capability negotiation for the multiple-bitness capability. Opnum: 3 |
-| [Initialize64BitQueryCellSupport](#Section_3.1.4.6) | Performs capability negotiation for the 64-bit QueryCell marshaling format capability. Opnum: 4 |
+| [Initialize64BitQueryCellSupport](#Section_2.2.1.4) | Performs capability negotiation for the 64-bit QueryCell marshaling format capability. Opnum: 4 |
 
 All methods MUST NOT throw exceptions.
 
 <a id="Section_3.1.4.6.1"></a>
 ##### 3.1.4.6.1 SupportsMultipleBitness (Opnum 3)
 
-This method is called by a client to perform capability negotiation for the [Multiple-Bitness Capability (section 3.1.4.4)](#Section_3.1.4.4).
+This method is called by a client to perform capability negotiation for the [Multiple-Bitness Capability (section 3.1.4.4)](#Section_3.2.4.4).
 
 HRESULT SupportsMultipleBitness(
 
@@ -5157,7 +5157,7 @@ Upon receiving a call to this method, the server MUST attempt to set the value r
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 ICatalogTableInfo
 
-The ICatalogTableInfo [**interface**](#gt_interface) provides a method to retrieve table metadata, as specified in section [3.1.1.2.1](#Section_3.1.1.2.11), for a [**catalog**](#gt_catalog) table. This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
+The ICatalogTableInfo [**interface**](#gt_interface) provides a method to retrieve table metadata, as specified in section [3.1.1.2.1](#Section_3.1.1.2.1), for a [**catalog**](#gt_catalog) table. This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM Object Class with the [**CLSID**](#gt_class-identifier-clsid) CLSID_COMAServer, as specified in section [1.9](#Section_1.9), using the [**UUID**](#gt_universally-unique-identifier-uuid) {A8927A41-D3CE-11D1-8472-006008B0E5CA} for this interface.
 
@@ -5174,7 +5174,7 @@ All methods MUST NOT throw exceptions.
 <a id="Section_3.1.4.7.1"></a>
 ##### 3.1.4.7.1 GetClientTableInfo (Opnum 3)
 
-This method is called by a client to retrieve the [table metadata (section 3.1.1.2.1)](#Section_3.1.1.2.11) for a [**catalog**](#gt_catalog) table.
+This method is called by a client to retrieve the [table metadata (section 3.1.1.2.1)](#Section_3.1.1.2.1) for a [**catalog**](#gt_catalog) table.
 
 HRESULT GetClientTableInfo(
 
@@ -5236,7 +5236,7 @@ char** ppReserved2,
 
 **tableFlags:** An [fTableFlags (section 2.2.1.1)](#Section_2.2.1.1) value supported by the table identified by *pTableIdentifier*.
 
-**pQueryCellArray:** A [QueryCellArray (section 2.2.1.5)](#Section_2.2.1.5) structure, marshaled in the negotiated format, as specified in section 2.2.1.5, for a supported query (see section [3.1.1.2](#Section_3.1.1.2)) on the table identified by *pTableIdentifier*.
+**pQueryCellArray:** A [QueryCellArray (section 2.2.1.5)](#Section_2.2.1.4) structure, marshaled in the negotiated format, as specified in section 2.2.1.5, for a supported query (see section [3.1.1.2](#Section_3.1.1.2)) on the table identified by *pTableIdentifier*.
 
 **cbQueryCellArray:** The size in bytes of *pQueryCellArray*.
 
@@ -5364,7 +5364,7 @@ char** ppReserved2,
 
 **tableFlags:** An [fTableFlags (section 2.2.1.1)](#Section_2.2.1.1) value supported (see section [3.1.1.2.3](#Section_3.1.1.2.3)) by the table identified by *pTableIdentifier*.
 
-**pQueryCellArray:** A [QueryCellArray](#Section_2.2.1.5) structure, marshaled in the negotiated format as specified in section 2.2.1.5, for a supported query (see section [3.1.1.2.2](#Section_3.1.1.2.2)) on the table identified by *pTableIdentifier*.
+**pQueryCellArray:** A [QueryCellArray](#Section_2.2.1.4) structure, marshaled in the negotiated format as specified in section 2.2.1.5, for a supported query (see section [3.1.1.2.2](#Section_3.1.1.2.2)) on the table identified by *pTableIdentifier*.
 
 **cbQueryCellArray:** The size in bytes of *pQueryCellArray*.
 
@@ -5512,7 +5512,7 @@ char** ppTableDetailedErrors,
 
 **tableFlags:** An [fTableFlags (section 2.2.1.1)](#Section_2.2.1.1) value supported (see section [3.1.1.2.3](#Section_3.1.1.2.3)) by the table identified by *pTableIdentifier*.
 
-**pQueryCellArray:** A [QueryCellArray](#Section_2.2.1.5) structure, marshaled in the negotiated format as specified in section 2.2.1.5, for a supported query (see section [3.1.1.2.2](#Section_3.1.1.2.2)) on the table identified by *pTableIdentifier*.
+**pQueryCellArray:** A [QueryCellArray](#Section_2.2.1.4) structure, marshaled in the negotiated format as specified in section 2.2.1.5, for a supported query (see section [3.1.1.2.2](#Section_3.1.1.2.2)) on the table identified by *pTableIdentifier*.
 
 **cbQueryCellArray:** The size in bytes of *pQueryCellArray*.
 
@@ -5522,7 +5522,7 @@ char** ppTableDetailedErrors,
 
 **eQueryFormat:** MUST be set to eQUERYFORMAT_1 (0x00000001).
 
-**pTableDataFixedWrite:** A [TableDataFixedWrite](#Section_2.2.1.10) structure, marshaled as specified in section 2.2.1.13.
+**pTableDataFixedWrite:** A [TableDataFixedWrite](#Section_2.2.1.13) structure, marshaled as specified in section 2.2.1.13.
 
 **cbTableDataFixedWrite:** The length in bytes of the TableDataFixedWrite structure passed in *pTableDataFixedWrite*.
 
@@ -5561,7 +5561,7 @@ The server then SHOULD verify that the client is authorized to write to the tabl
 
 The server then MAY verify that previously in the session, [ICatalogTableRead::ReadTable (section 3.1.4.8.1)](#Section_3.1.4.8) was called for the same table and with an identical query.
 
-The parameters *pTableDataFixedWrite*, *cbTableDataFixedWrite*, *pTableDataVariable*, and *cbTableDataVariable* specify writes to zero or more entries in the table identified by *pTableIdentifier*. Each [TableEntryFixedWrite (section 2.2.1.12)](#Section_2.2.1.12) structure and the corresponding [TableEntryVariable (section 2.2.1.14)](#Section_2.2.1.14) together specify a write to a single entry, known as an *entry write*. The server MUST verify that these parameters are a properly formatted representation of zero entry writes for the table and fail the call if not. A call to WriteTable specifying zero entry writes is explicitly legal, although it results in no changes to the catalog. If a server receives a call specifying zero entry writes, it MUST NOT make any changes to the catalog and MUST return S_OK (0x00000000).
+The parameters *pTableDataFixedWrite*, *cbTableDataFixedWrite*, *pTableDataVariable*, and *cbTableDataVariable* specify writes to zero or more entries in the table identified by *pTableIdentifier*. Each [TableEntryFixedWrite (section 2.2.1.12)](#Section_2.2.1.9) structure and the corresponding [TableEntryVariable (section 2.2.1.14)](#Section_2.2.1.14) together specify a write to a single entry, known as an *entry write*. The server MUST verify that these parameters are a properly formatted representation of zero entry writes for the table and fail the call if not. A call to WriteTable specifying zero entry writes is explicitly legal, although it results in no changes to the catalog. If a server receives a call specifying zero entry writes, it MUST NOT make any changes to the catalog and MUST return S_OK (0x00000000).
 
 The server MUST validate and attempt to perform the specified entry writes, as described later in this section. If validation fails for any of the entry writes (for example, if performing the entry write would result in the constraints for one or more of the properties in the table being violated), the server MAY<303> add one or more [TableDetailedError (section 2.2.1.16)](#Section_2.2.1.16) records to the detailed error results, using the zero-based index of the entry write and the zero-based index of a property to indicate to the client which specific change caused the failure. Additionally, if the server fails to perform an entry write (for example, if the server is unable to write a property value to its data store), the server MAY add one or more TableDetailedError records. Whether the server returns immediately upon generating a TableDetailedError or continues to validate entry writes in order to generate a more complete record of the reason for failure is implementation-specific.<304>
 
@@ -5640,7 +5640,7 @@ Upon success, the server MUST return S_OK (0x00000000). Upon failure in which de
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 IRegister
 
-The IRegister [**interface**](#gt_interface) provides a method for [**registration**](#gt_registration), as specified in section [1.3.6](#Section_4.4). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
+The IRegister [**interface**](#gt_interface) provides a method for [**registration**](#gt_registration), as specified in section [1.3.6](#Section_1.3.6). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM Object Class with the [**CLSID**](#gt_class-identifier-clsid) CLSID_COMAServer, as specified in section [1.9](#Section_1.9), using the [**UUID**](#gt_universally-unique-identifier-uuid) {8DB2180E-BD29-11D1-8B7E-00C04FD7A924} for this interface.
 
@@ -5760,7 +5760,7 @@ For each element of *ppModules*, the server MUST perform the following:
 - If the fREGISTER_VERIFYONLY flag is not set in the *dwFlags* parameter, the server MUST perform the following:
 - For each CLSID in the set of processed CLSIDs for the module, the server MUST perform the following:
 - The server MUST, via an implementation-specific mechanism, attempt to register the component in the module with this CLSID, and fail for the module if it cannot. Whether or not it is considered a failure to attempt to register a component that has the same CLSID as a component that already exists is implementation-specific.
-- The server MUST verify that it is possible, according to the constraints specified for [**component configurations**](#gt_component-configuration-entry) in sections [3.1.1.3.1](#Section_3.1.1.3.18) and [3.1.1.3.3](#Section_3.1.1.3.3), to create a component full configuration for the newly registered component in the target conglomeration, and fail if not.
+- The server MUST verify that it is possible, according to the constraints specified for [**component configurations**](#gt_component-configuration-entry) in sections [3.1.1.3.1](#Section_3.1.1.3.19) and [3.1.1.3.3](#Section_3.1.1.3.3), to create a component full configuration for the newly registered component in the target conglomeration, and fail if not.
 - The server MUST attempt to create a component full configuration for that component in the target conglomeration, using implementation-specific default values (see section [3.1.1.2.6](#Section_3.1.1.2.6)) for properties except (IsEventClass (section 3.1.1.3.1), and fail for the module if it cannot.
 - If the fREGISTER_EVENTCLASSES flag is set in the *dwFlags* parameter, the server MUST attempt to set the IsEventClass property of the newly created component full configuration to the value TRUE (0x00000001), and fail for the module if it cannot.
 - If the flag fREGISTER_EVENTCLASSES is not set in the *dwFlags* parameter, the server MUST attempt to set the IsEventClass property of the newly created component full configuration to the value FALSE (0x00000000), and fail for the module if it cannot.
@@ -5784,7 +5784,7 @@ The server then MUST return S_OK (0x00000000) on successful completion, and an i
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 IRegister2
 
-The IRegister2 [**interface**](#gt_interface) provides methods for [**registration**](#gt_registration), as specified in section [1.3.6](#Section_4.4), and creating [**component configurations**](#gt_component-configuration-entry). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
+The IRegister2 [**interface**](#gt_interface) provides methods for [**registration**](#gt_registration), as specified in section [1.3.6](#Section_1.3.6), and creating [**component configurations**](#gt_component-configuration-entry). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM Object Class with the [**CLSID**](#gt_class-identifier-clsid) CLSID_COMAServer, as specified in section [1.9](#Section_1.9), using the [**UUID**](#gt_universally-unique-identifier-uuid) {971668DC-C3FE-4EA1-9643-0C7230F494A1} for this interface.
 
@@ -5823,7 +5823,7 @@ HRESULT CreateFullConfiguration(
 
 **pwszConglomerationIdOrName:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of a [**conglomeration identifier**](#gt_conglomeration-identifier) or the Name property (see section [3.1.1.3.3](#Section_3.1.1.3.3)) of a conglomeration.
 
-**pwszCLSIDOrProgId:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3) representation of a [**CLSID**](#gt_class-identifier-clsid) or the ProgID property (see section [3.1.1.3.1](#Section_3.1.1.3.18)) of a component.
+**pwszCLSIDOrProgId:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3) representation of a [**CLSID**](#gt_class-identifier-clsid) or the ProgID property (see section [3.1.1.3.1](#Section_3.1.1.3.19)) of a component.
 
 **ctComponentType:** An [eComponentType (section 2.2.5)](#Section_2.2.5) value to select the [**bitness**](#gt_bitness) of the component, when there might be multiple bitnesses.
 
@@ -5844,7 +5844,7 @@ The server then MUST verify that the target conglomeration is contained in the g
 
 The server then MUST select a component and bitness to configure, based on the value of *pwszCLSIDOrProgId* as follows:
 
-- If the server supports the [Multiple-bitness Capability Negotiation](#Section_3.1.4.4) (section 3.1.4.4) and the value of *ctComponentType* is eCT_UNKNOWN (0x00000000), the server MUST perform the following:
+- If the server supports the [Multiple-bitness Capability Negotiation](#Section_3.2.4.4) (section 3.1.4.4) and the value of *ctComponentType* is eCT_UNKNOWN (0x00000000), the server MUST perform the following:
 - If there exists a component that has a native bitness and for which the value of the ProgID (see section 3.1.1.3.1) property of the native bitness is *pwszCLSIDOrProgId*, the server MUST select that component and the native bitness.
 - Otherwise, if *pwszCLSIDOrProgId* is in Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3), and there exists a component with the CLSID represented by *pwszCLSIDOrProgId* that has a native bitness, the server MUST select that component and the native bitness.
 - Otherwise, if there exists a component that has a non-native bitness and for which the value of the ProgID (see section 3.1.1.3.1) property of the non-native bitness is *pwszCLSIDOrProgId*, the server MUST select that component and the non-native bitness.
@@ -5875,7 +5875,7 @@ HRESULT CreateLegacyConfiguration(
 
 **pwszConglomerationIdOrName:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of a [**conglomeration identifier**](#gt_conglomeration-identifier) or the Name property (see section [3.1.1.3.3](#Section_3.1.1.3.3)) of a conglomeration.
 
-**pwszCLSIDOrProgId:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3) representation of a [**CLSID**](#gt_class-identifier-clsid) or the ProgID property (see section [3.1.1.3.1](#Section_3.1.1.3.18)) of a component.
+**pwszCLSIDOrProgId:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3) representation of a [**CLSID**](#gt_class-identifier-clsid) or the ProgID property (see section [3.1.1.3.1](#Section_3.1.1.3.19)) of a component.
 
 **ctComponentType:** An [eComponentType (section 2.2.5)](#Section_2.2.5) value to select the [**bitness**](#gt_bitness) of the component when there might be multiple bitnesses. This value MUST NOT be eCT_UNKNOWN or eCT_ANY.
 
@@ -5896,7 +5896,7 @@ The server then MUST verify that the target conglomeration is contained in the g
 
 The server then MUST select a component and bitness to configure, based on the value of *pwszCLSIDOrProgId* as follows:
 
-- If the server does not support the [multiple-bitness capability](#Section_3.1.4.4) (section 3.1.4.4) or the value of *ctComponentType* specifies the bitness, the server MUST perform the following:
+- If the server does not support the [multiple-bitness capability](#Section_3.2.4.4) (section 3.1.4.4) or the value of *ctComponentType* specifies the bitness, the server MUST perform the following:
 - If the first character of *pwszCLSIDOrProgId* is not "{", the server MUST determine whether or not there exists a component that has the specified bitness and for which the value of the ProgID (see section 3.1.1.3.1) property of the non-native bitness is *pwszCLSIDOrProgId*. If such a component exists, the server MUST select that component and the specified bitness. If no such component exists, the server MUST return a failure result (as specified in [MS-ERREF] (section 2.1)).
 - If the first character of *pwszCLSIDOrProgId* is "{", the server MUST verify that *pwszCLSIDOrProgId* is in Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3). The server then MUST determine whether or not there exists a component with the CLSID represented by *pwszCLSIDOrProgId* that has the specified bitness. If such a component exists, the server MUST select that component and the specified bitness. If no such component exists, the server MUST return a failure result, as specified in [MS-ERREF] section 2.1.
 The server then MUST verify that creating a component legacy configuration for the selected component and bitness in the selected conglomeration would not violate the constraints specified for [**component configurations**](#gt_component-configuration-entry) in sections 3.1.1.3.1 and 3.1.1.3.3.
@@ -5920,7 +5920,7 @@ HRESULT PromoteLegacyConfiguration(
 
 **pwszConglomerationIdOrName:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of a [**conglomeration identifier**](#gt_conglomeration-identifier) or the Name property (see section [3.1.1.3.3](#Section_3.1.1.3.3)) of a [**conglomeration**](#gt_conglomeration).
 
-**pwszCLSIDOrProgId:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3) representation of a [**CLSID**](#gt_class-identifier-clsid) or the ProgID property (see section [3.1.1.3.1](#Section_3.1.1.3.18)) of a component.
+**pwszCLSIDOrProgId:** A string containing either the Curly Braced GUID String Syntax ([MS-DTYP] section 2.3.4.3) representation of a [**CLSID**](#gt_class-identifier-clsid) or the ProgID property (see section [3.1.1.3.1](#Section_3.1.1.3.19)) of a component.
 
 **ctComponentType:** An [eComponentType (section 2.2.5)](#Section_2.2.5) value to select the [**bitness**](#gt_bitness) of the component, when there might be multiple bitnesses.
 
@@ -6056,7 +6056,7 @@ For each element of *ppModules*, the server MUST perform the following:
 - If the fREGISTER_VERIFYONLY flag is not set in the *dwFlags* parameter, the server MUST perform the following:
 - For each CLSID in the set of processed CLSIDs for the module, the server MUST perform the following:
 - The server MUST, via an implementation-specific mechanism, attempt to register the component in the module with this CLSID, and fail for the module if it cannot. Whether or not it is considered a failure to attempt to register a component that has the same CLSID as a component that already exists is implementation-specific.
-- The server MUST verify that it is possible, according to the constraints specified for [**component configurations**](#gt_component-configuration-entry) in sections [3.1.1.3.1](#Section_3.1.1.3.18) and [3.1.1.3.3](#Section_3.1.1.3.3), to create a component full configuration for the newly registered component in the target conglomeration, and fail if not.
+- The server MUST verify that it is possible, according to the constraints specified for [**component configurations**](#gt_component-configuration-entry) in sections [3.1.1.3.1](#Section_3.1.1.3.19) and [3.1.1.3.3](#Section_3.1.1.3.3), to create a component full configuration for the newly registered component in the target conglomeration, and fail if not.
 - The server MUST attempt to create a component full configuration for that component in the target conglomeration, using implementation-specific default values (see section [3.1.1.2.6](#Section_3.1.1.2.6)) for properties except IsEventClass (section 3.1.1.3.1), and fail for the module if it cannot.
 - If the fREGISTER_EVENTCLASSES flag is set in the *dwFlags* parameter, the server MUST attempt to set the IsEventClass property of the newly created component full configuration to the value TRUE (0x00000001), and fail for the module if it cannot.
 - If the flag fREGISTER_EVENTCLASSES is not set in the *dwFlags* parameter, the server MUST attempt to set the IsEventClass property of the newly created component full configuration to the value FALSE (0x00000000), and fail for the module if it cannot.
@@ -6209,7 +6209,7 @@ The server MUST select an existing partition as the target partition, or create 
 - If the value of the Changeable property (see section 3.1.1.3.6) of the partition is TRUE (0x00000001), the server MUST select the partition as the target partition.
 - Otherwise, the server MUST fail the call.
 - If the GUID selected previously is not the partition identifier of an existing partition, the server MUST perform the following:
-- If the server does not support the multiple-partition capability, as specified in section [3.1.4.3](#Section_3.1.4.3), the server MUST fail the call.
+- If the server does not support the multiple-partition capability, as specified in section [3.1.4.3](#Section_3.2.4.3), the server MUST fail the call.
 - If the value of the PartitionsEnabled property (see section [3.1.1.3.8](#Section_3.1.1.3.8)) of the machine settings is FALSE (0x00000000), the server MUST fail the call.
 - Otherwise, the server MUST attempt to create a new partition with the selected GUID as the partition identifier and implementation-specific default values for the rest of the properties, and fail the call if it cannot.
 Having selected a target partition, the server then MUST select a GUID to be used as the [**conglomeration identifier**](#gt_conglomeration-identifier) for each conglomeration represented in the installer package file as follows:
@@ -6238,7 +6238,7 @@ The server then SHOULD construct detailed results to return to the client for in
 
 - If the import was a success, the server MUST select as the set of *processed CLSIDs* the set of CLSIDs of components that were registered as part of the import. Otherwise, the set of processed CLSIDs SHOULD represent the components that the server attempted to register as part of the import.
 - For each component, the server MUST perform the following:
-- The server SHOULD select an implementation-specific name string for the CLSID. If the CLSID is the CLSID of a successfully registered component, this SHOULD be the value of the ProgID (see section [3.1.1.3.1](#Section_3.1.1.3.18)) property of the component.
+- The server SHOULD select an implementation-specific name string for the CLSID. If the CLSID is the CLSID of a successfully registered component, this SHOULD be the value of the ProgID (see section [3.1.1.3.1](#Section_3.1.1.3.19)) property of the component.
 - The server SHOULD select an implementation-specific DWORD value representing detailed results of the registration or verification attempt for the CLSID for informational purposes.
 - The server MUST select an HRESULT value representing the result of the registration or verification attempt for the CLSID. This MUST be S_OK (0x00000000) to represent success, or a failure result, as specified in [MS-ERREF] section 2.1, to represent failure.
 The server then MUST set the values referenced by the out parameters as follows:
@@ -6284,7 +6284,7 @@ LPWSTR** ppModules
 
 **ppNames:** A pointer to a variable that, upon successful completion, MUST be set to an array of string values, each of which is the value of the Name property (see section [3.1.1.3.3](#Section_3.1.1.3.3)) of a conglomeration represented in the installer package file.
 
-**ppDescriptions:** A pointer to a variable that, upon successful completion, MUST be set to an array of string values, each of which is the value of the Description property (see section [3.1.1.3.1](#Section_3.1.1.3.18) ) of a conglomeration represented in the installer package file.
+**ppDescriptions:** A pointer to a variable that, upon successful completion, MUST be set to an array of string values, each of which is the value of the Description property (see section [3.1.1.3.1](#Section_3.1.1.3.19) ) of a conglomeration represented in the installer package file.
 
 **pdwUsers:** A pointer to a variable that, upon successful completion, MUST be set to the value TRUE (0x00000001) if the installer package file contains configuration for user accounts, and FALSE (0x00000000) otherwise.
 
@@ -6710,8 +6710,8 @@ Methods in RPC Opnum Order
 | [AliasComponent](#Section_3.1.4.18.3) | Creates an alias component configuration. Opnum: 5 |
 | [MoveComponentConfiguration](#Section_3.1.4.18.4) | Moves a component configuration from one conglomeration into another conglomeration. Opnum: 6 |
 | [GetEventClassesForIID2](#Section_3.1.4.18.5) | Returns the [**event classes**](#gt_event-class) associated with an interface identifier (IID). Opnum: 7 |
-| [IsSafeToDelete](#Section_3.1.4.17) | Determines whether it is safe to delete a file. Opnum: 8 |
-| [FlushPartitionCache](#Section_3.1.4.17) | Flushes a server's local cache of partition user information. Opnum: 9 |
+| [IsSafeToDelete](#Section_3.1.4.18) | Determines whether it is safe to delete a file. Opnum: 8 |
+| [FlushPartitionCache](#Section_3.1.4.18) | Flushes a server's local cache of partition user information. Opnum: 9 |
 | [EnumerateSRPLevels](#Section_3.1.4.17) | Returns a list of software restriction policy levels supported by the server. Opnum: 10 |
 | [GetComponentVersions](#Section_3.1.4.18.9) | Returns a list of [**component configurations**](#gt_component-configuration-entry) for a [**component**](#gt_component). Opnum: 11 |
 
@@ -7096,7 +7096,7 @@ HRESULT GetComponentVersions(
 
 **ppConglomerationIDs:** A pointer to a variable that, upon successful completion, MUST be set to an array of [**conglomeration identifiers**](#gt_conglomeration-identifier) of the [**conglomerations**](#gt_conglomeration) containing the component full configurations, in the same order as *ppPartitionIDs*.
 
-**ppIsPrivate:** A pointer to a variable that, upon successful completion, MUST be set to an array of the values of the IsPrivate (see section [3.1.1.3.1](#Section_3.1.1.3.18)) property of the component full configurations, in the same order as *ppPartitionIDs*.
+**ppIsPrivate:** A pointer to a variable that, upon successful completion, MUST be set to an array of the values of the IsPrivate (see section [3.1.1.3.1](#Section_3.1.1.3.19)) property of the component full configurations, in the same order as *ppPartitionIDs*.
 
 **ppBitness:** A pointer to a variable that, upon successful completion, MUST be set to an array of the values of the ConfigurationBitness (see section 3.1.1.3.1) property of the component full configurations, in the same order as *ppPartitionIDs*.
 
@@ -7116,7 +7116,7 @@ The server then MUST attempt to set the values referenced by the out parameters 
 <a id="Section_3.1.4.19"></a>
 #### 3.1.4.19 ICapabilitySupport
 
-The ICapabilitySupport [**interface**](#gt_interface) provides methods for starting and stopping optional, dynamically controllable, catalog-related capabilities of a COMA server. This version of COMA defines one such capability, [instance load balancing (section 1.3.9)](#Section_3.1.1.1.6). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
+The ICapabilitySupport [**interface**](#gt_interface) provides methods for starting and stopping optional, dynamically controllable, catalog-related capabilities of a COMA server. This version of COMA defines one such capability, [instance load balancing (section 1.3.9)](#Section_1.3.9). This interface inherits from IUnknown, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.1.1.5.8.
 
 To receive incoming remote calls for this interface, the server MUST implement a DCOM Object Class with the [**CLSID**](#gt_class-identifier-clsid) CLSID_COMAServer, specified in section [1.9](#Section_1.9), using the [**UUID**](#gt_universally-unique-identifier-uuid) {47CDE9A1-0BF6-11D2-8016-00C04FB9988E} for this interface.
 
@@ -7769,7 +7769,7 @@ This section describes a conceptual model of possible data organization that an 
 
 A COMA client maintains the following state information per session. This information is not retained between sessions.
 
-**Negotiated catalog version:** The [**catalog**](#gt_catalog) version that has been negotiated for the session, as specified in section [3.1.4.1](#Section_3.2.4.1), if this negotiation has already been performed. In each session, the initial value is a sentinel indicating that negotiation has not yet been performed.
+**Negotiated catalog version:** The [**catalog**](#gt_catalog) version that has been negotiated for the session, as specified in section [3.1.4.1](#Section_3.1.4.1), if this negotiation has already been performed. In each session, the initial value is a sentinel indicating that negotiation has not yet been performed.
 
 **64-bit QueryCell format:** A value that indicates whether the 64-bit [QueryCell (section 2.2.1.4)](#Section_2.2.1.4) marshaling format capability negotiation has been performed and, if so, whether the 64-bit format is to be used. In each session, the initial value is a sentinel indicating that negotiation has not yet been performed.
 
@@ -7792,7 +7792,7 @@ None.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
-A COMA client MUST provide an implementation-specific mechanism by which a client application can request that it perform implementation-defined configuration tasks by making one or more calls to a COMA server. Additionally, it SHOULD provide a mechanism by which a client application can separately request that it establish a session. Establishing a session, whether implicit in a request to perform configuration tasks, or as an explicit request from the client application, consists of DCOM activation of the COMA server, optionally [**catalog**](#gt_catalog) version negotiation (see section [3.2.4.1](#Section_3.2.4.1) for a list of methods that do not require this), and optionally capability negotiation.
+A COMA client MUST provide an implementation-specific mechanism by which a client application can request that it perform implementation-defined configuration tasks by making one or more calls to a COMA server. Additionally, it SHOULD provide a mechanism by which a client application can separately request that it establish a session. Establishing a session, whether implicit in a request to perform configuration tasks, or as an explicit request from the client application, consists of DCOM activation of the COMA server, optionally [**catalog**](#gt_catalog) version negotiation (see section [3.2.4.1](#Section_3.1.4.1) for a list of methods that do not require this), and optionally capability negotiation.
 
 A COMA client also MUST provide an implementation-specific mechanism by which a client application can request that it end a session (by releasing all references to the COMA server's [**interfaces**](#gt_interface)). This mechanism might be implicit, for example destroying the COMA client object if the COMA client provides an object-oriented interface for client applications.
 
@@ -7808,12 +7808,12 @@ Before making any calls to the server, a COMA server MUST ensure that it has per
 | [ICatalogSession::InitializeSession](#Section_3.1.4.5) | Used for catalog version negotiation. |
 | [ICatalogSession::GetServerInformation](#Section_3.1.4.5) | Used for capability negotiation. |
 | [ICatalog64BitSupport::SupportsMultipleBitness](#Section_3.1.4.6) | Used for capability negotiation. |
-| [ICatalog64BitSupport::Initialize64BitQueryCellSupport](#Section_3.1.4.6) | Used for capability negotiation. |
+| [ICatalog64BitSupport::Initialize64BitQueryCellSupport](#Section_2.2.1.4) | Used for capability negotiation. |
 | [IImport2::SetPartition](#Section_3.1.4.13) | Sets the [**import**](#gt_import) target [**partition identifier**](#gt_partition-identifier), as specified in section [3.1.1.5](#Section_3.1.1.5). |
 | [ICatalogUtils::ValidateUser](#Section_3.1.4.17) | Used to validate a user account name and password. |
 | [ICatalogUtils::WaitForEndWrites](#Section_3.1.4.17.2) | Used to synchronize with the server. |
-| [ICatalogUtils2::IsSafeToDelete](#Section_3.1.4.17) | Used to determine if a file is safe to delete. |
-| [ICatalogUtils2::FlushPartitionCache](#Section_3.1.4.17) | Used to flush the server's local cache of partition user information. |
+| [ICatalogUtils2::IsSafeToDelete](#Section_3.1.4.18) | Used to determine if a file is safe to delete. |
+| [ICatalogUtils2::FlushPartitionCache](#Section_3.1.4.18) | Used to flush the server's local cache of partition user information. |
 | [ICatalogUtils2::EnumerateSRPLevels](#Section_3.1.4.17) | Used to get a list of software restriction policy levels supported by the server. |
 | [ICatalogUtils2::GetComponentVersions](#Section_3.1.4.17) | Used to get a list of [**component configurations**](#gt_component-configuration-entry) for a [**component**](#gt_component). |
 | [ICapabilitySupport::Start](#Section_3.1.4.19) | Used to control [**instance load balancing**](#gt_instance-load-balancing). |
@@ -7838,7 +7838,7 @@ Before making any calls to the server, a COMA server MUST ensure that it has per
 | [IReplicationUtil::QueryConglomerationPassword](#Section_3.1.4.22) | Specific to replication. |
 | [IReplicationUtil::CreateReplicationDir](#Section_1.3.12) | Specific to replication. |
 
-Catalog version negotiation is described in more detail in section [3.1.4.1](#Section_3.2.4.1). On successful completion, the client MUST set the negotiated catalog version for the session in its per-session state.
+Catalog version negotiation is described in more detail in section [3.1.4.1](#Section_3.1.4.1). On successful completion, the client MUST set the negotiated catalog version for the session in its per-session state.
 
 Each COMA client supports an implementation-specific range of catalog versions.<355> However, not all possible supported ranges are recommended.
 
@@ -7866,7 +7866,7 @@ If this capability negotiation fails because the COMA server does not implement 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Multiple-Partition Support Capability Negotiation
 
-A COMA client MAY<358> attempt to perform capability negotiation for the multiple-partition support capability. This negotiation MUST be performed before the client attempts to change the configuration of [**partitions**](#gt_partition) other than the [**global partition**](#gt_global-partition). Multiple-partition support capability negotiation is specified in section [3.1.4.3](#Section_3.1.4.3).
+A COMA client MAY<358> attempt to perform capability negotiation for the multiple-partition support capability. This negotiation MUST be performed before the client attempts to change the configuration of [**partitions**](#gt_partition) other than the [**global partition**](#gt_global-partition). Multiple-partition support capability negotiation is specified in section [3.1.4.3](#Section_3.2.4.3).
 
 On successful completion of multiple-partition support capability negotiation, the client SHOULD set the "server supports multiple partitions" value in its per-session state to indicate the results of the negotiation.
 
@@ -7883,7 +7883,7 @@ If multiple-partition support is disabled on the server and a client application
 
 A COMA client MAY<359> attempt to perform capability negotiation for the multiple-bitness capability.
 
-This negotiation MUST be performed before the client attempts to change the configuration of the non-native [**bitness**](#gt_bitness) of any [**component**](#gt_component). Multiple-bitness capability negotiation is described in more detail in section [3.1.4.4](#Section_3.1.4.4).
+This negotiation MUST be performed before the client attempts to change the configuration of the non-native [**bitness**](#gt_bitness) of any [**component**](#gt_component). Multiple-bitness capability negotiation is described in more detail in section [3.1.4.4](#Section_3.2.4.4).
 
 On successful completion of multiple-partition support capability negotiation, the client SHOULD indicate the results of the negotiation by setting the "server supports multiple bitnesses" value in its per-session state.
 
@@ -7907,7 +7907,7 @@ After making a successful call to [ICatalogTableWrite::WriteTable (section 3.1
 <a id="Section_3.2.4.8"></a>
 #### 3.2.4.8 IsSafeToDelete
 
-The server method [ICatalogUtils2::IsSafeToDelete (section 3.1.4.18.6)](#Section_3.1.4.17) can be used to determine if a file is safe to delete, but it is usually impossible for a server to reliably make such a determination.
+The server method [ICatalogUtils2::IsSafeToDelete (section 3.1.4.18.6)](#Section_3.1.4.18) can be used to determine if a file is safe to delete, but it is usually impossible for a server to reliably make such a determination.
 
 A COMA client MUST NOT call the ICatalogUtils2::IsSafeToDelete method unless it receives an explicit request from a client application to do so, and MUST return the results of the call unaltered to the client application.
 
@@ -8423,7 +8423,7 @@ packet-beta
 
 Figure 8: Writing to a table
 
-The preceding figure shows the sequence for a COMA client that attempts to update a description of the [**partition**](#gt_partition) in the [Partitions table](#Section_3.1.1.3.7) on behalf of a client application that requests to make this change. The COMA client has already performed the initialization and read table steps, as shown in section [4.1](#Section_4.1) and section [4.2](#Section_4.2). It is after performing these steps that the client is now attempting a table write operation.
+The preceding figure shows the sequence for a COMA client that attempts to update a description of the [**partition**](#gt_partition) in the [Partitions table](#Section_3.1.1.3.7) on behalf of a client application that requests to make this change. The COMA client has already performed the initialization and read table steps, as shown in section [4.1](#Section_3.1.3) and section [4.2](#Section_4.2). It is after performing these steps that the client is now attempting a table write operation.
 
 - The client calls the [ICatalogTableWrite::WriteTable (section 3.1.4.9.1)](#Section_3.1.4.9) method by setting the parameters, as follows:
 - The client determines the query appropriate to do an update. In this case, **pQueryCellArray** is set to NULL with its size **cbQueryCellArray** set to zero.
@@ -8657,7 +8657,7 @@ ppTableDetailedErrors = NULL,
 
 Figure 9: Registration
 
-The preceding figure shows the sequence for a COMA client that attempts [**registration**](#gt_registration) of a [**component**](#gt_component) on a COMA server, on behalf of a client application. The client has already performed session and capability negotiation, as shown in example [4.1](#Section_4.1). It is assumed that the COMA server has a [**partition**](#gt_partition) {41e90f3e-56c1-4633-81c3-6e8bac8bdd70} with [**conglomeration**](#gt_conglomeration) {3fe02b83-6551-410b-a58a-b231fd7c0c2e}. It is also assumed that the client knows about the partition and the conglomeration on the COMA server by means of a query on a COMA server or by some other way. It is also assumed that the module file path is something that a COMA client acquired beforehand by its own custom means. For example, the client application might be an administrative tool, and an administrative user provided the path when requesting registration.
+The preceding figure shows the sequence for a COMA client that attempts [**registration**](#gt_registration) of a [**component**](#gt_component) on a COMA server, on behalf of a client application. The client has already performed session and capability negotiation, as shown in example [4.1](#Section_3.1.3). It is assumed that the COMA server has a [**partition**](#gt_partition) {41e90f3e-56c1-4633-81c3-6e8bac8bdd70} with [**conglomeration**](#gt_conglomeration) {3fe02b83-6551-410b-a58a-b231fd7c0c2e}. It is also assumed that the client knows about the partition and the conglomeration on the COMA server by means of a query on a COMA server or by some other way. It is also assumed that the module file path is something that a COMA client acquired beforehand by its own custom means. For example, the client application might be an administrative tool, and an administrative user provided the path when requesting registration.
 
 - The client calls [IRegister2::RegisterModule2 (section 3.1.4.11.4)](#Section_3.1.4.11) as follows:
 - The client sets the *ConglomerationIdentifier* and the *PartitionIdentifier* parameters to specify the conglomeration of the component belonging to the [**module**](#gt_module).
@@ -9947,7 +9947,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 2.2.1.8: Rather than ignoring the Read and Write bits, Windows 10 and earlier and Windows Server 2016 and earlier rely on them as hints when extracting data from these structures.
 
-<9> Section 2.2.1.9: Windows uses this field as scratch space when constructing or processing [TableDataFixed](#Section_2.2.1.10) and [TableDataFixedWrite](#Section_2.2.1.10) structures, and in some cases sends these structures with this field set to a nonzero value for a null-valued property. This field is always ignored on receipt for a null-valued property.
+<9> Section 2.2.1.9: Windows uses this field as scratch space when constructing or processing [TableDataFixed](#Section_2.2.1.10) and [TableDataFixedWrite](#Section_2.2.1.13) structures, and in some cases sends these structures with this field set to a nonzero value for a null-valued property. This field is always ignored on receipt for a null-valued property.
 
 <10> Section 2.2.1.9: Windows uses this field as scratch space when constructing or processing TableDataFixed and TableDataFixedWrite structures, and in some cases sends these structures with this field set to a nonzero value for a null-valued property. This field is always ignored on receipt for a null-valued property.
 
@@ -10561,10 +10561,10 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | [IExport2](#Section_3.1.4.15) | - | X | X | X | X | X | X | X | X | X | X | X | X |
 | [IAlternateLaunch](#Section_3.1.4.16) | X | X | X | X | X | X | X | X | X | X | X | X | X |
 | [ICatalogUtils](#Section_3.1.4.17) | X | X | X | X | X | X | X | X | X | X | X | X | X |
-| [ICatalogUtils2](#Section_3.1.4.17) | - | X | X | X | X | X | X | X | X | X | X | X | X |
+| [ICatalogUtils2](#Section_3.1.4.18) | - | X | X | X | X | X | X | X | X | X | X | X | X |
 | [ICapabilitySupport](#Section_3.1.4.19) | X | X | X | X | X | X | X | X | X | X | X | X | X |
 | [IContainerControl](#Section_3.1.4.20) | X | X | X | X | X | X | X | X | X | X | X | X | X |
-| [IContainerControl2](#Section_3.1.4.21) | - | X | X | X | X | X | X | X | X | X | X | X | X |
+| [IContainerControl2](#Section_3.1.4.20) | - | X | X | X | X | X | X | X | X | X | X | X | X |
 | [IReplicationUtil](#Section_3.1.4.22) | X | X | X | X | X | X | X | X | X | X | X | X | X |
 
 <280> Section 3.1.4.1: Applicable Windows Server releases support the following catalog versions.
@@ -10754,7 +10754,7 @@ A call to [AliasComponent](#Section_3.1.4.18.3) in which the source component is
 
 Windows COMA clients act as a pass-through and do not validate this requirement. It is the responsibility of Windows client applications to provide valid parameters when making such a request.
 
-<344> Section 3.1.4.18.3: Windows uses an internal property in the [ComponentsAndFullConfigurations](#Section_3.1.1.3.18) table to associate the new CLSID with the original component.
+<344> Section 3.1.4.18.3: Windows uses an internal property in the [ComponentsAndFullConfigurations](#Section_3.1.1.3.19) table to associate the new CLSID with the original component.
 
 <345> Section 3.1.4.18.6: Windows XP does not ignore this parameter.
 

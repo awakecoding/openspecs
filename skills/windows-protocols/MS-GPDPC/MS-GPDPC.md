@@ -268,7 +268,7 @@ The following diagram shows the consumers of the Deployed Printer Connections pr
 
 Figure 1: Consumers of the Deployed Printer Connections Protocol
 
-The situations in which this protocol is used are described in two scenarios: the **administrative scenario** and the **client scenario**, which are defined in sections [1.3.2.1](#Section_1.3.2.2) and [1.3.2.2](#Section_1.3.2.2), respectively.
+The situations in which this protocol is used are described in two scenarios: the **administrative scenario** and the **client scenario**, which are defined in sections [1.3.2.1](#Section_1.3.2.1) and [1.3.2.2](#Section_1.3.2.1), respectively.
 
 <a id="Section_1.3.2.1"></a>
 #### 1.3.2.1 Administrative Scenario
@@ -620,7 +620,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-In order to use LDAP, the client-side plug-in invokes the Initializing an ADConnection task specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1 with the following parameters, and it stores the new *TaskReturnADConnection* returned from the task as the **ADConnection handle** abstract data model element (section [3.2.1](#Section_3.1.1)):
+In order to use LDAP, the client-side plug-in invokes the Initializing an ADConnection task specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1 with the following parameters, and it stores the new *TaskReturnADConnection* returned from the task as the **ADConnection handle** abstract data model element (section [3.2.1](#Section_3.2.1)):
 
 - *TaskInputTargetName*: MAY be specified by the administrator, or if not specified, NULL.
 - *TaskInputPortNumber*: 389
@@ -639,7 +639,7 @@ The Deployed Printer Connections client-side plug-in reads a list of printer con
 
 When the client-side plug-in receives a [Process Group Policy](#Section_3.2.4.1) event (section 3.2.4.1), it MUST perform the following processing steps:
 
-- The client-side plug-in MUST initialize the **DesiredConnections list** abstract data model element (section [3.2.1](#Section_3.1.1)) to the list of printer connections in the **PreviouslyAppliedConnections list** abstract data model element (section 3.2.1).
+- The client-side plug-in MUST initialize the **DesiredConnections list** abstract data model element (section [3.2.1](#Section_3.2.1)) to the list of printer connections in the **PreviouslyAppliedConnections list** abstract data model element (section 3.2.1).
 - For each [**GPO**](#gt_group-policy-object-gpo) in the *Deleted GPO list* parameter (specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1), the client-side plug-in MUST remove any printer connections from the **DesiredConnections list** that were assigned to the user or machine by this GPO, as determined by the [**GUID**](#gt_globally-unique-identifier-guid) of the GPO.
 - The client-side plug-in MUST issue one LDAP search for each GPO in the *New or Changed GPO list* parameter ([MS-GPOL] section 3.2.4.1) to obtain a list of all new or changed printer connection settings. The message format for this LDAP search is specified in section [3.2.5.1](../MS-GPOL/MS-GPOL.md).
 - The list of printer connection settings that was obtained from [**Active Directory**](#gt_active-directory) in the previous step SHOULD be removed from the **DesiredConnections list** cache, as determined by the [**Group Policy Object (GPO) GUIDs**](#gt_group-policy-object-gpo-guid). The list of printer connection settings MUST then be added to the **DesiredConnections list**.
@@ -716,7 +716,7 @@ When JohnQ logs on to JohnQ-Laptop, the client-side plug-in performs the followi
 
 - During [**policy application**](#gt_policy-application), the client-side plug-in gets a list of GPOs that apply to the user JohnQ or computer JohnQ-Laptop from [**Group Policy**](#gt_group-policy).
 - Using [MS-GPOL], the client-side plug-in issues one LDAP search for each GPO to obtain a list of all printer connection settings that apply to "JohnQ" or "JohnQ-Laptop". In this example, the client-side plug-in discovers a [**user connection**](#gt_user-connection) that applies to JohnQ, but does not discover a [**machine connection**](#gt_machine-connection) that applies to JohnQ-Laptop.
-- The client-side plug-in adds the discovered printer connection \\fabprint44\b2-2003-clr to its DesiredConnections list, as specified in section [3.2.1](#Section_3.1.1). It then compares the DesiredConnections list with its PreviouslyAppliedConnections list. It discovers that it needs to add that printer connection to the client machine, because it does not appear in the PreviouslyAppliedConnections list.
+- The client-side plug-in adds the discovered printer connection \\fabprint44\b2-2003-clr to its DesiredConnections list, as specified in section [3.2.1](#Section_3.2.1). It then compares the DesiredConnections list with its PreviouslyAppliedConnections list. It discovers that it needs to add that printer connection to the client machine, because it does not appear in the PreviouslyAppliedConnections list.
 - The printer connections that are specified in the GPOs are added to the client machine. The client-side plug-in now removes the printer connection \\fabprint44\b2-2003-clr from its DesiredConnections list and adds the printer connection to its PreviouslyAppliedConnections list. JohnQ will subsequently observe a representation of that printer connection in the user interface.
 Later, the network administrator wants to remove the printer connection \\fabprint44\b2-2003-clr. The network administrator uses the administrative tool plug-in to remove that printer connection setting from the GPO named "Deploy b2-2003-clr printer". The administrative tool plug-in performs the following tasks:
 

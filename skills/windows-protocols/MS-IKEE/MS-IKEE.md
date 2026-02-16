@@ -631,7 +631,7 @@ If the message from the initiator for negotiating the child SA does not have an 
 <a id="Section_1.3.13"></a>
 ### 1.3.13 IKEv2 Fragmentation
 
-Similar to the IKE fragmentation case described in section [1.3.2](#Section_3.3), IKEv2 fragmentation is a new solution that improves security by avoiding IP-level fragmentation. For larger IKEv2 messages that exceed the path [**maximum transmission unit (MTU)**](#gt_maximum-transmission-unit-mtu) size, instead of taking the risk of incurring IP-level fragmentation, IKEv2 itself performs fragmentation so that the resulting IP datagrams are small enough to avoid fragmentation taking place at the IP-level.
+Similar to the IKE fragmentation case described in section [1.3.2](#Section_1.3.2), IKEv2 fragmentation is a new solution that improves security by avoiding IP-level fragmentation. For larger IKEv2 messages that exceed the path [**maximum transmission unit (MTU)**](#gt_maximum-transmission-unit-mtu) size, instead of taking the risk of incurring IP-level fragmentation, IKEv2 itself performs fragmentation so that the resulting IP datagrams are small enough to avoid fragmentation taking place at the IP-level.
 
 <a id="Section_1.3.14"></a>
 ### 1.3.14 Extension to RFC Cross Reference
@@ -674,8 +674,8 @@ The following table summarizes how each [**IKE**](#gt_internet-key-exchange-ike)
 
 The following sections describe the prerequisites and preconditions for using [**IKE**](#gt_internet-key-exchange-ike) protocol extensions:
 
-- [General Prerequisites/Preconditions (section 1.5.1)](#Section_1.5)
-- [CGA Authentication Prerequisites/Preconditions (section 1.5.2)](#Section_1.5)
+- [General Prerequisites/Preconditions (section 1.5.1)](#Section_1.5.1)
+- [CGA Authentication Prerequisites/Preconditions (section 1.5.2)](#Section_1.5.2)
 <a id="Section_1.5.1"></a>
 ### 1.5.1 General Prerequisites/Preconditions
 
@@ -1111,7 +1111,7 @@ The following main data elements are required by any implementation:
 For each [**IKE**](#gt_internet-key-exchange-ike) MM SA, the following information MUST be maintained:
 
 - All states that are necessary for managing a standard IKE MM SA as defined in [RFC2409] appendix A for IKEv1 and [RFC4306] section 3.3.2 for IKEv2.
-- All states that are necessary for management of other IKE extensions for the [**SA**](#gt_security-association-sa), as specified in this section and in sections [3.2.1](#Section_3.2.1), [3.3.1](#Section_3.3.1), [3.4.1](#Section_3.4.1), [3.5.1](#Section_3.14.1), [3.6.1](#Section_3.14.1), [3.7.1](#Section_3.7.1), [3.8.1](#Section_3.8.1) for IKEv1 only, and [3.10.1](#Section_3.10.1) for IKEv2 only.
+- All states that are necessary for management of other IKE extensions for the [**SA**](#gt_security-association-sa), as specified in this section and in sections [3.2.1](#Section_3.2.1), [3.3.1](#Section_3.3.1), [3.4.1](#Section_3.4.1), [3.5.1](#Section_3.12.1), [3.6.1](#Section_3.12.1), [3.7.1](#Section_3.7.1), [3.8.1](#Section_3.8.1) for IKEv1 only, and [3.10.1](#Section_3.10.1) for IKEv2 only.
 The MMSAD MUST be indexed by the local and peer IP addresses and the [**initiator**](#gt_initiator) and [**responder (1)**](#gt_c37f09fa-24c8-4fd5-8edd-2c5e575bc211) cookies found in the [**ISAKMP**](#gt_internet-security-association-and-key-management-protocol-isakmp) header, as specified in [RFC2408].
 
 - Peer authorization database (PAD): The PAD and its management operations are specified in [RFC4301] section 4.4.3. This specification does not extend that definition. The PAD that is referred to in this specification contains rules that describe if and how IKE negotiates SAs with a remote peer, as specified in [RFC4301].
@@ -1136,7 +1136,7 @@ The possible connection entries are:
 - V6 protocol-only state entry: {IPv6 source address {16 bytes}, IPv6 destination address {16 bytes}, IP protocol {DWORD}}.
 All states that are necessary for management of IKE extensions are described in section 3.7.1 for IKEv1 only.
 
-- Other states: Additional states are defined in section [3.9.1](#Section_1.3.7) and section [3.11.1](#Section_3.11.1).
+- Other states: Additional states are defined in section [3.9.1](#Section_3.9) and section [3.11.1](#Section_3.11.1).
 **Note** The preceding conceptual data can be implemented by using a variety of techniques. Any data structure that stores the preceding conceptual data can be used in the implementation.
 
 <a id="Section_3.1.2"></a>
@@ -1259,7 +1259,7 @@ Then, the host MUST construct message #2 (as specified in [[RFC2409]](https://go
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Receiving Message #2
 
-On receipt of message #2, the host MUST check for the presence of [**NAT**](#gt_network-address-translation-nat)-T [**vendor ID payloads**](#gt_vendor-id-payload) and set the Selected Revision as specified in section [3.2.5.1](#Section_3.6.5.1).
+On receipt of message #2, the host MUST check for the presence of [**NAT**](#gt_network-address-translation-nat)-T [**vendor ID payloads**](#gt_vendor-id-payload) and set the Selected Revision as specified in section [3.2.5.1](#Section_3.3.5.1).
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving Other Messages
@@ -1340,7 +1340,7 @@ Then, the host MUST construct message #2 (as specified in [[RFC2409]](https://go
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Receiving Message #2
 
-On receipt of message #2, the host MUST check for the presence of a "FRAGMENTATION" [**vendor ID payload**](#gt_vendor-id-payload) and set the Fragmentation supported flag, as specified in section [3.3.5.1](#Section_3.6.5.1).
+On receipt of message #2, the host MUST check for the presence of a "FRAGMENTATION" [**vendor ID payload**](#gt_vendor-id-payload) and set the Fragmentation supported flag, as specified in section [3.3.5.1](#Section_3.3.5.1).
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Receiving Other IKE Messages
@@ -1437,9 +1437,9 @@ Peer authorization database (PAD): The following information MUST be maintained:
 - A [**self-signed certificate**](#gt_self-signed-certificate) (type X.509) compatible with the [**IKE**](#gt_internet-key-exchange-ike) [**exchange**](#gt_exchange). See [RFC2409] section 5.1.
 This data structure is used during:
 
-- Generation of a CGA and its associated self-signed certificate (see section [3.4.3](#Section_3.14.3)).
+- Generation of a CGA and its associated self-signed certificate (see section [3.4.3](#Section_3.11.3)).
 - Construction of an identity payload (see section [3.4.5.4](#Section_3.4.5.4)).
-- Verification of its association with a public key (see section [3.4.5.5](#Section_3.7.5.3)).
+- Verification of its association with a public key (see section [3.4.5.5](#Section_3.4.5.5)).
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Timers
 
@@ -1450,7 +1450,7 @@ None.
 
 Each host configured to use [**CGA**](#gt_cryptographically-generated-address-cga) authentication MUST generate an [**Rivest-Shamir-Adleman (RSA)**](#gt_rivest-shamir-adleman-rsa) public/private key pair (see [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) and 3 and [[RFC3972]](https://go.microsoft.com/fwlink/?LinkId=90452) section 3). The host MUST then generate a X.509 [**self-signed certificate**](#gt_self-signed-certificate) that uses this key pair and is compatible with [**IKE**](#gt_internet-key-exchange-ike) (see [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5.1).
 
-The CGA itself MUST be created as described in [RFC3972] section 4. This IP address is used to send and receive the IKE packets described in section [3.4.5](#Section_3.6.5).
+The CGA itself MUST be created as described in [RFC3972] section 4. This IP address is used to send and receive the IKE packets described in section [3.4.5](#Section_3.12.5).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
@@ -1512,7 +1512,7 @@ Then, the host MUST construct message #6 by using the procedure for constructing
 <a id="Section_3.4.5.6"></a>
 #### 3.4.5.6 Receiving Message #6
 
-On receipt of message #6, the host MUST validate the message using the procedure specified for validating message #5 in section [3.4.5.5](#Section_3.7.5.3).
+On receipt of message #6, the host MUST validate the message using the procedure specified for validating message #5 in section [3.4.5.5](#Section_3.4.5.5).
 
 <a id="Section_3.4.6"></a>
 ### 3.4.6 Timer Events
@@ -1946,7 +1946,7 @@ Establishment of a successful [**QM SA**](#gt_quick-mode-security-association-qm
 <a id="Section_3.9"></a>
 ## 3.9 Denial of Service Protection Details
 
-[**IKE**](#gt_internet-key-exchange-ike) goes into DoS protection under the condition described in section [3.9.7](#Section_3.8.7).
+[**IKE**](#gt_internet-key-exchange-ike) goes into DoS protection under the condition described in section [3.9.7](#Section_3.5.7).
 
 Using the notation, as specified in [[RFC2408]](https://go.microsoft.com/fwlink/?LinkId=90348) section 4.1.1, the generalized form of an IKE [**exchange**](#gt_exchange) using the DoS Protection extension is as shown in the following figure. For more information, see [[RFC2409]](https://go.microsoft.com/fwlink/?LinkId=90349) section 5.
 
@@ -1968,7 +1968,7 @@ DoS Protection mode state: [**responder (1)**](#gt_c37f09fa-24c8-4fd5-8edd-2c5e5
 
 - A cookie field consisting of random data.
 - A cookie timeout period, initialized to 150 secs.
-This state is used by the cookie generation algorithm that is described in section [3.9.5.1](#Section_3.6.5.1).
+This state is used by the cookie generation algorithm that is described in section [3.9.5.1](#Section_3.3.5.1).
 
 <a id="Section_3.9.2"></a>
 ### 3.9.2 Timers
@@ -2212,7 +2212,7 @@ When this extension is implemented, the following additional state SHOULD<33> be
 
 [**Main mode security association database (MMSAD)**](#gt_main-mode-security-association-database-mmsad): The entry for each [**MM SA**](#gt_main-mode-security-association-mm-sa) contains the following fast-failover client-specific data elements:
 
-- InboundPacketTimeStamp: 1 octet, type: unsigned integer. A time stamp field that is present if the [**SA**](#gt_security-association-sa) has the Fast Failover flag set as described in section [3.5.1](#Section_3.14.1).
+- InboundPacketTimeStamp: 1 octet, type: unsigned integer. A time stamp field that is present if the [**SA**](#gt_security-association-sa) has the Fast Failover flag set as described in section [3.5.1](#Section_3.12.1).
 - A DeadPeerDetection flag: A flag that indicates whether the current SA is in dead peer detection mode.
 <a id="Section_3.12.2"></a>
 ### 3.12.2 Timers
@@ -2464,7 +2464,7 @@ The IKE header prepended to the IKE Fragment messages is taken from the original
 <a id="Section_3.15.6"></a>
 ### 3.15.6 Timer Events
 
-As specified in section [3.3.6](#Section_3.7.6).
+As specified in section [3.3.6](#Section_3.2.6).
 
 <a id="Section_3.15.7"></a>
 ### 3.15.7 Other Local Events
@@ -2921,7 +2921,7 @@ concatenated with localAddr concatenated with curTime)
 
 Compute cookie as the first 8 bytes of tempCookie
 
-<28> Section 3.9.5.3: The Windows implementation checks the validity of the **Responder Cookie** field by regenerating the cookie using the algorithm specified in section [3.9.5.1](#Section_3.6.5.1). The algorithm is as follows.
+<28> Section 3.9.5.3: The Windows implementation checks the validity of the **Responder Cookie** field by regenerating the cookie using the algorithm specified in section [3.9.5.1](#Section_3.3.5.1). The algorithm is as follows.
 
 Set RCookie to the cookie field from message #2
 

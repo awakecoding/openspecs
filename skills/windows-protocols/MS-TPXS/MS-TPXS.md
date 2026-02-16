@@ -181,7 +181,7 @@ The **req** (request) element is the topmost element of a client-to-server reque
 <a id="Section_2.1.1.1"></a>
 #### 2.1.1.1 tlm
 
-The **tlm** (telemetry) element is the namespace of the requested service. The **tlm** element is a child element of [req](#Section_2.1.1).
+The **tlm** (telemetry) element is the namespace of the requested service. The **tlm** element is a child element of [req](#Section_2.1.1.1.2.2).
 
 <xs:element name="tlm">
 
@@ -632,7 +632,7 @@ The **resp** (response) element describes a server response to a client request.
 <a id="Section_2.2.1.1.1.1.1"></a>
 namespace
 
-The **namespace** element is echoed back from the telemetry request message **req** (section [2.1.1](#Section_2.1.1)) unaltered. **namespace** is a child element of resp. See the telemetry request message **namespace** element as specified in section [2.1.1.1.2.2.1](#Section_2.1.1.1.2.2.1).
+The **namespace** element is echoed back from the telemetry request message **req** (section [2.1.1](#Section_2.1.1.1.2.2)) unaltered. **namespace** is a child element of resp. See the telemetry request message **namespace** element as specified in section [2.1.1.1.2.2.1](#Section_2.1.1.1.2.2.1).
 
 <xs:element name="namespace" minOccurs="1" maxOccurs="1">
 

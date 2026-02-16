@@ -521,8 +521,8 @@ The following HTTP methods are allowed to be performed on this resource.
 
 | HTTP method | Section | Description |
 | --- | --- | --- |
-| POST | [3.1.5.1.1](#Section_3.1.5.1.1.1) | Create a new device object. |
-| DELETE | [3.1.5.1.2](#Section_3.1.5.1.2) | Remove a device object. |
+| POST | [3.1.5.1.1](#Section_3.1.5.1.1) | Create a new device object. |
+| DELETE | [3.1.5.1.2](#Section_3.1.5.1.2.3) | Remove a device object. |
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 POST
@@ -693,7 +693,7 @@ The HTTP POST request is processed as follows.
 If any of the claims from the table is not present, or if the value of the claim does NOT match the corresponding value in the table, the server MUST respond to the HTTP POST in the following manner:
 
 - The DRS server responds with an HTTP response with the HTTP status code set to 400 ("Bad Request").
-- The body of the HTTP response contains an ErrorDetails object (section [2.2.3.1](#Section_2.2.3)) that provides the client with additional, implementation-specific information about the error.
+- The body of the HTTP response contains an ErrorDetails object (section [2.2.3.1](#Section_2.2.3.1)) that provides the client with additional, implementation-specific information about the error.
 - The server adds the following [**object identifiers (OIDs)**](#gt_object-identifier-oid) and values to the X.509 certificate request [[RFC4211]](https://go.microsoft.com/fwlink/?LinkId=301568) contained in the CertificateRequest object of the client HTTP request.
 | OID | Value |
 | --- | --- |
@@ -754,7 +754,7 @@ The request body MUST be empty.
 <a id="Section_3.1.5.1.2.2"></a>
 ###### 3.1.5.1.2.2 Response Body
 
-If the DRS server successfully removes the device object from the directory, an HTTP 200 status code ("OK") is returned. If the DRS server does NOT respond to the HTTP DELETE request with the HTTP status code set to 200, the body of the HTTP response MUST contain an ErrorDetails object (section [2.2.3.1](#Section_2.2.3)) that provides the client with additional, implementation-specific information about the error. Otherwise, the response body MUST be empty.
+If the DRS server successfully removes the device object from the directory, an HTTP 200 status code ("OK") is returned. If the DRS server does NOT respond to the HTTP DELETE request with the HTTP status code set to 200, the body of the HTTP response MUST contain an ErrorDetails object (section [2.2.3.1](#Section_2.2.3.1)) that provides the client with additional, implementation-specific information about the error. Otherwise, the response body MUST be empty.
 
 <a id="Section_3.1.5.1.2.3"></a>
 ###### 3.1.5.1.2.3 Processing Details
@@ -805,24 +805,24 @@ None.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-The resource used by the Device Registration Join Protocol, device, is defined in section [3.1.5](#Section_3.2.5).
+The resource used by the Device Registration Join Protocol, device, is defined in section [3.1.5](#Section_3.1.5).
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 device
 
-See section [3.1.5.1](#Section_3.1.5.1).
+See section [3.1.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 POST
 
-See section [3.1.5.1.1](#Section_3.1.5.1.1.1) and subsections.
+See section [3.1.5.1.1](#Section_3.1.5.1.1) and subsections.
 
 When the client receives the response from the server, the X.509 certificate contained in the RawBody property (section [3.1.5.1.1.2](#Section_3.1.5.1.1.2)) must be stored in the SignedDeviceCertificate ADM element (section [3.2.1](#Section_3.1.1)).
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 DELETE
 
-See section [3.1.5.1.2](#Section_3.1.5.1.2) and subsections.
+See section [3.1.5.1.2](#Section_3.1.5.1.2.3) and subsections.
 
 The client must send the X.509 certificate that was stored in the SignedDeviceCertificate ADM element (section [3.2.1](#Section_3.1.1)) as part of client authentication for the DELETE request (section [3.1.5.1.2.3](#Section_3.1.5.1.2.3)).
 
@@ -901,7 +901,7 @@ The following example shows a request to the DRS server to create a device objec
 <a id="Section_4.2"></a>
 ## 4.2 Error Example
 
-The following example shows a request to the DRS server that resulted in an error response (section [2.2.3.1](#Section_2.2.3)).
+The following example shows a request to the DRS server that resulted in an error response (section [2.2.3.1](#Section_2.2.3.1)).
 
 {
 

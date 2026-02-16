@@ -394,7 +394,7 @@ The WDS OS Deployment Protocol MUST support the following opcodes under the OS d
 | --- | --- | --- |
 | WDS_OP_IMG_ENUMERATE 0x00000002 | Authenticated | Enumerate and return the list of [**OS images**](#gt_os-image) available to client machine. See section [2.2.6](#Section_2.2.6). |
 | WDS_OP_LOG_INIT 0x00000003 | Authenticated and Unauthenticated | Provides a unique Transaction ID and severity level for [**status message**](#gt_status-message)s that MUST be logged by the client. See section [2.2.1](#Section_2.2.1). |
-| WDS_OP_LOG_MSG 0x00000004 | Authenticated and Unauthenticated | Logs a status message on the server, specifying status update from client. See section [2.2.2](#Section_3.1.5.2). |
+| WDS_OP_LOG_MSG 0x00000004 | Authenticated and Unauthenticated | Logs a status message on the server, specifying status update from client. See section [2.2.2](#Section_2.2.2). |
 | WDS_OP_GET_CLIENT_UNATTEND 0x00000005 | Authenticated and Unauthenticated | Queries the server for [**deployment agent unattend**](#gt_deployment-agent-unattend). See section [2.2.3](#Section_2.2.3). |
 | WDS_OP_GET_UNATTEND_VARIABLES 0x00000006 | Authenticated | Queries the server for values for variables to be consumed for [**deployed OS**](#gt_deployed-os) Unattend. See section [2.2.4](#Section_2.2.4). |
 | WDS_OP_GET_DOMAIN_JOIN_INFORMATION 0x00000007 | Authenticated | Queries the server to find out if the client SHOULD join a [**domain**](#gt_domain), and the details of the domain to be joined. See section [2.2.5](#Section_2.2.5). |
@@ -436,7 +436,7 @@ This variable MUST be set to a value as given in the following table.
 | WDS_LOG_LEVEL_WARNING 0x00000002 | The client MUST log all status messages for warning and failure conditions. |
 | WDS_LOG_LEVEL_INFO 0x00000003 | The client MUST log all status messages for informational, warning, and failure conditions. |
 
-**TRANSACTION_ID** (**WDSCPL_VAR_WSTRING**): MUST be set to the string value that is used by the client in *WDS_OP_LOG_MSG* opcode (section [2.2.2](#Section_3.1.5.2)) to send status messages to the server.
+**TRANSACTION_ID** (**WDSCPL_VAR_WSTRING**): MUST be set to the string value that is used by the client in *WDS_OP_LOG_MSG* opcode (section [2.2.2](#Section_2.2.2)) to send status messages to the server.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 WDS_OP_LOG_MSG
@@ -543,14 +543,14 @@ This status message does not require any additional variables.
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 WDS_LOG_TYPE_CLIENT_UNATTEND_MODE
 
-This [**status message**](#gt_status-message) is logged to specify if the [**deployment agent**](#gt_deployment-agent) is operating in [**unattended mode**](#gt_unattended-mode). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged to specify if the [**deployment agent**](#gt_deployment-agent) is operating in [**unattended mode**](#gt_unattended-mode). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **UNATTEND_MODE** (**WDSCPL_VAR_ULONG**): MUST be set to 1 if client is operating in unattended mode; otherwise, MUST be set to zero.
 
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 WDS_LOG_TYPE_CLIENT_TRANSFER_START
 
-This [**status message**](#gt_status-message) is logged when the client is starting the download of the files for an [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client is starting the download of the files for an [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **IMAGE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the name of the OS image selected by the client.
 
@@ -561,7 +561,7 @@ This [**status message**](#gt_status-message) is logged when the client is start
 <a id="Section_2.2.2.9"></a>
 #### 2.2.2.9 WDS_LOG_TYPE_CLIENT_TRANSFER_END
 
-This [**status message**](#gt_status-message) is logged when the client has completed the download of the [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client has completed the download of the [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **IMAGE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the name of the OS image selected by the client.
 
@@ -572,7 +572,7 @@ This [**status message**](#gt_status-message) is logged when the client has comp
 <a id="Section_2.2.2.10"></a>
 #### 2.2.2.10 WDS_LOG_TYPE_CLIENT_TRANSFER_DOWNGRADE
 
-This [**status message**](#gt_status-message) is logged when the client fails to download the [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image) using [**multicast transmission**](#gt_multicast-transmission), and is now using an alternate mechanism<3> to download the OS image container files. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client fails to download the [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image) using [**multicast transmission**](#gt_multicast-transmission), and is now using an alternate mechanism<3> to download the OS image container files. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **IMAGE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the name of the OS image selected by the client.
 
@@ -583,7 +583,7 @@ This [**status message**](#gt_status-message) is logged when the client fails to
 <a id="Section_2.2.2.11"></a>
 #### 2.2.2.11 WDS_LOG_TYPE_CLIENT_DOMAINJOINERROR
 
-This [**status message**](#gt_status-message) is logged when the client encounters an error while configuring the [**deployed OS**](#gt_deployed-os) to join an [**Active Directory domain**](#gt_active-directory-domain). The request packet MUST specify the following variables in addition to the variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client encounters an error while configuring the [**deployed OS**](#gt_deployed-os) to join an [**Active Directory domain**](#gt_active-directory-domain). The request packet MUST specify the following variables in addition to the variables specified in section [2.2.2](#Section_2.2.2).
 
 **MACHINE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the computer object name used to configure the deployed OS for the domain join.
 
@@ -608,7 +608,7 @@ This status message does not require any additional variables.
 <a id="Section_2.2.2.14"></a>
 #### 2.2.2.14 WDS_LOG_TYPE_CLIENT_APPLY_STARTED_2
 
-This [**status message**](#gt_status-message) is logged when the client is starting the download of the files for an [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client is starting the download of the files for an [**OS image container**](#gt_os-image-container) that contains the selected [**OS image**](#gt_os-image). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 The [**WDS server**](#gt_wds-server) MAY NOT<4> support this status message. The client MUST first try to log this status message, and on failure MUST fall back to using *WDS_LOG_TYPE_CLIENT_APPLY_STARTED* (section [2.2.2.5](#Section_2.2.2.5)).
 
@@ -619,7 +619,7 @@ The [**WDS server**](#gt_wds-server) MAY NOT<4> support this status message. The
 <a id="Section_2.2.2.15"></a>
 #### 2.2.2.15 WDS_LOG_TYPE_CLIENT_APPLY_FINISHED_2
 
-This [**status message**](#gt_status-message) is logged when the client has finished applying the selected [**OS image**](#gt_os-image) to the client machine. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client has finished applying the selected [**OS image**](#gt_os-image) to the client machine. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 The [**WDS server**](#gt_wds-server) MAY NOT<5> support this status message. The client MUST first try to log this status message and on failure MUST fall back to using *WDS_LOG_TYPE_CLIENT_APPLY_FINISHED* (section [2.2.2.3](#Section_2.2.2.3)).
 
@@ -630,7 +630,7 @@ The [**WDS server**](#gt_wds-server) MAY NOT<5> support this status message. The
 <a id="Section_2.2.2.16"></a>
 #### 2.2.2.16 WDS_LOG_TYPE_CLIENT_DOMAINJOINERROR2
 
-This [**status message**](#gt_status-message) is logged when the client encounters a fatal error while configuring the [**deployed OS**](#gt_deployed-os) to join an [**Active Directory domain**](#gt_active-directory-domain). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client encounters a fatal error while configuring the [**deployed OS**](#gt_deployed-os) to join an [**Active Directory domain**](#gt_active-directory-domain). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **MACHINE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the computer object name that was used to configure the deployed OS image for joining a domain.
 
@@ -643,7 +643,7 @@ The [**WDS server**](#gt_wds-server) MAY NOT support this status message. The cl
 <a id="Section_2.2.2.17"></a>
 #### 2.2.2.17 WDS_LOG_TYPE_CLIENT_DRIVER_PACKAGE_NOT_ACCESSIBLE
 
-This [**status message**](#gt_status-message) is logged when the client is not able to access the [**driver package**](#gt_driver-package) files required to configure the [**deployed OS**](#gt_deployed-os) to use a specific driver package. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client is not able to access the [**driver package**](#gt_driver-package) files required to configure the [**deployed OS**](#gt_deployed-os) to use a specific driver package. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **DRIVER_PACKAGE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the name of the failed driver package.
 
@@ -672,7 +672,7 @@ This status message does not require any additional variables.
 <a id="Section_2.2.2.20"></a>
 #### 2.2.2.20 WDS_LOG_TYPE_CLIENT_OFFLINE_DRIVER_INJECTION_FAILURE
 
-This [**status message**](#gt_status-message) is logged when the client is not able to configure the [**deployed OS**](#gt_deployed-os) to use a specific [**driver package**](#gt_driver-package). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+This [**status message**](#gt_status-message) is logged when the client is not able to configure the [**deployed OS**](#gt_deployed-os) to use a specific [**driver package**](#gt_driver-package). The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **DRIVER_PACKAGE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the name of the failed driver package.
 
@@ -683,7 +683,7 @@ The [**WDS server**](#gt_wds-server) MAY NOT support this status message.<9>
 <a id="Section_2.2.2.21"></a>
 #### 2.2.2.21 WDS_LOG_TYPE_CLIENT_IMAGE_SELECTED2
 
-The [**status message**](#gt_status-message) is logged when the client has selected an [**OS image**](#gt_os-image) for deployment. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+The [**status message**](#gt_status-message) is logged when the client has selected an [**OS image**](#gt_os-image) for deployment. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **IMAGE_NAME** (**WDSCPL_VAR_WSTRING**): MUST be set to the name of the OS image selected by the client.
 
@@ -696,7 +696,7 @@ The [**WDS server**](#gt_wds-server) MAY NOT<10> support this status message. Th
 <a id="Section_2.2.2.22"></a>
 #### 2.2.2.22 WDS_LOG_TYPE_CLIENT_IMAGE_SELECTED3
 
-The [**status message**](#gt_status-message) is logged when the client has selected an [**OS image**](#gt_os-image) for deployment. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_3.1.5.2).
+The [**status message**](#gt_status-message) is logged when the client has selected an [**OS image**](#gt_os-image) for deployment. The request packet MUST specify the following variables in addition to variables specified in section [2.2.2](#Section_2.2.2).
 
 **IMAGE_NAME (WDSCPL_VAR_WSTRING):** MUST be set to the name of the OS image selected by the client.
 
@@ -862,7 +862,7 @@ The request packet MAY<14> include the following:
 | CLIENT_CAP_SUPPORT_V2 0x00000001 | MUST be set if the client supports the version 2.0 format that is used to return information for each OS image. |
 | CLIENT_CAP_SUPPORT_VHDX 0x00000002 | MUST be set if the client is capable of deploying OS images in the VHDX format.<15> |
 
-If the client used WDSDCMGR_OP_QUERY_METADATA to get deployment agent metadata from the server as specified in section [2.2.9](#Section_2.2.9), the client SHOULD<16> include this in the request packet in the following variables:
+If the client used WDSDCMGR_OP_QUERY_METADATA to get deployment agent metadata from the server as specified in section [2.2.9](#Section_3.1.5.8), the client SHOULD<16> include this in the request packet in the following variables:
 
 **IMDC** (**WDSCPL_VAR_ULONG**): MUST specify the same value specified by the Metadata.Count variable in the server's response to WDSDCMGR_OP_QUERY_METADATA.
 
@@ -1022,7 +1022,7 @@ For the following variables, the variable name is generated for each device by r
 
 **Mi.D.VL[index].C.VL[cp_index]** (**WDSCPL_VAR_WSTRING**): MUST be set to the list of compatible IDs for the device. The variable name for each compatible ID is generated by replacing the cp_index in the variable name with a value of zero for the first entry and incrementing it by one for subsequent entries up to (Mi.D.VL[index].C.Cnt - 1).
 
-If the client used WDSDCMGR_OP_QUERY_METADATA to get deployment agent metadata from the server as specified in section [2.2.9](#Section_2.2.9), the client SHOULD<31> include this in the request packet in the following variables:
+If the client used WDSDCMGR_OP_QUERY_METADATA to get deployment agent metadata from the server as specified in section [2.2.9](#Section_3.1.5.8), the client SHOULD<31> include this in the request packet in the following variables:
 
 **MDC** (**WDSCPL_VAR_ULONG**): MUST specify the same value specified by the **Metadata.Count** variable in the server's response to WDSDCMGR_OP_QUERY_METADATA.
 
@@ -1227,7 +1227,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **image store:** Collection of image groups. All files and folders for image groups and OS images in an image group are made available by the server using a network share<35>
 
-**WDS server configuration:** Configuration information for a server, in persistent storage, in the form of (name, value) pairs. The list of metadata information can be found in section [3.1.1.1](#Section_3.1.1.1).
+**WDS server configuration:** Configuration information for a server, in persistent storage, in the form of (name, value) pairs. The list of metadata information can be found in section [3.1.1.1](#Section_3.2.1.1).
 
 **driver package store:** Persistent storage where files and metadata for each [**driver package**](#gt_driver-package) is stored. All files for driver packages are made available by the server using a network share<36>
 
@@ -1352,7 +1352,7 @@ This opcode is used by the client to obtain the Log Level and the unique Transac
 
 The server MUST validate that all required variables are specified in the request packet.
 
-The server MUST generate a unique [**GUID**](#gt_globally-unique-identifier-guid) (as defined in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460)) and return it as the **TRANSACTION_ID** after conversion to a [**Unicode string**](#gt_unicode-string). The server MUST set the *LOGLEVEL* variable to **ClientLoggingLevel** as specified in section [3.1.1.1](#Section_3.1.1.1).
+The server MUST generate a unique [**GUID**](#gt_globally-unique-identifier-guid) (as defined in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460)) and return it as the **TRANSACTION_ID** after conversion to a [**Unicode string**](#gt_unicode-string). The server MUST set the *LOGLEVEL* variable to **ClientLoggingLevel** as specified in section [3.1.1.1](#Section_3.2.1.1).
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 WDS_OP_LOG_MSG
@@ -1361,7 +1361,7 @@ This opcode is used by the clients to send [**status message**](#gt_status-messa
 
 The server MUST validate that all required variables are specified in the request packet.
 
-The server MAY<39> validate that the log level for the status message being logged is consistent with **ClientLoggingLevel** as specified in section [3.1.1.1](#Section_3.1.1.1). The server MUST validate that all required variables for the status message are specified, and add the status message to the status messages log.
+The server MAY<39> validate that the log level for the status message being logged is consistent with **ClientLoggingLevel** as specified in section [3.1.1.1](#Section_3.2.1.1). The server MUST validate that all required variables for the status message are specified, and add the status message to the status messages log.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 WDS_OP_GET_CLIENT_UNATTEND
@@ -1382,7 +1382,7 @@ If the **FIRMWARE** variable is present, the server MAY use the value of the FIR
 
 If unattended instructions are found, the **FLAGS** variable MUST be set to include the WdsCliClientUnattendPresent flag.
 
-If the **OSImageUnattendOverride** (section [3.1.1.1](#Section_3.1.1.1)) is set to TRUE, then the FLAGS variable MUST also include the WdsCliClientUnattendOverride flag.
+If the **OSImageUnattendOverride** (section [3.1.1.1](#Section_3.2.1.1)) is set to TRUE, then the FLAGS variable MUST also include the WdsCliClientUnattendOverride flag.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 WDS_OP_GET_UNATTEND_VARIABLES
@@ -1399,7 +1399,7 @@ The **MACHINEDOMAIN** variable MUST be set to the name of the Active Directory d
 
 If a computer object does not exist in the Active Directory domain, the server MUST set **MACHINENAME** and **MACHINEDOMAIN** to the empty string.
 
-The **TIMESIZE** variable MUST be set to **TimeZone** as specified in section [3.1.1.1](#Section_3.1.1.1).
+The **TIMESIZE** variable MUST be set to **TimeZone** as specified in section [3.1.1.1](#Section_3.2.1.1).
 
 The **ORGNAME** variable MUST be set to **OrganizationName** as specified in section 3.1.1.1.
 
@@ -1425,7 +1425,7 @@ The server MUST set the **FLAGS** variable as follows:
 
 - MUST include WdsCliFlagsAccountExists.
 - MUST include WdsCliFlagJoinDomain if the **JoinDomain** attribute (section [3.1.1.2](#Section_3.1.1.2)) is set to a nonzero value.
-- MUST include WdsCliFlagResetBootProgram if ResetBootProgram is set to TRUE (section [3.1.1.1](#Section_3.1.1.1)).
+- MUST include WdsCliFlagResetBootProgram if ResetBootProgram is set to TRUE (section [3.1.1.1](#Section_3.2.1.1)).
 Remaining variables MUST be set as follows:
 
 - MUST set the **MACHINEOU** variable to a null string.
@@ -1441,7 +1441,7 @@ Otherwise, the computer object information exists in a custom computer data stor
 
 The server MUST set the FLAGS variable as follows:
 
-- MUST include WdsCliFlagJoinDomain if NewMachinesJoinDomain is set to TRUE (section [3.1.1.1](#Section_3.1.1.1)).
+- MUST include WdsCliFlagJoinDomain if NewMachinesJoinDomain is set to TRUE (section [3.1.1.1](#Section_3.2.1.1)).
 - MUST include WdsCliFlagPrestageUsingMAC if PrestageUsingMAC is set to TRUE (section 3.1.1.1).
 The server MUST set the remaining variables as follows:
 
@@ -1458,7 +1458,7 @@ The server MUST validate that all required variables are specified in the reques
 
 The server MUST set the **OPTIONS** variable as follows in the reply packet:
 
-MUST include WdsCliFlagEnumFilterVersion if ImageFilterOnVersion is set to TRUE (section [3.1.1.1](#Section_3.1.1.1)).
+MUST include WdsCliFlagEnumFilterVersion if ImageFilterOnVersion is set to TRUE (section [3.1.1.1](#Section_3.2.1.1)).
 
 MUST include WdsCliFlagEnumFilterFirmware if ImageFilterOnFirmware is set to TRUE (section 3.1.1.1).
 
@@ -1502,7 +1502,7 @@ This opcode is used by the clients to get deployment agent metadata that can be 
 
 The server MUST validate that the client has specified all required variables.
 
-The server MUST validate that all deployment agent metadata strings match the format specified in section [2.2.9](#Section_2.2.9).
+The server MUST validate that all deployment agent metadata strings match the format specified in section [2.2.9](#Section_3.1.5.8).
 
 The server MUST add all required variables to the reply packet.
 
@@ -1541,7 +1541,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Client Configuration**: A temporary storage mechanism where the client stores the configuration information.
 
-**Client Metadata**: Temporary storage which records the deployment agent metadata in the server's response to the WDSDCMGR_OP_QUERY_METADATA opcode. This is a list of strings in the format specified by the ABNF grammar given in section [2.2.9](#Section_2.2.9). The list is initially empty.
+**Client Metadata**: Temporary storage which records the deployment agent metadata in the server's response to the WDSDCMGR_OP_QUERY_METADATA opcode. This is a list of strings in the format specified by the ABNF grammar given in section [2.2.9](#Section_3.1.5.8). The list is initially empty.
 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Client Configuration
@@ -1571,7 +1571,7 @@ None.
 
 The client MUST initialize logging using the opcode specified in [2.2.1](#Section_2.2.1).
 
-The value of the TRANSACTION_ID variable in the reply packet MUST be stored in LogTransactionID (section [3.2.1.1](#Section_3.1.1.1)).
+The value of the TRANSACTION_ID variable in the reply packet MUST be stored in LogTransactionID (section [3.2.1.1](#Section_3.2.1.1)).
 
 The value of the LOGLEVEL variable in the reply packet MUST be stored in LogLevel (section 3.2.1.1).
 
@@ -1587,7 +1587,7 @@ The deployment agent can use the deployment agent metadata in Client Metadata to
 <a id="Section_3.2.3.3"></a>
 #### 3.2.3.3 Status Message: Client Started
 
-The client MUST send WDS_LOG_TYPE_CLIENT_STARTED using [2.2.2](#Section_3.1.5.2), if allowed by LogLevel (section [3.2.1.1](#Section_3.1.1.1)).
+The client MUST send WDS_LOG_TYPE_CLIENT_STARTED using [2.2.2](#Section_2.2.2), if allowed by LogLevel (section [3.2.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1602,7 +1602,7 @@ None.
 
 The client MUST query the server for [**unattended instructions**](#gt_unattended-instructions) for the [**deployment agent**](#gt_deployment-agent) using the *WDS_OP_GET_CLIENT_UNATTEND* opcode (section [2.2.3](#Section_2.2.3)).
 
-The client MUST set **UnattendFlags** (section [3.2.1.1](#Section_3.1.1.1)) to the value of the **FLAGS** variable in the reply packet.
+The client MUST set **UnattendFlags** (section [3.2.1.1](#Section_3.2.1.1)) to the value of the **FLAGS** variable in the reply packet.
 
 If **UnattendFlags** specifies the WdsCliClientUnattendPresent flag, the client MUST set DeploymentAgentUnattend (section 3.2.1.1) to the value of the **CLIENT_UNATTEND** variable.
 
@@ -1613,14 +1613,14 @@ The client MUST log the [**status message**](#gt_status-message) as follows if a
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Getting Credentials
 
-The client MUST get user credentials that are to be used for authentication to the server. If the DeploymentAgentUnattend (section [3.2.1.1](#Section_3.1.1.1)) specifies user credentials, then the [**deployment agent**](#gt_deployment-agent) MUST NOT prompt the user for credentials.
+The client MUST get user credentials that are to be used for authentication to the server. If the DeploymentAgentUnattend (section [3.2.1.1](#Section_3.2.1.1)) specifies user credentials, then the [**deployment agent**](#gt_deployment-agent) MUST NOT prompt the user for credentials.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Getting List of Images
 
 The client MUST query for a list of [**OS images**](#gt_os-image) that are available to the client using WDS_OP_IMG_ENUMERATE (section [2.2.6](#Section_2.2.6)).
 
-If DeploymentAgentUnattend (section [3.2.1.1](#Section_3.1.1.1)) specifies an OS image that is to be deployed, the [**deployment agent**](#gt_deployment-agent) MUST automatically select the specified OS image. No user input MUST be required.
+If DeploymentAgentUnattend (section [3.2.1.1](#Section_3.2.1.1)) specifies an OS image that is to be deployed, the [**deployment agent**](#gt_deployment-agent) MUST automatically select the specified OS image. No user input MUST be required.
 
 If DeploymentAgentUnattend (section 3.2.1.1) does not specify an OS image for deployment, the deployment agent MUST present all available OS images to the user and wait for the user to make a selection.
 
@@ -1631,7 +1631,7 @@ If LogLevel allows logging, the client MUST log the WDS_LOG_TYPE_CLIENT_IMAGE_SE
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Transferring Selected OS Image
 
-If **LogLevel** (section [3.2.1.1](#Section_3.1.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_TRANSFER_START [**status message**](#gt_status-message).
+If **LogLevel** (section [3.2.1.1](#Section_3.2.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_TRANSFER_START [**status message**](#gt_status-message).
 
 The client MUST try to download the SelectedOSImage (section 3.2.1.1) files using [**Multicast Transmission**](#gt_multicast-transmission).
 
@@ -1642,7 +1642,7 @@ If LogLevel (section 3.2.1.1) allows logging, the client MUST log a WDS_LOG_TYPE
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Applying Selected OS Image
 
-If **LogLevel** (section [3.2.1.1](#Section_3.1.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_APPLY_STARTED_2 [**status message**](#gt_status-message). If the attempt to log the message fails, the client MUST log a WDS_LOG_TYPE_CLIENT_APPLY_STARTED status message.
+If **LogLevel** (section [3.2.1.1](#Section_3.2.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_APPLY_STARTED_2 [**status message**](#gt_status-message). If the attempt to log the message fails, the client MUST log a WDS_LOG_TYPE_CLIENT_APPLY_STARTED status message.
 
 The client MUST process the [**OS image container**](#gt_os-image-container) files for SelectedOSImage (section 3.2.1.1) and deploy them to the client machine.
 
@@ -1651,9 +1651,9 @@ When the OS has been deployed, and if **LogLevel** (section 3.2.1.1) allows logg
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Driver Injection
 
-If **LogLevel** (section [3.2.1.1](#Section_3.1.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_OFFLINE_DRIVER_INJECTION_START [**status message**](#gt_status-message).
+If **LogLevel** (section [3.2.1.1](#Section_3.2.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_OFFLINE_DRIVER_INJECTION_START [**status message**](#gt_status-message).
 
-The client MUST query and send a list of all devices installed on the client machine to the server using WDS_OP_GET_MACHINE_DRIVER_PACKAGES (section [2.2.7](#Section_3.1.5.7)).
+The client MUST query and send a list of all devices installed on the client machine to the server using WDS_OP_GET_MACHINE_DRIVER_PACKAGES (section [2.2.7](#Section_2.2.7)).
 
 For each [**driver package**](#gt_driver-package) that is returned by the server, the client MUST configure the [**deployed OS**](#gt_deployed-os) to use the driver package.
 
@@ -1666,7 +1666,7 @@ If **LogLevel** (section 3.2.1.1) allows logging, the client MUST log a WDS_LOG_
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Deployed OS Unattend and Domain Join
 
-If **LogLevel** (section [3.2.1.1](#Section_3.1.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_POST_ACTIONS_START [**status message**](#gt_status-message).
+If **LogLevel** (section [3.2.1.1](#Section_3.2.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_POST_ACTIONS_START [**status message**](#gt_status-message).
 
 The client MUST get [**domain join**](#gt_domain-join) information from the server using WDS_OP_GET_DOMAIN_JOIN_INFORMATION (section [2.2.5](#Section_2.2.5)).
 
@@ -1697,12 +1697,12 @@ If **FLAGS** variable specifies WdsCliFlagsPrestageUsingMAC, the client MUST set
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 Finishing Up
 
-If **LogLevel** (section [3.2.1.1](#Section_3.1.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_FINISHED [**status message**](#gt_status-message).
+If **LogLevel** (section [3.2.1.1](#Section_3.2.1.1)) allows logging, the client MUST log a WDS_LOG_TYPE_CLIENT_FINISHED [**status message**](#gt_status-message).
 
 <a id="Section_3.2.5.9"></a>
 #### 3.2.5.9 Error Handling
 
-When the client encounters a fatal error and is unable to continue, it MUST log a WDS_LOG_TYPE_CLIENT_ERROR [**status message**](#gt_status-message), if allowed by **LogLevel** (section [3.2.1.1](#Section_3.1.1.1)).
+When the client encounters a fatal error and is unable to continue, it MUST log a WDS_LOG_TYPE_CLIENT_ERROR [**status message**](#gt_status-message), if allowed by **LogLevel** (section [3.2.1.1](#Section_3.2.1.1)).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -2017,7 +2017,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <38> Section 3.1.3: Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2 WDS servers do not support the deployment agent metadata Endpoint GUID.
 
-<39> Section 3.1.5.2: The Log Level for a status message being logged is not validated against **ClientLoggingLevel** as specified in section [3.1.1.1](#Section_3.1.1.1).
+<39> Section 3.1.5.2: The Log Level for a status message being logged is not validated against **ClientLoggingLevel** as specified in section [3.1.1.1](#Section_3.2.1.1).
 
 <40> Section 3.1.5.3: The Windows Server 2012 and later WDS server selects unattended instructions specific to the client firmware type when the FIRMWARE variable is specified by the client.
 

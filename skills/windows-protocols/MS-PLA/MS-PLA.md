@@ -621,7 +621,7 @@ The capabilities of the Performance Logs and Alerts Protocol are summarized as f
 
 - Performance Counter Logging (section [3.2.4.6](#Section_3.2.4.6)): The Performance Logs and Alerts Protocol allows users to log performance counters' data of resources on a remote system. A resource can be hardware (for example, CPU, memory) or software (for example, application, process). The logged performance counter data is often useful for the analysis of performance trends and bottlenecks. The PLA Protocol also supports logging performance counter data in a SQL database format (section 3.2.4.6). This option defines the name of an existing SQL database and log set within the database where the performance counter data will be read or written. This file format is useful when collecting and analyzing performance counter data at an enterprise level rather than on a per-computer basis.
 - Event Trace Logging (section [3.2.4.9](#Section_3.2.4.9)): The Performance Logs and Alerts Protocol allows users to log event tracing data of resources on a remote system. The event provider is software that can create event notifications and generate events when certain activities, such as a [**disk**](#gt_disk) I/O operation or a page fault, occur. The application that uses the Performance Logs and Alerts Protocol can enable or disable event providers and selectively log the events of interest into a file.
-- API Trace Logging (section [3.2.4.10](#Section_3.2.4.10.9)): The Performance Logs and Alerts Protocol allows users to log the API call activity of an executable on a remote system. Observing API call activity is useful for the diagnosis of various executable issues (for example, detecting unnecessary API calls.)
+- API Trace Logging (section [3.2.4.10](#Section_3.2.4.10)): The Performance Logs and Alerts Protocol allows users to log the API call activity of an executable on a remote system. Observing API call activity is useful for the diagnosis of various executable issues (for example, detecting unnecessary API calls.)
 - Configuration Data Logging (section [3.2.4.7](#Section_3.2.4.7)): The Performance Logs and Alerts Protocol allows users to log the computer configuration information on a remote system. Readjustment of an incorrect setting is one of the common diagnosis root causes.
 - Alerts (section [3.2.4.8](#Section_3.2.4.8)): The Performance Logs and Alerts Protocol allows users to create alerts based on performance counter values on a remote system. An alert can trigger running a program, logging the alert as an event, or starting another data collection.
 - Data Collector Set (section [3.2.4.1](#Section_3.2.4.1)): The Performance Logs and Alerts Protocol allows users to group multiple logging entities' data collectors and apply operations to them at once. The operations include start (section [3.2.4.1.56](#Section_3.2.4.1.56)), stop (section [3.2.4.1.57](#Section_3.2.4.1.57)), schedule (section [3.2.4.1.20](#Section_3.2.4.1.20)), and configure (section 3.2.4.1).
@@ -638,7 +638,7 @@ This protocol is implemented over DCOM and [**RPC**](#gt_remote-procedure-call-r
 
 It is assumed that a client has obtained the [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of a remote computer that supports the Performance Logs and Alerts Protocol before the protocol is invoked.
 
-It is assumed that the server can delegate the rights of a user to a process when given the correct username and password of the user, both specified as BSTRs. This is required to support the [IDataCollectorSet::SetCredentials](#Section_3.2.4.5) method, which allows a user to save his or her credentials (a username/password pair) in a [**data collector**](#gt_data-collector) set and to have that data collector set run with his or her rights when it is started.
+It is assumed that the server can delegate the rights of a user to a process when given the correct username and password of the user, both specified as BSTRs. This is required to support the [IDataCollectorSet::SetCredentials](#Section_3.2.4.1) method, which allows a user to save his or her credentials (a username/password pair) in a [**data collector**](#gt_data-collector) set and to have that data collector set run with his or her rights when it is started.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -673,15 +673,15 @@ No standards assignments have been received for this protocol. All values used i
 | RPC Interface UUID for IConfigurationDataCollector | 03837514-098b-11d8-9414-505054503030 | As specified in [3.2.4.7](#Section_3.2.4.7) |
 | RPC Interface UUID for IAlertDataCollector | 03837516-098b-11d8-9414-505054503030 | As specified in [3.2.4.8](#Section_3.2.4.8) |
 | RPC Interface UUID for ITraceDataCollector | 0383750b-098b-11d8-9414-505054503030 | As specified in [3.2.4.9](#Section_3.2.4.9) |
-| RPC Interface UUID for IApiTracingDataCollector | 0383751a-098b-11d8-9414-505054503030 | As specified in [3.2.4.10](#Section_3.2.4.10.9) |
+| RPC Interface UUID for IApiTracingDataCollector | 0383751a-098b-11d8-9414-505054503030 | As specified in [3.2.4.10](#Section_3.2.4.10) |
 | RPC Interface UUID for ITraceDataProvider | 03837512-098b-11d8-9414-505054503030 | As specified in [3.2.4.11](#Section_3.2.4.11) |
 | RPC Interface UUID for ISchedule | 0383753a-098b-11d8-9414-505054503030 | As specified in [3.2.4.12](#Section_3.2.4.12) |
 | RPC Interface UUID for ITraceDataProviderCollection | 03837510-098b-11d8-9414-505054503030 | As specified in [3.2.4.13](#Section_3.2.4.13) |
 | RPC Interface UUID for IScheduleCollection | 0383753d-098b-11d8-9414-505054503030 | As specified in [3.2.4.14](#Section_3.2.4.14) |
 | RPC Interface UUID for IDataCollectorCollection | 03837502-098b-11d8-9414-505054503030 | As specified in [3.2.4.15](#Section_3.2.4.15) |
-| RPC Interface UUID for IDataCollectorSetCollection | 03837524-098b-11d8-9414-505054503030 | As specified in [3.2.4.16](#Section_3.2.4.16) |
+| RPC Interface UUID for IDataCollectorSetCollection | 03837524-098b-11d8-9414-505054503030 | As specified in [3.2.4.16](#Section_3.2.4.16.2) |
 | RPC Interface UUID for IValueMapItem | 03837533-098b-11d8-9414-505054503030 | As specified in [3.2.4.17](#Section_3.2.4.18.14) |
-| RPC Interface UUID for IValueMap | 03837534-098b-11d8-9414-505054503030 | As specified in [3.2.4.18](#Section_3.2.4.17.9) |
+| RPC Interface UUID for IValueMap | 03837534-098b-11d8-9414-505054503030 | As specified in [3.2.4.18](#Section_3.2.4.18.8) |
 
 <a id="Section_2"></a>
 # 2 Messages
@@ -717,7 +717,7 @@ Note that the preceding HRESULTs are necessarily returned from the specified PLA
 
 | Return value/code | Description |
 | --- | --- |
-| 0x80300002 PLA_E_DCS_NOT_FOUND | The [**data collector set**](#gt_data-collector-set) was not found. This HRESULT can be returned from the following methods: [IDataCollectorSet::Commit](#Section_3.2.4.5): Name does not refer to an existing data collector set, and mode is set to plaModify. [IDataCollectorSet::Query](#Section_3.2.4.5): Name does not refer to an existing data collector set. [IDataCollector::DataCollectorSet(Get)](#Section_3.2.4.5): Data collector was never added to a data collector set. [IDataCollectorSet::LatestOutputLocation](#Section_3.2.4.5): Data collector was never added to a data collector set or it was removed from a data collector set. [IDataCollectorSet::Delete](#Section_3.2.4.5): IDataCollectorSet::Commit was not called on the data collector set. |
+| 0x80300002 PLA_E_DCS_NOT_FOUND | The [**data collector set**](#gt_data-collector-set) was not found. This HRESULT can be returned from the following methods: [IDataCollectorSet::Commit](#Section_3.2.4.1): Name does not refer to an existing data collector set, and mode is set to plaModify. [IDataCollectorSet::Query](#Section_3.2.4.1): Name does not refer to an existing data collector set. [IDataCollector::DataCollectorSet(Get)](#Section_3.2.4.5): Data collector was never added to a data collector set. [IDataCollectorSet::LatestOutputLocation](#Section_3.2.4.5): Data collector was never added to a data collector set or it was removed from a data collector set. [IDataCollectorSet::Delete](#Section_3.2.4.1): IDataCollectorSet::Commit was not called on the data collector set. |
 | 0x803000AA PLA_E_DCS_IN_USE | The data collector set or one of its dependencies is already in use. This HRESULT can be returned from the following method: [IDataCollectorSet::Start](#Section_3.2.4.1.56): Data collector set is already started. |
 | 0x803000B7 PLA_E_DCS_ALREADY_EXISTS | The data collector set already exists. This HRESULT can be returned from the following method: IDataCollectorSet::Commit: The data collector set already exists, and mode is set to CreateNew. |
 | 0x00300100 PLA_S_PROPERTY_IGNORED | The property value will be ignored. |
@@ -729,7 +729,7 @@ Note that the preceding HRESULTs are necessarily returned from the specified PLA
 | 0x80300109 PLA_E_DC_ALREADY_EXISTS | The [**data collector**](#gt_data-collector) already exists. This HRESULT can be returned from the following method: [IDataCollectorCollection::Add](#Section_3.2.4.5): Data collector collection already contains a data collector with the same name. |
 | 0x8030010A PLA_E_DCS_START_WAIT_TIMEOUT | The wait for the data collector set start notification has timed out. This HRESULT can be returned from the following method: IDataCollectorSet::Start: Synchronous start was requested but the request timed out. |
 | 0x8030010D PLA_E_NO_DUPLICATES | Duplicate items are not allowed. This HRESULT can be returned from the following methods: [IConfigurationDataCollector::RegistryKeys(Put)](#Section_3.2.4.7): Duplicate registry keys are specified in the RegistryKeys property. [IPerformanceCounterDataCollector::PerformanceCounters(Put)](#Section_3.2.4.6): Duplicate performance counters are specified in the PerformanceCounters property. [ITraceDataProviderCollection::Add](#Section_3.2.4.13): Duplicate providers are specified in the collection. [IDataCollector::Xml(Get)](#Section_3.2.4.5.21): Duplicate providers are specified in the collection. [IDataCollector::SetXml](#Section_3.2.4.5.22): Duplicate providers are specified in the collection. |
-| 0x8030010E PLA_E_EXE_FULL_PATH_REQUIRED | When specifying the executable file that needs to be traced, the caller MUST specify a full path to the executable file and not just a file name. This HRESULT can be returned from the following method: [IApiTracingDataCollector](#Section_3.2.4.10.9): IApiTracingDataCollector::ExePath: was not an absolute path. |
+| 0x8030010E PLA_E_EXE_FULL_PATH_REQUIRED | When specifying the executable file that needs to be traced, the caller MUST specify a full path to the executable file and not just a file name. This HRESULT can be returned from the following method: [IApiTracingDataCollector](#Section_3.2.4.10): IApiTracingDataCollector::ExePath: was not an absolute path. |
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Enumerations
@@ -1104,11 +1104,11 @@ plaValidation = 4
 
 **plaFlagArray:** One or more items in the collection can be enabled. An item in the collection represents a 32-bit unsigned value (ULONG). The enabled items are not combined together as they are for the plaFlag type, but rather each item can be retrieved separately.<2>
 
-**plaValidation:** The collection contains a list of HRESULT values that are returned in an IValueMap by the validation process. The validation process occurs when [IDataCollectorSet::Commit](#Section_3.2.4.5) is called. In the validation process, the PLA Protocol analyzes the values of all the properties in the IDataCollectorSet, including the values of the IDataCollectors contained in the IDataCollectorSet and inserts a [ValueMapItem](#Section_3.2.4.18.14) into the [ValueMap](#Section_3.2.4.17.9) for any property that is problematic. The ValueMapItem holds the name of the property and the HRESULT describing why it is problematic. The following codes can be set in a validation ValueMap:
+**plaValidation:** The collection contains a list of HRESULT values that are returned in an IValueMap by the validation process. The validation process occurs when [IDataCollectorSet::Commit](#Section_3.2.4.1) is called. In the validation process, the PLA Protocol analyzes the values of all the properties in the IDataCollectorSet, including the values of the IDataCollectors contained in the IDataCollectorSet and inserts a [ValueMapItem](#Section_3.2.4.18.14) into the [ValueMap](#Section_3.2.4.18.8) for any property that is problematic. The ValueMapItem holds the name of the property and the HRESULT describing why it is problematic. The following codes can be set in a validation ValueMap:
 
 | Name/value | Description |
 | --- | --- |
-| PLA_S_PROPERTY_IGNORED/(0x00300100) | This value can be returned anytime the value of a property is being ignored by this implementation of the protocol. The code is intended to inform the client when a property is not needed or supported by an implementation. The following is a list of properties for the different types of data collectors (that are encapsulated within a data collector set) that MUST be ignored by the server when the client calls the Commit method on the data collector set; the server MUST return the property name and PLA_S_PROPERTY_IGNORED in the IValueMapItem for each property that it ignored. Note that certain properties can pertain to the base DataCollector interface. If there is no task specified, the TaskArguments property of the DataCollectorSet MUST be ignored. If the SubdirectoryFormat property is not set to plaPattern, the SubdirectoryFormatPattern property is ignored. For the base DataCollector, if the SegmentMaxSize property is zero and LogCircular is false, LogCircular is ignored. If the LogOverwrite property is true or the LogCircular is true, and the LogAppend property is false, LogAppend is ignored. For the AlertDataCollector data collector, the following properties MUST be ignored: FileName, FileNameFormat, FileNameFormatPattern, LogAppend, LogCircular, and LogOverwrite. For the ApiTracingDataCollector data collector, the following properties MUST be ignored: FileNameFormat, FileNameFormatPattern, LogAppend, and LogOverwrite. For the ApiTracingDataCollector data collector, the following properties MUST be ignored: FileName and LogCircular. <3> For the ConfigurationDataCollector data collector, the following properties MUST be ignored: LogCircular and LogAppend. For the PerformanceCounterDataCollector data collector, the following properties MUST be ignored if the LogFileFormat property is set to plaSql: LogCircular, LogOverwrite, and LogAppend. LogAppend is also returned if the LogFileFormat property is set to plaTabSeparated or plaCommaSeparated. For the TraceDataCollector data collector, the following properties MUST be ignored if the StreamMode is not plaFile: FileName, LogAppend, LogCircular, LogOverwrite, FileNameFormat, and FileNameFormatPattern. For TraceSession, the following properties MUST be ignored: RootPath, Duration, Description, Keywords, Segment, SegmentMaxDuration, SerialNumber, Subdirectory, SubdirectoryFormat, SubdirectoryFormatPattern, Task, Schedules, TraceDataCollector[1]/FileNameFormat, TraceDataCollector[1]/FileNameFormatPattern, and TraceDataCollector[1]/LogOverwrite. If IDataCollectorSet::Commit() with the flag plaUpdateRunningInstance set is called on an IDataCollectorSet of type TraceSession, as specified in section [3.2.1](#Section_3.1.1), the following properties MUST be ignored: TraceDataCollector[1]/BufferSize, TraceDataCollector[1]/MinimumBuffers, TraceDataCollector[1]/NumberOfBuffers, TraceDataCollector[1]/ClockType, TraceDataCollector[1]/ProcessMode, TraceDataCollector[1]/PreallocateFile, and SegmentMaxSize. |
+| PLA_S_PROPERTY_IGNORED/(0x00300100) | This value can be returned anytime the value of a property is being ignored by this implementation of the protocol. The code is intended to inform the client when a property is not needed or supported by an implementation. The following is a list of properties for the different types of data collectors (that are encapsulated within a data collector set) that MUST be ignored by the server when the client calls the Commit method on the data collector set; the server MUST return the property name and PLA_S_PROPERTY_IGNORED in the IValueMapItem for each property that it ignored. Note that certain properties can pertain to the base DataCollector interface. If there is no task specified, the TaskArguments property of the DataCollectorSet MUST be ignored. If the SubdirectoryFormat property is not set to plaPattern, the SubdirectoryFormatPattern property is ignored. For the base DataCollector, if the SegmentMaxSize property is zero and LogCircular is false, LogCircular is ignored. If the LogOverwrite property is true or the LogCircular is true, and the LogAppend property is false, LogAppend is ignored. For the AlertDataCollector data collector, the following properties MUST be ignored: FileName, FileNameFormat, FileNameFormatPattern, LogAppend, LogCircular, and LogOverwrite. For the ApiTracingDataCollector data collector, the following properties MUST be ignored: FileNameFormat, FileNameFormatPattern, LogAppend, and LogOverwrite. For the ApiTracingDataCollector data collector, the following properties MUST be ignored: FileName and LogCircular. <3> For the ConfigurationDataCollector data collector, the following properties MUST be ignored: LogCircular and LogAppend. For the PerformanceCounterDataCollector data collector, the following properties MUST be ignored if the LogFileFormat property is set to plaSql: LogCircular, LogOverwrite, and LogAppend. LogAppend is also returned if the LogFileFormat property is set to plaTabSeparated or plaCommaSeparated. For the TraceDataCollector data collector, the following properties MUST be ignored if the StreamMode is not plaFile: FileName, LogAppend, LogCircular, LogOverwrite, FileNameFormat, and FileNameFormatPattern. For TraceSession, the following properties MUST be ignored: RootPath, Duration, Description, Keywords, Segment, SegmentMaxDuration, SerialNumber, Subdirectory, SubdirectoryFormat, SubdirectoryFormatPattern, Task, Schedules, TraceDataCollector[1]/FileNameFormat, TraceDataCollector[1]/FileNameFormatPattern, and TraceDataCollector[1]/LogOverwrite. If IDataCollectorSet::Commit() with the flag plaUpdateRunningInstance set is called on an IDataCollectorSet of type TraceSession, as specified in section [3.2.1](#Section_3.2.1), the following properties MUST be ignored: TraceDataCollector[1]/BufferSize, TraceDataCollector[1]/MinimumBuffers, TraceDataCollector[1]/NumberOfBuffers, TraceDataCollector[1]/ClockType, TraceDataCollector[1]/ProcessMode, TraceDataCollector[1]/PreallocateFile, and SegmentMaxSize. |
 | PLA_E_PROPERTY_CONFLICT/(0x80300101) | This value can be returned anytime two properties are in conflict. This code can be returned for the following properties under the following conditions: IApiTracingDataCollector::ExePath: Returned when ExePath is equal to the empty string. IDataCollector::FileNameFormatPattern: Returned when IDataCollector::FileNameFormat is equal to plaPattern and FileNameFormatPattern is equal to the empty string. IDataCollector::LogCircular: Returned when IDataCollectorSet::SegmentMaxSize is equal to 0 and LogCircular is equal to true. IDataCollector::LogAppend: Returned when either IDataCollector::LogCircular is true or IDataCollector::LogOverwrite is true and LogAppend is true. IPerformanceCounterDataCollector::DataSourceName: Returned when DataSourceName is equal to the empty string and IPerformanceCounterDataCollector::LogFileFormat is set to plaSql. ITraceDataCollector::MaximumBuffers: Returned when MaximumBuffers is less than ITraceDataCollector::MinimumBuffers.<4> ITraceDataCollector::TraceDataProviders: Returned if ITraceDataProviderCollection::Count is greater than 1 and isKernelTrace is TRUE. ITraceDataCollector::Guid: Returned if isKernelTrace is true and the specific PLA-UID does not match the kernel PLA-UID.<5> |
 | PLA_E_EXE_FULL_PATH_REQUIRED/0x8030010E) | This value can be returned anytime a relative path, with respect to the current working directory, to a file is provided when a full path is required. This code can be returned for the following properties under the following conditions: IApiTracingDataCollector::ExePath: Returned when the provided path is relative to the current working directory instead of absolute. |
 | PLA_E_EXE_PATH_NOT_VALID/(0x80300108) | This value can be returned when the executable referenced by the ExePath property for an IApiTracingDataCollector does not exist. This code can be returned for the following properties under the following conditions: IApiTracingDataCollector::ExePath: Returned when the executable referenced by the ExePath property does not exist. |
@@ -3076,14 +3076,14 @@ Before a provider raises an event to the sessions to which it is enabled, the pr
 
 After a trace provider is registered with [**ETW**](#gt_etw), it can be controlled using the PLA protocol. The provider is configured using the [ITraceDataProvider](#Section_3.2.4.11) interface. The ITraceDataProvider is then added to the [ITraceDataProviderCollection](#Section_3.2.4.13) for an ITraceDataProvider by calling [ITraceDataProviderCollection::Add](#Section_3.2.4.13) on the ITraceDataProviderCollection returned from [ITraceDataCollector::get_TraceDataProviders](#Section_3.2.4.9).
 
-Next, the ITraceDataCollector is added to the [IDataCollectorCollection](#Section_3.2.4.15) for an [IDataCollectorSet](#Section_3.2.4.1) by calling [IDataCollectorCollection::Add](#Section_3.2.4.5) on the IDataCollectorCollection returned from [IDataCollectorSet::get_DataCollectors](#Section_3.2.4.5).
+Next, the ITraceDataCollector is added to the [IDataCollectorCollection](#Section_3.2.4.15) for an [IDataCollectorSet](#Section_3.2.4.1) by calling [IDataCollectorCollection::Add](#Section_3.2.4.5) on the IDataCollectorCollection returned from [IDataCollectorSet::get_DataCollectors](#Section_3.2.4.1).
 
 Finally, the trace provider is enabled by calling [IDataCollectorSet::Start](#Section_3.2.4.1.56) and can then be disabled by calling [IDataCollectorSet::Stop](#Section_3.2.4.1.57).
 
 <a id="Section_2.2.12.1"></a>
 #### 2.2.12.1 Configuring the Trace Provider with ITraceDataProvider
 
-The [ITraceDataProvider](#Section_3.2.4.11) needs to be provided with the PLA-UID of the registered trace provider in order to enable that provider. To set the [**PLA-UID**](#gt_performance-logs-and-alerts-unique-identifier-pla-uid) of the ITraceDataProvider, [ITraceDataProvider::put_GUID()](#Section_3.2.4.11) needs to be called. The ITraceDataProvider can additionally be used to configure the KeywordsAny, KeywordsAll, Level, and FilterData for the provider. KeywordsAny, KeywordsAll, and Level can all be set by calling [IValueMap::put_Value](#Section_3.2.4.18) on the [IValueMap](#Section_3.2.4.17.9) returned from the appropriate function ([ITraceDataProvider::get_KeywordsAny](#Section_2.2.11.1.2), [ITraceDataProvider::get_KeywordsAll](#Section_2.2.11.1.2), and [ITraceDataProvider::get_Level](#Section_3.2.4.11)). The FilterData for the provider can be provided by calling [ITraceDataProvider::put_FilterEnabled](#Section_3.2.4.11) and calling ITraceDataProvider::put_FilterEnabled. Alternatively, all the properties of the ITraceDataProvider (including PLA-UID, level, keywords, and filter data) can be set by calling ITraceDataProvider::SetXml.
+The [ITraceDataProvider](#Section_3.2.4.11) needs to be provided with the PLA-UID of the registered trace provider in order to enable that provider. To set the [**PLA-UID**](#gt_performance-logs-and-alerts-unique-identifier-pla-uid) of the ITraceDataProvider, [ITraceDataProvider::put_GUID()](#Section_3.2.4.11) needs to be called. The ITraceDataProvider can additionally be used to configure the KeywordsAny, KeywordsAll, Level, and FilterData for the provider. KeywordsAny, KeywordsAll, and Level can all be set by calling [IValueMap::put_Value](#Section_3.2.4.18) on the [IValueMap](#Section_3.2.4.18.8) returned from the appropriate function ([ITraceDataProvider::get_KeywordsAny](#Section_2.2.11.1.2), [ITraceDataProvider::get_KeywordsAll](#Section_2.2.11.1.2), and [ITraceDataProvider::get_Level](#Section_3.2.4.11)). The FilterData for the provider can be provided by calling [ITraceDataProvider::put_FilterEnabled](#Section_3.2.4.11) and calling ITraceDataProvider::put_FilterEnabled. Alternatively, all the properties of the ITraceDataProvider (including PLA-UID, level, keywords, and filter data) can be set by calling ITraceDataProvider::SetXml.
 
 <a id="Section_2.2.13"></a>
 ### 2.2.13 Performance Counter
@@ -3104,12 +3104,12 @@ Performance counters that are exposed by a performance counter provider are grou
 <a id="Section_2.2.13.2"></a>
 #### 2.2.13.2 Performance Counter Consumer
 
-A performance counter consumer collects the values of one or more performance counters that are exposed by one or more performance counter providers. When a performance counter consumer wishes to query for performance data, it will provide the path to the performance counter in the format specified in section [2.2.10](#Section_2.2.13). For reference, it is duplicated here: \\Computer\PerfObject(ParentInstance/ObjectInstance#InstanceIndex)\Counter. Computer can be omitted if the performance counter consumer is querying for local performance counters. The PerfObject refers to the counter set or counter object to which the performance counter belongs. If there are multiple instances of a counter set or object, then the specific instance is specified after the "#" character. Finally, the specific counter that the performance counter consumer is interested in is specified. Note that wildcard characters can also be used when a full reference to either the counter set, counter object, or counter is not available; it can also be used to specify more than one instance. For example, a performance counter consumer would specify "\Process(*)\% Processor Time" to query for the "% Processor Time" counter for each process on the local machine.
+A performance counter consumer collects the values of one or more performance counters that are exposed by one or more performance counter providers. When a performance counter consumer wishes to query for performance data, it will provide the path to the performance counter in the format specified in section [2.2.10](#Section_2.2.10). For reference, it is duplicated here: \\Computer\PerfObject(ParentInstance/ObjectInstance#InstanceIndex)\Counter. Computer can be omitted if the performance counter consumer is querying for local performance counters. The PerfObject refers to the counter set or counter object to which the performance counter belongs. If there are multiple instances of a counter set or object, then the specific instance is specified after the "#" character. Finally, the specific counter that the performance counter consumer is interested in is specified. Note that wildcard characters can also be used when a full reference to either the counter set, counter object, or counter is not available; it can also be used to specify more than one instance. For example, a performance counter consumer would specify "\Process(*)\% Processor Time" to query for the "% Processor Time" counter for each process on the local machine.
 
 <a id="Section_2.2.13.3"></a>
 #### 2.2.13.3 Querying for a Performance Counter with PLA
 
-Clients of the PLA protocol, such as performance counter consumers, can use the PLA protocol to query for the values of performance counters on a target machine. Clients cannot use the PLA Protocol to discover what performance counters are registered on the target machine (such as their XML manifest file was registered on the target machine). Clients can use the PLA Protocol to query for performance counter values once they have established which performance counters to query. Other protocols, such as those specified in [MS-RRP](../MS-RRP/MS-RRP.md) or [MS-PCQ](#Section_2.2.13), can be used to determine which performance counters are available on the target machine. Once a performance counter consumer has determined which performance counters on the target machine are available and of interest, it then specifies this (according to the format specified in section [2.2.10](#Section_2.2.13)) in the [IPerformanceCounterDataCollector::PerformanceCounters](#Section_3.2.4.6) property. The interval at which to query for performance counter values is specified in the [IPerformanceCounterDataCollector::SampleInterval](#Section_3.2.4.6) property. The maximum number of samples to collect is specified in the [IPerformanceCounterDataCollector::SegmentMaxRecords](#Section_3.2.4.6) property.
+Clients of the PLA protocol, such as performance counter consumers, can use the PLA protocol to query for the values of performance counters on a target machine. Clients cannot use the PLA Protocol to discover what performance counters are registered on the target machine (such as their XML manifest file was registered on the target machine). Clients can use the PLA Protocol to query for performance counter values once they have established which performance counters to query. Other protocols, such as those specified in [MS-RRP](../MS-RRP/MS-RRP.md) or [MS-PCQ](#Section_2.2.13), can be used to determine which performance counters are available on the target machine. Once a performance counter consumer has determined which performance counters on the target machine are available and of interest, it then specifies this (according to the format specified in section [2.2.10](#Section_2.2.10)) in the [IPerformanceCounterDataCollector::PerformanceCounters](#Section_3.2.4.6) property. The interval at which to query for performance counter values is specified in the [IPerformanceCounterDataCollector::SampleInterval](#Section_3.2.4.6) property. The maximum number of samples to collect is specified in the [IPerformanceCounterDataCollector::SegmentMaxRecords](#Section_3.2.4.6) property.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -3147,7 +3147,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with a nonzero conformant value, as specified in [MS-RPCE] section 3.
 
-A list of full interfaces is specified in section [3.2.4](#Section_3.2.4).
+A list of full interfaces is specified in section [3.2.4](#Section_3.1.4).
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Processing Server Replies to Method Calls
@@ -3172,11 +3172,11 @@ No other special events require special processing on the client.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-A [**data collector set**](#gt_data-collector-set) is the basic unit that describes all aspects of data collection, management and reporting. It includes the list of [**data collectors**](#gt_data-collector), scheduling data, [**data management**](#gt_data-management) policies, and reporting configuration. Section [3.2.4](#Section_3.2.4) specifies all the interfaces.
+A [**data collector set**](#gt_data-collector-set) is the basic unit that describes all aspects of data collection, management and reporting. It includes the list of [**data collectors**](#gt_data-collector), scheduling data, [**data management**](#gt_data-management) policies, and reporting configuration. Section [3.2.4](#Section_3.1.4) specifies all the interfaces.
 
 Data collector sets are categorized into four different categories; each category references a particular group of data collector sets. A client exercises the PLA protocol by specifying the category of the data collector set it wants to create or control on the server. From the server perspective, the category of the data collector set dictates how it ought to execute the data collector set. The categories are defined as follows:
 
-- SystemDataCollectorSet: This is a specific category of data collector sets that MUST run either in the context that is specified through the [IDataCollectorSet::SetCredential](#Section_3.2.4.5) method or in the context of the client; if no user is specified by the IDataCollectorSet::SetCredential method which has been called, then this category of data collector sets will run at the highest permission level on the server. This category of data collector sets can include the TraceDataCollector, PerformanceCounterDatacollector, ConfigurationDataCollector, and ApiTracingDataCollector; the methods of the [IDataManager](#Section_3.2.4.2) can also be used to manage the data that is generated by these data collectors. These constituent data collectors can be started, stopped, and queried by a client. However, a client cannot modify any properties of these constituent data collectors; the [IDataCollectorSet::Commit](#Section_3.2.4.5) method MUST return E_NOTIMPL.
+- SystemDataCollectorSet: This is a specific category of data collector sets that MUST run either in the context that is specified through the [IDataCollectorSet::SetCredential](#Section_3.2.4.1) method or in the context of the client; if no user is specified by the IDataCollectorSet::SetCredential method which has been called, then this category of data collector sets will run at the highest permission level on the server. This category of data collector sets can include the TraceDataCollector, PerformanceCounterDatacollector, ConfigurationDataCollector, and ApiTracingDataCollector; the methods of the [IDataManager](#Section_3.2.4.2) can also be used to manage the data that is generated by these data collectors. These constituent data collectors can be started, stopped, and queried by a client. However, a client cannot modify any properties of these constituent data collectors; the [IDataCollectorSet::Commit](#Section_3.2.4.1) method MUST return E_NOTIMPL.
 - ServerDataCollectorSet: This category of data collector sets supports all of the capabilities that are exposed by the [IDataCollectorSet](#Section_3.2.4.1) and its derived classes. Clients can use this category to create and delete data collector sets on the server that include the TraceDataCollector, PerformanceCounterDataCollector, ConfigurationDataCollector, and ApiTracingDataCollector. In addition, the methods of the IDataManager interface can be used to manage the data that is generated by the constituent data collectors.
 - TraceSession: This category references the TraceSession data collector set that is used to control the collection of event traces on the server; the TraceSession data collector set MUST contain a trace data collector. A client can use the PLA protocol to create and control the TraceSession data collector set on the server. However, information about the data collector sets MUST NOT be persisted across server reboots. Moreover, the TraceSession data collector set MUST ignore the segmentation propreties of IDataCollectorSet as well as the [ISchedule](#Section_3.2.4.12) and IDataManager properties. Please see section [2.2.2.11](#Section_2.2.2.11) for specific properties that are ignored by the TraceSession data collector set. Note that although this functionality can be achieved by using the ServerDataCollectorSet class, the TraceSession class provides a "lightweight" mechanism to control the TraceSession data collector set.
 - BootTraceSession: This category references a TraceSession data collector set that MUST be started by the server automatically during boot; the TraceSession data collector set MUST contain a trace data collector. A client can use the PLA protocol to create the data collector set; however, if a client attempts to start the data collector set, the server MUST return E_NOTIMPL because the data collector set can only be started upon reboot. Moreover, the server MUST return E_NOTIMPL if the client tries to stop the data collector set once it has started. The BootTraceSession data collector set MUST ignore the same properties that are ignored by the TraceSession data collector set; please see section 2.2.2.11 for these specific properties.
@@ -3244,7 +3244,7 @@ Objects that implement this interface represent a data collector set. The follow
 | SerialNumber | RW | The serial number of the data collector set. Each time the data collector set runs it is assigned a serial number. The serial number for each data collector set starts at 1 and is incremented each time the data collector set runs. Each run of the data collector set has a serial number that is unique across all runs of the data collector set. Accordingly, each run of the data collector set has its own serial number and no two runs of the same data collector set have the same serial number. However, it is possible that two different runs of two different data collector sets will have the same serial number (the serial number is unique among all runs of one data collector set; it is not unique among all runs of all data collector sets). The serial number can optionally be used by an [AutoPathFormat](#Section_2.2.2.1), which will cause the serial number to be appended to the name of the directory or files pertaining to each run of the data collector set. Using the serial number as an AutoPathFormat prevents possible collisions in directory or file naming. This property serves as a serial number across all runs of a particular data collector set on a particular machine, not across all data collector sets or all machines. Any unsigned long is a valid value for this property. |
 | Server | R | Name of the server this data collector set belongs to. |
 | Status | R | Status of the data collector set. |
-| StopOnCompletion | RW | Determines whether a data collector set MUST stop when all data collectors complete. A data collector completes when the first segment is collected. The definition of completion depends on the data collector type, and is not generally defined as the point at which the data collector has collected all possible data. For an [IConfigurationDataCollector](#Section_3.2.4.7), completion occurs when all data has been collected. For an [IAlertDataCollector](#Section_3.2.4.8) or [IApiTracingDataCollector](#Section_3.2.4.10.9), completion occurs immediately (that is, no data will be collected if this property is set to true). For an [IPerformanceCounterDataCollector](#Section_3.2.4.6) or [ITraceDataCollector](#Section_3.2.4.11), completion occurs immediately if no limit is set on the output file size or time spent writing to the output file. If there is a maximum file size per output file, or a maximum duration per output file, completion occurs when the data collector has finished writing to the current file. |
+| StopOnCompletion | RW | Determines whether a data collector set MUST stop when all data collectors complete. A data collector completes when the first segment is collected. The definition of completion depends on the data collector type, and is not generally defined as the point at which the data collector has collected all possible data. For an [IConfigurationDataCollector](#Section_3.2.4.7), completion occurs when all data has been collected. For an [IAlertDataCollector](#Section_3.2.4.8) or [IApiTracingDataCollector](#Section_3.2.4.10), completion occurs immediately (that is, no data will be collected if this property is set to true). For an [IPerformanceCounterDataCollector](#Section_3.2.4.6) or [ITraceDataCollector](#Section_3.2.4.11), completion occurs immediately if no limit is set on the output file size or time spent writing to the output file. If there is a maximum file size per output file, or a maximum duration per output file, completion occurs when the data collector has finished writing to the current file. |
 | Subdirectory | RW | Retrieves or sets a base subdirectory of the root path where the next instance of the data collector set will write its logs. |
 | SubdirectoryFormat | RW | Determines what to include in the decoration the subdirectory name. |
 | SubdirectoryFormatPattern | RW | If patterns are to be included in the decoration of subdirectory names, determines the pattern to use. |
@@ -3339,11 +3339,11 @@ Methods in RPC Opnum order:
 
 | Method | Description |
 | --- | --- |
-| [DataCollectors (Get)](#Section_3.2.4.5) | List of data collectors in this data collector set. Opnum: 7 |
+| [DataCollectors (Get)](#Section_3.2.4.1) | List of data collectors in this data collector set. Opnum: 7 |
 | [Duration (Get)](#Section_3.2.4.1.2) | Retrieves the Duration property. Opnum: 8 |
 | [Duration (Put)](#Section_3.2.4.1.3) | Sets the Duration property. Opnum: 9 |
 | [Description (Get)](#Section_3.2.4.1.4) | Retrieves the Description property. Opnum: 10 |
-| [Description (Put)](#Section_3.2.4.1.5) | Sets the Description property. Opnum: 11 |
+| [Description (Put)](#Section_3.2.4.1.54) | Sets the Description property. Opnum: 11 |
 | [DescriptionUnresolved (Get)](#Section_3.2.4.1.6) | Retrieves the DescriptionUnresolved property. Opnum: 12 |
 | [DisplayName (Get)](#Section_3.2.4.1.7) | Retrieves the display name of the data collector set . Opnum: 13 |
 | [DisplayName (Put)](#Section_3.2.4.1.8) | Sets the DisplayName property. Opnum: 14 |
@@ -3365,7 +3365,7 @@ Methods in RPC Opnum order:
 | [SerialNumber (Get)](#Section_3.2.4.1.24) | Retrieves the SerialNumber property. Opnum: 30 |
 | [SerialNumber (Put)](#Section_3.2.4.1.25) | Sets the SerialNumber property. Opnum: 31 |
 | [Server (Get)](#Section_3.2.4.1.26) | Retrieves the Server property. Opnum: 32 |
-| [Status (Get)](#Section_3.2.4.5) | Retrieves the Status property. Opnum: 33 |
+| [Status (Get)](#Section_3.2.4.1) | Retrieves the Status property. Opnum: 33 |
 | [Subdirectory (Get)](#Section_3.2.4.1.28) | Retrieves the Subdirectory property. Opnum: 34 |
 | [Subdirectory (Put)](#Section_3.2.4.1.29) | Sets the Subdirectory property. Opnum: 35 |
 | [SubdirectoryFormat (Get)](#Section_3.2.4.1.30) | Retrieves the SubdirectoryFormat property. Opnum: 36 |
@@ -3390,10 +3390,10 @@ Methods in RPC Opnum order:
 | [StopOnCompletion (Get)](#Section_3.2.4.1.49) | Retrieves the StopOnCompletion property. Opnum: 55 |
 | [StopOnCompletion (Put)](#Section_3.2.4.1.50) | Sets the StopOnCompletion property. Opnum: 56 |
 | [DataManager (Get)](#Section_3.2.4.1.51) | Retrieves the DataManager property. Opnum: 57 |
-| [SetCredentials](#Section_3.2.4.5) | Specifies the user account under which the data collector set runs. Opnum: 58 |
-| [Query](#Section_3.2.4.5) | Loads the properties of a data collector set from storage to memory. Opnum: 59 |
-| [Commit](#Section_3.2.4.5) | Updates, validates, or saves a data collector set or flushes the event trace data collectors of a data collector set. Opnum: 60 |
-| [Delete](#Section_3.2.4.5) | Removes the data collector set from storage if it is not running. Opnum: 61 |
+| [SetCredentials](#Section_3.2.4.1) | Specifies the user account under which the data collector set runs. Opnum: 58 |
+| [Query](#Section_3.2.4.1) | Loads the properties of a data collector set from storage to memory. Opnum: 59 |
+| [Commit](#Section_3.2.4.1) | Updates, validates, or saves a data collector set or flushes the event trace data collectors of a data collector set. Opnum: 60 |
+| [Delete](#Section_3.2.4.1) | Removes the data collector set from storage if it is not running. Opnum: 61 |
 | Start | Manually starts the data collector set. Opnum: 62 |
 | [Stop](#Section_3.2.4.1.57) | Manually stops the data collector set. Opnum: 63 |
 | SetXml | Sets the property values of the data collector set based on an XML file. Opnum: 64 |
@@ -3482,7 +3482,7 @@ The Description (Put) method sets the Description property.
 
 The DescriptionUnresolved (Get) method retrieves the DescriptionUnresolved property.
 
-This method MUST return the description as originally set by the IDataCollectorSet::Description method, as specified in section [3.2.4.1.5](#Section_3.2.4.1.5).
+This method MUST return the description as originally set by the IDataCollectorSet::Description method, as specified in section [3.2.4.1.5](#Section_3.2.4.1.54).
 
 [propget] HRESULT DescriptionUnresolved(
 
@@ -4099,7 +4099,7 @@ The UserAccount (Get) method retrieves the UserAccount property.
 
 );
 
-**user:** Receives the user account under which the [**data collector set**](#gt_data-collector-set) will run. The value of the string that is returned will be that which was passed as a parameter to the [IDataCollectorSet::SetCredentials](#Section_3.2.4.5) method if that method was called after the last [IDataCollectorSet::Query](#Section_3.2.4.5) method was called. If the SetCredentials method was not called, then the string that is returned will be that of the user which the data collector set is registered to run as. In such a case, if the machine is joined to a domain and the user is a member of that domain, then the form of the returned string will be domain\user or user@domain.
+**user:** Receives the user account under which the [**data collector set**](#gt_data-collector-set) will run. The value of the string that is returned will be that which was passed as a parameter to the [IDataCollectorSet::SetCredentials](#Section_3.2.4.1) method if that method was called after the last [IDataCollectorSet::Query](#Section_3.2.4.1) method was called. If the SetCredentials method was not called, then the string that is returned will be that of the user which the data collector set is registered to run as. In such a case, if the machine is joined to a domain and the user is a member of that domain, then the form of the returned string will be domain\user or user@domain.
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -4254,7 +4254,7 @@ CommitMode mode,
 
 **mode:** Supplies the actions to perform. See section [2.2.2.3](#Section_2.2.2.3) for a description of possible actions.
 
-**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.17.9). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects. The client MUST ignore the validation property if the Commit method fails. The validation property will be NULL, and an error code returned, in the case that the data collector set contains an IApiTracingDataCollectorSet and there are array elements that are part of both the IApiTracingDataCollectorSet::IncludeApis array and IApiTracingDataCollectorSet::ExcludeApis array (in other words, there is overlap between the two arrays).
+**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects. The client MUST ignore the validation property if the Commit method fails. The validation property will be NULL, and an error code returned, in the case that the data collector set contains an IApiTracingDataCollectorSet and there are array elements that are part of both the IApiTracingDataCollectorSet::IncludeApis array and IApiTracingDataCollectorSet::ExcludeApis array (in other words, there is overlap between the two arrays).
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -4314,7 +4314,7 @@ HRESULT SetXml(
 
 **xml:** Supplies the XML that contains the properties to set. Each data collector set property has a corresponding XML tag that can be used in this string to set the value of that property. The format of the XML to supply is given in section [3.2.4.1](#Section_3.2.4.1).
 
-**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.17.9). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
+**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -4774,7 +4774,7 @@ HRESULT Run(
 
 **bstrFolder:** Supplies the name of the subfolder where the report will be generated, rules applied, and/or HTML created.
 
-**Errors:** Receives a validation value map, stored as an [IValueMap](#Section_3.2.4.17.9), containing a list of subfolders on which the data manager did not successfully run; each subfolder is represented as an [IValueMapItem](#Section_3.2.4.18.14). The Names property of the IValueMapItem represents the path to a subfolder, while the Values property of the IValueMapItem represents the HRESULT describing the specific problem with that subfolder. The ValueMapType of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11).
+**Errors:** Receives a validation value map, stored as an [IValueMap](#Section_3.2.4.18.8), containing a list of subfolders on which the data manager did not successfully run; each subfolder is represented as an [IValueMapItem](#Section_3.2.4.18.14). The Names property of the IValueMapItem represents the path to a subfolder, while the Values property of the IValueMapItem represents the HRESULT describing the specific problem with that subfolder. The ValueMapType of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11).
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -5484,7 +5484,7 @@ The Xml (Get) method retrieves the XML property.
 
 );
 
-**Xml:** Receives a BSTR that MUST contain an XML description of the [**data collector**](#gt_data-collector) that the client had specified. Each data collector can defined as a set of XML elements; the set of required elements are described in the section of each data collector type: PerformanceDataCollector (section [3.2.4.6](#Section_3.2.4.6)), ConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), AlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), TraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)) and ApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10.9)). The XML elements are also specified in section [3.2.4.19](#Section_3.2.4.19), which contains the set of XML elements required to define all data collector types within a data collector set.
+**Xml:** Receives a BSTR that MUST contain an XML description of the [**data collector**](#gt_data-collector) that the client had specified. Each data collector can defined as a set of XML elements; the set of required elements are described in the section of each data collector type: PerformanceDataCollector (section [3.2.4.6](#Section_3.2.4.6)), ConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), AlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), TraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)) and ApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10)). The XML elements are also specified in section [3.2.4.19](#Section_3.2.4.19), which contains the set of XML elements required to define all data collector types within a data collector set.
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -5501,9 +5501,9 @@ HRESULT SetXml(
 
 );
 
-**Xml:** Supplies a BSTR that MUST contain an XML description of the data collector. Each data collector can defined as a set of XML elements; the set of required elements are described in the section of each data collector type: PerformanceDataCollector (section [3.2.4.6](#Section_3.2.4.6)), ConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), AlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), TraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)) and ApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10.9)). The XML elements are also specified in section [3.2.4.19](#Section_3.2.4.19), which contains the set of XML elements required to define all data collector types within a data collector set.
+**Xml:** Supplies a BSTR that MUST contain an XML description of the data collector. Each data collector can defined as a set of XML elements; the set of required elements are described in the section of each data collector type: PerformanceDataCollector (section [3.2.4.6](#Section_3.2.4.6)), ConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), AlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), TraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)) and ApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10)). The XML elements are also specified in section [3.2.4.19](#Section_3.2.4.19), which contains the set of XML elements required to define all data collector types within a data collector set.
 
-**Validation:** Receives a validation value map with a list of properties for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.17.9). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
+**Validation:** Receives a validation value map with a list of properties for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -6062,7 +6062,7 @@ The following properties MUST be implemented by the objects that implement the I
 
 | Property | Read/write | Description |
 | --- | --- | --- |
-| AlertThresholds | RW | List of Performance Counters to monitor, along with the threshold values which are used to generate alerts. The threshold is specified by appending either a '>' or '<' sign along with a value to the [Performance Counter path](#Section_2.2.13). This defines the threshold to be either greater than or less than the provided value, respectively. |
+| AlertThresholds | RW | List of Performance Counters to monitor, along with the threshold values which are used to generate alerts. The threshold is specified by appending either a '>' or '<' sign along with a value to the [Performance Counter path](#Section_2.2.10). This defines the threshold to be either greater than or less than the provided value, respectively. |
 | EventLog | RW | Specifies whether or not an event MUST be written to the Eventlog each time the value of any counter specified in the AlertThresholds property. If set to true and the threshold is crossed, then the event will be logged; otherwise, if set to false, and even if the threshold is crossed, the event is not logged. <20> |
 | SampleInterval | RW | The time, in seconds, between two consecutive samples. The default value is 15 seconds. The minimum sample interval is 1 second, and there is no maximum sample interval. However, if the sample interval is set to 0xFFFFFFFF, only one sample will ever be collected. |
 | Task | RW | Name of the Task Scheduler job to be executed each time a Performance Counter value crosses the specified threshold. |
@@ -6135,7 +6135,7 @@ The AlertThresholds (Get) method retrieves the AlertThresholds property, as spec
 
 );
 
-**alerts:** Receives an array of BSTRs that contain [Performance Counter Paths](#Section_2.2.13) and thresholds.
+**alerts:** Receives an array of BSTRs that contain [Performance Counter Paths](#Section_2.2.10) and thresholds.
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -6150,7 +6150,7 @@ The AlertThresholds (Put) method sets the AlertThresholds property, as specified
 
 );
 
-**alerts:** Supplies an array of BSTRs that contain [Performance Counter Paths](#Section_2.2.13) and thresholds.
+**alerts:** Supplies an array of BSTRs that contain [Performance Counter Paths](#Section_2.2.10) and thresholds.
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -6392,7 +6392,7 @@ The following properties MUST be implemented by the objects that implement the I
 | Property | Read/write | Description |
 | --- | --- | --- |
 | BufferSize | RW | Specifies the suggested buffer size, in kilobytes (KB), for each event tracing session buffer. The minimum value of the BufferSize property is 1 kilobyte. The maximum value is 1,024 KB. The default value is 8 KB. |
-| BuffersLost | R | Specifies the number of buffers that could not be written to the log file. Any unsigned long is a valid value for this property. This property is only updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) or [IDataCollectorSet::Query](#Section_3.2.4.5) methods are called.<22> |
+| BuffersLost | R | Specifies the number of buffers that could not be written to the log file. Any unsigned long is a valid value for this property. This property is only updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) or [IDataCollectorSet::Query](#Section_3.2.4.1) methods are called.<22> |
 | BuffersWritten | R | If running, specifies the number of buffers written to the log file. Any unsigned long is a valid value for this property. |
 | ClockType | RW | Retrieves or sets the clock resolution to use when logging the time stamp for each event. |
 | EventsLost | R | If running, specifies the number of events that were lost due to the lack of buffers to write to. Any unsigned long is a valid value for this property. This property is only updated when the IDataCollectorSet::Start or IDataCollectorSet::Query methods are called.<23> |
@@ -7208,7 +7208,7 @@ The LogFilePath (Put) method sets the LogFilePath property.
 <a id="Section_3.2.4.10.9"></a>
 ##### 3.2.4.10.9 IncludeModules (Get) (Opnum 40)
 
-The IncludeModules (Get) method retrieves the IncludeModules property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10.9).
+The IncludeModules (Get) method retrieves the IncludeModules property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10).
 
 [propget] HRESULT IncludeModules(
 
@@ -7223,7 +7223,7 @@ The IncludeModules (Get) method retrieves the IncludeModules property, as specif
 <a id="Section_3.2.4.10.10"></a>
 ##### 3.2.4.10.10 IncludeModules (Put) (Opnum 41)
 
-The IncludeModules (Put) method sets the IncludeModules property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10.9).
+The IncludeModules (Put) method sets the IncludeModules property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10).
 
 [propput] HRESULT IncludeModules(
 
@@ -7238,7 +7238,7 @@ The IncludeModules (Put) method sets the IncludeModules property, as specified i
 <a id="Section_3.2.4.10.11"></a>
 ##### 3.2.4.10.11 IncludeApis (Get) (Opnum 42)
 
-The IncludeApis (Get) method retrieves the IncludeApis property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10.9).
+The IncludeApis (Get) method retrieves the IncludeApis property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10).
 
 [propget] HRESULT IncludeApis(
 
@@ -7253,7 +7253,7 @@ The IncludeApis (Get) method retrieves the IncludeApis property, as specified in
 <a id="Section_3.2.4.10.12"></a>
 ##### 3.2.4.10.12 IncludeApis (Put) (Opnum 43)
 
-The IncludeApis (Put) method sets the IncludeApis property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10.9).
+The IncludeApis (Put) method sets the IncludeApis property, as specified in the property table in section [3.2.4.10](#Section_3.2.4.10).
 
 [propput] HRESULT IncludeApis(
 
@@ -7411,7 +7411,7 @@ The Level (Get) method retrieves the Level property, as specified in the propert
 
 );
 
-**ppLevel:** Receives the level. The level is stored as an [IValueMap](#Section_3.2.4.17.9). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppLevel:** Receives the level. The level is stored as an [IValueMap](#Section_3.2.4.18.8). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -7426,7 +7426,7 @@ The KeywordsAny (Get) method retrieves the KeywordsAny property, as specified in
 
 );
 
-**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.17.9). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.18.8). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -7441,7 +7441,7 @@ The KeywordsAll (Get) method retrieves the KeywordsAll property, as specified in
 
 );
 
-**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.17.9). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.18.8). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -7456,7 +7456,7 @@ The Properties (Get) method retrieves the Properties property, as specified in t
 
 );
 
-**ppProperties:** Receives the properties. The properties are stored as an [IValueMap](#Section_3.2.4.17.9). The properties are stored as an IValueMap. The value of the property is stored in the Value property of the IValueMap. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to an individual property. The Names property of the IValueMapItem refers to the property name, while the Values field of the IValueMapItem contains the numerical value of the property. The type of the IValueMap, specified in the [ValueMapType](#Section_2.2.2.11) property, is plaFlag; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppProperties:** Receives the properties. The properties are stored as an [IValueMap](#Section_3.2.4.18.8). The properties are stored as an IValueMap. The value of the property is stored in the Value property of the IValueMap. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to an individual property. The Names property of the IValueMapItem refers to the property name, while the Values field of the IValueMapItem contains the numerical value of the property. The type of the IValueMap, specified in the [ValueMapType](#Section_2.2.2.11) property, is plaFlag; more information can be found in section [2.2.11](#Section_2.2.11).
 
 **Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
 
@@ -7576,7 +7576,7 @@ HRESULT Query(
 
 The Resolve method, given another event trace data provider or a collection of event trace data providers, updates the properties of the original provider with information from one of the passed-in provider(s). If only one provider is passed-in, information from that provider is used. If multiple providers are passed-in, information is used from the first provider in the collection that has the same value for the ITraceDataProvider::Guid property as the original ITraceDataProvider. The Guid in this context refers to the COM interface property which is used as a [**PLA-UID**](#gt_performance-logs-and-alerts-unique-identifier-pla-uid) and does not comply with the semantics of [**GUID**](#gt_globally-unique-identifier-guid) specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
-If no provider from the passed-in collection has the same PLA-UID, the original provider is not updated. If the original provider is updated, the DisplayName property of the original provider is overwritten by the DisplayName of the passed-in provider, and the ValueMapItems in the Level, KeywordsAny, and KeywordsAll properties of the passed-in provider replace the ValueMapItems for the existing Level, KeywordsAny, and KeywordsAll properties of the original provider. However, actual value of the Level, KeywordsAny, and KeywordsAll properties are not overwritten. Consequently, the existing settings are not lost; that is, if the level is 5, the symbolic names of all the levels (which are stored as ValueMapItems) are added, but the value of the level remains as 5. For ValueMaps, see section [3.2.4.18](#Section_3.2.4.17.9).
+If no provider from the passed-in collection has the same PLA-UID, the original provider is not updated. If the original provider is updated, the DisplayName property of the original provider is overwritten by the DisplayName of the passed-in provider, and the ValueMapItems in the Level, KeywordsAny, and KeywordsAll properties of the passed-in provider replace the ValueMapItems for the existing Level, KeywordsAny, and KeywordsAll properties of the original provider. However, actual value of the Level, KeywordsAny, and KeywordsAll properties are not overwritten. Consequently, the existing settings are not lost; that is, if the level is 5, the symbolic names of all the levels (which are stored as ValueMapItems) are added, but the value of the level remains as 5. For ValueMaps, see section [3.2.4.18](#Section_3.2.4.18.8).
 
 Because only one provider is used to update the original provider, there is no possibility for conflicting or duplicate properties.
 
@@ -8037,7 +8037,7 @@ The Item (Get) method retrieves the Item property.
 <a id="Section_3.2.4.14.3"></a>
 ##### 3.2.4.14.3 _NewEnum (Get) (Opnum 9)
 
-The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16).
+The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16.2).
 
 [propget, id(DISPID_NEWENUM)] HRESULT _NewEnum(
 
@@ -8269,9 +8269,9 @@ HRESULT CreateDataCollectorFromXml(
 
 );
 
-**bstrXml:** Supplies a string that contains the XML specifying the data collector to create. The possible data collector definitions can be as follows: IPerformanceCounterDataCollector (section [3.2.4.6](#Section_3.2.4.6)), IConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), IAlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), ITraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)), and IApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10.9)). The XML for each of those respective data collector types is in their corresponding sections; the overall XML of the data collector set, which includes the XML for each type of data collector, specified in section [3.2.4.19](#Section_3.2.4.19). The bStrXml parameter value is the set of XML elements corresponding to a single type of data collector.
+**bstrXml:** Supplies a string that contains the XML specifying the data collector to create. The possible data collector definitions can be as follows: IPerformanceCounterDataCollector (section [3.2.4.6](#Section_3.2.4.6)), IConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), IAlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), ITraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)), and IApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10)). The XML for each of those respective data collector types is in their corresponding sections; the overall XML of the data collector set, which includes the XML for each type of data collector, specified in section [3.2.4.19](#Section_3.2.4.19). The bStrXml parameter value is the set of XML elements corresponding to a single type of data collector.
 
-**pValidation:** Receives a validation value map with a list of properties from the input bstrXml for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.17.9). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
+**pValidation:** Receives a validation value map with a list of properties from the input bstrXml for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
 
 **pCollector:** Receives the newly created data collector.
 
@@ -8361,7 +8361,7 @@ The Item (Get) method retrieves the Item property.
 <a id="Section_3.2.4.16.3"></a>
 ##### 3.2.4.16.3 _NewEnum (Get) (Opnum 9)
 
-The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16).
+The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16.2).
 
 [proppget, id(DISPID_NEWENUM)] HRESULT _NewEnum(
 
@@ -8434,8 +8434,8 @@ IDataCollectorSetCollection* sets
 
 The GetDataCollectorSets method populates [**data collector set**](#gt_data-collector-set) collection with the persisted data collector sets. A data collector set is considered to be persisted if either of the following conditions is met:
 
-- The data collector set is in a running state. A data collector set is considered to be in a running state if a call to [IDataCollectorSet::getState](#Section_3.2.4.5) returns plaRunning. A data collector set enters a running state by calling [IDataCollectorSet::Start](#Section_3.2.4.1.56). A data collector set can be removed from a running state by calling [IDataCollectorSet::Stop](#Section_3.2.4.1.57).
-- The data collector set is committed. A data collector set is committed after a successful call to [IDataCollectorSet::Commit](#Section_3.2.4.5) where the CommitMode has any value other than plaValidateOnly. A data collector set can be removed from a committed state by calling [IDataCollectorSet::Delete](#Section_3.2.4.5).
+- The data collector set is in a running state. A data collector set is considered to be in a running state if a call to [IDataCollectorSet::getState](#Section_3.2.4.1) returns plaRunning. A data collector set enters a running state by calling [IDataCollectorSet::Start](#Section_3.2.4.1.56). A data collector set can be removed from a running state by calling [IDataCollectorSet::Stop](#Section_3.2.4.1.57).
+- The data collector set is committed. A data collector set is committed after a successful call to [IDataCollectorSet::Commit](#Section_3.2.4.1) where the CommitMode has any value other than plaValidateOnly. A data collector set can be removed from a committed state by calling [IDataCollectorSet::Delete](#Section_3.2.4.1).
 Semantically, a data collector set is persisted if it has been committed to a permanent store, such as the filesystem.<35>
 
 HRESULT GetDataCollectorSets(
@@ -8473,7 +8473,7 @@ The following is an XML representation of a ValueMapItem.
 | --- | --- | --- |
 | Description | RW | Specifies the description of the item. |
 | Enabled | RW | Specifies whether or not the item is enabled. If an item is not enabled, its Value property will be ignored. In typical usage, a ValueMap will contain a ValueMapItem for each of the multiple possible settings of the property that the ValueMap is passed to (such as an entry for every Keyword or every Level that can be used by an [ITraceDataProvider](#Section_3.2.4.11)). This Enabled property indicates whether or not the ValueMapItem will be used. Essentially, the ValueMap contains a ValueMapItem for each of the multiple possible options, and the Enabled property indicates which options are actually selected. |
-| Key | RW | Specifies the name of the item. The name of the item can be any non-empty BSTR. The semantics of the key depend on the ValueMapType property, specified in section [3.2.4.18](#Section_3.2.4.17.9), of the IValueMap to which this IValueMapItem belongs. The over-the-wire transmission of a BSTR is specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.23. The Performance Logs and Alerts Protocol does not have any predefined Key values or semantic definitions. The only condition Performance Logs and Alerts Protocol places on the Key is that it cannot be an empty BSTR.<36> |
+| Key | RW | Specifies the name of the item. The name of the item can be any non-empty BSTR. The semantics of the key depend on the ValueMapType property, specified in section [3.2.4.18](#Section_3.2.4.18.8), of the IValueMap to which this IValueMapItem belongs. The over-the-wire transmission of a BSTR is specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.23. The Performance Logs and Alerts Protocol does not have any predefined Key values or semantic definitions. The only condition Performance Logs and Alerts Protocol places on the Key is that it cannot be an empty BSTR.<36> |
 | Value | RW | Specifies the value of the item. The value is stored in a VARIANT. The format and over the wire transmission of a VARIANT is specified in [MS-OAUT] section 2.2.29. Any VARIANT is a legal value for this property. The ValueMapItem is a generic container and the semantics of the Value property depend on what it is being used to contain. The ValueMapType property contains information regarding how the Value property will be interpreted. <37> |
 | ValueMapType | RW | Specifies the type of ValueMap in which the ValueMapItem will be inserted. Information on the different types of ValueMaps are specified in section [2.2.2.11](#Section_2.2.2.11). |
 
@@ -8691,7 +8691,7 @@ Methods in RPC Opnum Order
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface.
 
-The IValueMap is used by the Performance Logs and Alerts Protocol for primarily two purposes. The first use of the IValueMap is to return properties of the [**data collector set**](#gt_data-collector-set) (or its encapsulated objects) that could not be set by the server. Sections [3.2.4.1.54](#Section_3.2.4.5), [3.2.4.1.58](#Section_3.2.4.1.58), [3.2.4.2.24](#Section_3.2.4.2.24), [3.2.4.5.22](#Section_3.2.4.5.22), and [3.2.4.15.8](#Section_3.2.4.15.8) provide more information on how the IValueMap is used for this purpose. The second primary use of IValueMap in the Performance Logs and Alerts Protocol is to return information about a trace provider in the ITraceDataProvider interface. Sections [3.2.4.11.5](#Section_3.2.4.11), [3.2.4.11.6](#Section_2.2.11.1.2), and [3.2.4.11.7](#Section_2.2.11.1.2) detail how information about the trace provider is returned using the IValueMap.
+The IValueMap is used by the Performance Logs and Alerts Protocol for primarily two purposes. The first use of the IValueMap is to return properties of the [**data collector set**](#gt_data-collector-set) (or its encapsulated objects) that could not be set by the server. Sections [3.2.4.1.54](#Section_3.2.4.1), [3.2.4.1.58](#Section_3.2.4.1.58), [3.2.4.2.24](#Section_3.2.4.2.24), [3.2.4.5.22](#Section_3.2.4.5.22), and [3.2.4.15.8](#Section_3.2.4.15.8) provide more information on how the IValueMap is used for this purpose. The second primary use of IValueMap in the Performance Logs and Alerts Protocol is to return information about a trace provider in the ITraceDataProvider interface. Sections [3.2.4.11.5](#Section_3.2.4.11), [3.2.4.11.6](#Section_2.2.11.1.2), and [3.2.4.11.7](#Section_2.2.11.1.2) detail how information about the trace provider is returned using the IValueMap.
 
 <a id="Section_3.2.4.18.1"></a>
 ##### 3.2.4.18.1 Count (Get) (Opnum 7)
@@ -8730,7 +8730,7 @@ The Item (Get) method retrieves the Item property.
 <a id="Section_3.2.4.18.3"></a>
 ##### 3.2.4.18.3 _NewEnum (Get) (Opnum 9)
 
-The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.17.9).
+The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
 
 [propget, id(DISPID_NEWENUM)] HRESULT _NewEnum(
 
@@ -8775,7 +8775,7 @@ The Description (Put) method sets the Description property.
 <a id="Section_3.2.4.18.6"></a>
 ##### 3.2.4.18.6 Value (Get) (Opnum 12)
 
-The Value (Get) method retrieves the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.17.9).
+The Value (Get) method retrieves the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
 
 [propget] HRESULT Value(
 
@@ -8790,7 +8790,7 @@ The Value (Get) method retrieves the Value property, as specified in the propert
 <a id="Section_3.2.4.18.7"></a>
 ##### 3.2.4.18.7 Value (Put) (Opnum 13)
 
-The Value (Put) method sets the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.17.9).
+The Value (Put) method sets the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
 
 [propput] HRESULT Value(
 
@@ -8805,7 +8805,7 @@ The Value (Put) method sets the Value property, as specified in the property tab
 <a id="Section_3.2.4.18.8"></a>
 ##### 3.2.4.18.8 ValueMapType (Get) (Opnum 14)
 
-The ValueMapType (Get) method retrieves the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.17.9).
+The ValueMapType (Get) method retrieves the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
 
 [propget] HRESULT ValueMapType(
 
@@ -8820,7 +8820,7 @@ The ValueMapType (Get) method retrieves the ValueMapType property, as specified 
 <a id="Section_3.2.4.18.9"></a>
 ##### 3.2.4.18.9 ValueMapType (Put) (Opnum 15)
 
-The ValueMapType (Put) method sets the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.17.9).
+The ValueMapType (Put) method sets the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
 
 [propput] HRESULT ValueMapType(
 
@@ -9300,7 +9300,7 @@ The following table lists the relevant sections for each of the key elements in 
 | TraceDataProvider | [3.2.4.11](#Section_3.2.4.11) |
 | ConfigurationDataCollector | [3.2.4.7](#Section_3.2.4.7) |
 | AlertDataCollector | [3.2.4.8](#Section_3.2.4.8) |
-| ApiTracingDataCollector | [3.2.4.10](#Section_3.2.4.10.9) |
+| ApiTracingDataCollector | [3.2.4.10](#Section_3.2.4.10) |
 | DataManager | [3.2.4.2](#Section_3.2.4.2) |
 | Rules | [3.2.4.4](#Section_3.2.4.4) |
 | FolderAction | [3.2.4.3](#Section_3.2.4.3) |
@@ -9553,7 +9553,7 @@ This protocol introduces no additional security considerations for transmissions
 | ITraceDataProvider::SetSecurity | [3.2.4.11.17](#Section_5) |
 | ITraceDataProvider::GetSecurity | [3.2.4.11.18](#Section_5) |
 | ITraceDataCollector::ProcessMode | [3.2.4.9](#Section_3.2.4.9) Property table the row labeled ProcessMode. |
-| IDataCollectorSet::SetCredentials | [3.2.4.1.52](#Section_3.2.4.5) |
+| IDataCollectorSet::SetCredentials | [3.2.4.1.52](#Section_3.2.4.1) |
 | IDataCollectorSet::Security | [3.2.4.1](#Section_3.2.4.1) Property table the row labeled Security. |
 
 <a id="Section_6"></a>
@@ -10810,7 +10810,7 @@ At runtime, the performance counter provider needs to register itself with the s
 
 Once the provider has registered the different counter sets and their corresponding performance counters through the PerfSetCounterSetInfo method, the data provider can then create instances of the counter sets by calling the PerfCreateInstance method [[MSDN-PLA-PCIF]](https://go.microsoft.com/fwlink/?LinkId=125382). The subsystem is made aware of each newly created counter set instance in order to expose this information to interested performance counter consumers. Once this has been completed, the performance counter provider can now update the performance counter values using the following methods that are exposed by the subsystem (note that which method is used depends on the type of the performance counter): PerfSetULongCounterValue [[MSDN-PLA-PSUCVF]](https://go.microsoft.com/fwlink/?LinkId=125388), PerfSetULongLongCounterValue[[MSDN-PLA-PSULCVF]](https://go.microsoft.com/fwlink/?LinkId=125389), or PerfSetCouterRefValue [[MSDN-PLA-PSCRVF]](https://go.microsoft.com/fwlink/?LinkId=125384). A performance counter provider can update the value of any instance of a performance counter using these methods at any arbitrary interval. At the end, the performance counter provider unregisters with the subsystem using the PerfStopProvider method [[MSDN-PLA-PSTPF]](https://go.microsoft.com/fwlink/?LinkId=125387); at this point, performance counter consumers cannot query for those performance counter values that were unregistered.
 
-<12> Section 3.2.4.1: In Windows Vista, if the Segment property is enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.19) method) and the SegmentMaxSize is set to a value greater than zero, PLA will stop the [**data collector set**](#gt_data-collector-set) when the log file size reaches the SegmentMaxSize value.
+<12> Section 3.2.4.1: In Windows Vista, if the Segment property is enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.18) method) and the SegmentMaxSize is set to a value greater than zero, PLA will stop the [**data collector set**](#gt_data-collector-set) when the log file size reaches the SegmentMaxSize value.
 
 <13> Section 3.2.4.1.5: Localized strings can be specified in the form @binary,#id, where binary is the EXE or DLL that contains the localized resource string, and id is the string resource identifier.
 
@@ -10818,7 +10818,7 @@ If the description is set to the @binary,#id form, when retrieving the descripti
 
 <14> Section 3.2.4.1.8: Localized strings can be specified in the form @binary,#id, where binary is the EXE or DLL that contains the localized resource string and id is the string resource identifier. If the display name is set to the @binary,#id form, it is returned as the localized string. The original display name string can be retrieved by calling the IDataCollectorSet::DisplayNameUnresolved method, as specified in section [3.2.4.1.9](#Section_3.2.4.1.9).
 
-<15> Section 3.2.4.1.23: In Windows Vista, if the Segment property has been enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.19) method) and the SegmentMaxSize is set to a value greater than zero, the Performance Logs and Alerts Protocol stops the data collector set when the log file size reaches the SegmentMaxSize value.
+<15> Section 3.2.4.1.23: In Windows Vista, if the Segment property has been enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.18) method) and the SegmentMaxSize is set to a value greater than zero, the Performance Logs and Alerts Protocol stops the data collector set when the log file size reaches the SegmentMaxSize value.
 
 <16> Section 3.2.4.1.52: If credentials are not specified, the Performance Logs and Alerts Protocol tries to run the set as LocalSystem if the current user is a member of the administrator group.
 
@@ -10851,7 +10851,7 @@ To collect registry information from a remote computer, include the computer nam
 
 <21> Section 3.2.4.8.4: The event identifier of the event is 2031 and the channel used is Microsoft-Windows-Diagnosis-Pla/Operational.
 
-<22> Section 3.2.4.9: On Windows, the following properties of the ITraceDataCollector are only updated when the [IDataCollectorSet::Query](#Section_3.2.4.5) method is called and only if the data collector set is of type TraceSession or BootTraceSession: BuffersLost, BuffersWritten, EventsLost, FreeBuffers, RealTimeBuffersLost, SessionThreadId. The values of these properties are not updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) method is called. The values of the above properties are not updated by calling the IDataCollectorSet::Query or IDataCollectorSet::Start methods if the data collector set type is SystemDataCollectorSet or ServerDataCollectorSet.
+<22> Section 3.2.4.9: On Windows, the following properties of the ITraceDataCollector are only updated when the [IDataCollectorSet::Query](#Section_3.2.4.1) method is called and only if the data collector set is of type TraceSession or BootTraceSession: BuffersLost, BuffersWritten, EventsLost, FreeBuffers, RealTimeBuffersLost, SessionThreadId. The values of these properties are not updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) method is called. The values of the above properties are not updated by calling the IDataCollectorSet::Query or IDataCollectorSet::Start methods if the data collector set type is SystemDataCollectorSet or ServerDataCollectorSet.
 
 <23> Section 3.2.4.9: On Windows, the following properties of the ITraceDataCollector are only updated when the IDataCollectorSet::Query method is called and only if the data collector set is of type TraceSession or BootTraceSession: BuffersLost, BuffersWritten, EventsLost, FreeBuffers, RealTimeBuffersLost, SessionThreadId. The values of these properties are not updated when the IDataCollectorSet::Start method is called. The values of the above properties are not updated by calling the IDataCollectorSet::Query or IDataCollectorSet::Start methods if the data collector set type is SystemDataCollectorSet or ServerDataCollectorSet.
 

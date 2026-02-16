@@ -598,13 +598,13 @@ The PowerShell Remoting Protocol is required whenever a user wants to execute [*
 
 The PowerShell Remoting Protocol is based on the Web Services Management Protocol Extensions for Windows Vista specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md).
 
-**Supported Transports:** The PowerShell Remoting Protocol is implemented on top of WSMV, as defined in section [3.1.5.3](#Section_3.1.5.3).
+**Supported Transports:** The PowerShell Remoting Protocol is implemented on top of WSMV, as defined in section [3.1.5.3](#Section_2).
 
-**Protocol Versions:** The PowerShell Remoting Protocol supports the following explicit dialects: WSMAN1.1. These dialects are defined in section [3.1.5.3.1](#Section_3.1.5.3.13).
+**Protocol Versions:** The PowerShell Remoting Protocol supports the following explicit dialects: WSMAN1.1. These dialects are defined in section [3.1.5.3.1](#Section_3.1.5.3.15).
 
 **PowerShell Remoting Protocol Version:** The PowerShell Remoting Protocol requires the option named protocolversion to be present in the OptionSet of the wxf:Create message. This option is described in section 3.1.5.3.1 and is used by the server to send messages to the client in a format that client can understand.
 
-**Capability Negotiation:** The PowerShell Remoting Protocol does explicit capability negotiation as specified in sections [3.1.5.4.1](#Section_3.1.5.4.18) and [3.2.5.4.1](#Section_3.2.5.4.10).
+**Capability Negotiation:** The PowerShell Remoting Protocol does explicit capability negotiation as specified in sections [3.1.5.4.1](#Section_3.1.5.4.17) and [3.2.5.4.1](#Section_3.2.5.4.1).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -624,7 +624,7 @@ None.
 
 The PowerShell Remoting Protocol uses remote shell operations, supported by the Web Services Management Protocol Extensions for Windows Vista [MS-WSMV](../MS-WSMV/MS-WSMV.md), for transporting data between clients and servers. These remote shell operations are specified in [MS-WSMV], section 3.1.4.
 
-For more information about how transport is done on clients and servers, see the general protocol rules specified in sections [3.1.5.1](#Section_3.2.5.1) and [3.1.5.2](#Section_3.1.5.2).
+For more information about how transport is done on clients and servers, see the general protocol rules specified in sections [3.1.5.1](#Section_3.1.5.1) and [3.1.5.2](#Section_3.1.5.2).
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -711,7 +711,7 @@ In messages of this type, the **Data** field is [**UTF-8**](#gt_utf-8) encoded X
 - Version of the higher-layer application
 - Property name: PSVersion
 - Property type: Version (see section [2.2.5.1.21](#Section_2.2.5.1.21))
-- Version of the PowerShell Remoting Protocol (see section [3.1.5.3.1](#Section_3.1.5.3.13))
+- Version of the PowerShell Remoting Protocol (see section [3.1.5.3.1](#Section_3.1.5.3.15))
 - Property name: protocolversion
 - Property type: Version (see section 2.2.5.1.21)
 - Version of the serialization system
@@ -719,7 +719,7 @@ In messages of this type, the **Data** field is [**UTF-8**](#gt_utf-8) encoded X
 - Property type: Version (see section 2.2.5.1.21)
 - Time zone of the client
 - Property name: TimeZone
-- Property type: TimeZone (see section [2.2.3.10](#Section_2.2.3.10)) or Null value (see section [2.2.5.1.20](#Section_2.2.5.1.20))
+- Property type: TimeZone (see section [2.2.3.10](#Section_2.2.3.10.3)) or Null value (see section [2.2.5.1.20](#Section_2.2.5.1.20))
 - This property is optional and MAY be omitted.
 The Complex Object described in this section SHOULD have no associated type names (section [2.2.5.2.3](#Section_2.2.5.2.3)).
 
@@ -1144,7 +1144,7 @@ packet-beta
 **Modulus (256 bytes):** The RSA modulus, referred to as **n** in [RFC8017] section 2. The modulus MUST be encoded in little-endian format.
 
 - Property name: PublicKey.
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 The Complex Object described in this section SHOULD have no associated type names (section [2.2.5.2.3](#Section_2.2.5.2.3)).
 
 Example:
@@ -1190,7 +1190,7 @@ packet-beta
 ```
 
 - Property name: EncryptedSessionKey.
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 The Complex Object described in this section SHOULD have no associated type names (section [2.2.5.2.3](#Section_2.2.5.2.3)).
 
 Example:
@@ -1214,7 +1214,7 @@ AQIAABBmAAAApAAAgY6iLhsPXjMGza6Rc6JeEfezwTaZjJhm+gj55YRVzv6QTyRkl3j9XuESv5WhNwHH
 
 The **Data** field of a PSRP message specifies a PUBLIC_KEY_REQUEST message when the **MessageType** field has a value of 0x00010007.
 
-In messages of this type, the **Data** field is UTF-8 encoded XML, equivalent to the XML created by serializing an empty String (see section [2.2.5.1.1](#Section_2.2.5.1.1)); that is, a string containing zero characters.
+In messages of this type, the **Data** field is UTF-8 encoded XML, equivalent to the XML created by serializing an empty String (see section [2.2.5.1.1](#Section_2.2.5.1.13)); that is, a string containing zero characters.
 
 Example:
 
@@ -1614,7 +1614,7 @@ In messages of this type, the **Data** field is UTF-8 encoded XML, equivalent to
 - Property type: Signed int (see section [2.2.5.1.11](#Section_2.2.5.1.11)).
 - Source identifier
 - Property name: PSEventArgs.SourceIdentifier.
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - Time when event was generated
 - Property name: PSEventArgs.TimeGenerated.
 - Property type: Date/Time (see section [2.2.5.1.4](#Section_2.2.5.1.4)).
@@ -3352,7 +3352,7 @@ This data type is a Complex Object (section [2.2.5.2](#Section_1.3)) with the fo
 
 - Hardcoded type of the object
 - Property name: T.
-- type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - Property value: System.Management.Automation.Host.Coordinates
 - Coordinates value
 - Property name: V.
@@ -3398,7 +3398,7 @@ This data type is a Complex Object (see section [2.2.5.2](#Section_1.3)) with th
 
 - Hardcoded type of the object
 - Property name: T.
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - Property value: System.Management.Automation.Host.Size
 - Size value
 - Property name: V.
@@ -3444,7 +3444,7 @@ This data type is a Complex Object (section [2.2.5.2](#Section_1.3)) with the fo
 
 - Hard-coded type of the object
 - Property name: T.
-- type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - Property value: System.ConsoleColor
 - Color value
 - Property name: V.
@@ -3738,7 +3738,7 @@ A pipeline is an object with the following extended properties (see section [2.2
 - Property type: **List** (see section [2.2.5.2.6.3](#Section_2.2.5.2.6.3)) of individual command objects (see section [2.2.3.12](#Section_2.2.3.12)) in the order they appear in the pipeline.
 - String, conveying command history information to the higher layer. The PSRP layer MUST NOT interpret this data.
 - Property name: History.
-- Property type: **String** (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: **String** (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - Boolean, indicating to the higher layer if error output is to be redirected. The PSRP layer MUST NOT interpret this data.
 - Property name: RedirectShellErrorOutputPipe.
 - Property type: **Boolean** (see section2.2.5.1.3).
@@ -3755,7 +3755,7 @@ Command is an object with the following extended properties (see section [2.2.5.
 
 - The name of the command or text of script to execute. (The format of a script is unspecified, because the PowerShell Remoting Protocol directly passes the script to the remote [**runspace**](#gt_runspace) implemented in the higher layer on the server, which in turn parses and executes the script.)
 - Property name: Cmd.
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - A Boolean indicating to the higher layer whether the command to execute is a script.
 - Property name: IsScript.
 - Property type: Boolean (see section [2.2.5.1.3](#Section_2.2.5.1.3)).
@@ -3799,7 +3799,7 @@ A command parameter is an object with the following extended properties (see sec
 
 - Name of the parameter
 - Property name: N.
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)) if the parameter has a name; otherwise a Null Value (see section [2.2.5.1.20](#Section_2.2.5.1.20)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)) if the parameter has a name; otherwise a Null Value (see section [2.2.5.1.20](#Section_2.2.5.1.20)).
 - Parameter value
 - Property name: V.
 - Property type: Primitive Type Object (section [2.2.5.1](#Section_1.3)) or Complex Object (section [2.2.5.2](#Section_1.3)).
@@ -3842,7 +3842,7 @@ The following are the elements which MUST be included in the _hostDefaultData di
 | WindowSize | Size - see section 2.2.3.2 | 6 |
 | MaxWindowSize | Size - see section 2.2.3.2 | 7 |
 | MaxPhysicalWindowSize | Size - see section 2.2.3.2 | 8 |
-| WindowTitle | String - see section [2.2.5.1.1](#Section_2.2.5.1.1) | 9 |
+| WindowTitle | String - see section [2.2.5.1.1](#Section_2.2.5.1.13) | 9 |
 
 The Complex Object described in this section SHOULD have no associated type names (section [2.2.5.2.3](#Section_2.2.5.2.3)).
 
@@ -3866,7 +3866,7 @@ This data type is a [Complex Object (section 2.2.5.2)](#Section_1.3) with the 
 - Property type: A Complex Object encoded as specified in section [2.2.3.15.1](#Section_2.2.3.15.1).
 - A string which uniquely identifies this error condition.
 - Property name: FullyQualifiedErrorId
-- Property type: [String (section 2.2.5.1.1)](#Section_2.2.5.1.1)
+- Property type: [String (section 2.2.5.1.1)](#Section_2.2.5.1.13)
 - Error category.
 - Property name: ErrorCategory_Category
 - Property type: [ErrorCategory (section 2.2.3.9)](#Section_2.2.3.9)
@@ -3912,7 +3912,7 @@ The following is a complete list of InvocationInfo-specific extended properties:
 
 - The [**command name**](#gt_command-name) used to invoke this command; if invoked through an alias, then this is the alias name.
 - Property name: InvocationInfo_InvocationName
-- Property type: [String (section 2.2.5.1.1)](#Section_2.2.5.1.1)
+- Property type: [String (section 2.2.5.1.1)](#Section_2.2.5.1.13)
 - The command line parameters.
 - Property name: InvocationInfo_BoundParameters
 - Property type: [Dictionary (section 2.2.5.2.6.4)](#Section_2.2.6.1.6) where keys (representing parameter names) are Strings (section 2.2.5.1.1) and values (representing parameter values) are any [Primitive Type Object (section 2.2.5.1)](#Section_1.3) or [Complex Object (section 2.2.5.2)](#Section_1.3).
@@ -3961,7 +3961,7 @@ This data type is a [Complex Object (section 2.2.5.2)](#Section_1.3) with the 
 
 - The message that a higher-layer pipeline or [**command**](#gt_command) wants to associate with the informational record.
 - Property name: InformationalRecord_Message
-- Property type: [String (section 2.2.5.1.1)](#Section_2.2.5.1.1)
+- Property type: [String (section 2.2.5.1.1)](#Section_2.2.5.1.13)
 - Flag indicating whether or not other properties (section [2.2.3.15.1](#Section_2.2.3.15.1)) listed below have been included in the object or not.
 - Property name: InformationalRecord_SerializeInvocationInfo
 - Property type: [Boolean (section 2.2.5.1.3)](#Section_2.2.5.1.3) value. When set to TRUE, indicates that InvocationInfo-specific extended properties (section 2.2.3.15.1) are present in the ErrorRecord.
@@ -3993,7 +3993,7 @@ If the Return Value column indicates that the method does not return a value, th
 
 | Name of method/property | Method identifier | Return value | Method details |
 | --- | --- | --- | --- |
-| GetName | 1 | String (section [2.2.5.1.1](#Section_2.2.5.1.1)) | SHOULD return a string identifying the hosting application in a user friendly way. |
+| GetName | 1 | String (section [2.2.5.1.1](#Section_2.2.5.1.13)) | SHOULD return a string identifying the hosting application in a user friendly way. |
 | GetVersion | 2 | Version number (section [2.2.5.1.21](#Section_2.2.5.1.21)) | SHOULD return the version number of the hosting application. |
 | GetInstanceId | 3 | GUID (section [2.2.5.1.18](#Section_2.2.5.1.18)) | SHOULD return a [**GUID**](#gt_globally-unique-identifier-guid) that uniquely identifies the hosting application. |
 | GetCurrentCulture | 4 | CultureInfo (section [2.2.6.1.2](#Section_2.2.6.1.2)) | SHOULD return the host's culture. |
@@ -4101,7 +4101,7 @@ The Complex Object described in this section SHOULD have the following type name
 
 This data type represents a dictionary, which contains only objects that are primitive types.
 
-This data type is a dictionary (see section [2.2.5.2.6.4](#Section_2.2.6.1.6)) with the restriction that keys are strings (see section [2.2.5.1.1](#Section_2.2.5.1.1)) and values are any of the following:
+This data type is a dictionary (see section [2.2.5.2.6.4](#Section_2.2.6.1.6)) with the restriction that keys are strings (see section [2.2.5.1.1](#Section_2.2.5.1.13)) and values are any of the following:
 
 - Any Primitive Type Object (see section [2.2.5.1](#Section_1.3)) except ScriptBlock (see section [2.2.5.1.23](#Section_2.2.5.1.23)) or Secure String (section [2.2.5.1.24](#Section_2.2.5.1.24)).
 - A list (see section [2.2.5.2.6.3](#Section_2.2.5.2.6.3)) of Primitive Type Objects (see section 2.2.5.1) except ScriptBlock (see section 2.2.5.1.23) or Secure String (section 2.2.5.1.24).
@@ -4132,7 +4132,7 @@ For an example, see section [2.2.3.22](#Section_2.2.3.22).
 <a id="Section_2.2.3.20"></a>
 #### 2.2.3.20 Wildcard
 
-This data type represents a wildcard pattern that can be matched against a String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+This data type represents a wildcard pattern that can be matched against a String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 
 This data type is a String (see section 2.2.5.1.1) with the contents interpreted according to IEEE Std 1003.1, 2004 Edition section 2.13.2 "Patterns Matching Multiple Characters [[IEEE1003.1-chap2]](https://go.microsoft.com/fwlink/?LinkId=400802) with the following exceptions:
 
@@ -4181,7 +4181,7 @@ This data type represents the metadata of a command. CommandMetadata is an objec
 
 - The name of a command
 - Property name: Name.
-- Property type: a non-empty String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: a non-empty String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - The URI to the documentation of the command. If the higher layer provides a URI for documentation of the command, then the PowerShell Remoting Protocol MUST set HelpUri to the value provided by the higher layer; otherwise the value of HelpUri MUST be set to Null (section [2.2.5.1.20](#Section_2.2.5.1.20)).
 - Property name: HelpUri.
 - Property type: String (see section 2.2.5.1.1).
@@ -4336,7 +4336,7 @@ ParameterMetadata is an object with the following extended properties (see secti
 
 - The name of a parameter.
 - Property name: Name.
-- Property type: a non-empty String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: a non-empty String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - The type of the parameter.
 - Property name: ParameterType.
 - Property type: String (see section 2.2.5.1.1) representing a type name (see section [2.2.5.2.3](#Section_2.2.5.2.3)).
@@ -4367,7 +4367,7 @@ This data type is a Complex Object (see section [2.2.5.2](#Section_1.3) and [2.2
 
 - User name
 - Property name: UserName
-- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.1)).
+- Property type: String (see section [2.2.5.1.1](#Section_2.2.5.1.13)).
 - Password.
 - Property name: Password
 - Property type: Secure String (see section [2.2.5.1.24](#Section_2.2.5.1.24)).
@@ -4463,7 +4463,7 @@ This data type is a Complex Object (see section [2.2.5.2](#Section_1.3) and [2.2
 - Property type: Signed Int (see section [2.2.5.1.11](#Section_2.2.5.1.11)).
 - Character corresponding to the pressed keys.
 - Property name: character
-- Property type: Character (see section [2.2.5.1.2](#Section_2.2.5.1.24)).
+- Property type: Character (see section [2.2.5.1.2](#Section_2.2.5.1.2)).
 - State of the control keys.
 - Property name: controlKeyState
 - Property type: ControlKeyStates (see section [2.2.3.27](#Section_2.2.3.27)).
@@ -4550,7 +4550,7 @@ This data type is a Complex Object (see section [2.2.5.2](#Section_1.3) and [2.2
 
 - Character visible in the cell
 - Property name: character
-- Property type: **Character** (see section [2.2.5.1.2](#Section_2.2.5.1.24)).
+- Property type: **Character** (see section [2.2.5.1.2](#Section_2.2.5.1.2)).
 - Foreground color
 - Property name: foregroundColor
 - Property type: **Color** (see section [2.2.3.3](#Section_2.2.3.3)).
@@ -4679,7 +4679,7 @@ The PowerShell Remoting Protocol is only responsible for transferring the XML be
 
 The following sections specify a complete list of primitive types, and describe how to serialize Primitive Type Objects. A Primitive Type Object is an object that contains only a value of a primitive type.
 
-An object which in addition to a value of a primitive type contains some extra information from section [2.2.5.3.4](#Section_2.2.5.3.4.2) (such as ToString or extended properties) is called an Extended Primitive Object. An Extended Primitive Object is a kind of Complex Object. [**Serialization**](#gt_serialization) of Complex Objects is covered in section [2.2.5.2](#Section_1.3). Note that Extended Primitive Objects never have adapted properties (see section [2.2.5.3.4.1](#Section_2.2.5.3.4.1)).
+An object which in addition to a value of a primitive type contains some extra information from section [2.2.5.3.4](#Section_2.2.5.3.4.4) (such as ToString or extended properties) is called an Extended Primitive Object. An Extended Primitive Object is a kind of Complex Object. [**Serialization**](#gt_serialization) of Complex Objects is covered in section [2.2.5.2](#Section_1.3). Note that Extended Primitive Objects never have adapted properties (see section [2.2.5.3.4.1](#Section_2.2.5.3.4.1)).
 
 <a id="Section_2.2.5.1.1"></a>
 ##### 2.2.5.1.1 String
@@ -5153,10 +5153,10 @@ Example:
 This section describes how to serialize Complex Objects. A Complex Object is one of the following:
 
 - An object of a non-primitive type (a type not covered in the section [2.2.5.1](#Section_1.3)).
-- An Extended Primitive Object - an object which in addition to a value of a primitive type (a type covered in section 2.2.5.1) contains some extra information from section [2.2.5.3.4](#Section_2.2.5.3.4.2) (for example, ToString or extended properties).
+- An Extended Primitive Object - an object which in addition to a value of a primitive type (a type covered in section 2.2.5.1) contains some extra information from section [2.2.5.3.4](#Section_2.2.5.3.4.4) (for example, ToString or extended properties).
 A Complex Object sent by the higher layer to the PowerShell Remoting Protocol for transport MUST have been encoded using one of the following representations.
 
-- As a reference to an earlier object (section [2.2.5.2.1](#Section_2.2.5.2.1)).
+- As a reference to an earlier object (section [2.2.5.2.1](#Section_2.2.5.2.1.1)).
 - As an [<Obj> Element (section 2.2.5.2.2)](#Section_2.2.5.2.2).
 The higher layer chooses either to encode a subset of the Complex Object's properties or to represent the Complex Object as a string. The type of the source Complex Object can be lost in the encoding.
 
@@ -5218,7 +5218,7 @@ The <Obj> element can include the following subelements in any order.
 - ToString (section [2.2.5.2.4](#Section_2.2.5.2.4)).
 - Element generated by one of the following:
 - Value of a primitive type (when the Complex Object is an Extended Primitive Object) (section [2.2.5.2.5](#Section_2.2.5.2.5)).
-- Contents of known containers (section [2.2.5.2.6](#Section_2.2.5.2.6.1)).
+- Contents of known containers (section [2.2.5.2.6](#Section_2.2.5.2.6.2)).
 - Contents of enums (section [2.2.5.2.7](#Section_2.2.5.2.7)).
 - Adapted Properties (section [2.2.5.2.8](#Section_2.2.5.2.8)).
 - Extended properties (section [2.2.5.2.9](#Section_2.2.5.2.9)).
@@ -5325,7 +5325,7 @@ Example:
 
 If the Complex Object being serialized is an Extended Primitive Object, then the value of the primitive type is serialized as described in section [2.2.5.1](#Section_1.3).
 
-Example (compare with the serialization of a string without notes in section [2.2.5.1.1](#Section_2.2.5.1.1)):
+Example (compare with the serialization of a string without notes in section [2.2.5.1.1](#Section_2.2.5.1.13)):
 
 <Obj RefId="RefId-0">
 
@@ -5671,7 +5671,7 @@ The underscore character only requires escaping when it is followed by a charact
 <a id="Section_2.2.5.3.3"></a>
 ##### 2.2.5.3.3 Lifetime of a Serializer/Deserializer Pair
 
-The serialization used in the PowerShell Remoting Protocol makes certain assumptions about lifetime of a serializer/deserializer pair. These assumptions are used in managing uniqueness of object identifiers (section [2.2.5.2.1](#Section_2.2.5.2.1)) and type identifiers (section [2.2.5.2.3](#Section_2.2.5.2.3)) used by the serializer.
+The serialization used in the PowerShell Remoting Protocol makes certain assumptions about lifetime of a serializer/deserializer pair. These assumptions are used in managing uniqueness of object identifiers (section [2.2.5.2.1](#Section_2.2.5.2.1.1)) and type identifiers (section [2.2.5.2.3](#Section_2.2.5.2.3)) used by the serializer.
 
 A new serializer/deserializer pair MUST be created and reused for each type of message data that is specified in section [2.2.2](#Section_2.2.2) and sent across the network.
 
@@ -5826,7 +5826,7 @@ Property Value: The value of the object's property encoded as described in secti
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Global Data
 
-Global client data MUST be initialized as described in section [3.1.3](#Section_3.1.3).
+Global client data MUST be initialized as described in section [3.1.3](#Section_3.2.3).
 
 <a id="Section_3.1.1.1.1"></a>
 ##### 3.1.1.1.1 WSMV ShellID to RunspacePool Table
@@ -5845,7 +5845,7 @@ The key used in the table is the value of the commandId element received in the 
 <a id="Section_3.1.1.1.3"></a>
 ##### 3.1.1.1.3 Public Key Pair
 
-The client MUST have an RSA public key pair[[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) (public key MUST be 2048-bit) that can be used in a key exchange (see sections [3.1.5.4.3](#Section_3.1.5.4.3), [3.1.5.4.4](#Section_3.1.5.4.4) and [3.1.5.4.5](#Section_3.1.5.4.5)). The same public key pair MUST be used in all key exchanges.
+The client MUST have an RSA public key pair[[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) (public key MUST be 2048-bit) that can be used in a key exchange (see sections [3.1.5.4.3](#Section_3.1.5.4.31), [3.1.5.4.4](#Section_3.1.5.4.4) and [3.1.5.4.5](#Section_3.1.5.4.5)). The same public key pair MUST be used in all key exchanges.
 
 The public key pair MUST be generated before the first PUBLIC_KEY message (see section 3.1.5.4.3) is sent from the client to the server.
 
@@ -5868,7 +5868,7 @@ From the Opened state, a RunspacePool can reach either the Closed or Broken stat
 
 A client can close a RunspacePool by sending a wxf:Delete message (section [3.1.5.3.11](#Section_3.1.5.3.11)). Before sending this message, the client changes the RunspacePool state to Closing and stops any executing [**pipelines**](#gt_pipeline) (section [3.1.4.4](#Section_3.1.4.4)) using the pipeline table (section [3.1.1.2.6](#Section_3.1.1.2.6)). If there is a successful response (section [3.2.5.3.12](#Section_3.2.5.3.12)), the client changes the RunspacePool state to Closed; otherwise, the client changes the state to Broken.
 
-For details of how a client can disconnect from a RunspacePool, see section [3.1.4.9](#Section_3.1.4.9). For details of how a client can connect to a RunspacePool, see section [3.1.4.10](#Section_3.1.4.10.3).
+For details of how a client can disconnect from a RunspacePool, see section [3.1.4.9](#Section_3.1.4.9). For details of how a client can connect to a RunspacePool, see section [3.1.4.10](#Section_3.1.4.10.1).
 
 ![Client RunspacePool states and transitions](media/image2.png)
 
@@ -5915,7 +5915,7 @@ The client MUST store and reuse the session key received from the server in the 
 <a id="Section_3.1.1.2.8"></a>
 ##### 3.1.1.2.8 SessionKeyTransferTimeoutms
 
-The idle time-out, in milliseconds, between a client sending the PUBLIC_KEY message (section [3.1.5.4.3](#Section_3.1.5.4.3)) and the client receiving the ENCRYPTED_SESSION_KEY message (section [3.1.5.4.4](#Section_3.1.5.4.4)). This element SHOULD be initialized to 60000.
+The idle time-out, in milliseconds, between a client sending the PUBLIC_KEY message (section [3.1.5.4.3](#Section_3.1.5.4.31)) and the client receiving the ENCRYPTED_SESSION_KEY message (section [3.1.5.4.4](#Section_3.1.5.4.4)). This element SHOULD be initialized to 60000.
 
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Pipeline Data
@@ -5979,7 +5979,7 @@ The Session Key transfer timer MUST trigger closure of an associated [**Runspace
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-The following sections describe how the higher-layer triggers various PowerShell Remoting Protocol events. For more details about how a PSRP message is sent from the client to the server, see section [3.1.5.1](#Section_3.2.5.1).
+The following sections describe how the higher-layer triggers various PowerShell Remoting Protocol events. For more details about how a PSRP message is sent from the client to the server, see section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Creating a RunspacePool
@@ -5988,7 +5988,7 @@ The higher-layer triggers the [**RunspacePool**](#gt_runspacepool) creation on t
 
 - The client creates a new RunspacePool, assigns a unique [**GUID**](#gt_globally-unique-identifier-guid) to this RunspacePool as described in section [3.1.1.2.1](#Section_3.1.1.2.1), and initializes the RunspacePool state to Opening as described in section [3.1.1.2.2](#Section_3.1.1.2.2).
 - The client constructs a SESSION_CAPABILITY message (as specified in section [2.2.2.1](#Section_3.2.5.4.1)) and an INIT_RUNSPACEPOOL message (section [2.2.2.2](#Section_2.2.2.2)). The client then constructs fragmented messages for these PSRP messages using the rules specified in section [3.1.5.1.1](#Section_3.1.5.1.1).
-- The client MUST use wxf:Create (section 3.1.4.5.2) to create a RunspacePool on the server. While sending the wxf:Create message, the client sends as many fragments as possible from step 2, along with the wxf:Create message, using the <open content> portion, as specified in section [3.1.5.3.1](#Section_3.1.5.3.13). If all fragments of the SESSION_CAPABILITY message have been sent, then the client changes the RunspacePool state (section [3.1.1.2](#Section_3.1.1.2)) to NegotiationSent; otherwise, the RunspacePool state change is delayed until step 6.
+- The client MUST use wxf:Create (section 3.1.4.5.2) to create a RunspacePool on the server. While sending the wxf:Create message, the client sends as many fragments as possible from step 2, along with the wxf:Create message, using the <open content> portion, as specified in section [3.1.5.3.1](#Section_3.1.5.3.15). If all fragments of the SESSION_CAPABILITY message have been sent, then the client changes the RunspacePool state (section [3.1.1.2](#Section_3.1.1.2)) to NegotiationSent; otherwise, the RunspacePool state change is delayed until step 6.
 - If the client receives a wxf:ResourceCreated message, the client stores the ShellID from the response (sections [3.1.1.1.1](#Section_3.1.1.1.1) and [3.1.1.2.4](#Section_3.1.1.2.4)), as specified in section 3.1.5.3.1. If the client receives a wxf:Fault message, the client reports the failure to the higher-layer and terminates RunspacePool creation.
 - At this point, the client has a ShellID associated with the remote RunspacePool and MUST send a wxf:Receive message (section [3.1.5.3.7](#Section_3.1.5.3.7)) to the server to start receiving data from the server.
 After each received wxf:ReceiveResponse message, the client MUST send another wxf:Receive if the RunspacePool is not in a Closed or Broken state.
@@ -6149,7 +6149,7 @@ When the RunspacePool state is in the Opened state, the higher layer can trigger
 The PowerShell Remoting Protocol MUST adhere to the message processing rules specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.1.31, in addition to the following.
 
 - The client uses wxf:Send (section [3.1.5.3.5](#Section_3.1.5.3.5)), wxf:Create (section [3.1.5.3.3](#Section_3.1.5.3.3)), and wxf:Command (section 3.1.5.3.3) messages to send PowerShell Remoting Protocol data to a server's [**RunspacePool**](#gt_runspacepool) or [**pipeline**](#gt_pipeline). The client MUST follow the rules described in section [3.1.5.1.1](#Section_3.1.5.1.1) while sending messages.
-- The client receives data from the server as part of wxf:ReceiveResponse (section [3.2.5.3.8](#Section_3.2.5.3.8)) message and constructs a PSRP message according to the rules described in section [3.1.5.2](#Section_3.1.5.2). The client decides whether a PSRP message is targeted to a RunspacePool or pipeline according to the rules described in sections [3.1.5.4](#Section_3.2.5.4) and [2.2.1](#Section_2.2.1).
+- The client receives data from the server as part of wxf:ReceiveResponse (section [3.2.5.3.8](#Section_3.2.5.3.8)) message and constructs a PSRP message according to the rules described in section [3.1.5.2](#Section_3.1.5.2). The client decides whether a PSRP message is targeted to a RunspacePool or pipeline according to the rules described in sections [3.1.5.4](#Section_2) and [2.2.1](#Section_2.2.1).
 - Some messages apply only to RunspacePools, and are valid only when the RunspacePool is in certain states. The valid states for each message are listed in section 3.1.5.4. When a client receives a message for a RunspacePool that is not in the correct state, the client MUST stop any executing pipelines (section [3.1.1.3.2](#Section_3.1.1.3.2)) and close that RunspacePool (section [3.1.1.2.2](#Section_3.1.1.2.2)).
 - Some messages apply to pipelines, and are valid only when the pipeline is in certain states. The valid states for each message are listed in section 3.1.5.4. When a client receives a message for a pipeline that is not in the correct state, then the client MUST stop the pipelines (section 3.1.1.3.2).
 - When a client's RunspacePool state reaches Closed or Broken state, the client MUST NOT process any message targeted for that particular RunspacePool and MUST NOT send any messages to the server's RunspacePool, except for wxf:Delete message (section [3.1.5.3.11](#Section_3.1.5.3.11)). If the client receives any message from the server targeted to the RunspacePool in this state, the client MUST ignore that message.
@@ -6157,7 +6157,7 @@ The PowerShell Remoting Protocol MUST adhere to the message processing rules spe
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 Rules for Sending Data
 
-- The client MUST use one of wxf:Create, wxf:Command, or wxf:Send messages (as specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md)) to send PSRP messages to the server, depending on the circumstances. See section [3.1.5.3](#Section_3.1.5.3) for details.
+- The client MUST use one of wxf:Create, wxf:Command, or wxf:Send messages (as specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md)) to send PSRP messages to the server, depending on the circumstances. See section [3.1.5.3](#Section_2) for details.
 - When sending any PSRP message (section [2.2](#Section_1.3)), the message MUST first be fragmented into one or more fragments. See section [2.2.4](#Section_2.2.4) for the format of a fragment. The **FragmentIds** MUST be numbered consecutively beginning with 0.
 - The fragments MUST be sent in ascending order of **FragmentId**, using either wxf:Create (section [3.1.5.3.3](#Section_3.1.5.3.3)), wxf:Send (section [3.1.5.3.5](#Section_3.1.5.3.5)) or wxf:Command (section 3.1.5.3.3).
 - If multiple fragments can fit into a single [**WS-MAN**](#gt_ws-man) message, then the single WS-MAN message SHOULD include as many fragments as possible (see [MS-WSMV], section 3.1.4.1.7). The fragments MUST be embedded in the order that the PSRP messages were generated.
@@ -6168,7 +6168,7 @@ The PowerShell Remoting Protocol MUST adhere to the message processing rules spe
 
 - The client receives data from the server using the wxf:ReceiveResponse [**WS-MAN**](#gt_ws-man) message. Each wxf:ReceiveResponse message contains one or more fragments. See section [2.2.4](#Section_2.2.4) for the format of a fragment.
 - When one of the WS-MAN messages with fragmented data is received, the client extracts the **Blob** field of the fragment and appends the extracted data to the **PartiallyDefragmentedPsrpMessage** field of the targeted [**RunspacePool**](#gt_runspacepool) (section [3.1.1.2.3](#Section_3.1.1.2.3)) or pipeline (section [3.1.1.3.3](#Section_3.1.1.3.3)).
-- After an End Fragment packet is received (section 2.2.4), a whole PSRP message (see section [2.2.1](#Section_2.2.1)) is stored in **PartiallyDefragmentedPsrpMessage** and can be handled as described in section [3.1.5.4](#Section_3.2.5.4).
+- After an End Fragment packet is received (section 2.2.4), a whole PSRP message (see section [2.2.1](#Section_2.2.1)) is stored in **PartiallyDefragmentedPsrpMessage** and can be handled as described in section [3.1.5.4](#Section_2).
 - Clients SHOULD compare the **ObjectId** and **FragmentId** fields of each received fragment with the **LastObjectId** and **LastFragmentId** data stored in the ADM and then update the ADM. If at any point, it is determined that the fragments are not received in ascending order of **FragmentId** with the same **ObjectId**, the client MUST close the appropriate RunspacePool (section [3.1.4.2](#Section_3.1.4.2)) or stop the appropriate [**pipeline**](#gt_pipeline) (section [3.1.4.4](#Section_3.1.4.4)).
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Sequencing Rules
@@ -6176,7 +6176,7 @@ The PowerShell Remoting Protocol MUST adhere to the message processing rules spe
 The following is a typical sequence for creating a [**RunspacePool**](#gt_runspacepool) and executing a [**pipeline**](#gt_pipeline) on a server.
 
 - The client MUST construct a RunspacePool and the RunspacePool MUST be in Opened state. Refer to section [3.1.4.1](#Section_3.1.4.1) for more details.
-- When a RunspacePool is in the Opened state, RunspacePool specific messages—such as Set Maximum Runspaces (section [3.1.5.4.6](#Section_3.1.5.4.6)), Set Minimum Runspaces (section [3.1.5.4.7](#Section_3.1.5.4.7)), and Get Available Runspaces (section [3.1.5.4.11](#Section_3.1.5.4.11)—can be sent to the server's RunspacePool. For more details about the exact messages that can be sent, see section [3.1.5.4](#Section_3.2.5.4).
+- When a RunspacePool is in the Opened state, RunspacePool specific messages—such as Set Maximum Runspaces (section [3.1.5.4.6](#Section_3.1.5.4.6)), Set Minimum Runspaces (section [3.1.5.4.7](#Section_3.1.5.4.7)), and Get Available Runspaces (section [3.1.5.4.11](#Section_3.1.5.4.11)—can be sent to the server's RunspacePool. For more details about the exact messages that can be sent, see section [3.1.5.4](#Section_2).
 - When a RunspacePool is in the Opened state, the client MAY send a pipeline message (section [3.1.5.4.10](#Section_3.1.5.4.10)) to the server to start executing a pipeline on the server. Refer to section [3.1.4.3](#Section_3.1.4.3) for more details about the pipeline sequence.
 - When the RunspacePool is in Opened state, the client MAY receive RunspacePool specific messages, such as the RUNSPACEPOOL_HOST_CALL message (section [3.1.5.4.15](#Section_3.1.5.4.15)) and RUNSPACEPOOL_STATE message (section [3.1.5.4.9](#Section_3.1.5.4.9)).
 - When a pipeline is in Running state and a success response message for wxf:Command is received (section [3.1.5.3.4](#Section_3.1.5.3.4)), the client MAY receive pipeline specific messages, such as the PIPELINE_OUTPUT message (section [3.1.5.4.19](#Section_3.1.5.4.19)) and PIPELINE_HOST_CALL message (section [3.1.5.4.27](#Section_3.1.5.4.27)). For more details about the exact messages that can be received, see section 3.1.5.4.
@@ -6229,7 +6229,7 @@ Only the SESSION_CAPABILITY message (section 2.2.2.1) and INIT_RUNSPACEPOOL mess
 <a id="Section_3.1.5.3.2"></a>
 ##### 3.1.5.3.2 Rules for the wxf:ResourceCreated Message
 
-The server sends a wxf:ResourceCreated message ([MS-WSMV](../MS-WSMV/MS-WSMV.md), section 3.1.4.5.2) upon successful processing of a wxf:Create message (section [3.1.5.3.1](#Section_3.1.5.3.13)).
+The server sends a wxf:ResourceCreated message ([MS-WSMV](../MS-WSMV/MS-WSMV.md), section 3.1.4.5.2) upon successful processing of a wxf:Create message (section [3.1.5.3.1](#Section_3.1.5.3.15)).
 
 The wsa:EndpointReference message encapsulated within the wxf:ResourceCreated message contains a reference to the newly created WSMV Shell instance on the server. The client stores this wsa:EndPointReference for future use (section [3.1.1.2.4](#Section_3.1.1.2.4)). The client MUST use this address in all subsequent WSMV messages to the shell instance, that is, wxf:Delete (section [3.1.5.3.11](#Section_3.1.5.3.11)), wxf:Command (section [3.1.5.3.3](#Section_3.1.5.3.3)), wxf:Signal (section [3.1.5.3.9](#Section_3.1.5.3.9)), wxf:Send (section [3.1.5.3.5](#Section_3.1.5.3.5)), and wxf:Receive (section [3.1.5.3.7](#Section_3.1.5.3.7)).
 
@@ -6238,7 +6238,7 @@ The client stores the value specified in the ShellID element of the wxf:Resource
 <a id="Section_3.1.5.3.3"></a>
 ##### 3.1.5.3.3 Rules for the wxf:Command Message
 
-The PowerShell Remoting Protocol executes a [**pipeline**](#gt_pipeline) on the remote [**RunspacePool**](#gt_runspacepool) (created using a remote shell as described in [3.1.5.3.1](#Section_3.1.5.3.13)) by sending a wxf:Command message to the remote shell, as specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.11. The header of the wxf:Command message MUST contain the following information.
+The PowerShell Remoting Protocol executes a [**pipeline**](#gt_pipeline) on the remote [**RunspacePool**](#gt_runspacepool) (created using a remote shell as described in [3.1.5.3.1](#Section_3.1.5.3.15)) by sending a wxf:Command message to the remote shell, as specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.11. The header of the wxf:Command message MUST contain the following information.
 
 | Element | Value |
 | --- | --- |
@@ -6287,7 +6287,7 @@ If the wxf:Send message is successfully received and processed by the server, th
 
 For any given RunspacePool or pipeline, there can be only one outstanding wxf:Send message targeted to that RunspacePool or pipeline. The client MUST wait until the server replies to the wxf:Send message with a wxf:SendResponse message or a wxf:Fault message before sending another wxf:Send message targeted to the same RunspacePool or pipeline.
 
-Only the following PSRP messages are allowed to be sent to the server using the wxf:Send message: SESSION_CAPABILITY (section [2.2.2.1](#Section_3.2.5.4.1)), INIT_RUNSPACEPOOL (section [2.2.2.2](#Section_2.2.2.2)), PUBLIC_KEY (section [3.1.5.4.3](#Section_3.1.5.4.3)), SET_MAX_RUNSPACES (section [3.1.5.4.6](#Section_3.1.5.4.6)), SET_MIN_RUNSPACES (section [3.1.5.4.7](#Section_3.1.5.4.7)), CREATE_PIPELINE (section [3.1.5.4.10](#Section_3.1.5.4.10)), GET_AVAILABLE_RUNSPACES (section [3.1.5.4.11](#Section_3.1.5.4.11)), RUNSPACEPOOL_HOST_RESPONSE (section [3.1.5.4.16](#Section_3.1.5.4.16)), PIPELINE_INPUT (section [3.1.5.4.17](#Section_3.1.5.4.17)), END_OF_PIPELINE_INPUT (section [3.1.5.4.18](#Section_3.1.5.4.18)), and PIPELINE_HOST_RESPONSE (section [3.1.5.4.28](#Section_3.1.5.4.28)).
+Only the following PSRP messages are allowed to be sent to the server using the wxf:Send message: SESSION_CAPABILITY (section [2.2.2.1](#Section_3.2.5.4.1)), INIT_RUNSPACEPOOL (section [2.2.2.2](#Section_2.2.2.2)), PUBLIC_KEY (section [3.1.5.4.3](#Section_3.1.5.4.31)), SET_MAX_RUNSPACES (section [3.1.5.4.6](#Section_3.1.5.4.6)), SET_MIN_RUNSPACES (section [3.1.5.4.7](#Section_3.1.5.4.7)), CREATE_PIPELINE (section [3.1.5.4.10](#Section_3.1.5.4.10)), GET_AVAILABLE_RUNSPACES (section [3.1.5.4.11](#Section_3.1.5.4.11)), RUNSPACEPOOL_HOST_RESPONSE (section [3.1.5.4.16](#Section_3.1.5.4.16)), PIPELINE_INPUT (section [3.1.5.4.17](#Section_3.1.5.4.17)), END_OF_PIPELINE_INPUT (section [3.1.5.4.18](#Section_3.1.5.4.18)), and PIPELINE_HOST_RESPONSE (section [3.1.5.4.28](#Section_3.1.5.4.28)).
 
 <a id="Section_3.1.5.3.6"></a>
 ##### 3.1.5.3.6 Rules for the wxf:SendResponse Message
@@ -6338,7 +6338,7 @@ Finally, the Stream element holds whatever data that the server sent. This data 
 
 Upon receiving the wxf:ReceiveResponse message, the client attempts to get the RunspacePool instance or pipeline instance, using the ShellID selector and the CommandId attribute specified in the wxf:ReceiveResponse message (section [3.2.5.3.8](#Section_3.2.5.3.8)) and the RunspacePool and the pipeline tables (section [3.2.1.1](#Section_3.2.1.1)). If a corresponding RunspacePool or pipeline instance is not found, the client ignores the message.
 
-If a corresponding RunspacePool or pipeline instance is found, the client extracts the data from the wxf:ReceiveResponse message and processes the data as per the rules described in section [3.1.5.1](#Section_3.2.5.1).
+If a corresponding RunspacePool or pipeline instance is found, the client extracts the data from the wxf:ReceiveResponse message and processes the data as per the rules described in section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.1.5.3.9"></a>
 ##### 3.1.5.3.9 Rules for the wxf:Signal Message
@@ -6483,7 +6483,7 @@ Decoded SESSION_CAPABILITY
 <a id="Section_3.1.5.3.16"></a>
 ##### 3.1.5.3.16 Rules for the wxf:Disconnect Message
 
-The PowerShell Remoting Protocol disconnects a remote RunspacePool, created using a remote shell as specified in section [3.1.5.3.1](#Section_3.1.5.3.13), by sending a wxf:Disconnect message to the remote shell as specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.11. Once the server shell is disconnected, all command input and output streams associated with the shell are automatically suspended. The header of the wxf:Disconnect message MUST contain the following information.
+The PowerShell Remoting Protocol disconnects a remote RunspacePool, created using a remote shell as specified in section [3.1.5.3.1](#Section_3.1.5.3.15), by sending a wxf:Disconnect message to the remote shell as specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.11. Once the server shell is disconnected, all command input and output streams associated with the shell are automatically suspended. The header of the wxf:Disconnect message MUST contain the following information.
 
 | Element | Value |
 | --- | --- |
@@ -6536,7 +6536,7 @@ The client waits for a wxf:ReconnectResponse message (see [MS-WSMV](../MS-WSMV/M
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Rules for Processing PSRP Messages
 
-See the general protocol rules described in section [3.1.5.1](#Section_3.2.5.1). The following sections describe the impact of various PSRP messages (section [2.2](#Section_1.3)) on a client.
+See the general protocol rules described in section [3.1.5.1](#Section_3.1.5.1). The following sections describe the impact of various PSRP messages (section [2.2](#Section_1.3)) on a client.
 
 <a id="Section_3.1.5.4.1"></a>
 ##### 3.1.5.4.1 SESSION_CAPABILITY Message
@@ -6548,7 +6548,7 @@ The syntax of this message is specified in section [2.2.2.1](#Section_3.2.5.4.1)
 
 The [**RunspacePool**](#gt_runspacepool) MUST be in an Opening state (section [3.1.1.2.2](#Section_3.1.1.2.2)) when this message is sent.
 
-The SESSION_CAPABILITY message MUST be the first message sent to the server. Fragments (see section [2.2.4](#Section_2.2.4)) of this message can be sent either as part of the <creationXml> element discussed in section [3.1.5.3.1](#Section_3.1.5.3.13) or as part of input discussed in section [3.1.5.3.5](#Section_3.1.5.3.5). This message MUST be sent only once per RunspacePool from a client to a server.
+The SESSION_CAPABILITY message MUST be the first message sent to the server. Fragments (see section [2.2.4](#Section_2.2.4)) of this message can be sent either as part of the <creationXml> element discussed in section [3.1.5.3.1](#Section_3.1.5.3.15) or as part of input discussed in section [3.1.5.3.5](#Section_3.1.5.3.5). This message MUST be sent only once per RunspacePool from a client to a server.
 
 The SESSION_CAPABILITY message MUST have the following properties when it is sent to the server.
 
@@ -6610,7 +6610,7 @@ When this message is received, the RunspacePool MUST be in the Opened state.
 
 The syntax of this message is specified in section [2.2.2.5](#Section_2.2.2.5).
 
-This is message is targeted to [**RunspacePool**](#gt_runspacepool). A server sends this message to get a client's Public Key. After receiving this message, the client MUST send a [PUBLIC_KEY message (section 3.1.5.4.3)](#Section_3.1.5.4.3) to the server.
+This is message is targeted to [**RunspacePool**](#gt_runspacepool). A server sends this message to get a client's Public Key. After receiving this message, the client MUST send a [PUBLIC_KEY message (section 3.1.5.4.3)](#Section_3.1.5.4.31) to the server.
 
 When this message is received, RunspacePool MUST be in Opened state.
 
@@ -6889,7 +6889,7 @@ This message MUST be sent to the server's RunspacePool. Before sending this mess
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
-The Session Key Transfer timer (section [3.1.1.2.8](#Section_3.1.1.2.8)) MUST be started by the PowerShell Remoting Protocol when it sends a PUBLIC_KEY message (section [3.1.5.4.3](#Section_3.1.5.4.3)). There MUST be a unique timer for each PUBLIC_KEY message. Upon receipt of an ENCRYPTED_SESSION_KEY message (section [3.1.5.4.4](#Section_3.1.5.4.4)) for that PUBLIC_KEY message, the timer MUST be canceled.
+The Session Key Transfer timer (section [3.1.1.2.8](#Section_3.1.1.2.8)) MUST be started by the PowerShell Remoting Protocol when it sends a PUBLIC_KEY message (section [3.1.5.4.3](#Section_3.1.5.4.31)). There MUST be a unique timer for each PUBLIC_KEY message. Upon receipt of an ENCRYPTED_SESSION_KEY message (section [3.1.5.4.4](#Section_3.1.5.4.4)) for that PUBLIC_KEY message, the timer MUST be canceled.
 
 The Session Key Transfer timer MUST expire after the number of milliseconds given by the SessionKeyTransferTimeoutms (section 3.1.1.2.8). Upon expiration of this timer, the PowerShell Remoting Protocol MUST close the associated [**RunspacePool**](#gt_runspacepool), as described in section [3.1.4.2](#Section_3.1.4.2).
 
@@ -6909,7 +6909,7 @@ If there are any errors while processing a [**pipeline**](#gt_pipeline) message,
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Global Data
 
-Global server data MUST be initialized as specified in section [3.2.3](#Section_3.1.3).
+Global server data MUST be initialized as specified in section [3.2.3](#Section_3.2.3).
 
 <a id="Section_3.2.1.1.1"></a>
 ##### 3.2.1.1.1 WSMV ShellID to RunspacePool Table
@@ -6940,9 +6940,9 @@ Each [**RunspacePool**](#gt_runspacepool) has an associated state. The state of 
 
 Section [2.2.3.4](#Section_2.2.3.4) lists available states and describes the data type used to encode the state in PSRP messages.
 
-Sections [3.2.5.4.1](#Section_3.2.5.4.10) and [3.2.5.4.2](#Section_3.2.5.4.25) describe how RunspacePool state transitions from the BeforeOpen state to the NegotiationSucceeded state, and then to the Opened state. From the Opened state, a RunspacePool can reach either the Closed or Broken state, mentioned in section 2.2.3.4.
+Sections [3.2.5.4.1](#Section_3.2.5.4.1) and [3.2.5.4.2](#Section_3.2.5.4.27) describe how RunspacePool state transitions from the BeforeOpen state to the NegotiationSucceeded state, and then to the Opened state. From the Opened state, a RunspacePool can reach either the Closed or Broken state, mentioned in section 2.2.3.4.
 
-A client can close a RunspacePool by sending wxf:Delete message (section [3.1.5.3.11](#Section_3.1.5.3.11)). When a server receives this message, the server MUST stop all the running [**pipeline**](#gt_pipeline), change the RunspacePool state to Closed, and send a wxf:DeleteResponse message (section [3.2.5.3.1](#Section_3.2.5.3.16)).
+A client can close a RunspacePool by sending wxf:Delete message (section [3.1.5.3.11](#Section_3.1.5.3.11)). When a server receives this message, the server MUST stop all the running [**pipeline**](#gt_pipeline), change the RunspacePool state to Closed, and send a wxf:DeleteResponse message (section [3.2.5.3.1](#Section_3.2.5.3.19)).
 
 The server can change the RunspacePool state from Opened to Broken at any time if the server determines that something is wrong with the RunspacePool (such as a network connection getting lost or a corrupted RunspacePool). Before changing the state to Broken, the server MUST stop all the running pipelines. After changing the RunspacePool state to Broken, the server MUST send a RUNSPACEPOOL_STATE message (section [3.2.5.4.9](#Section_3.2.5.4.9)) with a Broken state to the client if there is a pending wxf:Receive message (see section [3.2.5.3.7](#Section_3.2.5.3.7)).
 
@@ -7130,7 +7130,7 @@ The message processing rules specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) secti
 - The server receives data from the client as part of wxf:Send (section [3.2.5.3.5](#Section_3.2.5.3.5)), wxf:Create (section [3.2.5.3.12](#Section_3.2.5.3.12)), or wxf:Command (section [3.2.5.3.3](#Section_3.2.5.3.3)) messages and constructs a PSRP message according to the rules specified in section [3.2.5.1.2](#Section_3.2.5.1.2). The server determines whether a PSRP message is targeted to a RunspacePool or pipeline, according to the rules specified in section [3.2.5.4](#Section_3.2.5.4) and section [2.2.1](#Section_2.2.1).
 - Some messages apply only to a RunspacePool, and are valid only when the RunspacePool is in certain states. The valid states for each message are listed in section 3.2.5.4. When a server receives a message for a RunspacePool that is not in the correct state, the server MUST send a wxf:Fault message ([MS-WSMV] section 2.2.4.43) to the client as a response to any pending wxf:Receive (section [3.1.5.3.7](#Section_3.1.5.3.7)) messages, close the RunspacePool as specified in section [3.2.1.2.2](#Section_3.2.1.2.2), and discard any incoming messages for that specific RunspacePool.
 - Some messages apply only to a pipeline, and are valid only when the pipeline is in certain states. The valid states for each message are listed in section 3.2.5.4. When a server receives a message for a pipeline that is not in the correct state, then the server MUST send a wxf:Fault message ([MS-WSMV] section 2.2.4.43) to the client as a response to any pending wxf:Receive (section 3.1.5.3.7) messages, stop the pipeline as specified in section [3.2.1.3.2](#Section_3.2.1.3.2), and discard the incoming messages for that specific pipeline.
-- If a server receives a message that does not target any existing pipeline or RunspacePool, as per the data specified in section [3.2.1](#Section_3.1.1), then the server MUST send a wxf:Fault message ([MS-WSMV] section 2.2.4.43) to the client and ignore the message.
+- If a server receives a message that does not target any existing pipeline or RunspacePool, as per the data specified in section [3.2.1](#Section_3.2.1), then the server MUST send a wxf:Fault message ([MS-WSMV] section 2.2.4.43) to the client and ignore the message.
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Rules for Sending Data
 
@@ -7142,7 +7142,7 @@ The message processing rules specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) secti
 ##### 3.2.5.1.2 Rules for Receiving Data
 
 - The server receives data from the client using a wxf:Create, wxf:Command, or wxf:Send WSMV message. Each WSMV message contains one or more fragments. See section [2.2.4](#Section_2.2.4) for the format of a fragment.
-- When one of the WSMV messages with fragmented data is received, the server extracts the **Blob** field of the fragment and appends the extracted data to the **PartiallyDefragmentedPsrpMessage** field of the targeted [**RunspacePool**](#gt_runspacepool) (section [3.2.1.2.3](#Section_3.2.1.2.3)) or [**pipeline**](#gt_pipeline) (section [3.2.1.3.3](#Section_3.2.1.3.3)). If the data is received using wxf:Create (section [3.2.5.3.1](#Section_3.2.5.3.16)) or wxf:Command (section [3.2.5.3.3](#Section_3.2.5.3.3)), the appropriate data MUST be decoded using base-64 format.
+- When one of the WSMV messages with fragmented data is received, the server extracts the **Blob** field of the fragment and appends the extracted data to the **PartiallyDefragmentedPsrpMessage** field of the targeted [**RunspacePool**](#gt_runspacepool) (section [3.2.1.2.3](#Section_3.2.1.2.3)) or [**pipeline**](#gt_pipeline) (section [3.2.1.3.3](#Section_3.2.1.3.3)). If the data is received using wxf:Create (section [3.2.5.3.1](#Section_3.2.5.3.19)) or wxf:Command (section [3.2.5.3.3](#Section_3.2.5.3.3)), the appropriate data MUST be decoded using base-64 format.
 - After an EndFragment packet is received, a whole PSRP message (see section [2.2.1](#Section_2.2.1)) is stored in the **PartiallyDefragmentedPsrpMessage** field and can be handled as described in section [3.2.5.4](#Section_3.2.5.4).
 - The server compares the **ObjectId** and **FragmentId** fields of each received fragment with the **LastObjectId** and **LastFragmentId** data stored in the ADM and then updates the ADM. If at any point it is determined that the fragments are not received in ascending order of **FragmentId** with the same **ObjectId**, the server MUST close the appropriate RunspacePool or stop the appropriate pipeline.
 <a id="Section_3.2.5.2"></a>
@@ -7150,7 +7150,7 @@ The message processing rules specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md) secti
 
 The following is a typical sequence of activity for a server's [**RunspacePool**](#gt_runspacepool) and [**pipeline**](#gt_pipeline)
 
-- The server creates a RunspacePool and the RunspacePool gets into the Opened state. Refer to sections [3.2.5.4.1](#Section_3.2.5.4.10) and [3.2.5.4.2](#Section_3.2.5.4.25) for more details.
+- The server creates a RunspacePool and the RunspacePool gets into the Opened state. Refer to sections [3.2.5.4.1](#Section_3.2.5.4.1) and [3.2.5.4.2](#Section_3.2.5.4.27) for more details.
 - When a RunspacePool is in an Opened state, RunspacePool-specific messages such as SET_MAX_RUNSPACES (section [3.2.5.4.6](#Section_3.2.5.4.6)), SET_MIN_RUNSPACES (section [3.2.5.4.7](#Section_3.2.5.4.7)), and GET_AVAILABLE_RUNSPACES (section [3.2.5.4.11](#Section_3.2.5.4.11)) can be received by the server's RunspacePool. For more details about which messages can be received, see section [3.2.5.4](#Section_3.2.5.4).
 - When a RunspacePool is in an Opened state, a client can send a CREATE_PIPELINE (section [3.2.5.4.10](#Section_3.2.5.4.10)) to the server to start executing a pipeline on the server. The server creates a pipeline and changes the pipeline state to Running.
 - When the RunspacePool is in Opened state, a server can send RunspacePool-specific messages, such as RUNSPACEPOOL_HOST_CALL (section [3.2.5.4.15](#Section_3.2.5.4.15)) and RUNSPACEPOOL_STATE (section [3.2.5.4.9](#Section_3.2.5.4.9)).
@@ -7161,7 +7161,7 @@ The following is a typical sequence of activity for a server's [**RunspacePool**
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Rules for Processing WS-Man Messages
 
-Transportation using [**WS-MAN**](#gt_ws-man) is as specified in section [3.1.5.3](#Section_3.1.5.3).
+Transportation using [**WS-MAN**](#gt_ws-man) is as specified in section [3.1.5.3](#Section_2).
 
 A server SHOULD participate in this protocol sequence by sending response messages as described in the following subsections.
 
@@ -7170,7 +7170,7 @@ A server SHOULD participate in this protocol sequence by sending response messag
 
 A client uses the wxf:Create message to create a [**RunspacePool**](#gt_runspacepool) on the server, as specified in section [3.1.5.3.3](#Section_3.1.5.3.3).
 
-Upon receiving this message, the server validates the option with the name "protocolversion" and compares the value of this option against version "2.1" (taken from the table in section [3.1.5.3.1](#Section_3.1.5.3.13)). The server MUST send a wxf:Fault message as described in section [3.2.5.3.2](#Section_3.2.5.3.2) when any of the following conditions are true:
+Upon receiving this message, the server validates the option with the name "protocolversion" and compares the value of this option against version "2.1" (taken from the table in section [3.1.5.3.1](#Section_3.1.5.3.15)). The server MUST send a wxf:Fault message as described in section [3.2.5.3.2](#Section_3.2.5.3.2) when any of the following conditions are true:
 
 - The "protocolversion" option is missing.
 - The major version number of the "protocolversion" option is not equal to 2.
@@ -7181,7 +7181,7 @@ The wxf:Create message MAY contain "creationXml" data, as described in section 3
 <a id="Section_3.2.5.3.2"></a>
 ##### 3.2.5.3.2 Rules for the wxf:ResourceCreated Message
 
-A client uses the wxf:Create message to create a RunspacePool on the server, as specified in section [3.1.5.3.1](#Section_3.1.5.3.13). A server implementation MUST process the wxf:Create message and send either a success response (using the wxf:ResourceCreated message specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md), section 3.1.4.5.2) or a failure response (using the wxf:Fault message, specified in [MS-WSMV] section 2.2.4.43). The server MUST use wxf:ReceiveResponse messages to send any data (section [3.2.5.3.8](#Section_3.2.5.3.8)) targeted to that RunspacePool.
+A client uses the wxf:Create message to create a RunspacePool on the server, as specified in section [3.1.5.3.1](#Section_3.1.5.3.15). A server implementation MUST process the wxf:Create message and send either a success response (using the wxf:ResourceCreated message specified in [MS-WSMV](../MS-WSMV/MS-WSMV.md), section 3.1.4.5.2) or a failure response (using the wxf:Fault message, specified in [MS-WSMV] section 2.2.4.43). The server MUST use wxf:ReceiveResponse messages to send any data (section [3.2.5.3.8](#Section_3.2.5.3.8)) targeted to that RunspacePool.
 
 The wxf:Create message sent by clients MUST contain an option with the name "protocolversion" and the value "2.1" or "2.2". If the server does not accept a client's protocol version, the server MUST send an error message to the client using a wxf:Fault message as specified in [MS-WSMV], section 2.2.4.43.
 
@@ -7231,7 +7231,7 @@ If a corresponding RunspacePool or pipeline instance is found, the server extrac
 
 Upon successfully processing the message, the server MUST send a wxf:SendResponse message (section [3.2.5.3.6](#Section_3.2.5.3.6)).
 
-Only the following PSRP messages are allowed to be sent to the server using the wxf:Send message: SESSION_CAPABILITY (section [3.1.5.4.1](#Section_3.1.5.4.18)), INIT_RUNSPACEPOOL (section [3.1.5.4.2](#Section_3.1.5.4.24)), PUBLIC_KEY (section [3.1.5.4.3](#Section_3.1.5.4.3)), SET_MAX_RUNSPACES (section [3.1.5.4.6](#Section_3.1.5.4.6)), SET_MIN_RUNSPACES (section [3.1.5.4.7](#Section_3.1.5.4.7)), CREATE_PIPELINE (section [3.1.5.4.10](#Section_3.1.5.4.10)), GET_AVAILABLE_RUNSPACES (section [3.1.5.4.11](#Section_3.1.5.4.11)), RUNSPACEPOOL_HOST_RESPONSE (section [3.1.5.4.16](#Section_3.1.5.4.16)), PIPELINE_INPUT (section [3.1.5.4.17](#Section_3.1.5.4.17)), END_OF_PIPELINE_INPUT (section [3.1.5.4.18](#Section_3.1.5.4.18)), PIPELINE_HOST_RESPONSE (section [3.1.5.4.28](#Section_3.1.5.4.28)).
+Only the following PSRP messages are allowed to be sent to the server using the wxf:Send message: SESSION_CAPABILITY (section [3.1.5.4.1](#Section_3.1.5.4.17)), INIT_RUNSPACEPOOL (section [3.1.5.4.2](#Section_3.1.5.4.24)), PUBLIC_KEY (section [3.1.5.4.3](#Section_3.1.5.4.31)), SET_MAX_RUNSPACES (section [3.1.5.4.6](#Section_3.1.5.4.6)), SET_MIN_RUNSPACES (section [3.1.5.4.7](#Section_3.1.5.4.7)), CREATE_PIPELINE (section [3.1.5.4.10](#Section_3.1.5.4.10)), GET_AVAILABLE_RUNSPACES (section [3.1.5.4.11](#Section_3.1.5.4.11)), RUNSPACEPOOL_HOST_RESPONSE (section [3.1.5.4.16](#Section_3.1.5.4.16)), PIPELINE_INPUT (section [3.1.5.4.17](#Section_3.1.5.4.17)), END_OF_PIPELINE_INPUT (section [3.1.5.4.18](#Section_3.1.5.4.18)), PIPELINE_HOST_RESPONSE (section [3.1.5.4.28](#Section_3.1.5.4.28)).
 
 <a id="Section_3.2.5.3.6"></a>
 ##### 3.2.5.3.6 Rules for the wxf:SendResponse Message
@@ -7310,7 +7310,7 @@ The server uses the wxf:Fault message (as specified in [MS-WSMV](../MS-WSMV/MS-W
 
 A client uses the wxf:Connect message to connect to an existing RunspacePool on the server, as specified in section [3.1.5.3.14](#Section_3.1.5.3.14).
 
-Upon receiving this message, the server compares the "protocolversion" option against the value "2.2" (see section [3.1.5.3.1](#Section_3.1.5.3.13)). The server MUST send a wxf:Fault message as specified in section [3.1.5.3.2](#Section_3.1.5.3.2) when either of the following conditions is true:
+Upon receiving this message, the server compares the "protocolversion" option against the value "2.2" (see section [3.1.5.3.1](#Section_3.1.5.3.15)). The server MUST send a wxf:Fault message as specified in section [3.1.5.3.2](#Section_3.1.5.3.2) when either of the following conditions is true:
 
 - The "protocolversion" option is missing.
 - The "protocolversion" option is present, but the major version number of the value it contains is not equal to 2.
@@ -7367,7 +7367,7 @@ See the general protocol rules described in section [3.2.5.1](#Section_3.2.5.1).
 <a id="Section_3.2.5.4.1"></a>
 ##### 3.2.5.4.1 SESSION_CAPABILITY Message
 
-The syntax of this message is specified in section [3.1.5.4.1](#Section_3.1.5.4.18).
+The syntax of this message is specified in section [3.1.5.4.1](#Section_3.1.5.4.17).
 
 <a id="Section_3.2.5.4.1.1"></a>
 ###### 3.2.5.4.1.1 Receiving from the Client
@@ -7435,7 +7435,7 @@ The server generates a session key (section [3.2.1.2.7](#Section_3.2.1.2.7)), if
 
 The syntax of this message is specified in section [2.2.2.4](#Section_2.2.2.4). The **RPID** field (as specified in section [2.2.1](#Section_2.2.1)) of this message MUST be zeroed out.
 
-The server MUST send this message to the client as a response to the PUBLIC_KEY message (section [3.2.5.4.3](#Section_3.2.5.4.30)).
+The server MUST send this message to the client as a response to the PUBLIC_KEY message (section [3.2.5.4.3](#Section_3.2.5.4.31)).
 
 The server MUST generate a session key (section [3.1.1.2.7](#Section_3.1.1.2.7)), if one is not already generated, and send the session key as part of an ENCRYPTED_SESSION_KEY message to the client using a wxf:ReceiveResponse message (section [3.2.5.3.8](#Section_3.2.5.3.8)) targeted to RunspacePool.
 
@@ -7538,7 +7538,7 @@ The server sends this message to notify a client about a higher-layer server-sid
 
 The syntax of this message is specified in section [2.2.2.13](#Section_2.2.2.13).
 
-This message MUST be sent to a client when the RunspacePool state (section [3.2.1.2.2](#Section_3.2.1.2.2)) is NegotiationSucceeded and the server receives an INIT_RUNSPACEPOOL message (section [3.2.5.4.2](#Section_3.2.5.4.25)) from the client.
+This message MUST be sent to a client when the RunspacePool state (section [3.2.1.2.2](#Section_3.2.1.2.2)) is NegotiationSucceeded and the server receives an INIT_RUNSPACEPOOL message (section [3.2.5.4.2](#Section_3.2.5.4.27)) from the client.
 
 The server sends this message to notify a client about the server-side higher-layer specific application data.
 
@@ -7698,7 +7698,7 @@ When this message is processed, the RunspacePool MUST be in the NegotiationSucce
 
 The server changes the RunspacePool state to Opened and sends a RUNSPACEPOOL_INIT_DATA message (section [3.2.5.4.30](#Section_3.2.5.4.30)) to the client using a wxf:ConnectResponse message (see section 3.2.5.3.8) targeted to RunspacePool.
 
-For more details on how a RunspacePool is connected to on the server, see section [3.1.4.10](#Section_3.1.4.10.3).
+For more details on how a RunspacePool is connected to on the server, see section [3.1.4.10](#Section_3.1.4.10.1).
 
 <a id="Section_3.2.5.4.30"></a>
 ##### 3.2.5.4.30 RUNSPACEPOOL_INIT_DATA Message
@@ -7743,7 +7743,7 @@ The typical sequence, with respect to PSRP, for creating a successful [**Runspac
 | --- | --- | --- | --- |
 | 1 | The client initializes the RunspacePool state (section [3.1.1.2](#Section_3.1.1.2)) to Opening. The client connects with the server using a wxf:Create message (section [3.1.5.3.3](#Section_3.1.5.3.3)). | > | The server processes the message and validates the ProtocolVersion, InputStreams, and OutputStreams specified in the message (section 3.1.5.3.3). The server adds an entry in the RunspacePool table to map the WSMV shell to the RunspacePool (section [3.2.1.1.1](#Section_3.2.1.1.1)). The server initializes the RunspacePool state (section [3.2.1.2.2](#Section_3.2.1.2.2)) to BeforeOpen. |
 | 2 | - | < | The server sends a success message (section [3.2.5.3.2](#Section_3.2.5.3.2)) if validation is successful. |
-| 3 | The client sends a Session Capability using wxf:Send message (section [3.1.5.3.5](#Section_3.1.5.3.5)). The client sends a wxf:Receive message (section [3.1.5.3.7](#Section_3.1.5.3.7)) to the server to start receiving data from the server. After each received wxf:ReceiveResponse message (section [3.2.5.3.8](#Section_3.2.5.3.8)), the client sends another wxf:Receive message until the RunspacePool transitions to a Closed or Broken state. The client changes the RunspacePool state (section 3.1.1.2) to NegotiationSent. | > | The server processes the message and validates the data according to the negotiation algorithm (section [3.2.5.4.1](#Section_3.2.5.4.10)). The server extracts the RPID from the message (section [2.2.1](#Section_2.2.1)) and stores this value as RunspacePool's [**GUID**](#gt_globally-unique-identifier-guid) (section [3.2.1.2.7](#Section_3.2.1.2.7)). The server changes the RunspacePool state (section 3.2.1.2.2) to NegotiationSucceeded. |
+| 3 | The client sends a Session Capability using wxf:Send message (section [3.1.5.3.5](#Section_3.1.5.3.5)). The client sends a wxf:Receive message (section [3.1.5.3.7](#Section_3.1.5.3.7)) to the server to start receiving data from the server. After each received wxf:ReceiveResponse message (section [3.2.5.3.8](#Section_3.2.5.3.8)), the client sends another wxf:Receive message until the RunspacePool transitions to a Closed or Broken state. The client changes the RunspacePool state (section 3.1.1.2) to NegotiationSent. | > | The server processes the message and validates the data according to the negotiation algorithm (section [3.2.5.4.1](#Section_3.2.5.4.1)). The server extracts the RPID from the message (section [2.2.1](#Section_2.2.1)) and stores this value as RunspacePool's [**GUID**](#gt_globally-unique-identifier-guid) (section [3.2.1.2.7](#Section_3.2.1.2.7)). The server changes the RunspacePool state (section 3.2.1.2.2) to NegotiationSucceeded. |
 | 4 | - | < | The server sends its Session Capability (section 3.2.5.4.1) using wxf:ReceiveResponse (section 3.2.5.3.8). |
 | 5 | The client processes the server's Session Capability object and if successful (as described in section 3.2.5.4.1): The client changes the RunspacePool state (section 3.1.1.2) to NegotiationSucceeded. The client sends a INIT_RUNSPACEPOOL message (section [2.2.2.2](#Section_2.2.2.2)) using wxf:Send message (section 3.1.5.3.5). | > | The server processes the INIT_RUNSPACEPOOL message. |
 | 6 | - | < | The server sends ApplicationPrivateData (section [3.2.5.4.13](#Section_3.2.5.4.13)) using wxf:ReceiveResponse (section 3.2.5.3.8). |
@@ -7760,7 +7760,7 @@ The typical PowerShell Remoting Protocol sequence for successfully connecting to
 | --- | --- | --- | --- |
 | 1 | The client initializes the RunspacePool state to Connecting (see section [3.2.1.2.2](#Section_3.2.1.2.2)). The client connects with the server using a wxf:Connect message (see section [3.1.5.3.14](#Section_3.1.5.3.14)) that includes the SESSION_CAPABILITY and CONNECT_RUNSPACEPOOL messages. | > | The server processes the message and validates the ProtocolVersion (see section 3.1.5.3.14).The server processes the CONNECT_RUNSPACEPOOL message. The server sets the RunspacePool state (section 3.2.1.2.2) to Connecting. |
 | 2 | - | < | The server sends a success message (see section [3.2.5.3.15](#Section_3.2.5.3.15)) along with the server's negotiation information and the RUNSPACEPOOL_INIT_DATA message, if validation succeeds. |
-| 3 | The client processes the server's Session Capability object and, if successful (as described in section [3.2.5.4.1](#Section_3.2.5.4.10)), takes the following actions: The client changes the RunspacePool state (see section 3.2.1.2.2) to NegotiationSucceeded. The client processes the RUNSPACEPOOL_INIT_DATA message and changes the RunspacePool to Opened. The client issues a wxf:Receive request to the server. | > | - |
+| 3 | The client processes the server's Session Capability object and, if successful (as described in section [3.2.5.4.1](#Section_3.2.5.4.1)), takes the following actions: The client changes the RunspacePool state (see section 3.2.1.2.2) to NegotiationSucceeded. The client processes the RUNSPACEPOOL_INIT_DATA message and changes the RunspacePool to Opened. The client issues a wxf:Receive request to the server. | > | - |
 | 4 | - | < | The server uses a wxf:ReceiveResponse message (see section [3.2.5.3.8](#Section_3.2.5.3.8)) to send an APPLICATION_PRIVATE_DATA message (see section [3.2.5.4.13](#Section_3.2.5.4.13)). The server changes the RunspacePool state to Opened. |
 | 5 | The client receives the APPLICATION_PRIVATE_DATA message and passes it to the higher layer. | - | - |
 
@@ -7803,7 +7803,7 @@ The PowerShell Remoting Protocol allows the client and the server to exchange a 
 | Step | Client | Direction | Server |
 | --- | --- | --- | --- |
 | 1 | The [**RunspacePool**](#gt_runspacepool) is in the Opened state on the client. | - | - |
-| 2 | The client constructs a PUBLIC_KEY message (section [2.2.2.3](#Section_2.2.2.3)) and sends it using a wxf:Send message (section [3.1.5.3.5](#Section_3.1.5.3.5)) targeted to the RunspacePool. The client starts Session Key Transfer timer (section [3.1.2](#Section_3.2.2)). | > | The server stores the Public Key (section [3.2.1.2.8](#Section_3.2.1.2.8)). The server generates a Session Key (section [3.2.1.2.7](#Section_3.2.1.2.7)), if not already generated. |
+| 2 | The client constructs a PUBLIC_KEY message (section [2.2.2.3](#Section_2.2.2.3)) and sends it using a wxf:Send message (section [3.1.5.3.5](#Section_3.1.5.3.5)) targeted to the RunspacePool. The client starts Session Key Transfer timer (section [3.1.2](#Section_3.1.2)). | > | The server stores the Public Key (section [3.2.1.2.8](#Section_3.2.1.2.8)). The server generates a Session Key (section [3.2.1.2.7](#Section_3.2.1.2.7)), if not already generated. |
 | 3 | The client sends a wxf:Receive message (see section [3.1.5.3.7](#Section_3.1.5.3.7)) to the server, if none is pending for this RunspacePool. | > | - |
 | 4 | - | < | For each wxf:Send message received from the client, the server sends a wxf:SendResponse message (see section [3.2.5.3.6](#Section_3.2.5.3.6)) to the client. |
 | 5 | The client processes the ENCRYPTED_SESSION_KEY message (section 2.2.2.4), cancels the Session Key Transfer timer (section [3.1.6](#Section_3.2.6)) and stores the Session Key (section [3.1.1.2.7](#Section_3.1.1.2.7)) for future use. | < | The server constructs an Encrypted Session Key (section 2.2.2.4) and sends it to the client using wxf:ReceiveResponse (section [3.2.5.3.8](#Section_3.2.5.3.8)). |
@@ -7819,7 +7819,7 @@ The PowerShell Remoting Protocol allows the client and the server to exchange a 
 | 1 | The [**RunspacePool**](#gt_runspacepool) is in the Opened state on the client. | - | The RunspacePool is in the Opened state on the server (section [4.1.1](#Section_4.1.1)). The Public Key (section [3.2.1.2.8](#Section_3.2.1.2.8)) is empty. |
 | 2 | The client sends a wxf:Receive message (section [3.1.5.3.7](#Section_3.1.5.3.7)) to the server, if none is pending for this RunspacePool. | > | - |
 | 3 | - | < | The server constructs a PUBLIC_KEY_REQUEST message (section [2.2.2.5](#Section_2.2.2.5)) and sends it to the client using wxf:ReceiveResponse (section [3.2.5.3.8](#Section_3.2.5.3.8)). |
-| 4 | The client constructs a PUBLIC_KEY message (section [2.2.2.3](#Section_2.2.2.3)) and sends it using wxf:Send message (section [3.1.5.3.5](#Section_3.1.5.3.5)) targeted to the RunspacePool. The client starts Session Key Transfer timer (section [3.1.2](#Section_3.2.2)). | > | The server stores the Public Key (section 3.2.1.2.8). The server generates a Session Key (section [3.2.1.2.7](#Section_3.2.1.2.7)), if not already generated. |
+| 4 | The client constructs a PUBLIC_KEY message (section [2.2.2.3](#Section_2.2.2.3)) and sends it using wxf:Send message (section [3.1.5.3.5](#Section_3.1.5.3.5)) targeted to the RunspacePool. The client starts Session Key Transfer timer (section [3.1.2](#Section_3.1.2)). | > | The server stores the Public Key (section 3.2.1.2.8). The server generates a Session Key (section [3.2.1.2.7](#Section_3.2.1.2.7)), if not already generated. |
 | 5 | The client sends a wxf:Receive message (section 3.1.5.3.7) to the server, if none is pending for this RunspacePool. | > | - |
 | 6 | - | < | For each wxf:Send message received from the client, the server sends a wxf:SendResponse message (see section [3.2.5.3.6](#Section_3.2.5.3.6)) to the client. |
 | 7 | The client processes the ENCRYPTED_SESSION_KEY message (section 2.2.2.4), cancels the Session Key Transfer timer (section 3.1.2) and stores the Session Key (section [3.1.1.2.7](#Section_3.1.1.2.7)) for future use. | < | The server constructs an Encrypted Session Key (section 2.2.2.4) and sends it to the client using wxf:ReceiveResponse (section 3.2.5.3.8). |

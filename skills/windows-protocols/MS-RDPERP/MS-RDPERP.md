@@ -528,12 +528,12 @@ If the server is not capable of monitoring the desktop (for example, secure desk
 <a id="Section_1.3.2.4"></a>
 #### 1.3.2.4 RAIL Virtual Channel Messages
 
-Client/server or server/client messages can flow over the [**RAIL**](#gt_remote-applications-integrated-locally-rail) anytime after the virtual channel handshake sequence (section [2.2.2.2.1](#Section_2.2.2.2.1)). The client sends the [Client Information PDU](#Section_3.3.5.2.1.1) and the [Client System Parameters Update PDU](#Section_2.2.2.4.1) immediately after the handshake to inform the server of its state and system parameters. If the client includes the TS_RAIL_CLIENTSTATUS_ZORDER_SYNC (0x00000004) flag in the Client Information PDU, then the server creates the marker window (section [3.3.1.3](#Section_3.3.1.3)) and sends the ID of this window to the client using the [Z-Order Sync Information PDU (section 2.2.2.11.1)](#Section_2.2.2.11.1). If the client includes the TS_RAIL_CLIENTSTATUS_WINDOW_RESIZE_MARGIN_SUPPORTED (0x00000010) flag in the Client Information PDU, then the server sends the dimensions of the window resize margins in the Window Information PDU (section [2.2.1.3.1](#Section_2.2.1.3.1.1)). If the client includes the TS_RAIL_CLIENTSTATUS_APPBAR_REMOTING_SUPPORTED (0x00000040) flag in the Client Information PDU, then the server sends the registration state and edge messages for [**application desktop toolbars**](#gt_application-desktop-toolbar) in the Window Information PDU (section 2.2.1.3.1). The server sends the [Server System Parameters Update PDU](#Section_3.2.5.2.4.1) immediately after the handshake to inform the client of its system parameters. All other virtual channel messages are generated in response to events on the client or server. If the client includes the TS_RAIL_CLIENTSTATUS_POWER_DISPLAY_REQUEST_SUPPORTED (0x00000080) flag in the Client Information PDU, then the server sends [**display-required power requests**](#gt_display-required-power-request) to the client using the Power Display Request PDU (section [2.2.2.13.1](#Section_2.2.2.13.1)).
+Client/server or server/client messages can flow over the [**RAIL**](#gt_remote-applications-integrated-locally-rail) anytime after the virtual channel handshake sequence (section [2.2.2.2.1](#Section_2.2.2.2.1)). The client sends the [Client Information PDU](#Section_2.2.2.2.2) and the [Client System Parameters Update PDU](#Section_2.2.2.4.1) immediately after the handshake to inform the server of its state and system parameters. If the client includes the TS_RAIL_CLIENTSTATUS_ZORDER_SYNC (0x00000004) flag in the Client Information PDU, then the server creates the marker window (section [3.3.1.3](#Section_3.3.1.3)) and sends the ID of this window to the client using the [Z-Order Sync Information PDU (section 2.2.2.11.1)](#Section_2.2.2.11.1). If the client includes the TS_RAIL_CLIENTSTATUS_WINDOW_RESIZE_MARGIN_SUPPORTED (0x00000010) flag in the Client Information PDU, then the server sends the dimensions of the window resize margins in the Window Information PDU (section [2.2.1.3.1](#Section_2.2.1.3.1.2)). If the client includes the TS_RAIL_CLIENTSTATUS_APPBAR_REMOTING_SUPPORTED (0x00000040) flag in the Client Information PDU, then the server sends the registration state and edge messages for [**application desktop toolbars**](#gt_application-desktop-toolbar) in the Window Information PDU (section 2.2.1.3.1). The server sends the [Server System Parameters Update PDU](#Section_2.2.2.5.1) immediately after the handshake to inform the client of its system parameters. All other virtual channel messages are generated in response to events on the client or server. If the client includes the TS_RAIL_CLIENTSTATUS_POWER_DISPLAY_REQUEST_SUPPORTED (0x00000080) flag in the Client Information PDU, then the server sends [**display-required power requests**](#gt_display-required-power-request) to the client using the Power Display Request PDU (section [2.2.2.13.1](#Section_2.2.2.13.1)).
 
 <a id="Section_1.3.2.5"></a>
 #### 1.3.2.5 RAIL Local Move/Resize
 
-Local move/resize features are [**RAIL**](#gt_remote-applications-integrated-locally-rail) options designed to optimize bandwidth in certain situations where [**RAIL windows**](#gt_rail-window) are moved or resized by the user. A RAIL client indicates to the RAIL server whether it supports local move/resize through the Client Capabilities PDU (section [2.2.2.2.2](#Section_3.3.5.2.1.1)), sent after the Virtual Channel handshake sequence. RAIL servers do not have to explicitly report move/size support to the client.
+Local move/resize features are [**RAIL**](#gt_remote-applications-integrated-locally-rail) options designed to optimize bandwidth in certain situations where [**RAIL windows**](#gt_rail-window) are moved or resized by the user. A RAIL client indicates to the RAIL server whether it supports local move/resize through the Client Capabilities PDU (section [2.2.2.2.2](#Section_2.2.2.2.2)), sent after the Virtual Channel handshake sequence. RAIL servers do not have to explicitly report move/size support to the client.
 
 ![RAIL local move/resize operation](media/image3.png)
 
@@ -556,7 +556,7 @@ Enhanced RemoteApp is a graphics presentation mode supported by RDP 8.1 that lev
 
 Window resize margins are supported by RDP 10.2. The dimensions of these margins are defined by the server and are to be used by the client to create a transparent hit-testable region around the RemoteApp window graphics. Any mouse, pen, or touch input within these margins is to be sent to the server.
 
-Window resize margins must be used to extend the window geometry and are not included in the boundaries of the window sent in the Window Information Order (section [2.2.1.3.1.2.1](#Section_3.3.5.1.6)).
+Window resize margins must be used to extend the window geometry and are not included in the boundaries of the window sent in the Window Information Order (section [2.2.1.3.1.2.1](#Section_2.2.1.3.1)).
 
 ![Window Resize Margins](media/image4.png)
 
@@ -572,7 +572,7 @@ RAIL extends the Remote Desktop Protocol: Basic Connectivity and Graphics Remoti
 
 The Remote Programs Extensions for Remote Desktop Protocol has the assumption to operate in a fully operational RDP connection. A fully operational RDP connection is a connection that has passed the Connection Finalization phase, as specified in [MS-RDPBCGR](#Section_2.2.1) section 1.3.1.1.
 
-The [**RAIL**](#gt_remote-applications-integrated-locally-rail) server endpoint expects that the Channel PDU Header ([MS-RDPBCGR] section 2.2.6.1.1) is visible for all data that flows over the RAIL virtual channel (sections [1.3.1](../MS-RDPBCGR/MS-RDPBCGR.md) and [2.2.2](#Section_3.2.5.2)). To ensure that this condition is met, the CHANNEL_FLAG_SHOW_PROTOCOL (0x00000010) flag has to be set in the **flags** field of the Channel PDU Header.
+The [**RAIL**](#gt_remote-applications-integrated-locally-rail) server endpoint expects that the Channel PDU Header ([MS-RDPBCGR] section 2.2.6.1.1) is visible for all data that flows over the RAIL virtual channel (sections [1.3.1](../MS-RDPBCGR/MS-RDPBCGR.md) and [2.2.2](#Section_2.2.2)). To ensure that this condition is met, the CHANNEL_FLAG_SHOW_PROTOCOL (0x00000010) flag has to be set in the **flags** field of the Channel PDU Header.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -821,7 +821,7 @@ packet-beta
   16-23: "CacheId"
 ```
 
-**CacheEntry (2 bytes):** An unsigned 16-bit integer. The index within an icon cache at the client that refers to the cached icon. This value MUST have been previously specified by the server in the **Icon Info** structure (section [2.2.1.2.3](#Section_2.2.1.2.3)) of a **Window Information Order** (section [2.2.1.3.1](#Section_2.2.1.3.1.1)) or **Icon** structure of a [New or Existing Notification Icon (section 2.2.1.3.2.2.1)](#Section_4.1.1.3).
+**CacheEntry (2 bytes):** An unsigned 16-bit integer. The index within an icon cache at the client that refers to the cached icon. This value MUST have been previously specified by the server in the **Icon Info** structure (section [2.2.1.2.3](#Section_2.2.1.2.3)) of a **Window Information Order** (section [2.2.1.3.1](#Section_2.2.1.3.1.2)) or **Icon** structure of a [New or Existing Notification Icon (section 2.2.1.3.2.2.1)](#Section_4.1.1.3).
 
 **CacheId (1 byte):** An unsigned 8-bit integer. The index of the icon cache containing the cached icon. This value MUST have been previously specified by the server in the **Icon Info** structure of a **Window Information Order** or **Icon** structure of a New or Existing Notification Icon.
 
@@ -850,7 +850,7 @@ packet-beta
 
 **OrderSize (2 bytes):** An unsigned 16-bit integer. The size of the entire packet, in bytes.
 
-**FieldsPresentFlags (4 bytes):** An unsigned 32-bit integer. The flags indicating which fields are present in the packet. See [Orders](#Section_2.2.1.3.1.2).
+**FieldsPresentFlags (4 bytes):** An unsigned 32-bit integer. The flags indicating which fields are present in the packet. See [Orders](#Section_2.2.1.3.3.2).
 
 **WindowId (4 bytes):** An unsigned 32-bit integer. The ID of the window being described in the drawing order. It is generated by the server and is unique for every window in the session.
 
@@ -1090,7 +1090,7 @@ The Window Icon packet is a Window Information Order generated by the server whe
 
 Icons are created by combining two bitmaps of the same size. The mask bitmap is always 1 bpp, although the color depth of the color bitmap can vary. The color bitmap can have an associated color table.
 
-The Window Icon order SHOULD NOT be sent if the client specified the TS_RAIL_CLIENTSTATUS_SUPPRESS_ICON_ORDERS flag in the Client Information PDU (section [2.2.2.2.2](#Section_3.3.5.2.1.1)).
+The Window Icon order SHOULD NOT be sent if the client specified the TS_RAIL_CLIENTSTATUS_SUPPRESS_ICON_ORDERS flag in the Client Information PDU (section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
 ```mermaid
 packet-beta
@@ -1114,7 +1114,7 @@ Cached Icon
 
 The **Cached Icon** Window Information Order is generated by the server when a new or existing window sets or updates the icon in its title bar or in the Alt-Tab dialog box. If the icon information was transmitted by the server in a previous Window Information Order or [**Notification Icon**](#gt_notification-icon) Information Order in the same session, and the icon was cacheable (that is, the server specified a CacheEntry and CacheId for the icon), the server reports the icon cache entries to avoid sending duplicate information.
 
-The Cached Icon packet SHOULD NOT be sent if the client specified the TS_RAIL_CLIENTSTATUS_SUPPRESS_ICON_ORDERS flag in the Client Information PDU (section [2.2.2.2.2](#Section_3.3.5.2.1.1)).
+The Cached Icon packet SHOULD NOT be sent if the client specified the TS_RAIL_CLIENTSTATUS_SUPPRESS_ICON_ORDERS flag in the Client Information PDU (section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
 ```mermaid
 packet-beta
@@ -1386,14 +1386,14 @@ packet-beta
 | --- | --- |
 | TS_RAIL_ORDER_EXEC 0x0001 | Indicates a [Client Execute PDU](#Section_2.2.2.3.1) from client to server. |
 | TS_RAIL_ORDER_ACTIVATE 0x0002 | Indicates a [Client Activate PDU](#Section_2.2.2.6.1) from client to server. |
-| TS_RAIL_ORDER_SYSPARAM 0x0003 | Indicates a [Client System Parameters Update PDU](#Section_2.2.2.4.1) from client to server or a [Server System Parameters Update PDU](#Section_3.2.5.2.4.1) from server to client. |
+| TS_RAIL_ORDER_SYSPARAM 0x0003 | Indicates a [Client System Parameters Update PDU](#Section_2.2.2.4.1) from client to server or a [Server System Parameters Update PDU](#Section_2.2.2.5.1) from server to client. |
 | TS_RAIL_ORDER_SYSCOMMAND 0x0004 | Indicates a [Client System Command PDU](#Section_2.2.2.6.3) from client to server. |
 | TS_RAIL_ORDER_HANDSHAKE 0x0005 | Indicates a bi-directional [Handshake PDU](#Section_2.2.2.2.1). |
 | TS_RAIL_ORDER_NOTIFY_EVENT 0x0006 | Indicates a [Client Notify Event PDU](#Section_2.2.2.6.4) from client to server. |
 | TS_RAIL_ORDER_WINDOWMOVE 0x0008 | Indicates a [Client Window Move PDU](#Section_2.2.2.7.4) from client to server. |
 | TS_RAIL_ORDER_LOCALMOVESIZE 0x0009 | Indicates a [Server Move/Size Start PDU](#Section_2.2.2.7.2) and a [Server Move/Size End PDU](#Section_2.2.2.7.3) from server to client. |
 | TS_RAIL_ORDER_MINMAXINFO 0x000a | Indicates a [Server Min Max Info PDU](#Section_2.2.2.7.1) from server to client. |
-| TS_RAIL_ORDER_CLIENTSTATUS 0x000b | Indicates a [Client Information PDU](#Section_3.3.5.2.1.1) from client to server. |
+| TS_RAIL_ORDER_CLIENTSTATUS 0x000b | Indicates a [Client Information PDU](#Section_2.2.2.2.2) from client to server. |
 | TS_RAIL_ORDER_SYSMENU 0x000c | Indicates a [Client System Menu PDU](#Section_2.2.2.6.2) from client to server. |
 | TS_RAIL_ORDER_LANGBARINFO 0x000d | Indicates a [Server Language Bar Information PDU](#Section_2.2.2.9.1) from server to client, or a Client Language Bar Information PDU from client to server. |
 | TS_RAIL_ORDER_EXEC_RESULT 0x0080 | Indicates a [Server Execute Result PDU](#Section_2.2.2.3.2) from server to client. |
@@ -1453,7 +1453,7 @@ packet-beta
 | TS_RAIL_CLIENTSTATUS_ALLOWLOCALMOVESIZE 0x00000001 | Indicates that the client supports the local move/size RAIL feature. |
 | TS_RAIL_CLIENTSTATUS_AUTORECONNECT 0x00000002 | Indicates that the client is auto-reconnecting to the server after an unexpected disconnect of the session. |
 | TS_RAIL_CLIENTSTATUS_ZORDER_SYNC 0x00000004 | Indicates that the client supports Z-order sync using the Z-Order Sync Information PDU (section [2.2.2.11.1](#Section_2.2.2.11.1)). |
-| TS_RAIL_CLIENTSTATUS_WINDOW_RESIZE_MARGIN_SUPPORTED 0x00000010 | Indicates that the client supports resize margins using the Window Information PDU (section [2.2.1.3.1](#Section_2.2.1.3.1.1)). |
+| TS_RAIL_CLIENTSTATUS_WINDOW_RESIZE_MARGIN_SUPPORTED 0x00000010 | Indicates that the client supports resize margins using the Window Information PDU (section [2.2.1.3.1](#Section_2.2.1.3.1.2)). |
 | TS_RAIL_CLIENTSTATUS_HIGH_DPI_ICONS_SUPPORTED 0x00000020 | Indicates that the client supports icons up to 96×96 pixels in size in the Window Icon PDU (section [2.2.1.3.1.2.2](#Section_2.2.1.3.1.2.2)). If this flag is not present, icon dimensions are limited to 32×32 pixels. |
 | TS_RAIL_CLIENTSTATUS_APPBAR_REMOTING_SUPPORTED 0x00000040 | Indicates that the client supports application desktop toolbar remoting using the Window Information PDU (section 2.2.1.3.1). |
 | TS_RAIL_CLIENTSTATUS_POWER_DISPLAY_REQUEST_SUPPORTED 0x00000080 | Indicates that the client supports [**display-required power requests**](#gt_display-required-power-request) sent using the Power Display Request PDU (section [2.2.2.13.1](#Section_2.2.2.13.1)). |
@@ -2456,7 +2456,7 @@ packet-beta
 <a id="Section_2.2.2.11.1"></a>
 ##### 2.2.2.11.1 Server Z-Order Sync Information PDU (TS_RAIL_ORDER_ZORDER_SYNC)
 
-The Z-Order Sync Information PDU is sent from the server to the client if the client has advertised support for Z-order sync in the [Client Information PDU (section 2.2.2.2.2)](#Section_3.3.5.2.1.1).
+The Z-Order Sync Information PDU is sent from the server to the client if the client has advertised support for Z-order sync in the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2).
 
 ```mermaid
 packet-beta
@@ -2478,7 +2478,7 @@ Windows are either in a cloaked or uncloaked state. Changes in the cloak state o
 
 The client sends the Window Cloak State Change PDU if both the client and server support syncing per-window cloak state (indicated by the TS_RAIL_LEVEL_WINDOW_CLOAKING_SUPPORTED flag in the [Remote Programs Capability Set (section 2.2.1.1.1)](#Section_2.2.1.1.1)). The server uses this information to sync the cloak state to the associated window on the server.
 
-The server sends the Window Cloak State Change PDU if the client is capable of processing this PDU (indicated by the TS_RAIL_CLIENTSTATUS_BIDIRECTIONAL_CLOAK_SUPPORTED flag in the Client Information PDU (section [2.2.2.2.2](#Section_3.3.5.2.1.1))). The client uses this information to sync the cloak state to the associated window on the client.
+The server sends the Window Cloak State Change PDU if the client is capable of processing this PDU (indicated by the TS_RAIL_CLIENTSTATUS_BIDIRECTIONAL_CLOAK_SUPPORTED flag in the Client Information PDU (section [2.2.2.2.2](#Section_2.2.2.2.2))). The client uses this information to sync the cloak state to the associated window on the client.
 
 ```mermaid
 packet-beta
@@ -2504,7 +2504,7 @@ packet-beta
 <a id="Section_2.2.2.13.1"></a>
 ##### 2.2.2.13.1 Power Display Request PDU (TS_RAIL_ORDER_POWER_DISPLAY_REQUEST)
 
-The Power Display Request PDU is sent from the server to the client if the client has advertised support for [**display-required power request**](#gt_display-required-power-request) sync in the Client Information PDU (section [2.2.2.2.2](#Section_3.3.5.2.1.1)).
+The Power Display Request PDU is sent from the server to the client if the client has advertised support for [**display-required power request**](#gt_display-required-power-request) sync in the Client Information PDU (section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
 ```mermaid
 packet-beta
@@ -2613,9 +2613,9 @@ Figure 5: Server State Machine Diagram
 | State | Description |
 | --- | --- |
 | Uninitialized | This is the initial state of the server. In this state, the server waits for the [Remote Programs Capability Set (section 2.2.1.1.1)](#Section_2.2.1.1.1) and the [Window List Capability Set (section 2.2.1.1.2)](#Section_2.2.1.1.2) from the client. On receiving these capability sets, the server processes them as specified in section [3.3.5.1.5](../MS-RDPBCGR/MS-RDPBCGR.md). If the server finds compatible settings, it transitions to the Initializing state. Otherwise, the connection is terminated (see [MS-RDPBCGR](#Section_2.2.1) section 1.3.1.4.2). |
-| Initializing | In this state, the server examines the [Handshake PDU (section 2.2.2.2.1)](#Section_2.2.2.2.1) and the [Client Information PDU (section 2.2.2.2.2)](#Section_3.3.5.2.1.1). On receiving these, the server processes the Handshake PDU as specified in section [3.1.5.2](#Section_3.2.5.1.2) and the Client Information PDU as specified in section [3.3.5.2.1.1](#Section_3.3.5.2.1.1), and transitions to the SyncDesktop state. If the server does not receive the Handshake PDU within a specified time, it can disconnect the connection (see section [3.1.2](#Section_3.1.2)). |
+| Initializing | In this state, the server examines the [Handshake PDU (section 2.2.2.2.1)](#Section_2.2.2.2.1) and the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2). On receiving these, the server processes the Handshake PDU as specified in section [3.1.5.2](#Section_3.3.5.2.9.1) and the Client Information PDU as specified in section [3.3.5.2.1.1](#Section_3.3.5.2.1.1), and transitions to the SyncDesktop state. If the server does not receive the Handshake PDU within a specified time, it can disconnect the connection (see section [3.1.2](#Section_3.1.2)). |
 | SyncDesktop | In this state, the server syncs its desktop with that of the client. The server transitions to this state either during the RAIL connection synchronization (see section [1.3.2.3](#Section_1.3.2.3)) or on detection of a desktop switch (see section [3.3.5.1.8](#Section_3.3.5.1.8)). After completion of the desktop sync (as specified in section 3.3.5.1.8), the server transitions to the WaitForData state. |
-| WaitForData | In this state, the server waits for all non-initialization messages received on the static virtual channel (see section [3.3.5.2](#Section_3.2.5.2)). On receiving a [Client Execute PDU (section 2.2.2.3.1)](#Section_2.2.2.3.1), the server transitions to the ExecuteApp state. On receiving a [Client System Parameters Update PDU (section 2.2.2.4.1)](#Section_2.2.2.4.1), the server transitions to the UpdateSysParam state. On receiving a [Language Bar Information PDU (section 2.2.2.9.1)](#Section_2.2.2.9.1), the server transitions to the UpdateLanguageBar state. On receiving a [Client Window Move PDU (section 2.2.2.7.4)](#Section_2.2.2.7.4), the server transitions to the MoveWindow state. On receiving a [Client Activate PDU (section 2.2.2.6.1)](#Section_2.2.2.6.1), a [Client System Menu PDU (section 2.2.2.6.2)](#Section_2.2.2.6.2), a [Client System Command PDU (section 2.2.2.6.3)](#Section_2.2.2.6.3), a [Client Notify Event PDU (section 2.2.2.6.4)](#Section_2.2.2.6.4), or a [Client Get Application ID PDU (section 2.2.2.6.5)](#Section_2.2.2.6.5), the server transitions to the HandleWindowUpdates state. On detecting a desktop switch, the server transitions to the SyncDesktop state. |
+| WaitForData | In this state, the server waits for all non-initialization messages received on the static virtual channel (see section [3.3.5.2](#Section_2.2.2)). On receiving a [Client Execute PDU (section 2.2.2.3.1)](#Section_2.2.2.3.1), the server transitions to the ExecuteApp state. On receiving a [Client System Parameters Update PDU (section 2.2.2.4.1)](#Section_2.2.2.4.1), the server transitions to the UpdateSysParam state. On receiving a [Language Bar Information PDU (section 2.2.2.9.1)](#Section_2.2.2.9.1), the server transitions to the UpdateLanguageBar state. On receiving a [Client Window Move PDU (section 2.2.2.7.4)](#Section_2.2.2.7.4), the server transitions to the MoveWindow state. On receiving a [Client Activate PDU (section 2.2.2.6.1)](#Section_2.2.2.6.1), a [Client System Menu PDU (section 2.2.2.6.2)](#Section_2.2.2.6.2), a [Client System Command PDU (section 2.2.2.6.3)](#Section_2.2.2.6.3), a [Client Notify Event PDU (section 2.2.2.6.4)](#Section_2.2.2.6.4), or a [Client Get Application ID PDU (section 2.2.2.6.5)](#Section_2.2.2.6.5), the server transitions to the HandleWindowUpdates state. On detecting a desktop switch, the server transitions to the SyncDesktop state. |
 | ExecuteApp | In this state, the server processes the Client Execute PDU, as specified in section [3.3.5.2.2.1](#Section_3.3.5.2.2.1), and sends the [Server Execute Result PDU (section 2.2.2.3.2)](#Section_2.2.2.3.2), as specified in section [3.3.5.2.2.2](#Section_3.3.5.2.2.2). The server then transitions back to the WaitForData state. |
 | UpdateSysParam | In this state, the server processes the Client System Parameters Update PDU, as specified in section [3.3.5.2.3.1](#Section_3.3.5.2.3.1), and transitions back to the WaitForData state. |
 | UpdateLanguageBar | In this state, the server processes the Language Bar Information PDU, as specified in section [3.3.5.2.5.5](#Section_3.3.5.2.5.5), and transitions back to the WaitForData state. |
@@ -2645,7 +2645,7 @@ The static virtual channel between the client and the server MUST be established
 
 The Handshake PDU (as specified in section [2.2.2.2.1](#Section_2.2.2.2.1)) is exchanged between the server and the client to establish that both endpoints are ready to begin RAIL mode.
 
-The Client Information PDU (as specified in section [2.2.2.2.2](#Section_3.3.5.2.1.1)) is sent from a client to a server and contains information about RAIL client state and features supported by the client.
+The Client Information PDU (as specified in section [2.2.2.2.2](#Section_2.2.2.2.2)) is sent from a client to a server and contains information about RAIL client state and features supported by the client.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -2764,7 +2764,7 @@ The client SHOULD use the NumIconCaches and NumIconCacheEntries of the Window Li
 <a id="Section_3.2.5.1.6"></a>
 ##### 3.2.5.1.6 Processing Window Information Orders
 
-Window Information Orders (section [2.2.1.3.1](#Section_2.2.1.3.1.1)) inform the client of the following types of window events on the server:
+Window Information Orders (section [2.2.1.3.1](#Section_2.2.1.3.1.2)) inform the client of the following types of window events on the server:
 
 - Creation of a new window.
 - Updates on window properties for a new or existing window.
@@ -2773,13 +2773,13 @@ Window Information Orders (section [2.2.1.3.1](#Section_2.2.1.3.1.1)) inform the
 - Registration of a new or existing window as an application desktop toolbar.
 - Deregistration of an existing application desktop toolbar.
 - Updates on the edge to which the application desktop toolbar window is anchored.
-Upon receipt of a Window Information Order for a new window (the **FieldsPresentFlags** field of the **Hdr** contains the WINDOW_ORDER_STATE_NEW (0x10000000) flag, as specified in section [2.2.1.3.1.2.1](#Section_3.3.5.1.6)), the client SHOULD create a new [**RAIL window**](#gt_rail-window) locally. The client SHOULD store an association of the **WindowId** reported in the **Hdr** field with the local RAIL window.
+Upon receipt of a Window Information Order for a new window (the **FieldsPresentFlags** field of the **Hdr** contains the WINDOW_ORDER_STATE_NEW (0x10000000) flag, as specified in section [2.2.1.3.1.2.1](#Section_2.2.1.3.1)), the client SHOULD create a new [**RAIL window**](#gt_rail-window) locally. The client SHOULD store an association of the **WindowId** reported in the **Hdr** field with the local RAIL window.
 
 Upon receipt of a Window Information Order for an existing window (the **FieldsPresentFlags** field of **Hdr** does not contain the WINDOW_ORDER_STATE_NEW (0x10000000) flag, as specified in section 2.2.1.3.1.2.1), the client SHOULD locate the local RAIL window that corresponds to the **WindowId** reported in the **Hdr** field and apply the specified updates to the RAIL window. If no such window can be found, the client SHOULD ignore the order.
 
 Upon receipt of a Window Information Order for an icon or cached icon, as specified in sections [2.2.1.3.1.2.2](#Section_2.2.1.3.1.2.2) and [2.2.1.3.1.2.3](#Section_2.2.1.3.1.2.3), the client SHOULD locate the local RAIL window that corresponds to the **WindowId** reported in the **Hdr** field and apply the icon updates to the RAIL window. If no such window can be found, the client SHOULD ignore the order.
 
-Upon receipt of a Window Information Order for a deleted window, as specified in section [2.2.1.3.1.2.4](#Section_3.3.5.1.6), the client SHOULD locate the local RAIL window that corresponds to the **WindowId** reported in the **Hdr** field and destroy it. If no such window can be found, the client SHOULD ignore the order.
+Upon receipt of a Window Information Order for a deleted window, as specified in section [2.2.1.3.1.2.4](#Section_2.2.1.3.1), the client SHOULD locate the local RAIL window that corresponds to the **WindowId** reported in the **Hdr** field and destroy it. If no such window can be found, the client SHOULD ignore the order.
 
 Upon receipt of a Window Information Order for the registration of a window as an application desktop toolbar, the client SHOULD locate the local RAIL window that corresponds to the **WindowId** reported in the **Hdr** field and register it as an application desktop toolbar. If no such window can be found, the client SHOULD ignore the order.
 
@@ -2808,7 +2808,7 @@ Upon receipt of a notification icon Order for a deleted icon, as specified in se
 
 Desktop Information Orders inform the client of events on the server that are not confined to a single window or [**notification icon**](#gt_notification-icon). Processing of these orders is indicated as follows:
 
-- Upon receipt of a Desktop Information Order, as specified in section [2.2.1.3.3.2.1](#Section_4.1.1.5), with the WINDOW_ORDER_FIELD_DESKTOP_ARC_BEGAN (0x00000008) and the WINDOW_ORDER_FIELD_DESKTOP_HOOKED (0x00000002) flags set in the **Hdr** field, the client SHOULD discard all of the existing RAIL windows and Notify Icons and prepare for Window Orders (see sections [2.2.1.3.1.2.1](#Section_3.3.5.1.6) and [2.2.1.3.1.2.4](#Section_3.3.5.1.6)) and Notify Icon Orders (see sections [2.2.1.3.1.2.2](#Section_2.2.1.3.1.2.2)and [2.2.1.3.1.2.3](#Section_2.2.1.3.1.2.3)) from the server.
+- Upon receipt of a Desktop Information Order, as specified in section [2.2.1.3.3.2.1](#Section_4.1.1.5), with the WINDOW_ORDER_FIELD_DESKTOP_ARC_BEGAN (0x00000008) and the WINDOW_ORDER_FIELD_DESKTOP_HOOKED (0x00000002) flags set in the **Hdr** field, the client SHOULD discard all of the existing RAIL windows and Notify Icons and prepare for Window Orders (see sections [2.2.1.3.1.2.1](#Section_2.2.1.3.1) and [2.2.1.3.1.2.4](#Section_2.2.1.3.1)) and Notify Icon Orders (see sections [2.2.1.3.1.2.2](#Section_2.2.1.3.1.2.2)and [2.2.1.3.1.2.3](#Section_2.2.1.3.1.2.3)) from the server.
 - Upon receipt of a Desktop Information Order for a **Non-Monitored Desktop** packet, as specified in section [2.2.1.3.3.2.2](#Section_2.2.1.3.3.2.2), the client SHOULD discard all of the existing RAIL windows and Notify Icons.
 - Upon receipt of a Desktop Information Order with the WINDOW_ORDER_FIELD_DESKTOP_HOOKED (0x00000002) flag set in the **Hdr** field, the client SHOULD prepare for Window and Notify Icon Orders from the server.
 - Upon receipt of a Desktop Information Order with the **NumWindowIds** and **WindowIds** fields present, the client SHOULD apply the specified Z-order of the server's windows to its local RAIL windows.
@@ -2822,7 +2822,7 @@ Desktop Information Orders inform the client of events on the server that are no
 <a id="Section_3.2.5.2.1.1"></a>
 ###### 3.2.5.2.1.1 Sending Client Information PDU
 
-The client information PDU is initialized as specified in section [2.2.2.2.2](#Section_3.3.5.2.1.1).
+The client information PDU is initialized as specified in section [2.2.2.2.2](#Section_2.2.2.2.2).
 
 <a id="Section_3.2.5.2.1.2"></a>
 ###### 3.2.5.2.1.2 Processing HandshakeEx PDU
@@ -2874,7 +2874,7 @@ The Activate PDU is sent by the client when a [**RAIL window**](#gt_rail-window)
 
 **Note** Mouse clicks on the RAIL window are forwarded to the server via the RDP core protocol. The PDU is initialized as specified in section [2.2.2.6.1](#Section_2.2.2.6.1).
 
-The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window being activated. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_3.3.5.1.6).
+The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window being activated. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_2.2.1.3.1).
 
 <a id="Section_3.2.5.2.5.2"></a>
 ###### 3.2.5.2.5.2 Sending System Menu PDU
@@ -2883,7 +2883,7 @@ The [**System Menu**](#gt_system-menu) PDU is sent by the client when a [**RAIL 
 
 **Note** Mouse clicks in the RAIL window are forwarded to the server via the RDP core protocol. The PDU is initialized as specified in section [2.2.2.6.2](#Section_2.2.2.6.2).
 
-The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_3.3.5.1.6).
+The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_2.2.1.3.1).
 
 <a id="Section_3.2.5.2.5.3"></a>
 ###### 3.2.5.2.5.3 Sending System Command PDU
@@ -2892,7 +2892,7 @@ The [**System Command**](#gt_system-command) PDU is sent by the client when a [*
 
 **Note** Mouse clicks in the RAIL window are forwarded to the server via the RDP core protocol. The PDU is initialized as specified in section [2.2.2.6.3](#Section_2.2.2.6.3).
 
-The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_3.3.5.1.6).
+The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_2.2.1.3.1).
 
 <a id="Section_3.2.5.2.5.4"></a>
 ###### 3.2.5.2.5.4 Sending Notify Event PDU
@@ -2944,7 +2944,7 @@ If the client does not support local move/size, it SHOULD ignore this PDU.
 
 If the client supports local move/size, it SHOULD send the Window Move PDU upon receiving a notification from the local window manager that a local move/size of a [**RAIL window**](#gt_rail-window) has ended. The PDU is sent for keyboard–based moves and all resizes, and it is initialized as specified in section [2.2.2.7.4](#Section_2.2.2.7.4).
 
-The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_3.3.5.1.6).
+The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The [**RAIL**](#gt_remote-applications-integrated-locally-rail) client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_2.2.1.3.1).
 
 If the client suppressed forwarding of keyboard/mouse events to the server during processing of the Move/Size Start PDU, it MUST resume the forwarding of these events to the server to allow the server to detect a move/size end of the remote window.
 
@@ -2990,12 +2990,12 @@ Upon receipt of this PDU, the client SHOULD<34> update the Application ID string
 <a id="Section_3.2.5.2.9.1"></a>
 ###### 3.2.5.2.9.1 Sending Z-Order Sync Support Flag
 
-The client advertises support for Z-order sync by including the TS_RAIL_CLIENTSTATUS_ZORDER_SYNC (0x00000004) flag in the [Client Information PDU (section 2.2.2.2.2)](#Section_3.3.5.2.1.1).
+The client advertises support for Z-order sync by including the TS_RAIL_CLIENTSTATUS_ZORDER_SYNC (0x00000004) flag in the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2).
 
 <a id="Section_3.2.5.2.9.2"></a>
 ###### 3.2.5.2.9.2 Processing Z-Order Sync Information PDU
 
-When the client receives the Z-Order Sync Information PDU, the ID of the [**marker window**](#gt_marker-window) MUST be stored in the [Marker Window ID (section 3.2.1.2)](#Section_3.2.1.2) store.
+When the client receives the Z-Order Sync Information PDU, the ID of the [**marker window**](#gt_marker-window) MUST be stored in the [Marker Window ID (section 3.2.1.2)](#Section_3.3.1.3) store.
 
 If a client-side window that is not remoted from the server (referred to as "Window A") is activated, then the client SHOULD instruct the server to activate the marker window by sending the [Client Activate PDU (section 2.2.2.6.1)](#Section_2.2.2.6.1) to the server with the **Enabled** field set to zero.
 
@@ -3009,7 +3009,7 @@ Furthermore, if the server instructs the client to activate a [**RAIL window**](
 
 The Window Cloak State Change PDU (section [2.2.2.12.1](#Section_2.2.2.12.1)) SHOULD be sent by the client when a RAIL window is cloaked or uncloaked on the client (for example, in the case of a virtual desktop feature, when the user switches desktops). A cloaked window MUST be present on the client, but MUST be invisible to the user and MUST NOT receive mouse, pen, or touch input. This PDU ensures that cloaked state is synchronized between client and server.
 
-The PDU is initialized as specified in section 2.2.2.12.1. The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The RAIL client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_3.3.5.1.6).
+The PDU is initialized as specified in section 2.2.2.12.1. The **WindowId** field SHOULD be initialized to the ID of an existing window on the server that is associated with the local RAIL window. The RAIL client SHOULD create this association during processing of the Window Information Order for new windows, as specified in section [2.2.1.3.1.2.1](#Section_2.2.1.3.1).
 
 <a id="Section_3.2.5.2.10.2"></a>
 ###### 3.2.5.2.10.2 Processing Window Cloak State Change PDU
@@ -3070,7 +3070,7 @@ Note: It is possible to implement the following conceptual data by using a varie
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Client Local Move/Size Ability Store
 
-The Client Local Move/Size Ability store determines whether the client has the ability to support Local Move/Size in RAIL. This is communicated to the server by the TS_RAIL_CLIENTSTATUS_ALLOWLOCALMOVESIZE flag as part of Client Information PDU (see section [2.2.2.2.2](#Section_3.3.5.2.1.1)).
+The Client Local Move/Size Ability store determines whether the client has the ability to support Local Move/Size in RAIL. This is communicated to the server by the TS_RAIL_CLIENTSTATUS_ALLOWLOCALMOVESIZE flag as part of Client Information PDU (see section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 Windowing Support Level
@@ -3080,7 +3080,7 @@ The windowing support level determines whether the client is capable of supporti
 <a id="Section_3.3.1.3"></a>
 #### 3.3.1.3 Marker Window
 
-The [**marker window**](#gt_marker-window) is a server-side window that is not remoted to the client and is used to manage the activation of [**RAIL windows**](#gt_rail-window). This window is destroyed if the client does not advertise support for Z-order sync in the [Client Information PDU (section 2.2.2.2.2)](#Section_3.3.5.2.1.1).
+The [**marker window**](#gt_marker-window) is a server-side window that is not remoted to the client and is used to manage the activation of [**RAIL windows**](#gt_rail-window). This window is destroyed if the client does not advertise support for Z-order sync in the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
@@ -3151,13 +3151,13 @@ The server generates Window Information Orders to inform the client of the follo
 - Deletion of an existing window.
 - Registration of a new or existing window as an application desktop toolbar.
 - Deregistration of an existing application desktop toolbar.
-The Window Information Orders are constructed as specified in section [2.2.1.3.1](#Section_2.2.1.3.1.1).
+The Window Information Orders are constructed as specified in section [2.2.1.3.1](#Section_2.2.1.3.1.2).
 
 ![An illustration of the window metrics sent in the Window Information Order](media/image6.png)
 
 Figure 6: An illustration of the window metrics sent in the Window Information Order
 
-Window icon orders SHOULD NOT be sent to the client if the TS_RAIL_CLIENTSTATUS_SUPPRESS_ICON_ORDERS flag was specified in the Client Information PDU (section [2.2.2.2.2](#Section_3.3.5.2.1.1)). Notification icon orders are not affected by this flag.
+Window icon orders SHOULD NOT be sent to the client if the TS_RAIL_CLIENTSTATUS_SUPPRESS_ICON_ORDERS flag was specified in the Client Information PDU (section [2.2.2.2.2](#Section_2.2.2.2.2)). Notification icon orders are not affected by this flag.
 
 <a id="Section_3.3.5.1.7"></a>
 ##### 3.3.5.1.7 Constructing Notification Icon Orders
@@ -3233,7 +3233,7 @@ Upon receipt of this PDU, the server SHOULD set its system parameters to those r
 <a id="Section_3.3.5.2.4.1"></a>
 ###### 3.3.5.2.4.1 Sending Server System Parameters Update PDU
 
-This PDU is initialized as specified in section [2.2.2.5.1](#Section_3.2.5.2.4.1). This PDU SHOULD be sent at the start of every [**remote applications integrated locally (RAIL)**](#gt_remote-applications-integrated-locally-rail) connection/reconnection, and when a system parameter on the server changes its value.
+This PDU is initialized as specified in section [2.2.2.5.1](#Section_2.2.2.5.1). This PDU SHOULD be sent at the start of every [**remote applications integrated locally (RAIL)**](#gt_remote-applications-integrated-locally-rail) connection/reconnection, and when a system parameter on the server changes its value.
 
 <a id="Section_3.3.5.2.5"></a>
 ##### 3.3.5.2.5 Local Client Event Messages
@@ -3332,7 +3332,7 @@ The Get Application ID Response PDU is sent in response to a Get Application ID 
 <a id="Section_3.3.5.2.8.1"></a>
 ###### 3.3.5.2.8.1 Processing Z-Order Sync Support Flag
 
-On processing the TS_RAIL_CLIENTSTATUS_ZORDER_SYNC (0x00000004) flag in the [Client Information PDU (section 2.2.2.2.2)](#Section_3.3.5.2.1.1), the server SHOULD create the marker window (section [3.3.1.3](#Section_3.3.1.3)) and send the ID of this window to the client in the [Z-Order Sync Information PDU (section 2.2.2.11.1)](#Section_2.2.2.11.1). If the client does not advertise support for Z-order sync, then the server MUST destroy the marker window, if it exists.
+On processing the TS_RAIL_CLIENTSTATUS_ZORDER_SYNC (0x00000004) flag in the [Client Information PDU (section 2.2.2.2.2)](#Section_2.2.2.2.2), the server SHOULD create the marker window (section [3.3.1.3](#Section_3.3.1.3)) and send the ID of this window to the client in the [Z-Order Sync Information PDU (section 2.2.2.11.1)](#Section_2.2.2.11.1). If the client does not advertise support for Z-order sync, then the server MUST destroy the marker window, if it exists.
 
 <a id="Section_3.3.5.2.8.2"></a>
 ###### 3.3.5.2.8.2 Sending Z-Order Sync Information PDU
@@ -3354,7 +3354,7 @@ If no such window exists, the server SHOULD ignore the PDU.
 
 The Window Cloak State Change PDU (section [2.2.2.12.1](#Section_2.2.2.12.1)) SHOULD be sent by the server when a remoted window is cloaked or uncloaked (unless the cloak or uncloak occurred as a result of processing a Window Cloak State Change PDU sent by the client). This PDU MUST be initialized as specified in section 2.2.2.12.1.
 
-If the client does not support processing the Window Cloak State Change PDU, the server SHOULD send a Deleted Window Information Order (section [2.2.1.3.1.2.4](#Section_3.3.5.1.6)) when a window is cloaked, and a Window Information Order (section [2.2.1.3.1.2.1](#Section_3.3.5.1.6)) when a window is uncloaked.
+If the client does not support processing the Window Cloak State Change PDU, the server SHOULD send a Deleted Window Information Order (section [2.2.1.3.1.2.4](#Section_2.2.1.3.1)) when a window is cloaked, and a Window Information Order (section [2.2.1.3.1.2.1](#Section_2.2.1.3.1)) when a window is uncloaked.
 
 <a id="Section_3.3.5.2.10"></a>
 ##### 3.3.5.2.10 Power Display Request Messages
@@ -3430,7 +3430,7 @@ The following sections describe several operations as used in common scenarios t
 <a id="Section_4.1.1.1"></a>
 #### 4.1.1.1 New or Existing Windows
 
-The following is a network capture of a [Window Information Order](#Section_3.3.5.1.6), sent when a new window is created on the server or when a property on a new or existing window is updated (as specified in 2.2.1.3.1.2.1).
+The following is a network capture of a [Window Information Order](#Section_2.2.1.3.1), sent when a new window is created on the server or when a property on a new or existing window is updated (as specified in 2.2.1.3.1.2.1).
 
 00000000 2e 81 00 9e df 08 19 58 01 12 00 00 00 00 00 00 .......X........
 
@@ -3507,7 +3507,7 @@ e6 05 00 00 -> WindowWidth (1510)
 <a id="Section_4.1.1.2"></a>
 #### 4.1.1.2 Deleted Window
 
-The following is a network capture of a [Window Information Order](#Section_3.3.5.1.6), sent when an existing window is destroyed on the server (as specified in 2.2.1.3.1.2.4).
+The following is a network capture of a [Window Information Order](#Section_2.2.1.3.1), sent when an existing window is destroyed on the server (as specified in 2.2.1.3.1.2.4).
 
 00000000 2e 0b 00 00 00 00 21 24 00 03 00......!$...
 
@@ -3710,7 +3710,7 @@ The following are network captures of the Handshake PDU (TS_RAIL_ORDER_HANDSHAKE
 <a id="Section_4.2.2"></a>
 ### 4.2.2 TS_RAIL_ORDER_CLIENTSTATUS
 
-The following is a network capture of the [Client Caps PDU](#Section_3.3.5.2.1.1) (TS_RAIL_ORDER_CLIENTSTATUS, as specified in 2.2.2.2.2).
+The following is a network capture of the [Client Caps PDU](#Section_2.2.2.2.2) (TS_RAIL_ORDER_CLIENTSTATUS, as specified in 2.2.2.2.2).
 
 00000000 0b 00 08 00 01 00 00 00 ........
 

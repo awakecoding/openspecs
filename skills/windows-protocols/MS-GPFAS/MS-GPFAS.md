@@ -2874,7 +2874,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The Group Policy: Firewall and Advanced Security Data Structure client initializes when the host machine starts. The client MUST use an implementation-specific<10> method to register for notification of the Policy Application event, as defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.7.3. The client MUST then query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.7) to retrieve the initial policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](#Section_5) section 3.1.6.4) to modify the internal state of the Firewall and Advanced Security component.
+The Group Policy: Firewall and Advanced Security Data Structure client initializes when the host machine starts. The client MUST use an implementation-specific<10> method to register for notification of the Policy Application event, as defined in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.7.3. The client MUST then query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.6) to retrieve the initial policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](#Section_5) section 3.1.6.4) to modify the internal state of the Firewall and Advanced Security component.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -2897,7 +2897,7 @@ None.
 <a id="Section_3.2.7.1"></a>
 #### 3.2.7.1 Policy Application Event
 
-When Group Policy: Core Protocol signals the Policy Application event, the Group Policy: Firewall and Advanced Security Data Structure client MUST query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.7) to retrieve the updated policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](#Section_5) section 3.1.6) to modify the internal state of the Firewall and Advanced Security component.
+When Group Policy: Core Protocol signals the Policy Application event, the Group Policy: Firewall and Advanced Security Data Structure client MUST query the registry using the key and value names defined in sections [2.2.1](#Section_2.2.1) through [2.2.7](#Section_2.2.6) to retrieve the updated policy settings. It MUST use the grammar rules defined in the same section to parse the values when necessary. Based on the data retrieved for these settings, the client MUST invoke the abstract interface SetGroupPolicyRSoPStore() (as specified in [MS-FASP](#Section_5) section 3.1.6) to modify the internal state of the Firewall and Advanced Security component.
 
 <a id="Section_4"></a>
 # 4 Protocol Examples

@@ -445,7 +445,7 @@ The primary higher-layer trigger events include:
 
 To establish a PPTP call session, the [**PNS**](#gt_pptp-network-server-pns) MUST establish a control connection with the [**PAC**](#gt_privilege-attribute-certificate-pac), as specified in [[RFC2637]](https://go.microsoft.com/fwlink/?LinkId=92846) section 1.3.1, if a control connection is not already established. On the newly created or existing control connection, the PNS MUST send the **Outgoing-Call-Request** message ([RFC2637] section 2.7) to the PAC to establish the PPTP call session with the PAC, as specified in [RFC2637] section 3.2.4.2.
 
-Before attempting to establish the connection, the PNS SHOULD start the [Dial out Timer (section 3.3.2)](#Section_3.2.2) and the timer SHOULD be stopped only when the control connection is in the established state. When the timer expires, the control connection MUST be closed.
+Before attempting to establish the connection, the PNS SHOULD start the [Dial out Timer (section 3.3.2)](#Section_3.1.2) and the timer SHOULD be stopped only when the control connection is in the established state. When the timer expires, the control connection MUST be closed.
 
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 Disconnect PPTP Call Session

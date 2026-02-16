@@ -230,7 +230,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_2.2.3)".
+[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_3.1.4.1.1)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
@@ -302,7 +302,7 @@ This protocol extension does not assume any prerequisites or preconditions.
 
 Use of the WS-Enumeration: Directory Services protocol extensions is suitable when searching [**XML**](#gt_xml) representations of [**directory objects**](#gt_directory-object) by means of WS-Enumeration and the granularity of resultant items is required to be lesser than the entire directory object's representation. These extensions cannot be used independently of WS-Enumeration [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580), so they might not be applicable in applications that have already standardized on a protocol other than WS-Enumeration [WSENUM] for querying directory services.
 
-The XPath 1.0-derived selection language, defined in [MS-ADDM](#Section_2.2.3) section 2.4, is used to specify the fragments requested out of the resultant items in the enumerate operation. This is suitable only when the data stored in a directory service could be represented as an XML document.
+The XPath 1.0-derived selection language, defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.4, is used to specify the fragments requested out of the resultant items in the enumerate operation. This is suitable only when the data stored in a directory service could be represented as an XML document.
 
 There is an implicit assumption that the directory service exposes semantics similar to that of a [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap) version 3 directory service [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) facilitating the use of LdapQuery language for the filter expression in the enumerate request.
 
@@ -352,7 +352,7 @@ The prefixes and XML namespaces used in this specification include the following
 | wsa: | http://www.w3.org/2005/08/addressing | [[WSADDR]](https://go.microsoft.com/fwlink/?LinkId=113065) |
 | wsa2004 | http://schemas.xmlsoap.org/ws/2004/08/addressing | [[WSAddressing]](https://go.microsoft.com/fwlink/?LinkId=90575) |
 | wsen: | http://schemas.xmlsoap.org/ws/2004/09/enumeration | [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) |
-| ad: | http://schemas.microsoft.com/2008/1/ActiveDirectory | [MS-ADDM](#Section_2.2.3) |
+| ad: | http://schemas.microsoft.com/2008/1/ActiveDirectory | [MS-ADDM](#Section_3.1.4.1.1) |
 | addata: | http://schemas.microsoft.com/2008/1/ActiveDirectory/Data | [MS-ADDM] |
 | adlq: | http://schemas.microsoft.com/2008/1/ActiveDirectory/Dialect/LdapQuery | The LdapQuery language [**URI**](#gt_uniform-resource-identifier-uri), defined in section [3.1.4.1.1.1](#Section_3.1.4.1.1.1) of this specification |
 | xsd: | http://www.w3.org/2001/XMLSchema | [[XMLSCHEMA1]](https://go.microsoft.com/fwlink/?LinkId=90608) |
@@ -477,7 +477,7 @@ In the tables describing faults in the later sections, the following apply.
 
 This section defines the directory services extensions to the Enumerate request and response message defined in WS-Enumeration [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) section 3.1.
 
-The Instance header defined in [MS-ADDM](#Section_2.2.3) section 2.5.1 MUST be attached by the [**requestor**](#gt_requestor) to a WS-Enumeration [WSENUM] Enumerate request message containing an <ad:instance> payload to inform the server about the directory instance targeted. See section [4.1](#Section_4.1) for an example of how the header is attached in an Enumerate request.
+The Instance header defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.5.1 MUST be attached by the [**requestor**](#gt_requestor) to a WS-Enumeration [WSENUM] Enumerate request message containing an <ad:instance> payload to inform the server about the directory instance targeted. See section [4.1](#Section_4.1) for an example of how the header is attached in an Enumerate request.
 
 For the /soapenv:Envelope/ soapenv:Body/ wsen:Enumerate/ wsen:Filter/ element defined in WS-Enumeration [WSENUM] section 3.1, the filter expression language supported by [MS-WSDS] is "LdapQuery" defined in section [3.1.4.1.1.1](#Section_3.1.4.1.1.1) and identified by the following [**URI**](#gt_uniform-resource-identifier-uri):
 
@@ -625,7 +625,7 @@ The [**requestor**](#gt_requestor) MUST specify the [**LDAP**](#gt_lightweight-d
 <a id="Section_3.1.4.1.1.1.2"></a>
 adlq:BaseObject
 
-The [**requestor**](#gt_requestor) MUST specify the [**object reference property**](#gt_object-reference-property) ([**GUID**](#gt_globally-unique-identifier-guid) or distinguished name of the object) as defined in [MS-ADDM](#Section_2.2.3) section 2.3.3.1 under the required BaseObject element wsen:Enumerate/wsen:Filter/adlq:LdapQuery/adlq:BaseObject in the Enumerate request.
+The [**requestor**](#gt_requestor) MUST specify the [**object reference property**](#gt_object-reference-property) ([**GUID**](#gt_globally-unique-identifier-guid) or distinguished name of the object) as defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.3.3.1 under the required BaseObject element wsen:Enumerate/wsen:Filter/adlq:LdapQuery/adlq:BaseObject in the Enumerate request.
 
 <adlq:BaseObject>
 
@@ -694,7 +694,7 @@ The value of /soapenv:Envelope/ soapenv:Body/wsen:Enumerate/ad:Selection/@Dialec
 <a id="Section_3.1.4.1.1.2.1"></a>
 ad:SelectionProperty
 
-The required element /soapenv:Envelope/soapenv:Body/wsen:Enumerate/ad:Selection/ad:SelectionProperty specifies which [**directory attribute**](#gt_directory-attribute) is to be returned for the resultant objects evaluating to true for that particular enumeration. The [**Requestor**](#gt_requestor) MUST use XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_2.2.3) section 2.4, to specify this element. The language is indicated by the Dialect attribute, defined in section [3.1.4.1.2.1](#Section_3.1.4.1.2.1), on its parent node ad:Selection, defined in section [3.1.4.1.1.2](#Section_3.1.4.1.1.2).
+The required element /soapenv:Envelope/soapenv:Body/wsen:Enumerate/ad:Selection/ad:SelectionProperty specifies which [**directory attribute**](#gt_directory-attribute) is to be returned for the resultant objects evaluating to true for that particular enumeration. The [**Requestor**](#gt_requestor) MUST use XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.4, to specify this element. The language is indicated by the Dialect attribute, defined in section [3.1.4.1.2.1](#Section_3.1.4.1.2.1), on its parent node ad:Selection, defined in section [3.1.4.1.1.2](#Section_3.1.4.1.1.2).
 
 For doing range retrieval of a multi-valued directory attribute, the extension to [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) specified in [MS-ADDM] section 2.7 SHOULD be used with this [**XML**](#gt_xml) element.
 
@@ -764,7 +764,7 @@ The value of /s:Envelope/s:Body/wsen:Enumerate/ad:Sorting/@Dialect is specified 
 <a id="Section_3.1.4.1.1.3.1"></a>
 ad:SortingProperty
 
-The required element /soapenv:Envelope/soapenv:Body/wsen:Enumerate/ad:Sorting/ad:SortingProperty specifies the sorting [**directory attribute**](#gt_directory-attribute) using XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_2.2.3) section 2.4, and the sort order using the Ascending attribute (see section [3.1.4.1.2.3](#Section_3.1.4.1.2.3)). If the Ascending attribute is absent, the default sorting order is ascending.
+The required element /soapenv:Envelope/soapenv:Body/wsen:Enumerate/ad:Sorting/ad:SortingProperty specifies the sorting [**directory attribute**](#gt_directory-attribute) using XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.4, and the sort order using the Ascending attribute (see section [3.1.4.1.2.3](#Section_3.1.4.1.2.3)). If the Ascending attribute is absent, the default sorting order is ascending.
 
 The following [**XML**](#gt_xml) shows the contents of the SortingProperty element:
 
@@ -788,7 +788,7 @@ The following XML schema attribute definitions are specific to these Enumerate r
 <a id="Section_3.1.4.1.2.1"></a>
 ###### 3.1.4.1.2.1 ad:Selection/@Dialect
 
-The XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_2.2.3) section 2.4, is used to specify selection properties. This derived language is identified by the following [**URI**](#gt_uniform-resource-identifier-uri):
+The XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.4, is used to specify selection properties. This derived language is identified by the following [**URI**](#gt_uniform-resource-identifier-uri):
 
 http://schemas.microsoft.com/2008/1/ActiveDirectory/Dialect/XPath-Level-1
 
@@ -797,7 +797,7 @@ The URI stated previously MUST be the value of the /soapenv:Envelope/ soapenv:Bo
 <a id="Section_3.1.4.1.2.2"></a>
 ###### 3.1.4.1.2.2 ad:Sorting/@Dialect
 
-The XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_2.2.3) section 2.4, is used to specify the sorting property. This derived language is identified by the following [**URI**](#gt_uniform-resource-identifier-uri):
+The XPath 1.0-derived Selection Language, defined in [MS-ADDM](#Section_3.1.4.1.1) section 2.4, is used to specify the sorting property. This derived language is identified by the following [**URI**](#gt_uniform-resource-identifier-uri):
 
 http://schemas.microsoft.com/2008/1/ActiveDirectory/Dialect/XPath-Level-1
 
@@ -906,7 +906,7 @@ Implementations MAY<17> supply a fault detail of their own choosing.
 
 This section defines the directory services extensions to the Pull response message defined in WS-Enumeration [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) section 3.2.
 
-The WS-Enumeration [WSENUM] Pull specification as defined in WS-Enumeration [WSENUM] section 3.2 leaves the contents of the wsen:PullResponse/wsen:Items element open-ended for a Pull response. The data returned by the server via the wsen:Items element (defined in WS-Enumeration [WSENUM] section 3.2) is structured in accord with the [**XML**](#gt_xml) data model specified in [MS-ADDM](#Section_2.2.3) section 2.3.2, except that only those attributes that were requested in the wsen:Enumerate/ad:Selection (see section [3.1.4.1.1.2](#Section_3.1.4.1.1.2)) element are returned. Also, in addition to requested attributes through the wsen:Selection element in the Enumerate request, the server always returns <ad:objectReferenceProperty> synthetic attribute (as specified in [MS-ADDM] section 2.3.3.1) in the Pull response.
+The WS-Enumeration [WSENUM] Pull specification as defined in WS-Enumeration [WSENUM] section 3.2 leaves the contents of the wsen:PullResponse/wsen:Items element open-ended for a Pull response. The data returned by the server via the wsen:Items element (defined in WS-Enumeration [WSENUM] section 3.2) is structured in accord with the [**XML**](#gt_xml) data model specified in [MS-ADDM](#Section_3.1.4.1.1) section 2.3.2, except that only those attributes that were requested in the wsen:Enumerate/ad:Selection (see section [3.1.4.1.1.2](#Section_3.1.4.1.1.2)) element are returned. Also, in addition to requested attributes through the wsen:Selection element in the Enumerate request, the server always returns <ad:objectReferenceProperty> synthetic attribute (as specified in [MS-ADDM] section 2.3.3.1) in the Pull response.
 
 The fragments or portions of the resultant objects evaluating to be true for the specific enumeration query are returned as children nodes with the most specific structural object class ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.1.4) being the root element. The server SHOULD specify the root element as "addata:top" in the Pull response if the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) display name of the most specific structural object class for the result fragment is not available as specified in [MS-ADDM] section 2.3.2. This sequence of result fragments forms children nodes to the <wsen:Items> element.
 
@@ -1519,7 +1519,7 @@ cda3e08b-cec1-42bb-8245-7cb6235a24b8
 <a id="Section_4.5"></a>
 ## 4.5 WS-Enumerate Directory Services Extension "FaultDetail" Example
 
-The following example shows a WS-Enumeration specific fault response message returned by [**Active Directory Web Services**](#gt_active-directory-web-services-adws) with detail element (specified in [MS-ADDM](#Section_2.2.3) section 2.6) to an Enumerate request containing an invalid attribute as a sorting property.
+The following example shows a WS-Enumeration specific fault response message returned by [**Active Directory Web Services**](#gt_active-directory-web-services-adws) with detail element (specified in [MS-ADDM](#Section_3.1.4.1.1) section 2.6) to an Enumerate request containing an invalid attribute as a sorting property.
 
 <soapenv:Envelope
 
@@ -1951,7 +1951,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 2.1: Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions use SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521) over a NET.TCP [MC-NMF](../MC-NMF/MC-NMF.md) transport binding. The transports used, as well as the authentication mechanisms supported and the [**endpoints**](#gt_endpoint) exposed, are specified in [MS-ADDM](#Section_2.2.3) section 2.1.
+<1> Section 2.1: Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions use SOAP 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521) over a NET.TCP [MC-NMF](../MC-NMF/MC-NMF.md) transport binding. The transports used, as well as the authentication mechanisms supported and the [**endpoints**](#gt_endpoint) exposed, are specified in [MS-ADDM](#Section_3.1.4.1.1) section 2.1.
 
 <2> Section 3: The following products are applicable to WS-Enumeration: Directory Services Protocol Extensions:
 
@@ -1972,7 +1972,7 @@ Active Directory Management Gateway Service is available for Windows Server 2003
 
 <8> Section 3.1.4.1: Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions always return the expiration time in the enumerate response as an absolute time in Coordinated Universal Time (UTC) mode.
 
-<9> Section 3.1.4.1.1.2: Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions return all of the [**default attributes**](#gt_default-attribute) and all of the synthetic attributes (defined in [MS-ADDM] section 2.3.3) when there is no selection element present in the [Enumerate](#Section_3.1.4.1) request.
+<9> Section 3.1.4.1.1.2: Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions return all of the [**default attributes**](#gt_default-attribute) and all of the synthetic attributes (defined in [MS-ADDM] section 2.3.3) when there is no selection element present in the [Enumerate](#Section_4.2) request.
 
 <10> Section 3.1.4.1.1.2.1: If selection property <ad:all> is specified in the Enumerate request, Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions return all of the default attributes and the synthetic attribute <ad:objectReferenceProperty> (defined in [MS-ADDM] section 2.3.3) in the SOAP response message for the Pull operation. In addition to <ad:all>, if certain [**constructed attributes**](#gt_constructed-attribute) are also specified as part of selection properties in the Enumerate request, then Microsoft implementations of WS-Enumeration: Directory Services Protocol Extensions also return the requested constructed attributes in the SOAP response message for the Pull operation.
 

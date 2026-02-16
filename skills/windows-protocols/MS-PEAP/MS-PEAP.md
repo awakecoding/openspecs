@@ -1161,7 +1161,7 @@ Initialization is specified in sections [3.2.3](#Section_3.2.3) and [3.3.3](#Sec
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-Higher-layer triggered events are specified in sections [3.2.4](#Section_3.1.4) and [3.3.4](#Section_3.1.4).
+Higher-layer triggered events are specified in sections [3.2.4](#Section_3.2.4) and [3.3.4](#Section_3.2.4).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -1180,12 +1180,12 @@ In [**EAP**](#gt_extensible-authentication-protocol-eap), success or failure pac
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 PEAP Packet Processing
 
-This section describes the PEAP packet processing common to peer and server. In contrast, PEAP packet processing specific to peer and server is described in sections [3.2.5.4](#Section_3.3.5.4) and [3.3.5.4](#Section_3.3.5.4) respectively.
+This section describes the PEAP packet processing common to peer and server. In contrast, PEAP packet processing specific to peer and server is described in sections [3.2.5.4](#Section_3.2.5.4) and [3.3.5.4](#Section_3.2.5.4) respectively.
 
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Received PEAP Packet with L and M Bit Set
 
-If **isFragmentationAllowed** is TRUE and the PEAP phase 2 is in progress, then store the first fragment and send a [PEAP Fragment Acknowledgement packet (section 2.2.3)](#Section_2.2.3) request (server) or response (peer). For all the next fragments (M bit set and L bit not set), store the fragments and send a PEAP Fragment Acknowledgement packet request (server) or response (peer). After receiving the last fragment (L and M bits not set), reassemble all the fragments and do the packet processing as specified in sections [3.2.5.4](#Section_3.3.5.4) and [3.3.5.4](#Section_3.3.5.4).
+If **isFragmentationAllowed** is TRUE and the PEAP phase 2 is in progress, then store the first fragment and send a [PEAP Fragment Acknowledgement packet (section 2.2.3)](#Section_2.2.3) request (server) or response (peer). For all the next fragments (M bit set and L bit not set), store the fragments and send a PEAP Fragment Acknowledgement packet request (server) or response (peer). After receiving the last fragment (L and M bits not set), reassemble all the fragments and do the packet processing as specified in sections [3.2.5.4](#Section_3.2.5.4) and [3.3.5.4](#Section_3.2.5.4).
 
 If **isFragmentationAllowed** is FALSE and the PEAP phase 2 is in progress, then the packet is ignored.
 
@@ -1238,7 +1238,7 @@ To facilitate this, a two-way [**handshake**](#gt_handshake) between the PEAP pe
 
 Implementations MAY<10> choose to support the cryptobinding feature of PEAP.
 
-The **Compound_MAC** field in the cryptobinding packet MUST be the output of an HMAC-SHA1-160 operation, as specified in [[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314) and [[RFC3174]](https://go.microsoft.com/fwlink/?LinkId=90408). The HMAC-SHA1-160 operation requires the data and the key as inputs, both of which are derived from the PEAP phase 1 and the inner method. For more details on how an implementation generates the data used in the HMAC-SHA1-160 operation for the cryptobinding packet, see section [3.1.5.5.1](#Section_3.1.5.5.1). For more details on how an implementation generates the key used in the HMAC-SHA1-160 operation for the cryptobinding packet, see section [3.1.5.5.2](#Section_3.1.5.5.2.1).
+The **Compound_MAC** field in the cryptobinding packet MUST be the output of an HMAC-SHA1-160 operation, as specified in [[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314) and [[RFC3174]](https://go.microsoft.com/fwlink/?LinkId=90408). The HMAC-SHA1-160 operation requires the data and the key as inputs, both of which are derived from the PEAP phase 1 and the inner method. For more details on how an implementation generates the data used in the HMAC-SHA1-160 operation for the cryptobinding packet, see section [3.1.5.5.1](#Section_3.1.5.5.1). For more details on how an implementation generates the key used in the HMAC-SHA1-160 operation for the cryptobinding packet, see section [3.1.5.5.2](#Section_3.1.5.5.2).
 
 <a id="Section_3.1.5.5.1"></a>
 ##### 3.1.5.5.1 Input Data Used in the Cryptobinding HMAC-SHA1-160 Operation
@@ -1523,7 +1523,7 @@ If **currentState** is set to TUNNEL_ESTABLISHED, INNER_IDENTITY_SENT, or PHASE2
 - If the **currentState** is set to TUNNEL_ESTABLISHED, then:
 - If the decrypted data matches an [SoH Request TLV (section 2.2.8.2.1)](#Section_2.2.8.2.1), then process the data as specified in section [3.2.5.4.5](#Section_3.2.5.4.5).
 - If the decrypted data matches the [EAP TLV Extensions Method (section 2.2.8.1)](#Section_2.2.8.1), then process the data as specified in section [3.2.5.4.7](#Section_3.2.5.4.7).
-- If the decrypted data matches the Identity Request packet, then process the data as specified in section [3.2.5.4](#Section_3.3.5.4).
+- If the decrypted data matches the Identity Request packet, then process the data as specified in section [3.2.5.4](#Section_3.2.5.4).
 - Ignore the packet if the decrypted data does not match the earlier conditions.
 - If **currentState** is set to INNER_IDENTITY_SENT, then:
 - If the decrypted data matches the Capabilities Negotiation Request, then process the data as specified in section [3.2.5.4.6](#Section_3.2.5.4.6).
@@ -2112,7 +2112,7 @@ AD 30 64 C2 BD DB D1 6E AA 94 9E 7D 98 A8 D7 94
 <a id="Section_4.4.1.3.2"></a>
 ##### 4.4.1.3.2 Key for HMAC-SHA1-160 Operation
 
-The key required for HMAC-SHA1-160 operation is called the Compound MAC Key (CMK) and is generated by the formulae described in section [3.1.5.5.2](#Section_3.1.5.5.2.1). Inputs required for this operation are the TempKey(K) and IPMK Seed(S).
+The key required for HMAC-SHA1-160 operation is called the Compound MAC Key (CMK) and is generated by the formulae described in section [3.1.5.5.2](#Section_3.1.5.5.2). Inputs required for this operation are the TempKey(K) and IPMK Seed(S).
 
 <a id="Section_4.4.1.3.2.1"></a>
 ###### 4.4.1.3.2.1 Temp Key
@@ -2217,7 +2217,7 @@ CC C9 0B 1A 90 8C BD F4 71 1B 69 99 4D 0C FE 8D
 <a id="Section_4.4.2.3.2"></a>
 ##### 4.4.2.3.2 Key for HMAC-SHA1-160 Operation
 
-The key required for HMAC-SHA1-160 operation is called the Compound MAC Key (CMK) and is generated by the formulae described in section [3.1.5.5.2](#Section_3.1.5.5.2.1). Inputs required for this operation are the TempKey(K) and IPMK Seed(S).
+The key required for HMAC-SHA1-160 operation is called the Compound MAC Key (CMK) and is generated by the formulae described in section [3.1.5.5.2](#Section_3.1.5.5.2). Inputs required for this operation are the TempKey(K) and IPMK Seed(S).
 
 <a id="Section_4.4.2.3.2.1"></a>
 ###### 4.4.2.3.2.1 Temp Key

@@ -976,7 +976,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DMRP] Microsoft Corporation, "[Disk Management Remote Protocol](../MS-DMRP/MS-DMRP.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.2.1.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1.1)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.2.3)".
 
@@ -1098,9 +1098,9 @@ The Virtual Disk Service Remote Protocol applies when an application needs to re
 
 Supported Transports: The Virtual Disk Service Remote Protocol uses the DCOM Remote Protocol ([MS-DCOM](../MS-DCOM/MS-DCOM.md)), which in turn uses [**RPC**](#gt_remote-procedure-call-rpc) over [**TCP**](#gt_transmission-control-protocol-tcp) as its only transport, see section [2.1](#Section_2.1).
 
-Protocol Version: The Virtual Disk Service Remote Protocol comprises a set of [**DCOM**](#gt_distributed-component-object-model-dcom) interfaces, which are all version 0.0. The following interfaces are common to all storage management: [IEnumVdsObject](#Section_3.4.5.2.1.2), [IVdsAdviseSink](#Section_3.1.2.1), [IVdsAsync](#Section_3.4.5.2.2.3), [IVdsService](#Section_3.4.5.2.3.1), and [IVdsServiceInitialization](#Section_3.1.5.2).<3>
+Protocol Version: The Virtual Disk Service Remote Protocol comprises a set of [**DCOM**](#gt_distributed-component-object-model-dcom) interfaces, which are all version 0.0. The following interfaces are common to all storage management: [IEnumVdsObject](#Section_3.1.1.1), [IVdsAdviseSink](#Section_4.6), [IVdsAsync](#Section_3.1.3.1), [IVdsService](#Section_3.4.5.2.9), and [IVdsServiceInitialization](#Section_3.1.5.2).<3>
 
-Functionality Negotiation: The client negotiates for a specified set of server functionality by specifying the [**UUID**](#gt_universally-unique-identifier-uuid) that corresponds to the necessary RPC interface by means of [**COM**](#gt_component-object-model-com) IUnknown::QueryInterface when binding to the server. Certain interfaces are implemented by only specific objects on the server, see section [3.4.1.2](#Section_3.4.1.2).
+Functionality Negotiation: The client negotiates for a specified set of server functionality by specifying the [**UUID**](#gt_universally-unique-identifier-uuid) that corresponds to the necessary RPC interface by means of [**COM**](#gt_component-object-model-com) IUnknown::QueryInterface when binding to the server. Certain interfaces are implemented by only specific objects on the server, see section [3.4.1.2](#Section_3.4.3.1).
 
 Security and Authentication Methods: See [MS-DCOM] and [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -1197,12 +1197,12 @@ All enumeration structures contain a zero value defined as VDS_XXX_UNKNOWN. The 
 <a id="Section_2.2.1.1.1"></a>
 ##### 2.2.1.1.1 ULONGLONG
 
-The ULONGLONG data type is defined in [MS-DTYP](#Section_2.2.2.1.1).
+The ULONGLONG data type is defined in [MS-DTYP](#Section_2.2.1.1).
 
 <a id="Section_2.2.1.1.2"></a>
 ##### 2.2.1.1.2 DWORD
 
-The DWORD data type is defined in [MS-DTYP](#Section_2.2.2.1.1).
+The DWORD data type is defined in [MS-DTYP](#Section_2.2.1.1).
 
 <a id="Section_2.2.1.1.3"></a>
 ##### 2.2.1.1.3 VDS_OBJECT_ID
@@ -1223,7 +1223,7 @@ typedef GUID VDS_OBJECT_ID;
 <a id="Section_2.2.1.1.5"></a>
 ##### 2.2.1.1.5 ACCESS_MASK
 
-The ACCESS_MASK data type is defined in [MS-DTYP](#Section_2.2.2.1.1) section 2.4.3.
+The ACCESS_MASK data type is defined in [MS-DTYP](#Section_2.2.1.1) section 2.4.3.
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Enumerations
@@ -2266,7 +2266,7 @@ The flag is set by default for dynamic disk and basic GPT disk volumes.
 **VDS_VF_HIDDEN, VDF_VF_READ_ONLY**, **VDS_VF_SHADOW_COPY**, and **VDS_VF_NO_DEFAULT_DRIVE_LETTER** are set as follows:
 
 - **Dynamic disk volumes** - The flag is per volume. **VDS_VF_NO_DEFAULT_DRIVE_LETTER** is set at volume creation. <18>The flag toggles when drive letters are assigned or removed, and can also be set or cleared using any of the Set/ClearFlags methods.
-- **MBR basic disk volumes** - The flag is applied to all volumes created on the disk after the flag is set. It is set per disk for basic [**MBR**](#gt_master-boot-record-mbr) disks, not per volume. The flag is only set or cleared if an explicit call is made to the [IVdsVolume::SetFlags (section 3.4.5.2.32.10)](#Section_3.4.5.2.21.6) and [IVdsVolume::ClearFlag (section 3.4.5.2.32.11)](#Section_3.4.5.2.32.11) methods, respectively. For example, the **VDS_VF_NO_DEFAULT_DRIVE_LETTER** flag is not toggled as drive letters are assigned to or removed from specific volumes.
+- **MBR basic disk volumes** - The flag is applied to all volumes created on the disk after the flag is set. It is set per disk for basic [**MBR**](#gt_master-boot-record-mbr) disks, not per volume. The flag is only set or cleared if an explicit call is made to the [IVdsVolume::SetFlags (section 3.4.5.2.32.10)](#Section_3.4.5.2.4.15) and [IVdsVolume::ClearFlag (section 3.4.5.2.32.11)](#Section_3.4.5.2.32.11) methods, respectively. For example, the **VDS_VF_NO_DEFAULT_DRIVE_LETTER** flag is not toggled as drive letters are assigned to or removed from specific volumes.
 - **GPT basic disk volumes** - The flag is per volume, data [**partitions**](#gt_partition) only. **VDS_VF_NO_DEFAULT_DRIVE_LETTER** is set at volume creation and toggled when drive letters are assigned or removed (by VDS).
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Structures
@@ -3096,7 +3096,7 @@ GUID VendorId;
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 IVdsService Data Types
 
-This section lists data types that are used exclusively by methods in the [IVdsService](#Section_3.4.5.2.3.1) interface.
+This section lists data types that are used exclusively by methods in the [IVdsService](#Section_3.4.5.2.9) interface.
 
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 Data Types
@@ -3395,7 +3395,7 @@ VDS_SP_MAX = 0x5
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 IVdsServiceIscsi Data Types
 
-This section lists data types that the [IVdsServiceIscsi](#Section_3.4.5.2.8) methods of the [IVdsServiceIscsi](#Section_3.4.5.2.8) interface use exclusively.
+This section lists data types that the [IVdsServiceIscsi](#Section_3.1.5.5) methods of the [IVdsServiceIscsi](#Section_3.1.5.5) interface use exclusively.
 
 <a id="Section_2.2.2.3.1"></a>
 ##### 2.2.2.3.1 Structures
@@ -3420,7 +3420,7 @@ unsigned long ulSharedSecretSize;
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 IVdsHbaPort Data Types
 
-This section lists data types that the [IVdsHbaPort](#Section_3.4.5.2.11.2) methods of the [IVdsHbaPort](#Section_3.4.5.2.11.2) interface use exclusively.
+This section lists data types that the [IVdsHbaPort](#Section_3.4.5.2.11) methods of the [IVdsHbaPort](#Section_3.4.5.2.11) interface use exclusively.
 
 <a id="Section_2.2.2.4.1"></a>
 ##### 2.2.2.4.1 Enumerations
@@ -3691,7 +3691,7 @@ unsigned long ulSupportedPortSpeed;
 <a id="Section_2.2.2.5"></a>
 #### 2.2.2.5 IVdsIscsiInitiatorAdapter Data Types
 
-This section lists data types that are used exclusively by the [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12.2) methods of the [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12.2) interface.
+This section lists data types that are used exclusively by the [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12) methods of the [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12) interface.
 
 <a id="Section_2.2.2.5.1"></a>
 ##### 2.2.2.5.1 Structures
@@ -3716,7 +3716,7 @@ VDS_OBJECT_ID id;
 <a id="Section_2.2.2.6"></a>
 #### 2.2.2.6 IVdsIscsiInitiatorPortal Data Types
 
-This section lists data types that are used exclusively by the [IVdsIscsiInitiatorPortal](#Section_3.1.8.1) methods of the [IVdsIscsiInitiatorPortal](#Section_3.1.8.1) interface.
+This section lists data types that are used exclusively by the [IVdsIscsiInitiatorPortal](#Section_3.4.5.2.13) methods of the [IVdsIscsiInitiatorPortal](#Section_3.4.5.2.13) interface.
 
 <a id="Section_2.2.2.6.1"></a>
 ##### 2.2.2.6.1 Enumerations
@@ -3812,7 +3812,7 @@ unsigned long ulPortIndex;
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 IVdsProvider Data Types
 
-This section lists data types that are used exclusively by the [IVdsProvider](#Section_3.1.9.1) methods.
+This section lists data types that are used exclusively by the [IVdsProvider](#Section_3.4.5.2.14.1) methods.
 
 <a id="Section_2.2.2.7.1"></a>
 ##### 2.2.2.7.1 Enumerations
@@ -3946,7 +3946,7 @@ short sRebuildPriority;
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 IVdsPack Data Types
 
-This section lists the data types that are used exclusively by the [IVdsPack](#Section_3.4.5.2.19.1) methods.
+This section lists the data types that are used exclusively by the [IVdsPack](#Section_2.2.2.8) methods.
 
 <a id="Section_2.2.2.8.1"></a>
 ##### 2.2.2.8.1 Enumerations
@@ -4038,7 +4038,7 @@ unsigned long ulFlags;
 <a id="Section_2.2.2.9"></a>
 #### 2.2.2.9 IVdsDisk Data Types
 
-This section lists data types that are used exclusively by the [IVdsDisk](#Section_3.1.12.10) methods.
+This section lists data types that are used exclusively by the [IVdsDisk](#Section_3.4.5.2.21.4) methods.
 
 <a id="Section_2.2.2.9.1"></a>
 ##### 2.2.2.9.1 Structures
@@ -4362,7 +4362,7 @@ ULONGLONG ullSize;
 <a id="Section_2.2.2.11"></a>
 #### 2.2.2.11 IVdsAdvancedDisk Data Types
 
-This section lists data types that are used exclusively by the [IVdsAdvancedDisk](#Section_3.4.5.2.24.10) methods.
+This section lists data types that are used exclusively by the [IVdsAdvancedDisk](#Section_3.4.5.2.24.8) methods.
 
 <a id="Section_2.2.2.11.1"></a>
 ##### 2.2.2.11.1 Structures
@@ -4420,7 +4420,7 @@ ULONGLONG attributes;
 <a id="Section_2.2.2.12"></a>
 #### 2.2.2.12 IVdsAdvancedDisk2 Data Types
 
-This section lists data types that are used exclusively by the [IVdsAdvancedDisk2](#Section_2.2.2.12) methods.
+This section lists data types that are used exclusively by the [IVdsAdvancedDisk2](#Section_3.4.5.2.25.1) methods.
 
 <a id="Section_2.2.2.12.1"></a>
 ##### 2.2.2.12.1 Structures
@@ -4609,7 +4609,7 @@ The following table shows examples of location paths built for various bus/disk 
 <a id="Section_2.2.2.14"></a>
 #### 2.2.2.14 IVdsVolume Data Types
 
-This section lists data types that are used exclusively by the [IVdsVolume](#Section_3.4.5.2.37.1) methods.
+This section lists data types that are used exclusively by the [IVdsVolume](#Section_3.4.5.2.38.1) methods.
 
 <a id="Section_2.2.2.14.1"></a>
 ##### 2.2.2.14.1 Structures
@@ -4727,7 +4727,7 @@ ULONG cbUniqueId;
 <a id="Section_2.2.2.16"></a>
 #### 2.2.2.16 IVdsVolumeMF Data Types
 
-This section lists data types that are used exclusively by the [IVdsVolumeMF](#Section_3.4.5.2.35.1) methods.
+This section lists data types that are used exclusively by the [IVdsVolumeMF](#Section_2.2.2.16) methods.
 
 <a id="Section_2.2.2.16.1"></a>
 ##### 2.2.2.16.1 Data Types
@@ -4764,7 +4764,7 @@ VDS_OBJECT_ID SourceVolumeId;
 <a id="Section_2.2.2.17"></a>
 #### 2.2.2.17 IVdsVolumePlex Data Types
 
-This section lists data types that are used exclusively by the [IVdsVolumePlex](#Section_3.4.5.2.39.3) methods.
+This section lists data types that are used exclusively by the [IVdsVolumePlex](#Section_2.2.2.17) methods.
 
 <a id="Section_2.2.2.17.1"></a>
 ##### 2.2.2.17.1 Enumeration
@@ -4947,7 +4947,7 @@ A differencing disk represents the current state of the virtual disk as a set of
 <a id="Section_2.2.2.19"></a>
 #### 2.2.2.19 IVdsVDisk Data Types
 
-This section lists data types that are used exclusively by methods in the [IVdsVDisk](#Section_3.4.5.2.40.1) interface.
+This section lists data types that are used exclusively by methods in the [IVdsVDisk](#Section_3.4.5.2.40) interface.
 
 <a id="Section_2.2.2.19.1"></a>
 ##### 2.2.2.19.1 Enumerations
@@ -5013,7 +5013,7 @@ VDS_VST_MAX
 
 When the service has been made aware of a virtual disk, the state is set to VDS_VST_ADDED. In order to perform any operations on the virtual disk such as attaching it, detaching it, merging, compacting, or expanding, the virtual disk file is opened using IVdsVDisk::Open. Once the virtual disk is opened, its state transitions to VDS_VST_OPEN.
 
-Attach: To attach a virtual disk, the virtual disk object is first added to the service's list of objects and its state is set to VDS_VS_ADDED. Next IVdsVDisk::Open MUST be called against the virtual disk, and the state transitions to VDS_VST_OPEN. When the attach operation is initiated against the virtual disk, the state of the virtual disk transitions to VDS_VST_ATTACH_PENDING. The virtual disk remains in this state until the operating system disk object corresponding to the virtual disk has been instantiated. Once this object is instantiated, the virtual disk object's state transitions to VDS_VST_ATTACHED. The [IVdsOpenVDisk](#Section_3.4.5.2.41.5) interface is then released, the OpenVirtualDisk object is removed, and the state transitions to VDS_VST_ATTACHED_NOT_OPEN.
+Attach: To attach a virtual disk, the virtual disk object is first added to the service's list of objects and its state is set to VDS_VS_ADDED. Next IVdsVDisk::Open MUST be called against the virtual disk, and the state transitions to VDS_VST_OPEN. When the attach operation is initiated against the virtual disk, the state of the virtual disk transitions to VDS_VST_ATTACH_PENDING. The virtual disk remains in this state until the operating system disk object corresponding to the virtual disk has been instantiated. Once this object is instantiated, the virtual disk object's state transitions to VDS_VST_ATTACHED. The [IVdsOpenVDisk](#Section_3.4.5.2.41.2) interface is then released, the OpenVirtualDisk object is removed, and the state transitions to VDS_VST_ATTACHED_NOT_OPEN.
 
 Detach: To detach a virtual disk, the virtual disk object is first added to the service's list of objects and its state is set to VDS_VST_ADDED. Next IVdsVDisk::Open MUST be called against the virtual disk, and the state transitions to VDS_VST_OPEN. When the detach operation is initiated against the virtual disk, the state of the virtual disk transitions to VDS_VST_DETACH_PENDING. The virtual disk remains in this state until the operating system disk object corresponding to the virtual disk has been removed. Once this object is removed, the virtual disk object's state transitions to VDS_VST_OPEN. The IVdsOpenVDisk interface is then released, the OpenVirtualDisk object is removed, and the state transitions to VDS_VST_ADDED.
 
@@ -5215,7 +5215,7 @@ BOOL bIsChild;
 <a id="Section_2.2.2.20"></a>
 #### 2.2.2.20 IVdsOpenVDisk Data Types
 
-This section lists data types that are used exclusively by methods in the [IVdsOpenVDisk](#Section_3.4.5.2.41.5) interface.
+This section lists data types that are used exclusively by methods in the [IVdsOpenVDisk](#Section_3.4.5.2.41.2) interface.
 
 <a id="Section_2.2.2.20.1"></a>
 ##### 2.2.2.20.1 Enumerations
@@ -5405,7 +5405,7 @@ The following [**HRESULT**](#gt_hresult) return codes are defined by the Virtual
 | 0x80042455 VDS_E_DISK_PNP_REG_CORRUPT | The provider's list of PnP registered disks has become corrupted. |
 | 0x80042456 VDS_E_LBN_REMAP_ENABLED_FLAG | The provider does not support the VDS_VF_LBN REMAP_ENABLED volume flag. |
 | 0x80042457 VDS_E_NO_DRIVELETTER_FLAG | The provider does not support the VDS_VF_NO DRIVELETTER volume flag. |
-| 0x80042458 VDS_E_REVERT_ON_CLOSE | The *bRevertOnClose* parameter can only be set to TRUE if the VDS_VF_HIDDEN, VDS_VF_READONLY, VDS_VF_NO_DEFAULT_DRIVE_LETTER, or VDS_VF_SHADOW_COPY volume flag is set in the *ulFlags* parameter. For more information, see [IVdsVolume::SetFlags](#Section_3.4.5.2.21.6). |
+| 0x80042458 VDS_E_REVERT_ON_CLOSE | The *bRevertOnClose* parameter can only be set to TRUE if the VDS_VF_HIDDEN, VDS_VF_READONLY, VDS_VF_NO_DEFAULT_DRIVE_LETTER, or VDS_VF_SHADOW_COPY volume flag is set in the *ulFlags* parameter. For more information, see [IVdsVolume::SetFlags](#Section_3.4.5.2.4.15). |
 | 0x80042459 VDS_E_REVERT_ON_CLOSE_SET | Some volume flags are already set. The software clears these flags first, then calls IVdsVolume::SetFlags again, specifying TRUE for the bRevertOnClose parameter. |
 | 0x8004245A VDS_E_IA64_BOOT_MIRRORED_TO_MBR | Not used. The boot volume has been mirrored on a GPT disk to an MBR disk. The machine will not be bootable from the secondary plex. |
 | 0x0004245A VDS_S_IA64_BOOT_MIRRORED_TO_MBR | The boot volume has been mirrored on a GPT disk to an MBR disk. The machine will not be bootable from the secondary plex. |
@@ -5703,13 +5703,13 @@ All [**VDS**](#gt_virtual-disk-service-vds) interfaces that are listed in this s
 
 The interfaces in this section are listed in the following order:
 
-- Generic object interfaces: [Enumeration Object Interfaces (section 3.1.1)](#Section_3.1.1) through [Asynchronous Operation Object Interfaces (section 3.1.3)](#Section_3.1.3).
-- Service object interfaces: [Service Object Interfaces (section 3.1.5)](#Section_3.1) through [HBA Port Object Interfaces (section 3.1.6)](#Section_3.1).
+- Generic object interfaces: [Enumeration Object Interfaces (section 3.1.1)](#Section_2.2.2.17.1) through [Asynchronous Operation Object Interfaces (section 3.1.3)](#Section_3.1.3).
+- Service object interfaces: [Service Object Interfaces (section 3.1.5)](#Section_3.4.1.1) through [HBA Port Object Interfaces (section 3.1.6)](#Section_3.1.6).
 - Provider interfaces: [Provider Object Interfaces (section 3.1.9)](#Section_3.1.9).
 - Pack interfaces: [Pack Object Interfaces (section 3.1.11)](#Section_3.1.11).
-- Disk interfaces: [Disk Object Interfaces (section 3.1.12)](#Section_3.1).
+- Disk interfaces: [Disk Object Interfaces (section 3.1.12)](#Section_3.1.12).
 - Volume interfaces: [Volume Object Interfaces (section 3.1.13)](#Section_3.1.13).
-- Volume plex interfaces: [Volume Plex Object Interfaces (section 3.1.14)](#Section_3.1).
+- Volume plex interfaces: [Volume Plex Object Interfaces (section 3.1.14)](#Section_3.1.14).
 This order reflects the logical hierarchy of objects in VDS, see section [3.4.1](#Section_3.4.1).
 
 To retrieve the interfaces of a specific object, call the QueryInterface method on the [**DCOM**](#gt_distributed-component-object-model-dcom) IUnknown interfaces of the object as defined in [MS-DCOM] section 3.1.1.5.8.
@@ -5815,7 +5815,7 @@ The IEnumVdsObject interface enumerates through a set of [**VDS objects**](#gt_v
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {118610B7-8D94-4030-B5B8-500889788E4E}.
 
-The IEnumVdsObject methods are specified in section [3.4.5.2.1](#Section_3.4.5.2.19.1).
+The IEnumVdsObject methods are specified in section [3.4.5.2.1](#Section_3.4.5.2.16).
 
 Methods in RPC Opnum Order
 
@@ -5840,13 +5840,13 @@ The client implements the IVdsAdviseSink interface in order to receive notificat
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {8326CD1D-CF59-4936-B786-5EFC08798E25}.
 
-[IVdsAdviseSink](#Section_3.1.2.1) methods are specified in section 3.3.4.3.
+[IVdsAdviseSink](#Section_4.6) methods are specified in section 3.3.4.3.
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [OnNotify](#Section_3.3.4.3.1) | Passes notifications from [**VDS**](#gt_virtual-disk-service-vds) to applications. Opnum: 3 |
+| [OnNotify](#Section_4.6) | Passes notifications from [**VDS**](#gt_virtual-disk-service-vds) to applications. Opnum: 3 |
 
 All methods MUST NOT throw exceptions.
 
@@ -5862,7 +5862,7 @@ The IVdsAsync interface manages asynchronous operations. Methods that initiate a
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {D5D23B6D-5A55-4492-9889-397A3C2D2DBC}.
 
-The IVdsAsync methods are specified in section [3.4.5.2.2](#Section_3.4.5.2.21.6).
+The IVdsAsync methods are specified in section [3.4.5.2.2](#Section_3.4.5.2.21.4).
 
 Methods in RPC Opnum Order
 
@@ -5894,7 +5894,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [LoadService](#Section_3.4.5.2.3.1) | Loads the VDS service on the machine that is specified by an input parameter and returns a pointer to the [IVdsService interface](#Section_3.4.5.2.3.1). Opnum: 3 |
+| [LoadService](#Section_3.4.5.2.3.1) | Loads the VDS service on the machine that is specified by an input parameter and returns a pointer to the [IVdsService interface](#Section_3.4.5.2.9). Opnum: 3 |
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Service Object Interfaces
@@ -5908,7 +5908,7 @@ Servers implement the IVdsService interface in order to support storage manageme
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {0818A8EF-9BA9-40D8-A6F9-E22833CC771E}.
 
-The IVdsService methods are specified in section [3.4.5.2.4](#Section_3.4.5.2.4.5). A method is not listed for [**opnum**](#gt_opnum) 7 because the Virtual Disk Service Remote Protocol does not use it. Attempting to call a method with opnum 7 can result in NDR raising a RPC_X_BAD_STUB_DATA exception. For more details, see [MS-DCOM](../MS-DCOM/MS-DCOM.md).
+The IVdsService methods are specified in section [3.4.5.2.4](#Section_3.4.5.2.41.2). A method is not listed for [**opnum**](#gt_opnum) 7 because the Virtual Disk Service Remote Protocol does not use it. Attempting to call a method with opnum 7 can result in NDR raising a RPC_X_BAD_STUB_DATA exception. For more details, see [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
 Methods in RPC Opnum Order
 
@@ -5916,7 +5916,7 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [IsServiceReady](#Section_3.4.5.2.4.1) | Determines whether a service is finished initializing. Opnum: 3 |
 | [WaitForServiceReady](#Section_3.4.5.2.4.2) | Waits for [**VDS**](#gt_virtual-disk-service-vds) initialization to complete and then returns the status of the VDS initialization in the [**HRESULT**](#gt_hresult). Opnum: 4 |
-| [GetProperties](#Section_3.4.5.2.19.1) | Retrieves the properties of the service that is represented by the object that exposes this interface and method. Opnum: 5 |
+| [GetProperties](#Section_3.4.5.2.14.1) | Retrieves the properties of the service that is represented by the object that exposes this interface and method. Opnum: 5 |
 | [QueryProviders](#Section_3.4.5.2.4.4) | Enumerates the providers of the server. Opnum: 6 |
 | Opnum07NotUsedOnWire | Reserved for local use. Opnum: 7 |
 | [QueryUnallocatedDisks](#Section_f952f2f8be1e4667ac58f3ce845a0fb4) | Enumerates the [**unallocated disks**](#gt_unallocated-disk) on the server. Opnum: 8 |
@@ -5949,7 +5949,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Initialize](#Section_3.3.3) | Starts the initialization of the server. Opnum: 3 |
+| [Initialize](#Section_3.2.3) | Starts the initialization of the server. Opnum: 3 |
 
 All methods MUST NOT throw exceptions.
 
@@ -5980,13 +5980,13 @@ The IVdsServiceHba interface provides a method to query [**HBA**](#gt_host-bus-a
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {0AC13689-3134-47C6-A17C-4669216801BE}.
 
-The IVdsServiceHba methods are specified in section [3.4.5.2.7](#Section_3.4.5.2.7).
+The IVdsServiceHba methods are specified in section [3.4.5.2.7](#Section_3.4.5.2.7.1).
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [QueryHbaPorts](#Section_ad487ff91029487fbc94cc84b46b2c3c) | Returns an [IEnumVdsObject](#Section_3.4.5.2.1.2) enumeration object that contains a list of the HBA ports that are known to [**VDS**](#gt_virtual-disk-service-vds) on the system. Opnum: 3 |
+| [QueryHbaPorts](#Section_ad487ff91029487fbc94cc84b46b2c3c) | Returns an [IEnumVdsObject](#Section_3.1.1.1) enumeration object that contains a list of the HBA ports that are known to [**VDS**](#gt_virtual-disk-service-vds) on the system. Opnum: 3 |
 
 All methods MUST NOT throw exceptions.
 
@@ -5997,7 +5997,7 @@ The IVdsServiceIscsi interface provides methods to interact with the [**iSCSI in
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {14FBE036-3ED7-4E10-90E9-A5FF991AFF01}.
 
-The IVdsServiceIscsi methods are specified in section [3.4.5.2.8](#Section_3.4.5.2.8). No methods with [**opnums**](#gt_opnum) 5, 6, 7, and 9 are listed because the Virtual Disk Service Remote Protocol does not use them.
+The IVdsServiceIscsi methods are specified in section [3.4.5.2.8](#Section_3.1.5.5). No methods with [**opnums**](#gt_opnum) 5, 6, 7, and 9 are listed because the Virtual Disk Service Remote Protocol does not use them.
 
 Methods in RPC Opnum Order
 
@@ -6022,7 +6022,7 @@ Servers implement the IvdsServiceSAN interface in order to support storage manag
 
 The UUID for this interface is {FC5D23E8-A88B-41A5-8DE0-2D2F73C5A630}.
 
-The IvdsServiceSAN methods are specified in section [3.4.5.2.9](#Section_3.4.5.2.9.1).
+The IvdsServiceSAN methods are specified in section [3.4.5.2.9](#Section_3.4.5.2.9).
 
 Methods in RPC Opnum Order
 
@@ -6040,7 +6040,7 @@ Servers implement the IVdsServiceSw interface<58> in order to support storage ma
 
 The UUID for this interface is {15fc031c-0652-4306-b2c3-f558b8f837e2}.
 
-The IvdsServiceSAN methods are specified in section [3.4.5.2.10](#Section_3.4.5.2.10.1).
+The IvdsServiceSAN methods are specified in section [3.4.5.2.10](#Section_3.4.5.2.10).
 
 Methods in RPC Opnum Order
 
@@ -6062,7 +6062,7 @@ The IVdsHbaPort interface provides methods to query and interact with [**HBA**](
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {2ABD757F-2851-4997-9A13-47D2A885D6CA}.
 
-The IVdsHbaPort methods are specified in section [3.4.5.2.11](#Section_3.4.5.2.11.2).
+The IVdsHbaPort methods are specified in section [3.4.5.2.11](#Section_3.4.5.2.11).
 
 Methods in RPC Opnum Order
 
@@ -6085,7 +6085,7 @@ The IVdsIscsiInitiatorAdapter interface provides methods to query and interact w
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {B07FEDD4-1682-4440-9189-A39B55194DC5}.
 
-The IVdsIscsiInitiatorAdapter methods are specified in section [3.4.5.2.12](#Section_3.4.5.2.12.2). No methods are listed with [**opnums**](#gt_opnum) 5 and 6 because the Virtual Disk Service Remote Protocol does not use them.
+The IVdsIscsiInitiatorAdapter methods are specified in section [3.4.5.2.12](#Section_3.4.5.2.12). No methods are listed with [**opnums**](#gt_opnum) 5 and 6 because the Virtual Disk Service Remote Protocol does not use them.
 
 Methods in RPC Opnum Order
 
@@ -6112,7 +6112,7 @@ The IVdsIscsiInitiatorPortal interface provides methods to query and interact wi
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {38A0A9AB-7CC8-4693-AC07-1F28BD03C3DA}.
 
-The IVdsIscsiInitiatorPortal methods are specified in section [3.4.5.2.13](#Section_3.1.8.1). No methods with [**opnums**](#gt_opnum) 5, 6, and 7 are listed because the Virtual Disk Service Remote Protocol does not use them.
+The IVdsIscsiInitiatorPortal methods are specified in section [3.4.5.2.13](#Section_3.4.5.2.13). No methods with [**opnums**](#gt_opnum) 5, 6, and 7 are listed because the Virtual Disk Service Remote Protocol does not use them.
 
 Methods in RPC Opnum Order
 
@@ -6140,7 +6140,7 @@ Providers implement the IVdsProvider interface in order to support provider mana
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {10C5E575-7984-4E81-A56B-431F5F92AE42}.
 
-The IVdsProvider methods are specified in section [3.4.5.2.14](#Section_3.1.9.1).
+The IVdsProvider methods are specified in section [3.4.5.2.14](#Section_3.4.5.2.14.1).
 
 Methods in RPC Opnum Order
 
@@ -6175,7 +6175,7 @@ Hardware providers implement the IVdsHwProvider interface to support management 
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {D99BDAAE-B13A-4178-9FDB-E27F16B4603E}.
 
-The IVdsHwProvider methods are specified in section [3.4.5.2.16](#Section_3.4.5.2.16.1).
+The IVdsHwProvider methods are specified in section [3.4.5.2.16](#Section_3.4.5.2.16).
 
 All methods MUST NOT throw exceptions.
 
@@ -6202,8 +6202,8 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [QueryVDisks](#Section_3.4.5.2.17.1) | Returns a list of the virtual disks that are managed by the provider. Opnum: 3 |
 | [CreateVDisk](#Section_3.4.5.2.17.2) | Defines a [**virtual hard disk**](#gt_virtual-hard-disk) by creating a virtual disk file [**backing store**](#gt_backing-store) and adds a virtual hard disk object to the provider. Does NOT instantiate an operating system [**disk**](#gt_disk) device. Opnum: 4 |
-| [AddVDisk](#Section_3.4.5.2.17.3) | Adds a virtual disk object for the specified virtual disk file to the provider and returns an [IVdsVDisk](#Section_3.4.5.2.40.1) interface pointer to it. Opnum: 5 |
-| [GetDiskFromVDisk](#Section_dd2e22ab4631481fa3aa07f4b30a4d81) | Returns an [IVdsDisk](#Section_3.4.5.2.40.1) interface pointer for a virtual disk object given an IVdsVDisk interface pointer. The virtual disk MUST be [**attached**](#gt_attach). Opnum: 6 |
+| [AddVDisk](#Section_3.4.5.2.17.3) | Adds a virtual disk object for the specified virtual disk file to the provider and returns an [IVdsVDisk](#Section_3.4.5.2.40) interface pointer to it. Opnum: 5 |
+| [GetDiskFromVDisk](#Section_dd2e22ab4631481fa3aa07f4b30a4d81) | Returns an [IVdsDisk](#Section_3.4.5.2.40) interface pointer for a virtual disk object given an IVdsVDisk interface pointer. The virtual disk MUST be [**attached**](#gt_attach). Opnum: 6 |
 | [GetVDiskFromDisk](#Section_3.4.5.2.17.5) | Returns an IVdsVDisk interface pointer for the virtual disk object given an IVdsDisk interface pointer. The virtual disk MUST be attached. Opnum: 7 |
 
 All methods MUST NOT throw exceptions.
@@ -6243,7 +6243,7 @@ The IVdsPack interface is implemented by [**disk pack**](#gt_disk-pack) objects 
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {3B69D7F5-9D94-4648-91CA-79939BA263BF}.
 
-The IVdsPack methods are specified in section [3.4.5.2.19](#Section_3.4.5.2.19.1). No method with opnum 10 is listed because it is not used by this protocol.
+The IVdsPack methods are specified in section [3.4.5.2.19](#Section_2.2.2.8). No method with opnum 10 is listed because it is not used by this protocol.
 
 Methods in RPC Opnum Order
 
@@ -6271,7 +6271,7 @@ The IVdsPack2 interface is implemented by [**disk pack**](#gt_disk-pack) objects
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {13B50BFF-290A-47DD-8558-B7C58DB1A71A}.
 
-The IVdsPack2 methods are specified in section [3.4.5.2.20](#Section_3.4.5.2.20.1).
+The IVdsPack2 methods are specified in section [3.4.5.2.20](#Section_3.4.5.2.20).
 
 Methods in RPC Opnum Order
 
@@ -6293,7 +6293,7 @@ The IVdsDisk interface is implemented by [**disk**](#gt_disk) objects in order t
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {07E5C822-F00C-47A1-8FCE-B244DA56FD06}.
 
-The IVdsDisk methods are specified in section [3.4.5.2.21](#Section_3.1.12.10).
+The IVdsDisk methods are specified in section [3.4.5.2.21](#Section_3.4.5.2.21.4).
 
 Methods in RPC Opnum Order
 
@@ -6351,7 +6351,7 @@ The IVdsAdvancedDisk interface is implemented by [**disk**](#gt_disk) objects in
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {6E6F6B40-977C-4069-BDDD-AC710059F8C0}.
 
-The IVdsAdvancedDisk methods are specified in section [3.4.5.2.24](#Section_3.4.5.2.24.10).
+The IVdsAdvancedDisk methods are specified in section [3.4.5.2.24](#Section_3.4.5.2.24.8).
 
 Methods in RPC Opnum Order
 
@@ -6377,7 +6377,7 @@ The IVdsAdvancedDisk2 interface is implemented by [**disk**](#gt_disk) objects i
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {9723F420-9355-42DE-AB66-E31BB15BEEAC}.
 
-The IVdsAdvancedDisk2 methods are specified in section [3.4.5.2.25](#Section_2.2.2.12).
+The IVdsAdvancedDisk2 methods are specified in section [3.4.5.2.25](#Section_3.4.5.2.25.1).
 
 Methods in RPC Opnum Order
 
@@ -6412,7 +6412,7 @@ The IVdsCreatePartitionEx interface is implemented by the [**disk**](#gt_disk) o
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {9882F547-CFC3-420B-9750-00DFBEC50662}.
 
-The IVdsCreatePartitionEx methods are specified in section [3.4.5.2.27](#Section_3.4.5.2.27).
+The IVdsCreatePartitionEx methods are specified in section [3.4.5.2.27](#Section_3.4.5.2.27.1).
 
 Methods in RPC Opnum Order
 
@@ -6447,7 +6447,7 @@ The IVdsDiskPartitionMF interface is implemented by [**disk**](#gt_disk) objects
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {538684E0-BA3D-4BC0-ACA9-164AFF85C2A9}.
 
-The IVdsDiskPartitionMF methods are specified in section [3.4.5.2.29](#Section_3.4.5.2.29.1).
+The IVdsDiskPartitionMF methods are specified in section [3.4.5.2.29](#Section_3.4.5.2.29).
 
 Methods in RPC Opnum Order
 
@@ -6507,7 +6507,7 @@ The IVdsVolume interface provides methods to manage [**volumes**](#gt_volume).
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {88306BB2-E71F-478C-86A2-79DA200A0F11}.
 
-The IVdsVolume methods are specified in section [3.4.5.2.32](#Section_3.4.5.2.37.1).
+The IVdsVolume methods are specified in section [3.4.5.2.32](#Section_3.4.5.2.38.1).
 
 All methods MUST NOT throw exceptions.
 
@@ -6524,7 +6524,7 @@ Methods in RPC Opnum Order
 | [BreakPlex](#Section_3.4.5.2.32.7) | Removes a specified plex from the current volume. Opnum: 9 |
 | [RemovePlex](#Section_3.4.5.2.32.8) | Removes a specified plex from a volume. The last plex of a volume cannot be removed. Opnum: 10 |
 | [Delete](#Section_fa0973ca6d6b431cb5b48bbeffc4e458) | Deletes all plexes in a volume. This method is not implemented for removable disks. Opnum: 11 |
-| [SetFlags](#Section_3.4.5.2.21.6) | Assigns flags to a volume. This method is not implemented for removable disks. Opnum: 12 |
+| [SetFlags](#Section_3.4.5.2.4.15) | Assigns flags to a volume. This method is not implemented for removable disks. Opnum: 12 |
 | [ClearFlags](#Section_002b61212e6d4334864abe59ecbb8a07) | Clears flags from a volume. This method is not implemented for removable disks. Opnum: 13 |
 
 <a id="Section_3.1.13.2"></a>
@@ -6549,7 +6549,7 @@ The IVdsVolumeMF interface is implemented by [**volume**](#gt_volume) objects in
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {EE2D5DED-6236-4169-931D-B9778CE03DC6}.
 
-The IVdsVolumeMF methods are specified in section [3.4.5.2.34](#Section_3.4.5.2.35.1).
+The IVdsVolumeMF methods are specified in section [3.4.5.2.34](#Section_2.2.2.16).
 
 Methods in RPC Opnum Order
 
@@ -6575,7 +6575,7 @@ The IVdsVolumeMF2 interface is implemented by [**volume**](#gt_volume) objects i
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {4DBCEE9A-6343-4651-B85F-5E75D74D983C}.
 
-The [IVdsVolumeMF2](#Section_3.4.5.2.35.1) methods are specified in section 3.4.5.2.35.
+The [IVdsVolumeMF2](#Section_3.4.5.2.35.3) methods are specified in section 3.4.5.2.35.
 
 Methods in RPC Opnum Order
 
@@ -6653,7 +6653,7 @@ The IVdsVolumePlex interface is implemented by [**volume plex**](#gt_volume-plex
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {4DAA0135-E1D1-40F1-AAA5-3CC1E53221C3}.
 
-The IVdsVolumePlex methods are specified in section [3.4.5.2.39](#Section_3.4.5.2.39.3).
+The IVdsVolumePlex methods are specified in section [3.4.5.2.39](#Section_2.2.2.17).
 
 Methods in RPC Opnum Order
 
@@ -6676,13 +6676,13 @@ The IVdsVDisk interface is implemented by the [**virtual disk**](#gt_virtual-dis
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {1E062B84-E5E6-4B4B-8A25-67B81E8F13E8}.
 
-The IVdsVDisk methods are specified in section [3.4.5.2.40](#Section_3.4.5.2.40.2).
+The IVdsVDisk methods are specified in section [3.4.5.2.40](#Section_3.4.5.2.40.3).
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Open](#Section_3.4.5.2.40.1) | Opens a handle to the specified virtual disk file and returns an [IVdsOpenVDisk](#Section_3.4.5.2.41.5) interface pointer to the object that represents the opened handle. Opnum: 3 |
+| [Open](#Section_3.4.5.2.40.1) | Opens a handle to the specified virtual disk file and returns an [IVdsOpenVDisk](#Section_3.4.5.2.41.2) interface pointer to the object that represents the opened handle. Opnum: 3 |
 | [GetProperties](#Section_3.4.5.2.40.2) | Returns [**disk**](#gt_disk) property information for the [**volume**](#gt_volume) where the virtual disk resides. Opnum: 4 |
 | [GetHostVolume](#Section_3.4.5.2.40.3) | Returns an interface pointer to the volume object for the volume where the virtual disk resides. Opnum: 5 |
 | [GetDeviceName](#Section_3.4.5.2.40.4) | Returns the device name for the volume where the virtual disk resides. Opnum: 6 |
@@ -6696,14 +6696,14 @@ The IVdsOpenVDisk interface is implemented by the [**virtual disk**](#gt_virtual
 
 The [**UUID**](#gt_universally-unique-identifier-uuid) for this interface is {75C8F324-F715-4FE3-A28E-F9011B61A4A1}.
 
-The IVdsOpenVDisk methods are specified in section [3.4.5.2.41](#Section_3.4.5.2.41.5).
+The IVdsOpenVDisk methods are specified in section [3.4.5.2.41](#Section_3.4.5.2.41.2).
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
 | [Attach](#Section_3.4.5.2.41.1) | Creates an operating system [**disk**](#gt_disk) device for a virtual disk. Opnum: 3 |
-| [Detach](#Section_3.4.5.2.41.3) | Removes the operating system disk device associated with the virtual disk. Opnum: 4 |
+| [Detach](#Section_3.4.5.2.41.2) | Removes the operating system disk device associated with the virtual disk. Opnum: 4 |
 | [DetachAndDelete](#Section_3.4.5.2.41.3) | Removes the operating system disk device associated with the virtual disk and deletes any [**backing store**](#gt_backing-store) files. Opnum: 5 |
 | [Compact](#Section_3.4.5.2.41.4) | Reduces the physical size of the virtual disk's backing store file. Opnum: 6 |
 | [Merge](#Section_3.4.5.2.41.5) | Causes all blocks in a child [**differencing disk**](#gt_differencing-disk) to be moved into the parent. Opnum: 7 |
@@ -6738,35 +6738,35 @@ This section describes the hierarchy of interfaces and objects that the Virtual 
 
 Figure 1: Relationships between VDS remote protocol objects
 
-Service Loader and Service: The first interface the client obtains is the [IVdsServiceLoader](#Section_3.4.5.2.3.1) interface. The client invokes IVdsServiceLoader::LoadService to load the [**VDS**](#gt_virtual-disk-service-vds) service on the specified machine. The server responds with an [IVdsService](#Section_3.4.5.2.3.1) interface for the VDS service that is loaded.
+Service Loader and Service: The first interface the client obtains is the [IVdsServiceLoader](#Section_3.1.4.1) interface. The client invokes IVdsServiceLoader::LoadService to load the [**VDS**](#gt_virtual-disk-service-vds) service on the specified machine. The server responds with an [IVdsService](#Section_3.4.5.2.9) interface for the VDS service that is loaded.
 
-Service and Providers: The client invokes [IVdsService::QueryProviders](#Section_3.4.5.2.4.4) to obtain a list of providers. The server responds with an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface, which enumerates a list of IUnknown interfaces, one for each provider that is available on the server. The client invokes QueryInterface on the IUnknown interface to retrieve a IVdsSwProvider or IVdsProvider interface on the provider object.
+Service and Providers: The client invokes [IVdsService::QueryProviders](#Section_3.4.5.2.4.4) to obtain a list of providers. The server responds with an [IEnumVdsObject](#Section_3.1.1.1) interface, which enumerates a list of IUnknown interfaces, one for each provider that is available on the server. The client invokes QueryInterface on the IUnknown interface to retrieve a IVdsSwProvider or IVdsProvider interface on the provider object.
 
-Service and Subsystems: The client invokes IVdsService::QueryProviders with the flag VDS_QUERY_HARDWARE_PROVIDERS to obtain a list of VDS hardware providers. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each hardware provider that is available on the server. The client invokes QueryInterface on the IUnknown interface to retrieve an [IVdsHwProvider](#Section_3.1.9.3) interface on the provider object. The client invokes [IVdsHwProvider::QuerySubSystems](#Section_3.4.5.2.16.1) to obtain a list of subsystems. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each subsystem that is available on the server. The client invokes QueryInterface on the IUnknown interface to retrieve an [IVdsSubSystemImportTarget](#Section_3.1.10.1) interface.
+Service and Subsystems: The client invokes IVdsService::QueryProviders with the flag VDS_QUERY_HARDWARE_PROVIDERS to obtain a list of VDS hardware providers. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each hardware provider that is available on the server. The client invokes QueryInterface on the IUnknown interface to retrieve an [IVdsHwProvider](#Section_3.4.5.2.16) interface on the provider object. The client invokes [IVdsHwProvider::QuerySubSystems](#Section_3.4.5.2.16.1) to obtain a list of subsystems. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each subsystem that is available on the server. The client invokes QueryInterface on the IUnknown interface to retrieve an [IVdsSubSystemImportTarget](#Section_3.4.5.2.18.2) interface.
 
-Virtual Disk Providers and Virtual Disks: Similar to hardware-providers, the client invokes IVdsService::QueryProviders with the flag VDS_QUERY_VIRTUALDISK_PROVIDERS to obtain a list of VDS [**virtual disk**](#gt_virtual-disk) providers, each of which implement an [IVdsVdProvider](#Section_3.4.5.2.17) interface. The client invokes the IUnknown QueryInterface method to retrieve an IVdsVdProvider interface on the virtual disk provider object. The client then invokes [IVdsVdProvider::QueryVDisks](#Section_3.4.5.2.17.1) to obtain a list of virtual disks that the provider maintains. The server responds with a IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each virtual disk. The client invokes IUnknown::QueryInterface to retrieve an [IVdsVDisk](#Section_3.4.5.2.40.1) interface on the virtual disk object.
+Virtual Disk Providers and Virtual Disks: Similar to hardware-providers, the client invokes IVdsService::QueryProviders with the flag VDS_QUERY_VIRTUALDISK_PROVIDERS to obtain a list of VDS [**virtual disk**](#gt_virtual-disk) providers, each of which implement an [IVdsVdProvider](#Section_3.4.5.2.17) interface. The client invokes the IUnknown QueryInterface method to retrieve an IVdsVdProvider interface on the virtual disk provider object. The client then invokes [IVdsVdProvider::QueryVDisks](#Section_3.4.5.2.17.1) to obtain a list of virtual disks that the provider maintains. The server responds with a IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each virtual disk. The client invokes IUnknown::QueryInterface to retrieve an [IVdsVDisk](#Section_3.4.5.2.40) interface on the virtual disk object.
 
-Service and [**Unallocated Disks**](#gt_unallocated-disk): The client invokes IVdsService::QueryUnallocatedDisks to obtain a list of disks that do not have a recognized disk partitioning [**format**](#gt_format). The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each unallocated disk that is available on the server. The client invokes IUnknown::QueryInterface to retrieve an [IVdsDisk](#Section_3.4.5.2.40.1), [IVdsDisk2](#Section_3.4.5.2.22.1), [IVdsDisk3](#Section_3.4.5.2.23.2), [IVdsAdvancedDisk](#Section_3.4.5.2.24.10), [IVdsAdvancedDisk2](#Section_2.2.2.12), [IVdsAdvancedDisk3](#Section_3.1.12.6), [IVdsDiskPartitionMF](#Section_3.1.12.10), [IVdsDiskPartitionMF2](#Section_3.1.12.10), [IVdsCreatePartitionEx](#Section_3.4.5.2.27.1), [IvdsDiskOnline,](#Section_3.4.5.2.28) or [IVdsRemovable](#Section_3.1.12.11) interface on the disk object.
+Service and [**Unallocated Disks**](#gt_unallocated-disk): The client invokes IVdsService::QueryUnallocatedDisks to obtain a list of disks that do not have a recognized disk partitioning [**format**](#gt_format). The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each unallocated disk that is available on the server. The client invokes IUnknown::QueryInterface to retrieve an [IVdsDisk](#Section_3.4.5.2.40), [IVdsDisk2](#Section_3.4.5.2.22.1), [IVdsDisk3](#Section_3.1.12.3), [IVdsAdvancedDisk](#Section_3.4.5.2.24.8), [IVdsAdvancedDisk2](#Section_3.4.5.2.25.1), [IVdsAdvancedDisk3](#Section_3.1.12.6), [IVdsDiskPartitionMF](#Section_3.1.12.9), [IVdsDiskPartitionMF2](#Section_3.4.5.2.30), [IVdsCreatePartitionEx](#Section_3.1.12.7), [IvdsDiskOnline,](#Section_3.4.5.2.28.2) or [IVdsRemovable](#Section_3.4.5.2.31) interface on the disk object.
 
-Service and Disks: The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the [IVdsServiceUninstallDisk](#Section_3.4.5.2.6) interface. The client invokes [IVdsServiceUninstallDisk::UninstallDisks](#Section_3.4.5.2.6.2) to uninstall one or more disks that are installed on the server. See section [3.2.1.4](#Section_3.2.1.4). The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the [IVdsServiceSAN](#Section_2.2.2.2) interface. The client invokes [IVdsServiceSAN::GetSANPolicy](#Section_3.4.5.2.9.1) to query the current SAN policy setting, and [IVdsServiceSAN::SetSANPolicy](#Section_3.4.5.2.9.2) to set the SAN policy.
+Service and Disks: The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the [IVdsServiceUninstallDisk](#Section_3.4.5.2.6.2) interface. The client invokes [IVdsServiceUninstallDisk::UninstallDisks](#Section_3.4.5.2.6.2) to uninstall one or more disks that are installed on the server. See section [3.2.1.4](#Section_3.2.1.4). The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the [IVdsServiceSAN](#Section_3.4.5.2.9) interface. The client invokes [IVdsServiceSAN::GetSANPolicy](#Section_3.4.5.2.9.1) to query the current SAN policy setting, and [IVdsServiceSAN::SetSANPolicy](#Section_3.4.5.2.9.2) to set the SAN policy.
 
 Service and File System Types: The client invokes IVdsService::QueryFileSystemTypes to obtain a list of the [**file system**](#gt_file-system) types that are available for use in formatting volumes. The server returns a list of [VDS_FILE_SYSTEM_TYPE_PROP](#Section_2.2.2.1.3.3) structures.
 
 Service and [**Drive Letters**](#gt_drive-letter): The client invokes IVdsService::QueryDriveLetters to obtain a list of drive letters on the system. The server returns a list of [VDS_DRIVE_LETTER_PROP](#Section_2.2.2.1.3.2) structures; the **bUsed** member indicates whether the drive letter is in use.
 
-Service and [**HBA**](#gt_host-bus-adapter-hba) Ports: The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the IVdsServiceHba interface. The client invokes IVdsServiceHba::QueryHbaPorts to obtain a list of the HBA ports that are connected to the server. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each HBA port that is connected to the machine. The client invokes IUnknown::QueryInterface to retrieve an [IVdsHbaPort](#Section_3.4.5.2.11.2) interface on the HBA port object.
+Service and [**HBA**](#gt_host-bus-adapter-hba) Ports: The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the IVdsServiceHba interface. The client invokes IVdsServiceHba::QueryHbaPorts to obtain a list of the HBA ports that are connected to the server. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each HBA port that is connected to the machine. The client invokes IUnknown::QueryInterface to retrieve an [IVdsHbaPort](#Section_3.4.5.2.11) interface on the HBA port object.
 
-Service and Initiator Adapters: The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the IVdsServiceIscsi interface. The client invokes IVdsServiceIscsi::QueryInitiatorAdapters to obtain a list of the [**iSCSI initiator adapters**](#gt_iscsi-initiator-adapter) that are connected to the server. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each initiator adapter that is connected to the machine. The client invokes IUnknown::QueryInterface to retrieve an [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12.2) interface on the initiator adapter object.
+Service and Initiator Adapters: The client invokes IUnknown::QueryInterface on the IVdsService interface to retrieve the IVdsServiceIscsi interface. The client invokes IVdsServiceIscsi::QueryInitiatorAdapters to obtain a list of the [**iSCSI initiator adapters**](#gt_iscsi-initiator-adapter) that are connected to the server. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each initiator adapter that is connected to the machine. The client invokes IUnknown::QueryInterface to retrieve an [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12) interface on the initiator adapter object.
 
-Service and Initiator Portals: The client invokes IVdsIscsiInitiatorAdapter::QueryInitiatorPortals to obtain a list of the [**iSCSI initiator portals**](#gt_iscsi-initiator-portal) that the initiator adapter maintains. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each initiator portal. The client invokes IUnknown::QueryInterface to retrieve an [IVdsIscsiInitiatorPortal](#Section_3.1.8.1) interface on the initiator portal object.
+Service and Initiator Portals: The client invokes IVdsIscsiInitiatorAdapter::QueryInitiatorPortals to obtain a list of the [**iSCSI initiator portals**](#gt_iscsi-initiator-portal) that the initiator adapter maintains. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each initiator portal. The client invokes IUnknown::QueryInterface to retrieve an [IVdsIscsiInitiatorPortal](#Section_3.4.5.2.13) interface on the initiator portal object.
 
-Providers and Packs: The client invokes IVdsSwProvider::QueryPacks to obtain a list of the [**packs**](#gt_pack) that the provider maintains. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each pack. The client invokes IUnknown::QueryInterface to retrieve an [IVdsPack](#Section_3.4.5.2.19.1) or [IVdsPack2](#Section_3.4.5.2.20.1) interface on the pack object.
+Providers and Packs: The client invokes IVdsSwProvider::QueryPacks to obtain a list of the [**packs**](#gt_pack) that the provider maintains. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each pack. The client invokes IUnknown::QueryInterface to retrieve an [IVdsPack](#Section_2.2.2.8) or [IVdsPack2](#Section_3.4.5.2.20.1) interface on the pack object.
 
 Packs and Disks: The client invokes IVdsPack::QueryDisks to obtain a list of the disks in the pack. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each disk in the pack. The client invokes IUnknown::QueryInterface to retrieve an IVdsDisk, IVdsDisk2, IVdsDisk3, IVdsAdvancedDisk, IVdsAdvancedDisk2, IVdsAdvancedDisk3,IVdsDiskPartitionMF, IVdsDiskPartitionMF2, IVdsCreatePartitionEx, IvdsDiskOnline, or IVdsRemovable interface on the disk object.
 
-Packs and Volumes: The client invokes [IVdsPack::QueryVolumes](#Section_3.4.5.2.19.3) to obtain a list of the volumes in the pack. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each volume in the pack. The client invokes IUnknown::QueryInterface to retrieve an [IVdsVolume](#Section_3.4.5.2.37.1), IVdsVolume2, [IVdsVolumeOnline](#Section_3.4.5.2.38), or [IVdsVolumeShrink](#Section_3.4.5.2.37.1) interface on the volume object.
+Packs and Volumes: The client invokes [IVdsPack::QueryVolumes](#Section_3.4.5.2.19.3) to obtain a list of the volumes in the pack. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each volume in the pack. The client invokes IUnknown::QueryInterface to retrieve an [IVdsVolume](#Section_3.4.5.2.38.1), IVdsVolume2, [IVdsVolumeOnline](#Section_3.4.5.2.38.1), or [IVdsVolumeShrink](#Section_3.4.5.2.37.1) interface on the volume object.
 
-Volumes and [**Plexes**](#gt_plex): The client invokes IVdsVolume::QueryPlexes to obtain a list of the plexes for a volume. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each plex that is associated with the volume. The client invokes IUnknown::QueryInterface to retrieve an [IVdsVolumePlex](#Section_3.4.5.2.39.3) interface on the plex object.
+Volumes and [**Plexes**](#gt_plex): The client invokes IVdsVolume::QueryPlexes to obtain a list of the plexes for a volume. The server responds with an IEnumVdsObject interface, which enumerates a list of IUnknown interfaces, one for each plex that is associated with the volume. The client invokes IUnknown::QueryInterface to retrieve an [IVdsVolumePlex](#Section_2.2.2.17) interface on the plex object.
 
 Plexes and Extents: The client invokes [IVdsVolumePlex::QueryExtents](#Section_3.4.5.2.39.3) to obtain a list of the extents for a specified plex. The server returns a list of [VDS_DISK_EXTENT](#Section_2.2.1.3.19) structures, one for each extent in use by the plex.
 
@@ -6776,7 +6776,7 @@ Volumes and [**Reparse Points**](#gt_reparse-point): For the IVdsVolume interfac
 
 Volumes and Access Paths: The client invokes IUnknown::QueryInterface to retrieve an IVdsVolumeMF interface. The client then invokes [IVdsVolumeMF::QueryAccessPaths](#Section_3.4.5.2.34.4) to obtain a list of user mode [**path**](#gt_path) names for the volume. The server returns a list of drive letters and mount points for the volume. For drive D mounted to C:\MountD, drive D is the mounted volume and C:\MountD is the mount point.
 
-Volumes and Supported File System Formats: The client invokes IUnknown::QueryInterface to retrieve an [IVdsVolumeMF2](#Section_3.4.5.2.35.1) interface. The client invokes [IVdsVolumeMF2::QueryFileSystemFormatSupport](#Section_3.4.5.2.35.2) to obtain a list of file systems that are supported for the volume. The server returns a list of [VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP](#Section_2.2.1.3.18) structures, one for each file system that is supported on the volume.
+Volumes and Supported File System Formats: The client invokes IUnknown::QueryInterface to retrieve an [IVdsVolumeMF2](#Section_3.4.5.2.35.3) interface. The client invokes [IVdsVolumeMF2::QueryFileSystemFormatSupport](#Section_3.4.5.2.35.2) to obtain a list of file systems that are supported for the volume. The server returns a list of [VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP](#Section_2.2.1.3.18) structures, one for each file system that is supported on the volume.
 
 Disks and Extents: The client invokes [IVdsDisk::QueryExtents](#Section_3.4.5.2.21.4) to obtain a list of the extents for a specified disk. The server returns a list of VDS_DISK_EXTENT structures, one for each extent on the disk. Alternatively, the client invokes [IVdsDisk3::QueryFreeExtents](#Section_3.4.5.2.23.2) to obtain a list of the free extents for a specified disk. The server returns a list of [VDS_DISK_FREE_EXTENT](#Section_2.2.2.10.2.2) structures, one for each extent on the disk that is associated with free space on the disk.
 
@@ -6795,7 +6795,7 @@ Volumes and Drive Letters: For a VDS_DRIVE_LETTER_PROP structure that describes 
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 Service and Providers
 
-[IVdsService::GetObject](#Section_3.4.5.2.4.6): "XXX" is a placeholder for provider, [**pack**](#gt_pack), [**disk**](#gt_disk), [**virtual disk**](#gt_virtual-disk), [**volume**](#gt_volume), [**volume plex**](#gt_volume-plex), or [**HBA**](#gt_host-bus-adapter-hba) port. Prior to invoking GetObject, the client invokes QueryXXXs on interfaces that have a QueryXXXs method. The server responds with an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface, which enumerates a list of IUnknown interfaces, one for each object that is associated with the enumeration. The client invokes IUnknown::QueryInterface to retrieve an IVdsXXX interface on the object. The client invokes IVdsXXX::GetProperties to retrieve the object ID. The client passes this returned value as the *id* input parameter to the GetObject method. IVdsXXX::GetProperties returns this value as the [VDS_PROVIDER_PROP](#Section_2.2.2.7.2.1) **id** member, [VDS_PACK_PROP](#Section_2.2.2.8.2.1) **id** member, [VDS_DISK_PROP](#Section_2.2.2.9.1.1) **id** member, [VDS_VDISK_PROPERTIES](#Section_2.2.2.19.2.1) **Id** member, [VDS_VOLUME_PROP](#Section_2.2.2.14.1.1) **id** member, [VDS_VOLUME_PLEX_PROP](#Section_2.2.2.17.2.1) **id** member, or [VDS_HBAPORT_PROP](#Section_2.2.2.4.2.2) **id** member. The client can cache the object IDs for the lifetime of the object; it can later be used to retrieve an interface to the object without having to cache the interface to the object itself, or having to enumerate and find the object every time it needs the object.
+[IVdsService::GetObject](#Section_3.4.5.2.4.6): "XXX" is a placeholder for provider, [**pack**](#gt_pack), [**disk**](#gt_disk), [**virtual disk**](#gt_virtual-disk), [**volume**](#gt_volume), [**volume plex**](#gt_volume-plex), or [**HBA**](#gt_host-bus-adapter-hba) port. Prior to invoking GetObject, the client invokes QueryXXXs on interfaces that have a QueryXXXs method. The server responds with an [IEnumVdsObject](#Section_3.1.1.1) interface, which enumerates a list of IUnknown interfaces, one for each object that is associated with the enumeration. The client invokes IUnknown::QueryInterface to retrieve an IVdsXXX interface on the object. The client invokes IVdsXXX::GetProperties to retrieve the object ID. The client passes this returned value as the *id* input parameter to the GetObject method. IVdsXXX::GetProperties returns this value as the [VDS_PROVIDER_PROP](#Section_2.2.2.7.2.1) **id** member, [VDS_PACK_PROP](#Section_2.2.2.8.2.1) **id** member, [VDS_DISK_PROP](#Section_2.2.2.9.1.1) **id** member, [VDS_VDISK_PROPERTIES](#Section_2.2.2.19.2.1) **Id** member, [VDS_VOLUME_PROP](#Section_2.2.2.14.1.1) **id** member, [VDS_VOLUME_PLEX_PROP](#Section_2.2.2.17.2.1) **id** member, or [VDS_HBAPORT_PROP](#Section_2.2.2.4.2.2) **id** member. The client can cache the object IDs for the lifetime of the object; it can later be used to retrieve an interface to the object without having to cache the interface to the object itself, or having to enumerate and find the object every time it needs the object.
 
 [IVdsService::Advise](#Section_3.4.5.2.4.12): Prior to invoking Advise, the client calls [IVdsService::WaitForServiceReady](#Section_3.4.5.2.4.2) or polls by using IVdsService::IsServiceReady successfully. The client invokes IVdsService::Advise to retrieve the client identification value parameter. The client passes the client identification value as the *dwCookie* input parameter to the [Unadvise](#Section_3.4.5.2.4.13) method.
 
@@ -6823,7 +6823,7 @@ Prior to invoking MigrateDisks, the client invokes IVdsPack::GetProperties to re
 
 [IVdsAdvancedDisk::CreatePartition](#Section_3.4.5.2.24.3): Prior to invoking CreatePartition, the client invokes IVdsDisk::QueryExtents , [IVdsDisk3::QueryFreeExtents](#Section_3.4.5.2.23.2), or IVdsVolumePlex::QueryExtents to retrieve the free [**disk extents**](#gt_disk-extent). Using the list of free disk extents, the client can calculate an offset and size for the new [**partition**](#gt_partition). The client passes these calculated values as the *ullOffset* and *ullSize* input parameters to the CreatePartition method. IVdsDisk::QueryExtents returns a list of VDS_DISK_EXTENT structures as an output parameter. These structures contain the offset and size of the free extent as VDS_DISK_EXTENT::**ullOffset** and VDS_DISK_EXTENT::**ullSize**. IVdsDisk3::QueryFreeExtents, and IVdsVolumePlex::QueryExtents return a list of [VDS_DISK_FREE_EXTENT](#Section_2.2.2.10.2.2) structures as an output parameter. These structures contain the offset and size of the free extent as **VDS_DISK_FREE_EXTENT::ullOffset** and **VDS_DISK_FREE_EXTENT::ullSize**.
 
-Prior to invoking CreatePartition, the client invokes IVdsAdvancedDisk::GetPartitionProperties to retrieve the [**partition type**](#gt_partition-type) (partition style) for the [**disk**](#gt_disk). The client passes this value as the [CREATE_PARTITION_PARAMETERS](#Section_2.2.1.3.22)::**style** input parameter to the CreatePartition method. [IVdsAdvancedDisk](#Section_3.4.5.2.24.10)::GetPartitionProperties returns this value as the [VDS_PARTITION_PROP](#Section_2.2.1.3.22)::**PartitionStyle** structure member.
+Prior to invoking CreatePartition, the client invokes IVdsAdvancedDisk::GetPartitionProperties to retrieve the [**partition type**](#gt_partition-type) (partition style) for the [**disk**](#gt_disk). The client passes this value as the [CREATE_PARTITION_PARAMETERS](#Section_2.2.1.3.22)::**style** input parameter to the CreatePartition method. [IVdsAdvancedDisk](#Section_3.4.5.2.24.8)::GetPartitionProperties returns this value as the [VDS_PARTITION_PROP](#Section_2.2.1.3.22)::**PartitionStyle** structure member.
 
 Prior to invoking CreatePartition, the client invokes [IVdsPack::AddDisk](#Section_3.4.5.2.19.6) to set the partitioning [**format**](#gt_format) for the disk if the disk is not initialized.
 
@@ -6865,7 +6865,7 @@ Prior to invoking ChangePartitionType, the client invokes IVdsAdvancedDisk::GetP
 
 [IVdsOpenVDisk::Attach](#Section_3.4.5.2.41.1): Prior to invoking Attach, the client invokes [IVdsVdProvider::QueryVDisks](#Section_3.4.5.2.17.1) or [IVdsVdProvider::CreateVDisk](#Section_3.4.5.2.17.2) or [IVdsVdProvider::AddVDisk](#Section_3.4.5.2.17.3) to retrieve the [**virtual disk**](#gt_virtual-disk) object. Then the client invokes [IVdsVDisk::Open](#Section_3.4.5.2.40.1) to retrieve the OpenVirtualDisk object.
 
-[IVdsOpenVDisk::Detach](#Section_3.4.5.2.41.3): Prior to invoking Detach, the client invokes IVdsVdProvider::QueryVDisks or [IVdsVdProvider::GetVDiskFromDisk](#Section_3.4.5.2.17.5) to retrieve an interface pointer to the virtual disk object to detach. Then the client invokes IVdsVDisk::Open to retrieve the OpenVirtualDisk object.
+[IVdsOpenVDisk::Detach](#Section_3.4.5.2.41.2): Prior to invoking Detach, the client invokes IVdsVdProvider::QueryVDisks or [IVdsVdProvider::GetVDiskFromDisk](#Section_3.4.5.2.17.5) to retrieve an interface pointer to the virtual disk object to detach. Then the client invokes IVdsVDisk::Open to retrieve the OpenVirtualDisk object.
 
 [IVdsOpenVDisk::DetachAndDelete](#Section_3.4.5.2.41.3): DetachAndDelete has the same call sequence description as IVdsOpenVDisk::Detach.
 
@@ -6953,14 +6953,14 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-A client initializes by creating an [**RPC**](#gt_remote-procedure-call-rpc) binding handle to the [IVdsServiceLoader](#Section_3.4.5.2.3.1) interface. For more details on how to get a client-side RPC binding handle for an IVdsServiceLoader interface, see [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.
+A client initializes by creating an [**RPC**](#gt_remote-procedure-call-rpc) binding handle to the [IVdsServiceLoader](#Section_3.1.4.1) interface. For more details on how to get a client-side RPC binding handle for an IVdsServiceLoader interface, see [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.
 
-After the client obtains the IVdsServiceLoader interface, the client MUST invoke [IVdsServiceLoader::LoadService](#Section_3.4.5.2.3.1) on the interface to retrieve the [IVdsService](#Section_3.4.5.2.3.1) interface.
+After the client obtains the IVdsServiceLoader interface, the client MUST invoke [IVdsServiceLoader::LoadService](#Section_3.4.5.2.3.1) on the interface to retrieve the [IVdsService](#Section_3.4.5.2.9) interface.
 
 If the IVdsService interface was NOT obtained by calling IVdsServiceLoader::LoadService, the client MUST invoke IUnknown::QueryInterface to retrieve the [IVdsServiceInitialization](#Section_3.1.5.2) interface. If the IVdsService interface was obtained by calling CoCreateInstance (see [[MSDN-CoCreateInstance]](https://go.microsoft.com/fwlink/?LinkId=208350)) on the [**VDS**](#gt_virtual-disk-service-vds) server with the class [**GUID**](#gt_globally-unique-identifier-guid) of the VDS service, then the client MUST:
 
 - Invoke IUnknown::QueryInterface on the interface to retrieve the IVdsServiceInitialization interface.
-- After the client obtains the IVdsServiceInitialization interface, the client MUST invoke the [IVdsServiceInitialization::Initialize](#Section_3.3.3) method on the interface before invoking any other method.
+- After the client obtains the IVdsServiceInitialization interface, the client MUST invoke the [IVdsServiceInitialization::Initialize](#Section_3.2.3) method on the interface before invoking any other method.
 All the clients MUST then do one of the following before invoking any other methods:
 
 - Invoke [IVdsService::WaitForServiceReady](#Section_3.4.5.2.4.2) and wait for it to return with a success code.
@@ -6980,7 +6980,7 @@ The client MUST release any [**DCOM**](#gt_distributed-component-object-model-dc
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 Processing Notifications Sent from the Server to the Client
 
-The client SHOULD choose to implement the [IVdsAdviseSink](#Section_3.1.2.1) interface in order to receive notification from the server of changes to the storage objects on the server. Notifications are sent to the client for creating, deleting, and modifying storage objects. The client can choose to take other action based on these notifications. The client can also choose to ignore notifications from the server.
+The client SHOULD choose to implement the [IVdsAdviseSink](#Section_4.6) interface in order to receive notification from the server of changes to the storage objects on the server. Notifications are sent to the client for creating, deleting, and modifying storage objects. The client can choose to take other action based on these notifications. The client can also choose to ignore notifications from the server.
 
 Notifications that are related to storage object modification indicate a state change, such as when a [**disk**](#gt_disk) status changes from VDS_DS_ONLINE to VDS_DS_FAILED, or when a [**volume**](#gt_volume) length changes because of a call to [IVdsVolume::Extend](#Section_3.4.5.2.32.4).
 
@@ -7035,8 +7035,8 @@ This section describes a conceptual model of possible data organization that an 
 
 The service object exposes [**DCOM**](#gt_distributed-component-object-model-dcom) interfaces for retrieving and interacting with all storage management objects. The service object:
 
-- Implements [IVdsService](#Section_3.4.5.2.3.1) and [IVdsServiceInitialization](#Section_3.1.5.2) interfaces.
-- Implements [IVdsServiceUninstallDisk](#Section_3.4.5.2.6), [IVdsServiceHba](#Section_3.4.5.2.7), [IVdsServiceSAN](#Section_2.2.2.2), and [IVdsServiceIscsi](#Section_3.4.5.2.8) interfaces.<66>
+- Implements [IVdsService](#Section_3.4.5.2.9) and [IVdsServiceInitialization](#Section_3.1.5.2) interfaces.
+- Implements [IVdsServiceUninstallDisk](#Section_3.4.5.2.6.2), [IVdsServiceHba](#Section_3.4.5.2.7.1), [IVdsServiceSAN](#Section_3.4.5.2.9), and [IVdsServiceIscsi](#Section_3.1.5.5) interfaces.<66>
 - Maintains a value that indicates the ready state of the service. The service-ready state values are "not ready", "ready", or "failed". When an object is created, this value will be "not ready". When the service is finished initializing, this value will be changed to "ready". After the value is "ready", it will not change.
 <a id="Section_3.4.1.2"></a>
 #### 3.4.1.2 Storage Management Objects
@@ -7046,26 +7046,26 @@ The server maintains a list of the following [**VDS objects**](#gt_vds-object):
 - [**HBA**](#gt_host-bus-adapter-hba) Port
 - The server maintains an object for each HBA port on the system.
 - Each HBA port object exposes [**DCOM**](#gt_distributed-component-object-model-dcom) interfaces for querying information from an HBA port on the system.
-- Each HBA port object implements the [IVdsHbaPort](#Section_3.4.5.2.11.2) interface.
+- Each HBA port object implements the [IVdsHbaPort](#Section_3.4.5.2.11) interface.
 - Initiator Adapter
 - The server maintains an object for each initiator adapter on the system.
 - Each initiator adapter object exposes DCOM interfaces for querying information from an [**iSCSI initiator adapter**](#gt_iscsi-initiator-adapter) on the system.
-- Each initiator adapter object implements the [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12.2) interface.
+- Each initiator adapter object implements the [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12) interface.
 - Initiator Portal
 - The server maintains an object for each initiator portal on the system.
 - Each initiator portal object exposes DCOM interfaces for querying information from an [**iSCSI initiator portal**](#gt_iscsi-initiator-portal) on the system.
-- Each initiator portal object implements the [IVdsIscsiInitiatorPortal](#Section_3.1.8.1) interface.
+- Each initiator portal object implements the [IVdsIscsiInitiatorPortal](#Section_3.4.5.2.13) interface.
 - Each initiator portal object maintains a pointer to the initiator adapter object to which it belongs.
 - Software Provider
 - The server maintains an object for each provider on the system.
 - The [**basic provider**](#gt_basic-provider) is for managing [**basic disks**](#gt_basic-disk).
 - The [**dynamic provider**](#gt_dynamic-provider) is for managing [**dynamic disks**](#gt_dynamic-disk).
 - Each software provider object exposes DCOM interfaces for managing storage objects ([**packs**](#gt_pack), [**volumes**](#gt_volume), [**plexes**](#gt_plex), and [**disks**](#gt_disk)) on the system.
-- Each software provider object implements the [IVdsProvider](#Section_3.1.9.1) and [IVdsSwProvider](#Section_3.4.5.2.15) interfaces.
+- Each software provider object implements the [IVdsProvider](#Section_3.4.5.2.14.1) and [IVdsSwProvider](#Section_3.4.5.2.15) interfaces.
 - Hardware Provider
 - The server maintains an object for each hardware provider on the system.
 - Each hardware provider object exposes DCOM interfaces for managing [**subsystems**](#gt_subsystem).
-- Each hardware provider object implements the IVdsProvider and [IVdsHwProvider](#Section_3.1.9.3) interfaces.
+- Each hardware provider object implements the IVdsProvider and [IVdsHwProvider](#Section_3.4.5.2.16) interfaces.
 - Virtual Disk Provider
 - The server maintains an object for each hardware provider on the system.
 - Each [**virtual disk**](#gt_virtual-disk) provider object exposes DCOM interfaces for managing virtual disks.
@@ -7073,39 +7073,39 @@ The server maintains a list of the following [**VDS objects**](#gt_vds-object):
 - Subsystem
 - The server maintains an object for each subsystem on the system.
 - Each subsystem object exposes DCOM interfaces for managing the subsystem.
-- Each subsystem object implements the [IVdsSubSystemImportTarget](#Section_3.1.10.1) interface.
+- Each subsystem object implements the [IVdsSubSystemImportTarget](#Section_3.4.5.2.18.2) interface.
 - Pack
 - The server maintains an object for each pack on the system.
 - Each pack object exposes DCOM interfaces for managing a logical group of disks and the volumes that they contain.
-- Each pack object implements the [IVdsPack](#Section_3.4.5.2.19.1) interface.
+- Each pack object implements the [IVdsPack](#Section_2.2.2.8) interface.
 - Each pack object implements the [IVdsPack2](#Section_3.4.5.2.20.1) interface.
 - Each pack object maintains a pointer to the software provider object to which it belongs.
 - Disk
 - The server maintains an object for each disk on the system.
 - Each disk object exposes DCOM interfaces for managing a disk, which can include physical [**hard disks**](#gt_hard-disk), removable disk units, optical drive units, and the [**LUNs**](#gt_logical-unit-number-lun) that are unmasked to the system.
-- Each disk object implements the [IVdsDisk](#Section_3.4.5.2.40.1) and [IVdsAdvancedDisk](#Section_3.4.5.2.24.10) interfaces.
-- If the disk is removable, the disk object implements the [IVdsRemovable](#Section_3.1.12.11) interface; otherwise, the IVdsRemovable interface is not implemented.
+- Each disk object implements the [IVdsDisk](#Section_3.4.5.2.40) and [IVdsAdvancedDisk](#Section_3.4.5.2.24.8) interfaces.
+- If the disk is removable, the disk object implements the [IVdsRemovable](#Section_3.4.5.2.31) interface; otherwise, the IVdsRemovable interface is not implemented.
 - If the disk is a removable drive with no media, the disk object sets its status to VDS_DS_NO_MEDIA and the values for **ulBytesPerSector**, **ulSectorsPerTrack**, **ulTracksPerCylinder**, and **ullSize** to zero.
-- Each disk object implements the [IVdsDisk2](#Section_3.4.5.2.22.1), [IVdsDisk3](#Section_3.4.5.2.23.2), [IVdsAdvancedDisk2](#Section_2.2.2.12), [IVdsAdvancedDisk3](#Section_3.1.12.6), [IVdsCreatePartitionEx](#Section_3.4.5.2.27.1), [IVdsDiskPartitionMF](#Section_3.1.12.10), [IVdsDiskPartitionMF2](#Section_3.1.12.10), and [IvdsDiskOnline](#Section_3.4.5.2.28) interfaces.
+- Each disk object implements the [IVdsDisk2](#Section_3.4.5.2.22.1), [IVdsDisk3](#Section_3.1.12.3), [IVdsAdvancedDisk2](#Section_3.4.5.2.25.1), [IVdsAdvancedDisk3](#Section_3.1.12.6), [IVdsCreatePartitionEx](#Section_3.1.12.7), [IVdsDiskPartitionMF](#Section_3.1.12.9), [IVdsDiskPartitionMF2](#Section_3.4.5.2.30), and [IvdsDiskOnline](#Section_3.4.5.2.28.2) interfaces.
 - Each disk object--if the disk is basic or dynamic--maintains a pointer to the pack object to which it belongs.
 - Volume
 - The server maintains an object for each volume on the system.
 - Each volume object exposes DCOM interfaces for managing a volume, which is a logical unit of storage that exists over [**regions**](#gt_region) of one or more disks that belong to the same pack.
-- Each volume object implements the [IVdsVolume](#Section_3.4.5.2.37.1), [IVdsVolume2](#Section_3.4.5.2.33.1), [IVdsVolumeMF](#Section_3.1.12.10), [IVdsVolumeMF2](#Section_3.4.5.2.35.1), [IVdsVolumeMF3](#Section_3.4.5.2.36.3), [IVdsVolumeShrink](#Section_3.4.5.2.37.1), and [IVdsVolumeOnline](#Section_3.4.5.2.38) interfaces.
+- Each volume object implements the [IVdsVolume](#Section_3.4.5.2.38.1), [IVdsVolume2](#Section_3.1.13.2), [IVdsVolumeMF](#Section_3.1.12.9), [IVdsVolumeMF2](#Section_3.4.5.2.35.3), [IVdsVolumeMF3](#Section_3.4.5.2.36), [IVdsVolumeShrink](#Section_3.4.5.2.37.1), and [IVdsVolumeOnline](#Section_3.4.5.2.38.1) interfaces.
 - Each volume object maintains a pointer to the pack object to which it belongs.
 - [**Removable media**](#gt_removable-media) drives contain one volume, and the volume is associated with the drive. If there is no media in the drive, the status of the volume is set to VDS_VS_NO_MEDIA and **ullsize** is set to zero.<67>
 - [**Volume Plex**](#gt_volume-plex)
 - The server maintains an object for each volume plex on the system.
 - Each volume plex object exposes DCOM interfaces for managing a volume plex, which represents a complete copy of the data that is stored on a [**mirrored volume**](#gt_mirrored-volume).
-- Each volume plex object implements the [IVdsVolumePlex](#Section_3.4.5.2.39.3) interface.
+- Each volume plex object implements the [IVdsVolumePlex](#Section_2.2.2.17) interface.
 - The volume object on a removable media drive contains one volume plex, and the volume plex is associated with the drive. If there is no media in the drive, the status of the volume plex is set to VDS_VPS_NO_MEDIA and **ullsize** is set to zero.
 - Each volume plex object maintains a pointer to the volume object to which it belongs.
 - Virtual Disk
 - The server maintains an object for each [**attached**](#gt_attach) virtual disk on the system.
 - The server maintains an object for each virtual disk that has been created using [IVdsVdProvider::CreateVDisk](#Section_3.4.5.2.17.2) after the server starts, or has been added to the server's cache using [IVdsVdProvider::AddVDisk](#Section_3.4.5.2.17.3).
 - Each virtual disk object exposes DCOM interfaces for managing a virtual disk.
-- Each virtual disk object implements the [IVdsVDisk](#Section_3.4.5.2.40.1) interface.
-- When a virtual disk is opened, it MUST create an object to represent the open virtual disk (an OpenVirtualDisk object), which MUST implement the [IVdsOpenVDisk](#Section_3.4.5.2.41.5) interface.
+- Each virtual disk object implements the [IVdsVDisk](#Section_3.4.5.2.40) interface.
+- When a virtual disk is opened, it MUST create an object to represent the open virtual disk (an OpenVirtualDisk object), which MUST implement the [IVdsOpenVDisk](#Section_3.4.5.2.41.2) interface.
 - Each attached virtual disk object maintains an association with an actual disk (basic, dynamic, or [**unallocated disk**](#gt_unallocated-disk)) that has been exposed to the system as a result of attaching the virtual disk.
 Each VDS object maintains the following information:
 
@@ -7135,9 +7135,9 @@ If objects are removed while a client still has references to them, the server M
 <a id="Section_3.4.1.3"></a>
 #### 3.4.1.3 Enumeration of Objects
 
-All [**VDS objects**](#gt_vds-object) that are listed in [Storage Management Objects](#Section_3.4.1.2)--except for the service object--are returned by means of enumeration objects. For an example of how these objects are created and used, see section [4.3](#Section_4.3).
+All [**VDS objects**](#gt_vds-object) that are listed in [Storage Management Objects](#Section_3.4.3.1)--except for the service object--are returned by means of enumeration objects. For an example of how these objects are created and used, see section [4.3](#Section_4.3).
 
-When the client calls a method to request an enumeration, the server creates an enumeration object that implements the [IEnumVdsObject](#Section_3.4.5.2.1.2) interface and returns the interface pointer to the client to allow it to enumerate through the requested objects. The server maintains this object until the client releases all references to the interface. For each enumeration object, the server maintains the following information:
+When the client calls a method to request an enumeration, the server creates an enumeration object that implements the [IEnumVdsObject](#Section_3.1.1.1) interface and returns the interface pointer to the client to allow it to enumerate through the requested objects. The server maintains this object until the client releases all references to the interface. For each enumeration object, the server maintains the following information:
 
 Objects Being Enumerated: A list of pointers to the VDS objects being enumerated.
 
@@ -7164,13 +7164,13 @@ Cookie: A unique 32-bit value that identifies the callback and that is maintaine
 
 - The cookie is assigned by the server and returned to the client so that the client can use it to later unregister the callback.
 - The server does not change the identifier and does not assign it to another callback object until the original callback object is unregistered.
-Callback Object Interface: A pointer to the [IVdsAdviseSink](#Section_3.1.2.1) interface that is implemented by the callback object that is used to receive notifications from the server.
+Callback Object Interface: A pointer to the [IVdsAdviseSink](#Section_4.6) interface that is implemented by the callback object that is used to receive notifications from the server.
 
 - Whenever a notification needs to be sent to the client, the server calls the IVdsAdviseSink::OnNotify (Opnum 3) method of the object in order to notify it of the event.
 <a id="Section_3.4.1.5"></a>
 #### 3.4.1.5 Asynchronous Tasks
 
-Certain tasks in [**VDS**](#gt_virtual-disk-service-vds) can be long-running. The methods that trigger these tasks are asynchronous and have an [IVdsAsync](#Section_3.4.5.2.2.3) interface pointer as an output parameter. When the client calls a method that initiates these tasks, the server creates an async object that implements the IVdsAsync interface and returns the [**interface**](#gt_interface) pointer to the client in order for it to monitor the task status. (For more details and for examples of how async objects can be used, see section [4.5](#Section_3.4.1.5).) The server maintains this object until the client releases all references to the interface.
+Certain tasks in [**VDS**](#gt_virtual-disk-service-vds) can be long-running. The methods that trigger these tasks are asynchronous and have an [IVdsAsync](#Section_3.1.3.1) interface pointer as an output parameter. When the client calls a method that initiates these tasks, the server creates an async object that implements the IVdsAsync interface and returns the [**interface**](#gt_interface) pointer to the client in order for it to monitor the task status. (For more details and for examples of how async objects can be used, see section [4.5](#Section_3.4.1.5).) The server maintains this object until the client releases all references to the interface.
 
 For each async object, the server maintains the following information:
 
@@ -7205,11 +7205,11 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-During initialization of the Virtual Disk Service Remote Protocol, the service MUST start enumerating storage objects on the system and assign unique [**VDS object**](#gt_vds-object) IDs to these objects, as specified in section [3.4.1.2](#Section_3.4.1.2).
+During initialization of the Virtual Disk Service Remote Protocol, the service MUST start enumerating storage objects on the system and assign unique [**VDS object**](#gt_vds-object) IDs to these objects, as specified in section [3.4.1.2](#Section_3.4.3.1).
 
 The server MUST NOT report different identifiers for the same object within one server session to the same or to different VDS clients. The VDS object IDs are generated at server startup and when a new object arrives. These IDs are not persistent across server instantiations; if the service is stopped and restarted, new VDS object IDs will be generated.
 
-If service initialization has not started when the client calls the IVdsServiceInitialization::Initialize (Opnum 3) (section [3.4.5.2.5.1)](#Section_3.3.3) method, the service MUST start initializing.
+If service initialization has not started when the client calls the IVdsServiceInitialization::Initialize (Opnum 3) (section [3.4.5.2.5.1)](#Section_3.2.3) method, the service MUST start initializing.
 
 <a id="Section_3.4.3.1"></a>
 #### 3.4.3.1 Storage Management Objects
@@ -7263,7 +7263,7 @@ The server MUST maintain a list of detected [**dynamic disk**](#gt_dynamic-disk)
 
 The server MUST maintain a list of detected [**disks**](#gt_disk). When the server discovers a new disk (either during initialization or when a new disk arrives after initialization), it checks whether it is a basic disk, a [**dynamic disk**](#gt_dynamic-disk), or [**unallocated**](#gt_unallocated-disk) (neither).
 
-[**Basic Disk**](#gt_basic-disk): If the disk is a basic disk, the server MUST first create a [**pack**](#gt_pack) object and assign it a unique [VDS_OBJECT_ID](#Section_2.2.1.1.3). The server MUST set the provider pointer of the pack object to the provider object that corresponds to the [**basic provider**](#gt_basic-provider). The server MUST add the pack object to the list of storage management objects. For each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
+[**Basic Disk**](#gt_basic-disk): If the disk is a basic disk, the server MUST first create a [**pack**](#gt_pack) object and assign it a unique [VDS_OBJECT_ID](#Section_2.2.1.1.3). The server MUST set the provider pointer of the pack object to the provider object that corresponds to the [**basic provider**](#gt_basic-provider). The server MUST add the pack object to the list of storage management objects. For each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - **objectType** member is VDS_NTT_PACK.
 - Pack member is a [VDS_PACK_NOTIFICATION](#Section_2.2.1.3.2) that has the following attributes:
@@ -7384,7 +7384,7 @@ The server MUST also maintain a list of OpenVirtualDisk objects. An OpenVirtualD
 <a id="Section_3.4.5.1.9"></a>
 ##### 3.4.5.1.9 Handling Asynchronous Tasks
 
-When the client calls a method that initiates a task that returns an async object, the server MUST create an async object that implements the [IVdsAsync](#Section_3.4.5.2.2.3) interface and return the [**interface**](#gt_interface) pointer to the client to allow it to monitor the task's status. For examples of how async objects can be used, see section [4.5](#Section_3.4.1.5).
+When the client calls a method that initiates a task that returns an async object, the server MUST create an async object that implements the [IVdsAsync](#Section_3.1.3.1) interface and return the [**interface**](#gt_interface) pointer to the client to allow it to monitor the task's status. For examples of how async objects can be used, see section [4.5](#Section_3.4.1.5).
 
 If the task has completed successfully and the client calls the [IVdsAsync::Wait](#Section_3.4.5.2.2.2) method on the async object, the server MUST return the following task-specific return values to the client by means of the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure returned by the method. The return values are determined by the async output type:
 
@@ -7507,7 +7507,7 @@ The Clone method creates a new enumeration that has the same state as the curren
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if successfully completed, receives the IEnumVdsObject interface of the cloned enumeration. Callers MUST release the interface that is received when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if successfully completed, receives the IEnumVdsObject interface of the cloned enumeration. Callers MUST release the interface that is received when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -7616,7 +7616,7 @@ HRESULT LoadService(
 
 **pwszMachineName:** A pointer to a string that contains the name of the machine on which the VDS service is loaded.
 
-**ppService:** A pointer to the [IVdsService](#Section_3.4.5.2.3.1) interface that, if successfully completed, returns the IVdsService interface to the VDS service that runs on the machine represented by *pwszMachineName*.
+**ppService:** A pointer to the [IVdsService](#Section_3.4.5.2.9) interface that, if successfully completed, returns the IVdsService interface to the VDS service that runs on the machine represented by *pwszMachineName*.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -7627,7 +7627,7 @@ The server MUST:
 
 - Load the VDS service on the computer specified by *pwszMachineName* parameter.
 - QueryInterface for the **IVdsServiceInitialization** interface.
-- Call the [IVdsServiceInitialization::Initialize](#Section_3.3.3) method, passing the *pwszMachineName* parameter input to this method.
+- Call the [IVdsServiceInitialization::Initialize](#Section_3.2.3) method, passing the *pwszMachineName* parameter input to this method.
 - Point *ppService* to the IVdsService interface for the VDS service that is loaded.
 - Return an HRESULT that indicates failure or success.
 The server object that is created when this method is called MUST implement only these interfaces:
@@ -7643,7 +7643,7 @@ The server object that is created when this method is called MUST implement only
 <a id="Section_3.4.5.2.4.1"></a>
 ###### 3.4.5.2.4.1 IVdsService::IsServiceReady (Opnum 3)
 
-The IsServiceReady method determines whether a service is finished initializing. Until the service initialization completes, an application SHOULD NOT call any method other than [GetProperties](#Section_3.4.5.2.19.1).<71>
+The IsServiceReady method determines whether a service is finished initializing. Until the service initialization completes, an application SHOULD NOT call any method other than [GetProperties](#Section_3.4.5.2.14.1).<71>
 
 HRESULT IsServiceReady();
 
@@ -7699,7 +7699,7 @@ HRESULT QueryProviders(
 
 **masks:** The combination of any values, by using a bitwise OR operator, that the [VDS_QUERY_PROVIDER_FLAG](#Section_2.2.2.1.2.3) enumeration defines. The values that are set in the mask specify the types of providers to return.
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of provider objects on the server. Callers MUST release the interface that is received when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of provider objects on the server. Callers MUST release the interface that is received when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -7719,7 +7719,7 @@ HRESULT QueryUnallocatedDisks(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of [**disk**](#gt_disk) objects that correspond to unallocated disks on the server. Callers MUST release the interface that is received when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of [**disk**](#gt_disk) objects that correspond to unallocated disks on the server. Callers MUST release the interface that is received when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -7876,9 +7876,9 @@ HRESULT Advise(
 
 );
 
-**pSink:** A pointer to an [IVdsAdviseSink](#Section_3.1.2.1) interface of the callback object to register with the server for notification of object changes.
+**pSink:** A pointer to an [IVdsAdviseSink](#Section_4.6) interface of the callback object to register with the server for notification of object changes.
 
-**pdwCookie:** A pointer to a variable that, if the operation is successfully completed, receives a unique cookie value that the client can later use to unregister the callback object from receiving notification changes from the service. For details about how to register callback objects, see section [3.3.1.1](#Section_3.4.1.4).
+**pdwCookie:** A pointer to a variable that, if the operation is successfully completed, receives a unique cookie value that the client can later use to unregister the callback object from receiving notification changes from the service. For details about how to register callback objects, see section [3.3.1.1](#Section_3.3.1.1).
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -7902,7 +7902,7 @@ HRESULT Unadvise(
 
 );
 
-**dwCookie:** The cookie value generated when the [IVdsAdviseSink](#Section_3.1.2.1) interface was registered.
+**dwCookie:** The cookie value generated when the [IVdsAdviseSink](#Section_4.6) interface was registered.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8003,7 +8003,7 @@ HRESULT GetDiskIdFromLunInfo(
 
 );
 
-**pLunInfo:** A pointer to a [VDS_LUN_INFORMATION](#Section_2.2.1.1.4) structure that stores the disk's LUN information.
+**pLunInfo:** A pointer to a [VDS_LUN_INFORMATION](#Section_2.2.1.3.16) structure that stores the disk's LUN information.
 
 **pDiskId:** A pointer to a [VDS_OBJECT_ID](#Section_2.2.1.1.3) structure that, if the operation is successfully completed, receives the VDS object ID of the disk object that corresponds to the LUN information that *pLunInfo* specifies.
 
@@ -8066,7 +8066,7 @@ The server MUST perform the following:
 <a id="Section_3.4.5.2.7.1"></a>
 ###### 3.4.5.2.7.1 IVdsServiceHba::QueryHbaPorts (Opnum 3)
 
-The QueryHbaPorts method returns an [IEnumVdsObject](#Section_3.4.5.2.1.2) enumeration object that contains a list of the [**HBA**](#gt_host-bus-adapter-hba) ports that are known to [**VDS**](#gt_virtual-disk-service-vds) on the system.
+The QueryHbaPorts method returns an [IEnumVdsObject](#Section_3.1.1.1) enumeration object that contains a list of the [**HBA**](#gt_host-bus-adapter-hba) ports that are known to [**VDS**](#gt_virtual-disk-service-vds) on the system.
 
 HRESULT QueryHbaPorts(
 
@@ -8117,7 +8117,7 @@ HRESULT QueryInitiatorAdapters(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of initiator adapter objects on the server. Callers MUST release the interface when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of initiator adapter objects on the server. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8291,7 +8291,7 @@ HRESULT QueryInitiatorPortals(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object containing an enumeration of initiator portal objects in the initiator adapter. Callers MUST release the interface when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object containing an enumeration of initiator portal objects in the initiator adapter. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a nonerror [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8334,7 +8334,7 @@ HRESULT GetInitiatorAdapter(
 
 );
 
-**ppInitiatorAdapter:** A pointer to an [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12.2) interface that, if the operation is successfully completed, receives the IVdsIscsiInitiatorAdapter interface of the initiator adapter object that the initiator portal belongs to. Callers MUST release the interface when they are done with it.
+**ppInitiatorAdapter:** A pointer to an [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12) interface that, if the operation is successfully completed, receives the IVdsIscsiInitiatorAdapter interface of the initiator adapter object that the initiator portal belongs to. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8380,7 +8380,7 @@ HRESULT QueryPacks(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object containing an enumeration of [**pack**](#gt_pack) objects in the provider. Callers MUST release the interface when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object containing an enumeration of [**pack**](#gt_pack) objects in the provider. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8400,7 +8400,7 @@ HRESULT CreatePack(
 
 );
 
-**ppPack:** A pointer to an [IVdsPack](#Section_3.4.5.2.19.1) interface that, if the operation is successfully completed, receives the IVdsPack interface of the newly created disk pack. Callers MUST release the interface when they are done with it.
+**ppPack:** A pointer to an [IVdsPack](#Section_2.2.2.8) interface that, if the operation is successfully completed, receives the IVdsPack interface of the newly created disk pack. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8433,7 +8433,7 @@ HRESULT QuerySubSystems(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface. If the operation is successfully completed, the pointer receives the IEnumVdsObject interface of the object, which contains an enumeration of subsystem objects in the provider. Callers MUST release the interface when they are finished with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface. If the operation is successfully completed, the pointer receives the IEnumVdsObject interface of the object, which contains an enumeration of subsystem objects in the provider. Callers MUST release the interface when they are finished with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8456,7 +8456,7 @@ HRESULT QueryVDisks(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject (section 3.1.1.1)](#Section_3.4.5.2.1.2) interface. If the operation is successfully completed, the pointer receives the IEnumVdsObject interface of the object, which contains an enumeration of virtual disk objects in the provider. Callers MUST release the interface when they are finished with it.
+**ppEnum:** A pointer to an [IEnumVdsObject (section 3.1.1.1)](#Section_3.1.1.1) interface. If the operation is successfully completed, the pointer receives the IEnumVdsObject interface of the object, which contains an enumeration of virtual disk objects in the provider. Callers MUST release the interface when they are finished with it.
 
 **Return Values:** The method MUST return zero or a nonerror [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8506,7 +8506,7 @@ HRESULT CreateVDisk(
 
 **pCreateDiskParameters:** Pointer to a [VDS_CREATE_VDISK_PARAMETERS (section 2.2.2.18.2.1)](#Section_2.2.2.18.2.1) structure that contains the virtual hard disk creation parameters.
 
-**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the [**HRESULT**](#gt_hresult) values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8532,7 +8532,7 @@ At any point in the preceding sequence--before the percentage completed value in
 <a id="Section_3.4.5.2.17.3"></a>
 ###### 3.4.5.2.17.3 IVdsVdProvider::AddVDisk (Opnum 5)
 
-The AddVDisk method creates a [**virtual disk**](#gt_virtual-disk) object representing the specified virtual disk and adds it to the list of virtual disks managed by the provider. This method returns an [IVdsVDisk (section 3.1.15.1)](#Section_3.4.5.2.40.1) interface pointer to the specified virtual disk object.
+The AddVDisk method creates a [**virtual disk**](#gt_virtual-disk) object representing the specified virtual disk and adds it to the list of virtual disks managed by the provider. This method returns an [IVdsVDisk (section 3.1.15.1)](#Section_3.4.5.2.40) interface pointer to the specified virtual disk object.
 
 HRESULT AddVDisk(
 
@@ -8564,7 +8564,7 @@ The server MUST then perform the following in sequence:
 <a id="Section_3.4.5.2.17.4"></a>
 ###### 3.4.5.2.17.4 IVdsVdProvider::GetDiskFromVDisk (Opnum 6)
 
-The GetDiskFromVDisk method returns an [IVdsDisk (section 3.1.12.1)](#Section_3.4.5.2.40.1) interface pointer for a [**virtual disk**](#gt_virtual-disk) given an [IVdsVDisk (section 3.1.15.1)](#Section_3.4.5.2.40.1) interface pointer.
+The GetDiskFromVDisk method returns an [IVdsDisk (section 3.1.12.1)](#Section_3.4.5.2.40) interface pointer for a [**virtual disk**](#gt_virtual-disk) given an [IVdsVDisk (section 3.1.15.1)](#Section_3.4.5.2.40) interface pointer.
 
 HRESULT GetDiskFromVDisk(
 
@@ -8589,7 +8589,7 @@ The server MUST find the cached [**disk**](#gt_disk) object that corresponds to 
 <a id="Section_3.4.5.2.17.5"></a>
 ###### 3.4.5.2.17.5 IVdsVdProvider::GetVDiskFromDisk (Opnum 7)
 
-The GetVDiskFromDisk method returns an [IVdsVDisk (section 3.1.15.1)](#Section_3.4.5.2.40.1) interface pointer for the [**virtual disk**](#gt_virtual-disk) given an [IVdsDisk (section 3.1.12.1)](#Section_3.4.5.2.40.1) interface pointer.
+The GetVDiskFromDisk method returns an [IVdsVDisk (section 3.1.15.1)](#Section_3.4.5.2.40) interface pointer for the [**virtual disk**](#gt_virtual-disk) given an [IVdsDisk (section 3.1.12.1)](#Section_3.4.5.2.40) interface pointer.
 
 HRESULT GetVDiskFromDisk(
 
@@ -8688,7 +8688,7 @@ HRESULT GetProvider(
 
 );
 
-**ppProvider:** A pointer to an [IVdsProvider](#Section_3.1.9.1) interface that, if the operation is successfully completed, receives the IVdsProvider interface of the provider object that the [**pack**](#gt_pack) belongs to. Callers MUST release the interface when they are done with it.
+**ppProvider:** A pointer to an [IVdsProvider](#Section_3.4.5.2.14.1) interface that, if the operation is successfully completed, receives the IVdsProvider interface of the provider object that the [**pack**](#gt_pack) belongs to. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8708,7 +8708,7 @@ HRESULT QueryVolumes(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of volume objects in the [**pack**](#gt_pack). Callers MUST release the interface when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of volume objects in the [**pack**](#gt_pack). Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8728,7 +8728,7 @@ HRESULT QueryDisks(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object containing an enumeration of disk objects in the [**pack**](#gt_pack). Callers MUST release the interface when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object containing an enumeration of disk objects in the [**pack**](#gt_pack). Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8764,7 +8764,7 @@ HRESULT CreateVolume(
 
 **ulStripeSize:** The stripe size of the new volume.<81>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the IVdsAsync::Wait (Opnum 4) method is called on the interface, the interfaces returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on handling asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the IVdsAsync::Wait (Opnum 4) method is called on the interface, the interfaces returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on handling asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8783,7 +8783,7 @@ The server MUST then perform the following in sequence. Errors generated in this
 
 - Create a new volume that uses the parameters that are specified for this method.
 - If the volume creation resulted in the renumbering of existing [**partitions**](#gt_partition) on a boot disk, the server MUST update the [**boot configuration file**](#gt_boot-configuration-file) with the new partition numbering.
-- Create a new volume object that corresponds to the new volume, implement the [IVdsVolume](#Section_3.4.5.2.37.1) interface, and assign it a unique [VDS_OBJECT_ID](#Section_2.2.1.1.3).
+- Create a new volume object that corresponds to the new volume, implement the [IVdsVolume](#Section_3.4.5.2.38.1) interface, and assign it a unique [VDS_OBJECT_ID](#Section_2.2.1.1.3).
 - Set the volume object's [**pack**](#gt_pack) pointer to this pack object.
 - Create new volume plex objects that correspond to the new volume plexes, implement the IVdsVolumePlex interface, and assign it a unique VDS_OBJECT_ID.
 - Set the volume plex object's volume pointer to this volume object.
@@ -8891,7 +8891,7 @@ The server MUST perform the following:
 - Return an HRESULT indicating failure or success; also return an HRESULT for each disk that is involved in the migration by using the pResults output parameter.
 The server MAY perform the following:
 
-- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is the value VDS_NTT_PACK.
 - **Pack** member is a [VDS_PACK_NOTIFICATION (section 2.2.1.3.2)](#Section_2.2.1.3.2) structure that has the following attributes:
 - **ulEvent** is the value VDS_NF_PACK_MODIFY.
@@ -8915,7 +8915,7 @@ When the server receives this message, it MUST validate the parameters:
 
 - Verify that **DiskId** belongs to a disk object in the list of storage management objects that correspond to a disk that is missing. The missing disk has its [**pack**](#gt_pack) pointer set to this pack object.
 - If this method is called against a disk which contains data [**volume**](#gt_volume) extents, then this method MUST return VDS_E_DISK_NOT_EMPTY.
-For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - **objectType** member is the value VDS_NTT_PACK.
 - **Pack** member is a [VDS_PACK_NOTIFICATION (section 2.2.1.3.2)](#Section_2.2.1.3.2) structure that has the following attributes:
@@ -8934,7 +8934,7 @@ HRESULT Recover(
 
 );
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -8951,7 +8951,7 @@ The server MUST then perform the following in sequence. Errors generated in this
 - Set the return code in the async object to an HRESULT indicating failure or success.
 - If the task completed successfully, set the percentage completed value in the async object to 100.
 - Set the signal state in the async object to TRUE.
-- If changes are made to the pack as a result of the call to recover, then for each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+- If changes are made to the pack as a result of the call to recover, then for each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is the value VDS_NTT_PACK.
 - **Pack** member is a [VDS_PACK_NOTIFICATION (section 2.2.1.3.2)](#Section_2.2.1.3.2) structure that has the following attributes:
 - **ulEvent** is the value VDS_NF_PACK_MODIFY.
@@ -9001,7 +9001,7 @@ HRESULT CreateVolume2(
 
 **ulAlign:** The number of bytes for the volume alignment. If zero is specified, the server determines the alignment value based on the size of the disk on which the volume is created.<88>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the IVdsAsync::Wait (Opnum 4) method is called on the interface, the interfaces returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on handling asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the IVdsAsync::Wait (Opnum 4) method is called on the interface, the interfaces returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on handling asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -9041,7 +9041,7 @@ HRESULT GetPack(
 
 );
 
-**ppPack:** A pointer to an [IVdsPack](#Section_3.4.5.2.19.1) interface that, if the operation is successfully completed, receives the IVdsPack interface of the [**pack**](#gt_pack) object that the disk belongs to. Callers MUST release the interface when they are done with it.
+**ppPack:** A pointer to an [IVdsPack](#Section_2.2.2.8) interface that, if the operation is successfully completed, receives the IVdsPack interface of the [**pack**](#gt_pack) object that the disk belongs to. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -9063,7 +9063,7 @@ HRESULT GetIdentificationData(
 
 );
 
-**pLunInfo:** A pointer to a [VDS_LUN_INFORMATION](#Section_2.2.1.1.4) structure that, if the operation is successfully completed, receives the [**LUN**](#gt_logical-unit-number-lun) information for the disk.
+**pLunInfo:** A pointer to a [VDS_LUN_INFORMATION](#Section_2.2.1.3.16) structure that, if the operation is successfully completed, receives the [**LUN**](#gt_logical-unit-number-lun) information for the disk.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -9355,7 +9355,7 @@ The partition is created at or beyond the *ullOffset* such that the offset is di
 
 **para:** MUST be a pointer to a [CREATE_PARTITION_PARAMETERS](#Section_2.2.1.3.22) structure that describes the new partition to create.
 
-**ppAsync:** MUST be a pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, upon successful completion, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface received when they are done with it. If the [IVdsAsync::Wait](#Section_3.4.5.2.2.2) method is called on the interface, the interfaces returned in the VDS_ASYNC_OUTPUT structure MUST be released as well.
+**ppAsync:** MUST be a pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, upon successful completion, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface received when they are done with it. If the [IVdsAsync::Wait](#Section_3.4.5.2.2.2) method is called on the interface, the interfaces returned in the VDS_ASYNC_OUTPUT structure MUST be released as well.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).<94>
 
@@ -9434,7 +9434,7 @@ When the server receives this message, it MUST perform the following:
 
 - Attempt to get exclusive access to the partition. If the server fails to get exclusive access to the partition, and the *bForce* parameter is not set to a non-zero value, then the server MUST return VDS_E_DEVICE_IN_USE.
 - Delete the partition following the parameters specified to the method.
-- If deleting the partition removed a [**volume**](#gt_volume), remove the corresponding volume object from the list of storage management objects. For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
+- If deleting the partition removed a [**volume**](#gt_volume), remove the corresponding volume object from the list of storage management objects. For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a VDS_VOLUME_NOTIFICATION that has the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_DEPART.
@@ -9613,7 +9613,7 @@ HRESULT FormatPartition(
 
 **bEnableCompression:** A Boolean that determines whether a file system is created with compression enabled.<97>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -9676,7 +9676,7 @@ HRESULT Clean(
 
 **bFullClean:** A Boolean value specifying whether the cleaning operation removes all the data from the disk.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -9750,7 +9750,7 @@ When the server receives this message, it MUST validate the following parameter:
 The server MUST perform the following:
 
 - Change the partition type following the parameters specified to the method.
-- If a [**volume**](#gt_volume) exists on the partition, for each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) method with a VDS_NOTIFICATION structure with the following attributes:
+- If a [**volume**](#gt_volume) exists on the partition, for each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) method with a VDS_NOTIFICATION structure with the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a VDS_VOLUME_NOTIFICATION with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -9833,7 +9833,7 @@ HRESULT CreatePartitionEx(
 
 **para:** A pointer to a [CREATE_PARTITION_PARAMETERS](#Section_2.2.1.3.22) structure that describes the new partition to create.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the [IVdsAsync::Wait](#Section_3.4.5.2.2.2) method is called on the interface, the interfaces returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the [IVdsAsync::Wait](#Section_3.4.5.2.2.2) method is called on the interface, the interfaces returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -9861,7 +9861,7 @@ The server MUST then perform the following in sequence. Errors generated in this
 - If the server was required to update the boot configuration file but failed, the return code MUST be set to VDS_S_UPDATE_BOOTFILE_FAILED (HRESULT of 0x80042434).
 - If the task completed successfully, set the percentage completed value in the async object to 100.
 - Set the signal state in the async object to TRUE.
-- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) method with a VDS_NOTIFICATION structure with the following attributes:
+- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) method with a VDS_NOTIFICATION structure with the following attributes:
 - objectType member is VDS_NTT_PARTITION.
 - Partition member is a VDS_PARTITION_NOTIFICATION with the following attributes:
 - ulEvent is VDS_NF_PARTITION_ARRIVE.
@@ -10052,7 +10052,7 @@ HRESULT FormatPartitionEx(
 
 **bEnableCompression:** A Boolean that determines whether a file system is created with compression enabled.<108>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10129,7 +10129,7 @@ HRESULT FormatPartitionEx2(
 
 **Options:** The combination of any values, by using a bitwise OR operator, that are defined in the [VDS_FORMAT_OPTION_FLAGS](#Section_2.2.1.2.18) enumeration.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) [**interface**](#gt_interface) that, if the operation is successfully completed, receives the IVdsAsync interface pointer to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) [**interface**](#gt_interface) that, if the operation is successfully completed, receives the IVdsAsync interface pointer to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10187,7 +10187,7 @@ This method has no parameters.
 When the server receives this message, it MUST perform the following:
 
 - Refresh any cached [**disk**](#gt_disk) and [**volume**](#gt_volume) properties of the [**removable media**](#gt_removable-media) drive.
-- If the disk properties ([VDS_DISK_PROP](#Section_2.2.2.9.1.1) values) for the media have changed, for each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
+- If the disk properties ([VDS_DISK_PROP](#Section_2.2.2.9.1.1) values) for the media have changed, for each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
 - **objectType** member is VDS_NTT_DISK.
 - **Disk** member is a [VDS_DISK_NOTIFICATION](#Section_2.2.1.3.3) with the following attributes:
 - **ulEvent** is VDS_NF_DISK_MODIFY.
@@ -10221,7 +10221,7 @@ When the server receives this message, it MUST perform the following:
 - **volumeId** is the [VDS_OBJECT_ID](#Section_2.2.1.1.3) of the [**volume**](#gt_volume) object corresponding to the removable media drive.
 - **plexId** is [**NULL GUID**](#gt_null-guid), but it is not relevant when ulEvent is VDS_NF_VOLUME_MODIFY.
 - **ulPercentCompleted** is from 0-100 and is implementation-specific; however, it is not relevant when ulEvent is VDS_NF_VOLUME_MODIFY.
-- If media was present in the drive, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) method by using a VDS_NOTIFICATION structure that has the following attributes:
+- If media was present in the drive, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) method by using a VDS_NOTIFICATION structure that has the following attributes:
 - **objectType** member is VDS_NTT_DISK.
 - **Disk** member is [VDS_DISK_NOTIFICATION](#Section_2.2.1.3.3) that has the following attributes:
 - **ulEvent** is VDS_NF_DISK_MODIFY.
@@ -10281,7 +10281,7 @@ HRESULT QueryPlexes(
 
 );
 
-**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of [**volume plex**](#gt_volume-plex) objects in the volume. Callers MUST release the interface when they are done with it.
+**ppEnum:** A pointer to an [IEnumVdsObject](#Section_3.1.1.1) interface that, if the operation is successfully completed, receives the IEnumVdsObject interface of the object that contains an enumeration of [**volume plex**](#gt_volume-plex) objects in the volume. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10311,7 +10311,7 @@ VDS_INPUT_DISK* pInputDiskArray,
 
 **lNumberOfDisks:** The number of elements in *pInputDiskArrray*.<111>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the [**interface**](#gt_interface) when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the [**interface**](#gt_interface) when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10328,7 +10328,7 @@ The server MUST perform the following:
 The server MUST then perform the following in sequence. Errors generated in this sequence of steps are returned in the pHrResult parameter to the IVdsAsync::Wait or IVdsAsyncQueryStatus methods.
 
 - Extend the volume following the parameters specified to the method.
-- If the volume's size is changed, then for each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method with a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
+- If the volume's size is changed, then for each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method with a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - Volume member is a VDS_VOLUME_NOTIFICATION with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -10361,7 +10361,7 @@ HRESULT Shrink(
 
 **ullNumberOfBytesToRemove:** The number of bytes by which to shrink the volume.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10376,7 +10376,7 @@ The server MUST then perform the following in sequence. Errors generated in this
 
 - The [**file system**](#gt_file-system) <116> MAY need to shrink, if the file system on the volume supports shrinking, following the parameters specified to the method.
 - Shrink the volume following the parameters specified to the method.
-- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
+- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
 - objectType member is VDS_NTT_VOLUME.
 - The volume member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -10403,7 +10403,7 @@ HRESULT AddPlex(
 
 **VolumeId:** The [**VDS object**](#gt_vds-object) ID of the volume object to add as a plex.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10444,7 +10444,7 @@ HRESULT BreakPlex(
 
 **plexId:** The [**GUID**](#gt_globally-unique-identifier-guid) of the plex to be broken.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the IVdsAsync::Wait method is called on the interface, the interfaces returned in the VDS_ASYNC_OUTPUT structure MUST be released as well. For details on asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the IVdsAsync::Wait method is called on the interface, the interfaces returned in the VDS_ASYNC_OUTPUT structure MUST be released as well. For details on asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10460,7 +10460,7 @@ If the volume resides on a basic disk, the server MUST return VDS_E_NOT_SUPPORTE
 The server MUST then perform the following in sequence. Errors generated in this sequence of steps are returned in the pHrResult parameter to the IVdsAsync::Wait or IVdsAsyncQueryStatus methods.
 
 - Break the [**volume plex**](#gt_volume-plex) corresponding to the [VDS_OBJECT_ID](#Section_2.2.1.1.3) that **PlexId** specifies for this volume.
-- Create a new volume object that corresponds to the new volume, implements the [IVdsVolume](#Section_3.4.5.2.37.1) interface, and assigns it a unique VDS_OBJECT_ID.
+- Create a new volume object that corresponds to the new volume, implements the [IVdsVolume](#Section_3.4.5.2.38.1) interface, and assigns it a unique VDS_OBJECT_ID.
 - Set the new volume object's [**pack**](#gt_pack) pointer to the pack object that this volume's pack pointer references.
 - Add the new volume object to the list of storage management objects.
 - Set the volume plex's volume pointer to the new volume object. Set the task-specific return values in the async object to return the values that are associated with VDS_ASYNCOUT_BREAKVOLUMEPLEX (as specified in section 3.4.5.1.9).
@@ -10484,7 +10484,7 @@ HRESULT RemovePlex(
 
 **plexId:** The [**VDS object**](#gt_vds-object) ID of the [**volume plex**](#gt_volume-plex) object to remove.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10527,7 +10527,7 @@ When the server receives this message, it MUST perform the following:
 - Attempt to get exclusive access to the volume. If the server fails to get exclusive access to the volume, and the *bForce* parameter is not set to true, then the server MUST return VDS_E_DEVICE_IN_USE.
 - Delete all [**volume plexes**](#gt_volume-plex) in the volume. Remove the corresponding volume plex objects from the list of storage management objects.<119>
 - Remove this volume object from the list of storage management objects.
-- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
+- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
 - objectType member is VDS_NTT_VOLUME.
 - Volume member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_DEPART.
@@ -10583,7 +10583,7 @@ The server MUST perform the following:
 - If the *ulFlags* parameter specifies that the VDS_VF_READONLY or VDS_VF_HIDDEN flags be set on a volume located on an [**MBR**](#gt_master-boot-record-mbr) [**disk**](#gt_disk), and that disk contains a critical volume, such as the system, [**boot**](#gt_boot-volume), hibernation, [**page file**](#gt_d359150b-3c93-451c-a6b4-e77255c9f212), or [**crash dump**](#gt_59753484-3bf5-4af6-9994-0eefce680541) volumes, then the server MUST fail this method and return VDS_E_OPERATION_DENIED.
 - Set the volume flags specified by **ulFlags**.
 - If **bRevertOnClose** is set, the server MUST be prepared to automatically revert the volume flags if a client releases the last reference to the volume object.
-- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
+- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method with a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure with the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -10609,11 +10609,11 @@ HRESULT ClearFlags(
 When the server receives this message, it MUST validate the following parameters:
 
 - Verify that **ulFlags** contains only valid flags defined in the VDS_VOLUME_FLAG enumeration.
-- If volume flags were set previously by calling [SetFlags](#Section_3.4.5.2.21.6) with **bRevertOnClose** set, and those flags have not yet been reverted, verify that the flags that **ulFlags** specifies are exactly the same as the flags set by a call to SetFlags.
+- If volume flags were set previously by calling [SetFlags](#Section_3.4.5.2.4.15) with **bRevertOnClose** set, and those flags have not yet been reverted, verify that the flags that **ulFlags** specifies are exactly the same as the flags set by a call to SetFlags.
 The server MUST perform the following:
 
 - Clear the volume flags that **ulFlags** specifies. If the flags being cleared were set temporarily by calling SetFlags with **bRevertOnClose** set, and those flags had not yet been reverted, the server SHOULD NOT revert the flags automatically when a client releases the last reference to the volume object or dismounts the volume.
-- For each callback object that is registered in the list of callback objects, call the [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method of the callback object by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
+- For each callback object that is registered in the list of callback objects, call the [IVdsAdviseSink::OnNotify()](#Section_4.6) method of the callback object by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) that has the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -10708,7 +10708,7 @@ HRESULT Format(
 
 **bEnableCompression:** A Boolean that determines whether a file system is created with compression enabled.<127>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -10742,7 +10742,7 @@ The server MUST update the percentage completed value periodically during the fo
 The server MUST then perform the following in sequence. Errors generated in this sequence of steps are returned in the pHrResult parameter to the IVdsAsync::Wait or IVdsAsyncQueryStatus methods.
 
 - Format the volume following the parameters specified to the method.
-- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method with a VDS_NOTIFICATION structure with the following attributes:
+- For each callback object registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method with a VDS_NOTIFICATION structure with the following attributes:
 - objectType member is VDS_NTT_VOLUME.
 - Volume member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -10777,7 +10777,7 @@ When the server receives this message, it MUST validate the following parameter:
 The server MUST then perform the following in sequence:<130>
 
 - Add the access path to the volume.
-- If the server determines that a mounted folder path name was added to the volume, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
+- If the server determines that a mounted folder path name was added to the volume, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is VDS_NTT_MOUNT_POINT.
 - **MountPoint** member is a [VDS_MOUNT_POINT_NOTIFICATION](#Section_2.2.1.3.8) with the following attributes:
 - **ulEvent** is VDS_NF_MOUNT_POINTS_CHANGE.
@@ -10874,7 +10874,7 @@ The server MUST then perform the following in sequence:<132>
 
 - Attempt to get exclusive access to the volume. If the server fails to get exclusive access to the volume, and the *bForce* parameter is not set to a non-zero value, then the server MUST return VDS_E_DEVICE_IN_USE.
 - Delete the access point from the volume.
-- If the server determines that a mount point was removed from the volume, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
+- If the server determines that a mount point was removed from the volume, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is VDS_NTT_MOUNT_POINT.
 - **MountPoint** member is a [VDS_MOUNT_POINT_NOTIFICATION](#Section_2.2.1.3.8) with the following attributes:
 - **ulEvent** is VDS_NF_MOUNT_POINTS_CHANGE.
@@ -11065,7 +11065,7 @@ HRESULT FormatEx(
 
 **bEnableCompression:** A Boolean that determines whether a file system is created with compression enabled.<134>
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -11098,7 +11098,7 @@ The server MUST update the percentage completed value periodically during the fo
 The server MUST then perform the following in sequence:
 
 - Format the volume following the parameters specified to the method.
-- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method by using a VDS_NOTIFICATION structure that has the following attributes:
+- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method by using a VDS_NOTIFICATION structure that has the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - volume member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -11174,7 +11174,7 @@ HRESULT FormatEx2(
 
 **Options:** The combination of any values, by using a bitwise OR operator, that are defined in the [VDS_FORMAT_OPTION_FLAGS](#Section_2.2.1.2.18) enumeration.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error HRESULT (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the [**HRESULT**](#gt_hresult) values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -11205,7 +11205,7 @@ The server MUST update the percentage completed value periodically during the fo
 The server MUST perform the following in sequence:
 
 - Format the volume following the parameters specified to the method.
-- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_3.3.4.3.1) (Opnum 3) method by using a VDS_NOTIFICATION structure that has the following attributes:
+- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify](#Section_4.6) (Opnum 3) method by using a VDS_NOTIFICATION structure that has the following attributes:
 - The **objectType** member is VDS_NTT_VOLUME.
 - The **Volume** member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -11270,7 +11270,7 @@ HRESULT Shrink(
 
 **ullMinNumberOfReclaimableBytes:** The minimum number of bytes to be reclaimed from the volume. If the method cannot reclaim at least the minimum number of bytes as specified by this parameter, the method MUST fail and MUST NOT reclaim any bytes.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -11288,7 +11288,7 @@ The server MUST then perform the following in sequence. Errors generated in this
 - The file system <138> needs to shrink, if the file system on the volume supports shrinking following the parameters specified to the method.
 - Shrink the volume and all its plexes following the parameters specified to the method.
 - Release the extents that have been reclaimed and mark them as free extents.
-- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
+- For each callback object that is registered in the list of callback objects, call the callback object's [IVdsAdviseSink::OnNotify()](#Section_4.6) method by using a [VDS_NOTIFICATION](#Section_2.2.1.3.9) structure that has the following attributes:
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a [VDS_VOLUME_NOTIFICATION](#Section_2.2.1.3.4) with the following attributes:
 - **ulEvent** is VDS_NF_VOLUME_MODIFY.
@@ -11350,7 +11350,7 @@ HRESULT GetVolume(
 
 );
 
-**ppVolume:** A pointer to an [IVdsVolume](#Section_3.4.5.2.37.1) interface that, if the operation is successfully completed, receives the IVdsVolume interface of the volume object that the volume plex belongs to. Callers MUST release the interface when they are done with it.
+**ppVolume:** A pointer to an [IVdsVolume](#Section_3.4.5.2.38.1) interface that, if the operation is successfully completed, receives the IVdsVolume interface of the volume object that the volume plex belongs to. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -11409,7 +11409,7 @@ HRESULT Repair(
 
 **lNumberOfDisks:** The number of elements in **pInputDiskArray**. Only one new disk can be passed to this method at a time.
 
-**ppAsync:** A pointer to an [IVdsAsync](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the [Wait](#Section_3.4.5.2.2.2) method is called on the interface, the [**interface**](#gt_interface) returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
+**ppAsync:** A pointer to an [IVdsAsync](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it. If the [Wait](#Section_3.4.5.2.2.2) method is called on the interface, the [**interface**](#gt_interface) returned in the [VDS_ASYNC_OUTPUT](#Section_2.2.1.3.10) structure MUST be released as well. For details on asynchronous tasks, see section [3.4.5.1.9](#Section_3.4.5.1.9).
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -11441,7 +11441,7 @@ The server MUST update the percentage completed value periodically during the pr
 <a id="Section_3.4.5.2.40.1"></a>
 ###### 3.4.5.2.40.1 IVdsVDisk::Open (Opnum 3)
 
-The Open method opens a handle to the specified [**virtual disk**](#gt_virtual-disk) file and returns an [IVdsOpenVDisk (section 3.1.15.2)](#Section_3.4.5.2.41.5) interface pointer to an object representing the open virtual disk (an OpenVirtualDisk object). Release the IVdsOpenVDisk interface to close the handle to the virtual disk.
+The Open method opens a handle to the specified [**virtual disk**](#gt_virtual-disk) file and returns an [IVdsOpenVDisk (section 3.1.15.2)](#Section_3.4.5.2.41.2) interface pointer to an object representing the open virtual disk (an OpenVirtualDisk object). Release the IVdsOpenVDisk interface to close the handle to the virtual disk.
 
 HRESULT Open(
 
@@ -11472,7 +11472,7 @@ The server MUST then perform the following in sequence:
 
 - Pass the input parameters to the operating system to open the virtual disk file.
 - If the operating system failed to open the file, return an implementation-specific error code. Otherwise, if the file was successfully opened, the server MUST:
-- Mark the state of the object that implements [IVdsVDisk](#Section_3.4.5.2.40.2) as "open". For details, see section [2.2.2.19.1.1](#Section_2.2.2.19.1.1).
+- Mark the state of the object that implements [IVdsVDisk](#Section_3.4.5.2.40.3) as "open". For details, see section [2.2.2.19.1.1](#Section_2.2.2.19.1.1).
 - Create an object that implements the IVdsOpenVDisk [**interface**](#gt_interface) to represent the virtual disk file in the open state.
 - Point *ppOpenVDisk* to an IVdsOpenVDisk interface of the virtual disk object created and return an HRESULT indicating success.
 <a id="Section_3.4.5.2.40.2"></a>
@@ -11508,7 +11508,7 @@ HRESULT GetHostVolume(
 
 );
 
-**ppVolume:** Pointer to a variable that receives an [IVdsVolume (section 3.1.13.1)](#Section_3.4.5.2.37.1) interface pointer for the volume. Callers MUST release the interface pointer when it is no longer needed by calling the **IUnknown::Release** method.
+**ppVolume:** Pointer to a variable that receives an [IVdsVolume (section 3.1.13.1)](#Section_3.4.5.2.38.1) interface pointer for the volume. Callers MUST release the interface pointer when it is no longer needed by calling the **IUnknown::Release** method.
 
 **Return Values:** The method MUST return zero or a non-error [**HRESULT**](#gt_hresult) (as specified in [MS-ERREF](#Section_2.2.3)) to indicate success, or return an implementation-specific nonzero error code to indicate failure. For the HRESULT values predefined by the Virtual Disk Service Remote Protocol, see section [2.2.3](#Section_2.2.3).
 
@@ -11572,7 +11572,7 @@ HRESULT Attach(
 
 **TimeoutInMs:** The length of time, in milliseconds, before this method MAY<142> return after waiting for the virtual disk to be surfaced completely. If this parameter is zero, the method returns immediately without waiting for the [**disk**](#gt_disk) to be surfaced. If this parameter is INFINITE, the method does not return until the surfacing operation is complete. If this parameter is set to a value other than zero or INFINITE and the time-out value is reached, the method guarantees that the disk is not surfaced after the operation is complete.
 
-**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.4.5.2.2.3) [**interface**](#gt_interface) that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.1.3.1) [**interface**](#gt_interface) that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** This method MUST return zero to indicate success, or return an implementation-specific nonzero error code to indicate failure.
 
@@ -11662,7 +11662,7 @@ HRESULT Compact(
 
 **Reserved:** This parameter is reserved for system use and MUST be ignored.
 
-**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.4.5.2.2.3) interface that if the operation is successfully completed receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.1.3.1) interface that if the operation is successfully completed receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero to indicate success, or return an implementation-specific nonzero error code to indicate failure.
 
@@ -11703,7 +11703,7 @@ HRESULT Merge(
 
 **MergeDepth:** Number of parent backing store files in the differencing chain to be updated. For example, if *MergeDepth* has a value of 1, the data blocks from the given [**differencing disk**](#gt_differencing-disk) are moved into its parent. If the given differencing disk's parent is also a differencing disk, (in other words the given disk is diskA, its parent is diskB, and diskB's parent is diskC), and the *MergeDepth* parameter value is 2, the data blocks from the given differencing disk (diskA) are moved into its parent (diskB), and then its parent's (diskB's) data blocks are moved into its parent (diskC).<146>
 
-**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero to indicate success, or return an implementation-specific nonzero error code to indicate failure.
 
@@ -11742,7 +11742,7 @@ HRESULT Expand(
 
 **NewSize:** The desired size, in bytes, of the expanded virtual disk.
 
-**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.4.5.2.2.3) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
+**ppAsync:** A pointer to an [IVdsAsync (section 3.1.3.1)](#Section_3.1.3.1) interface that, if the operation is successfully completed, receives the IVdsAsync interface to monitor and control this operation. Callers MUST release the interface when they are done with it.
 
 **Return Values:** The method MUST return zero to indicate success, or return an implementation-specific nonzero error code to indicate failure.
 
@@ -11787,7 +11787,7 @@ When the server detects that a [**disk pack**](#gt_disk-pack) with [**dynamic di
 <a id="Section_3.4.7.3"></a>
 #### 3.4.7.3 Pack Modification
 
-When the server detects that a [**pack**](#gt_pack) was modified, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+When the server detects that a [**pack**](#gt_pack) was modified, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - *objectType* member is VDS_NTT_PACK.
 - *Pack* member is a [VDS_PACK_NOTIFICATION (section 2.2.1.3.2)](#Section_2.2.1.3.2) with the following attributes:
@@ -11806,7 +11806,7 @@ When the server detects that a [**disk**](#gt_disk) was disconnected from the sy
 <a id="Section_3.4.7.6"></a>
 #### 3.4.7.6 Disk Modification
 
-When the server detects that a [**disk**](#gt_disk) was modified, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+When the server detects that a [**disk**](#gt_disk) was modified, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - *objectType* member is VDS_NTT_DISK.
 - *Disk* member is a [VDS_DISK_NOTIFICATION (section 2.2.1.3.3)](#Section_2.2.1.3.3) with the following attributes:
@@ -11825,7 +11825,7 @@ When the server detects that a [**volume**](#gt_volume) was removed from the sys
 <a id="Section_3.4.7.9"></a>
 #### 3.4.7.9 Volume Modification
 
-When the server detects that a [**volume**](#gt_volume) was modified, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+When the server detects that a [**volume**](#gt_volume) was modified, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - *objectType* member is VDS_NTT_VOLUME.
 - *Volume* member is a [VDS_VOLUME_NOTIFICATION (section 2.2.1.3.4)](#Section_2.2.1.3.4) with the following attributes:
@@ -11836,7 +11836,7 @@ When the server detects that a [**volume**](#gt_volume) was modified, for each c
 <a id="Section_3.4.7.10"></a>
 #### 3.4.7.10 File System Modification
 
-When the server detects that a [**volume**](#gt_volume) was [**formatted**](#gt_format), for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+When the server detects that a [**volume**](#gt_volume) was [**formatted**](#gt_format), for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - **objectType** member is VDS_NTT_FILE_SYSTEM.
 - **FileSystem** member is a [VDS_FILE_SYSTEM_NOTIFICATION (section 2.2.1.3.7)](#Section_2.2.1.3.7) with the following attributes:
@@ -11846,7 +11846,7 @@ When the server detects that a [**volume**](#gt_volume) was [**formatted**](#gt_
 <a id="Section_3.4.7.11"></a>
 #### 3.4.7.11 Mount Point Change
 
-When the server detects that a [**volume's**](#gt_volume) [**mount point**](#gt_mount-point) has changed, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+When the server detects that a [**volume's**](#gt_volume) [**mount point**](#gt_mount-point) has changed, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - **objectType** member is VDS_NTT_MOUNT_POINT.
 - **MountPoint** member is a [VDS_MOUNT_POINT_NOTIFICATION (section 2.2.1.3.8)](#Section_2.2.1.3.8) with the following attributes:
@@ -11855,7 +11855,7 @@ When the server detects that a [**volume's**](#gt_volume) [**mount point**](#gt_
 <a id="Section_3.4.7.12"></a>
 #### 3.4.7.12 Drive Letter Assignment
 
-When the server detects that a [**drive letter**](#gt_drive-letter) is assigned to a [**volume**](#gt_volume), for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
+When the server detects that a [**drive letter**](#gt_drive-letter) is assigned to a [**volume**](#gt_volume), for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure that has the following attributes:
 
 - **objectType** member is VDS_NTT_DRIVE_LETTER.
 - **Letter** member is a [VDS_DRIVE_LETTER_NOTIFICATION (section 2.2.1.3.6)](#Section_2.2.1.3.6) that has the following attributes:
@@ -11865,7 +11865,7 @@ When the server detects that a [**drive letter**](#gt_drive-letter) is assigned 
 <a id="Section_3.4.7.13"></a>
 #### 3.4.7.13 Drive Letter Removal
 
-When the server detects that a [**drive letter**](#gt_drive-letter) was removed from a [**volume**](#gt_volume), for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
+When the server detects that a [**drive letter**](#gt_drive-letter) was removed from a [**volume**](#gt_volume), for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
 
 - **objectType** member is VDS_NTT_DRIVE_LETTER.
 - **Letter** member is a [VDS_DRIVE_LETTER_NOTIFICATION (section 2.2.1.3.6)](#Section_2.2.1.3.6) that has the following attributes:
@@ -11875,7 +11875,7 @@ When the server detects that a [**drive letter**](#gt_drive-letter) was removed 
 <a id="Section_3.4.7.14"></a>
 #### 3.4.7.14 Media Arrival
 
-When the server detects that media was inserted into a [**removable media**](#gt_removable-media) drive, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
+When the server detects that media was inserted into a [**removable media**](#gt_removable-media) drive, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
 
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a [VDS_VOLUME_NOTIFICATION (section 2.2.1.3.4)](#Section_2.2.1.3.4) that has the following attributes:
@@ -11892,7 +11892,7 @@ Then, for each callback object that is registered in the list of callback object
 <a id="Section_3.4.7.15"></a>
 #### 3.4.7.15 Media Removal
 
-When the server detects that media was ejected from a [**removable media**](#gt_removable-media) drive, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_3.3.4.3.1) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
+When the server detects that media was ejected from a [**removable media**](#gt_removable-media) drive, for each callback object that is registered in the list of callback objects, the server MUST call the callback object's [IVdsAdviseSink::OnNotify() (section 3.3.4.3.1)](#Section_4.6) method by using a [VDS_NOTIFICATION (section 2.2.1.3.9)](#Section_2.2.1.3.9) structure with the following attributes:
 
 - **objectType** member is VDS_NTT_VOLUME.
 - **Volume** member is a [VDS_VOLUME_NOTIFICATION (section 2.2.1.3.4)](#Section_2.2.1.3.4) with the following attributes:
@@ -11934,18 +11934,18 @@ The following is an example of a client starting a [**VDS session**](#gt_d7afdb2
 Figure 2: Client starting a VDS session by retrieving an instance of the VDS service object
 
 - The client requests the creation of a VDS session by calling CoCreateInstanceEx (see [[MSDN-CoCreateInstanceEx]](https://go.microsoft.com/fwlink/?LinkId=208352)) with the class [**UUID**](#gt_universally-unique-identifier-uuid) of the VDS service in order to create an instance of the [**VDS object**](#gt_vds-object) on the server.
-- The server returns a reference to the [IVdsService](#Section_3.4.5.2.3.1) interface.
+- The server returns a reference to the [IVdsService](#Section_3.4.5.2.9) interface.
 - The client invokes the interface's **IUnknown::QueryInterface** method to request for the [IVdsServiceInitialization](#Section_3.1.5.2) interface.
 - The server returns a reference to the IVdsServiceInitialization interface.
-- The client calls the [IVdsServiceInitialization::Initialize](#Section_3.3.3) method.
+- The client calls the [IVdsServiceInitialization::Initialize](#Section_3.2.3) method.
 - The server begins initializing the service and returns control back to the client.
 - The client calls the [IVdsService::WaitForServiceReady](#Section_3.4.5.2.4.2) method.
 - The server replies to the client with an [**HRESULT**](#gt_hresult) indicating whether the service initialization was successful. If the VDS service initialization is successful (HRESULT of 0x00000000), the client can request virtual [**disk**](#gt_disk) management operations to the server through the methods in the IVdsService interface.
 - The client initiates the enumeration of providers by calling the [IVdsService::QueryProviders](#Section_3.4.5.2.4.4) method.
-- Upon successful execution of the IVdsService::QueryProviders method, the server creates an enumeration object and returns a reference to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface.
+- Upon successful execution of the IVdsService::QueryProviders method, the server creates an enumeration object and returns a reference to an [IEnumVdsObject](#Section_3.1.1.1) interface.
 - The client can call [IEnumVdsObject::Next](#Section_3.4.5.2.1.1) to retrieve the next provider in the enumeration.
 - Upon receiving the IEnumVdsObject::Next request, the server looks for the next provider object in the enumeration. If there is a provider object in the enumeration, the server returns an HRESULT of 0x00000000 and a reference to the IUnknown interface to the client. If the server reaches the end of the enumeration, the server returns a HRESULT of 0x00000001.
-- If the server returns a zero disk, the client invokes the interface's IUnknown::QueryInterface method to request for the object's [IVdsProvider](#Section_3.1.9.1) interface.
+- If the server returns a zero disk, the client invokes the interface's IUnknown::QueryInterface method to request for the object's [IVdsProvider](#Section_3.4.5.2.14.1) interface.
 - The server returns a HRESULT of 0x00000000 and a reference to the IVdsProvider interface to the client. The client can access the provider information through the IVdsProvider interface.
 - If the client wants to query the objects in the provider, the client invokes the interface's IUnknown::QueryInterface method to request for the object's [IVdsSwProvider](#Section_3.4.5.2.15) interface.
 - The server returns a HRESULT of 0x00000000 and a reference to the IVdsSwProvider interface to the client. The client can enumerate the objects in the provider through the IVdsProvider interface.
@@ -11966,7 +11966,7 @@ The following figure shows an example of a client ending a [**VDS session**](#gt
 
 Figure 3: Client ending a VDS session
 
-- The client releases the reference to the [IVdsService](#Section_3.4.5.2.3.1) interface by invoking IVdsService::Release.
+- The client releases the reference to the [IVdsService](#Section_3.4.5.2.9) interface by invoking IVdsService::Release.
 - The server returns the new [**reference count**](#gt_reference-count) for the IVdsService interface.
 <a id="Section_4.2"></a>
 ## 4.2 VDS Client Notifications
@@ -11980,7 +11980,7 @@ The following figure shows an example of a client that registers to receive noti
 
 Figure 4: Client registering to receive notifications from a server
 
-- The client requests registration by calling the [IVdsService::Advise](#Section_3.4.5.2.4.12) method and by passing an [IVdsAdviseSink](#Section_3.4.5.2.2.3) interface as a parameter.
+- The client requests registration by calling the [IVdsService::Advise](#Section_3.4.5.2.4.12) method and by passing an [IVdsAdviseSink](#Section_3.1.3.1) interface as a parameter.
 - The server returns a cookie value that uniquely identifies the client registration. The client can later use the cookie value to unregister for notifications.
 <a id="Section_4.2.2"></a>
 ### 4.2.2 Receiving Notifications
@@ -11991,7 +11991,7 @@ The following figure shows an example of what happens when one or more [**VDS**]
 
 Figure 5: VDS event triggered
 
-- For each callback that was registered, the server calls [IVdsAdviseSink::OnNotify()](#Section_3.3.4.3.1) with an array of [VDS_NOTIFICATION](#Section_2.2.1.3.9) structures that describe the events that were triggered.
+- For each callback that was registered, the server calls [IVdsAdviseSink::OnNotify()](#Section_4.6) with an array of [VDS_NOTIFICATION](#Section_2.2.1.3.9) structures that describe the events that were triggered.
 - The client returns an [**HRESULT**](#gt_hresult) of 0x00000000 to acknowledge the notification.
 <a id="Section_4.2.3"></a>
 ### 4.2.3 Unregistering for Notifications
@@ -12003,23 +12003,23 @@ The following figure shows an example of a client that cancels a previous regist
 Figure 6: Client canceling previous registration for notification
 
 - The client requests unregistration by calling the [IVdsService::Unadvise](#Section_3.4.5.2.4.13) method and passing the cookie value that was received during registration.
-- The server determines that the cookie value matches a registered [IVdsAdviseSink](#Section_3.4.5.2.2.3) interface and invokes the IVdsAdviseSink::Release method to release its reference.
+- The server determines that the cookie value matches a registered [IVdsAdviseSink](#Section_3.1.3.1) interface and invokes the IVdsAdviseSink::Release method to release its reference.
 - The client returns the new [**reference count**](#gt_reference-count) for the IVdsAdviseSink interface.
 - The server returns an [**HRESULT**](#gt_hresult) of 0x00000000 in response to an IVdsService::Unadvise call from the client to acknowledge that the registration is canceled. The server can reuse the cookie value in the future.
 <a id="Section_4.3"></a>
 ## 4.3 Querying Enumerations of VDS Objects
 
-Most [**VDS objects**](#gt_vds-object) are retrievable only through an enumeration via the [IVdsPack](#Section_3.4.5.2.19.1) interface. The following figure shows an example of a client enumerating [**volume**](#gt_volume) objects belonging to a [**disk pack**](#gt_disk-pack).
+Most [**VDS objects**](#gt_vds-object) are retrievable only through an enumeration via the [IVdsPack](#Section_2.2.2.8) interface. The following figure shows an example of a client enumerating [**volume**](#gt_volume) objects belonging to a [**disk pack**](#gt_disk-pack).
 
 ![Client enumerating volume objects belonging to a disk pack](media/image7.png)
 
 Figure 7: Client enumerating volume objects belonging to a disk pack
 
 - The client initiates the enumeration of volumes by calling the [IVdsPack::QueryVolumes](#Section_3.4.5.2.19.3) method.
-- Upon successful execution of the IVdspack::QueryVolumes method, the server creates an enumeration object and returns a reference to an [IEnumVdsObject](#Section_3.4.5.2.1.2) interface.
+- Upon successful execution of the IVdspack::QueryVolumes method, the server creates an enumeration object and returns a reference to an [IEnumVdsObject](#Section_3.1.1.1) interface.
 - The client can call [IEnumVdsObject::Next](#Section_3.4.5.2.1.1) for the next object in the enumeration that it wants to retrieve.
 - Upon receiving the IEnumVdsObject::Next request, the server looks for the next volume object in the enumeration. If one exists, then the server returns an [**HRESULT**](#gt_hresult) of 0x00000000 and a reference to the IUnknown interface to the client. If the server reaches the end of the enumeration, the server returns an HRESULT of 0x00000001.
-- Assuming the server returned a zero HRESULT, the client invokes the interface's IUnknown::QueryInterface method to request for the object's [IVdsVolume](#Section_3.4.5.2.37.1) interface.
+- Assuming the server returned a zero HRESULT, the client invokes the interface's IUnknown::QueryInterface method to request for the object's [IVdsVolume](#Section_3.4.5.2.38.1) interface.
 - The server returns an HRESULT of 0x00000000 and a reference to the IVdsVolume interface to the client. The client can access the volume information through the IVdsVolume interface.
 - When a client no longer needs the IVdsVolume interface, the client releases the reference to the interface by calling IVdsVolume::Release.
 - The server returns a new [**reference count**](#gt_reference-count) for IVdsVolume::Release.
@@ -12058,7 +12058,7 @@ The Virtual Disk Service Remote Protocol exposes certain potentially long-runnin
 Figure 9: Asynchronous task of formatting a volume
 
 - The client requests that a volume be formatted by calling the [IVdsVolumeMF::Format](#Section_3.4.5.2.34.2) method.
-- The server acknowledges the format request and returns an [IVdsAsync](#Section_3.4.5.2.2.3) interface that the client can use to monitor progress of the format operation.
+- The server acknowledges the format request and returns an [IVdsAsync](#Section_3.1.3.1) interface that the client can use to monitor progress of the format operation.
 - The client checks the current status of the format operation by calling the [IVdsAsync::QueryStatus](#Section_3.4.5.2.2.3) method on the returned IVdsAsync interface.
 - The server returns the status of the format operation.
 - The client can repeatedly check the status of the format operation by calling the IVdsAsync::QueryStatus method.
@@ -12314,7 +12314,7 @@ None.
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided here; "ms-dtyp.idl" is the IDL that is in [MS-DTYP](#Section_2.2.2.1.1) section 5.
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided here; "ms-dtyp.idl" is the IDL that is in [MS-DTYP](#Section_2.2.1.1) section 5.
 
 import "ms-dtyp.idl";
 
@@ -16621,36 +16621,36 @@ The following table lists, by operating system version, the interfaces used when
 |  | Supported operating system version | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Interface | Windows Server 2003 | Windows Server 2003 R2 | Windows Vista | Windows Server 2008 | Windows 7/Windows Server 2008 R2 | Windows 8 and later/Windows Server 2012 and later |
-| [IVdsProvider](#Section_3.1.9.1) | X | X | X | X | X | X |
+| [IVdsProvider](#Section_3.4.5.2.14.1) | X | X | X | X | X | X |
 | [IVdsSwProvider](#Section_3.4.5.2.15) | X | X | X | X | X | X |
-| [IVdsPack](#Section_3.4.5.2.19.1) | X | X | X | X | X | X |
-| [IVdsDisk](#Section_3.4.5.2.40.1) | X | X | X | X | X | X |
-| [IVdsAdvancedDisk](#Section_3.4.5.2.24.10) | X | X | X | X | X | X |
-| [IVdsCreatePartitionEx](#Section_3.4.5.2.27.1) | X | X | X | X | X | X |
-| [IVdsRemovable](#Section_3.1.12.11) | X | X | X | X | X | X |
-| [IVdsVolume](#Section_3.4.5.2.37.1) | X | X | X | X | X | X |
+| [IVdsPack](#Section_2.2.2.8) | X | X | X | X | X | X |
+| [IVdsDisk](#Section_3.4.5.2.40) | X | X | X | X | X | X |
+| [IVdsAdvancedDisk](#Section_3.4.5.2.24.8) | X | X | X | X | X | X |
+| [IVdsCreatePartitionEx](#Section_3.1.12.7) | X | X | X | X | X | X |
+| [IVdsRemovable](#Section_3.4.5.2.31) | X | X | X | X | X | X |
+| [IVdsVolume](#Section_3.4.5.2.38.1) | X | X | X | X | X | X |
 | IVdsVolume2 | - | - | - | - | X | X |
-| [IVdsVolumeMF](#Section_3.1.12.10) | X | X | X | X | X | X |
-| [IVdsVolumePlex](#Section_3.4.5.2.39.3) | X | X | X | X | X | X |
-| [IVdsServiceUninstallDisk](#Section_3.4.5.2.6) | - | X | X | X | X | X |
+| [IVdsVolumeMF](#Section_3.1.12.9) | X | X | X | X | X | X |
+| [IVdsVolumePlex](#Section_2.2.2.17) | X | X | X | X | X | X |
+| [IVdsServiceUninstallDisk](#Section_3.4.5.2.6.2) | - | X | X | X | X | X |
 | [IVdsPack2](#Section_3.4.5.2.20.1) | - | - | X | X | X | X |
 | [IVdsDisk2](#Section_3.4.5.2.22.1) | - | - | X | X | X | X |
 | IVdsDisk3 | - | - | - | - | X | X |
-| [IVdsAdvancedDisk2](#Section_2.2.2.12) | - | - | X | X | X | X |
+| [IVdsAdvancedDisk2](#Section_3.4.5.2.25.1) | - | - | X | X | X | X |
 | [IVdsAdvancedDisk3](#Section_3.1.12.6) | - | - | - | - | - | X |
-| [IVdsDiskPartitionMF](#Section_3.1.12.10) | - | - | X | X | X | X |
+| [IVdsDiskPartitionMF](#Section_3.1.12.9) | - | - | X | X | X | X |
 | IVdsDiskPartitionMF2 | - | - | - | - | X | X |
-| [IVdsVolumeMF2](#Section_3.4.5.2.35.1) | - | - | X | X | X | X |
+| [IVdsVolumeMF2](#Section_3.4.5.2.35.3) | - | - | X | X | X | X |
 | IVdsVolumeMF3 | - | - | - | - | X | X |
 | [IVdsVolumeShrink](#Section_3.4.5.2.37.1) | - | - | X | X | X | X |
-| [IVdsVolumeOnline](#Section_3.4.5.2.38) | - | - | - | - | X | X |
-| [IVdsHwProvider](#Section_3.1.9.3) | X | X | X | X | X | X |
-| [IVdsServiceLoader](#Section_3.4.5.2.3.1) | X | X | X | X | X | X |
+| [IVdsVolumeOnline](#Section_3.4.5.2.38.1) | - | - | - | - | X | X |
+| [IVdsHwProvider](#Section_3.4.5.2.16) | X | X | X | X | X | X |
+| [IVdsServiceLoader](#Section_3.1.4.1) | X | X | X | X | X | X |
 | [IVdsVdProvider](#Section_3.4.5.2.17) | - | - | - | - | X | X |
-| [IVdsVDisk](#Section_3.4.5.2.40.1) | - | - | - | - | X | X |
-| [IVdsOpenVDisk](#Section_3.4.5.2.41.5) | - | - | - | - | X | X |
-| [IVdsServiceSw](#Section_3.4.5.2.10.1) | - | - | - | - | - | X |
-| [IVdsSubSystemImportTarget](#Section_3.1.10.1) | - | X | X | X | X | X |
+| [IVdsVDisk](#Section_3.4.5.2.40) | - | - | - | - | X | X |
+| [IVdsOpenVDisk](#Section_3.4.5.2.41.2) | - | - | - | - | X | X |
+| [IVdsServiceSw](#Section_3.4.5.2.10) | - | - | - | - | - | X |
+| [IVdsSubSystemImportTarget](#Section_3.4.5.2.18.2) | - | X | X | X | X | X |
 
 The following list provides a brief overview of the functionality available for managing disks and volumes starting with the initial release of the Virtual Disk Service Remote Protocol in Windows Server 2003:
 
@@ -16666,17 +16666,17 @@ IVdsPack2 extends IVdsPack with functionality that is related to creating aligne
 
 IVdsDisk2 extends IVdsDisk with functionality that is related to bringing disks online and offline in [**clustered**](#gt_cluster) and other scenarios.
 
-[IVdsDisk3](#Section_3.4.5.2.23.2) extends IVdsDisk with functionality that is related to detecting the BIOS 0 disk or system disk. This allows a client to find the disk that will be used at boot as the system disk (hosts the system [**partition**](#gt_partition) on MBR disks or the ESP for [**GPT**](#gt_guid-partition-table-gpt) disks). Also, IVdsDisk3 extends IVdsDisk with functionality to return the list of free extents associated with a disk and to align those extents. The output of this method is useful as input when creating partitions and volumes.
+[IVdsDisk3](#Section_3.1.12.3) extends IVdsDisk with functionality that is related to detecting the BIOS 0 disk or system disk. This allows a client to find the disk that will be used at boot as the system disk (hosts the system [**partition**](#gt_partition) on MBR disks or the ESP for [**GPT**](#gt_guid-partition-table-gpt) disks). Also, IVdsDisk3 extends IVdsDisk with functionality to return the list of free extents associated with a disk and to align those extents. The output of this method is useful as input when creating partitions and volumes.
 
-[IVdsVolume2](#Section_3.4.5.2.33.1) extends IVdsVolume with functionality that is related to volume properties.
+[IVdsVolume2](#Section_3.1.13.2) extends IVdsVolume with functionality that is related to volume properties.
 
 IVdsVolumeMF2 extends IVdsVolumeMF with functionality that is related to [**file systems**](#gt_file-system).
 
-[IVdsVolumeMF3](#Section_3.4.5.2.36.3) extends IVdsVolumeMF with functionality that is related to file systems.
+[IVdsVolumeMF3](#Section_3.4.5.2.36) extends IVdsVolumeMF with functionality that is related to file systems.
 
 IVdsDiskPartitionMF contains functionality that is related to file systems.
 
-[IVdsDiskPartitionMF2](#Section_3.1.12.10) contains a format method that allows the user to specify metadata duplication when formatting as [**UDF**](#gt_user-defined-function-udf).
+[IVdsDiskPartitionMF2](#Section_3.4.5.2.30) contains a format method that allows the user to specify metadata duplication when formatting as [**UDF**](#gt_user-defined-function-udf).
 
 IVdsVolumeShrink contains functionality that is related to shrinking volumes.
 
@@ -16684,7 +16684,7 @@ IVdsVolumeOnline contains functionality that is related to bringing volumes back
 
 [**Interfaces**](#gt_interface) that are used when querying [**HBA**](#gt_host-bus-adapter-hba) and [**iSCSI initiator**](#gt_iscsi-initiator) information.
 
-The following interfaces, used when querying HBA and iSCSI initiator information, are not supported in Windows Server 2003: [IVdsServiceHba](#Section_3.4.5.2.7), [IVdsServiceIscsi](#Section_3.4.5.2.8), [IVdsHbaPort](#Section_3.4.5.2.11.2), [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12.2), and [IVdsIscsiInitiatorPortal](#Section_3.1.8.1).
+The following interfaces, used when querying HBA and iSCSI initiator information, are not supported in Windows Server 2003: [IVdsServiceHba](#Section_3.4.5.2.7.1), [IVdsServiceIscsi](#Section_3.1.5.5), [IVdsHbaPort](#Section_3.4.5.2.11), [IVdsIscsiInitiatorAdapter](#Section_3.4.5.2.12), and [IVdsIscsiInitiatorPortal](#Section_3.4.5.2.13).
 
 <4> Section 2.1: Windows configures the underlying [**RPC**](#gt_remote-procedure-call-rpc) transport by using the following flags. For more information on the meaning of these flags, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -16714,7 +16714,7 @@ The following interfaces, used when querying HBA and iSCSI initiator information
 
 <13> Section 2.2.1.2.22: No Win32 API path names are created. Win32 APIs such as FindFirstVolume and FindNextVolume do not enumerate this volume.
 
-<14> Section 2.2.1.2.23: For Windows Server 2003 and Windows Server 2003 R2, **VDS_VF_NO_DEFAULT_DRIVE_LETTER** cannot be set or cleared on [**dynamic disk**](#gt_dynamic-disk) volumes, and is always enabled. On [**basic disks**](#gt_basic-disk), it is disabled by default, and the flags can only be changed using the [IVdsVolume::SetFlags (section 3.4.5.2.32.10)](#Section_3.4.5.2.21.6) and [IvdsVolume::ClearFlag (section 3.4.5.2.32.11)](#Section_3.4.5.2.32.11) methods. Assigning or removing a [**drive letter**](#gt_drive-letter) does not toggle the flag for basic GPT disks.
+<14> Section 2.2.1.2.23: For Windows Server 2003 and Windows Server 2003 R2, **VDS_VF_NO_DEFAULT_DRIVE_LETTER** cannot be set or cleared on [**dynamic disk**](#gt_dynamic-disk) volumes, and is always enabled. On [**basic disks**](#gt_basic-disk), it is disabled by default, and the flags can only be changed using the [IVdsVolume::SetFlags (section 3.4.5.2.32.10)](#Section_3.4.5.2.4.15) and [IvdsVolume::ClearFlag (section 3.4.5.2.32.11)](#Section_3.4.5.2.32.11) methods. Assigning or removing a [**drive letter**](#gt_drive-letter) does not toggle the flag for basic GPT disks.
 
 <15> Section 2.2.1.2.23: Windows-based client and servers use [**BitLocker**](#gt_bitlocker) [**full-volume encryption**](#gt_full-volume-encryption) except Windows Server 2003 and Windows Server 2003 R2.
 
@@ -16877,7 +16877,7 @@ Group 6 is not supported in Windows Server 2003, Windows Server 2003 R2, Windows
 
 <70> Section 3.4.5.2: Windows-based servers enforce authorization checks. For information on the authorization requirements for the various methods, see section [2.1](#Section_2.1). In Windows, the client needs to be a member of the administrator or backup operators groups, or be the local_system account.
 
-<71> Section 3.4.5.2.4.1: In Windows, the [IVdsService::GetProperties](#Section_3.4.5.2.19.1) method will not fail if called before the service has finished initializing, but the data returned is not valid. Client applications wait for the service to finish initializing before making any calls against the service, other than [IVdsService::IsServiceReady](#Section_3.4.5.2.4.1) or [IVdsService::WaitForServiceReady](#Section_3.4.5.2.4.2).
+<71> Section 3.4.5.2.4.1: In Windows, the [IVdsService::GetProperties](#Section_3.4.5.2.14.1) method will not fail if called before the service has finished initializing, but the data returned is not valid. Client applications wait for the service to finish initializing before making any calls against the service, other than [IVdsService::IsServiceReady](#Section_3.4.5.2.4.1) or [IVdsService::WaitForServiceReady](#Section_3.4.5.2.4.2).
 
 <72> Section 3.4.5.2.4.8: Note the following issues in Windows Server 2003, Windows Server 2003 R2, Windows Vista, Windows Server 2008 R2, and Windows Server 2012: (1) The first entry's **wszName** field is overwritten with "UDF". The first entry's **wszName** field contains "FAT". (2) The string of illegal label characters for the second entry (the FAT32 entry), **pwszIllegalLabelCharSet**, is not set and contains an invalid string. (3) The fifth entry's **wszName** field is left unset. It is supposed to contain "UDF", but instead contains invalid characters.
 

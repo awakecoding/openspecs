@@ -507,7 +507,7 @@ Example: "Authorization": "Shared GKtPgocze1AM/pgc3LQzyGpDCRs15KoKx/2eXxlL8+w="
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 DSC-certificateRotation
 
-The server MAY<5> send a DSC-certificateRotation response header field for every message sent to the client except for **CertificateRotation** (section [3.12](#Section_3.12.5.1)) and **RegisterDscAgent** (section [3.9](#Section_3.9)) responses. The only allowed value is “True”. All other values are reserved. The value “True” indicates that the client SHOULD attempt the **CertificateRotation** message.
+The server MAY<5> send a DSC-certificateRotation response header field for every message sent to the client except for **CertificateRotation** (section [3.12](#Section_2.2.2.8)) and **RegisterDscAgent** (section [3.9](#Section_3.9)) responses. The only allowed value is “True”. All other values are reserved. The value “True” indicates that the client SHOULD attempt the **CertificateRotation** message.
 
 DSC-certificateRotation = "DSC-certificateRotation:" DQUOTE DSC-certificateRotation-Namevalue DQUOTE CRLF
 
@@ -1213,7 +1213,7 @@ The StatusReportContent packet does not contain any data.
 <a id="Section_3.4.5.1.1.3"></a>
 ###### 3.4.5.1.1.3 Processing Details
 
-The client sends the SendStatusReport request with content-type as application/json to the server with a request body as specified in section [3.4.5.1.1.1](#Section_3.4.5.1.1.1). The client MUST include JobId in the request body. The server responds back with status codes as specified in section [3.4.5.1.1](#Section_3.4.5.1.1.1).
+The client sends the SendStatusReport request with content-type as application/json to the server with a request body as specified in section [3.4.5.1.1.1](#Section_3.4.5.1.1.1). The client MUST include JobId in the request body. The server responds back with status codes as specified in section [3.4.5.1.1](#Section_3.4.5.1.1.2).
 
 <a id="Section_3.4.6"></a>
 ### 3.4.6 Timer Events
@@ -1228,7 +1228,7 @@ None.
 <a id="Section_3.5"></a>
 ## 3.5 GetStatusReport Versions 1.0 and 1.1 Details
 
-The GetStatusReport request SHOULD<9> get the status report from the server, as specified in section [3.5.5.1.1](#Section_3.5.5.1.1.2). The GetStatusReport request maps to the HTTP GET request with content-type as application/json, as specified in Appendix A: Full JSON Schema (section [6](#Section_6)), as part of the request.
+The GetStatusReport request SHOULD<9> get the status report from the server, as specified in section [3.5.5.1.1](#Section_3.5.5.1.1.3). The GetStatusReport request maps to the HTTP GET request with content-type as application/json, as specified in Appendix A: Full JSON Schema (section [6](#Section_6)), as part of the request.
 
 <a id="Section_3.5.1"></a>
 ### 3.5.1 Abstract Data Model
@@ -1352,7 +1352,7 @@ StatusReportContent represents a [**BLOB**](#gt_binary-large-object-blob).
 <a id="Section_3.5.5.1.1.3"></a>
 ###### 3.5.5.1.1.3 Processing Details
 
-The client sends the GetStatusReport request with the content-type as application/json to the server with a request body as specified in section [3.5.5.1.1.1](#Section_3.5.5.1.1.1). The server responds back with status codes as specified in section [3.5.5.1.1](#Section_3.5.5.1.1.2).
+The client sends the GetStatusReport request with the content-type as application/json to the server with a request body as specified in section [3.5.5.1.1.1](#Section_3.5.5.1.1.1). The server responds back with status codes as specified in section [3.5.5.1.1](#Section_3.5.5.1.1.3).
 
 <a id="Section_3.5.6"></a>
 ### 3.5.6 Timer Events
@@ -1998,7 +1998,7 @@ RegisterDscAgentContent represents a BLOB.
 <a id="Section_3.9.5.1.1.3"></a>
 ###### 3.9.5.1.1.3 Processing Details
 
-The client sends the RegisterDscAgent request with the content-type as application/json to the server with a request body as specified in section [3.9.5.1.1.1](#Section_3.9.5.1.1.1). The server responds back with status codes as specified in section [3.9.5.1.1](#Section_3.9.5.1.1.2).
+The client sends the RegisterDscAgent request with the content-type as application/json to the server with a request body as specified in section [3.9.5.1.1.1](#Section_3.9.5.1.1.1). The server responds back with status codes as specified in section [3.9.5.1.1](#Section_3.9.5.1.1).
 
 <a id="Section_3.9.6"></a>
 ### 3.9.6 Timer Events
@@ -2169,7 +2169,7 @@ The ReportContent packet does not contain any data.
 <a id="Section_3.10.5.1.1.3"></a>
 ###### 3.10.5.1.1.3 Processing Details
 
-The client sends the SendReport request with content-type as application/json to the server with a request body as specified in section [3.10.5.1.1.1](#Section_3.10.5.1.1.1). The client MUST include JobId in the request body. The server responds back with status codes as specified in section [3.10.5.1.1](#Section_3.10.5.1.1).
+The client sends the SendReport request with content-type as application/json to the server with a request body as specified in section [3.10.5.1.1.1](#Section_3.10.5.1.1.1). The client MUST include JobId in the request body. The server responds back with status codes as specified in section [3.10.5.1.1](#Section_3.10.5.1.1.2).
 
 <a id="Section_3.10.6"></a>
 ### 3.10.6 Timer Events

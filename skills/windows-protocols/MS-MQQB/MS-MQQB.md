@@ -427,7 +427,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [LDAP] Microsoft Corporation, "About Lightweight Directory Access Protocol", [http://msdn.microsoft.com/en-us/library/aa366075.aspx](https://go.microsoft.com/fwlink/?LinkId=89932)
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3.1)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -1179,9 +1179,9 @@ The Message Queuing (MSMQ): Message Queuing Binary Protocol is often described a
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](#Section_1.3.1) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](#Section_1.3.1) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3.1).
 
-Section [3.1.1.2](#Section_3.1.1.2) specifies the elements from the shared data model that are manipulated by this protocol. Sections [3.1.1.3](#Section_3.1.1.3) through [3.1.1.5](#Section_1.3.2.1.3) specify the data model elements that are private to this protocol.
+Section [3.1.1.2](#Section_3.1.1.2) specifies the elements from the shared data model that are manipulated by this protocol. Sections [3.1.1.3](#Section_3.1.1.3) through [3.1.1.5](#Section_3.1.1.5) specify the data model elements that are private to this protocol.
 
 **Abstract Data Model Syntax**
 
@@ -1406,11 +1406,11 @@ The sender and receiver MUST independently maintain the following ADM elements f
 | WAITING_CPR_MSG | The protocol is waiting for a ConnectionParameters Packet response packet. |
 | WAITING_EC_MSG | The protocol is waiting for an [EstablishConnection Packet](#Section_2.2.3). |
 | WAITING_ECR_MSG | The protocol is waiting for an EstablishConnection Packet response packet. |
-| WAITING_RECONNECT | The protocol is waiting for the [Session Retry Connect Timer Event (section 3.1.6.1)](#Section_3.1.2.3). |
+| WAITING_RECONNECT | The protocol is waiting for the [Session Retry Connect Timer Event (section 3.1.6.1)](#Section_3.1.6.1). |
 
 **SessionActive:** A Boolean value that is set to TRUE when there is activity on the session. This value is used by the [Session Cleanup Timer (section 3.1.2.2)](#Section_3.1.2.2) to identify when there has been message activity since the last [Session Cleanup Timer Event (section 3.1.6.2)](#Section_3.1.2.2).
 
-**ReceivedAck:** A Boolean value that is set to TRUE when there is activity on the session. This value is used by the [Session Ack Wait Timer (section 3.1.2.4)](#Section_3.1.2.4) to identify when there has been message activity since the last [Session Ack Wait Timer Event (section 3.1.6.3)](#Section_3.1.2.4).
+**ReceivedAck:** A Boolean value that is set to TRUE when there is activity on the session. This value is used by the [Session Ack Wait Timer (section 3.1.2.4)](#Section_3.1.2.4) to identify when there has been message activity since the last [Session Ack Wait Timer Event (section 3.1.6.3)](#Section_3.1.6.3).
 
 **AckWaitTimeout:** Time, in milliseconds, that the protocol waits before closing the session because its messages are not acknowledged.
 
@@ -1546,7 +1546,7 @@ The receiver utilizes session sequence numbers when acknowledging receipt of exp
 
 To provide EOIO guarantees for [**transactional messages**](#gt_transactional-message), the protocol organizes transactional **UserMessage Packet**s ([MS-MQMQ](#Section_1.3.1) section 2.2.20) into transactional [**sequences**](#gt_sequence). A transactional message sequence is independent of the session [**message**](#gt_message) sequence of section [3.1.1.4](#Section_3.1.1.4). A transactional message is identified by a sequence number and a transactional sequence identifier pair. The transactional sequence identifier identifies the transaction, and the sequence number identifies the order of the message in that transaction. The first message within a transactional sequence is assigned a sequence number of 1. Only one transactional sequence is active at a given time.
 
-The protocol maintains the following transactional sequence state for each session, as specified in section [3.1.1.3.1](#Section_3.1.1.3.1):
+The protocol maintains the following transactional sequence state for each session, as specified in section [3.1.1.3.1](#Section_3.1.1.3.1.3):
 
 - **OutgoingTxSequenceID**: A **TxSequenceID** ([MS-MQMQ] section 2.2.18.1.2) that identifies the current outgoing sequence of transactional messages.
 - **OutgoingTxSequenceNumber**: A 32-bit unsigned integer. This ADM element is the sequence number of the next outgoing transactional **UserMessage Packet** to be sent on this session.
@@ -1598,7 +1598,7 @@ The receiver sends session acknowledgments to the sender at intervals defined by
 <a id="Section_3.1.1.6.2"></a>
 ##### 3.1.1.6.2 Transactional Acknowledgment
 
-Transactional acknowledgments related to the Transactional Message Sequence are specified in [Transactional Message Sequence (section 3.1.1.5)](#Section_1.3.2.1.3).
+Transactional acknowledgments related to the Transactional Message Sequence are specified in [Transactional Message Sequence (section 3.1.1.5)](#Section_3.1.1.5).
 
 Transactional acknowledgments are end-to-end acknowledgments. Processing of transactional [**sequences**](#gt_sequence) MUST be done only by the original sender [**queue manager**](#gt_queue-manager-qm) and the final destination queue manager. An intermediate queue manager that receives a [Transactional Message](#Section_1.3.2.1.3) MUST pass the **TransactionHeader** ([MS-MQMQ](#Section_1.3.1) section 2.2.20.5) to the next destination but MUST NOT perform any processing related to the transactional sequence.
 
@@ -1743,7 +1743,7 @@ This timer regulates the amount of time that the protocol waits before removing 
 <a id="Section_3.1.2.13"></a>
 #### 3.1.2.13 UserCertCache Cleanup Timer
 
-This timer regulates the amount of time that the protocol waits before removing expired [CachedUserCert (section 3.1.1.3.4)](#Section_3.1.1.3.4) ADM element instances from the **UserCertCache** ADM element. This timer is set either when a **CachedUserCert** ADM element instance is added to the **UserCertCache** ADM element, as specified in section [3.1.5.8.3](#Section_3.1.5.8.3), or when the [UserCertCache Cleanup Timer Event (section 3.1.6.13)](#Section_3.1.6.13) is processed.
+This timer regulates the amount of time that the protocol waits before removing expired [CachedUserCert (section 3.1.1.3.4)](#Section_3.1.1.3.4) ADM element instances from the **UserCertCache** ADM element. This timer is set either when a **CachedUserCert** ADM element instance is added to the **UserCertCache** ADM element, as specified in section [3.1.5.8.3](#Section_3.1.5.8.3), or when the [UserCertCache Cleanup Timer Event (section 3.1.6.13)](#Section_3.1.2.13) is processed.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -1939,7 +1939,7 @@ If **destinationQmGuid** is not equal to all zero bytes, the protocol MUST obtai
 <a id="Section_3.1.5.2.2"></a>
 ##### 3.1.5.2.2 Ping Mechanism
 
-If the session is not being created in response to a [Session Retry Connect Timer Event (section 3.1.6.1)](#Section_3.1.2.3), the [**initiator**](#gt_initiator) MAY send a **Ping Request**, as specified in [Ping Message (section 2.1.2)](#Section_2.1.2) to the [**acceptor**](#gt_acceptor) and receive a **Ping Response**, as specified in Ping Message (section 2.1.2), before attempting to establish a session.<56>This mechanism provides the initiator with information about whether a connection is likely to be accepted. The result in the **Ping Response** is not a guarantee, because the acceptor state could change before it receives the [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3) from the initiator. If the initiator sends a **Ping Request**, it MUST do the following:
+If the session is not being created in response to a [Session Retry Connect Timer Event (section 3.1.6.1)](#Section_3.1.6.1), the [**initiator**](#gt_initiator) MAY send a **Ping Request**, as specified in [Ping Message (section 2.1.2)](#Section_2.1.2) to the [**acceptor**](#gt_acceptor) and receive a **Ping Response**, as specified in Ping Message (section 2.1.2), before attempting to establish a session.<56>This mechanism provides the initiator with information about whether a connection is likely to be accepted. The result in the **Ping Response** is not a guarantee, because the acceptor state could change before it receives the [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3) from the initiator. If the initiator sends a **Ping Request**, it MUST do the following:
 
 - Raise a [Send Ping Request (section 3.1.7.6)](#Section_3.1.7.6) event with the following argument:
 - *iAddress*: the address resolved in **destinationHostName** as specified in [Resolve Host Address (section 3.1.5.2.1)](#Section_3.1.5.2.1).
@@ -1966,7 +1966,7 @@ The **SessionState** value MUST be set to WAITING_ECR_MSG. An entry MUST be appe
 
 After the EstablishConnection Packet is sent, the protocol MUST start the Session Initialization Timer.
 
-See [Receiving an EstablishConnection Packet (section 3.1.5.3)](#Section_3.1.5.3) for the next step in session initialization.
+See [Receiving an EstablishConnection Packet (section 3.1.5.3)](#Section_2.2.3) for the next step in session initialization.
 
 If the **OutgoingQueueReference.State** is not **OnHold**, **OutgoingQueueReference.State** MUST be set to **Waiting**.
 
@@ -2020,7 +2020,7 @@ The protocol MUST reply to a connection response by sending a [ConnectionParamet
 - The **ConnectionParametersHeader.WindowSize** field MUST be set to the **WindowSize** ADM element.
 The **SessionState** ADM element value MUST be set to WAITING_CPR_MSG. An entry MUST be appended to the **OutgoingQueueReference.ConnectionHistory** array; the **Status** ADM attribute of the array entry MUST be set to **EstablishPacketReceived**; the **ConnectionHistoryTime** ADM attribute of the array entry MUST be set to the current time; the **Error** ADM attribute of the array entry MUST be set to zero; and the **AddressList** ADM attribute of the array entry MUST be set to the **RemoteQMAddress** ADM element.
 
-See [Receiving a ConnectionParameters Packet (section 3.1.5.4)](#Section_3.1.5.4) for the next step in session initialization.
+See [Receiving a ConnectionParameters Packet (section 3.1.5.4)](#Section_2.2.2) for the next step in session initialization.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receiving a ConnectionParameters Packet
@@ -2074,7 +2074,7 @@ The protocol MUST perform the following steps to process a SessionHeader:
 - [Mark Acknowledged Messages](#Section_3.1.5.5.1)
 - [Delete Acknowledged Express Messages](#Section_3.1.5.5.2)
 - [Delete Acknowledged Recoverable Messages](#Section_3.1.5.5.3)
-- [Source Journaling](#Section_1.3.4)
+- [Source Journaling](#Section_3.1.5.5.4)
 - [Validate Message Counts](#Section_3.1.5.5.5)
 <a id="Section_3.1.5.5.1"></a>
 ##### 3.1.5.5.1 Mark Acknowledged Messages
@@ -2124,7 +2124,7 @@ Each recoverable [**transactional message**](#gt_transactional-message) MUST be 
 
 If the **SessionState** ADM element is not set to the value OPEN, the protocol MUST close the session as specified in [Closing a Session (section 3.1.5.9)](#Section_3.1.5.9).
 
-The ADM elements and ADM attributes defined in [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1) MUST be updated as follows:
+The ADM elements and ADM attributes defined in [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1.3) MUST be updated as follows:
 
 - **TxOutgoingSequence.TimeOfLastAck** MUST be set to the local system time.
 - **TxOutgoingSequence.ResendIntervalIndex** MUST be incremented by 1. If the new value is greater than the number of entries in the **ResendTimerTable** ADM element, it MUST be set to the index of the last entry. **TxOutgoingSequence.ResendInterval** MUST be set to the value at the index corresponding to **TxOutgoingSequence.ResendIntervalIndex** in the **ResendTimerTable** ADM element.
@@ -2175,7 +2175,7 @@ If the **SessionState** ADM element is not set to the value OPEN, the protocol M
 Processing a UserMessage Packet consists of the following [**sequence**](#gt_sequence) of operations. The protocol MUST perform the following steps to process a UserMessage Packet:
 
 - [Duplicate Detection](#Section_3.1.5.8.1)
-- [General Processing](#Section_3.1.7.1.1)
+- [General Processing](#Section_3.1.5.8.2)
 - [Security](#Section_3.1.5.8.3)
 - [SessionHeader Processing](#Section_3.1.5.8.4)
 - [Message Expiration](#Section_3.1.7.1.2)
@@ -2734,7 +2734,7 @@ The following steps MUST be performed to process this event:
 - If *iQueue*.**State** is not equal to **Connected**, take no further action.
 - If the **UnAckedMessageCount** ADM element is greater than or equal to the **WindowSize** ADM element, take no further action.
 - If the **OutgoingQueueReference** ADM element of the session is NULL, set it to *iQueue*.
-- [General Processing (section 3.1.7.1.1)](#Section_3.1.7.1.1).
+- [General Processing (section 3.1.7.1.1)](#Section_3.1.5.8.2).
 - [Checking for Message Expiration (section 3.1.7.1.2)](#Section_3.1.7.1.2).
 - [Signing the Packet (section 3.1.7.1.4)](#Section_3.1.7.1.4).
 - [Encrypting the Message Body (section 3.1.7.1.5)](#Section_3.1.7.1.5.2).
@@ -2778,7 +2778,7 @@ If the **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) contain
 - The **UserMessage.TransactionHeader.PreviousTxSequenceNumber** field MUST be set to the **OutgoingTxSequenceNumber** ADM element - 1.
 - The **UserMessage.TransactionHeader.TxSequenceNumber** field MUST be set to the **OutgoingTxSequenceNumber** ADM element.
 - *iPosition*.**TxSequenceNumber** MUST be set to the **OutgoingTxSequenceNumber** ADM element.
-- A new **SEQUENCE_INFO** ([MS-MQMQ] section 2.2.5) structure instance MUST be created and inserted into **TxOutgoingSequence.UnackedSequence**. The **SEQUENCE_INFO** structure MUST be created and set as specified in section [3.1.1.5](#Section_1.3.2.1.3).
+- A new **SEQUENCE_INFO** ([MS-MQMQ] section 2.2.5) structure instance MUST be created and inserted into **TxOutgoingSequence.UnackedSequence**. The **SEQUENCE_INFO** structure MUST be created and set as specified in section [3.1.1.5](#Section_3.1.1.5).
 - The **OutgoingTxSequenceNumber** ADM element value MUST be incremented by 1.
 - The [Transactional Ack Wait Timer (section 3.1.2.6)](#Section_3.1.2.6) MUST be started.
 If the **UserMessage Packet** contains a **TransactionHeader** and *iPosition*.**Transmitted** is TRUE, the **TransactionHeader.PreviousTxSequenceNumber** field MUST be set to the **TxSequenceNumber** ADM element of the previous transactional message in the **OutgoingMessageTable** ADM element. This action is necessary to bridge gaps left by transactional messages that were removed from the table (for example, **TimeToReachQueue** expired) since the message was first sent.
@@ -3071,7 +3071,7 @@ The protocol MUST perform the following actions to process this event:
 - The remaining fields of *Request* MUST be initialized as specified in section 2.2.7 for an [**initiator**](#gt_initiator).
 - *Request* MUST be sent as a **Ping Request** to the acceptor specified by the *iAddress* argument as specified in section 2.1.2.
 - Start a new instance of the [Ping Response Timer (section 3.1.2.9)](#Section_3.1.2.9).
-- Wait for either the [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.6.8) raised by the instance of the Ping Response Timer started in the previous step or a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event.
+- Wait for either the [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.2.9) raised by the instance of the Ping Response Timer started in the previous step or a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event.
 - If the Ping Response Timer Event is raised, set *rStatus* to FALSE and take no further action.
 - Otherwise, if a Ping Response Processed event is raised, determine the value of *rStatus* based on the *Response* processed by the [Receive Ping Response (section 3.1.7.8)](#Section_3.1.7.8) event. If the *Response*.**Flags.RF** field is 0x0, *rStatus* MUST be set to TRUE; otherwise, *rStatus* MUST be set to FALSE. The instance of the Ping Response Timer is canceled.
 <a id="Section_3.1.7.7"></a>
@@ -3096,7 +3096,7 @@ The Receive Ping Response event is triggered when a packet is received on the UD
 - Let *Response* be a reference to a [Ping Packet (section 2.2.7)](#Section_2.2.7), initialized to refer to the Ping Response (section 2.1.2) received.
 - If the *Response*.**Signature** field is not 0x5548, the protocol MUST ignore the packet and take no further action.
 - If the *Response*.**Cookie** field has a different value from the **PingCookie** ADM element, the protocol MUST ignore the packet and take no further action.
-- If a [Send Ping Request (section 3.1.7.6)](#Section_3.1.7.6) event is waiting for a [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.6.8) as specified in step 8 of section 3.1.7.6, the protocol MUST raise a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event. Otherwise, the protocol MUST ignore the packet and take no further action.
+- If a [Send Ping Request (section 3.1.7.6)](#Section_3.1.7.6) event is waiting for a [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.2.9) as specified in step 8 of section 3.1.7.6, the protocol MUST raise a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event. Otherwise, the protocol MUST ignore the packet and take no further action.
 <a id="Section_3.1.7.9"></a>
 #### 3.1.7.9 Ping Response Processed
 
@@ -3176,7 +3176,7 @@ This event is triggered when the Pause Queue ([MS-MQDMPR](#Section_1.3.1) sectio
 - The **SessionHeader.RecoverableMsgSeqNumber** field MUST be set to the **RecoverableMessageSentCount** ADM element.
 - The **SessionHeader.RecoverableMsgAckFlags** field MUST be set to the **RecoverableMsgAckFlags** ADM element.
 - The **SessionHeader.WindowSize** field MUST be set to 0x0001.
-Subsequently, the [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1) ADM elements MUST be updated as follows:
+Subsequently, the [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1.3) ADM elements MUST be updated as follows:
 
 - The **RecoverableMsgAckFlags** ADM element MUST be set to 0x00000000.
 - The **UnackedReceivedMsgCount** ADM element MUST be set to 0x0000, and the **LastAckedRecoverableMsgSeqNumber** ADM element MUST be set to the **RecoverableMessageReceivedCount** ADM element.

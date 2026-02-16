@@ -401,14 +401,14 @@ The protocol further restricts the values that can be assigned to HeaderValue. H
 | HeaderValue | Purpose |
 | --- | --- |
 | [System Access](#Section_2.2.1) | MUST contain settings that pertain to account lockout, password policies, and local security options. |
-| [Kerberos Policy](#Section_3.2.5.4) | MUST contain settings that pertain to the Kerberos policy, as specified in [[RFC1510]](https://go.microsoft.com/fwlink/?LinkId=90279). |
+| [Kerberos Policy](#Section_2.2.2) | MUST contain settings that pertain to the Kerberos policy, as specified in [[RFC1510]](https://go.microsoft.com/fwlink/?LinkId=90279). |
 | System Log | MUST contain settings that pertain to maximum size, retention policy, and so on for the system log. For more details, see section [2.2.3](#Section_2.2.3). |
 | Security Log | MUST contain settings that pertain to maximum size, retention policy, and so on for the security log. For more details, see section 2.2.3. |
 | Application Log | MUST contain settings that pertain to maximum size, retention policy, and so on for the application log. For more details, see section 2.2.3. |
-| [Event Audit](#Section_3.2.5.6) | MUST contain settings that pertain to audit policy. |
-| [Registry Values](#Section_2.2.5) | MUST contain registry values to be configured. |
-| [Privilege Rights](#Section_3.2.5.8) | MUST contain a list of privileges to be assigned to specific accounts. |
-| [Service General Setting](#Section_3.2.5.10) | MUST contain configuration settings that pertain to services. |
+| [Event Audit](#Section_2.2.4) | MUST contain settings that pertain to audit policy. |
+| [Registry Values](#Section_3.2.5.7) | MUST contain registry values to be configured. |
+| [Privilege Rights](#Section_2.2.6) | MUST contain a list of privileges to be assigned to specific accounts. |
+| [Service General Setting](#Section_2.2.8) | MUST contain configuration settings that pertain to services. |
 | [Registry Keys](#Section_2.2.7) | MUST contain a list of registry keys and their corresponding security information to be applied. |
 | [File Security](#Section_2.2.9) | MUST contain a list of files, folders, and their corresponding security information to be applied. |
 | [Group Membership](#Section_3.2.5.12) | MUST contain group membership information, for example, which users are part of what group. |
@@ -878,7 +878,7 @@ The following table explains each of the settings listed.
 <a id="Section_2.2.11"></a>
 ### 2.2.11 User Account Control
 
-This section defines settings that enable the administrator to configure the behavior of the User Account Control feature. For details on how the settings listed in this section SHOULD<6> be defined, see sections [2.2.5](#Section_2.2.5) and [2.2.7](#Section_2.2.7).
+This section defines settings that enable the administrator to configure the behavior of the User Account Control feature. For details on how the settings listed in this section SHOULD<6> be defined, see sections [2.2.5](#Section_3.2.5.7) and [2.2.7](#Section_2.2.7).
 
 <a id="Section_2.2.11.1"></a>
 #### 2.2.11.1 FilterAdministratorToken
@@ -1335,7 +1335,7 @@ Perform external behavior consistent with locally invoking SamrSetInformationUse
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Kerberos Policy
 
-If the Key value is any value other than those listed as valid in the table in section [2.2.2](#Section_3.2.5.4), the client MUST stop processing Kerberos policy settings and log an error.
+If the Key value is any value other than those listed as valid in the table in section [2.2.2](#Section_2.2.2), the client MUST stop processing Kerberos policy settings and log an error.
 
 The existing Kerberos Policy MUST be retrieved by performing the external behavior consistent with locally invoking **LsarQueryDomainInformationPolicy** ([MS-LSAD](#Section_5) section 3.1.4.4.7).
 
@@ -1378,9 +1378,9 @@ The registry values in the right column of the following table are set to the va
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Event Audit Policies
 
-If the DWORD registry value MACHINE\System\CurrentControlSet\Control\LSA\SCENoApplyLegacyAuditPolicy is set to 1 using the mechanism described in section [2.2.5](#Section_2.2.5), then the client-side plug-in MUST ignore any settings under the Event Audit Policies section and MUST NOT process them. If this registry value is set to 1, it indicates that the Advanced Audit Policies are present on the client.<10>
+If the DWORD registry value MACHINE\System\CurrentControlSet\Control\LSA\SCENoApplyLegacyAuditPolicy is set to 1 using the mechanism described in section [2.2.5](#Section_3.2.5.7), then the client-side plug-in MUST ignore any settings under the Event Audit Policies section and MUST NOT process them. If this registry value is set to 1, it indicates that the Advanced Audit Policies are present on the client.<10>
 
-The value of the key element MUST be one of the values specified in the table in section [2.2.4](#Section_3.2.5.6); otherwise, the client MUST log an error and stop processing Event Audit Policies. The value element MUST be an integer; otherwise, the client logs an error and stop processing Event Audit Policies.
+The value of the key element MUST be one of the values specified in the table in section [2.2.4](#Section_2.2.4); otherwise, the client MUST log an error and stop processing Event Audit Policies. The value element MUST be an integer; otherwise, the client logs an error and stop processing Event Audit Policies.
 
 Settings in Event Audit Policies (section 2.2.4) MUST be set by performing the external behavior consistent with locally invoking LsarSetInformationPolicy (section 3.1.4.4.6) ([MS-LSAD](#Section_5) section 3.1.4.4.6).
 
@@ -1412,7 +1412,7 @@ In addition, the value of each setting (section 2.2.4) is mapped to the values o
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Registry Values
 
-Settings in [Registry Values (section 2.2.5)](#Section_2.2.5) MUST be set by adding registry values.
+Settings in [Registry Values (section 2.2.5)](#Section_3.2.5.7) MUST be set by adding registry values.
 
 If the Key value is any value other than those listed as valid in the table in section 2.2.5, an error SHOULD be logged and the client MUST stop processing Registry Value settings.
 
@@ -1426,7 +1426,7 @@ Registry values MUST be added by performing the external behavior consistent wit
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 Privilege Rights
 
-Settings in [Privilege Rights (section 2.2.6)](#Section_3.2.5.8) MUST be set by adding privilege rights.
+Settings in [Privilege Rights (section 2.2.6)](#Section_2.2.6) MUST be set by adding privilege rights.
 
 If a setting or value does not conform to the valid corresponding values as specified in section 2.2.6, the client SHOULD stop processing Privilege Rights settings.
 
@@ -1478,7 +1478,7 @@ If PermPropagationMode is "2", the security descriptor **Control** field bit PD 
 <a id="Section_3.2.5.10"></a>
 #### 3.2.5.10 Service General Setting
 
-Settings in [Service General Setting (section 2.2.8)](#Section_3.2.5.10) MUST be set by applying start up configuration and security descriptors on services for each setting.
+Settings in [Service General Setting (section 2.2.8)](#Section_2.2.8) MUST be set by applying start up configuration and security descriptors on services for each setting.
 
 If a ServiceName, StartupMode, or AclString value is not valid as specified in section 2.2.8, the client stops processing Service General Setting and logs an error.
 
@@ -1755,15 +1755,15 @@ The ClearTextPassword flag, as specified in section [2.2.1.1](#Section_2.2.1.1),
 | Settings category | Comments |
 | --- | --- |
 | System Access | Defined in section [2.2.1](#Section_2.2.1). |
-| Kerberos Policy | Defined in section [2.2.2](#Section_3.2.5.4). |
+| Kerberos Policy | Defined in section [2.2.2](#Section_2.2.2). |
 | System Log | Defined in section [2.2.3](#Section_2.2.3). |
 | Security Log | Defined in section 2.2.3. |
 | Application Log | Defined in section 2.2.3. |
-| Event Audit | Defined in section [2.2.4](#Section_3.2.5.6). |
-| Registry Values | Defined in section [2.2.5](#Section_2.2.5). |
-| Privilege Rights | Defined in section [2.2.6](#Section_3.2.5.8). |
+| Event Audit | Defined in section [2.2.4](#Section_2.2.4). |
+| Registry Values | Defined in section [2.2.5](#Section_3.2.5.7). |
+| Privilege Rights | Defined in section [2.2.6](#Section_2.2.6). |
 | Registry Key | Defined in section [2.2.7](#Section_2.2.7). |
-| Service General Setting | Defined in section [2.2.8](#Section_3.2.5.10). |
+| Service General Setting | Defined in section [2.2.8](#Section_2.2.8). |
 | File Security | Defined in section [2.2.9](#Section_2.2.9). |
 | Group Membership | Defined in section [2.2.10](#Section_3.2.5.12). |
 

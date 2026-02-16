@@ -236,7 +236,7 @@ The steps describing the CLR and the .NET object interaction are as follows:
 
 - A COM object, which is a CCW wrapping a local CLR object, reenters the CLR through a COM call. The CLR calls the **QueryInterface** method on the CCW for the IManagedObject interface in order to determine whether this COM object is a CCW or not.
 - Since the COM object is a CCW, it returns the IManagedObject call with S_OK and a pointer to its IManagedObject interface.
-- The CLR calls [IManagedObject::GetObjectIdentity](#Section_3.1.4.1) on the IManagedObject interface obtained in step 2 in order to determine if the object is local to the current process and application domain.
+- The CLR calls [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) on the IManagedObject interface obtained in step 2 in order to determine if the object is local to the current process and application domain.
 - The CCW responds back with its ID, and the CLR notes that this ID is local to the current process and application domain.
 - As established in step 4, the wrapped object belongs to this instance of the CLR, and the CLR can interact with the object directly instead of going through an RCW / CCW pair and communicating over a COM channel.
 In cases in which the .NET object is in a different process division (different application domain or process), a remoting proxy is used to interact with the .NET object. In such a case, the CCW implementing IManagedObject returns a **Server Object Identity** / *AppDomainID* from IManagedObject::GetObjectIdentity that does not correspond to the current process. The CLR will then ask for the remoting ID for the object ([IManagedObject::GetSerializedBuffer](#Section_3.1.4.1)). This can be used to generate a transparent remoting proxy to communicate to the original object. At this point, the communication endpoints are now remoting .NET objects, and CCWs / RCWs are not used:
@@ -273,7 +273,7 @@ Figure 3: IManagedObject request-response
 <a id="Section_1.3.1"></a>
 ### 1.3.1 IRemoteDispatch Interface and IServicedComponentInfo Interface
 
-A server [**object**](#gt_object) instance can associate a unique identity with itself. This identity can be used by the client to track multiple instances of the server object. The server can use [IServicedComponentInfo](#Section_3.1.4.3) to allow the client to query for its identity.
+A server [**object**](#gt_object) instance can associate a unique identity with itself. This identity can be used by the client to track multiple instances of the server object. The server can use [IServicedComponentInfo](#Section_1.3.1) to allow the client to query for its identity.
 
 The [IRemoteDispatch](#Section_1.3.1) interface can be used by the server to provide an alternative way to dispatch method calls on its object instance. A client can further use this interface to perform [**deactivation**](#gt_deactivation) of the server object instance.
 
@@ -284,7 +284,7 @@ This protocol uses the OLE Automation Protocol [MS-OAUT](../MS-OAUT/MS-OAUT.md),
 
 The [IManagedObject](#Section_3.1.4.1) interface uses the Distributed Component Object Model (DCOM) Remote Protocol [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-The [IRemoteDispatch](#Section_1.3.1) and [IServicedComponentInfo](#Section_3.1.4.3) interfaces use DCOM [MS-DCOM] to communicate over the wire and to authenticate all requests issued against the infrastructure.
+The [IRemoteDispatch](#Section_1.3.1) and [IServicedComponentInfo](#Section_1.3.1) interfaces use DCOM [MS-DCOM] to communicate over the wire and to authenticate all requests issued against the infrastructure.
 
 This protocol allows for encodings defined in [MS-NRTP](../MS-NRTP/MS-NRTP.md) and [MS-NRBF](../MS-NRBF/MS-NRBF.md).
 
@@ -309,7 +309,7 @@ Interoperability between the CLR and COM offers the following benefits.
 - The managed identity of an object is not lost when it is passed out to COM and then back to the CLR.
 The [IRemoteDispatch](#Section_1.3.1) interface is used for method call dispatch and deactivation.
 
-The [IServicedComponentInfo](#Section_3.1.4.3) interface is used for determining server object instance identity.
+The [IServicedComponentInfo](#Section_1.3.1) interface is used for determining server object instance identity.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -338,7 +338,7 @@ This protocol uses Win32 error codes. These values are taken from the Windows e
 | --- | --- |
 | IManagedObject {C3FCC19E-A970-11D2-8B5A-00A0C9B7C9C4} | The [**GUID**](#gt_globally-unique-identifier-guid) associated with the [IManagedObject](#Section_3.1.4.1) interface. |
 | IRemoteDispatch {6619a740-8154-43be-a186-0319578e02db} | The GUID associated with the [IRemoteDispatch](#Section_1.3.1) interface. |
-| IServicedComponentInfo {8165B19E-8D3A-4d0b-80C8-97DE310DB583} | The GUID associated with the [IServicedComponentInfo](#Section_3.1.4.3) interface. |
+| IServicedComponentInfo {8165B19E-8D3A-4d0b-80C8-97DE310DB583} | The GUID associated with the [IServicedComponentInfo](#Section_1.3.1) interface. |
 
 <a id="Section_2"></a>
 # 2 Messages
@@ -391,7 +391,7 @@ typedef int* CCW_PTR;
 
 The following sections specify details of the IManagedObject Interface Protocol, including abstract data model, interface method syntax, and message processing rules.
 
-The [IRemoteDispatch](#Section_1.3.1) and [IServicedComponentInfo](#Section_3.1.4.3) client applications initiate the conversation with the server by performing remote protocol [**activation**](#gt_activation) ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.1.1) of an application-specific [**CLSID**](#gt_class-identifier-clsid) of an [**object**](#gt_object) that supports these interfaces. After the client application uses activation to get the [**interface pointer**](#gt_interface-pointer) to the remote protocol object, it works with this object by making calls on the remote protocol interface supported by the object. After it has finished making calls, the client application does a release on the interface pointer.
+The [IRemoteDispatch](#Section_1.3.1) and [IServicedComponentInfo](#Section_1.3.1) client applications initiate the conversation with the server by performing remote protocol [**activation**](#gt_activation) ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.1.1) of an application-specific [**CLSID**](#gt_class-identifier-clsid) of an [**object**](#gt_object) that supports these interfaces. After the client application uses activation to get the [**interface pointer**](#gt_interface-pointer) to the remote protocol object, it works with this object by making calls on the remote protocol interface supported by the object. After it has finished making calls, the client application does a release on the interface pointer.
 
 <a id="Section_3.1"></a>
 ## 3.1 IManagedObject Server Details
@@ -432,7 +432,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [GetSerializedBuffer](#Section_3.1.4.1) | Returns a binary-formatted representation of a managed [**object**](#gt_object), as specified in [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3. Opnum: 3 |
-| [GetObjectIdentity](#Section_3.1.4.1) | Used to determine if a COM object is a managed object that belongs to this [**CLR**](#gt_common-language-runtime-clr) instance and process subdivision. Opnum: 4 |
+| [GetObjectIdentity](#Section_3.1.4.1.2) | Used to determine if a COM object is a managed object that belongs to this [**CLR**](#gt_common-language-runtime-clr) instance and process subdivision. Opnum: 4 |
 
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 GetSerializedBuffer (Opnum 3)
@@ -626,7 +626,7 @@ The initialization is the same as for server. See section [3.1.3](#Section_3.1.3
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
-The client determines if it is the server by matching values returned from the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1) method. The client matches the value of **pBSTRGUID** against the GUID of the client [**CLR**](#gt_common-language-runtime-clr) instance and uses the implementation-specific helper values in **AppDomainID** and **pCCW** to help decide if the COM object originated in the client CLR instance. Otherwise, the client fetches a binary-formatted string representation ([MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3) to the underlying managed [**object**](#gt_object) by using [GetSerializedBuffer](#Section_3.1.4.1), which can be used to create a managed object.
+The client determines if it is the server by matching values returned from the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) method. The client matches the value of **pBSTRGUID** against the GUID of the client [**CLR**](#gt_common-language-runtime-clr) instance and uses the implementation-specific helper values in **AppDomainID** and **pCCW** to help decide if the COM object originated in the client CLR instance. Otherwise, the client fetches a binary-formatted string representation ([MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3) to the underlying managed [**object**](#gt_object) by using [GetSerializedBuffer](#Section_3.1.4.1), which can be used to create a managed object.
 
 When the IServiceComponentInfo interface is used, the client determines the server instance identity by means of the URI returned from the IServiceComponentInfo::GetComponentInfo method.
 
@@ -656,11 +656,11 @@ A [**CLR**](#gt_common-language-runtime-clr) instance uses the [IManagedObject](
 
 - A CLR instance starts up and generates a [**UUID**](#gt_universally-unique-identifier-uuid) to uniquely identify itself. It later creates a process subdivision and creates a unique value to identify the process subdivision.
 - A COM [**object**](#gt_object) enters the CLR, and the CLR then calls the **IUnknown::QueryInterface** method to determine whether the object implements IManagedObject. The object returns S_OK and returns a pointer to an IManagedObject [**interface pointer**](#gt_interface-pointer).
-- The CLR then calls the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1) method and matches the *pBSTRGUID* against its UUID and, if they match, compares the *AppDomainID* to the identifier of the current process subdivision. If they match, the CLR converts *pCCW* to the underlying CLR-managed object. If they do not match, it calls the [IManagedObject::GetSerializedBuffer](#Section_3.1.4.1) method and uses the binary-formatted version of the object converted to a string to create a copy of the object that resides in another CLR (which could be a completely different implementation). The caller on the client CLR is then able to interpret the deserialized opaque object reference. For more information about how to create the binary-formatted string representation of an object, see [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3.
+- The CLR then calls the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) method and matches the *pBSTRGUID* against its UUID and, if they match, compares the *AppDomainID* to the identifier of the current process subdivision. If they match, the CLR converts *pCCW* to the underlying CLR-managed object. If they do not match, it calls the [IManagedObject::GetSerializedBuffer](#Section_3.1.4.1) method and uses the binary-formatted version of the object converted to a string to create a copy of the object that resides in another CLR (which could be a completely different implementation). The caller on the client CLR is then able to interpret the deserialized opaque object reference. For more information about how to create the binary-formatted string representation of an object, see [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3.
 <a id="Section_4.2"></a>
 ## 4.2 Determining Server Object Identity
 
-This example assumes that the client already has an [**interface pointer**](#gt_interface-pointer) to an instance of an [**object**](#gt_object) that implements [IServicedComponentInfo](#Section_3.1.4.3). The example also assumes that the server already has a unique identifier encoded into a URI to identify the server object instance. The following diagram helps to illustrate this example.
+This example assumes that the client already has an [**interface pointer**](#gt_interface-pointer) to an instance of an [**object**](#gt_object) that implements [IServicedComponentInfo](#Section_1.3.1). The example also assumes that the server already has a unique identifier encoded into a URI to identify the server object instance. The following diagram helps to illustrate this example.
 
 ![Call sequence for determining server object identity](media/image4.png)
 

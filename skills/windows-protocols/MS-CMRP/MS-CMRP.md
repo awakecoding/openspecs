@@ -1090,7 +1090,7 @@ The following security packages are required for the RPC [**Authentication Servi
 
 - For ClusAPI Protocol version 2.0, NT LAN Manager (NTLM) protocol [MS-NLMP](../MS-NLMP/MS-NLMP.md).
 - For ClusAPI Protocol version 3.0, Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO) [MS-SPNG](../MS-SPNG/MS-SPNG.md).
-Further prerequisites for client initialization of the protocol are specified in section [3.2.3.1](#Section_3.2.3.1).
+Further prerequisites for client initialization of the protocol are specified in section [3.2.3.1](#Section_1.5).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -1204,7 +1204,7 @@ In addition to the RPC base types and definitions that are specified in [[C706]]
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 HCLUSTER_RPC
 
-HCLUSTER_RPC is an [**RPC context handle**](#gt_rpc-context-handle), as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). It represents the [**server**](#gt_server) context for the operations of a [**client**](#gt_client) on a [**cluster**](#gt_cluster). An HCLUSTER_RPC is obtained as specified in section [3.1.4.2.1](#Section_3.1.4.2.160).
+HCLUSTER_RPC is an [**RPC context handle**](#gt_rpc-context-handle), as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). It represents the [**server**](#gt_server) context for the operations of a [**client**](#gt_client) on a [**cluster**](#gt_cluster). An HCLUSTER_RPC is obtained as specified in section [3.1.4.2.1](#Section_3.1.4.2.139).
 
 This type is declared as follows:
 
@@ -1231,7 +1231,7 @@ typedef [context_handle] void* HGROUP_RPC;
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 HRES_RPC
 
-HRES_RPC is an [**RPC context handle**](#gt_rpc-context-handle) as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). It represents the [**server**](#gt_server) context for the operations of a [**client**](#gt_client) on a [**cluster**](#gt_cluster) [**resource**](#gt_resource). An HRES_RPC is obtained as specified in sections [3.1.4.2.9](#Section_3.1.4.2.99) and [3.1.4.2.10](#Section_3.1.4.2.10).
+HRES_RPC is an [**RPC context handle**](#gt_rpc-context-handle) as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). It represents the [**server**](#gt_server) context for the operations of a [**client**](#gt_client) on a [**cluster**](#gt_cluster) [**resource**](#gt_resource). An HRES_RPC is obtained as specified in sections [3.1.4.2.9](#Section_3.1.4.2.92) and [3.1.4.2.10](#Section_3.1.4.2.100).
 
 This type is declared as follows:
 
@@ -1630,7 +1630,7 @@ The following values are not supported in ClusAPI Protocol version 2.0:
 
 The **CLUS_FLAGS** enumeration is a bitmask of the possible [**values**](#gt_value) for the flags associated with a [**resource**](#gt_resource), [**resource type**](#gt_resource-type), or [**group**](#gt_group) object.
 
-The following table specifies valid constant values for **CLUS_FLAGS** that are interpreted by the [**server**](#gt_server). Entities external to the [**cluster**](#gt_cluster) can define other values. If they do, these values MUST be written as defined in section [3.1.4.3.1.3](#Section_3.1.4.3.1.38) and section [3.1.4.3.2.3](#Section_3.1.4.3.2.30).
+The following table specifies valid constant values for **CLUS_FLAGS** that are interpreted by the [**server**](#gt_server). Entities external to the [**cluster**](#gt_cluster) can define other values. If they do, these values MUST be written as defined in section [3.1.4.3.1.3](#Section_3.1.4.3.1.31) and section [3.1.4.3.2.3](#Section_3.1.4.3.2.3).
 
 typedef enum
 
@@ -2707,7 +2707,7 @@ DWORD Type;
 
 **Type:** Specifies the type of the object that is represented by the list element. This member MUST be set to one of the following values.
 
-If the **ENUM_LIST** is returned by a call to **ApiCreateEnum** (section [3.1.4.2.8](#Section_3.1.4.2.88)) or **ApiCreateEnumEx** (section [3.1.4.2.124](#Section_3.1.4.2.124)), **Type** is set to one of the following values.
+If the **ENUM_LIST** is returned by a call to **ApiCreateEnum** (section [3.1.4.2.8](#Section_3.1.4.2.89)) or **ApiCreateEnumEx** (section [3.1.4.2.124](#Section_3.1.4.2.124)), **Type** is set to one of the following values.
 
 | Value | Meaning |
 | --- | --- |
@@ -2770,7 +2770,7 @@ Otherwise, a null-terminated [**Unicode string**](#gt_unicode-string) that speci
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 ENUM_LIST
 
-The **ENUM_LIST** structure is a container for a list of **ENUM_ENTRY** (section [2.2.3.4](#Section_2.2.3.4)) structures. An **ENUM_LIST** encapsulates the results of a query that is performed on the [**cluster state**](#gt_cluster-state). The semantics of the collection of named [**cluster objects**](#gt_cluster-object) depends on the query that is performed. For example, the **ApiCreateEnum** (section [3.1.4.2.8](#Section_3.1.4.2.88)) method can be used to query a list of nodes in the [**cluster**](#gt_cluster) or a list of resources in the cluster. The result of either query is returned to the [**client**](#gt_client) as an **ENUM_LIST**.
+The **ENUM_LIST** structure is a container for a list of **ENUM_ENTRY** (section [2.2.3.4](#Section_2.2.3.4)) structures. An **ENUM_LIST** encapsulates the results of a query that is performed on the [**cluster state**](#gt_cluster-state). The semantics of the collection of named [**cluster objects**](#gt_cluster-object) depends on the query that is performed. For example, the **ApiCreateEnum** (section [3.1.4.2.8](#Section_3.1.4.2.89)) method can be used to query a list of nodes in the [**cluster**](#gt_cluster) or a list of resources in the cluster. The result of either query is returned to the [**client**](#gt_client) as an **ENUM_LIST**.
 
 typedef struct _ENUM_LIST {
 
@@ -3127,7 +3127,7 @@ packet-beta
 
 **MaintenanceModeType (4 bytes):** A 4-byte **MAINTENANCE_MODE_TYPE** (section [2.2.2.6](#Section_2.2.2.6)) enumeration that indicates the current maintenance mode type when written by the server or the target maintenance mode type when provided by the client for a storage class resource.
 
-**InternalState (4 bytes):** A 32-bit integer representing the internal resource state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.133). This field is valid only when written by the server.
+**InternalState (4 bytes):** A 32-bit integer representing the internal resource state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.139). This field is valid only when written by the server.
 
 **Signature (4 bytes):** A 32-bit integer that MUST contain the [**value**](#gt_value) 0xABBAF00F.
 
@@ -4530,14 +4530,14 @@ Methods that return context handles MUST return a valid context handle to indica
 
 Certain methods require the client to supply one or more context handles that are obtained by a previous method call. In particular:
 
-- The [ApiOpenCluster](#Section_3.1.4.2.160) method or the [ApiOpenClusterEx](#Section_3.1.4.2.116) method MUST be called in order to obtain an [HCLUSTER_RPC](#Section_2.2.1.1) context handle prior to invoking the following methods: [ApiAddNotifyCluster](#Section_3.1.4.1.58), [ApiNodeResourceTypeControl](#Section_3.1.4.2.75), [ApiResourceTypeControl](#Section_3.1.4.3.2), [ApiNodeClusterControl](#Section_3.1.4.2.105), [ApiClusterControl](#Section_3.1.4.2.106), [ApiCreateNetInterfaceEnum](#Section_3.1.4.2.163), and [ApiCloseCluster](#Section_3.1.4.2.2). After ApiCloseCluster is called, the specified HCLUSTER_RPC context handle is no longer valid.
-- The [ApiOpenNode](#Section_3.1.4.2.67) method or the [ApiOpenNodeEx](#Section_3.1.4.2.117) method MUST be called in order to obtain an [HNODE_RPC](#Section_2.2.1.2) context handle prior to invoking the following methods: [ApiAddResourceNode](#Section_3.1.4.2.24), [ApiRemoveResourceNode](#Section_3.1.4.2.25), [ApiGetNodeId](#Section_3.1.4.1.49), [ApiMoveGroupToNode](#Section_3.1.4.2.132), [ApiAddNotifyNode](#Section_3.1.4.2.59), [ApiReAddNotifyNode](#Section_3.1.4.1.63), [ApiGetNodeState](#Section_3.1.4.2.69), [ApiCloseNode](#Section_3.1.4.1.68), [ApiPauseNode](#Section_3.1.4.2.70), [ApiResumeNode](#Section_3.1.4.2.71), [ApiEvictNode](#Section_3.1.4.2.72), [ApiNodeResourceControl](#Section_3.1.4.2.73), ApiNodeResourceTypeControl, [ApiNodeGroupControl](#Section_3.1.4.2.77), [ApiNodeNodeControl](#Section_3.1.4.1.79), [ApiNodeControl](#Section_3.1.4.3.4), [ApiNodeNetworkControl](#Section_3.1.4.2.88), [ApiNodeNetInterfaceControl](#Section_3.1.4.2.97), [ApiCreateNodeEnum](#Section_3.1.4.2.101), and ApiNodeClusterControl. After ApiCloseNode is invoked, the specified HNODE_RPC context handle is no longer valid.
-- The [ApiOpenGroup](#Section_3.1.4.2.42) method, the [ApiOpenGroupEx](#Section_3.1.4.2.118) method, or the [ApiCreateGroup](#Section_3.1.4.2.43) method MUST be called in order to obtain an [HGROUP_RPC](#Section_2.2.1.3) context handle prior to invoking the following methods: [ApiCreateResource](#Section_3.1.4.2.10), [ApiChangeResourceGroup](#Section_3.1.4.1.26), [ApiDeleteGroup](#Section_3.1.4.1.44), [ApiSetGroupName](#Section_3.1.4.2.47), [ApiGetGroupId](#Section_3.1.4.2.48), ApiGetNodeId, [ApiOnlineGroup](#Section_3.1.4.1.50), [ApiOfflineGroup](#Section_3.1.4.2.130), [ApiSetGroupNodeList](#Section_3.1.4.2.55), [ApiAddNotifyGroup](#Section_3.1.4.1.60), [ApiReAddNotifyGroup](#Section_3.1.4.1.64), ApiNodeGroupControl, [ApiGroupControl](#Section_3.1.4.2.78), [ApiCreateGroupResourceEnum](#Section_3.1.4.2.54), [ApiGetGroupState](#Section_3.1.4.2.46), [ApiMoveGroup](#Section_3.1.4.2.131), ApiMoveGroupToNode, [ApiSetGroupDependencyExpression](#Section_3.1.4.2.157), [ApiRemoveClusterGroupDependency](#Section_3.1.4.2.158), [ApiAddGroupSetDependency](#Section_3.1.4.2.153), [ApiAddGroupToGroupSetDependency](#Section_3.1.4.2.154), and [ApiCloseGroup](#Section_3.1.4.1.45). After ApiCloseGroup is called, the specified HGROUP_RPC context handle is no longer valid.
-- The [ApiOpenResource](#Section_3.1.4.2.99) method, the [ApiOpenResourceEx](#Section_3.1.4.2.119) method, or the ApiCreateResource method MUST be called in order to obtain an [HRES_RPC](#Section_2.2.1.4) context handle prior to invoking the following methods: [ApiSetQuorumResource](#Section_3.1.4.1.7), [ApiDeleteResource](#Section_3.1.4.1.28), [ApiSetResourceName](#Section_3.1.4.2.14), [ApiGetResourceType](#Section_3.1.4.1.16), [ApiFailResource](#Section_3.1.4.1.17), [ApiCanResourceBeDependent](#Section_3.1.4.2.22), ApiAddResourceNode, ApiRemoveResourceNode, ApiChangeResourceGroup, [ApiAddNotifyResource](#Section_3.1.4.1.61), [ApiReAddNotifyResource](#Section_3.1.4.2.65), [ApiSetResourceDependencyExpression](#Section_3.1.4.2.109), [ApiGetResourceDependencyExpression](#Section_3.1.4.2.110), [ApiGetResourceNetworkName](#Section_3.1.4.2.111), [ApiGetResourceState](#Section_3.1.4.2.133), [ApiGetResourceId](#Section_3.1.4.1.15), [ApiOnlineResource](#Section_3.1.4.2.18), [ApiOfflineResource](#Section_3.1.4.1.19), [ApiAddResourceDependency](#Section_3.1.4.1.20), [ApiRemoveResourceDependency](#Section_3.1.4.1.21), [ApiCreateResEnum](#Section_3.1.4.2.23), ApiNodeResourceControl, [ApiResourceControl](#Section_3.1.4.2.74), [ApiChangeCsvStateEx](#Section_3.1.4.2.164), and [ApiCloseResource](#Section_3.1.4.1.12). After ApiCloseResource is called, the specified HRES_RPC context handle is no longer valid.
-- Either the [ApiGetRootKey](#Section_3.1.4.2.29), the [ApiCreateKey](#Section_3.1.4.2.30), or the [ApiOpenKey](#Section_3.1.4.2.31) method MUST be called in order to obtain an [HKEY_RPC](#Section_2.2.1.5) context handle prior to invoking the following methods: ApiCreateKey, ApiOpenKey, [ApiEnumKey](#Section_3.1.4.2.32), [ApiSetValue](#Section_3.1.4.2.33), [ApiDeleteValue](#Section_3.1.4.1.34), [ApiQueryValue](#Section_3.1.4.2.35), [ApiDeleteKey](#Section_3.1.4.2.36), [ApiEnumValue](#Section_3.1.4.1.37), [ApiQueryInfoKey](#Section_3.1.4.1.39), [ApiSetKeySecurity](#Section_3.1.4.2.40), [ApiGetKeySecurity](#Section_3.1.4.1.41), [ApiAddNotifyKey](#Section_3.1.4.1.62), [ApiExecuteBatch](#Section_3.1.4.2.112), [ApiCreateBatchPort](#Section_3.1.4.2.113), [ApiGetBatchNotification](#Section_3.1.4.2.114), [ApiCloseBatchPort](#Section_3.1.4.2.115), and [ApiCloseKey](#Section_3.1.4.1.38). After ApiCloseKey is called, the specified HKEY_RPC context handle is no longer valid.
-- The [ApiCreateNotify](#Section_3.1.4.2.56) method MUST be called in order to obtain an [HNOTIFY_RPC](#Section_2.2.1.6) context handle prior to calling the following methods: ApiAddNotifyCluster, ApiAddNotifyNode, ApiAddNotifyGroup, ApiAddNotifyResource, ApiAddNotifyKey, [ApiAddNotifyNetwork](#Section_3.1.4.2.90), [ApiAddNotifyNetInterface](#Section_3.1.4.2.99), ApiReAddNotifyNode, ApiReAddNotifyGroup, ApiReAddNotifyResource, [ApiReAddNotifyNetwork](#Section_3.1.4.1.91), [ApiReAddNotifyNetInterface](#Section_3.1.4.2.100), [ApiUnblockGetNotifyCall](#Section_3.1.4.1.107), and [ApiCloseNotify](#Section_3.1.4.1.57). After ApiCloseNotify is called, the specified HNOTIFY_RPC context handle is no longer valid.
-- Either the [ApiOpenNetwork](#Section_3.1.4.2.81) or [ApiOpenNetworkEx](#Section_3.1.4.2.120) method MUST be called in order to obtain an [HNETWORK_RPC](#Section_2.2.1.7) context handle prior to calling the following methods: [ApiGetNetworkState](#Section_3.1.4.1.83), [ApiSetNetworkName](#Section_3.1.4.2.84), [ApiCreateNetworkEnum](#Section_3.1.4.2.85), [ApiGetNetworkId](#Section_3.1.4.1.86), [ApiSetNetworkPriorityOrder](#Section_3.1.4.1.87), ApiNodeNetworkControl, [ApiNetworkControl](#Section_3.1.4.1.89), ApiAddNotifyNetwork, ApiReAddNotifyNetwork, and [ApiCloseNetwork](#Section_3.1.4.1.82). After ApiCloseNetwork is called, the specified HNETWORK_RPC context handle is no longer valid.
-- Either the [ApiOpenNetInterface](#Section_3.1.4.2.92) or [ApiOpenNetInterfaceEx](#Section_3.1.4.2.121) method MUST be called in order to obtain an [HNETINTERFACE_RPC](#Section_2.2.1.8) context handle prior to calling the following methods: [ApiGetNetInterfaceState](#Section_3.1.4.1.94), [ApiGetNetInterfaceId](#Section_3.1.4.1.96), ApiNodeNetInterfaceControl, [ApiNetInterfaceControl](#Section_3.1.4.1.98), ApiAddNotifyNetInterface, ApiReAddNotifyNetInterface, and [ApiCloseNetInterface](#Section_3.1.4.1.93). After ApiCloseNetInterface is called, the specified HNETINTERFACE_RPC context handle is no longer valid.
+- The [ApiOpenCluster](#Section_3.1.4.2.139) method or the [ApiOpenClusterEx](#Section_3.1.4.2.116) method MUST be called in order to obtain an [HCLUSTER_RPC](#Section_2.2.1.1) context handle prior to invoking the following methods: [ApiAddNotifyCluster](#Section_3.1.4.2.58), [ApiNodeResourceTypeControl](#Section_3.1.4.2.75), [ApiResourceTypeControl](#Section_3.1.4.1.76), [ApiNodeClusterControl](#Section_3.1.4.2.105), [ApiClusterControl](#Section_3.1.4.3.7), [ApiCreateNetInterfaceEnum](#Section_3.1.4.2.163), and [ApiCloseCluster](#Section_3.1.4.2.2). After ApiCloseCluster is called, the specified HCLUSTER_RPC context handle is no longer valid.
+- The [ApiOpenNode](#Section_3.1.4.2.67) method or the [ApiOpenNodeEx](#Section_3.1.4.2.117) method MUST be called in order to obtain an [HNODE_RPC](#Section_2.2.1.2) context handle prior to invoking the following methods: [ApiAddResourceNode](#Section_3.1.4.1.24), [ApiRemoveResourceNode](#Section_3.1.4.2.25), [ApiGetNodeId](#Section_3.1.4.1.49), [ApiMoveGroupToNode](#Section_3.1.4.2.132), [ApiAddNotifyNode](#Section_3.1.4.2.59), [ApiReAddNotifyNode](#Section_3.1.4.2.63), [ApiGetNodeState](#Section_3.1.4.1.69), [ApiCloseNode](#Section_3.1.4.2.68), [ApiPauseNode](#Section_3.1.4.2.126), [ApiResumeNode](#Section_3.1.4.2.127), [ApiEvictNode](#Section_3.1.4.2.72), [ApiNodeResourceControl](#Section_3.1.4.2.73), ApiNodeResourceTypeControl, [ApiNodeGroupControl](#Section_3.1.4.2.77), [ApiNodeNodeControl](#Section_3.1.4.1.79), [ApiNodeControl](#Section_3.1.4.1.80), [ApiNodeNetworkControl](#Section_3.1.4.2.88), [ApiNodeNetInterfaceControl](#Section_3.1.4.2.97), [ApiCreateNodeEnum](#Section_3.1.4.2.101), and ApiNodeClusterControl. After ApiCloseNode is invoked, the specified HNODE_RPC context handle is no longer valid.
+- The [ApiOpenGroup](#Section_3.1.4.2.42) method, the [ApiOpenGroupEx](#Section_3.1.4.2.118) method, or the [ApiCreateGroup](#Section_3.1.4.2.43) method MUST be called in order to obtain an [HGROUP_RPC](#Section_2.2.1.3) context handle prior to invoking the following methods: [ApiCreateResource](#Section_3.1.4.2.100), [ApiChangeResourceGroup](#Section_3.1.4.2.166), [ApiDeleteGroup](#Section_3.1.4.1.44), [ApiSetGroupName](#Section_3.1.4.1.47), [ApiGetGroupId](#Section_3.1.4.2.48), ApiGetNodeId, [ApiOnlineGroup](#Section_3.1.4.1.50), [ApiOfflineGroup](#Section_3.1.4.1.51), [ApiSetGroupNodeList](#Section_3.1.4.1.55), [ApiAddNotifyGroup](#Section_3.1.4.2.60), [ApiReAddNotifyGroup](#Section_3.1.4.2.64), ApiNodeGroupControl, [ApiGroupControl](#Section_3.1.4.2.78), [ApiCreateGroupResourceEnum](#Section_3.1.4.2.54), [ApiGetGroupState](#Section_3.1.4.2.46), [ApiMoveGroup](#Section_3.1.4.2.152), ApiMoveGroupToNode, [ApiSetGroupDependencyExpression](#Section_3.1.4.2.157), [ApiRemoveClusterGroupDependency](#Section_3.1.4.2.158), [ApiAddGroupSetDependency](#Section_3.1.4.2.153), [ApiAddGroupToGroupSetDependency](#Section_3.1.4.2.154), and [ApiCloseGroup](#Section_3.1.4.1.45). After ApiCloseGroup is called, the specified HGROUP_RPC context handle is no longer valid.
+- The [ApiOpenResource](#Section_3.1.4.2.92) method, the [ApiOpenResourceEx](#Section_3.1.4.2.119) method, or the ApiCreateResource method MUST be called in order to obtain an [HRES_RPC](#Section_2.2.1.4) context handle prior to invoking the following methods: [ApiSetQuorumResource](#Section_3.1.4.1.7), [ApiDeleteResource](#Section_3.1.4.1.28), [ApiSetResourceName](#Section_3.1.4.1.14), [ApiGetResourceType](#Section_3.1.4.1.16), [ApiFailResource](#Section_3.1.4.1.17), [ApiCanResourceBeDependent](#Section_3.1.4.2.22), ApiAddResourceNode, ApiRemoveResourceNode, ApiChangeResourceGroup, [ApiAddNotifyResource](#Section_3.1.4.2.61), [ApiReAddNotifyResource](#Section_3.1.4.1.65), [ApiSetResourceDependencyExpression](#Section_3.1.4.2.109), [ApiGetResourceDependencyExpression](#Section_3.1.4.2.110), [ApiGetResourceNetworkName](#Section_3.1.4.2.111), [ApiGetResourceState](#Section_3.1.4.2.139), [ApiGetResourceId](#Section_3.1.4.2.15), [ApiOnlineResource](#Section_3.1.4.1.18), [ApiOfflineResource](#Section_3.1.4.2.19), [ApiAddResourceDependency](#Section_3.1.4.2.20), [ApiRemoveResourceDependency](#Section_3.1.4.2.21), [ApiCreateResEnum](#Section_3.1.4.2.23), ApiNodeResourceControl, [ApiResourceControl](#Section_3.1.4.1.74), [ApiChangeCsvStateEx](#Section_3.1.4.2.164), and [ApiCloseResource](#Section_3.1.4.1.12). After ApiCloseResource is called, the specified HRES_RPC context handle is no longer valid.
+- Either the [ApiGetRootKey](#Section_3.1.4.2.29), the [ApiCreateKey](#Section_3.1.4.2.30), or the [ApiOpenKey](#Section_3.1.4.2.31) method MUST be called in order to obtain an [HKEY_RPC](#Section_2.2.1.5) context handle prior to invoking the following methods: ApiCreateKey, ApiOpenKey, [ApiEnumKey](#Section_3.1.4.1.32), [ApiSetValue](#Section_3.1.4.2.33), [ApiDeleteValue](#Section_3.1.4.1.34), [ApiQueryValue](#Section_3.1.4.1.35), [ApiDeleteKey](#Section_3.1.4.2.36), [ApiEnumValue](#Section_3.1.4.2.37), [ApiQueryInfoKey](#Section_3.1.4.1.39), [ApiSetKeySecurity](#Section_3.1.4.1.40), [ApiGetKeySecurity](#Section_3.1.4.2.41), [ApiAddNotifyKey](#Section_3.1.4.1.62), [ApiExecuteBatch](#Section_3.1.4.2.112), [ApiCreateBatchPort](#Section_3.1.4.2.113), [ApiGetBatchNotification](#Section_3.1.4.2.114), [ApiCloseBatchPort](#Section_3.1.4.2.115), and [ApiCloseKey](#Section_3.1.4.2.38). After ApiCloseKey is called, the specified HKEY_RPC context handle is no longer valid.
+- The [ApiCreateNotify](#Section_3.1.4.2.56) method MUST be called in order to obtain an [HNOTIFY_RPC](#Section_2.2.1.6) context handle prior to calling the following methods: ApiAddNotifyCluster, ApiAddNotifyNode, ApiAddNotifyGroup, ApiAddNotifyResource, ApiAddNotifyKey, [ApiAddNotifyNetwork](#Section_3.1.4.1.90), [ApiAddNotifyNetInterface](#Section_3.1.4.2.99), ApiReAddNotifyNode, ApiReAddNotifyGroup, ApiReAddNotifyResource, [ApiReAddNotifyNetwork](#Section_3.1.4.1.91), [ApiReAddNotifyNetInterface](#Section_3.1.4.2.100), [ApiUnblockGetNotifyCall](#Section_3.1.4.1.107), and [ApiCloseNotify](#Section_3.1.4.2.57). After ApiCloseNotify is called, the specified HNOTIFY_RPC context handle is no longer valid.
+- Either the [ApiOpenNetwork](#Section_3.1.4.2.81) or [ApiOpenNetworkEx](#Section_3.1.4.2.120) method MUST be called in order to obtain an [HNETWORK_RPC](#Section_2.2.1.7) context handle prior to calling the following methods: [ApiGetNetworkState](#Section_3.1.4.1.83), [ApiSetNetworkName](#Section_3.1.4.2.84), [ApiCreateNetworkEnum](#Section_3.1.4.2.85), [ApiGetNetworkId](#Section_3.1.4.2.86), [ApiSetNetworkPriorityOrder](#Section_3.1.4.1.87), ApiNodeNetworkControl, [ApiNetworkControl](#Section_3.1.4.2.89), ApiAddNotifyNetwork, ApiReAddNotifyNetwork, and [ApiCloseNetwork](#Section_3.1.4.2.82). After ApiCloseNetwork is called, the specified HNETWORK_RPC context handle is no longer valid.
+- Either the [ApiOpenNetInterface](#Section_3.1.4.2.92) or [ApiOpenNetInterfaceEx](#Section_3.1.4.2.121) method MUST be called in order to obtain an [HNETINTERFACE_RPC](#Section_2.2.1.8) context handle prior to calling the following methods: [ApiGetNetInterfaceState](#Section_3.1.4.2.94), [ApiGetNetInterfaceId](#Section_3.1.4.1.96), ApiNodeNetInterfaceControl, [ApiNetInterfaceControl](#Section_3.1.4.3.6), ApiAddNotifyNetInterface, ApiReAddNotifyNetInterface, and [ApiCloseNetInterface](#Section_3.1.4.1.93). After ApiCloseNetInterface is called, the specified HNETINTERFACE_RPC context handle is no longer valid.
 - The ApiCreateBatchPort method MUST be called in order to obtain an [HBATCH_PORT_RPC](#Section_2.2.1.9) context handle prior to calling the following methods: ApiGetBatchNotification and ApiCloseBatchPort. After ApiCloseBatchPort is called, the specified HBATCH_PORT_RPC context handle is no longer valid.
 <a id="Section_3.1"></a>
 ## 3.1 Server Details
@@ -4558,9 +4558,9 @@ A server maintains its [**protocol server state**](#gt_protocol-server-state). T
 - **None:** The node has not sufficiently initialized to accept any protocol requests.
 - **Read/Write:** The node can accept all requests.
 - **Read-Only:** The node can accept requests that do not modify the cluster state.
-Any active node in the cluster can accept ClusAPI Protocol requests from valid clients. A valid client is a client that has successfully completed the initialization steps as specified in section [3.2.3](#Section_3.1.3). For client requests that change the cluster state, after the client request is completed, the updated cluster state is accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node.
+Any active node in the cluster can accept ClusAPI Protocol requests from valid clients. A valid client is a client that has successfully completed the initialization steps as specified in section [3.2.3](#Section_3.2.3). For client requests that change the cluster state, after the client request is completed, the updated cluster state is accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node.
 
-A node that is running the cluster software but is not yet an active node in the cluster can accept ClusAPI Protocol requests that do not modify the cluster state. For this to occur, each node locally maintains its protocol server state, which indicates the extent to which it can accept protocol requests that operate on the cluster state. A server supports the following values for protocol server state: None (indicating that the node has not sufficiently initialized to accept any protocol requests), Read-Only (indicating that the node accepts requests that do not modify the cluster state), and Read/Write (indicating that the node accepts all requests). The protocol server state of an active node is Read/Write, as specified in ApiGetNodeState Opnum 68 (section [3.1.4.1.69)](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.2.69) for protocol version 3).
+A node that is running the cluster software but is not yet an active node in the cluster can accept ClusAPI Protocol requests that do not modify the cluster state. For this to occur, each node locally maintains its protocol server state, which indicates the extent to which it can accept protocol requests that operate on the cluster state. A server supports the following values for protocol server state: None (indicating that the node has not sufficiently initialized to accept any protocol requests), Read-Only (indicating that the node accepts requests that do not modify the cluster state), and Read/Write (indicating that the node accepts all requests). The protocol server state of an active node is Read/Write, as specified in ApiGetNodeState Opnum 68 (section [3.1.4.1.69)](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.1.69) for protocol version 3).
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Resource Model
@@ -4572,21 +4572,21 @@ A [**cluster**](#gt_cluster) [**resource**](#gt_resource) is any physical or log
 
 A protocol client can perform the following management operations on a cluster resource (see section [4.1](#Section_4.1) for an example):
 
-- Create: Create a new instance of a specific type of resource. For more information, refer to [3.1.4.1.10](#Section_3.1.4.1.107) (protocol version 2) or [3.1.4.2.10](#Section_3.1.4.2.10) (protocol version 3).
+- Create: Create a new instance of a specific type of resource. For more information, refer to [3.1.4.1.10](#Section_3.1.4.1.107) (protocol version 2) or [3.1.4.2.10](#Section_3.1.4.2.100) (protocol version 3).
 - Delete: Delete a resource from the nonvolatile cluster state. For more information, refer to [3.1.4.1.11](#Section_3.1.4.1.11) (protocol version 2) or [3.1.4.2.11](#Section_3.1.4.1.28) (protocol version 3).
-- Online: Bringing a resource online consists of starting the resource or making the resource active or available on a cluster node. For more information, refer to [3.1.4.1.18](#Section_3.1.4.1.18) (protocol version 2) or [3.1.4.2.18](#Section_3.1.4.2.18) (protocol version 3).
-- Offline: Bringing a resource offline consists of stopping the resource or making the resource inactive or unavailable on all cluster nodes. For more information, refer to [3.1.4.1.19](#Section_3.1.4.1.19) (protocol version 2) or [3.1.4.2.19](#Section_3.1.4.1.19) (protocol version 3).
+- Online: Bringing a resource online consists of starting the resource or making the resource active or available on a cluster node. For more information, refer to [3.1.4.1.18](#Section_3.1.4.1.18) (protocol version 2) or [3.1.4.2.18](#Section_3.1.4.1.18) (protocol version 3).
+- Offline: Bringing a resource offline consists of stopping the resource or making the resource inactive or unavailable on all cluster nodes. For more information, refer to [3.1.4.1.19](#Section_3.1.4.1.19) (protocol version 2) or [3.1.4.2.19](#Section_3.1.4.2.19) (protocol version 3).
 - Fail: Force the resource to fail its health check. For more information, refer to [3.1.4.1.17](#Section_3.1.4.1.17) (protocol version 2) or [3.1.4.2.17](#Section_3.1.4.1.17) (protocol version 3).
-- Get state: Query the state of the resource. For more information, refer to [3.1.4.1.13](#Section_3.1.4.1.13) (protocol version 2) or [3.1.4.2.13](#Section_3.1.4.2.133) (protocol version 3).
-- Query configuration: Querying the configuration data for a resource. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.83), [3.1.4.1.15](#Section_3.1.4.1.15), [3.1.4.1.16](#Section_3.1.4.1.16), [3.1.4.1.22](#Section_3.1.4.1.22), and [3.1.4.1.23](#Section_3.1.4.1.23) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.88), [3.1.4.2.15](#Section_3.1.4.1.15), [3.1.4.2.16](#Section_3.1.4.1.16), [3.1.4.2.22](#Section_3.1.4.2.22), and [3.1.4.2.23](#Section_3.1.4.2.23) (protocol version 3).
-- Set configuration: Change the configuration data for a resource. For more information, see sections [3.1.4.1.14](#Section_3.1.4.1.14), [3.1.4.1.20](#Section_3.1.4.1.20), [3.1.4.1.21](#Section_3.1.4.1.21), [3.1.4.1.24](#Section_3.1.4.1.24), [3.1.4.1.25](#Section_3.1.4.1.25), [3.1.4.1.26](#Section_3.1.4.1.26), and [3.1.4.1.74](#Section_3.1.4.1.74) (protocol version 2), and sections [3.1.4.2.14](#Section_3.1.4.2.14), [3.1.4.2.20](#Section_3.1.4.1.20), [3.1.4.2.21](#Section_3.1.4.1.21), [3.1.4.2.24](#Section_3.1.4.2.24), [3.1.4.2.25](#Section_3.1.4.2.25), [3.1.4.2.26](#Section_3.1.4.1.26), and [3.1.4.2.74](#Section_3.1.4.2.74) (protocol version 3).
+- Get state: Query the state of the resource. For more information, refer to [3.1.4.1.13](#Section_3.1.4.1.13) (protocol version 2) or [3.1.4.2.13](#Section_3.1.4.2.139) (protocol version 3).
+- Query configuration: Querying the configuration data for a resource. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.85), [3.1.4.1.15](#Section_3.1.4.1.15), [3.1.4.1.16](#Section_3.1.4.1.16), [3.1.4.1.22](#Section_3.1.4.1.22), and [3.1.4.1.23](#Section_3.1.4.1.23) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.89), [3.1.4.2.15](#Section_3.1.4.2.15), [3.1.4.2.16](#Section_3.1.4.1.16), [3.1.4.2.22](#Section_3.1.4.2.22), and [3.1.4.2.23](#Section_3.1.4.2.23) (protocol version 3).
+- Set configuration: Change the configuration data for a resource. For more information, see sections [3.1.4.1.14](#Section_3.1.4.1.14), [3.1.4.1.20](#Section_3.1.4.1.20), [3.1.4.1.21](#Section_3.1.4.1.21), [3.1.4.1.24](#Section_3.1.4.1.24), [3.1.4.1.25](#Section_3.1.4.1.25), [3.1.4.1.26](#Section_3.1.4.1.26), and [3.1.4.1.74](#Section_3.1.4.1.74) (protocol version 2), and sections [3.1.4.2.14](#Section_3.1.4.1.14), [3.1.4.2.20](#Section_3.1.4.2.20), [3.1.4.2.21](#Section_3.1.4.2.21), [3.1.4.2.24](#Section_3.1.4.1.24), [3.1.4.2.25](#Section_3.1.4.2.25), [3.1.4.2.26](#Section_3.1.4.2.166), and [3.1.4.2.74](#Section_3.1.4.1.74) (protocol version 3).
 A resource is uniquely identified in a cluster by separate [**Unicode strings**](#gt_unicode-string) that contain the name and ID of the resource. Both the resource name and resource ID are case-insensitive and contain any [**Unicode**](#gt_unicode) character in any position except as follows: the string is null-terminated, the string contains no Unicode null character other than for termination, and the string contains at least one character that is not Unicode 0x20, 0x09, 0x0d, 0x0a, or null. In addition to these exceptions, the resource ID string does not include the backslash ('\') character. The size of resource name and ID strings are not limited by this protocol. The resource name can be changed (so long as it remains unique). The resource ID is assigned by the cluster at resource creation and remains constant until the resource is deleted. A resource cannot have a name that is the same as the ID of a different resource.
 
 Each resource has an associated persistent state, which itself has a [**value**](#gt_value) of either online or offline. The persistent state of a resource is stored in a nonvolatile cluster state. The persistent state of a resource indicates whether the resource was most recently commanded to transition online or offline by a protocol [**client**](#gt_client). A client can query the current state of a resource. The [**server**](#gt_server) will maintain the current state of a resource. The current state of a resource is one of the values that is specified in section 3.1.4.1.13 (protocol version 2) or 3.1.4.2.13 (protocol version 3) when a client successfully queries for the state.
 
 A resource maintains a set of configured nodes that restrict where the resource is hosted. The possible node hosts are stored in a nonvolatile cluster state.
 
-A resource can be designated as a core resource. A core resource is critical to the operation of the cluster and cannot be deleted from the non-volatile cluster state. How a server determines which resources are core resources is implementation-specific, except as specified in section [3.1.4.1.7](#Section_3.1.4.1.70) (protocol version 2) or section [3.1.4.2.7](#Section_3.1.4.1.7) (protocol version 3).
+A resource can be designated as a core resource. A core resource is critical to the operation of the cluster and cannot be deleted from the non-volatile cluster state. How a server determines which resources are core resources is implementation-specific, except as specified in section [3.1.4.1.7](#Section_3.1.4.1.71) (protocol version 2) or section [3.1.4.2.7](#Section_3.1.4.1.7) (protocol version 3).
 
 A resource is associated with a set of [**characteristics**](#gt_characteristic) that are defined by its [**resource type**](#gt_resource-type). For example, a characteristic can be used to determine whether it is appropriate to create more than one instance of a resource type in a group or within the cluster.
 
@@ -4631,8 +4631,8 @@ A resource that no resource depends on is a [**top-level resource**](#gt_top-lev
 
 A protocol [**client**](#gt_client) can perform the following management operations on a dependency relation (see section [4.4](#Section_4.4) for an example). Note that complex dependencies are supported only in ClusAPI Protocol version 3.
 
-- Add a dependency: Add a simple or complex dependency to a resource. For more information, see section [3.1.4.1.20](#Section_3.1.4.1.20) (ClusAPI Protocol version 2), and sections [3.1.4.2.20](#Section_3.1.4.1.20) and [3.1.4.2.109](#Section_3.1.4.2.109) (ClusAPI Protocol version 3).
-- Remove a dependency: Remove a simple or complex dependency to a resource. For more information, see section [3.1.4.1.21](#Section_3.1.4.1.21) (ClusAPI Protocol version 2), and sections [3.1.4.2.21](#Section_3.1.4.1.21) and 3.1.4.2.109 (ClusAPI Protocol version 3).
+- Add a dependency: Add a simple or complex dependency to a resource. For more information, see section [3.1.4.1.20](#Section_3.1.4.1.20) (ClusAPI Protocol version 2), and sections [3.1.4.2.20](#Section_3.1.4.2.20) and [3.1.4.2.109](#Section_3.1.4.2.109) (ClusAPI Protocol version 3).
+- Remove a dependency: Remove a simple or complex dependency to a resource. For more information, see section [3.1.4.1.21](#Section_3.1.4.1.21) (ClusAPI Protocol version 2), and sections [3.1.4.2.21](#Section_3.1.4.2.21) and 3.1.4.2.109 (ClusAPI Protocol version 3).
 - Validate: Determine whether a simple or complex dependency is valid. For more information, see section [3.1.4.1.22](#Section_3.1.4.1.22) (ClusAPI Protocol version 2) and section [3.1.4.2.22](#Section_3.1.4.2.22) (ClusAPI Protocol version 3).
 - Query Configuration: Query the configuration data for a resource's dependency tree. For more information, see section [3.1.4.1.23](#Section_3.1.4.1.23) (ClusAPI Protocol version 2), and sections [3.1.4.2.23](#Section_3.1.4.2.23) and [3.1.4.2.110](#Section_3.1.4.2.110) (ClusAPI Protocol version 3).
 <a id="Section_3.1.1.1.2.1"></a>
@@ -4681,7 +4681,7 @@ A protocol [**client**](#gt_client) can perform the following management operati
 
 - Create: Create a new type of resource. For more information, see section [3.1.4.1.27](#Section_3.1.4.1.27) (protocol version 2) and section [3.1.4.2.27](#Section_3.1.4.2.27) (protocol version 3).
 - Delete: Delete a resource type. For more information, see section [3.1.4.1.28](#Section_3.1.4.1.28) (protocol version 2) and section [3.1.4.2.28](#Section_3.1.4.2.28) (protocol version 3).
-- Query Configuration: Query the configuration data for a resource type. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.83), [3.1.4.1.75](#Section_3.1.4.1.75), [3.1.4.1.76](#Section_3.1.4.1.76) and [3.1.4.1.103](#Section_3.1.4.1.103) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.88), [3.1.4.2.75](#Section_3.1.4.2.75), [3.1.4.2.76](#Section_3.1.4.3.2) and [3.1.4.2.103](#Section_3.1.4.2.103) (protocol version 3).
+- Query Configuration: Query the configuration data for a resource type. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.85), [3.1.4.1.75](#Section_3.1.4.1.75), [3.1.4.1.76](#Section_3.1.4.1.76) and [3.1.4.1.103](#Section_3.1.4.1.103) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.89), [3.1.4.2.75](#Section_3.1.4.2.75), [3.1.4.2.76](#Section_3.1.4.1.76) and [3.1.4.2.103](#Section_3.1.4.2.103) (protocol version 3).
 - Set configuration: Change the configuration data for a resource type. For more information, see sections 3.1.4.1.75 and 3.1.4.1.76 (protocol version 2), and sections 3.1.4.2.75 and 3.1.4.2.76 (protocol version 3).
 <a id="Section_3.1.1.1.4"></a>
 ##### 3.1.1.1.4 Groups
@@ -4699,11 +4699,11 @@ A ClusAPI Protocol client can perform the following management operations on a c
 - Create: Create a new, empty instance of a group. For more information, see section [3.1.4.1.43](#Section_3.1.4.1.43) (protocol version 2) and section [3.1.4.2.43](#Section_3.1.4.2.43) (protocol version 3).
 - Delete: Delete a group from the nonvolatile cluster state. For more information, see section [3.1.4.1.44](#Section_3.1.4.1.44) (protocol version 2) and section [3.1.4.2.44](#Section_3.1.4.1.44) (protocol version 3).
 - Online: Bringing a group online consists of bringing all the resources in a group to their online state. For more information, see section [3.1.4.1.50](#Section_3.1.4.1.50) (protocol version 2) and section [3.1.4.2.50](#Section_3.1.4.1.50) (protocol version 3).
-- Offline: Bringing a group offline consists of bringing all the resources in a group to their offline state. For more information, see section [3.1.4.1.51](#Section_3.1.4.1.51) (protocol version 2) and [3.1.4.2.51](#Section_3.1.4.2.130) (protocol version 3).
+- Offline: Bringing a group offline consists of bringing all the resources in a group to their offline state. For more information, see section [3.1.4.1.51](#Section_3.1.4.1.51) (protocol version 2) and [3.1.4.2.51](#Section_3.1.4.1.51) (protocol version 3).
 - Get state: Query the state of the group. See section [3.1.4.1.46](#Section_3.1.4.1.46) (protocol version 2) and 3.1.4.2.46 (protocol version 3) for more details.
-- Move: Change ownership of the group to another node in the cluster. For more information, see sections [3.1.4.1.52](#Section_3.1.4.1.52) and [3.1.4.1.53](#Section_3.1.4.1.53) (protocol version 2), and sections [3.1.4.2.52](#Section_3.1.4.2.131) and [3.1.4.2.53](#Section_3.1.4.2.132) (protocol version 3).
-- Query configuration: Querying the configuration data for a group. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.83), [3.1.4.1.48](#Section_3.1.4.1.48), [3.1.4.1.54](#Section_3.1.4.1.54), [3.1.4.1.77](#Section_3.1.4.1.77) and [3.1.4.1.78](#Section_3.1.4.1.78) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.88), [3.1.4.2.48](#Section_3.1.4.2.48), [3.1.4.2.54](#Section_3.1.4.2.54), [3.1.4.2.77](#Section_3.1.4.2.77) and [3.1.4.2.78](#Section_3.1.4.2.78) (protocol version 3).
-- Set configuration: Change the configuration data for a group. For more information, see sections [3.1.4.1.47](#Section_3.1.4.1.47), [3.1.4.1.55](#Section_3.1.4.1.55), 3.1.4.1.77 and 3.1.4.1.78 (protocol version 2), and sections [3.1.4.2.47](#Section_3.1.4.2.47), [3.1.4.2.55](#Section_3.1.4.2.55), 3.1.4.2.77 and 3.1.4.2.78 (protocol version 3).
+- Move: Change ownership of the group to another node in the cluster. For more information, see sections [3.1.4.1.52](#Section_3.1.4.1.52) and [3.1.4.1.53](#Section_3.1.4.1.53) (protocol version 2), and sections [3.1.4.2.52](#Section_3.1.4.2.152) and [3.1.4.2.53](#Section_3.1.4.2.132) (protocol version 3).
+- Query configuration: Querying the configuration data for a group. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.85), [3.1.4.1.48](#Section_3.1.4.1.48), [3.1.4.1.54](#Section_3.1.4.1.54), [3.1.4.1.77](#Section_3.1.4.1.77) and [3.1.4.1.78](#Section_3.1.4.1.78) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.89), [3.1.4.2.48](#Section_3.1.4.2.48), [3.1.4.2.54](#Section_3.1.4.2.54), [3.1.4.2.77](#Section_3.1.4.2.77) and [3.1.4.2.78](#Section_3.1.4.2.78) (protocol version 3).
+- Set configuration: Change the configuration data for a group. For more information, see sections [3.1.4.1.47](#Section_3.1.4.1.47), [3.1.4.1.55](#Section_3.1.4.1.55), 3.1.4.1.77 and 3.1.4.1.78 (protocol version 2), and sections [3.1.4.2.47](#Section_3.1.4.1.47), [3.1.4.2.55](#Section_3.1.4.1.55), 3.1.4.2.77 and 3.1.4.2.78 (protocol version 3).
 A group can be uniquely identified in a cluster by separate [**Unicode strings**](#gt_unicode-string) that contain the name and ID of the group. Both the group name and group ID are case-insensitive and contain any [**Unicode**](#gt_unicode) character in any position except as follows: the string is null-terminated, the string contains no Unicode null character other than for termination, and the string contains at least one character that is not Unicode 0x20, 0x09, 0x0d, 0x0a, and null. The size of group name and ID strings are not limited by this protocol. The group name can be changed (so long as it remains unique). The group ID is assigned by the cluster at group creation and remains constant until the resource is deleted.
 
 Groups, and the resources that are contained in each group, are part of the nonvolatile cluster state.
@@ -4794,7 +4794,7 @@ The method by which the server supports backup mode is implementation-specific. 
 A protocol client can perform the following management operations for cluster shared volumes. These operations are supported in ClusAPI Protocol version 3 only.
 
 - Change ResourceSharedVolumes: change whether the volumes associated with a resource are cluster shared volumes. For more information, see sections [3.1.4.2.122](#Section_3.1.4.2.122) and [3.1.4.2.162](#Section_3.1.4.2.162).
-- Enumerate: enumerate the resources that have cluster shared volumes. For more information, see section [3.1.4.2.8](#Section_3.1.4.2.88).
+- Enumerate: enumerate the resources that have cluster shared volumes. For more information, see section [3.1.4.2.8](#Section_3.1.4.2.89).
 - Query configuration: query the configuration of a cluster shared volume. For more information, see [3.1.4.3.1.48](#Section_3.1.4.3.1.48).
 - Change configuration: change the configuration of a cluster shared volume. For more information, see [3.1.4.3.1.51](#Section_3.1.4.3.1.51), 3.1.4.3.1.52, 3.1.4.3.1.53, and [3.1.4.3.1.54](#Section_3.1.4.3.1.54).
 <a id="Section_3.1.1.5"></a>
@@ -4813,7 +4813,7 @@ A [**cluster**](#gt_cluster) [**node**](#gt_node) object represents a [**server*
 
 A node is uniquely identified in a cluster by separate [**Unicode strings**](#gt_unicode-string) that contain the [**computer name**](#gt_computer-name) of the server and the node's ID. The node name is case-insensitive and consists of a [**DNS**](#gt_domain-name-system-dns) host name (in the format of a label as specified in [[RFC1035]](https://go.microsoft.com/fwlink/?LinkId=90264)). The node ID is represented as a positive integer within the range of 1 and the maximum number of nodes in the cluster (but no greater than 0xFFFFFFFF), and is assigned by the cluster when the server is added to the cluster. The node name and ID cannot change while the server is a configured member of the cluster.
 
-Each node has an associated persistent state, which has a [**value**](#gt_value) of either operational or paused. The persistent state of a node is stored in a nonvolatile [**cluster state**](#gt_cluster-state). The persistent state of a node indicates whether the node was most recently commanded to transition to operational or paused by a protocol [**client**](#gt_client). The server initializes the persistent node state to operational when a server is added to the cluster nonvolatile configuration. A client can query the current state of a node. The server maintains the current state of a node. The current state of a node is one of the values specified in ApiGetNodeState (Opnum 68; see [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2 or [3.1.4.2.69](#Section_3.1.4.2.69) for protocol version 3) when a client successfully queries for the state.
+Each node has an associated persistent state, which has a [**value**](#gt_value) of either operational or paused. The persistent state of a node is stored in a nonvolatile [**cluster state**](#gt_cluster-state). The persistent state of a node indicates whether the node was most recently commanded to transition to operational or paused by a protocol [**client**](#gt_client). The server initializes the persistent node state to operational when a server is added to the cluster nonvolatile configuration. A client can query the current state of a node. The server maintains the current state of a node. The current state of a node is one of the values specified in ApiGetNodeState (Opnum 68; see [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2 or [3.1.4.2.69](#Section_3.1.4.1.69) for protocol version 3) when a client successfully queries for the state.
 
 A cluster node has no defined [**characteristics**](#gt_characteristic).
 
@@ -4821,11 +4821,11 @@ The nonvolatile cluster state associated with a node includes a set of flags; th
 
 A ClusAPI Protocol client can perform the following management operations on a cluster node:
 
-- Pause: Pause group failover activity and set the persistent state of the node to paused, see ApiPauseNode (Opnum 69; [3.1.4.1.70](#Section_3.1.4.1.70) for protocol version 2 or [3.1.4.2.70](#Section_3.1.4.2.70) for protocol version 3).
-- Resume: Resume group failover activity and set the persistent state of the node to operational, see ApiResumeNode (Opnum 70; [3.1.4.1.71](#Section_3.1.4.1.71) for protocol version 2 or [3.1.4.2.71](#Section_3.1.4.2.71) for protocol version 3).
+- Pause: Pause group failover activity and set the persistent state of the node to paused, see ApiPauseNode (Opnum 69; [3.1.4.1.70](#Section_3.1.4.1.70) for protocol version 2 or [3.1.4.2.70](#Section_3.1.4.2.126) for protocol version 3).
+- Resume: Resume group failover activity and set the persistent state of the node to operational, see ApiResumeNode (Opnum 70; [3.1.4.1.71](#Section_3.1.4.1.71) for protocol version 2 or [3.1.4.2.71](#Section_3.1.4.2.127) for protocol version 3).
 - Evict: Remove a configured node from a cluster, see ApiEvictNode (Opnum 71; [3.1.4.1.72](#Section_3.1.4.1.72) for protocol version 2 or [3.1.4.2.72](#Section_3.1.4.2.72) for protocol version 3).
-- Query the configured nodes: Querying a cluster for a list of its configured nodes, see ApiCreateEnum (Opnum 7; [3.1.4.1.8](#Section_3.1.4.1.83) for protocol version 2 or [3.1.4.2.8](#Section_3.1.4.2.88) for protocol version 3).
-- Query configuration: Querying the configuration data for a node, see ApiGetNodeId (Opnum 48; [3.1.4.1.49](#Section_3.1.4.1.49) for protocol version 2 or [3.1.4.2.49](#Section_3.1.4.1.49) for protocol version 3), ApiNodeNodeControl (Opnum 78; [3.1.4.1.79](#Section_3.1.4.1.79) for protocol version 2 or [3.1.4.2.79](#Section_3.1.4.1.79) for protocol version 3), ApiNodeControl (Opnum 79; [3.1.4.1.80](#Section_3.1.4.1.80) for protocol version 2 or [3.1.4.2.80](#Section_3.1.4.3.4) for protocol version 3), and ApiCreateNodeEnum (Opnum 101; [3.1.4.1.101](#Section_3.1.4.1.101) for protocol version 2 or [3.1.4.2.101](#Section_3.1.4.2.101) for protocol version 3).
+- Query the configured nodes: Querying a cluster for a list of its configured nodes, see ApiCreateEnum (Opnum 7; [3.1.4.1.8](#Section_3.1.4.1.85) for protocol version 2 or [3.1.4.2.8](#Section_3.1.4.2.89) for protocol version 3).
+- Query configuration: Querying the configuration data for a node, see ApiGetNodeId (Opnum 48; [3.1.4.1.49](#Section_3.1.4.1.49) for protocol version 2 or [3.1.4.2.49](#Section_3.1.4.1.49) for protocol version 3), ApiNodeNodeControl (Opnum 78; [3.1.4.1.79](#Section_3.1.4.1.79) for protocol version 2 or [3.1.4.2.79](#Section_3.1.4.1.79) for protocol version 3), ApiNodeControl (Opnum 79; [3.1.4.1.80](#Section_3.1.4.1.80) for protocol version 2 or [3.1.4.2.80](#Section_3.1.4.1.80) for protocol version 3), and ApiCreateNodeEnum (Opnum 101; [3.1.4.1.101](#Section_3.1.4.1.101) for protocol version 2 or [3.1.4.2.101](#Section_3.1.4.2.101) for protocol version 3).
 - Set configuration: Change the configuration data for a node, see ApiNodeNodeControl (Opnum 78; 3.1.4.1.79 for protocol version 2 or 3.1.4.2.79 for protocol version 3) and ApiNodeControl (Opnum 79; 3.1.4.1.80 for protocol version 2 or 3.1.4.2.80 for protocol version 3).
 <a id="Section_3.1.1.7"></a>
 #### 3.1.1.7 Cluster Networks and Cluster Network Interfaces
@@ -4849,13 +4849,13 @@ The nonvolatile cluster state associated with a cluster network and cluster netw
 A ClusAPI Protocol client can perform the following management operations on a cluster network:
 
 - Get State: For more information, see section [3.1.4.1.83](#Section_3.1.4.1.83) (protocol version 2) and section [3.1.4.2.83](#Section_3.1.4.1.83) (protocol version 3).
-- Query configuration: Querying the configuration data for a cluster network. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.83), [3.1.4.1.85](#Section_3.1.4.1.85), [3.1.4.1.86](#Section_3.1.4.1.86), [3.1.4.1.88](#Section_3.1.4.1.88) and [3.1.4.1.89](#Section_3.1.4.1.89) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.88), [3.1.4.2.85](#Section_3.1.4.2.85), [3.1.4.2.86](#Section_3.1.4.1.86), [3.1.4.2.88](#Section_3.1.4.2.88) and [3.1.4.2.89](#Section_3.1.4.1.89) (protocol version 3).
+- Query configuration: Querying the configuration data for a cluster network. For more information, see sections [3.1.4.1.8](#Section_3.1.4.1.85), [3.1.4.1.85](#Section_3.1.4.1.85), [3.1.4.1.86](#Section_3.1.4.1.86), [3.1.4.1.88](#Section_3.1.4.1.88) and [3.1.4.1.89](#Section_3.1.4.1.89) (protocol version 2), and sections [3.1.4.2.8](#Section_3.1.4.2.89), [3.1.4.2.85](#Section_3.1.4.2.85), [3.1.4.2.86](#Section_3.1.4.2.86), [3.1.4.2.88](#Section_3.1.4.2.88) and [3.1.4.2.89](#Section_3.1.4.2.89) (protocol version 3).
 - Set configuration: Change the configuration data for a cluster network. For more information, see sections [3.1.4.1.84](#Section_3.1.4.1.84), 3.1.4.1.87, 3.1.4.1.88, and 3.1.4.1.89 (protocol version 2), and sections [3.1.4.2.84](#Section_3.1.4.2.84), 3.1.4.2.88, and 3.1.4.2.89 (protocol version 3).
 A ClusAPI Protocol client can perform the following management operations on a cluster network interface:
 
-**Get State**: Return the current state of the designated cluster network interface. For more information, see section [3.1.4.1.94](#Section_3.1.4.1.94) (ClusAPI Protocol version 2.0) and section [3.1.4.2.94](#Section_3.1.4.1.94) (ClusAPI Protocol version 3.0).
+**Get State**: Return the current state of the designated cluster network interface. For more information, see section [3.1.4.1.94](#Section_3.1.4.1.94) (ClusAPI Protocol version 2.0) and section [3.1.4.2.94](#Section_3.1.4.2.94) (ClusAPI Protocol version 3.0).
 
-**Query configuration**: Query the configuration data for a cluster network interface. For more information, see sections [3.1.4.1.95](#Section_3.1.4.1.95) through [3.1.4.1.98](#Section_3.1.4.1.98) (protocol version 2), and sections [3.1.4.2.95](#Section_3.1.4.2.95) through [3.1.4.2.98](#Section_3.1.4.1.98) (protocol version 3).
+**Query configuration**: Query the configuration data for a cluster network interface. For more information, see sections [3.1.4.1.95](#Section_3.1.4.1.95) through [3.1.4.1.98](#Section_3.1.4.1.98) (protocol version 2), and sections [3.1.4.2.95](#Section_3.1.4.2.95) through [3.1.4.2.98](#Section_3.1.4.3.6) (protocol version 3).
 
 **Set configuration**: Change the configuration data for a cluster network interface. For more information, see sections 3.1.4.1.88 and 3.1.4.1.89 (protocol version 2), and sections 3.1.4.2.88 and 3.1.4.2.89 (protocol version3).
 
@@ -4877,14 +4877,14 @@ A version 2 event indication contains the following information:
 - A value from the [CLUSTER_OBJECT_TYPE (section 2.2.2.11)](#Section_2.2.2.11) enumeration that indicates the type of cluster object for which the event has occurred.
 - A value from one of the following enumerations, indicating the type of event that occurred.
 - [CLUSTER_CHANGE_CLUSTER_V2 (section 2.2.2.12)](#Section_2.2.2.12)
-- [CLUSTER_CHANGE_GROUP_V2 (section 2.2.2.13)](#Section_2.2.2.13)
-- [CLUSTER_CHANGE_RESOURCE_V2 (section 2.2.2.14)](#Section_2.2.2.14)
-- [CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section 2.2.2.15)](#Section_2.2.2.15)
-- [CLUSTER_CHANGE_NETINTERFACE_V2 (section 2.2.2.16)](#Section_2.2.2.16)
-- [CLUSTER_CHANGE_NETWORK_V2 (section 2.2.2.17)](#Section_2.2.2.17)
-- [CLUSTER_CHANGE_NODE_V2 (section 2.2.2.18)](#Section_2.2.2.18)
-- [CLUSTER_CHANGE_REGISTRY_V2 (section 2.2.2.19)](#Section_2.2.2.19)
-- [CLUSTER_CHANGE_QUORUM_V2 (section 2.2.2.20)](#Section_2.2.2.20)
+- [CLUSTER_CHANGE_GROUP_V2 (section 2.2.2.13)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_RESOURCE_V2 (section 2.2.2.14)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section 2.2.2.15)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_NETINTERFACE_V2 (section 2.2.2.16)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_NETWORK_V2 (section 2.2.2.17)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_NODE_V2 (section 2.2.2.18)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_REGISTRY_V2 (section 2.2.2.19)](#Section_2.2.2.7)
+- [CLUSTER_CHANGE_QUORUM_V2 (section 2.2.2.20)](#Section_2.2.2.7)
 - [CLUSTER_CHANGE_SHARED_VOLUME_V2 (section 2.2.2.21)](#Section_2.2.2.21)
 - The name of the object the event pertains to.
 - The ID of the object the event pertains to.
@@ -4897,8 +4897,8 @@ Each version 1 indication includes a 32-bit integer value that is associated wit
 A ClusAPI Protocol [**client**](#gt_client) can perform the following management operations on a version 1 cluster notification port (see section [4.3](#Section_4.3) for an example):
 
 - Create: Create a notification port for receiving information about changes in the cluster. For more information, see sections 3.1.4.1.56 (protocol version 2) and 3.1.4.2.56 (protocol version 3).
-- Close: Close the notification port. For more information, see sections [3.1.4.1.57](#Section_3.1.4.1.57) (protocol version 2), [3.1.4.2.57](#Section_3.1.4.1.57) (protocol version 3), [3.1.4.1.107](#Section_3.1.4.1.107) (protocol version 2), and [3.1.4.2.107](#Section_3.1.4.1.107) (protocol version 3).
-- Configure a notification port: Add a filter mask, a context value and/or objects of interest. For more information, see sections [3.1.4.1.58](#Section_3.1.4.1.58) through [3.1.4.1.65](#Section_3.1.4.1.65) (protocol version 2), sections [3.1.4.2.58](#Section_3.1.4.1.58) through [3.1.4.2.65](#Section_3.1.4.2.65) (protocol version 3), and sections [3.1.4.1.90](#Section_3.1.4.1.90) (protocol version 2), [3.1.4.1.91](#Section_3.1.4.1.91) (protocol version 2), [3.1.4.1.99](#Section_3.1.4.1.99) (protocol version 2), [3.1.4.1.100](#Section_3.1.4.1.100) (protocol version 2), [3.1.4.2.90](#Section_3.1.4.2.90) (protocol version 3), [3.1.4.2.91](#Section_3.1.4.1.91) (protocol version 3), [3.1.4.2.99](#Section_3.1.4.2.99) (protocol version 3), and [3.1.4.2.100](#Section_3.1.4.2.100) (protocol version 3).
+- Close: Close the notification port. For more information, see sections [3.1.4.1.57](#Section_3.1.4.1.57) (protocol version 2), [3.1.4.2.57](#Section_3.1.4.2.57) (protocol version 3), [3.1.4.1.107](#Section_3.1.4.1.107) (protocol version 2), and [3.1.4.2.107](#Section_3.1.4.1.107) (protocol version 3).
+- Configure a notification port: Add a filter mask, a context value and/or objects of interest. For more information, see sections [3.1.4.1.58](#Section_3.1.4.1.58) through [3.1.4.1.65](#Section_3.1.4.1.65) (protocol version 2), sections [3.1.4.2.58](#Section_3.1.4.2.58) through [3.1.4.2.65](#Section_3.1.4.1.65) (protocol version 3), and sections [3.1.4.1.90](#Section_3.1.4.1.90) (protocol version 2), [3.1.4.1.91](#Section_3.1.4.1.91) (protocol version 2), [3.1.4.1.99](#Section_3.1.4.1.99) (protocol version 2), [3.1.4.1.100](#Section_3.1.4.1.100) (protocol version 2), [3.1.4.2.90](#Section_3.1.4.1.90) (protocol version 3), [3.1.4.2.91](#Section_3.1.4.1.91) (protocol version 3), [3.1.4.2.99](#Section_3.1.4.2.99) (protocol version 3), and [3.1.4.2.100](#Section_3.1.4.2.100) (protocol version 3).
 - Retrieve an event: Get the first event at the head of the queue. For more information, see sections [3.1.4.1.66](#Section_3.1.4.1.66) (protocol version 2) and [3.1.4.2.66](#Section_3.1.4.2.66) (protocol version 3).
 A ClusAPI Protocol client can perform the following management operations on a version 2 cluster notification port:
 
@@ -4976,8 +4976,8 @@ The level of access granted to a [**client**](#gt_client) is associated with the
 
 The level of access granted to a client is initialized when the context handle is created or opened, as specified in the following sections:
 
-- HCLUSTER_RPC: ApiOpenCluster ([3.1.4.1.1](#Section_3.1.4.1.16) for protocol version 2 and [3.1.4.2.1](#Section_3.1.4.2.160) for protocol version 3) and [ApiOpenClusterEx](#Section_3.1.4.2.116) (protocol version 3 only).
-- HRES_RPC: ApiOpenResource ([3.1.4.1.9](#Section_3.1.4.1.96) for protocol version 2 and [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3), [ApiOpenResourceEx](#Section_3.1.4.2.119) (protocol version 3 only), and ApiCreateResource ([3.1.4.1.10](#Section_3.1.4.1.107) for protocol version 2 and [3.1.4.2.10](#Section_3.1.4.2.10) for protocol version 3).
+- HCLUSTER_RPC: ApiOpenCluster ([3.1.4.1.1](#Section_3.1.4.1.14) for protocol version 2 and [3.1.4.2.1](#Section_3.1.4.2.139) for protocol version 3) and [ApiOpenClusterEx](#Section_3.1.4.2.116) (protocol version 3 only).
+- HRES_RPC: ApiOpenResource ([3.1.4.1.9](#Section_3.1.4.1.90) for protocol version 2 and [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3), [ApiOpenResourceEx](#Section_3.1.4.2.119) (protocol version 3 only), and ApiCreateResource ([3.1.4.1.10](#Section_3.1.4.1.107) for protocol version 2 and [3.1.4.2.10](#Section_3.1.4.2.100) for protocol version 3).
 - HGROUP_RPC: ApiOpenGroup ([3.1.4.1.42](#Section_3.1.4.1.42) for protocol version 2 and [3.1.4.2.42](#Section_3.1.4.2.42) for protocol version 3), [ApiOpenGroupEx](#Section_3.1.4.2.118) (protocol version 3 only), and ApiCreateGroup ([3.1.4.1.43](#Section_3.1.4.1.43) for protocol version 2 and [3.1.4.2.43](#Section_3.1.4.2.43) for protocol version 3).
 - HNODE_RPC: ApiOpenNode ([3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2 and [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3) and [ApiOpenNodeEx](#Section_3.1.4.2.117) (protocol version 3 only).
 - HNETWORK_RPC: ApiOpenNetwork ([3.1.4.1.81](#Section_3.1.4.1.81) for protocol version 2 and [3.1.4.2.81](#Section_3.1.4.2.81) for protocol version 3) and [ApiOpenNetworkEx](#Section_3.1.4.2.120) (protocol version 3 only).
@@ -5023,7 +5023,7 @@ ClusAPI Protocol version 2.0 servers maintain a GetNotify timer for each notific
 <a id="Section_3.1.2.5"></a>
 #### 3.1.2.5 Arbitration Timer
 
-The [**server**](#gt_server) maintains an Arbitration timer for the quorum resource if a quorum resource has been designated by a call to the ApiSetQuorumResource (Opnum 6) method (see ApiSetQuorumResource; [3.1.4.1.7](#Section_3.1.4.1.70) for protocol version 2 or [3.1.4.2.7](#Section_3.1.4.1.7) for protocol version 3). This timer is used by the server in an implementation-specific manner as specified in [CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT (section 3.1.4.3.2.6)](#Section_3.1.4.3.2.6).
+The [**server**](#gt_server) maintains an Arbitration timer for the quorum resource if a quorum resource has been designated by a call to the ApiSetQuorumResource (Opnum 6) method (see ApiSetQuorumResource; [3.1.4.1.7](#Section_3.1.4.1.71) for protocol version 2 or [3.1.4.2.7](#Section_3.1.4.1.7) for protocol version 3). This timer is used by the server in an implementation-specific manner as specified in [CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT (section 3.1.4.3.2.6)](#Section_3.1.4.3.2.6).
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -5061,10 +5061,10 @@ Servers MUST provide information about the configuration and current status of t
 
 Each cluster object, with the exception of cluster registry keys, is associated with a key in the cluster registry. The hierarchical name of the registry key, relative to the root key that is obtained by using the [ApiGetRootKey (section 3.1.4.1.29)](#Section_3.1.4.1.29) and the [ApiGetRootKey (section 3.1.4.2.29)](#Section_3.1.4.2.29) methods, MUST be as follows: a null-terminated [**Unicode string**](#gt_unicode-string) that is specific to the object type, followed by the [**Unicode**](#gt_unicode) character "\", followed by the object ID that is obtained by using the object appropriate method for obtaining the object's ID:
 
-- For resources, ApiGetResourceId (Opnum 14): section [3.1.4.1.15](#Section_3.1.4.1.15) for protocol version 2, and [3.1.4.2.15](#Section_3.1.4.1.15) for protocol version 3.0.
+- For resources, ApiGetResourceId (Opnum 14): section [3.1.4.1.15](#Section_3.1.4.1.15) for protocol version 2, and [3.1.4.2.15](#Section_3.1.4.2.15) for protocol version 3.0.
 - For groups, ApiGetGroupId (Opnum 47): section [3.1.4.1.48](#Section_3.1.4.1.48) for protocol version 2, and [3.1.4.2.48](#Section_3.1.4.2.48) for protocol version 3.0.
 - For nodes, ApiGetNodeId (Opnum 48): section [3.1.4.1.49](#Section_3.1.4.1.49) for protocol version 2, and [3.1.4.2.49](#Section_3.1.4.1.49) for protocol version 3.0.
-- For cluster networks, ApiGetNetworkId (Opnum 86): section [3.1.4.1.86](#Section_3.1.4.1.86) for protocol version 2, and [3.1.4.2.86](#Section_3.1.4.1.86) for protocol version 3.0.
+- For cluster networks, ApiGetNetworkId (Opnum 86): section [3.1.4.1.86](#Section_3.1.4.1.86) for protocol version 2, and [3.1.4.2.86](#Section_3.1.4.2.86) for protocol version 3.0.
 - For cluster network interfaces, ApiGetNetInterfaceId (Opnum 96): section [3.1.4.1.96](#Section_3.1.4.1.96) for protocol version 2, and [3.1.4.2.96](#Section_3.1.4.1.96) for protocol version 3.0.
 For example, consider a resource with the following ID.
 
@@ -5096,7 +5096,7 @@ This protocol<57> MUST indicate to the RPC runtime by means of the strict_contex
 
 The methods MUST NOT throw an exception except those thrown by the underlying RPC protocol [MS-RPCE], as specified in [MS-RPCE].
 
-Any [**active node**](#gt_active-node) in the [**cluster**](#gt_cluster) MUST have [**protocol server state**](#gt_protocol-server-state) set to read/write, as specified in section [3.1.1](#Section_1.3). As such, it MUST accept ClusAPI Protocol requests from clients that have successfully completed the initialization steps, as specified in section [3.2.3](#Section_3.1.3). For [**client**](#gt_client) requests that change the [**cluster state**](#gt_cluster-state), after the client request is completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node. For client requests that change non-volatile cluster state, after the client request has completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node, even after one or all nodes have failed or restarted.
+Any [**active node**](#gt_active-node) in the [**cluster**](#gt_cluster) MUST have [**protocol server state**](#gt_protocol-server-state) set to read/write, as specified in section [3.1.1](#Section_1.3). As such, it MUST accept ClusAPI Protocol requests from clients that have successfully completed the initialization steps, as specified in section [3.2.3](#Section_3.2.3). For [**client**](#gt_client) requests that change the [**cluster state**](#gt_cluster-state), after the client request is completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node. For client requests that change non-volatile cluster state, after the client request has completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node, even after one or all nodes have failed or restarted.
 
 Any active node in the cluster MUST accept ClusAPI Protocol requests from valid clients. A valid client is a client that has successfully completed the initialization steps as specified in section 3.2.3. For client requests that change the cluster state, after the client request is completed, the updated cluster state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node.
 
@@ -5135,15 +5135,15 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [ApiOpenCluster](#Section_3.1.4.1.16) | Obtains an [HCLUSTER_RPC](#Section_2.2.1.1) context handle to a cluster, enabling the client to issue subsequent methods pertaining to the specified cluster. Opnum: 0 |
-| [ApiCloseCluster](#Section_3.1.4.1.28) | Instructs the server to free the context specified by the HCLUSTER_RPC context handle previously obtained by ApiOpenCluster. Opnum: 1 |
+| [ApiOpenCluster](#Section_3.1.4.1.14) | Obtains an [HCLUSTER_RPC](#Section_2.2.1.1) context handle to a cluster, enabling the client to issue subsequent methods pertaining to the specified cluster. Opnum: 0 |
+| [ApiCloseCluster](#Section_3.1.4.1.29) | Instructs the server to free the context specified by the HCLUSTER_RPC context handle previously obtained by ApiOpenCluster. Opnum: 1 |
 | [ApiSetClusterName](#Section_3.1.4.1.3) | Changes the name of the cluster. Opnum: 2 |
-| [ApiGetClusterName](#Section_3.1.4.1.45) | Queries the cluster name and the host name of the node acting as an RPC interface server. Opnum: 3 |
+| [ApiGetClusterName](#Section_3.1.4.1.47) | Queries the cluster name and the host name of the node acting as an RPC interface server. Opnum: 3 |
 | [ApiGetClusterVersion](#Section_3.1.4.1.5) | Queries version information about the cluster and the protocol server software. Opnum: 4 |
-| [ApiGetQuorumResource](#Section_3.1.4.2.6) | Queries the quorum configuration for the cluster. Opnum: 5 |
-| [ApiSetQuorumResource](#Section_3.1.4.1.70) | Changes the quorum configuration for the cluster. Opnum: 6 |
-| [ApiCreateEnum](#Section_3.1.4.1.83) | Queries an enumeration of named objects from the cluster state. Opnum: 7 |
-| [ApiOpenResource](#Section_3.1.4.1.96) | Obtains an [HRES_RPC](#Section_2.2.1.4) context handle to a [**resource**](#gt_resource), enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 8 |
+| [ApiGetQuorumResource](#Section_3.1.4.1.6) | Queries the quorum configuration for the cluster. Opnum: 5 |
+| [ApiSetQuorumResource](#Section_3.1.4.1.71) | Changes the quorum configuration for the cluster. Opnum: 6 |
+| [ApiCreateEnum](#Section_3.1.4.1.85) | Queries an enumeration of named objects from the cluster state. Opnum: 7 |
+| [ApiOpenResource](#Section_3.1.4.1.90) | Obtains an [HRES_RPC](#Section_2.2.1.4) context handle to a [**resource**](#gt_resource), enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 8 |
 | [ApiCreateResource](#Section_3.1.4.1.107) | Creates an instance of a cluster resource in the non-volatile cluster state for the specified [**resource type**](#gt_resource-type). Returns an HRES_RPC context handle to the resource, enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 9 |
 | [ApiDeleteResource](#Section_3.1.4.1.11) | Removes the specified resource from the non-volatile cluster state. Opnum: 10 |
 | [ApiCloseResource](#Section_3.1.4.1.12) | Instructs the server to free the context specified by the HRES_RPC context handle previously obtained by ApiOpenResource. Opnum: 11 |
@@ -5241,7 +5241,7 @@ Methods in RPC Opnum Order
 | [ApiCreateResTypeEnum](#Section_3.1.4.1.103) | Queries an enumeration of named [**cluster objects**](#gt_cluster-object) associated with the specified resource type. Opnum: 103 |
 | [ApiBackupClusterDatabase](#Section_3.1.4.1.104) | Instructs the server to make a backup copy of the cluster configuration data. Opnum: 104 |
 | [ApiNodeClusterControl](#Section_3.1.4.1.105) | Instructs the server to initiate an operation on the specified cluster based on the specified control code. The operation is executed on the specified node. Opnum: 105 |
-| [ApiClusterControl](#Section_3.1.4.2.106) | Instructs the server to initiate an operation on the specified cluster based on the specified control code. The operation is executed on the node where the HCLUSTER_RPC context handle was obtained. Opnum: 106 |
+| [ApiClusterControl](#Section_3.1.4.3.7) | Instructs the server to initiate an operation on the specified cluster based on the specified control code. The operation is executed on the node where the HCLUSTER_RPC context handle was obtained. Opnum: 106 |
 | [ApiUnblockGetNotifyCall](#Section_3.1.4.1.107) | Instructs the server to complete any outstanding ApiGetNotify calls as a precursor to closing the notification port. Opnum: 107 |
 | [ApiSetServiceAccountPassword](#Section_3.1.4.1.108) | Changes the password associated with the operational identity of the cluster service. Opnum: 108 |
 
@@ -5267,7 +5267,7 @@ HCLUSTER_RPC ApiOpenCluster(
 <a id="Section_3.1.4.1.2"></a>
 ##### 3.1.4.1.2 ApiCloseCluster (Opnum 1)
 
-(Protocol Version 2) The ApiCloseCluster method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenCluster](#Section_3.1.4.1.16) method call.
+(Protocol Version 2) The ApiCloseCluster method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenCluster](#Section_3.1.4.1.14) method call.
 
 The server SHOULD accept an ApiCloseCluster request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -5454,11 +5454,11 @@ error_status_t ApiSetQuorumResource(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **lpszDeviceName:** A [**Unicode string**](#gt_unicode-string) identifying a directory on the disk (when the *hResource* parameter represents a storage device) where the cluster will store its configuration database.
 
-**dwMaxQuorumLogSize:** A 32-bit integer that indicates the maximum size, in bytes, to which the quorum log file will grow. If zero is supplied, then the server MUST set the log size to a default value. Whether and how a server uses a quorum log file as well as the default log size value is implementation-specific. A client can query the server for the default log size by setting *dwMaxQuorumLogSize* to 0, and then performing a subsequent call to the [ApiGetQuorumResource](#Section_3.1.4.2.6) method.
+**dwMaxQuorumLogSize:** A 32-bit integer that indicates the maximum size, in bytes, to which the quorum log file will grow. If zero is supplied, then the server MUST set the log size to a default value. Whether and how a server uses a quorum log file as well as the default log size value is implementation-specific. A client can query the server for the default log size by setting *dwMaxQuorumLogSize* to 0, and then performing a subsequent call to the [ApiGetQuorumResource](#Section_3.1.4.1.6) method.
 
 **Return Values:** The method MUST return the following error codes for the conditions that are specified as follows.
 
@@ -5520,7 +5520,7 @@ For any other condition, the server MUST return a value that is not one of the v
 
 (Protocol Version 2) The ApiOpenResource method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified cluster resource by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenResource returns a context handle so that the client can refer to the [**resource**](#gt_resource) in subsequent method call.
 
-There are several ways in which the client can determine the name of the resource to specify for the *lpszResourceName* parameter. A resource can have a well-known name if the resource was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.83) with enumeration type CLUSTER_ENUM_RESOURCE, as specified in section 3.1.4.1.8. This method obtains a list of all resource names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open resources to call additional methods to determine which resources to operate on.
+There are several ways in which the client can determine the name of the resource to specify for the *lpszResourceName* parameter. A resource can have a well-known name if the resource was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.85) with enumeration type CLUSTER_ENUM_RESOURCE, as specified in section 3.1.4.1.8. This method obtains a list of all resource names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open resources to call additional methods to determine which resources to operate on.
 
 The server SHOULD accept an ApiOpenResource request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -5631,7 +5631,7 @@ error_status_t ApiDeleteResource(
 
 );
 
-**hResource:** An HRES_RPC context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An HRES_RPC context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **Return Values:** The method MUST return the following error codes for the specified conditions.
 
@@ -5651,7 +5651,7 @@ For any other condition, the server MUST set *Status* to a value that is not one
 <a id="Section_3.1.4.1.12"></a>
 ##### 3.1.4.1.12 ApiCloseResource (Opnum 11)
 
-(Protocol Version 2) The ApiCloseResource method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method.
+(Protocol Version 2) The ApiCloseResource method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method.
 
 The server SHOULD accept an ApiCloseResource request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -5697,7 +5697,7 @@ error_status_t ApiGetResourceState(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **State:** The current state of the resource, which is written by the server to indicate the success of this method. If the method fails, this parameter MUST be ignored. If the method succeeds, State MUST be set to one of the following values.
 
@@ -5740,7 +5740,7 @@ error_status_t ApiSetResourceName(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **lpszResourceName:** A pointer to a [**Unicode string**](#gt_unicode-string) that contains the new name of the resource.
 
@@ -5771,7 +5771,7 @@ error_status_t ApiGetResourceId(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **pGuid:** The address of a pointer where the server MUST write, upon successful completion of this method, the address of a [**Unicode string**](#gt_unicode-string) buffer containing the unique ID of the resource. The server MUST allocate as much memory as is required to return the ID. If the method fails, this parameter MUST be ignored.<59>
 
@@ -5799,7 +5799,7 @@ error_status_t ApiGetResourceType(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **lpszResourceType:** The address of a pointer where the server MUST write, upon successful completion of this method, the address of a [**Unicode string**](#gt_unicode-string) buffer containing the name of the resource type of the specified resource. The server MUST allocate as much memory as is required to return the resource type. If the method fails, this parameter MUST be ignored.
 
@@ -5825,7 +5825,7 @@ error_status_t ApiFailResource(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **Return Values:** The method MUST return the following error codes for the specified conditions.
 
@@ -5873,7 +5873,7 @@ error_status_t ApiOnlineResource(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **Return Values:** The method MUST return the following error codes for the specified conditions.
 
@@ -5918,7 +5918,7 @@ error_status_t ApiOfflineResource(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **Return Values:** The method MUST return the following error codes for the specified conditions.
 
@@ -5950,7 +5950,7 @@ error_status_t ApiAddResourceDependency(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **hDependsOn:** An HRES_RPC context handle that was obtained in a previous ApiOpenResource method call. After successful completion of this method, the resource that is specified in the *hResource* parameter has a simple dependency to this resource.
 
@@ -5988,7 +5988,7 @@ error_status_t ApiRemoveResourceDependency(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **hDependsOn:** An HRES_RPC context handle that is obtained in a previous ApiOpenResource method call.
 
@@ -6026,7 +6026,7 @@ error_status_t ApiCanResourceBeDependent(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **hResourceDependent:** An HRES_RPC context handle that was obtained in a previous ApiOpenResource or ApiCreateResource method call.
 
@@ -6065,7 +6065,7 @@ error_status_t ApiCreateResEnum(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **dwType:** The type of enumeration to be returned by the server. This [**value**](#gt_value) MUST be set to the bitwise OR operator of one or more of the following values.
 
@@ -6105,7 +6105,7 @@ error_status_t ApiAddResourceNode(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **hNode:** An [HNODE_RPC](#Section_2.2.1.2) context handle that was obtained in a previous [ApiOpenNode](#Section_3.1.4.1.67) method call.
 
@@ -6142,7 +6142,7 @@ error_status_t ApiRemoveResourceNode(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **hNode:** An [HNODE_RPC](#Section_2.2.1.2) context handle that is obtained in a previous [ApiOpenNode](#Section_3.1.4.1.67) method call.
 
@@ -6179,7 +6179,7 @@ error_status_t ApiChangeResourceGroup(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **hGroup:** An [HGROUP_RPC](#Section_2.2.1.3) context handle that was obtained in a previous [ApiOpenGroup](#Section_3.1.4.1.42) or [ApiCreateGroup](#Section_3.1.4.1.43) method call.
 
@@ -7355,7 +7355,7 @@ error_status_t ApiAddNotifyCluster(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.1.56)](#Section_3.1.4.1.56) method call.
 
-**hCluster:** An [HCLUSTER_RPC (section 2.2.1.1)](#Section_2.2.1.1) context handle that was obtained in a previous [ApiOpenCluster (section 3.1.4.1.1)](#Section_3.1.4.1.16) method call.
+**hCluster:** An [HCLUSTER_RPC (section 2.2.1.1)](#Section_2.2.1.1) context handle that was obtained in a previous [ApiOpenCluster (section 3.1.4.1.1)](#Section_3.1.4.1.14) method call.
 
 **dwFilter:** A 32-bit integer bitmask containing the bitwise OR operator of one or more values in a CLUSTER_CHANGE (section 2.2.2.7) enumeration. This parameter MUST NOT have any of the following values set: CLUSTER_CHANGE_CLUSTER_STATE, CLUSTER_CHANGE_CLUSTER_RECONNECT, or CLUSTER_CHANGE_HANDLE_CLOSE.
 
@@ -7443,7 +7443,7 @@ error_status_t ApiAddNotifyGroup(
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.1.66)](#Section_3.1.4.1.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hGroup* (the second parameter).
 
-**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyGroup (section 3.1.4.1.64)](#Section_3.1.4.1.64) method, as specified in section [3.1.4.2.64](#Section_3.1.4.1.64).
+**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyGroup (section 3.1.4.1.64)](#Section_3.1.4.1.64) method, as specified in section [3.1.4.2.64](#Section_3.1.4.2.64).
 
 **Return Values:** The method MUST return the following error codes for the specified conditions.
 
@@ -7479,13 +7479,13 @@ error_status_t ApiAddNotifyResource(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.1.56)](#Section_3.1.4.1.56) method call.
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.1.9)](#Section_3.1.4.1.96) or [ApiCreateResource (section 3.1.4.1.10)](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.1.9)](#Section_3.1.4.1.90) or [ApiCreateResource (section 3.1.4.1.10)](#Section_3.1.4.1.107) method call.
 
 **dwFilter:** A 32-bit integer bitmask containing one or more resource-specific values in a CLUSTER_CHANGE (section 2.2.2.7) enumeration. The value of this parameter MUST be set to the bitwise OR operator of one or more of the following values: CLUSTER_CHANGE_RESOURCE_ADD, CLUSTER_CHANGE_RESOURCE_DELETE, CLUSTER_CHANGE_RESOURCE_STATE, or CLUSTER_CHANGE_RESOURCE_PROPERTY.
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.1.66)](#Section_3.1.4.1.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hResource* (the second parameter).
 
-**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyResource (section 3.1.4.1.65)](#Section_3.1.4.1.65) method, as specified in section [3.1.4.2.65](#Section_3.1.4.2.65).
+**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyResource (section 3.1.4.1.65)](#Section_3.1.4.1.65) method, as specified in section [3.1.4.2.65](#Section_3.1.4.1.65).
 
 **Return Values:** The method MUST return the following error codes for the specified conditions.
 
@@ -7655,7 +7655,7 @@ error_status_t ApiReAddNotifyResource(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.1.56)](#Section_3.1.4.1.56) method call.
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.1.9)](#Section_3.1.4.1.96) or [ApiCreateResource (section 3.1.4.1.10)](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.1.9)](#Section_3.1.4.1.90) or [ApiCreateResource (section 3.1.4.1.10)](#Section_3.1.4.1.107) method call.
 
 **dwFilter:** A 32-bit integer containing one or more resource-specific values in a **CLUSTER_CHANGE** enumeration. The value of this parameter MUST be set to the bitwise OR operator of one or more of the following values: CLUSTER_CHANGE_RESOURCE_ADD, CLUSTER_CHANGE_RESOURCE_DELETE, CLUSTER_CHANGE_RESOURCE_STATE and CLUSTER_CHANGE_RESOURCE_PROPERTY.
 
@@ -7703,7 +7703,7 @@ error_status_t ApiGetNotify(
 
 **dwNotifyKey:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The value was supplied as the *dwNotifyKey* parameter in a previous call to one of the following methods: [ApiAddNotifyCluster (section 3.1.4.1.58)](#Section_3.1.4.1.58), [ApiAddNotifyNode (section 3.1.4.1.59)](#Section_3.1.4.1.59), [ApiAddNotifyGroup (section 3.1.4.1.60)](#Section_3.1.4.1.60), [ApiAddNotifyResource (section 3.1.4.1.61)](#Section_3.1.4.1.61), [ApiAddNotifyKey (section 3.1.4.1.62)](#Section_3.1.4.1.62), [ApiAddNotifyNetwork (section 3.1.4.1.90)](#Section_3.1.4.1.90), [ApiAddNotifyNetInterface (section 3.1.4.1.99)](#Section_3.1.4.1.99), [ApiReAddNotifyNode (section 3.1.4.1.63)](#Section_3.1.4.1.63), [ApiReAddNotifyGroup (section 3.1.4.1.64)](#Section_3.1.4.1.64), [ApiReAddNotifyResource (section 3.1.4.1.65)](#Section_3.1.4.1.65), [ApiReAddNotifyNetwork (section 3.1.4.1.91)](#Section_3.1.4.1.91), or [ApiReAddNotifyNetInterface (section 3.1.4.1.100)](#Section_3.1.4.1.100).
 
-**dwFilter:** The address of a 32-bit integer value that the server MUST write upon successful completion of this method, which contains the CLUSTER_CHANGE (section 2.2.2.7) enumeration value, as specified in section 2.2.2.7, indicating the type of event. The value MUST match one or more filter blocks that were provided in a previous call to one of the following methods: ApiAddNotifyCluster (section 3.1.4.1.58), [ApiAddNotifyNode (section 3.1.4.2.59)](#Section_3.1.4.2.59), ApiAddNotifyGroup (section 3.1.4.1.60), [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.1.61), ApiAddNotifyKey (section 3.1.4.1.62), ApiAddNotifyNetwork (section 3.1.4.1.90), ApiAddNotifyNetInterface (section 3.1.4.1.99), ApiReAddNotifyNode (section 3.1.4.1.63), ApiReAddNotifyGroup (section 3.1.4.1.64), ApiReAddNotifyResource (section 3.1.4.1.65), ApiReAddNotifyNetwork (section 3.1.4.1.91), or ApiReAddNotifyNetInterface (section 3.1.4.1.100).
+**dwFilter:** The address of a 32-bit integer value that the server MUST write upon successful completion of this method, which contains the CLUSTER_CHANGE (section 2.2.2.7) enumeration value, as specified in section 2.2.2.7, indicating the type of event. The value MUST match one or more filter blocks that were provided in a previous call to one of the following methods: ApiAddNotifyCluster (section 3.1.4.1.58), [ApiAddNotifyNode (section 3.1.4.2.59)](#Section_3.1.4.2.59), ApiAddNotifyGroup (section 3.1.4.1.60), [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.2.61), ApiAddNotifyKey (section 3.1.4.1.62), ApiAddNotifyNetwork (section 3.1.4.1.90), ApiAddNotifyNetInterface (section 3.1.4.1.99), ApiReAddNotifyNode (section 3.1.4.1.63), ApiReAddNotifyGroup (section 3.1.4.1.64), ApiReAddNotifyResource (section 3.1.4.1.65), ApiReAddNotifyNetwork (section 3.1.4.1.91), or ApiReAddNotifyNetInterface (section 3.1.4.1.100).
 
 **dwStateSequence:** The address of a 32-bit integer value that the server MUST write upon successful completion of this method. The [**client**](#gt_client) MUST retain this value for reuse when calling any of the following methods: ApiReAddNotifyNode (section 3.1.4.1.63), ApiReAddNotifyGroup (section 3.1.4.1.64), ApiReAddNotifyResource (section 3.1.4.1.65), ApiReAddNotifyNetwork (section 3.1.4.1.91), or ApiReAddNotifyNetInterface (section 3.1.4.1.100).
 
@@ -7726,7 +7726,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 2) The ApiOpenNode method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified [**cluster**](#gt_cluster) [**node**](#gt_node) by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenNode returns a context handle so that the client can refer to the context that is created in subsequent method calls.
 
-There are several ways by which the client can determine the name of the node to specify for the *lpszNodeName* parameter. A node can have a well-known name if the node was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.83) with enumeration type CLUSTER_ENUM_NODE, as specified in section 3.1.4.1.8. This method obtains a list of all node names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open nodes to call additional methods in order to determine which nodes to operate on.
+There are several ways by which the client can determine the name of the node to specify for the *lpszNodeName* parameter. A node can have a well-known name if the node was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.85) with enumeration type CLUSTER_ENUM_NODE, as specified in section 3.1.4.1.8. This method obtains a list of all node names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open nodes to call additional methods in order to determine which nodes to operate on.
 
 The server SHOULD accept an ApiOpenNode request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -7818,7 +7818,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 2) The ApiPauseNode method instructs the [**server**](#gt_server) to suspend [**group**](#gt_group) ownership and failover activity on the designated [**node**](#gt_node). The persistent state of the node is set to paused, as specified in section [3.1.1.6](#Section_3.1.1.6).
 
-The server MUST NOT move a group to a node in the ClusterNodePaused state in response to a [**client**](#gt_client) request, such as [ApiMoveGroup](#Section_3.1.4.1.52) or [ApiMoveGroupToNode](#Section_3.1.4.1.53). If a node hosting one or more groups fails, then the server MUST NOT move those groups to a node in the ClusterNodePaused state if there are any other nodes in the ClusterNodeUp state. If a node hosting one or more groups fails, and there are no remaining nodes in the ClusterNodeUp state but there are nodes in the ClusterNodePaused state, then the server MUST move those groups to a node in the ClusterNodePaused state; however, the server MUST NOT bring those groups online. If there are groups hosted on a node in the ClusterNodePaused state, the server MUST NOT allow those groups or any resources in those groups to transition to the online state, such as in response to an [ApiOnlineGroup](#Section_3.1.4.1.50) or [ApiOnlineResource](#Section_3.1.4.1.18) request from a client. However, the server MUST permit the quorum [**resource**](#gt_resource), as designated by a previous call to [ApiSetQuorumResource](#Section_3.1.4.1.70), to come online on a node, even if that node is in the ClusterNodePaused state.
+The server MUST NOT move a group to a node in the ClusterNodePaused state in response to a [**client**](#gt_client) request, such as [ApiMoveGroup](#Section_3.1.4.1.52) or [ApiMoveGroupToNode](#Section_3.1.4.1.53). If a node hosting one or more groups fails, then the server MUST NOT move those groups to a node in the ClusterNodePaused state if there are any other nodes in the ClusterNodeUp state. If a node hosting one or more groups fails, and there are no remaining nodes in the ClusterNodeUp state but there are nodes in the ClusterNodePaused state, then the server MUST move those groups to a node in the ClusterNodePaused state; however, the server MUST NOT bring those groups online. If there are groups hosted on a node in the ClusterNodePaused state, the server MUST NOT allow those groups or any resources in those groups to transition to the online state, such as in response to an [ApiOnlineGroup](#Section_3.1.4.1.50) or [ApiOnlineResource](#Section_3.1.4.1.18) request from a client. However, the server MUST permit the quorum [**resource**](#gt_resource), as designated by a previous call to [ApiSetQuorumResource](#Section_3.1.4.1.71), to come online on a node, even if that node is in the ClusterNodePaused state.
 
 The [**cluster**](#gt_cluster) takes necessary and appropriate actions, by using implementation-specific mechanisms between servers, in order to bring all nodes into their persistent state.
 
@@ -7958,7 +7958,7 @@ length_is (*lpBytesReturned)] unsigned char *lpOutBuffer,
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.96) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.1.90) or [ApiCreateResource](#Section_3.1.4.1.107) method call.
 
 **dwControlCode:** Indicates the operation to perform on the resource. It MUST be one of the following values.
 
@@ -7966,10 +7966,10 @@ length_is (*lpBytesReturned)] unsigned char *lpOutBuffer,
 | --- | --- |
 | [CLUSCTL_RESOURCE_UNKNOWN](#Section_3.1.4.3.1.1) 0x1000000 | Verifies that control codes for the resource are being processed. |
 | [CLUSCTL_RESOURCE_GET_CHARACTERISTICS](#Section_3.1.4.3.1.2) 0x1000005 | Retrieves the intrinsic [**characteristics**](#gt_characteristic) associated with the resource. |
-| [CLUSCTL_RESOURCE_GET_FLAGS](#Section_3.1.4.3.1.38) 0x1000009 | Retrieves the flags that are set for a resource. |
-| [CLUSCTL_RESOURCE_GET_CLASS_INFO](#Section_3.1.4.3.1.41) 0x100000D | Retrieves info about the class to which the designated resource belongs. |
-| [CLUSCTL_RESOURCE_GET_REQUIRED_DEPENDENCIES](#Section_3.1.4.3.1.5) 0x1000011 | Retrieves a list of the names of [**resource types**](#gt_resource-type) on which the designated resource MUST be dependent on in order to properly operate. |
-| [CLUSCTL_RESOURCE_GET_NAME](#Section_3.1.4.3.1.64) 0x1000029 | Retrieves the name of the resource. |
+| [CLUSCTL_RESOURCE_GET_FLAGS](#Section_3.1.4.3.1.31) 0x1000009 | Retrieves the flags that are set for a resource. |
+| [CLUSCTL_RESOURCE_GET_CLASS_INFO](#Section_3.1.4.3.1.44) 0x100000D | Retrieves info about the class to which the designated resource belongs. |
+| [CLUSCTL_RESOURCE_GET_REQUIRED_DEPENDENCIES](#Section_3.1.1.1.2) 0x1000011 | Retrieves a list of the names of [**resource types**](#gt_resource-type) on which the designated resource MUST be dependent on in order to properly operate. |
+| [CLUSCTL_RESOURCE_GET_NAME](#Section_3.1.4.3.1.60) 0x1000029 | Retrieves the name of the resource. |
 | [CLUSCTL_RESOURCE_GET_RESOURCE_TYPE](#Section_3.1.4.3.1.7) 0x100002D | Retrieves the resource type of the designated resource. |
 | [CLUSCTL_RESOURCE_GET_ID](#Section_3.1.4.3.1.8) 0x1000039 | Retrieves the unique ID for the resource. |
 | [CLUSCTL_RESOURCE_ENUM_COMMON_PROPERTIES](#Section_3.1.4.3.1.9) 0x1000051 | Retrieves a list of the [**common property**](#gt_common-property) names for the designated resource. |
@@ -8115,7 +8115,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 
 );
 
-**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.1.16) method call.
+**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.1.14) method call.
 
 **lpszResourceTypeName:** A [**Unicode string**](#gt_unicode-string) that is the name of the type of resource that will execute this operation.
 
@@ -8125,7 +8125,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 | --- | --- |
 | [CLUSCTL_RESOURCE_TYPE_UNKNOWN](#Section_3.1.4.3.2.1) 0x02000000 | Verifies that control codes for the resource type are being processed. |
 | [CLUSCTL_RESOURCE_TYPE_GET_CHARACTERISTICS](#Section_3.1.4.3.2.2) 0x02000005 | Retrieves the intrinsic [**characteristics**](#gt_characteristic) associated with the resource type. |
-| [CLUSCTL_RESOURCE_TYPE_GET_FLAGS](#Section_3.1.4.3.2.30) 0x02000009 | Retrieves the flags that are set for the resource type. |
+| [CLUSCTL_RESOURCE_TYPE_GET_FLAGS](#Section_3.1.4.3.2.3) 0x02000009 | Retrieves the flags that are set for the resource type. |
 | [CLUSCTL_RESOURCE_TYPE_GET_CLASS_INFO](#Section_3.1.4.3.2.4) 0x0200000D | Retrieves info about the class to which the resource type belongs. |
 | [CLUSCTL_RESOURCE_TYPE_GET_REQUIRED_DEPENDENCIES](#Section_3.1.4.3.2.5) 0x02000011 | Retrieves a list of the names of resource types on which an instance of this resource type MUST be dependent on in order to properly operate. |
 | [CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT](#Section_3.1.4.3.2.6) 0x02000015 | Queries the arbitration time-out value for the designated storage class resource. |
@@ -8181,7 +8181,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 Upon receiving this message, the server MUST:
 
-- Determine the number of bytes that are required for *lpOutBuffer*. If the size indicated by *nOutBufferSize* is less than the number of bytes that are required for *lpOutBuffer*, return ERROR_MORE_DATA (0x000000EA), except as specified in the subsections of [3.1.4.3.2](#Section_3.1.4.3.2.8) where a different value is returned, and set *lpcbRequired* to the number of bytes that are required for the output buffer.
+- Determine the number of bytes that are required for *lpOutBuffer*. If the size indicated by *nOutBufferSize* is less than the number of bytes that are required for *lpOutBuffer*, return ERROR_MORE_DATA (0x000000EA), except as specified in the subsections of [3.1.4.3.2](#Section_3.1.4.3.2.20) where a different value is returned, and set *lpcbRequired* to the number of bytes that are required for the output buffer.
 - Return either ERROR_INVALID_DATA or ERROR_INVALID_PARAMETER if the input data is invalid or incorrectly formatted. The client MUST treat these two error codes the same.
 <a id="Section_3.1.4.1.77"></a>
 ##### 3.1.4.1.77 ApiNodeGroupControl (Opnum 76)
@@ -8410,7 +8410,7 @@ Upon receiving this message, the server MUST:
 
 (Protocol Version 2) The ApiOpenNetwork method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified [**cluster**](#gt_cluster) [**network**](#gt_network) by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenNetwork returns a context handle so that the client can refer to the context that is created in subsequent method calls.
 
-There are several ways by which the client can determine the name of the [**cluster network**](#gt_cluster-network) to specify for the *lpszNetworkName* parameter. A cluster network can have a well-known name if the cluster network was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.83) with enumeration type CLUSTER_ENUM_NETWORK, as specified in section 3.1.4.1.8. This method obtains a list of all cluster network names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open cluster networks to call additional methods in order to determine which cluster networks to operate on.
+There are several ways by which the client can determine the name of the [**cluster network**](#gt_cluster-network) to specify for the *lpszNetworkName* parameter. A cluster network can have a well-known name if the cluster network was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.85) with enumeration type CLUSTER_ENUM_NETWORK, as specified in section 3.1.4.1.8. This method obtains a list of all cluster network names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open cluster networks to call additional methods in order to determine which cluster networks to operate on.
 
 The server SHOULD accept an ApiOpenNetwork request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -8830,7 +8830,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 2) The ApiOpenNetInterface method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified [**cluster network interface**](#gt_cluster-network-interface) by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenNetInterface returns a context handle so that the client can refer to the context that is created in subsequent method calls.
 
-There are several ways by which the client can determine the name of the cluster network interface to specify for the *lpszNetInterfaceName* parameter. A cluster network interface can have a well-known name if the cluster network interface was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.83) with enumeration type CLUSTER_ENUM_NETINTERFACE, as specified in section 3.1.4.1.8. This method obtains a list of all cluster network interface names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open the cluster network interface to call additional methods in order to determine which cluster network interface to operate on. Finally, a client supplying the name of the [**node**](#gt_node) and [**cluster network**](#gt_cluster-network) to the [ApiGetNetInterface](#Section_3.1.4.1.95) method will get back the corresponding cluster network interface object name for that combination, which can then be provided to this method.
+There are several ways by which the client can determine the name of the cluster network interface to specify for the *lpszNetInterfaceName* parameter. A cluster network interface can have a well-known name if the cluster network interface was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.1.85) with enumeration type CLUSTER_ENUM_NETINTERFACE, as specified in section 3.1.4.1.8. This method obtains a list of all cluster network interface names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open the cluster network interface to call additional methods in order to determine which cluster network interface to operate on. Finally, a client supplying the name of the [**node**](#gt_node) and [**cluster network**](#gt_cluster-network) to the [ApiGetNetInterface](#Section_3.1.4.1.95) method will get back the corresponding cluster network interface object name for that combination, which can then be provided to this method.
 
 The server SHOULD accept an ApiOpenNetInterface request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and the server MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -9320,7 +9320,7 @@ For any other condition, the server MUST set *Status* to a value that is not one
 
 (Protocol Version 2) The ApiNodeClusterControl method SHOULD<71> instruct the [**server**](#gt_server) to initiate, on the specified [**cluster**](#gt_cluster), an operation that is defined by the specified control code. If necessary, the operation is forwarded to and executed on the specified [**node**](#gt_node).
 
-The semantic behavior as well as all the parameters, with the exception of *hHostNode*, are identical to those of the [ApiClusterControl](#Section_3.1.4.2.106) method. All return values are identical to those specified in ApiClusterControl.
+The semantic behavior as well as all the parameters, with the exception of *hHostNode*, are identical to those of the [ApiClusterControl](#Section_3.1.4.3.7) method. All return values are identical to those specified in ApiClusterControl.
 
 error_status_t ApiNodeClusterControl(
 
@@ -9375,7 +9375,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 
 );
 
-**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.1.16) method call.
+**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.1.14) method call.
 
 **dwControlCode:** Indicates the operation to perform on the cluster. It MUST be one of the following values.
 
@@ -9512,7 +9512,7 @@ This protocol MUST indicate to the RPC runtime by means of the strict_context_ha
 
 The methods MUST NOT throw an exception except those thrown by the underlying RPC protocol [MS-RPCE], as specified in [MS-RPCE].
 
-Any [**active node**](#gt_active-node) in the [**cluster**](#gt_cluster) MUST have [**protocol server state**](#gt_protocol-server-state) set to read/write, as specified in section [3.1.1](#Section_1.3). As such, it MUST accept ClusAPI Protocol requests from clients that have successfully completed the initialization steps, as specified in section [3.2.3](#Section_3.1.3). For [**client**](#gt_client) requests that change the [**cluster state**](#gt_cluster-state), after the client request is completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node. For client requests that change non-volatile cluster state, after the client request has completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node, even after one or all nodes have failed or restarted.
+Any [**active node**](#gt_active-node) in the [**cluster**](#gt_cluster) MUST have [**protocol server state**](#gt_protocol-server-state) set to read/write, as specified in section [3.1.1](#Section_1.3). As such, it MUST accept ClusAPI Protocol requests from clients that have successfully completed the initialization steps, as specified in section [3.2.3](#Section_3.2.3). For [**client**](#gt_client) requests that change the [**cluster state**](#gt_cluster-state), after the client request is completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node. For client requests that change non-volatile cluster state, after the client request has completed, the updated state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node, even after one or all nodes have failed or restarted.
 
 Any active node in the cluster MUST accept ClusAPI Protocol requests from valid clients. A valid client is a client that has successfully completed the initialization steps as specified in section 3.2.3. For client requests that change the cluster state, after the client request is completed, the updated cluster state MUST be accessible to the same or other protocol clients by means of a ClusAPI Protocol session to any active node.
 
@@ -9564,105 +9564,105 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [ApiOpenCluster](#Section_3.1.4.2.160) | Obtains an [HCLUSTER_RPC](#Section_2.2.1.1) context handle to a cluster, enabling the client to issue subsequent methods pertaining to the specified cluster. Opnum: 0 |
+| [ApiOpenCluster](#Section_3.1.4.2.139) | Obtains an [HCLUSTER_RPC](#Section_2.2.1.1) context handle to a cluster, enabling the client to issue subsequent methods pertaining to the specified cluster. Opnum: 0 |
 | [ApiCloseCluster](#Section_3.1.4.2.2) | Instructs the server to free the context specified by the HCLUSTER_RPC context handle previously obtained by ApiOpenCluster. Opnum: 1 |
 | [ApiSetClusterName](#Section_3.1.4.1.3) | Changes the name of the cluster. Opnum: 2 |
 | [ApiGetClusterName](#Section_3.1.4.2.47) | Queries the cluster name and the host name of the node acting as an RPC interface server. Opnum: 3 |
 | [ApiGetClusterVersion](#Section_3.1.4.1.5) | Queries version information about the cluster and the protocol server software. Opnum: 4 |
 | [ApiGetQuorumResource](#Section_3.1.4.1.6) | Queries the quorum configuration for the cluster. Opnum: 5 |
 | [ApiSetQuorumResource](#Section_3.1.4.1.7) | Changes the quorum configuration for the cluster. Opnum: 6 |
-| [ApiCreateEnum](#Section_3.1.4.2.88) | Queries an enumeration of named objects from the cluster state. Opnum: 7 |
-| [ApiOpenResource](#Section_3.1.4.2.99) | Obtains an [HRES_RPC](#Section_2.2.1.4) context handle to a [**resource**](#gt_resource), enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 8 |
-| [ApiCreateResource](#Section_3.1.4.2.10) | Creates an instance of a cluster resource in the non-volatile cluster state for the specified [**resource type**](#gt_resource-type). Returns an HRES_RPC context handle to the resource, enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 9 |
+| [ApiCreateEnum](#Section_3.1.4.2.89) | Queries an enumeration of named objects from the cluster state. Opnum: 7 |
+| [ApiOpenResource](#Section_3.1.4.2.92) | Obtains an [HRES_RPC](#Section_2.2.1.4) context handle to a [**resource**](#gt_resource), enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 8 |
+| [ApiCreateResource](#Section_3.1.4.2.100) | Creates an instance of a cluster resource in the non-volatile cluster state for the specified [**resource type**](#gt_resource-type). Returns an HRES_RPC context handle to the resource, enabling the client to issue subsequent methods pertaining to the specified resource. Opnum: 9 |
 | [ApiDeleteResource](#Section_3.1.4.1.28) | Removes the specified resource from the non-volatile cluster state. Opnum: 10 |
 | [ApiCloseResource](#Section_3.1.4.1.12) | Instructs the server to free the context specified by the HRES_RPC context handle previously obtained by ApiOpenResource or ApiOpenResourceEx. Opnum: 11 |
-| [ApiGetResourceState](#Section_3.1.4.2.133) | Queries the current state of the specified resource. Opnum: 12 |
-| [ApiSetResourceName](#Section_3.1.4.2.14) | Changes the name of the specified resource. Opnum: 13 |
-| [ApiGetResourceId](#Section_3.1.4.1.15) | Queries the [**unique identifier (UID)**](#gt_unique-identifier-uid) of the specified resource. Opnum: 14 |
+| [ApiGetResourceState](#Section_3.1.4.2.139) | Queries the current state of the specified resource. Opnum: 12 |
+| [ApiSetResourceName](#Section_3.1.4.1.14) | Changes the name of the specified resource. Opnum: 13 |
+| [ApiGetResourceId](#Section_3.1.4.2.15) | Queries the [**unique identifier (UID)**](#gt_unique-identifier-uid) of the specified resource. Opnum: 14 |
 | [ApiGetResourceType](#Section_3.1.4.1.16) | Queries a string identifying the resource type of the designated resource. Opnum: 15 |
 | [ApiFailResource](#Section_3.1.4.1.17) | Initiates a failure of the specified resource. Tests the recovery policy associated with the resource. Opnum: 16 |
-| [ApiOnlineResource](#Section_3.1.4.2.18) | Instructs the server to bring the specified resource to the online state. Opnum: 17 |
-| [ApiOfflineResource](#Section_3.1.4.1.19) | Instructs the server to bring the specified resource to the offline state. Opnum: 18 |
-| [ApiAddResourceDependency](#Section_3.1.4.1.20) | Instructs the server to add a simple dependency between the two specified resources. Opnum: 19 |
-| [ApiRemoveResourceDependency](#Section_3.1.4.1.21) | Instructs the server to remove the dependency between the two specified resources. Opnum: 20 |
+| [ApiOnlineResource](#Section_3.1.4.1.18) | Instructs the server to bring the specified resource to the online state. Opnum: 17 |
+| [ApiOfflineResource](#Section_3.1.4.2.19) | Instructs the server to bring the specified resource to the offline state. Opnum: 18 |
+| [ApiAddResourceDependency](#Section_3.1.4.2.20) | Instructs the server to add a simple dependency between the two specified resources. Opnum: 19 |
+| [ApiRemoveResourceDependency](#Section_3.1.4.2.21) | Instructs the server to remove the dependency between the two specified resources. Opnum: 20 |
 | [ApiCanResourceBeDependent](#Section_3.1.4.2.22) | Determines whether the specified resource can be dependent on another specified resource. Opnum: 21 |
 | [ApiCreateResEnum](#Section_3.1.4.2.23) | Queries an enumeration of the resources on which the specified resource depends. Opnum: 22 |
-| [ApiAddResourceNode](#Section_3.1.4.2.24) | Adds the specified node to the set of nodes that can host the specified resource. Opnum: 23 |
+| [ApiAddResourceNode](#Section_3.1.4.1.24) | Adds the specified node to the set of nodes that can host the specified resource. Opnum: 23 |
 | [ApiRemoveResourceNode](#Section_3.1.4.2.25) | Removes the specified node from the set of nodes that can host the specified resource. Opnum: 24 |
-| [ApiChangeResourceGroup](#Section_3.1.4.1.26) | Moves the specified resource from its current group to the specified [**group**](#gt_group). Opnum: 25 |
+| [ApiChangeResourceGroup](#Section_3.1.4.2.166) | Moves the specified resource from its current group to the specified [**group**](#gt_group). Opnum: 25 |
 | [ApiCreateResourceType](#Section_3.1.4.2.27) | Adds the specified resource type to the non-volatile cluster state. Opnum: 26 |
 | [ApiDeleteResourceType](#Section_3.1.4.2.28) | Removes the specified resource type from the non-volatile cluster state. Opnum: 27 |
 | [ApiGetRootKey](#Section_3.1.4.2.29) | Obtains a context handle for the root key of the [**cluster registry**](#gt_cluster-registry). Opnum: 28 |
 | [ApiCreateKey](#Section_3.1.4.2.30) | Creates a key in the cluster registry and returns a context handle for the created key. Opnum: 29 |
 | [ApiOpenKey](#Section_3.1.4.2.31) | Opens and returns a context handle to a key in the cluster registry. Opnum: 30 |
-| [ApiEnumKey](#Section_3.1.4.2.32) | Obtains, by index, the name of a [**subkey**](#gt_subkey) of a key in the cluster registry. Opnum: 31 |
+| [ApiEnumKey](#Section_3.1.4.1.32) | Obtains, by index, the name of a [**subkey**](#gt_subkey) of a key in the cluster registry. Opnum: 31 |
 | [ApiSetValue](#Section_3.1.4.2.33) | Sets the data stored in a [**value**](#gt_value) in the cluster registry. Opnum: 32 |
 | [ApiDeleteValue](#Section_3.1.4.1.34) | Deletes a value from the cluster registry. Opnum: 33 |
-| [ApiQueryValue](#Section_3.1.4.2.35) | Queries the data stored in a value in the cluster registry. Opnum: 34 |
+| [ApiQueryValue](#Section_3.1.4.1.35) | Queries the data stored in a value in the cluster registry. Opnum: 34 |
 | [ApiDeleteKey](#Section_3.1.4.2.36) | Deletes a key from the cluster registry. Opnum: 35 |
-| [ApiEnumValue](#Section_3.1.4.1.37) | Retrieve, by index, a value under a key in the cluster registry. Opnum: 36 |
-| [ApiCloseKey](#Section_3.1.4.1.38) | Close a cluster registry key. Opnum: 37 |
+| [ApiEnumValue](#Section_3.1.4.2.37) | Retrieve, by index, a value under a key in the cluster registry. Opnum: 36 |
+| [ApiCloseKey](#Section_3.1.4.2.38) | Close a cluster registry key. Opnum: 37 |
 | [ApiQueryInfoKey](#Section_3.1.4.1.39) | Queries information about a key in the cluster registry. Opnum: 38 |
-| [ApiSetKeySecurity](#Section_3.1.4.2.40) | Sets the security descriptor of a key in the cluster registry. Opnum: 39 |
-| [ApiGetKeySecurity](#Section_3.1.4.1.41) | Retrieves the security descriptor of a key in the cluster registry. Opnum: 40 |
+| [ApiSetKeySecurity](#Section_3.1.4.1.40) | Sets the security descriptor of a key in the cluster registry. Opnum: 39 |
+| [ApiGetKeySecurity](#Section_3.1.4.2.41) | Retrieves the security descriptor of a key in the cluster registry. Opnum: 40 |
 | [ApiOpenGroup](#Section_3.1.4.2.42) | Obtains an [HGROUP_RPC](#Section_2.2.1.3) context handle to a group, enabling the client to issue subsequent methods pertaining to the specified group. Opnum: 41 |
 | [ApiCreateGroup](#Section_3.1.4.2.43) | Creates an instance of a cluster group in the non-volatile cluster state. Returns an HGROUP_RPC context handle to the group, enabling the client to issue subsequent methods pertaining to the specified group. Opnum: 42 |
 | [ApiDeleteGroup](#Section_3.1.4.1.44) | Removes the specified group from the non-volatile cluster state. Opnum: 43 |
 | [ApiCloseGroup](#Section_3.1.4.1.45) | Instructs the server to free the context specified by the HGROUP_RPC context handle previously obtained by ApiOpenGroup. Opnum: 44 |
 | [ApiGetGroupState](#Section_3.1.4.2.46) | Queries the current state of the specified group. Opnum: 45 |
-| [ApiSetGroupName](#Section_3.1.4.2.47) | Changes the name of the specified group. Opnum: 46 |
+| [ApiSetGroupName](#Section_3.1.4.1.47) | Changes the name of the specified group. Opnum: 46 |
 | [ApiGetGroupId](#Section_3.1.4.2.48) | Queries the UID of the specified group. Opnum: 47 |
 | [ApiGetNodeId](#Section_3.1.4.1.49) | Queries the unique identifier (UID) of the specified node. Opnum: 48 |
 | [ApiOnlineGroup](#Section_3.1.4.1.50) | Instructs the server to bring the specified group to the ClusterGroupOnline state. Opnum: 49 |
-| [ApiOfflineGroup](#Section_3.1.4.2.130) | Instructs the server to bring the specified resource to the ClusterGroupOffline state. Opnum: 50 |
-| [ApiMoveGroup](#Section_3.1.4.2.131) | Instructs the server to move the group to another node in the cluster. Opnum: 51 |
+| [ApiOfflineGroup](#Section_3.1.4.1.51) | Instructs the server to bring the specified resource to the ClusterGroupOffline state. Opnum: 50 |
+| [ApiMoveGroup](#Section_3.1.4.2.152) | Instructs the server to move the group to another node in the cluster. Opnum: 51 |
 | [ApiMoveGroupToNode](#Section_3.1.4.2.132) | Instructs the server to move the group to the specified node. Opnum: 52 |
 | [ApiCreateGroupResourceEnum](#Section_3.1.4.2.54) | Queries an enumeration of the resources that are contained in the specified group. Opnum: 53 |
-| [ApiSetGroupNodeList](#Section_3.1.4.2.55) | Sets a list of nodes, in order of preference, indicating where the specified group is hosted. Opnum: 54 |
+| [ApiSetGroupNodeList](#Section_3.1.4.1.55) | Sets a list of nodes, in order of preference, indicating where the specified group is hosted. Opnum: 54 |
 | [ApiCreateNotify](#Section_3.1.4.2.56) | Obtains an [HNOTIFY_RPC](#Section_2.2.1.6) context handle to a [**notification port**](#gt_notification-port), enabling the client to issue subsequent methods pertaining to the events in the cluster. Opnum: 55 |
-| [ApiCloseNotify](#Section_3.1.4.1.57) | Instructs the server to free the context specified by the HNOTIFY_RPC context handle previously obtained by ApiCreateNotify. Opnum: 56 |
-| [ApiAddNotifyCluster](#Section_3.1.4.1.58) | Registers an event filter mask with the specified notification port whose scope covers all objects in the cluster. Opnum: 57 |
+| [ApiCloseNotify](#Section_3.1.4.2.57) | Instructs the server to free the context specified by the HNOTIFY_RPC context handle previously obtained by ApiCreateNotify. Opnum: 56 |
+| [ApiAddNotifyCluster](#Section_3.1.4.2.58) | Registers an event filter mask with the specified notification port whose scope covers all objects in the cluster. Opnum: 57 |
 | [ApiAddNotifyNode](#Section_3.1.4.2.59) | Registers an event filter mask with the specified notification port whose scope is limited to the specified node. Opnum: 58 |
-| [ApiAddNotifyGroup](#Section_3.1.4.1.60) | Registers an event filter mask with the specified notification port whose scope is limited to the specified group. Opnum: 59 |
-| [ApiAddNotifyResource](#Section_3.1.4.1.61) | Registers an event filter mask with the specified notification port whose scope is limited to the specified resource. Opnum: 60 |
+| [ApiAddNotifyGroup](#Section_3.1.4.2.60) | Registers an event filter mask with the specified notification port whose scope is limited to the specified group. Opnum: 59 |
+| [ApiAddNotifyResource](#Section_3.1.4.2.61) | Registers an event filter mask with the specified notification port whose scope is limited to the specified resource. Opnum: 60 |
 | [ApiAddNotifyKey](#Section_3.1.4.1.62) | Registers an event filter mask with the specified notification port whose scope is limited to the specified cluster registry key. Opnum: 61 |
-| [ApiReAddNotifyNode](#Section_3.1.4.1.63) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified node. Opnum: 62 |
-| [ApiReAddNotifyGroup](#Section_3.1.4.1.64) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified group. Opnum: 63 |
-| [ApiReAddNotifyResource](#Section_3.1.4.2.65) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified resource. Opnum: 64 |
+| [ApiReAddNotifyNode](#Section_3.1.4.2.63) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified node. Opnum: 62 |
+| [ApiReAddNotifyGroup](#Section_3.1.4.2.64) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified group. Opnum: 63 |
+| [ApiReAddNotifyResource](#Section_3.1.4.1.65) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified resource. Opnum: 64 |
 | [ApiGetNotify](#Section_3.1.4.2.66) | Retrieves the next event from the specified notification port. Opnum: 65 |
 | [ApiOpenNode](#Section_3.1.4.2.67) | Obtains an [HNODE_RPC](#Section_2.2.1.2) context handle to a node, enabling the client to issue subsequent methods pertaining to the specified node. Opnum: 66 |
-| [ApiCloseNode](#Section_3.1.4.1.68) | Instructs the server to free the context specified by the HNODE_RPC context handle previously obtained by ApiOpenNode. Opnum: 67 |
-| [ApiGetNodeState](#Section_3.1.4.2.69) | Queries the current state of the specified node. Opnum: 68 |
-| [ApiPauseNode](#Section_3.1.4.2.70) | Instructs the server to pause group failover activity on the specified node. Opnum: 69 |
-| [ApiResumeNode](#Section_3.1.4.2.71) | Instructs the server to resume group failover activity on the specified node. Opnum: 70 |
+| [ApiCloseNode](#Section_3.1.4.2.68) | Instructs the server to free the context specified by the HNODE_RPC context handle previously obtained by ApiOpenNode. Opnum: 67 |
+| [ApiGetNodeState](#Section_3.1.4.1.69) | Queries the current state of the specified node. Opnum: 68 |
+| [ApiPauseNode](#Section_3.1.4.2.126) | Instructs the server to pause group failover activity on the specified node. Opnum: 69 |
+| [ApiResumeNode](#Section_3.1.4.2.127) | Instructs the server to resume group failover activity on the specified node. Opnum: 70 |
 | [ApiEvictNode](#Section_3.1.4.2.72) | Instructs the server to remove the specified node as a configured node in the cluster. Opnum: 71 |
 | [ApiNodeResourceControl](#Section_3.1.4.2.73) | Instructs the server to initiate an operation on the specified resource based on the specified control code. The operation is executed on the specified node. Opnum: 72 |
-| [ApiResourceControl](#Section_3.1.4.2.74) | Instructs the server to initiate an operation on the specified resource based on the specified control code. The operation is executed on the node hosting the group that contains the resource. Opnum: 73 |
+| [ApiResourceControl](#Section_3.1.4.1.74) | Instructs the server to initiate an operation on the specified resource based on the specified control code. The operation is executed on the node hosting the group that contains the resource. Opnum: 73 |
 | [ApiNodeResourceTypeControl](#Section_3.1.4.2.75) | Instructs the server to initiate an operation on the specified resource type based on the specified control code. The operation is executed on the specified node. Opnum: 74 |
-| [ApiResourceTypeControl](#Section_3.1.4.3.2) | Instructs the server to initiate an operation on the specified resource type based on the specified control code. The operation is executed on the node where the HCLUSTER_RPC context handle was obtained. Opnum: 75 |
+| [ApiResourceTypeControl](#Section_3.1.4.1.76) | Instructs the server to initiate an operation on the specified resource type based on the specified control code. The operation is executed on the node where the HCLUSTER_RPC context handle was obtained. Opnum: 75 |
 | [ApiNodeGroupControl](#Section_3.1.4.2.77) | Instructs the server to initiate an operation on the specified group based on the specified control code. The operation is executed on the specified node. Opnum: 76 |
 | [ApiGroupControl](#Section_3.1.4.2.78) | Instructs the server to initiate an operation on the specified group based on the specified control code. The operation is executed on the node hosting the group. Opnum: 77 |
 | [ApiNodeNodeControl](#Section_3.1.4.1.79) | Instructs the server to initiate an operation on the specified node based on the specified control code. The operation is executed on the specified node. Opnum: 78 |
-| [ApiNodeControl](#Section_3.1.4.3.4) | Instructs the server to initiate an operation on the specified node based on the specified control code. The operation is executed on the node where the HNODE_RPC context handle was obtained. Opnum: 79 |
+| [ApiNodeControl](#Section_3.1.4.1.80) | Instructs the server to initiate an operation on the specified node based on the specified control code. The operation is executed on the node where the HNODE_RPC context handle was obtained. Opnum: 79 |
 | [Opnum80NotUsedOnWire](#Section_7) | Reserved for local use. Opnum: 80 Opnum: 80 |
 | [ApiOpenNetwork](#Section_3.1.4.2.81) | Obtains an [HNETWORK_RPC](#Section_2.2.1.7) context handle to a [**cluster network**](#gt_cluster-network), enabling the client to issue subsequent methods pertaining to the specified cluster network. Opnum: 81 |
-| [ApiCloseNetwork](#Section_3.1.4.1.82) | Instructs the server to free the context specified by the HNETWORK_RPC context handle previously obtained by ApiOpenNetwork or ApiOpenNetworkEx. Opnum: 82 |
+| [ApiCloseNetwork](#Section_3.1.4.2.82) | Instructs the server to free the context specified by the HNETWORK_RPC context handle previously obtained by ApiOpenNetwork or ApiOpenNetworkEx. Opnum: 82 |
 | [ApiGetNetworkState](#Section_3.1.4.1.83) | Queries the current state of the specified cluster network. Opnum: 83 |
 | [ApiSetNetworkName](#Section_3.1.4.2.84) | Changes the name of the specified cluster network. Opnum: 84 |
 | [ApiCreateNetworkEnum](#Section_3.1.4.2.85) | Queries an enumeration of [**cluster network interface**](#gt_cluster-network-interface) objects that are installed on the specified cluster network. Opnum: 85 |
-| [ApiGetNetworkId](#Section_3.1.4.1.86) | Queries the unique ID of the specified cluster network. Opnum: 86 |
+| [ApiGetNetworkId](#Section_3.1.4.2.86) | Queries the unique ID of the specified cluster network. Opnum: 86 |
 | [ApiSetNetworkPriorityOrder](#Section_3.1.4.1.87) | Sets the priority ordered list of internal cluster networks to use for internal cluster communication. Opnum: 87 |
 | [ApiNodeNetworkControl](#Section_3.1.4.2.88) | Instructs the server to initiate an operation on the specified cluster network based on the specified control code. The operation is executed on the specified node. Opnum: 88 |
-| [ApiNetworkControl](#Section_3.1.4.1.89) | Instructs the server to initiate an operation on the specified cluster network based on the specified control code. The operation is executed on the node where the HNETWORK_RPC context handle was obtained. Opnum: 89 |
-| [ApiAddNotifyNetwork](#Section_3.1.4.2.90) | Registers an event filter mask with the specified notification port whose scope is limited to the specified cluster network. Opnum: 90 |
+| [ApiNetworkControl](#Section_3.1.4.2.89) | Instructs the server to initiate an operation on the specified cluster network based on the specified control code. The operation is executed on the node where the HNETWORK_RPC context handle was obtained. Opnum: 89 |
+| [ApiAddNotifyNetwork](#Section_3.1.4.1.90) | Registers an event filter mask with the specified notification port whose scope is limited to the specified cluster network. Opnum: 90 |
 | [ApiReAddNotifyNetwork](#Section_3.1.4.1.91) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified cluster network. Opnum: 91 |
 | [ApiOpenNetInterface](#Section_3.1.4.2.92) | Obtains an [HNETINTERFACE_RPC](#Section_2.2.1.8) context handle to a cluster network interface, enabling the client to issue subsequent methods pertaining to the specified cluster network interface. Opnum: 92 |
 | [ApiCloseNetInterface](#Section_3.1.4.1.93) | Instructs the server to free the context specified by the HNETINTERFACE_RPC context handle previously obtained by ApiOpenNetInterface or ApiOpenNetInterfaceEx. Opnum: 93 |
-| [ApiGetNetInterfaceState](#Section_3.1.4.1.94) | Queries the current state of the specified cluster network interface. Opnum: 94 |
+| [ApiGetNetInterfaceState](#Section_3.1.4.2.94) | Queries the current state of the specified cluster network interface. Opnum: 94 |
 | [ApiGetNetInterface](#Section_3.1.4.2.95) | Queries the name of a cluster network interface for a specified node and cluster network. Opnum: 95 |
 | [ApiGetNetInterfaceId](#Section_3.1.4.1.96) | Queries the unique ID of the specified cluster network interface. Opnum: 96 |
 | [ApiNodeNetInterfaceControl](#Section_3.1.4.2.97) | Instructs the server to initiate an operation on the specified cluster network interface based on the specified control code. The operation is executed on the specified node. Opnum: 97 |
-| [ApiNetInterfaceControl](#Section_3.1.4.1.98) | Instructs the server to initiate an operation on the specified cluster network interface based on the specified control code. The operation is executed on the node where the HNETINTERFACE_RPC context handle was obtained. Opnum: 98 |
+| [ApiNetInterfaceControl](#Section_3.1.4.3.6) | Instructs the server to initiate an operation on the specified cluster network interface based on the specified control code. The operation is executed on the node where the HNETINTERFACE_RPC context handle was obtained. Opnum: 98 |
 | [ApiAddNotifyNetInterface](#Section_3.1.4.2.99) | Registers an event filter mask with the specified notification port whose scope is limited to the specified cluster network interface. Opnum: 99 |
 | [ApiReAddNotifyNetInterface](#Section_3.1.4.2.100) | Re-registers an event filter mask with the specified notification port whose scope is limited to the specified cluster network interface. Opnum: 100 |
 | [ApiCreateNodeEnum](#Section_3.1.4.2.101) | Queries an enumeration of named cluster objects that are associated with a particular node. Opnum: 101 |
@@ -9670,7 +9670,7 @@ Methods in RPC Opnum Order
 | [ApiCreateResTypeEnum](#Section_3.1.4.2.103) | Queries an enumeration of named [**cluster objects**](#gt_cluster-object) associated with the specified resource type. Opnum: 103 |
 | [ApiBackupClusterDatabase](#Section_3.1.4.1.104) | Instructs the server to make a backup copy of the cluster configuration data. Opnum: 104 |
 | [ApiNodeClusterControl](#Section_3.1.4.2.105) | Instructs the server to initiate an operation on the specified cluster based on the specified control code. The operation is executed on the specified node. Opnum: 105 |
-| [ApiClusterControl](#Section_3.1.4.2.106) | Instructs the server to initiate an operation on the specified cluster based on the specified control code. The operation is executed on the node where the HCLUSTER_RPC context handle was obtained. Opnum: 106 |
+| [ApiClusterControl](#Section_3.1.4.3.7) | Instructs the server to initiate an operation on the specified cluster based on the specified control code. The operation is executed on the node where the HCLUSTER_RPC context handle was obtained. Opnum: 106 |
 | [ApiUnblockGetNotifyCall](#Section_3.1.4.1.107) | Instructs the server to complete any outstanding ApiGetNotify calls as a precursor to closing the notification port. Opnum: 107 |
 | [ApiSetServiceAccountPassword](#Section_3.1.4.2.108) | Changes the password associated with the operational identity of the cluster service. Opnum: 108 |
 | [ApiSetResourceDependencyExpression](#Section_3.1.4.2.109) | Instructs the server to modify a complex dependency for the resource. Opnum: 109 |
@@ -9858,7 +9858,7 @@ HCLUSTER_RPC ApiOpenCluster(
 <a id="Section_3.1.4.2.2"></a>
 ##### 3.1.4.2.2 ApiCloseCluster (Opnum 1)
 
-(Protocol Version 3) The ApiCloseCluster method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenCluster](#Section_3.1.4.2.160) method or [ApiOpenClusterEx](#Section_3.1.4.2.116) method call.
+(Protocol Version 3) The ApiCloseCluster method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenCluster](#Section_3.1.4.2.139) method or [ApiOpenClusterEx](#Section_3.1.4.2.116) method call.
 
 The server SHOULD accept an ApiCloseCluster request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -10060,7 +10060,7 @@ error_status_t ApiSetQuorumResource(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call. If the *dwMaxQuorumLogSize* parameter is set to 0x00000000, *hResource* MUST be set to a handle of a current quorum resource.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call. If the *dwMaxQuorumLogSize* parameter is set to 0x00000000, *hResource* MUST be set to a handle of a current quorum resource.
 
 **lpszDeviceName:** A [**Unicode string**](#gt_unicode-string) identifying a directory on the disk (when the *hResource* parameter represents a storage device) where the cluster stores its configuration database. If the *dwMaxQuorumLogSize* parameter is set to 0x00000000, this parameter SHOULD be set to an empty string by clients and ignored by servers.
 
@@ -10137,7 +10137,7 @@ For any other condition, the server MUST return a value that is not one of the v
 
 (Protocol Version 3) The ApiOpenResource method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified cluster resource by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenResource returns a context handle so that the client can refer to the [**resource**](#gt_resource) in subsequent method call.
 
-There are several ways in which the client can determine the name of the resource to specify for the *lpszResourceName* parameter. A resource can have a well-known name if the resource was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_RESOURCE, as specified in section 3.1.4.2.8. This method obtains a list of all resource names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open resources to call additional methods to determine which resources to operate on.
+There are several ways in which the client can determine the name of the resource to specify for the *lpszResourceName* parameter. A resource can have a well-known name if the resource was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_RESOURCE, as specified in section 3.1.4.2.8. This method obtains a list of all resource names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open resources to call additional methods to determine which resources to operate on.
 
 The server SHOULD accept an ApiOpenResource request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -10155,7 +10155,7 @@ HRES_RPC ApiOpenResource(
 
 );
 
-**lpszResourceName:** A [**Unicode string**](#gt_unicode-string) that contains the name of the resource for which to establish context on the server. The server MUST also accept the resource unique ID as returned by the [ApiGetResourceId](#Section_3.1.4.1.15) method.
+**lpszResourceName:** A [**Unicode string**](#gt_unicode-string) that contains the name of the resource for which to establish context on the server. The server MUST also accept the resource unique ID as returned by the [ApiGetResourceId](#Section_3.1.4.2.15) method.
 
 **Status:** Indicates the status of this operation. The server MUST set Status to the following error codes for the specified conditions.
 
@@ -10253,7 +10253,7 @@ If the resource has the CLUS_CHAR_BROADCAST_DELETE [**characteristic**](#gt_char
 
 The server MUST fail this method for any of the following conditions:
 
-- The resource is not in either the ClusterResourceOffline or ClusterResourceFailed state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.133).
+- The resource is not in either the ClusterResourceOffline or ClusterResourceFailed state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.139).
 - Another resource is directly dependent on the designated resource.
 - The resource has the CLUS_CHAR_DELETE_REQUIRES_ALL_NODES characteristic, as specified in section [2.2.2.4](#Section_2.2.2.4), and one or more nodes are not active within the [**cluster**](#gt_cluster).
 - The resource is a core resource.
@@ -10271,7 +10271,7 @@ error_status_t ApiDeleteResource(
 
 );
 
-**hResource:** An HRES_RPC context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An HRES_RPC context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -10293,7 +10293,7 @@ For any other condition, the server MUST set *Status* to a value that is not one
 <a id="Section_3.1.4.2.12"></a>
 ##### 3.1.4.2.12 ApiCloseResource (Opnum 11)
 
-(Protocol Version 3) The ApiCloseResource method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method.
+(Protocol Version 3) The ApiCloseResource method instructs the [**server**](#gt_server) to free any context information that is created in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method.
 
 The server SHOULD accept an ApiCloseResource request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -10345,7 +10345,7 @@ error_status_t ApiGetResourceState(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **State:** The current state of the resource, which is written by the server to indicate the success of this method. If the method fails, this parameter MUST be ignored. If the method succeeds, State MUST be set to one of the following values.
 
@@ -10394,7 +10394,7 @@ error_status_t ApiSetResourceName(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **lpszResourceName:** A pointer to a [**Unicode string**](#gt_unicode-string) that contains the new name of the resource.
 
@@ -10431,7 +10431,7 @@ error_status_t ApiGetResourceId(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **pGuid:** The address of a pointer where the server MUST write, upon successful completion of this method, the address of a [**Unicode string**](#gt_unicode-string) buffer containing the unique ID of the resource. The server MUST allocate as much memory as is required to return the ID. If the method fails, this parameter MUST be ignored.<78>
 
@@ -10465,7 +10465,7 @@ error_status_t ApiGetResourceType(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **lpszResourceType:** The address of a pointer where the server MUST write, upon successful completion of this method, the address of a [**Unicode string**](#gt_unicode-string) buffer containing the name of the resource type of the specified resource. The server MUST allocate as much memory as is required to return the resource type. If the method fails, this parameter MUST be ignored.
 
@@ -10497,7 +10497,7 @@ error_status_t ApiFailResource(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -10517,7 +10517,7 @@ For any other condition, the server MUST set *Status* to a value that is not one
 
 (Protocol Version 3) The ApiOnlineResource method instructs the [**server**](#gt_server) to make the specified [**resource**](#gt_resource) active or available on the [**node**](#gt_node) that currently owns it.
 
-For a successful completion of this method, the server MUST execute any implementation-specific methods and protocols between servers to transition the specified resource to the ClusterResourceOnline state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.133).
+For a successful completion of this method, the server MUST execute any implementation-specific methods and protocols between servers to transition the specified resource to the ClusterResourceOnline state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.139).
 
 The server MUST fail this method with ERROR_INVALID_STATE (0x0000139F) if the specified resource is not in either the ClusterResourceInitializing, ClusterResourceOnline, ClusterResourceOffline, or ClusterResourceFailed state, as specified in section 3.1.4.2.13.
 
@@ -10553,7 +10553,7 @@ error_status_t ApiOnlineResource(
 
 );
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -10576,7 +10576,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiOfflineResource method instructs the [**server**](#gt_server) to make the specified [**resource**](#gt_resource) inactive or unavailable.
 
-For a successful completion of this method, the server MUST execute any implementation-specific methods and protocols between servers in order to transition the specified resource to the ClusterResourceOffline state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.133).
+For a successful completion of this method, the server MUST execute any implementation-specific methods and protocols between servers in order to transition the specified resource to the ClusterResourceOffline state, as specified in section [3.1.4.2.13](#Section_3.1.4.2.139).
 
 The server MUST fail this method with ERROR_INVALID_STATE (0x0000139F) if the specified resource is not in the *ClusterResourceOnline* state, the *ClusterResourceOffline* state, or the *ClusterResourceFailed* state, as specified in section 3.1.4.2.13.
 
@@ -10606,7 +10606,7 @@ error_status_t ApiOfflineResource(
 
 );
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -10646,7 +10646,7 @@ error_status_t ApiAddResourceDependency(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **hDependsOn:** An HRES_RPC context handle that was obtained in a previous ApiOpenResource or ApiOpenResourceEx method call. After successful completion of this method, the resource that is specified in the *hResource* parameter has a simple dependency to this resource.
 
@@ -10690,7 +10690,7 @@ error_status_t ApiRemoveResourceDependency(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **hDependsOn:** An HRES_RPC context handle that is obtained in a previous ApiOpenResource, or ApiOpenResourceEx method call.
 
@@ -10742,7 +10742,7 @@ error_status_t ApiCanResourceBeDependent(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **hResourceDependent:** An HRES_RPC context handle that was obtained in a previous ApiOpenResource, ApiOpenResourceEx, or ApiCreateResource method call.
 
@@ -10787,7 +10787,7 @@ error_status_t ApiCreateResEnum(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **dwType:** The type of enumeration to be returned by the server. This [**value**](#gt_value) MUST be set to the bitwise OR operator of one or more of the following values.
 
@@ -10833,7 +10833,7 @@ error_status_t ApiAddResourceNode(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **hNode:** An [HNODE_RPC](#Section_2.2.1.2) context handle that was obtained in a previous [ApiOpenNode](#Section_3.1.4.2.67) or [ApiOpenNodeEx](#Section_3.1.4.2.117) method call.
 
@@ -10876,7 +10876,7 @@ error_status_t ApiRemoveResourceNode(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx,](#Section_3.1.4.2.119) or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx,](#Section_3.1.4.2.119) or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **hNode:** An [HNODE_RPC](#Section_2.2.1.2) context handle that is obtained in a previous [ApiOpenNode](#Section_3.1.4.2.67) or [ApiOpenNodeEx](#Section_3.1.4.2.117) method call.
 
@@ -10925,7 +10925,7 @@ error_status_t ApiChangeResourceGroup(
 
 );
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **hGroup:** An [HGROUP_RPC (section 2.2.1.3)](#Section_2.2.1.3) context handle that was obtained in a previous [ApiOpenGroup (section 3.1.4.2.42)](#Section_3.1.4.2.42), [ApiOpenGroupEx (section 3.1.4.2.118)](#Section_3.1.4.2.118), or [ApiCreateGroup (section 3.1.4.2.43)](#Section_3.1.4.2.43) method call.
 
@@ -11607,7 +11607,7 @@ For any other condition, the server MUST set *Status* to a value that is not one
 
 (Protocol Version 3) The ApiOpenGroup method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with a specified [**cluster**](#gt_cluster) [**group**](#gt_group) by means of the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenGroup returns a context handle so that the client can refer to the group in subsequent method calls.
 
-There are several ways by which the client can determine the name of the group to specify for the *lpszGroupName* parameter. A group can have a well-known name if the group was configured as such using implementation-specific methods between servers. Alternatively, a client can use [ApiGetResourceState](#Section_3.1.4.2.133), as specified in 3.1.4.2.13, which returns the name of the group that a [**resource**](#gt_resource) is contained in.
+There are several ways by which the client can determine the name of the group to specify for the *lpszGroupName* parameter. A group can have a well-known name if the group was configured as such using implementation-specific methods between servers. Alternatively, a client can use [ApiGetResourceState](#Section_3.1.4.2.139), as specified in 3.1.4.2.13, which returns the name of the group that a [**resource**](#gt_resource) is contained in.
 
 The server SHOULD accept an ApiOpenGroup request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -11761,7 +11761,7 @@ For any other condition, this method MUST return a value that is not one of the 
 <a id="Section_3.1.4.2.46"></a>
 ##### 3.1.4.2.46 ApiGetGroupState (Opnum 45)
 
-(Protocol Version 3) The ApiGetGroupState method returns the current state of the specified [**group**](#gt_group) and the name of the [**node**](#gt_node) that owns the group. The group state is determined by the [**server**](#gt_server) at the time it is requested; that is, the state of the group is dynamically determined and is based on the configuration and collective set of [**resource**](#gt_resource) states (section [3.1.4.2.13](#Section_3.1.4.2.133)) that are contained in the group.
+(Protocol Version 3) The ApiGetGroupState method returns the current state of the specified [**group**](#gt_group) and the name of the [**node**](#gt_node) that owns the group. The group state is determined by the [**server**](#gt_server) at the time it is requested; that is, the state of the group is dynamically determined and is based on the configuration and collective set of [**resource**](#gt_resource) states (section [3.1.4.2.13](#Section_3.1.4.2.139)) that are contained in the group.
 
 The group state is meant to convey an exceptional resource state by using an increasing level of precedence. The group state does not imply the state of all the resources in the group; typically it implies that at least one resource state is exceptional or transitional. Therefore, if the group state is ClusterGroupFailed, it is possible that some resources are in a state other than ClusterResourceFailed. The order of precedence is defined as follows:
 
@@ -11930,7 +11930,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiOnlineGroup method instructs the [**server**](#gt_server) to make all the resources in the designated [**group**](#gt_group) active or available on the [**node**](#gt_node) that is hosting the group. The persistent state of the group is set to online and is updated in the nonvolatile [**cluster state**](#gt_cluster-state).
 
-The server MUST attempt to make all resources in the group active or available as specified in section [3.1.4.2.18](#Section_3.1.4.2.18).
+The server MUST attempt to make all resources in the group active or available as specified in section [3.1.4.2.18](#Section_3.1.4.1.18).
 
 The server MUST fail this method using the error ERROR_NODE_CANT_HOST_RESOURCE if the node is already hosting a group with one or more resources in the ClusterResourceOnline state, and the group has the same anti-affinity setting as the designated group. For information about anti-affinity, see section [3.1.1.1.4](#Section_3.1.1.1.4).
 
@@ -11975,7 +11975,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiOfflineGroup method instructs the [**server**](#gt_server) to make all the resources in the designated [**group**](#gt_group) inactive or unavailable on the [**node**](#gt_node) that is hosting the group. The group's persistent state is set to offline and is updated in the non-volatile [**cluster state**](#gt_cluster-state).
 
-The server MUST attempt to make all resources in the group inactive or unavailable as specified in section [3.1.4.2.19](#Section_3.1.4.1.19).
+The server MUST attempt to make all resources in the group inactive or unavailable as specified in section [3.1.4.2.19](#Section_3.1.4.2.19).
 
 The server fails this method using the error ERROR_CLUSTER_RESOURCE_LOCKED_STATUS if the group is in locked mode, as specified in section [3.1.1.1.4](#Section_3.1.1.1.4).
 
@@ -12077,7 +12077,7 @@ If the server executes the full move procedure synchronously, and if the server 
 
 Whether the move procedure is executed synchronously or asynchronously, it is possible for the resources in the group to fail to reach their persistent state on the destination node. In this case, the server SHOULD attempt recovery actions, such as moving the group to another node in the cluster, which might include moving the group to the node that was the owner prior to the move request.
 
-If the destination node is in the ClusterNodePaused state, as specified in section [3.1.4.2.69](#Section_3.1.4.2.69), or if the current [**protocol server state**](#gt_protocol-server-state) of the server is not read/write, as specified in section [3.1.1](#Section_1.3), the server MUST fail this call using ERROR_SHARING_PAUSED. Otherwise, if the node is not in the ClusterNodeUp state, the server MUST fail this call using ERROR_HOST_NODE_NOT_AVAILABLE.
+If the destination node is in the ClusterNodePaused state, as specified in section [3.1.4.2.69](#Section_3.1.4.1.69), or if the current [**protocol server state**](#gt_protocol-server-state) of the server is not read/write, as specified in section [3.1.1](#Section_1.3), the server MUST fail this call using ERROR_SHARING_PAUSED. Otherwise, if the node is not in the ClusterNodeUp state, the server MUST fail this call using ERROR_HOST_NODE_NOT_AVAILABLE.
 
 The server fails this method using ERROR_CLUSTER_RESOURCE_LOCKED_STATUS if the resource or any of its providers are in locked mode, as specified in section [3.1.1.1.4](#Section_3.1.1.1.4).
 
@@ -12173,7 +12173,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 The [**server**](#gt_server) MUST overwrite any existing data in the set with the designated list. The set is emptied as specified in protocol version-specific information later in this section. The server SHOULD append, in any order, the remaining nodes to the list if the designated list does not include all configured nodes in the [**cluster**](#gt_cluster).
 
-The server SHOULD use the set when making placement decisions for the designated group. The server SHOULD place the group on the first [**node**](#gt_node) in the list when the group is moved by using the [ApiMoveGroup](#Section_3.1.4.2.131) method. The server SHOULD use the next node in the list, relative to the node that is currently hosting the group, if the group moves due to group and/or [**resource**](#gt_resource) failure.
+The server SHOULD use the set when making placement decisions for the designated group. The server SHOULD place the group on the first [**node**](#gt_node) in the list when the group is moved by using the [ApiMoveGroup](#Section_3.1.4.2.152) method. The server SHOULD use the next node in the list, relative to the node that is currently hosting the group, if the group moves due to group and/or [**resource**](#gt_resource) failure.
 
 If *cchListSize* is not greater than 1 or if *multiSzNodeList* is NULL, then the server MUST treat the input as an empty node list. Otherwise, the server MUST return ERROR_INVALID_PARAMETER (0x00000057) if *multiSzNodeList* is not terminated by at least one [**Unicode**](#gt_unicode) NULL character, where the terminating character is determined by *cchListSize*. If the two preceding conditions are not met, the server MUST return ERROR_ASSERTION_FAILURE (0x0000029c) if any individual string in *multiSzNodeList* is not a valid node ID. The server MUST accept any other input.
 
@@ -12221,7 +12221,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 Upon receipt of this method, the server MUST create and maintain a queuing mechanism for posting event indications to the port, as described in section [3.1.1.8](#Section_3.1.1.8). This mechanism is maintained using implementation-specific methods and protocols between servers.
 
-The server MUST NOT queue any event indications to the port until the first event filter has been registered, as specified in [ApiAddNotifyCluster (section 3.1.4.2.58)](#Section_3.1.4.1.58), [ApiAddNotifyNode (section 3.1.4.2.59)](#Section_3.1.4.2.59), [ApiAddNotifyGroup (section 3.1.4.2.60)](#Section_3.1.4.1.60), [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.1.61), [ApiAddNotifyKey (section 3.1.4.2.62)](#Section_3.1.4.1.62), [ApiAddNotifyNetwork (section 3.1.4.2.90)](#Section_3.1.4.2.90), and [ApiAddNotifyNetInterface (section 3.1.4.2.99)](#Section_3.1.4.2.99).
+The server MUST NOT queue any event indications to the port until the first event filter has been registered, as specified in [ApiAddNotifyCluster (section 3.1.4.2.58)](#Section_3.1.4.2.58), [ApiAddNotifyNode (section 3.1.4.2.59)](#Section_3.1.4.2.59), [ApiAddNotifyGroup (section 3.1.4.2.60)](#Section_3.1.4.2.60), [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.2.61), [ApiAddNotifyKey (section 3.1.4.2.62)](#Section_3.1.4.1.62), [ApiAddNotifyNetwork (section 3.1.4.2.90)](#Section_3.1.4.1.90), and [ApiAddNotifyNetInterface (section 3.1.4.2.99)](#Section_3.1.4.2.99).
 
 The server SHOULD accept an ApiCreateNotify request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -12306,7 +12306,7 @@ error_status_t ApiAddNotifyCluster(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.2.56)](#Section_3.1.4.2.56) method call.
 
-**hCluster:** An [HCLUSTER_RPC (section 2.2.1.1)](#Section_2.2.1.1) context handle that was obtained in a previous [ApiOpenCluster (section 3.1.4.2.1)](#Section_3.1.4.2.160) or [ApiOpenClusterEx (section 3.1.4.2.116)](#Section_3.1.4.2.116) method call.
+**hCluster:** An [HCLUSTER_RPC (section 2.2.1.1)](#Section_2.2.1.1) context handle that was obtained in a previous [ApiOpenCluster (section 3.1.4.2.1)](#Section_3.1.4.2.139) or [ApiOpenClusterEx (section 3.1.4.2.116)](#Section_3.1.4.2.116) method call.
 
 **dwFilter:** A 32-bit integer bitmask containing the bitwise OR operator of one or more values in a CLUSTER_CHANGE (section 2.2.2.7) enumeration. This parameter MUST NOT have any of the following values set: CLUSTER_CHANGE_CLUSTER_STATE, CLUSTER_CHANGE_CLUSTER_RECONNECT, or CLUSTER_CHANGE_HANDLE_CLOSE.
 
@@ -12358,7 +12358,7 @@ error_status_t ApiAddNotifyNode(
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.2.66)](#Section_3.1.4.2.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hNode* (the second parameter).
 
-**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *StateSequence* parameter of the [ApiReAddNotifyNode (section 3.1.4.2.63)](#Section_3.1.4.1.63) method.
+**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *StateSequence* parameter of the [ApiReAddNotifyNode (section 3.1.4.2.63)](#Section_3.1.4.2.63) method.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -12406,7 +12406,7 @@ error_status_t ApiAddNotifyGroup(
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.2.66)](#Section_3.1.4.2.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hGroup* (the second parameter).
 
-**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyGroup (section 3.1.4.2.64)](#Section_3.1.4.1.64) method.
+**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyGroup (section 3.1.4.2.64)](#Section_3.1.4.2.64) method.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -12448,13 +12448,13 @@ error_status_t ApiAddNotifyResource(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.2.56)](#Section_3.1.4.2.56) method call.
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **dwFilter:** A 32-bit integer bitmask containing one or more resource-specific values in a CLUSTER_CHANGE (section 2.2.2.7) enumeration. The value of this parameter MUST be set to the bitwise OR operator of one or more of the following values: CLUSTER_CHANGE_RESOURCE_ADD, CLUSTER_CHANGE_RESOURCE_DELETE, CLUSTER_CHANGE_RESOURCE_STATE, or CLUSTER_CHANGE_RESOURCE_PROPERTY.
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.2.66)](#Section_3.1.4.2.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hResource* (the second parameter).
 
-**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyResource (section 3.1.4.2.65)](#Section_3.1.4.2.65) method.
+**dwStateSequence:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The client MUST retain the most current value of this parameter and provide it back to the server via the *dwStateSequence* parameter of the [ApiReAddNotifyResource (section 3.1.4.2.65)](#Section_3.1.4.1.65) method.
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -12524,7 +12524,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 The server MUST queue a separate event indication to the port for every filter that has the [CLUSTER_CHANGE (section 2.2.2.7)](#Section_2.2.2.7) value set (section 2.2.2.7) that corresponds to the internal event.
 
-As part of the successful completion of this method, the server MUST queue a CLUSTER_CHANGE_NODE_STATE event indication to the port if the StateSequence parameter is not equal to the internal state of the node, as specified in section [3.1.4.2.69](#Section_3.1.4.2.69).
+As part of the successful completion of this method, the server MUST queue a CLUSTER_CHANGE_NODE_STATE event indication to the port if the StateSequence parameter is not equal to the internal state of the node, as specified in section [3.1.4.2.69](#Section_3.1.4.1.69).
 
 The server SHOULD accept an ApiReAddNotifyNode request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -12604,7 +12604,7 @@ error_status_t ApiReAddNotifyGroup(
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.2.66)](#Section_3.1.4.2.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hGroup* (the second parameter).
 
-**dwStateSequence:** A 32-bit integer value that was obtained from a call to the [ApiAddNotifyGroup (section 3.1.4.2.60)](#Section_3.1.4.1.60) method or from the most recent value obtained from subsequent calls to ApiGetNotify (section 3.1.4.2.66).
+**dwStateSequence:** A 32-bit integer value that was obtained from a call to the [ApiAddNotifyGroup (section 3.1.4.2.60)](#Section_3.1.4.2.60) method or from the most recent value obtained from subsequent calls to ApiGetNotify (section 3.1.4.2.66).
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether the runtime succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -12648,13 +12648,13 @@ error_status_t ApiReAddNotifyResource(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.2.56)](#Section_3.1.4.2.56) method call.
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **dwFilter:** A 32-bit integer containing one or more resource-specific values in a **CLUSTER_CHANGE** enumeration. The value of this parameter MUST be set to the bitwise OR operator of one or more of the following values: CLUSTER_CHANGE_RESOURCE_ADD, CLUSTER_CHANGE_RESOURCE_DELETE, CLUSTER_CHANGE_RESOURCE_STATE and CLUSTER_CHANGE_RESOURCE_PROPERTY.
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.2.66)](#Section_3.1.4.2.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hResource* (the second parameter).
 
-**dwStateSequence:** A 32-bit integer value that was obtained from a call to [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.1.61) or from the most recent value obtained from subsequent calls to ApiGetNotify (section 3.1.4.2.66).
+**dwStateSequence:** A 32-bit integer value that was obtained from a call to [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.2.61) or from the most recent value obtained from subsequent calls to ApiGetNotify (section 3.1.4.2.66).
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether the runtime succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -12670,7 +12670,7 @@ For any other condition, this method MUST return a value that is not one of the 
 <a id="Section_3.1.4.2.66"></a>
 ##### 3.1.4.2.66 ApiGetNotify (Opnum 65)
 
-(Protocol Version 3) The ApiGetNotify method instructs the [**server**](#gt_server) to retrieve the first queued event indication from the designated version 1 [**notification port**](#gt_notification-port). The server MUST NOT complete this method until an indication has been queued to the port or the port has been closed through a separate call to the [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) method or the [ApiCloseNotify (section 3.1.4.2.57)](#Section_3.1.4.1.57) method.
+(Protocol Version 3) The ApiGetNotify method instructs the [**server**](#gt_server) to retrieve the first queued event indication from the designated version 1 [**notification port**](#gt_notification-port). The server MUST NOT complete this method until an indication has been queued to the port or the port has been closed through a separate call to the [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) method or the [ApiCloseNotify (section 3.1.4.2.57)](#Section_3.1.4.2.57) method.
 
 The server MUST NOT return the following [CLUSTER_CHANGE (section 2.2.2.7)](#Section_2.2.2.7) enumeration values in the *dwFilter* parameter: CLUSTER_CHANGE_REGISTRY_SUBTREE, CLUSTER_CHANGE_CLUSTER_STATE, or CLUSTER_CHANGE_HANDLE_CLOSE. The server SHOULD<80> return the value CLUSTER_CHANGE_CLUSTER_RECONNECT in each case where the server fails to return one or more event indications on the port. How and when the server fails to return an event indication is implementation-specific.
 
@@ -12696,7 +12696,7 @@ error_status_t ApiGetNotify(
 
 **hNotify:** An [HNOTIFY_RPC (section 2.2.1.6)](#Section_2.2.1.6) context handle that was obtained in a previous [ApiCreateNotify (section 3.1.4.2.56)](#Section_3.1.4.2.56) method call.
 
-**dwNotifyKey:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The value was supplied as the *dwNotifyKey* parameter in a previous call to one of the following methods: [ApiAddNotifyCluster (section 3.1.4.2.58)](#Section_3.1.4.1.58), [ApiAddNotifyNode (section 3.1.4.2.59)](#Section_3.1.4.2.59), [ApiAddNotifyGroup (section 3.1.4.2.60)](#Section_3.1.4.1.60), [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.1.61), [ApiAddNotifyKey (section 3.1.4.2.62)](#Section_3.1.4.1.62), [ApiAddNotifyNetwork (section 3.1.4.2.90)](#Section_3.1.4.2.90), [ApiAddNotifyNetInterface (section 3.1.4.2.99)](#Section_3.1.4.2.99), [ApiReAddNotifyNode (section 3.1.4.2.63)](#Section_3.1.4.1.63), [ApiReAddNotifyGroup (section 3.1.4.2.64)](#Section_3.1.4.1.64), [ApiReAddNotifyResource (section 3.1.4.2.65)](#Section_3.1.4.2.65), [ApiReAddNotifyNetwork (section 3.1.4.2.91)](#Section_3.1.4.1.91), or [ApiReAddNotifyNetInterface (section 3.1.4.2.100)](#Section_3.1.4.2.100).
+**dwNotifyKey:** The address of a 32-bit integer that the server MUST write upon successful completion of this method. The value was supplied as the *dwNotifyKey* parameter in a previous call to one of the following methods: [ApiAddNotifyCluster (section 3.1.4.2.58)](#Section_3.1.4.2.58), [ApiAddNotifyNode (section 3.1.4.2.59)](#Section_3.1.4.2.59), [ApiAddNotifyGroup (section 3.1.4.2.60)](#Section_3.1.4.2.60), [ApiAddNotifyResource (section 3.1.4.2.61)](#Section_3.1.4.2.61), [ApiAddNotifyKey (section 3.1.4.2.62)](#Section_3.1.4.1.62), [ApiAddNotifyNetwork (section 3.1.4.2.90)](#Section_3.1.4.1.90), [ApiAddNotifyNetInterface (section 3.1.4.2.99)](#Section_3.1.4.2.99), [ApiReAddNotifyNode (section 3.1.4.2.63)](#Section_3.1.4.2.63), [ApiReAddNotifyGroup (section 3.1.4.2.64)](#Section_3.1.4.2.64), [ApiReAddNotifyResource (section 3.1.4.2.65)](#Section_3.1.4.1.65), [ApiReAddNotifyNetwork (section 3.1.4.2.91)](#Section_3.1.4.1.91), or [ApiReAddNotifyNetInterface (section 3.1.4.2.100)](#Section_3.1.4.2.100).
 
 **dwFilter:** The address of a 32-bit integer value that the server MUST write upon successful completion of this method, which contains the CLUSTER_CHANGE (section 2.2.2.7) enumeration value, as specified in section 2.2.2.7, indicating the type of event. The value MUST match one or more filter blocks that were provided in a previous call to one of the following methods: ApiAddNotifyCluster, ApiAddNotifyNode, ApiAddNotifyGroup, ApiAddNotifyResource, ApiAddNotifyKey, ApiAddNotifyNetwork, ApiAddNotifyNetInterface, ApiReAddNotifyNode, ApiReAddNotifyGroup, ApiReAddNotifyResource, ApiReAddNotifyNetwork, or ApiReAddNotifyNetInterface.
 
@@ -12722,7 +12722,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiOpenNode method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified [**cluster**](#gt_cluster) [**node**](#gt_node) by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenNode returns a context handle so that the client can refer to the context that is created in subsequent method calls.
 
-There are several ways by which the client can determine the name of the node to specify for the *lpszNodeName* parameter. A node can have a well-known name if the node was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_NODE, as specified in section 3.1.4.2.8. This method obtains a list of all node names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open nodes to call additional methods in order to determine which nodes to operate on.
+There are several ways by which the client can determine the name of the node to specify for the *lpszNodeName* parameter. A node can have a well-known name if the node was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_NODE, as specified in section 3.1.4.2.8. This method obtains a list of all node names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open nodes to call additional methods in order to determine which nodes to operate on.
 
 The server SHOULD accept an ApiOpenNode request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -12811,7 +12811,7 @@ error_status_t ApiGetNodeState(
 | ClusterNodeUp 0x00000000 | The node is active. |
 | ClusterNodeDown 0x00000001 | The node is not active. |
 | ClusterNodeJoining 0x00000003 | The node is in the process of becoming active by joining a [**cluster**](#gt_cluster). |
-| ClusterNodePaused 0x00000002 | The node is active, but it has temporarily suspended activity, as specified in section [3.1.4.2.70](#Section_3.1.4.2.70). |
+| ClusterNodePaused 0x00000002 | The node is active, but it has temporarily suspended activity, as specified in section [3.1.4.2.70](#Section_3.1.4.2.126). |
 | ClusterNodeStateUnknown 0xFFFFFFFF | The operation to retrieve the node state was not successful. |
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether it succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
@@ -12830,7 +12830,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiPauseNode method instructs the [**server**](#gt_server) to suspend [**group**](#gt_group) ownership and failover activity on the designated [**node**](#gt_node). The persistent state of the node is set to paused, as specified in section [3.1.1.6](#Section_3.1.1.6).
 
-The server MUST NOT move a group to a node in the ClusterNodePaused state in response to a [**client**](#gt_client) request, such as [ApiMoveGroup](#Section_3.1.4.2.131) or [ApiMoveGroupToNode](#Section_3.1.4.2.132). If a node hosting one or more groups fails, then the server MUST NOT move those groups to a node in the ClusterNodePaused state if there are any other nodes in the ClusterNodeUp state. If a node hosting one or more groups fails, and there are no remaining nodes in the ClusterNodeUp state but there are nodes in the ClusterNodePaused state, then the server MUST move those groups to a node in the ClusterNodePaused state; however, the server MUST NOT bring those groups online. If there are groups hosted on a node in the ClusterNodePaused state, the server MUST NOT allow those groups or any resources in those groups to transition to the online state, such as in response to an [ApiOnlineGroup](#Section_3.1.4.1.50) or [ApiOnlineResource](#Section_3.1.4.2.18) request from a client. However, the server MUST permit the quorum [**resource**](#gt_resource), as designated by a previous call to [ApiSetQuorumResource](#Section_3.1.4.1.7), to come online on a node, even if that node is in the ClusterNodePaused state.
+The server MUST NOT move a group to a node in the ClusterNodePaused state in response to a [**client**](#gt_client) request, such as [ApiMoveGroup](#Section_3.1.4.2.152) or [ApiMoveGroupToNode](#Section_3.1.4.2.132). If a node hosting one or more groups fails, then the server MUST NOT move those groups to a node in the ClusterNodePaused state if there are any other nodes in the ClusterNodeUp state. If a node hosting one or more groups fails, and there are no remaining nodes in the ClusterNodeUp state but there are nodes in the ClusterNodePaused state, then the server MUST move those groups to a node in the ClusterNodePaused state; however, the server MUST NOT bring those groups online. If there are groups hosted on a node in the ClusterNodePaused state, the server MUST NOT allow those groups or any resources in those groups to transition to the online state, such as in response to an [ApiOnlineGroup](#Section_3.1.4.1.50) or [ApiOnlineResource](#Section_3.1.4.1.18) request from a client. However, the server MUST permit the quorum [**resource**](#gt_resource), as designated by a previous call to [ApiSetQuorumResource](#Section_3.1.4.1.7), to come online on a node, even if that node is in the ClusterNodePaused state.
 
 The [**cluster**](#gt_cluster) takes necessary and appropriate actions, by using implementation-specific mechanisms between servers, in order to bring all nodes into their persistent state.
 
@@ -12933,7 +12933,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiNodeResourceControl method instructs the [**server**](#gt_server) to initiate, on the specified [**resource**](#gt_resource), an operation that is defined by the specified control code. If necessary, the operation is forwarded to and executed on the specified [**node**](#gt_node).
 
-The semantic behavior as well as all parameters with the exception of *hNode* are identical to the [ApiResourceControl](#Section_3.1.4.2.74) method, as specified in section 3.1.4.2.74. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero, except as otherwise specified for particular control codes in section 3.1.4.2.74.
+The semantic behavior as well as all parameters with the exception of *hNode* are identical to the [ApiResourceControl](#Section_3.1.4.1.74) method, as specified in section 3.1.4.2.74. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero, except as otherwise specified for particular control codes in section 3.1.4.2.74.
 
 error_status_t ApiNodeResourceControl(
 
@@ -12994,7 +12994,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 
 );
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119) or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that is obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119) or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **dwControlCode:** Indicates the operation to perform on the resource. It MUST be one of the following values.
 
@@ -13002,10 +13002,10 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 | --- | --- |
 | [CLUSCTL_RESOURCE_UNKNOWN (section 3.1.4.3.1.1)](#Section_3.1.4.3.1.1) 0x1000000 | Verifies that control codes for the resource are being processed. |
 | [CLUSCTL_RESOURCE_GET_CHARACTERISTICS (section 3.1.4.3.1.2)](#Section_3.1.4.3.1.2) 0x1000005 | Retrieves the intrinsic [**characteristics**](#gt_characteristic) associated with the resource. |
-| [CLUSCTL_RESOURCE_GET_FLAGS (section 3.1.4.3.1.3)](#Section_3.1.4.3.1.38) 0x1000009 | Retrieves the flags that are set for a resource. |
-| [CLUSCTL_RESOURCE_GET_CLASS_INFO (section 3.1.4.3.1.4)](#Section_3.1.4.3.1.41) 0x100000D | Retrieves info about the class to which the designated resource belongs. |
-| [CLUSCTL_RESOURCE_GET_REQUIRED_DEPENDENCIES (section 3.1.4.3.1.5)](#Section_3.1.4.3.1.5) 0x1000011 | Retrieves a list of the names of [**resource types**](#gt_resource-type) on which the designated resource MUST be dependent on in order to properly operate. |
-| [CLUSCTL_RESOURCE_GET_NAME (section 3.1.4.3.1.6)](#Section_3.1.4.3.1.64) 0x1000029 | Retrieves the name of the resource. |
+| [CLUSCTL_RESOURCE_GET_FLAGS (section 3.1.4.3.1.3)](#Section_3.1.4.3.1.31) 0x1000009 | Retrieves the flags that are set for a resource. |
+| [CLUSCTL_RESOURCE_GET_CLASS_INFO (section 3.1.4.3.1.4)](#Section_3.1.4.3.1.44) 0x100000D | Retrieves info about the class to which the designated resource belongs. |
+| [CLUSCTL_RESOURCE_GET_REQUIRED_DEPENDENCIES (section 3.1.4.3.1.5)](#Section_3.1.1.1.2) 0x1000011 | Retrieves a list of the names of [**resource types**](#gt_resource-type) on which the designated resource MUST be dependent on in order to properly operate. |
+| [CLUSCTL_RESOURCE_GET_NAME (section 3.1.4.3.1.6)](#Section_3.1.4.3.1.60) 0x1000029 | Retrieves the name of the resource. |
 | [CLUSCTL_RESOURCE_GET_RESOURCE_TYPE (section 3.1.4.3.1.7)](#Section_3.1.4.3.1.7) 0x100002D | Retrieves the resource type of the designated resource. |
 | [CLUSCTL_RESOURCE_GET_ID (section 3.1.4.3.1.8)](#Section_3.1.4.3.1.8) 0x1000039 | Retrieves the unique ID for the resource. |
 | [CLUSCTL_RESOURCE_ENUM_COMMON_PROPERTIES (section 3.1.4.3.1.9)](#Section_3.1.4.3.1.9) 0x1000051 | Retrieves a list of the [**common property**](#gt_common-property) names for the designated resource. |
@@ -13102,7 +13102,7 @@ Upon receiving this message, the server MUST:
 
 (Protocol Version 3) The ApiNodeResourceTypeControl method instructs the [**server**](#gt_server) to initiate, on the specified [**resource**](#gt_resource) type, an operation that is defined by the specified control code. If necessary, the operation is forwarded to and executed on the specified [**node**](#gt_node).
 
-The semantic behavior as well as all parameters with the exception of *hNode* are identical to the [ApiResourceTypeControl](#Section_3.1.4.3.2) method including parameter descriptions. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero, except as otherwise specified for particular control codes in section 3.1.4.2.76.
+The semantic behavior as well as all parameters with the exception of *hNode* are identical to the [ApiResourceTypeControl](#Section_3.1.4.1.76) method including parameter descriptions. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero, except as otherwise specified for particular control codes in section 3.1.4.2.76.
 
 error_status_t ApiNodeResourceTypeControl(
 
@@ -13167,7 +13167,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 
 );
 
-**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.2.160) or [ApiOpenClusterEx](#Section_3.1.4.2.116) method call.
+**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.2.139) or [ApiOpenClusterEx](#Section_3.1.4.2.116) method call.
 
 **lpszResourceTypeName:** A [**Unicode string**](#gt_unicode-string) that is the name of the type of resource that will execute this operation.
 
@@ -13177,7 +13177,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 | --- | --- |
 | [CLUSCTL_RESOURCE_TYPE_UNKNOWN](#Section_3.1.4.3.2.1) 0x02000000 | Verifies that control codes for the resource type are being processed. |
 | [CLUSCTL_RESOURCE_TYPE_GET_CHARACTERISTICS](#Section_3.1.4.3.2.2) 0x02000005 | Retrieves the intrinsic [**characteristics**](#gt_characteristic) associated with the resource type. |
-| [CLUSCTL_RESOURCE_TYPE_GET_FLAGS](#Section_3.1.4.3.2.30) 0x02000009 | Retrieves the flags that are set for the resource type. |
+| [CLUSCTL_RESOURCE_TYPE_GET_FLAGS](#Section_3.1.4.3.2.3) 0x02000009 | Retrieves the flags that are set for the resource type. |
 | [CLUSCTL_RESOURCE_TYPE_GET_CLASS_INFO](#Section_3.1.4.3.2.4) 0x0200000D | Retrieves info about the class to which the resource type belongs. |
 | [CLUSCTL_RESOURCE_TYPE_GET_REQUIRED_DEPENDENCIES](#Section_3.1.4.3.2.5) 0x02000011 | Retrieves a list of the names of resource types on which an instance of this resource type MUST be dependent on in order to properly operate. |
 | [CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT](#Section_3.1.4.3.2.6) 0x02000015 | Queries the arbitration time-out value for the designated storage class resource. |
@@ -13245,7 +13245,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 Upon receiving this message, the server MUST:
 
-- Determine the number of bytes that are required for *lpOutBuffer*. If the size indicated by *nOutBufferSize* is less than the number of bytes that are required for *lpOutBuffer*, return ERROR_MORE_DATA (0x000000EA), except as specified in the subsections of [3.1.4.3.2](#Section_3.1.4.3.2.8) where a different value is returned, and set *lpcbRequired* to the number of bytes that are required for the output buffer.
+- Determine the number of bytes that are required for *lpOutBuffer*. If the size indicated by *nOutBufferSize* is less than the number of bytes that are required for *lpOutBuffer*, return ERROR_MORE_DATA (0x000000EA), except as specified in the subsections of [3.1.4.3.2](#Section_3.1.4.3.2.20) where a different value is returned, and set *lpcbRequired* to the number of bytes that are required for the output buffer.
 - Return either ERROR_INVALID_DATA or ERROR_INVALID_PARAMETER if the input data is invalid or incorrectly formatted. The client MUST treat these two error codes the same.
 <a id="Section_3.1.4.2.77"></a>
 ##### 3.1.4.2.77 ApiNodeGroupControl (Opnum 76)
@@ -13374,7 +13374,7 @@ Upon receiving this message, the server MUST:
 
 (Protocol Version 3) The ApiNodeNodeControl method instructs the [**server**](#gt_server) to initiate, on the [**node**](#gt_node) designated by *hNode*, an operation that is defined by the specified control code. The operation is forwarded to and executed on the node designated by *hHostNode*. The *hNode* parameter MUST NOT be set to the calling node.
 
-The semantic behavior and all parameters, with the exception of *hHostNode*, are identical to the [ApiNodeControl](#Section_3.1.4.3.4) method. In addition, the server MUST require that the access level associated with the *hHostNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
+The semantic behavior and all parameters, with the exception of *hHostNode*, are identical to the [ApiNodeControl](#Section_3.1.4.1.80) method. In addition, the server MUST require that the access level associated with the *hHostNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
 
 error_status_t ApiNodeNodeControl(
 
@@ -13499,7 +13499,7 @@ Upon receiving this message, the server MUST:
 
 (Protocol Version 3) The ApiOpenNetwork method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified [**cluster network**](#gt_cluster-network) by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenNetwork returns a context handle so that the client can refer to the context that is created in subsequent method calls.
 
-There are several ways by which the client can determine the name of the cluster network to specify for the *lpszNetworkName* parameter. A cluster network can have a well-known name if the cluster network was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_NETWORK, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open cluster networks to call additional methods in order to determine which cluster networks to operate on.
+There are several ways by which the client can determine the name of the cluster network to specify for the *lpszNetworkName* parameter. A cluster network can have a well-known name if the cluster network was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_NETWORK, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open cluster networks to call additional methods in order to determine which cluster networks to operate on.
 
 The server SHOULD accept an ApiOpenNetwork request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -13751,7 +13751,7 @@ LPWSTR NetworkIdList[*],
 
 (Protocol Version 3) The ApiNodeNetworkControl method instructs the [**server**](#gt_server) to initiate, on the specified [**cluster network**](#gt_cluster-network), an operation that is defined by the specified control code. The operation is forwarded to and executed on the specified [**node**](#gt_node).
 
-The semantic behavior as well as all parameters with the exception of *hNode* are identical to the [ApiNetworkControl](#Section_3.1.4.1.89) method. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
+The semantic behavior as well as all parameters with the exception of *hNode* are identical to the [ApiNetworkControl](#Section_3.1.4.2.89) method. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
 
 error_status_t ApiNodeNetworkControl(
 
@@ -13947,7 +13947,7 @@ error_status_t ApiReAddNotifyNetwork(
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the [**client**](#gt_client). This value MUST be returned to the client via a subsequent completion of the [ApiGetNotify (section 3.1.4.2.66)](#Section_3.1.4.2.66) method, if the name of the object pertaining to the event matches the name of the object designated by *hNetwork* (the second parameter).
 
-**dwStateSequence:** A 32-bit integer value that was obtained from a call to [ApiAddNotifyNetwork (section 3.1.4.2.90)](#Section_3.1.4.2.90) or the most recent value obtained from subsequent calls to ApiGetNotify (section 3.1.4.2.66).
+**dwStateSequence:** A 32-bit integer value that was obtained from a call to [ApiAddNotifyNetwork (section 3.1.4.2.90)](#Section_3.1.4.1.90) or the most recent value obtained from subsequent calls to ApiGetNotify (section 3.1.4.2.66).
 
 **rpc_status:** A 32-bit integer used to indicate success or failure. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST indicate, by writing to this parameter, whether the runtime succeeded in executing this method on the server. The encoding of the value passed in this parameter MUST conform to encoding for comm_status and fault_status, as specified in Appendix E of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
@@ -13965,7 +13965,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiOpenNetInterface method establishes context on the [**server**](#gt_server) about the interaction of a [**client**](#gt_client) with the specified [**cluster network interface**](#gt_cluster-network-interface) by using the current [**RPC**](#gt_remote-procedure-call-rpc) connection. ApiOpenNetInterface returns a context handle so that the client can refer to the context that is created in subsequent method calls.
 
-There are several ways by which the client can determine the name of the cluster network interface to specify for the *lpszNetInterfaceName* parameter. A cluster network interface can have a well-known name if the cluster network interface was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_NETINTERFACE, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network interface names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open the cluster network interface to call additional methods in order to determine which cluster network interface to operate on. Finally, a client supplying the name of the [**node**](#gt_node) and [**cluster network**](#gt_cluster-network) to the [ApiGetNetInterface](#Section_3.1.4.2.95) method will get back the corresponding cluster network interface object name for that combination, which can then be provided to this method.
+There are several ways by which the client can determine the name of the cluster network interface to specify for the *lpszNetInterfaceName* parameter. A cluster network interface can have a well-known name if the cluster network interface was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_NETINTERFACE, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network interface names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open the cluster network interface to call additional methods in order to determine which cluster network interface to operate on. Finally, a client supplying the name of the [**node**](#gt_node) and [**cluster network**](#gt_cluster-network) to the [ApiGetNetInterface](#Section_3.1.4.2.95) method will get back the corresponding cluster network interface object name for that combination, which can then be provided to this method.
 
 The server SHOULD accept an ApiOpenNetInterface request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and the server MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -14144,7 +14144,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 (Protocol Version 3) The ApiNodeNetInterfaceControl method instructs the [**server**](#gt_server) to initiate, on the specified [**cluster network interface**](#gt_cluster-network-interface), an operation that is defined by the specified control code. If necessary, the operation is forwarded to and executed on the specified [**node**](#gt_node).
 
-The semantic behavior as well as all parameters, with the exception of *hNode*, are identical to that of the [ApiNetInterfaceControl](#Section_3.1.4.1.98) method. All return values are identical to those specified in ApiNetInterfaceControl. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
+The semantic behavior as well as all parameters, with the exception of *hNode*, are identical to that of the [ApiNetInterfaceControl](#Section_3.1.4.3.6) method. All return values are identical to those specified in ApiNetInterfaceControl. In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
 
 error_status_t ApiNodeNetInterfaceControl(
 
@@ -14314,7 +14314,7 @@ For any other condition, this method MUST return a value that is not one of the 
 
 The server MUST queue a separate event indication to the port for every filter that has the [CLUSTER_CHANGE (section 2.2.2.7)](#Section_2.2.2.7) value set that corresponds to the internal event.
 
-The server MUST post a CLUSTER_CHANGE_NETINTERFACE_STATE event indication to the port if the *StateSequence* parameter is not equal to the internal state of the cluster network interface, as specified in section [3.1.4.2.94](#Section_3.1.4.1.94).
+The server MUST post a CLUSTER_CHANGE_NETINTERFACE_STATE event indication to the port if the *StateSequence* parameter is not equal to the internal state of the cluster network interface, as specified in section [3.1.4.2.94](#Section_3.1.4.2.94).
 
 The server SHOULD accept an ApiReAddNotifyNetInterface request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and the server MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -14521,7 +14521,7 @@ error_status_t ApiBackupClusterDatabase(
 
 (Protocol Version 3) The ApiNodeClusterControl method instructs the [**server**](#gt_server) to initiate, on the specified [**cluster**](#gt_cluster), an operation that is defined by the specified control code. If necessary, the operation is forwarded to and executed on the specified [**node**](#gt_node).
 
-The semantic behavior as well as all the parameters, with the exception of *hHostNode*, are identical to those of the [ApiClusterControl](#Section_3.1.4.2.106) method. All return values are identical to those specified in section 3.1.4.2.106.
+The semantic behavior as well as all the parameters, with the exception of *hHostNode*, are identical to those of the [ApiClusterControl](#Section_3.1.4.3.7) method. All return values are identical to those specified in section 3.1.4.2.106.
 
 In addition, the server MUST require that the access level associated with the *hNode* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero.
 
@@ -14584,7 +14584,7 @@ length_is (*lpBytesReturned)] UCHAR *lpOutBuffer,
 
 );
 
-**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.2.160) or [ApiOpenClusterEx](#Section_3.1.4.2.116) method call.
+**hCluster:** An [HCLUSTER_RPC](#Section_2.2.1.1) context handle that is obtained in a previous [ApiOpenCluster](#Section_3.1.4.2.139) or [ApiOpenClusterEx](#Section_3.1.4.2.116) method call.
 
 **dwControlCode:** Indicates the operation to perform on the cluster. Must be one of the following values.
 
@@ -14755,7 +14755,7 @@ resource:
 
 | "[" resourceName "]"
 
-In this grammar, "resourceID" represents the ID of a resource, as returned by CLUSCTL_RESOURCE_GET_ID ([3.1.4.3.1.8](#Section_3.1.4.3.1.8)), and "resourceName" represents the name of a resource, as returned by CLUSCTL_RESOURCE_GET_NAME ([3.1.4.3.1.6](#Section_3.1.4.3.1.64)).
+In this grammar, "resourceID" represents the ID of a resource, as returned by CLUSCTL_RESOURCE_GET_ID ([3.1.4.3.1.8](#Section_3.1.4.3.1.8)), and "resourceName" represents the name of a resource, as returned by CLUSCTL_RESOURCE_GET_NAME ([3.1.4.3.1.6](#Section_3.1.4.3.1.60)).
 
 For example, the following expression indicates that *hResource* will remain online as long as a resource from each of the parenthesized expressions remains online.
 
@@ -14812,7 +14812,7 @@ error_status_t ApiSetResourceDependencyExpression(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx,](#Section_3.1.4.2.119) or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx,](#Section_3.1.4.2.119) or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **lpszDependencyExpression:** A pointer to a null-terminated Unicode string buffer containing a valid dependency expression.
 
@@ -14851,7 +14851,7 @@ error_status_t ApiGetResourceDependencyExpression(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **lpszDependencyExpression:** The address of a pointer that receives a pointer to a [**Unicode string**](#gt_unicode-string) buffer where the server MUST return the null-terminated complex dependency expression after successful completion of this method. The server MUST allocate as much memory as is required to return the expression. If the method fails, this parameter MUST be ignored.
 
@@ -14891,7 +14891,7 @@ error_status_t ApiGetResourceNetworkName(
 
 );
 
-**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx,](#Section_3.1.4.2.119) or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx,](#Section_3.1.4.2.119) or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **lpszName:** A pointer to a Unicode string buffer. The *lpszName* parameter receives the NetBIOS computer name associated with the resource with the following properties:
 
@@ -15146,7 +15146,7 @@ For any other condition, the server sets *Status* to a value that is not one of 
 
 The server MUST determine the level of access to be granted to the client (section [3.1.4](#Section_1.3)). Upon success, the server MUST associate that level of access with the node context it has established.
 
-The client can determine the name of the node to specify for the *lpszNodeName* parameter in one of two ways. A node can have a well-known name if it was configured as such by using implementation-specific methods between servers. Or, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_NODE, as specified in section 3.1.4.2.8. This method obtains a list of all node names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open nodes to call additional methods to determine which nodes to operate on.
+The client can determine the name of the node to specify for the *lpszNodeName* parameter in one of two ways. A node can have a well-known name if it was configured as such by using implementation-specific methods between servers. Or, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_NODE, as specified in section 3.1.4.2.8. This method obtains a list of all node names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open nodes to call additional methods to determine which nodes to operate on.
 
 The server SHOULD accept an ApiOpenNodeEx request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -15193,7 +15193,7 @@ For any other condition, the server sets *Status* to a value that is not one of 
 
 The [**server**](#gt_server) MUST determine the level of access to be granted to the [**client**](#gt_client) (section [3.1.4](#Section_1.3)). Upon success, the server MUST associate that level of access with the [**group**](#gt_group) context it has established.
 
-The client has two ways to determine the group name to specify for the *lpszGroupName* parameter. A group can have a well-known name if it was configured as such using implementation-specific methods between servers. Alternatively, a client can use [ApiGetResourceState](#Section_3.1.4.2.133) which returns the name of the group in which a [**resource**](#gt_resource) is contained.
+The client has two ways to determine the group name to specify for the *lpszGroupName* parameter. A group can have a well-known name if it was configured as such using implementation-specific methods between servers. Alternatively, a client can use [ApiGetResourceState](#Section_3.1.4.2.139) which returns the name of the group in which a [**resource**](#gt_resource) is contained.
 
 The server SHOULD accept an ApiOpenGroupEx request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -15215,7 +15215,7 @@ HGROUP_RPC ApiOpenGroupEx(
 
 **dwDesiredAccess:** The value for this parameter is the same as specified for *dwDesiredAccess* in [ApiOpenClusterEx](#Section_3.1.4.2.116).
 
-**lpdwGrantedAccess:** The value for this parameter is the same as specified for *lpdwGrantedAccess* in ApiOpenClusterEx, with the additional stipulation that if the server sets *lpdwGrantedAccess* to GENERIC_READ and if the client has the backup privilege, as defined in [MS-LSAD](#Section_5), then the returned context handle can also be used in a subsequent call to [ApiMoveGroup](#Section_3.1.4.2.131) or [ApiMoveGroupToNode](#Section_3.1.4.2.132).
+**lpdwGrantedAccess:** The value for this parameter is the same as specified for *lpdwGrantedAccess* in ApiOpenClusterEx, with the additional stipulation that if the server sets *lpdwGrantedAccess* to GENERIC_READ and if the client has the backup privilege, as defined in [MS-LSAD](#Section_5), then the returned context handle can also be used in a subsequent call to [ApiMoveGroup](#Section_3.1.4.2.152) or [ApiMoveGroupToNode](#Section_3.1.4.2.132).
 
 **Status:** Indicates the status of this operation. The server MUST set **Status** to the following error codes for the specified conditions.
 
@@ -15241,7 +15241,7 @@ For any other condition, the server sets *Status* to a value that is not one of 
 
 The server MUST determine the level of access to be granted to the client (section [3.1.4](#Section_1.3)). Upon success, the server MUST associate that level of access with the resource context it has established.
 
-The client has several ways to determine the resource name to specify for the *lpszResourceName* parameter. A resource can have a well-known name if it was configured as such by using implementation-specific methods between servers. Or, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_RESOURCE, as specified in section 3.1.4.2.8. This method obtains a list of all resource names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open resources to call additional methods to determine on which resources to operate.
+The client has several ways to determine the resource name to specify for the *lpszResourceName* parameter. A resource can have a well-known name if it was configured as such by using implementation-specific methods between servers. Or, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_RESOURCE, as specified in section 3.1.4.2.8. This method obtains a list of all resource names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open resources to call additional methods to determine on which resources to operate.
 
 The server SHOULD accept an ApiOpenResourceEx request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and MUST accept the processing request if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -15259,7 +15259,7 @@ HRES_RPC ApiOpenResourceEx(
 
 );
 
-**lpszResourceName:** A [**Unicode string**](#gt_unicode-string) that contains the name of the resource for which to establish context on the server. For version 3.0, the server MUST also accept the resource unique ID as returned by the [ApiGetResourceId](#Section_3.1.4.1.15) method.
+**lpszResourceName:** A [**Unicode string**](#gt_unicode-string) that contains the name of the resource for which to establish context on the server. For version 3.0, the server MUST also accept the resource unique ID as returned by the [ApiGetResourceId](#Section_3.1.4.2.15) method.
 
 **dwDesiredAccess:** The value for this parameter is the same as specified for *dwDesiredAccess* in [ApiOpenClusterEx](#Section_3.1.4.2.116).
 
@@ -15288,7 +15288,7 @@ For any other condition, the server sets *Status* to a value that is not one of 
 
 The server MUST determine the level of access to be granted to the client (section [3.1.4](#Section_1.3)). Upon success, the server MUST associate with the [**node**](#gt_node) context it has established that level of access.
 
-There are several ways by which the client can determine the name of the cluster network to specify for the *lpszNetworkName* parameter. A cluster network can have a well-known name if the cluster network was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_NETWORK, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open networks to call additional methods in order to determine which networks to operate on.
+There are several ways by which the client can determine the name of the cluster network to specify for the *lpszNetworkName* parameter. A cluster network can have a well-known name if the cluster network was configured as such by using implementation-specific methods between servers. Optionally, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_NETWORK, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network names in the [**cluster state**](#gt_cluster-state). The client can then examine names or open networks to call additional methods in order to determine which networks to operate on.
 
 The server SHOULD accept an ApiOpenNetworkEx request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -15335,7 +15335,7 @@ For any other condition, the server sets *Status* to a value that is not one of 
 
 The server MUST determine the level of access to be granted to the client (section [3.1.4](#Section_1.3)). Upon success, the server MUST associate that level of access with the node context it has established.
 
-The client can determine the name of the cluster network interface in several ways to specify for the *lpszNetInterfaceName* parameter. A cluster network interface can have a well-known name if the cluster network interface was configured as such by using implementation-specific methods between servers. Or, a client can use [ApiCreateEnum](#Section_3.1.4.2.88) with enumeration type CLUSTER_ENUM_NETINTERFACE, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network interface names in the [**cluster state**](#gt_cluster-state). The client then can examine names or open cluster network interfaces to call additional methods to determine which cluster network interfaces to operate on. Finally, a client supplying the name of the [**node**](#gt_node) and network to the [ApiGetNetInterface](#Section_3.1.4.2.95) method, will get the corresponding cluster network interface object name for that combination, which then can be provided to this method.
+The client can determine the name of the cluster network interface in several ways to specify for the *lpszNetInterfaceName* parameter. A cluster network interface can have a well-known name if the cluster network interface was configured as such by using implementation-specific methods between servers. Or, a client can use [ApiCreateEnum](#Section_3.1.4.2.89) with enumeration type CLUSTER_ENUM_NETINTERFACE, as specified in section 3.1.4.2.8. This method obtains a list of all cluster network interface names in the [**cluster state**](#gt_cluster-state). The client then can examine names or open cluster network interfaces to call additional methods to determine which cluster network interfaces to operate on. Finally, a client supplying the name of the [**node**](#gt_node) and network to the [ApiGetNetInterface](#Section_3.1.4.2.95) method, will get the corresponding cluster network interface object name for that combination, which then can be provided to this method.
 
 The server SHOULD accept an ApiOpenNetInterfaceEx request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -15402,7 +15402,7 @@ error_status_t ApiChangeCsvState(
 
 );
 
-**hResource:** An HRES_RPC context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.99), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.10) method call.
+**hResource:** An HRES_RPC context handle that was obtained in a previous [ApiOpenResource](#Section_3.1.4.2.92), [ApiOpenResourceEx](#Section_3.1.4.2.119), or [ApiCreateResource](#Section_3.1.4.2.100) method call.
 
 **dwState:** This MUST be 1 to make the disk associated with *hResource* accessible from all cluster nodes. This MUST be 0 to make the disk associated with *hResource* accessible only from the cluster [**node**](#gt_node) that mounted the disk.
 
@@ -15507,7 +15507,7 @@ error_status_t ApiCreateEnumEx(
 
 );
 
-**hCluster:** An [HCLUSTER_RPC (section 2.2.1.1)](#Section_2.2.1.1) context handle that was obtained in a previous [ApiOpenCluster (section 3.1.4.2.1)](#Section_3.1.4.2.160) or [ApiOpenClusterEx (section 3.1.4.2.116)](#Section_3.1.4.2.116) method call.
+**hCluster:** An [HCLUSTER_RPC (section 2.2.1.1)](#Section_2.2.1.1) context handle that was obtained in a previous [ApiOpenCluster (section 3.1.4.2.1)](#Section_3.1.4.2.139) or [ApiOpenClusterEx (section 3.1.4.2.116)](#Section_3.1.4.2.116) method call.
 
 **dwType:** The type of enumeration to be returned by the server. This value MUST be set to the bitwise OR operator of one or more of the following values, except as noted for CLUSTER_ENUM_INTERNAL_NETWORK.
 
@@ -15600,7 +15600,7 @@ For any other condition, the server returns a value that is not one of the value
 
 This server MUST handle this method in the same manner as [ApiPauseNodeEx (section 3.1.4.2.125)](#Section_3.1.4.2.125) except that the server MUST attempt to move groups hosted by the node specified by the *hNode* parameter to the node specified by the *hNodeDrainTarget* parameter. The server SHOULD move the groups according to preferences, limitations, and other policies as if [ApiMoveGroupToNode (section 3.1.4.2.53)](#Section_3.1.4.2.132) or [ApiMoveGroupToNodeEx (section 3.1.4.2.132)](#Section_3.1.4.2.132) had been called for each of these groups individually.
 
-The server MUST fail this method with ERROR_HOST_NODE_NOT_AVAILABLE (0x0000138D) if the node designated by the *hNodeDrainTarget* parameter is not in the ClusterNodeUp state as specified in section [3.1.4.2.69](#Section_3.1.4.2.69).
+The server MUST fail this method with ERROR_HOST_NODE_NOT_AVAILABLE (0x0000138D) if the node designated by the *hNodeDrainTarget* parameter is not in the ClusterNodeUp state as specified in section [3.1.4.2.69](#Section_3.1.4.1.69).
 
 The server MUST accept an ApiPauseNodeWithDrainTarget request only if its [**protocol server state**](#gt_protocol-server-state) is read/write, as specified in section [3.1.1](#Section_1.3).
 
@@ -15640,7 +15640,7 @@ For any other condition, the server returns a value that is not one of the value
 
 (Protocol Version 3) The ApiResumeNodeEx method SHOULD<107> instruct the server to resume normal group ownership and failover activity on the designated node and, optionally, to initiate operations to move groups to the designated node.
 
-The server MUST handle this method in the same manner as [ApiResumeNode (section 3.1.4.2.71)](#Section_3.1.4.2.71) except as specified below for the *dwResumeFailbackType* parameter.
+The server MUST handle this method in the same manner as [ApiResumeNode (section 3.1.4.2.71)](#Section_3.1.4.2.127) except as specified below for the *dwResumeFailbackType* parameter.
 
 The server MUST require that the access level associated with the *hNode* parameter context handle is "All", as specified in section [3.1.4](#Section_1.3).
 
@@ -15734,7 +15734,7 @@ The server MUST handle this method in the same manner as [ApiOnlineGroup (secti
 - If the CLUSAPI_GROUP_ONLINE_SYNCHRONOUS flag is set in the *dwOnlineFlags* parameter, the server MUST perform the operation synchronously to bring the group designated by the *hGroup* parameter online.
 - If the CLUSAPI_GROUP_ONLINE_BEST_POSSIBLE_NODE flag is set in the *dwOnlineFlags* parameter, the server MUST determine the best possible node that will host the group designated by the *hGroup* parameter.
 - If the CLUSAPI_GROUP_ONLINE_IGNORE_AFFINITY_RULE flag is set in the *dwOnlineFlags* parameter, the server MUST ignore the affinity rule of the group designated by the *hGroup* parameter.
-- For each resource contained in the group designated by the *hGroup* parameter that is not in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.133)), the server MUST provide the buffer specified by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource online.
+- For each resource contained in the group designated by the *hGroup* parameter that is not in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.139)), the server MUST provide the buffer specified by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource online.
 The server MUST accept an ApiOnlineGroupEx request only if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
 The server MUST require that the access level associated with the *hGroup* parameter is "All" (section [3.1.4](#Section_1.3)).
@@ -15785,10 +15785,10 @@ error_status_t ApiOnlineGroupEx(
 
 (Protocol Version 3) The ApiOfflineGroupEx method SHOULD<113> instruct the server to make all the resources in the designated group inactive or unavailable on the node that is hosting the group.
 
-The server MUST handle this method in the same manner as [ApiOfflineGroup (section 3.1.4.2.51)](#Section_3.1.4.2.130) except as follows:
+The server MUST handle this method in the same manner as [ApiOfflineGroup (section 3.1.4.2.51)](#Section_3.1.4.1.51) except as follows:
 
 - If the CLUSAPI_GROUP_OFFLINE_IGNORE_RESOURCE_STATUS flag is set in the *dwOfflineFlags* parameter, the server MUST ignore the locked mode value of the group designated by the *hGroup* parameter.
-- For each resource contained in the group designated by the *hGroup* parameter that is in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.133)), the server MUST provide the buffer specified by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource offline.
+- For each resource contained in the group designated by the *hGroup* parameter that is in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.139)), the server MUST provide the buffer specified by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource offline.
 The server MUST accept an ApiOfflineGroupEx request only if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
 The server MUST require that the access level associated with the *hGroup* parameter is "All" (section [3.1.4](#Section_1.3)).
@@ -15832,7 +15832,7 @@ error_status_t ApiOfflineGroupEx(
 
 (Protocol Version 3) The ApiMoveGroupEx method SHOULD<114> instruct the server to move ownership of the specified group to another node in the cluster.
 
-The server MUST handle this method in the same manner as [ApiMoveGroup (section 3.1.4.2.52)](#Section_3.1.4.2.131) except as follows:
+The server MUST handle this method in the same manner as [ApiMoveGroup (section 3.1.4.2.52)](#Section_3.1.4.2.152) except as follows:
 
 - If the CLUSAPI_GROUP_MOVE_IGNORE_RESOURCE_STATUS flag is set in the *dwMoveFlags* parameter, the server MUST ignore the locked mode value of the group designated by the *hGroup* parameter.
 - If the CLUSAPI_GROUP_MOVE_RETURN_TO_SOURCE_NODE_ON_ERROR flag is set in the *dwMoveFlags* parameter, and if the designated group cannot be brought to its persistent state on the destination node selected by the server, the server MUST move the group back to the source node and bring the group to its persistent state on the source node.
@@ -15840,7 +15840,7 @@ The server MUST handle this method in the same manner as [ApiMoveGroup (section
 - If the CLUSAPI_GROUP_MOVE_HIGH_PRIORITY_START flag is set in the *dwMoveFlags* parameter, then on the destination node when bringing the group to its persistent state, the server SHOULD bring this group to its persistent state as soon as possible, regardless of other implementation-specific policies that govern the ordering and/or prioritization of bringing groups to their persistent states.
 - If the CLUSAPI_GROUP_MOVE_FAILBACK flag is set in the *dwMoveFlags* parameter, and if move group operation fails, the server MUST perform failback operation.
 - If the CLUSAPI_GROUP_MOVE_IGNORE_AFFINITY_RULE flag is set in the *dwMoveFlags* parameter, the server MUST ignore the affinity rule of the group designated by the *hGroup* parameter.
-- For each resource contained in the group designated by *hGroup* that is in the state ClusterResourceOnline (section [3.1.4.2.13](#Section_3.1.4.2.133)), the server MUST provide the buffer designated by the lpInBuffer parameter to the server implementation-specific object that controls the resource operation while bringing the resource offline on the current node and when bringing the resource online on the destination node. How the server provides this buffer is implementation-specific.
+- For each resource contained in the group designated by *hGroup* that is in the state ClusterResourceOnline (section [3.1.4.2.13](#Section_3.1.4.2.139)), the server MUST provide the buffer designated by the lpInBuffer parameter to the server implementation-specific object that controls the resource operation while bringing the resource offline on the current node and when bringing the resource online on the destination node. How the server provides this buffer is implementation-specific.
 The server accepts an ApiMoveGroupEx request only if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
 The server MUST require that the access level associated with the *hGroup* parameter is "All" (section [3.1.4](#Section_1.3)).
@@ -15981,14 +15981,14 @@ For any other condition, the server returns a value that is not one of the value
 
 (Protocol Version 3) The ApiOnlineResourceEx method SHOULD<118> instruct the server to make the specified resource active or available on the node that currently owns it.
 
-The server MUST handle this method in the same manner as [ApiOnlineResource (section 3.1.4.2.18)](#Section_3.1.4.2.18) except as follows:
+The server MUST handle this method in the same manner as [ApiOnlineResource (section 3.1.4.2.18)](#Section_3.1.4.1.18) except as follows:
 
 - If the CLUSAPI_RESOURCE_ONLINE_IGNORE_RESOURCE_STATUS flag is set in the *dwOnlineFlags* parameter, the server MUST ignore the locked mode value of the resource designated by the *hResource* parameter as well as the locked mode value of any of its provider resources as specified in section [3.1.1.1.2](#Section_3.1.1.1.2).
 - If the CLUSAPI_RESOURCE_ONLINE_DO_NOT_UPDATE_PERSISTENT_STATE flag is set in the *dwOnlineFlags* parameter, the server MUST not update the persistent state of the resource designated by the *hResource* parameter.
 - If the CLUSAPI_RESOURCE_ONLINE_NECESSARY_FOR_QUORUM flag is set in the *dwOnlineFlags* parameter, the server MUST bring the resource designated by the *hResource* parameter to online to maintain a quorum.
 - If the CLUSAPI_RESOURCE_ONLINE_BEST_POSSIBLE_NODE flag is set in the *dwOnlineFlags* parameter, the server MUST determine the best possible node that will host the resource designated by the *hResource* parameter.
 - If the CLUSAPI_RESOURCE_ONLINE_IGNORE_AFFINITY_RULE flag is set in the *dwOnlineFlags* parameter, the server MUST ignore the affinity rule of the resource designated by the *hResource* parameter.
-- If the resource designated by *hResource* is not already in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.133)), the server MUST provide the buffer designated by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource online and MUST provide this buffer to the server implementation-specific objects for any of the designated resource's provider resources that are not already in the ClusterResourceOnline state. How the server provides this buffer is implementation-specific.
+- If the resource designated by *hResource* is not already in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.139)), the server MUST provide the buffer designated by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource online and MUST provide this buffer to the server implementation-specific objects for any of the designated resource's provider resources that are not already in the ClusterResourceOnline state. How the server provides this buffer is implementation-specific.
 The server accepts an ApiOnlineResourceEx request only if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
 The server MUST require that the access level associated with the *hResource* parameter is "All" (section [3.1.4](#Section_1.3)).
@@ -16007,7 +16007,7 @@ error_status_t ApiOnlineResourceEx(
 
 );
 
-**hResource:** An HRES_RPC context handle that was obtained in a previous call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10).
+**hResource:** An HRES_RPC context handle that was obtained in a previous call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100).
 
 **dwOnlineFlags:** A bitwise-OR of zero or more of the following flags.
 
@@ -16040,12 +16040,12 @@ error_status_t ApiOnlineResourceEx(
 
 (Protocol Version 3) The ApiOfflineResourceEx SHOULD<121> instruct the server to make the designated resource inactive or unavailable on the node that currently owns it.
 
-The server MUST handle this method in the same manner as [ApiOfflineResource (section 3.1.4.2.19)](#Section_3.1.4.1.19) except as follows:
+The server MUST handle this method in the same manner as [ApiOfflineResource (section 3.1.4.2.19)](#Section_3.1.4.2.19) except as follows:
 
 - If the CLUSAPI_RESOURCE_OFFLINE_IGNORE_RESOURCE_STATUS flag is set in the *dwOfflineFlags* parameter, the server MUST ignore the locked mode value of the resource designated by the *hResource* parameter as well as the locked mode value of any of its dependent resources as specified in section [3.1.1.1.2](#Section_3.1.1.1.2).
 - If the CLUSAPI_RESOURCE_OFFLINE_FORCE_WITH_TERMINATION flag is set in the *dwOfflineFlags* parameter, the server MUST shut down the resource designated by the *hResource* parameter.
 - If the CLUSAPI_RESOURCE_OFFLINE_DO_NOT_UPDATE_PERSISTENT_STATE flag is set in the *dwOfflineFlags* parameter, the server MUST not update the persistent state of the resource designated by the *hResource* parameter when it is brought offline.
-- If the resource designated by the *hResource* parameter is in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.133)), then the server MUST provide the buffer designated by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource offline. The server MUST also provide this buffer to the server implementation-specific objects for any of the designated resource's dependent resources that are also in the ClusterResourceOnline state. How the server provides this buffer is implementation-specific.
+- If the resource designated by the *hResource* parameter is in the ClusterResourceOnline state (section [3.1.4.2.13](#Section_3.1.4.2.139)), then the server MUST provide the buffer designated by the *lpInBuffer* parameter to the server implementation-specific object that controls the resource operation while bringing the resource offline. The server MUST also provide this buffer to the server implementation-specific objects for any of the designated resource's dependent resources that are also in the ClusterResourceOnline state. How the server provides this buffer is implementation-specific.
 The server MUST accept an ApiOfflineResourceEx request only if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
 The server MUST require that the access level associated with the *hResource* parameter is "All" (section [3.1.4](#Section_1.3)).
@@ -16064,7 +16064,7 @@ error_status_t ApiOfflineResourceEx(
 
 );
 
-**hResource:** An HRES_RPC context handle that was obtained in a previous call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10).
+**hResource:** An HRES_RPC context handle that was obtained in a previous call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100).
 
 **dwOfflineFlags:** A bitwise-OR of zero or more of the following flags.
 
@@ -16103,7 +16103,7 @@ Upon receipt of this method, the server MUST create and maintain a queuing mecha
 
 The server MUST NOT queue any event indications to the port until the first event filter has been registered, as specified in [ApiAddNotifyV2 (section 3.1.4.2.137)](#Section_3.1.4.2.137).
 
-When calling theApiAddNotifyV2 (section 3.1.4.2.137), [ApiGetNotifyV2 (section 3.1.4.2.138)](#Section_3.1.4.2.138), [ApiCloseNotify (section 3.1.4.2.57)](#Section_3.1.4.1.57), and [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) methods, the client MUST use the HNOTIFY_RPC handle obtained by calling this method.
+When calling theApiAddNotifyV2 (section 3.1.4.2.137), [ApiGetNotifyV2 (section 3.1.4.2.138)](#Section_3.1.4.2.138), [ApiCloseNotify (section 3.1.4.2.57)](#Section_3.1.4.2.57), and [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) methods, the client MUST use the HNOTIFY_RPC handle obtained by calling this method.
 
 The server SHOULD accept an ApiCreateNotifyV2 request if its [**protocol server state**](#gt_protocol-server-state) is read-only. The server MUST accept an ApiCreateNotifyV2 request if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -16160,11 +16160,11 @@ error_status_t ApiAddNotifyV2(
 
 | Filter | Context handle |
 | --- | --- |
-| CLUSTER_OBJECT_TYPE_CLUSTER | An HCLUSTER_RPC context handle that was obtained from a call to [ApiOpenCluster (section 3.1.4.2.1)](#Section_3.1.4.2.160) or [ApiOpenClusterEx (section 3.1.4.2.116)](#Section_3.1.4.2.116). |
+| CLUSTER_OBJECT_TYPE_CLUSTER | An HCLUSTER_RPC context handle that was obtained from a call to [ApiOpenCluster (section 3.1.4.2.1)](#Section_3.1.4.2.139) or [ApiOpenClusterEx (section 3.1.4.2.116)](#Section_3.1.4.2.116). |
 | CLUSTER_OBJECT_TYPE_QUORUM | An HCLUSTER_RPC context handle that was obtained from a call to ApiOpenCluster (section 3.1.4.2.1) or ApiOpenClusterEx (section 3.1.4.2.116). |
 | CLUSTER_OBJECT_TYPE_RESOURCE_TYPE | An HCLUSTER_RPC context handle that was obtained from a call to ApiOpenCluster (section 3.1.4.2.1) or ApiOpenClusterEx (section 3.1.4.2.116). |
 | CLUSTER_OBJECT_TYPE_GROUP | An HGROUP_RPC context handle that was obtained from a call to [ApiOpenGroup (section 3.1.4.2.42)](#Section_3.1.4.2.42), [ApiOpenGroupEx (section 3.1.4.2.118)](#Section_3.1.4.2.118), or [ApiCreateGroup (section 3.1.4.2.43)](#Section_3.1.4.2.43). |
-| CLUSTER_OBJECT_TYPE_RESOURCE | An HRES_RPC context handle that was obtained from a call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10). |
+| CLUSTER_OBJECT_TYPE_RESOURCE | An HRES_RPC context handle that was obtained from a call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100). |
 | CLUSTER_OBJECT_TYPE_NETWORK | An HNETWORK_RPC context handle that was obtained from a call to [ApiOpenNetwork (section 3.1.4.2.81)](#Section_3.1.4.2.81) or [ApiOpenNetworkEx (section 3.1.4.2.120)](#Section_3.1.4.2.120). |
 | CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE | An HNETINTERFACE_RPC context handle that was obtained from a call to [ApiOpenNetInterface (section 3.1.4.2.92)](#Section_3.1.4.2.92) or [ApiOpenNetInterfaceEx (section 3.1.4.2.121)](#Section_3.1.4.2.121). |
 | CLUSTER_OBJECT_TYPE_NODE | An HNODE_RPC context handle that was obtained from a call to [ApiOpenNode (section 3.1.4.2.67)](#Section_3.1.4.2.67) or [ApiOpenNodeEx (section 3.1.4.2.117)](#Section_3.1.4.2.117). |
@@ -16179,14 +16179,14 @@ error_status_t ApiAddNotifyV2(
 | Notification type | Enumeration |
 | --- | --- |
 | CLUSTER_OBJECT_TYPE_CLUSTER | CLUSTER_CHANGE_CLUSTER_V2 (section 2.2.2.12) The client MUST NOT set the following flags: CLUSTER_CHANGE_CLUSTER_RECONNECT_V2, CLUSTER_CHANGE_CLUSTER_HANDLE_CLOSE_V2, CLUSTER_CHANGE_CLUSTER_STATE_V2. |
-| CLUSTER_OBJECT_TYPE_QUORUM | [CLUSTER_CHANGE_QUORUM_V2 (section 2.2.2.20)](#Section_2.2.2.20) |
-| CLUSTER_OBJECT_TYPE_RESOURCE_TYPE | [CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section 2.2.2.15)](#Section_2.2.2.15) |
-| CLUSTER_OBJECT_TYPE_GROUP | [CLUSTER_CHANGE_GROUP_V2 (section 2.2.2.13)](#Section_2.2.2.13) The client MUST NOT set the CLUSTER_CHANGE_GROUP_HANDLE_CLOSE_V2 flag. |
-| CLUSTER_OBJECT_TYPE_RESOURCE | [CLUSTER_CHANGE_RESOURCE_V2 (section 2.2.2.14)](#Section_2.2.2.14) The client MUST NOT set the CLUSTER_CHANGE_RESOURCE_HANDLE_CLOSE_V2 flag. |
-| CLUSTER_OBJECT_TYPE_NETWORK | [CLUSTER_CHANGE_NETWORK_V2 (section 2.2.2.17)](#Section_2.2.2.17) The client MUST NOT set the CLUSTER_CHANGE_NETWORK_HANDLE_CLOSE_V2 flag. |
-| CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE | [CLUSTER_CHANGE_NETINTERFACE_V2 (section 2.2.2.16)](#Section_2.2.2.16) The client MUST NOT set the CLUSTER_CHANGE_NETINTERFACE_HANDLE_CLOSE_V2 flag. |
-| CLUSTER_OBJECT_TYPE_NODE | [CLUSTER_CHANGE_NODE_V2 (section 2.2.2.18)](#Section_2.2.2.18) The client MUST NOT set the CLUSTER_CHANGE_NODE_HANDLE_CLOSE_V2 flag. |
-| CLUSTER_OBJECT_TYPE_REGISTRY | [CLUSTER_CHANGE_REGISTRY_V2 (section 2.2.2.19)](#Section_2.2.2.19) The client MUST NOT set the CLUSTER_CHANGE_REGISTRY_HANDLE_CLOSE_V2 flag. |
+| CLUSTER_OBJECT_TYPE_QUORUM | [CLUSTER_CHANGE_QUORUM_V2 (section 2.2.2.20)](#Section_2.2.2.7) |
+| CLUSTER_OBJECT_TYPE_RESOURCE_TYPE | [CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section 2.2.2.15)](#Section_2.2.2.7) |
+| CLUSTER_OBJECT_TYPE_GROUP | [CLUSTER_CHANGE_GROUP_V2 (section 2.2.2.13)](#Section_2.2.2.7) The client MUST NOT set the CLUSTER_CHANGE_GROUP_HANDLE_CLOSE_V2 flag. |
+| CLUSTER_OBJECT_TYPE_RESOURCE | [CLUSTER_CHANGE_RESOURCE_V2 (section 2.2.2.14)](#Section_2.2.2.7) The client MUST NOT set the CLUSTER_CHANGE_RESOURCE_HANDLE_CLOSE_V2 flag. |
+| CLUSTER_OBJECT_TYPE_NETWORK | [CLUSTER_CHANGE_NETWORK_V2 (section 2.2.2.17)](#Section_2.2.2.7) The client MUST NOT set the CLUSTER_CHANGE_NETWORK_HANDLE_CLOSE_V2 flag. |
+| CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE | [CLUSTER_CHANGE_NETINTERFACE_V2 (section 2.2.2.16)](#Section_2.2.2.7) The client MUST NOT set the CLUSTER_CHANGE_NETINTERFACE_HANDLE_CLOSE_V2 flag. |
+| CLUSTER_OBJECT_TYPE_NODE | [CLUSTER_CHANGE_NODE_V2 (section 2.2.2.18)](#Section_2.2.2.7) The client MUST NOT set the CLUSTER_CHANGE_NODE_HANDLE_CLOSE_V2 flag. |
+| CLUSTER_OBJECT_TYPE_REGISTRY | [CLUSTER_CHANGE_REGISTRY_V2 (section 2.2.2.19)](#Section_2.2.2.7) The client MUST NOT set the CLUSTER_CHANGE_REGISTRY_HANDLE_CLOSE_V2 flag. |
 | CLUSTER_OBJECT_TYPE_SHARED_VOLUME | [CLUSTER_CHANGE_SHARED_VOLUME_V2 (section 2.2.2.21](#Section_2.2.2.21)). |
 | CLUSTER_OBJECT_TYPE_SPACEPORT | **CLUSTER_CHANGE_SPACEPORT_V2** (section [2.2.2.25](#Section_2.2.2.25)). |
 | CLUSTER_OBJECT_TYPE_UPGRADE | **CLUSTER_CHANGE_NODE_UPGRADE_PHASE_V2** (section [2.2.2.26](#Section_2.2.2.26)). |
@@ -16213,7 +16213,7 @@ For any other condition, the server returns a value that is not one of the value
 <a id="Section_3.1.4.2.138"></a>
 ##### 3.1.4.2.138 ApiGetNotifyV2 (Opnum 139)
 
-(Protocol Version 3) The ApiGetNotifyV2 method is an asynchronous [**RPC**](#gt_remote-procedure-call-rpc) method that SHOULD<124> instruct the server to return a set of queued events from a designated version 2 notification port corresponding to a particular context handle. The server MUST NOT complete this method until an indication has been queued to the port or the port has been closed through a separate call to the [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) or [ApiCloseNotify (section 3.1.4.2.57)](#Section_3.1.4.1.57) method.
+(Protocol Version 3) The ApiGetNotifyV2 method is an asynchronous [**RPC**](#gt_remote-procedure-call-rpc) method that SHOULD<124> instruct the server to return a set of queued events from a designated version 2 notification port corresponding to a particular context handle. The server MUST NOT complete this method until an indication has been queued to the port or the port has been closed through a separate call to the [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) or [ApiCloseNotify (section 3.1.4.2.57)](#Section_3.1.4.2.57) method.
 
 The server MUST return the notification enumeration values registered by the client as specified in [ApiAddNotifyV2 (section 3.1.4.2.137)](#Section_3.1.4.2.137).
 
@@ -16262,7 +16262,7 @@ The remaining fields are set depending on the event that occurred, identified by
 | --- | --- | --- | --- | --- |
 | CLUSTER_CHANGE_CLUSTER_GROUP _ADDED_V2 | A DWORD containing the type of the group. | The ID of the group. | The ID of the node where the group is hosted. | The name of the group |
 | CLUSTER_CHANGE_CLUSTER_NETWORK _ADDED_V2 | Empty. | The ID of the cluster network. | An empty Unicode string. | The name of the cluster network. |
-| CLUSTER_CHANGE_CLUSTER_NODE _ADDED_V2 | A DWORD containing the state of the node, as specified in [3.1.4.2.69](#Section_3.1.4.2.69) | The ID of the cluster node. | An empty Unicode string. | The name of the cluster node. |
+| CLUSTER_CHANGE_CLUSTER_NODE _ADDED_V2 | A DWORD containing the state of the node, as specified in [3.1.4.2.69](#Section_3.1.4.1.69) | The ID of the cluster node. | An empty Unicode string. | The name of the cluster node. |
 | CLUSTER_CHANGE_CLUSTER_RESOURCE _TYPE_ADDED_V2 | Empty. | An empty Unicode string. | An empty Unicode string. | The name of the new [**resource type**](#gt_resource-type). |
 | CLUSTER_CHANGE_CLUSTER_COMMON _PROPERTY_V2 | A [Property List (section 2.2.3.10)](#Section_2.2.3.10.1) containing one or more [Property Values (section 2.2.3.10.1)](#Section_2.2.3.10.1) with updated values. | An empty Unicode string. | An empty Unicode string. | An empty Unicode string. |
 | CLUSTER_CHANGE_CLUSTER_PRIVATE _PROPERTY | A Property List (section 2.2.3.10) containing one or more Property Values (section 2.2.3.10.1) with updated values. | An empty Unicode string. | An empty Unicode string. | An empty Unicode string. |
@@ -16274,7 +16274,7 @@ The remaining fields are set depending on the event that occurred, identified by
 For event indications pertaining to a group object as specified for CLUSTER_OBJECT_TYPE_GROUP (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_GROUP (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_GROUP_V2 (section 2.2.2.13)](#Section_2.2.2.13) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_GROUP_V2 (section 2.2.2.13)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ParentId: ID of the node on which the group is hosted.
 - Type: an empty Unicode string.
 - dwBufferSize: the number of bytes in the **buffer** field.
@@ -16287,15 +16287,15 @@ The remaining fields are set depending on the event that occurred, identified by
 | CLUSTER_CHANGE_GROUP_PRIVATE_PROPERTY_V2 | A Property List (section 2.2.3.10) containing one or more Property Values (section 2.2.3.10.1) with updated values. | The ID of the group. | The name of the group. |
 | CLUSTER_CHANGE_GROUP_STATE_V2 | A DWORD containing the new group state (see section [3.1.4.2.46](#Section_3.1.4.2.46)). | The ID of the group. | The name of the group. |
 | CLUSTER_CHANGE_GROUP_OWNER_NODE_V2 | The ID of the new owner node. | The ID of the group. | The name of the group. |
-| CLUSTER_CHANGE_GROUP_PREFERRED_OWNER_V2 | A [**MULTI_SZ**](#gt_multi_sz) list of string IDs of the preferred owners, as would be set for a multiSzNodeList in a call to [ApiSetGroupNodeList (section 3.1.4.2.55)](#Section_3.1.4.2.55). | The ID of the group. | The name of the group. |
-| CLUSTER_CHANGE_GROUP_RESOURCE_ADDED_V2 | The ID of the group. | The ID of the resource created in the cluster and contained in this group (see [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10)). | The name of the resource created in the cluster and contained in this group (see ApiCreateResource (section 3.1.4.2.10)). |
-| CLUSTER_CHANGE_GROUP_RESOURCE_GAINED_V2 | The ID of the resource added to this group, either by ApiCreateResource (section 3.1.4.2.10) or [ApiChangeResourceGroup (section 3.1.4.2.26)](#Section_3.1.4.1.26) or [ApiChangeResourceGroupEx (](#Section_3.1.4.1.26)section 3.1.4.2.166). | The ID of the group. | The name of the group. |
+| CLUSTER_CHANGE_GROUP_PREFERRED_OWNER_V2 | A [**MULTI_SZ**](#gt_multi_sz) list of string IDs of the preferred owners, as would be set for a multiSzNodeList in a call to [ApiSetGroupNodeList (section 3.1.4.2.55)](#Section_3.1.4.1.55). | The ID of the group. | The name of the group. |
+| CLUSTER_CHANGE_GROUP_RESOURCE_ADDED_V2 | The ID of the group. | The ID of the resource created in the cluster and contained in this group (see [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100)). | The name of the resource created in the cluster and contained in this group (see ApiCreateResource (section 3.1.4.2.10)). |
+| CLUSTER_CHANGE_GROUP_RESOURCE_GAINED_V2 | The ID of the resource added to this group, either by ApiCreateResource (section 3.1.4.2.10) or [ApiChangeResourceGroup (section 3.1.4.2.26)](#Section_3.1.4.2.166) or [ApiChangeResourceGroupEx (](#Section_3.1.4.1.26)section 3.1.4.2.166). | The ID of the group. | The name of the group. |
 | CLUSTER_CHANGE_GROUP_RESOURCE_LOST_V2 | The ID of the resource removed from this group, either by [ApiDeleteResource (section 3.1.4.2.11)](#Section_3.1.4.1.28) or ApiChangeResourceGroup (section 3.1.4.2.26) or ApiChangeResourceGroupEx (section 3.1.4.2.166). | The ID of the group. | The name of the group. |
 
 For event indications pertaining to a resource object as specified for CLUSTER_OBJECT_TYPE_RESOURCE (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_RESOURCE (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_RESOURCE_V2 (section 2.2.2.14)](#Section_2.2.2.14) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_RESOURCE_V2 (section 2.2.2.14)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ObjectId: ID of the resource.
 - ParentId: ID of the group that contains the resource.
 - Name: the name of the resource.
@@ -16307,7 +16307,7 @@ The remaining fields are set depending on the event that occurred, identified by
 | --- | --- |
 | CLUSTER_CHANGE_RESOURCE_COMMON_PROPERTY_V2 | A Property List (section 2.2.3.10) containing one or more Property Values (section 2.2.3.10.1) with updated values. |
 | CLUSTER_CHANGE_RESOURCE_PRIVATE_PROPERTY_V2 | Empty. |
-| CLUSTER_CHANGE_RESOURCE_STATE_V2 | A DWORD containing the resource state (see [3.1.4.2.13](#Section_3.1.4.2.133)). |
+| CLUSTER_CHANGE_RESOURCE_STATE_V2 | A DWORD containing the resource state (see [3.1.4.2.13](#Section_3.1.4.2.139)). |
 | CLUSTER_CHANGE_RESOURCE_OWNER_GROUP_V2 | The ID of the group that now contains the resource. |
 | CLUSTER_CHANGE_RESOURCE_DEPENDENCIES_V2 | A new dependency expression, as would be returned by a call to [ApiGetResourceDependencyExpression (section 3.1.4.2.110)](#Section_3.1.4.2.110). |
 | CLUSTER_CHANGE_RESOURCE_DEPENDENTS_V2 | A MULTI_SZ list of resource ID strings that now list this resource as a provider. |
@@ -16318,7 +16318,7 @@ The remaining fields are set depending on the event that occurred, identified by
 For event indications pertaining to a resource type object as specified for CLUSTER_OBJECT_TYPE_RESOURCE_TYPE (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_RESOURCE_TYPE (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section 2.2.2.15)](#Section_2.2.2.15) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section 2.2.2.15)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ObjectId: An empty Unicode string.
 - ParentId: An empty Unicode string.
 - Name: the name of the resource type.
@@ -16338,7 +16338,7 @@ The **buffer** field is set depending on the event that occurred, identified by 
 For event indications pertaining to a cluster network interface as specified for CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_NETINTERFACE_V2 (section 2.2.2.16)](#Section_2.2.2.16) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_NETINTERFACE_V2 (section 2.2.2.16)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ObjectId: ID of the cluster network interface.
 - ParentId: ID of the node associated with the cluster network interface.
 - Name: the name of the cluster network interface.
@@ -16351,12 +16351,12 @@ The **buffer** field is set depending on the event that occurred, identified by 
 | CLUSTER_CHANGE_NETINTERFACE_DELETED_V2 | Empty. |
 | CLUSTER_CHANGE_NETINTERFACE_COMMON_PROPERTY_V2 | A Property List (section 2.2.3.10) containing one or more Property Values (section 2.2.3.10.1) with updated values. |
 | CLUSTER_CHANGE_NETINTERFACE_PRIVATE_PROPERTY_V2 | A Property List (section 2.2.3.10) containing one or more Property Values (section 2.2.3.10.1) with updated values. |
-| CLUSTER_CHANGE_NETINTERFACE_STATE_V2 | A DWORD containing the cluster network interface state as would be returned from a call to [ApiGetNetInterfaceState (section 3.1.4.2.94)](#Section_3.1.4.1.94). |
+| CLUSTER_CHANGE_NETINTERFACE_STATE_V2 | A DWORD containing the cluster network interface state as would be returned from a call to [ApiGetNetInterfaceState (section 3.1.4.2.94)](#Section_3.1.4.2.94). |
 
 For event indications pertaining to a cluster network object as specified for CLUSTER_OBJECT_TYPE_NETWORK (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_NETWORK (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_NETWORK_V2 (section 2.2.2.17)](#Section_2.2.2.17) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_NETWORK_V2 (section 2.2.2.17)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ObjectId: ID of the cluster network.
 - ParentId: An empty Unicode string.
 - Name: the name of the cluster network.
@@ -16374,7 +16374,7 @@ The **buffer** field is set depending on the event that occurred, identified by 
 For event indications pertaining to a cluster node object as specified for CLUSTER_OBJECT_TYPE_NODE (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_NODE (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_NODE_V2 (section 2.2.2.18)](#Section_2.2.2.18) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_NODE_V2 (section 2.2.2.18)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ParentId: An empty Unicode string.
 - Type: An empty Unicode string.
 - dwBufferSize: the number of bytes in the **buffer** field.
@@ -16393,7 +16393,7 @@ The remaining fields are set depending on the event that occurred, identified by
 For event indications pertaining to a cluster registry key object as specified for CLUSTER_OBJECT_TYPE_REGISTRY (section 2.2.2.11), the server MUST set the NOTIFICATION_DATA_RPC structure as follows:
 
 - FilterAndType.dwObjectType: CLUSTER_OBJECT_TYPE_REGISTRY (section 2.2.2.11).
-- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_REGISTRY_V2 (section 2.2.2.19)](#Section_2.2.2.19) enumeration, indicating the event that occurred.
+- FilterAndType.FilterFlags: one flag from the [CLUSTER_CHANGE_REGISTRY_V2 (section 2.2.2.19)](#Section_2.2.2.7) enumeration, indicating the event that occurred.
 - ParentId: An empty Unicode string.
 - Type: An empty Unicode string.
 - buffer: An empty buffer.
@@ -16537,7 +16537,7 @@ UCHAR* pRoProperties,
 
 **hCluster:** A valid context handle to the cluster from which the client wishes to obtain a resource enumeration.
 
-**pProperties:** A [**MULTI_SZ**](#gt_multi_sz) list containing a list of names of common properties requested by the client. For each [RESOURCE_ENUM_ENTRY (section 2.2.3.27)](#Section_2.2.3.27) in the resulting [RESOURCE_ENUM_LIST (section 2.2.3.28)](#Section_2.2.3.28), the server MUST return a [PROPERTY_LIST (section 2.2.3.10)](#Section_2.2.3.10.1) containing a [Property Value (section 2.2.3.10.1)](#Section_2.2.3.10.1) for each property name specified by the client in the *pProperties* parameter. If the client sets the *pProperties* parameter to a single NULL-terminated [**Unicode string**](#gt_unicode-string) equaling "*", then the server MUST return a PROPERTY_LIST containing a Property Value for each of the common properties of the resource, as would be returned by a call to [CLUSCTL_RESOURCE_GET_COMMON_PROPERTIES (section 3.1.4.3.1.11)](#Section_3.1.4.3.1.11).
+**pProperties:** A [**MULTI_SZ**](#gt_multi_sz) list containing a list of names of common properties requested by the client. For each [RESOURCE_ENUM_ENTRY (section 2.2.3.27)](#Section_2.2.3.27) in the resulting [RESOURCE_ENUM_LIST (section 2.2.3.28)](#Section_2.2.3.5), the server MUST return a [PROPERTY_LIST (section 2.2.3.10)](#Section_2.2.3.10.1) containing a [Property Value (section 2.2.3.10.1)](#Section_2.2.3.10.1) for each property name specified by the client in the *pProperties* parameter. If the client sets the *pProperties* parameter to a single NULL-terminated [**Unicode string**](#gt_unicode-string) equaling "*", then the server MUST return a PROPERTY_LIST containing a Property Value for each of the common properties of the resource, as would be returned by a call to [CLUSCTL_RESOURCE_GET_COMMON_PROPERTIES (section 3.1.4.3.1.11)](#Section_3.1.4.3.1.11).
 
 **cbProperties:** The size in bytes of the property list buffer pointed to by the *pProperties* parameter.
 
@@ -16573,7 +16573,7 @@ The following table describes the different command types.
 | CLUSREG_READ_KEY | Changes the current key to be relative to the previous current key. | A subkey path relative to the current key pointer. | Not used. | The key pointer is set to this key. |
 | CLUSREG_READ_VALUE | Reads the named value relative to the current key pointer. | The name of the value to be read. This can be the null [**Unicode string**](#gt_unicode-string) (0x0000), indicating the default, unnamed value associated with the key. | Not used. | None. |
 
-On successful completion of this method, the server MUST set the *lpOutData* parameter to a buffer containing a **CLUSTER_REG_BATCH_UPDATE** structure. For each **BATCH_UPDATE_COMMAND** structure in the variable-length **CLUSTER_REG_BATCH_UPDATE** structure pointed to by *lpInData*, the server MUST include, in the same order, a **CLUSTER_REG_BATCH_UPDATE** structure in the *lpOutData* parameter. If the read operation is successful, a BATCH_UPDATE_COMMAND of command type CLUSREG_READ_VALUE is returned with its **Data** and **ValueType** fields filled out. If the read operation is not successful, a CLUSREG_READ_ERROR is returned with the **ValueType** field set to the status code corresponding to the failure, as would be returned by the server if the designed query were attempted via the [ApiQueryValue (section 3.1.4.2.35)](#Section_3.1.4.2.35) method.
+On successful completion of this method, the server MUST set the *lpOutData* parameter to a buffer containing a **CLUSTER_REG_BATCH_UPDATE** structure. For each **BATCH_UPDATE_COMMAND** structure in the variable-length **CLUSTER_REG_BATCH_UPDATE** structure pointed to by *lpInData*, the server MUST include, in the same order, a **CLUSTER_REG_BATCH_UPDATE** structure in the *lpOutData* parameter. If the read operation is successful, a BATCH_UPDATE_COMMAND of command type CLUSREG_READ_VALUE is returned with its **Data** and **ValueType** fields filled out. If the read operation is not successful, a CLUSREG_READ_ERROR is returned with the **ValueType** field set to the status code corresponding to the failure, as would be returned by the server if the designed query were attempted via the [ApiQueryValue (section 3.1.4.2.35)](#Section_3.1.4.1.35) method.
 
 The server SHOULD accept calls to ApiExecuteReadBatch if it is in the read state, and MUST accept calls to ApiExecuteReadBatch if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -16636,7 +16636,7 @@ error_status_t ApiRestartResource(
 
 );
 
-**hResource:** An HRES_RPC context handle that was obtained in a previous call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10).
+**hResource:** An HRES_RPC context handle that was obtained in a previous call to [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100).
 
 **dwFlags:** This field is reserved and is ignored by the server. Clients MUST set this value to 0.
 
@@ -16647,7 +16647,7 @@ error_status_t ApiRestartResource(
 <a id="Section_3.1.4.2.143"></a>
 ##### 3.1.4.2.143 ApiGetNotifyAsync (Opnum 147)
 
-(Protocol Version 3) The **ApiGetNotifyAsync** method is an asynchronous [**RPC**](#gt_remote-procedure-call-rpc) method that SHOULD<130> be used instead of [ApiGetNotify](#Section_3.1.4.2.66) to instruct the server to return the next set of queued events corresponding to a particular context handle. The server MUST NOT complete this method until an indication has been queued to the port or the port has been closed through a separate call to the [ApiUnblockGetNotifyCall](#Section_3.1.4.1.107) or [ApiCloseNotify](#Section_3.1.4.1.57) method.
+(Protocol Version 3) The **ApiGetNotifyAsync** method is an asynchronous [**RPC**](#gt_remote-procedure-call-rpc) method that SHOULD<130> be used instead of [ApiGetNotify](#Section_3.1.4.2.66) to instruct the server to return the next set of queued events corresponding to a particular context handle. The server MUST NOT complete this method until an indication has been queued to the port or the port has been closed through a separate call to the [ApiUnblockGetNotifyCall](#Section_3.1.4.1.107) or [ApiCloseNotify](#Section_3.1.4.2.57) method.
 
 error_status_t ApiGetNotifyAsync(
 
@@ -16707,7 +16707,7 @@ error_status_t ApiAddNotifyResourceTypeV2(
 
 **hNotify:** An HNOTIFY_RPC context handle that was obtained in a previous call to ApiCreateNotifyV2 (section 3.1.4.2.136).
 
-**filter:** Identifies the notifications for the specified object type for which the client is registering. Clients MUST set this field with a bitwise-OR of flags from enumerations that correspond to the desired notifications. For some notifications, certain flags are disallowed. See CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section [2.2.2.15](#Section_2.2.2.15)) for more details.
+**filter:** Identifies the notifications for the specified object type for which the client is registering. Clients MUST set this field with a bitwise-OR of flags from enumerations that correspond to the desired notifications. For some notifications, certain flags are disallowed. See CLUSTER_CHANGE_RESOURCE_TYPE_V2 (section [2.2.2.15](#Section_2.2.2.7)) for more details.
 
 **dwNotifyKey:** A 32-bit integer context value chosen by the client. This value MUST be returned to the client via a subsequent completion of the ApiGetNotifyV2 (section [3.1.4.2.138](#Section_3.1.4.2.138)) method, if the name of the object pertaining to the event matches the name of the object indicated by the *hObject* parameter.
 
@@ -17179,7 +17179,7 @@ ApiNodeGroupSetControl (
 
 The **ApiGroupSetControl** method<143> provides for arbitrary communication and control between an application and an instance of a group. This method instructs the server to initiate, on the specified [**group set**](#gt_group-set), an operation that is defined by the specified control code. The operation is performed on the node hosting the group set.
 
-The server MUST require that the access level associated with the *hGroupSet* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero, except as otherwise specified for particular control codes in section [3.1.4.3.8](#Section_3.1.4.3.8.7).
+The server MUST require that the access level associated with the *hGroupSet* context handle is "All" (section [3.1.4](#Section_1.3)), if and only if the bitwise AND of *dwControlCode* and 0x00400000 is not equal to zero, except as otherwise specified for particular control codes in section [3.1.4.3.8](#Section_3.1.4.3.8.3).
 
 error_status_t
 
@@ -17542,7 +17542,7 @@ ApiCreateGroupSetEnum (
 
 );
 
-**hCluster:** An **HCLUSTER_RPC** (section [2.2.1.1](#Section_2.2.1.1)) context handle that is obtained in a previous **ApiOpenCluster** (section [3.1.4.2.1](#Section_3.1.4.2.160)) or **ApiOpenClusterEx** (section [3.1.4.2.116](#Section_3.1.4.2.116)) method call.
+**hCluster:** An **HCLUSTER_RPC** (section [2.2.1.1](#Section_2.2.1.1)) context handle that is obtained in a previous **ApiOpenCluster** (section [3.1.4.2.1](#Section_3.1.4.2.139)) or **ApiOpenClusterEx** (section [3.1.4.2.116](#Section_3.1.4.2.116)) method call.
 
 **ReturnEnum:** A pointer to a **PENUM_LIST**, as specified in section [2.2.3.5](#Section_2.2.3.5). The server MUST allocate as much memory as is required to return the enumeration data. If the method fails, this parameter MUST be ignored.
 
@@ -17582,7 +17582,7 @@ ApiCreateNetInterfaceEnum (
 
 );
 
-**hCluster:** An **HCLUSTER_RPC** (section [2.2.1.1](#Section_2.2.1.1)) context handle that is obtained in a previous **ApiOpenCluster** (section [3.1.4.2.1](#Section_3.1.4.2.160)) or **ApiOpenClusterEx** (section [3.1.4.2.116](#Section_3.1.4.2.116)) method call.
+**hCluster:** An **HCLUSTER_RPC** (section [2.2.1.1](#Section_2.2.1.1)) context handle that is obtained in a previous **ApiOpenCluster** (section [3.1.4.2.1](#Section_3.1.4.2.139)) or **ApiOpenClusterEx** (section [3.1.4.2.116](#Section_3.1.4.2.116)) method call.
 
 **lpszNodeName:** A null-terminated [**Unicode string**](#gt_unicode-string) that contains the name of the node on which to locate the cluster network interface.
 
@@ -17634,7 +17634,7 @@ ApiChnageCsvStateEx (
 
 );
 
-**hResource:** An **HRES_RPC** (section [2.2.1.4](#Section_2.2.1.4)) context handle that was obtained in a previous **ApiOpenResource** (section [3.1.4.2.9](#Section_3.1.4.2.99)), **ApiOpenResourceEx** (section [3.1.4.2.119](#Section_3.1.4.2.119)), or **ApiCreateResource** (section [3.1.4.2.10](#Section_3.1.4.2.10)) method call.
+**hResource:** An **HRES_RPC** (section [2.2.1.4](#Section_2.2.1.4)) context handle that was obtained in a previous **ApiOpenResource** (section [3.1.4.2.9](#Section_3.1.4.2.92)), **ApiOpenResourceEx** (section [3.1.4.2.119](#Section_3.1.4.2.119)), or **ApiCreateResource** (section [3.1.4.2.10](#Section_3.1.4.2.100)) method call.
 
 **DwState:** This MUST be 1 to make the disk associated with *hResource* accessible from all cluster nodes. This MUST be 0 to make the disk associated with *hResource* accessible only from the cluster node that mounted the disk.
 
@@ -17733,7 +17733,7 @@ If *UseDomains* is TRUE, the server MUST add the *Group* to *UpdateDomain* and *
 
 The ApiChangeResourceGroupEx method<154> moves the designated resource and all the resources in its dependency tree out of its current group and into the designated group. The nonvolatile [**cluster state**](#gt_cluster-state) is updated to reflect this change.
 
-The server MUST handle this method in the same manner as [ApiChangeResourceGroup (section 3.1.4.2.26)](#Section_3.1.4.1.26) except as follows:
+The server MUST handle this method in the same manner as [ApiChangeResourceGroup (section 3.1.4.2.26)](#Section_3.1.4.2.166) except as follows:
 
 - If the CLUSAPI_CHANGE_RESOURCE_GROUP_FORCE_MOVE_TO_CSV flag is set in the *flags* parameter, the server MUST move the resource designated by the *hResource* parameter to cluster shared volume group designated by the *hGroup* parameter.
 The server MUST accept an ApiChangeResourceGroupEx request for processing only if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
@@ -17752,7 +17752,7 @@ error_status_t ApiChangeResourceGroupEx(
 
 );
 
-**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.99), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.10) method call.
+**hResource:** An [HRES_RPC (section 2.2.1.4)](#Section_2.2.1.4) context handle that was obtained in a previous [ApiOpenResource (section 3.1.4.2.9)](#Section_3.1.4.2.92), [ApiOpenResourceEx (section 3.1.4.2.119)](#Section_3.1.4.2.119), or [ApiCreateResource (section 3.1.4.2.10)](#Section_3.1.4.2.100) method call.
 
 **hGroup:** An [HGROUP_RPC (section 2.2.1.3)](#Section_2.2.1.3) context handle that was obtained in a previous [ApiOpenGroup (section 3.1.4.2.42)](#Section_3.1.4.2.42), [ApiOpenGroupEx (section 3.1.4.2.118)](#Section_3.1.4.2.118), or [ApiCreateGroup (section 3.1.4.2.43)](#Section_3.1.4.2.43) method call.
 
@@ -17818,12 +17818,12 @@ This section contains the control code values that are common between the ClusAP
 <a id="Section_3.1.4.3.1"></a>
 ##### 3.1.4.3.1 ApiResourceControl (Opnum 73) Control Codes
 
-This section contains the control codes for the ApiResourceControl (Opnum 73) method for ClusAPI Protocol version 2.0 (section [3.1.4.2.74](#Section_3.1.4.2.74)) and ClusAPI Protocol version 3.0 (section 3.1.4.2.74).
+This section contains the control codes for the ApiResourceControl (Opnum 73) method for ClusAPI Protocol version 2.0 (section [3.1.4.2.74](#Section_3.1.4.1.74)) and ClusAPI Protocol version 3.0 (section 3.1.4.2.74).
 
 <a id="Section_3.1.4.3.1.1"></a>
 ###### 3.1.4.3.1.1 CLUSCTL_RESOURCE_UNKNOWN
 
-The CLUSCTL_RESOURCE_UNKNOWN [**resource**](#gt_resource) control code verifies that control codes are being processed on the [**node**](#gt_node) where the [ApiResourceControl](#Section_3.1.4.2.74) was issued.
+The CLUSCTL_RESOURCE_UNKNOWN [**resource**](#gt_resource) control code verifies that control codes are being processed on the [**node**](#gt_node) where the [ApiResourceControl](#Section_3.1.4.1.74) was issued.
 
 The [**server**](#gt_server) SHOULD accept a CLUSCTL_RESOURCE_UNKNOWN resource control code request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and the server MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -18124,7 +18124,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_GET_CRYPTO_CHECKPOINTS resource cont
 <a id="Section_3.1.4.3.1.27"></a>
 ###### 3.1.4.3.1.27 CLUSCTL_RESOURCE_UPGRADE_DLL
 
-The CLUSCTL_RESOURCE_UPGRADE_DLL [**resource**](#gt_resource) control code SHOULD<162> replace the [**server**](#gt_server) implementation-specific object that controls resource operation and health monitoring without stopping the [**cluster**](#gt_cluster) service on the node where the [ApiResourceControl](#Section_3.1.4.2.74) was issued.
+The CLUSCTL_RESOURCE_UPGRADE_DLL [**resource**](#gt_resource) control code SHOULD<162> replace the [**server**](#gt_server) implementation-specific object that controls resource operation and health monitoring without stopping the [**cluster**](#gt_cluster) service on the node where the [ApiResourceControl](#Section_3.1.4.1.74) was issued.
 
 The [**client**](#gt_client) MUST provide the location of the object on the server in the buffer that is designated by *lpInBuffer*. The client SHOULD specify a file path to the object that specifies a disk on the designated [**node**](#gt_node).
 
@@ -18279,7 +18279,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_NETNAME_CREDS_UPDATED resource contr
 
 The CLUSCTL_RESOURCE_STORAGE_GET_DISK_INFO [**resource**](#gt_resource) control code retrieves a [PROPERTY_LIST](#Section_2.2.3.10.1) value list (section [2.2.3.10.1](#Section_2.2.3.10.1)) that contains information about the disk that is represented by the designated storage class resource.
 
-The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.41).
+The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.44).
 
 After successful completion of this method, the server MUST return a value list as follows:
 
@@ -18299,7 +18299,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_STORAGE_GET_DISK_INFO resource contr
 
 The CLUSCTL_RESOURCE_STORAGE_IS_PATH_VALID [**resource**](#gt_resource) control code confirms that the designated path exists on the storage device associated with the designated resource.
 
-The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.41).
+The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.44).
 
 The [**client**](#gt_client) MUST provide the path, as a null-terminated [**Unicode string**](#gt_unicode-string), in the buffer that is designated by *lpInBuffer*.
 
@@ -18314,7 +18314,7 @@ The CLUSCTL_RESOURCE_IPADDRESS_RENEW_LEASE [**resource**](#gt_resource) control 
 
 Protocol version 2.0 servers SHOULD fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
-The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_NETWORK, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.41).
+The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_NETWORK, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.44).
 
 After successful completion of the method, the server SHOULD NOT write any data to the buffer that is designated by *lpOutBuffer*.
 
@@ -18327,7 +18327,7 @@ The CLUSCTL_RESOURCE_IPADDRESS_RELEASE_LEASE [**resource**](#gt_resource) contro
 
 Protocol version 2.0 servers SHOULD fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
-The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_NETWORK, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.41).
+The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_NETWORK, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.44).
 
 After successful completion of the method, the server SHOULD NOT write any data to the buffer that is designated by *lpOutBuffer*.
 
@@ -18393,7 +18393,7 @@ The CLUSCTL_RESOURCE_STORAGE_GET_DISK_INFO_EX [**resource**](#gt_resource) contr
 
 Protocol version 2.0 servers SHOULD fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
-The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.41).
+The [**server**](#gt_server) MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.44).
 
 After successful completion of this method, the server MUST write a value list as follows to the buffer that is designated by *lpOutBuffer*:
 
@@ -18645,7 +18645,7 @@ The CLUSCTL_RESOURCE_STORAGE_GET_DISK_INFO_EX2 resource control code retrieves a
 
 Protocol version 2.0 servers SHOULD fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
-The server MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.41).
+The server MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION) if the designated resource is not in class CLUS_RESCLASS_STORAGE, as specified in section [3.1.4.3.1.4](#Section_3.1.4.3.1.44).
 
 After successful completion of this method, the server MUST write a value list as follows to the buffer that is designated by *lpOutBuffer*:
 
@@ -18708,12 +18708,12 @@ The server SHOULD accept a CLUSCTL_RESOURCE_GET_NODES_IN_FD resource control cod
 <a id="Section_3.1.4.3.2"></a>
 ##### 3.1.4.3.2 ApiResourceTypeControl (Opnum 75) Control Codes
 
-This section contains the control codes for the ApiResourceTypeControl (Opnum 75) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.76](#Section_3.1.4.1.76)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.76](#Section_3.1.4.3.2)).
+This section contains the control codes for the ApiResourceTypeControl (Opnum 75) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.76](#Section_3.1.4.1.76)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.76](#Section_3.1.4.1.76)).
 
 <a id="Section_3.1.4.3.2.1"></a>
 ###### 3.1.4.3.2.1 CLUSCTL_RESOURCE_TYPE_UNKNOWN
 
-The CLUSCTL_RESOURCE_TYPE_UNKNOWN [**resource**](#gt_resource) type control code verifies that control codes are being processed on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_UNKNOWN [**resource**](#gt_resource) type control code verifies that control codes are being processed on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 The [**server**](#gt_server) SHOULD accept a CLUSCTL_RESOURCE_TYPE_UNKNOWN resource type control code request if its [**protocol server state**](#gt_protocol-server-state) is read-only, and the server MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -18744,7 +18744,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_GET_FLAGS resource type control
 
 The CLUSCTL_RESOURCE_TYPE_GET_CLASS_INFO [**resource**](#gt_resource) type control code retrieves the class to which the designated resource type belongs.
 
-The behavior for this [**resource type**](#gt_resource-type) control is identical to that of the [CLUSCTL_RESOURCE_GET_CLASS_INFO](#Section_3.1.4.3.1.41) resource control, as specified in section 3.1.4.3.1.4.
+The behavior for this [**resource type**](#gt_resource-type) control is identical to that of the [CLUSCTL_RESOURCE_GET_CLASS_INFO](#Section_3.1.4.3.1.44) resource control, as specified in section 3.1.4.3.1.4.
 
 For protocol version 3.0, if the size indicated by *nOutBufferSize* is less than the number of bytes that are required for *lpOutBuffer* and if *nOutBufferSize* is 0x00000000, then the [**server**](#gt_server) MUST return *ERROR_SUCCESS* (0x00000000).
 
@@ -18753,7 +18753,7 @@ For protocol version 3.0, if the size indicated by *nOutBufferSize* is less than
 
 The CLUSCTL_RESOURCE_TYPE_GET_REQUIRED_DEPENDENCIES [**resource**](#gt_resource) type control code retrieves a [PROPERTY_LIST](#Section_2.2.3.10.1) value list (section [2.2.3.10.1](#Section_2.2.3.10.1)) that contains information about the resource types and/or classes on which the designated [**resource type**](#gt_resource-type) is required to have an explicit [**dependency**](#gt_4dd1909e-098c-4553-9cee-0cbc7c2f6916) in order to properly operate.
 
-The behavior for this resource type control is identical to that of the [CLUSCTL_RESOURCE_GET_REQUIRED_DEPENDENCIES (section 3.1.4.3.1.5)](#Section_3.1.4.3.1.5) resource control.
+The behavior for this resource type control is identical to that of the [CLUSCTL_RESOURCE_GET_REQUIRED_DEPENDENCIES (section 3.1.4.3.1.5)](#Section_3.1.1.1.2) resource control.
 
 <a id="Section_3.1.4.3.2.6"></a>
 ###### 3.1.4.3.2.6 CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT
@@ -18939,7 +18939,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_GET_PRIVATE_RESOURCE_PROPERTY_F
 <a id="Section_3.1.4.3.2.21"></a>
 ###### 3.1.4.3.2.21 CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS
 
-The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS [**resource**](#gt_resource) type control code retrieves a [PROPERTY_LIST](#Section_2.2.3.10.1) value list (section [2.2.3.10.1](#Section_2.2.3.10.1)) from the designated storage class resource type. The PROPERTY_LIST value list MUST contain information about the disks that can be placed under [**cluster**](#gt_cluster) control on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS [**resource**](#gt_resource) type control code retrieves a [PROPERTY_LIST](#Section_2.2.3.10.1) value list (section [2.2.3.10.1](#Section_2.2.3.10.1)) from the designated storage class resource type. The PROPERTY_LIST value list MUST contain information about the disks that can be placed under [**cluster**](#gt_cluster) control on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 After successful completion of this method, the [**server**](#gt_server) MUST write the value list (section [3.1.4.3.1.38](#Section_3.1.4.3.1.38)), or return zero or more sets of the value lists, to the buffer that is designated by *lpOutBuffer*. An empty value list is signified with a CLUSPROP_SYNTAX_ENDMARK as its first component.
 
@@ -18961,7 +18961,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_NETNAME_VALIDATE_NETNAME resour
 <a id="Section_3.1.4.3.2.23"></a>
 ###### 3.1.4.3.2.23 CLUSCTL_RESOURCE_TYPE_VALIDATE_PATH
 
-The CLUSCTL_RESOURCE_TYPE_VALIDATE_PATH [**resource**](#gt_resource) type control code confirms that the supplied file path is valid on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_VALIDATE_PATH [**resource**](#gt_resource) type control code confirms that the supplied file path is valid on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 ClusAPI Protocol version 2.0 servers fail this method using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
@@ -18980,7 +18980,7 @@ Furthermore, if the resource type designated by the *lpscResourceTypeName* param
 <a id="Section_3.1.4.3.2.24"></a>
 ###### 3.1.4.3.2.24 CLUSCTL_RESOURCE_TYPE_GEN_APP_VALIDATE_DIRECTORY
 
-The CLUSCTL_RESOURCE_TYPE_GEN_APP_VALIDATE_DIRECTORY [**resource**](#gt_resource) type control code confirms that the supplied directory path is valid for the designated resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_GEN_APP_VALIDATE_DIRECTORY [**resource**](#gt_resource) type control code confirms that the supplied directory path is valid for the designated resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 ClusAPI Protocol version 2.0 servers fail this method using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
@@ -18993,7 +18993,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_GEN_APP_VALIDATE_DIRECTORY [**r
 <a id="Section_3.1.4.3.2.25"></a>
 ###### 3.1.4.3.2.25 CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DRIVELETTERS
 
-The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DRIVELETTERS [**resource**](#gt_resource) type control code returns a 32-bit integer bitmask that represents the drive letters that have been assigned to disk drives of the designated storage class resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DRIVELETTERS [**resource**](#gt_resource) type control code returns a 32-bit integer bitmask that represents the drive letters that have been assigned to disk drives of the designated storage class resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 ClusAPI Protocol version 2.0 servers fail this method using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
@@ -19006,7 +19006,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DRIVELETTERS [**res
 <a id="Section_3.1.4.3.2.26"></a>
 ###### 3.1.4.3.2.26 CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX
 
-The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX [**resource**](#gt_resource) type control code retrieves zero or more PROPERTY_LIST value lists (section [2.2.3.10.1](#Section_2.2.3.10.1)) that contain information about disks of the designated storage class resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX [**resource**](#gt_resource) type control code retrieves zero or more PROPERTY_LIST value lists (section [2.2.3.10.1](#Section_2.2.3.10.1)) that contain information about disks of the designated storage class resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 Protocol version 2.0 servers SHOULD fail this method using ERROR_INVALID_FUNCTION (0x00000001).
 
@@ -19019,7 +19019,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX 
 <a id="Section_3.1.4.3.2.27"></a>
 ###### 3.1.4.3.2.27 CLUSCTL_RESOURCE_TYPE_STORAGE_REMAP_DRIVELETTER
 
-The CLUSCTL_RESOURCE_TYPE_STORAGE_REMAP_DRIVELETTER [**resource**](#gt_resource) type control code changes the drive letter of a disk drive of the designated storage class resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_STORAGE_REMAP_DRIVELETTER [**resource**](#gt_resource) type control code changes the drive letter of a disk drive of the designated storage class resource type on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 Protocol version 2.0 servers fail this method using ERROR_INVALID_FUNCTION (0x00000001).
 
@@ -19034,7 +19034,7 @@ For protocol version 3.0, the server MUST require that the access level associat
 <a id="Section_3.1.4.3.2.28"></a>
 ###### 3.1.4.3.2.28 CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DISKID
 
-The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DISKID [**resource**](#gt_resource) type control code returns the identification information of the disk of the designated storage class resource type with the specified file path on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DISKID [**resource**](#gt_resource) type control code returns the identification information of the disk of the designated storage class resource type with the specified file path on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 Protocol version 2.0 servers fail this method using ERROR_INVALID_FUNCTION (0x00000001).
 
@@ -19053,7 +19053,7 @@ The server SHOULD accept a CLUSCTL_RESOURCE_TYPE_STORAGE_GET_DISKID resource con
 <a id="Section_3.1.4.3.2.29"></a>
 ###### 3.1.4.3.2.29 CLUSCTL_RESOURCE_TYPE_STORAGE_IS_CLUSTERABLE
 
-The CLUSCTL_RESOURCE_TYPE_STORAGE_IS_CLUSTERABLE [**resource**](#gt_resource) type control code identifies whether the specified disk of the designated storage class resource type can be placed under [**cluster**](#gt_cluster) control on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.3.2) method was issued.
+The CLUSCTL_RESOURCE_TYPE_STORAGE_IS_CLUSTERABLE [**resource**](#gt_resource) type control code identifies whether the specified disk of the designated storage class resource type can be placed under [**cluster**](#gt_cluster) control on the [**node**](#gt_node) where the [ApiResourceTypeControl](#Section_3.1.4.1.76) method was issued.
 
 Protocol version 2.0 servers SHOULD fail this method by using error code ERROR_INVALID_FUNCTION (0x00000001).
 
@@ -19072,7 +19072,7 @@ The CLUSCTL_RESOURCE_TYPE_STORAGE_RELEASE_OWNERSHIP [**resource**](#gt_resource)
 
 In response to the CLUSCTL_RESOURCE_TYPE_STORAGE_RELEASE_OWNERSHIP [**resource type**](#gt_resource-type) control code, the server SHOULD remove access restrictions and permit access to the disk as if the disk were capable of connection to multiple machines but not currently connected to multiple machines. If there are no access restrictions for the disk, the server SHOULD NOT fail the request, and the disk SHOULD continue to have no access restrictions.
 
-The [**client**](#gt_client) SHOULD issue this resource type control for a disk that it intends to bring into [**cluster**](#gt_cluster) control and for which the server currently has access restrictions. A client brings a disk into cluster control by creating a storage class resource ([ApiCreateResource](#Section_3.1.4.2.10)) representing that disk.
+The [**client**](#gt_client) SHOULD issue this resource type control for a disk that it intends to bring into [**cluster**](#gt_cluster) control and for which the server currently has access restrictions. A client brings a disk into cluster control by creating a storage class resource ([ApiCreateResource](#Section_3.1.4.2.100)) representing that disk.
 
 The client MUST NOT issue this resource type control for a disk that is currently represented by a storage class resource. If the client issues this resource type control for a disk that is currently represented by a storage class resource, the server SHOULD NOT fail the request. However, the resulting behavior is implementation-specific.
 
@@ -19469,7 +19469,7 @@ The server SHOULD accept a **CLUSCTL_GROUP_GET_PROVIDER_GROUPSETS** cluster grou
 <a id="Section_3.1.4.3.4"></a>
 ##### 3.1.4.3.4 ApiNodeControl (Opnum 79) Control Codes
 
-This section contains the control codes for the ApiNodeControl (Opnum 79) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.80](#Section_3.1.4.1.80)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.80](#Section_3.1.4.3.4)).
+This section contains the control codes for the ApiNodeControl (Opnum 79) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.80](#Section_3.1.4.1.80)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.80](#Section_3.1.4.1.80)).
 
 <a id="Section_3.1.4.3.4.1"></a>
 ###### 3.1.4.3.4.1 CLUSCTL_NODE_UNKNOWN
@@ -19730,12 +19730,12 @@ The server MUST accept a CLUSCTL_NODE_SCALEOUTNODE_PLACEMENT_STATE node control 
 <a id="Section_3.1.4.3.5"></a>
 ##### 3.1.4.3.5 ApiNetworkControl (Opnum 89) Control Codes
 
-This section contains the control codes for the ApiNetworkControl (Opnum 89) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.89](#Section_3.1.4.1.89)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.89](#Section_3.1.4.1.89)).
+This section contains the control codes for the ApiNetworkControl (Opnum 89) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.89](#Section_3.1.4.1.89)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.89](#Section_3.1.4.2.89)).
 
 <a id="Section_3.1.4.3.5.1"></a>
 ###### 3.1.4.3.5.1 CLUSCTL_NETWORK_UNKNOWN
 
-The CLUSCTL_NETWORK_UNKNOWN [**cluster network**](#gt_cluster-network) control code verifies that control codes are being processed on the [**node**](#gt_node) where the [ApiNetworkControl](#Section_3.1.4.1.89) method was issued.
+The CLUSCTL_NETWORK_UNKNOWN [**cluster network**](#gt_cluster-network) control code verifies that control codes are being processed on the [**node**](#gt_node) where the [ApiNetworkControl](#Section_3.1.4.2.89) method was issued.
 
 The [**server**](#gt_server) SHOULD accept a CLUSCTL_NETWORK_UNKNOWN cluster network control code request if its [**protocol server state**](#gt_protocol-server-state) is read-only and MUST accept the request for processing if it is in the read/write state, as specified in section [3.1.1](#Section_1.3).
 
@@ -19898,7 +19898,7 @@ The server SHOULD accept a CLUSCTL_NETWORK_VALIDATE_PRIVATE_PROPERTIES cluster n
 <a id="Section_3.1.4.3.6"></a>
 ##### 3.1.4.3.6 ApiNetInterfaceControl (Opnum 98) Control Codes
 
-This section contains the control codes for the ApiNetInterfaceControl (Opnum 98) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.98](#Section_3.1.4.1.98)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.98](#Section_3.1.4.1.98)).
+This section contains the control codes for the ApiNetInterfaceControl (Opnum 98) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.98](#Section_3.1.4.1.98)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.98](#Section_3.1.4.3.6)).
 
 <a id="Section_3.1.4.3.6.1"></a>
 ###### 3.1.4.3.6.1 CLUSCTL_NETINTERFACE_UNKNOWN
@@ -20084,7 +20084,7 @@ The server SHOULD accept a CLUSCTL_NETINTERFACE_VALIDATE_PRIVATE_PROPERTIES clus
 <a id="Section_3.1.4.3.7"></a>
 ##### 3.1.4.3.7 ApiClusterControl (Opnum 106) Control Codes
 
-This section contains the control codes for the ApiClusterControl (Opnum 106) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.106](#Section_3.1.4.2.106)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.106](#Section_3.1.4.2.106)).
+This section contains the control codes for the ApiClusterControl (Opnum 106) method for ClusAPI Protocol version 2.0 (section [3.1.4.1.106](#Section_3.1.4.3.7)) and ClusAPI Protocol version 3.0 (section [3.1.4.2.106](#Section_3.1.4.3.7)).
 
 <a id="Section_3.1.4.3.7.1"></a>
 ###### 3.1.4.3.7.1 CLUSCTL_CLUSTER_UNKNOWN
@@ -20113,7 +20113,7 @@ Protocol version 2.0 servers do not support this control and MUST fail this meth
 
 The [**client**](#gt_client) MUST NOT invoke this method if the server is in a Shared Disk quorum type cluster, as defined in section 3.1.1.10.
 
-The client MUST provide either a resource or node ID, as specified in sections [3.1.4.2.15](#Section_3.1.4.1.15) and [3.1.4.2.49](#Section_3.1.4.1.49) respectively, as a null-terminated [**Unicode string**](#gt_unicode-string) in the buffer that is designated by *lpInBuffer*. The server MUST fail this method by using ERROR_INVALID_PARAMETER if the resource specified is not the one currently configured as the quorum resource, as specified in section 3.1.1.10, or the node ID does not correspond to the ID of a configured node in the cluster.
+The client MUST provide either a resource or node ID, as specified in sections [3.1.4.2.15](#Section_3.1.4.2.15) and [3.1.4.2.49](#Section_3.1.4.1.49) respectively, as a null-terminated [**Unicode string**](#gt_unicode-string) in the buffer that is designated by *lpInBuffer*. The server MUST fail this method by using ERROR_INVALID_PARAMETER if the resource specified is not the one currently configured as the quorum resource, as specified in section 3.1.1.10, or the node ID does not correspond to the ID of a configured node in the cluster.
 
 After successful completion of the method, the server MUST write a 32-bit integer containing one of the values from the [CLUSTER_QUORUM_VALUE](#Section_2.2.2.10) enumeration (as specified in section 2.2.2.10) to the buffer that is designated by *lpOutBuffer*, indicating whether quorum will be lost. If the *lpOutBuffer* buffer is not large enough to accommodate the enumeration value, error 0x000000EA (ERROR_MORE_DATA) MUST be returned.
 
@@ -20126,7 +20126,7 @@ The CLUSCTL_CLUSTER_CHECK_VOTER_DOWN [**cluster**](#gt_cluster) control code que
 
 Protocol version 2.0 servers do not support this control and MUST fail this method by using error code 0x00000001 (ERROR_INVALID_FUNCTION).
 
-The [**client**](#gt_client) MUST provide either a resource or [**node**](#gt_node) ID, as specified in sections [3.1.4.2.15](#Section_3.1.4.1.15) and [3.1.4.2.49](#Section_3.1.4.1.49) respectively, as a null-terminated [**Unicode string**](#gt_unicode-string) in the buffer that is designated by *lpInBuffer*. The server MUST fail this method by using ERROR_INVALID_PARAMETER if the resource specified is not the one currently configured as the quorum resource, as specified in section [3.1.1.10](#Section_3.1.1.10), or if the node ID does not correspond to the ID of a configured node in the cluster.
+The [**client**](#gt_client) MUST provide either a resource or [**node**](#gt_node) ID, as specified in sections [3.1.4.2.15](#Section_3.1.4.2.15) and [3.1.4.2.49](#Section_3.1.4.1.49) respectively, as a null-terminated [**Unicode string**](#gt_unicode-string) in the buffer that is designated by *lpInBuffer*. The server MUST fail this method by using ERROR_INVALID_PARAMETER if the resource specified is not the one currently configured as the quorum resource, as specified in section [3.1.1.10](#Section_3.1.1.10), or if the node ID does not correspond to the ID of a configured node in the cluster.
 
 After successful completion of the method, the server MUST write a 32-bit integer containing one of the values from the [CLUSTER_QUORUM_VALUE](#Section_2.2.2.10) enumeration (as specified in section 2.2.2.10) to the buffer that is designated by *lpOutBuffer*, indicating whether quorum will be lost. If the *lpOutBuffer* buffer is not large enough to accommodate the enumeration value, error 0x000000EA (ERROR_MORE_DATA) MUST be returned.
 
@@ -20293,7 +20293,7 @@ volume *unique id* returned MUST be of form:
 
 RESOURCE-ID : PARTITIONOFFSET,
 
-where **RESOURCE-ID** is a unique resource ID (as specified in [3.1.4.2.15](#Section_3.1.4.1.15)) identifying disk resource hosting the shared volume, and where **PARTITIONOFFSET** is decimal number representing the offset of the disk [**partition**](#gt_partition) containing the volume on that disk.
+where **RESOURCE-ID** is a unique resource ID (as specified in [3.1.4.2.15](#Section_3.1.4.2.15)) identifying disk resource hosting the shared volume, and where **PARTITIONOFFSET** is decimal number representing the offset of the disk [**partition**](#gt_partition) containing the volume on that disk.
 
 Example:
 
@@ -20574,14 +20574,14 @@ When the volume backup timer expires, the server MUST determine whether a backup
 
 As specified in the ApiCreateResoureType method (see section [3.1.4.1.27](#Section_3.1.4.1.27) for protocol version 2, or section [3.1.4.2.27](#Section_3.1.4.2.27) for protocol version 3), the point in time when the [**server**](#gt_server) starts the [LooksAlive timer (section 3.1.2.2)](#Section_3.1.2.2) is implementation specific, and the actions performed by the server when the LooksAlive timer expires are implementation specific.
 
-A server typically starts the LooksAlive timer when the associated [**resource**](#gt_resource) transitions into the ClusterResourceOnline state (see ApiGetResourceState: section [3.1.4.1.13](#Section_3.1.4.1.13) for protocol version 2, or section [3.1.4.2.13](#Section_3.1.4.2.133) for protocol version 3). The expiration time of the LooksAlive timer is typically designated by the *dwLooksAlive* parameter in the ApiCreateResourceType method or by other implementation-specific mechanisms. When the LooksAlive timer expires, the server typically performs an implementation-specific low-cost health-check of the resource. If the health-check fails, the server typically performs implementation-specific actions to confirm or restore the health of the resource. If the health-check succeeds, then the server typically reschedules the LooksAlive timer for the same interval. If the resource transitions out of the ClusterResourceOnline state, then the server typically cancels the LooksAlive timer.
+A server typically starts the LooksAlive timer when the associated [**resource**](#gt_resource) transitions into the ClusterResourceOnline state (see ApiGetResourceState: section [3.1.4.1.13](#Section_3.1.4.1.13) for protocol version 2, or section [3.1.4.2.13](#Section_3.1.4.2.139) for protocol version 3). The expiration time of the LooksAlive timer is typically designated by the *dwLooksAlive* parameter in the ApiCreateResourceType method or by other implementation-specific mechanisms. When the LooksAlive timer expires, the server typically performs an implementation-specific low-cost health-check of the resource. If the health-check fails, the server typically performs implementation-specific actions to confirm or restore the health of the resource. If the health-check succeeds, then the server typically reschedules the LooksAlive timer for the same interval. If the resource transitions out of the ClusterResourceOnline state, then the server typically cancels the LooksAlive timer.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 IsAlive Timer Event
 
 As specified in the ApiCreateResourceType method (see section [3.1.4.1.27](#Section_3.1.4.1.27) for protocol version 2, or section [3.1.4.2.27](#Section_3.1.4.2.27) for protocol version 3), the point in time when the [**server**](#gt_server) starts the [IsAlive timer (section 3.1.2.3)](#Section_3.1.2.3) is implementation specific, and the actions performed by the server when the IsAlive timer expires are implementation specific.
 
-A server typically starts the IsAlive timer when the associated [**resource**](#gt_resource) transitions into the ClusterResourceOnline state (see ApiGetResourceState: section [3.1.4.1.13](#Section_3.1.4.1.13) for protocol version 2, or section [3.1.4.2.13](#Section_3.1.4.2.133) for protocol version 3). The expiration time of the IsAlive timer is typically designated by the *dwIsAlive* parameter in the ApiCreateResourceType method or by other implementation-specific mechanisms. When the IsAlive timer expires, the server typically performs an implementation-specific in-depth health-check of the resource. If the health-check fails, the server typically performs implementation-specific actions to confirm or restore the health of the resource. If the health-check succeeds, the server typically reschedules the IsAlive timer for the same interval. If the resource transitions out of the ClusterResourceOnline state, then the server typically cancels the IsAlive timer.
+A server typically starts the IsAlive timer when the associated [**resource**](#gt_resource) transitions into the ClusterResourceOnline state (see ApiGetResourceState: section [3.1.4.1.13](#Section_3.1.4.1.13) for protocol version 2, or section [3.1.4.2.13](#Section_3.1.4.2.139) for protocol version 3). The expiration time of the IsAlive timer is typically designated by the *dwIsAlive* parameter in the ApiCreateResourceType method or by other implementation-specific mechanisms. When the IsAlive timer expires, the server typically performs an implementation-specific in-depth health-check of the resource. If the health-check fails, the server typically performs implementation-specific actions to confirm or restore the health of the resource. If the health-check succeeds, the server typically reschedules the IsAlive timer for the same interval. If the resource transitions out of the ClusterResourceOnline state, then the server typically cancels the IsAlive timer.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 GetNotify Timer Event
@@ -20595,7 +20595,7 @@ When the GetNotify timer expires, the server MUST complete the associated ApiGet
 
 As specified in [CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT (section 3.1.4.3.2.6)](#Section_3.1.4.3.2.6), the point in time when the [**server**](#gt_server) starts the [Arbitration timer (section 3.1.2.5)](#Section_3.1.2.5) is implementation-specific, and the actions performed by the server when the Arbitration timer expires are implementation-specific.
 
-A server typically starts the Arbitration timer when it attempts to take control of a [**resource**](#gt_resource) that was designated as the quorum resource by a previous call to the ApiSetQuorumResource (Opnum 6) method (section [3.1.4.1.7](#Section_3.1.4.1.70) for protocol version 2, or section [3.1.4.2.7](#Section_3.1.4.1.7) for protocol version 3). The expiration time of the Arbitration timer is typically designated by the result of the CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT method (section 3.1.4.3.2.6) for the [**resource type**](#gt_resource-type) associated with the quorum resource or by other implementation-specific mechanisms. When the Arbitration timer expires, the server typically stops attempting to take control of the quorum resource and typically takes implementation-specific recovery actions, depending on the [quorum type (section 3.1.1.10)](#Section_3.1.1.10). The server typically cancels the Arbitration timer if it successfully takes control of the quorum resource before the timer expires. When and how the server determines control of a quorum resource is implementation-specific.
+A server typically starts the Arbitration timer when it attempts to take control of a [**resource**](#gt_resource) that was designated as the quorum resource by a previous call to the ApiSetQuorumResource (Opnum 6) method (section [3.1.4.1.7](#Section_3.1.4.1.71) for protocol version 2, or section [3.1.4.2.7](#Section_3.1.4.1.7) for protocol version 3). The expiration time of the Arbitration timer is typically designated by the result of the CLUSCTL_RESOURCE_TYPE_GET_ARB_TIMEOUT method (section 3.1.4.3.2.6) for the [**resource type**](#gt_resource-type) associated with the quorum resource or by other implementation-specific mechanisms. When the Arbitration timer expires, the server typically stops attempting to take control of the quorum resource and typically takes implementation-specific recovery actions, depending on the [quorum type (section 3.1.1.10)](#Section_3.1.1.10). The server typically cancels the Arbitration timer if it successfully takes control of the quorum resource before the timer expires. When and how the server determines control of a quorum resource is implementation-specific.
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Other Local Events
@@ -20604,20 +20604,20 @@ Except as specified in the following paragraphs in this section, no local events
 
 If the [**RPC**](#gt_remote-procedure-call-rpc) connection fails, the server SHOULD free all context that is associated with the [**client**](#gt_client). Such context MUST exist if any of the following has occurred:
 
-- The client has previously called ApiOpenCluster (section [3.1.4.1.1](#Section_3.1.4.1.16) for protocol version 2, or [3.1.4.2.1](#Section_3.1.4.2.160) for protocol version 3) or ApiOpenClusterEx (section [3.1.4.2.116](#Section_3.1.4.2.116) for protocol version 3) and not yet called ApiCloseCluster (section [3.1.4.1.2](#Section_3.1.4.1.28) for protocol version 2, or [3.1.4.2.2](#Section_3.1.4.2.2) for protocol version 3).
-- The client has previously called ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3) or ApiOpenNodeEx (section [3.1.4.2.117](#Section_3.1.4.2.117) for protocol version 3) and not yet called ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.1.68) for protocol version 3).
-- The client has previously called ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.96) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3), ApiOpenResourceEx (section [3.1.4.2.119](#Section_3.1.4.2.119) for protocol version 3), or ApiCreateResource (section [3.1.4.1.10](#Section_3.1.4.1.107) for protocol version 2, or [3.1.4.2.10](#Section_3.1.4.2.10) for protocol version 3) and not yet called ApiCloseResource (section [3.1.4.1.12](#Section_3.1.4.1.12) for protocol version 2, or [3.1.4.2.12](#Section_3.1.4.1.12) for protocol version 3).
+- The client has previously called ApiOpenCluster (section [3.1.4.1.1](#Section_3.1.4.1.14) for protocol version 2, or [3.1.4.2.1](#Section_3.1.4.2.139) for protocol version 3) or ApiOpenClusterEx (section [3.1.4.2.116](#Section_3.1.4.2.116) for protocol version 3) and not yet called ApiCloseCluster (section [3.1.4.1.2](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.2](#Section_3.1.4.2.2) for protocol version 3).
+- The client has previously called ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3) or ApiOpenNodeEx (section [3.1.4.2.117](#Section_3.1.4.2.117) for protocol version 3) and not yet called ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.2.68) for protocol version 3).
+- The client has previously called ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3), ApiOpenResourceEx (section [3.1.4.2.119](#Section_3.1.4.2.119) for protocol version 3), or ApiCreateResource (section [3.1.4.1.10](#Section_3.1.4.1.107) for protocol version 2, or [3.1.4.2.10](#Section_3.1.4.2.100) for protocol version 3) and not yet called ApiCloseResource (section [3.1.4.1.12](#Section_3.1.4.1.12) for protocol version 2, or [3.1.4.2.12](#Section_3.1.4.1.12) for protocol version 3).
 - The client has previously called ApiOpenGroup (section [3.1.4.1.42](#Section_3.1.4.1.42) for protocol version 2, or [3.1.4.2.42](#Section_3.1.4.2.42) for protocol version 3), ApiOpenGroupEx (section [3.1.4.2.118](#Section_3.1.4.2.118) for protocol version 3), or ApiCreateGroup (section [3.1.4.1.43](#Section_3.1.4.1.43) for protocol version 2, or [3.1.4.2.43](#Section_3.1.4.2.43) for protocol version 3) and not yet called ApiCloseGroup (section [3.1.4.1.45](#Section_3.1.4.1.45) for protocol version 2, or [3.1.4.2.45](#Section_3.1.4.1.45) for protocol version 3).
-- The client has previously called ApiGetRootKey (section [3.1.4.1.29](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.29](#Section_3.1.4.2.29) for protocol version 3), ApiCreateKey (section [3.1.4.1.30](#Section_3.1.4.1.30) for protocol version 2, or [3.1.4.2.30](#Section_3.1.4.2.30) for protocol version 3), or ApiOpenKey (section [3.1.4.1.31](#Section_3.1.4.1.31) for protocol version 2, or [3.1.4.2.31](#Section_3.1.4.2.31) for protocol version 3) and did not call ApiCloseKey (section [3.1.4.1.38](#Section_3.1.4.1.38) for protocol version 2, or [3.1.4.2.38](#Section_3.1.4.1.38) for protocol version 3).
+- The client has previously called ApiGetRootKey (section [3.1.4.1.29](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.29](#Section_3.1.4.2.29) for protocol version 3), ApiCreateKey (section [3.1.4.1.30](#Section_3.1.4.1.30) for protocol version 2, or [3.1.4.2.30](#Section_3.1.4.2.30) for protocol version 3), or ApiOpenKey (section [3.1.4.1.31](#Section_3.1.4.1.31) for protocol version 2, or [3.1.4.2.31](#Section_3.1.4.2.31) for protocol version 3) and did not call ApiCloseKey (section [3.1.4.1.38](#Section_3.1.4.1.38) for protocol version 2, or [3.1.4.2.38](#Section_3.1.4.2.38) for protocol version 3).
 - The client has previously called ApiOpenNetInterface (section [3.1.4.1.92](#Section_3.1.4.1.92) for protocol version 2, or [3.1.4.2.92](#Section_3.1.4.2.92) for protocol version 3) or ApiOpenNetInterfaceEx (section [3.1.4.2.121](#Section_3.1.4.2.121) for protocol version 3) and not yet called ApiCloseNetInterface (section [3.1.4.1.93](#Section_3.1.4.1.93) for protocol version 2, or [3.1.4.2.93](#Section_3.1.4.1.93) for protocol version 3).
-- The client has previously called ApiOpenNetwork (section [3.1.4.1.81](#Section_3.1.4.1.81) for protocol version 2, or [3.1.4.2.81](#Section_3.1.4.2.81) for protocol version 3) or ApiOpenNetworkEx (section [3.1.4.2.120](#Section_3.1.4.2.120) for protocol version 3) and not yet called ApiCloseNetwork (section [3.1.4.1.82](#Section_3.1.4.1.82) for protocol version 2, or [3.1.4.2.82](#Section_3.1.4.1.82) for protocol version 3).
-- The client has previously called ApiCreateNotify (section [3.1.4.1.56](#Section_3.1.4.1.56) for protocol version 2, or [3.1.4.2.56](#Section_3.1.4.2.56) for protocol version 3) and not yet called ApiCloseNotify (section [3.1.4.1.57](#Section_3.1.4.1.57) for protocol version 2, or [3.1.4.2.57](#Section_3.1.4.1.57) for protocol version 3).
+- The client has previously called ApiOpenNetwork (section [3.1.4.1.81](#Section_3.1.4.1.81) for protocol version 2, or [3.1.4.2.81](#Section_3.1.4.2.81) for protocol version 3) or ApiOpenNetworkEx (section [3.1.4.2.120](#Section_3.1.4.2.120) for protocol version 3) and not yet called ApiCloseNetwork (section [3.1.4.1.82](#Section_3.1.4.1.82) for protocol version 2, or [3.1.4.2.82](#Section_3.1.4.2.82) for protocol version 3).
+- The client has previously called ApiCreateNotify (section [3.1.4.1.56](#Section_3.1.4.1.56) for protocol version 2, or [3.1.4.2.56](#Section_3.1.4.2.56) for protocol version 3) and not yet called ApiCloseNotify (section [3.1.4.1.57](#Section_3.1.4.1.57) for protocol version 2, or [3.1.4.2.57](#Section_3.1.4.2.57) for protocol version 3).
 - The client has previously called [ApiCreateBatchPort](#Section_3.1.4.2.113) (protocol version 3 only) and not yet called [ApiCloseBatchPort](#Section_3.1.4.2.115) (protocol version 3 only).
 - Note that additional context might exist due to pending operations or in progress operations.
 <a id="Section_3.2"></a>
 ## 3.2 Client Details
 
-The interfaces used by a client implementation of protocol version 2 are documented by the Full IDL in section [6.1](#Section_6.1), and the interfaces used by a client implementation of protocol version 3 are documented by the Full IDL in section [6.2](#Section_6.2). Although not required, a client implementation of the protocol that exposes either version-specific interface to higher-layer applications and protocols SHOULD implement the client behaviors specified in section [3.2.4](#Section_3.2.4) within this interface implementation as follows:
+The interfaces used by a client implementation of protocol version 2 are documented by the Full IDL in section [6.1](#Section_6.1), and the interfaces used by a client implementation of protocol version 3 are documented by the Full IDL in section [6.2](#Section_6.2). Although not required, a client implementation of the protocol that exposes either version-specific interface to higher-layer applications and protocols SHOULD implement the client behaviors specified in section [3.2.4](#Section_3.1.4) within this interface implementation as follows:
 
 - As specified in sections [3.1.4.1](#Section_3.1.4.1) and [3.1.4.2](#Section_3.1.4.2), the client implementation SHOULD perform the Reconnect Procedure in response to particular errors, as specified in section [3.2.4.6](#Section_3.2.4.6).
 - The client implementation SHOULD maintain a client-side notification queue for each Notification Port as specified in sections [3.2.4.5](#Section_3.1.1.8) and [3.2.4.8](#Section_3.2.4.8).
@@ -20648,10 +20648,10 @@ For each version 1 notification port, the client maintains a list of event filte
 - A 32-bit integer context value that is returned to the [**client**](#gt_client) when an event indication is retrieved.
 - The [**cluster object**](#gt_cluster-object) context handle associated with the event filter, as specified in the following methods:
 - [ApiAddNotifyNode (section 3.1.4.1.59)](#Section_3.1.4.1.59) for protocol version 2, or section [3.1.4.2.59](#Section_3.1.4.2.59) for protocol version 3
-- [ApiAddNotifyGroup (section 3.1.4.1.60)](#Section_3.1.4.1.60) for protocol version 2, or section [3.1.4.2.60](#Section_3.1.4.1.60) for protocol version 3
-- [ApiAddNotifyResource (section 3.1.4.1.65)](#Section_3.1.4.1.65) for protocol version 2, or section [3.1.4.2.61](#Section_3.1.4.1.61) for protocol version 3
+- [ApiAddNotifyGroup (section 3.1.4.1.60)](#Section_3.1.4.1.60) for protocol version 2, or section [3.1.4.2.60](#Section_3.1.4.2.60) for protocol version 3
+- [ApiAddNotifyResource (section 3.1.4.1.65)](#Section_3.1.4.1.65) for protocol version 2, or section [3.1.4.2.61](#Section_3.1.4.2.61) for protocol version 3
 - [ApiAddNotifyKey (section 3.1.4.1.62)](#Section_3.1.4.1.62) for protocol version 2, or section [3.1.4.2.62](#Section_3.1.4.1.62) for protocol version 3
-- [ApiAddNotifyNetwork (section 3.1.4.1.90)](#Section_3.1.4.1.90) for protocol version 2, or section [3.1.4.2.90](#Section_3.1.4.2.90) for protocol version 3
+- [ApiAddNotifyNetwork (section 3.1.4.1.90)](#Section_3.1.4.1.90) for protocol version 2, or section [3.1.4.2.90](#Section_3.1.4.1.90) for protocol version 3
 - [ApiAddNotifyNetInterface (section 3.1.4.1.99)](#Section_3.1.4.1.99) for protocol version 2, or section [3.1.4.2.99](#Section_3.1.4.2.99) for protocol version 3
 - The latest state sequence number associated with an event filter that is specific to a [**resource**](#gt_resource), [**group**](#gt_group), [**node**](#gt_node), [**cluster network**](#gt_cluster-network), or [**cluster network interface**](#gt_cluster-network-interface) cluster object.
 <a id="Section_3.2.1.1.2"></a>
@@ -20659,7 +20659,7 @@ For each version 1 notification port, the client maintains a list of event filte
 
 For each version 2 notification port, the client maintains a list of event filters that have been registered with the port. This information includes the following:
 
-- The combination of object type (section [2.2.2.11](#Section_2.2.2.11)) and filter flags (section [2.2.2.13](#Section_2.2.2.13) through [2.2.2.21](#Section_2.2.2.21)) indicating one or more types of event indications that MUST be queued to the port.
+- The combination of object type (section [2.2.2.11](#Section_2.2.2.11)) and filter flags (section [2.2.2.13](#Section_2.2.2.7) through [2.2.2.21](#Section_2.2.2.21)) indicating one or more types of event indications that MUST be queued to the port.
 - A 32-bit integer context value that is returned to the [**client**](#gt_client) when an event indication is retrieved.
 - The [**cluster object**](#gt_cluster-object) context handle associated with the event filter, as specified in [ApiAddNotifyV2 (section 3.1.4.2.137)](#Section_3.1.4.2.137) for protocol version 3.
 - The latest state sequence number associated with an event filter that is specific to a [**resource**](#gt_resource), [**group**](#gt_group), [**node**](#gt_node), [**cluster network**](#gt_cluster-network), or [**cluster network interface**](#gt_cluster-network-interface) cluster object.
@@ -20679,7 +20679,7 @@ The [**server**](#gt_server) state that is specified in sections [3.1.3.1](#Sect
 The following are prerequisites for initializing the [**client**](#gt_client) side of the ClusAPI Protocol:
 
 - The client MUST be capable of accessing the [**server**](#gt_server) remotely through the [**cluster network**](#gt_cluster-network). That is, the server MUST be turned on and ready to respond to cluster network requests, the cluster network MUST be functioning sufficiently well for connectivity between the client and server, and there MUST NOT be firewalls or other obstacles blocking protocol traffic between client and server.
-If, after completing client-side protocol initialization as specified in sections [3.2.3.2](#Section_3.2.3.2) and [3.2.3.3](#Section_3.2.3.3), the server or server cluster network connectivity fails but other nodes in the [**cluster**](#gt_cluster) remain active, the client MUST be capable of accessing the remaining [**active nodes**](#gt_active-node) remotely through the cluster network.
+If, after completing client-side protocol initialization as specified in sections [3.2.3.2](#Section_3.2.3.2) and [3.2.3.3](#Section_3.2.3), the server or server cluster network connectivity fails but other nodes in the [**cluster**](#gt_cluster) remain active, the client MUST be capable of accessing the remaining [**active nodes**](#gt_active-node) remotely through the cluster network.
 
 - The client MUST be permitted by the cluster [**security descriptor**](#gt_security-descriptor) to invoke the ClusAPI Protocol methods on the server.
 - The client MUST be permitted to access server state, as specified in sections [3.1.3.1](#Section_3.1.3.1) and [3.1.3.2](#Section_3.1.3.2).
@@ -20695,11 +20695,11 @@ The [**client**](#gt_client) initializes and secures an [**RPC**](#gt_remote-pro
 
 Along with establishing an [**RPC**](#gt_remote-procedure-call-rpc) connection, client-side initialization SHOULD gather the state that is necessary to execute the reconnect-on-failure logic as specified in sections [3.2.1](#Section_1.3) and [3.2.4.6](#Section_3.2.4.6). The [**client**](#gt_client) SHOULD initialize reconnect logic according to the following procedure. This procedure MUST NOT be executed until an RPC connection is successfully established, as specified in section [3.2.3.2](#Section_3.2.3.2).
 
-The client SHOULD call the ApiGetClusterName (section [3.1.4.1.4](#Section_3.1.4.1.45) for protocol version 2, or [3.1.4.2.4](#Section_3.1.4.2.47) for protocol version 3) method in order to retrieve the [**cluster name**](#gt_cluster-name) and the current [**server**](#gt_server) [**computer name**](#gt_computer-name). As long as this method fails with status 0x000006BF (RPC_CALL_FAILED_DNE), the client SHOULD<222> try the method again, although it SHOULD NOT exceed four attempts. If the method fails, either with a status other than 0x000006BF (RPC_CALL_FAILED_DNE) or by exhausting retries, the client SHOULD terminate the RPC connection and deduce that the server is not an [**active node**](#gt_active-node) in a [**cluster**](#gt_cluster). If the method is successful, the client SHOULD add the cluster name to the list of reconnect candidates, as specified in section 3.2.1, and save the current server computer name.
+The client SHOULD call the ApiGetClusterName (section [3.1.4.1.4](#Section_3.1.4.1.47) for protocol version 2, or [3.1.4.2.4](#Section_3.1.4.2.47) for protocol version 3) method in order to retrieve the [**cluster name**](#gt_cluster-name) and the current [**server**](#gt_server) [**computer name**](#gt_computer-name). As long as this method fails with status 0x000006BF (RPC_CALL_FAILED_DNE), the client SHOULD<222> try the method again, although it SHOULD NOT exceed four attempts. If the method fails, either with a status other than 0x000006BF (RPC_CALL_FAILED_DNE) or by exhausting retries, the client SHOULD terminate the RPC connection and deduce that the server is not an [**active node**](#gt_active-node) in a [**cluster**](#gt_cluster). If the method is successful, the client SHOULD add the cluster name to the list of reconnect candidates, as specified in section 3.2.1, and save the current server computer name.
 
-The client SHOULD call the ApiOpenCluster (section [3.1.4.1.1](#Section_3.1.4.1.16) for protocol version 2, or [3.1.4.2.1](#Section_3.1.4.2.160) for protocol version 3) or ApiOpenClusterEx (section [3.1.4.2.116](#Section_3.1.4.2.116) for protocol version 3) method. If the method fails, the client SHOULD terminate the RPC connection and deduce that the server is not an active node in a cluster.
+The client SHOULD call the ApiOpenCluster (section [3.1.4.1.1](#Section_3.1.4.1.14) for protocol version 2, or [3.1.4.2.1](#Section_3.1.4.2.139) for protocol version 3) or ApiOpenClusterEx (section [3.1.4.2.116](#Section_3.1.4.2.116) for protocol version 3) method. If the method fails, the client SHOULD terminate the RPC connection and deduce that the server is not an active node in a cluster.
 
-The client SHOULD retrieve an enumeration of cluster nodes by using the ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.83) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.88) for protocol version 3) method. If the method fails, the client SHOULD terminate the RPC connection and deduce that the server is not an active node in a cluster. If the method is successful, the client SHOULD add the Computer Name of all cluster nodes to the list of reconnect candidates, as specified in section 3.2.1.
+The client SHOULD retrieve an enumeration of cluster nodes by using the ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.85) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.89) for protocol version 3) method. If the method fails, the client SHOULD terminate the RPC connection and deduce that the server is not an active node in a cluster. If the method is successful, the client SHOULD add the Computer Name of all cluster nodes to the list of reconnect candidates, as specified in section 3.2.1.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
@@ -20708,8 +20708,8 @@ The ClusAPI Protocol enables clients to remotely manage a [**failover cluster**]
 
 Depending on the protocol version and the operations that are requested by the [**client**](#gt_client), clients MAY follow one or more of these protocol sequences:
 
-- Determine whether a computer is configured as a [**cluster**](#gt_cluster) node or whether it is currently active in the cluster, as specified in section [3.2.4.1](#Section_3.2.4.1.2).
-- Configure and activate resources and groups, as specified in section [3.2.4.2](#Section_3.1.1.1.1).
+- Determine whether a computer is configured as a [**cluster**](#gt_cluster) node or whether it is currently active in the cluster, as specified in section [3.2.4.1](#Section_3.2.4.1).
+- Configure and activate resources and groups, as specified in section [3.2.4.2](#Section_3.2.4.2).
 - Access the [**cluster registry**](#gt_cluster-registry), as specified in section [3.2.4.3](#Section_3.1.1.2).
 - Obtain configuration and state information about nodes, [**cluster networks**](#gt_cluster-network), and [**cluster network interfaces**](#gt_cluster-network-interface), as specified in section [3.2.4.4](#Section_3.2.4.4).
 - Configure [**notification ports**](#gt_notification-port) and retrieve event indications, as specified in section [3.2.4.5](#Section_3.1.1.8).
@@ -20737,11 +20737,11 @@ Both scenarios rely on the protocol sequence, as specified in section [3.2.4.1.1
 <a id="Section_3.2.4.1.1"></a>
 ##### 3.2.4.1.1 Querying the State of a Cluster Node
 
-The state of a [**node**](#gt_node) in a [**cluster**](#gt_cluster) is determined by the cluster using implementation-specific mechanisms and methods between servers. In order to query that state, a [**client**](#gt_client) SHOULD follow the procedure that is specified in this section. As a prerequisite for this procedure, a client MUST establish an [**RPC**](#gt_remote-procedure-call-rpc) connection to a cluster node, as specified in section [3.2.3](#Section_3.1.3).
+The state of a [**node**](#gt_node) in a [**cluster**](#gt_cluster) is determined by the cluster using implementation-specific mechanisms and methods between servers. In order to query that state, a [**client**](#gt_client) SHOULD follow the procedure that is specified in this section. As a prerequisite for this procedure, a client MUST establish an [**RPC**](#gt_remote-procedure-call-rpc) connection to a cluster node, as specified in section [3.2.3](#Section_3.2.3).
 
-- Call the ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3) method indicating the computer name of the node whose state is to be queried. The client SHOULD interpret failure of this method as the node having state ClusterNodeDown, as specified in the ApiGetNodeState (section [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.2.69) for protocol version 3) method.
+- Call the ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3) method indicating the computer name of the node whose state is to be queried. The client SHOULD interpret failure of this method as the node having state ClusterNodeDown, as specified in the ApiGetNodeState (section [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.1.69) for protocol version 3) method.
 - Call the ApiGetNodeState method indicating the [HNODE_RPC](#Section_2.2.1.2) context handle obtained in the previous step. The client SHOULD interpret failure of this method as the node having state ClusterNodeDown (see the ApiGetNodeState method); otherwise, the client SHOULD conclude that the state of the node is that returned by the ApiGetNodeState method.
-- Call the ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.1.68) for protocol version 3) method indicating the HNODE_RPC context handle that was obtained in the previous call to ApiOpenNode.
+- Call the ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.2.68) for protocol version 3) method indicating the HNODE_RPC context handle that was obtained in the previous call to ApiOpenNode.
 <a id="Section_3.2.4.1.2"></a>
 ##### 3.2.4.1.2 Determining Cluster Node Configuration and State
 
@@ -20751,81 +20751,81 @@ A client that implements version 2.0 of the protocol SHOULD<223> perform the fol
 
 - The client SHOULD query the cluster installation status of the [**server**](#gt_server) from the [**registry**](#gt_registry), as specified in section [3.1.3.1](#Section_3.1.3.1). If the registry query fails, the client SHOULD deduce that the server is not configured as a cluster node.
 - The client SHOULD<224> query whether the cluster software of the server is running, as specified in section [3.1.3.2](#Section_3.1.3.2).
-- If the cluster software of the server is not running, as determined in the previous step, the client SHOULD<225> attempt an [**RPC**](#gt_remote-procedure-call-rpc) connection to the server, as specified in section [3.2.3](#Section_3.1.3). The client SHOULD interpret a failure to establish an RPC connection to mean that the server is not an active node in the cluster.
+- If the cluster software of the server is not running, as determined in the previous step, the client SHOULD<225> attempt an [**RPC**](#gt_remote-procedure-call-rpc) connection to the server, as specified in section [3.2.3](#Section_3.2.3). The client SHOULD interpret a failure to establish an RPC connection to mean that the server is not an active node in the cluster.
 - The client SHOULD query the cluster node state, as specified in section [3.2.4.1.1](#Section_3.2.4.1.1). The client SHOULD interpret the failure of this call to mean that the server is not an active node in the cluster.
 A client that implements version 3.0 of the protocol SHOULD perform the following procedure:
 
 - Query whether the server's cluster software is running, as specified in section 3.1.3.2.
 - If the server's cluster software is running, as specified in section 3.1.3.2, the client SHOULD establish an RPC connection to the server, as specified in section 3.2.3. The client SHOULD interpret a failure to establish an RPC connection to mean that the server is not an active node in the cluster.
-- The client SHOULD enumerate the nodes of the cluster, as specified in the ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.83) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.88) for protocol version 3) method. The client SHOULD interpret the failure of this method to mean that the server is not an active node in the cluster.
-- For each node in the enumeration, the client SHOULD query the cluster node state, as specified in section 3.2.4.1.1. If at least one node is found to have state ClusterNodeUp or ClusterNodePaused, as specified in the ApiGetNodeState (section [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.2.69) for protocol version 3) method, the client SHOULD conclude that the target computer is an active node in the cluster. The client MAY stop querying the state of the remaining nodes in the enumeration. If no node is found to have state ClusterNodeUp or ClusterNodePaused, as specified in section 3.2.4.1.1, the client SHOULD conclude that the target computer is a configured node in the cluster, although not an active node. If a cluster node state query, as specified in section 3.2.4.1.1, fails, the client SHOULD conclude that the target computer is not a node in the cluster.
+- The client SHOULD enumerate the nodes of the cluster, as specified in the ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.85) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.89) for protocol version 3) method. The client SHOULD interpret the failure of this method to mean that the server is not an active node in the cluster.
+- For each node in the enumeration, the client SHOULD query the cluster node state, as specified in section 3.2.4.1.1. If at least one node is found to have state ClusterNodeUp or ClusterNodePaused, as specified in the ApiGetNodeState (section [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.1.69) for protocol version 3) method, the client SHOULD conclude that the target computer is an active node in the cluster. The client MAY stop querying the state of the remaining nodes in the enumeration. If no node is found to have state ClusterNodeUp or ClusterNodePaused, as specified in section 3.2.4.1.1, the client SHOULD conclude that the target computer is a configured node in the cluster, although not an active node. If a cluster node state query, as specified in section 3.2.4.1.1, fails, the client SHOULD conclude that the target computer is not a node in the cluster.
 <a id="Section_3.2.4.1.3"></a>
 ##### 3.2.4.1.3 Identifying an Active Node
 
-A [**client**](#gt_client) can determine whether a computer is an [**active node**](#gt_active-node) in a [**cluster**](#gt_cluster) by first establishing an [**RPC**](#gt_remote-procedure-call-rpc) connection to the computer, as specified in section [3.2.3](#Section_3.1.3).
+A [**client**](#gt_client) can determine whether a computer is an [**active node**](#gt_active-node) in a [**cluster**](#gt_cluster) by first establishing an [**RPC**](#gt_remote-procedure-call-rpc) connection to the computer, as specified in section [3.2.3](#Section_3.2.3).
 
 For protocol version 2.0, if the connection succeeds, the client SHOULD conclude that the [**server**](#gt_server) is currently an active node in a cluster.
 
 For protocol version 3.0, if the connection succeeds, the client SHOULD conclude that the server is a [**node**](#gt_node) in a cluster. However, in order to determine whether the server is an active node, the client SHOULD query the node state as specified in section [3.2.4.1.1](#Section_3.2.4.1.1).
 
-If the RPC connection succeeded, the client SHOULD call the ApiCloseCluster (section [3.1.4.1.2](#Section_3.1.4.1.28) for protocol version 2, or [3.1.4.2.2](#Section_3.1.4.2.2) for protocol version 3) method to clean up any server context that is no longer needed.
+If the RPC connection succeeded, the client SHOULD call the ApiCloseCluster (section [3.1.4.1.2](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.2](#Section_3.1.4.2.2) for protocol version 3) method to clean up any server context that is no longer needed.
 
 If the client fails to establish an RPC connection, as specified in section 3.2.3, the client SHOULD conclude that the computer is not an active node in a cluster; however, the client SHOULD NOT conclude that the computer either is or is not configured as a node in a cluster.
 
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Cluster Resources and Groups
 
-In order to operate on a [**cluster**](#gt_cluster) [**resource**](#gt_resource) or [**group**](#gt_group), a [**client**](#gt_client) MUST establish a ClusAPI [**RPC**](#gt_remote-procedure-call-rpc) interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.1.3).
+In order to operate on a [**cluster**](#gt_cluster) [**resource**](#gt_resource) or [**group**](#gt_group), a [**client**](#gt_client) MUST establish a ClusAPI [**RPC**](#gt_remote-procedure-call-rpc) interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.2.3).
 
-In order to operate on a cluster resource , the client MAY call ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.96) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3), designating either the resource name or ID. If the resource does not have a well-known name, the client MAY determine the name by using a mechanism such as a resource enumeration.
+In order to operate on a cluster resource , the client MAY call ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3), designating either the resource name or ID. If the resource does not have a well-known name, the client MAY determine the name by using a mechanism such as a resource enumeration.
 
-For example, to access a resource of a particular [**resource type**](#gt_resource-type), a client obtains an enumeration of all resources in the cluster by using ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.83) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.88) for protocol version 3) with enumeration type CLUSTER_ENUM_RESOURCE. For each resource name in the enumeration, the client calls ApiOpenResource followed by ApiGetResourceType (section [3.1.4.1.16](#Section_3.1.4.1.16) for protocol version 2, or [3.1.4.2.16](#Section_3.1.4.1.16) for protocol version 3), and the client compares the returned resource type name to the name of the resource type it is searching for.
+For example, to access a resource of a particular [**resource type**](#gt_resource-type), a client obtains an enumeration of all resources in the cluster by using ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.85) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.89) for protocol version 3) with enumeration type CLUSTER_ENUM_RESOURCE. For each resource name in the enumeration, the client calls ApiOpenResource followed by ApiGetResourceType (section [3.1.4.1.16](#Section_3.1.4.1.16) for protocol version 2, or [3.1.4.2.16](#Section_3.1.4.1.16) for protocol version 3), and the client compares the returned resource type name to the name of the resource type it is searching for.
 
-As another example, to open all resources that are not in the ClusterResourceOnline state (as specified in ApiGetResourceState; section [3.1.4.1.13](#Section_3.1.4.1.13) for protocol version 2, or [3.1.4.2.13](#Section_3.1.4.2.133) for protocol version 3), the client calls ApiCreateEnum with enumeration type CLUSTER_ENUM_RESOURCE, and for each resource name in the enumeration, the client calls ApiOpenResource followed by ApiGetResourceState.
+As another example, to open all resources that are not in the ClusterResourceOnline state (as specified in ApiGetResourceState; section [3.1.4.1.13](#Section_3.1.4.1.13) for protocol version 2, or [3.1.4.2.13](#Section_3.1.4.2.139) for protocol version 3), the client calls ApiCreateEnum with enumeration type CLUSTER_ENUM_RESOURCE, and for each resource name in the enumeration, the client calls ApiOpenResource followed by ApiGetResourceState.
 
 After a resource is opened and a client has an [HRES_RPC](#Section_2.2.1.4) context handle, the client can perform operations on the resource, such as:
 
-- Bringing it online: ApiOnlineResource (section [3.1.4.1.18](#Section_3.1.4.1.18) for protocol version 2, or [3.1.4.2.18](#Section_3.1.4.2.18) for protocol version 3)
-- Bringing it offline: ApiOfflineResource (section [3.1.4.1.19](#Section_3.1.4.1.19) for protocol version 2, or [3.1.4.2.19](#Section_3.1.4.1.19) for protocol version 3)
-- Adding dependencies: ApiAddResourceDependency (section [3.1.4.1.20](#Section_3.1.4.1.20) for protocol version 2, or [3.1.4.2.20](#Section_3.1.4.1.20) for protocol version 3)
-- Removing dependencies: ApiRemoveResourceDependency (section [3.1.4.1.21](#Section_3.1.4.1.21) for protocol version 2, or [3.1.4.2.21](#Section_3.1.4.1.21) for protocol version 3)
+- Bringing it online: ApiOnlineResource (section [3.1.4.1.18](#Section_3.1.4.1.18) for protocol version 2, or [3.1.4.2.18](#Section_3.1.4.1.18) for protocol version 3)
+- Bringing it offline: ApiOfflineResource (section [3.1.4.1.19](#Section_3.1.4.1.19) for protocol version 2, or [3.1.4.2.19](#Section_3.1.4.2.19) for protocol version 3)
+- Adding dependencies: ApiAddResourceDependency (section [3.1.4.1.20](#Section_3.1.4.1.20) for protocol version 2, or [3.1.4.2.20](#Section_3.1.4.2.20) for protocol version 3)
+- Removing dependencies: ApiRemoveResourceDependency (section [3.1.4.1.21](#Section_3.1.4.1.21) for protocol version 2, or [3.1.4.2.21](#Section_3.1.4.2.21) for protocol version 3)
 When a client has finished performing operations with an HRES_RPC context handle, it SHOULD release the context handle by calling ApiCloseResource (section [3.1.4.1.12](#Section_3.1.4.1.12) for protocol version 2, or [3.1.4.2.12](#Section_3.1.4.1.12) for protocol version 3).
 
 In order to operate on a cluster group, the client MAY call ApiOpenGroup (section [3.1.4.1.42](#Section_3.1.4.1.42) for protocol version 2, or [3.1.4.2.42](#Section_3.1.4.2.42) for protocol version 3) designating the name of the group. If the group does not have a well-known name, the client MAY obtain the group name by querying the state of one of the group resources. See ApiGetResourceState (section 3.1.4.1.13 for protocol version 2, or 3.1.4.2.13 for protocol version 3).
 
-After a group is opened and a client has an [HGROUP_RPC](#Section_2.2.1.3) context handle, the client MAY perform operations on the group, such as moving it using ApiMoveGroup (section [3.1.4.1.52](#Section_3.1.4.1.52) for protocol version 2, or [3.1.4.2.52](#Section_3.1.4.2.131) for protocol version 3), moving it using ApiMoveGroupToNode (section [3.1.4.1.53](#Section_3.1.4.1.53) for protocol version 2, or [3.1.4.2.53](#Section_3.1.4.2.132) for protocol version 3), querying its state using ApiGetGroupState (section [3.1.4.1.46](#Section_3.1.4.1.46) for protocol version 2, or [3.1.4.2.46](#Section_3.1.4.2.46) for protocol version 3), setting group dependency expression using **ApiSetGroupDependencyExpression** (section [3.1.4.2.157](#Section_3.1.4.2.157) for protocol version 3), and removing cluster group dependency using **ApiRemoveClusterGroupDependency** (section [3.1.4.2.158](#Section_3.1.4.2.158) for protocol version 3).
+After a group is opened and a client has an [HGROUP_RPC](#Section_2.2.1.3) context handle, the client MAY perform operations on the group, such as moving it using ApiMoveGroup (section [3.1.4.1.52](#Section_3.1.4.1.52) for protocol version 2, or [3.1.4.2.52](#Section_3.1.4.2.152) for protocol version 3), moving it using ApiMoveGroupToNode (section [3.1.4.1.53](#Section_3.1.4.1.53) for protocol version 2, or [3.1.4.2.53](#Section_3.1.4.2.132) for protocol version 3), querying its state using ApiGetGroupState (section [3.1.4.1.46](#Section_3.1.4.1.46) for protocol version 2, or [3.1.4.2.46](#Section_3.1.4.2.46) for protocol version 3), setting group dependency expression using **ApiSetGroupDependencyExpression** (section [3.1.4.2.157](#Section_3.1.4.2.157) for protocol version 3), and removing cluster group dependency using **ApiRemoveClusterGroupDependency** (section [3.1.4.2.158](#Section_3.1.4.2.158) for protocol version 3).
 
 When a client has finished performing operations with an HGROUP_RPC context handle, it MAY release the context handle by calling ApiCloseGroup (section [3.1.4.1.45](#Section_3.1.4.1.45) for protocol version 2, or [3.1.4.2.45](#Section_3.1.4.1.45) for protocol version 3).
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Cluster Registry
 
-In order to access the [**cluster registry**](#gt_cluster-registry), a [**client**](#gt_client) MUST establish an [**RPC**](#gt_remote-procedure-call-rpc) interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.1.3). Operations on the cluster registry begin with the client calling ApiGetRootKey (section [3.1.4.1.29](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.29](#Section_3.1.4.2.29) for protocol version 3) to open the [**cluster registry root key**](#gt_cluster-registry-root-key). After this key is opened, an [**RPC context handle**](#gt_rpc-context-handle) is associated with this opened key, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), and this handle is returned to the client. The client MAY then perform operations on this key, such as:
+In order to access the [**cluster registry**](#gt_cluster-registry), a [**client**](#gt_client) MUST establish an [**RPC**](#gt_remote-procedure-call-rpc) interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.2.3). Operations on the cluster registry begin with the client calling ApiGetRootKey (section [3.1.4.1.29](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.29](#Section_3.1.4.2.29) for protocol version 3) to open the [**cluster registry root key**](#gt_cluster-registry-root-key). After this key is opened, an [**RPC context handle**](#gt_rpc-context-handle) is associated with this opened key, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), and this handle is returned to the client. The client MAY then perform operations on this key, such as:
 
 - Open the key: ApiOpenKey (section [3.1.4.1.31](#Section_3.1.4.1.31) for protocol version 2, or [3.1.4.2.31](#Section_3.1.4.2.31) for protocol version 3)
 - Create [**subkeys**](#gt_subkey): ApiCreateKey (section [3.1.4.1.30](#Section_3.1.4.1.30) for protocol version 2, or [3.1.4.2.30](#Section_3.1.4.2.30) for protocol version 3)
-- Read values associated with this key: ApiQueryValue (section [3.1.4.1.35](#Section_3.1.4.1.35) for protocol version 2, or [3.1.4.2.35](#Section_3.1.4.2.35) for protocol version 3)
+- Read values associated with this key: ApiQueryValue (section [3.1.4.1.35](#Section_3.1.4.1.35) for protocol version 2, or [3.1.4.2.35](#Section_3.1.4.1.35) for protocol version 3)
 - Set values associated with this key: ApiSetValue (section [3.1.4.1.33](#Section_3.1.4.1.33) for protocol version 2, or [3.1.4.2.33](#Section_3.1.4.2.33) for protocol version 3)
 - Delete subkeys: ApiDeleteKey (section [3.1.4.1.36](#Section_3.1.4.1.36) for protocol version 2, or [3.1.4.2.36](#Section_3.1.4.2.36) for protocol version 3)
-After finishing operations, the client MAY call the ApiCloseKey (section [3.1.4.1.38](#Section_3.1.4.1.38) for protocol version 2, or [3.1.4.2.38](#Section_3.1.4.1.38) for protocol version 3) method for each opened key.
+After finishing operations, the client MAY call the ApiCloseKey (section [3.1.4.1.38](#Section_3.1.4.1.38) for protocol version 2, or [3.1.4.2.38](#Section_3.1.4.2.38) for protocol version 3) method for each opened key.
 
-When enumerating keys or values, a client MAY first invoke ApiEnumKey (section [3.1.4.1.32](#Section_3.1.4.1.32) for protocol version 2, or [3.1.4.2.32](#Section_3.1.4.2.32) for protocol version 3) or ApiEnumValue (section [3.1.4.1.37](#Section_3.1.4.1.37) for protocol version 2, or [3.1.4.2.37](#Section_3.1.4.1.37) for protocol version 3) with the index set to 0. Then the client MAY continue calling ApiEnumKey or ApiEnumValue, incrementing the index on each call, until 0x00000103 (ERROR_NO_MORE_ITEMS) is returned.
+When enumerating keys or values, a client MAY first invoke ApiEnumKey (section [3.1.4.1.32](#Section_3.1.4.1.32) for protocol version 2, or [3.1.4.2.32](#Section_3.1.4.1.32) for protocol version 3) or ApiEnumValue (section [3.1.4.1.37](#Section_3.1.4.1.37) for protocol version 2, or [3.1.4.2.37](#Section_3.1.4.2.37) for protocol version 3) with the index set to 0. Then the client MAY continue calling ApiEnumKey or ApiEnumValue, incrementing the index on each call, until 0x00000103 (ERROR_NO_MORE_ITEMS) is returned.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 Cluster Nodes, Cluster Networks, and Cluster Network Interfaces
 
-In order to operate on a [**cluster**](#gt_cluster) [**node**](#gt_node), [**cluster network**](#gt_cluster-network), or [**cluster network interface**](#gt_cluster-network-interface), a [**client**](#gt_client) MUST first establish a ClusAPI [**RPC**](#gt_remote-procedure-call-rpc) interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.1.3).
+In order to operate on a [**cluster**](#gt_cluster) [**node**](#gt_node), [**cluster network**](#gt_cluster-network), or [**cluster network interface**](#gt_cluster-network-interface), a [**client**](#gt_client) MUST first establish a ClusAPI [**RPC**](#gt_remote-procedure-call-rpc) interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.2.3).
 
-In order to operate on a cluster node object, the client MAY call ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3), which obtains an [HNODE_RPC](#Section_2.2.1.2) context handle to the designated configured node in the cluster. The client MAY determine the names of the configured nodes by using a mechanism such as a node enumeration (see ApiCreateEnum; section [3.1.4.1.8](#Section_3.1.4.1.83) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.88) for protocol version 3).
+In order to operate on a cluster node object, the client MAY call ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3), which obtains an [HNODE_RPC](#Section_2.2.1.2) context handle to the designated configured node in the cluster. The client MAY determine the names of the configured nodes by using a mechanism such as a node enumeration (see ApiCreateEnum; section [3.1.4.1.8](#Section_3.1.4.1.85) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.89) for protocol version 3).
 
-For example, to get the current state of all nodes that are not in the ClusterNodeUp state, the client calls ApiCreateEnum with enumeration type CLUSTER_ENUM_NODE, and for each node name in the enumeration, the client calls ApiOpenNode followed by ApiGetNodeState (section [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.2.69) for protocol version 3).
+For example, to get the current state of all nodes that are not in the ClusterNodeUp state, the client calls ApiCreateEnum with enumeration type CLUSTER_ENUM_NODE, and for each node name in the enumeration, the client calls ApiOpenNode followed by ApiGetNodeState (section [3.1.4.1.69](#Section_3.1.4.1.69) for protocol version 2, or [3.1.4.2.69](#Section_3.1.4.1.69) for protocol version 3).
 
 After a node is opened, the client MAY perform operations on the node such as:
 
-- Pause node: ApiPauseNode (section [3.1.4.1.70](#Section_3.1.4.1.70) for protocol version 2, or [3.1.4.2.70](#Section_3.1.4.2.70) for protocol version 3)
-- Resume node: ApiResumeNode (section [3.1.4.1.71](#Section_3.1.4.1.71) for protocol version 2, or [3.1.4.2.71](#Section_3.1.4.2.71) for protocol version 3)
+- Pause node: ApiPauseNode (section [3.1.4.1.70](#Section_3.1.4.1.70) for protocol version 2, or [3.1.4.2.70](#Section_3.1.4.2.126) for protocol version 3)
+- Resume node: ApiResumeNode (section [3.1.4.1.71](#Section_3.1.4.1.71) for protocol version 2, or [3.1.4.2.71](#Section_3.1.4.2.127) for protocol version 3)
 - Remove node from the cluster configuration: ApiEvictNode (section [3.1.4.1.72](#Section_3.1.4.1.72) for protocol version 2, or [3.1.4.2.72](#Section_3.1.4.2.72) for protocol version 3)
-When a client has finished performing operations with an HNODE_RPC context handle, it MAY release the context handle by calling ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.1.68) for protocol version 3).
+When a client has finished performing operations with an HNODE_RPC context handle, it MAY release the context handle by calling ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.2.68) for protocol version 3).
 
 In order to operate on a cluster network, the client MAY call ApiOpenNetwork (section [3.1.4.1.81](#Section_3.1.4.1.81) for protocol version 2, or [3.1.4.2.81](#Section_3.1.4.2.81) for protocol version 3), which obtains an [HNETWORK_RPC](#Section_2.2.1.7) context handle to the designated cluster network. If the cluster network does not have a well-known name, the client MAY determine the names of the configured [**networks**](#gt_network) by using a mechanism such as a cluster network enumeration (see ApiCreateEnum).
 
@@ -20834,18 +20834,18 @@ After a cluster network is opened, the client MAY perform operations on the clus
 - Query its state: ApiGetNetworkState (section [3.1.4.1.83](#Section_3.1.4.1.83) for protocol version 2, or [3.1.4.2.83](#Section_3.1.4.1.83) for protocol version 3)
 - Change its name: ApiSetNetworkName (section [3.1.4.1.84](#Section_3.1.4.1.84) for protocol version 2, or [3.1.4.2.84](#Section_3.1.4.2.84) for protocol version 3)
 - Enumerate the cluster network interfaces associated with this cluster network: **ApiCreateNetworkEnum** (section [3.1.4.1.85](#Section_3.1.4.1.85) for protocol version 2 or [3.1.4.2.85](#Section_3.1.4.2.85) for protocol version 3), or **ApiCreateNetInterfaceEnum** (section [3.1.4.2.163](#Section_3.1.4.2.163)) for protocol version 3.
-When a client has finished performing operations with an HNETWORK_RPC context handle, it MAY release the context handle by calling ApiCloseNetwork (section [3.1.4.1.82](#Section_3.1.4.1.82) for protocol version 2, or [3.1.4.2.82](#Section_3.1.4.1.82) for protocol version 3).
+When a client has finished performing operations with an HNETWORK_RPC context handle, it MAY release the context handle by calling ApiCloseNetwork (section [3.1.4.1.82](#Section_3.1.4.1.82) for protocol version 2, or [3.1.4.2.82](#Section_3.1.4.2.82) for protocol version 3).
 
 In order to operate on a cluster network interface, the client MAY call ApiOpenNetInterface (section [3.1.4.1.92](#Section_3.1.4.1.92) for protocol version 2, or [3.1.4.2.92](#Section_3.1.4.2.92) for protocol version 3), which obtains an [HNETINTERFACE_RPC](#Section_2.2.1.8) context handle to the designated cluster network interface. If the cluster network interface does not have a well-known name, the client MAY determine the names of the configured cluster network interfaces by using a mechanism such as a cluster network interface enumeration, as specified in ApiCreateEnum.
 
-After a cluster network interface is opened, the client MAY perform operations on the cluster network interface, such as querying its state (see ApiGetNetInterfaceState; section [3.1.4.1.94](#Section_3.1.4.1.94) for protocol version 2, or [3.1.4.2.94](#Section_3.1.4.1.94) for protocol version 3) and obtaining its unique ID (see ApiGetNetInterfaceId; section [3.1.4.1.96](#Section_3.1.4.1.96) for protocol version 2, or [3.1.4.2.96](#Section_3.1.4.1.96) for protocol version 3).
+After a cluster network interface is opened, the client MAY perform operations on the cluster network interface, such as querying its state (see ApiGetNetInterfaceState; section [3.1.4.1.94](#Section_3.1.4.1.94) for protocol version 2, or [3.1.4.2.94](#Section_3.1.4.2.94) for protocol version 3) and obtaining its unique ID (see ApiGetNetInterfaceId; section [3.1.4.1.96](#Section_3.1.4.1.96) for protocol version 2, or [3.1.4.2.96](#Section_3.1.4.1.96) for protocol version 3).
 
 When a client has finished performing operations with an HNETINTERFACE_RPC context handle, it MAY release the context handle by calling ApiCloseNetInterface (section [3.1.4.1.93](#Section_3.1.4.1.93) for protocol version 2, or [3.1.4.2.93](#Section_3.1.4.1.93) for protocol version 3).
 
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Notification Ports
 
-In order to operate on a [**cluster**](#gt_cluster) [**notification port**](#gt_notification-port), a [**client**](#gt_client) MUST first establish a ClusAPI RPC interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.1.3).
+In order to operate on a [**cluster**](#gt_cluster) [**notification port**](#gt_notification-port), a [**client**](#gt_client) MUST first establish a ClusAPI RPC interface connection to an [**active node**](#gt_active-node), as specified in section [3.2.3](#Section_3.2.3).
 
 <a id="Section_3.2.4.5.1"></a>
 ##### 3.2.4.5.1 Version 1 Notification Ports
@@ -20854,16 +20854,16 @@ To create a version 1 [**notification port**](#gt_notification-port), the [**cli
 
 After the port is opened, the client MAY register an event filter to instruct the [**server**](#gt_server) to begin queuing the respective event indications on the port. The following methods are used to register the event filters:
 
-- ApiAddNotifyCluster (section [3.1.4.1.58](#Section_3.1.4.1.58) for protocol version 2, or section [3.1.4.2.58](#Section_3.1.4.1.58) for protocol version 3)
+- ApiAddNotifyCluster (section [3.1.4.1.58](#Section_3.1.4.1.58) for protocol version 2, or section [3.1.4.2.58](#Section_3.1.4.2.58) for protocol version 3)
 - ApiAddNotifyNode (section [3.1.4.1.59](#Section_3.1.4.1.59) for protocol version 2, or section [3.1.4.2.59](#Section_3.1.4.2.59) for protocol version 3)
-- ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or section [3.1.4.2.60](#Section_3.1.4.1.60) for protocol version 3)
-- ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or section [3.1.4.2.61](#Section_3.1.4.1.61) for protocol version 3)
+- ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or section [3.1.4.2.60](#Section_3.1.4.2.60) for protocol version 3)
+- ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or section [3.1.4.2.61](#Section_3.1.4.2.61) for protocol version 3)
 - ApiAddNotifyKey (section [3.1.4.1.62](#Section_3.1.4.1.62) for protocol version 2, or section [3.1.4.2.62](#Section_3.1.4.1.62) for protocol version 3)
-- ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or section [3.1.4.2.90](#Section_3.1.4.2.90) for protocol version 3)
+- ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or section [3.1.4.2.90](#Section_3.1.4.1.90) for protocol version 3)
 - ApiAddNotifyNetInterface (section [3.1.4.1.99](#Section_3.1.4.1.99) for protocol version 2, or section [3.1.4.2.99](#Section_3.1.4.2.99) for protocol version 3)
 After the first event filter is registered, the client SHOULD call ApiGetNotify to begin receiving event indications that are queued to the port. The client MAY continue to register additional event filters as necessary.
 
-When a client has finished performing operations with an HNOTIFY_RPC context handle, it SHOULD unblock any outstanding ApiGetNotify calls by calling [ApiUnblockGetNotifyCall (section 3.1.4.1.107)](#Section_3.1.4.1.107) for protocol version 2, or section [3.1.4.2.107](#Section_3.1.4.1.107) for protocol version 3<226> and then release the context handle by calling ApiCloseNotify (section [3.1.4.1.57](#Section_3.1.4.1.57) for protocol version 2, or [3.1.4.2.57](#Section_3.1.4.1.57) for protocol version 3).
+When a client has finished performing operations with an HNOTIFY_RPC context handle, it SHOULD unblock any outstanding ApiGetNotify calls by calling [ApiUnblockGetNotifyCall (section 3.1.4.1.107)](#Section_3.1.4.1.107) for protocol version 2, or section [3.1.4.2.107](#Section_3.1.4.1.107) for protocol version 3<226> and then release the context handle by calling ApiCloseNotify (section [3.1.4.1.57](#Section_3.1.4.1.57) for protocol version 2, or [3.1.4.2.57](#Section_3.1.4.2.57) for protocol version 3).
 
 <a id="Section_3.2.4.5.2"></a>
 ##### 3.2.4.5.2 Version 2 Notification Ports
@@ -20885,7 +20885,7 @@ After the port is opened, the client MAY invoke [ApiAddNotifyV2 (section 3.1.4
 
 After the first event filter is registered, the client SHOULD call ApiGetNotifyV2 (section 3.1.4.2.138) to begin receiving event indications that are queued to the port. The client MAY continue to register additional event filters as necessary.
 
-When a client has finished performing operations with an HNOTIFY_RPC context handle, it SHOULD unblock any outstanding ApiGetNotifyV2 calls by calling [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) for protocol version 3 and then release the context handle by calling [ApiCloseNotify](#Section_3.1.4.1.58) for protocol version 3.
+When a client has finished performing operations with an HNOTIFY_RPC context handle, it SHOULD unblock any outstanding ApiGetNotifyV2 calls by calling [ApiUnblockGetNotifyCall (section 3.1.4.2.107)](#Section_3.1.4.1.107) for protocol version 3 and then release the context handle by calling [ApiCloseNotify](#Section_3.1.4.2.58) for protocol version 3.
 
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 Reconnect Procedure
@@ -20935,30 +20935,30 @@ Note that in the previous two tables of error codes, those error codes whose val
 
 When the client receives one of the specific error codes from a call to one of the specific methods, the client SHOULD reconnect to the cluster and retry the method according to the following procedure:
 
-- The client SHOULD obtain a reconnect candidate name from the list of reconnect candidates that were previously constructed as specified in section [3.2.3.3](#Section_3.2.3.3). If all candidates in the list have already been attempted in this reconnect procedure, reconnect has failed, and the client SHOULD perform the following steps:
+- The client SHOULD obtain a reconnect candidate name from the list of reconnect candidates that were previously constructed as specified in section [3.2.3.3](#Section_3.2.3). If all candidates in the list have already been attempted in this reconnect procedure, reconnect has failed, and the client SHOULD perform the following steps:
 - For each version 1 [**notification port**](#gt_notification-port) associated with the cluster, a **CLUSTER_CHANGE_CLUSTER_STATE** event indication, as specified in section [2.2.2.7](#Section_2.2.2.7), is posted to the client queue of event indications, specifying the [**cluster name**](#gt_cluster-name) as the name of the object associated with the event.
-- For each version 2 notification port associated with the cluster, a **CLUSTER_CHANGE_GROUP_STATE_V2** event indication, as specified in section [2.2.2.13](#Section_2.2.2.13), is posted to the client queue of event indications, specifying the cluster name as the name of the object associated with the event.
+- For each version 2 notification port associated with the cluster, a **CLUSTER_CHANGE_GROUP_STATE_V2** event indication, as specified in section [2.2.2.13](#Section_2.2.2.7), is posted to the client queue of event indications, specifying the cluster name as the name of the object associated with the event.
 - Return the original error code to the caller.
 - The client SHOULD determine whether the candidate name matches the [**computer name**](#gt_computer-name) of the server that the client was connected to when the reconnect procedure started. That server computer name SHOULD have been obtained as specified in section 3.2.3.3. If the candidate name matches the server name, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1. However, if all other candidates in the list have already been attempted, the client SHOULD proceed with the candidate whose name matches the server computer name.
 - The client SHOULD free any existing RPC binding to a [**node**](#gt_node) in the cluster.
 - The client SHOULD attempt to establish an RPC connection to the reconnect candidate name, as specified in section [3.2.3.2](#Section_3.2.3.2). If RPC connection establishment fails, the client SHOULD proceed to the next node in the enumeration and go back to step 1.
-- The client SHOULD call ApiGetClusterName (section [3.1.4.1.4](#Section_3.1.4.1.45) for protocol version 2, or [3.1.4.2.4](#Section_3.1.4.2.47) for protocol version 3) to obtain the cluster name and the computer name of the server currently connected to. If ApiGetClusterName fails, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1. The client SHOULD NOT interpret error codes from ApiGetClusterName for reconnection as specified in this section. If ApiGetClusterName succeeds, the client SHOULD use the returned cluster name and node name to replace the cluster name and the computer name of the server that it is currently connected to. The returned cluster name and node were previously obtained as specified in section 3.2.3.3 or in a previous reconnect attempt.
+- The client SHOULD call ApiGetClusterName (section [3.1.4.1.4](#Section_3.1.4.1.47) for protocol version 2, or [3.1.4.2.4](#Section_3.1.4.2.47) for protocol version 3) to obtain the cluster name and the computer name of the server currently connected to. If ApiGetClusterName fails, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1. The client SHOULD NOT interpret error codes from ApiGetClusterName for reconnection as specified in this section. If ApiGetClusterName succeeds, the client SHOULD use the returned cluster name and node name to replace the cluster name and the computer name of the server that it is currently connected to. The returned cluster name and node were previously obtained as specified in section 3.2.3.3 or in a previous reconnect attempt.
 - The client SHOULD free any existing [HCLUSTER_RPC](#Section_2.2.1.1) context handle, which was obtained as specified in section 3.2.3.3 or in a previous reconnect attempt.
-- For protocol version 3.0, if the level of access granted for the HCLUSTER_RPC context handle in step 6 was not "All", the client SHOULD<228> call ApiOpenClusterEx (section [3.1.4.2.116](#Section_3.1.4.2.116), for protocol version 3 only), requesting the same level of access. Otherwise, and for protocol version 2.0, the client SHOULD call ApiOpenCluster (section [3.1.4.1.1](#Section_3.1.4.1.16) for protocol version 2, or [3.1.4.2.1](#Section_3.1.4.2.160) for protocol version 3). If this method fails, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1.
+- For protocol version 3.0, if the level of access granted for the HCLUSTER_RPC context handle in step 6 was not "All", the client SHOULD<228> call ApiOpenClusterEx (section [3.1.4.2.116](#Section_3.1.4.2.116), for protocol version 3 only), requesting the same level of access. Otherwise, and for protocol version 2.0, the client SHOULD call ApiOpenCluster (section [3.1.4.1.1](#Section_3.1.4.1.14) for protocol version 2, or [3.1.4.2.1](#Section_3.1.4.2.139) for protocol version 3). If this method fails, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1.
 - For each [HNODE_RPC](#Section_2.2.1.2) context handle that the client has retained from a previous RPC connection or reconnect attempt, the client SHOULD first free that context. Then, for protocol version 3.0, if the level of access granted for the HNODE_RPC context handle was not "All", the client SHOULD call ApiOpenNodeEx (section [3.1.4.2.117](#Section_3.1.4.2.117), for protocol version 3 only), requesting the same level of access. Otherwise, and for protocol version 2.0, the client SHOULD call ApiOpenNode (section [3.1.4.1.67](#Section_3.1.4.1.67) for protocol version 2, or [3.1.4.2.67](#Section_3.1.4.2.67) for protocol version 3) to obtain an HNODE_RPC context handle that has the new RPC binding. If the ApiOpenNode method fails, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1. The client SHOULD NOT interpret error codes from ApiOpenNode for reconnection as specified in this section.
 - The client SHOULD repeat step 8 by using [HGROUP_RPC](#Section_2.2.1.3) handles instead of HNODE_RPC handles and by using ApiOpenGroupEx (section [3.1.4.2.118](#Section_3.1.4.2.118), for protocol version 3 only) or ApiOpenGroup (section [3.1.4.1.42](#Section_3.1.4.1.42) for protocol version 2, or [3.1.4.2.42](#Section_3.1.4.2.42) for protocol version 3) to open context handles with the new RPC binding.
-- The client SHOULD repeat step 8; however, this time, the client SHOULD use HRES_RPC handles and ApiOpenResourceEx (section [3.1.4.2.119](#Section_3.1.4.2.119), for protocol version 3 only) or ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.96) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3) to open context handles with the new RPC binding.
+- The client SHOULD repeat step 8; however, this time, the client SHOULD use HRES_RPC handles and ApiOpenResourceEx (section [3.1.4.2.119](#Section_3.1.4.2.119), for protocol version 3 only) or ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3) to open context handles with the new RPC binding.
 - The client SHOULD repeat step 8; however, this time, the client SHOULD NOT consider the level of access previously granted, and the client SHOULD use [HKEY_RPC](#Section_2.2.1.5) handles and ApiGetRootKey (section [3.1.4.1.29](#Section_3.1.4.1.29) for protocol version 2, or [3.1.4.2.29](#Section_3.1.4.2.29) for protocol version 3) and ApiOpenKey (section [3.1.4.1.31](#Section_3.1.4.1.31) for protocol version 2, or [3.1.4.2.31](#Section_3.1.4.2.31) for protocol version 3) to open context handles with the new RPC binding.
 - The client SHOULD repeat step 8; however, this time, the client SHOULD use [HNETWORK_RPC](#Section_2.2.1.7) handles and ApiOpenNetworkEx (section [3.1.4.2.120](#Section_3.1.4.2.120), for protocol version 3 only) or ApiOpenNetwork (section [3.1.4.1.81](#Section_3.1.4.1.81) for protocol version 2, or [3.1.4.2.81](#Section_3.1.4.2.81) for protocol version 3) to open context handles with the new RPC binding.
 - The client SHOULD repeat step 8; however, this time, the client SHOULD use [HNETINTERFACE_RPC](#Section_2.2.1.8) handles and ApiOpenNetInterfaceEx (section [3.1.4.2.121](#Section_3.1.4.2.121), for protocol version 3 only) or ApiOpenNetInterface (section [3.1.4.1.92](#Section_3.1.4.1.92) for protocol version 2, or [3.1.4.2.92](#Section_3.1.4.2.92) for protocol version 3) to open context handles with the new RPC binding.
 - The client SHOULD repeat step 8; however, this time, the client SHOULD NOT consider the level of access previously granted, and the client SHOULD use [HNOTIFY_RPC](#Section_2.2.1.6) handles associated with version 1 notification ports and ApiCreateNotify (section [3.1.4.1.56](#Section_3.1.4.1.56) for protocol version 2, or [3.1.4.2.56](#Section_3.1.4.2.56) for protocol version 3) to open context handles with the new RPC binding.
 - For each HNOTIFY_RPC context handle that the client re-created in step 14, the client SHOULD re-register the event filters associated with the port by calling the registration method that is appropriate for the type of event filter and queue a local reconnect event indication to the port. If any of the registration methods in the following list fails, the client SHOULD proceed to the next candidate in the list of reconnect candidates and go back to step 1. The client SHOULD NOT interpret any error code from the registration methods for reconnection as specified in this section.
-- The client SHOULD call the ApiAddNotifyCluster (section [3.1.4.1.58](#Section_3.1.4.1.58) for protocol version 2, or [3.1.4.2.58](#Section_3.1.4.1.58) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyCluster.
+- The client SHOULD call the ApiAddNotifyCluster (section [3.1.4.1.58](#Section_3.1.4.1.58) for protocol version 2, or [3.1.4.2.58](#Section_3.1.4.2.58) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyCluster.
 - The client SHOULD call the ApiAddNotifyKey (section [3.1.4.1.62](#Section_3.1.4.1.62) for protocol version 2, or [3.1.4.2.62](#Section_3.1.4.1.62) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyKey.
-- The client SHOULD call the ApiReAddNotifyNode (section [3.1.4.1.63](#Section_3.1.4.1.63) for protocol version 2, or [3.1.4.2.63](#Section_3.1.4.1.63) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyNode (section [3.1.4.1.59](#Section_3.1.4.1.59) for protocol version 2, or [3.1.4.2.59](#Section_3.1.4.2.59) for protocol version 3).
-- The client SHOULD call the ApiReAddNotifyGroup (section [3.1.4.1.64](#Section_3.1.4.1.64) for protocol version 2, or [3.1.4.2.64](#Section_3.1.4.1.64) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or [3.1.4.2.60](#Section_3.1.4.1.60) for protocol version 3).
-- The client SHOULD call the ApiReAddNotifyResource (section [3.1.4.1.65](#Section_3.1.4.1.65) for protocol version 2, or [3.1.4.2.65](#Section_3.1.4.2.65) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.1.61) for protocol version 3).
-- The client SHOULD call the ApiReAddNotifyNetwork (section [3.1.4.1.91](#Section_3.1.4.1.91) for protocol version 2, or [3.1.4.2.91](#Section_3.1.4.1.91) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.90](#Section_3.1.4.2.90) for protocol version 3).
+- The client SHOULD call the ApiReAddNotifyNode (section [3.1.4.1.63](#Section_3.1.4.1.63) for protocol version 2, or [3.1.4.2.63](#Section_3.1.4.2.63) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyNode (section [3.1.4.1.59](#Section_3.1.4.1.59) for protocol version 2, or [3.1.4.2.59](#Section_3.1.4.2.59) for protocol version 3).
+- The client SHOULD call the ApiReAddNotifyGroup (section [3.1.4.1.64](#Section_3.1.4.1.64) for protocol version 2, or [3.1.4.2.64](#Section_3.1.4.2.64) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or [3.1.4.2.60](#Section_3.1.4.2.60) for protocol version 3).
+- The client SHOULD call the ApiReAddNotifyResource (section [3.1.4.1.65](#Section_3.1.4.1.65) for protocol version 2, or [3.1.4.2.65](#Section_3.1.4.1.65) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.2.61) for protocol version 3).
+- The client SHOULD call the ApiReAddNotifyNetwork (section [3.1.4.1.91](#Section_3.1.4.1.91) for protocol version 2, or [3.1.4.2.91](#Section_3.1.4.1.91) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.90](#Section_3.1.4.1.90) for protocol version 3).
 - The client SHOULD call the ApiReAddNotifyNetInterface (section [3.1.4.1.100](#Section_3.1.4.1.100) for protocol version 2, or [3.1.4.2.100](#Section_3.1.4.2.100) for protocol version 3) method for event filters that were registered with a previous call to ApiAddNotifyNetInterface (section [3.1.4.1.99](#Section_3.1.4.1.99) for protocol version 2, or [3.1.4.2.99](#Section_3.1.4.2.99) for protocol version 3).
 - The client SHOULD post a **CLUSTER_CHANGE_CLUSTER_RECONNECT** to the client-side queue of event indications specifying the cluster name as the name of the object associated with the event.
 - The client SHOULD repeat step 8; however, this time the client SHOULD NOT consider the level of access previously granted, and the client SHOULD use HNOTIFY_RPC handles associated with version 2 notification ports and [ApiCreateNotifyV2 (section 3.1.4.2.136)](#Section_3.1.4.2.136) for protocol version 3 to open context handles with the new RPC binding.
@@ -20975,20 +20975,20 @@ The client SHOULD use the new RPC connection and context handles to reattempt th
 If a context handle has been registered with a version 1 [**notification port**](#gt_notification-port) event filter, then the [**client**](#gt_client) SHOULD post a [CLUSTER_CHANGE_HANDLE_CLOSE (section 2.2.2.7)](#Section_2.2.2.7) event indication to the client-side queue of events when the context handle is closed. Context handles are registered with a notification port event filter as specified in following sections:
 
 - ApiAddNotifyNode (section [3.1.4.1.59](#Section_3.1.4.1.59) for protocol version 2, or [3.1.4.2.59](#Section_3.1.4.2.59) for protocol version 3)
-- ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or [3.1.4.2.60](#Section_3.1.4.1.60) for protocol version 3)
-- ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.1.61) for protocol version 3)
+- ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or [3.1.4.2.60](#Section_3.1.4.2.60) for protocol version 3)
+- ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.2.61) for protocol version 3)
 - ApiAddNotifyKey (section [3.1.4.1.62](#Section_3.1.4.1.62) for protocol version 2, or [3.1.4.2.62](#Section_3.1.4.1.62) for protocol version 3)
-- ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.90](#Section_3.1.4.2.90) for protocol version 3)
+- ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.90](#Section_3.1.4.1.90) for protocol version 3)
 - ApiAddNotifyNetInterface (section [3.1.4.1.99](#Section_3.1.4.1.99) for protocol version 2, or [3.1.4.2.99](#Section_3.1.4.2.99) for protocol version 3)
 If a context handle has been registered with a version 2 notification port event filter, then the client SHOULD post an event indication to the client-side queue of events when the context handle is closed as follows:
 
 - For HCLUSTER_RPC, CLUSTER_CHANGE_CLUSTER_HANDLE_CLOSE_V2 (section [2.2.2.12](#Section_2.2.2.12)).
-- For HGROUP_RPC, CLUSTER_CHANGE_GROUP_HANDLE_CLOSE_V2 (section [2.2.2.13](#Section_2.2.2.13)).
-- For HRES_RPC, CLUSTER_CHANGE_RESOURCE_HANDLE_CLOSE_V2 (section [2.2.2.14](#Section_2.2.2.14)).
-- For HNETINTERFACE_RPC, CLUSTER_CHANGE_NETINTERFACE_HANDLE_CLOSE_V2 (section [2.2.2.16](#Section_2.2.2.16)).
-- For HNETWORK_RPC, CLUSTER_CHANGE_NETWORK_HANDLE_CLOSE_V2 (section [2.2.2.17](#Section_2.2.2.17)).
-- For HNODE_RPC, CLUSTER_CHANGE_NODE_HANDLE_CLOSE_V2 (section [2.2.2.18](#Section_2.2.2.18)).
-- For HKEY_RPC, CLUSTER_CHANGE_REGISTRY_HANDLE_CLOSE_V2 (section [2.2.2.19](#Section_2.2.2.19)).
+- For HGROUP_RPC, CLUSTER_CHANGE_GROUP_HANDLE_CLOSE_V2 (section [2.2.2.13](#Section_2.2.2.7)).
+- For HRES_RPC, CLUSTER_CHANGE_RESOURCE_HANDLE_CLOSE_V2 (section [2.2.2.14](#Section_2.2.2.7)).
+- For HNETINTERFACE_RPC, CLUSTER_CHANGE_NETINTERFACE_HANDLE_CLOSE_V2 (section [2.2.2.16](#Section_2.2.2.7)).
+- For HNETWORK_RPC, CLUSTER_CHANGE_NETWORK_HANDLE_CLOSE_V2 (section [2.2.2.17](#Section_2.2.2.7)).
+- For HNODE_RPC, CLUSTER_CHANGE_NODE_HANDLE_CLOSE_V2 (section [2.2.2.18](#Section_2.2.2.7)).
+- For HKEY_RPC, CLUSTER_CHANGE_REGISTRY_HANDLE_CLOSE_V2 (section [2.2.2.19](#Section_2.2.2.7)).
 - For HGROUPSET_RPC, CLUSTER_CHANGE_GROUPSET_HANDLE_CLOSE_v2 (section [2.2.2.24](#Section_2.2.2.24)).
 Context handles are registered with a notification port event filter as specified for [ApiAddNotifyV2 (section 3.1.4.2.137)](#Section_3.1.4.2.137) (for protocol version 3).
 
@@ -20997,10 +20997,10 @@ For both version 1 and version 2 notification port handle close event indication
 A context handle is closed using its corresponding close methods, as specified in the following sections:
 
 - ApiCloseResource (section [3.1.4.1.12](#Section_3.1.4.1.12) for protocol version 2, or [3.1.4.2.12](#Section_3.1.4.1.12) for protocol version 3)
-- ApiCloseKey (section [3.1.4.1.38](#Section_3.1.4.1.38) for protocol version 2, or [3.1.4.2.38](#Section_3.1.4.1.38) for protocol version 3)
+- ApiCloseKey (section [3.1.4.1.38](#Section_3.1.4.1.38) for protocol version 2, or [3.1.4.2.38](#Section_3.1.4.2.38) for protocol version 3)
 - ApiCloseGroup (section [3.1.4.1.45](#Section_3.1.4.1.45) for protocol version 2, or [3.1.4.2.45](#Section_3.1.4.1.45) for protocol version 3)
-- ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.1.68) for protocol version 3)
-- ApiCloseNetwork (section [3.1.4.1.82](#Section_3.1.4.1.82) for protocol version 2, or [3.1.4.2.82](#Section_3.1.4.1.82) for protocol version 3)
+- ApiCloseNode (section [3.1.4.1.68](#Section_3.1.4.1.68) for protocol version 2, or [3.1.4.2.68](#Section_3.1.4.2.68) for protocol version 3)
+- ApiCloseNetwork (section [3.1.4.1.82](#Section_3.1.4.1.82) for protocol version 2, or [3.1.4.2.82](#Section_3.1.4.2.82) for protocol version 3)
 - ApiCloseNetInterface (section [3.1.4.1.93](#Section_3.1.4.1.93) for protocol version 2, or [3.1.4.2.93](#Section_3.1.4.1.93) for protocol version 3)
 - ApiCloseGroupSet (section [3.1.4.2.148](#Section_3.1.4.2.148) for protocol version 3)
 <a id="Section_3.2.4.8"></a>
@@ -21021,10 +21021,10 @@ In response to event identifier CLUSTER_CHANGE_CLUSTER_STATE, an application typ
 In response to event identifier CLUSTER_CHANGE_HANDLE_CLOSE, an application typically unblocks and closes the notification port as specified in section [3.2.4.5](#Section_3.1.1.8), if there are no remaining open context handles that were previously registered with the notification port, as specified in the following sections:
 
 - ApiAddNotifyNode (section [3.1.4.1.59](#Section_3.1.4.1.59) for protocol version 2, or [3.1.4.2.59](#Section_3.1.4.2.59) for protocol version 3)
-- ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or [3.1.4.2.60](#Section_3.1.4.1.60) for protocol version 3)
-- ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.1.61) for protocol version 3)
+- ApiAddNotifyGroup (section [3.1.4.1.60](#Section_3.1.4.1.60) for protocol version 2, or [3.1.4.2.60](#Section_3.1.4.2.60) for protocol version 3)
+- ApiAddNotifyResource (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.2.61) for protocol version 3)
 - ApiAddNotifyKey (section [3.1.4.1.62](#Section_3.1.4.1.62) for protocol version 2, or [3.1.4.2.62](#Section_3.1.4.1.62) for protocol version 3)
-- ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.90](#Section_3.1.4.2.90) for protocol version 3)
+- ApiAddNotifyNetwork (section [3.1.4.1.90](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.90](#Section_3.1.4.1.90) for protocol version 3)
 - ApiAddNotifyNetInterface (section [3.1.4.1.99](#Section_3.1.4.1.99) for protocol version 2, or [3.1.4.2.99](#Section_3.1.4.2.99) for protocol version 3)
 All other event identifiers are informative to the application and suggest no particular action on the part of the client or the application.
 
@@ -21087,17 +21087,17 @@ The following steps describe connecting to a [**cluster**](#gt_cluster), opening
 
 Figure 6: Message flow: Obtaining PROPERTY_LIST
 
-First, a client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.1.3). Any implementation-specific method can be used to locate the cluster.
+First, a client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.2.3). Any implementation-specific method can be used to locate the cluster.
 
-Next, the client calls ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.83) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.88) for protocol version 3) and specifies the enumeration type CLUSTER_ENUM_RESOURCE (also specified in ApiCreateEnum). The server returns an [ENUM_LIST (section 2.2.3.5)](#Section_2.2.3.5) containing an [ENUM_ENTRY (section 2.2.3.4)](#Section_2.2.3.4) for each resource in the [**cluster state**](#gt_cluster-state).
+Next, the client calls ApiCreateEnum (section [3.1.4.1.8](#Section_3.1.4.1.85) for protocol version 2, or [3.1.4.2.8](#Section_3.1.4.2.89) for protocol version 3) and specifies the enumeration type CLUSTER_ENUM_RESOURCE (also specified in ApiCreateEnum). The server returns an [ENUM_LIST (section 2.2.3.5)](#Section_2.2.3.5) containing an [ENUM_ENTRY (section 2.2.3.4)](#Section_2.2.3.4) for each resource in the [**cluster state**](#gt_cluster-state).
 
-For each entry in the ENUM_ENTRY, the client calls ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.96) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3) providing the ENUM_ENTRY Name buffer as the resource name parameter. This ApiOpenResource call obtains an [HRES_RPC](#Section_2.2.1.4) context handle to the resource that is represented by the ENUM_ENTRY.
+For each entry in the ENUM_ENTRY, the client calls ApiOpenResource (section [3.1.4.1.9](#Section_3.1.4.1.90) for protocol version 2, or [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3) providing the ENUM_ENTRY Name buffer as the resource name parameter. This ApiOpenResource call obtains an [HRES_RPC](#Section_2.2.1.4) context handle to the resource that is represented by the ENUM_ENTRY.
 
 The client then calls ApiGetResourceType (section [3.1.4.1.16](#Section_3.1.4.1.16) for protocol version 2, or [3.1.4.2.16](#Section_3.1.4.1.16) for protocol version 3) on the HRES_RPC context handle. The returned buffer contains the resource's resource type name as a null-terminated [**Unicode string**](#gt_unicode-string).
 
 Next, because the client is searching for a resource that has the type name "IP Address", the client performs a case-insensitive comparison of the returned resource type string to the null-terminated Unicode string "IP Address".
 
-When a resource type name match is found, the client calls ApiResourceControl (section [3.1.4.1.74](#Section_3.1.4.1.74) for protocol version 2, or [3.1.4.2.74](#Section_3.1.4.2.74) for protocol version 3) passing the control code CLUSCTL_RESOURCE_GET_PRIVATE_PROPERTIES (0x001000081), as specified in section [3.1.4.3.1.17](#Section_3.1.4.3.1.17). The client sets the output buffer lpOutBuffer to a non-null pointer and sets the nOutputBuffer parameter to 0.
+When a resource type name match is found, the client calls ApiResourceControl (section [3.1.4.1.74](#Section_3.1.4.1.74) for protocol version 2, or [3.1.4.2.74](#Section_3.1.4.1.74) for protocol version 3) passing the control code CLUSCTL_RESOURCE_GET_PRIVATE_PROPERTIES (0x001000081), as specified in section [3.1.4.3.1.17](#Section_3.1.4.3.1.17). The client sets the output buffer lpOutBuffer to a non-null pointer and sets the nOutputBuffer parameter to 0.
 
 The server returns ERROR_MORE_DATA (234) and returns the size, in bytes, that is required for the output buffer by means of the *lpcbRequired* parameter.
 
@@ -21138,7 +21138,7 @@ The following diagram depicts the message flow.
 
 Figure 7: Message flow: Moving a group
 
-First, the client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.1.3). The client knows the names of the nodes and can use either node to establish the connection.
+First, the client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.2.3). The client knows the names of the nodes and can use either node to establish the connection.
 
 The client next opens a context handle to the group by calling ApiOpenGroup (section [3.1.4.1.42](#Section_3.1.4.1.42) for protocol version 2, or [3.1.4.2.42](#Section_3.1.4.2.42) for protocol version 3) with the *lpszGroupName* parameter set to the null-terminated [**Unicode string**](#gt_unicode-string) "Application Group".
 
@@ -21165,19 +21165,19 @@ The following diagram depicts the message flow for this example.
 
 Figure 9: Message flow: Registering and receiving events from a notification port
 
-First, the client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.1.3). Any implementation-specific method can be used to locate the cluster. The client reserves the [HCLUSTER_RPC](#Section_2.2.1.1) context handle, obtained in the [Reconnect Logic Initialization (section 3.2.3.3)](#Section_3.2.3.3), for invocation of **ApiAddNotifyCluster** described in the following paragraphs.
+First, the client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.2.3). Any implementation-specific method can be used to locate the cluster. The client reserves the [HCLUSTER_RPC](#Section_2.2.1.1) context handle, obtained in the [Reconnect Logic Initialization (section 3.2.3.3)](#Section_3.2.3), for invocation of **ApiAddNotifyCluster** described in the following paragraphs.
 
-The client next obtains an [HRES_RPC](#Section_2.2.1.4) context handle to the resource by calling **ApiOpenResource** (section [3.1.4.1.9](#Section_3.1.4.1.96) for protocol version 2 or section [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3) with the *lpszResourceName* parameter set to the null-terminated [**Unicode string**](#gt_unicode-string) "Resource1".
+The client next obtains an [HRES_RPC](#Section_2.2.1.4) context handle to the resource by calling **ApiOpenResource** (section [3.1.4.1.9](#Section_3.1.4.1.90) for protocol version 2 or section [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3) with the *lpszResourceName* parameter set to the null-terminated [**Unicode string**](#gt_unicode-string) "Resource1".
 
 The caller notifies the client through the programming abstraction to create a new notification port. The client obtains an [HNOTIFY_RPC](#Section_2.2.1.6) context handle on behalf of the caller by calling the ApiCreateNotify (section [3.1.4.1.56](#Section_3.1.4.1.56) for protocol version 2, or [3.1.4.2.56](#Section_3.1.4.2.56) for protocol version 3) method. A new client-side notification data structure is allocated and initialized with the context handle of the port and the pointer to the list of filters set to NULL. A separate thread of execution is started and calls the **ApiGetNotify** method; this is called the port service thread. This method will not complete because no event filters have been registered.
 
-The caller now registers an event filter with the client that causes the server to provide an indication each time a group is created or deleted. The client creates an event filter data structure, initializes it with the caller supplied data, and links it to the notification port data structure. The client calls **ApiAddNotifyCluster** (section [3.1.4.1.58](#Section_3.1.4.1.58) for protocol version 2 or section [3.1.4.2.58](#Section_3.1.4.1.58) for protocol version 3) with the following:
+The caller now registers an event filter with the client that causes the server to provide an indication each time a group is created or deleted. The client creates an event filter data structure, initializes it with the caller supplied data, and links it to the notification port data structure. The client calls **ApiAddNotifyCluster** (section [3.1.4.1.58](#Section_3.1.4.1.58) for protocol version 2 or section [3.1.4.2.58](#Section_3.1.4.2.58) for protocol version 3) with the following:
 
 - The *hNotify* parameter set to the HNOTIFY_RPC context handle obtained in the previous step.
 - The *hCluster* parameter set to the HCLUSTER_RPC context handle obtained in section 3.2.3.
 - The *dwFilter* parameter set to the values CLUSTER_CHANGE_GROUP_ADDED and CLUSTER_CHANGE_GROUP_DELETED logically OR'd together (0x00006000).
 - The *dwNotifyKey* parameter set to the address of the filter block created for this registration request.
-The caller next registers an event filter with the client that will cause the server to provide an indication each time "Resource1" changes state. The client creates an event filter data structure, initializes it with the caller supplied data, and links it to the notification port data structure. The client calls **ApiAddNotifyResource** (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.1.61) for protocol version 3) with the following:
+The caller next registers an event filter with the client that will cause the server to provide an indication each time "Resource1" changes state. The client creates an event filter data structure, initializes it with the caller supplied data, and links it to the notification port data structure. The client calls **ApiAddNotifyResource** (section [3.1.4.1.61](#Section_3.1.4.1.61) for protocol version 2, or [3.1.4.2.61](#Section_3.1.4.2.61) for protocol version 3) with the following:
 
 - The *hNotify* parameter set to the HNOTIFY_RPC context handle obtained from the previous **ApiCreateNotify** call.
 - The *hResource* parameter set to the HRES_RPC context handle obtained from the previous **ApiOpenResource** call.
@@ -21234,11 +21234,11 @@ The following diagram depicts the message flow for this example.
 
 Figure 11: Message flow: Setting a complex dependency relationship for a resource
 
-First, the client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.1.3). Any implementation-specific method can be used to locate the cluster.
+First, the client initializes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the cluster, as specified in section [3.2.3](#Section_3.2.3). Any implementation-specific method can be used to locate the cluster.
 
-The client next obtains three [HRES_RPC](#Section_2.2.1.4) context handles to the Network Name and IP address resources by calling ApiOpenResource (see section [3.1.4.2.9](#Section_3.1.4.2.99) for protocol version 3) with the *lpszResourceName* parameter set to the null-terminated [**Unicode strings**](#gt_unicode-string), "Name1", "IP1", and "IP2", respectively, for each call.
+The client next obtains three [HRES_RPC](#Section_2.2.1.4) context handles to the Network Name and IP address resources by calling ApiOpenResource (see section [3.1.4.2.9](#Section_3.1.4.2.92) for protocol version 3) with the *lpszResourceName* parameter set to the null-terminated [**Unicode strings**](#gt_unicode-string), "Name1", "IP1", and "IP2", respectively, for each call.
 
-The client then obtains the resource IDs for the two IP address resources through use of the ApiResourceControl (see section [3.1.4.2.74](#Section_3.1.4.2.74) for protocol version 3). If the size of the resource ID string is well known, the client can pre-allocate a suitably sized buffer for each ID string including space for the null-termination (in this example, five buffers will eventually be needed). Otherwise, it will discover the size of the ID string for each resource by setting the *nOutBufferSize* parameter to zero and the *lpcbRequired* pointer to the address of the 32-bit integer that will receive the size, in bytes, of the ID string.
+The client then obtains the resource IDs for the two IP address resources through use of the ApiResourceControl (see section [3.1.4.2.74](#Section_3.1.4.1.74) for protocol version 3). If the size of the resource ID string is well known, the client can pre-allocate a suitably sized buffer for each ID string including space for the null-termination (in this example, five buffers will eventually be needed). Otherwise, it will discover the size of the ID string for each resource by setting the *nOutBufferSize* parameter to zero and the *lpcbRequired* pointer to the address of the 32-bit integer that will receive the size, in bytes, of the ID string.
 
 Using the allocated buffers holding the respective ID strings of the IP address resources, the client calls ApiResourceControl once for each IP address. For each IP address resource, the client sets the *hResource* parameter to the respective HRES_RPC context handle, the *dwControlCode* parameter to CLUSCTL_RESOURCE_GET_ID (0x1000039), and the *lpOutBuffer* parameter to a different allocated buffer each time.
 
@@ -26361,7 +26361,7 @@ The following versions of Windows implement only the client side of ClusAPI Prot
 
 <221> Section 3.2.1: Windows Vista SP1 and Windows Server 2008 [**clients**](#gt_client) do not maintain granted level of access.
 
-<222> Section 3.2.3.3: Windows NT does not retry the ApiGetClusterName (section [3.1.4.1.4](#Section_3.1.4.1.45) for protocol version 2, or [3.1.4.2.4](#Section_3.1.4.2.47) for protocol version 3) method if it fails with error 0x000006BF (RPC_CALL_FAILED_DNE).
+<222> Section 3.2.3.3: Windows NT does not retry the ApiGetClusterName (section [3.1.4.1.4](#Section_3.1.4.1.47) for protocol version 2, or [3.1.4.2.4](#Section_3.1.4.2.47) for protocol version 3) method if it fails with error 0x000006BF (RPC_CALL_FAILED_DNE).
 
 <223> Section 3.2.4.1.2: Clients running Windows NT do not perform the procedure that is specified in this section for version 2.0 of the protocol.
 

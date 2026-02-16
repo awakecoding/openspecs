@@ -425,7 +425,7 @@ The following diagram shows a typical [**connection-oriented NTLM**](#gt_connect
 
 Figure 1: Typical NTLM authentication message flow
 
-**Note** In the preceding diagram, the embedding of NTLM messages in the application protocol is shown by placing the NTLM messages within [ ] brackets. NTLM messages for both connection-oriented and [**connectionless**](#gt_connectionless-protocol) authentication are embedded in the application protocol as shown. Variations between the connection-oriented and connectionless NTLM protocol sequence are documented in sections [1.3.1.1](#Section_3.2.5.1) and [1.3.1.2](#Section_3.1.5.2).
+**Note** In the preceding diagram, the embedding of NTLM messages in the application protocol is shown by placing the NTLM messages within [ ] brackets. NTLM messages for both connection-oriented and [**connectionless**](#gt_connectionless-protocol) authentication are embedded in the application protocol as shown. Variations between the connection-oriented and connectionless NTLM protocol sequence are documented in sections [1.3.1.1](#Section_3.1.5.1) and [1.3.1.2](#Section_3.1.5.2).
 
 After an authenticated NTLM [**session**](#gt_session) is established, the subsequent application messages can be protected with NTLM [**session security**](#gt_session-security). This is done by the application, which specifies what options (such as message integrity or confidentiality, as specified in the Abstract Data Model) it requires, before the NTLM authentication message sequence begins.<3>
 
@@ -671,7 +671,7 @@ If the NTLMSSP_REQUEST_TARGET flag is not set in **NegotiateFlags**, indicating 
 - **TargetNameBufferOffset** field SHOULD be set to the offset from the beginning of the CHALLENGE_MESSAGE to where the **TargetName** would be in **Payload** if it were present.
 **NegotiateFlags (4 bytes):** A **NEGOTIATE** structure that contains a set of flags, as defined by section [2.2.2.5](#Section_2.2.2.5). The server sets flags to indicate options it supports or, if there has been a NEGOTIATE_MESSAGE (section 2.2.1.1), the choices it has made from the options offered by the client. If the client has set the NTLMSSP_NEGOTIATE_SIGN in the NEGOTIATE_MESSAGE the Server MUST return it.
 
-**ServerChallenge (8 bytes):** A 64-bit value that contains the NTLM challenge. The challenge is a 64-bit [**nonce**](#gt_nonce). The processing of the ServerChallenge is specified in sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_1.3).
+**ServerChallenge (8 bytes):** A 64-bit value that contains the NTLM challenge. The challenge is a 64-bit [**nonce**](#gt_nonce). The processing of the ServerChallenge is specified in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_1.3).
 
 **Reserved (8 bytes):** An 8-byte array whose elements MUST be zero when sent and MUST be ignored on receipt.
 
@@ -874,7 +874,7 @@ packet-beta
 
 **Workstation (variable):** The name of the computer to which the user is logged on. **Workstation** MUST be encoded in the negotiated character set.
 
-**EncryptedRandomSessionKey (variable):** The client's encrypted random [**session key**](#gt_session-key). **EncryptedRandomSessionKey** and its usage are defined in sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_1.3).
+**EncryptedRandomSessionKey (variable):** The client's encrypted random [**session key**](#gt_session-key). **EncryptedRandomSessionKey** and its usage are defined in sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_1.3).
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 NTLM Structures
@@ -1214,7 +1214,7 @@ packet-beta
 
 The following sections offer a detailed specification of the NTLM message computation:
 
-- Sections [3.1.5](#Section_3.2.5) and [3.2.5](#Section_1.3) specify how the client and server compute messages and respond to messages.
+- Sections [3.1.5](#Section_3.1.5) and [3.2.5](#Section_1.3) specify how the client and server compute messages and respond to messages.
 - Section [3.3](#Section_1.3) specifies how the response computation is calculated, depending on whether NTLM v1 or NTLM v2 is used. This includes the ComputeResponse function, as well as the [**NTOWF**](#gt_ntowf) and [**LMOWF**](#gt_lmowf) functions, which are used by the ComputeResponse function.
 - Section [3.4](#Section_1.3) specifies how message integrity and message confidentiality are provided, including a detailed specification of the algorithms used to calculate the signing and sealing [**keys**](#gt_key).
 The Cryptographic Operations Reference in section [6](#Section_6) defines the cryptographic primitives used in this section.
@@ -1573,7 +1573,7 @@ When this process is complete, the client MUST send the AUTHENTICATE_MESSAGE to 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Connectionless
 
-The client action for connectionless NTLM authentication is similar to that of connection-oriented authentication (section [3.1.5.1](#Section_3.2.5.1)). However, the first message sent in connectionless authentication is the CHALLENGE_MESSAGE (section [2.2.1.2](#Section_2.2.1.2)) from the server to the client; there is no client-initiated NEGOTIATE_MESSAGE (section [2.2.1.1](#Section_2.2.1.1)) as in the connection-oriented authentication.
+The client action for connectionless NTLM authentication is similar to that of connection-oriented authentication (section [3.1.5.1](#Section_3.1.5.1)). However, the first message sent in connectionless authentication is the CHALLENGE_MESSAGE (section [2.2.1.2](#Section_2.2.1.2)) from the server to the client; there is no client-initiated NEGOTIATE_MESSAGE (section [2.2.1.1](#Section_2.2.1.1)) as in the connection-oriented authentication.
 
 The message processing for connectionless NTLM authentication<52> is as specified in the following sections.
 
@@ -2149,7 +2149,7 @@ Both the client and the server now have the session, signing, and sealing keys. 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Connectionless NTLM
 
-The server action for connectionless NTLM authentication is similar to that of connection-oriented authentication (section [3.1.5.1](#Section_3.2.5.1)). However, the first message sent in connectionless authentication is the CHALLENGE_MESSAGE from the server to the client; there is no client-initiated NEGOTIATE_MESSAGE as in the connection-oriented authentication.
+The server action for connectionless NTLM authentication is similar to that of connection-oriented authentication (section [3.1.5.1](#Section_3.1.5.1)). However, the first message sent in connectionless authentication is the CHALLENGE_MESSAGE from the server to the client; there is no client-initiated NEGOTIATE_MESSAGE as in the connection-oriented authentication.
 
 The message processing for connectionless NTLM authentication<70> is as specified in the following sections.
 

@@ -358,7 +358,7 @@ This protocol allows a [**CredSSP server**](#gt_credssp-server) to authenticate 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-Each security package supporting this protocol implements versioning independently and negotiates version and capabilities as part of initialization. For Kerberos and NTLM, it is required that the [**CredSSP server**](#gt_credssp-server) send a **RemoteCallKerbNegotateVersion** message (sections [2.2.2.1.1](#Section_2.2.2.1.13) and [3.1.5.1](#Section_3.1.5.1)) or a **RemoteCallNtlmNegotiateVersion** message (sections [2.2.2.2.1](#Section_2.2.2.2.1) and [3.1.5.19](#Section_3.1.5.19)), respectively, with the maximum protocol version it supports. The [**CredSSP client**](#gt_credssp-client) responds with a matching message containing the protocol version that will be used for future communications. As the protocol currently has only one version; this maximum version is required to be zero.
+Each security package supporting this protocol implements versioning independently and negotiates version and capabilities as part of initialization. For Kerberos and NTLM, it is required that the [**CredSSP server**](#gt_credssp-server) send a **RemoteCallKerbNegotateVersion** message (sections [2.2.2.1.1](#Section_2.2.2.1.17) and [3.1.5.1](#Section_3.1.5.1)) or a **RemoteCallNtlmNegotiateVersion** message (sections [2.2.2.2.1](#Section_2.2.2.2.1) and [3.1.5.19](#Section_3.1.5.19)), respectively, with the maximum protocol version it supports. The [**CredSSP client**](#gt_credssp-client) responds with a matching message containing the protocol version that will be used for future communications. As the protocol currently has only one version; this maximum version is required to be zero.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1009,7 +1009,7 @@ ULONG X509PublicKeyLen;
 
 **CallId:** An ID from the **RemoteGuardCallId** enumeration (section [2.2.1.1](#Section_2.2.1.1)) that determines which of the following union members is associated with the current message.
 
-**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.13)) that contains the maximum version agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used.
+**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.17)) that contains the maximum version agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used.
 
 **BuildAsReqAuthenticator:** A structure (section [2.2.2.1.2](#Section_2.2.2.1.2)) used to create an AS_REQ message authenticator.
 
@@ -1256,7 +1256,7 @@ KERB_RPC_ENCRYPTION_KEY* SharedKey;
 
 **CallId:** An ID from the **RemoteGuardCallId** enumeration (section [2.2.1.1](#Section_2.2.1.1)) that determines which of the following union members is associated with the current message.
 
-**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.13)) that contains the **VersionToUse** agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used for future exchanges.
+**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.17)) that contains the **VersionToUse** agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used for future exchanges.
 
 **BuildAsReqAuthenticator:** A structure (section [2.2.2.1.2](#Section_2.2.2.1.2)) that contains the padata-type of the **PreauthData** field and the padata-value to be included in the KRB_AS_REQ message [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 5.2.7.
 
@@ -1613,7 +1613,7 @@ A single structure defines all possible inputs, and another structure defines al
 
 Kerberos calls are formatted as **KerbCredIsoRemoteInput** objects (section [2.2.1.3.7](#Section_2.2.1.3.7)), and responses are formatted as **KerbCredIsoRemoteOutput** objects (section [2.2.1.2.10](#Section_2.2.1.2.10)). The structures, as defined in the IDL, are made primarily of unions. In this way, the single **KerbCredIsoRemoteInput** and **KerbCredIsoRemoteOutput** structure types can represent multiple Input and Output message pairs as documented in the following sections.
 
-Some Kerberos messages make use of [**Abstract Syntax Notation One (ASN.1)**](#gt_abstract-syntax-notation-one-asn1) structures, as specified in [[ITUX680]](https://go.microsoft.com/fwlink/?LinkId=89923), and are encoded using [**Distinguished Encoding Rules (DER)**](#gt_distinguished-encoding-rules-der), as specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593) section 10. The definitions of these structures are contained in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and [[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316). When such structure packing is used, the data type of the message field is **KERB_ASN1_DATA** (section [2.2.1.2.1](#Section_2.2.1.2.10)). These fields are used in order to pack standards-compliant, predefined Kerberos structures, avoiding additional overhead incurred by a custom data type in the Kerberos [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file.
+Some Kerberos messages make use of [**Abstract Syntax Notation One (ASN.1)**](#gt_abstract-syntax-notation-one-asn1) structures, as specified in [[ITUX680]](https://go.microsoft.com/fwlink/?LinkId=89923), and are encoded using [**Distinguished Encoding Rules (DER)**](#gt_distinguished-encoding-rules-der), as specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593) section 10. The definitions of these structures are contained in [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) and [[RFC6113]](https://go.microsoft.com/fwlink/?LinkId=226316). When such structure packing is used, the data type of the message field is **KERB_ASN1_DATA** (section [2.2.1.2.1](#Section_2.2.1.2.1)). These fields are used in order to pack standards-compliant, predefined Kerberos structures, avoiding additional overhead incurred by a custom data type in the Kerberos [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) file.
 
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 NegotiateVersion
@@ -1704,7 +1704,7 @@ PLARGE_INTEGER TimeSkew; // optional
 
 } VerifyServiceTicket;
 
-**PackedTicket:** A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.10)) that contains the [**DER**](#gt_distinguished-encoding-rules-der)-encoded Kerberos ticket to be verified and decrypted.
+**PackedTicket:** A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.1)) that contains the [**DER**](#gt_distinguished-encoding-rules-der)-encoded Kerberos ticket to be verified and decrypted.
 
 **ServiceKey:** A pointer to a **KERB_RPC_ENCRYPTION_KEY** structure (section [2.2.1.2.8](#Section_2.2.1.2.8)) that contains the key required to decrypt the ticket.
 
@@ -1769,7 +1769,7 @@ ULONG KeyUsage;
 
 **SubKey:** Optional. A pointer to a **KERB_RPC_ENCRYPTION_KEY** structure (section 2.2.1.2.8) that contains the sub-session key negotiated with KDC as defined in [RFC4120] section 1.7.
 
-**AuthData:** Optional. A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.10)) that contains additional authentication data.
+**AuthData:** Optional. A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.1)) that contains additional authentication data.
 
 **GssChecksum:** Optional. A pointer to a **KERB_ASN1_DATA** structure that contains the checksum of application data associated with a request.
 
@@ -1817,7 +1817,7 @@ KERB_RPC_ENCRYPTION_KEY* Key;
 
 } DecryptApReply;
 
-**EncryptedReply:** A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.10)) that contains the [**DER**](#gt_distinguished-encoding-rules-der)-encoded enc-part of a **KRB_AP_REP** message to be decrypted.
+**EncryptedReply:** A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.1)) that contains the [**DER**](#gt_distinguished-encoding-rules-der)-encoded enc-part of a **KRB_AP_REP** message to be decrypted.
 
 **Key:** A pointer to a **KERB_RPC_ENCRYPTION_KEY** structure (section [2.2.1.2.8](#Section_2.2.1.2.8)) that is the opaque structure associated with the key that the [**CredSSP server**](#gt_credssp-server) uses to decrypt **EncryptedReply**. The exact format of this structure is [**CredSSP client**](#gt_credssp-client) dependent. The key comes from a previous **UnpackKdcReplyBody** output message (section [2.2.2.1.6](#Section_2.2.2.1.6)).
 
@@ -1856,7 +1856,7 @@ ULONG KeyUsage;
 
 } UnpackKdcReplyBody;
 
-**EncryptedData:** A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.10)) that contains the [**DER**](#gt_distinguished-encoding-rules-der)-encoded, encrypted reply data to be decrypted.
+**EncryptedData:** A pointer to a **KERB_ASN1_DATA** structure (section [2.2.1.2.1](#Section_2.2.1.2.1)) that contains the [**DER**](#gt_distinguished-encoding-rules-der)-encoded, encrypted reply data to be decrypted.
 
 **Key:** A pointer to a **KERB_RPC_ENCRYPTION_KEY** structure (section [2.2.1.2.8](#Section_2.2.1.2.8)) that is the opaque structure associated with the decryption key that the [**CredSSP server**](#gt_credssp-server) uses. The exact format of this structure is [**CredSSP client**](#gt_credssp-client) dependent. The key comes from a previous **UnpackKdcReplyBody** output message (section 2.2.2.1.6) or the CredSSP client.
 
@@ -2642,7 +2642,7 @@ None.
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 RemoteCallKerbNegotiateVersion
 
-The **RemoteCallKerbNegotiateVersion** call uses the Kerberos NegotiateVersion message (section [2.2.2.1.1](#Section_2.2.2.1.13)) to negotiate the protocol version that the Kerberos packages on the [**CredSSP server**](#gt_credssp-server) and [**CredSSP client**](#gt_credssp-client) will use to communicate. It SHOULD be called before any other calls are made. As the protocol currently has only one version, this maximum MUST be zero.
+The **RemoteCallKerbNegotiateVersion** call uses the Kerberos NegotiateVersion message (section [2.2.2.1.1](#Section_2.2.2.1.17)) to negotiate the protocol version that the Kerberos packages on the [**CredSSP server**](#gt_credssp-server) and [**CredSSP client**](#gt_credssp-client) will use to communicate. It SHOULD be called before any other calls are made. As the protocol currently has only one version, this maximum MUST be zero.
 
 To perform this message exchange, the CredSSP server MUST send a **KerbCredIsoRemoteInput** object to the CredSSP client. The **CallId** field MUST be set to RemoteCallKerbNegotiateVersion, and the **MaxSupportedVersion** member of the union MUST be populated.
 

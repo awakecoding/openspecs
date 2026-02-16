@@ -165,7 +165,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The [**advanced flow-control extension (AFCE)**](#gt_advanced-flow-control-extension-afce) to [**web services reliable messaging protocol (WSRM)**](#gt_53cb509b-61f6-4d10-97e7-f94888da4a0c) attempts to minimize the number of dropped messages by synchronizing the rate at which the [**reliable messaging source (RMS)**](#gt_reliable-messaging-source-rms) sends messages with the rate at which the [**reliable messaging destination (RMD)**](#gt_reliable-messaging-destination-rmd) can receive them. This minimization is achieved via the introduction of the [BufferRemaining](#Section_4.1.5) element in the WSRM protocol's [SequenceAcknowledgement header block](#Section_2.2.1). This element is used to inform the RMS of the number of messages that the RMD is capable of receiving before messages start being dropped.
+The [**advanced flow-control extension (AFCE)**](#gt_advanced-flow-control-extension-afce) to [**web services reliable messaging protocol (WSRM)**](#gt_53cb509b-61f6-4d10-97e7-f94888da4a0c) attempts to minimize the number of dropped messages by synchronizing the rate at which the [**reliable messaging source (RMS)**](#gt_reliable-messaging-source-rms) sends messages with the rate at which the [**reliable messaging destination (RMD)**](#gt_reliable-messaging-destination-rmd) can receive them. This minimization is achieved via the introduction of the [BufferRemaining](#Section_4.1.2) element in the WSRM protocol's [SequenceAcknowledgement header block](#Section_2.2.1). This element is used to inform the RMS of the number of messages that the RMD is capable of receiving before messages start being dropped.
 
 The RMS uses the BufferRemaining element's value to adjust the rate at which messages are sent. The RMS will not send new messages if the BufferRemaining element's value in a SequenceAcknowledgement header block is 0.
 
@@ -225,7 +225,7 @@ The [**advanced flow-control extension (AFCE)**](#gt_advanced-flow-control-exten
 
 The SequenceAcknowledgement header block is the SequenceAcknowledgement header block specified in [**WSRM**](#gt_53cb509b-61f6-4d10-97e7-f94888da4a0c) with the following extension:
 
-- The extensibility element of the SequenceAcknowledgement header block, as specified by the WSRM specifications [[WSRM1-0]](https://go.microsoft.com/fwlink/?LinkId=117285), [[WSRM1-1]](https://go.microsoft.com/fwlink/?LinkId=117286), and [[WSRM1-2]](https://go.microsoft.com/fwlink/?LinkId=192440) MUST contain a [BufferRemaining](#Section_4.1.5) element.
+- The extensibility element of the SequenceAcknowledgement header block, as specified by the WSRM specifications [[WSRM1-0]](https://go.microsoft.com/fwlink/?LinkId=117285), [[WSRM1-1]](https://go.microsoft.com/fwlink/?LinkId=117286), and [[WSRM1-2]](https://go.microsoft.com/fwlink/?LinkId=192440) MUST contain a [BufferRemaining](#Section_4.1.2) element.
 <a id="Section_2.2.2"></a>
 ### 2.2.2 AckRequested Header Block
 
@@ -336,7 +336,7 @@ The [**reliable messaging destination (RMD)**](#gt_reliable-messaging-destinatio
 If the GET_BUFFER_REMAINING event is signaled, the following actions MUST be performed:
 
 - The GET_BUFFER_REMAINING event MUST return the value of the [**advanced flow-control object's (AFCO)**](#gt_advanced-flow-control-object-afco) **Buffer Remaining** field.
-- The RMD MUST use the return value to set the value of the [BufferRemaining](#Section_4.1.5) element in the SequenceAcknowledgement header block.
+- The RMD MUST use the return value to set the value of the [BufferRemaining](#Section_4.1.2) element in the SequenceAcknowledgement header block.
 <a id="Section_3.1.7.2"></a>
 #### 3.1.7.2 MESSAGE_PROCESSED
 
@@ -455,7 +455,7 @@ The SEQ_ACK_RECEIVED event MUST be triggered by the [**reliable messaging source
 
 The SEQ_ACK_RECEIVED event MUST be signaled with the following arguments:
 
-- The [BufferRemaining](#Section_4.1.5) argument corresponding to the value of the BufferRemaining element in the SequenceAcknowledgement header block.
+- The [BufferRemaining](#Section_4.1.2) argument corresponding to the value of the BufferRemaining element in the SequenceAcknowledgement header block.
 - If the BufferRemaining element is missing from the SequenceAcknowledgement header block, the BufferRemaining argument MUST be set to -1.
 If the SEQ_ACK_RECEIVED event is signaled, the RMS MUST perform the following actions:
 
@@ -490,7 +490,7 @@ If the SEQ_TERMINATED event is signaled, the RMS MUST perform the following acti
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-The following is an example of a [**reliable messaging source (RMS)**](#gt_reliable-messaging-source-rms) sending 3 messages to a [**reliable messaging destination (RMD)**](#gt_reliable-messaging-destination-rmd). The RMD is capable of storing a maximum of 2 messages at a time. Once stored, the messages are passed to the [**application destination (AD)**](#gt_application-destination-ad) for processing. In this example, the AD is offline when the RMD starts receiving messages. The RMD uses [SequenceAcknowledgement header blocks](#Section_2.2.1) to acknowledge every message received. The [BufferRemaining](#Section_4.1.5) element is included in all SequenceAcknowledgement header blocks and the RMS adjusts the rate at which it sends new messages accordingly.
+The following is an example of a [**reliable messaging source (RMS)**](#gt_reliable-messaging-source-rms) sending 3 messages to a [**reliable messaging destination (RMD)**](#gt_reliable-messaging-destination-rmd). The RMD is capable of storing a maximum of 2 messages at a time. Once stored, the messages are passed to the [**application destination (AD)**](#gt_application-destination-ad) for processing. In this example, the AD is offline when the RMD starts receiving messages. The RMD uses [SequenceAcknowledgement header blocks](#Section_2.2.1) to acknowledge every message received. The [BufferRemaining](#Section_4.1.2) element is included in all SequenceAcknowledgement header blocks and the RMS adjusts the rate at which it sends new messages accordingly.
 
 The following figure shows the diagram of the message flow between the RMS and the RMD.
 
@@ -520,7 +520,7 @@ Line numbers 1-19 in Table 1 are the SOAP envelope of message 1. Line 11 shows t
 
 Message 2 in Figure 4 contains the [SequenceAcknowledgement header block](#Section_2.2.1) sent by the RMD in response to message 1.
 
-Line numbers 1-24 in Table 2 are the SOAP envelope of message 2. Line 11 shows that the [**RMD**](#gt_reliable-messaging-destination-rmd) has received the first message in the [**Sequence**](#gt_sequence). Lines 13-17 show the [BufferRemaining](#Section_4.1.5) element with a value of 1. This means the RMD is capable of receiving one more message.
+Line numbers 1-24 in Table 2 are the SOAP envelope of message 2. Line 11 shows that the [**RMD**](#gt_reliable-messaging-destination-rmd) has received the first message in the [**Sequence**](#gt_sequence). Lines 13-17 show the [BufferRemaining](#Section_4.1.2) element with a value of 1. This means the RMD is capable of receiving one more message.
 
 **Table 2**
 
@@ -544,7 +544,7 @@ Line numbers 1-19 in Table 3 are the SOAP envelope of message 3. Line 11 shows t
 
 Message 4 in Figure 4 contains the [SequenceAcknowledgement header block](#Section_2.2.1) sent by the [**RMD**](#gt_reliable-messaging-destination-rmd) in response to message 2.
 
-Line numbers 1-24 in Table 4 are the SOAP envelope of message 4. Line 11 shows that the RMD has received the first and second messages in the [**Sequence**](#gt_sequence). Lines 13-17 show the [BufferRemaining](#Section_4.1.5) element with a value of 0. This means the RMD is not capable of receiving more messages until the AD comes online and starts processing the ones already received.
+Line numbers 1-24 in Table 4 are the SOAP envelope of message 4. Line 11 shows that the RMD has received the first and second messages in the [**Sequence**](#gt_sequence). Lines 13-17 show the [BufferRemaining](#Section_4.1.2) element with a value of 0. This means the RMD is not capable of receiving more messages until the AD comes online and starts processing the ones already received.
 
 **Table 4**
 
@@ -556,7 +556,7 @@ Line numbers 1-24 in Table 4 are the SOAP envelope of message 4. Line 11 shows t
 
 Message 5 in Figure 4 contains the [SequenceAcknowledgement header block](#Section_2.2.1) sent by the [**RMD**](#gt_reliable-messaging-destination-rmd) in response to the AD coming online and processing message 1. The RMD removed message 1 from its store once it was processed, allowing the RMD to receive a new message in message 1's stead.
 
-Line numbers 1-24 in Table 5 are the SOAP envelope of message 5. Line 11 shows that the RMD has received the first and second messages in the [**Sequence**](#gt_sequence), which has not changed since message 4. Lines 13-17 show the [BufferRemaining](#Section_4.1.5) element with a value of 1. This means the RMD is now once again capable of receiving a message.
+Line numbers 1-24 in Table 5 are the SOAP envelope of message 5. Line 11 shows that the RMD has received the first and second messages in the [**Sequence**](#gt_sequence), which has not changed since message 4. Lines 13-17 show the [BufferRemaining](#Section_4.1.2) element with a value of 1. This means the RMD is now once again capable of receiving a message.
 
 **Table 5**
 
@@ -566,7 +566,7 @@ Line numbers 1-24 in Table 5 are the SOAP envelope of message 5. Line 11 shows t
 <a id="Section_4.1.6"></a>
 ### 4.1.6 Message 6: Sequence(MessageNumber = 3)
 
-Message 6 in Figure 4 is the third message in the [**Sequence**](#gt_sequence) sent by the [**RMS**](#gt_reliable-messaging-source-rms) in response to processing the [BufferRemaining](#Section_4.1.5) element in the [SequenceAcknowledgement header block](#Section_2.2.1) of message 5. The BufferRemaining element, with a value of 1, informed the RMS of the [**RMD**](#gt_reliable-messaging-destination-rmd)'s capability of receiving a new message.
+Message 6 in Figure 4 is the third message in the [**Sequence**](#gt_sequence) sent by the [**RMS**](#gt_reliable-messaging-source-rms) in response to processing the [BufferRemaining](#Section_4.1.2) element in the [SequenceAcknowledgement header block](#Section_2.2.1) of message 5. The BufferRemaining element, with a value of 1, informed the RMS of the [**RMD**](#gt_reliable-messaging-destination-rmd)'s capability of receiving a new message.
 
 Line numbers 1-19 in Table 6 are the SOAP envelope of message 6. Line 11 shows this to be the third message in the Sequence.
 
@@ -580,7 +580,7 @@ Line numbers 1-19 in Table 6 are the SOAP envelope of message 6. Line 11 shows t
 
 Message 7 in Figure 4 contains the [SequenceAcknowledgement header block](#Section_2.2.1) sent by the [**RMD**](#gt_reliable-messaging-destination-rmd) in response to message 6.
 
-Line numbers 1-24 in Table 7 are the SOAP envelope of message 7. Line 11 shows that the RMD has received the first, second, and third messages in the [**Sequence**](#gt_sequence). Lines 13-17 show the [BufferRemaining](#Section_4.1.5) element with a value of 0. This 0 value means that the RMD is once again incapable of receiving more messages.
+Line numbers 1-24 in Table 7 are the SOAP envelope of message 7. Line 11 shows that the RMD has received the first, second, and third messages in the [**Sequence**](#gt_sequence). Lines 13-17 show the [BufferRemaining](#Section_4.1.2) element with a value of 0. This 0 value means that the RMD is once again incapable of receiving more messages.
 
 **Table 7**
 
@@ -593,7 +593,7 @@ Line numbers 1-24 in Table 7 are the SOAP envelope of message 7. Line 11 shows t
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The [BufferRemaining](#Section_4.1.5) element is secured with the entire [SequenceAcknowledgement header block](#Section_2.2.1) containing it.
+The [BufferRemaining](#Section_4.1.2) element is secured with the entire [SequenceAcknowledgement header block](#Section_2.2.1) containing it.
 
 For information about securing a reliable session, including the SequenceAcknowledgement header block, see section 5 of [[WSRM1-0]](https://go.microsoft.com/fwlink/?LinkId=117285), [[WSRM1-1]](https://go.microsoft.com/fwlink/?LinkId=117286), and [[WSRM1-2]](https://go.microsoft.com/fwlink/?LinkId=192440).
 

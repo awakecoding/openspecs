@@ -395,7 +395,7 @@ The graphics commands specified in section [2.2](#Section_2.2) are used to effic
 
 - Cache management commands are used to evict entries from a bitmap cache and to notify the server of cache entries stored in an optional client-side persistent bitmap cache.
 - **RDPGFX_EVICT_CACHE_ENTRY_PDU** (section [2.2.2.8](#Section_2.2.2.8))
-- **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16))
+- **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16.1))
 - **RDPGFX_CACHE_IMPORT_REPLY_PDU** (section [2.2.2.17](#Section_2.2.2.17))
 - Surface management commands are used to manage the lifetime of offscreen surfaces, to map offscreen surfaces to a graphics output buffer, and to adjust the dimensions of any associated graphics output buffers.
 - **RDPGFX_CREATE_SURFACE_PDU** (section [2.2.2.9](#Section_2.2.2.9))
@@ -457,7 +457,7 @@ Furthermore, clients implementing the Remote Desktop Protocol: Graphics Pipeline
 
 - **RDPGFX_FRAME_ACKNOWLEDGE_PDU** (section [2.2.2.13](#Section_2.2.2.13))
 - **RDPGFX_CAPS_ADVERTISE_PDU** (section [2.2.2.18](#Section_2.2.2.18))
-Clients that implement optional persistent bitmap caching must be capable of sending the **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16)) message and processing the **RDPGFX_CACHE_IMPORT_REPLY_PDU** (section [2.2.2.17](#Section_2.2.2.17)) message.
+Clients that implement optional persistent bitmap caching must be capable of sending the **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16.1)) message and processing the **RDPGFX_CACHE_IMPORT_REPLY_PDU** (section [2.2.2.17](#Section_2.2.2.17)) message.
 
 Clients that implement Enhanced RemoteApp ([MS-RDPERP](../MS-RDPERP/MS-RDPERP.md) section 1.3.3) must be capable of processing the **RDPGFX_MAP_SURFACE_TO_WINDOW_PDU** (section [2.2.2.20](#Section_2.2.2.20)) message.
 
@@ -489,7 +489,7 @@ Servers implementing the Remote Desktop Protocol: Graphics Pipeline Extension mu
 Furthermore, servers implementing the Remote Desktop Protocol: Graphics Pipeline Extension must be capable of processing the following messages:
 
 - **RDPGFX_FRAME_ACKNOWLEDGE_PDU** (section [2.2.2.13](#Section_2.2.2.13))
-- **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16))
+- **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16.1))
 - **RDPGFX_CAPS_ADVERTISE_PDU** (section [2.2.2.18](#Section_2.2.2.18))
 Servers that implement Enhanced RemoteApp ([MS-RDPERP](../MS-RDPERP/MS-RDPERP.md) section 1.3.3) must be capable of sending the **RDPGFX_MAP_SURFACE_TO_WINDOW_PDU** (section [2.2.2.20](#Section_2.2.2.20)) message.
 
@@ -644,7 +644,7 @@ packet-beta
 | RDPGFX_CMDID_FRAMEACKNOWLEDGE 0x000D | **RDPGFX_FRAME_ACKNOWLEDGE_PDU** (section [2.2.2.13](#Section_2.2.2.13)) |
 | RDPGFX_CMDID_RESETGRAPHICS 0x000E | **RDPGFX_RESET_GRAPHICS_PDU** (section [2.2.2.14](#Section_2.2.2.14)) |
 | RDPGFX_CMDID_MAPSURFACETOOUTPUT 0x000F | **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** (section [2.2.2.15](#Section_2.2.2.15)) |
-| RDPGFX_CMDID_CACHEIMPORTOFFER 0x0010 | **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16)) |
+| RDPGFX_CMDID_CACHEIMPORTOFFER 0x0010 | **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16.1)) |
 | RDPGFX_CMDID_CACHEIMPORTREPLY 0x0011 | **RDPGFX_CACHE_IMPORT_REPLY_PDU** (section [2.2.2.17](#Section_2.2.2.17)) |
 | RDPGFX_CMDID_CAPSADVERTISE 0x0012 | **RDPGFX_CAPS_ADVERTISE_PDU** (section [2.2.2.18](#Section_2.2.2.18)) |
 | RDPGFX_CMDID_CAPSCONFIRM 0x0013 | **RDPGFX_CAPS_CONFIRM_PDU** (section [2.2.2.19](#Section_2.2.2.19)) |
@@ -1104,7 +1104,7 @@ packet-beta
 <a id="Section_2.2.2.17"></a>
 #### 2.2.2.17 RDPGFX_CACHE_IMPORT_REPLY_PDU
 
-The **RDPGFX_CACHE_IMPORT_REPLY_PDU** message is sent by the server to indicate that persistent bitmap cache metadata advertised in the **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16)) message has been transferred to the bitmap cache.
+The **RDPGFX_CACHE_IMPORT_REPLY_PDU** message is sent by the server to indicate that persistent bitmap cache metadata advertised in the **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16.1)) message has been transferred to the bitmap cache.
 
 ```mermaid
 packet-beta
@@ -1532,7 +1532,7 @@ packet-beta
 
 **glyphIndex (2 bytes, optional):** An optional 16-bit unsigned integer that specifies the position in the **Decompressor Glyph Storage** ADM element for the current glyph. This field MUST NOT be present if the CLEARCODEC_FLAG_GLYPH_INDEX (0x01) flag is not present in the **flags** field. If this field is present, its value MUST be in the range 0 (0x0000) to 3,999 (0x0F9F), inclusive.
 
-**compositePayload (variable):** An optional variable-length **CLEARCODEC_COMPOSITE_PAYLOAD** (section [2.2.4.1.1](#Section_2.2.4.1.1.3)) structure. This field MUST NOT be present if the CLEARCODEC_FLAG_GLYPH_INDEX (0x01) flag and the CLEARCODEC_FLAG_GLYPH_HIT (0x02) flag are both present in the **flags** field.
+**compositePayload (variable):** An optional variable-length **CLEARCODEC_COMPOSITE_PAYLOAD** (section [2.2.4.1.1](#Section_2.2.4.1.1.2)) structure. This field MUST NOT be present if the CLEARCODEC_FLAG_GLYPH_INDEX (0x01) flag and the CLEARCODEC_FLAG_GLYPH_HIT (0x02) flag are both present in the **flags** field.
 
 <a id="Section_2.2.4.1.1"></a>
 ##### 2.2.4.1.1 CLEARCODEC_COMPOSITE_PAYLOAD
@@ -1861,7 +1861,7 @@ packet-beta
   0-95: "progressiveDataBlocks (variable)"
 ```
 
-**progressiveDataBlocks (variable):** A variable-length array of **RFX_PROGRESSIVE_DATABLOCK** (section [2.2.4.2.1](#Section_2.2.4.2.1.4)) structures.
+**progressiveDataBlocks (variable):** A variable-length array of **RFX_PROGRESSIVE_DATABLOCK** (section [2.2.4.2.1](#Section_2.2.4.2.1.5)) structures.
 
 <a id="Section_2.2.4.2.1"></a>
 ##### 2.2.4.2.1 RFX_PROGRESSIVE_DATABLOCK
@@ -2032,7 +2032,7 @@ packet-beta
 
 **quantProgVals (variable):** A variable-length array of **RFX_PROGRESSIVE_CODEC_QUANT** structures (the number of quantization tables in this field is specified by the **numProgQuant** field).
 
-**tiles (variable):** A variable-length array of **RFX_PROGRESSIVE_DATABLOCK** (section [2.2.4.2.1](#Section_2.2.4.2.1.4)) structures. The value of the **blockType** field of each block present in the array MUST be WBT_TILE_SIMPLE (0xCCC5), WBT_TILE_PROGRESSIVE_FIRST (0xCCC6), or WBT_TILE_PROGRESSIVE_UPGRADE (0xCCC7).
+**tiles (variable):** A variable-length array of **RFX_PROGRESSIVE_DATABLOCK** (section [2.2.4.2.1](#Section_2.2.4.2.1.5)) structures. The value of the **blockType** field of each block present in the array MUST be WBT_TILE_SIMPLE (0xCCC5), WBT_TILE_PROGRESSIVE_FIRST (0xCCC6), or WBT_TILE_PROGRESSIVE_UPGRADE (0xCCC7).
 
 <a id="Section_2.2.4.2.1.5.1"></a>
 RFX_PROGRESSIVE_CODEC_QUANT
@@ -2759,7 +2759,7 @@ In the case where **nBits** = 1, only the sign would be written, because the mag
 <a id="Section_3.1.9.1"></a>
 #### 3.1.9.1 RDP 8.0
 
-RDP 8.0 lossless compression is a specialization of the Lempel-Ziv ("LZ77") technique ([SAYOOD] section 6.2.3.2.2) paired with static Huffman encoding ([SAYOOD] sections 4.1 to 4.7). It is most-easily explained by detailing the operation of a decompressor. A compliant data compressor MUST encode input data, and a compliant data decompressor MUST decode compressed data, according to the format defined in section [3.1.9.1.2](#Section_3.1.9.1.2.1) and its subsections.
+RDP 8.0 lossless compression is a specialization of the Lempel-Ziv ("LZ77") technique ([SAYOOD] section 6.2.3.2.2) paired with static Huffman encoding ([SAYOOD] sections 4.1 to 4.7). It is most-easily explained by detailing the operation of a decompressor. A compliant data compressor MUST encode input data, and a compliant data decompressor MUST decode compressed data, according to the format defined in section [3.1.9.1.2](#Section_3.1.9.1.2.5) and its subsections.
 
 Any given input data could have many valid but different compressed representations. Whether the "compressed" representation is actually smaller than the original is dependent on the characteristics of the input data and on the compressor implementation. A compliant decompressor MUST accept any conforming compressed encoding and produce output that exactly matches the original input to the compressor. This document specifies at least one way to decode RDP 8.0 compressed data, although numerous implementation approaches are possible.
 
@@ -3028,17 +3028,17 @@ The structure and fields of the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message are
 <a id="Section_3.2.5.16"></a>
 #### 3.2.5.16 Processing an RDPGFX_CACHE_IMPORT_OFFER_PDU message
 
-The structure and fields of the **RDPGFX_CACHE_IMPORT_OFFER_PDU** message are specified in section [2.2.2.16](#Section_2.2.2.16). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, then the cache keys specified in the **cacheEntries** field and the cache slot assigned by the server to each entry SHOULD be added to the **Bitmap Cache Map** (section [3.2.1.1](#Section_3.2.1.1)) ADM element. Once the **RDPGFX_CACHE_IMPORT_OFFER_PDU** message has been processed, the server MUST respond by sending the **RDPGFX_CACHE_IMPORT_REPLY_PDU** (section [2.2.2.17](#Section_2.2.2.17)) message to the client (section [3.2.5.17](#Section_3.2.5.17)).
+The structure and fields of the **RDPGFX_CACHE_IMPORT_OFFER_PDU** message are specified in section [2.2.2.16](#Section_2.2.2.16.1). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). If the message is valid, then the cache keys specified in the **cacheEntries** field and the cache slot assigned by the server to each entry SHOULD be added to the **Bitmap Cache Map** (section [3.2.1.1](#Section_3.2.1.1)) ADM element. Once the **RDPGFX_CACHE_IMPORT_OFFER_PDU** message has been processed, the server MUST respond by sending the **RDPGFX_CACHE_IMPORT_REPLY_PDU** (section [2.2.2.17](#Section_2.2.2.17)) message to the client (section [3.2.5.17](#Section_3.2.5.17)).
 
 <a id="Section_3.2.5.17"></a>
 #### 3.2.5.17 Sending an RDPGFX_CACHE_IMPORT_REPLY_PDU message
 
-The structure and fields of the **RDPGFX_CACHE_IMPORT_REPLY_PDU** message are specified in section [2.2.2.17](#Section_2.2.2.17). The command fields MUST be populated in accordance with this description. The **importedEntriesCount** field MUST be initialized with the number of entries that were imported into the **Bitmap Cache Map** (section [3.2.1.1](#Section_3.2.1.1)) ADM element while processing the most recent **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16)) message, as specified in section [3.2.5.16](#Section_3.2.5.16). Furthermore, the cache slot assigned to each entry imported by the server MUST be enumerated in the **cacheSlots** field.
+The structure and fields of the **RDPGFX_CACHE_IMPORT_REPLY_PDU** message are specified in section [2.2.2.17](#Section_2.2.2.17). The command fields MUST be populated in accordance with this description. The **importedEntriesCount** field MUST be initialized with the number of entries that were imported into the **Bitmap Cache Map** (section [3.2.1.1](#Section_3.2.1.1)) ADM element while processing the most recent **RDPGFX_CACHE_IMPORT_OFFER_PDU** (section [2.2.2.16](#Section_2.2.2.16.1)) message, as specified in section [3.2.5.16](#Section_3.2.5.16). Furthermore, the cache slot assigned to each entry imported by the server MUST be enumerated in the **cacheSlots** field.
 
 <a id="Section_3.2.5.18"></a>
 #### 3.2.5.18 Processing an RDPGFX_CAPS_ADVERTISE_PDU message
 
-The structure and fields of the **RDPGFX_CAPS_ADVERTISE_PDU** message are specified in section [2.2.2.18](#Section_2.2.2.18). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_CAPS_ADVERTISE_PDU** message has been successfully processed, the server MUST respond by sending the **RDPGFX_CAPS_CONFIRM_PDU** (section [2.2.2.19](#Section_2.2.2.19)) message to the client, as specified in section [3.2.5.19](#Section_3.2.5.19).
+The structure and fields of the **RDPGFX_CAPS_ADVERTISE_PDU** message are specified in section [2.2.2.18](#Section_2.2.2.18). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_CAPS_ADVERTISE_PDU** message has been successfully processed, the server MUST respond by sending the **RDPGFX_CAPS_CONFIRM_PDU** (section [2.2.2.19](#Section_2.2.2.19)) message to the client, as specified in section [3.2.5.19](#Section_3.2.5.19).
 
 If the **RDPGFX_CAPS_ADVERTISE_PDU** is received again during the session after the initial **RDPGFX_CAPS_CONFIRM_PDU** message has been sent with the **version** field set to **RDPGFX_CAPSET_VERSION103** or later, the server MUST resend the **RDPGFX_CAPS_CONFIRM_PDU** (section 2.2.2.19) message to the client. The server MUST also reset the protocol to the initial state and assume that the client has disregarded all the messages sent by the server prior to **RDPGFX_CAPS_CONFIRM_PDU** in this channel.
 
@@ -3197,7 +3197,7 @@ Each time a progressive pass is performed, **DRS** is reduced by the current **D
 
 The first progressive pass for a tile occurs when the encoder receives new pixels to encode and send to the decoder.
 
-The encoder first performs the DWT (section [3.2.8.1.2](#Section_3.2.8.1.2)), Quantization and Linearization (section [3.2.8.1.3](#Section_3.2.8.1.3)) stages to obtain **DwtQ**. At this point, the Sub-Band Diffing (section [3.2.8.1.4](#Section_3.2.8.1.4)) stage determines whether to send **DwtQ** or the difference (**Diff**). **Diff** is computed based on the "reference bits" (**Ref**) specified in section [3.1.8.1.4](#Section_3.1.8.1.4).
+The encoder first performs the DWT (section [3.2.8.1.2](#Section_3.2.8.1.2.2)), Quantization and Linearization (section [3.2.8.1.3](#Section_3.2.8.1.3)) stages to obtain **DwtQ**. At this point, the Sub-Band Diffing (section [3.2.8.1.4](#Section_3.2.8.1.4)) stage determines whether to send **DwtQ** or the difference (**Diff**). **Diff** is computed based on the "reference bits" (**Ref**) specified in section [3.1.8.1.4](#Section_3.1.8.1.4).
 
 **Diff** = **DwtQ** - **Ref**
 
@@ -3368,7 +3368,7 @@ None.
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Processing an RDPGFX_WIRE_TO_SURFACE_PDU_1 message
 
-The structure and fields of the **RDPGFX_WIRE_TO_SURFACE_PDU_1** message are specified in section [2.2.2.1](#Section_2.2.2.1). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](#Section_3.3.1.6)) ADM element, and the size of the bitmap data specified in the **bitmapDataLength** field MUST be consistent with the amount of data read from the "Microsoft::Windows::RDS::Graphics" dynamic virtual channel (section [2.1](#Section_2.1)). Once the data in the **bitmapData** field has been decoded as specified by the encoding type enumerated in the **codecId** field, the bitmap MUST be copied to the target surface.
+The structure and fields of the **RDPGFX_WIRE_TO_SURFACE_PDU_1** message are specified in section [2.2.2.1](#Section_2.2.2.1). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](#Section_3.3.1.6)) ADM element, and the size of the bitmap data specified in the **bitmapDataLength** field MUST be consistent with the amount of data read from the "Microsoft::Windows::RDS::Graphics" dynamic virtual channel (section [2.1](#Section_2.1)). Once the data in the **bitmapData** field has been decoded as specified by the encoding type enumerated in the **codecId** field, the bitmap MUST be copied to the target surface.
 
 If the encoding type enumerated in the **codecId** field is not RDPGFX_CODECID_ALPHA (0x000C):
 
@@ -3380,57 +3380,57 @@ If the encoding type enumerated in the **codecId** field is RDPGFX_CODECID_ALPHA
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Processing an RDPGFX_WIRE_TO_SURFACE_PDU_2 message
 
-The structure and fields of the **RDPGFX_WIRE_TO_SURFACE_PDU_2** message are specified in section [2.2.2.2](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element, and the size of the bitmap data specified in the **bitmapDataLength** field MUST be consistent with the amount of data read from the "Microsoft::Windows::RDS::Graphics" dynamic virtual channel (section [2.1](#Section_2.1)). If there is no codec context identified by the **codecContextId** field in the **Codec Contexts** (section [3.3.1.1](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element, the client MUST create a new context, place it into the **Codec Contexts** ADM element, and begin the process of progressively rendering a bitmap from the data in the **bitmapData** field, as specified by the encoding type enumerated value in the **codecId** field, using the context to store intermediate state. The bitmap SHOULD be copied to the target surface using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7) once enough data has been decoded to render a discernible image and SHOULD then continue to be updated as subsequent **RDPGFX_WIRE_TO_SURFACE_PDU_2** messages are processed. Note that if the type (specified in the **blockType** field) of the current **RFX_PROGRESSIVE_DATABLOCK** structure (section [2.2.4.2.1](#Section_2.2.4.2.1.4)) of an **RFX_PROGRESSIVE_BITMAP_STREAM** (section [2.2.4.2](../MS-RDPEGDI/MS-RDPEGDI.md)) is WBT_TILE_PROGRESSIVE_UPGRADE (0xCCC7), then the **codecContextId** field in the **Codec Contexts** (section 3.3.1.1) ADM element MUST be known.
+The structure and fields of the **RDPGFX_WIRE_TO_SURFACE_PDU_2** message are specified in section [2.2.2.2](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element, and the size of the bitmap data specified in the **bitmapDataLength** field MUST be consistent with the amount of data read from the "Microsoft::Windows::RDS::Graphics" dynamic virtual channel (section [2.1](#Section_2.1)). If there is no codec context identified by the **codecContextId** field in the **Codec Contexts** (section [3.3.1.1](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element, the client MUST create a new context, place it into the **Codec Contexts** ADM element, and begin the process of progressively rendering a bitmap from the data in the **bitmapData** field, as specified by the encoding type enumerated value in the **codecId** field, using the context to store intermediate state. The bitmap SHOULD be copied to the target surface using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7) once enough data has been decoded to render a discernible image and SHOULD then continue to be updated as subsequent **RDPGFX_WIRE_TO_SURFACE_PDU_2** messages are processed. Note that if the type (specified in the **blockType** field) of the current **RFX_PROGRESSIVE_DATABLOCK** structure (section [2.2.4.2.1](#Section_2.2.4.2.1.5)) of an **RFX_PROGRESSIVE_BITMAP_STREAM** (section [2.2.4.2](../MS-RDPEGDI/MS-RDPEGDI.md)) is WBT_TILE_PROGRESSIVE_UPGRADE (0xCCC7), then the **codecContextId** field in the **Codec Contexts** (section 3.3.1.1) ADM element MUST be known.
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Processing an RDPGFX_DELETE_ENCODING_CONTEXT_PDU message
 
-The structure and fields of the **RDPGFX_DELETE_ENCODING_CONTEXT_PDU** message are specified in section [2.2.2.3](#Section_2.2.2.3). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_DELETE_ENCODING_CONTEXT_PDU** message has been successfully decoded, the codec context identified by the **codecContextId** field (which is associated with the surface identified by the **surfaceId** field) MUST be removed from the **Codec Contexts** (section [3.3.1.1](#Section_3.3.1.1)) ADM element.
+The structure and fields of the **RDPGFX_DELETE_ENCODING_CONTEXT_PDU** message are specified in section [2.2.2.3](#Section_2.2.2.3). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_DELETE_ENCODING_CONTEXT_PDU** message has been successfully decoded, the codec context identified by the **codecContextId** field (which is associated with the surface identified by the **surfaceId** field) MUST be removed from the **Codec Contexts** (section [3.3.1.1](#Section_3.3.1.1)) ADM element.
 
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Processing an RDPGFX_SOLIDFILL_PDU message
 
-The structure and fields of the **RDPGFX_SOLIDFILL_PDU** message are specified in section [2.2.2.4](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_SOLIDFILL_PDU** message has been successfully decoded, the rectangles specified in the **fillRects** field MUST be filled with the 32-bpp color specified by the **fillPixel** field using an R2_COPYPEN ROP2 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.6).
+The structure and fields of the **RDPGFX_SOLIDFILL_PDU** message are specified in section [2.2.2.4](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_SOLIDFILL_PDU** message has been successfully decoded, the rectangles specified in the **fillRects** field MUST be filled with the 32-bpp color specified by the **fillPixel** field using an R2_COPYPEN ROP2 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.6).
 
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 Processing an RDPGFX_SURFACE_TO_SURFACE_PDU message
 
-The structure and fields of the **RDPGFX_SURFACE_TO_SURFACE_PDU** message are specified in section [2.2.2.5](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The **surfaceIdSrc** and **surfaceIdDest** fields MUST both identify valid offscreen surfaces in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_SURFACE_TO_SURFACE_PDU** message has been successfully decoded, the pixels in the source rectangle on the source surface (specified in the **rectSrc** field) MUST be copied to the target surface at each of the points specified in the **destPts** field using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7).
+The structure and fields of the **RDPGFX_SURFACE_TO_SURFACE_PDU** message are specified in section [2.2.2.5](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The **surfaceIdSrc** and **surfaceIdDest** fields MUST both identify valid offscreen surfaces in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_SURFACE_TO_SURFACE_PDU** message has been successfully decoded, the pixels in the source rectangle on the source surface (specified in the **rectSrc** field) MUST be copied to the target surface at each of the points specified in the **destPts** field using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7).
 
 <a id="Section_3.3.5.6"></a>
 #### 3.3.5.6 Processing an RDPGFX_SURFACE_TO_CACHE_PDU message
 
-The structure and fields of the **RDPGFX_SURFACE_TO_CACHE_PDU** message are specified in section [2.2.2.6](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_SURFACE_TO_CACHE_PDU** message has been successfully decoded, the pixels in the source rectangle on the source surface (specified in the **rectSrc** field) MUST be copied to the slot in the **Bitmap Cache** (section [3.3.1.4](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element identified by the **cacheSlot** field using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7) and tagged with the key specified in the **cacheKey** field.
+The structure and fields of the **RDPGFX_SURFACE_TO_CACHE_PDU** message are specified in section [2.2.2.6](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_SURFACE_TO_CACHE_PDU** message has been successfully decoded, the pixels in the source rectangle on the source surface (specified in the **rectSrc** field) MUST be copied to the slot in the **Bitmap Cache** (section [3.3.1.4](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element identified by the **cacheSlot** field using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7) and tagged with the key specified in the **cacheKey** field.
 
 <a id="Section_3.3.5.7"></a>
 #### 3.3.5.7 Processing an RDPGFX_CACHE_TO_SURFACE_PDU message
 
-The structure and fields of the **RDPGFX_CACHE_TO_SURFACE_PDU** message are specified in section [2.2.2.7](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element, and the **cacheSlot** field MUST contain a valid entry in the **Bitmap Cache** (section [3.3.1.4](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_CACHE_TO_SURFACE_PDU** message has been successfully decoded, the bitmap retrieved from the cache MUST be copied to the target surface at each of the points specified in the **destPts** field using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7).
+The structure and fields of the **RDPGFX_CACHE_TO_SURFACE_PDU** message are specified in section [2.2.2.7](../MS-RDPEGDI/MS-RDPEGDI.md). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The **surfaceId** field MUST identify a valid offscreen surface in the **Offscreen Surface** (section [3.3.1.6](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element, and the **cacheSlot** field MUST contain a valid entry in the **Bitmap Cache** (section [3.3.1.4](../MS-RDPEGDI/MS-RDPEGDI.md)) ADM element. Once the **RDPGFX_CACHE_TO_SURFACE_PDU** message has been successfully decoded, the bitmap retrieved from the cache MUST be copied to the target surface at each of the points specified in the **destPts** field using a SRCCOPY ROP3 operation ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.1.1.7).
 
 <a id="Section_3.3.5.8"></a>
 #### 3.3.5.8 Processing an RDPGFX_EVICT_CACHE_ENTRY_PDU message
 
-The structure and fields of the **RDPGFX_EVICT_CACHE_ENTRY_PDU** message are specified in section [2.2.2.8](#Section_2.2.2.8). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_EVICT_CACHE_ENTRY_PDU** message has been successfully decoded, the entry in the **Bitmap Cache** (section [3.3.1.4](#Section_3.3.1.4)) ADM element present in the slot identified by the **cacheSlot** field MUST be removed from the cache.
+The structure and fields of the **RDPGFX_EVICT_CACHE_ENTRY_PDU** message are specified in section [2.2.2.8](#Section_2.2.2.8). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_EVICT_CACHE_ENTRY_PDU** message has been successfully decoded, the entry in the **Bitmap Cache** (section [3.3.1.4](#Section_3.3.1.4)) ADM element present in the slot identified by the **cacheSlot** field MUST be removed from the cache.
 
 <a id="Section_3.3.5.9"></a>
 #### 3.3.5.9 Processing an RDPGFX_CREATE_SURFACE_PDU message
 
-The structure and fields of the **RDPGFX_CREATE_SURFACE_PDU** message are specified in section [2.2.2.9](#Section_2.2.2.9). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_CREATE_SURFACE_PDU** message has been successfully decoded, a bitmap MUST be created with the appropriate width, height, and pixel format and MUST be placed into the **Offscreen Surface** (section [3.3.1.6](#Section_3.3.1.6)) ADM element. The entry MUST be tagged with the ID specified in the **surfaceId** field.
+The structure and fields of the **RDPGFX_CREATE_SURFACE_PDU** message are specified in section [2.2.2.9](#Section_2.2.2.9). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_CREATE_SURFACE_PDU** message has been successfully decoded, a bitmap MUST be created with the appropriate width, height, and pixel format and MUST be placed into the **Offscreen Surface** (section [3.3.1.6](#Section_3.3.1.6)) ADM element. The entry MUST be tagged with the ID specified in the **surfaceId** field.
 
 <a id="Section_3.3.5.10"></a>
 #### 3.3.5.10 Processing an RDPGFX_DELETE_SURFACE_PDU message
 
-The structure and fields of the **RDPGFX_DELETE_SURFACE_PDU** message are specified in section [2.2.2.10](#Section_2.2.2.10). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_DELETE_SURFACE_PDU** message has been successfully decoded, the surface identified by the **surfaceId** field MUST be deleted from the **Offscreen Surface** (section [3.3.1.6](#Section_3.3.1.6)) ADM element.
+The structure and fields of the **RDPGFX_DELETE_SURFACE_PDU** message are specified in section [2.2.2.10](#Section_2.2.2.10). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_DELETE_SURFACE_PDU** message has been successfully decoded, the surface identified by the **surfaceId** field MUST be deleted from the **Offscreen Surface** (section [3.3.1.6](#Section_3.3.1.6)) ADM element.
 
 <a id="Section_3.3.5.11"></a>
 #### 3.3.5.11 Processing an RDPGFX_START_FRAME_PDU message
 
-The structure and fields of the **RDPGFX_START_FRAME_PDU** message are specified in section [2.2.2.11](#Section_2.2.2.11). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1).
+The structure and fields of the **RDPGFX_START_FRAME_PDU** message are specified in section [2.2.2.11](#Section_2.2.2.11). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2).
 
 <a id="Section_3.3.5.12"></a>
 #### 3.3.5.12 Processing an RDPGFX_END_FRAME_PDU message
 
-The structure and fields of the **RDPGFX_END_FRAME_PDU** message are specified in section [2.2.2.12](#Section_2.2.2.12). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_END_FRAME_PDU** message has been successfully decoded, the client MUST copy the contents of every updated off-screen surface that is present in the **Surface to Output Mapping** (section [3.3.1.8](#Section_3.3.1.8)) ADM element to the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element. Once the copy is complete, the client MUST send the **RDPGFX_FRAME_ACKNOWLEDGE_PDU** (section [2.2.2.13](#Section_2.2.2.13)) message to the server, as specified in section [3.3.5.13](#Section_3.3.5.13).
+The structure and fields of the **RDPGFX_END_FRAME_PDU** message are specified in section [2.2.2.12](#Section_2.2.2.12). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_END_FRAME_PDU** message has been successfully decoded, the client MUST copy the contents of every updated off-screen surface that is present in the **Surface to Output Mapping** (section [3.3.1.8](#Section_3.3.1.8)) ADM element to the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element. Once the copy is complete, the client MUST send the **RDPGFX_FRAME_ACKNOWLEDGE_PDU** (section [2.2.2.13](#Section_2.2.2.13)) message to the server, as specified in section [3.3.5.13](#Section_3.3.5.13).
 
 <a id="Section_3.3.5.13"></a>
 #### 3.3.5.13 Sending an RDPGFX_FRAME_ACKNOWLEDGE_PDU message
@@ -3440,22 +3440,22 @@ The structure and fields of the **RDPGFX_FRAME_ACKNOWLEDGE_PDU** message are spe
 <a id="Section_3.3.5.14"></a>
 #### 3.3.5.14 Processing an RDPGFX_RESET_GRAPHICS_PDU message
 
-The structure and fields of the **RDPGFX_RESET_GRAPHICS_PDU** message are specified in section [2.2.2.14](#Section_2.2.2.14). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_RESET_GRAPHICS_PDU** message has been successfully decoded, the client MUST resize the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element.
+The structure and fields of the **RDPGFX_RESET_GRAPHICS_PDU** message are specified in section [2.2.2.14](#Section_2.2.2.14). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_RESET_GRAPHICS_PDU** message has been successfully decoded, the client MUST resize the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element.
 
 <a id="Section_3.3.5.15"></a>
 #### 3.3.5.15 Processing an RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU message
 
-The structure and fields of the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message are specified in section [2.2.2.15](#Section_2.2.2.15). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message has been successfully decoded, the surface-to-output mapping in the **Surface to Output Mapping** (section [3.3.1.8](#Section_3.3.1.8)) ADM element MUST be updated by mapping the surface identified by the **surfaceId** field to the point on the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element specified by the **outputOriginX** and **outputOriginY** fields.
+The structure and fields of the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message are specified in section [2.2.2.15](#Section_2.2.2.15). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message has been successfully decoded, the surface-to-output mapping in the **Surface to Output Mapping** (section [3.3.1.8](#Section_3.3.1.8)) ADM element MUST be updated by mapping the surface identified by the **surfaceId** field to the point on the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element specified by the **outputOriginX** and **outputOriginY** fields.
 
 <a id="Section_3.3.5.16"></a>
 #### 3.3.5.16 Sending an RDPGFX_CACHE_IMPORT_OFFER_PDU message
 
-The structure and fields of the **RDPGFX_CACHE_IMPORT_OFFER_PDU** message are specified in section [2.2.2.16](#Section_2.2.2.16). The command fields MUST be populated in accordance with this description. The client MUST populate the **cacheEntries** field by enumerating the bitmaps stored in the **Persistent Bitmap Cache** (section [3.3.1.5](#Section_3.3.1.5)) ADM element.
+The structure and fields of the **RDPGFX_CACHE_IMPORT_OFFER_PDU** message are specified in section [2.2.2.16](#Section_2.2.2.16.1). The command fields MUST be populated in accordance with this description. The client MUST populate the **cacheEntries** field by enumerating the bitmaps stored in the **Persistent Bitmap Cache** (section [3.3.1.5](#Section_3.3.1.5)) ADM element.
 
 <a id="Section_3.3.5.17"></a>
 #### 3.3.5.17 Processing an RDPGFX_CACHE_IMPORT_REPLY_PDU message
 
-The structure and fields of the **RDPGFX_CACHE_IMPORT_REPLY_PDU** message are specified in section [2.2.2.17](#Section_2.2.2.17). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_CACHE_IMPORT_REPLY_PDU** message has been successfully decoded, the client MUST copy the number of entries specified in the **importedEntriesCount** field from the **Persistent Bitmap Cache** (section [3.3.1.5](#Section_3.3.1.5)) ADM element to the assigned slots in the **Bitmap Cache** (section [3.3.1.4](#Section_3.3.1.4)) ADM element.
+The structure and fields of the **RDPGFX_CACHE_IMPORT_REPLY_PDU** message are specified in section [2.2.2.17](#Section_2.2.2.17). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_CACHE_IMPORT_REPLY_PDU** message has been successfully decoded, the client MUST copy the number of entries specified in the **importedEntriesCount** field from the **Persistent Bitmap Cache** (section [3.3.1.5](#Section_3.3.1.5)) ADM element to the assigned slots in the **Bitmap Cache** (section [3.3.1.4](#Section_3.3.1.4)) ADM element.
 
 <a id="Section_3.3.5.18"></a>
 #### 3.3.5.18 Sending an RDPGFX_CAPS_ADVERTISE_PDU message
@@ -3465,14 +3465,14 @@ The structure and fields of the **RDPGFX_CAPS_ADVERTISE_PDU** message are specif
 <a id="Section_3.3.5.19"></a>
 #### 3.3.5.19 Processing an RDPGFX_CAPS_CONFIRM_PDU message
 
-The structure and fields of the **RDPGFX_CAPS_CONFIRM_PDU** message are specified in section [2.2.2.19](#Section_2.2.2.19). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). The graphics capabilities specified by the server SHOULD be stored in the **Confirmed Graphics Capabilities** (section [3.3.1.14](#Section_3.3.1.14)) ADM element and MUST be adhered to by the client.
+The structure and fields of the **RDPGFX_CAPS_CONFIRM_PDU** message are specified in section [2.2.2.19](#Section_2.2.2.19). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). The graphics capabilities specified by the server SHOULD be stored in the **Confirmed Graphics Capabilities** (section [3.3.1.14](#Section_3.3.1.14)) ADM element and MUST be adhered to by the client.
 
 If the capability set received in the **RDPGFX_CAPS_CONFIRM_PDU** message is **RDPGFX_CAPSET_VERSION103**, **RDPGFX_CAPSET_VERSION104**, **RDPGFX_CAPSET_VERSION105**, **RDPGFX_CAPSET_VERSION106**, or **RDPGFX_CAPSET_VERSION107** then the client can resend the **RDPGFX_CAPS_ADVERTISE_PDU** message during the connection to reset the protocol. The client MUST reset the channel state after sending the **RDPGFX_CAPS_ADVERTISE_PDU** message and MUST ignore any messages sent by the server until **RDPGFX_CAPS_CONFIRM_PDU** message is received.
 
 <a id="Section_3.3.5.20"></a>
 #### 3.3.5.20 Processing an RDPGFX_MAP_SURFACE_TO_WINDOW_PDU message
 
-The structure and fields of the **RDPGFX_MAP_SURFACE_TO_WINDOW_PDU** message are specified in section [2.2.2.20](#Section_2.2.2.20). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_MAP_SURFACE_TO_WINDOW_PDU** message has been successfully decoded, the surface-to-window mapping in the **Surface to Window Mapping** (section [3.3.1.15](#Section_3.3.1.15)) ADM element MUST be updated by associating the rectangular region (specified by the **mappedWidth** and **mappedHeight** fields) on the surface identified by the **surfaceId** field to the [**RAIL window**](#gt_rail-window) specified by the **windowId** field.
+The structure and fields of the **RDPGFX_MAP_SURFACE_TO_WINDOW_PDU** message are specified in section [2.2.2.20](#Section_2.2.2.20). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_MAP_SURFACE_TO_WINDOW_PDU** message has been successfully decoded, the surface-to-window mapping in the **Surface to Window Mapping** (section [3.3.1.15](#Section_3.3.1.15)) ADM element MUST be updated by associating the rectangular region (specified by the **mappedWidth** and **mappedHeight** fields) on the surface identified by the **surfaceId** field to the [**RAIL window**](#gt_rail-window) specified by the **windowId** field.
 
 <a id="Section_3.3.5.21"></a>
 #### 3.3.5.21 Sending an RDPGFX_QOE_FRAME_ACKNOWLEDGE_PDU message
@@ -3484,12 +3484,12 @@ If the client has opted in to sending the **RDPGFX_FRAME_ACKNOWLEDGE_PDU** (sect
 <a id="Section_3.3.5.22"></a>
 #### 3.3.5.22 Processing an RDPGFX_MAP_SURFACE_TO_SCALED_OUTPUT_PDU message
 
-The structure and fields of the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message are specified in section [2.2.2.22](#Section_2.2.2.22). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_MAP_SURFACE_TO_SCALED_OUTPUT_PDU** message has been successfully decoded, the surface-to-output mapping in the **Surface to Output Mapping** (section [3.3.1.8](#Section_3.3.1.8)) ADM element MUST be updated by mapping the surface identified by the **surfaceId** field to the point on the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element specified by the **outputOriginX** and **outputOriginY** fields, and scaled to the **targetWidth** and **targetHeight** fields specified.
+The structure and fields of the **RDPGFX_MAP_SURFACE_TO_OUTPUT_PDU** message are specified in section [2.2.2.22](#Section_2.2.2.22). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_MAP_SURFACE_TO_SCALED_OUTPUT_PDU** message has been successfully decoded, the surface-to-output mapping in the **Surface to Output Mapping** (section [3.3.1.8](#Section_3.3.1.8)) ADM element MUST be updated by mapping the surface identified by the **surfaceId** field to the point on the **Graphics Output Buffer** (section [3.3.1.7](#Section_3.3.1.7)) ADM element specified by the **outputOriginX** and **outputOriginY** fields, and scaled to the **targetWidth** and **targetHeight** fields specified.
 
 <a id="Section_3.3.5.23"></a>
 #### 3.3.5.23 Processing an RDPGFX_MAP_SURFACE_TO_SCALED_WINDOW_PDU message
 
-The structure and fields of the **RDPGFX_MAP_SURFACE_TO_SCALED_WINDOW_PDU** message are specified in section [2.2.2.23](#Section_2.2.2.23). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). Once the **RDPGFX_MAP_SURFACE_TO_SCALED_WINDOW_PDU** message has been successfully decoded, the surface-to-window mapping in the **Surface to Window Mapping** (section [3.3.1.15](#Section_3.3.1.15)) ADM element MUST be updated by associating the rectangular region (specified by the **mappedWidth** and **mappedHeight** fields) on the surface identified by the **surfaceId** field to the [**RAIL window**](#gt_rail-window) specified by the **windowId** field with the entire surface scaled to the **targetWidth** and **targetHeight** fields specified.
+The structure and fields of the **RDPGFX_MAP_SURFACE_TO_SCALED_WINDOW_PDU** message are specified in section [2.2.2.23](#Section_2.2.2.23). The **header** field MUST be processed as specified in section [3.1.5.1](#Section_2.2.2). Once the **RDPGFX_MAP_SURFACE_TO_SCALED_WINDOW_PDU** message has been successfully decoded, the surface-to-window mapping in the **Surface to Window Mapping** (section [3.3.1.15](#Section_3.3.1.15)) ADM element MUST be updated by associating the rectangular region (specified by the **mappedWidth** and **mappedHeight** fields) on the surface identified by the **surfaceId** field to the [**RAIL window**](#gt_rail-window) specified by the **windowId** field with the entire surface scaled to the **targetWidth** and **targetHeight** fields specified.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -3556,7 +3556,7 @@ The first stage of decoding aims to reconstruct the DWT data of a tile.
 
 The decoder MUST maintain a copy of the unquantized DWT data ("Current frame" in the figure captioned "RemoteFX Progressive Codec decoding stages" in section [3.3.8.2](#Section_3.3.8.2)) as well as a tri-state value for each element in a tile that has not yet been fully upgraded ("Persistent progressive state" in the same figure). The tri-state value records whether the data that has been received for an element sums up to a positive value, a negative value, or zero.
 
-A coefficient either is encoded with the SRL encoder, or its absolute value is written as raw bits (section [3.2.8.1.5](#Section_3.2.8.1.5.2)). The decoder MUST determine which of these two methods was used and what sign to apply to the decoded element. The sign can be determined by using the tri-state value associated with each element.
+A coefficient either is encoded with the SRL encoder, or its absolute value is written as raw bits (section [3.2.8.1.5](#Section_3.2.8.1.5)). The decoder MUST determine which of these two methods was used and what sign to apply to the decoded element. The sign can be determined by using the tri-state value associated with each element.
 
 If the input data is for the first progressive chunk of a tile (or it contains all of the data for a tile), then the Persistent progressive state MUST be cleared. Furthermore, if the tile is an original tile (not a difference tile), then the tile MUST be zeroed out in the current frame. The result of the entropy decode operation MUST be added to the current frame.
 
@@ -3625,7 +3625,7 @@ Note that a band in a given pass might not have any bits to read. In this case, 
 <a id="Section_3.3.8.2.2"></a>
 ##### 3.3.8.2.2 Inverse DWT
 
-The [**inverse discrete wavelet transform (IDWT)**](#gt_inverse-discrete-wavelet-transform-idwt) is based on the equations specified in [MS-RDPRFX](../MS-RDPRFX/MS-RDPRFX.md) section 3.1.8.2.4. However, as described in section [3.2.8.1.2](#Section_3.2.8.1.2), the associated forward transform uses the Reduce-Extrapolate Method (section [3.2.8.1.2.2](#Section_3.2.8.1.2.2)) to remove boundary artifacts. The structure of the resultant tile (with its ten bands) is illustrated in the figure captioned "Bands resulting from the Reduce-Extrapolate DWT Method" in section 3.2.8.1.2.2.
+The [**inverse discrete wavelet transform (IDWT)**](#gt_inverse-discrete-wavelet-transform-idwt) is based on the equations specified in [MS-RDPRFX](../MS-RDPRFX/MS-RDPRFX.md) section 3.1.8.2.4. However, as described in section [3.2.8.1.2](#Section_3.2.8.1.2.2), the associated forward transform uses the Reduce-Extrapolate Method (section [3.2.8.1.2.2](#Section_3.2.8.1.2.2)) to remove boundary artifacts. The structure of the resultant tile (with its ten bands) is illustrated in the figure captioned "Bands resulting from the Reduce-Extrapolate DWT Method" in section 3.2.8.1.2.2.
 
 Each tile component undergoes three levels of inverse 2D discrete wavelet transformation.
 
@@ -4300,7 +4300,7 @@ Zeros are added to complete the final byte, which results in the following bytes
 
 The quantized data is dequantized and subtracted from the input, yielding the remaining values to be sent (known as "**DRS**"). These values are quantized for the 50% progressive quality.
 
-Details on the formulas for **DRS** and **UpgradeQ** are as specified in section [3.2.8.1.5.2](#Section_3.2.8.1.5.2), while details on the SRL encoder are as specified in section [3.2.8.1.5](#Section_3.2.8.1.5.2).
+Details on the formulas for **DRS** and **UpgradeQ** are as specified in section [3.2.8.1.5.2](#Section_3.2.8.1.5.2), while details on the SRL encoder are as specified in section [3.2.8.1.5](#Section_3.2.8.1.5).
 
 The difference in bit positions for the two progressive quality levels indicates how many bits of magnitude are sent to the client. For this particular upgrade, the LL band does not receive any new bits, and the number of bits is zero. Hence, no entries are generated for this band.
 

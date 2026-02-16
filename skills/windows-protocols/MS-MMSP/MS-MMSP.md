@@ -358,7 +358,7 @@ This protocol references commonly used data types as defined in [MS-DTYP](../MS-
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Data Structures Used for Logging
 
-Logging information sent by the client to the server is formatted as a [CLIENT_LOG (section 2.2.1.1)](#Section_2.2.1.1) data structure. The CLIENT_LOG (section 2.2.1.1) structure consists of a [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.2) structure and other fields. This section defines these two structures.
+Logging information sent by the client to the server is formatted as a [CLIENT_LOG (section 2.2.1.1)](#Section_2.2.1.1) data structure. The CLIENT_LOG (section 2.2.1.1) structure consists of a [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.1) structure and other fields. This section defines these two structures.
 
 Strings in the CLIENT_LOG (section 2.2.1.1) structure and the CLIENT_LOG_INFO (section 2.2.1.2) structure always use the ANSI code page. The character set used for the ANSI code page is U.S. ASCII for the English version of Windows, but it can be different for versions of Windows localized into other languages.
 
@@ -390,7 +390,7 @@ packet-beta
 
 **cbSize (4 bytes):** An unsigned 32-bit integer. Specifies the length of the CLIENT_LOG structure in bytes.
 
-**info (1142 bytes):** A [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.2) structure.
+**info (1142 bytes):** A [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.1) structure.
 
 **dwSourceId (4 bytes):** An unsigned 32-bit integer. It MUST be the value of the **openFileId** field in the [LinkMacToViewerReportOpenFile (section 2.2.4.7)](#Section_2.2.4.7) message.
 
@@ -2372,7 +2372,7 @@ If the value of the **State** variable is READY, the **Idle-Timeout** timer MUST
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2403,11 +2403,11 @@ This section specifies common steps that MUST be performed whenever the server r
 
 If the packet is received on the TCP connection, the server MUST verify that the packet begins with a [TcpMessageHeader (section 2.2.3)](#Section_2.2.3). Each message contained in the packet MUST be processed.
 
-The server MUST inspect the **MID** field of the message to validate that the message is from one of the types specified in section [2.2.4](#Section_2.2.4) and process the message as specified in section [3.2.5](#Section_3.1.5).
+The server MUST inspect the **MID** field of the message to validate that the message is from one of the types specified in section [2.2.4](#Section_2.2.4) and process the message as specified in section [3.2.5](#Section_3.2.5).
 
 If the packet is received over UDP, it MUST be a [RequestPacketListResend (section 2.2.5)](#Section_2.2.5) packet.
 
-If the **KeepAlive** timer (as specified in section [3.2.2](#Section_3.1.2)) is running, it MUST be stopped.
+If the **KeepAlive** timer (as specified in section [3.2.2](#Section_3.2.2)) is running, it MUST be stopped.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Sending a Message
@@ -2416,7 +2416,7 @@ This section specifies common steps that MUST be performed whenever the client s
 
 The message MUST be encapsulated in a [TcpMessageHeader](#Section_2.2.3) packet. Multiple messages SHOULD NOT be combined in a single TcpMessageHeader packet.
 
-The **KeepAlive** timer (as specified in section [3.2.2](#Section_3.1.2)) MUST be started.
+The **KeepAlive** timer (as specified in section [3.2.2](#Section_3.2.2)) MUST be started.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Receiving a LinkViewerToMacConnect Message
@@ -2555,7 +2555,7 @@ How to process a LinkViewerToMacCancelReadBlock message is specified in section 
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2585,7 +2585,7 @@ If the value of the State variable is STREAMING, the server MUST continue transm
 
 If the value of the State variable is READY, the server MUST wait for a [LinkViewerToMacStartPlaying](#Section_2.2.4.25) message, a [LinkViewerToMacStartStriding](#Section_2.2.4.26) message, or a [LinkViewerToMacCloseFile](#Section_2.2.4.16) message to be received from the client.
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2690,7 +2690,7 @@ How to process a LinkViewerToMacLogging message is specified in section [3.2.5.1
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2707,7 +2707,7 @@ The server MUST wait for a [LinkViewerToMacStreamSwitch](#Section_2.2.4.28) mess
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2718,7 +2718,7 @@ How to process a LinkViewerToMacCloseFile message is specified in section [3.2.5
 
 The server MUST first follow the steps specified in section [3.2.5.1](#Section_3.2.5.1). Also, the server MUST verify that the [LinkViewerToMacPong](#Section_2.2.4.22) message adheres to the syntax specified in section 2.2.4.22.
 
-If the value of the State variable is STREAMING, the server MUST continue transmitting [**ASF**](#gt_advanced-systems-format-asf) data packets by following the rules specified in section [3.2.5.11.1](#Section_3.2.5.11.1). Otherwise, the server MUST continue waiting for the messages that it was waiting for before the **KeepAlive** timer (as specified in section [3.2.2](#Section_3.1.2)) expired.
+If the value of the State variable is STREAMING, the server MUST continue transmitting [**ASF**](#gt_advanced-systems-format-asf) data packets by following the rules specified in section [3.2.5.11.1](#Section_3.2.5.11.1). Otherwise, the server MUST continue waiting for the messages that it was waiting for before the **KeepAlive** timer (as specified in section [3.2.2](#Section_3.2.2)) expired.
 
 <a id="Section_3.2.5.17"></a>
 #### 3.2.5.17 Receiving a LinkViewerToMacCloseFile Message
@@ -2790,7 +2790,7 @@ The following describes the preceding diagram:
 
 - The server enters INIT state when it receives a LinkViewerToMacConnect message from the client, as described in section [3.2.5.3](#Section_3.2.5.3).
 - When the server is in INIT state, it can receive a request for the ASF File Header by means of a LinkViewerToMacReadBlock message, as described in section [3.1.5.8](#Section_2.2.4.14). The server sends the ASF File Header to the client, and once it has sent the last Data packet with the ASF File Header, the server transitions to READY state.
-- If the server is in READY state and it receives a request to start streaming, it will transition to STREAMING state. The request can be in the form of a LinkViewerToMacStartPlaying message (section [3.2.5.11](#Section_3.2.5.11)) or a LinkViewerToMacStartStriding message (section [3.2.5.12](#Section_3.2.5.12)).
+- If the server is in READY state and it receives a request to start streaming, it will transition to STREAMING state. The request can be in the form of a LinkViewerToMacStartPlaying message (section [3.2.5.11](#Section_3.2.5.11.1)) or a LinkViewerToMacStartStriding message (section [3.2.5.12](#Section_3.2.5.12)).
 - While in INIT and READY states, there is a possibility that the Idle-Timeout timer could expire. If that happens the state machine terminates the connection, as described in section [3.2.6.2](#Section_3.2.6.2).
 - If the server is in STREAMING state and it receives a request to stop streaming by means of a LinkViewerToMacStopPlaying message, it will transition to READY state, as described in section [3.2.5.14](#Section_3.2.5.14).
 - If the server is in STREAMING state and the higher layer notifies the client that the last Data packet has been sent and that no additional ASF File Headers will be made available to the client, then the server transitions to READY state, as described in section [3.2.4.1](#Section_3.2.4.1).

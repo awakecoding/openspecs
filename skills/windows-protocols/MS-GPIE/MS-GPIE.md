@@ -391,7 +391,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Client-Side State
 
-The client-side plug-in maintains no persistent state. During processing, the New or Changed GPO list passed as a parameter is enumerated and then discarded (see section [3.2.5](#Section_3.1.5)).
+The client-side plug-in maintains no persistent state. During processing, the New or Changed GPO list passed as a parameter is enumerated and then discarded (see section [3.2.5](#Section_3.2.5)).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -837,7 +837,7 @@ The following table sections repeat per zone for the total count of zones. For e
 <a id="Section_4.1.3.3"></a>
 #### 4.1.3.3 Ratrsop.INF File Format
 
-An informative description of the setting names and legal values in Ratrsop.inf follows, which uses the definitions of value type from section [4.1.1](#Section_4.1.1). An example of this file format is provided in section [4.5](#Section_4.1.3.3).
+An informative description of the setting names and legal values in Ratrsop.inf follows, which uses the definitions of value type from section [4.1.1](#Section_4.1.1). An example of this file format is provided in section [4.5](#Section_4.5).
 
 | SectionName | ValueName | Value type | Sample value | Description |
 | --- | --- | --- | --- | --- |

@@ -537,7 +537,7 @@ This protocol specifies the following properties for monitoring the active queue
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a [**directory**](#gt_directory). This protocol SHOULD<12> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<13>
+This protocol uses ADM elements specified in section [3.1.1](#Section_3.2.1). A subset of these elements can be published in a [**directory**](#gt_directory). This protocol SHOULD<12> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<13>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -548,7 +548,7 @@ The client side of this protocol is simply a pass-through. That is, there are no
 
 The client MUST have [**administrator**](#gt_administrator) privileges on the server machine.
 
-This protocol permits establishing a connection to an [**RPC**](#gt_remote-procedure-call-rpc) server. For each connection, the server uses the underlying RPC protocol to retrieve the identity of the invoking client call, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The server uses this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.1.4).
+This protocol permits establishing a connection to an [**RPC**](#gt_remote-procedure-call-rpc) server. For each connection, the server uses the underlying RPC protocol to retrieve the identity of the invoking client call, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The server uses this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.2.4).
 
 The methods comprising this RPC interface all return 0x00000000 on success and a nonzero implementation-specific error code on failure. Unless otherwise specified in the following sections, a server-side implementation of this protocol uses any nonzero Win32 error value to signify an error condition, as specified in section [1.8](#Section_1.8). The client side of the Message Queuing (MSMQ): Queue Manager Management Protocol does not need to interpret the error codes returned from the server; instead, the client side can return the error code unprocessed to the invoking application without taking any protocol action.
 

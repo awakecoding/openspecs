@@ -3175,7 +3175,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.1.4.2](#Section_3.1.4.2.2.1) TransactedRun | 8336 : Updated product support note in product behavior note 2. | Major |
+| [3.1.4.2](#Section_3.1.4.2) TransactedRun | 8336 : Updated product support note in product behavior note 2. | Major |
 | [7](#Section_7) Appendix B: Product Behavior | 8336 : Added boilerplate statement for product note language: and later. | Major |
 | 7 Appendix B: Product Behavior | Added .NET 4.8 to the list of applicable products. | Major |
 

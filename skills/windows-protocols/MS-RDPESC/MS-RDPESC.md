@@ -490,7 +490,7 @@ The following figure specifies how the messages are encoded and routed from a TS
 
 Figure 3: Protocol flow
 
-The input for this protocol (call packet) is a combination of an [**I/O control (IOCTL)**](#gt_io-control-ioctl) and the corresponding structure as specified in section [3.2.5](#Section_3.1.4).
+The input for this protocol (call packet) is a combination of an [**I/O control (IOCTL)**](#gt_io-control-ioctl) and the corresponding structure as specified in section [3.2.5](#Section_3.2.5).
 
 - The call packet structure is encoded as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.6.
 - The packet, as specified in [MS-RPCE], is returned as a response to 1.
@@ -968,7 +968,7 @@ REDIR_SCARDCONTEXT Context;
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 ContextAndTwoStringA_Call
 
-The contents of the ContextAndTwoStringA_Call structure are used in those calls that require a valid [**Smart Cards for Windows**](#gt_smart-cards-for-windows) context (as specified in section [3.2.5](#Section_3.1.4)) and two strings (friendly names).
+The contents of the ContextAndTwoStringA_Call structure are used in those calls that require a valid [**Smart Cards for Windows**](#gt_smart-cards-for-windows) context (as specified in section [3.2.5](#Section_3.2.5)) and two strings (friendly names).
 
 typedef struct _ContextAndTwoStringA_Call {
 
@@ -1001,7 +1001,7 @@ REDIR_SCARDCONTEXT Context;
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 ContextAndTwoStringW_Call
 
-The contents of the ContextAndTwoStringW_Call structure is used in those calls that require a valid [**Smart Cards for Windows**](#gt_smart-cards-for-windows) context (as specified in section [3.2.5](#Section_3.1.4)) and two strings (friendly names).
+The contents of the ContextAndTwoStringW_Call structure is used in those calls that require a valid [**Smart Cards for Windows**](#gt_smart-cards-for-windows) context (as specified in section [3.2.5](#Section_3.2.5)) and two strings (friendly names).
 
 typedef struct _ContextAndTwoStringW_Call {
 
@@ -3218,7 +3218,7 @@ Figure 4: Protocol flow
 
 This representation of the protocol flow is simplified in that there is only one application sending data over this protocol. In an actual implementation there could be multiple outstanding calls at any time.
 
-All packets are constructed as specified in sections [3.2.5](#Section_3.1.4) and [3.2.5.3](../MS-RDPEFS/MS-RDPEFS.md). The Status field refers to the **IoStatus** field as specified in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 2.2.1.5. The **CompletionId** field is also specified in [MS-RDPEFS] section 2.2.1.5.
+All packets are constructed as specified in sections [3.2.5](#Section_3.2.5) and [3.2.5.3](../MS-RDPEFS/MS-RDPEFS.md). The Status field refers to the **IoStatus** field as specified in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 2.2.1.5. The **CompletionId** field is also specified in [MS-RDPEFS] section 2.2.1.5.
 
 <a id="Section_4.1"></a>
 ## 4.1 Establish Context Call

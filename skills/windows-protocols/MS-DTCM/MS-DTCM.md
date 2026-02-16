@@ -504,7 +504,7 @@ This section specifies the versioning and capability negotiation dependencies fo
 <a id="Section_1.7.2"></a>
 ### 1.7.2 Versioning Negotiation Mechanisms
 
-This protocol uses the explicit versioning negotiation mechanism that is specified in [MS-CMPO](#Section_2.1) section 3.3.4.2, BuildContext. An implementation of this protocol uses that mechanism to specify which versions of the protocol that it supports and to arrive at a mutually agreeable version with its partners. For specific information about versioning negotiation, see [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
+This protocol uses the explicit versioning negotiation mechanism that is specified in [MS-CMPO](#Section_2.1) section 3.3.4.2, BuildContext. An implementation of this protocol uses that mechanism to specify which versions of the protocol that it supports and to arrive at a mutually agreeable version with its partners. For specific information about versioning negotiation, see [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
 
 By claiming support for a specific protocol version, an implementation is agreeing to provide support for the protocol elements that define that version. Protocol elements that are specific to a version are as follows:
 
@@ -950,7 +950,7 @@ For more information about the transport layer, see Transport (section 2.1).
 The connection objects that are used in this specification extend the definition of a connection object, as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.1.1, to include the following data elements:
 
 - State: A state enumeration value that represents the current state of the connection while participating in the interactions that are associated with a certain [**connection type**](#gt_connection-type). A connection [**state machine**](#gt_state-machine) is defined as a set of possible connection states, together with a set of processing rules for messages and events, that are received in each state.
-- UsesVersion11: A Boolean flag that indicates whether the negotiated protocol version is MS-DTCM 1.0 or MS-DTCM 1.1. For more information about versioning, see [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
+- UsesVersion11: A Boolean flag that indicates whether the negotiated protocol version is MS-DTCM 1.0 or MS-DTCM 1.1. For more information about versioning, see [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
 The following rules apply to a connection state machine:
 
 - When a [**protocol participant**](#gt_protocol-participant) initiates or accepts a connection, the state field of the connection MUST be set to the Idle (section [3.2.1.1.1](#Section_3.2.1.1.1) or section [3.3.1.2.1.1](#Section_3.3.1.2.1.1)) state. When the connection is disconnected, the state of the connection MUST be set to the Ended (section [3.2.1.1.5](#Section_3.2.1.1.5) or section [3.3.1.2.1.5](#Section_3.3.1.2.1.5)) state.
@@ -969,7 +969,7 @@ Related to protocol versioning, when a [**protocol role**](#gt_protocol-role) is
 
 - Set the value of the Minimum Level 3 Version Number data field of the underlying transports protocol implementation to 1, as specified in [MS-CMPO](#Section_2.1) section 3.2.3.1.
 - If the protocol role implements version 1.0 of this protocol:
-- The [TIP Interoperability Application Role (section 3.2)](#Section_1.3.2.1) sets the Maximum Level 3 Version Number data field of the underlying transports protocol implementation to either 1 or 2. Both values have the same interpretation, as specified in [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
+- The [TIP Interoperability Application Role (section 3.2)](#Section_1.3.2.1) sets the Maximum Level 3 Version Number data field of the underlying transports protocol implementation to either 1 or 2. Both values have the same interpretation, as specified in [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
 - The [TIP Interoperability Provider Role (section 3.3)](#Section_1.3.2.2) sets the Maximum Level 3 Version Number of the underlying transports protocol to 1.
 - Otherwise, if the role implements version 1.1 of this protocol:
 - Set the Maximum Level 3 Version Number data field of the underlying transports protocol implementation to 4, 5, or 6. All three values have the same interpretation, as specified in Versioning Negotiation (section 3.1.8).
@@ -1015,7 +1015,7 @@ None.
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
 
-A protocol participant that uses a connection object MUST be prepared to handle the [Connection Disconnected event](#Section_3.2.5.1.6) at any time during the lifetime of that connection.
+A protocol participant that uses a connection object MUST be prepared to handle the [Connection Disconnected event](#Section_3.3.5.1.3) at any time during the lifetime of that connection.
 
 <a id="Section_3.1.7.1"></a>
 #### 3.1.7.1 Connection Disconnected
@@ -1048,7 +1048,7 @@ The negotiated protocol version MUST be used when creating new connection object
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with the behavior that is described in this document.
 
-The [TIP interoperability application role](#Section_1.3.2.1) MUST extend the common abstract data model that is specified in section [3.1.1](#Section_3.3.1) to include the following data elements:
+The [TIP interoperability application role](#Section_1.3.2.1) MUST extend the common abstract data model that is specified in section [3.1.1](#Section_3.1.1) to include the following data elements:
 
 - [**TIP Interoperability Application Name**](#gt_tip-interoperability-application-name): A [**name object**](#gt_name-object) that is used to identify the TIP interoperability application with the underlying transport protocol, as specified in [MS-CMPO](#Section_2.1).
 - [**TIP Interoperability Provider Name**](#gt_tip-interoperability-provider-name): A name object that identifies the [TIP interoperability provider](#Section_1.3.2.2) that the TIP interoperability application MUST use.
@@ -1062,7 +1062,7 @@ The [TIP interoperability application](#Section_1.3.2.1) MUST act as an initiato
 - [Idle](#Section_3.2.1.1.1)
 - [Awaiting Sync Pull Response](#Section_3.2.1.1.2)
 - [Awaiting Async Pull Response](#Section_3.2.1.1.3)
-- [Awaiting Push Response](#Section_3.3.1.2.1.4)
+- [Awaiting Push Response](#Section_3.2.1.1.4)
 - [Ended](#Section_3.2.1.1.5)
 The following figure shows the relationship between the CONNTYPE_TXUSER_TIPPROXYGATEWAY initiator states:
 
@@ -1084,7 +1084,7 @@ The following events are processed in this state:
 
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLED Message](#Section_3.2.5.1.1)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLERROR Message](#Section_3.2.5.1.3)
-- [Connection Disconnected](#Section_3.2.5.1.6)
+- [Connection Disconnected](#Section_3.3.5.1.3)
 <a id="Section_3.2.1.1.3"></a>
 ##### 3.2.1.1.3 Awaiting Async Pull Response
 
@@ -1093,7 +1093,7 @@ The following events are processed in this state:
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLED Message](#Section_3.2.5.1.1)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULL_ASYNC_COMPLETE Message](#Section_3.2.5.1.2)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLERROR Message](#Section_3.2.5.1.3)
-- [Connection Disconnected](#Section_3.2.5.1.6)
+- [Connection Disconnected](#Section_3.3.5.1.3)
 <a id="Section_3.2.1.1.4"></a>
 ##### 3.2.1.1.4 Awaiting Push Response
 
@@ -1101,7 +1101,7 @@ The following events are processed in this state:
 
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSHED Message](#Section_3.2.5.1.4)
 - [Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSHERROR Message](#Section_3.2.5.1.5)
-- [Connection Disconnected](#Section_3.2.5.1.6)
+- [Connection Disconnected](#Section_3.3.5.1.3)
 <a id="Section_3.2.1.1.5"></a>
 ##### 3.2.1.1.5 Ended
 
@@ -1155,14 +1155,14 @@ If the higher-layer business logic decides to push a transaction by using the [*
 - The **guidTx** field MUST be set to the GUID that specifies the [**transaction identifier**](#gt_transaction-identifier) that is associated with the transaction to be pushed.
 - The **tipTmId** field MUST be set to the value of the [OLETX_TIP_TM_ID](#Section_2.2.3.1) structure that is provided by the higher-layer business logic.
 - Otherwise, the TIP interoperability application MUST send a [TIPPROXYGATEWAY_MTAG_PUSH](#Section_2.2.5.1.3.6) message by using the connection. The message fields MUST be set as specified above for sending a TXUSER_TIPPROXYGATEWAY_MTAG_PUSH2 message.
-- Set the connection state to [Awaiting Push Response](#Section_3.3.1.2.1.4).
+- Set the connection state to [Awaiting Push Response](#Section_3.2.1.1.4).
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 CONNTYPE_TXUSER_TIPPROXYGATEWAY as Initiator
 
-For all messages that are received in this connection type, the [TIP interoperability application](#Section_1.3.2.1) MUST process the message, as specified in [Common Message Processing Events and Sequencing Rules](#Section_3.2.5). The application MUST also follow the processing rules that are specified in the following sections.
+For all messages that are received in this connection type, the [TIP interoperability application](#Section_1.3.2.1) MUST process the message, as specified in [Common Message Processing Events and Sequencing Rules](#Section_3.1.5). The application MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLED Message
@@ -1174,7 +1174,7 @@ When the TIP interoperability application receives a TXUSER_TIPPROXYGATEWAY_MTAG
 - Set the connection state to [Ended](#Section_3.2.1.1.5).
 - Otherwise, if the connection state is Awaiting Async Pull Response:
 - Return a success result and the value of the guidTx field from the message to the higher-layer business logic as a response to the Sending a TIP Pull Request event from the higher-layer business logic.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.5](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.5](#Section_3.1.5).
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULL_ASYNC_COMPLETE Message
 
@@ -1183,7 +1183,7 @@ When the [TIP interoperability application](#Section_1.3.2.1) receives a [TXUSER
 - If the connection state is [Awaiting Async Pull Response](#Section_3.2.1.1.3):
 - Return a success result to the higher-layer business logic as a response to the [Sending a TIP Pull Request](#Section_3.2.4.1) event from the higher-layer business logic.
 - Set the connection state to [Ended](#Section_3.2.1.1.5).
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.5](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.5](#Section_3.1.5).
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULLERROR Message
 
@@ -1193,34 +1193,34 @@ When the [TIP interoperability application](#Section_1.3.2.1) receives a [TXUSER
 - If the Error field from the message is set to one of the following values of the [TRUN_TIPPROXYGATEWAY_PULLERROR](#Section_2.2.4.1) enumeration (**TRUN_TIPPROXYGATEWAY_PULLERROR_TIPCONNECTERROR**, **TRUN_TIPPROXYGATEWAY_PULLERROR_TIPNOTPULLED**, **TRUN_TIPPROXYGATEWAY_PULLERROR_TIPERROR**), or if the Error field from the message is set to **TRUN_TIPPROXYGATEWAY_PULLERROR_TIPDISABLED** and the **UsesVersion11** flag of the connection is set:
 - Return a failure result to the higher-layer business logic as a response to the [Sending a TIP Pull Request](#Section_3.2.4.1) event from the higher-layer business logic.
 - Set the connection state to [Ended](#Section_3.2.1.1.5).
-- Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.5](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.5](#Section_3.1.5).
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSHED Message
 
 When the [TIP interoperability application](#Section_1.3.2.1) receives a [TXUSER_TIPPROXYGATEWAY_MTAG_PUSHED](#Section_2.2.5.1.3.8) message, it MUST perform the following actions:
 
-- If the connection state is [Awaiting Push Response](#Section_3.3.1.2.1.4):
+- If the connection state is [Awaiting Push Response](#Section_3.2.1.1.4):
 - Return a success result and the value of the **tipTxId** field from the message to the higher-layer business logic as a response to the [Sending a TIP Pull Request](#Section_3.2.4.1) event from the higher-layer business logic.
 - Set the connection state to [Ended](#Section_3.2.1.1.5).
-- Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.5](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.5](#Section_3.1.5).
 <a id="Section_3.2.5.1.5"></a>
 ##### 3.2.5.1.5 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSHERROR Message
 
 When the [TIP interoperability application](#Section_1.3.2.1) receives a [TXUSER_TIPPROXYGATEWAY_MTAG_PUSHERROR](#Section_2.2.5.1.3.9) message, it MUST perform the following actions:
 
-- If the connection state is [Awaiting Push Response](#Section_3.3.1.2.1.4):
+- If the connection state is [Awaiting Push Response](#Section_3.2.1.1.4):
 - If the Error field from the message is set to one of the following values of the [TRUN_TIPPROXYGATEWAY_PUSHERROR](#Section_2.2.4.2) enumeration (**TRUN_TIPPROXYGATEWAY_PUSHERROR_TIPCONNECTERROR** or **TRUN_TIPPROXYGATEWAY_PUSHERROR_TIPERROR**), or if the Error field from the message is set to **TRUN_TIPPROXYGATEWAY_PUSHERROR_TIPDISABLED** and the **UsesVersion11** flag of the connection is set:
 - Return a failure result to the higher-layer business logic.
 - Set the connection state to [Ended](#Section_3.2.1.1.5).
-- Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.5](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message, as specified in section [3.1.5](#Section_3.1.5).
 <a id="Section_3.2.5.1.6"></a>
 ##### 3.2.5.1.6 Connection Disconnected
 
 When a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is disconnected, the [TIP interoperability application](#Section_1.3.2.1) MUST perform the following actions:
 
-- If the connection state is [Awaiting Sync Pull Response](#Section_3.2.1.1.2), [Awaiting Async Pull Response](#Section_3.2.1.1.3), or [Awaiting Push Response](#Section_3.3.1.2.1.4):
+- If the connection state is [Awaiting Sync Pull Response](#Section_3.2.1.1.2), [Awaiting Async Pull Response](#Section_3.2.1.1.3), or [Awaiting Push Response](#Section_3.2.1.1.4):
 - Return a failure result to the higher-layer business logic.
-- Otherwise, the event MUST be processed as specified in section [3.1.7.1](#Section_3.2.5.1.6).
+- Otherwise, the event MUST be processed as specified in section [3.1.7.1](#Section_3.3.5.1.3).
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
@@ -1239,7 +1239,7 @@ None.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with the behavior that is described in this document.
 
-The [**TIP**](#gt_tip) interoperability provider MUST maintain all the data elements that are specified in the [Abstract Data Model (section 3.1.1)](#Section_3.3.1). The [TIP interoperability provider](#Section_1.3.2.2) MUST also maintain the following data elements:
+The [**TIP**](#gt_tip) interoperability provider MUST maintain all the data elements that are specified in the [Abstract Data Model (section 3.1.1)](#Section_3.1.1). The [TIP interoperability provider](#Section_1.3.2.2) MUST also maintain the following data elements:
 
 - [**TIP Interoperability Provider Name**](#gt_tip-interoperability-provider-name): A [**Name object**](#gt_name-object) that identifies the TIP interoperability provider with the underlying transport infrastructure of MSDTC Connection Manager: OleTx Transports Protocol, as specified in [MS-CMPO](#Section_2.1).
 - [**TIP Transaction Table**](#gt_tip-transaction-table): A table of entries to [**transaction objects**](#gt_transaction-object), as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.1.1, that are keyed by the [**TIP URL**](#gt_tip-url) of the TIP transaction with which a transaction object that is managed by the [**OleTx transaction manager**](#gt_oletx-transaction-manager-oletx-tm) is associated through TIP propagation.
@@ -1273,7 +1273,7 @@ The [TIP interoperability provider](#Section_1.3.2.2) MUST act as an acceptor fo
 - [Idle](#Section_3.3.1.2.1.1)
 - [Awaiting Sync Pull Response](#Section_3.2.1.1.2)
 - [Awaiting Async Pull Response](#Section_3.2.1.1.3)
-- [Awaiting Push Response](#Section_3.3.1.2.1.4)
+- [Awaiting Push Response](#Section_3.2.1.1.4)
 - [Ended](#Section_3.3.1.2.1.5)
 The following figure shows the relationship between the CONNTYPE_TXUSER_TIPPROXYGATEWAY acceptor states.
 
@@ -1356,7 +1356,7 @@ There are no higher-layer triggered events specifically for this role.
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 CONNTYPE_TXUSER_TIPPROXYGATEWAY as Acceptor
 
-For all messages that are received in this [**connection type**](#gt_connection-type), the [TIP interoperability provider](#Section_1.3.2.2) MUST process the message as specified in [Common Message Processing Events and Sequencing Rules](#Section_3.2.5). The TIP interoperability provider MUST also follow the processing rules that are specified in the following sections.
+For all messages that are received in this [**connection type**](#gt_connection-type), the [TIP interoperability provider](#Section_1.3.2.2) MUST process the message as specified in [Common Message Processing Events and Sequencing Rules](#Section_3.1.5). The TIP interoperability provider MUST also follow the processing rules that are specified in the following sections.
 
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PULL or a TXUSER_TIPPROXYGATEWAY_MTAG_PULL2 Message
@@ -1403,14 +1403,14 @@ When the [TIP interoperability provider](#Section_1.3.2.2) receives one of these
 - The TIP URL value
 - Signal the [Pull TIP Transaction](#Section_3.3.7.1.1) event on itself with the following argument:
 - The transaction object
-- Otherwise, the message MUST be processed as an invalid message, as specified in [Common Message Processing Events and Sequencing Rules (section 3.1.5)](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message, as specified in [Common Message Processing Events and Sequencing Rules (section 3.1.5)](#Section_3.1.5).
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 Receiving a TXUSER_TIPPROXYGATEWAY_MTAG_PUSH or a TXUSER_TIPPROXYGATEWAY_MTAG_PUSH2 Message
 
 When the [TIP interoperability provider](#Section_1.3.2.2) receives one of these messages, it MUST perform the following actions:
 
 - If the connection state is [Idle](#Section_3.3.1.2.1.1):
-- Set the connection state to [Awaiting Push Response](#Section_3.3.1.2.1.4).
+- Set the connection state to [Awaiting Push Response](#Section_3.2.1.1.4).
 - If the **Allow TIP** flag of the **Core Transaction Manager Facet** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1) is set to FALSE<7>:
 - If the UsesVersion11 flag of the connection is TRUE:
 - Send a [TXUSER_TIPPROXYGATEWAY_MTAG_PUSHERROR](#Section_2.2.5.1.3.9) message by using the connection:
@@ -1434,11 +1434,11 @@ When the [TIP interoperability provider](#Section_1.3.2.2) receives one of these
 - Signal the [Push TIP Transaction](#Section_3.3.7.1.2) event on itself with the following arguments:
 - The transaction object
 - The value of the **tipTmId** field from the message
-- Otherwise, the message MUST be processed as an invalid message, as specified in [Common Message Processing Events and Sequencing Rules (section 3.1.5)](#Section_3.2.5).
+- Otherwise, the message MUST be processed as an invalid message, as specified in [Common Message Processing Events and Sequencing Rules (section 3.1.5)](#Section_3.1.5).
 <a id="Section_3.3.5.1.3"></a>
 ##### 3.3.5.1.3 Connection Disconnected
 
-When a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is disconnected, the [TIP interoperability provider](#Section_1.3.2.2) MUST process the event as specified in [Connection Disconnected (section 3.1.7.1)](#Section_3.2.5.1.6).
+When a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is disconnected, the [TIP interoperability provider](#Section_1.3.2.2) MUST process the event as specified in [Connection Disconnected (section 3.1.7.1)](#Section_3.3.5.1.3).
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -1641,7 +1641,7 @@ When performing a [**TIP transaction propagation**](#gt_tip-transaction-propagat
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-The following protocol examples assume that a session, as specified in [MS-CMPO](#Section_2.1), is already established between two [**protocol participants**](#gt_protocol-participant) and that the negotiated protocol version for that session is MS-DTCM 1.1. For more information about protocol versions, see [Versioning Negotiation (section 3.1.8)](#Section_3.1.8).
+The following protocol examples assume that a session, as specified in [MS-CMPO](#Section_2.1), is already established between two [**protocol participants**](#gt_protocol-participant) and that the negotiated protocol version for that session is MS-DTCM 1.1. For more information about protocol versions, see [Versioning Negotiation (section 3.1.8)](#Section_1.7.1).
 
 In these examples, protocol participants communicate with each other by using a multiplexing protocol connection, described in [MS-CMP](../MS-CMP/MS-CMP.md), that is in turn layered on top of the transports protocol infrastructure. Example messages are based on a MESSAGE_PACKET structure, as described in [MS-CMP] section 2.2.2, and are sent from one protocol participant to another by using the functionality that is provided by the underlying multiplexing protocol layer.
 
@@ -1713,7 +1713,7 @@ This scenario shows how a [TIP interoperability application](#Section_1.3.2.1) p
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Establishing a CONNTYPE_TXUSER_TIPPROXYGATEWAY Connection
 
-Before protocol-specific messages are exchanged, a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is established between the [TIP interoperability application](#Section_1.3.2.1) and the [TIP interoperability provider](#Section_1.3.2.2)—just as in the example [Establishing a CONNTYPE_TXUSER_TIPPROXYGATEWAY Connection (section 4.1.1)](#Section_4.1.1).
+Before protocol-specific messages are exchanged, a [CONNTYPE_TXUSER_TIPPROXYGATEWAY](#Section_2.2.5.1) connection is established between the [TIP interoperability application](#Section_1.3.2.1) and the [TIP interoperability provider](#Section_1.3.2.2)—just as in the example [Establishing a CONNTYPE_TXUSER_TIPPROXYGATEWAY Connection (section 4.1.1)](#Section_2.2.5.1).
 
 <a id="Section_4.2.2"></a>
 ### 4.2.2 Sending the TXUSER_TIPPROXYGATEWAY_MTAG_PUSH2 Message

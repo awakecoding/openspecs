@@ -932,7 +932,7 @@ If the user is authenticated successfully using the provided authentication info
 
 If the SOAP action is "http://schemas.microsoft.com/windows/pki/2009/01/enrollment/RST/wstep" the server must follow the Request Security Token Processing Rules per section [3.1.4.2.1](#Section_3.1.4.2.1.1).
 
-If the SOAP action is "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/KET" the server must follow the Key Exchange Token Processing Rules per section [3.1.4.2.2](#Section_3.1.4.2.2).
+If the SOAP action is "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/KET" the server must follow the Key Exchange Token Processing Rules per section [3.1.4.2.2](#Section_3.1.4.2.2.1).
 
 If any other SOAP action is defined, the server SHOULD respond with a SOAP fault.
 

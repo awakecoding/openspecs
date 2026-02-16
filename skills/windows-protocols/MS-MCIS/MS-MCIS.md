@@ -458,7 +458,7 @@ The following table summarizes the data structures defined in this section.
 | [CDbPropSet](#Section_2.2.1.16) | Contains a set of rowset properties. |
 | [CPidMapper](#Section_2.2.1.17) | Maps from message internal property IDs (PIDs) to full prop specs. |
 | [CRowSeekAt](#Section_2.2.1.18) | Contains the offset at which to retrieve [**rows**](#gt_row) in a [CPMGetRowsIn](#Section_2.2.3.15) message. |
-| [CRowSeekAtRatio](#Section_2.2.1.18) | Identifies the approximate point expressed as a ratio at which to begin retrieval for a CPMGetRowsIn message. |
+| [CRowSeekAtRatio](#Section_2.2.1.19) | Identifies the approximate point expressed as a ratio at which to begin retrieval for a CPMGetRowsIn message. |
 | [CRowSeekByBookmark](#Section_2.2.1.20) | Identifies the [**bookmarks**](#gt_bookmark) from which to retrieve rows for a CPMGetRowsIn message. |
 | [CRowSeekNext](#Section_2.2.1.21) | Contains the number of rows to skip in a CPMGetRowsIn message. |
 | [CRowsetProperties](#Section_2.2.1.22) | Contains the configuration information for a query and is specified as OLE-DB rowset properties. |
@@ -1491,7 +1491,7 @@ packet-beta
 
 **_status (4 bytes):** An [**HRESULT**](#gt_hresult) value, indicating the status of the requested operation. When sent by the client, can be set to any arbitrary value and MUST be ignored on receipt.<5>
 
-**_ulChecksum (4 bytes):** The **_ulChecksum** MUST be calculated as specified in section [3.2.4](#Section_3.1.4) for the following messages:
+**_ulChecksum (4 bytes):** The **_ulChecksum** MUST be calculated as specified in section [3.2.4](#Section_3.2.4) for the following messages:
 
 - CPMConnectIn
 - CPMCreateQueryIn
@@ -1714,7 +1714,7 @@ packet-beta
 - [CPMFetchValueIn](#Section_2.2.3.19)
 - [CPMGetRowsIn](#Section_2.2.3.15)
 - [CPMSetBindingsIn](#Section_2.2.3.14)
-For how the server validates the value specified by the client in the **_ulChecksum** field for the messages previously listed, see section [3.2.4](#Section_3.1.4).
+For how the server validates the value specified by the client in the **_ulChecksum** field for the messages previously listed, see section [3.2.4](#Section_3.2.4).
 
 If the value is greater than 0x00000008, the client is assumed capable of handling 64-bit offsets in [CPMGetRowsOut](#Section_2.2.3.16) messages.<8>
 
@@ -2036,7 +2036,7 @@ MUST be set to one of the following values.
 | --- | --- |
 | eRowSeekNext 0x00000001 | **SeekDescription** contains a [CRowSeekNext](#Section_2.2.1.21) structure. |
 | eRowSeekAt 0x00000002 | **SeekDescription** contains a [CRowSeekAt](#Section_2.2.1.18) structure. |
-| eRowSeekAtRatio 0x00000003 | **SeekDescription** contains a [CRowSeekAtRatio](#Section_2.2.1.18) structure. |
+| eRowSeekAtRatio 0x00000003 | **SeekDescription** contains a [CRowSeekAtRatio](#Section_2.2.1.19) structure. |
 | eRowSeekByBookmark 0x00000004 | **SeekDescription** contains a [CRowSeekByBookmark](#Section_2.2.1.20) structure. |
 
 **SeekDescription (variable):** This field MUST contain a structure of the type indicated by the **eType** value.
@@ -2069,7 +2069,7 @@ packet-beta
 | eRowsSeekNone 0x00000000 | The **SeekDescription** field is omitted from the message. |
 | eRowSeekNext 0x00000001 | **SeekDescription** contains a [CRowSeekNext](#Section_2.2.1.21) structure. |
 | eRowSeekAt 0x00000002 | **SeekDescription** contains a [CRowSeekAt](#Section_2.2.1.18) structure. |
-| eRowSeekAtRatio 0x00000003 | **SeekDescription** contains a [CRowSeekAtRatio](#Section_2.2.1.18) structure. |
+| eRowSeekAtRatio 0x00000003 | **SeekDescription** contains a [CRowSeekAtRatio](#Section_2.2.1.19) structure. |
 | eRowSeekByBookmark 0x00000004 | **SeekDescription** contains a [CRowSeekByBookmark](#Section_2.2.1.20) structure. |
 
 **SeekDescription (variable):** This field MUST contain a structure of the type indicated by the **eType** field.
@@ -2696,7 +2696,7 @@ To validate the **_ulChecksum** field value, the server MUST check the value tha
 
 If the **_iClientVersion** field is less than 0x00000008 and the _ulChecksum field is not set to 0x00000000, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error. The server MUST NOT validate the **_ulChecksum** field for clients that set the **_iClientVersion** field to a value less than 0x00000008.
 
-If the **_iClientVersion** field value is 0x00000008 or greater, the server MUST validate that the **_ulChecksum** field was calculated as specified in section [3.2.4](#Section_3.1.4). If the **_ulChecksum** value is invalid, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
+If the **_iClientVersion** field value is 0x00000008 or greater, the server MUST validate that the **_ulChecksum** field was calculated as specified in section [3.2.4](#Section_3.2.4). If the **_ulChecksum** value is invalid, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
 
 Next, the server checks which state it is in. If its state is "not initialized", the server MUST report a CI_E_NOT_INITIALIZED (0x8004180B) error. If its state is "shutting down", the server MUST report a CI_E_SHUTDOWN (0x80041812) error.
 
@@ -3079,7 +3079,7 @@ When this request is received from the higher layer, the client MUST do the foll
 
 - Calculate the number of CTableColumn structures in the **aColumns** array and set the **cColumns** field to this value.
 - Calculate the total size in bytes of the **cColumns** and **aColumns** fields and set the **_cbBindingDesc** field to this value.
-- Set specified fields in the [CPMSetBindingsIn](#Section_2.2.3.14) message to the values provided by the higher application layer. Set the **ulChecksum** field to the value calculated as specified in section [3.2.5](#Section_3.1.5).
+- Set specified fields in the [CPMSetBindingsIn](#Section_2.2.3.14) message to the values provided by the higher application layer. Set the **ulChecksum** field to the value calculated as specified in section [3.2.5](#Section_3.2.5).
 - Send the completed CPMSetBindingsIn message to the server.
 - Wait to receive a CPMSetBindingsIn message from the server, discarding other messages.
 - Indicate the status from the **_status** field of the response to the higher layer.
@@ -3209,7 +3209,7 @@ The header of the message is populated as follows:
 
 - _msg is set to 0x000000C8, indicating that this is a CPMConnectIn message.
 - _status is set to 0x00000000.
-- _ulChecksum contains the checksum, computed as specified in section [3.2.4](#Section_3.1.4).
+- _ulChecksum contains the checksum, computed as specified in section [3.2.4](#Section_3.2.4).
 - _ulReserved2 is set to 0x00000000.
 The body of the message is populated as follows:
 

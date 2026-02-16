@@ -523,7 +523,7 @@ The object server constitutes an [**object resolver**](#gt_object-resolver) serv
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Activation
 
-[**Activation**](#gt_activation) is a generic term used to describe the act of creating (or sometimes finding) an existing DCOM [**object**](#gt_object) or [**class factory**](#gt_class-factory). Two [**RPC**](#gt_remote-procedure-call-rpc) [**interfaces**](#gt_interface) in the DCOM Remote Protocol are used to activate objects: [IActivation](#Section_3.1.2.5.2) methods and [IRemoteSCMActivator](#Section_3.1.2.5.2) methods. At a rudimentary level, activation consists of sending the following to the object activation service on the remote machine:
+[**Activation**](#gt_activation) is a generic term used to describe the act of creating (or sometimes finding) an existing DCOM [**object**](#gt_object) or [**class factory**](#gt_class-factory). Two [**RPC**](#gt_remote-procedure-call-rpc) [**interfaces**](#gt_interface) in the DCOM Remote Protocol are used to activate objects: [IActivation](#Section_3.1.2.5.2.1) methods and [IRemoteSCMActivator](#Section_3.1.2.5.2.2) methods. At a rudimentary level, activation consists of sending the following to the object activation service on the remote machine:
 
 - A class identifier ([**CLSID**](#gt_class-identifier-clsid))
 - One or more [**IIDs**](#gt_interface-identifier-iid)
@@ -546,9 +546,9 @@ An object exporter listens on the network by way of [**RPC**](#gt_remote-procedu
 
 An object exporter contains a [**remote unknown**](#gt_remote-unknown) object, which supports the following [**ORPC**](#gt_object-remote-procedure-call-orpc) [**interfaces**](#gt_interface):
 
-[IRemUnknown](#Section_3.1.1.5.7) interface: An ORPC interface that contains methods used to call QueryInterface, AddRef, and Release on remote objects.
+[IRemUnknown](#Section_3.1.1.5.7.1) interface: An ORPC interface that contains methods used to call QueryInterface, AddRef, and Release on remote objects.
 
-[IRemUnknown2](#Section_3.1.1.5.7) interface: An ORPC interface that extends the functionality of IRemUnknown.
+[IRemUnknown2](#Section_3.1.1.5.7.1) interface: An ORPC interface that extends the functionality of IRemUnknown.
 
 The [**client**](#gt_client) uses the AddRef and Release methods to manage the lifetime of objects contained in the object exporter. The client uses the QueryInterface method to obtain [**object references**](#gt_object-reference) for additional interface types implemented by an object.
 
@@ -585,18 +585,18 @@ An object exporter needs to use the CID of an incoming ORPC call to detect wheth
 
 The DCOM Remote Protocol uses [**reference counts**](#gt_reference-count) to manage [**object**](#gt_object) lifetimes. Each [**interface**](#gt_interface) on an object has an associated reference count that governs its lifetime. There are two types of reference counts associated with an interface: public references and private references. The sole distinction between public and private references is that private references can be released only by the client identity that requested them.
 
-To ensure that object resources are recovered in the event of machine failures or network failures, the DCOM Remote Protocol incorporates a [**garbage collection**](#gt_garbage-collection) mechanism. The mechanism is based on keep-alive [**pinging**](#gt_pinging), which allows a client to maintain the lifetimes of its [**object references**](#gt_object-reference). If an [**object server**](#gt_object-server) fails to receive pings for an object, then eventually the object server reclaims the object. For details, see sections [3.2.6.1](#Section_3.2.6.1), [3.1.1.6.2](#Section_3.1.1.6.2), and [3.1.2.6](#Section_3.1.1.6).
+To ensure that object resources are recovered in the event of machine failures or network failures, the DCOM Remote Protocol incorporates a [**garbage collection**](#gt_garbage-collection) mechanism. The mechanism is based on keep-alive [**pinging**](#gt_pinging), which allows a client to maintain the lifetimes of its [**object references**](#gt_object-reference). If an [**object server**](#gt_object-server) fails to receive pings for an object, then eventually the object server reclaims the object. For details, see sections [3.2.6.1](#Section_3.2.6.1), [3.1.1.6.2](#Section_3.1.1.6.2), and [3.1.2.6](#Section_3.2.6).
 
 <a id="Section_1.3.7"></a>
 ### 1.3.7 Object Resolver Service
 
-The [**object resolver**](#gt_object-resolver) service is the part of the DCOM Remote Protocol that performs [**activation**](#gt_activation) (see section [3.2.4.1.1](#Section_3.2.4.1.1.2)), [**OXID resolution**](#gt_oxid-resolution) (see section [3.1.2.5.1.1](#Section_3.1.2.5.1.1)), [**garbage collection**](#gt_garbage-collection) (see sections [3.1.1.6.2](#Section_3.1.1.6.2) and [3.1.2.6](#Section_3.1.1.6)), and server aliveness tests (see section [3.1.2.5.1.6](#Section_3.1.2.5.1.6)). The object resolver service can be reached as specified in sections [1.9](#Section_1.9) and [3.1.2.3](#Section_3.1.2). The object resolver service implements the following [**RPC**](#gt_remote-procedure-call-rpc) [**interfaces**](#gt_interface):
+The [**object resolver**](#gt_object-resolver) service is the part of the DCOM Remote Protocol that performs [**activation**](#gt_activation) (see section [3.2.4.1.1](#Section_3.2.4.1.1.1)), [**OXID resolution**](#gt_oxid-resolution) (see section [3.1.2.5.1.1](#Section_3.1.2.5.1.1)), [**garbage collection**](#gt_garbage-collection) (see sections [3.1.1.6.2](#Section_3.1.1.6.2) and [3.1.2.6](#Section_3.2.6)), and server aliveness tests (see section [3.1.2.5.1.6](#Section_3.1.2.5.1.6)). The object resolver service can be reached as specified in sections [1.9](#Section_1.9) and [3.1.2.3](#Section_1.3.7). The object resolver service implements the following [**RPC**](#gt_remote-procedure-call-rpc) [**interfaces**](#gt_interface):
 
-[IObjectExporter](#Section_3.1.2.5.1) methods.
+[IObjectExporter](#Section_3.1.2.5.1.5) methods.
 
-[IActivation](#Section_3.1.2.5.2): Contains a method used to create objects and [**class factories**](#gt_class-factory).
+[IActivation](#Section_3.1.2.5.2.1): Contains a method used to create objects and [**class factories**](#gt_class-factory).
 
-[IRemoteSCMActivator](#Section_3.1.2.5.2): Contains more methods used to create objects and class factories.
+[IRemoteSCMActivator](#Section_3.1.2.5.2.2): Contains more methods used to create objects and class factories.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -613,7 +613,7 @@ The following protocols are layered above the DCOM Remote Protocol:
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-The DCOM Remote Protocol requires that both client and [**object servers**](#gt_object-server) possess implementations of Remote Procedure Call Protocol Extensions, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). In addition, on the server, the [**object resolver**](#gt_object-resolver) must be running and reachable, as specified in section [3.1.2.3](#Section_3.1.2).
+The DCOM Remote Protocol requires that both client and [**object servers**](#gt_object-server) possess implementations of Remote Procedure Call Protocol Extensions, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). In addition, on the server, the [**object resolver**](#gt_object-resolver) must be running and reachable, as specified in section [3.1.2.3](#Section_1.3.7).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -673,16 +673,16 @@ The following table presents well-known [**GUIDs**](#gt_globally-unique-identifi
 | CLSID_PropsOutInfo | {00000339-0000-0000-c000-000000000046} | Activation property CLSID for PropsOutInfo | [2.2.22.2.9](#Section_2.2.22.2.9) |
 | CLSID_ScmReplyInfo | {000001b6-0000-0000-c000-000000000046} | Activation property CLSID for ScmReplyInfoData | [2.2.22.2.8](#Section_2.2.22.2.8) |
 | CLSID_ScmRequestInfo | {000001aa-0000-0000-c000-000000000046} | Activation property CLSID for ScmRequestInfoData | [2.2.22.2.4](#Section_2.2.22.2.4) |
-| CLSID_SecurityInfo | {000001a6-0000-0000-c000-000000000046} | Activation property CLSID for SecurityInfoData | [2.2.22.2.7](#Section_2.2.22.2.7) |
+| CLSID_SecurityInfo | {000001a6-0000-0000-c000-000000000046} | Activation property CLSID for SecurityInfoData | [2.2.22.2.7](#Section_5) |
 | CLSID_ServerLocationInfo | {000001a4-0000-0000-c000-000000000046} | Activation property CLSID for LocationInfoData | [2.2.22.2.6](#Section_2.2.22.2.6) |
 | CLSID_SpecialSystemProperties | {000001b9-0000-0000-c000-000000000046} | Activation property CLSID for SpecialPropertiesData | [2.2.22.2.2](#Section_2.2.22.2.2) |
-| IID_IActivation | {4d9f4ab8-7d1c-11cf-861e-0020af6e7c57} | [**RPC**](#gt_remote-procedure-call-rpc) [**interface**](#gt_interface) [**UUID**](#gt_universally-unique-identifier-uuid) for IActivation | [3.1.2.5.2.1](#Section_3.1.2.5.2) |
+| IID_IActivation | {4d9f4ab8-7d1c-11cf-861e-0020af6e7c57} | [**RPC**](#gt_remote-procedure-call-rpc) [**interface**](#gt_interface) [**UUID**](#gt_universally-unique-identifier-uuid) for IActivation | [3.1.2.5.2.1](#Section_3.1.2.5.2.1) |
 | IID_IActivationPropertiesIn | {000001A2-0000-0000-C000-000000000046} | The value of the **iid** field of the *pActProperties* [OBJREF](#Section_2.2.18) structure | 3.1.2.5.2.3.2 3.1.2.5.2.3.3 |
 | IID_IActivationPropertiesOut | {000001A3-0000-0000-C000-000000000046} | The value of the **iid** field of the *ppActProperties* OBJREF structure | 3.1.2.5.2.3.2 3.1.2.5.2.3.3 |
 | IID_IContext | {000001c0-0000-0000-C000-000000000046} | The value of the **iid** field of the Context structure. | 2.2.20 |
-| IID_IObjectExporter | {99fcfec4-5260-101b-bbcb-00aa0021347a} | RPC interface UUID for IObjectExporter | [3.1.2.5.1](#Section_3.1.2.5.1) |
-| IID_IRemoteSCMActivator | {000001A0-0000-0000-C000-000000000046} | RPC interface UUID for IRemoteSCMActivator | [3.1.2.5.2.2](#Section_3.1.2.5.2) |
-| IID_IRemUnknown | {00000131-0000-0000-C000-000000000046} | RPC interface UUID for IRemUnknown | [3.1.1.5.6](#Section_3.1.1.5.7) |
+| IID_IObjectExporter | {99fcfec4-5260-101b-bbcb-00aa0021347a} | RPC interface UUID for IObjectExporter | [3.1.2.5.1](#Section_3.1.2.5.1.5) |
+| IID_IRemoteSCMActivator | {000001A0-0000-0000-C000-000000000046} | RPC interface UUID for IRemoteSCMActivator | [3.1.2.5.2.2](#Section_3.1.2.5.2.2) |
+| IID_IRemUnknown | {00000131-0000-0000-C000-000000000046} | RPC interface UUID for IRemUnknown | [3.1.1.5.6](#Section_3.1.1.5.7.1) |
 | IID_IRemUnknown2 | {00000143-0000-0000-C000-000000000046} | RPC interface UUID for IRemUnknown2 | [3.1.1.5.7.1](#Section_3.1.1.5.7.1) |
 | IID_IUnknown | {00000000-0000-0000-C000-000000000046} | RPC interface UUID for IUnknown | [3.1.1.5.8](#Section_3.1.1.5.8) |
 
@@ -831,7 +831,7 @@ The following table specifies the capabilities introduced in each [**DCOM**](#gt
 | 5.3 | MUST NOT be used. |
 | 5.4 | Update in the marshaling of arrays of interface pointers. Update in the marshaling of conformant embedded structures. |
 | 5.5 | Unused. This is to avoid having a DCOM version with matching major and minor version numbers. |
-| 5.6 | Added [OBJREF_HANDLER](#Section_2.2.18.5) and [OBJREF_EXTENDED](#Section_2.2.18.7) to the [**OBJREF**](#gt_objref) type. Added IRemoteSCMActivator interface methods (see section [3.1.2.5.2.2](#Section_3.1.2.5.2)). Added IObjectExporter::ServerAlive2 (Opnum 5) method to IObjectExporter interface. Added [IRemUnknown2](#Section_3.1.1.5.7) interface. |
+| 5.6 | Added [OBJREF_HANDLER](#Section_2.2.18.5) and [OBJREF_EXTENDED](#Section_2.2.18.7) to the [**OBJREF**](#gt_objref) type. Added IRemoteSCMActivator interface methods (see section [3.1.2.5.2.2](#Section_3.1.2.5.2.2)). Added IObjectExporter::ServerAlive2 (Opnum 5) method to IObjectExporter interface. Added [IRemUnknown2](#Section_3.1.1.5.7.1) interface. |
 | 5.7 | No DCOM changes from 5.6.<5> |
 
 <a id="Section_2.2.12"></a>
@@ -1500,7 +1500,7 @@ packet-beta
 <a id="Section_2.2.22"></a>
 ### 2.2.22 Activation Properties BLOB
 
-Activation properties constitute a BLOB of data that contains information used to specify the parameters of activation, or to return the results of activation. Activation properties BLOBs are passed as [in] and [out] parameters of the [IRemoteSCMActivator](#Section_3.1.2.5.2) methods.
+Activation properties constitute a BLOB of data that contains information used to specify the parameters of activation, or to return the results of activation. Activation properties BLOBs are passed as [in] and [out] parameters of the [IRemoteSCMActivator](#Section_3.1.2.5.2.2) methods.
 
 ```mermaid
 packet-beta
@@ -1516,7 +1516,7 @@ packet-beta
 
 **CustomHeader (variable):** This MUST contain a [CustomHeader](#Section_2.2.22.1) marshaled using the [**NDR**](#gt_network-data-representation-ndr) Type Serialization 1 engine (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.6).
 
-**Property (variable):** This MUST contain an array of structures listed in section [2.2.22.2](#Section_2.2.22.2.3) marshaled using the NDR Type Serialization 1 engine (as specified in [MS-RPCE] section 2.2.6). The format of the Nth element in the array is identified by the [**CLSID**](#gt_class-identifier-clsid) specified in the Nth entry of the pclsid array in the CustomHeader field. The number of elements in the array MUST be specified by the **cIfs** field of the CustomHeader and MUST NOT be zero.
+**Property (variable):** This MUST contain an array of structures listed in section [2.2.22.2](#Section_2.2.22.2.2) marshaled using the NDR Type Serialization 1 engine (as specified in [MS-RPCE] section 2.2.6). The format of the Nth element in the array is identified by the [**CLSID**](#gt_class-identifier-clsid) specified in the Nth entry of the pclsid array in the CustomHeader field. The number of elements in the array MUST be specified by the **cIfs** field of the CustomHeader and MUST NOT be zero.
 
 <a id="Section_2.2.22.1"></a>
 #### 2.2.22.1 CustomHeader
@@ -2101,7 +2101,7 @@ This section describes a conceptual model of possible data organization that an 
 - An object pointer to an implementation-specific application state that represents the object.
 - An implementation-defined hash of the [STRINGBINDING](#Section_2.2.19.3) of the **saResAddr** field contained in the [STDOBJREF](#Section_2.2.18.1).
 - A Boolean garbage_collection flag that MUST be set to True if the object participates in [**pinging**](#gt_pinging); see the SORF_NOPING flag in section [2.2.18.2](#Section_2.2.18.2).
-**Resolver table**: See section [3.2.1](#Section_3.1.1.1).
+**Resolver table**: See section [3.2.1](#Section_3.1.2.1).
 
 **SETID table**: See section 3.2.1.
 
@@ -2115,7 +2115,7 @@ Each object exporter instance MUST maintain a global timer for [**pinging**](#gt
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Initialization
 
-[**Object exporters**](#gt_object-exporter) MUST listen by way of [**RPC**](#gt_remote-procedure-call-rpc) protocols described in section [3.1.2.3](#Section_3.1.2) and as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 3.1.20 (rpc_server_use_protseq). Because listening is potentially expensive, such initialization SHOULD be delayed until an [**object reference**](#gt_object-reference) is marshaled from the object exporter.
+[**Object exporters**](#gt_object-exporter) MUST listen by way of [**RPC**](#gt_remote-procedure-call-rpc) protocols described in section [3.1.2.3](#Section_1.3.7) and as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 3.1.20 (rpc_server_use_protseq). Because listening is potentially expensive, such initialization SHOULD be delayed until an [**object reference**](#gt_object-reference) is marshaled from the object exporter.
 
 The object exporter MUST listen on an RPC protocol before returning the object exporter bindings that specify that RPC [**protocol sequence identifier**](#gt_protocol-sequence-identifier) in the response to the activation or [**OXID resolution**](#gt_oxid-resolution) requests.
 
@@ -2125,7 +2125,7 @@ The object exporter MUST obtain the [**OID**](#gt_object-identifier-oid) of the 
 
 The object exporter MUST obtain the ping period from the resolver; for details, see section [3.1.2.2](#Section_3.2.2).
 
-Each object exporter instance MUST create an [**IPID**](#gt_interface-pointer-identifier-ipid) entry for its [IRemUnknown](#Section_3.1.1.5.7) interface. If an object exporter instance is at [COMVERSION](#Section_2.2.11) 5.6 or above, it MUST also create an IPID entry for the [IRemUnknown2](#Section_3.1.1.5.7) interface. An object exporter instance MUST create its IPID entry as follows:
+Each object exporter instance MUST create an [**IPID**](#gt_interface-pointer-identifier-ipid) entry for its [IRemUnknown](#Section_3.1.1.5.7.1) interface. If an object exporter instance is at [COMVERSION](#Section_2.2.11) 5.6 or above, it MUST also create an IPID entry for the [IRemUnknown2](#Section_3.1.1.5.7.1) interface. An object exporter instance MUST create its IPID entry as follows:
 
 - It MUST allocate an IPID and set it in the IPID entry.
 - It MUST set the IID in the IPID entry to the IID for the IRemUnknown interface or the IRemUnknown2 interface.
@@ -2194,7 +2194,7 @@ An application or higher-layer protocol can instruct the object exporter to retu
 
 The [**object exporter**](#gt_object-exporter) MUST perform the following operations to marshal an [**object reference**](#gt_object-reference) when returning from an [**ORPC**](#gt_object-remote-procedure-call-orpc) invocation. In this case, the application or higher-layer protocol MUST supply the [**IPID**](#gt_interface-pointer-identifier-ipid) of the object reference:
 
-- The object exporter MUST proceed as a client to marshal the object reference. Specifically, it MUST follow the steps specified in section [3.2.4.3](#Section_1.3.2) to marshal the object reference.
+- The object exporter MUST proceed as a client to marshal the object reference. Specifically, it MUST follow the steps specified in section [3.2.4.3](#Section_1.2) to marshal the object reference.
 <a id="Section_3.1.1.5.3"></a>
 ##### 3.1.1.5.3 Unmarshaling an Object Reference
 
@@ -2258,7 +2258,7 @@ The methods MUST NOT throw exceptions.
 <a id="Section_3.1.1.5.6.1"></a>
 ###### 3.1.1.5.6.1 IRemUnknown Methods
 
-All [**object exporters**](#gt_object-exporter) MUST implement a [**Remote Unknown**](#gt_remote-unknown) object that supports the [IRemUnknown](#Section_3.1.1.5.7) interface. Clients MUST check for the RPC_S_UNKNOWN_IF error (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to determine if the object exporter supports the IRemUnknown interface.
+All [**object exporters**](#gt_object-exporter) MUST implement a [**Remote Unknown**](#gt_remote-unknown) object that supports the [IRemUnknown](#Section_3.1.1.5.7.1) interface. Clients MUST check for the RPC_S_UNKNOWN_IF error (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2) to determine if the object exporter supports the IRemUnknown interface.
 
 This is an [**ORPC**](#gt_object-remote-procedure-call-orpc) interface, not a native [**RPC**](#gt_remote-procedure-call-rpc) interface.
 
@@ -2461,7 +2461,7 @@ When the global timer expires, the [**object exporter**](#gt_object-exporter) MU
 <a id="Section_3.1.1.6.2"></a>
 ##### 3.1.1.6.2 Object Reclamation
 
-The [**object exporter**](#gt_object-exporter) MUST respond to object reclamation requests from the [**object resolver**](#gt_object-resolver) when the object resolver determines, by the [**pinging**](#gt_pinging) mechanism, that the client of the object is dead or unreachable; see section [3.1.2.6](#Section_3.1.1.6). When processing this request, the object exporter MUST do the following:
+The [**object exporter**](#gt_object-exporter) MUST respond to object reclamation requests from the [**object resolver**](#gt_object-resolver) when the object resolver determines, by the [**pinging**](#gt_pinging) mechanism, that the client of the object is dead or unreachable; see section [3.1.2.6](#Section_3.2.6). When processing this request, the object exporter MUST do the following:
 
 - It MUST look up the OID entry for the object. If found:
 - It MUST check the last [**ORPC**](#gt_object-remote-procedure-call-orpc) invocation time to see if an ORPC request has arrived in the last ping period.
@@ -2502,7 +2502,7 @@ OXID table: A table of entries to object exporters managed by the resolver, keye
 
 - The OXID of the object exporter.
 - The [**RPC**](#gt_remote-procedure-call-rpc) binding information for the object exporter.
-- The [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7) interface of the object exporter.
+- The [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the object exporter.
 - An [**authentication-level**](#gt_authentication-level) hint for the object exporter.
 - The [COMVERSION](#Section_2.2.11) of the object exporter.
 [**SETID**](#gt_ping-set-identifier-setid) table: A table of [**ping set**](#gt_ping-set) entries allocated by the resolver, keyed by SETID. Each entry MUST contain:
@@ -2602,7 +2602,7 @@ When processing this call:
 - The object resolver MUST return the following information to the client:
 - The RPC binding strings of the object exporter.
 - The authentication hint of the object exporter.
-- The IPID of the [IRemUnknown](#Section_3.1.1.5.7) interface of the object exporter.
+- The IPID of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the object exporter.
 <a id="Section_3.1.2.5.1.2"></a>
 ###### 3.1.2.5.1.2 IObjectExporter::SimplePing (Opnum 1)
 
@@ -2865,7 +2865,7 @@ When processing any of these three method calls:
 - The object resolver MUST look up the [**CLSID**](#gt_class-identifier-clsid) entry for the CLSID specified by the client. If the entry is not found:
 - The object resolver MUST start an [**object exporter**](#gt_object-exporter) for the CLSID using an implementation-specific mechanism.
 - The object resolver MUST create the CLSID entry specifying the CLSID, the [**OXID**](#gt_object-exporter-identifier-oxid) entry of the exporter and the application-specific state of the [**class factory**](#gt_class-factory) interface for the CLSID.
-- The object resolver MUST invoke the application-specific state of the class factory interface, in an implementation-specific manner, to create the object in its object exporter and marshal an object reference (see section [3.2.4.3](#Section_1.3.2)) for each [**IID**](#gt_interface-identifier-iid) specified by the client.
+- The object resolver MUST invoke the application-specific state of the class factory interface, in an implementation-specific manner, to create the object in its object exporter and marshal an object reference (see section [3.2.4.3](#Section_1.2)) for each [**IID**](#gt_interface-identifier-iid) specified by the client.
 - If the [**RPC**](#gt_remote-procedure-call-rpc) binding information in the OXID entry of the object exporter of the object is not present or does not contain the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) that the client specified, the object resolver MUST instruct the object exporter to listen on the RPC protocol, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 3.1.20 (rpc_server_use_protseq).
 When processing the [IRemoteSCMActivator::RemoteGetClassObject](#Section_3.1.2.5.2.3) or the [IRemoteSCMActivator::RemoteCreateInstance](#Section_3.1.2.5.2.3) method calls, the object resolver MUST additionally perform all of the following checks before creating the object exporter:
 
@@ -2876,7 +2876,7 @@ When processing the [IRemoteSCMActivator::RemoteGetClassObject](#Section_3.1.2.5
 If the ACTVFLAGS_ACTIVATE_64_BIT_SERVER flag is set in the **actvFlags** field of the InstantiationInfoData structure (section 2.2.22.2.1), the object resolver SHOULD<66> create the object exporter in the 64-bit address space and MUST return REGDB_E_CLASSNOTREG if it cannot meet this requirement.
 
 - If the ACTVFLAGS_NO_FAILURE_LOG flag is set in the **actvFlags** field of the InstantiationInfoData structure (section 2.2.22.2.1), the object resolver SHOULD NOT<67> log any errors that occur during the activation.
-- If the object class has an application identifier (section [3.1.2.1](#Section_3.1.2)), the object resolver MUST do the following:
+- If the object class has an application identifier (section [3.1.2.1](#Section_1.3.7)), the object resolver MUST do the following:
 - The object resolver MUST read the [Context](#Section_2.2.20) structure (section 2.2.20) contained in **pIFDClientCtx** field.
 - If the **dwNumExtents** field or the **cbExtents** field of the Context structure is not set to 0x00000000, the object resolver MUST return RPC_E_INVALID_OBJREF.
 - The object resolver MUST supply the [**client context**](#gt_client-context) properties contained in the [PROPMARSHALHEADER](#Section_2.2.20.1) array (section 2.2.20.1) contained in the Context structure (section 2.2.20) to the application or the higher-layer protocol specified by the application identifier of the object class.
@@ -2885,7 +2885,7 @@ If the ACTVFLAGS_ACTIVATE_64_BIT_SERVER flag is set in the **actvFlags** field o
 - The object resolver MUST supply the [**prototype context**](#gt_prototype-context) properties contained in the PROPMARSHALHEADER array (section 2.2.20.1) contained in the Context structure (section 2.2.20) to the application or the higher-layer protocol specified by the application identifier of the object class.
 - The object resolver MUST return the following:
 - An array of object references, one for each IID.
-- The [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7) interface of the object exporter.
+- The [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the object exporter.
 - The COMVERSION of the object exporter.
 - The RPC bindings of the object exporter.
 <a id="Section_3.1.2.5.2.3.1"></a>
@@ -3025,7 +3025,7 @@ The activation properties BLOB MUST contain properties marked Required in the fo
 | InstantiationInfoData | [2.2.22.2.1](#Section_2.2.22.2.1) | Required |
 | ScmRequestInfoData | [2.2.22.2.4](#Section_2.2.22.2.4) | Required |
 | LocationInfoData | [2.2.22.2.6](#Section_2.2.22.2.6) | Required |
-| SecurityInfoData | [2.2.22.2.7](#Section_2.2.22.2.7) | Optional |
+| SecurityInfoData | [2.2.22.2.7](#Section_5) | Optional |
 | ActivationContextInfoData | [2.2.22.2.5](#Section_2.2.22.2.5) | Optional |
 | InstanceInfoData | [2.2.22.2.3](#Section_2.2.22.2.3) | Optional |
 | SpecialPropertiesData | [2.2.22.2.2](#Section_2.2.22.2.2) | Optional |
@@ -3081,7 +3081,7 @@ The activation properties BLOB MUST contain properties that are marked Required 
 | InstantiationInfoData | [2.2.22.2.1](#Section_2.2.22.2.1) | Required |
 | ScmRequestInfoData | [2.2.22.2.4](#Section_2.2.22.2.4) | Required |
 | LocationInfoData | [2.2.22.2.6](#Section_2.2.22.2.6) | Required |
-| SecurityInfoData | [2.2.22.2.7](#Section_2.2.22.2.7) | Optional |
+| SecurityInfoData | [2.2.22.2.7](#Section_5) | Optional |
 | ActivationContextInfoData | [2.2.22.2.5](#Section_2.2.22.2.5) | Optional |
 | InstanceInfoData | [2.2.22.2.3](#Section_2.2.22.2.3) | Optional |
 | SpecialPropertiesData | [2.2.22.2.2](#Section_2.2.22.2.2) | Optional |
@@ -3201,7 +3201,7 @@ The [**activation**](#gt_activation) mechanism consists of the following sequenc
 <a id="Section_3.2.4.1.1.1"></a>
 ###### 3.2.4.1.1.1 Determining RPC Binding Information for Activation
 
-The client MUST call the [IObjectExporter::ServerAlive2](#Section_3.1.2.5.1.6) method using the first [**RPC protocol sequence**](#gt_rpc-protocol-sequence) listed in section [3.1.2.3](#Section_3.1.2), unless the client [COMVERSION](#Section_2.2.11) is less than 5.6, in which case the client MUST call the [IObjectExporter::ServerAlive](#Section_3.1.2.5.1.4) method. The client MUST specify the [**RPC endpoint**](#gt_rpc-endpoint) information to contain the [**remote server name**](#gt_remote-server-name) on which the application wants to activate the object and the [**well-known endpoint**](#gt_well-known-endpoint) of the [**object resolver**](#gt_object-resolver).
+The client MUST call the [IObjectExporter::ServerAlive2](#Section_3.1.2.5.1.6) method using the first [**RPC protocol sequence**](#gt_rpc-protocol-sequence) listed in section [3.1.2.3](#Section_1.3.7), unless the client [COMVERSION](#Section_2.2.11) is less than 5.6, in which case the client MUST call the [IObjectExporter::ServerAlive](#Section_3.1.2.5.1.4) method. The client MUST specify the [**RPC endpoint**](#gt_rpc-endpoint) information to contain the [**remote server name**](#gt_remote-server-name) on which the application wants to activate the object and the [**well-known endpoint**](#gt_well-known-endpoint) of the [**object resolver**](#gt_object-resolver).
 
 The client MUST NOT specify security on the call.
 
@@ -3279,13 +3279,13 @@ The client MUST specify the remaining parameters common to both interfaces as fo
 
 - The client MUST set the [COMVERSION](#Section_2.2.11) in the [ORPCTHIS](#Section_2.2.13.3) parameter to the value negotiated while determining the [**RPC**](#gt_remote-procedure-call-rpc) binding information (see section 3.2.4.1.1.1).
 - The client MUST specify the [**CLSID**](#gt_class-identifier-clsid) supplied by the DCOM application.
-- The client MUST supply an array of RPC [**Protocol Sequence Identifiers**](#gt_protocol-sequence-identifier) that the client's object resolver listens on, as specified in section [3.1.2.3](#Section_3.1.2). The array SHOULD contain all such identifiers (as opposed to only a subset of them).
+- The client MUST supply an array of RPC [**Protocol Sequence Identifiers**](#gt_protocol-sequence-identifier) that the client's object resolver listens on, as specified in section [3.1.2.3](#Section_1.3.7). The array SHOULD contain all such identifiers (as opposed to only a subset of them).
 - The client MUST specify an array of [**IIDs**](#gt_interface-identifier-iid) supplied by the DCOM application.
 When the activation call returns successfully, the following data MUST be returned to the client:
 
 - An [HRESULT](#Section_2.2.3) indicating the overall result of the activation. If this is not success, the client MUST return the HRESULT to the DCOM application.
 - The [**OXID**](#gt_object-exporter-identifier-oxid) and the RPC bindings of the [**object exporter**](#gt_object-exporter).
-- The [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7) interface of the object exporter.
+- The [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the object exporter.
 - The COMVERSION of the server.
 - An authentication hint for use in subsequent [**ORPCs**](#gt_object-remote-procedure-call-orpc) to the object.
 - An array of HRESULTS, one for each interface, that the client requested. If an element of this array is not S_OK, the client MUST consider that the object reference for the corresponding interface is not obtained.
@@ -3367,18 +3367,18 @@ The client MUST specify an impersonation level of at least RPC_C_IMPL_LEVEL_IDEN
 
 When using Kerberos and SPNEGO security providers, the client MUST specify an [**SPN**](#gt_service-principal-name-spn) of "RPCSS/<remote server name>", where <remote server name> is the network address used to create the RPC binding information, as specified in section [3.2.4.1.2.1](#Section_3.2.4.1.2.1).
 
-The client MUST call the [ResolveOxid2](#Section_3.1.2.5.1.5) method of the [IObjectExporter](#Section_3.1.2.5.1) interface to make the OXID resolution request.
+The client MUST call the [ResolveOxid2](#Section_3.1.2.5.1.5) method of the [IObjectExporter](#Section_3.1.2.5.1.5) interface to make the OXID resolution request.
 
 If the ResolveOxid2 method fails with the RPC_S_PROCNUM_OUT_OF_RANGE error (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2), the client MUST retry by calling the [ResolveOxid](#Section_3.1.2.5.1.1) method. In this case, it MUST assume that the [COMVERSION](#Section_2.2.11) structure of the server specifies version 5.1.
 
 The client MUST specify parameters to the OXID resolution request as follows:
 
 - The client MUST specify the [**OXID**](#gt_object-exporter-identifier-oxid) of the [**object exporter**](#gt_object-exporter) contained in the object reference supplied by the DCOM application.
-- The client MUST supply an array of [**RPC**](#gt_remote-procedure-call-rpc) [**protocol sequence identifiers**](#gt_protocol-sequence-identifier) that the client's object resolver listens on, as specified in section [3.1.2.3](#Section_3.1.2). The array SHOULD contain all such identifiers (as opposed to only a subset of them).
+- The client MUST supply an array of [**RPC**](#gt_remote-procedure-call-rpc) [**protocol sequence identifiers**](#gt_protocol-sequence-identifier) that the client's object resolver listens on, as specified in section [3.1.2.3](#Section_1.3.7). The array SHOULD contain all such identifiers (as opposed to only a subset of them).
 When OXID resolution completes successfully, the following data MUST be returned to the client:
 
 - The OXID bindings of the object exporter.
-- [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7) interface of the object exporter.
+- [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the object exporter.
 - The COMVERSION of the server in the case of ResolveOxid2.
 - An authentication hint for use in subsequent [**ORPCs**](#gt_object-remote-procedure-call-orpc) to the server.
 <a id="Section_3.2.4.1.2.3"></a>
@@ -3443,7 +3443,7 @@ The client MUST initiate the ORPC as follows:
 - The client MUST set the COMVERSION to the negotiated version from activation or [**OXID resolution**](#gt_oxid-resolution).
 - The client MUST set the **cid** to the CID of the current ORPC. If the client is currently executing an incoming ORPC, the client MUST set the **cid** of the outgoing ORPC to be the same as the **cid** in the ORPCTHIS of the incoming ORPC. If the client is not executing an incoming ORPC, the client MUST specify a new CID. For details, see section [1.3.5](#Section_1.3.5).
 - The client MAY specify the **extensions** field if it needs to send out-of-band data to the object.<88>
-- The client MUST marshal ORPC parameters of object reference types; see section [3.2.4.3](#Section_1.3.2).
+- The client MUST marshal ORPC parameters of object reference types; see section [3.2.4.3](#Section_1.2).
 On Windows 2000 operating system, Windows XP operating system, Windows XP operating system Service Pack 1 (SP1), Windows XP operating system Service Pack 2 (SP2), Windows Server 2003 operating system, and Windows Server 2003 operating system with Service Pack 1 (SP1), DCOM clients optionally append extra data to the end of an ORPC request. This is due to a coding error and the extra data, if present, has no meaning and is ignored by Windows recipients. Whether the data is sent or not does not affect interoperability, and the protocol functions correctly.<89>
 
 The client MUST process the ORPC response as follows:
@@ -3486,7 +3486,7 @@ If the client unmarshals an [STDOBJREF](#Section_2.2.18.1) instance that has a p
 To request additional [**reference counts**](#gt_reference-count), the client MUST perform the following sequence of operations:
 
 - It MUST look up the [**OXID**](#gt_object-exporter-identifier-oxid) entry for the OXID specified in the [STDOBJREF](#Section_2.2.18.1) instance.
-- It MUST use the [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7) interface of the [**object exporter**](#gt_object-exporter) contained in the OXID entry to issue an [**ORPC**](#gt_object-remote-procedure-call-orpc) call (see section [3.2.4.2](#Section_3.2.4.2)) on the [RemAddRef](#Section_a844e835c5d94431a04cfcd9c3c07f83) method of the IRemUnknown interface.
+- It MUST use the [**IPID**](#gt_interface-pointer-identifier-ipid) of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the [**object exporter**](#gt_object-exporter) contained in the OXID entry to issue an [**ORPC**](#gt_object-remote-procedure-call-orpc) call (see section [3.2.4.2](#Section_3.2.4.2)) on the [RemAddRef](#Section_a844e835c5d94431a04cfcd9c3c07f83) method of the IRemUnknown interface.
 The client MUST specify the following when making the call:
 
 - An [REMINTERFACEREF](#Section_2.2.23) structure containing:
@@ -3505,7 +3505,7 @@ When the DCOM application is finished using the object reference, the client MUS
 - It MUST look up the [**IPID**](#gt_interface-pointer-identifier-ipid) entry for the IPID specified by the application.
 - Using the [**OXID**](#gt_object-exporter-identifier-oxid) contained in the IPID entry, it MUST look up the OXID entry.
 - Using the OID contained in the IPID entry, it MUST look up the OID entry.
-- It MUST use the IPID of the [IRemUnknown](#Section_3.1.1.5.7) interface of the [**object exporter**](#gt_object-exporter) contained in the OXID entry to issue an [**ORPC**](#gt_object-remote-procedure-call-orpc) call, see section [3.2.4.2](#Section_3.2.4.2), on the [RemRelease](#Section_4383e2aaae3c4da6a09430233ac4b285) method of the IRemUnknown interface.
+- It MUST use the IPID of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the [**object exporter**](#gt_object-exporter) contained in the OXID entry to issue an [**ORPC**](#gt_object-remote-procedure-call-orpc) call, see section [3.2.4.2](#Section_3.2.4.2), on the [RemRelease](#Section_4383e2aaae3c4da6a09430233ac4b285) method of the IRemUnknown interface.
 The client MUST specify the following when making the call:
 
 - A [REMINTERFACEREF](#Section_2.2.23) structure containing:
@@ -3524,7 +3524,7 @@ When the DCOM application requests references to additional interfaces on the ob
 
 - It MUST look up the [**IPID**](#gt_interface-pointer-identifier-ipid) entry for the IPID specified by the application.
 - It MUST look up the [**OXID**](#gt_object-exporter-identifier-oxid) entry for the OXID specified in the [STDOBJREF](#Section_2.2.18.1) instance.
-- It MUST use the IPID of the [IRemUnknown](#Section_3.1.1.5.7) interface of the [**object exporter**](#gt_object-exporter) contained in the OXID entry to issue an [**ORPC**](#gt_object-remote-procedure-call-orpc) call (see section [3.2.4.2](#Section_3.2.4.2)) on the [RemQueryInterface](#Section_11fd5e3af5ef41ccb94345217efdb054) method of the IRemUnknown interface.
+- It MUST use the IPID of the [IRemUnknown](#Section_3.1.1.5.7.1) interface of the [**object exporter**](#gt_object-exporter) contained in the OXID entry to issue an [**ORPC**](#gt_object-remote-procedure-call-orpc) call (see section [3.2.4.2](#Section_3.2.4.2)) on the [RemQueryInterface](#Section_11fd5e3af5ef41ccb94345217efdb054) method of the IRemUnknown interface.
 The client MUST specify the following information when making the call:
 
 - The IPID specified by the application.
@@ -3551,7 +3551,7 @@ For each entry in the Resolver table:
 - If the [**SETID**](#gt_ping-set-identifier-setid) is 0, the client MUST add a SETID entry as follows:
 - It MUST search the OID table and form a list of [**OIDs**](#gt_object-identifier-oid) with the same [STRINGBINDING](#Section_2.2.19.3) hash as the Resolver table entry and add the list to the SETID entry. If the garbage_collection flag (see the SORF_NOPING flag in section [2.2.18.2](#Section_2.2.18.2)) is set to FALSE in the OID entry, the OID MUST not be added to the list.
 - It MUST set the sequence number to 1.
-- It MUST call the [ComplexPing](#Section_3.1.2.5.1.3) method of the [IObjectExporter](#Section_3.1.2.5.1) using the [**RPC**](#gt_remote-procedure-call-rpc) binding information in the Resolver table entry. The client MUST specify:
+- It MUST call the [ComplexPing](#Section_3.1.2.5.1.3) method of the [IObjectExporter](#Section_3.1.2.5.1.5) using the [**RPC**](#gt_remote-procedure-call-rpc) binding information in the Resolver table entry. The client MUST specify:
 - The SETID as 0.
 - The sequence number as 1.
 - The OID list as the *AddToSet* parameter.
@@ -3643,7 +3643,7 @@ SIMPLEPING_REQ: Represents one or more RPC calls to the [IObjectExporter::Simple
 
 Figure 8: OXID resolution sequence
 
-There is no requirement for the client to receive an [**OBJREF**](#gt_objref) via one of the object activation interfaces: [IActivation](#Section_3.1.2.5.2) and [IRemoteSCMActivator](#Section_3.1.2.5.2.3). However, if the client receives an OBJREF via some other mechanism, the OBJREF does not contain sufficient information to make [**ORPC**](#gt_object-remote-procedure-call-orpc) calls to the object exporter. In particular, the RPC endpoint information for the object exporter is obtainable only through the [IObjectExporter::ResolveOxid](#Section_3.1.2.5.1.1) method or the [IObjectExporter::ResolveOxid2](#Section_3.1.2.5.1.5) method.
+There is no requirement for the client to receive an [**OBJREF**](#gt_objref) via one of the object activation interfaces: [IActivation](#Section_3.1.2.5.2.1) and [IRemoteSCMActivator](#Section_3.1.2.5.2.3). However, if the client receives an OBJREF via some other mechanism, the OBJREF does not contain sufficient information to make [**ORPC**](#gt_object-remote-procedure-call-orpc) calls to the object exporter. In particular, the RPC endpoint information for the object exporter is obtainable only through the [IObjectExporter::ResolveOxid](#Section_3.1.2.5.1.1) method or the [IObjectExporter::ResolveOxid2](#Section_3.1.2.5.1.5) method.
 
 This example shows a sequence for a client that has received an OBJREF via some undefined mechanism and needs to retrieve the RPC endpoint for the object exporter.
 
@@ -4529,7 +4529,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <9> Section 2.2.19.1: Windows does not order the [STRINGBINDING](#Section_2.2.19.3) structures in the decreasing order of preference. They are passed in an arbitrary order.
 
-<10> Section 2.2.19.3: Windows supports a subset of the constants. For details, see section [3.1.2.3](#Section_3.1.2).
+<10> Section 2.2.19.3: Windows supports a subset of the constants. For details, see section [3.1.2.3](#Section_1.3.7).
 
 <11> Section 2.2.19.3: Applicable Windows Server releases accept other forms of the IPv4 address that are accepted by inet_addr as specified in [[RFC3493]](https://go.microsoft.com/fwlink/?LinkId=90425) section 6.3.
 
@@ -4589,7 +4589,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <39> Section 3.1.1.5.1: On Windows, servers will set the SORF_NOPING flag if the application specifies the MSHLFLAGS_NOPING flag in the *mshlflags* parameter to the CoMarshalInterface API. For more information, see [[MSDN-CoMarshalInterface]](https://go.microsoft.com/fwlink/?LinkId=89978).
 
-<40> Section 3.1.1.5.4: Windows XP operating system Service Pack 2 (SP2), Windows Server 2003 operating system with Service Pack 1 (SP1), Windows Vista and later, and Windows Server 2008 and later DCOM servers return E_ACCESSDENIED if the [**ORPC**](#gt_object-remote-procedure-call-orpc) invocation is for the [IRemUnknown (section 3.1.1.5.6)](#Section_3.1.1.5.7) interface or the [IRemUnknown2 (section 3.1.1.5.7)](#Section_3.1.1.5.7) interface. They return ERROR_ACCESS_DENIED for all other interfaces. On Windows NT 4.0 operating system, Windows 2000, Windows XP, Windows XP operating system Service Pack 1 (SP1), and Windows Server 2003, DCOM servers return E_ACCESSDENIED for all interfaces.
+<40> Section 3.1.1.5.4: Windows XP operating system Service Pack 2 (SP2), Windows Server 2003 operating system with Service Pack 1 (SP1), Windows Vista and later, and Windows Server 2008 and later DCOM servers return E_ACCESSDENIED if the [**ORPC**](#gt_object-remote-procedure-call-orpc) invocation is for the [IRemUnknown (section 3.1.1.5.6)](#Section_3.1.1.5.7.1) interface or the [IRemUnknown2 (section 3.1.1.5.7)](#Section_3.1.1.5.7.1) interface. They return ERROR_ACCESS_DENIED for all other interfaces. On Windows NT 4.0 operating system, Windows 2000, Windows XP, Windows XP operating system Service Pack 1 (SP1), and Windows Server 2003, DCOM servers return E_ACCESSDENIED for all interfaces.
 
 <41> Section 3.1.1.5.4: On Windows, DCOM servers use the LegacyAuthenticationLevel value (see [[MSDN-LegAuthLevel]](https://go.microsoft.com/fwlink/?LinkId=120110) for more information) as the object exporter's default authentication level setting.
 
@@ -4699,7 +4699,7 @@ On Windows NT 4.0, Windows 2000, Windows XP, Windows XP SP1, and Windows Server 
 | InstantiationInfoData | [2.2.22.2.1](#Section_2.2.22.2.1) | Required |
 | ScmRequestInfoData | [2.2.22.2.4](#Section_2.2.22.2.4) | Required |
 | LocationInfoData | [2.2.22.2.6](#Section_2.2.22.2.6) | Required |
-| SecurityInfoData | [2.2.22.2.7](#Section_2.2.22.2.7) | Optional |
+| SecurityInfoData | [2.2.22.2.7](#Section_5) | Optional |
 | ActivationContextInfoData | [2.2.22.2.5](#Section_2.2.22.2.5) | Optional |
 | InstanceInfoData | [2.2.22.2.3](#Section_2.2.22.2.3) | Optional |
 | SpecialPropertiesData | [2.2.22.2.2](#Section_2.2.22.2.2) | Optional |

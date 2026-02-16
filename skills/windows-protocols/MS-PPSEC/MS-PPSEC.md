@@ -297,7 +297,7 @@ None.
 
 [**P2P Grouping**](#gt_p2p-grouping) implements Group Security, which is a Graph Security Provider [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md). Group Security provides two classes of security features: connection security and record security.
 
-Connection security is implemented by the Group Connect subprotocol (see section [1.3.3](#Section_1.3.3)), which provides authentication and message encryption within a connection secured by TLS [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474).
+Connection security is implemented by the Group Connect subprotocol (see section [1.3.3](#Section_2.2.2)), which provides authentication and message encryption within a connection secured by TLS [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474).
 
 Record security provides authorization and record integrity, by implementing record validation and record signing.
 
@@ -1424,7 +1424,7 @@ When the higher-layer application triggers publication of new credentials for an
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 Modify Security Properties
 
-To modify the group's security properties, the higher-layer application on the group creator node MUST trigger the update and publishing of an updated Security Properties record. Certain properties MUST NOT be changed as a result of the update. See section [3.1.4.7](#Section_3.1.4.7) for details.
+To modify the group's security properties, the higher-layer application on the group creator node MUST trigger the update and publishing of an updated Security Properties record. Certain properties MUST NOT be changed as a result of the update. See section [3.1.4.7](#Section_3.1.7.1) for details.
 
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 Record Publication

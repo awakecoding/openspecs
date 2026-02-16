@@ -1389,34 +1389,34 @@ The RRAS implementation is defined to be the provider of these methods and objec
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Interface Object
 
-This object provides the interface-specific information and the routing protocol configurations associated with the interface. The interfaces on the RRAS server can be enumerated using [RRouterInterfaceEnum](#Section_3.1.4.21). Each interface is associated with a handle that can be used to refer to a specific interface. This handle can be obtained through the RRouterInterfaceEnum or through [RRouterInterfaceGetHandle](#Section_3.1.4.12). For new interfaces, creating the interface through [RRouterInterfaceCreate](#Section_3.2.4.13) will also provide the reference handle. With the interface handle, specific tasks on the interface can be performed, which are as follows:
+This object provides the interface-specific information and the routing protocol configurations associated with the interface. The interfaces on the RRAS server can be enumerated using [RRouterInterfaceEnum](#Section_3.1.4.21). Each interface is associated with a handle that can be used to refer to a specific interface. This handle can be obtained through the RRouterInterfaceEnum or through [RRouterInterfaceGetHandle](#Section_3.2.4.12). For new interfaces, creating the interface through [RRouterInterfaceCreate](#Section_3.1.4.13) will also provide the reference handle. With the interface handle, specific tasks on the interface can be performed, which are as follows:
 
 - [RRouterInterfaceDelete](#Section_3.1.4.16)
-- [RRouterInterfaceGetInfo](#Section_3.1.4.14)
-- [RRouterInterfaceSetInfo](#Section_3.1.4.15)
-- [RRouterInterfaceUpdatePhonebookInfo](#Section_3.1.4.26)
-- [RRouterInterfaceDeviceGetInfo](#Section_3.1.4.39)
+- [RRouterInterfaceGetInfo](#Section_3.2.4.14)
+- [RRouterInterfaceSetInfo](#Section_3.2.4.15)
+- [RRouterInterfaceUpdatePhonebookInfo](#Section_3.2.4.26)
+- [RRouterInterfaceDeviceGetInfo](#Section_3.2.4.39)
 - [RRouterInterfaceDeviceSetInfo](#Section_3.1.4.40)
-- [RRouterInterfaceSetCredentialsEx](#Section_3.2.4.41)
+- [RRouterInterfaceSetCredentialsEx](#Section_3.1.4.41)
 - [RRouterInterfaceGetCredentialsEx](#Section_3.1.4.42)
 - [RRouterInterfaceSetCredentialsLocal](#Section_3.1.4.50)
 - [RRouterInterfaceGetCredentialsLocal](#Section_3.1.4.51)
-An interface object corresponding to a [**demand-dial**](#gt_demand-dial) interface can also be used to perform tasks like connect and disconnect using the [RRouterInterfaceConnect](#Section_3.2.4.22) and [RRouterInterfaceDisconnect](#Section_3.2.4.23) methods.
+An interface object corresponding to a [**demand-dial**](#gt_demand-dial) interface can also be used to perform tasks like connect and disconnect using the [RRouterInterfaceConnect](#Section_3.2.4.22) and [RRouterInterfaceDisconnect](#Section_3.1.4.23) methods.
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Transport Object
 
 The transports are the various protocols that participate in the routing operation. The transport configurations are realized by the router managers and the routing protocols that are part of the router managers. Each transport is identified by a well-known transport identifier that specifies the protocol for which a certain operation needs to be performed. The transport-specific configuration can be managed through the following methods by specifying the appropriate transport identifier:
 
-- [RRouterInterfaceTransportSetGlobalInfo](#Section_2.1)
-- [RRouterInterfaceTransportGetGlobalInfo](#Section_2.1)
-- [RRouterInterfaceTransportCreate](#Section_2.1)
+- [RRouterInterfaceTransportSetGlobalInfo](#Section_3.1.4.10)
+- [RRouterInterfaceTransportGetGlobalInfo](#Section_3.2.4.11)
+- [RRouterInterfaceTransportCreate](#Section_3.1.4.38)
 Additionally, the transport configurations can be managed for a specific interface using the following methods by specifying the transport identifier and the interface handle:
 
-- [RRouterInterfaceTransportRemove](#Section_2.1)
-- [RRouterInterfaceTransportGetInfo](#Section_2.1)
-- [RRouterInterfaceTransportSetInfo](#Section_2.1)
-- [RRouterInterfaceTransportAdd](#Section_2.1)
+- [RRouterInterfaceTransportRemove](#Section_3.2.4.17)
+- [RRouterInterfaceTransportGetInfo](#Section_3.2.4.19)
+- [RRouterInterfaceTransportSetInfo](#Section_3.1.4.20)
+- [RRouterInterfaceTransportAdd](#Section_3.2.4.18)
 For the routing functionality, the [**route**](#gt_route) configuration can be updated on the interfaces for a particular transport by using the following methods.
 
 - [RRouterInterfaceUpdateRoutes](#Section_3.2.4.24)
@@ -1426,11 +1426,11 @@ For the routing functionality, the [**route**](#gt_route) configuration can be u
 
 A number of statistics are collected as a part of the routing functionality of the various routing protocols. The MIB object provides methods and data structures with which this information can be gathered from the router managers and the routing protocols. The following methods enable these monitoring operations:
 
-- [RMIBEntryCreate](#Section_3.2.4.27)
+- [RMIBEntryCreate](#Section_3.1.4.27)
 - [RMIBEntryDelete](#Section_3.2.4.28)
-- [RMIBEntrySet](#Section_3.2.4.29)
-- [RMIBEntryGet](#Section_3.2.4.31)
-- [RMIBEntryGetFirst](#Section_3.2.4.31)
+- [RMIBEntrySet](#Section_3.1.4.29)
+- [RMIBEntryGet](#Section_3.1.4.32)
+- [RMIBEntryGetFirst](#Section_3.1.4.31)
 - [RMIBEntryGetNext](#Section_3.1.4.32)
 - [RMIBGetTrapInfo](#Section_3.1.4.33)
 - [RMIBSetTrapInfo](#Section_3.1.4.34)
@@ -1441,12 +1441,12 @@ Each of these methods takes the transport identifier and the routing protocol id
 
 The remote access and site-to-site connection functionality is associated with connectivity. In turn, connectivity is provided by physical devices, such as a modem or ISDN (dial-up), or by virtual devices, such as [**PPTP**](#gt_pptp), [**L2TP**](#gt_l2tp), [**PPPoE**](#gt_pppoe), [**IKEv2**](#gt_internet-key-exchange-ike), and [**SSTP**](#gt_simple-symmetric-transport-protocol-sstp). For the RRAS server to accept connectivity, the devices (physical or virtual) need to be configured to accept connections. This is specified through the port configuration. A port is associated with each device type supported. The ports can be used for various connectivity purposes like remote access or [**demand-dial**](#gt_demand-dial) routing connectivity. There can be miscellaneous configurations associated with a specific device type. Configurations of the devices can be set or retrieved through the following methods:
 
-- [RMprAdminServerSetInfo](#Section_3.2.4.44)
-- [RMprAdminServerGetInfo](#Section_3.2.4.1)
-- [RMprAdminServerGetInfoEx](#Section_3.1.4.45)
-- [RMprAdminServerSetInfoEx](#Section_3.2.4.48)
-- [RRouterDeviceEnum](#Section_3.1.4.37)
-The following request types, used by [RasRpcSubmitRequest](#Section_3.4.4.5), also enable these operations:
+- [RMprAdminServerSetInfo](#Section_3.1.4.44)
+- [RMprAdminServerGetInfo](#Section_3.1.4.1)
+- [RMprAdminServerGetInfoEx](#Section_3.2.4.45)
+- [RMprAdminServerSetInfoEx](#Section_3.1.4.48)
+- [RRouterDeviceEnum](#Section_3.2.4.37)
+The following request types, used by [RasRpcSubmitRequest](#Section_3.3.4.5), also enable these operations:
 
 - REQTYPE_GETDEVICECONFIGINFO
 - REQTYPE_SETDEVICECONFIGINFO
@@ -1454,17 +1454,17 @@ The following request types, used by [RasRpcSubmitRequest](#Section_3.4.4.5), al
 - REQTYPE_SETCALLEDID
 - REQTYPE_GETDEVCONFIG
 - REQTYPE_GETNDISWANDRIVERCAPS
-Each port is associated with a port handle that can be retrieved using [RRasAdminPortEnum](#Section_3.2.4.5) or the RasRpcSubmitRequest with REQTYPE_PORTENUM. This handle can be used to perform tasks or queries specific to a port using this handle as reference. For each configured port there are runtime information and statistics obtainable through [RRasAdminPortGetInfo](#Section_3.1.4.6). The specific request type REQTYPE_GETINFO of the RasRpcSubmitRequest method also enables these operations. Other than these get and set operations, there are other port-specific operations possible such as [RRasAdminPortClearStats](#Section_3.1.4.7), [RRasAdminPortReset](#Section_3.1.4.8), and [RRasAdminPortDisconnect](#Section_3.2.4.9).
+Each port is associated with a port handle that can be retrieved using [RRasAdminPortEnum](#Section_3.1.4.5) or the RasRpcSubmitRequest with REQTYPE_PORTENUM. This handle can be used to perform tasks or queries specific to a port using this handle as reference. For each configured port there are runtime information and statistics obtainable through [RRasAdminPortGetInfo](#Section_3.2.4.6). The specific request type REQTYPE_GETINFO of the RasRpcSubmitRequest method also enables these operations. Other than these get and set operations, there are other port-specific operations possible such as [RRasAdminPortClearStats](#Section_3.1.4.7), [RRasAdminPortReset](#Section_3.1.4.8), and [RRasAdminPortDisconnect](#Section_3.2.4.9).
 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Connection Object
 
-The ports represent an endpoint of the remote access or [**demand-dial**](#gt_demand-dial) connectivity. As a part of the individual device process of establishing the underlying connectivity, there is data available at runtime. The data is represented as connection objects. The connections can be enumerated using [RRasAdminConnectionEnumEx](#Section_3.1.4.46) or [RRasAdminConnectionEnum](#Section_3.1.4.46). Each connection is associated with a connection handle that can be used to refer to a specific connection instance. This can be obtained through the [RRasAdminPortEnum](#Section_3.2.4.5) or [RRasAdminPortGetInfo](#Section_3.1.4.6) methods. [RRasAdminConnectionGetInfo](#Section_3.2.4.3) or [RRasAdminConnectionGetInfoEx](#Section_3.2.4.47) enable the retrieval of the connection-specific information. Other than these, the connection-specific tasks that can be performed are as follows:
+The ports represent an endpoint of the remote access or [**demand-dial**](#gt_demand-dial) connectivity. As a part of the individual device process of establishing the underlying connectivity, there is data available at runtime. The data is represented as connection objects. The connections can be enumerated using [RRasAdminConnectionEnumEx](#Section_3.2.4.46) or [RRasAdminConnectionEnum](#Section_3.2.4.46). Each connection is associated with a connection handle that can be used to refer to a specific connection instance. This can be obtained through the [RRasAdminPortEnum](#Section_3.1.4.5) or [RRasAdminPortGetInfo](#Section_3.2.4.6) methods. [RRasAdminConnectionGetInfo](#Section_3.2.4.3) or [RRasAdminConnectionGetInfoEx](#Section_3.1.4.47) enable the retrieval of the connection-specific information. Other than these, the connection-specific tasks that can be performed are as follows:
 
 - [RRasAdminConnectionClearStats](#Section_3.1.4.4)
 - [RRasAdminConnectionNotification](#Section_3.1.4.35)
-- [RRasAdminUpdateConnection](#Section_3.1.4.49)
-- [RRasAdminConnectionRemoveQuarantine](#Section_3.2.4.43)
+- [RRasAdminUpdateConnection](#Section_3.2.4.49)
+- [RRasAdminConnectionRemoveQuarantine](#Section_3.1.4.43)
 - [RRasAdminSendUserMessage](#Section_3.2.4.36)
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -1496,7 +1496,7 @@ This protocol is applicable when an application needs to remotely configure, man
 
 **Supported Transports:** The RRAS Management Protocol uses the RPC protocol as a transport and the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) as specified in section [2.1](#Section_2.1).
 
-**Protocol Versions:** This protocol has three interfaces named DIMSVC, RASRPC, and REMRAS. Each interface has only one interface version. The interfaces have been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_3.1), section [3.3](#Section_3.3), and section [3.5](#Section_3.5).
+**Protocol Versions:** This protocol has three interfaces named DIMSVC, RASRPC, and REMRAS. Each interface has only one interface version. The interfaces have been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_3.1), section [3.3](#Section_3.3), and section [3.5](#Section_3.6).
 
 **Security and Authentication Methods:** [**Authentication**](#gt_authentication) and security for the transport used by this protocol are specified in [MS-RPCE](#Section_2.2.2.2.119). For the RPC and DCOM interfaces, the security and authentication mechanisms are described in section [5](../MS-RPCE/MS-RPCE.md).
 
@@ -2029,8 +2029,8 @@ NatOutboundDirection
 
 The **OSPF_PARAM_TYPE** enumeration contains an OSPF parameter type that defines the type of information in the following structures:
 
-- **OSPF_ROUTE_FILTER_INFO** (section [2.2.1.2.209)](#Section_2.2.1.2.208)
-- **OSPF_PROTO_FILTER_INFO** (section [2.2.1.2.210)](#Section_2.2.1.2.210)
+- **OSPF_ROUTE_FILTER_INFO** (section [2.2.1.2.209)](#Section_2.2.1.2.6)
+- **OSPF_PROTO_FILTER_INFO** (section [2.2.1.2.210)](#Section_2.2.1.2.6)
 - **OSPF_GLOBAL_PARAM** (section [2.2.1.2.211)](#Section_2.2.1.2.211)
 - **OSPF_AREA_PARAM** (section [2.2.1.2.212)](#Section_2.2.1.2.212)
 - **OSPF_AREA_RANGE_PARAM** (section [2.2.1.2.213)](#Section_2.2.1.2.213)
@@ -2471,21 +2471,21 @@ This information can be any of the following structures:
 - [MPRI_INTERFACE_2](#Section_2.2.1.2.83)
 **DIM_INFORMATION_CONTAINER** specifies a generic information container used by the following methods to store and retrieve information:
 
-- [RMprAdminServerGetInfo (section 3.1.4.1)](#Section_3.2.4.1)
-- [RRasAdminConnectionEnum (section 3.1.4.2)](#Section_3.1.4.46)
+- [RMprAdminServerGetInfo (section 3.1.4.1)](#Section_3.1.4.1)
+- [RRasAdminConnectionEnum (section 3.1.4.2)](#Section_3.2.4.46)
 - [RRasAdminConnectionGetInfo (section 3.1.4.3)](#Section_3.2.4.3)
-- [RRasAdminPortEnum (section 3.1.4.5)](#Section_3.2.4.5)
-- [RRasAdminPortGetInfo (section 3.1.4.6)](#Section_3.1.4.6)
-- [RRouterInterfaceCreate (section 3.1.4.13)](#Section_3.2.4.13)
-- [RRouterInterfaceGetInfo (section 3.1.4.14)](#Section_3.1.4.14)
-- [RRouterInterfaceSetInfo (section 3.1.4.15)](#Section_3.1.4.15)
+- [RRasAdminPortEnum (section 3.1.4.5)](#Section_3.1.4.5)
+- [RRasAdminPortGetInfo (section 3.1.4.6)](#Section_3.2.4.6)
+- [RRouterInterfaceCreate (section 3.1.4.13)](#Section_3.1.4.13)
+- [RRouterInterfaceGetInfo (section 3.1.4.14)](#Section_3.2.4.14)
+- [RRouterInterfaceSetInfo (section 3.1.4.15)](#Section_3.2.4.15)
 - [RRouterInterfaceEnum (section 3.1.4.21)](#Section_3.1.4.21)
-- [RRouterInterfaceDeviceGetInfo (section 3.1.4.39)](#Section_3.1.4.39)
+- [RRouterInterfaceDeviceGetInfo (section 3.1.4.39)](#Section_3.2.4.39)
 - [RRouterInterfaceDeviceSetInfo (section 3.1.4.40)](#Section_3.1.4.40)
-- [RRouterInterfaceSetCredentialsEx (section 3.1.4.41)](#Section_3.2.4.41)
+- [RRouterInterfaceSetCredentialsEx (section 3.1.4.41)](#Section_3.1.4.41)
 - [RRouterInterfaceGetCredentialsEx (section 3.1.4.42)](#Section_3.1.4.42)
-- [RMprAdminServerSetInfo (section 3.1.4.44)](#Section_3.2.4.44)
-- [RRouterDeviceEnum (section 3.1.4.37)](#Section_3.1.4.37)
+- [RMprAdminServerSetInfo (section 3.1.4.44)](#Section_3.1.4.44)
+- [RRouterDeviceEnum (section 3.1.4.37)](#Section_3.2.4.37)
 <a id="Section_2.2.1.2.2"></a>
 ##### 2.2.1.2.2 DIM_INTERFACE_CONTAINER
 
@@ -2509,7 +2509,7 @@ DWORD dwGlobalInfoSize;
 
 *PDIM_INTERFACE_CONTAINER;
 
-**fGetInterfaceInfo:** This field is used to get interface information from the server. This MUST be set to TRUE when the client needs to retrieve interface information from the server while calling the [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1) and [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1) methods.
+**fGetInterfaceInfo:** This field is used to get interface information from the server. This MUST be set to TRUE when the client needs to retrieve interface information from the server while calling the [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11) and [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19) methods.
 
 **dwInterfaceInfoSize:** This MUST be set to the size of *pInterfaceInfo*.
 
@@ -2523,12 +2523,12 @@ DWORD dwGlobalInfoSize;
 
 The **DIM_INTERFACE_CONTAINER** specifies a generic structure used by the following methods to set, create, or retrieve information from the RRAS server:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
 - **RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
 - **RRouterInterfaceTransportGetInfo (section 3.1.4.19)**
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
-- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
+- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_3.1.4.38)
 <a id="Section_2.2.1.2.3"></a>
 ##### 2.2.1.2.3 RTR_INFO_BLOCK_HEADER
 
@@ -2582,11 +2582,11 @@ packet-beta
 | Variable | IP_DEMAND_DIAL_FILTER_INFO 0xFFFF0009 | The IP traffic that matches this filter indicates that a demand-dial connection is available and all the IP packets matching this filter MUST be routed into the connection. FILTER_DESCRIPTOR (section 2.2.1.2.5) |
 | Variable | IP_MCAST_HEARTBEAT_INFO 0xFFFF000A | Specifies the multicast heartbeat configuration for an interface. [MCAST_HBEAT_INFO (section 2.2.1.2.15)](#Section_2.2.1.2.15) |
 | Variable | IP_MCAST_BOUNDARY_INFO 0xFFFF000B | Multicast boundary information. [MIB_BOUNDARYROW (section 2.2.1.2.24)](#Section_2.2.1.2.24) |
-| Variable | IP_IPINIP_CFG_INFO 0xFFFF000C | IP in IP configuration information. [IPINIP_CONFIG_INFO (section 2.2.1.2.17)](#Section_2.2.1.2.174)<19> |
+| Variable | IP_IPINIP_CFG_INFO 0xFFFF000C | IP in IP configuration information. [IPINIP_CONFIG_INFO (section 2.2.1.2.17)](#Section_2.2.1.2.176)<19> |
 | Variable | IP_IFFILTER_INFO 0xFFFF000D | IPv4 interface filter information. [IFFILTER_INFO (section 2.2.1.2.88)](#Section_2.2.1.2.6) |
 | Variable | IP_MCAST_LIMIT_INFO 0xFFFF000E | Multicast configuration information. [MIB_MCAST_LIMIT_ROW (section 2.2.1.2.16)](#Section_2.2.1.2.16) |
 | Variable | IPV6_GLOBAL_INFO 0xFFFF000F | Global lPv6 filtering information. GLOBAL_INFO (section 2.2.1.2.9) |
-| Variable | IP_IN_FILTER_INFO_V6 0xFFFF0011 | The input filter that MUST be applied to the IPv6 packets sent to the RRAS server. [FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)](#Section_2.2.1.2.7) |
+| Variable | IP_IN_FILTER_INFO_V6 0xFFFF0011 | The input filter that MUST be applied to the IPv6 packets sent to the RRAS server. [FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)](#Section_2.2.1.2.5) |
 | Variable | IP_OUT_FILTER_INFO_V6 0xFFFF0012 | The output filter that MUST be applied to the IPv6 packets sent from the RRAS server. FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7) |
 | Variable | IP_DEMAND_DIAL_FILTER_INFO_V6 0xFFFF0013 | IPv6 traffic that matches this filter indicates that a site-to-site connection MUST be available and all the IPv6 packets matching this filter MUST be routed into the connection. FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7) |
 | Variable | IP_IFFILTER_INFO_V6 0xFFFF0014 | IPv6 interface filter information. IFFILTER_INFO (section 2.2.1.2.88) |
@@ -2594,12 +2594,12 @@ packet-beta
 | Variable | IP_FILTER_ENABLE_INFO_V6 0xFFFF0016 | Enable or disable IPv6 interface filter. MPR_FILTER_0 (section 2.2.1.2.89) |
 | Variable | MS_IP_BOOTP 0x0000270F | IP BOOTP global or interface information depending on the method that calls. [IPBOOTP_GLOBAL_CONFIG (section 2.2.1.2.149)](#Section_2.2.1.2.149) [IPBOOTP_IF_CONFIG (section 2.2.1.2.150)](#Section_2.2.1.2.150) |
 | Variable | MS_IP_IGMP 0x4137000A | IGMP global or interface information depending on the method that calls. [IGMP_MIB_GLOBAL_CONFIG (section 2.2.1.2.173)](#Section_2.2.1.2.173) [IGMP_MIB_IF_CONFIG (section 2.2.1.2.174)](#Section_2.2.1.2.174) |
-| Variable | MS_IP_RIP 0x00000008 | IP RIP global or interface information depending on the method that calls. [IPRIP_IF_CONFIG (section 2.2.1.2.166)](#Section_2.2.1.2.166) [IPRIP_GLOBAL_CONFIG (section 2.2.1.2.164)](#Section_2.2.1.2.164) |
+| Variable | MS_IP_RIP 0x00000008 | IP RIP global or interface information depending on the method that calls. [IPRIP_IF_CONFIG (section 2.2.1.2.166)](#Section_2.2.1.2.206) [IPRIP_GLOBAL_CONFIG (section 2.2.1.2.164)](#Section_2.2.1.2.164) |
 | Variable | MS_IP_BGP 0x0137000E | BGP configuration. When the transport is IPv4, the structure pointed to at the offset is [BGP_CONFIG_HEADER (section 2.2.1.2.252)](#Section_2.2.1.2.252). When the transport is IPv6, the structure pointed to at the offset is [BGP_ROUTER_V6 (section 2.2.1.2.265)](#Section_2.2.1.2.265). |
-| Variable | MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP allocator global or interface information depending on the method that calls. IP_AUTO_DHCP_GLOBAL_INFO (section [2.2.1.2.191)](#Section_2.2.1.2.9) IP_AUTO_DHCP_INTERFACE_INFO (section [2.2.1.2.192)](#Section_2.2.1.2.192) |
+| Variable | MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP allocator global or interface information depending on the method that calls. IP_AUTO_DHCP_GLOBAL_INFO (section [2.2.1.2.191)](#Section_2.2.1.2.191) IP_AUTO_DHCP_INTERFACE_INFO (section [2.2.1.2.192)](#Section_2.2.1.2.192) |
 | Variable | MS_IP_DNS_PROXY 0x81372713 | DNS Proxy global or interface information depending on the method that calls. IP_DNS_PROXY_GLOBAL_INFO (section [2.2.1.2.193)](#Section_2.2.1.2.9) IP_DNS_PROXY_INTERFACE_INFO (section [2.2.1.2.194)](#Section_2.2.1.2.194) |
 | Variable | MS_IP_NAT 0x81372715 | IP NAT global or interface information depending on the method that calls. IP_NAT_GLOBAL_INFO (section [2.2.1.2.195)](#Section_2.2.1.2.9) IP_NAT_INTERFACE_INFO (section [2.2.1.2.197)](#Section_2.2.1.2.197) |
-| Variable | MS_IP_OSPF<21> 0x0000000D | OSPF global or interface information depending on the method that calls. OSPF_ROUTE_FILTER_INFO (section [2.2.1.2.209)](#Section_2.2.1.2.208) OSPF_PROTO_FILTER_INFO (section [2.2.1.2.210)](#Section_2.2.1.2.210) OSPF_GLOBAL_PARAM (section [2.2.1.2.211)](#Section_2.2.1.2.211) OSPF_AREA_PARAM (section [2.2.1.2.212)](#Section_2.2.1.2.212) OSPF_AREA_RANGE_PARAM (section [2.2.1.2.213)](#Section_2.2.1.2.213) OSPF_VIRT_INTERFACE_PARAM (section [2.2.1.2.214)](#Section_2.2.1.2.214) OSPF_INTERFACE_PARAM (section [2.2.1.2.215)](#Section_2.2.1.2.215) OSPF_NBMA_NEIGHBOR_PARAM (section [2.2.1.2.216)](#Section_2.2.1.2.216) |
+| Variable | MS_IP_OSPF<21> 0x0000000D | OSPF global or interface information depending on the method that calls. OSPF_ROUTE_FILTER_INFO (section [2.2.1.2.209)](#Section_2.2.1.2.6) OSPF_PROTO_FILTER_INFO (section [2.2.1.2.210)](#Section_2.2.1.2.6) OSPF_GLOBAL_PARAM (section [2.2.1.2.211)](#Section_2.2.1.2.211) OSPF_AREA_PARAM (section [2.2.1.2.212)](#Section_2.2.1.2.212) OSPF_AREA_RANGE_PARAM (section [2.2.1.2.213)](#Section_2.2.1.2.213) OSPF_VIRT_INTERFACE_PARAM (section [2.2.1.2.214)](#Section_2.2.1.2.214) OSPF_INTERFACE_PARAM (section [2.2.1.2.215)](#Section_2.2.1.2.215) OSPF_NBMA_NEIGHBOR_PARAM (section [2.2.1.2.216)](#Section_2.2.1.2.216) |
 | Variable | MS_IPV6_DHCP 0x000003E7 | DHCPv6 Relay global or interface information depending on the method that calls. [DHCPV6R_IF_CONFIG (section 2.2.1.2.159)](#Section_2.2.1.2.159) [DHCPV6R_GLOBAL_CONFIG (section 2.2.1.2.157)](#Section_2.2.1.2.157) |
 
 The value MUST be one of the following when the transport is IPX.<22>
@@ -2645,16 +2645,16 @@ packet-beta
 
 **faDefaultAction (4 bytes):** A 32-bit integer in network byte order used to specify the action for the filter. It MUST be [**FORWARD_ACTION (section 2.2.1.1.7)**](#Section_2.2.1.1.7).
 
-**fiFilter (variable):** This MUST contain the actual five-tuple filters as specified in section [2.2.1.2.6](#Section_2.2.1.2.64).
+**fiFilter (variable):** This MUST contain the actual five-tuple filters as specified in section [2.2.1.2.6](#Section_2.2.1.2.61).
 
 When this structure is used as an embedded structure in [**RTR_TOC_ENTRY (section 2.2.1.2.4)**](#Section_2.2.1.2.4), the **infoType** of **RTR_TOC_ENTRY** MUST have the value 0xFFFF0001, 0xFFFF0002, or 0xFFFF0009 to specify an IPv4 in filter, an IPv4 out filter, or an IPv4 demand-dial filter respectively.
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
-- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
+- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_3.1.4.38)
 <a id="Section_2.2.1.2.6"></a>
 ##### 2.2.1.2.6 FILTER_INFO
 
@@ -2723,10 +2723,10 @@ The **FILTER_DESCRIPTOR_V6** structure MUST be used while specifying IPv6 [**fil
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
-- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
+- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_3.1.4.38)
 ```mermaid
 packet-beta
   0-31: "dwVersion"
@@ -2748,7 +2748,7 @@ When this structure is used as an embedded structure in **RTR_TOC_ENTRY** (secti
 <a id="Section_2.2.1.2.8"></a>
 ##### 2.2.1.2.8 FILTER_INFO_V6
 
-The **FILTER_INFO_V6** structure SHOULD<24> specify the five-tuple [**filters**](#gt_filter) to be used in [**FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)**](#Section_2.2.1.2.7).
+The **FILTER_INFO_V6** structure SHOULD<24> specify the five-tuple [**filters**](#gt_filter) to be used in [**FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)**](#Section_2.2.1.2.5).
 
 typedef struct _FILTER_INFO_V6 {
 
@@ -2815,8 +2815,8 @@ The **GLOBAL_INFO** structure is used to set logging levels and enable [**filter
 
 This structure is used in the following methods:
 
-- [RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)](#Section_2.1)
-- [RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)](#Section_2.1)
+- [RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)](#Section_3.1.4.10)
+- [RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)](#Section_3.2.4.11)
 typedef struct _GLOBAL_INFO {
 
 IN OUT BOOL bFilteringOn;
@@ -2872,9 +2872,9 @@ The **INTERFACE_ROUTE_INFO** structure MAY<25> be used or [**MIB_IPFORWARDROW (
 
 This structure is used in the following methods:
 
-- [RRouterInterfaceTransportAdd (section 3.1.4.18)](#Section_2.1)
-- [RRouterInterfaceTransportGetInfo (section 3.1.4.19)](#Section_2.1)
-- [RRouterInterfaceTransportSetInfo (section 3.1.4.20)](#Section_2.1)
+- [RRouterInterfaceTransportAdd (section 3.1.4.18)](#Section_3.2.4.18)
+- [RRouterInterfaceTransportGetInfo (section 3.1.4.19)](#Section_3.2.4.19)
+- [RRouterInterfaceTransportSetInfo (section 3.1.4.20)](#Section_3.1.4.20)
 typedef struct _INTERFACE_ROUTE_INFO {
 
 union {
@@ -3000,16 +3000,16 @@ The **PRIORITY_INFO** structure MUST be used to set preferences to different pro
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
-- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
+- [**RRouterInterfaceTransportCreate (section 3.1.4.38)**](#Section_3.1.4.38)
 ```mermaid
 packet-beta
   0-31: "dwNumProtocols"
   32-95: "ppmProtocolMetric (variable)"
 ```
 
-**dwNumProtocols (4 bytes):** This MUST be the number of protocols for which metric information is given in the [**PROTOCOL_METRIC (section**](#Section_2.2.1.2.13) 2.2.1.2.13) structure.
+**dwNumProtocols (4 bytes):** This MUST be the number of protocols for which metric information is given in the [**PROTOCOL_METRIC (section**](#Section_2.2.2.2.119) 2.2.1.2.13) structure.
 
 **ppmProtocolMetric (variable):** This MUST be an array of **PROTOCOL_METRIC** structures with **dwNumProtocols** specifying the number of elements in the array.
 
@@ -3041,8 +3041,8 @@ The **RTR_DISC_INFO** structure is used to set and retrieve router discovery inf
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
 typedef struct _RTR_DISC_INFO {
 
 IN OUT WORD wMaxAdvtInterval;
@@ -3116,9 +3116,9 @@ The **MIB_MCAST_LIMIT_ROW** structure is used to specify the configuration infor
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 typedef struct {
 
 DWORD dwTtl;
@@ -3167,9 +3167,9 @@ The **INTERFACE_STATUS_INFO** structure contains the administrative status of an
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 typedef struct _INTERFACE_STATUS_INFO {
 
 IN OUT DWORD dwAdminStatus;
@@ -3192,11 +3192,11 @@ When this structure is used, the **InfoType** of [**RTR_TOC_ENTRY (section 2.2
 
 The **DIM_MIB_ENTRY_CONTAINER** structure contains the size and the data for the management information base (MIB) entries that are either set or retrieved from the MIB variables. This structure is used in the following methods:
 
-- [**RMIBEntryCreate (section 3.1.4.27)**](#Section_3.2.4.27)
+- [**RMIBEntryCreate (section 3.1.4.27)**](#Section_3.1.4.27)
 - [**RMIBEntryDelete (section 3.1.4.28)**](#Section_3.2.4.28)
-- [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.2.4.29)
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.1.4.29)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _DIM_MIB_ENTRY_CONTAINER
 
@@ -3232,7 +3232,7 @@ The contents of pMibInEntry and pMibOutEntry are based on the transport and the 
 | PID_IP 0x00000021 | MS_IP_DNS_PROXY 0x81372713 | IP_DNS_PROXY_MIB_QUERY (section [2.2.1.2.186)](#Section_2.2.1.2.186) | IP_DNS_PROXY_MIB_QUERY (section 2.2.1.2.186) |
 | PID_IP 0x00000021 | MS_IP_DHCP_ALLOCATOR 0x81372714 | IP_AUTO_DHCP_MIB_QUERY (section [2.2.1.2.188)](#Section_2.2.1.2.188) | IP_AUTO_DHCP_MIB_QUERY (section 2.2.1.2.188) |
 | PID_IP 0x00000021 | MS_IP_OSPF 0x0000000D | MIB_DA_MSG (section [2.2.1.2.190)](#Section_2.2.1.2.190) | MIB_DA_MSG (section 2.2.1.2.190) |
-| PID_IP 0x00000021 | MS_IP_RIP 0x00000008 | [IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)](#Section_2.2.1.2.161) | [IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)](#Section_2.2.1.2.162) |
+| PID_IP 0x00000021 | MS_IP_RIP 0x00000008 | [IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)](#Section_2.2.1.2.125) | [IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)](#Section_2.2.1.2.162) |
 | PID_IP 0x00000021 | MS_IP_IGMP 0x4137000A | [IGMP_MIB_GET_INPUT_DATA (section 2.2.1.2.171)](#Section_2.2.1.2.171) | [IGMP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.172)](#Section_2.2.1.2.172) |
 | PID_IPV6 0x00000057 | MS_IPV6_DHCP 0x000003E7 | [DHCPV6R_MIB_GET_INPUT_DATA (section 2.2.1.2.160)](#Section_2.2.1.2.160) | [DHCPV6R_MIB_GET_OUTPUT_DATA (section 2.2.1.2.156)](#Section_2.2.1.2.156) |
 | PID_IPV6 0x00000057 | IPRTRMGR_PID 0x00002710 | MIB_OPAQUE_QUERY (section 2.2.1.2.53) | MIB_OPAQUE_QUERY (section 2.2.1.2.53) |
@@ -3321,9 +3321,9 @@ This structure is used in **MIB_OPAQUE_INFO** (section [2.2.1.2.52](#Section_2.
 
 This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
 typedef struct {
 
 DWORD dwGroupAddress;
@@ -4314,7 +4314,7 @@ DWORD dwNumRoutes;
 
 *PMIB_IPSTATS;
 
-**dwForwarding:** Specifies whether IP forwarding is enabled or disabled. This value MUST be 0xFFFFFFFF or one of the following values. If set to 0xFFFFFFFF, [**RMIBEntrySet**](#Section_3.2.4.29) does not change the current value of **dwForwarding**.
+**dwForwarding:** Specifies whether IP forwarding is enabled or disabled. This value MUST be 0xFFFFFFFF or one of the following values. If set to 0xFFFFFFFF, [**RMIBEntrySet**](#Section_3.1.4.29) does not change the current value of **dwForwarding**.
 
 | Value | Meaning |
 | --- | --- |
@@ -4402,10 +4402,10 @@ packet-beta
 
 The **MIB_OPAQUE_INFO** structure contains information related to an MIB entry. This structure is used to handle MIB data in MIB methods such as the following:
 
-- [**RMIBEntryCreate (section 3.1.4.27)**](#Section_3.2.4.27)
-- [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.2.4.29)
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryCreate (section 3.1.4.27)**](#Section_3.1.4.27)
+- [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.1.4.29)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 ```mermaid
 packet-beta
@@ -4464,9 +4464,9 @@ packet-beta
 
 The **MIB_OPAQUE_QUERY** structure contains the MIB ID and the corresponding index of the MIB object. This structure is used in the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
 - [**RMIBEntryDelete (section 3.1.4.28)**](#Section_3.2.4.28)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 The same structure is also used as a blob for querying MIB if **dwPid** is PID_IPX, or if **dwPid** is PID_IP and **dwRoutingPid** is not IPRTRMGR_PID (0x00002710) in the parameter of the methods using this structure.
 
@@ -5441,7 +5441,7 @@ WCHAR wszRemoteComputer[17];
 
 **dwConnectDuration:** Specifies the duration of the current connection, in seconds.
 
-**dwInterfaceType:** A **ROUTER_INTERFACE_TYPE** (section [2.2.1.1.1](#Section_2.2.1.1.15)) value specifying the interface type of the current connection.
+**dwInterfaceType:** A **ROUTER_INTERFACE_TYPE** (section [2.2.1.1.1](#Section_2.2.1.1.12)) value specifying the interface type of the current connection.
 
 **dwConnectionFlags:** Specifies certain attributes of the connection. This member can contain the following flags.
 
@@ -5450,7 +5450,7 @@ WCHAR wszRemoteComputer[17];
 | RAS_FLAGS_PPP_CONNECTION 0x00000001 | The connection is using PPP. |
 | RAS_FLAGS_MESSENGER_PRESENT 0x00000002 | The messenger service is active on the client, and messages can be sent to the client using [**RRasAdminSendUserMessage (section 3.1.4.36)**](#Section_3.2.4.36). |
 | RAS_FLAGS_RAS_CONNECTION 0x00000004 | The connection is a NetBIOS connection. |
-| RAS_FLAGS_QUARANTINE_PRESENT 0x00000008 | The connection is currently in quarantine. See [**RRasAdminConnectionRemoveQuarantine (section 3.1.4.43)**](#Section_3.2.4.43) for more information. |
+| RAS_FLAGS_QUARANTINE_PRESENT 0x00000008 | The connection is currently in quarantine. See [**RRasAdminConnectionRemoveQuarantine (section 3.1.4.43)**](#Section_3.1.4.43) for more information. |
 | RAS_FLAGS_ARAP_CONNECTION 0x00000010 | The connection is using AppleTalk Remote Access Protocol (ARAP).<59> |
 
 **wszInterfaceName:** Specifies a null-terminated Unicode string that contains the name of the interface for this connection.
@@ -5557,11 +5557,11 @@ PPP_INFO_2 PppInfo2;
 
 **wszUserName:** See **wszUserName** in **RASI_CONNECTION_0**.
 
-**dwInterfaceType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.15) that specifies the interface type of the current connection.
+**dwInterfaceType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.12) that specifies the interface type of the current connection.
 
 **guid:** A GUID uniquely identifying the connection.
 
-**PppInfo2:** A [**PPP_INFO_2 (section 2.2.1.2.73)**](#Section_2.2.1.2.72) structure that contains information about the PPP negotiation for this connection.
+**PppInfo2:** A [**PPP_INFO_2 (section 2.2.1.2.73)**](#Section_2.2.1.2.73) structure that contains information about the PPP negotiation for this connection.
 
 <a id="Section_2.2.1.2.80"></a>
 ##### 2.2.1.2.80 RASI_CONNECTION_3
@@ -5600,7 +5600,7 @@ FILETIME timer;
 
 **wszUserName:** Specifies a null-terminated Unicode string that contains the name of the user on this connection.
 
-**dwInterfaceType:** A **ROUTER_INTERFACE_TYPE** (section [2.2.1.1.1](#Section_2.2.1.1.15)) value that specifies the type of interface.
+**dwInterfaceType:** A **ROUTER_INTERFACE_TYPE** (section [2.2.1.1.1](#Section_2.2.1.1.12)) value that specifies the type of interface.
 
 **guid:** Specifies a GUID that identifies the connection. For an incoming connection, this GUID is valid only as long as the connection is active.
 
@@ -5615,9 +5615,9 @@ FILETIME timer;
 
 The **MPRI_INTERFACE_0** structure contains information for a particular router interface. This structure is used in the following methods:
 
-- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13)
-- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.1.4.14)
-- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.1.4.15)
+- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13)
+- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.2.4.14)
+- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.2.4.15)
 - [**RRouterInterfaceEnum (section 3.1.4.21)**](#Section_3.1.4.21)
 typedef struct _MPRI_INTERFACE_0 {
 
@@ -5652,7 +5652,7 @@ This member can have one of the following values.
 | TRUE >0 | The interface is enabled. |
 | FALSE 0 | The interface is disabled. |
 
-**dwIfType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.15) value that specifies the interface type. This value MUST be specified during the call to **RRouterInterfaceCreate** and cannot be modified after the interface is created.
+**dwIfType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.12) value that specifies the interface type. This value MUST be specified during the call to **RRouterInterfaceCreate** and cannot be modified after the interface is created.
 
 **dwConnectionState:** A [**ROUTER_CONNECTION_STATE (section 2.2.1.1.2)**](#Section_2.2.1.1.2) value that specifies the current state of the interface (for example: connected, disconnected, or unreachable). This is a read-only field that cannot be set or modified.
 
@@ -5675,9 +5675,9 @@ This member can have one of the following values.
 
 The **MPRI_INTERFACE_1** structure<61> is used to contain configuration and status information for a specific router [**interface**](#gt_interface). This structure is used in the following methods:
 
-- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13)
-- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.1.4.14)
-- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.1.4.15)
+- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13)
+- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.2.4.14)
+- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.2.4.15)
 typedef struct _MPRI_INTERFACE_1 {
 
 WCHAR wszInterfaceName[257];
@@ -5745,9 +5745,9 @@ The preceding string restricts dial-out to Tuesdays and Thursdays from 9:00 A.M.
 
 The **MPRI_INTERFACE_2** structure<62> is used to contain data for a router demand-dial [**interface**](#gt_interface). This structure is used in the following methods:
 
-- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13)
-- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.1.4.14)
-- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.1.4.15)
+- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13)
+- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.2.4.14)
+- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.2.4.15)
 typedef struct _MPRI_INTERFACE_2 {
 
 WCHAR wszInterfaceName[257];
@@ -5839,7 +5839,7 @@ DWORD dwVpnStrategy;
 | TRUE >0 | The interface is enabled. |
 | FALSE 0 | The interface is disabled. |
 
-**dwIfType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.15) value that specifies the type of interface.
+**dwIfType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.12) value that specifies the type of interface.
 
 **dwConnectionState:** A [**ROUTER_CONNECTION_STATE (section 2.2.1.1.2)**](#Section_2.2.1.1.2) value that specifies the current state of the interface (for example: connected, disconnected, or unreachable). This is a read-only field and cannot be set or modified.
 
@@ -5925,7 +5925,7 @@ DWORD dwVpnStrategy;
 | MPRDT_Irda "IRDA" | An Infrared Data Association (IrDA)-compliant device. |
 | MPRDT_Parallel "PARALLEL" | Direct parallel connection through a parallel port. |
 
-**szDeviceName:** Specifies a null-terminated Unicode string that contains the name of a telephony application programming interface ([**TAPI**](#gt_telephony-application-programming-interface-tapi)) device to use with this phone book entry, for example, "Fabrikam Inc 28800 External". To enumerate all available RAS-capable devices, use the [**RRouterDeviceEnum (section 3.1.4.37)**](#Section_3.1.4.37) function.
+**szDeviceName:** Specifies a null-terminated Unicode string that contains the name of a telephony application programming interface ([**TAPI**](#gt_telephony-application-programming-interface-tapi)) device to use with this phone book entry, for example, "Fabrikam Inc 28800 External". To enumerate all available RAS-capable devices, use the [**RRouterDeviceEnum (section 3.1.4.37)**](#Section_3.2.4.37) function.
 
 **szX25PadType:** Contains a null-terminated Unicode string that identifies the X.25 PAD type. This value SHOULD be set to an empty string ("") unless the entry dials using an X.25 PAD.<67>
 
@@ -6014,9 +6014,9 @@ The value of the **dwEncryptionType** does not affect how passwords are encrypte
 
 The **MPRI_INTERFACE_3** structure<72> is used to contain data for a router [**demand-dial**](#gt_demand-dial) interface. This structure is used in the following methods:
 
-- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13)
-- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.1.4.14)
-- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.1.4.15)
+- [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13)
+- [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.2.4.14)
+- [**RRouterInterfaceSetInfo (section 3.1.4.15)**](#Section_3.2.4.15)
 typedef struct _MPR_INTERFACE_3 {
 
 WCHAR wszInterfaceName[257];
@@ -6116,7 +6116,7 @@ IN6_ADDR* ipv6addr;
 | TRUE >0 | The interface is enabled. |
 | FALSE 0 | The interface is disabled. |
 
-**dwIfType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.15) value specifying the type of interface.
+**dwIfType:** A [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.12) value specifying the type of interface.
 
 **dwConnectionState:** A [**ROUTER_CONNECTION_STATE (section 2.2.1.1.2)**](#Section_2.2.1.1.2) value specifying the current state of the interface (for example: connected, disconnected, or unreachable). This is a read-only field and cannot be set or modified.
 
@@ -6186,7 +6186,7 @@ IN6_ADDR* ipv6addr;
 
 **szDeviceType:** A value that specifies a null-terminated Unicode string that indicates the RRAS server device type that is referenced by **szDeviceName**. This is a read-only field that is computed based on the value of the **szDeviceName** member. The possible values for this member are the same as the wszDeviceName defined in **RASI_PORT_0**.
 
-**szDeviceName:** Contains a null-terminated Unicode string that contains the name of a TAPI device to use with this phone book entry (for example, "Fabrikam Inc 28800 External"). To enumerate all available RAS-capable devices, use the [**RRouterDeviceEnum**](#Section_3.1.4.37) (section 3.1.4.37) method.
+**szDeviceName:** Contains a null-terminated Unicode string that contains the name of a TAPI device to use with this phone book entry (for example, "Fabrikam Inc 28800 External"). To enumerate all available RAS-capable devices, use the [**RRouterDeviceEnum**](#Section_3.2.4.37) (section 3.1.4.37) method.
 
 **szX25PadType:** Contains a null-terminated Unicode string that identifies the X.25 PAD type. This value SHOULD be set to an empty string ("") unless the entry dials using an X.25 PAD.<76>
 
@@ -6327,7 +6327,7 @@ PWCHAR szAlternates;
 <a id="Section_2.2.1.2.87"></a>
 ##### 2.2.1.2.87 MPR_CREDENTIALSEX_1
 
-The **MPR_CREDENTIALSEX_1** structure is used to contain extended credentials information (other than username/password), such as the information used by [**Extensible Authentication Protocols (EAPs)**](#gt_extensible-authentication-protocol-eap) or a [**preshared key**](#gt_preshared-key) based on the level being passed in by the methods that use this structure. This structure is used in [**RRouterInterfaceSetCredentialsEx (section 3.1.4.41)**](#Section_3.2.4.41) and [**RRouterInterfaceGetCredentialsEx (section 3.1.4.42)**](#Section_3.1.4.42). If a preshared key is being used **dwSsize** MUST be less than 257. Note that the preshared key here is used to specify the credential for the connection endpoint on the RRAS server. The other end of the connection endpoint MUST be configured with the same preshared key in order for the connection to be successful.
+The **MPR_CREDENTIALSEX_1** structure is used to contain extended credentials information (other than username/password), such as the information used by [**Extensible Authentication Protocols (EAPs)**](#gt_extensible-authentication-protocol-eap) or a [**preshared key**](#gt_preshared-key) based on the level being passed in by the methods that use this structure. This structure is used in [**RRouterInterfaceSetCredentialsEx (section 3.1.4.41)**](#Section_3.1.4.41) and [**RRouterInterfaceGetCredentialsEx (section 3.1.4.42)**](#Section_3.1.4.42). If a preshared key is being used **dwSsize** MUST be less than 257. Note that the preshared key here is used to specify the credential for the connection endpoint on the RRAS server. The other end of the connection endpoint MUST be configured with the same preshared key in order for the connection to be successful.
 
 typedef struct _MPR_CREDENTIALSEX_1 {
 
@@ -6806,8 +6806,8 @@ STATIC_SERVICES_TABLE_INDEX StaticServicesTableIndex;
 
 The **IPX_MIB_GET_INPUT_DATA** structure MAY<96> be used to retrieve IPX MIB entries. This structure is used in the following methods:
 
-- [RMIBEntryGet (section 3.1.4.30)](#Section_3.2.4.31)
-- [RMIBEntryGetFirst (section 3.1.4.31)](#Section_3.2.4.31)
+- [RMIBEntryGet (section 3.1.4.30)](#Section_3.1.4.32)
+- [RMIBEntryGetFirst (section 3.1.4.31)](#Section_3.1.4.31)
 - [RMIBEntryGetNext (section 3.1.4.32)](#Section_3.1.4.32)
 typedef struct _IPX_MIB_GET_INPUT_DATA {
 
@@ -6837,8 +6837,8 @@ IPX_MIB_INDEX MibIndex;
 
 The **IPXMIB_BASE** structure MAY<97> be used to contain basic information about the IPX protocol. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IPXMIB_BASE {
 
@@ -6891,8 +6891,8 @@ A 32-bit number assigned by a network administrator; set to 0 on the local netwo
 
 The **IPX_IF_STATS** structure MAY<98> be used to gather the IPX interface statistics. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IPX_IF_STATS {
 
@@ -6959,8 +6959,8 @@ ULONG NetbiosSent;
 
 The **IPX_INTERFACE** structure MAY<99> be used to describe the MIB Row for **IPX_INTERFACE_TABLE**. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IPX_INTERFACE {
 
@@ -7133,7 +7133,7 @@ IPX_SERVICE Service;
 <a id="Section_2.2.1.2.111"></a>
 ##### 2.2.1.2.111 IPX_MIB_SET_INPUT_DATA
 
-The **IPX_MIB_SET_INPUT_DATA** structure MAY<103> be used in [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.2.4.29) method.
+The **IPX_MIB_SET_INPUT_DATA** structure MAY<103> be used in [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.1.4.29) method.
 
 typedef struct _IPX_MIB_SET_INPUT_DATA {
 
@@ -7232,7 +7232,7 @@ SAP_SERVICE_FILTER_INFO ServiceFilter[1];
 
 **ListenFilterCount:** The count of listen filters.
 
-**ServiceFilter:** This is a [**SAP_SERVICE_FILTER_INFO (section 2.2.1.2.112)**](#Section_2.2.1.2.112).
+**ServiceFilter:** This is a [**SAP_SERVICE_FILTER_INFO (section 2.2.1.2.112)**](#Section_2.2.1.2.6).
 
 <a id="Section_2.2.1.2.114"></a>
 ##### 2.2.1.2.114 SAP_IF_CONFIG
@@ -7258,8 +7258,8 @@ SAP_IF_FILTERS SapIfFilters;
 
 The **SAP_MIB_BASE** structure MAY<107> be used to contain the operation status. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _SAP_MIB_BASE {
 
@@ -7284,8 +7284,8 @@ ULONG SapOperState;
 
 The **SAP_IF_STATS** structure MAY<108> be used to contain the SAP MIB Interface Table Entry. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _SAP_IF_STATS {
 
@@ -7316,8 +7316,8 @@ ULONG SapIfOutputPackets;
 
 The **SAP_INTERFACE** structure MAY<109> be used to contain information about an SAP interface. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _SAP_INTERFACE {
 
@@ -7342,8 +7342,8 @@ SAP_IF_STATS SapIfStats;
 
 The **SAP_MIB_GET_INPUT_DATA** structure MAY<110> be used to retrieve the SAP MIB information. This structure is used in the following methods to retrieve the MIB information of the **TableId** and specified **InterfaceIndex**:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32**](#Section_3.1.4.32))
 typedef struct _SAP_MIB_GET_INPUT_DATA {
 
@@ -7362,7 +7362,7 @@ ULONG InterfaceIndex;
 <a id="Section_2.2.1.2.119"></a>
 ##### 2.2.1.2.119 SAP_MIB_SET_INPUT_DATA
 
-The **SAP_MIB_SET_INPUT_DATA** structure MAY<111> be used in the [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.2.4.29) method to set information corresponding to the **TableId** and the **SapInterface**.
+The **SAP_MIB_SET_INPUT_DATA** structure MAY<111> be used in the [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.1.4.29) method to set information corresponding to the **TableId** and the **SapInterface**.
 
 typedef struct _SAP_MIB_SET_INPUT_DATA {
 
@@ -7406,8 +7406,8 @@ IPX_SERVER_ENTRY Server;
 
 The **SAP_IF_INFO** structure MAY<113> be used to contain information about the SAP interface. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _SAP_IF_INFO {
 
@@ -7452,8 +7452,8 @@ ULONG AgeIntervalMultiplier;
 
 The **RIPMIB_BASE** structure contains information about the RIP MIB base. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _RIPMIB_BASE {
 
@@ -7478,8 +7478,8 @@ ULONG RIPOperState;
 
 The **RIP_IF_STATS** structure contains the RIP interface statistics. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _RIP_IF_STATS {
 
@@ -7510,8 +7510,8 @@ ULONG RipIfOutputPackets;
 
 The **RIP_INTERFACE** structure contains information about a specific RIP interface. This structure is returned as part of the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _RIP_INTERFACE {
 
@@ -7636,8 +7636,8 @@ packet-beta
 
 The **MPRAPI_OBJECT_HEADER_IDL** structure SHOULD<116> define the version of the structure that needs to be used by the following methods and structures:
 
-- [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.1.4.46)
-- [**RRasAdminConnectionGetInfoEx (section 3.1.4.47)**](#Section_3.2.4.47)
+- [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.2.4.46)
+- [**RRasAdminConnectionGetInfoEx (section 3.1.4.47)**](#Section_3.1.4.47)
 - [**RAS_CONNECTION_EX_1_IDL (section 2.2.1.2.133)**](#Section_2.2.1.2.133)
 - [**MPR_SERVER_EX_1 (section 2.2.1.2.142)**](#Section_2.2.1.2.142)
 - [**MPR_SERVER_SET_CONFIG_EX_1 (section 2.2.1.2.145)**](#Section_2.2.1.2.145)
@@ -8028,7 +8028,7 @@ ULONG hInterface;
 
 **dwConnectDuration:** Specifies the duration in seconds for which the current connection is active.
 
-**dwInterfaceType:** Specifies a [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.15) value specifying the interface type of the current connection.
+**dwInterfaceType:** Specifies a [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.12) value specifying the interface type of the current connection.
 
 **dwConnectionFlags:** Specifies certain attributes of the connection.
 
@@ -8039,7 +8039,7 @@ This member SHOULD contain one of the following flags.<119>
 | 0x00000000 | No flag is set. |
 | RAS_FLAGS_PPP_CONNECTION 0x00000001 | The connection is using the Point-to-Point Protocol (PPP). |
 | RAS_FLAGS_MESSENGER_PRESENT 0x00000002 | The messenger service is active on the client and messages can be sent to the client using [**RRasAdminSendUserMessage (section 3.1.4.36)**](#Section_3.2.4.36). |
-| RAS_FLAGS_QUARANTINE_PRESENT 0x00000008 | The connection is currently in quarantine. See **RRasAdminConnectionRemoveQuarantine** (section [3.1.4.43](#Section_3.2.4.43)) for more information. |
+| RAS_FLAGS_QUARANTINE_PRESENT 0x00000008 | The connection is currently in quarantine. See **RRasAdminConnectionRemoveQuarantine** (section [3.1.4.43](#Section_3.1.4.43)) for more information. |
 | RAS_FLAGS_ARAP_CONNECTION 0x00000010 | The connection is using the AppleTalk Remote Access Protocol (ARAP). |
 | RAS_FLAGS_DORMANT 0x00000020 | The connection is using the IKEv2 and the server is not reachable. |
 
@@ -8096,7 +8096,7 @@ This member SHOULD contain one of the following flags.<119>
 <a id="Section_2.2.1.2.134"></a>
 ##### 2.2.1.2.134 RAS_CONNECTION_EX_IDL
 
-The **RAS_CONNECTION_EX_IDL** union contains a placeholder for [**RAS_CONNECTION_EX_1_IDL (section 2.2.1.2.133)**](#Section_2.2.1.2.133) structure. This union is used in the [**RRasAdminConnectionGetInfoEx (section 3.1.4.47)**](#Section_3.2.4.47) method.
+The **RAS_CONNECTION_EX_IDL** union contains a placeholder for [**RAS_CONNECTION_EX_1_IDL (section 2.2.1.2.133)**](#Section_2.2.1.2.133) structure. This union is used in the [**RRasAdminConnectionGetInfoEx (section 3.1.4.47)**](#Section_3.1.4.47) method.
 
 typedef union _RAS_CONNECTION_EX_IDL switch (UCHAR revision) ConnObject {
 
@@ -8478,8 +8478,8 @@ case 1: RAS_UPDATE_CONNECTION_1_IDL UpdateConnection1;
 
 The **IPBOOTP_GLOBAL_CONFIG** structure is used to set or retrieve global configuration for the IPBOOTP. This is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _IPBOOTP_GLOBAL_CONFIG {
 
 DWORD GC_LoggingLevel;
@@ -8510,9 +8510,9 @@ DWORD GC_ServerCount;
 
 The **IPBOOTP_IF_CONFIG** structure is used to set or retrieve the per-interface configuration. This is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 All IP address are in network order.
 
 typedef struct _IPBOOTP_IF_CONFIG {
@@ -8552,8 +8552,8 @@ DWORD IC_MinSecondsSinceBoot;
 
 The **IPBOOTP_MIB_GET_INPUT_DATA** structure is passed as input data for the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IPBOOTP_MIB_GET_INPUT_DATA {
 
@@ -8581,7 +8581,7 @@ DWORD IMGID_IfIndex;
 
 The **IPBOOTP_MIB_GET_OUTPUT_DATA** structure is passed as output data for the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
 - [**RMIBEntryGetFirst (section 3.2.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.2.4.32)**](#Section_3.2.4.32)
 **Note** At the end of a table **RMIBEntryGetNext** wraps to the next table.
@@ -8707,8 +8707,8 @@ DWORD IA_Netmask;
 
 The **DHCPV6R_MIB_GET_OUTPUT_DATA** structure is passed as output data for the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _DHCPV6R_MIB_GET_OUTPUT_DATA {
 
@@ -8737,8 +8737,8 @@ BYTE IMGOD_Buffer[1];
 
 The **DHCPV6R_GLOBAL_CONFIG** structure contains the global configuration of the DHCPV6 Relay Agent. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 This structure is variable length, after the base structure there will be an array of GC_ServerCount in6_addr structures, each of which contains an IPv6 address of a DHCP server to which packets will be sent. All IPv6 address fields MUST be in network order.
 
 typedef struct _DHCPV6R_GLOBAL_CONFIG {
@@ -8852,8 +8852,8 @@ DWORD IC_MinElapsedTime;
 
 The **DHCPV6R_MIB_GET_INPUT_DATA** structure is passed as input for the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _DHCPV6R_MIB_GET_INPUT_DATA {
 
@@ -8878,8 +8878,8 @@ DWORD IMGID_IfIndex;
 
 The **IPRIP_MIB_GET_INPUT_DATA** structure is passed as input data for the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 All the IP addresses MUST be in network order.
 
@@ -8917,8 +8917,8 @@ DWORD IMGID_PeerAddress;
 
 The **IPRIP_MIB_GET_OUTPUT_DATA** structure is populated by the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IPRIP_MIB_GET_OUTPUT_DATA {
 
@@ -8944,8 +8944,8 @@ BYTE IMGOD_Buffer[1];
 | --- | --- |
 | IPRIP_GLOBAL_STATS_ID 0x00000000 | The global statistics for the IP RIP, [**IPRIP_GLOBAL_STATS (section 2.2.1.2.163)**](#Section_2.2.1.2.163). |
 | IPRIP_GLOBAL_CONFIG_ID 0x00000001 | The global configuration for the IP RIP, [**IPRIP_GLOBAL_CONFIG (section 2.2.1.2.164)**](#Section_2.2.1.2.164). |
-| IPRIP_IF_STATS_ID 0x00000002 | The per-interface statistics for the IP RIP, [**IPRIP_IF_STATS (section 2.2.1.2.165)**](#Section_2.2.1.2.123). |
-| IPRIP_IF_CONFIG_ID 0x00000003 | The per-interface configuration, [**IPRIP_IF_CONFIG (section 2.2.1.2.166)**](#Section_2.2.1.2.166). |
+| IPRIP_IF_STATS_ID 0x00000002 | The per-interface statistics for the IP RIP, [**IPRIP_IF_STATS (section 2.2.1.2.165)**](#Section_2.2.1.2.165). |
+| IPRIP_IF_CONFIG_ID 0x00000003 | The per-interface configuration, [**IPRIP_IF_CONFIG (section 2.2.1.2.166)**](#Section_2.2.1.2.206). |
 | IPRIP_IF_BINDING_ID 0x00000004 | The table of IP addresses to which each interface is bound, [**IPRIP_IF_BINDING (section 2.2.1.2.168)**](#Section_2.2.1.2.168). |
 | IPRIP_PEER_STATS_ID 0x00000005 | The statistics kept about neighboring routers, [**IPRIP_PEER_STATS (section 2.2.1.2.170)**](#Section_2.2.1.2.170). |
 
@@ -8956,7 +8956,7 @@ BYTE IMGOD_Buffer[1];
 <a id="Section_2.2.1.2.163"></a>
 ##### 2.2.1.2.163 IPRIP_GLOBAL_STATS
 
-The **IPRIP_GLOBAL_STATS** structure contains global statistics for the IP RIP. There is only one instance, so this entry has no index. This structure is read-only. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.161) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162) structures.
+The **IPRIP_GLOBAL_STATS** structure contains global statistics for the IP RIP. There is only one instance, so this entry has no index. This structure is read-only. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.125) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162) structures.
 
 typedef struct _IPRIP_GLOBAL_STATS {
 
@@ -8975,10 +8975,10 @@ DWORD GS_TotalResponsesSent;
 <a id="Section_2.2.1.2.164"></a>
 ##### 2.2.1.2.164 IPRIP_GLOBAL_CONFIG
 
-The **IPRIP_GLOBAL_CONFIG** structure contains global configuration for the IPRIP. This structure is used in structures [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.161), [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162), and in the following methods:
+The **IPRIP_GLOBAL_CONFIG** structure contains global configuration for the IPRIP. This structure is used in structures [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.125), [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162), and in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo**](#Section_2.1) (section 3.1.4.10)
-- [**RRouterInterfaceTransportGetGlobalInfo**](#Section_2.1) (section 3.1.4.11)
+- [**RRouterInterfaceTransportSetGlobalInfo**](#Section_3.1.4.10) (section 3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo**](#Section_3.2.4.11) (section 3.1.4.11)
 There is only one instance of this entry in the MIB. Following it is an array of **GC_PeerFilterCount** DWORDs, each of which contains an IP address which is a peer which will be accepted or rejected depending on the value of **GC_PeerFilterMode**. If the **GC_PeerFilterMode** is set to IPRIP_FILTER_EXCLUDE, routes will be rejected which come from the routers whose addresses are in the peer array, and all other routers will be accepted.
 
 Likewise, if the **GC_PeerFilterMode** is set to IPRIP_FILTER_INCLUDE, routes will only be accepted if they are from the routers in the peer array.
@@ -9029,7 +9029,7 @@ DWORD GC_PeerFilterCount;
 <a id="Section_2.2.1.2.165"></a>
 ##### 2.2.1.2.165 IPRIP_IF_STATS
 
-The **IPRIP_IF_STATS** structure contains per-interface statistics for the IPRIP. This structure is read-only. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.161) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162).
+The **IPRIP_IF_STATS** structure contains per-interface statistics for the IPRIP. This structure is read-only. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.125) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162).
 
 typedef struct _IPRIP_IF_STATS {
 
@@ -9085,11 +9085,11 @@ DWORD IS_TriggeredUpdatesSent;
 <a id="Section_2.2.1.2.166"></a>
 ##### 2.2.1.2.166 IPRIP_IF_CONFIG
 
-The **IPRIP_IF_CONFIG** structure contains the per-interface configuration. This structure is used in structures [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.161), [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162), and in the following methods:
+The **IPRIP_IF_CONFIG** structure contains the per-interface configuration. This structure is used in structures [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.125), [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162), and in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
 - [**RRouterInterfaceTransportGetInfo (section 3.2.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 ```mermaid
 packet-beta
   0-31: "IC_State"
@@ -9224,7 +9224,7 @@ packet-beta
 <a id="Section_2.2.1.2.167"></a>
 ##### 2.2.1.2.167 IPRIP_ROUTE_FILTER
 
-The **IPRIP_ROUTE_FILTER** structure is used to specify a route filter for use in the **IC_AcceptFilter** and **IC_AnnounceFilter** fields of the [**IPRIP_IF_CONFIG (section 2.2.1.2.166)**](#Section_2.2.1.2.166) structure.
+The **IPRIP_ROUTE_FILTER** structure is used to specify a route filter for use in the **IC_AcceptFilter** and **IC_AnnounceFilter** fields of the [**IPRIP_IF_CONFIG (section 2.2.1.2.166)**](#Section_2.2.1.2.206) structure.
 
 typedef struct _IPRIP_ROUTE_FILTER {
 
@@ -9243,7 +9243,7 @@ DWORD RF_HiAddress;
 <a id="Section_2.2.1.2.168"></a>
 ##### 2.2.1.2.168 IPRIP_IF_BINDING
 
-The **IPRIP_IF_BINDING** structure is an MIB entry that contains the table of IP addresses to which each interface is bound. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.161) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162) structures.
+The **IPRIP_IF_BINDING** structure is an MIB entry that contains the table of IP addresses to which each interface is bound. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.125) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162) structures.
 
 All IP addresses are in network order. This structure is variable length.
 
@@ -9290,7 +9290,7 @@ DWORD IA_Netmask;
 <a id="Section_2.2.1.2.170"></a>
 ##### 2.2.1.2.170 IPRIP_PEER_STATS
 
-The **IPRIP_PEER_STATS** structure is an MIB entry that describes the statistics kept about neighboring routers. All IP addresses are in network order. This structure is read-only. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.161) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162) structures.
+The **IPRIP_PEER_STATS** structure is an MIB entry that describes the statistics kept about neighboring routers. All IP addresses are in network order. This structure is read-only. This structure is used in [**IPRIP_MIB_GET_INPUT_DATA (section 2.2.1.2.161)**](#Section_2.2.1.2.125) and [**IPRIP_MIB_GET_OUTPUT_DATA (section 2.2.1.2.162)**](#Section_2.2.1.2.162) structures.
 
 typedef struct _IPRIP_PEER_STATS {
 
@@ -9323,8 +9323,8 @@ DWORD PS_BadResponseEntriesFromPeer;
 
 The **IGMP_MIB_GET_INPUT_DATA** structure is passed as input data for the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 All IP addresses MUST be in network order.
 
@@ -9382,8 +9382,8 @@ DWORD Count;
 
 The **IGMP_MIB_GET_OUTPUT_DATA** structure is written into the output data on calling the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 ```mermaid
 packet-beta
@@ -9425,8 +9425,8 @@ packet-beta
 
 The **IGMP_MIB_GLOBAL_CONFIG** structure contains the global configuration for the IGMP. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _IGMP_MIB_GLOBAL_CONFIG {
 
 DWORD Version;
@@ -9462,9 +9462,9 @@ DWORD RasClientStats;
 
 The **IGMP_MIB_IF_CONFIG** structure contains per-interface configuration. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
 - [**RRouterInterfaceTransportGetInfo (section 3.2.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 All IP address fields MUST be in network order.
 
 typedef struct _IGMP_MIB_IF_CONFIG {
@@ -9931,8 +9931,8 @@ INTERFACE_ROUTE_INFO routeInfo;
 
 The **IP_NAT_MIB_QUERY** structure is used to retrieve [**Network Address Translator (NAT)**](#gt_network-address-translator-nat) information and is passed to the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- **RMIBEntryGetFirst** (section [3.1.4.31](#Section_3.2.4.31))
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- **RMIBEntryGetFirst** (section [3.1.4.31](#Section_3.1.4.31))
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IP_NAT_MIB_QUERY {
 
@@ -9978,7 +9978,7 @@ packet-beta
 
 **Index (4 bytes):** This MUST be the index of the interface.
 
-**EnumerateContext (16 bytes):** This is represented by an array of 4 ULONG values. On the first call to [**RMIBEntryGet (section**](#Section_3.2.4.31) 3.1.4.30) or [**RMIBEntryGetFirst (section**](#Section_3.2.4.31) 3.1.4.31) methods **EnumerateContext** is zeroed out. It will be filled by the NAT with the information to be passed back down as the enumeration continues. To indicate there are no items remaining, the NAT will set **EnumerateContext[0]** to 0. In [**RMIBEntryGetNext (section**](#Section_3.2.4.32) [3.2.4.32](#Section_3.2.4.32)) method, **EnumerateContext** MUST be returned to the value returned in the previous calls.
+**EnumerateContext (16 bytes):** This is represented by an array of 4 ULONG values. On the first call to [**RMIBEntryGet (section**](#Section_3.1.4.32) 3.1.4.30) or [**RMIBEntryGetFirst (section**](#Section_3.1.4.31) 3.1.4.31) methods **EnumerateContext** is zeroed out. It will be filled by the NAT with the information to be passed back down as the enumeration continues. To indicate there are no items remaining, the NAT will set **EnumerateContext[0]** to 0. In [**RMIBEntryGetNext (section**](#Section_3.2.4.32) [3.2.4.32](#Section_3.2.4.32)) method, **EnumerateContext** MUST be returned to the value returned in the previous calls.
 
 **EnumerateCount (4 bytes):** Contains the number of enumerations returned and the number of **IP_NAT_SESSION_MAPPING** (section [2.2.1.2.184)](#Section_2.2.1.2.184) structures being returned.
 
@@ -10093,7 +10093,7 @@ OUT ULONG64 RejectsReverse;
 <a id="Section_2.2.1.2.186"></a>
 ##### 2.2.1.2.186 IP_DNS_PROXY_MIB_QUERY
 
-The **IP_DNS_PROXY_MIB_QUERY** structure is passed to [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31) method to retrieve the DNS proxy information.
+The **IP_DNS_PROXY_MIB_QUERY** structure is passed to [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32) method to retrieve the DNS proxy information.
 
 ```mermaid
 packet-beta
@@ -10146,8 +10146,8 @@ ULONG ResponsesSent;
 
 The **IP_AUTO_DHCP_MIB_QUERY** structure is used to retrieve the DNS proxy information and is passed to the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _IP_AUTO_DHCP_MIB_QUERY {
 
@@ -10236,8 +10236,8 @@ ULONG ReleasesReceived;
 
 The **MIB_DA_MSG** structure MAY<137> be used for retrieving OSPF MIB entries in the following methods:
 
-- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31)
-- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31)
+- [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32)
+- [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31)
 - [**RMIBEntryGetNext (section 3.1.4.32)**](#Section_3.1.4.32)
 typedef struct _MIB_DA_MSG {
 
@@ -10273,7 +10273,7 @@ ULONG_PTR data[32];
 | --- | --- |
 | ASN_RFC1157_GETREQUEST 0x000000A0 | MIB get request: **RMIBEntryGet (section 3.1.4.30)** |
 | ASN_RFC1157_GETNEXTREQUEST 0x000000A1 | MIB get next request: **RMIBEntryGetNext (section 3.1.4.32)** |
-| ASN_RFC1157_SETREQUEST 0x000000A3 | MIB set request: [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.2.4.29) |
+| ASN_RFC1157_SETREQUEST 0x000000A3 | MIB set request: [**RMIBEntrySet (section 3.1.4.29)**](#Section_3.1.4.29) |
 
 **ret_code:** This contains a return value which MUST be one of the following values.
 
@@ -10341,8 +10341,8 @@ ULONG_PTR data[32];
 
 The **IP_AUTO_DHCP_GLOBAL_INFO** structure holds the global configuration for the DHCP allocator and is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 The configuration consists of two things:
 
 - The network and mask from which addresses are to be allocated.
@@ -10393,9 +10393,9 @@ ULONG ExclusionArray;
 
 The **IP_AUTO_DHCP_INTERFACE_INFO** structure holds per-interface configuration for the DHCP allocator. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 The configuration only allows the DHCP allocator to be disabled on the given interface. Since the allocator runs in promiscuous-interface mode, it is enabled by default on all interfaces. Thus, the only interfaces that require any configuration are those on which the allocator is to be disabled.
 
 typedef struct _IP_AUTO_DHCP_INTERFACE_INFO {
@@ -10418,8 +10418,8 @@ ULONG Flags;
 
 The **IP_DNS_PROXY_GLOBAL_INFO** structure holds global configuration for the DNS proxy and is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _IP_DNS_PROXY_GLOBAL_INFO {
 
 ULONG LoggingLevel;
@@ -10475,8 +10475,8 @@ ULONG Flags;
 
 The **IP_NAT_GLOBAL_INFO** structure holds the global configuration information for NAT. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _IP_NAT_GLOBAL_INFO {
 
 ULONG LoggingLevel;
@@ -10523,9 +10523,9 @@ ULONG UDPTimeoutSeconds;
 
 The **IP_NAT_INTERFACE_INFO** structure is used to configure the NAT on an interface. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 The configuration information uses the [**RTR_INFO_BLOCK_HEADER (section 2.2.1.2.3)**](#Section_2.2.1.2.3) structure.
 
 typedef struct _IP_NAT_INTERFACE_INFO {
@@ -10652,8 +10652,8 @@ BOOLEAN AllowInboundSessions;
 
 The **IP_ALG_GLOBAL_INFO** structure<138> be used to hold the global configuration for the Application Layer Gateway transparent proxy and is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct IP_ALG_GLOBAL_INFO {
 
 ULONG LoggingLevel;
@@ -10678,8 +10678,8 @@ ULONG Flags;
 
 The **RIP_GLOBAL_INFO** structure<139> be used to give the global IPX RIP information for the RRAS server. When this structure is encapsulated in [**RTR_TOC_ENTRY (section 2.2.1.2.4)**](#Section_2.2.1.2.4), the **InfoType** value used MUST be set to 0x00020000. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _RIP_GLOBAL_INFO {
 
 DWORD EventLogMask;
@@ -10749,7 +10749,7 @@ RIP_ROUTE_FILTER_INFO RouteFilter[1];
 
 **ListenFilterCount:** The count of listen filters.
 
-**RouteFilter:** This is a **RIP_ROUTE_FILTER_INFO** (section [2.2.1.2.203)](#Section_2.2.1.2.203).
+**RouteFilter:** This is a **RIP_ROUTE_FILTER_INFO** (section [2.2.1.2.203)](#Section_2.2.1.2.6).
 
 <a id="Section_2.2.1.2.205"></a>
 ##### 2.2.1.2.205 RIP_IF_INFO
@@ -10839,7 +10839,7 @@ DWORD EventLogMask;
 <a id="Section_2.2.1.2.208"></a>
 ##### 2.2.1.2.208 OSPF_ROUTE_FILTER
 
-The **OSPF_ROUTE_FILTER** structure MAY<144> be used as part of [**OSPF_ROUTE_FILTER_INFO (section 2.2.1.2.209)**](#Section_2.2.1.2.208) structure.
+The **OSPF_ROUTE_FILTER** structure MAY<144> be used as part of [**OSPF_ROUTE_FILTER_INFO (section 2.2.1.2.209)**](#Section_2.2.1.2.6) structure.
 
 typedef struct _OSPF_ROUTE_FILTER {
 
@@ -10858,8 +10858,8 @@ DWORD dwMask;
 
 The **OSPF_ROUTE_FILTER_INFO** structure MAY<145> be used to contain OSPF route filter information and is used by the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 ```mermaid
 packet-beta
   0-31: "type"
@@ -10881,8 +10881,8 @@ packet-beta
 
 The **OSPF_PROTO_FILTER_INFO** structure MAY<146> be used to contain the OSPF protocol filter information and is used by the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _OSPF_PROTO_FILTER_INFO {
 
 DWORD type;
@@ -10908,8 +10908,8 @@ DWORD pdwProtoId[1];
 
 The **OSPF_GLOBAL_PARAM** structure MAY<147> be used to contain the OPSF global parameters and is used by the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _OSPF_GLOBAL_PARAM {
 
 DWORD type;
@@ -10943,8 +10943,8 @@ DWORD logLevel;
 
 The **OSPF_AREA_PARAM** structure MAY<148> be used to contain the OSPF area parameters and is used by the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 When calling **RRouterInterfaceTransportSetGlobalInfo** you MUST NOT delete the area with the areaId set to 0.0.0.0, which works as the backbone area for the OSPF, otherwise the method will return a failure.
 
 typedef struct _OSPF_AREA_PARAM {
@@ -10988,8 +10988,8 @@ DWORD importSumAdv;
 
 The **OSPF_AREA_RANGE_PARAM** structure MAY<149> be used to contain the OSPF area range parameters. This structure is used by the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _OSPF_AREA_RANGE_PARAM {
 
 DWORD type;
@@ -11023,8 +11023,8 @@ DWORD rangeMask;
 
 The **OSPF_VIRT_INTERFACE_PARAM** structure MAY<150> be used to contain the OSPF virtual interface parameters and is used by the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.1.4.11)**](#Section_3.2.4.11)
 typedef struct _OSPF_VIRT_INTERFACE_PARAM {
 
 DWORD type;
@@ -11074,9 +11074,9 @@ BYTE password[8];
 
 The **OSPF_INTERFACE_PARAM** structure MAY<151> be used to contain the OSPF Non-Broadcast Multiple Access (NBMA) neighbor parameters and is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 typedef struct _OSPF_INTERFACE_PARAM {
 
 DWORD type;
@@ -11150,9 +11150,9 @@ DWORD mtuSize;
 
 The **OSPF_NBMA_NEIGHBOR_PARAM** structure MAY<152> be used to contain the OSPF NBMA neighbor parameters and is used in the following methods:
 
-- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_2.1)
-- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_2.1)
+- [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18)
+- [**RRouterInterfaceTransportGetInfo (section 3.1.4.19)**](#Section_3.2.4.19)
+- [**RRouterInterfaceTransportSetInfo (section 3.1.4.20)**](#Section_3.1.4.20)
 typedef struct _OSPF_NBMA_NEIGHBOR_PARAM {
 
 DWORD type;
@@ -11184,7 +11184,7 @@ DWORD neighborPriority;
 <a id="Section_2.2.1.2.217"></a>
 ##### 2.2.1.2.217 RequestBuffer
 
-The **RequestBuffer** structure is a generic information container used by the [**RasRpcSubmitRequest (section 3.4.4.5)**](#Section_3.4.4.5) method to set or retrieve information on RRAS server.
+The **RequestBuffer** structure is a generic information container used by the [**RasRpcSubmitRequest (section 3.4.4.5)**](#Section_3.3.4.5) method to set or retrieve information on RRAS server.
 
 ```mermaid
 packet-beta
@@ -13102,9 +13102,9 @@ packet-beta
 
 **uActionCount (4 bytes):** Specifies the number of Action clauses.
 
-**Matches (variable):** A list of consecutive entries of Match clauses, **uMatchCount** in number, each of which MUST be of type [**BGP_POLICY_MATCH (section**](#Section_2.2.1.2.258) 2.2.1.2.258).
+**Matches (variable):** A list of consecutive entries of Match clauses, **uMatchCount** in number, each of which MUST be of type [**BGP_POLICY_MATCH (section**](#Section_2.2.1.2.261) 2.2.1.2.258).
 
-**Actions (variable):** A list of consecutive entries of Action clauses, **uActionCount** in number, each of which MUST be of type [**BGP_POLICY_ACTION (section**](#Section_2.2.1.2.260) 2.2.1.2.260). The Action clause MUST ignore the **Modify** field of **BGP_POLICY_ACTION** when the **eType** field is set to **PolicyFilter** (0x1).
+**Actions (variable):** A list of consecutive entries of Action clauses, **uActionCount** in number, each of which MUST be of type [**BGP_POLICY_ACTION (section**](#Section_2.2.1.2.261) 2.2.1.2.260). The Action clause MUST ignore the **Modify** field of **BGP_POLICY_ACTION** when the **eType** field is set to **PolicyFilter** (0x1).
 
 A BGP policy:
 
@@ -13194,7 +13194,7 @@ BYTE policyNames[1];
 
 **peerIP:** Specifies the IP address of the BGP peer for which the policies are configured. This MUST be of type [**BGP_IP_ADDRESS (section 2.2.1.2.254)**](#Section_2.2.1.2.254).
 
-**eDirection:** Specifies the source of the BGP routes to which the BGP policies are applied. This value MUST be of type [**BGP_POLICY_DIRECTION (section 2.2.1.1.22)**](#Section_2.2.1.1.22).
+**eDirection:** Specifies the source of the BGP routes to which the BGP policies are applied. This value MUST be of type [**BGP_POLICY_DIRECTION (section 2.2.1.1.22)**](#Section_2.2.1.2.261).
 
 **uPolicyCount:** Specifies the number of policies configured for the BGP peer. This value MUST be greater than zero (0).
 
@@ -13249,8 +13249,8 @@ DWORD dwReserved;
 
 The **PRIORITY_INFO_EX** structure<195> is used to set preferences to different protocols on the RRAS server. This structure is used in the following methods:
 
-- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_2.1)
-- [**RRouterInterfaceTransportGetGlobalInfo (section 3.2.4.11)**](#Section_2.1)
+- [**RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)**](#Section_3.1.4.10)
+- [**RRouterInterfaceTransportGetGlobalInfo (section 3.2.4.11)**](#Section_2.2.3.1.2)
 ```mermaid
 packet-beta
   0-31: "dwNumProtocols"
@@ -13280,7 +13280,7 @@ IN OUT DWORD dwMetric;
 
 *PPROTOCOL_METRIC_EX;
 
-**dwProtocolId:** This is same as **dwProtocolId** in [**PROTOCOL_METRIC (section 2.2.1.2.13)**](#Section_2.2.1.2.13).
+**dwProtocolId:** This is same as **dwProtocolId** in [**PROTOCOL_METRIC (section 2.2.1.2.13)**](#Section_2.2.2.2.119).
 
 **dwSubProtocolId:** This is the subprotocol ID. This value MUST be set to zero (0) if the **dwProtocolId** is not set to MIB_IPPROTO_BGP (0xD). For **dwProtocolId** MIB_IPPROTO_BGP (0xD), this MUST be set to one the following values.
 
@@ -14476,7 +14476,7 @@ The **Interfacename** value represents the name of the interface. This MUST be a
 <a id="Section_2.2.3.2.1.2"></a>
 ###### 2.2.3.2.1.2 Type
 
-The **Type** value represents the type of the interface. This MUST be of type REG_DWORD. The value for this MUST be as defined in the [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.15). For each interface, the **Type** MUST be specified.
+The **Type** value represents the type of the interface. This MUST be of type REG_DWORD. The value for this MUST be as defined in the [**ROUTER_INTERFACE_TYPE (section 2.2.1.1.1)**](#Section_2.2.1.1.12). For each interface, the **Type** MUST be specified.
 
 <a id="Section_2.2.3.2.1.3"></a>
 ###### 2.2.3.2.1.3 Enabled
@@ -15183,7 +15183,7 @@ This section describes a conceptual model that an implementation can maintain to
 
 RRASM protocol provides the remoting capability to the underlying RRAS implementation's management objects and methods. The following data variables affect the protocol behavior.
 
-**RouterType:** This 4-byte variable specifies the currently defined RRAS role type. It is a combination of the flags as specified under section [2.2.3.4.1](#Section_2.2.3.4.1). As a part of the initialization, the RRAS server specifies this value for the RRASM server to initialize with **Start DIMSVC**, as defined in section [3.1.6](#Section_3.1). This value remains the same and will be refreshed only when the RRASM server is shut down and initialized again.
+**RouterType:** This 4-byte variable specifies the currently defined RRAS role type. It is a combination of the flags as specified under section [2.2.3.4.1](#Section_2.2.3.4.14). As a part of the initialization, the RRAS server specifies this value for the RRASM server to initialize with **Start DIMSVC**, as defined in section [3.1.6](#Section_3.1). This value remains the same and will be refreshed only when the RRASM server is shut down and initialized again.
 
 **SupportedTransportsList:** This specifies the list of transport identifiers that are supported by RRAS. As a part of the initialization, RRAS specifies this value for the RRASM server to initialize with **Start DIMSVC** as defined in section 3.1.6. This list remains static and will be refreshed only when the RRASM server is shut down and initialized again. Each transport identifier is a 4-byte value and can be one of the following values.<248>
 
@@ -15195,11 +15195,11 @@ RRASM protocol provides the remoting capability to the underlying RRAS implement
 
 **PhonebookEntryNameList**: This specifies the list of **phonebook entry names** (section [2.2.2.1](#Section_2.2.2.1)). The RRASM server loads the [**phonebook file**](#gt_7653fbde-27ea-4593-bf47-46064b0a1c29) and regenerates this list when any of the following methods are called:
 
-RRouterInterfaceCreate (section [3.1.4.13](#Section_3.2.4.13))
+RRouterInterfaceCreate (section [3.1.4.13](#Section_3.1.4.13))
 
-RRouterInterfaceGetInfo (section [3.1.4.14](#Section_3.1.4.14))
+RRouterInterfaceGetInfo (section [3.1.4.14](#Section_3.2.4.14))
 
-RRouterInterfaceSetInfo (section [3.1.4.15](#Section_3.1.4.15))
+RRouterInterfaceSetInfo (section [3.1.4.15](#Section_3.2.4.15))
 
 RasRpcDeleteEntry (section [3.3.4.1](#Section_3.4.4.1))
 
@@ -15236,55 +15236,55 @@ Methods in RPC Opnum order
 
 | Method | Description |
 | --- | --- |
-| [RMprAdminServerGetInfo](#Section_3.2.4.1) | Retrieves port-related configuration information for the specified RRAS server. Opnum: 0 |
-| [RRasAdminConnectionEnum](#Section_3.1.4.46) | Retrieves the list of active connections. Opnum: 1 |
+| [RMprAdminServerGetInfo](#Section_3.1.4.1) | Retrieves port-related configuration information for the specified RRAS server. Opnum: 0 |
+| [RRasAdminConnectionEnum](#Section_3.2.4.46) | Retrieves the list of active connections. Opnum: 1 |
 | [RRasAdminConnectionGetInfo](#Section_3.2.4.3) | Retrieves the connection information for a specific connection. Opnum: 2 |
 | [RRasAdminConnectionClearStats](#Section_3.1.4.4) | Resets the statistics counters for the connection. Opnum: 3 |
-| [RRasAdminPortEnum](#Section_3.2.4.5) | Retrieves the list of all ports on a RRAS server, or the ports for a specified connection. Opnum: 4 |
-| [RRasAdminPortGetInfo](#Section_3.1.4.6) | Retrieves the port information for a specific port. Opnum: 5 |
+| [RRasAdminPortEnum](#Section_3.1.4.5) | Retrieves the list of all ports on a RRAS server, or the ports for a specified connection. Opnum: 4 |
+| [RRasAdminPortGetInfo](#Section_3.2.4.6) | Retrieves the port information for a specific port. Opnum: 5 |
 | [RRasAdminPortClearStats](#Section_3.1.4.7) | Resets the counters for the specified port. Opnum: 6 |
 | [RRasAdminPortReset](#Section_3.1.4.8) | Performs access validation. Opnum: 7 |
 | [RRasAdminPortDisconnect](#Section_3.2.4.9) | Initiates the disconnect of the connection on a specified port. Opnum: 8 |
-| [RRouterInterfaceTransportSetGlobalInfo](#Section_2.1) | Sets global information for the specified IP transport. Opnum: 9 |
-| [RRouterInterfaceTransportGetGlobalInfo](#Section_2.1) | Gets the entire global information for the specified transport. Opnum: 10 |
-| [RRouterInterfaceGetHandle](#Section_3.1.4.12) | Retrieves the handle of the specified interface. Opnum: 11 |
-| [RRouterInterfaceCreate](#Section_3.2.4.13) | Creates an interface on a specified RRAS server. Opnum: 12 |
-| [RRouterInterfaceGetInfo](#Section_3.1.4.14) | Retrieves information for a specified interface on a specified RRAS server. Opnum: 13 |
-| [RRouterInterfaceSetInfo](#Section_3.1.4.15) | Sets information for a specified interface on a specified server. Opnum: 14 |
+| [RRouterInterfaceTransportSetGlobalInfo](#Section_3.1.4.10) | Sets global information for the specified IP transport. Opnum: 9 |
+| [RRouterInterfaceTransportGetGlobalInfo](#Section_3.2.4.11) | Gets the entire global information for the specified transport. Opnum: 10 |
+| [RRouterInterfaceGetHandle](#Section_3.2.4.12) | Retrieves the handle of the specified interface. Opnum: 11 |
+| [RRouterInterfaceCreate](#Section_3.1.4.13) | Creates an interface on a specified RRAS server. Opnum: 12 |
+| [RRouterInterfaceGetInfo](#Section_3.2.4.14) | Retrieves information for a specified interface on a specified RRAS server. Opnum: 13 |
+| [RRouterInterfaceSetInfo](#Section_3.2.4.15) | Sets information for a specified interface on a specified server. Opnum: 14 |
 | [RRouterInterfaceDelete](#Section_3.1.4.16) | Deletes an interface on a specified server. Opnum: 15 |
-| [RRouterInterfaceTransportRemove](#Section_2.1) | Removes an existing IP transport from the RRAS server. Opnum: 16 |
-| [RRouterInterfaceTransportAdd](#Section_2.1) | Adds an IP transport to a specified interface. Opnum: 17 |
-| [RRouterInterfaceTransportGetInfo](#Section_2.1) | Retrieves information about an IP transport running on a specified interface. Opnum: 18 |
-| [RRouterInterfaceTransportSetInfo](#Section_2.1) | Sets information about an IP transport running on a specified interface. Opnum: 19 |
+| [RRouterInterfaceTransportRemove](#Section_3.2.4.17) | Removes an existing IP transport from the RRAS server. Opnum: 16 |
+| [RRouterInterfaceTransportAdd](#Section_3.2.4.18) | Adds an IP transport to a specified interface. Opnum: 17 |
+| [RRouterInterfaceTransportGetInfo](#Section_3.2.4.19) | Retrieves information about an IP transport running on a specified interface. Opnum: 18 |
+| [RRouterInterfaceTransportSetInfo](#Section_3.1.4.20) | Sets information about an IP transport running on a specified interface. Opnum: 19 |
 | [RRouterInterfaceEnum](#Section_3.1.4.21) | Retrieves the list of all the interfaces from the specified server. Opnum: 20 |
 | [RRouterInterfaceConnect](#Section_3.2.4.22) | Establishes a connection for the specified interface. Opnum: 21 |
-| [RRouterInterfaceDisconnect](#Section_3.2.4.23) | Disconnects the specified interface on the specified RRASM server. Opnum: 22 |
+| [RRouterInterfaceDisconnect](#Section_3.1.4.23) | Disconnects the specified interface on the specified RRASM server. Opnum: 22 |
 | [RRouterInterfaceUpdateRoutes](#Section_3.2.4.24) | Updates routing information for a given IP transport on a specified interface on the RRAS server. Opnum: 23 |
 | [RRouterInterfaceQueryUpdateResult](#Section_3.2.4.25) | Returns the result of the last RRouterInterfaceUpdateRoutes request. Opnum: 24 |
-| [RRouterInterfaceUpdatePhonebookInfo](#Section_3.1.4.26) | Forces the router to pick up changes made on a specified demand-dial interface. Opnum: 25 |
-| [RMIBEntryCreate](#Section_3.2.4.27) | Creates an MIB entry that is used by the RRAS to create a route entry in the IPv4 routing table. Opnum: 26 |
+| [RRouterInterfaceUpdatePhonebookInfo](#Section_3.2.4.26) | Forces the router to pick up changes made on a specified demand-dial interface. Opnum: 25 |
+| [RMIBEntryCreate](#Section_3.1.4.27) | Creates an MIB entry that is used by the RRAS to create a route entry in the IPv4 routing table. Opnum: 26 |
 | [RMIBEntryDelete](#Section_3.2.4.28) | Deletes an MIB entry in an IPv4 forwarding table. Opnum: 27 |
-| [RMIBEntrySet](#Section_3.2.4.29) | Modifies an MIB entry in the IPv4 forwarding table. Opnum: 28 |
-| [RMIBEntryGet](#Section_3.2.4.31) | Retrieves the value of a RRAS MIB entry that corresponds to the transport. Opnum: 29 |
-| [RMIBEntryGetFirst](#Section_3.2.4.31) | Retrieves the first value of an entry corresponding to the transport, protocol, and the MIB entry. Opnum: 30 |
+| [RMIBEntrySet](#Section_3.1.4.29) | Modifies an MIB entry in the IPv4 forwarding table. Opnum: 28 |
+| [RMIBEntryGet](#Section_3.1.4.32) | Retrieves the value of a RRAS MIB entry that corresponds to the transport. Opnum: 29 |
+| [RMIBEntryGetFirst](#Section_3.1.4.31) | Retrieves the first value of an entry corresponding to the transport, protocol, and the MIB entry. Opnum: 30 |
 | [RMIBEntryGetNext](#Section_3.1.4.32) | Retrieves the next entry corresponding to the transport protocol, and the MIB entry. Opnum: 31 |
 | [RMIBGetTrapInfo](#Section_3.1.4.33) | Queries the module that set a trap event for more information about the trap. Opnum: 32 |
 | [RMIBSetTrapInfo](#Section_3.1.4.34) | Specifies a handle to an event that is signaled whenever a trap needs to be issued. Opnum: 33 |
 | [RRasAdminConnectionNotification](#Section_3.1.4.35) | Registers an event object with the RRAS server. Opnum: 34 |
 | [RRasAdminSendUserMessage](#Section_3.2.4.36) | Sends a message to the user connected on the specified connection. Opnum: 35 |
-| [RRouterDeviceEnum](#Section_3.1.4.37) | Retrieves the list of all the devices from the specified server. Opnum: 36 |
-| [RRouterInterfaceTransportCreate](#Section_2.1) | Creates a new transport on the RRAS server. Opnum: 37 |
-| [RRouterInterfaceDeviceGetInfo](#Section_3.1.4.39) | Retrieves information for a specified device, for a specified interface on a specified server. Opnum: 38 |
+| [RRouterDeviceEnum](#Section_3.2.4.37) | Retrieves the list of all the devices from the specified server. Opnum: 36 |
+| [RRouterInterfaceTransportCreate](#Section_3.1.4.38) | Creates a new transport on the RRAS server. Opnum: 37 |
+| [RRouterInterfaceDeviceGetInfo](#Section_3.2.4.39) | Retrieves information for a specified device, for a specified interface on a specified server. Opnum: 38 |
 | [RRouterInterfaceDeviceSetInfo](#Section_3.1.4.40) | Sets the information for a specified device, for a specified interface on a specified server. Opnum: 39 |
-| [RRouterInterfaceSetCredentialsEx](#Section_3.2.4.41) | Sets extended credentials (other than username and password) information for an interface. Opnum: 40 |
+| [RRouterInterfaceSetCredentialsEx](#Section_3.1.4.41) | Sets extended credentials (other than username and password) information for an interface. Opnum: 40 |
 | [RRouterInterfaceGetCredentialsEx](#Section_3.1.4.42) | Retrieves extended credentials information for the specified interface. Opnum: 41 |
-| [RRasAdminConnectionRemoveQuarantine](#Section_3.2.4.43) | Removes quarantine filters on a dialed-in RRAS client. Opnum: 42 |
-| [RMprAdminServerSetInfo](#Section_3.2.4.44) | Sets port information on a specified server. Opnum: 43 |
-| [RMprAdminServerGetInfoEx](#Section_3.1.4.45) | Gets the device configuration information for PPTP, L2TP, SSTP, and IKEv2 on a server. Opnum: 44 |
-| [RRasAdminConnectionEnumEx](#Section_3.1.4.46) | Retrieves the list of all active connections for a specified RRAS server. Opnum: 45 |
-| [RRasAdminConnectionGetInfoEx](#Section_3.2.4.47) | Retrieves the connection information for a specific connection. Opnum: 46 |
-| [RMprAdminServerSetInfoEx](#Section_3.2.4.48) | Sets the device configuration information for PPTP, L2TP, SSTP, and IKEv2 on a specified server. Opnum: 47 |
-| [RRasAdminUpdateConnection](#Section_3.1.4.49) | Updates the endpoint by sending MOBIKE on a connection specified on a specified server. Opnum: 48 |
+| [RRasAdminConnectionRemoveQuarantine](#Section_3.1.4.43) | Removes quarantine filters on a dialed-in RRAS client. Opnum: 42 |
+| [RMprAdminServerSetInfo](#Section_3.1.4.44) | Sets port information on a specified server. Opnum: 43 |
+| [RMprAdminServerGetInfoEx](#Section_3.2.4.45) | Gets the device configuration information for PPTP, L2TP, SSTP, and IKEv2 on a server. Opnum: 44 |
+| [RRasAdminConnectionEnumEx](#Section_3.2.4.46) | Retrieves the list of all active connections for a specified RRAS server. Opnum: 45 |
+| [RRasAdminConnectionGetInfoEx](#Section_3.1.4.47) | Retrieves the connection information for a specific connection. Opnum: 46 |
+| [RMprAdminServerSetInfoEx](#Section_3.1.4.48) | Sets the device configuration information for PPTP, L2TP, SSTP, and IKEv2 on a specified server. Opnum: 47 |
+| [RRasAdminUpdateConnection](#Section_3.2.4.49) | Updates the endpoint by sending MOBIKE on a connection specified on a specified server. Opnum: 48 |
 | [RRouterInterfaceSetCredentialsLocal](#Section_3.1.4.50) | Sets credentials information for an interface. Opnum: 49 |
 | [RRouterInterfaceGetCredentialsLocal](#Section_3.1.4.51) | Gets credentials information for an interface. Opnum: 50 |
 | [RRouterInterfaceGetCustomInfoEx](#Section_3.2.4.52) | Gets the tunnel-specific custom configuration for an interface. Opnum: 51 |
@@ -15394,7 +15394,7 @@ The opnum field value for this method is 1.
 When processing this call, the RRASM server MUST do the following:
 
 - Validate, as specified in section 2.1.1.1, whether this method was called by a client that has access to the method. If the client does not have access, then return error ERROR_ACCESS_DENIED (0x00000005).
-- If the [**RouterType (section 2.2.3.4.1)**](#Section_2.2.3.4.1) is ROUTER_TYPE_LAN, return an error other than those in the preceding table.
+- If the [**RouterType (section 2.2.3.4.1)**](#Section_2.2.3.4.14) is ROUTER_TYPE_LAN, return an error other than those in the preceding table.
 - If *pInfoStruct* is NULL, return an error other than those in the preceding table.
 - If *dwLevel* is not supported, return an error other than those in the preceding table.
 - Call the abstract interface **Invoke DIMSVC** method specifying the operation and the parameters to enable RRAS server to perform the required management task.
@@ -15430,7 +15430,7 @@ DWORD RRasAdminConnectionGetInfo(
 | 2 | After the function returns, the memory pointed to by pInfoStruct->pBuffer is interpreted as an array of [**RASI_CONNECTION_2 (section 2.2.1.2.79)**](#Section_2.2.1.2.79) structures. |
 | 3 | After the function returns, the memory pointed to by pInfoStruct->pBuffer is interpreted as [**RASI_CONNECTION_3 (section 2.2.1.2.80)**](#Section_2.2.1.2.80). |
 
-**hDimConnection:** This is of type **DWORD** and SHOULD be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.1.4.46). Since RRASM server does not maintain connection handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hDimConnection:** This is of type **DWORD** and SHOULD be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.2.4.46). Since RRASM server does not maintain connection handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **pInfoStruct:** This is a pointer of type **DIM_INFORMATION_CONTAINER**, and **DIM_INFORMATION_CONTAINER.dwBufferSize** is initialized to zero (0). Upon successful return, the pInfoStruct->pBuffer is a cast to an array of **RASI_CONNECTION_0**, **RASI_CONNECTION_1**, **RASI_CONNECTION_2**, or **RASI_CONNECTION_3** structures, based on the *dwLevel* value.
 
@@ -15446,7 +15446,7 @@ The opnum field value for this method is 2.
 When processing this call, the RRASM server MUST do the following:
 
 - Validate, as specified in section 2.1.1.1, whether this method was called by a client that has access to the method. If not, then return error ERROR_ACCESS_DENIED (0x00000005).
-- If the [**RouterType**](#Section_2.2.3.4.1) is ROUTER_TYPE_LAN, return an error other than those in the preceding table.
+- If the [**RouterType**](#Section_2.2.3.4.14) is ROUTER_TYPE_LAN, return an error other than those in the preceding table.
 - If *pInfoStruct* is NULL, return an error other than those in the preceding table.
 - If *dwLevel* is not supported, return an error other than those in the preceding table.
 - Call the abstract interface **Invoke DIMSVC** method specifying the operation and the parameters to enable the RRAS server to perform the required management task.
@@ -15469,7 +15469,7 @@ DWORD RRasAdminConnectionClearStats(
 
 **hDimServer:** A handle to the RRAS server where the call is executed, see section [3.1.3](#Section_3.1).
 
-**hDimConnection:** This is of type **DWORD** and SHOULD be set to the particular connection identifier for which the connection statistics have to be cleared. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.1.4.46). Because RRASM server does not maintain connection handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hDimConnection:** This is of type **DWORD** and SHOULD be set to the particular connection identifier for which the connection statistics have to be cleared. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.2.4.46). Because RRASM server does not maintain connection handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -15522,7 +15522,7 @@ DWORD RRasAdminPortEnum(
 | --- | --- |
 | 0 | After the function returns, the memory pointed by pInfoStruct->pBuffer is interpreted as an array of [**RASI_PORT_0 (section 2.2.1.2.75)**](#Section_2.2.1.2.75). The size of the array is determined by *lpdwEntriesRead*. This includes information related to the Port object during runtime. The port objects SHOULD be initialized based on the port configurations defined by [**WanEndpoints (section 2.2.3.3.1.8)**](#Section_2.2.3.3.1.8). The Device Name is also returned as a part of each port information. |
 
-**hRasConnection:** This is of type **DWORD** and SHOULD be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.1.4.46). If this parameter is passed as INVALID_HANDLE_VALUE (0xFFFFFFFF), the function enumerates all the active ports configured on the RRAS server. Since RRASM server does not maintain connection handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hRasConnection:** This is of type **DWORD** and SHOULD be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.2.4.46). If this parameter is passed as INVALID_HANDLE_VALUE (0xFFFFFFFF), the function enumerates all the active ports configured on the RRAS server. Since RRASM server does not maintain connection handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **pInfoStruct:** This is a pointer of type **DIM_INFORMATION_CONTAINER (section 2.2.1.2.1)**, and **DIM_INFORMATION_CONTAINER.dwBufferSize** is initialized to zero (0). Upon successful return, the pInfoStruct->pBuffer is typecast to an array of **RASI_PORT_0**, and the array size is determined by the value to pointer *lpdwEntriesRead*.
 
@@ -15547,7 +15547,7 @@ The opnum field value for this method is 4.
 When processing this call, the RRASM server MUST do the following:
 
 - Validate, as specified in section [2.1.1.1](#Section_2.1.1.1), whether this method was called by a client that has access to the method. If the client does not have access, then return error ERROR_ACCESS_DENIED (0x00000005).
-If the [**RouterType (section 2.2.3.4.1)**](#Section_2.2.3.4.1) is ROUTER_TYPE_LAN, return an error other than those in the preceding table.
+If the [**RouterType (section 2.2.3.4.1)**](#Section_2.2.3.4.14) is ROUTER_TYPE_LAN, return an error other than those in the preceding table.
 
 - If *pInfoStruct* is NULL, return an error other than those in the preceding table.
 - If *dwLevel* is not supported, return an error other than those in the preceding table.
@@ -15582,7 +15582,7 @@ DWORD RRasAdminPortGetInfo(
 | 0 | After the function returns, the memory pointed to by pInfoStruct->pBuffer is typecast to [**RASI_PORT_0 (section 2.2.1.2.75)**](#Section_2.2.1.2.75). The size of the array is determined by *lpdwEntriesRead*. |
 | 1 | After the function returns, the memory pointed to by pInfoStruct->pBuffer is typecast to [**RASI_ PORT_1 (section 2.2.1.2.76)**](#Section_2.2.1.2.76). The size of the array is determined by *lpdwEntriesRead*. |
 
-**hPort:** This is of type **DWORD** and MUST be set to the particular port identifier for which the port information is required. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.2.4.5). Since RRASM server does not maintain any port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hPort:** This is of type **DWORD** and MUST be set to the particular port identifier for which the port information is required. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.1.4.5). Since RRASM server does not maintain any port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **pInfoStruct:** This is a pointer of type **DIM_INFORMATION_CONTAINER**, and **DIM_INFORMATION_CONTAINER.dwBufferSize** is initialized to zero (0). Upon successful return, the pInfoStruct->pBuffer is typecast to an array of the **RASI_PORT_0** or **RASI_ PORT_1** structures, based on the *dwLevel* value.
 
@@ -15621,7 +15621,7 @@ DWORD RRasAdminPortClearStats(
 
 **hDimServer:** A handle to the RRASM server where the call is executed, see section [3.1.3](#Section_3.1).
 
-**hPort:** This is of type **DWORD** and MUST be set to the particular port identifier for which the port information is required. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.2.4.5). Since RRASM server does not maintain port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hPort:** This is of type **DWORD** and MUST be set to the particular port identifier for which the port information is required. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.1.4.5). Since RRASM server does not maintain port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of *ERROR_SUCCESS* (0x00000000) indicates that the operation was completed successfully; otherwise it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -15655,7 +15655,7 @@ DWORD RRasAdminPortReset(
 
 **hDimServer:** A handle to the RRASM server where the call is executed, see section [3.1.3](#Section_3.1).
 
-**hPort:** This is of type **DWORD** and SHOULD be set to the particular port identifier for which the port information is required. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.2.4.5). This parameter is not used. Because RRASM server does not maintain port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hPort:** This is of type **DWORD** and SHOULD be set to the particular port identifier for which the port information is required. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.1.4.5). This parameter is not used. Because RRASM server does not maintain port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values not in the following table MUST be treated the same by the RRASM client.
 
@@ -15689,7 +15689,7 @@ DWORD RRasAdminPortDisconnect(
 
 **hDimServer:** A handle to the RRASM server where the call is executed, see section [3.1.3](#Section_3.1).
 
-**hPort:** This is of type **DWORD** and MUST be set to the port identifier of the port that is to be disconnected. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.2.4.5). Since RRASM server does not maintain port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
+**hPort:** This is of type **DWORD** and MUST be set to the port identifier of the port that is to be disconnected. Obtain this handle by calling [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.1.4.5). Since RRASM server does not maintain port handle information, the validation of this handle SHOULD be done by the RRAS server implementation.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -15806,9 +15806,9 @@ If *dwTransportId* is PID_IP or PID_IP6 and if the **InfoType** field in the RTR
 | MS_IP_IGMP 0x4137000A | IGMP global configuration. | [IGMP_MIB_GLOBAL_CONFIG (section 2.2.1.2.173)](#Section_2.2.1.2.173) |
 | MS_IP_RIP 0x00000008 | IP RIP global configuration information. | [IPRIP_GLOBAL_CONFIG (section 2.2.1.2.164)](#Section_2.2.1.2.164) (values specified are overwritten) |
 | MS_IP_BGP 0x0137000E | BGP configuration. | When *dwTransportId* is PID_IP, the structure pointed to, at the offset is [BGP_CONFIG_HEADER (section 2.2.1.2.252)](#Section_2.2.1.2.252). When *dwTransportId* is PID_IP6, the structure pointed to, at the offset is [BGP_ROUTER_V6 (section 2.2.1.2.265)](#Section_2.2.1.2.265). |
-| MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP global configuration information. | IP_AUTO_DHCP_GLOBAL_INFO (section [2.2.1.2.191)](#Section_2.2.1.2.9) (values specified are overwritten) |
+| MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP global configuration information. | IP_AUTO_DHCP_GLOBAL_INFO (section [2.2.1.2.191)](#Section_2.2.1.2.191) (values specified are overwritten) |
 | MS_IP_DNS_PROXY 0x81372713 | DNS proxy global configuration information. | IP_DNS_PROXY_GLOBAL_INFO (section [2.2.1.2.193)](#Section_2.2.1.2.9) (values specified are overwritten) |
-| MS_IP_OSPF<258> 0x0000000D | OSPF global configuration information specified is retrieved. The type field is the first field in each of the structures and this defines which of the structures MUST be used. The type field MUST be OSPF_PARAM_TYPE (section [2.2.1.1.14](#Section_2.2.1.1.14)) and the value MUST be corresponding to the structures specified. | OSPF_ROUTE_FILTER_INFO (section [2.2.1.2.209)](#Section_2.2.1.2.208) OSPF_PROTO_FILTER_INFO (section [2.2.1.2.210)](#Section_2.2.1.2.210) OSPF_GLOBAL_PARAM (section [2.2.1.2.211)](#Section_2.2.1.2.211) OSPF_ROUTE_FILTER (section [2.2.1.2.208)](#Section_2.2.1.2.208) |
+| MS_IP_OSPF<258> 0x0000000D | OSPF global configuration information specified is retrieved. The type field is the first field in each of the structures and this defines which of the structures MUST be used. The type field MUST be OSPF_PARAM_TYPE (section [2.2.1.1.14](#Section_2.2.1.1.14)) and the value MUST be corresponding to the structures specified. | OSPF_ROUTE_FILTER_INFO (section [2.2.1.2.209)](#Section_2.2.1.2.6) OSPF_PROTO_FILTER_INFO (section [2.2.1.2.210)](#Section_2.2.1.2.6) OSPF_GLOBAL_PARAM (section [2.2.1.2.211)](#Section_2.2.1.2.211) OSPF_ROUTE_FILTER (section [2.2.1.2.208)](#Section_2.2.1.2.208) |
 | MS_IP_ALG<259> 0x8137271A | Application layer gateway global configuration. | IP_ALG_GLOBAL_INFO (section [2.2.1.2.201)](#Section_2.2.1.2.9) |
 | MS_IPV6_DHCP 0x000003E7 | DHCPv6 Relay global configuration information. | DHCPV6R_GLOBAL_CONFIG (section [2.2.1.2.157)](#Section_2.2.1.2.157) |
 | MS_IP_NAT 0x81372715 | IP NAT global configuration information. | IP_NAT_GLOBAL_INFO (section [2.2.1.2.195)](#Section_2.2.1.2.9) |
@@ -15987,7 +15987,7 @@ The **dwfOptions** member of **MPRI_INTERFACE_2** and **MPRI_INTERFACE_3** SHOUL
 - MPRIO_RequirePAP
 - MPRIO_RequireEAP
 - If the **dwEncryptionType** member is not set to MPR_ET_None or MPR_ET_Optional, enable the MPRIO_RequireDataEncryption flag.
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER if **dwLevel** is set to 2 or 3. Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle value represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER if **dwLevel** is set to 2 or 3. Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle value represents a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, the return value contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not listed in the table that follows MUST be treated the same by the RRASM client.
 
@@ -16042,16 +16042,16 @@ DWORD RRouterInterfaceSetInfo(
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Variable | 0 | This MUST be set to the size of the data being passed in MPRI_INTERFACE_0 (section 2.2.1.2.81). This MUST be set to point to MPRI_INTERFACE_0. Only the **fEnabled** field of this structure can be modified; the rest of the fields MUST be populated as returned by [RRouterInterfaceGetInfo (section 3.1.4.14)](#Section_3.1.4.14). |
+| Variable | 0 | This MUST be set to the size of the data being passed in MPRI_INTERFACE_0 (section 2.2.1.2.81). This MUST be set to point to MPRI_INTERFACE_0. Only the **fEnabled** field of this structure can be modified; the rest of the fields MUST be populated as returned by [RRouterInterfaceGetInfo (section 3.1.4.14)](#Section_3.2.4.14). |
 | Variable | 1 | This MUST be set to the size of the data being passed in MPRI_INTERFACE_1 (section 2.2.1.2.82). This MUST be set to point to MPRI_INTERFACE_1. In addition to the fields for MPRI_INTERFACE_0, **lpwsDialoutHoursRestriction** can be set. Setting other values has no effect. The values MUST be populated as returned by RRouterInterfaceGetInfo. |
 | Variable | 2 | This MUST be set to the size of MPRI_INTERFACE_2 (section 2.2.1.2.83). Otherwise, an error is returned. This MUST be set to point to MPRI_INTERFACE_2. The **dwIfType** of MPRI_INTERFACE_0 MUST be set to ROUTER_IF_TYPE_FULL_ROUTER. The **szAlternates** of MPRI_INTERFACE_2 MUST be set to 0. |
 | Variable | 3 | This MUST be set to the size of MPRI_INTERFACE_3 (section 2.2.1.2.84). Otherwise, an error is returned. This MUST be set to point to MPRI_INTERFACE_3. The **dwIfType** of MPRI_INTERFACE_3 MUST be set to ROUTER_IF_TYPE_FULL_ROUTER. The **szAlternates** of MPRI_INTERFACE_0 MUST be set to 0. The values of the ipv6addrDns and ipv6addrDnsAlt members of MPRI_INTERFACE_3 SHOULD be ignored by the server. |
 
-If the interface type, specified at the time the interface was created using [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13), is either ROUTER_IF_TYPE_DEDICATED or ROUTER_IF_TYPE_INTERNAL and if **fEnabled** is set to FALSE, an error is returned.
+If the interface type, specified at the time the interface was created using [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13), is either ROUTER_IF_TYPE_DEDICATED or ROUTER_IF_TYPE_INTERNAL and if **fEnabled** is set to FALSE, an error is returned.
 
 When the **dwLevel** value is either 2 or 3 and the **dwfOptions** member does not contain any of the flags MPRIO_RequirePAP, MPRIO_RequireCHAP, MPRIO_RequireMsCHAP2, or MPRIO_RequireEAP, then the **dwfOptions** value SHOULD be modified to enable MPRIO_RequireMsCHAP2, MPRIO_RequireCHAP, and **MPRIO_RequirePAP**.
 
-**hInterface:** The unique identifier of an interface. This can be obtained from **RRouterInterfaceCreate** or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM does not manage the interface handles, the RRAS server SHOULD check to ensure that this handle is a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from **RRouterInterfaceCreate** or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM does not manage the interface handles, the RRAS server SHOULD check to ensure that this handle is a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -16075,7 +16075,7 @@ No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-
 <a id="Section_3.1.4.16"></a>
 #### 3.1.4.16 RRouterInterfaceDelete (Opnum 15)
 
-The **RRouterInterfaceDelete** method<266> deletes an interface on a specified server. The interface MUST have been created with the [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) method.
+The **RRouterInterfaceDelete** method<266> deletes an interface on a specified server. The interface MUST have been created with the [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) method.
 
 DWORD RRouterInterfaceDelete(
 
@@ -16087,7 +16087,7 @@ DWORD RRouterInterfaceDelete(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** A unique identifier of an interface. This can be obtained from **RRouterInterfaceCreate** or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check to ensure that this handle is a valid interface handle.
+**hInterface:** A unique identifier of an interface. This can be obtained from **RRouterInterfaceCreate** or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check to ensure that this handle is a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates the return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, the value contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not listed in the table that follows MUST be treated the same by the RRASM client.
 
@@ -16126,7 +16126,7 @@ DWORD RRouterInterfaceTransportRemove(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** A unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** A unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **dwTransportId:** Specifies the transport (IPX, IPv4, or IPv6). It MUST be one of the following values.<268> Otherwise an error other than those in the returned values table is returned.
 
@@ -16174,7 +16174,7 @@ DWORD RRouterInterfaceTransportAdd(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **dwTransportId:** Specifies the transport (IPX, IPv4, or IPv6) and MUST be one of the following values.<270> Otherwise an error, other than those in the return values table, is returned.
 
@@ -16202,14 +16202,14 @@ Only a combination of the following entries SHOULD<271> be present in **pInterfa
 | Variable | IP_IFFILTER_INFO 0xFFFF000D | IP interface filter information is overwritten. Interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. [IFFILTER_INFO (section 2.2.1.2.88)](#Section_2.2.1.2.6) |
 | Variable | IP_MCAST_LIMIT_INFO 0xFFFF000E | Multicast configuration information. [MIB_MCAST_LIMIT_ROW (section 2.2.1.2.16)](#Section_2.2.1.2.16) |
 | Variable | IP_ROUTE_INFO 0xFFFF0005 | The **dwAdminStatus** MUST be IF_ADMIN_STATUS_UP if the route information is added. If bV4 of **INTERFACE_ROUTE_INFO** is set, it indicates an IPv4 route is added; otherwise, an IPv6 route is added. [INTERFACE_ROUTE_INFO (section 2.2.1.2.11)](#Section_2.2.1.2.11) |
-| Variable | IP_IN_FILTER_INFO_V6 0xFFFF0011 | This is the input filter that MUST be applied to IPv6 packets sent to the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. [FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)](#Section_2.2.1.2.7) |
+| Variable | IP_IN_FILTER_INFO_V6 0xFFFF0011 | This is the input filter that MUST be applied to IPv6 packets sent to the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. [FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)](#Section_2.2.1.2.5) |
 | Variable | IP_OUT_FILTER_INFO_V6 0xFFFF0012 | This is the output filter that MUST be applied to IPv6 packets sent from the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7) |
 | Variable | IP_DEMAND_DIAL_FILTER_INFO_V6 0xFFFF0013 | IPv6 traffic that matches this filter indicates that a site-to-site connection MUST be available and all IPv6 packets matching this filter MUST be routed into the connection. The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER or ROUTER_IF_TYPE_HOME_ROUTER and the filters are overwritten FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7) |
 | Variable | IP_IFFILTER_INFO_V6 0xFFFF0014 | IPv6 interface filter information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. IFFILTER_INFO (section 2.2.1.2.88) |
 | Variable | MS_IP_BOOTP 0x0000270F | IP BOOTP interface, information depending. [IPBOOTP_IF_CONFIG (section 2.2.1.2.150)](#Section_2.2.1.2.150) |
 | Variable | MS_IP_IGMP 0x4137000A | IGMP interface information. [IGMP_MIB_IF_CONFIG (section 2.2.1.2.174)](#Section_2.2.1.2.174) |
-| Variable | MS_IP_RIP 0x00000008 | IP RIP interface information. [IPRIP_IF_CONFIG (section 2.2.1.2.166)](#Section_2.2.1.2.166) |
-| Variable | MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP allocator interface information. Used only with [RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)](#Section_2.1). IP_AUTO_DHCP_INTERFACE_INFO (section [2.2.1.2.192)](#Section_2.2.1.2.192) |
+| Variable | MS_IP_RIP 0x00000008 | IP RIP interface information. [IPRIP_IF_CONFIG (section 2.2.1.2.166)](#Section_2.2.1.2.206) |
+| Variable | MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP allocator interface information. Used only with [RRouterInterfaceTransportSetGlobalInfo (section 3.1.4.10)](#Section_3.1.4.10). IP_AUTO_DHCP_INTERFACE_INFO (section [2.2.1.2.192)](#Section_2.2.1.2.192) |
 | Variable | MS_IP_DNS_PROXY 0x81372713 | DNS proxy interface information. IP_DNS_PROXY_INTERFACE_INFO (section [2.2.1.2.194)](#Section_2.2.1.2.194) |
 | Variable | MS_IP_NAT 0x81372715 | IP NAT interface information. IP_NAT_INTERFACE_INFO (section [2.2.1.2.197)](#Section_2.2.1.2.197) |
 | Variable | MS_IP_OSPF<272> 0x0000000D | OSPF interface information is added. OSPF_INTERFACE_PARAM (section [2.2.1.2.215)](#Section_2.2.1.2.215) |
@@ -16252,7 +16252,7 @@ DWORD RRouterInterfaceTransportGetInfo(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
 
 **dwTransportId:** Specifies the transport for which the information is retrieved (IPX, IPv4, or IPv6). It MUST be one of the following values.<274> Otherwise an error other than those in the return values table is returned.
 
@@ -16306,7 +16306,7 @@ DWORD RRouterInterfaceTransportSetInfo(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **dwTransportId:** Specifies the transport for which the information is set (IPX, IPv4, or IPv6). It MUST be one of the following values.<277> Otherwise an error other than those in the return values table is returned.
 
@@ -16333,13 +16333,13 @@ Only a combination of the following entries of **RTR_TOC_ENTRY** MUST be present
 | Variable | IP_IN_FILTER_INFO 0xFFFF0001 | This is the input filter that MUST be applied to IP packets sent to the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. [FILTER_DESCRIPTOR (section 2.2.1.2.5)](#Section_2.2.1.2.5) |
 | Variable | IP_OUT_FILTER_INFO 0xFFFF0002 | This is the output filter that MUST be applied to IP packets sent from the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. FILTER_DESCRIPTOR (section 2.2.1.2.5) |
 | Variable | IP_DEMAND_DIAL_FILTER_INFO 0xFFFF0009 | IPv4 traffic that matches this filter indicates that there is a site-to-site connection available into which all the IPv4 packets (matching this filter) are routed. The information is overwritten. The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER or ROUTER_IF_TYPE_HOME_ROUTER. FILTER_DESCRIPTOR (section 2.2.1.2.5) |
-| Variable | IP_IN_FILTER_INFO_V6 0xFFFF0011 | This is the input filter that MUST be applied to IPv6 packets sent to the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. [FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)](#Section_2.2.1.2.7) |
+| Variable | IP_IN_FILTER_INFO_V6 0xFFFF0011 | This is the input filter that MUST be applied to IPv6 packets sent to the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. [FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7)](#Section_2.2.1.2.5) |
 | Variable | IP_OUT_FILTER_INFO_V6 0xFFFF0012 | This is the output filter that MUST be applied to IPv6 packets sent from the RRAS server. The information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7) |
 | Variable | IP_DEMAND_DIAL_FILTER_INFO_V6 0xFFFF0013 | IPv6 traffic that matches this filter indicates that a site-to-site connection MUST be available and all IPv6 packets matching this filter MUST be routed into the connection. The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER or ROUTER_IF_TYPE_HOME_ROUTER. The filters are overwritten. FILTER_DESCRIPTOR_V6 (section 2.2.1.2.7) |
 | Variable | IP_IFFILTER_INFO_V6 0xFFFF0014 | The IPv6 interface filter information is overwritten. The interface MUST NOT be of type ROUTER_IF_TYPE_INTERNAL, ROUTER_IF_TYPE_LOOPBACK, or ROUTER_IF_TYPE_DIALOUT. IFFILTER_INFO (section 2.2.1.2.88) |
 | Variable | MS_IP_BOOTP 0x0000270F | IP BOOTP interface information. [IPBOOTP_IF_CONFIG (section 2.2.1.2.150)](#Section_2.2.1.2.150) |
 | Variable | MS_IP_IGMP 0x4137000A | IGMP interface information. It can only be set once. [IGMP_MIB_IF_CONFIG (section 2.2.1.2.174)](#Section_2.2.1.2.174) |
-| Variable | MS_IP_RIP 0x00000008 | IP RIP interface information. [IPRIP_IF_CONFIG (section 2.2.1.2.166)](#Section_2.2.1.2.166) |
+| Variable | MS_IP_RIP 0x00000008 | IP RIP interface information. [IPRIP_IF_CONFIG (section 2.2.1.2.166)](#Section_2.2.1.2.206) |
 | Variable | MS_IP_DHCP_ALLOCATOR 0x81372714 | DHCP allocator interface information. IP_AUTO_DHCP_INTERFACE_INFO (section [2.2.1.2.192)](#Section_2.2.1.2.192) |
 | Variable | MS_IP_DNS_PROXY 0x81372713 | DNS proxy interface information. IP_DNS_PROXY_INTERFACE_INFO (section [2.2.1.2.194)](#Section_2.2.1.2.194) |
 | Variable | MS_IP_NAT 0x81372715 | IP NAT interface information. IP_NAT_INTERFACE_INFO (section [2.2.1.2.197)](#Section_2.2.1.2.197) |
@@ -16444,7 +16444,7 @@ DWORD RRouterInterfaceConnect(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
 
 **hEvent:** The calling application MUST specify NULL for this.
 
@@ -16487,7 +16487,7 @@ DWORD RRouterInterfaceDisconnect(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, the value contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -16527,7 +16527,7 @@ DWORD RRouterInterfaceUpdateRoutes(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **dwTransportId:** Specifies the transport for which routing information needs to be updated. This MUST be one of the following values.<283>
 
@@ -16577,7 +16577,7 @@ DWORD RRouterInterfaceQueryUpdateResult(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This identifier can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This identifier can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **dwTransportId:** Specifies the transport for which routing information needs to be updated. This MUST be one of the following values.<285> Otherwise an error is returned.
 
@@ -16620,7 +16620,7 @@ DWORD RRouterInterfaceUpdatePhonebookInfo(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -16900,7 +16900,7 @@ If *dwPid* is PID_IPV6 and *dwRoutingPid* is 10000, then **pMibInEntry** MUST po
 | 0x00000001 IF_TABLE | Information about interface table. |
 | 0x00000008 IP_FORWARDROW | Information about an IPv6 network route. |
 
-If *dwPid* is PID_IP and if *dwRoutingPid* is not IPRTRMGR_PID (0x00002710), then *dwRoutingPid* MUST be one of the entries in the **Value** column and *pMibInEntry* MUST be the corresponding entry in the **Structure to be pointed to by pMibInEntry** column in the following table. The routing protocols specified in the following table are valid only if the protocol is already initialized by [**RRAS**](#gt_routing-and-remote-access-service-rras-server) for IPv4. RRAS initializes a protocol when a RTR_TOC_ENTRY with the **InfoType** corresponding to the protocol is present in the global configuration. The [**RRouterInterfaceTransportSetGlobalInfo**](#Section_2.1) method enables specifying the global configuration through the **pGlobalInfo** member of **pInfoStruct**.
+If *dwPid* is PID_IP and if *dwRoutingPid* is not IPRTRMGR_PID (0x00002710), then *dwRoutingPid* MUST be one of the entries in the **Value** column and *pMibInEntry* MUST be the corresponding entry in the **Structure to be pointed to by pMibInEntry** column in the following table. The routing protocols specified in the following table are valid only if the protocol is already initialized by [**RRAS**](#gt_routing-and-remote-access-service-rras-server) for IPv4. RRAS initializes a protocol when a RTR_TOC_ENTRY with the **InfoType** corresponding to the protocol is present in the global configuration. The [**RRouterInterfaceTransportSetGlobalInfo**](#Section_3.1.4.10) method enables specifying the global configuration through the **pGlobalInfo** member of **pInfoStruct**.
 
 | Value | Meaning | Structure to be pointed to by pMibInEntry. | Remarks |
 | --- | --- | --- | --- |
@@ -17006,7 +17006,7 @@ If *dwPid* is PID_IPV6 and *dwRoutingPid* is 10000, then **pMibInEntry** MUST po
 | - | - |
 | 0x00000008 IP_FORWARDROW | Information about an IPv6 network route. |
 
-If *dwPid* is PID_IP and if *dwRoutingPid* is not IPRTRMGR_PID (0x00002710), then *dwRoutingPid* MUST be one of the entries in the **Value** column and *pMibInEntry* MUST be the corresponding entry in the **Structure to be pointed to by pMibInEntry** in the following table. The following specified routing protocols are valid only if the protocol is already initialized by [**RRAS**](#gt_routing-and-remote-access-service-rras-server) for IPv4. RRAS initializes a protocol when an RTR_TOC_ENTRY with the **InfoType** corresponding to the protocol is present in the global configuration. The [**RRouterInterfaceTransportSetGlobalInfo**](#Section_2.1) method enables specifying the global configuration through the *pGlobalInfo* member of *pInfoStuct*.
+If *dwPid* is PID_IP and if *dwRoutingPid* is not IPRTRMGR_PID (0x00002710), then *dwRoutingPid* MUST be one of the entries in the **Value** column and *pMibInEntry* MUST be the corresponding entry in the **Structure to be pointed to by pMibInEntry** in the following table. The following specified routing protocols are valid only if the protocol is already initialized by [**RRAS**](#gt_routing-and-remote-access-service-rras-server) for IPv4. RRAS initializes a protocol when an RTR_TOC_ENTRY with the **InfoType** corresponding to the protocol is present in the global configuration. The [**RRouterInterfaceTransportSetGlobalInfo**](#Section_3.1.4.10) method enables specifying the global configuration through the *pGlobalInfo* member of *pInfoStuct*.
 
 | Value | Meaning | Structure to be pointed to by pMibInEntry. | Remarks |
 | --- | --- | --- | --- |
@@ -17023,7 +17023,7 @@ If *dwPid* is PID_IPV6 and if *dwRoutingPid* is not IPRTRMGR_PID (0x00002710), t
 | --- | --- | --- | --- |
 | MS_IPV6_DHCP 0x000003E7 | An entry in DHCPv6 Relay agent MIB needs to be retrieved. | DHCPV6R_MIB_GET_INPUT_DATA | See section [2.2.1.2.160](#Section_2.2.1.2.160) on how to populate DHCPV6R_MIB_GET_INPUT_DATA. The values are retuned in DHCPV6R_MIB_GET_OUTPUT_DATA. |
 
-**pInfoStuct:** The same as in [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31).
+**pInfoStuct:** The same as in [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32).
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, the return value contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -17064,9 +17064,9 @@ RMIBEntryGetNext(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**dwPid:** The same as in [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31).
+**dwPid:** The same as in [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32).
 
-**dwRoutingPid:** The same as in [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.2.4.31).
+**dwRoutingPid:** The same as in [**RMIBEntryGetFirst (section 3.1.4.31)**](#Section_3.1.4.31).
 
 **pInfoStuct:** The same as in **RMIBEntryGet (section 3.1.4.30)**.
 
@@ -17250,7 +17250,7 @@ DWORD RRasAdminSendUserMessage(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hDimConnection:** This is of type **DWORD** and MUST be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.1.4.46). Since RRASM server does not maintain the connection handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hDimConnection:** This is of type **DWORD** and MUST be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.2.4.46). Since RRASM server does not maintain the connection handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **lpwszMessage:** A pointer to a [**Unicode**](#gt_unicode) string that specifies the message to the user. It MUST NOT be NULL.
 
@@ -17414,7 +17414,7 @@ DWORD RRouterInterfaceDeviceGetInfo(
 
 **dwIndex:** Specifies the one-based index of the device. A multilinked demand-dial interface uses multiple devices.
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM server does not maintain interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM server does not maintain interface handles, the RRAS server SHOULD check and ensure that this handle represents a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, the return value contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values not in the following table MUST be treated the same by the RRASM client.
 
@@ -17462,7 +17462,7 @@ DWORD RRouterInterfaceDeviceSetInfo(
 | 0 | pInfoStruct->pBuffer MUST be set to point to [**MPR_DEVICE_0 (section 2.2.1.2.85)**](#Section_2.2.1.2.85). |
 | 1 | pInfoStruct->pBuffer MUST be set to point to [**MPR_DEVICE_1 (section 2.2.1.2.86)**](#Section_2.2.1.2.86). |
 
-**pInfoStruct:** This is a pointer of type [**DIM_INFORMATION_CONTAINER (section 2.2.1.2.1)**](#Section_2.2.1.2.1) and MUST be set to the following, based on *dwLevel*. The *szDeviceName* MUST be one of the devices as specified by [**RRouterDeviceEnum**](#Section_3.1.4.37). The **szDeviceType** specified in the structure SHOULD be validated against the actual type of the device specified by *szDeviceName*. If the **szDeviceType** is incorrect, the actual device type SHOULD be used by the server instead.
+**pInfoStruct:** This is a pointer of type [**DIM_INFORMATION_CONTAINER (section 2.2.1.2.1)**](#Section_2.2.1.2.1) and MUST be set to the following, based on *dwLevel*. The *szDeviceName* MUST be one of the devices as specified by [**RRouterDeviceEnum**](#Section_3.2.4.37). The **szDeviceType** specified in the structure SHOULD be validated against the actual type of the device specified by *szDeviceName*. If the **szDeviceType** is incorrect, the actual device type SHOULD be used by the server instead.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -17471,7 +17471,7 @@ DWORD RRouterInterfaceDeviceSetInfo(
 
 **dwIndex:** Specifies the 1-based index of the device. A multilinked demand-dial interface uses multiple devices. If the device information specified for *dwIndex* 1 is either a PPPoE interface or a VPN interface, any other device information, specified (with *dwIndex* > 1), SHOULD be ignored. If the device information specified for *dwIndex* 1 is a serial or ISDN device, the connection SHOULD be treated as a multilink-capable connection. Any other device information, specified (with *dwIndex* > 1), SHOULD be treated as device information for the individual links. Device information with type **szDeviceType**, which is neither modem nor ISDN, SHOULD<311> be ignored.
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server implementation SHOULD check and ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Since the RRASM server does not maintain the interface handles, the RRAS server implementation SHOULD check and ensure that this handle represents a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -17514,7 +17514,7 @@ DWORD RRouterInterfaceSetCredentialsEx(
 
 **pInfoStruct:** Pointer to the [**DIM_INFORMATION_CONTAINER (section 2.2.1.2.1)**](#Section_2.2.1.2.1), the **pBuffer** pointer of which points to the **MPR_CREDENTIALSEX_1** structure that contains the credential information to be set for the interface.
 
-**hInterface:** Handle to the interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). If dwLevel is 0x0000002 and *hInterface* is NULL, the preshared key is used for L2TP. Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
+**hInterface:** Handle to the interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). If dwLevel is 0x0000002 and *hInterface* is NULL, the preshared key is used for L2TP. Since the RRASM server does not maintain the interface handles, the RRAS server SHOULD check and ensure that this handle is a valid interface handle.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -17557,7 +17557,7 @@ DWORD RRouterInterfaceGetCredentialsEx(
 
 **pInfoStruct:** Pointer to a **MPR_CREDENTIALSEX_1** structure that contains the preshared key or EAP information for the interface. When the method completes successfully, the client SHOULD free this memory.
 
-**hInterface:** A handle to the interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER if **dwLevel** is 0x00000000.
+**hInterface:** A handle to the interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). The interface MUST be of type ROUTER_IF_TYPE_FULL_ROUTER if **dwLevel** is 0x00000000.
 
 **Return Values:** A 32-bit, unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully; otherwise, it contains an error code, as specified in [MS-ERREF](#Section_2.2.4) or in section [2.2.4](../MS-ERREF/MS-ERREF.md). All values that are not in the table that follows MUST be treated the same by the RRASM client.
 
@@ -17593,7 +17593,7 @@ DWORD RRasAdminConnectionRemoveQuarantine(
 
 **hDimServer:** A handle to the RRAS server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hRasConnection:** This is of type **DWORD** and SHOULD be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.1.4.46). Since the RRASM server does not maintain the connection handles, the RRAS server SHOULD check and ensure that this handle is a valid connection handle.
+**hRasConnection:** This is of type **DWORD** and SHOULD be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.2.4.46). Since the RRASM server does not maintain the connection handles, the RRAS server SHOULD check and ensure that this handle is a valid connection handle.
 
 Alternatively, this parameter specifies the IP address of the RRAS client for which to remove the quarantine filter. The IP address MUST be specified as a **DWORD** in [**network byte order**](#gt_network-byte-order). Obtain the IP address by calling **RRasAdminConnectionEnum**. If this parameter specifies an IP address, the *fIsIpAddress* parameter MUST specify a TRUE value.
 
@@ -17775,7 +17775,7 @@ DWORD RRasAdminConnectionGetInfoEx(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hDimConnection:** This is of type DWORD and MUST be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.1.4.46). Because the RRASM server does not maintain the connection handles, the RRAS server SHOULD check and ensure that this handle represents a valid connection handle.
+**hDimConnection:** This is of type DWORD and MUST be set to a particular connection identifier for which the connection information is required. Obtain this handle by calling [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.2.4.46). Because the RRASM server does not maintain the connection handles, the RRAS server SHOULD check and ensure that this handle represents a valid connection handle.
 
 **objectHeader:** A pointer to [**MPRAPI_OBJECT_HEADER_IDL (section 2.2.1.2.129)**](#Section_2.2.1.2.129). In the structure, the **revision** field MUST be MPRAPI_RAS_CONNECTION_OBJECT_REVISION_1, the **type** field MUST be MPRAPI_OBJECT_TYPE_RAS_CONNECTION_OBJECT, and the **size** MUST be the size of RAS_CONNECTION_EX_IDL.
 
@@ -17851,7 +17851,7 @@ DWORD RRasAdminUpdateConnection(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed, see section [3.1.3](#Section_3.1).
 
-**hDimConnection:** This is of type DWORD and SHOULD be set to a particular IKEv2 connection identifier for which the endpoint needs to be updated. Obtain this handle by calling RRasAdminConnectionEnum (see section [3.1.4.2](#Section_3.1.4.46)). Since the RRASM server does not maintain connection handles, the RRAS server SHOULD validate this handle.
+**hDimConnection:** This is of type DWORD and SHOULD be set to a particular IKEv2 connection identifier for which the endpoint needs to be updated. Obtain this handle by calling RRasAdminConnectionEnum (see section [3.1.4.2](#Section_3.2.4.46)). Since the RRASM server does not maintain connection handles, the RRAS server SHOULD validate this handle.
 
 **pServerConfig:** This is a pointer to a **RAS_UPDATE_CONNECTION_IDL** structure (section [2.2.1.2.148](#Section_2.2.1.2.148)) that contains the information required to set values on the RRAS server.
 
@@ -17980,7 +17980,7 @@ DWORD RRouterInterfaceGetCustomInfoEx(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed; see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check to ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check to ensure that this handle represents a valid interface handle.
 
 **pIfCustomConfig:** A valid pointer to an [**MPR_IF_CUSTOMINFOEX_IDL (section 2.2.1.2.245)**](#Section_2.2.1.2.245) structure. This MUST NOT be NULL. On successful return, this parameter contains tunnel-specific custom configuration for the interface whose handle is specified in the *hInterface* parameter.
 
@@ -18015,7 +18015,7 @@ DWORD RRouterInterfaceSetCustomInfoEx(
 
 **hDimServer:** A handle to the RRASM server where the call is to be executed; see section [3.1.3](#Section_3.1).
 
-**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.1.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check to ensure that this handle represents a valid interface handle.
+**hInterface:** The unique identifier of an interface. This can be obtained from [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) or [**RRouterInterfaceGetHandle (section 3.1.4.12)**](#Section_3.2.4.12). Because the RRASM server does not maintain the interface handles, the RRAS server SHOULD check to ensure that this handle represents a valid interface handle.
 
 **pIfCustomConfig:** A valid pointer to an [**MPR_IF_CUSTOMINFOEX_IDL (section 2.2.1.2.245)**](#Section_2.2.1.2.245) structure that contains custom configurations to be set for the interface whose handle is specified in the *hInterface* parameter. This MUST NOT be NULL.
 
@@ -18028,7 +18028,7 @@ DWORD RRouterInterfaceSetCustomInfoEx(
 
 When processing this call, the RRASM server MUST do the following:
 
-- Validate, as specified in section [2.2.1.1.1](#Section_2.2.1.1.15), whether this method was called by a client that has access to the method. If the client does not have access, return the error ERROR_ACCESS_DENIED (0x00000005).
+- Validate, as specified in section [2.2.1.1.1](#Section_2.2.1.1.12), whether this method was called by a client that has access to the method. If the client does not have access, return the error ERROR_ACCESS_DENIED (0x00000005).
 - Call the abstract interface **Invoke DIMSVC** method, specifying the operation and the parameters, to enable the RRAS server to perform the required management task.
 - Return any error status that the RRAS server returns. Otherwise, return ERROR_SUCCESS (0x00000000).
 No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](#Section_2.2.2.2.119).
@@ -18095,7 +18095,7 @@ When the method completes with ERROR_SUCCESS (0x00000000) as the return value, t
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 RRasAdminConnectionEnum (Opnum 1)
 
-If the return code is ERROR_MORE_DATA (0x000000EA), then call RRasAdminConnectionEnum (Opnum 1) (section [3.1.4.2)](#Section_3.1.4.46) with the handle passed in *lpdwResumeHandle*. If *lpdwResumeHandle* is NULL, the enumeration cannot be continued.
+If the return code is ERROR_MORE_DATA (0x000000EA), then call RRasAdminConnectionEnum (Opnum 1) (section [3.1.4.2)](#Section_3.2.4.46) with the handle passed in *lpdwResumeHandle*. If *lpdwResumeHandle* is NULL, the enumeration cannot be continued.
 
 When the method completes with ERROR_SUCCESS (0x00000000) as the return value, the client MUST free the returned buffer *pInfoStruct*.
 
@@ -18112,7 +18112,7 @@ None beyond those specified in section [3.2.4](#Section_3.1).
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 RRasAdminPortEnum (Opnum 4)
 
-If the return code is ERROR_MORE_DATA (0x000000EA), then call RRasAdminPortEnum (Opnum 4) (section [3.1.4.5)](#Section_3.2.4.5) with the handle passed in *lpdwResumeHandle*. If *lpdwResumeHandle* is NULL, the enumeration cannot be continued.
+If the return code is ERROR_MORE_DATA (0x000000EA), then call RRasAdminPortEnum (Opnum 4) (section [3.1.4.5)](#Section_3.1.4.5) with the handle passed in *lpdwResumeHandle*. If *lpdwResumeHandle* is NULL, the enumeration cannot be continued.
 
 When the method completes with ERROR_SUCCESS (0x00000000) as the return value, the client MUST free the returned buffer *pInfoStruct*.
 
@@ -18169,7 +18169,7 @@ When the method completes with ERROR_IKEV2_PSK_INTERFACE_ALREADY_EXISTS (0x00000
 <a id="Section_3.2.4.16"></a>
 #### 3.2.4.16 RRouterInterfaceDelete (Opnum 15)
 
-If ERROR_INTERFACE_CONNECTED (0x0000038C) is returned, [**RRouterInterfaceDisconnect (section 3.1.4.23)**](#Section_3.2.4.23) SHOULD be called before [**RRouterInterfaceDelete (section 3.1.4.16)**](#Section_3.1.4.16) can succeed.
+If ERROR_INTERFACE_CONNECTED (0x0000038C) is returned, [**RRouterInterfaceDisconnect (section 3.1.4.23)**](#Section_3.1.4.23) SHOULD be called before [**RRouterInterfaceDelete (section 3.1.4.16)**](#Section_3.1.4.16) can succeed.
 
 <a id="Section_3.2.4.17"></a>
 #### 3.2.4.17 RRouterInterfaceTransportRemove (Opnum 16)
@@ -18201,7 +18201,7 @@ If the method completes successfully and returns a value of either ERROR_MORE_DA
 <a id="Section_3.2.4.22"></a>
 #### 3.2.4.22 RRouterInterfaceConnect (Opnum 21)
 
-If the return value is PENDING (0x00000258), call [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.1.4.14) to find out if the connection was successful or not.
+If the return value is PENDING (0x00000258), call [**RRouterInterfaceGetInfo (section 3.1.4.14)**](#Section_3.2.4.14) to find out if the connection was successful or not.
 
 <a id="Section_3.2.4.23"></a>
 #### 3.2.4.23 RRouterInterfaceDisconnect (Opnum 22)
@@ -18321,7 +18321,7 @@ None beyond those specified in section [3.2.4](#Section_3.1).
 <a id="Section_3.2.4.46"></a>
 #### 3.2.4.46 RRasAdminConnectionEnumEx (Opnum 45)
 
-If the return code is ERROR_MORE_DATA, then the call [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.1.4.46) with the handle passed in *lpdwResumeHandle*. If *lpdwResumeHandle* is NULL, the enumeration cannot be continued.
+If the return code is ERROR_MORE_DATA, then the call [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.2.4.46) with the handle passed in *lpdwResumeHandle*. If *lpdwResumeHandle* is NULL, the enumeration cannot be continued.
 
 When the method completes with either ERROR_SUCCESS or ERROR_MORE_DATA as the return value, the client MUST free the returned buffer *pInfoStruct*.
 
@@ -18424,12 +18424,12 @@ Methods in RPC Opnum order.
 | Opnum6NotUsedOnWire | Reserved for local use. Opnum: 6 |
 | Opnum7NotUsedOnWire | Reserved for local use. Opnum: 7 |
 | Opnum8NotUsedOnWire | Reserved for local use. Opnum: 8 |
-| [RasRpcGetUserPreferences](#Section_3.3.4.2) | Retrieves the configuration information. Opnum: 9 |
-| [RasRpcSetUserPreferences](#Section_3.4.4.3) | Sets the configuration information. Opnum: 10 |
-| [RasRpcGetSystemDirectory](#Section_3.4.4.4) | Retrieves the path of the system directory. Opnum: 11 |
-| [RasRpcSubmitRequest](#Section_3.4.4.5) | Retrieves or sets the configuration data on the RRAS server. Opnum: 12 |
+| [RasRpcGetUserPreferences](#Section_3.4.4.2) | Retrieves the configuration information. Opnum: 9 |
+| [RasRpcSetUserPreferences](#Section_3.3.4.3) | Sets the configuration information. Opnum: 10 |
+| [RasRpcGetSystemDirectory](#Section_3.3.4.4) | Retrieves the path of the system directory. Opnum: 11 |
+| [RasRpcSubmitRequest](#Section_3.3.4.5) | Retrieves or sets the configuration data on the RRAS server. Opnum: 12 |
 | Opnum13NotUsedOnWire | Reserved for local use. Opnum: 13 |
-| [RasRpcGetInstalledProtocolsEx](#Section_3.3.4.6) | Retrieves the protocol information on the RRAS server. Opnum: 14 |
+| [RasRpcGetInstalledProtocolsEx](#Section_2.2.2.2.119) | Retrieves the protocol information on the RRAS server. Opnum: 14 |
 | [RasRpcGetVersion](#Section_3.4.4.7) | Retrieves the RASRPC server interface version. Opnum: 15 |
 | Opnum16NotUsedOnWire | Reserved for local use. Opnum: 16 |
 
@@ -18476,7 +18476,7 @@ When processing this call, the RRASM server SHOULD do the following:
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 RasRpcGetUserPreferences (Opnum 9)
 
-The **RasRpcGetUserPreferences** method retrieves the configuration information. The configuration information consists of the callback information associated with the various ports, and the number of the last successful callback done by the RRAS. This configuration information is set by [**RasRpcSetUserPreferences**](#Section_3.4.4.3) **(**section 3.3.4.3**)**.
+The **RasRpcGetUserPreferences** method retrieves the configuration information. The configuration information consists of the callback information associated with the various ports, and the number of the last successful callback done by the RRAS. This configuration information is set by [**RasRpcSetUserPreferences**](#Section_3.3.4.3) **(**section 3.3.4.3**)**.
 
 DWORD RasRpcGetUserPreferences(
 
@@ -18982,13 +18982,13 @@ Methods in RPC opnum Order.
 
 | Method | Description |
 | --- | --- |
-| **UpgradeRouterConfig** | Clears the existing transport configuration (sections [2.2.3.1](#Section_2.2.3.2) and [2.2.3.2](#Section_2.2.3.2)). Opnum: 3 |
+| **UpgradeRouterConfig** | Clears the existing transport configuration (sections [2.2.3.1](#Section_2.2.3.3.2) and [2.2.3.2](#Section_2.2.3.2)). Opnum: 3 |
 | **SetUserConfig** | This method is not used. Opnum: 4 |
 
 <a id="Section_3.5.4.1.1"></a>
 ##### 3.5.4.1.1 UpgradeRouterConfig Method (Opnum 3)
 
-The **UpgradeRouterConfig** method clears the existing transport configuration (section [2.2.3.1](#Section_2.2.3.2)) and interfaces (section [2.2.3.2](#Section_2.2.3.2)).
+The **UpgradeRouterConfig** method clears the existing transport configuration (section [2.2.3.1](#Section_2.2.3.3.2)) and interfaces (section [2.2.3.2](#Section_2.2.3.2)).
 
 HRESULT UpgradeRouterConfig();
 
@@ -19356,7 +19356,7 @@ None.
 
 This example illustrates the use of the RPC methods defined in this specification. The methods are used to query the configuration of the RRAS server when there are 128 ports each of PPTP, L2TP, and SSTP. The RRAS server is configured for both routing and remote access.
 
-The client calls the RPC method [**RMprAdminServerGetInfo (section 3.1.4.1)**](#Section_3.2.4.1) with the following parameters:
+The client calls the RPC method [**RMprAdminServerGetInfo (section 3.1.4.1)**](#Section_3.1.4.1) with the following parameters:
 
 - The [**DIM_HANDLE (section 2.2.1.1.6)**](#Section_2.2.1.1.6) that the client obtains during initialization (section [3.1.3](#Section_3.1)).
 - The level of information required. In this example, if the client specifies level 2, it will get the maximum information.
@@ -19378,7 +19378,7 @@ The client frees the buffer pointed to by *pBuffer* using midl_user_free.
 
 This example illustrates the use of the RPC methods defined in this specification to enumerate a connection on the RRAS server. This example shows a Windows Server 2008 operating system server when 10 remote access connections are active and one of the clients (foo) has connected from a multilink (2-port) machine that is compliant with the polices on the server [MS-RNAP](../MS-RNAP/MS-RNAP.md). The connection of foo is enumerated and all the ports (2) of that connection are disconnected.
 
-The client calls the RPC method [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.1.4.46) with the following parameters:
+The client calls the RPC method [**RRasAdminConnectionEnum (section 3.1.4.2)**](#Section_3.2.4.46) with the following parameters:
 
 - The [**DIM_HANDLE (section 2.2.1.1.6)**](#Section_2.2.1.1.6) that the client obtains during initialization (section [3.1.3](#Section_3.1)).
 - The level of information required. In this example, the RRAS server supports level 3.<354>
@@ -19403,7 +19403,7 @@ The client then stores the **dwConnection** in **RASI_CONNECTION_3**, which has 
 
 The client frees the buffer pointed to by **pBuffer**.
 
-The client calls the RPC method [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.2.4.5) with the following parameters:
+The client calls the RPC method [**RRasAdminPortEnum (section 3.1.4.5)**](#Section_3.1.4.5) with the following parameters:
 
 - The **DIM_HANDLE** is the same handle that the client obtains earlier during initialization.
 - The *dwLevel* is set to 0.
@@ -19433,7 +19433,7 @@ This example illustrates the use of the RPC methods defined in this specificatio
 
 The client updates the phone book file router.pbk under the file path C:\Windows\System32 to comprise the phonebook entry for dd1, see section [4.10](#Section_4.10) for details.
 
-The client calls the RPC method [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.2.4.13) with the following parameters:
+The client calls the RPC method [**RRouterInterfaceCreate (section 3.1.4.13)**](#Section_3.1.4.13) with the following parameters:
 
 - The [**DIM_HANDLE (section 2.2.1.1.6)**](#Section_2.2.1.1.6) that the client obtains during initialization (section [3.1.3](#Section_3.1)).
 - The level of information required. In this example, the client specifies level 0.
@@ -19449,7 +19449,7 @@ The client stores the *hInterface* returned in **MPRI_INTERFACE_0** into a local
 
 The client frees the buffer pointed to by **pBuffer**.
 
-The client then calls the RPC method [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_2.1) to add with the following parameters:
+The client then calls the RPC method [**RRouterInterfaceTransportAdd (section 3.1.4.18)**](#Section_3.2.4.18) to add with the following parameters:
 
 - The **DIM_HANDLE** that the client obtains during initialization (section 3.1.3).
 - The pointer to [**DIM_INTERFACE_CONTAINER**](#Section_2.2.1.2.2) (*pInfoStruct*) that the RRAS server uses to pass the information.
@@ -19489,7 +19489,7 @@ The client then calls the RPC method **RRouterInterfaceTransportAdd** with the f
 - The *dwVersion* in **FILTER_DESCRIPTOR** is set to 0x00000001.
 - The *dwNumFilters* in **FILTER_DESCRIPTOR** is set to 0x00000001.
 - The *faDefaultAction* in **FILTER_DESCRIPTOR** is set to 0x00000000.
-- The *fiFilter* contains [**FILTER_INFO (section 2.2.1.2.6)**](#Section_2.2.1.2.64).
+- The *fiFilter* contains [**FILTER_INFO (section 2.2.1.2.6)**](#Section_2.2.1.2.61).
 - The *dwSrcAddr* in **FILTER_INFO** is set to 0x01010101 and the rest of the fields in **FILTER_INFO** are set to 0.
 <a id="Section_4.4"></a>
 ## 4.4 Enumerating Interfaces and Connecting "dd1"
@@ -19520,7 +19520,7 @@ When the client calls the RPC method as previously described, the RRAS server re
 
 This example illustrates the use of the RPC methods defined in this specification to get the status information for an interface on the RRAS server on which no multicast protocol is running.
 
-The client calls the RPC method [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.2.4.31) with the following parameters:
+The client calls the RPC method [**RMIBEntryGet (section 3.1.4.30)**](#Section_3.1.4.32) with the following parameters:
 
 - The [**DIM_HANDLE (section 2.2.1.1.6)**](#Section_2.2.1.1.6) that the client obtains during initialization (section [3.1.3](#Section_3.1)).
 - The *dwPid* specifies the protocol ID that exported the variable (0x00000002) because the status is being requested.
@@ -19540,7 +19540,7 @@ When the client calls the RPC method as previously described, the RRAS server re
 
 This example illustrates the use of the RPC methods defined in this specification to enumerate a connection on the RRAS server. In this example we consider a Windows Server 2008 R2 operating system when 10 remote access connections are active and one of the clients (username = joe) has connected using the IKEv2 from a machine that is compliant with the polices on the server [MS-RNAP](../MS-RNAP/MS-RNAP.md). The connection of joe is enumerated and the tunnel endpoint is updated to a different interface identified by interface index.
 
-The client calls the RPC method [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.1.4.46) with the following parameters:
+The client calls the RPC method [**RRasAdminConnectionEnumEx (section 3.1.4.46)**](#Section_3.2.4.46) with the following parameters:
 
 - The [**DIM_HANDLE (section 2.2.1.1.6)**](#Section_2.2.1.1.6) that the client obtains during initialization (section [3.1.3](#Section_3.1)).
 - The *objectHeader* contains the pointer to [**MPRAPI_OBJECT_HEADER_IDL (section 2.2.1.2.129)**](#Section_2.2.1.2.129), revision is set to MPRAPI_RAS_CONNECTION_OBJECT_REVISION_1, type is set to MPRAPI_OBJECT_TYPE_RAS_CONNECTION_OBJECT, and size is set to sizeof(MPRAPI_OBJECT_HEADER_IDL).
@@ -19560,7 +19560,7 @@ The client then stores the *hConnection* in **RAS_CONNECTION_EX_IDL** whose wszU
 
 The client frees the buffer pointed to by *pRasConections*.
 
-The client calls the RPC method [**RRasAdminUpdateConnection (section 3.1.4.49)**](#Section_3.1.4.49) with the following parameters:
+The client calls the RPC method [**RRasAdminUpdateConnection (section 3.1.4.49)**](#Section_3.2.4.49) with the following parameters:
 
 - The *DIM_HANDLE* that the client obtains during initialization (section 3.1.3).
 - *hDimConnection* contains the previously obtained *hConnection*.
@@ -19583,7 +19583,7 @@ When the client calls the RPC method as previously described, it returns ERROR_S
 
 This example illustrates the use of the Rasrpc Interface method **RasRpcSubmitRequest** with ReqTypes REQTYPE_GETDEVICECONFIGINFO as defined in this specification. The method is used to query all the devices configured on the RRAS server when there are 7 devices on the RRAS - 2 Modem devices, 4 tunnel devices (one each for PPTP, L2TP, SSTP and IKEv2) and 1 PPPoE device.
 
-The client calls the RPC method **RasRpcSubmitRequest** (section [3.3.4.5](#Section_3.4.4.5)) with the following parameters:
+The client calls the RPC method **RasRpcSubmitRequest** (section [3.3.4.5](#Section_3.3.4.5)) with the following parameters:
 
 - The handle to the Rasrpc Server where the call is to be executed that the client obtains during initialization (section [3.3.3](#Section_3.3)).
 - *pReqBuffer* parameter is updated as follows:
@@ -19621,7 +19621,7 @@ The client frees the memory allocated to the *pReqBuffer* structure.
 
 This example illustrates the use of the Rasrpc Interface method **RasRpcSubmitRequest** with ReqTypes **REQTYPE_GETINFO** as defined in this specification. The method is used to query the information of a specific port with port identifier 2 which is a SSTP port.
 
-The client calls the RPC method **RasRpcSubmitRequest** (section [3.3.4.5](#Section_3.4.4.5)) with the following parameters:
+The client calls the RPC method **RasRpcSubmitRequest** (section [3.3.4.5](#Section_3.3.4.5)) with the following parameters:
 
 - The handle to the Rasrpc Server where the call is to be executed that the client obtains during initialization (section [3.3.3](#Section_3.3))
 - *pReqBuffer* parameter is updated as follows:
@@ -26206,7 +26206,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <18> Section 2.2.1.2.4: The IP_PROT_PRIORITY_INFO_EX value is not available in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, and Windows Server 2012 operating system.
 
-<19> Section 2.2.1.2.4: The **IPINIP_CONFIG_INFO** structure (section [2.2.1.2.17](#Section_2.2.1.2.174)) is only defined in Windows 2000 Server.
+<19> Section 2.2.1.2.4: The **IPINIP_CONFIG_INFO** structure (section [2.2.1.2.17](#Section_2.2.1.2.176)) is only defined in Windows 2000 Server.
 
 <20> Section 2.2.1.2.4: The **MPR_FILTER_0** structure (section [2.2.1.2.89](#Section_2.2.1.2.89)) is not available on Windows 2000 Server and Windows Server 2003.
 
@@ -26224,11 +26224,11 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <27> Section 2.2.1.2.11: The IP_ROUTE_INFO (0xFFFF0005) value is only defined in Windows Server 2008.
 
-<28> Section 2.2.1.2.11: Windows implementations always return 0x00000000 for the **dwRtInfoType** field when the **INTERFACE_ROUTE_INFO** structure is queried using the **RRouterInterfaceTransportGetInfo** (section [3.1.4.19)](#Section_2.1) method.
+<28> Section 2.2.1.2.11: Windows implementations always return 0x00000000 for the **dwRtInfoType** field when the **INTERFACE_ROUTE_INFO** structure is queried using the **RRouterInterfaceTransportGetInfo** (section [3.1.4.19)](#Section_3.2.4.19) method.
 
 <29> Section 2.2.1.2.13: The **PROTOCOL_METRIC** structure is defined only in Windows 2000 Server, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, and Windows Server 2012.
 
-<30> Section 2.2.1.2.13: Windows does not validate the **dwProtocolId** member of **PROTOCOL_METRIC** structure to be one of the values specified in the **MIB_IPFORWARD_PROTO** enumeration. A set operation (using [**RRouterInterfaceTransportSetGlobalInfo**](#Section_2.1)) with a value specified outside of **MIB_IPFORWARD_PROTO** will be accepted, and the same will be returned when a get operation (using [**RRouterInterfaceTransportGetGlobalInfo**](#Section_2.1)) is performed.
+<30> Section 2.2.1.2.13: Windows does not validate the **dwProtocolId** member of **PROTOCOL_METRIC** structure to be one of the values specified in the **MIB_IPFORWARD_PROTO** enumeration. A set operation (using [**RRouterInterfaceTransportSetGlobalInfo**](#Section_3.1.4.10)) with a value specified outside of **MIB_IPFORWARD_PROTO** will be accepted, and the same will be returned when a get operation (using [**RRouterInterfaceTransportGetGlobalInfo**](#Section_3.2.4.11)) is performed.
 
 <31> Section 2.2.1.2.17: The **IPINIP_CONFIG_INFO** structure is only defined in Windows 2000 Server.
 
@@ -26296,7 +26296,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <63> Section 2.2.1.2.83: Windows also require that the interface be registered in the registry as specified in [2.2.3.2.1](#Section_2.2.3.2.1.3); otherwise, the interface will not be available for managing after the Remote Access Service is restarted.
 
-<64> Section 2.2.1.2.83: In applicable Windows Server releases, specifying a new value for **wszInterfaceInfo** with **MPRI_INTERFACE_2** in calls to [**RRouterInterfaceSetInfo**](#Section_3.1.4.15) results in a new phonebook entry being created; that new entry will not be available for management.
+<64> Section 2.2.1.2.83: In applicable Windows Server releases, specifying a new value for **wszInterfaceInfo** with **MPRI_INTERFACE_2** in calls to [**RRouterInterfaceSetInfo**](#Section_3.2.4.15) results in a new phonebook entry being created; that new entry will not be available for management.
 
 <65> Section 2.2.1.2.83: The MPRIO_RequireSPAP and MPRIO_RequireMsCHAP values are available in Windows 2000 Server and Windows Server 2003. The MPRIO_RequireMachineCertificates, MPRIO_UsePreSharedKeyForIkev2Initiator, and MPRIO_UsePreSharedKeyForIkev2Responder values are not available in Windows 2000 Server, Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
@@ -26739,7 +26739,7 @@ On Windows Server 2008 and Windows Server 2008 R2, RRAS relies on the keys **Sha
 
 <274> Section 3.1.4.19: The PID_IPX value is available only in Windows 2000 Server. The PID_IPV6 value is not available in Windows 2000 Server and Windows Server 2003.
 
-<275> Section 3.1.4.19: The **IPV6_ROUTE_INFO** and **FILTER_DESCRIPTOR_V6** (section [2.2.1.2.7)](#Section_2.2.1.2.7) cannot be retrieved in Windows 2000 Server, Windows Server 2003, and in Windows Server 2008.
+<275> Section 3.1.4.19: The **IPV6_ROUTE_INFO** and **FILTER_DESCRIPTOR_V6** (section [2.2.1.2.7)](#Section_2.2.1.2.5) cannot be retrieved in Windows 2000 Server, Windows Server 2003, and in Windows Server 2008.
 
 <276> Section 3.1.4.20: The **RRouterInterfaceTransportSetInfo** method is not available on Windows 2000, Windows XP, Windows Vista, or Windows 7.
 
@@ -26811,7 +26811,7 @@ On Windows Server 2008 and Windows Server 2008 R2, RRAS relies on the keys **Sha
 
 <310> Section 3.1.4.40: The **RRouterInterfaceDeviceSetInfo** method is not available on Windows 2000, Windows XP, Windows Vista, or Windows 7.
 
-<311> Section 3.1.4.40: Windows does not validate the type of devices being added for a connection. Thus, if the devices specified are valid serial, ISDN, PPPoE, or VPN devices (as provided by the [**RRouterDeviceEnum**](#Section_3.1.4.37) method), the addition of the VPN/PPPoE devices still succeeds and the method returns ERROR_SUCCESS, though the functionality itself is not supported.
+<311> Section 3.1.4.40: Windows does not validate the type of devices being added for a connection. Thus, if the devices specified are valid serial, ISDN, PPPoE, or VPN devices (as provided by the [**RRouterDeviceEnum**](#Section_3.2.4.37) method), the addition of the VPN/PPPoE devices still succeeds and the method returns ERROR_SUCCESS, though the functionality itself is not supported.
 
 <312> Section 3.1.4.41: The **RRouterInterfaceSetCredentialsEx** method is not available on Windows 2000, Windows XP, Windows Vista, or Windows 7.
 
@@ -26851,7 +26851,7 @@ On Windows Server 2008 and Windows Server 2008 R2, RRAS relies on the keys **Sha
 
 <330> Section 3.2.4.15: The error code ERROR_IKEV2_PSK_INTERFACE_ALREADY_EXISTS is not available in Windows 2000 Server, Windows Server 2003, Windows Server 2008, and Windows Server 2008 R2.
 
-<331> Section 3.2.4.15: Windows calls **RRouterInterfaceGetInfo** method (section [3.2.4.14)](#Section_3.2.4.14) in order to construct and fill the structures with which [**RRouterInterfaceSetInfo**](#Section_3.1.4.15) will be called. After the structure is retrieved the **RRouterInterfaceGetInfo** method is used to apply the necessary configuration modifications to the structure before **RRouterInterfaceSetInfo** method is called.
+<331> Section 3.2.4.15: Windows calls **RRouterInterfaceGetInfo** method (section [3.2.4.14)](#Section_3.2.4.14) in order to construct and fill the structures with which [**RRouterInterfaceSetInfo**](#Section_3.2.4.15) will be called. After the structure is retrieved the **RRouterInterfaceGetInfo** method is used to apply the necessary configuration modifications to the structure before **RRouterInterfaceSetInfo** method is called.
 
 <332> Section 3.3.4: Windows 2000 Server does not throw an exception to indicate the client does not have access.
 

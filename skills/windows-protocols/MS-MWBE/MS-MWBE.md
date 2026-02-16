@@ -446,7 +446,7 @@ The sections that follow define new elements to convey the source of [**claims**
 
 [WindowsUserName](#Section_3.1.5.2.1.4) (optional): A [**user**](#gt_user) name associated with the subject of the SAML assertion. The content is of type string (as specified in [XMLSCHEMA2] section 3.2.1) and MUST be of the form "DOMAIN\user name".<7>
 
-[WindowsIdentifiers](#Section_3.1.5.2.1.5) (optional): A base64-encoded binary structure that defines a set of SIDs that identify the subject of the SAML assertion and a set of flags that specify the use of the SIDs. The content is of type base64Binary (as specified in [XMLSCHEMA2] section 3.2.16), and the binary data MUST be structured as specified in [WindowsIdentifiers Binary Structure (section 2.2.3.2)](#Section_2.2.3.2).
+[WindowsIdentifiers](#Section_2.2.3.2) (optional): A base64-encoded binary structure that defines a set of SIDs that identify the subject of the SAML assertion and a set of flags that specify the use of the SIDs. The content is of type base64Binary (as specified in [XMLSCHEMA2] section 3.2.16), and the binary data MUST be structured as specified in [WindowsIdentifiers Binary Structure (section 2.2.3.2)](#Section_2.2.3.2).
 
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 WindowsIdentifiers Structure
@@ -656,7 +656,7 @@ The IP/STS is a requestor IP/STS when issuing a token to a [**relying party**](#
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Responding to a wsignin1.0 Request
 
-When responding to a [**wsignin1.0**](#gt_wsignin10) request, the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) MAY include any of the [ClaimSource (section 3.1.5.2.1.1)](#Section_3.1.5.2.1.1), [CookieInfoHash (section 3.1.5.2.1.2)](#Section_3.1.5.2.1.2), [WindowsUserIdentifier (section 3.1.5.2.1.3)](#Section_3.1.5.2.1.3), [WindowsUserName (section 3.1.5.2.1.4)](#Section_3.1.5.2.1.4), and [WindowsIdentifiers (section 3.1.5.2.1.5)](#Section_3.1.5.2.1.5) elements in the issued [**SAML assertion**](#gt_saml-assertion). For syntax details, see section [2.2.3](#Section_4.2).
+When responding to a [**wsignin1.0**](#gt_wsignin10) request, the [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) MAY include any of the [ClaimSource (section 3.1.5.2.1.1)](#Section_3.1.5.2.1.1), [CookieInfoHash (section 3.1.5.2.1.2)](#Section_3.1.5.2.1.2), [WindowsUserIdentifier (section 3.1.5.2.1.3)](#Section_3.1.5.2.1.3), [WindowsUserName (section 3.1.5.2.1.4)](#Section_3.1.5.2.1.4), and [WindowsIdentifiers (section 3.1.5.2.1.5)](#Section_2.2.3.2) elements in the issued [**SAML assertion**](#gt_saml-assertion). For syntax details, see section [2.2.3](#Section_1.3.2).
 
 The following sections describe the processing semantics for each of these optional SAML assertion elements.
 
@@ -832,12 +832,12 @@ A [**web browser requestor**](#gt_web-browser-requestor) plays a passive role in
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
 
-A [**web browser requestor**](#gt_web-browser-requestor) does not need to interact with any timers, or service any timer events, beyond those that might be used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in section [3.1.6](#Section_3.1.6).
+A [**web browser requestor**](#gt_web-browser-requestor) does not need to interact with any timers, or service any timer events, beyond those that might be used by the underlying transport to transmit and receive messages over HTTP and SSL/TLS, or those specified in section [3.1.6](#Section_3.3.6).
 
 <a id="Section_3.3.7"></a>
 ### 3.3.7 Other Local Events
 
-A [**web browser requestor**](#gt_web-browser-requestor) does not have dependencies on local events beyond those specified in section [3.1.7](#Section_3.3.7).
+A [**web browser requestor**](#gt_web-browser-requestor) does not have dependencies on local events beyond those specified in section [3.1.7](#Section_3.2.7).
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -1140,7 +1140,7 @@ jlaHXZKO2mO%2fTykrVn3ny93nGygPpVKClJt3qFQfFAfe6YZ8m5m1LXDvvee6
 
 %2fkzz9A6cx%2fkw%3d HTTP/1.1
 
-- The relying party appends the *wresult* parameter to the aggregated result. The new aggregated result is 2,652 characters long, which indicates the completion of the Query String Response Transfer Protocol (see section [4.1](#Section_2.1.1)). The relying party extracts the RSTR from the aggregated result (as specified in section [3.2.5.1.4](#Section_3.2.5.1.4)) and processes it as specified in [MS-MWBF] section 3.3.5.2. The relying party's next action is outside the scope of the protocol, though in this case the relying party, which was a resource IP/STS, issued a new [**SAML assertion**](#gt_saml-assertion) and used the Query String Response Transfer Protocol to transmit it to a WS resource.
+- The relying party appends the *wresult* parameter to the aggregated result. The new aggregated result is 2,652 characters long, which indicates the completion of the Query String Response Transfer Protocol (see section [4.1](#Section_2.2.2)). The relying party extracts the RSTR from the aggregated result (as specified in section [3.2.5.1.4](#Section_3.2.5.1.4)) and processes it as specified in [MS-MWBF] section 3.3.5.2. The relying party's next action is outside the scope of the protocol, though in this case the relying party, which was a resource IP/STS, issued a new [**SAML assertion**](#gt_saml-assertion) and used the Query String Response Transfer Protocol to transmit it to a WS resource.
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Full Network Trace
 
@@ -2919,7 +2919,7 @@ HTTP/1.1 200 OK
 <a id="Section_4.2"></a>
 ## 4.2 SAML 1.1 Assertion Extension
 
-Following is a [**SAML assertion**](#gt_saml-assertion) fragment that illustrates the message syntax of the SAML 1.1 Assertion Extension elements in the advice element, as specified in section [2.2.3](#Section_4.2).
+Following is a [**SAML assertion**](#gt_saml-assertion) fragment that illustrates the message syntax of the SAML 1.1 Assertion Extension elements in the advice element, as specified in section [2.2.3](#Section_1.3.2).
 
 <saml:Advice xmlns:adfs="urn:microsoft:federation">
 
@@ -2951,7 +2951,7 @@ ADFSVM-A\Administrator
 
 </saml:Advice>
 
-The raw octets of the [WindowsIdentifiers (section 3.1.5.2.1.5)](#Section_3.1.5.2.1.5) binary structure, after [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7) decoding are as follows.
+The raw octets of the [WindowsIdentifiers (section 3.1.5.2.1.5)](#Section_2.2.3.2) binary structure, after [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7) decoding are as follows.
 
 00 00 00 00 01 00 00 00 01 04 00 00 00 00 00 05 15 00 00 00 15 53 ED
 
@@ -3068,7 +3068,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <2> Section 1.5: Local configuration is used to modify several of the Windows behaviors described in this document. In all cases, the local configuration must exist before the protocol is initiated. Specific instances where local configuration is used are listed below.
 
-By default, an [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) does not issue [**security tokens**](#gt_security-token) with SIDs (see section [3.1.5.2](#Section_3.1.5.2)). The issuance of SIDs (that is, including the WindowsUserIdentifier (section [3.1.5.2.1.3](#Section_3.1.5.2.1.3)), WindowsUserName (section [3.1.5.2.1.4](#Section_3.1.5.2.1.4)), and WindowsIdentifiers (section [3.1.5.2.1.5](#Section_3.1.5.2.1.5)) elements in issued SAML assertions) can be enabled for specific [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) by using local configuration.
+By default, an [**IP/STS**](#gt_identity-providersecurity-token-service-ipsts) does not issue [**security tokens**](#gt_security-token) with SIDs (see section [3.1.5.2](#Section_3.1.5.2)). The issuance of SIDs (that is, including the WindowsUserIdentifier (section [3.1.5.2.1.3](#Section_3.1.5.2.1.3)), WindowsUserName (section [3.1.5.2.1.4](#Section_3.1.5.2.1.4)), and WindowsIdentifiers (section [3.1.5.2.1.5](#Section_2.2.3.2)) elements in issued SAML assertions) can be enabled for specific [**relying parties**](#gt_ee5619ac-b16e-4727-ace0-3a2f98204fc7) by using local configuration.
 
 By default, when a [**user**](#gt_user) authenticates to a resource IP/STS by using a security token from a requestor IP/STS (see section 3.1.5.2), any SIDs in the SAML assertion are ignored (that is, the WindowsUserIdentifier (section 3.1.5.2.1.3), WindowsUserName (section 3.1.5.2.1.4), and WindowsIdentifiers (section 3.1.5.2.1.5) elements). Processing these SIDs (as described in section 3.1.5.2) can be enabled for specified requestor IP/STSs using local configuration. In this case, the local configuration also specifies a Windows [**domain**](#gt_domain) associated with the IP/STS, so that SID filtering can be performed (as specified in section [5.1.3](#Section_5)).
 
@@ -3159,13 +3159,13 @@ END IF
 
 END IF
 
-<20> Section 3.2.5.2: By default, the resource IP/STS ignores these fields and processes the security token as though the extension elements are absent. Their processing can be enabled for specific requestor IP/STSs (as specified in section 1.5). Section [3.1.5.2.1](#Section_3.1.5.2.1.5) specifies how the resource IP/STS includes the fields. The [**web service resource**](#gt_web-service-ws-resource) uses the fields to provide authorization services to a web-based application on the same machine by using methods that are outside the scope of this protocol.
+<20> Section 3.2.5.2: By default, the resource IP/STS ignores these fields and processes the security token as though the extension elements are absent. Their processing can be enabled for specific requestor IP/STSs (as specified in section 1.5). Section [3.1.5.2.1](#Section_3.1.5.2.1.4) specifies how the resource IP/STS includes the fields. The [**web service resource**](#gt_web-service-ws-resource) uses the fields to provide authorization services to a web-based application on the same machine by using methods that are outside the scope of this protocol.
 
 <21> Section 3.2.6: There are no new timer events. The aggregated result is stored by using secure session cookies (as specified in section 3.1.1.1.1).
 
 <22> Section 3.3.1: Windows Internet Explorer supports the use of session and persistent HTTP cookies (for more information, see [RFC2965]). The Windows implementation of this protocol requires that web browser requestor support at least session cookies. It uses persistent cookies to preserve security realm identifiers if they are supported by the web browser requestor.
 
-<23> Section 3.3.5: The RMS 2.0 client in Windows Vista operating system with Service Pack 1 (SP1), Windows Server 2008, Windows 7 operating system, Windows Server 2008 R2, Windows 8 operating system, and Windows Server 2012 adds a *whr* parameter to the wsignin 1.0 Request Message (section [2.2.2](#Section_2.1.1)) if the wsignin 1.0 Request Message does not already contain a *whr* parameter.
+<23> Section 3.3.5: The RMS 2.0 client in Windows Vista operating system with Service Pack 1 (SP1), Windows Server 2008, Windows 7 operating system, Windows Server 2008 R2, Windows 8 operating system, and Windows Server 2012 adds a *whr* parameter to the wsignin 1.0 Request Message (section [2.2.2](#Section_2.2.2)) if the wsignin 1.0 Request Message does not already contain a *whr* parameter.
 
 <24> Section 5.1.2: The inclusion of SIDs can be enabled for specific relying parties (as specified in section 1.5).
 

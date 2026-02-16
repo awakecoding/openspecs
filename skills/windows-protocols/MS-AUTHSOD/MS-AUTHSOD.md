@@ -936,7 +936,7 @@ When the client and server agree on either the Digest or the NTLM protocol, the 
 <a id="Section_2.1.2.3"></a>
 #### 2.1.2.3 Enterprise Environment
 
-The protocols commonly used in enterprise environments for authentication and secure transport of application data are listed in section [2.2.1](#Section_2.3). The following section describes how distributed applications use the Authentication Services protocols in the enterprise environment, with the file access services as an example.
+The protocols commonly used in enterprise environments for authentication and secure transport of application data are listed in section [2.2.1](#Section_2.2.1). The following section describes how distributed applications use the Authentication Services protocols in the enterprise environment, with the file access services as an example.
 
 <a id="Section_2.1.2.3.1"></a>
 ##### 2.1.2.3.1 File Access Services
@@ -984,7 +984,7 @@ Figure 10: KKDCP deployment environment
 <a id="Section_2.1.2.4"></a>
 #### 2.1.2.4 Intranet Web Environment
 
-The protocols that are commonly used in intranet web environments for authentication and secure transportation of application data are listed in section [2.2.2](#Section_2.3). The following section describes how distributed applications use the Authentication Services protocols in the intranet web environment.
+The protocols that are commonly used in intranet web environments for authentication and secure transportation of application data are listed in section [2.2.2](#Section_2.2.2). The following section describes how distributed applications use the Authentication Services protocols in the intranet web environment.
 
 <a id="Section_2.1.2.4.1"></a>
 ##### 2.1.2.4.1 HTTP Access Authentication
@@ -1010,7 +1010,7 @@ When a web browser uses Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) for web authen
 <a id="Section_2.1.2.5"></a>
 #### 2.1.2.5 Mixed Web Environment
 
-As listed in section [2.2.3](#Section_2.3), the authentication protocols that are primarily used in web environments for authentication and secure transportation of application data are Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md), Transport Layer Security (TLS) Profile [MS-TLSP](#Section_2.9), and HTTP Authentication: Basic and Digest Access Authentication [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373).
+As listed in section [2.2.3](#Section_2.2.3), the authentication protocols that are primarily used in web environments for authentication and secure transportation of application data are Digest Protocol Extensions [MS-DPSP](../MS-DPSP/MS-DPSP.md), Transport Layer Security (TLS) Profile [MS-TLSP](#Section_2.9), and HTTP Authentication: Basic and Digest Access Authentication [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373).
 
 The following diagram illustrates authentication protocol interactions in a mixed web environment, which is the combination of Internet and enterprise environments.
 
@@ -1086,7 +1086,7 @@ Figure 15: Relationships between SSL/TLS protocol standards and Microsoft extens
 <a id="Section_2.2"></a>
 ## 2.2 Protocol Summary
 
-The tables in the following sections group the Authentication Services protocols according to their roles into three distinct environments: the [Enterprise Environment (section 2.2.1)](#Section_2.3), the [Intranet Web Environment (section 2.2.2)](#Section_2.3), and the [Internet Web Environment (section 2.2.3)](#Section_2.3).
+The tables in the following sections group the Authentication Services protocols according to their roles into three distinct environments: the [Enterprise Environment (section 2.2.1)](#Section_2.2.1), the [Intranet Web Environment (section 2.2.2)](#Section_2.2.2), and the [Internet Web Environment (section 2.2.3)](#Section_2.2.3).
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Enterprise Environment
@@ -1111,7 +1111,7 @@ The tables in the following sections group the Authentication Services protocols
 | Digest Protocol Extensions | Extends the Digest Authentication standard [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373) and [[RFC2831]](https://go.microsoft.com/fwlink/?LinkId=90387). | [MS-DPSP](../MS-DPSP/MS-DPSP.md) |
 | Remote Certificate Mapping Protocol | Used by servers that authenticate users by using [**X.509**](#gt_x509) certificates. This protocol allows the server to use a directory, database, or other technology to map the user's X.509 certificate to a [**security principal**](#gt_security-principal). This protocol returns the [**authorization**](#gt_authorization) information that is associated with the security principal in the form of a [**privilege attribute certificate (PAC)**](#gt_privilege-attribute-certificate-pac), as specified in [MS-PAC](../MS-PAC/MS-PAC.md), that represents the user's identity and group memberships. | [MS-RCMP](../MS-RCMP/MS-RCMP.md) |
 | [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) Profile | Specifies the differences between Microsoft implementation and the SSL/TLS standards. | [MS-TLSP](#Section_2.9) |
-| NT LAN Manager (NTLM) Authentication Protocol | See section [2.2.1](#Section_2.3). | [MS-NLMP](../MS-NLMP/MS-NLMP.md) |
+| NT LAN Manager (NTLM) Authentication Protocol | See section [2.2.1](#Section_2.2.1). | [MS-NLMP](../MS-NLMP/MS-NLMP.md) |
 | Kerberos Protocol Extensions | See section 2.2.1. | [MS-KILE](../MS-KILE/MS-KILE.md) |
 | Public Key Cryptography for Initial Authentication (PKINIT) in Kerberos Protocol | Specifies the Microsoft extensions to the Public Key Cryptography for Initial Authentication in Kerberos (PKINIT) protocol and enables the use of [**public key**](#gt_public-key) cryptography in the initial authentication exchange (that is, in the Authentication Service (AS) exchange) of the [**Kerberos**](#gt_kerberos) protocol [MS-KILE]. | [MS-PKCA](../MS-PKCA/MS-PKCA.md) |
 | Authentication Protocol Domain Support | See section 2.2.1. | [MS-APDS](../MS-APDS/MS-APDS.md) |
@@ -1123,7 +1123,7 @@ The tables in the following sections group the Authentication Services protocols
 
 | Protocol name | Description | Short name |
 | --- | --- | --- |
-| Digest Protocol Extensions | See section [2.2.2](#Section_2.3). | [MS-DPSP](../MS-DPSP/MS-DPSP.md) |
+| Digest Protocol Extensions | See section [2.2.2](#Section_2.2.2). | [MS-DPSP](../MS-DPSP/MS-DPSP.md) |
 | [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) Profile | See section 2.2.2. | [MS-TLSP](#Section_2.9) |
 | [**Kerberos**](#gt_kerberos) [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) Proxy Protocol | This protocol lets Kerberos clients use KDC [**proxy**](#gt_proxy) servers to communicate to KDCs for the Kerberos [**Authentication Service (AS)**](#gt_authentication-service-as), [**ticket-granting service (TGS)**](#gt_ticket-granting-service-tgs), and change password exchanges. | [MS-KKDCP](../MS-KKDCP/MS-KKDCP.md) |
 
@@ -1186,7 +1186,7 @@ The following sections describe a set of use cases that span the functionality o
 | [Interactive Logon (section 2.5.3)](#Section_2.5.3) | [Interactive Domain Logon: Service Ticket for Client Computer (section 2.5.3.1.1)](#Section_2.5.3.1.1) |
 | [Network Logon (section 2.5.4)](#Section_2.5.4) | [Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Server Authentication (section 2.5.4.1.2)](#Section_2.5.4.1.2), [Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Delegation of Authentication (section 2.5.4.1.4)](#Section_2.5.4.1.4), and [Credential Delegation (section 2.5.4.1.5)](#Section_2.5.4.1.5). |
 | [Auxiliary (section 2.5.5)](#Section_2.5.5) | [Authenticate a User or Computer Identity to a Kerberos Authentication Server (section 2.5.5.1)](#Section_2.1), [Negotiate Authentication Protocol (section 2.5.5.2)](#Section_2.1), and [S4U2self Mechanism: Get a Service Ticket for a Front-end Server (section 2.5.5.3)](#Section_2.5.5.3). These use cases support the other use cases that are listed in this table and in the following tables. |
-| [Security Services (section 2.5.6)](#Section_2.5.6) | [Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6) [Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6) |
+| [Security Services (section 2.5.6)](#Section_2.5.6) | [Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6) [Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6.2) |
 
 The use cases listed in the following table apply to a multi-[**domain**](#gt_domain) environment in a single [**forest**](#gt_forest).
 
@@ -2036,7 +2036,7 @@ There are no additional considerations.
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: GSS Authentication Protocol Process - Stock Quote Server
 
-This example describes the [**GSS**](#gt_generic-security-services-gss) authentication protocol process. It builds on the use cases for [Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Server Authentication (section 2.5.4.1.2)](#Section_2.5.4.1.2), [Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Security Services: Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6), [Security Services: Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6), and their dependent use cases.
+This example describes the [**GSS**](#gt_generic-security-services-gss) authentication protocol process. It builds on the use cases for [Client Authentication (section 2.5.4.1.1)](#Section_2.5.4.1.1), [Server Authentication (section 2.5.4.1.2)](#Section_2.5.4.1.2), [Mutual Authentication (section 2.5.4.1.3)](#Section_2.5.4.1.3), [Security Services: Data Origin Authentication (Signing) (section 2.5.6.1)](#Section_2.5.6), [Security Services: Data Confidentiality (Sealing) (section 2.5.6.2)](#Section_2.5.6.2), and their dependent use cases.
 
 Every application protocol uses its own mechanism to transport the GSS-API security tokens from an Application Client to an Application Server. The following example explains the interactions of the [**Authentication Client**](#gt_authentication-client), the [**Authentication Server**](#gt_authentication-server), and the [**Authentication Authority (AA)**](#gt_authentication-authority-aa) through GSS-APIs [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378).
 
@@ -2390,12 +2390,12 @@ The changes made to this document are listed in the following table. For more in
 | Section | Description | Revision class |
 | --- | --- | --- |
 | [1.3](#Section_1.3) References | 11217 : Updated [MS-NEGOEX] reference title from SPEGNO to SPNEGO. | Minor |
-| [2.1.2.2](#Section_2.1.1.2) Protocol Interactions | 11217 : Updated [MS-NEGOEX] title from SPEGNO to SPNEGO. | Minor |
+| [2.1.2.2](#Section_2.1.2.2) Protocol Interactions | 11217 : Updated [MS-NEGOEX] title from SPEGNO to SPNEGO. | Minor |
 | 2.1.2.2 Protocol Interactions | Updated SSL/TLS name. | None |
 | [2.1.3](#Section_2.1.3) Relevant Standards | Added TLS Version 1.3 with reference to [RFC8446]. | Major |
 | [2.1.4.3](#Section_2.1.4.3) SSL/TLS Protocols | Updated diagram with RFCs for TLS 1.3, TLS extensions, elliptic curves, and cipher suites. | Major |
-| [2.2.1](#Section_2.3) Enterprise Environment | 11217 : Updated [MS-NEGOEX] title from SPEGNO to SPNEGO. | Minor |
-| [2.2.2](#Section_2.3) Intranet Web Environment | 11217 : Updated [MS-NEGOEX] title from SPEGNO to SPNEGO. | Minor |
+| [2.2.1](#Section_2.2.1) Enterprise Environment | 11217 : Updated [MS-NEGOEX] title from SPEGNO to SPNEGO. | Minor |
+| [2.2.2](#Section_2.2.2) Intranet Web Environment | 11217 : Updated [MS-NEGOEX] title from SPEGNO to SPNEGO. | Minor |
 | [4](#Section_4) Microsoft Implementations | Added Windows 11 to the list of applicable products. | Major |
 
 <a id="revision-history"></a>

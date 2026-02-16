@@ -833,7 +833,7 @@ This section describes a conceptual model of possible data organization that an 
 
 The abstract data model for this protocol comprises ADM elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are collocated at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a queue manager is described in [MS-MQOD](#Section_1.3).
 
-Section [3.2.1.1](#Section_3.3.1.1) references the ADM elements from the shared data model that are manipulated by this protocol.
+Section [3.2.1.1](#Section_3.2.1.1) references the ADM elements from the shared data model that are manipulated by this protocol.
 
 Section [3.2.1.2](#Section_3.2.1.2) describes the ADM elements that are specific to the server side of this protocol.
 

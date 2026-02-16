@@ -498,7 +498,7 @@ packet-beta
 | Flag | Meaning |
 | --- | --- |
 | CS_READY_FLAGS_SHOW_TOUCH_VISUALS 0x00000001 | Touch gesture and contact visuals SHOULD be rendered by the server in the remote session. |
-| CS_READY_FLAGS_DISABLE_TIMESTAMP_INJECTION 0x00000002 | The client does not support touch frame timestamp remoting. The server MUST ignore any values specified in the **frameOffset** field of the [RDPINPUT_TOUCH_FRAME (section 2.2.3.3.1)](#Section_2.2.3.3.1.1) structure and the **encodeTime** field of the [RDPINPUT_TOUCH_EVENT_PDU (section 2.2.3.3)](#Section_2.2.3.3) message. This flag SHOULD NOT be sent to a server that only supports version 1.0.0 of the input remoting protocol. The server-supported version is specified in the **protocolVersion** field of the [RDPINPUT_SC_READY_PDU (section 2.2.3.1)](#Section_2.2.3.1) message. |
+| CS_READY_FLAGS_DISABLE_TIMESTAMP_INJECTION 0x00000002 | The client does not support touch frame timestamp remoting. The server MUST ignore any values specified in the **frameOffset** field of the [RDPINPUT_TOUCH_FRAME (section 2.2.3.3.1)](#Section_2.2.3.3.1) structure and the **encodeTime** field of the [RDPINPUT_TOUCH_EVENT_PDU (section 2.2.3.3)](#Section_2.2.3.3) message. This flag SHOULD NOT be sent to a server that only supports version 1.0.0 of the input remoting protocol. The server-supported version is specified in the **protocolVersion** field of the [RDPINPUT_SC_READY_PDU (section 2.2.3.1)](#Section_2.2.3.1) message. |
 | CS_READY_FLAGS_ENABLE_MULTIPEN_INJECTION 0x00000004 | The server should configure the pen injection subsystem so that the simultaneous injection of input from up to four pen devices is possible. |
 
 **protocolVersion (4 bytes):** A 32-bit unsigned integer that specifies the input protocol version supported by the client.
@@ -529,7 +529,7 @@ packet-beta
 
 **encodeTime (variable):** A FOUR_BYTE_UNSIGNED_INTEGER (section [2.2.2.3](#Section_2.2.2.3)) structure that specifies the time that has elapsed (in milliseconds) from when the oldest touch frame was generated to when it was encoded for transmission by the client.
 
-**frameCount (variable):** A TWO_BYTE_UNSIGNED_INTEGER (section [2.2.2.1](#Section_2.2.2.1)) structure that specifies the number of RDPINPUT_TOUCH_FRAME (section [2.2.3.3.1](#Section_2.2.3.3.1.1)) structures in the **frames** field.
+**frameCount (variable):** A TWO_BYTE_UNSIGNED_INTEGER (section [2.2.2.1](#Section_2.2.2.1)) structure that specifies the number of RDPINPUT_TOUCH_FRAME (section [2.2.3.3.1](#Section_2.2.3.3.1)) structures in the **frames** field.
 
 **frames (variable):** An array of **RDPINPUT_TOUCH_FRAME** structures ordered from the oldest in time to the most recent in time. The number of structures in this array is specified by the **frameCount** field.
 
@@ -554,7 +554,7 @@ packet-beta
 <a id="Section_2.2.3.3.1.1"></a>
 ###### 2.2.3.3.1.1 RDPINPUT_TOUCH_CONTACT
 
-The **RDPINPUT_TOUCH_CONTACT** structure describes the characteristics of a contact that is encapsulated in an RDPINPUT_TOUCH_FRAME (section [2.2.3.3.1](#Section_2.2.3.3.1.1)) structure.
+The **RDPINPUT_TOUCH_CONTACT** structure describes the characteristics of a contact that is encapsulated in an RDPINPUT_TOUCH_FRAME (section [2.2.3.3.1](#Section_2.2.3.3.1)) structure.
 
 ```mermaid
 packet-beta
@@ -888,7 +888,7 @@ The **header** field MUST be processed as specified in section [3.1.5.1](#Sectio
 
 The structure and fields of the **RDPINPUT_TOUCH_EVENT_PDU** message are specified in section [2.2.3.3](#Section_2.2.3.3).
 
-The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server MUST iterate over each [RDPINPUT_TOUCH_FRAME (section 2.2.3.3.1)](#Section_2.2.3.3.1.1) structure encapsulated in the **RDPINPUT_TOUCH_EVENT_PDU** message, decode each [RDPINPUT_TOUCH_CONTACT (section 2.2.3.3.1.1)](#Section_2.2.3.3.1.1) structure in the frame, and then inject the frame contacts into the user session.
+The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server MUST iterate over each [RDPINPUT_TOUCH_FRAME (section 2.2.3.3.1)](#Section_2.2.3.3.1) structure encapsulated in the **RDPINPUT_TOUCH_EVENT_PDU** message, decode each [RDPINPUT_TOUCH_CONTACT (section 2.2.3.3.1.1)](#Section_2.2.3.3.1.1) structure in the frame, and then inject the frame contacts into the user session.
 
 If any of the contacts does not conform to the finite state machine described in section [3.1.1.1](#Section_3.1.1.1), the touch transaction SHOULD be canceled in the session, and all subsequent frames associated with the transaction SHOULD be ignored until a new touch transaction is initiated at the client.
 
@@ -991,7 +991,7 @@ The client MUST populate the **maxTouchContacts** field to indicate the maximum 
 
 The structure and fields of the **RDPINPUT_TOUCH_EVENT_PDU** message are specified in section [2.2.3.3](#Section_2.2.3.3).
 
-Each RDPINPUT_TOUCH_EVENT_PDU (section 2.2.3.3) message contains an array of [RDPINPUT_TOUCH_FRAME (section 2.2.3.3.1)](#Section_2.2.3.3.1.1) structures, and each frame contains an array of [RDPINPUT_TOUCH_CONTACT (section 2.2.3.3.1.1)](#Section_2.2.3.3.1.1) structures. Every **RDPINPUT_TOUCH_CONTACT** structure represents the state and attributes of an active contact; see section [3.1.1.1](#Section_3.1.1.1) for a description of permissible touch contact state transitions.
+Each RDPINPUT_TOUCH_EVENT_PDU (section 2.2.3.3) message contains an array of [RDPINPUT_TOUCH_FRAME (section 2.2.3.3.1)](#Section_2.2.3.3.1) structures, and each frame contains an array of [RDPINPUT_TOUCH_CONTACT (section 2.2.3.3.1.1)](#Section_2.2.3.3.1.1) structures. Every **RDPINPUT_TOUCH_CONTACT** structure represents the state and attributes of an active contact; see section [3.1.1.1](#Section_3.1.1.1) for a description of permissible touch contact state transitions.
 
 Every touch frame received by the client from a touch digitizer MUST be encoded as an **RDPINPUT_TOUCH_FRAME** structure, the contacts being encoded as **RDPINPUT_TOUCH_CONTACT** structures. The number of encoded frames depends on the rate at which the digitizer generates touch frames. Once the touch frames have been encoded, they MUST be encapsulated in an **RDPINPUT_TOUCH_EVENT_PDU** message.
 

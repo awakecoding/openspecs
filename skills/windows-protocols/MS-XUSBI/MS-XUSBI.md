@@ -707,7 +707,7 @@ Table 12: Endpoint to RF slot assignment
 
 For an attaching data device, it is assigned the endpoints with the highest priority from the ones available. For a voice only device, it is assigned the endpoints with the highest priority from the available ones. Note that the assigned endpoint is completely independent of VPort assignment.
 
-The voice endpoints, even numbered endpoints, contain only voice data. A voice only device MAY use the data endpoints, odd numbered endpoints, to handle reports and requests. For more details, see Same Slot Voice Device Reports (Report ID 0x01) section [3.5.5.1.2](#Section_3.5.5.1.2.2).
+The voice endpoints, even numbered endpoints, contain only voice data. A voice only device MAY use the data endpoints, odd numbered endpoints, to handle reports and requests. For more details, see Same Slot Voice Device Reports (Report ID 0x01) section [3.5.5.1.2](#Section_3.5.5.1.2.3).
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 XUSB Descriptors
@@ -3040,7 +3040,7 @@ None.
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-See section [3.5.5.1.1](#Section_3.5.5.1.1.2) for Data transport packet for security chip and section [3.5.5.1.1.4](#Section_3.5.5.1.1.4) for Controller Supported Security Level.
+See section [3.5.5.1.1](#Section_3.5.5.1.1.1) for Data transport packet for security chip and section [3.5.5.1.1.4](#Section_3.5.5.1.1.4) for Controller Supported Security Level.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

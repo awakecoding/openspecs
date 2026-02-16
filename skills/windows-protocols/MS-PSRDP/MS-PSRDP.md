@@ -166,7 +166,7 @@ Figure 1: Relationship of the PowerShell Remote Debugging Protocol to other prot
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-Because this protocol is a higher layer than PSRP, a [**remote session**](#gt_remote-session) established over PSRP is required before this protocol can operate. The client must be aware of the **Debugger_State**, **Resume_Action**, **Debugger_Mode**, **Debugger_Breakpoint_Collection**, **Debugger_Stop_Context, Debugger_Step_Mode**, and **Debugger_UnhandledBreakpoint_Mode**<1> abstract data model elements, specified in section [3.2.1](#Section_3.1.1), on the server.
+Because this protocol is a higher layer than PSRP, a [**remote session**](#gt_remote-session) established over PSRP is required before this protocol can operate. The client must be aware of the **Debugger_State**, **Resume_Action**, **Debugger_Mode**, **Debugger_Breakpoint_Collection**, **Debugger_Stop_Context, Debugger_Step_Mode**, and **Debugger_UnhandledBreakpoint_Mode**<1> abstract data model elements, specified in section [3.2.1](#Section_3.2.1), on the server.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -318,8 +318,8 @@ This event message MUST contain a server **Debugger_Stop_Context** data structur
 
 The client can send three messages to the server.
 
-- SET_PSDEBUGMODE (section [2.2.2](#Section_2.2.2)). This message is sent to the server to set the **Debugger_Mode** state on the server.
-- SET_PSDEBUGGERACTION (section [2.2.3](#Section_2.2.3)). This message is sent to the server in response to a server REMOTE_DEBUGGER_STOP_EVENT message. It sets the **Resume_Action** state on the server.
+- SET_PSDEBUGMODE (section [2.2.2](#Section_3.1.4.1)). This message is sent to the server to set the **Debugger_Mode** state on the server.
+- SET_PSDEBUGGERACTION (section [2.2.3](#Section_3.2.4.2)). This message is sent to the server in response to a server REMOTE_DEBUGGER_STOP_EVENT message. It sets the **Resume_Action** state on the server.
 - GET_PSDEBUGGERSTOPARGS (section [2.2.4](#Section_2.2.4)). This message queries the server for the **Debugger_Stop_Context** information.
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -329,16 +329,16 @@ None.
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Initialization
 
-This protocol is initialized when a [**remote session**](#gt_remote-session) is established over PSRP. After this, the client higher layer MAY<4> initialize the remote session for [**remote debugging**](#gt_remote-debugging) by sending the SET_PSDEBUGMODE message, as specified in section [2.2.2](#Section_2.2.2), to the server.
+This protocol is initialized when a [**remote session**](#gt_remote-session) is established over PSRP. After this, the client higher layer MAY<4> initialize the remote session for [**remote debugging**](#gt_remote-debugging) by sending the SET_PSDEBUGMODE message, as specified in section [2.2.2](#Section_3.1.4.1), to the server.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Higher-Layer Triggered Events
 
-- When the client sends a SET_PSDEBUGMODE message (section [2.2.2](#Section_2.2.2)) to the server, the server uses the message argument value **Debugger_Mode** to update its state.
-- When the client sends a SET_PSDEBUGGERACTION message (section [2.2.3](#Section_2.2.3)) to the server, the server uses the message argument value **Resume_Action** to update its state.
+- When the client sends a SET_PSDEBUGMODE message (section [2.2.2](#Section_3.1.4.1)) to the server, the server uses the message argument value **Debugger_Mode** to update its state.
+- When the client sends a SET_PSDEBUGGERACTION message (section [2.2.3](#Section_3.2.4.2)) to the server, the server uses the message argument value **Resume_Action** to update its state.
 - When the client sends a GET_PSDEBUGGERSTOPARGS message (section [2.2.4](#Section_2.2.4)) to the server, the server returns the current **Debugger_Stop_Context** data to the client via the PSRP pipeline command infrastructure specified in [MS-PSRP](../MS-PSRP/MS-PSRP.md) section 2.2.2.10 and section 2.2.3.12.
-- When the client sends a SET_PSDEBUGGERSTEPMODE message (section [2.2.5](#Section_3.1.4.4)) to the server, the server uses the message argument value **Debugger_Step_Mode** to update its state.
-- When the client sends a SET_PSUNHANDLEDBREAKPOINTMODE message (section [2.2.6](#Section_3.1.4.5)) to the server, the server uses the message argument value **Debugger_UnhandledBreakpoint_Mode** to update its state.
+- When the client sends a SET_PSDEBUGGERSTEPMODE message (section [2.2.5](#Section_3.2.4.4)) to the server, the server uses the message argument value **Debugger_Step_Mode** to update its state.
+- When the client sends a SET_PSUNHANDLEDBREAKPOINTMODE message (section [2.2.6](#Section_2.2.6)) to the server, the server uses the message argument value **Debugger_UnhandledBreakpoint_Mode** to update its state.
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Message Processing Events and Sequencing Rules
 
@@ -405,25 +405,25 @@ This protocol is initialized when a [**remote session**](#gt_remote-session) is 
 ### 3.2.3 Higher-Layer Triggered Events
 
 - When the [**remote session**](#gt_remote-session) is first established, the server MUST send a REMOTE_DEBUGGER_STATE message (section [2.2.7](#Section_2.2.7)) to the client.
-- When the server receives the SET_PSDEBUGMODE message (section [2.2.2](#Section_2.2.2)) from the client, it MUST set the server **Debugger_Mode** state.
+- When the server receives the SET_PSDEBUGMODE message (section [2.2.2](#Section_3.1.4.1)) from the client, it MUST set the server **Debugger_Mode** state.
 - When server [**breakpoint**](#gt_breakpoint) state changes in the remote session, the server MUST send a REMOTE_DEBUGGER_BREAKPOINT_UPDATED_EVENT message (section [2.2.8](#Section_3.2.4.7)) to the client.
 - When code execution is halted through [**debugger**](#gt_debugger) action in the remote session, the server MUST send a REMOTE_DEBUGGER_STOP_EVENT message (section [2.2.9](#Section_2.2.9)) to the client.
-- When the server receives the SET_PSDEBUGGERACTION message (section [2.2.3](#Section_2.2.3)) from the client, it MUST set the server **Resume_Action** state.
+- When the server receives the SET_PSDEBUGGERACTION message (section [2.2.3](#Section_3.2.4.2)) from the client, it MUST set the server **Resume_Action** state.
 - When the server receives the GET_PSDEBUGGERSTOPARGS message (section [2.2.4](#Section_2.2.4)) from the client, it MUST return the server **Debugger_Stop_Context** information.
-- When the server receives the SET_PSDEBUGGERSTEPMODE message (section [2.2.5](#Section_3.1.4.4)) from the client, it MUST set the **Debugger_Step_Mode** state.
-- When the server receives the SET_PSUNHANDLEDBREAKPOINTMODE message (section [2.2.6](#Section_3.1.4.5)) from the client, it MUST set the **Debugger_UnhandledBreakpoint_Mode** state.
+- When the server receives the SET_PSDEBUGGERSTEPMODE message (section [2.2.5](#Section_3.2.4.4)) from the client, it MUST set the **Debugger_Step_Mode** state.
+- When the server receives the SET_PSUNHANDLEDBREAKPOINTMODE message (section [2.2.6](#Section_2.2.6)) from the client, it MUST set the **Debugger_UnhandledBreakpoint_Mode** state.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 SET_PSDEBUGMODE Message
 
-When the server receives this message, it MUST update its **Debugger_Mode** state as provided by the message argument specified in section [2.2.2](#Section_2.2.2).
+When the server receives this message, it MUST update its **Debugger_Mode** state as provided by the message argument specified in section [2.2.2](#Section_3.1.4.1).
 
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 SET_PSDEBUGGERACTION Message
 
-When the server receives this message, it MUST update its **Resume_Action** state as provided by the message argument specified in section [2.2.3](#Section_2.2.3).
+When the server receives this message, it MUST update its **Resume_Action** state as provided by the message argument specified in section [2.2.3](#Section_3.2.4.2).
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 GET_PSDEBUGGERSTOPARGS Message
@@ -433,12 +433,12 @@ When the server receives this message, it MUST return a **Debugger_Stop_Context*
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 SET_PSDEBUGGERSTEPMODE Message
 
-When the server receives this message, it MUST update its **Debugger_Step_Mode** state as provided by the message argument specified in section [2.2.5](#Section_3.1.4.4).
+When the server receives this message, it MUST update its **Debugger_Step_Mode** state as provided by the message argument specified in section [2.2.5](#Section_3.2.4.4).
 
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 SET_PSUNHANDLEDBREAKPOINTMODE Message
 
-When the server receives this message, it MUST update its **Debugger_UnhandledBreakpoint_Mode** state as provided by the message argument specified in section [2.2.6](#Section_3.1.4.5).
+When the server receives this message, it MUST update its **Debugger_UnhandledBreakpoint_Mode** state as provided by the message argument specified in section [2.2.6](#Section_2.2.6).
 
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 REMOTE_DEBUGGER_STATE Message

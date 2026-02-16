@@ -516,7 +516,7 @@ The Windows Management Instrumentation Remote Protocol is implemented as a three
 
 Figure 1: Windows Management Instrumentation Remote Protocol architecture
 
-At layer 3, the Providers are designed to interact locally with WMI Management Data Sources. Providers implement abstract interface as specified in section [3.1.4.17](#Section_3.1.4.17.7). Windows Management Instrumentation Remote Protocol management data sources are designed to interact locally with [**manageable entities**](#gt_manageable-entity). Layer 2 supports the core of the Windows Management Instrumentation Remote Protocol service and is called the CIM Object Manager (CIMOM). CIMOM interacts with CIM database for storing or accessing CIM class and CIM instances that are [**static CIM object**](#gt_static-cim-object); CIM providers for storing or accessing CIM class and CIM instances that are dynamic from the [DMTF-DSP0004]. WMI DCOM Client Interfaces in Layer 1 and WMI DCOM Server Interfaces in Layer 2 implement the [**Distributed Component Object Model**](#gt_distributed-component-object-model-dcom) interfaces (as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md)]) that are used by the Windows Management Instrumentation Remote Protocol to communicate over the network between Windows Management Instrumentation Remote Protocol [**clients**](#gt_client) and [**servers**](#gt_server). This layer is the only layer that communicates over the network. Network communication is achieved by using the Distributed Component Object Model (DCOM) Remote Protocol and a set of Windows Management Instrumentation Remote Protocol DCOM interfaces, as specified in section [3.1.4](#Section_3.1.4).
+At layer 3, the Providers are designed to interact locally with WMI Management Data Sources. Providers implement abstract interface as specified in section [3.1.4.17](#Section_3.1.4.17.4). Windows Management Instrumentation Remote Protocol management data sources are designed to interact locally with [**manageable entities**](#gt_manageable-entity). Layer 2 supports the core of the Windows Management Instrumentation Remote Protocol service and is called the CIM Object Manager (CIMOM). CIMOM interacts with CIM database for storing or accessing CIM class and CIM instances that are [**static CIM object**](#gt_static-cim-object); CIM providers for storing or accessing CIM class and CIM instances that are dynamic from the [DMTF-DSP0004]. WMI DCOM Client Interfaces in Layer 1 and WMI DCOM Server Interfaces in Layer 2 implement the [**Distributed Component Object Model**](#gt_distributed-component-object-model-dcom) interfaces (as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md)]) that are used by the Windows Management Instrumentation Remote Protocol to communicate over the network between Windows Management Instrumentation Remote Protocol [**clients**](#gt_client) and [**servers**](#gt_server). This layer is the only layer that communicates over the network. Network communication is achieved by using the Distributed Component Object Model (DCOM) Remote Protocol and a set of Windows Management Instrumentation Remote Protocol DCOM interfaces, as specified in section [3.1.4](#Section_3.2.4).
 
 ![Clients can be local or remote from the server](media/image2.png)
 
@@ -531,7 +531,7 @@ The client can call the server in one of the following ways:
 - Synchronous calls
 - Semisynchronous calls
 - Asynchronous calls
-The server APIs for synchronous and semisynchronous APIs are the same, but the call is executed synchronously if the flags do not contain WBEM_FLAG_RETURN_IMMEDIATELY. If the flag WBEM_FLAG_RETURN_IMMEDIATELY is specified, the call is executed semisynchronously. Examples of such APIs include [IWbemServices::GetObject (section 3.1.4.3.4)](#Section_3.1.4.3.5), [IWbemServices::PutClass (section 3.1.4.3.6)](#Section_3.1.4.3.6), and so on.
+The server APIs for synchronous and semisynchronous APIs are the same, but the call is executed synchronously if the flags do not contain WBEM_FLAG_RETURN_IMMEDIATELY. If the flag WBEM_FLAG_RETURN_IMMEDIATELY is specified, the call is executed semisynchronously. Examples of such APIs include [IWbemServices::GetObject (section 3.1.4.3.4)](#Section_3.1.4.3.5), [IWbemServices::PutClass (section 3.1.4.3.6)](#Section_3.1.4.3.7), and so on.
 
 The IWbemServices methods that end with Async are asynchronous counterparts for their synchronous APIs. Example of async APIs are [IWbemServices::GetObjectAsync (section 3.1.4.3.5)](#Section_3.1.4.3.5), [IWbemServices::PutClassAsync (section 3.1.4.3.7)](#Section_3.1.4.3.7), and so on
 
@@ -571,13 +571,13 @@ The Windows Management Instrumentation Remote Protocol implementation is designe
 
 This document covers versioning issues in the following areas. The Windows Management Instrumentation Remote Protocol does explicit negotiation as follows:
 
-- The client of this protocol uses the mechanism, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 1.7, to discover which interfaces are supported by the exported object and to interpret the E_NOINTERFACE result, as specified in [MS-DCOM] section 1.7. The client then adjusts its behavior based on the availability of the requested interface, as specified in sections [3.2.3](#Section_3.1.3) and [3.2.4.2.8](#Section_3.2.4.2.8).
+- The client of this protocol uses the mechanism, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 1.7, to discover which interfaces are supported by the exported object and to interpret the E_NOINTERFACE result, as specified in [MS-DCOM] section 1.7. The client then adjusts its behavior based on the availability of the requested interface, as specified in sections [3.2.3](#Section_3.2.3) and [3.2.4.2.8](#Section_3.2.4.2.8).
 - The protocol uses return codes as a capability discovery mechanism; the client interprets them as a capability negotiation, as specified in section [3.2.4.1.1](#Section_3.2.4.1.1).
 - The protocol uses return values and parameters to negotiate the locale capabilities of the server as specified in section 3.2.3.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-In order to extend the [**CIM**](#gt_common-information-model-cim) schema using the Windows Management Instrumentation Remote Protocol, vendors MUST use operations as specified in section [3.1.4.3](#Section_3.1.4.3.23).
+In order to extend the [**CIM**](#gt_common-information-model-cim) schema using the Windows Management Instrumentation Remote Protocol, vendors MUST use operations as specified in section [3.1.4.3](#Section_3.1.4.3.13).
 
 This protocol uses HRESULT values as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Vendors can define their own HRESULT values, provided they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
 
@@ -1079,7 +1079,7 @@ MACHINENAME = <STRING-IDENTIFIER> / DOT
 
 Codes that are returned by the protocol are represented as an HRESULT, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
-The HRESULT values that are documented in the following table are interpreted by the protocol through a specific set of interface methods, as specified in sections [3.1.4.3](#Section_3.1.4.3.23), [3.1.4.4.2](#Section_3.1.4.4.2), and [3.2.4.1.1](#Section_3.2.4.1.1).
+The HRESULT values that are documented in the following table are interpreted by the protocol through a specific set of interface methods, as specified in sections [3.1.4.3](#Section_3.1.4.3.13), [3.1.4.4.2](#Section_3.1.4.4.2), and [3.2.4.1.1](#Section_3.2.4.1.1).
 
 The severity bit of HRESULT MUST be interpreted as specified in [MS-ERREF] section 2.1. HRESULT errors are not recoverable by the protocol. HRESULT successes, other than the ones specified in the following table, MUST be considered as equal to WBEM_S_NO_ERROR.
 
@@ -1242,11 +1242,11 @@ WBEM_FLAG_STRONG_VALIDATION = 0x100000
 
 **WBEM_FLAG_RETURN_IMMEDIATELY:** This flag causes the call to return without waiting for the operation to complete. The call result parameter contains the IWbemCallResult object by using the status of the operation that can be retrieved.
 
-**WBEM_FLAG_FORWARD_ONLY:** This flag causes a forward-only enumerator, [IEnumWbemClassObject, (section 3.1.4.4)](#Section_3.1.4.4.5), to be returned. Forward-only enumerators are typically much faster and use less memory than conventional enumerators; however, they do not allow calls to [IEnumWbemClassObject::Clone](#Section_3.1.4.4.4) or [IEnumWbemClassObject::Reset](#Section_3.1.4.4.1).
+**WBEM_FLAG_FORWARD_ONLY:** This flag causes a forward-only enumerator, [IEnumWbemClassObject, (section 3.1.4.4)](#Section_3.1.4.4), to be returned. Forward-only enumerators are typically much faster and use less memory than conventional enumerators; however, they do not allow calls to [IEnumWbemClassObject::Clone](#Section_3.1.4.4.4) or [IEnumWbemClassObject::Reset](#Section_3.1.4.4.1).
 
 **WBEM_FLAG_NO_ERROR_OBJECT:** This flag MUST NOT be set, and MUST be ignored on receipt.
 
-**WBEM_FLAG_SEND_STATUS:** This flag registers a request with WMI to receive intermediate status reports through the client implementation of [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2), if supported by the server implementation.
+**WBEM_FLAG_SEND_STATUS:** This flag registers a request with WMI to receive intermediate status reports through the client implementation of [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2), if supported by the server implementation.
 
 **WBEM_FLAG_ENSURE_LOCATABLE:** This flag ensures that any returned objects have enough information in them so that system properties, such as __PATH, __RELPATH, and __SERVER,<1> are non-NULL.
 
@@ -1279,7 +1279,7 @@ WBEM_STATUS_PROGRESS = 2
 
 } WBEM_STATUS_TYPE;
 
-**WBEM_STATUS_COMPLETE:** When the WMI operation is completed, WMI calls [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) with WBEM_STATUS_COMPLETE.
+**WBEM_STATUS_COMPLETE:** When the WMI operation is completed, WMI calls [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) with WBEM_STATUS_COMPLETE.
 
 **WBEM_STATUS_REQUIREMENTS:** This flag MUST NOT be set, and MUST be ignored on receipt.
 
@@ -1321,7 +1321,7 @@ WBEM_FLAG_PROTOTYPE = 2
 
 } WBEM_QUERY_FLAG_TYPE;
 
-**WBEM_FLAG_DEEP:** If used in [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11) or [IWbemServices::CreateClassEnumAsync](#Section_3.1.4.3.11), the WBEM_FLAG_DEEP constant causes the enumeration to return all the [**subclasses**](#gt_fbb1e623-a709-400d-8d4a-85df94ad58c3) in the hierarchy of a specified class but to not return the class itself.
+**WBEM_FLAG_DEEP:** If used in [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10) or [IWbemServices::CreateClassEnumAsync](#Section_3.1.4.3.11), the WBEM_FLAG_DEEP constant causes the enumeration to return all the [**subclasses**](#gt_fbb1e623-a709-400d-8d4a-85df94ad58c3) in the hierarchy of a specified class but to not return the class itself.
 
 If used in [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17) or [IWbemServices::CreateInstanceEnumAsync](#Section_3.1.4.3.17), this constant causes the enumeration to return the instances of this class and also the instances of subclasses in the hierarchy of the class.
 
@@ -1499,7 +1499,7 @@ WBEM_E_REGISTRATION_TOO_PRECISE = 0x80042002
 
 **WBEM_S_NO_ERROR:** The operation completed successfully.
 
-**WBEM_S_FALSE:** Either no more [**CIM objects**](#gt_cim-object) are available, the number of returned CIM objects is less than the number requested, or this is the end of an enumeration. This error code is returned from the [IEnumWbemClassObject](#Section_3.1.4.4.5) and [IWbemWCOSmartEnum](#Section_3.1.4.7.1) interface methods.
+**WBEM_S_FALSE:** Either no more [**CIM objects**](#gt_cim-object) are available, the number of returned CIM objects is less than the number requested, or this is the end of an enumeration. This error code is returned from the [IEnumWbemClassObject](#Section_3.1.4.4) and [IWbemWCOSmartEnum](#Section_3.1.4.7) interface methods.
 
 **WBEM_S_TIMEDOUT:** The attempt to establish the connection has expired.
 
@@ -1971,7 +1971,7 @@ long m_lBlobLength;
 
 When *m_lBlobType* is set to WBEM_BLOB_TYPE_ERROR, the *m_lBlobLength* parameter MUST be set to NULL.
 
-When *m_lBlobType* is set to WBEM_BLOB_TYPE_ENUM, it MUST contain the instance information that is represented in the [WBEM_INSTANCE_BLOB](#Section_2.2.17) format for several IWbemClassObject interface pointers being part of the refreshing result.
+When *m_lBlobType* is set to WBEM_BLOB_TYPE_ENUM, it MUST contain the instance information that is represented in the [WBEM_INSTANCE_BLOB](#Section_2.2.16) format for several IWbemClassObject interface pointers being part of the refreshing result.
 
 <a id="Section_2.2.16"></a>
 ### 2.2.16 WBEM_INSTANCE_BLOB Enumeration
@@ -2017,7 +2017,7 @@ WBEM_BLOB_TYPE_ENUM = 4
 <a id="Section_2.2.18"></a>
 ### 2.2.18 RefreshedInstances
 
-The RefreshedInstances packet is contained within the [WBEM_INSTANCE_BLOB](#Section_2.2.17).
+The RefreshedInstances packet is contained within the [WBEM_INSTANCE_BLOB](#Section_2.2.16).
 
 ```mermaid
 packet-beta
@@ -2044,7 +2044,7 @@ The elements of IWbemClassObject are defined in [MS-WMIO](../MS-WMIO/MS-WMIO.md)
 <a id="Section_2.2.20"></a>
 ### 2.2.20 _WBEM_REFRESH_INFO Structure
 
-The _WBEM_REFRESH_INFO structure MUST be populated by the Windows Management Instrumentation Remote Protocol service that provides the refresher information. The structure MUST be used to return to information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.2.4.5.3) interface methods.
+The _WBEM_REFRESH_INFO structure MUST be populated by the Windows Management Instrumentation Remote Protocol service that provides the refresher information. The structure MUST be used to return to information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.1.4.12) interface methods.
 
 typedef struct {
 
@@ -2065,7 +2065,7 @@ long m_lCancelId;
 <a id="Section_2.2.21"></a>
 ### 2.2.21 _WBEM_REFRESHER_ID Structure
 
-The _WBEM_REFRESHER_ID structure identifies the client that is requesting refreshing services. The structure MUST be used to return information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.2.4.5.3) interface methods.
+The _WBEM_REFRESHER_ID structure identifies the client that is requesting refreshing services. The structure MUST be used to return information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.1.4.12) interface methods.
 
 typedef struct {
 
@@ -2103,7 +2103,7 @@ long m_lType;
 <a id="Section_2.2.23"></a>
 ### 2.2.23 _WBEM_RECONNECT_RESULTS Structure
 
-The _WBEM_RECONNECT_RESULTS structure defines the status of a reconnect operation. The structure MUST be used to return information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.2.4.5.3) interface methods.
+The _WBEM_RECONNECT_RESULTS structure defines the status of a reconnect operation. The structure MUST be used to return information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.1.4.12) interface methods.
 
 typedef struct {
 
@@ -2120,7 +2120,7 @@ HRESULT m_hr;
 <a id="Section_2.2.24"></a>
 ### 2.2.24 _WBEM_RECONNECT_TYPE Enumeration
 
-The _WBEM_RECONNECT_TYPE enumeration defines possible types of remote [**CIM instances**](#gt_cim-instance). The structure MUST be used to return to information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.2.4.5.3) interface methods.
+The _WBEM_RECONNECT_TYPE enumeration defines possible types of remote [**CIM instances**](#gt_cim-instance). The structure MUST be used to return to information from [IWbemRefreshingServices (section 3.1.4.12)](#Section_3.1.4.12) interface methods.
 
 typedef enum
 
@@ -2143,7 +2143,7 @@ WBEM_RECONNECT_TYPE_LAST = 2
 <a id="Section_2.2.25"></a>
 ### 2.2.25 WBEM_REFRESH_TYPE Enumeration
 
-The WBEM_REFRESH_TYPE enumeration defines refresh types for the [_WBEM_REFRESH_INFO](#Section_2.2.28) structure.
+The WBEM_REFRESH_TYPE enumeration defines refresh types for the [_WBEM_REFRESH_INFO](#Section_2.2.26) structure.
 
 typedef enum
 
@@ -2199,7 +2199,7 @@ GUID m_Guid;
 
 **m_pTemplate:** MUST be a pointer to an [IWbemClassObject](#Section_2.2.4) interface that MUST represent a [**CIM**](#gt_common-information-model-cim) instance with all properties set to the default values as specified in [MS-WMIO](../MS-WMIO/MS-WMIO.md) section 2.2.26.
 
-**m_Guid:** MUST be a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid) created to identify this [_WBEM_REFRESH_INFO](#Section_2.2.28) object.
+**m_Guid:** MUST be a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid) created to identify this [_WBEM_REFRESH_INFO](#Section_2.2.26) object.
 
 <a id="Section_2.2.28"></a>
 ### 2.2.28 _WBEM_REFRESH_INFO_UNION Union
@@ -2259,7 +2259,7 @@ class __SystemSecurity
 <a id="Section_2.2.30.1"></a>
 #### 2.2.30.1 __SystemSecurity::GetSD
 
-The **GetSD** method gets the security descriptor in the NamespaceConnection of the namespace. This method is called using the [IWbemServices](#Section_3.1.4.3.23) interface as described in section [3.2.4.2.5](#Section_3.2.4.2.5).
+The **GetSD** method gets the security descriptor in the NamespaceConnection of the namespace. This method is called using the [IWbemServices](#Section_3.1.4.3.13) interface as described in section [3.2.4.2.5](#Section_3.2.4.2.5).
 
 void GetSD (
 
@@ -2283,7 +2283,7 @@ If the System Access Control List of the parent security descriptor is not prote
 - For each Access Control Entry of parent ACL, if CONTAINER_INHERIT_ACE bit is not set, then ignore this ACE.
 - Otherwise, append the parent ACE to the ACL in the child security descriptor. If NO_PROPAGATE_INHERIT_ACE bit is set in the parent ACE, server MUST clear the CONTAINER_INHERIT_ACE bit from the appended ACE.
 - If INHERIT_ONLY_ACE bit is set in the parent ACE, server MUST clear this bit from the appended ACE.
-This method is called using [IWbemServices](#Section_3.1.4.3.23) interface as described in section [3.2.4.2.5](#Section_3.2.4.2.5).
+This method is called using [IWbemServices](#Section_3.1.4.3.13) interface as described in section [3.2.4.2.5](#Section_3.2.4.2.5).
 
 void SetSD (
 
@@ -2298,7 +2298,7 @@ A return value of 0 indicates success. Any nonzero value indicates failure.<9>
 <a id="Section_2.2.30.3"></a>
 #### 2.2.30.3 RequiresEncryption
 
-The **RequiresEncryption** qualifier has a Boolean data type. If the **RequiresEncryption** qualifier is present and set to TRUE for the [__SystemSecurity](#Section_2.2.30.1) singleton instance, the server SHOULD set the **RequiresEncryption** flag for the containing [**CIM namespace**](#gt_cim-namespace). If **RequiresEncryption** is set, the server MUST reject the client request with authentication levels that are not equal to RPC_C_AUTHN_LEVEL_PKT_PRIVACY.<10>
+The **RequiresEncryption** qualifier has a Boolean data type. If the **RequiresEncryption** qualifier is present and set to TRUE for the [__SystemSecurity](#Section_2.2.30.2) singleton instance, the server SHOULD set the **RequiresEncryption** flag for the containing [**CIM namespace**](#gt_cim-namespace). If **RequiresEncryption** is set, the server MUST reject the client request with authentication levels that are not equal to RPC_C_AUTHN_LEVEL_PKT_PRIVACY.<10>
 
 <a id="Section_2.2.31"></a>
 ### 2.2.31 Default System Classes
@@ -2307,7 +2307,7 @@ Classes whose names begin with an underscore are termed **system classes**. WMI 
 
 **__SystemClass**: Base class from which for all of the system classes below.
 
-**__SystemSecurity**: Contains methods that let you access and modify the security settings for a namespace as specified in section [2.2.30](#Section_2.2.30.1).
+**__SystemSecurity**: Contains methods that let you access and modify the security settings for a namespace as specified in section [2.2.30](#Section_2.2.30.2).
 
 **__IndicationRelated**: Serves as a parent class for all event-related classes.
 
@@ -2460,7 +2460,7 @@ The server MUST maintain the following information:
 
 **ClassInstancesTable:** A list of instances of the given CIM class.
 
-The **ClassTable** MUST include entries defining the system classes in sections [2.2.30](#Section_2.2.30.1) and [2.2.31](#Section_2.2.31). If the server supports the dynamic objects, the server MUST maintain a **ProviderTable** in the CIM database where each entry contains:
+The **ClassTable** MUST include entries defining the system classes in sections [2.2.30](#Section_2.2.30.2) and [2.2.31](#Section_2.2.31). If the server supports the dynamic objects, the server MUST maintain a **ProviderTable** in the CIM database where each entry contains:
 
 **ProviderId:** Unique Id of the provider in the system.
 
@@ -2486,7 +2486,7 @@ The **ClassTable** MUST include entries defining the system classes in sections 
 
 **EventQueryList:** A list of WQL query strings representing events that can be produced by this provider. See section [3.1.4.3.20](#Section_3.1.4.3.20) for details.
 
-**ResultSetQueries:** A list of WQL query strings; see section [3.1.4](#Section_3.1.4) for details.
+**ResultSetQueries:** A list of WQL query strings; see section [3.1.4](#Section_3.2.4) for details.
 
 **QuerySupportLevels:** An array of strings that present the query capabilities of the provider. The values MUST be the combination of zero or more of the following strings: "WQL:Associators","WQL:V1ProviderDefined","WQL:UnarySelect","WQL:References".<14>
 
@@ -2502,7 +2502,7 @@ The **ClassTable** MUST include entries defining the system classes in sections 
 
 **WbemCallResultTable:** A table to store information about pending single-result semisynchronous operations (see section [3.2.4.2.7](#Section_3.2.4.2.7) for a list of single-result semisynchronous operations). Each entry in this table corresponds to one semisynchronous call, where each entry contains the following:
 
-**WbemCallResultPointer:** A pointer to a server-created [IWbemCallResult](#Section_3.1.4.5.3) object.
+**WbemCallResultPointer:** A pointer to a server-created [IWbemCallResult](#Section_3.1.4.5) object.
 
 **FinalResult:** An HRESULT to store the result status of the call.
 
@@ -2532,7 +2532,7 @@ The following ADM elements are used to store information about semisynchronous c
 
 **ClientSecurityContext:** The security context of the client.
 
-**EnumWbemClassObjectTable:** A table to store information about the pending result of semisynchronous operations. Each entry in this table either corresponds to one semisynchronous call or is a clone of another [IEnumWbemClassObject](#Section_3.1.4.4.5) instance. Each entry contains the following:
+**EnumWbemClassObjectTable:** A table to store information about the pending result of semisynchronous operations. Each entry in this table either corresponds to one semisynchronous call or is a clone of another [IEnumWbemClassObject](#Section_3.1.4.4) instance. Each entry contains the following:
 
 **EnumWbemClassObjectPointer:** A pointer to SemiSinkResultSetObject.
 
@@ -2557,18 +2557,18 @@ The server MUST complete the requested operation before returning from the synch
 <a id="Section_3.1.1.1.2"></a>
 ##### 3.1.1.1.2 Semisynchronous Calls
 
-The server MUST start the requested operation and MUST return the appropriate response without waiting for the operation to complete. If the requested operation fails to start, the server MUST return an error as a return value of the method and MUST NOT return [IEnumWbemClassObject](#Section_3.1.4.4.5) or [IWbemCallResult](#Section_3.1.4.5.3) as an out parameter.
+The server MUST start the requested operation and MUST return the appropriate response without waiting for the operation to complete. If the requested operation fails to start, the server MUST return an error as a return value of the method and MUST NOT return [IEnumWbemClassObject](#Section_3.1.4.4) or [IWbemCallResult](#Section_3.1.4.5) as an out parameter.
 
 <a id="Section_3.1.1.1.2.1"></a>
 ###### 3.1.1.1.2.1 Semisynchronous Operations Returning Multiple Objects
 
-For the requested operation to begin successfully, the server MUST create and return an object of type [IEnumWbemClassObject](#Section_3.1.4.4.5) for the following methods, and the return value MUST be WBEM_S_NO_ERROR, as specified in section [2.2.11](#Section_2.2.11). When the client calls the methods of IEnumWbemClassObject, the IEnumWbemClassObject method MUST deliver the results of the requested operation. The enumeration of IEnumWbemClassObject MUST return the same result set as the corresponding [**synchronous operation**](#gt_synchronous-operation).
+For the requested operation to begin successfully, the server MUST create and return an object of type [IEnumWbemClassObject](#Section_3.1.4.4) for the following methods, and the return value MUST be WBEM_S_NO_ERROR, as specified in section [2.2.11](#Section_2.2.11). When the client calls the methods of IEnumWbemClassObject, the IEnumWbemClassObject method MUST deliver the results of the requested operation. The enumeration of IEnumWbemClassObject MUST return the same result set as the corresponding [**synchronous operation**](#gt_synchronous-operation).
 
 Before returning WBEM_S_NO_ERROR, the server MUST create an instance of the **SemiSinkResultSetObject** ADM element and initialize CurrentTotalCount to zero, OperationFinished to FALSE, and RefCount to 1. The server MUST also copy the *lFlags* parameter of the operation. The server MUST create an entry in **EnumWbemClassObjectTable** for IEnumWbemClassObject by storing a pointer to **SemiSinkResultSetObject** created for this operation in ResultSetPointer. The server initializes CurrentIndex of **EnumWbemClassObjectTable** to start the index of **ResultArray** and stores the security context of the client in **ClientSecurityContext**.
 
 - [IWbemServices::ExecQuery (section 3.1.4.3.18)](#Section_3.1.4.3.18)
 - [IWbemServices::CreateInstanceEnum (section 3.1.4.3.16)](#Section_3.1.4.3.17)
-- [IWbemServices::CreateClassEnum (section 3.1.4.3.10)](#Section_3.1.4.3.11)
+- [IWbemServices::CreateClassEnum (section 3.1.4.3.10)](#Section_3.1.4.3.10)
 - [IWbemServices::ExecNotificationQuery (section 3.1.4.3.20)](#Section_3.1.4.3.20)
 The server stores the results of the operation in **SemiSinkResultSetObject** and tracks the client fetching the results by using the entry in **EnumWbemClassObjectTable**.
 
@@ -2582,23 +2582,23 @@ The server updates the **SemiSinkResultSetObject EnumWbemClassObjectTable** entr
 <a id="Section_3.1.1.1.2.2"></a>
 ###### 3.1.1.1.2.2 Semisynchronous Operations Returning a Single Object
 
-If the requested operation begins successfully, the server MUST return an [IWbemCallResult](#Section_3.1.4.5.3) object for the following methods, and the return value MUST be WBEM_S_NO_ERROR. When the client calls the methods of IWbemCallResult, IWbemCallResult MUST deliver the result of the requested operation.
+If the requested operation begins successfully, the server MUST return an [IWbemCallResult](#Section_3.1.4.5) object for the following methods, and the return value MUST be WBEM_S_NO_ERROR. When the client calls the methods of IWbemCallResult, IWbemCallResult MUST deliver the result of the requested operation.
 
 Before returning WBEM_S_NO_ERROR, the server MUST create an entry in **WbemCallResultTable** by keeping a reference to IEnumWbemClassObject in **WbemCallResultPointer** and initializing **ResultObject**, **ResultString**, and **ResultService** to NULL. The server MUST set **OperationFinished** to FALSE.
 
 - [IWbemServices::OpenNamespace (section 3.1.4.3.1)](#Section_3.1.4.3.1)
-- [IWbemServices::PutInstance (section 3.1.4.3.12)](#Section_4.2.3.2)
+- [IWbemServices::PutInstance (section 3.1.4.3.12)](#Section_3.1.4.3.13)
 - [IWbemServices::GetObject (section 3.1.4.3.4)](#Section_3.1.4.3.5)
-- [IWbemServices::PutClass (section 3.1.4.3.6)](#Section_3.1.4.3.6)
-- [IWbemServices::DeleteClass (section 3.1.4.3.8)](#Section_3.1.4.3.8)
+- [IWbemServices::PutClass (section 3.1.4.3.6)](#Section_3.1.4.3.7)
+- [IWbemServices::DeleteClass (section 3.1.4.3.8)](#Section_3.1.4.3.9)
 - [IWbemServices::DeleteInstance (section 3.1.4.3.14)](#Section_3.1.4.3.15)
-- [IWbemServices::ExecMethod (section 3.1.4.3.22)](#Section_3.1.4.3.23)
+- [IWbemServices::ExecMethod (section 3.1.4.3.22)](#Section_3.1.4.3.22)
 The server sets **ResultObject**, **ResultString**, and **ResultService** as the results become available for the respective operations. When an operation is finished, the server MUST set **FinalResult** with the operation result and set **OperationFinished** to TRUE. The server MUST remove the entry for this operation from **WbemCallResultTable** when the client releases its last reference of **IEnumWbemClassObject**.
 
 <a id="Section_3.1.1.1.3"></a>
 ##### 3.1.1.1.3 Asynchronous calls
 
-The server MUST start the requested operation and MUST return the appropriate response without waiting for the completion of the operation. If starting the requested operation fails, the server MUST return the error as a return value of the method; MUST NOT keep a reference to [IWbemObjectSink](#Section_3.2.4.1) (passed as a response handler); and MUST NOT call [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) or [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2).
+The server MUST start the requested operation and MUST return the appropriate response without waiting for the completion of the operation. If starting the requested operation fails, the server MUST return the error as a return value of the method; MUST NOT keep a reference to [IWbemObjectSink](#Section_3.1.4.2.2) (passed as a response handler); and MUST NOT call [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) or [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2).
 
 Section [3.2.4.2.9](#Section_3.2.4.2.9) lists the asynchronous method calls. Before starting an asynchronous operation, the server method MUST create an entry in AsyncOperationTable, storing a reference to the client's IWbemObjectSink in ClientSyncPointer, and set other fields (**CallbackInprogress**, **CallCancelled**, and **SetStatusWithFinalResultCalled**) to FALSE.
 
@@ -2610,7 +2610,7 @@ The server MAY call IWbemObjectSink::SetStatus multiple times when it executes t
 
 Calls made by the server into the client-provided IWbemObjectSink interface SHOULD use an authentication level that is greater than NONE. If that fails, and if the **UnsecAppAccessControlDefault** flag is set to false and **AllowAnonymousCallback** flag is set to true, the server SHOULD retry with an authentication level of NONE.<16> The server MUST try to make the calls by using the machine principal name.
 
-The total number of client operations is limited by **MaxRequestLimit** as described in section [3.1.4.3](#Section_3.1.4.3.23).
+The total number of client operations is limited by **MaxRequestLimit** as described in section [3.1.4.3](#Section_3.1.4.3.13).
 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 Localization Support
@@ -2646,7 +2646,7 @@ When a client deletes a class object and the **WBEM_FLAG_USE_AMENDED_QUALIFIERS*
 
 The server MUST use timers to ensure that the conversation between itself and its clients remains active. The Windows Management Instrumentation Remote Protocol uses the following timers:
 
-**Sink timer:** Each [**asynchronous operation**](#gt_asynchronous-operation) has a corresponding timer, which MUST be initialized to 30 seconds when the server calls the client back using [IWbemObjectSink](#Section_3.2.4.1). The timer MUST be reset when the call completes.
+**Sink timer:** Each [**asynchronous operation**](#gt_asynchronous-operation) has a corresponding timer, which MUST be initialized to 30 seconds when the server calls the client back using [IWbemObjectSink](#Section_3.1.4.2.2). The timer MUST be reset when the call completes.
 
 **Backup timer:** Each [IWbemBackupRestoreEx](#Section_3.1.4.11) has a corresponding timer, which MUST be initialized to 15 minutes when the server receives an [IWbemBackupRestoreEx::Pause](#Section_3.1.4.11.1). The timer MUST be reset when the server receives an [IWbemBackupRestoreEx::Resume](#Section_3.1.4.11.2).
 
@@ -2710,7 +2710,7 @@ If the server is expected to set the value of the output parameter, but the outp
 
 For all methods, the server MUST enforce that the DCOM security level is at least at the RPC_C_AUTHN_LEVEL_CONNECT level, and SHOULD be RPC_C_AUTHN_LEVEL_PKT_INTEGRITY; the server MUST also evaluate the security principal rights to open a [**CIM namespace**](#gt_cim-namespace).<19> The server MUST fail the operation if the security requirements are not met.
 
-For all [IwbemServices](#Section_3.1.4.3.23) methods, the server MUST verify that the client has been granted the access rights specified in the method description, by testing that those rights are included in **GrantedAccess**.
+For all [IwbemServices](#Section_3.1.4.3.13) methods, the server MUST verify that the client has been granted the access rights specified in the method description, by testing that those rights are included in **GrantedAccess**.
 
 For all methods, if the server cannot find the **NamespaceConnection** associated with IWbemServices in the **NamespaceConnectionTable** (either because the table no longer contains a row for the namespace or because the **NamespaceConnection** was replaced during IWbemBackupRestore::Restore), the server MUST return WBEM_E_INVALID_NAMESPACE.
 
@@ -2723,7 +2723,7 @@ If **InstanceProviderId** is NULL, the server MUST forward the request to the [*
 - If its value is neither 32 nor 64, the server MUST return WBEM_E_INVALID_PARAMETER.
 - If RequiredArchitecture is present and is set to TRUE, the server MUST find the ProviderEntryPoint in ProviderTable corresponding to ProviderArchitecture and InstanceProviderId.
 - If RequiredArchitecture is not present or set to FALSE, the server MUST find the **ProviderEntryPoint** in ProviderTable corresponding to ProviderArchitecture and **InstanceProviderId**. If there is no **ProviderEntryPoint** found, the server MUST find **ProviderEntryPoint** for the given **InstanceProviderId** ignoring the ProviderArchitecture.
-If the server cannot find **ProviderEntryPoint**, it MUST return WBEM_E_PROVIDER_LOAD_FAILURE. If the **ProviderEntryPoint** is found, the server MUST use the abstract interface defined in [3.1.4.17](#Section_3.1.4.17.7) to communicate with the provider.
+If the server cannot find **ProviderEntryPoint**, it MUST return WBEM_E_PROVIDER_LOAD_FAILURE. If the **ProviderEntryPoint** is found, the server MUST use the abstract interface defined in [3.1.4.17](#Section_3.1.4.17.4) to communicate with the provider.
 
 For all methods that create, query, update, or delete the [**CIM class**](#gt_cim-class) where **InstanceProviderId** is not zero, the server MUST go through each of the [**WQL**](#gt_wmi-query-language-wql) queries in **ResultSetQueries** and evaluate the WHERE clause. If the expression evaluates to TRUE for the given CIM class (that is, the provider supports the CIM class), then the server MUST proceed with the rest of the processing for the method as specified in the method-specific processing rules in 3.1.4. If FALSE, the server MUST return WBEM_E_PROVIDER_NOT_CAPABLE.
 
@@ -2735,7 +2735,7 @@ If the server cannot find **ProviderEntryPoint**, it MUST return WBEM_E_PROVIDER
 
 For all methods where the request is sent to the provider, the provider MAY choose to perform additional authentication or authorization, or perform the operations within the context of security principal in which **ProviderEntryPoint** was called<21>
 
-Specific rules related to creation, deletion, navigation, and persistence of the namespaces are covered as part of section [3.1.4.18](#Section_3.1.4.18.3).
+Specific rules related to creation, deletion, navigation, and persistence of the namespaces are covered as part of section [3.1.4.18](#Section_3.1.4.18.1).
 
 The server SHOULD fail the operation and return WBEM_E_ACCESS_DENIED if the namespace has the **RequiresEncryption** flag set and if the [**DCOM**](#gt_distributed-component-object-model-dcom) security level is lower than RPC_C_AUTHN_LEVEL_PKT_PRIVACY.<22>
 
@@ -2774,7 +2774,7 @@ Methods in RPC Opnum Order
 | [WBEMLogin](#Section_3.1.4.1.3) | Opnum: 5 |
 | [NTLMLogin](#Section_3.1.4.1.4) | Opnum: 6 |
 
-The object that exports this interface also implements the [IWbemLoginClientID](#Section_3.1.4.8.1) and [IWbemLoginHelper](#Section_3.1.4.9) interfaces. The IRemUnknown and IRemUnknown2 interfaces, specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), MUST be used to manage the interfaces exposed by the object. The object MUST be uniquely identified with the [**CLSID**](#gt_class-identifier-clsid) {8BC3F05E-D86B-11D0-A075-00C04FB68820}.
+The object that exports this interface also implements the [IWbemLoginClientID](#Section_3.1.4.8) and [IWbemLoginHelper](#Section_3.1.4.9) interfaces. The IRemUnknown and IRemUnknown2 interfaces, specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), MUST be used to manage the interfaces exposed by the object. The object MUST be uniquely identified with the [**CLSID**](#gt_class-identifier-clsid) {8BC3F05E-D86B-11D0-A075-00C04FB68820}.
 
 ![The IWbemLevel1Login interface](media/image4.png)
 
@@ -2783,7 +2783,7 @@ Figure 4: The IWbemLevel1Login interface
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 IWbemLevel1Login::EstablishPosition (Opnum 3)
 
-The IWbemLevel1Login::EstablishPosition method does not perform any action. The return value and output parameter are used in locale negotiation as specified in section [3.2.3](#Section_3.1.3).
+The IWbemLevel1Login::EstablishPosition method does not perform any action. The return value and output parameter are used in locale negotiation as specified in section [3.2.3](#Section_3.2.3).
 
 HRESULT EstablishPosition(
 
@@ -2893,13 +2893,13 @@ HRESULT NTLMLogin(
 
 );
 
-**wszNetworkResource:** The string MUST represent the namespace on the server to which the returned [IWbemServices](#Section_3.1.4.3.23) object is associated. This parameter MUST NOT be NULL and MUST match the namespace syntax as specified in section [2.2.2](#Section_2.2.2).
+**wszNetworkResource:** The string MUST represent the namespace on the server to which the returned [IWbemServices](#Section_3.1.4.3.13) object is associated. This parameter MUST NOT be NULL and MUST match the namespace syntax as specified in section [2.2.2](#Section_2.2.2).
 
 **wszPreferredLocale:** MUST be a pointer to a string that MUST specify the locale values in the preferred order, separated by a comma. If the client does not supply it, the server creates a default list which is implementation-specific.<29> Each locale format SHOULD conform to the WMI locale format, as specified in [WMI Locale Formats (section 2.2.29)](#Section_2.2.29). Any subsequent calls that request [**CIM localizable information**](#gt_cim-localizable-information) ([WBEM_FLAG_USE_AMENDED_QUALIFIERS](#Section_2.2.6)) SHOULD return the localized information in the order of preference if the information is available in the [**LCID**](#gt_language-code-identifier-lcid).<30> The server MUST save this information in **ClientPreferredLocales**.
 
 **lFlags:** MUST be 0. The server SHOULD consider any other value as not valid and return WBEM_E_INVALID_PARAMETER; otherwise, the server behavior is implementation-specific.<31>
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information sent by the client. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information sent by the client. If *pCtx* is NULL, the parameter MUST be ignored.
 
 **ppNamespace:** If the call succeeds, *ppNamespace* MUST return a pointer to an IWbemServices [**interface pointer**](#gt_interface-pointer). This parameter MUST be set to NULL when an error occurs.
 
@@ -2940,8 +2940,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Indicate](#Section_3.1.4.2.1) | The [**server**](#gt_server) receives the [IWbemClassObject](#Section_2.2.4) interfaces, which are sent in an [ObjectArray](#Section_2.2.14) structure. These objects are the result of an [IWbemServices](#Section_3.1.4.3.23) asynchronous method call that was started with this sink as the response handler. Opnum: 3 |
-| [SetStatus](#Section_3.2.4.1.2) | The server receives either a completion status code or information about the progress of the operation that was started with this sink as the response handler. Opnum: 4 |
+| [Indicate](#Section_3.1.4.2.1) | The [**server**](#gt_server) receives the [IWbemClassObject](#Section_2.2.4) interfaces, which are sent in an [ObjectArray](#Section_2.2.14) structure. These objects are the result of an [IWbemServices](#Section_3.1.4.3.13) asynchronous method call that was started with this sink as the response handler. Opnum: 3 |
+| [SetStatus](#Section_3.1.4.2.2) | The server receives either a completion status code or information about the progress of the operation that was started with this sink as the response handler. Opnum: 4 |
 
 <a id="Section_3.1.4.2.1"></a>
 ##### 3.1.4.2.1 IWbemObjectSink::Indicate (Opnum 3) Server details
@@ -3020,13 +3020,13 @@ Methods in RPC Opnum Order
 | [QueryObjectSink](#Section_3.1.4.3.3) | Obtains a notification handler that allows the client to send events directly to the server. Opnum: 5 |
 | [GetObject](#Section_3.1.4.3.5) | Retrieves a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance). Opnum: 6 |
 | [GetObjectAsync](#Section_3.1.4.3.5) | Asynchronous version of the IWbemServices::GetObject method. Opnum: 7 |
-| [PutClass](#Section_3.1.4.3.6) | Creates a new class or updates an existing class in the namespace associated with the current IWbemServices interface. Opnum: 8 |
+| [PutClass](#Section_3.1.4.3.7) | Creates a new class or updates an existing class in the namespace associated with the current IWbemServices interface. Opnum: 8 |
 | [PutClassAsync](#Section_3.1.4.3.7) | Asynchronous version of the IWbemServices::PutClass method. Opnum: 9 |
-| [DeleteClass](#Section_3.1.4.3.8) | Deletes a specified class from the namespace associated with the current IWbemServices interface. Opnum: 10 |
+| [DeleteClass](#Section_3.1.4.3.9) | Deletes a specified class from the namespace associated with the current IWbemServices interface. Opnum: 10 |
 | [DeleteClassAsync](#Section_3645bc464427451cb1b41417b7db735c) | Asynchronous version of the IWbemServices::DeleteClass method. Opnum: 11 |
-| [CreateClassEnum](#Section_3.1.4.3.11) | Creates a class enumeration. Opnum: 12 |
+| [CreateClassEnum](#Section_3.1.4.3.10) | Creates a class enumeration. Opnum: 12 |
 | [CreateClassEnumAsync](#Section_3.1.4.3.11) | Asynchronous version of the IWbemServices::CreateClassEnum method. Opnum: 13 |
-| [PutInstance](#Section_4.2.3.2) | Creates or updates an instance of an existing class. Opnum: 14 |
+| [PutInstance](#Section_3.1.4.3.13) | Creates or updates an instance of an existing class. Opnum: 14 |
 | [PutInstanceAsync](#Section_3.1.4.3.13) | Asynchronous version of the PutInstance method. Opnum: 15 |
 | [DeleteInstance](#Section_3.1.4.3.15) | Deletes an instance of an existing class from the namespace that is pointed to by the IWbemServices interface object that is used to call the method. Opnum: 16 |
 | [DeleteInstanceAsync](#Section_0a7bdd3af8344ae6b7c4b7ab7b93b755) | Asynchronous version of the IWbemServices::DeleteInstance method. Opnum: 17 |
@@ -3036,10 +3036,10 @@ Methods in RPC Opnum Order
 | [ExecQueryAsync](#Section_2a7f47d88b2f4e1b90f3cbcfd8b841af) | Asynchronous version of the IWbemServices::ExecQuery method. Opnum: 21 |
 | [ExecNotificationQuery](#Section_3.1.4.3.20) | Server runs a query to receive events when called by a client to request subscription to the events. Opnum: 22 |
 | [ExecNotificationQueryAsync](#Section_3.1.4.3.21) | Asynchronous version of the IWbemServices::ExecNotificationQuery method. Opnum: 23 |
-| [ExecMethod](#Section_3.1.4.3.23) | Executes a [**CIM method**](#gt_cim-method) implemented by a CIM class or a [**CIM**](#gt_common-information-model-cim) instance retrieved from the IWbemServices interface. Opnum: 24 |
+| [ExecMethod](#Section_3.1.4.3.22) | Executes a [**CIM method**](#gt_cim-method) implemented by a CIM class or a [**CIM**](#gt_common-information-model-cim) instance retrieved from the IWbemServices interface. Opnum: 24 |
 | [ExecMethodAsync](#Section_3.1.4.3.23) | Asynchronous version of the IWbemServices::ExecMethod method. Opnum: 25 |
 
-IWbemServices MUST be a DCOM Remote Protocol interface. The interface MUST be uniquely identified by [**UUID**](#gt_universally-unique-identifier-uuid) {9556dc99-828c-11cf-a37e-00aa003240c7}. The object exporting this interface also implements the [IWbemRefreshingServices](#Section_3.2.4.5.3) interface, as shown in the following diagram.
+IWbemServices MUST be a DCOM Remote Protocol interface. The interface MUST be uniquely identified by [**UUID**](#gt_universally-unique-identifier-uuid) {9556dc99-828c-11cf-a37e-00aa003240c7}. The object exporting this interface also implements the [IWbemRefreshingServices](#Section_3.1.4.12) interface, as shown in the following diagram.
 
 ![The IWbemServices interface](media/image5.png)
 
@@ -3052,7 +3052,7 @@ If **IsServerPaused** flag is set to True, the server MUST return WBEM_E_SERVER_
 <a id="Section_3.1.4.3.1"></a>
 ##### 3.1.4.3.1 IWbemServices::OpenNamespace (Opnum 3)
 
-The IWbemServices::OpenNamespace method provides the client with an [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer) that is scoped to the requested namespace. The specified namespace MUST be a child namespace of the current namespace through which this method is called.
+The IWbemServices::OpenNamespace method provides the client with an [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer) that is scoped to the requested namespace. The specified namespace MUST be a child namespace of the current namespace through which this method is called.
 
 HRESULT OpenNamespace(
 
@@ -3098,7 +3098,7 @@ The output parameter MUST be based on the state of the **lFlags** parameter (whe
 | WBEM_FLAG_RETURN_IMMEDIATELY is not set. | MUST be set to NULL if the input parameter is not-NULL. | MUST be set to NULL if the input parameter is not-NULL. |
 | WBEM_FLAG_RETURN_IMMEDIATELY is set. | MUST be set to the requested IWbemCallResult interface. | MUST be set to NULL if the input parameter is not-NULL. |
 
-This parameter MUST NOT be NULL on input when WBEM_FLAG_RETURN_IMMEDIATELY equals 1. In such a case, it receives a pointer to an [IWbemCallResult](#Section_3.1.4.5.3) interface pointer.
+This parameter MUST NOT be NULL on input when WBEM_FLAG_RETURN_IMMEDIATELY equals 1. In such a case, it receives a pointer to an [IWbemCallResult](#Section_3.1.4.5) interface pointer.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR, as specified in section [2.2.11](#Section_2.2.11), to indicate the successful completion of the method.
 
@@ -3121,7 +3121,7 @@ If the *ppResult* input parameter is non-NULL, the server MUST deliver the resul
 <a id="Section_3.1.4.3.2"></a>
 ##### 3.1.4.3.2 IWbemServices::CancelAsyncCall (Opnum 4)
 
-The IWbemServices::CancelAsyncCall method cancels a currently pending asynchronous method call identified by the [IWbemObjectSink](#Section_3.2.4.1) pointer passed to the initial asynchronous method.
+The IWbemServices::CancelAsyncCall method cancels a currently pending asynchronous method call identified by the [IWbemObjectSink](#Section_3.1.4.2.2) pointer passed to the initial asynchronous method.
 
 HRESULT CancelAsyncCall(
 
@@ -3170,7 +3170,7 @@ HRESULT QueryObjectSink(
 
 The [**security principal**](#gt_security-principal) that makes the call MUST have WBEM_REMOTE_ENABLE, WBEM_ENABLE, and WBEM_FULL_WRITE accesses to the namespace; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
-In response to the IWbemServices::QueryObjectSink method, the server MUST return an [IWbemObjectSink](#Section_3.2.4.1) interface pointer in *ppResponseHandler*. The server MUST return an error if the *ppResponseHandler* is NULL or if it is unable to create the requested interface pointer.
+In response to the IWbemServices::QueryObjectSink method, the server MUST return an [IWbemObjectSink](#Section_3.1.4.2.2) interface pointer in *ppResponseHandler*. The server MUST return an error if the *ppResponseHandler* is NULL or if it is unable to create the requested interface pointer.
 
 The successful method execution MUST fill the *ppResponseHandler* parameter and MUST return WBEM_S_NO_ERROR.
 
@@ -3183,7 +3183,7 @@ The notification query is made by the client to the server by calling [IWbemServ
 <a id="Section_3.1.4.3.4"></a>
 ##### 3.1.4.3.4 IWbemServices::GetObject (Opnum 6)
 
-The IWbemServices::GetObject method retrieves a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance). This method MUST retrieve [**CIM objects**](#gt_cim-object) from the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.23) interface.
+The IWbemServices::GetObject method retrieves a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance). This method MUST retrieve [**CIM objects**](#gt_cim-object) from the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.13) interface.
 
 HRESULT GetObject(
 
@@ -3211,7 +3211,7 @@ The server MUST allow any combination of zero or more flags from the following t
 | WBEM_FLAG_RETURN_IMMEDIATELY 0x00000010 | If this bit is not set, the server MUST make the method call synchronously. If this bit is set, the server MUST make the method call semisynchronously. |
 | WBEM_FLAG_DIRECT_READ 0x00000200 | If this bit is set, the server MUST disregard any derived class when it searches the result. If this bit is not set, the server MUST consider the entire class hierarchy when it returns the result. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass for processing to the implementer of the CIM object that is referred to by *strObjectPath*. If the parameter is set to NULL, the server MUST ignore it.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass for processing to the implementer of the CIM object that is referred to by *strObjectPath*. If the parameter is set to NULL, the server MUST ignore it.
 
 **ppObject:** If the parameter is set to NULL, the server MUST ignore it. In this case, the output parameter MUST be filled according to the state of the **lFlags** parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
 
@@ -3225,7 +3225,7 @@ The server MUST allow any combination of zero or more flags from the following t
 | Flag state | Success operation | Failure operation |
 | --- | --- | --- |
 | WBEM_FLAG_RETURN_IMMEDIATELY is not set. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
-| WBEM_FLAG_RETURN_IMMEDIATELY is set. | The *ppCallResult* parameter MUST NOT be NULL upon input. If NULL, the server MUST return WBEM_E_INVALID_PARAMETER. Upon output, the parameter MUST contain the [IWbemCallResult](#Section_3.1.4.5.3) interface pointer. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
+| WBEM_FLAG_RETURN_IMMEDIATELY is set. | The *ppCallResult* parameter MUST NOT be NULL upon input. If NULL, the server MUST return WBEM_E_INVALID_PARAMETER. Upon output, the parameter MUST contain the [IWbemCallResult](#Section_3.1.4.5) interface pointer. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
 
 **Return Values:** This method MUST return an HRESULT that MUST indicate the status of the method call. The HRESULT MUST have the type and values as specified in section [2.2.11](#Section_2.2.11). The server MUST return WBEM_S_NO_ERROR (as specified in section 2.2.11) to indicate the successful completion of the method.
 
@@ -3237,7 +3237,7 @@ In response to the IWbemServices::GetObject method, the server MUST interpret *s
 
 - If found:
 - If **SupportsGet** is FALSE, the server MUST return WBEM_E_PROVIDER_NOT_CAPABLE.
-- Else the server MUST use the abstract interface specified as part of [3.1.4.17](#Section_3.1.4.17.7) to communicate with the provider, and return the appropriate results or the error code.
+- Else the server MUST use the abstract interface specified as part of [3.1.4.17](#Section_3.1.4.17.4) to communicate with the provider, and return the appropriate results or the error code.
 - If not found, the server MUST return WBEM_E_PROVIDER_NOT_FOUND.
 The successful synchronous method execution MUST provide the retrieved IWbemClassObject interface pointer in the *ppObject* parameter and MUST return WBEM_S_NO_ERROR.
 
@@ -3273,12 +3273,12 @@ The server MUST accept a combination of zero or more flags from the following ta
 | Value | Meaning |
 | --- | --- |
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD return no [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information for the CIM object, as specified in section [2.2.6](#Section_2.2.6). |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 | WBEM_FLAG_DIRECT_READ 0x00000200 | If this bit is not set, the implementer MUST consider the entire class hierarchy when it returns the result. If this bit is set, the server MUST disregard any derived class when it searches the result. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to provide to the server about the CIM object referred to by *strObjectPath*. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to provide to the server about the CIM object referred to by *strObjectPath*. If *pCtx* is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.2.4.1) interface that is implemented by the caller, where enumeration results are delivered. The parameter MUST NOT be NULL. If the parameter is NULL, the server MUST return WBEM_E_INVALID_PARAMETER.
+**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.1.4.2.2) interface that is implemented by the caller, where enumeration results are delivered. The parameter MUST NOT be NULL. If the parameter is NULL, the server MUST return WBEM_E_INVALID_PARAMETER.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -3294,11 +3294,11 @@ If successful, the server MUST create a new entry in **AsyncOperationTable** as 
 
 The following validation happens asynchronously.
 
-In response to IwbemServices::GetObjectAsync method, the server MUST interpret *strObjectPath*as defined in [[DMTF-DSP0004]](https://go.microsoft.com/fwlink/?LinkId=89848) section 8.5. If the path refers to a class, the server MUST look it up in the **ClassTable**. If found, the server MUST return an object that represents the **ClassDeclaration**. If *strObjectPath* refers to an instance, the server MUST check the **InstanceProviderId** for the class. If **InstanceProviderId** is NULL, then the server MUST look up the CIM database and return the CIM instance. If **InstanceProviderId** is not NULL, then the server MUST use the abstract interface specified as part of section [3.1.4.18](#Section_3.1.4.18.3) to communicate with the provider, and find the provider entry corresponding to the **InstanceProviderId** in the **ProviderTable**.
+In response to IwbemServices::GetObjectAsync method, the server MUST interpret *strObjectPath*as defined in [[DMTF-DSP0004]](https://go.microsoft.com/fwlink/?LinkId=89848) section 8.5. If the path refers to a class, the server MUST look it up in the **ClassTable**. If found, the server MUST return an object that represents the **ClassDeclaration**. If *strObjectPath* refers to an instance, the server MUST check the **InstanceProviderId** for the class. If **InstanceProviderId** is NULL, then the server MUST look up the CIM database and return the CIM instance. If **InstanceProviderId** is not NULL, then the server MUST use the abstract interface specified as part of section [3.1.4.18](#Section_3.1.4.18.1) to communicate with the provider, and find the provider entry corresponding to the **InstanceProviderId** in the **ProviderTable**.
 
 - If found:
 - If **SupportsGet** is FALSE, the server MUST return WBEM_E_PROVIDER_NOT_CAPABLE.
-- Else, the server MUST use the abstract interface specified in section [3.1.4.17](#Section_3.1.4.17.7) to communicate with the provider, and return the appropriate results or the error code.
+- Else, the server MUST use the abstract interface specified in section [3.1.4.17](#Section_3.1.4.17.4) to communicate with the provider, and return the appropriate results or the error code.
 - If not found, the server MUST return WBEM_E_PROVIDER_NOT_FOUND.
 The method MUST fail if the CIM object that is referred to by *strObjectPath* does not exist, if the method parameters are not valid as specified in the preceding list, or if the server is unable to execute the method. The failed method execution MUST set the output parameters to NULL and MUST return an error in the format specified in section 2.2.11.
 
@@ -3307,7 +3307,7 @@ If a class is marked by a Singleton qualifier, the server MUST treat "Class-Name
 <a id="Section_3.1.4.3.6"></a>
 ##### 3.1.4.3.6 IWbemServices::PutClass (Opnum 8)
 
-The IWbemServices::PutClass method creates a new class or updates an existing class in the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.23) interface. The server MUST NOT allow the creation of classes that have names that begin or end with an underscore because those names are reserved for system classes. If the class name does not conform to the CLASS-NAME element defined in [**WQL**](#gt_wmi-query-language-wql), the server MUST return WBEM_E_INVALID_PARAMETER.
+The IWbemServices::PutClass method creates a new class or updates an existing class in the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.13) interface. The server MUST NOT allow the creation of classes that have names that begin or end with an underscore because those names are reserved for system classes. If the class name does not conform to the CLASS-NAME element defined in [**WQL**](#gt_wmi-query-language-wql), the server MUST return WBEM_E_INVALID_PARAMETER.
 
 HRESULT PutClass(
 
@@ -3336,9 +3336,9 @@ The server MUST accept a combination of zero or more flags from the following ta
 | WBEM_FLAG_UPDATE_FORCE_MODE 0x00000040 | The server MUST update the class even if conflicting child classes exist. |
 | WBEM_FLAG_UPDATE_SAFE_MODE 0x00000020 | The server MUST update the class as long as the change does not cause any conflicts with existing child classes or instances. This flag is mutually exclusive with WBEM_FLAG_UPDATE_FORCE_MODE. If none of these flags are set, the server MUST update the class if there is no derived class, if there is no instance for that class, or if the class is unchanged. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to provide to the server about the CIM class that is referred to by the *pObject* parameter. If the *pCtx* parameter is NULL, it MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to provide to the server about the CIM class that is referred to by the *pObject* parameter. If the *pCtx* parameter is NULL, it MUST be ignored.
 
-**ppCallResult:** If the input parameter is non-NULL, the server MUST return WBEM_S_NO_ERROR and [IWbemCallResult](#Section_3.1.4.5.3) MUST deliver the result of the requested operation (regardless whether WBEM_FLAG_RETURN_IMMEDIATELY is set). The output parameter MUST be filled according to the state of the *lFlags* parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
+**ppCallResult:** If the input parameter is non-NULL, the server MUST return WBEM_S_NO_ERROR and [IWbemCallResult](#Section_3.1.4.5) MUST deliver the result of the requested operation (regardless whether WBEM_FLAG_RETURN_IMMEDIATELY is set). The output parameter MUST be filled according to the state of the *lFlags* parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
 
 | Flag state | Operation Started Successfully | Operation Failed to Start |
 | --- | --- | --- |
@@ -3385,7 +3385,7 @@ The server MUST ensure that the value referred by __CLASS conforms to CLASS-NAME
 <a id="Section_3.1.4.3.7"></a>
 ##### 3.1.4.3.7 IWbemServices::PutClassAsync (Opnum 9)
 
-The IWbemServices::PutClassAsync method is the asynchronous version of the [IWbemServices::PutClass](#Section_3.1.4.3.6) method. The PutClassAsync method creates a new class or updates an existing class. The server MUST NOT allow the creation of classes that have names that begin or end with an underscore because those names are reserved for system classes. If the class name does not conform to the CLASS-NAME element defined in WQL, the server MUST return WBEM_E_INVALID_PARAMETER.
+The IWbemServices::PutClassAsync method is the asynchronous version of the [IWbemServices::PutClass](#Section_3.1.4.3.7) method. The PutClassAsync method creates a new class or updates an existing class. The server MUST NOT allow the creation of classes that have names that begin or end with an underscore because those names are reserved for system classes. If the class name does not conform to the CLASS-NAME element defined in WQL, the server MUST return WBEM_E_INVALID_PARAMETER.
 
 HRESULT PutClassAsync(
 
@@ -3412,11 +3412,11 @@ The server MUST accept a combination of zero or more flags from the following ta
 | WBEM_FLAG_CREATE_ONLY 0x00000002 | The server MUST create a CIM class *pObject* if the CIM class is not already present. |
 | WBEM_FLAG_UPDATE_FORCE_MODE 0x00000040 | The server MUST forcefully update the class even when conflicting child classes exist. |
 | WBEM_FLAG_UPDATE_SAFE_MODE 0x00000020 | The server MUST update the class as long as the change does not cause any conflicts with existing child classes or instances. This flag is mutually exclusive with WBEM_FLAG_UPDATE_FORCE_MODE. If none of these flags are set, the server MUST update the class if there is no derived class, if there is no instance for that class, or if the class is unchanged. |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) method call on the interface pointer that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) method call on the interface pointer that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If the *pCtx* parameter is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If the *pCtx* parameter is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.2.4.1) interface object that is implemented by the client of this method. The parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.1.4.2.2) interface object that is implemented by the client of this method. The parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -3458,7 +3458,7 @@ The server MUST ensure that the value referred by __CLASS conforms to CLASS-NAME
 <a id="Section_3.1.4.3.8"></a>
 ##### 3.1.4.3.8 IWbemServices::DeleteClass (Opnum 10)
 
-The IWbemServices::DeleteClass method MUST delete a specified class from the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.23) interface.
+The IWbemServices::DeleteClass method MUST delete a specified class from the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.13) interface.
 
 HRESULT DeleteClass(
 
@@ -3482,13 +3482,13 @@ HRESULT DeleteClass(
 
 Any other DWORD value that does not match the preceding condition MUST be treated as invalid.
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
 
 **ppCallResult:** The output parameter MUST be filled according to the state of the **lFlags** parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
 
 | Flag state | Operation Started Successfully | Operation Failed to Start |
 | --- | --- | --- |
-| WBEM_FLAG_RETURN_IMMEDIATELY is not set. | MUST be set to [IWbemCallResult](#Section_3.1.4.5.3) if the *ppCallResult* input parameter is non-NULL. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
+| WBEM_FLAG_RETURN_IMMEDIATELY is not set. | MUST be set to [IWbemCallResult](#Section_3.1.4.5) if the *ppCallResult* input parameter is non-NULL. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
 | WBEM_FLAG_RETURN_IMMEDIATELY is set. | The *ppCallResult* parameter MUST NOT be NULL upon input. If NULL, the server MUST return WBEM_E_INVALID_PARAMETER. On output, the parameter MUST contain the IWbemCallResult [**interface pointer**](#gt_interface-pointer). | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
@@ -3522,7 +3522,7 @@ The server SHOULD enforce a maximum length for the *strClass* parameter, and ret
 <a id="Section_3.1.4.3.9"></a>
 ##### 3.1.4.3.9 IWbemServices::DeleteClassAsync (Opnum 11)
 
-The IWbemServices::DeleteClassAsync method is the asynchronous version of the [IWbemServices::DeleteClass](#Section_3.1.4.3.8) method. The DeleteClassAsync method MUST delete a specified class from the namespace.
+The IWbemServices::DeleteClassAsync method is the asynchronous version of the [IWbemServices::DeleteClass](#Section_3.1.4.3.9) method. The DeleteClassAsync method MUST delete a specified class from the namespace.
 
 HRESULT DeleteClassAsync(
 
@@ -3542,13 +3542,13 @@ HRESULT DeleteClassAsync(
 
 | Value | Meaning |
 | --- | --- |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 
 Any other DWORD value that does not match the preceding condition MUST be treated as not valid.
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.2.4.1) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.1.4.2.2) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (as specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -3581,7 +3581,7 @@ The server MUST generate a **__ClassDeletionEvent** event object upon successful
 <a id="Section_3.1.4.3.10"></a>
 ##### 3.1.4.3.10 IWbemServices::CreateClassEnum (Opnum 12)
 
-The IWbemServices::CreateClassEnum method provides a class enumeration. When this method is invoked, the server MUST return all classes that satisfy the selection criteria from the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.23) interface.
+The IWbemServices::CreateClassEnum method provides a class enumeration. When this method is invoked, the server MUST return all classes that satisfy the selection criteria from the namespace that is associated with the current [IWbemServices](#Section_3.1.4.3.13) interface.
 
 HRESULT CreateClassEnum(
 
@@ -3606,9 +3606,9 @@ The server MUST allow any combination of zero or more flags from the following t
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD return no [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information for the [**CIM object**](#gt_cim-object), as specified in section [2.2.6](#Section_2.2.6). |
 | WBEM_FLAG_RETURN_IMMEDIATELY 0x00000010 | If this bit is not set, the server MUST make the method call [**synchronously**](#gt_synchronous-operation). If this bit is set, the server MUST make the method call [**semisynchronously**](#gt_semisynchronous-operation). |
 | WBEM_FLAG_SHALLOW 0x00000001 | When this bit is not set, the server MUST return all classes that are derived from the requested class and all its subclasses. When this bit is set, the server MUST return only the classes that are directly derived from the requested class. |
-| WBEM_FLAG_FORWARD_ONLY 0x00000020 | When this bit is not set, the server MUST return an enumerator that has reset capability. When this bit is set, the server MUST return an enumerator that does not have reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4.5). |
+| WBEM_FLAG_FORWARD_ONLY 0x00000020 | When this bit is not set, the server MUST return an enumerator that has reset capability. When this bit is set, the server MUST return an enumerator that does not have reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4). |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface that MUST contain additional information that the client wants to pass to the server. If the *pCtx* parameter is NULL, it MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface that MUST contain additional information that the client wants to pass to the server. If the *pCtx* parameter is NULL, it MUST be ignored.
 
 **ppEnum:** MUST receive the pointer to the enumerator that implements the IEnumWbemClassObject interface. This parameter MUST NOT be NULL.
 
@@ -3649,19 +3649,19 @@ HRESULT CreateClassEnumAsync(
 
 **strSuperClass:** Specifies a [**superclass**](#gt_fbb1e623-a709-400d-8d4a-85df94ad58c3) name. Only classes that are subclasses of this class MUST be returned. If *strSuperClass* is NULL or a zero-length string, all classes in the namespace MUST be considered in the result set. The results MUST be filtered by using the *lFlags* parameter. Classes without a base class are considered to be derived from the NULL superclass.
 
-**lFlags:** Flags that affect the behavior of the [CreateClassEnum](#Section_3.1.4.3.11) method. Flag behavior MUST be interpreted as specified in the following table.
+**lFlags:** Flags that affect the behavior of the [CreateClassEnum](#Section_3.1.4.3.10) method. Flag behavior MUST be interpreted as specified in the following table.
 
 The server MUST allow any combination of zero or more flags from the following table and MUST comply with all the restrictions in a flag description. Any other DWORD value that does not match a flag condition MUST be treated as not valid.
 
 | Value | Meaning |
 | --- | --- |
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD return no [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information for the [**CIM object**](#gt_cim-object) as specified in section [2.2.6](#Section_2.2.6). |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 | WBEM_FLAG_SHALLOW 0x00000001 | When this bit is not set, the server MUST return all classes that are derived from the requested class and all its subclasses. When this bit is set, the server MUST only return the classes that are directly derived from the requested class. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.2.4.1) that is implemented by the caller, where enumeration results are delivered. The parameter MUST NOT be NULL. In error cases, indicated by the return value, the supplied IWbemObjectSink interface pointer MUST NOT be used. If WBEM_S_NO_ERROR is returned, the user IWbemObjectSink interface pointer MUST be called to indicate the results of the CreateClassEnumAsync operation, as specified later in this section.
+**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.1.4.2.2) that is implemented by the caller, where enumeration results are delivered. The parameter MUST NOT be NULL. In error cases, indicated by the return value, the supplied IWbemObjectSink interface pointer MUST NOT be used. If WBEM_S_NO_ERROR is returned, the user IWbemObjectSink interface pointer MUST be called to indicate the results of the CreateClassEnumAsync operation, as specified later in this section.
 
 **Return Values:** This method MUST return an HRESULT, which MUST indicate the status of the method call. The HRESULT MUST have the type and values as specified in section [2.2.11](#Section_2.2.11). The server MUST return WBEM_S_NO_ERROR (specified in section 2.2.11) to indicate the successful completion of the method.
 
@@ -3715,7 +3715,7 @@ The server MUST accept a combination of zero or more flags from the following ta
 | WBEM_FLAG_UPDATE_ONLY 0x00000001 | The server MUST update a CIM instance *pObject* if the [**CIM**](#gt_common-information-model-cim) instance is present. This flag is mutually exclusive with WBEM_FLAG_CREATE_ONLY. If none of these flags are set, the server MUST create or update a CIM instance *pObject*. |
 | WBEM_FLAG_CREATE_ONLY 0x00000002 | The server MUST create a CIM instance *pObject* if the CIM instance is not already present. |
 
-**pCtx:** This parameter is optional. The *pCtx* parameter MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface object. The *pCtx* parameter indicates whether the client is requesting a partial-instance update or a full-instance update. A partial-instance update modifies a subset of the CIM instance properties. In contrast, a full-instance update modifies all the properties. If NULL, this parameter indicates that the client application is requesting a full-instance update. When *pCtx* is used to perform a partial-instance update, the IWbemContext interface object MUST be filled in with the properties that are specified in the following table. If the IWbemContext interface object does not contain the properties in the table, the method MUST return WBEM_E_INVALID_CONTEXT.
+**pCtx:** This parameter is optional. The *pCtx* parameter MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface object. The *pCtx* parameter indicates whether the client is requesting a partial-instance update or a full-instance update. A partial-instance update modifies a subset of the CIM instance properties. In contrast, a full-instance update modifies all the properties. If NULL, this parameter indicates that the client application is requesting a full-instance update. When *pCtx* is used to perform a partial-instance update, the IWbemContext interface object MUST be filled in with the properties that are specified in the following table. If the IWbemContext interface object does not contain the properties in the table, the method MUST return WBEM_E_INVALID_CONTEXT.
 
 | Property name | Type | Description |
 | --- | --- | --- |
@@ -3724,7 +3724,7 @@ The server MUST accept a combination of zero or more flags from the following ta
 | __PUT_EXT_PROPERTIES | VT_ARRAY \| VT_BSTR | Contains a [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) list to update. The server MUST ignore the properties that are not listed. To perform a partial instance update, the list of properties MUST be specified. |
 | __PUT_EXT_ATOMIC | VT_BOOL | If the return code indicates success, all CIM property updates MUST have been successful. On failure, the server MUST revert any changes to the original state for all CIM property that was updated. On failure, not a single change MUST remain. The operation is successful when all properties are updated. |
 
-**ppCallResult:** If the input parameter is non-NULL, the server MUST return WBEM_S_NO_ERROR and [IWbemCallResult](#Section_3.1.4.5.3) MUST deliver the result of the requested operation (regardless whether WBEM_FLAG_RETURN_IMMEDIATELY is set). The output parameter MUST be filled according to the state of the *lFlags* parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
+**ppCallResult:** If the input parameter is non-NULL, the server MUST return WBEM_S_NO_ERROR and [IWbemCallResult](#Section_3.1.4.5) MUST deliver the result of the requested operation (regardless whether WBEM_FLAG_RETURN_IMMEDIATELY is set). The output parameter MUST be filled according to the state of the *lFlags* parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
 
 | Flag state | Operation Started Successfully | Operation Failed to Start |
 | --- | --- | --- |
@@ -3762,7 +3762,7 @@ The server SHOULD enforce a maximum length for the __RELPATH system property of 
 <a id="Section_3.1.4.3.13"></a>
 ##### 3.1.4.3.13 IWbemServices::PutInstanceAsync (Opnum 15)
 
-The IWbemServices::PutInstanceAsync method is the asynchronous version of the [PutInstance](#Section_4.2.3.2) method. The PutInstanceAsync method creates or updates an instance of an existing class.
+The IWbemServices::PutInstanceAsync method is the asynchronous version of the [PutInstance](#Section_3.1.4.3.13) method. The PutInstanceAsync method creates or updates an instance of an existing class.
 
 HRESULT PutInstanceAsync(
 
@@ -3787,9 +3787,9 @@ The server MUST accept a combination of zero or more flags from the following ta
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is set, the server SHOULD ignore all the amended qualifiers while this method creates or updates a [**CIM instance**](#gt_cim-instance). If this bit is not set, the server SHOULD include all the qualifiers, including amended qualifiers, while this method creates or updates a CIM instance. |
 | WBEM_FLAG_UPDATE_ONLY 0x00000001 | The server MUST update a CIM instance *pObject* if the CIM instance is present. This flag is mutually exclusive with WBEM_FLAG_CREATE_ONLY. If none of these flags are set, the server MUST create or update a CIM instance *pObject*. |
 | WBEM_FLAG_CREATE_ONLY 0x00000002 | The server MUST create a CIM instance *pObject* if the CIM instance is not already present. |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 
-**pCtx:** This parameter is optional. The *pCtx* parameter MUST be a pointer to an [IWbemContext (section 2.2.13)](#Section_2.2.13.3) interface object. The *pCtx* parameter indicates whether the client is requesting a partial-instance update or full-instance update. A partial-instance update modifies a subset of CIM instance properties; a full-instance update modifies all the properties. If NULL, this parameter indicates that the client application is requesting a full-instance update. When *pCtx* is used to perform a partial-instance update, the IWbemContext interface MUST be completed with the properties that are specified in the following table. If the IWbemContext interface object does not contain the properties in the table, the method MUST return WBEM_E_INVALID_CONTEXT.
+**pCtx:** This parameter is optional. The *pCtx* parameter MUST be a pointer to an [IWbemContext (section 2.2.13)](#Section_2.2.13.2) interface object. The *pCtx* parameter indicates whether the client is requesting a partial-instance update or full-instance update. A partial-instance update modifies a subset of CIM instance properties; a full-instance update modifies all the properties. If NULL, this parameter indicates that the client application is requesting a full-instance update. When *pCtx* is used to perform a partial-instance update, the IWbemContext interface MUST be completed with the properties that are specified in the following table. If the IWbemContext interface object does not contain the properties in the table, the method MUST return WBEM_E_INVALID_CONTEXT.
 
 | Property name | Type | Description |
 | --- | --- | --- |
@@ -3798,7 +3798,7 @@ The server MUST accept a combination of zero or more flags from the following ta
 | __PUT_EXT_PROPERTIES | VT_ARRAY \| VT_BSTR | Contains a [**CIM**](#gt_common-information-model-cim) property list to update. The server MUST ignore properties that are not listed. To perform a partial-instance update, the list of properties MUST be specified. |
 | __PUT_EXT_ATOMIC | VT_BOOL | If the return code indicates success, all CIM property updates MUST have been successful. On failure, the server MUST revert any changes to the original state for all CIM property updates. On failure, any changes MUST NOT remain. The operation is successful when all properties are updated. |
 
-**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.2.4.1) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.1.4.2.2) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -3833,7 +3833,7 @@ If the instance belongs to the **__Namespace** class, then the server MUST creat
 <a id="Section_3.1.4.3.14"></a>
 ##### 3.1.4.3.14 IWbemServices::DeleteInstance (Opnum 16)
 
-The IWbemServices::DeleteInstance method deletes an instance of an existing class from the namespace that is pointed to by the [IWbemServices](#Section_3.1.4.3.23) interface object that is used to call the method.
+The IWbemServices::DeleteInstance method deletes an instance of an existing class from the namespace that is pointed to by the [IWbemServices](#Section_3.1.4.3.13) interface object that is used to call the method.
 
 HRESULT DeleteInstance(
 
@@ -3857,9 +3857,9 @@ HRESULT DeleteInstance(
 
 Any other DWORD value that does not match the preceding condition MUST be treated as invalid.
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
-**ppCallResult:** If the input parameter is non-NULL, the server MUST return WBEM_S_NO_ERROR and [IWbemCallResult](#Section_3.1.4.5.3) MUST deliver the result of the requested operation (regardless whether WBEM_FLAG_RETURN_IMMEDIATELY is set). The output parameter MUST be filled according to the state of the *lFlags* parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
+**ppCallResult:** If the input parameter is non-NULL, the server MUST return WBEM_S_NO_ERROR and [IWbemCallResult](#Section_3.1.4.5) MUST deliver the result of the requested operation (regardless whether WBEM_FLAG_RETURN_IMMEDIATELY is set). The output parameter MUST be filled according to the state of the *lFlags* parameter (whether WBEM_FLAG_RETURN_IMMEDIATELY is set) as listed in the following table.
 
 | Flag state | Operation Started Successfully | Operation Failed to Start |
 | --- | --- | --- |
@@ -3895,7 +3895,7 @@ The failed method execution MUST set the output parameters to NULL and MUST retu
 <a id="Section_3.1.4.3.15"></a>
 ##### 3.1.4.3.15 IWbemServices::DeleteInstanceAsync (Opnum 17)
 
-The IWbemServices::DeleteInstanceAsync method is the asynchronous version of the [IWbemServices::DeleteInstance](#Section_3.1.4.3.15) method. The IWbemServices::DeleteInstanceAsync method deletes an instance of an existing class from the namespace that is pointed to by the [IWbemServices](#Section_3.1.4.3.23) interface that is used to call the method.
+The IWbemServices::DeleteInstanceAsync method is the asynchronous version of the [IWbemServices::DeleteInstance](#Section_3.1.4.3.15) method. The IWbemServices::DeleteInstanceAsync method deletes an instance of an existing class from the namespace that is pointed to by the [IWbemServices](#Section_3.1.4.3.13) interface that is used to call the method.
 
 HRESULT DeleteInstanceAsync(
 
@@ -3915,13 +3915,13 @@ HRESULT DeleteInstanceAsync(
 
 | Value | Meaning |
 | --- | --- |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 
 Any other DWORD value that does not match the preceding condition MUST be treated as invalid.
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which contains additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which contains additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.2.4.1) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.1.4.2.2) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -3980,9 +3980,9 @@ The server MUST allow any combination of zero or more flags from the following t
 | WBEM_FLAG_RETURN_IMMEDIATELY 0x00000010 | If this bit is not set, the server MUST make the method call [**synchronously**](#gt_synchronous-operation). If this bit is set, the server MUST make the method call [**semisynchronously**](#gt_semisynchronous-operation). |
 | WBEM_FLAG_DIRECT_READ 0x00000200 | If this bit is not set, the server MUST consider the entire class hierarchy when it returns the result. If this bit is set, the server MUST disregard any derived class when it searches the result. |
 | WBEM_FLAG_SHALLOW 0x00000001 | If this bit is set, the server MUST return instances of the requested class only and MUST exclude instances of classes that are derived from the requested class. If this bit is not set, the server MUST return all instances of the requested class as well as instances of classes that are derived from the requested class. |
-| WBEM_FLAG_FORWARD_ONLY 0x00000020 | If this bit is not set, the server MUST return an enumerator that has reset capability. If this bit is set, the server MUST return an enumerator that does not have reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4.5). |
+| WBEM_FLAG_FORWARD_ONLY 0x00000020 | If this bit is not set, the server MUST return an enumerator that has reset capability. If this bit is set, the server MUST return an enumerator that does not have reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4). |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which contains additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which contains additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
 **ppEnum:** MUST receive the pointer to the enumerator that is used to enumerate through the returned class instances, which implements the IEnumWbemClassObject interface. This parameter MUST NOT be NULL.
 
@@ -4030,13 +4030,13 @@ The server MUST allow any combination of zero or more flags from the following t
 | Value | Meaning |
 | --- | --- |
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD return no [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information for the [**CIM object**](#gt_cim-object), as specified in section [2.2.6](#Section_2.2.6). |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 | WBEM_FLAG_DIRECT_READ 0x00000200 | If this bit is not set, the server MUST consider the entire class hierarchy when it returns the result. If this bit is set, the server MUST disregard any derived class when it searches the result. |
 | WBEM_FLAG_SHALLOW 0x00000001 | If this bit is set, the server MUST return instances of the requested class only and MUST exclude instances of classes that are derived from the requested class. If this bit is not set, the server MUST return all instances of the requested class as well as instances of classes that are derived from the requested class. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.2.4.1) interface that is implemented by the caller and where enumeration results are delivered. The parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.1.4.2.2) interface that is implemented by the caller and where enumeration results are delivered. The parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (as specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -4093,9 +4093,9 @@ The server MUST allow any combination of zero or more flags from the following t
 | WBEM_FLAG_RETURN_IMMEDIATELY 0x00000010 | If this bit is not set, the server MUST make the method call synchronously. If this bit is set, the server MUST make the method call semisynchronously. |
 | WBEM_FLAG_DIRECT_READ 0x00000200 | If this bit is not set, the server MUST consider the entire class hierarchy when it returns the result. If this bit is set, the server MUST disregard any derived class when it searches the result. |
 | WBEM_FLAG_PROTOTYPE 0x00000002 | If this bit is not set, the server MUST run the query. If this bit is set, the server MUST only return the class schema of the resulting objects. |
-| WBEM_FLAG_FORWARD_ONLY 0x00000020 | If this bit is not set, the server MUST return an enumerator that has reset capability. If this bit is set, the server MUST return an enumerator without reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4.5). |
+| WBEM_FLAG_FORWARD_ONLY 0x00000020 | If this bit is not set, the server MUST return an enumerator that has reset capability. If this bit is set, the server MUST return an enumerator without reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4). |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
 **ppEnum:** MUST receive the pointer to the IEnumWbemClassObject that is used to enumerate through the [**CIM objects**](#gt_cim-object) that are returned for the query result set. This parameter MUST NOT be NULL.
 
@@ -4205,13 +4205,13 @@ The server MUST allow any combination of zero or more flags from the following t
 | Value | Meaning |
 | --- | --- |
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD not return [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information for the [**CIM object**](#gt_cim-object), as specified in section [2.2.6](#Section_2.2.6). |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set the server MUST make one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 | WBEM_FLAG_PROTOTYPE 0x00000002 | If this bit is not set, the server MUST run the query. If this bit is set, the server MUST only return the class schema of the resulting objects. |
 | WBEM_FLAG_DIRECT_READ 0x00000200 | If this bit is not set, the server MUST consider the entire class hierarchy when it returns the result. If this bit is set, the server MUST disregard any derived class when it searches the result. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.2.4.1) interface that is implemented by the caller, where enumeration results are delivered. The parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.1.4.2.2) interface that is implemented by the caller, where enumeration results are delivered. The parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (as specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -4268,9 +4268,9 @@ The server MUST allow any combination of zero or more flags from the following t
 | --- | --- |
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD return no [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information for the [**CIM object**](#gt_cim-object), as specified in section [2.2.6](#Section_2.2.6). |
 | WBEM_FLAG_RETURN_IMMEDIATELY 0x00000010 | If this bit is set, the server MUST make the method call semisynchronously. This flag MUST always be set. |
-| WBEM_FLAG_FORWARD_ONLY 0x00000020 | If this bit is set, the server MUST return an enumerator that does not have reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4.5). This flag MUST always be set. |
+| WBEM_FLAG_FORWARD_ONLY 0x00000020 | If this bit is set, the server MUST return an enumerator that does not have reset capability, as specified in section [3.1.4.4](#Section_3.1.4.4). This flag MUST always be set. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, the parameter MUST be ignored.
 
 **ppEnum:** MUST receive the pointer to the IEnumWbemClassObject that is used to enumerate through the [**CIM objects**](#gt_cim-object) that are returned for the query result set. This parameter MUST NOT be NULL.
 
@@ -4341,9 +4341,9 @@ The server MUST allow any combination of zero or more flags from the following t
 | WBEM_FLAG_USE_AMENDED_QUALIFIERS 0x00020000 | If this bit is not set, the server SHOULD return no [**CIM localizable information**](#gt_cim-localizable-information). If this bit is set, the server SHOULD return CIM localizable information. |
 | WBEM_FLAG_SEND_STATUS 0x00000080 | This flag is ignored. |
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, this parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If *pCtx* is NULL, this parameter MUST be ignored.
 
-**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.2.4.1) interface that is implemented by the caller, where enumeration results are delivered. This parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to the [IWbemObjectSink](#Section_3.1.4.2.2) interface that is implemented by the caller, where enumeration results are delivered. This parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR, as specified in section [2.2.11](#Section_2.2.11), to indicate the successful completion of the method.
 
@@ -4382,7 +4382,7 @@ If WITHIN clause is not specified as part of *strQuery* that contains an intrins
 
 If the *strQuery* is not syntactically valid or one or more elements in <PROPERTY-LIST> contains undefined properties, the server MUST return WBEM_E_INVALID_QUERY.
 
-If method execution succeeds, the server MUST run the notification query until the query is canceled or execution fails. The server MUST NOT call [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) to send success or operation progress information. When query execution fails, the server MUST call IWbemObjectSink::SetStatus to send the error to the client, and the server MUST release IWbemObjectSink.
+If method execution succeeds, the server MUST run the notification query until the query is canceled or execution fails. The server MUST NOT call [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) to send success or operation progress information. When query execution fails, the server MUST call IWbemObjectSink::SetStatus to send the error to the client, and the server MUST release IWbemObjectSink.
 
 If the *strQuery* is evaluated successfully, the server MUST create an entry (row) in the *EventBindingTable*. If *strQuery* includes a **WITHIN** clause, the server MUST create an **EventPollingTimer**, set its interval to the number of seconds specified in the **WITHIN** clause, and start the timer. If *strQuery* includes a **GROUP WITHIN** clause, then the server MUST create an **EventGroupingTimer** and set its interval to the number of seconds specified in the **GROUP WITHIN** clause. The server MUST set **ClientSecurityContext** to RpcImpersonationAccessToken.Sids[UserIndex]. The server response to out-of-range time intervals is implementation-dependent.<55>
 
@@ -4393,7 +4393,7 @@ The server MUST delete the row when the client cancels the query. If *strQuery* 
 <a id="Section_3.1.4.3.22"></a>
 ##### 3.1.4.3.22 IWbemServices::ExecMethod (Opnum 24)
 
-The IWbemServices::ExecMethod method executes a [**CIM method**](#gt_cim-method) that is implemented by a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance) that is retrieved from the [IWbemServices](#Section_3.1.4.3.23) interface.
+The IWbemServices::ExecMethod method executes a [**CIM method**](#gt_cim-method) that is implemented by a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance) that is retrieved from the [IWbemServices](#Section_3.1.4.3.13) interface.
 
 HRESULT ExecMethod(
 
@@ -4425,7 +4425,7 @@ HRESULT ExecMethod(
 
 Any other DWORD value that does not match the preceding condition MUST be treated as invalid.
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
 
 **pInParams:** MUST be a pointer to an [IWbemClassObject](#Section_2.2.4) [**interface pointer**](#gt_interface-pointer), which MUST contain an instance of input parameter CIM class as defined in [MS-WMIO](../MS-WMIO/MS-WMIO.md) (section 2.3.3), with method parameter values set as properties. This parameter MUST be NULL when the method has no input parameters.
 
@@ -4440,7 +4440,7 @@ Any other DWORD value that does not match the preceding condition MUST be treate
 
 | Condition | Success operation | Failure operation |
 | --- | --- | --- |
-| WBEM_FLAG_RETURN_IMMEDIATELY is not set. | MUST be set to [IWbemCallResult](#Section_3.1.4.5.3) if the *ppCallResult* input parameter is non-NULL. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
+| WBEM_FLAG_RETURN_IMMEDIATELY is not set. | MUST be set to [IWbemCallResult](#Section_3.1.4.5) if the *ppCallResult* input parameter is non-NULL. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
 | WBEM_FLAG_RETURN_IMMEDIATELY is set. | The *ppCallResult* parameter MUST NOT be NULL upon input. If NULL, the server MUST return WBEM_E_INVALID_PARAMETER. Upon output, the parameter MUST contain the IWbemCallResult interface pointer. | MUST be set to NULL if the *ppCallResult* input parameter is non-NULL. |
 
 **Return Values:** This method MUST return an HRESULT, which MUST indicate the status of the method call. HRESULT MUST have the type and values as specified in section [2.2.11](#Section_2.2.11). The server MUST return WBEM_S_NO_ERROR (specified in section 2.2.11) to indicate the successful completion of the method.
@@ -4462,7 +4462,7 @@ The failed method execution MUST set the output parameters to NULL and MUST retu
 <a id="Section_3.1.4.3.23"></a>
 ##### 3.1.4.3.23 IWbemServices::ExecMethodAsync (Opnum 25)
 
-The IWbemServices::ExecMethodAsync method asynchronously executes a [**CIM method**](#gt_cim-method) that is implemented by a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance) that is retrieved from the [IWbemServices](#Section_3.1.4.3.23) interface.
+The IWbemServices::ExecMethodAsync method asynchronously executes a [**CIM method**](#gt_cim-method) that is implemented by a [**CIM class**](#gt_cim-class) or a [**CIM instance**](#gt_cim-instance) that is retrieved from the [IWbemServices](#Section_3.1.4.3.13) interface.
 
 HRESULT ExecMethodAsync(
 
@@ -4488,15 +4488,15 @@ HRESULT ExecMethodAsync(
 
 | Value | Meaning |
 | --- | --- |
-| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make just one final [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
+| WBEM_FLAG_SEND_STATUS 0x00000080 | If this bit is not set, the server MUST make just one final [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) call on the [**interface pointer**](#gt_interface-pointer) that is provided in the *pResponseHandler* parameter. If this bit is set, the server MAY make intermediate IWbemObjectSink::SetStatus calls on the interface pointer prior to call completion. |
 
 Any other DWORD value that does not match the preceding condition MUST be treated as invalid.
 
-**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
+**pCtx:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface, which MUST contain additional information that the client wants to pass to the server. If pCtx is NULL, the parameter MUST be ignored.
 
 **pInParams:** MUST be a pointer to an [IWbemClassObject](#Section_2.2.4) interface pointer, which MUST contain an instance of input parameter CIM class as defined in [MS-WMIO](../MS-WMIO/MS-WMIO.md) (section 2.3.3), with method parameter values set as properties. This parameter MUST be NULL when the method has no input parameters.
 
-**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.2.4.1) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
+**pResponseHandler:** MUST be a pointer to an [IWbemObjectSink](#Section_3.1.4.2.2) interface object that is implemented by the client of this method. This parameter MUST NOT be NULL.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (as specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -4531,7 +4531,7 @@ Methods in RPC opnum order:
 | [Clone](#Section_3.1.4.4.4) | Causes the server to make a logical copy of the entire enumerator. Opnum: 6 |
 | [Skip](#Section_87d1cfc5604243a1ac48f8d84dad1a2b) | Causes the server to move the current position in an enumeration ahead by a specified number of CIM objects. Opnum: 7 |
 
-An IEnumWbemClassObject interface object MUST be returned by [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11), [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), or [IWbemServices::ExecQuery](#Section_3.1.4.3.18), [IWbemServices::ExecNotificationQuery](#Section_3.1.4.3.20), as specified in [IWbemServices](#Section_3.1.4.3.23) section 3.1.4.3.
+An IEnumWbemClassObject interface object MUST be returned by [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10), [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), or [IWbemServices::ExecQuery](#Section_3.1.4.3.18), [IWbemServices::ExecNotificationQuery](#Section_3.1.4.3.20), as specified in [IWbemServices](#Section_3.1.4.3.13) section 3.1.4.3.
 
 The object that exports this interface MUST implement the [IWbemFetchSmartEnum](#Section_3.1.4.6) interface. The IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), MUST be used to manage the interfaces exposed by the object.
 
@@ -4552,7 +4552,7 @@ This method has no parameters.
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The server MUST locate the entry in **EnumWbemClassObjectTable** with **EnumWbemClassObjectPointer** matching [IEnumWbemClassObject](#Section_3.1.4.4.5).
+The server MUST locate the entry in **EnumWbemClassObjectTable** with **EnumWbemClassObjectPointer** matching [IEnumWbemClassObject](#Section_3.1.4.4).
 
 The server MUST validate that the [**security principal**](#gt_security-principal) that makes the call is the same as the **ClientSecurityContext** of the **SemiSinkResultSetObject** pointed to by the entry in the **EnumWbemClassObjectTable**; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
@@ -4567,7 +4567,7 @@ A failed method execution MUST return an error in the format that is specified i
 <a id="Section_3.1.4.4.2"></a>
 ##### 3.1.4.4.2 IEnumWbemClassObject::Next (Opnum 4)
 
-When the IEnumWbemClassObject::Next method is invoked, the server MUST get zero or more [**CIM objects**](#gt_cim-object) starting at the current position in an enumeration. The server MUST also move the current position by the number of CIM objects in the *uCount* parameter. When [IEnumWbemClassObject](#Section_3.1.4.4.5) is created, the current position MUST be set on the first [**CIM object**](#gt_cim-object) of the collection. The order of the CIM objects that are stored in the enumerator is arbitrary.
+When the IEnumWbemClassObject::Next method is invoked, the server MUST get zero or more [**CIM objects**](#gt_cim-object) starting at the current position in an enumeration. The server MUST also move the current position by the number of CIM objects in the *uCount* parameter. When [IEnumWbemClassObject](#Section_3.1.4.4) is created, the current position MUST be set on the first [**CIM object**](#gt_cim-object) of the collection. The order of the CIM objects that are stored in the enumerator is arbitrary.
 
 HRESULT Next(
 
@@ -4612,7 +4612,7 @@ The failed method execution MUST set the value that is referenced by the output 
 <a id="Section_3.1.4.4.3"></a>
 ##### 3.1.4.4.3 IEnumWbemClassObject::NextAsync (Opnum 5)
 
-The IEnumWbemClassObject::NextAsync method is the asynchronous version of the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method. It provides controlled asynchronous retrieval of [**CIM objects**](#gt_cim-object) to a sink. The server MUST asynchronously get one or more CIM objects, starting at the current position in an enumeration, and MUST move the current position by the number of CIM objects. When [IEnumWbemClassObject](#Section_3.1.4.4.5) is created, the current position MUST be set on the first [**CIM object**](#gt_cim-object) of the collection. The order of the CIM objects that are stored in the enumerator is arbitrary.
+The IEnumWbemClassObject::NextAsync method is the asynchronous version of the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method. It provides controlled asynchronous retrieval of [**CIM objects**](#gt_cim-object) to a sink. The server MUST asynchronously get one or more CIM objects, starting at the current position in an enumeration, and MUST move the current position by the number of CIM objects. When [IEnumWbemClassObject](#Section_3.1.4.4) is created, the current position MUST be set on the first [**CIM object**](#gt_cim-object) of the collection. The order of the CIM objects that are stored in the enumerator is arbitrary.
 
 HRESULT NextAsync(
 
@@ -4624,7 +4624,7 @@ HRESULT NextAsync(
 
 **uCount:** MUST be the number of CIM objects being requested.
 
-**pSink:** MUST be a pointer to the [IWbemObjectSink](#Section_3.2.4.1) interface, which MUST represent the sink to receive the CIM object. As each batch of CIM objects is requested, they MUST be delivered to the [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) method to which *pSink* points (as specified in section 3.1.4.2.1) and MUST be followed by a final call to the [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) method to which *pSink* points, as specified in section 3.1.4.2.2. This parameter MUST NOT be NULL. In error cases, indicated by the HRESULT return value, the supplied IWbemObjectSink [**interface pointer**](#gt_interface-pointer) MUST NOT be used by the server.
+**pSink:** MUST be a pointer to the [IWbemObjectSink](#Section_3.1.4.2.2) interface, which MUST represent the sink to receive the CIM object. As each batch of CIM objects is requested, they MUST be delivered to the [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) method to which *pSink* points (as specified in section 3.1.4.2.1) and MUST be followed by a final call to the [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) method to which *pSink* points, as specified in section 3.1.4.2.2. This parameter MUST NOT be NULL. In error cases, indicated by the HRESULT return value, the supplied IWbemObjectSink [**interface pointer**](#gt_interface-pointer) MUST NOT be used by the server.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -4660,7 +4660,7 @@ HRESULT Clone(
 
 );
 
-**ppEnum:** Upon return, MUST contain a pointer to an [IEnumWbemClassObject](#Section_3.1.4.4.5) interface [**CIM object**](#gt_cim-object) that is a logical copy of the entire enumerator that made the Clone method call, retaining the current position in an enumeration. This parameter MUST NOT be NULL. When returned by the server, this parameter can be NULL if a failure occurred or if there are no results.
+**ppEnum:** Upon return, MUST contain a pointer to an [IEnumWbemClassObject](#Section_3.1.4.4) interface [**CIM object**](#gt_cim-object) that is a logical copy of the entire enumerator that made the Clone method call, retaining the current position in an enumeration. This parameter MUST NOT be NULL. When returned by the server, this parameter can be NULL if a failure occurred or if there are no results.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
@@ -4705,7 +4705,7 @@ HRESULT Skip(
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The server MUST locate the entry in **EnumWbemClassObjectTable** with **EnumWbemClassObjectPointer** matching [IEnumWbemClassObject](#Section_3.1.4.4.5).
+The server MUST locate the entry in **EnumWbemClassObjectTable** with **EnumWbemClassObjectPointer** matching [IEnumWbemClassObject](#Section_3.1.4.4).
 
 The server MUST validate that the [**security principal**](#gt_security-principal) that makes the call is the same as the **ClientSecurityContext** of the **SemiSinkResultSetObject** pointed to by the entry in **EnumWbemClassObjectTable**; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
@@ -4728,15 +4728,15 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetResultObject](#Section_6ac4caa041f843e1b66ea37ddbeaa7bf) | Causes the server to attempt to retrieve a CIM object from a previous semisynchronous call to the [IWbemServices::GetObject](#Section_3.1.4.3.5) method or [IWbemServices::ExecMethod](#Section_3.1.4.3.23) method. Opnum: 3 |
-| [GetResultString](#Section_8ee57a15e2b046ccaaae4e4367ac9ac9) | Causes the server to return the assigned [**CIM path**](#gt_775e4b82-5447-4125-b887-b404421e1269) of a [**CIM**](#gt_common-information-model-cim) instance that was created by the [IWbemServices::PutInstance](#Section_4.2.3.2) method. Opnum: 4 |
-| [GetResultServices](#Section_f0360b51bd584f93aa03fcadd00f443a) | Causes the server to retrieve a pointer to the [IWbemServices](#Section_3.1.4.3.23) interface that results from a semisynchronous call to the [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) method. Opnum: 5 |
+| [GetResultObject](#Section_6ac4caa041f843e1b66ea37ddbeaa7bf) | Causes the server to attempt to retrieve a CIM object from a previous semisynchronous call to the [IWbemServices::GetObject](#Section_3.1.4.3.5) method or [IWbemServices::ExecMethod](#Section_3.1.4.3.22) method. Opnum: 3 |
+| [GetResultString](#Section_8ee57a15e2b046ccaaae4e4367ac9ac9) | Causes the server to return the assigned [**CIM path**](#gt_775e4b82-5447-4125-b887-b404421e1269) of a [**CIM**](#gt_common-information-model-cim) instance that was created by the [IWbemServices::PutInstance](#Section_3.1.4.3.13) method. Opnum: 4 |
+| [GetResultServices](#Section_f0360b51bd584f93aa03fcadd00f443a) | Causes the server to retrieve a pointer to the [IWbemServices](#Section_3.1.4.3.13) interface that results from a semisynchronous call to the [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) method. Opnum: 5 |
 | [GetCallStatus](#Section_c25147335d8546b8897def3a020c31fc) | Causes the server to return the status of the current outstanding semisynchronous call. Opnum: 6 |
 
 <a id="Section_3.1.4.5.1"></a>
 ##### 3.1.4.5.1 IWbemCallResult::GetResultObject (Opnum 3)
 
-When the IWbemCallResult::GetResultObject method is called, the server MUST attempt to retrieve a [**CIM object**](#gt_cim-object) from a previous [**semisynchronous operation**](#gt_semisynchronous-operation) call to the [IWbemServices::GetObject](#Section_3.1.4.3.5) method or the [IWbemServices::ExecMethod](#Section_3.1.4.3.23) method. The entry in **WbemCallResultTable** with **WbemCallResultPointer** pointing to [IWbemCallResult](#Section_3.1.4.5.3) is used to identify the previous semisynchronous call.
+When the IWbemCallResult::GetResultObject method is called, the server MUST attempt to retrieve a [**CIM object**](#gt_cim-object) from a previous [**semisynchronous operation**](#gt_semisynchronous-operation) call to the [IWbemServices::GetObject](#Section_3.1.4.3.5) method or the [IWbemServices::ExecMethod](#Section_3.1.4.3.22) method. The entry in **WbemCallResultTable** with **WbemCallResultPointer** pointing to [IWbemCallResult](#Section_3.1.4.5) is used to identify the previous semisynchronous call.
 
 HRESULT GetResultObject(
 
@@ -4760,7 +4760,7 @@ The IWbemCallResult::GetResultObject method MUST be called on the interface obta
 
 In response to the IWbemCallResult::GetResultObject method, the server MUST wait for the operation to finish by waiting up to *lTimeout* for **OperationFinished** to become TRUE for this operation entry in **WbemCallResultTable**. If the operation is finished successfully in *lTimeout* time, the server MUST return the CIM object in the *ppResultObject* parameter by making a logical copy of **ResultObject**. If the operation is not finished in *lTimeout* time, the server MUST return WBEM_S_TIMEDOUT. The method MUST fail if the method parameters are not valid, as specified earlier in this section, or if the server is unable to execute the method.
 
-The successful method execution MUST fill *ppResultObject* with an [IWbemClassObject](#Section_3.1.4.4.5) [**interface pointer**](#gt_interface-pointer) and MUST return WBEM_S_NO_ERROR.
+The successful method execution MUST fill *ppResultObject* with an [IWbemClassObject](#Section_3.1.4.4) [**interface pointer**](#gt_interface-pointer) and MUST return WBEM_S_NO_ERROR.
 
 If the operation is not finished in *lTimeout* time, this method MUST set the value referenced by the output parameters to NULL and return WBEM_S_TIMEDOUT. The client is allowed to retry the operation.
 
@@ -4769,7 +4769,7 @@ If the operation fails within *lTimeout* time, the server MUST set the value ref
 <a id="Section_3.1.4.5.2"></a>
 ##### 3.1.4.5.2 IWbemCallResult::GetResultString (Opnum 4)
 
-When the IWbemCallResult::GetResultString method is called, the server MUST return the assigned [**CIM path**](#gt_775e4b82-5447-4125-b887-b404421e1269) of a [**CIM**](#gt_common-information-model-cim) instance that was created by the [IWbemServices::PutInstance](#Section_4.2.3.2) method that returned [IWbemCallResult](#Section_3.1.4.5.3) in the ppCallResult parameter.
+When the IWbemCallResult::GetResultString method is called, the server MUST return the assigned [**CIM path**](#gt_775e4b82-5447-4125-b887-b404421e1269) of a [**CIM**](#gt_common-information-model-cim) instance that was created by the [IWbemServices::PutInstance](#Section_3.1.4.3.13) method that returned [IWbemCallResult](#Section_3.1.4.5) in the ppCallResult parameter.
 
 HRESULT GetResultString(
 
@@ -4800,7 +4800,7 @@ If the original semisynchronous operation fails, the IWbemCallResult::GetResultS
 <a id="Section_3.1.4.5.3"></a>
 ##### 3.1.4.5.3 IWbemCallResult::GetResultServices (Opnum 5)
 
-When the IWbemCallResult::GetResultServices method is called, the server MUST retrieve a pointer to the [IWbemServices](#Section_3.1.4.3.23) interface that results from a semisynchronous call to the [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) method.
+When the IWbemCallResult::GetResultServices method is called, the server MUST retrieve a pointer to the [IWbemServices](#Section_3.1.4.3.13) interface that results from a semisynchronous call to the [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) method.
 
 HRESULT GetResultServices(
 
@@ -4818,7 +4818,7 @@ HRESULT GetResultServices(
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The server MUST locate the entry in **WbemCallResultTable** with WbemCallResultPointer matching [IWbemCallResult](#Section_3.1.4.5.3). The IWbemCallResult::GetResultServices method MUST be called on the interface that is obtained in response to a previous call to a semisynchronous operation that returns an IWbemCallResult interface.
+The server MUST locate the entry in **WbemCallResultTable** with WbemCallResultPointer matching [IWbemCallResult](#Section_3.1.4.5). The IWbemCallResult::GetResultServices method MUST be called on the interface that is obtained in response to a previous call to a semisynchronous operation that returns an IWbemCallResult interface.
 
 IWbemCallResult::GetResultServices MUST be called to obtain the IWbemServices interface pointer that is returned by the IWbemServices::OpenNamespace execution. In response to the IWbemCallResult::GetResultServices method, the server MUST wait for the operation to finish in *lTimeout* time. The operation is finished when **OperationFinished** is TRUE. If the operation is not finished in *lTimeout* time, the server MUST return WBEM_S_TIMEDOUT. If the operation is finished successfully in *lTimeout* time, the server MUST return the IWbemServices interface pointer result stored in ResultService of the operation in the *ppServices* parameter. The method MUST fail if the method parameters are not valid, as specified earlier in this section, or if the server is unable to execute the method.
 
@@ -4843,13 +4843,13 @@ HRESULT GetCallStatus(
 
 **lTimeout:** MUST be the maximum amount of time, in milliseconds, that the call to GetCallStatus allows to pass before timing out. If the constant WBEM_INFINITE (0xFFFFFFFF) is used, the Skip method call waits until the operation succeeds.
 
-**plStatus:** MUST be the status of a call to an [IWbemServices](#Section_3.1.4.3.23) method if the WBEM_S_NO_ERROR code is returned for this method. When sent by the client, this parameter MUST NOT be NULL. Upon return by the server, this parameter can be NULL if there is a failure or if there are no results.
+**plStatus:** MUST be the status of a call to an [IWbemServices](#Section_3.1.4.3.13) method if the WBEM_S_NO_ERROR code is returned for this method. When sent by the client, this parameter MUST NOT be NULL. Upon return by the server, this parameter can be NULL if there is a failure or if there are no results.
 
 **Return Values:** This method MUST return an HRESULT value that MUST indicate the status of the method call. The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2.2.11)) to indicate the successful completion of the method.
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The server MUST locate the entry in **WbemCallResultTable** with **WbemCallResultPointer** matching [IWbemCallResult](#Section_3.1.4.5.3).
+The server MUST locate the entry in **WbemCallResultTable** with **WbemCallResultPointer** matching [IWbemCallResult](#Section_3.1.4.5).
 
 The IWbemCallResult::GetCallStatus method MUST be called on the interface that is obtained in response to a previous call to a [**semisynchronous operation**](#gt_semisynchronous-operation) that returns an IWbemCallResult interface.
 
@@ -4870,12 +4870,12 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetSmartEnum](#Section_3.1.4.6.1) | Retrieves an [IWbemWCOSmartEnum](#Section_3.1.4.7.1) interface, which is a network-optimized enumerator interface. Opnum: 3 |
+| [GetSmartEnum](#Section_3.1.4.6.1) | Retrieves an [IWbemWCOSmartEnum](#Section_3.1.4.7) interface, which is a network-optimized enumerator interface. Opnum: 3 |
 
 <a id="Section_3.1.4.6.1"></a>
 ##### 3.1.4.6.1 IWbemFetchSmartEnum::GetSmartEnum (Opnum 3)
 
-The IWbemFetchSmartEnum::GetSmartEnum method retrieves an [IWbemWCOSmartEnum (section 3.1.4.7)](#Section_3.1.4.7.1) interface, which is a network-optimized enumerator interface.
+The IWbemFetchSmartEnum::GetSmartEnum method retrieves an [IWbemWCOSmartEnum (section 3.1.4.7)](#Section_3.1.4.7) interface, which is a network-optimized enumerator interface.
 
 HRESULT GetSmartEnum(
 
@@ -4889,7 +4889,7 @@ HRESULT GetSmartEnum(
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The server MUST locate the associated [IEnumWbemClassObject](#Section_3.1.4.4.5) interface pointer in the **EnumWbemClassObjectTable**, and validate that the [**security principal**](#gt_security-principal) that makes the call is the same as the **ClientSecurityContext** of the **SemiSinkResultSetObject** pointed to by the entry in the **EnumWbemClassObjectTable**; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
+The server MUST locate the associated [IEnumWbemClassObject](#Section_3.1.4.4) interface pointer in the **EnumWbemClassObjectTable**, and validate that the [**security principal**](#gt_security-principal) that makes the call is the same as the **ClientSecurityContext** of the **SemiSinkResultSetObject** pointed to by the entry in the **EnumWbemClassObjectTable**; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
 In response to the IWbemFetchSmartEnum::GetSmartEnum method, the server MUST return an IWbemWCOSmartEnum interface in the *ppSmartEnum* output parameter.
 
@@ -4900,7 +4900,7 @@ The failed method execution MUST set the output parameters to NULL and MUST retu
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 IWbemWCOSmartEnum Interface
 
-The server MUST implement the IWbemWCOSmartEnum interface if it implements [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1). The IWbemWCOSmartEnum interface is intended to provide an alternate synchronous enumeration of [**CIM objects**](#gt_cim-object) for [IEnumWbemClassObject](#Section_3.1.4.4.5).
+The server MUST implement the IWbemWCOSmartEnum interface if it implements [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1). The IWbemWCOSmartEnum interface is intended to provide an alternate synchronous enumeration of [**CIM objects**](#gt_cim-object) for [IEnumWbemClassObject](#Section_3.1.4.4).
 
 The interface MUST be uniquely identified by [**UUID**](#gt_universally-unique-identifier-uuid) {423EC01E-2E35-11d2-B604-00104B703EFD}.
 
@@ -4949,7 +4949,7 @@ If a failure occurs, the server MUST return an HRESULT whose S (severity) bit is
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The IWbemWCOSmartEnum::Next method MUST be called on an [IWbemWCOSmartEnum](#Section_3.1.4.7.1) interface that is returned by a previous call to [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1).
+The IWbemWCOSmartEnum::Next method MUST be called on an [IWbemWCOSmartEnum](#Section_3.1.4.7) interface that is returned by a previous call to [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1).
 
 The server MUST locate the associated **IEnumWbemClassObject** interface pointer in the **EnumWbemClassObjectTable**, and validate that the [**security principal**](#gt_security-principal) that makes the call is the same as the **ClientSecurityContext** of the **SemiSinkResultSetObject** pointed to by the entry in the **EnumWbemClassObjectTable**; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
@@ -5120,7 +5120,7 @@ After the Restore operation is complete, the server MUST reset the **RestoreInPr
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 IWbemBackupRestoreEx Interface
 
-The IWbemBackupRestoreEx interface extends the [IWbemBackupRestore](#Section_3.1.4.10.1) interface and exposes methods that pause and resume the activity in the Windows Management Instrumentation Remote Protocol. These methods are used to provide an alternative solution for backing up the contents of the [**CIM**](#gt_common-information-model-cim) database. The interface MUST be implemented in order to support backup/restore scenarios without stopping the server. The server SHOULD support this interface.<62>
+The IWbemBackupRestoreEx interface extends the [IWbemBackupRestore](#Section_3.1.4.10) interface and exposes methods that pause and resume the activity in the Windows Management Instrumentation Remote Protocol. These methods are used to provide an alternative solution for backing up the contents of the [**CIM**](#gt_common-information-model-cim) database. The interface MUST be implemented in order to support backup/restore scenarios without stopping the server. The server SHOULD support this interface.<62>
 
 The IWbemBackupRestoreEx interface is a DCOM Remote Protocol interface (as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md)). The interface MUST be uniquely identified by [**UUID**](#gt_universally-unique-identifier-uuid) {A359DEC5-E813-4834-8A2A-BA7F1D777D76}.
 
@@ -5170,7 +5170,7 @@ In case of any other failure, the server MUST return an HRESULT whose S (severit
 <a id="Section_3.1.4.12"></a>
 #### 3.1.4.12 IWbemRefreshingServices Interface
 
-The IWbemRefreshingServices interface SHOULD<63> be implemented by the server. This interface (an [MS-DCOM](../MS-DCOM/MS-DCOM.md) interface) provides methods that allow clients to get updates of numerous objects in a single DCOM Remote Protocol method invocation; whereas the [IWbemServices](#Section_3.1.4.3.23) interface provides methods that allow clients to get updates on a class or an instance.
+The IWbemRefreshingServices interface SHOULD<63> be implemented by the server. This interface (an [MS-DCOM](../MS-DCOM/MS-DCOM.md) interface) provides methods that allow clients to get updates of numerous objects in a single DCOM Remote Protocol method invocation; whereas the [IWbemServices](#Section_3.1.4.3.13) interface provides methods that allow clients to get updates on a class or an instance.
 
 The IWbemRefreshingServices interface requires multiple calls to set up the remote refresher; however, after the remote refresher is set up, obtaining updates requires only a single call. The IWbemRefreshingServices interface provides a faster [**CIM**](#gt_common-information-model-cim) instance refreshing service when updated data on CIM instances have to be retrieved multiple times.
 
@@ -5180,11 +5180,11 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [AddObjectToRefresher](#Section_3.1.4.12.2) | Adds a CIM instance to the list of [**CIM objects**](#gt_cim-object) to be refreshed. Opnum: 3 |
-| [AddObjectToRefresherByTemplate](#Section_3.1.4.12.2) | Adds a CIM instance that is identified by its [**CIM object**](#gt_cim-object) instance, to the list of CIM objects to be refreshed. Opnum: 4 |
+| [AddObjectToRefresher](#Section_3.2.4.5.1) | Adds a CIM instance to the list of [**CIM objects**](#gt_cim-object) to be refreshed. Opnum: 3 |
+| [AddObjectToRefresherByTemplate](#Section_3.2.4.5.1) | Adds a CIM instance that is identified by its [**CIM object**](#gt_cim-object) instance, to the list of CIM objects to be refreshed. Opnum: 4 |
 | [AddEnumToRefresher](#Section_3.2.4.5.2) | Adds all [**CIM instances**](#gt_cim-instance) of the [**CIM class**](#gt_cim-class) name to the list of CIM objects to be refreshed. Opnum: 5 |
 | [RemoveObjectFromRefresher](#Section_c040f27dd84b412588026638eae12732) | Removes a CIM instance from the list of CIM instances to be refreshed. Opnum: 6 |
-| [GetRemoteRefresher](#Section_3.2.4.5.3) | Retrieves an [IWbemRemoteRefresherinterface](#Section_3.1.4.13.1) pointer. Opnum: 7 |
+| [GetRemoteRefresher](#Section_3.2.4.5.3) | Retrieves an [IWbemRemoteRefresherinterface](#Section_3.1.4.13.2) pointer. Opnum: 7 |
 | [ReconnectRemoteRefresher](#Section_3.2.4.5.4) | Restores a set of CIM instances and enumerations to a server refresher. Opnum: 8 |
 
 <a id="Section_3.1.4.12.1"></a>
@@ -5216,11 +5216,11 @@ HRESULT AddObjectToRefresher(
 
 **lFlags:** This parameter is not used, and its value SHOULD be 0x0.
 
-**pContext:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface object, which MUST contain additional information for the server refresher. If pContext is NULL, the parameter MUST be ignored.
+**pContext:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface object, which MUST contain additional information for the server refresher. If pContext is NULL, the parameter MUST be ignored.
 
 **dwClientRefrVersion:** MUST be the version of the client refresher. This value SHOULD<64> be 0x2. The server MUST allow all client versions.
 
-**pInfo:** MUST be an output parameter that MUST return a **_WBEM_REFRESH_INFO** structure, as specified in section [2.2.20](#Section_2.2.28), which MUST contain refresher information about the CIM instance in *wszPath*. It MUST NOT be NULL.
+**pInfo:** MUST be an output parameter that MUST return a **_WBEM_REFRESH_INFO** structure, as specified in section [2.2.20](#Section_2.2.26), which MUST contain refresher information about the CIM instance in *wszPath*. It MUST NOT be NULL.
 
 **pdwSvrRefrVersion:** MUST be an output parameter that MUST be the version of the server refresher. The value of this parameter SHOULD be 0x1.
 
@@ -5234,9 +5234,9 @@ In response to IWbemRefreshingServices::AddObjectToRefresher, the server MUST ev
 
 A successful call to IWbemRefreshingServices::AddObjectToRefresher MUST return WBEM_S_NO_ERROR and MUST fill the output _WBEM_REFRESH_INFO structure as specified in section 2.2.20.
 
-The server MUST locate the **InstanceProviderId** for the instance in *wszPath* using the algorithm in section [3.1.4](#Section_3.1.4). If **InstanceProviderId** is not empty and the provider's **SupportsRefresher** field is TRUE, the server MUST return the **_WBEM_REFRESH_INFO** structure that has an **m_lType** that is set to **_WBEM_REFRESH_INFO_REMOTE**, otherwise returning one with **m_lType** set to **_WBEM_REFRESH_TYPE_NON_HIPERF**.
+The server MUST locate the **InstanceProviderId** for the instance in *wszPath* using the algorithm in section [3.1.4](#Section_3.2.4). If **InstanceProviderId** is not empty and the provider's **SupportsRefresher** field is TRUE, the server MUST return the **_WBEM_REFRESH_INFO** structure that has an **m_lType** that is set to **_WBEM_REFRESH_INFO_REMOTE**, otherwise returning one with **m_lType** set to **_WBEM_REFRESH_TYPE_NON_HIPERF**.
 
-If the server sets **m_lType** to **_WBEM_REFRESH_INFO_REMOTE**, the server MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface pointer in **_WBEM_REFRESH_INFO_REMOTE** that is part of **_WBEM_REFRESH_INFO**.
+If the server sets **m_lType** to **_WBEM_REFRESH_INFO_REMOTE**, the server MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface pointer in **_WBEM_REFRESH_INFO_REMOTE** that is part of **_WBEM_REFRESH_INFO**.
 
 If the server sets **m_lType** to **_WBEM_REFRESH_TYPE_NON_HIPERF**, the server MUST return a **_WBEM_REFRESH_INFO_NON_HIPERF** structure as part of **_WBEM_REFRESH_INFO**.
 
@@ -5273,11 +5273,11 @@ HRESULT AddObjectToRefresherByTemplate(
 
 **lFlags:** This parameter is not used, and its value SHOULD be 0x0.
 
-**pContext:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface object, which MUST contain additional information for the server refresher. If pContext is NULL, the parameter MUST be ignored.
+**pContext:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface object, which MUST contain additional information for the server refresher. If pContext is NULL, the parameter MUST be ignored.
 
 **dwClientRefrVersion:** MUST be the version of the client refresher. This value SHOULD<65> be 0x2. The server MUST allow all client versions.
 
-**pInfo:** MUST be an output parameter that returns a _WBEM_REFRESH_INFO structure, as specified in section [2.2.20](#Section_2.2.28), which MUST contain refresher information about the CIM instance in *wszPath*. This parameter MUST NOT be NULL.
+**pInfo:** MUST be an output parameter that returns a _WBEM_REFRESH_INFO structure, as specified in section [2.2.20](#Section_2.2.26), which MUST contain refresher information about the CIM instance in *wszPath*. This parameter MUST NOT be NULL.
 
 **pdwSvrRefrVersion:** MUST be an output parameter that MUST be the version of the server refresher. The value of this parameter SHOULD be 0x1.
 
@@ -5291,9 +5291,9 @@ In response to IWbemRefreshingServices::AddObjectToRefresherByTemplate, the serv
 
 A successful call to IWbemRefreshingServices::AddObjectToRefresherByTemplate MUST return WBEM_S_NO_ERROR and MUST fill the output _WBEM_REFRESH_INFO structure, as specified in this section.
 
-The server MUST locate the **InstanceProviderId** for the instance in *wszPath* using the algorithm in section [3.1.4](#Section_3.1.4). If **InstanceProviderId** is not empty and the provider's **SupportsRefresher** field is TRUE, the server MUST return the **_WBEM_REFRESH_INFO** structure that has an **m_lType** set to **_WBEM_REFRESH_INFO_REMOTE**, otherwise returning one with **m_lType** set to _**_WBEM_REFRESH_TYPE_NON_HIPERF**.
+The server MUST locate the **InstanceProviderId** for the instance in *wszPath* using the algorithm in section [3.1.4](#Section_3.2.4). If **InstanceProviderId** is not empty and the provider's **SupportsRefresher** field is TRUE, the server MUST return the **_WBEM_REFRESH_INFO** structure that has an **m_lType** set to **_WBEM_REFRESH_INFO_REMOTE**, otherwise returning one with **m_lType** set to _**_WBEM_REFRESH_TYPE_NON_HIPERF**.
 
-If the server sets **m_lType** to **_WBEM_REFRESH_INFO_REMOTE**, the server MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface pointer in **_WBEM_REFRESH_INFO_REMOTE** that is part of **_WBEM_REFRESH_INFO**.
+If the server sets **m_lType** to **_WBEM_REFRESH_INFO_REMOTE**, the server MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface pointer in **_WBEM_REFRESH_INFO_REMOTE** that is part of **_WBEM_REFRESH_INFO**.
 
 If the server sets **m_lType** to **_WBEM_REFRESH_TYPE_NON_HIPERF**, the server MUST return the **_WBEM_REFRESH_TYPE_NON_HIPERF** structure as part of **_WBEM_REFRESH_INFO**.
 
@@ -5328,11 +5328,11 @@ HRESULT AddEnumToRefresher(
 
 **lFlags:** This parameter is not used, and its value SHOULD be 0x0.
 
-**pContext:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.3) interface object, which MUST contain additional information for the server refresher. If pContext is NULL, the parameter is ignored.
+**pContext:** MUST be a pointer to an [IWbemContext](#Section_2.2.13.2) interface object, which MUST contain additional information for the server refresher. If pContext is NULL, the parameter is ignored.
 
 **dwClientRefrVersion:** MUST be the version of the client refresher. This value SHOULD<66> be 0x2. The server MUST allow all client versions.
 
-**pInfo:** MUST be an output parameter that returns a _WBEM_REFRESH_INFO structure, as specified in section [2.2.20](#Section_2.2.28), which MUST contain refresher information about the [**CIM**](#gt_common-information-model-cim) instance in *wszPath*. This parameter MUST NOT be NULL.
+**pInfo:** MUST be an output parameter that returns a _WBEM_REFRESH_INFO structure, as specified in section [2.2.20](#Section_2.2.26), which MUST contain refresher information about the [**CIM**](#gt_common-information-model-cim) instance in *wszPath*. This parameter MUST NOT be NULL.
 
 **pdwSvrRefrVersion:** MUST be an output parameter, which MUST be the version of the server refresher. The value of this parameter SHOULD be 0x1.
 
@@ -5344,13 +5344,13 @@ The [**security principal**](#gt_security-principal) that makes the call MUST ha
 
 In response to IWbemRefreshingServices::AddEnumToRefresher, the server MUST evaluate the *wszClass* parameter, and it MUST return information to the client so that the server knows how to handle the specific class as specified in this section.
 
-This method MUST add all instances of a class, instead of a single instance of a class, as is the case for the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.1.4.12.2) and [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.1.4.12.2) methods.
+This method MUST add all instances of a class, instead of a single instance of a class, as is the case for the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.2.4.5.1) and [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.2.4.5.1) methods.
 
 A successful call to IWbemRefreshingServices::AddEnumToRefresher MUST return WBEM_S_NO_ERROR and MUST fill the output _WBEM_REFRESH_INFO structure as specified in section 2.2.20.
 
-The server MUST locate the **InstanceProviderId** for the class in *wszPath* using the algorithm in section [3.1.4](#Section_3.1.4). If **InstanceProviderId** is not empty and the provider's **SupportsRefresher** field is TRUE, the server MUST return the **_WBEM_REFRESH_INFO** structure that has an **m_lType** that is set to **_WBEM_REFRESH_INFO_REMOTE**, otherwise returning one with **m_lType** set to **_WBEM_REFRESH_TYPE_NON_HIPERF**.
+The server MUST locate the **InstanceProviderId** for the class in *wszPath* using the algorithm in section [3.1.4](#Section_3.2.4). If **InstanceProviderId** is not empty and the provider's **SupportsRefresher** field is TRUE, the server MUST return the **_WBEM_REFRESH_INFO** structure that has an **m_lType** that is set to **_WBEM_REFRESH_INFO_REMOTE**, otherwise returning one with **m_lType** set to **_WBEM_REFRESH_TYPE_NON_HIPERF**.
 
-If the server sets **m_lType** to **_WBEM_REFRESH_INFO_REMOTE**, the server MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface pointer in **_WBEM_REFRESH_INFO_REMOTE** that is part of **_WBEM_REFRESH_INFO**.
+If the server sets **m_lType** to **_WBEM_REFRESH_INFO_REMOTE**, the server MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface pointer in **_WBEM_REFRESH_INFO_REMOTE** that is part of **_WBEM_REFRESH_INFO**.
 
 If the server sets **m_lType** to **_WBEM_REFRESH_TYPE_NON_HIPERF**, the server MUST return the **_WBEM_REFRESH_TYPE_NON_HIPERF** structure as part of **_WBEM_REFRESH_INFO**.
 
@@ -5396,7 +5396,7 @@ In case of failure, the server MUST set **pdwSvrRefrVersion** to 1 and MUST retu
 <a id="Section_3.1.4.12.5"></a>
 ##### 3.1.4.12.5 IWbemRefreshingServices::GetRemoteRefresher (Opnum 7)
 
-The IWbemRefreshingServices::GetRemoteRefresher method MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.1) [**interface pointer**](#gt_interface-pointer). This pointer is needed by the client to refresh objects and enumerations.
+The IWbemRefreshingServices::GetRemoteRefresher method MUST return an [IWbemRemoteRefresher](#Section_3.1.4.13.2) [**interface pointer**](#gt_interface-pointer). This pointer is needed by the client to refresh objects and enumerations.
 
 HRESULT GetRemoteRefresher(
 
@@ -5434,7 +5434,7 @@ In case of failure, the server MUST return an HRESULT whose S (severity) bit is 
 
 The [**security principal**](#gt_security-principal) that makes the call MUST have WBEM_REMOTE_ENABLE and WBEM_ENABLE accesses to the namespace; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
-The IWbemRefreshingServices::GetRemoteRefresher method evaluates the *pRefresherID* parameter and MUST return an IWbemRemoteRefresher interface pointer and a GUID that is randomly generated by the server in order to identify this interface pointer. The [IWbemRefreshingServices](#Section_3.2.4.5.3) interface pointer MUST have the same value as the one initially returned by the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.1.4.12.2), [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.1.4.12.2), or [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2) method.
+The IWbemRefreshingServices::GetRemoteRefresher method evaluates the *pRefresherID* parameter and MUST return an IWbemRemoteRefresher interface pointer and a GUID that is randomly generated by the server in order to identify this interface pointer. The [IWbemRefreshingServices](#Section_3.1.4.12) interface pointer MUST have the same value as the one initially returned by the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.2.4.5.1), [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.2.4.5.1), or [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2) method.
 
 A successful call to IWbemRefreshingServices::GetRemoteRefresher MUST return WBEM_S_NO_ERROR and fill the **ppRemRefresher** and **pGuid** fields. The **pdwSvrRefrVersion** field is reserved for future use and MUST be set to 0x1.
 
@@ -5485,7 +5485,7 @@ _WBEM_RECONNECT_RESULTS* apReconnectResults,
 
 The [**security principal**](#gt_security-principal) that makes the call MUST have WBEM_REMOTE_ENABLE and WBEM_ENABLE accesses to the namespace; otherwise, WBEM_E_ACCESS_DENIED MUST be returned.
 
-The description of [IWbemRefreshingServices](#Section_3.2.4.5.3) is specified in IWbemRefreshingServices Interface.
+The description of [IWbemRefreshingServices](#Section_3.1.4.12) is specified in IWbemRefreshingServices Interface.
 
 In response to IWbemRefreshingServices::ReconnectRemoteRefresher, the server MUST evaluate the *pRefresherId* and *apReconnectInfo* arrays; and MUST reconnect to the refresher the requested [**CIM objects**](#gt_cim-object) and enumerators that are listed in *apReconnectInfo*, as specified in this section.
 
@@ -5506,14 +5506,14 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [RemoteRefresh](#Section_3.1.4.13.1) | Retrieves the updated set of [**CIM instances**](#gt_cim-instance) and enumerations configured by an [IWbemRefreshingServices](#Section_3.2.4.5.3) [**interface pointer**](#gt_interface-pointer). Opnum: 3 |
+| [RemoteRefresh](#Section_3.1.4.13.1) | Retrieves the updated set of [**CIM instances**](#gt_cim-instance) and enumerations configured by an [IWbemRefreshingServices](#Section_3.1.4.12) [**interface pointer**](#gt_interface-pointer). Opnum: 3 |
 | [StopRefreshing](#Section_3.1.4.13.2) | Removes a set of [**CIM**](#gt_common-information-model-cim) instance and enumerations configured by IWbemRefreshingServices interface pointer. Opnum: 4 |
 | [Opnum5NotUsedOnWire](#Section_3.1.4.13.3) | This method is reserved for local use and is not used remotely. Opnum: 5 |
 
 <a id="Section_3.1.4.13.1"></a>
 ##### 3.1.4.13.1 IWbemRemoteRefresher::RemoteRefresh (Opnum 3)
 
-The IWbemRemoteRefresher::RemoteRefresh method MUST return the updated collection of [**CIM instances**](#gt_cim-instance) and enumerations previously configured by the [IWbemRefreshingServices](#Section_3.2.4.5.3) [**interface pointer**](#gt_interface-pointer).
+The IWbemRemoteRefresher::RemoteRefresh method MUST return the updated collection of [**CIM instances**](#gt_cim-instance) and enumerations previously configured by the [IWbemRefreshingServices](#Section_3.1.4.12) [**interface pointer**](#gt_interface-pointer).
 
 HRESULT RemoteRefresh(
 
@@ -5541,14 +5541,14 @@ The server MUST return WBEM_S_NO_ERROR (specified in section [2.2.11](#Section_2
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The IWbemRemoteRefresher::RemoteRefresh method MUST be called on the [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface pointer returned as a member of the _WBEM_REFRESH_INFO structure from IWbemRefreshingServices methods or on the interface returned by [IWbemRefreshingServices::GetRemoteRefresher](#Section_3.2.4.5.3) method invocation.
+The IWbemRemoteRefresher::RemoteRefresh method MUST be called on the [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface pointer returned as a member of the _WBEM_REFRESH_INFO structure from IWbemRefreshingServices methods or on the interface returned by [IWbemRefreshingServices::GetRemoteRefresher](#Section_3.2.4.5.3) method invocation.
 
 In response to IWbemRemoteRefresher::RemoteRefresh method, the server MUST read the current values of all the [**CIM objects**](#gt_cim-object) previously added to the set of refreshing objects using IWbemRefreshingServices methods. The updated values for all CIM objects MUST be encoded into the output parameter using the format specified in this section.
 
 <a id="Section_3.1.4.13.2"></a>
 ##### 3.1.4.13.2 IWbemRemoteRefresher::StopRefreshing (Opnum 4)
 
-The IWbemRemoteRefresher::StopRefreshing method MUST remove a set of [**CIM**](#gt_common-information-model-cim) instances or enumerations from the collection previously configured by the [IWbemRefreshingServices](#Section_3.2.4.5.3) [**interface pointer**](#gt_interface-pointer).
+The IWbemRemoteRefresher::StopRefreshing method MUST remove a set of [**CIM**](#gt_common-information-model-cim) instances or enumerations from the collection previously configured by the [IWbemRefreshingServices](#Section_3.1.4.12) [**interface pointer**](#gt_interface-pointer).
 
 HRESULT StopRefreshing(
 
@@ -5562,7 +5562,7 @@ HRESULT StopRefreshing(
 
 **lNumIds:** MUST be the number of identifiers in the array of object identifiers in the *aplIds* parameter.
 
-**aplIds:** MUST be an array of object identifiers that MUST identify the [**CIM instances**](#gt_cim-instance) and enumerations to stop refreshing. The object identifier is the m_lCancelId member from the _WBEM_REFRESH_INFO structure that is specified in section [2.2.20](#Section_2.2.28) and MUST be obtained from a previous call to the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.1.4.12.2), [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.1.4.12.2), or [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2) method specified in section 3.1.4.12.
+**aplIds:** MUST be an array of object identifiers that MUST identify the [**CIM instances**](#gt_cim-instance) and enumerations to stop refreshing. The object identifier is the m_lCancelId member from the _WBEM_REFRESH_INFO structure that is specified in section [2.2.20](#Section_2.2.26) and MUST be obtained from a previous call to the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.2.4.5.1), [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.2.4.5.1), or [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2) method specified in section 3.1.4.12.
 
 **lFlags:** This parameter is not used, and its value MUST be 0x0.
 
@@ -5570,7 +5570,7 @@ HRESULT StopRefreshing(
 
 **WBEM_S_NO_ERROR** (0x00)
 
-The IWbemRemoteRefresher::StopRefreshing method MUST be called on the [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface pointer that is returned as a member of the _WBEM_REFRESH_INFO structure from the methods of the IWbemRefreshingServices interface or on the interface that is returned by the [IWbemRefreshingServices::GetRemoteRefresher](#Section_3.2.4.5.3) method invocation.
+The IWbemRemoteRefresher::StopRefreshing method MUST be called on the [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface pointer that is returned as a member of the _WBEM_REFRESH_INFO structure from the methods of the IWbemRefreshingServices interface or on the interface that is returned by the [IWbemRefreshingServices::GetRemoteRefresher](#Section_3.2.4.5.3) method invocation.
 
 In response to the IWbemRemoteRefresher::StopRefreshing method, the server MUST remove a list of [**CIM objects**](#gt_cim-object) that were previously added to the set of refreshing objects using the IWbemRefreshingServices methods. The CIM objects MUST be identified by their identifier, the m_lCancelId member of the _WBEM_REFRESH_INFO structure that is returned by a previous IWbemRefreshingServices::AddObjectToRefresher, IWbemRefreshingServices::AddObjectToRefresherByTemplate, or IWbemRefreshingServices::AddEnumToRefresher call.
 
@@ -5797,7 +5797,7 @@ The server passes the namespace and class name to the provider. The provider ret
 <a id="Section_3.1.4.17.15"></a>
 ##### 3.1.4.17.15 Execute Query
 
-The server passes a [**WQL**](#gt_wmi-query-language-wql) query and a pointer to the **IWbemObjectSink** object. The provider communicates with the matching objects through the [IWbemObjectSink::Indicate (section 3.1.4.2.1)](#Section_3.1.4.2.1) method. After all the matching objects are returned, or if there is a failure encountered, the provider sends the final status using the [IWbemObjectSink::SetStatus (section 3.1.4.2.2)](#Section_3.2.4.1.2) method.
+The server passes a [**WQL**](#gt_wmi-query-language-wql) query and a pointer to the **IWbemObjectSink** object. The provider communicates with the matching objects through the [IWbemObjectSink::Indicate (section 3.1.4.2.1)](#Section_3.1.4.2.1) method. After all the matching objects are returned, or if there is a failure encountered, the provider sends the final status using the [IWbemObjectSink::SetStatus (section 3.1.4.2.2)](#Section_3.1.4.2.2) method.
 
 If the provider cannot process the query, then it MUST return WBEM_E_PROVIDER_NOT_CAPABLE.
 
@@ -5822,7 +5822,7 @@ The server MUST set the namespace's RequiresEncryption flag using the semantics 
 <a id="Section_3.1.4.18.2"></a>
 ##### 3.1.4.18.2 Reading Namespace Information
 
-When the server receives a request to get an instance of the **__Namespace** class, the server MUST check for the existence of a child namespace (of the current namespace in the [IWbemServices Interface (section 3.1.4.3)](#Section_3.1.4.3.23)) with the same name, returning WBEM_E_NOT_FOUND if none matches. The **RequiresEncryption** and **NamespaceSecuritySDDL** qualifiers MUST be set to the values of the child namespace's **RequiresEncryption** flag and security descriptor, respectively.
+When the server receives a request to get an instance of the **__Namespace** class, the server MUST check for the existence of a child namespace (of the current namespace in the [IWbemServices Interface (section 3.1.4.3)](#Section_3.1.4.3.13)) with the same name, returning WBEM_E_NOT_FOUND if none matches. The **RequiresEncryption** and **NamespaceSecuritySDDL** qualifiers MUST be set to the values of the child namespace's **RequiresEncryption** flag and security descriptor, respectively.
 
 Similarly, when a client enumerates instances of the **__Namespace** class, the server MUST return a set of instances corresponding to the child namespaces of the current namespace.
 
@@ -5906,11 +5906,11 @@ None
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The client MUST activate the [IWbemLevel1Login](#Section_3.1.4.1.4) interface on the machine that is running the target WMI server by using the CLSID {8BC3F05E-D86B-11D0-A075-00C04FB68820}, as specified in the DCOM Remote Protocol ([MS-DCOM](../MS-DCOM/MS-DCOM.md)). The client SHOULD obtain the [IWbemLoginClientID](#Section_3.1.4.8.1) interface by using the IRemUnknown and IRemUnknown2 interfaces, [MS-DCOM], on the IWbemLevel1Login interface. If the server returns an error for the IWbemLoginClientID interface, the client MUST ignore the error. If the server returns the IWbemLoginClientID interface, the client SHOULD call the [IWbemLoginClientID::SetClientInfo](#Section_3.1.4.8.1) method to set the client information on the server.<77>
+The client MUST activate the [IWbemLevel1Login](#Section_3.1.4.1) interface on the machine that is running the target WMI server by using the CLSID {8BC3F05E-D86B-11D0-A075-00C04FB68820}, as specified in the DCOM Remote Protocol ([MS-DCOM](../MS-DCOM/MS-DCOM.md)). The client SHOULD obtain the [IWbemLoginClientID](#Section_3.1.4.8) interface by using the IRemUnknown and IRemUnknown2 interfaces, [MS-DCOM], on the IWbemLevel1Login interface. If the server returns an error for the IWbemLoginClientID interface, the client MUST ignore the error. If the server returns the IWbemLoginClientID interface, the client SHOULD call the [IWbemLoginClientID::SetClientInfo](#Section_3.1.4.8.1) method to set the client information on the server.<77>
 
 The client SHOULD NOT obtain the [IWbemLoginHelper](#Section_3.1.4.9) interface from IWbemLevel1Login by calling the IRemUnknown and IRemUnknown2 interfaces.<78>
 
-The client MUST call the [IWbemLevel1Login::NTLMLogin](#Section_3.1.4.1.4) method. If the IWbemLevel1Login::NTLMLogin method completes successfully, the *ppNamespace* parameter has an [IWbemServices](#Section_3.1.4.3.23) interface pointer that can be used by the client to call the IWbemServices methods.
+The client MUST call the [IWbemLevel1Login::NTLMLogin](#Section_3.1.4.1.4) method. If the IWbemLevel1Login::NTLMLogin method completes successfully, the *ppNamespace* parameter has an [IWbemServices](#Section_3.1.4.3.13) interface pointer that can be used by the client to call the IWbemServices methods.
 
 If the client has multiple preferred locales or any locale string that does not match the "MS_xxx" format as the *pszPreferredLocale* parameter to IWbemLevel1Login::NTLMLogin, the client MUST determine whether the server supports the locale and filter out unsupported locales before calling IWbemLevel1Login::NTLMLogin. To determine supported locales, the client MUST call [IWbemLevel1Login::EstablishPosition](#Section_3.1.4.1.1) If the return value is E_NOTIMPL, the client MUST choose the first locale that matches the "MS_xxx" format and MUST remove other locales from the string.
 
@@ -5958,7 +5958,7 @@ If IWbemObjectSink::Indicate returns an error, the server MUST do the following:
 <a id="Section_3.2.4.1.2"></a>
 ##### 3.2.4.1.2 IWbemObjectSink::SetStatus Client Details
 
-The client MUST call the IWbemObjectSink::SetStatus method operation to send the final status of the IWbemServices method operation by passing WBEM_STATUS_COMPLETE as an *lFlags* parameter and the operation return code as an HRESULT parameter. After calling IWbemObjectSink::SetStatus with final status information, the client MUST release the [IWbemObjectSink](#Section_3.2.4.1) interface and MUST NOT call any other methods of IWbemObjectSink.
+The client MUST call the IWbemObjectSink::SetStatus method operation to send the final status of the IWbemServices method operation by passing WBEM_STATUS_COMPLETE as an *lFlags* parameter and the operation return code as an HRESULT parameter. After calling IWbemObjectSink::SetStatus with final status information, the client MUST release the [IWbemObjectSink](#Section_3.1.4.2.2) interface and MUST NOT call any other methods of IWbemObjectSink.
 
 When the reported operation status is success, the client MUST set the *pObjParam* parameter to NULL.
 
@@ -5981,12 +5981,12 @@ If operation progress information by IWbemObjectSink::SetStatus returns an error
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 Sending Events to Server
 
-If the client wants to send the events to the WMI server, the client MUST call the [IWbemServices::QueryObjectSink](#Section_3.1.4.3.3) method on the [IWbemObjectSink](#Section_3.2.4.1) interface that is obtained as specified in section [3.2.3](#Section_3.1.3). When the method execution succeeds, the client gets the IWbemObjectSink interface. The extrinsic events, represented as [IWbemClassObject Prototype Result Object](#Section_2.2.4.1), as specified in 2.2.4.1, MUST be delivered to the server by calling [IWbemObjectSink::Indicate](#Section_3.1.4.2.1).When the client completes delivering the extrinsic events, the client MUST release the IWbemObjectSink.
+If the client wants to send the events to the WMI server, the client MUST call the [IWbemServices::QueryObjectSink](#Section_3.1.4.3.3) method on the [IWbemObjectSink](#Section_3.1.4.2.2) interface that is obtained as specified in section [3.2.3](#Section_3.2.3). When the method execution succeeds, the client gets the IWbemObjectSink interface. The extrinsic events, represented as [IWbemClassObject Prototype Result Object](#Section_2.2.4.1), as specified in 2.2.4.1, MUST be delivered to the server by calling [IWbemObjectSink::Indicate](#Section_3.1.4.2.1).When the client completes delivering the extrinsic events, the client MUST release the IWbemObjectSink.
 
 <a id="Section_3.2.4.2.2"></a>
 ##### 3.2.4.2.2 Calling Put Interfaces for CIM Objects with Amended Qualifiers
 
-If the client calls the [PutClass](#Section_3.1.4.3.6), [PutClassAsync](#Section_3.1.4.3.7), [PutInstance](#Section_4.2.3.2), or [PutInstanceAsync](#Section_3.1.4.3.13) method to update or create a [**CIM Object**](#gt_cim-object) that contains amended qualifiers, the client SHOULD set the WBEM_FLAG_USE_AMENDED_QUALIFIERS flag.
+If the client calls the [PutClass](#Section_3.1.4.3.7), [PutClassAsync](#Section_3.1.4.3.7), [PutInstance](#Section_3.1.4.3.13), or [PutInstanceAsync](#Section_3.1.4.3.13) method to update or create a [**CIM Object**](#gt_cim-object) that contains amended qualifiers, the client SHOULD set the WBEM_FLAG_USE_AMENDED_QUALIFIERS flag.
 
 To create a new class with amended qualifiers, the client MUST first separate the class into a locale-neutral class object and a locale-specific class object, with contents as described in section [3.1.1.2](#Section_3.1.1.2). Then the client MUST make multiple calls to **PutClass** or **PutClassAsync**; one to create the locale-neutral class object and one for each supported locale to construct the locale-specific class object. The client SHOULD create the locale-neutral object last.
 
@@ -6000,14 +6000,14 @@ To delete a class with amended qualifiers, the client MUST delete the locale-neu
 
 If the client wants to invoke following WMI methods synchronously, the client MUST NOT set WBEM_FLAG_RETURN_IMMEDIATELY when making method calls. When the method completes, the result of the operation is returned as return value. List of methods returning no objects in synchronous mode are
 
-- [IWbemServices::PutInstance](#Section_4.2.3.2)
-- [IWbemServices::PutClass](#Section_3.1.4.3.6)
-- [IWbemServices::DeleteClass](#Section_3.1.4.3.8)
+- [IWbemServices::PutInstance](#Section_3.1.4.3.13)
+- [IWbemServices::PutClass](#Section_3.1.4.3.7)
+- [IWbemServices::DeleteClass](#Section_3.1.4.3.9)
 - [IWbemServices::DeleteInstance](#Section_3.1.4.3.15)
 <a id="Section_3.2.4.2.5"></a>
 ##### 3.2.4.2.5 IWbemServices::ExecMethod and IWbemServices::ExecMethodAsync
 
-The client MUST create a [**CIM instance**](#gt_cim-instance) for the input parameter [**CIM class**](#gt_cim-class) defined in [MS-WMIO](../MS-WMIO/MS-WMIO.md) section 2.3.3. The values of the CIM instance properties MUST be set to the values of the input parameters of the method by matching the parameter name to the property name. This CIM instance MUST be passed to [IWbemServices::ExecMethod (section 3.1.4.3.22)](#Section_3.1.4.3.23) or [IWbemServices::ExecMethodAsync (section 3.1.4.3.23)](#Section_3.1.4.3.23) as *pInParams*.
+The client MUST create a [**CIM instance**](#gt_cim-instance) for the input parameter [**CIM class**](#gt_cim-class) defined in [MS-WMIO](../MS-WMIO/MS-WMIO.md) section 2.3.3. The values of the CIM instance properties MUST be set to the values of the input parameters of the method by matching the parameter name to the property name. This CIM instance MUST be passed to [IWbemServices::ExecMethod (section 3.1.4.3.22)](#Section_3.1.4.3.22) or [IWbemServices::ExecMethodAsync (section 3.1.4.3.23)](#Section_3.1.4.3.23) as *pInParams*.
 
 The output parameters from the method invocation will be returned as an instance of output parameter CIM class as defined in [MS-WMIO] section 2.3.3. Depending on how the method is invoked, the resultant object is returned in one of the ways as described in sections [3.2.4.2.6](#Section_3.2.4.2.6), [3.2.4.2.7](#Section_3.2.4.2.7), or [3.2.4.2.9](#Section_3.2.4.2.9).
 
@@ -6020,7 +6020,7 @@ If the client wants to invoke any of the following WMI methods synchronously, th
 | --- | --- | --- |
 | 1 | [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) | *ppWorkingNamespace* |
 | 2 | [IWbemServices::GetObject](#Section_3.1.4.3.5) | *ppObject* |
-| 3 | [IWbemServices::ExecMethod](#Section_3.1.4.3.23) | *ppOutParams* |
+| 3 | [IWbemServices::ExecMethod](#Section_3.1.4.3.22) | *ppOutParams* |
 
 When the call to the method fails, the output parameter is NULL.
 
@@ -6029,15 +6029,15 @@ When the call to the method fails, the output parameter is NULL.
 
 If the client wants to invoke any of the following WMI methods semisynchronously, the client MUST set WBEM_FLAG_RETURN_IMMEDIATELY when it makes the method calls.
 
-When the method returns success, the [IWbemCallResult](#Section_3.1.4.5.3) parameter MUST be used to get the result of the actual [**semisynchronous operation**](#gt_semisynchronous-operation). The client MUST call the methods of IWbemCallResult, as specified in the following table, to obtain the results of the semisynchronous operation that is initiated by the client. The client MUST NOT call other methods of IWbemCallResult except as specified in the following table.
+When the method returns success, the [IWbemCallResult](#Section_3.1.4.5) parameter MUST be used to get the result of the actual [**semisynchronous operation**](#gt_semisynchronous-operation). The client MUST call the methods of IWbemCallResult, as specified in the following table, to obtain the results of the semisynchronous operation that is initiated by the client. The client MUST NOT call other methods of IWbemCallResult except as specified in the following table.
 
 | Method | Rule |
 | --- | --- |
-| [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) | The [IWbemCallResult::GetResultServices](#Section_3.1.4.5.3) method MUST be called to retrieve the [IWbemServices](#Section_3.1.4.3.23) pointer. |
-| [IWbemServices::PutInstance](#Section_4.2.3.2) | The [IWbemCallResult::GetResultString](#Section_3.1.4.5.2) method MUST be called to obtain the [**CIM path**](#gt_775e4b82-5447-4125-b887-b404421e1269) that was assigned to the [**CIM**](#gt_common-information-model-cim) instance. |
+| [IWbemServices::OpenNamespace](#Section_3.1.4.3.1) | The [IWbemCallResult::GetResultServices](#Section_3.1.4.5.3) method MUST be called to retrieve the [IWbemServices](#Section_3.1.4.3.13) pointer. |
+| [IWbemServices::PutInstance](#Section_3.1.4.3.13) | The [IWbemCallResult::GetResultString](#Section_3.1.4.5.2) method MUST be called to obtain the [**CIM path**](#gt_775e4b82-5447-4125-b887-b404421e1269) that was assigned to the [**CIM**](#gt_common-information-model-cim) instance. |
 | [IWbemServices::GetObject](#Section_3.1.4.3.5) | The [IWbemCallResult::GetResultObject](#Section_3.1.4.5.1) method MUST be called to retrieve the [**CIM object**](#gt_cim-object). |
-| [IWbemServices::PutClass](#Section_3.1.4.3.6) [IWbemServices::DeleteClass](#Section_3.1.4.3.8) [IWbemServices::DeleteInstance](#Section_3.1.4.3.15) | The [IWbemCallResult::GetCallStatus](#Section_3.1.4.5.4) method MUST be called to return the call status. |
-| [IWbemServices::ExecMethod](#Section_3.1.4.3.23) | The IWbemCallResult::GetResultObject method MUST be called to retrieve the output parameters. |
+| [IWbemServices::PutClass](#Section_3.1.4.3.7) [IWbemServices::DeleteClass](#Section_3.1.4.3.9) [IWbemServices::DeleteInstance](#Section_3.1.4.3.15) | The [IWbemCallResult::GetCallStatus](#Section_3.1.4.5.4) method MUST be called to return the call status. |
+| [IWbemServices::ExecMethod](#Section_3.1.4.3.22) | The IWbemCallResult::GetResultObject method MUST be called to retrieve the output parameters. |
 
 When the semisynchronous IWbemServices method fails, the output parameter does not have the IWbemCallResult interface.
 
@@ -6050,11 +6050,11 @@ The methods returning multiple objects are as follows:
 
 - [IWbemServices::ExecQuery](#Section_3.1.4.3.18)
 - [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17)
-- [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11)
+- [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10)
 - [IWbemServices::ExecNotificationQuery](#Section_3.1.4.3.20)
-When the method execution fails, as indicated by the return value, the output parameter does not have [IEnumWbemClassObject](#Section_3.1.4.4.5).
+When the method execution fails, as indicated by the return value, the output parameter does not have [IEnumWbemClassObject](#Section_3.1.4.4).
 
-When [IWbemServices](#Section_3.1.4.3.23) method execution succeeds, an object of type IEnumWbemClassObject is returned to the client.
+When [IWbemServices](#Section_3.1.4.3.13) method execution succeeds, an object of type IEnumWbemClassObject is returned to the client.
 
 The client SHOULD obtain IWbemFetchSmartEnum interface using IRemUnknown and IRemUnknown2 interfaces as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), on this IEnumWbemClassObject interface. If client obtains IWbemFetchSmartEnum, the client MUST call IWbemFetchSmartEnum::GetSmartEnum to obtain IWbemWCOSmartEnum. The client SHOULD call [IWbemWCOSmartEnum::Next](#Section_3.1.4.7.1) method repeatedly to retrieve the objects. When IWbemWCOSmartEnum::Next returns WBEM_S_NO_ERROR or WBEM_S_TIMEDOUT, the client SHOULD call [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) again. If IWbemWCOSmartEnum::Next returns an error as specified in [2.2.11](#Section_2.2.11) or returns WBEM_S_FALSE, the client MUST NOT call IWbemWCOSmartEnum::Next again.
 
@@ -6068,7 +6068,7 @@ If the client wants to start the enumerator from the first object, the client MU
 
 If the client wants to create a new enumerator containing the same result set, the client MUST call IEnumWbemClassObject::Clone, if the IWbemServices method that created the IEnumWbemClassObject is not passed WBEM_FLAG_FORWARD_ONLY flag. The client SHOULD use IEnumWbemClassObject created using IEnumWbemClassObject::Clone as another result object by calling IEnumWbemClassObject::Next.
 
-If the client wants to get some results of the operation asynchronously, the client MUST call [IEnumWbemClassObject::NextAsync](#Section_3.1.4.4.3) with the uCount, in this case next uCount result objects are returned in [IWbemObjectSink](#Section_3.2.4.1) passed as a parameter to IEnumWbemClassObject::NextAsync.
+If the client wants to get some results of the operation asynchronously, the client MUST call [IEnumWbemClassObject::NextAsync](#Section_3.1.4.4.3) with the uCount, in this case next uCount result objects are returned in [IWbemObjectSink](#Section_3.1.4.2.2) passed as a parameter to IEnumWbemClassObject::NextAsync.
 
 <a id="Section_3.2.4.2.9"></a>
 ##### 3.2.4.2.9 Invoking Asynchronous Operations
@@ -6085,35 +6085,35 @@ The methods providing asynchronous behaviors are as follows:
 - [IWbemServices::ExecQueryAsync (section 3.1.4.3.19)](#Section_3.1.4.3.19)
 - [IWbemServices::ExecNotificationQueryAsync (section 3.1.4.3.21)](#Section_3.1.4.3.21)
 - [IWbemServices::ExecMethodAsync (section 3.1.4.3.23)](#Section_3.1.4.3.23)
-If the client wants to invoke any of the above asynchronous methods, the client MUST pass an object implementing [IWbemObjectSink](#Section_3.2.4.1) interface to the above method calls as a response handler.
+If the client wants to invoke any of the above asynchronous methods, the client MUST pass an object implementing [IWbemObjectSink](#Section_3.1.4.2.2) interface to the above method calls as a response handler.
 
-When the method invocation succeeds, the client SHOULD wait for the result of the operation to be returned to the client using [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) and [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) on the IWbemObjectSink passed to the asynchronous method.
+When the method invocation succeeds, the client SHOULD wait for the result of the operation to be returned to the client using [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) and [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) on the IWbemObjectSink passed to the asynchronous method.
 
-When the [IWbemServices](#Section_3.1.4.3.23) method invocation fails, the result of the operation is returned as a return value of the method.
+When the [IWbemServices](#Section_3.1.4.3.13) method invocation fails, the result of the operation is returned as a return value of the method.
 
 After the IWbemServices asynchronous method invocation succeeds, if the client wants to cancel the pending [**asynchronous operation**](#gt_asynchronous-operation) the client MUST call [IWbemServices::CancelAsyncCall](#Section_3.1.4.3.2) method. If the client calls IWbemServices::CancelAsyncCall, the client MUST pass the IWbemObjectSink passed to the asynchronous IWbemServices method that is still pending. The client MUST NOT call IWbemServices::CancelAsyncCall from within a call to IWbemObjectSink::Indicate or IWbemObjectSink::SetStatus.
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 IWbemBackupRestore Interface Client Details
 
-If client wants to invoke methods of [IWbemBackupRestore](#Section_3.1.4.10.1) interface, the client MUST activate IWbemBackupRestore interface on the target WMI server machine using [**CLSID**](#gt_class-identifier-clsid) {C49E32C6-BC8B-11D2-85D4-00105A1F8304} as specified in DCOM remote protocol.
+If client wants to invoke methods of [IWbemBackupRestore](#Section_3.1.4.10) interface, the client MUST activate IWbemBackupRestore interface on the target WMI server machine using [**CLSID**](#gt_class-identifier-clsid) {C49E32C6-BC8B-11D2-85D4-00105A1F8304} as specified in DCOM remote protocol.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 IWbemBackupRestoreEx Interface Client Details
 
-If client wants to invoke methods of [IWbemBackupRestoreEx](#Section_3.1.4.11) interface, the client MUST activate IWbemBackupRestoreEx interface on the target WMI server using [**CLSID**](#gt_class-identifier-clsid) {C49E32C6-BC8B-11D2-85D4-00105A1F8304} as specified in DCOM remote protocol. The client MAY obtain IWbemBackupRestoreEx by calling IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), on [IWbemBackupRestore](#Section_3.1.4.10.1) interface obtained as specified in section 3.1.4.10.
+If client wants to invoke methods of [IWbemBackupRestoreEx](#Section_3.1.4.11) interface, the client MUST activate IWbemBackupRestoreEx interface on the target WMI server using [**CLSID**](#gt_class-identifier-clsid) {C49E32C6-BC8B-11D2-85D4-00105A1F8304} as specified in DCOM remote protocol. The client MAY obtain IWbemBackupRestoreEx by calling IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), on [IWbemBackupRestore](#Section_3.1.4.10) interface obtained as specified in section 3.1.4.10.
 
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 IWbemRefreshingServices Interface Client Details
 
-The client MUST obtain [IWbemRefreshingServices](#Section_3.2.4.5.3) interface, if the client wants to get updates to the objects in an efficient manner. The client MUST obtain IWbemRefreshingServices interface by calling IRemUnknown and IRemUnknown2 on [IWbemServices](#Section_3.1.4.3.23) interface obtained as specified in section [3.2.3](#Section_3.1.3).
+The client MUST obtain [IWbemRefreshingServices](#Section_3.1.4.12) interface, if the client wants to get updates to the objects in an efficient manner. The client MUST obtain IWbemRefreshingServices interface by calling IRemUnknown and IRemUnknown2 on [IWbemServices](#Section_3.1.4.3.13) interface obtained as specified in section [3.2.3](#Section_3.2.3).
 
-The client MUST generate [_WBEM_REFRESHER_ID](#Section_2.2.21) as specified in section 2.2.21. The client MAY call [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.1.4.12.2), [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.1.4.12.2) or [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2) to add multiple objects and enums to the refresher.
+The client MUST generate [_WBEM_REFRESHER_ID](#Section_2.2.21) as specified in section 2.2.21. The client MAY call [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.2.4.5.1), [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.2.4.5.1) or [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2) to add multiple objects and enums to the refresher.
 
 <a id="Section_3.2.4.5.1"></a>
 ##### 3.2.4.5.1 IWbemRefreshingServices::AddObjectToRefresher and IWbemRefreshingServices::AddObjectToRefresherByTemplate
 
-The client MUST pass the _WBEM_REFRESHER_ID that is generated as specified in section [2.2.21](#Section_2.2.21) to the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.1.4.12.2) and [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.1.4.12.2) methods.
+The client MUST pass the _WBEM_REFRESHER_ID that is generated as specified in section [2.2.21](#Section_2.2.21) to the [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.2.4.5.1) and [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.2.4.5.1) methods.
 
 When the client calls the IWbemRefreshingServices::AddObjectToRefresher or IWbemRefreshingServices::AddObjectToRefresherByTemplate method with pRefresherId generated by the client, the server returns the refresher information in the _WBEM_REFRESH_INFO structure if the method succeeds.
 
@@ -6121,7 +6121,7 @@ The client MUST allow all the version numbers that are returned by the server in
 
 If the returned _WBEM_REFRESH_INFO structure contains m_lType as WBEM_REFRESH_TYPE_REMOTE, the m_Info structure contains the _WBEM_REFRESH_INFO_REMOTE structure. The client MUST obtain the IWbemRemoteRefresher from the m_pRefresher in _WBEM_REFRESH_INFO_REMOTE. The client MUST use the [IWbemRemoteRefresher::RemoteRefresh](#Section_3.1.4.13.1) method to get the updated object. If the client wants to remove the particular object from the remote refresher, the client MUST use m_lCancelId, which is returned in _WBEM_REFRESH_INFO, to invoke the [IWbemRemoteRefresher::StopRefreshing](#Section_3.1.4.13.2) method.
 
-If the returned _WBEM_REFRESH_INFO structure contains m_lType as WBEM_REFRESH_TYPE_NON_HIPERF, the client MUST retrieve the CIM instance using [IWbemServices::GetObject](#Section_3.1.4.3.5) or [IWbemServices::GetObjectAsync](#Section_3.1.4.3.5) on the initial [IWbemServices](#Section_3.1.4.3.23) interface.
+If the returned _WBEM_REFRESH_INFO structure contains m_lType as WBEM_REFRESH_TYPE_NON_HIPERF, the client MUST retrieve the CIM instance using [IWbemServices::GetObject](#Section_3.1.4.3.5) or [IWbemServices::GetObjectAsync](#Section_3.1.4.3.5) on the initial [IWbemServices](#Section_3.1.4.3.13) interface.
 
 When the IWbemRefreshingServices::AddObjectToRefresher or IWbemRefreshingServices::AddObjectToRefresherByTemplate method fails, the server does not return the _WBEM_REFRESH_INFO structure.
 
@@ -6136,20 +6136,20 @@ The client MUST allow all the version numbers that are returned by the server in
 
 If the returned **_WBEM_REFRESH_INFO** structure contains **m_lType** as WBEM_REFRESH_TYPE_REMOTE, the **m_Info** structure contains the **_WBEM_REFRESH_INFO_REMOTE** structure. The client MUST obtain the IWbemRemoteRefresher from the **m_pRefresher** in **_WBEM_REFRESH_INFO_REMOTE**. The client MUST use the [IWbemRemoteRefresher::RemoteRefresh](#Section_3.1.4.13.1) method to get the updated enumeration. The client MUST use m_lCancelId, which is returned in **_WBEM_REFRESH_INFO**, to invoke the [IWbemRemoteRefresher::StopRefreshing](#Section_3.1.4.13.2) method if the client wants to remove the particular enumeration from the remote refresher.
 
-If the returned **_WBEM_REFRESH_INFO** structure contains **m_lType** as WBEM_REFRESH_TYPE_NON_HIPERF, the client MUST retrieve the CIM instances using [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17) or [IWbemServices::CreateInstanceEnumAsync](#Section_3.1.4.3.17) on the initial [IWbemServices](#Section_3.1.4.3.23) interface.
+If the returned **_WBEM_REFRESH_INFO** structure contains **m_lType** as WBEM_REFRESH_TYPE_NON_HIPERF, the client MUST retrieve the CIM instances using [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17) or [IWbemServices::CreateInstanceEnumAsync](#Section_3.1.4.3.17) on the initial [IWbemServices](#Section_3.1.4.3.13) interface.
 
 When the IWbemRefreshingServices::AddEnumToRefresher method fails, the client MUST NOT use the **_WBEM_REFRESH_INFO** structure.
 
 <a id="Section_3.2.4.5.3"></a>
 ##### 3.2.4.5.3 IWbemRefreshingServices::GetRemoteRefresher
 
-When invoking the methods of the [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface, if the connection is lost and reported to the client as an RPC disconnect error (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md)), the client SHOULD try to reconnect to WMI by obtaining [IWbemServices](#Section_3.1.4.3.23) as specified in section [3.2.3](#Section_3.1.3) and to obtain the IWbemRemoteRefresher interface using the IWbemServices interface as specified in section [3.2.4.5](#Section_3.2.4.5), and SHOULD call the [IWbemRefreshingServices::GetRemoteRefresher](#Section_3.2.4.5.3) method on this interface.
+When invoking the methods of the [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface, if the connection is lost and reported to the client as an RPC disconnect error (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md)), the client SHOULD try to reconnect to WMI by obtaining [IWbemServices](#Section_3.1.4.3.13) as specified in section [3.2.3](#Section_3.2.3) and to obtain the IWbemRemoteRefresher interface using the IWbemServices interface as specified in section [3.2.4.5](#Section_3.1.4.12), and SHOULD call the [IWbemRefreshingServices::GetRemoteRefresher](#Section_3.2.4.5.3) method on this interface.
 
 If the IWbemRefreshingServices::GetRemoteRefresher method call succeeds, the client gets a GUID of the remote refresher in the *pGuid* parameter.
 
 The client MUST allow all the version numbers that are returned by the server in the *pdwSvrRefrVersion* parameter.
 
-If the GUID is equal to the GUID that is returned in WBEM_REFRESH_INFO_REMOTE when the remote refresher is first received by calling either [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2), [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.1.4.12.2), or [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.1.4.12.2), the client MUST NOT call [IWbemRefreshingServices::ReconnectRemoteRefresher](#Section_3.2.4.5.4). The client SHOULD call [IWbemRemoteRefresher::RemoteRefresh](#Section_3.1.4.13.1) on the IWbemRemoteRefresher interface, which is obtained by using IWbemRefreshingServices::GetRemoteRefresher to refresh the object. The client MUST NOT call the methods on the IWbemRemoteRefresher interface whose connection is initially lost.
+If the GUID is equal to the GUID that is returned in WBEM_REFRESH_INFO_REMOTE when the remote refresher is first received by calling either [IWbemRefreshingServices::AddEnumToRefresher](#Section_3.2.4.5.2), [IWbemRefreshingServices::AddObjectToRefresher](#Section_3.2.4.5.1), or [IWbemRefreshingServices::AddObjectToRefresherByTemplate](#Section_3.2.4.5.1), the client MUST NOT call [IWbemRefreshingServices::ReconnectRemoteRefresher](#Section_3.2.4.5.4). The client SHOULD call [IWbemRemoteRefresher::RemoteRefresh](#Section_3.1.4.13.1) on the IWbemRemoteRefresher interface, which is obtained by using IWbemRefreshingServices::GetRemoteRefresher to refresh the object. The client MUST NOT call the methods on the IWbemRemoteRefresher interface whose connection is initially lost.
 
 If the GUID is not equal to the GUID that is returned in WBEM_REFRESH_INFO_REMOTE when the remote refresher is first received by calling either IWbemRefreshingServices::AddEnumToRefresher, IWbemRefreshingServices::AddObjectToRefresher or IWbemRefreshingServices::AddObjectToRefresherByTemplate, the client MUST call IWbemRefreshingServices::ReconnectRemoteRefresher to reconnect all the objects to the refresher. The client MUST NOT call methods on the new remote refresher until IWbemRefreshingServices::ReconnectRemoteRefresher is executed successfully. The client MUST NOT call methods on the IWbemRemoteRefresher interface whose connection is lost initially.
 
@@ -6158,7 +6158,7 @@ If the IWbemRefreshingServices::GetRemoteRefresher method call fails, the client
 <a id="Section_3.2.4.5.4"></a>
 ##### 3.2.4.5.4 IWbemRefreshingServices::ReconnectRemoteRefresher
 
-The client SHOULD call [IWbemRefreshingServices::ReconnectRemoteRefresher](#Section_3.2.4.5.4) if the [IWbemRemoteRefresher](#Section_3.1.4.13.1) method call failed and the client is attempting to reconnect the remote refresher as specified in section [3.2.4.5.3](#Section_3.2.4.5.3).
+The client SHOULD call [IWbemRefreshingServices::ReconnectRemoteRefresher](#Section_3.2.4.5.4) if the [IWbemRemoteRefresher](#Section_3.1.4.13.2) method call failed and the client is attempting to reconnect the remote refresher as specified in section [3.2.4.5.3](#Section_3.2.4.5.3).
 
 The client MUST allow all the version numbers that are returned by the server in *pdwSvrRefrVersion*.
 
@@ -6208,7 +6208,7 @@ The examples are performed using the wbemtest utility. Network captures with ann
 
 The figure below illustrates one possible sequence of steps that the WMI client takes during establishment of connection with WMI server.
 
-For a client application to connect to the WMI service on a remote server, the client application first obtains an [IWbemLevel1Login](#Section_3.1.4.1.4) [**interface pointer**](#gt_interface-pointer) to the server on the remote computer by using the DCOM activation. The client then obtains IWbemLoginClientID by calling IRemUnknown using IWbemLevel1Login. The client calls [IWbemLoginClientID::SetClientInfo](#Section_3.1.4.8.1). Then the client obtains IWbemLoginHelper by calling IRemUnknown using IWbemLevel1Login. The client calls [IWbemLoginHelper::SetEvent](#Section_3.1.4.9.1) to determine whether the WMI server is running on the same machine. Finally, the client calls the [IWbemLevel1Login::NTLMLogin](#Section_3.1.4.1.4) method to obtain an [IWbemServices](#Section_3.1.4.3.23) interface pointer. The IWbemServices interface pointer is the starting point for all other activities.
+For a client application to connect to the WMI service on a remote server, the client application first obtains an [IWbemLevel1Login](#Section_3.1.4.1) [**interface pointer**](#gt_interface-pointer) to the server on the remote computer by using the DCOM activation. The client then obtains IWbemLoginClientID by calling IRemUnknown using IWbemLevel1Login. The client calls [IWbemLoginClientID::SetClientInfo](#Section_3.1.4.8.1). Then the client obtains IWbemLoginHelper by calling IRemUnknown using IWbemLevel1Login. The client calls [IWbemLoginHelper::SetEvent](#Section_3.1.4.9.1) to determine whether the WMI server is running on the same machine. Finally, the client calls the [IWbemLevel1Login::NTLMLogin](#Section_3.1.4.1.4) method to obtain an [IWbemServices](#Section_3.1.4.3.13) interface pointer. The IWbemServices interface pointer is the starting point for all other activities.
 
 ![Protocol initialization example](media/image11.png)
 
@@ -6229,7 +6229,7 @@ Client creates a DCOM request to obtain **IWbemLevel1Login** interface:
 
 + ActivationProperties:
 
-Server responds with [IWbemLevel1Login](#Section_3.1.4.1.4) [**interface pointer**](#gt_interface-pointer) to the client's request:
+Server responds with [IWbemLevel1Login](#Section_3.1.4.1) [**interface pointer**](#gt_interface-pointer) to the client's request:
 
 - DCOM: RemoteCreateInstance Response, ORPCFLOCAL - Local call to this computer
 
@@ -6237,7 +6237,7 @@ Server responds with [IWbemLevel1Login](#Section_3.1.4.1.4) [**interface pointer
 
 + ActivationProperties:
 
-Client performs the QueryInterface for [IWbemLoginClientID](#Section_3.1.4.8.1) interface from **IWbemLevel1Login** interface pointer:
+Client performs the QueryInterface for [IWbemLoginClientID](#Section_3.1.4.8) interface from **IWbemLevel1Login** interface pointer:
 
 - DCOM: IRemUnknown2:RemQueryInterface Request, DCOM Version=5.7 Causality Id={8E2416FE-0A3F-42BE-A9B0-F30624C94619}
 
@@ -6303,7 +6303,7 @@ LocaleVersion: 1 (0x1)
 
 ReturnValue: 0x00000000 - WBEM_S_NO_ERROR - Indicates a successful completion to the method call.
 
-Client calls **NTLMLogin** method on IWbemLevel1Login interface pointer to obtain [IWbemServices](#Section_3.1.4.3.23) interface pointer for root\cimv2 namespace on sai-nav009-2 (server):
+Client calls **NTLMLogin** method on IWbemLevel1Login interface pointer to obtain [IWbemServices](#Section_3.1.4.3.13) interface pointer for root\cimv2 namespace on sai-nav009-2 (server):
 
 - WMI: IWbemLevel1Login:NTLMLogin Request, NetworkResource=\\sai-nav009-2\root\cimv2 PreferredLocale=en-US,en Flags=0
 
@@ -6340,7 +6340,7 @@ A [**synchronous operation**](#gt_synchronous-operation) completes when the enti
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Synchronous Delivery of a Single Result
 
-The [IWbemServices::GetObject](#Section_3.1.4.3.5) and [IWbemServices::ExecMethod](#Section_3.1.4.3.23) methods support synchronous calls returning a single marshaled [IWbemClassObject](#Section_2.2.4) [**interface pointer**](#gt_interface-pointer).
+The [IWbemServices::GetObject](#Section_3.1.4.3.5) and [IWbemServices::ExecMethod](#Section_3.1.4.3.22) methods support synchronous calls returning a single marshaled [IWbemClassObject](#Section_2.2.4) [**interface pointer**](#gt_interface-pointer).
 
 ![Synchronous delivery of a single result](media/image12.png)
 
@@ -6361,8 +6361,8 @@ The server behaviors are as follows:
 - Optimized server behavior<86>
 The resulting client-server interactions are defined in the following sections:
 
-- [Unoptimized Client and Unoptimized Server (section 4.2.2.1)](#Section_4.2.2.1)
-- [Unoptimized Client and Optimized Server (section 4.2.2.2)](#Section_4.2.2.3)
+- [Unoptimized Client and Unoptimized Server (section 4.2.2.1)](#Section_4.2.2.4)
+- [Unoptimized Client and Optimized Server (section 4.2.2.2)](#Section_4.2.2.2)
 - [Optimized Client and Optimized Server (section 4.2.2.3)](#Section_4.2.2.3)
 - [Optimized Client and Unoptimized Server (section 4.2.2.4)](#Section_4.2.2.4)
 <a id="Section_4.2.2.1"></a>
@@ -6370,7 +6370,7 @@ The resulting client-server interactions are defined in the following sections:
 
 The product versions that exhibit unoptimized client behavior and unoptimized server behavior are referenced in section [4.2.2](#Section_1.3).
 
-To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an [IEnumWbemClassObject](#Section_3.1.4.4.5) interface pointer. The client then uses the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method to repeatedly retrieve the [IWbemClassObject](#Section_2.2.4) objects from the query result set.
+To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an [IEnumWbemClassObject](#Section_3.1.4.4) interface pointer. The client then uses the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method to repeatedly retrieve the [IWbemClassObject](#Section_2.2.4) objects from the query result set.
 
 ![Unoptimized Client and Unoptimized Server](media/image13.png)
 
@@ -6383,9 +6383,9 @@ An example capture is given on [[SysDocCap-WMI]](https://go.microsoft.com/fwlink
 
 The product versions that exhibit unoptimized client behavior and optimized server behavior are referenced in section [4.2.2](#Section_1.3).
 
-To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an [IEnumWbemClassObject](#Section_3.1.4.4.5) interface pointer. The client then uses the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method to repeatedly retrieve the [IWbemClassObject](#Section_2.2.4) objects from the query result set.
+To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an [IEnumWbemClassObject](#Section_3.1.4.4) interface pointer. The client then uses the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method to repeatedly retrieve the [IWbemClassObject](#Section_2.2.4) objects from the query result set.
 
-The call sequence is the same as that in section [4.2.2.1](#Section_4.2.2.1) because in both cases, the client is unoptimized, and therefore still uses the old mechanism for communication. Sections [4.2.2.3](#Section_4.2.2.3) and [4.2.2.4](#Section_4.2.2.4) explain the call sequences between the newer versions of client and server.
+The call sequence is the same as that in section [4.2.2.1](#Section_4.2.2.4) because in both cases, the client is unoptimized, and therefore still uses the old mechanism for communication. Sections [4.2.2.3](#Section_4.2.2.3) and [4.2.2.4](#Section_4.2.2.4) explain the call sequences between the newer versions of client and server.
 
 ![Unoptimized Client and Optimized Server](media/image14.png)
 
@@ -6398,7 +6398,7 @@ An example capture is given on [[SysDocCap-WMI]](https://go.microsoft.com/fwlink
 
 The product versions that exhibit optimized client behavior and optimized server behavior are referenced in section [4.2.2](#Section_1.3).
 
-To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an IEnumWbemClassObject interface pointer. The client uses IRemUnknown and IRemUnknown2, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), to obtain an [IWbemFetchSmartEnum](#Section_3.1.4.6) interface pointer from the IEnumWbemClassObject interface pointer. The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1) method to obtain the [IWbemWCOSmartEnum](#Section_3.1.4.7.1) interface pointer. The client uses the [IWbemWCOSmartEnum::Next](#Section_3.1.4.7.1) method repeatedly to retrieve the [IWbemClassObject](#Section_2.2.4) interface pointers that contains the result set. The results are encoded as an [ObjectArray](#Section_2.2.14) as specified in section 2.2.14.
+To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an IEnumWbemClassObject interface pointer. The client uses IRemUnknown and IRemUnknown2, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), to obtain an [IWbemFetchSmartEnum](#Section_3.1.4.6) interface pointer from the IEnumWbemClassObject interface pointer. The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1) method to obtain the [IWbemWCOSmartEnum](#Section_3.1.4.7) interface pointer. The client uses the [IWbemWCOSmartEnum::Next](#Section_3.1.4.7.1) method repeatedly to retrieve the [IWbemClassObject](#Section_2.2.4) interface pointers that contains the result set. The results are encoded as an [ObjectArray](#Section_2.2.14) as specified in section 2.2.14.
 
 ![Optimized Client and Optimized Server](media/image15.png)
 
@@ -6411,7 +6411,7 @@ An example capture is given on [[SysDocCap-WMI]](https://go.microsoft.com/fwlink
 
 The product versions that exhibit optimized client behavior and unoptimized server behavior are referenced in section [4.2.2](#Section_1.3).
 
-To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.11), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an IEnumWbemClassObject interface pointer. The client uses IRemUnknown and IRemUnknown2, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), to obtain an [IWbemFetchSmartEnum](#Section_3.1.4.6) interface pointer from IEnumWbemClassObject interface pointer. The operation fails because the server is not implementing the IWbemFetchSmartEnum interface. The client falls back to unoptimized client behavior.
+To make a [**synchronous operation**](#gt_synchronous-operation) from a client to a server, the client uses the [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer). The client calls the IWbemServices synchronous methods [IWbemServices::CreateInstanceEnum](#Section_3.1.4.3.17), [IWbemServices::CreateClassEnum](#Section_3.1.4.3.10), and [IWbemServices::ExecQuery](#Section_3.1.4.3.18). In response to the method executed, the server returns an IEnumWbemClassObject interface pointer. The client uses IRemUnknown and IRemUnknown2, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), to obtain an [IWbemFetchSmartEnum](#Section_3.1.4.6) interface pointer from IEnumWbemClassObject interface pointer. The operation fails because the server is not implementing the IWbemFetchSmartEnum interface. The client falls back to unoptimized client behavior.
 
 ![Optimized Client and Unoptimized Server](media/image16.png)
 
@@ -6427,7 +6427,7 @@ An example capture is given on [[SysDocCap-WMI]](https://go.microsoft.com/fwlink
 
 This section contains the information exchanged between SAI-NAV009 (client) and SAI-NAV009-2 (server).
 
-First the client tries to connect to the server and obtains [IwbemServices](#Section_3.1.4.3.23) for namespace **root\cimv2** as outlined in [4.1.1](#Section_4.1.1).
+First the client tries to connect to the server and obtains [IwbemServices](#Section_3.1.4.3.13) for namespace **root\cimv2** as outlined in [4.1.1](#Section_4.1.1).
 
 Client calls ExecQuery method on IWbemServices [**interface pointer**](#gt_interface-pointer) with "select * from win32_process where Name='calc.exe'" as strQuery. It is assumed that an instance of calc.exe is running on the server:
 
@@ -6483,7 +6483,7 @@ Server responds with a valid IWbemFetchSmartEnum interface pointer. This means t
 
 + ReturnValue: Success
 
-The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1) method to obtain the [IWbemWCOSmartEnum](#Section_3.1.4.7.1) interface pointer:
+The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1) method to obtain the [IWbemWCOSmartEnum](#Section_3.1.4.7) interface pointer:
 
 WMI: IWbemFetchSmartEnum:GetSmartEnum Request
 
@@ -6929,12 +6929,12 @@ ReturnValue: 0x00000001 - WBEM_S_FALSE - Either no more CIM objects are availabl
 <a id="Section_4.3"></a>
 ## 4.3 Semisynchronous Operations
 
-In semisynchronous cases, the call returns before the requested operation completes, and another interface is used to retrieve the operation results. The returned interface depends on the [IWbemServices](#Section_3.1.4.3.23) methods that are invoked by the client. The following sections describe the two different behaviors.
+In semisynchronous cases, the call returns before the requested operation completes, and another interface is used to retrieve the operation results. The returned interface depends on the [IWbemServices](#Section_3.1.4.3.13) methods that are invoked by the client. The following sections describe the two different behaviors.
 
 <a id="Section_4.3.1"></a>
 ### 4.3.1 Semisynchronous Delivery of a Single Result
 
-The methods returning a single element such as [IWbemServices::OpenNamespace](#Section_3.1.4.3.1), [IWbemServices::GetObject](#Section_3.1.4.3.5), [IWbemServices::PutClass](#Section_3.1.4.3.6), [IWbemServices::DeleteClass](#Section_3.1.4.3.8), [IWbemServices::PutInstance](#Section_4.2.3.2), [IWbemServices::DeleteInstance](#Section_3.1.4.3.15), or [IWbemServices::ExecMethod](#Section_3.1.4.3.23) return an [IWbemCallResult](#Section_3.1.4.5.3) [**interface pointer**](#gt_interface-pointer). To obtain the operation results, the client uses the IWbemCallResult methods.
+The methods returning a single element such as [IWbemServices::OpenNamespace](#Section_3.1.4.3.1), [IWbemServices::GetObject](#Section_3.1.4.3.5), [IWbemServices::PutClass](#Section_3.1.4.3.7), [IWbemServices::DeleteClass](#Section_3.1.4.3.9), [IWbemServices::PutInstance](#Section_3.1.4.3.13), [IWbemServices::DeleteInstance](#Section_3.1.4.3.15), or [IWbemServices::ExecMethod](#Section_3.1.4.3.22) return an [IWbemCallResult](#Section_3.1.4.5) [**interface pointer**](#gt_interface-pointer). To obtain the operation results, the client uses the IWbemCallResult methods.
 
 ![Semisynchronous delivery of a single result](media/image17.png)
 
@@ -6943,7 +6943,7 @@ Figure 17: Semisynchronous delivery of a single result
 <a id="Section_4.3.2"></a>
 ### 4.3.2 Semisynchronous Delivery of Result Sets
 
-The [**semisynchronous operation**](#gt_semisynchronous-operation) uses the same sequence as the synchronous calls, as specified in section [4.2.2](#Section_1.3), to request a result set. However, in semisynchronous cases, the [IEnumWbemClassObject](#Section_3.1.4.4.5) [**interface pointer**](#gt_interface-pointer) is returned before the result set is available on the server. This is different from the synchronous case, in which the interface pointer is returned only after the result set is available on the server. The IEnumWbemClassObject interface pointer is returned before the result set is available on the server. When the client calls the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method, it specifies a time-out within which the server returns the requested results. When one of the previous conditions is satisfied, the call completes.
+The [**semisynchronous operation**](#gt_semisynchronous-operation) uses the same sequence as the synchronous calls, as specified in section [4.2.2](#Section_1.3), to request a result set. However, in semisynchronous cases, the [IEnumWbemClassObject](#Section_3.1.4.4) [**interface pointer**](#gt_interface-pointer) is returned before the result set is available on the server. This is different from the synchronous case, in which the interface pointer is returned only after the result set is available on the server. The IEnumWbemClassObject interface pointer is returned before the result set is available on the server. When the client calls the [IEnumWbemClassObject::Next](#Section_3.1.4.4.2) method, it specifies a time-out within which the server returns the requested results. When one of the previous conditions is satisfied, the call completes.
 
 <a id="Section_4.3.3"></a>
 ### 4.3.3 Semisynchronous Delivery Traces
@@ -6953,7 +6953,7 @@ The [**semisynchronous operation**](#gt_semisynchronous-operation) uses the same
 
 This section contains the information exchanged between SAI-NAV009 (client) and SAI-NAV009-2 (server).
 
-First the client tries to connect to the server and obtains [IWbemServices](#Section_3.1.4.3.23) for namespace root\cimv2 as outlined in [4.1.1](#Section_4.1.1).
+First the client tries to connect to the server and obtains [IWbemServices](#Section_3.1.4.3.13) for namespace root\cimv2 as outlined in [4.1.1](#Section_4.1.1).
 
 The client calls ExecQuery method on IwbemServices [**interface pointer**](#gt_interface-pointer) with "select * from win32_process where Name='calc.exe'" as strQuery. It is assumed that an instance of calc.exe is running on the server:
 
@@ -6969,7 +6969,7 @@ The client calls ExecQuery method on IwbemServices [**interface pointer**](#gt_i
 
 + Ctx: NULL
 
-In response to the method executed above, the server returns an [IenumWbemClassObject](#Section_3.1.4.4.5) interface pointer:
+In response to the method executed above, the server returns an [IenumWbemClassObject](#Section_3.1.4.4) interface pointer:
 
 - WMI: IWbemServices:ExecQuery Response, ReturnValue=WBEM_S_NO_ERROR
 
@@ -7013,7 +7013,7 @@ The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1
 
 WMI: IWbemFetchSmartEnum:GetSmartEnum Request
 
-The server responds with a valid [IWbemWCOSmartEnum](#Section_3.1.4.7.1) interface pointer:
+The server responds with a valid [IWbemWCOSmartEnum](#Section_3.1.4.7) interface pointer:
 
 - WMI: IWbemFetchSmartEnum:GetSmartEnum Response, ReturnValue=WBEM_S_NO_ERROR
 
@@ -7073,7 +7073,7 @@ Flags: WBEM_FLAG_RETURN_IMMEDIATELY - If this bit is not set, the server MUST ma
 
 + CallResult: NULL
 
-The server responds with a valid [IWbemCallResult](#Section_3.1.4.5.3) interface pointer corresponding to the ExecMethod operation above:
+The server responds with a valid [IWbemCallResult](#Section_3.1.4.5) interface pointer corresponding to the ExecMethod operation above:
 
 - WMI: IWbemServices:ExecMethod Response, ReturnValue=WBEM_S_NO_ERROR
 
@@ -7228,7 +7228,7 @@ uint32 y;
 
 There is initially an instance of TestWMI object created (x=3,y=5).
 
-First the client tries to connect to the server and obtains [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer) for namespace **root\cimv2\MyTest** as outlined in [4.1.1](#Section_4.1.1).
+First the client tries to connect to the server and obtains [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer) for namespace **root\cimv2\MyTest** as outlined in [4.1.1](#Section_4.1.1).
 
 Client calls PutInstance operation on IWbemServices interface pointer to create another instance of TestWMI class on the server. The instance property values are x=10, y=15:
 
@@ -7244,7 +7244,7 @@ Pad: 0 Bytes
 
 ReturnValue: 0x00000001 - WBEM_S_FALSE - Either no more CIM objects are available, the number of returned CIM objects is less than the number requested, or this is the end of an enumeration.
 
-Server responds with a valid [IWbemCallResult](#Section_3.1.4.5.3) interface pointer corresponding to the PutInstance operation above:
+Server responds with a valid [IWbemCallResult](#Section_3.1.4.5) interface pointer corresponding to the PutInstance operation above:
 
 - WMI: IWbemServices:PutInstance Response, ReturnValue=WBEM_S_NO_ERROR
 
@@ -7340,7 +7340,7 @@ Server responds with a valid IWbemFetchSmartEnum interface pointer. This means t
 
 + ReturnValue: Success
 
-The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1) method to obtain the [IWbemWCOSmartEnum](#Section_3.1.4.7.1):
+The client then calls the [IWbemFetchSmartEnum::GetSmartEnum](#Section_3.1.4.6.1) method to obtain the [IWbemWCOSmartEnum](#Section_3.1.4.7):
 
 WMI: IWbemFetchSmartEnum:GetSmartEnum Request
 
@@ -7515,11 +7515,11 @@ ReturnValue: 0x00000001 - WBEM_S_FALSE - Either no more CIM objects are availabl
 
 An asynchronous method returns before the requested operation completes. The server continues to execute the request and delivers the results to the client using a response handler when the results are available. The response handler receives the results as they become available. The [IWbemObjectSink::Indicate](#Section_3.1.4.2.1) method is called by the server when a result is found during the operation.
 
-To make an asynchronous query, the client uses the [IWbemServices](#Section_3.1.4.3.23) [**interface pointer**](#gt_interface-pointer) and it passes the [IWbemObjectSink](#Section_3.2.4.1) interface when calling an asynchronous method of the IWbemServices interface.
+To make an asynchronous query, the client uses the [IWbemServices](#Section_3.1.4.3.13) [**interface pointer**](#gt_interface-pointer) and it passes the [IWbemObjectSink](#Section_3.1.4.2.2) interface when calling an asynchronous method of the IWbemServices interface.
 
 If the asynchronous call returns SUCCESS, the server keeps a reference to the IWbemObjectSink interface pointer. If the server is required to return WMI objects to the client, the server delivers the results through the IWbemObjectSink::Indicate method.
 
-After the delivery of all objects, the server makes a single call to [IWbemObjectSink::SetStatus](#Section_3.2.4.1.2) to indicate that the operation finished, specifying the final status of the operation. After that, the server releases the IWbemObjectSink pointer.
+After the delivery of all objects, the server makes a single call to [IWbemObjectSink::SetStatus](#Section_3.1.4.2.2) to indicate that the operation finished, specifying the final status of the operation. After that, the server releases the IWbemObjectSink pointer.
 
 ![Asynchronous delivery of results](media/image18.png)
 
@@ -7539,7 +7539,7 @@ Figure 19: Optimized asynchronous delivery of results
 <a id="Section_4.6"></a>
 ## 4.6 Configuring Refreshing Services
 
-When using the refresher mechanism, a client application that is connected to a remote computer through an [IWbemServices](#Section_3.1.4.3.23) pointer uses the IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), to obtain an [IWbemRefreshingServices](#Section_3.2.4.5.3) interface, and it adds [**CIM objects**](#gt_cim-object) or enumerators as needed. The following diagram illustrates this behavior.
+When using the refresher mechanism, a client application that is connected to a remote computer through an [IWbemServices](#Section_3.1.4.3.13) pointer uses the IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), to obtain an [IWbemRefreshingServices](#Section_3.1.4.12) interface, and it adds [**CIM objects**](#gt_cim-object) or enumerators as needed. The following diagram illustrates this behavior.
 
 ![Configuring refreshing services](media/image20.png)
 
@@ -7548,7 +7548,7 @@ Figure 20: Configuring refreshing services
 <a id="Section_4.7"></a>
 ## 4.7 Using the Refresher Interface
 
-The [IWbemRemoteRefresher](#Section_3.1.4.13.1) [**interface pointer**](#gt_interface-pointer) that is returned from [IWbemRefreshingServices](#Section_3.2.4.5.3) is used to obtain an updated result set. For the usage of the remote refresher, the client calls the [IWbemRemoteRefresher::RemoteRefresh](#Section_3.1.4.13.1) method when the client needs to get an updated set of data.
+The [IWbemRemoteRefresher](#Section_3.1.4.13.2) [**interface pointer**](#gt_interface-pointer) that is returned from [IWbemRefreshingServices](#Section_3.1.4.12) is used to obtain an updated result set. For the usage of the remote refresher, the client calls the [IWbemRemoteRefresher::RemoteRefresh](#Section_3.1.4.13.1) method when the client needs to get an updated set of data.
 
 ![Using the refresher interface](media/image21.png)
 
@@ -7584,7 +7584,7 @@ The access mask that controls the [**security principal**](#gt_security-principa
 | READ_CONTROL | 0x20000 | Allows the security principal to read the security descriptor of CIM namespace. |
 | WRITE_DAC | 0x40000 | Allows the security principal to modify the security descriptor of CIM namespace. |
 
-In order to change the namespace security descriptor, a client MUST use the Windows Management Instrumentation Remote Protocol and the required [**CIM object**](#gt_cim-object) encoding, as specified in [MS-WMIO](../MS-WMIO/MS-WMIO.md). To query or change the security descriptor, the __SystemSecurity class methods GetSD and SetSD defined in section [2.2.30](#Section_2.2.30.1) MUST be used. To manage the namespace security, the __SystemSecurity class MUST be implemented at the top level of every namespace. The GetSD and SetSD methods are invoked as specified in sections [3.1.4.3.22](#Section_3.1.4.3.23) and [3.1.4.3.23](#Section_3.1.4.3.23).
+In order to change the namespace security descriptor, a client MUST use the Windows Management Instrumentation Remote Protocol and the required [**CIM object**](#gt_cim-object) encoding, as specified in [MS-WMIO](../MS-WMIO/MS-WMIO.md). To query or change the security descriptor, the __SystemSecurity class methods GetSD and SetSD defined in section [2.2.30](#Section_2.2.30.2) MUST be used. To manage the namespace security, the __SystemSecurity class MUST be implemented at the top level of every namespace. The GetSD and SetSD methods are invoked as specified in sections [3.1.4.3.22](#Section_3.1.4.3.22) and [3.1.4.3.23](#Section_3.1.4.3.23).
 
 If the event object that is delivered to the WMI server (as specified in [3.2.4.2.1](#Section_3.2.4.2.1)) contains a non-null SECURITY_DESCRIPTOR as specified in [2.2.4.2](#Section_2.2.4.2), the server MUST secure access to the event object by using access controls specified in the security descriptor. The access mask that controls the security principal rights has the following specific rights, which are interpreted as specified in the following table.
 
@@ -8946,7 +8946,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 **WBEM_FLAG_CONNECT_PROVIDERS:** The connection is established to operate only on the provider.
 
-<3> Section 2.2.13: A Windows client builds the [IWbemContext](#Section_2.2.13.3) object by using a set of specific IWbemContext methods to add, delete, and enumerate properties with their respective values. The IWbemContext methods are not used by the protocol at any time. They are used internally by the client and the server to manage the content of the object.
+<3> Section 2.2.13: A Windows client builds the [IWbemContext](#Section_2.2.13.2) object by using a set of specific IWbemContext methods to add, delete, and enumerate properties with their respective values. The IWbemContext methods are not used by the protocol at any time. They are used internally by the client and the server to manage the content of the object.
 
 The following Windows versions support the context properties in the table: Windows XP operating system Service Pack 1 (SP1), Windows Server 2003 operating system with Service Pack 1 (SP1), Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 operating system. Prior versions of Windows ignore these values.
 
@@ -8958,7 +8958,7 @@ The following Windows versions support the context properties in the table: Wind
 
 <7> Section 2.2.21: Windows uses the **m_dwProcessId** as the process identifier.
 
-<8> Section 2.2.30.1: Windows 2000 Professional and later and Windows Server 2003 and later do not return errors using the return value of the **GetSD** [**CIM method**](#gt_cim-method). Errors are returned as an error in the [IWbemServices interface](#Section_3.1.4.3.23) method call.
+<8> Section 2.2.30.1: Windows 2000 Professional and later and Windows Server 2003 and later do not return errors using the return value of the **GetSD** [**CIM method**](#gt_cim-method). Errors are returned as an error in the [IWbemServices interface](#Section_3.1.4.3.13) method call.
 
 <9> Section 2.2.30.2: Windows 2000 Professional and later and Windows Server 2003 and later do not return errors using the return value of the **GetSD** CIM method. Errors are returned as an error in the IWbemServices interface method call.
 
@@ -9262,7 +9262,7 @@ These Windows versions enforce a query string limit of 16,384 characters (WBEM_M
 
 <62> Section 3.1.4.11: This interface is not supported in Windows NT 4.0 and Windows 2000.
 
-<63> Section 3.1.4.12: The [IWbemRefreshingServices](#Section_3.2.4.5.3) interface is not available in Windows NT 4.0, Windows 2000, or Windows 2000 Server.
+<63> Section 3.1.4.12: The [IWbemRefreshingServices](#Section_3.1.4.12) interface is not available in Windows NT 4.0, Windows 2000, or Windows 2000 Server.
 
 <64> Section 3.1.4.12.1: Windows 2000 sets the version number to 1.
 
@@ -9278,7 +9278,7 @@ These Windows versions enforce a query string limit of 16,384 characters (WBEM_M
 
 <70> Section 3.1.4.12.6: Windows 2000 sets the version number to 1.
 
-<71> Section 3.1.4.13: The [IWbemRemoteRefresher](#Section_3.1.4.13.1) interface is not available in Windows NT 4.0, Windows 2000, or Windows 2000 Server.
+<71> Section 3.1.4.13: The [IWbemRemoteRefresher](#Section_3.1.4.13.2) interface is not available in Windows NT 4.0, Windows 2000, or Windows 2000 Server.
 
 <72> Section 3.1.4.13.3: The [Opnum5NotUsedOnWire](#Section_3.1.4.13.3) method is not used by Windows and therefore is not required for an implementation.
 
@@ -9309,7 +9309,7 @@ The default access permissions for the Authenticated Users, LOCAL SERVICE, and N
 - Enable Account
 <77> Section 3.2.3: Windows clients pass the client process ID in the *lClientProcId* parameter.
 
-<78> Section 3.2.3: Windows 2000 and Windows XP clients obtain the [IWbemLoginHelper](#Section_3.1.4.9) interface by using the IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM] sections 3.1.1.5.6 and 3.1.1.5.7, on the [IWbemLevel1Login](#Section_3.1.4.1.4) interface.
+<78> Section 3.2.3: Windows 2000 and Windows XP clients obtain the [IWbemLoginHelper](#Section_3.1.4.9) interface by using the IRemUnknown and IRemUnknown2 interfaces, as specified in [MS-DCOM] sections 3.1.1.5.6 and 3.1.1.5.7, on the [IWbemLevel1Login](#Section_3.1.4.1) interface.
 
 If the server returns an error during the attempt to use IRemUnknown and IRemUnknown2 to obtain an IWbemLoginHelper interface, the client ignores the error. The client calls IWbemLoginHelper::SetEvent to determine whether both the client and server are running on the same machine.
 
@@ -9545,7 +9545,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [4.1](#Section_3.1.3) Protocol Initialization | 11482 : Updated description to accommodate that the formerly referenced network captures no longer exist from [SysDocCap-WMI], but that other examples do exist at the site. | Major |
+| [4.1](#Section_3.2.3) Protocol Initialization | 11482 : Updated description to accommodate that the formerly referenced network captures no longer exist from [SysDocCap-WMI], but that other examples do exist at the site. | Major |
 | [4.1.2](#Section_4.1.2) Example Captures | 11482 : Replaced section content with 'None.', as the formerly referenced example traces (cap files) no longer exist at the [SysDocCap-WMI] site. | Major |
 | [7](#Section_7) Appendix B: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
 

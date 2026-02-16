@@ -527,7 +527,7 @@ The **CmdID** element type specifies a unique command identifier for the SyncML 
 
 <CmdID>(#PCDATA)</CmdID>
 
-**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Alert (section 2.2.7.2)](#Section_2.2.7.2), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_2.2.7.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
+**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Alert (section 2.2.7.2)](#Section_2.2.7.2), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_3.1.5.1.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
 
 **Restrictions: CmdID** MUST always be present in the [SyncML](#Section_2.2.4.1) message. **CmdID** MUST be unique within the SyncML message and MUST NOT be the string "0".
 
@@ -776,7 +776,7 @@ The server provides the value for the ProviderID as specified in [MS-MDE2](../MS
 
 **Restrictions:** None.
 
-**Content Model:** (([Atomic (section 2.2.7.3)](#Section_2.2.7.3) | [Exec (section 2.2.7.5)](#Section_2.2.7.5) | [Get (section 2.2.7.6)](#Section_2.2.7.6) | [Results (section 2.2.7.8)](#Section_2.2.7.8) | [Status (section 2.2.6.1)](#Section_2.2.6.1) | [Add (section 2.2.7.1)](#Section_2.2.7.1) | [Replace (section 2.2.7.7)](#Section_2.2.7.7) | [Delete (section 2.2.7.4)](#Section_2.2.7.4))+, [Final (section 2.2.3.4)](#Section_2.2.3.4)?)
+**Content Model:** (([Atomic (section 2.2.7.3)](#Section_2.2.7.3) | [Exec (section 2.2.7.5)](#Section_2.2.7.5) | [Get (section 2.2.7.6)](#Section_2.2.7.6) | [Results (section 2.2.7.8)](#Section_2.2.7.8) | [Status (section 2.2.6.1)](#Section_2.2.6.1) | [Add (section 2.2.7.1)](#Section_2.2.7.1) | [Replace (section 2.2.7.7)](#Section_2.2.7.7) | [Delete (section 2.2.7.4)](#Section_3.1.5.1.4))+, [Final (section 2.2.3.4)](#Section_2.2.3.4)?)
 
 **Attributes:** None.
 
@@ -815,7 +815,7 @@ The **Item** element type provides a container for item data. The element type h
 
 <Item>(#PCDATA)</Item>
 
-**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Delete (section 2.2.7.4)](#Section_2.2.7.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
+**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Delete (section 2.2.7.4)](#Section_3.1.5.1.4), [Exec (section 2.2.7.5)](#Section_2.2.7.5), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8), [Status (section 2.2.6.1)](#Section_2.2.6.1)
 
 **Restrictions:** When the source **URI** for the item data is an external entity, the [Data (section 2.2.5.1)](#Section_2.2.5.1) element is not present, and the recipient retrieves the data from the specified network location. When **Data** is present in the **Item** it MUST be the last element in the **Item**.
 
@@ -834,7 +834,7 @@ The **Meta** element type provides a container for meta-information about the pa
 
 <Meta>(#PCDATA)</Meta>
 
-**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_2.2.7.4), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Item (section 2.2.5.2)](#Section_2.2.5.2), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8)
+**Parent Elements:** [Add (section 2.2.7.1)](#Section_2.2.7.1), [Atomic (section 2.2.7.3)](#Section_2.2.7.3), [Delete (section 2.2.7.4)](#Section_3.1.5.1.4), [Get (section 2.2.7.6)](#Section_2.2.7.6), [Item (section 2.2.5.2)](#Section_2.2.5.2), [Replace (section 2.2.7.7)](#Section_2.2.7.7), [Results (section 2.2.7.8)](#Section_2.2.7.8)
 
 **Restrictions:** When **Meta** is specified in an **Atomic** or **Sync** command, the scope of the meta-information includes all of the contained commands, unless the meta-information is overridden by another **Meta** element in a contained command.
 
@@ -946,7 +946,7 @@ The **Atomic** element specifies the SyncML command to request that subordinate 
 **Restrictions:** The [**CmdID (section 2.2.3.2)**](#Section_2.2.3.2) element type is required and specifies the unique identifier for the command in the SyncML message.
 
 - The [**Meta (section 2.2.5.3)**](#Section_2.2.5.3) element is optional. When **Meta** is present, it specifies meta-information to be used for the command. The scope of the meta-information is limited to the command.
-- One or more sets of subordinate commands to be executed are specified as a series of one or more of the following commands: [**Add (section 2.2.7.1)**](#Section_2.2.7.1), [**Delete (section 2.2.7.4)**](#Section_2.2.7.4), **Atomic (section 2.2.7.3)**, [**Replace (section 2.2.7.7)**](#Section_2.2.7.7), [**Get (section 2.2.7.6)**](#Section_2.2.7.6), and [**Exec (section 2.2.7.5)**](#Section_2.2.7.5). Note that a particular command can be specified multiple times to achieve execution of contained commands. For example.
+- One or more sets of subordinate commands to be executed are specified as a series of one or more of the following commands: [**Add (section 2.2.7.1)**](#Section_2.2.7.1), [**Delete (section 2.2.7.4)**](#Section_3.1.5.1.4), **Atomic (section 2.2.7.3)**, [**Replace (section 2.2.7.7)**](#Section_2.2.7.7), [**Get (section 2.2.7.6)**](#Section_2.2.7.6), and [**Exec (section 2.2.7.5)**](#Section_2.2.7.5). Note that a particular command can be specified multiple times to achieve execution of contained commands. For example.
 <Atomic>(CmdID, Meta,(Add,Get),(Delete,Replace),(Add,Exec))</Atomic>
 
 **Content Model:** ([CmdID](#Section_2.2.3.2), Meta?, (Add| Delete | Atomic | Replace | Get | Exec)+)
@@ -1290,7 +1290,7 @@ No classes are specified for the **Atomic** command. Valid classes for the comma
 
 The **Delete** command is used by the originator to request that data elements accessible to the recipient be deleted. The target location URI contains the **resource** to delete.
 
-The following XML snippet shows example usage of the [Delete](#Section_2.2.7.4) command. The syntax for the **Delete** element type is specified in section 2.2.7.4.
+The following XML snippet shows example usage of the [Delete](#Section_3.1.5.1.4) command. The syntax for the **Delete** element type is specified in section 2.2.7.4.
 
 <SyncBody>
 
@@ -1664,7 +1664,7 @@ The **Retry Timer Event** defined in section [3.1.6](#Section_3.1.6) is per OMA 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
 
-The **UserAgentOrigin** field applies to AVD, and [**ACL**](#gt_access-control-list-acl) is not supported as defined in section [3.1.7](#Section_3.1.7).
+The **UserAgentOrigin** field applies to AVD, and [**ACL**](#gt_access-control-list-acl) is not supported as defined in section [3.1.7](#Section_3.2.7).
 
 <a id="Section_4"></a>
 # 4 Protocol Examples

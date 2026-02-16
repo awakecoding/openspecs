@@ -309,12 +309,12 @@ In addition to the OLE2.0 streams mentioned in sections [1.3.1](#Section_1.3.1) 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Clipboard Formats
 
-The users of [**container applications**](#gt_container-application) and [**creating applications**](#gt_creating-application) can use the system [**clipboard**](#gt_clipboard) to transfer data between applications. All data copied to a system clipboard has to conform to a format specification, known as a [Clipboard Format](#Section_1.3.5.1). Each Clipboard Format is identified by a unique numeric format ID.
+The users of [**container applications**](#gt_container-application) and [**creating applications**](#gt_creating-application) can use the system [**clipboard**](#gt_clipboard) to transfer data between applications. All data copied to a system clipboard has to conform to a format specification, known as a [Clipboard Format](#Section_2.1.1). Each Clipboard Format is identified by a unique numeric format ID.
 
 <a id="Section_1.3.5.1"></a>
 #### 1.3.5.1 Standard Clipboard Formats
 
-This specification uses a number of [Clipboard Formats](#Section_1.3.5.1) called the Standard Clipboard Formats. These are specified in section 2.1.1. A standard Clipboard Format is identified by a numeric ID as specified in section 2.1.1.
+This specification uses a number of [Clipboard Formats](#Section_2.1.1) called the Standard Clipboard Formats. These are specified in section 2.1.1. A standard Clipboard Format is identified by a numeric ID as specified in section 2.1.1.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Protocols and Other Structures
@@ -341,7 +341,7 @@ The Object Linking and Embedding Data Structures use HRESULT error codes. These 
 <a id="Section_1.7.1"></a>
 ### 1.7.1 Registered Clipboard Formats
 
-Vendors can create their own [Clipboard Formats](#Section_1.3.5.1), called Registered Clipboard Formats. A Registered Clipboard Format is identified by a string that contains the name of the Clipboard Format (as specified in section 2.1.1). Vendors can define their own Registered Clipboard Formats provided that the string that identifies the Registered Clipboard Format is prefixed with the "OleExternal" string literal.
+Vendors can create their own [Clipboard Formats](#Section_2.1.1), called Registered Clipboard Formats. A Registered Clipboard Format is identified by a string that contains the name of the Clipboard Format (as specified in section 2.1.1). Vendors can define their own Registered Clipboard Formats provided that the string that identifies the Registered Clipboard Format is prefixed with the "OleExternal" string literal.
 
 <a id="Section_2"></a>
 # 2 Structures
@@ -777,7 +777,7 @@ packet-beta
 
 **PresentationDataSize (4 bytes):** This MUST be an unsigned long integer set to the size, in bytes, of the **PresentationData** field.
 
-**PresentationData (variable):** This MUST be an array of bytes that contains the presentation data. The format of the data is identified by the [Clipboard Format](#Section_1.3.5.1) contained in the **Header** field.
+**PresentationData (variable):** This MUST be an array of bytes that contains the presentation data. The format of the data is identified by the [Clipboard Format](#Section_2.1.1) contained in the **Header** field.
 
 If the Clipboard Format contains CF_DIB (section 2.1.1), the **Data** field MUST contain a DeviceIndependentBitmap Object structure (as specified in [MS-WMF](../MS-WMF/MS-WMF.md) section 2.2.2.9).
 
@@ -788,7 +788,7 @@ If the Clipboard Format contains CF_ENHMETAFILE (section 2.1.1), the **Data** fi
 <a id="Section_2.2.3.3"></a>
 #### 2.2.3.3 RegisteredClipboardFormatPresentationObject
 
-The RegisteredClipboardFormatPresentationObject structure specifies a [**presentation data**](#gt_presentation-data) type that is used to display [**linked objects**](#gt_linked-object) or [**embedded objects**](#gt_embedded-object) in [**container applications**](#gt_container-application). The presentation data is identified using a registered [Clipboard Format](#Section_1.3.5.1) (section [1.7.1](#Section_1.7.1)).
+The RegisteredClipboardFormatPresentationObject structure specifies a [**presentation data**](#gt_presentation-data) type that is used to display [**linked objects**](#gt_linked-object) or [**embedded objects**](#gt_embedded-object) in [**container applications**](#gt_container-application). The presentation data is identified using a registered [Clipboard Format](#Section_2.1.1) (section [1.7.1](#Section_1.7.1)).
 
 ```mermaid
 packet-beta
@@ -911,7 +911,7 @@ packet-beta
   32-95: "FormatOrAnsiString (variable)"
 ```
 
-**MarkerOrLength (4 bytes):** If this is set to 0x00000000, the **FormatOrAnsiString** field MUST NOT be present. If this field is set to 0xFFFFFFFF or 0xFFFFFFFE, the **FormatOrAnsiString** field MUST be 4 bytes in size and MUST contain a standard clipboard format identifier (section [2.1.1](#Section_1.3.5.1)).
+**MarkerOrLength (4 bytes):** If this is set to 0x00000000, the **FormatOrAnsiString** field MUST NOT be present. If this field is set to 0xFFFFFFFF or 0xFFFFFFFE, the **FormatOrAnsiString** field MUST be 4 bytes in size and MUST contain a standard clipboard format identifier (section [2.1.1](#Section_2.1.1)).
 
 If this set to a value other than 0x00000000, the **FormatOrAnsiString** field MUST be set to a null-terminated ANSI string containing the name of a registered clipboard format (section 2.1.1) and the **MarkerOrLength** field MUST be set to the number of ANSI characters in the **FormatOrAnsiString** field, including the terminating null character.
 
@@ -926,7 +926,7 @@ If this set to a value other than 0x00000000, the **FormatOrAnsiString** field M
 <a id="Section_2.3.2"></a>
 ### 2.3.2 ClipboardFormatOrUnicodeString
 
-The ClipboardFormatOrUnicodeString structure specifies either a [standard clipboard format](#Section_1.3.5.1) identifier (section [2.1.1](#Section_1.3.5.1)) or a [registered clipboard format](#Section_1.7.1) as a [**Unicode string**](#gt_unicode-string).
+The ClipboardFormatOrUnicodeString structure specifies either a [standard clipboard format](#Section_1.3.5.1) identifier (section [2.1.1](#Section_2.1.1)) or a [registered clipboard format](#Section_1.7.1) as a [**Unicode string**](#gt_unicode-string).
 
 ```mermaid
 packet-beta
@@ -1055,7 +1055,7 @@ packet-beta
   624-687: "TocEntry (variable)"
 ```
 
-**AnsiClipboardFormat (variable):** This MUST be a [ClipboardFormatOrAnsiString](#Section_2.3.1) structure (section 2.3.1) that contains the [Clipboard Format](#Section_1.3.5.1) of the presentation data. If the **MarkerOrLength** field of the ClipboardFormatOrAnsiString structure contains 0x0000000, the OLEPresentationStream structure is invalid.<15>
+**AnsiClipboardFormat (variable):** This MUST be a [ClipboardFormatOrAnsiString](#Section_2.3.1) structure (section 2.3.1) that contains the [Clipboard Format](#Section_2.1.1) of the presentation data. If the **MarkerOrLength** field of the ClipboardFormatOrAnsiString structure contains 0x0000000, the OLEPresentationStream structure is invalid.<15>
 
 If the **MarkerOrLength** field contains a value other than 0xFFFFFFFF or 0xFFFFFFFE, the value MUST NOT be greater than 0x00000201. Otherwise, the OLEPresentationStream structure is invalid.<16>
 
@@ -1119,7 +1119,7 @@ If the **FormatOrAnsiString** field of **AnsiClipboardFormat** contains the name
 
 The TOCENTRY structure is used to specify the additional values of the attributes of the [OLEPresentationStream](#Section_2.3.4) structure.
 
-An OLEPresentationStream structure, if present, MUST have one or more values for attributes such as the [Clipboard Format](#Section_1.3.5.1) and the target device.
+An OLEPresentationStream structure, if present, MUST have one or more values for attributes such as the [Clipboard Format](#Section_2.1.1) and the target device.
 
 ```mermaid
 packet-beta
@@ -1188,7 +1188,7 @@ packet-beta
 <a id="Section_2.3.8"></a>
 ### 2.3.8 CompObjStream
 
-The CompObjStream structure is contained inside of an **OLE Compound File Stream** (as specified in [MS-CFB](../MS-CFB/MS-CFB.md)). The **OLE Compound File Stream** has the name "\1CompObj". The CompObjStream structure specifies the [Clipboard Format](#Section_1.3.5.1) and the display name of the linked object or embedded object.
+The CompObjStream structure is contained inside of an **OLE Compound File Stream** (as specified in [MS-CFB](../MS-CFB/MS-CFB.md)). The **OLE Compound File Stream** has the name "\1CompObj". The CompObjStream structure specifies the [Clipboard Format](#Section_2.1.1) and the display name of the linked object or embedded object.
 
 ```mermaid
 packet-beta

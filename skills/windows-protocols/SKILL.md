@@ -15,16 +15,32 @@ This skill is optimized for structure-first navigation of Microsoft Open Specifi
 
 ## Corpus Layout
 
-- `README.md` — curated quick index (RDP-focused list retained for convenience).
+- `README.md` — index with three sections: Overview Documents (domain maps), Technical Documents (full spec list), and Reference Documents. Overview Documents are at the top; use them for topical discovery.
 - `LEGAL.md` — legal and redistribution notice.
-- `MS-*/` — full Microsoft protocol directories, directly under this folder.
-- `MS-*/<PROTOCOL-ID>.md` — primary markdown spec content.
-- `MS-*/media/` — extracted figures and image assets referenced by the markdown.
+- `<PROTOCOL-ID>/` — protocol directories (Overview, Technical, or Reference), directly under this folder.
+- `<PROTOCOL-ID>/<PROTOCOL-ID>.md` — primary markdown spec content.
+- `<PROTOCOL-ID>/media/` — extracted figures and image assets referenced by the markdown.
 
-Use this selection strategy:
+## Corpus Document Types
 
-1. Resolve `MS-*` protocols directly under this folder first.
-2. If required context is not present in local `MS-*` specs, explicitly call that out and request a narrower scope or additional source material.
+- **Overview Documents** — Domain maps that group related protocols under a topic (file access, authentication, storage, remote desktop, etc.). Each describes system capabilities, lists member protocols with their roles, and contains many links to specifications. Use as the primary entry point for topical discovery.
+- **Technical Documents** — Individual protocol specifications with full wire-format, message syntax, and behavior details.
+- **Reference Documents** — Supplemental references (error codes, shared types, etc.).
+
+## Protocol Clusters by Domain
+
+When using Overview documents for discovery, expect these cluster themes:
+
+- **Authentication**: Kerberos, NTLM, SPNEGO — core for file access, RDP, Group Policy.
+- **File Access**: SMB/CIFS family, DFS, WebDAV, shared types (FSCC, FSA).
+- **Remote Desktop**: Base + graphics pipeline, gateway, virtual channels (clipboard, devices, transport).
+- **Storage**: Disk/volume management, shadow copies, EFS, backup, removable media.
+- **Group Policy**: Core protocol + extensions; depends on AD and file access.
+- **Network Access Protection**: SoH/SoHR over PEAP; DHCP/VPN/TSGU/IPsec enforcement.
+- **Content Caching**: Peer discovery, retrieval, hosted cache; integrates with SMB/HTTP.
+- **File Services Management**: FSRM, remote VSS, classification.
+- **Rights Management**: Publish/consume protected content.
+- **Virtual Storage**: Remote shared virtual disks over SMB.
 
 ## Protocol Naming and Scope
 
@@ -48,28 +64,38 @@ Do not use this skill as the primary source for:
 
 If a required protocol is missing from root-level `MS-*` directories, state that explicitly and ask the user for the exact protocol ID or a narrower feature scope.
 
+## Navigation Strategy
+
+- **Domain/topic questions** (file access, authentication, storage, remote desktop, etc.): Start with the corresponding Overview document from README. Use it as a map to identify which specifications to read. Follow its links into those specs.
+- **Protocol-ID questions**: Go directly to the spec if the ID is known.
+- **Principle**: Overview documents are the primary entry point for topical discovery. README provides the index of Overview docs and the full protocol list, but does not contain the semantic mapping (topic → protocols) found in Overviews.
+- **Anti-pattern**: Do not rely on README keyword search alone. A shallow grep of README may return protocol IDs from unrelated domains; overview documents provide the curated topic-to-protocol mapping.
+
 ## Navigation Workflow
 
-1. Normalize request terms into candidate protocol IDs (feature keyword -> family prefix -> likely IDs).
-2. Validate candidates in `README.md` and directory names (`<PROTOCOL-ID>/`).
+1. For topical questions: Identify the domain from the question, match to an Overview document in README, read it to obtain linked member specs, then follow links into those specs.
+2. For known protocol IDs: Validate in `README.md` and directory names (`<PROTOCOL-ID>/`), then open the spec.
 3. Start from the spec TOC (`<summary>` blocks and numbered entries) before deep reading.
-4. Read sections in this order by intent:
-	- orientation/versioning,
-	- message or structure syntax,
-	- behavior and sequencing,
-	- security and product behavior notes.
+4. Read sections in this order by intent: orientation/versioning, message or structure syntax, behavior and sequencing, security and product behavior notes.
 5. Cross-check base vs extension specs when requirements may be split.
 6. Answer with explicit protocol IDs and exact section headings; separate confirmed facts from inference.
 
+## Link-Following
+
+- Overview documents contain References sections (often 1.3) and extensive inline links to member specifications. Follow these links rather than guessing paths.
+- The link graph (Overview → spec → related spec) is the intended navigation structure.
+- When a spec references another spec for types, extensions, or dependencies, follow that link to reach the authoritative source.
+- Continue following links until the relevant information is found; do not stop at the first document that mentions the topic.
+
 ## Canonical Spec Structure (Corpus-Guided)
 
-The corpus is highly consistent. In a 425-spec analysis (`artifacts/reports/windows-protocols-structure-analysis-2026-02-16.md`), the most common top-level sequence is:
+The corpus is highly consistent. The most common top-level sequence is:
 
-- `1 Introduction` (424 files)
-- `2 Messages` (373 files)
-- `3 Protocol Details` (371 files)
-- `4 Protocol Examples` (362 files)
-- `5 Security` (364 files)
+- `1 Introduction`
+- `2 Messages`
+- `3 Protocol Details`
+- `4 Protocol Examples`
+- `5 Security`
 
 Common `1.x` orientation subsections include:
 
@@ -120,10 +146,11 @@ Rule: match by semantic intent first, section number second.
 
 ## Quick Discovery Patterns
 
-- Query by protocol ID when the user provides a specific code (for example `MS-RDPEUDP`).
-- Query by feature terms when ID is unknown (for example `capability`, `PDU`, `virtual channel`, `security exchange`, `compression`).
-- For extension behavior, verify whether requirements are in a base protocol or an extension.
-- For ambiguous acronyms, list 2-4 likely protocols and ask the user to choose before deep analysis.
+- When the protocol ID is unknown: Identify the domain first from question keywords, then open the matching Overview document before picking specs. Use its Protocol Summary or References section to obtain the correct spec list.
+- Do not select specs from README's flat Technical Documents list without consulting an Overview when the domain is ambiguous.
+- When the user provides a specific protocol ID: Go directly to that spec.
+- For extension behavior: Verify whether requirements are in a base protocol or an extension; Overview docs and spec cross-references help clarify dependencies.
+- For ambiguous acronyms: List 2–4 likely protocols (via Overview docs) and ask the user to choose before deep analysis.
 
 ## Answer Contract (Semi-Structured)
 
@@ -147,12 +174,3 @@ Evidence policy:
 - If the corpus does not clearly answer a point, state uncertainty explicitly.
 - Never present inferred behavior as normative requirement text.
 
-## Typical Protocol Clusters
-
-- RDP base and capabilities: `MS-RDPBCGR`
-- Graphics pipeline: `MS-RDPEGFX`, `MS-RDPEGDI`
-- Input/display: `MS-RDPEDISP`, `MS-RDPEI`
-- Clipboard/device/channel extensions: `MS-RDPECLIP`, `MS-RDPEFS`, `MS-RDPEUSB`, `MS-RDPEV`
-- Transport/security-related extensions: `MS-RDPEUDP`, `MS-RDPEUDP2`, `MS-RDPBCGR` security sections
-
-Use these as starting points, then confirm against exact headings in the corpus.

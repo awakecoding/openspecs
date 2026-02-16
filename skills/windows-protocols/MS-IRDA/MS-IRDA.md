@@ -198,7 +198,7 @@ This profile does not introduce any new versioning issues. This profile is based
 
 Portions of this profile use Win32 error codes. These values are taken from the error number space specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Vendors SHOULD reuse those values with their indicated meaning. Choosing any other value runs the risk of a collision in the future.
 
-Section [3.1.5.1](#Section_3.2.5.1) describes how a **CONNECT** message that contains a **WHO** header is parsed. The **WHO** header used in this profile contains a **UUID** used to identify itself to the IrOBEX server, the specific **UUID** (16 byte) value b9c7fd98-e5f8-11d1-bfce-0000f8753890.
+Section [3.1.5.1](#Section_3.1.5.1) describes how a **CONNECT** message that contains a **WHO** header is parsed. The **WHO** header used in this profile contains a **UUID** used to identify itself to the IrOBEX server, the specific **UUID** (16 byte) value b9c7fd98-e5f8-11d1-bfce-0000f8753890.
 
 Vendors who want to receive Win32 error codes using the Win32 Error Message header MUST use the previous specific **UUID** in a **WHO** header, as specified in section [2.2.1.1](#Section_2.2.1.1), in addition to the IrOBEX error codes as specified in [[IROBEX]](https://go.microsoft.com/fwlink/?LinkId=92765) section 3.2.1. The effect of using this **UUID** in a **WHO** header is specified in section [3.1.5](#Section_3.1.5) and section [3.2.5](#Section_3.1.5).
 
@@ -318,7 +318,7 @@ A **PUT Response** message MUST be sent as specified in [[IROBEX]](https://go.mi
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 Receiving a GET Message
 
-This profile does not support processing of **GET** messages. Implementations of this profile discard the **GET** message by responding with a "Not implemented" IrOBEX response code (0xD1), as specified in section [3.2.1](#Section_3.1.1).
+This profile does not support processing of **GET** messages. Implementations of this profile discard the **GET** message by responding with a "Not implemented" IrOBEX response code (0xD1), as specified in section [3.2.1](#Section_3.2.1).
 
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 Receiving a SETPATH Message

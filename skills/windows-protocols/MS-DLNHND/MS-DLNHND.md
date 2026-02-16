@@ -344,7 +344,7 @@ The Microsoft Extensions to the [**DLNA Guidelines**](#gt_dlna-guidelines) are o
 
 This document covers versioning issues in the following areas:
 
-**Supported Transport**: This protocol is implemented on top of IPv4 and can also be implemented on top of IPv6. **Streaming** uses HTTP and can also use RTSP. For more details, see section [2.1](#Section_2.2.3.4).
+**Supported Transport**: This protocol is implemented on top of IPv4 and can also be implemented on top of IPv6. **Streaming** uses HTTP and can also use RTSP. For more details, see section [2.1](#Section_2.1).
 
 **Protocol Versions**: Future versions of the [**DLNA Guidelines**](#gt_dlna-guidelines) can be detected using the DLNA-CP-Version token on the HTTP User-Agent header. For more details, see section [2.2.4.1](#Section_2.2.4.1).
 
@@ -934,7 +934,7 @@ The Microsoft Extensions to the client role do not include any timers beyond any
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Initialization occurs when a higher layer wants to start [**streaming**](#gt_streaming) [**content**](#gt_content) from a server. If the HTTP protocol will be used, this step is specified in section [3.1.4.1](#Section_3.3.5.1). If the RTSP protocol will be used, this step is specified in section [3.1.4.2](#Section_3.3.5.1).
+Initialization occurs when a higher layer wants to start [**streaming**](#gt_streaming) [**content**](#gt_content) from a server. If the HTTP protocol will be used, this step is specified in section [3.1.4.1](#Section_3.3.5.1). If the RTSP protocol will be used, this step is specified in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -1035,7 +1035,7 @@ The client MUST wait for a higher layer to request a [**DLNA**](#gt_digital-livi
 
 The client MUST process the RTSP response in accordance with the rules in [[DLNA]](https://go.microsoft.com/fwlink/?LinkId=178990) guideline 7.4.210.
 
-If the response is to a SETUP request, the Transport header SHOULD be parsed according to section [2.2.3.4](#Section_2.2.3.4). The value of the ssrc token on the Transport header SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the ssrc value and the stream referenced in the SETUP request. If the rtcp-fb-ssrc token is present on the Transport header, then the value of that token SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the rtcp-fb-ssrc value and the stream referenced in the SETUP request.
+If the response is to a SETUP request, the Transport header SHOULD be parsed according to section [2.2.3.4](#Section_2.1). The value of the ssrc token on the Transport header SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the ssrc value and the stream referenced in the SETUP request. If the rtcp-fb-ssrc token is present on the Transport header, then the value of that token SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the rtcp-fb-ssrc value and the stream referenced in the SETUP request.
 
 The client MUST now continue with standard RTSP and RTP protocol usage. Standard RTSP and RTP protocol usage involves processing additional RTSP responses, processing ANNOUNCE requests, processing RTP packets and RTCP packets, as specified in [DLNA] and [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335). The following Microsoft Extensions apply:
 
@@ -1162,7 +1162,7 @@ This event occurs when a higher layer wants the [**DMP**](#gt_digital-media-play
 
 The DMP MUST set the value of the **State** variable to Streaming.
 
-The DMP MUST follow the rules for the client role specified in section [3.1](#Section_1.3). Specifically, if the higher layer is requesting streaming using HTTP, then the client role rules start in section [3.1.4.1](#Section_3.3.5.1), and if the higher layer is requesting streaming using RTSP, then the client role rules start in section [3.1.4.2](#Section_3.3.5.1).
+The DMP MUST follow the rules for the client role specified in section [3.1](#Section_1.3). Specifically, if the higher layer is requesting streaming using HTTP, then the client role rules start in section [3.1.4.1](#Section_3.3.5.1), and if the higher layer is requesting streaming using RTSP, then the client role rules start in section [3.1.4.2](#Section_3.1.4.2).
 
 Once streaming has ended, a notification will be received from the client role, as specified in section [3.2.7.2](#Section_3.2.7.2).
 
@@ -1292,7 +1292,7 @@ In order for a Digital Media Controller ([**DMC**](#gt_digital-media-controller-
 
 The DMR SHOULD make the values of the CurrentURI and CurrentURIMetaData arguments of the AVTransportService:SetAVTransportURI action available to the higher layer, so that the higher layer can choose the URL that will be used for streaming. If the higher layer does not make a choice, the value of the CurrentURI argument MUST be used as the URL for streaming.
 
-The DMR MUST follow the rules for the client role specified in section [3.1](#Section_1.3). Specifically, if the URL chosen for streaming is an HTTP URL, then the client role rules start in section [3.1.4.1](#Section_3.3.5.1), and if the URL chosen for streaming is a RTSP URL, then the client role rules start in section [3.1.4.2](#Section_3.3.5.1).
+The DMR MUST follow the rules for the client role specified in section [3.1](#Section_1.3). Specifically, if the URL chosen for streaming is an HTTP URL, then the client role rules start in section [3.1.4.1](#Section_3.3.5.1), and if the URL chosen for streaming is a RTSP URL, then the client role rules start in section [3.1.4.2](#Section_3.1.4.2).
 
 Once streaming has ended a notification will be received from the client role, as specified in section [3.3.7.1](#Section_3.3.7.1).
 
@@ -1574,7 +1574,7 @@ The DMS MUST include headers in the RTSP response, as specified in section [3.4.
 
 The DMS MUST include the *ssrc* parameter on the Transport header (defined in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335), section 12.39) in the SETUP response.
 
-If the DMS supports retransmitting RTP packets as defined in [DLNA] guideline 7.4.137, then the DMS MUST include the *rtcp-fb-ssrc* parameter on the Transport header, as defined in section [2.2.3.4](#Section_2.2.3.4).
+If the DMS supports retransmitting RTP packets as defined in [DLNA] guideline 7.4.137, then the DMS MUST include the *rtcp-fb-ssrc* parameter on the Transport header, as defined in section [2.2.3.4](#Section_2.1).
 
 If the value of the **State** variable is RTSP_Init and the RTSP response status code is 200, then the DMS MUST set the value of the **State** variable to RTSP_Ready.
 
@@ -1985,7 +1985,7 @@ Session: 11626846570809248029
 
 CSeq: 3
 
-The response to the SETUP request shows the use of the rtcp-fb-ssrc parameter on the Transport header (section [2.2.3.4](#Section_2.2.3.4)).
+The response to the SETUP request shows the use of the rtcp-fb-ssrc parameter on the Transport header (section [2.2.3.4](#Section_2.1)).
 
 The client then sends a PLAY request. The PLAY request and response look like this:
 

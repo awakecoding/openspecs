@@ -326,7 +326,7 @@ This protocol uses the following enumeration.
 | Enumeration name | Section | Description |
 | --- | --- | --- |
 | AUTHZ_CONTEXT_INFORMATION_CLASS | [2.2.2.1](#Section_2.2.2.1) | References the security attributes of a principal represented by an AUTHZR_HANDLE. |
-| AUTHZ_SECURITY_ATTRIBUTE_OPERATION | [2.2.2.2](#Section_5) | Identifies operation types on a [**client context**](#gt_client-context) object. |
+| AUTHZ_SECURITY_ATTRIBUTE_OPERATION | [2.2.2.2](#Section_2.2.2.2) | Identifies operation types on a [**client context**](#gt_client-context) object. |
 | AUTHZ_SID_OPERATION | [2.2.2.3](#Section_2.2.2.3) | Indicates the type of SID operations that can be made by a call to the **AuthzrModifySids** method. |
 
 <a id="Section_2.2.2.1"></a>
@@ -1050,7 +1050,7 @@ DWORD AuthzrModifyClaims(
 
 **OperationCount:** The number of operations to be performed.
 
-**pClaimOperations:** A pointer to an array of AUTHZ_SECURITY_ATTRIBUTE_OPERATION enumerations, as defined in section [2.2.2.2](#Section_5). Specifies the operations to be performed on each claim.
+**pClaimOperations:** A pointer to an array of AUTHZ_SECURITY_ATTRIBUTE_OPERATION enumerations, as defined in section [2.2.2.2](#Section_2.2.2.2). Specifies the operations to be performed on each claim.
 
 **pClaims:** A pointer to an array of AUTHZR_SECURITY_ATTRIBUTES_INFORMATION structures, as defined in section [2.2.3.7](#Section_5). Contains the claim(s) used to modify the client context.
 

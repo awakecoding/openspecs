@@ -10,7 +10,9 @@ function Update-OpenSpecIndex {
 
         [switch]$IncludeDescription = $false,
 
-        [string[]]$OverviewProtocolIds = @()
+        [string[]]$OverviewProtocolIds = @(),
+
+        [string[]]$ReferenceProtocolIds = @('MS-DTYP', 'MS-ERREF', 'MS-LCID', 'MS-UCODEREF')
     )
 
     if (-not (Test-Path -LiteralPath $Path)) {
@@ -120,6 +122,12 @@ function Update-OpenSpecIndex {
         if ($trimmed) { [void]$overviewIds.Add($trimmed) }
     }
 
+    $referenceIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($id in $ReferenceProtocolIds) {
+        $trimmed = $id.Trim()
+        if ($trimmed) { [void]$referenceIds.Add($trimmed) }
+    }
+
     $overviewEntries = New-Object System.Collections.Generic.List[object]
     $technicalEntries = New-Object System.Collections.Generic.List[object]
     $referenceEntries = New-Object System.Collections.Generic.List[object]
@@ -127,6 +135,10 @@ function Update-OpenSpecIndex {
     foreach ($entry in $entries) {
         if ($overviewIds.Contains($entry.Name)) {
             [void]$overviewEntries.Add($entry)
+            continue
+        }
+        if ($referenceIds.Contains($entry.Name)) {
+            [void]$referenceEntries.Add($entry)
             continue
         }
 
@@ -150,9 +162,6 @@ function Update-OpenSpecIndex {
     $sb = New-Object System.Text.StringBuilder
     [void]$sb.AppendLine("# $Title")
     [void]$sb.AppendLine()
-    $totalCount = $entries.Count
-    [void]$sb.AppendLine("$totalCount documents converted to Markdown.")
-    [void]$sb.AppendLine()
 
     $writeTable = {
         param($list, $includeDesc)
@@ -174,19 +183,16 @@ function Update-OpenSpecIndex {
     }
 
     [void]$sb.AppendLine('## Overview Documents')
-    [void]$sb.AppendLine("[Overview Documents]($overviewDocsUri)")
     [void]$sb.AppendLine()
     & $writeTable $overviewEntries $IncludeDescription
     [void]$sb.AppendLine()
 
     [void]$sb.AppendLine('## Technical Documents')
-    [void]$sb.AppendLine("[Technical Documents]($technicalDocsUri)")
     [void]$sb.AppendLine()
     & $writeTable $technicalEntries $IncludeDescription
     [void]$sb.AppendLine()
 
     [void]$sb.AppendLine('## Reference Documents')
-    [void]$sb.AppendLine("[Reference Documents]($referenceDocsUri)")
     [void]$sb.AppendLine()
     & $writeTable $referenceEntries $IncludeDescription
 

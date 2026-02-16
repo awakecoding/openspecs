@@ -423,7 +423,7 @@ This document covers versioning issues in the following areas:
 - **Supported Transports**: The Remote Administrative Interface: WINS protocol uses the [**RPC**](#gt_remote-procedure-call-rpc) protocol as a transport and [RPC Protocol Sequences](#Section_2.1) as specified in section 2.1.
 - **Protocol Versions**: This protocol has only one interface version, but that interface has been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_1.3).
 - **Security and Authentication Methods**: Authentication and security for the methods specified by this protocol are specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) and in section 2.1.
-- **Localization**: This protocol passes text strings in various methods. Localization considerations for such strings are specified in sections [2.2](#Section_2.2) and [3.1.4](#Section_3.1.4).
+- **Localization**: This protocol passes text strings in various methods. Localization considerations for such strings are specified in sections [2.2](#Section_2.2) and [3.1.4](#Section_3.2.4).
 - **Capability Negotiation**: The Remote Administrative Interface: WINS protocol does not support interface version negotiation. Instead, this protocol uses the interface version number specified in the [**interface definition language (IDL)**](#gt_interface-definition-language-idl) for versioning and capability negotiation.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -491,7 +491,7 @@ typedef [handle] PWINSINTF_BIND_DATA_T WINSIF_HANDLE;
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 WINSINTF_VERS_NO_T
 
-The WINSINTF_VERS_NO_T data type indicates the version number of a [**WINS**](#gt_windows-internet-name-service-wins) database record. It is used by several [**RPC**](#gt_remote-procedure-call-rpc) methods like [R_WinsGetDbRecs](#Section_3.1.4.19) and [R_WinsDelDbRecs](#Section_3.1.4.9).
+The WINSINTF_VERS_NO_T data type indicates the version number of a [**WINS**](#gt_windows-internet-name-service-wins) database record. It is used by several [**RPC**](#gt_remote-procedure-call-rpc) methods like [R_WinsGetDbRecs](#Section_3.1.4.6) and [R_WinsDelDbRecs](#Section_3.1.4.9).
 
 This type is declared as follows:
 
@@ -641,7 +641,7 @@ WINSINTF_E_SCV_VERIFY
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 WINSINTF_ADD_T
 
-The WINSINTF_ADD_T structure defines the IP address information of a [**WINS**](#gt_windows-internet-name-service-wins) server. It is used by several data structures including [WINSINTF_RECORD_ACTION_T](#Section_2.2.2.3) and [WINSINTF_ADD_VERS_MAP_T](#Section_2.2.2.4) and by RPC methods like [R_WinsTrigger](#Section_3.1.4.3) and [R_WinsGetDbRecs](#Section_3.1.4.19).
+The WINSINTF_ADD_T structure defines the IP address information of a [**WINS**](#gt_windows-internet-name-service-wins) server. It is used by several data structures including [WINSINTF_RECORD_ACTION_T](#Section_2.2.2.3) and [WINSINTF_ADD_VERS_MAP_T](#Section_2.2.2.4) and by RPC methods like [R_WinsTrigger](#Section_3.1.4.3) and [R_WinsGetDbRecs](#Section_3.1.4.6).
 
 typedef struct _WINSINTF_ADD_T {
 
@@ -947,7 +947,7 @@ DWORD NoOfPnrs;
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 WINSINTF_RESULTS_T
 
-The WINSINTF_RESULTS_T structure defines information related to the configuration and statistics of a [**target WINS server**](#gt_target-wins-server). This is used by [**RPC**](#gt_remote-procedure-call-rpc) method [R_WinsStatus](#Section_3.1.4.20).
+The WINSINTF_RESULTS_T structure defines information related to the configuration and statistics of a [**target WINS server**](#gt_target-wins-server). This is used by [**RPC**](#gt_remote-procedure-call-rpc) method [R_WinsStatus](#Section_3.1.4.2).
 
 typedef struct _WINSINTF_RESULTS_T {
 
@@ -1003,7 +1003,7 @@ WINSINTF_STAT_T WINSStat;
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 WINSINTF_RECS_T
 
-The structure WINSINTF_RECS_T defines an array of [WINSINTF_RECORD_ACTION_T (section 2.2.2.3)](#Section_2.2.2.3) elements. The [R_WinsGetDbRecs (section 3.1.4.6)](#Section_3.1.4.19) and [R_WinsGetDbRecsByName (section 3.1.4.19)](#Section_3.1.4.19) methods use this structure.
+The structure WINSINTF_RECS_T defines an array of [WINSINTF_RECORD_ACTION_T (section 2.2.2.3)](#Section_2.2.2.3) elements. The [R_WinsGetDbRecs (section 3.1.4.6)](#Section_3.1.4.6) and [R_WinsGetDbRecsByName (section 3.1.4.19)](#Section_3.1.4.19) methods use this structure.
 
 typedef struct _WINSINTF_RECS_T {
 
@@ -1156,8 +1156,8 @@ The client side of The Remote Administrative Interface: WINS protocol is simply 
 
 The [**WINS**](#gt_windows-internet-name-service-wins) server supports two interfaces:
 
-- [winsif (section 3.1.4)](#Section_3.1.4)
-- [winsi2 (section 3.2.4)](#Section_3.1.4)
+- [winsif (section 3.1.4)](#Section_3.2.4)
+- [winsi2 (section 3.2.4)](#Section_3.2.4)
 To support both interfaces, client applications are responsible for implementing mechanisms to manage memory such as the following:
 
 - **midl_user_allocate**: Allocates memory for [**RPC**](#gt_remote-procedure-call-rpc) input and output parameters.
@@ -1167,7 +1167,7 @@ Clients SHOULD call **midl_user_allocate** to allocate memory for any input poin
 <a id="Section_3.1"></a>
 ## 3.1 winsif Server Details
 
-The methods supported by the **winsif** interface are specified in [Message Processing Events and Sequencing Rules (section 3.1.4)](#Section_3.1.4).
+The methods supported by the **winsif** interface are specified in [Message Processing Events and Sequencing Rules (section 3.1.4)](#Section_3.2.4).
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -1216,11 +1216,11 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [R_WinsRecordAction](#Section_3.1.4.1) | Inserts, modifies, deletes, releases or queries a [**Name Record**](#gt_name-record) from the WINS database. Opnum: 0 |
-| [R_WinsStatus](#Section_3.1.4.20) | Retrieves various counters, configuration settings and the statistics of a WINS server. Opnum: 1 |
+| [R_WinsStatus](#Section_3.1.4.2) | Retrieves various counters, configuration settings and the statistics of a WINS server. Opnum: 1 |
 | [R_WinsTrigger](#Section_3.1.4.3) | Queues a request to trigger a replication from [**target WINS server**](#gt_target-wins-server) to a specified WINS server. Opnum: 2 |
 | [R_WinsDoStaticInit](#Section_3.1.4.4) | Imports Name Records from a file to the WINS database. Opnum: 3 |
 | [R_WinsDoScavenging](#Section_3.1.4.5) | Queues a [**Scavenging**](#gt_scavenging) request at the target WINS server. Opnum: 4 |
-| [R_WinsGetDbRecs](#Section_3.1.4.19) | Retrieves Name Records lying in a range of two version numbers and are owned by a particular WINS server. Opnum: 5 |
+| [R_WinsGetDbRecs](#Section_3.1.4.6) | Retrieves Name Records lying in a range of two version numbers and are owned by a particular WINS server. Opnum: 5 |
 | [R_WinsTerm](#Section_3.1.4.7) | Sends a termination signal to the WINS process running on the target WINS server. Opnum: 6 |
 | [R_WinsBackup](#Section_3.1.4.8) | Backs up the WINS database to a specified directory. Opnum: 7 |
 | [R_WinsDelDbRecs](#Section_3.1.4.9) | Deletes Name Records lying in a range of two version numbers and are owned by a particular WINS server. Opnum: 8 |
@@ -2157,7 +2157,7 @@ DWORD R_WinsStatusNew(
 
 **Processing and Response Requirements**:
 
-- The behavior of this method is exactly same as that of [R_WinsStatus](#Section_3.1.4.20) except for the following:
+- The behavior of this method is exactly same as that of [R_WinsStatus](#Section_3.1.4.2) except for the following:
 - There is no limit on the number of entries in the address-version map array.
 - This method SHOULD NOT be called with **Cmd_e** set to WINSINTF_E_ADDVERSMAP. If it is, the server returns an ERROR_WINS_INTERNAL error.
 - Refer to R_WinsStatus and WINSINTF_RESULTS_NEW_T for the details of the behavior of this method.
@@ -2261,7 +2261,7 @@ No local events are maintained other than those in the underlying [**RPC**](#gt_
 <a id="Section_3.2"></a>
 ## 3.2 winsi2 Server Details
 
-The methods supported by the **winsi2** interface are specified in [Message Processing Events and Sequencing Rules (section 3.2.4)](#Section_3.1.4).
+The methods supported by the **winsi2** interface are specified in [Message Processing Events and Sequencing Rules (section 3.2.4)](#Section_3.2.4).
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -2292,7 +2292,7 @@ No timers are required beyond those used internally by [**RPC**](#gt_remote-proc
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-A [**WINS**](#gt_windows-internet-name-service-wins) [winsi2](#Section_3.1.4) remote protocol server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) interface and listening on the dynamically allocated port assigned by RPC, as specified in section [2.1](#Section_2.1). The client MUST connect to a well-known RPC port on the WINS server to determine the endpoint of winsi2. Before any client connection, the WINS server MUST wait for WINS winsi2 to register with RPC before any clients can establish a connection.
+A [**WINS**](#gt_windows-internet-name-service-wins) [winsi2](#Section_3.2.4) remote protocol server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) interface and listening on the dynamically allocated port assigned by RPC, as specified in section [2.1](#Section_2.1). The client MUST connect to a well-known RPC port on the WINS server to determine the endpoint of winsi2. Before any client connection, the WINS server MUST wait for WINS winsi2 to register with RPC before any clients can establish a connection.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
@@ -3172,7 +3172,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <5> Section 3.1.4.1: In Windows 2000 Server and later, a maximum of 25 IP address mappings are allowed for a multihomed or special group [**Name Record**](#gt_name-record).
 
-<6> Section 3.1.4.2: Windows NT 4.0: The [R_WinStatus](#Section_3.1.4.20) caller is required to have control-level access regardless of the command used.
+<6> Section 3.1.4.2: Windows NT 4.0: The [R_WinStatus](#Section_3.1.4.2) caller is required to have control-level access regardless of the command used.
 
 <7> Section 3.1.4.6: Windows NT 4.0: The RPC method caller is required to have control-level access regardless of the command used.
 

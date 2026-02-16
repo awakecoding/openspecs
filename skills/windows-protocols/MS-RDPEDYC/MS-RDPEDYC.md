@@ -389,7 +389,7 @@ There are three versions of the Remote Desktop Protocol: Dynamic Channel Virtual
 - Version 1: The first version of the protocol consists of initialization, closing, and the sending of data over [**DVCs**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3).
 - Version 2: The second version introduced the capability to specify priority classes for virtual channels in order to allocate different bandwidth to different classes of virtual channels.
 - Version 3: The third version introduced the ability to send and receive compressed data.
-Implementations can support version 1, versions 1 and 2, or versions 1, 2, and 3 of the protocol. The negotiation of the protocol between the server and the client is described in section [2.2.1](#Section_4.1).
+Implementations can support version 1, versions 1 and 2, or versions 1, 2, and 3 of the protocol. The negotiation of the protocol between the server and the client is described in section [2.2.1](#Section_2.2.1).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -455,8 +455,8 @@ packet-beta
 | 0x01 | The message contained in the **optionalFields** field is a [Create Request PDU (section 2.2.2.1)](#Section_4.2.1) or a [Create Response PDU (section 2.2.2.2)](#Section_4.2.2). |
 | 0x02 | The message contained in the **optionalFields** field is a [Data First PDU (section 2.2.3.1)](#Section_2.2.3.1). |
 | 0x03 | The message contained in the **optionalFields** field is a [Data PDU (section 2.2.3.2)](#Section_2.2.3.2). |
-| 0x04 | The message contained in the **optionalFields** field is a [Close Request PDU (section 2.2.4)](#Section_3.3.5.2) or a Close Response PDU (section 2.2.4). |
-| 0x05 | The message contained in the **optionalFields** field is a [Capability Request PDU (section 2.2.1.1)](#Section_2.2.1.1) or a [Capabilities Response PDU (section 2.2.1.2)](#Section_2.2.1.2). |
+| 0x04 | The message contained in the **optionalFields** field is a [Close Request PDU (section 2.2.4)](#Section_1.3.3.3) or a Close Response PDU (section 2.2.4). |
+| 0x05 | The message contained in the **optionalFields** field is a [Capability Request PDU (section 2.2.1.1)](#Section_4.1.1) or a [Capabilities Response PDU (section 2.2.1.2)](#Section_4.1.2). |
 | 0x06 | The message contained in the **optionalFields** field is a Data First Compressed PDU (section [2.2.3.3](#Section_2.2.3.3)). |
 | 0x07 | The message contained in the **optionalFields** field is a Data Compressed PDU (section [2.2.3.4](#Section_2.2.3.4)). |
 | 0x08 | The message contained in the **optionalFields** field is a Soft-Sync Request PDU (section [2.2.5.1](#Section_2.2.5.1)). |
@@ -472,7 +472,7 @@ Capabilities PDUs are exchanged to negotiate the version level of the Remote Des
 - [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1) PDU is sent by a DVC server manager to indicate it supports version 1 of the protocol.
 - [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2) PDU is sent by a DVC server manager to indicate it supports version 2 of the protocol.
 - [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU is sent by a DVC server manager to indicate it supports version 3 of the protocol.
-- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) PDU is sent by a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to acknowledge the version level it supports.
+- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) PDU is sent by a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to acknowledge the version level it supports.
 A DVC server manager initializes a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) environment by sending a DYNVC_CAPS_VERSION1 (section 2.2.1.1.1), a DYNVC_CAPS_VERSION2 (section 2.2.1.1.2), or a DYNVC_CAPS_VERSION3 (section 2.2.1.1.3) PDU to the DVC client manager to indicate the highest version level supported by the server. The client MUST respond with a DYNVC_CAPS_RSP (section 2.2.1.2) PDU that indicates the highest version level supported by the client.
 
 The DVC server manager MUST send a Capabilities message prior to creating a DVC and wait for a response from the client. This happens just once; if capability exchange has already been completed, the channel creation continues. The DVC client manager MUST reply with a DYNVC_CAPS_RSP (section 2.2.1.2) PDU as soon as it receives the server request.
@@ -1058,11 +1058,11 @@ Figure 7: State diagram
 
 **Static channel created event:** This event signals that the static channel is available to send and receive data, as described in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.5.2.
 
-**Caps exchange state:** In this state, the client and the server exchange capabilities, as described in section [2.2.1](#Section_4.1).
+**Caps exchange state:** In this state, the client and the server exchange capabilities, as described in section [2.2.1](#Section_2.2.1).
 
 **Caps received event:** After the capabilities have been received by both sides, the protocol is ready to open dynamic channels.
 
-**Ready state:** In this state, the protocol can open new channels, as described in [2.2.2](#Section_1.3.3.1). For each new channel it will enter new state.
+**Ready state:** In this state, the protocol can open new channels, as described in [2.2.2](#Section_2.2.2). For each new channel it will enter new state.
 
 **Create channel event:** Signifies that the server is requesting a new channel, as described in section 2.2.2.
 
@@ -1074,7 +1074,7 @@ Figure 7: State diagram
 
 **Send/Receive state:** The dynamic channel is ready to send and process incoming data. See below for detailed data processing state diagram.
 
-**Channel close event:** Close the channel because either the client or the server have sent Closing a DVC packet, as described in section [2.2.4](#Section_3.3.5.2).
+**Channel close event:** Close the channel because either the client or the server have sent Closing a DVC packet, as described in section [2.2.4](#Section_1.3.3.3).
 
 **Static channel disconnected event:** This event signifies that the connection between the client and the server is broken and, at this point, the protocol terminates.
 
@@ -1097,13 +1097,13 @@ These reassembly rules are described in more detail in section [3.1.5.2.3](#Sect
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model, as long as their external behavior is consistent with that described in this document.
 
-**ChannelId:** A unique ID that the server generates and sends in a [DVC Create Request PDU (section 2.2.2.1)](#Section_4.2.1). The **ChannelId** is valid until the server or client issues a Closing a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) PDU (as specified in section [2.2.4](#Section_3.3.5.2)); afterwards, the **ChannelId** value can be reused in another DVC Create Request PDU.
+**ChannelId:** A unique ID that the server generates and sends in a [DVC Create Request PDU (section 2.2.2.1)](#Section_4.2.1). The **ChannelId** is valid until the server or client issues a Closing a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) PDU (as specified in section [2.2.4](#Section_1.3.3.3)); afterwards, the **ChannelId** value can be reused in another DVC Create Request PDU.
 
 **Listener:** A logical object identified by its name which consists of a string of [**ANSI encoded characters**](#gt_ansi-character). The server uses the listener name to initiate channel connection by using a DVC Create Request PDU. The client maintains a list of active listeners and uses that list to send a [DVC Create Response PDU (section 2.2.2.2)](#Section_4.2.2). The client MAY change the list at any time without notifying the server. Changing the list content MUST NOT result in any change in the existing DVC state.
 
 **Priority Class:** This field identifies how much bandwidth needs to be allocated for a particular class of channels. The bandwidth used by all channels with the same **Priority Class** MUST have a predetermined allocation, as described in section [2.2.1.1.2](#Section_2.2.1.1.2). **Priority Class** of value 0 will use the bandwidth calculated from PriorityCharge0, Priority Class of 1 will use PriorityCharge2, and so on.
 
-**Version:** The number exchanged between clients in DVC Capabilities Request/Response packets, see section [2.2.1.1](#Section_2.2.1.1). It is used by both sides to determine what features the protocol supports as described in section [3.2.3.1](#Section_3.2.3).
+**Version:** The number exchanged between clients in DVC Capabilities Request/Response packets, see section [2.2.1.1](#Section_4.1.1). It is used by both sides to determine what features the protocol supports as described in section [3.2.3.1](#Section_3.2.3).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -1113,7 +1113,7 @@ No common timers are used.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The TS server [**DVC manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) begins the initialization sequence immediately following the establishment of a [**static virtual channel**](#gt_static-virtual-channel) session, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.5.2. A TS server DVC manager and a TS client DVC manager exchange Capabilities PDUs as described in section [2.2.1](#Section_4.1) and initialize themselves to the version level negotiated. Individual [**DVCs**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) are created by the DVC server manager exchanging the DVC Create Request/Response, as described in section [2.2.2](#Section_1.3.3.1), with the DVC client manager only after the Capabilities PDUs have been exchanged.
+The TS server [**DVC manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) begins the initialization sequence immediately following the establishment of a [**static virtual channel**](#gt_static-virtual-channel) session, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.5.2. A TS server DVC manager and a TS client DVC manager exchange Capabilities PDUs as described in section [2.2.1](#Section_2.2.1) and initialize themselves to the version level negotiated. Individual [**DVCs**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) are created by the DVC server manager exchanging the DVC Create Request/Response, as described in section [2.2.2](#Section_2.2.2), with the DVC client manager only after the Capabilities PDUs have been exchanged.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -1257,9 +1257,9 @@ Static virtual channels MUST be created on the main RDP connection as described 
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 Creating Tunneling DVCs
 
-After the server has completed processing of all the MCS Channel Join Request PDUs ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.8), sent the corresponding Channel Join Confirm PDUs ([MS-RDPBCGR] section 2.2.1.9), and performed any necessary dynamic virtual channel initialization (section [2.2.1](#Section_4.1)), the server manager MUST send a DVC Create Request PDU (section [2.2.2.1](#Section_4.2.1)). The **ChannelName** field in the DVC Create Request PDU MUST be set to the corresponding ANSI static virtual channel name that was specified in the **channelDefArray** field of the Client Network Data block of the MCS Connect Initial PDU ([MS-RDPBCGR] section 2.2.1.3.4). A DVC Create Request PDU MUST be sent for all static virtual channels with the exception of the DRDYNVC channel, which MUST continue to be used as a static virtual channel.
+After the server has completed processing of all the MCS Channel Join Request PDUs ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.8), sent the corresponding Channel Join Confirm PDUs ([MS-RDPBCGR] section 2.2.1.9), and performed any necessary dynamic virtual channel initialization (section [2.2.1](#Section_2.2.1)), the server manager MUST send a DVC Create Request PDU (section [2.2.2.1](#Section_4.2.1)). The **ChannelName** field in the DVC Create Request PDU MUST be set to the corresponding ANSI static virtual channel name that was specified in the **channelDefArray** field of the Client Network Data block of the MCS Connect Initial PDU ([MS-RDPBCGR] section 2.2.1.3.4). A DVC Create Request PDU MUST be sent for all static virtual channels with the exception of the DRDYNVC channel, which MUST continue to be used as a static virtual channel.
 
-The server and client DVC managers MUST use the dynamic virtual channel to send and receive all data for the corresponding static virtual channel. The incoming data SHOULD NOT be reassembled by the client or server manager. Rather, each data chunk from the data PDUs (section [2.2.3](#Section_3.3.5.1)) MUST be delivered as-is so that the application endpoint can perform the reassembly (as specified in [MS-RDPBCGR] section 3.1.5.2.2.1), hence ensuring that there is no change in the data transfer interface layer.
+The server and client DVC managers MUST use the dynamic virtual channel to send and receive all data for the corresponding static virtual channel. The incoming data SHOULD NOT be reassembled by the client or server manager. Rather, each data chunk from the data PDUs (section [2.2.3](#Section_2.2.3)) MUST be delivered as-is so that the application endpoint can perform the reassembly (as specified in [MS-RDPBCGR] section 3.1.5.2.2.1), hence ensuring that there is no change in the data transfer interface layer.
 
 <a id="Section_3.1.5.4.3"></a>
 ##### 3.1.5.4.3 Relation to Soft-Sync
@@ -1313,7 +1313,7 @@ There are no client timers.
 <a id="Section_3.2.3.1"></a>
 #### 3.2.3.1 DVC Client Manager Initialization
 
-The Remote Desktop Protocol: Dynamic Virtual Channel Extension encompasses three version levels. The server specifies priority charges in Version 2 or 3 (as described in section [2.2.1.1.2](#Section_2.2.1.1.2)); no such priority charges are specified in Version 1. If the client supports channel priorities, it MUST set the **Version** field of [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) to at least 2. The server specifies support for compressed dynamic virtual channel data as well as channel priorities by using the Version 3 PDU. If the client supports compressed dynamic virtual channel data as well as channel priorities, it MUST set the Version field of DYNVC_CAPS_RSP to 3.
+The Remote Desktop Protocol: Dynamic Virtual Channel Extension encompasses three version levels. The server specifies priority charges in Version 2 or 3 (as described in section [2.2.1.1.2](#Section_2.2.1.1.2)); no such priority charges are specified in Version 1. If the client supports channel priorities, it MUST set the **Version** field of [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) to at least 2. The server specifies support for compressed dynamic virtual channel data as well as channel priorities by using the Version 3 PDU. If the client supports compressed dynamic virtual channel data as well as channel priorities, it MUST set the Version field of DYNVC_CAPS_RSP to 3.
 
 Capabilities PDUs are exchanged to negotiate the version level of the Remote Desktop Protocol: Dynamic Virtual Channel Extension that is supported. Three different Capabilities PDUs are used to negotiate version level support.
 
@@ -1347,7 +1347,7 @@ A DYNVC_CAPS_VERSION3 (section [2.2.1.1.3](#Section_2.2.1.1.3)) PDU specifies a 
 <a id="Section_3.2.3.1.4"></a>
 ##### 3.2.3.1.4 Capabilities Response (DYNVC_CAPS_RSP)
 
-If a client receives a [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1), a [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2), or a [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU from the server, it MUST reply with a [Capabilities Response PDU (section 2.2.1.2)](#Section_2.2.1.2).
+If a client receives a [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1), a [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2), or a [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU from the server, it MUST reply with a [Capabilities Response PDU (section 2.2.1.2)](#Section_4.1.2).
 
 <a id="Section_3.2.3.2"></a>
 #### 3.2.3.2 DVC Initialization
@@ -1359,7 +1359,7 @@ When a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) receiv
 
 The client responds to the server with a [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_4.2.2) PDU indicating the channel creation status. Any positive or zero value indicates success. A negative value indicates failure.
 
-On failure, the server DVC manager can reuse the failed **ChannelId** for another channel without first sending a [DYNVC_CLOSE (section 2.2.4)](#Section_3.3.5.2) PDU. Therefore, the client MUST NOT add the failed **ChannelId** into the list of active **ChannelIds**.
+On failure, the server DVC manager can reuse the failed **ChannelId** for another channel without first sending a [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU. Therefore, the client MUST NOT add the failed **ChannelId** into the list of active **ChannelIds**.
 
 If the channel creation was successful, the client SHOULD maintain this channel until it is closed or the connection is terminated.
 
@@ -1381,7 +1381,7 @@ Sending and receiving messages is symmetrical between the [**DVC server manager*
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Closing a DVC (DYNVC_CLOSE)
 
-A channel can be closed by either a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) or a DVC server manager. A [DYNVC_CLOSE (section 2.2.4)](#Section_3.3.5.2) PDU is used for both a close request and a close response.
+A channel can be closed by either a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) or a DVC server manager. A [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU is used for both a close request and a close response.
 
 When a DVC client manager receives a DYNVC_CLOSE (section 2.2.4) PDU, the client MAY respond with a DYNVC_CLOSE (section 2.2.4) PDU specifying the **ChannelId**.
 
@@ -1446,7 +1446,7 @@ The [**DVC managers**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) on the TS serve
 - [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1) PDU is sent by a server to indicate it supports version 1 of this protocol.
 - [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2) PDU is sent by a server to indicate it supports version 2 of this protocol.
 - [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU is sent by a server to indicate it supports version 3 of this protocol.
-- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) PDU is sent by a client to acknowledge the version level it supports.
+- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) PDU is sent by a client to acknowledge the version level it supports.
 A Capabilities PDU has the **Cmd** field set to 0x05.
 
 Immediately following the establishment of a [**static virtual channel**](#gt_static-virtual-channel) session, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md), the DVC server manager begins the initialization sequence. The DVC server manager sets a 10-second timer and sends a DYNVC_CAPS_VERSION1 (section 2.2.1.1.1), a DYNVC_CAPS_VERSION2 (section 2.2.1.1.2), or a DYNVC_CAPS_VERSION3 (section 2.2.1.1.3) PDU to the DVC client manager to indicate its highest version level supported. The DVC client manager MUST respond with a DYNVC_CAPS_RSP (section 2.2.1.2) PDU indicating the highest version level supported by the client. If the client does not respond to a Capabilities Request PDU before the 10-second timer expires, the server fails the creation of the [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3).
@@ -1471,7 +1471,7 @@ A [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU is sent to
 <a id="Section_3.3.3.1.4"></a>
 ##### 3.3.3.1.4 Capabilities Response (DYNVC_CAPS_RSP)
 
-The [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) PDU is sent by the [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to indicate the protocol version level it supports.
+The [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) PDU is sent by the [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to indicate the protocol version level it supports.
 
 The version level supported is indicated by the value of the **Version** field. If the client doesn't respond with a Capabilities Response packet within 10 seconds, the server MUST NOT make any further attempts to send a DVC Create Request packet.
 
@@ -1488,7 +1488,7 @@ A DVC server manager creates a channel in response to a request by an applicatio
 
 The DVC client manager responds to the DVC server manager with a DYNVC_CREATE_RSP (section 2.2.2.2) PDU indicating the channel creation status. Any positive or zero value indicates success. A negative value indicates failure.
 
-On failure, the server DVC manager MAY<12> send a [DYNVC_CLOSE (section 2.2.4)](#Section_3.3.5.2) PDU for the failed channel. The listener name is only used at channel initialization. After the channel is initialized, all data is sent referencing the **ChannelId**.
+On failure, the server DVC manager MAY<12> send a [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU for the failed channel. The listener name is only used at channel initialization. After the channel is initialized, all data is sent referencing the **ChannelId**.
 
 The Channel ID MUST be unique within a [**static virtual channel**](#gt_static-virtual-channel) session. The server DVC manager SHOULD reuse a Channel ID if the channel creation failed, or if the channel has been closed.
 
@@ -1512,7 +1512,7 @@ Sending and receiving messages is symmetrical between the [**DVC server manager*
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Closing a DVC (DYNVC_CLOSE)
 
-The closure of a channel can be requested by either an application running on the TS server or a [**listener**](#gt_listener) running on the TS client. A [DYNVC_CLOSE (section 2.2.4)](#Section_3.3.5.2) PDU is used for both a close request and a close response.
+The closure of a channel can be requested by either an application running on the TS server or a [**listener**](#gt_listener) running on the TS client. A [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU is used for both a close request and a close response.
 
 The DVC server manager sends a DYNVC_CLOSE (section 2.2.4) PDU (specifying the **ChannelId** to close) to the [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e). The client replies with a DYNVC_CLOSE (section 2.2.4) PDU.
 
@@ -1595,7 +1595,7 @@ a7 04 -> DYNVC_CAPS_VERSION2::PriorityCharge3 = 0x04a7 = 1191 (~55%)
 <a id="Section_4.1.2"></a>
 ### 4.1.2 DVC Capabilities Response PDU
 
-The following is an annotated sample of the [DYNVC_CAPS_RSP PDU (section 2.2.1.2)](#Section_2.2.1.2).
+The following is an annotated sample of the [DYNVC_CAPS_RSP PDU (section 2.2.1.2)](#Section_4.1.2).
 
 00000000 50 00 02 00
 
@@ -2711,7 +2711,7 @@ The last packet in the sequence for the remaining data: DYNVC_DATA_COMPRESSED PD
 <a id="Section_4.4.1"></a>
 ### 4.4.1 DVC Close PDU
 
-The following is an annotated sample of the [DYNVC_CLOSE PDU (section 2.2.4)](#Section_3.3.5.2).
+The following is an annotated sample of the [DYNVC_CLOSE PDU (section 2.2.4)](#Section_1.3.3.3).
 
 00000000 40 03 @.
 

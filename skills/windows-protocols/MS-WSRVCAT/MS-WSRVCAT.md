@@ -1930,7 +1930,7 @@ When the server application's transaction coordinator receives the Prepare SOAP 
 
 When the root transaction coordinator receives the Prepared SOAP message from the server application's transaction coordinator, the root transaction coordinator decides to commit the transaction.
 
-The root transaction coordinator then creates a Completion Protocol Committed SOAP message and sends the message to the client application's [Participant](#Section_1.3.2.1) Completion Protocol Service URI.
+The root transaction coordinator then creates a Completion Protocol Committed SOAP message and sends the message to the client application's [Participant](#Section_1.3.2.2) Completion Protocol Service URI.
 
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" xmlns:a="http://www.w3.org/2005/08/addressing">
 

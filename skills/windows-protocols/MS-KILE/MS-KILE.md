@@ -1295,7 +1295,7 @@ Before the client can send an [**AS**](#gt_authentication-service-as) or [**TGS*
 
 If the client has a [**ticket**](#gt_ticket) cache, the ticket cache MUST be initialized to an empty state.
 
-All parameters that are specified in section [3.2.1](#Section_3.1.1) are reset and then set according to the higher-layer protocols request.
+All parameters that are specified in section [3.2.1](#Section_3.2.1) are reset and then set according to the higher-layer protocols request.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1386,7 +1386,7 @@ In addition to the RFC behavior ([[RFC6113]](https://go.microsoft.com/fwlink/?Li
 - If the client does not have a TGT for the realm and is creating an:
 - **AS-REQ:** the client obtains a TGT for the computer principal from the user principal's [**domain**](#gt_domain).
 - **TGS-REQ:** the client obtains a referral TGT for the user principal for the target domain.
-- [**Compound identity TGS-REQ**](#gt_compound-identity-tgs-req): the client obtains a user principal TGT and computer principal TGT for the target domain with the same [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_3.1.5.8)).
+- [**Compound identity TGS-REQ**](#gt_compound-identity-tgs-req): the client obtains a user principal TGT and computer principal TGT for the target domain with the same [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_5.1.1)).
 If a TGT for the required principals cannot be obtained and **RequireFAST** is:
 
 - **TRUE:** the client fails the request.
@@ -1446,7 +1446,7 @@ When the server name is not Krbtgt, the client sends an AP request as an authori
 - ad-type KERB_AUTH_DATA_LOOPBACK (142) and ad-data containing **KERB_AUTH_DATA_LOOPBACK** structure (section [2.2.4](#Section_2.2.4)).
 - KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141), containing the **KERB-AD-RESTRICTION-ENTRY** structure (section [2.2.6](#Section_2.2.6)) inside the first AD-IF-RELEVANT element.<39>
 - KERB_AUTH_DATA_CLIENT_TARGET (144), containing the server’s name qualified with the realm name inside the first AD-IF-RELEVANT element.
-- If **ChannelBinding** is set to TRUE, the client sends the Authorization Data Type AD-AUTH-DATA-AP-OPTIONS (143) data in the first AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) and the ad-data of KERB_AP_OPTIONS_CBT (0x4000), encoded as a four byte little-endian unsigned integer. The presence of this element indicates that the client expects the applications running on it to include channel binding information ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 1.1.6 and [[RFC2744]](https://go.microsoft.com/fwlink/?LinkId=125716)) in AP requests whenever Kerberos authentication takes place over an "outer channel" such as TLS. Channel binding is provided using the **ChannelBinding** variable specified in section [3.2.1](#Section_3.1.1).
+- If **ChannelBinding** is set to TRUE, the client sends the Authorization Data Type AD-AUTH-DATA-AP-OPTIONS (143) data in the first AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) and the ad-data of KERB_AP_OPTIONS_CBT (0x4000), encoded as a four byte little-endian unsigned integer. The presence of this element indicates that the client expects the applications running on it to include channel binding information ([[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378) section 1.1.6 and [[RFC2744]](https://go.microsoft.com/fwlink/?LinkId=125716)) in AP requests whenever Kerberos authentication takes place over an "outer channel" such as TLS. Channel binding is provided using the **ChannelBinding** variable specified in section [3.2.1](#Section_3.2.1).
 - If **UnverifiedTargetName** is set to TRUE, the client additionally sets KERB_AP_OPTIONS_UNVERIFIED_TARGET_NAME (0x8000) in the AD_AUTH_DATA_AP_OPTIONS.
 When the client receives a KRB_AP_ERR_SKEW error ([RFC4120] section 3.2.3) with a **KERB-ERROR-DATA** structure (section [2.2.2](#Section_2.2.2)) in the e-data field of the KRB-ERROR message ([RFC4120] section 5.9.1), the client retries the AP-REQ using the time in the KRB-ERROR message to create the [**authenticator**](#gt_authenticator).
 
@@ -1557,7 +1557,7 @@ Kerberos V5 specifies that all [**KDCs**](#gt_key-distribution-center-kdc) in a 
 
 KILE implementations that use the LSAD for the configuration database load the KDC configuration from the Kerberos Policy Information ([MS-LSAD](#Section_5) section 3.1.1.1). The KDC calls the **LsarQueryDomainInformationPolicy** method ([MS-LSAD] section 3.1.4.4.7), and the *InformationClass* parameter is set to the value of PolicyDomainKerberosTicketInformation in order to retrieve the current values. The KDC configuration settings are set as follows:
 
-- **MaxRenewAge** (section [3.3.1](#Section_3.1.1)) to the value of the **MaxRenewAge** field.
+- **MaxRenewAge** (section [3.3.1](#Section_3.2.1)) to the value of the **MaxRenewAge** field.
 - **MaxClockSkew** (section 3.3.1) to the value of the **MaxClockSkew** field.
 - **MaxServiceTicketAge** (section 3.3.1) to the value of the **MaxServiceTicketAge** field.
 - **MaxTicketAge** (section 3.3.1) to the value of the **MaxTicketAge** field.
@@ -1584,7 +1584,7 @@ If an implementation supports multiple [**KDCs**](#gt_key-distribution-center-kd
 
 When KILE implementations that use the LSAD for the configuration database receive a KDC ConfigurationChange event, the KDC SHOULD call the LsarQueryDomainInformationPolicy method ([MS-LSAD](#Section_5) section 3.1.4.4.7). The *InformationClass* parameter SHOULD be set to the value of PolicyDomainKerberosTicketInformation in order to retrieve the current values. The KDC configuration settings are set as follows:
 
-- **MaxRenewAge** (section [3.3.1](#Section_3.1.1)) to the value of the **MaxRenewAge** field.
+- **MaxRenewAge** (section [3.3.1](#Section_3.2.1)) to the value of the **MaxRenewAge** field.
 - **MaxClockSkew** (section 3.3.1) to the value of the **MaxClockSkew** field.
 - **MaxServiceTicketAge** (section 3.3.1) to the value of the **MaxServiceTicketAge** field.
 - **MaxTicketAge** (section 3.3.1) to the value of the **MaxTicketAge** field.
@@ -1827,7 +1827,7 @@ KILE concatenates the following information to use as the [**key**](#gt_key) sal
 
 Kerberos V5 does not enforce revocation of accounts prior to the expiration of issued [**tickets**](#gt_ticket).
 
-If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.1.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the KDCs and the KDC MUST verify that the account and return the following errors:
+If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.2.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the KDCs and the KDC MUST verify that the account and return the following errors:
 
 - If **Disabled** is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
 - If **Expired** is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
@@ -1989,7 +1989,7 @@ The KILE KDC MUST copy the populated fields from the PAC in the TGT to the newly
 
 Kerberos V5 does not enforce revocation of accounts prior to the expiration of issued [**tickets**](#gt_ticket).
 
-If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.1.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the account KDCs. When this property is set on the account KDC for the client's domain, and the [**TGT**](#gt_ticket-granting-ticket-tgt) is older than an implementation-specific time<68>, the account KDC MUST verify that the account is still in good standing. Good standing means the account has not expired, been locked out, been disabled, or otherwise is not allowed to log on. If the KDC receiving the [**session**](#gt_session) ticket request is not in the user account’s [**domain**](#gt_domain), then the check cannot be made.
+If the POLICY_KERBEROS_VALIDATE_CLIENT bit is set in the **AuthenticationOptions** (section [3.3.1](#Section_3.2.1)) setting on the [**KDC**](#gt_key-distribution-center-kdc), then KILE will enforce revocation on the account KDCs. When this property is set on the account KDC for the client's domain, and the [**TGT**](#gt_ticket-granting-ticket-tgt) is older than an implementation-specific time<68>, the account KDC MUST verify that the account is still in good standing. Good standing means the account has not expired, been locked out, been disabled, or otherwise is not allowed to log on. If the KDC receiving the [**session**](#gt_session) ticket request is not in the user account’s [**domain**](#gt_domain), then the check cannot be made.
 
 - If Disabled is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
 - If Expired is TRUE, then the KDC MUST return KDC_ERR_CLIENT_REVOKED.
@@ -2168,7 +2168,7 @@ The [**AP exchange**](#gt_authentication-protocol-ap-exchange) is controlled by 
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for the Application Server is identical to that specified in section [3.2.1](#Section_3.1.1).
+The abstract data model for the Application Server is identical to that specified in section [3.2.1](#Section_3.2.1).
 
 Additionally, the server maintains the following parameter:
 
@@ -2184,7 +2184,7 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-All parameters that are specified in section [3.4.1](#Section_3.1.1) are reset and then set according to the higher-layer protocols request.
+All parameters that are specified in section [3.4.1](#Section_3.2.1) are reset and then set according to the higher-layer protocols request.
 
 The replay cache MUST be initialized with no entries.
 
@@ -2200,7 +2200,7 @@ When an application server is running under the machine account and NRPC is supp
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Higher-Layer Triggered Events
 
-The [**AP exchange**](#gt_authentication-protocol-ap-exchange) is triggered by a higher-layer application protocol that requests security [**services**](#gt_service) for a connection or message exchange. The higher-layer application protocol MUST specify the name of the server to which it is attempting authentication and also MUST specify any of the parameters from section [3.4.1](#Section_3.1.1) that are required for Kerberos V5 [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) to perform the authentication.
+The [**AP exchange**](#gt_authentication-protocol-ap-exchange) is triggered by a higher-layer application protocol that requests security [**services**](#gt_service) for a connection or message exchange. The higher-layer application protocol MUST specify the name of the server to which it is attempting authentication and also MUST specify any of the parameters from section [3.4.1](#Section_3.2.1) that are required for Kerberos V5 [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) to perform the authentication.
 
 Calling applications use the [**SSPI**](#gt_security-support-provider-interface-sspi) API family to establish the connection and specify the target. Optionally, certain higher-layer protocols, such as Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO) [MS-SPNG](../MS-SPNG/MS-SPNG.md), will also specify the parameters.
 
@@ -2229,7 +2229,7 @@ When the checksum field is not present, the application server processes the req
 
 When the server receives AP exchange requests for SPNs with the serviceclass string equal to [**"RestrictedKrbHost"**](#gt_0827ff28-3f7e-40d8-94ec-cd9dc5995677), it will decrypt the ticket with the computer account's key and either create or use the [**session key**](#gt_session-key) for the "RestrictedKrbHost", regardless of the account the target [**service**](#gt_service) is running as.<77>
 
-If the ApplicationRequiresCBT parameter (section [3.4.1](#Section_3.1.1)) is set to TRUE, the server, if so configured, SHOULD<78> return GSS_S_BAD_BINDINGS whenever the AP exchange request message contains an all-zero channel binding value and does not contain the AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+If the ApplicationRequiresCBT parameter (section [3.4.1](#Section_3.2.1)) is set to TRUE, the server, if so configured, SHOULD<78> return GSS_S_BAD_BINDINGS whenever the AP exchange request message contains an all-zero channel binding value and does not contain the AD-IF-RELEVANT element ([RFC4120] section 5.2.6.1) KERB_AP_OPTIONS_CBT.
 
 If the [**service ticket**](#gt_service-ticket) received for the computer's principal is encrypted with DES, the KILE server MUST return KRB_AP_ERR_MODIFIED regardless of supporting DES.<79>
 
@@ -2264,7 +2264,7 @@ The server MUST search all AD-IF-RELEVANT containers for the KERB_AUTH_DATA_TOKE
 
 - If equal, the server processes the authentication as a local one, because the client and server are on the same machine, and can use the **KERB_AUTH_DATA_LOOPBACK** structure (section [2.2.4](#Section_2.2.4)) AuthorizationData for any local implementation purposes.
 - Otherwise, the server MUST ignore the KERB_AUTH_DATA_TOKEN_RESTRICTIONS (141) Authorization Data Type, the **KERB-AD-RESTRICTION-ENTRY** structure (section 2.2.6), the KERB_AUTH_DATA_LOOPBACK (142), and the containing **KERB_AUTH_DATA_LOOPBACK** structure (section 2.2.4).
-For KILE implementations that use a [**security identifier (SID)**](#gt_security-identifier-sid)-based authorization model, the server populates the User SID and Security Group SIDs in the **ImpersonationAccessToken** parameter (section [3.4.1](#Section_3.1.1)) as follows:
+For KILE implementations that use a [**security identifier (SID)**](#gt_security-identifier-sid)-based authorization model, the server populates the User SID and Security Group SIDs in the **ImpersonationAccessToken** parameter (section [3.4.1](#Section_3.2.1)) as follows:
 
 - Concatenate **LogonDomainId** and **UserId** [MS-PAC] section 2.5), add to the **ImpersonationAccessToken.Sids** array, and set the **ImpersonationAccessToken.UserIndex** field to this index.
 - Concatenate **LogonDomainId** and **PrimaryGroupId** ([MS-NRPC](../MS-NRPC/MS-NRPC.md) sections 2.2.1.4.11, 2.2.1.4.12, and 2.2.1.4.13), add the result to the **ImpersonationAccessToken.Sids** array, and set the **ImpersonationAccessToken.PrimaryGroup** field to this index.
@@ -2701,7 +2701,7 @@ The encryption types AES128-CTC-HMAC-SHA1-96/AES256-CTC-HMAC-SHA1-96 or includin
 <a id="Section_5.1.1"></a>
 ### 5.1.1 RODC Key Version Numbers
 
-Because [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc) can be deployed in less secure locations, RODCs have different [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_3.1.5.8)) to ensure they are using a different key than the [**domain**](#gt_domain)'s DCs. This protects the domain if an RODC is compromised.
+Because [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc) can be deployed in less secure locations, RODCs have different [**key**](#gt_key) version numbers (section [3.1.5.8](#Section_5.1.1)) to ensure they are using a different key than the [**domain**](#gt_domain)'s DCs. This protects the domain if an RODC is compromised.
 
 <a id="Section_5.1.2"></a>
 ### 5.1.2 SPNs with Serviceclass Equal to "RestrictedKrbHost"

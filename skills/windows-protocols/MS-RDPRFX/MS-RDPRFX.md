@@ -442,7 +442,7 @@ packet-beta
 | --- | --- |
 | CODEC_MODE 0x02 | When this flag is set, it indicates that only image mode is supported by the decoder, and therefore, the codec MUST operate in image mode. When this flag is not set, it indicates that both the image mode and the video mode of the codec are supported by the decoder and the codec MUST operate in video mode. |
 
-When operating in image mode, the encode headers messages (section [2.2.2.2](#Section_4.2.2)) MUST always precede an encoded frame. When operating in video mode, the header messages MUST be present at the beginning of the stream and are optional elsewhere.
+When operating in image mode, the encode headers messages (section [2.2.2.2](#Section_2.2.2.2)) MUST always precede an encoded frame. When operating in video mode, the header messages MUST be present at the beginning of the stream and are optional elsewhere.
 
 **colConvBits (1 byte):** An 8-bit, unsigned integer. Specifies the color conversion transform. This field MUST be set to CLW_COL_CONV_ICT (0x1), and the transformation is by the equations in sections [3.1.8.1.3](#Section_3.1.8.1.3) and [3.1.8.2.5](#Section_3.1.8.2.5).
 
@@ -733,7 +733,7 @@ packet-beta
 | --- | --- |
 | CODEC_MODE 0x02 | The codec is operating in image mode. If this flag is not set, the codec is operating in video mode. |
 
-When operating in image mode, the Encode Headers messages (section [2.2.2.2](#Section_4.2.2)) MUST always precede an encoded frame. When operating in video mode, the header messages MUST be present at the beginning of the stream and MAY be present elsewhere.
+When operating in image mode, the Encode Headers messages (section [2.2.2.2](#Section_2.2.2.2)) MUST always precede an encoded frame. When operating in video mode, the header messages MUST be present at the beginning of the stream and MAY be present elsewhere.
 
 **cct (2 bits):** A 2-bit unsigned integer. Specifies the color conversion transform. This field MUST be set to COL_CONV_ICT (0x1) to specify the transform defined by the equations in sections [3.1.8.1.3](#Section_3.1.8.1.3) and [3.1.8.2.5](#Section_3.1.8.2.5). The decoder SHOULD ignore this field.
 
@@ -1028,7 +1028,7 @@ None.
 
 **Establishing the connection:** RemoteFX capabilities messages are exchanged to establish the encoding properties used by the server, as specified in sections [3.1.3](#Section_3.1.3) and [3.1.5.1](#Section_3.1.5.1). A compliant server MUST process the [TS_RFX_CLNT_CAPS_CONTAINER](#Section_2.2.1.1) message as specified in section 3.1.5.1 before RemoteFX encoding can begin.
 
-**Sending RemoteFX encoded data:** RemoteFX encoded data is sent to the client as a sequence of the RemoteFX messages defined in section [2.2.2](#Section_2). A compliant server MUST always send the encoded messages in the correct order, as specified in section [3.1.8.3.1](#Section_3.1.8.3.1).
+**Sending RemoteFX encoded data:** RemoteFX encoded data is sent to the client as a sequence of the RemoteFX messages defined in section [2.2.2](#Section_2.2.2). A compliant server MUST always send the encoded messages in the correct order, as specified in section [3.1.8.3.1](#Section_3.1.8.3.1).
 
 **Header messages:** The encoded message sequence MUST include header messages, as specified in section 3.1.8.3.1.
 
@@ -1933,7 +1933,7 @@ Figure 13: RemoteFX decoding stages
 <a id="Section_3.1.8.2.1"></a>
 ##### 3.1.8.2.1 RLGR Entropy Decoding
 
-The three encoded tile components (Y, Cb, and Cr) are entropy decoded independently. The algorithm used is either inverse RLGR1 or RLGR3, depending on which one was used for encoding. For details of the decoding process, refer to [[ARLGR]](https://go.microsoft.com/fwlink/?LinkId=187365) (the encoding process is described in section [3.1.8.1.7](#Section_3.1.8.1.7)).
+The three encoded tile components (Y, Cb, and Cr) are entropy decoded independently. The algorithm used is either inverse RLGR1 or RLGR3, depending on which one was used for encoding. For details of the decoding process, refer to [[ARLGR]](https://go.microsoft.com/fwlink/?LinkId=187365) (the encoding process is described in section [3.1.8.1.7](#Section_3.1.8.1.7.3)).
 
 <a id="Section_3.1.8.2.2"></a>
 ##### 3.1.8.2.2 Sub-Band Reconstruction
@@ -1980,11 +1980,11 @@ A RemoteFX stream is defined to be the set of all of the codec messages, sent se
 <a id="Section_3.1.8.3.1"></a>
 ##### 3.1.8.3.1 Encode Message Sequencing
 
-An encoded RemoteFX stream is composed of a sequence of encode messages that are described in section [2.2.2](#Section_2). The sequence of encode messages is encapsulated inside an Extended Bitmap Data structure ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.2.1.1), which is encapsulated in a Stream Surface Bits Surface Command ([MS-RDPBCGR] section 2.2.9.2.2).
+An encoded RemoteFX stream is composed of a sequence of encode messages that are described in section [2.2.2](#Section_2.2.2). The sequence of encode messages is encapsulated inside an Extended Bitmap Data structure ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.2.1.1), which is encapsulated in a Stream Surface Bits Surface Command ([MS-RDPBCGR] section 2.2.9.2.2).
 
 All encode messages start with a TS_RFX_BLOCKT (section [2.2.2.1.1](#Section_2.2.2.1.1)) structure. When parsing the message blocks, the **blockLen** field of a TS_RFX_BLOCKT MUST be used to obtain the length of the data block. This length MUST NOT be less than the length based on the **blockType** field of the TS_RFX_BLOCKT.
 
-The RemoteFX stream is structured as a set of header messages followed by encoded data messages. The header messages contain global information necessary to decompress the data messages. The header messages are described in section [2.2.2.2](#Section_4.2.2), and the data messages are described in section [2.2.2.3](#Section_4.2.3). The stream MUST start with the header messages and any of these headers can appear in the stream at a later stage. The header messages can be repeated.
+The RemoteFX stream is structured as a set of header messages followed by encoded data messages. The header messages contain global information necessary to decompress the data messages. The header messages are described in section [2.2.2.2](#Section_2.2.2.2), and the data messages are described in section [2.2.2.3](#Section_2). The stream MUST start with the header messages and any of these headers can appear in the stream at a later stage. The header messages can be repeated.
 
 ![Message sequencing in the RemoteFX stream](media/image16.png)
 
@@ -2101,7 +2101,7 @@ The server has sent an array of bytes set to zero as described in section 2.2.1.
 <a id="Section_4.2.2"></a>
 ### 4.2.2 Encode Header Messages
 
-The following is an annotated network capture of the [Encode Header Messages (section 2.2.2.2)](#Section_4.2.2).
+The following is an annotated network capture of the [Encode Header Messages (section 2.2.2.2)](#Section_2.2.2.2).
 
 00000000 c0 cc 0c 00 00 00 ca ac cc ca 00 01 c3 cc 0d 00
 
@@ -2178,7 +2178,7 @@ The server has chosen to encode using RLGR3 (TS_RFX_CONTEXT) and specified one c
 <a id="Section_4.2.3"></a>
 ### 4.2.3 Encode Data Messages
 
-The following is an annotated network capture of the [Encode Data Messages (section 2.2.2.3)](#Section_4.2.3).
+The following is an annotated network capture of the [Encode Data Messages (section 2.2.2.3)](#Section_2).
 
 00000000 c4 cc 0e 00 00 00 01 00 00 00 00 00 01 00 c6 cc
 

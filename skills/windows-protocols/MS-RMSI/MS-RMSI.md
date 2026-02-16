@@ -323,7 +323,7 @@ Figure 3: Relationships between the application, the RMS client, and the RMS ser
 While the RMS: Client-to-Server Protocol [MS-RMPR] supports the most common scenarios for the creation and consumption of content by an application in the RMS system, the RMS: ISV Extension Protocol can be used when additional functionality is required to enable the application to communicate directly with the RMS server. The RMS: ISV Extension Protocol provides the following interfaces to support these more advanced scenarios:
 
 - Decommissioning: Enables RMS protection to be completely removed from protected content. When enabled on the RMS server, the [Decommissioning](#Section_6.1) interface accepts a [**publishing license**](#gt_publishing-license) and returns the content key from that [**license**](#gt_license).
-- Precertification: Enables protected content to be delivered with an authorization token for the recipient user. The [Precertification](#Section_3.3) interface is used to retrieve the public key of the specified user.
+- Precertification: Enables protected content to be delivered with an authorization token for the recipient user. The [Precertification](#Section_5.1.2) interface is used to retrieve the public key of the specified user.
 - Republishing: Enables a new IL to be created by using the same content key as an existing IL. The Republishing interface is used to alter the set of rights granted by an IL.
 - Prelicensing: Enables protected content to be delivered with an authorization token for the recipient user without requiring a precertification request. The Prelicensing interface is used to retrieve a [**use license**](#gt_use-license-ul) for the specified user.
 <a id="Section_1.3.1"></a>
@@ -331,7 +331,7 @@ While the RMS: Client-to-Server Protocol [MS-RMPR] supports the most common scen
 
 If an organization were to decide to stop using RMS entirely and remove its deployment, it would need to remove RMS protection from content. One method is to have people with owner rights to each piece of content remove the protection. Realistically, however, it might not be possible to find these people because they might no longer belong to the organization in question. Another approach is to use the Decommissioning interface to extract the content key from a [**publishing license**](#gt_publishing-license) and return it so that it can then be used to decrypt the content. Because each protected document has a publishing license, and each publishing license has its own content key, this process is repeated for each protected document that needs to have its protection removed.
 
-When servicing the request, the RMS server does not verify whether the requestor can be granted access to the content as specified in the publishing license. Rather, the RMS server returns the content key to any requestor. As a result, the Decommissioning interface is disabled for normal operation by default. The interface exposes one request and response message to support decommissioning via the [AcquireContentKey](#Section_3.2.4.1.2.1) operation.
+When servicing the request, the RMS server does not verify whether the requestor can be granted access to the content as specified in the publishing license. Rather, the RMS server returns the content key to any requestor. As a result, the Decommissioning interface is disabled for normal operation by default. The interface exposes one request and response message to support decommissioning via the [AcquireContentKey](#Section_3.2.4.1) operation.
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Precertification Interface
@@ -418,7 +418,7 @@ The interfaces MUST be exposed by the server at the following [**endpoints**](#g
 
 **Decommissioning:** This interface MUST be exposed at the following URLs:
 
-[baseURL]/decommission/decommission.asmx: [AcquireContentKey](#Section_3.2.4.1.2.1)
+[baseURL]/decommission/decommission.asmx: [AcquireContentKey](#Section_3.2.4.1)
 
 **Precertification:** This interface MUST be exposed at the following URL:
 
@@ -697,7 +697,7 @@ None.
 
 | Operation | Description |
 | --- | --- |
-| [AcquireContentKey Operation](#Section_3.2.4.1.2.1) | Used to acquire a content key from a decommissioned RMS server. |
+| [AcquireContentKey Operation](#Section_3.2.4.1) | Used to acquire a content key from a decommissioned RMS server. |
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 AcquireContentKey
@@ -826,7 +826,7 @@ type="tns:ArrayOfAcquireContentKeyResponse" />
 | --- | --- |
 | [<ArrayOfAcquireContentKeyParams>](#Section_3.2.4.1.3.1) | Contains any number of sets of [<AcquireContentKeyParams>](#Section_3.2.4.1.3.2) used to acquire a content key. |
 | <AcquireContentKeyParams> | The parameters that are used to acquire a content key. |
-| [<ArrayOfAcquireContentKeyResponse>](#Section_3.2.4.1.3.3) | Contains any number of [<AcquireContentKeyResponse>](#Section_3.2.4.1.3.4) elements. |
+| [<ArrayOfAcquireContentKeyResponse>](#Section_3.2.4.1.3.3) | Contains any number of [<AcquireContentKeyResponse>](#Section_3.2.4.1.2.2) elements. |
 | <AcquireContentKeyResponse> | The parameters returned from an [AcquireContentKey](#Section_3.2.4.1.2.1) operation. |
 
 <a id="Section_3.2.4.1.3.1"></a>
@@ -888,7 +888,7 @@ type="tns:AcquireContentKeyResponse" />
 
 </s:complexType>
 
-**AcquireContentKeyResponse:** An element that contains the content key in the response. The element is of the <[AcquireContentKeyResponse](#Section_3.2.4.1.3.4)> complex type as defined by the schema in section 3.2.4.1.3.4.
+**AcquireContentKeyResponse:** An element that contains the content key in the response. The element is of the <[AcquireContentKeyResponse](#Section_3.2.4.1.2.2)> complex type as defined by the schema in section 3.2.4.1.3.4.
 
 <a id="Section_3.2.4.1.3.4"></a>
 ###### 3.2.4.1.3.4 AcquireContentKeyResponse
@@ -1134,7 +1134,7 @@ type="tns:ArrayOfPrecertifyResponse" />
 | [<PrecertifyParams>](#Section_3.3.4.1) | Contains the user identity information. |
 | [<Identification>](#Section_3.3.4.1.3.3) | Contains information that identifies the target user. |
 | [<ArrayOfPrecertifyResponse>](#Section_3.3.4.1.3.4) | Contains an array that consists of <PrecertifyResponse> elements, which in turn contain public key [**certificates**](#gt_certificate). |
-| [<PrecertifyResponse>](#Section_3.3.4.1.2.2) | Contains the signed [**publishing license**](#gt_publishing-license). |
+| [<PrecertifyResponse>](#Section_3.3.4.1.3.5) | Contains the signed [**publishing license**](#gt_publishing-license). |
 
 <a id="Section_3.3.4.1.3.1"></a>
 ###### 3.3.4.1.3.1 ArrayOfPrecertifyParams
@@ -1228,7 +1228,7 @@ type="tns:PrecertifyResponse" />
 
 </s:complexType>
 
-**PrecertifyResponse:** An element that contains the public key certificate in the response. The element is of the <[PrecertifyResponse](#Section_3.3.4.1.2.2)> complex type as defined by the schema in section 3.3.4.1.3.5.
+**PrecertifyResponse:** An element that contains the public key certificate in the response. The element is of the <[PrecertifyResponse](#Section_3.3.4.1.3.5)> complex type as defined by the schema in section 3.3.4.1.3.5.
 
 <a id="Section_3.3.4.1.3.5"></a>
 ###### 3.3.4.1.3.5 PrecertifyResponse
@@ -1910,7 +1910,7 @@ An RMS server is placed in decommissioning mode so that RMS protection can be re
 - Usage policy is extracted from [**protected content**](#gt_protected-content) by the application.
 The application extracts or retrieves the [**publishing license**](#gt_publishing-license) from wherever the application has stored it. Storage of the publishing license associated with protected content is the responsibility of the application.
 
-- [AcquireContentKey](#Section_3.2.4.1.2.1) operation is called.
+- [AcquireContentKey](#Section_3.2.4.1) operation is called.
 ![AcquireContentKey operation is called](media/image8.png)
 
 Figure 9: AcquireContentKey operation is called
@@ -1956,7 +1956,7 @@ The [Decommissioning](#Section_6.1) interface allows a requestor to retrieve the
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Precertification Interface
 
-The [Precertification](#Section_3.3) interface might involve communicating a recipient's email address between the requestor and the RMS Server. This can be considered sensitive or private information. An attacker observing the traffic between the requestor and the RMS Server might also be able to determine whether a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). Although the information in the content is not disclosed to this attacker, the attack could potentially make the recipient a target of another attack.
+The [Precertification](#Section_5.1.2) interface might involve communicating a recipient's email address between the requestor and the RMS Server. This can be considered sensitive or private information. An attacker observing the traffic between the requestor and the RMS Server might also be able to determine whether a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). Although the information in the content is not disclosed to this attacker, the attack could potentially make the recipient a target of another attack.
 
 It is strongly recommended that communication be done over HTTPS instead of HTTP so that this traffic is protected.
 
@@ -1970,7 +1970,7 @@ It is strongly recommended that access to this interface be limited to a set of 
 <a id="Section_5.1.4"></a>
 ### 5.1.4 Prelicensing Interface
 
-The [Prelicensing](#Section_6.4) interface involves the communication of a recipient's email address between the requestor and the RMS Server. This information could be considered sensitive or private. An attacker that observes the traffic between the requestor and the RMS Server might also be able to determine whether or not a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). While the information in the content will not be disclosed to this attacker, it could potentially make the recipient a target of another attack.
+The [Prelicensing](#Section_3.5) interface involves the communication of a recipient's email address between the requestor and the RMS Server. This information could be considered sensitive or private. An attacker that observes the traffic between the requestor and the RMS Server might also be able to determine whether or not a particular recipient has been granted access to particular [**protected content**](#gt_protected-content). While the information in the content will not be disclosed to this attacker, it could potentially make the recipient a target of another attack.
 
 It is strongly recommended that communication be transported over HTTPS, rather than HTTP, to ensure traffic protection.
 

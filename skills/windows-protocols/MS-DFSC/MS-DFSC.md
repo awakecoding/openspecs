@@ -528,7 +528,7 @@ If the SiteName flag is set in the RequestFlags field, then the RequestData buff
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 RequestData
 
-RequestData is part of the REQ_GET_DFS_REFERRAL_EX message (section [2.2.3](#Section_2.2.2)).
+RequestData is part of the REQ_GET_DFS_REFERRAL_EX message (section [2.2.3](#Section_2.2.3)).
 
 ```mermaid
 packet-beta
@@ -906,7 +906,7 @@ The following procedure specifies a possible implementation for resolving a UNC 
 - If the RootOrLink of ReferralCache entry indicates root targets, the process is as specified in section [3.1.5.1](#Section_3.1.5.1). If this processing does not successfully determine a ReferralCache entry to traverse the link, set the failure status to the last error that occurred and go to step 14.
 - ReferralCache entry for the link determined successfully. Go to step 4.
 - If the I/O operation fails with an error other than STATUS_PATH_NOT_COVERED, then the process is as specified in section [3.1.5.2](#Section_3.1.5.2). If the processing of that section specifies a new TargetHint, repeat step 8. Otherwise, set the failure status to the last error that occurred and go to step 14.
-- If the I/O operation is successful, the process is as specified in section [3.1.5.3](#Section_2.2.1.5). Complete the I/O operation and user/application-initiated I/O request with success.
+- If the I/O operation is successful, the process is as specified in section [3.1.5.3](#Section_3.1.5.3). Complete the I/O operation and user/application-initiated I/O request with success.
 - [ReferralCache hit, expired TTL, RootOrLink=link] The link referral request is issued to a DFS root target of the namespace. Find the root ReferralCache entry corresponding to the first two path components, noting that this will already be in the cache due to processing that resulted in acquiring the expired link ReferralCache entry. Issue a [**DFS link**](#gt_0611e93d-f0e7-42ee-a591-d77ebcbb6619) referral request, as specified in section 3.1.4.2, providing "LINK", **TargetHint** of the root ReferralCache entry, **UserCredentials**, **MaxOutputSize**, and **Pathf** as parameters, and process the DFS referral response and/or error as specified in section 3.1.5.4.3, which will update the ReferralCache on success. If the DFS Link referral request fails, set the failure status to the last error that occurred and go to step 14. Otherwise:
 - If the RootOrLink of the refreshed ReferralCache entry indicates DFS root targets, go to step 3.
 - If the RootOrLink of the refreshed ReferralCache entry indicates DFS link targets, go to step 4.
@@ -929,7 +929,7 @@ The client MUST initiate a server session with the SMB server, as specified in [
 
 The client MUST verify the local configuration on extended referrals in an implementation-specific manner<7>, and MUST also query the server's extended referral capability by invoking the event as specified in [MS-CIFS] section 3.4.4.12.
 
-If both the tests return TRUE, the client MUST construct the **REQ_GET_DFS_REFERRAL_EX** request, as specified in section [2.2.3](#Section_2.2.2), with the following parameters:
+If both the tests return TRUE, the client MUST construct the **REQ_GET_DFS_REFERRAL_EX** request, as specified in section [2.2.3](#Section_2.2.3), with the following parameters:
 
 - MaxReferralLevel is set to the corresponding Type as specified in the following table.
 - RequestFlags is set to 1.
@@ -995,7 +995,7 @@ If a [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) request fails 
 <a id="Section_3.1.5.4.1"></a>
 ##### 3.1.5.4.1 Receiving a Domain Referral Response
 
-This is applicable only to a domain-joined computer. The client receives this response for the domain referral request that it issued to BootstrapDC (as specified in section [3.1.6](#Section_3.2.6)). The domain referral response MUST be version 3 or later; otherwise, the client MUST ignore the referral response.
+This is applicable only to a domain-joined computer. The client receives this response for the domain referral request that it issued to BootstrapDC (as specified in section [3.1.6](#Section_3.1.6)). The domain referral response MUST be version 3 or later; otherwise, the client MUST ignore the referral response.
 
 The client MUST discard referral responses that do not have the NameListReferral bit of each referral entry set. The other bits of **ReferralEntryFlags** in the referral entry MUST be ignored. The client can access the null-terminated [**Unicode**](#gt_unicode) [**domain name**](#gt_domain-name) contained in a referral entry by adding the value in the **SpecialNameOffset** field of the referral entry to the address of the referral entry.
 
@@ -1067,7 +1067,7 @@ A referral response is an Interlink if either of the following two conditions ho
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
 
-On joining a [**domain**](#gt_domain), the client updates its BootstrapDC, issues a domain referral to the BootstrapDC, and enables the BootstrapDCTimer, as specified in section [3.1.6](#Section_3.2.6). On leaving a domain to join a workgroup, the client disables the BootstrapDCTimer.
+On joining a [**domain**](#gt_domain), the client updates its BootstrapDC, issues a domain referral to the BootstrapDC, and enables the BootstrapDCTimer, as specified in section [3.1.6](#Section_3.1.6). On leaving a domain to join a workgroup, the client disables the BootstrapDCTimer.
 
 <a id="Section_3.2"></a>
 ## 3.2 DFS Root Target Server Details
@@ -1132,7 +1132,7 @@ The caller provides the following:
 
 **IpAddress**: The IP address of the client.
 
-**Buffer**: The buffer containing one of the DFS referral request packets as specified in sections [2.2.2](#Section_2.2.2) and [2.2.3](#Section_2.2.2).
+**Buffer**: The buffer containing one of the DFS referral request packets as specified in sections [2.2.2](#Section_2.2.2) and [2.2.3](#Section_2.2.3).
 
 **IsExtendedReferral**: A Boolean value that, if set, indicates the referral request contained in the Buffer parameter is of the form REQ_GET_DFS_REFERRAL_EX, as specified in section 2.2.3.
 
@@ -1148,7 +1148,7 @@ The server processes this request as specified in section [3.2.5.1](#Section_3.3
 
 The server receives [**DFS referral**](#gt_c6f2eabf-2138-4f97-a788-5d6a41a27bdd) requests from clients when they need to resolve [**DFS**](#gt_distributed-file-system-dfs) paths into file server paths.
 
-The **MaxReferralLevel** field of the [REQ_GET_DFS_REFERRAL (section 2.2.2)](#Section_2.2.2) or [REQ_GET_DFS_REFERRAL_EX (section 2.2.3)](#Section_2.2.2) message contains the highest DFS referral version understood by the client. The server MUST respond with a version number less than or equal to the value specified by the client in the request. It SHOULD respond with the highest version number that it supports that can meet this constraint.<18>
+The **MaxReferralLevel** field of the [REQ_GET_DFS_REFERRAL (section 2.2.2)](#Section_2.2.2) or [REQ_GET_DFS_REFERRAL_EX (section 2.2.3)](#Section_2.2.3) message contains the highest DFS referral version understood by the client. The server MUST respond with a version number less than or equal to the value specified by the client in the request. It SHOULD respond with the highest version number that it supports that can meet this constraint.<18>
 
 The server MUST determine the maximum response data buffer size specified by the client. The source of this information depends on the transport protocol used by the client, as follows:
 

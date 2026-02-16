@@ -506,7 +506,7 @@ The Microsoft Message Queuing ([**MSMQ**](#gt_microsoft-message-queuing-msmq)) p
 
 [Message Transfer and Routing (section 2.1.2.2)](#Section_2.1.2.2)
 
-[Message Security (section 2.1.2.3)](#Section_2.1.2.3)
+[Message Security (section 2.1.2.3)](#Section_2.9)
 
 [Management and Administration (section 2.1.2.4)](#Section_2.1.2.4)
 
@@ -1649,7 +1649,7 @@ This example demonstrates disconnected data entry as described in the [Send Mess
 
 **Prerequisites**
 
-- See the common prerequisites defined in section [3](#Section_2.1) .
+- See the common prerequisites defined in section [3](#Section_3) .
 - The queue exists.
 - The application is authorized to send [**messages**](#gt_message) to the queue.
 - If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
@@ -1702,7 +1702,7 @@ This example demonstrates web order entry as described in the Send Message in Tr
 
 **Prerequisites**
 
-- See the common prerequisites defined in section [3](#Section_2.1).
+- See the common prerequisites defined in section [3](#Section_3).
 - The queue exists.
 - The application is authorized to send messages to the queue.
 - If a Directory Service is not being used, the application is configured with the address of the queue prior to the send operation.
@@ -1748,7 +1748,7 @@ This example demonstrates modifying a public queue as described in the [Create o
 
 **Prerequisites**
 
-- See the common prerequisites that are described in section [3](#Section_2.1).
+- See the common prerequisites that are described in section [3](#Section_3).
 - The application has access to the machine on which a queue is to be created or modified.
 - The application has the necessary administrative rights to execute the operation.
 **Initial System State**
@@ -1783,7 +1783,7 @@ This example demonstrates creating and monitoring a remote private queue as desc
 
 **Prerequisites**
 
-- The common prerequisites defined in section [3](#Section_2.1).
+- The common prerequisites defined in section [3](#Section_3).
 - The application has access to the machine on which a queue is to be created or modified.
 - The application has the necessary administrative rights to execute the operation.
 - The application administrator completes the application-specific configuration of the Message Queuing System, such as creating the necessary queues.
@@ -1821,7 +1821,7 @@ This example demonstrates branch office order processing as described in the [Se
 
 **Prerequisites**
 
-- See the common prerequisites defined in section [3](#Section_2.1).
+- See the common prerequisites defined in section [3](#Section_3).
 - The [**queue**](#gt_queue) exists.
 - The application is authorized to send [**messages**](#gt_message) to the queue.
 - If a [**Directory Service**](#gt_directory-service-ds) is not being used, the application is configured with the address of the queue prior to the send operation.
@@ -1875,7 +1875,7 @@ This example demonstrates business-to-business messaging across a firewall as de
 
 **Prerequisites**
 
-See the common prerequisites defined in section [3](#Section_2.1).
+See the common prerequisites defined in section [3](#Section_3).
 
 - The queue exists.
 - The application is authorized to send messages to the queue.
@@ -1916,7 +1916,7 @@ This example demonstrates the sequence of events for messages in a server farm, 
 
 **Prerequisites**
 
-See the common prerequisites that are described in section [3](#Section_2.1).
+See the common prerequisites that are described in section [3](#Section_3).
 
 - The [**queue**](#gt_queue) exists.
 - The application is authorized to send [**messages**](#gt_message) to the queue.
@@ -1957,7 +1957,7 @@ This example demonstrates business-to-business messaging, as described in the [S
 
 **Prerequisites**
 
-See the common prerequisites defined in section [3](#Section_2.1).
+See the common prerequisites defined in section [3](#Section_3).
 
 - The [**queue**](#gt_queue) exists.
 - The application is authorized to send [**messages**](#gt_message) to the queue.
@@ -1994,7 +1994,7 @@ This example demonstrates business-to-business messaging across heterogeneous sy
 
 **Prerequisites**
 
-See the common prerequisites defined in section [3](#Section_2.1).
+See the common prerequisites defined in section [3](#Section_3).
 
 - The queue exists.
 - The application is authorized to send messages to the queue.

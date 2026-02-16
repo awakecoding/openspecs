@@ -447,7 +447,7 @@ None beyond those specified in [[RFC2661]](https://go.microsoft.com/fwlink/?Link
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
 
-Apart from the disconnect event specified in section [3.1.4](#Section_3.3.4), a [**LAC**](#gt_l2tp-access-concentrator-lac) can receive a request to establish an L2TP call session from the higher layer. To establish an L2TP call [**session**](#gt_session), the LAC MUST establish a control connection with [**LNS**](#gt_l2tp-network-server-lns), as specified in section 5.1 of [[RFC2661]](https://go.microsoft.com/fwlink/?LinkId=92843), if not already established. Once the control connection is available, LAC MUST send the Incoming-Call-Request (ICRQ) message (section 6.6 of [RFC2661]), as specified in section 5.2.1 of [RFC2661], to establish the L2TP call session with LNS.
+Apart from the disconnect event specified in section [3.1.4](#Section_3.2.4), a [**LAC**](#gt_l2tp-access-concentrator-lac) can receive a request to establish an L2TP call session from the higher layer. To establish an L2TP call [**session**](#gt_session), the LAC MUST establish a control connection with [**LNS**](#gt_l2tp-network-server-lns), as specified in section 5.1 of [[RFC2661]](https://go.microsoft.com/fwlink/?LinkId=92843), if not already established. Once the control connection is available, LAC MUST send the Incoming-Call-Request (ICRQ) message (section 6.6 of [RFC2661]), as specified in section 5.2.1 of [RFC2661], to establish the L2TP call session with LNS.
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -512,7 +512,7 @@ None beyond those specified in [[RFC2661]](https://go.microsoft.com/fwlink/?Link
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
 
-None beyond the specification in section [3.1.4](#Section_3.3.4).
+None beyond the specification in section [3.1.4](#Section_3.2.4).
 
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules

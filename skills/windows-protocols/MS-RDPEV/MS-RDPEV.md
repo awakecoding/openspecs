@@ -428,7 +428,7 @@ Figure 6: Volume handling sequence
 <a id="Section_1.3.4"></a>
 ### 1.3.4 Interface Manipulation Exchange Capabilities Interface Description
 
-The [Interface Manipulation Exchange Capabilities Interface](#Section_2.2.3) consists of the [Interface Manipulation Exchange Capabilities Request](#Section_3.2.5.3.1) and [Interface Manipulation Exchange Capabilities Response](#Section_2.2.2) messages. This [**interface**](#gt_interface) is used to exchange client and server capabilities for interface manipulation.
+The [Interface Manipulation Exchange Capabilities Interface](#Section_2.2.3) consists of the [Interface Manipulation Exchange Capabilities Request](#Section_2.2.3.1) and [Interface Manipulation Exchange Capabilities Response](#Section_3.3.5.4.2) messages. This [**interface**](#gt_interface) is used to exchange client and server capabilities for interface manipulation.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -450,7 +450,7 @@ The Remote Desktop Protocol Video Redirection Virtual Channel Extension is desig
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-This protocol supports versioning and capability negotiation at two levels. The first is supported through the use of [**interface**](#gt_interface) manipulation messages, as specified in sections [2.2.2](#Section_2.2.2) and [2.2.3](#Section_2.2.3). The second is supported by the capability exchange messages, as specified in sections [2.2.5.1.2](#Section_2.2.5.1.2) and [2.2.5.1.3](#Section_2.2.5.1.3).
+This protocol supports versioning and capability negotiation at two levels. The first is supported through the use of [**interface**](#gt_interface) manipulation messages, as specified in sections [2.2.2](#Section_3.3.5.1) and [2.2.3](#Section_2.2.3). The second is supported by the capability exchange messages, as specified in sections [2.2.5.1.2](#Section_2.2.5.1.2) and [2.2.5.1.3](#Section_2.2.5.1.3).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -459,7 +459,7 @@ The Remote Desktop Protocol Video Redirection Virtual Channel Extension uses HRE
 
 This protocol also uses Win32 error codes. These values are taken from the error number space as specified in [MS-ERREF] section 2.2. Vendors SHOULD reuse those values with their indicated meanings. Choosing any other value runs the risk of a collision in the future.
 
-Vendors can define their own interfaces and use them through the [**interface**](#gt_interface) manipulation mechanism, as specified in section [2.2.2](#Section_2.2.2).
+Vendors can define their own interfaces and use them through the [**interface**](#gt_interface) manipulation mechanism, as specified in section [2.2.2](#Section_3.3.5.1).
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -525,13 +525,13 @@ The Capabilities Negotiator Interface ID is as follows.
 
 | Value | Meaning |
 | --- | --- |
-| RIM_EXCHANGE_CAPABILITY_REQUEST 0x00000100 | The server sends the [Interface Manipulation Exchange Capabilities Request](#Section_3.2.5.3.1) message. |
+| RIM_EXCHANGE_CAPABILITY_REQUEST 0x00000100 | The server sends the [Interface Manipulation Exchange Capabilities Request](#Section_2.2.3.1) message. |
 
 The Client Notifications Interface IDs are as follows.
 
 | Value | Meaning |
 | --- | --- |
-| PLAYBACK_ACK 0x00000100 | The client sends the [Playback Acknowledgment](#Section_3.2.5.1.1) message. |
+| PLAYBACK_ACK 0x00000100 | The client sends the [Playback Acknowledgment](#Section_2.2.4.1) message. |
 | CLIENT_EVENT_NOTIFICATION 0x00000101 | The client sends the [Client Event Notification](#Section_2.2.4.2) message. |
 
 Server Data Interface IDs are as follows.
@@ -539,30 +539,30 @@ Server Data Interface IDs are as follows.
 | Value | Meaning |
 | --- | --- |
 | EXCHANGE_CAPABILITIES_REQ 0x00000100 | The server sends the [Exchange Capabilities Request](#Section_2.2.5.1.2) message. |
-| SET_CHANNEL_PARAMS 0x00000101 | The server sends the [Set Channel Parameters](#Section_3.3.5.3.1.1) message. |
+| SET_CHANNEL_PARAMS 0x00000101 | The server sends the [Set Channel Parameters](#Section_2.2.5.1.1) message. |
 | ADD_STREAM 0x00000102 | The server sends the [Add Stream](#Section_3.3.5.3.2.4) message. |
-| ON_SAMPLE 0x00000103 | The server sends the [On Sample](#Section_2.2.5.4.3) message. |
+| ON_SAMPLE 0x00000103 | The server sends the [On Sample](#Section_3.2.5.2.4.3) message. |
 | SET_VIDEO_WINDOW 0x00000104 | The server sends the [Set Video Window](#Section_3.2.5.2.5.1) message. |
-| ON_NEW_PRESENTATION 0x00000105 | The server sends the [New Presentation](#Section_3.3.5.3.2.1) message. |
+| ON_NEW_PRESENTATION 0x00000105 | The server sends the [New Presentation](#Section_3.2.5.2.2.1) message. |
 | SHUTDOWN_PRESENTATION REQ 0x00000106 | The server sends the [Shut Down Presentation Request](#Section_2.2.5.2.8) message. |
 | SET_TOPOLOGY_REQ 0x00000107 | The server sends the [Set Topology Request](#Section_2.2.5.2.5) message. |
 | CHECK_FORMAT_SUPPORT_REQ 0x00000108 | The server sends the [Check Format Support Request](#Section_2.2.5.2.2) message. |
 | ON_PLAYBACK_STARTED 0x00000109 | The server sends the [On Playback Started](#Section_3.2.5.2.3.1) message. |
-| ON_PLAYBACK_PAUSED 0x0000010a | The server sends the [On Playback Paused](#Section_2.2.5.3.2) message. |
-| ON_PLAYBACK_STOPPED 0x0000010b | The server sends the [On Playback Stopped](#Section_2.2.5.3.4) message. |
+| ON_PLAYBACK_PAUSED 0x0000010a | The server sends the [On Playback Paused](#Section_3.3.5.3.3.2) message. |
+| ON_PLAYBACK_STOPPED 0x0000010b | The server sends the [On Playback Stopped](#Section_3.3.5.3.3.4) message. |
 | ON_PLAYBACK_RESTARTED 0x0000010c | The server sends the [On Playback Restarted](#Section_2.2.5.3.3) message. |
-| ON_PLAYBACK_RATE_CHANGED 0x0000010d | The server sends the [On Playback Rate Change](#Section_3.3.5.3.3.5) message. |
+| ON_PLAYBACK_RATE_CHANGED 0x0000010d | The server sends the [On Playback Rate Change](#Section_2.2.5.3.5) message. |
 | ON_FLUSH 0x0000010e | The server sends the [On Flush](#Section_3.3.5.3.4.4) message. |
-| ON_STREAM_VOLUME 0x0000010f | The server sends the [On Stream Volume](#Section_3.2.5.2.6.1) message. |
-| ON_CHANNEL_VOLUME 0x00000110 | The server sends the [On Channel Volume](#Section_3.3.5.3.6.2) message. |
-| ON_END_OF_STREAM 0x00000111 | The server sends the [On End of Stream](#Section_2.2.5.4.5) message. |
+| ON_STREAM_VOLUME 0x0000010f | The server sends the [On Stream Volume](#Section_3.3.5.3.6.1) message. |
+| ON_CHANNEL_VOLUME 0x00000110 | The server sends the [On Channel Volume](#Section_2.2.5.6.2) message. |
+| ON_END_OF_STREAM 0x00000111 | The server sends the [On End of Stream](#Section_3.3.5.3.4.5) message. |
 | SET_ALLOCATOR 0x00000112 | The server sends the [Set Allocator Properties](#Section_2.2.5.4.1) message. |
-| NOTIFY_PREROLL 0x00000113 | The server sends the [Notify Preroll](#Section_2.2.5.4.2) message. |
+| NOTIFY_PREROLL 0x00000113 | The server sends the [Notify Preroll](#Section_3.2.5.2.4.2) message. |
 | UPDATE_GEOMETRY_INFO 0x00000114 | The server sends the [Update Geometry Information](#Section_3.2.5.2.5.2) message. |
-| REMOVE_STREAM 0x00000115 | The server sends the [Remove Stream](#Section_3.3.5.3.2.7) message. |
+| REMOVE_STREAM 0x00000115 | The server sends the [Remove Stream](#Section_2.2.5.2.7) message. |
 | SET_SOURCE_VIDEO_RECT 0x00000116 | The server sends the [Set Source Video Rectangle](#Section_2.2.5.2.10) message. |
 
-**messagePayload (variable):** An array of unsigned 8-bit integers describing the payload of the message corresponding to the interface for which the packet is sent. The specific structure of the payload is described by the message descriptions in sections 2.2.3, [2.2.4](#Section_2.2.4), and [2.2.5](#Section_1.3.3).
+**messagePayload (variable):** An array of unsigned 8-bit integers describing the payload of the message corresponding to the interface for which the packet is sent. The specific structure of the payload is described by the message descriptions in sections 2.2.3, [2.2.4](#Section_1.3.2), and [2.2.5](#Section_1.3.3).
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Interface Manipulation
@@ -596,7 +596,7 @@ packet-beta
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 Interface Manipulation Exchange Capabilities Response (RIM_EXCHANGE_CAPABILITY_RESPONSE)
 
-This message is sent by the client in response to [RIM_EXCHANGE_CAPABILITY_REQUEST](#Section_3.2.5.3.1).
+This message is sent by the client in response to [RIM_EXCHANGE_CAPABILITY_REQUEST](#Section_2.2.3.1).
 
 ```mermaid
 packet-beta
@@ -1176,7 +1176,7 @@ packet-beta
 
 **numGeometryInfo (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the **pGeoInfo** field.
 
-**pGeoInfo (variable):** A [GEOMETRY_INFO](#Section_2.2.5.5.2) structure sent as an array of bytes. This field indicates the geometry information of the video window.
+**pGeoInfo (variable):** A [GEOMETRY_INFO](#Section_2.2.11) structure sent as an array of bytes. This field indicates the geometry information of the video window.
 
 **cbVisibleRect (4 bytes):** A 32-bit unsigned integer. This field MUST contain the number of bytes in the **pVisibleRect** field.
 
@@ -1447,7 +1447,7 @@ Audio support is defined in the table that follows.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-**PresentationId:** For each audio/video presentation that is to be redirected, the server generates a unique **PresentationId**. The server sends this ID to the client in the **PresentationId** field of the [New Presentation message](#Section_3.3.5.3.2.1). This ID is then used in all subsequent messages for a [**presentation**](#gt_presentation) and is used by the client to refer all messages to the correct presentation.
+**PresentationId:** For each audio/video presentation that is to be redirected, the server generates a unique **PresentationId**. The server sends this ID to the client in the **PresentationId** field of the [New Presentation message](#Section_3.2.5.2.2.1). This ID is then used in all subsequent messages for a [**presentation**](#gt_presentation) and is used by the client to refer all messages to the correct presentation.
 
 **StreamId:** A presentation consists of a set of individual audio or video data streams. These streams use their own channels for data transfer. To uniquely identify the channels associated with a stream, the server uses an identifier called **StreamId**. The server sends this ID to the client in the **StreamId** field of the [Add Stream](#Section_3.3.5.3.2.4) message. The **StreamId** of 0x00000000 is reserved for the channel used to transport messages that are not specific to a data-stream.
 
@@ -1530,7 +1530,7 @@ None.
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Processing a Playback Acknowledgment Message
 
-The structure and fields of the [Playback Acknowledgment](#Section_3.2.5.1.1) message are specified in section 2.2.4.1.
+The structure and fields of the [Playback Acknowledgment](#Section_2.2.4.1) message are specified in section 2.2.4.1.
 
 This message confirms the amount of data that has been played on the client. If the server is controlling the rate at which data is being sent to the client, this message SHOULD be used as the trigger for sending more data.
 
@@ -1558,7 +1558,7 @@ This message enables the client to notify the server of the important events def
 <a id="Section_3.2.5.2.1.1"></a>
 ###### 3.2.5.2.1.1 Sending a Set Channel Parameters Message
 
-The structure and fields of the [Set Channel Parameters](#Section_3.3.5.3.1.1) message are specified in section 2.2.5.1.1.
+The structure and fields of the [Set Channel Parameters](#Section_2.2.5.1.1) message are specified in section 2.2.5.1.1.
 
 The Set Channel Parameters message MUST be sent for every new channel used for this protocol. This message MUST be sent after the Interface Manipulation Exchange Capabilities messages (section [2.2.3](#Section_2.2.3)) are sent. There MUST be only one channel with the **StreamId** value 0x00000000. Additionally, all streams MUST use their own channels for data transfer, with their **StreamId** as the channel identifier.
 
@@ -1584,7 +1584,7 @@ The server SHOULD <9> use the received platform capability to determine its own 
 <a id="Section_3.2.5.2.2.1"></a>
 ###### 3.2.5.2.2.1 Sending a New Presentation Message
 
-The structure and fields of the [New Presentation](#Section_3.3.5.3.2.1) message are specified in section 2.2.5.2.1.
+The structure and fields of the [New Presentation](#Section_3.2.5.2.2.1) message are specified in section 2.2.5.2.1.
 
 This message MUST be sent for all distinct presentations. The **PresentationId** field of the message MUST be set to a unique [**GUID**](#gt_globally-unique-identifier-guid). The **PlatformCookie** field MUST be set to indicate the server’s preference of the platform to be used on the client.
 
@@ -1598,7 +1598,7 @@ This message SHOULD be sent to check if the client supports rendering of the dat
 <a id="Section_3.2.5.2.2.3"></a>
 ###### 3.2.5.2.2.3 Processing a Check Format Support Response Message
 
-The structure and fields of the [Check Format Support Response](#Section_3.2.5.2.2.3) message are specified in section 2.2.5.2.3.
+The structure and fields of the [Check Format Support Response](#Section_3.3.5.3.2.3) message are specified in section 2.2.5.2.3.
 
 The server uses the **FormatSupported** field of the message to check if the client supports the data [**format**](#gt_format) sent in the [Check Format Support Request](#Section_2.2.5.2.2) message. The **PlatformCookie** is used to determine the platform that will be used by the client to play the data. For a [**presentation**](#gt_presentation) with multiple [**streams**](#gt_stream), the server MUST ensure that the same platform is used to render data for each stream. If the client uses an inconsistent platform for any of the streams, the server MUST renegotiate format support until a common platform is found or the server MUST shut down the presentation. When the **FormatSupported** field of the Check Format Support Response message is set to false, additional messages such as [On Playback Started](#Section_3.2.5.2.3.1) are not sent by the server.
 
@@ -1619,14 +1619,14 @@ The Set Topology Request message MUST be sent when all the streams have been add
 <a id="Section_3.2.5.2.2.6"></a>
 ###### 3.2.5.2.2.6 Processing a Set Topology Response Message
 
-The structure and fields of the [Set Topology Response](#Section_3.2.5.2.2.6) message are specified in section 2.2.5.2.6.
+The structure and fields of the [Set Topology Response](#Section_3.3.5.3.2.6) message are specified in section 2.2.5.2.6.
 
 The Set Topology Response message indicates that the client successfully set up all the streams in the [**presentation**](#gt_presentation) and is ready to play the presentation. If the response indicates that the presentation setup was unsuccessful, the server MAY<10> shut down the presentation by removing all the streams and sending a [Shut Down Presentation Request](#Section_2.2.5.2.8) message.
 
 <a id="Section_3.2.5.2.2.7"></a>
 ###### 3.2.5.2.2.7 Sending a Remove Stream Message
 
-The structure and fields of the [Remove Stream](#Section_3.3.5.3.2.7) message are specified in section 2.2.5.2.7.
+The structure and fields of the [Remove Stream](#Section_2.2.5.2.7) message are specified in section 2.2.5.2.7.
 
 The Remove Stream message MAY<11> be sent by the server when a [**presentation**](#gt_presentation) is complete and the [**stream**](#gt_stream) no longer sends any data.
 
@@ -1635,12 +1635,12 @@ The Remove Stream message MAY<11> be sent by the server when a [**presentation**
 
 The structure and fields of the [Shut Down Presentation Request](#Section_2.2.5.2.8) message are specified in section 2.2.5.2.8.
 
-The Shut Down Presentation Request message MUST be sent when a presentation is complete and all the streams have been removed by the [Remove Stream](#Section_3.3.5.3.2.7) message. This MUST be the last message for a specific presentation identified by the [**GUID**](#gt_globally-unique-identifier-guid).
+The Shut Down Presentation Request message MUST be sent when a presentation is complete and all the streams have been removed by the [Remove Stream](#Section_2.2.5.2.7) message. This MUST be the last message for a specific presentation identified by the [**GUID**](#gt_globally-unique-identifier-guid).
 
 <a id="Section_3.2.5.2.2.9"></a>
 ###### 3.2.5.2.2.9 Processing a Shut Down Presentation Response Message
 
-The structure and fields of the [Shut Down Presentation Response](#Section_3.2.5.2.2.9) message are specified in section 2.2.5.2.9.
+The structure and fields of the [Shut Down Presentation Response](#Section_3.3.5.3.2.9) message are specified in section 2.2.5.2.9.
 
 The client MUST send this message to the server after it has attempted to clean up all resources related to the [**presentation**](#gt_presentation) identified by the [**GUID**](#gt_globally-unique-identifier-guid). The server MUST always continue to clean up all resources associated with the presentation identified by the GUID after it receives this message, regardless of the result.
 
@@ -1670,7 +1670,7 @@ The On Playback Started message MUST be sent when a [**presentation**](#gt_prese
 <a id="Section_3.2.5.2.3.2"></a>
 ###### 3.2.5.2.3.2 Sending an On Playback Paused Message
 
-The structure and fields of the [On Playback Paused](#Section_2.2.5.3.2) message are specified in section 2.2.5.3.2.
+The structure and fields of the [On Playback Paused](#Section_3.3.5.3.3.2) message are specified in section 2.2.5.3.2.
 
 The On Playback Paused message MUST be sent when a [**presentation**](#gt_presentation) is paused on the server. This message MAY<13> be sent multiple times if the detection of playback pause happens in a [**stream**](#gt_stream) and if there are multiple streams in a presentation.
 
@@ -1684,14 +1684,14 @@ The On Playback Restarted message MUST be sent when a [**presentation**](#gt_pre
 <a id="Section_3.2.5.2.3.4"></a>
 ###### 3.2.5.2.3.4 Sending an On Playback Stopped Message
 
-The structure and fields of the [On Playback Stopped](#Section_2.2.5.3.4) message are specified in section 2.2.5.3.4.
+The structure and fields of the [On Playback Stopped](#Section_3.3.5.3.3.4) message are specified in section 2.2.5.3.4.
 
 The On Playback Stopped message MUST be sent when a presentation is stopped on the server. This message MAY be sent multiple times if the detection of playback stop happens in a stream and if there are multiple streams in a presentation.
 
 <a id="Section_3.2.5.2.3.5"></a>
 ###### 3.2.5.2.3.5 Sending an On Playback Rate Changed Message
 
-The structure and fields of the [On Playback Rate Changed](#Section_3.3.5.3.3.5) message are specified in section 2.2.5.3.5.
+The structure and fields of the [On Playback Rate Changed](#Section_2.2.5.3.5) message are specified in section 2.2.5.3.5.
 
 The On Playback Rate Changed message MUST be sent when the rate of playback for a presentation is changed on the server. This message MAY<15> be sent multiple times if the detection of playback rate change happens in a stream and if there are multiple streams in a presentation.
 
@@ -1708,14 +1708,14 @@ The Set Allocator message MAY<16> be sent for a [**stream**](#gt_stream) if a se
 <a id="Section_3.2.5.2.4.2"></a>
 ###### 3.2.5.2.4.2 Sending a Notify Preroll Message
 
-The structure and fields of the [Notify Preroll](#Section_2.2.5.4.2) message are specified in section 2.2.5.4.2.
+The structure and fields of the [Notify Preroll](#Section_3.2.5.2.4.2) message are specified in section 2.2.5.4.2.
 
 The Notify Preroll message MUST be sent for a [**stream**](#gt_stream) if a server is going to supply data to the client to queue before the [On Playback Started](#Section_3.2.5.2.3.1) message is sent.
 
 <a id="Section_3.2.5.2.4.3"></a>
 ###### 3.2.5.2.4.3 Sending an On Sample Message
 
-The structure and fields of the [On Sample](#Section_2.2.5.4.3) message are specified in section 2.2.5.4.3.
+The structure and fields of the [On Sample](#Section_3.2.5.2.4.3) message are specified in section 2.2.5.4.3.
 
 The On Sample message MUST be sent for a stream when the server is ready to play the stream on the client.
 
@@ -1729,7 +1729,7 @@ The On Flush message MUST be sent for a stream if all the queued data for a stre
 <a id="Section_3.2.5.2.4.5"></a>
 ###### 3.2.5.2.4.5 Sending an On End Of Stream Message
 
-The structure and fields of the [On End of Stream](#Section_2.2.5.4.5) message are specified in section 2.2.5.4.5.
+The structure and fields of the [On End of Stream](#Section_3.3.5.3.4.5) message are specified in section 2.2.5.4.5.
 
 The On End of Stream message MUST be sent for a stream when no more data is expected to be sent for that stream without an [On Playback Started](#Section_3.2.5.2.3.1) message. The stream MUST NOT send any more samples after this message.
 
@@ -1756,14 +1756,14 @@ The Update Geometry Information message MUST be sent for a presentation that con
 <a id="Section_3.2.5.2.6.1"></a>
 ###### 3.2.5.2.6.1 Sending an On Stream Volume Message
 
-The structure and fields of the [On Stream Volume](#Section_3.2.5.2.6.1) message are specified in section 2.2.5.6.1.
+The structure and fields of the [On Stream Volume](#Section_3.3.5.3.6.1) message are specified in section 2.2.5.6.1.
 
 The On Stream Volume message MUST be sent when the volume for a [**presentation**](#gt_presentation) is changed on the server. This message MUST also be sent when the volume for the presentation is muted.
 
 <a id="Section_3.2.5.2.6.2"></a>
 ###### 3.2.5.2.6.2 Sending an On Channel Volume Message
 
-The structure and fields of the [On Channel Volume](#Section_3.3.5.3.6.2) message are specified in section 2.2.5.6.2.
+The structure and fields of the [On Channel Volume](#Section_2.2.5.6.2) message are specified in section 2.2.5.6.2.
 
 The On Channel Volume message MUST be sent when any of the channel volumes for a [**presentation**](#gt_presentation) are changed on the server.
 
@@ -1773,14 +1773,14 @@ The On Channel Volume message MUST be sent when any of the channel volumes for a
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 Sending an Interface Manipulation Exchange Capabilities Request Message
 
-The structure and fields of the [Interface Manipulation Exchange Capabilities Request](#Section_3.2.5.3.1) message are specified in section 2.2.3.1.
+The structure and fields of the [Interface Manipulation Exchange Capabilities Request](#Section_2.2.3.1) message are specified in section 2.2.3.1.
 
 The server MUST send this message when the video redirection virtual channel is connected. This message MUST be sent before the Server Data Interface Channel Setup messages ([2.2.5.1](#Section_2.2.5.1)).
 
 <a id="Section_3.2.5.3.2"></a>
 ##### 3.2.5.3.2 Processing an Interface Manipulation Exchange Capabilities Response Message
 
-The structure and fields of the [Interface Manipulation Exchange Capabilities Response](#Section_2.2.2) message are specified in section 2.2.3.2.
+The structure and fields of the [Interface Manipulation Exchange Capabilities Response](#Section_3.3.5.4.2) message are specified in section 2.2.3.2.
 
 On receiving this message, the server confirms that the client meets the minimum capabilities for interface manipulation.
 
@@ -1831,7 +1831,7 @@ The details of rules for processing the [**interface**](#gt_interface) manipulat
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Sending a Playback Acknowledgment Message
 
-The structure and fields of the [Playback Acknowledgment](#Section_3.2.5.1.1) message are specified in section 2.2.4.1.
+The structure and fields of the [Playback Acknowledgment](#Section_2.2.4.1) message are specified in section 2.2.4.1.
 
 The Playback Acknowledgment message MUST be sent for every played [**sample**](#gt_sample) on the client. This message MUST be sent on the same channel on which the corresponding sample was received to ensure that the server continues to send data.
 
@@ -1857,9 +1857,9 @@ The structure and fields of the Client Event Notification message are specified 
 <a id="Section_3.3.5.3.1.1"></a>
 ###### 3.3.5.3.1.1 Processing a Set Channel Parameters Message
 
-The structure and fields of the [Set Channel Parameters](#Section_3.3.5.3.1.1) message are specified in section 2.2.5.1.1.
+The structure and fields of the [Set Channel Parameters](#Section_2.2.5.1.1) message are specified in section 2.2.5.1.1.
 
-After receiving the Set Channel Parameters message, the client MUST use the new channel and its identifier to ensure that the correct channel is used for sending the [Playback Acknowledgment](#Section_3.2.5.1.1) message for a [**sample**](#gt_sample). Any errors that occur in this process SHOULD be stored and used for the [Set Topology Response Message](#Section_3.2.5.2.2.6).
+After receiving the Set Channel Parameters message, the client MUST use the new channel and its identifier to ensure that the correct channel is used for sending the [Playback Acknowledgment](#Section_2.2.4.1) message for a [**sample**](#gt_sample). Any errors that occur in this process SHOULD be stored and used for the [Set Topology Response Message](#Section_3.3.5.3.2.6).
 
 <a id="Section_3.3.5.3.1.2"></a>
 ###### 3.3.5.3.1.2 Processing an Exchange Capabilities Request Message
@@ -1883,21 +1883,21 @@ The client MUST send the Exchange Capabilities Response message when it receives
 <a id="Section_3.3.5.3.2.1"></a>
 ###### 3.3.5.3.2.1 Processing a New Presentation Message
 
-The structure and fields of the [New Presentation](#Section_3.3.5.3.2.1) message are specified in section 2.2.5.2.1.
+The structure and fields of the [New Presentation](#Section_3.2.5.2.2.1) message are specified in section 2.2.5.2.1.
 
-On receiving the New Presentation message, the client SHOULD set up a player to use for the [**presentation**](#gt_presentation). The platform used to set up the player SHOULD be based on the server's request platform and the client's platform capabilities. Any errors in this process SHOULD be stored and used for the [Set Topology Response](#Section_3.2.5.2.2.6) message.
+On receiving the New Presentation message, the client SHOULD set up a player to use for the [**presentation**](#gt_presentation). The platform used to set up the player SHOULD be based on the server's request platform and the client's platform capabilities. Any errors in this process SHOULD be stored and used for the [Set Topology Response](#Section_3.3.5.3.2.6) message.
 
 <a id="Section_3.3.5.3.2.2"></a>
 ###### 3.3.5.3.2.2 Processing a Check Format Support Request Message
 
 The structure and fields of the [Check Format Support Request](#Section_2.2.5.2.2) message are specified in section 2.2.5.2.2.
 
-After receiving the Check Format Support Request message, the client MUST check if it is capable of playing the [**media data**](#gt_media-data) encoded in that [**format**](#gt_format). It MUST send the [Check Format Support Response](#Section_3.2.5.2.2.3) message with the result.
+After receiving the Check Format Support Request message, the client MUST check if it is capable of playing the [**media data**](#gt_media-data) encoded in that [**format**](#gt_format). It MUST send the [Check Format Support Response](#Section_3.3.5.3.2.3) message with the result.
 
 <a id="Section_3.3.5.3.2.3"></a>
 ###### 3.3.5.3.2.3 Sending a Check Format Support Response Message
 
-The structure and fields of the [Check Format Support Response](#Section_3.2.5.2.2.3) message are specified in section 2.2.5.2.3.
+The structure and fields of the [Check Format Support Response](#Section_3.3.5.3.2.3) message are specified in section 2.2.5.2.3.
 
 The client MUST send the Check Format Support Response message in response to a [Check Format Support Request](#Section_2.2.5.2.2) message. The client MUST NOT send any other message to the server between the Check Format Support Request and Check Format Support Response messages; otherwise, the server behavior is not defined.
 
@@ -1906,26 +1906,26 @@ The client MUST send the Check Format Support Response message in response to a 
 
 The structure and fields of the [Add Stream](#Section_3.3.5.3.2.4) message are specified in section 2.2.5.2.4.
 
-After receiving the Add Stream Message, the client SHOULD add the [**stream**](#gt_stream) to the player that is used for the indicated [**presentation**](#gt_presentation). Any errors in this process SHOULD be stored and used for the [Set Topology Response](#Section_3.2.5.2.2.6) message.
+After receiving the Add Stream Message, the client SHOULD add the [**stream**](#gt_stream) to the player that is used for the indicated [**presentation**](#gt_presentation). Any errors in this process SHOULD be stored and used for the [Set Topology Response](#Section_3.3.5.3.2.6) message.
 
 <a id="Section_3.3.5.3.2.5"></a>
 ###### 3.3.5.3.2.5 Processing a Set Topology Request Message
 
 The structure and fields of the [Set Topology Request](#Section_2.2.5.2.5) message are specified in section 2.2.5.2.5.
 
-After receiving the Set Topology Request message, the client SHOULD ensure that all streams in the presentation have been successfully added to the player and that they are ready to start playback. The client MUST send a [Set Topology Response](#Section_3.2.5.2.2.6) message with the result, indicating whether the player is ready to start playback or the [**presentation**](#gt_presentation) setup was unsuccessful.
+After receiving the Set Topology Request message, the client SHOULD ensure that all streams in the presentation have been successfully added to the player and that they are ready to start playback. The client MUST send a [Set Topology Response](#Section_3.3.5.3.2.6) message with the result, indicating whether the player is ready to start playback or the [**presentation**](#gt_presentation) setup was unsuccessful.
 
 <a id="Section_3.3.5.3.2.6"></a>
 ###### 3.3.5.3.2.6 Sending a Set Topology Response Message
 
-The structure and fields of the [Set Topology Response](#Section_3.2.5.2.2.6) message are specified in section 2.2.5.2.6.
+The structure and fields of the [Set Topology Response](#Section_3.3.5.3.2.6) message are specified in section 2.2.5.2.6.
 
 The client MUST send the Set Topology Response message when it receives the [Set Topology Request](#Section_2.2.5.2.5) message. In the response, the client MUST indicate whether the player is ready to start or the presentation setup was unsuccessful. The client MUST NOT send any other message to the server between the Set Topology Request and Set Topology Response messages; otherwise, the server behavior is not defined.
 
 <a id="Section_3.3.5.3.2.7"></a>
 ###### 3.3.5.3.2.7 Processing a Remove Stream Message
 
-The structure and fields of the [Remove Stream](#Section_3.3.5.3.2.7) message are specified in section 2.2.5.2.7.
+The structure and fields of the [Remove Stream](#Section_2.2.5.2.7) message are specified in section 2.2.5.2.7.
 
 After receiving the Remove Stream message, the client MAY remove the stream from the player that is used for the presentation.
 
@@ -1934,12 +1934,12 @@ After receiving the Remove Stream message, the client MAY remove the stream from
 
 The structure and fields of the [Shut Down Presentation Request](#Section_2.2.5.2.8) message are specified in section 2.2.5.2.8.
 
-After receiving the Shut Down Presentation Request message, the client MUST ensure that all streams are removed from the player and that the player is shut down. After processing the Shut Down Presentation Request message, the client MUST ignore any further messages sent for the specific presentation. The client MUST send a [Shut Down Presentation Response](#Section_3.2.5.2.2.9) message.
+After receiving the Shut Down Presentation Request message, the client MUST ensure that all streams are removed from the player and that the player is shut down. After processing the Shut Down Presentation Request message, the client MUST ignore any further messages sent for the specific presentation. The client MUST send a [Shut Down Presentation Response](#Section_3.3.5.3.2.9) message.
 
 <a id="Section_3.3.5.3.2.9"></a>
 ###### 3.3.5.3.2.9 Sending a Shut Down Presentation Response Message
 
-The structure and fields of the Shut Down Presentation Response message are specified in section [2.2.5.2.9](#Section_3.2.5.2.2.9).
+The structure and fields of the Shut Down Presentation Response message are specified in section [2.2.5.2.9](#Section_3.3.5.3.2.9).
 
 The client MUST send the Shut Down Presentation Response message when it receives the Shut Down Presentation Request message specified in section [2.2.5.2.8](#Section_2.2.5.2.8). The client MUST NOT send any other message to the server between the Shut Down Presentation Request message and the Shut Down Presentation Response message; otherwise, server behavior is undefined.
 
@@ -1965,7 +1965,7 @@ After receiving the On Playback Started message, the client MUST ensure that the
 <a id="Section_3.3.5.3.3.2"></a>
 ###### 3.3.5.3.3.2 Processing an On Playback Paused Message
 
-The structure and fields of the [On Playback Paused](#Section_2.2.5.3.2) message are specified in section 2.2.5.3.2.
+The structure and fields of the [On Playback Paused](#Section_3.3.5.3.3.2) message are specified in section 2.2.5.3.2.
 
 After receiving the On Playback Paused message, the client MUST ensure that the player used for the presentation is paused.
 
@@ -1979,14 +1979,14 @@ After receiving the On Playback Restarted message, the client MUST ensure that t
 <a id="Section_3.3.5.3.3.4"></a>
 ###### 3.3.5.3.3.4 Processing an On Playback Stopped Message
 
-The structure and fields of the [On Playback Stopped](#Section_2.2.5.3.4) message are specified in section 2.2.5.3.4.
+The structure and fields of the [On Playback Stopped](#Section_3.3.5.3.3.4) message are specified in section 2.2.5.3.4.
 
 After receiving the On Playback Stopped message, the client MUST ensure that the player used for the presentation is stopped.
 
 <a id="Section_3.3.5.3.3.5"></a>
 ###### 3.3.5.3.3.5 Processing an On Playback Rate Changed Message
 
-The structure and fields of the [On Playback Rate Changed](#Section_3.3.5.3.3.5) message are specified in section 2.2.5.3.5.
+The structure and fields of the [On Playback Rate Changed](#Section_2.2.5.3.5) message are specified in section 2.2.5.3.5.
 
 On receiving the On Playback Rate Changed message, the client MUST change the playback rate for the player that is used for the current presentation.
 
@@ -2003,14 +2003,14 @@ After receiving the Set Allocator Properties message, the client MAY use the fie
 <a id="Section_3.3.5.3.4.2"></a>
 ###### 3.3.5.3.4.2 Processing a Notify Preroll Message
 
-The structure and fields of the [Notify Preroll](#Section_2.2.5.4.2) message are specified in section 2.2.5.4.2.
+The structure and fields of the [Notify Preroll](#Section_3.2.5.2.4.2) message are specified in section 2.2.5.4.2.
 
 After receiving the Notify Preroll message, the client MUST start queuing the samples while it waits for the [On Playback Started](#Section_3.2.5.2.3.1) message.
 
 <a id="Section_3.3.5.3.4.3"></a>
 ###### 3.3.5.3.4.3 Processing an On Sample Message
 
-The structure and fields of the [On Sample](#Section_2.2.5.4.3) message are specified in section 2.2.5.4.3.
+The structure and fields of the [On Sample](#Section_3.2.5.2.4.3) message are specified in section 2.2.5.4.3.
 
 After receiving the On Sample message, the client MUST make the sample available to the player that is used for the presentation. The client SHOULD store the samples in a queue while it waits for the player to consume them.
 
@@ -2024,7 +2024,7 @@ On receiving the On Flush message, the client MUST drop any samples queued for t
 <a id="Section_3.3.5.3.4.5"></a>
 ###### 3.3.5.3.4.5 Processing an On End Of Stream Message
 
-The structure and fields of the [On End of Stream](#Section_2.2.5.4.5) message are specified in section 2.2.5.4.5.
+The structure and fields of the [On End of Stream](#Section_3.3.5.3.4.5) message are specified in section 2.2.5.4.5.
 
 After receiving the On End of Stream message, the client MUST indicate to the player of the [**presentation**](#gt_presentation) that no more samples are expected for this [**stream**](#gt_stream).
 
@@ -2051,14 +2051,14 @@ After receiving the Update Geometry Information message, the client SHOULD updat
 <a id="Section_3.3.5.3.6.1"></a>
 ###### 3.3.5.3.6.1 Processing an On Stream Volume Message
 
-The structure and fields of the [On Stream Volume](#Section_3.2.5.2.6.1) message are specified in section 2.2.5.6.1.
+The structure and fields of the [On Stream Volume](#Section_3.3.5.3.6.1) message are specified in section 2.2.5.6.1.
 
 On receiving the On Stream Volume message, the client SHOULD update the volume of the current presentation.
 
 <a id="Section_3.3.5.3.6.2"></a>
 ###### 3.3.5.3.6.2 Processing an On Channel Volume Message
 
-The structure and fields of the [On Channel Volume](#Section_3.3.5.3.6.2) message are specified in section 2.2.5.6.2.
+The structure and fields of the [On Channel Volume](#Section_2.2.5.6.2) message are specified in section 2.2.5.6.2.
 
 On receiving the On Channel Volume message, the client SHOULD update the channel volumes of the current presentation.
 
@@ -2068,16 +2068,16 @@ On receiving the On Channel Volume message, the client SHOULD update the channel
 <a id="Section_3.3.5.4.1"></a>
 ##### 3.3.5.4.1 Processing an Interface Manipulation Exchange Capabilities Request Message
 
-The structure and fields of the [Interface Manipulation Exchange Capabilities Request](#Section_3.2.5.3.1) message are specified in section 2.2.3.1.
+The structure and fields of the [Interface Manipulation Exchange Capabilities Request](#Section_2.2.3.1) message are specified in section 2.2.3.1.
 
-On receiving an Interface Manipulation Exchange Capabilities Request message, the client MUST send an [Interface Manipulation Exchange Capabilities Response](#Section_2.2.2) message.
+On receiving an Interface Manipulation Exchange Capabilities Request message, the client MUST send an [Interface Manipulation Exchange Capabilities Response](#Section_3.3.5.4.2) message.
 
 <a id="Section_3.3.5.4.2"></a>
 ##### 3.3.5.4.2 Sending an Interface Manipulation Exchange Capabilities Response Message
 
-The structure and fields of the [Interface Manipulation Exchange Capabilities Response](#Section_2.2.2) message are specified in section 2.2.3.2.
+The structure and fields of the [Interface Manipulation Exchange Capabilities Response](#Section_3.3.5.4.2) message are specified in section 2.2.3.2.
 
-This message is sent in response to the [Interface Manipulation Exchange Capabilities Request](#Section_3.2.5.3.1) message.
+This message is sent in response to the [Interface Manipulation Exchange Capabilities Request](#Section_2.2.3.1) message.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -2098,7 +2098,7 @@ None.
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Channel Setup Sequence
 
-After a new channel is established, the server sends the [Set Channel Parameters](#Section_3.3.5.3.1.1) message to the client. The message specifies the **PresentationId** and the **StreamId** for the channel. The following sequence shows the Set Channel Parameters message for a **StreamId** of 0x00000000.
+After a new channel is established, the server sends the [Set Channel Parameters](#Section_2.2.5.1.1) message to the client. The message specifies the **PresentationId** and the **StreamId** for the channel. The following sequence shows the Set Channel Parameters message for a **StreamId** of 0x00000000.
 
 Set Channel Parameters
 
@@ -2207,7 +2207,7 @@ MMREDIR_CAPABILITY_PLATFORM_DSHOW (0x02) = 0x03
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Presentation Initialization and Termination Sequence
 
-The following annotation shows the [New Presentation](#Section_3.3.5.3.2.1) message sent from the server to the client. This message is sent after a channel has been set up. In this example, the **PlatformCookie** field is set to TSMM_PLATFORM_COOKIE_DSHOW to indicate that the server prefers to use the DShow platform for playback.
+The following annotation shows the [New Presentation](#Section_3.2.5.2.2.1) message sent from the server to the client. This message is sent after a channel has been set up. In this example, the **PlatformCookie** field is set to TSMM_PLATFORM_COOKIE_DSHOW to indicate that the server prefers to use the DShow platform for playback.
 
 New Presentation
 
@@ -2325,7 +2325,7 @@ c0 5d 00 00
 
 e0 00 00 00
 
-The following annotation shows the [Check Format Support Response](#Section_3.2.5.2.2.3) message sent from the client to the server. In this example, the **FormatSupported** field is set to 0x01 to indicate that the format is supported on the client. The **PlatformCookie** field is set to TSMM_PLATFORM_COOKIE_MF to indicate that the client is using the MF platform to play data for this format.
+The following annotation shows the [Check Format Support Response](#Section_3.3.5.3.2.3) message sent from the client to the server. In this example, the **FormatSupported** field is set to 0x01 to indicate that the format is supported on the client. The **PlatformCookie** field is set to TSMM_PLATFORM_COOKIE_MF to indicate that the client is using the MF platform to play data for this format.
 
 Check Format Support Response
 
@@ -2469,7 +2469,7 @@ fc 7d 2e d8 -> PresentationId (GUID) = {d82e7dfc-6334-49d6-90a7-347df08a5665}
 
 f0 8a 56 65
 
-The following annotation shows the [Set Topology Response](#Section_3.2.5.2.2.6) message sent from the client to the server. In this example, the **TopologyReady** field of the response is set to 0x01 to indicate that the topology is ready to be played on the client.
+The following annotation shows the [Set Topology Response](#Section_3.3.5.3.2.6) message sent from the client to the server. In this example, the **TopologyReady** field of the response is set to 0x01 to indicate that the topology is ready to be played on the client.
 
 Set Topology Response
 
@@ -2485,7 +2485,7 @@ ChannelName = TSMF,16,server to client
 
 00 00 00 00 -> Result = S_OK
 
-The following annotation shows the [Remove Stream](#Section_3.3.5.3.2.7) message sent from the server to the client. The **StreamId** field identifies the stream to be removed.
+The following annotation shows the [Remove Stream](#Section_2.2.5.2.7) message sent from the server to the client. The **StreamId** field identifies the stream to be removed.
 
 Remove Stream
 
@@ -2535,7 +2535,7 @@ b7 7a e4 0f
 
 b5 9e cc 63
 
-The following annotation shows the [Shut Down Presentation Response](#Section_3.2.5.2.2.9) message sent from the client to the server.
+The following annotation shows the [Shut Down Presentation Response](#Section_3.3.5.3.2.9) message sent from the client to the server.
 
 Shut Down Presentation Response
 
@@ -2584,7 +2584,7 @@ ChannelName = TSMF,36,server to client
 
 00 00 00 00 -> IsSeek = 0 (FALSE)
 
-The following annotation shows the [On Playback Paused](#Section_2.2.5.3.2) message sent from the server to the client.
+The following annotation shows the [On Playback Paused](#Section_3.3.5.3.3.2) message sent from the server to the client.
 
 On Playback Paused
 
@@ -2632,7 +2632,7 @@ a8 06 e7 bd
 
 75 4f 9f 0b
 
-The following annotation shows the [On Playback Stopped](#Section_2.2.5.3.4) message sent from the server to the client.
+The following annotation shows the [On Playback Stopped](#Section_3.3.5.3.3.4) message sent from the server to the client.
 
 On Playback Stopped
 
@@ -2656,7 +2656,7 @@ a4 14 8a 9a
 
 fb cc ea 2f
 
-The following annotation shows the [On Playback Rate Changed](#Section_3.3.5.3.3.5) message sent from the server to the client. The **NewRate** field identifies the new rate at which the [**presentation**](#gt_presentation) data is to be played.
+The following annotation shows the [On Playback Rate Changed](#Section_2.2.5.3.5) message sent from the server to the client. The **NewRate** field identifies the new rate at which the [**presentation**](#gt_presentation) data is to be played.
 
 On Playback Rate Changed
 
@@ -2725,7 +2725,7 @@ fa 31 d0 53
 
 00 00 00 00 -> cbPrefix = 0x00
 
-The following annotation shows the [Notify Preroll](#Section_2.2.5.4.2) message sent from the server to the client. This message indicates that the [**stream**](#gt_stream) is preloading the media data before playback.
+The following annotation shows the [Notify Preroll](#Section_3.2.5.2.4.2) message sent from the server to the client. This message indicates that the [**stream**](#gt_stream) is preloading the media data before playback.
 
 Notify Preroll
 
@@ -2751,7 +2751,7 @@ b5 9e cc 63
 
 01 00 00 00 -> StreamId = 0x01
 
-The following annotation shows the [On Sample](#Section_2.2.5.4.3) message sent from the server to the client. Various fields of this message indicate the [**sample**](#gt_sample) properties and the sample data encoded in the stream format.
+The following annotation shows the [On Sample](#Section_3.2.5.2.4.3) message sent from the server to the client. Various fields of this message indicate the [**sample**](#gt_sample) properties and the sample data encoded in the stream format.
 
 On Sample
 
@@ -2845,7 +2845,7 @@ ChannelName = TSMF,32,server to client
 
 01 00 00 00 -> StreamId = 0x01
 
-The following annotation shows the [On End of Stream](#Section_2.2.5.4.5) message sent from the server to the client. The **StreamId** field identifies the stream for which the end of data has been reached.
+The following annotation shows the [On End of Stream](#Section_3.3.5.3.4.5) message sent from the server to the client. The **StreamId** field identifies the stream for which the end of data has been reached.
 
 On End of Stream
 
@@ -2987,7 +2987,7 @@ a7 00 00 00 -> Right of the second TS_RECT structure = 0xa7
 <a id="Section_4.1.6"></a>
 ### 4.1.6 Volume Handling Sequence
 
-The following annotation shows the [On Stream Volume](#Section_3.2.5.2.6.1) message sent from the server to the client. The fields of this message indicate the new stream volume level of the [**presentation**](#gt_presentation) and if the presentation volume is muted.
+The following annotation shows the [On Stream Volume](#Section_3.3.5.3.6.1) message sent from the server to the client. The fields of this message indicate the new stream volume level of the [**presentation**](#gt_presentation) and if the presentation volume is muted.
 
 On Stream Volume
 
@@ -3017,7 +3017,7 @@ b0 78 cd 93
 
 00 00 00 00 -> bMuted = 0x00
 
-The following annotation shows the [On Channel Volume](#Section_3.3.5.3.6.2) message sent from the server to the client. The fields of this message indicate the new channel volume level of the presentation and if the volume for a channel is muted.
+The following annotation shows the [On Channel Volume](#Section_2.2.5.6.2) message sent from the server to the client. The fields of this message indicate the new channel volume level of the presentation and if the volume for a channel is muted.
 
 On Channel Volume
 
@@ -3050,7 +3050,7 @@ b0 78 cd 93
 <a id="Section_4.2"></a>
 ## 4.2 Client Notifications Interface Annotation
 
-The following annotation shows the [Playback Acknowledgment](#Section_3.2.5.1.1) message sent from the client to the server. The fields of this message indicate the duration and the size of the data being acknowledged.
+The following annotation shows the [Playback Acknowledgment](#Section_2.2.4.1) message sent from the client to the server. The fields of this message indicate the duration and the size of the data being acknowledged.
 
 Playback Acknowledgment
 
@@ -3101,7 +3101,7 @@ c9 00 00 00 -> Event Id = 0x0c9 (TSMM_CLIENT_EVENT_START_COMPLETED)
 <a id="Section_4.3"></a>
 ## 4.3 Interface Manipulation Exchange Capabilities Interface Annotation
 
-The following annotation shows the [Interface Manipulation Exchange Capabilities Request](#Section_3.2.5.3.1) message sent from the server to the client.
+The following annotation shows the [Interface Manipulation Exchange Capabilities Request](#Section_2.2.3.1) message sent from the server to the client.
 
 Interface Manipulation Exchange Capabilities Request
 
@@ -3117,7 +3117,7 @@ ChannelName = TSMF,16,server to client
 
 01 00 00 00 -> RIM_CAPABILITY_VERSION_01
 
-The following annotation shows the [Interface Manipulation Exchange Capabilities Response](#Section_2.2.2) message sent from the client to the server.
+The following annotation shows the [Interface Manipulation Exchange Capabilities Response](#Section_3.3.5.4.2) message sent from the client to the server.
 
 Interface Manipulation Exchange Capabilities Response
 
@@ -3195,15 +3195,15 @@ For more information about the MF platform, see [[MSDN-MEDIAFOUNDATION]](https:/
 
 <10> Section 3.2.5.2.2.6: In the Windows implementation of this protocol, the presentation is shut down when the server is using the DShow platform. The presentation is not shut down when the server is using the MF platform.
 
-<11> Section 3.2.5.2.2.7: In the Windows implementation of this protocol, the [Remove Stream](#Section_3.3.5.3.2.7) message is not sent by the server.
+<11> Section 3.2.5.2.2.7: In the Windows implementation of this protocol, the [Remove Stream](#Section_2.2.5.2.7) message is not sent by the server.
 
 <12> Section 3.2.5.2.3.1: In Windows implementations of this protocol, the On Playback Started message is sent for every stream in the presentation when the server is using the MF platform. The On Playback Started message is sent only once when the server is using the DShow platform.
 
-<13> Section 3.2.5.2.3.2: In Windows implementations of this protocol, the [On Playback Paused](#Section_2.2.5.3.2) message is sent for every stream in the presentation when the server is using the MF platform. The On Playback Paused message is sent just once when the server is using the DShow platform.
+<13> Section 3.2.5.2.3.2: In Windows implementations of this protocol, the [On Playback Paused](#Section_3.3.5.3.3.2) message is sent for every stream in the presentation when the server is using the MF platform. The On Playback Paused message is sent just once when the server is using the DShow platform.
 
 <14> Section 3.2.5.2.3.3: In Windows implementations of this protocol, the [On Playback Restarted](#Section_2.2.5.3.3) message is sent for every stream in the presentation when the server is using the MF platform. The On Playback Restarted message is never sent if the server is using the DShow platform.
 
-<15> Section 3.2.5.2.3.5: In Windows implementations of this protocol, the [On Playback Rate Changed](#Section_3.3.5.3.3.5) message is sent for every stream in the presentation when the server is using the MF platform. The On Playback Rate Changed message is never sent if the server is using the DShow platform.
+<15> Section 3.2.5.2.3.5: In Windows implementations of this protocol, the [On Playback Rate Changed](#Section_2.2.5.3.5) message is sent for every stream in the presentation when the server is using the MF platform. The On Playback Rate Changed message is never sent if the server is using the DShow platform.
 
 <16> Section 3.2.5.2.4.1: In the Windows implementation of this protocol, the Set Allocator message is sent when the server is using the DShow platform. The Set Allocator message is not sent when the server is using the MF platform.
 

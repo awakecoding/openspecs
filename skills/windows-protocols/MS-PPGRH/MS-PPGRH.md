@@ -481,7 +481,7 @@ The Graph Info Record (section [2.2.3.1](#Section_1.3.5.5.1)) contains basic inf
 <a id="Section_1.3.5.5.2"></a>
 ##### 1.3.5.5.2 Signature
 
-The [**signature record**](#gt_signature-record) (section [2.2.3.2](#Section_1.3.2.1)) is used to compute and publish the [**graph**](#gt_graph) [**signature**](#gt_signature). For more information, see section [1.3.2.1](#Section_1.3.2.1).
+The [**signature record**](#gt_signature-record) (section [2.2.3.2](#Section_2.2.3.2)) is used to compute and publish the [**graph**](#gt_graph) [**signature**](#gt_signature). For more information, see section [1.3.2.1](#Section_1.3.2.1).
 
 <a id="Section_1.3.5.5.3"></a>
 ##### 1.3.5.5.3 Contact
@@ -1468,7 +1468,7 @@ packet-beta
 This section defines a set of internal record types used by the Peer-to-Peer Graphing Protocol, and defines the structure of the **Payload Data** field of the [PEER_RECORD (section 2.2.1.9)](#Section_2.2.1.9) structure for those types.
 
 - [Graph Info Record (section 2.2.3.1)](#Section_1.3.5.5.1)
-- [Signature Record (section 2.2.3.2)](#Section_1.3.2.1)
+- [Signature Record (section 2.2.3.2)](#Section_2.2.3.2)
 - [Contact Record (section 2.2.3.3)](#Section_2.2.3.3)
 - [Presence Record (section 2.2.3.4)](#Section_1.3.5.5.4)
 <a id="Section_2.2.3.1"></a>
@@ -2429,7 +2429,7 @@ If the received record is "old", the local node MUST respond with a FLOOD messag
 
 For all three classifications, the local node MUST send (see section 3.1.7.1) an ACK message to the FLOOD message's sender, containing the record ID for this record, with the "Useful" flag set to 1 if the received record was classified as "new", and set to 0 otherwise. The local node MUST also update the [**connection utility**](#gt_connection-utility) associated with this connection, as specified in section [3.1.7.33](#Section_3.1.7.33).
 
-Further processing MUST be performed on the received record according to its Record Type. For more details, see sections [3.1.7.10](#Section_3.1.7.10.1) through [3.1.7.10.5](#Section_3.1.7.10.5).
+Further processing MUST be performed on the received record according to its Record Type. For more details, see sections [3.1.7.10](#Section_3.1.7.10.5) through [3.1.7.10.5](#Section_3.1.7.10.5).
 
 <a id="Section_3.1.5.2.11"></a>
 ##### 3.1.5.2.11 Receive SYNC_END
@@ -2584,7 +2584,7 @@ When creating a [**record**](#gt_record), a PEER_RECORD MUST be created, and the
 
 - The Record ID MUST be generated as follows:
 - If the record type is Graph Info Record, the Record ID MUST be set according to section [2.2.3.1](#Section_1.3.5.5.1).
-- If the record type is Signature Record, the Record ID MUST be set according to section [2.2.3.2](#Section_1.3.2.1).
+- If the record type is Signature Record, the Record ID MUST be set according to section [2.2.3.2](#Section_2.2.3.2).
 - Otherwise the Record ID MUST be calculated as follows:
 - A 128-bit GUID value, *guid*, MUST be randomly generated.
 - A 64-bit value, *lowPart*, MUST be generated XORing the low 64 bits of the *guid* value with the high 64 bits of the *guid*value.

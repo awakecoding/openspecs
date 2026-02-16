@@ -502,7 +502,7 @@ This operation is specified by the following WSDL.
 
 </wsdl:operation>
 
-The **IWindowsDeviceEnrollmentService_RequestSecurityToken_InputMessage** message consists of a single object definition: the client request. The client request is made by using the acceptable SOAP actions and values as defined in sections [3.1.4.1.1](#Section_3.1.4.1.1.1) and [3.1.4.1.2](#Section_3.1.4.1.2.2).
+The **IWindowsDeviceEnrollmentService_RequestSecurityToken_InputMessage** message consists of a single object definition: the client request. The client request is made by using the acceptable SOAP actions and values as defined in sections [3.1.4.1.1](#Section_3.1.4.1.1) and [3.1.4.1.2](#Section_3.1.4.1.2).
 
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 Messages
@@ -636,7 +636,7 @@ The WSDL definition is:
 
 The **IWindowsDeviceEnrollmentService_RequestSecurityToken_WindowsDeviceEnrollmentServiceErrorFault_FaultMessage** message contains the SOAP fault associated with an error in the request from the client to the server.
 
-**WindowsDeviceEnrollmentServiceError:** Defined in section [3.1.4.1.2.1](#Section_3.1.4.1.2.12). The object MUST be included in the <s:Detail> element of a SOAP fault, and clients MUST ignore the entire WindowsDeviceEnrollmentServiceError node in the SOAP fault response.
+**WindowsDeviceEnrollmentServiceError:** Defined in section [3.1.4.1.2.1](#Section_3.1.4.1.2.11). The object MUST be included in the <s:Detail> element of a SOAP fault, and clients MUST ignore the entire WindowsDeviceEnrollmentServiceError node in the SOAP fault response.
 
 <a id="Section_3.1.4.1.2"></a>
 ##### 3.1.4.1.2 Elements

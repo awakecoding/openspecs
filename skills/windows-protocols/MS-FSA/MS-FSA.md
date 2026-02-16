@@ -688,7 +688,7 @@ The object store MUST implement the following:
 - **ROplocks:** A list of zero or more **Opens** used to request a LEVEL_GRANULAR(**RequestedOplockLevel**: READ_CACHING) opportunistic lock, as specified in section 2.1.5.18.1.
 - **RHOplocks:** A list of zero or more **Opens** used to request a LEVEL_GRANULAR(**RequestedOplockLevel**: (READ_CACHING|HANDLE_CACHING)) opportunistic lock, as specified in section 2.1.5.18.1.
 - **RHBreakQueue**: A list of zero or more **RHOpContext** objects. This queue is used to track (READ_CACHING|HANDLE_CACHING) oplocks as they are breaking.
-- **WaitList:** A list of zero or more **Opens** belonging to operations that are waiting for an oplock to break, as specified in section [2.1.4.12](#Section_2.1.4.12.1).
+- **WaitList:** A list of zero or more **Opens** belonging to operations that are waiting for an oplock to break, as specified in section [2.1.4.12](#Section_2.1.4.12).
 - **State:** The current state of the oplock, expressed as a combination of one or more flags. Valid flags are:
 - NO_OPLOCK - Indicates that this **Oplock** does not represent a currently granted or breaking oplock. This is semantically equivalent to the **Oplock** object being entirely absent from a **Stream**. This flag always appears alone.
 - LEVEL_ONE_OPLOCK - Indicates that this **Oplock** represents a Level 1 (also called Exclusive) oplock.
@@ -789,7 +789,7 @@ The inputs for this algorithm are:
 
 - **RootDirectory:** The DirectoryFile indicating the top-level directory under which to search for open files.
 - **Open:** The **Open** for the request that is calling this algorithm.
-- **Operation:** A code describing the operation being processed, as specified in section [2.1.4.12](#Section_2.1.4.12.1).
+- **Operation:** A code describing the operation being processed, as specified in section [2.1.4.12](#Section_2.1.4.12).
 - **OpParams:** Parameters associated with **Operation**, passed in from the calling request, as specified in section 2.1.4.12.
 The output is a Boolean. If the return value is TRUE, then no open files exist under the directory; if FALSE, then at least one open exists even after attempting to break oplocks.
 
@@ -1015,7 +1015,7 @@ If **Oplock** is not empty and **Oplock.State** is not NO_OPLOCK:
 - Set *BreakToTwo* to TRUE, set *BreakCacheState* to WRITE_CACHING.
 - EndIf
 - EndCase
-- Case OPEN_BREAK_H, as specified in section [2.1.5.1.2](#Section_2.1.5.1.2.2):
+- Case OPEN_BREAK_H, as specified in section [2.1.5.1.2](#Section_2.1.5.1.2):
 - Set *BreakCacheState* to HANDLE_CACHING.
 - EndCase
 - Case CLOSE, as specified in section [2.1.5.5](#Section_2.1.5.5):
@@ -1112,7 +1112,7 @@ If **Oplock** is not empty and **Oplock.State** is not NO_OPLOCK:
 - Set *BreakToNone* to TRUE
 - Set *BreakCacheState* to (READ_CACHING|WRITE_CACHING).
 - EndCase
-- Case SET_INFORMATION, as specified in section [2.1.5.15](#Section_2.1.5.15.7):
+- Case SET_INFORMATION, as specified in section [2.1.5.15](#Section_2.1.5.15.4):
 - Switch (**OpParams.FileInformationClass**):
 - Case FileEndOfFileInformation:
 - Case FileAllocationInformation:
@@ -1130,7 +1130,7 @@ If **Oplock** is not empty and **Oplock.State** is not NO_OPLOCK:
 - Set *BreakCacheState* to HANDLE_CACHING.
 - EndCase
 - EndSwitch // FileInfoClass
-- Case FS_CONTROL, as specified in section [2.1.5.10](#Section_2.1.5.10.39):
+- Case FS_CONTROL, as specified in section [2.1.5.10](#Section_2.1.5.10.29.2):
 - If **OpParams.ControlCode** is FSCTL_SET_ZERO_DATA:
 - Set *BreakToNone* to TRUE.
 - Set *BreakCacheState* to (READ_CACHING|WRITE_CACHING).
@@ -1439,7 +1439,7 @@ The inputs for this algorithm are:
 - **OpenToRelease:** The **Open** used in the request that caused the oplock to break
 Pseudocode for the algorithm is as follows:
 
-- The request corresponding to **OpenToRelease** MUST resume from the point where it broke the oplock (that is, called section [2.1.4.12](#Section_2.1.4.12.1)).
+- The request corresponding to **OpenToRelease** MUST resume from the point where it broke the oplock (that is, called section [2.1.4.12](#Section_2.1.4.12)).
 <a id="Section_2.1.4.12.2"></a>
 ##### 2.1.4.12.2 Algorithm to Compare Oplock Keys
 
@@ -1802,7 +1802,7 @@ Pseudocode for the operation is as follows:
 - If *StreamTypeToOpen* is DataStream or **CreateOptions.FILE_NON_DIRECTORY_FILE** is TRUE, the operation MUST be failed with STATUS_OBJECT_NAME_INVALID.
 - EndIf
 - Phase 8 -- Completion of open
-- If **Open.File** is NULL, the object store MUST create a new file as described in section [2.1.5.1.1](#Section_2.1.5.1.1); otherwise the object store MUST open the existing file as described in section [2.1.5.1.2](#Section_2.1.5.1.2.2).
+- If **Open.File** is NULL, the object store MUST create a new file as described in section [2.1.5.1.1](#Section_2.1.5.1.1); otherwise the object store MUST open the existing file as described in section [2.1.5.1.2](#Section_2.1.5.1.2).
 <a id="Section_2.1.5.1.1"></a>
 ##### 2.1.5.1.1 Creation of a New File
 
@@ -1916,7 +1916,7 @@ Pseudocode for the operation is as follows:
 - The object store MUST insert **Link** into **Link.ParentFile.DirectoryList**.
 - The object store MUST post a USN change as specified in section [2.1.4.11](#Section_2.1.4.11) with **File** equal to **File**, **Reason** equal to *UsnReason*, and **FileName** equal to **Link.Name**.
 - The object store MUST update **Link.ParentFile.LastModificationTime**, **Link.ParentFile.LastChangeTime**, and **Link.ParentFile.LastAccessTime** to the current system time.
-- If the **Oplock** member of the **DirectoryStream** in **Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If the **Oplock** member of the **DirectoryStream** in **Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to *ParentOplock*
 - **Operation** equal to "OPEN"
@@ -1950,7 +1950,7 @@ Pseudocode for the operation is as follows:
 - If *StreamTypeToOpen* is DirectoryStream:
 - If **CreateDisposition** is FILE_OPEN or FILE_OPEN_IF then:
 - Perform access checks as described in section [2.1.5.1.2.1](#Section_2.1.5.1.2.1). If this fails with STATUS_SHARING_VIOLATION:
-- If **Open.Stream.Oplock** is not empty and **Open.Stream.Oplock.State** contains HANDLE_CACHING, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty and **Open.Stream.Oplock.State** contains HANDLE_CACHING, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "OPEN_BREAK_H"
@@ -2190,7 +2190,7 @@ Pseudocode for these checks is as follows:
 - EndIf
 - EndFor
 - EndIf
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "OPEN"
@@ -2299,7 +2299,7 @@ Pseudocode for the operation is as follows:
 - **BytesRead** set to zero.
 - **Status** set to STATUS_SUCCESS.
 - Set *RequestedByteCount* to **ByteCount**.
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "READ"
@@ -2371,7 +2371,7 @@ Pseudocode for the operation is as follows:
 - Initialize *UsnReason* to zero.
 - If (**ByteOffset** + **ByteCount**) > **Open.Stream.Size**, set *UsnReason*.USN_REASON_DATA_EXTEND to TRUE.
 - If **ByteOffset** < **Open.Stream.Size**, set *UsnReason*.USN_REASON_DATA_OVERWRITE to TRUE.
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "WRITE"
@@ -2538,7 +2538,7 @@ Pseudocode for the operation is as follows:
 - EndFor
 - EndIf
 - Phase 8 -- Oplock Cleanup:
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "CLOSE"
@@ -2730,7 +2730,7 @@ Pseudocode for the algorithm is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2768,7 +2768,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_DIRECTORY_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2794,7 +2794,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_FULL_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2825,7 +2825,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_64_EXTD_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2867,7 +2867,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_64_EXTD_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2902,7 +2902,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_ALL_EXTD_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2947,7 +2947,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_ALL_EXTD_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -2985,7 +2985,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_BOTH_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -3030,7 +3030,7 @@ OutputBuffer is an array of one or more FILE_ID_EXTD_DIR_INFORMATION structures 
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than **FieldOffset(**FILE_ID_EXTD_DIR_INFORMATION.FileName**)**, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry*.**NextEntryOffset** set to zero
 - *Entry*.**FileIndex** set to zero
@@ -3065,7 +3065,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_ID_FULL_DIR_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -3103,7 +3103,7 @@ Pseudocode for the operation is as follows:
 Pseudocode for the operation is as follows:
 
 - If **OutputBufferSize** is smaller than ***FieldOffset(***FILE_NAMES_INFORMATION.FileName***)***, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
-- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.11).
+- The object store MUST process this query using the algorithm described in section [2.1.5.6.3](#Section_2.1.5.6.3.8).
 - *Entry* MUST be constructed as follows:
 - *Entry***.NextEntryOffset** set to zero
 - *Entry***.FileIndex** set to zero
@@ -3158,7 +3158,7 @@ Pseudocode for the operation is as follows:
 - This means that the requested range contains one or more bytes with offsets beyond the maximum 64-bit unsigned integer. The operation MUST be failed with STATUS_INVALID_LOCK_RANGE.
 - EndIf
 - [Processing]
-- If (**FileOffset** < **Open.Stream.AllocationSize**)<81> and **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If (**FileOffset** < **Open.Stream.AllocationSize**)<81> and **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "LOCK_CONTROL"
@@ -4769,7 +4769,7 @@ Pseudocode for the operation is as follows:
 - Set **Open.Link.PendingNotifications** to zero.
 - Set **Open.File.PendingNotifications** to zero.
 - EndIf
-- If the **Oplock** member of the **DirectoryStream** in **Open.Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If the **Oplock** member of the **DirectoryStream** in **Open.Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to *ParentOplock*
 - **Operation** equal to "FS_CONTROL"
@@ -5045,7 +5045,7 @@ Pseudocode for the operation is as follows:
 - Set *CurrentBytes* to **InputBuffer.BeyondFinalZero** - *StartingOffset*.
 - If **InputBuffer.BeyondFinalZero** is greater than **Open.Stream.Size**, set *CurrentBytes* to **Open.Stream.Size** - *StartingOffset*. In other words, **Open.Stream.Size** MUST NOT be changed by this operation.
 - If *CurrentBytes* is greater than 0x40000000 (1 gigabyte), set *CurrentBytes* to 0x40000000.
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "FS_CONTROL"
@@ -5371,10 +5371,10 @@ Pseudocode for the operation is as follows:
 - **OutputBuffer.StandardInformation** MUST be filled using the operation described in section [2.1.5.12.27](#Section_2.1.5.12.27).
 - **OutputBuffer.InternalInformation** MUST be filled using the operation described in section [2.1.5.12.17](#Section_2.1.5.12.17).
 - **OutputBuffer.EaInformation** MUST be filled using the operation described in section [2.1.5.12.10](#Section_2.1.5.12.10).
-- **OutputBuffer.AccessInformation** MUST be filled using the operation described in section [2.1.5.12.1](#Section_2.1.5.12.19).
+- **OutputBuffer.AccessInformation** MUST be filled using the operation described in section [2.1.5.12.1](#Section_2.1.5.12.17).
 - **OutputBuffer.PositionInformation** MUST be filled using the operation described in section [2.1.5.12.23](#Section_2.1.5.12.23).
 - **OutputBuffer.ModeInformation** MUST be filled using the operation described in section [2.1.5.12.18](#Section_2.1.5.12.18).
-- **OutputBuffer.AlignmentInformation** MUST be filled using the operation described in section [2.1.5.12.2](#Section_2.1.5.12.21).
+- **OutputBuffer.AlignmentInformation** MUST be filled using the operation described in section [2.1.5.12.2](#Section_2.1.5.12.24).
 - **OutputBuffer.NameInformation** MUST be filled using the operation described in section [2.1.5.12.19](#Section_2.1.5.12.19), saving the returned ByteCount in *NameInformationLength* and the returned Status in *NameInformationStatus*.
 - Upon successful completion of the operation, the object store MUST return:
 - **ByteCount** set to ***FieldOffset(***FILE_ALL_INFORMATION.NameInformation***)*** + *NameInformationLength*.
@@ -5585,7 +5585,7 @@ Pseudocode for the operation is as follows:
 <a id="Section_2.1.5.12.19"></a>
 ##### 2.1.5.12.19 FileNameInformation
 
-This operation is not supported from a remote client, it is only supported from a local client or as part of processing a query for the FileAllInformation operation as specified in section [2.1.5.12.3](#Section_2.1.5.12.3). If used to query from a remote client, this operation MUST be failed with a status code of STATUS_NOT_SUPPORTED.
+This operation is not supported from a remote client, it is only supported from a local client or as part of processing a query for the FileAllInformation operation as specified in section [2.1.5.12.3](#Section_2.1.5.12.30). If used to query from a remote client, this operation MUST be failed with a status code of STATUS_NOT_SUPPORTED.
 
 **OutputBuffer** is of type FILE_NAME_INFORMATION as described in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.5.
 
@@ -6192,7 +6192,7 @@ Pseudocode for the operation is as follows:
 
 - If **InputBufferSize** is less than the size, in bytes, of the FILE_ALLOCATION_INFORMATION structure, the operation MUST be failed with STATUS_INFO_LENGTH_MISMATCH.
 - If **Open.GrantedAccess** does not contain FILE_WRITE_DATA, the operation MUST be failed with STATUS_ACCESS_DENIED.
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "SET_INFORMATION"
@@ -6310,7 +6310,7 @@ Pseudocode for the operation is as follows:
 - EndIf
 - EndIf
 - If *BreakParentOplock* is TRUE:
-- If the **Oplock** member of the **DirectoryStream** in **Open.Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If the **Oplock** member of the **DirectoryStream** in **Open.Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**.
 - **Oplock** equal to *ParentOplock*.
 - **Operation** equal to "SET_INFORMATION"
@@ -6408,7 +6408,7 @@ Pseudocode for the operation is as follows:
 - If **Open.Stream.StreamType** is DirectoryStream.
 - If **InputBuffer.EndOfFile** is greater than the maximum file size allowed by the object store.<181>
 - If **Open.GrantedAccess** does not contain FILE_WRITE_DATA, the operation MUST be failed with STATUS_ACCESS_DENIED.
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "SET_INFORMATION"
@@ -6508,7 +6508,7 @@ Pseudocode for the operation is as follows:
 - The object store MUST insert *NewLink* into **Open.File.LinkList**
 - The object store MUST insert *NewLink* into *DestinationDirectory***.File.DirectoryList**.
 - The object store MUST update **DestinationDirectory.File.LastModificationTime**, **DestinationDirectory.File.LastAccessTime**, and **DestinationDirectory.File.LastChangeTime**.
-- If the **Oplock** member of the **DirectoryStream** in **DestinationDirectory.File.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If the **Oplock** member of the **DirectoryStream** in **DestinationDirectory.File.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to *ParentOplock*
 - **Operation** equal to "SET_INFORMATION"
@@ -6633,7 +6633,7 @@ Pseudocode for the operation is as follows:
 - If **InputBuffer.FileName** contains the character '\', the object store MUST fail the operation with STATUS_OBJECT_NAME_INVALID.
 - Set *DestinationDirectory* equal to **Open.Link.ParentFile**.
 - EndIf
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**.
 - **Oplock** equal to **Open.Stream.Oplock**.
 - **Operation** equal to "SET_INFORMATION".
@@ -6975,7 +6975,7 @@ Pseudocode for the algorithm is as follows:
 - If **Open.Link.ShortName** is not empty:
 - Send directory change notification as specified in section 2.1.4.1, with **Volume** equal to **Open**.**File.Volume**, **Action** equal to FILE_ACTION_RENAMED_OLD_NAME, and **FileName** set to **Open.Link.ShortName** with a **FilterMatch** of *FilterMatch*.
 - EndIf
-- If the **Oplock** member of the **DirectoryStream** in **Open.Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If the **Oplock** member of the **DirectoryStream** in **Open.Link.ParentFile.StreamList** (hereinafter referred to as *ParentOplock*) is not empty, the object store MUST check for an oplock break on the parent according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to *ParentOplock*
 - **Operation** equal to "SET_INFORMATION"
@@ -7002,7 +7002,7 @@ Pseudocode for the operation is as follows:
 - If **Open.Stream.IsCompressed** is TRUE.
 - If **Open.Stream.IsSparse** is TRUE.
 - If **Open.File.FileType** is DirectoryFile.
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**.
 - **Oplock** equal to **Open.Stream.Oplock**.
 - **Operation** equal to "SET_INFORMATION".
@@ -7120,7 +7120,7 @@ The operation MUST be failed with STATUS_ACCESS_DENIED under any of the followin
 - **SecurityInformation** contains SACL_SECURITY_INFORMATION and **Open.GrantedAccess** does not contain ACCESS_SYSTEM_SECURITY.
 Pseudocode for the operation is as follows:
 
-- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12.1), with input values as follows:
+- If **Open.Stream.Oplock** is not empty, the object store MUST check for an oplock break according to the algorithm in section [2.1.4.12](#Section_2.1.4.12), with input values as follows:
 - **Open** equal to this operation's **Open**
 - **Oplock** equal to **Open.Stream.Oplock**
 - **Operation** equal to "SET_SECURITY"

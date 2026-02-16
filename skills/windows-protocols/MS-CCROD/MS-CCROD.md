@@ -1499,7 +1499,7 @@ The [**hosted cache**](#gt_hosted-cache) server is initialized as described in [
 - Using [MS-PCCRTP](../MS-PCCRTP/MS-PCCRTP.md) or [MS-SMB2](../MS-SMB2/MS-SMB2.md), retrieve the hashes and blocks of required resources from a content server and insert them into the cache of the new hosted cache server.
 In either method, the retrieval can be performed from a machine other than the hosted cache server and transported to the hosted cache server by using an implementation-specific intermediary format.
 
-Preloading is never necessary because clients automatically retrieve missing content and offer it to the server as described in [2.5.4.4.1](#Section_2.5.4.4.1.3). However, preloading a server can result in a more immediate performance gain when client requests can be planned for.
+Preloading is never necessary because clients automatically retrieve missing content and offer it to the server as described in [2.5.4.4.1](#Section_2.5.4.4.1). However, preloading a server can result in a more immediate performance gain when client requests can be planned for.
 
 <a id="Section_2.8.3.2.2"></a>
 ##### 2.8.3.2.2 Distributed Cache Mode
@@ -1560,7 +1560,7 @@ The following examples describe two different methods of metadata retrieval and 
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Reading a File Using SMB 2.1or 3.x as Metadata Channel in Distributed Cache Mode (Cached Content Available)
 
-This example includes the following use cases: Configuring SMB 2.1 or 3.x Content Server Caching (section [2.5.4.1.1](#Section_2.5.4.1.1.1)), Configuring Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3.1)), Using SMB 2.1 or 3.x Metadata Retrieval (section [2.5.4.3.1](#Section_2.5.4.3.1.2)), and Content Discovery and Retrieval (section [2.5.4.4.4](#Section_2.5.4.4.4)).
+This example includes the following use cases: Configuring SMB 2.1 or 3.x Content Server Caching (section [2.5.4.1.1](#Section_2.5.4.1.1.1)), Configuring Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3)), Using SMB 2.1 or 3.x Metadata Retrieval (section [2.5.4.3.1](#Section_2.5.4.3.1)), and Content Discovery and Retrieval (section [2.5.4.4.4](#Section_2.5.4.4.4)).
 
 The SMB 2.1 or 3.x protocol plays two distinct roles. The first role is to act as a member of the File Access system by providing the usual file-sharing resources between machines. The second role is to act as a transport for metadata from a content server to a content client, which enables the content client to participate in Content Caching and Retrieval.
 
@@ -1605,7 +1605,7 @@ Figure 10: SMB 2.1 or 3.x read file stages and distributed mode discovery and re
 <a id="Section_3.2"></a>
 ## 3.2 Example 2: Reading a File Using HTTP as the Metadata Channel in Hosted Cache Mode
 
-This example includes the following use cases: Configure HTTP Content Server Caching (section [2.5.4.1.2](#Section_2.5.4.1.2)), Configure a Hosted Cache Server (section [2.5.4.1.4](#Section_2.5.4.1.4)), Configure Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3.1)), HTTP Metadata Retrieval (section [2.5.4.3.2](#Section_2.5.4.3.2.2)), Content Discovery and Retrieval (cached data unavailable) (section [2.5.4.4.1](#Section_2.5.4.4.1.3)), and Content Discovery and Retrieval with Hosted Cache (Cached Data Available) (section [2.5.4.4.2](#Section_2.5.4.4.2)).
+This example includes the following use cases: Configure HTTP Content Server Caching (section [2.5.4.1.2](#Section_2.5.4.1.2)), Configure a Hosted Cache Server (section [2.5.4.1.4](#Section_2.5.4.1.4)), Configure Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3)), HTTP Metadata Retrieval (section [2.5.4.3.2](#Section_2.5.4.3.2.1)), Content Discovery and Retrieval (cached data unavailable) (section [2.5.4.4.1](#Section_2.5.4.4.1)), and Content Discovery and Retrieval with Hosted Cache (Cached Data Available) (section [2.5.4.4.2](#Section_2.5.4.4.2)).
 
 In this example, the HTTP protocol plays two distinct roles. The first role is to act in the usual manner as a file retrieval protocol. The second role is through the use of PeerDist, as described in [MS-PCCRTP](../MS-PCCRTP/MS-PCCRTP.md), to act as a transport for metadata from a content server to a content client, which allows the content client to participate in the initial stages of Content Caching and Retrieval.
 
