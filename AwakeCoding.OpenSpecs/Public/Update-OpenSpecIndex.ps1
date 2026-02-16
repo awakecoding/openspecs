@@ -174,19 +174,19 @@ function Update-OpenSpecIndex {
     }
 
     [void]$sb.AppendLine('## Overview Documents')
-    [void]$sb.AppendLine($overviewDocsUri)
+    [void]$sb.AppendLine("[Overview Documents]($overviewDocsUri)")
     [void]$sb.AppendLine()
     & $writeTable $overviewEntries $IncludeDescription
     [void]$sb.AppendLine()
 
     [void]$sb.AppendLine('## Technical Documents')
-    [void]$sb.AppendLine($technicalDocsUri)
+    [void]$sb.AppendLine("[Technical Documents]($technicalDocsUri)")
     [void]$sb.AppendLine()
     & $writeTable $technicalEntries $IncludeDescription
     [void]$sb.AppendLine()
 
     [void]$sb.AppendLine('## Reference Documents')
-    [void]$sb.AppendLine($referenceDocsUri)
+    [void]$sb.AppendLine("[Reference Documents]($referenceDocsUri)")
     [void]$sb.AppendLine()
     & $writeTable $referenceEntries $IncludeDescription
 
