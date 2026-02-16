@@ -20,7 +20,24 @@ jobs:
       - name: Install oxipng
         shell: pwsh
         run: |
-          choco install oxipng -y --no-progress
+          $release = Invoke-RestMethod -Uri 'https://api.github.com/repos/oxipng/oxipng/releases/latest'
+          $asset = $release.assets | Where-Object { $_.name -match 'x86_64-pc-windows-msvc\.zip$' } | Select-Object -First 1
+          if (-not $asset) {
+            throw 'Could not find Windows x86_64 zip asset in latest oxipng release.'
+          }
+          $zipPath = Join-Path $env:RUNNER_TEMP $asset.name
+          Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $zipPath
+          $extractPath = Join-Path $env:RUNNER_TEMP 'oxipng'
+          if (Test-Path -LiteralPath $extractPath) {
+            Remove-Item -LiteralPath $extractPath -Recurse -Force
+          }
+          Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath -Force
+          $binPath = Get-ChildItem -LiteralPath $extractPath -Recurse -File -Filter 'oxipng.exe' | Select-Object -First 1
+          if (-not $binPath) {
+            throw 'oxipng.exe was not found after extracting release archive.'
+          }
+          $binDir = Split-Path -Path $binPath.FullName -Parent
+          Add-Content -Path $env:GITHUB_PATH -Value $binDir
           oxipng --version
 
       - name: Install OpenXML module
