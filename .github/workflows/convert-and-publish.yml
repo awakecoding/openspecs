@@ -47,7 +47,7 @@ jobs:
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
           Install-Module -Name OpenXML -Force -Scope CurrentUser
 
-      - name: Build publish tree and Windows_Protocols.zip
+      - name: Build publish tree and windows-protocols.zip
         shell: pwsh
         working-directory: ${{ github.workspace }}
         run: .\scripts\Build-Publish.ps1
@@ -56,11 +56,22 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: publish
-          path: Windows_Protocols.zip
+          path: |
+            windows-protocols.zip
+            windows-protocols.metadata.json
+
+      - name: Stage downloadable bundle in publish tree
+        shell: pwsh
+        working-directory: ${{ github.workspace }}
+        run: |
+          Copy-Item -LiteralPath .\windows-protocols.zip -Destination .\skills\windows-protocols\windows-protocols.zip -Force
+          if (Test-Path -LiteralPath .\windows-protocols.metadata.json -PathType Leaf) {
+            Copy-Item -LiteralPath .\windows-protocols.metadata.json -Destination .\skills\windows-protocols\windows-protocols.metadata.json -Force
+          }
 
       - name: Push to orphaned publish branch
         shell: pwsh
-        working-directory: publish
+        working-directory: skills/windows-protocols
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
