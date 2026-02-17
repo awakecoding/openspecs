@@ -97,6 +97,10 @@ try {
     if ($missingDownloads.Count -gt 0) {
         if ($AllowPartial) {
             Write-Warning "Skipping $($missingDownloads.Count) specs with missing downloads (CDN links may be stale): $($missingDownloads -join ', ')"
+            Write-Host 'Skipped specs (missing downloads):'
+            foreach ($protocolId in $missingDownloads) {
+                Write-Host " - $protocolId"
+            }
             $catalog = $catalog | Where-Object { $downloadedProtocolIds.Contains($_.ProtocolId) }
         }
         else {
@@ -139,7 +143,16 @@ try {
 
     $missingPublished = @($catalog | Where-Object { -not $publishedProtocolIds.Contains($_.ProtocolId) } | Select-Object -ExpandProperty ProtocolId -Unique | Sort-Object)
     if ($missingPublished.Count -gt 0) {
-        throw "Missing converted output for $($missingPublished.Count) specs: $($missingPublished -join ', ')"
+        if ($AllowPartial) {
+            Write-Warning "Skipping $($missingPublished.Count) specs with missing converted output: $($missingPublished -join ', ')"
+            Write-Host 'Skipped specs (missing converted output):'
+            foreach ($protocolId in $missingPublished) {
+                Write-Host " - $protocolId"
+            }
+        }
+        else {
+            throw "Missing converted output for $($missingPublished.Count) specs: $($missingPublished -join ', ')"
+        }
     }
 
     $legalSource = Join-Path (Join-Path $convPath '_legal') 'LEGAL.md'
