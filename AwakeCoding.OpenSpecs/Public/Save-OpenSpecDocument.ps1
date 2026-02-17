@@ -114,7 +114,7 @@ function Save-OpenSpecDocument {
         $downloadOne = {
             param($link, $destination)
             try {
-                Invoke-OpenSpecWebDownloadWithRetry -Uri $link.Url -OutFile $destination
+                Invoke-OpenSpecRequest -Uri $link.Url -OutFile $destination | Out-Null
                 [pscustomobject]@{
                     PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                     ProtocolId = $link.ProtocolId
@@ -173,7 +173,7 @@ function Save-OpenSpecDocument {
                     if (-not $currentModule -and $using:moduleBase) {
                         Import-Module (Join-Path -Path $using:moduleBase -ChildPath 'AwakeCoding.OpenSpecs.psd1') -Force | Out-Null
                     }
-                    Invoke-OpenSpecWebDownloadWithRetry -Uri $link.Url -OutFile $destination
+                    Invoke-OpenSpecRequest -Uri $link.Url -OutFile $destination | Out-Null
                     [pscustomobject]@{
                         PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                         ProtocolId = $link.ProtocolId
