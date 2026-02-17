@@ -163,15 +163,18 @@ function Save-OpenSpecDocument {
         }
 
         $moduleBase = (Get-Module -Name 'AwakeCoding.OpenSpecs' | Select-Object -First 1).ModuleBase
+        $openSpecRequestPath = if ($moduleBase) { Join-Path -Path $moduleBase -ChildPath 'Private\Invoke-OpenSpecRequest.ps1' } else { $null }
         $useParallel = $Parallel -and $PSVersionTable.PSVersion.Major -ge 7 -and $toDownload.Count -gt 1
         $results = if ($useParallel) {
             $toDownload | ForEach-Object -Parallel {
                 $link = $_.Link
                 $destination = $_.Destination
                 try {
-                    $currentModule = Get-Module -Name 'AwakeCoding.OpenSpecs' | Select-Object -First 1
-                    if (-not $currentModule -and $using:moduleBase) {
-                        Import-Module (Join-Path -Path $using:moduleBase -ChildPath 'AwakeCoding.OpenSpecs.psd1') -Force | Out-Null
+                    if (-not (Get-Command -Name 'Invoke-OpenSpecRequest' -CommandType Function -ErrorAction SilentlyContinue)) {
+                        if (-not $using:openSpecRequestPath -or -not (Test-Path -LiteralPath $using:openSpecRequestPath -PathType Leaf)) {
+                            throw 'Invoke-OpenSpecRequest helper script not found for parallel download.'
+                        }
+                        . $using:openSpecRequestPath
                     }
                     Invoke-OpenSpecRequest -Uri $link.Url -OutFile $destination | Out-Null
                     [pscustomobject]@{
