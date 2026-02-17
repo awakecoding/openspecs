@@ -14,22 +14,11 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$fullPath = [System.IO.Path]::GetFullPath($Path)
-if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
-    Write-Error "File not found: $fullPath"
-}
-
-$repoRoot = (Get-Item $PSScriptRoot).Parent.FullName
-$privateScript = Join-Path $repoRoot 'AwakeCoding.OpenSpecs\Private\Invoke-OpenSpecMarkdownCleanup.ps1'
-if (-not (Test-Path -LiteralPath $privateScript -PathType Leaf)) {
-    Write-Error "Cleanup script not found: $privateScript"
-}
-
-. $privateScript
-$markdown = Get-Content -LiteralPath $fullPath -Raw -Encoding UTF8
-$result = Add-OpenSpecMissingSectionAnchorsFromToc -Markdown $markdown
+. (Join-Path $PSScriptRoot 'Invoke-MarkdownCleanupTransform.ps1')
+$result = Invoke-MarkdownCleanupTransform -Path $Path -TransformFunction 'Add-OpenSpecMissingSectionAnchorsFromToc'
 if ($result.InjectedCount -gt 0) {
-    $result.Markdown | Set-Content -LiteralPath $fullPath -Encoding UTF8 -NoNewline
+    Save-MarkdownCleanupTransformResult -Path $Path -Markdown $result.Markdown
+    $fullPath = [System.IO.Path]::GetFullPath((Resolve-Path -LiteralPath $Path).Path)
     Write-Host "Injected $($result.InjectedCount) missing section anchor(s). File updated: $fullPath"
 } else {
     Write-Host "No missing section anchors to inject."
