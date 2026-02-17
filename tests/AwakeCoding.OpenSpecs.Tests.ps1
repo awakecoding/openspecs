@@ -75,3 +75,32 @@ Describe 'Conversion report aggregation' {
         Remove-Item -LiteralPath $tempRoot -Recurse -Force
     }
 }
+
+Describe 'Section GUID link repair' {
+    It 'is deterministic and prefers explicit section-number targets' {
+        $markdown = @'
+<a id="Section_2.2.1.3"></a>
+## 2.2.1.3 MCS Connect Initial PDU
+<a id="Section_3.2.5.3.3"></a>
+## 3.2.5.3.3 MCS Connect Initial PDU
+Numeric reference: [2.2.1.3](#Section_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+Heading reference: [MCS Connect Initial PDU](#Section_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+'@
+
+        $module = Get-Module AwakeCoding.OpenSpecs -ErrorAction Stop
+        $results = 1..5 | ForEach-Object {
+            & $module {
+                param([string]$text)
+                Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $text
+            } $markdown
+        }
+
+        $firstMarkdown = $results[0].Markdown
+        foreach ($item in $results) {
+            $item.Markdown | Should -Be $firstMarkdown
+        }
+
+        $firstMarkdown | Should -Match '\[2\.2\.1\.3\]\(#Section_2\.2\.1\.3\)'
+        $firstMarkdown | Should -Match '\[MCS Connect Initial PDU\]\(#Section_2\.2\.1\.3\)'
+    }
+}
