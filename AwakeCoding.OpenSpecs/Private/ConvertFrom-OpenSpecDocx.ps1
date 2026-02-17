@@ -912,26 +912,6 @@ function Get-OpenSpecOpenXmlParagraphAnchorInfo {
     }
 }
 
-function Get-OpenSpecOpenXmlParagraphAnchors {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory)]
-        [System.Xml.XmlNode]$ParagraphNode,
-
-        [Parameter(Mandatory)]
-        [System.Xml.XmlNamespaceManager]$NamespaceManager,
-
-        [Parameter()]
-        [string]$ParagraphText,
-
-        [Parameter()]
-        [string]$HeadingStyle
-    )
-
-    $info = Get-OpenSpecOpenXmlParagraphAnchorInfo -ParagraphNode $ParagraphNode -NamespaceManager $NamespaceManager -ParagraphText $ParagraphText -HeadingStyle $HeadingStyle
-    return @($info.Anchors)
-}
-
 function Get-OpenSpecOpenXmlParagraphInternalHyperlinks {
     [CmdletBinding()]
     param(
