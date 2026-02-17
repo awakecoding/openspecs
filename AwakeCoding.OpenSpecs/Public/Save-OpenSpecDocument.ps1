@@ -206,12 +206,10 @@ function Save-OpenSpecDocument {
 
         # Retry failed DOCX via RSS fallback URLs (e.g. MS-THCH, MS-MQOD with stale Learn-page links)
         $downloadResults = New-Object System.Collections.Generic.List[object]
-        $i = 0
         foreach ($r in @($results)) {
-            $dest = $toDownload[$i].Destination
+            $dest = $r.Path
             $r = & $tryDocxFallback -result $r -destination $dest
             [void]$downloadResults.Add($r)
-            $i++
         }
 
         $existsResults
