@@ -114,26 +114,7 @@ function Save-OpenSpecDocument {
         $downloadOne = {
             param($link, $destination)
             try {
-                $attempt = 0
-                $maxRetries = 4
-                $delay = 1
-                while ($true) {
-                    $attempt++
-                    try {
-                        Invoke-WebRequest -Uri $link.Url -OutFile $destination -MaximumRedirection 8 -ErrorAction Stop
-                        break
-                    }
-                    catch {
-                        $statusCode = $null
-                        if ($_.Exception.Response -and $_.Exception.Response.StatusCode) {
-                            $statusCode = [int]$_.Exception.Response.StatusCode
-                        }
-                        $transient = ($statusCode -in 429, 500, 502, 503, 504) -or (-not $statusCode)
-                        if ($attempt -ge $maxRetries -or -not $transient) { throw }
-                        Start-Sleep -Seconds $delay
-                        $delay = [Math]::Min($delay * 2, 16)
-                    }
-                }
+                Invoke-OpenSpecWebDownloadWithRetry -Uri $link.Url -OutFile $destination
                 [pscustomobject]@{
                     PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                     ProtocolId = $link.ProtocolId
@@ -181,32 +162,18 @@ function Save-OpenSpecDocument {
             return $result
         }
 
+        $moduleBase = (Get-Module -Name 'AwakeCoding.OpenSpecs' | Select-Object -First 1).ModuleBase
         $useParallel = $Parallel -and $PSVersionTable.PSVersion.Major -ge 7 -and $toDownload.Count -gt 1
         $results = if ($useParallel) {
             $toDownload | ForEach-Object -Parallel {
                 $link = $_.Link
                 $destination = $_.Destination
                 try {
-                    $attempt = 0
-                    $maxRetries = 4
-                    $delay = 1
-                    while ($true) {
-                        $attempt++
-                        try {
-                            Invoke-WebRequest -Uri $link.Url -OutFile $destination -MaximumRedirection 8 -ErrorAction Stop
-                            break
-                        }
-                        catch {
-                            $statusCode = $null
-                            if ($_.Exception.Response -and $_.Exception.Response.StatusCode) {
-                                $statusCode = [int]$_.Exception.Response.StatusCode
-                            }
-                            $transient = ($statusCode -in 429, 500, 502, 503, 504) -or (-not $statusCode)
-                            if ($attempt -ge $maxRetries -or -not $transient) { throw }
-                            Start-Sleep -Seconds $delay
-                            $delay = [Math]::Min($delay * 2, 16)
-                        }
+                    $currentModule = Get-Module -Name 'AwakeCoding.OpenSpecs' | Select-Object -First 1
+                    if (-not $currentModule -and $using:moduleBase) {
+                        Import-Module (Join-Path -Path $using:moduleBase -ChildPath 'AwakeCoding.OpenSpecs.psd1') -Force | Out-Null
                     }
+                    Invoke-OpenSpecWebDownloadWithRetry -Uri $link.Url -OutFile $destination
                     [pscustomobject]@{
                         PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                         ProtocolId = $link.ProtocolId
