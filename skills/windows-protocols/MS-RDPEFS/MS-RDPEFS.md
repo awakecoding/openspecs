@@ -368,7 +368,7 @@ In general, there is no distinguishable difference between the initial connectio
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Drive Redirection
 
-Drives can be announced or deleted at any point in time after the connection has been established. For example, Drive redirection sequence shows the sequence for adding and removing a file system drive. The first message pair, [Client Device List Announce Request](#Section_4.10)/[Server Device Announce Response](#Section_4.2), is optional. If the device has been announced already in the [Client Device List Announce](#Section_3.2.5.1.9) as part of the protocol initialization, this pair is not required. But if the device has been discovered on the client after the initial sequence, this pair of messages is used to announce the device to the server. The client announces only one drive at a time in this case.
+Drives can be announced or deleted at any point in time after the connection has been established. For example, Drive redirection sequence shows the sequence for adding and removing a file system drive. The first message pair, [Client Device List Announce Request](#Section_4.10)/[Server Device Announce Response](#Section_4.2), is optional. If the device has been announced already in the [Client Device List Announce](#Section_4.10) as part of the protocol initialization, this pair is not required. But if the device has been discovered on the client after the initial sequence, this pair of messages is used to announce the device to the server. The client announces only one drive at a time in this case.
 
 The next pair of messages describes a series of I/O request messages exchanged between the client and the server. This set of messages describes the actual file system functionality redirection. Finally, the [Client Drive Device List Remove](#Section_4.11) message announces to the server that the file system drive has been removed from the client, and that all I/O to that device will fail in the future.
 
@@ -398,9 +398,9 @@ The Remote Desktop Protocol: File System Virtual Channel Extension is designed t
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The version numbers for the [**client**](#gt_client) and the [**server**](#gt_server) are sent in the [Server Announce Request (section 2.2.2.2)](#Section_4.3) and [Client Announce Reply (section 2.2.2.3)](#Section_4.4) messages. These messages are the first to be exchanged after the [**static virtual channel**](#gt_static-virtual-channel) transport is established.
+The version numbers for the [**client**](#gt_client) and the [**server**](#gt_server) are sent in the [Server Announce Request (section 2.2.2.2)](#Section_2.2.2.2) and [Client Announce Reply (section 2.2.2.3)](#Section_2.2.2.3) messages. These messages are the first to be exchanged after the [**static virtual channel**](#gt_static-virtual-channel) transport is established.
 
-The capabilities are sent in separate messages: the [Server Core Capability Request (section 2.2.2.7)](#Section_4.8) for the server and the [Client Core Capability Response (section 2.2.2.8)](#Section_4.9) for the client. Both messages have a similar structure, and are a combination of capabilities for each feature that will be transported by the static virtual channel. If a feature does not have a capability subpacket, that feature is not supported by the remote side. The following figure shows the structure of a combined capabilities message.
+The capabilities are sent in separate messages: the [Server Core Capability Request (section 2.2.2.7)](#Section_2.2.2.7) for the server and the [Client Core Capability Response (section 2.2.2.8)](#Section_2.2.2.8) for the client. Both messages have a similar structure, and are a combination of capabilities for each feature that will be transported by the static virtual channel. If a feature does not have a capability subpacket, that feature is not supported by the remote side. The following figure shows the structure of a combined capabilities message.
 
 ![Combined capabilities](media/image3.png)
 
@@ -458,18 +458,18 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| PAKID_CORE_SERVER_ANNOUNCE 0x496E | Server Announce Request, as specified in section [2.2.2.2](#Section_4.3). |
-| PAKID_CORE_CLIENTID_CONFIRM 0x4343 | Client Announce Reply and Server Client ID Confirm, as specified in sections [2.2.2.3](#Section_4.4) and [2.2.2.6](#Section_4.7). |
-| PAKID_CORE_CLIENT_NAME 0x434E | Client Name Request, as specified in section [2.2.2.4](#Section_4.5). |
-| PAKID_CORE_DEVICELIST_ANNOUNCE 0x4441 | Client Device List Announce Request, as specified in section [2.2.2.9](#Section_4.10). |
-| PAKID_CORE_DEVICE_REPLY 0x6472 | Server Device Announce Response, as specified in section [2.2.2.1](#Section_4.2). |
+| PAKID_CORE_SERVER_ANNOUNCE 0x496E | Server Announce Request, as specified in section [2.2.2.2](#Section_2.2.2.2). |
+| PAKID_CORE_CLIENTID_CONFIRM 0x4343 | Client Announce Reply and Server Client ID Confirm, as specified in sections [2.2.2.3](#Section_2.2.2.3) and [2.2.2.6](#Section_2.2.2.6). |
+| PAKID_CORE_CLIENT_NAME 0x434E | Client Name Request, as specified in section [2.2.2.4](#Section_2.2.2.4). |
+| PAKID_CORE_DEVICELIST_ANNOUNCE 0x4441 | Client Device List Announce Request, as specified in section [2.2.2.9](#Section_2.2.2.9). |
+| PAKID_CORE_DEVICE_REPLY 0x6472 | Server Device Announce Response, as specified in section [2.2.2.1](#Section_2.2.2.1). |
 | PAKID_CORE_DEVICE_IOREQUEST 0x4952 | Device I/O Request, as specified in section [2.2.1.4](#Section_2.2.1.4). |
 | PAKID_CORE_DEVICE_IOCOMPLETION 0x4943 | Device I/O Response, as specified in section [2.2.1.5](#Section_2.2.1.5). |
-| PAKID_CORE_SERVER_CAPABILITY 0x5350 | Server Core Capability Request, as specified in section [2.2.2.7](#Section_4.8). |
-| PAKID_CORE_CLIENT_CAPABILITY 0x4350 | Client Core Capability Response, as specified in section [2.2.2.8](#Section_4.9). |
-| PAKID_CORE_DEVICELIST_REMOVE 0x444D | Client Drive Device List Remove, as specified in section [2.2.3.2](#Section_4.11). |
+| PAKID_CORE_SERVER_CAPABILITY 0x5350 | Server Core Capability Request, as specified in section [2.2.2.7](#Section_2.2.2.7). |
+| PAKID_CORE_CLIENT_CAPABILITY 0x4350 | Client Core Capability Response, as specified in section [2.2.2.8](#Section_2.2.2.8). |
+| PAKID_CORE_DEVICELIST_REMOVE 0x444D | Client Drive Device List Remove, as specified in section [2.2.3.2](#Section_2.2.3.2). |
 | PAKID_PRN_CACHE_DATA 0x5043 | Add Printer Cachedata, as specified in [MS-RDPEPC](../MS-RDPEPC/MS-RDPEPC.md) section 2.2.2.3. |
-| PAKID_CORE_USER_LOGGEDON 0x554C | Server User Logged On, as specified in section [2.2.2.5](#Section_4.6). |
+| PAKID_CORE_USER_LOGGEDON 0x554C | Server User Logged On, as specified in section [2.2.2.5](#Section_2.2.2.5). |
 | PAKID_PRN_USING_XPS 0x5543 | Server Printer Set XPS Mode, as specified in [MS-RDPEPC] section 2.2.2.2. |
 
 <a id="Section_2.2.1.2"></a>
@@ -503,7 +503,7 @@ packet-beta
 | CAP_GENERAL_TYPE | GENERAL_CAPABILITY_VERSION_01 0x00000001 GENERAL_CAPABILITY_VERSION_02 0x00000002 | See section 2.2.2.7.1. |
 | CAP_PRINTER_TYPE | PRINT_CAPABILITY_VERSION_01 0x00000001 | Version 1 of printing capabilities. |
 | CAP_PORT_TYPE | PORT_CAPABILITY_VERSION_01 0x00000001 | Version 1 of port capabilities. |
-| CAP_DRIVE_TYPE | DRIVE_CAPABILITY_VERSION_01 0x00000001 DRIVE_CAPABILITY_VERSION_02 0x00000002 | If the client supports DRIVE_CAPABILITY_VERSION_02, then the drive name of the redirected device can be specified by the **DeviceData** field of a DEVICE ANNOUNCE header, as specified in the **DeviceAnnounce** field description of the Client Device List Announce message (section [2.2.3.1](#Section_3.2.5.1.9)). |
+| CAP_DRIVE_TYPE | DRIVE_CAPABILITY_VERSION_01 0x00000001 DRIVE_CAPABILITY_VERSION_02 0x00000002 | If the client supports DRIVE_CAPABILITY_VERSION_02, then the drive name of the redirected device can be specified by the **DeviceData** field of a DEVICE ANNOUNCE header, as specified in the **DeviceAnnounce** field description of the Client Device List Announce message (section [2.2.3.1](#Section_2.2.3.1)). |
 | CAP_SMARTCARD_TYPE | SMARTCARD_CAPABILITY_VERSION_01 0x00000001 | Version 1 of smart card capabilities. |
 
 <a id="Section_2.2.1.2.1"></a>
@@ -526,7 +526,7 @@ packet-beta
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Device Announce Header (DEVICE_ANNOUNCE)
 
-This header is embedded in the [Client Device List Announce](#Section_3.2.5.1.9) message. Its purpose is to describe different types of devices.
+This header is embedded in the [Client Device List Announce](#Section_4.10) message. Its purpose is to describe different types of devices.
 
 ```mermaid
 packet-beta
@@ -547,7 +547,7 @@ packet-beta
 | RDPDR_DTYP_FILESYSTEM 0x00000008<3> | File system device |
 | RDPDR_DTYP_SMARTCARD 0x00000020<4> | Smart card device |
 
-**DeviceId (4 bytes):** A 32-bit unsigned integer that specifies a unique ID that identifies the announced device. This ID MUST be reused if the device is removed by means of the Client Drive Device List Remove packet specified in section [2.2.3.2](#Section_4.11).
+**DeviceId (4 bytes):** A 32-bit unsigned integer that specifies a unique ID that identifies the announced device. This ID MUST be reused if the device is removed by means of the Client Drive Device List Remove packet specified in section [2.2.3.2](#Section_2.2.3.2).
 
 **PreferredDosName (8 bytes):** A string of [**ASCII**](#gt_ascii) characters (with a maximum length of eight characters) that represents the name of the device as it appears on the client. This field MUST be null-terminated, so the maximum device name is 7 characters long. The following characters are considered invalid for the **PreferredDosName** field:
 
@@ -580,7 +580,7 @@ packet-beta
 
 **Header (4 bytes):** An [RDPDR_HEADER](#Section_2.2.1.1) header. The **Component** field MUST be set to RDPDR_CTYP_CORE, and the **PacketId** field MUST be set to PAKID_CORE_DEVICE_IOREQUEST.
 
-**DeviceId (4 bytes):** A 32-bit unsigned integer that is a unique ID. The value MUST match the **DeviceId** value in the [Client Device List Announce Request (section 2.2.2.9)](#Section_4.10).
+**DeviceId (4 bytes):** A 32-bit unsigned integer that is a unique ID. The value MUST match the **DeviceId** value in the [Client Device List Announce Request (section 2.2.2.9)](#Section_2.2.2.9).
 
 **FileId (4 bytes):** A 32-bit unsigned integer that specifies a unique ID retrieved from the [Device Create Response (section 2.2.1.5.1)](#Section_2.2.1.5.1).
 
@@ -1064,7 +1064,7 @@ packet-beta
 
 **protocolMajorVersion (2 bytes):** A 16-bit unsigned integer. This field MUST be set to 1.
 
-**protocolMinorVersion (2 bytes):** A 16-bit unsigned integer. This field MUST be set to one of the values described by the **VersionMinor** field of the [Server Client ID Confirm (section 2.2.2.6)](#Section_4.7) packet.
+**protocolMinorVersion (2 bytes):** A 16-bit unsigned integer. This field MUST be set to one of the values described by the **VersionMinor** field of the [Server Client ID Confirm (section 2.2.2.6)](#Section_2.2.2.6) packet.
 
 **ioCode1 (4 bytes):** A 32-bit unsigned integer that identifies a bitmask of the supported I/O requests for the given device. If the bit is set, the I/O request is allowed. The requests are identified by the **MajorFunction** field in the [Device I/O Request (section 2.2.1.4)](#Section_2.2.1.4) header. This field MUST be set to a valid combination of the following values.
 
@@ -1158,7 +1158,7 @@ packet-beta
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 Client Core Capability Response (DR_CORE_CAPABILITY_RSP)
 
-This packet is identical to [Server Core Capability Request (section 2.2.2.7)](#Section_4.8) with the exception that the **PacketId** field in [RDPDR_HEADER (section 2.2.1.1)](#Section_2.2.1.1) MUST be set to PAKID_CORE_CLIENT_CAPABILITY.
+This packet is identical to [Server Core Capability Request (section 2.2.2.7)](#Section_2.2.2.7) with the exception that the **PacketId** field in [RDPDR_HEADER (section 2.2.1.1)](#Section_2.2.1.1) MUST be set to PAKID_CORE_CLIENT_CAPABILITY.
 
 <a id="Section_2.2.2.9"></a>
 #### 2.2.2.9 Client Device List Announce Request (DR_CORE_DEVICELIST_ANNOUNCE_REQ)
@@ -1217,7 +1217,7 @@ packet-beta
 
 **DeviceCount (4 bytes):** A 32-bit unsigned integer that specifies the number of entries in the **DeviceIds** field.
 
-**DeviceIds (variable):** A variable-length array of 32-bit unsigned integers that specifies device IDs. The IDs specified in this array match the IDs specified in the [Client Device List Announce (section 2.2.3.1)](#Section_3.2.5.1.9) packet.
+**DeviceIds (variable):** A variable-length array of 32-bit unsigned integers that specifies device IDs. The IDs specified in this array match the IDs specified in the [Client Device List Announce (section 2.2.3.1)](#Section_2.2.3.1) packet.
 
 **Note** The client can send the DR_DEVICELIST_REMOVE message for devices that are removed after a session is connected. The server can accept the DR_DEVICE_REMOVE message for any removed device, including file system and port devices. The server can also accept reused DeviceIds of devices that have been removed, providing the implementation uses the DR_DEVICE_REMOVE message to do so.
 
@@ -1236,7 +1236,7 @@ packet-beta
   0-63: "DeviceCreateRequest (variable)"
 ```
 
-**DeviceCreateRequest (variable):** A [DR_CREATE_REQ](#Section_2.2.1.4.1) header. The **PathLength** and **Path** fields contain the file name of the file to be created. The file name does not contain a drive letter, which means that the drive is specified by the **DeviceId** field of the request. The **DeviceId** is associated with a drive letter when the device is announced in the [DR_DEVICELIST_ANNOUNCE (section 2.2.3.1)](#Section_3.2.5.1.9) message. The drive letter is contained in the **PreferredDosName** field.
+**DeviceCreateRequest (variable):** A [DR_CREATE_REQ](#Section_2.2.1.4.1) header. The **PathLength** and **Path** fields contain the file name of the file to be created. The file name does not contain a drive letter, which means that the drive is specified by the **DeviceId** field of the request. The **DeviceId** is associated with a drive letter when the device is announced in the [DR_DEVICELIST_ANNOUNCE (section 2.2.3.1)](#Section_2.2.3.1) message. The drive letter is contained in the **PreferredDosName** field.
 
 <a id="Section_2.2.3.3.2"></a>
 ##### 2.2.3.3.2 Server Close Drive Request (DR_DRIVE_CLOSE_REQ)
@@ -1248,7 +1248,7 @@ packet-beta
   0-95: "DeviceCloseRequest (56 bytes)"
 ```
 
-**DeviceCloseRequest (56 bytes):** A [DR_CLOSE_REQ](#Section_2.2.1.4.2) header. This request closes a file opened by a [Server Create Drive Request (section 2.2.3.3.1)](#Section_4.12).
+**DeviceCloseRequest (56 bytes):** A [DR_CLOSE_REQ](#Section_2.2.1.4.2) header. This request closes a file opened by a [Server Create Drive Request (section 2.2.3.3.1)](#Section_2.2.3.3.1).
 
 <a id="Section_2.2.3.3.3"></a>
 ##### 2.2.3.3.3 Server Drive Read Request (DR_DRIVE_READ_REQ)
@@ -1574,7 +1574,7 @@ packet-beta
 <a id="Section_2.2.3.4.1"></a>
 ##### 2.2.3.4.1 Client Drive Create Response (DR_DRIVE_CREATE_RSP)
 
-This message is sent by the client as a response to the [Server Create Drive Request (section 2.2.3.3.1)](#Section_4.12).
+This message is sent by the client as a response to the [Server Create Drive Request (section 2.2.3.3.1)](#Section_2.2.3.3.1).
 
 ```mermaid
 packet-beta
@@ -1592,7 +1592,7 @@ packet-beta
 <a id="Section_2.2.3.4.2"></a>
 ##### 2.2.3.4.2 Client Drive Close Response (DR_DRIVE_CLOSE_RSP)
 
-This message is sent by the client as a response to the [Server Close Drive Request (section 2.2.3.3.2)](#Section_4.14).
+This message is sent by the client as a response to the [Server Close Drive Request (section 2.2.3.3.2)](#Section_2.2.3.3.2).
 
 ```mermaid
 packet-beta
@@ -1607,7 +1607,7 @@ packet-beta
 <a id="Section_2.2.3.4.3"></a>
 ##### 2.2.3.4.3 Client Drive Read Response (DR_DRIVE_READ_RSP)
 
-This message is sent by the client as a response to the [Server Drive Read Request (section 2.2.3.3.3)](#Section_4.16).
+This message is sent by the client as a response to the [Server Drive Read Request (section 2.2.3.3.3)](#Section_2.2.3.3.3).
 
 ```mermaid
 packet-beta
@@ -1619,7 +1619,7 @@ packet-beta
 <a id="Section_2.2.3.4.4"></a>
 ##### 2.2.3.4.4 Client Drive Write Response (DR_DRIVE_WRITE_RSP)
 
-This message is sent by the client as a response to the [Server Drive Write Request (section 2.2.3.3.4)](#Section_4.18).
+This message is sent by the client as a response to the [Server Drive Write Request (section 2.2.3.3.4)](#Section_2.2.3.3.4).
 
 ```mermaid
 packet-beta
@@ -1631,19 +1631,19 @@ packet-beta
 <a id="Section_2.2.3.4.5"></a>
 ##### 2.2.3.4.5 Client Drive Control Response (DR_DRIVE_CONTROL_RSP)
 
-This message is sent by the client as a response to the [Server Drive Control Request (section 2.2.3.3.5)](#Section_4.20).
+This message is sent by the client as a response to the [Server Drive Control Request (section 2.2.3.3.5)](#Section_2.2.3.3.5).
 
 ```mermaid
 packet-beta
   0-63: "DeviceIoResponse (variable)"
 ```
 
-**DeviceIoResponse (variable):** Returns the result of DR_DRIVE_CONROL_REQ; it is the same as the common [Device Control Response (section 2.2.1.5.5)](../MS-FSCC/MS-FSCC.md). The content of the **OutputBuffer** field is described in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.3 as a reply type message.
+**DeviceIoResponse (variable):** Returns the result of DR_DRIVE_CONROL_REQ; it is the same as the common [Device Control Response (section 2.2.1.5.5)](#Section_2.2.1.5.5). The content of the **OutputBuffer** field is described in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.3 as a reply type message.
 
 <a id="Section_2.2.3.4.6"></a>
 ##### 2.2.3.4.6 Client Drive Query Volume Information Response (DR_DRIVE_QUERY_VOLUME_INFORMATION_RSP)
 
-This message is sent by the client as a response to the [Server Drive Query Volume Information Request (section 2.2.3.3.6)](#Section_4.22).
+This message is sent by the client as a response to the [Server Drive Query Volume Information Request (section 2.2.3.3.6)](#Section_2.2.3.3.6).
 
 ```mermaid
 packet-beta
@@ -1664,7 +1664,7 @@ packet-beta
 <a id="Section_2.2.3.4.7"></a>
 ##### 2.2.3.4.7 Client Drive Set Volume Information Response (DR_DRIVE_SET_VOLUME_INFORMATION_RSP)
 
-This message is sent by the client as a response to the [Server Drive Set Volume Information Request (section 2.2.3.3.7)](#Section_4.24).
+This message is sent by the client as a response to the [Server Drive Set Volume Information Request (section 2.2.3.3.7)](#Section_2.2.3.3.7).
 
 ```mermaid
 packet-beta
@@ -1679,7 +1679,7 @@ packet-beta
 <a id="Section_2.2.3.4.8"></a>
 ##### 2.2.3.4.8 Client Drive Query Information Response (DR_DRIVE_QUERY_INFORMATION_RSP)
 
-This message is sent by the client as a response to the [Server Drive Query Information Request (section 2.2.3.3.8)](#Section_4.26).
+This message is sent by the client as a response to the [Server Drive Query Information Request (section 2.2.3.3.8)](#Section_2.2.3.3.8).
 
 ```mermaid
 packet-beta
@@ -1697,7 +1697,7 @@ packet-beta
 <a id="Section_2.2.3.4.9"></a>
 ##### 2.2.3.4.9 Client Drive Set Information Response (DR_DRIVE_SET_INFORMATION_RSP)
 
-This message is sent by the client as a response to the [Server Drive Set Information Request (section 2.2.3.3.9)](#Section_4.28).
+This message is sent by the client as a response to the [Server Drive Set Information Request (section 2.2.3.3.9)](#Section_2.2.3.3.9).
 
 ```mermaid
 packet-beta
@@ -1715,7 +1715,7 @@ packet-beta
 <a id="Section_2.2.3.4.10"></a>
 ##### 2.2.3.4.10 Client Drive Query Directory Response (DR_DRIVE_QUERY_DIRECTORY_RSP)
 
-This message is sent by the client as a response to the [Server Drive Query Directory Request (section 2.2.3.3.10)](#Section_4.30).
+This message is sent by the client as a response to the [Server Drive Query Directory Request (section 2.2.3.3.10)](#Section_2.2.3.3.10).
 
 ```mermaid
 packet-beta
@@ -1736,7 +1736,7 @@ packet-beta
 <a id="Section_2.2.3.4.11"></a>
 ##### 2.2.3.4.11 Client Drive NotifyChange Directory Response (DR_DRIVE_NOTIFY_CHANGE_DIRECTORY_RSP)
 
-This message is sent by the client as a response to the [Server Drive NotifyChange Directory Request (section 2.2.3.3.11)](#Section_4.32).
+This message is sent by the client as a response to the [Server Drive NotifyChange Directory Request (section 2.2.3.3.11)](#Section_2.2.3.3.11).
 
 ```mermaid
 packet-beta
@@ -1750,14 +1750,14 @@ packet-beta
 
 **Length (4 bytes):** A 32-bit unsigned integer that specifies the number of bytes in the **Buffer** field.
 
-**Buffer (variable):** A variable-length array of bytes, in which the number of bytes is specified in the **Length** field. This field has the same meaning as the **Buffer** field in the SMB2 CHANGE_NOTIFY Response message specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 2.2.36. This buffer MUST be empty when the [Server Close Drive Request (section 2.2.3.3.2)](#Section_4.14) message has been issued and no drive-specific events have occurred.
+**Buffer (variable):** A variable-length array of bytes, in which the number of bytes is specified in the **Length** field. This field has the same meaning as the **Buffer** field in the SMB2 CHANGE_NOTIFY Response message specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 2.2.36. This buffer MUST be empty when the [Server Close Drive Request (section 2.2.3.3.2)](#Section_2.2.3.3.2) message has been issued and no drive-specific events have occurred.
 
 **Padding (1 byte):** An optional, 8-bit unsigned integer intended to allow the client minor flexibility in determining the overall packet length. This field is unused and MUST be ignored.
 
 <a id="Section_2.2.3.4.12"></a>
 ##### 2.2.3.4.12 Client Drive Lock Control Response (DR_DRIVE_LOCK_RSP)
 
-This message is sent by the client as a response to the [Server Drive Lock Control Request (section 2.2.3.3.12)](#Section_4.34).
+This message is sent by the client as a response to the [Server Drive Lock Control Request (section 2.2.3.3.12)](#Section_2.2.3.3.12).
 
 ```mermaid
 packet-beta
@@ -1782,7 +1782,7 @@ The following sections specify protocol details, including abstract data models 
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model, as long as their external behavior is consistent with that described in this document.
 
-**ClientId**: Although this field is negotiated in the [Server Announce Request (section 2.2.2.2)](#Section_4.3) message, the [Client Announce Reply (section 2.2.2.3)](#Section_4.4) message and the [Server Client ID Confirm (section 2.2.2.6)](#Section_4.7) message, the protocol never processes this field after the ID has been established.
+**ClientId**: Although this field is negotiated in the [Server Announce Request (section 2.2.2.2)](#Section_2.2.2.2) message, the [Client Announce Reply (section 2.2.2.3)](#Section_2.2.2.3) message and the [Server Client ID Confirm (section 2.2.2.6)](#Section_2.2.2.6) message, the protocol never processes this field after the ID has been established.
 
 **DeviceId**: A unique ID that is maintained by both the [**client**](#gt_client) and the [**server**](#gt_server) for each device within a session. This unique ID is generated by the client and sent to the server in the [Device Announce Header (section 2.2.1.3)](#Section_2.2.1.3). For subsequent operations on the devices, both the client and server use this ID to refer to the device.
 
@@ -1790,9 +1790,9 @@ This section describes a conceptual model of possible data organization that an 
 
 **CompletionId**: For I/O request calls, the server generates this unique ID and sends it to the client in the Device I/O Request (section 2.2.1.4). The client and server use this ID, in addition to the **DeviceId**, to refer to the request in subsequent messages. When a request is sent to the client, the server adds it to a list of outstanding requests. When the client completes the request, or when the request is canceled from the server by issuing a [Device Close Request (section 2.2.1.4.2)](#Section_2.2.1.4.2), the server removes the entry for the request from the outstanding requests list. This ID is valid until a [Device I/O Response (section 2.2.1.5)](#Section_2.2.1.5) packet is sent from the client to the server. A response is matched to a request if both the **CompletionId** and the **DeviceId** fields are equal.
 
-**ResultCode**: The server generates these status codes in a [Server Device Announce Response (section 2.2.2.1)](#Section_4.2) message. If the status code is not successful, the device is not redirected and I/O operations are not issued by the server on that device.
+**ResultCode**: The server generates these status codes in a [Server Device Announce Response (section 2.2.2.1)](#Section_2.2.2.1) message. If the status code is not successful, the device is not redirected and I/O operations are not issued by the server on that device.
 
-**ComputerName**: This field is sent by the client in a [Client Name Request (section 2.2.2.4)](#Section_4.5) message, but the **ComputerName** field does not participate in any protocol decision. Typically, this field is used for display purposes on the server.
+**ComputerName**: This field is sent by the client in a [Client Name Request (section 2.2.2.4)](#Section_2.2.2.4) message, but the **ComputerName** field does not participate in any protocol decision. Typically, this field is used for display purposes on the server.
 
 **Capabilities**: The client and server store the capability packets that they receive. Based on the fields of the capability packets, some packets will not be supported, as specified in this protocol.
 
@@ -1806,16 +1806,16 @@ No timers are used.
 
 A virtual channel MUST be established to facilitate protocol operation. The [**static virtual channel**](#gt_static-virtual-channel) is initialized as part of the basic Remote Desktop Protocol: File System Virtual Channel Extension initialization, by sending and processing a Virtual Channel PDU, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 3.1.5.2. After establishing the virtual channel this protocol continues its initialization by executing these steps:
 
-- The server MUST send Server Announce Request (section [2.2.2.2](#Section_4.3)): this sets server version and is indication to the client to start the client sequence.
-- The client MUST reply with Client Announce Reply (section [2.2.2.3](#Section_4.4)) immediately followed by Client Name Request (section [2.2.2.4](#Section_4.5)): this establishes client version and name.
-- Upon receiving Client Name Request, the server MUST send Server Core Capability Request (section [2.2.2.7](#Section_4.8)) followed by Server Client ID Confirm ([2.2.2.6](#Section_4.7)): this establishes server capabilities and confirms client version.
-- Upon receiving Server Client ID Confirm, the client MUST send Client Core Capability Response (section [2.2.2.8](#Section_4.9)) and Client Device List Announce Request (section [2.2.2.9](#Section_4.10)): this establishes client capabilities and list of devices to be redirected.
+- The server MUST send Server Announce Request (section [2.2.2.2](#Section_2.2.2.2)): this sets server version and is indication to the client to start the client sequence.
+- The client MUST reply with Client Announce Reply (section [2.2.2.3](#Section_2.2.2.3)) immediately followed by Client Name Request (section [2.2.2.4](#Section_2.2.2.4)): this establishes client version and name.
+- Upon receiving Client Name Request, the server MUST send Server Core Capability Request (section [2.2.2.7](#Section_2.2.2.7)) followed by Server Client ID Confirm ([2.2.2.6](#Section_2.2.2.6)): this establishes server capabilities and confirms client version.
+- Upon receiving Server Client ID Confirm, the client MUST send Client Core Capability Response (section [2.2.2.8](#Section_2.2.2.8)) and Client Device List Announce Request (section [2.2.2.9](#Section_2.2.2.9)): this establishes client capabilities and list of devices to be redirected.
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-The announcement of different devices can be triggered by an event, such as when a user has successfully logged on to a terminal server. This behavior ensures that the required devices are visible in the different stages of the logon process. For example, when the protocol is first established, only the smart card devices are announced, because only those devices are required for the logon process. After logon completes, the rest of the devices can be announced to the server. The logged-on event triggers the server to send a [Server User Logged On (section 2.2.2.5)](#Section_4.6) packet, which the client can use as an indication that the server is logged on.
+The announcement of different devices can be triggered by an event, such as when a user has successfully logged on to a terminal server. This behavior ensures that the required devices are visible in the different stages of the logon process. For example, when the protocol is first established, only the smart card devices are announced, because only those devices are required for the logon process. After logon completes, the rest of the devices can be announced to the server. The logged-on event triggers the server to send a [Server User Logged On (section 2.2.2.5)](#Section_2.2.2.5) packet, which the client can use as an indication that the server is logged on.
 
-The announcement of additional drives by the client is triggered when devices are added to the client machine. After the devices are added to the client machine, the client SHOULD announce the new drives to the server using a [Client Device List Announce (section 2.2.3.1)](#Section_3.2.5.1.9) message. When the device is removed from the client, the client sends a [Client Drive Device List Remove (section 2.2.3.2)](#Section_4.11) message.
+The announcement of additional drives by the client is triggered when devices are added to the client machine. After the devices are added to the client machine, the client SHOULD announce the new drives to the server using a [Client Device List Announce (section 2.2.3.1)](#Section_2.2.3.1) message. When the device is removed from the client, the client sends a [Client Drive Device List Remove (section 2.2.3.2)](#Section_2.2.3.2) message.
 
 I/O requests are generated in response to I/O calls that server applications make on the redirected device.
 
@@ -1825,7 +1825,7 @@ I/O requests are generated in response to I/O calls that server applications mak
 The **DeviceId** field is valid if all of the following conditions are met:
 
 - The **DeviceId** field has been specified in a packet that contains the [Device Announce Header (section 2.2.1.3)](#Section_2.2.1.3).
-- No [Client Drive Device List Remove (section 2.2.3.2)](#Section_4.11) has been sent for this **DeviceId**.
+- No [Client Drive Device List Remove (section 2.2.3.2)](#Section_2.2.3.2) has been sent for this **DeviceId**.
 The **FileId** field is valid if all of the following conditions are met:
 
 - A [Device Create Response](#Section_2.2.1.5.1) has been issued with that **FileId**.
@@ -1934,7 +1934,7 @@ This request is initiated by the server and is the first packet that goes across
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Sending a Client Announce Reply Message
 
-The client MUST send this reply immediately after receiving the [Server Announce Request](#Section_4.3) packet. It sends its own version number in the **VersionMajor** and **VersionMinor** fields. If the value of **VersionMinor** field from the Server Announce Request message was at least 12, the client MUST populate the **ClientId** field of its reply with the same value supplied by the server in the **ClientId** field. Otherwise, the client MUST provide a new, unique value for the **ClientId** field by generating a 32-bit random number. The **ClientId** is valid until a [Client Drive Device List Remove](#Section_4.11) packet is sent by the client or the protocol channel is disconnected. After the Client Drive Device List Remove packet is sent, the **ClientIds** in that packet MUST be reused in a subsequent [Client Device List Announce](#Section_3.2.5.1.9) packet.
+The client MUST send this reply immediately after receiving the [Server Announce Request](#Section_4.3) packet. It sends its own version number in the **VersionMajor** and **VersionMinor** fields. If the value of **VersionMinor** field from the Server Announce Request message was at least 12, the client MUST populate the **ClientId** field of its reply with the same value supplied by the server in the **ClientId** field. Otherwise, the client MUST provide a new, unique value for the **ClientId** field by generating a 32-bit random number. The **ClientId** is valid until a [Client Drive Device List Remove](#Section_4.11) packet is sent by the client or the protocol channel is disconnected. After the Client Drive Device List Remove packet is sent, the **ClientIds** in that packet MUST be reused in a subsequent [Client Device List Announce](#Section_4.10) packet.
 
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 Sending a Client Name Request Message
@@ -1980,7 +1980,7 @@ This section describes data packets that are specific to drive (file system) red
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 Sending a Client Device List Announce Message
 
-The client MAY choose to send announce messages for each file system individually, all in one packet, or mixed with other devices. In all cases, the packet SHOULD start with a standard header, as specified in section [2.2.3.1](#Section_3.2.5.1.9); and the **DeviceType** in each announce sub-packet MUST be set to RDPDR_DTYP_FILESYSTEM.<13> The client MAY choose to send this packet if a new file system appears at any time, according to the rules defined in section [3.2.5.1.9](#Section_3.2.5.1.9).
+The client MAY choose to send announce messages for each file system individually, all in one packet, or mixed with other devices. In all cases, the packet SHOULD start with a standard header, as specified in section [2.2.3.1](#Section_2.2.3.1); and the **DeviceType** in each announce sub-packet MUST be set to RDPDR_DTYP_FILESYSTEM.<13> The client MAY choose to send this packet if a new file system appears at any time, according to the rules defined in section [3.2.5.1.9](#Section_3.2.5.1.9).
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Sending a Client Drive Device List Remove Message
@@ -2109,8 +2109,8 @@ This message is processed according to the rules defined in section [3.1.5.1](#S
 
 This packet is generated according to the rules defined in section [3.1.5.1](#Section_3.1.5.1). There are two distinguishable cases in which this response can indicate success:
 
-- When any of the conditions requested in the [Server Drive NotifyChange Directory Request (section 2.2.3.3.11)](#Section_4.32) message are met for an event on the file system. In this case, the **Buffer** field contains the appropriate indication for the events.
-- When the file is closed by a [Server Close Drive Request (section 2.2.3.3.2)](#Section_4.14). In this case, the **Buffer** field is empty.
+- When any of the conditions requested in the [Server Drive NotifyChange Directory Request (section 2.2.3.3.11)](#Section_2.2.3.3.11) message are met for an event on the file system. In this case, the **Buffer** field contains the appropriate indication for the events.
+- When the file is closed by a [Server Close Drive Request (section 2.2.3.3.2)](#Section_2.2.3.3.2). In this case, the **Buffer** field is empty.
 <a id="Section_3.2.5.2.25"></a>
 ##### 3.2.5.2.25 Processing a Server Drive Lock Control Request Message
 
@@ -2163,7 +2163,7 @@ Higher-layer triggered events are specified in section [3.1.4](#Section_3.1.4).
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Sending a Server Device Announce Response Message
 
-After the server initializes its virtual [**file system drivers**](#gt_97348f88-b452-4d16-8215-99e44b209dd7) for each announced device in the [Client Device List Announce Request](#Section_3.2.5.1.9), the server MUST send a [Server Device Announce Response](#Section_4.2) for each device. The server initializes **ResultCode** with the appropriate NTSTATUS code of the virtual file system driver initialization. NTSTATUS codes are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.
+After the server initializes its virtual [**file system drivers**](#gt_97348f88-b452-4d16-8215-99e44b209dd7) for each announced device in the [Client Device List Announce Request](#Section_4.10), the server MUST send a [Server Device Announce Response](#Section_4.2) for each device. The server initializes **ResultCode** with the appropriate NTSTATUS code of the virtual file system driver initialization. NTSTATUS codes are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.
 
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 Sending a Server Announce Request Message
@@ -2219,12 +2219,12 @@ The server initializes virtual [**device drivers**](#gt_device-driver) for each 
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Processing a Client List Announce Message
 
-The server creates a virtual [**file system driver**](#gt_97348f88-b452-4d16-8215-99e44b209dd7) for each file system device. If this message contains **DeviceIds** that were previously sent in a [Client Device List Announce](#Section_3.2.5.1.9) message and the **DeviceIds** have not been invalidated by a [Client Drive Device List Remove](#Section_4.11) message, the protocol MUST be terminated.
+The server creates a virtual [**file system driver**](#gt_97348f88-b452-4d16-8215-99e44b209dd7) for each file system device. If this message contains **DeviceIds** that were previously sent in a [Client Device List Announce](#Section_4.10) message and the **DeviceIds** have not been invalidated by a [Client Drive Device List Remove](#Section_4.11) message, the protocol MUST be terminated.
 
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Processing a Client Drive Device List Remove Message
 
-The server removes the virtual [**file system driver**](#gt_97348f88-b452-4d16-8215-99e44b209dd7) for the specified device. If the specified device was not previously announced in a [Client Device List Announce](#Section_3.2.5.1.9) message, the Processing a Client Drive Device List Remove message MUST be ignored.
+The server removes the virtual [**file system driver**](#gt_97348f88-b452-4d16-8215-99e44b209dd7) for the specified device. If the specified device was not previously announced in a [Client Device List Announce](#Section_4.10) message, the Processing a Client Drive Device List Remove message MUST be ignored.
 
 <a id="Section_3.3.5.2.3"></a>
 ##### 3.3.5.2.3 Sending a Server Create Drive Request Message
@@ -3939,7 +3939,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <5> Section 2.2.1.4: In the Windows implementation, the **MinorFunction** field is not initialized when the **MajorFunction** field is set to IRP_MJ_DEVICE_CONTROL.
 
-<6> Section 2.2.1.4.4: If the client did not advertise a minor version of at least 0x000D in the Client Announce Reply (section [2.2.2.3](#Section_4.4)), then it is not possible to determine whether an offset of 0x7FFFFFFF is, in fact, an offset or an indication to treat the write request as an append operation.
+<6> Section 2.2.1.4.4: If the client did not advertise a minor version of at least 0x000D in the Client Announce Reply (section [2.2.2.3](#Section_2.2.2.3)), then it is not possible to determine whether an offset of 0x7FFFFFFF is, in fact, an offset or an indication to treat the write request as an append operation.
 
 <7> Section 2.2.1.5.1: All Windows versions skip the **Information** field if **IoStatus** is set to 0x00000000 and **DeviceId** has **DeviceType** set to RDPDR_DTYP_PRINT.
 

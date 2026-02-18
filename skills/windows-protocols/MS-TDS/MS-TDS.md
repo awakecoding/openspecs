@@ -419,7 +419,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-SMP] Microsoft Corporation, "[Session Multiplex Protocol](../MC-SMP/MC-SMP.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MS-SSCLRT] Microsoft Corporation, "[Microsoft SQL Server CLR Types Serialization Formats](../MS-SSCLRT/MS-SSCLRT.md)".
 
@@ -632,13 +632,13 @@ Messages sent from the client to the server are as follows:
 
 - [Pre-Login](#Section_2.2.1.1)
 - [Login](#Section_2.2.1.2)
-- [Federated Authentication Token](#Section_2.2.6.3)
+- [Federated Authentication Token](#Section_2.2.1.3)
 - [SQL Batch](#Section_2.2.1.4)
 - [Bulk Load](#Section_4.12)
 - [Remote Procedure Call](#Section_2.2.1.6)
 - [Attention](#Section_2.2.1.7)
-- [Transaction Manager Request](#Section_2.2.6.9)
-These messages are briefly described in the sections that follow. Detailed descriptions of message contents are in section [2.2.6](#Section_2.2.3.1).
+- [Transaction Manager Request](#Section_4.13)
+These messages are briefly described in the sections that follow. Detailed descriptions of message contents are in section [2.2.6](#Section_2.2.6).
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Pre-Login
@@ -681,7 +681,7 @@ To execute a [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) on
 
 The client can interrupt and cancel the current request by sending an **Attention** message. This is also known as [**out-of-band**](#gt_out-of-band) data, but any TDS packet that is being sent MUST be finished before sending the **Attention** message. After the client sends an **Attention** message, the client MUST read until it receives an **Attention** acknowledgment.
 
-If a complete request has been sent to the server, sending a cancel requires sending an **Attention** packet. An example of this behavior is if the client has already sent a request, which has the last packet with EOM bit (0x01) set in status. The **Attention** packet is the only way to interrupt a complete request that has already been sent to the server. For more information, see section [4.19.2](#Section_2.2.1.7).
+If a complete request has been sent to the server, sending a cancel requires sending an **Attention** packet. An example of this behavior is if the client has already sent a request, which has the last packet with EOM bit (0x01) set in status. The **Attention** packet is the only way to interrupt a complete request that has already been sent to the server. For more information, see section [4.19.2](#Section_4.19.2).
 
 If a complete request has not been sent to the server, the client MUST send the next packet with both the ignore bit (0x02) and EOM bit (0x01) set in the status to cancel the request. An example of this behavior is if one or more packets have been sent but the last packet with EOM bit (0x01) set in status has not been sent. Setting the ignore and EOM bits terminates the current request, and the server MUST ignore the current request. When the ignore and EOM bits are set, the server does not send an attention acknowledgment, but instead returns a [**table response**](#gt_table-response) with a single DONE token (section [2.2.7.6](#Section_2.2.7.6)) that has a status of DONE_ERROR to indicate that the incoming request was ignored. For more details about the packet header status code, see section [2.2.3.1.2](#Section_2.2.3.1.2).
 
@@ -696,15 +696,15 @@ The client can request that the connection enlist in a transaction as described 
 Messages sent from the server to the client are the following:
 
 - [Pre-Login Response](#Section_2.2.2.1)
-- [Login Response](#Section_2.2.2.2)
+- [Login Response](#Section_4.4)
 - [Federated Authentication Information](#Section_2.2.2.3)
 - [Row Data](#Section_2.2.2.4)
 - [Return Status](#Section_2.2.2.5)
 - [Return Parameters](#Section_2.2.2.6)
 - [Response Completion](#Section_2.2.2.7)
 - [Error and Info](#Section_2.2.2.8)
-- [Attention Acknowledgement](#Section_2.2.1.7)
-These messages are briefly described in the sections that follow. Detailed descriptions of message contents are in section [2.2.6](#Section_2.2.3.1) and section [2.2.7](#Section_2.2.7).
+- [Attention Acknowledgement](#Section_2.2.2.9)
+These messages are briefly described in the sections that follow. Detailed descriptions of message contents are in section [2.2.6](#Section_2.2.6) and section [2.2.7](#Section_2.2.7).
 
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 Pre-Login Response
@@ -807,9 +807,9 @@ The following sections provide a detailed description of each item within the pa
 | 17 | SSPI | Yes |
 | 18 | Pre-Login | Yes |
 
-If an unknown **Type** is specified, the message receiver SHOULD disconnect the connection. If a valid **Type** is specified, but is unexpected (per section [3](#Section_1.3)), the message receiver SHOULD disconnect the connection. This applies to both the client and the server. For example, the server could disconnect the connection if the server receives a message with **Type** equal 16 when the connection is already logged in.
+If an unknown **Type** is specified, the message receiver SHOULD disconnect the connection. If a valid **Type** is specified, but is unexpected (per section [3](#Section_3)), the message receiver SHOULD disconnect the connection. This applies to both the client and the server. For example, the server could disconnect the connection if the server receives a message with **Type** equal 16 when the connection is already logged in.
 
-The following table highlights which messages, as described previously in sections [2.2.1](#Section_1.3) and [2.2.2](#Section_2.2.2), correspond to which packet header type.
+The following table highlights which messages, as described previously in sections [2.2.1](#Section_2.2.1) and [2.2.2](#Section_2.2.2), correspond to which packet header type.
 
 | Message type | Client or server message | Packet header type |
 | --- | --- | --- |
@@ -820,10 +820,10 @@ The following table highlights which messages, as described previously in sectio
 | [Bulk Load](#Section_4.12) | Client | 7 |
 | [RPC](#Section_2.2.1.6) | Client | 3 |
 | [Attention](#Section_2.2.1.7) | Client | 6 |
-| [Transaction Manager Request](#Section_2.2.6.9) | Client | 14 |
+| [Transaction Manager Request](#Section_4.13) | Client | 14 |
 | [FeatureExtAck](#Section_2.2.7.11) | Server | 4 |
 | [Pre-Login Response](#Section_2.2.2.1) | Server | 4 |
-| [Login Response](#Section_2.2.2.2) | Server | 4 |
+| [Login Response](#Section_4.4) | Server | 4 |
 | [Federated Authentication Information](#Section_2.2.7.12) | Server | 4 |
 | [Row Data](#Section_2.2.2.4) | Server | 4 |
 | [Return Status](#Section_2.2.2.5) | Server | 4 |
@@ -831,7 +831,7 @@ The following table highlights which messages, as described previously in sectio
 | [Response Completion](#Section_2.2.2.7) | Server | 4 |
 | [Session State](#Section_2.2.7.21) | Server | 4 |
 | [Error and Info](#Section_2.2.2.8) | Server | 4 |
-| [Attention Acknowledgement](#Section_2.2.1.7) | Server | 4 |
+| [Attention Acknowledgement](#Section_2.2.2.9) | Server | 4 |
 
 <a id="Section_2.2.3.1.2"></a>
 ##### 2.2.3.1.2 Status
@@ -882,7 +882,7 @@ If a stream spans more than one packet, then the EOM bit of the packet header **
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Packet Data Token and Tokenless Data Streams
 
-The messages contained in packet data that pass between the client and the server can be one of two types: a "token stream" or a "tokenless stream". A token stream consists of one or more "tokens" each followed by some token-specific data. A "token" is a single byte identifier that is used to describe the data that follows it and contains information such as token data type, token data length, and so on. Tokenless streams are used for simple messages. Messages that might require a more detailed description of the data within it are sent as a token stream. The following table highlights which messages, as described previously in sections [2.2.1](#Section_1.3) and [2.2.2](#Section_2.2.2), use token streams and which do not.
+The messages contained in packet data that pass between the client and the server can be one of two types: a "token stream" or a "tokenless stream". A token stream consists of one or more "tokens" each followed by some token-specific data. A "token" is a single byte identifier that is used to describe the data that follows it and contains information such as token data type, token data length, and so on. Tokenless streams are used for simple messages. Messages that might require a more detailed description of the data within it are sent as a token stream. The following table highlights which messages, as described previously in sections [2.2.1](#Section_2.2.1) and [2.2.2](#Section_2.2.2), use token streams and which do not.
 
 | Message type | Client or server message | Token stream? |
 | --- | --- | --- |
@@ -1153,7 +1153,7 @@ For a SortId==0 collation, the LCID bits correspond to a LocaleId as defined by 
 <a id="Section_2.2.5.2.1"></a>
 ##### 2.2.5.2.1 Unknown Length Data Streams
 
-Unknown length data streams can be used by tokenless data streams. It is a stream of bytes. The number of bytes within the data stream is defined in the packet header as specified in section [2.2.3.1](#Section_1.3).
+Unknown length data streams can be used by tokenless data streams. It is a stream of bytes. The number of bytes within the data stream is defined in the packet header as specified in section [2.2.3.1](#Section_2.2.3.1).
 
 BYTESTREAM = *BYTE
 
@@ -2433,7 +2433,7 @@ Count
 <a id="Section_2.2.5.8"></a>
 #### 2.2.5.8 Data Packet Stream Tokens
 
-The tokens defined as follows are used as part of the token-based data stream. Details about how each token is used inside the data stream are in section [2.2.6](#Section_2.2.3.1).
+The tokens defined as follows are used as part of the token-based data stream. Details about how each token is used inside the data stream are in section [2.2.6](#Section_2.2.6).
 
 ALTMETADATA_TOKEN = %x88
 
@@ -3381,7 +3381,7 @@ Query and control operations pertaining to the lifecycle and state of local and 
 **Stream Comments:**
 
 - Packet header type 0x0E.
-- A sample Transaction Manager Request message is given in section [4.13](#Section_2.2.6.9).
+- A sample Transaction Manager Request message is given in section [4.13](#Section_4.13).
 **Stream-Specific Rules:**
 
 RequestType = USHORT
@@ -5165,7 +5165,7 @@ See sections [3.2.6](#Section_3.2.6) and [3.3.6](#Section_3.3.6) for the timer e
 
 A TDS session is tied to the underlying established network protocol session. As such, loss or termination of a network connection is equivalent to immediate termination of a TDS session.
 
-See sections [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.2.7) for the other local events of the client and server, respectively.
+See sections [3.2.7](#Section_3.2.7) and [3.3.7](#Section_3.3.7) for the other local events of the client and server, respectively.
 
 <a id="Section_3.2"></a>
 ## 3.2 Client Details
@@ -5193,7 +5193,7 @@ A TDS client SHOULD maintain the following states:
 - [Sent LOGIN7 Record with Complete Authentication Token State](#Section_3.2.5.4)
 - [Sent LOGIN7 Record with SPNEGO Packet State](#Section_3.2.5.5)
 - [Sent LOGIN7 Record with Federated Authentication Information Request State](#Section_3.2.5.6)
-- [Logged In State](#Section_3.3.5.8)
+- [Logged In State](#Section_3.2.5.7)
 - [Sent Client Request State](#Section_3.2.5.8)
 - [Sent Attention State](#Section_3.2.5.9)
 - [Routing Completed State](#Section_3.2.5.10)
@@ -5304,7 +5304,7 @@ If the response contains a structurally valid TLS/SSL response message (TDS pack
 - "Sent LOGIN7 Record with Federated Authentication Information Request" state, if a Login message with FEDAUTH FeatureExt that indicates a client library that needs additional information from server for authentication was sent.
 The TDS specification does not prescribe the authentication protocol if SSPI [[SSPI]](https://go.microsoft.com/fwlink/?LinkId=90536) authentication or federated authentication is used. The current implementation of SSPI supports NTLM [[MSDN-NTLM]](https://go.microsoft.com/fwlink/?LinkId=145227) and Kerberos [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458).
 
-- If login-only encryption was negotiated as described in section [2.2](#Section_1.3) in the PRELOGIN message description, then the first TDS packet of the Login message MUST be encrypted using TLS/SSL and encapsulated in a TLS/SSL message. All other TDS packets sent or received MUST be in plaintext.
+- If login-only encryption was negotiated as described in section [2.2](#Section_2.2) in the PRELOGIN message description, then the first TDS packet of the Login message MUST be encrypted using TLS/SSL and encapsulated in a TLS/SSL message. All other TDS packets sent or received MUST be in plaintext.
 - If full encryption was negotiated as described in section 2.2 in the PRELOGIN message description, then all subsequent TDS packets sent or received from this point on MUST be encrypted using TLS/SSL and encapsulated in a TLS/SSL message.
 - If the TLS/SSL layer indicates an error, the TDS client MUST close the underlying transport connection, indicate an error to the upper layer, and enter the "Final State" state.
 If the response received from the server does not contain a structurally valid TLS/SSL response or it contains a structurally valid response indicating an error, the TDS client MUST close the underlying transport connection, indicate an error to the upper layer, and enter the "Final State" state.
@@ -5425,14 +5425,14 @@ The server SHOULD maintain the following states:
 - [Login Ready State](#Section_3.3.5.5)
 - [SPNEGO Negotiation State](#Section_3.3.5.6)
 - [Federated Authentication Ready State](#Section_3.3.5.7)
-- [Logged In State](#Section_3.3.5.8)
+- [Logged In State](#Section_3.2.5.7)
 - [Client Request Execution State](#Section_3.3.5.9)
 - [Routing Completed State](#Section_3.2.5.10)
 - [Final State](#Section_3.2.5.11)
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
 
-The TDS protocol does not regulate any timer on a data stream. The TDS server MAY implement a timer on any message found in section [2](#Section_1.3).
+The TDS protocol does not regulate any timer on a data stream. The TDS server MAY implement a timer on any message found in section [2](#Section_2).
 
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
@@ -5449,14 +5449,14 @@ A higher layer can choose to terminate a TDS connection at any time. In the curr
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
 
-The processing of messages received from a TDS client depends on the message type and the current state of the TDS server. The rest of this section describes the processing and actions to take on them. The message type is determined from the TDS packet type and the token stream inside the TDS packet payload, as described in section [2.2](#Section_1.3).
+The processing of messages received from a TDS client depends on the message type and the current state of the TDS server. The rest of this section describes the processing and actions to take on them. The message type is determined from the TDS packet type and the token stream inside the TDS packet payload, as described in section [2.2](#Section_2.2).
 
 The corresponding action is taken when the server is in the following states. In the following processing and actions, aspects that do not apply to both TDS 7.x and TDS 8.0 are explicitly identified in the text.
 
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Initial State
 
-The "Initial State" state is a prerequisite for application-layer communication, and a lower-layer channel that can provide reliable communication MUST be established. The TDS server enters the "Initial State" state when the first packet is received from the client. The packet SHOULD be a PRELOGIN packet to set up context for login or a TLS ClientHello to set up context for the TLS handshake. A Pre-Login message is indicated by the PRELOGIN (0x12) message type described in section [2](#Section_1.3). A TLS ClientHello is indicated when the first byte is equal to 0x16.
+The "Initial State" state is a prerequisite for application-layer communication, and a lower-layer channel that can provide reliable communication MUST be established. The TDS server enters the "Initial State" state when the first packet is received from the client. The packet SHOULD be a PRELOGIN packet to set up context for login or a TLS ClientHello to set up context for the TLS handshake. A Pre-Login message is indicated by the PRELOGIN (0x12) message type described in section [2](#Section_2). A TLS ClientHello is indicated when the first byte is equal to 0x16.
 
 If the first packet is not a structurally correct PRELOGIN packet, or if the PRELOGIN packet does not contain the client version as the first option token, or if the first packet is not indicated to be a TLS ClientHello, the TDS server MUST close the underlying transport connection, indicate an error to the upper layer, and enter the "Final State" state.
 
@@ -5508,7 +5508,7 @@ If the TDS server receives a valid LOGIN7 message with the FEDAUTH FeatureId fro
 
 - The TDS server's PRELOGIN structure contained a FEDAUTHREQUIRED option with the value 0x00, or the TDS server’s PRELOGIN structure did not contain a FEDAUTHREQUIRED option, and the value of fFedAuthEcho is 0.
 - The TDS server's PRELOGIN structure contained a FEDAUTHREQUIRED option with the value 0x01, and the value of fFedAuthEcho is 1.
-If the TDS server receives a valid LOGIN7 message with the FEDAUTH FeatureId from the client but neither of the above statements is true, the server MUST send an ERROR packet, described in section [2](#Section_1.3), to the client. The TDS server MUST then close the underlying transport connection, indicate an error to the upper layer, and enter the "Final State" state. Otherwise, the TDS server MUST process the FedAuthToken embedded in the packet in a way appropriate for the value of bFedAuthLibrary.
+If the TDS server receives a valid LOGIN7 message with the FEDAUTH FeatureId from the client but neither of the above statements is true, the server MUST send an ERROR packet, described in section [2](#Section_2), to the client. The TDS server MUST then close the underlying transport connection, indicate an error to the upper layer, and enter the "Final State" state. Otherwise, the TDS server MUST process the FedAuthToken embedded in the packet in a way appropriate for the value of bFedAuthLibrary.
 
 When the bFedAuthLibrary is a Live ID Compact token, the TDS Server MUST respond as follows:
 
@@ -5565,7 +5565,7 @@ If a TDS of type 1, 3, 7, or 14 (see section [2.2.3.1.1](#Section_2.2.3.1.1)) ar
 
 The TDS server MUST continue to listen for messages from the client while awaiting notification of client request for completion from the upper layer. The TDS server MUST also do one of the following:
 
-- If the upper layer notifies TDS that the client request has finished successfully, the TDS server MUST send the results in the formats described in section [2](#Section_1.3) to the TDS client and enter the "Logged In" state.
+- If the upper layer notifies TDS that the client request has finished successfully, the TDS server MUST send the results in the formats described in section [2](#Section_2) to the TDS client and enter the "Logged In" state.
 - If the upper layer notifies TDS that an error has been encountered during client request, the TDS server MUST send an error message (described in section 2) to the TDS client and enter the "Logged In" state.
 - If an attention packet (described in section 2) is received during the execution of the current client request, it MUST deliver a cancel indication to the upper layer. If an attention packet (described in section 2) is received after the execution of the current client request, it SHOULD NOT deliver a cancel indication to the upper layer because there is no existing execution to cancel. The TDS server MUST send an attention acknowledgment to the TDS client and enter the "Logged In" state.
 - If another client request packet is received during the execution of the current client request, the TDS server SHOULD queue the new client request, and continue processing the client request already in progress according to the preceding rules. When this operation is complete, the TDS server re-enters the "Client Request Execution" state and processes the newly arrived message.
@@ -12041,7 +12041,7 @@ A response message that contains SESSIONSTATE token data:
 <a id="Section_4.19"></a>
 ## 4.19 Token Stream Communication
 
-The following two examples highlight token stream communication. The packaging of these token streams into packets is not shown in this section. Actual TDS network data samples are available in section [4](#Section_1.3).
+The following two examples highlight token stream communication. The packaging of these token streams into packets is not shown in this section. Actual TDS network data samples are available in section [4](#Section_4).
 
 <a id="Section_4.19.1"></a>
 ### 4.19.1 Sending a SQL Batch
@@ -13802,9 +13802,9 @@ The following table lists the sections in this document in which the available T
 
 | Security parameter | Section |
 | --- | --- |
-| TLS Negotiation | [2.1](#Section_2.1) Transport [3.2.5.1](#Section_3.2.5.1) Sent Initial TLS Negotiation Packet State [3.2.5.2](#Section_3.2.5.2) Sent Initial PRELOGIN Packet State [3.2.5.3](#Section_3.2.5.3) Sent TLS/SSL Negotiation Packet State [3.3.5.1](#Section_3.3.5.1) Initial State [3.3.5.2](#Section_3.3.5.3) TLS/SSL Negotiation State [3.3.5.3](#Section_3.3.5.2) TLS Negotiation State [3.3.5.4](#Section_3.3.5.4) PRELOGIN Ready State [3.3.5.5](#Section_3.3.5.5) Login Ready State |
-| SSPI Authentication | [2.2.1.2](#Section_2.2.1.2) Login [2.2.3.1.1](#Section_2.2.3.1.1) Type [2.2.5.8](#Section_2.2.5.8) Data Packet Stream Tokens [2.2.6.4](#Section_2.2.6.4) LOGIN7 [2.2.6.5](#Section_2.2.6.5) PRELOGIN [2.2.6.8](#Section_4.11) SSPI Message [2.2.7.22](#Section_2.2.7.22) SSPI 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.5](#Section_3.2.5.5) Sent LOGIN7 Record with SPNEGO Packet State 3.3.5.5 Login Ready State [4.2](#Section_4.2) Login Request [4.3](#Section_4.3) Login Request with Federated Authentication [4.11](#Section_4.11) SSPI Message [4.16](#Section_4.16) FeatureExt with SESSIONRECOVERY Feature Data [4.20](#Section_4.20) FeatureExt with AZURESQLSUPPORT Feature Data |
-| Federated Authentication | 2.2.1.2 Login [2.2.1.3](#Section_2.2.6.3) Federated Authentication Token [2.2.2.3](#Section_2.2.2.3) Federated Authentication Information 2.2.3.1.1 Type [2.2.4](#Section_2.2.4) Packet Data Token and Tokenless Data Streams [2.2.6.3](#Section_2.2.6.3) Federated Authentication Token 2.2.6.4 LOGIN7 2.2.6.5 PRELOGIN [2.2.7.11](#Section_2.2.7.11) FEATUREEXTACK [2.2.7.12](#Section_2.2.7.12) FEDAUTHINFO [3.1.5](#Section_3.1.5) Message Processing Events and Sequencing Rules 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.4](#Section_3.2.5.4) Sent LOGIN7 Record with Complete Authentication Token State [3.2.5.6](#Section_3.2.5.6) Sent LOGIN7 Record with Federated Authentication Information Request State 3.3.5.1 Initial State 3.3.5.5 Login Ready State [3.3.5.7](#Section_3.3.5.7) Federated Authentication Ready State 4.3 Login Request with Federated Authentication [4.5](#Section_2.2.2.2) Login Response with Federated Authentication Feature Extension Acknowledgement |
+| TLS Negotiation | [2.1](#Section_2.1) Transport [3.2.5.1](#Section_3.2.5.1) Sent Initial TLS Negotiation Packet State [3.2.5.2](#Section_3.2.5.2) Sent Initial PRELOGIN Packet State [3.2.5.3](#Section_3.2.5.3) Sent TLS/SSL Negotiation Packet State [3.3.5.1](#Section_3.3.5.1) Initial State [3.3.5.2](#Section_3.3.5.2) TLS/SSL Negotiation State [3.3.5.3](#Section_3.3.5.3) TLS Negotiation State [3.3.5.4](#Section_3.3.5.4) PRELOGIN Ready State [3.3.5.5](#Section_3.3.5.5) Login Ready State |
+| SSPI Authentication | [2.2.1.2](#Section_2.2.1.2) Login [2.2.3.1.1](#Section_2.2.3.1.1) Type [2.2.5.8](#Section_2.2.5.8) Data Packet Stream Tokens [2.2.6.4](#Section_2.2.6.4) LOGIN7 [2.2.6.5](#Section_2.2.6.5) PRELOGIN [2.2.6.8](#Section_2.2.6.8) SSPI Message [2.2.7.22](#Section_2.2.7.22) SSPI 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.5](#Section_3.2.5.5) Sent LOGIN7 Record with SPNEGO Packet State 3.3.5.5 Login Ready State [4.2](#Section_4.2) Login Request [4.3](#Section_4.3) Login Request with Federated Authentication [4.11](#Section_4.11) SSPI Message [4.16](#Section_4.16) FeatureExt with SESSIONRECOVERY Feature Data [4.20](#Section_4.20) FeatureExt with AZURESQLSUPPORT Feature Data |
+| Federated Authentication | 2.2.1.2 Login [2.2.1.3](#Section_2.2.1.3) Federated Authentication Token [2.2.2.3](#Section_2.2.2.3) Federated Authentication Information 2.2.3.1.1 Type [2.2.4](#Section_2.2.4) Packet Data Token and Tokenless Data Streams [2.2.6.3](#Section_2.2.6.3) Federated Authentication Token 2.2.6.4 LOGIN7 2.2.6.5 PRELOGIN [2.2.7.11](#Section_2.2.7.11) FEATUREEXTACK [2.2.7.12](#Section_2.2.7.12) FEDAUTHINFO [3.1.5](#Section_3.1.5) Message Processing Events and Sequencing Rules 3.2.5.2 Sent Initial PRELOGIN Packet State 3.2.5.3 Sent TLS/SSL Negotiation Packet State [3.2.5.4](#Section_3.2.5.4) Sent LOGIN7 Record with Complete Authentication Token State [3.2.5.6](#Section_3.2.5.6) Sent LOGIN7 Record with Federated Authentication Information Request State 3.3.5.1 Initial State 3.3.5.5 Login Ready State [3.3.5.7](#Section_3.3.5.7) Federated Authentication Ready State 4.3 Login Request with Federated Authentication [4.5](#Section_4.5) Login Response with Federated Authentication Feature Extension Acknowledgement |
 | Data classification | [2.2.4.2.1.3](#Section_2.2.4.2.1.3) Variable Length Tokens(xx10xxxx) 2.2.5.8 Data Packet Stream Tokens 2.2.6.4 LOGIN7 [2.2.7.5](#Section_2.2.7.5) DATACLASSIFICATION 2.2.7.11 FEATUREEXTACK |
 
 <a id="Section_6"></a>
@@ -13812,7 +13812,7 @@ The following table lists the sections in this document in which the available T
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 1.1
 - Microsoft .NET Framework 2.0

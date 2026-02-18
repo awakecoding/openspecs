@@ -377,7 +377,7 @@ packet-beta
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 Server Printer Set XPS Mode (DR_PRN_USING_XPS)
 
-This message is sent from server to client to set the device in [**XPS**](#gt_xml-paper-specification-xps) mode (see section [3.1.1.2](#Section_3.1.1.2)) and indicate to the client that future Printer Write Request (section [2.2.2.9](#Section_4.1.9)) messages will use the XPS format.
+This message is sent from server to client to set the device in [**XPS**](#gt_xml-paper-specification-xps) mode (see section [3.1.1.2](#Section_3.1.1.2)) and indicate to the client that future Printer Write Request (section [2.2.2.9](#Section_2.2.2.9)) messages will use the XPS format.
 
 ```mermaid
 packet-beta
@@ -547,7 +547,7 @@ This message is handled by the Print Virtual Channel Extension only if the **Dev
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 Server Printer Close Request (DR_PRN_CLOSE_REQ)
 
-This message is sent by the server to request the closing of the [**printer queue**](#gt_printer-queue) that was previously created by a DR_PRN_CREATE_REQ (section [2.2.2.7](#Section_4.1.7)).
+This message is sent by the server to request the closing of the [**printer queue**](#gt_printer-queue) that was previously created by a DR_PRN_CREATE_REQ (section [2.2.2.7](#Section_2.2.2.7)).
 
 ```mermaid
 packet-beta
@@ -573,7 +573,7 @@ The **WriteData** field of the request could be either in [**PRN file**](#gt_prn
 <a id="Section_2.2.2.10"></a>
 #### 2.2.2.10 Client Printer Create Response (DR_PRN_CREATE_RSP)
 
-The client responds to the [DR_PRN_CREATE_REQ](#Section_4.1.7) with this message.
+The client responds to the [DR_PRN_CREATE_REQ](#Section_2.2.2.7) with this message.
 
 ```mermaid
 packet-beta
@@ -603,7 +603,7 @@ packet-beta
 <a id="Section_2.2.2.12"></a>
 #### 2.2.2.12 Client Printer Write Response (DR_PRN_WRITE_RSP)
 
-The client responds to the [DR_PRN_WRITE_REQ](#Section_4.1.9) with this message.
+The client responds to the [DR_PRN_WRITE_REQ](#Section_2.2.2.9) with this message.
 
 ```mermaid
 packet-beta
@@ -637,7 +637,7 @@ The cached configuration information SHOULD be treated as an opaque data BLOB by
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 XPS Mode
 
-When a client redirects printers, it adds a special flag (RDPDR_PRINTER_ANNOUNCE_FLAG_XPSFORMAT) if the client can handle the XPS format for the given printer. For these printers, the server MAY<2> choose to use either the [**XPS**](#gt_xml-paper-specification-xps) format or the printer driver-specific format. The server MUST notify the client with the [DR_PRN_USING_XPS (section 2.2.2.2)](../MS-RDPEXPS/MS-RDPEXPS.md) message as described in section [3.3.5.1.2](#Section_3.3.5.1.2) if it chooses to use the XPS format. When this type of message is received, the client marks the printer in XPS mode. Redirection of XPS data using the Remote Desktop Protocol: XML Paper Specification (XPS) Print Virtual Channel Extension is described in [MS-RDPEXPS](../MS-RDPEXPS/MS-RDPEXPS.md).
+When a client redirects printers, it adds a special flag (RDPDR_PRINTER_ANNOUNCE_FLAG_XPSFORMAT) if the client can handle the XPS format for the given printer. For these printers, the server MAY<2> choose to use either the [**XPS**](#gt_xml-paper-specification-xps) format or the printer driver-specific format. The server MUST notify the client with the [DR_PRN_USING_XPS (section 2.2.2.2)](#Section_2.2.2.2) message as described in section [3.3.5.1.2](#Section_3.3.5.1.2) if it chooses to use the XPS format. When this type of message is received, the client marks the printer in XPS mode. Redirection of XPS data using the Remote Desktop Protocol: XML Paper Specification (XPS) Print Virtual Channel Extension is described in [MS-RDPEXPS](../MS-RDPEXPS/MS-RDPEXPS.md).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -657,7 +657,7 @@ No higher-layer triggered events are used.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The common message processing events and rules that are described in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 3.1.5 apply to this protocol. For client-specific and server-specific message processing, see sections [3.2.5](../MS-RDPEFS/MS-RDPEFS.md) and [3.3.5](../MS-RDPEFS/MS-RDPEFS.md).
+The common message processing events and rules that are described in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 3.1.5 apply to this protocol. For client-specific and server-specific message processing, see sections [3.2.5](#Section_3.2.5) and [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -701,7 +701,7 @@ No client higher-layer triggered events are used.
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Sending a Client Device List Announce Request Message
 
-After the Remote Desktop Protocol: File System Virtual Channel Extension completes its initialization, the client MUST send a DR_CORE_DEVICELIST_ANNOUNCE_REQ message to the server with information for various devices. This message is specified in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 2.2.2.9. The Print Virtual Channel Extension prepares the printer device information that goes into this packet. The printer-specific structure is specified in section [2.2.2.1](../MS-RDPEFS/MS-RDPEFS.md).
+After the Remote Desktop Protocol: File System Virtual Channel Extension completes its initialization, the client MUST send a DR_CORE_DEVICELIST_ANNOUNCE_REQ message to the server with information for various devices. This message is specified in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 2.2.2.9. The Print Virtual Channel Extension prepares the printer device information that goes into this packet. The printer-specific structure is specified in section [2.2.2.1](#Section_2.2.2.1).
 
 The printer redirection extension enumerates the [**printer queues**](#gt_printer-queue) and manually configured printers ([**manual printer redirection**](#gt_manual-printer-redirection)) and determines the devices to be redirected. For each printer, the client collects the following information and prepares DR_PRN_DEVICE_ANNOUNCE (section 2.2.2.1) packet. This packet contains the following:
 
@@ -847,7 +847,7 @@ After receiving a [Client Device List Announce Request (section 2.2.2.1)](#Sec
 <a id="Section_3.3.5.1.2"></a>
 ##### 3.3.5.1.2 Sending a Printer Set XPS Mode Message
 
-If the client printer supports [**XPS**](#gt_xml-paper-specification-xps) format, it indicates this support using the RDPDR_PRINTER_ANNOUNCE_FLAG_XPSFORMAT flag when redirecting this printer (see section [2.2.2.1](#Section_2.2.2.1)). For these redirected printers, the server can choose to send print job output in XPS format.<3> If the server chooses to send print data in XPS format, the server MUST send this message to the client prior to sending any data in the Printer Write Request (section [2.2.2.9](#Section_4.1.9)) message.
+If the client printer supports [**XPS**](#gt_xml-paper-specification-xps) format, it indicates this support using the RDPDR_PRINTER_ANNOUNCE_FLAG_XPSFORMAT flag when redirecting this printer (see section [2.2.2.1](#Section_2.2.2.1)). For these redirected printers, the server can choose to send print job output in XPS format.<3> If the server chooses to send print data in XPS format, the server MUST send this message to the client prior to sending any data in the Printer Write Request (section [2.2.2.9](#Section_2.2.2.9)) message.
 
 <a id="Section_3.3.5.1.3"></a>
 ##### 3.3.5.1.3 Sending an Add Printer Cachedata Message

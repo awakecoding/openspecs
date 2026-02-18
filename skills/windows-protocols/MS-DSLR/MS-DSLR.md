@@ -240,7 +240,7 @@ Figure 1: OSI layers and DSLR
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 Dispenser (Application Layer)
 
-The [**dispenser**](#gt_dispenser) is exposed on both sides of the connection (both client and server). The dispenser is itself a service with two exposed functions: [CreateService (section 1.3.2.1)](#Section_3.2.5.1) and [DeleteService (section 1.3.2.2)](#Section_3.2.5.3). These calls provide the interface the application uses to instantiate and clean up remote services. The dispenser manages a mapping between a given service [**GUID**](#gt_globally-unique-identifier-guid) and its corresponding proxy implementation (on the client side) and its stub function (on the server side).
+The [**dispenser**](#gt_dispenser) is exposed on both sides of the connection (both client and server). The dispenser is itself a service with two exposed functions: [CreateService (section 1.3.2.1)](#Section_1.3.2.1) and [DeleteService (section 1.3.2.2)](#Section_1.3.2.2). These calls provide the interface the application uses to instantiate and clean up remote services. The dispenser manages a mapping between a given service [**GUID**](#gt_globally-unique-identifier-guid) and its corresponding proxy implementation (on the client side) and its stub function (on the server side).
 
 The dispenser is in charge of keeping track of these services. It does so by allocating a service [**handle**](#gt_handle) for each unique service GUID provided by CreateService call. Note that service handles are only required to be unique at a given time and only for a given direction (in other words they are allocated on one side, and used on the other). This also applies to the [**dispatcher's**](#gt_dispatcher) transaction handles.
 
@@ -390,7 +390,7 @@ This protocol has no specific capability negotiation or versioning aspects, asid
 
 This protocol uses GUIDs, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md), to represent services. Each DSLR service is defined by two GUIDS: a class ID and a service ID. Vendors are free to choose their own values for these fields to define new DSLR services.
 
-This protocol uses HRESULT values as defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1, as well as those defined in this document, in section [2.2.2.5](#Section_2.2.2). Vendors can define their own HRESULT values, provided they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
+This protocol uses HRESULT values as defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1, as well as those defined in this document, in section [2.2.2.5](#Section_2.2.2.5). Vendors can define their own HRESULT values, provided they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -455,7 +455,7 @@ packet-beta
   96-127: "FunctionHandle"
 ```
 
-**CallingConvention (4 bytes):** An unsigned 32-bit integer that indicates the type of request (either a two-way request or a one-way event). This field MUST be set to one of the following values. (Note that for the dispenser service calls, CreateService and DeleteService, this value MUST be dslrRequest. See sections [2.2.2.3](#Section_3.2.5.1) and [2.2.2.4](#Section_3.2.5.3) for more details about CreateService and DeleteService.)
+**CallingConvention (4 bytes):** An unsigned 32-bit integer that indicates the type of request (either a two-way request or a one-way event). This field MUST be set to one of the following values. (Note that for the dispenser service calls, CreateService and DeleteService, this value MUST be dslrRequest. See sections [2.2.2.3](#Section_2.2.2.3) and [2.2.2.4](#Section_2.2.2.4) for more details about CreateService and DeleteService.)
 
 | Value | Meaning |
 | --- | --- |
@@ -526,7 +526,7 @@ packet-beta
 
 **ServiceHandle (4 bytes):** An unsigned 32-bit integer. The service handle that identifies the service being created. The service handle is allocated by the client to uniquely identify the service being created in this CreateService call, and is used in each subsequent request on the newly created remote service.
 
-See section [2.2.2.5](#Section_2.2.2) for the format of the Response payload for the CreateService message.
+See section [2.2.2.5](#Section_2.2.2.5) for the format of the Response payload for the CreateService message.
 
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 DeleteService Message Payload
@@ -711,7 +711,7 @@ packet-beta
   96-159: "SerializedArgument_N (variable)"
 ```
 
-**Result (4 bytes):** An unsigned 32-bit integer containing the HRESULT returned from the function call. This can be any of the pre-defined DSLR error codes (see section [2.2.2.5](#Section_2.2.2)) or a service-defined set of HRESULT codes.
+**Result (4 bytes):** An unsigned 32-bit integer containing the HRESULT returned from the function call. This can be any of the pre-defined DSLR error codes (see section [2.2.2.5](#Section_2.2.2.5)) or a service-defined set of HRESULT codes.
 
 **SerializedArgument_1 (variable):** An out argument (if any) if the call was successful. This parameter is defined by the service. See section [2.2.2.6](#Section_2.2.2.6) about valid data types for out parameters.
 
@@ -789,14 +789,14 @@ The DSLR client is driven by applications calling CreateService to create the se
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
 
-The following sections describe the states and events outlined in [3.1](#Section_1.3).
+The following sections describe the states and events outlined in [3.1](#Section_3.1).
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 CreateService
 
 When initialization and startup is complete, the client sends the CreateService message to the server to instantiate the service on the server, and also creates a proxy for that service (an object that implements the proxied service's interfaces). As part of the CreateService request, the client allocates a service handle that is sent to the server, and is subsequently used when calling functions on the service.
 
-If the CreateService event occurs while the client is in the Start state, the client moves into the Accepting Requests state and returns S_OK (0x00000000). Otherwise, the client returns an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2).
+If the CreateService event occurs while the client is in the Start state, the client moves into the Accepting Requests state and returns S_OK (0x00000000). Otherwise, the client returns an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 The flow for CreateService is diagrammed in the following figure:
 
@@ -818,23 +818,23 @@ Figure 5: Flow diagram for calling remote functions
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 One-Way Events
 
-If this event occurs while the client is in the Accepting Requests state, the client moves into the Sending Request state and sends the request to the server. Otherwise, the event is queued until the client returns to the Accepting Requests state. (See figure in section [3.1](#Section_1.3).)
+If this event occurs while the client is in the Accepting Requests state, the client moves into the Sending Request state and sends the request to the server. Otherwise, the event is queued until the client returns to the Accepting Requests state. (See figure in section [3.1](#Section_3.1).)
 
-When the event has been sent to the server, the client returns to the Accepting Requests state. The return value is from the server is S_OK (0x00000000), or an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2).
+When the event has been sent to the server, the client returns to the Accepting Requests state. The return value is from the server is S_OK (0x00000000), or an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 <a id="Section_3.1.5.2.2"></a>
 ##### 3.1.5.2.2 Two-Way Requests
 
-If this event occurs while the client is in the Accepting Requests state, the client moves into the Sending Request state and sends the request to the server. Otherwise, the event is queued until the client returns to the Accepting Requests state. (See figure in section [3.1](#Section_1.3).)
+If this event occurs while the client is in the Accepting Requests state, the client moves into the Sending Request state and sends the request to the server. Otherwise, the event is queued until the client returns to the Accepting Requests state. (See figure in section [3.1](#Section_3.1).)
 
-When the event has been sent to the server, the client moves to the Receiving Response state. The client returns to the Accepting Requests state when the response has been received. The return value is the one received from the server, or an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2).
+When the event has been sent to the server, the client moves to the Receiving Response state. The client returns to the Accepting Requests state when the response has been received. The return value is the one received from the server, or an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 DeleteService
 
-When the client no longer needs to make requests on the remote service, it sends the DeleteService message to the server to clean up the remote service. Clean up on the server entails removing the service handle from the set of currently instantiated remote services, and setting the Disconnect event (if one is specified at initialization). The result is that no more requests can be made on the remote service. (See figure in section [3.1](#Section_1.3).)
+When the client no longer needs to make requests on the remote service, it sends the DeleteService message to the server to clean up the remote service. Clean up on the server entails removing the service handle from the set of currently instantiated remote services, and setting the Disconnect event (if one is specified at initialization). The result is that no more requests can be made on the remote service. (See figure in section [3.1](#Section_3.1).)
 
-If this event occurs while the client is in the Accepting Requests state, the client MUST move to Finish state and return S_OK(0x00000000). Otherwise, the client returns an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2).
+If this event occurs while the client is in the Accepting Requests state, the client MUST move to Finish state and return S_OK(0x00000000). Otherwise, the client returns an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -919,14 +919,14 @@ None.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Processing Events and Sequencing Rules
 
-The following sections describe the states and events outlined in section [3.2.1](#Section_3.1.1).
+The following sections describe the states and events outlined in section [3.2.1](#Section_3.2.1).
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 CreateService
 
 When initialization and startup are complete, the server waits for the client to call CreateService to instantiate the service. When the CreateService message is received, the server calls the service creator function to create the service, and adds the newly created service to the list of instantiated local services. The provided service handle is then mapped to the stub function that was mapped to the service GUID at initialization and startup. This new mapping is then used to call local service functions in response to remote requests.
 
-If the CreateService event occurs while the server is in the Start state, the server moves into the Accepting Messages state, and the server returns S_OK (0x00000000). Otherwise, the server returns an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2).
+If the CreateService event occurs while the server is in the Start state, the server moves into the Accepting Messages state, and the server returns S_OK (0x00000000). Otherwise, the server returns an appropriate error code from the set of DSLR error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 The flow for CreateService is diagrammed in the following figure:
 
@@ -948,23 +948,23 @@ Figure 8: Flow diagram for processing function calls
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 One-Way Events
 
-If this event occurs while the server is in the Accepting Messages state, the server moves into the Processing Message state and processes the one-way event. Otherwise, the event is queued until the server returns to the Accepting Messages state. (See figure in section [3.1](#Section_1.3).)
+If this event occurs while the server is in the Accepting Messages state, the server moves into the Processing Message state and processes the one-way event. Otherwise, the event is queued until the server returns to the Accepting Messages state. (See figure in section [3.1](#Section_3.1).)
 
-Once the event message has been processed (the local function has been called), the client returns to the Accepting Messages state. The return value is S_OK (0x00000000), or an appropriate error code from the set of error codes defined in section [2.2.2.5](#Section_2.2.2).
+Once the event message has been processed (the local function has been called), the client returns to the Accepting Messages state. The return value is S_OK (0x00000000), or an appropriate error code from the set of error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Two-Way Requests
 
-If this event occurs while the server is in the Accepting Messages state, the server moves into the Accepting Messages state and processes the two-way request. Otherwise, the event is queued until the server returns to the Accepting Messages state. (See figure in section [3.1](#Section_1.3).)
+If this event occurs while the server is in the Accepting Messages state, the server moves into the Accepting Messages state and processes the two-way request. Otherwise, the event is queued until the server returns to the Accepting Messages state. (See figure in section [3.1](#Section_3.1).)
 
-When the request message has been processed (the local function has been called, and the return value and out parameters sent back to the client), the server returns to the Accepting Messages state. The return value is the result of the function call, or an appropriate error code from the set of error codes defined in section [2.2.2.5](#Section_2.2.2).
+When the request message has been processed (the local function has been called, and the return value and out parameters sent back to the client), the server returns to the Accepting Messages state. The return value is the result of the function call, or an appropriate error code from the set of error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 DeleteService
 
-Once the server receives the DeleteService message from the client, it stops processing service requests and cleans up the service. (See figure in section [3.1](#Section_1.3).)
+Once the server receives the DeleteService message from the client, it stops processing service requests and cleans up the service. (See figure in section [3.1](#Section_3.1).)
 
-If this event occurs while the server is in the Accepting Messages state, the client MUST move to Finish state and return S_OK(0x00000000). Otherwise, the client returns an appropriate error code from the set of error codes defined in section [2.2.2.5](#Section_2.2.2).
+If this event occurs while the server is in the Accepting Messages state, the client MUST move to Finish state and return S_OK(0x00000000). Otherwise, the client returns an appropriate error code from the set of error codes defined in section [2.2.2.5](#Section_2.2.2.5).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events

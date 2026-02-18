@@ -556,7 +556,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-The Server Message Block (SMB) Protocol Versions 2 and 3 supports the sharing of file and print resources between machines. The protocol borrows and extends concepts from the Server Message Block (SMB) Version 1.0 Protocol, as specified in [MS-SMB](../MS-SMB/MS-SMB.md). This specification assumes familiarity with [MS-SMB], and with the security concepts described in [MS-WPO](#Section_1.3) section 9.
+The Server Message Block (SMB) Protocol Versions 2 and 3 supports the sharing of file and print resources between machines. The protocol borrows and extends concepts from the Server Message Block (SMB) Version 1.0 Protocol, as specified in [MS-SMB](../MS-SMB/MS-SMB.md). This specification assumes familiarity with [MS-SMB], and with the security concepts described in [MS-WPO](../MS-WPO/MS-WPO.md) section 9.
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -761,7 +761,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
@@ -771,7 +771,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RSVD] Microsoft Corporation, "[Remote Shared Virtual Disk Protocol](../MS-RSVD/MS-RSVD.md)".
 
-[MS-SMBD] Microsoft Corporation, "[SMB2 Remote Direct Memory Access (RDMA) Transport Protocol](#Section_2.1)".
+[MS-SMBD] Microsoft Corporation, "[SMB2 Remote Direct Memory Access (RDMA) Transport Protocol](../MS-SMBD/MS-SMBD.md)".
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
@@ -820,13 +820,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [KB2770917] Microsoft Corporation, "Windows 8 and Windows Server 2012 update rollup: November 2012", Version 6.0, [http://support.microsoft.com/kb/2770917/en-us](https://go.microsoft.com/fwlink/?LinkId=321737)
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-PCCRR] Microsoft Corporation, "[Peer Content Caching and Retrieval: Retrieval Protocol](../MS-PCCRR/MS-PCCRR.md)".
 
 [MS-SQOS] Microsoft Corporation, "[Storage Quality of Service Protocol](../MS-SQOS/MS-SQOS.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDFS] Microsoft Corporation, "How DFS Works", March 2003, [http://technet.microsoft.com/en-us/library/cc782417%28WS.10%29.aspx](https://go.microsoft.com/fwlink/?LinkId=89945)
 
@@ -951,7 +951,7 @@ The SMB 3.1.1 dialect introduces the following enhancements:
 
 The SMB 2 Protocol can be negotiated by using an SMB negotiate, as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 1.7. After a dialect of the SMB 2 Protocol is selected during negotiation, all messages that are sent on the [**connection**](#gt_connection) (including the negotiate response) will be SMB 2 Protocol messages, as specified in this document, and no further SMB traffic will be exchanged on the connection.
 
-For authentication, the SMB 2 Protocol relies on Simple and Protected GSS-API Negotiation (SPNEGO), as described in [MS-AUTHSOD](#Section_1.3) section 2.1.2.3.1 and specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) and [MS-SPNG](../MS-SPNG/MS-SPNG.md), which in turn can rely on the Kerberos Protocol Extensions (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) or the NT LAN Manager (NTLM) Authentication Protocol (as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md)).
+For authentication, the SMB 2 Protocol relies on Simple and Protected GSS-API Negotiation (SPNEGO), as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3.1 and specified in [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) and [MS-SPNG](../MS-SPNG/MS-SPNG.md), which in turn can rely on the Kerberos Protocol Extensions (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) or the NT LAN Manager (NTLM) Authentication Protocol (as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md)).
 
 The SMB 2 Protocol uses either TCP or NetBIOS over TCP as underlying transports. The SMB 3.x dialect family also supports the use of RDMA as a transport. SMB 3.1.1 dialect also supports QUIC as a transport as specified in [[RFC9000]](https://go.microsoft.com/fwlink/?linkid=2296951).
 
@@ -1056,7 +1056,7 @@ The SMB2 protocol supports Direct TCP Transport and makes use of the following a
 | --- | --- | --- |
 | Microsoft-DS | 445 (0x01BD) | [[IANAPORT]](https://go.microsoft.com/fwlink/?LinkId=89888) |
 
-When the SMB 3.x dialect family is negotiated and an RDMA transport is used, the standards assignment for the protocol specified in [MS-SMBD](#Section_2.1) is used.
+When the SMB 3.x dialect family is negotiated and an RDMA transport is used, the standards assignment for the protocol specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) is used.
 
 When the SMB 3.1.1 dialect is negotiated, the SMB2 protocol supports QUIC over UDP port 443. The ALPN Identification sequence used to identify the SMB2 protocol over QUIC is 0x73 0x6D 0x62 ("smb").
 
@@ -1070,7 +1070,7 @@ The following sections specify how SMB 2 Protocol messages are encapsulated on t
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The SMB 2 Protocol supports Direct TCP, NetBIOS over TCP [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261), SMB2 Remote Direct Memory Access (RDMA) Transport [MS-SMBD](#Section_2.1), and QUIC [[RFC9000]](https://go.microsoft.com/fwlink/?linkid=2296951) as transports.<2> These transports are supported by the various SMB2 dialects as follows:
+The SMB 2 Protocol supports Direct TCP, NetBIOS over TCP [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261), SMB2 Remote Direct Memory Access (RDMA) Transport [MS-SMBD](../MS-SMBD/MS-SMBD.md), and QUIC [[RFC9000]](https://go.microsoft.com/fwlink/?linkid=2296951) as transports.<2> These transports are supported by the various SMB2 dialects as follows:
 
 - All dialects of SMB2 support operation over Direct TCP. The Direct TCP transport packet header has the following structure.
 ```mermaid
@@ -1237,7 +1237,7 @@ In all SMB dialects for a response this field is interpreted as the **Status** f
 | SMB2_FLAGS_RELATED_OPERATIONS 0x00000004 | When set in an SMB2 request, indicates that this request is a related operation in a compounded request chain. The use of this flag in an SMB2 request is as specified in section [3.2.4.1.4](#Section_3.2.4.1.4). When set in an SMB2 compound response, indicates that the request corresponding to this response was part of a related operation in a compounded request chain. The use of this flag in an SMB2 response is as specified in section [3.3.5.2.7.2](#Section_3.3.5.2.7.2). |
 | SMB2_FLAGS_SIGNED 0x00000008 | When set, indicates that this packet has been signed. The use of this flag is as specified in section [3.1.5.1](#Section_3.1.5.1). |
 | SMB2_FLAGS_PRIORITY_MASK 0x00000070 | This flag is only valid for the SMB 3.1.1 dialect. It is a mask for the requested I/O priority of the request, and it MUST be a value in the range 0 to 7. |
-| SMB2_FLAGS_DFS_OPERATIONS 0x10000000 | When set, indicates that this command is a [**Distributed File System (DFS)**](#gt_distributed-file-system-dfs) operation. The use of this flag is as specified in section [3.3.5.9](#Section_2.2.13). |
+| SMB2_FLAGS_DFS_OPERATIONS 0x10000000 | When set, indicates that this command is a [**Distributed File System (DFS)**](#gt_distributed-file-system-dfs) operation. The use of this flag is as specified in section [3.3.5.9](#Section_3.3.5.9). |
 | SMB2_FLAGS_REPLAY_OPERATION 0x20000000 | This flag is only valid for the SMB 3.x dialect family. When set, it indicates that this command is a replay operation. The client MUST ignore this bit on receipt. |
 
 **NextCommand (4 bytes):** For a compounded request and response, this field MUST be set to the offset, in bytes, from the beginning of this SMB2 header to the start of the subsequent 8-byte aligned SMB2 header. If this is not a compounded request or response, or this is the last header in a compounded request or response, this value MUST be 0.
@@ -1327,7 +1327,7 @@ In all SMB dialects for a response this field is interpreted as the **Status** f
 | SMB2_FLAGS_RELATED_OPERATIONS 0x00000004 | When set in an SMB2 request, indicates that this request is a related operation in a compounded request chain. The use of this flag in an SMB2 request is as specified in section [3.2.4.1.4](#Section_3.2.4.1.4). When set in an SMB2 compound response, indicates that the request corresponding to this response was part of a related operation in a compounded request chain. The use of this flag in an SMB2 response is as specified in section [3.3.5.2.7.2](#Section_3.3.5.2.7.2). |
 | SMB2_FLAGS_SIGNED 0x00000008 | When set, indicates that this packet has been signed. The use of this flag is as specified in section [3.1.5.1](#Section_3.1.5.1). |
 | SMB2_FLAGS_PRIORITY_MASK 0x00000070 | This flag is only valid for the SMB 3.1.1 dialect. It is a mask for the requested I/O priority of the request, and it MUST be a value in the range 0 to 7. |
-| SMB2_FLAGS_DFS_OPERATIONS 0x10000000 | When set, indicates that this command is a [**DFS**](#gt_distributed-file-system-dfs) operation. The use of this flag is as specified in section [3.3.5.9](#Section_2.2.13). |
+| SMB2_FLAGS_DFS_OPERATIONS 0x10000000 | When set, indicates that this command is a [**DFS**](#gt_distributed-file-system-dfs) operation. The use of this flag is as specified in section [3.3.5.9](#Section_3.3.5.9). |
 | SMB2_FLAGS_REPLAY_OPERATION 0x20000000 | This flag is only valid for the SMB 3.x dialect family. When set, it indicates that this command is a replay operation. The client MUST ignore this bit on receipt. |
 
 **NextCommand (4 bytes):** For a [**compounded request**](#gt_3d5b08e2-38da-4cee-93d8-7e9a32f14670) and response, this field MUST be set to the offset, in bytes, from the beginning of this SMB2 header to the start of the subsequent 8-byte aligned SMB2 header. If this is not a compounded request or response, or this is the last header in a compounded request or response, this value MUST be 0.
@@ -1894,7 +1894,7 @@ packet-beta
 | SMB2_GLOBAL_CAP_ENCRYPTION 0x00000040 | When set, indicates that the server supports encryption. This flag is valid for the SMB 3.0 and 3.0.2 dialects. |
 | SMB2_GLOBAL_CAP_NOTIFICATIONS 0x00000080 | When set, indicates that the server supports server-to-client notifications, specified in section [2.2.44](#Section_2.2.44). This flag is not valid for the SMB 2.0.2, 2.1, 3.0 and 3.0.2 dialects. |
 
-**MaxTransactSize (4 bytes):** The maximum size, in bytes, of the buffer that can be used for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.40) requests, or returned from the server in [QUERY_INFO](#Section_3.2.5.17), [QUERY_DIRECTORY](#Section_3.2.5.15), and [CHANGE_NOTIFY](#Section_3.2.5.16) responses.<27>
+**MaxTransactSize (4 bytes):** The maximum size, in bytes, of the buffer that can be used for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.39) requests, or returned from the server in [QUERY_INFO](#Section_2.2.37), [QUERY_DIRECTORY](#Section_2.2.33), and [CHANGE_NOTIFY](#Section_2.2.35) responses.<27>
 
 **MaxReadSize (4 bytes):** The maximum size, in bytes, of the **Length** in an [SMB2 READ Request](#Section_2.2.19) (section 2.2.19) that the server will accept.
 
@@ -1910,7 +1910,7 @@ packet-beta
 
 **NegotiateContextOffset/Reserved2 (4 bytes):** If the **DialectRevision** field is 0x0311, then this field specifies the offset, in bytes, from the beginning of the SMB2 header to the first 8-byte aligned negotiate context in **NegotiateContextList**; otherwise, the server MUST set this to 0 and the client MUST ignore it on receipt.
 
-**Buffer (variable):** The variable-length buffer that contains the security buffer for the response, as specified by **SecurityBufferOffset** and **SecurityBufferLength**. The buffer SHOULD contain a token as produced by the GSS protocol as specified in section [3.3.5.4](#Section_2.2.3). If **SecurityBufferLength** is 0, this field is empty and then client-initiated authentication, with an authentication protocol of the client's choice, will be used instead of server-initiated SPNEGO authentication as described in [MS-AUTHSOD](#Section_1.3) section 2.1.2.2.
+**Buffer (variable):** The variable-length buffer that contains the security buffer for the response, as specified by **SecurityBufferOffset** and **SecurityBufferLength**. The buffer SHOULD contain a token as produced by the GSS protocol as specified in section [3.3.5.4](#Section_3.3.5.4). If **SecurityBufferLength** is 0, this field is empty and then client-initiated authentication, with an authentication protocol of the client's choice, will be used instead of server-initiated SPNEGO authentication as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.2.
 
 **Padding (variable):** Optional padding between the end of the **Buffer** field and the first negotiate context in the **NegotiateContextList** so that the first negotiate context is 8-byte aligned.
 
@@ -2152,7 +2152,7 @@ packet-beta
 | **Value** | **Meaning** |
 | --- | --- |
 | SMB2_RESERVED_TREE_CONNECT_CONTEXT_ID 0x0000 | This value is reserved. |
-| SMB2_REMOTED_IDENTITY_TREE_CONNECT_CONTEXT_ID 0x0001 | The **Data** field contains remoted identity tree connect context data as specified in section [2.2.9.2.1](#Section_2.2.9.2.1.1). |
+| SMB2_REMOTED_IDENTITY_TREE_CONNECT_CONTEXT_ID 0x0001 | The **Data** field contains remoted identity tree connect context data as specified in section [2.2.9.2.1](#Section_2.2.9.2.1). |
 
 **DataLength (2 bytes)**: The length, in bytes, of the **Data** field.
 
@@ -2276,7 +2276,7 @@ packet-beta
 
 **Luid (8 bytes):** Locally unique identifier, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.7.
 
-**Attr (4 bytes):** LUID attributes as specified in [MS-LSAD](#Section_5) section 2.2.5.4.
+**Attr (4 bytes):** LUID attributes as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.5.4.
 
 <a id="Section_2.2.9.2.1.5"></a>
 ###### 2.2.9.2.1.5 PRIVILEGE_DATA
@@ -2347,7 +2347,7 @@ This field MUST contain zero or more of the following values.
 | SMB2_SHAREFLAG_ENABLE_HASH_V1 0x00002000 | The share supports hash generation for branch cache retrieval of data. For more information, see section [2.2.31.2](#Section_2.2.31.2). This flag is not valid for the SMB 2.0.2 dialect. |
 | SMB2_SHAREFLAG_ENABLE_HASH_V2 0x00004000 | The share supports v2 hash generation for branch cache retrieval of data. For more information, see section 2.2.31.2. This flag is not valid for the SMB 2.0.2 and SMB 2.1 dialects. |
 | SMB2_SHAREFLAG_ENCRYPT_DATA 0x00008000 | The server requires encryption of remote file access messages on this share, per the conditions specified in section [3.3.5.2.11](#Section_3.3.5.2.11). This flag is only valid for the SMB 3.x dialect family. |
-| SMB2_SHAREFLAG_IDENTITY_REMOTING 0x00040000 | The share supports identity remoting. The client can request remoted identity access for the share via the SMB2_REMOTED_IDENTITY_TREE_CONNECT context as specified in section [2.2.9.2.1](#Section_2.2.9.2.1.1).<34> |
+| SMB2_SHAREFLAG_IDENTITY_REMOTING 0x00040000 | The share supports identity remoting. The client can request remoted identity access for the share via the SMB2_REMOTED_IDENTITY_TREE_CONNECT context as specified in section [2.2.9.2.1](#Section_2.2.9.2.1).<34> |
 | SMB2_SHAREFLAG_COMPRESS_DATA 0x00100000 | The server supports compression of read/write messages on this share. This flag is only valid for the SMB 3.1.1 dialect.<35> |
 | SMB2_SHAREFLAG_ISOLATED_TRANSPORT 0x00200000 | The server indicates that administrator set share property telling client that it is preferable to isolate communication to that share on a separate set of connections. This flag is advisory and can be ignored by SMB clients. |
 
@@ -2362,7 +2362,7 @@ This field MUST contain zero or more of the following values.
 | SMB2_SHARE_CAP_ASYMMETRIC 0x00000080 | The specified share is present on a server configuration that allows dynamic changes in the ownership of the share. This flag is not valid for the SMB 2.0.2, 2.1, and 3.0 dialects. |
 | SMB2_SHARE_CAP_REDIRECT_TO_OWNER 0x00000100 | The specified share is present on a server configuration that supports synchronous [**share level redirection**](#gt_share-level-redirection) via a Share Redirect error context response (section [2.2.2.2.2](#Section_2.2.2.2.2)). This flag is not valid for SMB 2.0.2, 2.1, 3.0, and 3.0.2 dialects. |
 
-**MaximalAccess (4 bytes):** Contains the maximal access for the user that establishes the [**tree connect**](#gt_tree-connect) on the share based on the share's permissions. This value takes the form as specified in section [2.2.13.1](#Section_2.2.13.1.2).
+**MaximalAccess (4 bytes):** Contains the maximal access for the user that establishes the [**tree connect**](#gt_tree-connect) on the share based on the share's permissions. This value takes the form as specified in section [2.2.13.1](#Section_2.2.13.1).
 
 <a id="Section_2.2.11"></a>
 ### 2.2.11 SMB2 TREE_DISCONNECT Request
@@ -2444,13 +2444,13 @@ packet-beta
 | Impersonation 0x00000002 | The application-requested impersonation level is Impersonation. |
 | Delegate 0x00000003 | The application-requested impersonation level is Delegate. |
 
-Impersonation is specified in [MS-WPO](#Section_1.3) section 9.7; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
+Impersonation is specified in [MS-WPO](../MS-WPO/MS-WPO.md) section 9.7; for more information about impersonation, see [[MSDN-IMPERS]](https://go.microsoft.com/fwlink/?LinkId=106009).
 
 **SmbCreateFlags (8 bytes):** This field MUST NOT be used and MUST be reserved. The client SHOULD set this field to zero, and the server MUST ignore it on receipt.
 
 **Reserved (8 bytes):** This field MUST NOT be used and MUST be reserved. The client sets this to any value, and the server MUST ignore it on receipt.
 
-**DesiredAccess (4 bytes):** The level of access that is required, as specified in section [2.2.13.1](#Section_2.2.13.1.2).
+**DesiredAccess (4 bytes):** The level of access that is required, as specified in section [2.2.13.1](#Section_2.2.13.1).
 
 **FileAttributes (4 bytes):** This field MUST be a combination of the values specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.6, and MUST NOT include any values other than those specified in that section.
 
@@ -2485,7 +2485,7 @@ Impersonation is specified in [MS-WPO](#Section_1.3) section 9.7; for more infor
 | FILE_SYNCHRONOUS_IO_NONALERT 0x00000020 | This bit SHOULD be set to 0 and MUST be ignored by the server.<43> |
 | FILE_NON_DIRECTORY_FILE 0x00000040 | If the name of the file being created or opened matches with an existing directory file, the server MUST fail the request with STATUS_FILE_IS_A_DIRECTORY. This flag MUST NOT be used with FILE_DIRECTORY_FILE or the server MUST fail the request with STATUS_INVALID_PARAMETER. |
 | FILE_COMPLETE_IF_OPLOCKED 0x00000100 | This bit SHOULD be set to 0 and MUST be ignored by the server.<44> |
-| FILE_NO_EA_KNOWLEDGE 0x00000200 | The caller does not understand how to handle extended attributes. If the request includes an [SMB2_CREATE_EA_BUFFER](#Section_2.2.13.2.10) create context, then the server MUST fail this request with STATUS_ACCESS_DENIED. If extended attributes with the FILE_NEED_EA flag (see [MS-FSCC] section 2.4.16) set are associated with the file being opened, then the server MUST fail this request with STATUS_ACCESS_DENIED. |
+| FILE_NO_EA_KNOWLEDGE 0x00000200 | The caller does not understand how to handle extended attributes. If the request includes an [SMB2_CREATE_EA_BUFFER](#Section_2.2.13.2.1) create context, then the server MUST fail this request with STATUS_ACCESS_DENIED. If extended attributes with the FILE_NEED_EA flag (see [MS-FSCC] section 2.4.16) set are associated with the file being opened, then the server MUST fail this request with STATUS_ACCESS_DENIED. |
 | FILE_RANDOM_ACCESS 0x00000800 | This indicates that the application intends to read or write at random offsets using this handle, so the server SHOULD optimize for random access. However, the server MUST accept any access pattern. This flag value is incompatible with the FILE_SEQUENTIAL_ONLY value. If both FILE_RANDOM_ACCESS and FILE_SEQUENTIAL_ONLY are set, then FILE_SEQUENTIAL_ONLY is ignored. |
 | FILE_DELETE_ON_CLOSE 0x00001000 | The file MUST be automatically deleted when the last open request on this file is closed. When this option is set, the **DesiredAccess** field MUST include the DELETE flag. This option is often used for temporary files. |
 | FILE_OPEN_BY_FILE_ID 0x00002000 | This bit SHOULD be set to 0 and the server MUST fail the request with a STATUS_NOT_SUPPORTED error if this bit is set.<45> |
@@ -2499,11 +2499,11 @@ Impersonation is specified in [MS-WPO](#Section_1.3) section 9.7; for more infor
 | FILE_OPEN_NO_RECALL 0x00400000 | In an HSM (Hierarchical Storage Management) environment, this flag means the file SHOULD NOT be recalled from tertiary storage such as tape. The recall can take several minutes. The caller can specify this flag to avoid those delays. |
 | FILE_OPEN_FOR_FREE_SPACE_QUERY 0x00800000 | Open file to query for free space. The client SHOULD set this to 0 and the server MUST ignore it.<47> |
 
-**NameOffset (2 bytes):** The offset, in bytes, from the beginning of the SMB2 header to the 8-byte aligned file name. If SMB2_FLAGS_DFS_OPERATIONS is set in the Flags field of the SMB2 header, the file name includes a prefix that will be processed during DFS name normalization as specified in section [3.3.5.9](#Section_2.2.13). Otherwise, the file name is relative to the share that is identified by the TreeId in the SMB2 header. The **NameOffset** field SHOULD be set to the offset of the **Buffer** field from the beginning of the SMB2 header. The file name (after DFS normalization if needed) MUST conform to the specification of a relative pathname in [MS-FSCC] section 2.1.5. A zero length file name indicates a request to open the root of the share.
+**NameOffset (2 bytes):** The offset, in bytes, from the beginning of the SMB2 header to the 8-byte aligned file name. If SMB2_FLAGS_DFS_OPERATIONS is set in the Flags field of the SMB2 header, the file name includes a prefix that will be processed during DFS name normalization as specified in section [3.3.5.9](#Section_3.3.5.9). Otherwise, the file name is relative to the share that is identified by the TreeId in the SMB2 header. The **NameOffset** field SHOULD be set to the offset of the **Buffer** field from the beginning of the SMB2 header. The file name (after DFS normalization if needed) MUST conform to the specification of a relative pathname in [MS-FSCC] section 2.1.5. A zero length file name indicates a request to open the root of the share.
 
 **NameLength (2 bytes):** The length of the file name, in bytes. If no file name is provided, this field MUST be set to 0.
 
-**CreateContextsOffset (4 bytes):** The offset, in bytes, from the beginning of the SMB2 header to the first 8-byte aligned [SMB2_CREATE_CONTEXT](#Section_2.2.14.2) structure in the request. If no SMB2_CREATE_CONTEXTs are being sent, this value MUST be 0.
+**CreateContextsOffset (4 bytes):** The offset, in bytes, from the beginning of the SMB2 header to the first 8-byte aligned [SMB2_CREATE_CONTEXT](#Section_2.2.13.2) structure in the request. If no SMB2_CREATE_CONTEXTs are being sent, this value MUST be 0.
 
 **CreateContextsLength (4 bytes):** The length, in bytes, of the list of SMB2_CREATE_CONTEXT structures sent in this request.
 
@@ -2710,7 +2710,7 @@ packet-beta
 <a id="Section_2.2.13.2.8"></a>
 ##### 2.2.13.2.8 SMB2_CREATE_REQUEST_LEASE
 
-The SMB2_CREATE_REQUEST_LEASE context is specified on an [SMB2 CREATE Request (section 2.2.13)](#Section_2.2.13) packet when the client is requesting the server to return a lease. This value is not valid for the SMB 2.0.2 dialect. The Data in the **Buffer** field of the [SMB2_CREATE_CONTEXT (section 2.2.13.2)](#Section_2.2.14.2) structure MUST contain the following structure.
+The SMB2_CREATE_REQUEST_LEASE context is specified on an [SMB2 CREATE Request (section 2.2.13)](#Section_2.2.13) packet when the client is requesting the server to return a lease. This value is not valid for the SMB 2.0.2 dialect. The Data in the **Buffer** field of the [SMB2_CREATE_CONTEXT (section 2.2.13.2)](#Section_2.2.13.2) structure MUST contain the following structure.
 
 ```mermaid
 packet-beta
@@ -2743,7 +2743,7 @@ The SMB2_CREATE_QUERY_ON_DISK_ID context is specified on an SMB2 CREATE Request 
 <a id="Section_2.2.13.2.10"></a>
 ##### 2.2.13.2.10 SMB2_CREATE_REQUEST_LEASE_V2
 
-The SMB2_CREATE_REQUEST_LEASE_V2 context is specified on an SMB2 CREATE Request when the client is requesting the server to return a lease on a file or a directory. This is valid only for the SMB 3.x dialect family. The data in the **Buffer** field of the SMB2_CREATE_CONTEXT (section [2.2.13.2](#Section_2.2.14.2)) structure MUST contain the following structure.
+The SMB2_CREATE_REQUEST_LEASE_V2 context is specified on an SMB2 CREATE Request when the client is requesting the server to return a lease on a file or a directory. This is valid only for the SMB 3.x dialect family. The data in the **Buffer** field of the SMB2_CREATE_CONTEXT (section [2.2.13.2](#Section_2.2.13.2)) structure MUST contain the following structure.
 
 ```mermaid
 packet-beta
@@ -2971,7 +2971,7 @@ packet-beta
 <a id="Section_2.2.14.2"></a>
 #### 2.2.14.2 SMB2_CREATE_CONTEXT Response Values
 
-The SMB2_CREATE_CONTEXT Response Values MUST take the same form as specified in section [2.2.13.2](#Section_2.2.14.2) except that the **Buffer** field MUST be one of the values provided in the following table. The following values are the valid [**create context**](#gt_create-context) values and are defined to be in network byte order. The individual values that are contained in the data buffer of the create context responses varies, based on the name of the create context in the request.
+The SMB2_CREATE_CONTEXT Response Values MUST take the same form as specified in section [2.2.13.2](#Section_2.2.13.2) except that the **Buffer** field MUST be one of the values provided in the following table. The following values are the valid [**create context**](#gt_create-context) values and are defined to be in network byte order. The individual values that are contained in the data buffer of the create context responses varies, based on the name of the create context in the request.
 
 | Value | Meaning |
 | --- | --- |
@@ -3010,7 +3010,7 @@ packet-beta
 <a id="Section_2.2.14.2.4"></a>
 ##### 2.2.14.2.4 SMB2_CREATE_DURABLE_HANDLE_RECONNECT
 
-The server responds to an [SMB2_CREATE_DURABLE_HANDLE_RECONNECT](#Section_2.2.14.2.4) request as specified in section [3.3.5.9.7](#Section_3.3.5.9.7).
+The server responds to an [SMB2_CREATE_DURABLE_HANDLE_RECONNECT](#Section_2.2.13.2.4) request as specified in section [3.3.5.9.7](#Section_3.3.5.9.7).
 
 <a id="Section_2.2.14.2.5"></a>
 ##### 2.2.14.2.5 SMB2_CREATE_QUERY_MAXIMAL_ACCESS_RESPONSE
@@ -3025,7 +3025,7 @@ packet-beta
 
 **QueryStatus (4 bytes):** The resulting status code of the attempt to query maximal access. The **MaximalAccess** field is valid only if **QueryStatus** is STATUS_SUCCESS. The status code MUST be one of those defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.
 
-**MaximalAccess (4 bytes):** The maximal access that the user who is described by **SessionId** has on the file or named pipe that was opened. This is an access mask value, as specified in section [2.2.13.1](#Section_2.2.13.1.2).
+**MaximalAccess (4 bytes):** The maximal access that the user who is described by **SessionId** has on the file or named pipe that was opened. This is an access mask value, as specified in section [2.2.13.1](#Section_2.2.13.1).
 
 <a id="Section_2.2.14.2.6"></a>
 ##### 2.2.14.2.6 SMB2_CREATE_APP_INSTANCE_ID
@@ -3045,7 +3045,7 @@ The SMB2_CREATE_TIMEWARP_TOKEN request does not generate an [SMB2_CREATE_CONTEXT
 <a id="Section_2.2.14.2.9"></a>
 ##### 2.2.14.2.9 SMB2_CREATE_QUERY_ON_DISK_ID
 
-The server responds with a 32-byte structure that the client can use to identify the open file in a volume. The SMB2_CREATE_QUERY_ON_DISK_ID returns an SMB2_CREATE_CONTEXT in the response with the Name that is identified by SMB2_CREATE_QUERY_ON_DISK_ID as specified in section [2.2.13.2](#Section_2.2.14.2).
+The server responds with a 32-byte structure that the client can use to identify the open file in a volume. The SMB2_CREATE_QUERY_ON_DISK_ID returns an SMB2_CREATE_CONTEXT in the response with the Name that is identified by SMB2_CREATE_QUERY_ON_DISK_ID as specified in section [2.2.13.2](#Section_2.2.13.2).
 
 ```mermaid
 packet-beta
@@ -3063,7 +3063,7 @@ packet-beta
 <a id="Section_2.2.14.2.10"></a>
 ##### 2.2.14.2.10 SMB2_CREATE_RESPONSE_LEASE
 
-The server responds with a lease that is granted for this open. The data in the **Buffer** field of the [SMB2_CREATE_CONTEXT](#Section_2.2.14.2) structure MUST contain the following structure.
+The server responds with a lease that is granted for this open. The data in the **Buffer** field of the [SMB2_CREATE_CONTEXT](#Section_2.2.13.2) structure MUST contain the following structure.
 
 ```mermaid
 packet-beta
@@ -3323,7 +3323,7 @@ The identifier of the file or pipe on which to perform the read.
 | Value | Meaning |
 | --- | --- |
 | SMB2_CHANNEL_NONE 0x00000000 | No channel information is present in the request. The **RemainingBytes, ReadChannelInfoOffset,** and **ReadChannelInfoLength** fields MUST be set to 0 by the client and MUST be ignored by the server. |
-| SMB2_CHANNEL_RDMA_V1 0x00000001 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD](#Section_2.1) section 2.2.3.1 are present in the channel information specified by **RemainingBytes, ReadChannelInfoOffset,** and **ReadChannelInfoLength** fields. |
+| SMB2_CHANNEL_RDMA_V1 0x00000001 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 2.2.3.1 are present in the channel information specified by **RemainingBytes, ReadChannelInfoOffset,** and **ReadChannelInfoLength** fields. |
 | SMB2_CHANNEL_RDMA_V1_INVALIDATE 0x00000002 | This flag is not valid for the SMB 3.0 dialect. One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures, as specified in [MS-SMBD] section 2.2.3.1, are present in the channel information specified by the **RemainingBytes, ReadChannelInfoOffset,** and **ReadChannelInfoLength** fields. The server is requested to perform remote invalidation when responding to the request as specified in [MS-SMBD] section 3.1.4.2. |
 
 **RemainingBytes (4 bytes):** For the SMB 3.x dialect family, if the **Channel** field of the request contains SMB2_CHANNEL_RDMA_V1 or SMB2_CHANNEL_RDMA_V1_INVALIDATE, this field contains the length, in bytes, of the data to be read.
@@ -3408,7 +3408,7 @@ The identifier of the file or pipe on which to perform the write.
 | Value | Meaning |
 | --- | --- |
 | SMB2_CHANNEL_NONE 0x00000000 | No channel information is present in the request. The **RemainingBytes**, **WriteChannelInfoOffset** and **WriteChannelInfoLength** fields MUST be set to zero by the client and MUST be ignored by the server. |
-| SMB2_CHANNEL_RDMA_V1 0x00000001 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD](#Section_2.1) section 2.2.3.1 are present in the channel information specified by **RemainingBytes**, **WriteChannelInfoOffset** and **WriteChannelInfoLength** fields. |
+| SMB2_CHANNEL_RDMA_V1 0x00000001 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 2.2.3.1 are present in the channel information specified by **RemainingBytes**, **WriteChannelInfoOffset** and **WriteChannelInfoLength** fields. |
 | SMB2_CHANNEL_RDMA_V1_INVALIDATE 0x00000002 | This flag is not valid for the SMB 3.0 dialect. One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD] section 2.2.3.1 are present in the channel information specified by the **RemainingBytes**, **WriteChannelInfoOffset** and **WriteChannelInfoLength** fields. The server is requested to perform remote invalidation when responding to the request as specified in [MS-SMBD] section 3.1.4.2. |
 | SMB2_CHANNEL_RDMA_TRANSFORM 0x00000003 | This flag is not valid for SMB 3.0 and 3.0.2 dialects. When connection supports RDMA transform, SMB2_RDMA_TRANSFORM structure is present in the channel information specified by the **RemainingBytes**, **WriteChannelInfoOffset**, and **WriteChannelInfoLength** fields.<62> |
 
@@ -3803,7 +3803,7 @@ packet-beta
 <a id="Section_2.2.31"></a>
 ### 2.2.31 SMB2 IOCTL Request
 
-The SMB2 IOCTL Request packet is sent by a client to issue an implementation-specific [**file system control**](#gt_file-system-control-fsctl) or device control (FSCTL/[**IOCTL**](#gt_io-control-ioctl)) command across the network. For a list of IOCTL operations, see section [3.2.4.20](#Section_3.2.4.20.12) and [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.3. This request is composed of an [SMB2 header](#Section_2.2.1), as specified in section 2.2.1, followed by this request structure.
+The SMB2 IOCTL Request packet is sent by a client to issue an implementation-specific [**file system control**](#gt_file-system-control-fsctl) or device control (FSCTL/[**IOCTL**](#gt_io-control-ioctl)) command across the network. For a list of IOCTL operations, see section [3.2.4.20](#Section_3.2.4.20) and [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.3. This request is composed of an [SMB2 header](#Section_2.2.1), as specified in section 2.2.1, followed by this request structure.
 
 ```mermaid
 packet-beta
@@ -3826,7 +3826,7 @@ packet-beta
 
 **Reserved (2 bytes):** This field MUST NOT be used and MUST be reserved. The client MUST set this field to 0, and the server MUST ignore it on receipt.
 
-**CtlCode (4 bytes):** The control code of the FSCTL/IOCTL method. The values are listed in subsequent sections, and in [MS-FSCC] section 2.3. The following values indicate SMB2-specific processing as specified in sections 3.2.4.20 and [3.3.5.15](#Section_3.3.5.15.15).
+**CtlCode (4 bytes):** The control code of the FSCTL/IOCTL method. The values are listed in subsequent sections, and in [MS-FSCC] section 2.3. The following values indicate SMB2-specific processing as specified in sections 3.2.4.20 and [3.3.5.15](#Section_3.3.5.15).
 
 | Name | Value |
 | --- | --- |
@@ -4040,7 +4040,7 @@ packet-beta
 
 **Reserved2 (4 bytes):** This field MUST NOT be used and MUST be reserved. The server MUST set this field to 0, and the client MUST ignore it on receipt.
 
-**Buffer (variable):** A variable-length buffer that contains the input and output data buffer for the response, as described by **InputOffset**, **InputCount**, **OutputOffset**, and **OutputCount**. For more details, refer to section [3.3.5.15](#Section_3.3.5.15.15).
+**Buffer (variable):** A variable-length buffer that contains the input and output data buffer for the response, as described by **InputOffset**, **InputCount**, **OutputOffset**, and **OutputCount**. For more details, refer to section [3.3.5.15](#Section_3.3.5.15).
 
 The following FSCTL responses do not provide an output buffer:
 
@@ -4067,7 +4067,7 @@ packet-beta
 <a id="Section_2.2.32.2"></a>
 #### 2.2.32.2 SRV_SNAPSHOT_ARRAY
 
-The SRV_SNAPSHOT_ARRAY packet is returned to the client by the server in an [SMB2 IOCTL Response](#Section_2.2.32) for the FSCTL_SRV_ENUMERATE_SNAPSHOTS request, as specified in section [3.3.5.15.1](#Section_3.3.5.15.15). This packet MUST contain all the revision time-stamps that are associated with the Tree Connect share in which the [**open**](#gt_open) resides, provided that the buffer size required is less than or equal to the maximum output buffer size received in the SMB2 IOCTL request. This SRV_SNAPSHOT_ARRAY is placed in the **Buffer** field in the SMB2 IOCTL Response,<68> and the **OutputOffset** and **OutputCount** fields MUST be updated to describe the buffer as specified in section 2.2.32. This packet consists of the following:
+The SRV_SNAPSHOT_ARRAY packet is returned to the client by the server in an [SMB2 IOCTL Response](#Section_2.2.32) for the FSCTL_SRV_ENUMERATE_SNAPSHOTS request, as specified in section [3.3.5.15.1](#Section_3.3.5.15.1). This packet MUST contain all the revision time-stamps that are associated with the Tree Connect share in which the [**open**](#gt_open) resides, provided that the buffer size required is less than or equal to the maximum output buffer size received in the SMB2 IOCTL request. This SRV_SNAPSHOT_ARRAY is placed in the **Buffer** field in the SMB2 IOCTL Response,<68> and the **OutputOffset** and **OutputCount** fields MUST be updated to describe the buffer as specified in section 2.2.32. This packet consists of the following:
 
 ```mermaid
 packet-beta
@@ -4356,7 +4356,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| SMB2_RESTART_SCANS 0x01 | The server is requested to restart the enumeration from the beginning as specified in section [3.3.5.18](#Section_2.2.33). |
+| SMB2_RESTART_SCANS 0x01 | The server is requested to restart the enumeration from the beginning as specified in section [3.3.5.18](#Section_3.3.5.18). |
 | SMB2_RETURN_SINGLE_ENTRY 0x02 | The server is requested to only return the first entry of the search results. |
 | SMB2_INDEX_SPECIFIED 0x04 | The server is requested to return entries beginning at the byte number specified by **FileIndex**. |
 | SMB2_REOPEN 0x10 | The server is requested to restart the enumeration from the beginning, and the search pattern is to be changed to the provided value. |
@@ -4369,7 +4369,7 @@ packet-beta
 
 **FileNameLength (2 bytes):** The length, in bytes, of the search pattern. This field MUST be 0 if no search pattern is provided.
 
-**OutputBufferLength (4 bytes):** The maximum number of bytes the server is allowed to return in the [SMB2 QUERY_DIRECTORY Response](#Section_3.2.5.15).
+**OutputBufferLength (4 bytes):** The maximum number of bytes the server is allowed to return in the [SMB2 QUERY_DIRECTORY Response](#Section_2.2.33).
 
 **Buffer (variable):** A variable-length buffer containing the [**Unicode**](#gt_unicode) search pattern for the request, as described by the **FileNameOffset** and **FileNameLength** fields. The format, including wildcards and other conventions for this pattern, is specified in [MS-CIFS](../MS-CIFS/MS-CIFS.md) section 2.2.1.1.3.<77>
 
@@ -4418,7 +4418,7 @@ packet-beta
 | 0x0000 | The request MUST monitor only immediate files or directories contained in the directory specified by **FileId**. |
 | SMB2_WATCH_TREE 0x0001 | The request MUST monitor changes on any file or directory contained beneath the directory specified by **FileId**. |
 
-**OutputBufferLength (4 bytes):** The maximum number of bytes the server is allowed to return in the [SMB2 CHANGE_NOTIFY Response (section 2.2.36)](#Section_3.2.5.16).
+**OutputBufferLength (4 bytes):** The maximum number of bytes the server is allowed to return in the [SMB2 CHANGE_NOTIFY Response (section 2.2.36)](#Section_2.2.36).
 
 **FileId (16 bytes):** An [SMB2_FILEID](#Section_2.2.14.1) identifier of the directory to monitor for changes.
 
@@ -4719,7 +4719,7 @@ For all other set requests, this field MUST be 0.
 <a id="Section_2.2.40"></a>
 ### 2.2.40 SMB2 SET_INFO Response
 
-The SMB2 SET_INFO Response packet is sent by the server in response to an [SMB2 SET_INFO Request (section 2.2.39)](#Section_2.2.40) to notify the client that its request has been successfully processed. This response consists of an SMB2 header, as specified in section [2.2.1](#Section_2.2.1), followed by this response structure:
+The SMB2 SET_INFO Response packet is sent by the server in response to an [SMB2 SET_INFO Request (section 2.2.39)](#Section_2.2.39) to notify the client that its request has been successfully processed. This response consists of an SMB2 header, as specified in section [2.2.1](#Section_2.2.1), followed by this response structure:
 
 ```mermaid
 packet-beta
@@ -4920,8 +4920,8 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | SMB2_CHANNEL_NONE 0x00000000 | No channel information is present. The **RdmaDescriptorOffset** and **RdmaDescriptorLength** fields MUST be set to zero by the sender and MUST be ignored by the receiver. |
-| SMB2_CHANNEL_RDMA_V1 0x00000001 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD](#Section_2.1) section [2.2.3.1](../MS-SMBD/MS-SMBD.md) are present in the channel information specified by the **RdmaDescriptorOffset** and **RdmaDescriptorLength** fields. |
-| SMB2_CHANNEL_RDMA_V1_INVALIDATE 0x00000002 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD] section 2.2.3.1 are present in the channel information specified by the **RdmaDescriptorOffset** and **RdmaDescriptorLength** fields. The server is requested to perform remote invalidation when responding to the request as specified in [MS-SMBD] section [3.1.4.2](../MS-SMBD/MS-SMBD.md). |
+| SMB2_CHANNEL_RDMA_V1 0x00000001 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section [2.2.3.1](#Section_2.2.3.1) are present in the channel information specified by the **RdmaDescriptorOffset** and **RdmaDescriptorLength** fields. |
+| SMB2_CHANNEL_RDMA_V1_INVALIDATE 0x00000002 | One or more SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures as specified in [MS-SMBD] section 2.2.3.1 are present in the channel information specified by the **RdmaDescriptorOffset** and **RdmaDescriptorLength** fields. The server is requested to perform remote invalidation when responding to the request as specified in [MS-SMBD] section [3.1.4.2](#Section_3.1.4.2). |
 
 **TransformCount (2 bytes):** This field specifies the number of transforms present after this structure. This value MUST be greater than 0.
 
@@ -5046,7 +5046,7 @@ There are no timers common to both client and server.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The value of [RequireMessageSigning](#Section_2) MUST be set based on system configuration, which is implementation-dependent.<90>
+The value of [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) MUST be set based on system configuration, which is implementation-dependent.<90>
 
 **IsEncryptionSupported** MUST be set in an implementation-specific manner.<91>
 
@@ -5087,7 +5087,7 @@ Determining when a client will sign an outgoing message is specified in [3.2.4.1
 
 This optional interface is applicable only for the SMB 3.x dialect family.
 
-When cryptographic keys are to be generated by processing as specified in sections [3.2.5.3](#Section_2.2.6) and [3.3.5.5](#Section_2.2.5), the Key Derivation specification in [[SP800-108]](https://go.microsoft.com/fwlink/?LinkId=186039) is used with the following inputs:
+When cryptographic keys are to be generated by processing as specified in sections [3.2.5.3](#Section_3.2.5.3) and [3.3.5.5](#Section_3.3.5.5), the Key Derivation specification in [[SP800-108]](https://go.microsoft.com/fwlink/?LinkId=186039) is used with the following inputs:
 
 - The key to be used for key derivation.
 - The string to be used as label.
@@ -5198,7 +5198,7 @@ If **IsCompressionSupported** is FALSE, **Connection.SupportsChainedCompression*
 - The receiver MUST initialize *RemainingCompressedDataSize* with the size of the received compressed data and Dec*ompressedMessage* with empty buffer.
 - The compressed data MUST be decompressed as follows:
 - The first 8 bytes of the data MUST be interpreted as SMB2_COMPRESSION_CHAINED_PAYLOAD_HEADER, specified in section [2.2.42.2.1](#Section_2.2.42.2.1).
-- If **CompressionAlgorithm** in SMB2_COMPRESSION_CHAINED_PAYLOAD_HEADER is not one of the values specified in section [2.2.3.1.3](#Section_2.2.3.1.3), the connection MUST be disconnected as specified in section [3.2.7.1](#Section_3.2.7.1) or [3.3.7.1](#Section_3.2.5.6).
+- If **CompressionAlgorithm** in SMB2_COMPRESSION_CHAINED_PAYLOAD_HEADER is not one of the values specified in section [2.2.3.1.3](#Section_2.2.3.1.3), the connection MUST be disconnected as specified in section [3.2.7.1](#Section_3.2.7.1) or [3.3.7.1](#Section_3.3.7.1).
 - If **CompressionAlgorithm** in SMB2_COMPRESSION_CHAINED_PAYLOAD_HEADER is NONE:
 - If **Length** is greater than (the size of the received compressed message – 8) or **OriginalCompressedSegmentSize** in SMB2 COMPRESSION_TRANSFORM_HEADER, the connection MUST be disconnected as specified in section 3.2.7.1 or 3.3.7.1.
 - **Length** number of bytes following SMB2_COMPRESSION_CHAINED_PAYLOAD_HEADER MUST be interpreted as uncompressed data and MUST be appended to Dec*ompressedMessage*.
@@ -5268,7 +5268,7 @@ If the client implements the SMB 3.1.1 dialect, it also implements the following
 
 The client MUST implement the following:
 
-**Connection.SessionTable:** A table of authenticated [**sessions**](#gt_session), as specified in section [3.2.1.3](#Section_3.3.1.8), that the client has established on this SMB2 transport [**connection**](#gt_connection). The table MUST allow lookup by both **Session.SessionId** and by the security context of the user that established the connection.
+**Connection.SessionTable:** A table of authenticated [**sessions**](#gt_session), as specified in section [3.2.1.3](#Section_3.2.1.3), that the client has established on this SMB2 transport [**connection**](#gt_connection). The table MUST allow lookup by both **Session.SessionId** and by the security context of the user that established the connection.
 
 **Connection.PreauthSessionTable:** A table of sessions that have not completed authentication, as specified in section 3.2.1.3. The table MUST allow lookup by **Session.SessionId**.
 
@@ -5278,7 +5278,7 @@ The client MUST implement the following:
 
 **Connection.GSSNegotiateToken:** A byte array containing the token received during a negotiation and remembered for authentication.
 
-**Connection.MaxTransactSize:** The maximum buffer size, in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.40) requests, or returned from the server in [QUERY_INFO](#Section_3.2.5.17), [QUERY_DIRECTORY](#Section_3.2.5.15), and [CHANGE_NOTIFY](#Section_3.2.5.16) responses.<102>
+**Connection.MaxTransactSize:** The maximum buffer size, in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.39) requests, or returned from the server in [QUERY_INFO](#Section_2.2.37), [QUERY_DIRECTORY](#Section_2.2.33), and [CHANGE_NOTIFY](#Section_2.2.35) responses.<102>
 
 **Connection.MaxReadSize:** The maximum read size, in bytes, that the server will accept in an [SMB2 READ Request](#Section_2.2.19) on this connection.
 
@@ -5326,7 +5326,7 @@ The client MUST implement the following:
 
 **Session.SessionId:** An 8-byte identifier returned by the server to identify this [**session**](#gt_session) on this SMB2 transport [**connection**](#gt_connection).
 
-**Session.TreeConnectTable:** A table of [**tree connects**](#gt_tree-connect), as specified in section [3.2.1.4](#Section_3.3.1.9). The table MUST allow lookup by both **TreeConnect.TreeConnectId** and by share name.
+**Session.TreeConnectTable:** A table of [**tree connects**](#gt_tree-connect), as specified in section [3.2.1.4](#Section_3.2.1.4). The table MUST allow lookup by both **TreeConnect.TreeConnectId** and by share name.
 
 **Session.SessionKey:** The first 16 bytes of the cryptographic key for this [**authenticated context**](#gt_authenticated-context). If the cryptographic key is less than 16 bytes, it is right-padded with zero bytes.
 
@@ -5336,7 +5336,7 @@ The client MUST implement the following:
 
 **Session.UserCredentials:** An opaque implementation-specific entity that identifies the credentials that were used to authenticate to the server.
 
-**Session.OpenTable:** A table of opens, as specified in section [3.2.1.6](#Section_3.3.1.10). The table MUST allow lookup by either file name or by **Open.FileId**.
+**Session.OpenTable:** A table of opens, as specified in section [3.2.1.6](#Section_3.2.1.6). The table MUST allow lookup by either file name or by **Open.FileId**.
 
 **Session.IsAnonymous**: A Boolean that, if set, indicates that the session is for an anonymous user.
 
@@ -5344,7 +5344,7 @@ The client MUST implement the following:
 
 If the client implements the SMB 3.x dialect family, it MUST also implement the following:
 
-**Session.ChannelList:** A list of channels, as specified in section [3.2.1.8](#Section_3.3.1.14).
+**Session.ChannelList:** A list of channels, as specified in section [3.2.1.8](#Section_3.2.1.8).
 
 **Session.ChannelSequence:** A 16-bit identifier incremented on a network disconnect that indicates to the server the client's **Channel** change.
 
@@ -5417,7 +5417,7 @@ The client MUST implement the following:
 
 **Open.Connection:** A reference to the SMB2 transport [**connection**](#gt_connection) on which this open was established.
 
-**Open.Session**: A reference to the authenticated session, as specified in section [3.2.1.3](#Section_3.3.1.8), over which this open was performed.
+**Open.Session**: A reference to the authenticated session, as specified in section [3.2.1.3](#Section_3.2.1.3), over which this open was performed.
 
 **Open.OplockLevel:** The current oplock level for this open.
 
@@ -5435,7 +5435,7 @@ The client MUST implement the following:
 
 - **SequenceNumber**: A 4-bit integer modulo 16.
 - **Free**: A Boolean value of FALSE indicates that there is an outstanding lock or unlock request using this index value and **SequenceNumber** combination.
-**Open.DesiredAccess:** The access mode requested by the client for this **Open**, in the format specified in section [2.2.13.1](#Section_2.2.13.1.2).
+**Open.DesiredAccess:** The access mode requested by the client for this **Open**, in the format specified in section [2.2.13.1](#Section_2.2.13.1).
 
 **Open.ShareMode:** The sharing mode requested by the client for this **Open**, in the format specified in section [2.2.13](#Section_2.2.13).
 
@@ -5470,7 +5470,7 @@ For each request that was sent to the server and is awaiting a response, the cli
 
 If the client implements the SMB 3.x dialect family, it also implements the following:
 
-- **Request.BufferDescriptorList:** For a READ/WRITE request sent over RDMA, this is a list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures returned by [MS-SMBD](#Section_2.1) section 3.1.4.3.
+- **Request.BufferDescriptorList:** For a READ/WRITE request sent over RDMA, this is a list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures returned by [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.3.
 <a id="Section_3.2.1.8"></a>
 #### 3.2.1.8 Per Channel
 
@@ -5700,7 +5700,7 @@ The application provides the following:
 - **SyncRedirect**: An optional Boolean that, if set to TRUE, specifies that the client supports synchronous [**share level redirection**](#gt_share-level-redirection).
 - **RemotedIdentity**: An optional Boolean that, if set to TRUE, specifies that the client is establishing a remoted identity for accessing the share using additional provided identity values.
 - **Guid**: An optional client GUID.
-Upon successful completion, the client MUST return an existing or newly constructed **Session** handle (section [3.2.1.3](#Section_3.3.1.8)), an existing or newly constructed **TreeConnect** handle, and the share type (section [3.2.1.4](#Section_3.3.1.9)) to the caller.
+Upon successful completion, the client MUST return an existing or newly constructed **Session** handle (section [3.2.1.3](#Section_3.2.1.3)), an existing or newly constructed **TreeConnect** handle, and the share type (section [3.2.1.4](#Section_3.2.1.4)) to the caller.
 
 The request to connect to a server could be either explicit (the application requests the [**connection**](#gt_connection) directly) or implicit (the application requests opening a file with a network path including server and [**share**](#gt_share)). In either case, the client MUST follow the steps described in the following flow chart.<125> For the implicit case, any error returned from the connection attempt MUST be returned as the error code for the operation that initiated the implicit connection attempt. For the explicit case, any error returned from the connection attempt MUST be returned to the calling application.
 
@@ -5726,7 +5726,7 @@ If a matching session is not found, the client MAY<127> either attempt to establ
 Otherwise, the client MUST perform the following steps:
 
 - Establish a new connection as described in section [3.2.4.2.1](#Section_3.2.4.2.1).
-- Negotiate the protocol as described in section [3.2.4.2.2](#Section_3.2.4.2.2.2).
+- Negotiate the protocol as described in section [3.2.4.2.2](#Section_3.2.4.2.2).
 - Authenticate to the server as described in section 3.2.4.2.3.
 - Establish a new tree connection to the target share as described in section 3.2.4.2.4.
 ![The client MUST follow the steps outlined in this chart](media/image4.png)
@@ -5736,7 +5736,7 @@ Figure 4: The client MUST follow the steps outlined in this chart
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 Connecting to the Target Server
 
-The **ServerName** and the optional **TransportIdentifier** provided by the caller are used to establish the connection. The client SHOULD resolve the **ServerName** as described in [MS-WPO](#Section_1.3) section 7.1.4, and SHOULD attempt connections to one or more of the returned addresses. The client can attempt to initiate each such SMB2 connection on all configured transports that it allows<128>, most commonly Direct TCP and the other transports described in section [2.1](#Section_2.1).
+The **ServerName** and the optional **TransportIdentifier** provided by the caller are used to establish the connection. The client SHOULD resolve the **ServerName** as described in [MS-WPO](../MS-WPO/MS-WPO.md) section 7.1.4, and SHOULD attempt connections to one or more of the returned addresses. The client can attempt to initiate each such SMB2 connection on all configured transports that it allows<128>, most commonly Direct TCP and the other transports described in section [2.1](#Section_2.1).
 
 The client can choose to prioritize the addresses and/or transport order and try each one sequentially, or try to connect on them all and select one using any implementation-specific heuristic<129>. The client can accept the **TransportIdentifier** parameter from the calling application, which specifies what transport to use, and then attempt to use the transport specified.
 
@@ -5752,7 +5752,7 @@ If the [**connection**](#gt_connection) attempt is successful, a connection obje
 - **Connection.RequireSigning** MUST be set to **FALSE**.
 - **Connection.ServerName** MUST be set to the application-supplied server name.
 - **Connection.CompressionIds**, if implemented, MUST be set to empty list.
-This connection MUST be inserted into **ConnectionTable**, and processing MUST continue, as specified in section [3.2.4.2.2](#Section_3.2.4.2.2.2).
+This connection MUST be inserted into **ConnectionTable**, and processing MUST continue, as specified in section [3.2.4.2.2](#Section_3.2.4.2.2).
 
 If the connection attempt fails, the client returns the error code to the calling application.
 
@@ -5806,7 +5806,7 @@ Otherwise,
 - Increment the **DialectCount** by 1.
 - Set the value in the **Dialects[DialectCount-1]** array to 0x0311.
 - If the client implements SMB 3.x dialect family, **Connection.OfferedDialects** MUST be set to the values in **Dialects** array.
-- If [RequireMessageSigning](#Section_2) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit to TRUE in **SecurityMode**. If RequireMessageSigning is FALSE, the client MUST set the SMB2_NEGOTIATE_SIGNING_ENABLED bit to TRUE in **SecurityMode**. The client MUST store the value of the **SecurityMode** field in **Connection.ClientSecurityMode**.
+- If [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit to TRUE in **SecurityMode**. If RequireMessageSigning is FALSE, the client MUST set the SMB2_NEGOTIATE_SIGNING_ENABLED bit to TRUE in **SecurityMode**. The client MUST store the value of the **SecurityMode** field in **Connection.ClientSecurityMode**.
 - Set **Capabilities** and **ClientStartTime** to 0.
 - If the client implements the SMB 2.1 or SMB 3.x dialect, **ClientGuid** MUST be set to the global **ClientGuid** value. Otherwise, it MUST be set to 0. The client MUST set **Connection.ClientGuid** to the **ClientGuid** initialized above.
 - If the client implements the SMB 3.x dialect family, the client MUST set the **Capabilities** field as follows:
@@ -5865,14 +5865,14 @@ If the GSS authentication succeeds, the client MUST construct an [SMB2 SESSION_S
 - The **MessageId** field is set as specified in section [3.2.4.1.3](#Section_3.2.4.1.3).
 The SMB2 SESSION_SETUP Request MUST be initialized as follows:
 
-- If [RequireMessageSigning](#Section_2) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit in the **SecurityMode** field.
+- If [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit in the **SecurityMode** field.
 If RequireMessageSigning is FALSE, the client MUST set the SMB2_NEGOTIATE_SIGNING_ENABLED bit in the **SecurityMode** field.
 
 - The **Flags** field MUST be set to 0.
 - If the client supports the [**Distributed File System (DFS)**](#gt_distributed-file-system-dfs), as specified in [MS-DFSC](../MS-DFSC/MS-DFSC.md), the SMB2_GLOBAL_CAP_DFS bit in the **Capabilities** field MUST be set.
 - If the client is attempting to reestablish a session, the client MUST set **PreviousSessionId** to its previous session identifier to allow the server to remove any session associated with this identifier. Otherwise, the client MUST set **PreviousSessionId** to 0.
 - The GSS output token is copied into the **Buffer** field in the request. The client MUST set **SecurityBufferOffset** and **SecurityBufferLength** to describe the location and length of the GSS output token in the request.
-If the client implements the SMB 3.x dialect family and this authentication is for establishing an alternative channel for an existing **Session**, as specified in section [3.2.5.5](#Section_2.2.10), the client MUST also set the following values:
+If the client implements the SMB 3.x dialect family and this authentication is for establishing an alternative channel for an existing **Session**, as specified in section [3.2.5.5](#Section_3.2.5.5), the client MUST also set the following values:
 
 - The **SessionId** field in the SMB2 header MUST be set to the **Session.SessionId** for the new channel being established.
 - The SMB2_SESSION_FLAG_BINDING bit MUST be set in the **Flags** field.
@@ -5882,7 +5882,7 @@ This request MUST be sent to the server.
 <a id="Section_3.2.4.2.3.1"></a>
 ###### 3.2.4.2.3.1 Application Requests Reauthenticating a User
 
-It is possible that the server indicates that authentication has expired, as specified in sections [3.3.5.7](#Section_2.2.9) and [3.3.5.9](#Section_2.2.13), or the application or the client itself requests that an existing [**session**](#gt_session) be reauthenticated. In either case, the client MUST issue a subsequent session setup request for the **SessionId** of the session being reauthenticated. The application SHOULD NOT issue new requests until the reauthentication succeeds.
+It is possible that the server indicates that authentication has expired, as specified in sections [3.3.5.7](#Section_3.3.5.7) and [3.3.5.9](#Section_3.3.5.9), or the application or the client itself requests that an existing [**session**](#gt_session) be reauthenticated. In either case, the client MUST issue a subsequent session setup request for the **SessionId** of the session being reauthenticated. The application SHOULD NOT issue new requests until the reauthentication succeeds.
 
 The client MAY<142> either:
 
@@ -5901,7 +5901,7 @@ If the GSS authentication succeeds, the client MUST construct an [SMB2 SESSION_S
 - The **SessionId** field MUST be set to the **Session.SessionId** for the session being reauthenticated.
 The SMB2 SESSION_SETUP Request MUST be initialized as follows:
 
-- If [RequireMessageSigning](#Section_2) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit in the **SecurityMode** field.
+- If [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit in the **SecurityMode** field.
 If RequireMessageSigning is FALSE, the client MUST set the SMB2_NEGOTIATE_SIGNING_ENABLED bit in the **SecurityMode** field.
 
 - The **Flags** field MUST be set to 0.
@@ -5922,11 +5922,11 @@ The client MUST construct an [SMB2 TREE_CONNECT Request](#Section_2.2.9) using t
 - The **SessionId** field is set to **Session.SessionId** of the [**session**](#gt_session) that was identified in section [3.2.4.2](#Section_3.2.4.2) or established as a result of processing section [3.2.4.2.3](#Section_3.2.4.2.3).
 The SMB2 TREE_CONNECT Request MUST be initialized as follows:
 
-- If **Connection.Dialect** is "3.1.1" and the optional **RemotedIdentity** parameter is true, the client MUST add a tree connect request extension in the **Buffer** field as specified in section [2.2.9.1](#Section_2.2.9.1), and MUST set the SMB2_TREE_CONNECT_FLAG_EXTENSION_PRESENT bit in the **Flags** field. The target share path, including server name, in the format "\\server\share", MUST be copied into the **PathName** field of the tree connection request extension, as specified in section [2.2.9.2.1](#Section_2.2.9.2.1.1). The client MUST construct a remoted identity tree connect context, as specified in section 2.2.9.2.1, by setting the User, UserName, Domain, Groups, RestrictedGroups, Privileges, PrimaryGroup, Owner, DefaultDacl, DeviceGroups, UserClaims and DeviceClaims in the SMB2_REMOTED_IDENTITY_TREE_CONNECT context, to the values specified by the application. Otherwise, the target share path, including server name, in the format "\\server\share", is copied into the **Buffer** field of the request. **PathOffset** and **PathLength** MUST be set to describe the location and length of the target share path in the request.
+- If **Connection.Dialect** is "3.1.1" and the optional **RemotedIdentity** parameter is true, the client MUST add a tree connect request extension in the **Buffer** field as specified in section [2.2.9.1](#Section_2.2.9.1), and MUST set the SMB2_TREE_CONNECT_FLAG_EXTENSION_PRESENT bit in the **Flags** field. The target share path, including server name, in the format "\\server\share", MUST be copied into the **PathName** field of the tree connection request extension, as specified in section [2.2.9.2.1](#Section_2.2.9.2.1). The client MUST construct a remoted identity tree connect context, as specified in section 2.2.9.2.1, by setting the User, UserName, Domain, Groups, RestrictedGroups, Privileges, PrimaryGroup, Owner, DefaultDacl, DeviceGroups, UserClaims and DeviceClaims in the SMB2_REMOTED_IDENTITY_TREE_CONNECT context, to the values specified by the application. Otherwise, the target share path, including server name, in the format "\\server\share", is copied into the **Buffer** field of the request. **PathOffset** and **PathLength** MUST be set to describe the location and length of the target share path in the request.
 - If **Connection.Dialect** is "3.1.1" and the optional **ClusterReconnect** parameter is true, the client MUST set the SMB2_TREE_CONNECT_FLAG_CLUSTER_RECONNECT bit in the **Flags** field.
 - If **Connection.Dialect** is "3.1.1", the optional **SyncRedirect** parameter is true, and the share previously connected includes the SMB2_SHARE_CAP_ASYMMETRIC capability, the client SHOULD<144> set the SMB2_TREE_CONNECT_FLAG_REDIRECT_TO_OWNER bit in the **Flags** field.
 - If **Connection.Dialect** is "3.1.1", **Session.EncryptData** is FALSE, **Session.IsGuest** is FALSE and **Session.IsAnonymous** is FALSE, the request MUST be signed as specified in section [3.2.4.1.1](#Section_3.2.4.1.1).
-This request MUST be sent to the server. The response from the server MUST be processed as described in section [3.2.5.5](#Section_2.2.10).
+This request MUST be sent to the server. The response from the server MUST be processed as described in section [3.2.5.5](#Section_3.2.5.5).
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Application Requests Opening a File
@@ -5936,7 +5936,7 @@ To [**open**](#gt_open) a file on a remote share, the application provides the f
 - A handle to the **TreeConnect** representing the share in which the file to be opened exists.
 - The path name of the file being opened, as a [**DFS**](#gt_distributed-file-system-dfs) pathname for a DFS share, or relative to the **TreeConnect** for a non-DFS share.
 - A handle to the **Session** representing the security context of the user opening the file.
-- The required access for the open, as specified in section [2.2.13.1](#Section_2.2.13.1.2).
+- The required access for the open, as specified in section [2.2.13.1](#Section_2.2.13.1).
 - The sharing mode for the open, as specified in section [2.2.13](#Section_2.2.13).
 - The create options to be applied for the open, as specified in section 2.2.13.
 - The create disposition for the open, as specified in section 2.2.13.
@@ -5944,7 +5944,7 @@ To [**open**](#gt_open) a file on a remote share, the application provides the f
 - The impersonation level for the open, as specified in section 2.2.13 (optional).
 - The security flags for the open, as specified in section 2.2.13 (optional).
 - The requested oplock level or lease state for the open, as specified in section 2.2.13 (optional).
-- As outlined in subsequent sections, the application can also provide a series of [**create contexts**](#gt_create-context), as specified in section [2.2.13.2](#Section_2.2.14.2).
+- As outlined in subsequent sections, the application can also provide a series of [**create contexts**](#gt_create-context), as specified in section [2.2.13.2](#Section_2.2.13.2).
 The client MUST verify the **TreeConnect** and **Session** handles. If the handles are invalid, or if no **TreeConnect** referenced by the tree connect handle is found, or if no **Session** referenced by the session handle is found, the client MUST return an implementation-specific error code locally to the calling application.
 
 The client MUST conform to the specification in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.1.5 for the application-supplied path name.
@@ -5992,7 +5992,7 @@ The SMB2 CREATE Request MUST be initialized as follows:
 - Otherwise, **RequestedOplockLevel** field is set to an implementation-specific oplock level.<151>
 - The client copies the application-supplied path into the **Buffer**, and sets the **NameLength** to the length, in bytes, of the path and the **NameOffset** to the offset, in bytes, to the path from the beginning of the SMB2 header.
 - The client copies any provided create contexts into the **Buffer** after the file name, and sets the **CreateContextsOffset** to the offset, in bytes, to the create contexts from the beginning of the SMB2 header and sets the **CreateContextsLength** to the length, in bytes, of the array of create contexts. If there are no provided create contexts, **CreateContextsLength** and **CreateContextsOffset** MUST be set to 0.
-This request MUST be sent to the server. The response from the server MUST be processed as described in section [3.2.5.7](#Section_2.2.14).
+This request MUST be sent to the server. The response from the server MUST be processed as described in section [3.2.5.7](#Section_3.2.5.7).
 
 <a id="Section_3.2.4.3.1"></a>
 ##### 3.2.4.3.1 Application Requests Opening a Named Pipe
@@ -6007,12 +6007,12 @@ For sending a file to a printer, the application [**opens**](#gt_open) the root 
 <a id="Section_3.2.4.3.3"></a>
 ##### 3.2.4.3.3 Application Requests Creating a File with Extended Attributes
 
-To create a file with extended attributes, in addition to the parameters that are specified in section [3.2.4.3](../MS-FSCC/MS-FSCC.md), the application provides a buffer of extended attributes in the format that is specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.16. The client MUST construct a [**create context**](#gt_create-context), as specified in section [2.2.13.2.1](#Section_2.2.13.2.10), and append it to any other create contexts being issued with this CREATE request.
+To create a file with extended attributes, in addition to the parameters that are specified in section [3.2.4.3](#Section_3.2.4.3), the application provides a buffer of extended attributes in the format that is specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.16. The client MUST construct a [**create context**](#gt_create-context), as specified in section [2.2.13.2.1](#Section_2.2.13.2.1), and append it to any other create contexts being issued with this CREATE request.
 
 <a id="Section_3.2.4.3.4"></a>
 ##### 3.2.4.3.4 Application Requests Creating a File with a Security Descriptor
 
-To create a file with a security descriptor, in addition to the parameters that are specified in section [3.2.4.3](../MS-DTYP/MS-DTYP.md), the application provides a buffer with a SECURITY_DESCRIPTOR in the format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6. The client MUST construct a [**create context**](#gt_create-context) using the syntax specified for [SMB2_CREATE_SD_BUFFER](#Section_2.2.13.2.2) in section 2.2.13.2.2, and append it to any other create contexts being issued with this CREATE request.
+To create a file with a security descriptor, in addition to the parameters that are specified in section [3.2.4.3](#Section_3.2.4.3), the application provides a buffer with a SECURITY_DESCRIPTOR in the format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6. The client MUST construct a [**create context**](#gt_create-context) using the syntax specified for [SMB2_CREATE_SD_BUFFER](#Section_2.2.13.2.2) in section 2.2.13.2.2, and append it to any other create contexts being issued with this CREATE request.
 
 <a id="Section_3.2.4.3.5"></a>
 ##### 3.2.4.3.5 Application Requests Creating a File Opened for Durable Operation
@@ -6037,12 +6037,12 @@ If the application is not requesting durability, the client MUST follow the norm
 <a id="Section_3.2.4.3.6"></a>
 ##### 3.2.4.3.6 Application Requests Opening a Previous Version of a File
 
-To open a previous version of a file, in addition to the parameters that are specified in section [3.2.4.3](../MS-DTYP/MS-DTYP.md), the application provides a time stamp for the version to be [**opened**](#gt_open), in FILETIME format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3. The client MUST construct a [**create context**](#gt_create-context) following the syntax as specified in section [2.2.13.2.7](#Section_2.2.13.2.7) using this time stamp. The client MUST append it to any other create contexts being issued with this CREATE request.
+To open a previous version of a file, in addition to the parameters that are specified in section [3.2.4.3](#Section_3.2.4.3), the application provides a time stamp for the version to be [**opened**](#gt_open), in FILETIME format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3. The client MUST construct a [**create context**](#gt_create-context) following the syntax as specified in section [2.2.13.2.7](#Section_2.2.13.2.7) using this time stamp. The client MUST append it to any other create contexts being issued with this CREATE request.
 
 <a id="Section_3.2.4.3.7"></a>
 ##### 3.2.4.3.7 Application Requests Creating a File with a Specific Allocation Size
 
-To create a file with a specific allocation size, in addition to the parameters specified in section [3.2.4.3](../MS-DTYP/MS-DTYP.md), the application provides an allocation size in LARGE_INTEGER format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.5. The client MUST construct a [**create context**](#gt_create-context) following the syntax that is specified in section [2.2.13.2.6](#Section_2.2.13.2.6) and using this allocation size. The client appends it to any other create contexts being issued with this CREATE request.
+To create a file with a specific allocation size, in addition to the parameters specified in section [3.2.4.3](#Section_3.2.4.3), the application provides an allocation size in LARGE_INTEGER format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.5. The client MUST construct a [**create context**](#gt_create-context) following the syntax that is specified in section [2.2.13.2.6](#Section_2.2.13.2.6) and using this allocation size. The client appends it to any other create contexts being issued with this CREATE request.
 
 <a id="Section_3.2.4.3.8"></a>
 ##### 3.2.4.3.8 Requesting a Lease on a File or a Directory
@@ -6067,12 +6067,12 @@ If **Connection.Dialect** is equal to "2.1", the client MUST attach an SMB2_CREA
 <a id="Section_3.2.4.3.9"></a>
 ##### 3.2.4.3.9 Application Requests Maximal Access Information of a File
 
-To request maximal access information of a file being [**opened**](#gt_open) or created, in addition to the parameters that are specified in section [3.2.4.3](../MS-DTYP/MS-DTYP.md), the application provides a Boolean indicating whether it is requesting maximal access information of a file, and optionally a Timestamp value, in FILETIME format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3. If the application is requesting this information, the client MUST construct an [SMB2_CREATE_QUERY_MAXIMAL_ACCESS_REQUEST](#Section_2.2.13.2.5) [**create context**](#gt_create-context) using the syntax specified in section 2.2.13.2.5. The client appends it to any other create contexts being issued with this CREATE request.
+To request maximal access information of a file being [**opened**](#gt_open) or created, in addition to the parameters that are specified in section [3.2.4.3](#Section_3.2.4.3), the application provides a Boolean indicating whether it is requesting maximal access information of a file, and optionally a Timestamp value, in FILETIME format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3. If the application is requesting this information, the client MUST construct an [SMB2_CREATE_QUERY_MAXIMAL_ACCESS_REQUEST](#Section_2.2.13.2.5) [**create context**](#gt_create-context) using the syntax specified in section 2.2.13.2.5. The client appends it to any other create contexts being issued with this CREATE request.
 
 <a id="Section_3.2.4.3.10"></a>
 ##### 3.2.4.3.10 Application Requests Identifier of a File
 
-To request an identifier of a file being opened or created, the client MUST construct an SMB2_CREATE_QUERY_ON_DISK_ID create context using the syntax specified in section [2.2.13.2](#Section_2.2.14.2). The client appends it to any other create contexts being issued with this CREATE request.
+To request an identifier of a file being opened or created, the client MUST construct an SMB2_CREATE_QUERY_ON_DISK_ID create context using the syntax specified in section [2.2.13.2](#Section_2.2.13.2). The client appends it to any other create contexts being issued with this CREATE request.
 
 <a id="Section_3.2.4.3.11"></a>
 ##### 3.2.4.3.11 Application Supplies its Identifier
@@ -6111,7 +6111,7 @@ The SMB2 CREATE Request MUST be initialized as follows:
 - The **CreateDisposition** field is set to **Open.CreateDisposition**.
 - The **CreateOptions** field is set to **Open.CreateOptions**.
 - The client copies the relative path into **Buffer** and sets **NameLength** to the length, in bytes, of the relative path, and **NameOffset** to the offset, in bytes, to the relative path from the beginning of the [SMB2 header](#Section_2.2.1).
-- If **Connection.Dialect** is "2.1", an [SMB2_CREATE_DURABLE_HANDLE_RECONNECT](#Section_2.2.14.2.4) [**create context**](#gt_create-context) is constructed according to the syntax specified in section 2.2.13.2.4. The data value is set to **Open.FileId**, and the create context is appended to the create request.
+- If **Connection.Dialect** is "2.1", an [SMB2_CREATE_DURABLE_HANDLE_RECONNECT](#Section_2.2.13.2.4) [**create context**](#gt_create-context) is constructed according to the syntax specified in section 2.2.13.2.4. The data value is set to **Open.FileId**, and the create context is appended to the create request.
 - If **Connection.Dialect** belongs to the SMB 3.x dialect family, an SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 create context is constructed according to the syntax specified in section [2.2.13.2.12](#Section_2.2.13.2.12). The **FileId** value is set to **Open.FileId**, **CreateGuid** is set to **Open.CreateGuid**, and the create context is appended to the create request. If **Open.IsPersistent** is TRUE, the client MUST set SMB2_DHANDLE_FLAG_PERSISTENT bit in the **Flags** field.
 - If **Connection.Dialect** is not "2.0.2", and the original open was performed by using a lease as specified in section [3.2.4.3.8](#Section_3.2.4.3.8), as indicated by **Open.OplockLevel** set to SMB2_OPLOCK_LEVEL_LEASE, the client MUST re-request the lease as specified in section 3.2.4.3.8 with the exception of the following values:
 - The **LeaseState** field MUST be set to **File.LeaseState** of the file being opened.
@@ -6175,7 +6175,7 @@ If the number of bytes to read exceeds **Connection.MaxReadSize**, the client MU
 
 If a client requests reading from a file, **Connection.Dialect** is not "2.0.2", and if **Connection.SupportsMultiCredit** is TRUE, the **CreditCharge** field in the SMB2 header MUST be set to ( 1 + (**Length** – 1) / 65536 ).
 
-If the **Connection** is established in RDMA mode and the size of any single operation exceeds an implementation-specific threshold <156>, and if **Open.TreeConnect.Session.SigningRequired** and **Open.TreeConnect.Session.EncryptData** are both FALSE, then the interface in [MS-SMBD](#Section_2.1) section 3.1.4.3 Register Buffer MUST be used to register the buffer provided by the calling application on the **Connection** with write permissions, which will receive the data to be read. The returned list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures MUST be stored in **Request.BufferDescriptorList**. The following fields of the request MUST be initialized as follows:
+If the **Connection** is established in RDMA mode and the size of any single operation exceeds an implementation-specific threshold <156>, and if **Open.TreeConnect.Session.SigningRequired** and **Open.TreeConnect.Session.EncryptData** are both FALSE, then the interface in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.3 Register Buffer MUST be used to register the buffer provided by the calling application on the **Connection** with write permissions, which will receive the data to be read. The returned list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures MUST be stored in **Request.BufferDescriptorList**. The following fields of the request MUST be initialized as follows:
 
 - If **Connection.Dialect** is "3.0.2" or "3.1.1" and processing of received remote invalidation is supported as specified in [MS-SMBD] section 3.1.5.8, the **Channel** field of the request SHOULD be set to SMB2_CHANNEL_RDMA_V1_INVALIDATE. Otherwise, the **Channel** field of the request MUST be set to SMB2_CHANNEL_RDMA_V1.
 - The returned list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures MUST be added to the **Buffer** field of the request.
@@ -6230,7 +6230,7 @@ If the connection is not established in RDMA mode or if the size of the operatio
 - The **RemainingBytes** field MUST be set to 0.
 - The data being written MUST be copied into the Buffer field at **DataOffset** bytes from the beginning of the SMB2 header.
 - The client MUST fill the bytes, if any, between the beginning of the **Buffer** field and the beginning of the data (at **DataOffset**) with zeros.
-Otherwise, the interface in [MS-SMBD](#Section_2.1) section 3.1.4.3 Register Buffer MUST be used to register the buffer on the **Connection** with read permissions, which will supply the data to be written. The returned list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures MUST be stored in **Request.BufferDescriptorList**. The following fields of the request MUST be initialized as follows:
+Otherwise, the interface in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.3 Register Buffer MUST be used to register the buffer on the **Connection** with read permissions, which will supply the data to be written. The returned list of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures MUST be stored in **Request.BufferDescriptorList**. The following fields of the request MUST be initialized as follows:
 
 - If **Connection.Dialect** is “3.1.1”, **Connection.RDMATransformIds** is not empty,
 - **Channel** field of the request MUST be set to SMB2_CHANNEL_RDMA_TRANSFORM.
@@ -6323,7 +6323,7 @@ If the handle is invalid, or if no **Open** referenced by the handle is found, t
 
 For the specified **Open**, the client MUST select a connection as specified in section [3.2.4.1.7](#Section_3.2.4.1.7). If no connection is available, the client MUST fail the set operation.
 
-Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.40) following the syntax specified in section [2.2.37](#Section_2.2.37). The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
+Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.39) following the syntax specified in section [2.2.37](#Section_2.2.37). The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
 
 - The **Command** field is set to SMB2 SET_INFO.
 - The **MessageId** field is set as specified in section [3.2.4.1.3](#Section_3.2.4.1.3).
@@ -6381,7 +6381,7 @@ If the handle is invalid, or if no **Open** referenced by the handle is found, t
 
 For the specified **Open**, the client MUST select a connection as specified in section [3.2.4.1.7](#Section_3.2.4.1.7). If no connection is available, the client MUST fail the set operation.
 
-Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.40) following the syntax specified in section [2.2.37](#Section_2.2.37). The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
+Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.39) following the syntax specified in section [2.2.37](#Section_2.2.37). The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
 
 - The **Command** field is set to SMB2 SET_INFO.
 - The **MessageId** field is set as specified in section [3.2.4.1.3](#Section_3.2.4.1.3).
@@ -6439,7 +6439,7 @@ If the handle is invalid, or if no **Open** referenced by the handle is found, t
 
 For the specified **Open**, the client MUST select a connection as specified in section [3.2.4.1.7](#Section_3.2.4.1.7). If no connection is available, the client MUST fail the set operation.
 
-Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.40) following the syntax specified in section 2.2.37. The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
+Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.39) following the syntax specified in section 2.2.37. The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
 
 - The **Command** field is set to SMB2 SET_INFO.
 - The **MessageId** field is set as specified in section [3.2.4.1.3](#Section_3.2.4.1.3).
@@ -6506,7 +6506,7 @@ If the handle is invalid, or if no **Open** referenced by the handle is found, t
 
 For the specified **Open**, the client MUST select a connection as specified in section [3.2.4.1.7](#Section_3.2.4.1.7). If no connection is available, the client MUST fail the set operation.
 
-Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.40), following the syntax specified in section [2.2.37](#Section_2.2.37). The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
+Otherwise, the client initializes an [SMB2 SET_INFO Request](#Section_2.2.39), following the syntax specified in section [2.2.37](#Section_2.2.37). The [SMB2 header](#Section_2.2.1) MUST be initialized as follows:
 
 - The **Command** field is set to SMB2 SET_INFO.
 - The **MessageId** field is set as specified in section [3.2.4.1.3](#Section_3.2.4.1.3).
@@ -7344,7 +7344,7 @@ The client MUST locate the request for which this response was sent in reply by 
 
 If the **MessageId** is 0xFFFFFFFFFFFFFFFF, this is not a reply to a previous request, and the client MUST NOT attempt to locate the request, but instead process it as follows:
 
-If the command field in the SMB2 header is SMB2 OPLOCK_BREAK, it MUST be processed as specified in [3.2.5.19](#Section_3.2.5.19.1). Otherwise, the response MUST be discarded as invalid.
+If the command field in the SMB2 header is SMB2 OPLOCK_BREAK, it MUST be processed as specified in [3.2.5.19](#Section_3.2.5.19). Otherwise, the response MUST be discarded as invalid.
 
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Verifying the Signature
@@ -7382,7 +7382,7 @@ If the **Status** field in the [SMB2 header](#Section_2.2.1) is STATUS_NETWORK_S
 <a id="Section_3.2.5.1.7"></a>
 ##### 3.2.5.1.7 Handling Incorrectly Formatted Responses
 
-If the client receives a response that does not conform to the structures specified in [2](#Section_1.3), the client MUST discard the response and fail the corresponding application request with an error indicating that an invalid network response was received. The client MAY<185> also disconnect the [**connection**](#gt_connection).
+If the client receives a response that does not conform to the structures specified in [2](#Section_2), the client MUST discard the response and fail the corresponding application request with an error indicating that an invalid network response was received. The client MAY<185> also disconnect the [**connection**](#gt_connection).
 
 <a id="Section_3.2.5.1.8"></a>
 ##### 3.2.5.1.8 Processing the Response
@@ -7553,7 +7553,7 @@ The **Session** object MUST be initialized as follows:
 - If **Connection.Dialect** is "3.1.1", **Session.PreauthIntegrityHashValue** as the context; otherwise, the case-sensitive ASCII string "SmbRpc" as context for the algorithm.
 - The context buffer size in bytes. If **Connection.Dialect** is "3.1.1", the size of **Session.PreauthIntegrityHashValue**. Otherwise, the size of "SmbRpc", including the terminating null character, is 7.
 - **Session.Connection** MUST be set to the [**connection**](#gt_connection) on which this authentication attempt was issued.
-- If the global setting [RequireMessageSigning](#Section_2) is set to TRUE or **Connection.RequireSigning** is set to TRUE then **Session.SigningRequired** MUST be set to TRUE, otherwise **Session.SigningRequired** MUST be set to FALSE.
+- If the global setting [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) is set to TRUE or **Connection.RequireSigning** is set to TRUE then **Session.SigningRequired** MUST be set to TRUE, otherwise **Session.SigningRequired** MUST be set to FALSE.
 - If the security subsystem indicates that the session was established by an anonymous user, **Session.SigningRequired** MUST be set to FALSE and **Session.IsAnonymous** MUST be set to TRUE.
 - If the security subsystem indicates that the session was established by a guest user, **Session.SigningRequired** MUST be set to FALSE and **Session.IsGuest** MUST be set to TRUE.
 - If the SMB2_SESSION_FLAG_IS_GUEST bit is set in the **SessionFlags** field of the SMB2 SESSION_SETUP Response and one of the following conditions is satisfied, this indicates a SESSION_SETUP failure and the connection MUST be terminated:
@@ -7624,7 +7624,7 @@ If the GSS protocol returns success and the Status code of the SMB2 header of th
 - The client MUST NOT regenerate **Session.SessionKey**. The client MUST NOT regenerate **Session.FullSessionKey** if it is not empty.
 The SMB2 SESSION_SETUP request MUST be initialized as follows:
 
-- If [RequireMessageSigning](#Section_2) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit in the **SecurityMode** field.
+- If [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) is TRUE, the client MUST set the SMB2_NEGOTIATE_SIGNING_REQUIRED bit in the **SecurityMode** field.
 If RequireMessageSigning is FALSE, the client MUST set the SMB2_NEGOTIATE_SIGNING_ENABLED bit in the **SecurityMode** field.
 
 - The client MUST set the **Flags** field to 0.
@@ -7828,7 +7828,7 @@ If the SMB2_CREATE_QUERY_ON_DISK_ID context is present, the client MUST return t
 <a id="Section_3.2.5.7.4"></a>
 ##### 3.2.5.7.4 SMB2_CREATE_RESPONSE_LEASE Create Context
 
-If **Connection.Dialect** is not "2.0.2" and an SMB2_CREATE_RESPONSE_LEASE create context is present in the [SMB2_CREATE response](#Section_2.2.14) returned from the server, it MUST do the following:
+If **Connection.Dialect** is not "2.0.2" and an SMB2_CREATE_RESPONSE_LEASE create context is present in the [SMB2_CREATE response](#Section_3.2.5.7) returned from the server, it MUST do the following:
 
 - If **Connection.SupportsFileLeasing** is FALSE, the client MUST fail the create request from the application.
 - The client MUST locate the file corresponding to **Open.FileName** in the **GlobalFileTable** and copy the **LeaseState** in the response to **File.LeaseState**.
@@ -7916,7 +7916,7 @@ The client MUST return the received status code in the **Status** field of the [
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Receiving an SMB2 READ Response
 
-If **Connection.Dialect** belongs to the SMB 3.x dialect family, the underlying transport is RDMA, and **Request.BufferDescriptorList** is not empty, then the processing specified in [MS-SMBD](#Section_2.1) section 3.1.4.4 Deregister Buffer MUST be used to deregister the buffer before returning to the application.
+If **Connection.Dialect** belongs to the SMB 3.x dialect family, the underlying transport is RDMA, and **Request.BufferDescriptorList** is not empty, then the processing specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.4 Deregister Buffer MUST be used to deregister the buffer before returning to the application.
 
 If the **Status** field of the [SMB2 header](#Section_2.2.1) of the response indicates an error, the client MUST return the received status code to the calling application.
 
@@ -7945,7 +7945,7 @@ If the **Status** field of the SMB2 header of the response indicates success, th
 <a id="Section_3.2.5.12"></a>
 #### 3.2.5.12 Receiving an SMB2 WRITE Response
 
-If **Connection.Dialect** belongs to the SMB 3.x dialect family, the underlying transport is RDMA and **Request.BufferDescriptorList** is not empty, then the processing specified in [MS-SMBD](#Section_2.1) section 3.1.4.4 Deregister Buffer MUST be used to deregister the buffer before returning to the application.
+If **Connection.Dialect** belongs to the SMB 3.x dialect family, the underlying transport is RDMA and **Request.BufferDescriptorList** is not empty, then the processing specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.4 Deregister Buffer MUST be used to deregister the buffer before returning to the application.
 
 If **Connection.Dialect** belongs to the SMB 3.x dialect family and the status code is STATUS_FILE_NOT_AVAILABLE, and **Connection.ServerCapabilities** includes SMB2_GLOBAL_CAP_PERSISTENT_HANDLES or SMB2_GLOBAL_CAP_MULTI_CHANNEL, the client MUST look up the request in **Connection.OutstandingRequests** using the **MessageId** field of the SMB2 header. If the request is found, the client SHOULD<194> replay the request by setting SMB2_FLAGS_REPLAY_OPERATION bit in the SMB2 header.
 
@@ -8078,7 +8078,7 @@ If the **Status** field of the SMB2 header of the response indicates success, th
 
 If the **Status** field of the [SMB2 header](#Section_2.2.1) of the response indicates an error, the client MUST return the received status code to the calling application.
 
-If the **Status** field of the SMB2 header of the response indicates success, the client MUST copy the received information in the [SMB2 QUERY_DIRECTORY Response](#Section_3.2.5.15) following the SMB2 header that is described by the **OutputBufferOffset** and **OutputBufferLength** into the buffer that is provided by the calling application. The client MUST return success and the **OutputBufferLength** to the application.
+If the **Status** field of the SMB2 header of the response indicates success, the client MUST copy the received information in the [SMB2 QUERY_DIRECTORY Response](#Section_2.2.33) following the SMB2 header that is described by the **OutputBufferOffset** and **OutputBufferLength** into the buffer that is provided by the calling application. The client MUST return success and the **OutputBufferLength** to the application.
 
 There can be cases where STATUS_BUFFER_OVERFLOW is returned and the **OutputBufferSize** is set to zero. See [[MSDOCS-ABEConcepts]](https://go.microsoft.com/fwlink/?linkid=2196189) for an example of such a case where output entries are filtered when the requester does not have the required permissions. [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.6.3.
 
@@ -8095,14 +8095,14 @@ The client SHOULD<200> fail the response with STATUS_INVALID_NETWORK_RESPONSE if
 - If **FileNameLength** field is not a multiple of 2.
 - If **FileName** field begins with "/" or “\” character or contains double-quote character.
 - If **Flags** field in the request is 0 and **FileName** field contains "/" or “\” character.
-If the **Status** field of the SMB2 header of the response indicates success, the client MUST copy the received information in the [SMB2 CHANGE_NOTIFY Response](#Section_3.2.5.16) following the SMB2 header that is described by the **OutputBufferOffset** and **OutputBufferLength** into the buffer that is provided by the calling application. The client MUST return success and the **OutputBufferLength** to the application.
+If the **Status** field of the SMB2 header of the response indicates success, the client MUST copy the received information in the [SMB2 CHANGE_NOTIFY Response](#Section_2.2.35) following the SMB2 header that is described by the **OutputBufferOffset** and **OutputBufferLength** into the buffer that is provided by the calling application. The client MUST return success and the **OutputBufferLength** to the application.
 
 <a id="Section_3.2.5.17"></a>
 #### 3.2.5.17 Receiving an SMB2 QUERY_INFO Response
 
 If the **Status** field of the [SMB2 header](#Section_2.2.1) of the response indicates an error, the client MUST return the received status code to the calling application. If the error code is either **STATUS_BUFFER_TOO_SMALL** or **STATUS_INFO_LENGTH_MISMATCH** and the [SMB2 ERROR Response](#Section_2.2.2) following the SMB2 header has a **ByteCount** of 4, the client MUST also return the 4-byte error data to the calling application. This error data indicates the size, in bytes, that is required to successfully query the information.
 
-If the **Status** field of the SMB2 header of the response indicates success, the client MUST copy the received information in the [SMB2 QUERY_INFO Response](#Section_3.2.5.17) following the SMB2 header that is described by the **OutputBufferOffset** and **OutputBufferLength** into the buffer that is provided by the calling application. The client MUST return success and the **OutputBufferLength** to the application.
+If the **Status** field of the SMB2 header of the response indicates success, the client MUST copy the received information in the [SMB2 QUERY_INFO Response](#Section_2.2.37) following the SMB2 header that is described by the **OutputBufferOffset** and **OutputBufferLength** into the buffer that is provided by the calling application. The client MUST return success and the **OutputBufferLength** to the application.
 
 <a id="Section_3.2.5.18"></a>
 #### 3.2.5.18 Receiving an SMB2 SET_INFO Response
@@ -8118,7 +8118,7 @@ If the **MessageId** field of the [SMB2 header](#Section_2.2.1) of the response 
 
 If **Connection.Dialect** is not "2.0.2", the client MUST verify:
 
-- If **Connection.SupportsFileLeasing** is TRUE or **Connection.SupportsDirectoryLeasing** is TRUE, the client MUST use the **StructureSize** field in the SMB2 OPLOCK_BREAK notification to differentiate between an oplock break notification and a lease break notification as specified in [2.2.25](#Section_2.2.25.2).
+- If **Connection.SupportsFileLeasing** is TRUE or **Connection.SupportsDirectoryLeasing** is TRUE, the client MUST use the **StructureSize** field in the SMB2 OPLOCK_BREAK notification to differentiate between an oplock break notification and a lease break notification as specified in [2.2.25](#Section_2.2.25).
 <a id="Section_3.2.5.19.1"></a>
 ##### 3.2.5.19.1 Receiving an Oplock Break Notification
 
@@ -8217,7 +8217,7 @@ The client MAY<205> choose to disconnect the connection as well.
 <a id="Section_3.2.6.2"></a>
 #### 3.2.6.2 Idle Connection Timer Event
 
-When the Idle Connection timer expires, the client MUST scan through the global **ConnectionTable** (defined in section [3.2.1.1](#Section_3.2.1.1)). For each [**connection**](#gt_connection) in **ConnectionTable**, for each session in **Connection.SessionTable**, if **Session.OpenTable** is empty and the idle time-out has expired, the client MUST tear down the Connection and all associated Sessions and Tree Connects, in the manner specified in section [3.2.7.1](#Section_3.2.7.1). The client is not required to explicitly send [SMB2 LOGOFF](#Section_2.2.7) and [SMB2 TREE_DISCONNECT](#Section_2.2.11) requests to the server because the teardown of the connection will implicitly result in the teardown of all server [**Sessions**](#gt_session) and [**Tree Connects**](#gt_tree-connect) on the connection, as specified in section [3.3.7.1](#Section_3.2.5.6).
+When the Idle Connection timer expires, the client MUST scan through the global **ConnectionTable** (defined in section [3.2.1.1](#Section_3.2.1.1)). For each [**connection**](#gt_connection) in **ConnectionTable**, for each session in **Connection.SessionTable**, if **Session.OpenTable** is empty and the idle time-out has expired, the client MUST tear down the Connection and all associated Sessions and Tree Connects, in the manner specified in section [3.2.7.1](#Section_3.2.7.1). The client is not required to explicitly send [SMB2 LOGOFF](#Section_2.2.7) and [SMB2 TREE_DISCONNECT](#Section_2.2.11) requests to the server because the teardown of the connection will implicitly result in the teardown of all server [**Sessions**](#gt_session) and [**Tree Connects**](#gt_tree-connect) on the connection, as specified in section [3.3.7.1](#Section_3.3.7.1).
 
 <a id="Section_3.2.6.3"></a>
 #### 3.2.6.3 Network Interface Information Timer Event
@@ -8302,7 +8302,7 @@ The server MUST implement an algorithm that monitors for changes on an object st
 - The algorithm MUST perform the change notification processing based on the **CompletionFilter** and SMB2_WATCH_TREE flag in the **Flags** field of the first CHANGE_NOTIFY request on an **Open.LocalOpen**. The algorithm MUST ignore the **CompletionFilter** and SMB2_WATCH_TREE flag in all further requests on the same open.
 - If the client sets the SMB2_WATCH_TREE flag in the **Flags** field of the first request on an **Open.LocalOpen**, indicating that an entire tree is being watched, the algorithm MUST monitor all objects beneath the directory on which the operation was issued, instead of simply the immediate children objects of that directory.
 - If a client issues multiple change notification requests on the same open to a directory, the server MUST queue the requests and complete them on a First In, First Out (FIFO) basis when changes are indicated by the underlying object store.
-- If a change notification request is pending on a directory and a change occurs to the directory contents matching the events to be monitored as specified by the **CompletionFilter**, the server MUST copy the results into the **Buffer** field of the CHANGE_NOTIFY response. The server SHOULD send the maximum number of events that match the **CompletionFilter** of the first CHANGE_NOTIFY request indicated by the underlying object store into a single response up to the maximum of the **OutputBufferLength** field. The server MUST construct the response in the format specified in section [2.2.36](#Section_3.2.5.16) and the change notification information in the format specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.7.1. The server MUST then return the results to the client.
+- If a change notification request is pending on a directory and a change occurs to the directory contents matching the events to be monitored as specified by the **CompletionFilter**, the server MUST copy the results into the **Buffer** field of the CHANGE_NOTIFY response. The server SHOULD send the maximum number of events that match the **CompletionFilter** of the first CHANGE_NOTIFY request indicated by the underlying object store into a single response up to the maximum of the **OutputBufferLength** field. The server MUST construct the response in the format specified in section [2.2.36](#Section_2.2.36) and the change notification information in the format specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.7.1. The server MUST then return the results to the client.
 <a id="Section_3.3.1.4"></a>
 #### 3.3.1.4 Algorithm for Leasing in an Object Store
 
@@ -8347,7 +8347,7 @@ The server implements the following:
 
 - **ServerStatistics**: Server statistical information. This contains all the members of **STAT_SRV_0** structure as specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 2.2.4.39.
 - **ServerEnabled**: A Boolean that indicates whether the SMB2 server is accepting incoming connections or requests.
-- **ShareList**: A list of available shares for the system. The structure of a [**share**](#gt_share) is as specified in section [3.3.1.6](#Section_3.2.1.10) and is uniquely indexed by the tuple <Share.ServerName, Share.Name>.
+- **ShareList**: A list of available shares for the system. The structure of a [**share**](#gt_share) is as specified in section [3.3.1.6](#Section_3.3.1.6) and is uniquely indexed by the tuple <Share.ServerName, Share.Name>.
 - **GlobalOpenTable**: A table containing all the files [**opened**](#gt_open) by remote clients on the server, indexed by **Open.DurableFileId**. The structure of an open is as specified in section [3.3.1.10](#Section_3.3.1.10). The table MUST support enumeration of all entries in the table.
 - **GlobalSessionTable**: A list of all the active [**sessions**](#gt_session) established to this server, indexed by the **Session.SessionId**.
 - **ConnectionList**: A list of all open [**connections**](#gt_connection) on the server, indexed by the connection endpoint addresses.
@@ -8433,7 +8433,7 @@ The server implements the following:
 - **Connection.Dialect**: The dialect of SMB2 negotiated with the client. This value MUST be either "2.0.2", "2.1", "3.0", "3.0.2", "3.1.1", or "Unknown". For the purpose of generalization in the server processing rules, the condition that **Connection.Dialect** is equal to "3.0", "3.0.2", or "3.1.1" is referred to as "**Connection.Dialect** belongs to the SMB 3.x dialect family".
 - **Connection.ShouldSign**: A Boolean that, if set, indicates that all sessions on this connection (with the exception of anonymous and guest sessions) MUST have signing enabled.
 - **Connection.ClientName**: A null-terminated Unicode UTF-16 IP address string, or NetBIOS host name of the client machine.
-- **Connection.MaxTransactSize**: The maximum buffer size, in bytes, that the server allows on the transport that established this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.40) requests, or returned from the server in [QUERY_INFO](#Section_3.2.5.17), [QUERY_DIRECTORY](#Section_3.2.5.15), and [CHANGE_NOTIFY](#Section_3.2.5.16) responses.
+- **Connection.MaxTransactSize**: The maximum buffer size, in bytes, that the server allows on the transport that established this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.39) requests, or returned from the server in [QUERY_INFO](#Section_2.2.37), [QUERY_DIRECTORY](#Section_2.2.33), and [CHANGE_NOTIFY](#Section_2.2.35) responses.
 - **Connection.MaxWriteSize**: The maximum buffer size, in bytes, that the server allows to be written on the connection using the [SMB2 WRITE Request](#Section_2.2.21).
 - **Connection.MaxReadSize**: The maximum buffer size, in bytes, that the server allows to be read on the connection using the [SMB2 READ Request](#Section_2.2.19).
 - **Connection.SupportsMultiCredit**: A Boolean indicating whether the connection supports multi-credit operations.
@@ -8507,7 +8507,7 @@ The server implements the following:
 - **TreeConnect.OpenCount**: A numeric value that indicates the number of files that are currently opened on TreeConnect.
 - **TreeConnect.TreeGlobalId**: A numeric value obtained via registration with [MS-SRVS](../MS-SRVS/MS-SRVS.md), as specified in [MS-SRVS] section 3.1.6.6.
 - **TreeConnect.CreationTime**: The time tree connect was established.
-- **TreeConnect.MaximalAccess**: Access rights for the user that established the tree connect on **TreeConnect.Share**, in the format specified in section [2.2.13.1](#Section_2.2.13.1.2).
+- **TreeConnect.MaximalAccess**: Access rights for the user that established the tree connect on **TreeConnect.Share**, in the format specified in section [2.2.13.1](#Section_2.2.13.1).
 - **TreeConnect.RemotedIdentitySecurityContext**: The remoted identity security context of the caller optionally provided by the client via the remoted identity tree connect context.
 <a id="Section_3.3.1.10"></a>
 #### 3.3.1.10 Per Open
@@ -8521,7 +8521,7 @@ The server implements the following:
 - **Open.TreeConnect**: A reference to the **TreeConnect**, as specified in section [3.3.1.9](#Section_3.3.1.9), over which the open was performed. If the open is not attached to a **TreeConnect** at this time, this value MUST be NULL.
 - **Open.Connection**: A reference to the [**connection**](#gt_connection), as specified in section [3.3.1.7](#Section_3.3.1.7), that created this open. If the open is not attached to a connection at this time, this value MUST be NULL.
 - **Open.LocalOpen**: An open of a file or named pipe in the underlying local resource that is used to perform the local operations, such as reading or writing, to the underlying object. For named pipes, **Open.LocalOpen** is shared between the SMB server and RPC server applications which serve RPC requests on a given named pipe. The higher level interfaces described in sections [3.3.4.5](#Section_3.3.4.5) and [3.3.4.11](#Section_3.3.4.11) require this shared element.
-- **Open.GrantedAccess**: The access granted on this open, as defined in section [2.2.13.1](#Section_2.2.13.1.2).
+- **Open.GrantedAccess**: The access granted on this open, as defined in section [2.2.13.1](#Section_2.2.13.1).
 - **Open.OplockLevel**: The current oplock level for this open. This value MUST be one of the **OplockLevel** values defined in section [2.2.14](#Section_2.2.14): SMB2_OPLOCK_LEVEL_NONE, SMB2_OPLOCK_LEVEL_II, SMB2_OPLOCK_LEVEL_EXCLUSIVE, SMB2_OPLOCK_LEVEL_BATCH, or SMB2_OPLOCK_LEVEL_LEASE.
 - **Open.OplockState**: The current oplock state of the file. This value MUST be Held, Breaking, or None.
 - **Open.OplockTimeout**: The time value that indicates when an oplock that is breaking and has not received an acknowledgment from the client will be acknowledged by the server.
@@ -8895,7 +8895,7 @@ The server MUST fill in the [SMB2 header](#Section_2.2.1) of the success respons
 - Otherwise, the server MUST set the **CreditResponse** field to the number of credits the server chooses to grant the request, as specified in section [3.3.1.2](#Section_3.3.1.2).
 Any other additional changes to the header will be made on a command-specific basis.
 
-The information that follows the SMB2 header is command-specific, as specified in section [3.3.5](#Section_1.3). This response MUST be sent to the client and the request MUST be removed from **Connection.RequestList** and freed.
+The information that follows the SMB2 header is command-specific, as specified in section [3.3.5](#Section_3.3.5). This response MUST be sent to the client and the request MUST be removed from **Connection.RequestList** and freed.
 
 <a id="Section_3.3.4.4"></a>
 #### 3.3.4.4 Sending an Error Response
@@ -8903,11 +8903,11 @@ The information that follows the SMB2 header is command-specific, as specified i
 When the server is responding with a failure to any command sent by the client, the response message MUST be constructed as described here. An error code other than one of the following indicates a failure:
 
 - STATUS_MORE_PROCESSING_REQUIRED in an [SMB2 SESSION_SETUP Response](#Section_2.2.6) specified in section 2.2.6.
-- STATUS_BUFFER_OVERFLOW in an [SMB2 QUERY_INFO Response](#Section_3.2.5.17) specified in section 2.2.38.
+- STATUS_BUFFER_OVERFLOW in an [SMB2 QUERY_INFO Response](#Section_2.2.37) specified in section 2.2.38.
 - STATUS_BUFFER_OVERFLOW in a FSCTL_PIPE_TRANSCEIVE, FSCTL_PIPE_PEEK or FSCTL_DFS_GET_REFERRALS Response specified in section [2.2.32](#Section_2.2.32).<243>
 - STATUS_BUFFER_OVERFLOW in an [SMB2 READ Response](#Section_2.2.20) on a named pipe specified in section 2.2.20.
 - STATUS_INVALID_PARAMETER in an FSCTL_SRV_COPYCHUNK or FSCTL_SRV_COPYCHUNK_WRITE response, when returning an [SRV_COPYCHUNK_RESPONSE](#Section_2.2.32.1) as described in section [3.3.5.15.6.2](#Section_3.3.5.15.6.2).
-- STATUS_NOTIFY_ENUM_DIR in an [SMB2 CHANGE_NOTIFY Response](#Section_3.2.5.16) specified in section 2.2.36.
+- STATUS_NOTIFY_ENUM_DIR in an [SMB2 CHANGE_NOTIFY Response](#Section_2.2.35) specified in section 2.2.36.
 The server MUST provide the error code of the failure and a data buffer to be returned with the error. If nothing is specified, the buffer MUST be considered to be zero bytes in length.
 
 The server can return any of the following errors if the server, the file, or the share is not ready to process an I/O request from the client.
@@ -9015,12 +9015,12 @@ In response to this event, the SMB2 server MUST set the global state variable **
 <a id="Section_3.3.4.9"></a>
 #### 3.3.4.9 DFS Server Notifies SMB2 Server That a Share Is a DFS Share
 
-In response to this event, the SMB2 server MUST set the **Share.IsDfs** attribute of the [**share**](#gt_share) specified in section [3.3.1.6](#Section_3.2.1.10). When a [**DFS**](#gt_distributed-file-system-dfs) server running on this computer claims a share as a DFS share, it MUST notify the SMB2 server via this event.
+In response to this event, the SMB2 server MUST set the **Share.IsDfs** attribute of the [**share**](#gt_share) specified in section [3.3.1.6](#Section_3.3.1.6). When a [**DFS**](#gt_distributed-file-system-dfs) server running on this computer claims a share as a DFS share, it MUST notify the SMB2 server via this event.
 
 <a id="Section_3.3.4.10"></a>
 #### 3.3.4.10 DFS Server Notifies SMB2 Server That a Share Is Not a DFS Share
 
-In response to this event, the SMB2 server MUST clear the **Share.IsDfs** attribute of the [**share**](#gt_share) specified in section [3.3.1.6](#Section_3.2.1.10).
+In response to this event, the SMB2 server MUST clear the **Share.IsDfs** attribute of the [**share**](#gt_share) specified in section [3.3.1.6](#Section_3.3.1.6).
 
 <a id="Section_3.3.4.11"></a>
 #### 3.3.4.11 Server Application Requests Security Context of the Client
@@ -9142,7 +9142,7 @@ The calling application provides **GlobalFileId** as input parameter. The server
 - If **Open.Lease.Breaking** is TRUE, the server MUST complete the lease break to the underlying object store with NONE as the new lease state. <251>
 - The server MUST remove the **Open.Lease** from the **LeaseTable.LeaseList** and free the **Open.Lease**.
 - If **LeaseTable.LeaseList** is now empty, the server MAY remove the **LeaseTable** from the **GlobalLeaseTableList** and free the **LeaseTable**.
-- The server MUST send an SMB2 CHANGE_NOTIFY Response, as specified in section [2.2.36](#Section_3.2.5.16), with STATUS_NOTIFY_CLEANUP status code for any pending CHANGE_NOTIFY request associated with the **Open** that is closed.
+- The server MUST send an SMB2 CHANGE_NOTIFY Response, as specified in section [2.2.36](#Section_2.2.36), with STATUS_NOTIFY_CLEANUP status code for any pending CHANGE_NOTIFY request associated with the **Open** that is closed.
 - Provide **Open.FileGlobalId** as the input parameter and deregister the **Open** by invoking the event specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.5.
 - The **Open** object is then freed.
 - Return STATUS_SUCCESS to the calling application.
@@ -9345,7 +9345,7 @@ If **Connection.SupportsMultiCredit** is TRUE, the command is other than READ, W
 
 For every message received, the server MUST calculate the total number of bytes in the message and update the values of **ServerStatistics.sts0_bytesrcvd_low** and **ServerStatistics.sts0_bytesrcvd_high**.
 
-Otherwise, the server MUST disconnect the connection as specified in section [3.3.7.1](#Section_3.2.5.6).
+Otherwise, the server MUST disconnect the connection as specified in section [3.3.7.1](#Section_3.3.7.1).
 
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Handling the Transformed Message
@@ -9357,7 +9357,7 @@ This section is applicable for only the SMB 3.x dialect family.<258>
 
 If **IsEncryptionSupported** is TRUE and **Connection.CipherId** is not zero, the server MUST perform the following:
 
-- If the size of the message received from the client is not greater than the size of the SMB2 TRANSFORM_HEADER as specified in section [2.2.41](#Section_2.2.41), the server MUST disconnect the connection as specified in section [3.3.7.1](#Section_3.2.5.6).
+- If the size of the message received from the client is not greater than the size of the SMB2 TRANSFORM_HEADER as specified in section [2.2.41](#Section_2.2.41), the server MUST disconnect the connection as specified in section [3.3.7.1](#Section_3.3.7.1).
 - If the **Flags/EncryptionAlgorithm** in the SMB2 TRANSFORM_HEADER is not 0x0001, the server MUST disconnect the connection as specified in section 3.3.7.1.
 - The server MUST look up the session in the **Connection.SessionTable** using the **SessionId** in the SMB2 TRANSFORM_HEADER of the request. If the session is not found, the server MUST disconnect the connection as specified in section 3.3.7.1.
 - If **Connection.ConstrainedConnection** is set to TRUE and the request is encrypted, then the server MUST disconnect the connection as specified in section 3.3.7.1.
@@ -9389,7 +9389,7 @@ This section is applicable only for the SMB 3.1.1 dialect.<261>
 
 If **IsCompressionSupported** is TRUE and **Connection.CompressionIds** is not empty, the server MUST perform the following:
 
-- The server MUST disconnect the connection as specified in section [3.3.7.1](#Section_3.2.5.6) if any of the following conditions are satisfied:
+- The server MUST disconnect the connection as specified in section [3.3.7.1](#Section_3.3.7.1) if any of the following conditions are satisfied:
 - If the size of the message received from the client is less than the size of SMB2 COMPRESSION_TRANSFORM_HEADER, specified in section [2.2.42](#Section_2.2.42).
 - If **Flags** field in SMB2 COMPRESSION_TRANSFORM_HEADER is equal to SMB2_COMPRESSION_FLAG_NONE and **Connection.CompressionIds** does not contain the **CompressionAlgorithm** field in the SMB2_COMPRESSION_TRANSFORM_HEADER_UNCHAINED.
 - If **Flags** field in SMB2 COMPRESSION_TRANSFORM_HEADER is equal to SMB2_COMPRESSION_FLAG_CHAINED and **CompressionAlgorithm** in any of the SMB2_COMPRESSION_CHAINED_PAYLOAD_HEADER structures in the chain is neither NONE nor one of the identifiers in **Connection.CompressionIds**.
@@ -9404,7 +9404,7 @@ Otherwise the server MUST disconnect the connection as specified in section 3.3.
 <a id="Section_3.3.5.2.2"></a>
 ##### 3.3.5.2.2 Verifying the Connection State
 
-If the request being received is not an [SMB2 NEGOTIATE Request](#Section_2.2.3) or a traditional SMB_COM_NEGOTIATE, as described in section [1.7](#Section_1.7), and **Connection.NegotiateDialect** is 0xFFFF or 0x02FF, the server MUST disconnect the [**connection**](#gt_connection), as specified in section [3.3.7.1](#Section_3.2.5.6), and send no reply.
+If the request being received is not an [SMB2 NEGOTIATE Request](#Section_2.2.3) or a traditional SMB_COM_NEGOTIATE, as described in section [1.7](#Section_1.7), and **Connection.NegotiateDialect** is 0xFFFF or 0x02FF, the server MUST disconnect the [**connection**](#gt_connection), as specified in section [3.3.7.1](#Section_3.3.7.1), and send no reply.
 
 <a id="Section_3.3.5.2.3"></a>
 ##### 3.3.5.2.3 Verifying the Sequence Number
@@ -9434,7 +9434,7 @@ Otherwise, the server MUST use **Session.SessionKey** as the session key to veri
 
 If **Session.SigningKey**, **Channel.SigningKey**, or **Session.SessionKey** is NULL, the server MUST fail the request with STATUS_NOT_SUPPORTED and MUST stop processing the request.
 
-If the signature verification fails, the server MUST fail the request with the error code STATUS_ACCESS_DENIED. The server MAY also disconnect the [**connection**](#gt_connection) as specified in section [3.3.7.1](#Section_3.2.5.6). If signature verification succeeds, the server MUST continue processing on the packet.<263>
+If the signature verification fails, the server MUST fail the request with the error code STATUS_ACCESS_DENIED. The server MAY also disconnect the [**connection**](#gt_connection) as specified in section [3.3.7.1](#Section_3.3.7.1). If signature verification succeeds, the server MUST continue processing on the packet.<263>
 
 If the SMB2 header of the request does not have SMB2_FLAGS_SIGNED set in the **Flags** field, the server MUST determine if the client failed to sign a packet that required it. The server MUST look up the session in the **GlobalSessionTable** using the **SessionId** in the SMB2 header of the request. If the session is found and **Session.SigningRequired** is equal to TRUE, the server MUST fail this request with STATUS_ACCESS_DENIED. The server MAY<264> also disconnect the connection, as specified in section 3.3.7.1. If either the session is not found, or **Session.SigningRequired** is FALSE, the server continues processing on the packet.
 
@@ -9450,9 +9450,9 @@ If **Connection.SupportsMultiCredit** is TRUE, the server MUST verify the **Cred
 <a id="Section_3.3.5.2.6"></a>
 ##### 3.3.5.2.6 Handling Incorrectly Formatted Requests
 
-If the server receives a request that does not conform to the structures outlined in section [2](#Section_1.3), the server MUST fail the request, as specified in section [3.3.4.4](#Section_3.3.4.4), with the error code STATUS_INVALID_PARAMETER. The server MAY<265> also disconnect the [**connection**](#gt_connection).
+If the server receives a request that does not conform to the structures outlined in section [2](#Section_2), the server MUST fail the request, as specified in section [3.3.4.4](#Section_3.3.4.4), with the error code STATUS_INVALID_PARAMETER. The server MAY<265> also disconnect the [**connection**](#gt_connection).
 
-The server MUST disconnect, as specified in section [3.3.7.1](#Section_3.2.5.6), without sending an error response if any of the following are true:
+The server MUST disconnect, as specified in section [3.3.7.1](#Section_3.3.7.1), without sending an error response if any of the following are true:
 
 - The **Command** code in the [SMB2 header](#Section_2.2.1) does not match one of the command codes in the SMB2 header as specified in section 2.2.1.
 - The server receives a request with a length less than the length of the SMB2 header as specified in section 2.2.1.
@@ -9549,7 +9549,7 @@ This section applies only to servers that implement the SMB 3.0.2 or SMB 3.1.1 d
 
 If **Open.IsSharedVHDX** is TRUE, the server MUST process as follows:
 
-- The server MUST perform Request validation as specified in respective subsections of [3.3.5](#Section_1.3).
+- The server MUST perform Request validation as specified in respective subsections of [3.3.5](#Section_3.3.5).
 - The server MUST process the operation as specified in [MS-RSVD](../MS-RSVD/MS-RSVD.md) section 3.2.5, passing the command name, **Open.LocalOpen**, and Request Parameters.
 - The server MUST perform Response construction as specified in respective subsections of 3.3.5.
 Otherwise, the server MUST process the request as specified in section 3.3.5.
@@ -9557,7 +9557,7 @@ Otherwise, the server MUST process the request as specified in section 3.3.5.
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Receiving an SMB_COM_NEGOTIATE
 
-If **Connection.NegotiateDialect** is 0xFFFF, processing MUST continue as specified in [3.3.5.3.1](#Section_3.3.5.3.1). Otherwise, the server MUST disconnect the connection, as specified in section [3.3.7.1](#Section_3.2.5.6), without sending a response.
+If **Connection.NegotiateDialect** is 0xFFFF, processing MUST continue as specified in [3.3.5.3.1](#Section_3.3.5.3.1). Otherwise, the server MUST disconnect the connection, as specified in section [3.3.7.1](#Section_3.3.7.1), without sending a response.
 
 <a id="Section_3.3.5.3.1"></a>
 ##### 3.3.5.3.1 SMB 2.1 or SMB 3.x Support
@@ -9576,7 +9576,7 @@ The server MUST set the command of the SMB2 header to SMB2 NEGOTIATE. All other 
 - SMB2_GLOBAL_CAP_DFS if the server supports the Distributed File System.
 - SMB2_GLOBAL_CAP_LEASING if the server supports leasing.
 - SMB2_GLOBAL_CAP_LARGE_MTU if **Connection.SupportsMultiCredit** is TRUE.
-- **MaxTransactSize** is set to the maximum buffer size, in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO, and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.40) requests, or returned from the server in [QUERY_INFO](#Section_3.2.5.17), [QUERY_DIRECTORY](#Section_3.2.5.15), and [CHANGE_NOTIFY](#Section_3.2.5.16) responses. This value SHOULD<274> be greater than or equal to 65536. **Connection.MaxTransactSize** MUST be set to **MaxTransactSize**.
+- **MaxTransactSize** is set to the maximum buffer size, in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO, and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.39) requests, or returned from the server in [QUERY_INFO](#Section_2.2.37), [QUERY_DIRECTORY](#Section_2.2.33), and [CHANGE_NOTIFY](#Section_2.2.35) responses. This value SHOULD<274> be greater than or equal to 65536. **Connection.MaxTransactSize** MUST be set to **MaxTransactSize**.
 - **MaxReadSize** is set to the maximum size, in bytes, of the Length in an SMB2 READ Request ([2.2.19](#Section_2.2.19)) that the server will accept on the transport that established this connection. This value SHOULD<275> be greater than or equal to 65536. **Connection.MaxReadSize** MUST be set to **MaxReadSize**.
 - **MaxWriteSize** is set to the maximum size, in bytes, of the Length in an SMB2 Write Request ([2.2.21](#Section_2.2.21)) that the server will accept on the transport that established this connection. This value SHOULD<276> be greater than or equal to 65536. **Connection.MaxWriteSize** MUST be set to **MaxWriteSize**.
 - **SystemTime** is set to the current time, in **FILETIME** format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3.
@@ -9591,16 +9591,16 @@ The generation of the GSS token for the SMB2 NEGOTIATE Response MUST be done as 
 <a id="Section_3.3.5.3.2"></a>
 ##### 3.3.5.3.2 SMB 2.0.2 Support
 
-The server MUST scan the dialects provided for the dialect string "SMB 2.002". If the string is present, the client understands SMB2, and the server MUST respond with an [SMB2 NEGOTIATE Response](#Section_2.2.4). If the string is not present in the dialect list and the server also implements SMB as specified in [MS-SMB](../MS-SMB/MS-SMB.md), it MUST terminate SMB2 processing on this [**connection**](#gt_connection) and start SMB processing on this connection. If the string is not present in the dialect list and the server does not implement SMB, the server MUST disconnect the connection, as specified in section [3.3.7.1](#Section_3.2.5.6), without sending a response.
+The server MUST scan the dialects provided for the dialect string "SMB 2.002". If the string is present, the client understands SMB2, and the server MUST respond with an [SMB2 NEGOTIATE Response](#Section_2.2.4). If the string is not present in the dialect list and the server also implements SMB as specified in [MS-SMB](../MS-SMB/MS-SMB.md), it MUST terminate SMB2 processing on this [**connection**](#gt_connection) and start SMB processing on this connection. If the string is not present in the dialect list and the server does not implement SMB, the server MUST disconnect the connection, as specified in section [3.3.7.1](#Section_3.3.7.1), without sending a response.
 
 The server MUST set the command of the [SMB2 header](#Section_2.2.1) to SMB2 NEGOTIATE. All other values MUST be set following the syntax specified in section 2.2.1, and any value not defined there with a default MUST be set to 0. The header is followed by an SMB2 NEGOTIATE Response that MUST be constructed as specified in section 2.2.4, with the following specific values:
 
 - **SecurityMode** MUST have the SMB2_NEGOTIATE_SIGNING_ENABLED bit set.
-- If [RequireMessageSigning](#Section_2) is TRUE, the server MUST also set SMB2_NEGOTIATE_SIGNING_REQUIRED in the **SecurityMode**.
+- If [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) is TRUE, the server MUST also set SMB2_NEGOTIATE_SIGNING_REQUIRED in the **SecurityMode**.
 - **DialectRevision** MUST be set to 0x0202.
 - **ServerGuid** is set to the global **ServerGuid** value.
 - If the server supports the Distributed File System, set the SMB2_GLOBAL_CAP_DFS bit in the **Capabilities** field of the negotiate response.
-- **MaxTransactSize** is set to the maximum buffer size,<278> in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO, and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.40) requests, or returned from the server in [QUERY_INFO](#Section_3.2.5.17), [QUERY_DIRECTORY](#Section_3.2.5.15), and [CHANGE_NOTIFY](#Section_3.2.5.16) responses. **Connection.MaxTransactSize** MUST be set to **MaxTransactSize**.
+- **MaxTransactSize** is set to the maximum buffer size,<278> in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO, and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.39) requests, or returned from the server in [QUERY_INFO](#Section_2.2.37), [QUERY_DIRECTORY](#Section_2.2.33), and [CHANGE_NOTIFY](#Section_2.2.35) responses. **Connection.MaxTransactSize** MUST be set to **MaxTransactSize**.
 - **MaxReadSize** is set to the maximum size,<279> in bytes, of the Length in an [SMB2 READ Request](#Section_2.2.19) (2.2.19) that the server will accept on the transport that established this connection. **Connection.MaxReadSize** MUST be set to **MaxReadSize**.
 - **MaxWriteSize** is set to the maximum size,<280> in bytes, of the Length in an [SMB2 WRITE Request](#Section_2.2.21) (2.2.21) that the server will accept on the transport that established this connection. **Connection.MaxWriteSize** MUST be set to **MaxWriteSize**.
 - **SystemTime** is set to the current time, in FILETIME format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3.
@@ -9619,7 +9619,7 @@ The generation of the GSS token for the SMB2 NEGOTIATE Response MUST be done as 
 
 When the server receives a request with an [SMB2 header](#Section_2.2.1) with a **Command** value equal to SMB2 NEGOTIATE, it MUST process it as follows:
 
-If **Connection.NegotiateDialect** is 0x0202, 0x0210, 0x0300, 0x0302, or 0x0311, the server MUST disconnect the connection, as specified in section [3.3.7.1](#Section_3.2.5.6), and not reply.
+If **Connection.NegotiateDialect** is 0x0202, 0x0210, 0x0300, 0x0302, or 0x0311, the server MUST disconnect the connection, as specified in section [3.3.7.1](#Section_3.3.7.1), and not reply.
 
 The server MUST set **Connection.ClientCapabilities** to the capabilities received in the [SMB2 NEGOTIATE request](#Section_2.2.3).
 
@@ -9694,7 +9694,7 @@ If the common dialect is SMB 2.1 or 3.x dialect family and the underlying connec
 - SMB2_GLOBAL_CAP_PERSISTENT_HANDLES if **Connection.Dialect** belongs to the SMB 3.x dialect family, SMB2_GLOBAL_CAP_PERSISTENT_HANDLES is set in the **Capabilities** field of the request, and the server supports persistent handles.
 - SMB2_GLOBAL_CAP_ENCRYPTION if **Connection.Dialect** is "3.0" or "3.0.2", **IsEncryptionSupported** is TRUE, the server supports AES-128-CCM encryption algorithm and SMB2_GLOBAL_CAP_ENCRYPTION is set in the **Capabilities** field of the request.
 - SMB2_GLOBAL_CAP_NOTIFICATIONS if **Connection.Dialect** is “3.1.1”, **IsServerToClientNotificationsSupported** is TRUE, and SMB2_GLOBAL_CAP_NOTIFICATIONS is set in the **Capabilities** field of the request. If SMB2_GLOBAL_CAP_NOTIFICATIONS is set in the **Capabilities** field of the response, the server MUST set **Connection.SupportsNotifications** to TRUE. Otherwise, the server MUST set **Connection.SupportsNotifications** to FALSE.
-- **MaxTransactSize** is set to the maximum buffer size, in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.40) requests, or returned from the server in [QUERY_INFO](#Section_3.2.5.17), [QUERY_DIRECTORY](#Section_3.2.5.15), and [CHANGE_NOTIFY](#Section_3.2.5.16) responses. This value SHOULD<283> be greater than or equal to 65536. **Connection.MaxTransactSize** MUST be set to **MaxTransactSize**.
+- **MaxTransactSize** is set to the maximum buffer size, in bytes, that the server will accept on this connection for QUERY_INFO, QUERY_DIRECTORY, SET_INFO and CHANGE_NOTIFY operations. This field is applicable only for buffers sent by the client in [SET_INFO](#Section_2.2.39) requests, or returned from the server in [QUERY_INFO](#Section_2.2.37), [QUERY_DIRECTORY](#Section_2.2.33), and [CHANGE_NOTIFY](#Section_2.2.35) responses. This value SHOULD<283> be greater than or equal to 65536. **Connection.MaxTransactSize** MUST be set to **MaxTransactSize**.
 - **MaxReadSize** is set to the maximum size, in bytes, of the Length in an [SMB2 READ Request (section 2.2.19)](#Section_2.2.19) that the server will accept on the transport that established this connection. This value SHOULD<284> be greater than or equal to 65536. **Connection.MaxReadSize** MUST be set to **MaxReadSize**.
 - **MaxWriteSize** is set to the maximum size, in bytes, of the Length in an [SMB2 WRITE Request (section 2.2.21)](#Section_2.2.21) that the server will accept on the transport that established this connection. This value SHOULD<285> be greater than or equal to 65536. **Connection.MaxWriteSize** MUST be set to **MaxWriteSize**.
 - **SystemTime** is set to the current time, in FILETIME format as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3.
@@ -9943,7 +9943,7 @@ Otherwise,
 - The server MUST look up the old session in **GlobalSessionTable**, where **Session.SessionId** matches **PreviousSessionId**. If no session is found, no other processing is necessary.
 - If a session is found with **Session.SessionId** equal to **PreviousSessionId**, the server MUST determine if the old session and the newly established session are created by the same user by comparing the user identifiers obtained from the **Session.SecurityContext** on the new and old session.
 - If the **PreviousSessionId** and **SessionId** values in the SMB2 header of the request are equal, the server SHOULD<294> ignore **PreviousSessionId** and no other processing is required.
-- Otherwise, if the server determines the authentications were for the same user, the server MUST remove the old session from the **GlobalSessionTable** and also from the **Connection.SessionTable**, as specified in section [3.3.7.1](#Section_3.2.5.6).
+- Otherwise, if the server determines the authentications were for the same user, the server MUST remove the old session from the **GlobalSessionTable** and also from the **Connection.SessionTable**, as specified in section [3.3.7.1](#Section_3.3.7.1).
 - Otherwise, if the server determines that the authentications were for different users, the server MUST ignore the **PreviousSessionId** value.
 - **Session.State** MUST be set to Valid.
 - **Session.ExpirationTime** MUST be set to the expiration time returned by the GSS authentication subsystem. If the GSS authentication subsystem does not return an expiration time, the **Session.ExpirationTime** is set to infinity.
@@ -10282,7 +10282,7 @@ Oplock Acquisition:
 
 If the server does not support leasing and **RequestedOplockLevel** is set to SMB2_OPLOCK_LEVEL_LEASE, the server MUST ignore the "RqLs" create context.
 
-If the server supports leasing, the name of the create context is "RqLs" as defined in section [2.2.13.2](#Section_2.2.14.2), and **RequestedOplockLevel** is set to SMB2_OPLOCK_LEVEL_LEASE, the server MUST do the following:
+If the server supports leasing, the name of the create context is "RqLs" as defined in section [2.2.13.2](#Section_2.2.13.2), and **RequestedOplockLevel** is set to SMB2_OPLOCK_LEVEL_LEASE, the server MUST do the following:
 
 - If the size of the **Buffer**, in bytes, of the SMB2_CREATE_CONTEXT is not equal to the size of the SMB2_CREATE_REQUEST_LEASE (0x20) or the size of the SMB2_CREATE_REQUEST_LEASE_V2 ( 0x34), the server MUST fail the request with STATUS_INVALID_PARAMETER.
 - If **Connection.Dialect** is "2.1" or belongs to the "3.x" dialect family, and the **DataLength** field equals 0x20, the server MUST attempt to acquire a lease on the open from the underlying object store as described in section [3.3.5.9.8](#Section_3.3.5.9.8).
@@ -10335,7 +10335,7 @@ The following create contexts are potentially received as part of the create req
 <a id="Section_3.3.5.9.1"></a>
 ##### 3.3.5.9.1 Handling the SMB2_CREATE_EA_BUFFER Create Context
 
-The client is requesting that an array of extended attributes be applied to the file that is being created. The server MUST ignore this Create Context for requests to open an existing file, a pipe, or a printer. This [**create context**](#gt_create-context) can be combined with any of those listed here except [SMB2_CREATE_DURABLE_HANDLE_RECONNECT](#Section_2.2.14.2.4).
+The client is requesting that an array of extended attributes be applied to the file that is being created. The server MUST ignore this Create Context for requests to open an existing file, a pipe, or a printer. This [**create context**](#gt_create-context) can be combined with any of those listed here except [SMB2_CREATE_DURABLE_HANDLE_RECONNECT](#Section_2.2.13.2.4).
 
 The processing changes involved for this create context are:
 
@@ -10417,7 +10417,7 @@ The processing changes involved for this [**create context**](#gt_create-context
 
 - If the create request also includes an [SMB2_CREATE_DURABLE_HANDLE_REQUEST](#Section_2.2.13.2.3) create context, the server MUST ignore the SMB2_CREATE_DURABLE_HANDLE_REQUEST create context.
 - If the create request also contains an [SMB2_CREATE_DURABLE_HANDLE_REQUEST_V2](#Section_2.2.13.2.11) or [SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2](#Section_2.2.13.2.12) create context, the server SHOULD<336> fail the request with STATUS_INVALID_PARAMETER.
-- The server MUST look up an existing open in the **GlobalOpenTable** by doing a lookup with the **FileId.Persistent** portion of the create context. If the lookup fails, the server SHOULD<337> fail the request with STATUS_OBJECT_NAME_NOT_FOUND and proceed as specified in "Failed Open Handling" in section [3.3.5.9](#Section_2.2.13).
+- The server MUST look up an existing open in the **GlobalOpenTable** by doing a lookup with the **FileId.Persistent** portion of the create context. If the lookup fails, the server SHOULD<337> fail the request with STATUS_OBJECT_NAME_NOT_FOUND and proceed as specified in "Failed Open Handling" in section [3.3.5.9](#Section_3.3.5.9).
 - If any **Open.Lease** is not NULL and **Open.ClientGuid** is not equal to the **ClientGuid** of the connection that received this request, the server MUST fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
 - If **Open.Lease** is not NULL, **Open.Lease.FileDeleteOnClose** is FALSE, and **Open.Lease.FileName** does not match the file name specified in the **Buffer** field of the SMB2 CREATE request, the server MUST fail the request with STATUS_INVALID_PARAMETER.
 - If any of the following conditions is TRUE, the server MUST fail the request with STATUS_OBJECT_NAME_NOT_FOUND.
@@ -10490,7 +10490,7 @@ If no lease is found, one MUST be allocated with the following values set:
 - If **Connection.Dialect** belongs to the SMB 3.x dialect family, **Lease.Version** is set to 1.
 If the allocation fails, the create request MUST be failed with STATUS_INSUFFICIENT_RESOURCES. Otherwise, if a **LeaseTable** was created it MUST be added to the **GlobalLeaseTableList**, and if a Lease was created it MUST be added to the **LeaseTable.LeaseList**.
 
-At this point, execution of create continues as described in [3.3.5.9](#Section_2.2.13) until the Oplock Acquisition phase.
+At this point, execution of create continues as described in [3.3.5.9](#Section_3.3.5.9) until the Oplock Acquisition phase.
 
 During "Oplock Acquisition", if the underlying object store does not support leasing, the server SHOULD fall back to requesting a batch oplock instead of a lease and continue processing as described in "Oplock Acquisition". If the underlying object store does support leasing, the following steps are taken:
 
@@ -10602,7 +10602,7 @@ If no lease is found, one MUST be allocated with the following values set:
 - **Lease.Version** is set to 2.
 If the allocation fails, the create request MUST be failed with STATUS_INSUFFICIENT_RESOURCES. Otherwise, if a **LeaseTable** was created it MUST be added to the **GlobalLeaseTableList**, and if a Lease was created it MUST be added to the **LeaseTable.LeaseList**.
 
-At this point, execution of create continues as described in [3.3.5.9](#Section_2.2.13) until the "Oplock Acquisition" phase.
+At this point, execution of create continues as described in [3.3.5.9](#Section_3.3.5.9) until the "Oplock Acquisition" phase.
 
 During "Oplock Acquisition", if the underlying object store does not support leasing, the server SHOULD fall back to requesting a batch oplock instead of a lease and continue processing as described in "Oplock Acquisition". If the underlying object store does support leasing, the following steps are taken:
 
@@ -10631,7 +10631,7 @@ If **Open.Lease** is not NULL and **CreateOptions** field in the CREATE request 
 
 This section applies only to servers that implement the SMB 3.x dialect family.
 
-There is no processing done for "Path Name Validation" as listed in section [3.3.5.9](#Section_2.2.13).
+There is no processing done for "Path Name Validation" as listed in section [3.3.5.9](#Section_3.3.5.9).
 
 The processing changes involved for this create context are:
 
@@ -10753,7 +10753,7 @@ The server then MUST construct the response following the syntax specified in se
 - **CreationTime**, **LastAccessTime**, **LastWriteTime**, **ChangeTime**, **AllocationSize**, **EndofFile**, and **FileAttributes** MUST all be set to 0.
 The response MUST then be sent to the client.
 
-The Server MUST send an [SMB2 CHANGE_NOTIFY Response](#Section_3.2.5.16) with STATUS_NOTIFY_CLEANUP status code for all pending CHANGE_NOTIFY requests associated with the **FileId** that is closed.
+The Server MUST send an [SMB2 CHANGE_NOTIFY Response](#Section_2.2.35) with STATUS_NOTIFY_CLEANUP status code for all pending CHANGE_NOTIFY requests associated with the **FileId** that is closed.
 
 The status code returned by this operation MUST be one of those defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Common status codes returned by this operation include:
 
@@ -10833,7 +10833,7 @@ If **Connection.Dialect** belongs to the SMB 3.x dialect family and if any of th
 - **Length**, **ReadChannelInfoOffset**, or **ReadChannelInfoLength** is equal to 0.
 The server MUST issue a read to the underlying object store represented by **Open.LocalOpen** for the length, in bytes, given by **Length**, at the offset, in bytes, from the beginning of the file, provided in **Offset**. If the server implements the SMB 3.0.2 or SMB 3.1.1 dialect and if the SMB2_READFLAG_READ_UNBUFFERED bit is set in the **Flags** field of the request, the server SHOULD<361> indicate to the underlying object store not to buffer the read data.
 
-If the read is being executed on a named pipe, and the pipe is in blocking mode (the default), the operation could block for a long time, so the server MAY<362> choose to handle it asynchronously, as specified in section [3.3.4.2](../MS-FSCC/MS-FSCC.md). To query a pipe's blocking mode, use the FilePipeInformation file information class, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.37. To change a pipe's blocking mode, use an [SMB2 SET_INFO Request](#Section_2.2.40) with the FilePipeInformation file information class, as specified in [MS-FSCC] section 2.4.37.<363> If the read is not finished in 0.5 milliseconds, the server MUST send an interim response to the client.
+If the read is being executed on a named pipe, and the pipe is in blocking mode (the default), the operation could block for a long time, so the server MAY<362> choose to handle it asynchronously, as specified in section [3.3.4.2](#Section_3.3.4.2). To query a pipe's blocking mode, use the FilePipeInformation file information class, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.37. To change a pipe's blocking mode, use an [SMB2 SET_INFO Request](#Section_2.2.39) with the FilePipeInformation file information class, as specified in [MS-FSCC] section 2.4.37.<363> If the read is not finished in 0.5 milliseconds, the server MUST send an interim response to the client.
 
 If the read fails, the server MUST fail the request using the error code received from the read operation. If the underlying object store returns fewer bytes than specified by the **MinimumCount** field of the request, the server MUST fail the request with STATUS_END_OF_FILE.
 
@@ -10871,7 +10871,7 @@ If the request **Channel** field contains the value SMB2_CHANNEL_RDMA_V1 or SMB2
 - The **DataOffset** field MUST be set to the offset into the response, in bytes, from the beginning of the SMB2 header to the **Buffer** field.
 - If the number of bytes returned from the underlying object store is more than the **Length** field in the request, **DataRemaining** MUST be set to the **Length** field of the request. Otherwise, **DataRemaining** MUST be set to the number of bytes returned from the underlying object store.
 - The data MUST NOT be copied into the response.
-- The data MUST be sent via the processing specified in [MS-SMBD](#Section_2.1) section 3.1.4.5, providing the **Connection**, the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **ReadChannelInfoOffset** and of length **ReadChannelInfoLength** fields.
+- The data MUST be sent via the processing specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.5, providing the **Connection**, the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **ReadChannelInfoOffset** and of length **ReadChannelInfoLength** fields.
 The response MUST then be sent to the client. If the request **Channel** field contains the value SMB2_CHANNEL_RDMA_V1_INVALIDATE, then the Token in the first element of the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request MUST additionally be supplied, as specified in [MS-SMBD] section 3.1.4.2.
 
 The status code returned by this operation MUST be one of those defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Common status codes returned by this operation include:
@@ -10948,13 +10948,13 @@ If **Connection.Dialect** belongs to the SMB 3.x dialect family and the **Channe
 - **RemainingBytes** field is greater than **Connection.MaxWriteSize**.
 - **Length** field of the first SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structure is zero.
 - Sum of the values of **Length** fields in all SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures is less than **RemainingBytes**.
-- If **Channel** is equal to SMB2_CHANNEL_RDMA_TRANSFORM, **Connection.RDMATransformIds** includes SMB2_RDMA_TRANSFORM_ENCRYPTION, and SMB2_RDMA_CRYPTO_TRANSFORM with **TransformType** equal to SMB2_RDMA_TRANSFORM_TYPE_ENCRYPTION is present, the data MUST first be obtained via the processing specified in [MS-SMBD](#Section_2.1) section 3.1.4.6, providing the **Connection**, a newly allocated buffer to receive the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **RdmaDescriptorOffset** and of length **RdmaDescriptorLength** fields of SMB2_RDMA_TRANSFORM structure.
+- If **Channel** is equal to SMB2_CHANNEL_RDMA_TRANSFORM, **Connection.RDMATransformIds** includes SMB2_RDMA_TRANSFORM_ENCRYPTION, and SMB2_RDMA_CRYPTO_TRANSFORM with **TransformType** equal to SMB2_RDMA_TRANSFORM_TYPE_ENCRYPTION is present, the data MUST first be obtained via the processing specified in [MS-SMBD](../MS-SMBD/MS-SMBD.md) section 3.1.4.6, providing the **Connection**, a newly allocated buffer to receive the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **RdmaDescriptorOffset** and of length **RdmaDescriptorLength** fields of SMB2_RDMA_TRANSFORM structure.
 - The server MUST fail the request with STATUS_AUTH_TAG_MISMATCH if one of the following is TRUE:
 - **SignatureLength** field is greater than 16.
 - **Connection.CipherId** is AES-128-CCM or AES-256-CCM and **NonceLength** field is not equal to 11.
 - **Connection.CipherId** is AES-128-GCM or AES-256-GCM and **NonceLength** field is not equal to 12.
 - The data obtained MUST be decrypted using the algorithm specified in **Connection.CipherId** and **Session.DecryptionKey** by passing encrypted data and **Signature** and **Nonce,** from the received SMB2_RDMA_CRYPTO_TRANSFORM structure. If the size of the decrypted data is not equal to **RemainingBytes** field in the request, the server MUST fail the request with STATUS_BAD_DATA.
-- If **Channel** is equal to SMB2_CHANNEL_RDMA_TRANSFORM, **Connection.RDMATransformIds** includes SMB2_RDMA_TRANSFORM_SIGNING, and SMB2_RDMA_CRYPTO_TRANSFORM with **TransformType** equal to SMB2_RDMA_TRANSFORM_TYPE_SIGNING is present, the data MUST first be obtained via the processing specified in [MS-SMBD] section 3.1.4.6, providing the Connection, a newly allocated buffer to receive the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **RdmaDescriptorOffset** and of length **RdmaDescriptorLength** fields of SMB2_RDMA_TRANSFORM structure. The server MUST verify the received data as specified in section [3.1.5.1](../MS-SMBD/MS-SMBD.md) except that the computed signature is compared with the value in **Signature** field of SMB2_RDMA_CRYPTO_TRANSFORM. If the signature verification fails, the server MUST fail the request with STATUS_INVALID_SIGNATURE.
+- If **Channel** is equal to SMB2_CHANNEL_RDMA_TRANSFORM, **Connection.RDMATransformIds** includes SMB2_RDMA_TRANSFORM_SIGNING, and SMB2_RDMA_CRYPTO_TRANSFORM with **TransformType** equal to SMB2_RDMA_TRANSFORM_TYPE_SIGNING is present, the data MUST first be obtained via the processing specified in [MS-SMBD] section 3.1.4.6, providing the Connection, a newly allocated buffer to receive the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **RdmaDescriptorOffset** and of length **RdmaDescriptorLength** fields of SMB2_RDMA_TRANSFORM structure. The server MUST verify the received data as specified in section [3.1.5.1](#Section_3.1.5.1) except that the computed signature is compared with the value in **Signature** field of SMB2_RDMA_CRYPTO_TRANSFORM. If the signature verification fails, the server MUST fail the request with STATUS_INVALID_SIGNATURE.
 - Otherwise, the data MUST be first obtained via the processing specified in [MS-SMBD] section 3.1.4.6, providing the **Connection**, a newly allocated buffer to receive the data, and the array of SMB_DIRECT_BUFFER_DESCRIPTOR_V1 structures passed in the request at offset **WriteChannelInfoOffset** and of length **WriteChannelInfoLength** fields.
 If **Connection.Dialect** is "3.0.2" or "3.1.1", SMB2_WRITEFLAG_WRITE_THROUGH is set in the **Flags** field of the request, SMB2_WRITEFLAG_WRITE_UNBUFFERED is not set in the **Flags** field of the request, and **Open.CreateOptions** doesn't include the FILE_NO_INTERMEDIATE_BUFFERING bit, the server MUST fail the request with STATUS_INVALID_PARAMETER.
 
@@ -10962,7 +10962,7 @@ If **Connection.Dialect** is "2.1" or "3.0", SMB2_WRITEFLAG_WRITE_THROUGH is set
 
 The server MUST issue a write to the underlying object store represented by **Open.LocalOpen** for the length, in bytes, given by **Length**, at the offset, in bytes, from the beginning of the file, provided in **Offset**. If **Connection.Dialect** is not "2.0.2", and SMB2_WRITEFLAG_WRITE_THROUGH is set in the **Flags** field of the SMB2 WRITE Request, the server SHOULD<367> indicate to the underlying object store that the write is to be written to underlying storage before completion is returned. If the server implements the SMB 3.0.2 or SMB 3.1.1 dialect, and if the SMB2_WRITEFLAG_WRITE_UNBUFFERED bit is set in the **Flags** field of the request, the server SHOULD indicate to the underlying object store that the write data is not to be buffered.
 
-If the write is being executed on a named pipe, and the pipe is in blocking mode (the default), the operation could block for a long time, so the server MAY<368> choose to handle it asynchronously, as specified in section [3.3.4.2](../MS-FSCC/MS-FSCC.md). To query a pipe's blocking mode, use the FilePipeInformation file information class, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.37. To change a pipe's blocking mode, use an [SMB2 SET_INFO Request](#Section_2.2.40) with the FilePipeInformation file information class, as specified in [MS-FSCC] section 2.4.37.
+If the write is being executed on a named pipe, and the pipe is in blocking mode (the default), the operation could block for a long time, so the server MAY<368> choose to handle it asynchronously, as specified in section [3.3.4.2](#Section_3.3.4.2). To query a pipe's blocking mode, use the FilePipeInformation file information class, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.37. To change a pipe's blocking mode, use an [SMB2 SET_INFO Request](#Section_2.2.39) with the FilePipeInformation file information class, as specified in [MS-FSCC] section 2.4.37.
 
 If the write fails, the server MUST fail the request with the error code received from the write.
 
@@ -11160,7 +11160,7 @@ The server MUST invoke the event as specified in [MS-DFSC](../MS-DFSC/MS-DFSC.md
 - The buffer containing the DFS referral request packet.
 - **IsExtendedReferral**: Set to TRUE when **CtlCode** is FSCTL_DFS_GET_REFERRALS_EX.
 - The maximum size of the response data buffer that will be accepted by the client, as indicated by **MaxOutputResponse** field in the request.
-If [**DFS**](#gt_distributed-file-system-dfs) returns a failure, the server MUST fail the request with the error code received from DFS. If the error returned from DFS is STATUS_BUFFER_OVERFLOW, the server SHOULD<384> copy the data returned by DFS into a normal FSCTL_GET_DFS_REFERRALS response and return STATUS_BUFFER_OVERFLOW to the client as noted in sections [3.3.4.4](#Section_3.3.4.4) and [3.3.5.15](#Section_3.3.5.15.15).
+If [**DFS**](#gt_distributed-file-system-dfs) returns a failure, the server MUST fail the request with the error code received from DFS. If the error returned from DFS is STATUS_BUFFER_OVERFLOW, the server SHOULD<384> copy the data returned by DFS into a normal FSCTL_GET_DFS_REFERRALS response and return STATUS_BUFFER_OVERFLOW to the client as noted in sections [3.3.4.4](#Section_3.3.4.4) and [3.3.5.15](#Section_3.3.5.15).
 
 If DFS returns success and a response buffer containing the referrals, the server MUST then construct an [SMB2 IOCTL response](#Section_2.2.32) following the syntax specified in section 2.2.32, with the following values:
 
@@ -11366,7 +11366,7 @@ If the Content Information File is verified successfully, the server MUST constr
 <a id="Section_3.3.5.15.8"></a>
 ##### 3.3.5.15.8 Handling a Pass-Through Operation Request
 
-Pass-through requests are [**I/O Control**](#gt_io-control-ioctl) requests and [**File System Control (FSCTL)**](#gt_file-system-control-fsctl) requests with a **CtlCode** value that is not specified in section [2.2.31](#Section_2.2.31). As noted in section [3.3.5.15](#Section_3.3.5.15.15), the server MUST fail I/O Control requests with STATUS_NOT_SUPPORTED.
+Pass-through requests are [**I/O Control**](#gt_io-control-ioctl) requests and [**File System Control (FSCTL)**](#gt_file-system-control-fsctl) requests with a **CtlCode** value that is not specified in section [2.2.31](#Section_2.2.31). As noted in section [3.3.5.15](#Section_3.3.5.15), the server MUST fail I/O Control requests with STATUS_NOT_SUPPORTED.
 
 Pass-through FSCTL requests fall further into two types, those for which a **CtlCode** value matches an FSCTL function number defined in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.3, and those that do not. When the latter type of pass-through request does not meet the private FSCTL requirements of [MS-FSCC] section 2.3, the server MUST NOT pass the request to the underlying object store and MUST fail the request by sending a response of STATUS_NOT_SUPPORTED.
 
@@ -11443,7 +11443,7 @@ If the server receives a request that is not signed, the server MAY fail the req
 
 If **Connection.Dialect** does not belong to the SMB 3.x dialect family or **Connection.ServerCapabilities** does not include SMB2_GLOBAL_CAP_MULTI_CHANNEL, the server MAY fail the request with STATUS_NOT_SUPPORTED.
 
-Otherwise, the server MUST enumerate the local network interfaces in an implementation-specific manner. For each IP address in each network interface, the server MUST construct a NETWORK_INTERFACE_INFO structure as specified in section [2.2.32.5](#Section_2.2.32.5.1), with the following values:
+Otherwise, the server MUST enumerate the local network interfaces in an implementation-specific manner. For each IP address in each network interface, the server MUST construct a NETWORK_INTERFACE_INFO structure as specified in section [2.2.32.5](#Section_2.2.32.5), with the following values:
 
 - The server MUST NOT include the IP address for a network interface with **IfIndex** equal to zero.
 - **IfIndex**, **Capability**, and **LinkSpeed** MUST be set in an implementation-specific manner.
@@ -11662,7 +11662,7 @@ The server MAY<410> choose to support resuming enumerations by index number, if 
 
 If **TreeConnect.Share.DoAccessBasedDirectoryEnumeration** is TRUE and the object store supports security, the server MUST also exclude entries for which the user represented by **Session.SecurityContext** is not granted GENERIC_READ and FILE_LIST_DIRECTORY access.
 
-Otherwise, the server MUST construct an [SMB2_QUERY_DIRECTORY Response](#Section_3.2.5.15) following the syntax specified in section 2.2.34, with the following values:
+Otherwise, the server MUST construct an [SMB2_QUERY_DIRECTORY Response](#Section_2.2.33) following the syntax specified in section 2.2.34, with the following values:
 
 - **OutputBufferOffset** MUST be set to the offset, in bytes, from the beginning of the SMB2 header where the enumeration data is being placed, the offset to **Buffer[]**.
 - **OutputBufferLength** MUST be set to the length, in bytes, of the result of the enumeration.
@@ -11719,7 +11719,7 @@ The server MUST process a change notification request in the object store as spe
 
 The server MUST send an SMB2 CHANGE_NOTIFY Response only if a change occurs. An SMB2 CHANGE_NOTIFY Request (section [2.2.35](#Section_2.2.35)) will result in, at most, one response from the server. The server can choose to aggregate multiple changes into the same response. The server MUST include at least one FILE_NOTIFY_INFORMATION structure if it detects a change.
 
-If the server is unable to copy the results into the buffer of the [SMB2 CHANGE_NOTIFY Response](#Section_3.2.5.16), then the server MUST construct the response as described below, with an **OutputBufferLength** of zero, and set the Status in the SMB2 header to STATUS_NOTIFY_ENUM_DIR.
+If the server is unable to copy the results into the buffer of the [SMB2 CHANGE_NOTIFY Response](#Section_2.2.35), then the server MUST construct the response as described below, with an **OutputBufferLength** of zero, and set the Status in the SMB2 header to STATUS_NOTIFY_ENUM_DIR.
 
 If the object store returns an error, the server MUST fail the request with the error code received.
 
@@ -11813,7 +11813,7 @@ If the underlying object store returns an error, the server MUST fail the reques
 
 If the underlying object store returns only a portion of the variable-length data, the server MUST construct a response as described below but set the **Status** field in the [SMB2 header](#Section_2.2.1) to STATUS_BUFFER_OVERFLOW. If FileFullEaInformation is being queried and the requested entries do not fit in the **Buffer** field of the response, the server MUST construct a response as described below but set the **Status** field in the SMB2 header to STATUS_BUFFER_OVERFLOW.
 
-If the underlying object store returns the information successfully, the server MUST construct an [SMB2 QUERY_INFO Response](#Section_3.2.5.17) with the following values:
+If the underlying object store returns the information successfully, the server MUST construct an [SMB2 QUERY_INFO Response](#Section_2.2.37) with the following values:
 
 - **OutputBufferOffset** MUST be set to the offset, in bytes, from the beginning of the SMB2 header to the attribute data at **Buffer[]**.
 - **OutputBufferLength** MUST be set to the length of the attribute data being returned to the client.
@@ -11850,7 +11850,7 @@ If the underlying object store returns an error, the server MUST fail the reques
 
 If the underlying object store returns only a portion of the variable-length data, the server MUST construct a success response as described below but set the **Status** in the [SMB2 header](#Section_2.2.1) to STATUS_BUFFER_OVERFLOW.
 
-If the underlying object store returns the information successfully, the server MUST construct an [SMB2 QUERY_INFO Response](#Section_3.2.5.17) with the following values:
+If the underlying object store returns the information successfully, the server MUST construct an [SMB2 QUERY_INFO Response](#Section_2.2.37) with the following values:
 
 - **OutputBufferOffset** MUST be set to the offset, in bytes, from the beginning of the SMB2 header to the attribute data at **Buffer[]**.
 - **OutputBufferLength** MUST be set to the length of the attribute data being returned to the client.
@@ -11860,7 +11860,7 @@ The response MUST then be sent to the client.<423>
 <a id="Section_3.3.5.20.3"></a>
 ##### 3.3.5.20.3 Handling SMB2_0_INFO_SECURITY
 
-This section assumes knowledge about security concepts, as described in [MS-WPO](#Section_1.3) section 9 and specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
+This section assumes knowledge about security concepts, as described in [MS-WPO](../MS-WPO/MS-WPO.md) section 9 and specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
 The server MUST ignore any flag value in the **AdditionalInformation** field that is not specified in section [2.2.37](#Section_2.2.37).
 
@@ -11870,7 +11870,7 @@ The fields required in the resulting security descriptor are denoted by the flag
 
 If the **OutputBufferLength** given in the client request is either zero or is insufficient to hold the information requested, the server MUST fail the request with STATUS_BUFFER_TOO_SMALL. If **Connection.Dialect** is "3.1.1", the server MUST return error data containing the buffer size, in bytes, that would be required to return the requested information, as specified in section [2.2.2](#Section_2.2.2), with **ByteCount** set to 12, **ErrorContextCount** set to 1, and **ErrorData** set to SMB2 ERROR Context response with **ErrorDataLength** set to 4, **ErrorId** set to 0, and **ErrorContextData** is set to the buffer size, in bytes, indicating the minimum required buffer length; otherwise, the server MUST return error data with **ByteCount** set to 4 and **ErrorData** set to a 4-byte value indicating the minimum required buffer length. The server MUST NOT return STATUS_BUFFER_OVERFLOW with an incomplete security descriptor to the client as in the previous cases. If the underlying object store returns an error, the server MUST fail the request with the error code received.
 
-If the underlying object store returns the information successfully, the server MUST construct an [SMB2 QUERY_INFO Response](#Section_3.2.5.17) with the following values:
+If the underlying object store returns the information successfully, the server MUST construct an [SMB2 QUERY_INFO Response](#Section_2.2.37) with the following values:
 
 - **OutputBufferOffset** MUST be set to the offset, in bytes, from the beginning of the [SMB2 header](#Section_2.2.1) to the attribute data at **Buffer[]**.
 - **OutputBufferLength** MUST be set to the length of the attribute data being returned to the client.
@@ -11901,7 +11901,7 @@ The server MUST return STATUS_SUCCESS if at least one FILE_QUOTA_INFORMATION ent
 
 If the **OutputBufferLength** given in the client request is either zero or is insufficient to hold single FILE_QUOTA_INFORMATION entry, the server MUST fail the request with STATUS_BUFFER_TOO_SMALL and return error data, as specified in section [2.2.2](#Section_2.2.2), with **ByteCount** set to zero.
 
-If the underlying object store returns STATUS_NO_MORE_ENTRIES, indicating that no information was returned, the server MUST set the same error in the **Status** field of the [SMB2 header](#Section_2.2.1). The server MUST also construct an [SMB2 QUERY_INFO Response](#Section_3.2.5.17) with **OutputBufferOffset**, **OutputBufferLength** and **Buffer** set to 0.
+If the underlying object store returns STATUS_NO_MORE_ENTRIES, indicating that no information was returned, the server MUST set the same error in the **Status** field of the [SMB2 header](#Section_2.2.1). The server MUST also construct an [SMB2 QUERY_INFO Response](#Section_2.2.37) with **OutputBufferOffset**, **OutputBufferLength** and **Buffer** set to 0.
 
 If the underlying object store returns any other error, the server MUST fail the entire request with the error code received.
 
@@ -11950,7 +11950,7 @@ The status code returned by this operation MUST be one of those defined in [MS-E
 <a id="Section_3.3.5.21.1"></a>
 ##### 3.3.5.21.1 Handling SMB2_0_INFO_FILE
 
-The information classes that are supported for setting file information are listed in section [2.2.39](#Section_2.2.40). Documentation for these is provided in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.
+The information classes that are supported for setting file information are listed in section [2.2.39](#Section_2.2.39). Documentation for these is provided in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.
 
 Requests for information classes documented in [MS-FSCC] section 2.4 with "Set" not specified in the Uses column are not allowed and SHOULD be failed with STATUS_INVALID_INFO_CLASS.
 
@@ -11988,7 +11988,7 @@ The response MUST then be sent to the client.
 <a id="Section_3.3.5.21.2"></a>
 ##### 3.3.5.21.2 Handling SMB2_0_INFO_FILESYSTEM
 
-The information classes that are supported for setting underlying object store information are listed in section [2.2.39](#Section_2.2.40). Documentation for these is provided [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.5. Requests for information classes not listed in section 2.2.39 but documented in section 2.5 of [MS-FSCC] for Uses of "Set" or "LOCAL" MUST be failed with STATUS_NOT_SUPPORTED. Requests for information classes not documented in section 2.5 of [MS-FSCC] or documented in section 2.5 of [MS-FSCC] for Uses of only "Query" MUST be failed with STATUS_INVALID_INFO_CLASS.
+The information classes that are supported for setting underlying object store information are listed in section [2.2.39](#Section_2.2.39). Documentation for these is provided [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.5. Requests for information classes not listed in section 2.2.39 but documented in section 2.5 of [MS-FSCC] for Uses of "Set" or "LOCAL" MUST be failed with STATUS_NOT_SUPPORTED. Requests for information classes not documented in section 2.5 of [MS-FSCC] or documented in section 2.5 of [MS-FSCC] for Uses of only "Query" MUST be failed with STATUS_INVALID_INFO_CLASS.
 
 If the object store supports security and the information class is FileFsControlInformation or FileFsObjectIdInformation and **Open.GrantedAccess** does not include FILE_WRITE_DATA, the server MUST fail the request with STATUS_ACCESS_DENIED.
 
@@ -11997,9 +11997,9 @@ The server MUST apply the information requested to the underlying object store.<
 <a id="Section_3.3.5.21.3"></a>
 ##### 3.3.5.21.3 Handling SMB2_0_INFO_SECURITY
 
-The following section assumes knowledge about security concepts as described in [MS-WPO](#Section_1.3) section 9 and specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md).<431>
+The following section assumes knowledge about security concepts as described in [MS-WPO](../MS-WPO/MS-WPO.md) section 9 and specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md).<431>
 
-The server MUST ignore any flag value in the **AdditionalInformation** field that is not specified in section [2.2.39](#Section_2.2.40).
+The server MUST ignore any flag value in the **AdditionalInformation** field that is not specified in section [2.2.39](#Section_2.2.39).
 
 - If SACL_SECURITY_INFORMATION is set in the **AdditionalInformation** field of the request, and **Open.GrantedAccess** does not include ACCESS_SYSTEM_SECURITY, the server MUST fail the request with STATUS_ACCESS_DENIED.
 - If DACL_SECURITY_INFORMATION is set in the **AdditionalInformation** field of the request, and **Open.GrantedAccess** does not include WRITE_DAC, the server MUST fail the request with STATUS_ACCESS_DENIED.
@@ -12143,7 +12143,7 @@ If there is an **Open** in **GlobalOpenTable** where **Open.IsDurable** is TRUE,
 <a id="Section_3.3.6.3"></a>
 #### 3.3.6.3 Session Expiration Timer Event
 
-When the session expiration timer expires, the server MUST walk each **Session** in the **GlobalSessionTable**. If the **Session.State** is Valid and the **Session.ExpirationTime** has passed, the **Session.State** MUST be set to Expired and **ServerStatistics.sts0_stimedout** MUST be increased by 1. For each **Connection** in the global **ConnectionList** where the current time minus **Connection.CreationTime** is more than an implementation-specific time-out,<442> the server MUST disconnect the **Connection**, as specified in section [3.3.7.1](#Section_3.2.5.6), if any of the following conditions are TRUE:
+When the session expiration timer expires, the server MUST walk each **Session** in the **GlobalSessionTable**. If the **Session.State** is Valid and the **Session.ExpirationTime** has passed, the **Session.State** MUST be set to Expired and **ServerStatistics.sts0_stimedout** MUST be increased by 1. For each **Connection** in the global **ConnectionList** where the current time minus **Connection.CreationTime** is more than an implementation-specific time-out,<442> the server MUST disconnect the **Connection**, as specified in section [3.3.7.1](#Section_3.3.7.1), if any of the following conditions are TRUE:
 
 - **Connection.Dialect** is "Unknown".
 - **Connection.Dialect** is not "Unknown", and **Connection.SessionTable** is empty.
@@ -15228,7 +15228,7 @@ CreateContextsOffset: 0 (0x0)
 
 CreateContextsLength: 0 (0x0)
 
-- The client sends an [SMB2 SET_INFO Request](#Section_2.2.40) to set **FileEndOfFileInformation** (specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.14) to 0x2f000.
+- The client sends an [SMB2 SET_INFO Request](#Section_2.2.39) to set **FileEndOfFileInformation** (specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.14) to 0x2f000.
 Smb2: C SET INFORMATION
 
 SMB2Header:
@@ -16585,7 +16585,7 @@ Flags: (00000000000000000000000000000001) FSCTL request
 
 Reserved2: 0 (0x0)
 
-- The server sends a [NETWORK_INTERFACE_INFO Response](#Section_2.2.32.5.1) in an SMB2 IOCTL Response with the available network interfaces.
+- The server sends a [NETWORK_INTERFACE_INFO Response](#Section_2.2.32.5) in an SMB2 IOCTL Response with the available network interfaces.
 SMB2: R IOCTL (0xb), FSCTL_QUERY_NETWORK_INTERFACE_INFO
 
 RIoCtl:
@@ -17604,7 +17604,7 @@ By default, Windows SMB2 clients and servers always use a single stream per QUIC
 
 <49> Section 2.2.13.1.1: Windows 7 operating system and later and Windows Server 2008 R2 operating system and later do not ignore the SYNCHRONIZE bit, and pass it to the underlying object store. If the caller requests SYNCHRONIZE in the *DesiredAccess* parameter, but the SYNCHRONIZE access is not granted to the caller for the object being created or opened, the underlying object store fails the request and returns STATUS_ACCESS_DENIED. When SYNCHRONIZE access is granted, the SYNCHRONIZE bit is returned in **MaximalAccess** field of SMB2_CREATE_QUERY_MAXIMAL_ACCESS_RESPONSE with no other behavior.
 
-<50> Section 2.2.13.1.1: Windows fails the create request with STATUS_ACCESS_DENIED if the caller does not have the SeSecurityPrivilege, as specified in [MS-LSAD](#Section_5) section 3.1.1.2.1.
+<50> Section 2.2.13.1.1: Windows fails the create request with STATUS_ACCESS_DENIED if the caller does not have the SeSecurityPrivilege, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1.
 
 <51> Section 2.2.13.1.2: Windows sets this flag to the value passed in by the higher-level application.
 
@@ -17692,7 +17692,7 @@ Windows clients ignore the **InputCount** field.
 
 <89> Section 2.2.43.1: Windows 10 operating system and prior and Windows Server v20H2 operating system and prior do not send or process RDMA transforms.
 
-<90> Section 3.1.3: By default, Windows-based servers set the [RequireMessageSigning](#Section_2) value to TRUE for domain controllers and FALSE for all other machines.
+<90> Section 3.1.3: By default, Windows-based servers set the [RequireMessageSigning](#Section_95a74d9693a742eaaf1a688c17c522ee) value to TRUE for domain controllers and FALSE for all other machines.
 
 <91> Section 3.1.3: Windows 8 and later and Windows Server 2012 and later set **IsEncryptionSupported** to TRUE.
 
@@ -18240,7 +18240,7 @@ Windows 10 v2004 and Windows Server v2004 select a common pattern scanning algor
 
 <301> Section 3.3.5.9: If **Open.ClientGuid** is not equal to the **ClientGuid** of the connection that received this request, **Open.Lease.LeaseState** is equal to RWH, or **Open.OplockLevel** is equal to SMB2_OPLOCK_LEVEL_BATCH, Windows-based servers will attempt to break the lease/oplock and return STATUS_PENDING to process the create request asynchronously. Otherwise, if **Open.Lease.LeaseState** does not include SMB2_LEASE_HANDLE_CACHING and **Open.OplockLevel** is not equal to SMB2_OPLOCK_LEVEL_BATCH, Windows-based servers return STATUS_FILE_NOT_AVAILABLE.
 
-<302> Section 3.3.5.9: Windows Vista and Windows Server 2008 validate the create requests before session verification as described in the "Create Context Validation" phase in section [3.3.5.9](#Section_2.2.13).
+<302> Section 3.3.5.9: Windows Vista and Windows Server 2008 validate the create requests before session verification as described in the "Create Context Validation" phase in section [3.3.5.9](#Section_3.3.5.9).
 
 <303> Section 3.3.5.9: Windows-based servers accept the path names containing Dot Directory Names specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.1.5.1 and attempt to normalize the path name by removing the pathname components of "." and "..". Windows-based servers fail the CREATE request with STATUS_INVALID_PARAMETER if the file name in the **Buffer** field of the request begins in the form "subfolder\..\", for example "x\..\y.txt".
 
@@ -18461,12 +18461,12 @@ Windows-based servers do not return an updated ChangeTime unless **Open.GrantedA
 <368> Section 3.3.5.13: Windows-based servers handle the following commands asynchronously:
 
 - SMB2 CREATE Request (section 3.3.5.9) when this create would result in an oplock break.
-- SMB2 IOCTL Request (section [3.3.5.15](#Section_3.3.5.15.15)) for FSCTL_PIPE_TRANSCEIVE if it blocks for more than 1 millisecond. For FSCTL_SRV_COPYCHUNK or FSCTL_SRV_COPYCHUNK_WRITE, when an oplock break happens.
+- SMB2 IOCTL Request (section [3.3.5.15](#Section_3.3.5.15)) for FSCTL_PIPE_TRANSCEIVE if it blocks for more than 1 millisecond. For FSCTL_SRV_COPYCHUNK or FSCTL_SRV_COPYCHUNK_WRITE, when an oplock break happens.
 - SMB2 CHANGE_NOTIFY Request (section [3.3.5.19](#Section_3.3.5.19)) if it blocks for more than 0.5 milliseconds.
 - SMB2 READ Request (section [3.3.5.12](#Section_3.3.5.12)) for named pipes if it blocks for more than 0.5 milliseconds.
 - SMB2 WRITE Request (section [3.3.5.13](#Section_3.3.5.13)) for named pipes if it blocks for more than 0.5 milliseconds.
 - SMB2 WRITE Request (section 3.3.5.13) for large file write.
-- SMB2 LOCK Request (section [3.3.5.14](#Section_3.3.5.14.1)) if the SMB2_LOCKFLAG_FAIL_IMMEDIATELY flag is not set.
+- SMB2 LOCK Request (section [3.3.5.14](#Section_3.3.5.14)) if the SMB2_LOCKFLAG_FAIL_IMMEDIATELY flag is not set.
 - SMB2 FLUSH Request (section [3.3.5.11](#Section_3.3.5.11)) for named pipes.
 <369> Section 3.3.5.14: Windows Vista, Windows Server 2008, Windows 7, and Windows Server 2008 R2 validate the open before verifying the session.
 
@@ -18903,12 +18903,12 @@ The changes made to this document are listed in the following table. For more in
 | Section | Description | Revision class |
 | --- | --- | --- |
 | [2.2.35](#Section_2.2.35) SMB2 CHANGE_NOTIFY Request | 30507 : Updated Flags field to include value zero. | Major |
-| [3.2.5.16](#Section_2.2.36) Receiving an SMB2 CHANGE_NOTIFY Response | 30507 : Added client validation of CHANGE_NOTIFY response. | Major |
+| [3.2.5.16](#Section_3.2.5.16) Receiving an SMB2 CHANGE_NOTIFY Response | 30507 : Added client validation of CHANGE_NOTIFY response. | Major |
 | [3.3](#Section_3.3) Server Details | 30459 : Updated server processing of CREATE replay of a persistent open. | Major |
 | [3.3.4.6](#Section_3.3.4.6) Object Store Indicates an Oplock Break | 30506 : Updated server processing when the Open is durable but not persistent and the Oplock breaks. | Major |
 | [3.3.4.17](#Section_3.3.4.17) Server Application Requests Closing an Open | 30439 : Updated server processing of CHANGE_NOTIFY requests when closing an Open. | Major |
-| [3.3.5](#Section_1.3) Processing Events and Sequencing Rules | 30644 : Updated server processing of open replay. | Major |
-| [3.3.5.9](#Section_2.2.13) Receiving an SMB2 CREATE Request | 30488 : Updated server processing of CREATE request when there is a conflicting Open. | Major |
+| [3.3.5](#Section_3.3.5) Processing Events and Sequencing Rules | 30644 : Updated server processing of open replay. | Major |
+| [3.3.5.9](#Section_3.3.5.9) Receiving an SMB2 CREATE Request | 30488 : Updated server processing of CREATE request when there is a conflicting Open. | Major |
 | 3.3.5.9 Receiving an SMB2 CREATE Request | 30488 : Updated server processing of the CREATE request when there is an existing persistent open on the same file. | Major |
 | 3.3.5.9 Receiving an SMB2 CREATE Request | 30511 : Updated server processing to retry create operation on failure. | Major |
 | [3.3.5.9.12](#Section_3.3.5.9.12) Handling the SMB2_CREATE_DURABLE_HANDLE_RECONNECT_V2 Create Context | 30530 : Updated server processing of Lease Epoch in resume create operation. | Major |

@@ -337,7 +337,7 @@ A client obtains the IPsec policy in three steps:
 - A client-side Group Policy protocol client polls the store to discover the existence of a new policy. When a new or changed IPsec policy is detected, it signals the IPsec client-side plug-in that an IPsec policy change has occurred and provides an LDAP path to the assigned policy, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 1.3.3.
 - The IPsec client-side plug-in reads the LDAP path that specifies the assigned policy location as an LDAP path reference that specifies the assigned IPsec policy details.
 - The IPsec policy detail LDAP path is then used by the IPsec client-side plug-in to read and interpret the assigned IPsec policy settings so that the IPsec policy settings can be enacted on the local system.
-The details of the actual individual settings that are transferred by this protocol are specified in IPsec Policy Creation/Modification (section [2.2.1](#Section_4.1.1)), because the relevant behavior is not part of the Group Policy: Core Protocol or its extensions, but rather of the Group Policy: IPsec Protocol. These details are included to enable a client to successfully read and interpret the IPsec policy data and understand the protocol.
+The details of the actual individual settings that are transferred by this protocol are specified in IPsec Policy Creation/Modification (section [2.2.1](#Section_2.2.1)), because the relevant behavior is not part of the Group Policy: Core Protocol or its extensions, but rather of the Group Policy: IPsec Protocol. These details are included to enable a client to successfully read and interpret the IPsec policy data and understand the protocol.
 
 IPsec policy retrieval uses the LDAP search functionality, as specified in [RFC2251] section 4.5, and in sections 3.2.5.3 and 3.2.5.4.
 
@@ -419,7 +419,7 @@ The following figure specifies the IPsec policy storage. IPsec policy storage de
 
 An IPsec policy is created by writing the appropriate IPsec policy attributes to the "*System\IP Security*" container. The policy can then be assigned by writing a "reference" to the policy data in the "*System\Policies\GPO-GUID\Machine\Microsoft\Windows\IPSEC*" container. Note that the GPO_[**GUID**](#gt_globally-unique-identifier-guid) text MUST be replaced by a [**curly braced GUID string**](#gt_curly-braced-guid-string) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3, "GUID--Curly Braced String Representation") that identifies the GPO.
 
-The reference of the policy that is assigned to a GPO MUST be stored in the "*Machine\Microsoft\Windows*" container in the IPSEC object of the GPO for this Group Policy protocol. IPsec Policy Assignment is specified in section [2.2.2](#Section_3.1.5.8).
+The reference of the policy that is assigned to a GPO MUST be stored in the "*Machine\Microsoft\Windows*" container in the IPSEC object of the GPO for this Group Policy protocol. IPsec Policy Assignment is specified in section [2.2.2](#Section_2.2.2).
 
 ![IPsec policy storage](media/image6.png)
 
@@ -1482,7 +1482,7 @@ If the preceding LDAP SearchRequest succeeds, then the following LDAP SearchRequ
 | timeLimit | The time limit MUST be infinite (it MUST be set to 0). |
 | typesOnly | This MUST be set to FALSE as defined in [RFC2251]. |
 | Filter | The following LDAP filter (as specified in [RFC2254]) MUST be used: (objectclass=*) |
-| Attributes | This field MUST specify the attributes ipsecOwnersReference, description, and ipsecName, as specified in section [2.2.2](#Section_3.1.5.8). |
+| Attributes | This field MUST specify the attributes ipsecOwnersReference, description, and ipsecName, as specified in section [2.2.2](#Section_2.2.2). |
 
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 Policy Data Retrieval
@@ -1519,7 +1519,7 @@ The Group Policy: Core Protocol accesses the Directory Service schema classes an
 <a id="Section_3.1"></a>
 ## 3.1 IPsec Group Policy Administrative Plug-in Details
 
-The [**IPsec administrative plug-in**](#gt_ipsec-administrative-plug-in) consists of a user interface that allows an [**IPsec**](#gt_internet-protocol-security-ipsec) administrator to author an IPsec policy and assign it to a [**GPO**](#gt_group-policy-object-gpo). First, the values that are entered by the administrator are used to form IPsec creation/modification messages as specified in IPsec Policy Creation/Modification (section [2.2.1](#Section_4.1.1)) and IPsec policy assignment messages, as specified in IPsec Policy Assignment (section [2.2.2](#Section_3.1.5.8)). These messages are then sent to [**Active Directory**](#gt_active-directory) and stored as the IPsec policy, as explained in IPsec Extension Overview (section [1.3.2](#Section_1.3.2)).
+The [**IPsec administrative plug-in**](#gt_ipsec-administrative-plug-in) consists of a user interface that allows an [**IPsec**](#gt_internet-protocol-security-ipsec) administrator to author an IPsec policy and assign it to a [**GPO**](#gt_group-policy-object-gpo). First, the values that are entered by the administrator are used to form IPsec creation/modification messages as specified in IPsec Policy Creation/Modification (section [2.2.1](#Section_2.2.1)) and IPsec policy assignment messages, as specified in IPsec Policy Assignment (section [2.2.2](#Section_2.2.2)). These messages are then sent to [**Active Directory**](#gt_active-directory) and stored as the IPsec policy, as explained in IPsec Extension Overview (section [1.3.2](#Section_1.3.2)).
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -1540,7 +1540,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-When the [**IPsec administrative plug-in**](#gt_ipsec-administrative-plug-in) starts, the [**Group Policy**](#gt_group-policy) Protocol component (as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) (section 1.3.3.1), "Server Discovery and Group Policy Object Association" and [MS-GPOL] (section 1.3.3.2), "GPO Retrieval") gives it an LDAP path (as defined in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) that identifies the [**GPO**](#gt_group-policy-object-gpo) path that contains the [**IPsec**](#gt_internet-protocol-security-ipsec) policy. The plug-in MUST then use this path to read the current active policy (if any) from the GPO path by using the messages specified in section [3.2.5.3](../MS-GPOL/MS-GPOL.md).
+When the [**IPsec administrative plug-in**](#gt_ipsec-administrative-plug-in) starts, the [**Group Policy**](#gt_group-policy) Protocol component (as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) (section 1.3.3.1), "Server Discovery and Group Policy Object Association" and [MS-GPOL] (section 1.3.3.2), "GPO Retrieval") gives it an LDAP path (as defined in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) that identifies the [**GPO**](#gt_group-policy-object-gpo) path that contains the [**IPsec**](#gt_internet-protocol-security-ipsec) policy. The plug-in MUST then use this path to read the current active policy (if any) from the GPO path by using the messages specified in section [3.2.5.3](#Section_3.2.5.3).
 
 The IPsec administrative plug-in MUST then retrieve the details of the IPsec policy objects that are currently available for assignment to the GPO from the IP Security [**Active Directory**](#gt_active-directory) container, as specified in section [3.2.5.4](#Section_3.2.5.4). If this fails, administrators MUST be informed so that they can determine the appropriate action to take.
 
@@ -1551,7 +1551,7 @@ The higher-layer triggered events are: policy creation, policy modification, pol
 
 The administrator triggers each of these events by using the administrative plug-in.
 
-On the policy creation/modify, the IPsec Protocol plug-in MUST generate the messages to create or modify the IPsec policy in the Active Directory store, as specified in IPsec Policy Creation/Modification (section [2.2.1](#Section_4.1.1)).
+On the policy creation/modify, the IPsec Protocol plug-in MUST generate the messages to create or modify the IPsec policy in the Active Directory store, as specified in IPsec Policy Creation/Modification (section [2.2.1](#Section_2.2.1)).
 
 On policy reading, the IPsec Protocol plug-in MUST generate the messages specified in section [3.1.5.4](#Section_3.1.5.4).
 
@@ -1591,7 +1591,7 @@ The administrative plug-in MUST connect to the domain controller as specified in
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 Writing the Assigned Policy Data
 
-The administrative plug-in MUST connect to the domain controller as specified in sections [3.2.5.1](../MS-ADTS/MS-ADTS.md) and [3.2.5.2](../MS-ADTS/MS-ADTS.md). To write the new IPsec policy, the administrative plug-in MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, "Performing an LDAP Operation on an ADConnection". The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, "ADCONNECTION_HANDLE") stored in **ADConnectionHandle**. The TaskInputRequestMessage MUST contain an LDAP AddRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) with the following parameters:
+The administrative plug-in MUST connect to the domain controller as specified in sections [3.2.5.1](#Section_3.2.5.1) and [3.2.5.2](#Section_3.2.5.2). To write the new IPsec policy, the administrative plug-in MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, "Performing an LDAP Operation on an ADConnection". The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, "ADCONNECTION_HANDLE") stored in **ADConnectionHandle**. The TaskInputRequestMessage MUST contain an LDAP AddRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) with the following parameters:
 
 | Parameter | Value |
 | --- | --- |
@@ -1621,7 +1621,7 @@ The administrative plug-in waits for a response. If the TaskReturnStatus does no
 <a id="Section_3.1.5.7"></a>
 #### 3.1.5.7 Deleting the Assigned Policy Data
 
-To delete an existing object, the administrative plug-in MUST connect to the domain controller as specified in sections [3.2.5.1](../MS-ADTS/MS-ADTS.md) and [3.2.5.2](../MS-ADTS/MS-ADTS.md). The administrative-side plug-in MUST delete the existing object in the [**Active Directory**](#gt_active-directory) that contains the particular IPsec settings. To accomplish this, an LDAP operation MUST be performed, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md), section 7.6.1.6, "Performing an LDAP Operation on an ADConnection". The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md), section 2.2.2, "ADCONNECTION_HANDLE") stored in **ADConnectionHandle**. The TaskInputRequestMessage MUST contain an LDAP delRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.8) with the following parameters:
+To delete an existing object, the administrative plug-in MUST connect to the domain controller as specified in sections [3.2.5.1](#Section_3.2.5.1) and [3.2.5.2](#Section_3.2.5.2). The administrative-side plug-in MUST delete the existing object in the [**Active Directory**](#gt_active-directory) that contains the particular IPsec settings. To accomplish this, an LDAP operation MUST be performed, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md), section 7.6.1.6, "Performing an LDAP Operation on an ADConnection". The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md), section 2.2.2, "ADCONNECTION_HANDLE") stored in **ADConnectionHandle**. The TaskInputRequestMessage MUST contain an LDAP delRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.8) with the following parameters:
 
 | Parameter | Value |
 | --- | --- |
@@ -1669,9 +1669,9 @@ To assign the policy to the GPO, the [**administrative plug-in**](#gt_ipsec-admi
 - The administrative plug-in MUST locate a Domain Controller as specified in section [3.2.5.1](#Section_3.2.5.1). If this operation fails, the administrative plug-in MUST stop processing the policy assignment event.
 - The administrative plug-in MUST establish a connection to the Domain Controller as specified in section [3.2.5.2](#Section_3.2.5.2). If this operation fails, the administrative plug-in MUST stop processing the policy assignment event.
 - The administrative plug-in MUST attempt to retrieve the assigned policy location as specified in section [3.2.5.3](#Section_3.2.5.3). The DN for the IPSEC object MUST be specified as "CN=IPSEC, CN=Windows, CN=Microsoft, <GPO path>". Note that this operation is performed only to determine if the IPSEC object already exists; the returned attributes (if any) are ignored.
-- If any of the SearchRequests performed in step 3 returns a TaskReturnStatus ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection) other than success (0) or "No such object" (32), the administrative plug-in MUST terminate the BindRequest as specified in section [3.1.5.2](../MS-ADTS/MS-ADTS.md) and MUST stop processing the policy assignment event.
+- If any of the SearchRequests performed in step 3 returns a TaskReturnStatus ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection) other than success (0) or "No such object" (32), the administrative plug-in MUST terminate the BindRequest as specified in section [3.1.5.2](#Section_3.1.5.2) and MUST stop processing the policy assignment event.
 - If all of the SearchRequests performed in step 3 return a TaskReturnStatus of success (0), the administrative plug-in MUST skip to step 7; that is, it MUST NOT send an addRequest.
-- Otherwise, the administrative plug-in MUST send an LDAP addRequest as specified in section [2.2.2](#Section_3.1.5.8). If the addRequest returns a TaskReturnStatus other than success (0), that is, the addRequest fails for any reason, the administrative plug-in MUST terminate the BindRequest as specified in section 3.1.5.2 and MUST stop processing the policy assignment event.
+- Otherwise, the administrative plug-in MUST send an LDAP addRequest as specified in section [2.2.2](#Section_2.2.2). If the addRequest returns a TaskReturnStatus other than success (0), that is, the addRequest fails for any reason, the administrative plug-in MUST terminate the BindRequest as specified in section 3.1.5.2 and MUST stop processing the policy assignment event.
 - The administrative plug-in MUST send an LDAP modifyRequest as specified in section 2.2.2. The ipsecOwnersReference, ipsecName, and description parameters for the modifyRequest are the same as the corresponding parameters supplied to this event. If the modifyRequest returns a TaskReturnStatus other than success (0), that is, the modifyRequest fails for any reason, the administrative plug-in MUST terminate the BindRequest as specified in section 3.1.5.2 and MUST stop processing the policy assignment event.
 - The administrative plug-in MUST terminate the LDAP BindRequest as specified section 3.1.5.2.
 - The administrative plug-in MUST invoke the [**Group Policy extension**](#gt_group-policy-extension) Update event ([MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.3.4.4, Group Policy Extension Update).
@@ -1745,7 +1745,7 @@ When the DsrGetDcName method completes, store the value of the **DomainName** me
 
 **Note** The hostname, contained in the **RetrievedDomainName** data element, is resolved to an explicit IP address when connecting to the domain controller in section [3.2.5.2](#Section_3.2.5.2).
 
-If the DsrGetDcName method fails, the client MUST increment the **Local Timer Interval** value (section [3.2.1](#Section_3.1.1)) by 1, square it, reduce it to 166 if its value is greater than 166, and then set the **Local Timer** to this new value, in minutes. Otherwise, the client MUST retrieve the assigned policy location, name, and description, as specified in section [3.2.5.3](#Section_3.2.5.3).
+If the DsrGetDcName method fails, the client MUST increment the **Local Timer Interval** value (section [3.2.1](#Section_3.2.1)) by 1, square it, reduce it to 166 if its value is greater than 166, and then set the **Local Timer** to this new value, in minutes. Otherwise, the client MUST retrieve the assigned policy location, name, and description, as specified in section [3.2.5.3](#Section_3.2.5.3).
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Establishing a Connection to the Domain Controller
@@ -1768,9 +1768,9 @@ Then, the connection handle MUST bind as specified in section [3.1.5.1](#Section
 
 The client MUST determine the location of the currently assigned policy by accessing the ipsecOwnersReference attribute, as specified in [MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.330, "Attribute ipsecOwnersReference", of the IPSEC object cn=ipsec,cn=Windows,cn=Microsoft,cn=Machine,<GPO DN>, for the last (highest precedence) GPO of the FilteredGPOList ADM element. The ipsecOwnersReference attribute contains the [**DN**](#gt_distinguished-name-dn) of the ipsecPolicy object that is to be applied to the client machine.
 
-Similarly, the assigned policy name and description MUST be read by retrieving the ipsecName and description values. These values MUST be interpreted as a [**Directory String**](#gt_directory-string) (section [2.2.2](#Section_3.1.5.8)).
+Similarly, the assigned policy name and description MUST be read by retrieving the ipsecName and description values. These values MUST be interpreted as a [**Directory String**](#gt_directory-string) (section [2.2.2](#Section_2.2.2)).
 
-To retrieve the assigned IPsec policy location, name, and description for a GPO, an LDAP operation MUST be performed using the operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, "Performing an LDAP Operation on an ADConnection". The *TaskInputADConnection* value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, "ADCONNECTION_HANDLE") stored in **ADConnectionHandle**. The TaskInputRequestMessage MUST contain an LDAP searchRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) [[RFC2254]](https://go.microsoft.com/fwlink/?LinkId=90328)) with the values specified in section [2.2.3.1](../MS-ADTS/MS-ADTS.md).
+To retrieve the assigned IPsec policy location, name, and description for a GPO, an LDAP operation MUST be performed using the operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, "Performing an LDAP Operation on an ADConnection". The *TaskInputADConnection* value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, "ADCONNECTION_HANDLE") stored in **ADConnectionHandle**. The TaskInputRequestMessage MUST contain an LDAP searchRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) [[RFC2254]](https://go.microsoft.com/fwlink/?LinkId=90328)) with the values specified in section [2.2.3.1](#Section_2.2.3.1).
 
 The client MUST first send an LDAP SearchRequest message with the **objectClass** attribute, as specified in 2.2.3.1. If this operation succeeds, then the client MUST send an LDAP SearchRequest message with the **ipsecOwnersReference**, **ipsecName**, and **description** attributes, as specified in 2.2.3.1.
 
@@ -1779,9 +1779,9 @@ If either LDAP SearchRequest message fails, the local IPsec component MUST be si
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Retrieving the Assigned Policy Data
 
-The IPsec policy data that is currently assigned is specified by the ipsecFilter, ipsecISAKMPPolicy, ipsecNegotiationPolicy, ipsecNFA, and ipsecPolicy entries, as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.71, "Class ipsecFilter", [MS-ADSC] section 2.72, "Class ipsecISAKMPPolicy", [MS-ADSC] section 2.73, "Class ipsecNegotiationPolicy", [MS-ADSC] section 2.74, "Class ipsecNFA", and [MS-ADSC] section 2.75, "Class ipsecPolicy", respectively. Additional details are specified in sections [2.2.1.1](../MS-ADSC/MS-ADSC.md), [2.2.1.2](#Section_2.2.1.2), [2.2.1.3](#Section_2.2.1.3), [2.2.1.4](#Section_2.2.1.4), and [2.2.1.5](#Section_2.2.1.5). To retrieve the details of the assigned IPsec policy from the IPsec ("System\IP Security") container, an LDAP searchRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) [[RFC2254]](https://go.microsoft.com/fwlink/?LinkId=90328)) with the values specified in section [2.2.3.2](../MS-ADSC/MS-ADSC.md) MUST be sent to the domain controller (located in section [3.2.5.1](../MS-ADSC/MS-ADSC.md)):
+The IPsec policy data that is currently assigned is specified by the ipsecFilter, ipsecISAKMPPolicy, ipsecNegotiationPolicy, ipsecNFA, and ipsecPolicy entries, as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.71, "Class ipsecFilter", [MS-ADSC] section 2.72, "Class ipsecISAKMPPolicy", [MS-ADSC] section 2.73, "Class ipsecNegotiationPolicy", [MS-ADSC] section 2.74, "Class ipsecNFA", and [MS-ADSC] section 2.75, "Class ipsecPolicy", respectively. Additional details are specified in sections [2.2.1.1](#Section_2.2.1.1), [2.2.1.2](#Section_2.2.1.2), [2.2.1.3](#Section_2.2.1.3), [2.2.1.4](#Section_2.2.1.4), and [2.2.1.5](#Section_2.2.1.5). To retrieve the details of the assigned IPsec policy from the IPsec ("System\IP Security") container, an LDAP searchRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) [[RFC2254]](https://go.microsoft.com/fwlink/?LinkId=90328)) with the values specified in section [2.2.3.2](#Section_2.2.3.2) MUST be sent to the domain controller (located in section [3.2.5.1](#Section_3.2.5.1)):
 
-If this operation fails, the client MUST increment the **Local Timer Interval** value (section [3.2.1](#Section_3.1.1)) by 1, square it, reduce it to 166 if its value is greater than 166, and then set the **Local Timer** (section [3.2.2](#Section_3.2.2)) to this new value, in minutes. Otherwise, it MUST reset the **Local Timer** to the interval specified by the Polling-Interval value that is retrieved as part of the IPsec policy object, as specified in the messages defined in ipsecPolicy Object Attribute Details.
+If this operation fails, the client MUST increment the **Local Timer Interval** value (section [3.2.1](#Section_3.2.1)) by 1, square it, reduce it to 166 if its value is greater than 166, and then set the **Local Timer** (section [3.2.2](#Section_3.2.2)) to this new value, in minutes. Otherwise, it MUST reset the **Local Timer** to the interval specified by the Polling-Interval value that is retrieved as part of the IPsec policy object, as specified in the messages defined in ipsecPolicy Object Attribute Details.
 
 Any retrieved ipsecPolicy object MUST copy its **whenChanged** field (see section 2.2.1.1) to the implementation's **LocalWhenChanged** ADM element, as defined in section 3.2.1.
 
@@ -1928,7 +1928,7 @@ The data returned is as follows:
 
 The protocol messages that occur to retrieve the assigned policy data are as follows:
 
-LDAP searchRequest message, as specified in ipsecPolicy Object Attribute Details (section [2.2.1.1)](#Section_53aa110628f34eef81a61466bd989ae8):
+LDAP searchRequest message, as specified in ipsecPolicy Object Attribute Details (section [2.2.1.1)](#Section_2.2.1.1):
 
 - **Location**: CN=IP Security, CN=System, DC=myDomain,DC=contoso,DC=com
 - **Filter**: (&(objectclass=ipsecPolicy)(cn=ipsecPolicy{E514E247-80C3-429A-8D69-74BD54FEB31E}))

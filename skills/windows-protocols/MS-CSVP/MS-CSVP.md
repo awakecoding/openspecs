@@ -523,7 +523,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-FASP] Microsoft Corporation, "[Firewall and Advanced Security Protocol](#Section_5)".
+[MS-FASP] Microsoft Corporation, "[Firewall and Advanced Security Protocol](../MS-FASP/MS-FASP.md)".
 
 [MS-OAUT] Microsoft Corporation, "[OLE Automation Protocol](../MS-OAUT/MS-OAUT.md)".
 
@@ -564,7 +564,7 @@ The ClusPrep Protocol provides [**DCOM**](#gt_distributed-component-object-model
 
 The Failover Cluster: Setup and Validation Protocol (ClusPrep) relies on the Distributed Component Object Model (DCOM) Remote Protocol, which uses [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) as a transport, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-The Failover Cluster: Setup and Validation Protocol (ClusPrep) creates a file containing diagnostic data, as specified in section [3.12.4](#Section_3.20). The server makes this file available to clients via a file [**share**](#gt_share). Protocol clients can access this file using the Server Message Block (SMB) Version 2 Protocol, as specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md).
+The Failover Cluster: Setup and Validation Protocol (ClusPrep) creates a file containing diagnostic data, as specified in section [3.12.4](#Section_3.12.4). The server makes this file available to clients via a file [**share**](#gt_share). Protocol clients can access this file using the Server Message Block (SMB) Version 2 Protocol, as specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md).
 
 The Failover Cluster: Cluster Management Remote Protocol (ClusAPI) ([MS-CMRP](../MS-CMRP/MS-CMRP.md)) clients can use the ClusPrep Protocol in conjunction with the ClusAPI Protocol when removing a [**node**](#gt_node) from a cluster, as specified in section [3.8.4.1](#Section_3.8.4.1).
 
@@ -1291,7 +1291,7 @@ packet-beta
 <a id="Section_2.2.15"></a>
 ### 2.2.15 CLUSTER_NETWORK_PROFILE
 
-The **CLUSTER_NETWORK_PROFILE** enumeration defines the valid values for network adapter firewall profiles. When the server firewall enforces policies specified in [MS-FASP](#Section_5), the server SHOULD determine the network adapter firewall profile by querying the server firewall for the network adapter profile and mapping that value as specified below.
+The **CLUSTER_NETWORK_PROFILE** enumeration defines the valid values for network adapter firewall profiles. When the server firewall enforces policies specified in [MS-FASP](../MS-FASP/MS-FASP.md), the server SHOULD determine the network adapter firewall profile by querying the server firewall for the network adapter profile and mapping that value as specified below.
 
 typedef enum _CLUSTER_NETWORK_PROFILE
 
@@ -1603,7 +1603,7 @@ WCHAR ClusterSecret[32 + 1];
 
 **KeyData**: Exported private key blob from the crypto container that matches the certificate.
 
-**ClusterSecret**: Cluster secret data as defined in section [3.10.1](#Section_3.10).
+**ClusterSecret**: Cluster secret data as defined in section [3.10.1](#Section_3.10.1).
 
 <a id="Section_2.2.24"></a>
 ### 2.2.24 DiskMediaType
@@ -1846,7 +1846,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with nonzero conformant value, as specified in section 3 of [MS-RPCE].
 
-The server MUST fail a method with error 0x80070548 (ERROR_INVALID_SERVER_STATE) if the server's **Prepare State** ([3.2.1](#Section_3.2)) is not correct for that method. The required **Prepare State** is as follows:
+The server MUST fail a method with error 0x80070548 (ERROR_INVALID_SERVER_STATE) if the server's **Prepare State** ([3.2.1](#Section_3.2.1)) is not correct for that method. The required **Prepare State** is as follows:
 
 - [CprepPrepareNode (section 3.2.4.3)](#Section_3.2.4.3) requires **Prepare State** Initial.
 - [CprepPrepareNodePhase2 (section 3.2.4.4)](#Section_3.2.4.4) requires **Prepare State** Preparing.
@@ -1871,12 +1871,12 @@ For the following methods, the server MUST require that the value of **ClusPrepD
 - [CprepDiskPRArbitrate (section 3.2.4.15)](#Section_3.2.4.15)
 - [CprepDiskPRRegister (section 3.2.4.16)](#Section_3.2.4.16)
 - [CprepDiskPRUnRegister (section 3.2.4.17)](#Section_3.2.4.17)
-- [CprepDiskPRReserve (section 3.2.4.18)](#Section_3.4.4.12)
+- [CprepDiskPRReserve (section 3.2.4.18)](#Section_3.2.4.18)
 - [CprepDiskPRRelease (section 3.2.4.19)](#Section_3.2.4.19)
 - [CprepDiskGetArbSectors (section 3.2.4.21)](#Section_3.2.4.21)
 - [CprepDiskIsPRPresent (section 3.2.4.22)](#Section_3.2.4.22)
 - [CprepDiskPRPreempt (section 3.2.4.23)](#Section_3.2.4.23)
-- [CprepDiskPRClear (section 3.2.4.24)](#Section_3.4.4.15)
+- [CprepDiskPRClear (section 3.2.4.24)](#Section_3.2.4.24)
 - [CprepDiskIsOnline (section 3.2.4.25)](#Section_3.2.4.25)
 - [CprepDiskIsReadable (section 3.2.4.28)](#Section_3.2.4.28)
 - [CprepDiskPRRegister3 (section 3.4.4.9)](#Section_3.4.4.9)
@@ -2008,7 +2008,7 @@ The opnum field value for this method is 3.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - If *cbData* is larger than 512, then return ERROR_READ_FAULT.
 - Read a 512 byte sector from the disk at the correct sector and place the first *cbData* bytes from this data into the *pbData* buffer.
 **Note** While performing the read operation, use the **Latency Time Source** ADM element in an implementation-specific manner to determine the elapsed time. For example, prior to initiating the read operation, observe the current time of day in millisecond granularity. Upon completion of the read, again observe the current time of day. The elapsed time can be calculated by subtracting the first observed value from the second.
@@ -2069,7 +2069,7 @@ The opnum field value for this method is 4.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - If the passed *cbData* is greater than 512, then return ERROR_WRITE_FAULT.
 - Write a single sector of 512 bytes from *pbData* to the disk at the correct sector. If the size of *cbData* is less than 512 bytes, then *pbData* is padded to 512 bytes with arbitrary data.
 **Note** While performing the write operation, use the **Latency Time Source** ADM element in an implementation-specific manner to determine the elapsed time. For example, prior to initiating the write operation, observe the current time of day in millisecond granularity. Upon completion of the write, again observe the current time of day. The elapsed time can be calculated by subtracting the first observed value from the second.
@@ -2208,7 +2208,7 @@ The opnum field value for this method is 7.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Gather the information about the given disk.
 - Populate a valid [DISK_PROPS](#Section_2.2.5) structure with the information.
 The server returns the following information to the client:
@@ -2250,7 +2250,7 @@ The opnum field value for this method is 12.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Relinquish ownership of the disk associated with the **ClusPrepDisk** object, as specified in section [3.2.6.2](#Section_3.2.6.2).
 - Set the **ClusPrepDisk.OwnedState** value to NotOwned.
 <a id="Section_3.2.4.7"></a>
@@ -2287,7 +2287,7 @@ The opnum field value for this method is 13.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Start the online process in the same way that [CprepDiskSetOnline](#Section_3.2.4.26) does.
 - Wait for the implementation-specific process where volumes on the disk become online, to complete.
 - If the online process is successful, then count the number of partitions on the disk.
@@ -2327,7 +2327,7 @@ The opnum field value for this method is 14.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Determine whether any other **ClusPrepDisk** objects in **ClusPrepDiskList** also match the *DiskId* parameter and have the **ClusPrepDisk.AttachedState** value set equal to Attached.
 <a id="Section_3.2.4.9"></a>
 #### 3.2.4.9 CprepDiskWriteFileData (Opnum 17)
@@ -2374,7 +2374,7 @@ Exceptions Thrown: No exceptions are thrown beyond those thrown by the underlyin
 
 The opnum field value for this method is 17.
 
-When processing this call, the server MUST do the following as specified in section [3.2.4](#Section_3.2):
+When processing this call, the server MUST do the following as specified in section [3.2.4](#Section_3.2.4):
 
 - Obtain the **ClusPrepDisk** identified by the *DiskId* parameter.
 - Verify that the **ClusPrepDisk.OnlineState** is Online.
@@ -2428,7 +2428,7 @@ Exceptions Thrown: No exceptions are thrown beyond those thrown by the underlyin
 
 The opnum field value for this method is 18.
 
-When processing this call, the server MUST do the following as specified in section [3.2.4](#Section_3.2):
+When processing this call, the server MUST do the following as specified in section [3.2.4](#Section_3.2.4):
 
 - Obtain the **ClusPrepDisk** identified by the *DiskId* parameter.
 - Verify that the **ClusPrepDisk.OnlineState** is Online.
@@ -2473,7 +2473,7 @@ Exceptions Thrown: No exceptions are thrown beyond those thrown by the underlyin
 
 The opnum field value for this method is 19.
 
-When processing this call, the server MUST do the following as specified in section [3.2.4](#Section_3.2):
+When processing this call, the server MUST do the following as specified in section [3.2.4](#Section_3.2.4):
 
 - Obtain the **ClusPrepDisk** identified by the *DiskId* parameter.
 - Verify that the **ClusPrepDisk.OnlineState** is Online.
@@ -2510,7 +2510,7 @@ The opnum field value for this method is 20.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Flush all unwritten data to the disk.
 - Invalidate all handles to files on the disk.
 - Dismount all file systems on the disk.
@@ -2565,7 +2565,7 @@ The opnum field value for this method is 22.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Retrieve the page 83h [**SCSI**](#gt_small-computer-system-interface-scsi) data defined in [[SPC-3]](https://go.microsoft.com/fwlink/?LinkId=90528) section 7.6.3.1 in an implementation-specific way for the given disk.
 - If the retrieved 83h SCSI data does not contain at least one identifier of the type **SCSI name string**, **EUI-64 based** or **NAA** as defined in **[SPC-3]** section 7.6.3.1, then return ERROR_NOT_SUPPORTED.
 - If the data buffer *pbData* with size *cbData* is not large enough to store the SCSI page 83 data formatted as a [**STORAGE_DEVICE_ID_DESCRIPTOR**](#Section_2.2.9) structure, then return ERROR_INSUFFICIENT_BUFFER.
@@ -2602,7 +2602,7 @@ The opnum field value for this method is 23.
 
 When processing this call, the server MUST:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Perform any implementation-specific processing needed to support the successful operation of the other methods that require a **ClusPrepDisk.AttachedState** to be Attached.
 - Set the attach state of the designated **ClusPrepDisk.AttachedState** to Attached.
 If the **ClusPrepDisk.AttachedState** was already equal to Attached, then the attach process is not performed and the method returns S_OK.
@@ -2636,7 +2636,7 @@ The opnum field value for this method is 24.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Establish ownership of the disk associated with the **ClusPrepDisk** object, as specified in section [3.2.6.1](#Section_3.2.6.1).
 - If the result of establishing ownership indicates that the disk is owned by a different server, set **ClusPrepDisk.OwnedState** to OwnedButNotByThisServer and return a nonzero error code.
 - Otherwise, set the **ClusPrepDisk.OwnedState** value to OwnedByThisServer.
@@ -2670,7 +2670,7 @@ The opnum field value for this method is 25.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Generate an arbitrary non-zero key using an implementation-specific method suitable for the PERSISTENT RESERVE OUT command with a REGISTER AND IGNORE EXISTING KEY action as specified in [SPC-3] section 6.12.
 - Issue a PERSISTENT RESERVE OUT command with a REGISTER AND IGNORE EXISTING KEY action as specified in [SPC-3] section 6.12, using the key generated in the previous step.
 <a id="Section_3.2.4.17"></a>
@@ -2703,7 +2703,7 @@ The opnum field value for this method is 26.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a REGISTER AND IGNORE EXISTING KEY action as specified in [SPC-3] section 6.12. The key value MUST be zero.
 <a id="Section_3.2.4.18"></a>
 #### 3.2.4.18 CprepDiskPRReserve (Opnum 27)
@@ -2735,7 +2735,7 @@ The opnum field value for this method is 27.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a RESERVE action as specified in [SPC-3] section 6.12.
 <a id="Section_3.2.4.19"></a>
 #### 3.2.4.19 CprepDiskPRRelease (Opnum 28)
@@ -2767,7 +2767,7 @@ The opnum field value for this method is 28.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a RELEASE action as specified in [SPC-3] section 6.12.
 <a id="Section_3.2.4.20"></a>
 #### 3.2.4.20 CprepDiskDiskPartitionIsNtfs (Opnum 29)
@@ -2804,7 +2804,7 @@ The opnum field value for this method is 29.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Verify that the **ClusPrepDisk.OnlineState** is Online as specified in section 3.2.4.
 - Map *ulPartition* to the corresponding volume as specified in section 3.2.4.
 - Return ERROR_WRONG_DISK if [CprepDiskGetFSName](#Section_3.2.4.27) would return any file system name other than "NTFS".
@@ -2846,7 +2846,7 @@ The opnum field value for this method is 30.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - In an implementation-specific way, identify the two sectors on the disk, which are pre-allocated for raw read/write, without disturbing any data that resides on the disk.
 The server returns the following information to the client:
 
@@ -2890,7 +2890,7 @@ The [**opnum**](#gt_opnum) field value for this method is 31.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE IN command with a READ RESERVATION action, as specified in [[SPC-3]](https://go.microsoft.com/fwlink/?LinkId=90528) section 6.11.
 - Set the *Present* parameter correctly, depending on the results.
 Upon successful completion, the server returns the following data to the client:
@@ -2925,7 +2925,7 @@ The opnum field value for this method is 32.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a PREEMPT action as specified in [SPC-3] section 6.12.
 <a id="Section_3.2.4.24"></a>
 #### 3.2.4.24 CprepDiskPRClear (Opnum 33)
@@ -2956,7 +2956,7 @@ The opnum field value for this method is 33.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a CLEAR action as specified in [SPC-3] section 6.12.
 <a id="Section_3.2.4.25"></a>
 #### 3.2.4.25 CprepDiskIsOnline (Opnum 34)
@@ -2987,7 +2987,7 @@ The opnum field value for this method is 34.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Return S_OK if the **ClusPrepDisk.OnlineState** is Online or ERROR_NOT_READY if the **ClusPrepDisk.OnlineState** is Not Online state.
 <a id="Section_3.2.4.26"></a>
 #### 3.2.4.26 CprepDiskSetOnline (Opnum 35)
@@ -3018,7 +3018,7 @@ The opnum field value for this method is 35.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Start the process for transitioning the **ClusPrepDisk.OnlineState** to Online. This process is done via an implementation-specific mechanism that causes the volumes on the disk to become [**online**](#gt_online).
 If the **ClusPrepDisk.OnlineState** is already in the Online state, then the online process is repeated.
 
@@ -3066,7 +3066,7 @@ The opnum field value for this method is 36.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Verify that the **ClusPrepDisk.OnlineState** is Online as specified in section 3.2.4.
 - Map *ulPartition* to the corresponding volume as specified in section 3.2.4.
 - Determine the file system on the given partition on the given disk.
@@ -3103,7 +3103,7 @@ The opnum field value for this method is 37.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as specified in section [3.2.4](#Section_3.2.4).
 - Via an implementation-specific means, attempt to read from the disk and if successful, then conclude that the disk supports being read from. If unsuccessful, then conclude that the disk does not support being read from.
 <a id="Section_3.2.4.29"></a>
 #### 3.2.4.29 CprepDiskGetDsms (Opnum 38)
@@ -3217,12 +3217,12 @@ Clients MAY invoke protocol methods in any order, unless otherwise noted in the 
 <a id="Section_3.3.4.1"></a>
 #### 3.3.4.1 Preparing a Server
 
-Because the server's initial **Prepare State** ([3.2.1](#Section_3.2)) restricts the methods that can be called, the client MUST call [CprepPrepareNode](#Section_3.2.4.3) before any other methods in the interface. Then, before calling any further methods in the interface, the client MUST call [CprepPrepareNodePhase2](#Section_3.2.4.4).
+Because the server's initial **Prepare State** ([3.2.1](#Section_3.2.1)) restricts the methods that can be called, the client MUST call [CprepPrepareNode](#Section_3.2.4.3) before any other methods in the interface. Then, before calling any further methods in the interface, the client MUST call [CprepPrepareNodePhase2](#Section_3.2.4.4).
 
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 Attaching CPrepDisks
 
-Because the **ClusPrepDisk.AttachedState** (section [3.2.1](#Section_3.2)) restricts the methods that can be called for a **ClusPrepDisk**, the client MUST call [CprepDiskAttach (section 3.2.4.14)](#Section_3.2.4.14) before calling any other method with a [CPREP_DISKID](#Section_2.2.2) input parameter, except for [CprepDiskGetProps (section 3.2.4.5)](#Section_3.2.4.5), [CprepDiskGetProps3 (section 3.4.4.7)](#Section_3.4.4.7), [CprepDiskGetUniqueIds (section 3.2.4.13)](#Section_3.2.4.13), and [CprepDiskGetUniqueIds3 (section 3.4.4.1)](#Section_3.4.4.1).
+Because the **ClusPrepDisk.AttachedState** (section [3.2.1](#Section_3.2.1)) restricts the methods that can be called for a **ClusPrepDisk**, the client MUST call [CprepDiskAttach (section 3.2.4.14)](#Section_3.2.4.14) before calling any other method with a [CPREP_DISKID](#Section_2.2.2) input parameter, except for [CprepDiskGetProps (section 3.2.4.5)](#Section_3.2.4.5), [CprepDiskGetProps3 (section 3.4.4.7)](#Section_3.4.4.7), [CprepDiskGetUniqueIds (section 3.2.4.13)](#Section_3.2.4.13), and [CprepDiskGetUniqueIds3 (section 3.4.4.1)](#Section_3.4.4.1).
 
 <a id="Section_3.3.4.3"></a>
 #### 3.3.4.3 Querying Disk Sectors
@@ -3247,10 +3247,10 @@ Certain methods in the interface require the server and a disk to fulfill the [*
 For a particular disk, assuming that the server behaves correctly as an initiator and the disk behaves correctly as a target, a client SHOULD adhere to the following sequencing for successful execution of methods:
 
 - [CprepDiskPRRegister](#Section_3.2.4.16) SHOULD be called before [CprepDiskPRUnRegister](#Section_3.2.4.17).
-- CprepDiskPRRegister SHOULD be called before [CprepDiskPRReserve](#Section_3.4.4.12).
+- CprepDiskPRRegister SHOULD be called before [CprepDiskPRReserve](#Section_3.2.4.18).
 - CprepDiskPRReserve SHOULD be called before [CprepDiskPRPreempt](#Section_3.2.4.23).
 - [CprepDiskPRArbitrate](#Section_3.2.4.15) and [CprepDiskOffline](#Section_3.2.4.12) MUST be called before [CprepDiskStopDefense](#Section_3.2.4.6).
-- [CprepDiskPRClear](#Section_3.4.4.15) SHOULD be called before CprepDiskPRRegister, when used as part of a persistent reservation sequence as follows:
+- [CprepDiskPRClear](#Section_3.2.4.24) SHOULD be called before CprepDiskPRRegister, when used as part of a persistent reservation sequence as follows:
 - CprepDiskPRClear
 - CprepDiskPRRegister
 - CprepDiskPRReserve
@@ -3330,7 +3330,7 @@ This protocol MUST indicate to the RPC runtime that it is to reject a NULL uniqu
 
 This interface SHOULD<14> be supported.
 
-The server MUST fail a method with error 0x80070548 (ERROR_INVALID_SERVER_STATE) if the server's **Prepare State** ([3.2.1](#Section_3.2)) is not correct for that method. The required **Prepare State** is as follows:
+The server MUST fail a method with error 0x80070548 (ERROR_INVALID_SERVER_STATE) if the server's **Prepare State** ([3.2.1](#Section_3.2.1)) is not correct for that method. The required **Prepare State** is as follows:
 
 - [CprepPrepareNode (section 3.2.4.3)](#Section_3.2.4.3) requires **Prepare State** Initial.
 - [CprepPrepareNodePhase2 (section 3.2.4.4)](#Section_3.2.4.4) requires **Prepare State** Preparing.
@@ -3356,12 +3356,12 @@ For the following methods, the server MUST require the value of **ClusPrepDisk.A
 - [CprepDiskPRArbitrate (section 3.2.4.15)](#Section_3.2.4.15)
 - [CprepDiskPRRegister (section 3.2.4.16)](#Section_3.2.4.16)
 - [CprepDiskPRUnRegister (section 3.2.4.17)](#Section_3.2.4.17)
-- [CprepDiskPRReserve (section 3.2.4.18)](#Section_3.4.4.12)
+- [CprepDiskPRReserve (section 3.2.4.18)](#Section_3.2.4.18)
 - [CprepDiskPRRelease (section 3.2.4.19)](#Section_3.2.4.19)
 - [CprepDiskGetArbSectors (section 3.2.4.21)](#Section_3.2.4.21)
 - [CprepDiskIsPRPresent (section 3.2.4.22)](#Section_3.2.4.22)
 - [CprepDiskPRPreempt (section 3.2.4.23)](#Section_3.2.4.23)
-- [CprepDiskPRClear (section 3.2.4.24)](#Section_3.4.4.15)
+- [CprepDiskPRClear (section 3.2.4.24)](#Section_3.2.4.24)
 - [CprepDiskIsOnline (section 3.2.4.25)](#Section_3.2.4.25)
 - [CprepDiskIsReadable (section 3.2.4.28)](#Section_3.2.4.28)
 - [CprepDiskIsReadOnly3 (section 3.4.4.8)](#Section_3.4.4.8)
@@ -3456,7 +3456,7 @@ The [**opnum**](#gt_opnum) field value for this method is 3.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Retrieve the page 83h [**SCSI**](#gt_small-computer-system-interface-scsi) data described in [[SPC-3]](https://go.microsoft.com/fwlink/?LinkId=90528) section 7.6.3.1 in an implementation-specific way for the given disk.
 - If the retrieved 83h SCSI data does not contain at least one identifier of the types SCSI name string, EUI-64 based, or NAA as described in [SPC-3] section 7.6.3.1, with device-specific association, return ERROR_NOT_SUPPORTED.
 - Allocate a block of **BYTE**s large enough to store the SCSI page 83h data formatted as a [STORAGE_DEVICE_ID_DESCRIPTOR](#Section_2.2.8) structure.
@@ -3677,7 +3677,7 @@ The [**opnum**](#gt_opnum) field value for this method is 9.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter as described in section [3.2.4](#Section_3.2.4).
 - Gather the information about the given disk.
 - Populate a valid [DISK_PROPS_EX](#Section_2.2.6) structure with the information.
 The server returns the following information to the client:
@@ -3696,7 +3696,7 @@ HRESULT CprepDiskIsReadOnly3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) for which to return the disk writable status.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) for which to return the disk writable status.
 
 **pbReadOnly:** Returns a nonzero value if the LUN underlying the operating system disk identified by ClusPrepDisk is not writable.
 
@@ -3716,7 +3716,7 @@ The [**opnum**](#gt_opnum) field value for this method is 10.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the **ClusPrepDisk** identified by the *DiskId* parameter, as described in section [3.2.4](#Section_3.2.4).
 - Determine whether the LUN underlying the operating system disk is writable.
 - Return a Boolean value indicating whether or not the LUN underlying the operating system disk is writable. If the operating system disk is not backed by a LUN, this method will return FALSE in pbReadOnly.
 The server returns the following information to the client:
@@ -3737,7 +3737,7 @@ HRESULT CprepDiskPRRegister3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **OldPrKey:** The key used in the **Reservation Key** field of the SCSI PERSISTENT RESERVE OUT command. If the value of *OldPrKey* is zero, the REGISTER_IGNORE_EXISTING action is used. Otherwise, the REGISTER action is used.
 
@@ -3761,7 +3761,7 @@ The [**opnum**](#gt_opnum) field value for this method is 11.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a REGISTER or REGISTER_IGNORE_EXISTING action as specified in [SPC-3] section 6.12.
 <a id="Section_3.4.4.10"></a>
 #### 3.4.4.10 CprepDiskFindKey3 (Opnum 12)
@@ -3780,7 +3780,7 @@ HRESULT CprepDiskFindKey3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **Key:** The registration key to search for in the SCSI Persistent Reserve registration table for the [**LUN**](#gt_logical-unit-number-lun) underlying the operating system disk identified by the *DiskId* parameter. A value of zero for this parameter indicates that the caller is querying to discover whether any keys are registered.
 
@@ -3804,7 +3804,7 @@ The opnum field value for this method is 12.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - If the *Key* parameter is not zero, search for that key in the SCSI Persistent Reserve registration table for the LUN underlying the operating system disk identified by the *DiskId* parameter, as specified in [[SPC-3]](https://go.microsoft.com/fwlink/?LinkId=90528) section 6.12 and return TRUE in the *pbFound* parameter if the key is found.
 - If the *Key* parameter is zero, return TRUE in the *pbFound* parameter if at least one key is present in the SCSI Persistent Reserve registration table for the LUN underlying the operating system disk identified by the *DiskId* parameter.
 <a id="Section_3.4.4.11"></a>
@@ -3822,7 +3822,7 @@ HRESULT CprepDiskPRPreempt3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **OwnerKey:** The key used in the **Service Action Reservation Key** field of the SCSI PERSISTENT RESERVE OUT command.
 
@@ -3846,7 +3846,7 @@ The [**opnum**](#gt_opnum) field value for this method is 13.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a PREEMPT action as specified in [SPC-3] section 6.12.
 <a id="Section_3.4.4.12"></a>
 #### 3.4.4.12 CprepDiskPRReserve3 (Opnum 14)
@@ -3861,7 +3861,7 @@ HRESULT CprepDiskPRReserve3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **Key:** The key used in the **Reservation Key** field of the SCSI PERSISTENT RESERVE OUT command.
 
@@ -3883,7 +3883,7 @@ The [**opnum**](#gt_opnum) field value for this method is 14.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a RESERVE action as specified in [SPC-3] section 6.12.
 <a id="Section_3.4.4.13"></a>
 #### 3.4.4.13 CprepDiskIsPRPresent3 (Opnum 15)
@@ -3898,7 +3898,7 @@ HRESULT CprepDiskIsPRPresent3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **Key:** The reservation key to search for in the SCSI Persistent Reserve reservation table for the [**LUN**](#gt_logical-unit-number-lun) underlying the operating system disk identified by the *DiskId* parameter.
 
@@ -3921,7 +3921,7 @@ The [**opnum**](#gt_opnum) field value for this method is 15.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - Search the SCSI Persistent Reserve reservation table as specified in [[SPC-3]](https://go.microsoft.com/fwlink/?LinkId=90528) section 6.12.
 <a id="Section_3.4.4.14"></a>
 #### 3.4.4.14 CprepDiskPRRelease3 (Opnum 16)
@@ -3936,7 +3936,7 @@ HRESULT CprepDiskPRRelease3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **Key:** The key used in the **Reservation Key** field of the SCSI PERSISTENT RESERVE OUT command.
 
@@ -3958,7 +3958,7 @@ The [**opnum**](#gt_opnum) field value for this method is 16.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a RELEASE action as specified in [SPC-3] section 6.12.
 <a id="Section_3.4.4.15"></a>
 #### 3.4.4.15 CprepDiskPRClear3 (Opnum 17)
@@ -3973,7 +3973,7 @@ HRESULT CprepDiskPRClear3(
 
 );
 
-**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2) representing the disk.
+**DiskId:** The identifier of the [ClusPrepDisk](#Section_3.2.1) representing the disk.
 
 **Key:** The key used in the **Reservation Key** field of the SCSI PERSISTENT RESERVE OUT command.
 
@@ -3995,7 +3995,7 @@ The [**opnum**](#gt_opnum) field value for this method is 17.
 
 When processing this call, the server MUST do the following:
 
-- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2).
+- Obtain the ClusPrepDisk identified by the DiskId parameter, as described in section [3.2.4](#Section_3.2.4).
 - Issue a PERSISTENT RESERVE OUT command with a CLEAR action as specified in [SPC-3] section 6.12.
 <a id="Section_3.4.5"></a>
 ### 3.4.5 Timer Events
@@ -4035,12 +4035,12 @@ None.
 <a id="Section_3.5.4.1"></a>
 #### 3.5.4.1 Preparing a Server
 
-Because the server's initial **Prepare State** (section [3.2.1](#Section_3.2)) restricts the methods that can be called, the client MUST call [CprepPrepareNode](#Section_3.2.4.3) before any other methods in the [**interface**](#gt_interface). Then, before calling any further methods in the interface, the client MUST call [CprepPrepareNodePhase2](#Section_3.2.4.4).
+Because the server's initial **Prepare State** (section [3.2.1](#Section_3.2.1)) restricts the methods that can be called, the client MUST call [CprepPrepareNode](#Section_3.2.4.3) before any other methods in the [**interface**](#gt_interface). Then, before calling any further methods in the interface, the client MUST call [CprepPrepareNodePhase2](#Section_3.2.4.4).
 
 <a id="Section_3.5.4.2"></a>
 #### 3.5.4.2 Attaching CPrepDisks
 
-Because **ClusPrepDisk.AttachedState** (section [3.2.1](#Section_3.2)) restricts the methods that can be called for a **ClusPrepDisk**, the client MUST call [CprepDiskAttach (section 3.2.4.14)](#Section_3.2.4.14) before calling any other method with a [CPREP_DISKID](#Section_2.2.2) input parameter except for [CprepDiskGetProps (section 3.2.4.5)](#Section_3.2.4.5), [CprepDiskGetProps3 (section 3.4.4.7)](#Section_3.4.4.7), [CprepDiskGetUniqueIds (section 3.2.4.13)](#Section_3.2.4.13), and [CprepDiskGetUniqueIds3 (section 3.4.4.1)](#Section_3.4.4.1).
+Because **ClusPrepDisk.AttachedState** (section [3.2.1](#Section_3.2.1)) restricts the methods that can be called for a **ClusPrepDisk**, the client MUST call [CprepDiskAttach (section 3.2.4.14)](#Section_3.2.4.14) before calling any other method with a [CPREP_DISKID](#Section_2.2.2) input parameter except for [CprepDiskGetProps (section 3.2.4.5)](#Section_3.2.4.5), [CprepDiskGetProps3 (section 3.4.4.7)](#Section_3.4.4.7), [CprepDiskGetUniqueIds (section 3.2.4.13)](#Section_3.2.4.13), and [CprepDiskGetUniqueIds3 (section 3.4.4.1)](#Section_3.4.4.1).
 
 <a id="Section_3.5.4.3"></a>
 #### 3.5.4.3 Querying Disk Sectors
@@ -4065,10 +4065,10 @@ Certain methods in the [**interface**](#gt_interface) require the server and a [
 For a particular disk, assuming that the server behaves correctly as an initiator and the disk behaves correctly as a target, a client SHOULD adhere to the following sequencing for successful execution of methods:
 
 - [CprepDiskPRRegister](#Section_3.2.4.16) SHOULD be called before [CprepDiskPRUnRegister](#Section_3.2.4.17).
-- CprepDiskPRRegister SHOULD be called before [CprepDiskPRReserve](#Section_3.4.4.12).
+- CprepDiskPRRegister SHOULD be called before [CprepDiskPRReserve](#Section_3.2.4.18).
 - CprepDiskPRReserve SHOULD be called before [CprepDiskPRPreempt](#Section_3.2.4.23).
 - [CprepDiskPRArbitrate](#Section_3.2.4.15) and [CprepDiskOffline](#Section_3.2.4.12) MUST be called before [CprepDiskStopDefense](#Section_3.2.4.6).
-- [CprepDiskPRClear](#Section_3.4.4.15) SHOULD be called before CprepDiskPRRegister when used as part of a persistent reservation sequence as follows:
+- [CprepDiskPRClear](#Section_3.2.4.24) SHOULD be called before CprepDiskPRRegister when used as part of a persistent reservation sequence as follows:
 - CprepDiskPRClear
 - CprepDiskPRRegister
 - CprepDiskPRReserve
@@ -4106,7 +4106,7 @@ No additional local events are used on the client beyond the events maintained i
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-**Firewall State:** The set of [**firewall rules**](#gt_firewall-rule) currently configured and enabled on the server. A firewall rule can be associated with a group of firewall rules that is identifiable by name. There can be multiple groups of firewall rules configured in the Firewall State of a server. A firewall rule is also associated with a network adapter such that for each network adapter on the server, it can be determined which firewall rules and/or groups of firewall rules are associated with that adapter. The data type of a firewall rule and the initialization of a firewall rule are implementation-specific. A server typically defines and initializes a firewall rule as specified for FW_RULE in [MS-FASP](#Section_5).
+**Firewall State:** The set of [**firewall rules**](#gt_firewall-rule) currently configured and enabled on the server. A firewall rule can be associated with a group of firewall rules that is identifiable by name. There can be multiple groups of firewall rules configured in the Firewall State of a server. A firewall rule is also associated with a network adapter such that for each network adapter on the server, it can be determined which firewall rules and/or groups of firewall rules are associated with that adapter. The data type of a firewall rule and the initialization of a firewall rule are implementation-specific. A server typically defines and initializes a firewall rule as specified for FW_RULE in [MS-FASP](../MS-FASP/MS-FASP.md).
 
 **Network Adapter Configuration:** Information about the set of network adapters on the server and their associated settings and configuration. In this protocol, the **Network Adapter Configuration** is defined as the data type [ADAPTERLIST2 (section 2.2.16)](#Section_2.2.16) <18>. The initialization and manipulation of **Network Adapter Configuration** is implementation-specific.
 
@@ -4215,7 +4215,7 @@ The [**opnum**](#gt_opnum) field value for this method is 4.
 
 When processing this call the server MUST do the following:
 
-- Set the server **Initialization State** to TRUE. The initialized state remains TRUE until either the [CleanupNode (section 3.6.4.4)](#Section_3.6.4.4) method is called or the [**DCOM**](#gt_distributed-component-object-model-dcom) object exporter removes the application-specific state associated with the [IClusterNetwork2](#Section_3.7) interface, as defined in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 1.3.6.
+- Set the server **Initialization State** to TRUE. The initialized state remains TRUE until either the [CleanupNode (section 3.6.4.4)](#Section_3.6.4.4) method is called or the [**DCOM**](#gt_distributed-component-object-model-dcom) object exporter removes the application-specific state associated with the [IClusterNetwork2](#Section_3.6) interface, as defined in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 1.3.6.
 - Set *NodeMajorVersion* to an implementation-specific value.<20>
 - Set *NodeMinorVersion* to an implementation-specific value.<21>
 - Set *ClusprepVersion* to an implementation-specific value.<22>
@@ -4292,7 +4292,7 @@ Return the following information to the client:
 <a id="Section_3.6.4.3"></a>
 #### 3.6.4.3 GetIpConfigSerialized (Opnum 5)
 
-The GetIpConfigSerialized method queries the [network adapter configuration](#Section_3.7) and returns select information about the adapters.
+The GetIpConfigSerialized method queries the [network adapter configuration](#Section_3.6.1) and returns select information about the adapters.
 
 The server SHOULD support this method even if the server **Initialization State** is FALSE.
 
@@ -4369,7 +4369,7 @@ When processing this call, the server MUST do the following:
 <a id="Section_3.6.4.5"></a>
 #### 3.6.4.5 QueryFirewallConfiguration (Opnum 7)
 
-The QueryFirewallConfiguration method determines whether the [firewall state](#Section_3.7) of the server is compatible with use in a [**failover cluster**](#gt_failover-cluster). The firewall settings that constitute failover cluster compatibility are implementation-specific. When the server firewall enforces policies specified in [MS-FASP](#Section_5), the server SHOULD determine the firewall state according to how the group of rules is enabled, as specified later in this section.
+The QueryFirewallConfiguration method determines whether the [firewall state](#Section_3.6.1) of the server is compatible with use in a [**failover cluster**](#gt_failover-cluster). The firewall settings that constitute failover cluster compatibility are implementation-specific. When the server firewall enforces policies specified in [MS-FASP](../MS-FASP/MS-FASP.md), the server SHOULD determine the firewall state according to how the group of rules is enabled, as specified later in this section.
 
 The server SHOULD support this method even if the server **Initialization State** is FALSE.
 
@@ -4615,7 +4615,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with nonzero conformant value, as specified in section 3 of [MS-RPCE].
 
-The [IClusterCleanup](#Section_3.9) [**interface**](#gt_interface) methods do not have any dependencies, including:
+The [IClusterCleanup](#Section_3.8) [**interface**](#gt_interface) methods do not have any dependencies, including:
 
 - CleanUpEvictedNode (Opnum 3)
 - ClearPR (Opnum 4)
@@ -5226,7 +5226,7 @@ No protocol timers are required beyond those used internally by [**RPC**](#gt_re
 <a id="Section_3.12.3"></a>
 ### 3.12.3 Initialization
 
-The Failover Cluster Setup and Validation [IClusterLog](#Section_3.20) Remote Protocol server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) [**interface**](#gt_interface) and listening on the RPC [**well-known endpoint**](#gt_well-known-endpoint), as specified in section [2.1](#Section_2.1). The server MUST then wait for Failover Cluster Setup and Validation IClusterLog Remote Protocol clients to establish connections.
+The Failover Cluster Setup and Validation [IClusterLog](#Section_3.12.4) Remote Protocol server MUST be initialized by registering the [**RPC**](#gt_remote-procedure-call-rpc) [**interface**](#gt_interface) and listening on the RPC [**well-known endpoint**](#gt_well-known-endpoint), as specified in section [2.1](#Section_2.1). The server MUST then wait for Failover Cluster Setup and Validation IClusterLog Remote Protocol clients to establish connections.
 
 <a id="Section_3.12.4"></a>
 ### 3.12.4 Message Processing Events and Sequencing Rules
@@ -5235,7 +5235,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with nonzero conformant value, as specified in section 3 of [MS-RPCE].
 
-The [IClusterLog](#Section_3.20) [**interface**](#gt_interface) methods do not have any dependencies, including:
+The [IClusterLog](#Section_3.12) [**interface**](#gt_interface) methods do not have any dependencies, including:
 
 - **GenerateClusterLog** (Opnum 3)
 - **GenerateTimeSpanLog** (Opnum 4)
@@ -5408,7 +5408,7 @@ No additional local events are used on the server beyond the events maintained i
 <a id="Section_3.13.1"></a>
 ### 3.13.1 Abstract Data Model
 
-The client can use the abstract data model defined by the server; see section [3.12.1](#Section_3.20).
+The client can use the abstract data model defined by the server; see section [3.12.1](#Section_3.12.1).
 
 <a id="Section_3.13.2"></a>
 ### 3.13.2 Timers
@@ -5447,7 +5447,7 @@ The server SHOULD<41> support the IClusterFirewall [**DCOM**](#gt_distributed-co
 <a id="Section_3.14.1"></a>
 ### 3.14.1 Abstract Data Model
 
-The abstract data model for [IClusterFirewall](#Section_3.15) is the same as the abstract data model for [IClusterNetwork2](#Section_3.7) in section [3.6.1](#Section_3.7).
+The abstract data model for [IClusterFirewall](#Section_3.14) is the same as the abstract data model for [IClusterNetwork2](#Section_3.6) in section [3.6.1](#Section_3.6.1).
 
 <a id="Section_3.14.2"></a>
 ### 3.14.2 Timers
@@ -5466,7 +5466,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with nonzero conformant value, as specified in [MS-RPCE] section 3.
 
-The order in which [IClusterFirewall](#Section_3.15) [**interface**](#gt_interface) methods are invoked becomes a precondition for subsequent methods. Preconditions include the following:
+The order in which [IClusterFirewall](#Section_3.14) [**interface**](#gt_interface) methods are invoked becomes a precondition for subsequent methods. Preconditions include the following:
 
 - The InitializeAdapterConfiguration (Opnum 3) method MUST be called before other methods defined in section 3.14.
 All methods MUST NOT throw exceptions.
@@ -5537,7 +5537,7 @@ HRESULT GetNextAdapterFirewallConfiguration(
 
 **adapterProfile:** The firewall profile assigned to the network adapter. Upon successful completion of this method, the server MUST set this value to one of the specified values of [CLUSTER_NETWORK_PROFILE](#Section_2.2.15). If the method fails, the client MUST ignore this value.
 
-**serverRulesEnabled:** An output parameter that indicates whether the server is suitable for server-to-server [**failover cluster**](#gt_failover-cluster) communication. Upon successful completion of this method, the server MUST set this value to TRUE if the server is suitable or to FALSE if the server is not suitable. When the server firewall enforces policies specified in [MS-FASP](#Section_5), the server sets this value to TRUE if the group of rules with the localized name "Failover Clusters" is enabled. If the method fails, the client MUST ignore this value.
+**serverRulesEnabled:** An output parameter that indicates whether the server is suitable for server-to-server [**failover cluster**](#gt_failover-cluster) communication. Upon successful completion of this method, the server MUST set this value to TRUE if the server is suitable or to FALSE if the server is not suitable. When the server firewall enforces policies specified in [MS-FASP](../MS-FASP/MS-FASP.md), the server sets this value to TRUE if the group of rules with the localized name "Failover Clusters" is enabled. If the method fails, the client MUST ignore this value.
 
 | Value | Meaning |
 | --- | --- |
@@ -5589,12 +5589,12 @@ None.
 <a id="Section_3.15"></a>
 ## 3.15 IClusterFirewall Client Details
 
-The client SHOULD<42> support the [IClusterFirewall](#Section_3.15) [**DCOM**](#gt_distributed-component-object-model-dcom) [**interface**](#gt_interface).
+The client SHOULD<42> support the [IClusterFirewall](#Section_3.14) [**DCOM**](#gt_distributed-component-object-model-dcom) [**interface**](#gt_interface).
 
 <a id="Section_3.15.1"></a>
 ### 3.15.1 Abstract Data Model
 
-The client can use the abstract data model defined by the server; see section [3.14.1](#Section_3.15).
+The client can use the abstract data model defined by the server; see section [3.14.1](#Section_3.14.1).
 
 <a id="Section_3.15.2"></a>
 ### 3.15.2 Timers
@@ -6394,7 +6394,7 @@ The following example illustrates how a protocol client validates network commun
 
 Figure 2: Message flow: Validating the network configuration
 
-- The client initializes an RPC connection for the correct interface as specified in section [3.6.3](#Section_3.7). The client recognizes the names of the server.
+- The client initializes an RPC connection for the correct interface as specified in section [3.6.3](#Section_3.6.3). The client recognizes the names of the server.
 - The client issues an [InitializeNode](#Section_3.6.4.1) method request. This prepares the server for further communication with the client.
 - The client issues a [SendRTMessage](#Section_3.6.4.2) method request. This verifies that the networking communication channel is functional.
 - The client uses the [QueryFirewallConfiguration](#Section_3.6.4.5) method to determine whether the firewall state of the server is compatible with use in a [**failover cluster**](#gt_failover-cluster).
@@ -6408,7 +6408,7 @@ The following example illustrates how a protocol client sets up a cluster to and
 
 Figure 3: Message flow: Setting up a cluster
 
-- The client initializes an RPC connection for the correct interface as specified in section [3.10.3](#Section_3.10). The client recognizes the names of the server.
+- The client initializes an RPC connection for the correct interface as specified in section [3.10.3](#Section_3.10.3). The client recognizes the names of the server.
 - The client uses the [ConfigSvcSecret](#Section_3.10.4.1) method to store the [**cluster secret**](#gt_cluster-secret) in an implementation-specific manner on the server.
 - The client uses the [RetrieveSvcSecret](#Section_3.10.4.2) method to retrieve the cluster secret stored on this server.
 - The client uses the [RetrieveHostLabel](#Section_3.10.4.3) method to obtain the [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of the server.
@@ -7818,7 +7818,7 @@ The upgrade version is set based on the following table.
 
 <40> Section 3.12.4.4: The **GenerateTimeSpanLogInLocalTime** method is implemented in Windows Server v1709 and later.
 
-<41> Section 3.14: Windows Server 2008 operating system does not support the [IClusterFirewall](#Section_3.15) [**DCOM**](#gt_distributed-component-object-model-dcom) interface.
+<41> Section 3.14: Windows Server 2008 operating system does not support the [IClusterFirewall](#Section_3.14) [**DCOM**](#gt_distributed-component-object-model-dcom) interface.
 
 <42> Section 3.15: Windows Server 2008 and Windows Vista SP1 do not support the IClusterFirewall DCOM interface.
 

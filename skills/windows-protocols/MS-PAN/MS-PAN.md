@@ -336,7 +336,7 @@ This document uses the following terms:
 **security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl) with [**SIDs**](#gt_security-identifier-sid) for the security principals who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
 
 <a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](#Section_1.3) section 1.1.1.2.
+**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 <a id="gt_security-provider"></a>
 **security provider**: A pluggable security module that is specified by the protocol layer above the [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) layer, and will cause the [**RPC**](#gt_remote-procedure-call-rpc) layer to use this module to secure messages in a communication session with the server. The security provider is sometimes referred to as an [**authentication**](#gt_authentication) service. For more information, see [C706] and [MS-RPCE].
@@ -421,11 +421,11 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](#Section_1.3)".
+[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](../MS-AZOD/MS-AZOD.md)".
 
 [MS-RPRN] Microsoft Corporation, "[Print System Remote Protocol](../MS-RPRN/MS-RPRN.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDN-ASYNC] Microsoft Corporation, "Asynchronous Printing Notification Reference", [http://msdn.microsoft.com/en-us/library/ff686795.aspx](https://go.microsoft.com/fwlink/?LinkId=225112)
 
@@ -581,9 +581,9 @@ PrintAsyncNotificationType MUST be a [**notification type identifier**](#gt_noti
 
 This protocol defines a reserved notification type identifier value, **NOTIFICATION_RELEASE** (ba9a5027-a70e-4ae7-9b7d-eb3e06ad4157). This value is not associated with any specific set of notification and [**response**](#gt_response) data formats, but rather has special meaning in the definition of this protocol. This value indicates that a client or server is not accepting further communication (sections [3.1.1.4.4](#Section_3.1.1.4.4), [3.1.1.4.5](#Section_3.1.1.4.5), and [3.1.1.4.6](#Section_3.1.1.4.6)).
 
-This protocol also defines the notification and response data formats for the [**AsyncUI**](#gt_asyncui) [**notification type**](#gt_notification-type). Associated with the AsyncUI notification type is its notification type identifier. The value **AsyncPrintNotificationType_AsyncUI** (f6853f92-eb31-4e23-b6e7-fd69056153f0) indicates that the notification data byte arrays contain AsyncUI data formats. For details, see sections [2.2.7](#Section_1.3), [3.1.3](#Section_1.3), and [3.2.3](#Section_1.3).
+This protocol also defines the notification and response data formats for the [**AsyncUI**](#gt_asyncui) [**notification type**](#gt_notification-type). Associated with the AsyncUI notification type is its notification type identifier. The value **AsyncPrintNotificationType_AsyncUI** (f6853f92-eb31-4e23-b6e7-fd69056153f0) indicates that the notification data byte arrays contain AsyncUI data formats. For details, see sections [2.2.7](#Section_2.2.7), [3.1.3](#Section_3.1.3), and [3.2.3](#Section_3.2.3).
 
-Finally, this protocol defines notification and response data formats for the printer configuration notification type. The value **AsyncPrintNotificationType_PrinterConfiguration** (2abad223-b994-4aca-82fd4571b1b585ac) indicates that the notification data byte arrays contain printer configuration data formats. For details, see sections [2.2.8](#Section_2.2.8), [3.1.4](#Section_2.2.8), and [3.2.4](#Section_1.3).
+Finally, this protocol defines notification and response data formats for the printer configuration notification type. The value **AsyncPrintNotificationType_PrinterConfiguration** (2abad223-b994-4aca-82fd4571b1b585ac) indicates that the notification data byte arrays contain printer configuration data formats. For details, see sections [2.2.8](#Section_2.2.8), [3.1.4](#Section_3.1.4), and [3.2.4](#Section_3.2.4).
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 PrintAsyncNotifyUserFilter
@@ -628,7 +628,7 @@ kUniDirectional = 1,
 <a id="Section_2.2.4"></a>
 ### 2.2.4 PRPCREMOTEOBJECT
 
-The PRPCREMOTEOBJECT data type defines an [**RPC context handle**](#gt_rpc-context-handle), which corresponds to the server [**remote object**](#gt_remote-object) representing a client registration. A client MUST call [IRPCRemoteObject_Create](#Section_3.1.2.4.1) to create a PRPCREMOTEOBJECT handle, and [IRPCRemoteObject_Delete](#Section_3.1.2.4.2) to delete a PRPCREMOTEOBJECT handle (section [3.1.2.4](#Section_3.1.2)).
+The PRPCREMOTEOBJECT data type defines an [**RPC context handle**](#gt_rpc-context-handle), which corresponds to the server [**remote object**](#gt_remote-object) representing a client registration. A client MUST call [IRPCRemoteObject_Create](#Section_3.1.2.4.1) to create a PRPCREMOTEOBJECT handle, and [IRPCRemoteObject_Delete](#Section_3.1.2.4.2) to delete a PRPCREMOTEOBJECT handle (section [3.1.2.4](#Section_3.1.2.4)).
 
 This type is declared as follows:
 
@@ -810,7 +810,7 @@ The following sections define [**XML**](#gt_xml) elements common to some of the 
 
 The asyncPrintUIRequest [**XML**](#gt_xml) element MUST be the root element of XML documents used in the **AsyncUIBalloon** (section [2.2.7.2](#Section_2.2.7.2)), **AsyncUIMessageBox** (section [2.2.7.3](#Section_2.2.7.3)), **AsyncUICustomUI** (section [2.2.7.5](#Section_2.2.7.5)), and **AsyncUICustomData** (section [2.2.7.7](#Section_2.2.7.7)) server-to-client [**notification**](#gt_notification) formats.
 
-The document markup MUST be schema-valid according to the following XML schema, which refers to additional schema fragments (section [2.2.7](#Section_1.3)). Schema-Validity Assessment of the document's root element MUST result in a value of "valid" for the **[validity]** property ([[XMLSCHEMA1/2]](https://go.microsoft.com/fwlink/?LinkId=90607) section 3.3.5).
+The document markup MUST be schema-valid according to the following XML schema, which refers to additional schema fragments (section [2.2.7](#Section_2.2.7)). Schema-Validity Assessment of the document's root element MUST result in a value of "valid" for the **[validity]** property ([[XMLSCHEMA1/2]](https://go.microsoft.com/fwlink/?LinkId=90607) section 3.3.5).
 
 <xs:element name="asyncPrintUIRequest">
 
@@ -877,7 +877,7 @@ Child Elements
 | Element | Type | Description |
 | --- | --- | --- |
 | v1 | N/A | A required element within an asyncPrintUIRequest element that MUST contain exactly one requestOpen element. |
-| requestOpen | N/A | A required element that MUST contain exactly one [balloonUI](#Section_2.2.7.2.2), [messageBoxUI](#Section_2.2.7.3.4), [customUI](#Section_3.2.3.4.3), or [customData](#Section_2.2.7.7.1) element. |
+| requestOpen | N/A | A required element that MUST contain exactly one [balloonUI](#Section_2.2.7.2.2), [messageBoxUI](#Section_2.2.7.3.4), [customUI](#Section_2.2.7.5), or [customData](#Section_2.2.7.7) element. |
 | balloonUI | balloonUI | See section 2.2.7.2.2. |
 | messageBoxUI | messageBoxUI | See section 2.2.7.3.4. |
 | customUI | customUI | See section 2.2.7.5.1. |
@@ -886,9 +886,9 @@ Child Elements
 <a id="Section_2.2.7.1.2"></a>
 ##### 2.2.7.1.2 asyncPrintUIResponse Element
 
-The asyncPrintUIResponse [**XML**](#gt_xml) element MUST be the root element of the XML documents used in the **AsyncUIMessageBoxReply** (section [2.2.7.4](#Section_2.2.7.3)) and **AsyncUICustomUIReply** (section [2.2.7.6](#Section_2.2.7.6)) client-to-server [**response**](#gt_response) formats.
+The asyncPrintUIResponse [**XML**](#gt_xml) element MUST be the root element of the XML documents used in the **AsyncUIMessageBoxReply** (section [2.2.7.4](#Section_2.2.7.4)) and **AsyncUICustomUIReply** (section [2.2.7.6](#Section_2.2.7.6)) client-to-server [**response**](#gt_response) formats.
 
-The document markup MUST be schema-valid according to the following XML schema, which refers to additional schema fragments (section [2.2.7](#Section_1.3)). Schema-Validity Assessment of the document's root element MUST result in a value of "valid" for the **[validity]** property ([[XMLSCHEMA1/2]](https://go.microsoft.com/fwlink/?LinkId=90607) section 3.3.5).
+The document markup MUST be schema-valid according to the following XML schema, which refers to additional schema fragments (section [2.2.7](#Section_2.2.7)). Schema-Validity Assessment of the document's root element MUST result in a value of "valid" for the **[validity]** property ([[XMLSCHEMA1/2]](https://go.microsoft.com/fwlink/?LinkId=90607) section 3.3.5).
 
 <xs:element name="asyncPrintUIResponse">
 
@@ -1479,7 +1479,7 @@ Child Elements
 
 AsyncUIMessageBoxUIReply is a string that contains a well-formed [**XML**](#gt_xml) document ([[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) section 2.1).
 
-The root element of the document MUST be an [asyncPrintUIResponse](#Section_2.2.7.1.2) element. A [messageBoxUI](#Section_2.2.7.4.2) element MUST be nested within the asyncPrintUIResponse markup at the point where it is referenced in the XML schema.
+The root element of the document MUST be an [asyncPrintUIResponse](#Section_2.2.7.1.2) element. A [messageBoxUI](#Section_2.2.7.3.4) element MUST be nested within the asyncPrintUIResponse markup at the point where it is referenced in the XML schema.
 
 The AsyncUIMessageBoxUIReply carries the [**response**](#gt_response) from a client to an AsyncUIMessageBoxUIReply [**notification**](#gt_notification).
 
@@ -1530,7 +1530,7 @@ Child Elements
 
 AsyncUICustomUI is a string that contains a well-formed XML document ([[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) section 2.1).
 
-The root element of the document MUST be an [asyncPrintUIRequest](#Section_2.2.7.1.1) element (section 2.2.7.1.1). A [customUI](#Section_3.2.3.4.3) element MUST be nested within the asyncPrintUIRequest markup at the point where it is referenced in the XML schema.
+The root element of the document MUST be an [asyncPrintUIRequest](#Section_2.2.7.1.1) element (section 2.2.7.1.1). A [customUI](#Section_2.2.7.5) element MUST be nested within the asyncPrintUIRequest markup at the point where it is referenced in the XML schema.
 
 AsyncUICustomUI (or the similar [AsyncUICustomData](#Section_2.2.7.7)) SHOULD be used by a [**printer driver**](#gt_printer-driver) on a server when it requires client-side handling of an event or a change in device status that cannot be expressed by using an [AsyncUIMessageBox](#Section_2.2.7.3) or [AsyncUIBalloon](#Section_2.2.7.2) [**notification**](#gt_notification). The AsyncUICustomUI notification calls for the execution of client-resident code that is associated with the server-resident printer driver.
 
@@ -1631,7 +1631,7 @@ AsyncUICustomUIReply MUST carry the [**response**](#gt_response) from a client t
 <a id="Section_2.2.7.6.1"></a>
 ##### 2.2.7.6.1 CustomUI Element
 
-The CustomUI XML element contains text that encodes the value returned by the call to the **entrypoint** method, which is identified in the [customUI](#Section_3.2.3.4.3) element of an [AsyncUICustomUI](#Section_2.2.7.5) [**notification**](#gt_notification) or in the [customData](#Section_2.2.7.7.1) element of an [AsyncUICustomData](#Section_2.2.7.7) notification.
+The CustomUI XML element contains text that encodes the value returned by the call to the **entrypoint** method, which is identified in the [customUI](#Section_2.2.7.5) element of an [AsyncUICustomUI](#Section_2.2.7.5) [**notification**](#gt_notification) or in the [customData](#Section_2.2.7.7) element of an [AsyncUICustomData](#Section_2.2.7.7) notification.
 
 <xs:element name="CustomUI"
 
@@ -1644,7 +1644,7 @@ type="xs:string"
 
 AsyncUICustomData is a null-terminated string containing a well-formed XML document ([[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) section 2.1) followed by binary data.
 
-The root element of the document MUST be the [asyncPrintUIRequest](#Section_2.2.7.1.1) element (section 2.2.7.1.1). A [customData](#Section_2.2.7.7.1) element MUST be nested within the asyncPrintUIRequest markup at the point where it is referenced in the XML schema.
+The root element of the document MUST be the [asyncPrintUIRequest](#Section_2.2.7.1.1) element (section 2.2.7.1.1). A [customData](#Section_2.2.7.7) element MUST be nested within the asyncPrintUIRequest markup at the point where it is referenced in the XML schema.
 
 The entry point specified in the customData element MUST be called, passing the binary data as an argument.
 
@@ -1741,7 +1741,7 @@ Note that XML 1.0 [XML1.0], restricts the set of legal characters that can be us
 <a id="Section_2.2.8.1"></a>
 #### 2.2.8.1 Printer Configuration Notification
 
-Printer Configuration Notification is a string that contains a well-formed [**XML**](#gt_xml) document ([[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) section 2.1). The root element of the document MUST be the [Notification element (section 2.2.8.1.1)](#Section_2.2.8.1.1). Notification SHOULD be used by a print server to notify a client of change in printer configuration; the Notification element SHOULD contain one or more [Schema elements (section 2.2.8.1.2)](#Section_2.2.8.1.2) representing the names and values for the new printer configuration settings. If the size of the Printer Configuration Notification containing all of the changed printer configuration settings exceeds the server's maximum notification size, the server MUST replace Schema elements in the Printer Configuration Notification message with [ReducedSchema elements (section 2.2.8.1.10)](#Section_2.2.8.1.2) until the size of the Printer Configuration Notification message is smaller than the maximum notification size.
+Printer Configuration Notification is a string that contains a well-formed [**XML**](#gt_xml) document ([[XML1.0]](https://go.microsoft.com/fwlink/?LinkId=90599) section 2.1). The root element of the document MUST be the [Notification element (section 2.2.8.1.1)](#Section_2.2.8.1.1). Notification SHOULD be used by a print server to notify a client of change in printer configuration; the Notification element SHOULD contain one or more [Schema elements (section 2.2.8.1.2)](#Section_2.2.8.1.2) representing the names and values for the new printer configuration settings. If the size of the Printer Configuration Notification containing all of the changed printer configuration settings exceeds the server's maximum notification size, the server MUST replace Schema elements in the Printer Configuration Notification message with [ReducedSchema elements (section 2.2.8.1.10)](#Section_2.2.8.1.10) until the size of the Printer Configuration Notification message is smaller than the maximum notification size.
 
 The document markup MUST be valid according to the following XML schema, whose elements are described in more detail in the following sections. Schema-Validity Assessment of the document's root element MUST result in a value of "valid" for the [validity] property ([[XMLSCHEMA1/2]](https://go.microsoft.com/fwlink/?LinkId=90607) section 3.3.5).
 
@@ -1824,7 +1824,7 @@ The document markup MUST be valid according to the following XML schema, whose e
 <a id="Section_2.2.8.1.1"></a>
 ##### 2.2.8.1.1 Notification Element
 
-The Notification element represents changes in the configuration of a printer and contains a list of [Schema elements (section 2.2.8.1.2)](#Section_2.2.8.1.2) and [ReducedSchema elements (section 2.2.8.1.10)](#Section_2.2.8.1.2) representing these changes.
+The Notification element represents changes in the configuration of a printer and contains a list of [Schema elements (section 2.2.8.1.2)](#Section_2.2.8.1.2) and [ReducedSchema elements (section 2.2.8.1.10)](#Section_2.2.8.1.10) representing these changes.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -1877,7 +1877,7 @@ The BIDI_BLOB XML element represents a configuration attribute for a printer. It
 <a id="Section_2.2.8.1.10"></a>
 ##### 2.2.8.1.10 ReducedSchema Element
 
-The ReducedSchema XML element represents only the name of a configuration setting for a printer. Print servers SHOULD use it only when using the [Schema element (section 2.2.8.1.2)](#Section_2.2.8.1.2), which includes the value of the configuration setting, results in a [Printer Configuration Notification (section 2.2.8.1)](#Section_3.2.4.4.1) message that is too large.
+The ReducedSchema XML element represents only the name of a configuration setting for a printer. Print servers SHOULD use it only when using the [Schema element (section 2.2.8.1.2)](#Section_2.2.8.1.2), which includes the value of the configuration setting, results in a [Printer Configuration Notification (section 2.2.8.1)](#Section_2.2.8.1) message that is too large.
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -1886,9 +1886,9 @@ The ReducedSchema XML element represents only the name of a configuration settin
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The [IRPCAsyncNotify](#Section_3.2.2) interface is identified by [**UUID**](#gt_universally-unique-identifier-uuid) 0b6edbfa-4a24-4fc6-8a23-942b1eca65d1.
+The [IRPCAsyncNotify](#Section_3.1.1) interface is identified by [**UUID**](#gt_universally-unique-identifier-uuid) 0b6edbfa-4a24-4fc6-8a23-942b1eca65d1.
 
-The [IRPCRemoteObject](#Section_3.1.2) interface is identified by UUID ae33069b-a2a8-46ee-a235-ddfd339be281.
+The [IRPCRemoteObject](#Section_3.1.2.4) interface is identified by UUID ae33069b-a2a8-46ee-a235-ddfd339be281.
 
 <a id="Section_3.1"></a>
 ## 3.1 Server Details
@@ -1896,7 +1896,7 @@ The [IRPCRemoteObject](#Section_3.1.2) interface is identified by UUID ae33069b-
 <a id="Section_3.1.1"></a>
 ### 3.1.1 IRPCAsyncNotify Server Details
 
-Unidirectional message passing mode in the [IRPCAsyncNotify](#Section_3.2.2) interface is illustrated by the following server state diagram.
+Unidirectional message passing mode in the [IRPCAsyncNotify](#Section_3.1.1) interface is illustrated by the following server state diagram.
 
 ![Unidirectional message passing mode](media/image5.png)
 
@@ -2047,7 +2047,7 @@ Servers SHOULD consider the security and privacy context prior to letting client
 | SERVER_ALL_ACCESS 0x000F0003 | Combines the **WO** (Write Owner), **WD** (Write DACL), **RC** (Read Control), and **DE** (Delete) bits of the ACCESS_MASK data type ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.3) with the following protocol-specific bits: 0x00000001 (bit 31): Access rights to administer print servers. 0x00000002 (bit 30): Access rights to enumerate print servers. These printing-specific access rights allow a client to administer the server and to enumerate server components such as print queues. |
 | PRINTER_ALL_ACCESS 0x000F000C | Combines the **WO** (Write Owner), **WD** (Write DACL), **RC** (Read Control), and **DE** (Delete) bits of the ACCESS_MASK data type with the following protocol-specific bits: 0x00000004 (bit 29): Access rights for printers to perform administrative tasks. 0x00000008 (bit 28): Access rights for printers to perform basic printing operations. These printing-specific access rights allow a client basic and administrative use of print queues. |
 
-For calls to IRPCAsyncNotify_RegisterClient with *NotifyFilter* set to **kAllUsers**, if *pName* is set to NULL, the server SHOULD fail the call if the calling principal lacks any of the server access rights specified by **SERVER_ALL_ACCESS**. If *pName* points to the name of a print queue, the server SHOULD fail the call if the calling principal lacks any of the print queue access rights specified by **PRINTER_ALL_ACCESS**. For additional information concerning access rights, see [MS-AZOD](#Section_1.3) section 1.1.1.5.
+For calls to IRPCAsyncNotify_RegisterClient with *NotifyFilter* set to **kAllUsers**, if *pName* is set to NULL, the server SHOULD fail the call if the calling principal lacks any of the server access rights specified by **SERVER_ALL_ACCESS**. If *pName* points to the name of a print queue, the server SHOULD fail the call if the calling principal lacks any of the print queue access rights specified by **PRINTER_ALL_ACCESS**. For additional information concerning access rights, see [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.5.
 
 <a id="Section_3.1.1.4.2"></a>
 ##### 3.1.1.4.2 IRPCAsyncNotify_UnregisterClient (Opnum 1)
@@ -2099,7 +2099,7 @@ PNOTIFYOBJECT** ppChannelCtxt
 
 The server SHOULD return all not-yet-acquired bidirectional channels in response to a single IRPCAsyncNotify_GetNewChannel call. The server SHOULD return such channels regardless of whether they were created before or after client registration or the call to IRPCAsyncNotify_GetNewChannel.
 
-**ppChannelCtxt:** MUST specify a pointer to the array of returned notification channels. This data is represented by a **Bidirectional Notification Channel** structure in the [Abstract Data Model (section 3.1.1.1)](#Section_3.1.3.1).
+**ppChannelCtxt:** MUST specify a pointer to the array of returned notification channels. This data is represented by a **Bidirectional Notification Channel** structure in the [Abstract Data Model (section 3.1.1.1)](#Section_3.1.1.1).
 
 **Return Values:** This method MUST return zero to indicate success, or an [**HRESULT**](#gt_hresult) error value ([MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1) to indicate failure. Protocol-specific error values are defined in the following table. The client SHOULD treat all error return values the same, except where noted.
 
@@ -2256,7 +2256,7 @@ A server MUST NOT do the following:
 
 - Indicate success to a client call of IRPCAsyncNotify_GetNotification unless a prior call to IRPCAsyncNotify_RegisterClient succeeded using the same PRPCREMOTEOBJECT value.
 - Indicate success to a client call of IRPCAsyncNotify_GetNotification following a prior successful call to [IRPCAsyncNotify_UnregisterClient](#Section_3.1.1.4.2) using the same PRPCREMOTEOBJECT value.
-- Complete a call to IRPCAsyncNotify_GetNotification until the **Unidirectional Notification Queue** associated with the **Client Registration** ([Abstract Data Model (section 3.1.1.1)](#Section_3.1.3.1)) contains an unreturned notification, or an abnormal condition occurs. An example of an abnormal condition is an initiated server shutdown sequence or remote object unregistration. An abnormal condition will result in a failure error code returned prior to the server having data.
+- Complete a call to IRPCAsyncNotify_GetNotification until the **Unidirectional Notification Queue** associated with the **Client Registration** ([Abstract Data Model (section 3.1.1.1)](#Section_3.1.1.1)) contains an unreturned notification, or an abnormal condition occurs. An example of an abnormal condition is an initiated server shutdown sequence or remote object unregistration. An abnormal condition will result in a failure error code returned prior to the server having data.
 A server SHOULD do the following:
 
 - Discard unidirectional notifications in the absence of corresponding registered clients.
@@ -2328,7 +2328,7 @@ No timer events are required on the server outside of the timers required in the
 
 This protocol does not define the set of printing events that cause [**notification sources**](#gt_notification-source) to trigger [**notifications**](#gt_notification).
 
-When a notification source opens a **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.3.1)) or sends a unidirectional notification, it MUST associate a [PrintAsyncNotificationType](#Section_2.2.1) value (section 2.2.1) with the request. That value SHOULD be used to match the request to a **Client Registration** (section 3.1.1.1). The notification source MUST also associate a [PrintAsyncNotifyUserFilter](#Section_2.2.2) value (section 2.2.2) with the request, to facilitate the application of a [**user identity filter**](#gt_user-identity-filter) in performing such matches. If the PrintAsyncNotifyUserFilter value is **kPerUser**, the notification source MUST also associate with the request the [**authenticated user identity**](#gt_authenticated-user-identity) of the user who is the intended target for receiving the notifications. The rules for interpreting PrintAsyncNotifyUserFilter values to apply a user identity filter are specified in section 2.2.2.
+When a notification source opens a **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.1.1)) or sends a unidirectional notification, it MUST associate a [PrintAsyncNotificationType](#Section_2.2.1) value (section 2.2.1) with the request. That value SHOULD be used to match the request to a **Client Registration** (section 3.1.1.1). The notification source MUST also associate a [PrintAsyncNotifyUserFilter](#Section_2.2.2) value (section 2.2.2) with the request, to facilitate the application of a [**user identity filter**](#gt_user-identity-filter) in performing such matches. If the PrintAsyncNotifyUserFilter value is **kPerUser**, the notification source MUST also associate with the request the [**authenticated user identity**](#gt_authenticated-user-identity) of the user who is the intended target for receiving the notifications. The rules for interpreting PrintAsyncNotifyUserFilter values to apply a user identity filter are specified in section 2.2.2.
 
 <a id="Section_3.1.1.6.1"></a>
 ##### 3.1.1.6.1 Unidirectional Notification Generated
@@ -2341,7 +2341,7 @@ A [**notification source**](#gt_notification-source) that provides unidirectiona
 <a id="Section_3.1.1.6.2"></a>
 ##### 3.1.1.6.2 Bidirectional Notification Channel Opened
 
-A [**notification source**](#gt_notification-source) that initiates the exchange of a sequence of one or more notifications and responses with a [**print client**](#gt_print-client) MUST open a **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.3.1)) to do so. When opening a **Bidirectional Notification Channel**, the notification source MUST provide the following:
+A [**notification source**](#gt_notification-source) that initiates the exchange of a sequence of one or more notifications and responses with a [**print client**](#gt_print-client) MUST open a **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.1.1)) to do so. When opening a **Bidirectional Notification Channel**, the notification source MUST provide the following:
 
 - A [PrintAsyncNotificationType](#Section_2.2.1) value (section 2.2.1).
 - A [PrintAsyncNotifyUserFilter](#Section_2.2.2) value (section 2.2.2).
@@ -2349,7 +2349,7 @@ A [**notification source**](#gt_notification-source) that initiates the exchange
 <a id="Section_3.1.1.6.3"></a>
 ##### 3.1.1.6.3 Bidirectional Notification Generated
 
-When generating a bidirectional [**notification**](#gt_notification), a [**notification source**](#gt_notification-source) MUST identify an opened **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.3.1)). In order to successfully generate a bidirectional notification, a notification source MUST NOT identify a particular bidirectional notification channel if a prior notification sent on that channel has not been responded to by a client’s call to IRPCAsyncNotify_GetNotificationSendResponse (Opnum 4) (section [3.1.1.4.4)](#Section_3.1.1.4.4) or IRPCAsyncNotify_CloseChannel (Opnum 6) (section [3.1.1.4.6)](#Section_3.1.1.4.6).
+When generating a bidirectional [**notification**](#gt_notification), a [**notification source**](#gt_notification-source) MUST identify an opened **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.1.1)). In order to successfully generate a bidirectional notification, a notification source MUST NOT identify a particular bidirectional notification channel if a prior notification sent on that channel has not been responded to by a client’s call to IRPCAsyncNotify_GetNotificationSendResponse (Opnum 4) (section [3.1.1.4.4)](#Section_3.1.1.4.4) or IRPCAsyncNotify_CloseChannel (Opnum 6) (section [3.1.1.4.6)](#Section_3.1.1.4.6).
 
 When a notification source generates the initial notification for a bidirectional notification channel, the server MUST hold that notification until one of two events occurs.
 
@@ -2360,12 +2360,12 @@ When a notification source generates any subsequent notification for a bidirecti
 <a id="Section_3.1.1.6.4"></a>
 ##### 3.1.1.6.4 Bidirectional Notification Channel Closed
 
-A [**notification source**](#gt_notification-source) that terminates the exchange of a sequence of notifications and responses with a [**print client**](#gt_print-client) MUST close the **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.3.1)). Such a closure can be due to normal processing or a critical failure in the notification source.
+A [**notification source**](#gt_notification-source) that terminates the exchange of a sequence of notifications and responses with a [**print client**](#gt_print-client) MUST close the **Bidirectional Notification Channel** (section [3.1.1.1](#Section_3.1.1.1)). Such a closure can be due to normal processing or a critical failure in the notification source.
 
 <a id="Section_3.1.1.6.5"></a>
 ##### 3.1.1.6.5 Impersonate Client
 
-This protocol uses local interfaces provided by the server implementation of [MS-RPCE](../MS-RPCE/MS-RPCE.md) to impersonate the user associated to the security context defined in [MS-RPCE] sections 3.1.1.1.1 and 3.2.1.4.1.1. This local interface is specified in [MS-RPCE] sections 3.1.1.4.2. This event stores an implementation-specific identifier for the [**authenticated user identity**](#gt_authenticated-user-identity) for the duration of processing the message reflected in the abstract data model as **Current Authenticated User**. This local event occurs for the processing of all messages in section [3.1.1.4](#Section_3.2.2).
+This protocol uses local interfaces provided by the server implementation of [MS-RPCE](../MS-RPCE/MS-RPCE.md) to impersonate the user associated to the security context defined in [MS-RPCE] sections 3.1.1.1.1 and 3.2.1.4.1.1. This local interface is specified in [MS-RPCE] sections 3.1.1.4.2. This event stores an implementation-specific identifier for the [**authenticated user identity**](#gt_authenticated-user-identity) for the duration of processing the message reflected in the abstract data model as **Current Authenticated User**. This local event occurs for the processing of all messages in section [3.1.1.4](#Section_3.1.1.4).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 IRPCRemoteObject Server Details
@@ -2493,9 +2493,9 @@ Methods in RPC Opnum Order
 | [IRPCAsyncNotify_GetNewChannel](#Section_3.1.1.4.3) | There are no AsyncUI server parameter details for this method. Opnum: 3 |
 | [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.1.4.4) | AsyncUI server parameter details are specified in section [3.1.3.4.2](#Section_3.1.3.4.2). Opnum: 4 |
 | [IRPCAsyncNotify_GetNotification](#Section_3.1.1.4.5) | AsyncUI server parameter details are specified in section [3.1.3.4.3](#Section_3.1.3.4.3). Opnum: 5 |
-| [IRPCAsyncNotify_CloseChannel](#Section_3.1.1.4.6) | AsyncUI server parameter details are specified in section [3.1.3.4.4](#Section_3.1.1.4.6). Opnum: 6 |
+| [IRPCAsyncNotify_CloseChannel](#Section_3.1.1.4.6) | AsyncUI server parameter details are specified in section [3.1.3.4.4](#Section_3.1.3.4.4). Opnum: 6 |
 
-The specific [**notification**](#gt_notification) and response formats referenced are defined in section [2.2.7](#Section_1.3). The behavior of methods reserved for local use is specified in section [3.1.1.4](#Section_3.2.2).
+The specific [**notification**](#gt_notification) and response formats referenced are defined in section [2.2.7](#Section_2.2.7). The behavior of methods reserved for local use is specified in section [3.1.1.4](#Section_3.1.1.4).
 
 There is no AsyncUI server syntax or behavior for methods of the [IRPCRemoteObject interface (section 3.2)](#Section_3.2).
 
@@ -2517,7 +2517,7 @@ The IRPCAsyncNotify_GetNotificationSendResponse method is specified in section [
 
 **pInNotificationData:** SHOULD be NULL, consistent with the guidance of section 3.1.1.4.4 and the specification of the **InSize** parameter.
 
-**ppOutNotificationData:** MUST hold server-to-client notification data, which conforms to the format for **AsyncUIMessageBox** (section [2.2.7.3](#Section_2.2.7.3)), **AsyncUICustomUI** (section [2.2.7.5](#Section_2.2.7.5)), or **AsyncUICustomData** (section [2.2.7.7](#Section_2.2.7.7)). If the notification is of format **AsyncUICustomUI** (section [2.2.7.5.1](#Section_3.2.3.4.3)) or **AsyncUICustomData** (section [2.2.7.7.1](#Section_2.2.7.7.1)), the value of the **bidi** attribute of the contained "customUI" or "customData" element, specified in sections and respectively, MUST be "true".
+**ppOutNotificationData:** MUST hold server-to-client notification data, which conforms to the format for **AsyncUIMessageBox** (section [2.2.7.3](#Section_2.2.7.3)), **AsyncUICustomUI** (section [2.2.7.5](#Section_2.2.7.5)), or **AsyncUICustomData** (section [2.2.7.7](#Section_2.2.7.7)). If the notification is of format **AsyncUICustomUI** (section [2.2.7.5.1](#Section_2.2.7.5.1)) or **AsyncUICustomData** (section [2.2.7.7.1](#Section_2.2.7.7.1)), the value of the **bidi** attribute of the contained "customUI" or "customData" element, specified in sections and respectively, MUST be "true".
 
 <a id="Section_3.1.3.4.3"></a>
 ##### 3.1.3.4.3 IRPCAsyncNotify_GetNotification (Opnum 5)
@@ -2526,7 +2526,7 @@ The IRPCAsyncNotify_GetNotification method is specified in section [3.1.1.4.5](#
 
 **ppOutNotificationType:** MUST hold either [**notification type identifier**](#gt_notification-type-identifier) value **AsyncPrintNotificationType_AsyncUI** or **NOTIFICATION_RELEASE**, as specified in section [2.2.1](#Section_2.2.1).
 
-**ppOutNotificationData:** MUST hold server-to-client [**notification**](#gt_notification) data, which conforms to the data format for **AsyncUIBalloon** (section [2.2.7.2](#Section_2.2.7.2)), **AsyncUICustomUI** (section [2.2.7.5](#Section_2.2.7.5)), or **AsyncUICustomData** (section [2.2.7.7](#Section_2.2.7.7)). If the notification is of format **AsyncUICustomUI** (section [2.2.7.5.1](#Section_3.2.3.4.3)) or **AsyncUICustomData** (section [2.2.7.7.1](#Section_2.2.7.7.1)), the value of the **bidi** attribute of the contained "customUI" or "customData" element, MUST be "false".
+**ppOutNotificationData:** MUST hold server-to-client [**notification**](#gt_notification) data, which conforms to the data format for **AsyncUIBalloon** (section [2.2.7.2](#Section_2.2.7.2)), **AsyncUICustomUI** (section [2.2.7.5](#Section_2.2.7.5)), or **AsyncUICustomData** (section [2.2.7.7](#Section_2.2.7.7)). If the notification is of format **AsyncUICustomUI** (section [2.2.7.5.1](#Section_2.2.7.5.1)) or **AsyncUICustomData** (section [2.2.7.7.1](#Section_2.2.7.7.1)), the value of the **bidi** attribute of the contained "customUI" or "customData" element, MUST be "false".
 
 <a id="Section_3.1.3.4.4"></a>
 ##### 3.1.3.4.4 IRPCAsyncNotify_CloseChannel (Opnum 6)
@@ -2535,7 +2535,7 @@ The IRPCAsyncNotify_CloseChannel method is specified in section [3.1.1.4.6](#Sec
 
 **pInNotificationType:** MUST hold either [**notification type identifier**](#gt_notification-type-identifier) value **AsyncPrintNotificationType_AsyncUI** or **NOTIFICATION_RELEASE** (section [2.2.1](#Section_2.2.1)).
 
-**pReason:** If **pInNotificationType** does hold **NOTIFICATION_RELEASE**, **pReason** MUST hold client-to-server [**response**](#gt_response) data conforming to the data format for **AsyncUIMessageBoxReply** (section [2.2.7.4](#Section_2.2.7.3)) or **AsyncUICustomUIReply** (section [2.2.7.6](#Section_2.2.7.6)). The client sequencing rules defining the conditions under which each response format is sent can be found in section [3.2.3.4](#Section_3.2.2.4).
+**pReason:** If **pInNotificationType** does hold **NOTIFICATION_RELEASE**, **pReason** MUST hold client-to-server [**response**](#gt_response) data conforming to the data format for **AsyncUIMessageBoxReply** (section [2.2.7.4](#Section_2.2.7.4)) or **AsyncUICustomUIReply** (section [2.2.7.6](#Section_2.2.7.6)). The client sequencing rules defining the conditions under which each response format is sent can be found in section [3.2.3.4](#Section_3.2.3.4).
 
 <a id="Section_3.1.3.5"></a>
 #### 3.1.3.5 Timer Events
@@ -2578,15 +2578,15 @@ Methods in RPC Opnum order:
 
 | Method | Description |
 | --- | --- |
-| [IRPCAsyncNotify_RegisterClient](#Section_3.1.1.4.1) | Printer configuration server parameter details are specified in section 3.1.4.4.1. Opnum: 0 |
+| [IRPCAsyncNotify_RegisterClient](#Section_3.1.4.4.1) | Printer configuration server parameter details are specified in section 3.1.4.4.1. Opnum: 0 |
 | [IRPCAsyncNotify_UnregisterClient](#Section_3.1.1.4.2) | There are no printer configuration server parameter details for this method. Opnum: 1 |
 | Opnum2NotUsedOnWire | Reserved for local use. Opnum: 2 |
 | [IRPCAsyncNotify_GetNewChannel](#Section_3.1.1.4.3) | There are no printer configuration server parameter details for this method. Opnum: 3 |
 | [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.1.4.4) | There are no printer configuration server parameter details for this method. Opnum: 4 |
-| [IRPCAsyncNotify_GetNotification](#Section_3.1.1.4.5) | Printer configuration server parameter details are specified in section 3.1.4.4.2. Opnum: 5 |
+| [IRPCAsyncNotify_GetNotification](#Section_3.1.4.4.2) | Printer configuration server parameter details are specified in section 3.1.4.4.2. Opnum: 5 |
 | [IRPCAsyncNotify_CloseChannel](#Section_3.1.1.4.6) | There are no printer configuration server parameter details for this method. Opnum: 6 |
 
-The specific notification and response formats referenced are defined in section [2.2.7](#Section_1.3). The behavior of methods reserved for local use is specified in section [3.1.1.4](#Section_3.2.2).
+The specific notification and response formats referenced are defined in section [2.2.7](#Section_2.2.7). The behavior of methods reserved for local use is specified in section [3.1.1.4](#Section_3.1.1.4).
 
 There is no printer configuration server syntax or behavior for methods of the **IRPCRemoteObject** interface (section [3.2](#Section_3.2)).
 
@@ -2606,7 +2606,7 @@ The [IRPCAsyncNotify_GetNotification](#Section_3.1.1.4.5) method is specified in
 
 **ppOutNotificationType:** MUST hold either notification type identifier value **AsyncPrintNotificationType_PrinterConfiguration** or **NOTIFICATION_RELEASE**, as specified in section [2.2.1](#Section_2.2.1).
 
-**ppOutNotificationData:** MUST hold server-to-client notification data that conforms to the data format for a [Printer Configuration Notification (section 2.2.8.1)](#Section_3.2.4.4.1).
+**ppOutNotificationData:** MUST hold server-to-client notification data that conforms to the data format for a [Printer Configuration Notification (section 2.2.8.1)](#Section_2.2.8.1).
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 Timer Events
@@ -2646,7 +2646,7 @@ This protocol MUST direct the [**RPC**](#gt_remote-procedure-call-rpc) Protocol 
 
 - Perform a strict [**NDR**](#gt_network-data-representation-ndr) data consistency check at target level 6.0.
 - Reject a NULL unique or full pointer with a non-zero conforming value.
-[**Remote object**](#gt_remote-object) clients MUST manage the lifetime of the remote objects. Specifically, clients MUST call [IRPCRemoteObject_Delete](#Section_3.1.2.4.2) (section [3.1.2.4](#Section_3.1.2)) for each successful call to [IRPCRemoteObject_Create](#Section_3.1.2.4.1) (section 3.1.2.4). These methods are specified in section 3.1.2.4.
+[**Remote object**](#gt_remote-object) clients MUST manage the lifetime of the remote objects. Specifically, clients MUST call [IRPCRemoteObject_Delete](#Section_3.1.2.4.2) (section [3.1.2.4](#Section_3.1.2.4)) for each successful call to [IRPCRemoteObject_Create](#Section_3.1.2.4.1) (section 3.1.2.4). These methods are specified in section 3.1.2.4.
 
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 Timer Events
@@ -2707,7 +2707,7 @@ Clients MUST manage registrations throughout their lifetimes. Specifically, clie
 
 When either [IRPCAsyncNotify_GetNewChannel](#Section_3.1.1.4.3) or [IRPCAsyncNotify_GetNotification](#Section_3.1.1.4.5) returns with a success code, the client SHOULD issue the next call of the same kind as soon as possible in order to minimize the amount of buffering and risk of event loss on the server.
 
-The syntax and behavior for the methods of the IRPCAsyncNotify interface are fully specified in section [3.1.1.4](#Section_3.2.2).
+The syntax and behavior for the methods of the IRPCAsyncNotify interface are fully specified in section [3.1.1.4](#Section_3.1.1.4).
 
 <a id="Section_3.2.2.5"></a>
 #### 3.2.2.5 Timer Events
@@ -2743,16 +2743,16 @@ No timer events are required on the client outside of the timers required in the
 <a id="Section_3.2.3.3"></a>
 #### 3.2.3.3 Initialization
 
-A [**remote object**](#gt_remote-object) client (section [3.2.1](#Section_3.2.1)) and an asynchronous [**notification**](#gt_notification) client (section [3.2.2](#Section_1.3)) MUST be fully initialized on the client.
+A [**remote object**](#gt_remote-object) client (section [3.2.1](#Section_3.2.1)) and an asynchronous [**notification**](#gt_notification) client (section [3.2.2](#Section_3.2.2)) MUST be fully initialized on the client.
 
 <a id="Section_3.2.3.4"></a>
 #### 3.2.3.4 Message Processing Events and Sequencing Rules
 
 An [**AsyncUI**](#gt_asyncui) client MUST specify a [**notification type identifier**](#gt_notification-type-identifier) value **AsyncPrintNotificationType_AsyncUI** (section [2.2.1](#Section_2.2.1)) when registering for, requesting, or responding to notifications or [**response**](#gt_response) data, using the methods of the Print System Asynchronous Notification Protocol.
 
-The AsyncUI-specific syntax and behavior for each method specified in section [3.1.3.4](#Section_3.2.2.4).
+The AsyncUI-specific syntax and behavior for each method specified in section [3.1.3.4](#Section_3.1.3.4).
 
-There is no AsyncUI-specific syntax or behavior for the **IRPCRemoteObject** interface methods described in section [3.1.2.4](#Section_3.1.2).
+There is no AsyncUI-specific syntax or behavior for the **IRPCRemoteObject** interface methods described in section [3.1.2.4](#Section_3.1.2.4).
 
 The sections that follow specify the processing of AsyncUI notifications that are delivered to a client from a printer driver using this protocol.
 
@@ -2781,7 +2781,7 @@ After validating the notification, an AsyncUI client MUST process the request as
 <a id="Section_3.2.3.4.2"></a>
 ##### 3.2.3.4.2 AsyncUIMessageBox Notification
 
-The AsyncUIMessageBox notification MUST use [**bidirectional communication mode**](#gt_bidirectional-communication-mode) and MUST be delivered by way of an output parameter of an [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.3.4.2) call. Once the [**notification**](#gt_notification) has been processed, a client MUST NOT make an additional call to IRPCAsyncNotify_GetNotificationSendResponse by using the same **pChannel** parameter and MUST send a [**response**](#gt_response) using a call to [IRPCAsyncNotify_CloseChannel](#Section_3.1.1.4.6).
+The AsyncUIMessageBox notification MUST use [**bidirectional communication mode**](#gt_bidirectional-communication-mode) and MUST be delivered by way of an output parameter of an [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.1.4.4) call. Once the [**notification**](#gt_notification) has been processed, a client MUST NOT make an additional call to IRPCAsyncNotify_GetNotificationSendResponse by using the same **pChannel** parameter and MUST send a [**response**](#gt_response) using a call to [IRPCAsyncNotify_CloseChannel](#Section_3.1.1.4.6).
 
 Before acting on a notification, a client SHOULD verify that the notification complies with the requirements specified for [AsyncUIMessageBox (section 2.2.7.3)](#Section_2.2.7.3), but SHOULD accept as compliant any of the inconsistencies described in section [3.2.3.4.1](#Section_3.2.3.4.1).
 
@@ -2799,7 +2799,7 @@ After successfully validating the notification:
 
 The AsyncUICustomUI notification can be sent by using either [**unidirectional communication mode**](#gt_unidirectional-communication-mode) or [**bidirectional communication mode**](#gt_bidirectional-communication-mode).
 
-A [**notification**](#gt_notification) sent by using unidirectional communication mode MUST be delivered by way of an output parameter of an [IRPCAsyncNotify_GetNotification](#Section_3.1.3.4.3) call.
+A [**notification**](#gt_notification) sent by using unidirectional communication mode MUST be delivered by way of an output parameter of an [IRPCAsyncNotify_GetNotification](#Section_3.1.1.4.5) call.
 
 A notification sent by using bidirectional communication mode MUST be delivered by way of an output parameter of an [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.1.4.4) call.
 
@@ -2811,7 +2811,7 @@ If a compliance error is detected, the client MUST NOT take any further action b
 
 After successfully validating the notification:
 
-- The client MUST call the executable method identified by the **entrypoint** and **dll** attributes of the [customUI](#Section_3.2.3.4.3) element.
+- The client MUST call the executable method identified by the **entrypoint** and **dll** attributes of the [customUI](#Section_2.2.7.5) element.
 - If the **entrypoint** cannot be successfully called for any reason:
 - If the **bidi** attribute is "false", the client MUST ignore the error and MUST continue with a subsequent call to IRPCAsyncNotify_GetNotification.
 - If the **bidi** attribute is "true":
@@ -2826,9 +2826,9 @@ After successfully validating the notification:
 
 The AsyncUICustomData notification can be sent using either [**unidirectional communication mode**](#gt_unidirectional-communication-mode) or [**bidirectional communication mode**](#gt_bidirectional-communication-mode).
 
-A [**notification**](#gt_notification) that is sent using unidirectional communication mode MUST be delivered by an output parameter from [IRPCAsyncNotify_GetNotification](#Section_3.1.3.4.3).
+A [**notification**](#gt_notification) that is sent using unidirectional communication mode MUST be delivered by an output parameter from [IRPCAsyncNotify_GetNotification](#Section_3.1.1.4.5).
 
-A notification that is sent using bidirectional communication mode MUST be delivered by an output parameter from [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.3.4.2).
+A notification that is sent using bidirectional communication mode MUST be delivered by an output parameter from [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.1.4.4).
 
 After a bidirectional notification has been processed, the client MUST NOT make an additional call to [IRPCAsyncNotify_GetNotificationSendResponse](#Section_3.1.1.4.4) using the same *pChannel* parameter. The client MUST send a [**response**](#gt_response) using [IRPCAsyncNotify_CloseChannel](#Section_3.1.1.4.6).
 
@@ -2846,7 +2846,7 @@ After successfully validating the notification, the following actions MUST be ta
 - The client MUST NOT send any further response on the same notification channel.
 - The client MUST close the notification channel by calling IRPCAsyncNotify_CloseChannel with its *pInNotificationType* parameter set to **NOTIFICATION_RELEASE**.
 - Otherwise, if the **entrypoint** is successful and the **bidi** attribute is "true", the following action MUST be taken:
-- The client MUST construct an [AsyncUICustomUIReply](#Section_2.2.7.6) string. The **CustomUI** element (section [2.2.7.6.1](#Section_2.2.7.5.1)) MUST contain a string that is returned by the called method.
+- The client MUST construct an [AsyncUICustomUIReply](#Section_2.2.7.6) string. The **CustomUI** element (section [2.2.7.6.1](#Section_2.2.7.6.1)) MUST contain a string that is returned by the called method.
 - The client MUST send the AsyncUICustomUIReply string to the server in the *pReason* parameter of an IRPCAsyncNotify_CloseChannel call.
 <a id="Section_3.2.3.5"></a>
 #### 3.2.3.5 Timer Events
@@ -2878,16 +2878,16 @@ No timer events are required on the client beyond the timers required in the und
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Initialization
 
-A [**remote object**](#gt_remote-object) client (section [3.2.1](#Section_3.2.1)) and an asynchronous notification client (section [3.2.2](#Section_1.3)) MUST be fully initialized on the client.
+A [**remote object**](#gt_remote-object) client (section [3.2.1](#Section_3.2.1)) and an asynchronous notification client (section [3.2.2](#Section_3.2.2)) MUST be fully initialized on the client.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 Message Processing Events and Sequencing Rules
 
 An AsyncUI client MUST specify a [**notification type identifier**](#gt_notification-type-identifier) value **AsyncPrintNotificationType_PrinterConfiguration** (section [2.2.1](#Section_2.2.1)) when registering for, requesting, or responding to notifications or [**response**](#gt_response) data, using the methods of the Print System Asynchronous Notification Protocol.
 
-The printer configuration-specific syntax and behavior for each method is specified in section [3.1.4.4](#Section_2.2.8).
+The printer configuration-specific syntax and behavior for each method is specified in section [3.1.4.4](#Section_3.1.4.4).
 
-There is no printer configuration-specific syntax or behavior for the **IRPCRemoteObject** interface methods described in section [3.1.2.4](#Section_3.1.2).
+There is no printer configuration-specific syntax or behavior for the **IRPCRemoteObject** interface methods described in section [3.1.2.4](#Section_3.1.2.4).
 
 The sections that follow specify the processing of printer configuration notifications that are delivered to a client from a [**print server**](#gt_print-server) using this protocol.
 
@@ -3039,13 +3039,13 @@ Sample response:
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The Print System Asynchronous Notification Protocol treats the [**print server**](#gt_print-server) and [**print queues**](#gt_print-queue) as securable resources in its security model. See section [2.1](#Section_2.1) for relevant security specifications; basic concepts of the security model are described in [MS-WPO](#Section_1.3) section 9; and security considerations for implementers of [**print clients**](#gt_print-client) that use authenticated [**RPC**](#gt_remote-procedure-call-rpc) are specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.
+The Print System Asynchronous Notification Protocol treats the [**print server**](#gt_print-server) and [**print queues**](#gt_print-queue) as securable resources in its security model. See section [2.1](#Section_2.1) for relevant security specifications; basic concepts of the security model are described in [MS-WPO](../MS-WPO/MS-WPO.md) section 9; and security considerations for implementers of [**print clients**](#gt_print-client) that use authenticated [**RPC**](#gt_remote-procedure-call-rpc) are specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.
 
 The print server and print queues each has an associated [**security descriptor**](#gt_security-descriptor) that contains the security information for that printing resource. The security descriptor identifies the owner of the resource, and it contains a [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl). The DACL contains [**access control entries (ACEs)**](#gt_b581857f-39aa-4979-876b-daba67a40f15) that specify the [**security identifier (SID)**](#gt_security-identifier-sid) of a user or group of users and whether access rights are to be allowed, denied, or audited. For resources on a print server, the ACEs specify operations including printing, managing printers, and managing documents in a print queue.
 
 Each RPC client has an associated access token that contains the SID of the user making the RPC call. The print server checks the client's access to resources by comparing the security information of the caller against the security descriptor of the resource. Prior to allowing a user to monitor and receive notifications, security and privacy contexts are considered. [IRPCAsyncNotify_RegisterClient (section 3.1.1.4.1)](#Section_3.1.1.4.1) specifies the security and privacy checks performed by the server before it allows the registration of the client to succeed.
 
-There is the risk of an AsyncUI client being used to execute arbitrary client-resident code, as identified by an **entrypoint** attribute within an executable driver file that is identified by a **dll** attribute (sections [2.2.7.2.1](#Section_2.2.7.2.1), [2.2.7.5.1](#Section_3.2.3.4.3), and [2.2.7.7.1](#Section_2.2.7.7.1)). By enforcing the character restrictions specified for the **entrypoint** attribute, the client can ensure that the driver-file name refers to a constituent file of a printer driver. An AsyncUI client can further reduce risk of execution of arbitrary code by minimizing the active permissions when calling an **entrypoint**.
+There is the risk of an AsyncUI client being used to execute arbitrary client-resident code, as identified by an **entrypoint** attribute within an executable driver file that is identified by a **dll** attribute (sections [2.2.7.2.1](#Section_2.2.7.2.1), [2.2.7.5.1](#Section_2.2.7.5.1), and [2.2.7.7.1](#Section_2.2.7.7.1)). By enforcing the character restrictions specified for the **entrypoint** attribute, the client can ensure that the driver-file name refers to a constituent file of a printer driver. An AsyncUI client can further reduce risk of execution of arbitrary code by minimizing the active permissions when calling an **entrypoint**.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -3065,7 +3065,7 @@ For ease of implementation, the following sections provide the full IDL for this
 <a id="Section_6.1"></a>
 ## 6.1 Appendix A.1: IRPCAsyncNotify.IDL
 
-This [**IDL**](#gt_interface-definition-language-idl) uses definitions from the IRPCRemoteObject interface (section [6.2](../MS-RPCE/MS-RPCE.md)) and RPC extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
+This [**IDL**](#gt_interface-definition-language-idl) uses definitions from the IRPCRemoteObject interface (section [6.2](#Section_6.2)) and RPC extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
 import "ms-pan_irpcremoteobject.idl";
 
@@ -3305,7 +3305,7 @@ Windows clients load the file indicated by the **dll** attribute as a dynamic li
 | "true" | void * **entrypoint**(void * **data:**) |
 | "false" | void **entrypoint**(void * **data:**) |
 
-**data:** The data from the [customUI](#Section_3.2.3.4.3) element.
+**data:** The data from the [customUI](#Section_2.2.7.5) element.
 
 Windows clients load the file indicated by the **dll** attribute as a dynamic linked library and call the method in the library indicated by the **entrypoint** attribute, passing in data by using the *data* parameter.
 
@@ -3316,7 +3316,7 @@ Windows clients load the file indicated by the **dll** attribute as a dynamic li
 | "true" | void * **entrypoint**(void * data) |
 | "false" | void **entrypoint**(void * data) |
 
-**data:** The data from the [customData](#Section_2.2.7.7.1) element.
+**data:** The data from the [customData](#Section_2.2.7.7) element.
 
 Windows clients load the file indicated by the **dll** attribute as a dynamic linked library and call the method in the library indicated by the **entrypoint** attribute, passing in data by using the *data* parameter.
 

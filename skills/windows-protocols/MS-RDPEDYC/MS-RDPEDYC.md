@@ -236,7 +236,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RDPEGFX] Microsoft Corporation, "[Remote Desktop Protocol: Graphics Pipeline Extension](../MS-RDPEGFX/MS-RDPEGFX.md)".
 
-[MS-RDPEMT] Microsoft Corporation, "[Remote Desktop Protocol: Multitransport Extension](#Section_2.1)".
+[MS-RDPEMT] Microsoft Corporation, "[Remote Desktop Protocol: Multitransport Extension](../MS-RDPEMT/MS-RDPEMT.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -259,7 +259,7 @@ After the DVC managers are initialized, the DVC server manager can create indivi
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Encapsulation of DVC Traffic
 
-If a multitransport connection ([MS-RDPEMT](#Section_2.1) section 1.3) is associated with a given RDP connection, the [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) PDUs, specified in section [2.2](../MS-RDPEMT/MS-RDPEMT.md), can be embedded inside either the dedicated DRDYNVC static virtual channel, or inside a Tunnel Data PDU ([MS-RDPEMT] section 2.2.2.3). If a multitransport connection is not present, then the DVC PDUs are encapsulated inside the dedicated DRDYNVC static virtual channel.
+If a multitransport connection ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) is associated with a given RDP connection, the [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) PDUs, specified in section [2.2](#Section_2.2), can be embedded inside either the dedicated DRDYNVC static virtual channel, or inside a Tunnel Data PDU ([MS-RDPEMT] section 2.2.2.3). If a multitransport connection is not present, then the DVC PDUs are encapsulated inside the dedicated DRDYNVC static virtual channel.
 
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 Encapsulation in the DRDYNVC Static Virtual Channel
@@ -277,7 +277,7 @@ This is a Windows implementation detail and does not limit the definition and th
 <a id="Section_1.3.1.2"></a>
 #### 1.3.1.2 Encapsulation in a Multitransport Tunnel Message
 
-The following diagram illustrates the wire-level encapsulation when a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) is embedded inside a multitransport connection tunnel ([MS-RDPEMT](#Section_2.1) sections 1.3 and 1.4).
+The following diagram illustrates the wire-level encapsulation when a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) is embedded inside a multitransport connection tunnel ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) sections 1.3 and 1.4).
 
 ![Encapsulation inside a multitransport connection tunnel](media/image2.png)
 
@@ -316,7 +316,7 @@ A DVC consists of two endpoints logically connected over a network. One endpoint
 
 Channels are established by the [**DVC managers**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) exchanging Create Request and Create Response PDUs. Channels are created by a DVC server manager in response to a channel-create request by an application. When an application makes a request to a DVC server manager to create a channel, the server generates a channel identifier (that is, a unique number for the requested session), and sends this identifier (and the listener name the application is requesting a connection to) in a Create Request PDU to the DVC client manager. The DVC client manager locates the requested listener, and the listener creates a DVC using the **ChannelId**. The DVC client manager binds the endpoint to the **ChannelId**. The client then sends a Create Response message to the server indicating the endpoint creation status. If the creation is successful, the DVC server manager indicates to the application that the session is established and is ready for sending and receiving data. The client and server maintain the endpoints for the life of the channel.
 
-When a multitransport connection ([MS-RDPEMT](#Section_2.1) section 1.3) is negotiated for a given RDP connection, the DVC server manager can establish a particular DVC from one of the connected transports (TCP, UDP-R, or UDP-L) based on preferences specified by the application endpoint. For example, an application can request that the DVC be encapsulated in a TCP transport for a feature that requires full-reliability but can be latency-tolerant, such as printer redirection. An application can also request that the DVC be encapsulated in a UDP-L transport for a feature that is loss-tolerant but latency-sensitive, such as audio output redirection.
+When a multitransport connection ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) is negotiated for a given RDP connection, the DVC server manager can establish a particular DVC from one of the connected transports (TCP, UDP-R, or UDP-L) based on preferences specified by the application endpoint. For example, an application can request that the DVC be encapsulated in a TCP transport for a feature that requires full-reliability but can be latency-tolerant, such as printer redirection. An application can also request that the DVC be encapsulated in a UDP-L transport for a feature that is loss-tolerant but latency-sensitive, such as audio output redirection.
 
 The server DVC manager sends the Create Request PDU over the selected transport, and the client responds by sending the Create Response PDU back to the server over the same transport.
 
@@ -414,7 +414,7 @@ This protocol references commonly used data types as defined in [MS-DTYP](../MS-
 Remote Desktop Protocol: Dynamic Virtual Channel Extension messages are passed between a [**DVC manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) on a server and a DVC manager on a client, and are transmitted over one of the following underlying transport mechanisms:
 
 - A static virtual channel ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 1.3.3 and 2.2.6), where the name of the channel is the [**ANSI character**](#gt_ansi-character) string "DRDYNVC" and bulk compression is enabled.
-- A lossy or reliable UDP multitransport connection ([MS-RDPEMT](#Section_2.1) sections 1.3 and 2.2.2.3).
+- A lossy or reliable UDP multitransport connection ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) sections 1.3 and 2.2.2.3).
 The Remote Desktop Protocol: Dynamic Virtual Channel Extension does not establish any transport connections.
 
 <a id="Section_2.2"></a>
@@ -452,11 +452,11 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| 0x01 | The message contained in the **optionalFields** field is a [Create Request PDU (section 2.2.2.1)](#Section_4.2.1) or a [Create Response PDU (section 2.2.2.2)](#Section_4.2.2). |
+| 0x01 | The message contained in the **optionalFields** field is a [Create Request PDU (section 2.2.2.1)](#Section_2.2.2.1) or a [Create Response PDU (section 2.2.2.2)](#Section_2.2.2.2). |
 | 0x02 | The message contained in the **optionalFields** field is a [Data First PDU (section 2.2.3.1)](#Section_2.2.3.1). |
 | 0x03 | The message contained in the **optionalFields** field is a [Data PDU (section 2.2.3.2)](#Section_2.2.3.2). |
-| 0x04 | The message contained in the **optionalFields** field is a [Close Request PDU (section 2.2.4)](#Section_1.3.3.3) or a Close Response PDU (section 2.2.4). |
-| 0x05 | The message contained in the **optionalFields** field is a [Capability Request PDU (section 2.2.1.1)](#Section_4.1.1) or a [Capabilities Response PDU (section 2.2.1.2)](#Section_4.1.2). |
+| 0x04 | The message contained in the **optionalFields** field is a [Close Request PDU (section 2.2.4)](#Section_2.2.4) or a Close Response PDU (section 2.2.4). |
+| 0x05 | The message contained in the **optionalFields** field is a [Capability Request PDU (section 2.2.1.1)](#Section_2.2.1.1) or a [Capabilities Response PDU (section 2.2.1.2)](#Section_2.2.1.2). |
 | 0x06 | The message contained in the **optionalFields** field is a Data First Compressed PDU (section [2.2.3.3](#Section_2.2.3.3)). |
 | 0x07 | The message contained in the **optionalFields** field is a Data Compressed PDU (section [2.2.3.4](#Section_2.2.3.4)). |
 | 0x08 | The message contained in the **optionalFields** field is a Soft-Sync Request PDU (section [2.2.5.1](#Section_2.2.5.1)). |
@@ -472,7 +472,7 @@ Capabilities PDUs are exchanged to negotiate the version level of the Remote Des
 - [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1) PDU is sent by a DVC server manager to indicate it supports version 1 of the protocol.
 - [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2) PDU is sent by a DVC server manager to indicate it supports version 2 of the protocol.
 - [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU is sent by a DVC server manager to indicate it supports version 3 of the protocol.
-- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) PDU is sent by a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to acknowledge the version level it supports.
+- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) PDU is sent by a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to acknowledge the version level it supports.
 A DVC server manager initializes a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) environment by sending a DYNVC_CAPS_VERSION1 (section 2.2.1.1.1), a DYNVC_CAPS_VERSION2 (section 2.2.1.1.2), or a DYNVC_CAPS_VERSION3 (section 2.2.1.1.3) PDU to the DVC client manager to indicate the highest version level supported by the server. The client MUST respond with a DYNVC_CAPS_RSP (section 2.2.1.2) PDU that indicates the highest version level supported by the client.
 
 The DVC server manager MUST send a Capabilities message prior to creating a DVC and wait for a response from the client. This happens just once; if capability exchange has already been completed, the channel creation continues. The DVC client manager MUST reply with a DYNVC_CAPS_RSP (section 2.2.1.2) PDU as soon as it receives the server request.
@@ -677,7 +677,7 @@ packet-beta
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Opening a DVC
 
-The [**DVC server manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) initiates opening a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) by exchanging Create PDUs with a DVC client manager. The server sends a [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_4.2.1) PDU to the client, and the client responds with a [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_4.2.2) PDU that indicates the status of the client endpoint creation.
+The [**DVC server manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) initiates opening a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) by exchanging Create PDUs with a DVC client manager. The server sends a [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_2.2.2.1) PDU to the client, and the client responds with a [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_2.2.2.2) PDU that indicates the status of the client endpoint creation.
 
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 DVC Create Request PDU (DYNVC_CREATE_REQ)
@@ -739,7 +739,7 @@ packet-beta
 
 **Cmd (4 bits):** MUST be set to 0x01 (Create).
 
-**ChannelId (variable):** A variable length 8-bit, 16-bit, or 32-bit unsigned integer. Set to the value of the **ChannelId** in the [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_4.2.1) PDU.
+**ChannelId (variable):** A variable length 8-bit, 16-bit, or 32-bit unsigned integer. Set to the value of the **ChannelId** in the [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_2.2.2.1) PDU.
 
 **CreationStatus (4 bytes):** A 32-bit, signed integer that specifies the HRESULT code that indicates success or failure of the client DVC creation. HRESULT codes are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1. A zero or positive value indicates success; a negative value indicates failure.
 
@@ -947,7 +947,7 @@ packet-beta
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Soft-Sync
 
-Soft-Sync is an optional feature used to defer the use of the multitransport tunnels (reliable UDP and lossy UDP as described in [MS-RDPEMT](#Section_2.1) section 1.3) as a transport for dynamic virtual channels until after these tunnels have been successfully created. For an overview of Soft-Sync, see section [3.1.5.3](../MS-RDPEMT/MS-RDPEMT.md).
+Soft-Sync is an optional feature used to defer the use of the multitransport tunnels (reliable UDP and lossy UDP as described in [MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) as a transport for dynamic virtual channels until after these tunnels have been successfully created. For an overview of Soft-Sync, see section [3.1.5.3](#Section_3.1.5.3).
 
 <a id="Section_2.2.5.1"></a>
 #### 2.2.5.1 Soft-Sync Request PDU (DYNVC_SOFT_SYNC_REQUEST)
@@ -1003,7 +1003,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| TUNNELTYPE_UDPFECR 0x00000001 | RDP-UDP Forward Error Correction (FEC) multitransport tunnel ([MS-RDPEMT](#Section_2.1) section 1.3). |
+| TUNNELTYPE_UDPFECR 0x00000001 | RDP-UDP Forward Error Correction (FEC) multitransport tunnel ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3). |
 | TUNNELTYPE_UDPFECL 0x00000003 | RDP-UDP FEC lossy multitransport tunnel ([MS-RDPEMT] section 1.3). |
 
 **NumberOfDVCs (2 bytes)**: A 16-bit, unsigned integer indicating the number of DVCs that will have data written by the server manager on this tunnel.
@@ -1039,7 +1039,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| TUNNELTYPE_UDPFECR 0x00000001 | RDP-UDP Forward Error Correction (FEC) reliable multitransport tunnel ([MS-RDPEMT](#Section_2.1) section 1.3). |
+| TUNNELTYPE_UDPFECR 0x00000001 | RDP-UDP Forward Error Correction (FEC) reliable multitransport tunnel ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3). |
 | TUNNELTYPE_UDPFECL 0x00000003 | RDP-UDP FEC lossy multitransport tunnel ([MS-RDPEMT] section 1.3). |
 
 <a id="Section_3"></a>
@@ -1066,7 +1066,7 @@ Figure 7: State diagram
 
 **Create channel event:** Signifies that the server is requesting a new channel, as described in section 2.2.2.
 
-**Opening channel state:** In this state, the server awaits a DVC Create Response PDU, as described in section [2.2.2.2](#Section_4.2.2).
+**Opening channel state:** In this state, the server awaits a DVC Create Response PDU, as described in section [2.2.2.2](#Section_2.2.2.2).
 
 **Channel create fail event:** The response indicated failure, the channel is closed.
 
@@ -1074,7 +1074,7 @@ Figure 7: State diagram
 
 **Send/Receive state:** The dynamic channel is ready to send and process incoming data. See below for detailed data processing state diagram.
 
-**Channel close event:** Close the channel because either the client or the server have sent Closing a DVC packet, as described in section [2.2.4](#Section_1.3.3.3).
+**Channel close event:** Close the channel because either the client or the server have sent Closing a DVC packet, as described in section [2.2.4](#Section_2.2.4).
 
 **Static channel disconnected event:** This event signifies that the connection between the client and the server is broken and, at this point, the protocol terminates.
 
@@ -1097,13 +1097,13 @@ These reassembly rules are described in more detail in section [3.1.5.2.3](#Sect
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model, as long as their external behavior is consistent with that described in this document.
 
-**ChannelId:** A unique ID that the server generates and sends in a [DVC Create Request PDU (section 2.2.2.1)](#Section_4.2.1). The **ChannelId** is valid until the server or client issues a Closing a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) PDU (as specified in section [2.2.4](#Section_1.3.3.3)); afterwards, the **ChannelId** value can be reused in another DVC Create Request PDU.
+**ChannelId:** A unique ID that the server generates and sends in a [DVC Create Request PDU (section 2.2.2.1)](#Section_2.2.2.1). The **ChannelId** is valid until the server or client issues a Closing a [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3) PDU (as specified in section [2.2.4](#Section_2.2.4)); afterwards, the **ChannelId** value can be reused in another DVC Create Request PDU.
 
-**Listener:** A logical object identified by its name which consists of a string of [**ANSI encoded characters**](#gt_ansi-character). The server uses the listener name to initiate channel connection by using a DVC Create Request PDU. The client maintains a list of active listeners and uses that list to send a [DVC Create Response PDU (section 2.2.2.2)](#Section_4.2.2). The client MAY change the list at any time without notifying the server. Changing the list content MUST NOT result in any change in the existing DVC state.
+**Listener:** A logical object identified by its name which consists of a string of [**ANSI encoded characters**](#gt_ansi-character). The server uses the listener name to initiate channel connection by using a DVC Create Request PDU. The client maintains a list of active listeners and uses that list to send a [DVC Create Response PDU (section 2.2.2.2)](#Section_2.2.2.2). The client MAY change the list at any time without notifying the server. Changing the list content MUST NOT result in any change in the existing DVC state.
 
 **Priority Class:** This field identifies how much bandwidth needs to be allocated for a particular class of channels. The bandwidth used by all channels with the same **Priority Class** MUST have a predetermined allocation, as described in section [2.2.1.1.2](#Section_2.2.1.1.2). **Priority Class** of value 0 will use the bandwidth calculated from PriorityCharge0, Priority Class of 1 will use PriorityCharge2, and so on.
 
-**Version:** The number exchanged between clients in DVC Capabilities Request/Response packets, see section [2.2.1.1](#Section_4.1.1). It is used by both sides to determine what features the protocol supports as described in section [3.2.3.1](#Section_3.2.3).
+**Version:** The number exchanged between clients in DVC Capabilities Request/Response packets, see section [2.2.1.1](#Section_2.2.1.1). It is used by both sides to determine what features the protocol supports as described in section [3.2.3.1](#Section_3.2.3.1).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -1155,7 +1155,7 @@ To send compressed data, the DYNVC_DATA_COMPRESSED (section [2.2.3.4](#Section_2
 <a id="Section_3.1.5.1.3"></a>
 ##### 3.1.5.1.3 DVC Data First Compressed (DYNVC_DATA_FIRST_COMPRESSED)
 
-When the length of the original uncompressed message data being sent exceeds 1,590 bytes, and bulk data compression of the channel data is desired, the DYNVC_DATA_FIRST_COMPRESSED (section [2.2.3.3](../MS-RDPEGFX/MS-RDPEGFX.md)) PDU is sent as the first data PDU. The Length field is set to the total uncompressed length of the message, and the Data field contains a RDP8_BULK_ENCODED_DATA ([MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) section 2.2.5.3) structure containing the first data block, compressed with the RDP 8.0 Bulk Data Compressor ([MS-RDPEGFX] section 3.1.9.1). Subsequent DYNVC_DATA_COMPRESSED (section [2.2.3.4](../MS-RDPEGFX/MS-RDPEGFX.md)) PDUs are sent until all the data has been sent.
+When the length of the original uncompressed message data being sent exceeds 1,590 bytes, and bulk data compression of the channel data is desired, the DYNVC_DATA_FIRST_COMPRESSED (section [2.2.3.3](#Section_2.2.3.3)) PDU is sent as the first data PDU. The Length field is set to the total uncompressed length of the message, and the Data field contains a RDP8_BULK_ENCODED_DATA ([MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) section 2.2.5.3) structure containing the first data block, compressed with the RDP 8.0 Bulk Data Compressor ([MS-RDPEGFX] section 3.1.9.1). Subsequent DYNVC_DATA_COMPRESSED (section [2.2.3.4](#Section_2.2.3.4)) PDUs are sent until all the data has been sent.
 
 Each channel MUST use a dedicated compression context for sending data, such that any compressed data refers only to the prior data sent on that channel.
 
@@ -1210,7 +1210,7 @@ Out-of-sequence packets, or the receipt of multiples of packets that are suppose
 <a id="Section_3.1.5.2.5"></a>
 ##### 3.1.5.2.5 DVC Data First Compressed (DYNVC_DATA_FIRST_COMPRESSED)
 
-When the DVC manager receives a PDU, the **Cmd** field MUST be checked to determine the type of PDU that has been sent. If the **Cmd** field is set to 0x06, the PDU type is DYNVC_DATA_FIRST_COMPRESSED (section [2.2.3.3](../MS-RDPEGFX/MS-RDPEGFX.md)). The **Length** field indicates the total uncompressed length of the message that is being sent, and the data field contains the first block of the fragmented message. The DVC manager decompresses the data block using RDP 8.0 Bulk Data Compression ([MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) section 3.1.9.1), stores the data, and reads the next data PDU.
+When the DVC manager receives a PDU, the **Cmd** field MUST be checked to determine the type of PDU that has been sent. If the **Cmd** field is set to 0x06, the PDU type is DYNVC_DATA_FIRST_COMPRESSED (section [2.2.3.3](#Section_2.2.3.3)). The **Length** field indicates the total uncompressed length of the message that is being sent, and the data field contains the first block of the fragmented message. The DVC manager decompresses the data block using RDP 8.0 Bulk Data Compression ([MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) section 3.1.9.1), stores the data, and reads the next data PDU.
 
 Each channel MUST use a dedicated decompression context for receiving data, as any compressed data received will refer only to the prior data received on that channel.
 
@@ -1219,7 +1219,7 @@ Each channel MUST use a dedicated decompression context for receiving data, as a
 
 When the DVC manager receives a PDU, the **Cmd** field MUST be checked to determine the type of PDU that has been sent. If the **Cmd** field is set to 0x07, the PDU type is DYNVC_DATA_COMPRESSED (section [2.2.3.4](#Section_2.2.3.4)). This PDU is used to send blocks of fragmented messages or one complete unfragmented message when compression is used.
 
-If a DYNVC_DATA_COMPRESSED (section 2.2.3.4) PDU is preceded by a DYNVC_DATA_FIRST (section [2.2.3.1](../MS-RDPEGFX/MS-RDPEGFX.md)) PDU or DYNVC_DATA_FIRST_COMPRESSED (section [2.2.3.3](../MS-RDPEGFX/MS-RDPEGFX.md)) PDU, the receiver MUST decompress the data block using RDP 8.0 Bulk Data Compression ([MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) section 3.1.9.1), store this data with the previously received data, and continue to receive DYNVC_DATA_COMPRESSED (section 2.2.3.4) PDUs until the entire message has been received. The DVC manager reassembles the fragmented data and passes a complete message to the receiver.
+If a DYNVC_DATA_COMPRESSED (section 2.2.3.4) PDU is preceded by a DYNVC_DATA_FIRST (section [2.2.3.1](#Section_2.2.3.1)) PDU or DYNVC_DATA_FIRST_COMPRESSED (section [2.2.3.3](#Section_2.2.3.3)) PDU, the receiver MUST decompress the data block using RDP 8.0 Bulk Data Compression ([MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) section 3.1.9.1), store this data with the previously received data, and continue to receive DYNVC_DATA_COMPRESSED (section 2.2.3.4) PDUs until the entire message has been received. The DVC manager reassembles the fragmented data and passes a complete message to the receiver.
 
 If a DYNVC_DATA_COMPRESSED (section 2.2.3.4) PDU is not preceded by a DYNVC_DATA_FIRST (section 2.2.3.1) PDU or DYNVC_DATA_FIRST_COMPRESSED (section 2.2.3.3) PDU, the receiver MUST decompress the message in the **Data** field using RDP 8.0 Bulk Data Compression and pass it directly to the receiver without further processing.
 
@@ -1228,7 +1228,7 @@ Each channel MUST use a dedicated decompression context for receiving data, as a
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Soft-Sync
 
-Soft-Sync is an optional feature used to defer the use of the multitransport tunnels (reliable UDP and lossy UDP as described in [MS-RDPEMT](#Section_2.1) section 1.3) as a transport for dynamic virtual channels until after these tunnels have been successfully created.<10>
+Soft-Sync is an optional feature used to defer the use of the multitransport tunnels (reliable UDP and lossy UDP as described in [MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) as a transport for dynamic virtual channels until after these tunnels have been successfully created.<10>
 
 ![Soft-Sync negotiation](media/image9.png)
 
@@ -1257,7 +1257,7 @@ Static virtual channels MUST be created on the main RDP connection as described 
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 Creating Tunneling DVCs
 
-After the server has completed processing of all the MCS Channel Join Request PDUs ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.8), sent the corresponding Channel Join Confirm PDUs ([MS-RDPBCGR] section 2.2.1.9), and performed any necessary dynamic virtual channel initialization (section [2.2.1](#Section_2.2.1)), the server manager MUST send a DVC Create Request PDU (section [2.2.2.1](#Section_4.2.1)). The **ChannelName** field in the DVC Create Request PDU MUST be set to the corresponding ANSI static virtual channel name that was specified in the **channelDefArray** field of the Client Network Data block of the MCS Connect Initial PDU ([MS-RDPBCGR] section 2.2.1.3.4). A DVC Create Request PDU MUST be sent for all static virtual channels with the exception of the DRDYNVC channel, which MUST continue to be used as a static virtual channel.
+After the server has completed processing of all the MCS Channel Join Request PDUs ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.8), sent the corresponding Channel Join Confirm PDUs ([MS-RDPBCGR] section 2.2.1.9), and performed any necessary dynamic virtual channel initialization (section [2.2.1](#Section_2.2.1)), the server manager MUST send a DVC Create Request PDU (section [2.2.2.1](#Section_2.2.2.1)). The **ChannelName** field in the DVC Create Request PDU MUST be set to the corresponding ANSI static virtual channel name that was specified in the **channelDefArray** field of the Client Network Data block of the MCS Connect Initial PDU ([MS-RDPBCGR] section 2.2.1.3.4). A DVC Create Request PDU MUST be sent for all static virtual channels with the exception of the DRDYNVC channel, which MUST continue to be used as a static virtual channel.
 
 The server and client DVC managers MUST use the dynamic virtual channel to send and receive all data for the corresponding static virtual channel. The incoming data SHOULD NOT be reassembled by the client or server manager. Rather, each data chunk from the data PDUs (section [2.2.3](#Section_2.2.3)) MUST be delivered as-is so that the application endpoint can perform the reassembly (as specified in [MS-RDPBCGR] section 3.1.5.2.2.1), hence ensuring that there is no change in the data transfer interface layer.
 
@@ -1313,7 +1313,7 @@ There are no client timers.
 <a id="Section_3.2.3.1"></a>
 #### 3.2.3.1 DVC Client Manager Initialization
 
-The Remote Desktop Protocol: Dynamic Virtual Channel Extension encompasses three version levels. The server specifies priority charges in Version 2 or 3 (as described in section [2.2.1.1.2](#Section_2.2.1.1.2)); no such priority charges are specified in Version 1. If the client supports channel priorities, it MUST set the **Version** field of [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) to at least 2. The server specifies support for compressed dynamic virtual channel data as well as channel priorities by using the Version 3 PDU. If the client supports compressed dynamic virtual channel data as well as channel priorities, it MUST set the Version field of DYNVC_CAPS_RSP to 3.
+The Remote Desktop Protocol: Dynamic Virtual Channel Extension encompasses three version levels. The server specifies priority charges in Version 2 or 3 (as described in section [2.2.1.1.2](#Section_2.2.1.1.2)); no such priority charges are specified in Version 1. If the client supports channel priorities, it MUST set the **Version** field of [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) to at least 2. The server specifies support for compressed dynamic virtual channel data as well as channel priorities by using the Version 3 PDU. If the client supports compressed dynamic virtual channel data as well as channel priorities, it MUST set the Version field of DYNVC_CAPS_RSP to 3.
 
 Capabilities PDUs are exchanged to negotiate the version level of the Remote Desktop Protocol: Dynamic Virtual Channel Extension that is supported. Three different Capabilities PDUs are used to negotiate version level support.
 
@@ -1347,7 +1347,7 @@ A DYNVC_CAPS_VERSION3 (section [2.2.1.1.3](#Section_2.2.1.1.3)) PDU specifies a 
 <a id="Section_3.2.3.1.4"></a>
 ##### 3.2.3.1.4 Capabilities Response (DYNVC_CAPS_RSP)
 
-If a client receives a [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1), a [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2), or a [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU from the server, it MUST reply with a [Capabilities Response PDU (section 2.2.1.2)](#Section_4.1.2).
+If a client receives a [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1), a [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2), or a [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU from the server, it MUST reply with a [Capabilities Response PDU (section 2.2.1.2)](#Section_2.2.1.2).
 
 <a id="Section_3.2.3.2"></a>
 #### 3.2.3.2 DVC Initialization
@@ -1355,11 +1355,11 @@ If a client receives a [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.
 <a id="Section_3.2.3.2.1"></a>
 ##### 3.2.3.2.1 DVC Create Response (DYNVC_CREATE_RSP)
 
-When a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) receives a [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_4.2.1) PDU from the DVC server manager, it uses the [**listener**](#gt_listener) name and **ChannelId** to create a named channel. The DVC client manager uses the listener name to locate a listener on the TS client that has advertised itself as being available to accept connections. A client-side listener is created that associates the **ChannelId** with the specified listener. After the channel is created, the listener name is no longer used and all data is sent referencing the **ChannelId**.
+When a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) receives a [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_2.2.2.1) PDU from the DVC server manager, it uses the [**listener**](#gt_listener) name and **ChannelId** to create a named channel. The DVC client manager uses the listener name to locate a listener on the TS client that has advertised itself as being available to accept connections. A client-side listener is created that associates the **ChannelId** with the specified listener. After the channel is created, the listener name is no longer used and all data is sent referencing the **ChannelId**.
 
-The client responds to the server with a [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_4.2.2) PDU indicating the channel creation status. Any positive or zero value indicates success. A negative value indicates failure.
+The client responds to the server with a [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_2.2.2.2) PDU indicating the channel creation status. Any positive or zero value indicates success. A negative value indicates failure.
 
-On failure, the server DVC manager can reuse the failed **ChannelId** for another channel without first sending a [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU. Therefore, the client MUST NOT add the failed **ChannelId** into the list of active **ChannelIds**.
+On failure, the server DVC manager can reuse the failed **ChannelId** for another channel without first sending a [DYNVC_CLOSE (section 2.2.4)](#Section_2.2.4) PDU. Therefore, the client MUST NOT add the failed **ChannelId** into the list of active **ChannelIds**.
 
 If the channel creation was successful, the client SHOULD maintain this channel until it is closed or the connection is terminated.
 
@@ -1381,7 +1381,7 @@ Sending and receiving messages is symmetrical between the [**DVC server manager*
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Closing a DVC (DYNVC_CLOSE)
 
-A channel can be closed by either a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) or a DVC server manager. A [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU is used for both a close request and a close response.
+A channel can be closed by either a [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) or a DVC server manager. A [DYNVC_CLOSE (section 2.2.4)](#Section_2.2.4) PDU is used for both a close request and a close response.
 
 When a DVC client manager receives a DYNVC_CLOSE (section 2.2.4) PDU, the client MAY respond with a DYNVC_CLOSE (section 2.2.4) PDU specifying the **ChannelId**.
 
@@ -1446,7 +1446,7 @@ The [**DVC managers**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) on the TS serve
 - [DYNVC_CAPS_VERSION1 (section 2.2.1.1.1)](#Section_2.2.1.1.1) PDU is sent by a server to indicate it supports version 1 of this protocol.
 - [DYNVC_CAPS_VERSION2 (section 2.2.1.1.2)](#Section_2.2.1.1.2) PDU is sent by a server to indicate it supports version 2 of this protocol.
 - [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU is sent by a server to indicate it supports version 3 of this protocol.
-- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) PDU is sent by a client to acknowledge the version level it supports.
+- [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) PDU is sent by a client to acknowledge the version level it supports.
 A Capabilities PDU has the **Cmd** field set to 0x05.
 
 Immediately following the establishment of a [**static virtual channel**](#gt_static-virtual-channel) session, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md), the DVC server manager begins the initialization sequence. The DVC server manager sets a 10-second timer and sends a DYNVC_CAPS_VERSION1 (section 2.2.1.1.1), a DYNVC_CAPS_VERSION2 (section 2.2.1.1.2), or a DYNVC_CAPS_VERSION3 (section 2.2.1.1.3) PDU to the DVC client manager to indicate its highest version level supported. The DVC client manager MUST respond with a DYNVC_CAPS_RSP (section 2.2.1.2) PDU indicating the highest version level supported by the client. If the client does not respond to a Capabilities Request PDU before the 10-second timer expires, the server fails the creation of the [**DVC**](#gt_fda9b8e9-bec6-4e04-9833-83bee294f3d3).
@@ -1471,7 +1471,7 @@ A [DYNVC_CAPS_VERSION3 (section 2.2.1.1.3)](#Section_2.2.1.1.3) PDU is sent to
 <a id="Section_3.3.3.1.4"></a>
 ##### 3.3.3.1.4 Capabilities Response (DYNVC_CAPS_RSP)
 
-The [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_4.1.2) PDU is sent by the [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to indicate the protocol version level it supports.
+The [DYNVC_CAPS_RSP (section 2.2.1.2)](#Section_2.2.1.2) PDU is sent by the [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) to indicate the protocol version level it supports.
 
 The version level supported is indicated by the value of the **Version** field. If the client doesn't respond with a Capabilities Response packet within 10 seconds, the server MUST NOT make any further attempts to send a DVC Create Request packet.
 
@@ -1482,13 +1482,13 @@ A [**DVC server manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e) initializes
 
 Two different Create PDUs are used to open a channel:
 
-- [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_4.2.1)
-- [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_4.2.2)
+- [DYNVC_CREATE_REQ (section 2.2.2.1)](#Section_2.2.2.1)
+- [DYNVC_CREATE_RSP (section 2.2.2.2)](#Section_2.2.2.2)
 A DVC server manager creates a channel in response to a request by an application running on the TS server to create a channel to a [**listener**](#gt_listener) running on the TS client. The server creates a channel for the requesting application using a listener name. The server sends the **ChannelId** and the listener name to the DVC client manager. A version 2 server also sends the channel priority to the DVC client manager. The server maintains this **ChannelId** for the life of the channel.
 
 The DVC client manager responds to the DVC server manager with a DYNVC_CREATE_RSP (section 2.2.2.2) PDU indicating the channel creation status. Any positive or zero value indicates success. A negative value indicates failure.
 
-On failure, the server DVC manager MAY<12> send a [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU for the failed channel. The listener name is only used at channel initialization. After the channel is initialized, all data is sent referencing the **ChannelId**.
+On failure, the server DVC manager MAY<12> send a [DYNVC_CLOSE (section 2.2.4)](#Section_2.2.4) PDU for the failed channel. The listener name is only used at channel initialization. After the channel is initialized, all data is sent referencing the **ChannelId**.
 
 The Channel ID MUST be unique within a [**static virtual channel**](#gt_static-virtual-channel) session. The server DVC manager SHOULD reuse a Channel ID if the channel creation failed, or if the channel has been closed.
 
@@ -1512,13 +1512,13 @@ Sending and receiving messages is symmetrical between the [**DVC server manager*
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Closing a DVC (DYNVC_CLOSE)
 
-The closure of a channel can be requested by either an application running on the TS server or a [**listener**](#gt_listener) running on the TS client. A [DYNVC_CLOSE (section 2.2.4)](#Section_1.3.3.3) PDU is used for both a close request and a close response.
+The closure of a channel can be requested by either an application running on the TS server or a [**listener**](#gt_listener) running on the TS client. A [DYNVC_CLOSE (section 2.2.4)](#Section_2.2.4) PDU is used for both a close request and a close response.
 
 The DVC server manager sends a DYNVC_CLOSE (section 2.2.4) PDU (specifying the **ChannelId** to close) to the [**DVC client manager**](#gt_04b4723b-a59c-4334-b791-47b9299e8d2e). The client replies with a DYNVC_CLOSE (section 2.2.4) PDU.
 
 When a DVC client manager initiates a channel-close, it sends an unsolicited DYNVC_CLOSE (section 2.2.4) PDU specifying the **ChannelId** to the server. The server does not respond to the DYNVC_CLOSE (section 2.2.4) PDU.
 
-Upon closing the channel, the DVC server manager MAY reuse the **ChannelId** in the next [DVC Create Request PDU (section 2.2.2.1)](#Section_4.2.1).
+Upon closing the channel, the DVC server manager MAY reuse the **ChannelId** in the next [DVC Create Request PDU (section 2.2.2.1)](#Section_2.2.2.1).
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Soft-Sync
@@ -1526,7 +1526,7 @@ Upon closing the channel, the DVC server manager MAY reuse the **ChannelId** in 
 <a id="Section_3.3.5.3.1"></a>
 ##### 3.3.5.3.1 Sending the Soft-Sync Request PDU
 
-The structure and fields of the Soft-Sync Request PDU are specified in section [2.2.5.1](../MS-RDPBCGR/MS-RDPBCGR.md), and the PDU MUST be initialized according to this specification. The server manager MUST NOT send this PDU until it has received a successful Initiate Multitransport Response PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.2) for each multitransport tunnel that the server manager will use to send dynamic virtual channel data.
+The structure and fields of the Soft-Sync Request PDU are specified in section [2.2.5.1](#Section_2.2.5.1), and the PDU MUST be initialized according to this specification. The server manager MUST NOT send this PDU until it has received a successful Initiate Multitransport Response PDU ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.15.2) for each multitransport tunnel that the server manager will use to send dynamic virtual channel data.
 
 The server manager MUST include a Soft-Sync Channel List in the **SoftSyncChannelLists** field for each multitransport tunnel that will be used to send dynamic virtual channel data, with the **TunnelType** field set to the ID of the specified multitransport tunnel and the **ListOfDVCIds** field set to contain the channel ID of each dynamic virtual channel for which the server manager will send data using the specified multitransport tunnel. The **Flags** field MUST contain the SOFT_SYNC_TCP_FLUSHED (0x01) flag (indicating that the server will send no more data for the specified DVCs over the main RDP connection) and MUST also specify the SOFT_SYNC_CHANNEL_LIST_PRESENT (0x02) flag if the **SoftSyncChannelLists** field contains one or more Soft-Sync Channel List (section [2.2.5.1.1](#Section_2.2.5.1.1)) structures.
 
@@ -1535,7 +1535,7 @@ The Soft-Sync Request PDU MUST be sent over the DRDYNVC static virtual channel o
 <a id="Section_3.3.5.3.2"></a>
 ##### 3.3.5.3.2 Processing the Soft-Sync Response PDU
 
-The structure and fields of the Soft-Sync Response PDU are specified in section [2.2.5](#Section_3.3.5.3). The receipt of this PDU indicates to the server DVC manager that the client DVC manager is now sending data for some or all dynamic virtual channels on a multitransport tunnel. If Soft-Sync is supported by the server and client, then, in order to ensure that no data is received out of order, the server DVC manager MUST NOT begin to read dynamic virtual channel data on any multitransport tunnel until after the Soft-Sync Response PDU has been received.
+The structure and fields of the Soft-Sync Response PDU are specified in section [2.2.5](#Section_2.2.5). The receipt of this PDU indicates to the server DVC manager that the client DVC manager is now sending data for some or all dynamic virtual channels on a multitransport tunnel. If Soft-Sync is supported by the server and client, then, in order to ensure that no data is received out of order, the server DVC manager MUST NOT begin to read dynamic virtual channel data on any multitransport tunnel until after the Soft-Sync Response PDU has been received.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -1595,7 +1595,7 @@ a7 04 -> DYNVC_CAPS_VERSION2::PriorityCharge3 = 0x04a7 = 1191 (~55%)
 <a id="Section_4.1.2"></a>
 ### 4.1.2 DVC Capabilities Response PDU
 
-The following is an annotated sample of the [DYNVC_CAPS_RSP PDU (section 2.2.1.2)](#Section_4.1.2).
+The following is an annotated sample of the [DYNVC_CAPS_RSP PDU (section 2.2.1.2)](#Section_2.2.1.2).
 
 00000000 50 00 02 00
 
@@ -1627,7 +1627,7 @@ The following is an annotated sample of the [DYNVC_CAPS_RSP PDU (section 2.2.1
 <a id="Section_4.2.1"></a>
 ### 4.2.1 DVC Create Request PDU
 
-The following is an annotated sample of the [DYNVC_CREATE_REQ PDU (section 2.2.2.1)](#Section_4.2.1).
+The following is an annotated sample of the [DYNVC_CREATE_REQ PDU (section 2.2.2.1)](#Section_2.2.2.1).
 
 00000000 10 03 74 65 73 74 64 76 63 00 ..testdvc.
 
@@ -1656,7 +1656,7 @@ The following is an annotated sample of the [DYNVC_CREATE_REQ PDU (section 2.2
 <a id="Section_4.2.2"></a>
 ### 4.2.2 DVC Create Response PDU
 
-The following is an annotated sample of the [DYNVC_CREATE_RSP PDU (section 2.2.2.2)](#Section_4.2.2).
+The following is an annotated sample of the [DYNVC_CREATE_RSP PDU (section 2.2.2.2)](#Section_2.2.2.2).
 
 00000000 10 03 00 00 00 00 ......
 
@@ -2711,7 +2711,7 @@ The last packet in the sequence for the remaining data: DYNVC_DATA_COMPRESSED PD
 <a id="Section_4.4.1"></a>
 ### 4.4.1 DVC Close PDU
 
-The following is an annotated sample of the [DYNVC_CLOSE PDU (section 2.2.4)](#Section_1.3.3.3).
+The following is an annotated sample of the [DYNVC_CLOSE PDU (section 2.2.4)](#Section_2.2.4).
 
 00000000 40 03 @.
 

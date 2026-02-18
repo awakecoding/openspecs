@@ -229,7 +229,7 @@ Supported Transports: WebDAV Protocol: Server Extensions use [**HTTP**](#gt_hype
 
 Versioning: No new versioning mechanisms have been introduced beyond those that already exist in [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) and HTTP.
 
-Capability Negotiation: Negotiation of WebDAV and HTTP capabilities is via the OPTIONS method. These server extensions extends the OPTIONS method that uses an HTTP response header to indicate which authoring tools are to be used. For more information about authoring, see section [2.2.2](#Section_4.1).
+Capability Negotiation: Negotiation of WebDAV and HTTP capabilities is via the OPTIONS method. These server extensions extends the OPTIONS method that uses an HTTP response header to indicate which authoring tools are to be used. For more information about authoring, see section [2.2.2](#Section_2.2.2).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -264,9 +264,9 @@ The extension headers in this protocol conform to the form and behavior of other
 
 This section specifies the following header extensions:
 
-- The [Translate request header (section 2.2.1)](#Section_3.2.5.1) allows the [**WebDAV client**](#gt_webdav-client) to request the source of an [**entity**](#gt_entity).
+- The [Translate request header (section 2.2.1)](#Section_2.2.1) allows the [**WebDAV client**](#gt_webdav-client) to request the source of an [**entity**](#gt_entity).
 - The header field [MS-Author-Via](#Section_4.1) is returned as a response-header field to a client that has issued an **OPTIONS** command to the server. The syntax of the **OPTIONS** command is specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 9.2. The syntax of the MS-Author-Via header is specified using the [**Augmented Backus-Naur Form (ABNF)**](#gt_augmented-backus-naur-form-abnf), as defined in [RFC2616] section 2.1.
-- The "[noroot (section 2.2.3)](#Section_3.1.5.3)" extension to the Depth request header extends the functionality that is specified in [RFC4918] section 10.2, allowing a WebDAV client to request the children of a requested entity, but not to include the requested entity itself.
+- The "[noroot (section 2.2.3)](#Section_2.2.3)" extension to the Depth request header extends the functionality that is specified in [RFC4918] section 10.2, allowing a WebDAV client to request the children of a requested entity, but not to include the requested entity itself.
 This section specifies the following method:
 
 - The [SEARCH method (section 2.2.4)](#Section_2.2.4) is used to transport search-related commands to external search providers.
@@ -288,7 +288,7 @@ Translate-header = "Translate" ":" Translate-value
 
 Translate-value = "t" / "f" / "F"
 
-If the Translate value is "t", the web server is to process the content before returning it to the WebDAV client; if "f" | "F", the web server is to return the unprocessed (or source) content to the WebDAV client. The values "f" and "F" are synonymous. All other values SHOULD be ignored by the web server. For more details about processing of this request header, see section [3.1.5](#Section_3.1).<1>
+If the Translate value is "t", the web server is to process the content before returning it to the WebDAV client; if "f" | "F", the web server is to return the unprocessed (or source) content to the WebDAV client. The values "f" and "F" are synonymous. All other values SHOULD be ignored by the web server. For more details about processing of this request header, see section [3.1.5](#Section_3.1.5).<1>
 
 This request header MUST be supported on the GET verb and MAY be supported on other verbs.<2>
 
@@ -439,7 +439,7 @@ A [**WebDAV client**](#gt_webdav-client) SHOULD send an OPTIONS request to the s
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Translate Request Header
 
-The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Translate request header](#Section_3.2.5.1) with an "f" or "F" flag to a request if the WebDAV client needs the source of a file without any translation; otherwise this header SHOULD be omitted.
+The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Translate request header](#Section_4.2) with an "f" or "F" flag to a request if the WebDAV client needs the source of a file without any translation; otherwise this header SHOULD be omitted.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 MS-Author-Via Response Header
@@ -456,7 +456,7 @@ A [**WebDAV client**](#gt_webdav-client) MAY send an OPTIONS request to the serv
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Depth "noroot" Request Header Extension
 
-The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Depth request header](#Section_3.1.5.3) with a value of '1,noroot' or 'infinity,noroot' to a request if the WebDAV client needs the resources that are in the container, but not in the container itself; otherwise this header SHOULD be omitted.<9> A resource is an entity that can be identified by a URI. A resource is used as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 1.3.
+The [**WebDAV client**](#gt_webdav-client) SHOULD add the [Depth request header](#Section_4.3) with a value of '1,noroot' or 'infinity,noroot' to a request if the WebDAV client needs the resources that are in the container, but not in the container itself; otherwise this header SHOULD be omitted.<9> A resource is an entity that can be identified by a URI. A resource is used as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 1.3.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 SEARCH Method
@@ -504,7 +504,7 @@ A [**WebDAV server**](#gt_webdav-server) can advertise support for [**WebDAV**](
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Translate Request Header
 
-The [**WebDAV server**](#gt_webdav-server) MUST respond with the actual source of the file if the translate request header exists with a flag value starting with "f" or "F". The WebDAV server SHOULD perform access checks when processing a command with a [Translate request header](#Section_3.2.5.1).<10>
+The [**WebDAV server**](#gt_webdav-server) MUST respond with the actual source of the file if the translate request header exists with a flag value starting with "f" or "F". The WebDAV server SHOULD perform access checks when processing a command with a [Translate request header](#Section_4.2).<10>
 
 To maintain consistency with web browsers, the default behavior if this request header is omitted is to translate the file; omission of this header SHOULD be the same as sending Translate: t.<11>
 
@@ -521,7 +521,7 @@ The [**WebDAV server**](#gt_webdav-server) SHOULD respond with the [MS-Author-Vi
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Depth "noroot" Request Header Extension
 
-If the [**WebDAV server**](#gt_webdav-server) supports the [Depth "noroot" request header extension](#Section_3.1.5.3), the WebDAV server SHOULD respond appropriately depending on the [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) command that the [**WebDAV client**](#gt_webdav-client) is sending.<13>
+If the [**WebDAV server**](#gt_webdav-server) supports the [Depth "noroot" request header extension](#Section_4.3), the WebDAV server SHOULD respond appropriately depending on the [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) command that the [**WebDAV client**](#gt_webdav-client) is sending.<13>
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 SEARCH Method
@@ -679,12 +679,12 @@ Next ' continue looping
 
 %>
 
-The difference between these two requests is that the second one is requesting the source of an entity. This is a typical example of how the [Translate request header](#Section_3.2.5.1) is used.
+The difference between these two requests is that the second one is requesting the source of an entity. This is a typical example of how the [Translate request header](#Section_4.2) is used.
 
 <a id="Section_4.3"></a>
 ## 4.3 Depth "noroot" Request Header Extension
 
-The following example shows a PROPFIND request from a [**WebDAV client**](#gt_webdav-client) and the response from the [**WebDAV server**](#gt_webdav-server) that contains the [Depth "noroot" Request Header Extension](#Section_3.1.5.3).
+The following example shows a PROPFIND request from a [**WebDAV client**](#gt_webdav-client) and the response from the [**WebDAV server**](#gt_webdav-server) that contains the [Depth "noroot" Request Header Extension](#Section_4.3).
 
 PROPFIND request with Depth: 1
 
@@ -914,7 +914,7 @@ xmlns:c="xml:" xmlns:a="DAV:">
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-[**WebDAV servers**](#gt_webdav-server) that support the [Translate request header](#Section_3.2.5.1) can perform access checks before returning the source of the file, as specified in section [3.2.5.1](#Section_3.2), in order to protect any source content (for example, database passwords).<15>
+[**WebDAV servers**](#gt_webdav-server) that support the [Translate request header](#Section_4.2) can perform access checks before returning the source of the file, as specified in section [3.2.5.1](#Section_3.2.5.1), in order to protect any source content (for example, database passwords).<15>
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -957,7 +957,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 2.2.1: The [**web server**](#gt_web-server) in IIS for Windows 2000 operating system, Windows XP, and Windows based servers Windows Server 2003 and later can accept the [Translate request header](#Section_3.2.5.1). This implementation accepts "f" and "F" as FALSE. Everything else, including omission of the header, is accepted as TRUE.
+<1> Section 2.2.1: The [**web server**](#gt_web-server) in IIS for Windows 2000 operating system, Windows XP, and Windows based servers Windows Server 2003 and later can accept the [Translate request header](#Section_4.2). This implementation accepts "f" and "F" as FALSE. Everything else, including omission of the header, is accepted as TRUE.
 
 <2> Section 2.2.1: The web server in IIS for Windows 2000, Windows XP, and Windows based servers Windows Server 2003 and later can accept this header on all commands, while only honoring this header on GET commands.
 
@@ -973,7 +973,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 3.1.3: The WebDAV server in Windows 2000, Windows XP, and Windows based servers Windows Server 2003 and later can return the MS-Author-Via: DAV response header if [**WebDAV**](#gt_web-distributed-authoring-and-versioning-protocol-webdav) is enabled on the server.
 
-<9> Section 3.1.5.3: The Depth header field is used with several WebDAV commands. However, Windows implementations only support the "noroot" extension on two verbs: **DELETE** and **PROPFIND**. "1,noroot" is supported for **PROPFIND** and "infinity,noroot" is supported on **DELETE**. Attempting to specify "noroot" on other verbs that support the [Depth header](#Section_3.1.5.3) field will result in a "400 Bad Request" error being returned.
+<9> Section 3.1.5.3: The Depth header field is used with several WebDAV commands. However, Windows implementations only support the "noroot" extension on two verbs: **DELETE** and **PROPFIND**. "1,noroot" is supported for **PROPFIND** and "infinity,noroot" is supported on **DELETE**. Attempting to specify "noroot" on other verbs that support the [Depth header](#Section_4.3) field will result in a "400 Bad Request" error being returned.
 
 <10> Section 3.2.5.1: The WebDAV server in IIS for Windows 2000, Windows XP, and Windows Server 2003 requires WRITE access to the file to return the source of the file.
 

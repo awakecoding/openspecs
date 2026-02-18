@@ -422,7 +422,7 @@ As defined in [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840) secti
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 GET
 
-For the syntax and semantics of the GET method, see section [3.2.5.1.1](#Section_3.2.5.1.1.1).
+For the syntax and semantics of the GET method, see section [3.2.5.1.1](#Section_3.2.5.1.1).
 
 <a id="Section_3.1.5.1.1.1"></a>
 ###### 3.1.5.1.1.1 Request Body
@@ -475,7 +475,7 @@ As defined in [[OIDCCore]](https://go.microsoft.com/fwlink/?LinkId=523840) secti
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 POST
 
-For the syntax and semantics of the POST method, see section [3.2.5.2.1](#Section_3.2.5.2.1.2).
+For the syntax and semantics of the POST method, see section [3.2.5.2.1](#Section_3.2.5.2.1).
 
 The client MUST meet the requirements specified in [MS-OAPX](../MS-OAPX/MS-OAPX.md) section 3.1.5.2.1.
 
@@ -512,7 +512,7 @@ As defined in [[OIDCDiscovery]](https://go.microsoft.com/fwlink/?LinkId=529548) 
 <a id="Section_3.1.5.3.1"></a>
 ##### 3.1.5.3.1 GET
 
-For the syntax and semantics of the GET method, see section [3.2.5.3.1](#Section_3.2.5.3.1.1).
+For the syntax and semantics of the GET method, see section [3.2.5.3.1](#Section_3.2.5.3.1).
 
 <a id="Section_3.1.5.3.1.1"></a>
 ###### 3.1.5.3.1.1 Request Body

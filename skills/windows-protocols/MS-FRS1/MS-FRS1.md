@@ -292,7 +292,7 @@ This document uses the following terms:
 **Dampening**: On receiving a [**remote change order**](#gt_remote-change-order), [**FRS**](#gt_file-replication-service-frs) has to determine if the [**change order**](#gt_change-order) is already known to the local machine by using the version vector of the local machine. If the remote change order is known, FRS drops the change order and informs the [**upstream partner**](#gt_upstream-partner). This process is called "dampening" a change order.
 
 <a id="gt_dfs-r"></a>
-**DFS-R**: A service that keeps [**DFS**](#gt_distributed-file-system-dfs) and [**SYSVOL**](#gt_system-volume-sysvol) folders in sync automatically. DFS-R is a state-based, multimaster replication system that supports replication scheduling and bandwidth throttling. This is a rewrite and new version of [**FRS**](#gt_file-replication-service-frs). For more information, see [MS-FRS2](#Section_3.1.1.1).
+**DFS-R**: A service that keeps [**DFS**](#gt_distributed-file-system-dfs) and [**SYSVOL**](#gt_system-volume-sysvol) folders in sync automatically. DFS-R is a state-based, multimaster replication system that supports replication scheduling and bandwidth throttling. This is a rewrite and new version of [**FRS**](#gt_file-replication-service-frs). For more information, see [MS-FRS2](../MS-FRS2/MS-FRS2.md).
 
 <a id="gt_directed-change-order"></a>
 **Directed Change Order**: A [**change order**](#gt_change-order) directed to a single [**downstream partner**](#gt_downstream-partner) and produced when the [**partner**](#gt_partner) is a [**Version Vector Join (VVJoin)**](#gt_version-vector-join-vvjoin), such as during [**initial sync**](#gt_initial-sync).
@@ -513,7 +513,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-BKUP] Microsoft Corporation, "[Microsoft NT Backup File Structure](../MS-BKUP/MS-BKUP.md)".
 
-[MS-DFSNM] Microsoft Corporation, "[Distributed File System (DFS): Namespace Management Protocol](#Section_3.1.1.1)".
+[MS-DFSNM] Microsoft Corporation, "[Distributed File System (DFS): Namespace Management Protocol](../MS-DFSNM/MS-DFSNM.md)".
 
 [MS-DFSRH] Microsoft Corporation, "[DFS Replication Helper Protocol](../MS-DFSRH/MS-DFSRH.md)".
 
@@ -523,9 +523,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-FRS2] Microsoft Corporation, "[Distributed File System Replication Protocol](#Section_3.1.1.1)".
+[MS-FRS2] Microsoft Corporation, "[Distributed File System Replication Protocol](../MS-FRS2/MS-FRS2.md)".
 
-[MS-FSCC] Microsoft Corporation, "[File System Control Codes](#Section_3.1.1.1)".
+[MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -588,7 +588,7 @@ Each file or folder is assigned a [**GUID**](#gt_globally-unique-identifier-guid
 
 The FRS Protocol relies directly on [**RPC**](#gt_remote-procedure-call-rpc), as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-RPCE](../MS-RPCE/MS-RPCE.md) (for message transport), and Remote Registry Protocol, as specified in [MS-RRP](../MS-RRP/MS-RRP.md) (for remote performance monitoring). It relies indirectly on the Directory Replication Service (DRS) Remote Protocol to replicate its [**Active Directory objects**](#gt_active-directory-object), as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md).
 
-[**FRS**](#gt_file-replication-service-frs) is a deprecated protocol for [**DFS**](#gt_distributed-file-system-dfs) replica sets on Windows Server 2008 R2 operating system. The Distributed File System: Replication (DFS-R) Protocol (as specified in [MS-FRS2](#Section_3.1.1.1)) is used to replicate DFS/[**SYSVOL**](#gt_system-volume-sysvol) replica sets when the DFS-Replication Protocol is available. A DFS replica set is configured for replication over either this protocol or DFS-R, but not both. Functional levels are an extension of the mixed/native mode concept introduced in Windows 2000 operating system to activate new [**Active Directory**](#gt_active-directory) features after all the [**domain controllers**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) or forest are running the Windows Server 2003 operating system or Windows Server 2008 operating system. When a computer running Windows Server 2003 or Windows Server 2008 is installed and promoted to a domain controller, new Active Directory features are activated by the Windows Server 2003 operating system or Windows Server 2008 operating system over its Windows 2000 counterparts, or by the Windows Server 2008 operating system over its Windows Server 2003 counterparts. Additional Active Directory features are available when all domain controllers in a domain or forest are running Windows Server 2003, and the administrator activates the corresponding functional level in the domain or forest.
+[**FRS**](#gt_file-replication-service-frs) is a deprecated protocol for [**DFS**](#gt_distributed-file-system-dfs) replica sets on Windows Server 2008 R2 operating system. The Distributed File System: Replication (DFS-R) Protocol (as specified in [MS-FRS2](../MS-FRS2/MS-FRS2.md)) is used to replicate DFS/[**SYSVOL**](#gt_system-volume-sysvol) replica sets when the DFS-Replication Protocol is available. A DFS replica set is configured for replication over either this protocol or DFS-R, but not both. Functional levels are an extension of the mixed/native mode concept introduced in Windows 2000 operating system to activate new [**Active Directory**](#gt_active-directory) features after all the [**domain controllers**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) or forest are running the Windows Server 2003 operating system or Windows Server 2008 operating system. When a computer running Windows Server 2003 or Windows Server 2008 is installed and promoted to a domain controller, new Active Directory features are activated by the Windows Server 2003 operating system or Windows Server 2008 operating system over its Windows 2000 counterparts, or by the Windows Server 2008 operating system over its Windows Server 2003 counterparts. Additional Active Directory features are available when all domain controllers in a domain or forest are running Windows Server 2003, and the administrator activates the corresponding functional level in the domain or forest.
 
 To activate the new domain features, all domain controllers in the domain have to be running Windows Server 2003 or Windows Server 2008 and the administrator raises the [**domain functional level**](#gt_domain-functional-level) to Windows Server 2003 or Windows Server 2008. The functional levels are separate from the revisions of the operating system in that users can upgrade to a new operating system (for example, Windows Server 2008) but not necessarily turn on the Windows Server 2008 functional level in the domains. The domain controllers for that domain will run the Windows Server 2008 operating system but display only the earlier domain functionality (for example, Windows Server 2003). However, a domain controller in a Windows Server 2008 functional level domain has to be running the Windows Server 2008 operating system. Network clients can authenticate or access resources in the domain or forest without being affected by the Windows Server 2003 domain or forest functional levels. These levels only affect the way that domain controllers interact with each other.
 
@@ -627,7 +627,7 @@ The version for this [**RPC**](#gt_remote-procedure-call-rpc) interface is 1.1.
 
 FrsRpcSendCommPkt (see section [3.3.4.4](#Section_3.3.4.4)) inside this interface has additional versioning negotiation.
 
-FrsRpcSendCommPkt sends COMM_PACKET (see section [2.2.3.5](#Section_4.3)) packets between replication partners. Every COMM_PACKET packet contains the following two fields:
+FrsRpcSendCommPkt sends COMM_PACKET (see section [2.2.3.5](#Section_2.2.3.5)) packets between replication partners. Every COMM_PACKET packet contains the following two fields:
 
 - Major (major version number of FRS; always 0)
 - Minor (minor version number of FRS; see section 2.2.3.5 for details on minor version values)
@@ -645,8 +645,8 @@ None.
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| UUID for interface NtFrsApi | D049B186-814F-11D1-9A3C-00C04FC9B232 | As specified in section [3.2](#Section_1.3). |
-| UUID for interface frsrpc | F5CC59B4-4264-101A-8C59-08002B2F8426 | As specified in section [3.3](#Section_1.3). |
+| UUID for interface NtFrsApi | D049B186-814F-11D1-9A3C-00C04FC9B232 | As specified in section [3.2](#Section_3.2). |
+| UUID for interface frsrpc | F5CC59B4-4264-101A-8C59-08002B2F8426 | As specified in section [3.3](#Section_3.3). |
 
 The [**security principal name (SPN)**](#gt_security-principal-name-spn) (for more information, see [[SPN]](https://go.microsoft.com/fwlink/?LinkId=90531)) for FRS has the following value: NtFrs-88f5d2bd-b646-11d2-a6d3-00c04fc9b232/FQDN. The [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) is the fully qualified domain name of the computer. See section [2.3.1.7](#Section_2.3.1.7) for the location of the computer's FQDN in [**Active Directory**](#gt_active-directory).
 
@@ -1018,7 +1018,7 @@ F = Filler bits, not used (27 bits). MUST be 0. MUST be ignored on receipt.
 
 **Filler:** These bits are not used and MUST be set to 0 and ignored by the receiver.
 
-**FileAttributes:** A 32-bit, unsigned integer that indicates [**file attributes**](#gt_file-attribute), as specified in [MS-FSCC](#Section_3.1.1.1) section 2.6.
+**FileAttributes:** A 32-bit, unsigned integer that indicates [**file attributes**](#gt_file-attribute), as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.6.
 
 **FileVersionNumber:** A 32-bit, unsigned integer that indicates the [**file version number**](#gt_file-version-number).
 
@@ -1207,7 +1207,7 @@ The types of replication command packets are listed in the following table along
 | CMD_RETRY_FETCH (0x244) | COMM_BLOCK_SIZE COMM_FILE_OFFSET COMM_CO_GUID COMM_CO_SEQUENCE_NUMBER | To inform the downstream partner that the request for the staging file data cannot be fulfilled at this time and that the request SHOULD be retried at a later time. |
 | CMD_NEED_JOIN (0x121) | - | To inform the upstream partner that a Join operation is needed. |
 | CMD_START_JOIN (0x122) | - | To inform the downstream partner that a Join operation is starting. |
-| CMD_JOINING (0x130) | [COMM_VVECTOR](#Section_2.2.3.6.9) [COMM_JOIN_TIME](#Section_2.2.3.6.10) [COMM_REPLICA_VERSION_GUID](#Section_2.2.3.6.5) [COMM_COMPRESSION_GUID](#Section_2.2.3.6.12) | To send a version vector to an upstream partner. |
+| CMD_JOINING (0x130) | [COMM_VVECTOR](#Section_2.2.3.6.9) [COMM_JOIN_TIME](#Section_2.2.3.6.10) [COMM_REPLICA_VERSION_GUID](#Section_2.2.3.6.11) [COMM_COMPRESSION_GUID](#Section_2.2.3.6.12) | To send a version vector to an upstream partner. |
 | CMD_JOINED (0x128) | - | To inform the downstream partner that Join is successful. |
 | CMD_UNJOIN_REMOTE (0x148) | - | On completion of a VVJ on a connection, this command causes the upstream partner to disconnect the connection so that it can be torn down. |
 | CMD_VVJOIN_DONE (0x136) | - | To inform the downstream partner that all change orders are sent out during Initial Sync. |
@@ -1323,7 +1323,7 @@ ULONG Data;
 
 *PCOMM_BOP;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0001.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0001.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000004.
 
@@ -1346,7 +1346,7 @@ ULONG Data;
 
 *PCOMM_COMMAND;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0002.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0002.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000004.
 
@@ -1390,7 +1390,7 @@ wchar_t Name[];
 
 *PCOMM_TO;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0003.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0003.
 
 **Length:** A 32-bit, unsigned integer that indicates the length, in bytes, of the COMM_TO packet element data following the Length field.
 
@@ -1425,7 +1425,7 @@ wchar_t Name[];
 
 *PCOMM_FROM;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0004.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0004.
 
 **Length:** A 32-bit, unsigned integer that indicates the length, in bytes, of the data following the Length field.
 
@@ -1460,7 +1460,7 @@ wchar_t Name[];
 
 *PCOMM_REPLICA;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0005.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0005.
 
 **Length:** A 32-bit, unsigned integer that indicates the length, in bytes, of the data following the Length field.
 
@@ -1495,7 +1495,7 @@ wchar_t Name[];
 
 *PCOMM_CXTION;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0008.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0008.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field.
 
@@ -1526,7 +1526,7 @@ GUID Data;
 
 *PCOMM_JOIN_GUID;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0006.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0006.
 
 **Length:** A 32-bit, unsigned integer that indicates the length, in bytes, of the data following the Length field. MUST be 0x00000014.
 
@@ -1551,7 +1551,7 @@ ULONGLONG Data;
 
 *PCOMM_LAST_JOIN_TIME;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0012.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0012.
 
 **Length:** A 32-bit, unsigned integer that indicates the length, in bytes, of the data following the Length field. MUST be 0x00000008.
 
@@ -1576,7 +1576,7 @@ GVSN Data;
 
 *PCOMM_VVECTOR;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0007.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0007.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x0000001C.
 
@@ -1603,7 +1603,7 @@ FILETIME Data;
 
 *PCOMM_JOIN_TIME;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0011.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0011.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x0000000C.
 
@@ -1630,7 +1630,7 @@ GUID Data;
 
 *PCOMM_REPLICA_VERSION_GUID;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0014.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0014.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000014.
 
@@ -1655,7 +1655,7 @@ GUID Data;
 
 *PCOMM_COMPRESSION_GUID;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0018.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0018.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000010.
 
@@ -1680,7 +1680,7 @@ UCHAR Data[];
 
 *PCOMM_BLOCK;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0009.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0009.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be set to the sum of 4 and the length of the Data field.
 
@@ -1705,7 +1705,7 @@ ULONGLONG Data;
 
 *PCOMM_BLOCK_SIZE;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x000A.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x000A.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000008.
 
@@ -1728,7 +1728,7 @@ ULONGLONG Data;
 
 *PCOMM_FILE_SIZE;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x000B.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x000B.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000008.
 
@@ -1751,7 +1751,7 @@ ULONGLONG Data;
 
 *PCOMM_FILE_OFFSET;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x000C.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x000C.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000008.
 
@@ -1776,7 +1776,7 @@ GVSN Data;
 
 *PCOMM_GVSN;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x000E.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x000E.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x0000001C.
 
@@ -1803,7 +1803,7 @@ GUID Data;
 
 *PCOMM_CO_GUID;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x000F.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x000F.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000014.
 
@@ -1828,7 +1828,7 @@ ULONG Data;
 
 *PCOMM_CO_SEQUENCE_NUMBER;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0010.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0010.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000004.
 
@@ -1853,7 +1853,7 @@ CHANGE_ORDER_COMMAND Data;
 
 *PCOMM_REMOTE_CO;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x000D.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x000D.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x0000031C.
 
@@ -1882,7 +1882,7 @@ CO_RECORD_EXTENSION_WIN2K Data;
 
 *PCOMM_CO_EXT_WIN2K;
 
-**CommType:** A 16-bit, unsigned integer that specifies the type of this [COMM_PACKET](#Section_4.3) element. MUST be 0x0016.
+**CommType:** A 16-bit, unsigned integer that specifies the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be 0x0016.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x0000002C.
 
@@ -1907,7 +1907,7 @@ CHANGE_ORDER_RECORD_EXTENSION Data;
 
 *PCOMM_CO_EXTENSION_2;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST set to 0x0017.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST set to 0x0017.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be set to the **FieldSize** member of the [CHANGE_ORDER_RECORD_EXTENSION](#Section_2.2.3.4) structure, which is 0x00000048 (72 bytes).
 
@@ -1930,7 +1930,7 @@ ULONG Data;
 
 *PCOMM_EOP;
 
-**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_4.3) element. MUST be set to 0x0013.
+**CommType:** A 16-bit, unsigned integer that indicates the type of this [COMM_PACKET](#Section_2.2.3.5) element. MUST be set to 0x0013.
 
 **Length:** A 32-bit, unsigned integer that indicates the length in bytes of the data following the Length field. MUST be 0x00000004.
 
@@ -2100,7 +2100,7 @@ The following field specifications in this section define the usage of the Minor
 
 **NotUsed:** Not used. MUST be 0. MUST be ignored on receipt.
 
-**Attributes:** A structure of type FILE_NETWORK_OPEN_INFORMATION that describes the [**file**](#gt_file), as specified in [MS-FSCC](#Section_3.1.1.1) section 2.4.33, for the definition of this structure. This field exists in all versions of the staging file.
+**Attributes:** A structure of type FILE_NETWORK_OPEN_INFORMATION that describes the [**file**](#gt_file), as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.33, for the definition of this structure. This field exists in all versions of the staging file.
 
 **ChangeOrderCommand:** A structure of type [CHANGE_ORDER_COMMAND](#Section_2.2.3.2) that contains a copy of the [**change order**](#gt_change-order) that was used to generate this staging file. The **ChangeOrderCommand.Extension** member is always set to NULL. This field exists in all versions of the staging file.
 
@@ -3036,7 +3036,7 @@ When doing [**initial sync**](#gt_initial-sync) for the [**replica set**](#gt_re
 
 - FRS forms a list of connections to upstream partners in order of the connection priority stored in the AD connection object (see section 2.3.1.6).
 - For every connection in a given priority class (see the following table), FRS sends a NEED_JOIN request to the upstream partner. For more details on [**connection joining**](#gt_join), see section [3.3.4.6](#Section_3.3.4.6).
-- A downstream partner can only perform a VVJoin with a single upstream partner at a time. Once an upstream partner responds to an FRS request, the connections to all other upstream partners are paused to prevent VVJoins from proceeding on those connections. On successful completion of the VVJoin on a connection, the connection state never goes back to initial sync. If the VVJoin failed (that is, if the partner goes offline), the connection is returned back to the list and the logic goes back to connection selection, and then performs a VVJoin again on the newly selected connection. For more details on how files and folders are replicated out to partners during initial sync, see section [3.3.4.4.1](#Section_3.3.4.4.11).
+- A downstream partner can only perform a VVJoin with a single upstream partner at a time. Once an upstream partner responds to an FRS request, the connections to all other upstream partners are paused to prevent VVJoins from proceeding on those connections. On successful completion of the VVJoin on a connection, the connection state never goes back to initial sync. If the VVJoin failed (that is, if the partner goes offline), the connection is returned back to the list and the logic goes back to connection selection, and then performs a VVJoin again on the newly selected connection. For more details on how files and folders are replicated out to partners during initial sync, see section [3.3.4.4.1](#Section_3.3.4.4.1).
 - The replica set leaves the Seeding state and becomes Online only after it has successfully completed a VVJoin with each of its upstream partners.
 FRS performs initial VVJoin with one [**partner**](#gt_partner) at a time. The sequence depends on the priority class of the upstream partner. *Next class* in the table below means the class with a larger priority value (plus 1). The priority classes and their meanings follow.
 
@@ -3156,13 +3156,13 @@ Methods in RPC Opnum Order
 | Opnum1NotUsedOnWire | Opnum: 1 |
 | Opnum2NotUsedOnWire | Opnum: 2 |
 | Opnum3NotUsedOnWire | Opnum: 3 |
-| [NtFrsApi_Rpc_Set_DsPollingIntervalW](#Section_1.7.1) | Adjusts the interval at which [**Active Directory**](#gt_active-directory) is polled for updates unless both *LongInterval* and *ShortInterval* are 0, and then MUST initiate a polling cycle. Opnum: 4 |
-| [NtFrsApi_Rpc_Get_DsPollingIntervalW](#Section_1.7.1) | Returns the current Active Directory polling intervals. Opnum: 5 |
+| [NtFrsApi_Rpc_Set_DsPollingIntervalW](#Section_3.2.4.1) | Adjusts the interval at which [**Active Directory**](#gt_active-directory) is polled for updates unless both *LongInterval* and *ShortInterval* are 0, and then MUST initiate a polling cycle. Opnum: 4 |
+| [NtFrsApi_Rpc_Get_DsPollingIntervalW](#Section_3.2.4.2) | Returns the current Active Directory polling intervals. Opnum: 5 |
 | Opnum6NotUsedOnWire | Opnum: 6 |
-| [NtFrsApi_Rpc_InfoW](#Section_1.7.1) | Returns internal information about FRS. Opnum: 7 |
+| [NtFrsApi_Rpc_InfoW](#Section_3.2.4.3) | Returns internal information about FRS. Opnum: 7 |
 | NtFrsApi_Rpc_IsPathReplicated | Method not used by FRS. Opnum: 8 |
-| [NtFrsApi_Rpc_WriterCommand](#Section_1.7.1) | Deactivates or reactivates the replication of the specified Replica Set. Opnum: 9 |
-| [NtFrsApi_Rpc_ForceReplication](#Section_1.7.1) | Triggers replication on the connection even if the [**schedule**](#gt_schedule) is off. Opnum: 10 |
+| [NtFrsApi_Rpc_WriterCommand](#Section_3.2.4.5) | Deactivates or reactivates the replication of the specified Replica Set. Opnum: 9 |
+| [NtFrsApi_Rpc_ForceReplication](#Section_3.2.4.6) | Triggers replication on the connection even if the [**schedule**](#gt_schedule) is off. Opnum: 10 |
 
 All methods MUST NOT throw exceptions.
 
@@ -3237,7 +3237,7 @@ unsigned long NtFrsApi_Rpc_Get_DsPollingIntervalW(
 
 **Handle:** Binding handle obtained when the [**partner**](#gt_partner) authenticates with the [**file replication service**](#gt_file-replication-service-frs).
 
-**Interval:** Current interval in minutes, which MUST be the same value as either LongInterval or ShortInterval (see section [3.1.2](#Section_3.2.2)).
+**Interval:** Current interval in minutes, which MUST be the same value as either LongInterval or ShortInterval (see section [3.1.2](#Section_3.1.2)).
 
 **LongInterval:** Long interval in minutes.
 
@@ -3340,7 +3340,7 @@ unsigned long NtFrsApi_Rpc_IsPathReplicated(
 | 0x00000000 | Indicates any [**replica set**](#gt_replica-set). |
 | FRS_RSTYPE_ENTERPRISE_SYSVOL 0x00000001 | Indicates the replica set for the enterprise [**system volume (SYSVOL)**](#gt_system-volume-sysvol). |
 | FRS_RSTYPE_DOMAIN_SYSVOL 0x00000002 | Indicates the replica set for the domain SYSVOL. |
-| FRS_RSTYPE_DFS 0x00000003 | Indicates the replica set for the [**distributed file system**](#gt_distributed-file-system-dfs), as specified in [MS-DFSNM](#Section_3.1.1.1). |
+| FRS_RSTYPE_DFS 0x00000003 | Indicates the replica set for the [**distributed file system**](#gt_distributed-file-system-dfs), as specified in [MS-DFSNM](../MS-DFSNM/MS-DFSNM.md). |
 | FRS_RSTYPE_OTHER 0x00000004 | Indicates none of the previous types. |
 
 **Replicated:** Boolean value that indicates if the replica set is replicated by the [**domain controller (DC)**](#gt_domain-controller-dc). The value MUST be one of the following.
@@ -3512,7 +3512,7 @@ Replication schedules MUST be stored in Coordinated Universal Time (UTC).
 <a id="Section_3.3.2.1.1"></a>
 ##### 3.3.2.1.1 SYSVOL Connection ScheduleTimer
 
-[**FRS**](#gt_file-replication-service-frs) MUST replicate [**SYSVOL**](#gt_system-volume-sysvol) using the same intra-site connection objects and [**schedule**](#gt_schedule) (section [2.3.2.4](../MS-DRSR/MS-DRSR.md)) built by the DRSR, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md), for [**Active Directory replication**](#gt_active-directory-replication).
+[**FRS**](#gt_file-replication-service-frs) MUST replicate [**SYSVOL**](#gt_system-volume-sysvol) using the same intra-site connection objects and [**schedule**](#gt_schedule) (section [2.3.2.4](#Section_2.3.2.4)) built by the DRSR, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md), for [**Active Directory replication**](#gt_active-directory-replication).
 
 FRS uses two types of replication schedules for SYSVOL:
 
@@ -3574,7 +3574,7 @@ This section specifies the common details for these six types of changes.
 
 For each type of change, the upstream partner MUST call FrsRpcSendCommPkt to send a COMM_PACKET object to a downstream partner on each outbound connection.
 
-The COMM_PACKET object MUST be constructed as specified in section [2.2.3.5](#Section_4.3) with the following values.
+The COMM_PACKET object MUST be constructed as specified in section [2.2.3.5](#Section_2.2.3.5) with the following values.
 
 **COMM_BOP**: MUST be 0.
 
@@ -3608,7 +3608,7 @@ The COMM_PACKET object MUST be constructed as specified in section [2.2.3.5](#Se
 - **IFlags**: Specified in sections 3.3.4.2 through 3.3.4.6.
 - **ContentCmd**: Specified in sections 3.3.4.2 through 3.3.4.6.
 - **LocationCmd**: Specified in sections 3.3.4.2 through 3.3.4.6.
-- **FileAttributes**: File attributes, as specified in [MS-FSCC](#Section_3.1.1.1).
+- **FileAttributes**: File attributes, as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md).
 - **FileVersionNumber**: The number of times that this file is closed after being modified. It is used in conflict resolution.
 - **PartnerAckSeqNumber**: MUST be the same as SequenceNumber.
 - **FileSize**: For files, MUST be the file size. For folders, it MUST be 0.<71>
@@ -3923,7 +3923,7 @@ unsigned long FrsRpcSendCommPkt(
 
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
-FRS uses FrsRpcSendCommPkt to send [COMM_PACKET](#Section_4.3) objects (see section 2.2.3.5) between [**replica members**](#gt_replica-member-frs-replica) to replicate files and folders inside a Replica Set. See sections [4.1](#Section_4.1) and [4.2](#Section_4.2).
+FRS uses FrsRpcSendCommPkt to send [COMM_PACKET](#Section_2.2.3.5) objects (see section 2.2.3.5) between [**replica members**](#gt_replica-member-frs-replica) to replicate files and folders inside a Replica Set. See sections [4.1](#Section_4.1) and [4.2](#Section_4.2).
 
 In the following section, these two sentences have the same meaning:
 
@@ -3999,7 +3999,7 @@ COMM_JOIN_GUID MUST be all 0 for new connection.
 
 COMM_LAST_JOIN_TIME MUST be 1.
 
-Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.11).
+Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.1).
 
 See sections [4.1](#Section_4.1) and [4.4.1](#Section_4.4.1) for examples of the use of this command.
 
@@ -4022,7 +4022,7 @@ COMM_REPLICA_VERSION_GUID MUST be the unique GUID that is generated for the loca
 
 COMM_COMPRESSION_GUID MUST be the unique GUID (see section [2.2.3.6.12](#Section_2.2.3.6.12)).
 
-Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.11).
+Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.1).
 
 See sections [4.1](#Section_4.1) and [4.4.2](#Section_4.4.2) for examples of the use of this command.
 
@@ -4050,7 +4050,7 @@ The upstream partner MUST answer the connection session establishment request wi
 - COMM_COMMAND MUST be CMD_JOINED (0x128).
 - COMM_JOIN_GUID MUST be P_IN.COMM_JOIN_GUID.
 - COMM_LAST_JOIN_TIME MUST be the current time.
-- Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.11).
+- Other elements are specified in section [3.3.4.4.1](#Section_3.3.4.4.1).
 After the CMD_JOINED packet is sent:
 
 - If a connection VVJoin needs to be performed, FRS MUST go through the process specified in the following section.
@@ -4083,7 +4083,7 @@ The change order MUST be constructed as follows.
 
 **LocationCmd**: Specified in sections Initial Syncing a File and Initial Syncing a Folder.
 
-**FileAttributes**: [**File attributes**](#gt_file-attribute), as specified in [MS-FSCC](#Section_3.1.1.1).
+**FileAttributes**: [**File attributes**](#gt_file-attribute), as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md).
 
 **FileVersionNumber**: The number of times that this file is closed after being modified. It is used in conflict resolution (see section COMM_COMMAND Is CMD_JOINED).
 
@@ -4312,7 +4312,7 @@ Both CMD_REMOTE_CO_DONE and CMD_SEND_STAGE MUST include a change order in their 
 <a id="Section_3.3.4.4.6.1"></a>
 ###### 3.3.4.4.6.1 Requesting a Staging File
 
-On receiving CMD_REMOTE_CO, if the [**downstream partner**](#gt_downstream-partner) determines that a [**staging file**](#gt_staging-file) is needed (see section [3.3.4.4.6](#Section_3.3.4.4.6.2)), the downstream partner MUST request the staging file by CMD_SEND_STAGE packet through [FrsRpcSendCommPkt](#Section_3.3.4.4).
+On receiving CMD_REMOTE_CO, if the [**downstream partner**](#gt_downstream-partner) determines that a [**staging file**](#gt_staging-file) is needed (see section [3.3.4.4.6](#Section_3.3.4.4.6)), the downstream partner MUST request the staging file by CMD_SEND_STAGE packet through [FrsRpcSendCommPkt](#Section_3.3.4.4).
 
 The server MUST construct the CMD_SEND_STAGE packet as follows.
 
@@ -4598,7 +4598,7 @@ If one of the above tests fails, the server MUST NOT reply to this call. If all 
 - DataHigh MUST be set to 0.
 - DataLow MUST be set to 0x400.
 - Compression MUST be set to 0.
-- A structure of type FILE_NETWORK_OPEN_INFORMATION that describes the file or folder. For the definition of this structure, see [MS-FSCC](#Section_3.1.1.1) section 2.4.33.
+- A structure of type FILE_NETWORK_OPEN_INFORMATION that describes the file or folder. For the definition of this structure, see [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.4.33.
 - ChangeOrderCommand MUST be copied from the CMD_SEND_STAGE, except for the following fields:
 - Flags MUST bitwise OR CO_FLAG_LOCALCO if the [**change order**](#gt_change-order) originates locally on the upstream partner.
 - State:
@@ -4809,7 +4809,7 @@ Since all of the RPC methods in this interface MUST NOT be called remotely, thes
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-[**FRS**](#gt_file-replication-service-frs) uses FrsRpcSendCommPkt (see section [3.3.4.4](#Section_3.3.4.4)) to send COMM_PACKET (see section [2.2.3.5](#Section_4.3)) between [**replica members**](#gt_replica-member-frs-replica) to replicate files and folders inside a [**replica set**](#gt_replica-set).
+[**FRS**](#gt_file-replication-service-frs) uses FrsRpcSendCommPkt (see section [3.3.4.4](#Section_3.3.4.4)) to send COMM_PACKET (see section [2.2.3.5](#Section_2.2.3.5)) between [**replica members**](#gt_replica-member-frs-replica) to replicate files and folders inside a [**replica set**](#gt_replica-set).
 
 If machine A calls the FrsRpcSendCommPkt method on machine B, in the following sections, this is called: Machine A sends COMM_PACKET packet to machine B.
 
@@ -5028,7 +5028,7 @@ fe 56 80 ef 12 00 08 00 00 00 9c 43 1d 03 ef 84 c6 01
 
 13 00 04 00 00 00 ff ff ff ff
 
-In CommPkt->Pkt (see section [2.2.3.5](#Section_4.3)), COMM_COMMAND (see section [2.2.3.6.2](#Section_2.2.3.6.2)) is:
+In CommPkt->Pkt (see section [2.2.3.5](#Section_2.2.3.5)), COMM_COMMAND (see section [2.2.3.6.2](#Section_2.2.3.6.2)) is:
 
 02 00 04 00 00 00 22 01 00 00
 
@@ -5175,7 +5175,7 @@ Steps 5 through 8 are repeated until all the files are replicated from PDC to re
 
 - Once all of the change orders are sent out, the PDC sends out CMD_VVJOIN_DONE.
 - Replica DC sends out CMD_UNJOIN_REMOTE. At this moment, the PDC can still send out CMD_RECEIVING_STAGE to replica DC. But there is no more CMD_REMOTE_CO.
-**Note** All symbols, such as CMD_NEED_JOIN, are specified in section [3](#Section_1.3).
+**Note** All symbols, such as CMD_NEED_JOIN, are specified in section [3](#Section_3).
 
 <a id="Section_4.4.1"></a>
 ### 4.4.1 Replica DC Sends Out CMD_NEED_JOIN to PDC
@@ -14227,7 +14227,7 @@ The following sections specify security considerations for implementers of the F
 | Security parameter | Section |
 | --- | --- |
 | Transport security | [2.1](#Section_2.1) |
-| ACLs on [**Active Directory**](#gt_active-directory) objects | [3.1.1](#Section_3.4) |
+| ACLs on [**Active Directory**](#gt_active-directory) objects | [3.1.1](#Section_3.1.1) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
@@ -14552,7 +14552,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.3: Windows FRS uses File Object ID as the ID of the files and folders inside a replica set (as specified in [MS-FSCC](#Section_3.1.1.1) section 2.1.3). To get the object ID, FRS first checks if the file or folder already has an object ID. If an object ID does not exist, FRS creates a new [**GUID**](#gt_globally-unique-identifier-guid) and saves it on the file or folder. If an object ID already exists, FRS can either use it or reset it to a new value if an object ID is already set on a remote machine for the same file.
+<1> Section 1.3: Windows FRS uses File Object ID as the ID of the files and folders inside a replica set (as specified in [MS-FSCC](../MS-FSCC/MS-FSCC.md) section 2.1.3). To get the object ID, FRS first checks if the file or folder already has an object ID. If an object ID does not exist, FRS creates a new [**GUID**](#gt_globally-unique-identifier-guid) and saves it on the file or folder. If an object ID already exists, FRS can either use it or reset it to a new value if an object ID is already set on a remote machine for the same file.
 
 <2> Section 1.5: The Windows implementation of [**FRS**](#gt_file-replication-service-frs) works with [**Active Directory**](#gt_active-directory), as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 

@@ -221,11 +221,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](../MS-GPOL/MS-GPOL.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](../MS-RRP/MS-RRP.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SCMR] Microsoft Corporation, "[Service Control Manager Remote Protocol](../MS-SCMR/MS-SCMR.md)".
 
@@ -406,12 +406,12 @@ The protocol further restricts the values that can be assigned to HeaderValue. H
 | Security Log | MUST contain settings that pertain to maximum size, retention policy, and so on for the security log. For more details, see section 2.2.3. |
 | Application Log | MUST contain settings that pertain to maximum size, retention policy, and so on for the application log. For more details, see section 2.2.3. |
 | [Event Audit](#Section_2.2.4) | MUST contain settings that pertain to audit policy. |
-| [Registry Values](#Section_3.2.5.7) | MUST contain registry values to be configured. |
+| [Registry Values](#Section_2.2.5) | MUST contain registry values to be configured. |
 | [Privilege Rights](#Section_2.2.6) | MUST contain a list of privileges to be assigned to specific accounts. |
 | [Service General Setting](#Section_2.2.8) | MUST contain configuration settings that pertain to services. |
 | [Registry Keys](#Section_2.2.7) | MUST contain a list of registry keys and their corresponding security information to be applied. |
 | [File Security](#Section_2.2.9) | MUST contain a list of files, folders, and their corresponding security information to be applied. |
-| [Group Membership](#Section_3.2.5.12) | MUST contain group membership information, for example, which users are part of what group. |
+| [Group Membership](#Section_2.2.10) | MUST contain group membership information, for example, which users are part of what group. |
 
 **Note** The plug-in that implements the client side of the protocol documented here does not understand the semantics of any of the (name, value) pairs it handles. Its operation is to set those named values in client-side stores indicated by the HeaderValue. When that client-side store is the Registry, the plug-in does not need to know the list of possible names for (name, value) pairs. This implies that new security settings stored in registry keys can be created and populated by GP. For other stores, the plug-in maintains a precompiled list of mappings from setting name to the application programming interface (API) used to apply the setting.
 
@@ -593,7 +593,7 @@ Key = "AuditSystemEvents" / "AuditLogonEvents" / "AuditPrivilegeUse" /
 
 Value = 1*DIGIT
 
-The following table provides an explanation for the valid keys as specified in [MS-LSAD](#Section_5) section 2.2.4.20.
+The following table provides an explanation for the valid keys as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.4.20.
 
 **Note** All numerical values are decimal unless explicitly specified otherwise, or unless preceded by 0x.
 
@@ -878,7 +878,7 @@ The following table explains each of the settings listed.
 <a id="Section_2.2.11"></a>
 ### 2.2.11 User Account Control
 
-This section defines settings that enable the administrator to configure the behavior of the User Account Control feature. For details on how the settings listed in this section SHOULD<6> be defined, see sections [2.2.5](#Section_3.2.5.7) and [2.2.7](#Section_2.2.7).
+This section defines settings that enable the administrator to configure the behavior of the User Account Control feature. For details on how the settings listed in this section SHOULD<6> be defined, see sections [2.2.5](#Section_2.2.5) and [2.2.7](#Section_2.2.7).
 
 <a id="Section_2.2.11.1"></a>
 #### 2.2.11.1 FilterAdministratorToken
@@ -1048,7 +1048,7 @@ Higher-layer triggered events occur in the following situations:
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The administrative-side plug-in reads extension-specific data from the remote storage location, as specified in section [3.2.5](#Section_1.3), steps 1-3. The administrative-side plug-in passes that information to an implementation-specific tool that provides a graphical user interface to display the current settings to an administrator.
+The administrative-side plug-in reads extension-specific data from the remote storage location, as specified in section [3.2.5](#Section_3.2.5), steps 1-3. The administrative-side plug-in passes that information to an implementation-specific tool that provides a graphical user interface to display the current settings to an administrator.
 
 If the administrator makes any changes to the existing configuration, the administrative-side plug-in writes the extension-specific configuration data to the remote storage location, as specified in section [3.1.5.2](#Section_3.1.5.2), Update Policy.
 
@@ -1057,7 +1057,7 @@ After every creation, modification, or deletion that affects the GptTmpl.inf fil
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Load Policy
 
-A Load Policy event occurs when an administrator initiates the administrative-side plug-in. When the administrative-side plug-in starts, it MUST get a scoped [**GPO**](#gt_group-policy-object-gpo) path from the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. The plug-in MUST attempt to retrieve any existing GptTmpl.inf file from "<gpo path>\Machine\Microsoft\Windows NT\SecEdit\", where "<gpo path>" is the GPO path. File reads MUST be performed, as specified in section [3.2.5](#Section_1.3), steps 1-3. If the attempt to read the file fails, an error MUST be logged and processing stopped.
+A Load Policy event occurs when an administrator initiates the administrative-side plug-in. When the administrative-side plug-in starts, it MUST get a scoped [**GPO**](#gt_group-policy-object-gpo) path from the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.4. The plug-in MUST attempt to retrieve any existing GptTmpl.inf file from "<gpo path>\Machine\Microsoft\Windows NT\SecEdit\", where "<gpo path>" is the GPO path. File reads MUST be performed, as specified in section [3.2.5](#Section_3.2.5), steps 1-3. If the attempt to read the file fails, an error MUST be logged and processing stopped.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Update Policy
@@ -1109,7 +1109,7 @@ This section defines a conceptual model of possible data organization that an im
 
 This protocol sets shared Abstract Data Model variables that are defined in other protocol documents. The normative definition for each shared variable is given in the corresponding document as shown here:
 
-This protocol sets the following abstract data variables shared from [MS-LSAD](#Section_5):
+This protocol sets the following abstract data variables shared from [MS-LSAD](../MS-LSAD/MS-LSAD.md):
 
 - MaxServiceTicketAge ([MS-LSAD] section 3.1.1.1)
 - MaxTicketAge ([MS-LSAD] section 3.1.1.1)
@@ -1129,7 +1129,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-When invoked by the [**Group Policy**](#gt_group-policy) framework with a list of one or more applicable [**GPOs**](#gt_group-policy-object-gpo), the client-side plug-in MUST do the following: locate all the physical [**security policies**](#gt_security-policy) within those GPOs, copy the policies to the local machine, read the policies, and apply them as specified in section [3.2.5](#Section_1.3).
+When invoked by the [**Group Policy**](#gt_group-policy) framework with a list of one or more applicable [**GPOs**](#gt_group-policy-object-gpo), the client-side plug-in MUST do the following: locate all the physical [**security policies**](#gt_security-policy) within those GPOs, copy the policies to the local machine, read the policies, and apply them as specified in section [3.2.5](#Section_3.2.5).
 
 Locating physical security policy files MUST be done by using the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.5.1, and the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search protocol, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.5. The policy files SHOULD<9> be copied and read by using standard Copy and Read functions in the Server Message Block (SMB) Versions 2 and 3 Protocol as specified in [MS-SMB2](../MS-SMB2/MS-SMB2.md).
 
@@ -1141,7 +1141,7 @@ The client-side plug-in implements one higher-layer triggered event: Process Gro
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Process Group Policy
 
-The client-side plug-in implements the Process Group Policy abstract event interface, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1. The client-side plug-in does not make use of the **Deleted GPO list**, **SessionFlags**, or **UserToken** arguments. When the event is triggered, the client-side plug-in MUST take the actions described in section [3.2.5](#Section_1.3).
+The client-side plug-in implements the Process Group Policy abstract event interface, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 3.2.4.1. The client-side plug-in does not make use of the **Deleted GPO list**, **SessionFlags**, or **UserToken** arguments. When the event is triggered, the client-side plug-in MUST take the actions described in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -1167,7 +1167,7 @@ When using SMB to open or read files as described in the preceding steps, the cl
 
 The client-side plug-in MUST parse the file according to the format specified in section 2.2. If the file does not conform to that format, the entire configuration operation MUST be ignored. If the file does conform to that format, the settings MUST be applied to the corresponding security parameters on the system.
 
-In applying security policies, several Group Policy: Security Protocol Extension setting names correspond to Abstract Data Model shared variables for which the normative definition is provided in other documents (see section [3.2.1](#Section_3.1.1).) The setting name and the corresponding Abstract Data Model shared variables are provided in the following tables. For each such setting that is read from a GPO .inf file, the client-side plug-in MUST set the value of the ADM variable in the right-hand column of the table to the value for the setting in the left-hand column.
+In applying security policies, several Group Policy: Security Protocol Extension setting names correspond to Abstract Data Model shared variables for which the normative definition is provided in other documents (see section [3.2.1](#Section_3.2.1).) The setting name and the corresponding Abstract Data Model shared variables are provided in the following tables. For each such setting that is read from a GPO .inf file, the client-side plug-in MUST set the value of the ADM variable in the right-hand column of the table to the value for the setting in the left-hand column.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Password Policies
@@ -1175,7 +1175,7 @@ In applying security policies, several Group Policy: Security Protocol Extension
 Password policies are set by doing the following:
 
 - If the setting value for the settings key is outside the range of valid values specified in the corresponding Explanation column in the table in section [2.2.1.1](#Section_2.2.1.1), the client SHOULD quit processing Password Policies and log an error.
-- Performing the external behavior consistent with locally invoking **SamrQueryInformationDomain** ([MS-SAMR](#Section_5) section 3.1.5.5.2) to obtain the existing domain password information.
+- Performing the external behavior consistent with locally invoking **SamrQueryInformationDomain** ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.5.2) to obtain the existing domain password information.
 - The *DomainHandle* MUST be set to a Domain handle opened by performing external behavior consistent with locally invoking **SamrOpenDomain** ([MS-SAMR] section 3.1.5.1.5) to obtain a handle to the domain of the current machine.
 - The *DomainInformationClass* MUST be set to DomainPasswordInformation.
 - The PSAMPR_DOMAIN_INFO_BUFFER MUST be a pointer to a PSAMPR_DOMAIN_INFO_BUFFER containing allocated memory sufficient to contain a **DOMAIN_PASSWORD_INFORMATION** structure.
@@ -1212,7 +1212,7 @@ Account Lockout policies are set by doing the following:
 
 If the Key name in the [**GPO**](#gt_group-policy-object-gpo) inf file is "**LockoutBadCount**", "**ResetLockoutCount**", or "**LockoutDuration**":
 
-- Perform external behavior consistent with locally invoking **SamrQueryInformationDomain** ([MS-SAMR](#Section_5) section 3.1.5.5.2) to obtain the existing domain account lockout information.
+- Perform external behavior consistent with locally invoking **SamrQueryInformationDomain** ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.5.2) to obtain the existing domain account lockout information.
 - The *DomainHandle* MUST be set to a Domain handle opened by performing external behavior consistent with locally invoking **SamrOpenDomain** ([MS-SAMR] section 3.1.5.1.5) to obtain a handle to the domain of the current machine.
 - The *DomainInformationClass* MUST be set to DomainLockoutInformation.
 - The PSAMPR_DOMAIN_INFO_BUFFER MUST be a pointer to a PSAMPR_DOMAIN_INFO_BUFFER containing allocated memory sufficient to contain a **SAMPR_DOMAIN_LOCKOUT_INFORMATION** structure ([MS-SAMR] section 2.2.3.15).
@@ -1256,13 +1256,13 @@ The *DomainInformation* MUST be a PSAMPR_DOMAIN_INFO_BUFFER containing a **DOMAI
 
 Local account policies are set by doing the following:
 
-If the key value is any value other than those listed as valid in the table in section [2.2.1.3](#Section_3.2.5.3), an error SHOULD be logged and the client SHOULD stop processing local account policies and log an error.
+If the key value is any value other than those listed as valid in the table in section [2.2.1.3](#Section_2.2.1.3), an error SHOULD be logged and the client SHOULD stop processing local account policies and log an error.
 
 If the value of the "value" element is not valid for the corresponding key value as specified in the table in section 2.2.1.3, an error SHOULD be logged and the client MUST stop processing local account policies.
 
 If the Key name is "LSAAnonymousNameLookup":
 
-- Perform external behavior consistent with locally invoking LsarQuerySecurityObject ([MS-LSAD](#Section_5) section 3.1.4.9.1).
+- Perform external behavior consistent with locally invoking LsarQuerySecurityObject ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.9.1).
 - The *PolicyHandle* MUST be set to a policy handle opened by performing external behavior consistent with locally invoking LsarOpenPolicy ([MS-LSAD] section 3.1.4.4.2) with DesiredAccess set to MAXIMUM_ALLOWED ([MS-LSAD] section 2.2.1.1.1).
 - The *SecurityInformation* MUST be set to DACL_SECURITY_INFORMATION ([MS-LSAD] section 2.2.1.3).
 - The *SecurityDescriptor* MUST be set to an address of a PLSAR_SR_SECURITY_DESCRIPTOR variable.
@@ -1272,7 +1272,7 @@ If the Key name is "LSAAnonymousNameLookup":
 - The *SecurityDescriptor* MUST be a pointer to an **LSAR_SR_SECURITY_DESCRIPTOR** structure in which the DACL ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.5) MUST be set to the DACL received from the LsarQuerySecurityObject method in step 1, with an added ACCESS_ALLOWED_ACE ([MS-DTYP] section 2.4.4.2) granting the Anonymous SID ([MS-DTYP] section 2.4.2.4) an access mask set to POLICY_LOOKUP_NAMES ([MS-LSAD] section 2.2.1.1.2).
 If the Key name is "**EnableAdminAccount**":
 
-- Perform external behavior consistent with locally invoking SamrQueryInformationUser ([MS-SAMR](#Section_5) section 3.1.5.5.6).
+- Perform external behavior consistent with locally invoking SamrQueryInformationUser ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.5.6).
 - The **UserHandle** MUST be set to a user handle obtained by performing external behavior consistent with locally invoking SamrOpenUser ([MS-SAMR] section 3.1.5.1.9) with the following parameters:
 - A *DesiredAccess* parameter of MAXIMUM_ALLOWED.
 - A *UserId* parameter of DOMAIN_USER_RID_ADMIN ([MS-SAMR] section 2.2.1.14).
@@ -1337,7 +1337,7 @@ Perform external behavior consistent with locally invoking SamrSetInformationUse
 
 If the Key value is any value other than those listed as valid in the table in section [2.2.2](#Section_2.2.2), the client MUST stop processing Kerberos policy settings and log an error.
 
-The existing Kerberos Policy MUST be retrieved by performing the external behavior consistent with locally invoking **LsarQueryDomainInformationPolicy** ([MS-LSAD](#Section_5) section 3.1.4.4.7).
+The existing Kerberos Policy MUST be retrieved by performing the external behavior consistent with locally invoking **LsarQueryDomainInformationPolicy** ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.7).
 
 - The *PolicyHandle* MUST be set to a policy handle opened by performing external behavior consistent with locally invoking **LsarOpenPolicy** ([MS-LSAD] section 3.1.4.4.2) with *DesiredAccess* set to MAXIMUM_ALLOWED ([MS-LSAD] section 2.2.1.1.1).
 - The *InformationClass* MUST be set to PolicyDomainKerberosTicketInformation ([MS-LSAD] section 2.2.4.15).
@@ -1378,11 +1378,11 @@ The registry values in the right column of the following table are set to the va
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Event Audit Policies
 
-If the DWORD registry value MACHINE\System\CurrentControlSet\Control\LSA\SCENoApplyLegacyAuditPolicy is set to 1 using the mechanism described in section [2.2.5](#Section_3.2.5.7), then the client-side plug-in MUST ignore any settings under the Event Audit Policies section and MUST NOT process them. If this registry value is set to 1, it indicates that the Advanced Audit Policies are present on the client.<10>
+If the DWORD registry value MACHINE\System\CurrentControlSet\Control\LSA\SCENoApplyLegacyAuditPolicy is set to 1 using the mechanism described in section [2.2.5](#Section_2.2.5), then the client-side plug-in MUST ignore any settings under the Event Audit Policies section and MUST NOT process them. If this registry value is set to 1, it indicates that the Advanced Audit Policies are present on the client.<10>
 
 The value of the key element MUST be one of the values specified in the table in section [2.2.4](#Section_2.2.4); otherwise, the client MUST log an error and stop processing Event Audit Policies. The value element MUST be an integer; otherwise, the client logs an error and stop processing Event Audit Policies.
 
-Settings in Event Audit Policies (section 2.2.4) MUST be set by performing the external behavior consistent with locally invoking LsarSetInformationPolicy (section 3.1.4.4.6) ([MS-LSAD](#Section_5) section 3.1.4.4.6).
+Settings in Event Audit Policies (section 2.2.4) MUST be set by performing the external behavior consistent with locally invoking LsarSetInformationPolicy (section 3.1.4.4.6) ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.6).
 
 - The *PolicyHandle* MUST be set to a policy handle opened by performing external behavior consistent with locally invoking LsarOpenPolicy (section 3.1.4.4.2) ([MS-LSAD] section 3.1.4.4.2).
 - The InformationClass MUST be set to PolicyAuditEventsInformation.
@@ -1412,7 +1412,7 @@ In addition, the value of each setting (section 2.2.4) is mapped to the values o
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Registry Values
 
-Settings in [Registry Values (section 2.2.5)](#Section_3.2.5.7) MUST be set by adding registry values.
+Settings in [Registry Values (section 2.2.5)](#Section_2.2.5) MUST be set by adding registry values.
 
 If the Key value is any value other than those listed as valid in the table in section 2.2.5, an error SHOULD be logged and the client MUST stop processing Registry Value settings.
 
@@ -1430,7 +1430,7 @@ Settings in [Privilege Rights (section 2.2.6)](#Section_2.2.6) MUST be set by 
 
 If a setting or value does not conform to the valid corresponding values as specified in section 2.2.6, the client SHOULD stop processing Privilege Rights settings.
 
-Privilege rights are added by performing the external behavior consistent with locally invoking LsarAddAccountRights ([MS-LSAD](#Section_5) section 3.1.4.5.11) for each SidEnt in a RightName setting.
+Privilege rights are added by performing the external behavior consistent with locally invoking LsarAddAccountRights ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.5.11) for each SidEnt in a RightName setting.
 
 - The *PolicyHandle* MUST be set to a policy handle opened by performing external behavior consistent with locally invoking LsarOpenPolicy ([MS-LSAD] section 3.1.4.4.2).
 - The *AccountSid* MUST be set to the value of SidEnt for the setting.
@@ -1550,7 +1550,7 @@ If PermPropagationMode is "2", the security descriptor **Control** field bit PD,
 
 Settings in Group Membership MUST be set by applying members and membership on a group for each setting.
 
-If a GroupNameMembers, GroupNameMemberOf, or the Value element value is not valid as specified in section [2.2.10](#Section_3.2.5.12), the client MUST stop processing Group Membership settings and log an error.
+If a GroupNameMembers, GroupNameMemberOf, or the Value element value is not valid as specified in section [2.2.10](#Section_2.2.10), the client MUST stop processing Group Membership settings and log an error.
 
 If the group specified by the Key (section 2.2.10) of the setting is a domain local, global, or universal group, then:
 
@@ -1563,7 +1563,7 @@ If the group specified by the Key (section 2.2.10) of the setting is a domain lo
 - modification:
 - **type**: member or memberOf.
 - **vals**: Distinguished name for the object specified by a SID or name in the Value (section 2.2.10) of the setting.
-- For local groups in the Values (section 2.2.10) of the setting, membership MUST be applied by performing external behavior consistent with locally invoking SamrAddMemberToGroup ([MS-SAMR](#Section_5) section 3.1.5.8.1) for each of the SIDs or names in the Value (section 2.2.10) in a setting:
+- For local groups in the Values (section 2.2.10) of the setting, membership MUST be applied by performing external behavior consistent with locally invoking SamrAddMemberToGroup ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.8.1) for each of the SIDs or names in the Value (section 2.2.10) in a setting:
 - The *GroupHandle* MUST be set to group handle opened by performing external behavior consistent with locally invoking SamrOpenGroup ([MS-SAMR] section 3.1.5.1.7) using the [**relative identifier (RID)**](#gt_relative-identifier-rid) of the group specified by the Value (section 2.2.10) of the setting.
 - The *MemberId* MUST be set to the RID of the object specified by the SID or name in the Key (section 2.2.10) of the setting.
 - The Attributes MUST be set to zero.
@@ -1577,7 +1577,7 @@ If the group specified by the Key (section 2.2.10) of the setting is a local gro
 
 Settings in [User Account Control (section 2.2.11)](#Section_2.2.11) MUST be set by adding a registry value for each setting value tuple (Key, Value, Type, Data.). If the Key, Value, Type, and Data values do not together conform to one of the valid User Account Control settings value tuples specified in section 2.2.11, the client SHOULD quit processing User Account Control settings and log an error.
 
-User Account Control settings are processed as specified in section [3.2.5.6](#Section_2.2.4), where:
+User Account Control settings are processed as specified in section [3.2.5.6](#Section_3.2.5.6), where:
 
 - The RegistryValueName is the specified Key value with a backslash and the specified Value element value appended to it.
 - The RegistryValueType is the Type value.
@@ -1760,12 +1760,12 @@ The ClearTextPassword flag, as specified in section [2.2.1.1](#Section_2.2.1.1),
 | Security Log | Defined in section 2.2.3. |
 | Application Log | Defined in section 2.2.3. |
 | Event Audit | Defined in section [2.2.4](#Section_2.2.4). |
-| Registry Values | Defined in section [2.2.5](#Section_3.2.5.7). |
+| Registry Values | Defined in section [2.2.5](#Section_2.2.5). |
 | Privilege Rights | Defined in section [2.2.6](#Section_2.2.6). |
 | Registry Key | Defined in section [2.2.7](#Section_2.2.7). |
 | Service General Setting | Defined in section [2.2.8](#Section_2.2.8). |
 | File Security | Defined in section [2.2.9](#Section_2.2.9). |
-| Group Membership | Defined in section [2.2.10](#Section_3.2.5.12). |
+| Group Membership | Defined in section [2.2.10](#Section_2.2.10). |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

@@ -117,7 +117,7 @@ This document uses the following terms:
 **access control list (ACL)**: A list of access control entries (ACEs) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_authenticated-user-identity"></a>
 **authenticated user identity**: The principal that is provided by the underlying protocol. See retrieval of client identity in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 3.2.3.4.2 and 3.3.3.4.3 for details.
@@ -144,7 +144,7 @@ This document uses the following terms:
 **device**: Any peripheral or part of a computer system that can send or receive data.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_2.1) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a domain controller (DC) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 <a id="gt_domain-name-system-dns"></a>
 **Domain Name System (DNS)**: A hierarchical, distributed database that contains mappings of domain names to various types of data, such as IP addresses. DNS enables the location of computers and services by user-friendly names, and it also enables the discovery of other information stored in the database.
@@ -311,11 +311,11 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-ADLS] Microsoft Corporation, "[Active Directory Lightweight Directory Services Schema](../MS-ADLS/MS-ADLS.md)".
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-BRWS] Microsoft Corporation, "[Common Internet File System (CIFS) Browser Protocol](../MS-BRWS/MS-BRWS.md)".
 
@@ -325,13 +325,13 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-EMFSPOOL] Microsoft Corporation, "[Enhanced Metafile Spool Format](../MS-EMFSPOOL/MS-EMFSPOOL.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_2.1)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
 [MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
 [MS-GPDPC] Microsoft Corporation, "[Group Policy: Deployed Printer Connections Extension](../MS-GPDPC/MS-GPDPC.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](../MS-GPOL/MS-GPOL.md)".
 
@@ -593,7 +593,7 @@ Figure 12: Redirectors routing data from a print client to the print spooler
 <a id="Section_2.1.2.5.4"></a>
 ##### 2.1.2.5.4 Enabling Print Queues to Be Discoverable
 
-To enable [**print queues**](#gt_print-queue) to be discoverable by [**print clients**](#gt_print-client), the Print Services system uses the [**Active Directory**](#gt_active-directory) system [MS-ADOD](#Section_2.1) to store and provide information about shared queues. Although a print client can contact a [**print server**](#gt_print-server) directly to discover the print queues on the print server, using the Active Directory system that is implemented on the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) server enables a print client to enumerate print queues on multiple print servers. Additionally, the Active Directory system isolates print clients from the requirement to locate print servers in the [**domain**](#gt_domain).
+To enable [**print queues**](#gt_print-queue) to be discoverable by [**print clients**](#gt_print-client), the Print Services system uses the [**Active Directory**](#gt_active-directory) system [MS-ADOD](../MS-ADOD/MS-ADOD.md) to store and provide information about shared queues. Although a print client can contact a [**print server**](#gt_print-server) directly to discover the print queues on the print server, using the Active Directory system that is implemented on the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) server enables a print client to enumerate print queues on multiple print servers. Additionally, the Active Directory system isolates print clients from the requirement to locate print servers in the [**domain**](#gt_domain).
 
 Print clients can request that print servers publish print queues to the Active Directory system through the Print System Remote Protocol [MS-RPRN](../MS-RPRN/MS-RPRN.md) and the Print System Asynchronous Remote Protocol [MS-PAR](../MS-PAR/MS-PAR.md). Print clients can then search for print queues in the Active Directory system by using LDAP. The details of the interactions between the Print Services system and the Active Directory system are described in [MS-RPRN] section 2.3. Print clients search the Active Directory system by using the mechanism described in [MS-RPRN] section 2.3.3.3.
 
@@ -774,7 +774,7 @@ Common Internet File System (CIFS) Browser Protocol [MS-BRWS](../MS-BRWS/MS-BRWS
 - Used for workgroup preconditions.
 The Print Services system member protocols [MS-RPRN], [MS-PAR], and [MS-PAN] are RPC-based and require RPC bindings between print servers and print clients to registered RPC endpoints. If a print client or print server is unable to register an RPC [**endpoint**](#gt_endpoint) or create RPC bindings, then Print Services, which are provided by the local print spooler, only enable the management and use of locally connected printers. Firewalls that are implemented on print clients or print servers are configured so that all ports that are required by member protocols are open for RPC-based communication, or at least open for SMB-based communication to support the Internet printing scenario by using IPP and the Web Point-and-Print Protocol.
 
-The Print Services system can run in a [**domain**](#gt_domain)-based network and a workgroup environment. Print Services require that File Share services be installed and enabled for Point-and Print-driver download and for SMB and Remote Administration Protocol support. On creation of a printer queue connection to a print server, the print client tries to copy the driver from the print server. For more information, see the use cases in sections [2.5.3.3](#Section_2.3) and [2.5.3.4](#Section_2.3). If copying the print driver fails, the print client tries, in turn, to locate:
+The Print Services system can run in a [**domain**](#gt_domain)-based network and a workgroup environment. Print Services require that File Share services be installed and enabled for Point-and Print-driver download and for SMB and Remote Administration Protocol support. On creation of a printer queue connection to a print server, the print client tries to copy the driver from the print server. For more information, see the use cases in sections [2.5.3.3](#Section_2.5.3.3) and [2.5.3.4](#Section_2.5.3.4). If copying the print driver fails, the print client tries, in turn, to locate:
 
 - Any available implementation-specific driver sources or repositories.<4>
 - The print client prompts the user to supply an appropriate [**printer driver**](#gt_printer-driver) from a disk, an Internet location, or other media.
@@ -782,7 +782,7 @@ If the print client cannot obtain a suitable printer driver from any of these so
 
 The Print Services system requires the CIFS Browser Protocol for workgroups. Availability of this protocol and the [**Active Directory**](#gt_active-directory) system is not determined at startup, but only on request. If neither the CIFS Browser Protocol nor the Active Directory system are available, a print client does not list any available shared print queues in the network; as a result, only local functionality of the [**print spooler**](#gt_print-spooler) is available unless the user of the print client knows the name of the print server and enters it manually.
 
-The Print Services system uses the Windows Update Services: Client Server Protocol [MS-WUSP](../MS-WUSP/MS-WUSP.md), if available, to find the most up-to-date or best matching printer drivers for a print queue connection. If Windows Update Services are unavailable, the Print Services system use other methods to find an appropriate printer driver. For more information, see the use cases in sections [2.5.3.2](#Section_2.1) and 2.5.3.3.
+The Print Services system uses the Windows Update Services: Client Server Protocol [MS-WUSP](../MS-WUSP/MS-WUSP.md), if available, to find the most up-to-date or best matching printer drivers for a print queue connection. If Windows Update Services are unavailable, the Print Services system use other methods to find an appropriate printer driver. For more information, see the use cases in sections [2.5.3.2](#Section_2.5.3.2) and 2.5.3.3.
 
 All member protocols can be used between print clients and print servers, depending on circumstances.
 
@@ -794,7 +794,7 @@ Any number of print servers and print clients can be operated in a domain-based 
 
 The Print Services system also depends on the following components and infrastructure:
 
-- The Windows Authentication Services system [MS-AUTHSOD](#Section_2.1).
+- The Windows Authentication Services system [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The Active Directory system in a domain environment: If the Print Services system is deployed within a domain, print servers can publish shared printers to the Active Directory system by using LDAP. Print clients that are joined to domains also require access to the Active Directory system to discover published printers.
 - The networking system to connect print server, print clients, and the Active Directory system.
 - Printers.
@@ -821,7 +821,7 @@ The following assumptions and preconditions are necessary for the Print Services
 - The print client and print server support the Print System Remote Protocol [MS-RPRN](../MS-RPRN/MS-RPRN.md).
 - The system is configured so that participants can access its services locally or remotely.
 - It is assumed that each participant is trusted by the system.
-- If member protocols that are supported by the system, as listed in section [2.2](#Section_2.1.2.5.2), have additional assumptions and preconditions for when that protocol is in use, see the relevant member protocol specification for details.
+- If member protocols that are supported by the system, as listed in section [2.2](#Section_2.2), have additional assumptions and preconditions for when that protocol is in use, see the relevant member protocol specification for details.
 - Print servers have a durable store to place the following objects in:
 - [**Printer drivers**](#gt_printer-driver)
 - [**Print jobs**](#gt_print-job)
@@ -869,7 +869,7 @@ Section [2.5.2](#Section_2.5.2) provides a table that summarizes the use cases t
 
 **Active Directory system**: The [**Active Directory**](#gt_active-directory) system is used to store a list of shared print queues in a [**domain**](#gt_domain) environment. The Print Services system uses version 3 of LDAP [[RFC4511]](https://go.microsoft.com/fwlink/?LinkId=157505) to publish information about shared print queues to the Active Directory system. Print clients can then discover shared print queues that are published by the Active Directory system, which enables a user to choose a print queue to which to send a print job.
 
-**Group Policy system**: The Print Services system makes use of the Group Policy system [MS-GPOD](#Section_2.1) to restrict print clients from accessing specified print servers and to remotely push preconfigured print queue connections to print clients. The Print Services system uses a Group Policy Services Extension [MS-GPDPC](../MS-GPDPC/MS-GPDPC.md) to distribute these preconfigured print queue connections to print clients.
+**Group Policy system**: The Print Services system makes use of the Group Policy system [MS-GPOD](../MS-GPOD/MS-GPOD.md) to restrict print clients from accessing specified print servers and to remotely push preconfigured print queue connections to print clients. The Print Services system uses a Group Policy Services Extension [MS-GPDPC](../MS-GPDPC/MS-GPDPC.md) to distribute these preconfigured print queue connections to print clients.
 
 <a id="Section_2.5.2"></a>
 ### 2.5.2 Use Case Summary Diagrams
@@ -1461,7 +1461,7 @@ The functionality in these versions is incremental. A third-party print server t
 
 For example, if PSS 3.0 included a protocol that defines opnum operation numbers or numeric identifiers 1 through 10, and PSS 4.0 included a new protocol and an extension to the PSS 3.0 protocol that defines a new opnum 11, then Windows print clients require that the print server supports the new PSS 4.0 protocol and the opnum 11 extension to the PSS 3.0 protocol.
 
-Support for some protocols is optional, as shown in the functional relationships of member protocols (section [2.1.2.3](#Section_2.1)) and later in this section. An implementation can be fully functional in a typical Windows network without implementing the optional protocols.
+Support for some protocols is optional, as shown in the functional relationships of member protocols (section [2.1.2.3](#Section_2.1.2.3)) and later in this section. An implementation can be fully functional in a typical Windows network without implementing the optional protocols.
 
 The print client or the administrative client determines the print server's PSS version support by calling Print System Remote Protocol methods [MS-RPRN](../MS-RPRN/MS-RPRN.md):
 
@@ -1673,7 +1673,7 @@ Because handles are not generally portable between threads, and are never portab
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Discovering and Utilizing a Print Queue in a Domain
 
-This example demonstrates the use cases described in section [2.5.3.3](#Section_2.3) with extensions (a) and (c), and section [2.5.3.7.1](#Section_2.5.3.7.1) with extension (a).
+This example demonstrates the use cases described in section [2.5.3.3](#Section_2.5.3.3) with extensions (a) and (c), and section [2.5.3.7.1](#Section_ef0c8e326ebc4809ba65b079abf27025) with extension (a).
 
 Prior to the beginning of this example, an administrator has installed a printer on a print server and provisioned a print queue corresponding to the printer. The print server has published the name of the print queue to the directory service by using LDAP [[RFC4511]](https://go.microsoft.com/fwlink/?LinkId=157505). In this scenario, PSS uses LDAP to discover the available shared print queues, after which it uses the Print System Remote Protocol [MS-RPRN](../MS-RPRN/MS-RPRN.md) and the SMB access protocols for subsequent operations.
 
@@ -1734,7 +1734,7 @@ The following table shows the message groups from the preceding diagram and thei
 | --- | --- | --- |
 | Connecting to a printer | Obtains the print server handle and information about the specified printer. | [MS-RPRN] section 3.1.4.2 |
 | Getting printer driver information | Obtains the driver information and package path of the specified printer driver. | [MS-RPRN] section 3.1.4.4 |
-| Downloading a printer driver | Downloads a printer driver by using the SMB Version 1.0 Protocol [MS-SMB](../MS-SMB/MS-SMB.md). | [MS-SMB] section 2.2 and [MS-FASOD](#Section_2.1) section 3.5 |
+| Downloading a printer driver | Downloads a printer driver by using the SMB Version 1.0 Protocol [MS-SMB](../MS-SMB/MS-SMB.md). | [MS-SMB] section 2.2 and [MS-FASOD](../MS-FASOD/MS-FASOD.md) section 3.5 |
 | Retrieving print queue information | Obtains configuration data and form information for a print queue. | [MS-RPRN] section 3.1.4.2 and [MS-RPRN] section 3.1.4.5 |
 | Registering for notifications | Creates a remote change notification object that monitors changes to printer objects and sends change notifications to the client. | [MS-RPRN] (section 3.1.4.10 |
 
@@ -1815,7 +1815,7 @@ It is common for clients to listen for notifications from more than one thread. 
 <a id="Section_3.2"></a>
 ## 3.2 Example 2: Discovering and Utilizing a Print Queue in a Workgroup
 
-This example demonstrates the use cases described in section [2.5.3.4](#Section_2.3) and section [2.5.3.7.1](#Section_2.5.3.7.1).
+This example demonstrates the use cases described in section [2.5.3.4](#Section_2.5.3.4) and section [2.5.3.7.1](#Section_ef0c8e326ebc4809ba65b079abf27025).
 
 In this example, a computer in a [**workgroup**](#gt_workgroup) locates a shared print queue on another computer in the workgroup and sends a [**print job**](#gt_print-job) to the shared print queue.
 
@@ -1888,7 +1888,7 @@ Figure 21: Print client establishing a connection and registering for notificati
 | --- | --- | --- |
 | Connecting to a printer | The client obtains the print server handle and information about the specified printer. | [MS-RPRN] section 3.1.4.2 |
 | Getting printer driver information | The client obtains information about the device driver for the specified printer. | [MS-RPRN] section 3.1.4.4 |
-| Downloading a driver | The client downloads a printer driver by using the SMB protocol. | [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2 and [MS-FASOD](#Section_2.1) section 3.5 |
+| Downloading a driver | The client downloads a printer driver by using the SMB protocol. | [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2 and [MS-FASOD](../MS-FASOD/MS-FASOD.md) section 3.5 |
 | Getting printer data | The client obtains configuration data and form information for a print queue. | [MS-RPRN] sections 3.1.4.2 and 3.1.4.5 |
 | Registering for notifications | The client creates a remote change notification object that monitors changes to printer objects and sends notifications of those changes to the client by using the **RpcRouterReplyPrinter** method. | [MS-RPRN] section 3.1.4.10 |
 
@@ -2055,7 +2055,7 @@ The print queue in this example contains only print jobs that were not deleted b
 
 ## Example 5: Provisioning a Print Queue By Using the Protocol Defined in [MS-RPRN]
 
-This example demonstrates the use case described in section [2.5.3.1](#Section_2.1) and section [2.5.3.2](#Section_2.1) under variation (a) with extension (a), where a [**print queue**](#gt_print-queue) is provisioned from an administrative client by using the Print System Remote Protocol [MS-RPRN](../MS-RPRN/MS-RPRN.md), and then the same print queue is deleted from a different administrative client by using the Print System Asynchronous Remote Protocol [MS-PAR](../MS-PAR/MS-PAR.md).
+This example demonstrates the use case described in section [2.5.3.1](#Section_2.5.3.1) and section [2.5.3.2](#Section_2.5.3.2) under variation (a) with extension (a), where a [**print queue**](#gt_print-queue) is provisioned from an administrative client by using the Print System Remote Protocol [MS-RPRN](../MS-RPRN/MS-RPRN.md), and then the same print queue is deleted from a different administrative client by using the Print System Asynchronous Remote Protocol [MS-PAR](../MS-PAR/MS-PAR.md).
 
 In this example, two different administrative clients are involved in managing print queues: the first client provisions a print queue, and the second client subsequently deletes the same print queue. The first client uses the Print System Remote Protocol, and the second client uses the Print System Asynchronous Remote Protocol. Although both management functions can be accomplished by either protocol, this example demonstrates how the parallel functionality can be accomplished by using different implementations or different versions of administrative clients.
 
@@ -2099,7 +2099,7 @@ The following table shows the message groups from the preceding diagram and thei
 | Message group | Description | Reference |
 | --- | --- | --- |
 | Retrieving a printer driver directory | The administrative client retrieves the directory where printer drivers are stored. | [MS-RPRN] section 3.1.4.4.4 |
-| Uploading a printer driver to an SMB share | The administrative client uses the SMB protocol to upload a printer driver to the printer driver directory. | [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2 and [MS-FASOD](#Section_2.1) section 3.5 |
+| Uploading a printer driver to an SMB share | The administrative client uses the SMB protocol to upload a printer driver to the printer driver directory. | [MS-SMB](../MS-SMB/MS-SMB.md) section 2.2 and [MS-FASOD](../MS-FASOD/MS-FASOD.md) section 3.5 |
 | Provisioning a print queue | The administrative client provisions the print queue, which involves adding a printer, adding a form, and setting the print queue's printer property. | [MS-RPRN] section 3.1.4 |
 
 The following steps describe task 1 of this example:

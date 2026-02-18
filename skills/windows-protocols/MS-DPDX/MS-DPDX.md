@@ -730,7 +730,7 @@ packet-beta
 
 **wMsgID (2 bytes):** A 16-bit integer value used to uniquely identify an individual SESS_PATH_TEST message. This MAY be any value selected by the sender and SHOULD be ignored by the receiver.<4>
 
-**Key (8 bytes):** A 64-bit integer that provides the unique key associated with the SESS_PATH_TEST message. For information about how this value is generated, see section [3.1.1](#Section_3.1).
+**Key (8 bytes):** A 64-bit integer that provides the unique key associated with the SESS_PATH_TEST message. For information about how this value is generated, see section [3.1.1](#Section_3.1.1).
 
 <a id="Section_2.2.7"></a>
 ### 2.2.7 TRANS_COMMAND_CONNECT
@@ -837,7 +837,7 @@ The TRANS_COMMAND_SACK packet is used to acknowledge outstanding packets. Packet
 
 - A dedicated ACK is requested (that is, when the PACKET_COMMAND_POLL bit in the **bCommand** header field is set).
 - No user data remains for further bundled acknowledgments.
-- The [Delayed Acknowledgment Timer (section 3.1.2.6)](#Section_3.1.6.6) elapses.
+- The [Delayed Acknowledgment Timer (section 3.1.2.6)](#Section_3.1.2.6) elapses.
 ```mermaid
 packet-beta
   0-7: "bCommand"
@@ -2063,7 +2063,7 @@ Both the new and existing clients MUST generate an SHA-1 digest of the PATHTESTK
 - The client receives a valid SESS_PATH_TEST message.
 At the same time, the existing client MUST prepare to accept SESS_PATH_TEST messages in response to its instructed connection messages.
 
-For a new client, this value MUST be used in the periodic transmission of SESS_PATH_TEST messages. The [Path Test Retry Timer (section 3.1.2.5)](#Section_3.1.6.3) MUST be initialized.
+For a new client, this value MUST be used in the periodic transmission of SESS_PATH_TEST messages. The [Path Test Retry Timer (section 3.1.2.5)](#Section_3.1.2.5) MUST be initialized.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -2232,7 +2232,7 @@ Validation and processing of the **bControl** field of the [TRANS_USERDATA_HEADE
 <a id="Section_3.1.5.10"></a>
 #### 3.1.5.10 Send Sequence ID (bSeq) Validation and Processing
 
-The [TRANS_USERDATA_HEADER](#Section_2.2.17) **bSeq** field MUST be either the next [**sequence ID**](#gt_sequence-id) expected or within 63 packets beyond the ID expected by the receiver. If the sequence ID is not within this range, the [**payload**](#gt_payload) MUST be ignored. In addition, a [**SACK**](#gt_selective-acknowledgment-sack) packet SHOULD be sent indicating the expected sequence ID. If the **PACKET_COMMAND_POLL** flag is set in the **bCommand** field, this packet SHOULD be sent immediately; otherwise, the [Delayed Acknowledgment Timer](#Section_3.1.6.6) SHOULD be set using a short timeout, and a SACK packet SHOULD be sent when it expires. The recommended short timeout is 20 milliseconds. This value can be modified according to application and network requirements.
+The [TRANS_USERDATA_HEADER](#Section_2.2.17) **bSeq** field MUST be either the next [**sequence ID**](#gt_sequence-id) expected or within 63 packets beyond the ID expected by the receiver. If the sequence ID is not within this range, the [**payload**](#gt_payload) MUST be ignored. In addition, a [**SACK**](#gt_selective-acknowledgment-sack) packet SHOULD be sent indicating the expected sequence ID. If the **PACKET_COMMAND_POLL** flag is set in the **bCommand** field, this packet SHOULD be sent immediately; otherwise, the [Delayed Acknowledgment Timer](#Section_3.1.2.6) SHOULD be set using a short timeout, and a SACK packet SHOULD be sent when it expires. The recommended short timeout is 20 milliseconds. This value can be modified according to application and network requirements.
 
 If the sequence ID is the next expected, the receiver SHOULD process the payload and advance the expected sequence ID. If the sequence ID is out of order, but still within 63 packets, the receiver SHOULD queue the payload until it receives either:
 

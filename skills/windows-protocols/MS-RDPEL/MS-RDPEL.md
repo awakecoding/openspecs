@@ -170,7 +170,7 @@ The location protocol is divided into two distinct phases:
 
 - Initializing Phase
 - Running Phase
-The Initializing Phase occurs at the start of the connection. During this phase, the server and client exchange the RDPLOCATION_SERVER_READY_PDU (section [2.2.2.1](#Section_2.2.2.1)) and RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_3.2.5.2)) messages. The server initiates this exchange when the dynamic virtual channel (sections [1.4](#Section_1.4) and [2.1](#Section_2.1)) over which the location update messages will flow has been opened.
+The Initializing Phase occurs at the start of the connection. During this phase, the server and client exchange the RDPLOCATION_SERVER_READY_PDU (section [2.2.2.1](#Section_2.2.2.1)) and RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_2.2.2.2)) messages. The server initiates this exchange when the dynamic virtual channel (sections [1.4](#Section_1.4) and [2.1](#Section_2.1)) over which the location update messages will flow has been opened.
 
 Once both endpoints are ready, the Running Phase is entered. During this phase, the client sends periodic location updates to the server encapsulated in the RDPLOCATION_BASE_LOCATION3D_PDU (section [2.2.2.3](#Section_2.2.2.3)), RDPLOCATION_LOCATION2D_DELTA_PDU (section [2.2.2.4](#Section_2.2.2.4)), and RDPLOCATION_LOCATION3D_DELTA_PDU (section [2.2.2.5](#Section_2.2.2.5)) messages. The server decodes these updates and injects them into the user's session to ensure that any location-aware applications remain in-sync with the client's current position, altitude, speed, and heading.
 
@@ -312,7 +312,7 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | PDUTYPE_SERVER_READY 0x0001 | RDPLOCATION_SERVER_READY_PDU (section [2.2.2.1](#Section_2.2.2.1)) |
-| PDUTYPE_CLIENT_READY 0x0002 | RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_3.2.5.2)) |
+| PDUTYPE_CLIENT_READY 0x0002 | RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_2.2.2.2)) |
 | PDUTYPE_BASE_LOCATION3D 0x0003 | RDPLOCATION_BASE_LOCATION3D_PDU (section [2.2.2.3](#Section_2.2.2.3)) |
 | PDUTYPE_LOCATION2D_DELTA 0x0004 | RDPLOCATION_LOCATION2D_DELTA_PDU (section [2.2.2.4](#Section_2.2.2.4)) |
 | PDUTYPE_LOCATION3D_DELTA 0x0005 | RDPLOCATION_LOCATION3D_DELTA_PDU (section [2.2.2.5](#Section_2.2.2.5)) |
@@ -592,7 +592,7 @@ If the server does not support location injection, then it MUST NOT send this [*
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Processing an RDPLOCATION_CLIENT_READY_PDU Message
 
-The structure and fields of the RDPLOCATION_CLIENT_READY_PDU message are specified in section [2.2.2.2](#Section_3.2.5.2).
+The structure and fields of the RDPLOCATION_CLIENT_READY_PDU message are specified in section [2.2.2.2](#Section_2.2.2.2).
 
 The **header** field MUST be processed as specified in section section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server SHOULD perform any necessary steps to initialize the location injection subsystem.
 
@@ -608,14 +608,14 @@ The header field MUST be processed as specified in section [3.1.5.1](#Section_3.
 
 The structure and fields of the RDPLOCATION_LOCATION2D_DELTA_PDU message are specified in section [2.2.2.4](#Section_2.2.2.4).
 
-The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server MUST extract the location deltas, compute the current values (using the Abstract Data Model defined in section [3.1.1](#Section_3.1)), and inject the updated location data into the user session. After injecting the location data, the server MUST update the Abstract Data Model by storing the updated latitude, longitude, altitude, speed, and heading to ensure that subsequent RDPLOCATION_LOCATION2D_DELTA_PDU (section 2.2.3.4) and RDPLOCATION_LOCATION3D_DELTA_PDU (section [2.2.2.5](#Section_2.2.2.5)) messages can be processed.
+The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server MUST extract the location deltas, compute the current values (using the Abstract Data Model defined in section [3.1.1](#Section_3.1.1)), and inject the updated location data into the user session. After injecting the location data, the server MUST update the Abstract Data Model by storing the updated latitude, longitude, altitude, speed, and heading to ensure that subsequent RDPLOCATION_LOCATION2D_DELTA_PDU (section 2.2.3.4) and RDPLOCATION_LOCATION3D_DELTA_PDU (section [2.2.2.5](#Section_2.2.2.5)) messages can be processed.
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Processing an RDPLOCATION_LOCATION3D_DELTA_PDU Message
 
 The structure and fields of the RDPLOCATION_LOCATION3D_DELTA_PDU message are specified in section [2.2.2.5](#Section_2.2.2.5).
 
-The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server MUST extract the location deltas, compute the current values (using the Abstract Data Model defined in section [3.1.1](#Section_3.1)), and inject the updated location data into the user session. After injecting the location data, the server MUST update the Abstract Data Model by storing the updated latitude, longitude, altitude, speed and heading to ensure that subsequent RDPLOCATION_LOCATION2D_DELTA_PDU (section [2.2.2.4](#Section_2.2.2.4)) and RDPLOCATION_LOCATION3D_DELTA_PDU (section 2.2.3.5) messages can be processed.
+The **header** field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the server MUST extract the location deltas, compute the current values (using the Abstract Data Model defined in section [3.1.1](#Section_3.1.1)), and inject the updated location data into the user session. After injecting the location data, the server MUST update the Abstract Data Model by storing the updated latitude, longitude, altitude, speed and heading to ensure that subsequent RDPLOCATION_LOCATION2D_DELTA_PDU (section [2.2.2.4](#Section_2.2.2.4)) and RDPLOCATION_LOCATION3D_DELTA_PDU (section 2.2.3.5) messages can be processed.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -643,7 +643,7 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-The client SHOULD NOT open the "Microsoft::Windows::RDS::Location" virtual channel transport (section [2.1](#Section_2.1)) if it is unable to query the local subsystem for location data. The client MUST send the RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_3.2.5.2)) message to the server, as specified in section [3.3.5.2](#Section_3.3.5.2), to initiate the process of remoting location data.
+The client SHOULD NOT open the "Microsoft::Windows::RDS::Location" virtual channel transport (section [2.1](#Section_2.1)) if it is unable to query the local subsystem for location data. The client MUST send the RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_2.2.2.2)) message to the server, as specified in section [3.3.5.2](#Section_3.3.5.2), to initiate the process of remoting location data.
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
@@ -658,12 +658,12 @@ None.
 
 The structure and fields of the RDPLOCATION_SERVER_READY_PDU message are specified in section [2.2.2.1](#Section_2.2.2.1).
 
-The header field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the client SHOULD initialize the location acquisition subsystem and then send an RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_3.2.5.2)) message to the server, as specified in section [3.3.5.2](#Section_3.3.5.2).
+The header field MUST be processed as specified in section [3.1.5.1](#Section_3.1.5.1). If the message is valid, the client SHOULD initialize the location acquisition subsystem and then send an RDPLOCATION_CLIENT_READY_PDU (section [2.2.2.2](#Section_2.2.2.2)) message to the server, as specified in section [3.3.5.2](#Section_3.3.5.2).
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Sending an RDPLOCATION_CLIENT_READY_PDU Message
 
-The structure and fields of the RDPLOCATION_CLIENT_READY_PDU message are specified in section [2.2.2.2](#Section_3.2.5.2).
+The structure and fields of the RDPLOCATION_CLIENT_READY_PDU message are specified in section [2.2.2.2](#Section_2.2.2.2).
 
 If the client does not support location remoting, then it MUST NOT send this PDU to the server. The **protocolVersion** field SHOULD be set to at least RDPLOCATION_PROTOCOL_V200 (0x00020000) if the client supports the acquisition and sending of speed, heading, horizontal accuracy and location data source.
 
@@ -672,14 +672,14 @@ If the client does not support location remoting, then it MUST NOT send this PDU
 
 The structure and fields of the RDPLOCATION_BASE_LOCATION3D_PDU message are specified in section [2.2.2.3](#Section_2.2.2.3).
 
-After encoding and transmitting the location data, the client MUST store the latitude, longitude, altitude, speed, and heading in the Abstract Data Model (section [3.1.1](#Section_3.1)) to ensure that subsequent RDPLOCATION_LOCATION2D_DELTA_PDU (section [2.2.2.4](#Section_2.2.2.4)) and RDPLOCATION_LOCATION3D_DELTA_PDU (section [2.2.2.5](#Section_2.2.2.5)) messages can be constructed and transmitted.
+After encoding and transmitting the location data, the client MUST store the latitude, longitude, altitude, speed, and heading in the Abstract Data Model (section [3.1.1](#Section_3.1.1)) to ensure that subsequent RDPLOCATION_LOCATION2D_DELTA_PDU (section [2.2.2.4](#Section_2.2.2.4)) and RDPLOCATION_LOCATION3D_DELTA_PDU (section [2.2.2.5](#Section_2.2.2.5)) messages can be constructed and transmitted.
 
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Sending an RDPLOCATION_LOCATION2D_DELTA_PDU Message
 
 The structure and fields of the RDPLOCATION_LOCATION2D_DELTA_PDU message are specified in section [2.2.2.4](#Section_2.2.2.4).
 
-The latitude, longitude, speed, and heading stored in the Abstract Data Model (section [3.1.1](#Section_3.1)) MUST be used to calculate the value for each delta field.
+The latitude, longitude, speed, and heading stored in the Abstract Data Model (section [3.1.1](#Section_3.1.1)) MUST be used to calculate the value for each delta field.
 
 **latitudeDelta** = previousLatitude – currentLatitude
 
@@ -696,7 +696,7 @@ After encoding and transmitting the location data, the client MUST update the Ab
 
 The structure and fields of the RDPLOCATION_LOCATION3D_DELTA_PDU message are specified in section [2.2.2.5](#Section_2.2.2.5).
 
-The values stored in the Abstract Data Model (section [3.1.1](#Section_3.1)) MUST be used to calculate the value for each delta field.
+The values stored in the Abstract Data Model (section [3.1.1](#Section_3.1.1)) MUST be used to calculate the value for each delta field.
 
 **latitudeDelta** = previousLatitude – currentLatitude
 

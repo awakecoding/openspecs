@@ -244,7 +244,7 @@ packet-beta
 <a id="Section_2.2.2"></a>
 ### 2.2.2 NSCodec Compressed Bitmap Stream (NSCODEC_BITMAP_STREAM)
 
-The **NSCODEC_BITMAP_STREAM** structure contains a stream of bitmap data compressed using NSCodec bitmap compression techniques (section [3.1.8](../MS-RDPEGDI/MS-RDPEGDI.md)). The bitmap data is represented using the [**AYCoCg**](#gt_aycocg) [**color space**](#gt_color-space) ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 3.1.9.1.2).
+The **NSCODEC_BITMAP_STREAM** structure contains a stream of bitmap data compressed using NSCodec bitmap compression techniques (section [3.1.8](#Section_3.1.8)). The bitmap data is represented using the [**AYCoCg**](#gt_aycocg) [**color space**](#gt_color-space) ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 3.1.9.1.2).
 
 NSCodec compressed bitmap data is sent encapsulated in a Set Surface Bits Surface Command ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.2.1) when sending a bitmap image that MUST NOT be cached, or in the Cache Bitmap - Revision 3 ([MS-RDPEGDI] section 2.2.2.2.1.2.8) Secondary Drawing Order when sending a bitmap image that MUST be cached (bitmap caching is discussed in [MS-RDPEGDI] section 3.1.1.1.1). In all these cases, the data is encapsulated inside an Extended Bitmap Data ([MS-RDPBCGR] section 2.2.9.2.1.1) structure.
 
@@ -499,7 +499,7 @@ If the data encapsulation is invalid or errors are encountered while processing 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 NSCodec Compressed Bitmap Stream
 
-The NSCodec Compressed Bitmap Stream (section [2.2.2](#Section_2.2.2)) structure contains a stream of bitmap data compressed by using NSCodec bitmap compression techniques (section [3.1.8](../MS-RDPBCGR/MS-RDPBCGR.md)). NSCodec compressed bitmap data is sent encapsulated in a Set Surface Bits Surface Command ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.2.1) when sending a bitmap image that MUST NOT be cached, or in the Cache Bitmap - Revision 3 ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.2.8) Secondary Drawing Order when sending a bitmap image that MUST be cached (bitmap caching is discussed in [MS-RDPEGDI] section 3.1.1.1.1). In all of these cases, the data is encapsulated inside an Extended Bitmap Data ([MS-RDPBCGR] section 2.2.9.2.1.1) structure. If the data encapsulation is invalid or errors are encountered while decompressing NSCodec data (section [3.1.8.4](#Section_3.1.8.4)), the connection SHOULD be dropped.
+The NSCodec Compressed Bitmap Stream (section [2.2.2](#Section_2.2.2)) structure contains a stream of bitmap data compressed by using NSCodec bitmap compression techniques (section [3.1.8](#Section_3.1.8)). NSCodec compressed bitmap data is sent encapsulated in a Set Surface Bits Surface Command ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.9.2.1) when sending a bitmap image that MUST NOT be cached, or in the Cache Bitmap - Revision 3 ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.2.8) Secondary Drawing Order when sending a bitmap image that MUST be cached (bitmap caching is discussed in [MS-RDPEGDI] section 3.1.1.1.1). In all of these cases, the data is encapsulated inside an Extended Bitmap Data ([MS-RDPBCGR] section 2.2.9.2.1.1) structure. If the data encapsulation is invalid or errors are encountered while decompressing NSCodec data (section [3.1.8.4](#Section_3.1.8.4)), the connection SHOULD be dropped.
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events

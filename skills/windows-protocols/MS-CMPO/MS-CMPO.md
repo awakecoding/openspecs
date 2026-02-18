@@ -341,7 +341,7 @@ The following sections specify supported MSDTC Connection Manager: OleTx Transpo
 
 A [**session**](#gt_session) is established by making a nested series of synchronous [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc) between the IXnRemote interfaces of the two [**partners**](#gt_partner). These calls are made in order; furthermore, no call begins before the last call completes, unless an error occurs.
 
-Once one of the partners decides to establish a session, the sequence is as follows. If the [**primary partner**](#gt_primary-partner) decides to establish the session, it proceeds immediately. If the [**secondary partner**](#gt_secondary-partner) decides to establish the session, it establishes an RPC [**connection**](#gt_connection) to the primary partner and calls either the [Poke](#Section_3.3.4.1) method or the [PokeW](#Section_3.3.4.7) method, which has the effect of informing the primary that the secondary wants to establish a session. The primary partner begins the handshake series by establishing an RPC connection to the secondary partner, and by making a [BuildContext](#Section_3.3.4.8) call or [BuildContextW](#Section_3.3.4.8) call to the secondary partner. The secondary partner responds to the incoming call by making a corresponding BuildContext callback or BuildContextW callback to the primary (after establishing an RPC connection, if necessary).
+Once one of the partners decides to establish a session, the sequence is as follows. If the [**primary partner**](#gt_primary-partner) decides to establish the session, it proceeds immediately. If the [**secondary partner**](#gt_secondary-partner) decides to establish the session, it establishes an RPC [**connection**](#gt_connection) to the primary partner and calls either the [Poke](#Section_3.3.4.1) method or the [PokeW](#Section_3.3.4.7) method, which has the effect of informing the primary that the secondary wants to establish a session. The primary partner begins the handshake series by establishing an RPC connection to the secondary partner, and by making a [BuildContext](#Section_3.3.4.2) call or [BuildContextW](#Section_3.3.4.8) call to the secondary partner. The secondary partner responds to the incoming call by making a corresponding BuildContext callback or BuildContextW callback to the primary (after establishing an RPC connection, if necessary).
 
 The primary partner then verifies the callback, and the chain of procedure calls progresses. The primary partner returns from the BuildContext call or the BuildContextW call that was made by the secondary partner, and then the secondary partner returns from the BuildContext call or the BuildContextW call that was made by the primary. Once these calls have returned, the session has been established. The following sequence diagrams illustrate this process.
 
@@ -500,7 +500,7 @@ DWORD dwMaxLevelThree;
 
 **dwMinLevelOne:** A 4-byte unsigned integer value containing the minimum supported MSDTC Connection Manager: OleTx Transports Protocol version. **dwMinLevelOne** MUST be less than or equal to **dwMaxLevelOne**.
 
-This field indicates whether the unsigned_char_t [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) version of the Session creation API calls ([Poke](#Section_3.3.4.1)/[BuildContext](#Section_3.3.4.8)) or the wchar_t [C706] version of the Session creation API calls ([PokeW](#Section_3.3.4.7)/[BuildContextW](#Section_3.3.4.8)) are used. This field MUST be one of the following values:
+This field indicates whether the unsigned_char_t [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) version of the Session creation API calls ([Poke](#Section_3.3.4.1)/[BuildContext](#Section_3.3.4.2)) or the wchar_t [C706] version of the Session creation API calls ([PokeW](#Section_3.3.4.7)/[BuildContextW](#Section_3.3.4.8)) are used. This field MUST be one of the following values:
 
 | Value | Meaning |
 | --- | --- |
@@ -527,7 +527,7 @@ This field indicates whether the unsigned_char_t version of the Session creation
 <a id="Section_2.2.3"></a>
 ### 2.2.3 BOUND_VERSION_SET
 
-The BOUND_VERSION_SET is a structure containing the MSDTC Connection Manager: OleTx Transports Protocol version numbers that were successfully negotiated during a [BuildContext](#Section_3.3.4.8) call or a [BuildContextW](#Section_3.3.4.8) call.
+The BOUND_VERSION_SET is a structure containing the MSDTC Connection Manager: OleTx Transports Protocol version numbers that were successfully negotiated during a [BuildContext](#Section_3.3.4.2) call or a [BuildContextW](#Section_3.3.4.8) call.
 
 typedef struct _BoundVersionSet {
 
@@ -747,7 +747,7 @@ An MSDTC Connection Manager: OleTx Transports Protocol [**partner**](#gt_partner
 | Incoming authentication | This value specifies that the protocol partner MUST use an authenticated RPC call when it is initiated (through [BuildContextW](#Section_3.3.4.8) or [PokeW](#Section_3.3.4.7)) by another protocol partner. For sessions initiated by itself, a partner MUST first attempt to use an authenticated RPC call; if that is not supported, the partner MUST use an [**unauthenticated RPC call**](#gt_unauthenticated-rpc-call). |
 | No Authentication | This value specifies that the protocol partner SHOULD use authenticated RPC calls to establish a communication between the client and server. The server RPC security MUST be configured as specified by the Server Security Settings, and the client security MUST be configured as specified by the Client Security Settings. If this fails, both the client and server sides of the protocol partner MUST use an unauthenticated RPC call. The settings specified by the Server Security Settings and Client Security Settings objects MUST be ignored. |
 
-These data elements are set during the initialization of the partner and are not changed thereafter. See section [3.3.3](#Section_3.2.3).
+These data elements are set during the initialization of the partner and are not changed thereafter. See section [3.3.3](#Section_3.3.3).
 
 **Note** It is possible to implement the abstract data model by using a variety of techniques. The protocol does not prescribe or advocate any specific implementation technique.
 
@@ -790,7 +790,7 @@ Figure 5: Secondary session state
 
 When a [**session**](#gt_session) object is removed from the session table, it MUST be cleaned up as follows:
 
-- Any outstanding [**RPC**](#gt_remote-procedure-call-rpc) associated with the session object MUST be canceled; this includes calls to [BuildContext](#Section_3.3.4.8), [BuildContextW](#Section_3.3.4.8), [Poke](#Section_3.3.4.1), [PokeW](#Section_3.3.4.7), [BeginTearDown](#Section_3.3.4.6), and [TearDownContext](#Section_3.3.4.5) that are being used to establish or tear down the session represented by the session object.
+- Any outstanding [**RPC**](#gt_remote-procedure-call-rpc) associated with the session object MUST be canceled; this includes calls to [BuildContext](#Section_3.3.4.2), [BuildContextW](#Section_3.3.4.8), [Poke](#Section_3.3.4.1), [PokeW](#Section_3.3.4.7), [BeginTearDown](#Section_3.3.4.6), and [TearDownContext](#Section_3.3.4.5) that are being used to establish or tear down the session represented by the session object.
 - All active timers associated with the session object MUST be canceled.
 - The RPC binding handle stored in the session object MUST be released if it has been allocated. For RPC binding handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 - The RPC context handle stored in the session object MUST be released if it has been allocated. For RPC context handles, see [C706].
@@ -834,7 +834,7 @@ The default value of the timer is specific to the implementation. The local [**p
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-Each MSDTC Connection Manager: OleTx Transports Protocol [**partner**](#gt_partner) is explicitly initialized with the data elements identified in section [3.2.1.1](#Section_3.2.1.1), and described in sections [Initialization By a Higher-Level Protocol (section 3.2.3.1)](#Section_3.2.3) and [Initialization By the Protocol (section 3.2.3.2)](#Section_3.2.3).
+Each MSDTC Connection Manager: OleTx Transports Protocol [**partner**](#gt_partner) is explicitly initialized with the data elements identified in section [3.2.1.1](#Section_3.2.1.1), and described in sections [Initialization By a Higher-Level Protocol (section 3.2.3.1)](#Section_3.2.3.1) and [Initialization By the Protocol (section 3.2.3.2)](#Section_3.2.3.2).
 
 <a id="Section_3.2.3.1"></a>
 #### 3.2.3.1 Initialization By a Higher-Level Protocol
@@ -856,7 +856,7 @@ The MSDTC Connection Manager OleTx Transports Protocol partner MUST perform the 
 - If the local partner implements the MSDTC Connection Manager OleTx Transports Protocol 1.1 protocol version, the Minimum Level 1 Version Number MUST be set to 0x00000001 and the Maximum Level 1 Version Number MUST be set to 0x00000002.
 - Otherwise, if the local partner implements only the MSDTC Connection Manager OleTx Transports Protocol 1.0 protocol version, both the Minimum and Maximum Level 1 Version Number MUST be set to 0x00000001.
 - Create an empty session table and assign it to the Session Table field.
-In addition to the initialization steps that are performed by a higher-level protocol and the steps that are common to both the Server and Client roles discussed here, some role-specific initialization also needs to be performed. See section [3.3.3](#Section_3.2.3) for initialization steps specific to the [IXnRemote Server](#Section_3.3) role and section [3.4.3](#Section_3.2.3) for initialization steps specific to the [IXnRemote Client](#Section_3.4) role.
+In addition to the initialization steps that are performed by a higher-level protocol and the steps that are common to both the Server and Client roles discussed here, some role-specific initialization also needs to be performed. See section [3.3.3](#Section_3.3.3) for initialization steps specific to the [IXnRemote Server](#Section_3.3) role and section [3.4.3](#Section_3.4.3) for initialization steps specific to the [IXnRemote Client](#Section_3.4) role.
 
 If any of the initialization of the above elements fails, an implementation-specific failure result MUST be returned to the higher-layer protocol.
 
@@ -875,7 +875,7 @@ Note that the events that follow are described as asynchronous with respect to t
 
 When the Session Setup timer expires, the local [**partner**](#gt_partner) SHOULD:
 
-- Cancel any outstanding call to [BuildContext](#Section_3.3.4.8) or [BuildContextW](#Section_3.3.4.8).
+- Cancel any outstanding call to [BuildContext](#Section_3.3.4.2) or [BuildContextW](#Section_3.3.4.8).
 When the Session Setup timer expires, the local partner MUST:
 
 - Remove the associated [**session**](#gt_session) object from the session table, and close any context handle or binding handle stored in the session object. (See [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).)
@@ -903,7 +903,7 @@ None.
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-In addition to the abstract data model described in section [3.2.1](#Section_3.4.1), when implementing an IXnRemote server role an MSDTC Connection Manager: OleTx Transports Protocol partner MUST allocate and maintain the following local data element:
+In addition to the abstract data model described in section [3.2.1](#Section_3.2.1), when implementing an IXnRemote server role an MSDTC Connection Manager: OleTx Transports Protocol partner MUST allocate and maintain the following local data element:
 
 **Server TCP Port**: A 4-byte unsigned integer whose value determines the TCP port number of the [**RPC server**](#gt_rpc-server) [**endpoint**](#gt_endpoint).<9>
 
@@ -950,7 +950,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [Poke](#Section_3.3.4.1) | Opnum: 0 |
-| [BuildContext](#Section_3.3.4.8) | Opnum: 1 |
+| [BuildContext](#Section_3.3.4.2) | Opnum: 1 |
 | [NegotiateResources](#Section_3.3.4.3) | Opnum: 2 |
 | [SendReceive](#Section_3.3.4.4) | Opnum: 3 |
 | [TearDownContext](#Section_3.3.4.5) | Opnum: 4 |
@@ -997,11 +997,11 @@ DWORD dwcbSizeOfBlob,
 
 | Value | Meaning |
 | --- | --- |
-| [SRANK_SECONDARY](#Section_3.3.4.5.3) 0x02 | The caller is the secondary participant. |
+| [SRANK_SECONDARY](#Section_2.2.8) 0x02 | The caller is the secondary participant. |
 
 **pszCalleeUuid:** A string containing the primary partner's [**contact identifier (CID)**](#gt_008df1ed-6dde-44be-be73-57a5008782ca) in the form of a [GUID](#Section_2.2.6). The contact identifier (CID) MUST match the CID in the primary partner's local name object and MUST be formatted into a string.
 
-**pszHostName:** The string form of the caller's host name. This host name identifies the machine on which the caller's instance of the MSDTC Connection Manager: OleTx Transports Protocol is running. This value is used by the primary participant to establish the RPC binding handle for its subsequent call to [BuildContext](#Section_3.3.4.8). This MUST be a [**NetBIOS name**](#gt_netbios-name). For NetBIOS, see [[NETBEUI]](https://go.microsoft.com/fwlink/?LinkId=90224), [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260), and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261).
+**pszHostName:** The string form of the caller's host name. This host name identifies the machine on which the caller's instance of the MSDTC Connection Manager: OleTx Transports Protocol is running. This value is used by the primary participant to establish the RPC binding handle for its subsequent call to [BuildContext](#Section_3.3.4.2). This MUST be a [**NetBIOS name**](#gt_netbios-name). For NetBIOS, see [[NETBEUI]](https://go.microsoft.com/fwlink/?LinkId=90224), [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260), and [[RFC1002]](https://go.microsoft.com/fwlink/?LinkId=90261).
 
 **pszUuidString:** The string form of the caller's contact identifier (CID) in the form of a GUID. This contact identifier (CID) identifies the caller's instance of the MSDTC Connection Manager: OleTx Transports Protocol. It MUST match the CID in the caller's local name object, and MUST be formatted into a string. This value is used by the primary participant to establish the RPC binding handle for its subsequent call to BuildContext.
 
@@ -1100,7 +1100,7 @@ DWORD dwcbSizeOfBlob,
 
 | Value | Meaning |
 | --- | --- |
-| [SRANK_PRIMARY](#Section_3.3.4.5.3) 1 | The caller is the primary partner in this session. |
+| [SRANK_PRIMARY](#Section_2.2.8) 1 | The caller is the primary partner in this session. |
 | SRANK_SECONDARY 2 | The caller is the secondary partner in this session. |
 
 **BindVersionSet:** A [BIND_VERSION_SET](#Section_2.2.2) structure that contains the minimum and maximum versions supported by the partner, as specified by the **Minimum Level 1 Version Number**, **Maximum Level 1 Version Number**, **Minimum Level 2 Version Number**, **Maximum Level 2 Version Number**, **Minimum Level 3 Version Number**, and **Maximum Level 3 Version Number** ADM elements (see section [3.2.1.1](#Section_3.2.1.1)).
@@ -1158,7 +1158,7 @@ For the structure and sequence of data on the wire, see [C706] Transfer Syntax [
 <a id="Section_3.3.4.2.1"></a>
 ##### 3.3.4.2.1 Primary
 
-If the *sRank* parameter is [SRANK_PRIMARY](#Section_3.3.4.5.3), the caller MUST be a [**primary partner**](#gt_primary-partner), and the callee MUST be a [**secondary partner**](#gt_secondary-partner). The [**session**](#gt_session) object has already been created on the primary partner, and its state has been set to Connecting.
+If the *sRank* parameter is [SRANK_PRIMARY](#Section_2.2.8), the caller MUST be a [**primary partner**](#gt_primary-partner), and the callee MUST be a [**secondary partner**](#gt_secondary-partner). The [**session**](#gt_session) object has already been created on the primary partner, and its state has been set to Connecting.
 
 The secondary partner MUST construct a name object using the host name specified in the *pszHostName* parameter, the [**contact identifier (CID)**](#gt_008df1ed-6dde-44be-be73-57a5008782ca) specified in the *pszUuidString* parameter, and the [**RPC**](#gt_remote-procedure-call-rpc) protocols specified in the **grbitComProtocols** field of the [BIND_INFO_BLOB](#Section_2.2.1) structure contained in the *rguchBlob* parameter.
 
@@ -1205,7 +1205,7 @@ If any of the previously described operations fails, the secondary partner MUST 
 
 If the previously described calculations succeed, a copy of the [BOUND_VERSION_SET](#Section_2.2.3) structure MUST also be stored in the **Version** ADM element of the session object. Once this is done, the secondary partner MUST start the [Session Setup timer](#Section_3.2.2.1) associated with that session object if it has not already been started. The Session Setup timer will not have been started if the session establishment began with the primary partner. In this case, this method call is the first time that the secondary partner has considered this session.
 
-An RPC binding handle to the primary partner MUST be created and stored in the session object. For binding handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). The secondary partner MUST attempt to call either the [BuildContextW](#Section_3.3.4.8) method or the [BuildContext](#Section_3.3.4.8) method on the primary partner using the binding handle stored in the session object. For making calls to a [**partner**](#gt_partner), see section [3.4](#Section_3.4).
+An RPC binding handle to the primary partner MUST be created and stored in the session object. For binding handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). The secondary partner MUST attempt to call either the [BuildContextW](#Section_3.3.4.8) method or the [BuildContext](#Section_3.3.4.2) method on the primary partner using the binding handle stored in the session object. For making calls to a [**partner**](#gt_partner), see section [3.4](#Section_3.4).
 
 To determine whether the primary partner supports BuildContextW, the secondary partner calls BuildContextW on the primary partner and waits for a return value. If the call completes with error code RPC_S_PROCNUM_OUT_OF_RANGE, then the primary partner does not support BuildContextW.
 
@@ -1226,9 +1226,9 @@ If the nested call completes unsuccessfully, the secondary partner SHOULD behave
 <a id="Section_3.3.4.2.2"></a>
 ##### 3.3.4.2.2 Secondary
 
-If the *sRank* parameter is [SRANK_SECONDARY](#Section_3.3.4.5.3), the caller MUST be a [**secondary partner**](#gt_secondary-partner), and the callee MUST be a [**primary partner**](#gt_primary-partner). The primary partner MUST construct a name object using the host name specified in the *pszHostName* parameter, the [**contact identifier (CID)**](#gt_008df1ed-6dde-44be-be73-57a5008782ca) specified in the *pszUuidString* parameter, and the [**RPC**](#gt_remote-procedure-call-rpc) protocols specified in the **grbitComProtocols** field of the [BIND_INFO_BLOB](#Section_2.2.1) structure contained in the *rguchBlob* parameter.
+If the *sRank* parameter is [SRANK_SECONDARY](#Section_2.2.8), the caller MUST be a [**secondary partner**](#gt_secondary-partner), and the callee MUST be a [**primary partner**](#gt_primary-partner). The primary partner MUST construct a name object using the host name specified in the *pszHostName* parameter, the [**contact identifier (CID)**](#gt_008df1ed-6dde-44be-be73-57a5008782ca) specified in the *pszUuidString* parameter, and the [**RPC**](#gt_remote-procedure-call-rpc) protocols specified in the **grbitComProtocols** field of the [BIND_INFO_BLOB](#Section_2.2.1) structure contained in the *rguchBlob* parameter.
 
-The primary partner MUST use this name object to check whether or not an existing [**session**](#gt_session) with a matching name object already exists in the session table. If an existing session cannot be found, the primary partner SHOULD return an implementation-specific error code or indicate that the bind was unsuccessful.<26> Note that for this case, the state of the session object does not influence the behavior of [BuildContext](#Section_3.3.4.8).
+The primary partner MUST use this name object to check whether or not an existing [**session**](#gt_session) with a matching name object already exists in the session table. If an existing session cannot be found, the primary partner SHOULD return an implementation-specific error code or indicate that the bind was unsuccessful.<26> Note that for this case, the state of the session object does not influence the behavior of [BuildContext](#Section_3.3.4.2).
 
 Next, the primary partner MUST compute the *pBoundVersionSet* parameter, as specified in section [3.3.4.2.1](#Section_3.3.4.2.1). If the computation fails, the session object MUST be cleaned up, as specified in section 3.3.4.2.1. This value MUST also be stored in the **Version** ADM element of the session object. Finally, the primary partner MUST set the **State** ADM element of the session object to Confirming Connection and then return from the method with the S_OK code.
 
@@ -1249,7 +1249,7 @@ HRESULT NegotiateResources(
 
 );
 
-**phContext:** An [**RPC**](#gt_remote-procedure-call-rpc) context, returned by a call to [BuildContext](#Section_3.3.4.8) or [BuildContextW](#Section_3.3.4.8), correlated with a [**session**](#gt_session) object that is in the Active state. For context handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
+**phContext:** An [**RPC**](#gt_remote-procedure-call-rpc) context, returned by a call to [BuildContext](#Section_3.3.4.2) or [BuildContextW](#Section_3.3.4.8), correlated with a [**session**](#gt_session) object that is in the Active state. For context handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
 **resourceType:** A [RESOURCE_TYPE](#Section_2.2.7) enumerated value indicating the resource type to be negotiated.
 
@@ -1302,7 +1302,7 @@ unsigned char rguchBoxCar[]
 
 );
 
-**phContext:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle, returned by a call to [BuildContext](#Section_3.3.4.8) or [BuildContextW](#Section_3.3.4.8), correlated with a session object in the Active state. For context handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
+**phContext:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle, returned by a call to [BuildContext](#Section_3.3.4.2) or [BuildContextW](#Section_3.3.4.8), correlated with a session object in the Active state. For context handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
 **dwcMessages:** An unsigned 32-bit integer specifying the number of messages being sent.
 
@@ -1346,9 +1346,9 @@ HRESULT TearDownContext(
 
 );
 
-**contextHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle, returned by a call to [BuildContext](#Section_3.3.4.8) or [BuildContextW](#Section_3.3.4.8), is correlated with a session object that is in the Active state. After TearDownContext is executed, on either success or failure requests, *contextHandle* will be set to null. For context handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
+**contextHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle, returned by a call to [BuildContext](#Section_3.3.4.2) or [BuildContextW](#Section_3.3.4.8), is correlated with a session object that is in the Active state. After TearDownContext is executed, on either success or failure requests, *contextHandle* will be set to null. For context handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
-**sRank:** A [SESSION_RANK](#Section_3.3.4.5.3) enumerated value indicating whether the teardown request is being made by a primary partner or secondary partner. The teardown request MUST be sent from a primary partner only.
+**sRank:** A [SESSION_RANK](#Section_2.2.8) enumerated value indicating whether the teardown request is being made by a primary partner or secondary partner. The teardown request MUST be sent from a primary partner only.
 
 | Value | Meaning |
 | --- | --- |
@@ -1462,7 +1462,7 @@ DWORD dwcbSizeOfBlob,
 
 **hBinding:** The [**RPC**](#gt_remote-procedure-call-rpc) primitive binding handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) part 3.
 
-**sRank:** The [SESSION_RANK](#Section_3.3.4.5.3) of the [**partner**](#gt_partner) making the call. This parameter MUST be set to 0x02 (SRANK_SECONDARY).
+**sRank:** The [SESSION_RANK](#Section_2.2.8) of the [**partner**](#gt_partner) making the call. This parameter MUST be set to 0x02 (SRANK_SECONDARY).
 
 | Value | Meaning |
 | --- | --- |
@@ -1494,7 +1494,7 @@ When a partner calls PokeW on another partner, an error code of RPC_S_PROCNUM_OU
 <a id="Section_3.3.4.8"></a>
 #### 3.3.4.8 BuildContextW (Opnum 7)
 
-The BuildContextW method is equivalent in all ways to the [BuildContext](#Section_3.3.4.8) method, except that its string parameters are encoded in UTF-16. The [**MIDL**](#gt_microsoft-interface-definition-language-midl) syntax of the method is as follows.
+The BuildContextW method is equivalent in all ways to the [BuildContext](#Section_3.3.4.2) method, except that its string parameters are encoded in UTF-16. The [**MIDL**](#gt_microsoft-interface-definition-language-midl) syntax of the method is as follows.
 
 HRESULT BuildContextW(
 
@@ -1542,7 +1542,7 @@ DWORD dwcbSizeOfBlob,
 
 | Value | Meaning |
 | --- | --- |
-| [SRANK_PRIMARY](#Section_3.3.4.5.3) 0x01 | The caller is the [**primary partner**](#gt_primary-partner) in this [**session**](#gt_session). |
+| [SRANK_PRIMARY](#Section_2.2.8) 0x01 | The caller is the [**primary partner**](#gt_primary-partner) in this [**session**](#gt_session). |
 | SRANK_SECONDARY 0x02 | The caller is the [**secondary partner**](#gt_secondary-partner) in this session. |
 
 **BindVersionSet:** A [BIND_VERSION_SET](#Section_2.2.2) structure that contains the minimum and maximum versions supported by the [**partner**](#gt_partner).
@@ -1609,7 +1609,7 @@ When the [**RPC**](#gt_remote-procedure-call-rpc) runtime indicates that a conte
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Abstract Data Model
 
-In addition to the abstract data model described in section [3.2.1](#Section_3.4.1), when implementing an IXnRemote client role, an MSDTC Connection Manager: OleTx Transports Protocol partner MUST implement the following local data elements:
+In addition to the abstract data model described in section [3.2.1](#Section_3.2.1), when implementing an IXnRemote client role, an MSDTC Connection Manager: OleTx Transports Protocol partner MUST implement the following local data elements:
 
 - **Session Setup Retry Count**: a 4-byte unsigned element that identifies the number of times that the client SHOULD try to establish a session to another partner before giving up.<32>
 - **Client Security Settings**: A collection of settings that are used to configure the [**RPC**](#gt_remote-procedure-call-rpc) security of the [**client**](#gt_client). As those settings are internal to this protocol and no network traffic is involved in the setting of their values, the following conditions SHOULD be observed:<33>
@@ -1674,7 +1674,7 @@ When the local [**partner**](#gt_partner) is the [**primary partner**](#gt_prima
 
 - If an existing session is found, the session object is returned to the level-two protocol and the request completes successfully.
 - Otherwise, a new session object MUST be created and added to the session table.
-After creating a new session object, the primary partner MUST set the state of the session object to Connecting, and start the [Session Setup timer](#Section_3.2.2.1) associated with that session object. An [**RPC**](#gt_remote-procedure-call-rpc) binding handle to the [**secondary partner**](#gt_secondary-partner) MUST be created and stored in the session object (for binding handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824)). The primary partner MUST attempt to call either the [BuildContextW](#Section_3.3.4.8) or [BuildContext](#Section_3.3.4.8) method on the secondary partner using the binding handle stored in the session object. (For making calls to a partner, see section [3.4](#Section_3.4).) The binding handle used to make the call MUST be stored in the session object. (For binding handles, see [C706].)
+After creating a new session object, the primary partner MUST set the state of the session object to Connecting, and start the [Session Setup timer](#Section_3.2.2.1) associated with that session object. An [**RPC**](#gt_remote-procedure-call-rpc) binding handle to the [**secondary partner**](#gt_secondary-partner) MUST be created and stored in the session object (for binding handles, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824)). The primary partner MUST attempt to call either the [BuildContextW](#Section_3.3.4.8) or [BuildContext](#Section_3.3.4.2) method on the secondary partner using the binding handle stored in the session object. (For making calls to a partner, see section [3.4](#Section_3.4).) The binding handle used to make the call MUST be stored in the session object. (For binding handles, see [C706].)
 
 To determine whether the secondary partner supports BuildContextW, the primary partner calls BuildContextW on the secondary partner and waits for a return value. If the call completes with error code RPC_S_PROCNUM_OUT_OF_RANGE, then the secondary partner does not support BuildContextW.
 
@@ -1752,7 +1752,7 @@ To participate in an MSDTC Connection Manager: OleTx Transports Protocol [**sess
 
 From the second partner's contact identifier (CID), the first partner determines if it is the [**primary partner**](#gt_primary-partner) or [**secondary partner**](#gt_secondary-partner) by performing a case-insensitive string comparison of the first partner's and second partner's contact identifier (CID), as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). If the first partner's contact identifier (CID) string is greater than (follows) the second partner's contact identifier (CID) string, the first partner is the primary partner. If the first partner's contact identifier (CID) string is less than (precedes) the second partner's contact identifier (CID) string, the first partner is the secondary partner.
 
-A session is initiated by the primary partner sending a [BuildContext](#Section_3.3.4.8) (or [BuildContextW](#Section_3.3.4.8)) call to the secondary partner with sRank set to SRANK_PRIMARY. In response, the secondary partner sends a BuildContext call to the secondary partner with sRank set to SRANK_SECONDARY. When the primary partner accepts the BuildContext call from the secondary partner, the secondary partner returns success to the primary partner's BuildContext call. Because the first BuildContext call in the protocol handshake originates from the primary partner, the secondary partner is required to begin a session with the primary partner by calling [Poke](#Section_3.3.4.1) (or [PokeW](#Section_3.3.4.7)), which instructs the primary partner to send a BuildContext call to the secondary partner.
+A session is initiated by the primary partner sending a [BuildContext](#Section_3.3.4.2) (or [BuildContextW](#Section_3.3.4.8)) call to the secondary partner with sRank set to SRANK_PRIMARY. In response, the secondary partner sends a BuildContext call to the secondary partner with sRank set to SRANK_SECONDARY. When the primary partner accepts the BuildContext call from the secondary partner, the secondary partner returns success to the primary partner's BuildContext call. Because the first BuildContext call in the protocol handshake originates from the primary partner, the secondary partner is required to begin a session with the primary partner by calling [Poke](#Section_3.3.4.1) (or [PokeW](#Section_3.3.4.7)), which instructs the primary partner to send a BuildContext call to the secondary partner.
 
 <a id="Section_4.1"></a>
 ## 4.1 Initiating a Session as Primary Partner
@@ -1763,7 +1763,7 @@ In this example, both partners support the [PokeW](#Section_3.3.4.7) and [BuildC
 
 Because this is a new session, the primary partner will create a new object with a newly generated session GUID. The session object is keyed to the session secondary partner name object and is maintained in a list to ensure that there is only one session established with the secondary partner.
 
-To begin a session, the primary partner obtains an [**RPC**](#gt_remote-procedure-call-rpc) binding handle (0x004377b0) from the secondary partner name object, as described in section [1.3.2](#Section_1.3.2). The primary partner uses the binding handle to send a BuildContextW call to the secondary partner using SRANK_PRIMARY. In the BuildContextW call, the primary partner passes its [**NetBIOS machine name**](#gt_netbios-name) (pwszHostName) and contact identifier (CID) (pwszUuidString), and the secondary partner's contact identifier (CID) (pwszCalleeUuid). The primary partner also sends the session GUID (pwszGuidIn), which will be returned in pwszGuidOut when the session is accepted. In the BindVersionSet, the primary partner indicates that it supports both the [Poke](#Section_3.3.4.1) / [BuildContext](#Section_3.3.4.8) and PokeW / BuildContextW method calls, that it supports version 1 of the [**level-two protocol**](#gt_level-two-protocol) and version 5 of the [**level-three protocol**](#gt_level-three-protocol). (In this example, this is version 1 of the protocol described in [MS-CMP](../MS-CMP/MS-CMP.md), and version 5 of this protocol, which is the current version at the level of Windows XP operating system Service Pack 2 (SP2), Windows Server 2003 operating system with Service Pack 1 (SP1), or Windows Vista operating system.) In the BindInfo (rguchBlob), the primary partner indicates that it supports PROT_IP_TCP (bit 0) and PROT_LRPC (bit 5). See section [2.2.4](#Section_2.2.4). The primary partner also passes a pointer to a PCONTEXT_HANDLE, into which it will receive the secondary partner PCONTEXT_HANDLE when the session is accepted.
+To begin a session, the primary partner obtains an [**RPC**](#gt_remote-procedure-call-rpc) binding handle (0x004377b0) from the secondary partner name object, as described in section [1.3.2](#Section_1.3.2). The primary partner uses the binding handle to send a BuildContextW call to the secondary partner using SRANK_PRIMARY. In the BuildContextW call, the primary partner passes its [**NetBIOS machine name**](#gt_netbios-name) (pwszHostName) and contact identifier (CID) (pwszUuidString), and the secondary partner's contact identifier (CID) (pwszCalleeUuid). The primary partner also sends the session GUID (pwszGuidIn), which will be returned in pwszGuidOut when the session is accepted. In the BindVersionSet, the primary partner indicates that it supports both the [Poke](#Section_3.3.4.1) / [BuildContext](#Section_3.3.4.2) and PokeW / BuildContextW method calls, that it supports version 1 of the [**level-two protocol**](#gt_level-two-protocol) and version 5 of the [**level-three protocol**](#gt_level-three-protocol). (In this example, this is version 1 of the protocol described in [MS-CMP](../MS-CMP/MS-CMP.md), and version 5 of this protocol, which is the current version at the level of Windows XP operating system Service Pack 2 (SP2), Windows Server 2003 operating system with Service Pack 1 (SP1), or Windows Vista operating system.) In the BindInfo (rguchBlob), the primary partner indicates that it supports PROT_IP_TCP (bit 0) and PROT_LRPC (bit 5). See section [2.2.4](#Section_2.2.4). The primary partner also passes a pointer to a PCONTEXT_HANDLE, into which it will receive the secondary partner PCONTEXT_HANDLE when the session is accepted.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -1863,7 +1863,7 @@ When the primary partner receives the Poke call from the secondary partner, the 
 
 If no existing session is found, the primary partner will create a new session object and identify it with a newly generated session GUID. The session object is keyed to the secondary partner's name object and is maintained in a list for the primary partner to ensure that there is only one session established with the secondary partner. At this point, the primary partner replies S_OK to the Poke call from the secondary partner, and assumes the role of the primary partner.
 
-As in the first example (see section [4.1](#Section_4.1)), the primary partner obtains an RPC binding handle (0x004dae28) from the secondary partner's name object (see section 1.3.2) to begin a session. The primary partner uses the binding handle to send a BuildContextW call to the secondary partner using SRANK_PRIMARY. In the BuildContextW call, the primary partner passes its NetBIOS machine name (pwszHostName) and contact identifier (CID) (pwszUuidString) and the secondary partner's contact identifier (CID) (pwszCalleeUuid). The primary partner also sends the session GUID (pwszGuidIn), which will be returned in pwszGuidOut when the session is accepted. In the BindVersionSet, the primary partner indicates that it supports both the Poke / [BuildContext](#Section_3.3.4.8) and PokeW / and BuildContextW method calls, that it supports version 1 of the [**level-two protocol**](#gt_level-two-protocol) and version 5 of the [**level-three protocol**](#gt_level-three-protocol). In the BindInfo (rguchBlob), the primary partner indicates that it supports PROT_IP_TCP (bit 0) and PROT_LRPC (bit 5). See section 2.2.4. The primary partner also passes a pointer to a PCONTEXT_HANDLE into which it will receive the secondary partner's PCONTEXT_HANDLE when the session is accepted.
+As in the first example (see section [4.1](#Section_4.1)), the primary partner obtains an RPC binding handle (0x004dae28) from the secondary partner's name object (see section 1.3.2) to begin a session. The primary partner uses the binding handle to send a BuildContextW call to the secondary partner using SRANK_PRIMARY. In the BuildContextW call, the primary partner passes its NetBIOS machine name (pwszHostName) and contact identifier (CID) (pwszUuidString) and the secondary partner's contact identifier (CID) (pwszCalleeUuid). The primary partner also sends the session GUID (pwszGuidIn), which will be returned in pwszGuidOut when the session is accepted. In the BindVersionSet, the primary partner indicates that it supports both the Poke / [BuildContext](#Section_3.3.4.2) and PokeW / and BuildContextW method calls, that it supports version 1 of the [**level-two protocol**](#gt_level-two-protocol) and version 5 of the [**level-three protocol**](#gt_level-three-protocol). In the BindInfo (rguchBlob), the primary partner indicates that it supports PROT_IP_TCP (bit 0) and PROT_LRPC (bit 5). See section 2.2.4. The primary partner also passes a pointer to a PCONTEXT_HANDLE into which it will receive the secondary partner's PCONTEXT_HANDLE when the session is accepted.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -1942,7 +1942,7 @@ At this point, a session has been established between the primary partner and th
 
 After a [**session**](#gt_session) is established, each [**partner**](#gt_partner) needs to respond to requests from MSDTC Connection Manager: OleTx Multiplexing Protocol to negotiate resources with its partner.
 
-In this example, the first partner requests 100 [**connection**](#gt_connection) resources from the second partner. The first partner will pass in the PCONTEXT_HANDLE that it received from its [BuildContext](#Section_3.3.4.8) (or [BuildContextW](#Section_3.3.4.8)) call to the second partner and the ResourceType for the connection resources (RT_CONNECTIONS in this example).
+In this example, the first partner requests 100 [**connection**](#gt_connection) resources from the second partner. The first partner will pass in the PCONTEXT_HANDLE that it received from its [BuildContext](#Section_3.3.4.2) (or [BuildContextW](#Section_3.3.4.8)) call to the second partner and the ResourceType for the connection resources (RT_CONNECTIONS in this example).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -2045,7 +2045,7 @@ The session has now been terminated, and no further messages will be sent.
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-For security considerations for both [**authenticated RPC**](#gt_c303a545-cf65-431a-b82c-879a6c89efaa) and [**unauthenticated RPC**](#gt_bdfac18b-a933-433d-bd6d-9e14e0492bc4) calls used in this protocol, see section [2.1.3](#Section_5) and [MS-RPCE](../MS-RPCE/MS-RPCE.md).
+For security considerations for both [**authenticated RPC**](#gt_c303a545-cf65-431a-b82c-879a6c89efaa) and [**unauthenticated RPC**](#gt_bdfac18b-a933-433d-bd6d-9e14e0492bc4) calls used in this protocol, see section [2.1.3](#Section_2.1.3) and [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
 The [**client**](#gt_client) can fail over to unauthenticated RPC calls when authenticated RPC calls fail for backward compatibility. The unauthenticated RPC call is not as secure as an authenticated RPC call; the client audits or supports this automatic failover only when it is explicitly specified.<39> For every [**RPC**](#gt_remote-procedure-call-rpc) call, the client executes the following sequence of steps:
 
@@ -2061,7 +2061,7 @@ The server is the only role that can impersonate RPC calls. However, the imperso
 
 | Security parameter | Section |
 | --- | --- |
-| Usage of secured and unsecured [**RPC**](#gt_remote-procedure-call-rpc) [**connections**](#gt_connection) | [2.1.3](#Section_5) |
+| Usage of secured and unsecured [**RPC**](#gt_remote-procedure-call-rpc) [**connections**](#gt_connection) | [2.1.3](#Section_2.1.3) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
@@ -2388,7 +2388,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <16> Section 3.3.4.1: The expected error code 0x80000123 (E_CM_SERVER_NOT_READY) is returned by Windows, except that Windows NT 4.0 Option Pack, Windows 2000, Windows XP, and Windows Server 2003 return 0x00000000 and set the *pszGuidOut* parameter to 00000000-0000-0000-0000-000000000000 to indicate that the bind was successful.
 
-<17> Section 3.3.4.1: In Windows NT 4.0 Option Pack, Windows 2000, Windows XP, and Windows Server 2003, when a [Poke](#Section_3.3.4.1) is invoked on a [**secondary partner**](#gt_secondary-partner), the secondary partner responds by making a [BuildContext](#Section_3.3.4.8) callback on the [**primary partner**](#gt_primary-partner). Otherwise in applicable Windows releases a Poke can be invoked only on a primary partner. If a Poke is invoked on a secondary partner, Windows returns the 0x80070057 (E_INVALIDARG) error code.
+<17> Section 3.3.4.1: In Windows NT 4.0 Option Pack, Windows 2000, Windows XP, and Windows Server 2003, when a [Poke](#Section_3.3.4.1) is invoked on a [**secondary partner**](#gt_secondary-partner), the secondary partner responds by making a [BuildContext](#Section_3.3.4.2) callback on the [**primary partner**](#gt_primary-partner). Otherwise in applicable Windows releases a Poke can be invoked only on a primary partner. If a Poke is invoked on a secondary partner, Windows returns the 0x80070057 (E_INVALIDARG) error code.
 
 <18> Section 3.3.4.1: On Windows NT 4.0 Option Pack, Windows 2000, Windows XP, and Windows Server 2003, when a Poke is invoked on a secondary partner, the secondary partner responds by making a BuildContext callback on the primary partner. Otherwise in applicable Windows releases a Poke can be invoked only on a primary partner. If a Poke is invoked on a secondary partner, Windows returns the 0x80070057 (E_INVALIDARG) error code.
 
@@ -2473,7 +2473,7 @@ The changes made to this document are listed in the following table. For more in
 | [3.2.1.4](#Section_3.2.1.4) Name Object | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
 | [3.2.1.4.1](#Section_3.2.1.4.1) Name Object Comparison | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
 | [3.3.4.1](#Section_3.3.4.1) Poke (Opnum 0) | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
-| [3.3.4.2](#Section_3.3.4.8) BuildContext (Opnum 1) | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
+| [3.3.4.2](#Section_3.3.4.2) BuildContext (Opnum 1) | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
 | [3.3.4.7](#Section_3.3.4.7) PokeW (Opnum 6) | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
 | [3.3.4.8](#Section_3.3.4.8) BuildContextW (Opnum 7) | 11751 : Reinstated [NETBEUI] as reference with download link | Major |
 

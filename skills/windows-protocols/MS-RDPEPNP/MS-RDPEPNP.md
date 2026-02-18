@@ -251,7 +251,7 @@ The Remote Desktop Protocol: Plug and Play Devices Virtual Channel Extension con
 <a id="Section_1.3.1"></a>
 ### 1.3.1 PNP Device Info Subprotocol
 
-The [PNP Device Info Subprotocol](#Section_2.2.1) specifies the communication between the [**terminal server**](#gt_terminal-server) client and the terminal server component that handles the creation and removal of [**remote devices**](#gt_remote-device) on the server side. This subprotocol is used to create remote device instances on the server machine that correspond to the physical devices on the client machine. The following illustration shows the PNP Device Info Subprotocol message sequence. This subprotocol uses a dynamic virtual channel named PNPDR for communication between client and server.
+The [PNP Device Info Subprotocol](#Section_1.3.1) specifies the communication between the [**terminal server**](#gt_terminal-server) client and the terminal server component that handles the creation and removal of [**remote devices**](#gt_remote-device) on the server side. This subprotocol is used to create remote device instances on the server machine that correspond to the physical devices on the client machine. The following illustration shows the PNP Device Info Subprotocol message sequence. This subprotocol uses a dynamic virtual channel named PNPDR for communication between client and server.
 
 ![PNP Device Info Subprotocol message sequence](media/image1.png)
 
@@ -268,7 +268,7 @@ The [PNP Device I/O Subprotocol](#Section_1.3.2) specifies the communication bet
 
 Figure 2: PNP Device I/O Subprotocol message sequence
 
-For devices redirected using the [PNP Device Info Subprotocol](#Section_2.2.1), I/O redirection takes place using the PNP Device I/O Subprotocol. The server creates a new subchannel within the **FileRedirectorChannel** main channel for each [CreateFile Request](#Section_3.2.5.2.2.1). Subsequent I/O operations related to the file created are passed on this subchannel. The server sends the I/O requests to the client on behalf of applications running on the server. The client completes the I/O requests and passes the results back to the server.
+For devices redirected using the [PNP Device Info Subprotocol](#Section_1.3.1), I/O redirection takes place using the PNP Device I/O Subprotocol. The server creates a new subchannel within the **FileRedirectorChannel** main channel for each [CreateFile Request](#Section_2.2.2.3.1). Subsequent I/O operations related to the file created are passed on this subchannel. The server sends the I/O requests to the client on behalf of applications running on the server. The client completes the I/O requests and passes the results back to the server.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -330,7 +330,7 @@ The messages in the following sections specify the common header and specific me
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Shared Message Header (PNP_INFO_HEADER)
 
-All messages in the [PNP Device Info Subprotocol](#Section_2.2.1) have a common header, which is followed by a message-specific payload, as described in the following sections.
+All messages in the [PNP Device Info Subprotocol](#Section_1.3.1) have a common header, which is followed by a message-specific payload, as described in the following sections.
 
 ```mermaid
 packet-beta
@@ -355,7 +355,7 @@ packet-beta
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 PNP Device Info Initialization Messages
 
-The messages in the following sections are used to initialize the [PNP Device Info Subprotocol](#Section_2.2.1).
+The messages in the following sections are used to initialize the [PNP Device Info Subprotocol](#Section_1.3.1).
 
 <a id="Section_2.2.1.2.1"></a>
 ##### 2.2.1.2.1 Server Version Message
@@ -652,7 +652,7 @@ packet-beta
 
 **Header (8 bytes):** A [SERVER_IO_HEADER](#Section_2.2.2.1.1) request header. The **FunctionId** field MUST be set to CREATE_FILE_REQUEST (0x00000004).
 
-**DeviceId (4 bytes):** A 32-bit unsigned integer. This field MUST identify the device redirected by the client. Device IDs are initially established as described in section [2.2.1.3.1](#Section_2.2.1.3.1.1).
+**DeviceId (4 bytes):** A 32-bit unsigned integer. This field MUST identify the device redirected by the client. Device IDs are initially established as described in section [2.2.1.3.1](#Section_2.2.1.3.1).
 
 **dwDesiredAccess (4 bytes):** A 32-bit unsigned integer. This is a flag field that indicates various access modes to use for creating and opening the file. This value SHOULD be set to 0xC0000000, meaning generic read and generic write.<9>
 
@@ -704,7 +704,7 @@ packet-beta
   32-63: "Result"
 ```
 
-**Header (4 bytes):** A [CLIENT_IO_HEADER](#Section_2.2.2.1.2) reply header. The **PacketType** field MUST be set to RESPONSE_PACKET (0x00). The **RequestId** field MUST match the value in the **RequestId** field in the corresponding [CreateFile Request Message](#Section_3.2.5.2.2.1).
+**Header (4 bytes):** A [CLIENT_IO_HEADER](#Section_2.2.2.1.2) reply header. The **PacketType** field MUST be set to RESPONSE_PACKET (0x00). The **RequestId** field MUST match the value in the **RequestId** field in the corresponding [CreateFile Request Message](#Section_2.2.2.3.1).
 
 **Result (4 bytes):** An [**HRESULT**](#gt_hresult) value that describes the result of the operation. There are no specific HRESULT values expected by this protocol because the value is returned by the client-side device when it completes the create request. The possible values will vary depending on the device.
 
@@ -905,7 +905,7 @@ packet-beta
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The organization is provided to explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document. An implementation maintains the following data.
 
-**Client device ID:** Both client and server maintain a list of client devices being redirected. The client generates this ID for each device when it sends device information in a [Client Device Addition message](#Section_2.2.1.3.1.1). For subsequent operations on the devices, both client and server use this ID to refer to the device.
+**Client device ID:** Both client and server maintain a list of client devices being redirected. The client generates this ID for each device when it sends device information in a [Client Device Addition message](#Section_2.2.1.3.1). For subsequent operations on the devices, both client and server use this ID to refer to the device.
 
 **Client device list:** Both client and server maintain a list of devices being redirected. This list contains the **client device ID** for each redirected device announced in a Client Device Addition message. Devices are added to the list when they are redirected and removed when either the device is removed with a [Client Device Remove message](#Section_2.2.1.3.2), or redirection is canceled.
 
@@ -998,7 +998,7 @@ No client-specific events or rules are required.
 
 The structure and fields of the [Authenticated Client message](#Section_2.2.1.2.3) are specified in section 2.2.1.2.3.
 
-The server sends the Authenticated Client message after it authenticates the client to the server session. The client MUST NOT send any device addition or removal messages until it receives this message. Only after receiving this message MAY the client send one or more [Client Device Addition messages](#Section_2.2.1.3.1.1).
+The server sends the Authenticated Client message after it authenticates the client to the server session. The client MUST NOT send any device addition or removal messages until it receives this message. Only after receiving this message MAY the client send one or more [Client Device Addition messages](#Section_2.2.1.3.1).
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Device Addition and Removal Messages
@@ -1006,7 +1006,7 @@ The server sends the Authenticated Client message after it authenticates the cli
 <a id="Section_3.2.5.1.2.1"></a>
 ###### 3.2.5.1.2.1 Sending a Client Device Addition Message
 
-The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1.1) are as specified in section 2.2.1.3.1.
+The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1) are as specified in section 2.2.1.3.1.
 
 The client MUST generate and assign a unique client device ID for each of the devices in its Client device list that it wants to redirect to the server. This message MUST be sent only after the client receives an [Authenticated Client message](#Section_2.2.1.2.3).
 
@@ -1015,7 +1015,7 @@ The client MUST generate and assign a unique client device ID for each of the de
 
 The structure and fields of the [Client Device Removal message](#Section_2.2.1.3.2) are as specified in section 2.2.1.3.2.
 
-Before the client sends this message to stop redirecting a particular device, the corresponding device MUST have previously been sent as part of a [Client Device Addition message](#Section_2.2.1.3.1.1). The client also removes the device from its Client device list.
+Before the client sends this message to stop redirecting a particular device, the corresponding device MUST have previously been sent as part of a [Client Device Addition message](#Section_2.2.1.3.1). The client also removes the device from its Client device list.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 PNP Device I/O Subprotocol
@@ -1049,7 +1049,7 @@ The device I/O messages in the [PNP Device I/O Subprotocol](#Section_1.3.2) are 
 <a id="Section_3.2.5.2.2.1"></a>
 ###### 3.2.5.2.2.1 Processing a CreateFile Request Message
 
-The structure and fields of the [CreateFile Request message](#Section_3.2.5.2.2.1) are defined in section 2.2.2.3.1.
+The structure and fields of the [CreateFile Request message](#Section_2.2.2.3.1) are defined in section 2.2.2.3.1.
 
 The client MUST use the client device ID passed in the CreateFile Request message to identify the device to use. The client interacts with the local [**device driver**](#gt_device-driver), using the attributes and flags specified in the CreateFile Request message, to service the I/O request.
 
@@ -1058,7 +1058,7 @@ The client MUST use the client device ID passed in the CreateFile Request messag
 
 The structure and fields of the [CreateFile Reply message](#Section_2.2.2.3.2) are defined in section 2.2.2.3.2.
 
-The result of the client's interaction with the local [**device driver**](#gt_device-driver) in servicing the [CreateFile Request message](#Section_3.2.5.2.2.1) MUST be returned by the client in the CreateFile Reply message. The client MUST maintain the association of the file [**handle**](#gt_handle) obtained through the dynamic virtual channel connection on which it received the CreateFile Request message, because all I/O requests on the connection are associated with the file handle.
+The result of the client's interaction with the local [**device driver**](#gt_device-driver) in servicing the [CreateFile Request message](#Section_2.2.2.3.1) MUST be returned by the client in the CreateFile Reply message. The client MUST maintain the association of the file [**handle**](#gt_handle) obtained through the dynamic virtual channel connection on which it received the CreateFile Request message, because all I/O requests on the connection are associated with the file handle.
 
 <a id="Section_3.2.5.2.2.3"></a>
 ###### 3.2.5.2.2.3 Processing a Read Request Message
@@ -1197,7 +1197,7 @@ The following messages are processed only after the client and server have compl
 <a id="Section_3.3.5.1.2.1"></a>
 ###### 3.3.5.1.2.1 Processing a Client Device Addition Message
 
-The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1.1) are described in section 2.2.1.3.1.
+The structure and fields of the [Client Device Addition message](#Section_2.2.1.3.1) are described in section 2.2.1.3.1.
 
 For each device contained in the **DeviceDescriptions** field of the Client Device Addition message, the server MUST create a [**remote device**](#gt_remote-device) instance on the server to represent the client-side physical devices and add it to its Client device list. The server MUST also maintain a client device ID for each device. A one-to-one correspondence exists between remote devices and client device IDs. This ID MUST be used to refer to a particular device when making I/O calls.
 
@@ -1240,7 +1240,7 @@ For every request message, the server maintains an entry in the **outstanding re
 <a id="Section_3.3.5.2.2.1"></a>
 ###### 3.3.5.2.2.1 Sending a CreateFile Request Message
 
-The structure and fields of the [CreateFile Request message](#Section_3.2.5.2.2.1) are described in section 2.2.2.3.1.
+The structure and fields of the [CreateFile Request message](#Section_2.2.2.3.1) are described in section 2.2.2.3.1.
 
 The server sends a CreateFile Request message to open or create a file on the client-side device on behalf of an application. The server MUST pass the client device ID to identify the device. The server MUST generate a unique ID for this request and pass it in the **RequestId** field of the [SERVER_IO_HEADER](#Section_2.2.2.1.1) along with any flags or attributes for the create-file request.
 

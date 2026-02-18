@@ -459,7 +459,7 @@ Server USB Device Interface IDs are as follows.
 | CANCEL_REQUEST 0x00000100 | The server sends the [Cancel Request](#Section_2.2.6.1) message. |
 | REGISTER_REQUEST_CALLBACK 0x00000101 | The server sends the [Register Request Callback](#Section_2.2.6.2) message. |
 | IO_CONTROL 0x00000102 | The server sends the [IO Control](#Section_2.2.6.3) message. |
-| INTERNAL_IO_CONTROL 0x00000103 | The server sends the [Internal IO Control](#Section_4.1.2) message. |
+| INTERNAL_IO_CONTROL 0x00000103 | The server sends the [Internal IO Control](#Section_2.2.6.4) message. |
 | QUERY_DEVICE_TEXT 0x00000104 | The server sends the [Query Device Text](#Section_2.2.6.5) message. |
 | TRANSFER_IN_REQUEST 0x00000105 | The server sends the [Transfer In Request](#Section_2.2.6.7) message. |
 | TRANSFER_OUT_REQUEST 0x00000106 | The server sends the [Transfer Out Request](#Section_2.2.6.8) message. |
@@ -476,7 +476,7 @@ Channel Notification Interface IDs are as follows.
 
 | Value | Meaning |
 | --- | --- |
-| CHANNEL_CREATED 0x00000100 | The server and the client send the [Channel Created](#Section_4.1.1) message. |
+| CHANNEL_CREATED 0x00000100 | The server and the client send the [Channel Created](#Section_2.2.5.1) message. |
 
 **messagePayload (variable):** An array of unsigned 8-bit integers. The remainder of the message is interpreted based on the interface for which the packet is sent. This field is optional based on the packet length.
 

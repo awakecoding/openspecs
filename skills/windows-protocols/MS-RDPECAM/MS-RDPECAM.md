@@ -342,7 +342,7 @@ This sequence occurs on the [**device channel**](#gt_device-channel). The server
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Video Capture sequence
 
-This sequence occurs on the [**device channel**](#gt_device-channel). The server uses this sequence to receive video data from the video capture device on the client associated with this channel. First, the server sends an Activate Device Request (section [2.2.3.3](#Section_2.2.3.3)), if it did not do so yet, to ensure that the device is ready for use. Next, the server sends a Start Streams Request (section [2.2.3.11](#Section_2.2.3.11.1)) to select the video stream(s) to produce video [**samples**](#gt_sample) and to select the current [**stream format**](#gt_stream-format) for each stream. Then, for each stream the server starts sending Sample Requests (section [2.2.3.13](#Section_2.2.3.13)). For each Sample Request, when a new sample is ready, the client sends back a Sample Response (section [2.2.3.14](#Section_2.2.3.14)) containing the video sample. When the server does not require any more video data, it sends a Stop Streams Request (section [2.2.3.12](#Section_2.2.3.12)). At the end of the sequence, the server sends a Deactivate Device Request (section [2.2.3.4](#Section_2.2.3.4)) to allow the client to free resources associated with the device.
+This sequence occurs on the [**device channel**](#gt_device-channel). The server uses this sequence to receive video data from the video capture device on the client associated with this channel. First, the server sends an Activate Device Request (section [2.2.3.3](#Section_2.2.3.3)), if it did not do so yet, to ensure that the device is ready for use. Next, the server sends a Start Streams Request (section [2.2.3.11](#Section_2.2.3.11)) to select the video stream(s) to produce video [**samples**](#gt_sample) and to select the current [**stream format**](#gt_stream-format) for each stream. Then, for each stream the server starts sending Sample Requests (section [2.2.3.13](#Section_2.2.3.13)). For each Sample Request, when a new sample is ready, the client sends back a Sample Response (section [2.2.3.14](#Section_2.2.3.14)) containing the video sample. When the server does not require any more video data, it sends a Stop Streams Request (section [2.2.3.12](#Section_2.2.3.12)). At the end of the sequence, the server sends a Deactivate Device Request (section [2.2.3.4](#Section_2.2.3.4)) to allow the client to free resources associated with the device.
 
 ![image5](media/image5.png)
 
@@ -440,15 +440,15 @@ packet-beta
 | MediaTypeListResponse 0x0C | A Media Type List Response (section [2.2.3.8](#Section_2.2.3.8)) message. |
 | CurrentMediaTypeRequest 0x0D | A Current Media Type Request (section [2.2.3.9](#Section_2.2.3.9)) message. |
 | CurrentMediaTypeResponse 0x0E | A Current Media Type Response (section [2.2.3.10](#Section_2.2.3.10)) message. |
-| StartStreamsRequest 0x0F | A Start Streams Request (section [2.2.3.11](#Section_2.2.3.11.1)) message. |
+| StartStreamsRequest 0x0F | A Start Streams Request (section [2.2.3.11](#Section_2.2.3.11)) message. |
 | StopStreamsRequest 0x10 | A Stop Streams Request (section [2.2.3.12](#Section_2.2.3.12)) message. |
 | SampleRequest 0x11 | A Sample Request (section [2.2.3.13](#Section_2.2.3.13)) message. |
 | SampleResponse 0x12 | A Sample Response (section [2.2.3.14](#Section_2.2.3.14)) message. |
 | SampleErrorResponse 0x13 | A Sample Error Response (section [2.2.3.15](#Section_2.2.3.15)) message. |
 | PropertyListRequest 0x14 | A Property List Request (section [2.2.3.16](#Section_2.2.3.16)) message. This message is supported only by version 2 of the protocol. |
-| PropertyListResponse 0x15 | A Property List Response (section [2.2.3.17](#Section_2.2.3.17.1)) message. This message is supported only by version 2 of the protocol. |
+| PropertyListResponse 0x15 | A Property List Response (section [2.2.3.17](#Section_2.2.3.17)) message. This message is supported only by version 2 of the protocol. |
 | PropertyValueRequest 0x16 | A Property Value Request (section [2.2.3.18](#Section_2.2.3.18)) message. This message is supported only by version 2 of the protocol. |
-| PropertyValueResponse 0x17 | A Property Value Response (section [2.2.3.19](#Section_2.2.3.19.1)) message. This message is supported only by version 2 of the protocol. |
+| PropertyValueResponse 0x17 | A Property Value Response (section [2.2.3.19](#Section_2.2.3.19)) message. This message is supported only by version 2 of the protocol. |
 | SetPropertyValueRequest 0x18 | A Set Property Value Request (section [2.2.3.20](#Section_2.2.3.20)) message. This message is supported only by version 2 of the protocol. |
 
 <a id="Section_2.2.2"></a>
@@ -817,7 +817,7 @@ packet-beta
 
 **StreamIndex (1 byte):** An 8-bit unsigned integer containing the index of the stream which produced the sample. This index MUST match the index in the STREAM_DESCRIPTION array returned in the Stream List Response (section [2.2.3.6](#Section_2.2.3.6)) message.
 
-**Sample (variable):** A variable-length array of bytes containing the sample data. The data format depends on the [**stream format**](#gt_stream-format) selected in the Start Streams Request (section [2.2.3.11](#Section_2.2.3.11.1)) message.
+**Sample (variable):** A variable-length array of bytes containing the sample data. The data format depends on the [**stream format**](#gt_stream-format) selected in the Start Streams Request (section [2.2.3.11](#Section_2.2.3.11)) message.
 
 <a id="Section_2.2.3.15"></a>
 #### 2.2.3.15 Sample Error Response
@@ -840,7 +840,7 @@ packet-beta
 <a id="Section_2.2.3.16"></a>
 #### 2.2.3.16 Property List Request
 
-The Stream List Request message is sent by the server over a [**device channel**](#gt_device-channel) to retrieve the list of device properties supported by the video capture device. In response the client MUST send either the Property List Response (section [2.2.3.17](#Section_2.2.3.17.1)) or Error Response (section [2.2.3.2](#Section_2.2.3.2)) message.
+The Stream List Request message is sent by the server over a [**device channel**](#gt_device-channel) to retrieve the list of device properties supported by the video capture device. In response the client MUST send either the Property List Response (section [2.2.3.17](#Section_2.2.3.17)) or Error Response (section [2.2.3.2](#Section_2.2.3.2)) message.
 
 ```mermaid
 packet-beta
@@ -928,7 +928,7 @@ VideoProcAmp properties:
 <a id="Section_2.2.3.18"></a>
 #### 2.2.3.18 Property Value Request
 
-The Property Value Request message is sent by the server over a [**device channel**](#gt_device-channel) to retrieve the current value of the specified device property of the video capture device. In response the client MUST send either the Property Value Response (section [2.2.3.19](#Section_2.2.3.19.1)) or Error Response (section [2.2.3.2](#Section_2.2.3.2)) message.
+The Property Value Request message is sent by the server over a [**device channel**](#gt_device-channel) to retrieve the current value of the specified device property of the video capture device. In response the client MUST send either the Property Value Response (section [2.2.3.19](#Section_2.2.3.19)) or Error Response (section [2.2.3.2](#Section_2.2.3.2)) message.
 
 ```mermaid
 packet-beta
@@ -1021,7 +1021,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Stream Array:** The client and server maintain an array of video streams for each redirected video capture device. The server receives the stream array from the client in the Stream List Response (section [2.2.3.6](#Section_2.2.3.6)) message and MUST use indexes from that array when constructing requests containing a stream index.
 
-**Media Type List:** The client and server maintain a list of supported [**stream formats**](#gt_stream-format) for each stream of each redirected video capture device. When sending a Start Streams Request (section [2.2.3.11](#Section_2.2.3.11.1)) message the server MUST include a stream format from this list for each stream being started.
+**Media Type List:** The client and server maintain a list of supported [**stream formats**](#gt_stream-format) for each stream of each redirected video capture device. When sending a Start Streams Request (section [2.2.3.11](#Section_2.2.3.11)) message the server MUST include a stream format from this list for each stream being started.
 
 A redirected video capture device has the following states:
 
@@ -1105,7 +1105,7 @@ The structure and fields of the Select Version Response message are specified in
 
 If the value of the **Version** field in the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure does not match one of the protocol versions supported by the client, the client MUST not continue with the protocol.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Sending a Device Added Notification
@@ -1132,7 +1132,7 @@ Upon success the client MUST respond with a Success Response (section [2.2.3.1](
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Processing a Stream List Request
@@ -1145,7 +1145,7 @@ Upon success the client MUST respond with a Stream List Response (section [2.2.3
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Sending a Stream List Response
@@ -1165,7 +1165,7 @@ Upon success the client MUST respond with a Media Type List Response (section [2
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.9"></a>
 #### 3.2.5.9 Sending a Media Type List Response
@@ -1185,7 +1185,7 @@ Upon success the client MUST respond with a Current Media Type Response (section
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 Sending a Current Media Type Response
@@ -1197,7 +1197,7 @@ The client MUST send this message after successfully processing a Current Media 
 <a id="Section_3.2.5.12"></a>
 #### 3.2.5.12 Processing a Start Streams Request
 
-The structure and fields of the Start Streams Request message are specified in section [2.2.3.11](#Section_2.2.3.11.1).
+The structure and fields of the Start Streams Request message are specified in section [2.2.3.11](#Section_2.2.3.11).
 
 After receiving this message, the client determines the number of the START_STREAM_INFO (section [2.2.3.11.1](#Section_2.2.3.11.1)) structures it contains by subtracting the size of the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure from the size of the message and dividing the result by the size of the START_STREAM_INFO structure. Next, it iterates over each START_STREAM_INFO structure, obtains the stream index and selected [**stream format**](#gt_stream-format) for each stream to be started, and starts the streams. Upon success, the device SHOULD be considered to be in the **Streaming** state as described in section [3.1.1](#Section_3.1.1).
 
@@ -1205,7 +1205,7 @@ Upon success the client MUST respond with a Success Response (section [2.2.3.1](
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.13"></a>
 #### 3.2.5.13 Processing a Sample Request
@@ -1218,7 +1218,7 @@ Upon success the client MUST respond with a Sample Response (section [2.2.3.14](
 
 Upon failure, the client MUST respond with a Sample Error Response (section [2.2.3.15](#Section_2.2.3.15)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section [2.2.3.2](#Section_2.2.3.2)).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.14"></a>
 #### 3.2.5.14 Sending a Sample Response
@@ -1238,7 +1238,7 @@ Upon success the client MUST respond with a Success Response (section [2.2.3.1](
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.16"></a>
 #### 3.2.5.16 Processing a Property List Request
@@ -1247,16 +1247,16 @@ The structure and fields of the Property List Request message are specified in s
 
 After receiving this message, the client enumerates all of the device properties supported by the video capture device.
 
-Upon success the client MUST respond with a Property List Response (section [2.2.3.17](#Section_2.2.3.17.1)) message.
+Upon success the client MUST respond with a Property List Response (section [2.2.3.17](#Section_2.2.3.17)) message.
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.17"></a>
 #### 3.2.5.17 Sending a Property List Response
 
-The structure and fields of the Property List Response message are specified in section [2.2.3.17](#Section_2.2.3.17.1).
+The structure and fields of the Property List Response message are specified in section [2.2.3.17](#Section_2.2.3.17).
 
 The client MUST send this message after successfully processing a Property List Request as specified in section [3.2.5.16](#Section_3.2.5.16). The message MUST contain the list of device properties supported by the video capture device.
 
@@ -1267,16 +1267,16 @@ The structure and fields of the Property Value Request message are specified in 
 
 After receiving this message, the client parses it to obtain the **PropertySet** and **PropertyId** values and uses them to locate the device property. Next, it acquires the current value of the specified property.
 
-Upon success the client MUST respond with a Property Value Response (section [2.2.3.19](#Section_2.2.3.19.1)) message.
+Upon success the client MUST respond with a Property Value Response (section [2.2.3.19](#Section_2.2.3.19)) message.
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.19"></a>
 #### 3.2.5.19 Sending a Property Value Response
 
-The structure and fields of the Property Value Response message are specified in section [2.2.3.19](#Section_2.2.3.19.1).
+The structure and fields of the Property Value Response message are specified in section [2.2.3.19](#Section_2.2.3.19).
 
 The client MUST send this message after successfully processing a Property Value Request as specified in section [3.2.5.18](#Section_3.2.5.18). The message MUST contain information about the current value of the specified device property.
 
@@ -1291,7 +1291,7 @@ Upon success the client MUST respond with a Success Response (section [2.2.3.1](
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.21"></a>
 #### 3.2.5.21 Processing a Deactivate Device Request
@@ -1304,7 +1304,7 @@ Upon success the client MUST respond with a Success Response (section [2.2.3.1](
 
 Upon failure, the client MUST respond with an Error Response (section [2.2.3.2](#Section_2.2.3.2)) message. The value of the **ErrorCode** field MUST be set to one of the error codes supported in the current protocol version (section 2.2.3.2).
 
-Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.5.22"></a>
 #### 3.2.5.22 Sending a Success Response
@@ -1372,7 +1372,7 @@ The structure and fields of the Select Version Request message are specified in 
 
 After receiving this message the server extracts the **Version** value from the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure, compares it with the highest protocol version it supports, and selects the smallest of the two to be sent back in the Select Version Response (section [2.2.2.2](#Section_2.2.2.2)) message.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Sending a Select Version Response
@@ -1388,7 +1388,7 @@ The structure and fields of the Device Added Notification message are specified 
 
 After receiving this message, the server parses it to obtain the **DeviceName** and **VirtualChannelName** strings. Next, it uses the device name to construct the display name of the video capture device for applications, while the virtual channel name is used to connect to the [**device channel**](#gt_device-channel) on the client.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Processing a Device Removed Notification
@@ -1397,7 +1397,7 @@ The structure and fields of the Device Removed Notification message are specifie
 
 After receiving this message, the server parses it to obtain the **VirtualChannelName** string. Next, it notifies the applications that the video capture device associated with the specified [**device channel**](#gt_device-channel) has been removed.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 Sending an Activate Device Request
@@ -1420,7 +1420,7 @@ The structure and fields of the Stream List Response message are specified in se
 
 After receiving this message, the server calculates the number of STREAM_DESCRIPTION (section [2.2.3.6.1](#Section_2.2.3.6.1)) structures it contains by subtracting the size of the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure from the size of the message and dividing the result by the size of the STREAM_DESCRIPTION structure. Next, it iterates over each STREAM_DESCRIPTION structure and stores the information to be used by applications.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.8"></a>
 #### 3.3.5.8 Sending a Media Type List Request
@@ -1436,7 +1436,7 @@ The structure and fields of the Media Type List Response message are specified i
 
 After receiving this message, the server calculates the number of MEDIA_TYPE_DESCRIPTION (section [2.2.3.8.1](#Section_2.2.3.8.1)) structures it contains by subtracting the size of the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure from the size of the message and dividing the result by the size of the MEDIA_TYPE_DESCRIPTION structure. Next, it iterates over each MEDIA_TYPE_DESCRIPTION structure and stores the information to be used by applications.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.10"></a>
 #### 3.3.5.10 Sending a Current Media Type Request
@@ -1452,12 +1452,12 @@ The structure and fields of the Current Media Type Response message are specifie
 
 After receiving this message, the server parses the message to obtain the MEDIA_TYPE_DESCRIPTION (section [2.2.3.8.1](#Section_2.2.3.8.1)) structure. Next, it stores the information to be used by applications.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.12"></a>
 #### 3.3.5.12 Sending a Start Streams Request
 
-The structure and fields of the Start Streams Request message are specified in section [2.2.3.11](#Section_2.2.3.11.1).
+The structure and fields of the Start Streams Request message are specified in section [2.2.3.11](#Section_2.2.3.11).
 
 The server sends this message to start the specified streams on the video capture device. The server MUST send this message only after a successful Activate Device Request (section [3.3.5.5](#Section_3.3.5.5)) message and before any Deactivate Device Request (section [3.3.5.21](#Section_3.3.5.21)) message.
 
@@ -1475,7 +1475,7 @@ The structure and fields of the Sample Response message are specified in section
 
 After receiving this message, the server parses it to obtain the **StreamIndex** and the video [**sample**](#gt_sample) data. The sample size is calculated by subtracting the sum of the size of the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure and the size of the **StreamIndex** field from the size of the message. Next, the server passes the sample data to applications.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.15"></a>
 #### 3.3.5.15 Sending a Stop Streams Request
@@ -1494,11 +1494,11 @@ The server sends this message to obtain a list of device properties supported by
 <a id="Section_3.3.5.17"></a>
 #### 3.3.5.17 Processing a Property List Response
 
-The structure and fields of the Property List Response message are specified in section [2.2.3.17](#Section_2.2.3.17.1).
+The structure and fields of the Property List Response message are specified in section [2.2.3.17](#Section_2.2.3.17).
 
 After receiving this message, the server calculates the number of PROPERTY_DESCRIPTION (section [2.2.3.17.1](#Section_2.2.3.17.1)) structures it contains by subtracting the size of the SHARED_MSG_HEADER (section [2.2.1](#Section_2.2.1)) structure from the size of the message and dividing the result by the size of the PROPERTY_DESCRIPTION structure. Next, it iterates over each PROPERTY_DESCRIPTION structure and stores the information to be used by applications.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.18"></a>
 #### 3.3.5.18 Sending a Property Value Request
@@ -1510,11 +1510,11 @@ The server sends this message to obtain the current value of the specified devic
 <a id="Section_3.3.5.19"></a>
 #### 3.3.5.19 Processing a Property Value Response
 
-The structure and fields of the Property Value Response message are specified in section [2.2.3.19](#Section_2.2.3.19.1).
+The structure and fields of the Property Value Response message are specified in section [2.2.3.19](#Section_2.2.3.19).
 
 After receiving this message, the server parses it to obtain the PROPERTY_VALUE (section [2.2.3.19.1](#Section_2.2.3.19.1)) structure. Next, it stores the property value information to be used by applications.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.20"></a>
 #### 3.3.5.20 Sending a Set Property Value Request
@@ -1537,7 +1537,7 @@ The structure and fields of the Success Response message are specified in sectio
 
 The server uses the Success Response message as an indication that a request was successful.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.23"></a>
 #### 3.3.5.23 Processing an Error Response
@@ -1546,7 +1546,7 @@ The structure and fields of the Error Response message are specified in section 
 
 After receiving this message, the server parses it to obtain the **ErrorCode** value. This value SHOULD be used when notifying applications about the error.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.5.24"></a>
 #### 3.3.5.24 Processing a Sample Error Response
@@ -1555,7 +1555,7 @@ The structure and fields of the Sample Error Response message are specified in s
 
 After receiving this message, the server parses it to obtain the **StreamIndex** and the **ErrorCode** values. These values SHOULD be used when notifying applications about the error.
 
-Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.1.5).
+Malformed and out-of-sequence messages are handled as specified in section [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -1873,7 +1873,7 @@ The following is an annotated dump of the Video Capture sequence, as described i
 <a id="Section_4.5.1"></a>
 ### 4.5.1 Start Streams Request
 
-The following is an annotated dump of a Start Streams Request (section [2.2.3.11](#Section_2.2.3.11.1)).
+The following is an annotated dump of a Start Streams Request (section [2.2.3.11](#Section_2.2.3.11)).
 
 00000000 02 0f 00 01 80 07 00 00 38 04 00 00 1e 00 00 00 ........8.......
 
@@ -1991,7 +1991,7 @@ The following is an annotated dump of a Property List Request (section [2.2.3.16
 <a id="Section_4.6.2"></a>
 ### 4.6.2 Property List Response
 
-The following is an annotated dump of a Property List Response (section [2.2.3.17](#Section_2.2.3.17.1)).
+The following is an annotated dump of a Property List Response (section [2.2.3.17](#Section_2.2.3.17)).
 
 00000000 02 15 01 02 03 00 00 00 00 fa 00 00 00 05 00 00 ................
 
@@ -2049,7 +2049,7 @@ The following is an annotated dump of a Property Value Request (section [2.2.3.1
 <a id="Section_4.6.4"></a>
 ### 4.6.4 Property Value Response
 
-The following is an annotated dump of a Property Value Response (section [2.2.3.19](#Section_2.2.3.19.1)).
+The following is an annotated dump of a Property Value Response (section [2.2.3.19](#Section_2.2.3.19)).
 
 00000000 02 17 01 64 00 00 00 ...d...
 

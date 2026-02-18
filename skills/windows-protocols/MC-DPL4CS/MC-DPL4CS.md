@@ -412,11 +412,11 @@ When a game application decides to host a game, it configures the [**DirectPlay 
 | DirectPlay flag | Behavior |
 | --- | --- |
 | DPSESSION_NEWPLAYERSDISABLED 0x00000001 | The DirectPlay 4 host disables the creation of new players. Groups can continue to be added and managed. **Note** This flag is dynamic. |
-| DPSESSION_MIGRATEHOST 0x00000004 | If the DirectPlay 4 host computer fails, the **DirectPlay 4 Protocol** will migrate the host computer to another machine. See section [3.1.6.2](#Section_3.2.6.2) for more information. |
+| DPSESSION_MIGRATEHOST 0x00000004 | If the DirectPlay 4 host computer fails, the **DirectPlay 4 Protocol** will migrate the host computer to another machine. See section [3.1.6.2](#Section_3.1.6.2) for more information. |
 | DPSESSION_NOMESSAGEID 0x00000008 | If this option is set, the **DirectPlay 4 Protocol** will not include the **PlayerTo** and **PlayerFrom** field in player management messages (**DPSP_MSG_PLAYERMESSAGE**, **DPSP_MSG_DELETEPLAYER**, **DPSP_MSG_DELETEGROUP**, **DPSP_MSG_ADDPLAYERTOGROUP**, **DPSP_MSG_DELETEPLAYERFROMGROUP**). |
 | DPSESSION_NOPLAYERMGMT 0x00000010 | The DirectPlay 4 client will not generate player management messages (**DPSP_MSG_PLAYERMESSAGE**, **DPSP_MSG_DELETEPLAYER**, **DPSP_MSG_DELETEGROUP**, **DPSP_MSG_ADDPLAYERTOGROUP**, **DPSP_MSG_DELETEPLAYERFROMGROUP**). |
 | DPSESSION_JOINDISABLED 0x00000020 | The **DirectPlay 4 Protocol** will no longer allow computers to join the game session. Players and groups can continue to be added by computers already in the game session. **Note** This flag is dynamic. |
-| DPSESSION_KEEPALIVE 0x00000040 | The **DirectPlay 4 Protocol** will periodically send **DPSP_MSG_PING** (section [2.2.42](#Section_3.1.5.30)) messages to ensure that all computers in the game session are still functioning. |
+| DPSESSION_KEEPALIVE 0x00000040 | The **DirectPlay 4 Protocol** will periodically send **DPSP_MSG_PING** (section [2.2.42](#Section_2.2.42)) messages to ensure that all computers in the game session are still functioning. |
 | DPSESSION_NODATAMESSAGES 0x00000080 | The **DirectPlay 4 Protocol** will not send **DPSP_MSG_PLAYERDATACHANGED** (section [2.2.44](#Section_2.2.44)) messages. |
 | DPSESSION_SECURESERVER 0x00000100 | The DirectPlay 4 host computer will require all DirectPlay 4 clients connecting to the computer to authenticate, as specified in sections [3.1.5.1](#Section_3.1.5.1) and [3.2.5.7](#Section_3.2.5.7). Players in the game session can then sign and/or encrypt application data. **Note** This option is incompatible with the DPSESSION_MIGRATEHOST option. |
 | DPSESSION_PRIVATE 0x00000200 | Established instances of the game that require computers to join ensure the user has entered the desired password prior to initiating the connection. |
@@ -568,7 +568,7 @@ packet-beta
 
 **NS (1 bit):** The player is the name server (host). It MUST be combined with **SP**.
 
-**PG (1 bit):** The player belongs to a group. This flag MUST be set for system players, for other players that have been added to a group using [DPSP_MSG_ADDPLAYERTOGROUP (section 2.2.12)](#Section_2.2.12), or for groups that have been added to a group using [DPSP_MSG_ADDSHORTCUTTOGROUP (section 2.2.13)](#Section_3.1.5.23).
+**PG (1 bit):** The player belongs to a group. This flag MUST be set for system players, for other players that have been added to a group using [DPSP_MSG_ADDPLAYERTOGROUP (section 2.2.12)](#Section_2.2.12), or for groups that have been added to a group using [DPSP_MSG_ADDSHORTCUTTOGROUP (section 2.2.13)](#Section_2.2.13).
 
 **PL (1 bit):** The player is on the sending machine. This flag does not have meaning on other machines and MUST be ignored on receipt.
 
@@ -658,7 +658,7 @@ packet-beta
 
 **NS (1 bit):** The player is the name server (host). It MUST be combined with **SP**.
 
-**PG (1 bit):** The player belongs to a group. This flag MUST be set for system players, for other players that have been added to a group using [DPSP_MSG_ADDPLAYERTOGROUP (section 2.2.12)](#Section_2.2.12), or for groups that have been added to a group using [DPSP_MSG_ADDSHORTCUTTOGROUP (section 2.2.13)](#Section_3.1.5.23).
+**PG (1 bit):** The player belongs to a group. This flag MUST be set for system players, for other players that have been added to a group using [DPSP_MSG_ADDPLAYERTOGROUP (section 2.2.12)](#Section_2.2.12), or for groups that have been added to a group using [DPSP_MSG_ADDSHORTCUTTOGROUP (section 2.2.13)](#Section_2.2.13).
 
 **PL (1 bit):** The player is on the sending machine. This flag does not have meaning on other machines and MUST be ignored on receipt.
 
@@ -846,7 +846,7 @@ packet-beta
 
 **X (1 bit):** All bits with this label SHOULD be set to zero when sent and MUST be ignored on receipt.
 
-**MH (1 bit):** When the game host quits, the game host responsibilities migrate to another DirectPlay machine so that new players can continue to be created and nascent game instances can join the game session, as specified in section [3.1.6.2](#Section_3.2.6.2).
+**MH (1 bit):** When the game host quits, the game host responsibilities migrate to another DirectPlay machine so that new players can continue to be created and nascent game instances can join the game session, as specified in section [3.1.6.2](#Section_3.1.6.2).
 
 **NM (1 bit):** DirectPlay will not set the **PlayerTo** and **PlayerFrom** fields in player messages.
 
@@ -854,7 +854,7 @@ packet-beta
 
 **JD (1 bit):** [**DirectPlay**](#gt_directplay) will not allow any new applications to join the game session. Applications already in the game session can still create new players, as specified in section 3.2.5.4.
 
-**KA (1 bit):** DirectPlay will detect when remote players exit abnormally (for example, because their computer or modem was unplugged) through the use of the [Ping Timer](#Section_3.2.6.2), as described in sections 3.1.2.5 and [3.2.2.2](#Section_3.2.6.2).
+**KA (1 bit):** DirectPlay will detect when remote players exit abnormally (for example, because their computer or modem was unplugged) through the use of the [Ping Timer](#Section_3.1.2.5), as described in sections 3.1.2.5 and [3.2.2.2](#Section_3.2.2.2).
 
 **ND (1 bit):** DirectPlay will not send a message to all players when a player's remote data changes.
 
@@ -1045,7 +1045,7 @@ packet-beta
 <a id="Section_2.2.9"></a>
 ### 2.2.9 DPSP_MSG_ADDFORWARDACK
 
-The **DPSP_MSG_ADDFORWARDACK** packet is sent in response to a [DPSP_MSG_ADDFORWARD](#Section_3.1.5.10) message.
+The **DPSP_MSG_ADDFORWARDACK** packet is sent in response to a [DPSP_MSG_ADDFORWARD](#Section_2.2.8) message.
 
 ```mermaid
 packet-beta
@@ -1060,7 +1060,7 @@ packet-beta
 <a id="Section_2.2.10"></a>
 ### 2.2.10 DPSP_MSG_ADDFORWARDREPLY
 
-The **DPSP_MSG_ADDFORWARDREPLY** packet is sent in response to a [DPSP_MSG_ADDFORWARDREQUEST](#Section_3.2.5.5) message when there is an error.
+The **DPSP_MSG_ADDFORWARDREPLY** packet is sent in response to a [DPSP_MSG_ADDFORWARDREQUEST](#Section_2.2.11) message when there is an error.
 
 ```mermaid
 packet-beta
@@ -1070,7 +1070,7 @@ packet-beta
 
 **DPSP_MSG_HEADER (28 bytes):** Message header for this packet. The Command Value member of this field MUST be set to 36 (0x24).
 
-**Error (4 bytes):** Indicates the reason that the **DPSP_MSG_ADDFORWARD** (section [2.2.8](#Section_3.1.5.10)) message failed. For a complete list of [**DirectPlay 4**](#gt_directplay-4) [**HRESULT**](#gt_hresult) codes, see [MS-ERREF](../MS-ERREF/MS-ERREF.md).
+**Error (4 bytes):** Indicates the reason that the **DPSP_MSG_ADDFORWARD** (section [2.2.8](#Section_2.2.8)) message failed. For a complete list of [**DirectPlay 4**](#gt_directplay-4) [**HRESULT**](#gt_hresult) codes, see [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 <a id="Section_2.2.11"></a>
 ### 2.2.11 DPSP_MSG_ADDFORWARDREQUEST
@@ -1388,7 +1388,7 @@ packet-beta
 <a id="Section_2.2.22"></a>
 ### 2.2.22 DPSP_MSG_CREATEPLAYERVERIFY
 
-A **DPSP_MSG_CREATEPLAYERVERIFY** message is sent as verification that a player was previously created. When all of the following conditions are met, one or more **DPSP_MSG_CREATEPLAYERVERIFY** messages are sent in response to a [DPSP_MSG_CREATEPLAYER (section 2.2.21)](#Section_3.1.5.12) message:
+A **DPSP_MSG_CREATEPLAYERVERIFY** message is sent as verification that a player was previously created. When all of the following conditions are met, one or more **DPSP_MSG_CREATEPLAYERVERIFY** messages are sent in response to a [DPSP_MSG_CREATEPLAYER (section 2.2.21)](#Section_2.2.21) message:
 
 - The receiving computer system is not the [**host**](#gt_host).
 - The [**player**](#gt_player) referenced in the incoming DPSP_MSG_CREATEPLAYER message has not already been added to the [**name table**](#gt_name-table).
@@ -1549,7 +1549,7 @@ packet-beta
 <a id="Section_2.2.28"></a>
 ### 2.2.28 DPSP_MSG_ENUMPLAYERSREPLY
 
-The **DPSP_MSG_ENUMPLAYERSREPLY** packet can be sent in response to a [DPSP_MSG_ENUMPLAYER (section 2.2.27)](#Section_2.2.27) message or a [DPSP_MSG_ADDFORWARDREQUEST (section 2.2.11)](#Section_3.2.5.5) message.
+The **DPSP_MSG_ENUMPLAYERSREPLY** packet can be sent in response to a [DPSP_MSG_ENUMPLAYER (section 2.2.27)](#Section_2.2.27) message or a [DPSP_MSG_ADDFORWARDREQUEST (section 2.2.11)](#Section_2.2.11) message.
 
 **Note** If the **CS** flag in the [DPSESSIONDESC2 (section 2.2.5)](#Section_2.2.5) structure associated with the [**game session**](#gt_game-session) is set, implementations SHOULD use the **DPSP_MSG_ENUMPLAYERSREPLY** message; otherwise, implementations SHOULD use the [DPSP_MSG_SUPERENUMPLAYERSREPLY (section 2.2.53)](#Section_2.2.53) message.
 
@@ -1749,7 +1749,7 @@ packet-beta
 
 **NS (1 bit):** The player is the name server (host). MUST be combined with **SP**.
 
-**PG (1 bit):** The player belongs to a group. This flag MUST be set for system players, for other players that have been added to a group using [DPSP_MSG_ADDPLAYERTOGROUP (section 2.2.12)](#Section_2.2.12), or for groups that have been added to a group using [DPSP_MSG_ADDSHORTCUTTOGROUP (section 2.2.13)](#Section_3.1.5.23).
+**PG (1 bit):** The player belongs to a group. This flag MUST be set for system players, for other players that have been added to a group using [DPSP_MSG_ADDPLAYERTOGROUP (section 2.2.12)](#Section_2.2.12), or for groups that have been added to a group using [DPSP_MSG_ADDSHORTCUTTOGROUP (section 2.2.13)](#Section_2.2.13).
 
 **X (29 bits):** All bits that have this label SHOULD be set to zero when sent and MUST be ignored on receipt.
 
@@ -1802,7 +1802,7 @@ packet-beta
 <a id="Section_2.2.35"></a>
 ### 2.2.35 DPSP_MSG_KEYEXCHANGEREPLY
 
-The **DPSP_MSG_KEYEXCHANGEREPLY** packet is sent in response to a **DPSP_MSG_KEYEXCHANGE** (section [2.2.34](#Section_3.2.5.9)) message that contains the server's public key.
+The **DPSP_MSG_KEYEXCHANGEREPLY** packet is sent in response to a **DPSP_MSG_KEYEXCHANGE** (section [2.2.34](#Section_2.2.34)) message that contains the server's public key.
 
 ```mermaid
 packet-beta
@@ -1925,7 +1925,7 @@ packet-beta
 <a id="Section_2.2.40"></a>
 ### 2.2.40 DPSP_MSG_PACKET2_ACK
 
-The **DPSP_MSG_PACKET2_ACK** packet is sent in response to a **DPSP_MSG_PACKET2_DATA** (section [2.2.41](#Section_2.2.39)) message.
+The **DPSP_MSG_PACKET2_ACK** packet is sent in response to a **DPSP_MSG_PACKET2_DATA** (section [2.2.41](#Section_2.2.41)) message.
 
 ```mermaid
 packet-beta
@@ -1943,7 +1943,7 @@ packet-beta
 <a id="Section_2.2.41"></a>
 ### 2.2.41 DPSP_MSG_PACKET2_DATA
 
-The **DPSP_MSG_PACKET2_DATA** packet contains [**player**](#gt_player)-to-player data that is part of a larger message that does not fit within the [**maximum transmission unit (MTU)**](#gt_maximum-transmission-unit-mtu) size of the transport. It MUST be [**acknowledged**](#gt_acknowledgment-ack) with a **DPSP_MSG_PACKET2_ACK** (section [2.2.40](#Section_2.2.39)) message.
+The **DPSP_MSG_PACKET2_DATA** packet contains [**player**](#gt_player)-to-player data that is part of a larger message that does not fit within the [**maximum transmission unit (MTU)**](#gt_maximum-transmission-unit-mtu) size of the transport. It MUST be [**acknowledged**](#gt_acknowledgment-ack) with a **DPSP_MSG_PACKET2_ACK** (section [2.2.40](#Section_2.2.40)) message.
 
 Once all the **DPSP_MSG_PACKET2_DATA** packets for a particular message have been received (as identified by the **GuidMessage** field), they are assembled into one contiguous message that is the concatenation of all the **PacketData** fields of all the associated **DPSP_MSG_PACKET2_DATA** messages. If the message was sent without reliability, then, after a 15-second period during which no **DPSP_MSG_PACKET2_DATA** packets are received for a particular message, the entire message is discarded.
 
@@ -2001,7 +2001,7 @@ packet-beta
 <a id="Section_2.2.43"></a>
 ### 2.2.43 DPSP_MSG_PINGREPLY
 
-The DPSP_MSG_PINGREPLY packet is sent in response to a **DPSP_MSG_PING** (section [2.2.42](#Section_3.1.5.30)) message.
+The DPSP_MSG_PINGREPLY packet is sent in response to a **DPSP_MSG_PING** (section [2.2.42](#Section_2.2.42)) message.
 
 ```mermaid
 packet-beta
@@ -2186,7 +2186,7 @@ packet-beta
 <a id="Section_2.2.50"></a>
 ### 2.2.50 DPSP_MSG_REQUESTPLAYERREPLY
 
-The **DPSP_MSG_REQUESTPLAYERREPLY** packet is sent in response to a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) or **DPSP_MSG_REQUESTGROUPID** (section [2.2.48](#Section_2.2.48)) message. The reply message contains either a new [**player ID**](#gt_player-id) or a new [**group**](#gt_group) identifier.
+The **DPSP_MSG_REQUESTPLAYERREPLY** packet is sent in response to a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) or **DPSP_MSG_REQUESTGROUPID** (section [2.2.48](#Section_2.2.48)) message. The reply message contains either a new [**player ID**](#gt_player-id) or a new [**group**](#gt_group) identifier.
 
 ```mermaid
 packet-beta
@@ -2293,15 +2293,15 @@ packet-beta
 
 **Message (variable):** Array of bytes that contains the DirectPlay message. The **Message** field can contain any **DirectPlay 4 Protocol** message. However, the message MUST begin with the **Signature** field of the [DPSP_MSG_HEADER (section 2.2.6)](#Section_2.2.6) rather than the entire **DPSP_MSG_HEADER** structure. Once authentication is negotiated, DirectPlay sends all messages in as signed, except the following:
 
-- The [DPSP_MSG_ADDFORWARDREQUEST (section 2.2.11)](#Section_3.2.5.5) and [DPSP_MSG_SESSIONDESCCHANGED (section 2.2.51)](#Section_2.2.51) messages are sent signed and encrypted.
+- The [DPSP_MSG_ADDFORWARDREQUEST (section 2.2.11)](#Section_2.2.11) and [DPSP_MSG_SESSIONDESCCHANGED (section 2.2.51)](#Section_2.2.51) messages are sent signed and encrypted.
 - The higher layer determines whether the [DPSP_MSG_PLAYERMESSAGE (section 2.2.45)](#Section_2.2.45) or [DPSP_MSG_ASK4MULTICASTGUARANTEED (section 2.2.15)](#Section_2.2.15) message SHOULD be sent signed and/or encrypted.
-- The [DPSP_MSG_PING (section 2.2.42)](#Section_3.1.5.30) and [DPSP_MSG_PINGREPLY (section 2.2.43)](#Section_3.1.5.30) messages are not signed or encrypted.
+- The [DPSP_MSG_PING (section 2.2.42)](#Section_2.2.42) and [DPSP_MSG_PINGREPLY (section 2.2.43)](#Section_2.2.43) messages are not signed or encrypted.
 **Signature (variable):** Array of bytes that contains the message signature.
 
 <a id="Section_2.2.53"></a>
 ### 2.2.53 DPSP_MSG_SUPERENUMPLAYERSREPLY
 
-The **DPSP_MSG_SUPERENUMPLAYERSREPLY** packet can be sent in response to a **DPSP_MSG_ENUMPLAYER** (section [2.2.27](#Section_2.2.27)) message or a [DPSP_MSG_ADDFORWARDREQUEST (section 2.2.11)](#Section_3.2.5.5) message.
+The **DPSP_MSG_SUPERENUMPLAYERSREPLY** packet can be sent in response to a **DPSP_MSG_ENUMPLAYER** (section [2.2.27](#Section_2.2.27)) message or a [DPSP_MSG_ADDFORWARDREQUEST (section 2.2.11)](#Section_2.2.11) message.
 
 **Note** If the **CS** flag in the [DPSESSIONDESC2 (section 2.2.5)](#Section_2.2.5) structure associated with the [**game session**](#gt_game-session) is not set, implementations SHOULD use the **DPSP_MSG_SUPERENUMPLAYERSREPLY** message; otherwise implementations SHOULD use the [DPSP_MSG_ENUMPLAYERSREPLY (section 2.2.28)](#Section_2.2.28) message.
 
@@ -2369,7 +2369,7 @@ packet-beta
 <a id="Section_2.2.55"></a>
 ### 2.2.55 DPSP_MSG_YOUAREDEAD
 
-The **DPSP_MSG_YOUAREDEAD** packet is sent in response to a **DPSP_MSG_PING** (section [2.2.42](#Section_3.1.5.30)) message when the sender of the ping is not recognized as a [**player**](#gt_player) who belongs to the active [**game session**](#gt_game-session).
+The **DPSP_MSG_YOUAREDEAD** packet is sent in response to a **DPSP_MSG_PING** (section [2.2.42](#Section_2.2.42)) message when the sender of the ping is not recognized as a [**player**](#gt_player) who belongs to the active [**game session**](#gt_game-session).
 
 ```mermaid
 packet-beta
@@ -2467,11 +2467,11 @@ Each participant in the **DirectPlay 4 Protocol** functions as a [**peer**](#gt_
 
 **Player.ID**: A 32-bit identifier that uniquely represents the player within the game.
 
-**Player.SystemPlayer**: If this flag is set, then the player is the "system player" for this game instance. This flag corresponds to the DPLAYI_PLAYER_SYSTEMPLAYER flag in the **Flags** field of the **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) message.
+**Player.SystemPlayer**: If this flag is set, then the player is the "system player" for this game instance. This flag corresponds to the DPLAYI_PLAYER_SYSTEMPLAYER flag in the **Flags** field of the **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) message.
 
 **Player.GameData**: Per-game data associated with each player.
 
-**Player.ChatterCount**: A counter incremented when messages are received, which is reset to 0 every time the [Ping Timer](#Section_3.2.6.2) elapses.
+**Player.ChatterCount**: A counter incremented when messages are received, which is reset to 0 every time the [Ping Timer](#Section_3.1.2.5) elapses.
 
 **Group List**: A group is a container for players or other groups. Each group in the Group List contains the following information.
 
@@ -2514,12 +2514,12 @@ The Logon Timer is set by a [**DirectPlay client**](#gt_directplay-client) when 
 <a id="Section_3.1.2.4"></a>
 #### 3.1.2.4 Packetize Timer
 
-The Packetize Timer is set by a [**DirectPlay client**](#gt_directplay-client) when it is sending **DPSP_MSG_PACKET2_DATA** (section [2.2.41](#Section_2.2.39)) messages. The initial timeout value for this timer is 900 milliseconds. This value SHOULD continue to be used until a packet is [**acknowledged**](#gt_acknowledgment-ack). At that time, 1.5 times the [**round-trip**](#gt_round-trip) latency of the packet and acknowledgment SHOULD be used instead. If the measured latency is less than 25 milliseconds, the timer SHOULD be set to 1.5 times 25, or 37.5 milliseconds.
+The Packetize Timer is set by a [**DirectPlay client**](#gt_directplay-client) when it is sending **DPSP_MSG_PACKET2_DATA** (section [2.2.41](#Section_2.2.41)) messages. The initial timeout value for this timer is 900 milliseconds. This value SHOULD continue to be used until a packet is [**acknowledged**](#gt_acknowledgment-ack). At that time, 1.5 times the [**round-trip**](#gt_round-trip) latency of the packet and acknowledgment SHOULD be used instead. If the measured latency is less than 25 milliseconds, the timer SHOULD be set to 1.5 times 25, or 37.5 milliseconds.
 
 <a id="Section_3.1.2.5"></a>
 #### 3.1.2.5 Ping Timer
 
-The Ping Timer is set by a [**DirectPlay client**](#gt_directplay-client) when either the joined [**game session**](#gt_game-session) has the **Session.KeepAlive** flag set, or the game session has the **Session.MigrateHost** flag set and the client is waiting for the new [**host**](#gt_host) to send a **DPSP_MSG_IAMNAMESERVER** (section [2.2.33](#Section_2.2.33)) message. It elapses periodically so that **DPSP_MSG_PING** (section [2.2.42](#Section_3.1.5.30)) messages are sent to [**players**](#gt_player) with a ChatterCount of 0 (that is, for which no messages have been received since the last Ping Timer expiration). If not waiting for the **DPSP_MSG_IAMNAMESERVER** message, **DPSP_MSG_PING** messages are sent only to the host; otherwise they are sent to all connected computing systems. The period for this timer is 35 seconds.
+The Ping Timer is set by a [**DirectPlay client**](#gt_directplay-client) when either the joined [**game session**](#gt_game-session) has the **Session.KeepAlive** flag set, or the game session has the **Session.MigrateHost** flag set and the client is waiting for the new [**host**](#gt_host) to send a **DPSP_MSG_IAMNAMESERVER** (section [2.2.33](#Section_2.2.33)) message. It elapses periodically so that **DPSP_MSG_PING** (section [2.2.42](#Section_2.2.42)) messages are sent to [**players**](#gt_player) with a ChatterCount of 0 (that is, for which no messages have been received since the last Ping Timer expiration). If not waiting for the **DPSP_MSG_IAMNAMESERVER** message, **DPSP_MSG_PING** messages are sent only to the host; otherwise they are sent to all connected computing systems. The period for this timer is 35 seconds.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -2543,7 +2543,7 @@ It then MUST start listening for responses on the DirectPlay [**TCP**](#gt_trans
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Join Session
 
-When a higher-level entity chooses to join an existing session (determined from received **DPSP_MSG_ENUMSESSIONSREPLY** (section [2.2.30](#Section_2.2.30)) packets), the DirectPlay client MUST create a new Player in the players list, setting the **Player.SystemPlayer** flag. It MUST then format a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) packet with the DPLAYI_PLAYER_SYSTEMPLAYER flag set in the **Flags** field to the host server for the specified game instance. It MUST then start the Reliable API timer and wait for a **DPSP_MSG_REQUESTPLAYERREPLY** response (section [2.2.50](#Section_2.2.50)) from the host server. If no reply is received before the Reliable API timer fires, it MUST communicate this information to the higher-level entity.
+When a higher-level entity chooses to join an existing session (determined from received **DPSP_MSG_ENUMSESSIONSREPLY** (section [2.2.30](#Section_2.2.30)) packets), the DirectPlay client MUST create a new Player in the players list, setting the **Player.SystemPlayer** flag. It MUST then format a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) packet with the DPLAYI_PLAYER_SYSTEMPLAYER flag set in the **Flags** field to the host server for the specified game instance. It MUST then start the Reliable API timer and wait for a **DPSP_MSG_REQUESTPLAYERREPLY** response (section [2.2.50](#Section_2.2.50)) from the host server. If no reply is received before the Reliable API timer fires, it MUST communicate this information to the higher-level entity.
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Enumerate Players or Groups
@@ -2553,7 +2553,7 @@ If the [**DirectPlay client**](#gt_directplay-client) is joined to a [**game ses
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 Create Player
 
-When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD create a [**player**](#gt_player) and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST create a new player in the **Player List** with the **Player.SystemPlayer** flag clear. It MUST then format a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) packet with the DPLAYI_PLAYER_SYSTEMPLAYER flag clear in the **Flags** field to the host server for the specified game instance. It MUST then start the Reliable API timer and wait for a **DPSP_MSG_REQUESTPLAYERREPLY** response (section [2.2.50](#Section_2.2.50)) from the host server. If no reply is received before the Reliable API timer fires, it MUST communicate this information to the higher-level entity.
+When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD create a [**player**](#gt_player) and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST create a new player in the **Player List** with the **Player.SystemPlayer** flag clear. It MUST then format a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) packet with the DPLAYI_PLAYER_SYSTEMPLAYER flag clear in the **Flags** field to the host server for the specified game instance. It MUST then start the Reliable API timer and wait for a **DPSP_MSG_REQUESTPLAYERREPLY** response (section [2.2.50](#Section_2.2.50)) from the host server. If no reply is received before the Reliable API timer fires, it MUST communicate this information to the higher-level entity.
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 Delete Player
@@ -2573,7 +2573,7 @@ When a higher-level entity indicates that the [**DirectPlay client**](#gt_direct
 <a id="Section_3.1.4.8"></a>
 #### 3.1.4.8 Set Group Data
 
-When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD change the data associated with a [**group**](#gt_group) and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST format a **DPSP_MSG_GROUPDATACHANGED** (section [2.2.31](#Section_3.1.5.16)) message. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_GROUPDATACHANGED** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_GROUPDATACHANGED** message to each of the computers that are currently joined to the game session. There is no response expected to this message.
+When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD change the data associated with a [**group**](#gt_group) and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST format a **DPSP_MSG_GROUPDATACHANGED** (section [2.2.31](#Section_2.2.31)) message. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_GROUPDATACHANGED** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_GROUPDATACHANGED** message to each of the computers that are currently joined to the game session. There is no response expected to this message.
 
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 Set Group Name
@@ -2603,12 +2603,12 @@ When a higher-level entity indicates that the [**DirectPlay client**](#gt_direct
 <a id="Section_3.1.4.14"></a>
 #### 3.1.4.14 Add Group to Group
 
-When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD add a [**group**](#gt_group) to another group and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST format a **DPSP_MSG_ADDSHORTCUTTOGROUP** (section [2.2.13](#Section_3.1.5.23)) packet with the **ChildGroupID** field set to the group ID of the child group to be added and the ParentGroupID field set to the group ID of the parent group in which to add the child group. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_ADDSHORTCUTTOGROUP** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_ADDSHORTCUTTOGROUP** message to each of the computers that are currently joined to the game session. There is no response expected to this message.
+When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD add a [**group**](#gt_group) to another group and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST format a **DPSP_MSG_ADDSHORTCUTTOGROUP** (section [2.2.13](#Section_2.2.13)) packet with the **ChildGroupID** field set to the group ID of the child group to be added and the ParentGroupID field set to the group ID of the parent group in which to add the child group. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_ADDSHORTCUTTOGROUP** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_ADDSHORTCUTTOGROUP** message to each of the computers that are currently joined to the game session. There is no response expected to this message.
 
 <a id="Section_3.1.4.15"></a>
 #### 3.1.4.15 Remove Group from Group
 
-When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD remove a group from another group and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST format a **DPSP_MSG_DELETEGROUPFROMGROUP** (section [2.2.24](#Section_2.2.23)) packet with the **ChildGroupID** field set to the [**group ID**](#gt_group-id) of the child group to be removed and the **ParentGroupID** field set to the group ID of the parent group from which to remove the child group. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_DELETEGROUPFROMGROUP** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_DELETEGROUPFROMGROUP** message to each of the computers currently joined to the game session. There is no response expected to this message.
+When a higher-level entity indicates that the [**DirectPlay client**](#gt_directplay-client) SHOULD remove a group from another group and the DirectPlay client has joined a [**game session**](#gt_game-session), the DirectPlay client MUST format a **DPSP_MSG_DELETEGROUPFROMGROUP** (section [2.2.24](#Section_2.2.24)) packet with the **ChildGroupID** field set to the [**group ID**](#gt_group-id) of the child group to be removed and the **ParentGroupID** field set to the group ID of the parent group from which to remove the child group. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_DELETEGROUPFROMGROUP** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_DELETEGROUPFROMGROUP** message to each of the computers currently joined to the game session. There is no response expected to this message.
 
 <a id="Section_3.1.4.16"></a>
 #### 3.1.4.16 Send Application Data
@@ -2628,7 +2628,7 @@ If the game session has the **DPSESSION_DIRECTPLAYPROTOCOL** flag set, then the 
 <a id="Section_3.1.4.16.1"></a>
 ##### 3.1.4.16.1 Sending Encrypted/Signed Data
 
-When a higher-level entity requires to send encrypted or signed data, then the [**DirectPlay client**](#gt_directplay-client) MUST encrypt or sign the data using the encryption algorithm specified by **Game.CAPIProviderType** and the public key of the recipient. It MUST then wrap the encrypted or signed data in a **DPSP_MSG_SIGNED** packet (section [2.2.52](#Section_3.1.5.9)). If the higher-level entity requested that the message be signed, the DirectPlay client MUST append the encryption signature to the **DPSP_MSG_SIGNED** packet and transmit the resulting packet to the designated recipient.
+When a higher-level entity requires to send encrypted or signed data, then the [**DirectPlay client**](#gt_directplay-client) MUST encrypt or sign the data using the encryption algorithm specified by **Game.CAPIProviderType** and the public key of the recipient. It MUST then wrap the encrypted or signed data in a **DPSP_MSG_SIGNED** packet (section [2.2.52](#Section_2.2.52)). If the higher-level entity requested that the message be signed, the DirectPlay client MUST append the encryption signature to the **DPSP_MSG_SIGNED** packet and transmit the resulting packet to the designated recipient.
 
 <a id="Section_3.1.4.16.2"></a>
 ##### 3.1.4.16.2 Sending Unencrypted/Unsigned Data
@@ -2644,14 +2644,14 @@ In either case, when the higher-level entity does not specify guaranteed deliver
 <a id="Section_3.1.4.17"></a>
 #### 3.1.4.17 Send Chat
 
-When a higher-level entity (game) requests that the DirectPlay client send a text chat message to another client or a group, the sending client MUST construct a **DPSP_MSG_CHAT** (section [2.2.19](#Section_3.1.5.26)) message. If the target is a group, it MUST send a copy of the **DPSP_MSG_CHAT** message to each player in the group. Otherwise, the client MUST send the message only to the desired player.
+When a higher-level entity (game) requests that the DirectPlay client send a text chat message to another client or a group, the sending client MUST construct a **DPSP_MSG_CHAT** (section [2.2.19](#Section_2.2.19)) message. If the target is a group, it MUST send a copy of the **DPSP_MSG_CHAT** message to each player in the group. Otherwise, the client MUST send the message only to the desired player.
 
-If the game session specified by the game has the **Session.MulticastServer** flag set and the higher-layer entity requires to send a chat message to a group and the local client is not the DirectPlay host, then the client MUST route the message through the host as described in section [3.1.4.16](#Section_3.1.4.16.1).
+If the game session specified by the game has the **Session.MulticastServer** flag set and the higher-layer entity requires to send a chat message to a group and the local client is not the DirectPlay host, then the client MUST route the message through the host as described in section [3.1.4.16](#Section_3.1.4.16).
 
 <a id="Section_3.1.4.18"></a>
 #### 3.1.4.18 Large Messages
 
-When a higher-level entity ([**game**](#gt_game)) requests that the [**DirectPlay client**](#gt_directplay-client) send a message that is larger than the [**maximum transmission unit (MTU)**](#gt_maximum-transmission-unit-mtu) size supported by the transport, the sending client MUST split the message into smaller fragments that will fit. Each fragment MUST then be transmitted using a **DPSP_MSG_PACKET** (section [2.2.39](#Section_2.2.39)) header if the message is not reliable, or a **DPSP_MSG_PACKET2_DATA** (section [2.2.41](#Section_2.2.39)) header if the message is reliable. If it is not reliable, the **DPSP_MSG_PACKET** messages SHOULD be transmitted without waiting for an acknowledgement. If it is not reliable, the sender MUST only send the first **DPSP_MSG_PACKET2_DATA** message and MUST start the [Packetize Timer](#Section_3.1.6.1) to retry the fragment if necessary. Future reliable fragments MUST NOT be sent until this fragment is [**acknowledged**](#gt_acknowledgment-ack) as specified in sections [3.1.5.28](#Section_3.1.5.28) and [3.1.5.29](#Section_3.1.5.29).
+When a higher-level entity ([**game**](#gt_game)) requests that the [**DirectPlay client**](#gt_directplay-client) send a message that is larger than the [**maximum transmission unit (MTU)**](#gt_maximum-transmission-unit-mtu) size supported by the transport, the sending client MUST split the message into smaller fragments that will fit. Each fragment MUST then be transmitted using a **DPSP_MSG_PACKET** (section [2.2.39](#Section_2.2.39)) header if the message is not reliable, or a **DPSP_MSG_PACKET2_DATA** (section [2.2.41](#Section_2.2.41)) header if the message is reliable. If it is not reliable, the **DPSP_MSG_PACKET** messages SHOULD be transmitted without waiting for an acknowledgement. If it is not reliable, the sender MUST only send the first **DPSP_MSG_PACKET2_DATA** message and MUST start the [Packetize Timer](#Section_3.1.2.4) to retry the fragment if necessary. Future reliable fragments MUST NOT be sent until this fragment is [**acknowledged**](#gt_acknowledgment-ack) as specified in sections [3.1.5.28](#Section_3.1.5.28) and [3.1.5.29](#Section_3.1.5.29).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -2660,22 +2660,22 @@ When a [**DirectPlay client**](#gt_directplay-client) receives a packet on the [
 
 If the 4-byte value at location 8 in the incoming packet is not 0x70, 0x6c, 0x61, or 0x79, then the DirectPlay client MUST interpret the incoming data as a **DPSP_MSG_HEADER** structure (section [2.2.6](#Section_2.2.6)) and MUST implement the following behaviors based on the **Command Value** field of that header.
 
-**Note** The **DirectPlay 4 Protocol** does not perform validation on the sender of a message. An implementation MAY choose to validate the sender of a message, but it is not a requirement for compatibility with DirectPlay. For more information, see section [5.1](#Section_5).
+**Note** The **DirectPlay 4 Protocol** does not perform validation on the sender of a message. An implementation MAY choose to validate the sender of a message, but it is not a requirement for compatibility with DirectPlay. For more information, see section [5.1](#Section_5.1).
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 DPSP_MSG_REQUESTPLAYERREPLY
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_REQUESTPLAYERREPLY** message (section [2.2.50](#Section_2.2.50)), if the [**DirectPlay client**](#gt_directplay-client) does not have a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) command outstanding, the DirectPlay client MUST ignore the message.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_REQUESTPLAYERREPLY** message (section [2.2.50](#Section_2.2.50)), if the [**DirectPlay client**](#gt_directplay-client) does not have a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) command outstanding, the DirectPlay client MUST ignore the message.
 
 Otherwise, the DirectPlay client MUST remember the **ID** (contained in the **DPSP_MSG_REQUESTPLAYERREPLY** message) as the **Player.ID** for the newly created [**player**](#gt_player).
 
-If the player being created has the **Player.SystemPlayer** flag set and the **Session.Authenticated** flag is not set, then the client MUST format a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_3.2.5.5)) with the **PlayerID** field set to the system [**player ID**](#gt_player-id). The client MUST then start the reliable API timer and wait for a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)). If no reply is received before the reliable API timer fires, then the client MUST return this information to the higher-level entity.
+If the player being created has the **Player.SystemPlayer** flag set and the **Session.Authenticated** flag is not set, then the client MUST format a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_2.2.11)) with the **PlayerID** field set to the system [**player ID**](#gt_player-id). The client MUST then start the reliable API timer and wait for a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)). If no reply is received before the reliable API timer fires, then the client MUST return this information to the higher-level entity.
 
 If the player being created has the **Player.SystemPlayer** flag set and the **Session.Authenticated** flag is set, then the client MUST format an NTLM NEGOTIATE packet as, specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md), using information provided by the higher-level entity (or the operating system, if applicable).<18>
 
 The DirectPlay client MUST then format and transmit a **DPSP_MSG_NEGOTIATE** (section [2.2.38](#Section_2.2.38)) to the [**game**](#gt_game) [**host**](#gt_host) with the **SecurityToken** of the message set to the NEGOTIATE message. It MUST start the Login Timer and wait for the game host to reply with a **DPSP_MSG_CHALLENGE** (section [2.2.17](#Section_2.2.17)) message. If the Login timer expires before a DPSP_MSG_CHALLENGE (section 2.2.17) response is received, the DirectPlay client MUST indicate that the logon operation failed to the higher level.
 
-If the player being created does not have the **Player.SystemPlayer** flag set, the DirectPlay client MUST format a **DPSP_MSG_CREATEPLAYER** (section [2.2.21](#Section_3.1.5.12)) message. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_CREATEPLAYER** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped **DPSP_MSG_CREATEPLAYER** message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_CREATEPLAYER** message to each of the computers currently joined to the [**game session**](#gt_game-session). There is no response expected to this message.
+If the player being created does not have the **Player.SystemPlayer** flag set, the DirectPlay client MUST format a **DPSP_MSG_CREATEPLAYER** (section [2.2.21](#Section_2.2.21)) message. If the **Session.MulticastServer** flag is set, the DirectPlay client MUST wrap the **DPSP_MSG_CREATEPLAYER** message in a **DPSP_MSG_ASK4MULTICAST** message (section [2.2.14](#Section_2.2.14)) and it MUST transmit the wrapped **DPSP_MSG_CREATEPLAYER** message to the game host. If the **Session.MulticastServer** flag is not set, the DirectPlay client MUST transmit the **DPSP_MSG_CREATEPLAYER** message to each of the computers currently joined to the [**game session**](#gt_game-session). There is no response expected to this message.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 DPSP_MSG_CHALLENGE
@@ -2685,26 +2685,26 @@ When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_CHALLEN
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 DPSP_MSG_ACCESSGRANTED
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_ACCESSGRANTED** (section [2.2.7](#Section_3.1.5.3)) message, the DirectPlay 4 client MUST ignore the message if it is not in the process of joining a [**game session**](#gt_game-session). If the DirectPlay 4 client is in the process of joining the game session, it MUST save the **PublicKey** contained in the **DPSP_MSG_ACCESSGRANTED** message as **Session.HostPublicKey**.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_ACCESSGRANTED** (section [2.2.7](#Section_2.2.7)) message, the DirectPlay 4 client MUST ignore the message if it is not in the process of joining a [**game session**](#gt_game-session). If the DirectPlay 4 client is in the process of joining the game session, it MUST save the **PublicKey** contained in the **DPSP_MSG_ACCESSGRANTED** message as **Session.HostPublicKey**.
 
 The DirectPlay 4 client MUST then generate a public/private key pair and remember it as **Client.PublicKey** and **Client**.
 
-The DirectPlay 4 client MUST then format a **DPSP_MSG_KEYEXCHANGE** (section [2.2.34](#Section_3.2.5.9)) request with the **PublicKey** field set to the public key received in the **DPSP_MSG_ACCESSGRANTED** and the **SessionKey** field set to the game session's public key, and it MUST then transmit it to the [**game**](#gt_game) [**host**](#gt_host). It MUST then start the logon timer.
+The DirectPlay 4 client MUST then format a **DPSP_MSG_KEYEXCHANGE** (section [2.2.34](#Section_2.2.34)) request with the **PublicKey** field set to the public key received in the **DPSP_MSG_ACCESSGRANTED** and the **SessionKey** field set to the game session's public key, and it MUST then transmit it to the [**game**](#gt_game) [**host**](#gt_host). It MUST then start the logon timer.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 DPSP_MSG_AUTHERROR
 
-When a DirectPlay 4 client receives a **DPSP_MSG_AUTHERROR** (section [2.2.16](#Section_3.1.5.4)) message, the DirectPlay 4 client MUST ignore the message if it is not in the process of joining a [**game session**](#gt_game-session). If the DirectPlay 4 client is in the process of joining a game session, it MUST fail the game session join operation by returning the **Error** field in the **DPSP_MSG_AUTHERROR** to the higher-level entity.
+When a DirectPlay 4 client receives a **DPSP_MSG_AUTHERROR** (section [2.2.16](#Section_2.2.16)) message, the DirectPlay 4 client MUST ignore the message if it is not in the process of joining a [**game session**](#gt_game-session). If the DirectPlay 4 client is in the process of joining a game session, it MUST fail the game session join operation by returning the **Error** field in the **DPSP_MSG_AUTHERROR** to the higher-level entity.
 
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 DPSP_MSG_LOGONDENIED
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_LOGONDENIED** (section [2.2.36](#Section_3.1.5.5)) message, the DirectPlay 4 client MUST ignore the message if it is not in the process of joining a [**game session**](#gt_game-session). If the DirectPlay 4 client is in the process of joining a game session, it MUST fail the game session join operation by returning an access denied error to the higher-level entity.<19>
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_LOGONDENIED** (section [2.2.36](#Section_2.2.36)) message, the DirectPlay 4 client MUST ignore the message if it is not in the process of joining a [**game session**](#gt_game-session). If the DirectPlay 4 client is in the process of joining a game session, it MUST fail the game session join operation by returning an access denied error to the higher-level entity.<19>
 
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 DPSP_MSG_KEYEXCHANGEREPLY
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_KEYEXCHANGEREPLY** message (section [2.2.35](#Section_2.2.35)), the DirectPlay 4 client MUST remember the **SessionKey** contained in the message as **Session.SessionKey**. It MUST then format a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_3.2.5.5)) with the **PlayerID** field set to the system [**player ID**](#gt_player-id). The client MUST then start the reliable API timer and wait for a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)). If no reply is received before the reliable API timer fires, then the client MUST return this information to the higher-level entity.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_KEYEXCHANGEREPLY** message (section [2.2.35](#Section_2.2.35)), the DirectPlay 4 client MUST remember the **SessionKey** contained in the message as **Session.SessionKey**. It MUST then format a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_2.2.11)) with the **PlayerID** field set to the system [**player ID**](#gt_player-id). The client MUST then start the reliable API timer and wait for a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)). If no reply is received before the reliable API timer fires, then the client MUST return this information to the higher-level entity.
 
 <a id="Section_3.1.5.7"></a>
 #### 3.1.5.7 DPSP_MSG_SUPERENUMPLAYERSREPLY
@@ -2716,14 +2716,14 @@ If the DirectPlay 4 client is not joining a game session, then if the DirectPlay
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 DPSP_MSG_ADDFORWARDREPLY
 
-When a DirectPlay 4 client receives a **DPSP_MSG_ADDFORWARDREPLY** message (section [2.2.10](#Section_3.1.5.8)), if the DirectPlay client is in the process of joining a [**game session**](#gt_game-session), it MUST indicate that the join failed and return the **Error** field to the higher-level entity. Otherwise, the DirectPlay client MUST ignore this message.
+When a DirectPlay 4 client receives a **DPSP_MSG_ADDFORWARDREPLY** message (section [2.2.10](#Section_2.2.10)), if the DirectPlay client is in the process of joining a [**game session**](#gt_game-session), it MUST indicate that the join failed and return the **Error** field to the higher-level entity. Otherwise, the DirectPlay client MUST ignore this message.
 
 <a id="Section_3.1.5.9"></a>
 #### 3.1.5.9 DPSP_MSG_SIGNED
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_SIGNED** message (section [2.2.52](#Section_3.1.5.9)), it MUST verify that the signature of the **Message** field matches the **Signature** field.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_SIGNED** message (section [2.2.52](#Section_2.2.52)), it MUST verify that the signature of the **Message** field matches the **Signature** field.
 
-If bit 2 in the **Flags** field is equal to 1 (0x00000004), then the **Message** field MUST first be decrypted by using the encryption algorithm specified in section [3.1.1](#Section_3.1) and designating the **Session.SessionKey** as the encryption key.
+If bit 2 in the **Flags** field is equal to 1 (0x00000004), then the **Message** field MUST first be decrypted by using the encryption algorithm specified in section [3.1.1](#Section_3.1.1) and designating the **Session.SessionKey** as the encryption key.
 
 If the **Flags** field is equal to 0x00000001, then the **Signature** field MUST be interpreted as a NTLMSSP_MESSAGE_SIGNATURE structure, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 2.2.2.9.
 
@@ -2734,7 +2734,7 @@ Once the **Message** field has been validated, then the [**DirectPlay client**](
 <a id="Section_3.1.5.10"></a>
 #### 3.1.5.10 DPSP_MSG_ADDFORWARD
 
-When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_3.1.5.10)), it MUST add a new entry in the **Player List** using the information contained in the message. The DirectPlay client MUST then format and transmit a **DPSP_MSG_ADDFORWARDACK** message (section [2.2.9](#Section_3.1.5.10)) to the [**game**](#gt_game) [**host**](#gt_host). There is no response expected to this message.<20>
+When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_2.2.8)), it MUST add a new entry in the **Player List** using the information contained in the message. The DirectPlay client MUST then format and transmit a **DPSP_MSG_ADDFORWARDACK** message (section [2.2.9](#Section_2.2.9)) to the [**game**](#gt_game) [**host**](#gt_host). There is no response expected to this message.<20>
 
 <a id="Section_3.1.5.11"></a>
 #### 3.1.5.11 DPSP_MSG_CREATEGROUP
@@ -2744,12 +2744,12 @@ When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_CREA
 <a id="Section_3.1.5.12"></a>
 #### 3.1.5.12 DPSP_MSG_CREATEPLAYER
 
-When a DirectPlay client receives a **DPSP_MSG_CREATEPLAYER** (section [2.2.21](#Section_3.1.5.12)) message, it MUST create a new entry in the **Player List** using the information contained in the message. The DirectPlay client SHOULD inform any higher-level entity of the arrival of this message.
+When a DirectPlay client receives a **DPSP_MSG_CREATEPLAYER** (section [2.2.21](#Section_2.2.21)) message, it MUST create a new entry in the **Player List** using the information contained in the message. The DirectPlay client SHOULD inform any higher-level entity of the arrival of this message.
 
 <a id="Section_3.1.5.13"></a>
 #### 3.1.5.13 DPSP_MSG_CREATEPLAYERVERIFY
 
-When a [**DirectPlay client**](#gt_directplay-client) receives a [DPSP_MSG_CREATEPLAYERVERIFY message (section 2.2.22)](#Section_2.2.22), the recipient SHOULD respond as though it had received a [DPSP_MSG_CREATEPLAYER message (section 2.2.21)](#Section_3.1.5.12). The client SHOULD create the specified [**player**](#gt_player) if it was not already created.
+When a [**DirectPlay client**](#gt_directplay-client) receives a [DPSP_MSG_CREATEPLAYERVERIFY message (section 2.2.22)](#Section_2.2.22), the recipient SHOULD respond as though it had received a [DPSP_MSG_CREATEPLAYER message (section 2.2.21)](#Section_2.2.21). The client SHOULD create the specified [**player**](#gt_player) if it was not already created.
 
 However, in contrast to the usual response to a DPSP_MSG_CREATEPLAYER message, the recipient MUST NOT send any **DPSP_MSG_CREATEPLAYERVERIFY** messages. By not sending any **DPSP_MSG_CREATEPLAYERVERIFY** messages in response, a feedback loop is avoided.
 
@@ -2772,7 +2772,7 @@ When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_DELE
 <a id="Section_3.1.5.16"></a>
 #### 3.1.5.16 DPSP_MSG_GROUPDATACHANGED
 
-Only the owner of a [**group**](#gt_group) is allowed to change the group's data, and it does so by sending the **DPSP_MSG_GROUPDATACHANGED** (section [2.2.31](#Section_3.1.5.16)) message. The owner of the group is the DirectPlay client that created the group. When a DirectPlay client is destroyed, so are any groups that it created.
+Only the owner of a [**group**](#gt_group) is allowed to change the group's data, and it does so by sending the **DPSP_MSG_GROUPDATACHANGED** (section [2.2.31](#Section_2.2.31)) message. The owner of the group is the DirectPlay client that created the group. When a DirectPlay client is destroyed, so are any groups that it created.
 
 When a DirectPlay client receives a **DPSP_MSG_GROUPDATACHANGED** message, it MUST locate the specified **GroupID** in the **Group List** using the information contained in the message and update the per-[**game**](#gt_game) data associated with the group. The [**DirectPlay client**](#gt_directplay-client) SHOULD inform any higher-level entity of the arrival of this message.
 
@@ -2809,12 +2809,12 @@ When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_SESS
 <a id="Section_3.1.5.23"></a>
 #### 3.1.5.23 DPSP_MSG_ADDSHORTCUTTOGROUP
 
-When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_ADDSHORTCUTTOGROUP** (section [2.2.13](#Section_3.1.5.23)) message, it MUST look up the specified **ChildGroupID** and **ParentGroupID** values in the **Group List**. It MUST then add the group specified by **ChildGroupID** to the group specified by the **ParentGroupID**. The DirectPlay client SHOULD inform any higher-level entity of the arrival of this message.
+When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_ADDSHORTCUTTOGROUP** (section [2.2.13](#Section_2.2.13)) message, it MUST look up the specified **ChildGroupID** and **ParentGroupID** values in the **Group List**. It MUST then add the group specified by **ChildGroupID** to the group specified by the **ParentGroupID**. The DirectPlay client SHOULD inform any higher-level entity of the arrival of this message.
 
 <a id="Section_3.1.5.24"></a>
 #### 3.1.5.24 DPSP_MSG_DELETEGROUPFROMGROUP
 
-When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_DELETEGROUPFROMGROUP** (section [2.2.24](#Section_2.2.23)) message, it MUST look up the specified **ChildGroupID** and **ParentGroupID** values in the **Group List**. It MUST then remove the group specified by **ChildGroupID** from the group specified by the **ParentGroupID**. The DirectPlay client SHOULD inform any higher-level entity of the arrival of this message.
+When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_DELETEGROUPFROMGROUP** (section [2.2.24](#Section_2.2.24)) message, it MUST look up the specified **ChildGroupID** and **ParentGroupID** values in the **Group List**. It MUST then remove the group specified by **ChildGroupID** from the group specified by the **ParentGroupID**. The DirectPlay client SHOULD inform any higher-level entity of the arrival of this message.
 
 <a id="Section_3.1.5.25"></a>
 #### 3.1.5.25 DPSP_MSG_VOICE
@@ -2824,7 +2824,7 @@ When a [**DirectPlay client**](#gt_directplay-client) or server receives a **DPS
 <a id="Section_3.1.5.26"></a>
 #### 3.1.5.26 DPSP_MSG_CHAT
 
-When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_CHAT** (section [2.2.19](#Section_3.1.5.26)) message, it MUST inform any higher-level entity of the arrival of the chat string from the specified [**player**](#gt_player) to the specified player or group. The client MUST also increment the **Player.ChatterCount**.
+When a [**DirectPlay client**](#gt_directplay-client) receives a **DPSP_MSG_CHAT** (section [2.2.19](#Section_2.2.19)) message, it MUST inform any higher-level entity of the arrival of the chat string from the specified [**player**](#gt_player) to the specified player or group. The client MUST also increment the **Player.ChatterCount**.
 
 <a id="Section_3.1.5.27"></a>
 #### 3.1.5.27 DPSP_MSG_PACKET
@@ -2834,27 +2834,27 @@ When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PACKET*
 <a id="Section_3.1.5.28"></a>
 #### 3.1.5.28 DPSP_MSG_PACKET2_DATA
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PACKET2_DATA** message (section [2.2.41](#Section_2.2.39)), it MUST send a **DPSP_MSG_PACKET2_ACK** (section [2.2.40](#Section_2.2.39)) message to the sender to [**acknowledge**](#gt_acknowledgment-ack) reception. It MUST then determine if previous fragments of the packets identified by **MessageGuid** have already been processed. If not, the client MUST begin reassembling the total message, starting with the received fragment. Otherwise, the client MUST check that **PacketID** is the next ID in the sequence and ignore the packet if not. It MUST then include the additional fragment [**payload**](#gt_payload) in its correct location in the total message. When all fragments have been received, the completed message MUST be delivered to the higher-layer entity.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PACKET2_DATA** message (section [2.2.41](#Section_2.2.41)), it MUST send a **DPSP_MSG_PACKET2_ACK** (section [2.2.40](#Section_2.2.40)) message to the sender to [**acknowledge**](#gt_acknowledgment-ack) reception. It MUST then determine if previous fragments of the packets identified by **MessageGuid** have already been processed. If not, the client MUST begin reassembling the total message, starting with the received fragment. Otherwise, the client MUST check that **PacketID** is the next ID in the sequence and ignore the packet if not. It MUST then include the additional fragment [**payload**](#gt_payload) in its correct location in the total message. When all fragments have been received, the completed message MUST be delivered to the higher-layer entity.
 
 <a id="Section_3.1.5.29"></a>
 #### 3.1.5.29 DPSP_MSG_PACKET2_ACK
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PACKET2_ACK** message (section [2.2.40](#Section_2.2.39)), it MUST determine if the packet identified by **MessageGuid** and **PacketID** has not already been acknowledged. If it has, the client MUST ignore this redundant [**acknowledgment (ACK)**](#gt_acknowledgment-ack). Otherwise, the client MUST reset the [Packetize Timer](#Section_3.1.6.1) and send the next **PacketID** in the fragmented message. If there are no more packets, then the entire message has completed and the Packetize Timer MUST be canceled.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PACKET2_ACK** message (section [2.2.40](#Section_2.2.40)), it MUST determine if the packet identified by **MessageGuid** and **PacketID** has not already been acknowledged. If it has, the client MUST ignore this redundant [**acknowledgment (ACK)**](#gt_acknowledgment-ack). Otherwise, the client MUST reset the [Packetize Timer](#Section_3.1.2.4) and send the next **PacketID** in the fragmented message. If there are no more packets, then the entire message has completed and the Packetize Timer MUST be canceled.
 
 <a id="Section_3.1.5.30"></a>
 #### 3.1.5.30 DPSP_MSG_PING
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PING** message (section [2.2.42](#Section_3.1.5.30)), it MUST look up the [**player**](#gt_player) specified by the **IDFrom** field in the **Player List**. If the ID does not represent a valid player, the client MUST ignore this message. Otherwise, the client MUST send a **DPSP_MSG_PINGREPLY** message (section [2.2.43](#Section_3.1.5.30)) and echo the **TickCount** field. It MUST also increment the **Player.ChatterCount**.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PING** message (section [2.2.42](#Section_2.2.42)), it MUST look up the [**player**](#gt_player) specified by the **IDFrom** field in the **Player List**. If the ID does not represent a valid player, the client MUST ignore this message. Otherwise, the client MUST send a **DPSP_MSG_PINGREPLY** message (section [2.2.43](#Section_2.2.43)) and echo the **TickCount** field. It MUST also increment the **Player.ChatterCount**.
 
 <a id="Section_3.1.5.31"></a>
 #### 3.1.5.31 DPSP_MSG_PINGREPLY
 
-When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PINGREPLY** message (section [2.2.43](#Section_3.1.5.30)), it MUST look up the [**player**](#gt_player) specified by **IDFrom** in the **Player List**. If the ID does not represent a valid player, the client MUST ignore this message. Otherwise, the client MUST also increment the **Player.ChatterCount** counter.
+When a [**DirectPlay 4**](#gt_directplay-4) client receives a **DPSP_MSG_PINGREPLY** message (section [2.2.43](#Section_2.2.43)), it MUST look up the [**player**](#gt_player) specified by **IDFrom** in the **Player List**. If the ID does not represent a valid player, the client MUST ignore this message. Otherwise, the client MUST also increment the **Player.ChatterCount** counter.
 
 <a id="Section_3.1.5.32"></a>
 #### 3.1.5.32 DPSP_MSG_YOUAREDEAD
 
-Only a [**DirectPlay 4**](#gt_directplay-4) client that determines itself to be the [**game session**](#gt_game-session) host can send a **DPSP_MSG_YOUAREDEAD** message (section [2.2.55](#Section_3.1.5.32)) to another peer in the game session.
+Only a [**DirectPlay 4**](#gt_directplay-4) client that determines itself to be the [**game session**](#gt_game-session) host can send a **DPSP_MSG_YOUAREDEAD** message (section [2.2.55](#Section_2.2.55)) to another peer in the game session.
 
 Any DirectPlay 4 client that is not the game session host, yet receives a **DPSP_MSG_IAMNAMESERVER** message (section [2.2.33](#Section_2.2.33)), treats the sender of the **DPSP_MSG_IAMNAMESERVER** message as the new game session host.
 
@@ -2868,12 +2868,12 @@ When a DirectPlay 4 client receives a **DPSP_MSG_YOUAREDEAD** message, it MUST t
 <a id="Section_3.1.6.1"></a>
 #### 3.1.6.1 Packetize Timer
 
-When the Packetize Timer expires, the [**DirectPlay 4**](#gt_directplay-4) client MUST resend the current **DPSP_MSG_PACKET2_DATA** message (section [2.2.41](#Section_2.2.39)), unless it has already sent the same packet 16 times and 60 seconds have elapsed since the first packet was sent, in which case the client MUST abort sending the entire message.
+When the Packetize Timer expires, the [**DirectPlay 4**](#gt_directplay-4) client MUST resend the current **DPSP_MSG_PACKET2_DATA** message (section [2.2.41](#Section_2.2.41)), unless it has already sent the same packet 16 times and 60 seconds have elapsed since the first packet was sent, in which case the client MUST abort sending the entire message.
 
 <a id="Section_3.1.6.2"></a>
 #### 3.1.6.2 Ping Timer
 
-When the Ping Timer expires, the [**DirectPlay 4**](#gt_directplay-4) client SHOULD send a **DPSP_MSG_PING** message (section [2.2.42](#Section_3.1.5.30)) to the [**host**](#gt_host) if no messages have been received since the last Ping Timer expiration. If 8 **DPSP_MSG_PING** messages have been sent without a reply, the connection to the host SHOULD be terminated.
+When the Ping Timer expires, the [**DirectPlay 4**](#gt_directplay-4) client SHOULD send a **DPSP_MSG_PING** message (section [2.2.42](#Section_2.2.42)) to the [**host**](#gt_host) if no messages have been received since the last Ping Timer expiration. If 8 **DPSP_MSG_PING** messages have been sent without a reply, the connection to the host SHOULD be terminated.
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -2881,13 +2881,13 @@ When the Ping Timer expires, the [**DirectPlay 4**](#gt_directplay-4) client SHO
 <a id="Section_3.1.7.1"></a>
 #### 3.1.7.1 Host Migration
 
-The [**host migration**](#gt_host-migration) process is initiated when the [**game session**](#gt_game-session) [**host**](#gt_host) leaves the game session for any reason, such as failing to reply to 8 [DPSP_MSG_PING (section 2.2.42)](#Section_3.1.5.30) messages. When this occurs, clients in the game session MUST check whether the host migration flag (**Session.MigrateHost**) is set in the abstract data model. If the flag is not set, the clients MUST terminate connections to all other computer systems and inform the higher layer ([**game**](#gt_game)) that the game session has terminated. When the flag is set, a deterministic algorithm is employed to establish the new game session host.
+The [**host migration**](#gt_host-migration) process is initiated when the [**game session**](#gt_game-session) [**host**](#gt_host) leaves the game session for any reason, such as failing to reply to 8 [DPSP_MSG_PING (section 2.2.42)](#Section_2.2.42) messages. When this occurs, clients in the game session MUST check whether the host migration flag (**Session.MigrateHost**) is set in the abstract data model. If the flag is not set, the clients MUST terminate connections to all other computer systems and inform the higher layer ([**game**](#gt_game)) that the game session has terminated. When the flag is set, a deterministic algorithm is employed to establish the new game session host.
 
 The algorithm requires clients to locate the [**system players**](#gt_system-player) in the **Player List** and, of these, to determine which player has the lowest **Player.ID** value. If the system player with the lowest **Player.ID** value is found to be local, then the client associated with that player MUST become the new game session host. This player then sends a [DPSP_MSG_IAMNAMESERVER (section 2.2.33)](#Section_2.2.33) message to all other clients.
 
-**Note** Because [**player IDs**](#gt_player-id) are assigned by the host, a new player has no way to "force" itself to become the new host. In addition, although player IDs are allocated sequentially (and starting from a random value), the random value is XOR'd with a secret value to generate the player ID. As a result, there is no guarantee that the distributed player ID values will be sequential. For more information, see sections [3.2.5.4](#Section_3.2.5.4) and [5.1](#Section_5).
+**Note** Because [**player IDs**](#gt_player-id) are assigned by the host, a new player has no way to "force" itself to become the new host. In addition, although player IDs are allocated sequentially (and starting from a random value), the random value is XOR'd with a secret value to generate the player ID. As a result, there is no guarantee that the distributed player ID values will be sequential. For more information, see sections [3.2.5.4](#Section_3.2.5.4) and [5.1](#Section_5.1).
 
-If the system player with the lowest player ID is not local, the client MUST start the [Ping Timer](#Section_3.2.6.2) to detect any other unreachable players until it either receives a **DPSP_MSG_IAMNAMESERVER** message, or all other computer systems are determined to be unreachable and the local system player now has the lowest player ID value.
+If the system player with the lowest player ID is not local, the client MUST start the [Ping Timer](#Section_3.1.2.5) to detect any other unreachable players until it either receives a **DPSP_MSG_IAMNAMESERVER** message, or all other computer systems are determined to be unreachable and the local system player now has the lowest player ID value.
 
 **Note** The **DirectPlay 4 Protocol** does not perform validation on the sender of a message. An implementation MAY choose to validate the sender of a message but it is not a requirement for compatibility with [**DirectPlay**](#gt_directplay). For more information, see section 5.1.
 
@@ -2926,12 +2926,12 @@ Each client contains the following information:
 <a id="Section_3.2.2.1"></a>
 #### 3.2.2.1 Name Table Population Timer
 
-The Name Table Population timer is set by a [**DirectPlay host**](#gt_directplay-host) when it receives a **DPSP_MSG_ADDFORWARDREQUEST** message (see section [2.2.11](#Section_3.2.5.5)). The timeout for this timer is 15 seconds.
+The Name Table Population timer is set by a [**DirectPlay host**](#gt_directplay-host) when it receives a **DPSP_MSG_ADDFORWARDREQUEST** message (see section [2.2.11](#Section_2.2.11)). The timeout for this timer is 15 seconds.
 
 <a id="Section_3.2.2.2"></a>
 #### 3.2.2.2 Ping Timer
 
-The Ping timer is set by a [**DirectPlay**](#gt_directplay) server when the **Session.KeepAlive** flag is set in the abstract data model. It elapses periodically so that **DPSP_MSG_PING** (section [2.2.42](#Section_3.1.5.30)) messages are sent to any connected [**player**](#gt_player) with a **Player.ChatterCount** of 0 (that is, for which no messages have been received since the last Ping timer expiration). The period for this timer is 35 seconds.
+The Ping timer is set by a [**DirectPlay**](#gt_directplay) server when the **Session.KeepAlive** flag is set in the abstract data model. It elapses periodically so that **DPSP_MSG_PING** (section [2.2.42](#Section_2.2.42)) messages are sent to any connected [**player**](#gt_player) with a **Player.ChatterCount** of 0 (that is, for which no messages have been received since the last Ping timer expiration). The period for this timer is 35 seconds.
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
@@ -2941,7 +2941,7 @@ When a [**DirectPlay 4**](#gt_directplay-4) host computer starts, it MUST open a
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
 
-A [**DirectPlay 4**](#gt_directplay-4) [**game**](#gt_game) [**host**](#gt_host) functions as a [**DirectPlay client**](#gt_directplay-client) and, as such, MUST handle all of the higher-layer triggered events as specified in section [3.1.4](#Section_3.2.4).
+A [**DirectPlay 4**](#gt_directplay-4) [**game**](#gt_game) [**host**](#gt_host) functions as a [**DirectPlay client**](#gt_directplay-client) and, as such, MUST handle all of the higher-layer triggered events as specified in section [3.1.4](#Section_3.1.4).
 
 **Note** When a DirectPlay client is the host, the messages specified in section 3.1.4 as being sent to or from the host, are therefore, inherently sent to or from the host itself. An implementation can handle these local message transport paths specifically for optimization or for other purposes, as long as the resulting protocol state or behavior remains the same as would be expected for and by external clients.
 
@@ -2972,7 +2972,7 @@ The information in the **DPSP_MSG_ENUMSESSIONSREPLY** message MUST be extracted 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 DPSP_MSG_REQUESTPLAYERID
 
-When a [**DirectPlay host**](#gt_directplay-host) receives a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) message, it MUST inspect the **Flags** field of the **DPSP_MSG_REQUESTPLAYERID** request. If the **DPLAYI_PLAYER_SYSTEMPLAYER** flag is set, this request is a request to join the [**game**](#gt_game). If the **DPLAYI_PLAYER_SYSTEMPLAYER** flag is not set, the request is a request to add a normal [**player**](#gt_player) from an existing member of the [**game session**](#gt_game-session).
+When a [**DirectPlay host**](#gt_directplay-host) receives a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) message, it MUST inspect the **Flags** field of the **DPSP_MSG_REQUESTPLAYERID** request. If the **DPLAYI_PLAYER_SYSTEMPLAYER** flag is set, this request is a request to join the [**game**](#gt_game). If the **DPLAYI_PLAYER_SYSTEMPLAYER** flag is not set, the request is a request to add a normal [**player**](#gt_player) from an existing member of the [**game session**](#gt_game-session).
 
 When adding a normal player to the game session, the game host MUST check to see if the number of current players identified in **Session.CurrentPlayers** is equal to the maximum number of players specified in **Session.MaxPlayers** or if the **Session.NewPlayersDisabled** flag is set. If it is set, the game host MUST format and transmit a **DPSP_MSG_REQUESTPLAYERREPLY** (section [2.2.50](#Section_2.2.50)) with the **Result** field set to DPERR_NONEWPLAYERS (0x8877014A). Otherwise, the game host MUST reserve a new [**player ID**](#gt_player-id) for the new player and the game host MUST add the player to the **Player List**. The game host MUST then format and transmit a **DPSP_MSG_REQUESTPLAYERREPLY** message with the **ID** field set to the new player ID. The **SecDesc** field in the **DPSP_MSG_REQUESTPLAYERREPLY** structure MUST be filled with 0s, and the **Result** field MUST be set to S_OK (0x00000000).
 
@@ -2981,7 +2981,7 @@ When adding a normal player to the game session, the game host MUST check to see
 - A zero-based value not shared by an existing identifier is assigned in the lowest 16 bits of the identifier.
 - A zero-based value that is incremented to provide uniqueness for each identifier is assigned in the highest 16 bits of the identifier.
 - The resulting 32-bit identifier value is bitwise XOR'd with the unique value specified in the **Reserved1** field of the [DPSESSIONDESC2](#Section_2.2.5) message.
-Although player IDs are allocated sequentially (and starting from a random value), because the random value is XOR'd with this unique value, there is no guarantee that the distributed player ID values will be sequential. For more information, see section [5.1](#Section_5).
+Although player IDs are allocated sequentially (and starting from a random value), because the random value is XOR'd with this unique value, there is no guarantee that the distributed player ID values will be sequential. For more information, see section [5.1](#Section_5.1).
 
 When a client is joining a game session, the game host MUST check to see if **Session.CurrentPlayers** is equal to the **Session.MaxPlayers** constraint or if the **Session.JoinDisabled** flag is set. If it is set, the game host MUST format and transmit a **DPSP_MSG_REQUESTPLAYERREPLY** with the **Result** field set to **DPERR_NONEWPLAYERS** (0x8877014A). Otherwise, the game host MUST reserve a new player ID for the new player and the game host MUST add the player to the **Player List**. The game host MUST then format and transmit a **DPSP_MSG_REQUESTPLAYERREPLY** message with the **ID** field set to the new player ID and the **Result** field MUST be set to **S_OK** (0x00000000). If the **Session.Authenticated** flag is not set, the **SecDesc** field in the **DPSP_MSG_REQUESTPLAYERREPLY** structure MUST be filled with 0s. If the **Session.Authenticated** flag is set, the **SecDesc** field MUST be filled in with the **SSPIProvider** field set to **Game.SSPIProvider** value for the authentication.<21>
 
@@ -2990,14 +2990,14 @@ The **CAPIProvider** field MUST be set to the cryptographic service specified in
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 DPSP_MSG_ADDFORWARDREQUEST
 
-When the [**game**](#gt_game) [**host**](#gt_host) receives a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_3.2.5.5)), the game host MUST format a **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_3.1.5.10)) containing the information for the [**system player**](#gt_system-player) contained in the **DPSP_MSG_ADDFORWARDREQUEST**.<22>
+When the [**game**](#gt_game) [**host**](#gt_host) receives a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_2.2.11)), the game host MUST format a **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_2.2.8)) containing the information for the [**system player**](#gt_system-player) contained in the **DPSP_MSG_ADDFORWARDREQUEST**.<22>
 
-The game host MUST then transmit the **DPSP_MSG_ADDFORWARD** request to each of the other [**players**](#gt_player) in the game to allow them to update their name tables. It MUST then start the **Name Table Population** timer and wait for each of the players to respond with a **DPSP_MSG_ADDFORWARDACK** (section [2.2.9](#Section_3.1.5.10)) message.
+The game host MUST then transmit the **DPSP_MSG_ADDFORWARD** request to each of the other [**players**](#gt_player) in the game to allow them to update their name tables. It MUST then start the **Name Table Population** timer and wait for each of the players to respond with a **DPSP_MSG_ADDFORWARDACK** (section [2.2.9](#Section_2.2.9)) message.
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 DPSP_MSG_ADDFORWARDACK
 
-When a [**DirectPlay host**](#gt_directplay-host) computer receives a **DPSP_MSG_ADDFORWARDACK** message (section [2.2.9](#Section_3.1.5.10)), if the [**host**](#gt_host) has an outstanding **DPSP_MSG_ADDFORWARDACK** from the client which sent the message, the DirectPlay host computer MUST indicate that it has received the **DPSP_MSG_ADDFORWARDACK**. When the DirectPlay host computer has received a **DPSP_MSG_ADDFORWARDACK** message from all of the clients to which it sent the **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_3.1.5.10)), then the game host MUST format and transmit a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)) to the client that sent the **DPSP_MSG_ADDFORWARDREQUEST** (section [3.2.5.5](#Section_3.2.5.5)).
+When a [**DirectPlay host**](#gt_directplay-host) computer receives a **DPSP_MSG_ADDFORWARDACK** message (section [2.2.9](#Section_2.2.9)), if the [**host**](#gt_host) has an outstanding **DPSP_MSG_ADDFORWARDACK** from the client which sent the message, the DirectPlay host computer MUST indicate that it has received the **DPSP_MSG_ADDFORWARDACK**. When the DirectPlay host computer has received a **DPSP_MSG_ADDFORWARDACK** message from all of the clients to which it sent the **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_2.2.8)), then the game host MUST format and transmit a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)) to the client that sent the **DPSP_MSG_ADDFORWARDREQUEST** (section [3.2.5.5](#Section_3.2.5.5)).
 
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 DPSP_MSG_NEGOTIATE
@@ -3006,33 +3006,33 @@ When a [**DirectPlay host**](#gt_directplay-host) receives a **DPSP_MSG_NEGOTIAT
 
 If the negotiate message is successful, then the host MUST format and transmit a **DPSP_MSG_CHALLENGE** message (section [2.2.17](#Section_2.2.17)) with the **SecurityToken** field set to an NTLM **CHALLENGE_MESSAGE**, as specified in [MS-NLMP] section 2.2.1.2.
 
-If the negotiate message is unsuccessful, then the host MUST format and transmit a **DPSP_MSG_AUTHERROR** message (section [2.2.16](#Section_3.1.5.4)) to the client.
+If the negotiate message is unsuccessful, then the host MUST format and transmit a **DPSP_MSG_AUTHERROR** message (section [2.2.16](#Section_2.2.16)) to the client.
 
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 DPSP_MSG_CHALLENGERESPONSE
 
 When a [**DirectPlay host**](#gt_directplay-host) receives a **DPSP_MSG_CHALLENGERESPONSE** message (section [2.2.18](#Section_2.2.18)), it MUST ignore the message if the sending client is not in the process of joining a [**game**](#gt_game); otherwise, it MUST process it as an NTLM **AUTHENTICATE_MESSAGE** packet, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 2.2.1.3.
 
-If the authenticate message is successful, then the host MUST format and transmit a **DPSP_MSG_ACCESSGRANTED** message (section [2.2.7](#Section_3.1.5.3)) with the **PublicKey** field set to **Session.SessionPublicKey**.
+If the authenticate message is successful, then the host MUST format and transmit a **DPSP_MSG_ACCESSGRANTED** message (section [2.2.7](#Section_2.2.7)) with the **PublicKey** field set to **Session.SessionPublicKey**.
 
-If the authenticate message is unsuccessful, then the host MUST format and transmit either a **DPSP_MSG_LOGONDENIED** message (section [2.2.36](#Section_3.1.5.5)) or a **DPSP_MSG_AUTHERROR** message (section [2.2.16](#Section_3.1.5.4)) to the client.
+If the authenticate message is unsuccessful, then the host MUST format and transmit either a **DPSP_MSG_LOGONDENIED** message (section [2.2.36](#Section_2.2.36)) or a **DPSP_MSG_AUTHERROR** message (section [2.2.16](#Section_2.2.16)) to the client.
 
 <a id="Section_3.2.5.9"></a>
 #### 3.2.5.9 DPSP_MSG_KEYEXCHANGE
 
-When a [**DirectPlay**](#gt_directplay) server receives a **DPSP_MSG_KEYEXCHANGE** message (section [2.2.34](#Section_3.2.5.9)), it MUST remember the **PublicKey** and **SessionKey** fields in the message as **Client.PublicKey** and **Client.SessionKey** and it MUST use these keys for subsequent encrypted communication to the client.
+When a [**DirectPlay**](#gt_directplay) server receives a **DPSP_MSG_KEYEXCHANGE** message (section [2.2.34](#Section_2.2.34)), it MUST remember the **PublicKey** and **SessionKey** fields in the message as **Client.PublicKey** and **Client.SessionKey** and it MUST use these keys for subsequent encrypted communication to the client.
 
 It MUST then allocate a new public/private key pair to be used when transmitting messages to this client and save it as **Client.HostPublicKey**. It MUST then format and transmit a **DPSP_MSG_KEYEXCHANGEREPLY** message (section [2.2.35](#Section_2.2.35)) with the **SessionKey** set to **Client.HostPublicKey**.
 
 <a id="Section_3.2.5.10"></a>
 #### 3.2.5.10 DPSP_MSG_PING
 
-When a [**DirectPlay 4**](#gt_directplay-4) server receives a **DPSP_MSG_PING** message (section [2.2.42](#Section_3.1.5.30)) it MUST be handled as specified in section [3.1.5.30](#Section_3.1.5.30), except that if **IDFrom** does not represent a valid [**player**](#gt_player), then the server MUST send a **DPSP_MSG_YOUAREDEAD** message (section [2.2.55](#Section_3.1.5.32)) rather than ignoring the packet.
+When a [**DirectPlay 4**](#gt_directplay-4) server receives a **DPSP_MSG_PING** message (section [2.2.42](#Section_2.2.42)) it MUST be handled as specified in section [3.1.5.30](#Section_3.1.5.30), except that if **IDFrom** does not represent a valid [**player**](#gt_player), then the server MUST send a **DPSP_MSG_YOUAREDEAD** message (section [2.2.55](#Section_2.2.55)) rather than ignoring the packet.
 
 <a id="Section_3.2.5.11"></a>
 #### 3.2.5.11 DPSP_MSG_PINGREPLY
 
-When a [**DirectPlay 4**](#gt_directplay-4) server receives a **DPSP_MSG_PINGREPLY** message (section [2.2.43](#Section_3.1.5.30)), it MUST be handled as specified in section [3.1.5.31](#Section_3.1.5.31), except that if **IDFrom** does not represent a valid [**player**](#gt_player), then the server MUST send a **DPSP_MSG_YOUAREDEAD** message (section [2.2.55](#Section_3.1.5.32)) rather than ignoring the packet.
+When a [**DirectPlay 4**](#gt_directplay-4) server receives a **DPSP_MSG_PINGREPLY** message (section [2.2.43](#Section_2.2.43)), it MUST be handled as specified in section [3.1.5.31](#Section_3.1.5.31), except that if **IDFrom** does not represent a valid [**player**](#gt_player), then the server MUST send a **DPSP_MSG_YOUAREDEAD** message (section [2.2.55](#Section_2.2.55)) rather than ignoring the packet.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -3045,7 +3045,7 @@ When the Name Table Population timer expires, the [**game**](#gt_game) [**host**
 <a id="Section_3.2.6.2"></a>
 #### 3.2.6.2 Ping Timer
 
-When the Ping timer expires, the [**DirectPlay 4**](#gt_directplay-4) server SHOULD send a **DPSP_MSG_PING** (section [2.2.42](#Section_3.1.5.30)) message to all connected computer systems if no messages have been received since the last Ping timer expiration. If eight **DPSP_MSG_PING** messages have been sent without a reply, the connection to the computer system SHOULD be terminated.
+When the Ping timer expires, the [**DirectPlay 4**](#gt_directplay-4) server SHOULD send a **DPSP_MSG_PING** (section [2.2.42](#Section_2.2.42)) message to all connected computer systems if no messages have been received since the last Ping timer expiration. If eight **DPSP_MSG_PING** messages have been sent without a reply, the connection to the computer system SHOULD be terminated.
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
@@ -3244,15 +3244,15 @@ The following figure shows a nascent [**game**](#gt_game) [**instance**](#gt_ins
 
 Figure 4: Joining a game
 
-A nascent game instance transmits a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_3.2.5.4)) message requesting a new system player to the game host.
+A nascent game instance transmits a **DPSP_MSG_REQUESTPLAYERID** (section [2.2.49](#Section_2.2.49)) message requesting a new system player to the game host.
 
 The game host responds with a **DPSP_MSG_REQUESTPLAYERREPLY** message (section [2.2.50](#Section_2.2.50)) with the new system [**player ID**](#gt_player-id).
 
-The nascent game instance transmits a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_3.2.5.5)) to the game host.
+The nascent game instance transmits a **DPSP_MSG_ADDFORWARDREQUEST** message (section [2.2.11](#Section_2.2.11)) to the game host.
 
-The game host transmits a **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_3.1.5.10)) to each of the established game instances.
+The game host transmits a **DPSP_MSG_ADDFORWARD** message (section [2.2.8](#Section_2.2.8)) to each of the established game instances.
 
-The established game instances respond with a **DPSP_MSG_ADDFORWARDACK** message (section [2.2.9](#Section_3.1.5.10)).
+The established game instances respond with a **DPSP_MSG_ADDFORWARDACK** message (section [2.2.9](#Section_2.2.9)).
 
 The game host completes the join process by sending a **DPSP_MSG_SUPERENUMPLAYERSREPLY** message (section [2.2.53](#Section_2.2.53)) to the nascent game instance with the state of the game session.
 
@@ -3383,7 +3383,7 @@ Implementations can choose to support other algorithms and values not shown here
 
 <19> Section 3.1.5.5: Windows returns a DPERR_LOGONDENIED error code to the caller when this message is received.
 
-<20> Section 3.1.5.10: If the Windows Sockets DirectPlay provider is used, the **SpData** field of the [DPSP_MSG_ADDFORWARD](#Section_3.1.5.10) request contains the IP address and port number that are used to communicate with the [**system player**](#gt_system-player).
+<20> Section 3.1.5.10: If the Windows Sockets DirectPlay provider is used, the **SpData** field of the [DPSP_MSG_ADDFORWARD](#Section_2.2.8) request contains the IP address and port number that are used to communicate with the [**system player**](#gt_system-player).
 
 <21> Section 3.2.5.4: In Windows, the only supported SSPI provider is the NTLM SSPI provider which implements the NT LAN Manager (NTLM) Authentication Protocol, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md).
 

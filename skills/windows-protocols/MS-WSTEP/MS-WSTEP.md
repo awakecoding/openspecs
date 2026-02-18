@@ -930,9 +930,9 @@ An incoming [**SOAP message**](#gt_soap-message) MUST be processed to evaluate t
 
 If the user is authenticated successfully using the provided authentication information, message processing MUST continue, and the authentication information SHOULD be provided to the Issuer. If the authentication fails, the server MUST respond with a [**SOAP fault**](#gt_soap-fault).
 
-If the SOAP action is "http://schemas.microsoft.com/windows/pki/2009/01/enrollment/RST/wstep" the server must follow the Request Security Token Processing Rules per section [3.1.4.2.1](#Section_3.1.4.2.1.1).
+If the SOAP action is "http://schemas.microsoft.com/windows/pki/2009/01/enrollment/RST/wstep" the server must follow the Request Security Token Processing Rules per section [3.1.4.2.1](#Section_3.1.4.2.1).
 
-If the SOAP action is "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/KET" the server must follow the Key Exchange Token Processing Rules per section [3.1.4.2.2](#Section_3.1.4.2.2.1).
+If the SOAP action is "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/KET" the server must follow the Key Exchange Token Processing Rules per section [3.1.4.2.2](#Section_3.1.4.2.2).
 
 If any other SOAP action is defined, the server SHOULD respond with a SOAP fault.
 

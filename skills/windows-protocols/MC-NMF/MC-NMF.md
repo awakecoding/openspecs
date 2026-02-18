@@ -255,9 +255,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MSDN-BinaryMsgEncdngBindElmnt] Microsoft Corporation, "BinaryMessageEncodingBindingElement Class", [http://msdn.microsoft.com/en-us/library/system.servicemodel.channels.binarymessageencodingbindingelement.aspx](https://go.microsoft.com/fwlink/?LinkId=216916)
 
@@ -298,7 +298,7 @@ The message properties are typically controlled by the Protocol Configuration Ob
 
 - The transport to be used.
 - The version of the .NET Message Framing Protocol being used.
-- The mode of communication, which is explained in sections [1.3.2](#Section_1.3) and [2.2.3.2](#Section_2.2.3.2).
+- The mode of communication, which is explained in sections [1.3.2](#Section_1.3.2) and [2.2.3.2](#Section_2.2.3.2).
 - The Via, which is a Uniform Resource Identifier (URI) that identifies the endpoint for which the messages are intended.
 - The encoding format being used for the messages. The different encoding schemes are covered in section [2.2.3.4](#Section_2.2.3.4).
 - The chunk size. If the mode supports chunking, this determines the maximum size of a chunk.
@@ -308,7 +308,7 @@ The message properties are typically controlled by the Protocol Configuration Ob
 
 This section describes scenarios that capture the various message exchange patterns between SOAP nodes. These scenarios help to define the communication modes that are covered in the next section and that the protocol needs to support.
 
-The scenarios describe a sales organization that has several salespersons; some are in the head office and some offsite. They are interacting with the customers and preparing purchase orders that need to be sent to a central server as SOAP messages. The purchase orders can also be retrieved from the server, again as SOAP messages. The Asynchronous Message Relay is a mechanism that is used to queue up messages when the salesperson is offline and then relay the messages after connectivity is established. One such mechanism is Microsoft Message Queuing, as described in [MS-MQOD](#Section_1.3).
+The scenarios describe a sales organization that has several salespersons; some are in the head office and some offsite. They are interacting with the customers and preparing purchase orders that need to be sent to a central server as SOAP messages. The purchase orders can also be retrieved from the server, again as SOAP messages. The Asynchronous Message Relay is a mechanism that is used to queue up messages when the salesperson is offline and then relay the messages after connectivity is established. One such mechanism is Microsoft Message Queuing, as described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 ![Asynchronous Message Relay](media/image1.png)
 
@@ -390,7 +390,7 @@ This protocol is available for use over any network transport that needs to prov
 
 The protocol assumes that a transport session has been established. The management of the transport session (that is, how and when it is established, management of idle sessions, and closure of the transport session) is not a responsibility of the protocol. The protocol only uses the transport session to send and receive octets.
 
-For the Singleton Sized mode, which is described in section [1.3.2](#Section_1.3), the size of the message is not contained as part of the message frame. The protocol assumes that the underlying transport has a means to compute the size and relay it to the protocol.
+For the Singleton Sized mode, which is described in section [1.3.2](#Section_1.3.2), the size of the message is not contained as part of the message frame. The protocol assumes that the underlying transport has a means to compute the size and relay it to the protocol.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -452,13 +452,13 @@ These records and their structure are covered in detail in subsequent sections. 
 | 0x02 | [Via Record](#Section_2.2.3.3) |
 | 0x03 | [Known Encoding Record](#Section_2.2.3.4.1) |
 | 0x04 | [Extensible Encoding Record](#Section_2.2.3.4.2) |
-| 0x05 | [Unsized Envelope Record](#Section_3.1.4.12) |
-| 0x06 | [Sized Envelope Record](#Section_3.1.4.11) |
-| 0x07 | [End Record](#Section_3.1.4.13) |
+| 0x05 | [Unsized Envelope Record](#Section_2.2.4.3) |
+| 0x06 | [Sized Envelope Record](#Section_2.2.4.1) |
+| 0x07 | [End Record](#Section_2.2.3.9) |
 | 0x08 | [Fault Record](#Section_2.2.5) |
 | 0x09 | [Upgrade Request Record](#Section_2.2.3.5) |
-| 0x0A | [Upgrade Response Record](#Section_3.1.4.8) |
-| 0x0B | [Preamble Ack Record](#Section_3.1.4.10) |
+| 0x0A | [Upgrade Response Record](#Section_2.2.3.6) |
+| 0x0B | [Preamble Ack Record](#Section_2.2.3.8) |
 | 0x0C | [Preamble End Record](#Section_2.2.3.7) |
 
 <a id="Section_2.2.2"></a>
@@ -857,7 +857,7 @@ Figure 3: Singleton Unsized mode
 
 Figure 4: Duplex mode
 
-In the case illustrated, the [**initiator**](#gt_initiator) sends the [End Record](#Section_3.1.4.13) first. The protocol allows either participant to send the End Record first. After a participant sends the End Record, the participant MUST continue to receive messages until the session is closed.
+In the case illustrated, the [**initiator**](#gt_initiator) sends the [End Record](#Section_2.2.3.9) first. The protocol allows either participant to send the End Record first. After a participant sends the End Record, the participant MUST continue to receive messages until the session is closed.
 
 <a id="Section_3.1.1.1.3"></a>
 ##### 3.1.1.1.3 Simplex Mode
@@ -882,7 +882,7 @@ Figure 7: Upgrades
 
 This figure illustrates a stream upgrade that uses the [Singleton Unsized mode](#Section_3.1.1.1.1). The figure would look very similar if the stream upgrade used the [Duplex mode](#Section_4.1).
 
-After the protocol upgrade, subsequent protocol exchanges occur over the upgraded transport stream until a fault occurs or an [End Record](#Section_3.1.4.13) is received. Although the protocol allows for multiple upgrades, the preceding exchange illustrates a single upgrade only.
+After the protocol upgrade, subsequent protocol exchanges occur over the upgraded transport stream until a fault occurs or an [End Record](#Section_2.2.3.9) is received. Although the protocol allows for multiple upgrades, the preceding exchange illustrates a single upgrade only.
 
 <a id="Section_3.1.1.1.6"></a>
 ##### 3.1.1.1.6 Faults
@@ -1105,27 +1105,27 @@ If the participant receives an unexpected [**record**](#gt_record) type, it MUST
 - If the record type the participant read from the protocol stream is not [Upgrade Request Record](#Section_2.2.3.5), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
 - The participant MUST read the Upgrade Protocol, as detailed in section [3.1.4.1](#Section_3.1.4.1). The participant SHOULD use a MaxUpgradeProtocolSize.<17> If the upgrade name is too long, a [Fault Record](#Section_2.2.5) MAY<18> be sent, and the session MUST be closed.
 - If the upgrade is not supported, a Fault Record MAY<19> be sent, and the session MUST be closed.
-- If the upgrade is supported, the participant MUST send an [Upgrade Response Record](#Section_3.1.4.8), as described in section 2.2.3.6. The participant MUST invoke the upgrade handler identified by the upgrade protocol name in the Upgrade Request Record.
+- If the upgrade is supported, the participant MUST send an [Upgrade Response Record](#Section_2.2.3.6), as described in section 2.2.3.6. The participant MUST invoke the upgrade handler identified by the upgrade protocol name in the Upgrade Request Record.
 <a id="Section_3.1.4.8"></a>
 #### 3.1.4.8 Upgrade Response Record
 
-- If the record type the participant read from the protocol stream is not [Upgrade Response Record](#Section_3.1.4.8), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
+- If the record type the participant read from the protocol stream is not [Upgrade Response Record](#Section_2.2.3.6), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
 - If the upgrade is supported, the participant MUST invoke the appropriate upgrade handler. How the upgrade handler achieves the upgrade is outside the scope of this document.
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 Preamble End Record
 
 - If the record type the participant read from the protocol stream is not [Preamble End Record](#Section_2.2.3.7), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
-- In the case of Singleton Unsized and Duplex modes, the participant MUST send a [Preamble Ack Record](#Section_3.1.4.10) as described in section 2.2.3.8.
+- In the case of Singleton Unsized and Duplex modes, the participant MUST send a [Preamble Ack Record](#Section_2.2.3.8) as described in section 2.2.3.8.
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 Preamble Ack Record
 
-If the record type the participant read from the protocol stream is not [Preamble Ack Record](#Section_3.1.4.10), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
+If the record type the participant read from the protocol stream is not [Preamble Ack Record](#Section_2.2.3.8), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 Sized Envelope Record
 
-- If the record type the participant read from the protocol stream is not [Sized Envelope Record](#Section_3.1.4.11), it MUST be handled as follows:
-- If the record type is [End Record](#Section_3.1.4.13), the participant MUST notify the higher layer of the receipt of End Record and set Receive Allowed to FALSE.
+- If the record type the participant read from the protocol stream is not [Sized Envelope Record](#Section_2.2.4.1), it MUST be handled as follows:
+- If the record type is [End Record](#Section_2.2.3.9), the participant MUST notify the higher layer of the receipt of End Record and set Receive Allowed to FALSE.
 - If the record type is a [Fault Record](#Section_2.2.5), the session MUST be closed.
 - Otherwise, it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
 - The participant MUST obtain the message as detailed in section [3.1.4.1](#Section_3.1.4.1). The participant SHOULD use a MaxEnvelopeSize.<20>
@@ -1134,12 +1134,12 @@ If the message is too large, a Fault Record MAY<21> be sent, and the session MUS
 <a id="Section_3.1.4.12"></a>
 #### 3.1.4.12 Unsized Envelope Record
 
-- If the record type the participant read from the protocol stream is not [Unsized Envelope Record](#Section_3.1.4.12), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
+- If the record type the participant read from the protocol stream is not [Unsized Envelope Record](#Section_2.2.4.3), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
 - The participant MUST then process the first chunk and any additional chunks, as described in section [3.1.4.1](#Section_3.1.4.1), until the Terminator marker (octet 0x00) is read. To achieve streaming, reading chunks SHOULD be correlated with consumption of chunks by the higher layer. The participant SHOULD use a MaxChunkSize.<22> If the chunk size is too large, a [Fault Record](#Section_2.2.5) MAY<23> be sent, and the session MUST be closed.
 <a id="Section_3.1.4.13"></a>
 #### 3.1.4.13 End Record
 
-- If the record type the participant read from the protocol stream is not [End Record](#Section_3.1.4.13), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
+- If the record type the participant read from the protocol stream is not [End Record](#Section_2.2.3.9), it MUST be handled as described in section [3.1.4.2](#Section_3.1.4.2).
 - The participant MUST set Receive Allowed to FALSE.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -1207,13 +1207,13 @@ If Send Allowed is set to FALSE, an error MUST be propagated to the higher layer
 <a id="Section_3.2.4.3.1"></a>
 ##### 3.2.4.3.1 Singleton Unsized Mode
 
-- The [**initiator**](#gt_initiator) MUST send an Unsized Envelope Record containing the message as described in section [2.2.4.3](#Section_3.1.4.12).
-- The initiator MUST send an End Record as described in section [2.2.3.9](#Section_3.1.4.13).
+- The [**initiator**](#gt_initiator) MUST send an Unsized Envelope Record containing the message as described in section [2.2.4.3](#Section_2.2.4.3).
+- The initiator MUST send an End Record as described in section [2.2.3.9](#Section_2.2.3.9).
 - The initiator MUST set Send Allowed to FALSE.
 <a id="Section_3.2.4.3.2"></a>
 ##### 3.2.4.3.2 Duplex or Simplex Mode
 
-The [**initiator**](#gt_initiator) MUST send a Sized Envelope Record containing the message as described in section [2.2.4.1](#Section_3.1.4.11).
+The [**initiator**](#gt_initiator) MUST send a Sized Envelope Record containing the message as described in section [2.2.4.1](#Section_2.2.4.1).
 
 <a id="Section_3.2.4.3.3"></a>
 ##### 3.2.4.3.3 Singleton Sized Mode
@@ -1228,7 +1228,7 @@ If Receive Allowed is set to FALSE, an error MUST be propagated to the higher la
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Send End Record
 
-If mode is not Duplex or Simplex, an error MUST be propagated to the higher layer and no further processing done. Otherwise, the [**initiator**](#gt_initiator) MUST send an End Record as described in section [2.2.3.9](#Section_3.1.4.13). The initiator MUST set Send Allowed to FALSE.
+If mode is not Duplex or Simplex, an error MUST be propagated to the higher layer and no further processing done. Otherwise, the [**initiator**](#gt_initiator) MUST send an End Record as described in section [2.2.3.9](#Section_2.2.3.9). The initiator MUST set Send Allowed to FALSE.
 
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 Session Close
@@ -1281,20 +1281,20 @@ A new session state MUST be created and session properties initialized as descri
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 Receive Preamble
 
-- The [**receiver**](#gt_receiver) MUST read the Version Record, as described in section [3.1.4.3](#Section_2.2.3.1).
-- The receiver MUST read the Mode Record, as described in section [3.1.4.4](#Section_2.2.3.2).
-- The receiver MUST read the Via Record, as described in section [3.1.4.5](#Section_2.2.3.3).
+- The [**receiver**](#gt_receiver) MUST read the Version Record, as described in section [3.1.4.3](#Section_3.1.4.3).
+- The receiver MUST read the Mode Record, as described in section [3.1.4.4](#Section_3.1.4.4).
+- The receiver MUST read the Via Record, as described in section [3.1.4.5](#Section_3.1.4.5).
 - The receiver MUST read the Encoding Record, as described in section [3.1.4.6](#Section_3.1.4.6).
-- If the mode is Simplex, the receiver MUST read the Preamble End record as described in section [3.1.4.9](#Section_3.1.4.13).
+- If the mode is Simplex, the receiver MUST read the Preamble End record as described in section [3.1.4.9](#Section_3.1.4.9).
 - If the mode is Singleton Unsized, or Duplex, the receiver MUST perform these additional steps:
-- If an upgrade is required, read the Upgrade Request Record, as described in section [3.1.4.7](#Section_2.2.3.5).
+- If an upgrade is required, read the Upgrade Request Record, as described in section [3.1.4.7](#Section_3.1.4.7).
 - Read the Preamble End Record, as described in section 3.1.4.9.
 - The receiver MUST set Receive Allowed to TRUE.
 - If the mode is Duplex, the receiver MUST set Send Allowed to TRUE.
 <a id="Section_3.3.4.3"></a>
 #### 3.3.4.3 Send Message
 
-If Send Allowed is set to FALSE, an error MUST be propagated to the higher layer and no further processing done. Otherwise, the [**receiver**](#gt_receiver) MUST send a Sized Envelope Record containing the message as described in section [2.2.4.1](#Section_3.1.4.11).
+If Send Allowed is set to FALSE, an error MUST be propagated to the higher layer and no further processing done. Otherwise, the [**receiver**](#gt_receiver) MUST send a Sized Envelope Record containing the message as described in section [2.2.4.1](#Section_2.2.4.1).
 
 <a id="Section_3.3.4.4"></a>
 #### 3.3.4.4 Receive Message
@@ -1320,7 +1320,7 @@ The [**receiver**](#gt_receiver) MUST read the message and propagate it to a hig
 <a id="Section_3.3.4.5"></a>
 #### 3.3.4.5 Send End Record
 
-If the mode is not Duplex, an error MUST be propagated to the higher layer and no further processing done. Otherwise, the [**receiver**](#gt_receiver) MUST send an End Record as described in section [2.2.3.9](#Section_3.1.4.13). The receiver MUST set Send Allowed to FALSE.
+If the mode is not Duplex, an error MUST be propagated to the higher layer and no further processing done. Otherwise, the [**receiver**](#gt_receiver) MUST send an End Record as described in section [2.2.3.9](#Section_2.2.3.9). The receiver MUST set Send Allowed to FALSE.
 
 <a id="Section_3.3.4.6"></a>
 #### 3.3.4.6 Session Close
@@ -1422,7 +1422,7 @@ None.
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 The terms "earlier" and "later", when used with a product version, refer to either all preceding versions or all subsequent versions, respectively. The term "through" refers to the inclusive range of versions. Applicable Microsoft products are listed chronologically in this section.
 
@@ -1465,7 +1465,7 @@ The Windows implementation of this protocol that is exercised by Windows Web Ser
 
 <8> Section 3.1.4.1: The Windows implementation of this protocol that is exercised by both Windows Communication Framework and Windows Web Services API does not send a [Fault Record](#Section_2.2.5) if the size of a variable-sized [**record**](#gt_record) is 0.
 
-<9> Section 3.1.4.3: The Windows implementation of this protocol that is exercised by Windows Communication Framework sends a Fault Record (UnsupportedVersion) if an incorrect version is specified in the received [Version Record](#Section_2.2.3.1).
+<9> Section 3.1.4.3: The Windows implementation of this protocol that is exercised by Windows Communication Framework sends a Fault Record (UnsupportedVersion) if an incorrect version is specified in the received [Version Record](#Section_3.1.4.3).
 
 The Windows implementation of this protocol that is exercised by Windows Web Services API does not send a Fault Record if an incorrect version is specified in the received Version Record.
 
@@ -1501,11 +1501,11 @@ The Windows implementation of this protocol that is exercised by Windows Communi
 
 <20> Section 3.1.4.11: The Windows implementation of this protocol that is exercised by both Windows Communication Framework and Windows Web Services uses a MaxEnvelopeSize as configured externally.
 
-<21> Section 3.1.4.11: The Windows implementation of this protocol that is exercised by both Windows Communication Framework and Windows Web Services API sends a Fault Record (MaxMessageSizeExceededFault) if the size of the received [Sized Envelope Record](#Section_3.1.4.11) exceeds MaxEnvelopeSize but is not greater than 0xffffffff. No Fault Record is sent if the size of the received Sized Envelope Record exceeds 0xffffffff.
+<21> Section 3.1.4.11: The Windows implementation of this protocol that is exercised by both Windows Communication Framework and Windows Web Services API sends a Fault Record (MaxMessageSizeExceededFault) if the size of the received [Sized Envelope Record](#Section_2.2.4.1) exceeds MaxEnvelopeSize but is not greater than 0xffffffff. No Fault Record is sent if the size of the received Sized Envelope Record exceeds 0xffffffff.
 
 <22> Section 3.1.4.12: The Windows implementation of this protocol that is exercised by Windows Communication Framework defines a MaxChunkSize of 0xfffffffa.
 
-<23> Section 3.1.4.12: The Windows implementation of this protocol that is exercised by Windows Communication Framework does not send a Fault Record if the size of a chunk in the received [Unsized Envelope Record](#Section_3.1.4.12) exceeds MaxChunkSize.
+<23> Section 3.1.4.12: The Windows implementation of this protocol that is exercised by Windows Communication Framework does not send a Fault Record if the size of a chunk in the received [Unsized Envelope Record](#Section_2.2.4.3) exceeds MaxChunkSize.
 
 <a id="Section_7"></a>
 # 7 Change Tracking

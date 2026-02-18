@@ -1431,7 +1431,7 @@ This section specifies the elements in the [**XML schema (XSD)**](#gt_xml-schema
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 ResourceCollection Element
 
-The <ResourceCollection> element contains all the other elements defined in section [2.2.2.1](#Section_2.2.1.1). The server MUST only put one <Publisher> element as defined in section [2.2.2.1.2](#Section_2.2.2.1.2). The <ResourceCollection> element defines the following attributes:
+The <ResourceCollection> element contains all the other elements defined in section [2.2.2.1](#Section_2.2.2.1). The server MUST only put one <Publisher> element as defined in section [2.2.2.1.2](#Section_2.2.2.1.2). The <ResourceCollection> element defines the following attributes:
 
 - **PubDate**: The publication date. This date SHOULD be included in the <ResourceCollection> element and MUST be in the form **xs:dateTime**.
 - **SchemaVersion**: The version number of the [**XML**](#gt_xml) [**schema**](#gt_schema). This attribute MUST be included in the <ResourceCollection> element and SHOULD be based on the version of the schema described in section [2.2.1.1](#Section_2.2.1.1) of this document. The schema version for the XML schema listed in section 2.2.1.1 of this document is schema version 1.1. The schema version number can be found in the **version** attribute of the <xs:schema> element in the XML schema (section [2.2.1](#Section_2.2.1)).
@@ -1485,7 +1485,7 @@ Icon elements define the following attributes:
 <a id="Section_2.2.2.1.7"></a>
 ##### 2.2.2.1.7 HostingTerminalServers Element
 
-The <HostingTerminalServers> element contains elements for all the [**terminal servers**](#gt_terminal-server), computers on which [**Terminal Services**](#gt_terminal-services-ts) is running, that are hosting a resource. This element MUST contain at least one [HostingTerminalServer](#Section_2.2.2.1.7) element, as defined in section 2.2.2.1.8.
+The <HostingTerminalServers> element contains elements for all the [**terminal servers**](#gt_terminal-server), computers on which [**Terminal Services**](#gt_terminal-services-ts) is running, that are hosting a resource. This element MUST contain at least one [HostingTerminalServer](#Section_2.2.2.1.8) element, as defined in section 2.2.2.1.8.
 
 <a id="Section_2.2.2.1.8"></a>
 ##### 2.2.2.1.8 HostingTerminalServer Element
@@ -1534,12 +1534,12 @@ The <FileExtension> element MUST contain the definition of one file type that th
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 Schema Version 2.0 Element Definitions
 
-This section specifies the elements in the [**XML schema (XSD)**](#gt_xml-schema-xsd) that are defined in section [2.2.1.2](#Section_2.2.1.2). It does this by listing the changes from schema version 1.1, the element definitions for which can be found in section [2.2.2.1](#Section_2.2.1.1). Unless specified otherwise in this section, the definition of an element in schema version 2.0 is the same as its definition in schema version 1.1.
+This section specifies the elements in the [**XML schema (XSD)**](#gt_xml-schema-xsd) that are defined in section [2.2.1.2](#Section_2.2.1.2). It does this by listing the changes from schema version 1.1, the element definitions for which can be found in section [2.2.2.1](#Section_2.2.2.1). Unless specified otherwise in this section, the definition of an element in schema version 2.0 is the same as its definition in schema version 1.1.
 
 <a id="Section_2.2.2.2.1"></a>
 ##### 2.2.2.2.1 ResourceCollection Element
 
-The <ResourceCollection> element contains all of the other elements defined in sections [2.2.2.1](#Section_2.2.1.1) and [2.2.2.2](#Section_2.2.1.2). The server MUST only put one <Publisher> element as defined in section [2.2.2.1.2](#Section_2.2.2.1.2). The <ResourceCollection> element defines the following attributes:
+The <ResourceCollection> element contains all of the other elements defined in sections [2.2.2.1](#Section_2.2.2.1) and [2.2.2.2](#Section_2.2.2.2). The server MUST only put one <Publisher> element as defined in section [2.2.2.1.2](#Section_2.2.2.1.2). The <ResourceCollection> element defines the following attributes:
 
 - **PubDate**: The publication date. This date SHOULD be included in the <ResourceCollection> element and MUST be in the form xs:dateTime.
 - **SchemaVersion**: The version number of the [**XML**](#gt_xml) [**schema**](#gt_schema). This attribute MUST be included in the <ResourceCollection> element and SHOULD be based on the version of the schema described in section [2.2.1.2](#Section_2.2.1.2) of this document. The schema version for the XML schema listed in section 2.2.1.2 of this document is schema version 2.0. The schema version number can be found in the version attribute of the <xs:schema> element in the XML schema (see section [2.2.1](#Section_2.2.1)).
@@ -1583,7 +1583,7 @@ The <Folder> element describes a folder (see section [2.2.6](#Section_2.2.6)) an
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Schema Version 2.1 Element Definitions
 
-This section specifies the elements in the [**XML schema (XSD)**](#gt_xml-schema-xsd) that are defined in section [2.2.1.3](#Section_2.2.1.3). It does this by listing the changes from schema version 2.0, the element definitions for which can be found in section [2.2.2.2](#Section_2.2.1.2). Unless specified otherwise in this section, the definition of an element in schema version 2.1 is the same as its definition in schema version 2.0 (which can in turn be the same as its definition in schema version 1.1).
+This section specifies the elements in the [**XML schema (XSD)**](#gt_xml-schema-xsd) that are defined in section [2.2.1.3](#Section_2.2.1.3). It does this by listing the changes from schema version 2.0, the element definitions for which can be found in section [2.2.2.2](#Section_2.2.2.2). Unless specified otherwise in this section, the definition of an element in schema version 2.1 is the same as its definition in schema version 2.0 (which can in turn be the same as its definition in schema version 1.1).
 
 <a id="Section_2.2.2.3.1"></a>
 ##### 2.2.2.3.1 Resource Element
@@ -1663,7 +1663,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Authentication Cookie
 
-When a [**TSWPP**](#gt_tswpp) [**client**](#gt_client) first connects to the TSWPP [**server**](#gt_server), an [**authentication**](#gt_authentication) cookie is transmitted to the client, as specified in section [3.1](#Section_1.3). This opaque server generated cookie contains information to authenticate a user to the server as well as the security identifier (SID), as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, for the user that originally authenticated to the server.
+When a [**TSWPP**](#gt_tswpp) [**client**](#gt_client) first connects to the TSWPP [**server**](#gt_server), an [**authentication**](#gt_authentication) cookie is transmitted to the client, as specified in section [3.1](#Section_3.1). This opaque server generated cookie contains information to authenticate a user to the server as well as the security identifier (SID), as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, for the user that originally authenticated to the server.
 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 XML Files
@@ -1851,7 +1851,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Authentication Cookie
 
-When a [**TSWPP**](#gt_tswpp) client first connects to the TSWPP server, an authentication cookie is transmitted to the client, as specified in section [3.1](#Section_1.3). This cookie contains information to authenticate a user to the server, as well as the security identifier (SID), as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, for the user that originally authenticated to the server.
+When a [**TSWPP**](#gt_tswpp) client first connects to the TSWPP server, an authentication cookie is transmitted to the client, as specified in section [3.1](#Section_3.1). This cookie contains information to authenticate a user to the server, as well as the security identifier (SID), as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2, for the user that originally authenticated to the server.
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers

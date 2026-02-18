@@ -487,7 +487,7 @@ This protocol offers the following services, which operate independently on the 
 - QoS diagnostics for [**cross-traffic analysis**](#gt_cross-traffic-analysis).
 There are no dependencies or ordering restrictions between these services, except that the topology discovery test requires that quick discovery is performed first.
 
-Additionally, the concept of [**charge**](#gt_charge) is central to this protocol. Charge is described in section [1.3.5](#Section_802.11).
+Additionally, the concept of [**charge**](#gt_charge) is central to this protocol. Charge is described in section [1.3.5](#Section_1.3.5).
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Quick Discovery
@@ -554,17 +554,17 @@ A [**mapper's**](#gt_mapper) requests have the potential to trigger non-trivial 
 
 Charging involves sending special frames to the responder to build up the charge. Only after enough charge has been accumulated can the mapper request the responder to carry out a topology test. Once the responder has verified that it has enough charge, it consumes the charge and fulfills the topology test.
 
-Section [1.3.5.1](#Section_802.11) summarizes frames used during charging.
+Section [1.3.5.1](#Section_1.3.5.1) summarizes frames used during charging.
 
-Section [1.3.5.2](#Section_802.11) summarizes how charge is tracked by responders.
+Section [1.3.5.2](#Section_1.3.5.2) summarizes how charge is tracked by responders.
 
 Responders perform the following actions when receiving a Charge frame or Emit frame:
 
-1) Accumulating charge from the frame (section [1.3.5.3](#Section_802.11)).
+1) Accumulating charge from the frame (section [1.3.5.3](#Section_1.3.5.3)).
 
-2) Determining the charge requirements for the request (section [1.3.5.4](#Section_802.11)).
+2) Determining the charge requirements for the request (section [1.3.5.4](#Section_1.3.5.4)).
 
-3) Consuming charge (section [1.3.5.5](#Section_802.11)).
+3) Consuming charge (section [1.3.5.5](#Section_1.3.5.5)).
 
 4) Sending out frames.
 
@@ -573,7 +573,7 @@ Responders perform the following actions when receiving a Charge frame or Emit f
 
 The frames described in this section convey or consume [**charge**](#gt_charge). Charge frames and Emit frames can be unacknowledged or acknowledged. Charge frames and Emit frames are considered acknowledged if they contain a nonzero sequence number (see section [2.2.4](#Section_2.2.4) for frame layout). Such frames are intended to elicit a response from a [**responder**](#gt_responder) indicating receipt and processing of the Charge frame or Emit frame (using either a Flat frame or an Ack frame). Unacknowledged Charge frames and Emit frames are those with sequence numbers of zero; they do not elicit a response indicating if or how the frame was processed.
 
-**Charge frames**: The primary purpose of the Charge frame is to transfer charge (see section [1.3.5.3](#Section_802.11)) to responders in preparation for an Emit frame containing one or more probe targets (EmiteeDesc items in the Emit frame). Acknowledged Charge frames can also instruct a responder to report its current charge using a Flat frame.
+**Charge frames**: The primary purpose of the Charge frame is to transfer charge (see section [1.3.5.3](#Section_1.3.5.3)) to responders in preparation for an Emit frame containing one or more probe targets (EmiteeDesc items in the Emit frame). Acknowledged Charge frames can also instruct a responder to report its current charge using a Flat frame.
 
 **Emit frames**: The primary purpose of an Emit frame is to request the sending of one or more Train or Probe frames by the responder. Emit frames also carry charge, but such charge is immediately consumed by fulfilling the Emit request. The only exception is when the responder does not have enough charge to satisfy the request. If this is the case, and the Emit frame was acknowledged, a Flat frame is sent to (1) notify the [**mapper**](#gt_mapper) that the request was not satisfied, and (2) report the amount of charge on the responder.
 
@@ -602,7 +602,7 @@ To limit the ability of a rogue mapper from accumulating dangerous amounts of ch
 
 [**Charge**](#gt_charge) requirements are based on how many frames are to be sent and how many bytes are in those frames. Charge requirements for each frame are: one Frame Charge (FC), and Byte Charge (BC) equivalent to the combined size, in bytes, of the Destination MAC, Source MAC, EtherType, and Payload fields of the Ethernet frame.
 
-The number of frames to be sent varies based on whether a Charge frame or an Emit frame is received and whether that frame is unacknowledged or acknowledged. (For the definition of unacknowledged and acknowledged Charge frames and Emit frames, see section [1.3.5.1](#Section_802.11). For further details about determining charge requirements, see section [3.2.4.3](#Section_3.2.4.3).)
+The number of frames to be sent varies based on whether a Charge frame or an Emit frame is received and whether that frame is unacknowledged or acknowledged. (For the definition of unacknowledged and acknowledged Charge frames and Emit frames, see section [1.3.5.1](#Section_1.3.5.1). For further details about determining charge requirements, see section [3.2.4.3](#Section_3.2.4.3).)
 
 As an example, an acknowledged Emit frame containing 5 EmiteeDesc entries would elicit 5 Probe frames and 1 Ack frame. Probe frames and Ack frames are both 32 bytes in size. Therefore, the charge required would be 6 FC and 192 BC. (For details about how this example was calculated, see section [4.3](#Section_4.3).)
 
@@ -648,7 +648,7 @@ This protocol has no capability negotiation or versioning aspects, except that m
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-This protocol defines a range of special [**MAC addresses**](#gt_5f9ccdf4-2607-4855-9a72-2010aa3300bf) that applications can use when they conduct network topology tests. This range is 0x000D3AD7F140 through 0x000D3AFFFFFF. These MAC addresses do not conflict with actual MAC addresses because the range is built from an assigned Organizationally Unique Identifier (OUI), as described in section [1.9](#Section_802.11). To minimize the probability of collisions between two such applications on the same link, while still allowing addresses that the same application uses to be similar (simply for ease in debugging), applications using this protocol SHOULD construct such MAC addresses by using the OUI, followed by a random number in the range 0xD7F2 to 0xFFFF, and leaving 8 bits that can be used to give 256 MAC addresses. This protocol contains a [**generation number**](#gt_generation-number) field that can be used as a seed in a pseudo-random number generator.
+This protocol defines a range of special [**MAC addresses**](#gt_5f9ccdf4-2607-4855-9a72-2010aa3300bf) that applications can use when they conduct network topology tests. This range is 0x000D3AD7F140 through 0x000D3AFFFFFF. These MAC addresses do not conflict with actual MAC addresses because the range is built from an assigned Organizationally Unique Identifier (OUI), as described in section [1.9](#Section_1.9). To minimize the probability of collisions between two such applications on the same link, while still allowing addresses that the same application uses to be similar (simply for ease in debugging), applications using this protocol SHOULD construct such MAC addresses by using the OUI, followed by a random number in the range 0xD7F2 to 0xFFFF, and leaving 8 bits that can be used to give 256 MAC addresses. This protocol contains a [**generation number**](#gt_generation-number) field that can be used as a seed in a pseudo-random number generator.
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -707,33 +707,33 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| 0x00 | [End-of-Property List marker (section 2.2.1.1.1)](#Section_802.11). |
-| 0x01 | [Host ID (section 2.2.1.1.2)](#Section_802.11) that uniquely identifies the host on which the responder is running. |
-| 0x02 | [Characteristics (section 2.2.1.1.3)](#Section_802.11). |
-| 0x03 | [Physical Medium (section 2.2.1.1.4)](#Section_802.11). |
-| 0x04 | [Wireless Mode (section 2.2.1.1.5)](#Section_802.11). |
+| 0x00 | [End-of-Property List marker (section 2.2.1.1.1)](#Section_2.2.1.1.1). |
+| 0x01 | [Host ID (section 2.2.1.1.2)](#Section_2.2.1.1.2) that uniquely identifies the host on which the responder is running. |
+| 0x02 | [Characteristics (section 2.2.1.1.3)](#Section_2.2.1.1.3). |
+| 0x03 | [Physical Medium (section 2.2.1.1.4)](#Section_2.2.1.1.4). |
+| 0x04 | [Wireless Mode (section 2.2.1.1.5)](#Section_2.2.1.1.5). |
 | 0x05 | 802.11 Basic Service Set Identifier (BSSID) (section [2.2.1.1.6)](#Section_802.11). |
 | 0x06 | 802.11 Service Set Identifier (SSID) (section [2.2.1.1.7)](#Section_802.11). |
-| 0x07 | [IPv4 Address (section 2.2.1.1.8)](#Section_802.11). |
-| 0x08 | [IPv6 Address (section 2.2.1.1.9)](#Section_802.11). |
+| 0x07 | [IPv4 Address (section 2.2.1.1.8)](#Section_2.2.1.1.8). |
+| 0x08 | [IPv6 Address (section 2.2.1.1.9)](#Section_2.2.1.1.9). |
 | 0x09 | 802.11 Maximum Operational Rate (section [2.2.1.1.10)](#Section_802.11). |
-| 0x0A | [Performance Counter Frequency (section 2.2.1.1.11)](#Section_802.11). |
-| 0x0C | [Link Speed (section 2.2.1.1.12)](#Section_802.11). |
+| 0x0A | [Performance Counter Frequency (section 2.2.1.1.11)](#Section_2.2.1.1.11). |
+| 0x0C | [Link Speed (section 2.2.1.1.12)](#Section_2.2.1.1.12). |
 | 0x0D | 802.11 Received Signal Strength Indication (RSSI) (section [2.2.1.1.13)](#Section_802.11). |
-| 0x0E | [Icon Image (section 2.2.1.1.14)](#Section_802.11). |
-| 0x0F | [Machine Name (section 2.2.1.1.15)](#Section_802.11). |
-| 0x10 | [Support Information (section 2.2.1.1.16)](#Section_802.11) that identifies the device manufacturer's support information. |
-| 0x11 | [Friendly Name (section 2.2.1.1.17)](#Section_802.11). |
-| 0x12 | [Device Universally Unique Identifier (UUID) (section 2.2.1.1.18)](#Section_802.11). |
-| 0x13 | [Hardware ID (section 2.2.1.1.19)](#Section_802.11). |
-| 0x14 | [QoS Characteristics (section 2.2.1.1.20)](#Section_802.11). |
+| 0x0E | [Icon Image (section 2.2.1.1.14)](#Section_2.2.1.1.14). |
+| 0x0F | [Machine Name (section 2.2.1.1.15)](#Section_2.2.1.1.15). |
+| 0x10 | [Support Information (section 2.2.1.1.16)](#Section_2.2.1.1.16) that identifies the device manufacturer's support information. |
+| 0x11 | [Friendly Name (section 2.2.1.1.17)](#Section_2.2.1.1.17). |
+| 0x12 | [Device Universally Unique Identifier (UUID) (section 2.2.1.1.18)](#Section_2.2.1.1.18). |
+| 0x13 | [Hardware ID (section 2.2.1.1.19)](#Section_2.2.1.1.19). |
+| 0x14 | [QoS Characteristics (section 2.2.1.1.20)](#Section_2.2.1.1.20). |
 | 0x15 | 802.11 Physical Medium (section [2.2.1.1.21)](#Section_802.11). |
-| 0x16 | [AP Association Table (section 2.2.1.1.22)](#Section_802.11). |
-| 0x18 | [Detailed Icon Image (section 2.2.1.1.23)](#Section_802.11). |
-| 0x19 | [Sees-List Working Set (section 2.2.1.1.24)](#Section_802.11). |
-| 0x1A | [Component Table (section 2.2.1.1.25)](#Section_802.11). |
-| 0x1B | [Repeater AP Lineage (section 2.2.1.1.26)](#Section_802.11). |
-| 0x1C | [Repeater AP Table (section 2.2.1.1.27)](#Section_802.11). |
+| 0x16 | [AP Association Table (section 2.2.1.1.22)](#Section_2.2.1.1.22). |
+| 0x18 | [Detailed Icon Image (section 2.2.1.1.23)](#Section_2.2.1.1.23). |
+| 0x19 | [Sees-List Working Set (section 2.2.1.1.24)](#Section_2.2.1.1.24). |
+| 0x1A | [Component Table (section 2.2.1.1.25)](#Section_2.2.1.1.25). |
+| 0x1B | [Repeater AP Lineage (section 2.2.1.1.26)](#Section_2.2.1.1.26). |
+| 0x1C | [Repeater AP Table (section 2.2.1.1.27)](#Section_2.2.1.1.27). |
 
 **Length (1 byte):** This field specifies the length, in bytes, of the **Value** field.
 
@@ -1077,7 +1077,7 @@ packet-beta
 <a id="Section_2.2.1.1.19"></a>
 ##### 2.2.1.1.19 Hardware ID
 
-The Hardware ID attribute is used by a responder to indicate that it has a Hardware ID property (see section [2.2.2.3](#Section_802.11)) and is willing to provide it if a QueryLargeTLV frame requests it. This attribute is optional for responders in UPnP devices; that is, implementations that include UPnP functionality MAY include it in Hello frames.
+The Hardware ID attribute is used by a responder to indicate that it has a Hardware ID property (see section [2.2.2.3](#Section_2.2.2.3)) and is willing to provide it if a QueryLargeTLV frame requests it. This attribute is optional for responders in UPnP devices; that is, implementations that include UPnP functionality MAY include it in Hello frames.
 
 ```mermaid
 packet-beta
@@ -1308,7 +1308,7 @@ packet-beta
 
 **Max_Oper_Rate (2 bytes):** The maximum operational data rate at which the selected radio can run to the given host, in network byte order. The data rate MUST be encoded in units of 0.5 Mbps.
 
-**PHY_type (1 byte):** The physical medium type for the given host. Valid values are defined in section [2.2.1.1.21](#Section_802.11).
+**PHY_type (1 byte):** The physical medium type for the given host. Valid values are defined in section [2.2.1.1.21](#Section_2.2.1.1.21).
 
 **Reserved (1 byte):** MUST be set to zero when sent and MUST be ignored on receipt.
 
@@ -1317,7 +1317,7 @@ If the size of the actual AP Association Table exceeds 409 entries, the responde
 <a id="Section_2.2.2.5"></a>
 #### 2.2.2.5 Detailed Icon Image
 
-The Detailed Icon Image property's data MUST be a high-resolution icon image, at most 262,144 bytes in length. The image format requirements are the same as specified in section [2.2.2.1](#Section_802.11).
+The Detailed Icon Image property's data MUST be a high-resolution icon image, at most 262,144 bytes in length. The image format requirements are the same as specified in section [2.2.2.1](#Section_2.2.2.1).
 
 <a id="Section_2.2.2.6"></a>
 #### 2.2.2.6 Component Table
@@ -1402,9 +1402,9 @@ packet-beta
 
 **Max_Oper_Rate (2 bytes):** The maximum operational data rate at which the radio can function, encoded in units of 0.5 Mbps in network byte order.
 
-**PHY_type (1 byte):** This field is the physical medium type. Valid values are defined in section [2.2.1.1.21](#Section_802.11).
+**PHY_type (1 byte):** This field is the physical medium type. Valid values are defined in section [2.2.1.1.21](#Section_2.2.1.1.21).
 
-**Mode (1 byte):** This field specifies how the radio connects to the wireless network. Valid values are defined in section [2.2.1.1.5](#Section_802.11).
+**Mode (1 byte):** This field specifies how the radio connects to the wireless network. Valid values are defined in section [2.2.1.1.5](#Section_2.2.1.1.5).
 
 **BSSID (6 bytes):** The MAC address of the [**AP**](#gt_80211-access-point-ap) that is hosting the [**SSID**](#gt_service-set-identifier-ssid).
 
@@ -1587,7 +1587,7 @@ packet-beta
 
 **Apparent_Mapper_Address (6 bytes):** This field specifies the mapper's MAC address as given in the **Source Address** field in the Ethernet header of the Discover frame that initiated the active topology mapping request. This field MUST be set to zero if there is no active topology mapping session.
 
-**TLV_List (variable):** This field specifies properties (as specified in section [2.2.1.1](#Section_802.11)) that the responder knows about the network interface on which it is running. A [**TLV**](#gt_type-length-value-tlv) MUST NOT occur in the list more than once.
+**TLV_List (variable):** This field specifies properties (as specified in section [2.2.1.1](#Section_2.2.1.1)) that the responder knows about the network interface on which it is running. A [**TLV**](#gt_type-length-value-tlv) MUST NOT occur in the list more than once.
 
 <a id="Section_2.2.4.4"></a>
 #### 2.2.4.4 Emit Upper-Level Header Format
@@ -1648,7 +1648,7 @@ The Probe frame has no upper-level header other than the Base header itself.
 
 A [**responder**](#gt_responder) sends an Ack frame to a [**mapper**](#gt_mapper) in response to an Emit request that contains a nonzero sequence number.
 
-Ack frames are not acknowledged, but the **Sequence Number** field in the [Base](#Section_2.2.4.1) header MUST be nonzero; that is, the sequence number of the request that is being acknowledged.
+Ack frames are not acknowledged, but the **Sequence Number** field in the [Base](#Section_2.2.3) header MUST be nonzero; that is, the sequence number of the request that is being acknowledged.
 
 The Ack frame has no upper-level header other than the Base header itself.
 
@@ -1664,7 +1664,7 @@ The sequence number in the base header MUST be nonzero for Query frames, because
 <a id="Section_2.2.4.9"></a>
 #### 2.2.4.9 QueryResp Upper-Level Header Format
 
-A [**responder**](#gt_responder) sends a QueryResp frame to a [**mapper**](#gt_mapper) in response to a Query request. It lists which recordable events (such as Ethernet source and Ethernet destination addresses from Probe frames that the responder has observed on the wire during a [**session**](#gt_session)) are available since the previous Query frame. QueryResp frames are not acknowledged but MUST set the [Base](#Section_2.2.4.1) header's **Sequence Number** field to match the Query frame to which they are generated in response.
+A [**responder**](#gt_responder) sends a QueryResp frame to a [**mapper**](#gt_mapper) in response to a Query request. It lists which recordable events (such as Ethernet source and Ethernet destination addresses from Probe frames that the responder has observed on the wire during a [**session**](#gt_session)) are available since the previous Query frame. QueryResp frames are not acknowledged but MUST set the [Base](#Section_2.2.3) header's **Sequence Number** field to match the Query frame to which they are generated in response.
 
 The QueryResp frame that follows a Base header MUST have the following format.
 
@@ -1765,12 +1765,12 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| 0x0E | [Icon image (section 2.2.2.1)](#Section_802.11) |
-| 0x11 | [Friendly Name (section 2.2.2.2)](#Section_802.11) |
-| 0x13 | [Hardware ID (section 2.2.2.3)](#Section_802.11) |
-| 0x16 | [AP Association Table (section 2.2.2.4)](#Section_802.11) |
-| 0x18 | [Detailed Icon Image (section 2.2.2.5)](#Section_802.11) |
-| 0x1A | [Component Table (section 2.2.2.6)](#Section_802.11) |
+| 0x0E | [Icon image (section 2.2.2.1)](#Section_2.2.2.1) |
+| 0x11 | [Friendly Name (section 2.2.2.2)](#Section_2.2.2.2) |
+| 0x13 | [Hardware ID (section 2.2.2.3)](#Section_2.2.2.3) |
+| 0x16 | [AP Association Table (section 2.2.2.4)](#Section_2.2.2.4) |
+| 0x18 | [Detailed Icon Image (section 2.2.2.5)](#Section_2.2.2.5) |
+| 0x1A | [Component Table (section 2.2.2.6)](#Section_2.2.2.6) |
 | 0x1C | [Repeater AP Table (section 2.2.2.7)](#Section_2.2.2.7) |
 
 **Offset (3 bytes):** This field specifies the offset in octets, in network byte order, within the TLV data to query.
@@ -1800,7 +1800,7 @@ packet-beta
 | --- | --- |
 | QueryLargeTlv 0x00 | An unsupported TLV type |
 
-**Data (variable):** This field specifies the information that was requested in the QueryLargeTlv frame. The format of the data objects are specified in section [2.2.2](#Section_802.11). This field MUST contain a portion of the requested data object, starting at the offset requested in the QueryLargeTlv frame, and contain as many bytes of the data object as will fit in the frame.
+**Data (variable):** This field specifies the information that was requested in the QueryLargeTlv frame. The format of the data objects are specified in section [2.2.2](#Section_2.2.2). This field MUST contain a portion of the requested data object, starting at the offset requested in the QueryLargeTlv frame, and contain as many bytes of the data object as will fit in the frame.
 
 <a id="Section_2.2.5"></a>
 ### 2.2.5 QoS Diagnostics Specification for Network Test
@@ -1882,7 +1882,7 @@ packet-beta
   216-255: "Payload"
 ```
 
-**Controller_Transmit_Timestamp (8 bytes):** This field specifies the time stamp, in network byte order, of the controller on transmission, in units per Performance Counter Frequency (as specified in section [2.2.1.1.11](#Section_802.11)).
+**Controller_Transmit_Timestamp (8 bytes):** This field specifies the time stamp, in network byte order, of the controller on transmission, in units per Performance Counter Frequency (as specified in section [2.2.1.1.11](#Section_2.2.1.1.11)).
 
 **Sink_Receive_Timestamp (8 bytes):** This field specifies the time stamp, in network byte order, of the sink on receipt in units per Performance Counter Frequency (as specified in section 2.2.1.1.11). This field MUST be set to zero in a timed probe test. In a [**probegap**](#gt_probegap) test, this field MUST be set to zero on transmission from the controller.
 
@@ -2073,7 +2073,7 @@ The QosCounterLease frame has no upper-level header other than the Base header i
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-As described in section [1.3](#Section_802.11), this protocol defines the following roles:
+As described in section [1.3](#Section_1.3), this protocol defines the following roles:
 
 - [Enumerator](#Section_3.1): This role MAY<6> be supported by implementations of this protocol.
 - [Mapper](#Section_3.2): This role MAY<7> be supported by implementations of this protocol. If supported, the implementation MUST also support the Enumerator role.
@@ -2294,7 +2294,7 @@ The data elements required in any [**mapper**](#gt_mapper) implementation are:
 - Generation Number: The mapper uses generation numbers to generate fresh MAC addresses that are unknown to [**switches**](#gt_switch) in the network. This avoids the requirement of restarting switches between mapping runs, so it is critical to choose an as-yet-unused generation number. Note that mappers do not store previous generation numbers because multiple mappers can operate on a network, and they do not participate in any process to keep their generation numbers synchronized.
 - Network Topology Test Session List: This data element tracks outstanding requests to [**responders**](#gt_responder) and allows unique sequence numbers for each request. It is populated after [**quick discovery**](#gt_quick-discovery) has been completed (see section [3.2.7.1](#Section_3.2.7.1)), with an entry for each discovered responder. Each entry is identified by the responder's MAC address and also contains the following additional fields:
 - **Sequence Number**: This field specifies a nonzero 16-bit unsigned value to be used as the sequence number in frames sent to the responder where a response is expected (acknowledged Charge frames, acknowledged Emit frames, Query frames, and QueryLargeTlv frames). This sequence number MUST NOT be zero since responders treat a sequence number of zero to mean "no response required". When a mapper initializes this entry, it MUST use a newly generated nonzero sequence number. When issuing commands/requests (for example, a QueryLargeTlv frame), the mapper populates the sequence number in the Base header of the frame using this value. After receiving a response from the responder to the command/request, this sequence number is incremented using ones-complement arithmetic (this guarantees a nonzero value for subsequent commands/requests).
-- **Pended Request**: This field specifies a request per responder for which a corresponding response is expected. A pended request is uniquely identified by its function code (the **Function** field in the [Demultiplex header](#Section_134ac8545a8840dd86e50f343da50d87)) and sequence number.
+- **Pended Request**: This field specifies a request per responder for which a corresponding response is expected. A pended request is uniquely identified by its function code (the **Function** field in the [Demultiplex header](#Section_2.2.3.1)) and sequence number.
 - **Network Medium Connected Flag**: A flag indicating whether the network interface is connected to a network medium.
 **Note** The previous conceptual data can be implemented by using a variety of techniques. An implementer can implement such data in any way it pleases.
 
@@ -2341,7 +2341,7 @@ The mapper MUST ignore the request if the **ResponderAddress** is set to the bro
 
 If **AcknowledgementRequired** is TRUE and the Network Topology Test Session List does not have an entry for the responder, or if there is already an outstanding request for the responder (that is, the Pended Request field is not empty), then the mapper MUST ignore the request. If **AcknowledgementRequired** is FALSE, then the Emit frame will not be eliciting a response from the responder, and it does not need to be tracked in the Network Topology Test Session List.
 
-The responder needs to be charged in order to conduct the topology test (see section [1.3.5.4](#Section_802.11)).
+The responder needs to be charged in order to conduct the topology test (see section [1.3.5.4](#Section_1.3.5.4)).
 
 The mapper MAY query the responder's current [**charge**](#gt_charge), as described in section [3.2.4.5](#Section_3.2.4.5), to determine charge requirements. This is not recommended as a reliable mechanism for synchronizing charge, as the responder frequently resets its charge (see section [3.6.6.1](#Section_3.6.6.1)). Implementations SHOULD assume that the responder charge is zero.
 
@@ -3023,11 +3023,11 @@ Figure 4: Responder's Topology Discovery state engine
 - Next Sequence Number: This data element is a 16-bit unsigned value. This data element MUST be initially set to zero, which indicates an invalid sequence number value. The first request that the mapper sends (via one of the Charge, Emit, Query, or QueryLargeTLV frames) that has a nonzero **Sequence Number** field in the Base header is incremented and stored in this data element.
 - Sees-List: This list MUST hold all of the information that is required to construct one or more **RecveeDesc** structures that are returned in the QueryResp packet (as specified in section [2.2.4.9](#Section_2.2.4.9)). Entries in the list MUST be stored in such a way that the oldest entry can be returned first. A responder SHOULD support up to 10,000 entries in the Sees-List.
 - Last-Sent Response: The Last-Sent Response MUST be identified by the **Function Number** field in the Demultiplex header of the Request frame and the **Sequence Number** field in the Base header of the original request frame. Each time the responder sends out an Ack, Flat, QueryResp, or QueryLargeTlvResp frame, it updates this value as well as a copy of the response frame that it sent.
-- Charge/CTC Counters: A responder MUST maintain its current [**charge**](#gt_charge) (see section [1.3.5.2](#Section_802.11)) or [**Current Transmit Credit (CTC)**](#gt_current-transmit-credit-ctc). The CTC holds two counters: an 8-bit unsigned integer Frame Count (FC), and a 16-bit unsigned integer Byte Count (BC). See sections [1.3.5.3](#Section_802.11) and [1.3.5.5](#Section_802.11) for an overview of how charge is accumulated and consumed.
+- Charge/CTC Counters: A responder MUST maintain its current [**charge**](#gt_charge) (see section [1.3.5.2](#Section_1.3.5.2)) or [**Current Transmit Credit (CTC)**](#gt_current-transmit-credit-ctc). The CTC holds two counters: an 8-bit unsigned integer Frame Count (FC), and a 16-bit unsigned integer Byte Count (BC). See sections [1.3.5.3](#Section_1.3.5.3) and [1.3.5.5](#Section_1.3.5.5) for an overview of how charge is accumulated and consumed.
 - Emit List: This data element is a list that stores the remaining **EmiteeDescs** fields in the Emit header that need to be processed when the topology state is set to Emit.
 - Emit Sequence Value: This 16-bit unsigned value stores the sequence number of the Emit frame that is being processed when the topology state is set to Emit.
 - Error Flag: This is a global flag. It MUST be set to FALSE initially. It MUST be set to TRUE when a Probe frame arrives, and the responder is not able to accommodate it in the Sees-List.
-- Large Data Property List: This data element is a set of large data properties, as specified in section [2.2.2](#Section_802.11), for the responder itself.
+- Large Data Property List: This data element is a set of large data properties, as specified in section [2.2.2](#Section_2.2.2), for the responder itself.
 - Current Mapper: This data element contains the [**MAC address**](#gt_5f9ccdf4-2607-4855-9a72-2010aa3300bf) of the [**mapper**](#gt_mapper) the responder is associated with for the duration of topology discovery. The mapper associated with the responder is the sole enumerator whose entry has a state field set to Complete in the Session Table described in section [3.5.1](#Section_3.5.1), and is of the Topology discovery service type. The MAC address associated with that entry is the current mapper MAC address. If the Session Table has no entry with a state field set to Complete state, there is no current mapper. When the Session Table is updated, the current mapper MUST be updated accordingly.
 **Note** The previous conceptual data can be implemented by using a variety of techniques. An implementer can implement such data in any way.
 
@@ -3074,7 +3074,7 @@ If the **Sequence Number** field in the Base header of the received Charge frame
 
 The responder MUST then zero out the Last-Sent Response (and delete any saved frame).
 
-The responder MUST then proceed to increase the [**CTC**](#gt_current-transmit-credit-ctc) counters by incrementing the Frame Charge (FC) by 1, and the Byte Charge (BC) by the combined size, in bytes, of the Destination MAC, Source MAC, EtherType, and Payload fields of the Ethernet frame encapsulating the Charge frame, as described in section [1.3.5.3](#Section_802.11). The CTC counters MUST be capped at a maximum value to prevent a rogue mapper from accumulating a large amount of [**charge**](#gt_charge) at multiple responders and releasing this charge at the same time against a target. The limits SHOULD be 65,536 BC and 64 FC. If the Charge timer is already running, the responder MUST restart the Charge timer; otherwise, it MUST start the Charge timer.
+The responder MUST then proceed to increase the [**CTC**](#gt_current-transmit-credit-ctc) counters by incrementing the Frame Charge (FC) by 1, and the Byte Charge (BC) by the combined size, in bytes, of the Destination MAC, Source MAC, EtherType, and Payload fields of the Ethernet frame encapsulating the Charge frame, as described in section [1.3.5.3](#Section_1.3.5.3). The CTC counters MUST be capped at a maximum value to prevent a rogue mapper from accumulating a large amount of [**charge**](#gt_charge) at multiple responders and releasing this charge at the same time against a target. The limits SHOULD be 65,536 BC and 64 FC. If the Charge timer is already running, the responder MUST restart the Charge timer; otherwise, it MUST start the Charge timer.
 
 If the Charge frame is an acknowledged Charge frame (that is, it contains a nonzero sequence number), then the responder MUST also send a Flat frame in response. The Flat frame requires 1 FC and 37 BC of charge from the CTC counters. If not enough charge exists to send the Flat frame, the Charge frame MUST be ignored and the CTC counters MUST be reverted to the previous values. As mentioned in section [3.2.4.3](#Section_3.2.4.3), an acknowledged Charge frame has at most the net effect of increasing the BC, since the FC carried by the Charge frame is consumed in sending the Flat frame.
 
@@ -3105,7 +3105,7 @@ If the **Sequence Number** field in the Base header of the received Emit frame i
 Otherwise, if there is match with the Last-Sent Response, the Emit frame MUST then be checked for validity by testing whether all of the following are true:
 
 - The Emit frame was not sent to the broadcast address.
-- Train and Probe **Source Address** field values equal the responder's MAC address or are within the range of the OUI that is allocated for this protocol (see section [1.9](#Section_802.11)).
+- Train and Probe **Source Address** field values equal the responder's MAC address or are within the range of the OUI that is allocated for this protocol (see section [1.9](#Section_1.9)).
 - Trains and Probe **Destination Address** field values are not an Ethernet broadcast or multicast address.
 - The cumulative Pause value from all quadruples in the Emit frame MUST NOT exceed 1 second.
 If any of the previous statements are not true, the responder MUST perform no further processing on the Emit frame.
@@ -3114,7 +3114,7 @@ If sequence number in the frame is nonzero, the responder MUST validate this seq
 
 Validation against the Next Sequence Number succeeds if the Next Sequence Number is zero or if the Next Sequence Number is nonzero and matches the sequence number of the Emit frame. Otherwise, validation fails and the responder MUST perform no further processing on the Emit frame.
 
-After validation succeeds, the responder MUST increase the [**CTC**](#gt_current-transmit-credit-ctc) by incrementing the Frame Charge (FC) by 1, and the Byte Charge (BC) by the combined size, in bytes, of the Destination MAC, Source MAC, EtherType, and Payload fields of the Ethernet frame encapsulating the Emit frame, as described in section [1.3.5.3](#Section_802.11). The CTC counters MUST be capped at a maximum value to prevent a rogue mapper from accumulating a large amount of [**charge**](#gt_charge) at multiple responders and releasing this charge at the same time against a target. The limits SHOULD be 65,536 BC and 64 FC.
+After validation succeeds, the responder MUST increase the [**CTC**](#gt_current-transmit-credit-ctc) by incrementing the Frame Charge (FC) by 1, and the Byte Charge (BC) by the combined size, in bytes, of the Destination MAC, Source MAC, EtherType, and Payload fields of the Ethernet frame encapsulating the Emit frame, as described in section [1.3.5.3](#Section_1.3.5.3). The CTC counters MUST be capped at a maximum value to prevent a rogue mapper from accumulating a large amount of [**charge**](#gt_charge) at multiple responders and releasing this charge at the same time against a target. The limits SHOULD be 65,536 BC and 64 FC.
 
 To avoid amplification attacks, the responder MUST require enough CTC (in both frames and bytes) to send a Train frame or Probe frame for each entry in the **EmiteeDescs** field in the Emit frame. If the Emit frame is acknowledged (has a nonzero sequence number), enough CTC must also exist to send an Ack frame or Flat frame.
 

@@ -203,7 +203,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-RAS3] Microsoft Corportion, "RasEnumConnections function", [http://msdn.microsoft.com/en-us/library/aa377284(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkID=114660)
 
@@ -251,7 +251,7 @@ No standards assignments have been made for the Message Queuing (MSMQ): Director
 
 This protocol references commonly used data types as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
-Unless otherwise qualified, instances of **GUID** in sections 2 and [3](../MS-DTYP/MS-DTYP.md) refer to [MS-DTYP] section 2.3.4.
+Unless otherwise qualified, instances of **GUID** in sections 2 and [3](#Section_3) refer to [MS-DTYP] section 2.3.4.
 
 <a id="Section_2.1"></a>
 ## 2.1 Transport
@@ -391,7 +391,7 @@ ContinuedEntry = Delim Entry ; The layout for one continued entry
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses ADM elements specified in section [3.1.1](#Section_1.3). A subset of these elements can be published in a directory. This protocol SHOULD<10> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are specified in [MS-MQDSSM] section 2.4. <11>
+This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a directory. This protocol SHOULD<10> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are specified in [MS-MQDSSM] section 2.4. <11>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -404,9 +404,9 @@ This protocol uses ADM elements specified in section [3.1.1](#Section_1.3). A su
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with what is described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared among multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared among multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
-Section [3.1.1.1](#Section_3.2.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.1.1.2](#Section_3.2.1.2) details the data model elements that are private to this protocol.
+Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.1.1.2](#Section_3.1.1.2) details the data model elements that are private to this protocol.
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Shared Data Elements
@@ -468,7 +468,7 @@ When this event is triggered, the protocol executes the following steps:
 - The protocol MUST create a new [**GUID**](#gt_globally-unique-identifier-guid) and assign it to the **RequestID** ADM element.
 - The protocol MUST set the **CurrentNetworkIndex** ADM elment to zero.
 - The protocol MUST set the **TopologyServerReplyReceived** ADM element to FALSE.
-- The protocol MUST initiate the sending of a [TopologyClientRequest (section 2.2.2)](#Section_2.2.2) packet, as specified in section [3.1.5.1](#Section_2.2.2).
+- The protocol MUST initiate the sending of a [TopologyClientRequest (section 2.2.2)](#Section_2.2.2) packet, as specified in section [3.1.5.1](#Section_3.1.5.1).
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
 
@@ -497,7 +497,7 @@ If the **CurrentNetworkIndex** ADM element does not equal the **NumberOfNetworkA
 - The protocol MUST set the **TopologyServerReplyReceived** ADM element to TRUE.
 - The protocol MUST set the **LastSuccessfulNetworkAddress** ADM element to the address of the network via which the **TopologyServerReply** packet was received and MUST set the **ValidLastSuccessfulNetworkAddress** ADM element to TRUE.
 - The protocol MUST stop the [Wait For Response Timer (section 3.1.2.1)](#Section_3.1.2.1).
-- The protocol MUST send a new **TopologyClientRequest** packet, as specified in section [3.1.5.1](#Section_2.2.2).
+- The protocol MUST send a new **TopologyClientRequest** packet, as specified in section [3.1.5.1](#Section_3.1.5.1).
 - The protocol MUST stop performing any further processing for the received **TopologyServerReply** packet.
 If the **CurrentNetworkIndex** ADM element does not equal the **NumberOfNetworkAddresses** ADM element, the **LastTopologyServerReply** ADM element is not empty, and the **TopologyServerReply.DirectoryServiceServerSize** field does not equal 0x00000000, which indicates that the packet was sent by a server that does not belong to the local site, the protocol MUST send a new **TopologyClientRequest** packet, as specified in section 3.1.5.1 and MUST perform no further processing for the received **TopologyServerReply** packet.
 
@@ -564,7 +564,7 @@ This event causes the protocol to update **LocalQueueManager.ConnectedNetworkIde
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with what is described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared among multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared among multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.2.1.1](#Section_3.2.1.1) details the elements from the shared data model that are manipulated by this protocol, and section [3.2.1.2](#Section_3.2.1.2) details the data model elements that are private to this protocol.
 

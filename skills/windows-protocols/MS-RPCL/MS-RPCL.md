@@ -385,7 +385,7 @@ This document includes the following:
 - An extension of the syntax for [**name service entries**](#gt_name-service-entry) to include a [**domain**](#gt_domain) name. For more details, see section [2.2.2](#Section_2.2.2).
 - A restriction requiring profile, group, and server attributes to be defined on separate name service entries. These attributes are as specified in section "Name Service Attributes" in [C706]. For more details, see section [1.3.3](#Section_1.3.3).
 - A restriction requiring clients to be members of an Active Directory domain to support persistently storing exported name service entries. For more details, see section 1.3.2.
-- A restriction requiring clients to be members of an Active Directory domain to support profile and group attributes. For more details, see sections [3.2.1](#Section_1.3), [3.3.3](#Section_1.3).
+- A restriction requiring clients to be members of an Active Directory domain to support profile and group attributes. For more details, see sections [3.2.1](#Section_3.2.1), [3.3.3](#Section_3.3.3).
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Roles
 
@@ -419,7 +419,7 @@ Functionalities are the same as for Directory mode, except as noted above.
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Name Service Entries in Active Directory
 
-In [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain) environments, this specification persistently stores [**RPC name service**](#gt_c87b207a-c8b7-4ae9-982a-65dc2cbe993b) entries in the Active Directory store. The following schema elements are used to implement persistent storing, as specified in section [2.2.5](#Section_1.3).
+In [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain) environments, this specification persistently stores [**RPC name service**](#gt_c87b207a-c8b7-4ae9-982a-65dc2cbe993b) entries in the Active Directory store. The following schema elements are used to implement persistent storing, as specified in section [2.2.5](#Section_2.2.5).
 
 | Schema class | Description |
 | --- | --- |
@@ -441,11 +441,11 @@ Figure 1: Active Directory layout
 The Remote Procedure Call Location Services Extensions depend on the following protocols:
 
 - [**Locators**](#gt_locator) depend on the [**domain controller (DC)**](#gt_domain-controller-dc) and [**domain**](#gt_domain) discovery mechanism [MS-ADTS](../MS-ADTS/MS-ADTS.md) to obtain information about domains and to select their mode of operation, as specified in section [3.1.3.1](#Section_3.1.3.1).
-- [**Client locators**](#gt_client-locator) depend on Remote Procedure Call Protocol Extensions [MS-RPCE](../MS-RPCE/MS-RPCE.md) for forwarding requests to the [**master locator**](#gt_master-locator), as specified in section [3.3.1.4](#Section_3.2.3).
-- Master locators depend on the Remote Mailslot Protocol [MS-MAIL](../MS-MAIL/MS-MAIL.md) to broadcast requests for the queries they receive, as specified in section [3.4.1.5.1](#Section_3.4.1.5.1.1). [**Server locators**](#gt_server-locator) depend on the Remote Mailslot Protocol for responding to broadcast requests, as specified in section [3.2.1.5](#Section_3.3.1.5).
+- [**Client locators**](#gt_client-locator) depend on Remote Procedure Call Protocol Extensions [MS-RPCE](../MS-RPCE/MS-RPCE.md) for forwarding requests to the [**master locator**](#gt_master-locator), as specified in section [3.3.1.4](#Section_3.3.1.4).
+- Master locators depend on the Remote Mailslot Protocol [MS-MAIL](../MS-MAIL/MS-MAIL.md) to broadcast requests for the queries they receive, as specified in section [3.4.1.5.1](#Section_3.4.1.5.1). [**Server locators**](#gt_server-locator) depend on the Remote Mailslot Protocol for responding to broadcast requests, as specified in section [3.2.1.5](#Section_3.2.1.5).
 - Client locators depend on the Remote Mailslot Protocol to dynamically discover the master locator, as specified in sections [3.3.1.4.3](#Section_3.3.1.4.3) and [3.4.1.5.2](#Section_3.4.1.5.2).
-- Server locators depend on Lightweight Directory Access Protocol (LDAP) [MS-ADTS] for persistently storing name service entries in the [**Active Directory**](#gt_active-directory) store, as specified in section [3.2.2.4](#Section_3.2.2).
-- Client locators depend on LDAP [MS-ADTS] to look up persistently stored entries in Active Directory for the name service entries, as specified in section [3.3.2.4](#Section_3.2.2).
+- Server locators depend on Lightweight Directory Access Protocol (LDAP) [MS-ADTS] for persistently storing name service entries in the [**Active Directory**](#gt_active-directory) store, as specified in section [3.2.2.4](#Section_3.2.2.4).
+- Client locators depend on LDAP [MS-ADTS] to look up persistently stored entries in Active Directory for the name service entries, as specified in section [3.3.2.4](#Section_3.3.2.4).
 No other protocols have a dependency on this protocol.
 
 The following diagram illustrates the layering of the protocols.
@@ -481,9 +481,9 @@ The [**client locator**](#gt_client-locator) communicates with the [**master loc
 
 The client locator uses the Remote Mailslot Protocol [MS-MAIL](../MS-MAIL/MS-MAIL.md) to discover master locators. For more information, see section [3.3.1.4.3](#Section_3.3.1.4.3).
 
-The master locator uses the Remote Mailslot Protocol [MS-MAIL] to broadcast requests to [**server locators**](#gt_server-locator) and receive their responses. For more information, see section [3.4.1.5](#Section_3.3.1.5).
+The master locator uses the Remote Mailslot Protocol [MS-MAIL] to broadcast requests to [**server locators**](#gt_server-locator) and receive their responses. For more information, see section [3.4.1.5](#Section_3.4.1.5).
 
-When operating on a [**domain**](#gt_domain)-joined computer, the locator uses the LDAP protocol to issue queries and updates to [**Active Directory**](#gt_active-directory) in its domain. For more information, see sections [3.2.2.4](#Section_3.2.2) and [3.3.2.4](#Section_3.2.2).
+When operating on a [**domain**](#gt_domain)-joined computer, the locator uses the LDAP protocol to issue queries and updates to [**Active Directory**](#gt_active-directory) in its domain. For more information, see sections [3.2.2.4](#Section_3.2.2.4) and [3.3.2.4](#Section_3.3.2.4).
 
 **Capability Negotiation**<1>
 
@@ -710,7 +710,7 @@ typedef [unique] NSI_BINDING_VECTOR_T* NSI_BINDING_VECTOR_P_T;
 
 This section specifies structures sent and received by using the Remote Mailslot Protocol for the following operations:
 
-- [Broadcast Lookup (section 2.2.4.2)](#Section_3.4.1.5.1.1)
+- [Broadcast Lookup (section 2.2.4.2)](#Section_2.2.4.2)
 - [Master Locator Discovery (section 2.2.4.3)](#Section_2.2.4.3)
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 Common Details
@@ -731,7 +731,7 @@ ComputerName MUST be the NetBIOS name of the computer where the mailslot origina
 <a id="Section_2.2.4.1.2"></a>
 ##### 2.2.4.1.2 RPC_SYNTAX_IDENTIFIER
 
-This structure MUST contain a [**GUID**](#gt_globally-unique-identifier-guid) and version information ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.2.7). It is identical to the RPC_SYNTAX_IDENTIFIER structure used in the LocToLoc interface in section [3.1.4](#Section_3.3.1.5). This structure is used to represent the following:
+This structure MUST contain a [**GUID**](#gt_globally-unique-identifier-guid) and version information ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.2.7). It is identical to the RPC_SYNTAX_IDENTIFIER structure used in the LocToLoc interface in section [3.1.4](#Section_3.1.4). This structure is used to represent the following:
 
 - Identifier and version of an interface.
 - Identifier and version of [**transfer syntax**](#gt_01216ea7-ac8a-4cc8-9d19-b901bc424c09) for an interface.
@@ -751,7 +751,7 @@ packet-beta
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 Broadcast Lookup
 
-A [**master locator**](#gt_master-locator) broadcasts a request for information by using the Remote Mailslot Protocol when it receives a query as specified in section [3.4.1.5.1](#Section_3.4.1.5.1.1):
+A [**master locator**](#gt_master-locator) broadcasts a request for information by using the Remote Mailslot Protocol when it receives a query as specified in section [3.4.1.5.1](#Section_3.4.1.5.1):
 
 - This request MUST be sent over the [**mailslot**](#gt_mailslot) by using the [QueryPacket](#Section_2.2.4.2.1) structure specified in section 2.2.4.2.1.
 - [**Server locators**](#gt_server-locator) MUST respond to the request with the [QueryReply](#Section_2.2.4.2.2) structure specified in section 2.2.4.2.2.
@@ -783,7 +783,7 @@ WCHAR EntryName[100];
 <a id="Section_2.2.4.2.2"></a>
 ##### 2.2.4.2.2 QueryReply
 
-The QueryReply structure defines the response of a [**server locator**](#gt_server-locator) to a [**master locator**](#gt_master-locator) [Broadcast Lookup](#Section_3.4.1.5.1.1) query
+The QueryReply structure defines the response of a [**server locator**](#gt_server-locator) to a [**master locator**](#gt_master-locator) [Broadcast Lookup](#Section_2.2.4.2) query
 
 typedef struct {
 
@@ -1150,22 +1150,22 @@ All LDAP operations in this document are described here in terms of the abstract
 <a id="Section_2.2.6.2.1"></a>
 ##### 2.2.6.2.1 LDAP Query
 
-To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP searchRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_1.3).
+To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP searchRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_2.2.5).
 
 <a id="Section_2.2.6.2.2"></a>
 ##### 2.2.6.2.2 LDAP Add
 
-To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP AddRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_1.3).
+To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP AddRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_2.2.5).
 
 <a id="Section_2.2.6.2.3"></a>
 ##### 2.2.6.2.3 LDAP Delete
 
-To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP delRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_1.3).
+To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP delRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_2.2.5).
 
 <a id="Section_2.2.6.2.4"></a>
 ##### 2.2.6.2.4 LDAP Modify
 
-To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP ModifyRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_1.3).
+To write LDAP data, the server locator MUST perform the LDAP operation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.6, Performing an LDAP Operation on an ADConnection. The TaskInputADConnection value MUST be the ADCONNECTION_HANDLE object ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2, ADCONNECTION_HANDLE) stored in **ADConnection**. The TaskInputRequestMessage MUST contain an LDAP ModifyRequest message ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.7) formatted per section [2.2.5](#Section_2.2.5).
 
 <a id="Section_2.2.6.2.5"></a>
 ##### 2.2.6.2.5 LDAP Bind
@@ -1239,7 +1239,7 @@ This section specifies a conceptual model of possible data organization that an 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 RPC Services Container
 
-In Directory and Directory-only modes, locators rely on an [**Active Directory**](#gt_active-directory) store (Active Directory Entry Cache, see section [3.2.2.1](#Section_3.2.2)) in the domain of the computer for persistently storing and looking up name service entries represented as Active Directory objects. These Active Directory objects MUST reside under the CN=RpcServices, CN=System location under the Domain Naming Context of the computer domain. This container MUST be of class [rpcContainer](#Section_2.2.5.2) and can have direct child objects as instances of classes [rpcServer](#Section_2.2.5.3), [rpcGroup](#Section_2.2.5.5), and [rpcProfile](#Section_2.2.5.4). Correspondence between [**name service entries**](#gt_name-service-entry) and Active Directory schema classes is specified in [Name Service Entries in Active Directory (section 1.3.3)](#Section_1.3.3).
+In Directory and Directory-only modes, locators rely on an [**Active Directory**](#gt_active-directory) store (Active Directory Entry Cache, see section [3.2.2.1](#Section_3.2.2.1)) in the domain of the computer for persistently storing and looking up name service entries represented as Active Directory objects. These Active Directory objects MUST reside under the CN=RpcServices, CN=System location under the Domain Naming Context of the computer domain. This container MUST be of class [rpcContainer](#Section_2.2.5.2) and can have direct child objects as instances of classes [rpcServer](#Section_2.2.5.3), [rpcGroup](#Section_2.2.5.5), and [rpcProfile](#Section_2.2.5.4). Correspondence between [**name service entries**](#gt_name-service-entry) and Active Directory schema classes is specified in [Name Service Entries in Active Directory (section 1.3.3)](#Section_1.3.3).
 
 **Entry FQDN**: The [**fully qualified domain name (FQDN)**](#gt_fully-qualified-domain-name-fqdn) of a given Active Directory entry representation MUST be defined by concatenating the [**RDN**](#gt_relative-distinguished-name-rdn) of the entry ([Name Service Entry RDN (section 2.2.5.1.1)](#Section_2.2.5.1.1)) with the FQDN of the [**RPC**](#gt_remote-procedure-call-rpc) services container.
 
@@ -1272,7 +1272,7 @@ Any implementation of the Remote Procedure Call Location Services Extensions MUS
 - The locator determines whether the computer on which it is running, is joined to the domain and whether it is acting as a [**domain controller**](#gt_domain-controller-dc) of the domain.
 - Locators running on a domain controller MUST initialize as a [**master locator**](#gt_master-locator).
 - Locators running on a domain-joined computer, but not running as a domain controller, MUST initialize as a nonmaster locator. A nonmaster locator MUST initialize the list of potential master locators by enumerating the computers running as domain controllers in the domain.
-- Locators running on a non-domain-joined computer MUST initialize as a nonmaster locator. An implementation SHOULD change its role from nonmaster locator to master locator if no master locator is discovered by the master locator discovery process or if the master locators discovered are not reachable. As part of this process, the locator MUST perform master locator-specific initialization, as specified in section [3.4.1.3](#Section_3.2.3).
+- Locators running on a non-domain-joined computer MUST initialize as a nonmaster locator. An implementation SHOULD change its role from nonmaster locator to master locator if no master locator is discovered by the master locator discovery process or if the master locators discovered are not reachable. As part of this process, the locator MUST perform master locator-specific initialization, as specified in section [3.4.1.3](#Section_3.4.1.3).
 - Any locator that becomes a master locator and responds to a master locator discovery query or sends a broadcast lookup request as specified in section [3.4](#Section_3.4) SHOULD continue to remain as a master locator.
 - Master locator reachability MAY be determined by making a call on the [I_nsi_ping_locator](#Section_3.1.4.4) method on the LocToLoc interface.<7>
 <a id="Section_3.1.4"></a>
@@ -1327,7 +1327,7 @@ void I_nsi_lookup_begin(
 
 **entry_name:** A Unicode [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string optionally specifying the entry name of the [**name service entry**](#gt_name-service-entry), using the syntax identified by the entry_name_syntax parameter, as specified in section [2.2.2](#Section_2.2.2). This parameter can optionally be null or an empty string.
 
-**interfaceid:** An optional interface specification. Specified to request only bindings for server entries that have advertised interfaces compatible with this parameter. The client sets interfaceid to NULL to indicate that this parameter is not specified. Interface compatibility is specified in section [3.4.1.5.1](#Section_3.4.1.5.1.1).
+**interfaceid:** An optional interface specification. Specified to request only bindings for server entries that have advertised interfaces compatible with this parameter. The client sets interfaceid to NULL to indicate that this parameter is not specified. Interface compatibility is specified in section [3.4.1.5.1](#Section_3.4.1.5.1).
 
 **xfersyntax:** An optional [**transfer syntax**](#gt_01216ea7-ac8a-4cc8-9d19-b901bc424c09) specification. Specified to request only bindings for server entries that have advertised interfaces compatible with this parameter. The client sets xfersyntax to NULL to indicate that this parameter is not specified. Interface compatibility is specified in section 3.4.1.5.1.
 
@@ -1696,7 +1696,7 @@ An implementation SHOULD cache a connection to [**Active Directory**](#gt_active
 
 A higher-level protocol or application can make a call to modify server, group, or profile entries.
 
-When a [**name service entry**](#gt_name-service-entry) is modified, the [**server locator**](#gt_server-locator) MUST update the [**Active Directory**](#gt_active-directory) of the computer's domain with the modification by using LDAP, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md). This LDAP request MUST be made in the context of the security principal that originated the call into the [**RPC name service**](#gt_c87b207a-c8b7-4ae9-982a-65dc2cbe993b). Active Directory schema classes are specified in section [2.2.5](#Section_1.3).
+When a [**name service entry**](#gt_name-service-entry) is modified, the [**server locator**](#gt_server-locator) MUST update the [**Active Directory**](#gt_active-directory) of the computer's domain with the modification by using LDAP, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md). This LDAP request MUST be made in the context of the security principal that originated the call into the [**RPC name service**](#gt_c87b207a-c8b7-4ae9-982a-65dc2cbe993b). Active Directory schema classes are specified in section [2.2.5](#Section_2.2.5).
 
 <a id="Section_3.2.2.4.1"></a>
 ##### 3.2.2.4.1 Updating a Server Entry
@@ -1721,7 +1721,7 @@ Upon success, the server uses the domain controller specified in the **DomainCon
 
 The server uses a default timeout value for LDAP operations, and no retries are required.
 
-- The [**server locator**](#gt_server-locator) MUST form the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn) from the **Server Entry**, as specified in section [3.1.1.1](../MS-ADTS/MS-ADTS.md), and issue an LDAP query (see LDAP Operation Details, section [2.2.6](#Section_2.2.6)) to read the corresponding Active Directory object ([MS-ADTS] section 3.1.1.4).
+- The [**server locator**](#gt_server-locator) MUST form the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn) from the **Server Entry**, as specified in section [3.1.1.1](#Section_3.1.1.1), and issue an LDAP query (see LDAP Operation Details, section [2.2.6](#Section_2.2.6)) to read the corresponding Active Directory object ([MS-ADTS] section 3.1.1.4).
 - The server locator MUST create or modify the Active Directory object as follows:
 - If an Active Directory object exists with the entry FQDN, the server locator MUST verify that the object represents a server entry by verifying that the Active Directory object is of class rpcServer.
 - If the Active Directory object represents a server entry, and if the description attribute on the Active Directory object is **Created Entry**, the Active Directory object MUST be treated as an empty [**name service entry**](#gt_name-service-entry), as specified in section [3.2.2.4.4](#Section_3.2.2.4.4). The server locator MUST modify the description to an implementation-specific value other than **Created Entry**.
@@ -1761,7 +1761,7 @@ Upon success, the server uses the domain controller specified in the **DomainCon
 
 The server uses a default timeout value for LDAP operations and no retries are required.
 
-- The [**server locator**](#gt_server-locator) forms the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn), as specified in section [3.1.1.1](../MS-ADTS/MS-ADTS.md), and issues an LDAP query to retrieve the corresponding Active Directory object ([MS-ADTS] section 3.1.1.4).
+- The [**server locator**](#gt_server-locator) forms the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn), as specified in section [3.1.1.1](#Section_3.1.1.1), and issues an LDAP query to retrieve the corresponding Active Directory object ([MS-ADTS] section 3.1.1.4).
 - The server locator MUST create or modify the Active Directory object as follows:
 - If an Active Directory object exists with the entry FQDN, the server locator MUST verify that the Active Directory object represents a group entry by verifying that the Active Directory object is of class [rpcGroup](#Section_2.2.5.5).
 - If the Active Directory object exists with the entry FQDN and is of class rpcServer, and if its description matches the string Created Entry, the Active Directory object MUST be treated as an empty [**name service entry**](#gt_name-service-entry), as specified in section [3.2.2.4.4](#Section_3.2.2.4.4). The Active Directory object MUST matches both criteria. The server locator MUST delete the Active Directory object and re-create an Active Directory object of class rpcGroup in its place. The server locator MUST change the description of the Active Directory object to something other than **Created Entry**.
@@ -1795,7 +1795,7 @@ Upon success, the server uses the domain controller specified in the **DomainCon
 
 The server uses a default timeout value for LDAP operations and no retries are required.
 
-- The [**server locator**](#gt_server-locator) MUST form the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn), as specified in section [3.1.1.1](../MS-ADTS/MS-ADTS.md), and issue an LDAP query (see LDAP Operation Details, section [2.2.6](#Section_2.2.6)) to retrieve the corresponding Active Directory object. ([MS-ADTS] section 3.1.1.4).
+- The [**server locator**](#gt_server-locator) MUST form the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn), as specified in section [3.1.1.1](#Section_3.1.1.1), and issue an LDAP query (see LDAP Operation Details, section [2.2.6](#Section_2.2.6)) to retrieve the corresponding Active Directory object. ([MS-ADTS] section 3.1.1.4).
 - The server locator MUST create or modify the Active Directory object as follows:
 - If an Active Directory object exists with the entry FQDN, the server locator MUST verify that the Active Directory object represents a profile entry by verifying that the Active Directory object is of class rpcProfile.
 - If the Active Directory object exists with the entry FQDN and is of class [rpcServer](#Section_2.2.5.3), and if its description matches the string **Created Entry**, the object MUST be treated as an empty [**name service entry**](#gt_name-service-entry), as specified in section [3.2.2.4.4](#Section_3.2.2.4.4). The Active Directory object MUST match both criteria. The server locator MUST delete the Active Directory object and re-create an Active Directory object of class rpcProfile in its place. The server locator MUST change the description of the Active Directory object to something other than **Created Entry**.
@@ -1831,14 +1831,14 @@ Upon success, the server uses the domain controller specified in the **DomainCon
 
 The server uses a default timeout value for LDAP operations and no retries are required.
 
-- The server locator forms the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn) for the Server Entry, as specified in section [3.1.1.1](../MS-ADTS/MS-ADTS.md), and issues an LDAP query ([MS-ADTS] section 3.1.1.4).
+- The server locator forms the entry [**FQDN**](#gt_fully-qualified-domain-name-fqdn) for the Server Entry, as specified in section [3.1.1.1](#Section_3.1.1.1), and issues an LDAP query ([MS-ADTS] section 3.1.1.4).
 - If an Active Directory object exists with the entry FQDN, whether or not the object is class rpcServer, the server locator MUST make no further modifications and return the status RPC_S_ENTRY_ALREADY_EXISTS.
 - If no Active Directory object exists for the entry FQDN, the server locator MUST create a new object of class [rpcServer](#Section_2.2.5.3) to represent an empty name service entry. The server locator MUST update the description of the entry to be "Created Entry" ([MS-ADTS] section 3.1.1.5.2). If any LDAP errors are encountered creating the new object in Active Directory, they are returned to the caller in Status.
 - If the new object was successfully created with no LDAP or other errors, indicate success to the caller by returning **RPC_S_OK**.
 <a id="Section_3.2.2.5"></a>
 #### 3.2.2.5 Message Processing Events and Sequencing Rules
 
-All message processing events and sequencing rules are as specified in section [3.2.2.4](#Section_3.2.2) in the context of processing higher-layer events.
+All message processing events and sequencing rules are as specified in section [3.2.2.4](#Section_3.2.2.4) in the context of processing higher-layer events.
 
 <a id="Section_3.2.2.6"></a>
 #### 3.2.2.6 Timer Events
@@ -1860,7 +1860,7 @@ Server, group, and profile entries are supported and corresponding objects are c
 <a id="Section_3.2.3.1"></a>
 #### 3.2.3.1 Abstract Data Model
 
-The abstract data model is as specified in sections [3.2.1.1](#Section_3.2.3) and [3.2.2.1](#Section_3.2.2).
+The abstract data model is as specified in sections [3.2.1.1](#Section_3.2.1.1) and [3.2.2.1](#Section_3.2.2.1).
 
 <a id="Section_3.2.3.2"></a>
 #### 3.2.3.2 Timers
@@ -1870,14 +1870,14 @@ No timers are required in this mode.
 <a id="Section_3.2.3.3"></a>
 #### 3.2.3.3 Initialization
 
-The [**server locator**](#gt_server-locator) initializes as specified in sections [3.2.1.3](#Section_3.2.3) and [3.2.2.3](#Section_3.2.2).
+The [**server locator**](#gt_server-locator) initializes as specified in sections [3.2.1.3](#Section_3.2.1.3) and [3.2.2.3](#Section_3.2.2.3).
 
 <a id="Section_3.2.3.4"></a>
 #### 3.2.3.4 Higher-Layer Triggered Events
 
 A higher-level protocol or application can make a call to modify server, group, or profile entries.
 
-When an entry is modified, the [**server locator**](#gt_server-locator) MUST update the [**Active Directory**](#gt_active-directory) store of the computer's domain with information, as specified in section [3.2.2.4](#Section_3.2.2).
+When an entry is modified, the [**server locator**](#gt_server-locator) MUST update the [**Active Directory**](#gt_active-directory) store of the computer's domain with information, as specified in section [3.2.2.4](#Section_3.2.2.4).
 
 <a id="Section_3.2.3.4.1"></a>
 ##### 3.2.3.4.1 Updating a Server Entry
@@ -1903,9 +1903,9 @@ Profile entries are not supported by the Entry Cache.
 <a id="Section_3.2.3.5"></a>
 #### 3.2.3.5 Message Processing Events and Sequencing Rules
 
-When a broadcast lookup request for server entries is received, the [**server locator**](#gt_server-locator) MUST respond, as specified in section [3.2.1.5](#Section_3.3.1.5).
+When a broadcast lookup request for server entries is received, the [**server locator**](#gt_server-locator) MUST respond, as specified in section [3.2.1.5](#Section_3.2.1.5).
 
-Additional message processing events and sequencing rules are specified in section [3.2.2.5](#Section_3.3.1.5), in the context of processing higher-layer events.
+Additional message processing events and sequencing rules are specified in section [3.2.2.5](#Section_3.2.2.5), in the context of processing higher-layer events.
 
 <a id="Section_3.2.3.6"></a>
 #### 3.2.3.6 Timer Events
@@ -1960,7 +1960,7 @@ A higher-level protocol or application can make a call to look up information fr
 When a request is received, the [**client locator**](#gt_client-locator) MUST take the following actions:
 
 - The client locator MUST look up in the Discovered Entries cache for entries that have not yet expired.
-- The client locator MUST forward the request to the [**master locator**](#gt_master-locator) by using the LocToLoc [**RPC**](#gt_remote-procedure-call-rpc) interface (section [3.1.4](#Section_3.3.1.5)), if there was no matching entry cached, or if matching entries in the cache have expired. The client locator can optimize by first returning results from the discovered entries from the cache before forwarding the request to the master locator.
+- The client locator MUST forward the request to the [**master locator**](#gt_master-locator) by using the LocToLoc [**RPC**](#gt_remote-procedure-call-rpc) interface (section [3.1.4](#Section_3.1.4)), if there was no matching entry cached, or if matching entries in the cache have expired. The client locator can optimize by first returning results from the discovered entries from the cache before forwarding the request to the master locator.
 - A non-domain-joined client locator MUST initiate a master locator discovery request if the master locator cache is empty (section [3.3.1.4.3](#Section_3.3.1.4.3)). It can use any of the [**locators**](#gt_locator) that responded to the request as the master locator to forward the lookup request.
 - The client locator MUST take the actions described in the following subsections to forward the request to the master locator (sections [3.3.1.4.1](#Section_3.3.1.4.1) and [3.3.1.4.2](#Section_3.3.1.4.2)).<13>
 <a id="Section_3.3.1.4.1"></a>
@@ -1997,7 +1997,7 @@ A non-domain-joined [**client locator**](#gt_client-locator) MUST initiate a loc
 <a id="Section_3.3.1.5"></a>
 #### 3.3.1.5 Message Processing Events and Sequencing Rules
 
-All message processing events and sequencing rules are specified in section [3.3.1.4](#Section_3.2.3) in the context of processing higher-layer events.
+All message processing events and sequencing rules are specified in section [3.3.1.4](#Section_3.3.1.4) in the context of processing higher-layer events.
 
 <a id="Section_3.3.1.6"></a>
 #### 3.3.1.6 Timer Events
@@ -2058,11 +2058,11 @@ If an entry name is not specified in a lookup operation, the [**client locator**
 - (& (objectClass = rpcServer) (rpcNsObjectID=<string object UUID>)) if an [**object UUID**](#gt_object-uuid) is specified in the request. The object UUID is encoded as the string representation of the object UUID, as specified in "Universal Unique Identifier" in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) Appendix A.
 - (& (objectClass = rpcServer)) if no object UUID is specified in the request.
 - For each matching object returned from [**Active Directory**](#gt_active-directory), the client locator MUST enumerate all children to assemble a list of interfaces and their bindings exported in the server entry.
-- The request MAY specify additional criteria as listed in section [3.3.2.4](#Section_3.2.2). The client locator MUST perform further refinement of the search results returned from Active Directory to return binding information only from interfaces that match all the specified criteria. If no additional criteria are specified, the client locator MUST treat all returned Active Directory objects as matching.
+- The request MAY specify additional criteria as listed in section [3.3.2.4](#Section_3.3.2.4). The client locator MUST perform further refinement of the search results returned from Active Directory to return binding information only from interfaces that match all the specified criteria. If no additional criteria are specified, the client locator MUST treat all returned Active Directory objects as matching.
 <a id="Section_3.3.2.5"></a>
 #### 3.3.2.5 Message Processing Events and Sequencing Rules
 
-All message processing events and sequencing rules are specified in section [3.3.2.4](#Section_3.2.2) in the context of processing higher-layer events.
+All message processing events and sequencing rules are specified in section [3.3.2.4](#Section_3.3.2.4) in the context of processing higher-layer events.
 
 <a id="Section_3.3.2.6"></a>
 #### 3.3.2.6 Timer Events
@@ -2082,7 +2082,7 @@ In this mode, the [**client locator**](#gt_client-locator) supports the lookup o
 <a id="Section_3.3.3.1"></a>
 #### 3.3.3.1 Abstract Data Model
 
-The abstract data model is as specified in sections [3.3.1.1](#Section_3.2.3) and [3.3.2.1](#Section_3.2.2).
+The abstract data model is as specified in sections [3.3.1.1](#Section_3.3.1.1) and [3.3.2.1](#Section_3.3.2.1).
 
 <a id="Section_3.3.3.2"></a>
 #### 3.3.3.2 Timers
@@ -2092,7 +2092,7 @@ No timers are required in this mode.
 <a id="Section_3.3.3.3"></a>
 #### 3.3.3.3 Initialization
 
-The [**client locator**](#gt_client-locator) initializes as specified in section [3.3.1.3](#Section_3.2.3) for domain-joined computers.
+The [**client locator**](#gt_client-locator) initializes as specified in section [3.3.1.3](#Section_3.3.1.3) for domain-joined computers.
 
 <a id="Section_3.3.3.4"></a>
 #### 3.3.3.4 Higher-Layer Triggered Events
@@ -2108,16 +2108,16 @@ If the entry name is specified, the following actions MUST be taken:
 
 - The [**client locator**](#gt_client-locator) MUST query [**Active Directory**](#gt_active-directory) for the entry as specified in section [3.3.2.4.1](#Section_3.3.2.4.1).
 - If the entry is found in Active Directory, the client locator MUST return this information to the caller. The client locator MUST NOT forward the request to the [**master locator**](#gt_master-locator).
-- If the entry was not found in Active Directory, the client locator MUST forward the request to the master locator, as specified in section [3.3.1.4](#Section_3.2.3), as applicable to a domain-joined computer.
+- If the entry was not found in Active Directory, the client locator MUST forward the request to the master locator, as specified in section [3.3.1.4](#Section_3.3.1.4), as applicable to a domain-joined computer.
 <a id="Section_3.3.3.4.2"></a>
 ##### 3.3.3.4.2 Query Without Entry Name
 
-If the entry name is not specified, the [**client locator**](#gt_client-locator) MUST forward the request to the [**master locator**](#gt_master-locator) (section [3.3.1.4](#Section_3.2.3)) as applicable to a domain-joined computer.
+If the entry name is not specified, the [**client locator**](#gt_client-locator) MUST forward the request to the [**master locator**](#gt_master-locator) (section [3.3.1.4](#Section_3.3.1.4)) as applicable to a domain-joined computer.
 
 <a id="Section_3.3.3.5"></a>
 #### 3.3.3.5 Message Processing Events and Sequencing Rules
 
-All message processing events and sequencing rules are specified in sections [3.3.1.4](#Section_3.2.3) and [3.3.2.4](#Section_3.2.2) in the context of processing higher-layer events.
+All message processing events and sequencing rules are specified in sections [3.3.1.4](#Section_3.3.1.4) and [3.3.2.4](#Section_3.3.2.4) in the context of processing higher-layer events.
 
 <a id="Section_3.3.3.6"></a>
 #### 3.3.3.6 Timer Events
@@ -2132,7 +2132,7 @@ No other local events are applicable in this mode.
 <a id="Section_3.4"></a>
 ## 3.4 LocToLoc Master Locator Details
 
-A [**master locator**](#gt_master-locator) facilitates communication between [**client locators**](#gt_client-locator) and [**server locators**](#gt_server-locator). A master locator MUST listen for forwarded requests from client locators on the LocToLoc [**RPC**](#gt_remote-procedure-call-rpc) interface (section [3.1.4](#Section_3.3.1.5)), and it MUST broadcast the requests to reach any potential server locators. There can be multiple master locators, and different client locators can forward requests to different master locators. An implementation of a master locator SHOULD choose to cache the responses that it receives from server locators by implementing the Discovered Entries cache as specified in section [3.4.1.1](#Section_3.2.3).
+A [**master locator**](#gt_master-locator) facilitates communication between [**client locators**](#gt_client-locator) and [**server locators**](#gt_server-locator). A master locator MUST listen for forwarded requests from client locators on the LocToLoc [**RPC**](#gt_remote-procedure-call-rpc) interface (section [3.1.4](#Section_3.1.4)), and it MUST broadcast the requests to reach any potential server locators. There can be multiple master locators, and different client locators can forward requests to different master locators. An implementation of a master locator SHOULD choose to cache the responses that it receives from server locators by implementing the Discovered Entries cache as specified in section [3.4.1.1](#Section_3.4.1.1).
 
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Nondirectory Mode
@@ -2178,7 +2178,7 @@ A [**master locator**](#gt_master-locator) responds to the following:
 <a id="Section_3.4.1.5.1"></a>
 ##### 3.4.1.5.1 Lookup Request
 
-When a [**master locator**](#gt_master-locator) receives a lookup request on the LocToLoc interface (section [3.1.4](#Section_3.3.1.5)), the following actions MUST be taken:
+When a [**master locator**](#gt_master-locator) receives a lookup request on the LocToLoc interface (section [3.1.4](#Section_3.1.4)), the following actions MUST be taken:
 
 - The master locator MUST validate the parameters as follows:
 - entry_name_syntax:
@@ -2259,7 +2259,7 @@ No other local events are applicable in this mode.
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Directory Mode
 
-In this mode, the [**master locator**](#gt_master-locator) behaves in a manner identical to the specification in section [3.4.1](#Section_1.3).
+In this mode, the [**master locator**](#gt_master-locator) behaves in a manner identical to the specification in section [3.4.1](#Section_3.4.1).
 
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Directory-Only Mode
@@ -2280,11 +2280,11 @@ Figure 3: Nondirectory mode
 
 The sequence is described in the following steps:
 
-- The server exports its interface, and the [**server locator**](#gt_server-locator) updates its cache. For more information, see section [3.2.1.4](#Section_3.2.3).
+- The server exports its interface, and the [**server locator**](#gt_server-locator) updates its cache. For more information, see section [3.2.1.4](#Section_3.2.1.4).
 - The client initiates a lookup by name.
-- The [**client locator**](#gt_client-locator) forwards the request to the [**master locator**](#gt_master-locator). For more information, see section [3.3.1.4](#Section_3.2.3).
-- The master locator sends out a broadcast. For more information, see section [3.4.1.5](#Section_3.3.1.5).
-- The server locator responds to the broadcast. For more information, see section [3.2.1.5](#Section_3.3.1.5).
+- The [**client locator**](#gt_client-locator) forwards the request to the [**master locator**](#gt_master-locator). For more information, see section [3.3.1.4](#Section_3.3.1.4).
+- The master locator sends out a broadcast. For more information, see section [3.4.1.5](#Section_3.4.1.5).
+- The server locator responds to the broadcast. For more information, see section [3.2.1.5](#Section_3.2.1.5).
 - The master locator gets the information and returns it to the client locator. For more information, see section 3.4.1.5.
 - The client locator returns the lookup handle to the client process.
 <a id="Section_4.2"></a>
@@ -2314,12 +2314,12 @@ Figure 5: Directory mode
 
 The sequence is described in the following steps:
 
-- The server exports the interface, and the server locator updates to its local cache. For more information, see section [3.2.1.4](#Section_3.2.3).
+- The server exports the interface, and the server locator updates to its local cache. For more information, see section [3.2.1.4](#Section_3.2.1.4).
 - The client initiates a lookup by name.
 - The [**client locator**](#gt_client-locator) initiates a DS lookup and does not find the [**name service entry**](#gt_name-service-entry). For more information, see section [3.3.3.4.1](#Section_3.3.3.4.1).
 - The client locator forwards the request to the [**master locator**](#gt_master-locator). For more information, see section 3.3.3.4.1.
-- The master locator sends out a broadcast request. For more information, see section [3.4.1.5](#Section_3.3.1.5).
-- The server locator responds to the request. For more information, see section [3.2.1.5](#Section_3.3.1.5).
+- The master locator sends out a broadcast request. For more information, see section [3.4.1.5](#Section_3.4.1.5).
+- The server locator responds to the request. For more information, see section [3.2.1.5](#Section_3.2.1.5).
 - The master locator gets the information and returns it to the client locator. For more information, see section 3.4.1.5.
 - The client locator returns the lookup handle to the client process.
 <a id="Section_5"></a>
@@ -2339,7 +2339,7 @@ The LocToLoc interface uses the default security settings and does not register 
 
 | Security parameter | Section |
 | --- | --- |
-| Discussion of security on mailslots, default [**RPC**](#gt_remote-procedure-call-rpc) containers, and the RPC interface | [Security Considerations for Implementers (section 5.1)](#Section_5) |
+| Discussion of security on mailslots, default [**RPC**](#gt_remote-procedure-call-rpc) containers, and the RPC interface | [Security Considerations for Implementers (section 5.1)](#Section_5.1) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
@@ -2531,7 +2531,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <6> Section 3.1.3.1: By default, **nameServiceFlags** is not set in [**Active Directory**](#gt_active-directory).
 
-<7> Section 3.1.3.2: On a non-domain-joined computer, the non[**master locator**](#gt_master-locator) discovers the master locator by issuing a master locator discovery query. In addition, locators also cache the sender of a broadcast lookup request as a master locator (see section [3.4.1.5.1](#Section_3.4.1.5.1.1)). On a non-domain-joined computer, if none of the locators in its cache is accessible as determined by calling the [I_nsi_ping_locator](#Section_3.1.4.4) method on the target locator once, a nonmaster locator changes its role to be a master locator.
+<7> Section 3.1.3.2: On a non-domain-joined computer, the non[**master locator**](#gt_master-locator) discovers the master locator by issuing a master locator discovery query. In addition, locators also cache the sender of a broadcast lookup request as a master locator (see section [3.4.1.5.1](#Section_3.4.1.5.1)). On a non-domain-joined computer, if none of the locators in its cache is accessible as determined by calling the [I_nsi_ping_locator](#Section_3.1.4.4) method on the target locator once, a nonmaster locator changes its role to be a master locator.
 
 <8> Section 3.1.4.1: The master locator ignores this value if the entry_name is null or an empty string.
 

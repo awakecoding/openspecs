@@ -278,7 +278,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RPRN] Microsoft Corporation, "[Print System Remote Protocol](../MS-RPRN/MS-RPRN.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
@@ -385,19 +385,19 @@ The Remote Administration Protocol supports the concept of an information level 
 
 | Command | Information level | Response structure |
 | --- | --- | --- |
-| [NetServerGetInfo](#Section_2.5.5.1.1) | 0x0000 | [NetServerInfo0](#Section_2.5.5.4.1) |
+| [NetServerGetInfo](#Section_2.5.5.1) | 0x0000 | [NetServerInfo0](#Section_2.5.5.4.1) |
 | - | 0x0001 | [NetServerInfo1](#Section_2.5.5.4.2) |
 | [NetServerEnum2](#Section_4.2) | 0x0000 | NetServerInfo0 |
 | - | 0x0001 | NetServerInfo1 |
 | [NetServerEnum3](#Section_2.5.5.3.1) | 0x0000 | NetServerInfo0 |
 | - | 0x0001 | NetServerInfo1 |
-| [NetShareEnum](#Section_4.1) | 0x0000 | [NetShareInfo0](#Section_2.5.6.3.1) |
+| [NetShareEnum](#Section_2.5.6.1.1) | 0x0000 | [NetShareInfo0](#Section_2.5.6.3.1) |
 | - | 0x0001 | [NetShareInfo1](#Section_2.5.6.3.2) |
 | - | 0x0002 | [NetShareInfo2](#Section_2.5.6.3.3) |
-| [NetShareGetInfo](#Section_2.5.6.2.1) | 0x0000 | NetShareInfo0 |
+| [NetShareGetInfo](#Section_2.5.6.2) | 0x0000 | NetShareInfo0 |
 | - | 0x0001 | NetShareInfo1 |
 | - | 0x0002 | NetShareInfo2 |
-| [NetPrintQEnum](#Section_3.1.4.4) | 0x0000 | [PrintQueue0](#Section_2.5.7.8.1) |
+| [NetPrintQEnum](#Section_2.5.7.1) | 0x0000 | [PrintQueue0](#Section_2.5.7.8.1) |
 | - | 0x0001 | [PrintQueue1](#Section_2.5.7.8.2) |
 | - | 0x0002 | PrintQueue1, [PrintJobInfo1](#Section_2.5.7.8.6) |
 | - | 0x0003 | [PrintQueue3](#Section_2.5.7.8.3) |
@@ -409,19 +409,19 @@ The Remote Administration Protocol supports the concept of an information level 
 | - | 0x0003 | PrintQueue3 |
 | - | 0x0004 | PrintQueue3, PrintJobInfo2 |
 | - | 0x0005 | PrintQueue5 |
-| [NetPrintJobSetInfo](#Section_3.2.5.6) | 0x0001, 0x0003 | - |
+| [NetPrintJobSetInfo](#Section_2.5.7.3) | 0x0001, 0x0003 | - |
 | [NetPrintJobGetInfo](#Section_2.5.7.4.1) | 0x0000 | [PrintJobInfo0](#Section_2.5.7.8.5) |
 | - | 0x0001 | PrintJobInfo1 |
 | - | 0x0002 | PrintJobInfo2 |
 | - | 0x0003 | [PrintJobInfo3](#Section_2.5.7.8.8) |
-| [NetUserGetInfo](#Section_3.1.4.13) | 0x0000 | [NetUserInfo0](#Section_2.5.8.3.1) |
+| [NetUserGetInfo](#Section_2.5.8.2) | 0x0000 | [NetUserInfo0](#Section_2.5.8.3.1) |
 | - | 0x0001 | [NetUserInfo1](#Section_2.5.8.3.2) |
 | - | 0x0002 | [NetUserInfo2](#Section_2.5.8.3.3) |
 | - | 0x000A | [NetUserInfo10](#Section_2.5.8.3.4) |
 | - | 0x000B | [NetUserInfo11](#Section_2.5.8.3.5) |
-| [NetWkstaGetInfo](#Section_2.5.10.1.2) | 0x000A | [NetWkstaInfo10](#Section_2.5.10.4.1) |
-| [NetWkstaUserLogon](#Section_2.5.10.2.1) | 0x0001 | [NetWkstaUserLogonResponseData](#Section_2.5.10.4.3) |
-| [NetWkstaUserLogoff](#Section_2.5.10.4.5) | 0x0001 | [NetWkstaUserLogoffResponseData](#Section_2.5.10.4.5) |
+| [NetWkstaGetInfo](#Section_2.5.10.1) | 0x000A | [NetWkstaInfo10](#Section_2.5.10.4.1) |
+| [NetWkstaUserLogon](#Section_2.5.10.2) | 0x0001 | [NetWkstaUserLogonResponseData](#Section_2.5.10.4.3) |
+| [NetWkstaUserLogoff](#Section_2.5.10.3) | 0x0001 | [NetWkstaUserLogoffResponseData](#Section_2.5.10.4.5) |
 
 <a id="Section_2.4"></a>
 ## 2.4 String Field Length Limits
@@ -460,7 +460,7 @@ The following table lists the length limits for RAP structures.
 | Variable | NetServerInfo1 | ServerComment 48 |
 | Variable | [NetShareInfo0](#Section_2.5.6.3.1), [NetShareInfo1](#Section_2.5.6.3.2) | NetworkName 13 |
 | Variable | [NetUserInfo11](#Section_2.5.8.3.5) | Name 21 |
-| Variable | [NetWkstaUserLogonRequestData](#Section_2.5.10.2.1) | UserName 21 |
+| Variable | [NetWkstaUserLogonRequestData](#Section_2.5.10.4.2) | UserName 21 |
 | Variable | NetWkstaUserLogonRequestData | Password 15 |
 | Variable | NetWkstaUserLogonRequestData | WorkstationName 16 |
 | Variable | [NetWkstaUserLogonResponseData](#Section_2.5.10.4.3) | EffName 21 |
@@ -574,28 +574,28 @@ packet-beta
 <a id="Section_2.5.3"></a>
 ### 2.5.3 RAP Request/Response Summary Table
 
-Some Remote Administration Protocol commands require the RAPOutParams structure, as specified in section [2.5.2](#Section_2.5.11). The following table specifies the message request and response for a specific Remote Administration Protocol command as well as the data structure for the response.
+Some Remote Administration Protocol commands require the RAPOutParams structure, as specified in section [2.5.2](#Section_2.5.2). The following table specifies the message request and response for a specific Remote Administration Protocol command as well as the data structure for the response.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Variable | [NetServerGetInfo](#Section_2.5.5.1.1) | [NetServerGetInfoRequest](#Section_2.5.5.1.1) [NetServerGetInfoResponse](#Section_2.5.5.1.2) [NetServerInfo0](#Section_2.5.5.4.1), [NetServerInfo1](#Section_2.5.5.4.2) |
+| Variable | [NetServerGetInfo](#Section_2.5.5.1) | [NetServerGetInfoRequest](#Section_2.5.5.1.1) [NetServerGetInfoResponse](#Section_2.5.5.1.2) [NetServerInfo0](#Section_2.5.5.4.1), [NetServerInfo1](#Section_2.5.5.4.2) |
 | Variable | [NetServerEnum2](#Section_4.2) | [NetServerEnum2Request](#Section_2.5.5.2.1) [NetServerEnum2Response](#Section_2.5.5.2.2) NetServerInfo0, NetServerInfo1 |
-| Variable | [NetServerEnum3](#Section_3.2.5.15) | [NetServerEnum3Request](#Section_2.5.5.3.1) [NetServerEnum3Response](#Section_2.5.5.3.2) NetServerInfo0, NetServerInfo1 |
-| Variable | [NetShareEnum](#Section_4.1) | [NetShareEnumRequest](#Section_4.1) [NetShareEnumResponse](#Section_4.1) [NetShareInfo0](#Section_2.5.6.3.1), [NetShareInfo1](#Section_2.5.6.3.2), [NetShareInfo2](#Section_2.5.6.3.3) |
-| Variable | [NetShareGetInfo](#Section_2.5.6.2.1) | [NetShareGetInfoRequest](#Section_2.5.6.2.1) [NetShareGetInfoResponse](#Section_2.5.6.2.2) NetShareInfo0, NetShareInfo1, NetShareInfo2 |
-| Variable | [NetPrintQEnum](#Section_3.1.4.4) | [NetPrintQEnumRequest](#Section_2.5.7.1.1) [NetPrintQEnumResponse](#Section_74ae8d422f2e4c448eeaa5349da537a3) [PrintQueue0](#Section_2.5.7.8.1), [PrintQueue1](#Section_2.5.7.8.2), [PrintQueue3](#Section_2.5.7.8.3), [PrintQueue5](#Section_2.5.7.8.4), [PrintJobInfo1](#Section_2.5.7.8.6), [PrintJobInfo2](#Section_2.5.7.8.7) |
-| Variable | [NetPrintQGetInfo](#Section_3.2.5.5) | [NetPrintQGetInfoRequest](#Section_2.5.7.2.1) [NetPrintQGetInfoResponse](#Section_2.5.7.2.2) PrintQueue0, PrintQueue1, PrintQueue3, PrintQueue5, PrintJobInfo1, PrintJobInfo2 |
-| Variable | [NetPrintJobGetInfo](#Section_3.1.4.7) | [NetPrintJobGetInfoRequest](#Section_2.5.7.4.1) [NetPrintJobGetInfoResponse](#Section_2020d57b9941458795730b842ed80992) [PrintJobInfo0](#Section_2.5.7.8.5), PrintJobInfo1, PrintJobInfo2, [PrintJobInfo3](#Section_2.5.7.8.8) |
-| Variable | [NetPrintJobSetInfo](#Section_3.2.5.6) | [NetPrintJobSetInfoRequest](#Section_2.5.7.3.1) [NetPrintJobSetInfoResponse](#Section_6ddf7960a3bc409a83e00264623a900b) - |
+| Variable | [NetServerEnum3](#Section_2.5.5.3) | [NetServerEnum3Request](#Section_2.5.5.3.1) [NetServerEnum3Response](#Section_2.5.5.3.2) NetServerInfo0, NetServerInfo1 |
+| Variable | [NetShareEnum](#Section_4.1) | [NetShareEnumRequest](#Section_2.5.6.1.1) [NetShareEnumResponse](#Section_2.5.6.1.2) [NetShareInfo0](#Section_2.5.6.3.1), [NetShareInfo1](#Section_2.5.6.3.2), [NetShareInfo2](#Section_2.5.6.3.3) |
+| Variable | [NetShareGetInfo](#Section_2.5.6.2) | [NetShareGetInfoRequest](#Section_2.5.6.2.1) [NetShareGetInfoResponse](#Section_2.5.6.2.2) NetShareInfo0, NetShareInfo1, NetShareInfo2 |
+| Variable | [NetPrintQEnum](#Section_2.5.7.1) | [NetPrintQEnumRequest](#Section_2.5.7.1.1) [NetPrintQEnumResponse](#Section_74ae8d422f2e4c448eeaa5349da537a3) [PrintQueue0](#Section_2.5.7.8.1), [PrintQueue1](#Section_2.5.7.8.2), [PrintQueue3](#Section_2.5.7.8.3), [PrintQueue5](#Section_2.5.7.8.4), [PrintJobInfo1](#Section_2.5.7.8.6), [PrintJobInfo2](#Section_2.5.7.8.7) |
+| Variable | [NetPrintQGetInfo](#Section_2.5.7.2) | [NetPrintQGetInfoRequest](#Section_2.5.7.2.1) [NetPrintQGetInfoResponse](#Section_2.5.7.2.2) PrintQueue0, PrintQueue1, PrintQueue3, PrintQueue5, PrintJobInfo1, PrintJobInfo2 |
+| Variable | [NetPrintJobGetInfo](#Section_2.5.7.4) | [NetPrintJobGetInfoRequest](#Section_2.5.7.4.1) [NetPrintJobGetInfoResponse](#Section_2020d57b9941458795730b842ed80992) [PrintJobInfo0](#Section_2.5.7.8.5), PrintJobInfo1, PrintJobInfo2, [PrintJobInfo3](#Section_2.5.7.8.8) |
+| Variable | [NetPrintJobSetInfo](#Section_2.5.7.3) | [NetPrintJobSetInfoRequest](#Section_2.5.7.3.1) [NetPrintJobSetInfoResponse](#Section_6ddf7960a3bc409a83e00264623a900b) - |
 | Variable | [NetPrintJobPause](#Section_2.5.7.5) | [NetPrintJobPauseRequest](#Section_2.5.7.5.1) [NetPrintJobPauseResponse](#Section_6775465a56604c80bef4d58c43816416) - |
-| Variable | [NetPrintJobContinue](#Section_3.2.5.10) | [NetPrintJobContinueRequest](#Section_2.5.7.6.1) [NetPrintJobContinueResponse](#Section_abe11e19c90d417b9639b256c8979650) - |
-| Variable | [NetPrintJobDelete](#Section_4.3) | [NetPrintJobDeleteRequest](#Section_2.5.7.7.1) [NetPrintJobDeleteResponse](#Section_4.3) - |
-| Variable | [NetUserPasswordSet2](#Section_3.1.4.14) | [NetUserPasswordSet2Request](#Section_2.5.8.1.1) [NetUserPasswordSet2Response](#Section_a53d43a085974c408a168243b8ca8146) - |
-| Variable | [NetUserGetInfo](#Section_3.1.4.13) | [NetUserGetInfoRequest](#Section_2.5.8.2.1) [NetUserGetInfoResponse](#Section_2.5.8.2.2) [NetUserInfo0](#Section_2.5.8.3.1), [NetUserInfo1](#Section_2.5.8.3.2), [NetUserInfo2](#Section_2.5.8.3.3), [NetUserInfo10](#Section_2.5.8.3.4), [NetUserInfo11](#Section_2.5.8.3.5) |
-| Variable | [NetRemoteTOD](#Section_3.2.5.11) | [NetRemoteTODRequest](#Section_2.5.9.1.1) [NetRemoteTODResponse](#Section_7175c361e49842e3bf1b4bc46166f339) [TimeOfDayInfo](#Section_2.5.9.2.1) |
-| Variable | [NetWkstaGetInfo](#Section_2.5.10.1.2) | [NetWkstaGetInfoRequest](#Section_2.5.10.1.1) [NetWkstaGetInfoResponse](#Section_2.5.10.1.2) [NetWkstaInfo10](#Section_2.5.10.4.1) |
-| Variable | [NetWkstaUserLogon](#Section_2.5.10.2.1) | [NetWkstaUserLogonRequest](#Section_2.5.10.2.1) [NetWkstaUserLogonResponse](#Section_2.5.10.4.3) [NetWkstaUserLogonResponseData](#Section_2.5.10.4.3) |
-| Variable | [NetWkstaUserLogoff](#Section_2.5.10.4.5) | [NetWkstaUserLogoffRequest](#Section_2.5.10.3.1) [NetWkstaUserLogoffResponse](#Section_2.5.10.4.5) [NetWkstaUserLogoffResponseData](#Section_2.5.10.4.5) |
+| Variable | [NetPrintJobContinue](#Section_2.5.7.6) | [NetPrintJobContinueRequest](#Section_2.5.7.6.1) [NetPrintJobContinueResponse](#Section_abe11e19c90d417b9639b256c8979650) - |
+| Variable | [NetPrintJobDelete](#Section_2.5.7.7) | [NetPrintJobDeleteRequest](#Section_2.5.7.7.1) [NetPrintJobDeleteResponse](#Section_4.3) - |
+| Variable | [NetUserPasswordSet2](#Section_2.5.8.1) | [NetUserPasswordSet2Request](#Section_2.5.8.1.1) [NetUserPasswordSet2Response](#Section_a53d43a085974c408a168243b8ca8146) - |
+| Variable | [NetUserGetInfo](#Section_2.5.8.2) | [NetUserGetInfoRequest](#Section_2.5.8.2.1) [NetUserGetInfoResponse](#Section_2.5.8.2.2) [NetUserInfo0](#Section_2.5.8.3.1), [NetUserInfo1](#Section_2.5.8.3.2), [NetUserInfo2](#Section_2.5.8.3.3), [NetUserInfo10](#Section_2.5.8.3.4), [NetUserInfo11](#Section_2.5.8.3.5) |
+| Variable | [NetRemoteTOD](#Section_2.5.9.1) | [NetRemoteTODRequest](#Section_2.5.9.1.1) [NetRemoteTODResponse](#Section_7175c361e49842e3bf1b4bc46166f339) [TimeOfDayInfo](#Section_2.5.9.2.1) |
+| Variable | [NetWkstaGetInfo](#Section_2.5.10.1) | [NetWkstaGetInfoRequest](#Section_2.5.10.1.1) [NetWkstaGetInfoResponse](#Section_2.5.10.1.2) [NetWkstaInfo10](#Section_2.5.10.4.1) |
+| Variable | [NetWkstaUserLogon](#Section_2.5.10.2) | [NetWkstaUserLogonRequest](#Section_2.5.10.2.1) [NetWkstaUserLogonResponse](#Section_2.5.10.2.2) [NetWkstaUserLogonResponseData](#Section_2.5.10.4.3) |
+| Variable | [NetWkstaUserLogoff](#Section_2.5.10.3) | [NetWkstaUserLogoffRequest](#Section_2.5.10.3.1) [NetWkstaUserLogoffResponse](#Section_2.5.10.3.2) [NetWkstaUserLogoffResponseData](#Section_2.5.10.4.5) |
 
 <a id="Section_2.5.4"></a>
 ### 2.5.4 RAP Opcodes
@@ -606,47 +606,47 @@ Server Commands
 
 | Command | Opcode |
 | --- | --- |
-| [NetServerGetInfo](#Section_2.5.5.1.1) | 0x000D |
+| [NetServerGetInfo](#Section_2.5.5.1) | 0x000D |
 | [NetServerEnum2](#Section_4.2) | 0x0068 |
-| [NetServerEnum3](#Section_3.2.5.15) | 0x00D7 |
+| [NetServerEnum3](#Section_2.5.5.3) | 0x00D7 |
 
 Share Commands
 
 | Command | Opcode |
 | --- | --- |
 | [NetShareEnum](#Section_4.1) | 0x0000 |
-| [NetShareGetInfo](#Section_2.5.6.2.1) | 0x0001 |
+| [NetShareGetInfo](#Section_2.5.6.2) | 0x0001 |
 
 Print Commands
 
 | Command | Opcode |
 | --- | --- |
-| [NetPrintQEnum](#Section_3.1.4.4) | 0x0045 |
-| [NetPrintQGetInfo](#Section_3.2.5.5) | 0x0046 |
-| [NetPrintJobSetInfo](#Section_3.2.5.6) | 0x0093 |
-| [NetPrintJobGetInfo](#Section_3.1.4.7) | 0x004D |
+| [NetPrintQEnum](#Section_2.5.7.1) | 0x0045 |
+| [NetPrintQGetInfo](#Section_2.5.7.2) | 0x0046 |
+| [NetPrintJobSetInfo](#Section_2.5.7.3) | 0x0093 |
+| [NetPrintJobGetInfo](#Section_2.5.7.4) | 0x004D |
 | [NetPrintJobPause](#Section_2.5.7.5) | 0x0052 |
-| [NetPrintJobContinue](#Section_3.2.5.10) | 0x0053 |
-| [NetPrintJobDelete](#Section_4.3) | 0x0051 |
+| [NetPrintJobContinue](#Section_2.5.7.6) | 0x0053 |
+| [NetPrintJobDelete](#Section_2.5.7.7) | 0x0051 |
 
 User Commands
 
 | Command | Opcode |
 | --- | --- |
-| [NetUserPasswordSet2](#Section_3.1.4.14) | 0x0073 |
-| [NetUserGetInfo](#Section_3.1.4.13) | 0x0038 |
+| [NetUserPasswordSet2](#Section_2.5.8.1) | 0x0073 |
+| [NetUserGetInfo](#Section_2.5.8.2) | 0x0038 |
 
 Time Commands
 
-The [NetRemoteTOD](#Section_3.2.5.11) command has an opcode of 0x005B.
+The [NetRemoteTOD](#Section_2.5.9.1) command has an opcode of 0x005B.
 
 Workstation Commands
 
 | Command | Opcode |
 | --- | --- |
-| [NetWkstaGetinfo](#Section_2.5.10.1.2) | 0x003F |
-| [NetWkstaUserLogon](#Section_2.5.10.2.1) | 0x0084 |
-| [NetWkstaUserLogoff](#Section_2.5.10.4.5) | 0x0085 |
+| [NetWkstaGetinfo](#Section_2.5.10.1) | 0x003F |
+| [NetWkstaUserLogon](#Section_2.5.10.2) | 0x0084 |
+| [NetWkstaUserLogoff](#Section_2.5.10.3) | 0x0085 |
 
 <a id="Section_2.5.5"></a>
 ### 2.5.5 RAP Server Commands
@@ -656,7 +656,7 @@ The following Remote Administration Protocol commands are for operations involvi
 <a id="Section_2.5.5.1"></a>
 #### 2.5.5.1 NetServerGetInfo Command
 
-The [NetServerGetInfo](#Section_2.5.5.1.1) command returns information on the server.
+The [NetServerGetInfo](#Section_2.5.5.1) command returns information on the server.
 
 <a id="Section_2.5.5.1.1"></a>
 ##### 2.5.5.1.1 RAP NetServerGetInfoRequest
@@ -692,7 +692,7 @@ packet-beta
 <a id="Section_2.5.5.1.2"></a>
 ##### 2.5.5.1.2 RAP NetServerGetInfoResponse
 
-The **RAPOutParams** RAP response to the [NetServerGetInfo](#Section_2.5.5.1.1) command is as follows.<8>
+The **RAPOutParams** RAP response to the [NetServerGetInfo](#Section_2.5.5.1) command is as follows.<8>
 
 ```mermaid
 packet-beta
@@ -806,7 +806,7 @@ If the **InfoLevel** specified in the NetServerEnum2Request is 0x0001, the **RAP
 <a id="Section_2.5.5.3"></a>
 #### 2.5.5.3 NetServerEnum3 Command
 
-The [NetServerEnum3](#Section_3.2.5.15) command specifies that the server MUST return to the client a list of servers that exist on the network.<11>
+The [NetServerEnum3](#Section_2.5.5.3) command specifies that the server MUST return to the client a list of servers that exist on the network.<11>
 
 <a id="Section_2.5.5.3.1"></a>
 ##### 2.5.5.3.1 RAP NetServerEnum3Request
@@ -842,7 +842,7 @@ packet-beta
 
 **ReceiveBufferSize (2 bytes):** A 16-bit unsigned integer that represents the maximum bytes of data that can be returned in the **Data** field of the SMB_COM_TRANSACTION response to the command.
 
-**ServerType (4 bytes):** A 32-bit set of flags used to filter servers in the response to the [NetServerEnum3](#Section_3.2.5.15) command. The **ServerType** field MUST be a bitmask composed of the following possible values.
+**ServerType (4 bytes):** A 32-bit set of flags used to filter servers in the response to the [NetServerEnum3](#Section_2.5.5.3) command. The **ServerType** field MUST be a bitmask composed of the following possible values.
 
 | Value | Meaning |
 | --- | --- |
@@ -884,7 +884,7 @@ packet-beta
 <a id="Section_2.5.5.3.2"></a>
 ##### 2.5.5.3.2 RAP NetServerEnum3Response
 
-The RAPOutParams structure for the [NetServerEnum3 Command](#Section_3.2.5.15) MUST be as follows.
+The RAPOutParams structure for the [NetServerEnum3 Command](#Section_2.5.5.3) MUST be as follows.
 
 ```mermaid
 packet-beta
@@ -908,7 +908,7 @@ If the **InfoLevel** specified in the NetServerEnum3Request is 0x0001, the **RAP
 <a id="Section_2.5.5.4.1"></a>
 ##### 2.5.5.4.1 NetServerInfo0 Data Structure
 
-The NetServerInfo0 structure MUST be returned by the server in the **Data** field of the SMB_COM_TRANSACTION response that corresponds to a [NetServerEnum2](#Section_4.2) command, a [NetServerEnum3](#Section_3.2.5.15) command, or a [NetServerGetInfoRequest](#Section_2.5.5.1.1) command when the *InfoLevel* parameter to the command is 0x0000.
+The NetServerInfo0 structure MUST be returned by the server in the **Data** field of the SMB_COM_TRANSACTION response that corresponds to a [NetServerEnum2](#Section_4.2) command, a [NetServerEnum3](#Section_2.5.5.3) command, or a [NetServerGetInfoRequest](#Section_2.5.5.1.1) command when the *InfoLevel* parameter to the command is 0x0000.
 
 ```mermaid
 packet-beta
@@ -920,7 +920,7 @@ packet-beta
 <a id="Section_2.5.5.4.2"></a>
 ##### 2.5.5.4.2 NetServerInfo1 Data Structure
 
-The NetServerInfo1 structure is returned by the server in the **Data** field of the SMB_COM_TRANSACTION response that corresponds to a [NetServerEnum2](#Section_4.2) command, a [NetServerEnum3](#Section_3.2.5.15) command, or a [NetServerGetInfo Command](#Section_2.5.5.1.1) when the *InfoLevel* parameter to the command is 0x0001.
+The NetServerInfo1 structure is returned by the server in the **Data** field of the SMB_COM_TRANSACTION response that corresponds to a [NetServerEnum2](#Section_4.2) command, a [NetServerEnum3](#Section_2.5.5.3) command, or a [NetServerGetInfo Command](#Section_2.5.5.1) when the *InfoLevel* parameter to the command is 0x0001.
 
 ```mermaid
 packet-beta
@@ -942,7 +942,7 @@ packet-beta
 
 **ServerCommentLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string allocated in the response block (see section [2.5.11](#Section_2.5.11)) that MUST specify the purpose of the server.
 
-Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.11) from the **ServerCommentLow** value and then use that result as the offset within the response.
+Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.2) from the **ServerCommentLow** value and then use that result as the offset within the response.
 
 **ServerCommentHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent, and MUST be ignored on receipt.
 
@@ -1004,7 +1004,7 @@ packet-beta
   16-31: "EntriesAvailable"
 ```
 
-**EntriesReturned (2 bytes):** A 16-bit unsigned integer that represents the number of fixed size [NetShareInfo0](#Section_2.5.6.3.1), [NetShareInfo1](#Section_2.5.6.3.2), or [NetShareInfo2](#Section_2.5.6.3.3) data structures returned in the **Data** field of the SMB_COM_TRANSACTION response to the Remote Administration Protocol [NetShareEnumRequest](#Section_4.1).
+**EntriesReturned (2 bytes):** A 16-bit unsigned integer that represents the number of fixed size [NetShareInfo0](#Section_2.5.6.3.1), [NetShareInfo1](#Section_2.5.6.3.2), or [NetShareInfo2](#Section_2.5.6.3.3) data structures returned in the **Data** field of the SMB_COM_TRANSACTION response to the Remote Administration Protocol [NetShareEnumRequest](#Section_2.5.6.1.1).
 
 **EntriesAvailable (2 bytes):** A 16-bit unsigned integer that represents the number of [**shares**](#gt_share) on the server.
 
@@ -1123,7 +1123,7 @@ packet-beta
 
 **RemarkOffsetLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string allocated in the response block (see section [2.5.11](#Section_2.5.11)). The string is an optional comment about the share.
 
-Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.11) from the **RemarkOffsetLow** value, and then use that result as the offset within the response.
+Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.2) from the **RemarkOffsetLow** value, and then use that result as the offset within the response.
 
 **RemarkOffsetHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent, and MUST be ignored on receipt.
 
@@ -1161,7 +1161,7 @@ packet-beta
 | STYPE_DEVICE 0x0002 | Communications device |
 | STYPE_IPC 0x0003 | Interprocess communication (IPC) |
 
-**RemarkOffsetLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string allocated in the response block (see section [2.5.11](#Section_2.5.11)). The string is an optional comment about the share. Before using this value, the RAP client MUST subtract the Converter field specified in section [2.5.2](#Section_2.5.11) from the RemarkOffsetLow value, and then use that result as the offset within the response.
+**RemarkOffsetLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string allocated in the response block (see section [2.5.11](#Section_2.5.11)). The string is an optional comment about the share. Before using this value, the RAP client MUST subtract the Converter field specified in section [2.5.2](#Section_2.5.2) from the RemarkOffsetLow value, and then use that result as the offset within the response.
 
 **RemarkOffsetHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent, and MUST be ignored on receipt.
 
@@ -1185,7 +1185,7 @@ packet-beta
 <a id="Section_2.5.7.1"></a>
 #### 2.5.7.1 NetPrintQEnum Command
 
-The [NetPrintQEnum](#Section_3.1.4.4) command enables the server to return information that is an enumeration of the [**print queues**](#gt_print-queue) on the server.
+The [NetPrintQEnum](#Section_2.5.7.1) command enables the server to return information that is an enumeration of the [**print queues**](#gt_print-queue) on the server.
 
 <a id="Section_2.5.7.1.1"></a>
 ##### 2.5.7.1.1 RAP NetPrintQEnumRequest
@@ -1247,7 +1247,7 @@ packet-beta
 
 **EntriesAvailable (2 bytes):** A 16-bit unsigned integer that represents the number of [**print queues**](#gt_print-queue) that are available on the server.
 
-For error conditions and error responses, see section [3.2.5.4](#Section_3.1.4.4).
+For error conditions and error responses, see section [3.2.5.4](#Section_3.2.5.4).
 
 If the **InfoLevel** specified in the NetPrintQEnumRequest is 0, and the response is not an error, the **RAPOutData** field of the SMB_COM_TRANSACTION response MUST be filled with an array of [PrintQueue0](#Section_2.5.7.8.1) structures of length **EntriesReturned**. For rules on how to initialize the data structures, see section 3.2.5.4.
 
@@ -1264,7 +1264,7 @@ If the **InfoLevel** specified in the NetPrintQEnumRequest is 5, and the respons
 <a id="Section_2.5.7.2"></a>
 #### 2.5.7.2 NetPrintQGetInfo Command
 
-The [NetPrintQGetInfo](#Section_3.2.5.5) command specifies that the server is to return information on the named [**print queue**](#gt_print-queue) on the server.
+The [NetPrintQGetInfo](#Section_2.5.7.2) command specifies that the server is to return information on the named [**print queue**](#gt_print-queue) on the server.
 
 <a id="Section_2.5.7.2.1"></a>
 ##### 2.5.7.2.1 RAP NetPrintQGetInfoRequest
@@ -1317,7 +1317,7 @@ packet-beta
 <a id="Section_2.5.7.2.2"></a>
 ##### 2.5.7.2.2 RAP NetPrintQGetInfoResponse
 
-The RAPOutParams structure responds to the [NetPrintQGetInfo](#Section_3.2.5.5) command as follows.<25>
+The RAPOutParams structure responds to the [NetPrintQGetInfo](#Section_2.5.7.2) command as follows.<25>
 
 ```mermaid
 packet-beta
@@ -1341,7 +1341,7 @@ If the **InfoLevel** specified in the NetPrintQGetInfoRequest is 5, and the resp
 <a id="Section_2.5.7.3"></a>
 #### 2.5.7.3 NetPrintJobSetInfo Command
 
-The [NetPrintJobSetInfo](#Section_3.2.5.6) command specifies that the server MUST modify information on the specified [**print job**](#gt_print-job).
+The [NetPrintJobSetInfo](#Section_2.5.7.3) command specifies that the server MUST modify information on the specified [**print job**](#gt_print-job).
 
 <a id="Section_2.5.7.3.1"></a>
 ##### 2.5.7.3.1 RAP NetPrintJobSetInfoRequest
@@ -1405,7 +1405,7 @@ For example, if the incoming application request sets the **ParamNum** value to 
 <a id="Section_2.5.7.3.2"></a>
 ##### 2.5.7.3.2 RAP NetPrintJobSetInfoResponse
 
-The **RAPOutParams** field and the **RAPOutData** field of the Remote Administration Protocol response to the [NetPrintJobSetInfo](#Section_3.2.5.6) command MUST be empty.<29>
+The **RAPOutParams** field and the **RAPOutData** field of the Remote Administration Protocol response to the [NetPrintJobSetInfo](#Section_2.5.7.3) command MUST be empty.<29>
 
 <a id="Section_2.5.7.4"></a>
 #### 2.5.7.4 NetPrintJobGetInfo Command
@@ -1507,7 +1507,7 @@ The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTI
 <a id="Section_2.5.7.6"></a>
 #### 2.5.7.6 NetPrintJobContinue Command
 
-The [NetPrintJobContinue](#Section_2.5.7.6.1) command specifies that the server MUST continue the specified [**print job**](#gt_print-job).
+The [NetPrintJobContinue](#Section_2.5.7.6) command specifies that the server MUST continue the specified [**print job**](#gt_print-job).
 
 <a id="Section_2.5.7.6.1"></a>
 ##### 2.5.7.6.1 RAP NetPrintJobContinueRequest
@@ -1540,12 +1540,12 @@ packet-beta
 <a id="Section_2.5.7.6.2"></a>
 ##### 2.5.7.6.2 RAP NetPrintJobContinueResponse
 
-The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTION response to the [NetPrintJobContinue](#Section_2.5.7.6.1) command MUST be empty.<35>
+The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTION response to the [NetPrintJobContinue](#Section_2.5.7.6) command MUST be empty.<35>
 
 <a id="Section_2.5.7.7"></a>
 #### 2.5.7.7 NetPrintJobDelete Command
 
-The [NetPrintJobDelete](#Section_2.5.7.7.1) command specifies that the server is to delete the specified [**print job**](#gt_print-job).
+The [NetPrintJobDelete](#Section_2.5.7.7) command specifies that the server is to delete the specified [**print job**](#gt_print-job).
 
 <a id="Section_2.5.7.7.1"></a>
 ##### 2.5.7.7.1 RAP NetPrintJobDeleteRequest
@@ -1578,12 +1578,12 @@ packet-beta
 <a id="Section_2.5.7.7.2"></a>
 ##### 2.5.7.7.2 RAP NetPrintJobDeleteResponse
 
-The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTION response to the [NetPrintJobDelete](#Section_2.5.7.7.1) command MUST be empty.<37>
+The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTION response to the [NetPrintJobDelete](#Section_2.5.7.7) command MUST be empty.<37>
 
 <a id="Section_2.5.7.8"></a>
 #### 2.5.7.8 RAP Print Response Structures
 
-The data field (section [2.5.2](#Section_2.5.11)) in the response to a NetPrintQGetInfo and NetPrintQEnum commands MUST consist of the following structure.
+The data field (section [2.5.2](#Section_2.5.2)) in the response to a NetPrintQGetInfo and NetPrintQEnum commands MUST consist of the following structure.
 
 ```mermaid
 packet-beta
@@ -1595,7 +1595,7 @@ packet-beta
 <a id="Section_2.5.7.8.1"></a>
 ##### 2.5.7.8.1 PrintQueue0 Data Structure
 
-The data field (see section [2.5.2](#Section_2.5.11)) in the response to [NetPrintQGetInfo](#Section_3.2.5.5) and [NetPrintQEnum](#Section_3.1.4.4) commands MUST consist of the following structure.
+The data field (see section [2.5.2](#Section_2.5.2)) in the response to [NetPrintQGetInfo](#Section_2.5.7.2) and [NetPrintQEnum](#Section_2.5.7.1) commands MUST consist of the following structure.
 
 ```mermaid
 packet-beta
@@ -1690,7 +1690,7 @@ Before using this value, the Remote Administration Protocol client MUST subtract
 <a id="Section_2.5.7.8.3"></a>
 ##### 2.5.7.8.3 PrintQueue3 Data Structure
 
-The data field in the response to a [NetPrintQGetInfo](#Section_3.2.5.5) command MUST consist of the following structure.
+The data field in the response to a [NetPrintQGetInfo](#Section_2.5.7.2) command MUST consist of the following structure.
 
 ```mermaid
 packet-beta
@@ -1720,7 +1720,7 @@ packet-beta
 
 **PrintQueueNameLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string that is allocated in the response block (as specified in section [2.5.11](#Section_2.5.11)) and that contains the name of the [**print queue**](#gt_print-queue).
 
-The Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.11), from the **PrintQueueNameLow** value and then use that result as the offset within the response.
+The Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.2), from the **PrintQueueNameLow** value and then use that result as the offset within the response.
 
 This field is for informational purposes only; a client MUST NOT take any action other than to display or log it.
 
@@ -1800,7 +1800,7 @@ For more information on the PrintQueue3 structure, see [[CIFSPRINT]](https://go.
 <a id="Section_2.5.7.8.4"></a>
 ##### 2.5.7.8.4 PrintQueue5 Data Structure
 
-The data field (see section [2.5.2](#Section_2.5.11)) in the response to a [NetPrintQGetInfo Command](#Section_3.2.5.5) and [NetPrintQEnum Command](#Section_3.1.4.4) commands MUST consist of the following structure.
+The data field (see section [2.5.2](#Section_2.5.2)) in the response to a [NetPrintQGetInfo Command](#Section_2.5.7.2) and [NetPrintQEnum Command](#Section_2.5.7.1) commands MUST consist of the following structure.
 
 ```mermaid
 packet-beta
@@ -1831,7 +1831,7 @@ packet-beta
 <a id="Section_2.5.7.8.6"></a>
 ##### 2.5.7.8.6 PrintJobInfo1 Data Structure
 
-The PrintJobInfo1 packet is used by the [NetPrintJobGetInfo Command](#Section_3.1.4.7).
+The PrintJobInfo1 packet is used by the [NetPrintJobGetInfo Command](#Section_2.5.7.4).
 
 ```mermaid
 packet-beta
@@ -1862,7 +1862,7 @@ packet-beta
 
 **DataType (10 bytes):** A null-terminated ASCII string that contains the name of a data type. It MUST uniquely identify a format for print data that is supported by a print processor. This field MUST be padded with null characters to 10 bytes in length.
 
-**PrintParameterStringLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string that is allocated in the response block (as specified in section [2.5.11](#Section_2.5.11)) and that specifies the parameters for this print job. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.11), from the **PrintParametersStringLow** value and then use that result as the offset within the response.
+**PrintParameterStringLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string that is allocated in the response block (as specified in section [2.5.11](#Section_2.5.11)) and that specifies the parameters for this print job. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.2), from the **PrintParametersStringLow** value and then use that result as the offset within the response.
 
 **PrintParameterStringHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent and MUST be ignored on receipt.
 
@@ -1893,7 +1893,7 @@ packet-beta
 <a id="Section_2.5.7.8.7"></a>
 ##### 2.5.7.8.7 PrintJobInfo2 Data Structure
 
-The PrintJobInfo2 packet is used by the [NetPrintJobGetInfo Command](#Section_3.1.4.7).
+The PrintJobInfo2 packet is used by the [NetPrintJobGetInfo Command](#Section_2.5.7.4).
 
 ```mermaid
 packet-beta
@@ -1917,7 +1917,7 @@ packet-beta
 
 **UserNameLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string that is allocated in the response block (as specified in section [2.5.11](#Section_2.5.11)) and that specifies the user name that submitted this print job.
 
-Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.11), from the **UserNameLow** value and then use that result as the offset within the response.
+Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.2), from the **UserNameLow** value and then use that result as the offset within the response.
 
 **UserNameHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent, and MUST be ignored on receipt.
 
@@ -1988,7 +1988,7 @@ packet-beta
 
 **UserNameLow (2 bytes):** A 16-bit unsigned integer that represents the offset, in bytes, from the start of the response to a null-terminated ASCII string that is allocated in the response block (as specified in section [2.5.11](#Section_2.5.11)) and that specifies the user name that submitted this print job.
 
-Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.11), from the **UserNameLow** value, and then use that result as the offset within the response.
+Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field, as specified in section [2.5.2](#Section_2.5.2), from the **UserNameLow** value, and then use that result as the offset within the response.
 
 **UserNameHigh (2 bytes):** Unused. Can be set to any arbitrary value on send, and MUST be ignored on receipt.
 
@@ -2080,7 +2080,7 @@ Before using this value, the Remote Administration Protocol client MUST subtract
 <a id="Section_2.5.8.1"></a>
 #### 2.5.8.1 NetUserPasswordSet2 Command
 
-The [NetUserPasswordSet2](#Section_2.5.8.1.2) command specifies that the server is to change the password of the indicated user.
+The [NetUserPasswordSet2](#Section_2.5.8.1) command specifies that the server is to change the password of the indicated user.
 
 <a id="Section_2.5.8.1.1"></a>
 ##### 2.5.8.1.1 RAP NetUserPasswordSet2Request
@@ -2125,7 +2125,7 @@ packet-beta
 <a id="Section_2.5.8.1.2"></a>
 ##### 2.5.8.1.2 RAP NetUserPasswordSet2Response
 
-The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTION response to the [NetUserPasswordSet2](#Section_2.5.8.1.2) command MUST be empty. <42><43>
+The **RAPOutParams** field and the **RAPOutData** field of the SMB_COM_TRANSACTION response to the [NetUserPasswordSet2](#Section_2.5.8.1) command MUST be empty. <42><43>
 
 <a id="Section_2.5.8.2"></a>
 #### 2.5.8.2 NetUserGetInfo Commands
@@ -2178,7 +2178,7 @@ packet-beta
 
 **TotalBytesAvailable (2 bytes):** A 16-bit unsigned integer that represents the number of bytes required to hold the server information requested.
 
-If the **InfoLevel** specified in the [NetUserGetInfo](#Section_3.1.4.13) is 0, and the response is not an error, the **RAPOutData** field of the SMB_COM_TRANSACTION response MUST be filled with a [NetUserInfo0](#Section_2.5.8.3.1) structure.
+If the **InfoLevel** specified in the [NetUserGetInfo](#Section_2.5.8.2) is 0, and the response is not an error, the **RAPOutData** field of the SMB_COM_TRANSACTION response MUST be filled with a [NetUserInfo0](#Section_2.5.8.3.1) structure.
 
 If the **InfoLevel** specified in the NetUserGetInfo is 1, and the response is not an error, the **RAPOutData** field of the SMB_COM_TRANSACTION response MUST be filled with a [NetUserInfo1](#Section_2.5.8.3.2) structure.
 
@@ -2240,7 +2240,7 @@ packet-beta
 | USER_PRIV_USER 1 | User privilege |
 | USER_PRV_ADMIN 2 | Administrator privilege |
 
-**HomeDirLow (2 bytes):** A pointer to a null-terminated ASCII string that contains the path name of the user's home directory. Before using this value, the Remote Administration Protocol client MUST subtract the Converter field specified in section [2.5.2](#Section_2.5.11) from the HomeDirLow value, and then use that result as the offset within the response.
+**HomeDirLow (2 bytes):** A pointer to a null-terminated ASCII string that contains the path name of the user's home directory. Before using this value, the Remote Administration Protocol client MUST subtract the Converter field specified in section [2.5.2](#Section_2.5.2) from the HomeDirLow value, and then use that result as the offset within the response.
 
 **HomeDirHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent, and MUST be ignored on receipt.
 
@@ -2323,7 +2323,7 @@ packet-beta
 | USER_PRIV_USER 1 | User privilege. |
 | USER_PRV_ADMIN 2 | Administrator privilege. |
 
-**HomeDirLow (2 bytes):** A pointer to a null-terminated ASCII string that contains the path name of the user's home directory. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.11) from the **HomeDirLow** value, and then use that result as the offset within the response.
+**HomeDirLow (2 bytes):** A pointer to a null-terminated ASCII string that contains the path name of the user's home directory. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.2) from the **HomeDirLow** value, and then use that result as the offset within the response.
 
 **HomeDirHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent, and MUST be ignored on receipt.
 
@@ -2421,7 +2421,7 @@ packet-beta
 
 **Pad (1 byte):** A pad byte. Can be set to any arbitrary value when sent and MUST be ignored on receipt.
 
-**CommentLow (2 bytes):** A pointer to a null-terminated ASCII string that specifies the comment. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.11) from the **CommentLow** value, and then use that result as the offset within the response.
+**CommentLow (2 bytes):** A pointer to a null-terminated ASCII string that specifies the comment. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.2) from the **CommentLow** value, and then use that result as the offset within the response.
 
 **CommentHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent and MUST be ignored on receipt.
 
@@ -2475,7 +2475,7 @@ packet-beta
 
 **Pad (1 byte):** Aligns the next data structure element to a word boundary. SHOULD be set to zero when sent and MUST be ignored on receipt.
 
-**CommentLow (2 bytes):** MUST be a pointer to a null-terminated ASCII string that specifies the comment. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.11) from the **CommentLow** value, and then use that result as the offset within the response.
+**CommentLow (2 bytes):** MUST be a pointer to a null-terminated ASCII string that specifies the comment. Before using this value, the Remote Administration Protocol client MUST subtract the **Converter** field specified in section [2.5.2](#Section_2.5.2) from the **CommentLow** value, and then use that result as the offset within the response.
 
 **CommentHigh (2 bytes):** Unused. Can be set to any arbitrary value when sent and MUST be ignored on receipt.
 
@@ -2550,7 +2550,7 @@ Before using this value, the Remote Administration Protocol client MUST subtract
 <a id="Section_2.5.9.1"></a>
 #### 2.5.9.1 NetRemoteTOD Command
 
-The [NetRemoteTOD](#Section_3.2.5.11) command specifies that the server is to return its current time information.
+The [NetRemoteTOD](#Section_2.5.9.1) command specifies that the server is to return its current time information.
 
 <a id="Section_2.5.9.1.1"></a>
 ##### 2.5.9.1.1 RAP NetRemoteTODRequest
@@ -2591,7 +2591,7 @@ If the **Win32ErrorCode** specified in the response to the [NetRemoteTODRequest]
 <a id="Section_2.5.9.2.1"></a>
 ##### 2.5.9.2.1 RAP TimeOfDayInfo Data Structure
 
-The data section of the response to a [NetRemoteTOD](#Section_3.2.5.11) command MUST be as follows.
+The data section of the response to a [NetRemoteTOD](#Section_2.5.9.1) command MUST be as follows.
 
 ```mermaid
 packet-beta
@@ -2723,12 +2723,12 @@ packet-beta
 
 **InfoLevel (2 bytes):** A 16-bit unsigned integer that specifies the information level for the NetWkstaUserLogonRequest.
 
-**WkstaUserLogonBuffer (54 bytes):** This buffer contains a [NetWkstaUserLogonRequestData](#Section_2.5.10.2.1) structure.
+**WkstaUserLogonBuffer (54 bytes):** This buffer contains a [NetWkstaUserLogonRequestData](#Section_2.5.10.4.2) structure.
 
 <a id="Section_2.5.10.2.2"></a>
 ##### 2.5.10.2.2 RAP NetWkstaUserLogonResponse
 
-The **RAPOutParams** structure for the [NetWkstaUserLogon Command](#Section_3.2.5.17) is as follows.<54><55>
+The **RAPOutParams** structure for the [NetWkstaUserLogon Command](#Section_2.5.10.2) is as follows.<54><55>
 
 ```mermaid
 packet-beta
@@ -2781,7 +2781,7 @@ packet-beta
 <a id="Section_2.5.10.3.2"></a>
 ##### 2.5.10.3.2 RAP NetWkstaUserLogoffResponse
 
-The **RAPOutParams** structure for the [NetWkstaUserLogoff Command](#Section_3.2.5.18) is as follows.<57><58>
+The **RAPOutParams** structure for the [NetWkstaUserLogoff Command](#Section_2.5.10.3) is as follows.<57><58>
 
 ```mermaid
 packet-beta
@@ -2790,7 +2790,7 @@ packet-beta
 
 **TotalBytesAvailable (2 bytes):** A 16-bit unsigned integer that represents the number of bytes required to hold the server information requested.
 
-If the **InfoLevel** field value specified in the [NetWkstaUserLogoff](#Section_2.5.10.4.5) message is 1, and the response is not an error, the **RAPOutData** field of the SMB_COM_TRANSACTION response MUST be filled with a [NetWkstaUserLogoffResponseData](#Section_2.5.10.4.5) structure.
+If the **InfoLevel** field value specified in the [NetWkstaUserLogoff](#Section_2.5.10.3) message is 1, and the response is not an error, the **RAPOutData** field of the SMB_COM_TRANSACTION response MUST be filled with a [NetWkstaUserLogoffResponseData](#Section_2.5.10.4.5) structure.
 
 <a id="Section_2.5.10.4"></a>
 #### 2.5.10.4 RAP Workstation Structures
@@ -2995,7 +2995,7 @@ When marshaling more than one data structure, the Remote Administration Protocol
 
 When marshaling a variable-length string that is pointed to by an offset in the fixed-size section, if the string data does not fit into the response buffer, the corresponding field in the fixed-size section MUST be set to 0. All strings are encoded in ASCII data and are terminated with a single null character. If the source string is null, then it MUST be marshaled as an empty string consisting of a single null character.
 
-For certain Remote Administration Protocol commands, such as [NetPrintQEnum](#Section_3.1.4.4) and [NetPrintQGetInfo](#Section_3.2.5.5), the fixed-size portion of the response packet also contains auxiliary data structures. For more information on these commands, see [RYAN] page 410. If the Remote Administration Protocol server cannot fit all of the auxiliary structures into the response buffer, it MUST NOT copy any of the data in the fixed-size structure OR the auxiliary data structures to the response buffer.
+For certain Remote Administration Protocol commands, such as [NetPrintQEnum](#Section_2.5.7.1) and [NetPrintQGetInfo](#Section_2.5.7.2), the fixed-size portion of the response packet also contains auxiliary data structures. For more information on these commands, see [RYAN] page 410. If the Remote Administration Protocol server cannot fit all of the auxiliary structures into the response buffer, it MUST NOT copy any of the data in the fixed-size structure OR the auxiliary data structures to the response buffer.
 
 As an example of this marshaling format, consider the case of a server marshaling a fixed-size data structure that has one or more auxiliary data structures associated with it. In this example, the fixed-size data structure consists of two 16-bit unsigned integers, an unsigned AUXCOUNT value, and an additional 16-bit unsigned integer, while the auxiliary data structure consists of two 32-bit unsigned integers. If the server marshals two instances of the data structure (called Data 1 and Data 2, for example), both of which have three auxiliary data structures associated with it, the server MUST marshal the following values into the response buffer.
 
@@ -3068,7 +3068,7 @@ If the client receives ERROR_MORE_DATA or NERR_BufTooSmall (0x084B) for the foll
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 NetShareEnum Command
 
-The client MUST create a [NetShareEnumRequest](#Section_4.1).
+The client MUST create a [NetShareEnumRequest](#Section_2.5.6.1.1).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 NetShareGetInfo Command
@@ -3148,12 +3148,12 @@ The client MUST create a [NetWkstaGetInfoRequest](#Section_2.5.10.1.1).
 <a id="Section_3.1.4.17"></a>
 #### 3.1.4.17 NetWkstaUserLogon Command
 
-The client MUST create a [NetWkstaUserLogon](#Section_2.5.10.2.1).
+The client MUST create a [NetWkstaUserLogon](#Section_2.5.10.2).
 
 <a id="Section_3.1.4.18"></a>
 #### 3.1.4.18 NetWkstaUserLogoff Command
 
-The client MUST create a [NetWkstaUserLogoff](#Section_2.5.10.4.5).
+The client MUST create a [NetWkstaUserLogoff](#Section_2.5.10.3).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -3212,11 +3212,11 @@ The server receives the Remote Administration Protocol request from the underlyi
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 NetShareEnum Command
 
-The Remote Administration Protocol server MUST process [NetShareEnumRequest](#Section_4.1) as follows:
+The Remote Administration Protocol server MUST process [NetShareEnumRequest](#Section_2.5.6.1.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "WrLeh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<67>
 - If the information level is any value other than 0, 1, or 2, the server implementing NetShareEnum MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
-- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetShareEnumResponse](#Section_4.1) message. The Remote Administration Protocol server MUST enumerate the shares on the local machine as specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.4.8, passing the following parameters:
+- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetShareEnumResponse](#Section_2.5.6.1.2) message. The Remote Administration Protocol server MUST enumerate the shares on the local machine as specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.4.8, passing the following parameters:
 | Parameter | Value |
 | --- | --- |
 | ServerName | The local machine name |
@@ -3264,7 +3264,7 @@ The server MUST set the **EntriesReturned** field in NetShareEnumResponse to the
 The Remote Administration Protocol server MUST process [NetShareGetInfoRequest](#Section_2.5.6.2.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "zWrLh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<69>
-- If the information level is any value other than 0, 1, and 2, the server implementing [NetShareGetInfo](#Section_2.5.6.2.1) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
+- If the information level is any value other than 0, 1, and 2, the server implementing [NetShareGetInfo](#Section_2.5.6.2) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
 - If the **NetName** is equal to NULL, the server implementing NetShareGetInfo MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_PARAMETER (0x0057).
 - If the request in the **ReceiveBuffersSize** field is less than the response in the **TotalBytesAvailable** field, the Remote Administration Protocol server MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_MORE_DATA (0x00EA).
 - The Remote Administration Protocol server MUST query information for the share on the local machine as specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) NetrShareGetInfo (section 3.1.4.10), passing in the following parameters:
@@ -3274,7 +3274,7 @@ The Remote Administration Protocol server MUST process [NetShareGetInfoRequest](
 | NetName | NetShareGetInfoRequest.NetName |
 | Level | NetShareGetInfoRequest.InfoLevel |
 
-If the call succeeds, the server MUST use the resulting SHARE_INFO structure to generate the response as specified in [3.2.5.1](#Section_4.1). The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetShareGetInfoResponse](#Section_2.5.6.2.2) message.
+If the call succeeds, the server MUST use the resulting SHARE_INFO structure to generate the response as specified in [3.2.5.1](#Section_3.2.5.1). The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetShareGetInfoResponse](#Section_2.5.6.2.2) message.
 
 - If any other errors occur during the response processing, the Remote Administration Protocol server MUST fill the **Win32ErrorCode** value in the Remote Administration Protocol response message with the **Win32ErrorCode** corresponding to the error, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Otherwise, the Remote Administration Protocol server MUST set **Win32ErrorCode** to ERROR_SUCCESS (0X0000).
 <a id="Section_3.2.5.3"></a>
@@ -3311,7 +3311,7 @@ The Remote Administration Protocol server MUST create a Remote Administration Pr
 The Remote Administration Protocol server MUST process the [NetPrintQEnumRequest](#Section_2.5.7.1.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "WrLeh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<71>
-- If the information level is any value other than 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, or 0x0005, the server implementing [NetPrintQEnum](#Section_3.1.4.4) MUST set the Win32ErrorCode value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
+- If the information level is any value other than 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, or 0x0005, the server implementing [NetPrintQEnum](#Section_2.5.7.1) MUST set the Win32ErrorCode value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
 - The server MUST call RpcOpenPrinter as specified in [MS-RPRN](../MS-RPRN/MS-RPRN.md) 3.1.4.2.2, with the following parameters:
 | Parameter | Value |
 | --- | --- |
@@ -3452,7 +3452,7 @@ The Remote Administration Protocol server MUST process the [NetPrintQGetInfoRequ
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "zWrLh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<72>
 - The Remote Administration Protocol server MUST respond to NetPrintQGetInfoRequest with a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of [NetPrintQGetInfoResponse](#Section_2.5.7.2.2).
-- The server MUST enumerate available printers as described in [3.2.5.4](#Section_3.1.4.4), providing **NetPrintQGetInfoRequest.InfoLevel** as the information level. The server MUST search for a returned PrintInfo structure where PrintQName is equal to **NetPrintQGetInfoRequest.PrintQueueName**. If no matching structure is found, the server MUST return the Win32ErrorCode NERR_QNotFound. If a matching structure is found, the server MUST construct a NetPrintQGetInfoResponse using that entry.
+- The server MUST enumerate available printers as described in [3.2.5.4](#Section_3.2.5.4), providing **NetPrintQGetInfoRequest.InfoLevel** as the information level. The server MUST search for a returned PrintInfo structure where PrintQName is equal to **NetPrintQGetInfoRequest.PrintQueueName**. If no matching structure is found, the server MUST return the Win32ErrorCode NERR_QNotFound. If a matching structure is found, the server MUST construct a NetPrintQGetInfoResponse using that entry.
 - If any other errors occur during the response processing, the Remote Administration Protocol server MUST fill in the **Win32ErrorCode** value in the Remote Administration Protocol response message with the Win32 error code corresponding to the error.
 - If the input information level is 0x0000, the **RAPOutData** data field of the Remote Administration Protocol response MUST be filled with a [PrintQueue0](#Section_2.5.7.8.1) structure that represents the named [**print queue**](#gt_print-queue), by using the attributes of the print queue.
 If the input information level is either 0x0001 or 0x0002, the **RAPOutData** data field of the Remote Administration Protocol response MUST be filled with a [PrintQueue1](#Section_2.5.7.8.2) structure that represents the named print queue, by using the attributes of the print queue. For information level 2, following the PrintQueue1 structure, the server MUST walk **PrintQueue.PrintJobList** and fill in as many [PrintJobInfo1](#Section_2.5.7.8.6) structures as are represented in the **PrintJobCount** field in the corresponding PrintQueue1 structure.
@@ -3460,7 +3460,7 @@ If the input information level is either 0x0001 or 0x0002, the **RAPOutData** da
 If the input information level is either 0x0003 or 0x0004, the **RAPOutData** field of the Remote Administration Protocol response MUST be filled with a [PrintQueue3](#Section_2.5.7.8.3) structure, using the attributes of the print queue. For information level 4, following the PrintQueue3 structure, the server MUST walk **PrintQueue.PrintJobList** and fill in as many [PrintJobInfo2](#Section_2.5.7.8.7) structures as are represented in the **PrintJobCount** field in the corresponding PrintQueue3 structure.
 
 - If the input information level is 0x0005, the **RAPOutData** field of the Remote Administration Protocol response MUST be filled with a [PrintQueue5](#Section_2.5.7.8.4) structure, using the attributes of the print queue.
-- If the information level is any value other than 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, or 0x0005, the server implementing [NetPrintQGetInfo](#Section_3.2.5.5) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C). See sections [2.5.5.2](#Section_4.2) and [2.5.5.3](#Section_3.2.5.15).
+- If the information level is any value other than 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, or 0x0005, the server implementing [NetPrintQGetInfo](#Section_2.5.7.2) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C). See sections [2.5.5.2](#Section_2.5.5.2) and [2.5.5.3](#Section_2.5.5.3).
 If any other errors occur during the response processing, the Remote Administration Protocol server MUST fill the Win32ErrorCode value in the Remote Administration Protocol response message with the Win32 error code corresponding to the error, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Otherwise, the Remote Administration Protocol server MUST set **Win32ErrorCode** to ERROR_SUCCESS (0X0000).
 
 - If the request **ReceiveBuffersSize** field is less than the response **TotalBytesAvailable** field, the Remote Administration Protocol server MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to NERR_BufTooSmall (0x084B).
@@ -3720,13 +3720,13 @@ If the **InfoLevel** of the NetServerEnum2Request structure is 1, the Remote Adm
 The Remote Administration Protocol server MUST process [NetUserGetInfoRequest](#Section_2.5.8.2.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "zWrLh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<84>
-- If the information level is 0, then the server implementing [NetUserGetInfo](#Section_3.1.4.13) MUST fill the **RAPOutData** field of SMB_TRANSACTION response with [NetUserInfo0](#Section_2.5.8.3.1) structure.
+- If the information level is 0, then the server implementing [NetUserGetInfo](#Section_2.5.8.2) MUST fill the **RAPOutData** field of SMB_TRANSACTION response with [NetUserInfo0](#Section_2.5.8.3.1) structure.
 - If the information level is 1, then the server implementing NetUserGetInfo MUST fill the **RAPOutData** field of SMB_TRANSACTION response with the [NetUserInfo1](#Section_2.5.8.3.2) structure.
 - If the information level is 2, then the server implementing NetUserGetInfo MUST fill the **RAPOutData** field of SMB_TRANSACTION response with the [NetUserInfo2](#Section_2.5.8.3.3) structure.
 - If the information level is 10, then the server implementing NetUserGetInfo MUST fill the **RAPOutData** field of SMB_TRANSACTION response with the [NetUserInfo10](#Section_2.5.8.3.4) structure.
 - If the information level is 11, then the server implementing NetUserGetInfo MUST fill the **RAPOutData** field of SMB_TRANSACTION response with the [NetUserInfo11](#Section_2.5.8.3.5) structure.
 - If the information level is any value other than 0, 1, 2, 10 and 11, the server implementing NetUserGetInfo MUST set the Win32ErrorCode value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
-- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetUserGetInfoResponse](#Section_2.5.8.2.2) message. The Remote Administration Protocol server MUST return information about user configuration (as specified in section 2.5.8.3.5). This information SHOULD be obtained using the Security Account Manager (SAM) Remote Protocol [MS-SAMR](#Section_5) as follows:
+- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetUserGetInfoResponse](#Section_2.5.8.2.2) message. The Remote Administration Protocol server MUST return information about user configuration (as specified in section 2.5.8.3.5). This information SHOULD be obtained using the Security Account Manager (SAM) Remote Protocol [MS-SAMR](../MS-SAMR/MS-SAMR.md) as follows:
 - The server MUST issue a SamrConnect request as specified in [MS-SAMR] section 3.1.5.1.4, with the following parameters:
 | Parameter | Value |
 | --- | --- |
@@ -3801,7 +3801,7 @@ The Remote Administration Protocol server MUST process the [NetUserPasswordSet2R
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "zb16b16WW"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<85>
 - If the input *EncryptedPassword* parameter is not 0x0000, the Remote Administration Protocol server SHOULD set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_PARAMETER (0x0057).<86>
 - The server MUST verify that the old password matches User.Password. If it does not, the server MUST fail the request by creating a Remote Administration Protocol response message with the **Win32ErrorCode** set to ERROR_ACCESS_DENIED.
-- The server MUST attempt to change the password for the specified user. This operation SHOULD be executed using the Security Account Manager (SAM) Remote Protocol [MS-SAMR](#Section_5) as follows:
+- The server MUST attempt to change the password for the specified user. This operation SHOULD be executed using the Security Account Manager (SAM) Remote Protocol [MS-SAMR](../MS-SAMR/MS-SAMR.md) as follows:
 - The server MUST issue a **SamrConnect** request as specified in [MS-SAMR] section 3.1.5.1.4, with the following parameters:
 | Parameter | Value |
 | --- | --- |
@@ -3857,7 +3857,7 @@ The Remote Administration Protocol server MUST process the [NetUserPasswordSet2R
 The Remote Administration Protocol server MUST process the [NetServerEnum3Request](#Section_2.5.5.3.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "WrLehDzz"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<87>
-- If the information level is any value other than 0x0000 or 0x0001, the server implementing [NetServerEnum3](#Section_3.2.5.15) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
+- If the information level is any value other than 0x0000 or 0x0001, the server implementing [NetServerEnum3](#Section_2.5.5.3) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
 - If the **ServerType** field in the incoming NetServerEnum3Request contains the SV_TYPE_LOCAL_LIST_ONLY bit, the server MUST return only those servers (or domains) that exist on the same subnet as the server, as specified in [MS-BRWS](../MS-BRWS/MS-BRWS.md) section 3.3.4.2. If the server cannot determine the list of servers on the current subnet, or if its list of servers (or domains) on the current subnet is empty, it MUST return an empty set of servers (or domains) and set the Win32ErrorCode value in the Remote Administration Protocol Response Message to ERROR_NO_BROWSER_SERVERS_FOUND (0x17E6).
 If the **ServerType** field in the incoming NetServerEnum3Request contains the SV_TYPE_DOMAIN_ENUM bit, the server MUST return its list of domains, not its list of servers.
 
@@ -3877,7 +3877,7 @@ If the **InfoLevel** of the NetServerEnum3Request structure is 0x0001, the Remot
 The Remote Administration Protocol server MUST process [NetWkstaGetInfoRequest](#Section_2.5.10.1.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "WrLh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<89>
-- If the information level is any value other than 10, the server implementing [NetWkstaGetInfo](#Section_2.5.10.1.2) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
+- If the information level is any value other than 10, the server implementing [NetWkstaGetInfo](#Section_2.5.10.1) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
 - The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetWkstaGetInfoResponse](#Section_2.5.10.1.2) message. The Remote Administration Protocol server MUST return information about the configuration of the workstation (as specified in section [2.5.10.4.1](#Section_2.5.10.4.1)).
 - If the request **ReceiveBuffersSize** field is less than the response **TotalBytesAvailable** field, the Remote Administration Protocol server MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_MORE_DATA (0x00EA).
 - If any other errors occur during the response processing, the Remote Administration Protocol server MUST fill the **Win32ErrorCode** value in the Remote Administration Protocol response message with the **Win32ErrorCode** corresponding to the error, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Otherwise, the Remote Administration Protocol server MUST set **Win32ErrorCode** to ERROR_SUCCESS (0X0000).
@@ -3887,9 +3887,9 @@ The Remote Administration Protocol server MUST process [NetWkstaGetInfoRequest](
 The Remote Administration Protocol server MUST process a [NetWkstaUserLogonRequest](#Section_2.5.10.2.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "zzWb54WrLh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<90>
-- If the information level is any value other than 1, the server implementing [NetWkstaUserLogon](#Section_2.5.10.2.1) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
+- If the information level is any value other than 1, the server implementing [NetWkstaUserLogon](#Section_2.5.10.2) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
 - If the workstation name in the logon request does not match the name of the workstation from which the request came, the server MUST fail the request by creating a Remote Administration Protocol response message with the **Win32ErrorCode** set to ERROR_ACCESS_DENIED. If it does match, the server MUST insert the username and workstation name into the LogonList by using the workstation and username fields in NetWkstaUserLogonRequest and logon.
-- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetWkstaUserLogonResponse](#Section_2.5.10.4.3) message. The Remote Administration Protocol server MUST return logon information about the user (as specified in section [2.5.10.4.3](#Section_2.5.10.4.3)).
+- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetWkstaUserLogonResponse](#Section_2.5.10.2.2) message. The Remote Administration Protocol server MUST return logon information about the user (as specified in section [2.5.10.4.3](#Section_2.5.10.4.3)).
 - If any other errors occur during the response processing, the Remote Administration Protocol server MUST fill the **Win32ErrorCode** value in the Remote Administration Protocol response message with the **Win32ErrorCode** corresponding to the error, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Otherwise, the Remote Administration Protocol server MUST set **Win32ErrorCode** to ERROR_SUCCESS (0X0000).
 <a id="Section_3.2.5.18"></a>
 #### 3.2.5.18 NetWkstaUserLogoff Command
@@ -3897,9 +3897,9 @@ The Remote Administration Protocol server MUST process a [NetWkstaUserLogonReque
 The Remote Administration Protocol server MUST process [NetWkstaUserLogoffRequest](#Section_2.5.10.3.1) as follows:
 
 - The server MUST validate that the incoming **ParamDesc** field of the Remote Administration Protocol request contains the ASCII string "zzWb38WrLh"; if it does not, the server SHOULD format a Remote Administration Protocol response with the **Win32ErrorCode** set to ERROR_INVALID_PARAMETER (0x0057), and then return the response to the client.<91>
-- If the information level is any value other than 1, the server implementing [NetWkstaUserLogoff](#Section_2.5.10.4.5) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
+- If the information level is any value other than 1, the server implementing [NetWkstaUserLogoff](#Section_2.5.10.3) MUST set the **Win32ErrorCode** value in the Remote Administration Protocol response message to ERROR_INVALID_LEVEL (0x007C).
 - If the workstation name in the logoff request does not match the name of the workstation from which the request came, the server MUST fail the request by creating a Remote Administration Protocol response message with the **Win32ErrorCode** set to ERROR_ACCESS_DENIED. If it does match, the server MUST remove the username and workstation name from the LogonList by using the workstation and username fields in NetWkstaUserLogoffRequest and the log off.
-- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetWkstaUserLogoffResponse](#Section_2.5.10.4.5) message. The Remote Administration Protocol server MUST return logoff information about the user, including the duration and number of logons (as specified in section [2.5.10.4.5](#Section_2.5.10.4.5)).
+- The Remote Administration Protocol server MUST create a Remote Administration Protocol response message with the **RAPOutParams** set to the contents of a [NetWkstaUserLogoffResponse](#Section_2.5.10.3.2) message. The Remote Administration Protocol server MUST return logoff information about the user, including the duration and number of logons (as specified in section [2.5.10.4.5](#Section_2.5.10.4.5)).
 - If any other errors occur during the response processing, the Remote Administration Protocol server MUST fill the **Win32ErrorCode** value in the Remote Administration Protocol response message with the **Win32ErrorCode** corresponding to the error, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). Otherwise, the Remote Administration Protocol server MUST set **Win32ErrorCode** to ERROR_SUCCESS (0X0000).
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -4530,7 +4530,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.6: This protocol is supported on the Windows operating system, including Windows 2000 Server operating system and later and Windows XP operating system and later for purposes of compatibility with pre-Windows NT clients. With the exception of the [NetServerEnum2](#Section_4.2) command and the [NetServerEnum3](#Section_3.2.5.15) command, the only client that uses this protocol is Windows 98 operating system. The Remote Administration Protocol is obsolete and is used primarily for communications with Windows 98 clients. The Windows 98 operating system uses the Remote Administration Protocol for the following operations:
+<1> Section 1.6: This protocol is supported on the Windows operating system, including Windows 2000 Server operating system and later and Windows XP operating system and later for purposes of compatibility with pre-Windows NT clients. With the exception of the [NetServerEnum2](#Section_4.2) command and the [NetServerEnum3](#Section_2.5.5.3) command, the only client that uses this protocol is Windows 98 operating system. The Remote Administration Protocol is obsolete and is used primarily for communications with Windows 98 clients. The Windows 98 operating system uses the Remote Administration Protocol for the following operations:
 
 - File Share enumeration (NET VIEW \\SERVER)
 - Printer management
@@ -4542,7 +4542,7 @@ In addition, the CIFS Browser Protocol uses the Remote Administration Protocol t
 
 <3> Section 1.8: Windows uses only the values specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2.
 
-<4> Section 2.5.1: The Windows SMB server validates that the **ParamDesc** matches what is specified by the **RAPOpcode**; if they do not match, the server returns ERROR_INVALID_PARAMETER (0x57), as specified in section [2.5.2](#Section_2.5.11).
+<4> Section 2.5.1: The Windows SMB server validates that the **ParamDesc** matches what is specified by the **RAPOpcode**; if they do not match, the server returns ERROR_INVALID_PARAMETER (0x57), as specified in section [2.5.2](#Section_2.5.2).
 
 <5> Section 2.5.1: The current Windows (versions after Windows 2000) implementation of the Remote Administration Protocol ignores the **DataDesc** field.
 
@@ -4738,7 +4738,7 @@ In addition, the CIFS Browser Protocol uses the Remote Administration Protocol t
 
 <85> Section 3.2.5.14: Windows-based servers will fail the underlying **SMB_COM_TRANSACT** request with STATUS_INVALID_PARAMETER, as specified in [MS-ERREF] section 2.3.1, instead of sending back an error in the RAP response.
 
-<86> Section 3.2.5.14: Windows-based servers accept values other than 0x0000 and perform the processing specified in section 3.1.5.10.1, **SamrChangePasswordUser**, [MS-SAMR](#Section_5).
+<86> Section 3.2.5.14: Windows-based servers accept values other than 0x0000 and perform the processing specified in section 3.1.5.10.1, **SamrChangePasswordUser**, [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 
 <87> Section 3.2.5.15: Windows-based servers will fail the underlying **SMB_COM_TRANSACT** request with STATUS_INVALID_PARAMETER, as specified in [MS-ERREF] section 2.3.1, instead of sending back an error in the RAP response.
 

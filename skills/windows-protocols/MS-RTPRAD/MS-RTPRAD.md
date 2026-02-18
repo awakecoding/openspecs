@@ -83,7 +83,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-The Real-Time Transport Protocol (RTP/RTCP): Redundant Audio Data Extensions (RTPRAD) Protocol is a method for encoding redundant audio data for use with the Real-Time Transport Protocol (RTP) Extensions Protocol as specified in [MS-RTPME](#Section_2.1). RTPRAD is an extension of RTP Payload for Redundant Audio Data as specified in [[RFC2198]](https://go.microsoft.com/fwlink/?LinkId=116461). [RFC2198] specifies a payload format for use with the Real-Time Transport Protocol (RTP) as specified in [[RFC3550]](https://go.microsoft.com/fwlink/?LinkId=90433).
+The Real-Time Transport Protocol (RTP/RTCP): Redundant Audio Data Extensions (RTPRAD) Protocol is a method for encoding redundant audio data for use with the Real-Time Transport Protocol (RTP) Extensions Protocol as specified in [MS-RTPME](../MS-RTPME/MS-RTPME.md). RTPRAD is an extension of RTP Payload for Redundant Audio Data as specified in [[RFC2198]](https://go.microsoft.com/fwlink/?LinkId=116461). [RFC2198] specifies a payload format for use with the Real-Time Transport Protocol (RTP) as specified in [[RFC3550]](https://go.microsoft.com/fwlink/?LinkId=90433).
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -119,7 +119,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-RTPME] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions](#Section_2.1)".
+[MS-RTPME] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions](../MS-RTPME/MS-RTPME.md)".
 
 [MS-SDP] Microsoft Corporation, "[Session Description Protocol (SDP) Extensions](../MS-SDP/MS-SDP.md)".
 
@@ -142,7 +142,7 @@ RTPRAD extends the RTP Payload for Redundant Audio Data as specified in [[RFC219
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-RTPRAD relies on the Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions [MS-RTPME](#Section_2.1) as its transport.
+RTPRAD relies on the Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions [MS-RTPME](../MS-RTPME/MS-RTPME.md) as its transport.
 
 This specification only addresses the redundancy (and thereby loss and error tolerance) of audio data streams.
 
@@ -163,7 +163,7 @@ This protocol does not cover all audio data redundancy. It is limited to in-band
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-- Supported Transports: The RTP/RTCP: Redundant Audio Data Extensions are implemented on top of [MS-RTPME](#Section_2.1) as the transport mechanism.
+- Supported Transports: The RTP/RTCP: Redundant Audio Data Extensions are implemented on top of [MS-RTPME](../MS-RTPME/MS-RTPME.md) as the transport mechanism.
 - Protocol Versions: The RTP/RTCP: Redundant Audio Data Extensions, as a payload format of [**RTP**](#gt_real-time-transport-protocol-rtp), do not provide for versioning information within the scope of the protocol itself. However, as a part of the RTP payload, any versioning information on the RTP level applies.
 - Security and Authentication Methods: This specification does not describe any security or authentication methods. Security and authentication are dependent on the security method, authentication method, or both as used by [MS-RTPME]
 - Localization: None.
@@ -183,7 +183,7 @@ None.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-Because RTPRAD uses [**RTP**](#gt_real-time-transport-protocol-rtp) as its transport [MS-RTPME](#Section_2.1), a successful RTP session must be established with valid redundancy payload information negotiated.
+Because RTPRAD uses [**RTP**](#gt_real-time-transport-protocol-rtp) as its transport [MS-RTPME](../MS-RTPME/MS-RTPME.md), a successful RTP session must be established with valid redundancy payload information negotiated.
 
 This MUST be done with the [**Session Description Protocol**](#gt_session-description-protocol-sdp) as specified in [MS-SDP](../MS-SDP/MS-SDP.md).
 

@@ -196,7 +196,7 @@ Windows Deployment Services (WDS) Control Protocol is a generic client/server pr
 A typical service invocation involves the following:
 
 - The client has already obtained the name of the [**WDS Server**](#gt_wds-server), [**Endpoint GUID**](#gt_endpoint-guid) for Service Provider and [**OpCode**](#gt_opcode) for the operation being invoked.
-- The client constructs a request by packaging required variables (as specified in section [2.2.1](#Section_1.3)), Endpoint GUID and OpCode.
+- The client constructs a request by packaging required variables (as specified in section [2.2.1](#Section_2.2.1)), Endpoint GUID and OpCode.
 - The WDS Control Protocol sends the request to the server by using [**RPC**](#gt_remote-procedure-call-rpc) interface (as specified in section [3](#Section_3)).
 - The WDS Server dispatches the request to the appropriate Service Provider based on Endpoint GUID.
 - Based on the Endpoint GUID and OpCode in the request, Service Provider will:
@@ -407,9 +407,9 @@ packet-beta
 
 **Padding1 (2 bytes):** Padding MAY be set to zero and MUST be ignored by receiver.
 
-**Variable-Type (4 bytes):** MUST be set to the data type of the variable as specified in section [2.2.1.3.2](#Section_2.2.1.3.2.2).
+**Variable-Type (4 bytes):** MUST be set to the data type of the variable as specified in section [2.2.1.3.2](#Section_2.2.1.3.2).
 
-**Value-Length (4 bytes):** This field MUST be set as specified in section [2.2.1.3.3](#Section_2.2.1.3.3.2).
+**Value-Length (4 bytes):** This field MUST be set as specified in section [2.2.1.3.3](#Section_2.2.1.3.3).
 
 **Array-Size (4 bytes):** This field MUST be set as specified in section 2.2.1.3.3.
 
@@ -572,7 +572,7 @@ byte** pbReplyPacket
 
 **uRequestPacketSize:** The client MUST pass the total size of request packet in bytes.
 
-**bRequestPacket:** A pointer to the request packet. The packet MUST be constructed as specified in section [2.2.1](#Section_1.3).
+**bRequestPacket:** A pointer to the request packet. The packet MUST be constructed as specified in section [2.2.1](#Section_2.2.1).
 
 **puReplyPacketSize:** The [**WDS Server**](#gt_wds-server) MUST set this to the total size of the reply packet in bytes.
 
@@ -582,7 +582,7 @@ byte** pbReplyPacket
 
 When processing this call, the WDS Server MUST do the following:
 
-- If the Global Server State is not Running (section [3.1](#Section_1.3)), the server MUST return a failure.
+- If the Global Server State is not Running (section [3.1](#Section_3.1)), the server MUST return a failure.
 - Server MUST validate the Endpoint Header (section [2.2.1.1](#Section_2.2.1.1)) and extract the [**Endpoint GUID**](#gt_endpoint-guid), and if invalid, the server MUST return a failure.
 - Server MUST search through the list of registered Endpoint GUIDs to match the Endpoint GUID specified in the Endpoint Header. If no match is found, the server MUST return a failure.
 - Server MUST query the [**authentication level**](#gt_authentication-level) of the [**RPC**](#gt_remote-procedure-call-rpc) call and validate as follows:
@@ -652,7 +652,7 @@ The client MAY also specify a timeout for the [**RPC**](#gt_remote-procedure-cal
 
 When processing the request, the client MUST follow these steps:
 
-- Construct the request packet as specified in section [2.2.1](#Section_1.3).
+- Construct the request packet as specified in section [2.2.1](#Section_2.2.1).
 - Set the [**authentication level**](#gt_authentication-level) for the RPC call (either authenticated or unauthenticated).
 - Set the timeout for RPC call if one is specified by client.
 - Send request to server as specified in section [3.1.4.1](#Section_3.1.4.1).

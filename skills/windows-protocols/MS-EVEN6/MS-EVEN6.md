@@ -311,7 +311,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_1.8.4)".
+[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-EVEN] Microsoft Corporation, "[EventLog Remoting Protocol](#Section_1.3.2)".
 
@@ -319,7 +319,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
@@ -437,7 +437,7 @@ The protocol provides the methods for reading [**publisher**](#gt_publisher) and
 
 A [**query**](#gt_query) can be done in which a filter is applied. The [**result set**](#gt_result-set) is the set of records that satisfy the filter. The [**cursor**](#gt_cursor) is the location in the result set that is the last record retrieved by the caller. A filter is composed by using selectors and suppressors. A selector specifies records to include, while a suppressor specifies records to exclude. Suppressors override selectors.
 
-For more information and an overview of methods used, see section [3.1.4](#Section_2.1.1).
+For more information and an overview of methods used, see section [3.1.4](#Section_3.1.4).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -448,7 +448,7 @@ The EventLog Remoting Protocol Version 6.0 is a replacement for the EventLog Rem
 
 The EventLog Remoting Protocol Version 6.0 allows access to all the [**event logs**](#gt_event-log) accessible by the EventLog Remoting Protocol, plus some additional event logs not accessible via the EventLog Remoting Protocol.
 
-The server-side dependency on the Local Security Authority (Domain Policy) Remote Protocol [MS-LSAD](#Section_5) is a shared-state dependency resulting from EventLog Remoting Protocol Version 6.0 depending on the Access Check algorithm pseudocode (as specified in Windows Data Types [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2), which in turn depends on state in the Local Security Authority (Domain Policy) Remote Protocol.
+The server-side dependency on the Local Security Authority (Domain Policy) Remote Protocol [MS-LSAD](../MS-LSAD/MS-LSAD.md) is a shared-state dependency resulting from EventLog Remoting Protocol Version 6.0 depending on the Access Check algorithm pseudocode (as specified in Windows Data Types [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2), which in turn depends on state in the Local Security Authority (Domain Policy) Remote Protocol.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -462,7 +462,7 @@ The EventLog Remoting Protocol Version 6.0 is well-suited for reading [**event l
 
 An eventlog user can retrieve events from an eventlog server, but an eventlog server cannot retrieve events from a remote [**publisher's**](#gt_publisher) eventlog server.
 
-The EventLog Remoting Protocol Version 6.0 is typically preferred over the original EventLog Remoting Protocol whenever both parties support it because it offers numerous improvements, such as subscriptions and improved configurability, as specified in section [3.1.4](#Section_2.1.1).
+The EventLog Remoting Protocol Version 6.0 is typically preferred over the original EventLog Remoting Protocol whenever both parties support it because it offers numerous improvements, such as subscriptions and improved configurability, as specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -497,7 +497,7 @@ Each publisher uses event descriptors to identify the different types of events 
 <a id="Section_1.8.4"></a>
 ### 1.8.4 Error Codes
 
-The EventLog Remoting Protocol Version 6.0 uses Win32 error codes, specifically, the subset designated as "NTSTATUS". These values are taken from the Windows error number space, as specified in [MS-ERREF](#Section_1.8.4) section 2.3. Vendors SHOULD reuse those values with their indicated meanings.<3> Choosing any other value runs the risk of a collision in the future.
+The EventLog Remoting Protocol Version 6.0 uses Win32 error codes, specifically, the subset designated as "NTSTATUS". These values are taken from the Windows error number space, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3. Vendors SHOULD reuse those values with their indicated meanings.<3> Choosing any other value runs the risk of a collision in the future.
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -524,7 +524,7 @@ This protocol uses [**RPC**](#gt_remote-procedure-call-rpc) as the transport pro
 
 The server interface is identified by [**UUID**](#gt_universally-unique-identifier-uuid) F6BEAFF7-1E19-4FBB-9F8F-B89E2018337C version 1.0, using the [**RPC dynamic endpoint**](#gt_rpc-dynamic-endpoint) EventLog. The server MUST specify [**RPC**](#gt_remote-procedure-call-rpc) over TCP/IP (that is, ncacn_ip_tcp) as the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) to the RPC implementation, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md). The server MUST specify both the Simple and Protected GSS-API Negotiation Mechanism [MS-SPNG](../MS-SPNG/MS-SPNG.md) (0x9) and Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) (0x10) as the RPC authentication service, as specified in [MS-RPCE].
 
-The EventLog Remoting Protocol Version 6.0 allows any user to establish a connection to the RPC server. The server uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in the second bullet of section 3.3.3.4.3 of [MS-RPCE]. The server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_2.1.1).
+The EventLog Remoting Protocol Version 6.0 allows any user to establish a connection to the RPC server. The server uses the underlying RPC protocol to retrieve the identity of the caller that made the method call, as specified in the second bullet of section 3.3.3.4.3 of [MS-RPCE]. The server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.1.4).
 
 The server MAY require the client connection to specify an authentication level of at least packet-level authentication (0x4), as specified in [MS-RPCE] section 2.2.1.1.8. The server SHOULD require the connection to use the packet-privacy authentication level (0x6). <4>
 
@@ -803,7 +803,7 @@ DWORD count;
 <a id="Section_2.2.10"></a>
 ### 2.2.10 EvtRpcAssertConfigFlags Enumeration
 
-The EvtRpcAssertConfigFlags Enumeration members specify how the *path* and *channelPath* parameters (used by a number of the methods in [3.1.4](#Section_2.1.1)) are to be interpreted.
+The EvtRpcAssertConfigFlags Enumeration members specify how the *path* and *channelPath* parameters (used by a number of the methods in [3.1.4](#Section_3.1.4)) are to be interpreted.
 
 typedef [v1_enum] enum tag_EvtRpcAssertConfigFlags
 
@@ -839,7 +839,7 @@ DWORD status;
 <a id="Section_2.2.12"></a>
 ### 2.2.12 BinXml
 
-BinXml is a token representation of text XML 1.0, which is specified in [[XML10]](https://go.microsoft.com/fwlink/?LinkId=90600). Here, BinXml encodes an XML document so that the original XML text can be correctly reproduced from the encoding. For information about the encoding algorithm, see section [3.1.4.7](#Section_2.2.12).
+BinXml is a token representation of text XML 1.0, which is specified in [[XML10]](https://go.microsoft.com/fwlink/?LinkId=90600). Here, BinXml encodes an XML document so that the original XML text can be correctly reproduced from the encoding. For information about the encoding algorithm, see section [3.1.4.7](#Section_3.1.4.7).
 
 The binary format for all numeric values is always little-endian. No alignment is required for any data. The format is given in the following Augmented Backus-Naur Form (ABNF) example, as specified in [[RFC4234]](https://go.microsoft.com/fwlink/?LinkId=90462)).
 
@@ -2300,12 +2300,12 @@ typedef [context_handle] void* PCONTEXT_HANDLE_PUBLISHER_METADATA;
 
 typedef [context_handle] void* PCONTEXT_HANDLE_EVENT_METADATA_ENUM;
 
-For information on handle security, see section [5.1](#Section_5).
+For information on handle security, see section [5.1](#Section_5.1).
 
 <a id="Section_2.2.21"></a>
 ### 2.2.21 Binding Handle
 
-This protocol reuses the RPC binding handle as the logical connection between the client and server. Numerous methods described in section [3.1.4](#Section_2.1.1) take the binding handle as the first parameter.
+This protocol reuses the RPC binding handle as the logical connection between the client and server. Numerous methods described in section [3.1.4](#Section_3.1.4) take the binding handle as the first parameter.
 
 This type is declared as follows:
 
@@ -2355,7 +2355,7 @@ The following common values are used throughout this specification.
 <a id="Section_3.1"></a>
 ## 3.1 Server Details
 
-The server handles client requests for any of the messages specified in section [2](#Section_2), and operates on the logs and configuration on the server. For each of those messages, the behavior of the server is specified in section [3.1.4](#Section_2.1.1).
+The server handles client requests for any of the messages specified in section [2](#Section_2), and operates on the logs and configuration on the server. For each of those messages, the behavior of the server is specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -2365,7 +2365,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Events
 
-An event is an entity that describes some occurrence in the system. All events in the system can be represented as XML (though in the protocol they only appear as [BinXml](#Section_2.2.12), as specified in section 3.1.4.7).
+An event is an entity that describes some occurrence in the system. All events in the system can be represented as XML (though in the protocol they only appear as [BinXml](#Section_3.1.4.7), as specified in section 3.1.4.7).
 
 An event is identified by a numeric code (EventID) and a set of attributes (qualifiers, task, opcode, level, version, and keywords). It also contains its [**publisher**](#gt_publisher) name and originating channel, and can also contain event specific data. See [[MSDN-EVENTRECORD]](https://go.microsoft.com/fwlink/?LinkId=204166), [[MSDN-EVENT_HEADER]](https://go.microsoft.com/fwlink/?LinkId=208337), and [[MSDN-EVENT_DESCRIPTOR]](https://go.microsoft.com/fwlink/?LinkId=208338), for a description of the layout of event data structures which contains this information.
 
@@ -2498,7 +2498,7 @@ A log file usually consists of file header and file body. The header SHOULD cont
 
 The server does not maintain these fields. These fields are maintained by publishers as events are added to the log file.
 
-The log body consists of all the event records in binXML format (as specified in section [3.1.4.7](#Section_2.2.12)).
+The log body consists of all the event records in binXML format (as specified in section [3.1.4.7](#Section_3.1.4.7)).
 
 The log file associated with a channel is maintained and updated by the server. This protocol assumes that the log files associated with channels are in the format described above. Note that rules for creating such files are out of scope for this protocol.
 
@@ -2615,10 +2615,10 @@ Clients can be notified of events occurring on the system through this protocol 
 The control object is used by the client to cancel a server call that is taking too long to return any result to the client. A control object is an object which is created on the server side when a client registers some heavy operations such as subscription or query. The following example shows a typical workflow such as a subscription or a query:
 
 - A client tries to register a query job by calling EvtRpcRegisterLogQuery (as specified in section [3.1.4.12](#Section_3.1.4.12)).
-- That method returns a control object through the PCONTEXT_HANDLE_OPERATION_CONTROL context handle (as specified in section [3.1.4.7](#Section_2.2.12)).
+- That method returns a control object through the PCONTEXT_HANDLE_OPERATION_CONTROL context handle (as specified in section [3.1.4.7](#Section_3.1.4.7)).
 - The client issues the call EvtRpcQueryNext (as specified in section [3.1.4.13](#Section_3.1.4.13)) to query the events, and this operation takes a long time before returning a result to the client. If the client wants to abandon the operation, it can call EvtRpcCancel (as specified in section [3.1.4.34](#Section_3.1.4.34)) to cancel the query operation by providing the context handle it receives from the server in the first step.
 - Since this protocol describes only one cancel operation for the control object, the control object SHOULD keep the pointer of the operation object, such as a subscription, and a Boolean flag to indicate whether the operation is canceled or not.
-For information on how many types of operations can be canceled, see section [3.1.4.6](#Section_1.3).
+For information on how many types of operations can be canceled, see section [3.1.4.6](#Section_3.1.4.6).
 
 <a id="Section_3.1.1.11"></a>
 #### 3.1.1.11 Context Handles
@@ -2627,7 +2627,7 @@ Sometimes operations such as querying a channels' subscription to new events for
 
 This protocol uses the following types of context handles, and does not allow handles of different types to be interchanged:
 
-- PCONTEXT_HANDLE_REMOTE_SUBSCRIPTION: This context handle is dedicated to subscription operation for the client. The client specifies a set of events to the server when setting up the subscription connection. For example, the client can ask to receive all the future events from a specified channel. The client passes that to the server and the server passes a context handle back to the client. Subsequently, the client can keep using this handle for requesting delivery of new events from the server for as long as that subscription connection is established. For this handle, the server logically needs to create an object to stand for this context handle to serve the client requests. In this protocol, this object is called the subscription object. A subscription object is a logical representation of a subscription in server memory. For detail content information on the subscription object, see the processing rules in section [3.1.4](#Section_2.1.1). A subscription object SHOULD contain the following information:
+- PCONTEXT_HANDLE_REMOTE_SUBSCRIPTION: This context handle is dedicated to subscription operation for the client. The client specifies a set of events to the server when setting up the subscription connection. For example, the client can ask to receive all the future events from a specified channel. The client passes that to the server and the server passes a context handle back to the client. Subsequently, the client can keep using this handle for requesting delivery of new events from the server for as long as that subscription connection is established. For this handle, the server logically needs to create an object to stand for this context handle to serve the client requests. In this protocol, this object is called the subscription object. A subscription object is a logical representation of a subscription in server memory. For detail content information on the subscription object, see the processing rules in section [3.1.4](#Section_3.1.4). A subscription object SHOULD contain the following information:
 - HandleType: An integer value that describes the type of the context handle this object stands for. For the subscription object, the server SHOULD always keep this value to be the predefined type value for the type of PCONTEXT_HANDLE_REMOTE_SUBSCRIPTION. For example, if the server decides to use 1 as the type value for PCONTEXT_HANDLE_REMOTE_SUBSCRIPTION, it sets the HandleType to 1.
 - Channels: An array of client subscribed channels. Each channel contains its name, log file path, and configuration properties. All the channel information can be retrieved from the corresponding channel table entry. As described in section [3.1.1.4](#Section_3.1.1.4), the channels are all registered to the server and kept in the server's channel table.
 - IsPullType: A Boolean value to indicate pull or push subscription.
@@ -2821,7 +2821,7 @@ Methods in RPC Opnum Order
 | [EvtRpcGetNextEventMetadata](#Section_3.1.4.28) | Used by a client to get details on a particular possible event, and also returns the next event metadata in the enumeration. Opnum: 27 |
 | [EvtRpcGetClassicLogDisplayName](#Section_3.1.4.36) | Used to obtain a descriptive name of a channel. Opnum: 28 |
 
-All methods MUST NOT throw exceptions. All return values use the NTSTATUS numbering space (as specified in [MS-ERREF](#Section_1.8.4) section 2.3) and, in particular, a value of 0x00000000 indicates success, and any other return value indicates an error. For a mapping of Windows NT operating system status error codes to Win32 error codes, see [[MSKB-113996]](https://go.microsoft.com/fwlink/?LinkId=102323). All error values MUST<8> be treated the same, unless specified otherwise.
+All methods MUST NOT throw exceptions. All return values use the NTSTATUS numbering space (as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3) and, in particular, a value of 0x00000000 indicates success, and any other return value indicates an error. For a mapping of Windows NT operating system status error codes to Win32 error codes, see [[MSKB-113996]](https://go.microsoft.com/fwlink/?LinkId=102323). All error values MUST<8> be treated the same, unless specified otherwise.
 
 Within the sections that follow this one, methods are presented in the order typically implemented to accomplish the following operations:
 
@@ -2844,7 +2844,7 @@ In the pull model, the client loops by using the [EvtRpcRemoteSubscriptionNext 
 
 In the push model, the client loops by using the [EvtRpcRemoteSubscriptionNextAsync (section 3.1.4.9)](#Section_3.1.4.9) method to get events. The call MUST be completed by the server when a new event is ready.
 
-Note that there is also a CONTEXT_HANDLE_OPERATION_CONTROL handle returned by the EvtRpcRegisterRemoteSubscription (section 3.1.4.8) method. The sequencing and use of these handles are specified in section [3.1.4.6](#Section_1.3).
+Note that there is also a CONTEXT_HANDLE_OPERATION_CONTROL handle returned by the EvtRpcRegisterRemoteSubscription (section 3.1.4.8) method. The sequencing and use of these handles are specified in section [3.1.4.6](#Section_3.1.4.6).
 
 The application ends the subscription by passing the CONTEXT_HANDLE_REMOTE_SUBSCRIPTION handle to the EvtRpcClose (section 3.1.4.33) method.
 
@@ -2857,7 +2857,7 @@ The client application can then use the handle for subsequent calls to the [EvtR
 
 The application then closes the handle at the end of the query using [EvtRpcClose](#Section_3.1.4.33).
 
-Note that there is also a CONTEXT_HANDLE_OPERATION_CONTROL handle returned by EvtRpcRegisterLogQuery. The sequencing and use of these handles are specified in section [3.1.4.6](#Section_1.3).
+Note that there is also a CONTEXT_HANDLE_OPERATION_CONTROL handle returned by EvtRpcRegisterLogQuery. The sequencing and use of these handles are specified in section [3.1.4.6](#Section_3.1.4.6).
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Log Information Sequencing
@@ -2943,7 +2943,7 @@ BinXml also includes more information that allows for fast navigation of the XML
 <a id="Section_3.1.4.7.1"></a>
 ##### 3.1.4.7.1 BinXml Templates
 
-[BinXml](#Section_2.2.12) encoding supports a way to use a template of a BinXml fragment and apply it to a set of values. A BinXml template describes the format and contents of an event independent of the values contained in a specific instance of the event being described. It contains property names and placeholders for the event properties.
+[BinXml](#Section_3.1.4.7) encoding supports a way to use a template of a BinXml fragment and apply it to a set of values. A BinXml template describes the format and contents of an event independent of the values contained in a specific instance of the event being described. It contains property names and placeholders for the event properties.
 
 The primary advantage of this is that the values (set of data) can remain in native form and only need to be converted to text if the BinXml encoding is actually rendered into XML text.
 
@@ -2994,7 +2994,7 @@ Substitutions can occur in attribute values as well as any other place where XML
 <a id="Section_3.1.4.7.2"></a>
 ##### 3.1.4.7.2 Optional Substitutions
 
-Another feature of [BinXml templates](#Section_3.1.4.7.1) is that substitutions can be specified such that the enclosing element or attribute MUST be omitted from rendered XML text (or other processing) if the value identified by the substitution is NULL in the Template Instance data. If this type of rendering from the [BinXml](#Section_2.2.12) is wanted, the substitution needs to be specified by using an optional substitution token. The optional substitution token is 0x0E, as compared to the normal substitution token 0x0D.
+Another feature of [BinXml templates](#Section_3.1.4.7.1) is that substitutions can be specified such that the enclosing element or attribute MUST be omitted from rendered XML text (or other processing) if the value identified by the substitution is NULL in the Template Instance data. If this type of rendering from the [BinXml](#Section_3.1.4.7) is wanted, the substitution needs to be specified by using an optional substitution token. The optional substitution token is 0x0E, as compared to the normal substitution token 0x0D.
 
 The server MAY determine whether to use the optional substitution token based on the event definition.<9>
 
@@ -3027,7 +3027,7 @@ The optional substitution applies only to the element or attribute immediately e
 <a id="Section_3.1.4.7.3"></a>
 ##### 3.1.4.7.3 Type System
 
-Each value (in [BinXml](#Section_2.2.12) encoding) of templates has an accompanying type. Likewise, each value has an accompanying byte length. This is redundant for fixed size types, but is necessary for variable-length types such as strings and binary large objects (BLOBs).
+Each value (in [BinXml](#Section_3.1.4.7) encoding) of templates has an accompanying type. Likewise, each value has an accompanying byte length. This is redundant for fixed size types, but is necessary for variable-length types such as strings and binary large objects (BLOBs).
 
 Each [BinXml type](#Section_3.1.4.7.4) has a canonical XML representation. This is the format used to represent the value when the BinXml is rendered as XML text. The following table gives the meaning of each type and also lists its canonical XML representation by association with XSD types. An XS: prefix specifies the XML Schema namespace (as specified in [[XMLSCHEMA2/2]](https://go.microsoft.com/fwlink/?LinkId=90609)), and an EVT: prefix specifies types defined in the event.xsd (as specified in [[MSDN-EVENTS]](https://go.microsoft.com/fwlink/?LinkId=90000)).
 
@@ -3064,7 +3064,7 @@ This table can be used to convert between BinXml and canonical XML. That is, if 
 <a id="Section_3.1.4.7.4"></a>
 ##### 3.1.4.7.4 BinXml Type
 
-The BinXml type MUST be used for values that are themselves [BinXml](#Section_2.2.12) encoding of XML fragments or TemplateInstances. This allows embedding of TemplateInstances.
+The BinXml type MUST be used for values that are themselves [BinXml](#Section_3.1.4.7) encoding of XML fragments or TemplateInstances. This allows embedding of TemplateInstances.
 
 The byte length for the value specifies the length of the BinXml fragment, up to and including its EOF token.
 
@@ -3124,7 +3124,7 @@ Note the value spec for the Inner Template. The template is 0x30 long, and is of
 <a id="Section_3.1.4.7.5"></a>
 ##### 3.1.4.7.5 Array Types
 
-In addition to the base types, arrays of most base types can be specified in [BinXml](#Section_2.2.12) encoding. The only basic types that are not allowed are binary, non-null-terminated AnsiStringType string, non-null-terminated StringType string, and BinXml.
+In addition to the base types, arrays of most base types can be specified in [BinXml](#Section_3.1.4.7) encoding. The only basic types that are not allowed are binary, non-null-terminated AnsiStringType string, non-null-terminated StringType string, and BinXml.
 
 The array itself is considered a single value of the set of values that make up the Template Instance. As with all values, there is an accompanying type and a byte length. Elements of an array MUST all be of the same type.
 
@@ -3161,7 +3161,7 @@ And the resultant XML text representation of this encoding is the following.
 <a id="Section_3.1.4.7.6"></a>
 ##### 3.1.4.7.6 Prescriptive Details
 
-The server MUST return all event information encoded in [BinXml](#Section_2.2.12) format according to the BinXml ABNF.
+The server MUST return all event information encoded in [BinXml](#Section_3.1.4.7) format according to the BinXml ABNF.
 
 Additionally, the server MUST organize the data encoded by the BinXml in such a way that if the BinXml is transformed to XML text, this XML text is valid according to the Event.xsd Schema (as specified in [[MSDN-EVENTS]](https://go.microsoft.com/fwlink/?LinkId=90000)).
 
@@ -3240,7 +3240,7 @@ The following bits control other aspects of the subscription. These bits are set
 
 **error:** A pointer to an [RpcInfo (section 2.2.1)](#Section_2.2.1) structure in which to place error information in the case of a failure. The RpcInfo (section 2.2.1) structure fields MUST be set to nonzero values if the error is related to parsing the query. If the method succeeds, the server MUST set all of the values in the structure to 0.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST fail the method if any of the following conditions occur:
 
@@ -3331,7 +3331,7 @@ BYTE** resultBuffer
 
 **resultBuffer:** A pointer to a byte-array that contains the [**result set**](#gt_result-set) of one or more events. The events MUST be in binary XML format, as specified in section [2.2.17](#Section_2.2.17).
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD fail the operation if the handle is not valid. The server SHOULD save the handle value it creates and returns to the client via the handle parameter in the **EvtRpcRegisterRemoteSubscription** method (as specified in section [3.1.4.8](#Section_3.1.4.8)) in its handle table (as specified in section [3.1.1.12](#Section_3.1.1.12)) and compare it with the handle passed here to perform the check.<14> The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid.
 
@@ -3396,7 +3396,7 @@ BYTE** resultBuffer
 
 **resultBuffer:** A pointer to a byte-array that contains the [**result set**](#gt_result-set) of one or more events. The events MUST be in binary XML format, as specified in section [2.2.17](#Section_2.2.17).
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_TIMEOUT (0x000005b4) if fewer than *numRequestedRecords* records are found within the time-out period. Otherwise, it MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_TIMEOUT (0x000005b4) if fewer than *numRequestedRecords* records are found within the time-out period. Otherwise, it MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST do the following:
 
@@ -3431,7 +3431,7 @@ error_status_t EvtRpcRemoteSubscriptionWaitAsync(
 
 **handle:** A handle to a subscription, as obtained from the [EvtRpcRegisterRemoteSubscription (section 3.1.4.8)](#Section_3.1.4.8) method. This parameter MUST be an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) Context Handles.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. For processing rules for handle validation, see the remarks in section [3.1.4.9](#Section_3.1.4.9). The server SHOULD fail the method with the return code ERROR_INVALID_PARAMETER (0x00000057) if it has no state for the handle.<16>
 
@@ -3512,7 +3512,7 @@ The following bit can be set independently of the previously mentioned bits.
 
 **error:** A pointer to an [RpcInfo (section 2.2.1)](#Section_2.2.1) structure in which to place error information in the case of a failure. The RpcInfo (section 2.2.1) structure fields MUST be set to nonzero values if the error is related to parsing the query; in addition, the server MAY set the structure fields to nonzero values for errors unrelated to query parsing (for example, for an invalid channel name). All nonzero values MUST be treated the same. If the method succeeds, the server MUST set all the fields in the structure to 0.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST fail the method if the *path* parameter is non-NULL and invalid. The server checks the syntax of the query by checking whether the query string is either a valid XPath query (specified in section 2.2.15) or an XML query (specified in section 2.2.16). The server MUST interpret the *path* to be either a channel name or file path name, depending on the *flags* parameter.
 
@@ -3534,7 +3534,7 @@ In the case of a query, the server MUST verify the validity of any channels or f
 
 Next, the server MUST verify that the caller has read access to the channel or the specified event log file and MUST fail the method if the caller does not have read access with the error code ERROR_ACCESS_DENIED (0x00000005). To perform the access check, the server SHOULD first determine the identity of the caller. Information determining the identity of the caller for the purpose of performing an access check is specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.2.3.4.2. Then, if the client specifies a channel, the server SHOULD read the channel's access property (as specified in section [3.1.4.21](#Section_3.1.4.21)) as the security descriptor string. Next, the server SHOULD be able to perform the read access check using the Access Check algorithm (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2).
 
-If the preceding checks succeed, the server MUST attempt to create a [CONTEXT_HANDLE_LOG_QUERY](#Section_ef007e790549446fa928379f47d57cfd) and return it to the caller via the *handle* parameter, and attempt to create a CONTEXT_HANDLE_OPERATION_CONTROL and return it in the *opControl* parameter. When creating the CONTEXT_HANDLE_LOG_QUERY, the server SHOULD create a log query object. The log query object is a class instance that resides in the server's memory to represent the query object for the client (as specified in section [3.1.1.11](#Section_3.1.1.11)). Inside the query object, the server SHOULD set the channel path to the channel name or the event log file name the client specified, set the query filter as the XPATH query from the query parameter, and set the position to 0 initially. The position SHOULD be updated each time the client calls **EvtRpcQuerySeek** (as specified in section [3.1.4.14](#Section_3.1.4.14)) or **EvtRpcQueryNext** (as specified in section 3.1.4.13). When creating the CONTEXT_HANDLE_OPERATION_CONTROL handle, the server SHOULD create an operation control object (as specified in section [3.1.1.10](#Section_3.1.1.10)). The server SHOULD set the operational pointer of the control object to be the pointer of the log query object that the server creates so that it can perform control operations on that object. The server SHOULD also initially set the canceled field in the control object to false. If successful, the server MUST add the created handles to its handle table to track the issued handles. If any of the preceding checks fail, the server MUST NOT create the context handles or add them to the handle table.
+If the preceding checks succeed, the server MUST attempt to create a [CONTEXT_HANDLE_LOG_QUERY](#Section_2.2.20) and return it to the caller via the *handle* parameter, and attempt to create a CONTEXT_HANDLE_OPERATION_CONTROL and return it in the *opControl* parameter. When creating the CONTEXT_HANDLE_LOG_QUERY, the server SHOULD create a log query object. The log query object is a class instance that resides in the server's memory to represent the query object for the client (as specified in section [3.1.1.11](#Section_3.1.1.11)). Inside the query object, the server SHOULD set the channel path to the channel name or the event log file name the client specified, set the query filter as the XPATH query from the query parameter, and set the position to 0 initially. The position SHOULD be updated each time the client calls **EvtRpcQuerySeek** (as specified in section [3.1.4.14](#Section_3.1.4.14)) or **EvtRpcQueryNext** (as specified in section 3.1.4.13). When creating the CONTEXT_HANDLE_OPERATION_CONTROL handle, the server SHOULD create an operation control object (as specified in section [3.1.1.10](#Section_3.1.1.10)). The server SHOULD set the operational pointer of the control object to be the pointer of the log query object that the server creates so that it can perform control operations on that object. The server SHOULD also initially set the canceled field in the control object to false. If successful, the server MUST add the created handles to its handle table to track the issued handles. If any of the preceding checks fail, the server MUST NOT create the context handles or add them to the handle table.
 
 The server SHOULD fail to create the two handles only in the case of memory limitation, and the server SHOULD return ERROR_OUTOFMEMORY(0x0000000E) in such case.
 
@@ -3591,7 +3591,7 @@ BYTE** resultBuffer
 
 **resultBuffer:** A pointer to a byte-array that contains the result set of one or more events. The events MUST be in binary XML format, as specified in section [2.2.17](#Section_2.2.17).
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_TIMEOUT (0x000005bf) if no records are found within the time-out period. The method MUST return ERROR_NO_MORE_ITEMS (0x00000103) once the query has finished going through all the log(s); otherwise, it MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_TIMEOUT (0x000005bf) if no records are found within the time-out period. The method MUST return ERROR_NO_MORE_ITEMS (0x00000103) once the query has finished going through all the log(s); otherwise, it MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server MUST fail the operation if the handle is invalid. The server SHOULD save the log handle value it creates in the **EvtRpcRegisterLogQuery** method (as specified in section [3.1.4.12](#Section_3.1.4.12)) in its handle table (as specified in section [3.1.1.12](#Section_3.1.1.12)) and compare it with the handle passed here to perform the check.<21>
 
@@ -3652,7 +3652,7 @@ LPCWSTR bookmarkXml,
 
 If the method succeeds, the server MUST set all the values in the structure to zero.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. For processing rules for handle validation, see the remarks in section [3.1.4.13](#Section_3.1.4.13). The server SHOULD fail the method with the return code ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid.
 
@@ -3725,7 +3725,7 @@ BYTE* propertyValueBuffer,
 
 **propertyValueBufferLength:** A pointer to a 32-bit unsigned integer that contains the size in bytes of the returned data.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_INSUFFICIENT_BUFFER (0x0000007A) if the buffer is too small; otherwise, it MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_INSUFFICIENT_BUFFER (0x0000007A) if the buffer is too small; otherwise, it MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the log handle value it creates in the EvtRpcOpenLogHandle (section 3.1.4.19) method in its handle table (as specified in section [3.1.1.12](#Section_3.1.1.12)) so that it can compare that value with the value in the *logHandle* parameter to perform the check. If the values differ, the handle is invalid.<24> The server MUST fail the operation if the handle is invalid with the error code ERROR_INVALID_PARAMETER (0x00000057).
 
@@ -3774,7 +3774,7 @@ LPCWSTR backupPath,
 
 **flags:** A 32-bit unsigned integer that MUST be set to zero when sent and MAY be ignored on receipt.<25>
 
-**error:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).<26>
+**error:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).<26>
 
 **Return Values:** The method returns 0 (ERROR_SUCCESS) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF].
 
@@ -3850,7 +3850,7 @@ The server MAY ignore unrecognized flag combinations.<28>
 
 **error:** A pointer to an [RpcInfo (section 2.2.1)](#Section_2.2.1) structure in which to place error information in the case of a failure. The RpcInfo (section 2.2.1) structure fields MUST be set to a nonzero value if the error is related to parsing the query. In addition, the server MAY set the suberror fields to nonzero values for other types of errors. All nonzero values MUST be treated the same. If the method succeeds, the server MUST set all of the values in the structure to 0.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 The server does not validate the control handle passed to **EvtRpcExportLog**, and it SHOULD assume that this parameter is always valid when the method is invoked.
 
@@ -3966,7 +3966,7 @@ LPCWSTR channel,
 
 **error:** A pointer to an [RpcInfo (section 2.2.1)](#Section_2.2.1) structure in which to place error information in the case of a failure. The server MAY set the suberror fields to supply more comprehensive error information.<35> If the method succeeds, the server MUST set all of the values in the structure to 0.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the *channel* parameter. The server SHOULD search for the given channel name in its channel table. If the server doesn't find the name, the specified channel name is not valid. If the specified channel name is invalid, the server SHOULD return the error code ERROR_EVT_CHANNEL_NOT_FOUND (0x00003A9F). If the *flags* parameter is set to 0x00000001, the server MUST interpret the *channel* parameter as a channel name. If the *flags* parameter is set to 0x00000002, the server MUST interpret channel as the path to an existing event log file. The server SHOULD return ERROR_INVALID_PARAMETER (0x00000057) if the *flags* parameter is not 0x00000001 or 0x00000002.<36> The server checks this by calling the file system to check if the file exists. If the event log file does not exist on the server, the server SHOULD return the error code ERROR_FILE_NOT_FOUND (0x00000002).
 
@@ -4007,7 +4007,7 @@ LPWSTR** channelPaths
 
 **channelPaths:** A pointer to an array of strings that contain all the channel names.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST verify that the caller has read access to the channel list and MUST fail the method with the error ERROR_ACCESS_DENIED (0x00000005) if the caller does not have read access. To perform the access check, the server SHOULD first determine the identity of the caller. Information determining the identity of the caller for the purpose of performing an access check is specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.2.3.4.2. Then, if the client specifies a channel, the server SHOULD read the channel's access property (as specified in section [3.1.4.21](#Section_3.1.4.21)) as the security descriptor string. Next, the server SHOULD be able to perform the write and clear access check using the Access Check algorithm (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2).
 
@@ -4068,7 +4068,7 @@ LPCWSTR channelPath,
 | 19 | EvtRpcVarTypeStringArray | PublisherList. List of publishers that can raise events into the channel. This returns the same list as is returned by the **EvtRpcGetPublisherList** method, as specified in section [3.1.4.24](#Section_3.1.4.24). |
 | 20 | EvtRpcVarTypeUint32 | FileMax. Maximum number of log files associated with an analytic or debug channel. When the number of logs reaches the specified maximum, the system begins to overwrite the logs, beginning with the oldest. A FileMax value of 0 or 1 indicates that only one file is associated with this channel. A FileMax of 0 is default.<39> |
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST verify that the *channelPath* parameter specifies a valid channel name. The server MUST fail the method if the parameter is invalid with the error ERROR_INVALID_PARAMETER (0x00000057). The server checks if a channel name is valid by searching the given name in its channel table.
 
@@ -4138,7 +4138,7 @@ LPCWSTR channelPath,
 
 **error:** A pointer to an [RpcInfo (section 2.2.1)](#Section_2.2.1) structure in which to place error information in the case of a failure. The RpcInfo (section 2.2.1) structure fields MUST be set to nonzero values if the error is related to a particular property. All nonzero values MUST be treated the same. If the method succeeds, the server MUST set all of the values in the structure to 0.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).<42>
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).<42>
 
 In response to this request from the client, the server MUST verify that the *channelPath* parameter specifies a valid channel name. The server MUST fail the method if the parameter is invalid with the error ERROR_INVALID_PARAMETER (0x00000057). The server checks if a channel name is valid by searching the given name in its channel table.
 
@@ -4220,7 +4220,7 @@ LPWSTR** publisherIds
 
 **publisherIds:** A pointer to an array of strings that contain publisher names.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST verify that the caller has read access to the publisher table and MUST fail the method with the error ERROR_ACCESS_DENIED (0x00000005) if the caller does not have read access. To perform the access check, the server SHOULD first determine the identity of the caller. Information determining the identity of the caller for the purpose of performing an access check is specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.2.3.4.2. Then the server MAY get the security descriptor of the publisher table. The server MAY assign a security descriptor when the publisher table is created or if the publisher table is built on the server's file system, it can get its security descriptor from the file system.<46> Next, the server SHOULD be able to perform the read access check using the Access Check algorithm (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2).
 
@@ -4259,7 +4259,7 @@ LPWSTR** publisherIds
 
 **publisherIds:** A pointer to an array of strings that contain [publisher names](#Section_1.8.2).
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST verify that the *channelName* parameter specifies a correct channel name. The server MUST fail the method if the *channelName* parameter is invalid with the error ERROR_INVALID_PARAMETER (0x00000057). The server checks if a channel name is valid by searching the given name in its channel table.
 
@@ -4308,9 +4308,9 @@ LPCWSTR logFilePath,
 
 **pubMetadataProps:** A pointer to an [EvtRpcVariantList (section 2.2.9)](#Section_2.2.9) structure containing publisher properties.
 
-**pubMetadata:** A pointer to a publisher handle. This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5).
+**pubMetadata:** A pointer to a publisher handle. This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5.1).
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST verify that the *publisherID* parameter specifies either a publisher name or NULL. The server MUST fail the method if the *publisherID* is non-NULL and is not the name of a publisher with the error code ERROR_INVALID_PARAMETER (0x00000057). The server SHOULD check whether the non-NULL *publisherID* is in the publisher table to verify whether the *publisherID* is a publisher name. If the *publisherID* parameter is NULL, the server MUST use the default publisher (as specified in section [3.1.1.14](#Section_3.1.1.14)).
 
@@ -4374,7 +4374,7 @@ error_status_t EvtRpcGetPublisherResourceMetadata(
 
 **pubMetadataProps:** Pointer to an [EvtRpcVariantList (section 2.2.9)](#Section_2.2.9) structure. This list MUST contain multiple entries.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the context handle value that it creates in the **EvtRpcGetPublisherMetadata** method (as specified in section [3.1.4.25](#Section_3.1.4.25)) in its handle table and compare it with the handle passed here to perform that check.<51> The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid.
 
@@ -4468,7 +4468,7 @@ LPCWSTR reservedForFilter,
 
 );
 
-**pubMetadata:** This parameter is an RPC context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5).
+**pubMetadata:** This parameter is an RPC context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5.1).
 
 **flags:** A 32-bit unsigned integer that MUST be set to zero when sent and MAY be ignored on receipt.<54>
 
@@ -4476,7 +4476,7 @@ LPCWSTR reservedForFilter,
 
 **eventMetaDataEnum:** A pointer to an event numeration handle. This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [C706], Context Handles.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the context handle value it creates in the **EvtRpcGetPublisherMetadata** method (as specified in section [3.1.4.25](#Section_3.1.4.25)) in its handle table and compare it with the handle passed here to perform the check.<55> The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid.
 
@@ -4507,7 +4507,7 @@ EvtRpcVariantList** eventMetadataInstances
 
 );
 
-**eventMetaDataEnum:** A handle to an [**event metadata**](#gt_event-metadata) enumerator. This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5). This is the value which comes from the return parameter *eventMetaDataEnum* of function **EvtRpcGetEventMetadataEnum** (as specified in [3.1.4.27](#Section_3.1.4.27)).
+**eventMetaDataEnum:** A handle to an [**event metadata**](#gt_event-metadata) enumerator. This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5.1). This is the value which comes from the return parameter *eventMetaDataEnum* of function **EvtRpcGetEventMetadataEnum** (as specified in [3.1.4.27](#Section_3.1.4.27)).
 
 **flags:** A 32-bit unsigned integer that MUST be set to 0x00000000 when sent and MAY be ignored on receipt.<56>
 
@@ -4517,7 +4517,7 @@ EvtRpcVariantList** eventMetadataInstances
 
 **eventMetadataInstances:** A pointer to an array of [EvtRpcVariantList (section 2.2.9)](#Section_2.2.9) structures.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the context handle value that it creates in the **EvtRpcGetPublisherMetadata** method (as specified in section [3.1.4.25](#Section_3.1.4.25)) in its handle table and compare it with the handle passed here to perform the check.<57> The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid.
 
@@ -4573,7 +4573,7 @@ LPCWSTR path,
 | EvtRpcChannelPath 0x00000000 | *Path* specifies a channel name. |
 | EvtRpcPublisherName 0x00000001 | *Path* specifies a publisher name. |
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server SHOULD first validate the *path* parameter. The server MUST interpret the *path* parameter as a channel name if the *flags* parameter is equal to 0x00000000. The server SHOULD try to determine if the specified channel name has been already registered in its channel table (as specified in section [3.1.1.5](#Section_3.1.1.5)). If the flags value is 0x00000001, the server MUST interpret *path* as a publisher name. The server SHOULD then check if the publisher has been registered in its publisher table (as specified in section [3.1.1.3](#Section_3.1.1.3)). The server SHOULD fail the operation if the validation of *path* fails. The server MAY<59> return the error ERROR_INVALID_PARAMETER (0x00000057) to indicate such failure.
 
@@ -4631,7 +4631,7 @@ LPCWSTR path,
 | EvtRpcChannelPath 0x00000000 | Path specifies a channel name. |
 | EvtRpcPublisherName 0x00000001 | Path specifies a publisher name. |
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server SHOULD first validate the *path* parameter.<60> The server MUST interpret the *path* parameter as a channel name if the flags parameter is equal to 0x00000000. The server SHOULD try to find if the specified channel name has been already registered in its channel table (as specified in section [3.1.1.5](#Section_3.1.1.5)). If the flags value is 0x00000001, the server MUST interpret *path* as a publisher name. The server SHOULD then check if the publisher has been registered in its publisher table (as specified in section [3.1.1.3](#Section_3.1.1.3)). The server SHOULD fail the operation if the validation of *path* fails. The server MAY return the error ERROR_INVALID_PARAMETER (0x00000057) to indicate such failure.<61>
 
@@ -4711,7 +4711,7 @@ BYTE** string,
 
 **error:** A pointer to an [RpcInfo (section 2.2.1)](#Section_2.2.1) structure in which to place error information in the case of a failure. The RpcInfo (section 2.2.1) structure fields MUST be set to nonzero values if the error is related to loading the necessary resource. All nonzero values MUST be treated the same. If the method succeeds, the server MUST set all the fields in the structure to 0.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_INSUFFICIENT_BUFFER (0x0000007A) if *maxSizeString* is too small to hold the result string. In that case, *neededSizeString* MUST be set to the necessary size. Otherwise, the method MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success. The method MUST return ERROR_INSUFFICIENT_BUFFER (0x0000007A) if *maxSizeString* is too small to hold the result string. In that case, *neededSizeString* MUST be set to the necessary size. Otherwise, the method MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the context handle value it creates in the **EvtRpcGetPublisherList** method (as specified in section 3.1.4.25) in its handle table (as specified in [3.1.1.12](#Section_3.1.1.12)) and compare it with the handle passed here to perform the handle validation work.<63> The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid or there is no such handle on the server.
 
@@ -4831,7 +4831,7 @@ BYTE** string,
 
 The method MUST return ERROR_INSUFFICIENT_BUFFER (0x0000007A) if *maxSizeString* is too small to hold the result string. In that case, *neededSizeString* MUST be set to the necessary size.
 
-Otherwise, the method MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+Otherwise, the method MUST return a different implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 This method is the same as the EvtRpcMessageRender (section 3.1.4.31) method, except that this method always uses the server's default strings (default strings come from the server's default publisher, so a publisher handle is not required), whereas the EvtRpcMessageRender (section 3.1.4.31) method uses only the default strings in the case of level, task, opcode, and keyword values that fall in certain ranges. Therefore it takes only 6 possible format flags. The server MUST fail the method with ERROR_INVALID_PARAMETER (0x00000057) for any other flags than the 6 values given in the flags table.
 
@@ -4848,9 +4848,9 @@ error_status_t EvtRpcClose(
 
 **handle:** This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
-In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the handle value in its handle table (as specified in section [3.1.1.12](#Section_3.1.1.12)) when the handle is created so that it can look up the handle in its table to determine if it is valid.<66> The server MUST fail the operation with the error ERROR_INVALID_PARAMETER (0x00000057) if the handle is not in its handle table. For more information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5).
+In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the handle value in its handle table (as specified in section [3.1.1.12](#Section_3.1.1.12)) when the handle is created so that it can look up the handle in its table to determine if it is valid.<66> The server MUST fail the operation with the error ERROR_INVALID_PARAMETER (0x00000057) if the handle is not in its handle table. For more information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5.1).
 
 If the above check succeeds, the server MUST remove the handle from its handle table. The server SHOULD NOT fail the operation of removing the handle.
 
@@ -4869,13 +4869,13 @@ error_status_t EvtRpcCancel(
 
 **handle:** A handle obtained by any of the other methods in this interface. This parameter is an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, the server MUST first validate the handle. The server SHOULD save the handle value it created in the handle table (as specified in section [3.1.1.12](#Section_3.1.1.12)) and compare it with the handle passed here to perform the validation check.<67>
 
-The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5).
+The server MUST return ERROR_INVALID_PARAMETER (0x00000057) if the handle is invalid. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5.1).
 
-If the above check succeeds, the server MUST attempt to cancel the outstanding call associated with this handle. As specified in section [3.1.1.10](#Section_3.1.1.10), the context handle SHOULD be a control object on the server. The control object contains the detail operation object pointers such as query object pointer, subscription object pointer, and so forth, plus the Boolean flag. The server SHOULD check if the Boolean flag is true. If the flag is true, the server does nothing and returns success. If this flag is not true, the server SHOULD get the operation object pointer and cancel the operation by stopping operation object processing. That would include stopping processing of the query or subscription tasks and then setting its cancelation Boolean flag to true. For information, see section [3.1.4](#Section_2.1.1).
+If the above check succeeds, the server MUST attempt to cancel the outstanding call associated with this handle. As specified in section [3.1.1.10](#Section_3.1.1.10), the context handle SHOULD be a control object on the server. The control object contains the detail operation object pointers such as query object pointer, subscription object pointer, and so forth, plus the Boolean flag. The server SHOULD check if the Boolean flag is true. If the flag is true, the server does nothing and returns success. If this flag is not true, the server SHOULD get the operation object pointer and cancel the operation by stopping operation object processing. That would include stopping processing of the query or subscription tasks and then setting its cancelation Boolean flag to true. For information, see section [3.1.4](#Section_3.1.4).
 
 In response to this call, the server MUST NOT remove the associated handle from its handle table.
 
@@ -4894,9 +4894,9 @@ error_status_t EvtRpcRegisterControllableOperation(
 
 );
 
-**handle:** A context handle for a control object. This parameter MUST be an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5).
+**handle:** A context handle for a control object. This parameter MUST be an [**RPC**](#gt_remote-procedure-call-rpc) context handle, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), Context Handles. For information on handle security and authentication considerations, see sections [2.2.20](#Section_2.2.20) and [5.1](#Section_5.1).
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, for a successful operation, the server MUST attempt to create a CONTEXT_HANDLE_OPERATION_CONTROL handle. The server SHOULD create a control object. The control object SHOULD initialize its operation pointer to be NULL and Canceled flag to be FALSE. Then the server SHOULD save the control object pointer in its handle table and return the pointer as the context handle to the client. If it cannot create the handle, the server MUST fail the operation with the error ERROR_OUTOFMEMORY (0x0000000E).
 
@@ -4942,7 +4942,7 @@ LPCWSTR logName,
 
 **displayName:** Returned display name.
 
-**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](#Section_1.8.4).
+**Return Values:** The method MUST return ERROR_SUCCESS (0x00000000) on success; otherwise, it MUST return an implementation-specific nonzero value as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
 In response to this request from the client, for a successful operation, the server MUST attempt to retrieve a display name for a channel. In [MS-EVEN](#Section_1.3.2) section 3.1.1.2, there are two configuration entries for a classic event log: DisplayNameFile and DisplayNameID. The server tries to use the log name passed here to find the log entry in the registry and then locate the DisplayNameID and DisplayNameFile. The DisplayNameID is the message ID for the display name. The file which is pointed at by DisplayNameFile contains the localized string for the display name. The server uses the messageId and locale as the combination key to look for the string inside the file and then retrieve the classic event log display name. The server verifies that the channel name, as specified by the *logName* parameter, is a known classic event log. If the *logName* parameter does not specify a registered event log (the log name can't be located in the registry described in [MS-EVEN]), the server MUST fail the method with the error ERROR_NOT_FOUND (0x00000490). If the server can't find the DisplayNameID or the DisplayNameFile, the server SHOULD fail the method with the error ERROR_INVALID_DATA (0x0000000D).
 
@@ -5103,7 +5103,7 @@ The client enumerates through the events, using multiple calls to the EvtRpcQuer
 If the client's query expression selects sparse events, and the log file contains a huge number of events, the EvtRpcQueryNext can take a long time to complete. In this case, the client has the option to cancel the EvtRpcQueryNext call by passing the query result handle to the [EvtRpcCancel (section 3.1.4.34)](#Section_3.1.4.34) method.
 
 - For each event, it is translated from BinXml encoding to the XML representation.
-This is done according to the BinXml ABNF, as specified in section [3.1.4.7](#Section_2.2.12).
+This is done according to the BinXml ABNF, as specified in section [3.1.4.7](#Section_3.1.4.7).
 
 The server is not involved in this step.
 
@@ -5206,7 +5206,7 @@ RecordId="9"/>
 <a id="Section_4.4"></a>
 ## 4.4 Simple BinXml Example
 
-The following is an example of a simple [BinXml](#Section_2.2.12) fragment (without use of templates):
+The following is an example of a simple [BinXml](#Section_3.1.4.7) fragment (without use of templates):
 
 <Event>
 
@@ -5485,7 +5485,7 @@ Unlike the **EvtRpcRemoteSubscriptionNextAsync** method, this method will block 
 <a id="Section_4.8"></a>
 ## 4.8 BinXml Example Using Templates
 
-This example demonstrates the use of [BinXml templates](#Section_3.1.4.7.1). There is one outer template <Event> and one inner template <MyEvent>. The outer template has substitutions (shown in bold) under the <System> element. However, it also has a [BinXml](#Section_2.2.12) substitution within the <UserData> element. In other words, the BinXml that describes <MyEvent> is contained as a value for the outer <Event> template instance. The BinXml for <MyEvent> happens to also be another template instance (although it could have been a normal fragment). The MyEvent template substitutions are also shown in bold.
+This example demonstrates the use of [BinXml templates](#Section_3.1.4.7.1). There is one outer template <Event> and one inner template <MyEvent>. The outer template has substitutions (shown in bold) under the <System> element. However, it also has a [BinXml](#Section_3.1.4.7) substitution within the <UserData> element. In other words, the BinXml that describes <MyEvent> is contained as a value for the outer <Event> template instance. The BinXml for <MyEvent> happens to also be another template instance (although it could have been a normal fragment). The MyEvent template substitutions are also shown in bold.
 
 Also, the outer template substitutions are all optional, and some values of that template are NULL; therefore, some of the BinXml elements or attributes are not present in the following XML text.
 
@@ -7224,7 +7224,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <2> Section 1.8.2: Windows prefixes the names of some of the [**publishers**](#gt_publisher) it creates with the string Microsoft-Windows-. For more information, see [[MSDN-EVENTS]](https://go.microsoft.com/fwlink/?LinkId=90000).
 
-<3> Section 1.8.4: Windows uses only the values specified in [MS-ERREF](#Section_1.8.4) section 2.3.
+<3> Section 1.8.4: Windows uses only the values specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.3.
 
 <4> Section 2.1.1: For more information about the significance of packet-level authentication, see Windows NTLM Elevation of Privilege Vulnerability security update June 2021 [[MSFT-CVE-2021-31958]](https://go.microsoft.com/fwlink/?linkid=2165320). Applies to all versions of client and server, Windows Vista operating system and Windows Server 2008 operating system and later.
 

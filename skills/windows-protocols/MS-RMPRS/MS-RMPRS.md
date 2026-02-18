@@ -238,10 +238,10 @@ See [Revision History](#revision-history) for full version history.
 
 This document specifies the Rights Management Services (RMS): Server-Server Protocol. The RMS: Server-Server Protocol is used to communicate information between RMS servers and consists of four separate port types and one binary interface:
 
-- [ServerSoap (FindServiceLocations)](#Section_3.2): Using theServerSoap (FindServiceLocations) port type, one RMS server provides another with URLs for services that are requested.
+- [ServerSoap (FindServiceLocations)](#Section_6.1): Using theServerSoap (FindServiceLocations) port type, one RMS server provides another with URLs for services that are requested.
 - [SubEnrollServiceSoap](#Section_6.2): Using theSubEnrollServiceSoap port type, one RMS server bootstraps itself as a subordinate of another RMS server. In this process, the main server grants the subordinate server the right to perform only licensing tasks by issuing it a Server Licensor Certificate (SLC) that indicates this right.
-- [ServerSoap (GetLicensorCertificate)](#Section_5.1.3): One RMS server acquires the public [**SLC**](#gt_server-licensor-certificate-slc) of another by using the ServerSoap (GetLicensorCertificate) port type in order to establish trust. This trust allows the requesting RMS server to trust [**RMS account certificates (RACs)**](#gt_rms-account-certificate-rac) issued by the responding RMS server.
-- [GroupExpansionWebServiceSoap](#Section_1.3.4): An RMS server uses the GroupExpansionWebServiceSoap port type to ask another RMS server whether a specific user is a member of a specific [**directory**](#gt_directory) group.
+- [ServerSoap (GetLicensorCertificate)](#Section_6.3): One RMS server acquires the public [**SLC**](#gt_server-licensor-certificate-slc) of another by using the ServerSoap (GetLicensorCertificate) port type in order to establish trust. This trust allows the requesting RMS server to trust [**RMS account certificates (RACs)**](#gt_rms-account-certificate-rac) issued by the responding RMS server.
+- [GroupExpansionWebServiceSoap](#Section_6.4): An RMS server uses the GroupExpansionWebServiceSoap port type to ask another RMS server whether a specific user is a member of a specific [**directory**](#gt_directory) group.
 - [Binary Group Expansion](#Section_4.3): This binary interface provides the same service as theGroupExpansionWebServiceSoap port type, by using a binary-over-HTTP interface.
 The Binary Group Expansion interface uses a binary-formatted interface over HTTP. The port types (ServerSoap (FindServiceLocations), SubEnrollServiceSoap, ServerSoap (GetLicensorCertificate), and GroupExpansionWebServiceSoap) all use a SOAP-based protocol over HTTP.
 
@@ -385,13 +385,13 @@ In these complicated deployments, RMS servers need to communicate with one anoth
 <a id="Section_1.3.1"></a>
 ### 1.3.1 ServerSoap (FindServiceLocations) Overview
 
-RMS servers use the [ServerSoap (FindServiceLocations)](#Section_3.2) port type of the RMS: Server-Server Protocol to find the URLs for specific services that are provided by other RMS servers. This communication can be useful in two scenarios:
+RMS servers use the [ServerSoap (FindServiceLocations)](#Section_6.1) port type of the RMS: Server-Server Protocol to find the URLs for specific services that are provided by other RMS servers. This communication can be useful in two scenarios:
 
 - Finding the appropriate URLs for a client to use for bootstrapping.
 - Finding the Group Expansion port type on a remote server before making a cross-[**forest**](#gt_forest) group expansion request.
 Clients contact the server for a bootstrapping process so they can begin functioning in the RMS system. This bootstrapping process is defined in the RMS: Client-to-Server Protocol, as specified in [MS-RMPR](../MS-RMPR/MS-RMPR.md). To bootstrap a specific user, the RMS server needs to authenticate that user and determine the user's email address by checking the [**directory**](#gt_directory). If the user's account resides in a partition of the directory that the RMS server cannot access, it cannot successfully bootstrap the user. A client starts the bootstrapping process by making a request for service locations to a specific RMS server. If that RMS server is not the appropriate server to bootstrap the client, the server can use the ServerSoap (FindServiceLocations) port type to find the URLs on the appropriate server, and then return them to the client.
 
-The ServerSoap (FindServiceLocations) port type uses a SOAP-based protocol over HTTP. It exposes one request/response operation: [FindServiceLocations](#Section_3.2.4.1.2.1).
+The ServerSoap (FindServiceLocations) port type uses a SOAP-based protocol over HTTP. It exposes one request/response operation: [FindServiceLocations](#Section_3.2.4.1).
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 SubEnrollServiceSoap Overview
@@ -405,7 +405,7 @@ The SubEnrollServiceSoap port type uses a SOAP-based protocol over HTTP. It expo
 <a id="Section_1.3.3"></a>
 ### 1.3.3 ServerSoap (GetLicensorCertificate) Overview
 
-RMS servers use the [Get Licensor Certificate](#Section_3.4.4.1.2.1) port type of the RMS: Server-to-Server Protocol to establish trust from a root server to a subordinate server.
+RMS servers use the [Get Licensor Certificate](#Section_3.4.4.1) port type of the RMS: Server-to-Server Protocol to establish trust from a root server to a subordinate server.
 
 When a subordinate RMS server is deployed, it needs to trust identities issued by the root RMS server. This is accomplished by trusting [**certificates**](#gt_certificate) that were issued by the root RMS server by trusting the root RMS server's public key. The subordinate server can use the Get Licensor Certificate port type to retrieve the [**SLC**](#gt_server-licensor-certificate-slc) of the main server that contains the appropriate public key.
 
@@ -414,21 +414,21 @@ The Get Licensor Certificate port type uses a SOAP-based protocol over HTTP. It 
 <a id="Section_1.3.4"></a>
 ### 1.3.4 GroupExpansionWebServiceSoap Overview
 
-RMS servers use the [Group Expansion over SOAP](#Section_1.3.4) port type of the RMS: Server-Server Protocol to determine group membership of authorized users across complex network directories.
+RMS servers use the [Group Expansion over SOAP](#Section_6.4) port type of the RMS: Server-Server Protocol to determine group membership of authorized users across complex network directories.
 
 Access policy on RMS [**protected content**](#gt_protected-content) can specify individual users as well as distribution groups. When a [**consumer**](#gt_consumer) contacts the RMS server for authorization to access protected content, the server might need to consult the [**directory**](#gt_directory) to determine whether that user is a member of a group that is specified in the policy. If the group exists in a partition of the directory to which the RMS server does not have access, that RMS server needs to contact another server that does have appropriate permissions. This server-to-server communication can use either the Group Expansion over SOAP port type or the [Binary Group Expansion](#Section_4.3) interface.
 
-The Group Expansion over SOAP port type exposes one request/response operation: [IsPrincipalMemberOf](#Section_3.6.4.1).
+The Group Expansion over SOAP port type exposes one request/response operation: [IsPrincipalMemberOf](#Section_3.5.4.1).
 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Binary Group Expansion Overview
 
-The [Binary Group Expansion](#Section_4.3) interface performs the same function as the [Group Expansion over SOAP](#Section_1.3.4) port type, as defined in section [1.3.4](#Section_1.3.4), only it does so using a binary-over-HTTP protocol. It exposes one request/response method: [IsPrincipalMemberOf](#Section_3.6.4.1).
+The [Binary Group Expansion](#Section_4.3) interface performs the same function as the [Group Expansion over SOAP](#Section_6.4) port type, as defined in section [1.3.4](#Section_1.3.4), only it does so using a binary-over-HTTP protocol. It exposes one request/response method: [IsPrincipalMemberOf](#Section_3.5.4.1).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The [ServerSoap (FindServiceLocations)](#Section_3.2), [SubEnrollServiceSoap](#Section_6.2), [ServerSoap (GetLicensorCertificate)](#Section_5.1.3), and [GroupExpansionWebServiceSoap](#Section_1.3.4) port types all use a SOAP-based protocol that uses HTTP 1.1 as its transport.
+The [ServerSoap (FindServiceLocations)](#Section_6.1), [SubEnrollServiceSoap](#Section_6.2), [ServerSoap (GetLicensorCertificate)](#Section_6.3), and [GroupExpansionWebServiceSoap](#Section_6.4) port types all use a SOAP-based protocol that uses HTTP 1.1 as its transport.
 
 The [Binary Group Expansion](#Section_4.3) interface uses a binary-formatted interface over HTTP 1.1.
 
@@ -445,7 +445,7 @@ It is assumed that the server either knows or can discover the appropriate servi
 
 It is also assumed that the server has been properly bootstrapped and initialized with its own [**SLC**](#gt_server-licensor-certificate-slc) in place in order to respond to Sub-Enrollment and Get Licensor Certificate requests.
 
-Finally, it is assumed that the server either has connectivity to the [**directory**](#gt_directory) and permissions to query it, or the server is able to verify group membership in some other way (for example, through cached directory information) in order to respond to Group Expansion requests from either the [Binary Group Expansion Interface](#Section_4.3) interface or the [GroupExpansionWebServiceSoap](#Section_1.3.4) port type. interfaces.
+Finally, it is assumed that the server either has connectivity to the [**directory**](#gt_directory) and permissions to query it, or the server is able to verify group membership in some other way (for example, through cached directory information) in order to respond to Group Expansion requests from either the [Binary Group Expansion Interface](#Section_4.3) interface or the [GroupExpansionWebServiceSoap](#Section_6.4) port type. interfaces.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -457,8 +457,8 @@ The RMS: Server-to-Server Protocol is used for communication between RMS servers
 
 This document covers versioning issues in the following areas:
 
-- **Supported Transports:** This protocol is implemented on top of HTTP, as specified in section [2.1](#Section_1.3.4).
-- **Protocol Versions:** The [ServerSoap (FindServiceLocations)](#Section_3.2) interface has only one version that is implemented using a SOAP-based protocol over HTTP. The [Binary Group Expansion](#Section_4.3) interface is used by RMS version 1.0 and RMS version 1.0 SP1. It is also used by RMS version 1.0 SP2 for backward compatibility when communicating with RMS version 1.0 servers or RMS version 1.0 SP1 servers. The [GroupExpansionWebServiceSoap](#Section_1.3.4) port type is used by RMS version 1.0 SP2 servers and RMS version 2.0 servers.<1>
+- **Supported Transports:** This protocol is implemented on top of HTTP, as specified in section [2.1](#Section_2.1).
+- **Protocol Versions:** The [ServerSoap (FindServiceLocations)](#Section_6.1) interface has only one version that is implemented using a SOAP-based protocol over HTTP. The [Binary Group Expansion](#Section_4.3) interface is used by RMS version 1.0 and RMS version 1.0 SP1. It is also used by RMS version 1.0 SP2 for backward compatibility when communicating with RMS version 1.0 servers or RMS version 1.0 SP1 servers. The [GroupExpansionWebServiceSoap](#Section_6.4) port type is used by RMS version 1.0 SP2 servers and RMS version 2.0 servers.<1>
 - **Security and Authentication Methods:** This protocol passively supports Kerberos authentication over HTTP or HTTPS (as specified in [[KERBKEY]](https://go.microsoft.com/fwlink/?LinkId=89926)) and NTLM authentication over HTTP or HTTPS (as specified in [[NTLM]](https://go.microsoft.com/fwlink/?LinkId=90235)).
 - **Localization:** There are no localization-dependent behaviors for the RMS: Server-to-Server Protocol.
 - **Capability Negotiation:** The RMS: Server-to-Server Protocol supports limited capability negotiation by way of the VersionData type that is present on all SOAP-based protocol requests. On a request, the VersionData structure contains a MinimumVersion and MaximumVersion value, indicating the range of versions that the client is capable of understanding. On a response, the [VersionData](#Section_2.2.4.2) structure contains a MinimumVersion and MaximumVersion that the server is capable of understanding. The Binary Group Expansion versioning structure must be adhered to for Binary Group Expansion requests.
@@ -481,9 +481,9 @@ The RMS: Server-Server Protocol has not been assigned any standards by any recog
 The RMS: Server-Server Protocol is composed of four port types and one binary-over-HTTP interface:
 
 - Port types:
-- [ServerSoap (FindServiceLocations)](#Section_3.2)
+- [ServerSoap (FindServiceLocations)](#Section_6.1)
 - [SubEnrollServiceSoap](#Section_6.2)
-- [ServerSoap (GetLicensorCertificate)](#Section_5.1.3)
+- [ServerSoap (GetLicensorCertificate)](#Section_6.3)
 - GroupExpansionWebServiceSoap
 - Binary-over-HTTP interface:
 - [Binary Group Expansion](#Section_4.3)
@@ -524,7 +524,7 @@ A remote method invocation request MUST be mapped to an HTTP request and MUST ha
 - HTTP Method MUST be specified.
 - The HTTP Method SHOULD be a POST.
 - The HTTP Method MAY be M-POST.
-- The Request-URI of the HTTP request message MUST be set to the URI of the [Binary Group Expansion](#Section_4.3) [**endpoint**](#gt_endpoint) as specified in section [2.1](#Section_1.3.4).
+- The Request-URI of the HTTP request message MUST be set to the URI of the [Binary Group Expansion](#Section_4.3) [**endpoint**](#gt_endpoint) as specified in section [2.1](#Section_2.1).
 - The User-Agent SHOULD contain the string "MS .NET Remoting".
 - The Content-Type MUST be "application/octet-stream".
 - The message content MUST be transmitted as the HTTP request message body.
@@ -534,7 +534,7 @@ A remote method invocation request MUST be mapped to an HTTP request and MUST ha
 
 The implementation MUST wait for a response. If a response is not received before an implementation-defined time-out, the implementation SHOULD cancel the request and report an error to the higher layer.
 
-If the status code of the HTTP response is one of the successful codes as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 10.2 or one of the server-error codes as specified in [RFC2616] section 10.5, the response MUST be processed further as specified in section [2.3](#Section_4.3). If the Status-Code is one of the client-error codes as specified in [RFC2616] section 10.4, the response MUST NOT be processed any further.
+If the status code of the HTTP response is one of the successful codes as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 10.2 or one of the server-error codes as specified in [RFC2616] section 10.5, the response MUST be processed further as specified in section [2.3](#Section_2.3). If the Status-Code is one of the client-error codes as specified in [RFC2616] section 10.4, the response MUST NOT be processed any further.
 
 An implementation MAY handle other status codes in an implementation-specific way that complies with [RFC2616]. If an error occurs in processing of the other status codes, the response MUST NOT be processed any further.
 
@@ -609,7 +609,7 @@ The following table summarizes the set of common XML Schema complex type definit
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 ArrayOfString Complex Type
 
-The ArrayOfString complex type is used in the [SubEnrollServiceSoap (section 3.3)](#Section_6.2) and [GroupExpansionWebServiceSoap (section 3.5)](#Section_1.3.4) port types.
+The ArrayOfString complex type is used in the [SubEnrollServiceSoap (section 3.3)](#Section_3.3) and [GroupExpansionWebServiceSoap (section 3.5)](#Section_3.5) port types.
 
 <s:complexType name="ArrayOfString">
 
@@ -636,7 +636,7 @@ In the GroupExpansionWebServiceSoap port type, the **string** element contains t
 
 The VersionData complex type is used to represent the capability version of the requestor and the responder.
 
-All four port types in the RMS: Server-Server Protocol (that is, [ServerSoap (FindServiceLocations)](#Section_3.2), [SubEnrollServiceSoap](#Section_6.2), [ServerSoap (GetLicensorCertificate)](#Section_5.1.3), and [GroupExpansionWebServiceSoap](#Section_1.3.4)) use the same SOAP header for both requests and responses. The SOAP header for requests and responses to these port types MUST contain the VersionDataelement.
+All four port types in the RMS: Server-Server Protocol (that is, [ServerSoap (FindServiceLocations)](#Section_6.1), [SubEnrollServiceSoap](#Section_6.2), [ServerSoap (GetLicensorCertificate)](#Section_6.3), and [GroupExpansionWebServiceSoap](#Section_6.4)) use the same SOAP header for both requests and responses. The SOAP header for requests and responses to these port types MUST contain the VersionDataelement.
 
 <xs:complexType name="VersionData">
 
@@ -725,7 +725,7 @@ It is possible that a requested group contains a subgroup in another [**forest**
 <a id="Section_2.3.1"></a>
 ### 2.3.1 Serialized Octet Stream
 
-The Serialized Octet Stream contains a series of records. The first record MUST be a [SerializationHeaderRecord](#Section_2.3.1.1). For requests, the second record is an [IsPrincipalMemberOfRequest](#Section_3.6.4.1). For responses, the second record is an [IsPrincipalMemberOfResponse](#Section_2.3.1.3). The remainder of the stream MAY contain any number of additional records. The final record in the stream MUST be a [MessageEnd](#Section_2.3.1.4) record.
+The Serialized Octet Stream contains a series of records. The first record MUST be a [SerializationHeaderRecord](#Section_2.3.1.1). For requests, the second record is an [IsPrincipalMemberOfRequest](#Section_3.5.4.1). For responses, the second record is an [IsPrincipalMemberOfResponse](#Section_2.3.1.3). The remainder of the stream MAY contain any number of additional records. The final record in the stream MUST be a [MessageEnd](#Section_2.3.1.4) record.
 
 ```mermaid
 packet-beta
@@ -773,7 +773,7 @@ packet-beta
 
 An INT32 value ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.22) that identifies the root of the graph of nodes. The value of the field is set as follows.
 
-- If an [IsPrincipalMemberOfRequest](#Section_3.6.4.1) record is present in the serialization stream, the value of this field MUST contain the **ObjectId** of the [ArgumentsArray](#Section_2.3.1.2.1) (section 2.3.1.2.1).
+- If an [IsPrincipalMemberOfRequest](#Section_3.5.4.1) record is present in the serialization stream, the value of this field MUST contain the **ObjectId** of the [ArgumentsArray](#Section_2.3.1.2.1) (section 2.3.1.2.1).
 - If an [IsPrincipalMemberOfResponse](#Section_2.3.1.3) record is present in the serialization stream, the value of this field MUST contain the **ObjectId** of the [ReturnArray](#Section_2.3.1.3.1) (section 2.3.1.3.1).
 **Reserved0 (4 bytes):** Reserved. MUST be set to 0xFFFFFFFF (-1) and MUST be ignored upon receipt.
 
@@ -847,9 +847,9 @@ packet-beta
 
 **PrincipalCrossForest (5 bytes):** A [MemberReference](#Section_2.3.5.3) value that refers to the [Principal](#Section_2.3.6.2) [StringValueWithCode](#Section_2.3.3.3) field by **ObjectId**.
 
-**TargetGroups (5 bytes):** A RecordTypeEnumeration value that identifies the **TargetGroups** [ArraySingleString](#Section_2.3.4.2) record by **ObjectId**. The **TargetGroups** field is specified in the [IsPrincipalMemberOfRequest](#Section_3.6.4.1) packet (section 2.3.1.2).
+**TargetGroups (5 bytes):** A RecordTypeEnumeration value that identifies the **TargetGroups** [ArraySingleString](#Section_2.3.4.2) record by **ObjectId**. The **TargetGroups** field is specified in the [IsPrincipalMemberOfRequest](#Section_3.5.4.1) packet (section 2.3.1.2).
 
-**CrossForestCallsSoFar (6 bytes):** A [MemberPrimitiveTyped](#Section_2.3.5.1) record that represents the number of servers that have been involved in servicing this group expansion request so far. This field is incremented as defined in section [2.3](#Section_4.3).
+**CrossForestCallsSoFar (6 bytes):** A [MemberPrimitiveTyped](#Section_2.3.5.1) record that represents the number of servers that have been involved in servicing this group expansion request so far. This field is incremented as defined in section [2.3](#Section_2.3).
 
 **ObjectNull (1 byte):** An [ObjectNull](#Section_2.3.5.4) record.
 
@@ -1102,7 +1102,7 @@ String = 0x12
 <a id="Section_2.3.2.4"></a>
 #### 2.3.2.4 MessageFlags
 
-The MessageFlags enumeration is used by the [IsPrincipalMemberOfRequest](#Section_3.6.4.1) or [IsPrincipalMemberOfResponse](#Section_2.3.1.3) records to provide information about the structure of the record. The type of the enumeration is INT32, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.22.
+The MessageFlags enumeration is used by the [IsPrincipalMemberOfRequest](#Section_3.5.4.1) or [IsPrincipalMemberOfResponse](#Section_2.3.1.3) records to provide information about the structure of the record. The type of the enumeration is INT32, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.22.
 
 The following table is common for both the IsPrincipalMemberOfRequest and IsPrincipalMemberOfResponse records. The term "method record" is used in the description when it is applicable to both the records. The term "call array record" is used in the description when it is applicable to both [ArgumentsArray](#Section_2.3.1.2.1) and [ReturnArray](#Section_2.3.1.3.1).
 
@@ -2098,7 +2098,7 @@ None.
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Common SOAP Headers
 
-All four port types in the RMS: Server-Server Protocol (that is, [ServerSoap (FindServiceLocations)](#Section_3.2), [SubEnrollServiceSoap](#Section_6.2), [ServerSoap (GetLicensorCertificate)](#Section_5.1.3), and [GroupExpansionWebServiceSoap](#Section_1.3.4)) use the same SOAP header for both requests and responses. The SOAP header for requests and responses to these port types MUST contain the [VersionData](#Section_2.2.4.2) element specified in section 2.2.4.2.
+All four port types in the RMS: Server-Server Protocol (that is, [ServerSoap (FindServiceLocations)](#Section_6.1), [SubEnrollServiceSoap](#Section_6.2), [ServerSoap (GetLicensorCertificate)](#Section_6.3), and [GroupExpansionWebServiceSoap](#Section_6.4)) use the same SOAP header for both requests and responses. The SOAP header for requests and responses to these port types MUST contain the [VersionData](#Section_2.2.4.2) element specified in section 2.2.4.2.
 
 **Request Headers**
 
@@ -2127,14 +2127,14 @@ None.
 
 A requesting RMS server uses the ServerSoap (FindServiceLocations) port type for FindServiceLocations to discover the URLs of services offered by a responding RMS server. These URLs MAY be passed back to a client as a form of redirection, or they MAY be used by the requesting server to make another request of the responding RMS server.
 
-The ServerSoap (FindServiceLocations) port type provides one operation: [FindServiceLocations](#Section_3.2.4.1.2.1).
+The ServerSoap (FindServiceLocations) port type provides one operation: [FindServiceLocations](#Section_3.2.4.1).
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document. The conceptual data can be implemented by using a variety of techniques. Any data structure that stores the conceptual data MAY be used in the implementation.
 
-In order to properly implement the [ServerSoap (FindServiceLocations)](#Section_3.2) port type, the responder MUST be able to provide the URLs it uses.
+In order to properly implement the [ServerSoap (FindServiceLocations)](#Section_6.1) port type, the responder MUST be able to provide the URLs it uses.
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -2149,13 +2149,13 @@ None.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
-An RMS server uses the [ServerSoap (FindServiceLocations)](#Section_3.2) port type to retrieve URLs for services that are either offered by or known to the responding server.
+An RMS server uses the [ServerSoap (FindServiceLocations)](#Section_6.1) port type to retrieve URLs for services that are either offered by or known to the responding server.
 
 The following table summarizes the list of WSDL operations as defined by this specification:
 
 | Operation | Description |
 | --- | --- |
-| [FindServiceLocations](#Section_3.2.4.1.2.1) | Allows a server to retrieve a URL for a specified service that is either offered by or known to the responding server. |
+| [FindServiceLocations](#Section_3.2.4.1) | Allows a server to retrieve a URL for a specified service that is either offered by or known to the responding server. |
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 FindServiceLocations
@@ -2195,7 +2195,7 @@ For a successful request, the responding server MUST return the appropriate serv
 | LicensingService | The URL of the responding server's licensing service (license.asmx). |
 | CertificationService | The URL of the responding server's certification service (certification.asmx). |
 | DrmRemoteDirectoryServices | The URL of the responding server's [Binary Group Expansion](#Section_4.3) interface.<10> |
-| GroupExpansionService | The URL of the responding server's [GroupExpansionServerSoap](#Section_1.3.4) port type.<11> |
+| GroupExpansionService | The URL of the responding server's [GroupExpansionServerSoap](#Section_6.4) port type.<11> |
 | LicensingInternalService | The internal URL of the responding server's the licensing service (license.asmx).<12> |
 | CertificationInternalService | The internal URL of the responding server's certification service (certification.asmx).<13> |
 
@@ -2475,7 +2475,7 @@ The ServiceType simple type enumerates licensing service types.
 | PrecertificationService | Identifies the precertification service (precertification.asmx). MUST NOT be used with the RMS: Server-Server Protocol. |
 | ServerService | Identifies the server service (server.asmx). MUST NOT be used with the RMS: Server-Server Protocol. |
 | DrmRemoteDirectoryServices | Identifies the [Binary Group Expansion](#Section_4.3) interface.<15> |
-| GroupExpansionService | Identifies the [Group Expansion over SOAP](#Section_1.3.4) port type.<16> |
+| GroupExpansionService | Identifies the [Group Expansion over SOAP](#Section_6.4) port type.<16> |
 | LicensingInternalService | Identifies the internal URL for the licensing service (license.asmx).<17> |
 | CertificationInternalService | Identifies the internal URL for the certification service (certification.asmx).<18> |
 
@@ -2590,7 +2590,7 @@ The SubEnrollSoapIn request submits a public key and the attributes of the RMS s
 
 </wsdl:message>
 
-**parameters**: An element that contains the body of the SOAP request. The body MUST contain exactly one [SubEnroll (section 3.3.4.1.2.1)](#Section_3.3.4.1) element.
+**parameters**: An element that contains the body of the SOAP request. The body MUST contain exactly one [SubEnroll (section 3.3.4.1.2.1)](#Section_3.3.4.1.2.1) element.
 
 <a id="Section_3.3.4.1.1.2"></a>
 ###### 3.3.4.1.1.2 SubEnrollSoapOut Response
@@ -2840,7 +2840,7 @@ The ServerSoap port type for GetLicensorCertificate is used to obtain licensor [
 
 When an RMS server becomes a subordinate of another RMS server, it does not issue its own [**RMS Account Certificates (RACs)**](#gt_rms-account-certificate-rac); instead, it trusts RACs issued by the root RMS server.<22> To trust RACs issued by the root RMS server, the subordinate RMS server needs to know the public key of the root RMS server, which is contained in the root RMS server's [**SLC**](#gt_server-licensor-certificate-slc).
 
-A subordinate RMS server uses the ServerSoap (GetLicensorCertificate) port type to acquire the root RMS server's SLC chain. The ServerSoap (GetLicensorCertificate) port type provides one operation: [GetLicensorCertificate](#Section_3.4.4.1.2.1).
+A subordinate RMS server uses the ServerSoap (GetLicensorCertificate) port type to acquire the root RMS server's SLC chain. The ServerSoap (GetLicensorCertificate) port type provides one operation: [GetLicensorCertificate](#Section_3.4.4.1).
 
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Abstract Data Model
@@ -2857,7 +2857,7 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-The responding RMS server MUST be bootstrapped in order for the [ServerSoap (GetLicensorCertificate)](#Section_5.1.3) port type to function. RMS server bootstrapping is defined in [MS-RMPR](../MS-RMPR/MS-RMPR.md) section 3.1.3.
+The responding RMS server MUST be bootstrapped in order for the [ServerSoap (GetLicensorCertificate)](#Section_6.3) port type to function. RMS server bootstrapping is defined in [MS-RMPR](../MS-RMPR/MS-RMPR.md) section 3.1.3.
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Message Processing Events and Sequencing Rules
@@ -2866,7 +2866,7 @@ The following table summarizes the list of WSDL operations as defined by this sp
 
 | Operation | Description |
 | --- | --- |
-| [GetLicensorCertificate](#Section_3.4.4.1.2.1) | Provides a mechanism for a requestor to acquire the [**SLC**](#gt_server-licensor-certificate-slc) chain of the responder. |
+| [GetLicensorCertificate](#Section_3.4.4.1) | Provides a mechanism for a requestor to acquire the [**SLC**](#gt_server-licensor-certificate-slc) chain of the responder. |
 
 <a id="Section_3.4.4.1"></a>
 #### 3.4.4.1 GetLicensorCertificate
@@ -2891,11 +2891,11 @@ style="document" />
 
 **Request Validation**:
 
-The responding server MUST validate the request upon receiving a GetLicensorCertificate request. There are no input parameters; however, the [GetLicensorCertificate request](#Section_3.4.4.1.2.1) MUST follow the schema specified in section 3.4.4.1.1.1.
+The responding server MUST validate the request upon receiving a GetLicensorCertificate request. There are no input parameters; however, the [GetLicensorCertificate request](#Section_3.4.4.1) MUST follow the schema specified in section 3.4.4.1.1.1.
 
 **Response**:
 
-A successful [GetLicensorCertificate response](#Section_3.4.4.1.2.1) MUST follow the schema specified in section 3.4.4.1.1.2. A successful response MUST return the responder's SLC chain. For an unsuccessful request, the server MUST return a fault code. This operation throws only [Common Fault Codes](#Section_2.2.9.1) for the RMS: Server-Server Protocol.
+A successful [GetLicensorCertificate response](#Section_3.4.4.1) MUST follow the schema specified in section 3.4.4.1.1.2. A successful response MUST return the responder's SLC chain. For an unsuccessful request, the server MUST return a fault code. This operation throws only [Common Fault Codes](#Section_2.2.9.1) for the RMS: Server-Server Protocol.
 
 <a id="Section_3.4.4.1.1"></a>
 ##### 3.4.4.1.1 Messages
@@ -2904,8 +2904,8 @@ The following table summarizes the XML Schema message definitions that are speci
 
 | Message | Description |
 | --- | --- |
-| [GetLicensorCertificateSoapIn request](#Section_3.4.4.1.2.1) | Requests an [**SLC**](#gt_server-licensor-certificate-slc) chain. Contains no inputs. |
-| [GetLicensorCertificateSoapOut response](#Section_3.4.4.1.2.1) | Returns the requestor's SLC chain. |
+| [GetLicensorCertificateSoapIn request](#Section_3.4.4.1.1.1) | Requests an [**SLC**](#gt_server-licensor-certificate-slc) chain. Contains no inputs. |
+| [GetLicensorCertificateSoapOut response](#Section_3.4.4.1.1.2) | Returns the requestor's SLC chain. |
 
 <a id="Section_3.4.4.1.1.1"></a>
 ###### 3.4.4.1.1.1 GetLicensorCertificateSoapIn Request
@@ -2944,13 +2944,13 @@ The following table summarizes the set of common XML Schema complex type definit
 
 | Complex Type | Description |
 | --- | --- |
-| [GetLicensorCertificate](#Section_3.4.4.1.2.1) | Included in the [GetLicensorCertificateSoapIn request (section 3.4.4.1.1.1)](#Section_3.4.4.1.2.1) as an empty message part. |
+| [GetLicensorCertificate](#Section_3.4.4.1) | Included in the [GetLicensorCertificateSoapIn request (section 3.4.4.1.1.1)](#Section_3.4.4.1.1.1) as an empty message part. |
 | [GetLicensorCertificateResponse](#Section_3.4.4.1.2.2) | Contains the body of the SOAP response, including the responder's [**SLC**](#gt_server-licensor-certificate-slc) chain. |
 
 <a id="Section_3.4.4.1.2.1"></a>
 ###### 3.4.4.1.2.1 GetLicensorCertificate
 
-The GetLicensorCertificate element is an empty element. It is included in the [GetLicensorCertificateSoapIn request (section 3.4.4.1.1.1)](#Section_3.4.4.1.2.1) as an empty message part.
+The GetLicensorCertificate element is an empty element. It is included in the [GetLicensorCertificateSoapIn request (section 3.4.4.1.1.1)](#Section_3.4.4.1.1.1) as an empty message part.
 
 <s:element name="GetLicensorCertificate">
 
@@ -3066,7 +3066,7 @@ An RMS server can be requested to issue a Use License (UL) for content that has 
 
 RMS version 1.0 and RMS version 1.0 SP1 use the Binary Group Expansion interface. RMS version 1.0 SP2 supports both the Binary Group Expansion interface and the GroupExpansionWebServiceSoap port type. It will use the GroupExpansionWebServiceSoap interface whenever possible. RMS version 2.0 supports only the GroupExpansionWebServiceSoap interface.
 
-The GroupExpansionWebServiceSoap port type provides one operation: [IsPrincipalMemberOf](#Section_3.6.4.1).
+The GroupExpansionWebServiceSoap port type provides one operation: [IsPrincipalMemberOf](#Section_3.5.4.1).
 
 <a id="Section_3.5.1"></a>
 ### 3.5.1 Abstract Data Model
@@ -3092,13 +3092,13 @@ None.
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Message Processing Events and Sequencing Rules
 
-An RMS server uses the [GroupExpansionWebServiceSoap](#Section_1.3.4) port type to verify group membership of a specific user with another RMS server.
+An RMS server uses the [GroupExpansionWebServiceSoap](#Section_6.4) port type to verify group membership of a specific user with another RMS server.
 
 The following table summarizes the list of WSDL operations as defined by this specification.
 
 | Operation | Description |
 | --- | --- |
-| [IsPrincipalMemberOf](#Section_3.6.4.1) | Provides a mechanism for verifying whether a specific user is currently a member of specific groups. |
+| [IsPrincipalMemberOf](#Section_3.5.4.1) | Provides a mechanism for verifying whether a specific user is currently a member of specific groups. |
 
 <a id="Section_3.5.4.1"></a>
 #### 3.5.4.1 IsPrincipalMemberOf
@@ -3107,7 +3107,7 @@ The IsPrincipalMemberOf operation provides a mechanism for verifying whether a s
 
 In the IsPrincipalMemberOf operation, the requestor specifies a principal name, the [**forest**](#gt_forest) of the principal, the target groups for which it needs an answer, and the count of cross-forest calls so far. The responder queries the directory and returns the membership status. IsPrincipalMemberOf MUST return true if the user is a member of at least one of the specified groups and MUST return false otherwise.
 
-A properly formed [IsPrincipalMemberOf request](#Section_3.6.4.1) MUST contain valid data for each of these elements.
+A properly formed [IsPrincipalMemberOf request](#Section_3.5.4.1) MUST contain valid data for each of these elements.
 
 ![IsPrincipalMemberOf message sequence diagram](media/image6.png)
 
@@ -3129,7 +3129,7 @@ style="document"/>
 
 **Request Validation**:
 
-The responding server MUST validate the input parameters upon receiving an IsPrincipalMemberOf request. For the [GroupExpansionWebServiceSoap](#Section_1.3.4) port type, the IsPrincipalMemberOf request MUST follow the schema specified in section 3.5.4.1.1.1. See section [3.6.4.1](#Section_3.6.4.1) for additional details regarding a successful binary request.
+The responding server MUST validate the input parameters upon receiving an IsPrincipalMemberOf request. For the [GroupExpansionWebServiceSoap](#Section_6.4) port type, the IsPrincipalMemberOf request MUST follow the schema specified in section 3.5.4.1.1.1. See section [3.6.4.1](#Section_3.6.4.1) for additional details regarding a successful binary request.
 
 **Data Processing**:
 
@@ -3150,7 +3150,7 @@ The following table summarizes the XML Schema message definitions that are speci
 
 | Message | Description |
 | --- | --- |
-| [IsPrincipalMemberOfSoapIn request](#Section_3.6.4.1) | Requests confirmation of group membership for the user. Contains information about the user, as well as information about the current group expansion operation. |
+| [IsPrincipalMemberOfSoapIn request](#Section_3.5.4.1.1.1) | Requests confirmation of group membership for the user. Contains information about the user, as well as information about the current group expansion operation. |
 | [IsPrincipalMemberOfSoapOut response](#Section_3.5.4.1.1.2) | Returns a Boolean value that either confirms or denies group membership. |
 
 <a id="Section_3.5.4.1.1.1"></a>
@@ -3164,7 +3164,7 @@ The IsPrincipalMemberOfSoapIn request submits information about the user, one or
 
 </wsdl:message>
 
-**parameters**: An element that contains the body of the SOAP request. The body MUST contain exactly one [IsPrincipalMemberOf (section 3.5.4.1.2.1)](#Section_3.6.4.1) element.
+**parameters**: An element that contains the body of the SOAP request. The body MUST contain exactly one [IsPrincipalMemberOf (section 3.5.4.1.2.1)](#Section_3.5.4.1.2.1) element.
 
 <a id="Section_3.5.4.1.1.2"></a>
 ###### 3.5.4.1.1.2 IsPrincipalMemberOfSoapOut Response
@@ -3190,7 +3190,7 @@ The following table summarizes the set of common XML Schema complex type definit
 
 | Complex Type | Description |
 | --- | --- |
-| [IsPrincipalMemberOf](#Section_3.6.4.1) | Contains the body of the SOAP request. |
+| [IsPrincipalMemberOf](#Section_3.5.4.1) | Contains the body of the SOAP request. |
 | [IsPrincipalMemberOfResponse](#Section_3.5.4.1.2.2) | Contains the body of the SOAP response containing the group membership status. |
 
 <a id="Section_3.5.4.1.2.1"></a>
@@ -3312,14 +3312,14 @@ None.
 <a id="Section_3.6.4"></a>
 ### 3.6.4 Message Processing Events and Sequencing Rules
 
-The [Binary Group Expansion](#Section_4.3) interface (section 2.3) provides a way of performing group expansion, and is an alternative to the [GroupExpansionWebServiceSoap](#Section_1.3.4) port type 3.5.
+The [Binary Group Expansion](#Section_4.3) interface (section 2.3) provides a way of performing group expansion, and is an alternative to the [GroupExpansionWebServiceSoap](#Section_6.4) port type 3.5.
 
 <a id="Section_3.6.4.1"></a>
 #### 3.6.4.1 IsPrincipalMemberOf
 
-Processing details for the IsPrincipalMemberOf method in the [Binary Group Expansion](#Section_4.3) interface are the same as those specified for the SOAP operation in section [3.5.4.1](#Section_3.6.4.1), with the following exceptions:
+Processing details for the IsPrincipalMemberOf method in the [Binary Group Expansion](#Section_4.3) interface are the same as those specified for the SOAP operation in section [3.5.4.1](#Section_3.5.4.1), with the following exceptions:
 
-- For the Binary Group Expansion interface, a successful IsPrincipalMemberOf request MUST follow the definition specified in section [2.3.1.2](#Section_3.6.4.1).
+- For the Binary Group Expansion interface, a successful IsPrincipalMemberOf request MUST follow the definition specified in section [2.3.1.2](#Section_2.3.1.2).
 - For the Binary Group Expansion interface, a successful IsPrincipalMemberOf response MUST follow the definition specified in section [2.3.1.3](#Section_2.3.1.3).
 - SOAP fault codes are not thrown in the binary interface.
 <a id="Section_3.6.5"></a>
@@ -3340,7 +3340,7 @@ None.
 
 An end user requires an authorization token ([**use license (UL)**](#gt_use-license-ul)) issued by an RMS server to access [**protected content**](#gt_protected-content). One of the conditions evaluated by the server when generating such an authorization token is the user's current membership in any groups that are authorized to consume the information, as specified by the policy of the protected content.
 
-The following example applies to the IsPrincipalMemberOf operation for either the [Binary Group Expansion](#Section_4.3) interface or the [Group Expansion over SOAP](#Section_1.3.4) port type.
+The following example applies to the IsPrincipalMemberOf operation for either the [Binary Group Expansion](#Section_4.3) interface or the [Group Expansion over SOAP](#Section_6.4) port type.
 
 - Usage policy is extracted from protected content by the application.
 The application extracts (or retrieves) the usage policy ([**publishing license (PL)**](#gt_publishing-license-pl)) from wherever the application has stored it. Storage of the usage policy associated with protected information (or content) is the responsibility of the application.
@@ -3356,7 +3356,7 @@ The client calls the AcquireLicense web method, providing the requesting user's 
 
 The server verifies that the RAC and PL were issued from an entity or entities it trusts. It then evaluates the full usage policy as it applies to the specific user named in the RAC, including verifying if the user is a member of any groups specified by the author as having authorization to access the protected information (or content).
 
-To verify group membership, the server will either invoke a local [IsPrincipalMemberOf](#Section_3.6.4.1) procedure call to consult the [**directory**](#gt_directory) in the local [**domain**](#gt_domain), or it will contact an RMS server located in an external domain to consult that domain's directory by way of the IsPrincipalMemberOf [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc). The result of either is a Boolean response indicating if the named user is a member of a named group (or groups).
+To verify group membership, the server will either invoke a local [IsPrincipalMemberOf](#Section_3.5.4.1) procedure call to consult the [**directory**](#gt_directory) in the local [**domain**](#gt_domain), or it will contact an RMS server located in an external domain to consult that domain's directory by way of the IsPrincipalMemberOf [**remote procedure call (RPC)**](#gt_remote-procedure-call-rpc). The result of either is a Boolean response indicating if the named user is a member of a named group (or groups).
 
 The server then issues a UL containing a set of usage policies for the user, and signs the UL. The UL is then returned to the client.
 
@@ -3366,11 +3366,11 @@ The client receiving the UL from the server then uses the UL to decrypt and cons
 <a id="Section_4.2"></a>
 ## 4.2 Provisioning an Extranet User
 
-To consume [**protected content**](#gt_protected-content), a user's client machine needs to contact an RMS server to be provisioned with specific [**certificates**](#gt_certificate) on the machine being used. These certificates can easily be obtained with the proper URLs. Sometimes the necessary URL information is not present on the client machine, either because the machine is not joined to a [**domain**](#gt_domain), or it is not joined to the same domain that contains the user's account. As defined in section [1.3.1](#Section_3.2), the appropriate RMS server for a specific service type can vary depending on the specific user.
+To consume [**protected content**](#gt_protected-content), a user's client machine needs to contact an RMS server to be provisioned with specific [**certificates**](#gt_certificate) on the machine being used. These certificates can easily be obtained with the proper URLs. Sometimes the necessary URL information is not present on the client machine, either because the machine is not joined to a [**domain**](#gt_domain), or it is not joined to the same domain that contains the user's account. As defined in section [1.3.1](#Section_1.3.1), the appropriate RMS server for a specific service type can vary depending on the specific user.
 
 To find the relevant RMS server's URL, the client has to first contact a general RMS server and invoke the FindServiceLocationsForUser [**RPC**](#gt_remote-procedure-call-rpc). The URL for this general RMS server can be found from the policy that has been applied to the protected information (or content). Alternately, the URL for the general server could be found via configuration settings or some application-specific or deployment-specific mechanism.
 
-Once contacted, the general RMS server (server 1 in the following diagram) will in turn contact an appropriate RMS server (server 2 in the following diagram) for the specific user using the FindSeviceLocations operation of the [ServerSoap (FindServiceLocations)](#Section_3.2) port type, and return the appropriate direct URL to the client for subsequent requests to provision the necessary certificates.
+Once contacted, the general RMS server (server 1 in the following diagram) will in turn contact an appropriate RMS server (server 2 in the following diagram) for the specific user using the FindSeviceLocations operation of the [ServerSoap (FindServiceLocations)](#Section_6.1) port type, and return the appropriate direct URL to the client for subsequent requests to provision the necessary certificates.
 
 ![FindServiceLocations call resulting from AcquireLicense](media/image8.png)
 
@@ -3394,9 +3394,9 @@ The client will then contact server 2 directly and request the required provisio
 <a id="Section_4.3"></a>
 ## 4.3 Binary Group Expansion
 
-This sample illustrates the messages used in the [Binary Group Expansion Interface](#Section_4.3). In this example, a client uses the [IsPrincipalMemberOf](#Section_3.6.4.1) operation to determine whether the user "mail=user1@contoso.com" is a mesmber of either of two target groups: "mail=group1_1@contoso.com" and "mail=group2@contoso.com".
+This sample illustrates the messages used in the [Binary Group Expansion Interface](#Section_4.3). In this example, a client uses the [IsPrincipalMemberOf](#Section_3.5.4.1) operation to determine whether the user "mail=user1@contoso.com" is a mesmber of either of two target groups: "mail=group1_1@contoso.com" and "mail=group2@contoso.com".
 
-The client creates a [Serialized Octet Stream](#Section_2.3.1) containing an [IsPrincipalMemberOfRequest](#Section_3.6.4.1) record. The network capture of this stream is as follows.
+The client creates a [Serialized Octet Stream](#Section_2.3.1) containing an [IsPrincipalMemberOfRequest](#Section_3.5.4.1) record. The network capture of this stream is as follows.
 
 0000 00 01 00 00 00 FF FF FF FF 01 00 00 00 00 00 00 .....ÿÿÿÿ.......
 
@@ -4487,7 +4487,7 @@ The client examines the **MessageEnum** flag in the IsPrincipalMemberOfResponse 
 <a id="Section_5.1.1"></a>
 ### 5.1.1 ServerSoap (FindServiceLocations) Security Considerations
 
-The [ServerSoap (FindServiceLocations)](#Section_3.2) port type does not communicate any sensitive information. However, it is recommended that communication be performed over HTTPS instead of HTTP to mitigate any man-in-the-middle attacks that might allow an attacker to intercept a request for a service location and return the location of an untrustworthy server instead. If an attacker can lure a victim to use this untrustworthy server, [**protected content**](#gt_protected-content) published by that victim could be disclosed to the attacker.
+The [ServerSoap (FindServiceLocations)](#Section_6.1) port type does not communicate any sensitive information. However, it is recommended that communication be performed over HTTPS instead of HTTP to mitigate any man-in-the-middle attacks that might allow an attacker to intercept a request for a service location and return the location of an untrustworthy server instead. If an attacker can lure a victim to use this untrustworthy server, [**protected content**](#gt_protected-content) published by that victim could be disclosed to the attacker.
 
 Because the ServerSoap (FindServiceLocations) port type generally does not require intense processing for the responding server, it is not a severe target for denial-of-service attacks. However, the impact of such attacks can be further reduced by requiring authentication.
 
@@ -4503,14 +4503,14 @@ It is also recommended that communication be performed over HTTPS instead of HTT
 <a id="Section_5.1.3"></a>
 ### 5.1.3 ServerSoap (GetLicensorCertificate) Security Considerations
 
-The [ServerSoap (GetLicensorCertificate)](#Section_5.1.3) port type does not communicate any sensitive information. However, it is strongly recommended that communication be done over HTTPS instead of HTTP to mitigate any man-in-the-middle attacks. If launched successfully, such an attack could allow an untrustworthy server to be registered as a trusted [**RAC**](#gt_rms-account-certificate-rac) provider for a subordinate RMS server. Properly configured [**Secure Sockets Layer (SSL)**](#gt_secure-sockets-layer-ssl) is the recommended mitigation.
+The [ServerSoap (GetLicensorCertificate)](#Section_6.3) port type does not communicate any sensitive information. However, it is strongly recommended that communication be done over HTTPS instead of HTTP to mitigate any man-in-the-middle attacks. If launched successfully, such an attack could allow an untrustworthy server to be registered as a trusted [**RAC**](#gt_rms-account-certificate-rac) provider for a subordinate RMS server. Properly configured [**Secure Sockets Layer (SSL)**](#gt_secure-sockets-layer-ssl) is the recommended mitigation.
 
 Because the ServerSoap (GetLicensorCertificate) port type generally does not require intense processing for the responding server, it is not a severe target for denial of service attacks. However, the impact of such attacks can be further reduced by requiring authentication.
 
 <a id="Section_5.1.4"></a>
 ### 5.1.4 Group Expansion Security Considerations
 
-[GroupExpansionWebServiceSoap](#Section_1.3.4) port type and the [Binary Group Expansion](#Section_4.3) interface could be used to communicate sensitive information. If group membership information is intended to be private for a given organization, it could be disclosed by an attacker using these interfaces. A man-in-the-middle attack on these interfaces could also result in an unauthorized user gaining access to content by spoofing a positive response to a group expansion request.
+[GroupExpansionWebServiceSoap](#Section_6.4) port type and the [Binary Group Expansion](#Section_4.3) interface could be used to communicate sensitive information. If group membership information is intended to be private for a given organization, it could be disclosed by an attacker using these interfaces. A man-in-the-middle attack on these interfaces could also result in an unauthorized user gaining access to content by spoofing a positive response to a group expansion request.
 
 Group expansion is also a resource-intensive operation for the [**directory**](#gt_directory) server(s) being queried, so these interfaces are potential targets for distributed denial of service attacks on directory servers.
 
@@ -5623,7 +5623,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 1.7: RMS version 1.0 servers, RMS version 1.0 SP1 servers, and RMS version 1.0 SP2 servers run on Windows Server 2003. RMS version 2.0 servers do not run on Windows Server 2003.
 
-<2> Section 2.1: On Windows, RMS version 1.0 and RMS version 1.0 SP1 do not implement the [GroupExpansionWebServiceSoap](#Section_1.3.4) port type. RMS version 2.0 does not implement the [Binary Group Expansion](#Section_4.3) interface.
+<2> Section 2.1: On Windows, RMS version 1.0 and RMS version 1.0 SP1 do not implement the [GroupExpansionWebServiceSoap](#Section_2.1) port type. RMS version 2.0 does not implement the [Binary Group Expansion](#Section_4.3) interface.
 
 RMS version 2.0 does not implement the [SubEnrollServiceSoap](#Section_6.2) port type.
 

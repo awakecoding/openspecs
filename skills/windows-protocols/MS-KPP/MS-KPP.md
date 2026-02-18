@@ -264,8 +264,8 @@ This protocol requires that the following state changes be made to [**Active Dir
 
 - Create an instance of the ms-DS-Device-Registration-Service-Container class ([MS-ADSC] section 2.139) in the directory.
 - Create an instance of the ms-DS-Device-Registration-Service class ([MS-ADSC] section 2.138) as a child of the container object created in the previous step. Generate a certificate-signing certificate and use it for the following attributes:
-- The certificate and [**private key**](#gt_private-key) are stored in the ms-DS-Issuer-Certificates attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.351) of the ms-DS-Device-Registration-Service object. For details, see section [2.3.1](../MS-ADA2/MS-ADA2.md).
-- The public portion of the certificate is stored in the ms-DS-Issuer-Public-Certificates attribute ([MS-ADA2] section 2.352) of the ms-DS-Device-Registration-Service object. For details, see section [2.3.2](../MS-ADA2/MS-ADA2.md).
+- The certificate and [**private key**](#gt_private-key) are stored in the ms-DS-Issuer-Certificates attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.351) of the ms-DS-Device-Registration-Service object. For details, see section [2.3.1](#Section_2.3.1).
+- The public portion of the certificate is stored in the ms-DS-Issuer-Public-Certificates attribute ([MS-ADA2] section 2.352) of the ms-DS-Device-Registration-Service object. For details, see section [2.3.2](#Section_2.3.2).
 - Set the following directory [**access control list (ACL)**](#gt_access-control-list-acl) entries:
 - Grant the key provisioning server read access to the ms-DS-Device-Registration-Service object ([MS-ADSC] section 2.138).
 - Grant the key provisioning server read/write access to ms-DS-Device objects ([MS-ADSC] section 2.136).
@@ -358,7 +358,7 @@ request-id = String
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 api-version
 
-The api-version header is an integer that indicates the API version that is expected by the client. Either this header or the api-version query parameter (section [2.2.2.1](#Section_2.2.1.4)) MUST be included in all client requests.
+The api-version header is an integer that indicates the API version that is expected by the client. Either this header or the api-version query parameter (section [2.2.2.1](#Section_2.2.2.1)) MUST be included in all client requests.
 
 **Note** The api-version header and the api-version query parameter defined in section 2.2.2.1 are mutually exclusive. The client is expected to specify an API version by using either one of these mechanisms, but not both.
 
@@ -724,12 +724,12 @@ The resources used for the Key Provisioning Protocol are defined in section [3.1
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Key
 
-The HTTP methods allowed for this resource are defined in section [3.1.5.1](#Section_3.2.5.1).
+The HTTP methods allowed for this resource are defined in section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 POST
 
-The POST message, including request and response body information, is defined in section [3.1.5.1.1](#Section_3.1.5.1.1.3) and subsections.
+The POST message, including request and response body information, is defined in section [3.1.5.1.1](#Section_3.1.5.1.1) and subsections.
 
 When the client receives the response from the POST message, it SHOULD<3> check for the **pctx** property. If this property exists in the response, the client stores its value in the **Data Store Information** abstract data model element (section [3.2.1](#Section_3.2.1)).
 

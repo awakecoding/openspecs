@@ -226,7 +226,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -238,7 +238,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQMP] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Client Protocol](../MS-MQMP/MS-MQMP.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_2.2.2)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
 [MS-MQRR] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Remote Read Protocol](../MS-MQRR/MS-MQRR.md)".
 
@@ -249,7 +249,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -260,7 +260,7 @@ Queues are typically hosted by a communications service called a [**queue manage
 
 The queue manager can perform operations on a [**remote queue**](#gt_remote-queue). When this scenario occurs, a protocol is required to insert messages into the remote queue, and another protocol is required to consume messages from the remote queue. The Message Queuing (MSMQ): Queue Manager to Queue Manager Protocol provides a protocol for consuming messages from a remote queue.
 
-The Queue Manager to Queue Manager Protocol is used only to read messages from a queue or to [**purge**](#gt_purge) messages from the queue. Reading a message also implies deleting the message after it is read, as specified in Queue Operations (section [1.3.3](#Section_1.3)).
+The Queue Manager to Queue Manager Protocol is used only to read messages from a queue or to [**purge**](#gt_purge) messages from the queue. Reading a message also implies deleting the message after it is read, as specified in Queue Operations (section [1.3.3](#Section_1.3.3)).
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 Messages
@@ -352,7 +352,7 @@ The server side of the Message Queuing (MSMQ): Queue Manager to Queue Manager Pr
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-This protocol uses HRESULTs, as specified in [MS-DTYP](#Section_2.2.1) section 2.2.18. Vendors can define their own HRESULT values, provided that they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
+This protocol uses HRESULTs, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.18. Vendors can define their own HRESULT values, provided that they set the C bit (0x20000000) for each vendor-defined value, indicating that the value is a customer code.
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -383,7 +383,7 @@ This protocol allows any user to establish a connection to the RPC server. This 
 
 This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runtime that it is to support both the [**Network Data Representation (NDR)**](#gt_network-data-representation-ndr) and NDR64 transfer syntaxes, and it MUST provide a negotiation mechanism for determining which transfer syntax will be used, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.
 
-HRESULT: This specification uses the HRESULT type, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1. Note: Throughout this specification, the phrase "a failure HRESULT" means any HRESULT where the Severity (S) bit is set, as specified by [MS-ERREF]. When this specification mandates the return of "a failure HRESULT" from a method, the specific error code is not relevant to the protocol, as long as the Severity bit is set. In this circumstance, the server MAY return MQ_ERROR (0xC00E0001), or any other HRESULT value where the Severity bit is set, such as a context-specific message queuing error code, as specified in [MS-MQMQ](#Section_2.2.2) section 2.4.
+HRESULT: This specification uses the HRESULT type, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1. Note: Throughout this specification, the phrase "a failure HRESULT" means any HRESULT where the Severity (S) bit is set, as specified by [MS-ERREF]. When this specification mandates the return of "a failure HRESULT" from a method, the specific error code is not relevant to the protocol, as long as the Severity bit is set. In this circumstance, the server MAY return MQ_ERROR (0xC00E0001), or any other HRESULT value where the Severity bit is set, such as a context-specific message queuing error code, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.4.
 
 In addition to the RPC base types and definitions, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-RPCE], additional data types are defined as follows.
 
@@ -512,7 +512,7 @@ byte* lpBuffer;
 
 **eAckNack:** This is a reserved field and MUST be ignored by the client and the server.
 
-**lpBuffer:** This field represents a pointer to a buffer containing the UserMessage Packet ([MS-MQMQ](#Section_2.2.2) section 2.2.20). The size of this field is specified by **dwSize**. This value is set by the server and MUST be set to NULL by the client.
+**lpBuffer:** This field represents a pointer to a buffer containing the UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20). The size of this field is specified by **dwSize**. This value is set by the server and MUST be set to NULL by the client.
 
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 REMOTEREADDESC2
@@ -549,7 +549,7 @@ The following sections specify details of the Message Queuing (MSMQ): Queue Mana
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are colocated at a common queue manager. The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1 and the relationship between this protocol, a queue manager, and other protocols which share a common queue manager, is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are colocated at a common queue manager. The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1 and the relationship between this protocol, a queue manager, and other protocols which share a common queue manager, is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol, and sections [3.1.1.2](#Section_3.1.1.2) through [3.1.1.5](#Section_3.1.1.5) detail the data model elements that are private to this protocol.
 
@@ -829,7 +829,7 @@ HRESULT RemoteQMOpenQueue(
 
 **phContext:** A pointer to a context handle that contains the information about the opened queue, which corresponds to the abstract data model's **OpenQueueEntry**. The server MUST set this value; it gets deleted on a call to RemoteQMCloseQueue.
 
-**pLicGuid:** A pointer to a valid [**GUID**](#gt_globally-unique-identifier-guid) ([MS-DTYP](#Section_2.2.1) section 2.3.4) that uniquely identifies the client. This value is set to the **QueueManager.Identifier** ADM element of the [**queue manager**](#gt_queue-manager-qm) at the client end.
+**pLicGuid:** A pointer to a valid [**GUID**](#gt_globally-unique-identifier-guid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4) that uniquely identifies the client. This value is set to the **QueueManager.Identifier** ADM element of the [**queue manager**](#gt_queue-manager-qm) at the client end.
 
 **dwMQS:** This value MAY be used by the server to impose an implementation-specific limit on the number of concurrent callers.<12>
 
@@ -1057,7 +1057,7 @@ DWORD RemoteQMGetQMQMServerPort(
 | Value | Meaning |
 | --- | --- |
 | IP_HANDSHAKE 0x00000000 | Requests that the server return the RPC port number for the qmcomm and qmcomm2 interfaces bound to TCP/IP. For more information on the qmcomm and qmcomm2 interfaces, see [MS-MQMP](../MS-MQMP/MS-MQMP.md). The default port number is 2103. |
-| IP_READ 0x00000001 | Requests that the server return the RPC port number for the qm2qm interface bound to TCP/IP. For more information on the qm2qm interface, see section [3.1.4](#Section_3.2.4). The default port number is 2105. |
+| IP_READ 0x00000001 | Requests that the server return the RPC port number for the qm2qm interface bound to TCP/IP. For more information on the qm2qm interface, see section [3.1.4](#Section_3.1.4). The default port number is 2105. |
 | IPX_HANDSHAKE 0x00000002 | Requests that the server return the RPC port number for the qmcomm and qmcomm2 interfaces bound to SPX.<19> For more information on the qmcomm and qmcomm2 interfaces, see [MS-MQMP]. The default port number is 2103. |
 | IPX_READ 0x00000003 | Requests that the server return the RPC port number for the qm2qm interface bound to SPX.<20> For more information on the qm2qm interface, see section 3.1.4. The default port number is 2105. |
 
@@ -1065,7 +1065,7 @@ DWORD RemoteQMGetQMQMServerPort(
 
 **Exceptions Thrown**: No exceptions are thrown beyond those thrown by the underlying RPC protocol (see [MS-RPCE]).
 
-As specified in section [3.1.3](#Section_3.2.3), this protocol configures a fixed listening endpoint at an RPC port number, which can vary. For the interface and protocol specified by the *dwPortType* parameter, this method returns the RPC port number determined at server initialization time. If the default port is already in use, the server SHOULD increment the port number by 11 until an unused port is found.
+As specified in section [3.1.3](#Section_3.1.3), this protocol configures a fixed listening endpoint at an RPC port number, which can vary. For the interface and protocol specified by the *dwPortType* parameter, this method returns the RPC port number determined at server initialization time. If the default port is already in use, the server SHOULD increment the port number by 11 until an unused port is found.
 
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 RemoteQmGetVersion (Opnum 8)
@@ -1435,7 +1435,7 @@ Else if none of the above conditions are satisfied, the client MUST:
 The client MUST then perform the following actions to process this event:
 
 - Set **rPendingRemoteReadEntry.RemoteReadHandle** to the returned *pphContext*.
-- Reconstruct the message, as specified in [MS-MQMQ](#Section_2.2.2) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (lpRemoteReadDesc), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
+- Reconstruct the message, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (lpRemoteReadDesc), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
 - Remove the **rPendingRemoteReadEntry** element from **rPendingRemoteReadEntryCollection**.
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Receiving a Message
@@ -1483,7 +1483,7 @@ Else if none of the above conditions are satisfied, the client MUST:
 The client MUST then perform the following actions to process this event:
 
 - Set **rPendingRemoteReadEntry.RemoteReadHandle** to the returned *pphContext*.
-- Reconstruct the message, as specified in [MS-MQMQ](#Section_2.2.2) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (lpRemoteReadDesc), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
+- Reconstruct the message, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (lpRemoteReadDesc), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
 - Advise the server that the message was received by calling the [RemoteQMEndReceive](#Section_3.1.4.2) method with the following parameter values:
 - *pphContext* set to the **rPendingRemoteReadEntry.RemoteReadHandle**.
 - *dwAck* set to 0x00000002 (RR_ACK).
@@ -1546,7 +1546,7 @@ Else if none of the above conditions are satisfied, the client MUST:
 The client MUST then perform the following actions to process this event:
 
 - Set **rPendingRemoteReadEntry.RemoteReadHandle** to the returned *pphContext*.
-- Reconstruct the message, as specified in [MS-MQMQ](#Section_2.2.2) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (*lpRemoteReadDesc*), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
+- Reconstruct the message, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (*lpRemoteReadDesc*), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
 - Remove the **rPendingRemoteReadEntry** element from **rPendingRemoteReadEntryCollection**.
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 Receiving a Message by Using a Cursor
@@ -1594,7 +1594,7 @@ Else if none of the above conditions is satisfied, the client MUST:
 The client MUST then perform the following actions to process this event:
 
 - Set **rPendingRemoteReadEntry.RemoteReadHandle** to the returned *pphContext*.
-- Reconstruct the message, as specified in [MS-MQMQ](#Section_2.2.2) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (lpRemoteReadDesc), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
+- Reconstruct the message, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18, from the returned *lpBuffer* element of the REMOTEREADDESC structure (lpRemoteReadDesc), which contains a UserMessage Packet ([MS-MQMQ] section 2.2.20).
 - Advise the server that the message was received by calling the [RemoteQMEndReceive](#Section_3.1.4.2) method with the following parameter values:
 - *pphContext* set to the **rPendingRemoteReadEntry.RemoteReadHandle**.
 - *dwAck* set to 0x00000002 (RR_ACK).
@@ -1713,7 +1713,7 @@ None.
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](#Section_2.2.1) Appendix A (section 5) and "ms-mqmq.idl" is the IDL found in [MS-MQMQ](#Section_2.2.2) Appendix A (section 5).
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A (section 5) and "ms-mqmq.idl" is the IDL found in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) Appendix A (section 5).
 
 import "ms-dtyp.idl";
 

@@ -258,7 +258,7 @@ The Virtual Application Publishing and Reporting Protocol uses existing headers 
 
 If a client or server receives an [**HTTP**](#gt_hypertext-transfer-protocol-http) header that is not defined in this section, or if the header is not defined in the current context (for example, receiving a request-only header in a response), the header MUST be interpreted as specified in [RFC2616].
 
-When responding to a GetPackage request (section [3.1](#Section_1.3)), the server MUST set the following HTTP header in a successful response.
+When responding to a GetPackage request (section [3.1](#Section_3.1)), the server MUST set the following HTTP header in a successful response.
 
 | Header | Description |
 | --- | --- |
@@ -848,7 +848,7 @@ The following sequence occurs between a client and a server during a GetPackage 
 
 - The client sends a GetPackage request.
 - If the server requires the client to be authenticated, the server and client access authentication HTTP headers as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 11.
-- If authentication is not required, or if authentication has succeeded, the server responds with a "200 OK" [**HTTP**](#gt_hypertext-transfer-protocol-http) response along with the response payload as described in section [3.1](#Section_1.3).
+- If authentication is not required, or if authentication has succeeded, the server responds with a "200 OK" [**HTTP**](#gt_hypertext-transfer-protocol-http) response along with the response payload as described in section [3.1](#Section_3.1).
 - The client closes the HTTP connection to the server.
 ![GetPackage message sequence](media/image1.png)
 

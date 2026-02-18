@@ -742,7 +742,7 @@ The client side of the Performance Counter Query Protocol is simply a pass-throu
 <a id="Section_3.1"></a>
 ## 3.1 Server Details
 
-The server handles client requests for any of the methods, as specified in section [3.1.4](#Section_3.2.4), and operates on the performance counters on the server.
+The server handles client requests for any of the methods, as specified in section [3.1.4](#Section_3.1.4), and operates on the performance counters on the server.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model

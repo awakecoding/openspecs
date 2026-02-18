@@ -241,7 +241,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-BPDP] Microsoft Corporation, "[Background Intelligent Transfer Service (BITS) Peer-Caching: Peer Discovery Protocol](../MS-BPDP/MS-BPDP.md)".
 
-[MS-CCROD] Microsoft Corporation, "[Content Caching and Retrieval Protocols Overview](#Section_1.3)".
+[MS-CCROD] Microsoft Corporation, "[Content Caching and Retrieval Protocols Overview](../MS-CCROD/MS-CCROD.md)".
 
 [MSDN-BITS] Microsoft Corporation, "Background Intelligent Transfer Service", [http://msdn.microsoft.com/en-us/library/bb968799(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=89959)
 
@@ -326,7 +326,7 @@ The BITS Peer-Caching: Content Retrieval Protocol does not define an explicit sy
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
-The BITS Peer-Caching: Content Retrieval Protocol uses HRESULTs, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md), primarily in [DISCOVERY-REQUEST (section 3.2.5.3)](#Section_2.2.2). Vendors are free to choose their own values as long as the C bit (0x20000000) is set, indicating it is a customer code.
+The BITS Peer-Caching: Content Retrieval Protocol uses HRESULTs, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md), primarily in [DISCOVERY-REQUEST (section 3.2.5.3)](#Section_3.2.5.3). Vendors are free to choose their own values as long as the C bit (0x20000000) is set, indicating it is a customer code.
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -822,7 +822,7 @@ To cancel a **FileSearchRequest** element in progress, cancel each [FileDiscover
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 New Download Request
 
-To download cached data from a server, the higher-layer protocol passes the server, the content record, and (optionally) one or more byte ranges to download. A new [Download](#Section_4.3) object is created.
+To download cached data from a server, the higher-layer protocol passes the server, the content record, and (optionally) one or more byte ranges to download. A new [Download](#Section_2.2.4) object is created.
 
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 Remove Server from PEER SERVER TABLE
@@ -908,12 +908,12 @@ The [FileDiscoveryAttempt](#Section_3.1.1.2) element result is set to [RESULT_TR
 <a id="Section_3.1.7.2.1"></a>
 ##### 3.1.7.2.1 Problem with Server Certificate During a Download
 
-During HTTPS connection setup, the client tries to find the server's certificate by querying the table of peer certificates, as described in BITS Peer-Caching: Peer Authentication section 3.2.6.1.<16> If the certificate is present in the table of peer certificates, the client proceeds with the request, otherwise, the client MUST attempt to authenticate the server by an exchange of certificates via the BITS Peer-Caching: Peer Authentication Protocol. If the client successfully exchanges certificates with the server, then the client completes the [Download request](#Section_4.3) with the result [RESULT_SERVER_CERT_UNKNOWN](#Section_3.1.7.3.6). Otherwise, the client completes the Download request with the result [RESULT_TRANSPORT_ERROR](#Section_3.1.7.3.7).
+During HTTPS connection setup, the client tries to find the server's certificate by querying the table of peer certificates, as described in BITS Peer-Caching: Peer Authentication section 3.2.6.1.<16> If the certificate is present in the table of peer certificates, the client proceeds with the request, otherwise, the client MUST attempt to authenticate the server by an exchange of certificates via the BITS Peer-Caching: Peer Authentication Protocol. If the client successfully exchanges certificates with the server, then the client completes the [Download request](#Section_2.2.4) with the result [RESULT_SERVER_CERT_UNKNOWN](#Section_3.1.7.3.6). Otherwise, the client completes the Download request with the result [RESULT_TRANSPORT_ERROR](#Section_3.1.7.3.7).
 
 <a id="Section_3.1.7.2.2"></a>
 ##### 3.1.7.2.2 Connection Failure During Download
 
-The [Download](#Section_4.3) result is set to [RESULT_TRANSPORT_ERROR](#Section_3.1.7.3.7), and the Download is completed.
+The [Download](#Section_2.2.4) result is set to [RESULT_TRANSPORT_ERROR](#Section_3.1.7.3.7), and the Download is completed.
 
 <a id="Section_3.1.7.3"></a>
 #### 3.1.7.3 FileSearchRequest Events
@@ -1120,8 +1120,8 @@ If the HTTP version check fails, the server MUST reply with an HTTP error respon
 | HTTP verb | Message type |
 | --- | --- |
 | POST | [DISCOVERY-REQUEST](#Section_2.2.2) |
-| GET | [DOWNLOAD-REQUEST](#Section_2.2.4) |
-| HEAD | [HEAD-REQUEST](#Section_2.2.6) |
+| GET | [DOWNLOAD-REQUEST](#Section_3.2.5.4) |
+| HEAD | [HEAD-REQUEST](#Section_3.2.5.5) |
 
 Once the initial validation has succeeded, the server uses the HTTP verb to determine the message type, and processes the message as appropriate. For specific actions for each message type, see the following sections.
 
@@ -1883,7 +1883,7 @@ Figure 6: Sequence diagram for a subsequent URL download
 - BPCR client creates a new **FileSearchRequest** element in INIT state. The **FileSearchRequest** element proceeds to CHOOSE_SERVER.
 - The client chooses the single known [**peer**](#gt_peer) server, proceeds to state SEND_REQUEST, and sends the discovery-request message to the peer server. The **FileSearchRequest** element proceeds to state CHOOSE_SERVER. Because the list of peer servers is exhausted, it proceeds to DISCOVER_SERVERS then to state WAIT. Because the BPDP client’s Discovery Suppression timer is still active, the **FileSearchRequest** element completes immediately without finding any new peer servers.
 - The peer server sends a discovery-response message with status "Success" and the details of the content record.
-- The client **FileDiscoveryAttempt** element completes with result RESULT_FOUND (see section [3.1.5.1)](#Section_3.1.1.2) and section [3.1.7.3.1](#Section_3.1.7.3.1)). The content record is returned to the BITS Upload Protocol. The **FileDiscoveryAttempt** element is removed from the **PENDING_CALLS_TABLE** element, and the search is complete. The BITS Upload Protocol client state is updated to DOWNLOAD, as described in [MC-BUP](../MC-BUP/MC-BUP.md) section 3.6.7.1.
+- The client **FileDiscoveryAttempt** element completes with result RESULT_FOUND (see section [3.1.5.1)](#Section_3.1.5.1) and section [3.1.7.3.1](#Section_3.1.7.3.1)). The content record is returned to the BITS Upload Protocol. The **FileDiscoveryAttempt** element is removed from the **PENDING_CALLS_TABLE** element, and the search is complete. The BITS Upload Protocol client state is updated to DOWNLOAD, as described in [MC-BUP](../MC-BUP/MC-BUP.md) section 3.6.7.1.
 - BITS Upload Protocol client proceeds to state DOWNLOAD. Because the content was found via BPCR, the client downloads the content using one or more BPCR download requests.
 - For each download request, the BPCR client sends a Download-Request message.
 - The server replies with a Download-Response message.
@@ -2074,7 +2074,7 @@ Exceptions, if any, are noted below. If a service pack or Quick Fix Engineering 
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.3: The MS-BPCR protocol is supported only in BITS version 3.0. BITS version 4.0 replaces the BITS Peercaching protocols with the Branch Cache protocol family. See [MS-CCROD](#Section_1.3) for details of BITS integration with Branch Cache protocols.
+<1> Section 1.3: The MS-BPCR protocol is supported only in BITS version 3.0. BITS version 4.0 replaces the BITS Peercaching protocols with the Branch Cache protocol family. See [MS-CCROD](../MS-CCROD/MS-CCROD.md) for details of BITS integration with Branch Cache protocols.
 
 <2> Section 1.3.1: In Windows 7, the BITS 3.0 peer caching model is deprecated. If BITS 4.0 is installed, the BITS 3.0 peer caching model is unavailable. If BITS 4.0 is installed, peer caching now uses Windows BranchCache as described in [MS-CCROD].
 

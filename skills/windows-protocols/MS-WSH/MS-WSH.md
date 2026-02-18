@@ -238,9 +238,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.15)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-WSH] Microsoft Corporation, "[Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol](#Section_5)".
+[MS-WSH] Microsoft Corporation, "[Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol](#Section_9a16cf36da15454daeaa600df49efa98)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [http://www.rfc-editor.org/rfc/rfc2119.txt](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -352,7 +352,7 @@ The Windows Security Health Agent (WSHA) and Windows Security Health Validator (
 
 The following sections specify how Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol messages are transported and WSHA and WSHV Protocol message syntax.
 
-This protocol references commonly used data types as defined in [MS-DTYP](#Section_2.2.15).
+This protocol references commonly used data types as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
 <a id="Section_2.1"></a>
 ## 2.1 Transport
@@ -1496,7 +1496,7 @@ The status is given by setting bits to flag the severity ratings. If the [Client
 <a id="Section_2.2.15"></a>
 ### 2.2.15 Data Types
 
-The following data types are used by the ADM elements **FirewallProductsInformation**, **AntivirusProductsInformation**, **AntispywareProductsInformation**, and **SUStatus**, which are defined in section [3.2.1](#Section_3.1.1).
+The following data types are used by the ADM elements **FirewallProductsInformation**, **AntivirusProductsInformation**, **AntispywareProductsInformation**, and **SUStatus**, which are defined in section [3.2.1](#Section_3.2.1).
 
 <a id="Section_2.2.15.1"></a>
 #### 2.2.15.1 ProductInformation
@@ -1557,7 +1557,7 @@ The WSHA provides status in the form of an SoHReportEntry in the SoH. The WSHV p
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The abstract data model in sections [3.2.1](#Section_3.1.1) and [3.3.1](#Section_3.3.1) describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with what is described in this document.
+The abstract data model in sections [3.2.1](#Section_3.2.1) and [3.3.1](#Section_3.3.1) describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with what is described in this document.
 
 The Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol consist of a single exchange. The following should be noted:
 
@@ -1619,7 +1619,7 @@ The following is a state diagram for the WSHA:
 
 Figure 3: WSHA state
 
-- If the WSHA is running but the WSHV is not running (or it is not applied to an [**NPS**](#gt_network-policy-server-nps) policy), the WSHA will send its payload in the SoH, but then NPS server will ignore it. This is handled by the [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054) protocol and does not involve the Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol [MS-WSH](#Section_5).
+- If the WSHA is running but the WSHV is not running (or it is not applied to an [**NPS**](#gt_network-policy-server-nps) policy), the WSHA will send its payload in the SoH, but then NPS server will ignore it. This is handled by the [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054) protocol and does not involve the Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol [MS-WSH](#Section_9a16cf36da15454daeaa600df49efa98).
 - The WSHA is stateless, so when it sends an [**SoH**](#gt_statement-of-health-soh), it does not actively wait for an [**SoHR**](#gt_statement-of-health-response-sohr). If the client sends an SoH, the client will not send a new SoH unless the security health status changes or a new SoH is requested by the [**NAP**](#gt_network-access-protection-nap) agent.
 ADM elements are defined for the WSHA as follows:
 
@@ -1723,7 +1723,7 @@ None.
 
 The WSHA MUST implement the following data initialization.
 
-All the ADM elements specified in section [3.2.1](#Section_3.1.1) are initialized to zero. Then the following initialization steps occur.
+All the ADM elements specified in section [3.2.1](#Section_3.2.1) are initialized to zero. Then the following initialization steps occur.
 
 **Firewall:** The **FirewallStatus** and **NumberOfFirewallProducts** ADM elements are initialized by calling the **GetNumberOfFirewallProducts** abstract interface (section [3.2.4.3](#Section_3.2.4.3)) as follows.
 
@@ -1777,7 +1777,7 @@ SendMessageToUI(
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 GetNumberOfFirewallProducts Abstract Interface
 
-This abstract interface is called to initialize the **FirewallStatus** ADM element described in section [3.2.1](#Section_3.1.1) and the **NumberOfFirewallProducts** ADM element described in section 3.2.1.
+This abstract interface is called to initialize the **FirewallStatus** ADM element described in section [3.2.1](#Section_3.2.1) and the **NumberOfFirewallProducts** ADM element described in section 3.2.1.
 
 DWORD GetNumberOfFirewallProducts(
 
@@ -1797,7 +1797,7 @@ DWORD GetNumberOfFirewallProducts(
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 GetFirewallProductsInformation Abstract Interface
 
-This abstract interface is called to initialize the **FirewallProductsInformation** ADM element described in section [3.2.1](#Section_3.1.1).
+This abstract interface is called to initialize the **FirewallProductsInformation** ADM element described in section [3.2.1](#Section_3.2.1).
 
 DWORD GetFirewallProductsInformation(
 
@@ -1819,7 +1819,7 @@ The interface allocates the memory required to accommodate the array of ProductI
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 GetNumberOfAntivirusProducts Abstract Interface
 
-This abstract interface is called to initialize the **AntivirusStatus** ADM element described in section [3.2.1](#Section_3.1.1) and the **NumberOfAntivirusProducts** ADM element described in section 3.2.1.
+This abstract interface is called to initialize the **AntivirusStatus** ADM element described in section [3.2.1](#Section_3.2.1) and the **NumberOfAntivirusProducts** ADM element described in section 3.2.1.
 
 DWORD GetNumberOfAntivirusProducts(
 
@@ -1839,7 +1839,7 @@ DWORD GetNumberOfAntivirusProducts(
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 GetAntivirusProductsInformation Abstract Interface
 
-This abstract interface is called to initialize the **AntivirusProductsInformation** ADM element described in section [3.2.1](#Section_3.1.1).
+This abstract interface is called to initialize the **AntivirusProductsInformation** ADM element described in section [3.2.1](#Section_3.2.1).
 
 DWORD GetAntivirusProductsInformation(
 
@@ -1861,7 +1861,7 @@ The interface allocates the memory required to accommodate the array of ProductI
 <a id="Section_3.2.4.7"></a>
 #### 3.2.4.7 GetNumberOfAntispywareProducts Abstract Interface
 
-This abstract interface is called to initialize the **AntispywareStatus** ADM element described in section [3.2.1](#Section_3.1.1) and the **NumberOfAntispywareProducts** ADM element described in section 3.2.1.
+This abstract interface is called to initialize the **AntispywareStatus** ADM element described in section [3.2.1](#Section_3.2.1) and the **NumberOfAntispywareProducts** ADM element described in section 3.2.1.
 
 DWORD GetNumberOfAntispywareProducts(
 
@@ -1881,7 +1881,7 @@ DWORD GetNumberOfAntispywareProducts(
 <a id="Section_3.2.4.8"></a>
 #### 3.2.4.8 GetAntispywareProductsInformation Abstract Interface
 
-This abstract interface is called to initialize the **AntispywareProductsInformation** ADM element described in section [3.2.1](#Section_3.1.1).
+This abstract interface is called to initialize the **AntispywareProductsInformation** ADM element described in section [3.2.1](#Section_3.2.1).
 
 DWORD GetAntispywareProductsInformation(
 
@@ -1903,7 +1903,7 @@ The interface allocates the memory required to accommodate the array of ProductI
 <a id="Section_3.2.4.9"></a>
 #### 3.2.4.9 GetAutomaticUpdatesStatusCode Abstract Interface
 
-This abstract interface is called to initialize the **AutomaticUpdatesStatusCode** ADM element described in section [3.2.1](#Section_3.1.1).
+This abstract interface is called to initialize the **AutomaticUpdatesStatusCode** ADM element described in section [3.2.1](#Section_3.2.1).
 
 DWORD GetAutomaticUpdatesStatusCode (
 
@@ -1921,7 +1921,7 @@ DWORD GetAutomaticUpdatesStatusCode (
 <a id="Section_3.2.4.10"></a>
 #### 3.2.4.10 GetSecurityUpdatesStatus Abstract Interface
 
-This abstract interface is called to initialize the **SUStatus** ADM element described in section [3.2.1](#Section_3.1.1).
+This abstract interface is called to initialize the **SUStatus** ADM element described in section [3.2.1](#Section_3.2.1).
 
 DWORD GetSecurityUpdatesStatus (
 
@@ -1950,7 +1950,7 @@ void FreeProductsInformation(
 <a id="Section_3.2.4.12"></a>
 #### 3.2.4.12 GetClientVersion Abstract Interface
 
-This abstract interface is called to initialize the **ClientVersion** ADM element described in section [3.2.1](#Section_3.1.1).
+This abstract interface is called to initialize the **ClientVersion** ADM element described in section [3.2.1](#Section_3.2.1).
 
 void GetClientVersion(
 
@@ -1961,12 +1961,12 @@ void GetClientVersion(
 <a id="Section_3.2.4.13"></a>
 #### 3.2.4.13 ClientVersion ADM Initialization
 
-During system initialization, the **ClientVersion** ADM element is initialized as described in section [3.2.1](#Section_3.1.1).
+During system initialization, the **ClientVersion** ADM element is initialized as described in section [3.2.1](#Section_3.2.1).
 
 <a id="Section_3.2.4.14"></a>
 #### 3.2.4.14 SohFlag ADM initialization
 
-During system initialization, the **SohFlag** ADM element is initialized as described in section [3.2.1](#Section_3.1.1).
+During system initialization, the **SohFlag** ADM element is initialized as described in section [3.2.1](#Section_3.2.1).
 
 <a id="Section_3.2.4.15"></a>
 #### 3.2.4.15 RemediateFirewall Abstract Interface
@@ -2078,7 +2078,7 @@ The WSHA is stateless, so when it sends an [**SoH**](#gt_statement-of-health-soh
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Constructing an SoH
 
-The SoH message is constructed by creating each of the TLVs described in section [2.2.2](#Section_2.2.2) and appending each TLV to the SoH message using the **INapSoHConstructor** interface described in [[MSDN-NAPAPI]](https://go.microsoft.com/fwlink/?LinkId=199018). The TLVs are created in the following order and set with values according to the following procedure. The ADM elements used in this procedure are defined in section [3.2.1](#Section_3.1.1).
+The SoH message is constructed by creating each of the TLVs described in section [2.2.2](#Section_2.2.2) and appending each TLV to the SoH message using the **INapSoHConstructor** interface described in [[MSDN-NAPAPI]](https://go.microsoft.com/fwlink/?LinkId=199018). The TLVs are created in the following order and set with values according to the following procedure. The ADM elements used in this procedure are defined in section [3.2.1](#Section_3.2.1).
 
 - Initialization:
 - Initialize the **FirewallStatus** ADM element and the **NumberOfFirewallProducts** ADM element by calling the **GetNumberOfFirewallProducts** abstract interface described in section [3.2.4.3](#Section_3.2.4.3).
@@ -2264,7 +2264,7 @@ The following is a state diagram for the WSHV:
 
 Figure 4: WSHV state
 
-- When the WSHV is running and the [**NPS**](#gt_network-policy-server-nps) receives an SoH from a client that does not have the WSHA running, the NPS returns an error code to the client indicated that it is missing a particular SHA. This is handled by the Protocol Bindings for SoH [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054) and does not involve the Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol [MS-WSH](#Section_5).
+- When the WSHV is running and the [**NPS**](#gt_network-policy-server-nps) receives an SoH from a client that does not have the WSHA running, the NPS returns an error code to the client indicated that it is missing a particular SHA. This is handled by the Protocol Bindings for SoH [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054) and does not involve the Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol [MS-WSH](#Section_9a16cf36da15454daeaa600df49efa98).
 - The health policy configuration ADM elements used by the WSHV are stored in the registry.<9> The health policy is used to evaluate the [**SoH**](#gt_statement-of-health-soh) sent by the client to the WSHV as described in section [3.3.7.3](#Section_3.3.7.3). The values for the ADM elements are as follows:
 | Name | Type | Description |
 | --- | --- | --- |

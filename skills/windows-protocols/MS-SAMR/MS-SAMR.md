@@ -440,7 +440,7 @@ This document uses the following terms:
 **account**: A user (including machine account), group, or alias object. Also a synonym for security principal or principal.
 
 <a id="gt_account-domain-object-account-domain"></a>
-**account domain object (account domain)**: A [**domain object**](#gt_domain-object) that represents an issuing authority in which [**user objects**](#gt_user-object) can be created. For more information about the concept of an issuing authority, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5.
+**account domain object (account domain)**: A [**domain object**](#gt_domain-object) that represents an issuing authority in which [**user objects**](#gt_user-object) can be created. For more information about the concept of an issuing authority, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5.
 
 <a id="gt_account-domain-security-identifier"></a>
 **account domain security identifier**: The [**security identifier (SID)**](#gt_security-identifier-sid) of the [**account domain object**](#gt_account-domain-object-account-domain).
@@ -455,7 +455,7 @@ This document uses the following terms:
 **ACID**: A term that refers to the four properties that any database system has to achieve in order to be considered transactional: Atomicity, Consistency, Isolation, and Durability.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_administrator"></a>
 **administrator**: A user who has complete and unrestricted access to the computer or [**domain**](#gt_domain).
@@ -586,7 +586,7 @@ This document uses the following terms:
 **security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a [**discretionary access control list (DACL)**](#gt_discretionary-access-control-list-dacl) with [**SIDs**](#gt_security-identifier-sid) for the [**security principals**](#gt_security-principal) who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
 
 <a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for [**security principals**](#gt_security-principal) that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the [**relative identifier (RID)**](#gt_relative-identifier-rid). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](#Section_1.3) section 1.1.1.2.
+**security identifier (SID)**: An identifier for [**security principals**](#gt_security-principal) that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a [**domain**](#gt_domain)) and a smaller integer representing an identity relative to the account authority, termed the [**relative identifier (RID)**](#gt_relative-identifier-rid). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP] section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 <a id="gt_security-principal"></a>
 **security principal**: A unique entity, also referred to as a principal, that can be authenticated by [**Active Directory**](#gt_active-directory). It frequently corresponds to a human user, but also can be a service that offers a resource to other security principals. Other security principals might be a group, which is a set of principals. Groups are supported by [**Active Directory**](#gt_active-directory).
@@ -666,9 +666,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
@@ -721,17 +721,17 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [LAMPORT] Lamport, L., "Time, Clocks, and the Ordering of Events in a Distributed System", July 1978, [http://portal.acm.org/citation.cfm?id=359563](https://go.microsoft.com/fwlink/?LinkId=89928)
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
-[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](#Section_1.3)".
+[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](../MS-AZOD/MS-AZOD.md)".
 
 [MS-SYS-ARCHIVE] Microsoft Corporation, "Windows System Overview", [https://learn.microsoft.com/en-us/openspecs/windows_protocols/MS-WINPROTLP/df36f95e-6a6b-48d6-a3ae-35a17674f546](https://go.microsoft.com/fwlink/?LinkId=311687)
 
 [MS-UCODEREF] Microsoft Corporation, "[Windows Protocols Unicode Reference](../MS-UCODEREF/MS-UCODEREF.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDN-CP] Microsoft Corporation, "Code Page Identifiers", [https://learn.microsoft.com/en-us/windows/desktop/Intl/code-page-identifiers](https://go.microsoft.com/fwlink/?LinkId=89981)
 
@@ -796,7 +796,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The Security Account Manager (SAM) Remote Protocol (Client-to-Server) provides management functionality for an account store or directory containing users and groups. SAM Remote Protocol specifies the behavior for both local and remote domains by using the [**Active Directory**](#gt_active-directory) data model as a common data model for both scenarios, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5.1. Implementers should familiarize themselves with the following documents: Windows System Overview [MS-SYS-ARCHIVE](../MS-SYS-ARCHIVE/MS-SYS-ARCHIVE.md), Windows Protocols Overview [MS-WPO](#Section_1.3), and Active Directory Technical Specification [MS-ADTS](../MS-ADTS/MS-ADTS.md).
+The Security Account Manager (SAM) Remote Protocol (Client-to-Server) provides management functionality for an account store or directory containing users and groups. SAM Remote Protocol specifies the behavior for both local and remote domains by using the [**Active Directory**](#gt_active-directory) data model as a common data model for both scenarios, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5.1. Implementers should familiarize themselves with the following documents: Windows System Overview [MS-SYS-ARCHIVE](../MS-SYS-ARCHIVE/MS-SYS-ARCHIVE.md), Windows Protocols Overview [MS-WPO](../MS-WPO/MS-WPO.md), and Active Directory Technical Specification [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 
 The goal of this protocol is to enable IT administrators and end users to manage users, groups, and computers. IT administrators and their delegates generally have full access control to these entities, and consequently can manage the entities' life cycles. End users are allowed to make changes to their own data (in most cases, limited to just their passwords).
 
@@ -815,8 +815,8 @@ The following is a brief listing of methods that operate on each object type.
 
 **Server Object:**
 
-- [SamrSetSecurityObject](#Section_3.1.5.12.1.2)
-- [SamrQuerySecurityObject](#Section_5)
+- [SamrSetSecurityObject](#Section_3.1.5.12.1)
+- [SamrQuerySecurityObject](#Section_3.1.5.12.2)
 - [SamrEnumerateDomainsInSamServer](#Section_3.1.5.2.1)
 - [SamrOpenDomain](#Section_3.1.5.1.5)
 - [SamrLookupDomainInSamServer](#Section_3.1.5.11.1)
@@ -843,7 +843,7 @@ The following is a brief listing of methods that operate on each object type.
 - [SamrGetAliasMembership](#Section_3.1.5.9.2)
 - [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5)
 - [SamrGetDisplayEnumerationIndex2](#Section_3.1.5.3.4)
-- [SamrQueryDisplayInformation](#Section_3.1.5.3.2)
+- [SamrQueryDisplayInformation](#Section_3.1.5.3.3)
 - [SamrQueryDisplayInformation2](#Section_3.1.5.3.2)
 - [SamrQueryDisplayInformation3](#Section_3.1.5.3.1)
 - SamrCloseHandle
@@ -879,14 +879,14 @@ The following is a brief listing of methods that operate on each object type.
 
 - SamrSetSecurityObject
 - SamrQuerySecurityObject
-- [SamrQueryInformationUser](#Section_3.1.5.5.5)
+- [SamrQueryInformationUser](#Section_3.1.5.5.6)
 - [SamrQueryInformationUser2](#Section_3.1.5.5.5)
 - [SamrSetInformationUser](#Section_3.1.5.6.5)
 - [SamrSetInformationUser2](#Section_3.1.5.6.4)
 - [SamrDeleteUser](#Section_3.1.5.7.3)
 - [SamrGetGroupsForUser](#Section_3.1.5.9.1)
 - [SamrChangePasswordUser](#Section_3.1.5.10.1)
-- [SamrGetUserDomainPasswordInformation](#Section_3.1.5.6.1.3)
+- [SamrGetUserDomainPasswordInformation](#Section_3.1.5.13.3)
 - SamrCloseHandle
 - SamrRidToSid
 For example, to set a policy that limits the minimum length of passwords to eight characters for all users, a client opens a handle to a domain object and updates the minimum length password policy setting via a parameter field called *MinPasswordLength*. The call sequence from the client appears as follows (parameter information is removed for brevity):
@@ -948,7 +948,7 @@ The methods that follow the selective enumerate pattern are as follows:
 
 - [SamrQueryDisplayInformation3](#Section_3.1.5.3.1)
 - [SamrQueryDisplayInformation2](#Section_3.1.5.3.2)
-- [SamrQueryDisplayInformation](#Section_3.1.5.3.2)
+- [SamrQueryDisplayInformation](#Section_3.1.5.3.3)
 - [SamrGetDisplayEnumerationIndex2](#Section_3.1.5.3.4)
 - [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5)
 - Create Pattern
@@ -972,7 +972,7 @@ The methods that follow the query pattern are as follows:
 - [SamrQueryInformationGroup](#Section_3.1.5.5.3)
 - [SamrQueryInformationAlias](#Section_3.1.5.5.4)
 - [SamrQueryInformationUser2](#Section_3.1.5.5.5)
-- [SamrQueryInformationUser](#Section_3.1.5.5.5)
+- [SamrQueryInformationUser](#Section_3.1.5.5.6)
 - Set Pattern
 This pattern allows specified object attributes to be set. The client indicates the attributes that are to be updated by specifying an "information level". Similar to the query pattern of methods, the information level specifies the attributes that are being sent in the request.
 
@@ -1033,16 +1033,16 @@ This pattern allows a client to specify or query access control with a granulari
 
 The methods that follow the security pattern are as follows:
 
-- [SamrSetSecurityObject](#Section_3.1.5.12.1.2)
-- [SamrQuerySecurityObject](#Section_5)
+- [SamrSetSecurityObject](#Section_3.1.5.12.1)
+- [SamrQuerySecurityObject](#Section_3.1.5.12.2)
 - Miscellaneous
 The following methods do not fall into a general pattern; see the message processing sections for details about each one. A brief description of each method follows:
 
-- [SamrGetUserDomainPasswordInformation](#Section_3.1.5.6.1.3): This method obtains information about the password policy on the account domain, given a user handle. Applications that allow end users to change their passwords can use this method to display policy information to an end user.
-- [SamrGetDomainPasswordInformation](#Section_3.1.5.6.1.3): This method is similar to the SamrGetUserDomainPasswordInformation method, except that the server does not enforce any security, and a user handle is not needed.
+- [SamrGetUserDomainPasswordInformation](#Section_3.1.5.13.3): This method obtains information about the password policy on the account domain, given a user handle. Applications that allow end users to change their passwords can use this method to display policy information to an end user.
+- [SamrGetDomainPasswordInformation](#Section_3.1.5.13.4): This method is similar to the SamrGetUserDomainPasswordInformation method, except that the server does not enforce any security, and a user handle is not needed.
 - [SamrRidToSid](#Section_3.1.5.13.5): This method returns a SID given a RID returned by any of the methods in this interface.<1>
 - [SamrSetDSRMPassword](#Section_3.1.5.13.6): This method allows a client to set the password on a local account (an account not stored in [**Active Directory**](#gt_active-directory)) on a [**DC**](#gt_domain-controller-dc). This is useful for recovery scenarios where Active Directory does not start.
-- [SamrValidatePassword](#Section_3.1.5.13.7): This method allows applications that store passwords to validate the strength of the passwords against the account domain policy.
+- [SamrValidatePassword](#Section_2.2.9): This method allows applications that store passwords to validate the strength of the passwords against the account domain policy.
 - [SamrSetMemberAttributesOfGroup](#Section_3.1.5.13.2): This method allows a server to configure extra authorization information associated with a group membership. This method is ignored in DC scenarios.
 - [SamrCloseHandle](#Section_3.1.5.13.1): This method releases server resources associated with the RPC context handle that is passed as a parameter.
 - [SamrValidateComputerAccountReuseAttempt](#Section_3.1.5.13.8): This method validates whether client attempts to re-use a given computer account are permitted.
@@ -1092,7 +1092,7 @@ Clients determine whether a method is supported by attempting to invoke the meth
 | --- | --- |
 | [SamrQueryInformationDomain2](#Section_3.1.5.5.1) | [SamrQueryInformationDomain](#Section_3.1.5.5.2) |
 | [SamrCreateUser2InDomain](#Section_3.1.5.4.4) | [SamrCreateUserInDomain](#Section_3.1.5.4.5) |
-| [SamrQueryDisplayInformation3](#Section_3.1.5.3.1) | [SamrQueryDisplayInformation2](#Section_3.1.5.3.2) [SamrQueryDisplayInformation](#Section_3.1.5.3.2) |
+| [SamrQueryDisplayInformation3](#Section_3.1.5.3.1) | [SamrQueryDisplayInformation2](#Section_3.1.5.3.2) [SamrQueryDisplayInformation](#Section_3.1.5.3.3) |
 | [SamrGetDisplayEnumerationIndex2](#Section_3.1.5.3.4) | [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5) |
 | [SamrSetInformationUser2](#Section_3.1.5.6.4) | [SamrSetInformationUser](#Section_3.1.5.6.5) |
 | [SamrConnect5](#Section_3.1.5.1.1) | [SamrConnect4](#Section_3.1.5.1.2) [SamrConnect2](#Section_3.1.5.1.3) |
@@ -1146,7 +1146,7 @@ RPC clients for this protocol MUST use the authentication level RPC_C_AUTHN_LEVE
 
 The server SHOULD<12> reject calls that do not use an authentication level of either RPC_C_AUTHN_LEVEL_NONE or RPC_C_AUTHN_LEVEL_PKT_PRIVACY (see [MS-RPCE] section 2.2.1.1.8).
 
-RPC clients for this protocol MUST use RPC over TCP/IP for the [SamrValidatePassword](#Section_3.1.5.13.7) method and MUST use RPC over SMB for the [SamrSetDSRMPassword](#Section_3.1.5.13.6) method.
+RPC clients for this protocol MUST use RPC over TCP/IP for the [SamrValidatePassword](#Section_2.2.9) method and MUST use RPC over SMB for the [SamrSetDSRMPassword](#Section_3.1.5.13.6) method.
 
 RPC clients MUST use only RPC over SMB for the [SamrSetInformationUser](#Section_3.1.5.6.5) and [SamrSetInformationUser2](#Section_3.1.5.6.4) methods when UserInformationClass is UserAllInformation, UserInternal1Information, UserInternal4Information, UserInternal4InformationNew, UserInternal5Information, UserInternal5InformationNew, UserInternal7Information, or UserInternal8Information.
 
@@ -1181,7 +1181,7 @@ These values specify an access control that is applicable to all object types us
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Generic ACCESS_MASK Values
 
-These values appear in methods that are used to obtain a handle (for example, [SamrConnect5](#Section_3.1.5.1.1)). They are translated by the server into specific ACCESS_MASK values. For more information on object-specific semantics, see sections [2.2.1.3](#Section_2.2.1.3), [2.2.1.4](#Section_2.2.1.4), [2.2.1.5](#Section_2.2.1.5), [2.2.1.6](#Section_2.2.1.6), and [2.2.1.7](#Section_1.2).
+These values appear in methods that are used to obtain a handle (for example, [SamrConnect5](#Section_3.1.5.1.1)). They are translated by the server into specific ACCESS_MASK values. For more information on object-specific semantics, see sections [2.2.1.3](#Section_2.2.1.3), [2.2.1.4](#Section_2.2.1.4), [2.2.1.5](#Section_2.2.1.5), [2.2.1.6](#Section_2.2.1.6), and [2.2.1.7](#Section_2.2.1.7).
 
 | Constant/value | Description |
 | --- | --- |
@@ -1193,7 +1193,7 @@ These values appear in methods that are used to obtain a handle (for example, [S
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Server ACCESS_MASK Values
 
-These are the specific values available to describe the access control on a [**server object**](#gt_server-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_5). For more information on the message processing of these values, see section [3.1.5.1.1](#Section_3.1.5.1.1).
+These are the specific values available to describe the access control on a [**server object**](#gt_server-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_2.2.1.1). For more information on the message processing of these values, see section [3.1.5.1.1](#Section_3.1.5.1.1).
 
 | Constant/value | Description |
 | --- | --- |
@@ -1211,7 +1211,7 @@ These are the specific values available to describe the access control on a [**s
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 Domain ACCESS_MASK Values
 
-These are the specific values available to describe the access control on a [**domain object**](#gt_domain-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_5). For more information on the message processing of these values, see section [3.1.5.1.2](#Section_3.1.5.1.2).
+These are the specific values available to describe the access control on a [**domain object**](#gt_domain-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_2.2.1.1). For more information on the message processing of these values, see section [3.1.5.1.2](#Section_3.1.5.1.2).
 
 | Constant/value | Description |
 | --- | --- |
@@ -1234,7 +1234,7 @@ These are the specific values available to describe the access control on a [**d
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 Group ACCESS_MASK Values
 
-These are the specific values available to describe the access control on a [**group object**](#gt_group-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_5). For more information on the message processing of these values, see section [3.1.5.1.6](#Section_3.1.5.1.6).
+These are the specific values available to describe the access control on a [**group object**](#gt_group-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_2.2.1.1). For more information on the message processing of these values, see section [3.1.5.1.6](#Section_3.1.5.1.6).
 
 | Constant/value | Description |
 | --- | --- |
@@ -1251,7 +1251,7 @@ These are the specific values available to describe the access control on a [**g
 <a id="Section_2.2.1.6"></a>
 #### 2.2.1.6 Alias ACCESS_MASK Values
 
-These are the specific values available to describe the access control on an [**alias object**](#gt_alias-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_5). For more information on the message processing of these values, see section [3.1.5.1.8](#Section_3.1.5.1.8).
+These are the specific values available to describe the access control on an [**alias object**](#gt_alias-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_2.2.1.1). For more information on the message processing of these values, see section [3.1.5.1.8](#Section_3.1.5.1.8).
 
 | Constant/value | Description |
 | --- | --- |
@@ -1268,7 +1268,7 @@ These are the specific values available to describe the access control on an [**
 <a id="Section_2.2.1.7"></a>
 #### 2.2.1.7 User ACCESS_MASK Values
 
-These are the specific values available to describe the access control on a [**user object**](#gt_user-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_5). For more information on the message processing of these values, see section [3.1.5.1.9](#Section_3.1.5.1.9).
+These are the specific values available to describe the access control on a [**user object**](#gt_user-object). A bitwise OR operation can be performed on these values, along with values from section [2.2.1.1](#Section_2.2.1.1). For more information on the message processing of these values, see section [3.1.5.1.9](#Section_3.1.5.1.9).
 
 | Constant/value | Description |
 | --- | --- |
@@ -1291,7 +1291,7 @@ These are the specific values available to describe the access control on a [**u
 <a id="Section_2.2.1.8"></a>
 #### 2.2.1.8 USER_ALL Values
 
-USER_ALL values are used in the WhichFields bit field in the [SAMPR_USER_ALL_INFORMATION](#Section_2.2.6.6) structure. All bits can be combined with a logical OR in any combination that is in accordance with the processing instructions specified in sections [3.1.5.6.5](#Section_3.1.5.6.5), [3.1.5.6.4](#Section_3.1.5.6.4), [3.1.5.5.6](#Section_3.1.5.5.5) and [3.1.5.5.5](#Section_3.1.5.5.5). If a bit is set, the associated field of SAMPR_USER_ALL_INFORMATION MUST be processed by the server. If a bit is not set, the server MUST ignore the associated field. The last column of the following table indicates the bit-to-field association.
+USER_ALL values are used in the WhichFields bit field in the [SAMPR_USER_ALL_INFORMATION](#Section_2.2.6.6) structure. All bits can be combined with a logical OR in any combination that is in accordance with the processing instructions specified in sections [3.1.5.6.5](#Section_3.1.5.6.5), [3.1.5.6.4](#Section_3.1.5.6.4), [3.1.5.5.6](#Section_3.1.5.5.6) and [3.1.5.5.5](#Section_3.1.5.5.5). If a bit is set, the associated field of SAMPR_USER_ALL_INFORMATION MUST be processed by the server. If a bit is not set, the server MUST ignore the associated field. The last column of the following table indicates the bit-to-field association.
 
 | Constant/value | Description |
 | --- | --- |
@@ -1383,7 +1383,7 @@ These values are attributes of a user account and can be combined by using a bit
 | USER_TEMP_DUPLICATE_ACCOUNT 0x00000008 | This bit is ignored by clients and servers. |
 | USER_NORMAL_ACCOUNT 0x00000010 | Specifies that the user is not a computer object. |
 | USER_MNS_LOGON_ACCOUNT 0x00000020 | This bit is ignored by clients and servers. |
-| USER_INTERDOMAIN_TRUST_ACCOUNT 0x00000040 | Specifies that the object represents a trust object. For more information about trust objects, see [MS-LSAD](#Section_5). |
+| USER_INTERDOMAIN_TRUST_ACCOUNT 0x00000040 | Specifies that the object represents a trust object. For more information about trust objects, see [MS-LSAD](../MS-LSAD/MS-LSAD.md). |
 | USER_WORKSTATION_TRUST_ACCOUNT 0x00000080 | Specifies that the object is a member workstation or server. |
 | USER_SERVER_TRUST_ACCOUNT 0x00000100 | Specifies that the object is a [**DC**](#gt_domain-controller-dc). |
 | USER_DONT_EXPIRE_PASSWORD 0x00000200 | Specifies that the maximum-password-age policy does not apply to this user. |
@@ -1403,7 +1403,7 @@ These values are attributes of a user account and can be combined by using a bit
 <a id="Section_2.2.1.13"></a>
 #### 2.2.1.13 UF_FLAG Codes
 
-These values are attributes of a user account, as expressed at the data model level (see section [3.1.1](#Section_3.2.1) for the data model). Unless otherwise specified in the table, see section [3.1.5.14.2](#Section_3.1.5.14.2) to map these values to USER_ACCOUNT values, and then see section [2.2.1.12](#Section_2.2.1.12) for a description.
+These values are attributes of a user account, as expressed at the data model level (see section [3.1.1](#Section_3.1.1) for the data model). Unless otherwise specified in the table, see section [3.1.5.14.2](#Section_3.1.5.14.2) to map these values to USER_ACCOUNT values, and then see section [2.2.1.12](#Section_2.2.1.12) for a description.
 
 | Constant/value | Description |
 | --- | --- |
@@ -1451,7 +1451,7 @@ These are predefined [**RIDs**](#gt_relative-identifier-rid) of users and groups
 <a id="Section_2.2.1.15"></a>
 #### 2.2.1.15 STATUS_ Codes
 
-These values are return status codes from the server. This section is provided as a reference for the message processing sections in section [3.1.5](#Section_3.1.5.14).
+These values are return status codes from the server. This section is provided as a reference for the message processing sections in section [3.1.5](#Section_3.1.5).
 
 | Constant/value | Description |
 | --- | --- |
@@ -2024,7 +2024,7 @@ DomainModifiedInformation2 = 13
 
 **DomainReplicationInformation:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_REPLICATION_INFORMATION** structure (see section [2.2.3.14](#Section_2.2.3.14)).
 
-**DomainServerRoleInformation:** Indicates the *Buffer* parameter is to be interpreted as a **DOMAIN_SERVER_ROLE_INFORMATION** structure (see section [2.2.3.7](#Section_2.2.3.4)).
+**DomainServerRoleInformation:** Indicates the *Buffer* parameter is to be interpreted as a **DOMAIN_SERVER_ROLE_INFORMATION** structure (see section [2.2.3.7](#Section_2.2.3.7)).
 
 **DomainModifiedInformation:** Indicates the *Buffer* parameter is to be interpreted as a **DOMAIN_MODIFIED_INFORMATION** structure (see section [2.2.3.8](#Section_2.2.3.8)).
 
@@ -2034,7 +2034,7 @@ DomainModifiedInformation2 = 13
 
 **DomainLockoutInformation:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_LOCKOUT_INFORMATION** structure (see section [2.2.3.15](#Section_2.2.3.15)).
 
-**DomainModifiedInformation2:** Indicates the *Buffer* parameter is to be interpreted as a **DOMAIN_MODIFIED_INFORMATION2** structure (see section [2.2.3.9](#Section_2.2.3.8)).
+**DomainModifiedInformation2:** Indicates the *Buffer* parameter is to be interpreted as a **DOMAIN_MODIFIED_INFORMATION2** structure (see section [2.2.3.9](#Section_2.2.3.9)).
 
 <a id="Section_2.2.3.17"></a>
 #### 2.2.3.17 SAMPR_DOMAIN_INFO_BUFFER
@@ -2385,7 +2385,7 @@ SAMPR_ALIAS_ADM_COMMENT_INFORMATION AdminComment;
 
 The structures and fields in this section relate to the following methods:
 
-- [SamrQueryInformationUser](#Section_3.1.5.5.5)
+- [SamrQueryInformationUser](#Section_3.1.5.5.6)
 - [SamrQueryInformationUser2](#Section_3.1.5.5.5)
 - [SamrSetInformationUser](#Section_3.1.5.6.5)
 - [SamrSetInformationUser2](#Section_3.1.5.6.4)
@@ -2605,7 +2605,7 @@ unsigned char PrivateDataSensitive;
 
 **SecurityDescriptor:** Not used. Ignored on receipt at the server and client. Clients MUST set to zero when sent, and servers MUST set to zero on return.
 
-**WhichFields:** A 32-bit bit field indicating which fields within the SAMPR_USER_ALL_INFORMATION structure will be processed by the server. Section [2.2.1.8](#Section_3.1.1.8.2) specifies the valid bits and also specifies the structure field to which each bit corresponds.
+**WhichFields:** A 32-bit bit field indicating which fields within the SAMPR_USER_ALL_INFORMATION structure will be processed by the server. Section [2.2.1.8](#Section_2.2.1.8) specifies the valid bits and also specifies the structure field to which each bit corresponds.
 
 **Note** If a given bit is set, the associated field MUST be processed; if a given bit is not set, then the associated field MUST be ignored.
 
@@ -3034,7 +3034,7 @@ SAMPR_ENCRYPTED_USER_PASSWORD UserPassword;
 <a id="Section_2.2.6.25"></a>
 #### 2.2.6.25 SAMPR_USER_INTERNAL4_INFORMATION_NEW
 
-The SAMPR_USER_INTERNAL4_INFORMATION_NEW structure holds all attributes of a user, along with an encrypted password. The encrypted password uses a [**salt**](#gt_salt) to improve the encryption algorithm. See the specification for [SAMPR_ENCRYPTED_USER_PASSWORD_NEW (section 2.2.6.22)](#Section_2.2.6.21) for details on salt value selection.
+The SAMPR_USER_INTERNAL4_INFORMATION_NEW structure holds all attributes of a user, along with an encrypted password. The encrypted password uses a [**salt**](#gt_salt) to improve the encryption algorithm. See the specification for [SAMPR_ENCRYPTED_USER_PASSWORD_NEW (section 2.2.6.22)](#Section_2.2.6.22) for details on salt value selection.
 
 typedef struct _SAMPR_USER_INTERNAL4_INFORMATION_NEW {
 
@@ -3074,7 +3074,7 @@ unsigned char PasswordExpired;
 <a id="Section_2.2.6.27"></a>
 #### 2.2.6.27 SAMPR_USER_INTERNAL5_INFORMATION_NEW
 
-The SAMPR_USER_INTERNAL5_INFORMATION_NEW structure communicates an encrypted password. The encrypted password uses a [**salt**](#gt_salt) to improve the encryption algorithm. See the specification for [SAMPR_ENCRYPTED_USER_PASSWORD_NEW (section 2.2.6.22)](#Section_2.2.6.21) for details on salt value selection.
+The SAMPR_USER_INTERNAL5_INFORMATION_NEW structure communicates an encrypted password. The encrypted password uses a [**salt**](#gt_salt) to improve the encryption algorithm. See the specification for [SAMPR_ENCRYPTED_USER_PASSWORD_NEW (section 2.2.6.22)](#Section_2.2.6.22) for details on salt value selection.
 
 This structure is used to carry a new password for a particular [**account**](#gt_account) from the client to the server, encrypted in a way that protects it from disclosure or tampering while in transit. A random value, a salt, is used by the client to seed the encryption routine; see section 2.2.6.22 for details.
 
@@ -3095,7 +3095,7 @@ unsigned char PasswordExpired;
 <a id="Section_2.2.6.28"></a>
 #### 2.2.6.28 USER_INFORMATION_CLASS
 
-The USER_INFORMATION_CLASS enumeration indicates how to interpret the *Buffer* parameter for [SamrSetInformationUser](#Section_3.1.5.6.5), [SamrQueryInformationUser](#Section_3.1.5.5.5), [SamrSetInformationUser2](#Section_3.1.5.6.4), and [SamrQueryInformationUser2](#Section_3.1.5.5.5). For a list of associated structures, see section [2.2.6.29](#Section_2.2.6.29).
+The USER_INFORMATION_CLASS enumeration indicates how to interpret the *Buffer* parameter for [SamrSetInformationUser](#Section_3.1.5.6.5), [SamrQueryInformationUser](#Section_3.1.5.5.6), [SamrSetInformationUser2](#Section_3.1.5.6.4), and [SamrQueryInformationUser2](#Section_3.1.5.5.5). For a list of associated structures, see section [2.2.6.29](#Section_2.2.6.29).
 
 typedef enum _USER_INFORMATION_CLASS
 
@@ -3157,7 +3157,7 @@ UserInternal8Information = 32
 
 **UserGeneralInformation:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_USER_GENERAL_INFORMATION** structure (see section [2.2.6.7](#Section_2.2.6.7)).
 
-**UserPreferencesInformation:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_USER_PREFERENCES_INFORMATION** structure (see section [2.2.6.8](#Section_1.2)).
+**UserPreferencesInformation:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_USER_PREFERENCES_INFORMATION** structure (see section [2.2.6.8](#Section_2.2.6.8)).
 
 **UserLogonInformation:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_USER_LOGON_INFORMATION** structure (see section [2.2.6.10](#Section_2.2.6.10)).
 
@@ -3208,7 +3208,7 @@ UserInternal8Information = 32
 <a id="Section_2.2.6.29"></a>
 #### 2.2.6.29 SAMPR_USER_INFO_BUFFER
 
-The SAMPR_USER_INFO_BUFFER union combines all possible structures used in the SamrSetInformationUser, SamrSetInformationUser2, SamrQueryInformationUser, and SamrQueryInformationUser2 methods (see sections [3.1.5.6.5](#Section_3.1.5.6.5), [3.1.5.6.4](#Section_3.1.5.6.4), [3.1.5.5.6](#Section_3.1.5.5.5), and [3.1.5.5.5](#Section_3.1.5.5.5)). For details on each field, see the associated section for the field structure.
+The SAMPR_USER_INFO_BUFFER union combines all possible structures used in the SamrSetInformationUser, SamrSetInformationUser2, SamrQueryInformationUser, and SamrQueryInformationUser2 methods (see sections [3.1.5.6.5](#Section_3.1.5.6.5), [3.1.5.6.4](#Section_3.1.5.6.4), [3.1.5.5.6](#Section_3.1.5.5.6), and [3.1.5.5.5](#Section_3.1.5.5.5)). For details on each field, see the associated section for the field structure.
 
 typedef
 
@@ -3410,7 +3410,7 @@ A decrypted cipher of less than (SAM_MAX_PASSWORD_LENGTH * sizeof(WCHAR)) + size
 <a id="Section_2.2.7"></a>
 ### 2.2.7 Miscellaneous Protocol-Specific Types
 
-These types are specific to the SAM Remote Protocol (Client-to-Server). Many types are used by multiple methods, while others are used by only one method. This section is useful when used as a reference while reading the method syntax in section [3.1.5](#Section_3.1.5.14).
+These types are specific to the SAM Remote Protocol (Client-to-Server). Many types are used by multiple methods, while others are used by only one method. This section is useful when used as a reference while reading the method syntax in section [3.1.5](#Section_3.1.5).
 
 <a id="Section_2.2.7.1"></a>
 #### 2.2.7.1 PSAMPR_SERVER_NAME
@@ -3451,7 +3451,7 @@ ENCRYPTED_NT_OWF_PASSWORD,
 
 *PENCRYPTED_NT_OWF_PASSWORD;
 
-**data:** 16 bytes of unstructured data used to hold an encrypted 16-byte hash (either an [**LM hash**](#gt_lm-hash) or an [**NT hash**](#gt_nt-hash)). The encryption algorithm is specified in section [2.2.11.1](#Section_2.2.11.1.4). The methods specified in sections [3.1.5.10](#Section_3.1.5.10) and [3.1.5.13.6](#Section_3.1.5.13.6) use this structure and specify the type of hash and the encryption key.
+**data:** 16 bytes of unstructured data used to hold an encrypted 16-byte hash (either an [**LM hash**](#gt_lm-hash) or an [**NT hash**](#gt_nt-hash)). The encryption algorithm is specified in section [2.2.11.1](#Section_2.2.11.1). The methods specified in sections [3.1.5.10](#Section_3.1.5.10) and [3.1.5.13.6](#Section_3.1.5.13.6) use this structure and specify the type of hash and the encryption key.
 
 <a id="Section_2.2.7.4"></a>
 #### 2.2.7.4 SAMPR_ULONG_ARRAY
@@ -3489,7 +3489,7 @@ typedef struct _SAMPR_PSID_ARRAY {
 
 **Count:** The number of elements in the **Sids** field. If zero, **Sids** MUST be ignored. If nonzero, **Sids** MUST point to at least Count * sizeof(SAMPR_SID_INFORMATION) bytes of memory.
 
-**Sids:** An array of pointers to SID values. For more information, see section [2.2.7.6](#Section_2.2.7.5).
+**Sids:** An array of pointers to SID values. For more information, see section [2.2.7.6](#Section_2.2.7.6).
 
 <a id="Section_2.2.7.6"></a>
 #### 2.2.7.6 SAMPR_SID_INFORMATION
@@ -3737,10 +3737,10 @@ The structures and fields in this section relate to the following methods:
 
 - [SamrQueryDisplayInformation3](#Section_3.1.5.3.1)
 - [SamrQueryDisplayInformation2](#Section_3.1.5.3.2)
-- [SamrQueryDisplayInformation](#Section_3.1.5.3.2)
+- [SamrQueryDisplayInformation](#Section_3.1.5.3.3)
 - [SamrGetDisplayEnumerationIndex2](#Section_3.1.5.3.4)
 - [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5)
-The model of the methods is for the client to specify an enumeration that indicates the attributes that are to be queried. There is duplication among the structures that contain the attributes. For a description of each attribute that is common among structures, see section [2.2.8.1](#Section_2.2.8).
+The model of the methods is for the client to specify an enumeration that indicates the attributes that are to be queried. There is duplication among the structures that contain the attributes. For a description of each attribute that is common among structures, see section [2.2.8.1](#Section_2.2.8.1).
 
 <a id="Section_2.2.8.1"></a>
 #### 2.2.8.1 Common Selective Enumerate Fields
@@ -3784,7 +3784,7 @@ RPC_UNICODE_STRING FullName;
 
 *PSAMPR_DOMAIN_DISPLAY_USER;
 
-For information on each field, see section [2.2.8.1](#Section_2.2.8).
+For information on each field, see section [2.2.8.1](#Section_2.2.8.1).
 
 <a id="Section_2.2.8.3"></a>
 #### 2.2.8.3 SAMPR_DOMAIN_DISPLAY_MACHINE
@@ -3807,7 +3807,7 @@ RPC_UNICODE_STRING AdminComment;
 
 *PSAMPR_DOMAIN_DISPLAY_MACHINE;
 
-For information on each field, see section [2.2.8.1](#Section_2.2.8).
+For information on each field, see section [2.2.8.1](#Section_2.2.8.1).
 
 <a id="Section_2.2.8.4"></a>
 #### 2.2.8.4 SAMPR_DOMAIN_DISPLAY_GROUP
@@ -3830,7 +3830,7 @@ RPC_UNICODE_STRING AdminComment;
 
 *PSAMPR_DOMAIN_DISPLAY_GROUP;
 
-For information on each field, see section [2.2.8.1](#Section_2.2.8).
+For information on each field, see section [2.2.8.1](#Section_2.2.8.1).
 
 <a id="Section_2.2.8.5"></a>
 #### 2.2.8.5 SAMPR_DOMAIN_DISPLAY_OEM_USER
@@ -3847,7 +3847,7 @@ RPC_STRING OemAccountName;
 
 *PSAMPR_DOMAIN_DISPLAY_OEM_USER;
 
-For information on each field, see section [2.2.8.1](#Section_2.2.8).
+For information on each field, see section [2.2.8.1](#Section_2.2.8.1).
 
 <a id="Section_2.2.8.6"></a>
 #### 2.2.8.6 SAMPR_DOMAIN_DISPLAY_OEM_GROUP
@@ -3864,7 +3864,7 @@ RPC_STRING OemAccountName;
 
 *PSAMPR_DOMAIN_DISPLAY_OEM_GROUP;
 
-For information on each field, see section [2.2.8.1](#Section_2.2.8).
+For information on each field, see section [2.2.8.1](#Section_2.2.8.1).
 
 <a id="Section_2.2.8.7"></a>
 #### 2.2.8.7 SAMPR_DOMAIN_DISPLAY_USER_BUFFER
@@ -3964,7 +3964,7 @@ unsigned long EntriesRead;
 <a id="Section_2.2.8.12"></a>
 #### 2.2.8.12 DOMAIN_DISPLAY_INFORMATION
 
-The DOMAIN_DISPLAY_INFORMATION enumeration indicates how to interpret the Buffer parameter for [SamrQueryDisplayInformation](#Section_3.1.5.3.2), [SamrQueryDisplayInformation2](#Section_3.1.5.3.2), [SamrQueryDisplayInformation3](#Section_3.1.5.3.1), [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5), and [SamrGetDisplayEnumerationIndex2](#Section_3.1.5.3.4). See section [2.2.8.13](#Section_2.2.8.13) for the list of the structures that are associated with each enumeration.
+The DOMAIN_DISPLAY_INFORMATION enumeration indicates how to interpret the Buffer parameter for [SamrQueryDisplayInformation](#Section_3.1.5.3.3), [SamrQueryDisplayInformation2](#Section_3.1.5.3.2), [SamrQueryDisplayInformation3](#Section_3.1.5.3.1), [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5), and [SamrGetDisplayEnumerationIndex2](#Section_3.1.5.3.4). See section [2.2.8.13](#Section_2.2.8.13) for the list of the structures that are associated with each enumeration.
 
 typedef enum _DOMAIN_DISPLAY_INFORMATION
 
@@ -3984,11 +3984,11 @@ DomainDisplayOemGroup
 
 *PDOMAIN_DISPLAY_INFORMATION;
 
-**DomainDisplayUser:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_DISPLAY_USER_BUFFER** structure (see section [2.2.8.7](#Section_2.2.8.2)).
+**DomainDisplayUser:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_DISPLAY_USER_BUFFER** structure (see section [2.2.8.7](#Section_2.2.8.7)).
 
 **DomainDisplayMachine:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_DISPLAY_MACHINE_BUFFER** structure (see section [2.2.8.8](#Section_2.2.8.8)).
 
-**DomainDisplayGroup:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_DISPLAY_GROUP_BUFFER** structure (see section [2.2.8.9](#Section_2.2.8.4)).
+**DomainDisplayGroup:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_DISPLAY_GROUP_BUFFER** structure (see section [2.2.8.9](#Section_2.2.8.9)).
 
 **DomainDisplayOemUser:** Indicates the *Buffer* parameter is to be interpreted as a **SAMPR_DOMAIN_DISPLAY_OEM_USER_BUFFER** structure (see section [2.2.8.10](#Section_2.2.8.10)).
 
@@ -4032,7 +4032,7 @@ SAMPR_DOMAIN_DISPLAY_OEM_GROUP_BUFFER OemGroupInformation;
 <a id="Section_2.2.9"></a>
 ### 2.2.9 SamrValidatePassword Data Types
 
-The following structures are used exclusively for the [SamrValidatePassword](#Section_3.1.5.13.7) method.
+The following structures are used exclusively for the [SamrValidatePassword](#Section_2.2.9) method.
 
 As stated in section [2.1](#Section_2.1), all structures SHOULD be encrypted by the client using transport layer security to hide any cleartext data embedded in the structures.
 
@@ -4169,7 +4169,7 @@ See the message processing of [SamrValidatePassword (section 3.1.5.13.7)](#Sec
 <a id="Section_2.2.9.4"></a>
 #### 2.2.9.4 SAM_VALIDATE_STANDARD_OUTPUT_ARG
 
-The SAM_VALIDATE_STANDARD_OUTPUT_ARG structure holds the output of [SamrValidatePassword](#Section_3.1.5.13.7).
+The SAM_VALIDATE_STANDARD_OUTPUT_ARG structure holds the output of [SamrValidatePassword](#Section_2.2.9).
 
 typedef struct _SAM_VALIDATE_STANDARD_OUTPUT_ARG {
 
@@ -4231,7 +4231,7 @@ unsigned char PasswordMatch;
 
 **UserAccountName:** The application-specific logon name of an [**account**](#gt_account) performing the change-password operation.
 
-**HashedPassword:** A binary value containing a hashed form of the value contained in the **ClearPassword** field. The structure of this binary value is specified in section [2.2.9.1](#Section_2.2.9.1). The hash function used to generate this value is chosen by the client. An example hash function might be MD5 (as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275)). The server implementation is independent of that choice; that is, through this protocol, the server is exposed to a sequence of bytes formatted per section 2.2.9.1 and is, therefore, not exposed to the hash function chosen by the client. Furthermore, there is no processing by the server that requires knowledge of the specific hash function chosen. Section [2.2.9](#Section_3.1.5.13.7) contains more information about a scenario in which this field is used.
+**HashedPassword:** A binary value containing a hashed form of the value contained in the **ClearPassword** field. The structure of this binary value is specified in section [2.2.9.1](#Section_2.2.9.1). The hash function used to generate this value is chosen by the client. An example hash function might be MD5 (as specified in [[RFC1321]](https://go.microsoft.com/fwlink/?LinkId=90275)). The server implementation is independent of that choice; that is, through this protocol, the server is exposed to a sequence of bytes formatted per section 2.2.9.1 and is, therefore, not exposed to the hash function chosen by the client. Furthermore, there is no processing by the server that requires knowledge of the specific hash function chosen. Section [2.2.9](#Section_2.2.9) contains more information about a scenario in which this field is used.
 
 **PasswordMatch:** A nonzero value indicates that a valid password was presented to the change-password request.
 
@@ -4354,7 +4354,7 @@ For more information, see the message processing of SamrValidatePassword.
 <a id="Section_2.2.10"></a>
 ### 2.2.10 Supplemental Credentials Structures
 
-These structures define the format of the **supplementalCredentials** attribute in [**Active Directory**](#gt_active-directory) that the server of this protocol updates in the [**DC**](#gt_domain-controller-dc) configuration. The structures are not part of the SAM Remote Protocol (Client-to-Server) but are listed here in normative detail because the persisted value (in the **supplementalCredentials** attribute) is replicated in Active Directory. See section [3.1.1.8.11](#Section_3.1.1.8.11.5) for details on how this attribute is updated.
+These structures define the format of the **supplementalCredentials** attribute in [**Active Directory**](#gt_active-directory) that the server of this protocol updates in the [**DC**](#gt_domain-controller-dc) configuration. The structures are not part of the SAM Remote Protocol (Client-to-Server) but are listed here in normative detail because the persisted value (in the **supplementalCredentials** attribute) is replicated in Active Directory. See section [3.1.1.8.11](#Section_3.1.1.8.11) for details on how this attribute is updated.
 
 <a id="Section_2.2.10.1"></a>
 #### 2.2.10.1 USER_PROPERTIES
@@ -4406,7 +4406,7 @@ packet-beta
   96-159: "PropertyValue (variable)"
 ```
 
-**NameLength (2 bytes):** The number of bytes, in little-endian byte order, of **PropertyName**. The property name is located at an offset of zero bytes just following the **Reserved** field. For more information, see the message processing section for [supplementalCredentials (section 3.1.1.8.11)](#Section_3.1.1.8.11.5).
+**NameLength (2 bytes):** The number of bytes, in little-endian byte order, of **PropertyName**. The property name is located at an offset of zero bytes just following the **Reserved** field. For more information, see the message processing section for [supplementalCredentials (section 3.1.1.8.11)](#Section_3.1.1.8.11).
 
 **ValueLength (2 bytes):** The number of bytes contained in **PropertyValue**.
 
@@ -4469,7 +4469,7 @@ packet-beta
 
 **Reserved3 (12 bytes):** This value MUST be ignored by the recipient and MUST be set to zero.
 
-For information on the **Hash** fields, see section [3.1.1.8.11](#Section_3.1.1.8.11.5).
+For information on the **Hash** fields, see section [3.1.1.8.11](#Section_3.1.1.8.11).
 
 <a id="Section_2.2.10.4"></a>
 #### 2.2.10.4 Primary:Kerberos - KERB_STORED_CREDENTIAL
@@ -4602,7 +4602,7 @@ This value is in little-endian byte order. This value SHOULD be ignored on read.
 
 **DefaultIterationCount (4 bytes):** The default iteration count used to calculate the password hashes.
 
-**Credentials (variable):** An array of **CredentialCount** [KERB_KEY_DATA_NEW (section 2.2.10.7)](#Section_2.2.10.5) elements.
+**Credentials (variable):** An array of **CredentialCount** [KERB_KEY_DATA_NEW (section 2.2.10.7)](#Section_2.2.10.7) elements.
 
 **ServiceCredentials (variable):** (This field is optional.) An array of **ServiceCredentialCount** KERB_KEY_DATA_NEW elements.
 
@@ -4647,7 +4647,7 @@ packet-beta
 <a id="Section_2.2.10.8"></a>
 #### 2.2.10.8 Kerberos Encryption Algorithm Identifiers
 
-The following table identifies the various algorithms that can be used in the [KERB_KEY_DATA](#Section_2.2.10.5) and [KERB_KEY_DATA_NEW](#Section_2.2.10.5) structures.<26>
+The following table identifies the various algorithms that can be used in the [KERB_KEY_DATA](#Section_2.2.10.5) and [KERB_KEY_DATA_NEW](#Section_2.2.10.7) structures.<26>
 
 | Value | Meaning |
 | --- | --- |
@@ -4773,9 +4773,9 @@ This protocol is part of the [**Active Directory**](#gt_active-directory) core 
 <a id="Section_3.1"></a>
 ## 3.1 Server Details
 
-This protocol enables create, read, update, and delete semantics over an account domain, as described in [MS-AUTHSOD](#Section_1.3) section 1.1.1.5. Five abstract objects are exposed through this protocol: server, [**domain**](#gt_domain), group, alias, and user. User, group, and [**alias objects**](#gt_alias-object) can be created and deleted; all objects can be updated and read.
+This protocol enables create, read, update, and delete semantics over an account domain, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5. Five abstract objects are exposed through this protocol: server, [**domain**](#gt_domain), group, alias, and user. User, group, and [**alias objects**](#gt_alias-object) can be created and deleted; all objects can be updated and read.
 
-This specification uses the [**Active Directory**](#gt_active-directory) data model, as specified in the entire document of [MS-ADTS](../MS-ADTS/MS-ADTS.md), for the server of this protocol. The attribute names specified in this section are normative for the [**DC**](#gt_domain-controller-dc) configuration. Section [3.1.1](#Section_3.2.1) contains a brief overview of that data model that is relevant to this protocol.
+This specification uses the [**Active Directory**](#gt_active-directory) data model, as specified in the entire document of [MS-ADTS](../MS-ADTS/MS-ADTS.md), for the server of this protocol. The attribute names specified in this section are normative for the [**DC**](#gt_domain-controller-dc) configuration. Section [3.1.1](#Section_3.1.1) contains a brief overview of that data model that is relevant to this protocol.
 
 Because the behavior of this protocol is very similar between the DC and non-DC configurations, the Active Directory data model is also used for the non-DC configuration. However, when implementing this protocol for the non-DC scenario, the names of attributes in the data model are not normative. For example, it is conceivable that the backing store in a non-DC configuration could be a text file written and read solely by the server of this protocol.
 
@@ -4931,7 +4931,7 @@ Effective-PasswordComplexityEnabled: A Boolean value indicating that password co
 
 Effective-PasswordHistoryLength: A 16-bit unsigned integer indicating the policy setting for the password history length.
 
-Effective-PasswordReversibleEncryptionEnabled: A Boolean value indicating that the user's cleartext password is to be stored in the **supplementalCredentials** attribute, as defined in section [3.1.1.8.11](#Section_3.1.1.8.11.5).
+Effective-PasswordReversibleEncryptionEnabled: A Boolean value indicating that the user's cleartext password is to be stored in the **supplementalCredentials** attribute, as defined in section [3.1.1.8.11](#Section_3.1.1.8.11).
 
 The values for these attributes on user objects are computed according to the following algorithm:
 
@@ -5095,7 +5095,7 @@ The following constraints are referenced from other constraints or triggers.
 
 This policy is referenced from the dBCSPwd and unicodePwd triggers.
 
-The following constraints MUST be satisfied; on error, the server MUST return a processing error. For more information on error codes, see section [3.1.5](#Section_3.1.5.14).
+The following constraints MUST be satisfied; on error, the server MUST return a processing error. For more information on error codes, see section [3.1.5](#Section_3.1.5).
 
 - Minimum Password Length Constraint: If all of the following conditions are true, the following constraint MUST be satisfied:
 - Conditions:
@@ -5127,7 +5127,7 @@ The following constraints MUST be satisfied; on error, the server MUST return a 
 
 This constraint is referenced when a cleartext password is updated.
 
-The following constraints MUST be satisfied; on error, the server MUST return a processing error. For more information on error codes, see section [3.1.5](#Section_3.1.5.14).
+The following constraints MUST be satisfied; on error, the server MUST return a processing error. For more information on error codes, see section [3.1.5](#Section_3.1.5).
 
 - The value MUST be interpreted as a UTF-16 encoded string. If the length of the value is an odd-byte count, ignore the final byte, interpret the remaining characters as a UTF-16 encoded string, and ignore the last constraint (starting with the text "If the Effective-PasswordComplexityEnabled value...").
 - The value MUST be less than or equal to 256 characters (this constraint is called the "maximum password length constraint").
@@ -5282,7 +5282,7 @@ If the lockoutTime attribute value is 0, badPwdCount MUST be updated to the valu
 - If the **sAMAccountName** attribute value is NOT unique with respect to the union of all **sAMAccountName** and **msDS-AdditionalSamAccountName** attribute values for all other objects within the scope of the account and [**built-in domain**](#gt_built-in-domain), the server MUST return an error status, according to the following conditions.
 | Condition | Error status |
 | --- | --- |
-| The object whose **sAMAccountName** matches the **sAMAccountName** attribute of the current object is a [**group object**](#gt_group-object) as defined in section [3.1.1](#Section_3.2.1). | STATUS_GROUP_EXISTS |
+| The object whose **sAMAccountName** matches the **sAMAccountName** attribute of the current object is a [**group object**](#gt_group-object) as defined in section [3.1.1](#Section_3.1.1). | STATUS_GROUP_EXISTS |
 | The object whose **sAMAccountName** matches the **sAMAccountName** attribute of the current object is an [**alias object**](#gt_alias-object) as defined in section 3.1.1. | STATUS_ALIAS_EXISTS |
 | Otherwise: | STATUS_USER_EXISTS |
 
@@ -5295,12 +5295,12 @@ If the lockoutTime attribute value is 0, badPwdCount MUST be updated to the valu
 - The constraints in section 3.1.1.7.2 MUST be satisfied.
 - The **unicodePwd** attribute MUST be updated with the [**NT hash**](#gt_nt-hash) of new value.
 - The **dBCSPwd** attribute MUST be updated with the [**LM hash**](#gt_lm-hash) of new value.
-- On a [**DC**](#gt_domain-controller-dc) configuration, the **supplementalCredentials** attribute MUST be updated with the cleartext value (see section [3.1.1.8.11](#Section_3.1.1.8.11.5) for processing details on how **supplementalCredentials** is updated).
+- On a [**DC**](#gt_domain-controller-dc) configuration, the **supplementalCredentials** attribute MUST be updated with the cleartext value (see section [3.1.1.8.11](#Section_3.1.1.8.11) for processing details on how **supplementalCredentials** is updated).
 <a id="Section_3.1.1.8.6"></a>
 ##### 3.1.1.8.6 dBCSPwd
 
 - The constraints in section [3.1.1.7.1](#Section_3.1.1.7.1) MUST be satisfied.
-- The new value MUST be encrypted before being persisted. Encryption is accomplished using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1.4), with the [**RID**](#gt_relative-identifier-rid) (an unsigned integer) as the encryption key.
+- The new value MUST be encrypted before being persisted. Encryption is accomplished using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1), with the [**RID**](#gt_relative-identifier-rid) (an unsigned integer) as the encryption key.
 - If the client has access to the Unexpire-Password [**control access right**](#gt_control-access-right) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2.1) on the [**domain object**](#gt_domain-object), **pwdLastSet** MUST be updated to the current time; otherwise, **pwdLastSet** MUST be updated to the value zero, which causes the new password to expire immediately.
 - If the update to this attribute is not from an internal trigger, the **supplementalCredential** attribute MUST be removed.
 - The **lmPwdHistory** attribute MUST be updated with the new **dBCSPwd** attribute value (encrypted with the RID, according to constraint 2) according to the constraints in section [3.1.1.9.1](#Section_3.1.1.9.1).
@@ -5308,7 +5308,7 @@ If the lockoutTime attribute value is 0, badPwdCount MUST be updated to the valu
 ##### 3.1.1.8.7 unicodePwd
 
 - The constraints in section [3.1.1.7.1](#Section_3.1.1.7.1) MUST be satisfied.
-- The new value MUST be encrypted before being persisted. Encryption is accomplished using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1.4), with the [**RID**](#gt_relative-identifier-rid) (an unsigned integer) as the encryption key.
+- The new value MUST be encrypted before being persisted. Encryption is accomplished using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1), with the [**RID**](#gt_relative-identifier-rid) (an unsigned integer) as the encryption key.
 - If the client has access to the Unexpire-Password [**control access right**](#gt_control-access-right) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2.1) on the [**domain object**](#gt_domain-object), **pwdLastSet** MUST be updated to the current time; otherwise, **pwdLastSet** MUST be updated to the value zero, which causes the new password to expire immediately.
 - If the update to this attribute is not from an internal trigger, the **supplementalCredential** attribute MUST be removed.
 - The **ntPwdHistory** attribute MUST be updated with the new **unicodePwd** attribute value (encrypted with the RID, according to constraint 2) according to the constraints in section [3.1.1.9.1](#Section_3.1.1.9.1).
@@ -5353,7 +5353,7 @@ See the following citation in Appendix B: Product Behavior.<32>
 - If the UF_SERVER_TRUST_ACCOUNT bit is set, all of the following constraints MUST be satisfied:
 - The **primaryGroupId** attribute MUST be updated to the value DOMAIN_GROUP_RID_CONTROLLERS.
 - If the previous **primaryGroupId** value is NOT DOMAIN_GROUP_RID_COMPUTERS, let G be the group whose **objectSid** value has the [**RID**](#gt_relative-identifier-rid) of the previous **primaryGroupId** on the current object. G's member attribute MUST be updated to add a reference to the current object if it is not already present; processing errors for this constraint MUST be ignored.
-- If either UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION or UF_TRUSTED_FOR_DELEGATION is set, the client's [**token**](#gt_token) MUST be retrieved using the method described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The **RpcImpersonationAccessToken.Privileges[]** field MUST have the SE_ENABLE_DELEGATION_NAME privilege (defined in [MS-LSAD](#Section_5) section 3.1.1.2.1). Otherwise, the server MUST abort processing and return STATUS_ACCESS_DENIED.
+- If either UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION or UF_TRUSTED_FOR_DELEGATION is set, the client's [**token**](#gt_token) MUST be retrieved using the method described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The **RpcImpersonationAccessToken.Privileges[]** field MUST have the SE_ENABLE_DELEGATION_NAME privilege (defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1). Otherwise, the server MUST abort processing and return STATUS_ACCESS_DENIED.
 - If any of the following bits are set, the client MUST have the associated [**control access right**](#gt_control-access-right) (defined in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2.1) on the **ntSecurityDescriptor** for the [**account domain object**](#gt_account-domain-object-account-domain), per an [**access check**](#gt_access-check). (Information about the access check mechanism is specified in [MS-ADTS] section 5.1.3.3.) If this constraint fails, the server MUST abort processing and return STATUS_ACCESS_DENIED.
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5876,7 +5876,7 @@ The following tables specify the required access for the RPC methods that enforc
 | --- | --- |
 | N/A | USER_LIST_GROUPS |
 
-- [SamrQueryDisplayInformation](#Section_3.1.5.3.2)
+- [SamrQueryDisplayInformation](#Section_3.1.5.3.3)
 [SamrQueryDisplayInformation2](#Section_3.1.5.3.2)
 
 [SamrQueryDisplayInformation3](#Section_3.1.5.3.1)
@@ -6042,8 +6042,8 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [SamrConnect](#Section_3.1.5.1.4) | Returns a handle to a [**server object**](#gt_server-object). Opnum: 0 |
 | [SamrCloseHandle](#Section_3.1.5.13.1) | Closes any context handle obtained from this RPC interface. Opnum: 1 |
-| [SamrSetSecurityObject](#Section_3.1.5.12.1.2) | Sets the access control on a server, [**domain**](#gt_domain), user, group, or [**alias object**](#gt_alias-object). Opnum: 2 |
-| [SamrQuerySecurityObject](#Section_5) | Queries the access control on a server, domain, user, group, or alias object. Opnum: 3 |
+| [SamrSetSecurityObject](#Section_3.1.5.12.1) | Sets the access control on a server, [**domain**](#gt_domain), user, group, or [**alias object**](#gt_alias-object). Opnum: 2 |
+| [SamrQuerySecurityObject](#Section_3.1.5.12.2) | Queries the access control on a server, domain, user, group, or alias object. Opnum: 3 |
 | Opnum4NotUsedOnWire | Reserved for local use. Opnum: 4 |
 | [SamrLookupDomainInSamServer](#Section_3.1.5.11.1) | Obtains the [**SID**](#gt_security-identifier-sid) of a [**domain object**](#gt_domain-object). Opnum: 5 |
 | [SamrEnumerateDomainsInSamServer](#Section_3.1.5.2.1) | Obtains a listing of all domains hosted by the server side. Opnum: 6 |
@@ -6076,15 +6076,15 @@ Methods in RPC Opnum Order
 | [SamrGetMembersInAlias](#Section_3.1.5.8.6) | Obtains the membership list of an alias. Opnum: 33 |
 | [SamrOpenUser](#Section_3.1.5.1.9) | Obtains a handle to a user. Opnum: 34 |
 | [SamrDeleteUser](#Section_3.1.5.7.3) | Removes a [**user object**](#gt_user-object). Opnum: 35 |
-| [SamrQueryInformationUser](#Section_3.1.5.5.5) | Obtains attributes from a user object. Opnum: 36 |
+| [SamrQueryInformationUser](#Section_3.1.5.5.6) | Obtains attributes from a user object. Opnum: 36 |
 | [SamrSetInformationUser](#Section_3.1.5.6.5) | Updates attributes on a user object. Opnum: 37 |
 | [SamrChangePasswordUser](#Section_3.1.5.10.1) | Changes the password of a user object. Opnum: 38 |
 | [SamrGetGroupsForUser](#Section_3.1.5.9.1) | Obtains a list of groups of which a user is a member. Opnum: 39 |
-| [SamrQueryDisplayInformation](#Section_3.1.5.3.2) | Obtains a list of [**accounts**](#gt_account) in name-sorted order. Opnum: 40 |
+| [SamrQueryDisplayInformation](#Section_3.1.5.3.3) | Obtains a list of [**accounts**](#gt_account) in name-sorted order. Opnum: 40 |
 | [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5) | Obtains an index into an account-name–sorted list of accounts. Opnum: 41 |
 | Opnum42NotUsedOnWire | Reserved for local use. Opnum: 42 |
 | Opnum43NotUsedOnWire | Reserved for local use. Opnum: 43 |
-| [SamrGetUserDomainPasswordInformation](#Section_3.1.5.6.1.3) | Obtains select password policy information. Opnum: 44 |
+| [SamrGetUserDomainPasswordInformation](#Section_3.1.5.13.3) | Obtains select password policy information. Opnum: 44 |
 | [SamrRemoveMemberFromForeignDomain](#Section_3.1.5.8.7) | Removes a member from all aliases. Opnum: 45 |
 | [SamrQueryInformationDomain2](#Section_3.1.5.5.1) | Obtains attributes from a domain object. Opnum: 46 |
 | [SamrQueryInformationUser2](#Section_3.1.5.5.5) | Obtains attributes from a user object. Opnum: 47 |
@@ -6096,7 +6096,7 @@ Methods in RPC Opnum Order
 | [SamrRemoveMultipleMembersFromAlias](#Section_3.1.5.8.9) | Removes multiple members from an alias. Opnum: 53 |
 | [SamrOemChangePasswordUser2](#Section_3.1.5.10.2) | Changes a user's password. Opnum: 54 |
 | [SamrUnicodeChangePasswordUser2](#Section_3.1.5.10.3) | Changes a user account's password. Opnum: 55 |
-| [SamrGetDomainPasswordInformation](#Section_3.1.5.6.1.3) | Obtains select password policy information. Opnum: 56 |
+| [SamrGetDomainPasswordInformation](#Section_3.1.5.13.4) | Obtains select password policy information. Opnum: 56 |
 | [SamrConnect2](#Section_3.1.5.1.3) | Obtains a handle to a server object (3). Opnum: 57 |
 | [SamrSetInformationUser2](#Section_3.1.5.6.4) | Updates attributes on a user object. Opnum: 58 |
 | Opnum59NotUsedOnWire | Reserved for local use. Opnum: 59 |
@@ -6107,7 +6107,7 @@ Methods in RPC Opnum Order
 | [SamrConnect5](#Section_3.1.5.1.1) | Obtains a handle to a server object. Opnum: 64 |
 | [SamrRidToSid](#Section_3.1.5.13.5) | Obtains the SID of an account. Opnum: 65 |
 | [SamrSetDSRMPassword](#Section_3.1.5.13.6) | Sets a local recovery password. Opnum: 66 |
-| [SamrValidatePassword](#Section_3.1.5.13.7) | Validates an application password against the locally stored policy. Opnum: 67 |
+| [SamrValidatePassword](#Section_2.2.9) | Validates an application password against the locally stored policy. Opnum: 67 |
 | Opnum68NotUsedOnWire | Reserved for local use. Opnum: 68 |
 | Opnum69NotUsedOnWire | Reserved for local use. Opnum: 69 |
 | Opnum70NotUsedOnWire | Reserved for local use. Opnum 70 |
@@ -6156,7 +6156,7 @@ The RPC protocol provides a mechanism to clean up any resources related to a con
 
 These methods enable a client to obtain an RPC context handle to an existing object.
 
-See section [1.7.2](#Section_1.7) for details on how to choose between SamrConnect variations.
+See section [1.7.2](#Section_1.7.2) for details on how to choose between SamrConnect variations.
 
 On success, each of these methods returns a handle that references a [**database object**](#gt_database-object) in the server's implementation.
 
@@ -6417,7 +6417,7 @@ This section specifies the message processing for [SamrOpenGroup (section 3.1.
 - Target-Rid: A [**RID**](#gt_relative-identifier-rid) input parameter from the message.
 - Target-Object-Type: The intended object type to be opened.
 - Generic-Access-Mask-Mapping-Table: A mapping from a generic access (for example, GENERIC_READ) to a specific mapping (for example, DOMAIN_READ for domain objects).
-- Desired-Access-Mapping-Table: A table that maps access masks specific to this protocol to object [**ACE**](#gt_access-control-entry-ace) values. An example [**access mask**](#gt_access-mask) specific to this protocol is USER_READ (section [2.2.1.7](#Section_1.2)).
+- Desired-Access-Mapping-Table: A table that maps access masks specific to this protocol to object [**ACE**](#gt_access-control-entry-ace) values. An example [**access mask**](#gt_access-mask) specific to this protocol is USER_READ (section [2.2.1.7](#Section_2.2.1.7)).
 - Output-Handle: An RPC context handle returned to the client that represents the object that is requested to be opened.
 Upon receiving this message, the server MUST process the data from the message subject to the following constraints:
 
@@ -6561,7 +6561,7 @@ long SamrOpenUser(
 
 **DomainHandle:** An RPC context handle, as specified in section [2.2.7.2](#Section_2.2.7.2), representing a [**domain object**](#gt_domain-object).
 
-**DesiredAccess:** An ACCESS_MASK that indicates the requested access for the returned handle. See section [2.2.1.7](#Section_1.2) for a list of user access values.
+**DesiredAccess:** An ACCESS_MASK that indicates the requested access for the returned handle. See section [2.2.1.7](#Section_2.2.1.7) for a list of user access values.
 
 **UserId:** A RID of a user account.
 
@@ -6811,7 +6811,7 @@ These methods require a [**domain**](#gt_domain) handle from the "open" pattern 
 
 The server MAY<52> cache implementation-specific details about the ongoing state of the enumeration on the domain handle; clients therefore MUST follow one of the use patterns described previously in order to produce deterministic results.
 
-See section [1.7.2](#Section_1.7) for details on how to choose between [SamrQueryDisplayInformation](#Section_3.1.5.3.2) and [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5) variations.
+See section [1.7.2](#Section_1.7.2) for details on how to choose between [SamrQueryDisplayInformation](#Section_3.1.5.3.3) and [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5) variations.
 
 See section [1.3](#Section_1.3) for a description of the "selective enumerate" pattern of methods.
 
@@ -7054,7 +7054,7 @@ The server MUST behave as with a call to SamrGetDisplayEnumerationIndex2, with t
 
 These methods enable a client to create a group, alias, or [**user object**](#gt_user-object). These methods require a [**domain**](#gt_domain) handle from the "open" pattern of methods (section [3.1.5.1](#Section_3.1.5.1)).
 
-See section [1.7.2](#Section_1.7) for details on how to choose between the [SamrCreateUserInDomain](#Section_3.1.5.4.5) and [SamrCreateUser2InDomain](#Section_3.1.5.4.4) variations.
+See section [1.7.2](#Section_1.7.2) for details on how to choose between the [SamrCreateUserInDomain](#Section_3.1.5.4.5) and [SamrCreateUser2InDomain](#Section_3.1.5.4.4) variations.
 
 See section [1.3](#Section_1.3) for a description of the "create" pattern of methods.
 
@@ -7075,12 +7075,12 @@ Upon receiving this message, the server MUST process the data from the message, 
 | --- | --- |
 | sAMAccountName | Name |
 
-- The **distinguishedName** database attribute MUST be updated with a value that conforms to the constraints as specified in section [3.1.5.14.1](#Section_3.1.5.14.11).
+- The **distinguishedName** database attribute MUST be updated with a value that conforms to the constraints as specified in section [3.1.5.14.1](#Section_3.1.5.14.1).
 - The **objectClass** database attribute MUST be updated with the value group.
 - The **groupType** database attribute MUST be updated with the value Provided-Group-Type.
 - The security model for object creation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3 MUST be adhered to.
-- Granted access MUST be set to *DesiredAccess* if *DesiredAccess* contains only valid access masks, according to Provided-Access-Mask-Section and section [2.2.1.1](#Section_5) (common Access Masks); otherwise, the request MUST be aborted and STATUS_ACCESS_DENIED MUST be returned.
-- If *DesiredAccess* contains the ACCESS_SYSTEM_SECURITY bit, the client's [**token**](#gt_token) MUST be retrieved using the method described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The **RpcImpersonationAccessToken.Privileges[]** field MUST have the SE_SECURITY_NAME privilege (defined in [MS-LSAD](#Section_5) section 3.1.1.2.1). Otherwise, the server MUST abort processing and return STATUS_ACCESS_DENIED.
+- Granted access MUST be set to *DesiredAccess* if *DesiredAccess* contains only valid access masks, according to Provided-Access-Mask-Section and section [2.2.1.1](#Section_2.2.1.1) (common Access Masks); otherwise, the request MUST be aborted and STATUS_ACCESS_DENIED MUST be returned.
+- If *DesiredAccess* contains the ACCESS_SYSTEM_SECURITY bit, the client's [**token**](#gt_token) MUST be retrieved using the method described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The **RpcImpersonationAccessToken.Privileges[]** field MUST have the SE_SECURITY_NAME privilege (defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1). Otherwise, the server MUST abort processing and return STATUS_ACCESS_DENIED.
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 SamrCreateGroupInDomain (Opnum 10)
 
@@ -7176,7 +7176,7 @@ long SamrCreateUser2InDomain(
 
 **AccountType:** A 32-bit value indicating the type of [**account**](#gt_account) to create. See the message processing shown later in this section for possible values.
 
-**DesiredAccess:** The access requested on the *UserHandle* on output. See section [2.2.1.7](#Section_1.2) for a listing of possible values.
+**DesiredAccess:** The access requested on the *UserHandle* on output. See section [2.2.1.7](#Section_2.2.1.7) for a listing of possible values.
 
 **UserHandle:** An RPC context handle, as specified in section 2.2.7.2.
 
@@ -7202,7 +7202,7 @@ Upon receiving this message, the server MUST process the data from the message s
 | --- | --- |
 | sAMAccountName | Name |
 
-- The **distinguishedName** attribute MUST be updated with a value that conforms to the constraints as specified in section [3.1.5.14.1](#Section_3.1.5.14.11). Let the term Container-Object be the object with the **distinguishedName** of the suffix chosen in section 3.1.5.14.1 for the new object. For a computer object, for example, Container-Object is, by default, the object with the **distinguishedName** CN=Computers,<DN of account domain object>.
+- The **distinguishedName** attribute MUST be updated with a value that conforms to the constraints as specified in section [3.1.5.14.1](#Section_3.1.5.14.1). Let the term Container-Object be the object with the **distinguishedName** of the suffix chosen in section 3.1.5.14.1 for the new object. For a computer object, for example, Container-Object is, by default, the object with the **distinguishedName** CN=Computers,<DN of account domain object>.
 - The **objectClass** database attribute MUST be updated with a value determined as follows:
 - If the *AccountType* parameter is USER_WORKSTATION_TRUST_ACCOUNT or USER_SERVER_TRUST_ACCOUNT, use computer.
 - Otherwise, use user.
@@ -7218,7 +7218,7 @@ Upon receiving this message, the server MUST process the data from the message s
 
 - The *AccountType* parameter is USER_WORKSTATION_TRUST_ACCOUNT.
 - The client does not have the ACTRL_DS_CREATE_CHILD access on the Container-Object object.
-- The **RpcImpersonationAccessToken.Privileges[]** field has the SE_ MACHINE_ACCOUNT NAME privilege (defined in [MS-LSAD](#Section_5) section 3.1.1.2.1).
+- The **RpcImpersonationAccessToken.Privileges[]** field has the SE_ MACHINE_ACCOUNT NAME privilege (defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1).
 - The security model for object creation specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3 MUST NOT be adhered to.
 - If the client does not have the ACTRL_DS_CREATE_CHILD access right on the Container-Object object, the client is not otherwise denied access due to an explicit DENY [**ACE**](#gt_access-control-entry-ace)<55>, and the *AccountType* parameter is USER_WORKSTATION_TRUST_ACCOUNT, then:
 - On a [**DC**](#gt_domain-controller-dc) configuration:
@@ -7264,7 +7264,7 @@ long SamrCreateUserInDomain(
 
 **Name:** The value to use as the name of the user. See the message processing shown later in this section for details on how this value maps to the data model.
 
-**DesiredAccess:** The access requested on the *UserHandle* on output. See section [2.2.1.7](#Section_1.2) for a listing of possible values.
+**DesiredAccess:** The access requested on the *UserHandle* on output. See section [2.2.1.7](#Section_2.2.1.7) for a listing of possible values.
 
 **UserHandle:** An RPC context handle, as specified in section 2.2.7.2.
 
@@ -7290,7 +7290,7 @@ These methods enable a client to read attributes about a [**domain**](#gt_domain
 
 A client MUST first obtain a handle to the object through an "open" or a "create" method. See sections [3.1.5.1](#Section_3.1.5.1) and [3.1.5.4](#Section_3.1.5.4).
 
-See section [1.7.2](#Section_1.7) for details on how to choose between [SamrQueryInformationDomain](#Section_3.1.5.5.2) and [SamrQueryInformationDomain2](#Section_3.1.5.5.1) variations.
+See section [1.7.2](#Section_1.7.2) for details on how to choose between [SamrQueryInformationDomain](#Section_3.1.5.5.2) and [SamrQueryInformationDomain2](#Section_3.1.5.5.1) variations.
 
 See section [1.3](#Section_1.3) for a description of the "query" pattern of methods.
 
@@ -7581,7 +7581,7 @@ The following table shows an example for an information level of UserGeneralInfo
 | Variable | USER_READ_ACCOUNT | USER_ALL_PASSWORDLASTSET USER_ALL_ACCOUNTEXPIRES USER_ALL_USERACCOUNTCONTROL USER_ALL_PARAMETERS |
 | Variable | USER_READ_PREFERENCES | USER_ALL_COUNTRYCODE USER_ALL_CODEPAGE |
 
-- Using the tables in sections [2.2.1.8](#Section_3.1.1.8.2) and [3.1.5.14.11](#Section_3.1.5.14.11), the server MUST set the appropriate fields in the *Buffer* parameter. The first table (section 2.2.1.8) lists the WhichFields-to-field-name mapping, and the second table (section 3.1.5.14.11) specifies the field-name-to-database-attribute mapping.
+- Using the tables in sections [2.2.1.8](#Section_2.2.1.8) and [3.1.5.14.11](#Section_3.1.5.14.11), the server MUST set the appropriate fields in the *Buffer* parameter. The first table (section 2.2.1.8) lists the WhichFields-to-field-name mapping, and the second table (section 3.1.5.14.11) specifies the field-name-to-database-attribute mapping.
 <a id="Section_3.1.5.5.6"></a>
 ##### 3.1.5.5.6 SamrQueryInformationUser (Opnum 36)
 
@@ -7618,7 +7618,7 @@ These methods enable a client to set attributes on a [**domain**](#gt_domain), g
 
 A client MUST first obtain a handle to the object through an "open" or a "create" method. See sections [3.1.5.1](#Section_3.1.5.1) and [3.1.5.4](#Section_3.1.5.4).
 
-See section [1.7.2](#Section_1.7) for details on how to choose between [SamrSetInformationUser](#Section_3.1.5.6.5) and [SamrSetInformationUser2](#Section_3.1.5.6.4).
+See section [1.7.2](#Section_1.7.2) for details on how to choose between [SamrSetInformationUser](#Section_3.1.5.6.5) and [SamrSetInformationUser2](#Section_3.1.5.6.4).
 
 See section [1.3](#Section_1.3) for a description of the "set" pattern of methods.
 
@@ -7811,7 +7811,7 @@ Upon receiving this message, the server MUST process the data from the message s
 | UserExpiresInformation |
 | UserInternal1Information |
 
-All SAMPR_USER_ALL_INFORMATION fields with the same name as the fields in the incoming structure MUST be set with the same value. Furthermore, the **WhichFields** field MUST be updated according to the table in section [2.2.1.8](#Section_3.1.1.8.2). All SAMPR_USER_ALL_INFORMATION fields not covered MUST be zero.
+All SAMPR_USER_ALL_INFORMATION fields with the same name as the fields in the incoming structure MUST be set with the same value. Furthermore, the **WhichFields** field MUST be updated according to the table in section [2.2.1.8](#Section_2.2.1.8). All SAMPR_USER_ALL_INFORMATION fields not covered MUST be zero.
 
 As an example, the following table shows how a request for UserPreferencesInformation MUST be handled.
 
@@ -7912,7 +7912,7 @@ The server MUST process the message subject to the following constraints on the 
 | Variable | USER_ALL_LMPASSWORDPRESENT | USER_FORCE_PASSWORD_CHANGE |
 | Variable | USER_ALL_PASSWORDEXPIRED | USER_FORCE_PASSWORD_CHANGE |
 
-- The server MUST update the corresponding database attributes for each bit that is present in the **WhichFields** field. In addition, the server MUST enforce that the client has ACTRL_DS_READ_PROP access to the database attribute being updated, according to the *UserHandle* passed into the method. Section [2.2.1.8](#Section_3.1.1.8.2) specifies a WhichFields-to-field mapping, and section [3.1.5.14.11](#Section_3.1.5.14.11) specifies a field-to-database-attribute mapping.
+- The server MUST update the corresponding database attributes for each bit that is present in the **WhichFields** field. In addition, the server MUST enforce that the client has ACTRL_DS_READ_PROP access to the database attribute being updated, according to the *UserHandle* passed into the method. Section [2.2.1.8](#Section_2.2.1.8) specifies a WhichFields-to-field mapping, and section [3.1.5.14.11](#Section_3.1.5.14.11) specifies a field-to-database-attribute mapping.
 - If the USER_ALL_USERACCOUNTCONTROL bit is present in the **WhichFields** field, the server MUST:
 - Enforce that the client has ACTRL_DS_READ_PROP access to the database attribute of **userAccountControl**, according to the *UserHandle.GrantedAccess* passed into the method.
 - Translate the bits according to the table in section [3.1.5.14.2](#Section_3.1.5.14.2). If a bit does not translate, abort with a processing error.
@@ -7961,7 +7961,7 @@ The server MUST process the message subject to the following constraints:
 
 - All updates MUST be done in the same transaction.
 - The server MUST satisfy the constraints listed in section [3.1.5.6.4.2](#Section_3.1.5.6.4.2).
-- If the section [2.2.1.8](#Section_3.1.1.8.2) **USER_ALL_NTPASSWORDPRESENT** or **USER_ALL_LMPASSWORDPRESENT** flag is present in the **WhichFields** field, the server MUST update the **clearTextPassword** attribute with the (decrypted) value of **SAMPR_USER_INTERNAL8_INFORMATION.UserPassword** presented by the client in the format of SAMPR_ENCRYPTED_PASSWORD_AES (section [2.2.6.32](#Section_2.2.6.32)), while using as the decryption key the 16-byte SMB session key obtained as specified in section [3.1.2.4](#Section_3.1.2.4) and the AES Cipher as specified in section [3.2.2.4](#Section_3.2.2.4).
+- If the section [2.2.1.8](#Section_2.2.1.8) **USER_ALL_NTPASSWORDPRESENT** or **USER_ALL_LMPASSWORDPRESENT** flag is present in the **WhichFields** field, the server MUST update the **clearTextPassword** attribute with the (decrypted) value of **SAMPR_USER_INTERNAL8_INFORMATION.UserPassword** presented by the client in the format of SAMPR_ENCRYPTED_PASSWORD_AES (section [2.2.6.32](#Section_2.2.6.32)), while using as the decryption key the 16-byte SMB session key obtained as specified in section [3.1.2.4](#Section_3.1.2.4) and the AES Cipher as specified in section [3.2.2.4](#Section_3.2.2.4).
 - The value of **UserPassword.PBKDFIterations**, as specified in SAMPR_ENCRYPTED_PASSWORD_AES (section 2.2.6.32), is ignored by the server.
 <a id="Section_3.1.5.6.5"></a>
 ##### 3.1.5.6.5 SamrSetInformationUser (Opnum 37)
@@ -8483,7 +8483,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - If *LmCrossEncryptionPresent* is nonzero and *NewLmEncryptedWithNewNt* is "NULL", the server MUST return an error.
 - If *LmPresent* and *NtPresent* are zero, the server MUST return an error.
 - Let U be the user account referenced by *UserHandle.Object*.
-- Let Stored-LM-Hash be the value of the **dBCSPwd** attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1.4), using U's RelativeId (an unsigned integer) as the key. If the **dBCSPwd** attribute does not exist, let Stored-LM-Hash be "NULL".
+- Let Stored-LM-Hash be the value of the **dBCSPwd** attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1), using U's RelativeId (an unsigned integer) as the key. If the **dBCSPwd** attribute does not exist, let Stored-LM-Hash be "NULL".
 - Let Stored-NT-Hash be the value of the **unicodePwd** attribute from the database decrypted using the algorithm specified in section 2.2.11.1, using U's RelativeId (an unsigned integer) as the key. If the **unicodePwd** attribute does not exist, let Stored-NT-Hash be "NULL".
 - If *LmPresent* is nonzero and Stored-LM-Hash is not NULL, let Presented-New-LM-Hash be *NewLmEncryptedWithOldLm*, decrypted as specified in section 2.2.11.1, using Stored-LM-Hash as the key; and let Presented-Old-LM-Hash be *OldLmEncryptedWithNewLm*, decrypted as specified in section 2.2.11.1, using Presented-New-LM-Hash as the key. The values are not referenced below if *LmPresent* is zero.
 - If *NtPresent* is nonzero and Stored-NT-Hash is not NULL, let Presented-New-NT-Hash be *NewNtEncryptedWithOldNt*, decrypted as specified in section 2.2.11.1, using Stored-NT-Hash as the key; and let Presented-Old-NT-Hash be *OldNtEncryptedWithNewNt*, decrypted as specified in section 2.2.11.1, using Presented-New-NT-Hash as the key. The values are not referenced below if *NtPresent* is zero.
@@ -8542,7 +8542,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - All database operations MUST occur in a single transaction.
 - The server MUST encode the *UserName* parameter into UTF-16 using the OEM code page.
 - Let U be the user account with the **sAMAccountName** attribute value of *UserName*. The server MUST return STATUS_WRONG_PASSWORD if no such account exists.
-- Let Stored-LM-Hash be the value of the **dBCSPwd** attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1.4), using U's RelativeId as the key. If this attribute does not exist, STATUS_WRONG_PASSWORD MUST be returned.
+- Let Stored-LM-Hash be the value of the **dBCSPwd** attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1), using U's RelativeId as the key. If this attribute does not exist, STATUS_WRONG_PASSWORD MUST be returned.
 - Let Presented-Clear-Text be the cleartext value sent by the client. This value is obtained by decrypting *NewPasswordEncryptedWithOldLm* according to the specification of SAMPR_ENCRYPTED_USER_PASSWORD using Stored-LM-Hash as the key, and then translating the result into a UTF-16 encoded string (using the OEM code page).
 - Let Presented-Old-LM-Hash be the value of *OldLmOwfPasswordEncryptedWithNewLm* that has been decrypted per the specification of ENCRYPTED_LM_OWF_PASSWORD, using the LM hash of Presented-Clear-Text as the key.
 - If Presented-Old-LM-Hash is not equal to Stored-LM-Hash, the server MUST satisfy the constraints in section [3.1.5.14.6](#Section_3.1.5.14.6), abort processing, and return STATUS_WRONG_PASSWORD.
@@ -8593,7 +8593,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - On a [**DC**](#gt_domain-controller-dc) configuration if [**Active Directory**](#gt_active-directory) is not running, the server MUST abort the request and return an error status.
 - All database operations MUST occur in a single transaction.
 - Let U be the user account with the **sAMAccountName** attribute value of UserName. The server MUST return STATUS_WRONG_PASSWORD if no such account exists.
-- Let Stored-NT-Hash be the value of the **unicodePwd** attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1.4), using U's *RelativeId* as the key. If the attribute does not exist, let Stored-NT-Hash be "NULL".
+- Let Stored-NT-Hash be the value of the **unicodePwd** attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1), using U's *RelativeId* as the key. If the attribute does not exist, let Stored-NT-Hash be "NULL".
 - Let Stored-LM-Hash be the value of the **dBCSPwd** attribute from the database decrypted using the algorithm specified in section 2.2.11.1, using U's *RelativeId* as the key. If the attribute does not exist, let Stored-LM-Hash be "NULL".
 - If Stored-NT-Hash is NULL and LmPresent is zero or Stored-LM-Hash is NULL, the server MUST abort processing and return STATUS_WRONG_PASSWORD.
 - If Stored-NT-Hash is not NULL, then:
@@ -8640,7 +8640,7 @@ Upon receiving this message, the server MUST process the data from the message s
 - On a [**DC (1)**](#gt_domain-controller-dc) configuration, if [**Active Directory**](#gt_active-directory) is not running, the server MUST abort the request and return an error status.
 - All database operations MUST occur in a single transaction.
 - Let ‘U’ be the user account with the **sAMAccountName** attribute value of UserName. The server MUST return STATUS_WRONG_PASSWORD (section [2.2.1.15](#Section_2.2.1.15)) if no such account exists.
-- Let Stored-NT-Hash be the value of the unicodePwd attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1.4), using U's RelativeId (section [3.1.5.11.2](#Section_3.1.5.11.2)) as the key. If the attribute does not exist, let Stored-NT-Hash be "NULL".
+- Let Stored-NT-Hash be the value of the unicodePwd attribute from the database decrypted using the algorithm specified in section [2.2.11.1](#Section_2.2.11.1), using U's RelativeId (section [3.1.5.11.2](#Section_3.1.5.11.2)) as the key. If the attribute does not exist, let Stored-NT-Hash be "NULL".
 - If Stored-NT-Hash is NULL, the server MUST abort processing and return STATUS_WRONG_PASSWORD.
 - If EncryptedPassword.PBKDF2Iterations is not present or not valid, the server will return STATUS_WRONG_PASSWORD and abort processing.
 - If Stored-NT-Hash is not NULL and EncryptedPassword.PBKDF2Iterations is valid, the server will decrypt EncryptedPassword as follows:
@@ -8657,7 +8657,7 @@ Upon receiving this message, the server MUST process the data from the message s
 <a id="Section_3.1.5.11"></a>
 #### 3.1.5.11 Lookup Pattern
 
-These methods enable a client to translate from a security ID (either a [**SID**](#gt_security-identifier-sid) or a [**RID**](#gt_relative-identifier-rid)) to a user-friendly name, and vice versa. This action is useful when an end user is setting access control via a [**security descriptor**](#gt_security-descriptor). However, the translation methods specified in [MS-LSAT](#Section_5) sections 3.1.4.5 and 3.1.4.9 are superior because they translate a wider range of SIDs.
+These methods enable a client to translate from a security ID (either a [**SID**](#gt_security-identifier-sid) or a [**RID**](#gt_relative-identifier-rid)) to a user-friendly name, and vice versa. This action is useful when an end user is setting access control via a [**security descriptor**](#gt_security-descriptor). However, the translation methods specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md) sections 3.1.4.5 and 3.1.4.9 are superior because they translate a wider range of SIDs.
 
 A client MUST first obtain a handle to the object of interest through an "open" method. See section [3.1.5.1](#Section_3.1.5.1).
 
@@ -8830,7 +8830,7 @@ Two points are significant:
 - All known clients use a very small subset of the functionality exposed in these methods.
 The DC message processing requirements differ from the non-DC case because the [**database objects**](#gt_database-object) on which the server operates are also exposed through the LDAP model for read and update, and have a different [**ACE**](#gt_access-control-entry-ace) format than what this protocol exposes. Specifically, in the DC case, the database objects have [**security descriptors**](#gt_security-descriptor) with an object ACE format (specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3), whereas these methods expect and return security descriptors with a simple ACE format (specified in [MS-ADTS] section 5.1.3). Therefore, the message processing for these methods converts between these two models. In general, this would be an intractable problem because new access masks and object ACE types can be added that are not expressible through this protocol.
 
-Fortunately, all known clients use a small subset of the functionality exposed through these methods. Specifically, all known clients use [SamrQuerySecurityObject](#Section_5) and [SamrSetSecurityObject](#Section_3.1.5.12.1.2) only to control whether a password can be changed for a user account (the relevant [**access mask**](#gt_access-mask) is USER_CHANGE_PASSWORD, specified in section [2.2.1.7](#Section_1.2)). Accordingly, the server of these methods is required to support only this narrow request; other requests can be safely ignored.
+Fortunately, all known clients use a small subset of the functionality exposed through these methods. Specifically, all known clients use [SamrQuerySecurityObject](#Section_3.1.5.12.2) and [SamrSetSecurityObject](#Section_3.1.5.12.1) only to control whether a password can be changed for a user account (the relevant [**access mask**](#gt_access-mask) is USER_CHANGE_PASSWORD, specified in section [2.2.1.7](#Section_2.2.1.7)). Accordingly, the server of these methods is required to support only this narrow request; other requests can be safely ignored.
 
 In the DC case, general security-descriptor manipulation is best achieved through LDAP. [MS-ADTS] section 5 specifies the [**Active Directory**](#gt_active-directory) security model in detail.
 
@@ -9072,14 +9072,14 @@ Upon receiving this message, the server MUST process the data from the message s
 | Variable | GROUP_SECURITY_INFORMATION | READ_CONTROL |
 | Variable | DACL_SECURITY_INFORMATION | READ_CONTROL |
 
-- The server MUST return, via the *SecurityDescriptor* parameter, a [**security descriptor**](#gt_security-descriptor) that only contains fields based on the bits contained in the *SecurityInformation* parameter; the fields of the security descriptor that are not returned are set to zero. The security descriptor expresses the owner and group of the referenced object and an access control ([**SACL**](#gt_system-access-control-list-sacl) and [**DACL**](#gt_discretionary-access-control-list-dacl)) that has been specified either by default settings or by previous calls to [SamrSetSecurityObject](#Section_3.1.5.12.1.2). The security descriptor MUST be in terms of simple [**ACEs**](#gt_access-control-entry-ace) and ACCESS_MASK values as specified in the following table, based on the object type that *ObjectHandle.HandleType* references.
+- The server MUST return, via the *SecurityDescriptor* parameter, a [**security descriptor**](#gt_security-descriptor) that only contains fields based on the bits contained in the *SecurityInformation* parameter; the fields of the security descriptor that are not returned are set to zero. The security descriptor expresses the owner and group of the referenced object and an access control ([**SACL**](#gt_system-access-control-list-sacl) and [**DACL**](#gt_discretionary-access-control-list-dacl)) that has been specified either by default settings or by previous calls to [SamrSetSecurityObject](#Section_3.1.5.12.1). The security descriptor MUST be in terms of simple [**ACEs**](#gt_access-control-entry-ace) and ACCESS_MASK values as specified in the following table, based on the object type that *ObjectHandle.HandleType* references.
 | Object type | ACCESS_MASK section |
 | --- | --- |
-| Server | [2.2.1.1](#Section_5) |
+| Server | [2.2.1.1](#Section_2.2.1.1) |
 | Domain | [2.2.1.4](#Section_2.2.1.4) |
 | Group | [2.2.1.5](#Section_2.2.1.5) |
 | Alias | [2.2.1.6](#Section_2.2.1.6) |
-| User | [2.2.1.7](#Section_1.2) |
+| User | [2.2.1.7](#Section_2.2.1.7) |
 
 <a id="Section_3.1.5.13"></a>
 #### 3.1.5.13 Miscellaneous
@@ -9388,7 +9388,7 @@ The output parameter **Result** MUST be set to TRUE when one of the following co
 - When the computer object with the given **ComputerSid** has its ms-ds-CreatorSid attribute set to the same SID as the SID of the calling client identity.<76>
 - When the computer object with the given **ComputerSid** has its ntSecurityDescriptor owner field set to the same SID as the SID of the calling identity.<77>
 - When the computer object with the given **ComputerSid** has its ntSecurityDescriptor owner field set to DOMAIN_GROUP_RID_ADMINS, DOMAIN_ALIAS_RID_ADMINS, or DOMAIN_GROUP_RID_ENTERPRISE_ADMINS (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 2.2.15), the server MUST end processing and return STATUS SUCCESS.
-- When the computer object with the given **ComputerSid** has its ntSecurityDescriptor owner field set to a SID that is a member of any of the groups in section [3.1](#Section_1.3), the server MUST end processing and return STATUS SUCCESS.
+- When the computer object with the given **ComputerSid** has its ntSecurityDescriptor owner field set to a SID that is a member of any of the groups in section [3.1](#Section_3.1), the server MUST end processing and return STATUS SUCCESS.
 - When the computer object with the given **ComputerSid** has its ntSecurityDescriptor owner field set to a group SID and the calling client identity is a member of this group, the server MUST end processing and return STATUS_SUCCESS.
 - When the computer object with the given **ComputerSid** has its ntSecurityDescriptor owner field set to a SID that is directly specified or is a member of a group specified in the ComputerAccountReuseAllowList (section [3.1.1.12](#Section_3.1.1.12)), the server MUST end processing and return STATUS_SUCCESS.
 - When none of these conditions are met, the output parameter **Result** is set to FALSE and the server MUST return STATUS_SUCCESS.
@@ -9524,7 +9524,7 @@ The PasswordMustChange value is computed as follows:
 
 This protocol associates a field called "Attributes" with a [**group object**](#gt_group-object) and a user membership for a group. This field is a bit field that uses values from the space specified in section [2.2.1.10](#Section_2.2.1.10).
 
-For a group object, this field can be set via [SamrSetInformationGroup](#Section_3.1.5.6.2) and queried via [SamrQueryInformationGroup](#Section_3.1.5.5.3) and the [SamrQueryDisplayInformation](#Section_3.1.5.3.2) family of methods.
+For a group object, this field can be set via [SamrSetInformationGroup](#Section_3.1.5.6.2) and queried via [SamrQueryInformationGroup](#Section_3.1.5.5.3) and the [SamrQueryDisplayInformation](#Section_3.1.5.3.3) family of methods.
 
 For a user membership, this field can be set via [SamrAddMemberToGroup](#Section_3.1.5.8.1) and [SamrSetMemberAttributesOfGroup](#Section_3.1.5.13.2) and queried via [SamrGetGroupsForUser](#Section_3.1.5.9.1) and [SamrGetMembersInGroup](#Section_3.1.5.8.3).
 
@@ -9541,7 +9541,7 @@ On a non-DC configuration:
 <a id="Section_3.1.5.14.8"></a>
 ##### 3.1.5.14.8 Domain Field to Attribute Name Mapping
 
-This table specifies the field-to-database-attribute mapping, where the field is a field in a domain-related structure such as [SAMPR_DOMAIN_GENERAL_INFORMATION (section 2.2.3.10)](#Section_2.2.3.10) and the database attribute is an attribute defined on a [**domain object**](#gt_domain-object). These attributes are from the data model specified in section [3.1.1](#Section_3.2.1).
+This table specifies the field-to-database-attribute mapping, where the field is a field in a domain-related structure such as [SAMPR_DOMAIN_GENERAL_INFORMATION (section 2.2.3.10)](#Section_2.2.3.10) and the database attribute is an attribute defined on a [**domain object**](#gt_domain-object). These attributes are from the data model specified in section [3.1.1](#Section_3.1.1).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -9565,7 +9565,7 @@ This table specifies the field-to-database-attribute mapping, where the field is
 <a id="Section_3.1.5.14.9"></a>
 ##### 3.1.5.14.9 Group Field to Attribute Name Mapping
 
-This table specifies the field-to-database-attribute mapping, where the field is a field in a group-related structure such as [SAMPR_GROUP_GENERAL_INFORMATION (section 2.2.4.3)](#Section_2.2.4.3) and the database attribute is an attribute defined on a [**group object**](#gt_group-object). These attributes are from the data model specified in section [3.1.1](#Section_3.2.1).
+This table specifies the field-to-database-attribute mapping, where the field is a field in a group-related structure such as [SAMPR_GROUP_GENERAL_INFORMATION (section 2.2.4.3)](#Section_2.2.4.3) and the database attribute is an attribute defined on a [**group object**](#gt_group-object). These attributes are from the data model specified in section [3.1.1](#Section_3.1.1).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -9577,7 +9577,7 @@ This table specifies the field-to-database-attribute mapping, where the field is
 <a id="Section_3.1.5.14.10"></a>
 ##### 3.1.5.14.10 Alias Field to Attribute Name Mapping
 
-This table specifies the field-to-database-attribute mapping, where the field is a field in a group-related structure such as [SAMPR_ALIAS_GENERAL_INFORMATION (section 2.2.5.2)](#Section_2.2.5.2) and the database attribute is an attribute defined on an [**alias object**](#gt_alias-object). These attributes are from the data model specified in section [3.1.1](#Section_3.2.1).
+This table specifies the field-to-database-attribute mapping, where the field is a field in a group-related structure such as [SAMPR_ALIAS_GENERAL_INFORMATION (section 2.2.5.2)](#Section_2.2.5.2) and the database attribute is an attribute defined on an [**alias object**](#gt_alias-object). These attributes are from the data model specified in section [3.1.1](#Section_3.1.1).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -9588,7 +9588,7 @@ This table specifies the field-to-database-attribute mapping, where the field is
 <a id="Section_3.1.5.14.11"></a>
 ##### 3.1.5.14.11 User Field to Attribute Name Mapping
 
-This table specifies the field-to-database-attribute mapping, where the field is a field in a user-related structure such as [SAMPR_USER_ALL_INFORMATION (section 2.2.6.6)](#Section_2.2.6.6) and the database attribute is an attribute defined on a [**user object**](#gt_user-object). These attributes are from the data model specified in section [3.1.1](#Section_3.2.1).
+This table specifies the field-to-database-attribute mapping, where the field is a field in a user-related structure such as [SAMPR_USER_ALL_INFORMATION (section 2.2.6.6)](#Section_2.2.6.6) and the database attribute is an attribute defined on a [**user object**](#gt_user-object). These attributes are from the data model specified in section [3.1.1](#Section_3.1.1).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -9672,7 +9672,7 @@ As discussed in section [1.5](#Section_1.5), an [**original equipment manufactur
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Security Model
 
-The client MUST create a secure RPC session such that the server can identify and determine the authorization for the client. (For more information on secure RPC, see [MS-RPCE](../MS-RPCE/MS-RPCE.md).) This requirement exists so that the server can implement its security model (section [3.1.2](#Section_3.2.2)).
+The client MUST create a secure RPC session such that the server can identify and determine the authorization for the client. (For more information on secure RPC, see [MS-RPCE](../MS-RPCE/MS-RPCE.md).) This requirement exists so that the server can implement its security model (section [3.1.2](#Section_3.1.2)).
 
 <a id="Section_3.2.2.1"></a>
 #### 3.2.2.1 RC4 Cipher Usage
@@ -9752,9 +9752,9 @@ To obtain any context handle to the server, one of the following methods MUST be
 
 **Note** The following methods do not require a context handle and can be called directly; they also do not return any context handle:
 
-- [SamrGetDomainPasswordInformation](#Section_3.1.5.6.1.3)
+- [SamrGetDomainPasswordInformation](#Section_3.1.5.13.4)
 - [SamrSetDSRMPassword](#Section_3.1.5.13.6)
-- [SamrValidatePassword](#Section_3.1.5.13.7)
+- [SamrValidatePassword](#Section_2.2.9)
 - [SamrOemChangePasswordUser2](#Section_3.1.5.10.2)
 - [SamrUnicodeChangePasswordUser2](#Section_3.1.5.10.3)
 **Note** A user account MUST be enabled by clearing the UF_ACCOUNTDISABLE bit from the **userAccountControl** attribute before that account will be able to authenticate, as specified in [MS-KILE](../MS-KILE/MS-KILE.md) section 3.3.5.7.1.
@@ -10049,7 +10049,7 @@ OldLmOwfEncryptedWithNewNt:
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-Sensitive information, such as the cleartext password for accounts, is communicated through this protocol; therefore, implementers have to pay special attention to the secrecy of this data. Although this protocol does not use transport-level encryption (with the exception of [SamrValidatePassword](#Section_3.1.5.13.7)), it does rely on the key strength of the SMB transport for encrypting cleartext data.
+Sensitive information, such as the cleartext password for accounts, is communicated through this protocol; therefore, implementers have to pay special attention to the secrecy of this data. Although this protocol does not use transport-level encryption (with the exception of [SamrValidatePassword](#Section_2.2.9)), it does rely on the key strength of the SMB transport for encrypting cleartext data.
 
 Using [SamrSetInformationUser2](#Section_3.1.5.6.4) with UserInternal8Information and UserInternal7Information is the best choice that a client can make for setting a cleartext password through this protocol, because the cryptography used is the strongest in this protocol.
 
@@ -10061,7 +10061,7 @@ Creating a [**user object**](#gt_user-object) is a multi-step process in this pr
 | Security Parameter | Section |
 | --- | --- |
 | Service principal name for server | [2.1](#Section_2.1) |
-| Encryption algorithm for hashes | [2.2.11.1](#Section_2.2.11.1.4) |
+| Encryption algorithm for hashes | [2.2.11.1](#Section_2.2.11.1) |
 | End-user password (to set) | [3.1.5.6.4](#Section_3.1.5.6.4) |
 | End-user password (to change) | [3.1.5.10.1](#Section_3.1.5.10.1) |
 | End-user password (to change) | [3.1.5.10.2](#Section_3.1.5.10.2) |
@@ -12648,7 +12648,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 1.3.2: There is no supported configuration in which this method is called from Windows clients. See section [2.2.7.15](#Section_2.2.7.15) for details on the conditions under which this method is called from a client.
 
-<2> Section 1.6: The DC implementation of this protocol is largely for backward compatibility with Windows NT 4.0–style applications. The LDAP protocol can be used to access a superset of the information exposed in this protocol (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3). The notable exceptions to this rule are that Windows clients use this protocol to join a domain ([MS-ADOD](#Section_1.3) sections 2.7.7 and 3.1) and that they use the [SamrUnicodeChangePasswordUser2](#Section_3.1.5.10.3) method to change passwords.
+<2> Section 1.6: The DC implementation of this protocol is largely for backward compatibility with Windows NT 4.0–style applications. The LDAP protocol can be used to access a superset of the information exposed in this protocol (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3). The notable exceptions to this rule are that Windows clients use this protocol to join a domain ([MS-ADOD](../MS-ADOD/MS-ADOD.md) sections 2.7.7 and 3.1) and that they use the [SamrUnicodeChangePasswordUser2](#Section_3.1.5.10.3) method to change passwords.
 
 <3> Section 1.6: Windows clients depend on this protocol to perform an end-user password change and join computers to a domain, as specified in [MS-ADTS] section 6.4.
 
@@ -12658,8 +12658,8 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | --- | --- | --- |
 | 0 | [SamrConnect](#Section_3.1.5.1.4) | Windows NT 3.1 |
 | 1 | [SamrCloseHandle](#Section_3.1.5.13.1) | Windows NT 3.1 |
-| 2 | [SamrSetSecurityObject](#Section_3.1.5.12.1.2) | Windows NT 3.1 |
-| 3 | [SamrQuerySecurityObject](#Section_5) | Windows NT 3.1 |
+| 2 | [SamrSetSecurityObject](#Section_3.1.5.12.1) | Windows NT 3.1 |
+| 3 | [SamrQuerySecurityObject](#Section_3.1.5.12.2) | Windows NT 3.1 |
 | 4 | Reserved (not intended for network traffic) | - |
 | 5 | [SamrLookupDomainInSamServer](#Section_3.1.5.11.1) | Windows NT 3.1 |
 | 6 | [SamrEnumerateDomainsInSamServer](#Section_3.1.5.2.1) | Windows NT 3.1 |
@@ -12692,15 +12692,15 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | 33 | [SamrGetMembersInAlias](#Section_3.1.5.8.6) | Windows NT 3.1 |
 | 34 | [SamrOpenUser](#Section_3.1.5.1.9) | Windows NT 3.1 |
 | 35 | [SamrDeleteUser](#Section_3.1.5.7.3) | Windows NT 3.1 |
-| 36 | [SamrQueryInformationUser](#Section_3.1.5.5.5) | Windows NT 3.1 |
+| 36 | [SamrQueryInformationUser](#Section_3.1.5.5.6) | Windows NT 3.1 |
 | 37 | [SamrSetInformationUser](#Section_3.1.5.6.5) | Windows NT 3.1 |
 | 38 | [SamrChangePasswordUser](#Section_3.1.5.10.1) | Windows NT 3.1 |
 | 39 | [SamrGetGroupsForUser](#Section_3.1.5.9.1) | Windows NT 3.1 |
-| 40 | [SamrQueryDisplayInformation](#Section_3.1.5.3.2) | Windows NT 3.1 |
+| 40 | [SamrQueryDisplayInformation](#Section_3.1.5.3.3) | Windows NT 3.1 |
 | 41 | [SamrGetDisplayEnumerationIndex](#Section_3.1.5.3.5) | Windows NT 3.1 |
 | 42 | Reserved (not intended for network traffic) | - |
 | 43 | Reserved (not intended for network traffic) | - |
-| 44 | [SamrGetUserDomainPasswordInformation](#Section_3.1.5.6.1.3) | Windows NT 3.1 |
+| 44 | [SamrGetUserDomainPasswordInformation](#Section_3.1.5.13.3) | Windows NT 3.1 |
 | 45 | [SamrRemoveMemberFromForeignDomain](#Section_3.1.5.8.7) | Windows NT 3.1 |
 | 46 | [SamrQueryInformationDomain2](#Section_3.1.5.5.1) | Windows NT 3.5 |
 | 47 | [SamrQueryInformationUser2](#Section_3.1.5.5.5) | Windows NT 3.5 |
@@ -12712,7 +12712,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | 53 | [SamrRemoveMultipleMembersFromAlias](#Section_3.1.5.8.9) | Windows NT 3.51 |
 | 54 | [SamrOemChangePasswordUser2](#Section_3.1.5.10.2) | Windows NT 3.51 |
 | 55 | SamrUnicodeChangePasswordUser2 | Windows NT 3.51 |
-| 56 | [SamrGetDomainPasswordInformation](#Section_3.1.5.6.1.3) | Windows NT 3.51 |
+| 56 | [SamrGetDomainPasswordInformation](#Section_3.1.5.13.4) | Windows NT 3.51 |
 | 57 | [SamrConnect2](#Section_3.1.5.1.3) | Windows NT 3.51 |
 | 58 | [SamrSetInformationUser2](#Section_3.1.5.6.4) | Windows NT 3.51 |
 | 59 | Reserved (not intended for network traffic) | - |
@@ -12723,7 +12723,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | 64 | [SamrConnect5](#Section_3.1.5.1.1) | Windows XP and Windows Server 2003 |
 | 65 | [SamrRidToSid](#Section_3.1.5.13.5) | Windows XP and Windows Server 2003 |
 | 66 | [SamrSetDSRMPassword](#Section_3.1.5.13.6) | Windows 2000 Server SP2 and Windows XP |
-| 67 | [SamrValidatePassword](#Section_3.1.5.13.7) | Windows Server 2003 and Windows Vista |
+| 67 | [SamrValidatePassword](#Section_2.2.9) | Windows Server 2003 and Windows Vista |
 | 68 | Reserved (not intended for network traffic) | - |
 | 69 | Reserved (not intended for network traffic) | - |
 
@@ -12775,7 +12775,7 @@ In addition, none of the Windows implementations of the client for this protocol
 
 <20> Section 2.2.7.15: The following Windows servers return this flag and perform these validations with the September 12th, 2023, updates installed: Windows Server 2022 with [[MSKB-5030216]](https://go.microsoft.com/fwlink/?linkid=2244245) and later, Windows Server 2019 with [[MSKB-5030214]](https://go.microsoft.com/fwlink/?linkid=2244243), Windows Server 2016 with [[MSKB-5030213]](https://go.microsoft.com/fwlink/?linkid=2244350), and Windows Server 2012 R2 with [[MSKB-5030269]](https://go.microsoft.com/fwlink/?linkid=2244429). For more information, see [MSKB-5020276].
 
-<21> Section 2.2.7.15: There is no supported configuration in which Windows implementations of the server of this protocol (for example, a DC) return nonzero values for the **SupportedFeatures** field. However, Windows protocol clients running Windows XP and later are implemented to behave as specified in the description for the **SupportedFeatures** field. For example, after calling SamrCreateUser2InDomain (section 3.1.5.4.4), Windows NT 4.0–style client applications assume that the RID returned by SamrCreateUser2InDomain can be concatenated with the [**domain**](#gt_domain) [**SID**](#gt_security-identifier-sid) in which the user was created to obtain the SID of the newly created user. This assumption limits the server's ability to create SIDs that differ in format from this assumption, and thus limits the number of accounts ever created to 2^32 (the maximum size of an unsigned integer, which is the datatype of a RID). For more information about the extensible structure of SIDs, see [MS-AZOD](#Section_1.3) section 1.1.1.2.
+<21> Section 2.2.7.15: There is no supported configuration in which Windows implementations of the server of this protocol (for example, a DC) return nonzero values for the **SupportedFeatures** field. However, Windows protocol clients running Windows XP and later are implemented to behave as specified in the description for the **SupportedFeatures** field. For example, after calling SamrCreateUser2InDomain (section 3.1.5.4.4), Windows NT 4.0–style client applications assume that the RID returned by SamrCreateUser2InDomain can be concatenated with the [**domain**](#gt_domain) [**SID**](#gt_security-identifier-sid) in which the user was created to obtain the SID of the newly created user. This assumption limits the server's ability to create SIDs that differ in format from this assumption, and thus limits the number of accounts ever created to 2^32 (the maximum size of an unsigned integer, which is the datatype of a RID). For more information about the extensible structure of SIDs, see [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 To allow servers (in future implementations) to generate SIDs such that the [**RID**](#gt_relative-identifier-rid) is not an unsigned integer (for example, a 64-bit value), the SupportedFeatures value of 1 specifies to the client that the SamrRidToSid method is to be called to obtain the SID of a RID value returned from this protocol. In this scenario, the RID returned from the protocol is modeled as a "handle" to the [**account**](#gt_account) that SamrRidToSid uses to return the SID value.
 
@@ -12814,7 +12814,7 @@ The two reserved values (0x00000002 and 0x00000004) have no effect on the protoc
 
 <35> Section 3.1.1.8.11.4: Windows implementations of the protocol server include irrelevant bytes in the [KERB_STORED_CREDENTIAL](#Section_2.2.10.4) structure for a single [KERB_KEY_DATA](#Section_2.2.10.5) structure (20 bytes). The bytes appear directly prior to the start of **DefaultSalt**. They are not referenced by any offset value or necessary for interoperability. All bits in these bytes are 0.
 
-<36> Section 3.1.1.8.11.6: Windows implementations of the protocol server include irrelevant bytes in the [KERB_STORED_CREDENTIAL_NEW](#Section_2.2.10.6) structure for a single [KERB_KEY_DATA_NEW](#Section_2.2.10.5) structure (24 bytes). The bytes appear directly prior to the start of **DefaultSalt**. They are not referenced by any offset value or necessary for interoperability. All bits in these bytes are 0.
+<36> Section 3.1.1.8.11.6: Windows implementations of the protocol server include irrelevant bytes in the [KERB_STORED_CREDENTIAL_NEW](#Section_2.2.10.6) structure for a single [KERB_KEY_DATA_NEW](#Section_2.2.10.7) structure (24 bytes). The bytes appear directly prior to the start of **DefaultSalt**. They are not referenced by any offset value or necessary for interoperability. All bits in these bytes are 0.
 
 <37> Section 3.1.1.8.11.7: Windows Server 2012 R2 and earlier do not set the NTLM-Strong-NTOWF property.
 

@@ -934,7 +934,7 @@ The Microsoft Extensions to the client role do not include any timers beyond any
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Initialization occurs when a higher layer wants to start [**streaming**](#gt_streaming) [**content**](#gt_content) from a server. If the HTTP protocol will be used, this step is specified in section [3.1.4.1](#Section_3.3.5.1). If the RTSP protocol will be used, this step is specified in section [3.1.4.2](#Section_3.1.4.2).
+Initialization occurs when a higher layer wants to start [**streaming**](#gt_streaming) [**content**](#gt_content) from a server. If the HTTP protocol will be used, this step is specified in section [3.1.4.1](#Section_3.1.4.1). If the RTSP protocol will be used, this step is specified in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -1007,7 +1007,7 @@ The client SHOULD parse the X-AvailableSeekRange header (section [2.2.4.2](#Sect
 
 The [**content**](#gt_content) received in the GET response SHOULD be made available to the higher layer.
 
-While the client is receiving the content, a higher layer can issue a new request to start streaming. For example, a higher layer can decide to invoke the [**DLNA**](#gt_digital-living-network-alliance-dlna) Seek Media Operation to seek to a different position in the content. Processing for this kind of request is specified in section [3.1.4.1](#Section_3.3.5.1).
+While the client is receiving the content, a higher layer can issue a new request to start streaming. For example, a higher layer can decide to invoke the [**DLNA**](#gt_digital-living-network-alliance-dlna) Seek Media Operation to seek to a different position in the content. Processing for this kind of request is specified in section [3.1.4.1](#Section_3.1.4.1).
 
 If the GET response ends without a new request being issued by a higher layer, the protocol ends. The value of the **State** variable is then set to INIT.
 
@@ -1035,7 +1035,7 @@ The client MUST wait for a higher layer to request a [**DLNA**](#gt_digital-livi
 
 The client MUST process the RTSP response in accordance with the rules in [[DLNA]](https://go.microsoft.com/fwlink/?LinkId=178990) guideline 7.4.210.
 
-If the response is to a SETUP request, the Transport header SHOULD be parsed according to section [2.2.3.4](#Section_2.1). The value of the ssrc token on the Transport header SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the ssrc value and the stream referenced in the SETUP request. If the rtcp-fb-ssrc token is present on the Transport header, then the value of that token SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the rtcp-fb-ssrc value and the stream referenced in the SETUP request.
+If the response is to a SETUP request, the Transport header SHOULD be parsed according to section [2.2.3.4](#Section_2.2.3.4). The value of the ssrc token on the Transport header SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the ssrc value and the stream referenced in the SETUP request. If the rtcp-fb-ssrc token is present on the Transport header, then the value of that token SHOULD be added to the **Ssrc-list** variable such that a mapping is established between the rtcp-fb-ssrc value and the stream referenced in the SETUP request.
 
 The client MUST now continue with standard RTSP and RTP protocol usage. Standard RTSP and RTP protocol usage involves processing additional RTSP responses, processing ANNOUNCE requests, processing RTP packets and RTCP packets, as specified in [DLNA] and [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335). The following Microsoft Extensions apply:
 
@@ -1094,7 +1094,7 @@ The Microsoft Extensions to the [**DLNA Guidelines**](#gt_dlna-guidelines) do no
 
 Figure 2: Digital Media Player role
 
-The DMP role incorporates the client role defined in section [3.1](#Section_1.3). This is shown in Figure 2 by means of the state labeled Streaming. The Streaming state corresponds to the client state machine illustrated in Figure 1.
+The DMP role incorporates the client role defined in section [3.1](#Section_3.1). This is shown in Figure 2 by means of the state labeled Streaming. The Streaming state corresponds to the client state machine illustrated in Figure 1.
 
 The preceding state diagram only shows interaction with a single [**DMS**](#gt_digital-media-server-dms). Hence, the protocol ends when that DMS leaves the network. DMP implementations SHOULD support interactions with multiple DMSs. This can be accomplished by running multiple instances of the protocol state machine in parallel.
 
@@ -1162,7 +1162,7 @@ This event occurs when a higher layer wants the [**DMP**](#gt_digital-media-play
 
 The DMP MUST set the value of the **State** variable to Streaming.
 
-The DMP MUST follow the rules for the client role specified in section [3.1](#Section_1.3). Specifically, if the higher layer is requesting streaming using HTTP, then the client role rules start in section [3.1.4.1](#Section_3.3.5.1), and if the higher layer is requesting streaming using RTSP, then the client role rules start in section [3.1.4.2](#Section_3.1.4.2).
+The DMP MUST follow the rules for the client role specified in section [3.1](#Section_3.1). Specifically, if the higher layer is requesting streaming using HTTP, then the client role rules start in section [3.1.4.1](#Section_3.1.4.1), and if the higher layer is requesting streaming using RTSP, then the client role rules start in section [3.1.4.2](#Section_3.1.4.2).
 
 Once streaming has ended, a notification will be received from the client role, as specified in section [3.2.7.2](#Section_3.2.7.2).
 
@@ -1244,7 +1244,7 @@ The Microsoft Extensions to the [**DLNA Guidelines**](#gt_dlna-guidelines) do no
 
 Figure 3: Digital Media Renderer role
 
-The DMR role incorporates the client role defined in section [3.1](#Section_1.3). This is shown in the preceding figure by means of the state labeled Streaming. The Streaming state corresponds to the client state machine illustrated in the HTTP and RTSP state diagram (client perspective).
+The DMR role incorporates the client role defined in section [3.1](#Section_3.1). This is shown in the preceding figure by means of the state labeled Streaming. The Streaming state corresponds to the client state machine illustrated in the HTTP and RTSP state diagram (client perspective).
 
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
@@ -1271,7 +1271,7 @@ This event occurs when the higher layer wants to initialize the protocol. The hi
 
 If the DMR supports streaming, and the link layer Network Interface Card supports waking the DMR computer if a magic packet (as defined in section [2.2.5](#Section_2.2.5)) is received, then the DMR SHOULD add the microsoft:magicPacketWakeSupported XML tag to its UPnP Device Description Document, and set the value of that tag to 1. For more details about microsoft:magicPacketWakeSupported, see [MS-UPMC](../MS-UPMC/MS-UPMC.md) section 2.3.1.1.
 
-If a higher layer implements a DMP together with the DMR, and the DMP supports sending a magic packet to wake a DMS as specified in section [3.2.4.1](../MS-UPMC/MS-UPMC.md), then the DMR SHOULD add the microsoft:magicPacketSendSupported XML tag to its UPnP Device Description Document, and set the value of that tag to 1. For more details about microsoft:magicPacketSendSupported, see [MS-UPMC] section 2.3.1.2. <9>
+If a higher layer implements a DMP together with the DMR, and the DMP supports sending a magic packet to wake a DMS as specified in section [3.2.4.1](#Section_3.2.4.1), then the DMR SHOULD add the microsoft:magicPacketSendSupported XML tag to its UPnP Device Description Document, and set the value of that tag to 1. For more details about microsoft:magicPacketSendSupported, see [MS-UPMC] section 2.3.1.2. <9>
 
 If the DMR supports the UPnP AVTransport service, the DMR MUST be prepared to receive a request to start streaming. Such a request will take the form of one or more UPnP action invocations, the details of which are specified in [DLNA]. Processing of a request is to start streaming is specified in section [3.3.5.1](#Section_3.3.5.1).
 
@@ -1292,7 +1292,7 @@ In order for a Digital Media Controller ([**DMC**](#gt_digital-media-controller-
 
 The DMR SHOULD make the values of the CurrentURI and CurrentURIMetaData arguments of the AVTransportService:SetAVTransportURI action available to the higher layer, so that the higher layer can choose the URL that will be used for streaming. If the higher layer does not make a choice, the value of the CurrentURI argument MUST be used as the URL for streaming.
 
-The DMR MUST follow the rules for the client role specified in section [3.1](#Section_1.3). Specifically, if the URL chosen for streaming is an HTTP URL, then the client role rules start in section [3.1.4.1](#Section_3.3.5.1), and if the URL chosen for streaming is a RTSP URL, then the client role rules start in section [3.1.4.2](#Section_3.1.4.2).
+The DMR MUST follow the rules for the client role specified in section [3.1](#Section_3.1). Specifically, if the URL chosen for streaming is an HTTP URL, then the client role rules start in section [3.1.4.1](#Section_3.1.4.1), and if the URL chosen for streaming is a RTSP URL, then the client role rules start in section [3.1.4.2](#Section_3.1.4.2).
 
 Once streaming has ended a notification will be received from the client role, as specified in section [3.3.7.1](#Section_3.3.7.1).
 
@@ -1369,9 +1369,9 @@ The DMS SHOULD support the X_MS_MediaReceiverRegistrar UPnP service, as defined 
 
 The DMS MUST support [**streaming**](#gt_streaming) via HTTP and SHOULD support streaming via RTSP.
 
-The DMS SHOULD ask the UPnP protocol layer to search the network for UPnP MediaRenderer devices. When such a UPnP Device is found, the DMS will be notified by an event, as specified in section [3.4.7.1](#Section_3.2.7.1).
+The DMS SHOULD ask the UPnP protocol layer to search the network for UPnP MediaRenderer devices. When such a UPnP Device is found, the DMS will be notified by an event, as specified in section [3.4.7.1](#Section_3.4.7.1).
 
-The DMS MUST be prepared to receive a request to start streaming. Such a request will take the form of an HTTP request or an RTSP request (only if the DMS supports RTSP streaming). Processing a request requires the DMS to start streaming , using either HTTP (specified in section [3.4.5.2](#Section_3.3.5.1)), or RTSP (specified in section [3.4.5.3](#Section_3.4.5.3)).
+The DMS MUST be prepared to receive a request to start streaming. Such a request will take the form of an HTTP request or an RTSP request (only if the DMS supports RTSP streaming). Processing a request requires the DMS to start streaming , using either HTTP (specified in section [3.4.5.2](#Section_3.4.5.2)), or RTSP (specified in section [3.4.5.3](#Section_3.4.5.3)).
 
 The DMS MUST always be prepared to receive a request to browse the list of [**content**](#gt_content) exposed by the UPnP ContentDirectory service. Such a request takes the form of one or more UPnP browse or search action invocations. Processing these UPnP actions is specified in section [3.4.5.1](#Section_3.4.5.1).
 
@@ -1574,7 +1574,7 @@ The DMS MUST include headers in the RTSP response, as specified in section [3.4.
 
 The DMS MUST include the *ssrc* parameter on the Transport header (defined in [[RFC2326]](https://go.microsoft.com/fwlink/?LinkId=90335), section 12.39) in the SETUP response.
 
-If the DMS supports retransmitting RTP packets as defined in [DLNA] guideline 7.4.137, then the DMS MUST include the *rtcp-fb-ssrc* parameter on the Transport header, as defined in section [2.2.3.4](#Section_2.1).
+If the DMS supports retransmitting RTP packets as defined in [DLNA] guideline 7.4.137, then the DMS MUST include the *rtcp-fb-ssrc* parameter on the Transport header, as defined in section [2.2.3.4](#Section_2.2.3.4).
 
 If the value of the **State** variable is RTSP_Init and the RTSP response status code is 200, then the DMS MUST set the value of the **State** variable to RTSP_Ready.
 
@@ -1700,7 +1700,7 @@ In the case of RTSP, the event indicates that the RTSP connection was terminated
 
 The [**DMS**](#gt_digital-media-server-dms) MUST set the value of the **State** variable to Ready.
 
-The DMS MUST be prepared to receive a request to start streaming. Such a request will take the form of an HTTP request or a RTSP request (only if the DMS supports RTSP streaming). Processing a request to start streaming using HTTP is specified in section [3.4.5.2](#Section_3.3.5.1). Processing a request to start streaming using RTSP is specified in section [3.4.5.3](#Section_3.4.5.3).
+The DMS MUST be prepared to receive a request to start streaming. Such a request will take the form of an HTTP request or a RTSP request (only if the DMS supports RTSP streaming). Processing a request to start streaming using HTTP is specified in section [3.4.5.2](#Section_3.4.5.2). Processing a request to start streaming using RTSP is specified in section [3.4.5.3](#Section_3.4.5.3).
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -1985,7 +1985,7 @@ Session: 11626846570809248029
 
 CSeq: 3
 
-The response to the SETUP request shows the use of the rtcp-fb-ssrc parameter on the Transport header (section [2.2.3.4](#Section_2.1)).
+The response to the SETUP request shows the use of the rtcp-fb-ssrc parameter on the Transport header (section [2.2.3.4](#Section_2.2.3.4)).
 
 The client then sends a PLAY request. The PLAY request and response look like this:
 

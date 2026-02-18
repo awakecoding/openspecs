@@ -91,7 +91,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-OLEPS] Microsoft Corporation, "[Object Linking and Embedding (OLE) Property Set Data Structures](#Section_2)".
+[MS-OLEPS] Microsoft Corporation, "[Object Linking and Embedding (OLE) Property Set Data Structures](../MS-OLEPS/MS-OLEPS.md)".
 
 [MS-SHLLINK] Microsoft Corporation, "[Shell Link (.LNK) Binary File Format](../MS-SHLLINK/MS-SHLLINK.md)".
 
@@ -119,7 +119,7 @@ This structure is used by the Shell Link (.LNK) Binary File Format, as specified
 <a id="Section_1.5"></a>
 ## 1.5 Applicability Statement
 
-This document specifies a persistence format for one or more sets of property identifiers and associated property values. This persistence format is applicable when each property set can be identified by a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid), and when each property within a property set can be identified by an unsigned integer or a [**Unicode**](#gt_unicode) string name and can be persisted as a TypedPropertyValue structure, as specified in [MS-OLEPS](#Section_2) section 2.15.
+This document specifies a persistence format for one or more sets of property identifiers and associated property values. This persistence format is applicable when each property set can be identified by a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid), and when each property within a property set can be identified by an unsigned integer or a [**Unicode**](#gt_unicode) string name and can be persisted as a TypedPropertyValue structure, as specified in [MS-OLEPS](../MS-OLEPS/MS-OLEPS.md) section 2.15.
 
 <a id="Section_1.6"></a>
 ## 1.6 Versioning and Localization
@@ -215,7 +215,7 @@ packet-beta
 
 **Name (variable):** A null-terminated Unicode string that specifies the identity of the property. It has to be unique within the enclosing Serialized Property Storage structure.
 
-**Value (variable):** A TypedPropertyValue structure, as specified in [MS-OLEPS](#Section_2) section 2.15.
+**Value (variable):** A TypedPropertyValue structure, as specified in [MS-OLEPS](../MS-OLEPS/MS-OLEPS.md) section 2.15.
 
 <a id="Section_2.3.2"></a>
 ### 2.3.2 Serialized Property Value (Integer Name)
@@ -236,7 +236,7 @@ packet-beta
 
 **Reserved (1 byte):** MUST be 0x00.
 
-**Value (variable):** A TypedPropertyValue structure, as specified in [MS-OLEPS](#Section_2) section 2.15.
+**Value (variable):** A TypedPropertyValue structure, as specified in [MS-OLEPS](../MS-OLEPS/MS-OLEPS.md) section 2.15.
 
 <a id="Section_3"></a>
 # 3 Structure Examples

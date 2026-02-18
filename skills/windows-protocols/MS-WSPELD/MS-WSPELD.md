@@ -185,7 +185,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_2.2.3)".
+[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](../MS-ADDM/MS-ADDM.md)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
@@ -303,7 +303,7 @@ Prefixes and XML namespaces used in this specification include the following.
 | soapenv11: | http://schemas.xmlsoap.org/soap/envelope | [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) |
 | wsa: | http://www.w3.org/2005/08/addressing | [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) |
 | wsen: | http://schemas.xmlsoap.org/ws/2004/09/enumeration | [WSENUM] |
-| ad: | http://schemas.microsoft.com/2008/1/ActiveDirectory | [MS-ADDM](#Section_2.2.3) |
+| ad: | http://schemas.microsoft.com/2008/1/ActiveDirectory | [MS-ADDM](../MS-ADDM/MS-ADDM.md) |
 | addata: | http://schemas.microsoft.com/2008/1/ActiveDirectory/Data | [MS-ADDM] |
 | adlq: | http://schemas.microsoft.com/2008/1/ActiveDirectory/Dialect/LdapQuery | [MS-WSDS](../MS-WSDS/MS-WSDS.md) |
 | da: | http://schemas.microsoft.com/2006/11/IdentityManagement/DirectoryAccess | [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md) |
@@ -371,7 +371,7 @@ For example, the following [**XML**](#gt_xml) shows the contents of the controls
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 ad:control
 
-The required element **ad:control** MUST be the child element of the ad:controls (section [2.2.3.1](#Section_1.3)) element. The **ad:control** element might have a value (see section [2.2.3.1.2](#Section_2.2.3.1.2) for the ad:controlValue element).
+The required element **ad:control** MUST be the child element of the ad:controls (section [2.2.3.1](#Section_2.2.3.1)) element. The **ad:control** element might have a value (see section [2.2.3.1.2](#Section_2.2.3.1.2) for the ad:controlValue element).
 
 The [**XML Schema**](#gt_xml-schema-xsd) [[XMLSCHEMA1]](https://go.microsoft.com/fwlink/?LinkId=90608) definition of the control element is as follows.
 
@@ -543,7 +543,7 @@ The Resource [**WSDL port type**](#gt_wsdl-port-type) includes three operations.
 | Put | Modifies the contents of one or more directory attributes on a directory object. |
 | Delete | Removes an existing directory object. |
 
-The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) request and response controls element specified in section [2.2.3.1](#Section_1.3) could be a part of both [**SOAP**](#gt_soap) request and response messages, respectively, for the preceding operations.
+The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) request and response controls element specified in section [2.2.3.1](#Section_2.2.3.1) could be a part of both [**SOAP**](#gt_soap) request and response messages, respectively, for the preceding operations.
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Get
@@ -556,7 +556,7 @@ There are no body blocks defined by default for a Get request in the WS-Transfer
 
 The presence of subsequent child elements is service-specific according to [WXFR].
 
-WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_1.3), if present in the Get request message, MUST be a child element of the **soapenv:Body** element and can be specified in any order in the presence of other child elements. See the example in section [4.3](#Section_4.3) for the WS-Transfer Get request message with controls extension. However, for the Get Response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **soapenv:Body** element.
+WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_2.2.3.1), if present in the Get request message, MUST be a child element of the **soapenv:Body** element and can be specified in any order in the presence of other child elements. See the example in section [4.3](#Section_4.3) for the WS-Transfer Get request message with controls extension. However, for the Get Response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **soapenv:Body** element.
 
 The WSTIM extensions of Get extensions operates at the level of granularity of portions of the representation of a directory object. That is, its extensions allow retrieving a fragment of a directory object. To request such granularity, it defines a **BaseObjectSearchRequest** element, wrapping various child elements representing the requested fragment inside the **soapenv:Body** element of the request message (the response message of the preceding request contains the **BaseObjectSearchResponse** element, containing one or more **PartialAttribute** elements representing the fragment of the directory object. WSPELD specifies that **ad:controls** element defined in section 2.2.3.1, if present, MUST be the child element of the **BaseObjectSearchRequest** element in the request message and can be specified in any order). However, for the Response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **BaseObjectSearchResponse** element.
 
@@ -565,7 +565,7 @@ The WSTIM extensions of Get extensions operates at the level of granularity of p
 
 This section specifies extensions to the delete operation defined by WS-Transfer [[WXFR]](https://go.microsoft.com/fwlink/?LinkId=90587).
 
-There are no body elements defined for a Delete request and Response message by WS-Transfer. WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_1.3), if present in the Delete request message, MUST be a child element of the **soapenv:Body** element and can be specified in any order. However, for the Response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **soapenv:Body** element.
+There are no body elements defined for a Delete request and Response message by WS-Transfer. WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_2.2.3.1), if present in the Delete request message, MUST be a child element of the **soapenv:Body** element and can be specified in any order. However, for the Response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **soapenv:Body** element.
 
 See the example in section [4.2](#Section_4.2) for the WS-Transfer Delete request message with controls extension.
 
@@ -576,7 +576,7 @@ This section specifies extensions to the Put operation extensions defined by the
 
 The WSTIM extensions specification of Put extensions operates at the level of granularity of portions of the representation of a [**directory object**](#gt_directory-object). That is, its extensions allow modifying a fragment of a directory object.
 
-To request modifications at such granularity, the change elements are wrapped inside the **ModifyRequest** element (defined in [MS-WSTIM] section 3.2.4.2) of the request message. WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_1.3), if present, MUST be the child element of the **ModifyRequest** element in the request message and can be specified in any order in the presence of other child elements. The response to this Put operation, **ModifyResponseMessage** ([MS-WSTIM] section 3.2.4.2.1.2), has an empty message body. However, for a response message the **ad:controls** element, if present, MUST be a child element of the **soapenv:Body** element of this **ModifyResponseMessage**.
+To request modifications at such granularity, the change elements are wrapped inside the **ModifyRequest** element (defined in [MS-WSTIM] section 3.2.4.2) of the request message. WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_2.2.3.1), if present, MUST be the child element of the **ModifyRequest** element in the request message and can be specified in any order in the presence of other child elements. The response to this Put operation, **ModifyResponseMessage** ([MS-WSTIM] section 3.2.4.2.1.2), has an empty message body. However, for a response message the **ad:controls** element, if present, MUST be a child element of the **soapenv:Body** element of this **ModifyResponseMessage**.
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Timer Events
@@ -619,7 +619,7 @@ The ResourceFactory [**WSDL port type**](#gt_wsdl-port-type) includes one operat
 | --- | --- |
 | Create | Creates a new [**directory object**](#gt_directory-object) |
 
-The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) request and response controls element specified in section [2.2.3.1](#Section_1.3) could be a part of both Create [**SOAP**](#gt_soap) request and response messages, respectively.
+The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) request and response controls element specified in section [2.2.3.1](#Section_2.2.3.1) could be a part of both Create [**SOAP**](#gt_soap) request and response messages, respectively.
 
 <a id="Section_3.3.4.1"></a>
 #### 3.3.4.1 Create
@@ -628,7 +628,7 @@ This section specifies extensions to the Create operation extensions defined by 
 
 The WSTIM extensions specification of create extensions permits the client to specify only a portion of the [**directory object**](#gt_directory-object) that is to be created, with the server supplying any remaining portions of the directory object when it creates the object.
 
-WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_1.3), if present, MUST be the child element of the **AddRequest** element in the request message and can be specified in any order in the presence of other child elements. The contents of [**SOAP**](#gt_soap) response message (AddResponseMessage [MS-WSTIM] (section 3.3.4.1.1.2)) are a resource reference, <wxf:ResourceCreated>, for the newly created object. WSPELD specifies that the **ad:controls** element, if present, MUST be the last child element of the soapenv:Body element of this **AddResponseMessage**.
+WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_2.2.3.1), if present, MUST be the child element of the **AddRequest** element in the request message and can be specified in any order in the presence of other child elements. The contents of [**SOAP**](#gt_soap) response message (AddResponseMessage [MS-WSTIM] (section 3.3.4.1.1.2)) are a resource reference, <wxf:ResourceCreated>, for the newly created object. WSPELD specifies that the **ad:controls** element, if present, MUST be the last child element of the soapenv:Body element of this **AddResponseMessage**.
 
 See the example in section [4.1](#Section_4.1) for the WSTIM extensions Create request and response message with controls extension.
 
@@ -678,7 +678,7 @@ The Enumeration [**WSDL port type**](#gt_wsdl-port-type) includes one operation 
 | --- | --- |
 | Pull | Pulls the resultant [**directory objects**](#gt_directory-object) in the context of a specific enumeration |
 
-The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) request and response controls element specified in section [2.2.3.1](#Section_1.3) could be a part of both [**SOAP**](#gt_soap) Pull request and response messages, respectively.
+The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) request and response controls element specified in section [2.2.3.1](#Section_2.2.3.1) could be a part of both [**SOAP**](#gt_soap) Pull request and response messages, respectively.
 
 <a id="Section_3.4.4.1"></a>
 #### 3.4.4.1 Pull
@@ -689,7 +689,7 @@ WS-Enumeration specifies that the Pull operation, which involves pulling [**dire
 
 On successful processing of a Pull request message, the directory server is expected to return a Pull response message containing the resultant object fragments wrapped by a **pullResponse** element inside a **soapenv:Body** element.
 
-WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_1.3), if present, MUST be the child element of the Pull element in the request message and can be specified in any order in the presence of other child elements. However, for the response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **PullResponse** element.
+WSPELD specifies that the **ad:controls** element defined in section [2.2.3.1](#Section_2.2.3.1), if present, MUST be the child element of the Pull element in the request message and can be specified in any order in the presence of other child elements. However, for the response message, the protocol mandates that the **ad:controls** element, if present, MUST be the last child element of the **PullResponse** element.
 
 See the example in section [4.4](#Section_4.4) for the WS-Enumeration [WSENUM] Pull request and response message with controls extension.
 
@@ -1500,7 +1500,7 @@ This protocol extension has no security parameters.
 <a id="Section_6"></a>
 # 6 Appendix A: WSDL (Contains Extension Elements Only)
 
-The WSPELD protocol extension does not define a [**WSDL**](#gt_web-services-description-language-wsdl) of its own. It does not extend the [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) WSDL and extends only [WSENUM] [**XML Schema**](#gt_xml-schema-xsd). The [**schema**](#gt_schema) of extension elements defined by this protocol for [WSENUM] is specified in section [7.1](#Section_7.1) of Appendix B. For a server to implement WSPELD protocol extensions of [WSENUM] it uses the full WSDL definition of the WS-Enumeration [WSENUM] protocol, except replacing [WSENUM]'s definitions of [**XML**](#gt_xml) elements, attributes, and complex types that are being extended by this protocol with those documented in section [7](#Section_7) Appendix B.
+The WSPELD protocol extension does not define a [**WSDL**](#gt_web-services-description-language-wsdl) of its own. It does not extend the [[WSENUM]](https://go.microsoft.com/fwlink/?LinkId=90580) WSDL and extends only [WSENUM] [**XML Schema**](#gt_xml-schema-xsd). The [**schema**](#gt_schema) of extension elements defined by this protocol for [WSENUM] is specified in section [7.1](#Section_969d9acbd7ea4117959e5c7f83267c9d) of Appendix B. For a server to implement WSPELD protocol extensions of [WSENUM] it uses the full WSDL definition of the WS-Enumeration [WSENUM] protocol, except replacing [WSENUM]'s definitions of [**XML**](#gt_xml) elements, attributes, and complex types that are being extended by this protocol with those documented in section [7](#Section_7) Appendix B.
 
 The WSDL extension elements of [[WXFR]](https://go.microsoft.com/fwlink/?LinkId=90587) and [MS-WSTIM](../MS-WSTIM/MS-WSTIM.md) defined by this protocol are shown below. For a server to implement WSPELD protocol extensions of [WXFR] it uses the full WSDL definition of the [WXFR] protocol, except replacing the [WXFR] definitions of WSDL elements that are being extended by this protocol with those documented below. For a server to implement WSPELD protocol extensions to [MS-WSTIM] it uses the full WSDL definition of the [MS-WSTIM] protocol, except replacing the [MS-WSTIM] definitions of WSDL elements that are being extended by this protocol with those documented below. It also replaces XML elements, attributes, and complex types that are being extended by this protocol with those documented in section 7 Appendix B.
 
@@ -2074,7 +2074,7 @@ and the following LDAP v3 response controls:
 - 1.2.840.113556.1.4.1504 (LDAP_SERVER_ASQ_OID)
 The previous list can change in the future versions.
 
-<3> Section 3.1.3: Microsoft implementations of WS-Transfer and WS-Enumeration Protocol Extension for Lightweight Directory Access Protocol v3 Controls use [**SOAP**](#gt_soap) 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). The transports used, as well as the authentication mechanisms supported and the endpoints exposed, are specified in section 2.1 of [MS-ADDM](#Section_2.2.3).
+<3> Section 3.1.3: Microsoft implementations of WS-Transfer and WS-Enumeration Protocol Extension for Lightweight Directory Access Protocol v3 Controls use [**SOAP**](#gt_soap) 1.2 [[SOAP1.2-1/2003]](https://go.microsoft.com/fwlink/?LinkId=90521). The transports used, as well as the authentication mechanisms supported and the endpoints exposed, are specified in section 2.1 of [MS-ADDM](../MS-ADDM/MS-ADDM.md).
 
 <a id="Section_9"></a>
 # 9 Change Tracking

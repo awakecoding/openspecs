@@ -861,7 +861,7 @@ When the higher layer needs to configure the server to receive [**content**](#gt
 
 The higher layer MUST provide the URL that will be specified in all requests sent by the client. The URL specifies a "publishing point" on the server, which is the destination of the ASF data packets that the client intends to [**stream**](#gt_stream) to the server.
 
-If the [InitialRequest](#Section_3.1.1) value is 0, then this is the first request that is sent by the client, the client MUST perform the initialization of the protocol as specified in section [3.1.3](#Section_3.2.3), and set the InitialRequest value to 1.
+If the [InitialRequest](#Section_3.1.1) value is 0, then this is the first request that is sent by the client, the client MUST perform the initialization of the protocol as specified in section [3.1.3](#Section_3.1.3), and set the InitialRequest value to 1.
 
 The client MUST then establish a TCP connection to the server, using the IP address and port number obtained by parsing the URL as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 3.2.2. Use of HTTP proxy servers is permitted, in which case the TCP connection is made to the proxy server specified by the higher layer instead of to the server specified in the URL. If a proxy server is used, the value of the UsingProxy flag in the abstract data model MUST be set to 1.
 
@@ -892,14 +892,14 @@ If the higher layer specifies a "template" publishing point on the server, the n
 
 If the higher layer requests that the publishing point identified by the URL on the HTTP request line be removed at the end of the [**streaming**](#gt_streaming) [**session**](#gt_session), the message body of the POST request MUST include the [AutoDestroy (section 2.2.2.1.2)](#Section_2.2.2.1.2) directive. If the Template-URL directive is included in the message body, the AutoDestroy directive SHOULD also be included, even if the higher layer does not request the publishing point to be removed.
 
-After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.1](#Section_2.2.1.1.1).
+After sending the request, the client MUST wait for the response to be received. How to process the response is specified in section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Request to Start Streaming Content
 
 When a higher layer requests that the [**streaming**](#gt_streaming) of [**content**](#gt_content) starts, it causes the client to send a [PushStart request](#Section_2.2.2.2) to the server.
 
-As a prerequisite for this event, the higher layer MUST already have configured the server to receive content, as specified in section [3.1.4.1](#Section_3.1.4.1), and the client MUST have received a response to the [PushSetup request](#Section_2.2.2.1) indicating that the PushSetup request succeeded (as specified in section [3.1.5.1](#Section_2.2.1.1.1)), but the client MUST NOT have sent any PushStart requests previously.
+As a prerequisite for this event, the higher layer MUST already have configured the server to receive content, as specified in section [3.1.4.1](#Section_3.1.4.1), and the client MUST have received a response to the [PushSetup request](#Section_2.2.2.1) indicating that the PushSetup request succeeded (as specified in section [3.1.5.1](#Section_3.1.5.1)), but the client MUST NOT have sent any PushStart requests previously.
 
 The higher layer MUST provide an ASF file header to send to the server. The client MUST encapsulate it in an [$H](#Section_2.2.3.6) packet, according to the rules specified in section 2.2.3.6.
 
@@ -1146,9 +1146,9 @@ If the URL is invalid, this is an error, and the server MUST respond with a vali
 
 If the [AutoDestroy](#Section_2.2.2.1.2) directive is present in the message body, the value of the AutoDestroy flag in the abstract data model MUST be set to TRUE if the directive specified the value 1.
 
-If the server is not sending a response with an error status code (for example, 302 or 305), and if the request does not specify a push-id cookie on a Cookie header, or if the value of the push-id cookie is "0", the server MUST create a new state by performing the initialization procedure as specified in section [3.2.3](#Section_2.2.1.5).
+If the server is not sending a response with an error status code (for example, 302 or 305), and if the request does not specify a push-id cookie on a Cookie header, or if the value of the push-id cookie is "0", the server MUST create a new state by performing the initialization procedure as specified in section [3.2.3](#Section_3.2.3).
 
-The [PushSetup](#Section_2.2.1.1.1) response MUST follow the rules in PushSetup request (section 2.2.2.1).
+The [PushSetup](#Section_3.1.5.1) response MUST follow the rules in PushSetup request (section 2.2.2.1).
 
 Because the PushSetup response does not have a message body, the status code in the response SHOULD be 204. The status code MAY be 200.
 
@@ -1771,7 +1771,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <12> Section 3.2.5.2: Windows Media Services support NTLM authentication (as specified in [MS-NLMP]), Digest authentication (as specified in [RFC2617]), and SPNEGO-based Kerberos authentication (as specified in [RFC4559]). Windows Media Services does not support acting as a proxy server for this protocol.
 
-<13> Section 3.2.5.2: Windows Media Services does not follow the prescribed behavior. Instead, it creates a new state by performing the initialization procedure as specified in section [3.2.3](#Section_2.2.1.5).
+<13> Section 3.2.5.2: Windows Media Services does not follow the prescribed behavior. Instead, it creates a new state by performing the initialization procedure as specified in section [3.2.3](#Section_3.2.3).
 
 <14> Section 3.2.5.5: Windows Media Services does not send a [PushStart](#Section_3.2.5.2.1) response if the value of the **Reason** field in the [$E](#Section_2.2.3.4) packet is "0x00000001", and if there are no bytes left to receive in the message body.
 

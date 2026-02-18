@@ -312,7 +312,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
-[MS-ADLS] Microsoft Corporation, "[Active Directory Lightweight Directory Services Schema](#Section_2.2.1.19)".
+[MS-ADLS] Microsoft Corporation, "[Active Directory Lightweight Directory Services Schema](../MS-ADLS/MS-ADLS.md)".
 
 [MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
@@ -331,7 +331,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](#Section_2.2.1.17)".
+[MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](../MS-RRP/MS-RRP.md)".
 
 [MSDN-ACCESSDRIVER] Microsoft Corporation, "Setting Options Programmatically for the Access Driver", [https://learn.microsoft.com/en-us/sql/odbc/microsoft/setting-options-programmatically-for-the-access-driver?view=sql-server-ver16](https://go.microsoft.com/fwlink/?LinkId=102077)
 
@@ -456,7 +456,7 @@ In addition, a client requires an implementation that is capable of executing co
 
 Group Policy: Preferences Extension is only applicable within the Group Policy: Core Protocol framework. The Group Policy: Preferences Extension is used to express the required state of the client at the time that the client add-in executes. However, it is not recommended to express intentions that are sensitive in an information disclosure context, because the metadata that the protocol transmits is not encrypted. For example, an administrator is not to use this protocol to transmit a password that the client needs to access a resource, because that password is unencrypted during transmission and can be easily intercepted by an unauthorized user, thus compromising the resource. Within the Group Policy: Preferences Extension, sensitive information is encoded as applicable.
 
-This protocol also applies only when many clients are required to receive the same settings. To configure individual clients with custom settings, use the Windows Remote Registry Protocol instead. For more information, see [MS-RRP](#Section_2.2.1.17).
+This protocol also applies only when many clients are required to receive the same settings. To configure individual clients with custom settings, use the Windows Remote Registry Protocol instead. For more information, see [MS-RRP](../MS-RRP/MS-RRP.md).
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -511,7 +511,7 @@ The Group Policy: Preferences Extension MUST transport messages (in the form of 
 The following sections specify the syntax for the following protocol elements:
 
 - [**Preferences**](#gt_preference) XML files (as specified in section [2.2.1](#Section_2.2.1)).
-Each protocol element is described as a message that corresponds one-to-one with a file transferred using the [MS-SMB2](../MS-SMB2/MS-SMB2.md) protocol. The protocol is driven through the exchange of these messages, as specified in section [3](#Section_1.3).
+Each protocol element is described as a message that corresponds one-to-one with a file transferred using the [MS-SMB2](../MS-SMB2/MS-SMB2.md) protocol. The protocol is driven through the exchange of these messages, as specified in section [3](#Section_3).
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Preferences Policy Message Syntax
@@ -2240,7 +2240,7 @@ use="optional" />
 <a id="Section_2.2.1.10"></a>
 #### 2.2.1.10 InternetSettings
 
-The InternetSettings element is composed of all [**registry**](#gt_registry) key and registry value settings. The examples provided in section [4.2](#Section_4.2) include all available settings. For the structure of the registry elements, see section [2.2.1.17](#Section_2.2.1.17.2).<8>
+The InternetSettings element is composed of all [**registry**](#gt_registry) key and registry value settings. The examples provided in section [4.2](#Section_4.2) include all available settings. For the structure of the registry elements, see section [2.2.1.17](#Section_2.2.1.17).<8>
 
 For information on Internet settings, refer to the following documents:[[MSDN-INF]](https://go.microsoft.com/fwlink/?LinkId=90025), [[MSDN-RAS]](https://go.microsoft.com/fwlink/?LinkId=90071), [[MSDN-RAS2]](https://go.microsoft.com/fwlink/?LinkId=90072), [[MSDN-SECZONES]](https://go.microsoft.com/fwlink/?LinkId=90660), [[MSDN-WININET1]](https://go.microsoft.com/fwlink/?LinkId=90164), [[MSDN-WININET2]](https://go.microsoft.com/fwlink/?LinkId=90165), [[MSFT-IEM]](https://go.microsoft.com/fwlink/?LinkId=90186), and [[MSFT-IESECZNREGENTRY]](https://go.microsoft.com/fwlink/?LinkId=94582).
 
@@ -8872,7 +8872,7 @@ The administrative tool plug-ins that define and edit Group Policy: Preferences 
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-The Group Policy: Preferences Extension accesses the following Directory Service schema classes and attributes listed in the following table. For the syntactic specifications of the following <Class> or <Class> <Attribute> pairs, refer to: [MS-ADLS](#Section_2.2.1.19), [MS-ADTS](../MS-ADTS/MS-ADTS.md), [MS-ADSC](../MS-ADSC/MS-ADSC.md), [MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), and [MS-ADA3](../MS-ADA3/MS-ADA3.md).
+The Group Policy: Preferences Extension accesses the following Directory Service schema classes and attributes listed in the following table. For the syntactic specifications of the following <Class> or <Class> <Attribute> pairs, refer to: [MS-ADLS](../MS-ADLS/MS-ADLS.md), [MS-ADTS](../MS-ADTS/MS-ADTS.md), [MS-ADSC](../MS-ADSC/MS-ADSC.md), [MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), and [MS-ADA3](../MS-ADA3/MS-ADA3.md).
 
 | Class | Attribute |
 | --- | --- |
@@ -8894,7 +8894,7 @@ The administrative tool plug-ins that define and edit Group Policy: Preferences 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The administrative abstract data model mirrors the client abstract data model, as specified in section [3.2.1](#Section_1.3), the difference being that the administrative abstract data model is logically encapsulated within a single [**GPO's**](#gt_group-policy-object-gpo) user policy and computer policy sections. A summary of this state is as follows:
+The administrative abstract data model mirrors the client abstract data model, as specified in section [3.2.1](#Section_3.2.1), the difference being that the administrative abstract data model is logically encapsulated within a single [**GPO's**](#gt_group-policy-object-gpo) user policy and computer policy sections. A summary of this state is as follows:
 
 **GPO:** The GPO contains a policy description store, user policy setting state, and computer policy setting state.
 
@@ -13170,7 +13170,7 @@ phoneNumber="1-555-1212"/>
 <a id="Section_4.2.12"></a>
 ### 4.2.12 NetworkShareSettings XML Example
 
-The following is an example of a [NetworkShareSettings](#Section_2.2.1.13) configuration XML. The XML in this example defines a share named "Products" that points to the UNC path "\\Products" with a comment of "Testing MSI Packages".
+The following is an example of a [NetworkShareSettings](#Section_2.2.1.13.2) configuration XML. The XML in this example defines a share named "Products" that points to the UNC path "\\Products" with a comment of "Testing MSI Packages".
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -13623,7 +13623,7 @@ comment="Old printer. Don't use."/>
 <a id="Section_4.2.15"></a>
 ### 4.2.15 Regional Options XML Example
 
-The following is an example of a Regional Options (section [2.2.1.16](#Section_2.2.1.16.2)) configuration XML. The XML in this example sets English (United States) as the default locale of this user, and it sets various attributes of the locale, such as the default time format, currency symbol, and date format.
+The following is an example of a Regional Options (section [2.2.1.16](#Section_2.2.1.16)) configuration XML. The XML in this example sets English (United States) as the default locale of this user, and it sets various attributes of the locale, such as the default time format, currency symbol, and date format.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -13704,7 +13704,7 @@ dateLongFormat="dddd, MMMM dd, yyyy"/>
 <a id="Section_4.2.16"></a>
 ### 4.2.16 RegistrySettings XML Example
 
-The following is an example of a [RegistrySettings](#Section_2.2.1.17.2) configuration XML. The XML in this example creates a key in "HKEY_CURRENT_USER" with the name "MP3", and it sets the DWORD value "Disallowed" to "00000001". It also creates a set of keys that are grouped as a collection.
+The following is an example of a [RegistrySettings](#Section_2.2.1.17) configuration XML. The XML in this example creates a key in "HKEY_CURRENT_USER" with the name "MP3", and it sets the DWORD value "Disallowed" to "00000001". It also creates a set of keys that are grouped as a collection.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -13827,7 +13827,7 @@ value=""/>
 <a id="Section_4.2.17"></a>
 ### 4.2.17 ScheduledTasks XML Example
 
-The following is an example of a ScheduledTasks (section [2.2.1.18](#Section_2.2.1.18.2)) configuration XML. The XML in this example creates a task named "Cleanup" that runs the application "\\scratch\filecleanup.exe" on a daily basis starting on July 6, 2007, at 10:00 UTC. It also creates an ImmediateTask called "PingCorporate" that executes the application "c:\ping.exe" with argument "-ip 10.10.10.10", with various attributes to control the maximum run time and behavior if the system begins to be operated on battery power.
+The following is an example of a ScheduledTasks (section [2.2.1.18](#Section_2.2.1.18)) configuration XML. The XML in this example creates a task named "Cleanup" that runs the application "\\scratch\filecleanup.exe" on a daily basis starting on July 6, 2007, at 10:00 UTC. It also creates an ImmediateTask called "PingCorporate" that executes the application "c:\ping.exe" with argument "-ip 10.10.10.10", with various attributes to control the maximum run time and behavior if the system begins to be operated on battery power.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -14362,7 +14362,7 @@ logonType="InteractiveToken">
 <a id="Section_4.2.18"></a>
 ### 4.2.18 NTServices XML Example
 
-The following is an example of an [NTServices](#Section_4.2.18) configuration XML. The XML in this example updates the NT service "Computer Browser" to run under the "LocalSystem" account with a restart after the third failure after a delay.
+The following is an example of an [NTServices](#Section_2.2.1.19.2) configuration XML. The XML in this example updates the NT service "Computer Browser" to run under the "LocalSystem" account with a restart after the third failure after a delay.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -14470,7 +14470,7 @@ shortcutPath="%DesktopDir%\Temp Files"/>
 <a id="Section_4.2.20"></a>
 ### 4.2.20 StartMenu XML Example
 
-The following is an example of a [StartMenu](#Section_2.2.1.21.1) configuration XML. The XML in this example sets various attributes of the desktop Start menu, such as hiding the Favorites menu, using large icons, showing My Music as a link, and showing the Search option on the Start menu.
+The following is an example of a [StartMenu](#Section_4.2.20) configuration XML. The XML in this example sets various attributes of the desktop Start menu, such as hiding the Favorites menu, using large icons, showing My Music as a link, and showing the Search option on the Start menu.
 
 <?xml version="1.0" encoding="utf-8"?>
 

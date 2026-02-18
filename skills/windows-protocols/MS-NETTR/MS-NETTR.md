@@ -140,7 +140,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -149,7 +149,7 @@ As [**distributed applications**](#gt_distributed-application) become increasing
 
 The .NET Tracing Protocol provides two main functions. First, it enables users to map outgoing messages to incoming messages between components in a distributed application. It does this by assigning each message a unique identifier, named the *CorrelationId*. This identifier is stored in the client component's trace log before it sends a message and in the server component's trace log after it receives a message. The identifier is then used as an index into the client and server trace logs to map the message exchange together. Using a unique identifier to map message flows also has the advantage of avoiding problems with clock skew between components in the distributed application.
 
-The second function of the .NET Tracing Protocol is to provide a way to group related messages together. It does this by generating a second message identifier named the *ActivityId*. Unlike the *CorrelationId*, the *ActivityId* is not unique for each message. Instead, the same *ActivityId* is propagated between related messages. For example, a client sends a request to a server with "*ActivityId* A" in the message. The .NET Tracing Protocol states that the server echoes "*ActivityId* A" in its message response. Future related requests by the client will continue to use the same "*ActivityId* A". Because all of the related messages have included the same *ActivityId*, users can infer causality relationships between messages. This information can also be used to determine the set of messages that led up to an error and the set of messages that resulted from the error. This process is specified in section [3.1.5](#Section_3.2.5).
+The second function of the .NET Tracing Protocol is to provide a way to group related messages together. It does this by generating a second message identifier named the *ActivityId*. Unlike the *CorrelationId*, the *ActivityId* is not unique for each message. Instead, the same *ActivityId* is propagated between related messages. For example, a client sends a request to a server with "*ActivityId* A" in the message. The .NET Tracing Protocol states that the server echoes "*ActivityId* A" in its message response. Future related requests by the client will continue to use the same "*ActivityId* A". Because all of the related messages have included the same *ActivityId*, users can infer causality relationships between messages. This information can also be used to determine the set of messages that led up to an error and the set of messages that resulted from the error. This process is specified in section [3.1.5](#Section_3.1.5).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -416,7 +416,7 @@ xmlns="http://schemas.microsoft.com/2004/09/ServiceModel/Diagnostics">
 
 </s:Envelope>
 
-The following is a sample response to the request discussed earlier. The header element for the message includes the <ActivityId> element. As per section [3.1.1](#Section_3.2.1), the *ActivityId* value is the same as received in the request ("43ffa660-a0c6-4249-bb36-648b73a06213"). The protocol also specifies that the *CorrelationId* attribute is different from the *CorrelationId* received in the request. In the example, the *CorrelationId* associated with the response is a new GUID string value ("b898336e-d4e2-4eb7-a2c7-1e23f4630646").
+The following is a sample response to the request discussed earlier. The header element for the message includes the <ActivityId> element. As per section [3.1.1](#Section_3.1.1), the *ActivityId* value is the same as received in the request ("43ffa660-a0c6-4249-bb36-648b73a06213"). The protocol also specifies that the *CorrelationId* attribute is different from the *CorrelationId* received in the request. In the example, the *CorrelationId* associated with the response is a new GUID string value ("b898336e-d4e2-4eb7-a2c7-1e23f4630646").
 
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
 
@@ -454,7 +454,7 @@ xmlns="http://schemas.microsoft.com/2004/09/ServiceModel/Diagnostics">
 
 </s:Envelope>
 
-The activity trace generated at the client and server ends for the request and response is expected to maintain a correlation with the value of *ActivityId* ("43ffa660-a0c6-4249-bb36-648b73a06213"). Section [4.2](#Section_1.3) provides examples of traces with such a correlation.
+The activity trace generated at the client and server ends for the request and response is expected to maintain a correlation with the value of *ActivityId* ("43ffa660-a0c6-4249-bb36-648b73a06213"). Section [4.2](#Section_4.2) provides examples of traces with such a correlation.
 
 <a id="Section_4.2"></a>
 ## 4.2 Sample Activity Traces
@@ -793,7 +793,7 @@ None.
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of the .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of the .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

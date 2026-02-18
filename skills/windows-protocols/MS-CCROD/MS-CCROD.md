@@ -148,7 +148,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-The Content Caching and Retrieval protocols support content retrieval scenarios such as accessing content from a file or web server. For file access scenarios, this document can be used in conjunction with the File Access Services Protocols Overview [MS-FASOD](#Section_2.1). The File Access Services Protocols Overview describes the protocols that are required for network File Access Services interoperation with Windows systems. This document describes the additional protocols, data structures, and mechanisms, such as security, that are required to enable a system of Content Caching and Retrieval to interoperate with Windows systems. The system is designed to support scenarios in which local storage of all possible content at all locations in a distributed network is not practicable, such as in corporate branch offices. If the Content Caching and Retrieval of data is unavailable or fails, normal file access continues without caching by using the SMB 2.1 or 3.x, HTTP, or HTTPS protocols.
+The Content Caching and Retrieval protocols support content retrieval scenarios such as accessing content from a file or web server. For file access scenarios, this document can be used in conjunction with the File Access Services Protocols Overview [MS-FASOD](../MS-FASOD/MS-FASOD.md). The File Access Services Protocols Overview describes the protocols that are required for network File Access Services interoperation with Windows systems. This document describes the additional protocols, data structures, and mechanisms, such as security, that are required to enable a system of Content Caching and Retrieval to interoperate with Windows systems. The system is designed to support scenarios in which local storage of all possible content at all locations in a distributed network is not practicable, such as in corporate branch offices. If the Content Caching and Retrieval of data is unavailable or fails, normal file access continues without caching by using the SMB 2.1 or 3.x, HTTP, or HTTPS protocols.
 
 Content within the system is divided into segments and blocks, where a block is a subdivision of a segment. Segments and blocks are stored and retrieved by the system, rather than files.
 
@@ -279,13 +279,13 @@ This document uses the following terms:
 
 [MC-BUP] Microsoft Corporation, "[Background Intelligent Transfer Service (BITS) Upload Protocol](../MC-BUP/MC-BUP.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-BPCR] Microsoft Corporation, "[Background Intelligent Transfer Service (BITS) Peer-Caching: Content Retrieval Protocol](../MS-BPCR/MS-BPCR.md)".
 
 [MS-BPDP] Microsoft Corporation, "[Background Intelligent Transfer Service (BITS) Peer-Caching: Peer Discovery Protocol](../MS-BPDP/MS-BPDP.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_2.1)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
 [MS-FSA] Microsoft Corporation, "[File System Algorithms](../MS-FSA/MS-FSA.md)".
 
@@ -293,7 +293,7 @@ This document uses the following terms:
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-NEGOEX] Microsoft Corporation, "[SPNEGO Extended Negotiation (NEGOEX) Security Mechanism](#Section_2.9)".
+[MS-NEGOEX] Microsoft Corporation, "[SPNEGO Extended Negotiation (NEGOEX) Security Mechanism](../MS-NEGOEX/MS-NEGOEX.md)".
 
 [MS-PCCRC] Microsoft Corporation, "[Peer Content Caching and Retrieval: Content Identification](../MS-PCCRC/MS-PCCRC.md)".
 
@@ -309,7 +309,7 @@ This document uses the following terms:
 
 [MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](../MS-SPNG/MS-SPNG.md)".
 
-[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](#Section_2.9)".
+[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](../MS-TLSP/MS-TLSP.md)".
 
 [MSDN-BITS] Microsoft Corporation, "Background Intelligent Transfer Service", [http://msdn.microsoft.com/en-us/library/bb968799(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=89959)
 
@@ -506,7 +506,7 @@ Content Caching and Retrieval is supplementary to File Access Services; it is a 
 
 **Web Services Dynamic Discovery** as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576).
 
-**SPNEGO-based Kerberos and NTLM HTTP Authentication in Windows** as specified in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). For more information on SPNEGO see [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9).
+**SPNEGO-based Kerberos and NTLM HTTP Authentication in Windows** as specified in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). For more information on SPNEGO see [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md).
 
 <a id="Section_2.2"></a>
 ## 2.2 Protocol Summary
@@ -539,8 +539,8 @@ The following table provides a comprehensive list of the member protocols of Con
 | - | **Content Retrieval** | - |
 | **Peer Content Caching and Retrieval: Retrieval Protocol** | Content in the form of blocks is transferred by using HTTP, with the message format, as described in [MS-PCCRR]. | [MS-PCCRR] |
 | - | **Authentication** | - |
-| **Transport Layer Security (TLS)** | Hosted server authentication uses HTTP/HTTPS for secure transport of hosted content, as described in [MS-PCHC].<6> [MS-TLSP](#Section_2.9) describes the Windows implementation of TLS. | [MS-TLSP] |
-| **RFC 4559** | Client authentication, as described in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). When a hosted cache server is used, SPNEGO HTTP client authentication can be enabled. For more information on SPNEGO see [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9). | [RFC4559] |
+| **Transport Layer Security (TLS)** | Hosted server authentication uses HTTP/HTTPS for secure transport of hosted content, as described in [MS-PCHC].<6> [MS-TLSP](../MS-TLSP/MS-TLSP.md) describes the Windows implementation of TLS. | [MS-TLSP] |
+| **RFC 4559** | Client authentication, as described in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483). When a hosted cache server is used, SPNEGO HTTP client authentication can be enabled. For more information on SPNEGO see [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md). | [RFC4559] |
 
 <a id="Section_2.3"></a>
 ## 2.3 Environment
@@ -605,7 +605,7 @@ The following assumptions and preconditions have to be satisfied for the Content
 - A [**PeerDist**](#gt_aa8b8ff4-165d-4e62-80b5-0ba0a8c8c49f)-capable (see [MS-PCCRTP](../MS-PCCRTP/MS-PCCRTP.md)) web server is installed and configured on the [**content server**](#gt_content-server) for HTTP caching.
 - A PeerDist-capable (see [MS-PCCRTP]) web browser or Background Intelligent Transfer Service (BITS) client is installed on client computers for HTTP caching.
 - The Content Caching and Retrieval components ([**BranchCache**](#gt_branchcache)) are installed on the computers involved.
-**Authentication Services**: Authentication Services, as described in [MS-AUTHSOD](#Section_2.1), are available to all file clients and File Services.
+**Authentication Services**: Authentication Services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all file clients and File Services.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and correctly configured.
 
@@ -631,7 +631,7 @@ The actors that participate in the Content Caching and Retrieval protocols are:
 
 **Content client**: The content client implements client-side protocol components and consumes the File Services that are offered by the content server. The content client can be referred to by using the qualifier "SMB2.1", "HTTP", or "BITS" when it is necessary to distinguish client instances. The content client is internal to the Content Caching and Retrieval protocols. A content client can additionally act as a [**distributed cache**](#gt_distributed-cache) peer.
 
-**Content server**: The content server's interest is to provide and maintain a secure and consistent File Access Service, as described in [MS-FASOD](#Section_2.1), and to provide content [**metadata**](#gt_metadata) as part of Content Caching and Retrieval.
+**Content server**: The content server's interest is to provide and maintain a secure and consistent File Access Service, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md), and to provide content [**metadata**](#gt_metadata) as part of Content Caching and Retrieval.
 
 **Hosted cache server**: The hosted cache server's interest is to cache content and to receive metadata about the availability of content [**segments**](#gt_segment) and [**blocks**](#gt_block), and then, as required, to download the segments and blocks from clients that have the relevant data. Later, when another client requests the content through a secure mechanism, the content can be retrieved from the hosted cache rather than from a content server.
 
@@ -869,7 +869,7 @@ The following preconditions have to be satisfied for successful operation:
 
 **Note** Domain configuration is not a requirement but can be used.
 
-**Authentication services**: Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers.
+**Authentication services**: Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and configured.
 
@@ -891,7 +891,7 @@ The following preconditions have to be satisfied for successful operation:
 
 - The user requests the application to read a file.
 - The application establishes an HTTP connection to the content server.
-- The content server authenticates the user, if required, through the mechanisms of Authentication Services Protocols, as described in [MS-AUTHSOD](#Section_2.1).
+- The content server authenticates the user, if required, through the mechanisms of Authentication Services Protocols, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The application performs an HTTP GET request, as described in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), with PeerDist encoding as described in [MS-PCCRTP](../MS-PCCRTP/MS-PCCRTP.md).
 - The content server checks the authorization of the user to perform the action, if required, as described in [MS-AUTHSOD].
 - The content server retrieves metadata (block hashes, segment hashes, and a private segment key) for the data as described in [MS-PCCRC](../MS-PCCRC/MS-PCCRC.md).
@@ -910,7 +910,7 @@ The following preconditions have to be satisfied for successful operation:
 
 **Note** Domain configuration is not a requirement.
 
-**Authentication services**: Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers.
+**Authentication services**: Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and configured.
 
@@ -932,7 +932,7 @@ The following preconditions have to be satisfied for successful operation:
 
 - The user requests the application to read a file.
 - The application establishes an HTTP connection to the content server.
-- The content server authenticates the user, if required, through the mechanisms of Authentication Services Protocols as described in[MS-AUTHSOD](#Section_2.1).
+- The content server authenticates the user, if required, through the mechanisms of Authentication Services Protocols as described in[MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The application performs an HTTP GET request, as described in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), with added custom headers that are described in [MS-PCCRTP](../MS-PCCRTP/MS-PCCRTP.md) extensions.
 - The content server checks the authorization of the user to perform the action [MS-AUTHSOD], if required.
 - The content server retrieves metadata (block hashes, segment hashes, and a private segment key) for the data as described in [MS-PCCRC](../MS-PCCRC/MS-PCCRC.md).
@@ -951,7 +951,7 @@ The following preconditions have to be satisfied for Background Intelligent Tran
 
 **Note** Domain configuration is not a requirement.
 
-**Authentication services**: Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers.
+**Authentication services**: Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and correctly configured.
 
@@ -982,7 +982,7 @@ The actors and their associated interests are as follows:
 
 **Content client**: The content client's interest is to use client-side protocol components and consume the File Services that are offered by the content server and to offer received [**content**](#gt_content) to the [**hosted cache**](#gt_hosted-cache) server.
 
-**Content server**: The content server's interest in this use case is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](#Section_2.1), and to provide content [**metadata**](#gt_metadata).
+**Content server**: The content server's interest in this use case is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md), and to provide content [**metadata**](#gt_metadata).
 
 **Hosted cache server**: The hosted cache server's interest is to provide two mechanisms: one to query for the availability of certain content and the other to retrieve content from a content client.
 
@@ -994,7 +994,7 @@ The actors and their associated interests are as follows:
 - The content client computes [**segment identifiers (HoHoDk)**](#gt_5cb5fb6e-1fa5-4b2e-939d-aa1295f3fbc9) for the data.
 - The content client queries the [**hosted cache**](#gt_hosted-cache) server for the availability of [**blocks**](#gt_block) from the target [**segments**](#gt_segment) by using the Peer Content Caching and Retrieval: Retrieval Protocol as described in [MS-PCCRR](../MS-PCCRR/MS-PCCRR.md).
 - The hosted cache server indicates that it does not have the required blocks as described in [MS-PCCRR].
-- The content client retrieves the [**content**](#gt_content) from the content server by using the mechanism as described in [MS-FASOD](#Section_2.1).
+- The content client retrieves the [**content**](#gt_content) from the content server by using the mechanism as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md).
 - The retrieved data is placed in the local cache of the content client computer.
 - The content client retrieves the data from the local cache and returns it to the application.
 - The application delivers the file contents to the user.
@@ -1018,7 +1018,7 @@ The following preconditions have to be satisfied for [**hosted cache**](#gt_host
 
 **Note** Domain configuration is not a requirement but can be used.
 
-**Authentication services**: Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers.
+**Authentication services**: Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and correctly configured.
 
@@ -1046,7 +1046,7 @@ The actors and their associated interests are as follows:
 
 **Content client**: The content client's interest is to use client-side protocol components and consume the file services that are offered by the content server and to offer received content to the hosted cache server.
 
-**Content server**: The content server's interest in this use case is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](#Section_2.1), and to provide content [**metadata**](#gt_metadata).
+**Content server**: The content server's interest in this use case is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md), and to provide content [**metadata**](#gt_metadata).
 
 **Hosted cache server**: The hosted cache server's interest is to provide two mechanisms: one for to query for the availability of certain content and the other to retrieve content from a content client.
 
@@ -1077,7 +1077,7 @@ Note that the specific URLs (that is, \\server\share\file and \\192.168.0.3\shar
 
 **Note** Domain configuration is not a requirement but can be used.
 
-**Authentication services**: Appropriate authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers. Domain membership is not a requirement for clients and servers.
+**Authentication services**: Appropriate authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers. Domain membership is not a requirement for clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and correctly configured.
 
@@ -1105,7 +1105,7 @@ The actors and their associated interests are as follows:
 
 **Content Client**: The content client's interest is to use client-side protocol components and consume the File Services that are offered by the content server.
 
-**Content Server**: The content server's interest in this use case is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](#Section_2.1), and to provide content metadata.
+**Content Server**: The content server's interest in this use case is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md), and to provide content metadata.
 
 **Distributed Cache Peers**: A distributed cache peer's interest is to provide two mechanisms: one to respond to broadcasts for cached content and the other to deliver the cached content.
 
@@ -1138,7 +1138,7 @@ The following preconditions have to be satisfied for [**distributed cache**](#gt
 
 **Note** Domain configuration is not a requirement but can be used.
 
-**Authentication services**: Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers.
+**Authentication services**: Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and correctly configured.
 
@@ -1166,7 +1166,7 @@ The actors and their associated interests are as follows:
 
 **Content client**: The content client's interest is to use client-side protocol components and to consume the file services that are offered by the content server.
 
-**Content server**: The content server's interest is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](#Section_2.1), and to provide content metadata by using the SMB 2.1 or 3.x protocol as transport [MS-SMB2](../MS-SMB2/MS-SMB2.md).
+**Content server**: The content server's interest is to provide and maintain a secure and consistent File Service, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md), and to provide content metadata by using the SMB 2.1 or 3.x protocol as transport [MS-SMB2](../MS-SMB2/MS-SMB2.md).
 
 **Distributed cache peers**: A distributed cache peer's interest is to respond to broadcasts for cached content and to deliver the cached content.
 
@@ -1201,7 +1201,7 @@ A prior client on the LAN has retrieved the data, which enables some or all of t
 
 **Note** Domain configuration is not a requirement but can be used.
 
-**Authentication services**: Authentication services, as described in [MS-AUTHSOD](#Section_2.1), are available to all clients and servers.
+**Authentication services**: Authentication services, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md), are available to all clients and servers.
 
 **Network configuration**: For system components that are running on different computers to communicate, the network services and infrastructure are functional and correctly configured.
 
@@ -1237,7 +1237,7 @@ A content client that fails to find content on a hosted cache server is not cons
 <a id="Section_2.7.2"></a>
 ### 2.7.2 Internal Failures
 
-The Content Caching and Retrieval protocols depend on the File Access Services, which are not defended against internal state failures other than as described in [MS-FASOD](#Section_2.1) and the specifications of its member protocols.
+The Content Caching and Retrieval protocols depend on the File Access Services, which are not defended against internal state failures other than as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md) and the specifications of its member protocols.
 
 <a id="Section_2.7.3"></a>
 ### 2.7.3 System Configuration Corruption or Unavailability
@@ -1560,7 +1560,7 @@ The following examples describe two different methods of metadata retrieval and 
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Reading a File Using SMB 2.1or 3.x as Metadata Channel in Distributed Cache Mode (Cached Content Available)
 
-This example includes the following use cases: Configuring SMB 2.1 or 3.x Content Server Caching (section [2.5.4.1.1](#Section_2.5.4.1.1.1)), Configuring Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3)), Using SMB 2.1 or 3.x Metadata Retrieval (section [2.5.4.3.1](#Section_2.5.4.3.1)), and Content Discovery and Retrieval (section [2.5.4.4.4](#Section_2.5.4.4.4)).
+This example includes the following use cases: Configuring SMB 2.1 or 3.x Content Server Caching (section [2.5.4.1.1](#Section_2.5.4.1.1)), Configuring Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3)), Using SMB 2.1 or 3.x Metadata Retrieval (section [2.5.4.3.1](#Section_2.5.4.3.1)), and Content Discovery and Retrieval (section [2.5.4.4.4](#Section_2.5.4.4.4)).
 
 The SMB 2.1 or 3.x protocol plays two distinct roles. The first role is to act as a member of the File Access system by providing the usual file-sharing resources between machines. The second role is to act as a transport for metadata from a content server to a content client, which enables the content client to participate in Content Caching and Retrieval.
 
@@ -1605,7 +1605,7 @@ Figure 10: SMB 2.1 or 3.x read file stages and distributed mode discovery and re
 <a id="Section_3.2"></a>
 ## 3.2 Example 2: Reading a File Using HTTP as the Metadata Channel in Hosted Cache Mode
 
-This example includes the following use cases: Configure HTTP Content Server Caching (section [2.5.4.1.2](#Section_2.5.4.1.2)), Configure a Hosted Cache Server (section [2.5.4.1.4](#Section_2.5.4.1.4)), Configure Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3)), HTTP Metadata Retrieval (section [2.5.4.3.2](#Section_2.5.4.3.2.1)), Content Discovery and Retrieval (cached data unavailable) (section [2.5.4.4.1](#Section_2.5.4.4.1)), and Content Discovery and Retrieval with Hosted Cache (Cached Data Available) (section [2.5.4.4.2](#Section_2.5.4.4.2)).
+This example includes the following use cases: Configure HTTP Content Server Caching (section [2.5.4.1.2](#Section_2.5.4.1.2)), Configure a Hosted Cache Server (section [2.5.4.1.4](#Section_2.5.4.1.4)), Configure Content Client Caching Mode (section [2.5.4.1.3](#Section_2.5.4.1.3)), HTTP Metadata Retrieval (section [2.5.4.3.2](#Section_2.5.4.3.2)), Content Discovery and Retrieval (cached data unavailable) (section [2.5.4.4.1](#Section_2.5.4.4.1)), and Content Discovery and Retrieval with Hosted Cache (Cached Data Available) (section [2.5.4.4.2](#Section_2.5.4.4.2)).
 
 In this example, the HTTP protocol plays two distinct roles. The first role is to act in the usual manner as a file retrieval protocol. The second role is through the use of PeerDist, as described in [MS-PCCRTP](../MS-PCCRTP/MS-PCCRTP.md), to act as a transport for metadata from a content server to a content client, which allows the content client to participate in the initial stages of Content Caching and Retrieval.
 
@@ -1683,7 +1683,7 @@ Server: Microsoft-HTTPAPI/2.0
 
 The content client (Peer1) and hosted cache server use the mechanisms as described in [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483), which are based on GSS-API [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). The exact number of packets that are exchanged during client authentication depends on the authentication mechanism<19> and whether the authentication is successful. In any case, if authentication fails for any reason, the content client (Peer1) cannot offer content to the hosted cache server. In this example, a successful case of client authentication with Kerberos [MS-KILE](../MS-KILE/MS-KILE.md) as the authentication mechanism is covered.
 
-- The content client (Peer1), on receipt of the HTTP 401 (Unauthorized) response, is expected to repeat the previous POST message that passes an HTTP Authorization header line. In this example, the content client passes the GSS-API SPNEGO token that contains the Kerberos token as the optimistic token in the Authorization header. For information on SPNEGO see [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9).
+- The content client (Peer1), on receipt of the HTTP 401 (Unauthorized) response, is expected to repeat the previous POST message that passes an HTTP Authorization header line. In this example, the content client passes the GSS-API SPNEGO token that contains the Kerberos token as the optimistic token in the Authorization header. For information on SPNEGO see [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md).
 - The hosted cache server verifies the Authorization header, which is received in the previous step, and authenticates the content client (Peer1). After authentication, message processing proceeds as the PCHC initial offer of content is made to the hosted cache server, which then responds with a response code of 1 (see [MS-PCHC] section 2.2.2.2) that indicates that it will accept block hashes.
 - The content client responds by sending a **SEGMENT_INFO_MESSAGE** message as described in [MS-PCHC] section 2.2.1.4. This message contains the [**segment hash of data (HoD)**](#gt_segment-hash-of-data-hod) for the previously offered segment and the range of block hashes in the segment.
 - After the hosted cache server obtains the **SEGMENT_INFO_MESSAGE** message, it responds with an HTTP 200 (OK) response.

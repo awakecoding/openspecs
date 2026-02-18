@@ -119,7 +119,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-GPCAP] Microsoft Corporation, "[Group Policy: Central Access Policies Protocol Extension](../MS-GPCAP/MS-GPCAP.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -237,7 +237,7 @@ ULONG Entries;
 
 **Entries:** The number of elements in the SidInfo array.
 
-**SidInfo:** A pointer to an array of LSAPR_SID_INFORMATION structures, as defined in [MS-LSAT](#Section_5) section 2.2.17.
+**SidInfo:** A pointer to an array of LSAPR_SID_INFORMATION structures, as defined in [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 2.2.17.
 
 <a id="Section_3"></a>
 # 3 Protocol Details

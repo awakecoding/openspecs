@@ -280,7 +280,7 @@ OCSPResponseStatus
 
 ResponseBytes
 
-Detailed server processing information is in section [3.2](#Section_1.3)
+Detailed server processing information is in section [3.2](#Section_3.2)
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -416,7 +416,7 @@ The client determines that it has to validate the [**revocation**](#gt_revocatio
 Figure 2: Revocation-checking process
 
 - The OCSP Extensions client generates an OCSP [**request**](#gt_request) as specified in section [3.1.5](#Section_3.1.5) and submits the request to the [**responder**](#gt_responder).
-- The responder inspects the requests and generates a [**response**](#gt_response) as specified in section [3.2.5](#Section_3.1.5).
+- The responder inspects the requests and generates a [**response**](#gt_response) as specified in section [3.2.5](#Section_3.2.5).
 <a id="Section_5"></a>
 # 5 Security
 

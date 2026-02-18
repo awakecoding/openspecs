@@ -536,7 +536,7 @@ This document uses the following terms:
 **message tag (MTAG)**: A message that is sent between participants in the context of connections.
 
 <a id="gt_oletx"></a>
-**OleTx**: A comprehensive distributed transaction manager processing protocol that uses the protocols specified in the following document(s): [MS-CMPO](#Section_2.1), [MS-CMP](../MS-CMP/MS-CMP.md), [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md), [MS-DTCM](../MS-DTCM/MS-DTCM.md), [MS-DTCO](../MS-DTCO/MS-DTCO.md), [MC-DTCXA](#Section_e4c50686e0134cf69515a0e821eb5ed9), [MS-TIPP](../MS-TIPP/MS-TIPP.md), and [MS-CMOM](../MS-CMOM/MS-CMOM.md).
+**OleTx**: A comprehensive distributed transaction manager processing protocol that uses the protocols specified in the following document(s): [MS-CMPO](../MS-CMPO/MS-CMPO.md), [MS-CMP](../MS-CMP/MS-CMP.md), [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md), [MS-DTCM](../MS-DTCM/MS-DTCM.md), [MS-DTCO](../MS-DTCO/MS-DTCO.md), [MC-DTCXA](#Section_e4c50686e0134cf69515a0e821eb5ed9), [MS-TIPP](../MS-TIPP/MS-TIPP.md), and [MS-CMOM](../MS-CMOM/MS-CMOM.md).
 
 <a id="gt_one-pipe"></a>
 **one pipe**: A model of communication between an [**XA Resource Manager Bridge**](#gt_xa-resource-manager-bridge), an [**XA Resource Manager Bridge Facet**](#gt_xa-resource-manager-bridge-facet), a [**Transaction Manager**](#gt_transaction-manager), and an [**XA Resource Manager**](#gt_xa-resource-manager). For more information, see the description in section 1.3.1.2.
@@ -669,7 +669,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** There is a charge to download the specification.
 
-[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](#Section_2.1)".
+[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](../MS-CMPO/MS-CMPO.md)".
 
 [MS-CMP] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Multiplexing Protocol](../MS-CMP/MS-CMP.md)".
 
@@ -714,7 +714,7 @@ Figure 1: Software components of a typical distributed transaction
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 OleTx Resource Managers Enlisting with XA Transaction Managers
 
-The communications between an XA [**Superior Transaction Manager**](#gt_superior-transaction-manager) and an XA [**Subordinate Transaction Manager**](#gt_subordinate-transaction-manager) [**Facet**](#gt_facet) specified in this document enable OleTx Resource Managers to participate in [**transactions**](#gt_transaction) coordinated by [**XA Transaction Managers**](#gt_xa-transaction-manager). The XA Transaction Manager component in the following diagram corresponds to the [**TM**](#gt_transaction-manager) software component defined in [[XOPEN-DTP]](https://go.microsoft.com/fwlink/?LinkId=95800). In this protocol it represents the higher-layer business logic that signals events on the XA Superior Transaction Manager component (see section [3.3](../MS-DTCO/MS-DTCO.md)). The XA Superior Transaction Manager component acts as a [**Resource Manager**](#gt_resource-manager-rm) as defined in [XOPEN-DTP]. A subordinate transaction manager software component with an XA Subordinate Transaction Manager Facet facilitates this scenario and bridges the [**XA Protocol**](#gt_xa-protocol) to the [**OleTx**](#gt_oletx) protocol defined in [MS-DTCO](../MS-DTCO/MS-DTCO.md). The following diagram shows components involved in this usage scenario.
+The communications between an XA [**Superior Transaction Manager**](#gt_superior-transaction-manager) and an XA [**Subordinate Transaction Manager**](#gt_subordinate-transaction-manager) [**Facet**](#gt_facet) specified in this document enable OleTx Resource Managers to participate in [**transactions**](#gt_transaction) coordinated by [**XA Transaction Managers**](#gt_xa-transaction-manager). The XA Transaction Manager component in the following diagram corresponds to the [**TM**](#gt_transaction-manager) software component defined in [[XOPEN-DTP]](https://go.microsoft.com/fwlink/?LinkId=95800). In this protocol it represents the higher-layer business logic that signals events on the XA Superior Transaction Manager component (see section [3.3](#Section_3.3)). The XA Superior Transaction Manager component acts as a [**Resource Manager**](#gt_resource-manager-rm) as defined in [XOPEN-DTP]. A subordinate transaction manager software component with an XA Subordinate Transaction Manager Facet facilitates this scenario and bridges the [**XA Protocol**](#gt_xa-protocol) to the [**OleTx**](#gt_oletx) protocol defined in [MS-DTCO](../MS-DTCO/MS-DTCO.md). The following diagram shows components involved in this usage scenario.
 
 ![OleTx Resource Managers enlisting with XA Transaction Managers topology](media/image2.png)
 
@@ -735,7 +735,7 @@ Figure 3: XA Superior Transaction enlistment and completion
 
 The protocols involved are specified as follows:
 
-- The protocol between the XA [**Superior Transaction Manager**](#gt_superior-transaction-manager) and the XA [**Subordinate Transaction Manager**](#gt_subordinate-transaction-manager) [**Facet**](#gt_facet) is specified by this document in [2](#Section_1.3) and [3](#Section_3).
+- The protocol between the XA [**Superior Transaction Manager**](#gt_superior-transaction-manager) and the XA [**Subordinate Transaction Manager**](#gt_subordinate-transaction-manager) [**Facet**](#gt_facet) is specified by this document in [2](#Section_2) and [3](#Section_3).
 - The protocol between the XA Subordinate Transaction Manager Facet and the Core Transaction Manager Facet is specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md).
 - The protocol between the OleTx Resource Manager and the [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet) is specified in [MS-DTCO].
 - The protocol between the [**application**](#gt_application) and the OleTx Resource Manager is implementation-specific.
@@ -760,7 +760,7 @@ Figure 4: XA Superior Transaction recovery
 
 The protocols involved are specified as follows:
 
-- The protocol between the XA [**Superior Transaction Manager**](#gt_superior-transaction-manager) and the XA [**subordinate transaction manager**](#gt_subordinate-transaction-manager) Facet is specified by this document in section [2](#Section_1.3) and section [3](#Section_3).
+- The protocol between the XA [**Superior Transaction Manager**](#gt_superior-transaction-manager) and the XA [**subordinate transaction manager**](#gt_subordinate-transaction-manager) Facet is specified by this document in section [2](#Section_2) and section [3](#Section_3).
 - The protocol between the XA Subordinate Transaction Manager Facet and the [**Core Transaction Manager Facet**](#gt_core-transaction-manager-facet) is specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md).
 The interface between the XA Transaction Manager and the XA Superior Transaction Manager is specified in [[XOPEN-DTP]](https://go.microsoft.com/fwlink/?LinkId=95800), with the addition of the implementation-specific **XA Lookup** event.
 
@@ -834,7 +834,7 @@ Figure 8: Two-pipe XA Resource Manager registration and unregistration
 
 The protocols involved are specified as follows:
 
-- The protocol between the XA Resource Manager Bridge and the [**XA Resource Manager Bridge Facet**](#gt_xa-resource-manager-bridge-facet) is specified by this document in sections [2](#Section_1.3) and [3](#Section_3).
+- The protocol between the XA Resource Manager Bridge and the [**XA Resource Manager Bridge Facet**](#gt_xa-resource-manager-bridge-facet) is specified by this document in sections [2](#Section_2) and [3](#Section_3).
 - The [**XA Interface**](#gt_xa-interface) between the XA Resource Manager Bridge Facet and the [**XA Resource Manager**](#gt_xa-resource-manager) is implemented by the XA Resource Manager in a third-party component that is loaded by the XA Resource Manager Bridge Facet. The **XA Interface** adheres to the API defined in the [[XOPEN-DTP]](https://go.microsoft.com/fwlink/?LinkId=95800) specification, with the exception that **ax_reg** and **ax_unreg** operations are not supported by the transaction manager and are not used by the extensions defined in this protocol. The **XA Interface** implementation might generate messages that are implementation-specific and beyond the purview of this document.
 - The protocol between the [**application**](#gt_application) and the XA Resource Manager Bridge is implementation-specific.
 After the third-party component is loaded, the third-party component name is written to the **XA DLL Name** Abstract Data Model element and is used as the *DLL Name* parameter in the XA Resource Manager registration and unregistration.
@@ -860,7 +860,7 @@ Figure 9: Two-pipe XA Resource Manager Transaction enlistment and completion
 
 The protocols involved are specified as follows:
 
-- The protocol between the [**XA Resource Manager Bridge**](#gt_xa-resource-manager-bridge) and the XA Resource Manager Bridge Facet is specified by this document in section [2](#Section_1.3) and section [3](#Section_3).
+- The protocol between the [**XA Resource Manager Bridge**](#gt_xa-resource-manager-bridge) and the XA Resource Manager Bridge Facet is specified by this document in section [2](#Section_2) and section [3](#Section_3).
 - The protocol between the XA Resource Manager Bridge Facet and the Core Transaction Manager Facet is specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md).
 - The protocol between the [**Application**](#gt_application) and the XA Resource Manager Bridge is implementation-specific.
 - The [**XA Protocol**](#gt_xa-protocol) between the XA Resource Manager Bridge Facet and the [**XA Resource Manager**](#gt_xa-resource-manager) is implemented by the XA Resource Manager and is implementation-specific. However, the API adheres to the [[XOPEN-DTP]](https://go.microsoft.com/fwlink/?LinkId=95800) specification, with the exception that **ax_reg** and **ax_unreg** operations are not supported by the [**transaction manager**](#gt_transaction-manager) and are not used by the extensions defined in this document.
@@ -890,7 +890,7 @@ Figure 10: One-pipe XA Resource Manager registration and unregistration
 
 The protocols involved are specified as follows:
 
-- The protocol between the XA Resource Manager Bridge and the XA Resource Manager Bridge Facet is specified by this document in section [2](#Section_1.3) and section [3](#Section_3).
+- The protocol between the XA Resource Manager Bridge and the XA Resource Manager Bridge Facet is specified by this document in section [2](#Section_2) and section [3](#Section_3).
 - The [**XA Protocol**](#gt_xa-protocol) between the XA Resource Manager Bridge Facet and the [**XA Resource Manager**](#gt_xa-resource-manager) is implemented by the XA Resource Manager and is implementation-specific. However, the API follows the [[XOPEN-DTP]](https://go.microsoft.com/fwlink/?LinkId=95800) specification, with the exception that **ax_reg** and **ax_unreg** operations are not supported by the transaction manager and are not used by the extensions defined in this document.
 - The protocol between the [**application**](#gt_application) and the XA Resource Manager Bridge is implementation-specific.
 To register an XA Resource Manager, an application passes the XA Resource Manager Bridge a **DLL Name**, a **Data Source Name**, and an [**RM**](#gt_resource-manager-rm) **cookie**. The DLL name is used by the XA Resource Manager Bridge Facet to load the **xa_switch** of the XA Resource Manager. The **Data Source Name**, an ASCII string, is passed to the **xa_open** and **xa_close** calls made on this XA Resource Manager. The **RM cookie** is used by the application to identify the XA Resource Manager in future calls.
@@ -989,11 +989,11 @@ This protocol extends the protocol described in [MS-DTCO](../MS-DTCO/MS-DTCO.md)
 - This protocol
 - [MS-DTCO]
 - [MS-CMP](../MS-CMP/MS-CMP.md)
-- [MS-CMPO](#Section_2.1)
+- [MS-CMPO](../MS-CMPO/MS-CMPO.md)
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-This protocol requires that all participating roles possess implementations of the MSDTC Connection Manager: OleTx Transports Protocol (as specified in [MS-CMPO](#Section_2.1)) and MSDTC Connection Manager: OleTx Multiplexing Protocol (as specified in [MS-CMP](../MS-CMP/MS-CMP.md)). This protocol also requires that an implementation of the protocol specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) is accessible using the protocols specified in [MS-CMPO] and [MS-CMP] and an implementation-specific communication mechanism between facets as outlined in [MS-DTCO] (section 3.2.1.4).
+This protocol requires that all participating roles possess implementations of the MSDTC Connection Manager: OleTx Transports Protocol (as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md)) and MSDTC Connection Manager: OleTx Multiplexing Protocol (as specified in [MS-CMP](../MS-CMP/MS-CMP.md)). This protocol also requires that an implementation of the protocol specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) is accessible using the protocols specified in [MS-CMPO] and [MS-CMP] and an implementation-specific communication mechanism between facets as outlined in [MS-DTCO] (section 3.2.1.4).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -1002,7 +1002,7 @@ This protocol applies to scenarios where an [**XA Resource Manager**](#gt_xa-res
 
 This protocol applies to scenarios where an [**XA Transaction Manager**](#gt_xa-transaction-manager) and an implementation of the protocol specified by [MS-DTCO] are available.
 
-This protocol requires network topologies where the [MS-CMPO](#Section_2.1) and [MS-CMP](../MS-CMP/MS-CMP.md) protocols constitute a viable network transport for establishing many short-lived [**connection**](#gt_connection) exchanges that accomplish specific tasks.
+This protocol requires network topologies where the [MS-CMPO](../MS-CMPO/MS-CMPO.md) and [MS-CMP](../MS-CMP/MS-CMP.md) protocols constitute a viable network transport for establishing many short-lived [**connection**](#gt_connection) exchanges that accomplish specific tasks.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -1075,7 +1075,7 @@ This value MUST be one of the following values.
 
 **dwConnectionId (4 bytes):** A 4-byte integer value that MUST contain the unique identifier for the associated [**connection**](#gt_connection).
 
-**dwUserMsgType (4 bytes):** This field contains the message type identifier. Each MTAG that is defined in this section MUST specify a distinct value for this field for a specified [connection type](#Section_2.2.3).
+**dwUserMsgType (4 bytes):** This field contains the message type identifier. Each MTAG that is defined in this section MUST specify a distinct value for this field for a specified [connection type](#Section_2.2.2.1).
 
 **dwcbVarLenData (4 bytes):** An unsigned 4-byte integer value that MUST contain the size, in bytes, of the message buffer that contains the **MESSAGE_HEADER** structure, minus the size, in bytes, of the **MESSAGE_HEADER** structure itself.
 
@@ -1191,7 +1191,7 @@ CONNTYPE_XAUSER_XACT_MIGRATE2 = 0x00000052
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Versioning
 
-The following table shows version-specific aspects for [Connection Types (section 2.2.2.1)](#Section_2.2.3) that are relevant to XA Resource Manager Bridges and XA Resource Manager Bridge Facets. This table includes Connection Types and messages that are supported on certain versions as well as messages whose size is version-specific. If a Connection Type or message that is relevant to XA Resource Manager Bridge and XA Resource Manager Bridge Facet is omitted from this table, it is not version-specific and MUST be supported on all versions.
+The following table shows version-specific aspects for [Connection Types (section 2.2.2.1)](#Section_2.2.2.1) that are relevant to XA Resource Manager Bridges and XA Resource Manager Bridge Facets. This table includes Connection Types and messages that are supported on certain versions as well as messages whose size is version-specific. If a Connection Type or message that is relevant to XA Resource Manager Bridge and XA Resource Manager Bridge Facet is omitted from this table, it is not version-specific and MUST be supported on all versions.
 
 | Version-specific aspect | Version 1 | Version 2 | Version 4 | Version 5 | Version 6 |
 | --- | --- | --- | --- | --- | --- |
@@ -1611,7 +1611,7 @@ packet-beta
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 Versioning
 
-The following table shows version-specific aspects for [Connection Types](#Section_2.2.3) that are relevant to [XA Superior Transaction Managers](#Section_2.2.4) and [XA Subordinate Transaction Manager Facets](#Section_1.3.2.3.2). This table includes Connection Types and messages that are supported on certain versions as well as messages whose size is version-specific. If a connection type or message that is relevant to XA Superior Transaction Managers and XA Subordinate Transaction Manager Facets is omitted from this table, it is not version-specific and MUST be supported on all versions.<2>
+The following table shows version-specific aspects for [Connection Types](#Section_2.2.2.1) that are relevant to [XA Superior Transaction Managers](#Section_2.2.4) and [XA Subordinate Transaction Manager Facets](#Section_2.2.4). This table includes Connection Types and messages that are supported on certain versions as well as messages whose size is version-specific. If a connection type or message that is relevant to XA Superior Transaction Managers and XA Subordinate Transaction Manager Facets is omitted from this table, it is not version-specific and MUST be supported on all versions.<2>
 
 | Version-specific aspect | Version 1 | Version 2 | Version 4 | Version 5 | Version 6 |
 | --- | --- | --- | --- | --- | --- |
@@ -1850,7 +1850,7 @@ packet-beta
 
 The **CONNTYPE_XAUSER_XACT_BRANCH_START** connection type is used to start a [**tightly-coupled**](#gt_tight-coupling) [**XA Transaction Branch**](#gt_xa-transaction-branch).
 
-For more information about this connection type as an initiator, see section [3.3.5.5](#Section_3.3.5.5), and as an acceptor, see section [3.2.5.5](#Section_2.2.4.4).
+For more information about this connection type as an initiator, see section [3.3.5.5](#Section_3.3.5.5), and as an acceptor, see section [3.2.5.5](#Section_3.2.5.5).
 
 The same set of message types in section [2.2.4.3](#Section_2.2.4.3) are sent on this connection type.
 
@@ -2046,7 +2046,7 @@ packet-beta
 <a id="Section_2.2.4.7"></a>
 #### 2.2.4.7 CONNTYPE_XAUSER_XACT_MIGRATE
 
-The **CONNTYPE_XAUSER_XACT_MIGRATE** connection type is used to migrate an [**XA Transaction Branch**](#gt_xa-transaction-branch) between threads of control. In addition to the messages defined in this section, [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND (section 2.2.4.5.4)**](#Section_2.2.4.5.3) message is also sent on this connection type.
+The **CONNTYPE_XAUSER_XACT_MIGRATE** connection type is used to migrate an [**XA Transaction Branch**](#gt_xa-transaction-branch) between threads of control. In addition to the messages defined in this section, [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND (section 2.2.4.5.4)**](#Section_2.2.4.5.4) message is also sent on this connection type.
 
 For more information about this connection type as an initiator and as an acceptor, see section [3](#Section_3).
 
@@ -2210,9 +2210,9 @@ A participant MUST extend the definition of a connection object, as specified in
 - **State:** A state enumeration that represents the current state of the connection.
 A **State** enumeration MUST contain a set of values that represent specific states in a logical state machine. For a [**connection**](#gt_connection) type, these values represent the different states to which the connection's logical state machine is set during the lifetime of the connection.
 
-When a participant initiates or accepts a connection, the **State** field of the connection MUST be set initially to the Idle state. When the participant acting as an initiator signals the [**Disconnect Connection**](#Section_3.1.8.1) event the connection state MUST be set to Ended. When a participant is acting as an acceptor, the connection state is set to Ended as part of the [Connection Disconnected](#Section_3.5.5.2.5) event processing as specified in section 3.1.8.2.
+When a participant initiates or accepts a connection, the **State** field of the connection MUST be set initially to the Idle state. When the participant acting as an initiator signals the [**Disconnect Connection**](#Section_3.1.8.1) event the connection state MUST be set to Ended. When a participant is acting as an acceptor, the connection state is set to Ended as part of the [Connection Disconnected](#Section_3.1.8.2) event processing as specified in section 3.1.8.2.
 
-A participant MUST support both initiating and accepting multiple concurrent connections of any type inside the same [MS-DTCO](../MS-DTCO/MS-DTCO.md) session or different [MS-DTCO] sessions, as specified in [MS-CMPO](#Section_2.1). Consequently, a participant MUST support the existence of multiple instances of a single connection of the same type. A participant MUST also support initiating multiple concurrent sessions to a number of different endpoints.
+A participant MUST support both initiating and accepting multiple concurrent connections of any type inside the same [MS-DTCO](../MS-DTCO/MS-DTCO.md) session or different [MS-DTCO] sessions, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md). Consequently, a participant MUST support the existence of multiple instances of a single connection of the same type. A participant MUST also support initiating multiple concurrent sessions to a number of different endpoints.
 
 A participant MUST maintain the following data elements:
 
@@ -2278,7 +2278,7 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that the abstract data model can be implemented in a variety of ways. This protocol does not prescribe or advocate any specific implementation technique.
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST maintain all the data elements that are specified in section [3.1.1](#Section_3.1.1).
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST maintain all the data elements that are specified in section [3.1.1](#Section_3.1.1).
 
 The XA Subordinate Transaction Manager Facet MUST also maintain the following data elements:
 
@@ -2329,7 +2329,7 @@ The XA Subordinate Transaction Manager Facet MUST also maintain the following da
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Versioning
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST maintain the data that pertains to the branching functionality only on versions where the connection types **CONNTYPE_XAUSER_XACT_BRANCH_START** and **CONNTYPE_XAUSER_XACT_BRANCH_OPEN** are supported as specified in section [2.2.4.1](#Section_2.2.4.1). The following data elements, as specified in [3.2.1](#Section_3.2.1), are affected:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST maintain the data that pertains to the branching functionality only on versions where the connection types **CONNTYPE_XAUSER_XACT_BRANCH_START** and **CONNTYPE_XAUSER_XACT_BRANCH_OPEN** are supported as specified in section [2.2.4.1](#Section_2.2.4.1). The following data elements, as specified in [3.2.1](#Section_3.2.1), are affected:
 
 - **Wait For All XA Branch Prepares** flag
 - **XA Superior Enlistment Object**
@@ -2346,12 +2346,12 @@ The XA Subordinate Transaction Manager Facet MUST maintain the data that pertain
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 CONNTYPE_XAUSER_CONTROL Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the **CONNTYPE_XAUSER_CONTROL** connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the **CONNTYPE_XAUSER_CONTROL** connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Create Request](#Section_3.2.1.2.2)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.2.1"></a>
 ##### 3.2.1.2.1 Idle
 
@@ -2387,18 +2387,18 @@ Figure 12: CONNTYPE_XAUSER_CONTROL acceptor states
 <a id="Section_3.2.1.3"></a>
 #### 3.2.1.3 CONNTYPE_XAUSER_XACT_START Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_START](#Section_2.2.4.3) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_START](#Section_2.2.4.3) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Processing Start Request](#Section_3.2.1.6.2)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Processing Start Request](#Section_3.2.1.3.2)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.3.1"></a>
 ##### 3.2.1.3.1 Idle
 
 This is the initial state. The following event is processed in this state:
 
-- [Receiving an XAUSER_XACT_MTAG_START Message](#Section_3.2.5.5.1)
+- [Receiving an XAUSER_XACT_MTAG_START Message](#Section_3.2.5.2.1)
 <a id="Section_3.2.1.3.2"></a>
 ##### 3.2.1.3.2 Processing Start Request
 
@@ -2413,7 +2413,7 @@ The following events are processed in this state:
 
 The following event is processed in this state:
 
-- [Connection Disconnected (section 3.2.5.2.2)](#Section_3.5.5.2.5)
+- [Connection Disconnected (section 3.2.5.2.2)](#Section_3.2.5.2.2)
 <a id="Section_3.2.1.3.4"></a>
 ##### 3.2.1.3.4 Ended
 
@@ -2431,11 +2431,11 @@ Figure 13: CONNTYPE_XAUSER_XACT_START acceptor states
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 CONNTYPE_XAUSER_XACT_OPEN Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_OPEN](#Section_2.2.4.5) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_OPEN](#Section_2.2.4.5) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.4.1"></a>
 ##### 3.2.1.4.1 Idle
 
@@ -2473,11 +2473,11 @@ Figure 14: CONNTYPE_XAUSER_XACT_OPEN acceptor states
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 CONNTYPE_XAUSER_XACT_MIGRATE Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_MIGRATE](#Section_2.2.4.7) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_MIGRATE](#Section_2.2.4.7) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Migrate Request](#Section_3.2.1.5.2)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.5.1"></a>
 ##### 3.2.1.5.1 Idle
 
@@ -2507,17 +2507,17 @@ Figure 15: CONNTYPE_XAUSER_XACT_MIGRATE acceptor states
 <a id="Section_3.2.1.6"></a>
 #### 3.2.1.6 CONNTYPE_XAUSER_XACT_BRANCH_START Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_BRANCH_START](#Section_2.2.4.4) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_BRANCH_START](#Section_2.2.4.4) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.6.1"></a>
 ##### 3.2.1.6.1 Idle
 
 This is the initial state. The following events are processed in this state:
 
-- [Receiving an XAUSER_XACT_MTAG_START Message](#Section_3.2.5.5.1).
+- [Receiving an XAUSER_XACT_MTAG_START Message](#Section_3.2.5.2.1).
 <a id="Section_3.2.1.6.2"></a>
 ##### 3.2.1.6.2 Processing Start Request
 
@@ -2532,7 +2532,7 @@ The following events are processed in this state:
 
 The following event is processed in this state:
 
-- [Connection Disconnected (section 3.2.5.5.2)](#Section_3.5.5.2.5)
+- [Connection Disconnected (section 3.2.5.5.2)](#Section_3.2.5.5.2)
 <a id="Section_3.2.1.6.4"></a>
 ##### 3.2.1.6.4 Ended
 
@@ -2550,11 +2550,11 @@ Figure 16: CONNTYPE_XAUSER_XACT_BRANCH_START acceptor states
 <a id="Section_3.2.1.7"></a>
 #### 3.2.1.7 CONNTYPE_XAUSER_XACT_BRANCH_OPEN Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_BRANCH_OPEN](#Section_2.2.4.6) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the [CONNTYPE_XAUSER_XACT_BRANCH_OPEN](#Section_2.2.4.6) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.7.1"></a>
 ##### 3.2.1.7.1 Idle
 
@@ -2592,11 +2592,11 @@ Figure 17: CONNTYPE_ XAUSER_XACT_BRANCH_OPEN acceptor states
 <a id="Section_3.2.1.8"></a>
 #### 3.2.1.8 CONNTYPE_XAUSER_XACT_MIGRATE2 Acceptor States
 
-The [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST act as an acceptor for the [CONNTYPE_ XAUSER_XACT_MIGRATE2](#Section_2.2.4.8) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
+The [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST act as an acceptor for the [CONNTYPE_ XAUSER_XACT_MIGRATE2](#Section_2.2.4.8) connection type. In this role, the XA Subordinate Transaction Manager Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Migrate2 Request](#Section_3.2.1.8.2)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.2.1.8.1"></a>
 ##### 3.2.1.8.1 Idle
 
@@ -2640,11 +2640,11 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) is initialized:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) is initialized:
 
 - The **Wait For All XA Branch Prepares** flag is set to an implementation-specific value.
 - The XA Subordinate Transaction Manager Facet MUST examine the **Allow XA** flag on the Core Transaction Manager Facet specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1 and, if it is not set, perform the following:
-- For all of the connection types listed in section [3.2](../MS-CMP/MS-CMP.md), the XA Subordinate Transaction Manager Facet MUST refuse to accept incoming connections from remote machines as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
+- For all of the connection types listed in section [3.2](#Section_3.2), the XA Subordinate Transaction Manager Facet MUST refuse to accept incoming connections from remote machines as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the rejection **Reason** set to 0x80070005.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
 
@@ -2658,12 +2658,12 @@ None.
 
 This is an **XA Superior CMP Connection**.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 Receiving an XAUSER_CONTROL_MTAG_CREATE Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [**XAUSER_CONTROL_MTAG_CREATE**](#Section_2.2.4.2.1) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [**XAUSER_CONTROL_MTAG_CREATE**](#Section_2.2.4.2.1) message, it MUST perform the following actions:
 
 - If the connection state is Idle:
 - Set the connection state to [Processing Create Message](#Section_3.2.1.2.2).
@@ -2684,11 +2684,11 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Send an **XAUSER_CONTROL_MTAG_CREATED** message using the receiving connection.
 - Set the connection state to Active.
 - Set the **XA Superior Object** referenced by the **XA Superior CMP Connection** to the newly created **XA Superior Object**.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 Receiving an XAUSER_CONTROL_MTAG_RECOVER Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_CONTROL_MTAG_RECOVER](#Section_2.2.4.2.4) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_CONTROL_MTAG_RECOVER](#Section_2.2.4.2.4) message, it MUST perform the following actions:
 
 - If the connection state is Active, SHOULD check the following conditions:<6>
 - The **totalUOWsRequested** field of the message is less than or equal to an implementation-specific value and greater than 0x00000000.<7>
@@ -2728,11 +2728,11 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Otherwise:
 - Set the **ReplyFlags** field of the **XAUSER_CONTROL_MTAG_RECOVER_REPLY** message to XARECOVER_MORE_TO_COME.
 - Send the **XAUSER_CONTROL_MTAG_RECOVER_REPLY** message using the receiving connection.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Connection Disconnected
 
-When a [CONNTYPE_XAUSER_CONTROL](#Section_2.2.4.2) connection is disconnected, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+When a [CONNTYPE_XAUSER_CONTROL](#Section_2.2.4.2) connection is disconnected, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If **XA Superior Object** reference is set:
 - Decrement the **Open Count** field of the **XA Superior Object** referenced by the connection.
@@ -2747,15 +2747,15 @@ When a [CONNTYPE_XAUSER_CONTROL](#Section_2.2.4.2) connection is disconnected, t
 
 This is an **XA Superior Enlistment CMP Connection**.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in the section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in the section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 Receiving an XAUSER_XACT_MTAG_START Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [**XAUSER_XACT_MTAG_START**](#Section_2.2.4.3.1) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [**XAUSER_XACT_MTAG_START**](#Section_2.2.4.3.1) message, it MUST perform the following actions:
 
 - If the **State** field of the receiving XA Superior Enlistment CMP Connection is set to Idle:
-- Set the state of the connection to [Processing Start Request](#Section_3.2.1.6.2).
+- Set the state of the connection to [Processing Start Request](#Section_3.2.1.3.2).
 - If the [**transaction manager**](#gt_transaction-manager) does not have sufficient memory available to process the message, it MUST perform the following actions:
 - Send an **XAUSER_XACT_MTAG_START_NO_MEM** message (section [2.2.4.3.4](#Section_2.2.4.3.4)).
 - Set the connection state to Ended.
@@ -2782,7 +2782,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - The **Current Request CMP connection** field is set to the receiving connection.
 - If failed:
 - Send an **XAUSER_XACT_MTAG_START_NO_MEM** message using the connection.
-- Set the connection state to [Ended](#Section_3.2.1.7.4).
+- Set the connection state to [Ended](#Section_3.2.1.2.4).
 - Otherwise:
 - Create a new **GUID** as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460).
 - Attempt to create new [**transaction**](#gt_transaction) with the following settings:
@@ -2805,7 +2805,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Set the **Transaction** field of the **XA Superior Enlistment Object** to the newly-created transaction.
 - Signal the Create Superior Enlistment event on the Core Transaction Manager Facet with the following argument:
 - The **XA Superior Enlistment Object**.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 Connection Disconnected
 
@@ -2825,18 +2825,18 @@ When a [**CONNTYPE_XAUSER_XACT_START**](#Section_2.2.4.3) connection (section 2.
 
 This is an XA Superior Enlistment CMP Connection.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 Receiving an XAUSER_XACT_MTAG_OPEN Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [**XAUSER_XACT_MTAG_OPEN**](#Section_2.2.4.5.3) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [**XAUSER_XACT_MTAG_OPEN**](#Section_2.2.4.5.3) message, it MUST perform the following actions:
 
 - If the connection state is Idle:
-- Set the connection state to [Processing Open Request](#Section_3.4.1.2.2).
+- Set the connection state to [Processing Open Request](#Section_3.2.1.4.2).
 - Attempt to find an **XA Superior Object** in the **XA Superior Table** keyed by the **guidXaRm** field of the message.
 - If not found:
-- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message using the connection.
+- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message using the connection.
 - Set the connection state to Ended.
 - Otherwise:
 - Attempt to find **XA Superior Enlistment Object** in **XA Superior Enlistment Table** referenced by the **XA Superior Object** that meet both of the following criteria:
@@ -2851,11 +2851,11 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Set the **XA Superior Enlistment Object** referenced by the receiving XA Superior Enlistment CMP Connection Object to the located **XA Superior Enlistment Object**.
 - Send an **XAUSER_XACT_MTAG_OPENED** message with the following arguments:
 - [**Transaction Identifier**](#gt_transaction-identifier) of the **Transaction Object** referenced by the located **XA Superior Enlistment Object**.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.3.2"></a>
 ##### 3.2.5.3.2 Receiving an XAUSER_XACT_MTAG_PREPARE Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [**XAUSER_XACT_MTAG_PREPARE**](#Section_2.2.4.5.6) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [**XAUSER_XACT_MTAG_PREPARE**](#Section_2.2.4.5.6) message, it MUST perform the following actions:
 
 - If the connection state is set to Active and the State field of the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection is set to Active:
 - Set **Current Request CMP Connection** field of **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection to receiving connection.
@@ -2874,7 +2874,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 <a id="Section_3.2.5.3.3"></a>
 ##### 3.2.5.3.3 Receiving an XAUSER_XACT_MTAG_COMMIT Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [**XAUSER_XACT_MTAG_COMMIT**](#Section_2.2.4.5.2) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [**XAUSER_XACT_MTAG_COMMIT**](#Section_2.2.4.5.2) message, it MUST perform the following actions:
 
 - If the connection state is set to Active and the **State** field of the **XA Superior Enlistment Object** referenced by the **XA Superior Enlistment CMP Connection** is set to either Prepared or In Doubt:
 - Set the **Current Request CMP Connection** field of XA Superior Enlistment referenced by the XA Superior Enlistment CMP Connection to receiving connection.
@@ -2886,7 +2886,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 <a id="Section_3.2.5.3.4"></a>
 ##### 3.2.5.3.4 Receiving an XAUSER_XACT_MTAG_ABORT Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_XACT_MTAG_ABORT](#Section_2.2.4.5.1) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_XACT_MTAG_ABORT](#Section_2.2.4.5.1) message, it MUST perform the following actions:
 
 - If the connection state is set to Active and the **State** field of the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection is set to Aborted:
 - Send an [**XAUSER_XACT_MTAG_REQUEST_COMPLETED**](#Section_2.2.4.5.9) message.
@@ -2904,7 +2904,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 The Connection Disconnected event MUST be signaled with the following argument:
 
 - **XA Superior Enlistment CMP Connection**
-When a [**CONNTYPE_XAUSER_XACT_OPEN**](#Section_2.2.4.5) connection (section 2.2.4.5) is disconnected, the XA Subordinate Transaction Manager Facet (section [1.3.2.3.2)](#Section_1.3.2.3.2) SHOULD perform the following actions:<11>
+When a [**CONNTYPE_XAUSER_XACT_OPEN**](#Section_2.2.4.5) connection (section 2.2.4.5) is disconnected, the XA Subordinate Transaction Manager Facet (section [1.3.2.3.2)](#Section_2.2.4) SHOULD perform the following actions:<11>
 
 - If the **State** field of the provided **XA Superior Enlistment CMP Connection** is set to **Active** and the **State** field of the **XA Superior Enlistment Object** referenced by the provided **XA Superior Enlistment CMP Connection** is set to **Active** or **Preparing**:
 - Set the **State** field of the **XA Superior Enlistment Object** referenced by the provided **XA Superior Enlistment CMP Connection** to **Aborting**.
@@ -2917,19 +2917,19 @@ When a [**CONNTYPE_XAUSER_XACT_OPEN**](#Section_2.2.4.5) connection (section 2.2
 
 This is an **XA Superior Enlistment CMP Connection**.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.4.1"></a>
 ##### 3.2.5.4.1 Receiving an XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE Message
 
 When the XA Subordinate Transaction Manager Facet receives an [**XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE**](#Section_2.2.4.7.3) message, it MUST perform the following actions:
 
-- If the connection state is [Idle](#Section_3.5.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Migrate Request](#Section_3.2.1.5.2).
 - Attempt to find an **XA Superior Object** in the **XA Superior Table** keyed by the **guidXaRm** field of the message.
 - If the Object is not found:
-- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message using the connection.
-- Set the connection state to [Ended](#Section_3.2.1.7.4).
+- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message using the connection.
+- Set the connection state to [Ended](#Section_3.2.1.2.4).
 - Otherwise:
 - Attempt to find **XA Superior Enlistment Object** in **XA Superior Enlistment Table** referenced by the **XA Superior Object** that meets one of the following conditions:
 - The [**XID**](#gt_xa-transaction-branch-identifier-xid) field is set to the **XAIdentifier** field of the message.
@@ -2948,18 +2948,18 @@ When the XA Subordinate Transaction Manager Facet receives an [**XAUSER_XACT_MTA
 - Set the **State** field of **XA Superior Child Branch Enlistment Object** to Migrate.
 - Send an **XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE_DONE** message.
 - Set the connection state to Ended.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.4.2"></a>
 ##### 3.2.5.4.2 Receiving an XAUSER_XACT_MTAG_RESUME Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_XACT_MTAG_RESUME](#Section_2.2.4.7.1) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_XACT_MTAG_RESUME](#Section_2.2.4.7.1) message, it MUST perform the following actions:
 
-- If the connection state is [Idle](#Section_3.5.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Migrate Request](#Section_3.2.1.5.2).
 - Attempt to find an **XA Superior Object** in the **XA Superior Table** referenced by this connection keyed by the **guidXaRm** field of the message.
 - If an Object is not found:
-- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message using the connection.
-- Set the connection state to [Ended](#Section_3.2.1.7.4).
+- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message using the connection.
+- Set the connection state to [Ended](#Section_3.2.1.2.4).
 - Otherwise:
 - Attempt to find **XA Superior Enlistment Object** in **XA Superior Enlistment Table** referenced by the **XA Superior Object** that meets one of the following conditions:
 - The [**XID**](#gt_xa-transaction-branch-identifier-xid) field is set to the **XAIdentifier** field of the message.
@@ -2976,22 +2976,22 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Otherwise, if second condition was satisfied:
 - If the **State** field of the **XA Superior Child Branch Enlistment Object** is set to Migrate:
 - Set **State** field of the **XA Superior Child Branch Enlistment Object** to Active.
-- Send an [**XAUSER_XACT_MTAG_RESUME_DONE**](#Section_2.2.4.8.1) message.
+- Send an [**XAUSER_XACT_MTAG_RESUME_DONE**](#Section_2.2.4.7.2) message.
 - Otherwise:
 - Send an **XAUSER_XACT_MTAG_TRANSACTION_NOT_SUSPENDED** message.
 - Set the connection state to Ended.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 CONNTYPE_XAUSER_XACT_BRANCH_START as Acceptor
 
 This is an XA Superior Enlistment CMP Connection.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in the [Common Details](#Section_3.1) section. The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in the [Common Details](#Section_3.1) section. The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.5.1"></a>
 ##### 3.2.5.5.1 Receiving an XAUSER_XACT_MTAG_START Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [**XAUSER_XACT_MTAG_START**](#Section_2.2.4.3.1) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [**XAUSER_XACT_MTAG_START**](#Section_2.2.4.3.1) message, it MUST perform the following actions:
 
 - If the connection state is Idle:
 - Set the connection state to Processing Start Request.
@@ -3062,7 +3062,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Set the **XA Superior Child Branch Enlistment Object** reference of the receiving connection to the new XA Superior Child Branch Enlistment.
 - Send an [**XAUSER_XACT_MTAG_STARTED**](#Section_2.2.4.3.5) message with the following arguments:
 - [**Transaction Identifier**](#gt_transaction-identifier) of the **Transaction Object** referenced by the found **XA Superior Enlistment Object**.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.5.2"></a>
 ##### 3.2.5.5.2 Connection Disconnected
 
@@ -3096,7 +3096,7 @@ When a [CONNTYPE_XAUSER_XACT_BRANCH_START](#Section_2.2.4.4) connection (section
 
 This is an XA Superior Enlistment CMP Connection.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.6.1"></a>
 ##### 3.2.5.6.1 Receiving an XAUSER_XACT_MTAG_OPEN Message
@@ -3107,7 +3107,7 @@ When the XA Subordinate Transaction Manager Facet receives an [XAUSER_XACT_MTAG_
 - Set the connection state to Processing Open Request.
 - Attempt to find an **XA Superior Object** in the **XA Superior Table** referenced by this connection keyed by the **guidXaRm** field of the message.
 - If an Object is not found:
-- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message using the connection.
+- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message using the connection.
 - Set the connection state to Ended.
 - Otherwise:
 - Attempt to find **XA Superior Enlistment Object** in **XA Superior Enlistment Table** referenced by the **XA Superior Object** that meets one of the following conditions:
@@ -3125,11 +3125,11 @@ When the XA Subordinate Transaction Manager Facet receives an [XAUSER_XACT_MTAG_
 - Set the **XA Superior Child Branch Enlistment Object** reference of the receiving connection to the found **XA Superior Child Branch Enlistment Object**.
 - Send an [**XAUSER_XACT_MTAG_OPENED**](#Section_2.2.4.5.5) message with the following argument:
 - [**Transaction Identifier**](#gt_transaction-identifier) of the **Transaction Object** referenced by the found **XA Superior Enlistment Object**.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.6.2"></a>
 ##### 3.2.5.6.2 Receiving an XAUSER_XACT_MTAG_PREPARE Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_XACT_MTAG_PREPARE](#Section_2.2.4.5.6) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_XACT_MTAG_PREPARE](#Section_2.2.4.5.6) message, it MUST perform the following actions:
 
 - If the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection is set:
 - If the connection state is set to Active and the State field of the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection is set to Active:
@@ -3148,7 +3148,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Send [XAUSER_XACT_MTAG_PREPARE_ABORT](#Section_2.2.4.5.7) message.
 - Remove the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection from the **XA Superior Enlistment Table** of the **XA Superior Object** indexed in the **XA Superior Table** by the [**Resource Manager Recovery GUID**](#gt_xa-superior-transaction-manager-identifier-resource-manager-recovery-guid) of the **XA Superior Enlistment Object**.
 - Set the connection state to Ended.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 - Otherwise, if the **XA Superior Child Branch Enlistment Object** referenced by the receiving connection is set:
 - If the **fSinglePhase** field of the message is set to 0x00000001:
 - Send **XAUSER_XACT_MTAG_REQUEST_FAILED_BAD_PROTOCOL** message on receiving connection.
@@ -3164,7 +3164,7 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 <a id="Section_3.2.5.6.3"></a>
 ##### 3.2.5.6.3 Receiving an XAUSER_XACT_MTAG_COMMIT Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_XACT_MTAG_COMMIT](#Section_2.2.4.5.2) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_XACT_MTAG_COMMIT](#Section_2.2.4.5.2) message, it MUST perform the following actions:
 
 - If the connection state is set to Active and the State field of the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection is set to either Prepared or In Doubt:
 - Set **Current Request CMP Connection** field of **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection to receiving connection.
@@ -3190,7 +3190,7 @@ When the XA Subordinate Transaction Manager Facet receives an [**XAUSER_XACT_MTA
 - Otherwise, if the connection state is set to Active and the State field of the **XA Superior Enlistment Object** referenced by the XA Superior Enlistment CMP Connection is set to Aborting and Current Request CMP Connection referenced by XA Superior Enlistment referenced by the XA Superior Enlistment CMP Connection is not set:
 - Set **Current Request CMP Connection** field of XA Superior Enlistment referenced by the XA Superior Enlistment CMP Connection to receiving connection.
 - Set the connection state to Ended.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 - Otherwise, if receiving connection references XA Superior Child Branch Enlistment:
 - If the connection state is set to Active and the State field of the Parent **XA Superior Enlistment Object** referenced by XA Superior Child Branch Enlistment referenced by receiving connection is set to Aborted:
 - Send XAUSER_XACT_MTAG_REQUEST_COMPLETED message.
@@ -3229,18 +3229,18 @@ When a [CONNTYPE_XAUSER_XACT_BRANCH_OPEN](#Section_2.2.4.6) connection (section 
 
 This is an XA Superior Enlistment CMP Connection.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST process the message as specified in section [3.1](#Section_3.1). The XA Subordinate Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.2.5.7.1"></a>
 ##### 3.2.5.7.1 Receiving an XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE](#Section_2.2.4.7.3) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE](#Section_2.2.4.7.3) message, it MUST perform the following actions:
 
-- If the connection state is [Idle](#Section_3.5.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Migrate2 Request](#Section_3.2.1.8.2).
 - Attempt to find an **XA Superior Object** in the **XA Superior Table** keyed by the **guidXaRm** field of the message.
 - If an Object is not found:
-- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message using the connection.
+- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message using the connection.
 - Otherwise:
 - Attempt to find an **XA Superior Enlistment Object** in the **XA Superior Enlistment Table** referenced by the **XA Superior Object** that meets one of the following conditions:
 - The [**XID**](#gt_xa-transaction-branch-identifier-xid) field is set to the value of the **XAIdentifier** field in the message.
@@ -3260,18 +3260,18 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Send an **XAUSER_XACT_MTAG_SUSPEND_WITH_MIGRATE_DONE** message.
 - Otherwise:
 - Send an **XAUSER_XACT_MTAG_OPEN_NOT_FOUND** message.
-- Set the connection state to [Ended](#Section_3.2.1.7.4).
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Set the connection state to [Ended](#Section_3.2.1.2.4).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.5.7.2"></a>
 ##### 3.2.5.7.2 Receiving an XAUSER_XACT_MTAG_RESUME Message
 
-When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives an [XAUSER_XACT_MTAG_RESUME](#Section_2.2.4.7.1) message, it MUST perform the following actions:
+When the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) receives an [XAUSER_XACT_MTAG_RESUME](#Section_2.2.4.7.1) message, it MUST perform the following actions:
 
-- If the connection state is [Idle](#Section_3.5.1.3.1):
+- If the connection state is [Idle](#Section_3.2.1.2.1):
 - Set the connection state to [Processing Migrate2 Request](#Section_3.2.1.8.2).
 - Attempt to find an **XA Superior Object** in the **XA Superior Table** keyed by the **guidXaRm** field of the message.
 - If an Object is not found:
-- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message using the connection.
+- Send an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message using the connection.
 - Otherwise:
 - Attempt to find **XA Superior Enlistment Object** in **XA Superior Enlistment Table** referenced by the **XA Superior Object** that meets one of the following conditions:
 - The [**XID**](#gt_xa-transaction-branch-identifier-xid) field is set to the value of the **XAIdentifier** field of the message.
@@ -3293,8 +3293,8 @@ When the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) receives
 - Transaction Identifier of the **Transaction Object** referenced by the found **XA Superior Enlistment Object**.
 - Otherwise:
 - Send an **XAUSER_XACT_MTAG_TRANSACTION_NOT_SUSPENDED** message.
-- Set the connection state to [Ended](#Section_3.2.1.7.4).
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Set the connection state to [Ended](#Section_3.2.1.2.4).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
@@ -3309,7 +3309,7 @@ This role has no protocol-specific timer events.
 The Commit Complete event MUST be signaled with the following arguments:
 
 - An **XA Superior Enlistment Object**.
-If the Commit Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Commit Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the **State** field of the provided **XA Superior Enlistment Object** is set to Committing:
 - Set the **State** field of the provided **XA Superior Enlistment Object** to Committed.
@@ -3322,7 +3322,7 @@ If the Commit Complete event is signaled, the [XA Subordinate Transaction Manage
 The Create Superior Enlistment Success event MUST be signaled with the following arguments:
 
 - An **XA Superior Enlistment Object**.
-If the Create Superior Enlistment Success event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Create Superior Enlistment Success event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the **State** field of the provided **XA Superior Enlistment Object** is set to Init:
 - Attempt to find **XA Superior Object** in **XA Superior Table** keyed by the **Resource Manager Recovery GUID** field of the provided **XA Superior Enlistment Object**.
@@ -3347,7 +3347,7 @@ The Create Superior Enlistment Failure event MUST be signaled with the following
 
 - An **XA Superior Enlistment Object**.
 - Failure Reason.
-If the Create Superior Enlistment Failure event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Create Superior Enlistment Failure event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the **State** field of the provided **XA Superior Enlistment Object** is set to Init:
 - If Failure Reason is set to Log Full:
@@ -3362,7 +3362,7 @@ The Phase Zero Complete event MUST be signaled with the following arguments:
 
 - An **XA Superior Enlistment Object**.
 - [**Outcome**](#gt_outcome).
-If the Phase Zero Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Phase Zero Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the provided Outcome is set to Failure and the **Current Request CMP Connection Object** referenced by the provided **XA Superior Enlistment Object** is set:
 - Send an [XAUSER_XACT_MTAG_PREPARE_ABORT](#Section_2.2.4.5.7) message.
@@ -3385,7 +3385,7 @@ The Phase One Complete event MUST be signaled with the following arguments:
 
 - An **XA Superior Enlistment Object**.
 - [**Outcome**](#gt_outcome).
-If the Phase One Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Phase One Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the **Current Request CMP Connection Object** referenced by the provided **XA Superior Enlistment Object** is set:
 - If the provided Outcome is set to [**In Doubt**](#gt_in-doubt-outcome):
@@ -3411,7 +3411,7 @@ If the Phase One Complete event is signaled, the [XA Subordinate Transaction Man
 <a id="Section_3.2.7.6"></a>
 #### 3.2.7.6 Recover In Doubt Transaction
 
-If the Recover In Doubt event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST take no action.
+If the Recover In Doubt event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST take no action.
 
 <a id="Section_3.2.7.7"></a>
 #### 3.2.7.7 Rollback Complete
@@ -3419,7 +3419,7 @@ If the Recover In Doubt event is signaled, the [XA Subordinate Transaction Manag
 The Rollback Complete event MUST be signaled with the following arguments:
 
 - An **XA Superior Enlistment Object**.
-If the Rollback Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Rollback Complete event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the **State** field of the provided **XA Superior Enlistment Object** is set to Aborting:
 - Set the **State** field of the provided **XA Superior Enlistment Object** to Aborted.
@@ -3438,7 +3438,7 @@ If the Rollback Complete event is signaled, the [XA Subordinate Transaction Mana
 The Unilaterally Aborted event MUST be signaled with the following arguments:
 
 - An **XA Superior Enlistment Object**.
-If the Unilaterally Aborted event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) MUST perform the following actions:
+If the Unilaterally Aborted event is signaled, the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) MUST perform the following actions:
 
 - If the **State** field of the provided **XA Superior Enlistment Object** is set to Active:
 - Set the **State** field of the provided **XA Superior Enlistment Object** to Aborted.
@@ -3516,11 +3516,11 @@ This is an extension of the flags defined in [[XOPEN-DTP]](https://go.microsoft.
 
 The XA Superior Transaction Manager MUST act as an initiator for the [CONNTYPE_XAUSER_CONTROL](#Section_2.2.4.2) connection type. In this role, the XA Superior Transaction Manager MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Creation Response](#Section_3.3.1.3.2)
-- [Active](#Section_3.2.1.3.3)
+- [Active](#Section_3.2.1.2.3)
 - [Awaiting Recovery Response](#Section_3.3.1.3.4)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.3.1.3.1"></a>
 ##### 3.3.1.3.1 Idle
 
@@ -3569,10 +3569,10 @@ Figure 20: Relationships between the CONNTYPE_XAUSER_CONTROL initiator states
 
 The XA Superior Transaction Manager MUST act as an initiator for the [CONNTYPE_XAUSER_XACT_START](#Section_2.2.4.3) connection type. In this role, the XA Superior Transaction Manager MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Start Response](#Section_3.3.1.7.2)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Start Response](#Section_3.3.1.4.2)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.3.1.4.1"></a>
 ##### 3.3.1.4.1 Idle
 
@@ -3614,13 +3614,13 @@ Figure 21: CONNTYPE_XAUSER_XACT_START initiator states
 
 The XA Superior Transaction Manager MUST act as an initiator for the [CONNTYPE_XAUSER_XACT_OPEN](#Section_2.2.4.5) connection type. In this role, the XA Superior Transaction Manager MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Open Response](#Section_3.5.1.1.2)
-- [Processing Opened Response](#Section_3.3.1.8.3)
-- [Awaiting Prepare Response](#Section_3.3.1.8.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Open Response](#Section_3.3.1.5.2)
+- [Processing Opened Response](#Section_3.3.1.5.3)
+- [Awaiting Prepare Response](#Section_3.3.1.5.4)
 - [Awaiting Abort Response](#Section_3.3.1.5.5)
 - [Awaiting Commit Response](#Section_3.3.1.5.6)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.3.1.5.1"></a>
 ##### 3.3.1.5.1 Idle
 
@@ -3734,10 +3734,10 @@ Figure 23: CONNTYPE_ XAUSER_XACT_MIGRATE initiator states
 
 The XA Superior Transaction Manager MUST act as an initiator for the [CONNTYPE_XAUSER_XACT_BRANCH_START](#Section_2.2.4.4) connection type. In this role, the XA Superior Transaction Manager MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Start Response](#Section_3.3.1.7.2)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Start Response](#Section_3.3.1.4.2)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.3.1.7.1"></a>
 ##### 3.3.1.7.1 Idle
 
@@ -3779,13 +3779,13 @@ Figure 24: CONNTYPE_ XAUSER_XACT_BRANCH_START initiator states
 
 The XA Superior Transaction Manager MUST act as an initiator for the [CONNTYPE_XAUSER_XACT_BRANCH_OPEN](#Section_2.2.4.6) connection type. In this role, the XA Superior Transaction Manager MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Open Response](#Section_3.5.1.1.2)
-- [Processing Opened Response](#Section_3.3.1.8.3)
-- [Awaiting Prepare Response](#Section_3.3.1.8.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Open Response](#Section_3.3.1.5.2)
+- [Processing Opened Response](#Section_3.3.1.5.3)
+- [Awaiting Prepare Response](#Section_3.3.1.5.4)
 - [Awaiting Abort Response](#Section_3.3.1.5.5)
 - [Awaiting Commit Response](#Section_3.3.1.5.6)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.3.1.8.1"></a>
 ##### 3.3.1.8.1 Idle
 
@@ -3854,10 +3854,10 @@ Figure 25: CONNTYPE_XAUSER_XACT_BRANCH_OPEN initiator states
 
 The XA Superior Transaction Manager MUST act as an initiator for the [CONNTYPE_XAUSER_XACT_MIGRATE2](#Section_2.2.4.8) connection type. In this role, the XA Superior Transaction Manager MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Suspension Response](#Section_3.3.1.9.2)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Suspension Response](#Section_3.3.1.6.2)
 - [Awaiting Resumption Response](#Section_3.3.1.6.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.3.1.9.1"></a>
 ##### 3.3.1.9.1 Idle
 
@@ -3922,7 +3922,7 @@ The XA Superior Transaction Manager MUST construct an **xa_switch_t** structure,
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
 
-When the processing of these higher-layer events results in a message being sent to the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2), it is assumed that the processing waits for a response before continuing. This act of waiting for a response action is also specified in the processing descriptions where applicable. The processing that occurs after a response is received is further defined in [Processing Events and Sequencing Rules (section 3.3.5)](#Section_3.5.5).
+When the processing of these higher-layer events results in a message being sent to the [XA Subordinate Transaction Manager Facet](#Section_2.2.4), it is assumed that the processing waits for a response before continuing. This act of waiting for a response action is also specified in the processing descriptions where applicable. The processing that occurs after a response is received is further defined in [Processing Events and Sequencing Rules (section 3.3.5)](#Section_3.3.5).
 
 <a id="Section_3.3.4.1"></a>
 #### 3.3.4.1 XA Lookup
@@ -4245,7 +4245,7 @@ If the **Xa_prepare** event is signaled, the XA Superior Transaction Manager MUS
 - The **guidXaRm** field set to the [**Resource Manager Recovery GUID**](#gt_xa-superior-transaction-manager-identifier-resource-manager-recovery-guid) field of the found **XA Superior Proxy object**.
 - The **lenXAIdentifier** field of the [**XA_UOW**](#Section_2.2.1.4) structure (section 2.2.1.4) in the **XAUow** field set to the size of an [**XA_XID**](#Section_2.2.1.3) structure (section 2.2.1.3).
 - The **XAIdentifier** field of the **XA_UOW** structure in the **XAUow** field set to the provided **XID** field.
-- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_OPEN Initiator (section [3.3.5.6)](#Section_df09debfd1a2499286c7f97db4088a97).
+- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_OPEN Initiator (section [3.3.5.6)](#Section_3.3.5.6).
 - Otherwise:
 - Attempt to create a new **XA Transaction CMP Connection object** with the following values:
 - The Connection Type is set to [CONNTYPE_XAUSER_XACT_OPEN](#Section_2.2.4.5).
@@ -4356,7 +4356,7 @@ If the **Xa_rollback** event is signaled, the XA Superior Transaction Manager MU
 - The **guidXaRm** is set to the [**Resource Manager Recovery GUID**](#gt_xa-superior-transaction-manager-identifier-resource-manager-recovery-guid) field of the found **XA Superior Proxy object**.
 - The **lenXAIdentifier** field of the [**XA_UOW**](#Section_2.2.1.4) structure (section 2.2.1.4) in the **XAUow** field is set to size of an [**XA_XID**](#Section_2.2.1.3) structure (section 2.2.1.3).
 - The **XAIdentifier** field of the **XA_UOW** structure in the **XAUow** field is set to the provided **XID** field.
-- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_OPEN Initiator (section [3.3.5.6)](#Section_df09debfd1a2499286c7f97db4088a97).
+- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_OPEN Initiator (section [3.3.5.6)](#Section_3.3.5.6).
 - Otherwise:
 - Attempt to create a new **XA Transaction CMP Connection object** with the following values:
 - The Connection type field is set to CONNTYPE_XAUSER_XACT_OPEN.
@@ -4409,7 +4409,7 @@ If the **Xa_start** event is signaled, the XA Superior Transaction Manager MUST 
 - The **XAIdentifier** field is set to the provided **XID**.
 - The **dwProcessId** field is set to the Current Process ID.
 - The **dwThreadId** field is set to the Current Thread ID.
-- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_MIGRATE2 Initiator (section [3.3.5.7)](#Section_3.3.5.7).
+- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_MIGRATE2 Initiator (section [3.3.5.7)](#Section_1f90f5b3223645c6bcbba2e71b2a8f40).
 - Otherwise:
 - Set the **State** of the found **XA Transaction Object** to Active.
 - Otherwise:
@@ -4478,7 +4478,7 @@ If the **Xa_start** event is signaled, the XA Superior Transaction Manager MUST 
 - The **guidXaRm** is set to the Resource Manager Recovery GUID field of the found **XA Superior Proxy object**.
 - The **lenXAIdentifier** field of the [**XA_UOW**](#Section_2.2.1.4) structure in the **XAUow** field is set to size of an **XA_XID** structure.
 - The **XAIdentifier** field of the **XA_UOW** structure in the **XAUow** field is set to the provided **XID** field.
-- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_OPEN Initiator (section [3.3.5.6)](#Section_df09debfd1a2499286c7f97db4088a97).
+- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_OPEN Initiator (section [3.3.5.6)](#Section_3.3.5.6).
 - Otherwise:
 - Attempt to create a new **XA Transaction CMP Connection object** with the following values:
 - The Connection Type is set to [CONNTYPE_XAUSER_XACT_BRANCH_START](#Section_2.2.4.4).
@@ -4499,7 +4499,7 @@ If the **Xa_start** event is signaled, the XA Superior Transaction Manager MUST 
 - Otherwise:
 - Set the **szDesc** field of the message to "XA Transaction".
 - The **isoFlags** field is set to 0.
-- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_START Initiator (section [3.3.5.5)](#Section_2e4f1843882d404d9a4d2beff04f9171).
+- Wait for a response and continue with the processing rules defined in CONNTYPE_XAUSER_XACT_BRANCH_START Initiator (section [3.3.5.5)](#Section_3.3.5.5).
 - Otherwise:
 - If the provided Flags argument has TMJOIN set:
 - Attempt to create a new **XA Transaction CMP Connection object** with the following values:
@@ -4544,7 +4544,7 @@ If the **Xa_start** event is signaled, the XA Superior Transaction Manager MUST 
 
 This is an **XA Superior Proxy CMP Connection**.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the XA Superior Transaction Manager Facet MUST process the message as specified in section [3.1](#Section_3.1). The XA Superior Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the XA Superior Transaction Manager Facet MUST process the message as specified in section [3.1](#Section_3.1). The XA Superior Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.3.5.1.1"></a>
 ##### 3.3.5.1.1 Receiving an XAUSER_CONTROL_MTAG_CREATE_NO_MEM Message
@@ -4629,7 +4629,7 @@ When a [CONNTYPE_XAUSER_CONTROL](#Section_2.2.4.2) connection (section 2.2.4.2) 
 
 This is an **XA Transaction CMP Connection**.
 
-For all messages received in this [Connection Type](#Section_2.2.3), the XA Superior Transaction Manager Facet MUST process the message as specified in section [3.1](#Section_3.1). The XA Superior Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
+For all messages received in this [Connection Type](#Section_2.2.2.1), the XA Superior Transaction Manager Facet MUST process the message as specified in section [3.1](#Section_3.1). The XA Superior Transaction Manager Facet MUST also follow the processing rules specified in the following sections.
 
 <a id="Section_3.3.5.2.1"></a>
 ##### 3.3.5.2.1 Receiving an XAUSER_XACT_MTAG_STARTED Message
@@ -4679,7 +4679,7 @@ When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_START_DUP
 
 When a [CONNTYPE_XAUSER_XACT_START](#Section_2.2.4.3) connection (section 2.2.4.3) is disconnected, the XA Superior Transaction Manager MUST perform the following actions:
 
-- If the **State** field of the receiving **XA Transaction CMP Connection** is set to Awaiting Start Response (section [3.3.1.4.2)](#Section_3.3.1.7.2):
+- If the **State** field of the receiving **XA Transaction CMP Connection** is set to Awaiting Start Response (section [3.3.1.4.2)](#Section_3.3.1.4.2):
 - Return XAER_RMFAIL from **xa_start** call.
 - Disconnect the receiving connection.
 <a id="Section_3.3.5.3"></a>
@@ -4718,7 +4718,7 @@ When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPENED](#
 <a id="Section_3.3.5.3.2"></a>
 ##### 3.3.5.3.2 Receiving an XAUSER_XACT_MTAG_OPEN_NOT_FOUND Message
 
-When the XA Superior Transaction Manager receives an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.3) message, it MUST perform the following actions:
+When the XA Superior Transaction Manager receives an [**XAUSER_XACT_MTAG_OPEN_NOT_FOUND**](#Section_2.2.4.5.4) message, it MUST perform the following actions:
 
 - If the **State** of receiving XA Transaction CMP Connection is set to Awaiting Open Response:
 - Return XAER_NOTA from originating XA call.
@@ -4820,7 +4820,7 @@ When the XA Superior Transaction Manager receives an [**XAUSER_XACT_MTAG_SUSPEND
 <a id="Section_3.3.5.4.2"></a>
 ##### 3.3.5.4.2 Receiving an XAUSER_XACT_MTAG_RESUME_DONE Message
 
-When the XA Superior Transaction Manager receives an **XAUSER_XACT_MTAG_RESUME_DONE** message (section [2.2.4.7.2](#Section_2.2.4.8.1)), it MUST perform the following actions:
+When the XA Superior Transaction Manager receives an **XAUSER_XACT_MTAG_RESUME_DONE** message (section [2.2.4.7.2](#Section_2.2.4.7.2)), it MUST perform the following actions:
 
 - If the **State** field of the **XA Transaction Object** referenced by the receiving connection is set to Suspended:
 - Leave the Transaction Identifier field of the XA Transaction referenced by the receiving connection uninitialized. The behavior is different for the same event on a CONNTYPE_XAUSER_XACT_MIGRATE2 connection (section [3.3.5.7.2](#Section_3.3.5.7.2)).
@@ -4843,7 +4843,7 @@ When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_TRANSACTI
 <a id="Section_3.3.5.4.4"></a>
 ##### 3.3.5.4.4 Receiving an XAUSER_XACT_MTAG_OPEN_NOT_FOUND Message
 
-When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPEN_NOT_FOUND](#Section_2.2.4.5.3) message, it MUST perform the following actions:
+When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPEN_NOT_FOUND](#Section_2.2.4.5.4) message, it MUST perform the following actions:
 
 - If the **State** field of the **XA Transaction Object** referenced by the receiving connection is set to Suspended:
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
@@ -4921,7 +4921,7 @@ When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_START_DUP
 
 When a CONNTYPE_XAUSER_XACT_BRANCH_START connection (section [2.2.4.4](#Section_2.2.4.4)) is disconnected, the XA Superior Transaction Manager MUST perform the following actions:
 
-- If the **State** field of the receiving **XA Transaction CMP Connection object** is set to Awaiting Start Response (section [3.3.1.7.2)](#Section_3.3.1.7.2):
+- If the **State** field of the receiving **XA Transaction CMP Connection object** is set to Awaiting Start Response (section [3.3.1.7.2)](#Section_3.3.1.4.2):
 - Return XAER_RMFAIL from **xa_start** call.
 - Disconnect the receiving connection.
 - Otherwise:
@@ -4961,7 +4961,7 @@ When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPENED](#
 <a id="Section_3.3.5.6.2"></a>
 ##### 3.3.5.6.2 Receiving an XAUSER_XACT_MTAG_OPEN_NOT_FOUND Message
 
-When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPEN_NOT_FOUND](#Section_2.2.4.5.3) message, it MUST perform the following actions:
+When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPEN_NOT_FOUND](#Section_2.2.4.5.4) message, it MUST perform the following actions:
 
 - If the **State** field of the receiving **XA Transaction CMP Connection object** is set to Awaiting Open Response:
 - Return XAER_NOTA from originating XA call.
@@ -5127,7 +5127,7 @@ When the XA Superior Transaction Manager receives an MTAG_CONNECTION_REQ_DENIED 
 <a id="Section_3.3.5.7.7"></a>
 ##### 3.3.5.7.7 Receiving an XAUSER_XACT_MTAG_OPEN_NOT_FOUND Message
 
-When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPEN_NOT_FOUND](#Section_2.2.4.5.3) message, it MUST perform the following actions:
+When the XA Superior Transaction Manager receives an [XAUSER_XACT_MTAG_OPEN_NOT_FOUND](#Section_2.2.4.5.4) message, it MUST perform the following actions:
 
 - If the **State** field of the **XA Transaction Object** referenced by the receiving connection is set to Suspended:
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
@@ -5208,10 +5208,10 @@ The XA Resource Manager Bridge Facet MUST also maintain the following data eleme
 
 The XA Resource Manager Bridge Facet MUST act as an acceptor for the CONNTYPE_XATM_OPEN connection type. In this role, the XA Resource Manager Bridge Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Processing Open Request](#Section_3.4.1.2.2)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Processing Open Request](#Section_3.2.1.4.2)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.4.1.1.1"></a>
 ##### 3.4.1.1.1 Idle
 
@@ -5248,11 +5248,11 @@ Figure 27: CONNTYPE_XATM_OPEN acceptor states
 
 The XA Resource Manager Bridge Facet MUST act as an acceptor for the CONNTYPE_XATM_OPENONEPIPE connection type. In this role, the XA Resource Manager Bridge Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Processing Open Request](#Section_3.4.1.2.2).
-- [Active](#Section_3.2.1.3.3)
+- [Idle](#Section_3.2.1.2.1)
+- [Processing Open Request](#Section_3.2.1.4.2).
+- [Active](#Section_3.2.1.2.3)
 - [Processing close Request](#Section_3.4.1.2.4)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.4.1.2.1"></a>
 ##### 3.4.1.2.1 Idle
 
@@ -5295,9 +5295,9 @@ Figure 28: CONNTYPE_XATM_OPENONEPIPE acceptor states
 
 The XA Resource Manager Bridge Facet MUST act as an acceptor for the CONNTYPE_XATM_ENLIST connection type. In this role, the XA Resource Manager Bridge Facet MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Processing Enlist Request](#Section_3.4.1.3.2)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.4.1.3.1"></a>
 ##### 3.4.1.3.1 Idle
 
@@ -5345,7 +5345,7 @@ When the timer is initialized, the XA Resource Manager Bridge Facet MUST specify
 When the XA Resource Manager Bridge Facet is initialized:
 
 - The XA Resource Manager Bridge Facet MUST examine the Allow XA flag on the Core Transaction Manager Facet specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1 and, if it is not set, perform the following actions:
-- For all connection types listed in section [3.4](../MS-CMP/MS-CMP.md), the XA Resource Manager Bridge Facet MUST refuse to accept incoming connections as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the reject **Reason** set to 0x80070005.
+- For all connection types listed in section [3.4](#Section_3.4), the XA Resource Manager Bridge Facet MUST refuse to accept incoming connections as specified in [MS-CMP](../MS-CMP/MS-CMP.md) section 3.1.5.5 with the reject **Reason** set to 0x80070005.
 - **XaTmMinWarmRecoveryInterval** SHOULD be set to a value that is obtained from an implementation-specific source.
 - **XaTmMaxWarmRecoveryInterval** SHOULD be set to a value that is obtained from an implementation-specific source.
 - **XA Resource Manager Identifier** Index MUST be set to an implementation-specific value.
@@ -5406,9 +5406,9 @@ For all messages received in this Connection Type, the XA Resource Manager Bridg
 When the XA Resource Manager Bridge Facet receives an **XATMUSER_MTAG_RMOPEN** message (section [2.2.3.2.5](#Section_2.2.3.2.5)), it MUST perform the following actions:
 
 - If the **State** field of the receiving Connection is set to Idle:
-- Set the **State** field of the receiving Connection to Processing Open Request (section [3.4.1.1.2)](#Section_3.4.1.2.2).
+- Set the **State** field of the receiving Connection to Processing Open Request (section [3.4.1.1.2)](#Section_3.2.1.4.2).
 - Otherwise:
-- The message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3) and processing of this message halted.
+- The message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6) and processing of this message halted.
 - Test if all of the following conditions are satisfied:
 - SHOULD check if the **lenDSN** field of the message is less than an implementation-specific value.<44>
 - SHOULD check if the **lenXaDll** field of the message is less than an implementation-specific value.<45>
@@ -5513,7 +5513,7 @@ When the XA Resource Manager Bridge Facet receives an **XATMUSER_MTAG_RMOPEN** m
 - If the **State** field of receiving Connection is set to Idle:
 - Set the **State** field of the Connection to Processing Open Request.
 - Otherwise:
-- The message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3); the implementation SHOULD perform no further processing of the message.
+- The message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6); the implementation SHOULD perform no further processing of the message.
 - Test if all of the following conditions are satisfied:
 - SHOULD check if the **lenDSN** field of the message is less than an implementation-specific value.<49>
 - SHOULD check if the **lenXaDll** field of the message is less than an implementation-specific value.<50>
@@ -5638,7 +5638,7 @@ When the XA Resource Manager Bridge Facet receives a **XATMUSER_MTAG_ENLIST** me
 - Otherwise:
 - Send an [**XATMUSER_MTAG_E_ENLISTMENTRMNOTFOUND**](#Section_2.2.3.4.5) message using the receiving connection.
 - Set the **State** of receiving connection to Ended.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.4.6"></a>
 ### 3.4.6 Timer Events
 
@@ -5930,10 +5930,10 @@ The XA Resource Manager Bridge MUST also maintain the following data elements:
 
 The XA Resource Manager Bridge MUST act as an initiator for the **CONNTYPE_XATM_OPEN** connection type. In this role, the XA Resource Manager Bridge MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Open Response](#Section_3.5.1.1.2)
-- [Active](#Section_3.2.1.3.3)
-- [Ended](#Section_3.2.1.7.4)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Open Response](#Section_3.3.1.5.2)
+- [Active](#Section_3.2.1.2.3)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.5.1.1.1"></a>
 ##### 3.5.1.1.1 Idle
 
@@ -5973,11 +5973,11 @@ Figure 30: CONNTYPE_XATM_OPEN initiator states
 
 The XA Resource Manager Bridge MUST act as an initiator for the **CONNTYPE_XATM_OPENONEPIPE** connection type. In this role, the XA Resource Manager Bridge MUST provide support for the following states.
 
-- [Idle](#Section_3.5.1.3.1)
-- [Awaiting Open Response](#Section_3.5.1.1.2)
-- [Active](#Section_3.2.1.3.3)
+- [Idle](#Section_3.2.1.2.1)
+- [Awaiting Open Response](#Section_3.3.1.5.2)
+- [Active](#Section_3.2.1.2.3)
 - [Awaiting Close Response](#Section_3.5.1.2.4)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 The following figure shows the relationship between the CONNTYPE_XATM_OPENONEPIPE initiator states.
 
 <a id="Section_3.5.1.2.1"></a>
@@ -6028,9 +6028,9 @@ Figure 31: CONNTYPE_XATM_OPENONEPIPE initiator states
 
 The XA Resource Manager Bridge MUST act as an initiator for the **CONNTYPE_XATM_ENLIST** connection type. In this role, the XA Resource Manager Bridge MUST provide support for the following states:
 
-- [Idle](#Section_3.5.1.3.1)
+- [Idle](#Section_3.2.1.2.1)
 - [Awaiting Enlist Response](#Section_3.5.1.3.2)
-- [Ended](#Section_3.2.1.7.4)
+- [Ended](#Section_3.2.1.2.4)
 <a id="Section_3.5.1.3.1"></a>
 ##### 3.5.1.3.1 Idle
 
@@ -6073,7 +6073,7 @@ The **Transaction Manager Name** field SHOULD be set to a value that is obtained
 
 The XA Resource Manager Bridge SHOULD obtain the Security Configuration of the Transaction Manager by temporarily acting as an Application Role as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.3 and signaling the event specified in [MS-DTCO] section 3.3.4.11.
 
-- If the **grfXaTransactions** field of the **TXUSER_GETSECURITYFLAGS_MTAG_FETCHED** response message defined in [MS-DTCO] section 2.2.8.4.1.1 is set to 0x00000000, then when higher-layer events are triggered that would cause the XA Resource Manager Bridge to initiate any of the connection types defined in section [3.5](../MS-DTCO/MS-DTCO.md), the XA Resource Manager Bridge SHOULD refuse to initiate the outgoing connections by returning a failure.
+- If the **grfXaTransactions** field of the **TXUSER_GETSECURITYFLAGS_MTAG_FETCHED** response message defined in [MS-DTCO] section 2.2.8.4.1.1 is set to 0x00000000, then when higher-layer events are triggered that would cause the XA Resource Manager Bridge to initiate any of the connection types defined in section [3.5](#Section_3.5), the XA Resource Manager Bridge SHOULD refuse to initiate the outgoing connections by returning a failure.
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Higher-Layer Triggered Events
 
@@ -6271,7 +6271,7 @@ When the XA Resource Manager Bridge receives an **XATMUSER_MTAG_RMOPENOK** messa
 - Set the **Resource Manager Global Identifier** field of the **XA Resource Manager Proxy object** referenced by receiving Connection to the **guidRm** field of the message.
 - Set the **State** of receiving Connection to Active.
 - Return success to Register Two-Pipe XA Resource Manager event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.1.2"></a>
 ##### 3.5.5.1.2 Receiving Other XATMUSER_MTAG_RMOPEN Messages
 
@@ -6287,7 +6287,7 @@ The XA Resource Manager Bridge MUST perform the following actions:
 - Remove the **XA Resource Manager Proxy object** referenced by receiving Connection from the [**two-pipe**](#gt_two-pipe) XA Resource Manager Proxy Table.
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
 - Return failure to [Register Two-Pipe XA Resource Manager](#Section_3.5.4.1) event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.1.3"></a>
 ##### 3.5.5.1.3 Connection Disconnected
 
@@ -6300,7 +6300,7 @@ When a [CONNTYPE_XATM_OPEN](#Section_2.2.3.2) connection is disconnected, the XA
 - Otherwise if the **State** of the Connection is set to Active:
 - Remove the **XA Resource Manager Proxy object** referenced by the receiving Connection from the Two-Pipe XA Resource Manager Proxy Table.
 - Set the **State** of receiving Connection to Ended.
-- Otherwise, this event MUST be processed as specified in section [3.1.8.2](#Section_3.5.5.2.5).
+- Otherwise, this event MUST be processed as specified in section [3.1.8.2](#Section_3.1.8.2).
 <a id="Section_3.5.5.2"></a>
 #### 3.5.5.2 CONNTYPE_XATM_OPENONEPIPE as Initiator
 
@@ -6321,7 +6321,7 @@ When the XA Resource Manager Bridge receives an **XATMUSER_MTAG_RMOPENOK** messa
 - Return success to the Register One-Pipe XA Resource Manager event (section [3.5.4.4](#Section_3.5.4.4)).
 - Otherwise:
 - Return failure to the Register One-Pipe XA Resource Manager event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.2.2"></a>
 ##### 3.5.5.2.2 Receiving Other XATMUSER_MTAG_RMOPEN Messages
 
@@ -6337,7 +6337,7 @@ The XA Resource Manager Bridge MUST perform the following actions:
 - Remove the **XA Resource Manager Proxy object** referenced by the receiving Connection from the One-Pipe XA Resource Manager Proxy Table.
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
 - Return failure to [Register One-Pipe XA Resource Manager](#Section_3.5.4.4) event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.2.3"></a>
 ##### 3.5.5.2.3 Receiving an XATMUSER_MTAG_RMCLOSEOK Message
 
@@ -6347,7 +6347,7 @@ When the XA Resource Manager Bridge receives a [XATMUSER_MTAG_RMCLOSEOK](#Sectio
 - Remove the **XA Resource Manager Proxy object** with **Request Connection** field set to the receiving Connection from the One-Pipe XA Resource Manager Proxy Table.
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
 - Return success to [Unregister One-Pipe XA Resource Manager](#Section_3.5.4.5) event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.2.4"></a>
 ##### 3.5.5.2.4 Receiving Other XATMUSER_MTAG_RMCLOSE Messages
 
@@ -6364,13 +6364,13 @@ The XA Resource Manager Bridge MUST perform the following actions:
 - Remove the **XA Resource Manager Proxy object** referenced by the receiving Connection from the One-Pipe XA Resource Manager Proxy Table.
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
 - Return success to [Unregister One-Pipe XA Resource Manager](#Section_3.5.4.5) event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.2.5"></a>
 ##### 3.5.5.2.5 Connection Disconnected
 
 When a CONNTYPE_XATM_OPENONEPIPE connection (section [2.2.3.3](#Section_2.2.3.3)) is disconnected, the XA Resource Manager Bridge MUST perform the following actions:
 
-- If the **State** of the receiving **Connection** is set to Awaiting Open Response (section [3.5.1.2.2)](#Section_3.5.1.1.2):
+- If the **State** of the receiving **Connection** is set to Awaiting Open Response (section [3.5.1.2.2)](#Section_3.3.1.5.2):
 - Remove the **XA Resource Manager Proxy object** referenced by the receiving **Connection** from the One-Pipe XA Resource Manager Proxy Table.
 - Set the **State** of the receiving **Connection** to **Ended**.
 - Return failure to the Register One-Pipe XA Resource Manager event (section [3.5.4.4](#Section_3.5.4.4)).
@@ -6381,7 +6381,7 @@ When a CONNTYPE_XATM_OPENONEPIPE connection (section [2.2.3.3](#Section_2.2.3.3)
 - Otherwise, if the **State** of the **Connection** is set to **Active**:
 - Remove the **XA Resource Manager Proxy object** referenced by the receiving **Connection** from the **One-Pipe XA Resource Manager Proxy Table**.
 - Set the **State** of the receiving **Connection** to **Ended**.
-- Otherwise, this event MUST be processed as specified in section [3.1.8.2](#Section_3.5.5.2.5).
+- Otherwise, this event MUST be processed as specified in section [3.1.8.2](#Section_3.1.8.2).
 <a id="Section_3.5.5.3"></a>
 #### 3.5.5.3 CONNTYPE_XATM_ENLIST as Initiator
 
@@ -6395,7 +6395,7 @@ When the XA Resource Manager Bridge receives a [XATMUSER_MTAG_ENLISTMENTOK](#Sec
 - If the **State** of the Connection is set to Awaiting Enlist Response:
 - Set the **State** of receiving Connection to Ended.
 - Return success to [Enlist Two-Pipe XA Resource Manager](#Section_3.5.4.3) event.
-- Otherwise the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.3.2"></a>
 ##### 3.5.5.3.2 Receiving Other XATMUSER_MTAG_RMENLIST Messages
 
@@ -6413,7 +6413,7 @@ The XA Resource Manager Bridge MUST perform the following actions:
 - If the **State** of the Connection is set to Awaiting Enlist Response:
 - Signal the **Disconnect Connection** event using the receiving Connection as the argument.
 - Return failure to [Enlist Two-Pipe XA Resource Manager](#Section_3.5.4.3) event.
-- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_1.3).
+- Otherwise, the message MUST be processed as an invalid message as specified in section [3.1.6](#Section_3.1.6).
 <a id="Section_3.5.5.3.3"></a>
 ##### 3.5.5.3.3 Connection Disconnected
 
@@ -6422,7 +6422,7 @@ When a CONNTYPE_XATM_ENLIST connection (section [2.2.3.4](#Section_2.2.3.4)) is 
 - If the **State** of the Connection is set to Awaiting Enlist Response:
 - Set the **State** of receiving Connection to Ended.
 - Return failure to the Enlist Two-Pipe XA Resource Manager event (section [3.5.4.3](#Section_3.5.4.3)).
-- Otherwise, this event MUST be processed as specified in section [3.1.8.2](#Section_3.5.5.2.5).
+- Otherwise, this event MUST be processed as specified in section [3.1.8.2](#Section_3.1.8.2).
 <a id="Section_3.5.6"></a>
 ### 3.5.6 Timer Events
 
@@ -6436,7 +6436,7 @@ None.
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-The following sections describe several examples of common scenarios to illustrate the function of the MSDTC Connection Manager: OleTx XA Transaction Protocol Extension. These protocol examples assume that an [**OleTx**](#gt_oletx) transports session, as specified in [MS-CMPO](#Section_2.1), has already been established between the two [**participants**](#gt_participant).
+The following sections describe several examples of common scenarios to illustrate the function of the MSDTC Connection Manager: OleTx XA Transaction Protocol Extension. These protocol examples assume that an [**OleTx**](#gt_oletx) transports session, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), has already been established between the two [**participants**](#gt_participant).
 
 In these examples, the abbreviation "gtrid" is used for "**XA Global Transaction Identifier**" to conserve space.
 
@@ -6450,7 +6450,7 @@ These scenarios show how an XA Superior Transaction Manager interoperates with a
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Opening an XA Superior Connection with an XA Subordinate Transaction Manager Facet Scenario
 
-This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2).
+This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an [XA Subordinate Transaction Manager Facet](#Section_2.2.4).
 
 [CONNTYPE_XAUSER_CONTROL](#Section_2.2.4.2): The packet sequence starts when an XA Superior Transaction Manager initiates a connection with an XA Subordinate Transaction Manager Facet using CONNTYPE_XAUSER_CONTROL.
 
@@ -6494,7 +6494,7 @@ When the XA Superior Transaction Manager gets the [**XAUSER_CONTROL_MTAG_CREATED
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Starting an XA Superior Transaction with an XA Subordinate Transaction Manager Facet Scenario
 
-This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an XA Subordinate Transaction Manager Facet. This scenario assumes that the XA Superior Transaction Manager is maintaining an XA Superior connection with the XA Subordinate Transaction Manager Facet (see section [4.1.1](#Section_1.3.2.3.2)).
+This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an XA Subordinate Transaction Manager Facet. This scenario assumes that the XA Superior Transaction Manager is maintaining an XA Superior connection with the XA Subordinate Transaction Manager Facet (see section [4.1.1](#Section_4.1.1)).
 
 **CONNTYPE_XAUSER_XACT_START:** The packet sequence starts when an XA Superior Transaction Manager initiates a connection with an XA Subordinate Transaction Manager Facet using CONNTYPE_XAUSER_XACT_START.
 
@@ -6593,12 +6593,12 @@ When the XA Superior Transaction Manager receives the XAUSER_XACT_MTAG_STARTED r
 <a id="Section_4.1.3"></a>
 ### 4.1.3 XA Superior Two-Phase Commit Scenario
 
-This scenario shows how an XA Superior Transaction Manager performs the [**Two-Phase Commit Protocol**](#gt_two-phase-commit) with an XA Subordinate Transaction Manager Facet. This scenario assumes that the XA Superior Transaction Manager is maintaining an XA Superior connection with the XA Subordinate Transaction Manager Facet (see section [4.1.1](#Section_1.3.2.3.2)).
+This scenario shows how an XA Superior Transaction Manager performs the [**Two-Phase Commit Protocol**](#gt_two-phase-commit) with an XA Subordinate Transaction Manager Facet. This scenario assumes that the XA Superior Transaction Manager is maintaining an XA Superior connection with the XA Subordinate Transaction Manager Facet (see section [4.1.1](#Section_4.1.1)).
 
 <a id="Section_4.1.3.1"></a>
 #### 4.1.3.1 Preparing an XA Superior Transaction with an XA Subordinate Transaction Manager Facet
 
-This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2).
+This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an [XA Subordinate Transaction Manager Facet](#Section_2.2.4).
 
 [CONNTYPE_XAUSER_XACT_OPEN](#Section_2.2.4.5): The packet sequence starts when an XA Superior Transaction Manager initiates a connection with an XA Subordinate Transaction Manager Facet using CONNTYPE_XAUSER_XACT_OPEN.
 
@@ -6709,7 +6709,7 @@ When the XA Superior Transaction Manager receives the **XAUSER_XACT_MTAG_REQUEST
 <a id="Section_4.1.3.2"></a>
 #### 4.1.3.2 Committing an XA Superior Transaction with an XA Subordinate Transaction Manager Facet
 
-This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2).
+This packet sequence is initiated by starting a connection on a transport session between an XA Superior Transaction Manager and an [XA Subordinate Transaction Manager Facet](#Section_2.2.4).
 
 **CONNTYPE_XAUSER_XACT_OPEN:** The packet sequence starts when an XA Superior Transaction Manager initiates a connection with an XA Subordinate Transaction Manager Facet using CONNTYPE_XAUSER_XACT_OPEN.
 
@@ -6819,12 +6819,12 @@ When the XA Superior Transaction Manager receives the **XAUSER_XACT_MTAG_REQUEST
 <a id="Section_4.1.4"></a>
 ### 4.1.4 XA Superior Recovery Scenario
 
-This scenario shows how an XA Superior Transaction Manager performs XA Recovery with an [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2). This scenario assumes that the XA Superior Transaction Manager is maintaining an XA Superior connection with the XA Subordinate Transaction Manager Facet (see section [4.1.1](#Section_1.3.2.3.2)).
+This scenario shows how an XA Superior Transaction Manager performs XA Recovery with an [XA Subordinate Transaction Manager Facet](#Section_2.2.4). This scenario assumes that the XA Superior Transaction Manager is maintaining an XA Superior connection with the XA Subordinate Transaction Manager Facet (see section [4.1.1](#Section_4.1.1)).
 
 <a id="Section_4.1.4.1"></a>
 #### 4.1.4.1 Obtaining a List of XA Superior Transactions to Recover with an XA Subordinate Transaction Manager Facet
 
-This packet sequence uses the XA Superior connection already established with the [XA Subordinate Transaction Manager Facet](#Section_1.3.2.3.2) (see section [4.1.1](#Section_1.3.2.3.2)).
+This packet sequence uses the XA Superior connection already established with the [XA Subordinate Transaction Manager Facet](#Section_2.2.4) (see section [4.1.1](#Section_4.1.1)).
 
 To initiate recovery, the [XA Superior Transaction Manager](#Section_2.2.4) sends a [**XAUSER_CONTROL_MTAG_RECOVER**](#Section_2.2.4.2.4) user message. In this example, the XA Superior Transaction Manager specifies to start a new scan (RequestFlags: XARECOVER_START_SCAN) and to return a maximum of five XIDs (totalUOWsRequested: 5).
 
@@ -7197,7 +7197,7 @@ When the XA Resource Manager Bridge Facet receives the **XATMUSER_MTAG_ENLIST** 
 
 Next, the XA Resource Manager Bridge Facet attempts to find an **XA Subordinate Enlistment object** in the **XA Subordinate Enlistment Table** referenced by the found **XA Resource Manager object** that has an **XID** field that contains an object that has a **Data Field** that contains an **XA Global Transaction identifier** that is set to the **XA Global Transaction Identifier** portion of the **Data** field of the **XA_XID** structure contained in the **Xid** field of the message. In this example, assume such an object was NOT found.
 
-Next, the XA Resource Manager Bridge Facet attempts to create an **XA Subordinate Enlistment object** as outlined in section [3.4.1](../MS-DTCO/MS-DTCO.md) and import a transaction as specified in [MS-DTCO] section 3.3.4.6 using the **ImportCookie** value of the received message. Assume the transaction was imported successfully. The XA Resource Manager Bridge Facet signals the [Create Subordinate Enlistment Success](#Section_3.4.7.5) event (section 3.4.7.5) providing the created **XA Subordinate Enlistment object**.
+Next, the XA Resource Manager Bridge Facet attempts to create an **XA Subordinate Enlistment object** as outlined in section [3.4.1](#Section_3.4.1) and import a transaction as specified in [MS-DTCO] section 3.3.4.6 using the **ImportCookie** value of the received message. Assume the transaction was imported successfully. The XA Resource Manager Bridge Facet signals the [Create Subordinate Enlistment Success](#Section_3.4.7.5) event (section 3.4.7.5) providing the created **XA Subordinate Enlistment object**.
 
 The Create Subordinate Enlistment Success event sends an [**XATMUSER_MTAG_ENLISTMENTOK**](#Section_2.2.3.4.10) message to the XA Resource Manager Bridge.
 
@@ -7365,11 +7365,11 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <9> Section 3.2.5.1.2: When iterating over available **XA Superior Enlistment Object**s during processing of an **XAUSER_CONTROL_MTAG_RECOVER** message (section 2.2.4.2.4) on Windows NT 4.0 Option Pack, no check is performed, and the actions are taken for all **XA Superior Enlistment Object**s. Under the same conditions, only **XA Superior Enlistment Object**s in the **Preparing State** are returned.
 
-<10> Section 3.2.5.2.2: A [Connection Disconnected](#Section_3.5.5.2.5) event (section 3.2.5.2.2) on a CONNTYPE_XAUSER_XACT_START (section [2.2.4.3](#Section_2.2.4.3)), CONNTYPE_XAUSER_XACT_OPEN (section [2.2.4.5](#Section_2.2.4.5)), CONNTYPE_XAUSER_XACT_BRANCH_START (section 2.2.4.4), or CONNTYPE_XAUSER_XACT_BRANCH_OPEN (section 2.2.4.6) connection type is not processed on Windows NT 4.0 Option Pack, Windows 2000, Windows XP, or Windows Server 2003.
+<10> Section 3.2.5.2.2: A [Connection Disconnected](#Section_3.1.8.2) event (section 3.2.5.2.2) on a CONNTYPE_XAUSER_XACT_START (section [2.2.4.3](#Section_2.2.4.3)), CONNTYPE_XAUSER_XACT_OPEN (section [2.2.4.5](#Section_2.2.4.5)), CONNTYPE_XAUSER_XACT_BRANCH_START (section 2.2.4.4), or CONNTYPE_XAUSER_XACT_BRANCH_OPEN (section 2.2.4.6) connection type is not processed on Windows NT 4.0 Option Pack, Windows 2000, Windows XP, or Windows Server 2003.
 
 <11> Section 3.2.5.3.5: A [Connection Disconnected](#Section_3.2.5.3.5) event (section 3.2.5.3.5) on a CONNTYPE_XAUSER_XACT_START (section 2.2.4.3), CONNTYPE_XAUSER_XACT_OPEN (section 2.2.4.5), CONNTYPE_XAUSER_XACT_BRANCH_START (section 2.2.4.4), or CONNTYPE_XAUSER_XACT_BRANCH_OPEN (section 2.2.4.6) connection type is not processed on Windows NT 4.0 Option Pack, Windows 2000, Windows XP, or Windows Server 2003.
 
-<12> Section 3.2.5.5.2: A [Connection Disconnected](#Section_3.5.5.2.5) event (section 3.2.5.5.2) on a CONNTYPE_XAUSER_XACT_START (section 2.2.4.3), CONNTYPE_XAUSER_XACT_OPEN (section 2.2.4.5), CONNTYPE_XAUSER_XACT_BRANCH_START (section 2.2.4.4), or CONNTYPE_XAUSER_XACT_BRANCH_OPEN (section 2.2.4.6) connection type is not processed on Windows NT 4.0 Option Pack, Windows 2000, Windows XP, or Windows Server 2003.
+<12> Section 3.2.5.5.2: A [Connection Disconnected](#Section_3.1.8.2) event (section 3.2.5.5.2) on a CONNTYPE_XAUSER_XACT_START (section 2.2.4.3), CONNTYPE_XAUSER_XACT_OPEN (section 2.2.4.5), CONNTYPE_XAUSER_XACT_BRANCH_START (section 2.2.4.4), or CONNTYPE_XAUSER_XACT_BRANCH_OPEN (section 2.2.4.6) connection type is not processed on Windows NT 4.0 Option Pack, Windows 2000, Windows XP, or Windows Server 2003.
 
 <13> Section 3.2.5.6.5: A [Connection Disconnected](#Section_3.2.5.6.5) event (section 3.2.5.6.5) on a CONNTYPE_XAUSER_XACT_START (section 2.2.4.3), CONNTYPE_XAUSER_XACT_OPEN (section 2.2.4.5), CONNTYPE_XAUSER_XACT_BRANCH_START (section 2.2.4.4), or CONNTYPE_XAUSER_XACT_BRANCH_OPEN (section 2.2.4.6) connection type is not processed on Windows NT 4.0 Option Pack, Windows 2000, Windows XP, or Windows Server 2003.
 

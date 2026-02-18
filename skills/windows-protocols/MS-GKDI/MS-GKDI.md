@@ -289,7 +289,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [FIPS197] FIPS PUBS, "Advanced Encryption Standard (AES)", FIPS PUB 197, November 2001, [https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf](https://go.microsoft.com/fwlink/?LinkId=89870)
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDN-ALG] Microsoft Corporation, "CNG Algorithm Identifiers", [http://msdn.microsoft.com/en-us/library/aa375534(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=187044)
 
@@ -304,7 +304,7 @@ The Group Key Distribution Protocol utilizes a single [**remote procedure call (
 
 - Requesting the most recent key for a security descriptor: after evaluating the client's security context against the specified security descriptor, the server will return a seed key, a public key, or an error.
 - Requesting a specific key for a security descriptor, or the key used for a set of security principals at a specific time in the past: after evaluating the client's security context against the specified security descriptor, the server will return either a seed key or an error.
-Active Directory domain controllers with a DC functional level of DS_BEHAVIOR_WIN2012 or higher can serve as Group Key Distribution Protocol servers. Clients can locate Group Key Distribution Protocol servers by using the DC locator functionality, as specified in section [3.2.4.2](#Section_3.2.4.2). These servers store a small amount of state in Active Directory (sections [2.3](#Section_2.3) and [3.1.1](#Section_3.2.1)), which consists of configuration information and one or more [**root key**](#gt_root-key) [**objects**](#gt_object). Other than this, Group Key Distribution Protocol servers retain no state across RPC calls.
+Active Directory domain controllers with a DC functional level of DS_BEHAVIOR_WIN2012 or higher can serve as Group Key Distribution Protocol servers. Clients can locate Group Key Distribution Protocol servers by using the DC locator functionality, as specified in section [3.2.4.2](#Section_3.2.4.2). These servers store a small amount of state in Active Directory (sections [2.3](#Section_2.3) and [3.1.1](#Section_3.1.1)), which consists of configuration information and one or more [**root key**](#gt_root-key) [**objects**](#gt_object). Other than this, Group Key Distribution Protocol servers retain no state across RPC calls.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -326,14 +326,14 @@ To use the Group Key Distribution Protocol, the client first establishes an auth
 
 The Group Key Distribution Protocol requires the use of secure RPC. It is necessary for both client and server to support mutual authentication through SPNEGO [MS-SPNG](../MS-SPNG/MS-SPNG.md) [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) and to also support security packages that implement impersonation support, along with packet privacy and integrity.
 
-The server needs to maintain some state in Active Directory, which consists of a [**server configuration**](#gt_server-configuration) [**object**](#gt_object) and a set of [**root key**](#gt_root-key) objects, as specified in section [3.1.1](#Section_3.2.1). This state has to be accessible from the location specified in section [1.9](#Section_1.9) in the form of the object classes referenced in section [2.3](#Section_2.3). At a minimum, a single valid server configuration object with a version number is required to be present on the Active Directory DC. A procedure for creating or updating a server configuration object is specified in section [3.1.4.1.3](#Section_3.1.4.1.3). Any server configuration that is created or updated in this manner will be used by all servers in the Active Directory [**forest**](#gt_forest) when creating future root keys, as specified in section [3.1.4.1.1](#Section_3.1.4.1.1), but will not affect any existing root keys. This state is replicated between domain controllers by using server-to-server [**replication**](#gt_replication) mechanisms, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.2.
+The server needs to maintain some state in Active Directory, which consists of a [**server configuration**](#gt_server-configuration) [**object**](#gt_object) and a set of [**root key**](#gt_root-key) objects, as specified in section [3.1.1](#Section_3.1.1). This state has to be accessible from the location specified in section [1.9](#Section_1.9) in the form of the object classes referenced in section [2.3](#Section_2.3). At a minimum, a single valid server configuration object with a version number is required to be present on the Active Directory DC. A procedure for creating or updating a server configuration object is specified in section [3.1.4.1.3](#Section_3.1.4.1.3). Any server configuration that is created or updated in this manner will be used by all servers in the Active Directory [**forest**](#gt_forest) when creating future root keys, as specified in section [3.1.4.1.1](#Section_3.1.4.1.1), but will not affect any existing root keys. This state is replicated between domain controllers by using server-to-server [**replication**](#gt_replication) mechanisms, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.2.
 
 The server configuration object also needs protection from unauthorized modification, and the root key objects require protection from unauthorized disclosure or modification. The server also requires a method of generating cryptographically strong random numbers for use as root keys in this protocol.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
 
-The Group Key Distribution Protocol is appropriate for use when it is desirable to associate cryptographic keys with [**security descriptors**](#gt_security-descriptor) in an [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain). It is only appropriate for a client to use this protocol when it has valid authentication credentials in a domain that contains at least one [**DC**](#gt_domain-controller-dc) with a DC functional level of DS_BEHAVIOR_WIN2012 or higher, as specified in section [1.5](#Section_1.5). Also, this protocol is not appropriate when protection against untrusted domain administrators is desired, as specified in section [5.1](#Section_5).
+The Group Key Distribution Protocol is appropriate for use when it is desirable to associate cryptographic keys with [**security descriptors**](#gt_security-descriptor) in an [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain). It is only appropriate for a client to use this protocol when it has valid authentication credentials in a domain that contains at least one [**DC**](#gt_domain-controller-dc) with a DC functional level of DS_BEHAVIOR_WIN2012 or higher, as specified in section [1.5](#Section_1.5). Also, this protocol is not appropriate when protection against untrusted domain administrators is desired, as specified in section [5.1](#Section_5.1).
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -370,7 +370,7 @@ The following table provides the [**relative distinguished name (RDN)**](#gt_rel
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| The RDN of the server configuration object, relative to [**forest**](#gt_forest) root. | CN=SID Key Server Configuration,CN=Server Configuration,CN=Sid Key Service,CN=Services,CN=Configuration | Section [3.1.1](#Section_3.2.1) |
+| The RDN of the server configuration object, relative to [**forest**](#gt_forest) root. | CN=SID Key Server Configuration,CN=Server Configuration,CN=Sid Key Service,CN=Services,CN=Configuration | Section [3.1.1](#Section_3.1.1) |
 | The RDN of the root key container, relative to forest root. | CN=Master Root Keys,CN=Sid Key Service,CN=Services,CN=Configuration | Section 3.1.1 |
 
 <a id="Section_2"></a>
@@ -803,7 +803,7 @@ To create a new **root key** object, the server MUST proceed as follows:
 - Set the **msKds-Version** attribute of this **root key** object to the value of the **msKds-Version** attribute in the **Server Configuration** object retrieved in step 4.
 - Check for the existence of the **msKds-KDF-AlgorithmID** attribute in the **Server Configuration** object retrieved in step 4. If it is present, set the **msKds-KDF-AlgorithmID** and **msKds-KDF-Param** attributes of the **root key** object to the values of the corresponding attributes in the **Server Configuration** object. If the **msKds-KDF-AlgorithmID** attribute is not present in the **Server Configuration** object, set the **msKds-KDF-AlgorithmID** attribute of this **root key** object to the [**Unicode string**](#gt_unicode-string) value "SP800_108_CTR_HMAC", and the **msKds-KDF-Param** attribute to a **KDF Parameters** structure (section [2.2.1](#Section_2.2.1)) that has the **Hash algorithm name** field set to the null-terminated Unicode string "SHA512".
 - Check for the existence of the **msKds-SecretAgreement-AlgorithmID** attribute in the **Server Configuration** object retrieved in step 4. If it is present, set the **msKds-SecretAgreement-AlgorithmID**, **msKds-SecretAgreement-Param**, **msKds-PublicKey-Length**, and **msKds-PrivateKey-Length** attributes of this **root key** object to the values of the corresponding attributes in the **Server Configuration** object. If the **msKds-SecretAgreement-AlgorithmID** attribute is not present in the **Server Configuration** object, set the **msKds-SecretAgreement-AlgorithmID** attribute of this **root key** object to the Unicode string value "DH", the **msKds-SecretAgreement-Param** attribute to a **FFC DH Parameters** structure (section [2.2.2](#Section_2.2.2)) containing the constants specified in [[RFC5114]](https://go.microsoft.com/fwlink/?LinkId=221923) section 2.3, the **msKds-PublicKey-Length** attribute to 2048, and the **msKds-PrivateKey-Length** attribute to 256.
-- Add this new **root key** object to the server's state, as specified in section [3.1.1](#Section_3.2.1).
+- Add this new **root key** object to the server's state, as specified in section [3.1.1](#Section_3.1.1).
 <a id="Section_3.1.4.1.2"></a>
 ##### 3.1.4.1.2 Generating a Group Key
 
@@ -811,7 +811,7 @@ This section specifies the processing rules for generating a [**group key**](#gt
 
 - SD — is used to denote the specified security descriptor, expressed in self-relative form, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 - RKID — denotes the specified root key identifier, represented in the binary format specified in [MS-DTYP] section 2.3.4.2.
-- RK — denotes the selected **root key** [**object**](#gt_object) corresponding to the root key identifier RKID. The attributes of the **root key** object are denoted in the form **RK.attributeName**, where attributeName is a particular [**Active Directory**](#gt_active-directory) attribute of the **root key** object, as specified in section [3.1.1](#Section_3.2.1). For example, **RK.msKds-Version** indicates the version of the **root key** RK.
+- RK — denotes the selected **root key** [**object**](#gt_object) corresponding to the root key identifier RKID. The attributes of the **root key** object are denoted in the form **RK.attributeName**, where attributeName is a particular [**Active Directory**](#gt_active-directory) attribute of the **root key** object, as specified in section [3.1.1](#Section_3.1.1). For example, **RK.msKds-Version** indicates the version of the **root key** RK.
 - (L0, L1, L2) — refers to the specified group key identifier.
 - Key(SD, RK, L0, L1, L2) — denotes the **group seed key** for security descriptor SD, **root key** object RK, and group key identifier (L0, L1, L2).
 - PubKey(SD, RK, L0, L1, L2) — denotes the [**group public key**](#gt_group-public-key) for security descriptor SD, **root key** object RK, and group key identifier (L0, L1, L2).
@@ -1035,7 +1035,7 @@ Also, since **root keys** are used to generate group keys for all [**security de
 
 Client implementations need to restrict access to the client's **group key cache**. Moreover, an implementation needs to ensure that a **group key** corresponding to a given security descriptor cannot be read or modified by a user who would not normally be able to obtain that key. If the **group key** cache is stored on disk, it is strongly recommended that it be stored in encrypted form.
 
-Guidance on building strong cryptographic subsystems is available in [[FIPS140]](https://go.microsoft.com/fwlink/?LinkId=89866). An overview of the Windows security architecture is available in [MS-WPO](#Section_1.3) section 9.
+Guidance on building strong cryptographic subsystems is available in [[FIPS140]](https://go.microsoft.com/fwlink/?LinkId=89866). An overview of the Windows security architecture is available in [MS-WPO](../MS-WPO/MS-WPO.md) section 9.
 
 Any implementation of a protocol exposes code to inputs from attackers. It is strongly advised for such code to be developed according to secure coding and development practices to avoid buffer overflows, denial-of-service attacks, escalation of privilege, and disclosure of information. For more information about these concepts, secure development best practices, and common errors, see [HOWARD].
 
@@ -1045,7 +1045,7 @@ Any implementation of a protocol exposes code to inputs from attackers. It is st
 | Security parameter | Section |
 | --- | --- |
 | Authentication | [1.7](#Section_1.7), [2.1](#Section_2.1) |
-| Use of [**RPC**](#gt_remote-procedure-call-rpc) security | 2.1, [3.1.4](#Section_3.2.4), [3.1.3](#Section_3.1.3), [3.2.4](#Section_3.2.4) |
+| Use of [**RPC**](#gt_remote-procedure-call-rpc) security | 2.1, [3.1.4](#Section_3.1.4), [3.1.3](#Section_3.1.3), [3.2.4](#Section_3.2.4) |
 | Key derivation algorithm | [3.1.4.1](#Section_3.1.4.1), 3.2.4 |
 | Secret agreement algorithm | 3.1.4.1, 3.2.4 |
 

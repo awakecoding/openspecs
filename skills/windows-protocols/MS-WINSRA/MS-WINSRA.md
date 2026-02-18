@@ -315,8 +315,8 @@ The pull replication operation involves four distinct phases as specified below.
 - **AutoDiscovery:** This is an optional phase of the replication where the NBNS servers send the NBNS_UP messages to discover each other. If AutoDiscovery is disabled, the partners are configured by an administrator. Once the servers discover each other, they then move to the next phase of the pull replication by setting up an association.
 - **Association Setup:** In this phase the NBNS server establishes a TCP connection on port 42 and then sends an [Association Start Request](#Section_2.2.3) packet to its partners to initiate replication, and in turn receives their [Association Start Responses](#Section_2.2.4). Once the handshake of the Request/Response is complete, the association is complete.
 - **Partner/Record Identification:** Before pulling records from a replication partner, NBNS needs to determine the range of records it needs to pull for each of the record owners. Each NBNS server sends a request packet (the [Owner-Version Map Request Packet](#Section_2.2.6)) over the association. The replication partner responds with a response packet that contains information about the owner (IPv4 address) and the version number of the records in its database. This information about the owner and the version number of a record is referred to as the owner-version map.
-- **Database synchronization:** Once the NBNS server retrieves complete maps from the remote partner, it determines for which of the owners the partner has more up-to-date name records by comparing the local and remote version numbers pertaining to the respective owner. For each of the owners for which the remote partner has a more recent view of its records, these records are requested in [Name Records Request Packet](#Section_2.2.10.1).
-The remote server responds with the [Name Records Response Packet](#Section_2.2.10.1) that contains the records requested. When all the Name Records Requests have been satisfied, the pull replication is complete.
+- **Database synchronization:** Once the NBNS server retrieves complete maps from the remote partner, it determines for which of the owners the partner has more up-to-date name records by comparing the local and remote version numbers pertaining to the respective owner. For each of the owners for which the remote partner has a more recent view of its records, these records are requested in [Name Records Request Packet](#Section_2.2.9).
+The remote server responds with the [Name Records Response Packet](#Section_2.2.10) that contains the records requested. When all the Name Records Requests have been satisfied, the pull replication is complete.
 
 A push replication partner is an NBNS server that pushes or notifies other NBNS servers (those configured to use it as a pull replication partner) of the need to replicate their database entries at a configured interval. Push replication has four phases; phases 1, 2 and 4 are identical. Phase 3 (Partner/Record Identification) is different and explained in the paragraph below.
 
@@ -436,7 +436,7 @@ packet-beta
 | 0x00000000 | Association Start Request Message |
 | 0x00000001 | Association Start Response Message |
 | 0x00000002 | [Association Stop Request Message](#Section_2.2.5) |
-| 0x00000003 | [Owner-Version Map Request Message](#Section_2.2.6), [Owner-Version Map Response Message](#Section_2.2.7), [Update Notification Message](#Section_2.2.8), [Name Records Request Message](#Section_2.2.10.1), and [Name Records Response Message](#Section_2.2.10.1) |
+| 0x00000003 | [Owner-Version Map Request Message](#Section_2.2.6), [Owner-Version Map Response Message](#Section_2.2.7), [Update Notification Message](#Section_2.2.8), [Name Records Request Message](#Section_2.2.9), and [Name Records Response Message](#Section_2.2.10) |
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Association Start Request Message
@@ -719,7 +719,7 @@ packet-beta
 | Variable | - | - 3 Reserved; if received MUST be treated as opaque data. |
 | Whether this record is local or [**replica**](#gt_replica). | 4 (L flag) | 0 This record is a [**local record**](#gt_local-record). That is, the name record is owned by the sending server. |
 | Variable | - | - 1 This record is a replica. That is, the name record is not owned by the sending server, but by another NBNS server. |
-| Variable | 3–2 (ST flag) | The state of the name record (see section [3.1.1.1](#Section_2.2.10) for more information). 0 Active. States of a name record are defined in section 3.1.1.1. |
+| Variable | 3–2 (ST flag) | The state of the name record (see section [3.1.1.1](#Section_3.1.1.1) for more information). 0 Active. States of a name record are defined in section 3.1.1.1. |
 | [**Tombstoned record**](#gt_tombstoned-record). | - | - 2 |
 | Variable | - | - Other values MUST NOT be used. If received, then it MUST be treated as opaque data. |
 | Variable | 1–0 (ET flag) | Entry type of the name record. 0 Unique name. One unique name has only one IPv4 address. |
@@ -793,7 +793,7 @@ This section describes a conceptual model of possible data organization that an 
 
 An [**NBNS server**](#gt_netbios-name-server-nbns) needs to maintain the following data structures:
 
-- **Name record**: Name record is a data structure that holds name, IPv4 address, its owner's IPv4, and so on. (see section [3.1.1.1](#Section_2.2.10) for more information).
+- **Name record**: Name record is a data structure that holds name, IPv4 address, its owner's IPv4, and so on. (see section [3.1.1.1](#Section_3.1.1.1) for more information).
 - **Name records collection**: This is a collection of all records that are either registered by this NBNS server or obtained by replication.
 - **Owner-Version map**: This is a map of each NBNS owner to the highest version of record from that owner present in the name records collection. This map is used to determine if the NBNS server has to pull records from its partners and if so, the range of records to obtain.
 - **Global Version Counter**: This is a 64-bit unsigned integer that is used to track the version that will be given to the next record that will be updated.
@@ -840,7 +840,7 @@ And optionally, a UDP socket is opened to listen on port 42 for AutoDiscovery, a
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-See the Higher-Layer Triggered Events sections of [pull](#Section_85de3ead025f4074a0d87b5789e031ab) and [push](#Section_c35ffab583004abab72d57c39f7eb86a) role details.
+See the Higher-Layer Triggered Events sections of [pull](#Section_3.2) and [push](#Section_3.3) role details.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -850,7 +850,7 @@ See the Higher-Layer Triggered Events sections of [pull](#Section_85de3ead025f40
 
 Before an [**NBNS push partner**](#gt_nbns-push-partner) and an [**NBNS pull partner**](#gt_nbns-pull-partner) can exchange replication information, an association MUST be set up. An association corresponds to a TCP connection. It can be persistent or non-persistent. A non-persistent association MUST not be used for more than one push or pull operation. A persistent association, once set up, is used for multiple request and response operations.
 
-If persistent connections are used, then one association is set up between each push and pull relation. Suppose server A is the pull partner and server B is the push partner. One association will be set up between the two servers. The push notification (for example, [Update Notification](#Section_2.2.8) message) from B to A, and the pull request (for example, [Name Records Request](#Section_2.2.10.1) message) will use the same association. If server A and server B are configured as both pull and push partners of each other, two associations will be set up between the two servers because there are two pull/push relationships between the servers.
+If persistent connections are used, then one association is set up between each push and pull relation. Suppose server A is the pull partner and server B is the push partner. One association will be set up between the two servers. The push notification (for example, [Update Notification](#Section_2.2.8) message) from B to A, and the pull request (for example, [Name Records Request](#Section_2.2.9) message) will use the same association. If server A and server B are configured as both pull and push partners of each other, two associations will be set up between the two servers because there are two pull/push relationships between the servers.
 
 An association is uniquely identified on a machine with an association handle, which is an unsigned 32-bit integer. When setting up a new association, the sender generates an association handle, and sends it inside an [Association Start Request](#Section_2.2.3) message's **Sender Association Handle** field. The receiver machine also generates an association handle, and sends it inside an [Association Start Response](#Section_2.2.4) message in the **Sender Association Handle** field. Now both the machines know the association handle value on the other machine. The association handle on the other machine MUST be included in the common header of every replication message as the **Destination Association Handle** field.
 
@@ -937,7 +937,7 @@ The Owner-Version Map Response message from a push partner contains every [**NBN
 - The pull partner merges all the maps. If an owner appears in several maps, then the highest version number of all the maximum version numbers for this owner is kept. This merge also includes the local map from the pull partner itself.
 See section [4.1](#Section_4.1) for an example of merging the owner-version map from different partners.
 
-- **Obtain Name Records**: The pull partner identifies the push partner that has the latest [name records](#Section_2.2.10) for each owner and sends the [Name Records Request](#Section_2.2.10.1) for each owner to the specific partner, and gets the [Name Records Response](#Section_2.2.10.1). The pull partner MUST NOT send request messages if it already has the latest name records for an owner.
+- **Obtain Name Records**: The pull partner identifies the push partner that has the latest [name records](#Section_3.1.1.1) for each owner and sends the [Name Records Request](#Section_2.2.9) for each owner to the specific partner, and gets the [Name Records Response](#Section_2.2.10). The pull partner MUST NOT send request messages if it already has the latest name records for an owner.
 The **Min Version Number** field in the request message is set to the highest locally known version number for the owner plus 1. The Max Version Number is set to the max version number from the merged map. Push partner MUST not send name records in released state when responding with a Name Records Response message.
 
 If any error happens during the process, the association between the pull partner and the push partner is stopped. The pull partner skips this push partner and continues to the next push partner.
@@ -951,7 +951,7 @@ Push notification triggered pull replication happens in following stages:
 - Association setup: Push partner sets up a new association if persistent associations are not used or if persistent association is not present. If persistent associations are used and an existing association is present, this step is skipped.
 - Update notification: Push partner sends an [Update Notification](#Section_2.2.8) message to the pull partner. The Update Notification message carries the owner-version map on the push partner. After receiving this message, the pull partner merges the map with its own local owner-version map following the same procedure as specified in section [3.2.5.1](#Section_3.2.5.1). Once the merged map is created, the pull partner finds out for which owner the push partner has newer name records.
 - If no persistent association exists previously, and it is set up for the first time in step 1, the partner pull server will set up a new association by sending an association request message after it receives the update notification message. The push partner has to respond to this association start request message by sending an association start response message. After the association is set up, the pull partner will use this new association to send name record request messages. All subsequent persistent replications will happen with this newly set-up association.
-- Obtain Name Records: For each owner, the pull partner sends a [Name Records Request](#Section_2.2.10.1) message to the push partner to retrieve the name records. The push partner responds to Name Records Request with [Name Records Response](#Section_2.2.10.1) message. The pull partner adds the returned name records to its local database of name records.
+- Obtain Name Records: For each owner, the pull partner sends a [Name Records Request](#Section_2.2.9) message to the push partner to retrieve the name records. The push partner responds to Name Records Request with [Name Records Response](#Section_2.2.10) message. The pull partner adds the returned name records to its local database of name records.
 - Update local database: After the pull partner has received a response for each owner, it adds the replicated name records to its local database of name records. In this operation, name conflicts can occur. See section [3.2.5.5](#Section_3.2.5.5) for name conflict resolution.
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Data Verification Pull Replication
@@ -959,8 +959,8 @@ Push notification triggered pull replication happens in following stages:
 Data verification pull replication can be initiated manually or via a database verification timer. Data verification pull replication happens in the following phases:
 
 - Association setup: The pull partner goes through all the owner [**NBNS servers**](#gt_netbios-name-server-nbns) one by one. All the [**active**](#gt_active) [**name records**](#gt_name-record) owned by the owner NBNS server to be verified are scanned and the maximum version number is determined. Then a NBNS server is selected and an association is set up with it. If the owner NBNS server is one of the configured push partners, then the association will be with the push partner. If the owner NBNS server is not configured as a push partner, and if the configuration allows data verification with non-partner NBNS servers, then the association will be with the owner NBNS server. If the owner NBNS server is not configured as a push partner, and if the configuration only allows verification with push partners, then the association will be with a randomly selected push partner. No persistent association is used in data verification pull replication.
-- Obtain Name Records: The pull partner then sends a [Name Records Request](#Section_2.2.10.1) message. The minimum version number in a Name Records Request message is 1, and the maximum version number is the highest version number of all active name records owned by the owner NBNS server.
-- Update local database: Once the [Name Records Response](#Section_2.2.10.1) message is received, the pull partner updates all the name records in its database owned by the owner. If any name records are not found in the response message, it is deleted from the local name record database.
+- Obtain Name Records: The pull partner then sends a [Name Records Request](#Section_2.2.9) message. The minimum version number in a Name Records Request message is 1, and the maximum version number is the highest version number of all active name records owned by the owner NBNS server.
+- Update local database: Once the [Name Records Response](#Section_2.2.10) message is received, the pull partner updates all the name records in its database owned by the owner. If any name records are not found in the response message, it is deleted from the local name record database.
 An NBNS server MUST stop data verification, if during data verification it retrieves the maximum number of records per verification;<10> it SHOULD continue the verification during the next expiration of the database verification timer.
 
 If data verification pull replication is manually initiated, all owner NBNS servers will be verified. The data verification is not subject to the maximum number of records limitation.
@@ -1078,13 +1078,13 @@ To prevent the push notifications from overwhelming the partners, the server MAY
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Processing Pull Replication Requests
 
-The push partner processes two pull replication request messages: [Owner-Version Map Request](#Section_2.2.6) and [Name Records Request](#Section_2.2.10.1).
+The push partner processes two pull replication request messages: [Owner-Version Map Request](#Section_2.2.6) and [Name Records Request](#Section_2.2.9).
 
 Upon receiving an Owner-Version Map Request message from a configured pull partner, the push partner finds all the owners of name records, including itself, in the database, and finds the maximum and minimum version number of the name records for each owner server. Then the push partner sends the information in the [Owner-Version Map Response](#Section_2.2.7) message.
 
 If the request message comes from a machine that is not configured as a pull partner, then the operation depends on the configuration. If the push partner is configured to allow replication with other servers not configured as replication partners, then a Owner-Version Map Response message is sent. Otherwise, the association is shut down.
 
-Each Name Records Request message requests the name records with the version number between Min Version Number and Max Version Number owned by a specific owner server. Upon receiving a Name Records Request message from a configured pull partner, the push partner searches all its name records for the ones that satisfy the request. It then sends back the name records (static and dynamic) in the [Name Records Response](#Section_2.2.10.1) message. If the request message comes from a machine that is not configured as a pull partner, then only dynamic name records are included in the Name Records Response message.
+Each Name Records Request message requests the name records with the version number between Min Version Number and Max Version Number owned by a specific owner server. Upon receiving a Name Records Request message from a configured pull partner, the push partner searches all its name records for the ones that satisfy the request. It then sends back the name records (static and dynamic) in the [Name Records Response](#Section_2.2.10) message. If the request message comes from a machine that is not configured as a pull partner, then only dynamic name records are included in the Name Records Response message.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -1183,7 +1183,7 @@ The merged table looks like the following. Note that now the pull partner gets t
 | IPd | 958 | Partner 1 |
 | IPe | 453 | Partner 2 |
 
-After obtaining the merged owner-version the preceding table, the pull partner sends a [Name Records Request message](#Section_2.2.10.1) to the push partners to actually get the name records. The following table shows the messages to be sent.
+After obtaining the merged owner-version the preceding table, the pull partner sends a [Name Records Request message](#Section_2.2.9) to the push partners to actually get the name records. The following table shows the messages to be sent.
 
 | Owner | Push partner to send message to | Minimum version in the request | Maximum version in the request |
 | --- | --- | --- | --- |
@@ -1201,7 +1201,7 @@ First, the pull partner [**NBNS**](#gt_netbios-name-server-nbns) server 1 establ
 
 Then NBNS server 1 sends an [Owner-Version Map Request](#Section_2.2.6) to NBNS server 2 to discover the owner-version map on NBNS server 2. NBNS server 2 sends back its owner-version map to NBNS server 1 in an [Owner-Version Map Response message](#Section_2.2.7).
 
-After examining the NBNS server 2's owner-version map, NBNS server 1 decides that there are newer name records on NBNS server 2 to be replicated. NBNS server 1 finds out the version range to retrieve and sends a [Name Records Request message](#Section_2.2.10.1) to NBNS server 2. NBNS server 2 sends the name records in a [Name Records Response message](#Section_2.2.10.1).
+After examining the NBNS server 2's owner-version map, NBNS server 1 decides that there are newer name records on NBNS server 2 to be replicated. NBNS server 1 finds out the version range to retrieve and sends a [Name Records Request message](#Section_2.2.9) to NBNS server 2. NBNS server 2 sends the name records in a [Name Records Response message](#Section_2.2.10).
 
 Finally NBNS server 1 sends an [Association Stop Request](#Section_2.2.5) to NBNS server 2 to tear down the association. The sender closes the TCP connection as soon as it sends the Association Stop Request.
 
@@ -1216,7 +1216,7 @@ The following figure shows the sequence of messages involved in propagating a pu
 
 Suppose that the administrator on NBNS server 1 starts a push notification to NBNS server 2 with propagation. Upon the administrator's request, NBNS server 1 sends an [Update Notification message](#Section_2.2.8) to NBNS server 2.
 
-Upon receiving the message, NBNS server 2 sends a [Name Records Request message](#Section_2.2.10.1) to NBNS server 1, and gets the updated name records from NBNS server 1 in the [Name Records Response message](#Section_2.2.10.1).
+Upon receiving the message, NBNS server 2 sends a [Name Records Request message](#Section_2.2.9) to NBNS server 1, and gets the updated name records from NBNS server 1 in the [Name Records Response message](#Section_2.2.10).
 
 After NBNS server 2 has processed the name records, it sends an Update Notification message to NBNS server 3, which will again do the same as NBNS server 2 has done to replicate the name records.
 
@@ -1292,7 +1292,7 @@ Windows 2000 Server and later set the minor version number to 5 in Association S
 
 <7> Section 2.2.9: If the Name Records Request message comes from a machine that is not a replication partner, a WINS server on Windows Server 2003 and later only sends dynamic name records in the Name Records Response message. WINS server on Windows NT 4.0 and Windows 2000 Server sends both dynamic and static name records.
 
-<8> Section 2.2.10.1: If the **Name Length** field in a name record in a [Name Records Response message](#Section_2.2.10.1) is larger than 255, which is invalid for NetBIOS name, then
+<8> Section 2.2.10.1: If the **Name Length** field in a name record in a [Name Records Response message](#Section_2.2.10) is larger than 255, which is invalid for NetBIOS name, then
 
 - On Windows NT 4.0, the name will be accepted.
 - On Windows 2000 Server and later, the Name Records Response message will be considered invalid, and all the records in it will be ignored.

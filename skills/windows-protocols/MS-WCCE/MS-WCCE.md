@@ -487,7 +487,7 @@ This document uses the following terms:
 **attribute**: A characteristic of some [**object**](#gt_object) or entity, typically encoded as a name/value pair.
 
 <a id="gt_autoenrollment"></a>
-**autoenrollment**: An automated process that performs [**certificate**](#gt_certificate) [**enrollment**](#gt_certificate-enrollment) and renewal. For more information about autoenrollment behavior, see [MS-CERSOD](#Section_1.3).
+**autoenrollment**: An automated process that performs [**certificate**](#gt_certificate) [**enrollment**](#gt_certificate-enrollment) and renewal. For more information about autoenrollment behavior, see [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md).
 
 <a id="gt_backward-cross-certificate"></a>
 **backward cross certificate**: Given a set of signing certificates for a specific certificate authority ([**CA**](#gt_certification-authority-ca)), this certificate is a cross certificate created between one of the certificates in the [**CA's**](#gt_certification-authority-ca) set and a certificate that precedes the set certificate (based on the value of the notBefore field), and has a different public-private key pair than the certificate with the set's.
@@ -919,7 +919,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [HTMLQ-keygen] HTML Quick, "KEYGEN ELEMENT", [https://www.htmlquick.com/reference/tags/keygen.html](https://go.microsoft.com/fwlink/?linkid=2165135)
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_1.3)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MS-EFSR] Microsoft Corporation, "[Encrypting File System Remote (EFSRPC) Protocol](../MS-EFSR/MS-EFSR.md)".
 
@@ -1007,9 +1007,9 @@ The high-level operations performed by the Windows Client Certificate Enrollment
 - Request a new [**certificate**](#gt_certificate) for the client directly from the [**CA**](#gt_certification-authority-ca). (For more information, see section [3.1.1.4.3.1](#Section_3.1.1.4.3.1).) This operation makes one [ICertRequestD::Request](#Section_3.2.1.4.2) or [ICertRequestD2::Request2](#Section_3.2.1.4.3) call from the client to the CA.
 - Get a new certificate on behalf of another through a [**Request On Behalf Of (ROBO)**](#gt_request-on-behalf-of-robo) process. The [**registration authority (RA)**](#gt_registration-authority-ra) requests a certificate on behalf of a client – a person (usually) or machine (potentially). For more information, see section [3.1.1.4.3.3](#Section_3.1.1.4.3.3). This operation makes one ICertRequestD::Request or ICertRequestD2::Request2 call from the RA to the CA.
 - Renew a certificate in which the client requests a certificate (presumably with a later expiration date) to replace an old certificate that is reaching its end of life (for more information, see section [3.1.1.4.3.2](#Section_3.1.1.4.3.2)). This operation makes one ICertRequestD::Request or ICertRequestD2::Request2 call from the client to the CA.
-- Get CA properties in which a client or RA queries the CA for its configuration and state (for more information, see sections [3.1.1.4.4](#Section_3.1.1.4.4), [3.1.1.4.6](#Section_3.1.1.4.6), and [3.1.1.4.7](#Section_3.1.1.4.7)). This operation makes one [ICertRequestD::GetCACert](#Section_3.2.1.4.2) or [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.2) call to the CA.
-- Issue a Ping request against a CA in which an [**end entity**](#gt_end-entity) or RA queries the CA to discover availability of the CA service (for more information, see section [3.1.1.4.5](#Section_3.1.1.4.5)). This operation makes one [ICertRequestD::Ping](#Section_3.2.1.4.2) or [ICertRequestD2::Ping2](#Section_3.2.1.4.2) call to the CA.
-- Archive a [**private key**](#gt_private-key) where a client uses a [**public key**](#gt_public-key) belonging to the CA to encrypt a copy of the private key corresponding to an [**encryption**](#gt_encryption) certificate and sends that encrypted private key to the CA for archiving. This archiving is an optional subprotocol, with security considerations specified in section [5.1.10](#Section_5). (For more information, see section [3.1.1.4.3.6](#Section_3.1.1.4.3.6).) This operation makes two calls from the client to the CA: ICertRequestD::GetCACert or [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.2) to retrieve the CA [**exchange certificate**](#gt_exchange-certificate), followed by ICertRequestD::Request or ICertRequestD2::Request2 to deliver a certificate request including the encrypted private key.
+- Get CA properties in which a client or RA queries the CA for its configuration and state (for more information, see sections [3.1.1.4.4](#Section_3.1.1.4.4), [3.1.1.4.6](#Section_3.1.1.4.6), and [3.1.1.4.7](#Section_3.1.1.4.7)). This operation makes one [ICertRequestD::GetCACert](#Section_3.2.1.4.2.2) or [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2) call to the CA.
+- Issue a Ping request against a CA in which an [**end entity**](#gt_end-entity) or RA queries the CA to discover availability of the CA service (for more information, see section [3.1.1.4.5](#Section_3.1.1.4.5)). This operation makes one [ICertRequestD::Ping](#Section_3.2.1.4.2.3) or [ICertRequestD2::Ping2](#Section_3.2.1.4.3.4) call to the CA.
+- Archive a [**private key**](#gt_private-key) where a client uses a [**public key**](#gt_public-key) belonging to the CA to encrypt a copy of the private key corresponding to an [**encryption**](#gt_encryption) certificate and sends that encrypted private key to the CA for archiving. This archiving is an optional subprotocol, with security considerations specified in section [5.1.10](#Section_5.1.10). (For more information, see section [3.1.1.4.3.6](#Section_3.1.1.4.3.6).) This operation makes two calls from the client to the CA: ICertRequestD::GetCACert or [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2) to retrieve the CA [**exchange certificate**](#gt_exchange-certificate), followed by ICertRequestD::Request or ICertRequestD2::Request2 to deliver a certificate request including the encrypted private key.
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Concepts
 
@@ -1028,7 +1028,7 @@ With respect to the first function, key archival policy is allowed. With respect
 
 The CA's [**exchange certificate**](#gt_exchange-certificate) is used to transport the client's private key for archiving.
 
-It is the responsibility of the CA to protect archived private keys from disclosure to unauthorized parties. How that protection is accomplished is up to the implementer of the CA. For more information on security considerations around key archival, see section [5.1.10](#Section_5). For processing rules concerning key archival, see section [3.2.2.6.2.1.2.2](#Section_3.2.2.6.2.1.2.2).
+It is the responsibility of the CA to protect archived private keys from disclosure to unauthorized parties. How that protection is accomplished is up to the implementer of the CA. For more information on security considerations around key archival, see section [5.1.10](#Section_5.1.10). For processing rules concerning key archival, see section [3.2.2.6.2.1.2.2](#Section_3.2.2.6.2.1.2.2).
 
 <a id="Section_1.3.2.2"></a>
 #### 1.3.2.2 Key Attestation
@@ -1077,7 +1077,7 @@ The client machine's (Netscape) browser connects to a web page served by a web s
 - The web page delivered by the web server to the client includes the <[**KEYGEN**](#gt_keygen)> tag. For more information, see [HTMLQ-keygen].
 - In response to the <KEYGEN> tag, the browser generates a [**public-private key pair**](#gt_public-private-key-pair) and builds a certificate enrollment request in a format defined by Netscape.
 - This request is delivered back to the web server with additional parameters.
-- The web server takes those parameters, builds a new request, and sends it to the [**CA**](#gt_certification-authority-ca) using the WCCE protocol, noting in the call that its parameters are in Netscape format (for more information, see sections [2.2.2.6.4](#Section_2.2.2.6.4.2) and [3.1.1.4.3.1.4](#Section_3.1.1.4.3.1.4)).
+- The web server takes those parameters, builds a new request, and sends it to the [**CA**](#gt_certification-authority-ca) using the WCCE protocol, noting in the call that its parameters are in Netscape format (for more information, see sections [2.2.2.6.4](#Section_2.2.2.6.4) and [3.1.1.4.3.1.4](#Section_3.1.1.4.3.1.4)).
 - The CA returns a certificate in response to that request to the RA (for more information, see section [3.2.2.6.2.1.4](#Section_3.2.2.6.2.1.4)).
 - The RA returns the certificate issued in step 6 to the Netscape browser over HTTP.
 **Note** Only steps 5 and 6 are specified in this document.
@@ -1166,7 +1166,7 @@ Figure 2: Windows Client Certificate Enrollment protocol stack
 
 Data structures that are defined in the [**certificate template**](#gt_certificate-template) structure specification (see [MS-CRTD](../MS-CRTD/MS-CRTD.md)), can be retrieved over [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), as specified in [[RFC2559]](https://go.microsoft.com/fwlink/?LinkId=90368), and used by the Windows Client Certificate Enrollment Protocol.
 
-The Certificate Services Remote Administration Protocol [MS-CSRA](../MS-CSRA/MS-CSRA.md) is a management protocol for the Windows Client Certificate Enrollment Protocol server. When implemented together Windows Client Certificate Enrollment Protocol shares ADM with Certificate Services Remote Administration Protocol [MS-CSRA] as specified in sections [3.2.1.1](#Section_3.2.1) and [3.2.1.1.3](#Section_3.2.1.1.3).
+The Certificate Services Remote Administration Protocol [MS-CSRA](../MS-CSRA/MS-CSRA.md) is a management protocol for the Windows Client Certificate Enrollment Protocol server. When implemented together Windows Client Certificate Enrollment Protocol shares ADM with Certificate Services Remote Administration Protocol [MS-CSRA] as specified in sections [3.2.1.1](#Section_3.2.1.1) and [3.2.1.1.3](#Section_3.2.1.1.3).
 
 The ICertPassage Remote Protocol [MS-ICPR](../MS-ICPR/MS-ICPR.md) is another [**certificate enrollment**](#gt_certificate-enrollment) protocol that is built directly on top of the Remote Procedure Call Protocol Extensions (RPCE) [MS-RPCE]. When implemented together the Windows Client Certificate Enrollment Protocol shares some of its ADM with ICertPassage Remote Protocol [MS-ICPR], as specified in [MS-ICPR] 3.1.1 and 3.2.1.
 
@@ -1189,7 +1189,7 @@ The Windows Client Certificate Enrollment Protocol is applicable to an environme
 
 This document covers versioning issues in the following areas.
 
-- **Interface support**: The Windows Client Certificate Enrollment Protocol uses [**DCOM**](#gt_distributed-component-object-model-dcom) [MS-DCOM](../MS-DCOM/MS-DCOM.md) to determine interface support, as specified in section [3.1.1.4](#Section_3.2.2.6).
+- **Interface support**: The Windows Client Certificate Enrollment Protocol uses [**DCOM**](#gt_distributed-component-object-model-dcom) [MS-DCOM](../MS-DCOM/MS-DCOM.md) to determine interface support, as specified in section [3.1.1.4](#Section_3.1.1.4).
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
@@ -1264,7 +1264,7 @@ typedef byte BYTE;
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Common Structures
 
-This section defines the structures used by the Windows Client Certificate Enrollment Protocol. These structures are used when a [**certificate**](#gt_certificate) request is submitted to the server and as part of the server's response. Use of these structures is specified in section [3.2.1.4](#Section_3.2.1).
+This section defines the structures used by the Windows Client Certificate Enrollment Protocol. These structures are used when a [**certificate**](#gt_certificate) request is submitted to the server and as part of the server's response. Use of these structures is specified in section [3.2.1.4](#Section_3.2.1.4).
 
 All communications of [**binary large objects (BLOBs)**](#gt_binary-large-object-blob) between the client and server use the [CERTTRANSBLOB](#Section_2.2.2.2) data structure (which also takes the acronym BLOB). The CERTTRANSBLOB data structure contains a length and a pointer to a byte array. The type of content, stored in the byte array buffer, depends on the particular call context.
 
@@ -1395,7 +1395,7 @@ packet-beta
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 CATRANSPROP
 
-The **CATRANSPROP** structure encapsulates information about a [**CA**](#gt_certification-authority-ca) property. For a list of CA properties, see section [3.2.1.4.3.2](#Section_3.2.1.4.2). An array of these structures is carried in a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure, and is returned by GetCAPropertyInfo, as specified in section [3.2.1.4.3.3](#Section_3.2.1.4.2). Note that this structure does not contain property values themselves; rather, CATRANSPROP contains information about properties.
+The **CATRANSPROP** structure encapsulates information about a [**CA**](#gt_certification-authority-ca) property. For a list of CA properties, see section [3.2.1.4.3.2](#Section_3.2.1.4.3.2). An array of these structures is carried in a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure, and is returned by GetCAPropertyInfo, as specified in section [3.2.1.4.3.3](#Section_3.2.1.4.3.3). Note that this structure does not contain property values themselves; rather, CATRANSPROP contains information about properties.
 
 typedef struct _CATRANSPROP {
 
@@ -1523,7 +1523,7 @@ DWORD fAdvancedServer;
 
 **cExitAlgorithms:** Unsigned integer value that SHOULD contain the number of [**exit algorithms**](#gt_ca-exit-algorithm) that are installed and active for the CA.
 
-**lPropIDMax:** Integer that SHOULD contain the maximum supported value for the *PropID* parameter in the [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.2) method. For more information on CA properties, see section 3.2.1.4.3.2.
+**lPropIDMax:** Integer that SHOULD contain the maximum supported value for the *PropID* parameter in the [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2) method. For more information on CA properties, see section 3.2.1.4.3.2.
 
 **lRoleSeparationEnabled:** Integer value that SHOULD indicate whether [**CA role separation**](#gt_ca-role-separation) is enabled on the CA. A value of 0 indicates that CA role separation is disabled; a value of 1 indicates that it is enabled.
 
@@ -1635,7 +1635,7 @@ BYTE keyBlob[cbKeyBlob];
 
 The Windows Client Certificate Enrollment Protocol is a simple request-response pattern between the client and the server ([**CA**](#gt_certification-authority-ca)). The client MUST send the [**certificate**](#gt_certificate) request by using one of the following ASN.1 encoded message formats: PKCS #10, [**CMS**](#gt_cryptographic-message-syntax-cms), Netscape, or [CMC](#Section_2.2.2.6.3). Each format contains a set of [**attributes**](#gt_attribute) and extensions that describe the request.
 
-This section defines the format for the various client request types. A single ASN.1 encoded request makes up the entire byte buffer of a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure passed to the CA. Detailed processing rules for each of the message formats are specified in section [3.1.1.4](#Section_3.2.2.6).
+This section defines the format for the various client request types. A single ASN.1 encoded request makes up the entire byte buffer of a [CERTTRANSBLOB (section 2.2.2.2)](#Section_2.2.2.2) structure passed to the CA. Detailed processing rules for each of the message formats are specified in section [3.1.1.4](#Section_3.1.1.4).
 
 <a id="Section_2.2.2.6.1"></a>
 ##### 2.2.2.6.1 PKCS #10 Request Format
@@ -1682,7 +1682,7 @@ For processing rules for these fields, see section [3.1.1.4.3.1.2](#Section_3.1.
 
 Clients use CMC structures that are documented (as specified in [[RFC2797]](https://go.microsoft.com/fwlink/?LinkId=90382)) for [**certificate**](#gt_certificate) requests. A CMC request consists of a [**CMS**](#gt_cryptographic-message-syntax-cms) message with CMC content.
 
-The following fields are specified in section [3](#Section_1.3) and in [RFC2797] (Appendix A) and are used by this protocol:
+The following fields are specified in section [3](#Section_3) and in [RFC2797] (Appendix A) and are used by this protocol:
 
 - **TaggedRequest**
 - **TaggedContentInfo**
@@ -1727,7 +1727,7 @@ Two [**attributes**](#gt_attribute) are associated with a request from a Netscap
 <a id="Section_2.2.2.6.4.1"></a>
 ###### 2.2.2.6.4.1 CertType
 
-The CertType [**attribute**](#gt_attribute) is used to specify the type of the requested [**certificate**](#gt_certificate). The only supported value for a [**KEYGEN**](#gt_keygen) certificate request for this attribute is the string "server". For specifications, see section [2.2.2.7](#Section_3.1.1.4.3.1).
+The CertType [**attribute**](#gt_attribute) is used to specify the type of the requested [**certificate**](#gt_certificate). The only supported value for a [**KEYGEN**](#gt_keygen) certificate request for this attribute is the string "server". For specifications, see section [2.2.2.7](#Section_2.2.2.7).
 
 <a id="Section_2.2.2.6.4.2"></a>
 ###### 2.2.2.6.4.2 Relative Distinguished Name
@@ -1779,7 +1779,7 @@ In addition, the client can pass the attributes specified in section 2.2.2.7.10 
 
 Because the Netscape [**KEYGEN**](#gt_keygen) tag request format does not support passing additional attributes, any request call that uses a Netscape KEYGEN tag request format MUST pass any additional attributes in the *pwszAttributes* parameter for the ICertRequestD::Request and ICertRequestD2::Request2 methods.
 
-For processing rule specifications, see section [3](#Section_1.3).
+For processing rule specifications, see section [3](#Section_3).
 
 Each attribute has an [**object identifier (OID)**](#gt_object-identifier-oid) that MUST uniquely identify the attribute and a value. The value MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der)-encoded value, as specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593). The following sections define the various attributes for this protocol and define their formats.
 
@@ -2218,7 +2218,7 @@ Format: The OID identifying the [**encryption**](#gt_encryption) algorithm. This
 <a id="Section_2.2.2.9"></a>
 #### 2.2.2.9 Private Key BLOB
 
-During the archival process, the client sends its [**private key**](#gt_private-key) to the [**CA**](#gt_certification-authority-ca) encrypted to the CA exchange [**key**](#gt_key). The CA decrypts the encrypted [**BLOB**](#gt_binary-large-object-blob) and retrieves the private key BLOB. More details are specified in section [1.3.2.1](#Section_5.1.10).
+During the archival process, the client sends its [**private key**](#gt_private-key) to the [**CA**](#gt_certification-authority-ca) encrypted to the CA exchange [**key**](#gt_key). The CA decrypts the encrypted [**BLOB**](#gt_binary-large-object-blob) and retrieves the private key BLOB. More details are specified in section [1.3.2.1](#Section_1.3.2.1).
 
 <a id="Section_2.2.2.9.1"></a>
 ##### 2.2.2.9.1 RSA Private Key BLOB
@@ -2460,7 +2460,7 @@ Value MUST be the elliptical curve private exponent.
 <a id="Section_2.2.2.11"></a>
 #### 2.2.2.11 Enterprise PKI Data Structures
 
-This section specifies the structure of the [**Active Directory**](#gt_active-directory) [**containers**](#gt_container) and objects that are related to this protocol. The usage of the data that is stored in these data structures is specified in section [3](#Section_1.3).
+This section specifies the structure of the [**Active Directory**](#gt_active-directory) [**containers**](#gt_container) and objects that are related to this protocol. The usage of the data that is stored in these data structures is specified in section [3](#Section_3).
 
 <a id="Section_2.2.2.11.1"></a>
 ##### 2.2.2.11.1 Certificate Templates Container
@@ -2653,7 +2653,7 @@ This protocol accesses the [**directory service**](#gt_directory-service-ds) sch
 <a id="Section_3"></a>
 # 3 Protocol Details
 
-The Windows Client Certificate Enrollment Protocol is a simple request-response protocol. The client sends a [**certificate**](#gt_certificate) request and the server responds with a signed certificate or a detailed disposition message. The primary usage of this protocol is [**certificate enrollment**](#gt_certificate-enrollment). In almost all cases, the protocol is a single message followed by a single reply. An overview of subprotocols is specified in section [1.3.1](#Section_1.3.1). Many of the [**DCOM**](#gt_distributed-component-object-model-dcom) methods that are specified in section [2](#Section_1.3) are made available for nonprotocol functions, such as diagnostics.
+The Windows Client Certificate Enrollment Protocol is a simple request-response protocol. The client sends a [**certificate**](#gt_certificate) request and the server responds with a signed certificate or a detailed disposition message. The primary usage of this protocol is [**certificate enrollment**](#gt_certificate-enrollment). In almost all cases, the protocol is a single message followed by a single reply. An overview of subprotocols is specified in section [1.3.1](#Section_1.3.1). Many of the [**DCOM**](#gt_distributed-component-object-model-dcom) methods that are specified in section [2](#Section_2) are made available for nonprotocol functions, such as diagnostics.
 
 <a id="Section_3.1"></a>
 ## 3.1 Client Role
@@ -2797,7 +2797,7 @@ Rules for each argument passed to ICertRequestD::Request and ICertRequestD2::Req
 
 *pdwRequestId*: For new requests, clients MUST set this parameter to 0. To retrieve the status of a pending certificate request, the client MUST set this parameter to the request ID of the pending request.
 
-*pwszAttributes*: The client MAY set the *pwszAttributes* parameter to a string representing a collection of [**attributes**](#gt_attribute) to be applied to the [**enrollment**](#gt_certificate-enrollment) request. For specifications on the format of the string, see section [2.2.2.7](#Section_3.1.1.4.3.1).
+*pwszAttributes*: The client MAY set the *pwszAttributes* parameter to a string representing a collection of [**attributes**](#gt_attribute) to be applied to the [**enrollment**](#gt_certificate-enrollment) request. For specifications on the format of the string, see section [2.2.2.7](#Section_2.2.2.7).
 
 *pctbRequest*: The pb member of [CERTTRANSBLOB](#Section_2.2.2.2) MUST be the encoded certificate request, and the cb member MUST be the length in bytes of the encoded certificate request. The Windows Client Certificate Enrollment Protocol can be used as the transport for four types of certificate requests, specified as follows.
 
@@ -2836,7 +2836,7 @@ New Certificate Request Using PKCS #10 Request Format
 The request MUST be an ASN.1 [**DER**](#gt_distinguished-encoding-rules-der)-encoded PKCS #10 request as specified in [[RFC2986]](https://go.microsoft.com/fwlink/?LinkId=90401). The PKCS #10 ASN.1 structure includes the following fields:
 
 - [**Attributes**](#gt_attribute): This field SHOULD be used to send additional parameters to the [**CA**](#gt_certification-authority-ca).
-Section [2.2.2.7](#Section_3.1.1.4.3.1) specifies the required format for each of these attributes. The following [**OIDs**](#gt_object-identifier-oid) identify the attributes that are supported by the protocol:
+Section [2.2.2.7](#Section_2.2.2.7) specifies the required format for each of these attributes. The following [**OIDs**](#gt_object-identifier-oid) identify the attributes that are supported by the protocol:
 
 - szOID_OS_VERSION (1.3.6.1.4.1.311.13.2.3): The client SHOULD use this attribute to specify the version information of the client's operating system in the form of a string. <23> The client SHOULD encode the value of this attribute as a IA5String. The format for this attribute is as specified in section 2.2.2.7.
 - szOID_ENROLLMENT_CSP_PROVIDER (1.3.6.1.4.1.311.13.2.2): The client SHOULD use this attribute to specify the [**CSP**](#gt_cryptographic-service-provider-csp) that was used to generate a [**private key**](#gt_private-key). CSP specifications are in section [1.1](#Section_1.1).
@@ -2937,7 +2937,7 @@ Abstract Data Model
 
 This section describes a conceptual model of data organization that a possible implementation would maintain to participate in this protocol. The described organization is provided to facilitate understanding of how the protocol behaves. This protocol specification does not mandate that implementations adhere to this model so long as their external behavior is consistent with the behavior described in this document.
 
-In addition to the data described in section [3.1.1.1](#Section_3.1.1), the client that implements [**ROBO**](#gt_request-on-behalf-of-robo)-requests processing maintains the following data:
+In addition to the data described in section [3.1.1.1](#Section_3.1.1.1), the client that implements [**ROBO**](#gt_request-on-behalf-of-robo)-requests processing maintains the following data:
 
 - OtherEndEntityRequest
 PKCS#10 request constructed as specified in section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1) or section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1), or [**CMS**](#gt_cryptographic-message-syntax-cms) request constructed as specified in section [3.1.1.4.3.1.3](#Section_3.1.1.4.3.1.3). It is left up to the implementation of the protocol to provide a way for end entities to exchange the requests and store it in this data.<27>
@@ -3053,7 +3053,7 @@ Processing of the server response to a client’s new certificate request with C
 <a id="Section_3.1.1.4.3.6"></a>
 ###### 3.1.1.4.3.6 Certificate Requests with Private Key Info
 
-Before submitting a request to the [**CA**](#gt_certification-authority-ca) for archiving purposes, the client MUST initialize a secure channel to the CA. To create a secure channel to the CA, the client MUST retrieve the current CA key [**exchange certificate**](#gt_exchange-certificate), either through a call to [ICertRequestD::GetCACert](#Section_3.2.1.4.2) (while providing the GETCERT_CAXCHGCERT 0x00000001 property identifier (ID) in the *fchain* parameter) or a call to [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.2) (while providing the CR_PROP_CAXCHGCERT 0x0000000F flag in the *PropID* parameter). Both methods can be used to retrieve the CA key exchange certificate with no preference.
+Before submitting a request to the [**CA**](#gt_certification-authority-ca) for archiving purposes, the client MUST initialize a secure channel to the CA. To create a secure channel to the CA, the client MUST retrieve the current CA key [**exchange certificate**](#gt_exchange-certificate), either through a call to [ICertRequestD::GetCACert](#Section_3.2.1.4.2.2) (while providing the GETCERT_CAXCHGCERT 0x00000001 property identifier (ID) in the *fchain* parameter) or a call to [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2) (while providing the CR_PROP_CAXCHGCERT 0x0000000F flag in the *PropID* parameter). Both methods can be used to retrieve the CA key exchange certificate with no preference.
 
 The client MUST locally generate a [**symmetric key**](#gt_symmetric-key) and MUST use it to encrypt the [**private key**](#gt_private-key) associated with the [**certificate**](#gt_certificate) to be enrolled. The client MUST then encrypt the symmetric key by using the [**public key**](#gt_public-key) from the retrieved CA exchange certificate. The encrypted symmetric key MUST then be included in a certificate request, as specified in section [3.1.1.4.3.6.1](#Section_3.1.1.4.3.6.1).
 
@@ -3131,12 +3131,12 @@ To invoke this method:
 
 *pwszAuthority*: This parameter MUST be set according to the processing rules for *pwszAuthority* as specified in section [3.1.1.4.2](#Section_3.1.1.4.2).
 
-*fchain*: This parameter MUST be set to indicate the CA property preferred. If the client requests a [**certificate**](#gt_certificate) or property for which it is possible to have multiple instances on the CA, the low-order 16 bits MUST contain the index of the certificate to be returned. Details about the *fchain* parameter are specified in section [3.2.1.4.2.2](#Section_3.2.1.4.2).
+*fchain*: This parameter MUST be set to indicate the CA property preferred. If the client requests a [**certificate**](#gt_certificate) or property for which it is possible to have multiple instances on the CA, the low-order 16 bits MUST contain the index of the certificate to be returned. Details about the *fchain* parameter are specified in section [3.2.1.4.2.2](#Section_3.2.1.4.2.2).
 
 <a id="Section_3.1.1.4.5"></a>
 ##### 3.1.1.4.5 ICertRequestD::Ping and ICertRequestD2::Ping2 Request Processing
 
-A client invokes either the [ICertRequestD::Ping](#Section_3.2.1.4.2) or [ICertRequestD2::Ping2](#Section_3.2.1.4.2) method to determine whether the [**CA**](#gt_certification-authority-ca) can be contacted.
+A client invokes either the [ICertRequestD::Ping](#Section_3.2.1.4.2.3) or [ICertRequestD2::Ping2](#Section_3.2.1.4.3.4) method to determine whether the [**CA**](#gt_certification-authority-ca) can be contacted.
 
 To invoke one of these methods, use the following parameter:
 
@@ -3152,7 +3152,7 @@ This method returns a [**CA**](#gt_certification-authority-ca) property.
 To invoke this method:
 
 - *pwszAuthority*: The client MUST follow the processing rules for *pwszAuthority*, as specified in section [3.1.1.4.2](#Section_3.1.1.4.2).
-- *PropID*: The client MUST pass the ID of the requested property. A list of optional values is specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2).
+- *PropID*: The client MUST pass the ID of the requested property. A list of optional values is specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2).
 - *PropIndex*: Values and restrictions MUST be as specified in the parameter requirements table in section 3.2.1.4.3.2.
 - *PropType*: Values and restrictions MUST be as specified in the parameter requirements table in section 3.2.1.4.3.2.
 The value and format of pctbPropertyValue MUST be as specified in section 3.2.1.4.3.2.
@@ -3185,7 +3185,7 @@ This local event allows higher level code to retrieve a [**certificate**](#gt_ce
 
 **Input Parameters**:
 
-**CAName**: The name of the CA which processed the original request. The type and value of this parameter is the same as the *pwszAuthority* parameter in the [ICertRequestD::Request (section 3.2.1.4.2.1)](#Section_3.2.1.4.2) method.
+**CAName**: The name of the CA which processed the original request. The type and value of this parameter is the same as the *pwszAuthority* parameter in the [ICertRequestD::Request (section 3.2.1.4.2.1)](#Section_3.2.1.4.2.1) method.
 
 **ServerName**: The [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of the server on which the CA specified by the **CAName** is running.
 
@@ -3202,9 +3202,9 @@ This local event allows higher level code to retrieve a [**certificate**](#gt_ce
 **Processing:**
 
 - Initialize a [**DCOM**](#gt_distributed-component-object-model-dcom) client as specified in section [2.1](#Section_2.1) by using the value of the **ServerName** input parameter as the remote server name setting of the DCOM client. If initialization did not succeed, then set the **Disposition** output parameter to "Error".
-- Determine the version of the certificate request interface supported by the server by following the processing rules specified in section [3.1.1.4](#Section_3.2.2.6). If errors were encountered, set the **Disposition** output parameter to "Error".
+- Determine the version of the certificate request interface supported by the server by following the processing rules specified in section [3.1.1.4](#Section_3.1.1.4). If errors were encountered, set the **Disposition** output parameter to "Error".
 - If the server supports the [ICertRequestD2 (section 3.2.1.4.3)](#Section_3.2.1.4.3) interface, then
-- Retrieve the pending certificate request by invoking [ICertRequestD2::Request2 (section 3.2.1.4.3.1)](#Section_3.2.1.4.3), using the following parameters:
+- Retrieve the pending certificate request by invoking [ICertRequestD2::Request2 (section 3.2.1.4.3.1)](#Section_3.2.1.4.3.1), using the following parameters:
 - *pwszAuthority*: set to the value of the **CAName** input parameter.
 - *dwFlags*: set to the value of the **Flags** input parameter.
 - *pdwRequestId*: set to the value of the **RequestID** input parameter.
@@ -3237,7 +3237,7 @@ This local event allows higher level code to submit a [**certificate**](#gt_cert
 
 **Input Parameters**:
 
-**CAName**: Identical to the *pwszAuthority* parameter in the [ICertRequestD::Request (section 3.2.1.4.2.1)](#Section_3.2.1.4.2) method.
+**CAName**: Identical to the *pwszAuthority* parameter in the [ICertRequestD::Request (section 3.2.1.4.2.1)](#Section_3.2.1.4.2.1) method.
 
 **ServerName**: The [**FQDN**](#gt_fully-qualified-domain-name-fqdn) of the server on which the CA specified by the **CAName** is running.
 
@@ -3256,9 +3256,9 @@ This local event allows higher level code to submit a [**certificate**](#gt_cert
 **Processing:**
 
 - Initialize a [**DCOM**](#gt_distributed-component-object-model-dcom) client as specified in section [2.1](#Section_2.1) by using the value of the **ServerName** input parameter as the remote server name setting of the DCOM client. If the initialization did not succeed, then set the **Disposition** output parameter to "Error".
-- Determine the version of the certificate request interface supported by the server by following the processing rules specified in section [3.1.1.4](#Section_3.2.2.6). If errors were encountered, set the **Disposition** output parameter to "Error".
+- Determine the version of the certificate request interface supported by the server by following the processing rules specified in section [3.1.1.4](#Section_3.1.1.4). If errors were encountered, set the **Disposition** output parameter to "Error".
 - If the server supports the [ICertRequestD2 (section 3.2.1.4.3)](#Section_3.2.1.4.3) interface, then
-- Submit the certificate request by invoking [ICertRequestD2::Request2 (section 3.2.1.4.3.1)](#Section_3.2.1.4.3), using the following parameters:
+- Submit the certificate request by invoking [ICertRequestD2::Request2 (section 3.2.1.4.3.1)](#Section_3.2.1.4.3.1), using the following parameters:
 - *pwszAuthority*: set to the value of the **CAName** input parameter.
 - *dwFlags*: set to the value of the **Flags** input parameter.
 - *pdwRequestId*: set to 0.
@@ -3287,12 +3287,12 @@ This local event allows higher level code to submit a [**certificate**](#gt_cert
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Client Mode: Enrollment Based on Certificate Templates
 
-This client extends the specification in section [3.1.1](#Section_1.3) and performs [**certificate enrollment**](#gt_certificate-enrollment) in an enterprise environment where the enterprise has specified enrollment policies by using [**certificate templates**](#gt_certificate-template) [MS-CRTD](../MS-CRTD/MS-CRTD.md) and other [**Active Directory**](#gt_active-directory) objects (see section [2.2.2.11](#Section_2.2.2.11.2.5)) and where the client enforces those policies. This mode of use of the Windows Client Certificate Enrollment Protocol is invoked by some client processes, such as the [**autoenrollment**](#gt_autoenrollment) task [MS-CERSOD](#Section_1.3), for each enrollment request.
+This client extends the specification in section [3.1.1](#Section_3.1.1) and performs [**certificate enrollment**](#gt_certificate-enrollment) in an enterprise environment where the enterprise has specified enrollment policies by using [**certificate templates**](#gt_certificate-template) [MS-CRTD](../MS-CRTD/MS-CRTD.md) and other [**Active Directory**](#gt_active-directory) objects (see section [2.2.2.11](#Section_2.2.2.11)) and where the client enforces those policies. This mode of use of the Windows Client Certificate Enrollment Protocol is invoked by some client processes, such as the [**autoenrollment**](#gt_autoenrollment) task [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md), for each enrollment request.
 
 <a id="Section_3.1.2.1"></a>
 #### 3.1.2.1 Abstract Data Model
 
-This client defines the following abstract elements in addition to those specified in section [3.1.1.1](#Section_3.1.1).
+This client defines the following abstract elements in addition to those specified in section [3.1.1.1](#Section_3.1.1.1).
 
 **Client_Intermediate_CA_Certificates:** A collection of **CACERTBLOB** constructs (section [2.2.2.1](#Section_2.2.2.1)) that contain intermediate CA [**certificates**](#gt_certificate) that are used by clients and servers to build certificate chains. A client and server must validate and verify certificate path information, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 6. Details about the requirements for certificate path validation are specified in [RFC3280] section 9.<35>
 
@@ -3360,26 +3360,26 @@ None.
 <a id="Section_3.1.2.3"></a>
 #### 3.1.2.3 Initialization
 
-Same as specified in section [3.1.1.3](#Section_3.1.2.3).
+Same as specified in section [3.1.1.3](#Section_3.1.1.3).
 
 <a id="Section_3.1.2.4"></a>
 #### 3.1.2.4 Message Processing Events and Sequencing Rules
 
-The client implemented according to section [3.1.2](#Section_1.3) differs from the client specified in section [3.1.1](#Section_1.3) in the usage of the following methods:
+The client implemented according to section [3.1.2](#Section_3.1.2) differs from the client specified in section [3.1.1](#Section_3.1.1) in the usage of the following methods:
 
 - [ICertRequestD::Request](#Section_3.2.1.4.2) and [ICertRequestD2::Request2](#Section_3.2.1.4.3)
-- [ICertRequestD::GetCACert](#Section_3.2.1.4.2) and [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.2)
+- [ICertRequestD::GetCACert](#Section_3.2.1.4.2.2) and [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2)
 The following section specifies the difference between those specifications.
 
 <a id="Section_3.1.2.4.1"></a>
 ##### 3.1.2.4.1 Algorithms
 
-The Client Mode: Enrollment Based on Certificate Templates protocol role uses the algorithms specified in section [3.1.1.4.1](#Section_3.1.1.4.1.1), and its subsections.
+The Client Mode: Enrollment Based on Certificate Templates protocol role uses the algorithms specified in section [3.1.1.4.1](#Section_3.1.1.4.1), and its subsections.
 
 <a id="Section_3.1.2.4.2"></a>
 ##### 3.1.2.4.2 ICertRequestD::Request and ICertRequestD2::Request2 Processing
 
-Certificate Template Based Enrollment adheres to the specification for this method detailed in section [3.1.1.4.3](#Section_3.1.1.4.3.7) with the exceptions documented in the following sections. It is required that the abstract data elements defined in section [3.1.2.1](#Section_3.1.2) have been initialized using the method specified in section [3.1.2.6.1](#Section_3.1.2.6.1).
+Certificate Template Based Enrollment adheres to the specification for this method detailed in section [3.1.1.4.3](#Section_3.1.1.4.3) with the exceptions documented in the following sections. It is required that the abstract data elements defined in section [3.1.2.1](#Section_3.1.2.1) have been initialized using the method specified in section [3.1.2.6.1](#Section_3.1.2.6.1).
 
 <a id="Section_3.1.2.4.2.1"></a>
 ###### 3.1.2.4.2.1 Choosing Certificate Request Types
@@ -3402,7 +3402,7 @@ This section describes what type of [**certificate**](#gt_certificate) request i
 <a id="Section_3.1.2.4.2.2"></a>
 ###### 3.1.2.4.2.2 Certificate Template Processing Rules
 
-The client MUST follow the rules identified in this section to create a request based on the abstract data model specified in section [3.1.2.1](#Section_3.1.2).
+The client MUST follow the rules identified in this section to create a request based on the abstract data model specified in section [3.1.2.1](#Section_3.1.2.1).
 
 - Clients MUST adhere to the following rules based on the existence or value of the **Certificate.Template.msPKI-Template-Schema-Version** datum:
 - If the **Certificate.Template.msPKI-Template-Schema-Version** datum was not set by the caller, or if the datum has a value of 1, the client MUST adhere to the processing rules as specified in section [3.1.2.4.2.2.1.1](#Section_3.1.2.4.2.2.1.1).
@@ -3424,21 +3424,21 @@ The following processing rules are applied to flags in the **Certificate.Templat
 | 0x00000080 - CT_FLAG_IS_CA | If this flag is set, an enrollment client MUST request a certificate for a [**CA**](#gt_certification-authority-ca). |
 | 0x00000800 - CT_FLAG_IS_CROSS_CA | If this flag is set, an enrollment client MUST request a certificate for [**cross-certifying**](#gt_def5c4bb-8d17-4d7a-bfa7-2bd33064ad98) a CA. For more information on cross certification, see [[MSFT-CROSSCERT]](https://go.microsoft.com/fwlink/?LinkId=90182). |
 
-If the CT_FLAG_IS_CA or CT_FLAG_IS_CROSS_CA flag is set, the client MUST add the Basic Constraints extension (as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.10) to the certificate request. The **cA** field of the Basic Constraints extension MUST be set to TRUE, and the **pathLenConstraint** field MUST be set as specified in section [3.1.2.4.2.2.1.4](#Section_3.1.2.4.2.2.1.4). This extension MUST be added as a request [**attribute**](#gt_attribute) to the certificate request, as specified in section [2.2.2.7.7](#Section_2.2.2.7.7.1).
+If the CT_FLAG_IS_CA or CT_FLAG_IS_CROSS_CA flag is set, the client MUST add the Basic Constraints extension (as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.10) to the certificate request. The **cA** field of the Basic Constraints extension MUST be set to TRUE, and the **pathLenConstraint** field MUST be set as specified in section [3.1.2.4.2.2.1.4](#Section_3.1.2.4.2.2.1.4). This extension MUST be added as a request [**attribute**](#gt_attribute) to the certificate request, as specified in section [2.2.2.7.7](#Section_2.2.2.7.7).
 
 <a id="Section_3.1.2.4.2.2.1.2"></a>
 Certificate.Template.pKIExtendedKeyUsage
 
 The client MUST create the extended [**key**](#gt_key) usage extension with the keyPurposeId as specified for the **Certificate.Template.pKIExtendedKeyUsage** datum (section 3.1.2.4.2.2.1.2). Specifications on this extension are in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.13.
 
-This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request, as specified in section [2.2.2.7.7](#Section_2.2.2.7.7.1).
+This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request, as specified in section [2.2.2.7.7](#Section_2.2.2.7.7).
 
 <a id="Section_3.1.2.4.2.2.1.3"></a>
 Certificate.Template.pKIKeyUsage
 
 The client MUST create the [**key**](#gt_key) usage extension with the bits value as specified in the **Certificate.Template.pKIKeyUsage** datum. Specifications on this extension are in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.3.
 
-This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request, as specified in section [2.2.2.7.7](#Section_2.2.2.7.7.1).
+This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request, as specified in section [2.2.2.7.7](#Section_2.2.2.7.7).
 
 <a id="Section_3.1.2.4.2.2.1.4"></a>
 Certificate.Template.pKIMaxIssuingDepth
@@ -3484,7 +3484,7 @@ The client SHOULD use the **Certificate.Template.pKIDefaultCSPs** datum to deter
 <a id="Section_3.1.2.4.2.2.1.7"></a>
 Certificate.Template.pKICriticalExtensions
 
-The client MUST mark the extensions listed in the **Certificate.Template.pKICriticalExtensions** datum critical when encoding the extensions in the request. Specifications on the extensions format are in section [2.2.2.7.7](#Section_2.2.2.7.7.1).
+The client MUST mark the extensions listed in the **Certificate.Template.pKICriticalExtensions** datum critical when encoding the extensions in the request. Specifications on the extensions format are in section [2.2.2.7.7](#Section_2.2.2.7.7).
 
 <a id="Section_3.1.2.4.2.2.1.8"></a>
 Certificate.Template.cn
@@ -3555,7 +3555,7 @@ Clients MUST inspect the value of the **Certificate.Template.msPKI-RA-Applicatio
 If the property type is not present, clients MAY choose defaults based on local policy.<48>
 
 - msPKI-SecurityDescriptor: If this property type is present, the client MUST use the security descriptor (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)) to set the access permissions on the [**private key**](#gt_private-key) corresponding to the [**public key**](#gt_public-key) in the request. If this property type is not present, clients MAY choose defaults based on local policy.<49>
-- msPKI-Symmetric-Algorithm: If this property type is present, the client MUST use the algorithm specified in this property to encrypt the private key corresponding to the public key in the request while generating the [**key archival**](#gt_key-archival) [**enrollment**](#gt_certificate-enrollment) request, as specified in section [1.3.2.1](#Section_5.1.10). In addition, the client SHOULD use this algorithm to encrypt the Client_HardwareKeyInfo ADM element as described in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1).<50> If this property type is not present, clients MAY choose defaults based on local policy.<51>
+- msPKI-Symmetric-Algorithm: If this property type is present, the client MUST use the algorithm specified in this property to encrypt the private key corresponding to the public key in the request while generating the [**key archival**](#gt_key-archival) [**enrollment**](#gt_certificate-enrollment) request, as specified in section [1.3.2.1](#Section_1.3.2.1). In addition, the client SHOULD use this algorithm to encrypt the Client_HardwareKeyInfo ADM element as described in section [3.1.1.4.3.4.1.1](#Section_3.1.1.4.3.4.1.1).<50> If this property type is not present, clients MAY choose defaults based on local policy.<51>
 - msPKI-Symmetric-Key-Length: If this property type is present, the client MUST use the value specified in this property as the length of the [**symmetric key**](#gt_symmetric-key) used to encrypt the private key while generating the key archival enrollment request, as specified in section 1.3.2.1. If this property type is not present, clients MAY choose defaults based on local policy.<52>
 - msPKI-Hash-Algorithm: If this property type is present, the client MUST use the value specified in this property as the hash algorithm while creating the signature of the [**certificate**](#gt_certificate) request. If this property type is not present, clients MAY choose defaults based on local policy.<53>
 - msPKI-Key-Usage: This property type MUST<54> be used to determine the cryptographic [**key**](#gt_key) information for generating the cryptographic keys that are used with the certificate. If this property type is not present, clients MAY choose defaults based on local policy.<55>
@@ -3564,7 +3564,7 @@ Certificate.Template.msPKI-Certificate-Application-Policy
 
 The client MUST create the Certificate Application Policy extension as specified in section [2.2.2.7.7.3](#Section_2.2.2.7.7.3), and using the [**OIDs**](#gt_object-identifier-oid) in this abstract datum.
 
-This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request. Specifications are in section [2.2.2.7.7](#Section_2.2.2.7.7.1).<56>
+This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request. Specifications are in section [2.2.2.7.7](#Section_2.2.2.7.7).<56>
 
 <a id="Section_3.1.2.4.2.2.2.7"></a>
 Certificate.Template.msPKI-Enrollment-Flag
@@ -3603,7 +3603,7 @@ The client MUST construct the "certificate policies" extension as specified in [
 
 For each value in this multiple-value datum, clients encode a PolicyInformation object, where the policyIdentifier MUST contain the value stored in this datum and the PolicyQualifier MUST NOT be present.
 
-This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request. Specifications are in section [2.2.2.7.7](#Section_2.2.2.7.7.1).
+This extension MUST be added as a request [**attribute**](#gt_attribute) to the [**certificate**](#gt_certificate) request. Specifications are in section [2.2.2.7.7](#Section_2.2.2.7.7).
 
 <a id="Section_3.1.2.4.2.2.2.10"></a>
 Certificate.Template.msPKI-Certificate-Name-Flag
@@ -3613,7 +3613,7 @@ The following processing rules are applied to flags in the **Certificate.Templat
 - If the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT flag or the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT_ALT_NAME flag is set, then:
 - If the CT_FLAG_OLD_CERT_SUPPLIES_SUBJECT_AND_ALT_NAME flag is set and the enrollment client is creating a renewal request, the client SHOULD <65>:
 - Use the value of the **Subject** field to populate the **Name** filed of the PKCS #10 request (see section [3.1.1.4.3.1.1](#Section_3.1.1.4.3.1.1)).
-- Add a subject alternative name extension to the [**certificate**](#gt_certificate) extensions [**attribute**](#gt_attribute) [szOID_CERT_EXTENSIONS (section 2.2.2.7.7)](#Section_2.2.2.7.7.1) of the PKCS #10 request (see section 3.1.1.4.3.1.1).
+- Add a subject alternative name extension to the [**certificate**](#gt_certificate) extensions [**attribute**](#gt_attribute) [szOID_CERT_EXTENSIONS (section 2.2.2.7.7)](#Section_2.2.2.7.7) of the PKCS #10 request (see section 3.1.1.4.3.1.1).
 - Otherwise, the client MUST supply subject information in the certificate request in the **Name** field or the subject alternative name extension in the certificate extensions attribute szOID_CERT_EXTENSIONS of the PKCS #10 request (see section 3.1.1.4.3.1.1).
 - If neither the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT flag nor the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT_ALT_NAME flag is set, the client MUST set the **Subject** field to empty and encode it as a 0 length [**DER**](#gt_distinguished-encoding-rules-der)-encoded sequence.
 <a id="Section_3.1.2.4.2.3"></a>
@@ -3638,7 +3638,7 @@ None.
 
 **Input Parameters**
 
-**Parameter.Certificate.Template.flags:** The type and value of this parameter is the same as the **Certificate.Template.flags** ADM element described in section [3.1.2.1](#Section_3.1.2).
+**Parameter.Certificate.Template.flags:** The type and value of this parameter is the same as the **Certificate.Template.flags** ADM element described in section [3.1.2.1](#Section_3.1.2.1).
 
 **Parameter.Certificate.Template.pKIExtendedKeyUsage:** The type and value of this parameter is the same as the **Certificate.Template.pKIExtendedKeyUsage** ADM element described in section 3.1.2.1.
 
@@ -3688,7 +3688,7 @@ None.
 
 **Output Parameter**
 
-**Request:** A [**certificate**](#gt_certificate) request created based on the [**certificate template**](#gt_certificate-template) settings. The type and value of this parameter is the same as the *pctbRequest* parameter in the [ICertRequestD::Request (section 3.2.1.4.2.1)](#Section_3.2.1.4.2) method.
+**Request:** A [**certificate**](#gt_certificate) request created based on the [**certificate template**](#gt_certificate-template) settings. The type and value of this parameter is the same as the *pctbRequest* parameter in the [ICertRequestD::Request (section 3.2.1.4.2.1)](#Section_3.2.1.4.2.1) method.
 
 **Processing**
 
@@ -3726,7 +3726,7 @@ None.
 <a id="Section_3.2"></a>
 ## 3.2 Server Role
 
-The server implements the interfaces as specified in sections [3.2.1](#Section_3.2.1) and [3.2.2](#Section_1.3) of this protocol specification.
+The server implements the interfaces as specified in sections [3.2.1](#Section_3.2.1) and [3.2.2](#Section_3.2.2) of this protocol specification.
 
 - The server MUST implement a [**CA policy algorithm**](#gt_ca-policy-algorithm) as described in section [3.2.1.4.2.1.4.5](#Section_3.2.1.4.2.1.4.5) or section [3.2.2.6.2.1.4](#Section_3.2.2.6.2.1.4).
 - The server MUST implement the [**standalone CA**](#gt_standalone-ca) mode functionality specified in section 3.2.1 (except for section [3.2.1.4.3](#Section_3.2.1.4.3)).
@@ -3734,7 +3734,7 @@ The server implements the interfaces as specified in sections [3.2.1](#Section_3
 - The server SHOULD implement [**enterprise certificate authority (enterprise CA)**](#gt_enterprise-certificate-authority-enterprise-ca) mode functionality. If the server implements multiple [**CA**](#gt_certification-authority-ca) modes, then it MUST implement customer selection of a mode.<67>
 - The server MAY implement one or more [**CA exit algorithms**](#gt_ca-exit-algorithm) as described in section [3.2.1.4.2.1.4.9](#Section_3.2.1.4.2.1.4.9).
 - The server MAY implement [**key archival**](#gt_key-archival), making it an [**advanced CA**](#gt_456bc2c5-d6e8-4ff7-a723-1a08e6d3cf09).<68>
-- The server SHOULD return properties on its implementation by implementing [ICertRequestD::GetCACert](#Section_3.2.1.4.2) and [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.2) methods as specified in sections 3.2.1.4.2.2 and 3.2.1.4.3.2, respectively.
+- The server SHOULD return properties on its implementation by implementing [ICertRequestD::GetCACert](#Section_3.2.1.4.2.2) and [ICertRequestD2::GetCAProperty](#Section_3.2.1.4.3.2) methods as specified in sections 3.2.1.4.2.2 and 3.2.1.4.3.2, respectively.
 The following sections describe the server modes:
 
 - Server Mode: Standalone CA: This mode is a server to the Windows Client Certificate Enrollment Protocol that implements the minimum required server functionality. This mode is specified in section 3.2.1.
@@ -3751,7 +3751,7 @@ This section describes a conceptual model of data organization that a possible i
 
 **CA_Client_Name:** A string that contains the CA account name. This ADM element is shared with **ClientName** ([MS-WKST] section 3.2.1.6).
 
-**CA_Account_Name:** A string that contains the security account name under which [**CA**](#gt_certification-authority-ca) is running. For more information on how this ADM is initialized, see section [3.2.1.3](#Section_3.2.1).
+**CA_Account_Name:** A string that contains the security account name under which [**CA**](#gt_certification-authority-ca) is running. For more information on how this ADM is initialized, see section [3.2.1.3](#Section_3.2.1.3).
 
 **CA_SID:** Contains the SID of the CA account.
 
@@ -3967,7 +3967,7 @@ Many of the [**DCOM**](#gt_distributed-component-object-model-dcom) methods defi
 <a id="Section_3.2.1.4.1"></a>
 ##### 3.2.1.4.1 Algorithms
 
-In addition to the algorithms specified in section [3.1.1.4.1](#Section_3.1.1.4.1.1) and its subsections, the Server Mode: Standalone[**CA**](#gt_certification-authority-ca) protocol role uses the algorithms in the following sections.
+In addition to the algorithms specified in section [3.1.1.4.1](#Section_3.1.1.4.1) and its subsections, the Server Mode: Standalone[**CA**](#gt_certification-authority-ca) protocol role uses the algorithms in the following sections.
 
 <a id="Section_3.2.1.4.1.1"></a>
 ###### 3.2.1.4.1.1 AccountGetInfo Abstract Interface
@@ -4162,8 +4162,8 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [Request](#Section_3.2.1.4.2) | Initiates the [**certificate issuance**](#gt_certificate-issuance) process. Opnum: 3 |
-| [GetCACert](#Section_3.2.1.4.2) | Returns property values on the CA. Opnum: 4 |
-| [Ping](#Section_3.2.1.4.2) | Performs a request response test (ping) to the CA. Opnum: 5 |
+| [GetCACert](#Section_3.2.1.4.2.2) | Returns property values on the CA. Opnum: 4 |
+| [Ping](#Section_3.2.1.4.2.3) | Performs a request response test (ping) to the CA. Opnum: 5 |
 
 **Note** [**Opnums**](#gt_opnum) 0, 1, and 2 are reserved for the IUnknown_QueryInterface, AddRef, and Release methods used by the standard COM IUnknown interface, as specified in [MS-DCOM].
 
@@ -4198,7 +4198,7 @@ HRESULT Request(
 
 **pwszAuthority:** A null-terminated [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550) string that contains the name of the [**CA**](#gt_certification-authority-ca).
 
-**pdwRequestId:** A 32-bit integer value that contains the identifier used to identify the request. Details about processing information are specified in section [3.1.1.4.3](#Section_3.1.1.4.3.7).
+**pdwRequestId:** A 32-bit integer value that contains the identifier used to identify the request. Details about processing information are specified in section [3.1.1.4.3](#Section_3.1.1.4.3).
 
 **pdwDisposition:** An unsigned integer that identifies the request status for this invocation. The value MUST be one of the following:
 
@@ -4292,7 +4292,7 @@ A list of actions follows, which the CA MUST perform for each of the supported a
 - certfile:c:\mycert.cer
 - Processing: If the Config_CA_Accept_Request_Attributes_CertPath data is set to true, the CA MAY<85> publish the issued certificate to the path that is specified in this attribute. If the Config_CA_Accept_Request_Attributes_CertPath datum is set to false, the CA MUST ignore this attribute.
 - CertType:server
-- Processing: If this attribute is present and the value is "server", the CA MUST add an extension 2.16.840.1.113730.1.1 with a bit string value of 0x01100000 (SSL server). If this attribute is present and the value is not "server", the CA MUST add an extension 2.16.840.1.113730.1.1 by using a bit string value of 0x01000000 (SSL client). If the request is a [**KEYGEN**](#gt_keygen) request and this attribute is not present, the CA MUST add an extension 2.16.840.1.113730.1.1 by using a bit string value of 0x01000000 (SSL client). The Netscape KEYGEN Tag Format is specified in section [2.2.2.6.4](#Section_2.2.2.6.4.2).
+- Processing: If this attribute is present and the value is "server", the CA MUST add an extension 2.16.840.1.113730.1.1 with a bit string value of 0x01100000 (SSL server). If this attribute is present and the value is not "server", the CA MUST add an extension 2.16.840.1.113730.1.1 by using a bit string value of 0x01000000 (SSL client). If the request is a [**KEYGEN**](#gt_keygen) request and this attribute is not present, the CA MUST add an extension 2.16.840.1.113730.1.1 by using a bit string value of 0x01000000 (SSL client). The Netscape KEYGEN Tag Format is specified in section [2.2.2.6.4](#Section_2.2.2.6.4).
 - CRLPartitionIndex:number
 - Processing: If the Config_CRLPartition_Enabled data is set to TRUE, the CA MUST set this attribute value as the value of Request_CRL_Partition_Index in the Request table. Otherwise, the CA MUST ignore this attribute.
 - Other:...
@@ -4364,7 +4364,7 @@ In general, the request MUST be compliant with the information in [[RFC2986]](ht
 - Attribute: This field MAY be used to send additional parameters to the CA. The CA MUST parse it and use it to construct the issued certificate. The following rules MUST be followed for each one of the supported [**attributes**](#gt_attribute):
 - OID = szOID_OS_VERSION (1.3.6.1.4.1.311.13.2.3)
 - Description: This attribute MUST define the client's operating system version.
-- CA Semantics: The CA MUST ignore the value of this attribute. The CA MUST NOT assume any specific values or value ranges that it receives in this attribute. If this field contains more than one value the CA MUST return 0x8007000D (ERROR_INVALID_DATA) to the client. If the format is not compliant with the requirement specified in section [2.2.2.7](#Section_3.1.1.4.3.1), the CA MUST return a nonzero error to the client.
+- CA Semantics: The CA MUST ignore the value of this attribute. The CA MUST NOT assume any specific values or value ranges that it receives in this attribute. If this field contains more than one value the CA MUST return 0x8007000D (ERROR_INVALID_DATA) to the client. If the format is not compliant with the requirement specified in section [2.2.2.7](#Section_2.2.2.7), the CA MUST return a nonzero error to the client.
 - OID = szOID_ENROLLMENT_CSP_PROVIDER (1.3.6.1.4.1.311.13.2.2) attribute
 - Description: This attribute MUST define the [**CSP**](#gt_cryptographic-service-provider-csp) used to generate the [**key pair**](#gt_public-private-key-pair) on the enrollment client.
 - CA Semantics: The CA MUST ignore the value of this attribute. The CA MUST NOT assume any specific values or value ranges that it receives in this attribute. If this field contains more than one value, the CA MUST return 0x8007000D (ERROR_INVALID_DATA) to the client. If the format is not compliant with the requirement specified in section 2.2.2.7, the CA MUST return a nonzero error to the client.
@@ -4406,7 +4406,7 @@ The [**certificate**](#gt_certificate) request MUST be compliant with "Netscape 
 
 The request MUST contain the following [**attributes**](#gt_attribute) in the *pwszAttributes* parameter:
 
-- challenge ([HTMLQ-keygen] – see ‘Meter’ element): If the challenge string is supplied in the certificate request, the CA MUST verify that the same string (case-sensitive comparison) is supplied in the *pwszAttributes* parameter. The syntax for this attribute is specified in section [2.2.2.7](#Section_3.1.1.4.3.1). If this is not the case, the CA MUST return a non-zero error.
+- challenge ([HTMLQ-keygen] – see ‘Meter’ element): If the challenge string is supplied in the certificate request, the CA MUST verify that the same string (case-sensitive comparison) is supplied in the *pwszAttributes* parameter. The syntax for this attribute is specified in section [2.2.2.7](#Section_2.2.2.7). If this is not the case, the CA MUST return a non-zero error.
 - CertType: The processing rules for this attribute are specified in section [3.2.1.4.2.1.2](#Section_3.2.1.4.2.1.2).
 - rdn ([HTMLQ-keygen] - see ‘Meter’ element): This attribute MUST be added to this parameter. If the attribute is not added, the CA MUST return a non-zero error code. If the attribute is present in this parameter, the CA MUST use the value to construct the **Subject** field in the issued certificate. Optional values are specified in section [2.2.2.6.4.2](#Section_2.2.2.6.4.2).
 <a id="Section_3.2.1.4.2.1.4.2"></a>
@@ -4484,7 +4484,7 @@ In addition, the CA MAY store request parameters in the Request table. If the CA
 | Column name | Processing rules |
 | --- | --- |
 | Request_Raw_Old_Certificate | If the request is a renewal request, the CA MUST store the X.509 [**certificate**](#gt_certificate) passed in the **Certificates** field of the [**CMS**](#gt_cryptographic-message-syntax-cms) request as specified in [[RFC3852]](https://go.microsoft.com/fwlink/?LinkId=90445) section 5.1. |
-| Request_Request_Attributes | The CA MUST store all the request [**attributes**](#gt_attribute) as specified in [2.2.2.7](#Section_3.1.1.4.3.1). |
+| Request_Request_Attributes | The CA MUST store all the request [**attributes**](#gt_attribute) as specified in [2.2.2.7](#Section_2.2.2.7). |
 | Request_Request_Type | The CA MUST store the type of the request as passed in the dwFlags parameter. See section [3.2.1.4.3.1.1](#Section_3.2.1.4.3.1.1) |
 | Request_Request_Flags | The CA MUST store additional information on the request process in this column. Specified values are documented in [MS-CSRA](../MS-CSRA/MS-CSRA.md) section 3.1.1.1.2. |
 | Request_Status_Code | The CA MUST store the returned value from the call to ICertRequestD::Request or ICertRequestD2::Request2 methods. |
@@ -4532,7 +4532,7 @@ In the Request table row for the current certificate request, the CA MUST set th
 
 - Request_Disposition: If the policy algorithm resulted in the certificate being issued, the CA MUST set the value to "certificate issued". If the policy algorithm resulted in the certificate being pended, the CA MUST set the value to "request pending". If the policy algorithm encountered an error, the CA MUST set the value to "request failed".
 - Request_Disposition_Message: The CA SHOULD populate this element with additional information that the licensee considers informative to a human.<90>
-Certificates constructed by the policy algorithm MUST satisfy all the processing rules specified in section [3.2.1.4.2.1](#Section_3.2.1.4.2).
+Certificates constructed by the policy algorithm MUST satisfy all the processing rules specified in section [3.2.1.4.2.1](#Section_3.2.1.4.2.1).
 
 The CA SHOULD store some description of the policy algorithm in the Config_CA_Policy_Description data of the Abstract Data Model that can be requested by clients as described in section [3.2.1.4.3.2.5](#Section_3.2.1.4.3.2.5).
 
@@ -4791,7 +4791,7 @@ For example, a property with the value 0x636C0002 is the GETCERT_CRLBYINDEX valu
 
 | Value | Meaning |
 | --- | --- |
-| GETCERT_CRLBYINDEX 0x636C | The request is for the CRL at the specified index. The index of the CRL MUST represent the CA certificate that is associated with the CRL. Because each CRL has an index, this method provides the means to retrieve a specific CRL based on its index. The CA Abstract Data Model is specified in section [3.1.1.1](#Section_3.1.1). |
+| GETCERT_CRLBYINDEX 0x636C | The request is for the CRL at the specified index. The index of the CRL MUST represent the CA certificate that is associated with the CRL. Because each CRL has an index, this method provides the means to retrieve a specific CRL based on its index. The CA Abstract Data Model is specified in section [3.1.1.1](#Section_3.1.1.1). |
 | GETCERT_CACERTBYINDEX 0x6374 | The request is for the CA certificate at the specified index. The index MUST refer to the number of the certificate of the CA. Because each CA certificate has an index, this method provides the means to retrieve a specific certificate based on its index. |
 | GETCERT_EXITVERSIONBYINDEX 0x6578 | The request is for the exit algorithm description at the specified index. |
 | GETCERT_CRLSTATEBYINDEX 0x736C | The request is for the CRL state at the specified index. |
@@ -4855,97 +4855,97 @@ Marshaling: pctbOut MUST be a pointer to a CERTTRANSBLOB structure. The pb membe
 <a id="Section_3.2.1.4.2.2.1"></a>
 GETCERT_CASIGCERT - 0x00000000
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CASIGCERT property ID identified in the *PropID* parameter and the number of rows in the Signing_Cert table in the *PropIndex* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CASIGCERT property ID identified in the *PropID* parameter and the number of rows in the Signing_Cert table in the *PropIndex* parameter.
 
 <a id="Section_3.2.1.4.2.2.2"></a>
 GETCERT_CAXCHGCERT - 0x00000001
 
-The CA SHOULD process this client request identically to one specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CAXCHGCERT property ID identified in the *PropID* parameter.<97>
+The CA SHOULD process this client request identically to one specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CAXCHGCERT property ID identified in the *PropID* parameter.<97>
 
 <a id="Section_3.2.1.4.2.2.3"></a>
 GETCERT_CURRENTCRL - 0x6363726C
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_BASECRL property ID identified in the *PropID* parameter and the number of rows in the Signing_Cert table in the *PropIndex* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_BASECRL property ID identified in the *PropID* parameter and the number of rows in the Signing_Cert table in the *PropIndex* parameter.
 
 <a id="Section_3.2.1.4.2.2.4"></a>
 GETCERT_FILEVERSION - 0x66696C65
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_FILEVERSION property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_FILEVERSION property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.5"></a>
 GETCERT_CAINFO - 0x696E666F
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CATYPE property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CATYPE property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.6"></a>
 GETCERT_CANAME - 0x6E616D65
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CANAME property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CANAME property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.7"></a>
 GETCERT_PARENTCONFIG - 0x70617265
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_PARENTCA property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_PARENTCA property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.8"></a>
 GETCERT_POLICYVERSION - 0x706F6C69
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_POLICYDESCRIPTION property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_POLICYDESCRIPTION property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.9"></a>
 GETCERT_PRODUCTVERSION - 0x70726F64
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_PRODUCTVERSION property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_PRODUCTVERSION property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.10"></a>
 GETCERT_SANITIZEDCANAME - 0x73616E69
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_SANITIZEDCANAME property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_SANITIZEDCANAME property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.11"></a>
 GETCERT_SHAREDFOLDER - 0x73686172
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_SHAREDFOLDER property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_SHAREDFOLDER property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.12"></a>
 GETCERT_CATYPE - 0x74797065
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CATYPE property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CATYPE property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.13"></a>
 GETCERT_CRLBYINDEX - 0x636C
 
 The index for this property MUST be passed in the least significant two bytes of the property value.
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_BASECRL property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_BASECRL property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.14"></a>
 GETCERT_CACERTBYINDEX - 0x6374
 
 The index for this property MUST be passed in the least significant two bytes of the property value.
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CASIGCERT property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CASIGCERT property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.15"></a>
 GETCERT_EXITVERSIONBYINDEX - 0x6578
 
 The index for this property MUST be passed in the least significant two bytes of the property value.
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_EXITDESCRIPTION property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_EXITDESCRIPTION property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.16"></a>
 GETCERT_CRLSTATEBYINDEX - 0x736C
 
 The index for this property MUST be passed in the least significant two bytes of the property value.
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CRLSTATE property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CRLSTATE property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.2.17"></a>
 GETCERT_CACERTSTATEBYINDEX - 0x7374
 
 The index for this property MUST be passed in the least significant two bytes of the property value.
 
-Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2) for the CR_PROP_CACERTSTATE property ID identified in the *PropID* parameter.
+Processing rules MUST be identical to the ones specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2) for the CR_PROP_CACERTSTATE property ID identified in the *PropID* parameter.
 
 <a id="Section_3.2.1.4.2.3"></a>
 ###### 3.2.1.4.2.3 ICertRequestD::Ping (Opnum 5)
@@ -4984,12 +4984,12 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [Request](#Section_3.2.1.4.2) | Initiates the [**certificate issuance**](#gt_certificate-issuance) process. Opnum: 3 |
-| [GetCACert](#Section_3.2.1.4.2) | Returns property values on the CA. Opnum: 4 |
-| [Ping](#Section_3.2.1.4.2) | Performs a request response test (ping) to the CA. Opnum: 5 |
+| [GetCACert](#Section_3.2.1.4.2.2) | Returns property values on the CA. Opnum: 4 |
+| [Ping](#Section_3.2.1.4.2.3) | Performs a request response test (ping) to the CA. Opnum: 5 |
 | [Request2](#Section_3.2.1.4.3) | The Request2 method requests a [**certificate**](#gt_certificate) from the CA. Opnum: 6 |
-| [GetCAProperty](#Section_3.2.1.4.2) | The GetCAProperty method retrieves a property value from the CA. Opnum: 7 |
-| [GetCAPropertyInfo](#Section_3.2.1.4.2) | The GetCAPropertyInfo method retrieves a set of property structures from the CA. Opnum: 8 |
-| [Ping2](#Section_3.2.1.4.2) | The Ping2 method pings the CA. Opnum: 9 |
+| [GetCAProperty](#Section_3.2.1.4.3.2) | The GetCAProperty method retrieves a property value from the CA. Opnum: 7 |
+| [GetCAPropertyInfo](#Section_3.2.1.4.3.2) | The GetCAPropertyInfo method retrieves a set of property structures from the CA. Opnum: 8 |
+| [Ping2](#Section_3.2.1.4.3.4) | The Ping2 method pings the CA. Opnum: 9 |
 
 **Note** [**Opnums**](#gt_opnum) 0, 1, and 2 are reserved for the IUnknown_QueryInterface, AddRef, and Release methods used by the standard COM IUnknown interface, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
@@ -5860,9 +5860,9 @@ If the [**CA**](#gt_certification-authority-ca) is a [**root CA**](#gt_root-ca),
 
 If the server implements the Signing_Forward_Cross_Certificate column, it MUST return the value of this column in the row identified by the value of the *PropIndex* parameter. The CA MUST return the forward cross certificate in X.509 format (as specified in [[X660]](https://go.microsoft.com/fwlink/?LinkId=90592)) marshaled in a CERTTRANSBLOB structure (as specified in section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
-If there is no value stored in the table (see section [3.2.1.1](#Section_3.2.1)), the CA MUST return a non-zero error.
+If there is no value stored in the table (see section [3.2.1.1](#Section_3.2.1.1)), the CA MUST return a non-zero error.
 
-If the index provided by the client is out of range as defined in the table in section [3.2.1.4.3.2](#Section_3.2.1.4.2), the CA MUST return a nonzero error code.
+If the index provided by the client is out of range as defined in the table in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2), the CA MUST return a nonzero error code.
 
 If the server does not implement the Signing_Forward_Cross_Certificate column, the server MUST return an empty CERTTRANSBLOB (as specified in section [2.2.2.2](#Section_2.2.2.2)). Marshaling rules for CERTTRANSBLOB are specified in section 2.2.2.2.
 
@@ -5875,7 +5875,7 @@ If the [**CA**](#gt_certification-authority-ca) is a [**root CA**](#gt_root-ca),
 
 If the server implements the Signing_Backward_Cross_Certificate column, it MUST return the value of this column in the row that is identified by the value of the *PropIndex* parameter. The CA MUST return the backward cross certificate in the X.509 format (as specified in [[X660]](https://go.microsoft.com/fwlink/?LinkId=90592)) marshaled in a CERTTRANSBLOB structure (as specified in section [2.2.2.2.2](#Section_2.2.2.2.2)).
 
-If there is no value stored in the table (see section [3.2.1.1](#Section_3.2.1)), the CA MUST return a non-zero error.
+If there is no value stored in the table (see section [3.2.1.1](#Section_3.2.1.1)), the CA MUST return a non-zero error.
 
 If the index provided by the client is out of range as defined in the table in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2), the CA MUST return a non-zero error.
 
@@ -6090,7 +6090,7 @@ The CA MUST return the publishing status in a **CERTTRANSBLOB** (section [2.2.2.
 <a id="Section_3.2.1.4.3.3"></a>
 ###### 3.2.1.4.3.3 ICertRequestD2::GetCAPropertyInfo (Opnum 8)
 
-The GetCAPropertyInfo method retrieves a set of property structures from the [**CA**](#gt_certification-authority-ca). The list of properties is specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2).
+The GetCAPropertyInfo method retrieves a set of property structures from the [**CA**](#gt_certification-authority-ca). The list of properties is specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2).
 
 HRESULT GetCAPropertyInfo(
 
@@ -6135,7 +6135,7 @@ HRESULT Ping2(
 
 **Return Values:** For a successful invocation, the CA MUST return 0; otherwise, the CA MUST return a nonzero value.
 
-The processing rules for this request MUST be the same as those specified in section [3.2.1.4.2.3](#Section_3.2.1.4.2).
+The processing rules for this request MUST be the same as those specified in section [3.2.1.4.2.3](#Section_3.2.1.4.2.3).
 
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 Timer Events
@@ -6150,12 +6150,12 @@ None.
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Server Mode: Enterprise CA
 
-The [**CA**](#gt_certification-authority-ca) is an implementation of the server mode specified in section [3.2.1](../MS-CRTD/MS-CRTD.md) with a different implementation for its [**CA policy algorithm**](#gt_ca-policy-algorithm) implementation. The CA policy algorithm of this server mode uses the [**certificate template**](#gt_certificate-template) data structure as specified in [MS-CRTD](../MS-CRTD/MS-CRTD.md) for its [**certificate issuance**](#gt_certificate-issuance) policies. Note that unless specified otherwise in the following sections, this server mode is compliant with the specifications documented in 3.2.1.
+The [**CA**](#gt_certification-authority-ca) is an implementation of the server mode specified in section [3.2.1](#Section_3.2.1) with a different implementation for its [**CA policy algorithm**](#gt_ca-policy-algorithm) implementation. The CA policy algorithm of this server mode uses the [**certificate template**](#gt_certificate-template) data structure as specified in [MS-CRTD](../MS-CRTD/MS-CRTD.md) for its [**certificate issuance**](#gt_certificate-issuance) policies. Note that unless specified otherwise in the following sections, this server mode is compliant with the specifications documented in 3.2.1.
 
 <a id="Section_3.2.2.1"></a>
 #### 3.2.2.1 Interaction with Active Directory
 
-This section provides a recommendation for the [**Enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) on how to access [**Active Directory**](#gt_active-directory). Server implementations can use an alternative method to read or write the information to the Active Directory that is required for the server processing rules in [3.2.2](#Section_1.3).
+This section provides a recommendation for the [**Enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) on how to access [**Active Directory**](#gt_active-directory). Server implementations can use an alternative method to read or write the information to the Active Directory that is required for the server processing rules in [3.2.2](#Section_3.2.2).
 
 The [**CA**](#gt_certification-authority-ca) SHOULD use [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search and modify operations, as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) sections 4.5 and 4.6, to read and write to the Active Directory. The profile of LDAP as implemented by the Active Directory servers ([**DCs**](#gt_domain-controller-dc)) as described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.
 
@@ -6879,9 +6879,9 @@ There are no timers for this protocol.
 <a id="Section_3.2.2.5"></a>
 #### 3.2.2.5 Initialization
 
-In addition to the initialization steps documented in section [3.2.1.3](#Section_3.2.1), the server MUST perform the following initialization steps:
+In addition to the initialization steps documented in section [3.2.1.3](#Section_3.2.1.3), the server MUST perform the following initialization steps:
 
-- Reads the list of objects under the [**certificate templates**](#gt_certificate-template) [**container**](#gt_container) in the working [**directory**](#gt_directory), by performing the processing rules specified in section [3.2.2.1.1](#Section_3.2.2.1.1.1) with input parameter **InputContainer** set to Certificate Templates Container.
+- Reads the list of objects under the [**certificate templates**](#gt_certificate-template) [**container**](#gt_container) in the working [**directory**](#gt_directory), by performing the processing rules specified in section [3.2.2.1.1](#Section_3.2.2.1.1) with input parameter **InputContainer** set to Certificate Templates Container.
 - For each certificate template in **CertificateTemplatesandEnrollmentServicesObjects** returned in step 1 that does not have a msPKI-Template-Schema-Version [**attribute**](#gt_attribute) or has msPKI-Template-Schema-Version value of 0x1, 0x2, 0x3, or 0x4, the [**CA**](#gt_certification-authority-ca) SHOULD create a new row in the Certificate Templates Replica table, store each certificate template object in a Certificate_Template_Data column, and set the value of the Certificate_Template_IsConfigured to False.<126>
 - Reads the list of objects under the enrollment services container in the working directory by performing the processing rules specified in section 3.2.2.1.1 with input parameter **InputContainer** set to Enrollment Services Container.
 For each object in **CertificateTemplatesandEnrollmentServicesObjects** returned from section 3.2.2.1.1, the CA MUST look for the object that has the following characteristics:
@@ -6896,12 +6896,12 @@ If the CA fails to complete any of the initialization steps in this section, the
 <a id="Section_3.2.2.6"></a>
 #### 3.2.2.6 Message Processing Events and Sequencing Rules
 
-The following sections specify processing rules that the server implements, in addition to those specified in section [3.2.1.4](#Section_3.2.1), or rules where the [**Enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) deviates from those specified in section 3.2.1.4. If an interface or method is specified in section 3.2.1.4, but is omitted in this section, the Enterprise CA implements that method or that interface exactly as specified in section 3.2.1.4.
+The following sections specify processing rules that the server implements, in addition to those specified in section [3.2.1.4](#Section_3.2.1.4), or rules where the [**Enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) deviates from those specified in section 3.2.1.4. If an interface or method is specified in section 3.2.1.4, but is omitted in this section, the Enterprise CA implements that method or that interface exactly as specified in section 3.2.1.4.
 
 <a id="Section_3.2.2.6.1"></a>
 ##### 3.2.2.6.1 Algorithms
 
-The Server Mode: [**Enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) protocol role uses the algorithms specified in [3.1.1.4.1](#Section_3.1.1.4.1.1), and its subsections, in addition to the algorithms specified in [3.2.1.4.1](#Section_3.2.1.4.1.3).
+The Server Mode: [**Enterprise CA**](#gt_enterprise-certificate-authority-enterprise-ca) protocol role uses the algorithms specified in [3.1.1.4.1](#Section_3.1.1.4.1), and its subsections, in addition to the algorithms specified in [3.2.1.4.1](#Section_3.2.1.4.1).
 
 <a id="Section_3.2.2.6.2"></a>
 ##### 3.2.2.6.2 ICertRequestD
@@ -6909,7 +6909,7 @@ The Server Mode: [**Enterprise CA**](#gt_enterprise-certificate-authority-enterp
 <a id="Section_3.2.2.6.2.1"></a>
 ###### 3.2.2.6.2.1 ICertRequestD::Request (Opnum 3)
 
-The server follows the specifications documented in section [3.2.1.4.2.1](#Section_3.2.1.4.2), with the following exceptions:
+The server follows the specifications documented in section [3.2.1.4.2.1](#Section_3.2.1.4.2.1), with the following exceptions:
 
 - The server MUST support the additional request [**attributes**](#gt_attribute) as specified in section [3.2.2.6.2.1.1](#Section_3.2.2.6.2.1.1).
 - The server MUST support the additional request scenarios and their supporting structures as documented in [3.2.2.6.2.1.2](#Section_3.2.2.6.2.1.2).
@@ -7075,7 +7075,7 @@ If processing for initial [**key attestation**](#gt_key-attestation) request, as
 - The CA MUST encrypt the secret with a current CA [**exchange certificate**](#gt_exchange-certificate) [**private key**](#gt_private-key) and store it in the AttestationChallenge column of the Request table ([MS-CSRA](../MS-CSRA/MS-CSRA.md) section 3.1.1.1.2).
 - The CA MUST set the Request_Request_Flags column to CR_FLG_CHALLENGEPENDING as specified in [MS-CSRA] section 3.1.1.1.2.
 - The CA MUST send a CMC full [**PKI**](#gt_public-key-infrastructure-pki) response including a CA exchange certificate and its full chain.
-- The CA MUST also include additional attributes as specified in section [2.2.2.8.1](#Section_2.2.2.8.1.1) where pdwDisposition is set to request pending (5).
+- The CA MUST also include additional attributes as specified in section [2.2.2.8.1](#Section_2.2.2.8.1) where pdwDisposition is set to request pending (5).
 <a id="Section_3.2.2.6.2.1.2.7"></a>
 Processing Rules for a Challenge Response Request
 
@@ -7306,7 +7306,7 @@ msPKI-Certificate-Policy
 
 The [**CA**](#gt_certification-authority-ca) MUST construct a [**certificate**](#gt_certificate) policies extension as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.5, and the CA MUST use the [**OIDs**](#gt_object-identifier-oid) specified in this [**attribute**](#gt_attribute) in the certificate request as the OIDs in the certificate policy extension of the certificate.
 
-- Let **CurrentCertificateRequestPolicies** be a list of OIDs identifying each certificate policy requested by the client via the [szOID_CERT_EXTENSIONS](#Section_2.2.2.7.7.1) attribute (1.3.6.1.4.1.311.2.1.14) containing a certificate policy extension as defined in [RFC3280] section 4.2.1.5.
+- Let **CurrentCertificateRequestPolicies** be a list of OIDs identifying each certificate policy requested by the client via the [szOID_CERT_EXTENSIONS](#Section_2.2.2.7.7) attribute (1.3.6.1.4.1.311.2.1.14) containing a certificate policy extension as defined in [RFC3280] section 4.2.1.5.
 - Let **KeyAttestationPolicies** be a list of OIDs identifying each certificate policy verified by the CA according to section [3.2.2.6.2.1.4.5.7](#Section_3.2.2.6.2.1.4.5.7).
 **Processing for CurrentCertificateRequestPolicies**
 
@@ -7345,7 +7345,7 @@ The following processing rules are applied to flags in this [**attribute**](#gt_
 <a id="Section_3.2.2.6.2.1.4.6"></a>
 Additional Processing Rules for Certificate Requests
 
-Upon receiving a [**certificate**](#gt_certificate) request, based on the specific value of either a [**certificate template**](#gt_certificate-template) extension (as specified in [2.2.2.7.7](#Section_2.2.2.7.7.1)) in the certificate request or the value of "CertificateTemplate" [**attribute**](#gt_attribute) 1.3.3, the CA MUST apply following processing rules:
+Upon receiving a [**certificate**](#gt_certificate) request, based on the specific value of either a [**certificate template**](#gt_certificate-template) extension (as specified in [2.2.2.7.7](#Section_2.2.2.7.7)) in the certificate request or the value of "CertificateTemplate" [**attribute**](#gt_attribute) 1.3.3, the CA MUST apply following processing rules:
 
 - If the value is the same as "SubCA", "CA", or "CrossCA" (case-insensitive comparison), the [**CA**](#gt_certification-authority-ca) MUST add a basic constraint extension in the certificate (to be issued corresponding to the request) with a Boolean value set to true, as specified in [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) section 4.2.1.10.
 - If the value is the same as "ExchangeUser" or "ExchangeUserSignature" (case-insensitive comparison), and the Subject Alternative Name extension (SubjectAltName) is present in the certificate (to be issued corresponding to the request), and if SubjectAltName contains an rfc822Name, then the CA MUST remove any directoryName with only X520CommonName as the RelativeDistinguishedName, as specified in [RFC3280] section 4.2.1.7.
@@ -7375,7 +7375,7 @@ If the CT_FLAG_PREVIOUS_APPROVAL_VALIDATE_REENROLLMENT flag is set in the templa
 <a id="Section_3.2.2.6.3.1"></a>
 ###### 3.2.2.6.3.1 ICertRequestD2::GetCAProperty (Opnum 7)
 
-The server MUST comply with the requirements specified in section [3.2.1.4.3.2](#Section_3.2.1.4.2), with the following exceptions:
+The server MUST comply with the requirements specified in section [3.2.1.4.3.2](#Section_3.2.1.4.3.2), with the following exceptions:
 
 - If *PropID* is equal to 0x0000001D (CR_PROP_TEMPLATES), the server MUST follow the processing rules as specified in section [3.2.2.6.3.1.1](#Section_3.2.2.6.3.1.1).
 - If *PropID* is equal to 0x0000000A (CR_PROP_CATYPE), the server MUST follow the processing rules as specified in section [3.2.2.6.3.1.2](#Section_3.2.2.6.3.1.2).
@@ -7413,7 +7413,7 @@ None.
 <a id="Section_3.2.2.8"></a>
 #### 3.2.2.8 Other Local Events
 
-The server SHOULD monitor whether a change was made to the [**certificate template**](#gt_certificate-template) [**container**](#gt_container) or to its enrollment service object, as identified in section [3.2.2.5](#Section_3.2.2) steps 1 and 3 respectively by using the LDAP_SERVER_NOTIFICATION_OID control specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.4.1.9. A change in one of these objects SHOULD trigger the initialization steps documented in section 3.2.2.5.
+The server SHOULD monitor whether a change was made to the [**certificate template**](#gt_certificate-template) [**container**](#gt_container) or to its enrollment service object, as identified in section [3.2.2.5](#Section_3.2.2.5) steps 1 and 3 respectively by using the LDAP_SERVER_NOTIFICATION_OID control specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.4.1.9. A change in one of these objects SHOULD trigger the initialization steps documented in section 3.2.2.5.
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -8228,7 +8228,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [3.2.1.4.3.2](#Section_3.2.1.4.2) ICertRequestD2::GetCAProperty (Opnum 7) | 30551 : Extended the tables for PropID values, and the PropIndex and PropType values. | Major |
+| [3.2.1.4.3.2](#Section_3.2.1.4.3.2) ICertRequestD2::GetCAProperty (Opnum 7) | 30551 : Extended the tables for PropID values, and the PropIndex and PropType values. | Major |
 
 <a id="revision-history"></a>
 

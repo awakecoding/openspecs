@@ -101,7 +101,7 @@ See [Revision History](#revision-history) for full version history.
 
 WDS Multicast Application Protocol is a single server, multiple client protocol.
 
-The protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) for transmission of content to multiple clients. The protocol relies on services provided by the WDS Multicast Transport Protocol [MS-WDSMT] to ensure all pieces of content are delivered to all clients in a [**multicast**](#gt_multicast) session.
+The protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) for transmission of content to multiple clients. The protocol relies on services provided by the WDS Multicast Transport Protocol [MS-WDSMT] to ensure all pieces of content are delivered to all clients in a [**multicast**](#gt_multicast) session.
 
 The protocol allows clients to join the multicast session at any point during the lifetime of the multicast session, and still be able to get all pieces of the content.
 
@@ -135,7 +135,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-WDSMSI] Microsoft Corporation, "[Windows Deployment Services Multicast Session Initiation Protocol](../MS-WDSMSI/MS-WDSMSI.md)".
 
-[MS-WDSMT] Microsoft Corporation, "[Windows Deployment Services Multicast Transport Protocol](#Section_2.1)".
+[MS-WDSMT] Microsoft Corporation, "[Windows Deployment Services Multicast Transport Protocol](../MS-WDSMT/MS-WDSMT.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -147,7 +147,7 @@ None.
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-WDS Multicast Application Protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) to deliver all pieces of the content to all clients in a [**multicast**](#gt_multicast) session.
+WDS Multicast Application Protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) to deliver all pieces of the content to all clients in a [**multicast**](#gt_multicast) session.
 
 When the first client joins the multicast session, the WDS Multicast Transport Protocol notifies the WDS Multicast Application Protocol using a trigger. After such a Trigger is received, the WDS Multicast Application Protocol uses the steps below to ensure delivery of all pieces of content to the clients in the multicast session:
 
@@ -159,7 +159,7 @@ When the first client joins the multicast session, the WDS Multicast Transport P
 
 The WDS Multicast Application Protocol is established via the WDS Multicast Session Initiation Protocol [MS-WDSMSI](../MS-WDSMSI/MS-WDSMSI.md).
 
-The WDS Multicast Application Protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) as its transport to send the pieces of content to all clients in the multicast session.
+The WDS Multicast Application Protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) as its transport to send the pieces of content to all clients in the multicast session.
 
 The following diagram specifies the relationship among the WDS Multicast Application Protocol and other protocols:
 
@@ -170,7 +170,7 @@ Figure 1: Relationship among the WDS Multicast Application Protocol and associat
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-The protocol relies on the WDS Multicast Session Initiation Protocol [MS-WDSMSI](../MS-WDSMSI/MS-WDSMSI.md) to provide each client with the details of the content and parameters required for the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1).
+The protocol relies on the WDS Multicast Session Initiation Protocol [MS-WDSMSI](../MS-WDSMSI/MS-WDSMSI.md) to provide each client with the details of the content and parameters required for the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md).
 
 The protocol assumes that the WDS Multicast Session Initiation Protocol has created and initialized instances of the WDS Multicast Application Protocol and the WDS Multicast Transport Protocol.
 
@@ -202,7 +202,7 @@ None.
 
 The packet contents for the WDS Multicast Application Protocol MUST be specified in [**network byte order**](#gt_network-byte-order) unless noted otherwise.
 
-The WDS Multicast Application Protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) for transport of the content to all clients in the [**multicast**](#gt_multicast) session.
+The WDS Multicast Application Protocol uses the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) for transport of the content to all clients in the [**multicast**](#gt_multicast) session.
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -362,7 +362,7 @@ None.
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The WDS Multicast Application Protocol drives the processing based on lower-layer triggered events generated by the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1).
+The WDS Multicast Application Protocol drives the processing based on lower-layer triggered events generated by the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md).
 
 The following table specifies the lower-layer triggered events generated by the WDS Multicast Transport Protocol and their respective processing:
 
@@ -376,19 +376,19 @@ The following table specifies the lower-layer triggered events generated by the 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Query State
 
-Server MUST remove all packets stored in **ClientCNTCIRPackets** (section [3.1.1](#Section_3.2.1)).
+Server MUST remove all packets stored in **ClientCNTCIRPackets** (section [3.1.1](#Section_3.1.1)).
 
 Server MUST construct a SRVCIR packet (section [2.2.2](#Section_2.2.2)) and MUST send the packet using **POLL Trigger** to the WDS Multicast Transport Protocol. The timeout value provided by **POLL Trigger** MUST be used to set the expiry time for the **Query Timer**.
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 POLLACK Trigger
 
-POLLACK Trigger MUST provide the payload received from the client. Server MUST validate that the payload specifies a CNTCIR packet as specified in section [2.2.3](#Section_2.2.3) and MUST add the packet to **ClientCNTCIRPackets** (section [3.1.1](#Section_3.2.1)).
+POLLACK Trigger MUST provide the payload received from the client. Server MUST validate that the payload specifies a CNTCIR packet as specified in section [2.2.3](#Section_2.2.3) and MUST add the packet to **ClientCNTCIRPackets** (section [3.1.1](#Section_3.1.1)).
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Data State
 
-The server MUST start from the first [**block number**](#gt_block-number) of the first block range specified by **MissingBlockRanges** (section [3.1.1](#Section_3.2.1)) and MUST process for each block number as specified below:
+The server MUST start from the first [**block number**](#gt_block-number) of the first block range specified by **MissingBlockRanges** (section [3.1.1](#Section_3.1.1)) and MUST process for each block number as specified below:
 
 - The server MUST compute the offset into the content as follows:
 **BlockOffset** = **BlockNumber** x **BlockSize** (section 3.1.1)
@@ -407,7 +407,7 @@ Server MUST wait for the **Data Empty Trigger** from the WDS Multicast Transport
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Data Empty Trigger
 
-Server MUST ignore **Data Empty Trigger** when **SessionState** (section [3.1.1](#Section_3.2.1)) is not set to **DataState**.
+Server MUST ignore **Data Empty Trigger** when **SessionState** (section [3.1.1](#Section_3.1.1)) is not set to **DataState**.
 
 Otherwise, server MUST change the **SessionState** (section 3.1.1) to **QueryState** and MUST continue processing as specified in section [3.1.5.1](#Section_3.1.5.1).
 
@@ -427,7 +427,7 @@ When Terminate Trigger is received, server MUST shut down the WDS Multicast Appl
 <a id="Section_3.1.6.1"></a>
 #### 3.1.6.1 Query Timer
 
-If the **ClientCNTCIRPackets** (section [3.1.1](#Section_3.2.1)) is empty, the server MUST continue processing as specified in section [3.1.5.1](#Section_3.1.5.1).
+If the **ClientCNTCIRPackets** (section [3.1.1](#Section_3.1.1)) is empty, the server MUST continue processing as specified in section [3.1.5.1](#Section_3.1.5.1).
 
 If the **ClientCNTCIRPackets** is not empty, the server MUST remove all entries stored in **MissingBlockRanges** (section 3.1.1). The server MUST merge block ranges specified by CNTCIR packets stored in **ClientCNTCIRPacket** and store the merged block ranges list into **MissingBlockRanges**.
 
@@ -439,7 +439,7 @@ Server MUST construct a merged list of missing block ranges from the remaining C
 
 The merged list MUST NOT have any overlapping block ranges and MUST be in ascending order.
 
-Server MUST change the **SessionState** (section 3.1.1) to **DataState** and MUST disable **Query Timer** and continue processing as specified in section [3.1.5.2](#Section_1.3).
+Server MUST change the **SessionState** (section 3.1.1) to **DataState** and MUST disable **Query Timer** and continue processing as specified in section [3.1.5.2](#Section_3.1.5.2).
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -460,7 +460,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **BlockSize:** Specifies the number of bytes of content data sent in each DATA packet. This value is provided by the WDS Multicast Session Initiation Protocol.
 
-**MaxCacheSize:** Specifies the maximum number of bytes of DATA packets that can be processed by a client before the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) stops sending the **DATA** trigger, and the protocol MUST wait for a **Cache Done** trigger from the WDS Multicast Application Protocol. The default maximum number of bytes is 2097152.
+**MaxCacheSize:** Specifies the maximum number of bytes of DATA packets that can be processed by a client before the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) stops sending the **DATA** trigger, and the protocol MUST wait for a **Cache Done** trigger from the WDS Multicast Application Protocol. The default maximum number of bytes is 2097152.
 
 **JoinTime:** MUST be set to local time (in seconds) on initialization.
 
@@ -489,7 +489,7 @@ The client processes the Lower-Layered Triggered Events from the WDS Multicast T
 
 The client MUST validate that the payload provided by the DATA Trigger specifies the DATA packet as per section [2.2.4](#Section_2.2.4). The client MUST check the value of the bit at the index specified by the **BlockNumber** field of the DATA packet in **MissingBlocksBitmap** (section [3.2.1](#Section_3.2.1)). If the value is set to one, then the client MUST ignore the DATA packet and stop further processing.
 
-If the bit value is not set to one, the client MUST set the bit to one and MUST send the **Cache Done Trigger** to the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) specifying the size of the DATA packet.
+If the bit value is not set to one, the client MUST set the bit to one and MUST send the **Cache Done Trigger** to the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) specifying the size of the DATA packet.
 
 The client MUST check whether all bits of **MissingBlocksBitmap** (section 3.2.1) are now set to one. If so then the download of Content has completed and the client MUST terminate.
 
@@ -549,7 +549,7 @@ Figure 3: Client-server interaction
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The WDS Multicast Application Protocol relies on the WDS Multicast Transport Protocol [MS-WDSMT](#Section_2.1) to provide security.
+The WDS Multicast Application Protocol relies on the WDS Multicast Transport Protocol [MS-WDSMT](../MS-WDSMT/MS-WDSMT.md) to provide security.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

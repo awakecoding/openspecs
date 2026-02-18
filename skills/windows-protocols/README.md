@@ -1,31 +1,4 @@
-# Windows Protocols Skill
-
-Agent skill for navigating the Microsoft Open Specifications corpus locally. Use when asking protocol-level questions, message/structure details, section-by-section summaries, or cross-references across related specs.
-
-## Installation
-
-**[skills.sh](https://skills.sh)** — Add this skill globally:
-
-```bash
-npx skills add awakecoding/openspecs --skill windows-protocols -y -g
-```
-
-This skill works with the corpus already extracted in this directory. No setup or downloads are required for normal usage. Ensure the agent has read access to this folder and its subdirectories.
-
-## File Structure
-
-| Path | Purpose |
-|------|---------|
-| `SKILL.md` | AI-facing instructions for the agent |
-| `README.md` | This file — skill overview and corpus index |
-| `LEGAL.md` | Legal and redistribution notice |
-| `<PROTOCOL-ID>/` | Protocol directories with spec markdown and `media/` assets |
-
-The tables below are the corpus index: Overview Documents for topical discovery, Technical Documents for full specs, Reference Documents for supplemental materials.
-
----
-
-# Microsoft Open Specifications — Corpus Index
+# Microsoft Open Specifications
 
 ## Overview Documents
 
@@ -41,6 +14,7 @@ The tables below are the corpus index: Overview Documents for topical discovery,
 | [MS-FASOD](MS-FASOD/MS-FASOD.md) | File Access Services Protocols Overview |
 | [MS-FSMOD](MS-FSMOD/MS-FSMOD.md) | File Services Management Protocols Overview |
 | [MS-GPOD](MS-GPOD/MS-GPOD.md) | Group Policy Protocols Overview |
+| [MS-MQOD](MS-MQOD/MS-MQOD.md) | Message Queuing Protocols Overview |
 | [MS-MSSOD](MS-MSSOD/MS-MSSOD.md) | Media Streaming Server Protocols Overview |
 | [MS-NAPOD](MS-NAPOD/MS-NAPOD.md) | Network Access Protection Protocols Overview |
 | [MS-NETOD](MS-NETOD/MS-NETOD.md) | Microsoft .NET Framework Protocols Overview |
@@ -413,6 +387,7 @@ The tables below are the corpus index: Overview Documents for topical discovery,
 | [MS-TAIL](MS-TAIL/MS-TAIL.md) | Telephony API Internet Locator Service Protocol |
 | [MS-TCC](MS-TCC/MS-TCC.md) | Tethering Control Channel Protocol |
 | [MS-TDS](MS-TDS/MS-TDS.md) | Tabular Data Stream Protocol |
+| [MS-THCH](MS-THCH/MS-THCH.md) | Tracing HTTP Correlation Header Protocol |
 | [MS-TIPP](MS-TIPP/MS-TIPP.md) | Transaction Internet Protocol (TIP) Extensions |
 | [MS-TLSP](MS-TLSP/MS-TLSP.md) | Transport Layer Security (TLS) Profile |
 | [MS-TNAP](MS-TNAP/MS-TNAP.md) | Telnet: NT LAN Manager (NTLM) Authentication Protocol |

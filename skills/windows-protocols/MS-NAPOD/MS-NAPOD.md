@@ -106,7 +106,7 @@ A secondary extension of NAP is that improperly configured clients or clients wi
 
 The NAP protocols allow verification of user and machine identities and checking a client's health state prior to allowing the client access to network resources. The health state can include the proper configuration of software, proper updates of systems software, access limits for specific hardware platforms, and executing security checking software on the client, such as anti-virus software and anti-malware to verify that a client computer is safe to use the network.
 
-NAP has a pluggable architecture that allows client and server plug-ins to contribute to the evaluation of the client's statement of health ([**SoH**](#gt_statement-of-health-soh)). A client plug-in is called a system health agent (SHA) and the corresponding server side plug-in is called a system health validator (SHV). Windows-specific SHA and SHVs are described in [MS-WSH](#Section_2.9). Other software packages, such as anti-virus software, can install an SHA to perform virus scanning and an SHV to keep track of the current version of signature files and acceptable results from a client scan.
+NAP has a pluggable architecture that allows client and server plug-ins to contribute to the evaluation of the client's statement of health ([**SoH**](#gt_statement-of-health-soh)). A client plug-in is called a system health agent (SHA) and the corresponding server side plug-in is called a system health validator (SHV). Windows-specific SHA and SHVs are described in [MS-WSH](../MS-WSH/MS-WSH.md). Other software packages, such as anti-virus software, can install an SHA to perform virus scanning and an SHV to keep track of the current version of signature files and acceptable results from a client scan.
 
 ![NAP extension to IETF architecture for network access](media/image2.png)
 
@@ -127,7 +127,7 @@ Network Access Protection provides access control to networks based on an extens
 
 A NAP client communicates with a NEP, an entity that either grants or restricts access to the enterprise network. In the enterprise network deployments, NEPs include VPN access servers, wireless LAN access servers, wired Ethernet switches, DHCP servers, and Remote Desktop gateways. In IPsec-capable networks, the logical NEP function is distributed across a certificate server and the IPsec component on all network servers in the network.
 
-An NEP makes requests to an NPS to evaluate the health of the client making a network access request. Based on the evaluation of the client's health by the NPS, a NEP can either grant full or restricted network access to the client. Restricted access can include denying all access. An NPS can depend on Active Directory services [MS-ADOD](#Section_2.1) for identity information and [**authentication**](#gt_authentication) services [MS-AUTHSOD](#Section_2.1) and other group policy information [MS-GPOD](#Section_2.1) [MS-GPNAP](../MS-GPNAP/MS-GPNAP.md).
+An NEP makes requests to an NPS to evaluate the health of the client making a network access request. Based on the evaluation of the client's health by the NPS, a NEP can either grant full or restricted network access to the client. Restricted access can include denying all access. An NPS can depend on Active Directory services [MS-ADOD](../MS-ADOD/MS-ADOD.md) for identity information and [**authentication**](#gt_authentication) services [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) and other group policy information [MS-GPOD](../MS-GPOD/MS-GPOD.md) [MS-GPNAP](../MS-GPNAP/MS-GPNAP.md).
 
 An NPS can also direct the client to remediate any failures in health evaluation. Remediation can include upgrading the configuration of the client-based firewall, updating a software component to the latest version, and installing an updated set of anti-virus signatures and running a full scan. The client can take these directives, perform the required remediation, and then retry requesting network access with a new SoH.
 
@@ -224,7 +224,7 @@ A [**Remote Desktop Gateway client (RDG client)**](#gt_remote-desktop-gateway-cl
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: A general-purpose network directory service. [**Active Directory**](#gt_active-directory) also refers to the Windows implementation of a directory service. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network. Importantly, user accounts, computer accounts, groups, and all related credential information used by the Windows implementation of Kerberos are stored in [**Active Directory**](#gt_active-directory). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS). [MS-ADTS](../MS-ADTS/MS-ADTS.md) describes both forms. For more information, see [MS-AUTHSOD](#Section_2.1) section 1.1.1.5.2, Lightweight Directory Access Protocol (LDAP) versions 2 and 3, Kerberos, and DNS.
+**Active Directory**: A general-purpose network directory service. [**Active Directory**](#gt_active-directory) also refers to the Windows implementation of a directory service. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network. Importantly, user accounts, computer accounts, groups, and all related credential information used by the Windows implementation of Kerberos are stored in [**Active Directory**](#gt_active-directory). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS). [MS-ADTS](../MS-ADTS/MS-ADTS.md) describes both forms. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5.2, Lightweight Directory Access Protocol (LDAP) versions 2 and 3, Kerberos, and DNS.
 
 <a id="gt_authentication"></a>
 **authentication**: The ability of one entity to determine the identity of another entity.
@@ -334,13 +334,13 @@ This document uses the following terms:
 
 **Note** There is a charge to download the specification.
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](../MS-APDS/MS-APDS.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_2.1)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MS-DHCPM] Microsoft Corporation, "[Microsoft Dynamic Host Configuration Protocol (DHCP) Server Management Protocol](../MS-DHCPM/MS-DHCPM.md)".
 
@@ -348,7 +348,7 @@ This document uses the following terms:
 
 [MS-GPNAP] Microsoft Corporation, "[Group Policy: Network Access Protection (NAP) Extension](../MS-GPNAP/MS-GPNAP.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MS-HCEP] Microsoft Corporation, "[Health Certificate Enrollment Protocol](../MS-HCEP/MS-HCEP.md)".
 
@@ -358,19 +358,19 @@ This document uses the following terms:
 
 [MS-PTPT] Microsoft Corporation, "[Point-to-Point Tunneling Protocol (PPTP) Profile](../MS-PTPT/MS-PTPT.md)".
 
-[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](#Section_2.1)".
+[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](../MS-RDSOD/MS-RDSOD.md)".
 
 [MS-RNAP] Microsoft Corporation, "[Vendor-Specific RADIUS Attributes for Network Access Protection (NAP) Data Structure](../MS-RNAP/MS-RNAP.md)".
 
 [MS-SNTP] Microsoft Corporation, "[Network Time Protocol (NTP) Authentication Extensions](../MS-SNTP/MS-SNTP.md)".
 
-[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](#Section_2.9)".
+[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](../MS-TLSP/MS-TLSP.md)".
 
 [MS-TSGU] Microsoft Corporation, "[Terminal Services Gateway Server Protocol](../MS-TSGU/MS-TSGU.md)".
 
 [MS-WCCE] Microsoft Corporation, "[Windows Client Certificate Enrollment Protocol](../MS-WCCE/MS-WCCE.md)".
 
-[MS-WSH] Microsoft Corporation, "[Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol](#Section_2.9)".
+[MS-WSH] Microsoft Corporation, "[Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol](../MS-WSH/MS-WSH.md)".
 
 [RFC1661] Simpson, W., Ed., "The Point-to-Point Protocol (PPP)", STD 51, RFC 1661, July 1994, [http://www.ietf.org/rfc/rfc1661.txt](https://go.microsoft.com/fwlink/?LinkId=90283)
 
@@ -459,7 +459,7 @@ For each NAP data link protocol, there is a corresponding method for transportin
 - Remote Desktop: SoH is transported in the Remote Desktop Gateway Server Protocol [MS-TSGU](../MS-TSGU/MS-TSGU.md)
 **NAP Policy Server (NPS)**
 
-NAP policy servers are RADIUS servers [[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392). NAP provides mechanisms to encapsulate SoH requests/responses (SoHRs) on top of RADIUS exchanges between a NEP and NPS. An NPS can use Authentication Services [MS-AUTHOD], Active Directory service [MS-ADOD](#Section_2.1), and Group Policy servers [MS-GPOD](#Section_2.1) [MS-GPNAP](../MS-GPNAP/MS-GPNAP.md) to evaluate a client's SoH. The NPS can also log NAP transactions.
+NAP policy servers are RADIUS servers [[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392). NAP provides mechanisms to encapsulate SoH requests/responses (SoHRs) on top of RADIUS exchanges between a NEP and NPS. An NPS can use Authentication Services [MS-AUTHOD], Active Directory service [MS-ADOD](../MS-ADOD/MS-ADOD.md), and Group Policy servers [MS-GPOD](../MS-GPOD/MS-GPOD.md) [MS-GPNAP](../MS-GPNAP/MS-GPNAP.md) to evaluate a client's SoH. The NPS can also log NAP transactions.
 
 When a NEP is communicating with an NPS, the NEP is acting as a RADIUS client and the NPS is acting as a RADIUS server. RADIUS has direct support for using EAP [[RFC3579]](https://go.microsoft.com/fwlink/?LinkId=90435). In the cases where the client/NEP communication is not transported over EAP, SoH messages are directly transported as RADIUS attributes. Note that these encapsulations place limits on the size of SoH messages.
 
@@ -467,7 +467,7 @@ NPSes support the extensible model for System Health Validators (SHVs) by using 
 
 **Policy Backend Databases**
 
-There are several backend services used by the NPS. Authentication services [MS-AUTHSOD](#Section_2.1) are used to authenticate user and client machine identities. Active Directory service [MS-ADOD] is used to store user and machine based policies and to group users and machines into logical groupings to simplify administration. Group Policy servers [MS-GPOD] are used to configure, manage, and distribute policies across clients and replicated servers.
+There are several backend services used by the NPS. Authentication services [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) are used to authenticate user and client machine identities. Active Directory service [MS-ADOD] is used to store user and machine based policies and to group users and machines into logical groupings to simplify administration. Group Policy servers [MS-GPOD] are used to configure, manage, and distribute policies across clients and replicated servers.
 
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Requesting Network Access
@@ -494,7 +494,7 @@ The following figure depicts the client architecture of NAP. The data link and N
 **NAP protocols:**
 
 - Protocol Bindings for SoH [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054)
-- Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol [MS-WSH](#Section_2.9)
+- Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol [MS-WSH](../MS-WSH/MS-WSH.md)
 - Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md) with NTLM pass-through [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483)
 **Data link protocols:**
 
@@ -508,7 +508,7 @@ The following figure depicts the client architecture of NAP. The data link and N
 
 Figure 13: White box diagram of client architecture for multiple scenarios/protocols
 
-In the client, there are five parallel NAP data link protocol stacks that support the five scenarios for NAP (section [1.2](../MS-PEAP/MS-PEAP.md)), and across these stacks many of the components are shared. For example, PEAP [MS-PEAP] is used for the 802.1x scenarios and also for the VPN scenario. Note that stacks can execute simultaneously as the client can have multiple network interfaces, or the network administrator can configure a layered approach to NAP. The latter situation can occur when NAP is used for wired Ethernet access using the IEEE 802.1x stack and fine-grained, end-to-end IPsec NAP enforcement for all client/server communication being used with the IPsec stack.
+In the client, there are five parallel NAP data link protocol stacks that support the five scenarios for NAP (section [1.2](#Section_1.2)), and across these stacks many of the components are shared. For example, PEAP [MS-PEAP] is used for the 802.1x scenarios and also for the VPN scenario. Note that stacks can execute simultaneously as the client can have multiple network interfaces, or the network administrator can configure a layered approach to NAP. The latter situation can occur when NAP is used for wired Ethernet access using the IEEE 802.1x stack and fine-grained, end-to-end IPsec NAP enforcement for all client/server communication being used with the IPsec stack.
 
 An NPS is a RADIUS server that has been extended for NAP. As such, NAP-related RADIUS attributes [MS-RNAP](../MS-RNAP/MS-RNAP.md) from a network access RADIUS request are passed to a NAP policy evaluation engine that processes the SoH request. In the SoH request, there can be sections from several SHAs on the client. The corresponding SHV for each equivalent SHA is invoked to process its section of the SoH request and provides a portion of the SoH response (SoHR). The NAP policy evaluation engine uses several external services, such as authentication services and Active Directory services. NAP-related policies can be stored in Active Directory or in files.
 
@@ -591,7 +591,7 @@ The following protocols enable SoH communication.
 | Protocol name | Description | Short name |
 | --- | --- | --- |
 | Protocol Bindings for SoH | Specifies the format and message exchange of SoH request and SoH response (SoHR) messages. | [[TNC-IF-TNCCSPBSoH]](https://go.microsoft.com/fwlink/?LinkId=240054) |
-| Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol | The WSHA reports the system security health state (Windows Security Center) to the WSHV which responds with quarantine and remediation instructions if the status reported is not compliant with the defined security health policy. | [MS-WSH](#Section_2.9) |
+| Windows Security Health Agent (WSHA) and Windows Security Health Validator (WSHV) Protocol | The WSHA reports the system security health state (Windows Security Center) to the WSHV which responds with quarantine and remediation instructions if the status reported is not compliant with the defined security health policy. | [MS-WSH](../MS-WSH/MS-WSH.md) |
 
 <a id="Section_2.3"></a>
 ## 2.3 Environment
@@ -605,16 +605,16 @@ Because NAP determines whether or not a client has access to the network, any sy
 
 **Windows Update:** NAP policies usually mandate keeping operating system software up-to-date. As such, remediation might require a client to update its software.
 
-**Remote Desktop Services System:** The functionality for securely connecting remote clients and servers, for channeling communication between components of remote clients and servers, and for managing servers as specified in [MS-RDSOD](#Section_2.1). This system depends on the services of **NAP** to gain access in the Remote Desktop system.
+**Remote Desktop Services System:** The functionality for securely connecting remote clients and servers, for channeling communication between components of remote clients and servers, and for managing servers as specified in [MS-RDSOD](../MS-RDSOD/MS-RDSOD.md). This system depends on the services of **NAP** to gain access in the Remote Desktop system.
 
 <a id="Section_2.3.2"></a>
 ### 2.3.2 Dependencies on Other Systems/Components
 
 NAP depends on the following systems:
 
-- Active Directory System [MS-ADOD](#Section_2.1)
-- Public Key Infrastructure (PKI) [MS-CERSOD](#Section_2.1)
-- Group Policy [MS-GPOD](#Section_2.1)
+- Active Directory System [MS-ADOD](../MS-ADOD/MS-ADOD.md)
+- Public Key Infrastructure (PKI) [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md)
+- Group Policy [MS-GPOD](../MS-GPOD/MS-GPOD.md)
 <a id="Section_2.4"></a>
 ## 2.4 Assumptions and Preconditions
 
@@ -628,7 +628,7 @@ The following assumptions and preconditions apply to this document.
 - If using Group Policy, a [**domain controller (DC)**](#gt_domain-controller-dc) has been set up and configured to support the domain infrastructure.
 - The user account for the authenticating client has been created and provisioned on the DC.
 - The client and server machines have been joined to the domain.
-- Higher-layer protocols and service implementations are configured and running on the authenticating client and server systems, such as Group Policy [MS-GPOD](#Section_2.1).
+- Higher-layer protocols and service implementations are configured and running on the authenticating client and server systems, such as Group Policy [MS-GPOD](../MS-GPOD/MS-GPOD.md).
 <a id="Section_2.5"></a>
 ## 2.5 Use Cases
 
@@ -668,7 +668,7 @@ The **Client computer** is used to access and manipulate protected network resou
 - The NPS can communicate with Authentication Services and [**Active Directory**](#gt_active-directory).
 **Main Success Scenario**
 
-- Trigger: The NAP client accumulates the SoH from a collection of [**SHAs**](#gt_system-health-agent-sha) including the Windows SHA [MS-WSH](#Section_2.9) and sends the SoH to the NPS.
+- Trigger: The NAP client accumulates the SoH from a collection of [**SHAs**](#gt_system-health-agent-sha) including the Windows SHA [MS-WSH](../MS-WSH/MS-WSH.md) and sends the SoH to the NPS.
 - The NPS validates the Client computer's health and sends the success [**SoHR**](#gt_statement-of-health-response-sohr) message.
 **Extensions:** None.
 
@@ -732,7 +732,7 @@ Figure 17: Remediation use case
 
 **Context of Use:** This use case is employed when the client is noncompliant with the network policy and it is directed by [**system health validators (SHV)**](#gt_system-health-validator-shv) on the [**NPS**](#gt_nap-health-policy-server-nps) to remediate its' configuration.
 
-**Goal:** To remediate the client based on the health evaluation response. The exact method of remediation depends on the specifics of the [**SHA**](#gt_system-health-agent-sha)/[**SHV**](#gt_system-health-validator-shv). However, this document uses the [**WSHA**](#gt_windows-security-health-agent-wsha)/[**WSHV**](#gt_windows-security-health-validator-wshv) as described in [MS-WSH](#Section_2.9), as an example.
+**Goal:** To remediate the client based on the health evaluation response. The exact method of remediation depends on the specifics of the [**SHA**](#gt_system-health-agent-sha)/[**SHV**](#gt_system-health-validator-shv). However, this document uses the [**WSHA**](#gt_windows-security-health-agent-wsha)/[**WSHV**](#gt_windows-security-health-validator-wshv) as described in [MS-WSH](../MS-WSH/MS-WSH.md), as an example.
 
 **Actors**
 
@@ -784,7 +784,7 @@ The NAP/client system does not provide any security mechanism against tampering,
 
 Implementers and network operations personnel deploying NAP be aware that no special effort is made by NAP to protect SOH [TNC-IF-TNCCSPBSoH] in the general cases. As such, NAP depends on secure network infrastructure for NEP and NPS, as do all deployments of the IETF AAA architecture.
 
-In the case of HCEP, the NAP client requires that the X.509 certificate use SSL as specified in [MS-TLSP](#Section_2.9).
+In the case of HCEP, the NAP client requires that the X.509 certificate use SSL as specified in [MS-TLSP](../MS-TLSP/MS-TLSP.md).
 
 <a id="Section_2.10"></a>
 ## 2.10 Additional Considerations

@@ -430,7 +430,7 @@ Figure 3: Protocol layering during phase 2 of PEAP
 
 PEAP, like EAP, can run over any EAP transport that is compliant with [RFC3748], such as PPP (for more information, see [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283)).
 
-There are a number of configurable settings for the protocol; for example, **isFastReconnectAllowed**, **isSoHEnable**, and so on, as specified in section [3.1.1](../MS-GPWL/MS-GPWL.md). The EAP peer which initializes this protocol is responsible for configuring these settings as well. The peer itself might be configured through the [**group policy**](#gt_group-policy). For example, the Group Policy: Wireless/Wired Protocol Extension [MS-GPWL](../MS-GPWL/MS-GPWL.md) specifies the group policy protocol to configure and deploy wireless local area network (WLAN). This configuration also carries the EAP method configuration as a part of it. The peer can use this configuration to initialize the PEAP method.
+There are a number of configurable settings for the protocol; for example, **isFastReconnectAllowed**, **isSoHEnable**, and so on, as specified in section [3.1.1](#Section_3.1.1). The EAP peer which initializes this protocol is responsible for configuring these settings as well. The peer itself might be configured through the [**group policy**](#gt_group-policy). For example, the Group Policy: Wireless/Wired Protocol Extension [MS-GPWL](../MS-GPWL/MS-GPWL.md) specifies the group policy protocol to configure and deploy wireless local area network (WLAN). This configuration also carries the EAP method configuration as a part of it. The peer can use this configuration to initialize the PEAP method.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -446,7 +446,7 @@ PEAP was designed for use in network access [**authentication**](#gt_authenticat
 
 The use of PEAP is appropriate as the basis for any network authentication scenario.
 
-For more information on PEAP security issues, see section [5](#Section_1.3).
+For more information on PEAP security issues, see section [5](#Section_5).
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -1144,7 +1144,7 @@ The [**PEAP peer**](#gt_peap-peer) and server participating in this protocol mai
 
 **InnerSessionKey (ISK):** ISK is a 32-octet string generated from keys provided by the inner method. This variable is used while generating Cryptobinding TLVs, as specified in section 3.1.5.5.
 
-**CtxtHandle:** A 128-bit [**context handle**](#gt_context-handle) obtained, as specified in sections [3.2.7.1](#Section_3.2.7.1) and [3.3.7.1](#Section_3.2.7.1), when the phase 1 [**tunnel**](#gt_tunnel) is established. This handle is used in [**encryption**](#gt_encryption) and [**decryption**](#gt_decryption) of messages during phase 2 of PEAP.
+**CtxtHandle:** A 128-bit [**context handle**](#gt_context-handle) obtained, as specified in sections [3.2.7.1](#Section_3.2.7.1) and [3.3.7.1](#Section_3.3.7.1), when the phase 1 [**tunnel**](#gt_tunnel) is established. This handle is used in [**encryption**](#gt_encryption) and [**decryption**](#gt_decryption) of messages during phase 2 of PEAP.
 
 **InnerIdentity:** An LPWSTR string (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.36) for storing the identity exchanged as part of inner EAP method authentication.
 
@@ -1161,7 +1161,7 @@ Initialization is specified in sections [3.2.3](#Section_3.2.3) and [3.3.3](#Sec
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-Higher-layer triggered events are specified in sections [3.2.4](#Section_3.2.4) and [3.3.4](#Section_3.2.4).
+Higher-layer triggered events are specified in sections [3.2.4](#Section_3.2.4) and [3.3.4](#Section_3.3.4).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -1180,12 +1180,12 @@ In [**EAP**](#gt_extensible-authentication-protocol-eap), success or failure pac
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 PEAP Packet Processing
 
-This section describes the PEAP packet processing common to peer and server. In contrast, PEAP packet processing specific to peer and server is described in sections [3.2.5.4](#Section_3.2.5.4) and [3.3.5.4](#Section_3.2.5.4) respectively.
+This section describes the PEAP packet processing common to peer and server. In contrast, PEAP packet processing specific to peer and server is described in sections [3.2.5.4](#Section_3.2.5.4) and [3.3.5.4](#Section_3.3.5.4) respectively.
 
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Received PEAP Packet with L and M Bit Set
 
-If **isFragmentationAllowed** is TRUE and the PEAP phase 2 is in progress, then store the first fragment and send a [PEAP Fragment Acknowledgement packet (section 2.2.3)](#Section_2.2.3) request (server) or response (peer). For all the next fragments (M bit set and L bit not set), store the fragments and send a PEAP Fragment Acknowledgement packet request (server) or response (peer). After receiving the last fragment (L and M bits not set), reassemble all the fragments and do the packet processing as specified in sections [3.2.5.4](#Section_3.2.5.4) and [3.3.5.4](#Section_3.2.5.4).
+If **isFragmentationAllowed** is TRUE and the PEAP phase 2 is in progress, then store the first fragment and send a [PEAP Fragment Acknowledgement packet (section 2.2.3)](#Section_2.2.3) request (server) or response (peer). For all the next fragments (M bit set and L bit not set), store the fragments and send a PEAP Fragment Acknowledgement packet request (server) or response (peer). After receiving the last fragment (L and M bits not set), reassemble all the fragments and do the packet processing as specified in sections [3.2.5.4](#Section_3.2.5.4) and [3.3.5.4](#Section_3.3.5.4).
 
 If **isFragmentationAllowed** is FALSE and the PEAP phase 2 is in progress, then the packet is ignored.
 
@@ -2061,7 +2061,7 @@ Figure 11: Successful PEAP phase 1 with fast reconnect
 <a id="Section_4.3.3"></a>
 ### 4.3.3 Fallback to Full Authentication upon a Fast Reconnect Failure
 
-The following diagram depicts a complete and successful PEAP [**authentication**](#gt_authentication) in which [**fast reconnect**](#gt_fast-reconnect) was attempted but failed (because, for example, fast reconnect was disabled on the [**peer**](#gt_peer)). After the initial exchange of SoH packets, the peer indicated a failure, forcing full authentication, as in section [4.3.1](#Section_4.1.1).
+The following diagram depicts a complete and successful PEAP [**authentication**](#gt_authentication) in which [**fast reconnect**](#gt_fast-reconnect) was attempted but failed (because, for example, fast reconnect was disabled on the [**peer**](#gt_peer)). After the initial exchange of SoH packets, the peer indicated a failure, forcing full authentication, as in section [4.3.1](#Section_4.3.1).
 
 ![Fallback to full authentication upon a fast reconnect failure](media/image12.png)
 

@@ -293,13 +293,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-EVEN6] Microsoft Corporation, "[EventLog Remoting Protocol Version 6.0](#Section_1.3.2)".
+[MS-EVEN6] Microsoft Corporation, "[EventLog Remoting Protocol Version 6.0](../MS-EVEN6/MS-EVEN6.md)".
 
 [MS-LCID] Microsoft Corporation, "[Windows Language Code Identifier (LCID) Reference](../MS-LCID/MS-LCID.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -369,7 +369,7 @@ The protocol does not provide any methods for configuring either event logs or [
 
 The protocol sequencing model is as follows: The client performs an Open operation, issues other requests, and finally performs a Close operation.
 
-For methods used by this protocol, see section [3.1.4](#Section_2.1.1).
+For methods used by this protocol, see section [3.1.4](#Section_3.1.4).
 
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Localizable Human-Readable Event Descriptions and Other Strings
@@ -385,14 +385,14 @@ The EventLog Remoting Protocol depends on [**RPC**](#gt_remote-procedure-call-rp
 
 The EventLog Remoting Protocol is often used in conjunction with the Windows Remote Registry Protocol, as specified in [MS-RRP](../MS-RRP/MS-RRP.md). This is because several aspects of the [**event log**](#gt_event-log) are not configured through the EventLog Remoting Protocol; rather, they are configured by modifying the [**registry**](#gt_registry).
 
-The EventLog Remoting Protocol Version 6.0, specified in [MS-EVEN6](#Section_1.3.2), is a replacement for this protocol.
+The EventLog Remoting Protocol Version 6.0, specified in [MS-EVEN6](../MS-EVEN6/MS-EVEN6.md), is a replacement for this protocol.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
 The EventLog Remoting Protocol has the prerequisites, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), as being common to protocols depending on [**RPC**](#gt_remote-procedure-call-rpc).
 
-A prerequisite for the successful use of the methods defined by this protocol is that the caller has appropriate read/write permissions for the resources held on the server, as specified in section [3.1.4](#Section_2.1.1).
+A prerequisite for the successful use of the methods defined by this protocol is that the caller has appropriate read/write permissions for the resources held on the server, as specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_1.5.1"></a>
 ### 1.5.1 Server Requirements to Enable Remote Description String Rendering
@@ -427,7 +427,7 @@ The EventLog Remoting Protocol uses NTSTATUS values, as specified in [MS-ERREF](
 <a id="Section_1.8.2"></a>
 ### 1.8.2 Event Log Names
 
-Each [**event log**](#gt_event-log) has a name that is a [**Unicode**](#gt_unicode) string. The EventLog Remoting Protocol supports both Unicode, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md), and ANSI strings. In this specification, ANSI strings refer to multi-byte strings in which the encoding is controlled by the current system code page. One of the most common code pages is ANSI Latin-1, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). More information about the use of Unicode and ANSI strings in the EventLog Remoting Protocol is specified in section [2.2.10](../MS-DTYP/MS-DTYP.md). This name MUST be unique across all event logs on the same server. Event log names SHOULD<3> be prefixed with the name of the entity that created the event log to avoid collisions.
+Each [**event log**](#gt_event-log) has a name that is a [**Unicode**](#gt_unicode) string. The EventLog Remoting Protocol supports both Unicode, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md), and ANSI strings. In this specification, ANSI strings refer to multi-byte strings in which the encoding is controlled by the current system code page. One of the most common code pages is ANSI Latin-1, as specified in [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). More information about the use of Unicode and ANSI strings in the EventLog Remoting Protocol is specified in section [2.2.10](#Section_2.2.10). This name MUST be unique across all event logs on the same server. Event log names SHOULD<3> be prefixed with the name of the entity that created the event log to avoid collisions.
 
 <a id="Section_1.8.3"></a>
 ### 1.8.3 Event Source Names
@@ -675,7 +675,7 @@ typedef [handle, unique] wchar_t* EVENTLOG_HANDLE_W;
 
 typedef [handle, unique] char* EVENTLOG_HANDLE_A;
 
-Some of the EventLog Remoting Protocol methods (for more information, see section [3.1.4](#Section_2.1.1)) have an EVENTLOG_HANDLE_W or EVENTLOG_HANDLE_A as their first argument. In these methods, the client maps this string to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle. The server ignores this argument. See [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2.
+Some of the EventLog Remoting Protocol methods (for more information, see section [3.1.4](#Section_3.1.4)) have an EVENTLOG_HANDLE_W or EVENTLOG_HANDLE_A as their first argument. In these methods, the client maps this string to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle. The server ignores this argument. See [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2.
 
 <a id="Section_2.2.8"></a>
 ### 2.2.8 RPC_CLIENT_ID
@@ -712,7 +712,7 @@ The following constants are used in various methods.
 
 The EventLog Remoting Protocol supports both [**Unicode**](#gt_unicode) and ANSI strings. In this specification, ANSI strings refer to multi-byte strings in which the encoding is controlled by the current system code page.
 
-The server MUST support conversions between character sets. For example, one client might write events using ANSI (multi-byte) strings, and another client might read those same [**records**](#gt_record) as Unicode.<10> For how clients choose a character set, see section [3.1.4](#Section_2.1.1). The way in which a Unicode string is converted to or from an ANSI string is implementation specific. In the occasional case in which the server cannot convert from Unicode to ANSI, the operation MUST fail.
+The server MUST support conversions between character sets. For example, one client might write events using ANSI (multi-byte) strings, and another client might read those same [**records**](#gt_record) as Unicode.<10> For how clients choose a character set, see section [3.1.4](#Section_3.1.4). The way in which a Unicode string is converted to or from an ANSI string is implementation specific. In the occasional case in which the server cannot convert from Unicode to ANSI, the operation MUST fail.
 
 <a id="Section_2.2.11"></a>
 ### 2.2.11 RPC_UNICODE_STRING
@@ -770,7 +770,7 @@ The EventLog Remoting Protocol asks the [**RPC**](#gt_remote-procedure-call-rpc)
 <a id="Section_3.1"></a>
 ## 3.1 Server Details
 
-The [**event log**](#gt_event-log) server handles client requests for any of the methods, as specified in section [3.1.4](#Section_2.1.1), and operates on the logs and the configuration on the server. Any potential conflicts from the client will be handled correctly by the server's [**synchronization object**](#gt_synchronization-object). For example, if the client issues a clear request while the server is handling some backup operation for the same log at the same time, the clear request has to wait on the server's synchronization object before the backup operation finishes. After the backup is done, the synchronization object is released and the clear request is able to pass through it, so that the server will handle the clear operation.
+The [**event log**](#gt_event-log) server handles client requests for any of the methods, as specified in section [3.1.4](#Section_3.1.4), and operates on the logs and the configuration on the server. Any potential conflicts from the client will be handled correctly by the server's [**synchronization object**](#gt_synchronization-object). For example, if the client issues a clear request while the server is handling some backup operation for the same log at the same time, the clear request has to wait on the server's synchronization object before the backup operation finishes. After the backup is done, the synchronization object is released and the clear request is able to pass through it, so that the server will handle the clear operation.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -789,7 +789,7 @@ The event log record includes time, type, and [**category**](#gt_category) infor
 
 The log is a persistent store of [**event log**](#gt_event-log) [**records**](#gt_record). Event logs are of two types: [**live event logs**](#gt_live-event-log), which can be written to and read from, and [**backup event logs**](#gt_backup-event-log), which can only be read from. The backup logs are created using the methods that back up (or copy) a live log to a backup log.
 
-The logs are registered by creating [**registry**](#gt_registry) entries. For how to create these entries, see [MS-RRP](../MS-RRP/MS-RRP.md). These registry entries will have to be added manually by the server administrator or by running registry scripts. This is because the methods described in section [3.1.4](#Section_2.1.1) never write information to the registry.
+The logs are registered by creating [**registry**](#gt_registry) entries. For how to create these entries, see [MS-RRP](../MS-RRP/MS-RRP.md). These registry entries will have to be added manually by the server administrator or by running registry scripts. This is because the methods described in section [3.1.4](#Section_3.1.4) never write information to the registry.
 
 The client MUST NOT modify event log registry entries. The server MUST configure those event log registry entries. The server configures the log entries by adding a subkey under HKEY_LOCAL_MACHINE\system\currentcontrolset\services\eventlog that results in an event log. The name of the log is the same as the subkey. The log subkey also specifies log attributes such as its maximum size and its retention settings. The retention settings determine how the server handles [**events**](#gt_event) after the log reaches its maximum size. The retention can be set either to fail all new writes, or to start overwriting the oldest records. In the latter case, the log is treated as a circular log. The Eventlog Remoting Protocol does not support any [**RPC**](#gt_remote-procedure-call-rpc) methods for getting or setting the maximum event log size or its retention policy. For more information, see [[MSDN-EVENTS]](https://go.microsoft.com/fwlink/?LinkId=90000).
 
@@ -853,7 +853,7 @@ The [**EventID**](#gt_eventid) identifies the specific kind of event; this class
 <a id="Section_3.1.1.5"></a>
 #### 3.1.1.5 Context Handles
 
-Clients obtain context handles for both reading and writing purposes. The methods for doing so are specified in section [3.1.4](#Section_2.1.1). The server MUST maintain a relationship between each particular handle and a particular log. For handles used for writing, the server MUST also maintain the name of the [**event source**](#gt_event-source) so that it can be injected into any events written using the handle. For handles used for reading, the server MUST maintain the position of the last read so that subsequent sequential mode reads can succeed. Server implementations define the following **context_handle** structure to maintain this information:
+Clients obtain context handles for both reading and writing purposes. The methods for doing so are specified in section [3.1.4](#Section_3.1.4). The server MUST maintain a relationship between each particular handle and a particular log. For handles used for writing, the server MUST also maintain the name of the [**event source**](#gt_event-source) so that it can be injected into any events written using the handle. For handles used for reading, the server MUST maintain the position of the last read so that subsequent sequential mode reads can succeed. Server implementations define the following **context_handle** structure to maintain this information:
 
 typedef [context_handle] struct _ELF_HANDLE {
 
@@ -1017,7 +1017,7 @@ NTSTATUS ElfrOpenBELW(
 
 **MinorVersion:** Minor version of the client. This value MUST be set to 1.
 
-**LogHandle:** Pointer to an [**event log**](#gt_event-log) handle. This parameter is a server context handle, as specified in section [2.2.6](../MS-RPCE/MS-RPCE.md). This handle MUST be closed using the ElfrCloseEL (Opnum 2) (section [3.1.4.21)](#Section_3.1.4.21) method once the handle is no longer needed. In the case when the client cannot call the ElfrCloseEL function, such as the abnormal termination of the client, this context handle will be revoked by the server so that there will not be any resource leaks. The processing rule to revoke a context handle that has been terminated abnormally is defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.2.1.
+**LogHandle:** Pointer to an [**event log**](#gt_event-log) handle. This parameter is a server context handle, as specified in section [2.2.6](#Section_2.2.6). This handle MUST be closed using the ElfrCloseEL (Opnum 2) (section [3.1.4.21)](#Section_3.1.4.21) method once the handle is no longer needed. In the case when the client cannot call the ElfrCloseEL function, such as the abnormal termination of the client, this context handle will be revoked by the server so that there will not be any resource leaks. The processing rule to revoke a context handle that has been terminated abnormally is defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.2.1.
 
 **Return Values:** The method MUST return STATUS_SUCCESS on success; otherwise, it MUST return an implementation-based, nonzero NTSTATUS value specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
@@ -1187,7 +1187,7 @@ NTSTATUS ElfrRegisterEventSourceW(
 
 );
 
-**UNCServerName:** A server interface handle. A pointer to a [**Unicode**](#gt_unicode) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)) string specifying the server, as specified in section [2.2.7](../MS-DTYP/MS-DTYP.md). The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, and the server MUST ignore this argument, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2.
+**UNCServerName:** A server interface handle. A pointer to a [**Unicode**](#gt_unicode) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)) string specifying the server, as specified in section [2.2.7](#Section_2.2.7). The client MUST map this string to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle, and the server MUST ignore this argument, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 4.3.5 and 5.1.5.2.
 
 **ModuleName:** Specifies the event source, as defined in section [1.8.3](#Section_1.8.3) and specified in section [2.2.11](#Section_2.2.11), for which a handle is needed.
 
@@ -2057,7 +2057,7 @@ If the event source contains localizable event description strings, the server M
 
 The client side of this [**RPC**](#gt_remote-procedure-call-rpc) protocol is simply a pass-through.
 
-The client implementation also relies on a combination of the remote [**registry**](#gt_registry) (as specified in [MS-RRP](../MS-RRP/MS-RRP.md)), remote SMB (as specified in [MS-SMB](../MS-SMB/MS-SMB.md)), Local Security Authority (as specified in [MS-LSAT](#Section_5)), and LDAP (as specified in [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932)) protocols to retrieve and assemble the [**event description string**](#gt_event-description-string). For these operations, see section [3.2.4.1](#Section_3.2.4.1).
+The client implementation also relies on a combination of the remote [**registry**](#gt_registry) (as specified in [MS-RRP](../MS-RRP/MS-RRP.md)), remote SMB (as specified in [MS-SMB](../MS-SMB/MS-SMB.md)), Local Security Authority (as specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md)), and LDAP (as specified in [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932)) protocols to retrieve and assemble the [**event description string**](#gt_event-description-string). For these operations, see section [3.2.4.1](#Section_3.2.4.1).
 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
@@ -2592,7 +2592,7 @@ Error Access Denied occurred while performing operation Modify on file C:\secure
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-Take care to enforce the read/write permissions specified in section [3.1.4](#Section_2.1.1) to prevent unauthorized access to [**event logs**](#gt_event-log).
+Take care to enforce the read/write permissions specified in section [3.1.4](#Section_3.1.4) to prevent unauthorized access to [**event logs**](#gt_event-log).
 
 **Note** Server prerequisites required for remote event description rendering (as defined in section [1.5.1](#Section_1.5.1)) can make the server more at risk to security attacks. Therefore, apply with caution.
 
@@ -3127,7 +3127,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1.6: On Windows Vista and later and Windows Server 2008 and later, the EventLog Remoting Protocol Version 6.0 specified in [MS-EVEN6](#Section_1.3.2) is preferred because of its additional functionality.
+<1> Section 1.6: On Windows Vista and later and Windows Server 2008 and later, the EventLog Remoting Protocol Version 6.0 specified in [MS-EVEN6](../MS-EVEN6/MS-EVEN6.md) is preferred because of its additional functionality.
 
 Note that the Windows client platforms can act as either a client or a server for this protocol. Similarly, applicable Windows Server releases can also act as either a client or a server for this protocol.
 
@@ -3239,7 +3239,7 @@ The EventID layout is used by other operating system components besides the even
 
 <54> Section 3.2.4.1.5: The number of substitutions in Windows implementations is capped at 100.
 
-<55> Section 3.2.4.1.5.3: Expanding SIDs: Starting with Windows 2000, Windows client implementations attempt to look up the name of the security principal for a properly formatted SID. The lookup is first attempted on the event source server, and, if that fails, it is attempted in the Global Catalog server for the forest to which the event source server belongs. For information on how to implement this lookup, see [MS-LSAD](#Section_5) and [MS-LSAT](#Section_5).
+<55> Section 3.2.4.1.5.3: Expanding SIDs: Starting with Windows 2000, Windows client implementations attempt to look up the name of the security principal for a properly formatted SID. The lookup is first attempted on the event source server, and, if that fails, it is attempted in the Global Catalog server for the forest to which the event source server belongs. For information on how to implement this lookup, see [MS-LSAD](../MS-LSAD/MS-LSAD.md) and [MS-LSAT](../MS-LSAT/MS-LSAT.md).
 
 Expanding GUIDs: Starting with Windows 2000, Windows client implementations attempt to find the name of the Active Directory object with this [**GUID**](#gt_globally-unique-identifier-guid). First, the client implementations attempt to look this up as a well-known schema GUID (for example, Administrators). Then, the client implementations look for an object by this name on the domain controller (DC) in the same domain as the target computer. Finally, they look for an object by this name on the Global Catalog for the local domain. If the client implementations still have not succeeded, they leave the GUID string in the output as is. For information on implementing this lookup, see [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) and [MS-ADTS](../MS-ADTS/MS-ADTS.md).
 

@@ -346,7 +346,7 @@ packet-beta
 <a id="Section_2.8"></a>
 ## 2.8 VECTOR_CLOCK_VECTOR_ELEMENT
 
-The VECTOR_CLOCK_VECTOR_ELEMENT structure represents a collection of CLOCK_VECTOR_ELEMENT structures, as specified in section [2.9](#Section_2.7), in the following format:
+The VECTOR_CLOCK_VECTOR_ELEMENT structure represents a collection of CLOCK_VECTOR_ELEMENT structures, as specified in section [2.9](#Section_2.9), in the following format:
 
 ```mermaid
 packet-beta

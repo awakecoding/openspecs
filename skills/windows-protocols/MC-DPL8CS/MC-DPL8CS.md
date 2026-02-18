@@ -339,7 +339,7 @@ During a [**peer-to-peer**](#gt_peer-to-peer) game session, one peer in the game
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Connecting to a Session
 
-The DirectPlay 8 Protocol: Core and Service Providers requires that clients first be connected through the DirectPlay 8 Protocol: Reliable (as specified in [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md)). After clients are connected through the DirectPlay 8 Protocol: Reliable, they can then connect to a DirectPlay 8 Protocol: Core and Service Providers multiplayer [**game session**](#gt_game-session) as described in section [3.1](#Section_1.3).
+The DirectPlay 8 Protocol: Core and Service Providers requires that clients first be connected through the DirectPlay 8 Protocol: Reliable (as specified in [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md)). After clients are connected through the DirectPlay 8 Protocol: Reliable, they can then connect to a DirectPlay 8 Protocol: Core and Service Providers multiplayer [**game session**](#gt_game-session) as described in section [3.1](#Section_3.1).
 
 <a id="Section_1.3.3.1"></a>
 #### 1.3.3.1 Client/Server Connect
@@ -388,7 +388,7 @@ If the [**host**](#gt_host) [**peer**](#gt_peer) wants to remove a peer from the
 
 The host also sends a remove [**player**](#gt_player) message to all other peers in the multiplayer game session to indicate removal of the disconnecting peer. Peers can receive this message before or after the disconnecting peer has disconnected itself from the DirectPlay 8 Protocol: Reliable game session (that is, a peer can receive a remove player message from the host even though the referenced peer has already disconnected from the game session).
 
-If the disconnecting peer is the game session host, [**host migration**](#gt_host-migration) is performed (as specified in section [1.3.6](#Section_3.2.5.4)).
+If the disconnecting peer is the game session host, [**host migration**](#gt_host-migration) is performed (as specified in section [1.3.6](#Section_1.3.6)).
 
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Integrity Check (Peer-to-Peer)
@@ -1368,7 +1368,7 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | 0x000000C6 | DN_INSTRUCT_CONNECT (section [2.2.1.9](#Section_2.2.1.9)) |
-| 0x000000D0 | DN_ADD_PLAYER (section [2.2.1.7](#Section_2.2.4.4)) |
+| 0x000000D0 | DN_ADD_PLAYER (section [2.2.1.7](#Section_2.2.1.7)) |
 | 0x000000D1 | DN_DESTROY_PLAYER (section [2.2.2.2](#Section_2.2.2.2)) |
 | 0x000000D7 | DN_CREATE_GROUP (section [2.2.4.2](#Section_2.2.4.2)) |
 | 0x000000D8 | DN_DESTROY_GROUP (section [2.2.4.8](#Section_2.2.4.8)) |
@@ -1835,7 +1835,7 @@ The following table identifies the name table operations that can be performed.
 | Action | Meaning |
 | --- | --- |
 | 0x000000C6 | DN_INSTRUCT_CONNECT (section [2.2.1.9](#Section_2.2.1.9)) |
-| 0x000000D0 | DN_ADD_PLAYER (section [2.2.1.7](#Section_2.2.4.4)) |
+| 0x000000D0 | DN_ADD_PLAYER (section [2.2.1.7](#Section_2.2.1.7)) |
 | 0x000000D1 | DN_DESTROY_PLAYER (section [2.2.2.2](#Section_2.2.2.2)) |
 | 0x000000D7 | DN_CREATE_GROUP (section [2.2.4.2](#Section_2.2.4.2)) |
 | 0x000000D8 | DN_DESTROY_GROUP (section [2.2.4.8](#Section_2.2.4.8)) |
@@ -2003,7 +2003,7 @@ Figure 1: Role of a client when joining the client to the session
 The role of a client when attempting to connect to the session:
 
 - The client sends a [DN_INTERNAL_MESSAGE_PLAYER_CONNECT_INFO](#Section_2.2.1.1) message (section 2.2.1.1) to the server and waits for the [DN_SEND_CONNECT_INFO](#Section_2.2.1.4) message (section 2.2.1.4) to be sent in response. If the server does not respond in time, the protocol times out and terminates the connection.
-**Note** When the client sends the DN_INTERNAL_MESSAGE_PLAYER_CONNECT_INFO message, it includes the user-provided password described in section [5.2](#Section_5.2). When the server receives the message, it attempts to verify the password as described in Step 4 of section [3.1.5.1](#Section_3.2.5.2). If the server is able to verify the password, it sends a DN_SEND_CONNECT_INFO message to bring the new client into consistency with regard to the current application description state and [**player**](#gt_player) list. The DN_SEND_CONNECT_INFO message includes the current user password, which is essentially a redundant echo of the password that was verified by the server. However, if the server is unable to verify the password and validation fails, the server sends a [DN_CONNECT_FAILED](#Section_2.2.1.3) message (section 2.2.1.3) with the **hResultCode** field set to DPNERR_INVALIDPASSWORD or to another validation failure code.
+**Note** When the client sends the DN_INTERNAL_MESSAGE_PLAYER_CONNECT_INFO message, it includes the user-provided password described in section [5.2](#Section_5.2). When the server receives the message, it attempts to verify the password as described in Step 4 of section [3.1.5.1](#Section_3.1.5.1). If the server is able to verify the password, it sends a DN_SEND_CONNECT_INFO message to bring the new client into consistency with regard to the current application description state and [**player**](#gt_player) list. The DN_SEND_CONNECT_INFO message includes the current user password, which is essentially a redundant echo of the password that was verified by the server. However, if the server is unable to verify the password and validation fails, the server sends a [DN_CONNECT_FAILED](#Section_2.2.1.3) message (section 2.2.1.3) with the **hResultCode** field set to DPNERR_INVALIDPASSWORD or to another validation failure code.
 
 - When the DN_SEND_CONNECT_INFO message is received from the server, the client processes the message. After the message is successfully processed, the client MUST send a [DN_ACK_CONNECT_INFO](#Section_2.2.1.8) message (section 2.2.1.8) to the server. If an error occurs during message processing, the client performs cleanup and ends the connection attempt.
 ![Role of the server when joining the client to the session](media/image2.png)
@@ -2056,7 +2056,7 @@ A DirectPlay 8 Protocol: Core and Service Providers Protocol implementation MUST
 
 **name table:** All participants MUST maintain a [**name table**](#gt_name-table), as described in section [2.2.6](#Section_2.2.6). In [**peer-to-peer mode**](#gt_peer-to-peer-mode), the name table state MUST be kept consistent among all participants, and during connections:
 
-- The host MUST generate a [DN_ADD_PLAYER (section 2.2.1.7)](#Section_2.2.4.4) name table operation associated with the connecting peer.
+- The host MUST generate a [DN_ADD_PLAYER (section 2.2.1.7)](#Section_2.2.1.7) name table operation associated with the connecting peer.
 - Existing peers MUST process the DN_ADD_PLAYER name table operation from the host.
 - New peers MUST construct the initial name table based on the entries contained in the [DN_SEND_CONNECT_INFO (section 2.2.1.4)](#Section_2.2.1.4) message.
 In client/server mode, each client only keeps name table entries that represent its player and the server player. Therefore, only this subset of the name table is synchronized with the server during connection.
@@ -2360,7 +2360,7 @@ Figure 16: Role of the peer, host, client, and server when sending and receiving
 
 The role of the [**peer**](#gt_peer), [**host**](#gt_host), client, and server when sending messages (section [2.2.3](#Section_2.2.3)):
 
-- When any message is sent, if the sender specifies [DN_REQ_PROCESS_COMPLETION](#Section_2.2.3.2) (section 2.2.3.2) to indicate that the receiving application MUST confirm delivery of the sent message, the sender waits to either receive a [DN_PROCESS_COMPLETION](#Section_2.2.3.3) response message (section 2.2.3.3), or to be notified of connection termination by the lower-layer transport that is handling reliable message delivery [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md). If the connection is terminated prior to receiving a response, the sender MUST treat the send operation as having failed in addition to performing standard disconnect handling as described in section [3.2](#Section_1.3).
+- When any message is sent, if the sender specifies [DN_REQ_PROCESS_COMPLETION](#Section_2.2.3.2) (section 2.2.3.2) to indicate that the receiving application MUST confirm delivery of the sent message, the sender waits to either receive a [DN_PROCESS_COMPLETION](#Section_2.2.3.3) response message (section 2.2.3.3), or to be notified of connection termination by the lower-layer transport that is handling reliable message delivery [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md). If the connection is terminated prior to receiving a response, the sender MUST treat the send operation as having failed in addition to performing standard disconnect handling as described in section [3.2](#Section_3.2).
 - Otherwise, when the DN_PROCESS_COMPLETION message is received, the send/receive is completed.
 The role of the peer, host, client, and server when receiving messages (section 2.2.3):
 
@@ -2373,7 +2373,7 @@ Illustrated in this model is a send where the process completion request has bee
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
 
-The send/receive sequence is event driven via messages sent and received via the Peer, Client, Host, or Server. The DirectPlay 8 Protocol: Core and Service Providers does not directly implement timing-related functionality; instead, it relies on internal timer events described in [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md) 3.1.2.5to provide feedback regarding the state of individual connections. When a connection has been lost, the DirectPlay 8 Protocol [MC-DPL8R] reports this to its consumers. The DirectPlay 8 Protocol: Core and Service Providers MUST then handle the disconnect as described in section [3.2](#Section_1.3).
+The send/receive sequence is event driven via messages sent and received via the Peer, Client, Host, or Server. The DirectPlay 8 Protocol: Core and Service Providers does not directly implement timing-related functionality; instead, it relies on internal timer events described in [MC-DPL8R](../MC-DPL8R/MC-DPL8R.md) 3.1.2.5to provide feedback regarding the state of individual connections. When a connection has been lost, the DirectPlay 8 Protocol [MC-DPL8R] reports this to its consumers. The DirectPlay 8 Protocol: Core and Service Providers MUST then handle the disconnect as described in section [3.2](#Section_3.2).
 
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization

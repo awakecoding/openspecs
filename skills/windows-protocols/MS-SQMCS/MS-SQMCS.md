@@ -409,7 +409,7 @@ packet-beta
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 SQM Sections
 
-SQM sections follow the SQM header in the data upload contained in the HTTP/HTTPS POST body. Each section has a SQM section header, as specified in section [2.2.4.3](#Section_2.2.4.3), and a SQM section data [**BLOB**](#gt_binary-large-object-blob), as specified in section [2.2.4.4](#Section_2.2.4.4). There are two types of SQM sections: SQM data point sections, as specified in section [2.2.4.4.1](#Section_2.2.4.4.1.3), and SQM stream sections, as specified in section [2.2.4.4.2](#Section_2.2.4.4.2.3).
+SQM sections follow the SQM header in the data upload contained in the HTTP/HTTPS POST body. Each section has a SQM section header, as specified in section [2.2.4.3](#Section_2.2.4.3), and a SQM section data [**BLOB**](#gt_binary-large-object-blob), as specified in section [2.2.4.4](#Section_2.2.4.4). There are two types of SQM sections: SQM data point sections, as specified in section [2.2.4.4.1](#Section_2.2.4.4.1), and SQM stream sections, as specified in section [2.2.4.4.2](#Section_2.2.4.4.2).
 
 ![SQM section in a binary data stream](media/image5.png)
 
@@ -734,7 +734,7 @@ packet-beta
 <a id="Section_2.2.6.5"></a>
 #### 2.2.6.5 A-SQM Escalation Rule Section
 
-The A-SQM escalation rule section contains a rule that the SQM-enabled client uses to modify behavior. An A-SQM escalation section is specified by a value of 0x1 in the **SectionType** field of the A-SQM section header. The rule is a set of rule clauses (as specified in section [2.2.6.5.2](#Section_2.2.6.5.2)) with defined data point values (see section [2.2.4.4.1](#Section_2.2.4.4.1.3)) and/or defined data stream values (see section [2.2.4.4.2](#Section_2.2.4.4.2.3)). Clauses are joined together with a group operator. A rule is either of type callback or report, and is read as either TRUE or FALSE.
+The A-SQM escalation rule section contains a rule that the SQM-enabled client uses to modify behavior. An A-SQM escalation section is specified by a value of 0x1 in the **SectionType** field of the A-SQM section header. The rule is a set of rule clauses (as specified in section [2.2.6.5.2](#Section_2.2.6.5.2)) with defined data point values (see section [2.2.4.4.1](#Section_2.2.4.4.1)) and/or defined data stream values (see section [2.2.4.4.2](#Section_2.2.4.4.2)). Clauses are joined together with a group operator. A rule is either of type callback or report, and is read as either TRUE or FALSE.
 
 <a id="Section_2.2.6.5.1"></a>
 ##### 2.2.6.5.1 A-SQM Rule Header
@@ -815,8 +815,8 @@ packet-beta
 
 **StreamRecordPosition (4 bytes):** A 32-bit unsigned integer specifying the value position within the SQM Stream identified by the **DataIdentifier** value. A value of 0x0 specifies that the clause references a SQM data point value, not a SQM stream.
 
-- A value of 0x0 specifies that the clause references a SQM data point value (see section [2.2.4.4.1](#Section_2.2.4.4.1.3)).
-- A value of [0x1, N] specifies that the clause references a value within a SQM stream of N record value positions (see section [2.2.4.4.2](#Section_2.2.4.4.2.3)). 0x1 references the first record position value within the SQM stream, 0x2 the second record position value within the SQM stream, up to the Nth record position value within the SQM stream.
+- A value of 0x0 specifies that the clause references a SQM data point value (see section [2.2.4.4.1](#Section_2.2.4.4.1)).
+- A value of [0x1, N] specifies that the clause references a value within a SQM stream of N record value positions (see section [2.2.4.4.2](#Section_2.2.4.4.2)). 0x1 references the first record position value within the SQM stream, 0x2 the second record position value within the SQM stream, up to the Nth record position value within the SQM stream.
 **ClauseEvaluationOperator (4 bytes):** A 32-bit unsigned integer specifying the clause operator and data type. This value MUST be specified from one of the following values:
 
 | Value | Meaning |
@@ -1138,7 +1138,7 @@ None.
 
 This section specifies the proxy role in the SQM Client-to-Service Protocol.
 
-When a configured [**SQM-enabled client**](#gt_sqm-enabled-client) sends a message to the proxy that contains SQM data, the proxy service opens the payload and adds a data point (see section [2.2.4.4.1](#Section_2.2.4.4.1.3)) identifying the proxy. The payload is then repackaged and sent to the SQM service. All messages that do not contain payload information are sent by the proxy from the SQM client to the SQM server with no modification.
+When a configured [**SQM-enabled client**](#gt_sqm-enabled-client) sends a message to the proxy that contains SQM data, the proxy service opens the payload and adds a data point (see section [2.2.4.4.1](#Section_2.2.4.4.1)) identifying the proxy. The payload is then repackaged and sent to the SQM service. All messages that do not contain payload information are sent by the proxy from the SQM client to the SQM server with no modification.
 
 ![Client upload through a proxy server](media/image11.png)
 

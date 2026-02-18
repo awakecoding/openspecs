@@ -250,7 +250,7 @@ packet-beta
 | **InterNetwork** 0x0002 | When set, this indicates an [**IPv4**](#gt_internet-protocol-version-4-ipv4) address in the socket. |
 | **InterNetworkV6** 0x0017 | When set, this indicates an [**IPv6**](#gt_internet-protocol-version-6-ipv6) address in the socket. |
 
-**Buffer (variable):** A variable-length buffer that contains the socket address information. If the value of the **Family** field is 0x0002, this field MUST be interpreted as [SOCKADDR_IN (section 2.2.2.2.1)](#Section_2.2.2.2.1). Otherwise, if the value of the **Family** field is 0x0017, this field MUST be interpreted as [SOCKADDR_IN6 (section 2.2.2.2.2)](#Section_2.2.2.2.1).
+**Buffer (variable):** A variable-length buffer that contains the socket address information. If the value of the **Family** field is 0x0002, this field MUST be interpreted as [SOCKADDR_IN (section 2.2.2.2.1)](#Section_2.2.2.2.1). Otherwise, if the value of the **Family** field is 0x0017, this field MUST be interpreted as [SOCKADDR_IN6 (section 2.2.2.2.2)](#Section_2.2.2.2.2).
 
 **Reserved (variable):** The remaining bytes within the size of the **SOCKADDR_STORAGE** structure (128 bytes) MUST NOT be used and MUST be reserved. The server SHOULD set this to zero, and the client MUST ignore it on receipt.
 

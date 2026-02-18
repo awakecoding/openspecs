@@ -207,7 +207,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MSDN-.NETFROVW] Microsoft Corporation, ".NET Framework Remoting Overview", [http://msdn.microsoft.com/en-us/library/kwdt6w2k](https://go.microsoft.com/fwlink/?LinkId=264697)
 
@@ -239,7 +239,7 @@ The steps describing the CLR and the .NET object interaction are as follows:
 - The CLR calls [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) on the IManagedObject interface obtained in step 2 in order to determine if the object is local to the current process and application domain.
 - The CCW responds back with its ID, and the CLR notes that this ID is local to the current process and application domain.
 - As established in step 4, the wrapped object belongs to this instance of the CLR, and the CLR can interact with the object directly instead of going through an RCW / CCW pair and communicating over a COM channel.
-In cases in which the .NET object is in a different process division (different application domain or process), a remoting proxy is used to interact with the .NET object. In such a case, the CCW implementing IManagedObject returns a **Server Object Identity** / *AppDomainID* from IManagedObject::GetObjectIdentity that does not correspond to the current process. The CLR will then ask for the remoting ID for the object ([IManagedObject::GetSerializedBuffer](#Section_3.1.4.1)). This can be used to generate a transparent remoting proxy to communicate to the original object. At this point, the communication endpoints are now remoting .NET objects, and CCWs / RCWs are not used:
+In cases in which the .NET object is in a different process division (different application domain or process), a remoting proxy is used to interact with the .NET object. In such a case, the CCW implementing IManagedObject returns a **Server Object Identity** / *AppDomainID* from IManagedObject::GetObjectIdentity that does not correspond to the current process. The CLR will then ask for the remoting ID for the object ([IManagedObject::GetSerializedBuffer](#Section_3.1.4.1.1)). This can be used to generate a transparent remoting proxy to communicate to the original object. At this point, the communication endpoints are now remoting .NET objects, and CCWs / RCWs are not used:
 
 ![CLR interacts via remoting proxy](media/image2.png)
 
@@ -273,9 +273,9 @@ Figure 3: IManagedObject request-response
 <a id="Section_1.3.1"></a>
 ### 1.3.1 IRemoteDispatch Interface and IServicedComponentInfo Interface
 
-A server [**object**](#gt_object) instance can associate a unique identity with itself. This identity can be used by the client to track multiple instances of the server object. The server can use [IServicedComponentInfo](#Section_1.3.1) to allow the client to query for its identity.
+A server [**object**](#gt_object) instance can associate a unique identity with itself. This identity can be used by the client to track multiple instances of the server object. The server can use [IServicedComponentInfo](#Section_3.1.4.3) to allow the client to query for its identity.
 
-The [IRemoteDispatch](#Section_1.3.1) interface can be used by the server to provide an alternative way to dispatch method calls on its object instance. A client can further use this interface to perform [**deactivation**](#gt_deactivation) of the server object instance.
+The [IRemoteDispatch](#Section_3.1.4.2) interface can be used by the server to provide an alternative way to dispatch method calls on its object instance. A client can further use this interface to perform [**deactivation**](#gt_deactivation) of the server object instance.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -284,7 +284,7 @@ This protocol uses the OLE Automation Protocol [MS-OAUT](../MS-OAUT/MS-OAUT.md),
 
 The [IManagedObject](#Section_3.1.4.1) interface uses the Distributed Component Object Model (DCOM) Remote Protocol [MS-DCOM](../MS-DCOM/MS-DCOM.md).
 
-The [IRemoteDispatch](#Section_1.3.1) and [IServicedComponentInfo](#Section_1.3.1) interfaces use DCOM [MS-DCOM] to communicate over the wire and to authenticate all requests issued against the infrastructure.
+The [IRemoteDispatch](#Section_3.1.4.2) and [IServicedComponentInfo](#Section_3.1.4.3) interfaces use DCOM [MS-DCOM] to communicate over the wire and to authenticate all requests issued against the infrastructure.
 
 This protocol allows for encodings defined in [MS-NRTP](../MS-NRTP/MS-NRTP.md) and [MS-NRBF](../MS-NRBF/MS-NRBF.md).
 
@@ -295,7 +295,7 @@ This protocol requires the Distributed Component Object Model (DCOM) Remote Prot
 
 All interfaces assume that the client is in possession of valid credentials recognized by the server that is accepting the client requests.
 
-This protocol assumes that the client has relied on **QueryInterface** to determine if the server supports the [IManagedObject](#Section_3.1.4.1) interface or the [IRemoteDispatch](#Section_1.3.1) interface. The protocol also assumes that the client has the server object Microsoft .NET Framework type information prior to initialization.
+This protocol assumes that the client has relied on **QueryInterface** to determine if the server supports the [IManagedObject](#Section_3.1.4.1) interface or the [IRemoteDispatch](#Section_3.1.4.2) interface. The protocol also assumes that the client has the server object Microsoft .NET Framework type information prior to initialization.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -307,9 +307,9 @@ Interoperability between the CLR and COM offers the following benefits.
 - Existing COM [**objects**](#gt_object) can be used from the CLR.
 - Managed objects created in the CLR can be used from existing COM applications.
 - The managed identity of an object is not lost when it is passed out to COM and then back to the CLR.
-The [IRemoteDispatch](#Section_1.3.1) interface is used for method call dispatch and deactivation.
+The [IRemoteDispatch](#Section_3.1.4.2) interface is used for method call dispatch and deactivation.
 
-The [IServicedComponentInfo](#Section_1.3.1) interface is used for determining server object instance identity.
+The [IServicedComponentInfo](#Section_3.1.4.3) interface is used for determining server object instance identity.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -320,7 +320,7 @@ Protocol Version: The [IManagedObject](#Section_3.1.4.1) protocol consists of on
 
 For both of these interfaces, it is assumed that the client has the .NET Framework information (such as type information of server objects) prior to initialization.
 
-The client relies on **QueryInterface** to determine if the server supports IManagedObject or [IRemoteDispatch](#Section_1.3.1).
+The client relies on **QueryInterface** to determine if the server supports IManagedObject or [IRemoteDispatch](#Section_3.1.4.2).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -337,8 +337,8 @@ This protocol uses Win32 error codes. These values are taken from the Windows e
 | Constant/value | Description |
 | --- | --- |
 | IManagedObject {C3FCC19E-A970-11D2-8B5A-00A0C9B7C9C4} | The [**GUID**](#gt_globally-unique-identifier-guid) associated with the [IManagedObject](#Section_3.1.4.1) interface. |
-| IRemoteDispatch {6619a740-8154-43be-a186-0319578e02db} | The GUID associated with the [IRemoteDispatch](#Section_1.3.1) interface. |
-| IServicedComponentInfo {8165B19E-8D3A-4d0b-80C8-97DE310DB583} | The GUID associated with the [IServicedComponentInfo](#Section_1.3.1) interface. |
+| IRemoteDispatch {6619a740-8154-43be-a186-0319578e02db} | The GUID associated with the [IRemoteDispatch](#Section_3.1.4.2) interface. |
+| IServicedComponentInfo {8165B19E-8D3A-4d0b-80C8-97DE310DB583} | The GUID associated with the [IServicedComponentInfo](#Section_3.1.4.3) interface. |
 
 <a id="Section_2"></a>
 # 2 Messages
@@ -391,7 +391,7 @@ typedef int* CCW_PTR;
 
 The following sections specify details of the IManagedObject Interface Protocol, including abstract data model, interface method syntax, and message processing rules.
 
-The [IRemoteDispatch](#Section_1.3.1) and [IServicedComponentInfo](#Section_1.3.1) client applications initiate the conversation with the server by performing remote protocol [**activation**](#gt_activation) ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.1.1) of an application-specific [**CLSID**](#gt_class-identifier-clsid) of an [**object**](#gt_object) that supports these interfaces. After the client application uses activation to get the [**interface pointer**](#gt_interface-pointer) to the remote protocol object, it works with this object by making calls on the remote protocol interface supported by the object. After it has finished making calls, the client application does a release on the interface pointer.
+The [IRemoteDispatch](#Section_3.1.4.2) and [IServicedComponentInfo](#Section_3.1.4.3) client applications initiate the conversation with the server by performing remote protocol [**activation**](#gt_activation) ([MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.1.1) of an application-specific [**CLSID**](#gt_class-identifier-clsid) of an [**object**](#gt_object) that supports these interfaces. After the client application uses activation to get the [**interface pointer**](#gt_interface-pointer) to the remote protocol object, it works with this object by making calls on the remote protocol interface supported by the object. After it has finished making calls, the client application does a release on the interface pointer.
 
 <a id="Section_3.1"></a>
 ## 3.1 IManagedObject Server Details
@@ -431,7 +431,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetSerializedBuffer](#Section_3.1.4.1) | Returns a binary-formatted representation of a managed [**object**](#gt_object), as specified in [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3. Opnum: 3 |
+| [GetSerializedBuffer](#Section_3.1.4.1.1) | Returns a binary-formatted representation of a managed [**object**](#gt_object), as specified in [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3. Opnum: 3 |
 | [GetObjectIdentity](#Section_3.1.4.1.2) | Used to determine if a COM object is a managed object that belongs to this [**CLR**](#gt_common-language-runtime-clr) instance and process subdivision. Opnum: 4 |
 
 <a id="Section_3.1.4.1.1"></a>
@@ -626,7 +626,7 @@ The initialization is the same as for server. See section [3.1.3](#Section_3.1.3
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
-The client determines if it is the server by matching values returned from the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) method. The client matches the value of **pBSTRGUID** against the GUID of the client [**CLR**](#gt_common-language-runtime-clr) instance and uses the implementation-specific helper values in **AppDomainID** and **pCCW** to help decide if the COM object originated in the client CLR instance. Otherwise, the client fetches a binary-formatted string representation ([MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3) to the underlying managed [**object**](#gt_object) by using [GetSerializedBuffer](#Section_3.1.4.1), which can be used to create a managed object.
+The client determines if it is the server by matching values returned from the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) method. The client matches the value of **pBSTRGUID** against the GUID of the client [**CLR**](#gt_common-language-runtime-clr) instance and uses the implementation-specific helper values in **AppDomainID** and **pCCW** to help decide if the COM object originated in the client CLR instance. Otherwise, the client fetches a binary-formatted string representation ([MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3) to the underlying managed [**object**](#gt_object) by using [GetSerializedBuffer](#Section_3.1.4.1.1), which can be used to create a managed object.
 
 When the IServiceComponentInfo interface is used, the client determines the server instance identity by means of the URI returned from the IServiceComponentInfo::GetComponentInfo method.
 
@@ -656,11 +656,11 @@ A [**CLR**](#gt_common-language-runtime-clr) instance uses the [IManagedObject](
 
 - A CLR instance starts up and generates a [**UUID**](#gt_universally-unique-identifier-uuid) to uniquely identify itself. It later creates a process subdivision and creates a unique value to identify the process subdivision.
 - A COM [**object**](#gt_object) enters the CLR, and the CLR then calls the **IUnknown::QueryInterface** method to determine whether the object implements IManagedObject. The object returns S_OK and returns a pointer to an IManagedObject [**interface pointer**](#gt_interface-pointer).
-- The CLR then calls the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) method and matches the *pBSTRGUID* against its UUID and, if they match, compares the *AppDomainID* to the identifier of the current process subdivision. If they match, the CLR converts *pCCW* to the underlying CLR-managed object. If they do not match, it calls the [IManagedObject::GetSerializedBuffer](#Section_3.1.4.1) method and uses the binary-formatted version of the object converted to a string to create a copy of the object that resides in another CLR (which could be a completely different implementation). The caller on the client CLR is then able to interpret the deserialized opaque object reference. For more information about how to create the binary-formatted string representation of an object, see [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3.
+- The CLR then calls the [IManagedObject::GetObjectIdentity](#Section_3.1.4.1.2) method and matches the *pBSTRGUID* against its UUID and, if they match, compares the *AppDomainID* to the identifier of the current process subdivision. If they match, the CLR converts *pCCW* to the underlying CLR-managed object. If they do not match, it calls the [IManagedObject::GetSerializedBuffer](#Section_3.1.4.1.1) method and uses the binary-formatted version of the object converted to a string to create a copy of the object that resides in another CLR (which could be a completely different implementation). The caller on the client CLR is then able to interpret the deserialized opaque object reference. For more information about how to create the binary-formatted string representation of an object, see [MS-NRBF](../MS-NRBF/MS-NRBF.md) section 2.3.
 <a id="Section_4.2"></a>
 ## 4.2 Determining Server Object Identity
 
-This example assumes that the client already has an [**interface pointer**](#gt_interface-pointer) to an instance of an [**object**](#gt_object) that implements [IServicedComponentInfo](#Section_1.3.1). The example also assumes that the server already has a unique identifier encoded into a URI to identify the server object instance. The following diagram helps to illustrate this example.
+This example assumes that the client already has an [**interface pointer**](#gt_interface-pointer) to an instance of an [**object**](#gt_object) that implements [IServicedComponentInfo](#Section_3.1.4.3). The example also assumes that the server already has a unique identifier encoded into a URI to identify the server object instance. The following diagram helps to illustrate this example.
 
 ![Call sequence for determining server object identity](media/image4.png)
 
@@ -692,7 +692,7 @@ GetComponentInfo{
 <a id="Section_4.3"></a>
 ## 4.3 Dispatching a Call on the Server Using Deactivate
 
-This example assumes that the client already has an [**interface pointer**](#gt_interface-pointer) to an instance of an [**object**](#gt_object) that implements [IRemoteDispatch](#Section_1.3.1). The following diagram helps to illustrate this example. The scenario is around a remote server object which has a method named **Method**. This method takes two string parameters. The first parameter *a* is an in only parameter, the second parameter *b* is the out only parameter.
+This example assumes that the client already has an [**interface pointer**](#gt_interface-pointer) to an instance of an [**object**](#gt_object) that implements [IRemoteDispatch](#Section_3.1.4.2). The following diagram helps to illustrate this example. The scenario is around a remote server object which has a method named **Method**. This method takes two string parameters. The first parameter *a* is an in only parameter, the second parameter *b* is the out only parameter.
 
 Method(string a, out string b);
 
@@ -881,7 +881,7 @@ HRESULT GetComponentInfo([in,out] int* infoMask, [out] SAFEARRAY(BSTR)* infoArra
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of the .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of the .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 1.0
 - Microsoft .NET Framework 2.0
@@ -896,11 +896,11 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 1: The Microsoft [**common language runtime (CLR)**](#gt_common-language-runtime-clr) and Component Object Model (COM) are capable of interoperating over the [IManagedObject Interface Protocol](#Section_3.1.4.1) mechanism. For more information on DCOM and remoting, see [[MSFT-DCOMTECHOVW]](https://go.microsoft.com/fwlink/?LinkId=264696) and [[MSDN-.NETFROVW]](https://go.microsoft.com/fwlink/?LinkId=264697).
+<1> Section 1: The Microsoft [**common language runtime (CLR)**](#gt_common-language-runtime-clr) and Component Object Model (COM) are capable of interoperating over the [IManagedObject Interface Protocol](#Section_1) mechanism. For more information on DCOM and remoting, see [[MSFT-DCOMTECHOVW]](https://go.microsoft.com/fwlink/?LinkId=264696) and [[MSDN-.NETFROVW]](https://go.microsoft.com/fwlink/?LinkId=264697).
 
 <2> Section 3.1.4.1: On the Windows platform, the [IManagedObject](#Section_3.1.4.1) interface is implemented by all .NET Framework components when they are exposed through the COM-Interop feature of the .NET Framework.
 
-<3> Section 3.1.4.2: On the Windows platform, the [IRemoteDispatch](#Section_1.3.1) interface is exposed only by components inheriting from **System.EnterpriseServices.ServicedComponent**.
+<3> Section 3.1.4.2: On the Windows platform, the [IRemoteDispatch](#Section_3.1.4.2) interface is exposed only by components inheriting from **System.EnterpriseServices.ServicedComponent**.
 
 <a id="Section_8"></a>
 # 8 Change Tracking

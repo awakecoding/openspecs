@@ -503,7 +503,7 @@ Network congestion in this case is defined as the state where a link or node is 
 
 **Sample_Index (4 bytes):** A 32-bit unsigned integer that specifies the total count of sample entries that have been collected by the sink device to date.
 
-**Recv_Error_Average (4 bytes):** A 32-bit unsigned integer that identifies the average of the most recent 100 samples of **Retry_Delta_Value** (section [2.2.2.4.3](#Section_2.2.2.4.3)) / **Xmitted_Frag_Delta_Value** (section [2.2.2.4.4](#Section_2.2.2.4.4)), expressed as 0.000001 units. More information is available in section [3.2](#Section_1.3).
+**Recv_Error_Average (4 bytes):** A 32-bit unsigned integer that identifies the average of the most recent 100 samples of **Retry_Delta_Value** (section [2.2.2.4.3](#Section_2.2.2.4.3)) / **Xmitted_Frag_Delta_Value** (section [2.2.2.4.4](#Section_2.2.2.4.4)), expressed as 0.000001 units. More information is available in section [3.2](#Section_3.2).
 
 **Send_Error_Average (4 bytes):** A 32-bit unsigned integer that identifies the average of the most recent 100 samples of **Fcs_Error_Delta_Value** (section [2.2.2.4.5](#Section_2.2.2.4.5)) / **Recvd_Frag_Delta_Value** (section [2.2.2.4.6](#Section_2.2.2.4.6)), expressed as 0.000001 units. More information is available in section 3.2.
 

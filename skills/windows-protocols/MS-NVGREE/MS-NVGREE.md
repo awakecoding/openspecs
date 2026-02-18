@@ -951,7 +951,7 @@ To protect against such attacks, an IP security protocol, for example [[RFC2401]
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Variable | IP Security (IPSec) | Section [5.1](#Section_5) Security Considerations for Implementors |
+| Variable | IP Security (IPSec) | Section [5.1](#Section_5.1) Security Considerations for Implementors |
 | Variable | Transport Layer Security (TLS) | Section 5.1 Security Considerations for Implementors |
 | Variable | Encapsulating Security Payload (ESP) | Section 5.1 Security Considerations for Implementors |
 | Variable | Authenticating Header (AH) | Section 5.1 Security Considerations for Implementors |

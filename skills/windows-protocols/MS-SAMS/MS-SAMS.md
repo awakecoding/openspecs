@@ -131,7 +131,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-It is useful to review the Active Directory Technical Specification, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md), the Netlogon Remote Protocol Specification, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md), and the Security Account Manager (SAM) Remote Protocol Specification (Client-to-Server), as specified in [MS-SAMR](#Section_5) before reading this document to understand the context and dependencies for this protocol.
+It is useful to review the Active Directory Technical Specification, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md), the Netlogon Remote Protocol Specification, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md), and the Security Account Manager (SAM) Remote Protocol Specification (Client-to-Server), as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) before reading this document to understand the context and dependencies for this protocol.
 
 The Security Account Manager (SAM) Remote Protocol (Server-to-Server) is used by [**Domain controllers (DCs)**](#gt_domain-controller-dc) to forward time-critical database changes to the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc); it is also used to forward time-critical database changes from a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) to a [**writable naming context (NC) replica**](#gt_writable-naming-context-nc-replica) within the same [**domain**](#gt_domain) but outside the normal replication protocol. This protocol is used only between [**Active Directory**](#gt_active-directory) servers in the same domain. Beginning with the Windows Server 2008 operating system, this protocol was extended to forward certain non–time-critical write operations from an RODC to a writable NC replica.
 
@@ -234,7 +234,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
@@ -242,7 +242,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MSKB-2641192] Microsoft Corporation, "The badPwdCount attribute is not reset to 0 on a Windows Server 2008 R2-based or Windows Server 2008-based PDC when the reset request is sent from an RODC", [https://support.microsoft.com/en-us/help/2641192/the-badpwdcount-attribute-is-not-reset-to-0-on-a-windows-server-2008-r2-based-or-windows-server-2008-based-pdc-when-the-reset-request-is-sent-from-an-rodc](https://go.microsoft.com/fwlink/?linkid=847641)
 
@@ -258,7 +258,7 @@ None.
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The SAM Remote Protocol (Server-to-Server) includes four sets of messages. The first set specifies messages that a [**domain controller (DC)**](#gt_domain-controller-dc) sends to a [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc) within the same [**domain**](#gt_domain) to communicate select state changes in the [**requestor's**](#gt_requestor) database. The second and third sets specify messages that a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) forwards to a [**writable NC replica**](#gt_writable-naming-context-nc-replica) within the same domain to affect state changes in the [**responder's**](#gt_responder) database. The fourth set, forwarded SAM Remote Protocol (Client-to-Server) messages, is different in that it uses a different transport protocol, as specified in [MS-SAMR](#Section_5).
+The SAM Remote Protocol (Server-to-Server) includes four sets of messages. The first set specifies messages that a [**domain controller (DC)**](#gt_domain-controller-dc) sends to a [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc) within the same [**domain**](#gt_domain) to communicate select state changes in the [**requestor's**](#gt_requestor) database. The second and third sets specify messages that a [**read-only domain controller (RODC)**](#gt_read-only-domain-controller-rodc) forwards to a [**writable NC replica**](#gt_writable-naming-context-nc-replica) within the same domain to affect state changes in the [**responder's**](#gt_responder) database. The fourth set, forwarded SAM Remote Protocol (Client-to-Server) messages, is different in that it uses a different transport protocol, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 
 This protocol is different from the Directory Replication Service (DRS) Remote Protocol (specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md)) in that (1) it is a "push" model from requestor to responder, and (2) it is used to communicate very limited, non-extensible, predefined state changes.
 
@@ -267,7 +267,7 @@ With the exception of the third set, this protocol is implemented within the Net
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-Much of this protocol sits directly on top of the Netlogon Remote Protocol, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md), and uses the NetrLogonSendToSam method to transmit the data. This method is specifically designed for this protocol. NetrLogonSendToSam is specified in [MS-NRPC] section 3.5.4.8.4. The remaining messages of this protocol use [MS-SAMR](#Section_5); the message processing descriptions explicitly mention the use of [MS-SAMR] in these cases.
+Much of this protocol sits directly on top of the Netlogon Remote Protocol, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md), and uses the NetrLogonSendToSam method to transmit the data. This method is specifically designed for this protocol. NetrLogonSendToSam is specified in [MS-NRPC] section 3.5.4.8.4. The remaining messages of this protocol use [MS-SAMR](../MS-SAMR/MS-SAMR.md); the message processing descriptions explicitly mention the use of [MS-SAMR] in these cases.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -308,7 +308,7 @@ There is no additional configuration required over the Netlogon RPC protocol req
 
 Unless otherwise noted, security services for the SAM Remote Protocol (Server-to-Server) (including authentication, authorization, secrecy, and integrity) MUST be handled at the transport layer (that is, the Netlogon Remote Protocol).
 
-Those messages that do not use the NetrLogonSendToSam method (in particular, forwarded SAM Remote Protocol (Client-to-Server) messages) MUST use transport identical to what is described in [MS-SAMR](#Section_5) section 2.1. Details about these messages are specified in section [2.2.5](#Section_2.2.5).
+Those messages that do not use the NetrLogonSendToSam method (in particular, forwarded SAM Remote Protocol (Client-to-Server) messages) MUST use transport identical to what is described in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1. Details about these messages are specified in section [2.2.5](#Section_2.2.5).
 
 <a id="Section_2.2"></a>
 ## 2.2 SAM Server-to-Server Request Message Syntax
@@ -316,7 +316,7 @@ Those messages that do not use the NetrLogonSendToSam method (in particular, for
 This section specifies the format of the bytes in the protocol. Bytes are presented as variable-length structures.
 
 - Details about a base format that is used for all messages are specified in Base Request Message (section [2.2.1](#Section_2.2.1)).
-- Details about specific messages are specified in PasswordUpdate Request Message (section [2.2.2](#Section_2.2.2)), ResetBadPwdCount Request Message (section [2.2.3](#Section_3.3.5.3)), PasswordUpdateForward Request Message (section [2.2.4](#Section_3.2.4.4)), and ResetSmartCardAccountPassword Request Message (section [2.2.8](#Section_2.2.8)).
+- Details about specific messages are specified in PasswordUpdate Request Message (section [2.2.2](#Section_2.2.2)), ResetBadPwdCount Request Message (section [2.2.3](#Section_2.2.3)), PasswordUpdateForward Request Message (section [2.2.4](#Section_2.2.4)), and ResetSmartCardAccountPassword Request Message (section [2.2.8](#Section_2.2.8)).
 - Details about forwarding password-change request messages are specified in section [2.2.5](#Section_2.2.5).
 - The format of the return value and values used in this protocol is specified in Return Codes (section [2.2.9](#Section_2.2.9)).
 <a id="Section_2.2.1"></a>
@@ -338,9 +338,9 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | PASSWORD_UPDATE_MSG 0x00000000 | Message is a [PasswordUpdate](#Section_2.2.2) request. |
-| RESET_PWD_COUNT_MSG 0x00000001 | Message is a [ResetBadPwdCount](#Section_3.3.5.3) request. |
-| FWD_PASSWORD_UPDATE_MSG 0x00000002 | Message is a [PasswordUpdateForward](#Section_3.2.4.4) request.<1> |
-| FWD_LASTLOGON_TS_UPDATE_MSG 0x00000003 | Message is a [LastLogonTimeStampUpdatesForward](#Section_3.2.4.6) request. |
+| RESET_PWD_COUNT_MSG 0x00000001 | Message is a [ResetBadPwdCount](#Section_2.2.3) request. |
+| FWD_PASSWORD_UPDATE_MSG 0x00000002 | Message is a [PasswordUpdateForward](#Section_2.2.4) request.<1> |
+| FWD_LASTLOGON_TS_UPDATE_MSG 0x00000003 | Message is a [LastLogonTimeStampUpdatesForward](#Section_2.2.7) request. |
 | RESET_SMART_CARD_ONLY_PWD 0x00000004 | Message is a [ResetSmartCardAccountPassword](#Section_2.2.8) request. |
 
 **MessageSize (4 bytes):** A 32-bit, unsigned integer that specifies the size of the **Message** field, in bytes.
@@ -521,7 +521,7 @@ Each **OffsetLengthArray** element contains two 32-bit unsigned integers that MU
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Forwarding Password-Change Request Messages
 
-When an [**RODC**](#gt_read-only-domain-controller-rodc) receives a SamrOemChangePasswordUser2 or a SamrUnicodeChangePasswordUser2 request, as specified in [MS-SAMR](#Section_5) sections 3.1.5.10.2 and 3.1.5.10.3, the request MUST be forwarded to a [**writable NC replica**](#gt_writable-naming-context-nc-replica). The way in which these messages are forwarded is specified in section [3.3.5.5](../MS-SAMR/MS-SAMR.md).
+When an [**RODC**](#gt_read-only-domain-controller-rodc) receives a SamrOemChangePasswordUser2 or a SamrUnicodeChangePasswordUser2 request, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.5.10.2 and 3.1.5.10.3, the request MUST be forwarded to a [**writable NC replica**](#gt_writable-naming-context-nc-replica). The way in which these messages are forwarded is specified in section [3.3.5.5](#Section_3.3.5.5).
 
 <a id="Section_2.2.6"></a>
 ### 2.2.6 LastLogonTimeStampUpdate Structure
@@ -704,7 +704,7 @@ If more than one update occurs in a given transaction, the updates described abo
 
 This message is used to communicate to the [**PDC**](#gt_primary-domain-controller-pdc) if the badPwdCount attribute must be reset to 0. This message MUST be triggered by the following database update on a non-PDC.
 
-When a non-PDC services a successful logon from either the Kerberos Protocol Extensions (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) or the Netlogon Remote Protocol (as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md)), the previous value of the local badPwdCount attribute was nonzero, and the local badPwdCount attribute is set to 0 as a result of the successful logon, the non-PDC MUST issue a [ResetBadPwdCount](#Section_3.3.5.3) request to the PDC on a best-effort basis; if the PDC cannot be reached or the update fails for any reason, the resulting error MUST be ignored.
+When a non-PDC services a successful logon from either the Kerberos Protocol Extensions (as specified in [MS-KILE](../MS-KILE/MS-KILE.md)) or the Netlogon Remote Protocol (as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md)), the previous value of the local badPwdCount attribute was nonzero, and the local badPwdCount attribute is set to 0 as a result of the successful logon, the non-PDC MUST issue a [ResetBadPwdCount](#Section_2.2.3) request to the PDC on a best-effort basis; if the PDC cannot be reached or the update fails for any reason, the resulting error MUST be ignored.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 PasswordUpdateForward Request
@@ -714,7 +714,7 @@ This message is used to communicate a request to change the state of a password 
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Forwarding a Password-Change Request
 
-A request to change the state of a password for a directory entry is forwarded from an [**RODC**](#gt_read-only-domain-controller-rodc) to a [**writable NC replica**](#gt_writable-naming-context-nc-replica). This behavior is triggered only at an RODC, and only by receipt of a SamrOemChangePasswordUser2 or a SamrUnicodeChangePasswordUser2 message, as specified in [MS-SAMR](#Section_5) sections 3.1.5.10.2 and 3.1.5.10.3. If the forwarding operation returns an error, the operation fails and the error MUST be propagated back to the client that originated the password change request.<7>
+A request to change the state of a password for a directory entry is forwarded from an [**RODC**](#gt_read-only-domain-controller-rodc) to a [**writable NC replica**](#gt_writable-naming-context-nc-replica). This behavior is triggered only at an RODC, and only by receipt of a SamrOemChangePasswordUser2 or a SamrUnicodeChangePasswordUser2 message, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.5.10.2 and 3.1.5.10.3. If the forwarding operation returns an error, the operation fails and the error MUST be propagated back to the client that originated the password change request.<7>
 
 Upon receiving one of the password-change messages, the RODC MUST process the data from the message subject to all of the following constraints:
 
@@ -793,7 +793,7 @@ None.
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
 
-In the following sections, the notation "Message.PasswordUpdate" is used to refer to the PasswordUpdate request message (section [2.2.2](#Section_2.2.2)). By using this convention, Message.PasswordUpdate.Flags, for example, refers to the **Flags** field of the PasswordUpdate request message. Similarly, "Message.ResetBadPwdCount" refers to the ResetBadPwdCount request message (section [2.2.3](#Section_3.3.5.3)), "Message.PasswordUpdateForward" refers to the PasswordUpdateForward request message (section [2.2.4](#Section_3.2.4.4)), and "Message.ResetSmartCardAccountPassword" refers to the ResetSmartCardAccountPassword request message (section [2.2.8](#Section_2.2.8)).
+In the following sections, the notation "Message.PasswordUpdate" is used to refer to the PasswordUpdate request message (section [2.2.2](#Section_2.2.2)). By using this convention, Message.PasswordUpdate.Flags, for example, refers to the **Flags** field of the PasswordUpdate request message. Similarly, "Message.ResetBadPwdCount" refers to the ResetBadPwdCount request message (section [2.2.3](#Section_2.2.3)), "Message.PasswordUpdateForward" refers to the PasswordUpdateForward request message (section [2.2.4](#Section_2.2.4)), and "Message.ResetSmartCardAccountPassword" refers to the ResetSmartCardAccountPassword request message (section [2.2.8](#Section_2.2.8)).
 
 For each message in this section, an informative description of the message is presented first; then, a normative description about how the message must be processed is given.
 
@@ -874,11 +874,11 @@ Upon receiving this message, the [**responder**](#gt_responder) SHOULD<17> retur
 
 - The responder SHOULD validate the integrity of the message with respect to embedded offsets and sizes. Responder implementations SHOULD return STATUS_INVALID_PARAMETER upon receiving malformed messages.<18>
 - If either FLAG_ACCOUNT_NAME or FLAG_CLEAR_TEXT_PASSWORD is not set, the responder SHOULD<19> return STATUS_REVISION_MISMATCH to the requestor.
-- If any reserved flag (marked as X in [PasswordUpdateForward Request Message (section 2.2.4)](#Section_3.2.4.4)) is set, the responder SHOULD return STATUS_REVISION_MISMATCH.<20>
+- If any reserved flag (marked as X in [PasswordUpdateForward Request Message (section 2.2.4)](#Section_2.2.4)) is set, the responder SHOULD return STATUS_REVISION_MISMATCH.<20>
 - If there is no object in the database that has a sAMAccountName attribute value that corresponds to the data value supplied in Message.PasswordUpdateForward.Data that is specified by the first array element in Message.PasswordUpdateForward.OffsetLengthArray, the responder MUST return STATUS_NOT_FOUND.
 - If the responder is not a [**writable NC replica**](#gt_writable-naming-context-nc-replica) in the same [**domain**](#gt_domain) as the RODC, the responder MUST return an error.
 - If RODC is not allowed to cache credentials for the target user account, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.5.15, the responder MUST return STATUS_ACCESS_DENIED.
-- The state changes for the password attributes in the database MUST be the same as those specified for clearTextPassword in [MS-SAMR](#Section_5).
+- The state changes for the password attributes in the database MUST be the same as those specified for clearTextPassword in [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 - If no errors occur during message processing, the responder MUST return STATUS_SUCCESS; otherwise, the responder MUST return an error code, as specified in section [2.2.](#Section_2.2.9)9.
 - All updates MUST occur as [**originating updates**](#gt_originating-update).
 <a id="Section_3.3.5.5"></a>
@@ -887,12 +887,12 @@ Upon receiving this message, the [**responder**](#gt_responder) SHOULD<17> retur
 <a id="Section_3.3.5.5.1"></a>
 ##### 3.3.5.5.1 Non-Normative Description
 
-When an [**RODC**](#gt_read-only-domain-controller-rodc) receives a SamrOemChangePasswordUser2 or SamrUnicodeChangePasswordUser2 request, as specified in [MS-SAMR](#Section_5) sections 3.1.5.10.2 and 3.1.5.10.3, the request is forwarded to a [**writable NC replica**](#gt_writable-naming-context-nc-replica) in the same [**domain**](#gt_domain) by initiating a transport session in the context of the caller and resending the message to that [**DC**](#gt_domain-controller-dc). The result of message processing at the DC is then returned to the [**requestor**](#gt_requestor).
+When an [**RODC**](#gt_read-only-domain-controller-rodc) receives a SamrOemChangePasswordUser2 or SamrUnicodeChangePasswordUser2 request, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.5.10.2 and 3.1.5.10.3, the request is forwarded to a [**writable NC replica**](#gt_writable-naming-context-nc-replica) in the same [**domain**](#gt_domain) by initiating a transport session in the context of the caller and resending the message to that [**DC**](#gt_domain-controller-dc). The result of message processing at the DC is then returned to the [**requestor**](#gt_requestor).
 
 <a id="Section_3.3.5.5.2"></a>
 ##### 3.3.5.5.2 Normative Specification
 
-Upon receiving this message, the [**responder**](#gt_responder) MUST process the data from the message subject to the constraints specified in [MS-SAMR](#Section_5) sections 3.1.5.10.2 and 3.1.5.10.3.
+Upon receiving this message, the [**responder**](#gt_responder) MUST process the data from the message subject to the constraints specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 3.1.5.10.2 and 3.1.5.10.3.
 
 <a id="Section_3.3.5.6"></a>
 #### 3.3.5.6 LastLogonTimeStampUpdatesForward Request Message
@@ -909,7 +909,7 @@ Upon receiving this message, the [**responder**](#gt_responder) SHOULD<21> retur
 
 - The responder SHOULD validate the integrity of the message with respect to embedded offsets and sizes. Responder implementations SHOULD return STATUS_INVALID_PARAMETER upon receiving malformed messages.<22>
 - If the responder is not a [**writable NC replica**](#gt_writable-naming-context-nc-replica) in the same [**domain**](#gt_domain) as the [**RODC**](#gt_read-only-domain-controller-rodc), then the responder SHOULD<23> return an error.
-- For each individual update contained in the **Updates** field of the [LastLogonTimeStampUpdatesForward message (section 2.2.7)](#Section_3.2.4.6), the responder MUST do the following:
+- For each individual update contained in the **Updates** field of the [LastLogonTimeStampUpdatesForward message (section 2.2.7)](#Section_2.2.7), the responder MUST do the following:
 - If there is no object in the database that has an objectSid attribute value that corresponds to the value constructed by concatenating the LastLogonTimeStampUpdate.AccountRid field with the configured domain [**SID**](#gt_security-identifier-sid), skip this update and go to the next one.
 - Verify that the RODC is allowed to cache credentials for the object found, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.10.5.15; otherwise, skip this update request and go to the next one.
 - Update the lastLogonTimeStamp attribute of the directory entry in accordance with the algorithm specified for that attribute in [MS-ADA1]. This MUST be an [**originating update**](#gt_originating-update).
@@ -931,11 +931,11 @@ The [**responder**](#gt_responder) SHOULD<24> process the data from the message,
 
 - The responder validates the integrity of the message with respect to embedded offsets and sizes. Responder implementations MUST return an error condition upon receiving malformed messages.
 - If the user password is not expired, the responder MUST return STATUS_SUCCESS. The user password is considered expired using the following procedure:
-- Let **PasswordMustChange** be the value computed using the procedure defined in PasswordMustChange Generation ([MS-SAMR](#Section_5) section 3.1.5.14.4).
+- Let **PasswordMustChange** be the value computed using the procedure defined in PasswordMustChange Generation ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.14.4).
 - The password is considered expired if **PasswordMustChange** is some time in the past.
 - Or, the password is considered expired if one of the following is true:
 - The user account has an msDS-AssignedAuthNPolicy attribute ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.224) referring to an msDS-AuthNPolicy object ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.120), AND the msDS-AuthNPolicy object has an msDS-AuthNPolicyEnforced attribute ([MS-ADA2] section 2.230) set to TRUE, AND the msDS-AuthNPolicy object has an msDS-UserTGTLifetime attribute ([MS-ADA2] section 2.505), AND **PasswordMustChange** minus msDS-UserTGTLifetime is greater than the current time.
-- Or, **PasswordMustChange** minus the value stored in the **MaxTicketAge** ADM element ([MS-LSAD](#Section_5) section 3.1.1.1) is greater than the current time.
+- Or, **PasswordMustChange** minus the value stored in the **MaxTicketAge** ADM element ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.1) is greater than the current time.
 - The responder MUST perform the following validation steps before proceeding.
 - If the msDS-ExpirePasswordsOnSmartCardOnlyAccounts attribute ([MS-ADA2] section 2.319) on the [**naming context (NC)**](#gt_naming-context-nc) is either false or not present, or if the [**domain**](#gt_domain) functional level is less than DS_BEHAVIOR_WIN2016, the responder MUST return an error condition.
 - If the specified user's userAccountControl attribute ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.342) does not contain 0x00040000 (ADS_UF_SMARTCARD_REQUIRED), the responder MUST return an error condition.

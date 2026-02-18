@@ -512,7 +512,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [REST] Fielding, R., "Architectural Styles and the Design of Network-based Software Architectures", 2000, [http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm](https://go.microsoft.com/fwlink/?LinkId=140866)
 
@@ -545,7 +545,7 @@ Figure 1: OData relationship to other protocols
 
 The OData protocol does not provide a mechanism for a client to discover the existence and location of arbitrary [**data services**](#gt_data-service) (of the server). It is a prerequisite that the client obtain a [**URI**](#gt_uniform-resource-identifier-uri) to the server before the protocol can be used.
 
-Neither the Atom Publishing Protocol (AtomPub) nor the OData protocol defines an authentication or authorization scheme. Implementers of the protocol ought to review the recommended security prerequisites in [Security Considerations for Implementers (section 5.1)](#Section_5) of this document and in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 15.
+Neither the Atom Publishing Protocol (AtomPub) nor the OData protocol defines an authentication or authorization scheme. Implementers of the protocol ought to review the recommended security prerequisites in [Security Considerations for Implementers (section 5.1)](#Section_5.1) of this document and in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 15.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -586,10 +586,10 @@ Following is a summary of the protocol constructs that are defined in this docum
 
 **Partial sets of entities:** Servers responds to [RetrieveEntitySet (section 2.2.7.2.1)](#Section_2.2.7.2.1) GET requests with a response body containing a representation of a partial list of the entities that are identified by the request [**URI**](#gt_uniform-resource-identifier-uri) and a link to the next partial list.
 
-- [2.2.3.6.1](#Section_2.2.3.6.1.5) System Query Options
+- [2.2.3.6.1](#Section_2.2.3.6.1) System Query Options
 - [2.2.3.6.1.9](#Section_2.2.3.6.1.9) Skip Token System Query Option ($skiptoken)
-- [2.2.6.2.1](#Section_2.2.6.2.1.3) Entity Set (as an Atom Feed Element)
-- [2.2.6.3.2](#Section_2.2.6.3.2.3) Entity Set (as a JSON Array)
+- [2.2.6.2.1](#Section_2.2.6.2.1) Entity Set (as an Atom Feed Element)
+- [2.2.6.3.2](#Section_2.2.6.3.2) Entity Set (as a JSON Array)
 - [3.2.5.4.1](#Section_3.2.5.4.1) Executing a Received RetrieveEntitySet Request
 **RetrieveCount request:** The purpose of the [RetrieveCount Request (section 2.2.7.2.10)](#Section_2.2.7.2.10) is to enable the count of a collection of EntityType ([MC-CSDL](../MC-CSDL/MC-CSDL.md) section 2.1.2) instances to be retrieved by the client.
 
@@ -630,7 +630,7 @@ Following is a summary of the protocol constructs that are defined in this docum
 - [3.2.5.2.1](#Section_3.2.5.2.1) Common Rules for Executing Requests Containing a Customizable Feeds Mapped Property
 **Revised Verbose JSON response format:** The Verbose JSON representation for collections has been enhanced to allow for the representation of additional collection-level metadata.
 
-- [2.2.6.3](#Section_4.2.1.6) JavaScript Object Notation (JSON) Format
+- [2.2.6.3](#Section_2.2.6.3) JavaScript Object Notation (JSON) Format
 <a id="Section_1.7.2"></a>
 ### 1.7.2 OData 3.0 Version-Specific Summary
 
@@ -638,12 +638,12 @@ Following is a summary of the protocol constructs that are defined in this docum
 
 **Collection properties:** A collection property is a property that represents a non-nullable, unordered, homogenous set of **EDMSimpleType** or **ComplexType**, as specified in [MC-CSDL](../MC-CSDL/MC-CSDL.md).
 
-- [2.2.1](#Section_3.2.1) Abstract Data Model
+- [2.2.1](#Section_2.2.1) Abstract Data Model
 - [2.2.3.1](#Section_2.2.3.1) URI Syntax
 - [2.2.3.4](#Section_2.2.3.4) Resource Path: Construction Rules
-- [2.2.3.6.1](#Section_2.2.3.6.1.5) System Query Options
+- [2.2.3.6.1](#Section_2.2.3.6.1) System Query Options
 - [2.2.6.2.2](#Section_2.2.6.2.2) Entity Type (as an Atom Entry Element)
-- [2.2.6.2.9](#Section_2.2.6.2.9.2) Collection Property
+- [2.2.6.2.9](#Section_2.2.6.2.9) Collection Property
 - [2.2.6.2.9.1](#Section_2.2.6.2.9.1) Collection Property of Complex Type
 - [2.2.6.2.9.2](#Section_2.2.6.2.9.2) Collection of EDMSimpleType
 - [2.2.6.3.13](#Section_2.2.6.3.13) Collection Property
@@ -661,11 +661,11 @@ Following is a summary of the protocol constructs that are defined in this docum
 - [2.2.3.6.1.1.7.2](#Section_2.2.3.6.1.1.7.2) Arbitrary Coordinate Transformations
 - [2.2.3.6.1.1.8](#Section_2.2.3.6.1.1.8) Geospatial Extension Methods
 - [2.2.3.6.1.1.8.1](#Section_2.2.3.6.1.1.8.1) Extending Type Support for Defined Functions
-- [2.2.3.6.1.1.8.2](#Section_2.2.3.6.1.1.8.2) Implementing One of the Functions Defined in [[OGC-SFOLECOM]](https://go.microsoft.com/fwlink/?LinkId=233591)
+- [2.2.3.6.1.1.8.2](#Section_c2de838467c2475d8c759bc0dca5d7f2) Implementing One of the Functions Defined in [[OGC-SFOLECOM]](https://go.microsoft.com/fwlink/?LinkId=233591)
 - [2.2.3.6.1.1.8.3](#Section_2.2.3.6.1.1.8.3) Arbitrary Extensions
 - [2.2.6.1](#Section_2.2.6.1) Common Serialization Rules for XML-based Formats
 - [2.2.6.2](#Section_2.2.6.2) AtomPub Format
-- [2.2.6.3.1](#Section_2.2.6.3.12) Common Verbose JSON Serialization Rules for All EDM Constructs
+- [2.2.6.3.1](#Section_2.2.6.3.1) Common Verbose JSON Serialization Rules for All EDM Constructs
 - [2.2.6.3.1.1](#Section_2.2.6.3.1.1) Modifications to GeoJSON [[GeoJSON]](https://go.microsoft.com/fwlink/?LinkId=233589) for use in OData
 - [2.2.6.3.9.1](#Section_2.2.6.3.9.1) Inline Representation
 **Relationship links:** Relationship links can be used to represent the association between related entities.
@@ -675,7 +675,7 @@ Following is a summary of the protocol constructs that are defined in this docum
 - [2.2.6.2.4](#Section_2.2.6.2.4) Navigation Property
 - [2.2.6.2.6.1](#Section_2.2.6.2.6.1) Inline Representation
 - [2.2.6.3.2.1](#Section_2.2.6.3.2.1) InlineCount Representation (for collections of entities)
-- [2.2.6.3.3](#Section_2.2.6.3.3.1) Entity Type (as a JSON object)
+- [2.2.6.3.3](#Section_2.2.6.3.3) Entity Type (as a JSON object)
 - [2.2.6.3.6](#Section_2.2.6.3.6) Navigation Property
 - [2.2.6.3.9](#Section_2.2.6.3.9) Deferred Content
 - 2.2.6.3.9.1 Inline Representation
@@ -687,7 +687,7 @@ Following is a summary of the protocol constructs that are defined in this docum
 - [2.2.5.5](#Section_2.2.5.5) If-Match
 - [2.2.5.6](#Section_2.2.5.6) If-None-Match
 - [2.2.5.8](#Section_2.2.5.8) X-HTTP-Method
-- [2.2.7.3.1](#Section_2.2.7.3.1.1) UpdateEntity Request
+- [2.2.7.3.1](#Section_2.2.7.3.1) UpdateEntity Request
 - [2.2.7.3.2](#Section_2.2.7.3.2) UpdateComplexType Request
 - [2.2.7.3.3](#Section_2.2.7.3.3) UpdatePrimitiveProperty Request
 - 2.2.7.3.4 UpdateCollectionProperty Request
@@ -701,7 +701,7 @@ Following is a summary of the protocol constructs that are defined in this docum
 - [2.2.5.9](#Section_2.2.5.9) Prefer
 - [2.2.5.10](#Section_2.2.5.10) Preference-Applied
 - [2.2.5.11](#Section_2.2.5.11) DataServiceId
-- [2.2.7.1.1](#Section_2.2.7.1.1.1) InsertEntity Request
+- [2.2.7.1.1](#Section_2.2.7.1.1) InsertEntity Request
 - [2.2.7.1.2](#Section_2.2.7.1.2) InsertLink Request
 - [2.2.7.1.3](#Section_2.2.7.1.3) InsertMediaResource Request
 - 2.2.7.3.1 UpdateEntity Request
@@ -771,7 +771,7 @@ Following is a summary of the protocol constructs that are defined in this docum
 - [2.2.7.5.2](#Section_2.2.7.5.2) Invoke Function Request
 - [3.1.4.8](#Section_3.1.4.8) Request to Invoke an Action
 - [3.1.4.9](#Section_3.1.4.9) Request to Invoke a Function
-- [3.2.5.9](#Section_2.2.7.5.1) Executing a Received Invoke Action Request
+- [3.2.5.9](#Section_3.2.5.9) Executing a Received Invoke Action Request
 - [3.2.5.10](#Section_3.2.5.10) Executing a Received Invoke Function Request
 **Containment:** Containment provides a way to model situations in which an **EntityType** is contained by another **EntityType**. This implies constraints on how to access, create, and update the contained **EntityType**.
 
@@ -813,7 +813,7 @@ This specification does not prescribe a mechanism to secure (authenticate, encry
 
 This section includes the following:
 
-[Abstract Data Model (section 2.2.1)](#Section_3.2.1) specifies the key concepts of the abstract data model that serve as the basis for the OData protocol. The subsequent sections each define mappings from the data model to the OData protocol.
+[Abstract Data Model (section 2.2.1)](#Section_2.2.1) specifies the key concepts of the abstract data model that serve as the basis for the OData protocol. The subsequent sections each define mappings from the data model to the OData protocol.
 
 [Abstract Type System (section 2.2.2)](#Section_2.2.2) specifies the abstract type system that is used to define the primitive types (such as **String**, **Boolean**, and so on) that are used by the OData protocol.
 
@@ -823,7 +823,7 @@ This section includes the following:
 
 [HTTP Header Fields (section 2.2.5)](#Section_2.2.5) specifies the syntax for the HTTP headers that are defined in this document.
 
-The HTTP payload format syntax in [Common Payload Syntax (section 2.2.6)](#Section_2.2.6) specifies how data that is described by using the abstract data model in Abstract Data Model (section 2.2.1) is mapped to the [AtomPub](#Section_2.2.6.2), [JSON](#Section_8a66205bcd2a44bca2827fc2ac927e96), and [Verbose JSON](#Section_4.2.1.6) serialization formats for use in the payloads of the HTTP request types that are described in Request Types (section [2.2.7](#Section_2.2.7)).
+The HTTP payload format syntax in [Common Payload Syntax (section 2.2.6)](#Section_2.2.6) specifies how data that is described by using the abstract data model in Abstract Data Model (section 2.2.1) is mapped to the [AtomPub](#Section_2.2.6.2), [JSON](#Section_2.2.6.6), and [Verbose JSON](#Section_2.2.6.3) serialization formats for use in the payloads of the HTTP request types that are described in Request Types (section [2.2.7](#Section_2.2.7)).
 
 Request Types (section 2.2.7) specifies the types of requests that are defined by this document and how each request type is mapped to [**AtomPub**](#gt_atom-publishing-protocol-atompub) request types as well as to constructs in the data model that is described in Abstract Data Model (section 2.2.1).
 
@@ -1044,7 +1044,7 @@ Nonrecursive contained **EntitySets** are accessed only through the URL of the r
 
 Recursively contained **EntitySets** MUST be accessible directly from the **ServiceRoot** for querying and inserting "root" entity instances that are not contained by another instance. Entity instances that are contained by another entity instance, the querying and inserting operations are supported via the URL of the resource that represents the container **NavigationProperty** on the parent entity instance.
 
-When the end of the containment **AssociationType** that is specified by the **ToRole** attribute of the containment **NavigationProperty** is '1' or '0..1', there is no way to independently insert the contained entity by using a simple [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1). A simple **InsertEntity** request would require supporting POST to a URL that represents a **ReferenceSet**, and a POST to a URL that represents a **ReferenceSet** is inconsistent with existing protocol semantics. This type of contained entity can still be created either by using a "deep insert" (section 2.2.7.1.1) that creates both the container and the contained entities in one request or by invoking an action (section [4.8](#Section_4.8)) that creates the contained entity.
+When the end of the containment **AssociationType** that is specified by the **ToRole** attribute of the containment **NavigationProperty** is '1' or '0..1', there is no way to independently insert the contained entity by using a simple [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1). A simple **InsertEntity** request would require supporting POST to a URL that represents a **ReferenceSet**, and a POST to a URL that represents a **ReferenceSet** is inconsistent with existing protocol semantics. This type of contained entity can still be created either by using a "deep insert" (section 2.2.7.1.1) that creates both the container and the contained entities in one request or by invoking an action (section [4.8](#Section_4.8)) that creates the contained entity.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Abstract Type System
@@ -1136,7 +1136,7 @@ The following table defines the literal form representations of [**Entity Data M
 <a id="Section_2.2.3"></a>
 ### 2.2.3 URI Format: Resource Addressing Rules
 
-The Atom Publishing (AtomPub) Protocol specifies operations for publishing and editing [**resources**](#gt_resource) by using HTTP, but does not constrain the form of the [**URIs**](#gt_uniform-resource-identifier-uri), as specified in [[RFC3986]](https://go.microsoft.com/fwlink/?LinkId=90453), that are used to identify the resources (see [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 4.1). This document extends [**AtomPub**](#gt_atom-publishing-protocol-atompub) by defining a mapping from elements in an [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), described by using a [**conceptual schema definition language (CSDL)**](#gt_conceptual-schema-definition-language-csdl) document, to the resource types defined in [RFC5023] section 4.2. See [Abstract Data Model (section 2.2.1)](#Section_3.2.1) for a mapping of EDM constructs to AtomPub resources.
+The Atom Publishing (AtomPub) Protocol specifies operations for publishing and editing [**resources**](#gt_resource) by using HTTP, but does not constrain the form of the [**URIs**](#gt_uniform-resource-identifier-uri), as specified in [[RFC3986]](https://go.microsoft.com/fwlink/?LinkId=90453), that are used to identify the resources (see [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 4.1). This document extends [**AtomPub**](#gt_atom-publishing-protocol-atompub) by defining a mapping from elements in an [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), described by using a [**conceptual schema definition language (CSDL)**](#gt_conceptual-schema-definition-language-csdl) document, to the resource types defined in [RFC5023] section 4.2. See [Abstract Data Model (section 2.2.1)](#Section_2.2.1) for a mapping of EDM constructs to AtomPub resources.
 
 As specified in [RFC5023] (section 4.1), the Atom Publishing Protocol [RFC5023] specifies the formats of the representations that are exchanged and the actions that can be performed on the [**Internationalized Resource Identifiers (IRIs)**](#gt_internationalized-resource-identifier-iri) embedded in those representations. AtomPub does not constrain the form of the URIs that are used. Following that paradigm, this section and its subsections defines a set of recommended, but not required, rules for constructing a URI or IRI to identify the various parts of the data and metadata in an EDM.
 
@@ -1777,7 +1777,7 @@ The following are the grammar rules of the resource path semantics listing:
 - `URI1 = scheme serviceRoot "/" entitySet`
 MUST identify all instances of the base EntityType or any of the **EntityType's** subtypes within the specified **EntitySet** specified in the last URI segment.
 
-If the EDM associated with the data service does not include an **EntitySet** with the name specified, this URI (and any URI created by appending additional path segments) MUST be treated as identifying a non-existent [**resource**](#gt_resource), as described in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.1.5).
+If the EDM associated with the data service does not include an **EntitySet** with the name specified, this URI (and any URI created by appending additional path segments) MUST be treated as identifying a non-existent [**resource**](#gt_resource), as described in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.2.5).
 
 Example:
 
@@ -2122,7 +2122,7 @@ The **actionCall** segment MAY be called directly off the service root if it has
 
 As described in section [2.2.3](#Section_2.2.3), all [**data services**](#gt_data-service) MUST follow the query string parsing and construction rules as defined in this section and its subsections.
 
-The query options section of a data service [**URI**](#gt_uniform-resource-identifier-uri) specifies three types of information: system query options ([2.2.3.6.1](#Section_2.2.3.6.1.5)), custom query options ([2.2.3.6.2](#Section_2.2.3.6.2)), and [**service operation**](#gt_service-operation) parameters ([2.2.3.6.3](#Section_2.2.3.6.3)). System query options and service operation parameters MUST conform to the following rules:
+The query options section of a data service [**URI**](#gt_uniform-resource-identifier-uri) specifies three types of information: system query options ([2.2.3.6.1](#Section_2.2.3.6.1)), custom query options ([2.2.3.6.2](#Section_2.2.3.6.2)), and [**service operation**](#gt_service-operation) parameters ([2.2.3.6.3](#Section_2.2.3.6.3)). System query options and service operation parameters MUST conform to the following rules:
 
 - Any number of the query options MAY<5> be specified in a data service URI.
 - The order of query options within a URI MUST be insignificant.
@@ -2134,7 +2134,7 @@ The query options section of a data service [**URI**](#gt_uniform-resource-ident
 
 System query options in a [**data service**](#gt_data-service) [**URI**](#gt_uniform-resource-identifier-uri), defined in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3) are directives that are defined by this document that a client MAY specify to control the amount and order of the data that a data service returns for the [**resource**](#gt_resource) identified by the URI. The names of all system query options are prefixed with a "$" character.
 
-A data service MAY<6> support some or all of the system query options defined in this document. If a data service does not support a system query option, it MUST reject any requests which contain the unsupported option, as seen in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.1.5) for HTTP-specific server details.
+A data service MAY<6> support some or all of the system query options defined in this document. If a data service does not support a system query option, it MUST reject any requests which contain the unsupported option, as seen in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.2.5) for HTTP-specific server details.
 
 The following table summarizes the system query options defined in this document.
 
@@ -2142,10 +2142,10 @@ If a system query option is included in a data service URI identifying a resourc
 
 | System query option | Description | Additional details |
 | --- | --- | --- |
-| $expand | This option indicates entities that are associated with the EntityType instance or EntitySet, identified by the resource path section of the URI, and represented inline in the data service's response, as opposed to being represented with Deferred Content markers in [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.3.9) and [Deferred Content (section 2.2.6.3.9)](#Section_2.2.6.3.9). | See [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3). |
+| $expand | This option indicates entities that are associated with the EntityType instance or EntitySet, identified by the resource path section of the URI, and represented inline in the data service's response, as opposed to being represented with Deferred Content markers in [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.2.6) and [Deferred Content (section 2.2.6.3.9)](#Section_2.2.6.3.9). | See [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3). |
 | $filter | This option specifies a predicate used to filter the elements from the **EntitySet** identified by the resource path section of the URI. | See [Filter System Query Option ($filter) (section 2.2.3.6.1.4)](#Section_2.2.3.6.1.4). |
 | $orderby | This option specifies the sort properties and sort direction (ascending or descending) that the data service is to use to order the entities in the **EntitySet**, identified by the resource path section of the URI. | See [OrderBy System Query Option ($orderby) (section 2.2.3.6.1.6)](#Section_2.2.3.6.1.6). |
-| $format | This option specifies the media type that is acceptable in a response. If present, this value takes precedence over the value(s) specified in an [Accept (section 2.2.5.1)](#Section_1.3) request header. | See [Format System Query Option ($format) (section 2.2.3.6.1.5)](#Section_2.2.3.6.1.5). |
+| $format | This option specifies the media type that is acceptable in a response. If present, this value takes precedence over the value(s) specified in an [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header. | See [Format System Query Option ($format) (section 2.2.3.6.1.5)](#Section_2.2.3.6.1.5). |
 | $skip | This option specifies a positive integer N that represents the number of entities, counted from the first [**entity**](#gt_entity) in the **EntitySet** and ordered as specified by the **$orderby** option, that the data service is to skip when returning the entities in the **EntitySet**, which is identified by the resource path section of the URI. The data service is to return all subsequent entities, starting from the one in position N+1. | See [Skip System Query Option ($skip) (section 2.2.3.6.1.7)](#Section_2.2.3.6.1.7). |
 | $top | This option specifies a positive integer N that is the maximum number of entities in the **EntitySet**, identified by the resource path section of the URI, that the data service is to return. | See [Top System Query Option ($top) (section 2.2.3.6.1.8)](#Section_2.2.3.6.1.8). |
 | $skiptoken | The value of a **$skiptoken** query option is an opaque token which identifies an index into the collection of entities identified by the URI containing the **$skiptoken** parameter. | See [Skip Token Query Option ($skiptoken) (section 2.2.3.6.1.9)](#Section_2.2.3.6.1.9) |
@@ -3448,7 +3448,7 @@ For example, using data from [Appendix A: Sample Entity Data Model and CSDL Docu
 <a id="Section_2.2.3.6.1.3"></a>
 ###### 2.2.3.6.1.3 Expand System Query Option ($expand)
 
-The presence of the **$expand** system query option indicates that entities associated with the EntityType instance or EntitySet, identified by the resource path section of the [**URI**](#gt_uniform-resource-identifier-uri), MUST be represented inline instead of as [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.3.9) and [Deferred Content (section 2.2.6.3.9)](#Section_2.2.6.3.9).
+The presence of the **$expand** system query option indicates that entities associated with the EntityType instance or EntitySet, identified by the resource path section of the [**URI**](#gt_uniform-resource-identifier-uri), MUST be represented inline instead of as [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.2.6) and [Deferred Content (section 2.2.6.3.9)](#Section_2.2.6.3.9).
 
 The server MUST include any actions or functions that are bound to the associated entities that are introduced via an **expandClause**, unless a select system query option is also included in the request and that **$select** requests that the actions/functions be omitted (section [2.2.3.6.1.11](#Section_2.2.3.6.1.11)).
 
@@ -3526,7 +3526,7 @@ In the previous example, the Orders for which all Orderlines have a Quantity gre
 
 A [**data service**](#gt_data-service) [**URI**](#gt_uniform-resource-identifier-uri) with a **$format** system query option specifies that a response to the request SHOULD use the media type specified by the query option.
 
-If the **$format** query option is present in a request URI, it SHOULD take precedence over the value(s) specified in the [Accept (section 2.2.5.1)](#Section_1.3) request header.
+If the **$format** query option is present in a request URI, it SHOULD take precedence over the value(s) specified in the [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header.
 
 The syntax of the format system query option is defined as follows.
 
@@ -3556,7 +3556,7 @@ Examples:
 
 `http://host/service.svc/Orders?$format=verbosejson`
 
-The set of Order entities represented using the [Verbose JSON](#Section_4.2.1.6) media type, as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879).
+The set of Order entities represented using the [Verbose JSON](#Section_2.2.6.3) media type, as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879).
 
 The **$format** query option MAY be used in conjunction with RAW format (section [2.2.6.4](#Section_2.2.6.4)) to specify which RAW format is returned.
 
@@ -3736,10 +3736,10 @@ star = "*"
 - For JSON formatted responses: See [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 6.
 - For Verbose JSON formatted responses: The value of a **selectQueryOp** applies only to the name/value pairs with a name that does not begin with two consecutive underscore characters.
 - If a property is not requested as a **selectItem** (explicitly or via a star), it SHOULD NOT be included in the response.
-- If a **selectedProperty** appears alone as a **selectItem** in a request URI, then the response MUST contain the value of the property as per the serialization rules defined in sections 2.2.6.2.2 and [2.2.6.3.3](#Section_2.2.6.3.3.1).
+- If a **selectedProperty** appears alone as a **selectItem** in a request URI, then the response MUST contain the value of the property as per the serialization rules defined in sections 2.2.6.2.2 and [2.2.6.3.3](#Section_2.2.6.3.3).
 - If a star appears alone in a **selectClause**, all properties on the **EntityType** within the collection of entities identified by the last path segment in the request URI MUST be included in the response.
 - If a star appears in a **selectItem** following a **selectedNavProperty**, all non-navigation properties of the entity or entities represented by the prior **selectedNavProperty** MUST be included in the response.
-- If a navigation property appears as the last segment of a **selectItem** and does not appear in an **$expand** query option, the entity or collection of entities identified by the navigation property MUST be represented as deferred content as described in sections [2.2.6.2.6](#Section_2.2.6.3.9) and [2.2.6.3.9](#Section_2.2.6.3.9).
+- If a navigation property appears as the last segment of a **selectItem** and does not appear in an **$expand** query option, the entity or collection of entities identified by the navigation property MUST be represented as deferred content as described in sections [2.2.6.2.6](#Section_2.2.6.2.6) and [2.2.6.3.9](#Section_2.2.6.3.9).
 - If a navigation property appears as the last segment of a **selectItem** and the same property is specified as a segment of a path in an **$expand** query option, then all the properties of the entity identified by the **selectItem** MUST be in the response. In addition, all the properties of the entities identified by segments in the **$expand** path after the segment that matched the **selectItem** MUST also be included in the response.
 - If multiple **selectClause** instances exist in a **$select** query option, then the total set of property values to be returned is equal to the union of the set of properties identified by each **selectClause**.
 - Redundant **selectClause** rules on the same URI MAY be considered valid, but MUST NOT alter the meaning of the URI.
@@ -3817,7 +3817,7 @@ The following rules are in addition to the grammar rules that are defined in eac
 <a id="Section_2.2.3.6.2"></a>
 ##### 2.2.3.6.2 Custom Query Options
 
-Custom query options provide an extensible mechanism for [**data service**](#gt_data-service)-specific information to be placed in a data service [**URI**](#gt_uniform-resource-identifier-uri) query string. A custom query option is any query option of the form shown by the rule "customQueryOption" in [URI Syntax (section 2.2.3.1)](#Section_2.2.3.1). Custom query options MUST NOT begin with a "$" character because the character is reserved for system query options, as described in [System Query Options (section 2.2.3.6.1)](#Section_2.2.3.6.1.5).
+Custom query options provide an extensible mechanism for [**data service**](#gt_data-service)-specific information to be placed in a data service [**URI**](#gt_uniform-resource-identifier-uri) query string. A custom query option is any query option of the form shown by the rule "customQueryOption" in [URI Syntax (section 2.2.3.1)](#Section_2.2.3.1). Custom query options MUST NOT begin with a "$" character because the character is reserved for system query options, as described in [System Query Options (section 2.2.3.6.1)](#Section_2.2.3.6.1).
 
 <a id="Section_2.2.3.6.3"></a>
 ##### 2.2.3.6.3 Service Operation Parameters
@@ -3932,7 +3932,7 @@ Actions are represented by using **FunctionImport** elements, as specified in [M
 
 Actions are invoked by using a POST request to a URI that identifies an action. Where specified, parameters to actions MUST be provided in the POST body. If not specified, parameter values MUST be assumed to be null.
 
-The POST body MUST be encoded in JSON format (according to Action Parameters in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 17) or in Verbose JSON format [2.2.6.3](#Section_4.2.1.6). Therefore, the Content-Type of the POST request SHOULD be set to application/json or application/json;odata=verbose, respectively.
+The POST body MUST be encoded in JSON format (according to Action Parameters in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 17) or in Verbose JSON format [2.2.6.3](#Section_2.2.6.3). Therefore, the Content-Type of the POST request SHOULD be set to application/json or application/json;odata=verbose, respectively.
 
 When passing parameters by using the Verbose JSON format, the body MUST consist of a single JSON object. Each parameter that is specified in the body MUST be a top level property of this single JSON object, where the property name is the same as the parameter name and the property value is the standard OData Verbose JSON encoding for that parameter type (Verbose JSON Format (section 2.2.6.3)).
 
@@ -4012,11 +4012,11 @@ For a client to interact with a [**data service**](#gt_data-service), it needs t
 
 The **ServiceRoot** of a data service MUST identify the Service Document for the data service.
 
-[Service Document (section 2.2.6.2.7)](#Section_2.2.6.3.12) describes how [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs are represented in a Service Document. As per [RFC5023], AtomPub Service Documents MUST be identified with the "application/atomsvc+xml" media type (see [RFC5023] section 8).
+[Service Document (section 2.2.6.2.7)](#Section_2.2.6.2.7) describes how [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs are represented in a Service Document. As per [RFC5023], AtomPub Service Documents MUST be identified with the "application/atomsvc+xml" media type (see [RFC5023] section 8).
 
 See Service Document in [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.16](http://msdn.microsoft.com/en-us/library/8042829a-830f-4bda-9e41-5d24659345ff/) for details about the representation of the data provided by a Service Document in the preferred OData 3.0 JSON format.
 
-[Service Document (section 2.2.6.3.12)](#Section_2.2.6.3.12) describes a [Verbose JSON](#Section_4.2.1.6) representation of the data provided by a Service Document. The section also describes how EDM constructs are represented in the Verbose JSON-based Service Document. Verbose JSON Service Documents MUST be identified using the "application/jsonodata=verbose" media type.
+[Service Document (section 2.2.6.3.12)](#Section_2.2.6.3.12) describes a [Verbose JSON](#Section_2.2.6.3) representation of the data provided by a Service Document. The section also describes how EDM constructs are represented in the Verbose JSON-based Service Document. Verbose JSON Service Documents MUST be identified using the "application/jsonodata=verbose" media type.
 
 **EntitySets** that are contained by a different **EntitySet** (see [Containment (section 2.2.1.6)](#Section_2.2.1.6)) MUST NOT have a corresponding collection for AtomPub (section 2.2.6.2.7) or a corresponding **EntitySet** for JSON ([MS-ODATAJSON] section 2.1.16) or for Verbose JSON (section 2.2.6.3.12) in the Service Document, as described in this section.
 
@@ -4590,7 +4590,7 @@ The OData protocol uses the Accept request-header field, as specified in [[RFC26
 | application/atom+xml;type=entry Specified in [RFC5023] | application/atom+xml;type=entry |
 | application/atom+xml;type=feed Specified in [RFC5023] | application/atom+xml;type=feed |
 | [application/json](#Section_2.2.5.1.2) Specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879) | For OData 1.0 and OData 2.0 responses: application/json;odata=verbose For OData 3.0 responses: application/json |
-| [application/json;odata=verbose](#Section_2.2.5.1.2) | application/json;odata=verbose |
+| [application/json;odata=verbose](#Section_2.2.5.1.3) | application/json;odata=verbose |
 
 **Table: Accept Request Header to Content-Type Response Header Mapping**
 
@@ -4606,19 +4606,19 @@ This content type is used to request the [**data service**](#gt_data-service) fo
 <a id="Section_2.2.5.1.2"></a>
 ##### 2.2.5.1.2 application/json
 
-For OData 1.0 and OData 2.0 services, this content type is used to request the data service format for the response payload according to the formatting rules that are outlined in [Verbose JSON Format (section 2.2.6.3)](#Section_4.2.1.6).
+For OData 1.0 and OData 2.0 services, this content type is used to request the data service format for the response payload according to the formatting rules that are outlined in [Verbose JSON Format (section 2.2.6.3)](#Section_2.2.6.3).
 
 For OData 3.0 services, the application/json content type returns the preferred OData 3.0 JSON format as defined in [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.5](http://msdn.microsoft.com/en-us/library/f2da9887-6f24-4370-b960-1dc8d5420fe2/).
 
 <a id="Section_2.2.5.1.3"></a>
 ##### 2.2.5.1.3 application/json;odata=verbose
 
-This content type is used to request the [**data service**](#gt_data-service) format for the response payload by using the application/json;odata=verbose format according to the formatting rules that are outlined in [Verbose JSON Format (section 2.2.6.3)](#Section_4.2.1.6). A data service MAY support this content type.
+This content type is used to request the [**data service**](#gt_data-service) format for the response payload by using the application/json;odata=verbose format according to the formatting rules that are outlined in [Verbose JSON Format (section 2.2.6.3)](#Section_2.2.6.3). A data service MAY support this content type.
 
 <a id="Section_2.2.5.2"></a>
 #### 2.2.5.2 Content-Type
 
-The Content-Type header is used as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). However, because this document describes messages for the [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.2), application/xml, text/plain, and text/xml formats, a [**data service**](#gt_data-service) client or server SHOULD only use HTTP messages with a Content-Type header value as shown in the ABNF grammar that follows and is specified in [[RFC5234]](https://go.microsoft.com/fwlink/?LinkId=123096). The exception to the above rule is when messages are used that represent a Media Resource [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) or the raw value of an entity's property (see section [2.2.3.5](#Section_2.2.3.5)).
+The Content-Type header is used as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). However, because this document describes messages for the [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.3), application/xml, text/plain, and text/xml formats, a [**data service**](#gt_data-service) client or server SHOULD only use HTTP messages with a Content-Type header value as shown in the ABNF grammar that follows and is specified in [[RFC5234]](https://go.microsoft.com/fwlink/?LinkId=123096). The exception to the above rule is when messages are used that represent a Media Resource [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) or the raw value of an entity's property (see section [2.2.3.5](#Section_2.2.3.5)).
 
 Content-Type = "Content-Type:"
 
@@ -4739,7 +4739,7 @@ Additionally, this header MAY be present on POST requests to invoke an [action 
 
 This header MUST NOT be on any POST request other than a request to invoke an action (section 2.2.1.3).
 
-Client processing rules for this header are defined in [Request Types (section 2.2.7)](#Section_2.2.7) and server processing rules are in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.1.5).
+Client processing rules for this header are defined in [Request Types (section 2.2.7)](#Section_2.2.7) and server processing rules are in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.2.5).
 
 The syntax of the If-Match header is defined as follows:
 
@@ -4758,7 +4758,7 @@ The If-None-Match header is used in this document as specified in [RFC2616]. How
 
 This header MAY<55> be present only on HTTP GET, MERGE, PATCH, or PUT requests to request [**URIs**](#gt_uniform-resource-identifier-uri) that identify the same [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs as URI 2, URI 3, URI 4, URI 5, and URI 17, as defined in the Resource Path Semantics table in [Resource Path: Semantics (section 2.2.3.5)](#Section_2.2.3.5). Additionally, this header MAY<56> be used on DELETE requests to URIs which identify the same EDM constructs as URI 2, as specified in the table in Resource Path: Semantics (section 2.2.3.5), and any data service URI whose last path segment is "/$value". This header MUST NOT be used on any POST requests to a data service.
 
-Client processing rules for this header are defined in [Request Types (section 2.2.7)](#Section_2.2.7) and server processing rules are in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.1.5).
+Client processing rules for this header are defined in [Request Types (section 2.2.7)](#Section_2.2.7) and server processing rules are in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.2.5).
 
 The syntax of the If-None-Match header is defined as follows:
 
@@ -4873,7 +4873,7 @@ Prefer = "Preference-Applied" ":" preference
 <a id="Section_2.2.5.11"></a>
 #### 2.2.5.11 DataServiceId
 
-The DataServiceId response header is returned by the server when the response payload for an [InsertEntity request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1) or an [InsertMediaResource request (section 2.2.7.1.3)](#Section_2.2.7.1.3) is empty. The value of the header is the identifier of the entity that was acted on by the request. The identifier, in this case, is the same identifier that would have been returned in the response payload (for example, as the value of the **atom:id** element for Atom responses).
+The DataServiceId response header is returned by the server when the response payload for an [InsertEntity request (section 2.2.7.1.1)](#Section_2.2.7.1.1) or an [InsertMediaResource request (section 2.2.7.1.3)](#Section_2.2.7.1.3) is empty. The value of the header is the identifier of the entity that was acted on by the request. The identifier, in this case, is the same identifier that would have been returned in the response payload (for example, as the value of the **atom:id** element for Atom responses).
 
 The DataServiceId response header is defined by the following grammar.
 
@@ -4890,7 +4890,7 @@ The OData protocol that is defined in this document enables clients and servers 
 
 [AtomPub Format (section 2.2.6.2)](#Section_2.2.6.2) specifies how to represent EDM constructs (single EntityType instance, multiple **EntityType** instances in an EntitySet, NavigationProperties, and so on) by using the [**AtomPub**](#gt_atom-publishing-protocol-atompub) [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) format.
 
-[MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) and [Verbose JSON Format (section 2.2.6.3)](#Section_4.2.1.6) each specify how to represent EDM constructs (single **EntityType** instance, multiple **EntityType** instances in an **EntitySet**, NavigationProperty properties, and so on) by using the [**JavaScript Object Notation (JSON)**](#gt_javascript-object-notation-json) [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879) format: see [MS-ODATAJSON] for the preferred OData 3.0 representation and section 2.2.6.3 for the Verbose JSON legacy representation.
+[MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) and [Verbose JSON Format (section 2.2.6.3)](#Section_2.2.6.3) each specify how to represent EDM constructs (single **EntityType** instance, multiple **EntityType** instances in an **EntitySet**, NavigationProperty properties, and so on) by using the [**JavaScript Object Notation (JSON)**](#gt_javascript-object-notation-json) [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879) format: see [MS-ODATAJSON] for the preferred OData 3.0 representation and section 2.2.6.3 for the Verbose JSON legacy representation.
 
 Note that Request Types (section 2.2.7) defines additional payload syntax directives, dependent on the message context, that MUST be adhered to in addition to those defined in this section.
 
@@ -4979,7 +4979,7 @@ The **atom:id** element, as specified in [RFC4287] section 4.2.6, MUST contain t
 
 The **atom:title** element, as specified in [RFC4287] section 4.2.14, MAY contain the name of the **EntitySet** that is represented by the parent **atom:feed** element. The set name MAY be qualified with the name of the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) [**namespace**](#gt_namespace) in which it is defined, as specified in [MC-CSDL](../MC-CSDL/MC-CSDL.md). If the URI in the sibling **atom:id** element is of the same form as URI6, as defined in [Resource Path: Semantics (section 2.2.3.5)](#Section_2.2.3.5) (last path segment is a **NavigationProperty**) and the **NavigationProperty** identifies an **EntitySet**, then the **atom:title** element MAY contain the name of the **NavigationProperty** instead of the name of the **EntitySet** that is identified by the [**property**](#gt_property).
 
-An **atom:link** element, as specified in [RFC4287] section 4.2.7, with a **rel="self"** attribute MUST contain an **href** attribute with a value equal to the URI used to identify the set that the parent **atom:feed** element represents. When used in HTTP responses, this URI MUST be equal to the associated HTTP request URI. When used in HTTP deep insert requests, this URI MUST identify a related [**collection**](#gt_collection) of entities (identified by a **NavigationProperty** on the base EntityType of the **EntitySet** that is identified by the request URI) into which the deep/related new entities will be inserted, as specified in [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1).
+An **atom:link** element, as specified in [RFC4287] section 4.2.7, with a **rel="self"** attribute MUST contain an **href** attribute with a value equal to the URI used to identify the set that the parent **atom:feed** element represents. When used in HTTP responses, this URI MUST be equal to the associated HTTP request URI. When used in HTTP deep insert requests, this URI MUST identify a related [**collection**](#gt_collection) of entities (identified by a **NavigationProperty** on the base EntityType of the **EntitySet** that is identified by the request URI) into which the deep/related new entities will be inserted, as specified in [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1).
 
 An **atom:entry** element, as specified in [RFC4287] section 4.1.2, within the **atom:feed** element, is formatted as specified in [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2).
 
@@ -4992,7 +4992,7 @@ In response payloads only, if the server does not include an **atom:entry** elem
 
 ***Applies to the OData 2.0 and OData 3.0 protocols***
 
-This section defines an extended representation of a collection of entities from that described in section [2.2.6.2.1](#Section_2.2.6.2.1.3). This representation is supported only in the OData 2.0 and OData 3.0 protocols.
+This section defines an extended representation of a collection of entities from that described in section [2.2.6.2.1](#Section_2.2.6.2.1). This representation is supported only in the OData 2.0 and OData 3.0 protocols.
 
 A request URI MAY contain an **$inlinecount** system query option to indicate that the count of the number of entities represented by the query after filters have been applied and before applying any other query option processing MUST be included in the result sent by the data service.
 
@@ -5123,7 +5123,7 @@ Actions advertised in the Atom feed element MUST be interpreted as being bound t
 
 Actions that operate on a feed MUST only be advertised in an Atom feed element if the server can fully encode the action, the resource path, and the appropriate system query options that define the feed.
 
-[System query options (section 2.2.3.6.1)](#Section_2.2.3.6.1.5) that change the membership of the feed MUST be considered to be part of the feed definition. In practice, this means that the target URL that is used to invoke the action MUST encode the following system query options if they are used to define the feed:
+[System query options (section 2.2.3.6.1)](#Section_2.2.3.6.1) that change the membership of the feed MUST be considered to be part of the feed definition. In practice, this means that the target URL that is used to invoke the action MUST encode the following system query options if they are used to define the feed:
 
 [$filter (section 2.2.3.6.1.4)](#Section_2.2.3.6.1.4)
 
@@ -5166,7 +5166,7 @@ Functions advertised in the Atom feed element MUST be interpreted as being bound
 
 Functions that operate on a feed MUST only be advertised in an Atom feed element if the server can fully encode the function, the resource path, and the appropriate system query options that define the feed.
 
-[System query options (section 2.2.3.6.1)](#Section_2.2.3.6.1.5) that change the membership of the feed MUST be considered part of the feed definition. In practice, this means that the target URL that is used to invoke the function MUST encode the following system query options if they are used to define the feed:
+[System query options (section 2.2.3.6.1)](#Section_2.2.3.6.1) that change the membership of the feed MUST be considered part of the feed definition. In practice, this means that the target URL that is used to invoke the function MUST encode the following system query options if they are used to define the feed:
 
 [$filter (section 2.2.3.6.1.4)](#Section_2.2.3.6.1.4)
 
@@ -5439,7 +5439,7 @@ The **m:action** element MUST have a title attribute containing a simple string 
 
 Actions can also be selectively requested or omitted by using different [Select system query option (section 2.2.3.6.1.11)](#Section_2.2.3.6.1.11) combinations.
 
-If the Atom Entry Element is retrieved as part of a feed (section [2.2.6.2.1](#Section_2.2.6.2.1.3)) and it is expensive to identify whether an action requested, either implicitly or explicitly, by using Select system query option (section 2.2.3.6.1.11) can be bound to a particular entity, a server SHOULD advertise the action and fail later if the action is invoked and found to be unavailable.
+If the Atom Entry Element is retrieved as part of a feed (section [2.2.6.2.1](#Section_2.2.6.2.1)) and it is expensive to identify whether an action requested, either implicitly or explicitly, by using Select system query option (section 2.2.3.6.1.11) can be bound to a particular entity, a server SHOULD advertise the action and fail later if the action is invoked and found to be unavailable.
 
 <a id="Section_2.2.6.2.2.3"></a>
 ###### 2.2.6.2.2.3 Entity Type (as an Atom Entry Element) with Functions
@@ -5458,7 +5458,7 @@ The **m:function** element MUST have a title attribute that contains a simple st
 
 If a function to be advertised has overloads, the server SHOULD if possible expose a single **m:function** element with a metadata attribute that identifies all the overloads bindable to the current entity.
 
-Functions and function groups can also be selectively requested or omitted by using different [Select system query option (section 2.2.3.6.1.11)](#Section_2.2.3.6.1.11) combinations. If the Atom Entry Element is retrieved as part of a [feed (section 2.2.6.2.1)](#Section_2.2.6.2.1.3) and it is expensive to identify whether a function requested explicitly by using a Select system query option (section 2.2.3.6.1.11) is available, a server SHOULD advertise the requested function and fail later if the function is invoked and found to be unavailable.
+Functions and function groups can also be selectively requested or omitted by using different [Select system query option (section 2.2.3.6.1.11)](#Section_2.2.3.6.1.11) combinations. If the Atom Entry Element is retrieved as part of a [feed (section 2.2.6.2.1)](#Section_2.2.6.2.1) and it is expensive to identify whether a function requested explicitly by using a Select system query option (section 2.2.3.6.1.11) is available, a server SHOULD advertise the requested function and fail later if the function is invoked and found to be unavailable.
 
 <a id="Section_2.2.6.2.3"></a>
 ##### 2.2.6.2.3 Complex Type
@@ -5467,12 +5467,12 @@ A **ComplexType** property on an **EntityType** MUST be serialized within the **
 
 Each [**declared property**](#gt_declared-property) defined on a **ComplexType** MUST be represented as a child element (in the data service namespace defined in [Common Serialization Rules for XML-based Formats (section 2.2.6.1)](#Section_2.2.6.1)) of the element representing the **ComplexType** as a whole, and MAY have an **m:type** attribute to specify the EDM type of the property. If the **m:type** attribute is missing, the EDM type of the property MUST be assumed to be **Edm.String**.
 
-An Atom representation of a **ComplexType** outside the context of an **atom:entry** element as described in the preceding paragraph is not defined by this document. See [Complex Type (section 2.2.6.5.1)](#Section_2.2.6.2.3) for details regarding formatting a **ComplexType** by using XML independent from the content of the defining **EntityType**.
+An Atom representation of a **ComplexType** outside the context of an **atom:entry** element as described in the preceding paragraph is not defined by this document. See [Complex Type (section 2.2.6.5.1)](#Section_2.2.6.5.1) for details regarding formatting a **ComplexType** by using XML independent from the content of the defining **EntityType**.
 
 <a id="Section_2.2.6.2.4"></a>
 ##### 2.2.6.2.4 Navigation Property
 
-See [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2) and [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.3.9) for the description of using the **atom:link** element to represent:
+See [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2) and [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.2.6) for the description of using the **atom:link** element to represent:
 
 - A URI that identifies a related entity or collection of entities.
 - A URI that identifies the association to a related entity or collection of entities.
@@ -5481,7 +5481,7 @@ See [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.
 
 For a description of how properties are serialized in request/response payloads that represent an **EntityType** instance, see [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2).
 
-An Atom representation of properties outside of the context of an **atom:entry** element is not defined. See [EDMSimpleType Property (section 2.2.6.5.3)](#Section_2.2.6.3.8) for details regarding formatting an **EDMSimpleType** property using XML independent from the content of the defining **EntityType**.
+An Atom representation of properties outside of the context of an **atom:entry** element is not defined. See [EDMSimpleType Property (section 2.2.6.5.3)](#Section_2.2.6.5.3) for details regarding formatting an **EDMSimpleType** property using XML independent from the content of the defining **EntityType**.
 
 <a id="Section_2.2.6.2.6"></a>
 ##### 2.2.6.2.6 Deferred Content
@@ -5495,9 +5495,9 @@ In the example, the presence of the empty **atom:link** element with **rel** att
 <a id="Section_2.2.6.2.6.1"></a>
 ###### 2.2.6.2.6.1 Inline Representation
 
-A request [**URI**](#gt_uniform-resource-identifier-uri) can include the **$expand** system query option to explicitly request that the [**entity**](#gt_entity) or entities represented by a NavigationProperties property be serialized inline (rather than deferred), as described in [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3). The example that follows uses the same data model as the [Deferred Content](#Section_2.2.6.3.9) example referenced previously; however, this example shows the value of the Order's **NavigationProperty** serialized inline.
+A request [**URI**](#gt_uniform-resource-identifier-uri) can include the **$expand** system query option to explicitly request that the [**entity**](#gt_entity) or entities represented by a NavigationProperties property be serialized inline (rather than deferred), as described in [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3). The example that follows uses the same data model as the [Deferred Content](#Section_2.2.6.2.6) example referenced previously; however, this example shows the value of the Order's **NavigationProperty** serialized inline.
 
-A **NavigationProperty** that represents an EntityType instance or a group of entities and that is serialized inline MUST be placed within a single **m:inline** element that is a child element of the **atom:link** element representing the **NavigationProperty**. Since a **NavigationProperty** identifies a [**collection**](#gt_collection) of entities or a single entity, the contents of the **m:inline** element will be described in [Entity Set (as an Atom Feed Element) (section 2.2.6.2.1)](#Section_2.2.6.2.1.3) or [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2).
+A **NavigationProperty** that represents an EntityType instance or a group of entities and that is serialized inline MUST be placed within a single **m:inline** element that is a child element of the **atom:link** element representing the **NavigationProperty**. Since a **NavigationProperty** identifies a [**collection**](#gt_collection) of entities or a single entity, the contents of the **m:inline** element will be described in [Entity Set (as an Atom Feed Element) (section 2.2.6.2.1)](#Section_2.2.6.2.1) or [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2).
 
 If **NavigationProperty** represents an **EntityType** instance and that instance is null, an empty **m:inline** element MUST appear under the **atom:link** element that represents **NavigationProperty**. If **NavigationProperty** represents a collection of entities and the collection is empty, an **m:inline** element with a nested **atom:Feed** element with no **atom:Entry** subelements MUST appear under the **atom:link** element that represents **NavigationProperty**. In both cases, the presence of the **m:inline** element indicates that **NavigationProperty** has been expanded but that no content was associated with it.
 
@@ -5722,7 +5722,7 @@ href="Orders(2)/$links/OrderLines" />
 <a id="Section_2.2.6.2.7"></a>
 ##### 2.2.6.2.7 Service Document
 
-[Service Document (section 2.2.3.7.1)](#Section_2.2.3.7.1) specifies that [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), defines a service document which describes [**collections**](#gt_collection) of [**resources**](#gt_resource) available from a [**data service**](#gt_data-service). The root URL of a data service that implements the protocol defined in this document MUST identify such a service document. In this service document, a data service MUST represent all available collections in a single **app:workspace** element. See [RFC5023] section 8.3.2 for the definition of the **app:workspace** element and [RFC5023] section 6.1 for the definition of the "app" prefix. Within that workspace, a data service MUST represent each EntitySet in its associated [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), as described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1), as an **app:collection** element, as specified in [RFC5023] section 8.3.3. The [**URI**](#gt_uniform-resource-identifier-uri) identifying the **EntitySet** MUST be used as the value of the **href** attribute of the **app:collection** element. The name of the **EntitySet** MAY be used as the value of the **atom:title** element which, as specified in [RFC5023], is a mandatory child element of the **app:collection** element.
+[Service Document (section 2.2.3.7.1)](#Section_2.2.3.7.1) specifies that [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), defines a service document which describes [**collections**](#gt_collection) of [**resources**](#gt_resource) available from a [**data service**](#gt_data-service). The root URL of a data service that implements the protocol defined in this document MUST identify such a service document. In this service document, a data service MUST represent all available collections in a single **app:workspace** element. See [RFC5023] section 8.3.2 for the definition of the **app:workspace** element and [RFC5023] section 6.1 for the definition of the "app" prefix. Within that workspace, a data service MUST represent each EntitySet in its associated [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), as described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1), as an **app:collection** element, as specified in [RFC5023] section 8.3.3. The [**URI**](#gt_uniform-resource-identifier-uri) identifying the **EntitySet** MUST be used as the value of the **href** attribute of the **app:collection** element. The name of the **EntitySet** MAY be used as the value of the **atom:title** element which, as specified in [RFC5023], is a mandatory child element of the **app:collection** element.
 
 The following is an example AtomPub Service Document, as specified in [RFC5023], for the EDM described in [Appendix A: Sample Entity Data Model and CSDL Document (section 6)](#Section_6).
 
@@ -5769,24 +5769,24 @@ xmlns="http://www.w3.org/2007/app">
 
 In [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), the structured unit of information is an Entry Resource that is represented as an **atom:entry** element and, as specified in [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2), is used to represent EntityTypes. A standalone Atom-based representation of the constituent [**EDM**](#gt_entity-data-model-edm) constructs of an EDMSimpleType [**property**](#gt_property) is not defined by this document.
 
-The [**URI**](#gt_uniform-resource-identifier-uri)-addressing scheme for [**data services**](#gt_data-service), as defined in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3), does enable addressing the constituent EDM constructs of an EntityType directly. For XML, [**JSON**](#gt_javascript-object-notation-json), and Verbose JSON serialization rules for such resources, see [XML Format (section 2.2.6.5)](#Section_2.2.6.5), [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md), and [Verbose JSON Format (section 2.2.6.3)](#Section_4.2.1.6), respectively.
+The [**URI**](#gt_uniform-resource-identifier-uri)-addressing scheme for [**data services**](#gt_data-service), as defined in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3), does enable addressing the constituent EDM constructs of an EntityType directly. For XML, [**JSON**](#gt_javascript-object-notation-json), and Verbose JSON serialization rules for such resources, see [XML Format (section 2.2.6.5)](#Section_2.2.6.5), [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md), and [Verbose JSON Format (section 2.2.6.3)](#Section_2.2.6.3), respectively.
 
 <a id="Section_2.2.6.2.9"></a>
 ##### 2.2.6.2.9 Collection Property
 
-A collection property on an **EntityType** that is not otherwise mapped through a customizable feed property mapping MUST be represented within the **m:properties** element of the **atom:entry** and MUST contain one child element for each collection property of the represented **EntityType** instance. Each child element representing a collection property MUST be defined in the data service namespace (http://schemas.microsoft.com/ado/2007/08/dataservices), and the element name must be the same as the property it represents, as described in [Collection Property of Complex Type (section 2.2.6.2.9.1)](#Section_2.2.6.2.9.1) and [Collection of EDMSimple Type (section 2.2.6.5.7)](#Section_2.2.6.2.9.2). An attribute named "type" (in the Data Service Metadata namespace), as described in [Common Serialization Rules for XML-based Formats (section 2.2.6.1)](#Section_2.2.6.1), MAY exist on the element representing the collection as a whole.
+A collection property on an **EntityType** that is not otherwise mapped through a customizable feed property mapping MUST be represented within the **m:properties** element of the **atom:entry** and MUST contain one child element for each collection property of the represented **EntityType** instance. Each child element representing a collection property MUST be defined in the data service namespace (http://schemas.microsoft.com/ado/2007/08/dataservices), and the element name must be the same as the property it represents, as described in [Collection Property of Complex Type (section 2.2.6.2.9.1)](#Section_2.2.6.2.9.1) and [Collection of EDMSimple Type (section 2.2.6.5.7)](#Section_2.2.6.5.7). An attribute named "type" (in the Data Service Metadata namespace), as described in [Common Serialization Rules for XML-based Formats (section 2.2.6.1)](#Section_2.2.6.1), MAY exist on the element representing the collection as a whole.
 
 <a id="Section_2.2.6.2.9.1"></a>
 ###### 2.2.6.2.9.1 Collection Property of Complex Type
 
-A property of an **EntityType** that represents a collection of complex types (that is not otherwise mapped through a customizable feed property mapping) MUST be represented within the **m:properties** element of an **atom:content** element or **atom:entry** element, as specified in [Collection Property (section 2.2.6.2.9)](#Section_2.2.6.2.9.2). Each **ComplexType** instance in the collection MUST be represented as a child element of the element that represents the collection as a whole and be named "element" and MUST be defined in the data service namespace (http://schemas.microsoft.com/ado/2007/08/dataservices). Each property of the **ComplexType** instance MUST be represented in the same way as in the serialization of a single **ComplexType**, as described in section [2.2.6.2.3](#Section_2.2.6.2.3). All properties of the **ComplexType** MUST be serialized to the same parent “element”. An attribute named "type" (in the Data Service Metadata namespace, as described in [Common Serialization Rules for XML-based Formats (section 2.2.6.1)](#Section_2.2.6.1)), MAY exist on the element representing the item in the collection.
+A property of an **EntityType** that represents a collection of complex types (that is not otherwise mapped through a customizable feed property mapping) MUST be represented within the **m:properties** element of an **atom:content** element or **atom:entry** element, as specified in [Collection Property (section 2.2.6.2.9)](#Section_2.2.6.2.9). Each **ComplexType** instance in the collection MUST be represented as a child element of the element that represents the collection as a whole and be named "element" and MUST be defined in the data service namespace (http://schemas.microsoft.com/ado/2007/08/dataservices). Each property of the **ComplexType** instance MUST be represented in the same way as in the serialization of a single **ComplexType**, as described in section [2.2.6.2.3](#Section_2.2.6.2.3). All properties of the **ComplexType** MUST be serialized to the same parent “element”. An attribute named "type" (in the Data Service Metadata namespace, as described in [Common Serialization Rules for XML-based Formats (section 2.2.6.1)](#Section_2.2.6.1)), MAY exist on the element representing the item in the collection.
 
 A collection property of **ComplexType** MUST NOT contain null values of the **ComplexType**. If the collection property is empty, the element representing the collection property as a whole MUST NOT have any child elements.
 
 <a id="Section_2.2.6.2.9.2"></a>
 ###### 2.2.6.2.9.2 Collection of EDMSimpleType
 
-A property of an **EntityType** that represents a collection of primitive values (that is not otherwise mapped through a customizable feed property mapping) MUST be serialized within the **m:properties** element of an **atom:content** element or **atom:entry** element, as specified in [Collection Property (section 2.2.6.2.9)](#Section_2.2.6.2.9.2). Each value in the Collection MUST be represented as an element named "element", and "element" MUST be defined in the data service namespace as (http://schemas.microsoft.com/ado/2007/08/dataservices) and be a direct child element of the element representing the collection as a whole. Each **EDMSimpleType** in the collection MUST be represented as described in [EDMSimpleType Property (section 2.2.6.2.5)](#Section_2.2.6.3.8).
+A property of an **EntityType** that represents a collection of primitive values (that is not otherwise mapped through a customizable feed property mapping) MUST be serialized within the **m:properties** element of an **atom:content** element or **atom:entry** element, as specified in [Collection Property (section 2.2.6.2.9)](#Section_2.2.6.2.9). Each value in the Collection MUST be represented as an element named "element", and "element" MUST be defined in the data service namespace as (http://schemas.microsoft.com/ado/2007/08/dataservices) and be a direct child element of the element representing the collection as a whole. Each **EDMSimpleType** in the collection MUST be represented as described in [EDMSimpleType Property (section 2.2.6.2.5)](#Section_2.2.6.2.5).
 
 A collection property of **EDMSimpleType** MUST NOT contain null values of the **EDMSimpleType**. If the collection property is empty, the element representing the collection property as a whole MUST NOT have any child elements.
 
@@ -5884,11 +5884,11 @@ href="Photos(1)/PrintReady " />
 <a id="Section_2.2.6.2.11"></a>
 ##### 2.2.6.2.11 Links and Subtypes
 
-Entity instances in an **EntitySet** MAY not belong to the same **EntityType** but MUST all be derived from the **EntityType baseType** associated with the **EntitySet**. In addition to the rules described in [Entity Set (as an Atom Feed Element (section 2.2.6.2.1)](#Section_2.2.6.2.1.3), the following rules apply:
+Entity instances in an **EntitySet** MAY not belong to the same **EntityType** but MUST all be derived from the **EntityType baseType** associated with the **EntitySet**. In addition to the rules described in [Entity Set (as an Atom Feed Element (section 2.2.6.2.1)](#Section_2.2.6.2.1), the following rules apply:
 
 - The edit link for an **EntityType**, if present, MUST be represented as a **link** element that SHOULD have an **href** attribute that includes the namespace qualified **EntityType**. For example, http://host/service.svc/Customers/ ('ALFKI2')/ SampleModel.VipCustomer
 - There MAY also be a **link** element for the entity’s self link. If this element is present, it SHOULD have the **href** attribute set to the namespace-qualified **EntityType**. For example,http://host/service.svc/Customers/ ('ALFKI2')/ SampleModel.VipCustomer
-- If an **EntityType** has a **NavigationProperty**, the following rules apply (in addition to those described in [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.3.9)):
+- If an **EntityType** has a **NavigationProperty**, the following rules apply (in addition to those described in [Deferred Content (section 2.2.6.2.6)](#Section_2.2.6.2.6)):
 - The link for the **NavigationProperty** on the **EntityType**, if present, MUST be represented as a **link** element that SHOULD have an **href** attribute that includes the namespace qualified **EntityType** on which the **NavigationProperty** exists. For example,http://host/service.svc/Customers/ ('ALFKI2')/ SampleModel.VipCustomer/InHouseStaff
 - The association link that describes the relationship between the related entities MUST be represented as a **link** element that SHOULD have the **href** attribute that includes the namespace qualified **EntityType** on which the **NavigationProperty** exists. For example, http://host/service.svc/Customers/ ('ALFKI2')/ SampleModel.VipCustomer/$links/InHouseStaff
 - If an **EntityType** has named resource streams, the following rules apply (in addition to those described in section [Named Resource Streams (section 2.2.6.2.10)](#Section_2.2.6.2.10)):
@@ -5906,7 +5906,7 @@ If the type of the annotation value is anything other than **Edm.String**, a **t
 
 The value of the element that represents a value annotation whose type is a primitive value MUST be an EDM primitive value that is formatted as per section 2.2.6.1.
 
-The value of the element the represents a value annotation whose type is a collection MUST be the individual elements of that collection formatted as direct child elements of the **annotation** element, as specified in [Collection Property of Complex Type (section 2.2.6.2.9.1)](#Section_2.2.6.2.9.1) and [Collection of EDMSimple Type (section 2.2.6.5.7)](#Section_2.2.6.2.9.2).
+The value of the element the represents a value annotation whose type is a collection MUST be the individual elements of that collection formatted as direct child elements of the **annotation** element, as specified in [Collection Property of Complex Type (section 2.2.6.2.9.1)](#Section_2.2.6.2.9.1) and [Collection of EDMSimple Type (section 2.2.6.5.7)](#Section_2.2.6.5.7).
 
 Each property of an annotation whose type is a **ComplexType** or **EntityType** MUST be represented as a direct child element of the **annotation** element. The name of the child element MUST be the name of the property and MUST be in the data service namespace (for more information, see Common Serialization Rules for XML-based Formats (section 2.2.6.1)). Further formatting rules that MUST be adhered to when representing properties within an annotation are the same as the rules for primitive and complex properties of an **EntityType** or **ComplexType** in an AtomPub payload, as defined in section [2.2.6.2.2](#Section_2.2.6.2.2) or [2.2.6.2.3](#Section_2.2.6.2.3), respectively, and their respective subsections.
 
@@ -5926,7 +5926,7 @@ When annotating a feed, the **annotation** element MUST be a direct child of the
 
 When annotating an error, the **annotation** element MUST be a direct child of the **error** element and MAY target the code, message, or innererror, or the error itself if **target** is not specified or is specified with a value of ".".
 
-Instance annotations are not supported when serializing single **EdmSimpleType** properties in XML, as described in [2.2.6.5.3](#Section_2.2.6.3.8).
+Instance annotations are not supported when serializing single **EdmSimpleType** properties in XML, as described in [2.2.6.5.3](#Section_2.2.6.5.3).
 
 The following example shows an annotated collection of the Customer Entities described in [Appendix A: Sample Entity Data Model and CSDL Document (section 6)](#Section_6) with the following annotations.
 
@@ -6150,7 +6150,7 @@ In all subsections that follow, if a data model construct is not explicitly refe
 <a id="Section_2.2.6.3.1"></a>
 ##### 2.2.6.3.1 Common Verbose JSON Serialization Rules for All EDM Constructs
 
-Literal values of the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) primitive types are represented as [Verbose JSON](#Section_4.2.1.6) literal values, as defined by the rules in the following Common Verbose JSON Serialization Rules for All EDM Constructs table. Grammar rules not defined here are specified in [[RFC5234]](https://go.microsoft.com/fwlink/?LinkId=123096), [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879), or both.
+Literal values of the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) primitive types are represented as [Verbose JSON](#Section_2.2.6.3) literal values, as defined by the rules in the following Common Verbose JSON Serialization Rules for All EDM Constructs table. Grammar rules not defined here are specified in [[RFC5234]](https://go.microsoft.com/fwlink/?LinkId=123096), [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879), or both.
 
 | EDM primitive type | ABNF rule for primitive type representation in Verbose JSON payloads | Verbose JSON serialization format (ABNF grammar) |
 | --- | --- | --- |
@@ -6204,7 +6204,7 @@ GeoJSON allows multiple types of coordinate reference systems (CRSs). In OData, 
 <a id="Section_2.2.6.3.2"></a>
 ##### 2.2.6.3.2 Entity Set (as a Verbose JSON Array)
 
-An EntitySet or collection of entities MUST be represented as an array of [Verbose JSON](#Section_4.2.1.6) objects, with one object for each EntityType instance within the set. A Verbose JSON-based format for **EntityTypes** is defined in [Entity Type (as a Verbose JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1).
+An EntitySet or collection of entities MUST be represented as an array of [Verbose JSON](#Section_2.2.6.3) objects, with one object for each EntityType instance within the set. A Verbose JSON-based format for **EntityTypes** is defined in [Entity Type (as a Verbose JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3).
 
 An empty **EntitySet** or collection of entities (one that contains no **EntityType** instances) MUST be represented as an empty JSON array.
 
@@ -6275,7 +6275,7 @@ In response payloads representing a collection of [**entities**](#gt_entity), if
 
 ***Applies to the OData 2.0 and OData 3.0 protocols***
 
-This section defines the semantics of the "countNVP" grammar rule in section [2.2.6.3.2](#Section_2.2.6.3.2.3), which is supported only in OData 2.0 and OData 3.0.
+This section defines the semantics of the "countNVP" grammar rule in section [2.2.6.3.2](#Section_2.2.6.3.2), which is supported only in OData 2.0 and OData 3.0.
 
 A request [**URI**](#gt_uniform-resource-identifier-uri) MAY contain an **$inlinecount** system query option to indicate that the count of the number of entities represented by the query after filters have been applied ought to be included in the collection of entities returned from a data service. If such a query string object is present, the response MUST include the "countNVP" name/value pair with the value of the name/value pair equal to the count of the total number of entities addressed by the request URI.
 
@@ -6424,7 +6424,7 @@ Actions advertised in the feed MUST be interpreted as being bound to the definit
 
 Actions that are advertised in the feed MUST be advertised only if the server can fully encode the action, the resource path, and the appropriate system query options that define the feed.
 
-[System Query Options (section 2.2.3.6.1)](#Section_2.2.3.6.1.5) that change the membership of the feed MUST be considered part of the feed definition. In practice, this means that the target URL that is used to invoke the action MUST encode the following system query options if they are used to define the feed:
+[System Query Options (section 2.2.3.6.1)](#Section_2.2.3.6.1) that change the membership of the feed MUST be considered part of the feed definition. In practice, this means that the target URL that is used to invoke the action MUST encode the following system query options if they are used to define the feed:
 
 - [$filter (section 2.2.3.6.1.4)](#Section_2.2.3.6.1.4)
 - [$expand (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3)
@@ -6454,7 +6454,7 @@ The function metadata URL MUST identify only functions that are bindable to the 
 
 Functions advertised in the feed MUST be interpreted as being bound to the definition of the feed and not to the items that are represented in the feed.
 
-Functions that are advertised in the feed MUST only be advertised if the server can fully encode the function, the resource path, and the appropriate [system query options (section 2.2.3.6.1)](#Section_2.2.3.6.1.5) that define the feed.
+Functions that are advertised in the feed MUST only be advertised if the server can fully encode the function, the resource path, and the appropriate [system query options (section 2.2.3.6.1)](#Section_2.2.3.6.1) that define the feed.
 
 System query options (section 2.2.3.6.1) that change the membership of the feed MUST be considered part of the feed definition. In practice, this means that the target URL used to invoke the function MUST encode the following system query options if they are used to define the feed:
 
@@ -6490,7 +6490,7 @@ The value of the "edit_media" name/value pair MUST be a [**URI**](#gt_uniform-re
 
 The value of the "properties" name/value pair MAY contain a JSON object for each **NavigationProperty**. Each **NavigationProperty** is serialized as name/value pairs in which the value is a JSON object that contains a single name/value pair, with the name equal to the name of the **NavigationProperty** and a value equal to the URI that can be used to manage the relationship between the related entities.
 
-The JSON object representing the **EntityType** SHOULD also contain representations of the properties defined on the **EntityType**. Each **EDMSimpleType**, **ComplexType**, and **NavigationProperty** defined on the **EntityType** MUST be formatted according to the directives in sections [EDMSimpleType Property (section 2.2.6.3.8)](#Section_2.2.6.3.8), [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.2.3), and [Navigation Property (section 2.2.6.3.6)](#Section_2.2.6.3.6).
+The JSON object representing the **EntityType** SHOULD also contain representations of the properties defined on the **EntityType**. Each **EDMSimpleType**, **ComplexType**, and **NavigationProperty** defined on the **EntityType** MUST be formatted according to the directives in sections [EDMSimpleType Property (section 2.2.6.3.8)](#Section_2.2.6.3.8), [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.3.4), and [Navigation Property (section 2.2.6.3.6)](#Section_2.2.6.3.6).
 
 The syntax of the Verbose JSON representation of an entity is defined by the grammar listed in this section. The grammar rule "entityTypeInVJson" defines the representation of an entity that can be used in both request and response payloads.
 
@@ -6817,7 +6817,7 @@ The title name/value pair MUST be included and contain a simple string that is u
 
 Actions can also be selectively requested or omitted by using different [Select system query option (section 2.2.3.6.1.11)](#Section_2.2.3.6.1.11) combinations.
 
-If the **EntityType** JSON Object is retrieved as part of a feed (see section [2.2.6.3.2](#Section_2.2.6.3.2.3)) and it is expensive to identify whether an action that is requested, either implicitly or explicitly, by using Select system query option (section 2.2.3.6.1.11) can be bound to a particular entity, a server SHOULD advertise the action and fail later if the action is invoked and found to be unavailable.
+If the **EntityType** JSON Object is retrieved as part of a feed (see section [2.2.6.3.2](#Section_2.2.6.3.2)) and it is expensive to identify whether an action that is requested, either implicitly or explicitly, by using Select system query option (section 2.2.3.6.1.11) can be bound to a particular entity, a server SHOULD advertise the action and fail later if the action is invoked and found to be unavailable.
 
 <a id="Section_2.2.6.3.3.2"></a>
 ###### 2.2.6.3.3.2 Entity Type (as a Verbose JSON Object) with Functions
@@ -6838,12 +6838,12 @@ If a function to be advertised has overloads that can all be bound to the curren
 
 Functions can also be selectively requested or omitted by using different [Select system query option (section 2.2.3.6.1.11)](#Section_2.2.3.6.1.11) combinations.
 
-If the **EntityType** JSON Object is retrieved as part of a Feed (see section [2.2.6.2.1](#Section_2.2.6.2.1.3)) and it is expensive to identify whether a function that is requested explicitly by using a Select system query option (section 2.2.3.6.1.11) is available, a server SHOULD advertise the requested function and fail later if the function is invoked and found to be unavailable.
+If the **EntityType** JSON Object is retrieved as part of a Feed (see section [2.2.6.2.1](#Section_2.2.6.2.1)) and it is expensive to identify whether a function that is requested explicitly by using a Select system query option (section 2.2.3.6.1.11) is available, a server SHOULD advertise the requested function and fail later if the function is invoked and found to be unavailable.
 
 <a id="Section_2.2.6.3.4"></a>
 ##### 2.2.6.3.4 Complex Type
 
-An instance of a **ComplexType** MUST be represented as a [Verbose JSON](#Section_4.2.1.6) object. Each [**declared property**](#gt_declared-property) defined on the **ComplexType** MUST be represented as a name/value pair within the JSON object. Additional name/value pairs that do not represent a declared property of the **ComplexType** SHOULD NOT be included. The name in the name/value pair MUST equal the name of the declared property on the **ComplexType** and the value of the pair MUST equal the value of the property. The order name/value pairs that appear within the JSON object MUST be considered insignificant.
+An instance of a **ComplexType** MUST be represented as a [Verbose JSON](#Section_2.2.6.3) object. Each [**declared property**](#gt_declared-property) defined on the **ComplexType** MUST be represented as a name/value pair within the JSON object. Additional name/value pairs that do not represent a declared property of the **ComplexType** SHOULD NOT be included. The name in the name/value pair MUST equal the name of the declared property on the **ComplexType** and the value of the pair MUST equal the value of the property. The order name/value pairs that appear within the JSON object MUST be considered insignificant.
 
 The syntax of the Verbose JSON representation of a **ComplexType** is defined by the grammar listed in this section. The grammar rule "entityCTInVJson" defines the Verbose JSON representation of a **ComplexType** that can be used in both request and response payloads.
 
@@ -6904,7 +6904,7 @@ typeNVP = ;see section 2.2.6.3.3
 <a id="Section_2.2.6.3.5"></a>
 ##### 2.2.6.3.5 Collection of Complex Type Instances
 
-A [**collection**](#gt_collection) of ComplexType instances MUST be represented as an array of [**JSON**](#gt_javascript-object-notation-json) objects. Each object in the array represents a single **ComplexType** instance as specified in [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.2.3).
+A [**collection**](#gt_collection) of ComplexType instances MUST be represented as an array of [**JSON**](#gt_javascript-object-notation-json) objects. Each object in the array represents a single **ComplexType** instance as specified in [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.3.4).
 
 The syntax of the Verbose JSON representation of a collection of **ComplexType** instances is defined by the grammar listed in this section. The grammar rule "entityCollCTInVJson" defines the Verbose JSON representation of a collection of **ComplexType** instances that can be used in all versions of request payloads and OData 1.0 response payloads. The grammar rule "entityCollCTInVJson2" defines the OData 2.0 Verbose JSON representation of a collection of **ComplexType** instances for response payloads only. The grammar rule "entityCollCTInVJson3" defines the OData 3.0 Verbose JSON representation of a collection of **ComplexType** instances for response payloads only.
 
@@ -6969,9 +6969,9 @@ end-array
 <a id="Section_2.2.6.3.6"></a>
 ##### 2.2.6.3.6 Navigation Property
 
-The default representation of a **NavigationProperty** is as a [JSON](#Section_4.2.1.6) name/value pair. The name is equal to "__deferred" and the value is a JSON object that contains a single name/value pair with the name equal to "uri". The value of the "uri" name/value pair MUST be a [**URI**](#gt_uniform-resource-identifier-uri) relative to the [**service root**](#gt_service-root) URI, as specified in [Service Root (section 2.2.3.2)](#Section_2.2.3.2), that identifies the **NavigationProperty**.
+The default representation of a **NavigationProperty** is as a [JSON](#Section_2.2.6.3) name/value pair. The name is equal to "__deferred" and the value is a JSON object that contains a single name/value pair with the name equal to "uri". The value of the "uri" name/value pair MUST be a [**URI**](#gt_uniform-resource-identifier-uri) relative to the [**service root**](#gt_service-root) URI, as specified in [Service Root (section 2.2.3.2)](#Section_2.2.3.2), that identifies the **NavigationProperty**.
 
-The syntax of a **NavigationProperty**, represented within a JSON object, is shown using the grammar rule "deferredNavProperty" in the Entity Type Verbose JSON Representation listing in [Entity Type (as a JSON Object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1).
+The syntax of a **NavigationProperty**, represented within a JSON object, is shown using the grammar rule "deferredNavProperty" in the Entity Type Verbose JSON Representation listing in [Entity Type (as a JSON Object) (section 2.2.6.3.3)](#Section_2.2.6.3.3).
 
 OData 3.0 adds another JSON object with the name "properties" to the "__metadata" object that contains an array of objects, each of which SHOULD have the name of a **NavigationProperty** in the entity. Each object has one name/value pair with the name "associationuri". The value of the "associationuri" name/value pair MUST be a URI that represents the association between the related entities.
 
@@ -6980,7 +6980,7 @@ The syntax of the OData 3.0 properties object is shown by using the grammar rule
 <a id="Section_2.2.6.3.7"></a>
 ##### 2.2.6.3.7 Collection of EDMSimpleType Values
 
-A [**collection**](#gt_collection) of EDMSimpleType values MUST be represented as an array of [JSON](#Section_4.2.1.6) primitives. Each element in the array represents a single primitive type value.
+A [**collection**](#gt_collection) of EDMSimpleType values MUST be represented as an array of [JSON](#Section_2.2.6.3) primitives. Each element in the array represents a single primitive type value.
 
 The syntax of the Verbose JSON representation of a collection of **EDMSimpleType** values is defined by the grammar listed in this section. The grammar rule "entityCollPrimValueInVJson" defines the Verbose JSON representation of a collection of **EDMSimpleType** values that can be used in all versions of request payloads and OData 1.0 response payloads. The grammar rule "entityCollPrimValueInVJson2" defines the OData 2.0 Verbose JSON representation of a collection of **EDMSimpleType** values for response payloads only. The grammar rule "entityCollPrimValueInVJson3" defines the OData 3.0 Verbose JSON representation of a collection of **EDMSimpleType** values for response payloads only.
 
@@ -7043,7 +7043,7 @@ edmSimpleTypeNVP =; EDM SimleType name
 <a id="Section_2.2.6.3.8"></a>
 ##### 2.2.6.3.8 EDMSimpleType Property
 
-A [**property**](#gt_property) of type EDMSimpleType MUST be represented as a [**JSON**](#gt_javascript-object-notation-json) name/value pair. The name in the name/value pair MUST be equal to the name of the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) property and the value MUST be set to the value of the property. The value is formatted, as specified in [Common Verbose JSON Serialization Rules for All EDM Constructs (section 2.2.6.3.1)](#Section_2.2.6.3.12).
+A [**property**](#gt_property) of type EDMSimpleType MUST be represented as a [**JSON**](#gt_javascript-object-notation-json) name/value pair. The name in the name/value pair MUST be equal to the name of the [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) property and the value MUST be set to the value of the property. The value is formatted, as specified in [Common Verbose JSON Serialization Rules for All EDM Constructs (section 2.2.6.3.1)](#Section_2.2.6.3.1).
 
 When represented as part of the Verbose JSON representation of an **EntityType** or **ComplexType**, the syntax of an **EDMSimpleType** property formatted in Verbose JSON is as follows.
 
@@ -7086,16 +7086,16 @@ end-object
 
 The serialized representation of an [**entity**](#gt_entity) and its related entities, identified by NavigationProperties, can be large. To conserve [**resources**](#gt_resource) (bandwidth, CPU, and so on), it is generally not a good idea for a [**data service**](#gt_data-service) to return the full graph of entities related to the EntityType instance or set identified in a request [**URI**](#gt_uniform-resource-identifier-uri). For example, a data service ought to defer sending entities represented by any navigation property in a response unless explicitly asked to send those entities via the **$expand** system query option, as described in [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3).
 
-In Verbose JSON-formatted **EntityType** instances (see [Entity Type (as a JSON Object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1)), **NavigationProperties** serialized as name/value pairs in which the value is a JSON object containing a single name/value pair with the name "__deferred" and a value that is a JSON object containing a single name/value pair with the name "uri" and a string value, which is a URL that can be used to retrieve the deferred content, signify deferred **NavigationProperty** content (for example, the entities represented by the **NavigationProperty** are not serialized inline). For example, using the two **EntityTypes** Customer and Order, as described in [Appendix A: Sample Entity Data Model and CSDL Document (section 6)](#Section_6), the default Verbose JSON serialization (with deferred **NavigationProperty** content) of the Customer instance with EntityKey value of "ALFKI" is shown in Entity Type (as a JSON object) (section 2.2.6.3.3).
+In Verbose JSON-formatted **EntityType** instances (see [Entity Type (as a JSON Object) (section 2.2.6.3.3)](#Section_2.2.6.3.3)), **NavigationProperties** serialized as name/value pairs in which the value is a JSON object containing a single name/value pair with the name "__deferred" and a value that is a JSON object containing a single name/value pair with the name "uri" and a string value, which is a URL that can be used to retrieve the deferred content, signify deferred **NavigationProperty** content (for example, the entities represented by the **NavigationProperty** are not serialized inline). For example, using the two **EntityTypes** Customer and Order, as described in [Appendix A: Sample Entity Data Model and CSDL Document (section 6)](#Section_6), the default Verbose JSON serialization (with deferred **NavigationProperty** content) of the Customer instance with EntityKey value of "ALFKI" is shown in Entity Type (as a JSON object) (section 2.2.6.3.3).
 
 In the example, the presence of the "__deferred" name/value pair signifies that the value of the Orders **NavigationProperty** is not directly represented on the JSON object in this serialization. In order to obtain the deferred value(s), a client would make a separate request directly to the navigation property URI (`service.svc/Customers('ALFKI')/Orders`) or explicitly ask that the property be serialized inline via the **$expand** system query option, as described in Expand System Query Option ($expand) (section 2.2.3.6.1.3).
 
 <a id="Section_2.2.6.3.9.1"></a>
 ###### 2.2.6.3.9.1 Inline Representation
 
-As described in [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3), a request [**URI**](#gt_uniform-resource-identifier-uri) can include the **$expand** system query option to explicitly request the [**entity**](#gt_entity) or entities represented by a NavigationProperty be serialized inline, rather than deferred. The example shown in this section uses the same data model as the [Deferred Content](#Section_2.2.6.3.9) example referenced in the preceding section. However, the following example shows the value of the Orders **NavigationProperty** serialized inline.
+As described in [Expand System Query Option ($expand) (section 2.2.3.6.1.3)](#Section_2.2.3.6.1.3), a request [**URI**](#gt_uniform-resource-identifier-uri) can include the **$expand** system query option to explicitly request the [**entity**](#gt_entity) or entities represented by a NavigationProperty be serialized inline, rather than deferred. The example shown in this section uses the same data model as the [Deferred Content](#Section_2.2.6.2.6) example referenced in the preceding section. However, the following example shows the value of the Orders **NavigationProperty** serialized inline.
 
-A **NavigationProperty** that is serialized inline MUST be represented as a name/value pair on the [JSON](#Section_4.2.1.6) object with the name equal to the **NavigationProperty** name. If the **NavigationProperty** identifies a single EntityType instance, the value MUST be a JSON object representation of that **EntityType** instance, as specified in [Entity Type (as a JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1). If the **NavigationProperty** represents an EntitySet, the value MUST be as specified in [Entity Set (as a JSON array) (section 2.2.6.3.2)](#Section_2.2.6.3.2.3).
+A **NavigationProperty** that is serialized inline MUST be represented as a name/value pair on the [JSON](#Section_2.2.6.3) object with the name equal to the **NavigationProperty** name. If the **NavigationProperty** identifies a single EntityType instance, the value MUST be a JSON object representation of that **EntityType** instance, as specified in [Entity Type (as a JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3). If the **NavigationProperty** represents an EntitySet, the value MUST be as specified in [Entity Set (as a JSON array) (section 2.2.6.3.2)](#Section_2.2.6.3.2).
 
 "etag": "W/\"X\'000000000000FA01\'""
 
@@ -7232,7 +7232,7 @@ Results: [
 <a id="Section_2.2.6.3.10"></a>
 ##### 2.2.6.3.10 Links
 
-Links represent unidirectional [**associations**](#gt_association) or one direction of a bidirectional association between EntityType instances. In the [Verbose JSON](#Section_4.2.1.6) format, Links are serialized as an array of [**URIs**](#gt_uniform-resource-identifier-uri), each of which identifies a single linked [**entity**](#gt_entity).
+Links represent unidirectional [**associations**](#gt_association) or one direction of a bidirectional association between EntityType instances. In the [Verbose JSON](#Section_2.2.6.3) format, Links are serialized as an array of [**URIs**](#gt_uniform-resource-identifier-uri), each of which identifies a single linked [**entity**](#gt_entity).
 
 When represented in Verbose JSON, Links MUST be formatted, as shown in the table in the following listing, ABNF Grammar for Links Represented in Verbose JSON, using one JSON object containing a single "uri" name/value pair per Link. The value of the "uri" name/value pair on each object MUST equal the absolute, canonical URI representing the linked-to **EntityType** instance.
 
@@ -7318,7 +7318,7 @@ A request [**URI**](#gt_uniform-resource-identifier-uri) MAY contain an **$inlin
 <a id="Section_2.2.6.3.12"></a>
 ##### 2.2.6.3.12 Service Document
 
-[Service Document](#Section_2.2.3.7.1) specifies that [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), defines a Service Document that describes [**collections**](#gt_collection) of [**resources**](#gt_resource) available from a [**data service**](#gt_data-service). The root URL of a data service that implements the protocol defined in this document MUST identify such a service document. This section defines a [Verbose JSON](#Section_4.2.1.6) representation, as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879), of the data provided in an AtomPub, as specified in [RFC5023] Service Document. For a description of the contents of a Service Document for which this section defines a Verbose JSON serialization, see Service Document.
+[Service Document](#Section_2.2.3.7.1) specifies that [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), defines a Service Document that describes [**collections**](#gt_collection) of [**resources**](#gt_resource) available from a [**data service**](#gt_data-service). The root URL of a data service that implements the protocol defined in this document MUST identify such a service document. This section defines a [Verbose JSON](#Section_2.2.6.3) representation, as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879), of the data provided in an AtomPub, as specified in [RFC5023] Service Document. For a description of the contents of a Service Document for which this section defines a Verbose JSON serialization, see Service Document.
 
 The syntax of a Verbose JSON-serialized Service Document is as shown in the grammar that follows:
 
@@ -7371,7 +7371,7 @@ The following is an example Verbose JSON, as specified in [RFC4627], representat
 
 ***Applies to the OData 3.0 protocol***
 
-In the OData 3.0 protocol, a collection property of a **ComplexType** or **EDMSimpleType** MUST be represented in the same way as collections of a **ComplexType**, as described in [Collection of Complex Type Instances (section 2.2.6.3.5)](#Section_2.2.6.5.6). Similarly, collections of **EDMSimpleTypes** MUST be represented the same as collections of **EDMSimpleTypes**, as described in [Collection of EDMSimpleType Values (section 2.2.6.3.7)](#Section_2.2.6.2.9.2). A "__metadata" object with a name/value pair called “type” MAY be present to specify the **EDMSimpleType** or the **ComplexType**.
+In the OData 3.0 protocol, a collection property of a **ComplexType** or **EDMSimpleType** MUST be represented in the same way as collections of a **ComplexType**, as described in [Collection of Complex Type Instances (section 2.2.6.3.5)](#Section_2.2.6.3.5). Similarly, collections of **EDMSimpleTypes** MUST be represented the same as collections of **EDMSimpleTypes**, as described in [Collection of EDMSimpleType Values (section 2.2.6.3.7)](#Section_2.2.6.3.7). A "__metadata" object with a name/value pair called “type” MAY be present to specify the **EDMSimpleType** or the **ComplexType**.
 
 {
 
@@ -7424,7 +7424,7 @@ In the OData 3.0 protocol, a collection property of a **ComplexType** or **EDMSi
 <a id="Section_2.2.6.3.14"></a>
 ##### 2.2.6.3.14 Named Resource Streams
 
-When an EntityType includes named resource streams, any representations of whole **EntityType** instances MUST include named resource stream instances by using the grammar listed in this section. The grammar rule "namedStreamInVJson" specifies how a named resource stream instance is represented. This rule is referenced, in turn, by the rule "entityPropertyInVJson" that specifies how **EntityType** instance members MUST be represented when representing an **EntityType** instance in Verbose JSON. See [Entity Type (as a JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1) for more information on how **EntityType** instances are represented in Verbose JSON.
+When an EntityType includes named resource streams, any representations of whole **EntityType** instances MUST include named resource stream instances by using the grammar listed in this section. The grammar rule "namedStreamInVJson" specifies how a named resource stream instance is represented. This rule is referenced, in turn, by the rule "entityPropertyInVJson" that specifies how **EntityType** instance members MUST be represented when representing an **EntityType** instance in Verbose JSON. See [Entity Type (as a JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3) for more information on how **EntityType** instances are represented in Verbose JSON.
 
 namedStreamInVJson = quotation-mark entityNamedStream quotation-mark
 
@@ -7555,7 +7555,7 @@ The value of the "content_type" name/value pair MUST specify the content type of
 <a id="Section_2.2.6.3.15"></a>
 ##### 2.2.6.3.15 Links and Subtypes
 
-Entity instances in an **EntitySet** MAY not belong to the same **EntityType** but MUST all be derived from the **EntityType** baseType associated with the **EntitySet**. In the OData 3.0 protocol, in addition to the rules described in [Entity Type (as a JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1), the value of the **ResourcePath** for the following grammar rules (described in Entity Type (as a JSON object) (section 2.2.6.3.3),) SHOULD include the **EntityType** instance (as described in [Resource Path (resourcePath) (section 2.2.3.3)](#Section_2.2.3.3)):
+Entity instances in an **EntitySet** MAY not belong to the same **EntityType** but MUST all be derived from the **EntityType** baseType associated with the **EntitySet**. In the OData 3.0 protocol, in addition to the rules described in [Entity Type (as a JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3), the value of the **ResourcePath** for the following grammar rules (described in Entity Type (as a JSON object) (section 2.2.6.3.3),) SHOULD include the **EntityType** instance (as described in [Resource Path (resourcePath) (section 2.2.3.3)](#Section_2.2.3.3)):
 
 - uriNVP
 - associationuri
@@ -7590,7 +7590,7 @@ The serializations defined in the following subsections MUST be identified with 
 
 A ComplexType [**property**](#gt_property), defined on an EntityType, MUST be represented in the same way as it is within in the Atom-based format, as specified in section [Complex Type (section 2.2.6.2.3)](#Section_2.2.6.2.3); however, the XML element representing the **ComplexType** instance as a whole MUST be the root of the XML document (for example, not a child element, as described in section Complex Type (section 2.2.6.2.3)). For example, the Address property of type CAddress (a **ComplexType**) in the sample model (see [Appendix A: Sample Entity Data Model and CSDL Document (section 6)](#Section_6)) is represented in the following listing.
 
-If the value of the **ComplexType** is null, the element MUST be empty and MUST include the **m:null** attribute set to true, as required by the Common Serialization Rules for XML-based Formats (section [2.2.6.3.1](#Section_2.2.6.3.12)).
+If the value of the **ComplexType** is null, the element MUST be empty and MUST include the **m:null** attribute set to true, as required by the Common Serialization Rules for XML-based Formats (section [2.2.6.3.1](#Section_2.2.6.3.1)).
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -7691,7 +7691,7 @@ For example, using the sample model and instance data, as described in Appendix 
 
 ***Applies to the OData 2.0 and OData 3.0 protocols***
 
-This section defines an extended representation of a collection of links from that described in section [2.2.6.5.5](#Section_2.2.6.5.5.2). This representation of a collection of links is supported only in the OData 2.0 and OData 3.0 protocols.
+This section defines an extended representation of a collection of links from that described in section [2.2.6.5.5](#Section_2.2.6.5.5). This representation of a collection of links is supported only in the OData 2.0 and OData 3.0 protocols.
 
 A request URI MAY contain an **$inlinecount** system query option to indicate that the count of the number of links represented by the query is to be included in the collection of links returned by a data service.
 
@@ -7707,7 +7707,7 @@ The value of the **next** element MUST be a URI that identifies the next page of
 <a id="Section_2.2.6.5.6"></a>
 ##### 2.2.6.5.6 Collection of Complex Type
 
-In the OData 3.0 protocol, a collection property of complex types, defined on an **EntityType**, MUST be represented in the same way that it is in the Atom-based format, as specified in section [Collection Property (section 2.2.6.2.9)](#Section_2.2.6.2.9.2). However, the XML element that represents the collection instance as a whole MUST be the root of the XML document (not a child element, as described in [Collection Property of Complex Type (section 2.2.6.2.9.1)](#Section_2.2.6.2.9.1)). For example, the Address property of type AlternateAddresses (a **ComplexType**) in the sample model (see [Appendix A: Sample EDM and CSDL Document (section 6)](#Section_6) ) is represented in the following listing.
+In the OData 3.0 protocol, a collection property of complex types, defined on an **EntityType**, MUST be represented in the same way that it is in the Atom-based format, as specified in section [Collection Property (section 2.2.6.2.9)](#Section_2.2.6.2.9). However, the XML element that represents the collection instance as a whole MUST be the root of the XML document (not a child element, as described in [Collection Property of Complex Type (section 2.2.6.2.9.1)](#Section_2.2.6.2.9.1)). For example, the Address property of type AlternateAddresses (a **ComplexType**) in the sample model (see [Appendix A: Sample EDM and CSDL Document (section 6)](#Section_6) ) is represented in the following listing.
 
 <?xml version="1.0" encoding="utf-8"?>
 
@@ -7768,13 +7768,13 @@ This document defines requests that a client can send to a [**data service**](#g
 
 The request types defined in this document either extend the request types defined in [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), by providing additional rules for each type. Or, they add additional types, in addition to those defined in [RFC5023].
 
-In general, this document adopts the protocol semantics of AtomPub, as specified in [RFC5023], but extends AtomPub to allow the use of alternate formats (such as [JSON](#Section_4.2.1.6) as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879)), in addition to Atom, and defines a [**URI**](#gt_uniform-resource-identifier-uri) addressing scheme for the abstract data model used in this document. This document's data model maps 1-to-1 to the model constructs defined in AtomPub and defines additional constructs not present in the AtomPub model.
+In general, this document adopts the protocol semantics of AtomPub, as specified in [RFC5023], but extends AtomPub to allow the use of alternate formats (such as [JSON](#Section_2.2.6.3) as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879)), in addition to Atom, and defines a [**URI**](#gt_uniform-resource-identifier-uri) addressing scheme for the abstract data model used in this document. This document's data model maps 1-to-1 to the model constructs defined in AtomPub and defines additional constructs not present in the AtomPub model.
 
 As specified in [RFC5023] and extended in this section, the requests from the client and the corresponding responses from the server are exchanged using HTTP request methods. Each request type defined is mapped to an HTTP request method (for example, GET, POST, and so on) and HTTP request URI pair.
 
 In general, the request types defined allow clients to:
 
-- Retrieve, edit, and delete [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs represented as data service or AtomPub [**resources**](#gt_resource) using HTTP's GET, PUT, PATCH, and DELETE methods. For details, see [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7), [Update Request Types (section 2.2.7.3)](#Section_2.2.7.3), and [Delete Request Types (section 2.2.7.4)](#Section_2.2.7.4).
+- Retrieve, edit, and delete [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs represented as data service or AtomPub [**resources**](#gt_resource) using HTTP's GET, PUT, PATCH, and DELETE methods. For details, see [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7.2), [Update Request Types (section 2.2.7.3)](#Section_2.2.7.3), and [Delete Request Types (section 2.2.7.4)](#Section_2.2.7.4).
 - Insert new EntityType instances into an EntitySet represented as an [**AtomPub Collection**](#gt_atompub-collection). See [Insert Request Types (section 2.2.7.1)](#Section_2.2.7.1) for details.
 - Invoke a data service [**service operation**](#gt_service-operation). For further details see [Invoke Request (section 2.2.7.5)](#Section_2.2.7.5).
 - Package many requests using a batch request type. See [Batch Request (section 2.2.7.6)](#Section_2.2.7.6) for details.
@@ -7800,18 +7800,18 @@ HTTP-Header-Types = *((general-header
 
 This section defines all the insert request types a client can send to a [**data service**](#gt_data-service). All insert requests use the HTTP POST request method. The type of insert action is further defined by the request [**URI**](#gt_uniform-resource-identifier-uri) used in a POST request.
 
-[InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1) defines the InsertEntity request type that enables a client to insert a new **EntityType** instance into an **EntitySet**.
+[InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1) defines the InsertEntity request type that enables a client to insert a new **EntityType** instance into an **EntitySet**.
 
 [InsertLink Request (section 2.2.7.1.2)](#Section_2.2.7.1.2) defines the InsertLink request type that is used to add a new link between **EntityTypes** instances.
 
 <a id="Section_2.2.7.1.1"></a>
 ##### 2.2.7.1.1 InsertEntity Request
 
-The purpose of the InsertEntity request is to enable a new EntityType instance, potentially with new related entities, to be inserted into an EntitySet. The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 5.3 – Creating a Resource, and, as described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1), [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs are mapped directly to data model concepts used in AtomPub. For example, **EntityTypes** are AtomPub Entry Resources and [**collections**](#gt_collection) of entities (entity sets and so on) are [**AtomPub collections**](#gt_atompub-collection). This section adds constraints to those defined in AtomPub for this request type.
+The purpose of the InsertEntity request is to enable a new EntityType instance, potentially with new related entities, to be inserted into an EntitySet. The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 5.3 – Creating a Resource, and, as described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1), [**Entity Data Model (EDM)**](#gt_entity-data-model-edm) constructs are mapped directly to data model concepts used in AtomPub. For example, **EntityTypes** are AtomPub Entry Resources and [**collections**](#gt_collection) of entities (entity sets and so on) are [**AtomPub collections**](#gt_atompub-collection). This section adds constraints to those defined in AtomPub for this request type.
 
 As specified in [RFC5023] section 9.2, insert requests use the HTTP POST method and the request [**URI**](#gt_uniform-resource-identifier-uri) has to represent an AtomPub collection. Because a collection maps to a [**conceptual schema definition language (CSDL)**](#gt_conceptual-schema-definition-language-csdl) in an EDM, the HTTP request line URI MUST be any valid [**data service**](#gt_data-service) URI, as defined in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3), which identifies a collection of entities.
 
-[RFC5023] section 9.2 states that the request body in the POST might be an AtomPub Entry Resource (which maps to an **EntityType** instance in an EDM) represented as an Atom Entry document. This document extends this rule to allow additional representations of an Entry Resource to be posted to a URI representing a collection. This document defines three such representations of **EntityTypes** that map to Entry Resources: AtomPub as defined in [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2), JSON as defined in Entity [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 6, and Verbose JSON as defined in [Entity Type (as a Verbose JSON Object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1).
+[RFC5023] section 9.2 states that the request body in the POST might be an AtomPub Entry Resource (which maps to an **EntityType** instance in an EDM) represented as an Atom Entry document. This document extends this rule to allow additional representations of an Entry Resource to be posted to a URI representing a collection. This document defines three such representations of **EntityTypes** that map to Entry Resources: AtomPub as defined in [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2), JSON as defined in Entity [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 6, and Verbose JSON as defined in [Entity Type (as a Verbose JSON Object) (section 2.2.6.3.3)](#Section_2.2.6.3.3).
 
 When the request body is a representation of an Entry Resource (Entity Type in EDM terms), the client MAY specify whether the [**resource**](#gt_resource)/[**entity**](#gt_entity) is to be automatically linked to other already existing entities in the data service. For example, a new order entity might need to be bound to an existing customer entity in a customer relationship management focused data service. Such linking is to be supported only if the **EntityType** of the to-be-inserted entity defines a NavigationProperty which associates the new entity and the to-be-related entity.
 
@@ -8086,7 +8086,7 @@ href="Customers('ASDFG')/$links/Orders" />
 
 </entry>
 
-**Example 2:** Insert a new Customer and bind it to existing Orders with key values 1 and 2 by using the [Verbose JSON format](#Section_4.2.1.6).
+**Example 2:** Insert a new Customer and bind it to existing Orders with key values 1 and 2 by using the [Verbose JSON format](#Section_2.2.6.3).
 
 **HTTP Request:**
 
@@ -8592,7 +8592,7 @@ insertLink-RespHeaders = DataServiceVersion ; see section 2.2.5.3
 <a id="Section_2.2.7.1.3"></a>
 ##### 2.2.7.1.3 InsertMediaResource Request
 
-The purpose of the InsertMediaResource request is to enable a [**BLOB**](#gt_binary-large-object-blob) (in other words, a media resource) along with an associated EntityType instance which, potentially with new related entities, is to be inserted into an EntitySet. The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 9.6 - Media Resources and Media Link Entries, and, as described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1), Entity Data Model (EDM) constructs are mapped directly to data model concepts used in AtomPub. If an **EntityType** instance is created via an InsertMediaResource request, the created entity represents an AtomPub Media Link Entry (MLE) and the associated BLOB represents the media resource described by the MLE.
+The purpose of the InsertMediaResource request is to enable a [**BLOB**](#gt_binary-large-object-blob) (in other words, a media resource) along with an associated EntityType instance which, potentially with new related entities, is to be inserted into an EntitySet. The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 9.6 - Media Resources and Media Link Entries, and, as described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1), Entity Data Model (EDM) constructs are mapped directly to data model concepts used in AtomPub. If an **EntityType** instance is created via an InsertMediaResource request, the created entity represents an AtomPub Media Link Entry (MLE) and the associated BLOB represents the media resource described by the MLE.
 
 The remainder of this section adds constraints to those defined in AtomPub for this request type.
 
@@ -8686,13 +8686,13 @@ The syntax of an error response is shown in Error Response (section [2.2.8.1](#S
 <a id="Section_2.2.7.2.1"></a>
 ##### 2.2.7.2.1 RetrieveEntitySet Request
 
-A RetrieveEntitySet request is used by a client to retrieve the entries in an [**AtomPub collection**](#gt_atompub-collection), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), that maps to an EntitySet in the abstract data model used in this document, as described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1). The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [RFC5023] section 5.2 -- Listing Collection Members. This section adds constraints to those defined in AtomPub for this request type.
+A RetrieveEntitySet request is used by a client to retrieve the entries in an [**AtomPub collection**](#gt_atompub-collection), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), that maps to an EntitySet in the abstract data model used in this document, as described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1). The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [RFC5023] section 5.2 -- Listing Collection Members. This section adds constraints to those defined in AtomPub for this request type.
 
 According to [RFC5023] section 5.2, requests of this type MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line has to represent an AtomPub collection. Because a [**collection**](#gt_collection) maps to an **EntitySet** in an [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), the HTTP request line URI MUST be equal to any valid [**data service**](#gt_data-service) URI that identifies an **EntitySet**, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
-[RFC5023] section 9.2 states that the response body from such a request has to be an Atom Feed document. This document extends this rule to allow additional representations of a collection (or **EntitySet**) to be retrieved by a data service client. This document defines three representations of **EntitySet**: AtomPub as specified in [Entity Set (as an Atom Feed Element) (section 2.2.6.2.1)](#Section_2.2.6.2.1.3), Collection of Entities as specified in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 12, and Verbose JSON as specified in [Entity Set (as a Verbose JSON Array) (section 2.2.6.3.2)](#Section_2.2.6.3.2.3).
+[RFC5023] section 9.2 states that the response body from such a request has to be an Atom Feed document. This document extends this rule to allow additional representations of a collection (or **EntitySet**) to be retrieved by a data service client. This document defines three representations of **EntitySet**: AtomPub as specified in [Entity Set (as an Atom Feed Element) (section 2.2.6.2.1)](#Section_2.2.6.2.1), Collection of Entities as specified in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 12, and Verbose JSON as specified in [Entity Set (as a Verbose JSON Array) (section 2.2.6.3.2)](#Section_2.2.6.3.2).
 
-If a RetrieveEntitySet request was successful, the response payload MUST contain the requested representation of the entities in the **EntitySet** identified in the request URI. The payload of such a response MUST be formatted using AtomPub, JSON, or [Verbose JSON](#Section_4.2.1.6), according to the rules defined in [AtomPub Format (section 2.2.6.2)](#Section_2.2.6.2), JSON format [ODataJSON4.0] section 12, and Verbose JSON Format (section 2.2.6.3), respectively.
+If a RetrieveEntitySet request was successful, the response payload MUST contain the requested representation of the entities in the **EntitySet** identified in the request URI. The payload of such a response MUST be formatted using AtomPub, JSON, or [Verbose JSON](#Section_2.2.6.3), according to the rules defined in [AtomPub Format (section 2.2.6.2)](#Section_2.2.6.2), JSON format [ODataJSON4.0] section 12, and Verbose JSON Format (section 2.2.6.3), respectively.
 
 If the RetrieveEntitySet request is not successful (for example, an error occurred while processing the request), the response MUST be formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -8785,11 +8785,11 @@ end-object)
 <a id="Section_2.2.7.2.2"></a>
 ##### 2.2.7.2.2 RetrieveEntity Request
 
-A RetrieveEntity request is used by a client to retrieve an [**AtomPub**](#gt_atom-publishing-protocol-atompub) entry resource, as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), and potentially related entities that map to EntityType instances, as described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1).
+A RetrieveEntity request is used by a client to retrieve an [**AtomPub**](#gt_atom-publishing-protocol-atompub) entry resource, as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), and potentially related entities that map to EntityType instances, as described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1).
 
-Requests of this type MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST represent an AtomPub entry resource. Because an entry resource maps to an **EntityType** in an [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), the HTTP request line URI MUST be any valid [**data service**](#gt_data-service) URI that identifies an **EntityType** instance, as defined in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3). A client will typically obtain such a URI after parsing one of the **EntityType** instances serialized in the response payload from a prior [RetrieveEntitySet request](#Section_2.2.7.2.1), as specified in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7). When using the [AtomPub format](#Section_2.2.6.2) in a RetrieveEntitySet request, such a URI is typically obtained from the "edit" or "self" URIs described in AtomPub, as specified in [RFC5023] section 11.1 (The "edit" Link Relation), [[RFC4287]](https://go.microsoft.com/fwlink/?LinkId=140877) section 4.2.7.2, and [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2). Using [Verbose JSON](#Section_4.2.1.6) in the RetrieveEntitySet request, the URI is obtained from the metadata name/value pair of a JSON object representing an [**entity**](#gt_entity), as described in [Entity Type (as a Verbose JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3.1). For information about obtaining the URI for the RetrieveEntitySet request in the preferred OData 3.0 JSON format, see [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 4.5.8.
+Requests of this type MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST represent an AtomPub entry resource. Because an entry resource maps to an **EntityType** in an [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), the HTTP request line URI MUST be any valid [**data service**](#gt_data-service) URI that identifies an **EntityType** instance, as defined in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3). A client will typically obtain such a URI after parsing one of the **EntityType** instances serialized in the response payload from a prior [RetrieveEntitySet request](#Section_2.2.7.2.1), as specified in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7.2). When using the [AtomPub format](#Section_2.2.6.2) in a RetrieveEntitySet request, such a URI is typically obtained from the "edit" or "self" URIs described in AtomPub, as specified in [RFC5023] section 11.1 (The "edit" Link Relation), [[RFC4287]](https://go.microsoft.com/fwlink/?LinkId=140877) section 4.2.7.2, and [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2). Using [Verbose JSON](#Section_2.2.6.3) in the RetrieveEntitySet request, the URI is obtained from the metadata name/value pair of a JSON object representing an [**entity**](#gt_entity), as described in [Entity Type (as a Verbose JSON object) (section 2.2.6.3.3)](#Section_2.2.6.3.3). For information about obtaining the URI for the RetrieveEntitySet request in the preferred OData 3.0 JSON format, see [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 4.5.8.
 
-AtomPub [RFC5023] describes retrieving an AtomPub entry resource, which maps to an **EntityType** instance in an EDM, in an HTTP response payload that MUST be represented as an Atom entry document, as specified in [RFC4287] section 4.1.2. This document extends that behavior to allow additional representations of an entry resource to be retrieved by a data service client. A client states the desired response payload format by using the [Accept (section 2.2.5.1)](#Section_1.3) request header. This document defines three representations of **EntityTypes**: entity type as an Atom Entry element (section 2.2.6.2.2), entity as a JSON object ([ODataJSON4.0] section 6), and entity type as a Verbose JSON object (section 2.2.6.3.3).
+AtomPub [RFC5023] describes retrieving an AtomPub entry resource, which maps to an **EntityType** instance in an EDM, in an HTTP response payload that MUST be represented as an Atom entry document, as specified in [RFC4287] section 4.1.2. This document extends that behavior to allow additional representations of an entry resource to be retrieved by a data service client. A client states the desired response payload format by using the [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header. This document defines three representations of **EntityTypes**: entity type as an Atom Entry element (section 2.2.6.2.2), entity as a JSON object ([ODataJSON4.0] section 6), and entity type as a Verbose JSON object (section 2.2.6.3.3).
 
 If the RetrieveEntity request was successful, the response payload MUST contain the requested representation of the **EntityType** instance identified in the request URI. The payload of such a response MUST be formatted by using Atom, JSON, or Verbose JSON according to the rules defined in Entity Type (as an Atom Entry Element) (section 2.2.6.2.2), Entity (as a JSON object) ([ODataJSON4.0] section 6), and Entity Type (as a Verbose JSON object) (section 2.2.6.3.3).
 
@@ -8902,7 +8902,7 @@ The purpose of the RetrieveComplexType request is to enable the value of a **Com
 
 A RetrieveComplexType request MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI that identifies a **ComplexType** property on an **EntityType** instance, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
-If the RetrieveComplexType request was successful, the response MUST have a 200 status code as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The payload of such a response MUST be formatted using XML, JSON, or [Verbose JSON](#Section_4.2.1.6), according to the rules defined in [Complex Type (section 2.2.6.5.1)](#Section_2.2.6.2.3), Complex Value ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 7.2), and [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.2.3), respectively.
+If the RetrieveComplexType request was successful, the response MUST have a 200 status code as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The payload of such a response MUST be formatted using XML, JSON, or [Verbose JSON](#Section_2.2.6.3), according to the rules defined in [Complex Type (section 2.2.6.5.1)](#Section_2.2.6.5.1), Complex Value ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 7.2), and [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.3.4), respectively.
 
 If the RetrieveComplexType request is not successful (for example, an error occurred while processing the request), the response MUST be formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -8987,7 +8987,7 @@ The purpose of the RetrievePrimitiveProperty request is to enable the value of a
 
 A RetrievePrimitiveProperty request MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI that identifies a property of type **EDMSimpleType** on an **EntityType** instance or **ComplexType** instance, as described in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
-If the RetrievePrimitiveProperty request was successful, the response MUST have a 2*xx* status code as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The payload of such a response MUST be formatted using XML, JSON, or [Verbose JSON](#Section_4.2.1.6), as defined in [EDMSimpleType Property (section 2.2.6.5.3)](#Section_2.2.6.3.8), Primitive Value ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.17](http://msdn.microsoft.com/en-us/library/9de5372b-b184-4db3-935c-a2e85075c3ed/)), and [EDMSimpleType Property (section 2.2.6.3.8)](#Section_2.2.6.3.8), respectively.
+If the RetrievePrimitiveProperty request was successful, the response MUST have a 2*xx* status code as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The payload of such a response MUST be formatted using XML, JSON, or [Verbose JSON](#Section_2.2.6.3), as defined in [EDMSimpleType Property (section 2.2.6.5.3)](#Section_2.2.6.5.3), Primitive Value ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.17](http://msdn.microsoft.com/en-us/library/9de5372b-b184-4db3-935c-a2e85075c3ed/)), and [EDMSimpleType Property (section 2.2.6.3.8)](#Section_2.2.6.3.8), respectively.
 
 If the RetrievePrimitiveProperty request is not successful (for example, an error occurred while processing the request) the response MUST be formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -9072,7 +9072,7 @@ The purpose of the RetrieveValue Request is to enable the raw value of an **EDMS
 
 A RetrieveValue Request MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI that identifies the raw value of a property (of type **EDMSimpleType**) on an **EntityType** instance, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
-If the RetrieveValue Request was successful, the response MUST have a 2*xx* status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and the response body MUST be formatted as specified in [EDMSimpleType Property (section 2.2.6.4.1)](#Section_2.2.6.3.8).
+If the RetrieveValue Request was successful, the response MUST have a 2*xx* status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and the response body MUST be formatted as specified in [EDMSimpleType Property (section 2.2.6.4.1)](#Section_2.2.6.4.1).
 
 If the RetrieveValue Request is not successful (for example, an error occurred while processing the request), the response MUST be formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -9137,7 +9137,7 @@ The purpose of the RetrieveCollectionProperty request is to enable the value of 
 
 A RetrieveCollectionProperty Request MUST use the HTTP GET method. Additionally, the URI specified by the client in the HTTP request line MUST be a valid data service URI that identifies a property of type collection, as described in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
-If the RetrieveCollectionProperty request is successful, the response MUST have a 2*xx* status code, as specified in [RFC2616]. The payload of such a response MUST be formatted by using XML as defined in [Collection of EDMSimpleType Values (section 2.2.6.5.3)](#Section_2.2.6.3.8), JSON as defined in Collection of Primitive Values ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 7.3), or Verbose JSON as defined in [Collection of EDMSimpleType Values (section 2.2.6.3.7)](#Section_2.2.6.2.9.2).
+If the RetrieveCollectionProperty request is successful, the response MUST have a 2*xx* status code, as specified in [RFC2616]. The payload of such a response MUST be formatted by using XML as defined in [Collection of EDMSimpleType Values (section 2.2.6.5.3)](#Section_2.2.6.5.3), JSON as defined in Collection of Primitive Values ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 7.3), or Verbose JSON as defined in [Collection of EDMSimpleType Values (section 2.2.6.3.7)](#Section_2.2.6.3.7).
 
 If the RetrieveCollectionProperty request is not successful, the response MUST be formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -9277,7 +9277,7 @@ defining the data service>
 
 The purpose of the RetrieveServiceDocument request is to enable a client to retrieve the Service Document describing the [**collection**](#gt_collection) of [**resources**](#gt_resource) exposed by a [**data service**](#gt_data-service), as described in [Service Document (section 2.2.3.7.1)](#Section_2.2.3.7.1).
 
-AtomPub, as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), describes the retrieval of an [**AtomPub**](#gt_atom-publishing-protocol-atompub) Service Document in an HTTP response payload. This document extends that behavior to allow additional representations of the Service Document to be retrieved by a data service client. A client states the desired response payload format by using the [Accept (section 2.2.5.1)](#Section_1.3) request header. This document defines three such representations of Service Documents: [Service Document (section 2.2.6.2.7)](#Section_2.2.6.3.12) for AtomPub, Service Document ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.16](http://msdn.microsoft.com/en-us/library/8042829a-830f-4bda-9e41-5d24659345ff/)) for JSON, and [Service Document (section 2.2.6.3.12)](#Section_2.2.6.3.12) for Verbose JSON.
+AtomPub, as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), describes the retrieval of an [**AtomPub**](#gt_atom-publishing-protocol-atompub) Service Document in an HTTP response payload. This document extends that behavior to allow additional representations of the Service Document to be retrieved by a data service client. A client states the desired response payload format by using the [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header. This document defines three such representations of Service Documents: [Service Document (section 2.2.6.2.7)](#Section_2.2.6.2.7) for AtomPub, Service Document ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.16](http://msdn.microsoft.com/en-us/library/8042829a-830f-4bda-9e41-5d24659345ff/)) for JSON, and [Service Document (section 2.2.6.3.12)](#Section_2.2.6.3.12) for Verbose JSON.
 
 A RetrieveServiceDocument Request MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid data service URI that identifies the [service root (section 2.2.3.2)](#Section_2.2.3.2).
 
@@ -9358,7 +9358,7 @@ The purpose of the RetrieveLink request is to enable the [**links**](#gt_link) r
 
 A RetrieveLink request MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI that identifies the links from one **EntityType** instance to another or from one **EntityType** instance to all other entities in a specified **EntitySet**, as described in the URI7 grammar rule in [Resource Path: Semantics (section 2.2.3.5)](#Section_2.2.3.5).
 
-If the RetrieveLink request was successful, the response MUST have a 2*xx* status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The response payload MUST contain a representation of the set of links or single link identified by the request URI. A client states the desired response payload format using the [Accept (section 2.2.5.1)](#Section_1.3) request header. This document defines three such formats for links: XML, [**JSON**](#gt_javascript-object-notation-json), and Verbose JSON, as defined in [Links (section 2.2.6.5.5)](#Section_2.2.6.5.5.2), links formatted as a resource reference ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.23](http://msdn.microsoft.com/en-us/library/e2c563a8-6806-42aa-9ca1-196341f64fd0/)), and [Links (section 2.2.6.3.10)](#Section_2.2.6.3.10), respectively.
+If the RetrieveLink request was successful, the response MUST have a 2*xx* status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). The response payload MUST contain a representation of the set of links or single link identified by the request URI. A client states the desired response payload format using the [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header. This document defines three such formats for links: XML, [**JSON**](#gt_javascript-object-notation-json), and Verbose JSON, as defined in [Links (section 2.2.6.5.5)](#Section_2.2.6.5.5), links formatted as a resource reference ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.23](http://msdn.microsoft.com/en-us/library/e2c563a8-6806-42aa-9ca1-196341f64fd0/)), and [Links (section 2.2.6.3.10)](#Section_2.2.6.3.10), respectively.
 
 If the RetrieveLink request is not successful (for example, an error occurred while processing the request), the response MUST be formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -9437,7 +9437,7 @@ The purpose of the RetrieveCount request is to enable the count of a collection 
 
 A RetrieveCount Request MUST use the HTTP GET method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid data service URI that identifies a collection of **EntityType** instances, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
-If the [RetrieveValue Request](#Section_2.2.7.2.5) was successful, the response MUST have a 2*xx* status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and the response body MUST be formatted as specified in EDMSimpleType Property (section [2.2.6.4.1](#Section_2.2.6.3.8)).
+If the [RetrieveValue Request](#Section_2.2.7.2.5) was successful, the response MUST have a 2*xx* status code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and the response body MUST be formatted as specified in EDMSimpleType Property (section [2.2.6.4.1](#Section_2.2.6.4.1)).
 
 If the RetrieveValue Request is not successful (for example, an error occurred while processing the request), the response MUST be formatted according to Error Response (section [2.2.8.1](#Section_2.2.8.1)).
 
@@ -9563,11 +9563,11 @@ retrieveMR-RespBody = <Any valid HTTP response body>
 <a id="Section_2.2.7.3.1"></a>
 ##### 2.2.7.3.1 UpdateEntity Request
 
-An UpdateEntity Request is used by a client to update an existing [**AtomPub**](#gt_atom-publishing-protocol-atompub) Entry Resource, as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), that maps to an EntityType instance in the abstract data model used in this document, as described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1). The base rules and semantics of this request type are defined by AtomPub, as specified in [RFC5023] section 5.4. This section adds constraints to those defined in AtomPub for this request type.
+An UpdateEntity Request is used by a client to update an existing [**AtomPub**](#gt_atom-publishing-protocol-atompub) Entry Resource, as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880), that maps to an EntityType instance in the abstract data model used in this document, as described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1). The base rules and semantics of this request type are defined by AtomPub, as specified in [RFC5023] section 5.4. This section adds constraints to those defined in AtomPub for this request type.
 
 As in [RFC5023] section 5.4.2, requests of this type use the HTTP PUT method, and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line represents an AtomPub entry [**resource**](#gt_resource). Given that an entry resource maps to an **EntityType** instance in an [**Entity Data Model (EDM)**](#gt_entity-data-model-edm), the HTTP request line URI MUST be equal to any valid [**data service**](#gt_data-service) URI that identifies an **EntityType** instance, as described in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3). Additionally, this specification allows UpdateEntity requests to use the MERGE method (as defined in [PATCH/MERGE (section 2.2.4.1)](#Section_2.2.4.1)) or PATCH method (as defined in [[RFC5789]](https://go.microsoft.com/fwlink/?LinkId=233592)) instead of PUT to specify that a merge-based update is to be performed.
 
-[RFC5023] section 5.4.2 states that the request body can be an AtomPub entry resource (that maps to an **EntityType** instance in an EDM) that is represented as an Atom entry document. This document extends this rule to allow additional representations of an entry resource to be used. This document defines three such representations: entity type as an Atom Entry element (section [2.2.6.2.2](#Section_2.2.6.2.2)), entity as a JSON object ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 6), and entity type as a Verbose JSON object (section [2.2.6.3.3](#Section_2.2.6.3.3.1)). A client SHOULD specify the representation used in the request body by including a [Content-Type](#Section_2.2.5.2) header in the request.
+[RFC5023] section 5.4.2 states that the request body can be an AtomPub entry resource (that maps to an **EntityType** instance in an EDM) that is represented as an Atom entry document. This document extends this rule to allow additional representations of an entry resource to be used. This document defines three such representations: entity type as an Atom Entry element (section [2.2.6.2.2](#Section_2.2.6.2.2)), entity as a JSON object ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 6), and entity type as a Verbose JSON object (section [2.2.6.3.3](#Section_2.2.6.3.3)). A client SHOULD specify the representation used in the request body by including a [Content-Type](#Section_2.2.5.2) header in the request.
 
 When the request body is a representation of an Entry Resource (**EntityType** instance in EDM terms), the client can specify if the resource/entity (in addition to being updated) is to be automatically linked to other already existing entities in the data service that are related through [**associations**](#gt_association) such that the opposite association end has a [**cardinality**](#gt_cardinality) of 1 or 0-or-1. Such linking MUST only be supported if the **EntityType** of the to-be-edited [**entity**](#gt_entity) defines a NavigationProperty that identifies a single **EntityType** instance. For example, an existing employee entity might need to be rebounded to an existing manager entity in a human resources management focused data service.
 
@@ -9719,7 +9719,7 @@ The purpose of the UpdateComplexType request is to enable the value of a **Compl
 
 An UpdateComplexType request MUST use the HTTP PUT, PATCH, or MERGE method, as specified in [PATCH/MERGE (section 2.2.4.1)](#Section_2.2.4.1). Additionally, the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI, that identifies a **ComplexType** instance, as specified in [URI Format: Resource Addressing Rule (section 2.2.3)](#Section_2.2.3) .
 
-The payload of the request MAY be formatted using the XML, JSON, or Verbose JSON format, according to the rules defined in [Complex Type (section 2.2.6.5.1)](#Section_2.2.6.2.3), Complex Value ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 7.2), and [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.2.3), respectively. A server accepting a request of this type using the PUT method MUST replace the value of the **ComplexType** addressed via the request URI with the value provided in the payload. A server accepting a request of this type using the MERGE or PATCH method MUST merge the property values of the **ComplexType** addressed via the request URI with the property values that are provided in the payload, as specified in PATCH/MERGE (section 2.2.4.1).
+The payload of the request MAY be formatted using the XML, JSON, or Verbose JSON format, according to the rules defined in [Complex Type (section 2.2.6.5.1)](#Section_2.2.6.5.1), Complex Value ([[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 7.2), and [Complex Type (section 2.2.6.3.4)](#Section_2.2.6.3.4), respectively. A server accepting a request of this type using the PUT method MUST replace the value of the **ComplexType** addressed via the request URI with the value provided in the payload. A server accepting a request of this type using the MERGE or PATCH method MUST merge the property values of the **ComplexType** addressed via the request URI with the property values that are provided in the payload, as specified in PATCH/MERGE (section 2.2.4.1).
 
 If the UpdateComplexType request is successful, the response in OData 1.0 and OData 2.0 MUST have a 204 response code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and have 0 bytes in the response body, unless a Prefer header (section [2.2.5.9](#Section_2.2.5.9)) has been specified to request content. When an OData 1.0 or OData 2.0 request contains a Prefer header value that requests content or when OData 3.0 is used, the response MAY have a 200 response code, as specified in [RFC2616], and a response body that MUST be formatted the same as a response body to an RetrieveComplexType request (section [2.2.7.2.3](#Section_2.2.7.2.3)).
 
@@ -9818,7 +9818,7 @@ The purpose of the UpdatePrimitiveProperty request is to enable the value of an 
 
 An UpdatePrimitiveProperty request MUST use either the HTTP PUT, PATCH, or MERGE (as specified in [PATCH/MERGE (section 2.2.4.1)](#Section_2.2.4.1)) and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3), which identifies a property (of type **EDMSimpleType**) on an **EntityType** instance (or on one of the ComplexType properties of that **EntityType** instance).
 
-The payload of the request MAY be formatted by using XML, JSON, or Verbose JSON, according to the rules defined in [EDMSimpleType Property (section 2.2.6.5.3)](#Section_2.2.6.3.8), Primitive Value ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.17](http://msdn.microsoft.com/en-us/library/9de5372b-b184-4db3-935c-a2e85075c3ed/)), and [EDMSimpleType Property (section 2.2.6.3.8)](#Section_2.2.6.3.8), respectively. A server receiving a request of this type MUST replace the value of the property addressed via the request URI with the property value provided in the payload. The server MUST perform the same behavior whether the request uses the MERGE, PATCH, or PUT method.
+The payload of the request MAY be formatted by using XML, JSON, or Verbose JSON, according to the rules defined in [EDMSimpleType Property (section 2.2.6.5.3)](#Section_2.2.6.5.3), Primitive Value ([MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.17](http://msdn.microsoft.com/en-us/library/9de5372b-b184-4db3-935c-a2e85075c3ed/)), and [EDMSimpleType Property (section 2.2.6.3.8)](#Section_2.2.6.3.8), respectively. A server receiving a request of this type MUST replace the value of the property addressed via the request URI with the property value provided in the payload. The server MUST perform the same behavior whether the request uses the MERGE, PATCH, or PUT method.
 
 If the property addressed is one of the properties which define the **EntityKey** for the addressed [**entity**](#gt_entity), then the request MUST be considered invalid.
 
@@ -9919,7 +9919,7 @@ The purpose of the UpdateCollectionProperty request is to enable the value of a 
 
 UpdateCollectionProperty request MUST use the HTTP PUT method. Additionally, the URI specified by the client in the HTTP request line MUST be a valid data service URI that identifies a collection property instance, as specified in [URI Format: Resource Addressing Rule (section 2.2.3)](#Section_2.2.3). HTTP PATCH and MERGE methods are not valid with the UpdateCollectionProperty request.
 
-The payload of the request MAY be formatted by using XML, JSON, or Verbose JSON format, according to the rules defined in [Collection of Complex Type Instances (section 2.2.6.5.2)](#Section_2.2.6.5.6) and [Collection of EDMSimpleType Values (section 2.2.6.5.4)](#Section_2.2.6.2.9.2) for XML, Collection of Primitive Values (section 7.3) and Collection of Complex Values (section 7.4) in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) for JSON, or [Collection of Complex Type Instances (section 2.2.6.3.5)](#Section_2.2.6.5.6) and [Collection of EDMSimpleType Values (section 2.2.6.3.7)](#Section_2.2.6.2.9.2) for Verbose JSON. A server accepting a request of this type by using the PUT method MUST replace the entire value of the collection type addressed via the request URI with the value provided in the payload.
+The payload of the request MAY be formatted by using XML, JSON, or Verbose JSON format, according to the rules defined in [Collection of Complex Type Instances (section 2.2.6.5.2)](#Section_2.2.6.5.2) and [Collection of EDMSimpleType Values (section 2.2.6.5.4)](#Section_2.2.6.5.4) for XML, Collection of Primitive Values (section 7.3) and Collection of Complex Values (section 7.4) in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) for JSON, or [Collection of Complex Type Instances (section 2.2.6.3.5)](#Section_2.2.6.3.5) and [Collection of EDMSimpleType Values (section 2.2.6.3.7)](#Section_2.2.6.3.7) for Verbose JSON. A server accepting a request of this type by using the PUT method MUST replace the entire value of the collection type addressed via the request URI with the value provided in the payload.
 
 If the UpdateCollectionProperty request is successful, the response in OData 1.0 and OData 2.0 MUST have a 204 response code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), if the response contains no response body, unless a Prefer header (section [2.2.5.9](#Section_2.2.5.9)) has been specified to request content. When an OData 1.0 or OData 2.0 request contains a Prefer header value that requests content or when OData 3.0 is used, the response MAY have a 200 response code, as specified in [RFC2616], and a response body that MUST be formatted the same as the response body to a RetrieveCollectionProperty request (section [2.2.7.2.6](#Section_2.2.7.2.6)).
 
@@ -10010,7 +10010,7 @@ The purpose of the UpdateValue request is to enable the value of an **EDMSimpleT
 
 An UpdateValue request MUST use the HTTP PUT, PATCH, or MERGE method (as specified in [PATCH/MERGE (section 2.2.4.1)](#Section_2.2.4.1)). Additionally, the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid [**data service**](#gt_data-service) URI, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3), that identifies the raw value of a property (of type **EDMSimpleType**) on an **EntityType** instance (or on one of the **ComplexType** properties of that **EntityType** instance).
 
-The payload of the request MUST be formatted according to the rules defined in [EDMSimpleType Property (section 2.2.6.4.1)](#Section_2.2.6.3.8). A server receiving a request of this type MUST replace the value of the property addressed via the request URI with the value provided in the payload. The server MUST perform the same behavior whether the request uses the HTTP MERGE, PATCH, or PUT method.
+The payload of the request MUST be formatted according to the rules defined in [EDMSimpleType Property (section 2.2.6.4.1)](#Section_2.2.6.4.1). A server receiving a request of this type MUST replace the value of the property addressed via the request URI with the value provided in the payload. The server MUST perform the same behavior whether the request uses the HTTP MERGE, PATCH, or PUT method.
 
 If the UpdateValue request is successful, the response in OData 1.0 and OData 2.0 MUST have a 204 response code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and have a 0 byte response body, unless a Prefer header (section [2.2.5.9](#Section_2.2.5.9)) has been specified to request content. When an OData 1.0 or OData 2.0 request contains a Prefer header value that requests content or when OData 3.0 is used, the response MAY have a 200 response code, as specified in [RFC2616], and a response body that includes the updated entity that MUST be formatted the same as a response body to a RetrieveValue request (section [2.2.7.2.5](#Section_2.2.7.2.5)).
 
@@ -10085,7 +10085,7 @@ An UpdateLink request MUST use the HTTP PUT, PATCH, or MERGE method (as specifie
 
 For example, when using the model described in [Appendix A: Sample Entity Data Model and CSDL Document (section 6)](#Section_6), `http://host/service.svc/Orders(1)/$links/Customer` is a valid URI for updating which Customer is associated with Orders(1). However, `http://host/service.svc/Customers('ALFKI')/$links/Orders(1)` is not valid for an UpdateLink request because the navigation property on Customer identifies a collection of Orders.
 
-In this context, the **EntityType** instance identified by the [**resource path**](#gt_resource-path) segment immediately prior to the "$links" segment in the request URI is referred to as the source [**entity**](#gt_entity). Requests of this type MUST contain a request body (formatted as a resource reference according to [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.23](http://msdn.microsoft.com/en-us/library/e2c563a8-6806-42aa-9ca1-196341f64fd0/), formatted according to the "linkVJson" rule in [Links (section 2.2.6.3.10)](#Section_2.2.6.3.10), or formatted according to the XML [**schema**](#gt_schema) for a single link in [Links (section 2.2.6.5.5)](#Section_2.2.6.5.5.2)) that contains a URI that identifies the **EntityType** instance to be linked to from the source entity.
+In this context, the **EntityType** instance identified by the [**resource path**](#gt_resource-path) segment immediately prior to the "$links" segment in the request URI is referred to as the source [**entity**](#gt_entity). Requests of this type MUST contain a request body (formatted as a resource reference according to [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.23](http://msdn.microsoft.com/en-us/library/e2c563a8-6806-42aa-9ca1-196341f64fd0/), formatted according to the "linkVJson" rule in [Links (section 2.2.6.3.10)](#Section_2.2.6.3.10), or formatted according to the XML [**schema**](#gt_schema) for a single link in [Links (section 2.2.6.5.5)](#Section_2.2.6.5.5)) that contains a URI that identifies the **EntityType** instance to be linked to from the source entity.
 
 If the UpdateEntity request is successful, the response in OData 1.0 and OData 2.0 MUST have a 204 response code, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), and have 0 bytes in the response body, unless a Prefer header (section [2.2.5.9](#Section_2.2.5.9)) has been specified to request content. When an OData 1.0 or OData 2.0 request contains a Prefer header value that requests content or when OData 3.0 is used, the response MAY have a 200 response code, as specified in [RFC2616], and a response body that MUST be formatted the same as a response body to an RetrieveLink request (section [2.2.7.2.9](#Section_2.2.7.2.9)).
 
@@ -10255,7 +10255,7 @@ end-object)
 
 ***Applies to the OData 2.0 and OData 3.0 protocols***
 
-In OData 2.0 and OData 3.0, it is possible to map the value of a property on an **EntityType** to another location in the feed. If the **EntityType** instance contained in an [UpdateEntity](#Section_2.2.7.3.1.1), [UpdateComplexType](#Section_2.2.7.3.2), or [UpdatePrimitiveType](#Section_2.2.7.3.3) Request has a property mapping defined on it and the Content-Type is [**AtomPub**](#gt_atom-publishing-protocol-atompub), then the request body MUST be formatted by using the **EntityType** formatting rules defined in [Entity Type (as an Atom Entry Element) with a Customizable Feed Property Mapping (section 2.2.6.2.2.1)](#Section_2.2.6.2.2.1).
+In OData 2.0 and OData 3.0, it is possible to map the value of a property on an **EntityType** to another location in the feed. If the **EntityType** instance contained in an [UpdateEntity](#Section_2.2.7.3.1), [UpdateComplexType](#Section_2.2.7.3.2), or [UpdatePrimitiveType](#Section_2.2.7.3.3) Request has a property mapping defined on it and the Content-Type is [**AtomPub**](#gt_atom-publishing-protocol-atompub), then the request body MUST be formatted by using the **EntityType** formatting rules defined in [Entity Type (as an Atom Entry Element) with a Customizable Feed Property Mapping (section 2.2.6.2.2.1)](#Section_2.2.6.2.2.1).
 
 When sending an Update Request to an **EntityType** instance that has a customizable feed property mapping, the client MAY include the property value in an **m:properties** element as described in [Entity Type (as an Atom Entry Element) (section 2.2.6.2.2)](#Section_2.2.6.2.2). If the property value is included in the **m:properties** element (as described in section 2.2.6.2.2), the data service MUST use that value when updating the **EntityType** instance.
 
@@ -10265,7 +10265,7 @@ When sending an Update Request to an **EntityType** instance that has a customiz
 <a id="Section_2.2.7.4.1"></a>
 ##### 2.2.7.4.1 DeleteEntity Request
 
-The purpose of the DeleteEntity request is to enable an **EntityType** instance to be deleted from a [**data service**](#gt_data-service). The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 9.4 -- Deleting Resources with DELETE. As described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1), [**Entity Data Model**](#gt_entity-data-model-edm) constructs are mapped directly to data model concepts used in AtomPub. For example, **EntityTypes** are AtomPub Entry Resources and **EntitySets** are [**AtomPub collections**](#gt_atompub-collection). This section adds constraints to those defined in AtomPub for this request type.
+The purpose of the DeleteEntity request is to enable an **EntityType** instance to be deleted from a [**data service**](#gt_data-service). The base rules and semantics of this request type are defined by [**AtomPub**](#gt_atom-publishing-protocol-atompub), as specified in [[RFC5023]](https://go.microsoft.com/fwlink/?LinkId=140880) section 9.4 -- Deleting Resources with DELETE. As described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1), [**Entity Data Model**](#gt_entity-data-model-edm) constructs are mapped directly to data model concepts used in AtomPub. For example, **EntityTypes** are AtomPub Entry Resources and **EntitySets** are [**AtomPub collections**](#gt_atompub-collection). This section adds constraints to those defined in AtomPub for this request type.
 
 As in [RFC5023] section 9.4, DeleteEntity requests MUST use the **HTTP DELETE** method, and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line addresses an AtomPub Member Resource. Because an Entry Resource (subtype of Member Resource) maps to an **EntityType** instance in an Entity Data Model, the HTTP request line URI MUST be any valid data service URI which identifies a single **EntityType** instance, as specified in [URI Format: Resource Addressing Rules (section 2.2.3)](#Section_2.2.3).
 
@@ -10715,13 +10715,13 @@ invokeFunction-Resp = invoke-Resp
 
 The request types defined in the preceding subsections provide mechanisms for a client to query and manipulate [**resources**](#gt_resource) exposed by a [**data service**](#gt_data-service) whereby each request type maps to a single HTTP request/response exchange. Such request types integrate deeply with HTTP, as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), allowing a client to leverage the services (for example, caching) provided by the HTTP infrastructure deployed at large.
 
-While the request types noted above address many common data service scenarios, as described in [Protocol Examples (section 4)](#Section_2.2.7.1.1.1), use cases exist where it is beneficial to enable a client of a data service to "batch" up a group of requests and send that Batch to the data service in a single HTTP request. This section defines a Batch request type that reduces the number of roundtrips to a data service for applications that need to make numerous requests and a change set syntax as a way to logically group a set of requests in a single unit within a batch.
+While the request types noted above address many common data service scenarios, as described in [Protocol Examples (section 4)](#Section_4), use cases exist where it is beneficial to enable a client of a data service to "batch" up a group of requests and send that Batch to the data service in a single HTTP request. This section defines a Batch request type that reduces the number of roundtrips to a data service for applications that need to make numerous requests and a change set syntax as a way to logically group a set of requests in a single unit within a batch.
 
 A data service MAY<67> support requests of this type. If a data service does not implement support for a Batch request, it has to return a 4*xx* response code in the response to any Batch request sent to it.
 
 Batch request MUST use the HTTP POST method and the [**URI**](#gt_uniform-resource-identifier-uri) specified by the client in the HTTP request line MUST be a valid data service URI that identifies the batch endpoint of a data service, see URI9 in [Resource Path: Semantics (section 2.2.3.5)](#Section_2.2.3.5).
 
-[**Query operations**](#gt_query-operation) and [**change sets**](#gt_change-set) MAY<68> be intermixed within a Batch request and occur in any order. A query operation MUST consist of a single Retrieve request, as defined in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7), or of an [Invoke Request (section 2.2.7.5)](#Section_2.2.7.5) that uses the HTTP GET method. Change sets MUST consist of one or more of the following request types:
+[**Query operations**](#gt_query-operation) and [**change sets**](#gt_change-set) MAY<68> be intermixed within a Batch request and occur in any order. A query operation MUST consist of a single Retrieve request, as defined in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7.2), or of an [Invoke Request (section 2.2.7.5)](#Section_2.2.7.5) that uses the HTTP GET method. Change sets MUST consist of one or more of the following request types:
 
 - [Insert Request Types (section 2.2.7.1)](#Section_2.2.7.1)
 - [Update Request Types (section 2.2.7.3)](#Section_2.2.7.3)
@@ -10777,7 +10777,7 @@ As described by the "application/http" media type in the preceding grammar, the 
 
 To enable referencing a new [**entity**](#gt_entity) created via an Insert request, as described in [Insert Request Types (section 2.2.7.1)](#Section_2.2.7.1), from a subsequent request within the same [**change set**](#gt_change-set), this document defines a request referencing mechanism.
 
-Each MIME part that represents a request in a change set MUST include a Content-ID MIME header as an HTTP header of the MIME part request. If a MIME part defines an [InsertEntity request](#Section_2.2.7.1.1.1) or invokes an action that returns an entity, then the entity, as defined by the InsertEntity request or action invocation, MAY be referenced by subsequent requests in the change set by using the "$<Content-ID value of previous request>" token as the root of the [resource path](#Section_2.2.3.3) that is used in a subsequent request within the change set. When used in this way, the token acts as an [**alias**](#gt_alias) for the [**resource path**](#gt_resource-path) that identifies the new entity. Requests in different change sets cannot reference one another, even if they are in the same batch.
+Each MIME part that represents a request in a change set MUST include a Content-ID MIME header as an HTTP header of the MIME part request. If a MIME part defines an [InsertEntity request](#Section_2.2.7.1.1) or invokes an action that returns an entity, then the entity, as defined by the InsertEntity request or action invocation, MAY be referenced by subsequent requests in the change set by using the "$<Content-ID value of previous request>" token as the root of the [resource path](#Section_2.2.3.3) that is used in a subsequent request within the change set. When used in this way, the token acts as an [**alias**](#gt_alias) for the [**resource path**](#gt_resource-path) that identifies the new entity. Requests in different change sets cannot reference one another, even if they are in the same batch.
 
 <a id="Section_2.2.7.6.2"></a>
 ##### 2.2.7.6.2 Query Operation Syntax
@@ -10786,7 +10786,7 @@ Each [**query operation**](#gt_query-operation) in a [Batch Request](#Section_2.
 
 A MIME part representing a query operation in a Batch request MUST include Content-Type and Content-Transfer-Encoding MIME headers, as described in the grammar in the Required Batch Request MIME Part Headers listing in [Change Set Syntax (section 2.2.7.6.1)](#Section_2.2.7.6.1).
 
-As described by the "application/http" media type, specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), in the grammar referenced, the body of a MIME part representing a query operation MUST be formatted as an HTTP request just as if it was a standalone HTTP request (not part of a Batch request) and follow the rules defined in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7). For restrictions on the HTTP constructs that can be used in batched HTTP requests, see [HTTP Request Restrictions (section 2.2.7.6.3)](#Section_2.2.7.6.3).
+As described by the "application/http" media type, specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372), in the grammar referenced, the body of a MIME part representing a query operation MUST be formatted as an HTTP request just as if it was a standalone HTTP request (not part of a Batch request) and follow the rules defined in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7.2). For restrictions on the HTTP constructs that can be used in batched HTTP requests, see [HTTP Request Restrictions (section 2.2.7.6.3)](#Section_2.2.7.6.3).
 
 <a id="Section_2.2.7.6.3"></a>
 ##### 2.2.7.6.3 HTTP Request Restrictions
@@ -10911,9 +10911,9 @@ This section shows an example Batch request that contains the following operatio
 
 - A [**query operation**](#gt_query-operation)
 - A [**change set**](#gt_change-set) that contains the following requests:
-- [InsertEntity Request](#Section_2.2.7.1.1.1) (with Content-ID = 1)
+- [InsertEntity Request](#Section_2.2.7.1.1) (with Content-ID = 1)
 - Insert Entity (references request with Content-ID = 1)
-- [UpdateEntity Request](#Section_2.2.7.3.1.1)
+- [UpdateEntity Request](#Section_2.2.7.3.1)
 - A second query operation
 **Legend:**
 
@@ -11312,7 +11312,7 @@ An in-stream error occurs when a data service that is processing a request detec
 
 In the context of this document, "top-level" errors SHOULD be used when the data service that is processing a request detects that an error has occurred before the status line or any response headers have been sent to the client. This document defines three formats for top-level error messages: XML, JSON, and Verbose JSON, as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879).
 
-[XML Error Response (section 2.2.8.1.1)](#Section_2.2.8.1) defines the rules for a top-level error in a response body that is formatted by using XML. Servers MUST use this format when sending a top-level error response to a request that includes an [Accept (section 2.2.5.1)](#Section_1.3) request header with the values "application/xml" or "application/atom+xml", or to a request that does not include an Accept (section 2.2.5.1) request header. When formatting error responses by using XML, servers SHOULD include a [Content-Type](#Section_2.2.5.2) response header with the value "application/xml".
+[XML Error Response (section 2.2.8.1.1)](#Section_2.2.8.1.1) defines the rules for a top-level error in a response body that is formatted by using XML. Servers MUST use this format when sending a top-level error response to a request that includes an [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header with the values "application/xml" or "application/atom+xml", or to a request that does not include an Accept (section 2.2.5.1) request header. When formatting error responses by using XML, servers SHOULD include a [Content-Type](#Section_2.2.5.2) response header with the value "application/xml".
 
 For details about formatting an error by using the preferred OData3.0 JSON format, see [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.28](http://msdn.microsoft.com/en-us/library/77887aa9-54bc-46ab-9196-0234ee6cda5d/).
 
@@ -11414,9 +11414,9 @@ minOccurs="0" maxOccurs="1"/>
 <a id="Section_2.2.8.1.2"></a>
 ##### 2.2.8.1.2 Verbose JSON Error Response
 
-This section defines the structure of an error message represented in Verbose [**JSON**](#gt_javascript-object-notation-json), as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879), that MUST be used in response payloads representing top-level errors, as specified in [Error Response (section 2.2.8.1)](#Section_2.2.8.1). For examples of errors that are represented in the preferred OData 3.0 JSON format, see [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.28](http://msdn.microsoft.com/en-us/library/77887aa9-54bc-46ab-9196-0234ee6cda5d/). For examples of errors that are defined in XML format, see [XML Error Response (section 2.2.8.1.1)](#Section_2.2.8.1).
+This section defines the structure of an error message represented in Verbose [**JSON**](#gt_javascript-object-notation-json), as specified in [[RFC4627]](https://go.microsoft.com/fwlink/?LinkId=140879), that MUST be used in response payloads representing top-level errors, as specified in [Error Response (section 2.2.8.1)](#Section_2.2.8.1). For examples of errors that are represented in the preferred OData 3.0 JSON format, see [MS-ODATAJSON](../MS-ODATAJSON/MS-ODATAJSON.md) section [2.1.28](http://msdn.microsoft.com/en-us/library/77887aa9-54bc-46ab-9196-0234ee6cda5d/). For examples of errors that are defined in XML format, see [XML Error Response (section 2.2.8.1.1)](#Section_2.2.8.1.1).
 
-The syntax of a top-level error using Verbose JSON ([application/json;odata=verbose](#Section_2.2.5.1.2)) is shown in the following ABNF Grammar for Top-level Error Payloads Formatted Using Verbose JSON listing.
+The syntax of a top-level error using Verbose JSON ([application/json;odata=verbose](#Section_2.2.5.1.3)) is shown in the following ABNF Grammar for Top-level Error Payloads Formatted Using Verbose JSON listing.
 
 stdErrorVJson-RespBody = begin-object
 
@@ -11495,7 +11495,7 @@ string = ; see [RFC4627] section 2.5
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The abstract data model used by [**data service**](#gt_data-service) clients is described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1).
+The abstract data model used by [**data service**](#gt_data-service) clients is described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1).
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -11519,7 +11519,7 @@ Requests sent by clients MUST NOT specify any of the HTTP headers or tokens defi
 
 In order to make use of the versioning scheme defined in [Versioning and Capability Negotiation (section 1.7)](#Section_1.7), a client SHOULD specify the [DataServiceVersion (section 2.2.5.3)](#Section_2.2.5.3) and [MaxDataServiceVersion (section 2.2.5.7)](#Section_2.2.5.7) headers in all requests.
 
-For all request types in which the response can include a response body, the client SHOULD specify the [Accept (section 2.2.5.1)](#Section_1.3) header or [Format System Query Option ($format) (section 2.2.3.6.1.5)](#Section_2.2.3.6.1.5) to control the content type of the response. If no Accept (section 2.2.5.1) header or $format query string option is specified, the [**data service**](#gt_data-service) SHOULD return an [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1)-based response. If an application/atom+xml (section 2.2.5.1.1) response, as specified in [AtomPub Format (section 2.2.6.2)](#Section_2.2.6.2), is not defined for the target resource, then the service SHOULD use application/xml as the response format (see [XML Format (section 2.2.6.5)](#Section_2.2.6.5)).
+For all request types in which the response can include a response body, the client SHOULD specify the [Accept (section 2.2.5.1)](#Section_2.2.5.1) header or [Format System Query Option ($format) (section 2.2.3.6.1.5)](#Section_2.2.3.6.1.5) to control the content type of the response. If no Accept (section 2.2.5.1) header or $format query string option is specified, the [**data service**](#gt_data-service) SHOULD return an [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1)-based response. If an application/atom+xml (section 2.2.5.1.1) response, as specified in [AtomPub Format (section 2.2.6.2)](#Section_2.2.6.2), is not defined for the target resource, then the service SHOULD use application/xml as the response format (see [XML Format (section 2.2.6.5)](#Section_2.2.6.5)).
 
 After sending a request, the client MUST wait for another higher-layer triggered event or for the response to the request to be received.
 
@@ -11533,9 +11533,9 @@ The higher layer MUST provide the [**URI**](#gt_uniform-resource-identifier-uri)
 <a id="Section_3.1.4.2.1"></a>
 ##### 3.1.4.2.1 Sending an InsertEntity Request
 
-The [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1) MUST adhere to the syntax specified in InsertEntity Request (section 2.2.7.1.1).
+The [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1) MUST adhere to the syntax specified in InsertEntity Request (section 2.2.7.1.1).
 
-The client SHOULD specify the [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header in the request, and the media type specified in the header value MUST be [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.2).
+The client SHOULD specify the [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header in the request, and the media type specified in the header value MUST be [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.3).
 
 If the higher layer requests to [**bind**](#gt_bind) the new [**entity**](#gt_entity) specified in the request body to one or more existing entities, the client MUST indicate this by specifying values for the NavigationProperties, which represent the [**association**](#gt_association) between the new and existing entity, as specified in InsertEntity Request (section 2.2.7.1.1).
 
@@ -11550,14 +11550,14 @@ Rules for processing the response to an InsertEntity are specified in [Responses
 
 The InsertLink request MUST adhere to the syntax specified in [InsertLink Request (section 2.2.7.1.2)](#Section_2.2.7.1.2).
 
-The client SHOULD specify the [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header in the request and the media type specified in the header value MUST be [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.2).
+The client SHOULD specify the [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header in the request and the media type specified in the header value MUST be [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.3).
 
 Rules for processing the response to an InsertLink Request (section 2.2.7.1.2) are specified in [Common Rules for Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1).
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Request to Retrieve Resources
 
-When a higher layer needs to retrieve [**resources**](#gt_resource) from a [**data service**](#gt_data-service), it MUST cause the client to send the appropriate [Retrieve Request Type (section 2.2.7.2)](#Section_2.2.7), as specified in the remainder of this section.
+When a higher layer needs to retrieve [**resources**](#gt_resource) from a [**data service**](#gt_data-service), it MUST cause the client to send the appropriate [Retrieve Request Type (section 2.2.7.2)](#Section_2.2.7.2), as specified in the remainder of this section.
 
 The higher layer MUST provide the [**URI**](#gt_uniform-resource-identifier-uri), which the higher layer obtained from a prior data service response or other means that will be specified in all requests sent by the client. As defined by the Retrieve Request Types (section 2.2.7.2), the URI MUST identify the data service resources to be retrieved. Such a URI MAY include [Query Options (section 2.2.3.6)](#Section_2.2.3.6) which further define the resources to be retrieved.
 
@@ -11566,11 +11566,11 @@ The higher layer MUST provide the [**URI**](#gt_uniform-resource-identifier-uri)
 
 This section defines all the rules to which clients MUST adhere when sending Retrieve requests. Therefore, no additional rules for specific Retrieve request types are defined in this document.
 
-Retrieve requests MUST adhere to the syntax rules that are specified in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7).
+Retrieve requests MUST adhere to the syntax rules that are specified in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7.2).
 
-As noted in [Common Rules for all Requests (section 3.1.4.1)](#Section_3.1.4.1), the client SHOULD specify the [Accept (section 2.2.5.1)](#Section_1.3) header or the [Format system query option ($format) (section 2.2.3.6.1.5)](#Section_2.2.3.6.1.5) to specify its preference regarding the content type used in the response.
+As noted in [Common Rules for all Requests (section 3.1.4.1)](#Section_3.1.4.1), the client SHOULD specify the [Accept (section 2.2.5.1)](#Section_2.2.5.1) header or the [Format system query option ($format) (section 2.2.3.6.1.5)](#Section_2.2.3.6.1.5) to specify its preference regarding the content type used in the response.
 
-If the higher layer causes the client to send a [RetrieveEntitySet request](#Section_2.2.7.2.1) or RetrieveEntity request, the media type(s) specified by the client in the Accept (section 2.2.5.1) header or the Format system query option (section 2.2.3.6.1.5) SHOULD include [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), and/or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.2). If the request type is [RetrieveComplexType](#Section_2.2.7.2.3), RetrievePrimitiveProperty, or RetrieveLink, the media type(s) specified in the Accept (section 2.2.5.1) header or the $format query string option SHOULD include application/xml, application/json (section 2.2.5.1.2), and/or application/json;odata=verbose (section 2.2.5.1.3). If the request is a RetrieveValue or RetrieveMediaResource, the required media type(s) are data dependent and are not defined by this document. If the request is a RetrieveServiceDocument request, the required media types SHOULD include application/xml and application/atomsvc+xml, application/json (section 2.2.5.1.2), and/or application/json;odata=verbose (section 2.2.5.1.3). Finally, if the request is a RetrieveCount request, the media type specified in the Accept (section 2.2.5.1) header or the $format query string option MUST be text/plain.
+If the higher layer causes the client to send a [RetrieveEntitySet request](#Section_2.2.7.2.1) or RetrieveEntity request, the media type(s) specified by the client in the Accept (section 2.2.5.1) header or the Format system query option (section 2.2.3.6.1.5) SHOULD include [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), and/or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.3). If the request type is [RetrieveComplexType](#Section_2.2.7.2.3), RetrievePrimitiveProperty, or RetrieveLink, the media type(s) specified in the Accept (section 2.2.5.1) header or the $format query string option SHOULD include application/xml, application/json (section 2.2.5.1.2), and/or application/json;odata=verbose (section 2.2.5.1.3). If the request is a RetrieveValue or RetrieveMediaResource, the required media type(s) are data dependent and are not defined by this document. If the request is a RetrieveServiceDocument request, the required media types SHOULD include application/xml and application/atomsvc+xml, application/json (section 2.2.5.1.2), and/or application/json;odata=verbose (section 2.2.5.1.3). Finally, if the request is a RetrieveCount request, the media type specified in the Accept (section 2.2.5.1) header or the $format query string option MUST be text/plain.
 
 If the retrieve request [**URI**](#gt_uniform-resource-identifier-uri) (provided by the higher layer) identifies an [**entity**](#gt_entity), ComplexType, primitive property, or property value, and the associated EntityType defines a concurrency token, the client MAY include an [If-None-Match](#Section_2.2.5.6) in the request. Even if the request URI includes a $expand query option, the concurrency token provided as the value of the If-None-Match header MUST be a token associated with the **EntityType** of the entity identified by the request URI. [RetrieveLink requests](#Section_2.2.7.2.9) MUST NOT include an If-None-Match or [If-Match](#Section_2.2.5.5) header.
 
@@ -11592,7 +11592,7 @@ This section defines all the rules to which clients MUST adhere when sending Upd
 
 Update requests MUST adhere to the syntax rules specified in [Update Request Types (section 2.2.7.3)](#Section_2.2.7.3).
 
-The client SHOULD specify the [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header in the request. If the higher layer issues an UpdateEntity request, the media type specified by the client in the Content-Type header MUST be [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.2). If the request type is UpdateComplexType or UpdatePrimitiveProperty, the media type specified MUST be application/xml or application/json;odata=verbose (section 2.2.5.1.3). Finally, if the request is an UpdateValue or UpdateMediaResource request, a required media type is data dependent and not defined by this document.
+The client SHOULD specify the [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header in the request. If the higher layer issues an UpdateEntity request, the media type specified by the client in the Content-Type header MUST be [application/atom+xml (section 2.2.5.1.1)](#Section_2.2.5.1.1), [application/json (section 2.2.5.1.2)](#Section_2.2.5.1.2), or [application/json;odata=verbose (section 2.2.5.1.3)](#Section_2.2.5.1.3). If the request type is UpdateComplexType or UpdatePrimitiveProperty, the media type specified MUST be application/xml or application/json;odata=verbose (section 2.2.5.1.3). Finally, if the request is an UpdateValue or UpdateMediaResource request, a required media type is data dependent and not defined by this document.
 
 If the Update request [**URI**](#gt_uniform-resource-identifier-uri) (provided by the higher layer) identifies an entity, ComplexType instance, primitive property, or property value, and the associated EntityType defines a concurrency token, the client SHOULD include an [If-Match (section 2.2.5.5)](#Section_2.2.5.5) header in the request. The concurrency token provided as the value of the header MUST be a token that is associated with the EntityType of the [**entity**](#gt_entity) identified by the request URI. UpdateLink requests MUST NOT include an If-Match (section 2.2.5.5) header.
 
@@ -11671,7 +11671,7 @@ Request headers MAY be provided with Invoke Action request types. However, this 
 
 If the data service identified by the request URI supports tunneled requests and the action requires no parameter to be passed in the POST body, then an Invoke Action Request (section 2.2.7.5.1) MAY be sent as a tunneled request (section [2.2.7.7](#Section_2.2.7.7)).
 
-Rules for processing the response to an Invoke Action request are specified in [Common Rules for Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1) and [Executing a Received Invoke Action Request (section 3.2.5.9)](#Section_2.2.7.5.1).
+Rules for processing the response to an Invoke Action request are specified in [Common Rules for Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1) and [Executing a Received Invoke Action Request (section 3.2.5.9)](#Section_3.2.5.9).
 
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 Request to Invoke a Function
@@ -11702,7 +11702,7 @@ If the HTTP status code indicates that the request completed in error, the clien
 
 If the HTTP status code indicates that the request succeeded, the client MUST validate and interpret the response body (if one is present) by using the syntax rules defined in the appropriate subsection(s) of [Common Payload Syntax (section 2.2.6)](#Section_2.2.6).
 
-If a [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header is present in the response and its value is not one of the valid values for an [Accept (section 2.2.5.1)](#Section_1.3) request header on the associated request type, then the client SHOULD report an error to the higher layer.
+If a [Content-Type (section 2.2.5.2)](#Section_2.2.5.2) header is present in the response and its value is not one of the valid values for an [Accept (section 2.2.5.1)](#Section_2.2.5.1) request header on the associated request type, then the client SHOULD report an error to the higher layer.
 
 If a [DataServiceVersion (section 2.2.5.3)](#Section_2.2.5.3) header is included in the response, the client MUST validate that the version number in the header is lower than or equal to the highest version of this document that it understands. If it is lower than or equal to the highest version of this document that the client understands, the client continues to process the request. If the version number in the header is higher than the highest version of this document that the client can interpret, the client MUST report an error to the higher layer.
 
@@ -11735,7 +11735,7 @@ If the TCP connection to the server is disconnected after the client has sent a 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-The abstract data model used by [**data services**](#gt_data-service) is described in [Abstract Data Model (section 2.2.1)](#Section_3.2.1).
+The abstract data model used by [**data services**](#gt_data-service) is described in [Abstract Data Model (section 2.2.1)](#Section_2.2.1).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -11805,13 +11805,13 @@ The format of the [**URI**](#gt_uniform-resource-identifier-uri) in a request do
 
 The directives defined in this section apply when executing a received request of any of the Insert request types defined in [Insert Request Types (section 2.2.7.1)](#Section_2.2.7.1).
 
-The server MUST validate the HTTP request [**URI**](#gt_uniform-resource-identifier-uri) identified as an EntitySet, [**collection**](#gt_collection) of entities, or a collection of [**Links**](#gt_link), as defined by the [**data service's**](#gt_data-service) data model in [Abstract Data Model (section 2.2.1)](#Section_3.2.1). If this validation fails, a 4xx error response code MUST be returned, as specified in [Common Response Codes (section 3.2.8)](#Section_3.2.8). If the validation succeeds, the server MUST insert the new [**entity**](#gt_entity), Media Resource, or Link as appropriate, based on the description in Insert Request Types (section 2.2.7.1).
+The server MUST validate the HTTP request [**URI**](#gt_uniform-resource-identifier-uri) identified as an EntitySet, [**collection**](#gt_collection) of entities, or a collection of [**Links**](#gt_link), as defined by the [**data service's**](#gt_data-service) data model in [Abstract Data Model (section 2.2.1)](#Section_2.2.1). If this validation fails, a 4xx error response code MUST be returned, as specified in [Common Response Codes (section 3.2.8)](#Section_3.2.8). If the validation succeeds, the server MUST insert the new [**entity**](#gt_entity), Media Resource, or Link as appropriate, based on the description in Insert Request Types (section 2.2.7.1).
 
 If an Insert request is received with a null value for a data service [**resource**](#gt_resource) and the type of that resource is not nullable (as defined by the [**Entity Data Model**](#gt_entity-data-model-edm) associated with the data service) then the server MUST return a 4*xx* response code, as specified in Common Response Codes (section 3.2.8).
 
 If an Insert request is received with an empty value for a data service resource and the type of that resource does not define an empty state, the server MUST return a 4xx response code, as specified in Common Response Codes (section 3.2.8).<71>
 
-Any [inlined content (section 2.2.6.2.6.1)](#Section_2.2.6.2.6.1) in a request payload MUST be treated as a "deep insert" as specified in [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1), inlined content (section 2.2.6.2.6.1), and [Deferred Content (section 2.2.6.3.9)](#Section_2.2.6.3.9).
+Any [inlined content (section 2.2.6.2.6.1)](#Section_2.2.6.2.6.1) in a request payload MUST be treated as a "deep insert" as specified in [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1), inlined content (section 2.2.6.2.6.1), and [Deferred Content (section 2.2.6.3.9)](#Section_2.2.6.3.9).
 
 If the request URI does not match associated URIs anywhere in the request payload where URIs are expected, then the request URI takes precedence and the payload SHOULD be treated as if the URIs in it matched the value of the request URI.
 
@@ -11820,7 +11820,7 @@ A data service MAY alter or ignore any of the values provided in the request pay
 <a id="Section_3.2.5.3.1"></a>
 ##### 3.2.5.3.1 Executing a Received InsertEntity Request
 
-In addition to the directives specified in sections [Common Rules: Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1), [Common Rules for Executing Received Insert, Update, or Delete Data Service Requests (section 3.2.5.2)](#Section_3.2.5.2), and [Executing a Received Insert Request (section 3.2.5.3)](#Section_3.2.5.3), the directives defined in this section apply when executing an [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1.1).
+In addition to the directives specified in sections [Common Rules: Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1), [Common Rules for Executing Received Insert, Update, or Delete Data Service Requests (section 3.2.5.2)](#Section_3.2.5.2), and [Executing a Received Insert Request (section 3.2.5.3)](#Section_3.2.5.3), the directives defined in this section apply when executing an [InsertEntity Request (section 2.2.7.1.1)](#Section_2.2.7.1.1).
 
 Any data in the request payload not required to complete the insert operation SHOULD be ignored by a [**data service**](#gt_data-service). If a data service ignores a particular payload construct, the client MAY<72> omit the construct from the request payload.
 
@@ -11851,7 +11851,7 @@ In OData 3.0, the response MAY have a 204 response code, as specified in [[RFC26
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Executing a Received Retrieve Request
 
-The directives defined in this section apply when executing a received request of any of the Retrieve request types defined in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7).
+The directives defined in this section apply when executing a received request of any of the Retrieve request types defined in [Retrieve Request Types (section 2.2.7.2)](#Section_2.2.7.2).
 
 If the request includes an [If-None-Match (section 2.2.5.6)](#Section_2.2.5.6), the header MUST be parsed and processed, as described in If-None-Match (section 2.2.5.6). If the value of the header is "*" and the target EntityType defines a concurrency token, then a 304 (Not Modified) response MUST be returned. When retrieving a Media Resource, the target **EntityType** in the prior sentence is the **EntityType** of the entity, which is the Media Link Entry for the Media Resource being retrieved.
 
@@ -11859,7 +11859,7 @@ If the request is a RetrievePrimitiveProperty (section [2.2.7.2.4](#Section_2.2.
 
 If the request includes an InlineCount system query option (section [2.2.3.6.1.10](#Section_2.2.3.6.1.10)), the response SHOULD include a [DataServiceVersion (section 2.2.5.3)](#Section_2.2.5.3) response header that indicates that the response is using either the OData 2.0 or OData 3.0 protocol.
 
-In addition to validating the request headers, the server MUST validate that the HTTP request [**URI**](#gt_uniform-resource-identifier-uri) and payload adhere to the syntax for Retrieve Request Types (section 2.2.7.2). The server validates the request based on its knowledge of the [**Entity Data Model**](#gt_entity-data-model-edm) associated with the service. For example, the server validates each request URI path segment against the **EntityTypes**, EntitySets, and so on, in the associated data model to ensure that each identifies a valid construct defined in the [**data service's**](#gt_data-service) [Abstract Data Model (section 2.2.1)](#Section_3.2.1) and that the request URI as a whole identifies a valid [**resource**](#gt_resource).
+In addition to validating the request headers, the server MUST validate that the HTTP request [**URI**](#gt_uniform-resource-identifier-uri) and payload adhere to the syntax for Retrieve Request Types (section 2.2.7.2). The server validates the request based on its knowledge of the [**Entity Data Model**](#gt_entity-data-model-edm) associated with the service. For example, the server validates each request URI path segment against the **EntityTypes**, EntitySets, and so on, in the associated data model to ensure that each identifies a valid construct defined in the [**data service's**](#gt_data-service) [Abstract Data Model (section 2.2.1)](#Section_2.2.1) and that the request URI as a whole identifies a valid [**resource**](#gt_resource).
 
 If this validation fails, the server MUST respond with a valid HTTP [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) error status code, as specified in [Common Response Codes (section 3.2.8)](#Section_3.2.8), and an error message that is formatted according to [Error Response (section 2.2.8.1)](#Section_2.2.8.1).
 
@@ -11901,7 +11901,7 @@ RetrieveCount requests are supported in the OData 2.0 and OData 3.0 protocols. A
 
 The directives defined in this section apply when executing a received request of any of the Update request types that are defined in [Update Request Types (section 2.2.7.3)](#Section_2.2.7.3).
 
-The server MUST validate the HTTP request [**URI**](#gt_uniform-resource-identifier-uri) identified as an existing EntityType, ComplexType instance, [**primitive property**](#gt_primitive-property), Media Resource, or [**Link**](#gt_link), as defined by the [**data service's**](#gt_data-service) data model in [Abstract Data Model (section 2.2.1)](#Section_3.2.1). If this validation fails, a 4*xx* error response code MUST be returned, as specified in [Common Response Codes (section 3.2.8)](#Section_3.2.8). If the validation succeeds, the server MUST update the value of the [**resource**](#gt_resource) identified by the request URI with the values specified in the request's payload.
+The server MUST validate the HTTP request [**URI**](#gt_uniform-resource-identifier-uri) identified as an existing EntityType, ComplexType instance, [**primitive property**](#gt_primitive-property), Media Resource, or [**Link**](#gt_link), as defined by the [**data service's**](#gt_data-service) data model in [Abstract Data Model (section 2.2.1)](#Section_2.2.1). If this validation fails, a 4*xx* error response code MUST be returned, as specified in [Common Response Codes (section 3.2.8)](#Section_3.2.8). If the validation succeeds, the server MUST update the value of the [**resource**](#gt_resource) identified by the request URI with the values specified in the request's payload.
 
 If the Update request used the **HTTP PUT** method, the request MUST be processed by first setting the resource identified in the request URI to its default value(s) and then updating the default value(s) with those provided in the request payload.
 
@@ -11928,7 +11928,7 @@ In OData 3.0, the response MAY have a 200 response code, as specified in [[RFC26
 <a id="Section_3.2.5.5.1"></a>
 ##### 3.2.5.5.1 Executing a Received UpdateEntity Request
 
-In addition to the directives specified in [Common Rules: Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1), [Common Rules for Executing Received Insert, Update, or Delete Data Service Requests (section 3.2.5.2)](#Section_3.2.5.2), and [Executing a Received Update Request (section 3.2.5.5)](#Section_3.2.5.5), the directives defined in this section apply when executing any received request of the UpdateEntity request type [UpdateEntity Request (section 2.2.7.3.1)](#Section_2.2.7.3.1.1).
+In addition to the directives specified in [Common Rules: Receiving Responses from Data Service Requests (section 3.1.5.1)](#Section_3.1.5.1), [Common Rules for Executing Received Insert, Update, or Delete Data Service Requests (section 3.2.5.2)](#Section_3.2.5.2), and [Executing a Received Update Request (section 3.2.5.5)](#Section_3.2.5.5), the directives defined in this section apply when executing any received request of the UpdateEntity request type [UpdateEntity Request (section 2.2.7.3.1)](#Section_2.2.7.3.1).
 
 If the request payload includes (re)binding information, the server MUST rebind the **EntityType** instance being updated to the existing entities specified in the request payload. A rebind request can be included in the request payload for each **NavigationProperty** defined on the associated **EntityType**.
 
@@ -11967,7 +11967,7 @@ The directives defined in this section apply when executing a received Batch req
 
 The server MUST validate the HTTP request using the "multipart/mixed" content type, and the request MUST conform to the syntax for Batch requests defined in Batch Request (section 2.2.7.6). If this validation fails, a 4*xx* error response code MUST be returned, as specified in [Common Response Codes (section 3.2.8)](#Section_3.2.8). If the validation succeeds, the server MUST parse the batch request into a set of individual operations and perform each operation specified in the batch according to the semantics outlined in Batch Request (section 2.2.7.6).
 
-Each MIME part within the Batch request using the application/http content type has to be processed according to the "executing rules" for the request type defined in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.1.5).
+Each MIME part within the Batch request using the application/http content type has to be processed according to the "executing rules" for the request type defined in [Message Processing Events and Sequencing Rules (section 3.2.5)](#Section_3.2.5).
 
 If the headers of a Batch request are received successfully, a [**data service**](#gt_data-service) MUST respond with a 202 (Accepted) response code allowing the service to signal that part of the request is received, but that processing of the request has not yet occurred. The response to a Batch request MUST adhere to the syntax and rules defined in [Batch Responses (section 2.2.7.6.6)](#Section_2.2.7.6.6).
 
@@ -13082,7 +13082,7 @@ m:etag="######" />
 <a id="Section_4.2.1.8"></a>
 #### 4.2.1.8 Retrieve a Collection of Entities with Named Resource Streams by Using the Verbose JSON Format
 
-The following example illustrates the exchange of messages that is required for a client to retrieve a collection of Photo entities that each contain two named resource streams (Thumbnail and PrintReady) by using the [Verbose JSON Format](#Section_4.2.1.6). This example is supported only in the OData 3.0 protocol.
+The following example illustrates the exchange of messages that is required for a client to retrieve a collection of Photo entities that each contain two named resource streams (Thumbnail and PrintReady) by using the [Verbose JSON Format](#Section_2.2.6.3). This example is supported only in the OData 3.0 protocol.
 
 **Request:**
 
@@ -13397,7 +13397,7 @@ scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
 <a id="Section_4.2.3"></a>
 ### 4.2.3 Retrieve a Single Entity by Using the Verbose JSON Format
 
-The following example illustrates the exchange of messages that is required for a client to retrieve a Customer [**entity**](#gt_entity) with an EntityKey value that is equal to "ALFKI" by using the [Verbose JSON](#Section_4.2.1.6) format.
+The following example illustrates the exchange of messages that is required for a client to retrieve a Customer [**entity**](#gt_entity) with an EntityKey value that is equal to "ALFKI" by using the [Verbose JSON](#Section_2.2.6.3) format.
 
 **Request:**
 
@@ -13725,7 +13725,7 @@ href="Orders(2)/SampleModel.Order/$links/OrderLines" />
 <a id="Section_4.2.5"></a>
 ### 4.2.5 Retrieve a Single Entity and Its Directly Related Entities by Using the Verbose JSON Format
 
-The following example illustrates the exchange of messages that is required for a client to retrieve a Customer [**entity**](#gt_entity) (with EntityKey value equal to "ALFKI") and its associated Order **EntityType** instances. This example uses the [Verbose JSON Format](#Section_4.2.1.6) for all messages.
+The following example illustrates the exchange of messages that is required for a client to retrieve a Customer [**entity**](#gt_entity) (with EntityKey value equal to "ALFKI") and its associated Order **EntityType** instances. This example uses the [Verbose JSON Format](#Section_2.2.6.3) for all messages.
 
 **Request:**
 
@@ -14704,7 +14704,7 @@ href="Customers('ALFKI')/SampleModel.Customer/$links/Orders" />
 <a id="Section_4.3.2"></a>
 ### 4.3.2 Replace-Based Update by Using the Verbose JSON Format
 
-The following example illustrates the exchange of messages that is required for a client to update an existing [**entity**](#gt_entity) in a [**data service**](#gt_data-service) by using the [Verbose JSON format](#Section_4.2.1.6) and replace-based update semantics.
+The following example illustrates the exchange of messages that is required for a client to update an existing [**entity**](#gt_entity) in a [**data service**](#gt_data-service) by using the [Verbose JSON format](#Section_2.2.6.3) and replace-based update semantics.
 
 **HTTP Request:**
 
@@ -14928,7 +14928,7 @@ href="Customers('ALFKI')/SampleModel.Customer/$links//Orders" />
 <a id="Section_4.3.4"></a>
 ### 4.3.4 Merge-Based Update by Using the Verbose JSON Format
 
-The following example illustrates the exchange of messages that is required for a client to update an existing [**entity**](#gt_entity) in a [**data service**](#gt_data-service) by using the [Verbose JSON format](#Section_4.2.1.6) and merge-based update semantics. The PATCH verb is supported only in the OData 3.0 protocol.
+The following example illustrates the exchange of messages that is required for a client to update an existing [**entity**](#gt_entity) in a [**data service**](#gt_data-service) by using the [Verbose JSON format](#Section_2.2.6.3) and merge-based update semantics. The PATCH verb is supported only in the OData 3.0 protocol.
 
 **HTTP Request**
 
@@ -15067,7 +15067,7 @@ DataServiceVersion: 1.0
 <a id="Section_4.4.2"></a>
 ### 4.4.2 Update a Relationship by Using the Verbose JSON Format
 
-The following example illustrates the exchange of messages required for a client to update the [**association**](#gt_association) between the Order [**entity**](#gt_entity) with EntityKey value 1 and its associated Customer. This example binds the Order 1 to Customer "ASDFG" by using the [Verbose JSON format (section 2.2.6.3)](#Section_4.2.1.6).
+The following example illustrates the exchange of messages required for a client to update the [**association**](#gt_association) between the Order [**entity**](#gt_entity) with EntityKey value 1 and its associated Customer. This example binds the Order 1 to Customer "ASDFG" by using the [Verbose JSON format (section 2.2.6.3)](#Section_2.2.6.3).
 
 **HTTP Request:**
 
@@ -15267,7 +15267,7 @@ DataServiceVersion: 1.0
 
 To retrieve a named resource stream instance, a client issues an HTTP GET request against the named resource stream self-link.
 
-To acquire a named resource stream self-link, a client can issue a request as described in section [4.2.1.7](#Section_4.2.1.7) for AtomPub, in Stream Property in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 9 for JSON, or in section [4.2.1.8](#Section_2.2.6.3) for Verbose JSON. And, a client can interpret the response according to the rules that are specified in section [2.2.6.2.10](#Section_2.2.6.2.10) for AtomPub, in Stream Property in [ODataJSON4.0] section 9 for JSON, or in section [2.2.6.3.14](#Section_2.2.6.3.14) for Verbose JSON.
+To acquire a named resource stream self-link, a client can issue a request as described in section [4.2.1.7](#Section_4.2.1.7) for AtomPub, in Stream Property in [[ODataJSON4.0]](https://go.microsoft.com/fwlink/?LinkId=301473) section 9 for JSON, or in section [4.2.1.8](#Section_4.2.1.8) for Verbose JSON. And, a client can interpret the response according to the rules that are specified in section [2.2.6.2.10](#Section_2.2.6.2.10) for AtomPub, in Stream Property in [ODataJSON4.0] section 9 for JSON, or in section [2.2.6.3.14](#Section_2.2.6.3.14) for Verbose JSON.
 
 A client sets the Accept header value to the ContentType of the named resource stream instance.
 
@@ -15348,7 +15348,7 @@ There is no direct way to insert a named resource stream instance.
 
 Instead, a named resource stream instance comes into existence when the owning **EntityType** instance is created.
 
-Clients can attempt to retrieve a [named resource stream instance (section 4.7.2)](#Section_2.2.1.2) immediately after creating the containing **EntityType** instance.
+Clients can attempt to retrieve a [named resource stream instance (section 4.7.2)](#Section_4.7.2) immediately after creating the containing **EntityType** instance.
 
 Servers can choose to initialize the named resource stream to a nonempty value when the containing **EntityType** instance is created. However, it is likely that the named resource stream instance will be empty immediately after creating the **EntityType** instance.
 
@@ -15952,7 +15952,7 @@ Multiplicity="*" />
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.5 Service Pack 1 (SP1)
 - Microsoft .NET Framework 4.0

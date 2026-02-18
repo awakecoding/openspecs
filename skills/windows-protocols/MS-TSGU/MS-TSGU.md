@@ -550,7 +550,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** Registration is required to download the document.
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -558,7 +558,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RDPBCGR] Microsoft Corporation, "[Remote Desktop Protocol: Basic Connectivity and Graphics Remoting](../MS-RDPBCGR/MS-RDPBCGR.md)".
 
-[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](#Section_1.7.3)".
+[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](../MS-RDPEUDP/MS-RDPEUDP.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -577,7 +577,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](#Section_1.3)".
+[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](../MS-RDSOD/MS-RDSOD.md)".
 
 [MS-RNAP] Microsoft Corporation, "[Vendor-Specific RADIUS Attributes for Network Access Protection (NAP) Data Structure](../MS-RNAP/MS-RNAP.md)".
 
@@ -598,7 +598,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 The RDGSP Protocol is designed for remote connections from RDG clients originating on the Internet to [**target servers**](#gt_target-server) behind a firewall.<3> The protocol establishes a connection, called a [**tunnel (2)**](#gt_1ebdc9c6-bb01-455e-98f7-8930618bb601), from an RDG [**client**](#gt_client) to an RDG [**server**](#gt_server) in the neutral zone. The RDG client uses the tunnel to establish a channel between the RDG client and the target server with the RDG server acting as a proxy. Data transfer between the RDG client and the target server occurs by using the channel. The tunnel and channel maintain active connections.
 
-The RDG client establishes one [**main channel**](#gt_main-channel) to the target server. The RDG client can establish zero or more [**side channels**](#gt_side-channel) depending on the requirements of the Remote Desktop Protocol: UDP Transport Extension Protocol [MS-RDPEUDP](#Section_1.7.3).
+The RDG client establishes one [**main channel**](#gt_main-channel) to the target server. The RDG client can establish zero or more [**side channels**](#gt_side-channel) depending on the requirements of the Remote Desktop Protocol: UDP Transport Extension Protocol [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md).
 
 The RDGSP Protocol uses one of the following transports for establishing the main channel:
 
@@ -617,14 +617,14 @@ Communication from the RDG [**server**](#gt_server) to the RDG [**client**](#gt_
 
 The RDG client first calls the [TsProxyCreateTunnel](#Section_3.2.6.1.1), [TsProxyAuthorizeTunnel](#Section_3.2.6.1.2), and [TsProxyCreateChannel](#Section_3.2.6.1.4) methods in sequential order, as shown in the figure named Message sequence between RDG client and RDG server during connection setup phase, in section [1.3.1.1.1](#Section_1.3.1.1.1). The RDG client makes each subsequent call in the order specified, only after a response for the previously issued call is received.
 
-After the TsProxyCreateTunnel call successfully completes, the RDG client calls the [TsProxySetupReceivePipe](#Section_3.2.6.2.2) and [TsProxySendToServer](#Section_3.2.6.2.1) methods. However, because the TsProxySetupReceivePipe call can have multiple responses from the RDG server, the responses can be interspersed with the calls to TsProxySendToServer.
+After the TsProxyCreateTunnel call successfully completes, the RDG client calls the [TsProxySetupReceivePipe](#Section_3.6.5.3) and [TsProxySendToServer](#Section_3.6.5.1) methods. However, because the TsProxySetupReceivePipe call can have multiple responses from the RDG server, the responses can be interspersed with the calls to TsProxySendToServer.
 
 To end the connection, the RDG client calls the [TsProxyCloseChannel](#Section_3.2.6.3.1) and [TsProxyCloseTunnel](#Section_3.2.6.3.3) methods in sequential order, as shown in the figure named Message sequence between RDG client and RDG server during shutdown phase, in section [1.3.1.1.3](#Section_1.3.1.1.3). If the RDG client calls TsProxyCloseTunnel before TsProxyCloseChannel, the RDG server closes the channel and then closes the tunnel. If TsProxyCloseChannel is called after TsProxyCloseTunnel, the RDG client receives an RPC exception. For details about the possible errors returned, see the description of the [Return Codes (section 2.2.6)](#Section_2.2.6).
 
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 RDGSP Protocol Phases Using RPC Over HTTP Transport
 
-The RDGSP Protocol uses [**RPC**](#gt_remote-procedure-call-rpc) over [**HTTP**](#gt_hypertext-transfer-protocol-http) as the transport by operating in three phases: connection setup, data transfer, and shutdown. The following sections provide an overview of these phases. For specific details about each phase, see section [3](#Section_1.3).
+The RDGSP Protocol uses [**RPC**](#gt_remote-procedure-call-rpc) over [**HTTP**](#gt_hypertext-transfer-protocol-http) as the transport by operating in three phases: connection setup, data transfer, and shutdown. The following sections provide an overview of these phases. For specific details about each phase, see section [3](#Section_3).
 
 <a id="Section_1.3.1.1.1"></a>
 ##### 1.3.1.1.1 Connection Setup Phase
@@ -662,7 +662,7 @@ Figure 3: Message sequence between RDG client and RDG server during data transfe
 This shutdown phase is used to terminate the [**channel**](#gt_channel) and [**tunnel (2)**](#gt_1ebdc9c6-bb01-455e-98f7-8930618bb601). The phase consists of three operations:
 
 - Channel shutdown: Channel shutdown can be performed only after a channel has been successfully created. A channel shutdown closes the [**RPC**](#gt_remote-procedure-call-rpc) [**out pipe**](#gt_out-pipe) created in the data transfer phase and prevents any further use of the channel. The closing of a channel can be initiated either by the RDG client or the RDG [**server**](#gt_server). To initiate channel shutdown, the client uses the [TsProxyCloseChannel (section 3.2.6.3.1)](#Section_3.2.6.3.1) method. The RDG server initiates channel shutdown by sending an RPC response [**protocol data unit (PDU)**](#gt_protocol-data-unit-pdu) with the PFC_LAST_FRAG bit set in the **pfc_flags** field as the final response PDU of the [TsProxySetupReceivePipe (section 3.2.6.2.2)](#Section_3.2.6.2.2) method. For more information about an RPC response PDU, the **pfc_flags** field, and the PFC_LAST_FRAG bit, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 12.6.2 and 12.6.4.10.
-- Cancel pending messages: If the RDG client has pending [**administrative message**](#gt_administrative-message) requests on the RDG server, the RDG client cancels these requests by calling the [TsProxyMakeTunnel (section 3.2.6.3.2)](#Section_3.2.6.1.3) call with [TSG_TUNNEL_CANCEL_ASYNC_MSG_REQUEST (section 2.2.5.2.17)](#Section_2.2.5.2.17) as a parameter.
+- Cancel pending messages: If the RDG client has pending [**administrative message**](#gt_administrative-message) requests on the RDG server, the RDG client cancels these requests by calling the [TsProxyMakeTunnel (section 3.2.6.3.2)](#Section_3.2.6.3.2) call with [TSG_TUNNEL_CANCEL_ASYNC_MSG_REQUEST (section 2.2.5.2.17)](#Section_2.2.5.2.17) as a parameter.
 - Tunnel shutdown: Tunnel (2) shutdown can be performed only after a tunnel has been successfully created and after all channels (if any) inside the tunnel are shut down successfully. A tunnel shutdown closes the connection between the RDG client and RDG server and is the last call in the protocol sequence. The closing of a tunnel is accomplished by using the [TsProxyCloseTunnel (section 3.2.6.3.3)](#Section_3.2.6.3.3) method.
 ![Message sequence between the RDG client and RDG server during shutdown phase](media/image4.png)
 
@@ -676,7 +676,7 @@ The RDGHTTP Protocol uses the [**HTTP**](#gt_hypertext-transfer-protocol-http) t
 <a id="Section_1.3.2.1"></a>
 #### 1.3.2.1 RDGHTTP Protocol Phases Using HTTP Transport
 
-The RDGHTTP Protocol uses [**HTTP**](#gt_hypertext-transfer-protocol-http) transport by operating in four phases: connection setup and authentication, tunnel and channel creation, data and server message transfer, and connection close. The following sections provide an overview of these phases. For specific details about each phase, see section [3](#Section_1.3).
+The RDGHTTP Protocol uses [**HTTP**](#gt_hypertext-transfer-protocol-http) transport by operating in four phases: connection setup and authentication, tunnel and channel creation, data and server message transfer, and connection close. The following sections provide an overview of these phases. For specific details about each phase, see section [3](#Section_3).
 
 <a id="Section_1.3.2.1.1"></a>
 ##### 1.3.2.1.1 Connection Setup and Authentication Phase
@@ -741,7 +741,7 @@ Before creating the UDP channel ([**side channel**](#gt_side-channel)), the RDG 
 <a id="Section_1.3.3.1"></a>
 #### 1.3.3.1 RDGUDP Protocol Phases Using UDP Transport
 
-The RDGUDP Protocol uses the [**UDP**](#gt_user-datagram-protocol-udp) transport by operating in four phases: DTLS handshake, connection setup, data transfer, and shutdown. The following sections provide an overview of these phases. For specific details about each phase, see section [3](#Section_1.3).
+The RDGUDP Protocol uses the [**UDP**](#gt_user-datagram-protocol-udp) transport by operating in four phases: DTLS handshake, connection setup, data transfer, and shutdown. The following sections provide an overview of these phases. For specific details about each phase, see section [3](#Section_3).
 
 <a id="Section_1.3.3.1.1"></a>
 ##### 1.3.3.1.1 DTLS Handshake Phase
@@ -881,7 +881,7 @@ The following table contains the RPC interface [**universal unique identifier (U
 | Parameter | Value | Reference |
 | --- | --- | --- |
 | RPC interface UUID | 44e265dd-7daf-42cd-8560-3cdb6e7a2729 | [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 2.1.1 |
-| ProtocolSequence | ncacn_http | Section [1.5](#Section_1.5.2) |
+| ProtocolSequence | ncacn_http | Section [1.5](#Section_1.5) |
 | [**endpoint**](#gt_endpoint) | 80, 443, and 3388 | Section [2.1](#Section_2.1) |
 
 <a id="Section_1.9.2"></a>
@@ -929,7 +929,7 @@ The RDGSP Protocol MUST use the [**UUID**](#gt_universally-unique-identifier-uui
 <a id="Section_2.1.2"></a>
 ### 2.1.2 HTTP Transport
 
-The [**HTTP**](#gt_hypertext-transfer-protocol-http) transport based RDG protocol is transported by an [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection. By default the RDG [**server**](#gt_server) listens on the URL HTTPS Binding URL with port 443. However, the port number can be configured to a different value, see section [3.1.1](#Section_3.2.2) for details.
+The [**HTTP**](#gt_hypertext-transfer-protocol-http) transport based RDG protocol is transported by an [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connection. By default the RDG [**server**](#gt_server) listens on the URL HTTPS Binding URL with port 443. However, the port number can be configured to a different value, see section [3.1.1](#Section_3.1.1) for details.
 
 When the RDG server connects with a reverse proxy, the connection from the RDG [**client**](#gt_client) is terminated and another connection to the RDG server is created, over which data is relayed. The connection between the reverse proxy and the RDG server can then be over HTTP without [**SSL**](#gt_secure-sockets-layer-ssl), for which the RDG server also binds on the HTTP binding URL.
 
@@ -956,14 +956,14 @@ This type is declared as follows:
 
 typedef [string] wchar_t* RESOURCENAME;
 
-The target server name to which the RDG server connects. This refers to the ADM element **Target server name** (sections [3.1.1](#Section_3.2.2) and [3.5.1](#Section_3.2.2)). The name MUST NOT be NULL and SHOULD be a valid server name. A valid [**target server**](#gt_target-server) name is one which DNS can resolve properly. Also, a valid target server is one which is up and running, and can accept a [**terminal server**](#gt_terminal-server) connection.
+The target server name to which the RDG server connects. This refers to the ADM element **Target server name** (sections [3.1.1](#Section_3.1.1) and [3.5.1](#Section_3.5.1)). The name MUST NOT be NULL and SHOULD be a valid server name. A valid [**target server**](#gt_target-server) name is one which DNS can resolve properly. Also, a valid target server is one which is up and running, and can accept a [**terminal server**](#gt_terminal-server) connection.
 
 A **RESOURCENAME** can be an IP address, FQDN, or NetBIOS name. DNS cannot resolve all NetBIOS names—for example, there are differences in the allowed characters, differences in length, and differences in composition rules. Therefore, RESOURCENAME can be a NetBIOS name if the NetBIOS name uses characters and length restrictions allowed by DNS which enables DNS to resolve the name.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 RPC Over HTTP Transport Data Types
 
-In addition to the [**RPC**](#gt_remote-procedure-call-rpc) base types and definitions as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 3.1, [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2 and [MS-DTYP](#Section_2.2), additional data types are defined in the following sections.
+In addition to the [**RPC**](#gt_remote-procedure-call-rpc) base types and definitions as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 3.1, [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2 and [MS-DTYP](../MS-DTYP/MS-DTYP.md), additional data types are defined in the following sections.
 
 In addition to the RPC base types and definitions described, the additional data types are defined in the MIDL specification for this RPC interface.
 
@@ -1053,7 +1053,7 @@ A [**GUID**](#gt_globally-unique-identifier-guid) generated by the RDG client, w
 <a id="Section_2.2.3.2.2"></a>
 ##### 2.2.3.2.2 RDG-Correlation-Id
 
-An optional header containing a GUID, generated by the RDG client, which specifies the correlation identifier for the connection, which can appear in some of the RDG or [**terminal server's**](#gt_terminal-server) event logs. This value, if provided, MUST be the same as provided in the RDP_NEG_CORRELATION_INFO structure ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.1.2) or RDPUDP_CORRELATION_ID_PAYLOAD structure ([MS-RDPEUDP](#Section_1.7.3) section 2.2.2.8).
+An optional header containing a GUID, generated by the RDG client, which specifies the correlation identifier for the connection, which can appear in some of the RDG or [**terminal server's**](#gt_terminal-server) event logs. This value, if provided, MUST be the same as provided in the RDP_NEG_CORRELATION_INFO structure ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.1.2) or RDPUDP_CORRELATION_ID_PAYLOAD structure ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) section 2.2.2.8).
 
 The RDG-Correlation-Id header value is an ASCII representation of a GUID, including curly braces.
 
@@ -1146,7 +1146,7 @@ None.
 
 | Constant/value | Description |
 | --- | --- |
-| TSG_PACKET_TYPE_HEADER 0x00004844 | This constant is used by the **packetId** field of the [TSG_PACKET](#Section_2.2.9.2) structure. The RDG [**client**](#gt_client) and RDG [**server**](#gt_server) SHOULD not use this type, as specified in sections 2.2.9.2 and [2.2.9.2.1.1](#Section_2.2.9.2.1.10). |
+| TSG_PACKET_TYPE_HEADER 0x00004844 | This constant is used by the **packetId** field of the [TSG_PACKET](#Section_2.2.9.2) structure. The RDG [**client**](#gt_client) and RDG [**server**](#gt_server) SHOULD not use this type, as specified in sections 2.2.9.2 and [2.2.9.2.1.1](#Section_2.2.9.2.1.1). |
 
 <a id="Section_2.2.5.2.3"></a>
 ##### 2.2.5.2.3 TSG_PACKET_TYPE_VERSIONCAPS
@@ -1279,21 +1279,21 @@ None.
 
 | Constant/value | Description |
 | --- | --- |
-| TSG_MESSAGING_CAP_CONSENT_SIGN 0x00000004 | This constant is used to represent the consent message capability. If the RDG [**client**](#gt_client) supports this capability, it means that the RDG client is capable of receiving and processing a consent message as specified in section [2.2.9.2.1.9.1](#Section_2.2.9.2). If the RDG [**server**](#gt_server) supports this capability, it means that the RDG server is capable of sending a consent message to the RDG client as specified in section 2.2.9.2.1.9.1. |
+| TSG_MESSAGING_CAP_CONSENT_SIGN 0x00000004 | This constant is used to represent the consent message capability. If the RDG [**client**](#gt_client) supports this capability, it means that the RDG client is capable of receiving and processing a consent message as specified in section [2.2.9.2.1.9.1](#Section_2.2.9.2.1.9.1). If the RDG [**server**](#gt_server) supports this capability, it means that the RDG server is capable of sending a consent message to the RDG client as specified in section 2.2.9.2.1.9.1. |
 
 <a id="Section_2.2.5.2.22"></a>
 ##### 2.2.5.2.22 TSG_MESSAGING_CAP_SERVICE_MSG
 
 | Constant/value | Description |
 | --- | --- |
-| TSG_MESSAGING_CAP_SERVICE_MSG 0x00000008 | This constant is used to represent the service message capability. If the RDG [**client**](#gt_client) supports this capability, it means that the RDG client is capable of receiving and processing a service message as specified in section [2.2.9.2.1.9.1](#Section_2.2.9.2). If the RDG [**server**](#gt_server) supports this capability, it means that the RDG server is capable of sending a service message to the RDG client as specified in section 2.2.9.2.1.9.1. |
+| TSG_MESSAGING_CAP_SERVICE_MSG 0x00000008 | This constant is used to represent the service message capability. If the RDG [**client**](#gt_client) supports this capability, it means that the RDG client is capable of receiving and processing a service message as specified in section [2.2.9.2.1.9.1](#Section_2.2.9.2.1.9.1). If the RDG [**server**](#gt_server) supports this capability, it means that the RDG server is capable of sending a service message to the RDG client as specified in section 2.2.9.2.1.9.1. |
 
 <a id="Section_2.2.5.2.23"></a>
 ##### 2.2.5.2.23 TSG_MESSAGING_CAP_REAUTH
 
 | Constant/value | Description |
 | --- | --- |
-| TSG_MESSAGING_CAP_REAUTH 0x00000010 | This constant is used to represent the [**reauthentication**](#gt_reauthentication) capability. If the RDG [**client**](#gt_client) supports this capability, it means that the RDG client is capable of performing reauthentication according to the same methods as initial authentication, as specified in section [2.1](#Section_2.1). If the RDG [**server**](#gt_server) supports this capability, it means that the RDG server is capable of sending a reauthentication request to the RDG client, as specified in section [2.2.9.2.1.9.1](#Section_2.2.9.2) |
+| TSG_MESSAGING_CAP_REAUTH 0x00000010 | This constant is used to represent the [**reauthentication**](#gt_reauthentication) capability. If the RDG [**client**](#gt_client) supports this capability, it means that the RDG client is capable of performing reauthentication according to the same methods as initial authentication, as specified in section [2.1](#Section_2.1). If the RDG [**server**](#gt_server) supports this capability, it means that the RDG server is capable of sending a reauthentication request to the RDG client, as specified in section [2.2.9.2.1.9.1](#Section_2.2.9.2.1.9.1) |
 
 <a id="Section_2.2.5.3"></a>
 #### 2.2.5.3 HTTP Transport Constants
@@ -1303,7 +1303,7 @@ None.
 
 | Constant/value | Description |
 | --- | --- |
-| HTTP_CHANNEL_RESPONSE_FIELD_CHANNELID 0x1 | This constant is used to represent that the [HTTP_CHANNEL_RESPONSE_OPTIONAL (section 2.2.10.5)](#Section_2.2.10.5) structure contains the **channelId** field, as specified in section [3.5.1](#Section_3.2.2). |
+| HTTP_CHANNEL_RESPONSE_FIELD_CHANNELID 0x1 | This constant is used to represent that the [HTTP_CHANNEL_RESPONSE_OPTIONAL (section 2.2.10.5)](#Section_2.2.10.5) structure contains the **channelId** field, as specified in section [3.5.1](#Section_3.5.1). |
 | HTTP_CHANNEL_RESPONSE_FIELD_AUTHNCOOKIE 0x2 | This constant is used to represent that the HTTP_CHANNEL_RESPONSE_OPTIONAL structure contains the **authnCookie** field that describes the [**UDP authentication cookie**](#gt_udp-authentication-cookie) |
 | HTTP_CHANNEL_RESPONSE_FIELD_UDPPORT 0x4 | This constant is used to represent that the HTTP_CHANNEL_RESPONSE_OPTIONAL structure contains the **udpPort** field. |
 
@@ -1419,7 +1419,7 @@ The following scheme names are used to identify custom authentication schemes. T
 | --- | --- |
 | PKT_TYPE_CONNECT_REQ/1 | This constant is used to represent the CONNECT packet type sent by the client during the [Connection Setup Phase (section 1.3.1.1.1)](#Section_1.3.1.1.1). |
 | PKT_TYPE_CONNECT_RESP/2 | This constant represents CONNECT_RESPONSE packet type sent by the RDG server during the Connection Setup Phase. |
-| PKT_TYPE_PAYLOAD/3 | This constant represents the DATA packet type sent either by the RDG client or RDG server during the [Data Transfer Phase (section 1.3.1.1.2)](#Section_3.2.6.2). |
+| PKT_TYPE_PAYLOAD/3 | This constant represents the DATA packet type sent either by the RDG client or RDG server during the [Data Transfer Phase (section 1.3.1.1.2)](#Section_1.3.1.1.2). |
 | PKT_TYPE_DISCONNECT/4 | This constant represents the DISCONNECT packet type sent either by the RDG client or RDG server during the [Shutdown Phase (section 1.3.1.1.3)](#Section_1.3.1.1.3). |
 | PKT_TYPE_CONNECT_REQ_FRAGMENT/5 | This constant represents the fragment of CONNECT_REQUEST packet type sent by the client. The RDG client MUST use the PKT_TYPE_CONNECT_REQ_FRAGMENT packet type to send connection request to the RDP server. It MUST do so by splitting a CONNECT_PKT request into one or more fragments of type CONNECT_PKT_FRAGMENT (section [2.2.11.10](#Section_2.2.11.10)).<8> |
 
@@ -1452,7 +1452,7 @@ The following [**HRESULT**](#gt_hresult) return values are specified by this pro
 | 0x000059E8 HRESULT_CODE(E_PROXY_NOTSUPPORTED) | Returned when the RDG server receives an unsupported packet. |
 | 0x8009030C SEC_E_LOGON_DENIED | Returned when client authentication fails during [**NTLM**](#gt_fff710f9-e3d1-4991-99a2-009768d57585) [**extended authentication**](#gt_extended-authentication). |
 
-In addition to the preceding [**HRESULTs**](#gt_hresult), which are defined by the [MS-TSGU] protocol, the following **DWORDs** are returned by only RPC and HTTP transports. These error codes are returned by [TsProxySetupReceivePipe](#Section_3.2.6.2.2) for RPC transport, for HTTP transport these are returned in the response packet sent by the RDG server as per the protocol.
+In addition to the preceding [**HRESULTs**](#gt_hresult), which are defined by the [MS-TSGU] protocol, the following **DWORDs** are returned by only RPC and HTTP transports. These error codes are returned by [TsProxySetupReceivePipe](#Section_3.6.5.3) for RPC transport, for HTTP transport these are returned in the response packet sent by the RDG server as per the protocol.
 
 | Return value/code | Description |
 | --- | --- |
@@ -1478,7 +1478,7 @@ In addition to the preceding [**HRESULTs**](#gt_hresult), which are defined by t
 | --- | --- |
 | 0x000004E3 ERROR_ONLY_IF_CONNECTED | Returned by the RDG [**server**](#gt_server) when an attempt is made by the client to send data to the target server on connection state other than Pipe Created state. |
 | 0x00000057 ERROR_INVALID_PARAMETER | Returned by the RDG server when the RDG client sends a non-NULL value in a data member of the [TSG_PACKET_QUARREQUEST](#Section_2.2.9.2.1.4) structure but it is not prefixed with Nonce. |
-| 0x000003E3 ERROR_OPERATION_ABORTED | Returned when the RDG server does not receive a [TsProxySetupReceivePipe](#Section_3.2.6.2.2) method call before the [Connection Timer (section 3.2.4.1)](#Section_1.3.2.1.1) expires. |
+| 0x000003E3 ERROR_OPERATION_ABORTED | Returned when the RDG server does not receive a [TsProxySetupReceivePipe](#Section_3.6.5.3) method call before the [Connection Timer (section 3.2.4.1)](#Section_3.2.4.1) expires. |
 
 <a id="Section_2.2.6.3"></a>
 #### 2.2.6.3 HTTP Transport Return Codes
@@ -1549,9 +1549,9 @@ unsigned long packetId;
 
 *PTSG_PACKET;
 
-**packetId:** This value specifies the type of structure pointer contained in the **TSGPacket** field. Valid values are specified in sections [2.2.5.2.2](#Section_2.2.5.2.21), [2.2.5.2.3](#Section_2.2.5.2.3), [2.2.5.2.4](#Section_2.2.5.2.4), [2.2.5.2.5](#Section_2.2.5.2.5), [2.2.5.2.6](#Section_2.2.5.2.6), [2.2.5.2.7](#Section_2.2.5.2.7), [2.2.5.2.9](#Section_2.2.5.2.9), [2.2.5.2.10](#Section_2.2.5.2.10), [2.2.5.2.11](#Section_2.2.5.2.11), [2.2.5.2.12](#Section_2.2.5.2.12), and [2.2.5.2.13](#Section_2.2.5.2.13).
+**packetId:** This value specifies the type of structure pointer contained in the **TSGPacket** field. Valid values are specified in sections [2.2.5.2.2](#Section_2.2.5.2.2), [2.2.5.2.3](#Section_2.2.5.2.3), [2.2.5.2.4](#Section_2.2.5.2.4), [2.2.5.2.5](#Section_2.2.5.2.5), [2.2.5.2.6](#Section_2.2.5.2.6), [2.2.5.2.7](#Section_2.2.5.2.7), [2.2.5.2.9](#Section_2.2.5.2.9), [2.2.5.2.10](#Section_2.2.5.2.10), [2.2.5.2.11](#Section_2.2.5.2.11), [2.2.5.2.12](#Section_2.2.5.2.12), and [2.2.5.2.13](#Section_2.2.5.2.13).
 
-**TSGPacket:** A union field containing the actual structure pointer corresponding to the value contained in the **packetId** field. Valid structures for this field are specified in sections [2.2.9.2.1.1](#Section_2.2.9.2.1.10), [2.2.9.2.1.2](#Section_2.2.9.2.1.2), [2.2.9.2.1.3](#Section_2.2.9.2.1.3), [2.2.9.2.1.4](#Section_2.2.9.2.1.4), [2.2.9.2.1.5](#Section_2.2.9.2.1.5), [2.2.9.2.1.6](#Section_2.2.9.2.1.6), [2.2.9.2.1.7](#Section_2.2.9.2.1.7), [2.2.9.2.1.8](#Section_2.2.9.2.1.8), [2.2.9.2.1.9](#Section_2.2.9.2.1.9), [2.2.9.2.1.10](#Section_2.2.9.2.1.10), and [2.2.9.2.1.11](#Section_2.2.9.2.1.11).
+**TSGPacket:** A union field containing the actual structure pointer corresponding to the value contained in the **packetId** field. Valid structures for this field are specified in sections [2.2.9.2.1.1](#Section_2.2.9.2.1.1), [2.2.9.2.1.2](#Section_2.2.9.2.1.2), [2.2.9.2.1.3](#Section_2.2.9.2.1.3), [2.2.9.2.1.4](#Section_2.2.9.2.1.4), [2.2.9.2.1.5](#Section_2.2.9.2.1.5), [2.2.9.2.1.6](#Section_2.2.9.2.1.6), [2.2.9.2.1.7](#Section_2.2.9.2.1.7), [2.2.9.2.1.8](#Section_2.2.9.2.1.8), [2.2.9.2.1.9](#Section_2.2.9.2.1.9), [2.2.9.2.1.10](#Section_2.2.9.2.1.10), and [2.2.9.2.1.11](#Section_2.2.9.2.1.11).
 
 <a id="Section_2.2.9.2.1"></a>
 ##### 2.2.9.2.1 TSG_PACKET_TYPE_UNION
@@ -1612,7 +1612,7 @@ PTSG_PACKET_REAUTH packetReauth;
 
 *PTSG_PACKET_TYPE_UNION;
 
-**packetHeader:** A **PTSG_PACKET_HEADER** as specified in section [2.2.9.2.1.1](#Section_2.2.9.2.1.10).
+**packetHeader:** A **PTSG_PACKET_HEADER** as specified in section [2.2.9.2.1.1](#Section_2.2.9.2.1.1).
 
 **packetVersionCaps:** A **PTSG_PACKET_VERSIONCAPS** as specified in section [2.2.9.2.1.2](#Section_2.2.9.2.1.2).
 
@@ -1637,7 +1637,7 @@ PTSG_PACKET_REAUTH packetReauth;
 <a id="Section_2.2.9.2.1.1"></a>
 ###### 2.2.9.2.1.1 TSG_PACKET_HEADER
 
-The TSG_PACKET_HEADER structure contains information about the **ComponentId** and **PacketId** fields of the [TSG_PACKET](#Section_2.2.9.2) structure. The value of **PacketId** in TSG_PACKET MUST be set to [TSG_PACKET_TYPE_HEADER](#Section_2.2.5.2.21).
+The TSG_PACKET_HEADER structure contains information about the **ComponentId** and **PacketId** fields of the [TSG_PACKET](#Section_2.2.9.2) structure. The value of **PacketId** in TSG_PACKET MUST be set to [TSG_PACKET_TYPE_HEADER](#Section_2.2.5.2.2).
 
 typedef struct _TSG_PACKET_HEADER {
 
@@ -1684,9 +1684,9 @@ unsigned short quarantineCapabilities;
 
 *PTSG_PACKET_VERSIONCAPS;
 
-**tsgHeader:** Specified in [2.2.9.2.1.1](#Section_2.2.9.2.1.10).
+**tsgHeader:** Specified in [2.2.9.2.1.1](#Section_2.2.9.2.1.1).
 
-**TSGCaps:** An array of [TSG_PACKET_CAPABILITIES](#Section_2.2.9.2) structures. The number of elements in the array is indicated by the **numCapabilities** field.
+**TSGCaps:** An array of [TSG_PACKET_CAPABILITIES](#Section_2.2.9.2.1.2.1) structures. The number of elements in the array is indicated by the **numCapabilities** field.
 
 **numCapabilities:** The number of array elements for the **TSGCaps** field. This value MUST be in the range of 0 and 32. If the **TSGCaps** field is ignored, then this field MUST also be ignored.
 
@@ -1759,7 +1759,7 @@ TSG_CAPABILITY_NAP
 
 The TSG_CAPABILITY_NAP structure contains information about the [**NAP**](#gt_network-access-protection-nap) capabilities of the RDG [**client**](#gt_client) and RDG [**server**](#gt_server).
 
-This structure MUST be embedded in the [TSG_PACKET_CAPABILITIES](#Section_2.2.9.2) structure.
+This structure MUST be embedded in the [TSG_PACKET_CAPABILITIES](#Section_2.2.9.2.1.2.1) structure.
 
 typedef struct _TSG_CAPABILITY_NAP {
 
@@ -1817,7 +1817,7 @@ unsigned long flags;
 
 **flags:** This field can be any value when sending and ignored on receipt.
 
-**machineName:** A string representing the name of the RDG **Client Machine name** (section [3.5.1](#Section_3.2.2)).<15> This field can be ignored. The length of the name, including the terminating null character, MUST be equal to the size specified by the **nameLength** field.
+**machineName:** A string representing the name of the RDG **Client Machine name** (section [3.5.1](#Section_3.5.1)).<15> This field can be ignored. The length of the name, including the terminating null character, MUST be equal to the size specified by the **nameLength** field.
 
 **nameLength:** An unsigned long specifying the number of characters in **machineName**, including the terminating null character. The specified value MUST be in the range from 0 to 513 characters.
 
@@ -1876,7 +1876,7 @@ packet-beta
 <a id="Section_2.2.9.2.1.5.2"></a>
 TSG_REDIRECTION_FLAGS
 
-The TSG_REDIRECTION_FLAGS structure specifies the device redirection settings that MUST be enforced by the RDG [**client**](#gt_client). For details about device redirection, see [MS-RDSOD](#Section_1.3) section 2.1.1.2.
+The TSG_REDIRECTION_FLAGS structure specifies the device redirection settings that MUST be enforced by the RDG [**client**](#gt_client). For details about device redirection, see [MS-RDSOD](../MS-RDSOD/MS-RDSOD.md) section 2.1.1.2.
 
 This structure MUST be embedded in the [TSG_PACKET_RESPONSE](#Section_2.2.9.2.1.5) structure.
 
@@ -1984,7 +1984,7 @@ PTSG_PACKET_VERSIONCAPS versionCaps;
 
 **certChainData:** The [**certificate**](#gt_certificate), along with the chain, that the RDG server used for the SCHANNEL [**authentication service**](#gt_authentication-service-as) as part of registering the [**RPC**](#gt_remote-procedure-call-rpc) interfaces and initialization. It MUST be a string representation of the certificate chain if **certChainLen** is nonzero.<19> This field can be ignored.
 
-**nonce:** A [**GUID**](#gt_globally-unique-identifier-guid) to uniquely identify this connection to prevent replay attacks by the RDG [**client**](#gt_client). This can be used for auditing purposes. A GUID is a unique ID using opaque sequence of bytes as specified in [MS-DTYP](#Section_2.2) section 2.3.4.2.
+**nonce:** A [**GUID**](#gt_globally-unique-identifier-guid) to uniquely identify this connection to prevent replay attacks by the RDG [**client**](#gt_client). This can be used for auditing purposes. A GUID is a unique ID using opaque sequence of bytes as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.2.
 
 **versionCaps:** A pointer to a TSG_PACKET_VERSIONCAPS structure, as specified in section 2.2.9.2.1.2.
 
@@ -2053,7 +2053,7 @@ long isMsgPresent;
 
 **isMsgPresent:** A Boolean that indicates whether the *messagePacket* parameter is present or not. If the value is TRUE, then *messagePacket* contains valid data and can be processed. If the value is FALSE, *messagePacket* parameter MUST be ignored.
 
-**messagePacket:** A [TSG_PACKET_TYPE_MESSAGE_UNION](#Section_2.2.9.2) union, as specified in section 2.2.9.2.1.9.1.
+**messagePacket:** A [TSG_PACKET_TYPE_MESSAGE_UNION](#Section_2.2.9.2.1.9.1) union, as specified in section 2.2.9.2.1.9.1.
 
 <a id="Section_2.2.9.2.1.9.1"></a>
 TSG_PACKET_TYPE_MESSAGE_UNION
@@ -2082,11 +2082,11 @@ PTSG_PACKET_REAUTH_MESSAGE reauthMessage;
 
 *PTSG_PACKET_TYPE_MESSAGE_UNION ;
 
-**consentMessage:** A pointer to a [TSG_PACKET_STRING_MESSAGE](#Section_2.2.9.2) structure, as defined in section 2.2.9.2.1.9.1.1. This field is used if **msgType** field specified in section 2.2.9.2.1.9 is set to [TSG_ASYNC_MESSAGE_CONSENT_MESSAGE](#Section_2.2.5.2.14).
+**consentMessage:** A pointer to a [TSG_PACKET_STRING_MESSAGE](#Section_2.2.9.2.1.9.1.1) structure, as defined in section 2.2.9.2.1.9.1.1. This field is used if **msgType** field specified in section 2.2.9.2.1.9 is set to [TSG_ASYNC_MESSAGE_CONSENT_MESSAGE](#Section_2.2.5.2.14).
 
 **serviceMessage:** A pointer to a TSG_PACKET_STRING_MESSAGE structure, as defined in section 2.2.9.2.1.9.1.1. This field is used if **msgType** field specified in section 2.2.9.2.1.9 is set to [TSG_ASYNC_MESSAGE_SERVICE_MESSAGE](#Section_2.2.5.2.15).
 
-**reauthMessage:** A pointer to a [TSG_PACKET_REAUTH_MESSAGE](#Section_2.2.9.2) structure, as defined in section 2.2.9.2.1.9.1.2. This field is used if **msgType** field specified in section 2.2.9.2.1.9 is set to [TSG_ASYNC_MESSAGE_REAUTH](#Section_2.2.5.2.16).
+**reauthMessage:** A pointer to a [TSG_PACKET_REAUTH_MESSAGE](#Section_2.2.9.2.1.9.1.2) structure, as defined in section 2.2.9.2.1.9.1.2. This field is used if **msgType** field specified in section 2.2.9.2.1.9 is set to [TSG_ASYNC_MESSAGE_REAUTH](#Section_2.2.5.2.16).
 
 <a id="Section_2.2.9.2.1.9.1.1"></a>
 TSG_PACKET_STRING_MESSAGE
@@ -2211,7 +2211,7 @@ PTSG_PACKET_AUTH packetAuth;
 <a id="Section_2.2.9.3"></a>
 #### 2.2.9.3 Generic Send Data Message Packet
 
-This packet contains data sent by the RDG [**client**](#gt_client) to the RDG [**server**](#gt_server) which is then sent to the [**target server**](#gt_target-server). The data is sent by the RDG client for the [TsProxySendToServer](#Section_3.2.6.2.1) method call.
+This packet contains data sent by the RDG [**client**](#gt_client) to the RDG [**server**](#gt_server) which is then sent to the [**target server**](#gt_target-server). The data is sent by the RDG client for the [TsProxySendToServer](#Section_3.6.5.1) method call.
 
 ```mermaid
 packet-beta
@@ -2342,7 +2342,7 @@ packet-beta
   64-127: "pAltResources (variable)"
 ```
 
-**pResource (variable):** An array of [HTTP_UNICODE_STRING Structure (section 2.2.10.22)](#Section_2.2.10.22). The number of elements in the array is represented in the **numResources** field of the corresponding [HTTP_CHANNEL_PACKET](#Section_2.2.10.3) structure.
+**pResource (variable):** An array of [HTTP_UNICODE_STRING Structure (section 2.2.10.22)](#Section_2.2.10.22). The number of elements in the array is represented in the **numResources** field of the corresponding [HTTP_CHANNEL_PACKET](#Section_2.2.10.2) structure.
 
 **pAltResources (variable):** An array of HTTP_UNICODE_STRING Structure (section 2.2.10.22). The number of elements in the array is represented in the **numAltResources** field of the corresponding HTTP_CHANNEL_PACKET structure.
 
@@ -2691,7 +2691,7 @@ packet-beta
 
 **capsFlags (4 bytes):** An unsigned integer representing the capabilities negotiated by the RDG server. It's specified in the form of an HTTP_CAPABILITY_TYPE Enumeration.
 
-**nonce (16 bytes):** A [**GUID**](#gt_globally-unique-identifier-guid) ([MS-DTYP](#Section_2.2) section 2.3.4.2) representing the nonce for the [**statement of health (SoH)**](#gt_statement-of-health-soh).
+**nonce (16 bytes):** A [**GUID**](#gt_globally-unique-identifier-guid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.2) representing the nonce for the [**statement of health (SoH)**](#gt_statement-of-health-soh).
 
 **serverCert (variable):** An [HTTP_UNICODE_STRING (section 2.2.10.22)](#Section_2.2.10.22) that is used for SoH encryption.
 
@@ -2723,7 +2723,7 @@ packet-beta
   64-95: "statusCode"
 ```
 
-**hdr (8 bytes):** An **HTTP_PACKET_HEADER** structure (section [2.2.10.9](#Section_2.2.10.9)). Its **packetType** field is set to PKT_TYPE_CLOSE_CHANNEL or PKT_TYPE_CLOSE_CHANNEL_RESPONSE. Section [3.7.5.4](#Section_3.3.5.5) describes the connection close sequence and how to set the **packetType** field in the **HTTP_PACKET_HEADER**.
+**hdr (8 bytes):** An **HTTP_PACKET_HEADER** structure (section [2.2.10.9](#Section_2.2.10.9)). Its **packetType** field is set to PKT_TYPE_CLOSE_CHANNEL or PKT_TYPE_CLOSE_CHANNEL_RESPONSE. Section [3.7.5.4](#Section_3.7.5.4) describes the connection close sequence and how to set the **packetType** field in the **HTTP_PACKET_HEADER**.
 
 **statusCode (4 bytes):** An unsigned integer representing errors that are detected by the RDG server in the process of creating a channel, in an HRESULT format. The expected return codes are described in section [2.2.6](#Section_2.2.6).
 
@@ -2747,7 +2747,7 @@ packet-beta
 
 **uDownStreamMtu (2 bytes):** An unsigned short representing the size for the MTU between the RDG server and RDG client path. This MUST be determined by the RDG client.
 
-**fLossy (4 bytes):** A Boolean flag which indicates whether the [**UDP**](#gt_user-datagram-protocol-udp) channel is reliable or not. This MUST be determined by the consumer of the RDG protocol ([MS-RDPEUDP](#Section_1.7.3)). The RDG client forwards the flag to the RDG server, which in turn sends the flag to a [**target server**](#gt_target-server) during the [Connection Setup Phase (section 1.3.1.1.1)](#Section_1.3.1.1.1).
+**fLossy (4 bytes):** A Boolean flag which indicates whether the [**UDP**](#gt_user-datagram-protocol-udp) channel is reliable or not. This MUST be determined by the consumer of the RDG protocol ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md)). The RDG client forwards the flag to the RDG server, which in turn sends the flag to a [**target server**](#gt_target-server) during the [Connection Setup Phase (section 1.3.1.1.1)](#Section_1.3.1.1.1).
 
 **snSendISN (4 bytes):** An integer representing the initial sequence number used by the forward error correction (FEC) receive window between the RDG client and the target server. This MUST be determined by the consumer of the RDG protocol ([MS-RDPEUDP]). The RDG client forwards the flag to the RDG server, which in turn sends the flag to the target server during the Connection Setup Phase.
 
@@ -2875,7 +2875,7 @@ packet-beta
 
 **szPrimaryUDPAuthScheme (42 bytes):** The name of the primary authentication method to be used for authenticating a side channel in Unicode characters. By default, all the side channels are authenticated with the [**UDPCookieAuthentication**](#gt_udpcookieauthentication) method. The RDG client and RDG server can also implement other strong authentication methods. For a side channel to be established, an RDG client SHOULD pass both the UDPCookieAuthentication method and the method mentioned in **szPrimaryUDPAuthScheme**.
 
-**ftExpiryTime (8 bytes):** The time (FILETIME) at which the cookie expires. For information on the FILETIME structure, see [MS-DTYP](#Section_2.2) section 2.3.3.
+**ftExpiryTime (8 bytes):** The time (FILETIME) at which the cookie expires. For information on the FILETIME structure, see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3.
 
 **szServerIP (114 bytes):** The IP address of the [**target server**](#gt_target-server) in Unicode characters.
 
@@ -2903,7 +2903,7 @@ packet-beta
 
 **uSignature1 (2 bytes):** An unsigned short with value 0x1DAA.
 
-**uCorrelationId (16 bytes):** A GUID, generated by the RDG client, which specifies the correlation identifier for the connection, which can appear in some of the RDG or [**terminal server's**](#gt_terminal-server) event logs. This value MUST be the same as provided in the RDP_NEG_CORRELATION_INFO structure ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.1.2), RDPUDP_CORRELATION_ID_PAYLOAD structure ([MS-RDPEUDP](#Section_1.7.3) section 2.2.2.8), and RDG-Correlation-Id header (section [2.2.3.2.2](#Section_2.2.3.2.2).)
+**uCorrelationId (16 bytes):** A GUID, generated by the RDG client, which specifies the correlation identifier for the connection, which can appear in some of the RDG or [**terminal server's**](#gt_terminal-server) event logs. This value MUST be the same as provided in the RDP_NEG_CORRELATION_INFO structure ([MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.1.2), RDPUDP_CORRELATION_ID_PAYLOAD structure ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) section 2.2.2.8), and RDG-Correlation-Id header (section [2.2.3.2.2](#Section_2.2.3.2.2).)
 
 **uSignature2 (2 bytes):** An unsigned short with value 0xAA1D.
 
@@ -2967,7 +2967,7 @@ The following sections specify details of the RDG Server Protocol that are commo
 **Target server names**: An array of alias names for a target [**server**](#gt_server). A target server alias name is a string of [**Unicode**](#gt_unicode) characters. The server name applies to the machine to which the RDG server connects.<23>
 
 - For [**RPC over HTTP**](#gt_remote-procedure-call-over-http-rpc-over-http) transport, this is initialized by the RDG server when the RDG [**client**](#gt_client) calls [TsProxyCreateChannel](#Section_3.2.6.1.4). This data is passed by the RDG client in the structure [TSENDPOINTINFO](#Section_2.2.9.1).
-- For [**HTTP**](#gt_hypertext-transfer-protocol-http) transport, this is initialized when the RDG server receives an HTTP_CHANNEL_PACKET (section [2.2.10.2](#Section_2.2.10.3)) from the RDG client.
+- For [**HTTP**](#gt_hypertext-transfer-protocol-http) transport, this is initialized when the RDG server receives an HTTP_CHANNEL_PACKET (section [2.2.10.2](#Section_2.2.10.2)) from the RDG client.
 - For [**UDP**](#gt_user-datagram-protocol-udp) transport, this is initialized when the RDG server receives a CONNECT_PKT from the RDG client.
 An array of *resourceName* and *alternateResourceNames* of TSENDPOINTINFO structure makes [**target server**](#gt_target-server) alias names. The RDG server attempts to connect to the target server by each target server alias name until it succeeds or until the array is traversed completely.
 
@@ -3107,7 +3107,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 RPC over HTTP Transport - RDG Server States
 
-**Connection State**: An enumeration of different connection states. This is updated as per the state transition rules mentioned in section [3.2.6](#Section_1.3). The following diagram represents the connection state transition.
+**Connection State**: An enumeration of different connection states. This is updated as per the state transition rules mentioned in section [3.2.6](#Section_3.2.6). The following diagram represents the connection state transition.
 
 The RDG [**server**](#gt_server) MUST use this ADM element to verify that the call sequence is not violated. In each state the allowed calls and the state transitions therefore are described in this section. Section 3.2.6 describes the returns values and errors for each method call.
 
@@ -3123,13 +3123,13 @@ Figure 13: State transition diagram
 
 **Authorized**: A successful [TsProxyAuthorizeTunnel](#Section_3.2.6.1.2) call brings the connection to the Authorized state. A TsProxyAuthorizeTunnel call can only be made when the connection is in a Connected state. If a TsProxyAuthorizeTunnel call is made in any other state, then the result is undefined. The [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) call is allowed in this state. This call does not change the state. TsProxyCloseTunnel can also be made in this state, which moves the connection to the Disconnected state.
 
-**Channel Created**: A successful [TsProxyCreateChannel](#Section_3.2.6.1.4) call brings the connection to the Channel Created state. A TsProxyCreateChannel call is valid only when the tunnel is authorized. If a TsProxyCreateChannel call is made before the [**tunnel (2)**](#gt_1ebdc9c6-bb01-455e-98f7-8930618bb601) is authorized, ERROR_ACCESS_DENIED will be returned. [TsProxyCloseChannel](#Section_3.2.6.3.1) can also be made in this state, which moves the connection to the Tunnel Close Pending state. The [TsProxySetupReceivePipe](#Section_3.2.6.2.2) call is valid only in this state. If this call is made before the RDG [**client**](#gt_client) calls TsProxyCreateChannel, ERROR_ACCESS_DENIED will be returned. If it is made after the call to TsProxyCloseChannel, E_PROXY_ALREADYDISCONNECTED will be returned.
+**Channel Created**: A successful [TsProxyCreateChannel](#Section_3.2.6.1.4) call brings the connection to the Channel Created state. A TsProxyCreateChannel call is valid only when the tunnel is authorized. If a TsProxyCreateChannel call is made before the [**tunnel (2)**](#gt_1ebdc9c6-bb01-455e-98f7-8930618bb601) is authorized, ERROR_ACCESS_DENIED will be returned. [TsProxyCloseChannel](#Section_3.2.6.3.1) can also be made in this state, which moves the connection to the Tunnel Close Pending state. The [TsProxySetupReceivePipe](#Section_3.6.5.3) call is valid only in this state. If this call is made before the RDG [**client**](#gt_client) calls TsProxyCreateChannel, ERROR_ACCESS_DENIED will be returned. If it is made after the call to TsProxyCloseChannel, E_PROXY_ALREADYDISCONNECTED will be returned.
 
 The [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) call is allowed in this state. This call does not change the state.
 
 When TsProxyCloseTunnel is called in this state before a call to TsProxyCloseChannel, the RDG server closes the channel and completes the TsProxyCloseTunnel call. After completing this call, the RDG server moves to the End state.
 
-**Pipe Created:** When a call to TsProxySetupReceivePipe reaches the RDG server, the connection goes to the Pipe Created state. The [TsProxySendToServer](#Section_3.2.6.2.1) call is valid only in this state. If this call is made before the RDG client calls TsProxySetupReceivePipe, ERROR_ACCESS_DENIED will be returned. If it is made after the call to TsProxyCloseTunnel, E_PROXY_ALREADYDISCONNECTED will be returned.
+**Pipe Created:** When a call to TsProxySetupReceivePipe reaches the RDG server, the connection goes to the Pipe Created state. The [TsProxySendToServer](#Section_3.6.5.1) call is valid only in this state. If this call is made before the RDG client calls TsProxySetupReceivePipe, ERROR_ACCESS_DENIED will be returned. If it is made after the call to TsProxyCloseTunnel, E_PROXY_ALREADYDISCONNECTED will be returned.
 
 The TsProxyMakeTunnelCall call is allowed in this state. This call does not change the state.
 
@@ -3153,7 +3153,7 @@ The RDG [**server**](#gt_server) MAY use this timer to recover early instead of 
 
 The default value of the timer is 30 seconds.<31> The timer value MUST be between 30 seconds and 3 minutes, both inclusive, in units of minutes. This timer MUST be started after the call to [TsProxyCreateChannel](#Section_3.2.6.1.4) is received by the RDG server.
 
-If a call to [TsProxySetupReceivePipe](#Section_3.2.6.2.2) is received by the RDG server before the timer expires, the timer MUST be stopped.
+If a call to [TsProxySetupReceivePipe](#Section_3.6.5.3) is received by the RDG server before the timer expires, the timer MUST be stopped.
 
 If the call to the TsProxySetupReceivePipe is received by the RDG server after the timer has expired, the server MUST disconnect with the ERROR_BAD_ARGUMENTS return value, as specified in section [2.2.6](#Section_2.2.6).
 
@@ -3173,7 +3173,7 @@ This protocol asks the [**RPC**](#gt_remote-procedure-call-rpc) runtime to perfo
 
 The RDG [**server**](#gt_server) SHOULD<33> enforce appropriate security measures to be sure that the caller has the required permissions to execute the following routines.
 
-The methods MAY throw an exception, and the [**client**](#gt_client) MUST [**handle**](#gt_handle) these exceptions gracefully. The methods implemented by the RDG server MUST be sequential in order as specified in section [1.3.1.1](#Section_1.3). The method details are specified as follows.
+The methods MAY throw an exception, and the [**client**](#gt_client) MUST [**handle**](#gt_handle) these exceptions gracefully. The methods implemented by the RDG server MUST be sequential in order as specified in section [1.3.1.1](#Section_1.3.1.1). The method details are specified as follows.
 
 Methods in RPC Opnum Order
 
@@ -3187,8 +3187,8 @@ Methods in RPC Opnum Order
 | Opnum5NotUsedOnWire | Reserved for local use. Opnum: 5 |
 | [TsProxyCloseChannel](#Section_3.2.6.3.1) | Closes the channel between the RDG client and the target server. Opnum: 6 |
 | [TsProxyCloseTunnel](#Section_3.2.6.3.3) | Closes the tunnel between the RDG client and the RDG server. Opnum: 7 |
-| [TsProxySetupReceivePipe](#Section_3.2.6.2.2) | Used for data transfer from the RDG server to the RDG client. Opnum: 8 |
-| [TsProxySendToServer](#Section_3.2.6.2.1) | Used for data transfer from the RDG client to the RDG server. Opnum: 9 |
+| [TsProxySetupReceivePipe](#Section_3.6.5.3) | Used for data transfer from the RDG server to the RDG client. Opnum: 8 |
+| [TsProxySendToServer](#Section_3.6.5.1) | Used for data transfer from the RDG client to the RDG server. Opnum: 9 |
 
 **Note** In the preceding table, the term "Reserved for local use" means that the client MUST NOT send the opnum, and the RDG server behavior is undefined<35> because it does not affect interoperability.
 
@@ -3343,7 +3343,7 @@ Sequential Processing Rules:
 - The connection shutdown sequence is initiated.
 If any of the preceding events occurs, then the following steps MUST be performed:
 
-- If reauthentication is started because of session timeout timer expiration, then the RDG server MUST return the TsProxyMakeTunnelCall as explained in section [3.2.7.1](#Section_3.1.2.1).
+- If reauthentication is started because of session timeout timer expiration, then the RDG server MUST return the TsProxyMakeTunnelCall as explained in section [3.2.7.1](#Section_3.2.7.1).
 - Or else, if the RDG administrator has set the administrative message, then the RDG server MUST do the following:
 - The RDG server MUST set the **packetId** member of the *TSGPacketResponse* out parameter of TsProxyMakeTunnelCall to [TSG_PACKET_TYPE_MESSAGE_PACKET](#Section_2.2.5.2.11).
 - The RDG server MUST set TSGPacketResponse->packetMsgResponse->msgType to [TSG_ASYNC_MESSAGE_SERVICE_MESSAGE](#Section_2.2.5.2.15).
@@ -3394,7 +3394,7 @@ HRESULT TsProxyMakeTunnelCall(
 <a id="Section_3.2.6.1.4"></a>
 ##### 3.2.6.1.4 TsProxyCreateChannel (Opnum 4)
 
-The TsProxyCreateChannel method is used to create a [**channel**](#gt_channel) between the RDG [**client**](#gt_client) and the RDG [**server**](#gt_server).<44> The RDG server SHOULD connect to the [**target server**](#gt_target-server) during this call to start communication between the RDG client and target server. If connection to the target server cannot be done, the RDG server MUST return HRESULT_CODE(E_PROXY_TS_CONNECTFAILED) as noted in the Return Values section.<45> The RDG server MUST return a representation of the channel to the RDG client. After this method call has successfully been completed, a channel shutdown can be performed by using the [TsProxyCloseChannel](#Section_3.2.6.3.1) method. Please refer to section [3.1.1](#Section_3.2.2) for a state transition diagram.
+The TsProxyCreateChannel method is used to create a [**channel**](#gt_channel) between the RDG [**client**](#gt_client) and the RDG [**server**](#gt_server).<44> The RDG server SHOULD connect to the [**target server**](#gt_target-server) during this call to start communication between the RDG client and target server. If connection to the target server cannot be done, the RDG server MUST return HRESULT_CODE(E_PROXY_TS_CONNECTFAILED) as noted in the Return Values section.<45> The RDG server MUST return a representation of the channel to the RDG client. After this method call has successfully been completed, a channel shutdown can be performed by using the [TsProxyCloseChannel](#Section_3.2.6.3.1) method. Please refer to section [3.1.1](#Section_3.1.1) for a state transition diagram.
 
 Prerequisites: The tunnel MUST be authorized; otherwise, the error ERROR_ACCESS_DENIED is returned.
 
@@ -3429,9 +3429,9 @@ HRESULT TsProxyCreateChannel(
 
 **tsEndPointInfo:** Pointer to the [TSENDPOINTINFO](#Section_2.2.9.1) structure. The RDG client MUST provide a non-NULL pointer to the RDG server for this structure. The RDG server initializes the ADM element Target server names with an array of **resourceName** and **alternateResourceNames** members of TSENDPOINTINFO structure. The RDG server SHOULD try to connect to the target server by each name in the array until it succeeds or until the array is traversed completely. If connection fails for all target server names, HRESULT_CODE(E_PROXY_TS_CONNECTFAILED) (0x000059DD) is returned.<47> The rules for determining a valid server name are specified in section [2.2.1.1](#Section_2.2.1.1).
 
-**channelContext:** A RPC context handle that represents context-specific information for the channel. The RDG server MUST provide a non-NULL value. The RDG client MUST save and use this context handle on all subsequent method calls on the channel. Specifically, these methods are [TsProxySendToServer](#Section_3.2.6.2.1), [TsProxySetupReceivePipe](#Section_3.2.6.2.2), and TsProxyCloseChannel.
+**channelContext:** A RPC context handle that represents context-specific information for the channel. The RDG server MUST provide a non-NULL value. The RDG client MUST save and use this context handle on all subsequent method calls on the channel. Specifically, these methods are [TsProxySendToServer](#Section_3.6.5.1), [TsProxySetupReceivePipe](#Section_3.6.5.3), and TsProxyCloseChannel.
 
-**channelId:** An unsigned long identifying the channel. The RDG server MUST provide this value to the RDG client. The RDG client MUST save the returned channel ID for future use in the ADM element **Channel id** (section [3.5.1](#Section_3.2.2)). This channel ID is not required on any future method calls.
+**channelId:** An unsigned long identifying the channel. The RDG server MUST provide this value to the RDG client. The RDG client MUST save the returned channel ID for future use in the ADM element **Channel id** (section [3.5.1](#Section_3.5.1)). This channel ID is not required on any future method calls.
 
 **Return Values:** The method MUST return ERROR_SUCCESS on success. Other failures MUST be one of the codes listed. The client MAY interpret failures in any way it deems appropriate. See section [2.2.6](#Section_2.2.6) for details on these errors.
 
@@ -3451,7 +3451,7 @@ The error ERROR_ACCESS_DENIED is returned when this call is made on a tunnel whi
 <a id="Section_3.2.6.2.1"></a>
 ##### 3.2.6.2.1 TsProxySendToServer (Opnum 9)
 
-The method is used for data transfer from the RDG [**client**](#gt_client) to the [**target server**](#gt_target-server), via the RDG [**server**](#gt_server). The RDG server SHOULD send the buffer data received in this method to the target server. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST NOT perform a strict [**NDR**](#gt_network-data-representation-ndr) data consistency check for this method. The Remote Desktop Gateway Server Protocol bypasses NDR for this method. The wire data MUST follow the regular RPC specifications as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 2.1, and [MS-RPCE](../MS-RPCE/MS-RPCE.md) minus all NDR headers, trailers, and NDR-specific payload. The RDG server MUST have created the [**channel**](#gt_channel) to the target server before completing this method call. This method MAY be called multiple times by the RDG client, but only after the previous method call finishes. The RDG server MUST [**handle**](#gt_handle) multiple sequential invocations of this method call. This method bypasses NDR. For this reason, unlike other RPC methods that return an HRESULT, this method returns a DWORD. This is directly passed to the callee from underlying RPC calls.<48> When this call fails, the RDG server MUST send the final response to [TsProxySetupReceivePipe](#Section_3.2.6.2.2) call.
+The method is used for data transfer from the RDG [**client**](#gt_client) to the [**target server**](#gt_target-server), via the RDG [**server**](#gt_server). The RDG server SHOULD send the buffer data received in this method to the target server. The [**RPC**](#gt_remote-procedure-call-rpc) runtime MUST NOT perform a strict [**NDR**](#gt_network-data-representation-ndr) data consistency check for this method. The Remote Desktop Gateway Server Protocol bypasses NDR for this method. The wire data MUST follow the regular RPC specifications as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 2.1, and [MS-RPCE](../MS-RPCE/MS-RPCE.md) minus all NDR headers, trailers, and NDR-specific payload. The RDG server MUST have created the [**channel**](#gt_channel) to the target server before completing this method call. This method MAY be called multiple times by the RDG client, but only after the previous method call finishes. The RDG server MUST [**handle**](#gt_handle) multiple sequential invocations of this method call. This method bypasses NDR. For this reason, unlike other RPC methods that return an HRESULT, this method returns a DWORD. This is directly passed to the callee from underlying RPC calls.<48> When this call fails, the RDG server MUST send the final response to [TsProxySetupReceivePipe](#Section_3.6.5.3) call.
 
 Prerequisites: The connection MUST be in Pipe Created state. If this call is made in any other state, ERROR_ONLY_IF_CONNECTED or E_PROXY_TS_CONNECTFAILED is returned.
 
@@ -3488,7 +3488,7 @@ DWORD TsProxySendToServer(
 <a id="Section_3.2.6.2.2"></a>
 ##### 3.2.6.2.2 TsProxySetupReceivePipe (Opnum 8)
 
-The TsProxySetupReceivePipe method is used for data transfer from the RDG [**server**](#gt_server) to the RDG [**client**](#gt_client). The RDG server MUST create an [**RPC**](#gt_remote-procedure-call-rpc) [**out pipe**](#gt_out-pipe) upon receiving this method call from the RDG client. This call bypasses the [**NDR**](#gt_network-data-representation-ndr) and hence, the RPC runtime MUST NOT perform a strict NDR data consistency check for this method. Refer to section [3.6.5](#Section_3.2.6.2.1) for details on NDR-bypassing. Section [3.6.5.4](#Section_3.6.5.4) and section [3.6.5.5](#Section_3.6.5.5) give details on wire representation of data for responses to TsProxySetupReceivePipe. The out pipe MUST be created by the RDG server in the same manner as NDR creates it for a call.<49> The RDG server MUST use this out pipe and Stub Data field in RPC response PDUs to send all data from the target server to the RDG client on the [**channel**](#gt_channel). The RDG client MUST use this out pipe to pull data from the [**target server**](#gt_target-server) on the channel. On connection disconnect, the RDG server MUST send the following on the pipe: A DWORD return code in an RPC response PDU and set the PFC_LAST_FRAG bit in the **pfc_flags** field of the RPC response PDU. The pipe close is indicated when the PFC_LAST_FRAG bit is set in the **pfc_flags** field of the RPC response PDU. When the RDG client sees that the PFC_LAST_FRAG bit is set in the **pfc_flags** field of the RPC response PDU, it MUST interpret the 4 bytes Stub Data as the return code of TsProxySetupReceivePipe. For a description of RPC response PDU, **pfc_flags**, PFC_LAST_FRAG, and Stub Data, refer to sections 12.6.2 and 12.6.4.10 in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). The RDG client and RDG server MUST negotiate a separate out pipe for each channel. Out pipes MUST NOT be used or shared across channels.<50>
+The TsProxySetupReceivePipe method is used for data transfer from the RDG [**server**](#gt_server) to the RDG [**client**](#gt_client). The RDG server MUST create an [**RPC**](#gt_remote-procedure-call-rpc) [**out pipe**](#gt_out-pipe) upon receiving this method call from the RDG client. This call bypasses the [**NDR**](#gt_network-data-representation-ndr) and hence, the RPC runtime MUST NOT perform a strict NDR data consistency check for this method. Refer to section [3.6.5](#Section_3.6.5) for details on NDR-bypassing. Section [3.6.5.4](#Section_3.6.5.4) and section [3.6.5.5](#Section_3.6.5.5) give details on wire representation of data for responses to TsProxySetupReceivePipe. The out pipe MUST be created by the RDG server in the same manner as NDR creates it for a call.<49> The RDG server MUST use this out pipe and Stub Data field in RPC response PDUs to send all data from the target server to the RDG client on the [**channel**](#gt_channel). The RDG client MUST use this out pipe to pull data from the [**target server**](#gt_target-server) on the channel. On connection disconnect, the RDG server MUST send the following on the pipe: A DWORD return code in an RPC response PDU and set the PFC_LAST_FRAG bit in the **pfc_flags** field of the RPC response PDU. The pipe close is indicated when the PFC_LAST_FRAG bit is set in the **pfc_flags** field of the RPC response PDU. When the RDG client sees that the PFC_LAST_FRAG bit is set in the **pfc_flags** field of the RPC response PDU, it MUST interpret the 4 bytes Stub Data as the return code of TsProxySetupReceivePipe. For a description of RPC response PDU, **pfc_flags**, PFC_LAST_FRAG, and Stub Data, refer to sections 12.6.2 and 12.6.4.10 in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). The RDG client and RDG server MUST negotiate a separate out pipe for each channel. Out pipes MUST NOT be used or shared across channels.<50>
 
 As long as the channel is not closed, the RPC and Transport layer guarantee that any data that is sent by the RDG server reaches the RDG client. RPC and Transport layer also ensure that the data is delivered to the RDG client in the order it was sent by the RDG server.
 
@@ -3510,7 +3510,7 @@ Sequential Processing Rules:
 - If the Session Timeout Timer expires and the **TimeoutAction** ADM element is set to "disconnect on session timeout" RDG server:
 - If the ADM element **Negotiated Capabilities** contains [TSG_NAP_CAPABILITY_IDLE_TIMEOUT](#Section_2.2.5.2.20), then the RDG server MUST disconnect the session by sending the final response of the TsProxySetupReceivePipe method with the HRESULT_CODE(E_PROXY_SESSIONTIMEOUT) error code.
 - If the ADM element **Negotiated Capabilities** does not contain TSG_NAP_CAPABILITY_IDLE_TIMEOUT, then the RDG server MUST disconnect the session by sending the final response of the TsProxySetupReceivePipe method with the HRESULT_CODE(E_PROXY_CONNECTIONABORTED) error code.
-- If the session timeout timer expires and the **TimeoutAction** ADM element is set to "[**reauthentication**](#gt_reauthentication) on session timeout", the RDG server initiates a reauthentication with the client and starts the reauthentication timer, as explained in section [3.2.7.1](#Section_3.1.2.1). After the reauthentication timer expires, the RDG server MUST check the value of **Reauthentication Status** ADM element.
+- If the session timeout timer expires and the **TimeoutAction** ADM element is set to "[**reauthentication**](#gt_reauthentication) on session timeout", the RDG server initiates a reauthentication with the client and starts the reauthentication timer, as explained in section [3.2.7.1](#Section_3.2.7.1). After the reauthentication timer expires, the RDG server MUST check the value of **Reauthentication Status** ADM element.
 - If the ADM element **Reauthentication Status** is set to NONE:
 - If the ADM element **Negotiated Capabilities** contains TSG_NAP_CAPABILITY_IDLE_TIMEOUT, then the RDG server MUST disconnect the connection with HRESULT_CODE(E_PROXY_REAUTH_AUTHN_FAILED).
 - If the ADM element **Negotiated Capabilities** does not contain TSG_NAP_CAPABILITY_IDLE_TIMEOUT, then the RDG server MUST disconnect the connection with HRESULT_CODE(E_PROXY_CONNECTIONABORTED).
@@ -3558,12 +3558,12 @@ The error DWORD value is always sent, when the receive pipe closes down. The rec
 <a id="Section_3.2.6.3"></a>
 #### 3.2.6.3 Shutdown Phase
 
-Shutdown phase is used to terminate the [**channel**](#gt_channel) and [**tunnel (2)**](#gt_1ebdc9c6-bb01-455e-98f7-8930618bb601). Channel closure can either be initiated by the RDG [**client**](#gt_client) or the RDG [**server**](#gt_server). The RDG client SHOULD initiate it by closing the channel using method [TsProxyCloseChannel](#Section_3.2.6.3.1). The RDG server initiates it by setting the PFC_LAST_FRAG bit in the **pfc_flags** field in the final response for the [TsProxySetupReceivePipe](#Section_3.2.6.2.2) method. If the client has any pending administrative message requests on the RDG server, the client cancels the same by making a [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) call with [TSG_TUNNEL_CANCEL_ASYNC_MSG_REQUEST](#Section_2.2.5.2.18) as a parameter. The closing of tunnel is accomplished by using the [TsProxyCloseTunnel](#Section_3.2.6.3.3) method.
+Shutdown phase is used to terminate the [**channel**](#gt_channel) and [**tunnel (2)**](#gt_1ebdc9c6-bb01-455e-98f7-8930618bb601). Channel closure can either be initiated by the RDG [**client**](#gt_client) or the RDG [**server**](#gt_server). The RDG client SHOULD initiate it by closing the channel using method [TsProxyCloseChannel](#Section_3.2.6.3.1). The RDG server initiates it by setting the PFC_LAST_FRAG bit in the **pfc_flags** field in the final response for the [TsProxySetupReceivePipe](#Section_3.6.5.3) method. If the client has any pending administrative message requests on the RDG server, the client cancels the same by making a [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) call with [TSG_TUNNEL_CANCEL_ASYNC_MSG_REQUEST](#Section_2.2.5.2.18) as a parameter. The closing of tunnel is accomplished by using the [TsProxyCloseTunnel](#Section_3.2.6.3.3) method.
 
 <a id="Section_3.2.6.3.1"></a>
 ##### 3.2.6.3.1 TsProxyCloseChannel (Opnum 6)
 
-The TsProxyCloseChannel method is used to terminate the [**channel**](#gt_channel) from the RDG [**client**](#gt_client) to the RDG [**server**](#gt_server). This SHOULD be called only if the RDG client has not received the RPC response PDU with the PFC_LAST_FRAG bit set in the **pfc_flags** field. All communication between the RDG client and the [**target server**](#gt_target-server) MUST stop after the RDG server executes this method. The RDG client MUST NOT use this context [**handle**](#gt_handle) in any subsequent operations after calling this method. This will terminate the channel between the RDG client and the target server. If the RDG server has not already sent the RPC response PDU with the PFC_LAST_FRAG bit set in the **pfc_flags** field, which happens if the RDG server initiated the disconnect, the RDG client will also receive a return code for [TsProxySetupReceivePipe](#Section_3.2.6.2.2) in an RPC response PDU with the PFC_LAST_FRAG bit set in the **pfc_flags**. For a description of RPC response PDU, pfc_flags, and PFC_LAST_FRAG, refer to [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 12.6.2 and 12.6.14.10.
+The TsProxyCloseChannel method is used to terminate the [**channel**](#gt_channel) from the RDG [**client**](#gt_client) to the RDG [**server**](#gt_server). This SHOULD be called only if the RDG client has not received the RPC response PDU with the PFC_LAST_FRAG bit set in the **pfc_flags** field. All communication between the RDG client and the [**target server**](#gt_target-server) MUST stop after the RDG server executes this method. The RDG client MUST NOT use this context [**handle**](#gt_handle) in any subsequent operations after calling this method. This will terminate the channel between the RDG client and the target server. If the RDG server has not already sent the RPC response PDU with the PFC_LAST_FRAG bit set in the **pfc_flags** field, which happens if the RDG server initiated the disconnect, the RDG client will also receive a return code for [TsProxySetupReceivePipe](#Section_3.6.5.3) in an RPC response PDU with the PFC_LAST_FRAG bit set in the **pfc_flags**. For a description of RPC response PDU, pfc_flags, and PFC_LAST_FRAG, refer to [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) sections 12.6.2 and 12.6.14.10.
 
 The RDG server completes the TsProxyCloseChannel only after sending all of the data it received before this call was made. The RDG client receives the call complete notification only after it receives all of the data that was sent by the RDG server before completing TsProxyCloseChannel. Please refer to section 3.2.6.2.2 for details on how the data is ensured to reach the destination.
 
@@ -3607,7 +3607,7 @@ Prerequisites: The connection MUST be in any of the following states: Connected 
 Sequential Processing Rules:
 
 - The RDG server MUST check whether the tunnel context handle is NULL or not a valid context handle. If so, it MUST return ERROR_ACCESS_DENIED.
-- If there are any channels in the tunnel then the RDG server MUST disconnect them. If TsProxyCloseChannel has not already been called then the RDG server MUST close the [**RPC**](#gt_remote-procedure-call-rpc) out pipe and return ERROR_GRACEFUL_DISCONNECT for the [TsProxySetupReceivePipe](#Section_3.2.6.2.2).
+- If there are any channels in the tunnel then the RDG server MUST disconnect them. If TsProxyCloseChannel has not already been called then the RDG server MUST close the [**RPC**](#gt_remote-procedure-call-rpc) out pipe and return ERROR_GRACEFUL_DISCONNECT for the [TsProxySetupReceivePipe](#Section_3.6.5.3).
 - The RDG server MUST disconnect the tunnel.
 - If the ADM element **Reauthentication Connection** is FALSE:
 - The RDG server MUST decrement the ADM element **Number of Connections** by 1.
@@ -3631,7 +3631,7 @@ HRESULT TsProxyCloseTunnel(
 <a id="Section_3.2.6.3.4"></a>
 ##### 3.2.6.3.4 Server Initiated Shutdown
 
-The [**server**](#gt_server) initiates shutdown by sending the final response packet to [TsProxySetupReceivePipe](#Section_3.2.6.2.2) call with the PFC_LAST_FRAG bit set in the **pfc_flags** field. The server closes the [**channel**](#gt_channel) after sending this response. The [**client**](#gt_client) SHOULD not call [TsProxyCloseChannel](#Section_3.2.6.3.1) after receiving this final response. The client SHOULD call the TsProxyCloseChannel method if the client initiates the shutdown, but not if the server initiates shutdown.
+The [**server**](#gt_server) initiates shutdown by sending the final response packet to [TsProxySetupReceivePipe](#Section_3.6.5.3) call with the PFC_LAST_FRAG bit set in the **pfc_flags** field. The server closes the [**channel**](#gt_channel) after sending this response. The [**client**](#gt_client) SHOULD not call [TsProxyCloseChannel](#Section_3.2.6.3.1) after receiving this final response. The client SHOULD call the TsProxyCloseChannel method if the client initiates the shutdown, but not if the server initiates shutdown.
 
 Prerequisites: The connection MUST be in Pipe Created state.
 
@@ -3647,11 +3647,11 @@ Sequential Processing Rules:
 #### 3.2.7.1 Session Timeout Timer
 
 - If the Session Timeout Timer expires and "disconnect on session timeout" is configured at the RDG [**server**](#gt_server), then review the following.
-- If the ADM element **Negotiated Capabilities** contains [TSG_NAP_CAPABILITY_IDLE_TIMEOUT](#Section_2.2.5.2.20), then the RDG server MUST disconnect the session by sending the final response of the [TsProxySetupReceivePipe](#Section_3.2.6.2.2) method with the HRESULT_CODE(E_PROXY_SESSIONTIMEOUT) error code.
+- If the ADM element **Negotiated Capabilities** contains [TSG_NAP_CAPABILITY_IDLE_TIMEOUT](#Section_2.2.5.2.20), then the RDG server MUST disconnect the session by sending the final response of the [TsProxySetupReceivePipe](#Section_3.6.5.3) method with the HRESULT_CODE(E_PROXY_SESSIONTIMEOUT) error code.
 - If the ADM element **Negotiated Capabilities** doesn't contain TSG_NAP_CAPABILITY_IDLE_TIMEOUT, then the RDG server MUST disconnect the session by sending the final response of the TsProxySetupReceivePipe method with the HRESULT_CODE(E_PROXY CONNECTIONABORTED) error code.
 - Otherwise, if this timer expires and "reauthentication on session timeout" is configured at the RDG server, the RDG server MUST initiate the [**reauthentication**](#gt_reauthentication) connection as follows:
 - The RDG server MUST set the ADM element **Reauthentication Status** to None.
-- The RDG server MUST start the [Reauthentication Timer](#Section_3.2.7.2).
+- The RDG server MUST start the [Reauthentication Timer](#Section_3.1.2.2).
 - If there is no waiting [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) call, do nothing.
 - If there is a waiting TsProxyMakeTunnelCall call:
 - The RDG server MUST set the **packetId** member of the *TSGPacketResponse* out parameter of TsProxyMakeTunnelCall to [TSG_PACKET_TYPE_MESSAGE_PACKET](#Section_2.2.5.2.11).
@@ -3675,16 +3675,16 @@ If the Reauthentication Timer expires, the RDG [**server**](#gt_server) MUST che
 - If the ADM element **Reauthentication Status** is set to UserAuthorizationCompleted:
 - If the ADM element **Negotiated Capabilities** contains TSG_NAP_CAPABILITY_IDLE_TIMEOUT, then the RDG server MUST disconnect the connection with HRESULT_CODE (E_PROXY_REAUTH_RAP_FAILED).
 - If the ADM element **Negotiated Capabilities** doesn't contain TSG_NAP_CAPABILITY_IDLE_TIMEOUT, then the RDG server MUST disconnect the connection with HRESULT_CODE (E_PROXY_CONNECTIONABORTED).
-- If the ADM element **Reauthentication Status** is set to ResourceAuthorizationCompleted, the RDG server MUST start the [Session Timeout Timer](#Section_3.1.2.1) and MUST reset the ADM element **Reauthentication Status** to NONE.
+- If the ADM element **Reauthentication Status** is set to ResourceAuthorizationCompleted, the RDG server MUST start the [Session Timeout Timer](#Section_3.2.7.1) and MUST reset the ADM element **Reauthentication Status** to NONE.
 <a id="Section_3.2.7.3"></a>
 #### 3.2.7.3 Connection Timer
 
-If the Connection Timer expires and the call to the [TsProxySetupReceivePipe](#Section_3.2.6.2.2) method is received by the RDG [**server**](#gt_server) after the timer has expired, the server MUST disconnect with the ERROR_OPERATION_ABORTED return value, as specified in section [2.2.6](#Section_2.2.6).
+If the Connection Timer expires and the call to the [TsProxySetupReceivePipe](#Section_3.6.5.3) method is received by the RDG [**server**](#gt_server) after the timer has expired, the server MUST disconnect with the ERROR_OPERATION_ABORTED return value, as specified in section [2.2.6](#Section_2.2.6).
 
 <a id="Section_3.2.7.4"></a>
 #### 3.2.7.4 Data Arrival From the Target Server
 
-This event occurs when the [**target server**](#gt_target-server) data arrives at the RDG [**server**](#gt_server) that is destined for the RDG [**client**](#gt_client). When this event occurs, the RDG server MUST stream the data to the RDG client, in response to the [TsProxySetupReceivePipe](#Section_3.2.6.2.2), in the same order that it arrived.
+This event occurs when the [**target server**](#gt_target-server) data arrives at the RDG [**server**](#gt_server) that is destined for the RDG [**client**](#gt_client). When this event occurs, the RDG server MUST stream the data to the RDG client, in response to the [TsProxySetupReceivePipe](#Section_3.6.5.3), in the same order that it arrived.
 
 <a id="Section_3.3"></a>
 ## 3.3 HTTP Transport - Server Protocol Details
@@ -3724,7 +3724,7 @@ Figure 15: RDG HTTP server channel state machine
 
 The RDG server initializes the HTTP connection and creates an HTTP server session with version 2.0. The HTTP server session is updated with the authentication scheme Negotiate, NTLM, Digest and Basic. Mutual authentication is mandated on the session. NTLM credential caching is disabled. The RDG server binds to the *HTTPS Binding URL* parameter. In this case, <Port number> is the port number used, which can be changed. If the RDG server is deployed behind a reverse proxy, the connection between the reverse proxy and the RDG server can be over HTTP, in which case, the RDG server binds to the *HTTP Binding URL* parameter.
 
-After the RDG client and the RDG server have successfully created an IN channel and an OUT channel, the [Keep-alive Timer (section 3.3.6.4)](#Section_3.3.3.1) is started.
+After the RDG client and the RDG server have successfully created an IN channel and an OUT channel, the [Keep-alive Timer (section 3.3.6.4)](#Section_3.3.6.4) is started.
 
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
@@ -3769,9 +3769,9 @@ The first set of messages exchanged is the version negotiation packet [HTTP_HAND
 
 - The RDG client sends an [HTTP_TUNNEL_PACKET](#Section_2.2.10.18) and receives a corresponding [HTTP_TUNNEL_RESPONSE](#Section_2.2.10.20) (shown in steps 10 and 11 in the figure in section 3.3.5.1). If the response contains an error, the client closes the connection and sends the error to the higher layer. At the end of this step, the RDG client has passed CAP (Connection Authorization Policies) checks.
 - The RDG client MUST send the [HTTP_TUNNEL_AUTH_PACKET](#Section_2.2.10.14), appending [HTTP_TUNNEL_AUTH_PACKET_OPTIONAL](#Section_2.2.10.15), to the RDG server (shown in step 11 in the figure in section 3.3.5.1). The client MUST set **clientName** as the name of the RDG client, **cbClientName** as the length of the RDG client name, **fieldsPresent** as HTTP_TUNNEL_AUTH_FIELD_SOH (if Negotiated Capabilities contains HTTP_CAPABILITY_TYPE_QUAR_SOH), and **statementOfHealth** and **clientName** of the HTTP_TUNNEL_AUTH_PACKET_OPTIONAL structure to authorize the tunnel.
-The RDG client MUST receive the [HTTP_TUNNEL_AUTH_RESPONSE](#Section_2.2.10.17) and [HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL](#Section_2.2.10.17) structures (shown in step 12 in the figure in section 3.3.5.1). If the errorCode in HTTP_TUNNEL_AUTH_RESPONSE is S_OK or E_PROXY_QUARANTINE_ACCESSDENIED, continue the following steps. Otherwise, the RDG client MUST close the connection.
+The RDG client MUST receive the [HTTP_TUNNEL_AUTH_RESPONSE](#Section_2.2.10.16) and [HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL](#Section_2.2.10.17) structures (shown in step 12 in the figure in section 3.3.5.1). If the errorCode in HTTP_TUNNEL_AUTH_RESPONSE is S_OK or E_PROXY_QUARANTINE_ACCESSDENIED, continue the following steps. Otherwise, the RDG client MUST close the connection.
 
-- The RDG client sends an [HTTP_CHANNEL_PACKET](#Section_2.2.10.3) with the target server details and receives a corresponding response (shown in steps 12 and 13 in the figure in section 3.3.5.1). If the response contains an error, the RDG client MAY close the connection. At the end of this step, the RDG client has passed RAP (Resource Authorization Policies) checks and is successfully connected to the target server.
+- The RDG client sends an [HTTP_CHANNEL_PACKET](#Section_2.2.10.2) with the target server details and receives a corresponding response (shown in steps 12 and 13 in the figure in section 3.3.5.1). If the response contains an error, the RDG client MAY close the connection. At the end of this step, the RDG client has passed RAP (Resource Authorization Policies) checks and is successfully connected to the target server.
 ![Data flow and connection close](media/image17.png)
 
 Figure 18: Data flow and connection close
@@ -3933,15 +3933,15 @@ If a [**DTLS**](#gt_datagram-transport-layer-security-dtls) error or non-DTLS er
 - If the DTLS decrypt message fails with an error that indicates that the DTLS handshake is not complete, the RDGUDP server returns to the DTLS handshake phase again.
 - If decrypt message fails with an ignorable error, the RDGUDP server ignores the message and waits for another incoming message. For information on ignorable DTLS errors, see [[RFC4347]](https://go.microsoft.com/fwlink/?LinkId=227111).
 - If the decrypt succeeds, the RDGUDP server MUST end the connection if it is not [CONNECT_PKT (section 2.2.11.3)](#Section_2.2.11.3) and skip the remaining processing rules.
-- The RDGUDP server verifies the signature on CONNECT_PKT.authnCookie and decodes it. For information on how to verify the signature, see section [3.6.4](#Section_3.4.3)
+- The RDGUDP server verifies the signature on CONNECT_PKT.authnCookie and decodes it. For information on how to verify the signature, see section [3.6.4](#Section_3.6.4)
 - The RDGUDP server maps the decoded message to the **AUTHN_COOKIE_DATA** data structure.
 - The RDGUDP server compares AUTHN_COOKIE_DATA.ftExpiryTime with the current time.
-- If AUTHN_COOKIE_DATA.ftExpiryTime is greater than current time, the RDGUDP server establishes a connection with the target server as described in [MS-RDPEUDP](#Section_1.7.3). Otherwise, if AUTHN_COOKIE_DATA.ftExpiryTime is less than the current time, the RDGUDP server skips steps b and c and sets the result in CONNECT_PKT_RESP to E_ACCESS_DENIED.
+- If AUTHN_COOKIE_DATA.ftExpiryTime is greater than current time, the RDGUDP server establishes a connection with the target server as described in [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md). Otherwise, if AUTHN_COOKIE_DATA.ftExpiryTime is less than the current time, the RDGUDP server skips steps b and c and sets the result in CONNECT_PKT_RESP to E_ACCESS_DENIED.
 - While connecting to the target server, the RDGUDP server does not resolve the AUTHN_COOKIE_DATA.szServerName again to find the IP address. Instead it SHOULD use the AUTHN_COOKIE_DATA.szServerIP in AUTHN_COOKIE_DATA.
 - If the connection to the target server is successful, the RDGUDP server sets CONNECT_PKT_RESP.Result to S_OK.
 - If the connection to the target server fails, the RDGUDP server sets CONNECT_PKT_RESP. Result to E_PROXY_TS_CONNECT_FAILED.
 - The RDGUDP server sends the CONNECT_PKT_RESP to the RDGUDP client.
-- If the Result is S_OK, move the connection state to Connected; otherwise, move it to the [Shutdown phase (section 3.4.3.4)](#Section_3.2.6.3).
+- If the Result is S_OK, move the connection state to Connected; otherwise, move it to the [Shutdown phase (section 3.4.3.4)](#Section_3.4.3.4).
 <a id="Section_3.4.3.3"></a>
 #### 3.4.3.3 Data Transfer Phase
 
@@ -3949,7 +3949,7 @@ If an error occurs in the following process, the RD Gateway UDP server ends the 
 
 - The RDGUDP server decrypts the message using DTLS and forwards the message to the target server
 - If the decrypted message is a **DATA_PKT**, then the RDGUDP server forwards the DATA_PKT.data to the target server.
-- Otherwise, if the decrypted message contains **DISC_PKT**, then proceed to [Shutdown phase (section 3.4.3.4)](#Section_3.2.6.3).
+- Otherwise, if the decrypted message contains **DISC_PKT**, then proceed to [Shutdown phase (section 3.4.3.4)](#Section_3.4.3.4).
 - The RDGUDP server copies the message received from target server to DATA_PKT.data, encrypts the DATA_PKT, and sends it to the RDGUDP client.
 <a id="Section_3.4.3.4"></a>
 #### 3.4.3.4 Shut Down Phase
@@ -4017,7 +4017,7 @@ Whenever there is a change in the RDG [**client**](#gt_client) computer's health
 <a id="Section_3.6"></a>
 ## 3.6 RPC Transport - Client Protocol Details
 
-The following sections contain the details of the [TsProxyRpcInterface (section 3.2.1)](#Section_1.3) on the client.
+The following sections contain the details of the [TsProxyRpcInterface (section 3.2.1)](#Section_3.2.1) on the client.
 
 <a id="Section_3.6.1"></a>
 ### 3.6.1 Abstract Data Model
@@ -4061,7 +4061,7 @@ This protocol asks the [**RPC**](#gt_remote-procedure-call-rpc) runtime to perfo
 
 All the methods implemented by the RDG [**server**](#gt_server) SHOULD enforce appropriate security measures to make sure that the RDG [**client**](#gt_client) has the required permissions to execute the routines. All methods MUST be RPC calls. However, these methods MUST be called in a sequence specified in section [1.3](#Section_1.3).
 
-The methods MAY throw an exception and the RDG client MUST [**handle**](#gt_handle) these exceptions appropriately. The methods called by the RDG client MUST be sequential in order, as specified in section [1.3.1.1](#Section_1.3). The method details are specified in section [3.2.6](#Section_1.3).
+The methods MAY throw an exception and the RDG client MUST [**handle**](#gt_handle) these exceptions appropriately. The methods called by the RDG client MUST be sequential in order, as specified in section [1.3.1.1](#Section_1.3.1.1). The method details are specified in section [3.2.6](#Section_3.2.6).
 
 A RDG client's invocation of each method is typically the result of local application activity. The local application at the RDG client specifies values for all input parameters. No other higher-layer triggered events are processed.
 
@@ -4090,15 +4090,15 @@ Sequential processing rules for connection process:
 - If the call TsProxyAuthorizeTunnel fails with error E_PROXY_QUARANTINE_ACCESSDENIED, the RDG client MUST end the protocol and MUST NOT follow the steps later in this section.
 - If the ADM element **Idle Timeout Value** is nonzero, the RDG client SHOULD start the idle time processing as specified in section [3.6.2.1.1](#Section_3.6.2.1.1) and SHOULD end the protocol when the connection has been idle for the specified **Idle Timeout Value**.
 - If the ADM element **Negotiated Capabilities** contains [TSG_MESSAGING_CAP_SERVICE_MSG](#Section_2.2.5.2.22), a [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) call MAY be made by the client, with [TSG_TUNNEL_CALL_ASYNC_MSG_REQUEST](#Section_2.2.5.2.17) as the parameter, to receive messages from the RDG server.
-- The RDG client MUST call [TsProxyCreateChannel](#Section_3.2.6.1.4) to create a [**channel**](#gt_channel) to the [**target server**](#gt_target-server) name as specified by the ADM element **Target Server Name** (section [3.5.1](#Section_3.2.2)).
+- The RDG client MUST call [TsProxyCreateChannel](#Section_3.2.6.1.4) to create a [**channel**](#gt_channel) to the [**target server**](#gt_target-server) name as specified by the ADM element **Target Server Name** (section [3.5.1](#Section_3.5.1)).
 - If the call fails, the RDG client MUST end the protocol and MUST not follow the below steps.
 - The RDG client MUST initialize the following ADM elements using TsProxyCreateChannel out parameters.
 - The RDG client MUST initialize the ADM element **Channel id** with the *channelId* out parameter.
 - The RDG client MUST initialize the ADM element **Channel Context Handle** with the *channelContext* out parameter. This **Channel Context Handle** is used for subsequent channel-related calls.
 Sequential processing rules for data transfer:
 
-- The RDG client MUST call [TsProxySetupReceivePipe](#Section_3.2.6.2.2) to receive data from the target server, via the RDG server.
-- The RDG client MUST call [TsProxySendToServer](#Section_3.2.6.2.1) to send data to the target server via the RDG server, and if the Idle Timeout Timer is started, the RDG client SHOULD reset the Idle Timeout Timer.
+- The RDG client MUST call [TsProxySetupReceivePipe](#Section_3.6.5.3) to receive data from the target server, via the RDG server.
+- The RDG client MUST call [TsProxySendToServer](#Section_3.6.5.1) to send data to the target server via the RDG server, and if the Idle Timeout Timer is started, the RDG client SHOULD reset the Idle Timeout Timer.
 - If [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) is returned, the RDG client MUST process the message and MAY call TsProxyMakeTunnelCall again with TSG_TUNNEL_CALL_ASYNC_MSG_REQUEST as the parameter.
 - The RDG client MUST end the protocol after it receives the final response to TsProxySetupReceivePipe. The final response format is specified in section [2.2.9.4.3](#Section_2.2.9.4.3).
 Sequential processing rules for ending the protocol:
@@ -4119,7 +4119,7 @@ Other than the above, no other special message processing is required on the RDG
 <a id="Section_3.6.5"></a>
 ### 3.6.5 Data Representation forTsProxySetupReceivePipe and TsProxySendToServer
 
-NDR64 specifies a method to package the data before sending it on the wire. For improved performance, [TsProxySetupReceivePipe](#Section_3.2.6.2.2) and [TsProxySendToServer](#Section_3.2.6.2.1) deviate from the [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) specification of the Network Data Representation. This section documents how these two calls bypass NDR64 and how the data is represented on the wire. For more information about NDR64, see [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.5.
+NDR64 specifies a method to package the data before sending it on the wire. For improved performance, [TsProxySetupReceivePipe](#Section_3.6.5.3) and [TsProxySendToServer](#Section_3.6.5.1) deviate from the [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) specification of the Network Data Representation. This section documents how these two calls bypass NDR64 and how the data is represented on the wire. For more information about NDR64, see [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.5.
 
 In the case of TsProxySetupReceivePipe and TsProxySendToServer, the Stub Data is not encoded using NDR64, instead it is sent over the wire as it is. Verification Trailer ([MS-RPCE] section 2.2.2.13) is also not passed with the Stub Data.
 
@@ -4264,7 +4264,7 @@ The RDG client uses the following sequencing rules and message processing in its
 - [Connection Setup and Authentication (section 3.7.5.1)](#Section_3.7.5.1)
 - [Tunnel and Channel Creation (section 3.7.5.2)](#Section_3.7.5.2)
 - [Data and Server Message Exchange (section 3.7.5.3)](#Section_3.7.5.3)
-- [Connection Close (section 3.7.5.4)](#Section_3.3.5.5)
+- [Connection Close (section 3.7.5.4)](#Section_3.7.5.4)
 <a id="Section_3.7.5.1"></a>
 #### 3.7.5.1 Connection Setup and Authentication
 
@@ -4287,12 +4287,12 @@ After the connection setup and handshake of version and capability exchange desc
 - The RDG client MUST initialize the ADM element **CertChainData** with **serverCert** of the HTTP_TUNNEL_RESPONSE_OPTIONAL structure if it is present
 - The RDG client MUST get its [**SoH**](#gt_statement-of-health-soh) by calling **NAP EC API**. If the SoH is received successfully, encrypt the SoH with the RDG server [**certificate**](#gt_certificate) context available in the ADM element **CertChainData**. The RDG client MUST pass the **consentMsg** to the higher layer if it is present in HTTP_TUNNEL_RESPONSE_OPTIONAL structure.
 - The RDG client MUST send the [HTTP_TUNNEL_AUTH_PACKET (section 2.2.10.14)](#Section_2.2.10.14) appending [HTTP_TUNNEL_AUTH_PACKET_OPTIONAL (section 2.2.10.15)](#Section_2.2.10.15) to the RDG server after setting **clientName** as the name of the RDG client, **cbClientName** as the length of the RDG client name, **fieldsPresent** set as HTTP_TUNNEL_AUTH_FIELD_SOH if Negotiated Capabilities contains HTTP_CAPABILITY_TYPE_QUAR_SOH, and accordingly setting **statementOfHealth** and **clientName** of the HTTP_TUNNEL_AUTH_PACKET_OPTIONAL structure to authorize the tunnel.
-- The RDG client MUST receive the [HTTP_TUNNEL_AUTH_RESPONSE (section 2.2.10.16)](#Section_2.2.10.17) and [HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL (section 2.2.10.17)](#Section_2.2.10.17) structures. If the **errorCode** in HTTP_TUNNEL_AUTH_RESPONSE is S_OK or E_PROXY_QUARANTINE_ACCESSDENIED, continue the following steps. Otherwise, the RDG client MUST end the protocol.
+- The RDG client MUST receive the [HTTP_TUNNEL_AUTH_RESPONSE (section 2.2.10.16)](#Section_2.2.10.16) and [HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL (section 2.2.10.17)](#Section_2.2.10.17) structures. If the **errorCode** in HTTP_TUNNEL_AUTH_RESPONSE is S_OK or E_PROXY_QUARANTINE_ACCESSDENIED, continue the following steps. Otherwise, the RDG client MUST end the protocol.
 - If the ADM element **Negotiated Capabilities** contains HTTP_CAPABILITY_IDLE_TIMEOUT, then the ADM element **Idle Timeout Value** SHOULD be initialized with **idleTimeout** in the HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL structure; otherwise, it MUST be initialized with zero.
 - If the ADM element **Negotiated Capabilities** contains HTTP_CAPABILITY_TYPE_QUAR_SOH, then the ADM element **Statement of health response** SHOULD be initialized with the **SoHResponse** of HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL structure; otherwise, it MUST be initialized with NULL.
 - If **Statement of health response** is non-NULL, then decrypt the **Statement of health response** variable and pass it to Process SoHR Task.
 - If the **errorCode** in HTTP_TUNNEL_AUTH_RESPONSE is E_PROXY_QUARANTINE_ACCESSDENIED, the RDG client MUST end the protocol.
-- The RDG client MUST send [HTTP_CHANNEL_PACKET (section 2.2.10.2)](#Section_2.2.10.3) and append the [HTTP_CHANNEL_PACKET_VARIABLE (section 2.2.10.3)](#Section_2.2.10.3) structure to create the channel.
+- The RDG client MUST send [HTTP_CHANNEL_PACKET (section 2.2.10.2)](#Section_2.2.10.2) and append the [HTTP_CHANNEL_PACKET_VARIABLE (section 2.2.10.3)](#Section_2.2.10.3) structure to create the channel.
 - The RDG client MUST receive [HTTP_CHANNEL_RESPONSE (section 2.2.10.4)](#Section_2.2.10.4) and [HTTP_CHANNEL_RESPONSE_OPTIONAL (section 2.2.10.5)](#Section_2.2.10.5). If the **errorCode** is not S_OK, the RDG client MUST end the protocol.
 - The RDG client MUST initialize the ADM elements **Channel id**, **udpPort** and **UDPAuthCookie** with the *channelId*, *udpPort* and *authnCookie* parameters of the HTTP_CHANNEL_RESPONSE_OPTIONAL structure.
 <a id="Section_3.7.5.3"></a>
@@ -4345,7 +4345,7 @@ The RD Gateway UDP client initializes DTLS.
 - Whenever the Remote Desktop Protocol: Basic Connectivity and Graphics Remoting Protocol has data to be sent, the RDG client MUST copy the RDP data payload to DATA_PKT.data and encrypt the **DATA_PKT** with DTLS.
 - The RDG client MUST send the encrypted message to the RDGUDP server.
 - The RDG client MUST decrypt the incoming messages with DTLS and map the decrypted message to **DATA_PKT** structure.
-- If the decrypted packet contains a DATA_PKT structure, the RDG client MUST hand over the DATA_PKT.data to the Remote Desktop Protocol UDP Transport Extension specified in [MS-RDPEUDP](#Section_1.7.3) for processing. Otherwise, if the decrypted message contains **DISC_PKT**, then the RDG client MUST end the connection.
+- If the decrypted packet contains a DATA_PKT structure, the RDG client MUST hand over the DATA_PKT.data to the Remote Desktop Protocol UDP Transport Extension specified in [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) for processing. Otherwise, if the decrypted message contains **DISC_PKT**, then the RDG client MUST end the connection.
 <a id="Section_3.8.3"></a>
 ### 3.8.3 Establishing a Connection
 
@@ -4398,7 +4398,7 @@ Finally, DTLS encrypts the fragments and sends them to the RDP server.
 - If both the client and the server are capable of handling administrative messages, the client can request administrative messages using the [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) method. This call is queued up on the server and is completed only when the messages are available.
 - The RDG client makes the [TsProxyCreateChannel](#Section_3.2.6.1.4) method call using the tunnel (2) context handle. The RDG client passes the [**target server**](#gt_target-server) information to the RDG server and obtains the [**channel**](#gt_channel) context handle from the RDG server.
 - The RDG server receives the TsProxyCreateChannel method and determines, based on the NAP policy, if the RDG client is allowed to connect to the target server. If the connection is allowed, the RDG server creates a context handle to represent the channel and returns this to the RDG client.
-- The RDG client makes the [TsProxySetupReceivePipe](#Section_3.2.6.2.2) method call.
+- The RDG client makes the [TsProxySetupReceivePipe](#Section_3.6.5.3) method call.
 - The RDG server receives the TsProxySetupReceivePipe method and creates an RPC [**out pipe**](#gt_out-pipe). The RDG server can now send data on the [**pipe**](#gt_pipe).
 - The RDG client and RDG server start sending and receiving data from this point.
 - The RDG client makes the [TsProxyCloseChannel](#Section_3.2.6.3.1) method call to close the channel.
@@ -4837,7 +4837,7 @@ pServerChannelContextHandle;
 
 );
 
-Example for the [TsProxySendToServer](#Section_3.2.6.2.1) method.
+Example for the [TsProxySendToServer](#Section_3.6.5.1) method.
 
 DWORD = {to be filled in by server}
 
@@ -4955,7 +4955,7 @@ TsProxyCloseTunnel(
 ### 4.1.2 Pluggable Authentication Scenario with Consent Message Returned
 
 - The RDG client obtains the name of a RDG server by using an out-of-band mechanism. The RDG client also obtains the cookie required for authenticating the user on the server by an out-of-band mechanism. The RDG client establishes a binding handle (a binding handle is specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 2.1) to the RDG server at the well-known endpoint of 443 and 3388. The RDG client then calls the [TsProxyCreateTunnel](#Section_3.2.6.1.1) method to create and obtain the tunnel context handle. Note that at this point in time, the connection is unauthenticated. The RDG server then authenticates the user using the cookie that is passed in. As part of this call, the client sends current version capabilities to the server.
-- The rest of the call flow is identical to what is specified in section [4.1.1](#Section_4.3.1).
+- The rest of the call flow is identical to what is specified in section [4.1.1](#Section_4.1.1).
 For example, the client calls the TsProxyCreateTunnel method on a server named "fourthcoffee.example.com". The cookie content "Test" is used for authenticating the user. The Consent Message "Accept" is returned.
 
 Example for the TsProxyCreateTunnel method:
@@ -5193,7 +5193,7 @@ long isConsentMandatory = 1;
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Reauthentication
 
-- Reauthentication is possible only if both the client and the server have the capability to handle the same. This capability is found out during the capability exchange during tunnel creation. This capability is based on capability to support Service Messages. As noted in section [4.1.1](#Section_4.3.1), a message request is queued up on the server using the [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) method. The following sequence of calls takes place when the server expects the client to reauthenticate.
+- Reauthentication is possible only if both the client and the server have the capability to handle the same. This capability is found out during the capability exchange during tunnel creation. This capability is based on capability to support Service Messages. As noted in section [4.1.1](#Section_4.1.1), a message request is queued up on the server using the [TsProxyMakeTunnelCall](#Section_3.2.6.1.3) method. The following sequence of calls takes place when the server expects the client to reauthenticate.
 - The server completes the pending call. In the message type, it specifies that reauthentication is required. It also passes in the specific tunnel context so that when the client actually reauthenticates, the server can find out which client is doing the same.
 - The client follows the steps 1, 2, 3, 4, 6, and 7 as specified in section 4.1.1. Only the initial packet is different, because it contains the tunnel context information that was passed back by the server.
 The RDG server completes the pending TsProxyMakeTunnel calls as follows:
@@ -5384,10 +5384,10 @@ HTTP_TUNNEL_RESPONSE *pResponsePacket = (HTTP_TUNNEL_RESPONSE*)pPacket; HTTP_TUN
 - The RDG client sends [HTTP_TUNNEL_AUTH_PACKET (section 2.2.10.14)](#Section_2.2.10.14) and [HTTP_TUNNEL_AUTH_PACKET_OPTIONAL (section 2.2.10.15)](#Section_2.2.10.15) to the RDG server to request tunnel authorization.
 pAuthPacket->hdr.packetType = PKT_TYPE_TUNNEL_AUTH; pAuthPacket->cbClientName = 22; pAuthPacket->cbClientName = "RDG-Client1";
 
-- The RDG server responds with [HTTP_TUNNEL_AUTH_RESPONSE](#Section_2.2.10.17) and [HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL](#Section_2.2.10.17) to the RDG client.
+- The RDG server responds with [HTTP_TUNNEL_AUTH_RESPONSE](#Section_2.2.10.16) and [HTTP_TUNNEL_AUTH_RESPONSE_OPTIONAL](#Section_2.2.10.17) to the RDG client.
 pAuthResponse->hdr.packetType = PKT_TYPE_TUNNEL_AUTH_RESPONSE; pAuthResponse->errorCode = hrIn; pAuthResponse->fieldsPresent = HTTP_TUNNEL_AUTH_RESPONSE_FIELD_REDIR_FLAGS | HTTP_TUNNEL_AUTH_RESPONSE_FIELD_IDLE_TIMEOUT; pAuthResponseOpt->redirFlags = 0; pAuthResponseOpt -> idleTimeout = 0;
 
-- The RDG client sends [HTTP_CHANNEL_PACKET (section 2.2.10.2)](#Section_2.2.10.3) to request channel creation.
+- The RDG client sends [HTTP_CHANNEL_PACKET (section 2.2.10.2)](#Section_2.2.10.2) to request channel creation.
 pChannelPkt->hdr.packetType = PKT_TYPE_CHANNEL_CREATE; pChannelPkt->numResources = 1; pChannelPkt->numAltResources = 0; pChannelPkt->port = 3389; pChannelPkt->protocol = 3;
 
 - The RDG server responds with [HTTP_CHANNEL_RESPONSE (section 2.2.10.4)](#Section_2.2.10.4) and [HTTP_CHANNEL_RESPONSE_OPTIONAL (section 2.2.10.5)](#Section_2.2.10.5).
@@ -5438,7 +5438,7 @@ During the tunnel creation for [**main channel**](#gt_main-channel), the RDG ser
 
 This section is not applicable for HTTP and UDP transports.
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL as specified in [MS-DTYP](#Section_2.2) Appendix A.
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A.
 
 import "ms-dtyp.idl";
 
@@ -6062,7 +6062,7 @@ Idle timeout is configured on the RDG server and is enforced on the RDG client. 
 
 <29> Section 3.1.3: Windows Server 2016 and Windows Server 2019 ignore the client statement of health.
 
-<30> Section 3.2.4.1: Windows Server 2008 implements this timer, but Windows Server 2008 R2 does not implement this timer. In Windows Server 2008, if a call to [TsProxySetupReceivePipe](#Section_3.2.6.2.2) is not made within 30 seconds of a call to [TsProxyCreateChannel](#Section_3.2.6.1.4), the Windows Server 2008 RDG server will disconnect the connection. The disconnection will occur in order to implement TsProxyCreateChannel. Note that the protocol, however, does not mandate the timer.
+<30> Section 3.2.4.1: Windows Server 2008 implements this timer, but Windows Server 2008 R2 does not implement this timer. In Windows Server 2008, if a call to [TsProxySetupReceivePipe](#Section_3.6.5.3) is not made within 30 seconds of a call to [TsProxyCreateChannel](#Section_3.2.6.1.4), the Windows Server 2008 RDG server will disconnect the connection. The disconnection will occur in order to implement TsProxyCreateChannel. Note that the protocol, however, does not mandate the timer.
 
 <31> Section 3.2.4.1: The timer value is not mandated by the protocol. Different implementations can choose to use this timer if required. The timer value can be set to a value appropriate to the implementation.
 

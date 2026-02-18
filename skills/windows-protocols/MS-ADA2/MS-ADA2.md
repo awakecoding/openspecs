@@ -802,9 +802,9 @@ Active Directory Schema Attributes M contains a partial list of the objects that
 <a id="Section_1.1"></a>
 ## 1.1 References
 
-[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](#Section_2)".
+[MS-ADA1] Microsoft Corporation, "[Active Directory Schema Attributes A-L](../MS-ADA1/MS-ADA1.md)".
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_2)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
 [MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
@@ -1222,7 +1222,7 @@ Version-Specific Behavior: First implemented on Windows 2000 Server.
 <a id="Section_2.13"></a>
 ## 2.13 Attribute masteredBy
 
-This attribute specifies the distinguished name (DN) for the NTDS Settings objects, and is the back link for the hasMasterNCs attribute as specified in [MS-ADA1](#Section_2) section 2.289.
+This attribute specifies the distinguished name (DN) for the NTDS Settings objects, and is the back link for the hasMasterNCs attribute as specified in [MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.289.
 
 cn: Mastered-By
 
@@ -2068,7 +2068,7 @@ Version-Specific Behavior: First implemented on Windows 2000 Server.
 <a id="Section_2.43"></a>
 ## 2.43 Attribute member
 
-For a given group object, this attribute specifies the list of objects that belong to the group, except for user accounts whose primaryGroupID specifies the given group object. Those user accounts are members of the group, although they are not reflected in this attribute. For more information, refer to primaryGroupID [MS-ADA3](#Section_2) section 2.120.
+For a given group object, this attribute specifies the list of objects that belong to the group, except for user accounts whose primaryGroupID specifies the given group object. Those user accounts are members of the group, although they are not reflected in this attribute. For more information, refer to primaryGroupID [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.120.
 
 cn: Member
 
@@ -2138,7 +2138,7 @@ Version-Specific Behavior: First implemented on Windows Server 2003 R2.
 <a id="Section_2.45"></a>
 ## 2.45 Attribute memberOf
 
-For a given user or group object, this attribute specifies the distinguished names of the groups to which this object belongs, except for a user object's primary group. The user object's primary group is specified by the primaryGroupID attribute. The user is a member of the group specified by the primaryGroupID attribute, although this is not reflected in the memberOf attribute. For more information, refer to [MS-ADA3](#Section_2) section 2.120.
+For a given user or group object, this attribute specifies the distinguished names of the groups to which this object belongs, except for a user object's primary group. The user object's primary group is specified by the primaryGroupID attribute. The user is a member of the group specified by the primaryGroupID attribute, although this is not reflected in the memberOf attribute. For more information, refer to [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.120.
 
 cn: Is-Member-Of-DL
 
@@ -2823,7 +2823,7 @@ packet-beta
 
 **Reserved (4 bytes):** reserved for future use. This field MUST be set to zero.
 
-**EncryptedPassword (variable):** variable-length data containing an encrypted buffer. The buffer is encrypted using a group key obtained via [MS-GKDI](../MS-GKDI/MS-GKDI.md). The decrypted data contains a JSON string that uses the format specified in **ms-LAPS-Password** (section [2.64](../MS-GKDI/MS-GKDI.md)).
+**EncryptedPassword (variable):** variable-length data containing an encrypted buffer. The buffer is encrypted using a group key obtained via [MS-GKDI](../MS-GKDI/MS-GKDI.md). The decrypted data contains a JSON string that uses the format specified in **ms-LAPS-Password** (section [2.64](#Section_2.64)).
 
 <a id="Section_2.67"></a>
 ## 2.67 Attribute ms-LAPS-EncryptedPasswordHistory
@@ -18379,7 +18379,7 @@ systemFlags: FLAG_SCHEMA_BASE_OBJECT
 
 Version-Specific Behavior: First implemented on Windows 2000 Server.
 
-In Windows 2000 Server, the rangeUpper attribute is not defined, and the value of this attribute is set to the value of the [mSMQSignCertificates](#Section_2.588) attribute when the MSMQ object is created.
+In Windows 2000 Server, the rangeUpper attribute is not defined, and the value of this attribute is set to the value of the [mSMQSignCertificates](#Section_2.587) attribute when the MSMQ object is created.
 
 <a id="Section_2.589"></a>
 ## 2.589 Attribute mSMQSignKey
@@ -18527,7 +18527,7 @@ Version-Specific Behavior: First implemented on Windows 2000 Server.
 <a id="Section_2.594"></a>
 ## 2.594 Attribute mSMQSiteGatesMig
 
-For a given MSMQ object, this attribute contains the previous value of the [mSMQSiteGates](#Section_2.594) attribute.
+For a given MSMQ object, this attribute contains the previous value of the [mSMQSiteGates](#Section_2.593) attribute.
 
 cn: MSMQ-Site-Gates-Mig
 

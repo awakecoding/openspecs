@@ -259,7 +259,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DCOM] Microsoft Corporation, "[Distributed Component Object Model (DCOM) Remote Protocol](../MS-DCOM/MS-DCOM.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-OAUT] Microsoft Corporation, "[OLE Automation Protocol](../MS-OAUT/MS-OAUT.md)".
 
@@ -370,7 +370,7 @@ In addition to the [**RPC**](#gt_remote-procedure-call-rpc) base types and defin
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 VSS_ID
 
-The VSS_ID data type defines the identifier (ID) as a [**GUID**](#gt_globally-unique-identifier-guid) for [**shadow copy**](#gt_shadow-copy) objects. GUID is defined in [MS-DTYP](#Section_2.2.1) section 2.3.4.
+The VSS_ID data type defines the identifier (ID) as a [**GUID**](#gt_globally-unique-identifier-guid) for [**shadow copy**](#gt_shadow-copy) objects. GUID is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.
 
 This type is declared as follows:
 
@@ -1093,10 +1093,10 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Next](#Section_3.1.2.1) | Retrieves the next specified number of objects in the collection. Opnum: 3 |
-| [Skip](#Section_3.1.2.2) | Skips the specified number of objects in the collection. Opnum: 4 |
-| [Reset](#Section_3.1.2.3) | Resets the enumeration sequence to the beginning of the collection. Opnum: 5 |
-| [Clone](#Section_3.1.2.4) | Creates a copy of the enumerator object that references the same internal collection of objects and state as the original enumerator. Opnum: 6 |
+| [Next](#Section_3.1.3.1) | Retrieves the next specified number of objects in the collection. Opnum: 3 |
+| [Skip](#Section_3.1.3.2) | Skips the specified number of objects in the collection. Opnum: 4 |
+| [Reset](#Section_3.1.3.3) | Resets the enumeration sequence to the beginning of the collection. Opnum: 5 |
+| [Clone](#Section_3.1.3.4) | Creates a copy of the enumerator object that references the same internal collection of objects and state as the original enumerator. Opnum: 6 |
 
 All methods MUST NOT throw exceptions.
 
@@ -1166,7 +1166,7 @@ No exceptions are thrown except those that are thrown by the underlying [**RPC**
 
 When the server receives this message, it MUST verify that *celt* is greater than zero.
 
-The server MUST update an internal cursor variable so that a subsequent call to [Next](#Section_3.1.2.1) begins to retrieve objects that start immediately after the *celt* skipped objects.
+The server MUST update an internal cursor variable so that a subsequent call to [Next](#Section_3.1.3.1) begins to retrieve objects that start immediately after the *celt* skipped objects.
 
 <a id="Section_3.1.3.3"></a>
 #### 3.1.3.3 Reset (Opnum 5)
@@ -1181,7 +1181,7 @@ This method has no parameters.
 
 No exceptions are thrown except those that are thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
-The server MUST update an internal cursor variable so that a subsequent call to [Next](#Section_3.1.2.1) begins to retrieve objects that start at the beginning of the collection.
+The server MUST update an internal cursor variable so that a subsequent call to [Next](#Section_3.1.3.1) begins to retrieve objects that start at the beginning of the collection.
 
 <a id="Section_3.1.3.4"></a>
 #### 3.1.3.4 Clone (Opnum 6)
@@ -1612,7 +1612,7 @@ This protocol introduces no security considerations except those that apply to D
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation the full [**IDL**](#gt_interface-definition-language-idl) is provided here, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](#Section_2.2.1) Appendix A. The syntax uses the IDL syntax extensions that are defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
+For ease of implementation the full [**IDL**](#gt_interface-definition-language-idl) is provided here, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A. The syntax uses the IDL syntax extensions that are defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
 
 import "ms-dtyp.idl";
 

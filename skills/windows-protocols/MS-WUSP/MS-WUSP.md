@@ -383,9 +383,9 @@ This specification covers versioning issues in the following areas.
 - [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2)
 **Server protocol versions:** There are different versions of the server side of the protocol. The latest server protocol version is specified in section 2.2.2.2.1. Differences in behavior due to server protocol versions are specified in several sections:
 
-- [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1)
-- [GetCookie (section 3.1.5.4)](#Section_2.2.2.2.2)
-- [SyncUpdates (section 3.1.5.7)](#Section_2.2.2.2.4)
+- [GetConfig (section 3.1.5.2)](#Section_3.1.5.2)
+- [GetCookie (section 3.1.5.4)](#Section_3.1.5.4)
+- [SyncUpdates (section 3.1.5.7)](#Section_3.1.5.7)
 - [StartCategoryScan (section 3.1.5.6)](#Section_3.1.5.6)
 **Supported transports:** All versions of the protocol use HTTP and [**SOAP**](#gt_soap) for communications.
 
@@ -406,10 +406,10 @@ This protocol has not received any standards assignments.
 
 This protocol MUST be carried out over [**SOAP**](#gt_soap) (as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520)) and HTTP (as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372)) and consists of the following set of [**web services**](#gt_web-service) and virtual directories.
 
-- **Update content directory**: A [**virtual directory**](#gt_virtual-directory), as specified in section [2.2.2.5](#Section_3.1.5.1), which MUST be populated with update content files. The server provides this virtual directory only as a container of files, which are accessible by clients through HTTP GET and HEAD requests.
+- **Update content directory**: A [**virtual directory**](#gt_virtual-directory), as specified in section [2.2.2.5](#Section_2.2.2.5), which MUST be populated with update content files. The server provides this virtual directory only as a container of files, which are accessible by clients through HTTP GET and HEAD requests.
 - **Self-update content directory**: A virtual directory containing the client [**self-update**](#gt_self-update) binaries, as specified in section 2.2.2.5, which MUST be populated with self-update content files. The server provides this virtual directory only as a container of files, which are accessible by clients through HTTP GET and HEAD requests.<2>
 - **SimpleAuth Web service**: A web service that clients consult to obtain cached state for use by servers in restricting availability of updates to groups of clients, as specified in section [2.2.2.1](#Section_2.2.2.1).
-- **Client Web service**: A web service that synchronizes [**metadata**](#gt_metadata) to the client, as specified in section [2.2.2.2](#Section_2.2.2.1).
+- **Client Web service**: A web service that synchronizes [**metadata**](#gt_metadata) to the client, as specified in section [2.2.2.2](#Section_2.2.2.2).
 - **Reporting Web service**: A web service that clients contact to report selected events containing information on their update activity, as specified in section [2.2.2.3](#Section_2.2.2.3).
 The following sections specify the use of the transports listed above and the syntax of these web services.
 
@@ -432,7 +432,7 @@ The following virtual directories MUST be exposed by the server as endpoints for
 
 **SimpleAuth Web service:** This virtual directory, as specified in section [2.2.2.1](#Section_2.2.2.1), MUST be exposed at URL http[s]://serverUrl:[commonPort]/SimpleAuthWebService/SimpleAuth.asmx
 
-**Client Web service:** This virtual directory, as specified in section [2.2.2.2](#Section_2.2.2.1), MUST be exposed at URL http[s]://serverUrl:[commonPort]/ClientWebService/Client.asmx
+**Client Web service:** This virtual directory, as specified in section [2.2.2.2](#Section_2.2.2.2), MUST be exposed at URL http[s]://serverUrl:[commonPort]/ClientWebService/Client.asmx
 
 **Reporting Web service:** This virtual directory, as specified in section [2.2.2.3](#Section_2.2.2.3), MUST be exposed at URL http[s]://serverUrl:[commonPort]/ReportingWebService/ReportingWebService.asmx
 
@@ -1007,7 +1007,7 @@ type="s1:AuthorizationCookie" />
 
 **AuthorizationCookie:** Authorization cookie MUST be as specified in section 2.2.3.4.
 
-**oldCookie:** Optionally specifies an existing cookie (that MUST have been obtained from a previous method call to GetCookie, [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4)) that needs renewal by the server.
+**oldCookie:** Optionally specifies an existing cookie (that MUST have been obtained from a previous method call to GetCookie, [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4)) that needs renewal by the server.
 
 **lastChange:** Specifies the value returned from the client's most recent call to the [GetConfig (section 2.2.2.2.1)](#Section_2.2.2.2.1) method.
 
@@ -1074,7 +1074,7 @@ type="s1:ComputerInfo" />
 
 </s:element>
 
-**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
+**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
 
 **computerInfo:** Information about the [**client computer (2)**](#gt_client-computer). Its format is as follows.
 
@@ -1178,7 +1178,7 @@ type="s:short" />
 
 </s:complexType>
 
-**DnsName:** The client's name. It MUST uniquely identify the computer on the network. The client MUST also use the same value in the call to [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_3.1.5.3). This element MUST be present.
+**DnsName:** The client's name. It MUST uniquely identify the computer on the network. The client MUST also use the same value in the call to [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_2.2.2.1.1). This element MUST be present.
 
 **OSMajorVersion:** The client operating system major version number.
 
@@ -1241,7 +1241,7 @@ This type has no fields.
 
 **Synopsis:**
 
-This method is invoked to perform synchronization of metadata describing software update content. The syntax of this method refers to the following concepts as specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.1.1).
+This method is invoked to perform synchronization of metadata describing software update content. The syntax of this method refers to the following concepts as specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.2.1).
 
 - The integer-valued [**revision ID**](#gt_revision-id) used to identify an update revision.
 - The string-valued HardwareID, which identifies a hardware device installed on the client machine.
@@ -1280,7 +1280,7 @@ type="s1:SyncUpdateParameters" />
 
 </s:element>
 
-**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or SyncUpdates. This element MUST be present.
+**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or SyncUpdates. This element MUST be present.
 
 **Parameters:** Additional parameters to this method. This element MUST be present. Its format is as follows.<15>
 
@@ -1535,7 +1535,7 @@ type="s1:SyncInfo" />
 
 </s:element>
 
-**SyncUpdatesResult:** Upon successful completion of this operation, this element MUST be returned. The client SHOULD interpret this result, as specified in section [3.1.5.7](#Section_2.2.2.2.4). Its format is as follows.
+**SyncUpdatesResult:** Upon successful completion of this operation, this element MUST be returned. The client SHOULD interpret this result, as specified in section [3.1.5.7](#Section_3.1.5.7). Its format is as follows.
 
 <s:complexType name="SyncInfo">
 
@@ -1769,7 +1769,7 @@ type="s1:ArrayOfUpdateIdentity" />
 
 </s:element>
 
-**cookie:** Specifies a cookie that was obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
+**cookie:** Specifies a cookie that was obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
 
 **globalIDs:** An array of **UpdateIdentity** elements. Its format MUST be as follows.
 
@@ -1910,7 +1910,7 @@ type="s1:String" />
 
 </s:element>
 
-**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or SyncUpdates (section 2.2.2.2.4). This element MUST be present.
+**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or SyncUpdates (section 2.2.2.2.4). This element MUST be present.
 
 **revisionIDs:** Specifies the array of [**revision IDs**](#gt_revision-id) for which extended metadata fragments are to be returned.
 
@@ -2154,7 +2154,7 @@ type="s1:Cookie" />
 
 **Synopsis:**
 
-A client invokes this method to request from the server a list of preferred categories to use when synchronizing updates via the [SyncUpdates](#Section_2.2.2.2.4) method (section 2.2.2.2.4). A category scan allows a client to synchronize a smaller part of the larger update catalog.
+A client invokes this method to request from the server a list of preferred categories to use when synchronizing updates via the [SyncUpdates](#Section_3.1.5.7) method (section 2.2.2.2.4). A category scan allows a client to synchronize a smaller part of the larger update catalog.
 
 <wsdl:operation name="StartCategoryScan" />
 
@@ -2240,7 +2240,7 @@ type="s1:ArrayOfGuid" />
 <a id="Section_2.2.2.2.9"></a>
 ##### 2.2.2.2.9 SyncPrinterCatalog
 
-This method is invoked to synchronize metadata describing the best matching printer drivers for the client. The syntax of this method refers to the following concepts as specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.1.1).
+This method is invoked to synchronize metadata describing the best matching printer drivers for the client. The syntax of this method refers to the following concepts as specified in sections [3.1.1](#Section_3.1.1) and [3.2.1](#Section_3.2.1).
 
 - The integer-valued [**revision ID**](#gt_revision-id) used to identify an update revision.
 - The string-valued HardwareID, which identifies a hardware device installed on the client machine.
@@ -2281,7 +2281,7 @@ type="tns:ArrayOfInt" />
 
 </s:element>
 
-**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
+**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
 
 **InstalledNonLeafUpdateIDs:** Contains an array of revision IDs of all nonleaf (in the prerequisite graph) revisions in the client cache that are installed on the client. These IDs MUST have been obtained from the UpdateInfo.ID returned from a previous call to SyncUpdates.
 
@@ -2305,7 +2305,7 @@ type="s1:SyncInfo" />
 
 </s:element>
 
-**SyncPrinterCatalogResult:** Upon successful completion of this operation, this element MUST be returned. The client SHOULD interpret this result, as specified in section [3.1.5.7](#Section_2.2.2.2.4). The format is the same as the one defined in the Response section of 2.2.2.2.4.
+**SyncPrinterCatalogResult:** Upon successful completion of this operation, this element MUST be returned. The client SHOULD interpret this result, as specified in section [3.1.5.7](#Section_3.1.5.7). The format is the same as the one defined in the Response section of 2.2.2.2.4.
 
 <a id="Section_2.2.2.2.10"></a>
 ##### 2.2.2.2.10 GetExtendedUpdateInfo2
@@ -2342,7 +2342,7 @@ The SOAP operation is defined as follows.
 
 </s:element>
 
-**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
+**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
 
 **updateIDs:** Specifies the array of UpdateIDs for which the additional metadata are to be returned.
 
@@ -2661,7 +2661,7 @@ type="s1:ArrayOfReportingEvent" />
 
 </s:element>
 
-**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
+**cookie:** Specifies a cookie that MUST have been obtained from a previous call to [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7), or [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4). This element MUST be present.
 
 **clientTime:** The current time (when this method was called) on the client in Coordinated Universal Time (UTC).
 
@@ -2751,7 +2751,7 @@ type="s:string" />
 
 </s:complexType>
 
-**TargetID:** The identity of the client computer (same as the *clientID* parameter to [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_3.1.5.3)). Its format (ComputerTargetIdentifier) MUST be as follows.
+**TargetID:** The identity of the client computer (same as the *clientID* parameter to [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_2.2.2.1.1)). Its format (ComputerTargetIdentifier) MUST be as follows.
 
 <s:complexType name="ComputerTargetIdentifier">
 
@@ -3098,7 +3098,7 @@ It does this by throwing a SOAP fault (as specified in [[SOAP1.1]](https://go.mi
 
 | ErrorCode | Description |
 | --- | --- |
-| InvalidCookie | The server cannot decrypt the cookie to validate it. The client MUST discard the cookie and start the initial handshake again by calling [GetConfig (section 2.2.2.2.1)](#Section_2.2.2.2.1), [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_3.1.5.3), [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), and [RefreshCache (section 2.2.2.2.5)](#Section_2.2.2.2.5). |
+| InvalidCookie | The server cannot decrypt the cookie to validate it. The client MUST discard the cookie and start the initial handshake again by calling [GetConfig (section 2.2.2.2.1)](#Section_2.2.2.2.1), [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_2.2.2.1.1), [GetCookie (section 2.2.2.2.2)](#Section_2.2.2.2.2), and [RefreshCache (section 2.2.2.2.5)](#Section_2.2.2.2.5). |
 | ConfigChanged | The server configuration has changed since the last time the client called GetConfig (section 2.2.2.2.1). The client MUST call GetConfig, GetAuthorizationCookie (section 2.2.2.1.1), and GetCookie (section 2.2.2.2.2) again. |
 | RegistrationRequired | Client registration is required. The client SHOULD call [RegisterComputer (section 2.2.2.2.3)](#Section_2.2.2.2.3) before calling [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4) again. |
 | ServerChanged | The server's identity or state has changed. The client MUST discard the cookie and start the initial handshake again by calling GetConfig (section 2.2.2.2.1), GetAuthorizationCookie (section 2.2.2.1.1), GetCookie (section 2.2.2.2.2), and RefreshCache (section 2.2.2.2.5). |
@@ -3108,7 +3108,7 @@ It does this by throwing a SOAP fault (as specified in [[SOAP1.1]](https://go.mi
 | InvalidAuthorizationCookie | The authorization cookie passed to GetCookie (section 2.2.2.2.2) is invalid. |
 | RegistrationNotRequired | The client has called RegisterComputer (section 2.2.2.2.3) even though the server told it not to in the GetConfig (section 2.2.2.2.1) response. |
 | ServerBusy | The server is too busy to handle this request. The client SHOULD try again later. |
-| FileLocationChanged | The file locations have changed since the last time the client synced. The client SHOULD call [GetFileLocations (section 2.2.2.2.7)](#Section_3.1.5.10) to get the current file locations. |
+| FileLocationChanged | The file locations have changed since the last time the client synced. The client SHOULD call [GetFileLocations (section 2.2.2.2.7)](#Section_2.2.2.2.7) to get the current file locations. |
 
 **method:** A string indicating the web service method in which the fault occurred. This can be omitted.
 
@@ -3182,7 +3182,7 @@ type="s2:guid" />
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 AuthorizationCookie
 
-An object returned by the server on successful completion of the [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_3.1.5.3) operation.
+An object returned by the server on successful completion of the [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_2.2.2.1.1) operation.
 
 Defined in namespace: http://www.microsoft.com/SoftwareDistribution.
 
@@ -3333,7 +3333,7 @@ Figure 2: Server abstract data model
 - **RevisionID:** A server-assigned [**revision identifier**](#gt_revision-id). Because it is more compact than the globally unique (UpdateID, RevisionNumber) pair, the RevisionID is used as the revision identifier during client/server communications to minimize network traffic.
 - **UpdateID:** A [**GUID**](#gt_globally-unique-identifier-guid) that is the same for all revisions of an update.
 - **RevisionNumber:** Used in conjunction with the UpdateID to uniquely identify the revision.
-- **UpdateType:** Specifies whether the update is a Driver, Software, Category, or Detectoid. The [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4) method treats Drivers and non-drivers differently, as specified in section [3.1.5.7](#Section_2.2.2.2.4).
+- **UpdateType:** Specifies whether the update is a Driver, Software, Category, or Detectoid. The [SyncUpdates (section 2.2.2.2.4)](#Section_2.2.2.2.4) method treats Drivers and non-drivers differently, as specified in section [3.1.5.7](#Section_3.1.5.7).
 This ADM element contains data that overlaps with the Revision Table specified in [MS-WSUSSS](../MS-WSUSSS/MS-WSUSSS.md) section 3.1.1.
 
 **Driver Table:** A collection of entries corresponding to the revisions available on the server with an UpdateType of "Driver". Each entry is uniquely identified by a RevisionID. Each entry includes the following elements:
@@ -3386,7 +3386,7 @@ This ADM element contains data that overlaps with the TargetGroup Table specifie
 
 **Client Table:** A collection of clients. Each entry is uniquely identified by a ComputerID. Each entry includes the following elements:
 
-- **ComputerID:** A unique identifier for the client. The server SHOULD use ComputerID to identify clients. A suitable unique identifier is the *clientID* parameter passed to the [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_3.1.5.3) method.
+- **ComputerID:** A unique identifier for the client. The server SHOULD use ComputerID to identify clients. A suitable unique identifier is the *clientID* parameter passed to the [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_2.2.2.1.1) method.
 - **TargetGroupName:** A reference to the [**target group**](#gt_target-group) to which this client belongs.
 This ADM element contains data that overlaps with the Client computer table specified in [MS-WSUSSS] section 3.1.1.
 
@@ -3604,7 +3604,7 @@ Figure 3: Message processing sequence of this protocol
 
 At the start of the protocol, a client that implements the self-update protocol SHOULD<48> check if it needs to [**self-update**](#gt_self-update). Client/server communications can fail if the server does not expose the [**self-update content directory**](#gt_self-update-content-directory), as specified in this section.
 
-As specified in section [2](#Section_1.3), the server implementation MUST expose the self-update content directory as a [**virtual directory**](#gt_virtual-directory). Clients that support the self-update protocol issue HTTP GET requests (as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 9.3) to obtain files from the self-update content directory; therefore, the server MUST support HTTP requests on this virtual directory to support these clients. The files that the client accesses in the self-update directory, and the way in which the client uses them, are implementation-specific<49>
+As specified in section [2](#Section_2), the server implementation MUST expose the self-update content directory as a [**virtual directory**](#gt_virtual-directory). Clients that support the self-update protocol issue HTTP GET requests (as specified in [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) section 9.3) to obtain files from the self-update content directory; therefore, the server MUST support HTTP requests on this virtual directory to support these clients. The files that the client accesses in the self-update directory, and the way in which the client uses them, are implementation-specific<49>
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 GetConfig
@@ -3652,7 +3652,7 @@ If no faults occur during the operation, the server MUST return a GetAuthorizati
 
 **Synopsis:**
 
-This method is called by the client during the initial dialog between the client and the server. It MUST be called after [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1) and [GetAuthorizationCookie (section 3.1.5.3)](#Section_3.1.5.3), but before calling any other operation. The cookie returned by the method MUST be passed to all subsequent operations in the client Web service. The client SHOULD cache the cookie and call this method only to renew the cached cookie, either because the cookie expired or because the server has thrown a SoapFault with one of the following ErrorCodes: InvalidCookie, ServerChanged, ConfigChanged, or CookieExpired. If this method is called in response to one of these errors, it MUST be called in the sequence specified for the error in section [2.2.2.4](#Section_2.2.2.4).
+This method is called by the client during the initial dialog between the client and the server. It MUST be called after [GetConfig (section 3.1.5.2)](#Section_3.1.5.2) and [GetAuthorizationCookie (section 3.1.5.3)](#Section_3.1.5.3), but before calling any other operation. The cookie returned by the method MUST be passed to all subsequent operations in the client Web service. The client SHOULD cache the cookie and call this method only to renew the cached cookie, either because the cookie expired or because the server has thrown a SoapFault with one of the following ErrorCodes: InvalidCookie, ServerChanged, ConfigChanged, or CookieExpired. If this method is called in response to one of these errors, it MUST be called in the sequence specified for the error in section [2.2.2.4](#Section_2.2.2.4).
 
 **Request Validation:**
 
@@ -3660,7 +3660,7 @@ This method is called by the client during the initial dialog between the client
 | --- | --- | --- |
 | authCookies | MUST contain exactly one Authorization Cookie—the one returned from GetAuthorizationCookie (section 3.1.5.3). | InvalidAuthorizationCookie |
 | oldCookie | MUST either be NULL or contain a valid cookie issued by this server (typically an expired cookie). | InvalidCookie or ServerChanged |
-| lastChange | MUST be the same as the last time the configuration changed on the server (although this check can be done in [SyncUpdates (section 3.1.5.7)](#Section_2.2.2.2.4) instead). | ConfigChanged |
+| lastChange | MUST be the same as the last time the configuration changed on the server (although this check can be done in [SyncUpdates (section 3.1.5.7)](#Section_3.1.5.7) instead). | ConfigChanged |
 | protocolVersion | SHOULD be a non-NULL two-part version string (for example, "1.0"). | InvalidParameters |
 
 **Data Processing:**
@@ -3684,7 +3684,7 @@ If no faults occur during the operation, the server MUST return a GetCookieRespo
 
 **Synopsis:**
 
-The client calls this method to pass information about itself to the server. The client MUST call this method if the server has returned IsRegistrationRequired=true from the client's most recent preceding call to [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1). The client SHOULD only call this method again if any of its registration information has changed, or if the server has requested it be called again by throwing a RegistrationRequired ErrorCode while processing a subsequent method invocation.
+The client calls this method to pass information about itself to the server. The client MUST call this method if the server has returned IsRegistrationRequired=true from the client's most recent preceding call to [GetConfig (section 3.1.5.2)](#Section_3.1.5.2). The client SHOULD only call this method again if any of its registration information has changed, or if the server has requested it be called again by throwing a RegistrationRequired ErrorCode while processing a subsequent method invocation.
 
 **Request Validation:**
 
@@ -3697,7 +3697,7 @@ The client calls this method to pass information about itself to the server. The
 
 **Data Processing:**
 
-The server SHOULD store client registration info on the server so that administrators can see the types of computers that are getting updates from the server. This is not required because the cookie is created and maintained through the **GetCookie** method (section [3.1.5.4](#Section_2.2.2.2.2)), and the computerInfo is purely informational and is not used anywhere else in the client/server protocol. If the server does not store this information, then the server will generally take no action in response to this method (other than validating parameters and returning a result). A server that does not store client registration information could include IsRegistrationRequired=false in its response to **GetConfig** (section 3.1.5.2), to inform the client that a call to the **RegisterComputer** method is not needed.
+The server SHOULD store client registration info on the server so that administrators can see the types of computers that are getting updates from the server. This is not required because the cookie is created and maintained through the **GetCookie** method (section [3.1.5.4](#Section_3.1.5.4)), and the computerInfo is purely informational and is not used anywhere else in the client/server protocol. If the server does not store this information, then the server will generally take no action in response to this method (other than validating parameters and returning a result). A server that does not store client registration information could include IsRegistrationRequired=false in its response to **GetConfig** (section 3.1.5.2), to inform the client that a call to the **RegisterComputer** method is not needed.
 
 **Results:**
 
@@ -3708,7 +3708,7 @@ If no faults occur during the operation, the server MUST return a RegisterComput
 
 **Synopsis:**
 
-Clients can perform update synchronization that is limited to a set of update categories by using the [SyncUpdates](#Section_2.2.2.2.4) operation. The [StartCategoryScan](#Section_2.2.2.2.8) method enables the client to obtain the preferred set of categories that the server expects as part of the SyncUpdates method parameters. It also allows the client to obtain any requested categories that are not recognized by the server.
+Clients can perform update synchronization that is limited to a set of update categories by using the [SyncUpdates](#Section_3.1.5.7) operation. The [StartCategoryScan](#Section_2.2.2.2.8) method enables the client to obtain the preferred set of categories that the server expects as part of the SyncUpdates method parameters. It also allows the client to obtain any requested categories that are not recognized by the server.
 
 When a client is performing limited update synchronization of a category, it MUST call the StartCategoryScan method before calling the SyncUpdates method. The client MUST NOT call this method if the "ProtocolVersion" ConfigurationProperty from the [GetConfig](#Section_2.2.2.2.1) response (section 2.2.2.2.1) is less than "3.2". This method SHOULD NOT exist on servers that return a "ProtocolVersion" less than "3.2".
 
@@ -3753,7 +3753,7 @@ The client MUST
 - First call SyncUpdates with **InstalledNonLeafUpdateIDs** field set to empty.
 - Check if the **NewUpdates** element in the result is empty. If it is empty, then the software update synchronization is complete.
 - Otherwise, evaluate the applicability of updates in the result of the call and collect applicable updates into a list. The applicability evaluation is performed using the metadata contained in the XmlFragments provided by the server and is implementation-specific.<53>
-- From the list compiled in step 3, select those updates that evaluated as installed and which are marked with the **IsLeaf** field as false in the **UpdateInfo** structure and append their IDs to the InstalledNonLeafUpdateIDs sent in the last call to [SyncUpdates](#Section_2.2.2.2.4). From the remaining updates in the list, select those that are drivers and append their IDs to the CachedDriverIDs sent in the last call to SyncUpdates. For the remaining updates in the list, append their IDs to the OtherCachedUpdateIDs sent in the last call to SyncUpdates. Call SyncUpdates again and continue from step 2.
+- From the list compiled in step 3, select those updates that evaluated as installed and which are marked with the **IsLeaf** field as false in the **UpdateInfo** structure and append their IDs to the InstalledNonLeafUpdateIDs sent in the last call to [SyncUpdates](#Section_3.1.5.7). From the remaining updates in the list, select those that are drivers and append their IDs to the CachedDriverIDs sent in the last call to SyncUpdates. For the remaining updates in the list, append their IDs to the OtherCachedUpdateIDs sent in the last call to SyncUpdates. Call SyncUpdates again and continue from step 2.
 **Request Validation:**
 
 | Parameter | Validation conditions | Error code |
@@ -3768,7 +3768,7 @@ Additional checks the server MUST perform:
 
 The data processing specified in this section references most of the elements of the abstract data model, as specified in section [3.1.1](#Section_3.1.1).
 
-The server MUST check whether the configuration data returned from [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1) has changed since the last time the client synchronized and, if so, throw a ConfigChanged ErrorCode fault.
+The server MUST check whether the configuration data returned from [GetConfig (section 3.1.5.2)](#Section_3.1.5.2) has changed since the last time the client synchronized and, if so, throw a ConfigChanged ErrorCode fault.
 
 The server checks whether client registration is required but the client is not yet registered. If so, it SHOULD throw a RegistrationRequired ErrorCode.
 
@@ -3851,7 +3851,7 @@ The response consists of an array of **RefreshCacheResult** elements. There MUST
 
 **Synopsis:**
 
-To optimize client/server communications, the [SyncUpdates (section 3.1.5.7)](#Section_2.2.2.2.4) method only downloads the "Core" metadata associated with an update revision. Additional metadata and the URLs of the revision content MUST be obtained by using this method.
+To optimize client/server communications, the [SyncUpdates (section 3.1.5.7)](#Section_3.1.5.7) method only downloads the "Core" metadata associated with an update revision. Additional metadata and the URLs of the revision content MUST be obtained by using this method.
 
 **Request Validation:**
 
@@ -3927,7 +3927,7 @@ This call supports the synchronization of printer driver update metadata to [**c
 
 The data processing specified in this section references most of the elements of the abstract data model, as specified in section [3.1.1](#Section_3.1.1).
 
-The server MUST check whether the configuration data returned from [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1) has changed since the last time the client synchronized and, if so, throw a ConfigChanged ErrorCode fault.
+The server MUST check whether the configuration data returned from [GetConfig (section 3.1.5.2)](#Section_3.1.5.2) has changed since the last time the client synchronized and, if so, throw a ConfigChanged ErrorCode fault.
 
 The server SHOULD check whether client registration is required but the client is not yet registered. If so, it SHOULD throw a RegistrationRequired ErrorCode.
 
@@ -3999,7 +3999,7 @@ Figure 4: Client abstract data model
 
 **DeploymentDownloadPriority:** Has the same definition as the Deployment table's DownloadPriority element as specified in section 3.1.1.
 
-**IsLeaf:** Specifies whether this revision is a leaf in the server's [**prerequisite graph**](#gt_prerequisite-graph). This value is returned to the client in the [SyncUpdates (section 3.1.5.7)](#Section_2.2.2.2.4) method.
+**IsLeaf:** Specifies whether this revision is a leaf in the server's [**prerequisite graph**](#gt_prerequisite-graph). This value is returned to the client in the [SyncUpdates (section 3.1.5.7)](#Section_3.1.5.7) method.
 
 **ApplicabilityState:** The client evaluates whether the revision is needed, installed, or not applicable during metadata synchronization. The client does this by evaluating the applicability rules in the core metadata fragment (although the format of the applicability rules is opaque to the client-server protocol). The client obtains the core revision metadata from the server's SyncUpdates (section 3.1.5.7) method. The client reevaluates the applicability state of all revisions before each sync. The applicability state of the revisions affects how the client passes the parameters to the SyncUpdates (section 3.1.5.7) method.
 
@@ -4017,15 +4017,15 @@ Figure 4: Client abstract data model
 
 **ClientID:** A [**ClientIdString**](#gt_clientidstring) that the client generates to uniquely identify itself to the server.
 
-**CachedConfig table:** The client caches the return value from [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1) so that it can avoid calling this method on every sync. The **GetConfigResult** structure (section [2.2.2.2.1](#Section_2.2.2.2.1)) describes the individual elements.
+**CachedConfig table:** The client caches the return value from [GetConfig (section 3.1.5.2)](#Section_3.1.5.2) so that it can avoid calling this method on every sync. The **GetConfigResult** structure (section [2.2.2.2.1](#Section_2.2.2.2.1)) describes the individual elements.
 
-**CachedCookie table:** The cookie returned from [GetCookie (section 3.1.5.4)](#Section_2.2.2.2.2), SyncUpdates (section 3.1.5.7), or [GetFileLocations (section 3.1.5.10)](#Section_3.1.5.10). There is at most one entry, which includes the following elements:
+**CachedCookie table:** The cookie returned from [GetCookie (section 3.1.5.4)](#Section_3.1.5.4), SyncUpdates (section 3.1.5.7), or [GetFileLocations (section 3.1.5.10)](#Section_3.1.5.10). There is at most one entry, which includes the following elements:
 
 **Expiration:** A clear-text copy of the time the cookie expires.
 
 **EncryptedData:** An opaque sequence of one or more bytes containing server-implementation–specific authorization, authentication, and protocol state information.
 
-**CachedRegistrationInfo Table:** The last set of parameters passed to the server's [RegisterComputer (section 3.1.5.5)](#Section_2.2.2.2.3) method. There is at most one entry, which includes one element for each parameter passed to the RegisterComputer method. The complete list of parameters are described as part of the **computerInfo** structure which is specified in section [2.2.2.2.3](#Section_2.2.2.2.3)
+**CachedRegistrationInfo Table:** The last set of parameters passed to the server's [RegisterComputer (section 3.1.5.5)](#Section_3.1.5.5) method. There is at most one entry, which includes one element for each parameter passed to the RegisterComputer method. The complete list of parameters are described as part of the **computerInfo** structure which is specified in section [2.2.2.2.3](#Section_2.2.2.2.3)
 
 **Configuration Table:** A set of properties that configure client behavior. Storage of these properties is implementation-dependent.<60> There is exactly one entry, which includes the following elements:
 
@@ -4063,10 +4063,10 @@ The "metadata sync" portion of this protocol conforms to the figure as specified
 
 [**Self-update**](#gt_self-update), authorization, and metadata sync MUST be performed in the sequence shown in the figure as specified in section 3.1.5, although, as an optimization, certain steps MAY be omitted under the conditions specified below. In particular, the client MAY perform the following optimizations.
 
-- The result of [GetConfig (section 3.1.5.2)](#Section_2.2.2.2.1) SHOULD be cached on the client. Subsequent synchronizations MAY omit this method invocation unless the server throws a ConfigChanged ErrorCode.
-- The cookie returned from [GetCookie (section 3.1.5.4)](#Section_2.2.2.2.2) or [SyncUpdates (section 3.1.5.7)](#Section_2.2.2.2.4) SHOULD be cached on the client. Subsequent synchronizations SHOULD omit the call to [GetAuthorizationCookie (section 3.1.5.3)](#Section_3.1.5.3) and GetCookie unless the server throws a CookieExpired ErrorCode, or unless the client determines that the clear-text copy of the cookie expiration time shows the cookie to be expired.
+- The result of [GetConfig (section 3.1.5.2)](#Section_3.1.5.2) SHOULD be cached on the client. Subsequent synchronizations MAY omit this method invocation unless the server throws a ConfigChanged ErrorCode.
+- The cookie returned from [GetCookie (section 3.1.5.4)](#Section_3.1.5.4) or [SyncUpdates (section 3.1.5.7)](#Section_3.1.5.7) SHOULD be cached on the client. Subsequent synchronizations SHOULD omit the call to [GetAuthorizationCookie (section 3.1.5.3)](#Section_3.1.5.3) and GetCookie unless the server throws a CookieExpired ErrorCode, or unless the client determines that the clear-text copy of the cookie expiration time shows the cookie to be expired.
 - The registration information sent to the server SHOULD be cached on the client.
-Subsequent synchronizations SHOULD omit the call to [RegisterComputer (section 3.1.5.5)](#Section_2.2.2.2.3), unless the registration information has changed on the client, or unless the server throws a RegistrationRequired exception.
+Subsequent synchronizations SHOULD omit the call to [RegisterComputer (section 3.1.5.5)](#Section_3.1.5.5), unless the registration information has changed on the client, or unless the server throws a RegistrationRequired exception.
 
 In addition to the standard sync path specified above, the client MUST also perform special recovery steps when the server returns certain application-level faults, as specified in section [2.2.2.4](#Section_2.2.2.4).
 
@@ -4080,7 +4080,7 @@ There are no timer events required by this protocol.<65>
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
 
-If, at the start of metadata synchronization, the client determines that the registration information it last sent to the server has changed, it SHOULD call the [RegisterComputer (section 3.1.5.5)](#Section_2.2.2.2.3) method during metadata synchronization, as specified in section 3.1.5.5.
+If, at the start of metadata synchronization, the client determines that the registration information it last sent to the server has changed, it SHOULD call the [RegisterComputer (section 3.1.5.5)](#Section_3.1.5.5) method during metadata synchronization, as specified in section 3.1.5.5.
 
 <a id="Section_4"></a>
 # 4 Protocol Examples
@@ -11804,7 +11804,7 @@ WUA uses the Digest attribute both to obtain the download URL for the EULA file 
 
 In Windows 8 and later and Windows Server 2012 and later, WUA performs an additional security check on downloaded EULA files. WUA will find the **AdditionalDigest** element whose Algorithm attribute is equal to "SHA256". It will take the contents of that **AdditionalDigest** element, compare it to the calculated SHA-256 hash value of the downloaded EULA file, and reject the content file if the two hashes do not match (or if the update metadata does not contain the additional digest information.
 
-<45> Section 3.1.1.1: WSUS 2.0 populates table entries when the clients call the [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_3.1.5.3) method.
+<45> Section 3.1.1.1: WSUS 2.0 populates table entries when the clients call the [GetAuthorizationCookie (section 2.2.2.1.1)](#Section_2.2.2.1.1) method.
 
 <46> Section 3.1.1.1: WSUS populates table entries based on administrative configuration. The entries are never populated automatically by the server.
 

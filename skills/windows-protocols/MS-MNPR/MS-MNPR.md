@@ -4583,7 +4583,7 @@ The NetMeeting Object Manager provides a generic way to manage abstract data. It
 - Operation
 Packets of type joiner, lock, and wsgroup send MUST be present as fixed-length data structures. The operation packet length varies per operation message type. The operation packet length MUST be used to determine whether a variable-length data packet follows. Each data packet MUST begin with an unsigned 32-bit integer length field. For more information on each packet type, refer to sections specified by the table below.
 
-The late joiner protocol is defined as a subset of NetMeeting Object Manager messages. For more information, refer to [Late Joiner Protocol Overview (section 3.1.5.4)](#Section_1.3).
+The late joiner protocol is defined as a subset of NetMeeting Object Manager messages. For more information, refer to [Late Joiner Protocol Overview (section 3.1.5.4)](#Section_3.1.5.4).
 
 | Packet Name | Packet Type | Description of Packet Function |
 | --- | --- | --- |

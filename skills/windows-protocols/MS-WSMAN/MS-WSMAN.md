@@ -706,7 +706,7 @@ type="cfg:ServiceType"/>
 
 **MaxProviderRequests**: The maximum number of concurrent requests that MUST be allowed by the Web Services Management Protocol Extensions for Windows Server 2003 servers. The minimum value MUST be 1. The maximum value MUST be 4294967295 (232 - 1). The limit is applied per provider. The categories include [**CIM**](#gt_common-information-model-cim) and configuration. This configuration setting is used when processing messages as specified in section [3.1.4.1.19](#Section_3.1.4.1.19).
 
-**Client**: MUST contain additional elements to configure Web Services Management Protocol Extensions for Windows Server 2003 clients as specified in section [2.2.4](#Section_1.3).
+**Client**: MUST contain additional elements to configure Web Services Management Protocol Extensions for Windows Server 2003 clients as specified in section [2.2.4](#Section_2.2.4).
 
 **Service**: MUST contain additional elements to configure Web Services Management Protocol Extensions for Windows Server 2003 servers as specified in section 2.2.4.
 
@@ -915,7 +915,7 @@ type="cfg:ServiceHTTPSType"/>
 
 </xs:schema>
 
-**RootSDDL**: The security descriptor controls remote access to the listener. The string format of RootSDDL MUST use the syntax defined by the Security Descriptor Description Language (SDDL) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)). This configuration setting MUST be used when processing messages as specified in section [5.1](#Section_5).
+**RootSDDL**: The security descriptor controls remote access to the listener. The string format of RootSDDL MUST use the syntax defined by the Security Descriptor Description Language (SDDL) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md)). This configuration setting MUST be used when processing messages as specified in section [5.1](#Section_5.1).
 
 **MaxConcurrentOperations**: MUST be the maximum number of concurrent Enumeration operations allowed. The minimum value MUST be 1. The maximum value MUST be 4294967295 (232 – 1). This configuration setting MUST be used when processing messages as specified in section [3.1.4.1.19](#Section_3.1.4.1.19).
 
@@ -1793,7 +1793,7 @@ The WS-CIM Mapping Specification defines rules for representing a CIM object in 
 
 Web Services Management Protocol Extensions for Windows Server 2003 extend the object XML with an extra child element that describes the [**EPR**](#gt_endpoint-reference-epr) of the object.
 
-Web Services Management Protocol Extensions for Windows Server 2003 clients SHOULD add a [cim:Location](#Section_3.2.4.1.13) element of type wsa:EndpointReferenceType, as specified in [[WSAddressing]](https://go.microsoft.com/fwlink/?LinkId=90575) section 2.2, specifying the EPR of an object to the instance element when requesting a Put operation following a Get operation on an object.<17>
+Web Services Management Protocol Extensions for Windows Server 2003 clients SHOULD add a [cim:Location](#Section_3.1.4.1.27) element of type wsa:EndpointReferenceType, as specified in [[WSAddressing]](https://go.microsoft.com/fwlink/?LinkId=90575) section 2.2, specifying the EPR of an object to the instance element when requesting a Put operation following a Get operation on an object.<17>
 
 <a id="Section_3.2.4.1.14"></a>
 ##### 3.2.4.1.14 CIM Namespace
@@ -3691,7 +3691,7 @@ resource identified by the resource URI and selectors.
 
 Web Services Management Protocol Extensions for Windows Server 2003 use the WS-Management Security Profiles as described in [[DMTF-DSP0226]](https://go.microsoft.com/fwlink/?LinkId=89849) section 12.
 
-Web Services Management Protocol Extensions for Windows Server 2003 servers are required to authenticate the request using one of the configured security profiles. See sections [2.2.4](#Section_1.3) and [3.1.4.1.29](#Section_3.1.4.1.29) for more details on configured profiles.
+Web Services Management Protocol Extensions for Windows Server 2003 servers are required to authenticate the request using one of the configured security profiles. See sections [2.2.4](#Section_2.2.4) and [3.1.4.1.29](#Section_3.1.4.1.29) for more details on configured profiles.
 
 Web Services Management Protocol Extensions for Windows Server 2003 servers are required to authorize the request using the RootSDDL configuration setting defined in section 2.2.4.
 
@@ -4071,7 +4071,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <16> Section 3.2.4.1.6: All Windows clients ensure that in a Pull request, the value of MaxElements lies within the specified range.
 
-<17> Section 3.2.4.1.13: Windows Server 2003 R2 clients remove the [cim:Location](#Section_3.2.4.1.13) element when requesting a Put operation following a Get operation on an object.
+<17> Section 3.2.4.1.13: Windows Server 2003 R2 clients remove the [cim:Location](#Section_3.1.4.1.27) element when requesting a Put operation following a Get operation on an object.
 
 <18> Section 5.1: Windows Server 2003 R2 clients remove the cim:Location element when requesting a Put operation following a Get operation on an object.
 

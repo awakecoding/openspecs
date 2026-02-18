@@ -123,9 +123,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-RTPME] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions](#Section_2.1)".
+[MS-RTPME] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions](../MS-RTPME/MS-RTPME.md)".
 
-[MS-RTPRAD] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Redundant Audio Data Extensions](#Section_2.1)".
+[MS-RTPRAD] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Redundant Audio Data Extensions](../MS-RTPRAD/MS-RTPRAD.md)".
 
 [MS-SDP] Microsoft Corporation, "[Session Description Protocol (SDP) Extensions](../MS-SDP/MS-SDP.md)".
 
@@ -148,7 +148,7 @@ The RTPDT protocol is limited to telephony signals using out-of-band transmissio
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-This protocol relies on [**RTP**](#gt_real-time-transport-protocol-rtp) as specified in [MS-RTPME](#Section_2.1) as its transport mechanism. This protocol can be used to communicate signaling [Dual Tone Multiple Frequency (DTMF)](../MS-GLOS/MS-GLOS.md) telephony events between clients and gateways using the RTP payload.
+This protocol relies on [**RTP**](#gt_real-time-transport-protocol-rtp) as specified in [MS-RTPME](../MS-RTPME/MS-RTPME.md) as its transport mechanism. This protocol can be used to communicate signaling [Dual Tone Multiple Frequency (DTMF)](../MS-GLOS/MS-GLOS.md) telephony events between clients and gateways using the RTP payload.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -165,7 +165,7 @@ This protocol is applicable wherever telephony digits, tones, or signals need to
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-- Supported Transports: This protocol is sent using the [**RTP**](#gt_real-time-transport-protocol-rtp) transport mechanism [MS-RTPME](#Section_2.1).
+- Supported Transports: This protocol is sent using the [**RTP**](#gt_real-time-transport-protocol-rtp) transport mechanism [MS-RTPME](../MS-RTPME/MS-RTPME.md).
 - Protocol Versions: This protocol, as a format of an RTP payload, does not provide for versioning information within the scope of the protocol itself. However, as a part of the RTP payload, any versioning information about the RTP level will apply.
 - Security and Authentication Methods: This specification does not describe any security or authentication methods. Security and authentication are dependent on the security method, authentication method, or both methods used by the RTP version 2 protocol.
 - Localization: None.
@@ -185,7 +185,7 @@ None.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The RTP/RTCP: DTMF Digits, Telephony Tones and Telephony Signals Data Extensions protocol MUST be sent using [**RTP**](#gt_real-time-transport-protocol-rtp) as specified in [MS-RTPME](#Section_2.1) as its transport. This protocol assumes that a successful RTP session has been established with valid payload information.
+The RTP/RTCP: DTMF Digits, Telephony Tones and Telephony Signals Data Extensions protocol MUST be sent using [**RTP**](#gt_real-time-transport-protocol-rtp) as specified in [MS-RTPME](../MS-RTPME/MS-RTPME.md) as its transport. This protocol assumes that a successful RTP session has been established with valid payload information.
 
 The [**Session Description Protocol (SDP)**](#gt_session-description-protocol-sdp) [MS-SDP](../MS-SDP/MS-SDP.md) MUST be used to negotiate the payload type information.
 
@@ -215,7 +215,7 @@ In [[RFC4733]](https://go.microsoft.com/fwlink/?LinkId=116566), out-of-band nego
 
 All event duration values MUST NOT exceed the maximum duration expressible in the duration field of the payload format as described in [RFC4733] section 2.3.5.
 
-Redundancy support as described in [MS-RTPRAD](#Section_2.1) MUST NOT be used. Integrity for the payload is not defined by this specification; see [MS-RTPRAD] section 2.2 for payload integrity information.
+Redundancy support as described in [MS-RTPRAD](../MS-RTPRAD/MS-RTPRAD.md) MUST NOT be used. Integrity for the payload is not defined by this specification; see [MS-RTPRAD] section 2.2 for payload integrity information.
 
 Multiple payload type binding for different telephony events MUST NOT be used. There MUST be only one telephony event binding for a payload type. The payload type binding MUST be symmetrical. This means the receive payload type and send payload type MUST be the same. Asymmetrical payload type information MUST NOT be used.
 
@@ -261,7 +261,7 @@ None.
 <a id="Section_3.2"></a>
 ## 3.2 Receiver Details
 
-Redundant payload support as described in [MS-RTPRAD](#Section_2.1) MUST NOT be used.
+Redundant payload support as described in [MS-RTPRAD](../MS-RTPRAD/MS-RTPRAD.md) MUST NOT be used.
 
 Multiple events per the [**RTP**](#gt_real-time-transport-protocol-rtp) block MUST NOT be used.
 
@@ -303,7 +303,7 @@ None.
 <a id="Section_3.3"></a>
 ## 3.3 Sender Details
 
-Implementation for this protocol MUST NOT generate redundant blocks as described in [MS-RTPRAD](#Section_2.1).
+Implementation for this protocol MUST NOT generate redundant blocks as described in [MS-RTPRAD](../MS-RTPRAD/MS-RTPRAD.md).
 
 The sender MUST NOT pack multiple [**DTMF**](#gt_dual-tone-multi-frequency-dtmf) payloads into a single RTP packet.
 

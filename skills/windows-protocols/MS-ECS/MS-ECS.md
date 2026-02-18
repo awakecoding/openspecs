@@ -284,7 +284,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](#Section_2.2.2.28)".
+[MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
 [MS-FSVCA] Microsoft Corporation, "[File Set Version Comparison Algorithms](../MS-FSVCA/MS-FSVCA.md)".
 
@@ -337,7 +337,7 @@ None.
 
 The Enterprise Client Synchronization Protocol does not provide a mechanism for a client to discover the existence and location of a global sync [**URI**](#gt_uniform-resource-identifier-uri) for syncing a namespace. It is a prerequisite that the client's local configuration include a global sync URI that can be used to enumerate all servers exposing that namespace for synchronization.
 
-The Enterprise Client Synchronization Protocol does not define an authentication or authorization scheme. Implementers of this protocol need to review the recommended security prerequisites in Security Considerations for Implementers (section [5.1](#Section_5)) of this document.
+The Enterprise Client Synchronization Protocol does not define an authentication or authorization scheme. Implementers of this protocol need to review the recommended security prerequisites in Security Considerations for Implementers (section [5.1](#Section_5.1)) of this document.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -2085,7 +2085,7 @@ Otherwise, for each FILE_INFO_INPUT_ENTRY structure in FileVector, the server co
 - Otherwise, if a FileMetadata entry is found and **FileMetadata.Attributes** contains FILE_ATTRIBUTE_DIRECTORY, the server MUST set **ProtocolType** to 0x00 and MUST set **PrepareResult** to ECS_E_STREAM_NOT_NEEDED, as specified in section [2.2.2.28](#Section_2.2.2.28).
 - Otherwise, if FileMetadata.FileStreamId is equal to FILE_INFO_INPUT_ENTRY.StreamId, the server MUST set **ProtocolType** to 0x00 and MUST set **PrepareResult** to ECS_E_STREAM_NOT_NEEDED, as specified in section 2.2.2.28*.*
 - Otherwise, if FileMetadata.FileStreamId is not equal to FILE_INFO_INPUT_ENTRY.StreamId, and FILE_INFO_INPUT_ENTRY.FileSize is greater than the implementation-specific<12> maximum size allowed, the server MUST set **ProtocolType** to 0x00 and MUST set **PrepareResult** to ECS_E_FILE_TOO_LARGE_FOR_UPLOAD, as specified in section 2.2.2.28.
-- Otherwise, if FileMetadata.FileStreamId is not equal to FILE_INFO_INPUT_ENTRY.StreamId, and FILE_INFO_INPUT_ENTRY.FileSize is greater than the space available for a user, the server MUST set **ProtocolType** to 0x00 and MUST set **PrepareResult** to ERROR_DISK_FULL, as specified in [MS-ERREF](#Section_2.2.2.28) section 2.1.1.
+- Otherwise, if FileMetadata.FileStreamId is not equal to FILE_INFO_INPUT_ENTRY.StreamId, and FILE_INFO_INPUT_ENTRY.FileSize is greater than the space available for a user, the server MUST set **ProtocolType** to 0x00 and MUST set **PrepareResult** to ERROR_DISK_FULL, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1.
 - Otherwise the server MUST set **ProtocolType** to 0x01 and MUST set **PrepareResult** to zero.
 The server MUST construct a VECTOR_FILE_INFO_ENTRY structure using the FILE_INFO_ENTRY structures constructed above.
 
@@ -2658,7 +2658,7 @@ The client MUST set **SyncChangesURL** to **"HostURLPrefix/Sync/SyncClientVersio
 
 **Server Capabilities:**
 
-The client MUST send a GET request on the Server Capabilities resource, as specified in section [3.1.5.3.1](#Section_3.1.5.3.1.3), using the URI format "**HostURLPrefix**/Sync/**ClientSyncVersion**/Capabilities".
+The client MUST send a GET request on the Server Capabilities resource, as specified in section [3.1.5.3.1](#Section_3.1.5.3.1), using the URI format "**HostURLPrefix**/Sync/**ClientSyncVersion**/Capabilities".
 
 The client SHOULD<14> check for x-ecs-server-os-version and x-ecs-server-rootdns-name headers in the response.
 
@@ -2669,7 +2669,7 @@ If the server responds with a status of 200, the client MUST store the entries i
 - SyncServerDataTransferType is set to ProtocolType in the response body
 **Obtain User Configuration:**
 
-The client MUST send a GET request on the User Configuration resource, as specified in section [3.3.5.1.1](#Section_3.3.5.1.1.2), by using the URI format "**HostURLPrefix**/Sync/SyncClientVersion/UserConfiguration"
+The client MUST send a GET request on the User Configuration resource, as specified in section [3.3.5.1.1](#Section_3.3.5.1.1), by using the URI format "**HostURLPrefix**/Sync/SyncClientVersion/UserConfiguration"
 
 If the server responds with a status code of 200, the client MUST store the entries in the response body as follows:
 
@@ -2677,7 +2677,7 @@ If the server responds with a status code of 200, the client MUST store the entr
 - *UserDataFreeSpace* member of *QuotaUsage* entry is set to **UserDataFree**.
 **Poll for Server Changes:**
 
-The client MUST poll for the server changes by sending a HEAD request on the Detect Server Changes resource, as specified in section [3.2.5.1.1](#Section_3.2.5.1.1.1), using the URI format **SyncChangesURL**.
+The client MUST poll for the server changes by sending a HEAD request on the Detect Server Changes resource, as specified in section [3.2.5.1.1](#Section_3.2.5.1.1), using the URI format **SyncChangesURL**.
 
 If the server responds with a status code of 200 and the x-ecs-changes-URL header is present, the client MUST set **SyncChangesURL** to the value in x-ecs-changes-URL header. The client MUST poll for the server changes by sending a HEAD request using the new **SyncChangesURL**.
 
@@ -2717,7 +2717,7 @@ The client MUST do the following:
 
 **Create Session:**
 
-The client MUST send a PUT request on Create Session resource, as specified in section [3.4.5.1.1](#Section_3.4.5.1.1.1), by using the URI format "**HostURLPrefix**/Sync/**SyncClientVersion**/Session". The x-ecs-partnershipID header MUST be set to **SyncTargetPartnershipId**. The x-ecs-devicename header MUST be set to an implementation-specific string. The client MUST set *ClientID* in the request body to **Client_ID**.
+The client MUST send a PUT request on Create Session resource, as specified in section [3.4.5.1.1](#Section_3.4.5.1.1), by using the URI format "**HostURLPrefix**/Sync/**SyncClientVersion**/Session". The x-ecs-partnershipID header MUST be set to **SyncTargetPartnershipId**. The x-ecs-devicename header MUST be set to an implementation-specific string. The client MUST set *ClientID* in the request body to **Client_ID**.
 
 The calling application intends to:
 
@@ -2729,7 +2729,7 @@ If the server responds with a status code of 200, the client MUST construct the 
 
 **Get Sync Batch Parameters from Server:**
 
-The client MUST send a GET request on the Sync Batch Parameters resource, as specified in section [3.4.5.2.1](#Section_3.4.5.2.1.2), by using the URI format "**SessionLocationURL**/SyncBatchParameters". The *x-ecs-partnershipID* header MUST be set to **SyncTargetPartnershipId**.
+The client MUST send a GET request on the Sync Batch Parameters resource, as specified in section [3.4.5.2.1](#Section_3.4.5.2.1), by using the URI format "**SessionLocationURL**/SyncBatchParameters". The *x-ecs-partnershipID* header MUST be set to **SyncTargetPartnershipId**.
 
 If the server responds with a status code of 200, the client MUST store the entries in the response body as follows:
 
@@ -2752,7 +2752,7 @@ The client MUST check for the changes in the underlying object store and update 
 - Set **ContentSize** as the file size.
 - Set **FileName** to the name of the file.
 - Set **OriginatingDeviceName** to the name of this device.
-The client MUST send a PUT request on the Prepare Batch resource, as specified in section [3.4.5.3.1](#Section_3.4.5.3.1.2), by using the URI format "**SessionLocationURL**/PrepareBatch/<BatchIndex>". The BatchIndex in the URI MUST be set to a value that uniquely identifies the batch within the session. Using the **SyncBatchServerKnowledge, FileMetadataTable**, and the application-supplied version information, the client MUST construct a VECTOR_FILE_INFO_INPUT_ENTRY structure and insert the same as the FileVector entry in the request body.
+The client MUST send a PUT request on the Prepare Batch resource, as specified in section [3.4.5.3.1](#Section_3.4.5.3.1), by using the URI format "**SessionLocationURL**/PrepareBatch/<BatchIndex>". The BatchIndex in the URI MUST be set to a value that uniquely identifies the batch within the session. Using the **SyncBatchServerKnowledge, FileMetadataTable**, and the application-supplied version information, the client MUST construct a VECTOR_FILE_INFO_INPUT_ENTRY structure and insert the same as the FileVector entry in the request body.
 
 If the server responds with a status code of 200, the client MUST store the information in FILE_INFO_ENTRY structures in FileList in the response body as follows:
 
@@ -2761,17 +2761,17 @@ If the server responds with a status code of 200, the client MUST store the info
 - Insert the UploadFile object into the global **UploadFileList**.
 **Data Transfer:**
 
-From each entry in UploadFileList, the client MUST construct a VECTOR_UPLOAD_ENTRY structure and MUST send a PUT request on Upload Data resource, as specified in section [3.5.5.1.1](#Section_3.5.5.1.1.2), by using the URI format "SessionLocationURL/UploadData".
+From each entry in UploadFileList, the client MUST construct a VECTOR_UPLOAD_ENTRY structure and MUST send a PUT request on Upload Data resource, as specified in section [3.5.5.1.1](#Section_3.5.5.1.1), by using the URI format "SessionLocationURL/UploadData".
 
 **Commit Change Batch:**
 
-The client MUST send a PUT request on the Upload Batch resource, as specified in section [3.4.5.4.1](#Section_3.4.5.4.1.1), by using the URI format "**SessionLocationURL**/UploadBatch/<BatchIndex>". The BatchIndex in the URI MUST be set to an implementation-specific value that identifies the batch to be uploaded. The SerializedSyncBatch in the request body MUST be set to an opaque binary stream representing the change batch. If **Session.SessionType** in the request is 0x03, SyncMetadata of SerializedSyncBatch in the request body contains the entire list of SyncIds on the client.
+The client MUST send a PUT request on the Upload Batch resource, as specified in section [3.4.5.4.1](#Section_3.4.5.4.1), by using the URI format "**SessionLocationURL**/UploadBatch/<BatchIndex>". The BatchIndex in the URI MUST be set to an implementation-specific value that identifies the batch to be uploaded. The SerializedSyncBatch in the request body MUST be set to an opaque binary stream representing the change batch. If **Session.SessionType** in the request is 0x03, SyncMetadata of SerializedSyncBatch in the request body contains the entire list of SyncIds on the client.
 
 For each **UploadFile** in **UploadFileList**, the client MUST update **UploadFile.CommitStatus** to the Status entry returned in the FILE_STATUS_ENTRY structure.
 
 **Delete Session:**
 
-The client MUST send a DELETE request on Delete Session resource, as specified in section [3.4.5.5.1](#Section_3.4.5.5.1.2), by using the URI format "**SessionLocationURL**".
+The client MUST send a DELETE request on Delete Session resource, as specified in section [3.4.5.5.1](#Section_3.4.5.5.1), by using the URI format "**SessionLocationURL**".
 
 The client MUST clear all entries in the **UploadFileList**.
 
@@ -2782,7 +2782,7 @@ The client MUST do the following:
 
 **Create Session:**
 
-The client MUST send a PUT request on the Create Session resource, as specified in section [3.4.5.1.1](#Section_3.4.5.1.1.1), by using the URI format "**HostURLPrefix**/Sync/**SyncClientVersion**/Session". The x-ecs-partnershipID header must be set to **SyncTargetPartnershipId**. The x-ecs-devicename header MUST be set to an implementation-specific string. The client MUST set *ClientID* in the request body to **Client_ID**.
+The client MUST send a PUT request on the Create Session resource, as specified in section [3.4.5.1.1](#Section_3.4.5.1.1), by using the URI format "**HostURLPrefix**/Sync/**SyncClientVersion**/Session". The x-ecs-partnershipID header must be set to **SyncTargetPartnershipId**. The x-ecs-devicename header MUST be set to an implementation-specific string. The client MUST set *ClientID* in the request body to **Client_ID**.
 
 The calling application intends to:
 
@@ -2796,13 +2796,13 @@ If the server responds with a status code of 200, the client MUST construct the 
 
 The client MUST obtain the information on the version of files in an implementation-specific manner and set it to **SyncBatchClientKnowledge**. The client MUST set **DownloadBatchLimits** to implementation-specific values.
 
-The client MUST send a PUT request on the Sync Batch Parameters resource, as specified in section [3.4.5.2.2](#Section_3.4.5.2.2.1), by using the URI format "**SessionLocationURL**/SyncBatchParameters". The *SyncKnowledge* and *BatchLimits* in the request body MUST be set to **SyncBatchClientKnowledge** and **DownloadBatchLimits**, respectively.
+The client MUST send a PUT request on the Sync Batch Parameters resource, as specified in section [3.4.5.2.2](#Section_3.4.5.2.2), by using the URI format "**SessionLocationURL**/SyncBatchParameters". The *SyncKnowledge* and *BatchLimits* in the request body MUST be set to **SyncBatchClientKnowledge** and **DownloadBatchLimits**, respectively.
 
 **Obtain Change Batch details:**
 
 The client performs the following steps to obtain server knowledge on the change batch:
 
-- Send a GET request on the Download Batch resource, as specified in section [3.4.5.6.1](#Section_3.4.5.6.1.3), by using the URI format "SessionLocationURL/DownloadBatch". If **ContinueToken** is not empty, the client MUST set x-ecs-continue in the request header to **ContinueToken**. Otherwise, if this is the first **DownloadBatch** request, the client MUST NOT include x-ecs-continue in the request header.
+- Send a GET request on the Download Batch resource, as specified in section [3.4.5.6.1](#Section_3.4.5.6.1), by using the URI format "SessionLocationURL/DownloadBatch". If **ContinueToken** is not empty, the client MUST set x-ecs-continue in the request header to **ContinueToken**. Otherwise, if this is the first **DownloadBatch** request, the client MUST NOT include x-ecs-continue in the request header.
 - If the server does not respond with a status code of 200, or if the server does not provide a nonempty 'x-ecs-continue' token with the response, the change batch download fails and an implementation-defined local error is returned.
 - Otherwise, for each **BatchMetadata** entry in the **Download Batch** response, the Client MUST construct **DownloadFile** objects as follows:
 - **DownloadFile.SyncId** is set to SYNC_CHANGE_BATCH.File.FileId.
@@ -2818,7 +2818,7 @@ If **Session.SessionType** in the request is 0x04, **SyncMetadata** of **BatchMe
 
 **Data Transfer:**
 
-The client MUST send a PUT request on the Download Data resource, as specified in section [3.5.5.2.1](#Section_3.5.5.2.1.2). The DownloadEntryVector in the request body MUST be set to a VECTOR_DOWNLOAD_ENTRY structure constructed as a collection of DOWNLOAD_ENTRY structures using each **DownloadFile** object in **DownloadFileList**:
+The client MUST send a PUT request on the Download Data resource, as specified in section [3.5.5.2.1](#Section_3.5.5.2.1). The DownloadEntryVector in the request body MUST be set to a VECTOR_DOWNLOAD_ENTRY structure constructed as a collection of DOWNLOAD_ENTRY structures using each **DownloadFile** object in **DownloadFileList**:
 
 - DOWNLOAD_ENTRY.SyncItemId is set to **DownloadFile.SyncId**.
 - DOWNLOAD_ENTRY.FileVersion is set to **DownloadFile.ConcurrencyInfo**.
@@ -2828,7 +2828,7 @@ The client MUST associate the **Share.EnterpriseId** value with the local file d
 
 **Delete Session:**
 
-The client MUST send a DELETE request on the Delete Session resource, as specified in section [3.4.5.5.1](#Section_3.4.5.5.1.2), by using the URI format "**SessionLocationURL**".
+The client MUST send a DELETE request on the Delete Session resource, as specified in section [3.4.5.5.1](#Section_3.4.5.5.1), by using the URI format "**SessionLocationURL**".
 
 <a id="Section_3.6.6"></a>
 ### 3.6.6 Timer Events

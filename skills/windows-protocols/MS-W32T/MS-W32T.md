@@ -284,7 +284,7 @@ This protocol is applicable wherever there is a need to control or monitor [**ti
 
 **Protocol Version:** This protocol's RPC interface has a single version number of 4.1. This protocol can be extended without altering the version number by adding RPC methods to the interface with [**opnums**](#gt_opnum) lying numerically beyond those defined in this specification. A client determines whether such methods are supported by attempting to invoke the method; if the method is not supported, the RPC server returns an "opnum out of range" error, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and [MS-ERREF](../MS-ERREF/MS-ERREF.md). For the RPC interface, see [MS-RPCE](../MS-RPCE/MS-RPCE.md).<2>
 
-**Security and Authentication Methods:** For security considerations, see sections [3.1.3](#Section_3.2.3) and [3.2.3](#Section_3.2.3).
+**Security and Authentication Methods:** For security considerations, see sections [3.1.3](#Section_3.1.3) and [3.2.3](#Section_3.2.3).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1180,9 +1180,9 @@ unsigned __int32 cEntries;
 
 **ulClockRate:** The **ClockRate** element value (see section 3.2.1.1).
 
-**ulNetlogonServiceBits:** An unsigned 32-bit integer that contains information about the functionality that the time service provides, as specified in section [3.2.5.2](#Section_3.1.4.2).
+**ulNetlogonServiceBits:** An unsigned 32-bit integer that contains information about the functionality that the time service provides, as specified in section [3.2.5.2](#Section_3.2.5.2).
 
-**eLastSyncResult:** An integer that indicates the TimeSync_ReturnResult code, as specified in section [3.2.5.1](#Section_3.1.4.1).
+**eLastSyncResult:** An integer that indicates the TimeSync_ReturnResult code, as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 **tpTimeLastGoodSync:** The **TimeLastGoodSync** element value (see section 3.2.1.1).
 
@@ -1496,8 +1496,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [W32TimeSync](#Section_3.1.4.1) | Requests that the [**time service**](#gt_time-service) immediately initiate an attempt to synchronize its time. Opnum: 0 |
-| [W32TimeGetNetlogonServiceBits](#Section_3.1.4.2) | Returns information about the functionality the time service provides. Opnum: 1 |
+| [W32TimeSync](#Section_3.2.5.1) | Requests that the [**time service**](#gt_time-service) immediately initiate an attempt to synchronize its time. Opnum: 0 |
+| [W32TimeGetNetlogonServiceBits](#Section_3.2.5.2) | Returns information about the functionality the time service provides. Opnum: 1 |
 | [W32TimeQueryProviderStatus](#Section_3.1.4.3) | Returns operational information for a specified [**time provider**](#gt_time-provider). Opnum: 2 |
 | [W32TimeQuerySource](#Section_3.1.4.4) | Returns the current [**time source**](#gt_time-source) of the time service. Opnum: 3 |
 | [W32TimeQueryProviderConfiguration](#Section_3.1.4.5) | Returns configuration data for a specific time provider. Opnum: 4 |
@@ -1887,7 +1887,7 @@ No additional local events are used on the client beyond the events maintained i
 
 This section provides an example of how the W32Time Remote Protocol is used.
 
-- The client obtains the name of a server via an out-of-band mechanism. The client establishes a binding handle to the server at the [**well-known endpoint**](#gt_well-known-endpoint) \\PIPE\W32TIME_ALT and performs the authentication checks, as specified in section [3.1.3](#Section_3.2.3). The client then invokes the [W32TimeGetNetlogonServiceBits](#Section_3.1.4.2) method to query the [**time service**](#gt_time-service) status to check whether the time service provides a [**time source**](#gt_time-source) or a [**reliable time source**](#gt_reliable-time-source).
+- The client obtains the name of a server via an out-of-band mechanism. The client establishes a binding handle to the server at the [**well-known endpoint**](#gt_well-known-endpoint) \\PIPE\W32TIME_ALT and performs the authentication checks, as specified in section [3.1.3](#Section_3.1.3). The client then invokes the [W32TimeGetNetlogonServiceBits](#Section_3.2.5.2) method to query the [**time service**](#gt_time-service) status to check whether the time service provides a [**time source**](#gt_time-source) or a [**reliable time source**](#gt_reliable-time-source).
 - The server receives the W32TimeGetNetlogonServiceBits method invocation. In this example, it is assumed that the server allows clients to synchronize time with it by using NTP, as specified in [[RFC1305]](https://go.microsoft.com/fwlink/?LinkId=90272), but that the server is not a reliable time source. In this case, the server returns the value 0x00000040 (DS_TIMESERV_FLAG) to the client.
 - The client receives the return value 0x00000040 (DS_TIMESERV_FLAG), which informs the client that the server is a time source but not a reliable one.
 <a id="Section_5"></a>
@@ -1898,14 +1898,14 @@ This section provides an example of how the W32Time Remote Protocol is used.
 
 Security considerations for both unauthenticated and authenticated [**RPC**](#gt_remote-procedure-call-rpc) used in this protocol are specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
-The client fails over to unauthenticated RPC when authenticated RPC fails for backward compatibility, as specified in section [3.1.3](#Section_3.2.3). The unauthenticated RPC is not as secure as authenticated RPC; the client is recommended to either audit or support this automatic failover only when it is explicitly specified.
+The client fails over to unauthenticated RPC when authenticated RPC fails for backward compatibility, as specified in section [3.1.3](#Section_3.1.3). The unauthenticated RPC is not as secure as authenticated RPC; the client is recommended to either audit or support this automatic failover only when it is explicitly specified.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
 
 | Security Parameter | Section |
 | --- | --- |
-| Authentication service settings | [3.1.3](#Section_3.2.3) |
+| Authentication service settings | [3.1.3](#Section_3.1.3) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
@@ -2478,7 +2478,7 @@ W32Time Remote Protocol clients in Windows 2000 do not attempt to negotiate auth
 
 <17> Section 3.1.4.1: In Windows releases prior to Windows XP, all applications and implementations available as part of Windows set the *ulFlags* parameter to zero.
 
-<18> Section 3.1.4.1: In the default configuration of a non–domain-joined Windows NTP client, the [W32TimeSync](#Section_3.1.4.1) method results in the higher-layer–triggered use of NTP (as described in [[RFC1305]](https://go.microsoft.com/fwlink/?LinkId=90272)). This occurs because a non–domain-joined Windows NTP client is configured to use NTP by default. For more information on NTP, see [RFC1305].
+<18> Section 3.1.4.1: In the default configuration of a non–domain-joined Windows NTP client, the [W32TimeSync](#Section_3.2.5.1) method results in the higher-layer–triggered use of NTP (as described in [[RFC1305]](https://go.microsoft.com/fwlink/?LinkId=90272)). This occurs because a non–domain-joined Windows NTP client is configured to use NTP by default. For more information on NTP, see [RFC1305].
 
 <19> Section 3.1.4.1: In the default configuration of a domain-joined Windows NTP client, the W32TimeSync method results in the higher-layer–triggered use of NTP with authentication extensions (as described in [MS-SNTP](../MS-SNTP/MS-SNTP.md)). This occurs because a domain-joined Windows NTP client is configured to use NTP Authentication Extensions by default, as outlined in [MS-SNTP] section 1.6. For more information on the Windows implementation of NTP with authentication extensions, see [MS-SNTP].
 

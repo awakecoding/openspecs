@@ -506,7 +506,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-ADFSOD] Microsoft Corporation, "[Active Directory Federation Services (AD FS) Protocols Overview](#Section_1.3)".
+[MS-ADFSOD] Microsoft Corporation, "[Active Directory Federation Services (AD FS) Protocols Overview](../MS-ADFSOD/MS-ADFSOD.md)".
 
 [MSFT-ADFS-DeepDive] Gregory, David, "ADFS Deep-Dive: Comparing WS-Fed, SAML, and OAuth", [https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/adfs-deep-dive-comparing-ws-fed-saml-and-oauth/ba-p/257584](https://go.microsoft.com/fwlink/?linkid=2152864)
 
@@ -544,7 +544,7 @@ The following components interact with the Active Directory Federation Services 
 - **Client**: These components refer to the type of client (for example, browser or rich client) in addition to the identity of the user and the device that is accessing a particular application service.
 - **Firewall**: A component that filters traffic flowing between the [**perimeter network**](#gt_perimeter-network) and the internal network. In the system described, web traffic is allowed between the Proxy and the AD FS and between the Proxy and the web application.
 - **Web Application**: Any web service or application to which a client connects and that typically requires authentication for the user in the client.
-This specification describes the distinct areas of interaction between the Proxy and the AD FS. A more complete understanding of AD FS and the proxy system can be gained from the following resources: [MS-ADFSOD](#Section_1.3), [[MSFT-ADFSOV2]](https://go.microsoft.com/fwlink/?LinkId=620788) with its subsections, and [[MSFT-ADFS-DeepDive]](https://go.microsoft.com/fwlink/?linkid=2152864).
+This specification describes the distinct areas of interaction between the Proxy and the AD FS. A more complete understanding of AD FS and the proxy system can be gained from the following resources: [MS-ADFSOD](../MS-ADFSOD/MS-ADFSOD.md), [[MSFT-ADFSOV2]](https://go.microsoft.com/fwlink/?LinkId=620788) with its subsections, and [[MSFT-ADFS-DeepDive]](https://go.microsoft.com/fwlink/?linkid=2152864).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -2032,7 +2032,7 @@ The response body MUST be a Relying Party Trust List (section [2.2.2.5](#Section
 <a id="Section_3.4.5.2.1.3"></a>
 ###### 3.4.5.2.1.3 Processing Details
 
-On successful authentication the server MUST return a [Server State].RelyingPartyTrusts (section [3.1.1](#Section_3.8.1)).
+On successful authentication the server MUST return a [Server State].RelyingPartyTrusts (section [3.1.1](#Section_3.1.1)).
 
 <a id="Section_3.4.5.3"></a>
 #### 3.4.5.3 Proxy/RelyingPartyTrusts/
@@ -2072,7 +2072,7 @@ The response body MUST be a Relying Party Trust (section [2.2.2.6](#Section_2.2.
 <a id="Section_3.4.5.3.1.3"></a>
 ###### 3.4.5.3.1.3 Processing Details
 
-On successful authentication the server MUST return a [Server State].RelyingPartyTrusts for the relying party trust with [Relying Party Trust].ObjectIdentifier equal to the URI {Identifier} value (section [3.1.1](#Section_3.8.1)).
+On successful authentication the server MUST return a [Server State].RelyingPartyTrusts for the relying party trust with [Relying Party Trust].ObjectIdentifier equal to the URI {Identifier} value (section [3.1.1](#Section_3.1.1)).
 
 <a id="Section_3.4.6"></a>
 ### 3.4.6 Timer Events
@@ -2291,7 +2291,7 @@ The response body MUST be a Store Entry List (section [2.2.2.8](#Section_2.2.2.8
 <a id="Section_3.6.5.1.1.3"></a>
 ###### 3.6.5.1.1.3 Processing Details
 
-Upon successful authentication the server MUST return [Server State].ProxyStore (section [3.1.1](#Section_3.8.1)).
+Upon successful authentication the server MUST return [Server State].ProxyStore (section [3.1.1](#Section_3.1.1)).
 
 <a id="Section_3.6.5.2"></a>
 #### 3.6.5.2 Proxy/WebApplicationProxy/Store/
@@ -3019,7 +3019,7 @@ For each object, CurrentEndpointConfiguration in [Client State].Configuration.En
 - If CurrentEndpointConfiguration.ClientCertificateQueryMode is 1 ("QueryAndAccept") and the request does not have a public key authentication header or user agent indicator ([MS-PKAP](../MS-PKAP/MS-PKAP.md) section 3.1.5.1.1), then the client SHOULD attempt to retrieve end-user X509 certificate [[RFC4158]](https://go.microsoft.com/fwlink/?LinkId=301986) using client [**TLS**](#gt_transport-layer-security-tls) authentication [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324). If it obtains a certificate the client MUST follow processing in section [3.11.5.1](#Section_3.11.5.1).
 - If CurrentEndpointConfiguration.ClientCertificateQueryMode is 2 ("QueryAndRequire"), then the client SHOULD attempt to retrieve end-user X509 certificate [RFC4158] using client TLS authentication [RFC2246]. If it obtains a certificate, the client MUST follow the processing in section 3.11.5.1.
 - If CurrentEndpointConfiguration.SupportsNtlm is true, the client SHOULD ensure that SPNEGO-based authentication requests [[RFC4559]](https://go.microsoft.com/fwlink/?LinkId=90483) with the "Negotiate" auth-scheme are converted to NTLM.
-- If the configuration field **IgnoreTokenBinding** is not set to True (section [2.2.2.4](../MS-OAPX/MS-OAPX.md)), the configuration field **UpdatedFarmBehaviorLevel** is greater than or equal to AD_FS_BEHAVIOR_LEVEL_4 ([MS-OAPX](../MS-OAPX/MS-OAPX.md) section 3.2.1.1), and the end-user request contains token binding information in the form of the Sec-Token-Binding header defined in [[IETFDRAFT-TOKBIND-H]](https://go.microsoft.com/fwlink/?linkid=2008727) section 2, the client SHOULD construct a signed header using the structure defined in section [2.2.1.6](../MS-OAPX/MS-OAPX.md), which is a serialized [**JWT**](#gt_json-web-token-jwt). The client then performs the following steps:
+- If the configuration field **IgnoreTokenBinding** is not set to True (section [2.2.2.4](#Section_2.2.2.4)), the configuration field **UpdatedFarmBehaviorLevel** is greater than or equal to AD_FS_BEHAVIOR_LEVEL_4 ([MS-OAPX](../MS-OAPX/MS-OAPX.md) section 3.2.1.1), and the end-user request contains token binding information in the form of the Sec-Token-Binding header defined in [[IETFDRAFT-TOKBIND-H]](https://go.microsoft.com/fwlink/?linkid=2008727) section 2, the client SHOULD construct a signed header using the structure defined in section [2.2.1.6](#Section_2.2.1.6), which is a serialized [**JWT**](#gt_json-web-token-jwt). The client then performs the following steps:
 - Token binding information on the request is parsed into the provided_token_binding and referred_token_binding structures, as defined in [IETFDRAFT-TOKBIND-H] section 2 and [[IETFDRAFT-TOKBINDPROT]](https://go.microsoft.com/fwlink/?linkid=853819) section 3.1.
 - The provided_token_binding information is included as a claim in the JWT, with claim name "Sec-Provided-Token-Binding-ID".
 - The referred_token_binding information is included as a claim in the JWT, with claim name "Sec-Referred-Token-Binding-ID".
@@ -3044,7 +3044,7 @@ If the client obtains a certificate of the end-user then the client SHOULD valid
 - If the CurrentEndpointConfiguration.CertificateValidation value is 2 ("IssuedByDrs") then the client SHOULD validate that the end-user certificate was issued by one of ServiceConfiguration.DeviceCertificateIssuers.
 If the validation of the end-user certificate was successful, or if the validation of the end-user certificate failed and the CurrentEndpointConfiguration.CertificateValidation value is 1, the following processing occurs:
 
-- The client MUST construct a request as in section [3.10.5.1](#Section_3.10.5.1.1.3).
+- The client MUST construct a request as in section [3.10.5.1](#Section_3.10.5.1).
 - If the validation of the end-user certificate was successful, then the [Serialized Request with Certificate].SerializedClientCertificate MUST be set to the base64 string encoded ([[RFC4648]](https://go.microsoft.com/fwlink/?LinkId=90487) section 4) X509 certificate [RFC4158]. Otherwise, the [Serialized Request with Certificate].ErrorType SHOULD be set to 1 ("Certificate") and the [Serialized Request with Certificate].ErrorCode SHOULD be set to the error value that was encountered while validating the end-user certificate.<13>
 - The client then performs the common processing defined in section 3.11.5.2.
 If the validation of the end-user certificate failed and the CurrentEndpointConfiguration.CertificateValidation value is 2, the client SHOULD replay the request as defined in section 3.11.5 step 6.
@@ -3136,7 +3136,7 @@ No response body is returned.
 
 The server MUST validate that {web-application-for-client-id} corresponds to the value of [Server State].ProxyRelyingPartyTrust.objectIdentifier. If validation fails, the server MUST return a HTTP error code of 500.
 
-The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1.1.1)) for the web application in [Server State].RelyingPartyTrusts with objectIdentifier equal to {web-application-id}.
+The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1)) for the web application in [Server State].RelyingPartyTrusts with objectIdentifier equal to {web-application-id}.
 
 The server MUST validate that the Relying Party Trust (section [2.2.2.6](#Section_2.2.2.6)) proxyTrustedEndpoints contains a URL with a scheme, host and port that match those of {client-url-to-issue-token} and that prefix-matches the url-path of {client-url-to-issue-token} (for URL components see [[RFC1738]](https://go.microsoft.com/fwlink/?LinkId=90287) sections 2.1 and 3.1). If validation fails, the server MUST return a HTTP error code of 500.
 
@@ -3147,7 +3147,7 @@ If authentication succeeds the server MUST return a HTTP status code of 302 with
 <a id="Section_3.12.5.1.2"></a>
 ##### 3.12.5.1.2 SAML-P Extensions for Preauthentication
 
-The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1.1.1)) for the web application in [Server State].RelyingPartyTrusts with identifiers containing a string value that matches the <Issuer> element value ([[SAMLCore2]](https://go.microsoft.com/fwlink/?LinkId=216915) section 2.2.5) in the <AuthnRequest> element ([SAMLCore2].
+The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1)) for the web application in [Server State].RelyingPartyTrusts with identifiers containing a string value that matches the <Issuer> element value ([[SAMLCore2]](https://go.microsoft.com/fwlink/?LinkId=216915) section 2.2.5) in the <AuthnRequest> element ([SAMLCore2].
 
 Upon successful authentication ([SAMLCore2] section 3.4.1.4) the server MUST do the following before sending the response to the response URL:
 
@@ -3161,7 +3161,7 @@ The server MUST send the response to the response URL.
 
 If the server implements [[WSFederation1.2]](https://go.microsoft.com/fwlink/?LinkId=306270) then the server MUST implement the following processing.
 
-The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1.1.1)) for the web application in [Server State].RelyingPartyTrusts with identifiers containing a string value that matches the wtrealm query string parameter value.
+The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1)) for the web application in [Server State].RelyingPartyTrusts with identifiers containing a string value that matches the wtrealm query string parameter value.
 
 Upon successful authentication ([WSFederation1.2] section 13.1.1) the server MUST do the following before sending the response to the response URL:
 
@@ -3175,7 +3175,7 @@ The server MUST send the response to the response URL.
 
 If the server implements the OAuth 2.0 Protocol Extensions [MS-OAPX](../MS-OAPX/MS-OAPX.md), then the server MUST implement the following behaviors.
 
-The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1.1.1)) for the web application in [Server State].RelyingPartyTrusts with identifiers containing a URI matching the "resource" query string parameter value.
+The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1)) for the web application in [Server State].RelyingPartyTrusts with identifiers containing a URI matching the "resource" query string parameter value.
 
 Upon successful authentication [MS-OAPX], the server MUST do the following before sending the response.
 
@@ -3220,7 +3220,7 @@ The response body MUST be a [Proxy Token Wrapper](#Section_2.2.2.20) complex typ
 
 The server MUST validate that {web-application-for-client-id} corresponds to the value of [Server State].ProxyRelyingPartyTrust.objectIdentifier. If validation fails, the server MUST return an HTTP error code of 500.
 
-The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1.1.1)) for the web application in [Server State].RelyingPartyTrusts with objectIdentifier equal to {web-application-id}.
+The server MUST validate that the request meets the conditions to issue [**pre-authentication**](#gt_pre-authentication) (section [3.12.5.1](#Section_3.12.5.1)) for the web application in [Server State].RelyingPartyTrusts with objectIdentifier equal to {web-application-id}.
 
 The server performs authentication of the request based on the server's authentication policy for [Server State].ProxyRelyingPartyTrust. If authentication fails, the server MUST return an HTTP error code of 403.
 
@@ -3297,7 +3297,7 @@ If the request does not contain a [**proxy**](#gt_proxy) [**token**](#gt_token) 
 If the client is servicing a request for the application identified by one of the entries in [Client State].RelyingPartyTrusts then the client MUST initiate pre-authentication as follows:
 
 - If [Relying Party Trust State].RedirectBasedPreauth is "true" then the client MUST follow processing rules in section [3.13.5.2.1](#Section_3.13.5.2.1).
-- If [Relying Party Trust State].RedirectBasedPreauth is "false" then the client MUST follow processing rules in section [3.13.5.2.2](#Section_3.13.5.2.2).
+- If [Relying Party Trust State].RedirectBasedPreauth is "false" then the client MUST follow processing rules in section [3.13.5.2.2](#Section_93fc09c0da964e45ab0dd49a9481b5b1).
 <a id="Section_3.13.5.2.1"></a>
 ##### 3.13.5.2.1 Initiate Redirect-based Preauthentication
 
@@ -3342,7 +3342,7 @@ For requests from non-Microsoft-Office clients accessing services that implement
 <a id="Section_3.13.5.2.3"></a>
 ##### 3.13.5.2.3 Response to Active Requests
 
-The [**proxy**](#gt_proxy) MAY choose to preauthenticate requests by making backend requests to the server as specified in section [3.12.5.1.5](#Section_3.12.5.1.5.2), provided the proxy deems that the request contains the credentials it needs to be preauthenticated.<16>
+The [**proxy**](#gt_proxy) MAY choose to preauthenticate requests by making backend requests to the server as specified in section [3.12.5.1.5](#Section_3.12.5.1.5), provided the proxy deems that the request contains the credentials it needs to be preauthenticated.<16>
 
 The proxy MUST perform client TLS authentication [[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324) using the certificate in [Client State].TrustCertificate.
 

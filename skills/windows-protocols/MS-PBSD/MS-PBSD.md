@@ -133,7 +133,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-DPWSRP] Microsoft Corporation, "[Devices Profile for Web Services (DPWS): Shared Resource Publishing Data Structure](#Section_2.3)".
+[MS-DPWSRP] Microsoft Corporation, "[Devices Profile for Web Services (DPWS): Shared Resource Publishing Data Structure](../MS-DPWSRP/MS-DPWSRP.md)".
 
 [MS-HGRP] Microsoft Corporation, "[HomeGroup Protocol](../MS-HGRP/MS-HGRP.md)".
 
@@ -161,7 +161,7 @@ The [**Publication Services**](#gt_publication-services) data structure is built
 
 Because the number of resources on a computer and the data associated with them can increase over time, clients also implement the Size Negotiation Extension as specified in [MS-DPWSSN](../MS-DPWSSN/MS-DPWSSN.md) to be able to retrieve resources completely.<1>
 
-The HomeGroup Protocol [MS-HGRP](../MS-HGRP/MS-HGRP.md), which is used to create a trust relationship that facilitates the advertising and publishing of content between machines in a home environment, and the Shell Publishing data structure [MS-DPWSRP](#Section_2.3) use the Publication Services data structure to advertise their content and resources.
+The HomeGroup Protocol [MS-HGRP](../MS-HGRP/MS-HGRP.md), which is used to create a trust relationship that facilitates the advertising and publishing of content between machines in a home environment, and the Shell Publishing data structure [MS-DPWSRP](../MS-DPWSRP/MS-DPWSRP.md) use the Publication Services data structure to advertise their content and resources.
 
 <a id="Section_1.5"></a>
 ## 1.5 Applicability Statement

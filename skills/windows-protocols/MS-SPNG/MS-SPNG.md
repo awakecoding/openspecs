@@ -232,7 +232,7 @@ SPNEGO is a [**security protocol**](#gt_security-protocol) that uses a [**GSS**]
 
 This approach led to a simplified form of interaction between an [**application protocol**](#gt_application-protocol) and an [**authentication**](#gt_authentication) protocol. In this model, an application protocol is responsible for ferrying discrete, opaque packets that the authentication protocol produces. These packets, which are referred to as [**security tokens**](#gt_security-token) by the GSS specifications, implement the authentication process. The application protocol has no visibility into the contents of the security tokens; its responsibility is merely to carry them.
 
-The application protocol in this model (see SPN exchange figures in section [1.3.3](#Section_1.3.4)) first invokes the authentication protocol on the client. The client portion of the authentication protocol creates a security token and returns it to the calling application. The application protocol then transmits that security token to the server side of its connection, embedded within the application protocol. On the server side, the server's application protocol extracts the security token and supplies it to the authentication protocol on the server side. The server authentication protocol can process the security token and possibly generate a response, or it can decide that authentication is complete. If another security token is generated, the application protocol must carry it back to the client, where the process continues.
+The application protocol in this model (see SPN exchange figures in section [1.3.3](#Section_1.3.3)) first invokes the authentication protocol on the client. The client portion of the authentication protocol creates a security token and returns it to the calling application. The application protocol then transmits that security token to the server side of its connection, embedded within the application protocol. On the server side, the server's application protocol extracts the security token and supplies it to the authentication protocol on the server side. The server authentication protocol can process the security token and possibly generate a response, or it can decide that authentication is complete. If another security token is generated, the application protocol must carry it back to the client, where the process continues.
 
 This exchange of security tokens continues until one side determines that authentication has failed or both sides decide that authentication is complete. If authentication fails, the application protocol drops the connection and indicates the error. If authentication succeeds, the application protocol can be assured of the identity of the participants as far as the supporting authentication protocol can accomplish. The onus of determining success or failure is on the abstracted security protocol, not the application protocol, which greatly simplifies the application protocol author's task.
 
@@ -866,7 +866,7 @@ It is important for implementers of the SPNEGO Extension to be aware of the corr
 
 | Security parameter | Section |
 | --- | --- |
-| GSS context parameters | [NegTokenInit Variation for Server-Initiation (section 3.3.5.2)](#Section_3.2.5.2) |
+| GSS context parameters | [NegTokenInit Variation for Server-Initiation (section 3.3.5.2)](#Section_3.3.5.2) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

@@ -190,9 +190,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-PAC] Microsoft Corporation, "[Privilege Attribute Certificate Data Structure](../MS-PAC/MS-PAC.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
-[MS-SAMS] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Server-to-Server)](#Section_5)".
+[MS-SAMS] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Server-to-Server)](../MS-SAMS/MS-SAMS.md)".
 
 [MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](../MS-SPNG/MS-SPNG.md)".
 
@@ -619,11 +619,11 @@ If the certificate is weakly mapped to a user and the SID matches that user, the
 <a id="Section_3.1.5.2.2"></a>
 ##### 3.1.5.2.2 Smart-card-only Account Password Reset
 
-When processing an AS-REQ request (section [2.2.3](#Section_2.2.3)) the PKCA KDC MUST trigger a ResetSmartCardAccountPassword request ([MS-SAMS](#Section_5) section 3.2.4.7) when the following conditions are all TRUE:
+When processing an AS-REQ request (section [2.2.3](#Section_2.2.3)) the PKCA KDC MUST trigger a ResetSmartCardAccountPassword request ([MS-SAMS](../MS-SAMS/MS-SAMS.md) section 3.2.4.7) when the following conditions are all TRUE:
 
 - The PKCA KDC is using Active Directory for the account database
 - The account’s **userAccountControl** attribute ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 2.2.16) SR flag is set to TRUE.
-- The account’s **PasswordMustChange** attribute ([MS-SAMR](#Section_5) section 3.1.5.14.4) is set to zero, OR the account’s **PasswordLastSet** attribute ([MS-SAMR] section 2.2.6.1) is set to a value in the past.
+- The account’s **PasswordMustChange** attribute ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.14.4) is set to zero, OR the account’s **PasswordLastSet** attribute ([MS-SAMR] section 2.2.6.1) is set to a value in the past.
 Upon successful completion of the ResetSmartCardAccountPassword request, the PKCA KDC MUST restart processing of the original request.
 
 <a id="Section_3.1.6"></a>

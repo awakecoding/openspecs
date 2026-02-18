@@ -120,7 +120,7 @@ This document uses the following terms:
 **attribute**: An identifier for a single or multivalued data element that is associated with a directory [**object**](#gt_object). An [**object**](#gt_object) consists of its [**attributes**](#gt_attribute) and their values. For example, cn (common name), street (street address), and mail (email addresses) can all be [**attributes**](#gt_attribute) of a user object. An [**attribute's**](#gt_attribute) schema, including the syntax of its values, is defined in an attributeSchema [**object**](#gt_object).
 
 <a id="gt_autoenrollment"></a>
-**autoenrollment**: An automated process that performs [**certificate**](#gt_certificate) [**enrollment**](#gt_certificate-enrollment) and renewal. For more information about autoenrollment behavior, see [MS-CERSOD](#Section_1.3).
+**autoenrollment**: An automated process that performs [**certificate**](#gt_certificate) [**enrollment**](#gt_certificate-enrollment) and renewal. For more information about autoenrollment behavior, see [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md).
 
 <a id="gt_certificate"></a>
 **certificate**: A certificate is a collection of attributes and extensions that can be stored persistently. The set of attributes in a certificate can vary depending on the intended usage of the certificate. A certificate securely binds a public key to the entity that holds the corresponding private key. A certificate is commonly used for authentication and secure exchange of information on open networks, such as the Internet, extranets, and intranets. Certificates are digitally signed by the issuing [**certification authority (CA)**](#gt_certification-authority-ca) and can be issued for a user, a computer, or a service. The most widely accepted format for certificates is defined by the ITU-T X.509 version 3 international standards. For more information about attributes and extensions, see [[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414) and [[X509]](https://go.microsoft.com/fwlink/?LinkId=90590) sections 7 and 8.
@@ -267,7 +267,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_1.3)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MSDN-KEY] Microsoft Corporation, "CERT_KEY_CONTEXT structure", [http://msdn.microsoft.com/en-us/library/aa377205.aspx](https://go.microsoft.com/fwlink/?LinkId=90032)
 
@@ -276,7 +276,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-This specification defines the syntax and interpretation of [**certificate templates**](#gt_certificate-template). Certificate templates are data structures that specify how [**certificate**](#gt_certificate) requests and certificates are constructed and issued as documented in [MS-WCCE](../MS-WCCE/MS-WCCE.md). The structures also provide settings that influence the behavior of the computer certificate [**autoenrollment**](#gt_autoenrollment) feature that is described in [MS-CERSOD](#Section_1.3). Certificate templates are stored as [**objects**](#gt_object) in [**Active Directory**](#gt_active-directory).
+This specification defines the syntax and interpretation of [**certificate templates**](#gt_certificate-template). Certificate templates are data structures that specify how [**certificate**](#gt_certificate) requests and certificates are constructed and issued as documented in [MS-WCCE](../MS-WCCE/MS-WCCE.md). The structures also provide settings that influence the behavior of the computer certificate [**autoenrollment**](#gt_autoenrollment) feature that is described in [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md). Certificate templates are stored as [**objects**](#gt_object) in [**Active Directory**](#gt_active-directory).
 
 The Windows Client Certificate Enrollment Protocol, as specified in [MS-WCCE], is documented separately. Windows Client Certificate Enrollment Protocol is the protocol by which clients request certificates from the [**CA**](#gt_certification-authority-ca) and by which any issued certificates are returned to the client. Certificate templates can be thought of as playing a part in that protocol because of their abilities to constrain behaviors of the CAs; otherwise, interactions between templates and the Windows Client Certificate Enrollment Protocol are not limited. A client in the Windows Client Certificate Enrollment Protocol can specify a template for the CA to use in building a certificate, but in that context, a template is just another complex data structure that is passed as a parameter to a Windows Client Certificate Enrollment Protocol method.
 
@@ -544,7 +544,7 @@ The pKIMaxIssuingDepth attribute is the maximum depth value for the Basic Constr
 <a id="Section_2.15"></a>
 ## 2.15 pKIOverlapPeriod Attribute
 
-The pKIOverlapPeriod attribute represents the time before a [**certificate**](#gt_certificate) expires, during which time, clients need to send a [**certificate renewal request**](#gt_certificate-renewal-request), as described in [MS-CERSOD](#Section_1.3) sections 2.5.2, 2.5.3.1, and 3.6. The [**attribute**](#gt_attribute) is an 8-byte octet string that initializes the FILETIME structure that is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3.
+The pKIOverlapPeriod attribute represents the time before a [**certificate**](#gt_certificate) expires, during which time, clients need to send a [**certificate renewal request**](#gt_certificate-renewal-request), as described in [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) sections 2.5.2, 2.5.3.1, and 3.6. The [**attribute**](#gt_attribute) is an 8-byte octet string that initializes the FILETIME structure that is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.3.
 
 For schema details of this attribute, see [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.103.
 
@@ -674,7 +674,7 @@ The msPKI-Enrollment-Flag attribute specifies the [**enrollment**](#gt_certifica
 | 0x00000020 CT_FLAG_AUTO_ENROLLMENT | This flag instructs clients to perform autoenrollment for the specified template. |
 | 0x00000040 CT_FLAG_PREVIOUS_APPROVAL_VALIDATE_REENROLLMENT | This flag instructs clients to sign the renewal request using the [**private key**](#gt_private-key) of the existing certificate. For more information, see [MS-WCCE] section 3.2.2.6.2.1.4.5.6.This flag also instructs the CA to process the renewal requests as specified in [MS-WCCE] section 3.2.2.6.2.1.4.5.6. |
 | 0x00000100 CT_FLAG_USER_INTERACTION_REQUIRED | This flag instructs the client to obtain user consent before attempting to [**enroll**](#gt_enroll) for a certificate that is based on the specified template. |
-| 0x00000400 CT_FLAG_REMOVE_INVALID_CERTIFICATE_FROM_PERSONAL_STORE | This flag instructs the autoenrollment client to delete any certificates that are no longer needed based on the specific template from the local certificate storage. For information about autoenrollment and the local certificate storage, see [MS-CERSOD](#Section_1.3) section 2.1.2.2.2. |
+| 0x00000400 CT_FLAG_REMOVE_INVALID_CERTIFICATE_FROM_PERSONAL_STORE | This flag instructs the autoenrollment client to delete any certificates that are no longer needed based on the specific template from the local certificate storage. For information about autoenrollment and the local certificate storage, see [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) section 2.1.2.2.2. |
 | 0x00000800 CT_FLAG_ALLOW_ENROLL_ON_BEHALF_OF | This flag instructs the server to allow [**enroll on behalf of (EOBO)**](#gt_enroll-on-behalf-of-eobo) functionality. |
 | 0x00001000 CT_FLAG_ADD_OCSP_NOCHECK | This flag instructs the server to not include [**revocation**](#gt_revocation) information and add the id-pkix-ocsp-nocheck extension, as specified in [[RFC2560]](https://go.microsoft.com/fwlink/?LinkId=90369) section 4.2.2.2.1, to the certificate that is issued.<28> |
 | 0x00002000 CT_FLAG_ENABLE_KEY_REUSE_ON_NT_TOKEN_KEYSET_STORAGE_FULL | This flag instructs the client to reuse the private key for a smart card–based certificate renewal if it is unable to create a new private key on the card.<29> |

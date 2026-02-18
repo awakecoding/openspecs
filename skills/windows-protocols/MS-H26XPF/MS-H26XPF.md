@@ -171,7 +171,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 We conduct frequent surveys of the normative references to assure their continued availability. If you have any issue with finding a normative reference, please contact [dochelp@microsoft.com](mailto:dochelp@microsoft.com). We will assist you in finding the relevant information.
 
-[MS-RTPME] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions](#Section_2.1)".
+[MS-RTPME] Microsoft Corporation, "[Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions](../MS-RTPME/MS-RTPME.md)".
 
 [RFC2032] Turletti, T., and Huitema, C., "RTP Payload Format for H.261 Video Streams", RFC 2032, Oct. 1996, [http://www.ietf.org/rfc/rfc2032.txt](https://go.microsoft.com/fwlink/?LinkId=114015)
 
@@ -197,7 +197,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-H26XPF specifies the payload format for encapsulating an H.261 [[H261]](https://go.microsoft.com/fwlink/?LinkId=114017) [**bitstream**](#gt_bitstream) and two payload formats for encapsulating an H.263 [[H263]](https://go.microsoft.com/fwlink/?LinkId=114018) bitstream in the Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions [MS-RTPME](#Section_2.1).
+H26XPF specifies the payload format for encapsulating an H.261 [[H261]](https://go.microsoft.com/fwlink/?LinkId=114017) [**bitstream**](#gt_bitstream) and two payload formats for encapsulating an H.263 [[H263]](https://go.microsoft.com/fwlink/?LinkId=114018) bitstream in the Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions [MS-RTPME](../MS-RTPME/MS-RTPME.md).
 
 The payload format for H.261 video streams is an extension to the H.261 payload format [[RFC2032]](https://go.microsoft.com/fwlink/?LinkId=114015). RTP is used to carry H.261 payloads. The Session Description Protocol (SDP) [MS-SDP](../MS-SDP/MS-SDP.md) and H.245 [[H245]](https://go.microsoft.com/fwlink/?LinkId=93032) are used to negotiate codec usage.
 
@@ -208,7 +208,7 @@ RFC mode of the H.263 payload format is used in conjunction with the Session Ini
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-H26XPF extends the base protocol for the H.261 payload format [[RFC2032]](https://go.microsoft.com/fwlink/?LinkId=114015) and the base protocol for the H.263 payload format [[RFC2190]](https://go.microsoft.com/fwlink/?LinkId=114016). It carries a payload consisting of an H.261 [**bitstream**](#gt_bitstream) or an H.263 bitstream in the formats specified in [[H261]](https://go.microsoft.com/fwlink/?LinkId=114017) or [[H263]](https://go.microsoft.com/fwlink/?LinkId=114018) and, in turn, it is carried as a payload of the RTP extensions specified in [MS-RTPME](#Section_2.1).
+H26XPF extends the base protocol for the H.261 payload format [[RFC2032]](https://go.microsoft.com/fwlink/?LinkId=114015) and the base protocol for the H.263 payload format [[RFC2190]](https://go.microsoft.com/fwlink/?LinkId=114016). It carries a payload consisting of an H.261 [**bitstream**](#gt_bitstream) or an H.263 bitstream in the formats specified in [[H261]](https://go.microsoft.com/fwlink/?LinkId=114017) or [[H263]](https://go.microsoft.com/fwlink/?LinkId=114018) and, in turn, it is carried as a payload of the RTP extensions specified in [MS-RTPME](../MS-RTPME/MS-RTPME.md).
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -243,7 +243,7 @@ H26XPF has no standards assignments beyond those specified in [[RFC2032]](https:
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-H26XPF is carried as a payload in RTP [MS-RTPME](#Section_2.1) and therefore relies on RTP for providing the means to transport its payload over the network.
+H26XPF is carried as a payload in RTP [MS-RTPME](../MS-RTPME/MS-RTPME.md) and therefore relies on RTP for providing the means to transport its payload over the network.
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -431,7 +431,7 @@ H.261 video packets are considered to be complete if they satisfy the following 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 H.263 Payload Formats
 
-The description in this section applies to the H.263 payload headers in both [**RFC mode**](#gt_rfc-mode) and [**draft mode**](#gt_draft-mode). An H.263 payload is carried within RTP packets; the Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions ([MS-RTPME](#Section_2.1) section 2.2.1) specifies how to identify packets containing H.263 payloads.
+The description in this section applies to the H.263 payload headers in both [**RFC mode**](#gt_rfc-mode) and [**draft mode**](#gt_draft-mode). An H.263 payload is carried within RTP packets; the Real-Time Transport Protocol (RTP/RTCP): Microsoft Extensions ([MS-RTPME](../MS-RTPME/MS-RTPME.md) section 2.2.1) specifies how to identify packets containing H.263 payloads.
 
 An H.263 video frame is fragmented and converted to packets using the mechanism specified in [[RFC2190]](https://go.microsoft.com/fwlink/?LinkId=114016) and in this document.
 
@@ -502,7 +502,7 @@ The following code snippet expands the payload header to include the RTP packet 
 
 0x40, 0x41, 0x22, 0x22, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x01, 0x9B, 0x00, 0x00, 0x00
 
-In this case, the definition of the RTP header [MS-RTPME](#Section_2.1) is the following:
+In this case, the definition of the RTP header [MS-RTPME](../MS-RTPME/MS-RTPME.md) is the following:
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -546,7 +546,7 @@ The following code snippet expands the payload header to include the RTP packet 
 
 0x40, 0x41, 0x22, 0x22, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x01, 0x9C, 0x66, 0x80, 0x06, 0x00, 0x00, 0x00, 0x00
 
-In this case, the definition of the RTP header [MS-RTPME](#Section_2.1) is the following:
+In this case, the definition of the RTP header [MS-RTPME](../MS-RTPME/MS-RTPME.md) is the following:
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -611,7 +611,7 @@ The following code snippet expands the payload header to include the RTP packet 
 
 0x40, 0x41, 0x22, 0x22, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x01, 0x9C, 0x66, 0x80, 0x06, 0x00, 0x00, 0x00, 0x00
 
-In this case, the definition of the RTP header [MS-RTPME](#Section_2.1) is the following:
+In this case, the definition of the RTP header [MS-RTPME](../MS-RTPME/MS-RTPME.md) is the following:
 
 | Bit Range | Field | Description |
 | --- | --- | --- |

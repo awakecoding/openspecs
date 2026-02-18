@@ -225,7 +225,7 @@ If acting as an NNTP server:
 - If the authentication is continuing, the NTLM software will return an NTLM message that needs to be sent to the server. This message is base64 encoded, and the NNTP padding is applied and sent to the client. Steps 2 through 4 are repeated until authentication succeeds or fails.
 The sequence that follows shows the typical flow of packets between client and server after NTLM authentication has been selected.
 
-- The NNTP client sends an [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message) that is embedded in an [NNTP_AUTH_NTLM_Blob_Command](#Section_3.2.5.2) packet to the server.
+- The NNTP client sends an [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message) that is embedded in an [NNTP_AUTH_NTLM_Blob_Command](#Section_2.2.1.6) packet to the server.
 - The NNTP client sends an NTLM NEGOTIATE_MESSAGE, and the NNTP server sends an [**NTLM CHALLENGE_MESSAGE**](#gt_ntlm-challenge_message) that is embedded in an NNTP packet to the client.
 - In response, the NNTP client sends an [**NTLM AUTHENTICATE_MESSAGE**](#gt_ntlm-authenticate_message) that is embedded in an NNTP packet.
 - The server then sends an [**NNTP response**](#gt_nntp-response) to the client to successfully complete the authentication process.
@@ -291,7 +291,7 @@ The NTLM Authentication: NNTP Extension does not establish transport connections
 
 The NTLM Authentication: NNTP Extension messages are divided into three categories, depending on whether the message was sent by the server or the client. The message categories are:
 
-- [AUTHINFO GENERIC Extensions](#Section_3.2.5.2)
+- [AUTHINFO GENERIC Extensions](#Section_2.2.1.6)
 - [NNTP Server Messages](#Section_2.2.2)
 - [NNTP Client Messages](#Section_2.2.3)
 The formal syntax of messages is provided in Augmented Backus-Naur Form (ABNF), as specified in [[RFC4234]](https://go.microsoft.com/fwlink/?LinkId=90462).
@@ -308,8 +308,8 @@ During every part of the authentication exchange, the client MUST parse the stat
 The client can receive any one of the following responses during authentication. The syntax and meaning of all these messages are completely defined in [RFC2980]—except for the first message, for which [RFC2980] does not define the data that is encapsulated in the NNTP message, and leaves the definition and processing of that data to the extension mechanism. This specification focuses on defining that data. The potential response messages received by the client are:
 
 - [NNTP_AUTH_NTLM_Blob_Response](#Section_2.2.1.3)
-- [NNTP_AUTH_Fail_Response](#Section_3.1.5.5)
-- [NNTP_AUTH_NTLM_Succeeded_Response](#Section_3.1.5.4)
+- [NNTP_AUTH_Fail_Response](#Section_2.2.1.4)
+- [NNTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.5)
 - NNTP_AUTH_Other_Failure_Response, which is actually a class of messages whose syntax and interpretation are defined in [RFC2980] and [[RFC977]](https://go.microsoft.com/fwlink/?LinkId=94679). They indicate an abnormal termination of the NTLM authentication negotiation, which can occur for various reasons such as software errors or lack of system resources. For the purposes of this document, NNTP_AUTH_Other_Failure_Response is defined as any NNTP message other than NNTP_AUTH_NTLM_Succeeded_Response, NNTP_AUTH_Fail_Response and NNTP_AUTH_NTLM_Blob_Response. The interpretation of NNTP_AUTH_Other_Failure_Response, and the suggested client action when receiving such a message, is defined in [RFC2980]. This message represents an exit from AUTH and is, as such, not really part of AUTH negotiation.
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 NNTP_AUTH_NTLM_Initiation_Command Message
@@ -389,7 +389,7 @@ De-encapsulation of these messages by the client follows reverse logic:
 <a id="Section_2.2.3"></a>
 ### 2.2.3 NNTP Client Messages
 
-This section defines the processing of [NNTP_AUTH_NTLM_Blob_Command](#Section_3.2.5.2) messages. These [**NTLM messages**](#gt_ntlm-message) are sent by the client and MUST be encapsulated as follows, in order to conform to the syntax of the AUTHINFO GENERIC mechanism:
+This section defines the processing of [NNTP_AUTH_NTLM_Blob_Command](#Section_2.2.1.6) messages. These [**NTLM messages**](#gt_ntlm-message) are sent by the client and MUST be encapsulated as follows, in order to conform to the syntax of the AUTHINFO GENERIC mechanism:
 
 - Use [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7) to encode the NTLM message data. Do this because NTLM messages contain data that is outside the ASCII character range, whereas NNTP only supports ASCII characters in context of the [**AUTHINFO GENERIC command**](#gt_authinfo-generic-command).
 - Prefix the base64-encoded string that is obtained in step 1 with the ASCII string "AUTHINFO GENERIC " (the casing of the "AUTHINFO GENERIC " characters does not matter).
@@ -430,7 +430,7 @@ This is the state of the client before the [NNTP_AUTH_NTLM_Initiation_Command](#
 This is the state of the client after the NNTP_AUTH_NTLM_Initiation_Command has been sent.
 
 - **inside_authentication**
-This is the state that a client enters after it has received an [NNTP_NTLM_Supported_Response](#Section_3.1.5.1). In this state, the client initializes the [**NTLM software**](#gt_ntlm-software) and repeats the following steps:
+This is the state that a client enters after it has received an [NNTP_NTLM_Supported_Response](#Section_2.2.1.2). In this state, the client initializes the [**NTLM software**](#gt_ntlm-software) and repeats the following steps:
 
 - Encapsulates the [**NTLM message**](#gt_ntlm-message) that is returned by the NTLM software into an NNTP message.
 - Waits for a response from the server.
@@ -439,11 +439,11 @@ This is the state that a client enters after it has received an [NNTP_NTLM_Suppo
 - Sends the NNTP message to the other party.
 This state terminates when:
 
-- For the server: the NTLM software reports completion with either a successful or failed authentication status. The server then sends the client an [NNTP_AUTH_NTLM_Succeeded_Response](#Section_3.1.5.4) message or [NNTP_AUTH_Fail_Response](#Section_3.1.5.5) message, as described in [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782).
+- For the server: the NTLM software reports completion with either a successful or failed authentication status. The server then sends the client an [NNTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.5) message or [NNTP_AUTH_Fail_Response](#Section_2.2.1.4) message, as described in [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782).
 - For the client: an NNTP_AUTH_NTLM_Succeeded_Response message or NNTP_AUTH_Fail_Response message is received.
 - For either client or server: any failure is reported by the NTLM software.
 - **completed_authentication**
-This is the state of the client when it exits the inside_authentication state. The rules for how the inside_authentication state is exited are specified in section [3.1.5](#Section_3.2.5).
+This is the state of the client when it exits the inside_authentication state. The rules for how the inside_authentication state is exited are specified in section [3.1.5](#Section_3.1.5).
 
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 NTLM Software Interaction
@@ -452,7 +452,7 @@ During the **inside_authentication** phase, the NNTP client invokes the [**NTLM 
 
 - The negotiation is a [**connection-oriented NTLM**](#gt_connection-oriented-ntlm) negotiation.
 - None of the flags that are specified in [MS-NLMP] section 3.1.1 are passed to [**NTLM**](#gt_nt-lan-manager-ntlm).
-The following describes how NNTP uses NTLM. Remember that all [**NTLM messages**](#gt_ntlm-message) are encapsulated as in section [2.2](../MS-NLMP/MS-NLMP.md). The NTLM Authentication Protocol, as specified in [MS-NLMP] section 3.1.1, describes the data model, internal states, and sequencing of NTLM messages in greater detail:
+The following describes how NNTP uses NTLM. Remember that all [**NTLM messages**](#gt_ntlm-message) are encapsulated as in section [2.2](#Section_2.2). The NTLM Authentication Protocol, as specified in [MS-NLMP] section 3.1.1, describes the data model, internal states, and sequencing of NTLM messages in greater detail:
 
 - The client initiates the authentication by invoking NTLM. NTLM then returns the [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message) to be sent by the client to the server.
 - Subsequently, the exchange of NTLM messages continues as defined by the NTLM Authentication Protocol: The NNTP client encapsulates the NTLM messages before sending them to the server and de-encapsulates NNTP messages to obtain the NTLM message, before giving it to NTLM.
@@ -479,7 +479,7 @@ There are no higher-layer triggered events in common to all parts of this protoc
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The NTLM Authentication: NNTP Extension is driven by a series of message exchanges between an NNTP server and an NNTP client. The rules that govern the sequencing of commands and the internal states of the client and server are defined by [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.1.1](../MS-NLMP/MS-NLMP.md) completely defines how the rules that are specified in [RFC2980] and [MS-NLMP] govern NNTP authentication.
+The NTLM Authentication: NNTP Extension is driven by a series of message exchanges between an NNTP server and an NNTP client. The rules that govern the sequencing of commands and the internal states of the client and server are defined by [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.1.1](#Section_3.1.1) completely defines how the rules that are specified in [RFC2980] and [MS-NLMP] govern NNTP authentication.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Receiving an NNTP_NTLM_Supported_Response Message
@@ -560,7 +560,7 @@ This is the state of the server before the [NNTP_AUTH_NTLM_Initiation_Command](#
 This is the state of the server after the NNTP_AUTH_NTLM_Initiation_Command has been received.
 
 - **inside_authentication**
-This is the state that a server enters after it has sent an [NNTP_NTLM_Supported_Response](#Section_3.1.5.1). In this state, the server initializes the [**NTLM software**](#gt_ntlm-software) and repeats the following steps:
+This is the state that a server enters after it has sent an [NNTP_NTLM_Supported_Response](#Section_2.2.1.2). In this state, the server initializes the [**NTLM software**](#gt_ntlm-software) and repeats the following steps:
 
 - Waits for a message from the client.
 - De-encapsulates the NNTP message data that is received, if any, from the other party and obtains the embedded [**NTLM message**](#gt_ntlm-message) data.
@@ -569,10 +569,10 @@ This is the state that a server enters after it has sent an [NNTP_NTLM_Supported
 - Sends the NNTP message to the other party.
 This state terminates when:
 
-- The NTLM software reports completion with either a successful or failed authentication status. The server then sends the client an [NNTP_AUTH_NTLM_Succeeded_Response](#Section_3.1.5.4) message or [NNTP_AUTH_Fail_Response](#Section_3.1.5.5) message, as described in [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782).
+- The NTLM software reports completion with either a successful or failed authentication status. The server then sends the client an [NNTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.5) message or [NNTP_AUTH_Fail_Response](#Section_2.2.1.4) message, as described in [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782).
 - Any failure is reported by the NTLM software.
 - **completed_authentication**
-This is the state of the server when it exits the inside_authentication state. The rules for how the inside_authentication state is exited are defined in section [3.2.5](#Section_1.3).
+This is the state of the server when it exits the inside_authentication state. The rules for how the inside_authentication state is exited are defined in section [3.2.5](#Section_3.2.5).
 
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 NTLM Software Interaction
@@ -586,8 +586,8 @@ The following describes how NNTP uses NTLM. For more information, see [MS-NLMP] 
 - When the server receives the [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message), it passes it to the NTLM software and if the NTLM NEGOTIATE_MESSAGE was valid, it receives the [**NTLM CHALLENGE_MESSAGE**](#gt_ntlm-challenge_message) in return.
 - Subsequently, the exchange of [**NTLM messages**](#gt_ntlm-message) goes on as defined by the NTLM Authentication Protocol: The NNTP server encapsulates the NTLM messages that are returned by NTLM before sending them to the client.
 - When the NTLM Authentication Protocol completes authentication, either successfully or unsuccessfully, the NTLM software notifies NNTP.
-- Upon successful completion, the server MUST exit the inside_authentication state, enter the completed_authentication state, and send the [NNTP_AUTH_NTLM_Succeeded_Response](#Section_3.1.5.4) to the client. Upon receiving this message, the client MUST also transition to the completed_authentication state.
-- If a failure occurs because of an incorrect password error, as described in [MS-NLMP] sections 3.3.1 and 3.3.2, the server MUST enter the completed_authentication state and send the client an [NNTP_AUTH_Fail_Response](#Section_3.1.5.5) message.
+- Upon successful completion, the server MUST exit the inside_authentication state, enter the completed_authentication state, and send the [NNTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.5) to the client. Upon receiving this message, the client MUST also transition to the completed_authentication state.
+- If a failure occurs because of an incorrect password error, as described in [MS-NLMP] sections 3.3.1 and 3.3.2, the server MUST enter the completed_authentication state and send the client an [NNTP_AUTH_Fail_Response](#Section_2.2.1.4) message.
 - If a failure occurs on the server because of any other reason than an incorrect password error, the server enters the completed_authentication state and sends the client an NNTP_AUTH_Fail_Response message. Upon receiving this message, the client enters the completed_authentication state.
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -607,14 +607,14 @@ There are no higher-layer triggered events in common to all parts of this protoc
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-The NTLM Authentication: NNTP Extension is driven by a series of message exchanges between an NNTP server and an NNTP client. The rules that govern the sequencing of commands and the internal states of the client and server are defined by [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.2.1](../MS-NLMP/MS-NLMP.md) completely defines how the rules that are specified in [RFC2980] and [MS-NLMP] govern NNTP authentication.
+The NTLM Authentication: NNTP Extension is driven by a series of message exchanges between an NNTP server and an NNTP client. The rules that govern the sequencing of commands and the internal states of the client and server are defined by [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.2.1](#Section_3.2.1) completely defines how the rules that are specified in [RFC2980] and [MS-NLMP] govern NNTP authentication.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receiving an NNTP_AUTH_NTLM_Initiation_Command Message
 
 The expected state is **start**.
 
-When a server receives this message, it MUST reply with the [NNTP_NTLM_Supported_Response](#Section_3.1.5.1) message if it supports [**NTLM**](#gt_nt-lan-manager-ntlm) and then change its state to the **inside_authentication** state.
+When a server receives this message, it MUST reply with the [NNTP_NTLM_Supported_Response](#Section_2.2.1.2) message if it supports [**NTLM**](#gt_nt-lan-manager-ntlm) and then change its state to the **inside_authentication** state.
 
 If the server does not support NTLM, it MUST respond with the [NNTP_NTLM_Not_Supported_Response](#Section_2.2.1.8) message, and change its state to the **completed_authentication** state.
 
@@ -637,17 +637,17 @@ The [**NTLM message**](#gt_ntlm-message) MUST be encapsulated and sent to the cl
 <a id="Section_3.2.5.2.2"></a>
 ##### 3.2.5.2.2 NTLM Indicates the Authentication Completed Successfully
 
-The server MUST return the [NNTP_AUTH_NTLM_Succeeded_Response](#Section_3.1.5.4) message and change its internal state to **completed_authentication**.<3>
+The server MUST return the [NNTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.5) message and change its internal state to **completed_authentication**.<3>
 
 <a id="Section_3.2.5.2.3"></a>
 ##### 3.2.5.2.3 NTLM Indicates That the User Name or Password Was Incorrect
 
-The server MUST return the [NNTP_AUTH_Fail_Response](#Section_3.1.5.5) message and change its internal state to **completed_authentication**.
+The server MUST return the [NNTP_AUTH_Fail_Response](#Section_2.2.1.4) message and change its internal state to **completed_authentication**.
 
 <a id="Section_3.2.5.2.4"></a>
 ##### 3.2.5.2.4 NTLM Returns a Failure Status Indicating Any Other Error
 
-The server MUST return the [NNTP_AUTH_Fail_Response](#Section_3.1.5.5) message and change its internal state to **completed_authentication**.
+The server MUST return the [NNTP_AUTH_Fail_Response](#Section_2.2.1.4) message and change its internal state to **completed_authentication**.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -676,10 +676,10 @@ Figure 4: NNTP client authenticates to an NNTP server
 - The client sends an [NNTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1) to the server. This command is defined in [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782) section 3.1.3.
 AUTHINFO GENERIC NTLM
 
-- The server sends the [NNTP_NTLM_Supported_Response](#Section_3.1.5.1) message, indicating that it can perform NTLM authentication.
+- The server sends the [NNTP_NTLM_Supported_Response](#Section_2.2.1.2) message, indicating that it can perform NTLM authentication.
 381 Protocol supported, proceed
 
-- The client sends an [NNTP_AUTH_NTLM_Blob_Command](#Section_3.2.5.2) message that contains a base64-encoded [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message).
+- The client sends an [NNTP_AUTH_NTLM_Blob_Command](#Section_2.2.1.6) message that contains a base64-encoded [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message).
 AUTHINFO GENERIC TlRMTVNTUAABAAAAB7IIogcABwAvAAAABwAHACgAAAAFA
 
 SgKAAAAD0dQVUxMQTFSRURNT05E
@@ -760,7 +760,7 @@ The contents of the NTLM message after base64 decoding are:
 
 0x00000090 00 00 00 00 C8 72 BF D2 4D A3 37 26 34 80 FE B4 ....Hr?RM#7&4
 
-- The server sends an [NNTP_AUTH_NTLM_Succeeded_Response](#Section_3.1.5.4) message.
+- The server sends an [NNTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.5) message.
 281 Authentication ok
 
 <a id="Section_4.2"></a>
@@ -775,10 +775,10 @@ Figure 5: NNTP client attempts authentication to an NNTP server and is unsuccess
 - The client sends an [NNTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1) to the server. This command is defined in [[RFC2980]](https://go.microsoft.com/fwlink/?LinkId=94782) section 3.1.3.
 AUTHINFO GENERIC NTLM
 
-- The server sends the [NNTP_NTLM_Supported_Response](#Section_3.1.5.1) message, indicating that it can perform NTLM authentication.
+- The server sends the [NNTP_NTLM_Supported_Response](#Section_2.2.1.2) message, indicating that it can perform NTLM authentication.
 381 Protocol supported, proceed
 
-- The client sends an [NNTP_AUTH_NTLM_Blob_Command](#Section_3.2.5.2) message.
+- The client sends an [NNTP_AUTH_NTLM_Blob_Command](#Section_2.2.1.6) message.
 AUTHINFO GENERIC TlRMTVNTUAABAAAAt4II4gAAAAAAAAAAAAAAAAAAAAAFAs4OAAAADw==
 
 The contents of the [**NTLM message**](#gt_ntlm-message) after [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7) decoding are:
@@ -857,7 +857,7 @@ The contents of the NTLM message after base64 decoding are:
 
 0x000000B0 08 B2 C2 58 D8 1D A0 05 7F CA 62 1A .2BXX. .Jb.
 
-- The server sends an [NNTP_AUTH_Fail_Response](#Section_3.1.5.5) message.
+- The server sends an [NNTP_AUTH_Fail_Response](#Section_2.2.1.4) message.
 502 Permission denied
 
 <a id="Section_5"></a>
@@ -875,7 +875,7 @@ Implementers need to be aware of the security considerations of using [**NTLM**]
 
 | Security parameter | Section |
 | --- | --- |
-| This protocol requires the [**NTLM**](#gt_nt-lan-manager-ntlm) authentication mechanism, whose data is carried in packets as described in this document. | [2](#Section_1.3) and [3](#Section_1.3) |
+| This protocol requires the [**NTLM**](#gt_nt-lan-manager-ntlm) authentication mechanism, whose data is carried in packets as described in this document. | [2](#Section_2) and [3](#Section_3) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

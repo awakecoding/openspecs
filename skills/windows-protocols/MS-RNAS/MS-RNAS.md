@@ -334,7 +334,7 @@ The RADIUS Protocol, specified in [[RFC2865]](https://go.microsoft.com/fwlink/?L
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
 
-The following sections contain information about the [**VSAs**](#gt_vendor-specific-attribute-vsa) that are defined in this document. These VSAs are used in RADIUS Access-Request and Access-Accept messages [[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392) in the manner specified in sections [3.1.5.2](#Section_2), [3.2.5](#Section_3.3.5), and [3.3.5](#Section_3.3.5).
+The following sections contain information about the [**VSAs**](#gt_vendor-specific-attribute-vsa) that are defined in this document. These VSAs are used in RADIUS Access-Request and Access-Accept messages [[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392) in the manner specified in sections [3.1.5.2](#Section_3.1.5.2), [3.2.5](#Section_3.2.5), and [3.3.5](#Section_3.3.5).
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Microsoft Vendor-Specific Attributes (VSAs)
@@ -471,7 +471,7 @@ The fields of MS-IPv6-Filter MUST be set as follows:
 
 **Attribute-Specific Value**: A list of IPv6 filter sets, defined as follows.
 
-The usage of this attribute within Access-Request, Access-Accept, Access-Reject, Access-Challenge and Accounting-Request packets is defined in section [3.1.5.2](#Section_2). If multiple MS-IPv6-Filter attributes occur in a single RADIUS packet, the **Attribute-Specific Value** field from each MUST be concatenated in the order received to form the full MS-IPv6-Filter value.
+The usage of this attribute within Access-Request, Access-Accept, Access-Reject, Access-Challenge and Accounting-Request packets is defined in section [3.1.5.2](#Section_3.1.5.2). If multiple MS-IPv6-Filter attributes occur in a single RADIUS packet, the **Attribute-Specific Value** field from each MUST be concatenated in the order received to form the full MS-IPv6-Filter value.
 
 ```mermaid
 packet-beta
@@ -783,7 +783,7 @@ No timers are required. For a discussion of retransmission hints, see the RADIUS
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The [**RNAS server**](#gt_rnas-server) uses the policy configuration for the RADIUS authorization. This configuration is maintained in an XML file on the server machine and is loaded into the **PolicyConfiguration structure** that is specified in section [3.2.1](#Section_3.1.1) when the server starts. The configuration is updated by the network administrator.
+The [**RNAS server**](#gt_rnas-server) uses the policy configuration for the RADIUS authorization. This configuration is maintained in an XML file on the server machine and is loaded into the **PolicyConfiguration structure** that is specified in section [3.2.1](#Section_3.2.1) when the server starts. The configuration is updated by the network administrator.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -988,7 +988,7 @@ When an [**RNAS server**](#gt_rnas-server) receives an Access-Request message se
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 MS-RAS-Client-Name
 
-When the RADIUS server receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.RASClientName** ADM element specified in section [3.2.1](#Section_3.1.1) for the value of the VSA. If a match is not found, the server SHOULD send an Access-Reject message to the NAS and stop processing.
+When the RADIUS server receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.RASClientName** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the VSA. If a match is not found, the server SHOULD send an Access-Reject message to the NAS and stop processing.
 
 For more details about this attribute, see section [2.2.1.1](#Section_2.2.1.1).
 
@@ -1004,19 +1004,19 @@ For more details about this attribute, see section [2.2.1.2](#Section_2.2.1.2).
 
 If the RADIUS User-Name attribute ([[RFC2865]](https://go.microsoft.com/fwlink/?LinkId=90392) section 5.1) is found in the request, the RADIUS server MUST ignore this attribute. Otherwise, the RADIUS server SHOULD convert the SID to a Fully Qualified User Name using [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds). Once the Fully Qualified User Name is available, the server MUST follow the same processing rules specified in section [3.2.5.1.1](#Section_3.2.5.1.1). If the server fails to obtain the Fully Qualified User Name from AD DS, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
 
-For more details about this attribute, see section [2.2.1.3](#Section_5).
+For more details about this attribute, see section [2.2.1.3](#Section_2.2.1.3).
 
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 MS-Network-Access-Server-Type
 
-When the **RADIUS server** receives this VSA, it MUST search the **PolicyConfiguration.NetworkAccessServerType** ADM element specified in section [3.2.1](#Section_3.1.1) for the value of the VSA. If a match was not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
+When the **RADIUS server** receives this VSA, it MUST search the **PolicyConfiguration.NetworkAccessServerType** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the VSA. If a match was not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
 
 For more details about this attribute, see section [2.2.1.4](#Section_2.2.1.4).
 
 <a id="Section_3.2.5.1.5"></a>
 ##### 3.2.5.1.5 MS-Machine-Name
 
-If a RADIUS server receives this attribute, it SHOULD determine the machine groups to which the machine specified in the attribute belongs, and it MUST search the **PolicyConfiguration.MachineName** ADM element specified in section [3.2.1](#Section_3.1.1) for the value of the [**VSA**](#gt_vendor-specific-attribute-vsa). If a match was not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
+If a RADIUS server receives this attribute, it SHOULD determine the machine groups to which the machine specified in the attribute belongs, and it MUST search the **PolicyConfiguration.MachineName** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the [**VSA**](#gt_vendor-specific-attribute-vsa). If a match was not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
 
 For more details about this attribute, see section [2.2.1.5](#Section_2.2.1.5).
 
@@ -1030,14 +1030,14 @@ For more details about this attribute, see section [2.2.1.7](#Section_2.2.1.7).
 <a id="Section_3.2.5.1.7"></a>
 ##### 3.2.5.1.7 MS-User-IPv4-Address
 
-When the RADIUS server receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.UserIPv4Address** ADM element specified in section [3.2.1](#Section_3.1.1) for the value of the VSA. If a match was not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
+When the RADIUS server receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.UserIPv4Address** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the VSA. If a match was not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
 
 For more details about this attribute, see section [2.2.1.8](#Section_2.2.1.8).
 
 <a id="Section_3.2.5.1.8"></a>
 ##### 3.2.5.1.8 MS-User-IPv6-Address
 
-When the RADIUS server receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.UserIPv6Address** ADM element specified in section [3.2.1](#Section_3.1.1) for the value of the VSA. If a match is not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
+When the RADIUS server receives this [**VSA**](#gt_vendor-specific-attribute-vsa), it MUST search the **PolicyConfiguration.UserIPv6Address** ADM element specified in section [3.2.1](#Section_3.2.1) for the value of the VSA. If a match is not found, the server SHOULD send an Access-Reject message back to the NAS and stop processing.
 
 For more details about this attribute, see section [2.2.1.9](#Section_2.2.1.9).
 
@@ -1224,7 +1224,7 @@ If the RADIUS User-Name attribute ([[RFC2865]](https://go.microsoft.com/fwlink/?
 
 If the RADIUS User-Name attribute ([RFC2865] section 5.1) is not NULL, this attribute MUST NOT be set.
 
-If the **sidDataLength** field of the *securityIdentity* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to zero, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *securityIdentity* parameter to the format specified in section [2.2.1.3](#Section_5).
+If the **sidDataLength** field of the *securityIdentity* parameter of the SendRadiusAccessRequest abstract interface (section [3.3.4.1](#Section_3.3.4.1)) is set to zero, this attribute MUST NOT be set. Otherwise, the attribute-specific value is obtained by serializing the *securityIdentity* parameter to the format specified in section [2.2.1.3](#Section_2.2.1.3).
 
 <a id="Section_3.3.5.1.4"></a>
 ##### 3.3.5.1.4 MS-Network-Access-Server-Type
@@ -1342,7 +1342,7 @@ In addition, implementers can support a mode of operation wherein RADIUS will no
 
 | Security parameter | Section |
 | --- | --- |
-| MS-User-Security-Identity | [2.2.1.3](#Section_5) |
+| MS-User-Security-Identity | [2.2.1.3](#Section_2.2.1.3) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

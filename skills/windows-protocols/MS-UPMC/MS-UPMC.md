@@ -222,7 +222,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [**Microsoft Power Management Extensions (MPME)**](#gt_microsoft-power-management-extensions-mpme) are used to expose UPnP Device capabilities for power management. For example, a UPnP Device can support sleep mode and accept wake requests from other UPnP Devices. At the same time, a UPnP Device can support waking other UPnP Devices.
 
-The [**Microsoft ProtocolInfo Extensions**](#gt_microsoft-protocolinfo-extensions) are extensions to the [**ProtocolInfo**](#gt_protocolinfo), defined by Microsoft. For example, a [**Digital Media Renderer (DMR)**](#gt_digital-media-renderer-dmr) can use the [PlayToApp extension (section 2.4.1)](#Section_3.4.1) to indicate that it supports a nonstandard URI scheme.
+The [**Microsoft ProtocolInfo Extensions**](#gt_microsoft-protocolinfo-extensions) are extensions to the [**ProtocolInfo**](#gt_protocolinfo), defined by Microsoft. For example, a [**Digital Media Renderer (DMR)**](#gt_digital-media-renderer-dmr) can use the [PlayToApp extension (section 2.4.1)](#Section_2.4.1) to indicate that it supports a nonstandard URI scheme.
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Protocols and Other Structures
@@ -584,7 +584,7 @@ In the case of the UPnP action ConnectionManager:GetProtocolInfo, all format sup
 
 http-get:*:audio/x-ms-wma:DLNA.ORG_PN=WMABASE
 
-**Note** The XML tags can be escaped, as described in section [3.1](#Section_2.1) of this document, when this compatibility flag is used.
+**Note** The XML tags can be escaped, as described in section [3.1](#Section_3.1) of this document, when this compatibility flag is used.
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 WMC_COMPAT_EXCLUDE_DLNA_1_5
@@ -597,7 +597,7 @@ This flag causes a [**DMS**](#gt_digital-media-server-dms) to map the [**DLNA**]
 
 <res duration="0:03:20.000" bitrate="24000" protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01500000000000000000000000000000" sampleFrequency="44100" bitsPerSample="16" nrAudioChannels="2" microsoft:codec="{00000055-0000-0010-8000-00AA00389B71}" xmlns:microsoft="urn:schemas-microsoft-com:WMPNSS-1-0/">http://127.0.0.1:10243/WMPNSSv4/2815481477/1_ezI0OTI3N0I5LUU2MUQtNDdEMi05MTI3LTJBNjFDOTFGM0M5N30uMC40.mp3</res>
 
-**Note** The [**XML**](#gt_xml) tags can be escaped, as described in section [3.1](#Section_2.1) of this document, when this compatibility flag is used.
+**Note** The [**XML**](#gt_xml) tags can be escaped, as described in section [3.1](#Section_3.1) of this document, when this compatibility flag is used.
 
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 WMC_COMPAT_EXCLUDE_PCMPARAMS
@@ -949,7 +949,7 @@ xmlns:microsoft="urn:schemas-microsoft-com:WMPNSS-1-0">1
 <a id="Section_3.4.1"></a>
 ### 3.4.1 PlayToApp Extension
 
-The following example shows a ProtocolInfo string (section [2.4.1](#Section_3.4.1)) that a [**DMR**](#gt_digital-media-renderer-dmr) device can include in its SinkProtocolInfo state variable ([[UPNPCNMGR]](https://go.microsoft.com/fwlink/?LinkId=187219) section 2.2.2) to declare that it supports playing media using the "example://" URI schemes.
+The following example shows a ProtocolInfo string (section [2.4.1](#Section_2.4.1)) that a [**DMR**](#gt_digital-media-renderer-dmr) device can include in its SinkProtocolInfo state variable ([[UPNPCNMGR]](https://go.microsoft.com/fwlink/?LinkId=187219) section 2.2.2) to declare that it supports playing media using the "example://" URI schemes.
 
 microsoft.com:*:application/vnd.ms-playtoapp;target="example":*
 

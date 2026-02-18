@@ -194,7 +194,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -466,7 +466,7 @@ ActionFlags: 1\r\n
 <a id="Section_2.2.3.13"></a>
 #### 2.2.3.13 Unique identifier
 
-Unique identifier is a concatenation of the [application](#Section_2.2.3.2), [application domain](#Section_2.2.3.2), and [session identifier](#Section_2.2.3.3) fields. The combined value is used as a unique identifier for [**session state**](#gt_session-state).
+Unique identifier is a concatenation of the [application](#Section_2.2.3.1), [application domain](#Section_2.2.3.2), and [session identifier](#Section_2.2.3.3) fields. The combined value is used as a unique identifier for [**session state**](#gt_session-state).
 
 unique-identifier =
 
@@ -930,7 +930,7 @@ None.
 
 A client that uses a state server makes either an exclusive or a non-exclusive request to a state server implementation for [**session state**](#gt_session-state) data.<6>
 
-For a non-exclusive request, the client sends an [**HTTP**](#gt_hypertext-transfer-protocol-http) request that uses the message format that is specified in section [2.2.5.1](#Section_2.2.5.1). A state server implementation MUST attempt to retrieve the session state data that corresponds to the [unique identifier](#Section_2.2.3.13) that is contained in the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server MUST not interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for retrieving any previously stored session state that is associated with the combination of those identifiers.
+For a non-exclusive request, the client sends an [**HTTP**](#gt_hypertext-transfer-protocol-http) request that uses the message format that is specified in section [2.2.5.1](#Section_2.2.5.1). A state server implementation MUST attempt to retrieve the session state data that corresponds to the [unique identifier](#Section_2.2.3.13) that is contained in the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server MUST not interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for retrieving any previously stored session state that is associated with the combination of those identifiers.
 
 The state server MUST send a response back to the client by using one of the message formats that are specified in section [2.2.5.2](#Section_2.2.5.2).
 
@@ -949,7 +949,7 @@ The response-bad-request message, as specified in section 2.2.5.2, is conceptual
 
 A client that uses a state server makes either an exclusive or a non-exclusive request to a state server implementation for [**session state**](#gt_session-state) data.<7>
 
-For an exclusive request, the client uses the message format that is specified in section [2.2.5.3](#Section_2.2.5.3). A state server implementation MUST attempt to retrieve the session state data that corresponds to the [unique identifier](#Section_2.2.3.13) that is contained in the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server MUST NOT interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for retrieving any previously stored session state that is associated with the combination of those identifiers.
+For an exclusive request, the client uses the message format that is specified in section [2.2.5.3](#Section_2.2.5.3). A state server implementation MUST attempt to retrieve the session state data that corresponds to the [unique identifier](#Section_2.2.3.13) that is contained in the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server MUST NOT interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for retrieving any previously stored session state that is associated with the combination of those identifiers.
 
 The state server MUST send a response back to the client by using one of the message formats that are specified in section [2.2.5.4](#Section_2.2.5.4).
 
@@ -970,7 +970,7 @@ The response-bad-request message, as specified in section 2.2.5.4, is conceptual
 
 When a client needs to store session data in an out-of-process state server, it makes a request to the state server by using the message format that is specified in section [2.2.5.5](#Section_2.2.5.5).
 
-A state server MUST associate the session data that is contained in this message with a [unique identifier](#Section_2.2.3.13) that is created from the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server MUST not interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for storing [**session state**](#gt_session-state) associated with the combination of those identifiers.
+A state server MUST associate the session data that is contained in this message with a [unique identifier](#Section_2.2.3.13) that is created from the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server MUST not interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for storing [**session state**](#gt_session-state) associated with the combination of those identifiers.
 
 The state server MUST send a response back to the client by using one of the message formats that are specified in section [2.2.5.6](#Section_2.2.5.6).
 
@@ -995,7 +995,7 @@ The response-bad-request message, as specified in section 2.2.5.6, is conceptual
 
 A client can acquire an exclusive lock on a [**session state**](#gt_session-state) by using a successful [GetExclusive_Request](#Section_2.2.5.3) message. The client obtains the lock-cookie value that is associated with a piece of locked session state from the response to a successful GetExclusive_Request message. Alternatively, a client can acquire the [lock-cookie](#Section_2.2.3.9) value of a locked piece of session state from failed calls to GetExclusive_Request or [Get_Request](#Section_2.2.5.1), where a response-locked message was returned.
 
-A client sends a [ReleaseExclusive_Request](#Section_2.2.5.7) message to request that the lock on a piece of session state data be released. A state server implementation MUST construct a [unique identifier](#Section_2.2.3.13) based on the values contained in the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server does not need to interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for referencing previously stored session state that is associated with the combination of those identifiers.
+A client sends a [ReleaseExclusive_Request](#Section_2.2.5.7) message to request that the lock on a piece of session state data be released. A state server implementation MUST construct a [unique identifier](#Section_2.2.3.13) based on the values contained in the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server does not need to interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for referencing previously stored session state that is associated with the combination of those identifiers.
 
 The state server MUST compare the lock-cookie value that is associated with the unique identifier to the lock-cookie value that is sent by the client. If the values match, the state server MUST release the lock on the session state data and respond to the web server with a response-ok message, as specified in section [2.2.5.8](#Section_2.2.5.8).
 
@@ -1010,7 +1010,7 @@ The response-bad-request message, as specified in section 2.2.5.8, is conceptual
 
 A client can acquire an exclusive lock on [**session state**](#gt_session-state) by using a successful [GetExclusive_Request](#Section_2.2.5.3) message. The client obtains that lock-cookie value that is associated with a piece of locked session state from the response to a successful GetExclusive_Request message. Although a client can obtain a [lock-cookie](#Section_2.2.3.9) value from failed attempts to get session state, a client MUST only send a [Remove_Request](#Section_2.2.5.9) message if the client was able to successfully obtain an exclusive lock through a previous GetExclusive_Request operation.
 
-A client sends a Remove_Request message to request that a specific set of session data be removed from the state server. A state server implementation MUST construct a [unique identifier](#Section_2.2.3.13) that is based on the values that are contained in the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server does not need to interpret these values or assign any specific relevance to them. Rather a state server implementation MUST simply use the combination of those values as the unique identifier for referencing the previously stored session state that is associated with the combination of those identifiers.
+A client sends a Remove_Request message to request that a specific set of session data be removed from the state server. A state server implementation MUST construct a [unique identifier](#Section_2.2.3.13) that is based on the values that are contained in the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server does not need to interpret these values or assign any specific relevance to them. Rather a state server implementation MUST simply use the combination of those values as the unique identifier for referencing the previously stored session state that is associated with the combination of those identifiers.
 
 The state server MUST compare the lock-cookie value that is associated with the unique identifier, to the lock-cookie value that is sent by the client. If the values match, the state server MUST remove the corresponding session state data and respond to the web server by using a response-ok message, as specified in section [2.2.5.10](#Section_2.2.5.10).
 
@@ -1025,7 +1025,7 @@ The response-bad-request message, as specified in section 2.2.5.10, is conceptua
 
 A client can send a [ResetTimeout_Request](#Section_2.2.5.11) message to request that a state server refresh the time-out for a specific piece of session data.
 
-A state server implementation MUST construct a [unique identifier](#Section_2.2.3.13) that is based on the values that are contained in the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server does not need to interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for referencing the previously stored [**session state**](#gt_session-state) that is associated with the combination of those identifiers.
+A state server implementation MUST construct a [unique identifier](#Section_2.2.3.13) that is based on the values that are contained in the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3). A state server does not need to interpret these values or assign any specific relevance to them. Rather, a state server implementation MUST simply use the combination of those values as the unique identifier for referencing the previously stored [**session state**](#gt_session-state) that is associated with the combination of those identifiers.
 
 If the state server finds session state data that is associated with the unique identifier, it MUST increase the expiration date of the session state. The new expiration date for the session state data MUST be set to the time-out value. This value was previously supplied as part of a [Set_Request](#Section_2.2.5.5) plus the current date and time on the state server. After the expiration date of the session state has been successfully updated, the state server MUST send a response-ok message to the client, as specified in section [2.2.5.12](#Section_2.2.5.12).
 
@@ -1067,7 +1067,7 @@ None.
 
 The initialization requirements for client startup are implementation-dependent.<9>
 
-There is one per-request initialization requirement for every client message. All requests to a state server require information that uniquely identifies [**session state**](#gt_session-state) information. The [unique identifier](#Section_2.2.3.13) is a combination of [application identifier](#Section_2.2.3.2), [application domain identifier](#Section_2.2.3.2), and [session identifier](#Section_2.2.3.3). The specific values that are used for these fields are implementation-dependent.<10> However, client implementations MUST ensure that the combined values for these fields are unique. In other words, at least one of the three identifiers has to be unique to ensure that a state server can differentiate between different pieces of session state information.
+There is one per-request initialization requirement for every client message. All requests to a state server require information that uniquely identifies [**session state**](#gt_session-state) information. The [unique identifier](#Section_2.2.3.13) is a combination of [application identifier](#Section_2.2.3.1), [application domain identifier](#Section_2.2.3.2), and [session identifier](#Section_2.2.3.3). The specific values that are used for these fields are implementation-dependent.<10> However, client implementations MUST ensure that the combined values for these fields are unique. In other words, at least one of the three identifiers has to be unique to ensure that a state server can differentiate between different pieces of session state information.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1110,7 +1110,7 @@ When a client needs to store session data in a state server, it makes a request 
 
 If the client needs to perform custom initialization tasks on the [**session state**](#gt_session-state) data during a subsequent [Get_Request](#Section_2.2.5.1) or [GetExclusive_Request](#Section_2.2.5.3), the client MUST set the extra-flags field to "1".
 
-If this is the first time that the session state data is being stored for the [unique identifier](#Section_2.2.3.13) that is contained in the combination of [application-identifier](#Section_2.2.3.2), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3), the client MUST generate a [lock-cookie](#Section_2.2.3.9) that conforms to the format that is specified in section 2.2.3.9. However the lock-cookie will be ignored by the state server the first time session state data is being stored for a unique identifier.
+If this is the first time that the session state data is being stored for the [unique identifier](#Section_2.2.3.13) that is contained in the combination of [application-identifier](#Section_2.2.3.1), [appdomain-identifier](#Section_2.2.3.2), and [session-identifier](#Section_2.2.3.3), the client MUST generate a [lock-cookie](#Section_2.2.3.9) that conforms to the format that is specified in section 2.2.3.9. However the lock-cookie will be ignored by the state server the first time session state data is being stored for a unique identifier.
 
 If the session state data already exists for the unique identifier, and the session state data is being updated with a Set_Request message, the client MUST send the lock-cookie that it originally obtained from a previous GetExclusive_Request message.
 
@@ -1318,7 +1318,7 @@ None.
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 1.0
 - Microsoft .NET Framework 1.1

@@ -287,7 +287,7 @@ This document provides versioning information in the following areas:
 
 **Supported transports:** This protocol uses [**RPC**](#gt_remote-procedure-call-rpc) as its transport protocol (see section [2.1](#Section_2.1)).
 
-**Security and authentication methods:** The RPC server in this protocol requires RPC_C_AUTHN_GSS_NEGOTIATE or RPC_C_AUTHN_WINNT authorization. See section [2.1.2](#Section_2.1) for more details.
+**Security and authentication methods:** The RPC server in this protocol requires RPC_C_AUTHN_GSS_NEGOTIATE or RPC_C_AUTHN_WINNT authorization. See section [2.1.2](#Section_2.1.2) for more details.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -1106,7 +1106,7 @@ error_status_t BaseRegCreateKey(
 
 **hKey:** A handle to a key that MUST have been opened previously by using one of the open methods that are specified in section [3.1.5](#Section_3.1.5): BaseRegCreateKey, [OpenClassesRoot](#Section_3.1.5.1), [OpenCurrentUser](#Section_3.1.5.2), [OpenLocalMachine](#Section_3.1.5.3), [OpenPerformanceData](#Section_3.1.5.4), [OpenUsers](#Section_3.1.5.5), [BaseRegOpenKey](#Section_3.1.5.15), [OpenCurrentConfig](#Section_3.1.5.25), [OpenPerformanceText](#Section_3.1.5.28), [OpenPerformanceNlsText](#Section_3.1.5.29).
 
-**lpSubKey:** A pointer to an [RRP_UNICODE_STRING](#Section_2.2.4) structure that specifies the name of the key (as specified in section [3.1.1.1](#Section_1.3)) that this method opens or creates. The name of the key specified is relative to the key specified by the *hkey* parameter.
+**lpSubKey:** A pointer to an [RRP_UNICODE_STRING](#Section_2.2.4) structure that specifies the name of the key (as specified in section [3.1.1.1](#Section_3.1.1.1)) that this method opens or creates. The name of the key specified is relative to the key specified by the *hkey* parameter.
 
 **lpClass:** A pointer to an RRP_UNICODE_STRING structure that specifies the [**class**](#gt_class) of the key (as specified in section [3.1.1.6](#Section_3.1.1.6)).<16>
 
@@ -1180,7 +1180,7 @@ For new keys that are created, if *lpClass* is not NULL, the server MUST set the
 
 For new keys that are created, the server MUST create the key based on the wanted key type that is specified in the dwOptions parameter. For key types, see section 3.1.1.2.
 
-For new keys that are created, the server MUST set to TRUE the [KEYISMODIFIED](#Section_3c984c3e3e2a40b8b479d4ddcfc50edb) property of the new key.
+For new keys that are created, the server MUST set to TRUE the [KEYISMODIFIED](#Section_3.1.1.3) property of the new key.
 
 If the *dwOptions* parameter specifies the REG_OPTION_BACKUP_RESTORE option, the server MUST ignore all bits set in the *samDesired* parameter except for KEY_WOW64_32KEY and KEY_WOW64_64KEY. The desired key access MUST be computed based on whether the caller holds the backup and restore privileges as outlined in the table below. If the caller holds neither privilege, the server MUST fail the method and return STATUS_ACCESS_DENIED.
 
@@ -1278,7 +1278,7 @@ In response to this request from the client, for a successful operation, the ser
 
 If the lpValueName parameter in the client request is an empty Unicode string, server MUST delete the data in the default value (as specified in section [3.1.1.5](#Section_3.1.1.5)) of the specified key.
 
-The server MUST set to TRUE the [KEYISMODIFIED](#Section_3c984c3e3e2a40b8b479d4ddcfc50edb) property of the key indicated by *hKey*.
+The server MUST set to TRUE the [KEYISMODIFIED](#Section_3.1.1.3) property of the key indicated by *hKey*.
 
 The caller MUST have KEY_SET_VALUE access rights to invoke this method. For more information, see section [2.2.4](#Section_2.2.4).
 
@@ -1311,7 +1311,7 @@ error_status_t BaseRegEnumKey(
 
 **hKey:** A handle to a key that MUST have been opened previously by using one of the open methods that are specified in section [3.1.5](#Section_3.1.5): [OpenClassesRoot](#Section_3.1.5.1), [OpenCurrentUser](#Section_3.1.5.2), [OpenLocalMachine](#Section_3.1.5.3), [OpenPerformanceData](#Section_3.1.5.4), [OpenUsers](#Section_3.1.5.5), [BaseRegCreateKey](#Section_3.1.5.7), [BaseRegOpenKey](#Section_3.1.5.15), [OpenCurrentConfig](#Section_3.1.5.25), [OpenPerformanceText](#Section_3.1.5.28), [OpenPerformanceNlsText](#Section_3.1.5.29).
 
-**dwIndex:** The index of the subkey to retrieve, as specified in section [3.1.1.1](#Section_1.3).
+**dwIndex:** The index of the subkey to retrieve, as specified in section [3.1.1.1](#Section_3.1.1.1).
 
 **lpNameIn:** A pointer to an RRP_UNICODE_STRING structure (section [2.2.4](#Section_2.2.4)) that contains the key name to be retrieved, as specified in section 3.1.1.1. This is used by the server to determine the maximum length for the output name parameter and to allocate space accordingly. The content is ignored, and only the maximum length is significant. The Length field MUST be set to 0.
 
@@ -1456,7 +1456,7 @@ error_status_t BaseRegFlushKey(
 
 Server Operations
 
-In response to this request from the client, the server MUST identify all the subkeys and [**values**](#gt_value) of the key specified by the *hKey* parameter that have the [KEYISMODIFIED](#Section_3c984c3e3e2a40b8b479d4ddcfc50edb) property set to TRUE, and write them to the backing store for that key.
+In response to this request from the client, the server MUST identify all the subkeys and [**values**](#gt_value) of the key specified by the *hKey* parameter that have the [KEYISMODIFIED](#Section_3.1.1.3) property set to TRUE, and write them to the backing store for that key.
 
 If the server encounters an error while writing data to the backing store, the server MUST fail the method and return ERROR_REGISTRY_IO_FAILED.
 
@@ -1536,7 +1536,7 @@ error_status_t BaseRegLoadKey(
 
 **Note** The other open methods in this protocol cannot be used to obtain the *hKey* parameter because the server checks that the key specified by *lpSubKey* is a descendent of the **HKEY_LOCAL_MACHINE** or **HKEY_USERS** root keys.
 
-**lpSubKey:** A pointer to an [RRP_UNICODE_STRING](#Section_2.2.4) structure that specifies the name of the key (as specified in section [3.1.1.1](#Section_1.3)) that MUST be created under *hKey*.
+**lpSubKey:** A pointer to an [RRP_UNICODE_STRING](#Section_2.2.4) structure that specifies the name of the key (as specified in section [3.1.1.1](#Section_3.1.1.1)) that MUST be created under *hKey*.
 
 **lpFile:** A pointer to a null-terminated RRP_UNICODE_STRING structure that contains the name of an existing [**registry**](#gt_registry) file in which the specified key and subkeys are to be saved. The format of the file name is implementation-specific. It is assumed that this file was created with the [BaseRegSaveKey](#Section_3.1.5.20) method. If it does not exist, the server creates a file with the specified name.
 
@@ -2079,7 +2079,7 @@ The client MUST specify the length, in bytes, to copy from the buffer in the *cb
 
 The server MUST determine if the key path indicated by *hKey* refers to a path that is within the list of paths for which updates to either the 32-bit or 64-bit namespaces are copied into the 64-bit or 32-bit namespace, respectively, as specified in section [3.1.1.4](#Section_3.1.1.4). If the key indicated by *hKey* is within one of the paths, the server MUST set the UPDATECOPY column of the HANDLETABLE for the row indicated by *hKey* to TRUE. This indicates that the value is copied between the 32-bit and 64-bit key namespaces when the handle is closed.
 
-The server MUST set the [KEYISMODIFIED](#Section_3c984c3e3e2a40b8b479d4ddcfc50edb) property of the key indicated by *hKey* to TRUE.
+The server MUST set the [KEYISMODIFIED](#Section_3.1.1.3) property of the key indicated by *hKey* to TRUE.
 
 The caller MUST have KEY_SET_VALUE access rights to invoke this method. Otherwise, the server MUST fail the method and return ERROR_ACCESS_DENIED. For more information, see section [2.2.4](#Section_2.2.4).
 
@@ -3561,7 +3561,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.1.2](#Section_2.1) Client | Changed default Windows behavior to not fall back on other transports. Fall back can be enabled using a configuration value. Updated Windows behavior to opt out of falling back on insecure connection using a configuration value. | Major |
+| [2.1.2](#Section_2.1.2) Client | Changed default Windows behavior to not fall back on other transports. Fall back can be enabled using a configuration value. Updated Windows behavior to opt out of falling back on insecure connection using a configuration value. | Major |
 
 <a id="revision-history"></a>
 

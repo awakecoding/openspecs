@@ -441,7 +441,7 @@ IO requests are generated in response to IO calls that the server applications m
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-The common message processing events and rules that are described in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 3.1.5 apply to this protocol. For client-specific and server-specific message processing, see sections [3.2.5](../MS-RDPEFS/MS-RDPEFS.md) and [3.3.5](../MS-RDPEFS/MS-RDPEFS.md).
+The common message processing events and rules that are described in [MS-RDPEFS](../MS-RDPEFS/MS-RDPEFS.md) section 3.1.5 apply to this protocol. For client-specific and server-specific message processing, see sections [3.2.5](#Section_3.2.5) and [3.3.5](#Section_3.3.5).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -697,7 +697,7 @@ The server sends this message to the client in response to the server applicatio
 <a id="Section_3.3.5.1.7"></a>
 ##### 3.3.5.1.7 Processing a Client Create Response Message
 
-After receiving the create response, the [**server**](#gt_server) responds to the application that initiated the create operation (section [3.3.5.1.1](#Section_3.3.5.1.10)). The server MUST maintain an association between the **FileId** returned by the [**client**](#gt_client) and the file handle returned to the application. For any subsequent IO operations on the file handle, the server SHOULD send the IO to the client for completion using the same **FileId** field.
+After receiving the create response, the [**server**](#gt_server) responds to the application that initiated the create operation (section [3.3.5.1.1](#Section_3.3.5.1.1)). The server MUST maintain an association between the **FileId** returned by the [**client**](#gt_client) and the file handle returned to the application. For any subsequent IO operations on the file handle, the server SHOULD send the IO to the client for completion using the same **FileId** field.
 
 <a id="Section_3.3.5.1.8"></a>
 ##### 3.3.5.1.8 Processing a Client Close Response Message

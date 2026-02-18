@@ -6632,7 +6632,7 @@ None.
 | --- | --- |
 | [IUserConfigProvider.GetUserSettingAsync](#Section_3.1.5.1) | An asynchronous operation to obtain user settings. |
 | [IUserConfigProvider.GetClientManagedSettingAsync](#Section_3.1.5.2) | An asynchronous operation to determine whether a client is managed. |
-| [IUserConfigProvider.GetUserSettingCompleted](#Section_91afcbb843ea4394b14beaf6f22cebf3) | The callback for the IUserConfigProvider.GetUserSettingAsync operation contract. |
+| [IUserConfigProvider.GetUserSettingCompleted](#Section_3.1.5.3) | The callback for the IUserConfigProvider.GetUserSettingAsync operation contract. |
 | [IUserConfigProvider.GetClientManagedCompleted](#Section_3.1.5.4) | The callback for the IUserConfigProvider.GetClientManagedSettingAsync operation contract. |
 
 <a id="Section_3.1.5.1"></a>

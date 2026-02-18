@@ -152,7 +152,7 @@ Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other 
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_ascii"></a>
 **ASCII**: The American Standard Code for Information Interchange (ASCII) is an 8-bit character-encoding scheme based on the English alphabet. ASCII codes represent text in computers, communications equipment, and other devices that work with text. ASCII refers to a single 8-bit ASCII character or an array of 8-bit ASCII characters with the high bit of each character set to zero.
@@ -257,7 +257,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-MAIL] Microsoft Corporation, "[Remote Mailslot Protocol](../MS-MAIL/MS-MAIL.md)".
 
@@ -265,7 +265,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RAP] Microsoft Corporation, "[Remote Administration Protocol](../MS-RAP/MS-RAP.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
@@ -282,7 +282,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
@@ -310,7 +310,7 @@ The CIFS Browser Protocol manages groups of computers. This document refers to s
 
 A machine group can be either a [**workgroup**](#gt_workgroup) or a [**domain**](#gt_domain). In a workgroup configuration, browsing is limited to the scope of a single [**subnet**](#gt_subnet). If computers are arranged in a Windows NT operating system security domain, the CIFS Browser Protocol allows for browsing across multiple subnets. This functionality is enabled by a special browser servers role that is known as the [**domain master browser server**](#gt_domain-master-browser-server).<2> This role is usually the responsibility of the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), which manages user access and security in the domain.
 
-One browser server for each machine group on a subnet is selected as the [**local master browser server**](#gt_local-master-browser-server) for that machine group. The selection occurs by an election process, as specified in sections [2.2.3](#Section_3.3.5.11) and [3.3.6](#Section_3.1.6). Servers that are in the local master browser server machine group on the subnet register with it, as does the local master browser server for other machine groups on the subnet. The local master browser server uses these registrations to maintain authoritative information about its machine group on its subnet. If there are servers in the domain that are located on other subnets on the network, the local master browser server for the domain can obtain information about them from the domain master browser server of the domain.
+One browser server for each machine group on a subnet is selected as the [**local master browser server**](#gt_local-master-browser-server) for that machine group. The selection occurs by an election process, as specified in sections [2.2.3](#Section_2.2.3) and [3.3.6](#Section_3.3.6). Servers that are in the local master browser server machine group on the subnet register with it, as does the local master browser server for other machine groups on the subnet. The local master browser server uses these registrations to maintain authoritative information about its machine group on its subnet. If there are servers in the domain that are located on other subnets on the network, the local master browser server for the domain can obtain information about them from the domain master browser server of the domain.
 
 A [**backup browser server**](#gt_backup-browser-server) on a subnet is a browser server that was selected by the local master browser server on that subnet to be available to share the processing load that is required to serve browser clients, as specified in section [3.1](#Section_3.1). backup browser servers keep copies of the information that is maintained by the local master browser server by periodically querying that server.<3>
 
@@ -335,11 +335,11 @@ The CIFS Browser Protocol depends on the following protocols:
 - Workstation Service Remote Protocol (WKST), as specified in [MS-WKST](../MS-WKST/MS-WKST.md).
 In certain situations, the CIFS Browser Protocol can invoke selected interfaces of other related protocols as follows:
 
-- Security Account Manager (SAM) Remote Protocol Specification [MS-SAMR](#Section_5) to query the current [**domain**](#gt_domain) role for the machine on which it is running.
-- Active Directory Protocols Overview [MS-ADOD](#Section_1.3) to locate the primary domain controller for a machine group.
+- Security Account Manager (SAM) Remote Protocol Specification [MS-SAMR](../MS-SAMR/MS-SAMR.md) to query the current [**domain**](#gt_domain) role for the machine on which it is running.
+- Active Directory Protocols Overview [MS-ADOD](../MS-ADOD/MS-ADOD.md) to locate the primary domain controller for a machine group.
 The CIFS Browser Protocol clearinghouse and advertisements can be affected when:
 
-- Local Security Authority (Domain Policy) Remote Protocol [MS-LSAD](#Section_5) causes the [**NetBIOS name**](#gt_netbios-name) of the domain or workgroup the client is a member of to change.
+- Local Security Authority (Domain Policy) Remote Protocol [MS-LSAD](../MS-LSAD/MS-LSAD.md) causes the [**NetBIOS name**](#gt_netbios-name) of the domain or workgroup the client is a member of to change.
 These limited relationships are not depicted in the diagram, for clarity.
 
 ![Relationship to other protocols](media/image1.png)
@@ -372,7 +372,7 @@ Finally, the information in the list of servers that can be returned by this pro
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-The CIFS Browser Protocol provides for a version field, as specified in section [2.2.3](#Section_3.3.5.11). It also specifies a biased election mechanism to nominate some servers as [**local master browser servers**](#gt_local-master-browser-server). This election mechanism, specified in section [3.3.6](#Section_3.1.6), is biased in favor of servers implementing newer versions of the CIFS Browser Protocol.
+The CIFS Browser Protocol provides for a version field, as specified in section [2.2.3](#Section_2.2.3). It also specifies a biased election mechanism to nominate some servers as [**local master browser servers**](#gt_local-master-browser-server). This election mechanism, specified in section [3.3.6](#Section_3.3.6), is biased in favor of servers implementing newer versions of the CIFS Browser Protocol.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -401,11 +401,11 @@ This document contains the following information on CIFS Browser Protocol messag
 
 - Section [2.1.1](#Section_2.1.1) specifies the recipients of CIFS Browser Protocol messages.
 - Sections [2.2.1](#Section_2.2.1) through [2.2.10](#Section_2.2.10) specify the syntax of each CIFS Browser Protocol message.
-- Section [3.3.5](#Section_3.4.5) specifies the details of CIFS Browser Protocol message processing, including events and sequencing rules.
+- Section [3.3.5](#Section_3.3.5) specifies the details of CIFS Browser Protocol message processing, including events and sequencing rules.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The CIFS Browser Protocol MUST use the Remote Mailslot Protocol transfer service, as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md). The CIFS Browser Protocol uses [**Mailslot**](#gt_mailslot) messages to accomplish inter-machine communication. This communication can be one-to-one (using unique NetBIOS names) or one-to-many (using group NetBIOS names). Two specific Mailslot names, \MAILSLOT\LANMAN and \MAILSLOT\BROWSE, are used by the CIFS Browser Protocol. The [**browser client**](#gt_browser-client) or [**browser server**](#gt_browser-server) MUST create these mailslots as specified in [MS-MAIL] section 3.2.4.1 and provide the mailslot name as the input parameter. A browser server MUST accept [**browser**](#gt_browser) requests on either of these mailslots. A browser client and server MAY select either mailslot for sending messages. Each browser message specifies the destination mailslot name it uses, as specified in section [2.2](../MS-MAIL/MS-MAIL.md).<6>
+The CIFS Browser Protocol MUST use the Remote Mailslot Protocol transfer service, as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md). The CIFS Browser Protocol uses [**Mailslot**](#gt_mailslot) messages to accomplish inter-machine communication. This communication can be one-to-one (using unique NetBIOS names) or one-to-many (using group NetBIOS names). Two specific Mailslot names, \MAILSLOT\LANMAN and \MAILSLOT\BROWSE, are used by the CIFS Browser Protocol. The [**browser client**](#gt_browser-client) or [**browser server**](#gt_browser-server) MUST create these mailslots as specified in [MS-MAIL] section 3.2.4.1 and provide the mailslot name as the input parameter. A browser server MUST accept [**browser**](#gt_browser) requests on either of these mailslots. A browser client and server MAY select either mailslot for sending messages. Each browser message specifies the destination mailslot name it uses, as specified in section [2.2](#Section_2.2).<6>
 
 The CIFS Browser Protocol MUST use the Remote Administration Protocol [MS-RAP](../MS-RAP/MS-RAP.md) to transport the request/response command NetServerEnum2, as specified in [MS-RAP] section 2.5.5.2.
 
@@ -452,9 +452,9 @@ Names that are placeholders and that need to be substituted with actual values a
 
 | Name | Comment |
 | --- | --- |
-| <computer>[0x00] | This name is used by all browser clients to receive second-class mailslot ([MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.2) messages. A system MUST register this NetBIOS name to receive browser mailslot messages intended for browser clients. The only [**browser**](#gt_browser) requests that use this name are [GetBackupListResponse (section 2.2.5)](#Section_3.1.5.1.2), [MasterAnnouncement (section 2.2.8)](#Section_2.2.8), and [LocalMasterAnnouncement (section 2.2.10)](../MS-MAIL/MS-MAIL.md) frames. NetBIOS name registration is as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) section 5.2. Historical note: The [**NetBIOS suffix**](#gt_netbios-suffix) 0x00 was chosen because all computers implementing the CIFS Workstation service were (and still are) required to have that name registered with the NetBIOS name server; therefore, the name was guaranteed to be present on all computers. |
+| <computer>[0x00] | This name is used by all browser clients to receive second-class mailslot ([MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.2) messages. A system MUST register this NetBIOS name to receive browser mailslot messages intended for browser clients. The only [**browser**](#gt_browser) requests that use this name are [GetBackupListResponse (section 2.2.5)](#Section_2.2.5), [MasterAnnouncement (section 2.2.8)](#Section_2.2.8), and [LocalMasterAnnouncement (section 2.2.10)](#Section_2.2.10) frames. NetBIOS name registration is as specified in [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) section 5.2. Historical note: The [**NetBIOS suffix**](#gt_netbios-suffix) 0x00 was chosen because all computers implementing the CIFS Workstation service were (and still are) required to have that name registered with the NetBIOS name server; therefore, the name was guaranteed to be present on all computers. |
 | <computer>[0x20] | See entry for <computer>[0x00] Historical note: The NetBIOS suffix 0x20 was chosen because all computers implementing the CIFS Server service were (and still are) required to have that name registered with the NetBIOS name server; therefore, the name was guaranteed to be present on all computers. This is significant, because certain implementations of NetBIOS severely limited the number of NetBIOS names that could be registered on any given computer, and using an already existing name meant that an additional name could be registered. |
-| <machine group>[0x1D] | This name is used to identify a [**local master browser server**](#gt_local-master-browser-server) for <machine group> on a [**subnet**](#gt_subnet). A local master browser server MUST register this name as a NetBIOS [**unique name**](#gt_unique-name) (as opposed to a [**group name**](#gt_group-name)). The only requests that use this name are [GetBackupListRequest (section 2.2.4)](#Section_3.3.5.5), [AnnouncementRequest (section 2.2.2)](#Section_3.2.5.1), and [HostAnnouncement (section 2.2.1)](#Section_2.2.1) requests.<7> |
+| <machine group>[0x1D] | This name is used to identify a [**local master browser server**](#gt_local-master-browser-server) for <machine group> on a [**subnet**](#gt_subnet). A local master browser server MUST register this name as a NetBIOS [**unique name**](#gt_unique-name) (as opposed to a [**group name**](#gt_group-name)). The only requests that use this name are [GetBackupListRequest (section 2.2.4)](#Section_2.2.4), [AnnouncementRequest (section 2.2.2)](#Section_2.2.2), and [HostAnnouncement (section 2.2.1)](#Section_2.2.1) requests.<7> |
 | <domain>[0x1B] | This name MUST be added by the [**PDC**](#gt_primary-domain-controller-pdc) as a unique name. All other servers MUST refrain from adding this name. This name is used to identify the [**domain master browser server**](#gt_domain-master-browser-server) for <domain>. A PDC responds to the GetBackupListRequest (section 2.2.4) request on this name.<8> |
 
 <a id="Section_2.1.1.3"></a>
@@ -463,8 +463,8 @@ Names that are placeholders and that need to be substituted with actual values a
 | Name | Comment |
 | --- | --- |
 | [0x01][0x02]__MSBROWSE__[0x02][0x01] | All [**local master browser servers**](#gt_local-master-browser-server) MUST add this name as a [**group name**](#gt_group-name). This name is used by local master browser servers to periodically announce themselves to local master browser servers for other domains on the [**subnet**](#gt_subnet). The only message that uses this name is [DomainAnnouncement (section 2.2.7)](#Section_2.2.7). |
-| <machine group>[0x00] | [**browser clients**](#gt_browser-client) and servers in <machine group> MUST register this name to process one-to-many mailslot messages. The only CIFS Browser Protocol message that uses this name is [AnnouncementRequest (section 2.2.2)](#Section_3.2.5.1). |
-| <machine group>[0x1E] | All [**browser servers**](#gt_browser-server) and potential browser servers within <machine group> MUST register this name to receive domain-wide broadcasts on a subnet. The only requests that use this name are [RequestElection (section 2.2.3)](#Section_3.3.5.11), [BecomeBackup (section 2.2.6)](#Section_3.3.5.7), and [LocalMasterAnnouncement (section 2.2.9)](#Section_2.2.10) frames. |
+| <machine group>[0x00] | [**browser clients**](#gt_browser-client) and servers in <machine group> MUST register this name to process one-to-many mailslot messages. The only CIFS Browser Protocol message that uses this name is [AnnouncementRequest (section 2.2.2)](#Section_2.2.2). |
+| <machine group>[0x1E] | All [**browser servers**](#gt_browser-server) and potential browser servers within <machine group> MUST register this name to receive domain-wide broadcasts on a subnet. The only requests that use this name are [RequestElection (section 2.2.3)](#Section_2.2.3), [BecomeBackup (section 2.2.6)](#Section_2.2.6), and [LocalMasterAnnouncement (section 2.2.9)](#Section_2.2.9) frames. |
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -475,11 +475,11 @@ Browser messages can be categorized according to the server's role. Each of thes
 
 - Messages used by [**nonbrowser servers**](#gt_nonbrowser-server) are the following:
 - [HostAnnouncement](#Section_2.2.1) (sent)
-- [AnnouncementRequest](#Section_3.2.5.1) (received)
+- [AnnouncementRequest](#Section_2.2.2) (received)
 - Messages used by [**browser clients**](#gt_browser-client) are the following:
-- [GetBackupListRequest](#Section_3.3.5.5) (sent)
-- [GetBackupListResponse](#Section_3.1.5.1.2) (received)
-- [RequestElection](#Section_3.3.5.11) (sent)
+- [GetBackupListRequest](#Section_2.2.4) (sent)
+- [GetBackupListResponse](#Section_2.2.5) (received)
+- [RequestElection](#Section_2.2.3) (sent)
 - Messages used by all browser servers (with subcategories of [**potential browser server**](#gt_potential-browser-server), [**backup browser servers**](#gt_backup-browser-server), [**local master browser servers**](#gt_local-master-browser-server), and [**domain master browser servers**](#gt_domain-master-browser-server)) are the following:
 - RequestElection (sent, received)
 - AnnouncementRequest (sent)
@@ -487,7 +487,7 @@ Browser messages can be categorized according to the server's role. Each of thes
 Messages used by potential browser servers are the following:
 
 - All messages used by all browser servers
-- [BecomeBackup](#Section_3.3.5.7) (received)
+- [BecomeBackup](#Section_2.2.6) (received)
 Messages used by backup browser servers are the following:
 
 - All messages used by all browser servers
@@ -507,7 +507,7 @@ Messages used by domain master browser servers are the following:
 
 - All messages used by local master browser servers except MasterAnnouncement (sent)
 - MasterAnnouncement (received)
-More information about how the various browser server messages are used is specified in section [3](#Section_1.3).
+More information about how the various browser server messages are used is specified in section [3](#Section_3).
 
 All multibyte fields specified in messages in this section are transmitted in [**little-endian**](#gt_little-endian) byte order, unless noted otherwise.
 
@@ -531,9 +531,9 @@ A browser message operation code (opcode) consists of an 8-bit numeric value. Th
 <a id="Section_2.2.1"></a>
 ### 2.2.1 HostAnnouncement Browser Frame
 
-A server (including [**nonbrowser servers**](#gt_nonbrowser-server)) sends a HostAnnouncement browser frame to advertise its presence and to specify the types of resources and services it supports. It MUST be a response to an [AnnouncementRequest](#Section_3.2.5.1) [**browser**](#gt_browser) [**frame**](#gt_frame), as specified in section 2.2.2, or to the expiration of the HostAnnouncement timer, as specified in section [3.2.2](#Section_3.1.2).
+A server (including [**nonbrowser servers**](#gt_nonbrowser-server)) sends a HostAnnouncement browser frame to advertise its presence and to specify the types of resources and services it supports. It MUST be a response to an [AnnouncementRequest](#Section_2.2.2) [**browser**](#gt_browser) [**frame**](#gt_frame), as specified in section 2.2.2, or to the expiration of the HostAnnouncement timer, as specified in section [3.2.2](#Section_3.2.2).
 
-A server MUST issue a HostAnnouncement in response to a received AnnouncementRequest browser frame (as defined in section 2.2.2) or as a response to the expiration of the announcement timer, as specified in section [3.2.6](#Section_3.1.6). Failure to do so results in this server's resources being absent in the resource enumeration to browser clients.
+A server MUST issue a HostAnnouncement in response to a received AnnouncementRequest browser frame (as defined in section 2.2.2) or as a response to the expiration of the announcement timer, as specified in section [3.2.6](#Section_3.2.6). Failure to do so results in this server's resources being absent in the resource enumeration to browser clients.
 
 A server SHOULD send a HostAnnouncement to the [**local master browser**](#gt_local-master-browser) using the NetBIOS unique name <machine group>[0x1D] and mailslot \MAILSLOT\LANMAN.<9>
 
@@ -579,7 +579,7 @@ packet-beta
 <a id="Section_2.2.2"></a>
 ### 2.2.2 AnnouncementRequest Browser Frame
 
-The AnnouncementRequest frame MUST be sent from the NetBIOS computer name <computer>[0x00] to the NetBIOS [**group name**](#gt_group-name) <machine group>[0x00], to force all machines in the [**workgroup**](#gt_workgroup) or domain to announce, or it MUST be sent from the NetBIOS computer name <computer>[0x00] to the NetBIOS group name <machine group>[0x1D], to force the current master [**browser**](#gt_browser) in the machine group to announce itself to the client. It is sent by a [**local master browser server**](#gt_local-master-browser-server) to <machine group>[0x00] at startup to discover the members of <machine group>, as specified in section [3.3.6](#Section_3.1.6). Its expected response is a set of [HostAnnouncement](#Section_2.2.1) frames, as specified in section 2.2.1.
+The AnnouncementRequest frame MUST be sent from the NetBIOS computer name <computer>[0x00] to the NetBIOS [**group name**](#gt_group-name) <machine group>[0x00], to force all machines in the [**workgroup**](#gt_workgroup) or domain to announce, or it MUST be sent from the NetBIOS computer name <computer>[0x00] to the NetBIOS group name <machine group>[0x1D], to force the current master [**browser**](#gt_browser) in the machine group to announce itself to the client. It is sent by a [**local master browser server**](#gt_local-master-browser-server) to <machine group>[0x00] at startup to discover the members of <machine group>, as specified in section [3.3.6](#Section_3.3.6). Its expected response is a set of [HostAnnouncement](#Section_2.2.1) frames, as specified in section 2.2.1.
 
 The frame MUST be sent to mailslot \MAILSLOT\BROWSE.
 
@@ -645,7 +645,7 @@ packet-beta
 <a id="Section_2.2.4"></a>
 ### 2.2.4 GetBackupListRequest Browser Frame
 
-The GetBackupListRequest frame is sent by a [**browser client**](#gt_browser-client) to the [**local master browser server**](#gt_local-master-browser-server) for a [**machine group**](#gt_machine-group) to retrieve the identities of [**backup browser servers**](#gt_backup-browser-server). Its response is a [GetBackupListResponse](#Section_3.1.5.1.2) frame, as specified in section 2.2.5. For more information about the use of the GetBackupListRequest frame, see section [3.1.5.1](#Section_3.1.5.1).
+The GetBackupListRequest frame is sent by a [**browser client**](#gt_browser-client) to the [**local master browser server**](#gt_local-master-browser-server) for a [**machine group**](#gt_machine-group) to retrieve the identities of [**backup browser servers**](#gt_backup-browser-server). Its response is a [GetBackupListResponse](#Section_2.2.5) frame, as specified in section 2.2.5. For more information about the use of the GetBackupListRequest frame, see section [3.1.5.1](#Section_3.1.5.1).
 
 To get the list of backup browser servers for <machine group> from the local master browser server for that domain, the GetBackupListRequest browser frame MUST be sent to the [**master browser server**](#gt_master-browser-server) with the NetBIOS [**unique name**](#gt_unique-name) <machine group>[0x1D] and mailslot \MAILSLOT\BROWSE.
 
@@ -669,7 +669,7 @@ packet-beta
 <a id="Section_2.2.5"></a>
 ### 2.2.5 GetBackupListResponse Browser Frame
 
-The GetBackupListResponse frame MUST be sent by a [**master browser server**](#gt_master-browser-server) to the computer system that sends a [GetBackupListRequest](#Section_3.3.5.5) frame. It is a response to a GetBackupListRequest browser frame.
+The GetBackupListResponse frame MUST be sent by a [**master browser server**](#gt_master-browser-server) to the computer system that sends a [GetBackupListRequest](#Section_2.2.4) frame. It is a response to a GetBackupListRequest browser frame.
 
 This frame MUST be sent to the NetBIOS [**unique name**](#gt_unique-name) <computer>[0x00] and mailslot \MAILSLOT\BROWSE, where <computer> is the name of the originator of the GetBackupListRequest frame.
 
@@ -734,7 +734,7 @@ packet-beta
 
 **UpdateCount (1 byte):** An unsigned 8-bit integer that MUST be sent as 0x00 and MUST be ignored on receipt.
 
-**Periodicity (4 bytes):** An unsigned 32-bit integer that MUST be the announcement frequency, in milliseconds, of the machine group, as specified in section [3.3.2](#Section_3.1.2).
+**Periodicity (4 bytes):** An unsigned 32-bit integer that MUST be the announcement frequency, in milliseconds, of the machine group, as specified in section [3.3.2](#Section_3.3.2).
 
 **MachineGroup (16 bytes):** MUST be a null-terminated ASCII workgroup or [**NetBIOS name**](#gt_netbios-name) of the domain with a length of 16 bytes, including the null terminator. If the name is fewer than 16 bytes in length, including the terminator, the remainder of the 16 bytes must be ignored.
 
@@ -755,7 +755,7 @@ packet-beta
 <a id="Section_2.2.8"></a>
 ### 2.2.8 MasterAnnouncement Browser Frame
 
-The MasterAnnouncement frame MUST be sent by a local master [**browser**](#gt_browser) to the domain master browser when the MasterAnnouncement timer expires, as specified in section [3.3.6](#Section_3.1.6). The MasterAnnouncement frame MUST be sent to the NetBIOS [**unique name**](#gt_unique-name) <PDCName>[0x00] and mailslot \MAILSLOT\BROWSE where <PDCName> is the computer name of the domain master browser.
+The MasterAnnouncement frame MUST be sent by a local master [**browser**](#gt_browser) to the domain master browser when the MasterAnnouncement timer expires, as specified in section [3.3.6](#Section_3.3.6). The MasterAnnouncement frame MUST be sent to the NetBIOS [**unique name**](#gt_unique-name) <PDCName>[0x00] and mailslot \MAILSLOT\BROWSE where <PDCName> is the computer name of the domain master browser.
 
 The format of the MasterAnnouncement frame MUST be as follows.
 
@@ -797,7 +797,7 @@ packet-beta
 <a id="Section_2.2.10"></a>
 ### 2.2.10 LocalMasterAnnouncement Browser Frame
 
-A local master [**browser**](#gt_browser) for a machine group MUST announce itself with the periodicity listed in section [3.3.2](#Section_3.1.2) to all the other [**browser servers**](#gt_browser-server) in its machine group that are on its [**subnet**](#gt_subnet), using the [LocalMasterAnnouncement](#Section_2.2.10) frame. The LocalMasterAnnouncement frame MUST be broadcast by using the NetBIOS [**group name**](#gt_group-name) <machine group>[0x1E] and mailslot \MAILSLOT\BROWSE.
+A local master [**browser**](#gt_browser) for a machine group MUST announce itself with the periodicity listed in section [3.3.2](#Section_3.3.2) to all the other [**browser servers**](#gt_browser-server) in its machine group that are on its [**subnet**](#gt_subnet), using the [LocalMasterAnnouncement](#Section_2.2.10) frame. The LocalMasterAnnouncement frame MUST be broadcast by using the NetBIOS [**group name**](#gt_group-name) <machine group>[0x1E] and mailslot \MAILSLOT\BROWSE.
 
 The format of the LocalMasterAnnouncement frame MUST be as listed in the following table.
 
@@ -859,7 +859,7 @@ This section describes a hypothetical model of [**browser client**](#gt_browser-
 
 **MachineGroupNameInProgress**: The NetBIOS name of a machine group for which the client is currently requesting a list of backup [**browsers**](#gt_browser).
 
-**TokenValue**: A 32-bit value used for [GetBackupList](#Section_3.1.5.1.2) requests.
+**TokenValue**: A 32-bit value used for [GetBackupList](#Section_2.2.4) requests.
 
 **BrowserClientUpTime**: Records the time when the browser service was initially started.
 
@@ -868,7 +868,7 @@ This section describes a hypothetical model of [**browser client**](#gt_browser-
 
 The client uses the following timer:
 
-**GetBackupListRequest timer:** This timer is used to govern the retransmission of [GetBackupListRequest](#Section_3.3.5.5) frames. Its initial duration MUST be 1 second.
+**GetBackupListRequest timer:** This timer is used to govern the retransmission of [GetBackupListRequest](#Section_2.2.4) frames. Its initial duration MUST be 1 second.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -878,10 +878,10 @@ At startup, to find a [**backup browser server**](#gt_backup-browser-server), th
 - **MachineGroupNameInProgress** is set to an empty string.
 - **TokenValue** is set to 0.
 - Initialize **BackupBrowserServerTable** to an empty table.
-- Initialize the [GetBackupListRequest](#Section_3.3.5.5) timer and send a GetBackupListRequest frame for **MachineGroupNameInProgress**, as specified in section [3.1.5.1.1](#Section_3.1.5.1.2).
-If the local master [**browser**](#gt_browser) for a machine group fails to respond to the GetBackupListRequest after an implementation-defined number of retries, as specified in section [3.1.6](#Section_3.1.6), the client MUST force an election by [Sending a RequestElection Frame](#Section_3.3.5.11), as specified in section 3.1.5.3.
+- Initialize the [GetBackupListRequest](#Section_2.2.4) timer and send a GetBackupListRequest frame for **MachineGroupNameInProgress**, as specified in section [3.1.5.1.1](#Section_3.1.5.1.1).
+If the local master [**browser**](#gt_browser) for a machine group fails to respond to the GetBackupListRequest after an implementation-defined number of retries, as specified in section [3.1.6](#Section_3.1.6), the client MUST force an election by [Sending a RequestElection Frame](#Section_3.1.5.3), as specified in section 3.1.5.3.
 
-The GetBackupListRequest and [GetBackupListResponse](#Section_3.1.5.1.2) sequences are specified in sections 3.1.5.1.1 and [3.1.5.1.2](#Section_3.1.5.1.2), respectively. If this sequence does not produce a backup browser server, as specified in section 3.1.6, the initialization MUST fail.<27>
+The GetBackupListRequest and [GetBackupListResponse](#Section_2.2.5) sequences are specified in sections 3.1.5.1.1 and [3.1.5.1.2](#Section_3.1.5.1.2), respectively. If this sequence does not produce a backup browser server, as specified in section 3.1.6, the initialization MUST fail.<27>
 
 **BrowserClientUpTime** is set to the time when the browser service was initially started.
 
@@ -914,12 +914,12 @@ The objective is to enable multiple backup browser servers to effectively handle
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
 
-A [**browser client**](#gt_browser-client) MUST ignore all CIFS Browser Protocol messages except [GetBackupListResponse](#Section_3.1.5.1.2).
+A [**browser client**](#gt_browser-client) MUST ignore all CIFS Browser Protocol messages except [GetBackupListResponse](#Section_2.2.5).
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Retrieving a List of Backup Browser Servers
 
-When a [**browser client**](#gt_browser-client) needs to determine the set of [**backup browser servers**](#gt_backup-browser-server) for a particular machine group, the browser client MUST send a [GetBackupListRequest](#Section_3.3.5.5) [**frame**](#gt_frame) and check whether it receives a [GetBackupListResponse](#Section_3.1.5.1.2) frame.
+When a [**browser client**](#gt_browser-client) needs to determine the set of [**backup browser servers**](#gt_backup-browser-server) for a particular machine group, the browser client MUST send a [GetBackupListRequest](#Section_2.2.4) [**frame**](#gt_frame) and check whether it receives a [GetBackupListResponse](#Section_2.2.5) frame.
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 Sending a GetBackupListRequest Frame
@@ -928,7 +928,7 @@ The caller MUST provide the [**NetBIOS name**](#gt_netbios-name) of the machine 
 
 The [**browser client**](#gt_browser-client) MUST set **MachineGroupNameInProgress** to the machine group provided.
 
-The browser client MUST send a [GetBackupListRequest](#Section_3.3.5.5) frame, as specified in section 2.2.4. When generating the GetBackupListRequest, the client MUST initialize **TokenValue**. How the client selects the token is implementation-defined. The token exists solely to allow the client to differentiate between [GetBackupListResponse](#Section_3.1.5.1.2) calls.<28> The client MUST then set the **Token** field of the GetBackupListRequest to **TokenValue**.
+The browser client MUST send a [GetBackupListRequest](#Section_2.2.4) frame, as specified in section 2.2.4. When generating the GetBackupListRequest, the client MUST initialize **TokenValue**. How the client selects the token is implementation-defined. The token exists solely to allow the client to differentiate between [GetBackupListResponse](#Section_2.2.5) calls.<28> The client MUST then set the **Token** field of the GetBackupListRequest to **TokenValue**.
 
 The browser client MUST send the frame to the server by issuing a [**mailslot**](#gt_mailslot) write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1, with the following parameters.
 
@@ -945,7 +945,7 @@ The client SHOULD ignore the error even if the send fails. After the [**browser*
 
 After the [**local master browser server**](#gt_local-master-browser-server) responds with a list of [**backup browser servers**](#gt_backup-browser-server), the client SHOULD choose an implementation-defined number of servers from within the response by using an implementation-dependent algorithm, and then insert a new entry into **BackupBrowserServerTable** for the [**NetBIOS name**](#gt_netbios-name) **MachineGroupNameInProgress** with the list of backup browser servers selected.<29>
 
-When a [GetBackupListResponse](#Section_3.1.5.1.2) frame is received, the corresponding timer MUST be stopped. Because a client can only have a single [GetBackupListRequest](#Section_3.3.5.5) pending, it needs only one timer.
+When a [GetBackupListResponse](#Section_2.2.5) frame is received, the corresponding timer MUST be stopped. Because a client can only have a single [GetBackupListRequest](#Section_2.2.4) pending, it needs only one timer.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Receiving a NetServerEnum2 Response
@@ -957,7 +957,7 @@ When the client receives a response to a NetServerEnum2 request that was sent to
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Sending a RequestElection Frame
 
-To force an election, the client MUST send a *RequestElection* frame as specified in section [2.2.3](#Section_3.3.5.11). The RequestElection Browser Frame MUST be sent by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters:
+To force an election, the client MUST send a *RequestElection* frame as specified in section [2.2.3](#Section_2.2.3). The RequestElection Browser Frame MUST be sent by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters:
 
 | Parameter name | Value |
 | --- | --- |
@@ -970,9 +970,9 @@ The server SHOULD ignore the error even if the send fails.
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
 
-When a [GetBackupListRequest](#Section_3.3.5.5) timer expires without receiving a [GetBackupListResponse](#Section_3.1.5.1.2), the GetBackupListRequest frame MAY be retransmitted. The delay MUST be at least twice the expected service time, which MUST be 1 second.<30> Before resending, the client MAY modify **TokenValue**.<31> If TokenValue is modified, the client MUST set the **Token** field of the GetBackupListRequest to the new value of **TokenValue**, and resend the GetBackupListRequest.
+When a [GetBackupListRequest](#Section_2.2.4) timer expires without receiving a [GetBackupListResponse](#Section_2.2.5), the GetBackupListRequest frame MAY be retransmitted. The delay MUST be at least twice the expected service time, which MUST be 1 second.<30> Before resending, the client MAY modify **TokenValue**.<31> If TokenValue is modified, the client MUST set the **Token** field of the GetBackupListRequest to the new value of **TokenValue**, and resend the GetBackupListRequest.
 
-If the local master [**browser**](#gt_browser) for a machine group fails to respond to the GetBackupListRequest after an implementation-defined number of retries, the client MUST set the **Uptime** value with the time difference, in seconds, between the current time and **BrowserClientUpTime**, and the client MUST force an election by [Sending a RequestElection Frame](#Section_3.3.5.11), as specified in section 3.1.5.3. If the client is unable to retrieve a list of [**browser servers**](#gt_browser-server) from the local master browser server, it MAY attempt to retrieve a list of [**backup browser servers**](#gt_backup-browser-server) by sending a GetBackupListRequest frame directly to the domain master browser for that [**domain**](#gt_domain) by using the [**unique name**](#gt_unique-name) <domain>[0x1B] that is registered by the domain master browser. The value of the retry count MUST be 3.
+If the local master [**browser**](#gt_browser) for a machine group fails to respond to the GetBackupListRequest after an implementation-defined number of retries, the client MUST set the **Uptime** value with the time difference, in seconds, between the current time and **BrowserClientUpTime**, and the client MUST force an election by [Sending a RequestElection Frame](#Section_3.1.5.3), as specified in section 3.1.5.3. If the client is unable to retrieve a list of [**browser servers**](#gt_browser-server) from the local master browser server, it MAY attempt to retrieve a list of [**backup browser servers**](#gt_backup-browser-server) by sending a GetBackupListRequest frame directly to the domain master browser for that [**domain**](#gt_domain) by using the [**unique name**](#gt_unique-name) <domain>[0x1B] that is registered by the domain master browser. The value of the retry count MUST be 3.
 
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
@@ -991,7 +991,7 @@ A nonbrowser server MUST implement the abstract data model for a server, as spec
 
 In addition to that information, the nonbrowser server MUST implement the following:
 
-**Server.HostAnnouncementCount:** The number of times the HostAnnouncement timer (as specified in section [3.2.2](#Section_3.1.2)) has expired.
+**Server.HostAnnouncementCount:** The number of times the HostAnnouncement timer (as specified in section [3.2.2](#Section_3.2.2)) has expired.
 
 **Server.Comment:** A null-terminated [**ASCII**](#gt_ascii) string that MUST be less than or equal to 43 bytes in length including the null terminator.
 
@@ -1000,14 +1000,14 @@ In addition to that information, the nonbrowser server MUST implement the follow
 
 [**Nonbrowser servers**](#gt_nonbrowser-server) use the following timers:
 
-**HostAnnouncement timer:** Used to periodically advertise itself to the local master [**browser**](#gt_browser) for its machine group. For more information about the HostAnnouncement timer, see section [3.2.6](#Section_3.1.6).
+**HostAnnouncement timer:** Used to periodically advertise itself to the local master [**browser**](#gt_browser) for its machine group. For more information about the HostAnnouncement timer, see section [3.2.6](#Section_3.2.6).
 
 **AnnouncementRequest response timer:** Used to delay responding to an AnnouncementRequest. For more information, see section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-When a [**nonbrowser server**](#gt_nonbrowser-server) starts up, it MUST start the HostAnnouncementTimer, as specified in section [3.2.2](#Section_3.1.2). Whenever the HostAnnouncementTimer fires, the nonbrowser server MUST issue a HostAnnouncement [**frame**](#gt_frame).
+When a [**nonbrowser server**](#gt_nonbrowser-server) starts up, it MUST start the HostAnnouncementTimer, as specified in section [3.2.2](#Section_3.2.2). Whenever the HostAnnouncementTimer fires, the nonbrowser server MUST issue a HostAnnouncement [**frame**](#gt_frame).
 
 A nonbrowser server MUST register the NetBIOS name <machine group>[0x00] corresponding to the domain or [**workgroup**](#gt_workgroup) within which the nonbrowser server resides. This makes it possible to receive AnnouncementRequest browser frames.
 
@@ -1027,12 +1027,12 @@ The calling application provides the **SERVER_INFO_103** structure ([MS-SRVS](..
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-A [**nonbrowser server**](#gt_nonbrowser-server) MUST ignore all CIFS Browser Protocol messages except the [AnnouncementRequest](#Section_3.2.5.1) browser frame.
+A [**nonbrowser server**](#gt_nonbrowser-server) MUST ignore all CIFS Browser Protocol messages except the [AnnouncementRequest](#Section_2.2.2) browser frame.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receiving an AnnouncementRequest Frame
 
-On receiving an [AnnouncementRequest](#Section_3.2.5.1) frame, a [**nonbrowser server**](#gt_nonbrowser-server) MUST generate a random number in the range of [0, 30] seconds. It MUST then set its AnnouncementRequest response timer to that value.
+On receiving an [AnnouncementRequest](#Section_2.2.2) frame, a [**nonbrowser server**](#gt_nonbrowser-server) MUST generate a random number in the range of [0, 30] seconds. It MUST then set its AnnouncementRequest response timer to that value.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Sending a HostAnnouncement Frame
@@ -1050,9 +1050,9 @@ The server SHOULD continue processing as described below even if the send fails.
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-When either the [HostAnnouncement](#Section_2.2.1) or [AnnouncementRequest](#Section_3.2.5.1) response timer expires, a [**nonbrowser server**](#gt_nonbrowser-server) MUST send a HostAnnouncement frame, as specified in section [3.2.5.2](#Section_3.2.5.2).
+When either the [HostAnnouncement](#Section_2.2.1) or [AnnouncementRequest](#Section_2.2.2) response timer expires, a [**nonbrowser server**](#gt_nonbrowser-server) MUST send a HostAnnouncement frame, as specified in section [3.2.5.2](#Section_3.2.5.2).
 
-When the HostAnnouncement timer fires, it SHOULD reset the HostAnnouncement timer based on the following table (as specified in section [3.2.1](#Section_3.2)).<32>
+When the HostAnnouncement timer fires, it SHOULD reset the HostAnnouncement timer based on the following table (as specified in section [3.2.1](#Section_3.2.1)).<32>
 
 | Server.HostAnnouncementCount value | New HostAnnouncement timer value |
 | --- | --- |
@@ -1088,9 +1088,9 @@ For each state, an additional flag MUST be set, as shown in the following table.
 | Local master browser | SV_TYPE_MASTER_BROWSER, as specified in [MS-SRVS] section 2.2.2.7 (MB) |
 | Potential Browser | SV_TYPE_POTENTIAL_BROWSER, as specified in [MS-SRVS] section 2.2.2.7 (PB) |
 
-If the [**primary domain controller**](#gt_primary-domain-controller-pdc) assumes the Local master browser role, it MUST act as a [**domain master browser server**](#gt_domain-master-browser-server) for its [**subnet**](#gt_subnet), as specified in section [3.4](#Section_1.3).
+If the [**primary domain controller**](#gt_primary-domain-controller-pdc) assumes the Local master browser role, it MUST act as a [**domain master browser server**](#gt_domain-master-browser-server) for its [**subnet**](#gt_subnet), as specified in section [3.4](#Section_3.4).
 
-When a [**local master browser server**](#gt_local-master-browser-server) starts, its Servers List can be empty; therefore, it MAY force all browser servers to announce themselves. The local master browser server does this by broadcasting an [AnnouncementRequest (section 2.2.2)](#Section_3.2.5.1) browser [**frame**](#gt_frame).<34>
+When a [**local master browser server**](#gt_local-master-browser-server) starts, its Servers List can be empty; therefore, it MAY force all browser servers to announce themselves. The local master browser server does this by broadcasting an [AnnouncementRequest (section 2.2.2)](#Section_2.2.2) browser [**frame**](#gt_frame).<34>
 
 The AnnouncementRequest frame MUST be broadcast by using the NetBIOS [**group name**](#gt_group-name) <machine group>[0x00]. The frame MUST be sent to the mailslot \MAILSLOT\BROWSE.
 
@@ -1125,7 +1125,7 @@ This section describes a sample model of [**browser server**](#gt_browser-server
 
 **IsPrimaryDomainController:** A Boolean that specifies if the machine on which the browser server is running is the [**primary domain controller**](#gt_primary-domain-controller-pdc) (TRUE) or a [**backup domain controller**](#gt_backup-domain-controller-bdc) (FALSE).<38>
 
-**Servers List:** An ordered list of servers and HostAnnouncementCount values (as specified in section [3.2.1](#Section_3.2)), as provided in [HostAnnouncement](#Section_2.2.1) frames. The ordering of the list is implementation defined, but the order MUST be stable and the list MUST NOT contain entries with duplicate names. The Servers List element MUST be ordered to implement the semantics of the NetServerEnum3 request (section 3.3.5.6), which specifies a resume point.<39>
+**Servers List:** An ordered list of servers and HostAnnouncementCount values (as specified in section [3.2.1](#Section_3.2.1)), as provided in [HostAnnouncement](#Section_2.2.1) frames. The ordering of the list is implementation defined, but the order MUST be stable and the list MUST NOT contain entries with duplicate names. The Servers List element MUST be ordered to implement the semantics of the NetServerEnum3 request (section 3.3.5.6), which specifies a resume point.<39>
 
 **OtherDomains:** Specifies a list of NetBIOS names of domains browsed by the computer. Each name MUST be at most 15 characters in length, and MUST NOT contain trailing spaces or a [**NetBIOS suffix**](#gt_netbios-suffix) as defined in section [2.1.1](#Section_2.1.1). The **OtherDomains** element is shared with the Workstation Service Remote Protocol Specification [MS-WKST](../MS-WKST/MS-WKST.md), modified through the WkstaAddOtherDomains event (section 3.2.6.2). This element is also shared with the Common Internet File System (CIFS) Browser Auxiliary Protocol [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) to query the **OtherDomains** information from a domain controller.
 
@@ -1134,7 +1134,7 @@ Be aware that the preceding model can be implemented using a variety of techniqu
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
 
-**DomainAnnouncement Timer:** Used by a local master [**browser**](#gt_browser) to periodically announce itself to [**local master browser servers**](#gt_local-master-browser-server) of other machine groups on the [**subnet**](#gt_subnet) by sending a DomainAnnouncement frame, as specified in section [2.2.7](#Section_2.2.7). For more information about the DomainAnnouncement timer, see section [3.3.6](#Section_3.1.6).<40>
+**DomainAnnouncement Timer:** Used by a local master [**browser**](#gt_browser) to periodically announce itself to [**local master browser servers**](#gt_local-master-browser-server) of other machine groups on the [**subnet**](#gt_subnet) by sending a DomainAnnouncement frame, as specified in section [2.2.7](#Section_2.2.7). For more information about the DomainAnnouncement timer, see section [3.3.6](#Section_3.3.6).<40>
 
 **DomainControllerRoleMonitor Timer:** The DomainControllerRoleMonitor timer is used to periodically check for changes to the configuration of the machine on which the [**browser server**](#gt_browser-server) is running. The timer monitors for situations where the machine is promoted (from a backup domain controller to a primary domain controller), or is demoted (from a primary domain controller to a backup domain controller). An implementation that supports a notification mechanism for domain controller role changes, can instead process these changes on notification.<41>
 
@@ -1144,13 +1144,13 @@ Be aware that the preceding model can be implemented using a variety of techniqu
 
 **FindMaster Timer:** Used when a browser server must find a local master browser for the machine group of the browser server. This timer value MUST be 1500 milliseconds (msec).
 
-**LocalMasterAnnouncement Timer:** Used to periodically advertise the local master browser to all the machines in the machine group on the local subnet by sending a [LocalMasterAnnouncement (section 2.2.9)](#Section_2.2.10) frame. For more information about the LocalMasterAnnouncement timer, see section 3.3.6.<42>
+**LocalMasterAnnouncement Timer:** Used to periodically advertise the local master browser to all the machines in the machine group on the local subnet by sending a [LocalMasterAnnouncement (section 2.2.9)](#Section_2.2.9) frame. For more information about the LocalMasterAnnouncement timer, see section 3.3.6.<42>
 
 **MasterAnnouncement Timer:** Used to periodically advertise the local master browser to the domain master browser by sending a [MasterAnnouncementBrowser (section 2.2.8)](#Section_2.2.8) frame. For more information about the MasterAnnouncementBrowser timer, see section 3.3.6 . If the local master browser is not a member of a domain, this timer MUST be ignored. The default value for this timer MUST be 12 minutes.<43>
 
 **NetServerEnum2 Timer:** Used to periodically allow the [**backup browser server**](#gt_backup-browser-server) to refresh its list of servers from the local master browser server or local master browser servers to refresh their Servers List elements from the [**domain master browser server**](#gt_domain-master-browser-server). The NetServerEnum2 timer SHOULD control the accuracy of the information in the browser server lists. If the NetServerEnum2 timer duration is low, the information in the Servers List element SHOULD be more accurate, but the load on the local master browser server (or domain master browser server) MAY be higher. If the NetServerEnum2 timer duration is high, the information in the Servers List element SHOULD be less accurate, but the load on the local master browser server (or domain master browser server) MAY be higher. The default value for this timer is 12 minutes.<44>
 
-**Server Expiration Timer:** For each server entry in the Servers List element that is created or updated by [HostAnnouncements (section 3.3.5.3)](#Section_3.2.5.2)), the local master browser server keeps a Server Expiration Timer. This timer MUST be initialized to the **Periodicity** field value found in the HostAnnouncement.
+**Server Expiration Timer:** For each server entry in the Servers List element that is created or updated by [HostAnnouncements (section 3.3.5.3)](#Section_3.3.5.3)), the local master browser server keeps a Server Expiration Timer. This timer MUST be initialized to the **Periodicity** field value found in the HostAnnouncement.
 
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
@@ -1175,7 +1175,7 @@ The [**browser server**](#gt_browser-server) MUST register NetBIOS names <Machin
 
 The server MUST enable advertising of the browser service by invoking [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.9, passing SV_TYPE_POTENTIAL_BROWSER as the input parameter.
 
-The browser server MUST query the current domain role for the machine on which it is running by calling SamrQueryInformationDomain as specified in [MS-SAMR](#Section_5) section 3.1.5.5.2.
+The browser server MUST query the current domain role for the machine on which it is running by calling SamrQueryInformationDomain as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.5.2.
 
 The browser server first performs a **SamrConnect** using its own name as the server name and an access mask of SAM_SERVER_CONNECT. The out parameter *ServerHandle* is used to perform a **SamrQueryInformationDomain** using the DomainServerRoleInformation value (as specified in [MS-SAMR] section 2.2.3.16). The returned buffer contains a **DOMAIN_SERVER_ROLE_INFORMATION** structure (see [MS-SAMR] section 2.2.3.1 for a detailed explanation of the fields).
 
@@ -1190,9 +1190,9 @@ For DomainServerRole:
 
 If **IsDomainController** is TRUE, the server MUST set the **DomainControllerRoleMonitor Timer** to 1 second.
 
-If **IsPrimaryDomainController** is TRUE, the server MUST force an election by sending a [RequestElection](#Section_3.3.5.11) (section 2.2.3) frame. It MUST set the preferred master bit in the Criteria in all RequestElection frames it sends.
+If **IsPrimaryDomainController** is TRUE, the server MUST force an election by sending a [RequestElection](#Section_2.2.3) (section 2.2.3) frame. It MUST set the preferred master bit in the Criteria in all RequestElection frames it sends.
 
-If **IsPrimaryDomainController** is FALSE, the server MUST send a [HostAnnouncement](#Section_2.2.1) frame as specified in [3.2.5.2](#Section_3.2.5.2), and if a [BecomeBackup](#Section_3.3.5.7) frame is received, it MUST become a backup server.<46>
+If **IsPrimaryDomainController** is FALSE, the server MUST send a [HostAnnouncement](#Section_2.2.1) frame as specified in [3.2.5.2](#Section_3.2.5.2), and if a [BecomeBackup](#Section_2.2.6) frame is received, it MUST become a backup server.<46>
 
 The server MUST disable advertising of the service by invoking [MS-SRVS] section 3.1.6.10, passing SV_TYPE_DOMAIN_CTRL and SV_TYPE_DOMAIN_BAKCTRL as input parameters.
 
@@ -1208,11 +1208,11 @@ If both **IsDomainController** and **IsPrimaryDomainController** are FALSE, the 
 <a id="Section_3.3.4.1"></a>
 #### 3.3.4.1 PromotedToPrimaryDomainController
 
-If a [**browser server**](#gt_browser-server) gets promoted to [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), it MUST force an election by [Sending a RequestElection Frame](#Section_3.3.5.11) as specified in section 3.3.5.11.
+If a [**browser server**](#gt_browser-server) gets promoted to [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc), it MUST force an election by [Sending a RequestElection Frame](#Section_3.1.5.3) as specified in section 3.3.5.11.
 
 The server SHOULD continue processing as described below even if the send fails.
 
-The server MUST assume the duties of a [**domain master browser**](#gt_domain-master-browser), as specified in section [3.4](#Section_1.3).
+The server MUST assume the duties of a [**domain master browser**](#gt_domain-master-browser), as specified in section [3.4](#Section_3.4).
 
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 LocalRequestForServerList
@@ -1222,14 +1222,14 @@ If the machine is a [**backup browser server**](#gt_backup-browser-server) or a 
 <a id="Section_3.3.4.3"></a>
 #### 3.3.4.3 ShutdownBrowserServer
 
-If a local administrator requests that the [**browser server**](#gt_browser-server) shuts down, the browser server MUST take the shutdown action as specified in section [3.3.7](#Section_3.2.7).
+If a local administrator requests that the [**browser server**](#gt_browser-server) shuts down, the browser server MUST take the shutdown action as specified in section [3.3.7](#Section_3.3.7).
 
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
 
 After receiving a CIFS Browser Protocol frame, the opcode MUST first be inspected to determine the message type. If the opcode is not defined in this specification, the frame MUST be silently ignored. If the opcode is recognized, the [**browser server**](#gt_browser-server) MUST then determine if the message is correctly formatted as specified in section [2.2](#Section_2.2). Because messages are transmitted as datagrams, malformed messages MUST be silently ignored.<48>
 
-A browser server MUST ignore the [GetBackupListResponse](#Section_3.1.5.1.2) frame. Correctly formed frames MUST then be processed as specified in the following subsections.
+A browser server MUST ignore the [GetBackupListResponse](#Section_2.2.5) frame. Correctly formed frames MUST then be processed as specified in the following subsections.
 
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Receiving a BecomeBackup Frame
@@ -1238,9 +1238,9 @@ The [**local master browser server**](#gt_local-master-browser-server) MUST send
 
 A [**browser server**](#gt_browser-server) that receives a BecomeBackup frame MUST attempt to become a backup [**browser**](#gt_browser).
 
-If the browser server is incapable of becoming a backup (for example, because it is overloaded), the browser server MUST shut down as specified in section [3.3.7](#Section_3.2.7).
+If the browser server is incapable of becoming a backup (for example, because it is overloaded), the browser server MUST shut down as specified in section [3.3.7](#Section_3.3.7).
 
-If the browser server does not recognize the name of the local master browser for its machine group, it MUST start the FindMaster timer and send an [AnnouncementRequest](#Section_3.2.5.1) frame request by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1, passing in the following parameters.
+If the browser server does not recognize the name of the local master browser for its machine group, it MUST start the FindMaster timer and send an [AnnouncementRequest](#Section_2.2.2) frame request by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1, passing in the following parameters.
 
 | Parameter name | Value |
 | --- | --- |
@@ -1250,7 +1250,7 @@ If the browser server does not recognize the name of the local master browser fo
 
 The server SHOULD continue processing as described below even if the send fails.
 
-If the FindMaster timer expires before the server receives a [LocalMasterAnnouncement](#Section_2.2.10) frame, the browser server MUST issue another AnnouncementRequest frame request to <Machine Group Name>[0x1D] and reset the FindMaster timer. If the server issues an implementation-defined number of FindMaster frame requests without receiving a LocalMasterAnnouncement frame response, then the server MUST send a [RequestElection](#Section_3.3.5.11) frame as specified in section [3.3.5.11](#Section_3.3.5.11).
+If the FindMaster timer expires before the server receives a [LocalMasterAnnouncement](#Section_2.2.10) frame, the browser server MUST issue another AnnouncementRequest frame request to <Machine Group Name>[0x1D] and reset the FindMaster timer. If the server issues an implementation-defined number of FindMaster frame requests without receiving a LocalMasterAnnouncement frame response, then the server MUST send a [RequestElection](#Section_2.2.3) frame as specified in section [3.3.5.11](#Section_3.3.5.11).
 
 The server SHOULD continue processing as described below even if the send fails.
 
@@ -1262,17 +1262,17 @@ The server SHOULD continue processing as described below even if the send fails.
 
 Note that after the master browser receives the HostAnnouncement frame, it MUST hand out this browser server name in GetBackupListResponse frames, and clients will contact this browser server as if it were a backup browser server.
 
-A [**nonbrowser server**](#gt_nonbrowser-server) that receives a BecomeBackup frame MUST ignore the frame, as specified in section [3.2.5](#Section_3.2). Similarly, a browser server whose Current Role is equal to backup browser server receives a BecomeBackup frame MUST ignore the frame.
+A [**nonbrowser server**](#gt_nonbrowser-server) that receives a BecomeBackup frame MUST ignore the frame, as specified in section [3.2.5](#Section_3.2.5). Similarly, a browser server whose Current Role is equal to backup browser server receives a BecomeBackup frame MUST ignore the frame.
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Receiving a LocalMasterAnnouncement Frame
 
-A [**browser server**](#gt_browser-server) can discover the [**master browser server**](#gt_master-browser-server) for a machine group by issuing an [AnnouncementRequest (section 2.2.2)](#Section_3.2.5.1) frame to the name <Machine Group Name>[0x1D].
+A [**browser server**](#gt_browser-server) can discover the [**master browser server**](#gt_master-browser-server) for a machine group by issuing an [AnnouncementRequest (section 2.2.2)](#Section_2.2.2) frame to the name <Machine Group Name>[0x1D].
 
 A [LocalMasterAnnouncement](#Section_2.2.10) frame MUST be processed as follows:
 
 - If the browser server whose Current Role is equal to [**backup browser server**](#gt_backup-browser-server), it MUST update the name of the local master [**browser**](#gt_browser) that sent it in the Machine Groups list, adding a new entry if one does not exist.
-- If the Local master browser server with **IsPrimaryDomainController** set to TRUE receives a LocalMasterAnnouncement frame with the SV_TYPE_MASTER_BROWSER (MB) flag set, it MUST continue to be in the same state and send a [RequestElection](#Section_3.3.5.11) frame as specified in section [3.3.5.11](#Section_3.3.5.11).
+- If the Local master browser server with **IsPrimaryDomainController** set to TRUE receives a LocalMasterAnnouncement frame with the SV_TYPE_MASTER_BROWSER (MB) flag set, it MUST continue to be in the same state and send a [RequestElection](#Section_2.2.3) frame as specified in section [3.3.5.11](#Section_3.3.5.11).
 The server SHOULD continue processing as described below even in the send fails.
 
 - If the Local master browser with **IsPrimaryDomainController** set to FALSE receives a LocalMasterAnnouncement frame with the SV_TYPE_MASTER_BROWSER (MB) flag set from a domain controller, it MUST unregister the NetBIOS unique name <machine group>[0x1D] so that the announcing browser server can successfully register it, set Current Role to [**potential browser server**](#gt_potential-browser-server), and it MUST empty all elements in the Backup Browser List. The browser server MUST disable advertising of the master browser service as specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.10, passing SV_TYPE_MASTER_BROWSER as the input parameter.
@@ -1280,11 +1280,11 @@ The server SHOULD continue processing as described below even in the send fails.
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Receiving a HostAnnouncement Frame
 
-[**Nonbrowser servers**](#gt_nonbrowser-server) and [**browser servers**](#gt_browser-server) periodically (see section [3.2.6](#Section_3.1.6)) send [HostAnnouncement](#Section_2.2.1) frames to inform the local master [**browser**](#gt_browser) for the machine group about the status of the server.
+[**Nonbrowser servers**](#gt_nonbrowser-server) and [**browser servers**](#gt_browser-server) periodically (see section [3.2.6](#Section_3.2.6)) send [HostAnnouncement](#Section_2.2.1) frames to inform the local master [**browser**](#gt_browser) for the machine group about the status of the server.
 
 Browser servers receiving the HostAnnouncement frame that are not the local master browser MUST ignore the [**frame**](#gt_frame).
 
-If the Local master browser server with **IsPrimaryDomainController** set to TRUE receives a HostAnnouncement frame with the SV_TYPE_MASTER_BROWSER (MB) flag set, it MUST continue to be in the same state and send a [RequestElection (section 2.2.3)](#Section_3.3.5.11) as specified in section [3.3.5.11](#Section_3.3.5.11).
+If the Local master browser server with **IsPrimaryDomainController** set to TRUE receives a HostAnnouncement frame with the SV_TYPE_MASTER_BROWSER (MB) flag set, it MUST continue to be in the same state and send a [RequestElection (section 2.2.3)](#Section_2.2.3) as specified in section [3.3.5.11](#Section_3.3.5.11).
 
 The server SHOULD continue processing as described below even if the send fails.
 
@@ -1301,7 +1301,7 @@ The local master browser that receives this request MUST update the Servers List
 - If an entry does not exist in the Servers List for the ServerName specified in the received HostAnnouncement, the local master browser server MUST insert a new entry into the list for the Name received with HostAnnouncementCount equal to 1, and MUST create a ServerExpirationTimer for this entry.
 If the ServerType in the HostAnnouncement indicates it is a [**backup browser server**](#gt_backup-browser-server) and the server is not currently present in the Backup Browser List, the machine MUST be added to the Backup Browser List.
 
-Upon receipt of a HostAnnouncement, if the number of backup browser servers is not sufficient for the machine group, the local master browser SHOULD send out [BecomeBackup (section 2.2.6)](#Section_3.3.5.7) packets according to the behavior as specified in section [3.3.5.7](#Section_3.3.5.7). The server MUST send the BecomeBackup packet by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters.
+Upon receipt of a HostAnnouncement, if the number of backup browser servers is not sufficient for the machine group, the local master browser SHOULD send out [BecomeBackup (section 2.2.6)](#Section_2.2.6) packets according to the behavior as specified in section [3.3.5.7](#Section_3.3.5.7). The server MUST send the BecomeBackup packet by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters.
 
 | Parameter name | Value |
 | --- | --- |
@@ -1314,7 +1314,7 @@ The server SHOULD ignore the error even if the send fails.
 <a id="Section_3.3.5.4"></a>
 #### 3.3.5.4 Receiving a DomainAnnouncement Frame
 
-[**Local master browser servers**](#gt_local-master-browser-server) periodically send DomainAnnouncement frames to inform the local master [**browsers**](#gt_browser) for other machine groups on the [**subnet**](#gt_subnet) about the status of the machine group. (For more details on the timers related to this process, see section [3.3.6](#Section_3.1.6).)
+[**Local master browser servers**](#gt_local-master-browser-server) periodically send DomainAnnouncement frames to inform the local master [**browsers**](#gt_browser) for other machine groups on the [**subnet**](#gt_subnet) about the status of the machine group. (For more details on the timers related to this process, see section [3.3.6](#Section_3.3.6).)
 
 [**Browser servers**](#gt_browser-server) receiving the DomainAnnouncement frame that are not the local master browser MUST ignore the frame.
 
@@ -1329,7 +1329,7 @@ The local master browser MUST reset the **Machine Groups List** Machine Group Ex
 
 A [**browser server**](#gt_browser-server) whose Current Role is not equal to local master browser MUST ignore this request.
 
-The local master [**browser**](#gt_browser) MUST reply with a [GetBackupListResponse Browser Frame](#Section_3.1.5.1.2) that contains a list of [**backup browser servers**](#gt_backup-browser-server) for the machine group, as specified in section [3.3.5.9](#Section_3.3.5.9). The server MUST send the GetBackupListResponse Browser Frame by issuing a mailslot write, as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1, with the following parameters:
+The local master [**browser**](#gt_browser) MUST reply with a [GetBackupListResponse Browser Frame](#Section_2.2.5) that contains a list of [**backup browser servers**](#gt_backup-browser-server) for the machine group, as specified in section [3.3.5.9](#Section_3.3.5.9). The server MUST send the GetBackupListResponse Browser Frame by issuing a mailslot write, as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1, with the following parameters:
 
 | Parameter name | Value |
 | --- | --- |
@@ -1370,7 +1370,7 @@ A [**browser server**](#gt_browser-server) whose Current Role is equal to local 
 - Minimizing network traffic.
 - Ensuring robustness by having multiple backup browser servers.
 - Ensuring that when a [**local master browser server**](#gt_local-master-browser-server) fails, there are multiple backup browser servers, which can become local master browser servers.<51>
-If the local master browser server determines that one or more backup browser servers SHOULD be added to its **Backup Browser List**<52>, it MUST send [BecomeBackup (section 2.2.6)](#Section_3.3.5.7) frames to enough servers to get up to the recommended level of backup servers. Each server to which it sends a BecomeBackup frame MUST be in the local master browser's **Servers List** and MUST NOT be in the **Backup Browser List**. The server MUST send the BecomeBackup frame by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters:
+If the local master browser server determines that one or more backup browser servers SHOULD be added to its **Backup Browser List**<52>, it MUST send [BecomeBackup (section 2.2.6)](#Section_2.2.6) frames to enough servers to get up to the recommended level of backup servers. Each server to which it sends a BecomeBackup frame MUST be in the local master browser's **Servers List** and MUST NOT be in the **Backup Browser List**. The server MUST send the BecomeBackup frame by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters:
 
 | Parameter name | Value |
 | --- | --- |
@@ -1380,12 +1380,12 @@ If the local master browser server determines that one or more backup browser se
 
 The server SHOULD continue processing as described below even if the send fails.
 
-The action to add one or more backup browser servers is triggered by the **Server Expiration Timer** as specified in [Timer Events (section 3.3.6)](#Section_3.1.6).
+The action to add one or more backup browser servers is triggered by the **Server Expiration Timer** as specified in [Timer Events (section 3.3.6)](#Section_3.3.6).
 
 <a id="Section_3.3.5.8"></a>
 #### 3.3.5.8 Receiving a RequestElection Frame
 
-The [RequestElection](#Section_3.3.5.11) frame (as specified in section 2.2.3) MUST be sent whenever a [**browser client**](#gt_browser-client) or server is unable to retrieve information that is maintained by the [**local master browser server**](#gt_local-master-browser-server). It also MUST be issued when a local master browser server receives a frame that indicates that another machine on the machine group also believes it is a local master browser server.
+The [RequestElection](#Section_2.2.3) frame (as specified in section 2.2.3) MUST be sent whenever a [**browser client**](#gt_browser-client) or server is unable to retrieve information that is maintained by the [**local master browser server**](#gt_local-master-browser-server). It also MUST be issued when a local master browser server receives a frame that indicates that another machine on the machine group also believes it is a local master browser server.
 
 When a [**browser server**](#gt_browser-server) receives a RequestElection frame, it MUST calculate its [**election criteria**](#gt_election-criteria) and update the **Uptime** value with the time difference, in seconds, between the current time and the **BrowserServerUpTime**, as specified in section 2.2.3.
 
@@ -1409,11 +1409,11 @@ The browser server MUST do the following:
 | Backup browser | A pseudo-random number chosen from the range 200 ms to 600 ms |
 | Potential browser | A pseudo-random number chosen from the range 800 ms to 3000 ms |
 
-In a domain environment, the [**master browser server**](#gt_master-browser-server) SHOULD query the [**primary domain controller**](#gt_primary-domain-controller-pdc) as described in [MS-ADOD](#Section_1.3) section 2.7.7.3.1. If the primary domain controller is successfully discovered, the master browser server SHOULD issue an I_BrowserrQueryOtherDomains request as specified in [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) section 3.1.4.1 to the primary domain controller, and append each domain name received in the response to OtherDomains as described in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.6.2 WkstaAddOtherDomains Event. If the number of domain names in the response is greater than 0, the server SHOULD register the [**NetBIOS name**](#gt_netbios-name) <other domain name>[0x00] for each domain name in the response, and accept requests on that name as described in section [3.3.3](#Section_3.2.3). If either the primary domain controller cannot be discovered, or the call to the primary domain controller fails, the server MUST take no action with regards to OtherDomains and the election algorithm continues to execute.
+In a domain environment, the [**master browser server**](#gt_master-browser-server) SHOULD query the [**primary domain controller**](#gt_primary-domain-controller-pdc) as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.7.7.3.1. If the primary domain controller is successfully discovered, the master browser server SHOULD issue an I_BrowserrQueryOtherDomains request as specified in [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) section 3.1.4.1 to the primary domain controller, and append each domain name received in the response to OtherDomains as described in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.6.2 WkstaAddOtherDomains Event. If the number of domain names in the response is greater than 0, the server SHOULD register the [**NetBIOS name**](#gt_netbios-name) <other domain name>[0x00] for each domain name in the response, and accept requests on that name as described in section [3.3.3](#Section_3.3.3). If either the primary domain controller cannot be discovered, or the call to the primary domain controller fails, the server MUST take no action with regards to OtherDomains and the election algorithm continues to execute.
 
-If the master browser server is running on a machine with **IsPrimaryDomainController** set to TRUE, it MUST act as a [**domain master browser server**](#gt_domain-master-browser-server) for its [**subnet**](#gt_subnet), as specified in section [3.4](#Section_1.3).
+If the master browser server is running on a machine with **IsPrimaryDomainController** set to TRUE, it MUST act as a [**domain master browser server**](#gt_domain-master-browser-server) for its [**subnet**](#gt_subnet), as specified in section [3.4](#Section_3.4).
 
-This election algorithm continues to execute as specified in section [3.3.6](#Section_3.1.6).
+This election algorithm continues to execute as specified in section [3.3.6](#Section_3.3.6).
 
 If the browser server has "lost" the election, the browser MUST stop its election delay timer and set Current Role to [**potential browser server**](#gt_potential-browser-server); if it was previously the local master browser server, it MUST do the following:
 
@@ -1434,7 +1434,7 @@ The frame MUST be sent by issuing a mailslot write as specified in [MS-MAIL](../
 | --- | --- |
 | NetBIOS name of the remote server | < computer that issued GetBackupListRequest >[0x00] |
 | Mailslot name | \MAILSLOT\BROWSE |
-| Data | [GetBackupListResponse](#Section_3.1.5.1.2) as specified in 2.2.5. |
+| Data | [GetBackupListResponse](#Section_2.2.5) as specified in 2.2.5. |
 
 The server SHOULD ignore the error even if the send fails.
 
@@ -1450,7 +1450,7 @@ When a backup [**browser**](#gt_browser) receives the ResetStateRequest message 
 <a id="Section_3.3.5.11"></a>
 #### 3.3.5.11 Sending a RequestElection Frame
 
-To force an election or participate in an election, the server MUST send a [RequestElection Browser Frame](#Section_3.3.5.11) as specified in section 2.2.3 by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters.
+To force an election or participate in an election, the server MUST send a [RequestElection Browser Frame](#Section_2.2.3) as specified in section 2.2.3 by issuing a mailslot write as specified in [MS-MAIL](../MS-MAIL/MS-MAIL.md) section 3.1.4.1 with the following parameters.
 
 | Parameter name | Value |
 | --- | --- |
@@ -1502,7 +1502,7 @@ If the election transmission count is greater than 30, the browser server MUST c
 When this counter reaches 4, the browser server MUST consider itself to have won the election and MUST perform the following actions:
 
 - The browser server must locate the [**domain master browser server**](#gt_domain-master-browser-server), which is also the [**primary domain controller (PDC)**](#gt_primary-domain-controller-pdc). This is done by locating the PDC as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6.2. If the PDC is successfully identified, the browser server MUST send a Master Announcement frame (as specified in section 2.2.8) to the domain master browser server and start the Master Announcement timer. If the PDC cannot be located, no Master Announcement is sent.
-- A newly elected local master browser server that has an empty Servers List element MUST send an AnnouncementRequest frame, as specified in section [2.2.2](#Section_3.2.5.1) sent by issuing a mailslot write as specified in [MS-MAIL] section 3.1.4.1 with the parameters shown in the following table.
+- A newly elected local master browser server that has an empty Servers List element MUST send an AnnouncementRequest frame, as specified in section [2.2.2](#Section_2.2.2) sent by issuing a mailslot write as specified in [MS-MAIL] section 3.1.4.1 with the parameters shown in the following table.
 | Parameter Name | Value |
 | --- | --- |
 | NetBIOS name of the remote server | <Machine Group Name>[0x1E] |
@@ -1511,9 +1511,9 @@ When this counter reaches 4, the browser server MUST consider itself to have won
 
 The server SHOULD continue processing as described below even in the send fails.
 
-- A local master browser server MUST register the NetBIOS [**unique name**](#gt_unique-name) <machine group>[0x1D]. If the [**NetBIOS name**](#gt_netbios-name) registration fails, the browser server MUST initiate a new election by sending a new ElectionRequest frame. For more information, see section [2.2.3](#Section_3.3.5.11).
+- A local master browser server MUST register the NetBIOS [**unique name**](#gt_unique-name) <machine group>[0x1D]. If the [**NetBIOS name**](#gt_netbios-name) registration fails, the browser server MUST initiate a new election by sending a new ElectionRequest frame. For more information, see section [2.2.3](#Section_2.2.3).
 - If the Servers List element is not empty, the local master browser server MUST initialize the Backup Browser List by enumerating the servers in the Servers List element for servers with the backup browser (BB) flag set (as specified in [MS-RAP](../MS-RAP/MS-RAP.md) section 2.5.5.2.1). If there are not sufficient backup browsers to meet the criteria, as specified in section [3.3.5.7](#Section_3.3.5.7), the [**master browser server**](#gt_master-browser-server) MUST send BecomeBackup frames to the potential browsers, as specified in section 3.3.5.7.
-**LocalMasterAnnouncement Timer:** When the LocalMasterAnnouncement timer expires, and the machine is a local master browser server, it MUST announce itself to all browser servers for its machine group on its [**subnet**](#gt_subnet) by sending a LocalMasterAnnouncement frame, as specified in section [2.2.9](#Section_2.2.10). The LocalMasterAnnouncement frame MUST be sent by issuing a mailslot write as specified in [MS-MAIL] section 3.1.4.1 with the parameters shown in the following table.
+**LocalMasterAnnouncement Timer:** When the LocalMasterAnnouncement timer expires, and the machine is a local master browser server, it MUST announce itself to all browser servers for its machine group on its [**subnet**](#gt_subnet) by sending a LocalMasterAnnouncement frame, as specified in section [2.2.9](#Section_2.2.9). The LocalMasterAnnouncement frame MUST be sent by issuing a mailslot write as specified in [MS-MAIL] section 3.1.4.1 with the parameters shown in the following table.
 
 | Parameter Name | Value |
 | --- | --- |
@@ -1559,7 +1559,7 @@ If the server being removed from the Servers List element is a member of the Bac
 
 **FindMaster Timer:** When this timer expires, the browser server MUST signal its expiration to the BecomeBackup processing routine that initialized the timer as specified in section [3.3.5.1](#Section_3.3.5.1).
 
-**DomainControllerRoleMonitor Timer:** When this timer expires, the browser server MUST query the current domain role for the machine on which it is running by calling SamrQueryInformationDomain as specified in [MS-SAMR](#Section_5) section 3.1.5.5.2.
+**DomainControllerRoleMonitor Timer:** When this timer expires, the browser server MUST query the current domain role for the machine on which it is running by calling SamrQueryInformationDomain as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.5.2.
 
 The browser server first performs a **SamrConnect** using its own name as the server name and an access mask of SAM_SERVER_CONNECT. The out parameter *ServerHandle* is used to perform a **SamrQueryInformationDomain** using the DomainServerRoleInformation value (as specified in [MS-SAMR] section 2.2.3.16). The returned buffer contains a **DOMAIN_SERVER_ROLE_INFORMATION** structure (see [MS-SAMR] section 2.2.3.1 for a detailed explanation of the fields).
 
@@ -1591,16 +1591,16 @@ If **IsDomainController** is TRUE but **IsPrimaryDomainController** is FALSE, th
 
 If the [**browser server**](#gt_browser-server) is shutting down, but the system will continue operating as a [**nonbrowser server**](#gt_nonbrowser-server), the browser server MUST send a [HostAnnouncement](#Section_2.2.1) frame as specified in section [3.2.5.2](#Section_3.2.5.2), with the SV_TYPE_POTENTIAL_BROWSER_SERVER, SV_TYPE_BACKUP_BROWSER, and SV_TYPE_MASTER_BROWSER bits in the **ServerType** field set to 0. The browser server MUST disable advertising of the services as specified in [MS-SRVS](../MS-SRVS/MS-SRVS.md) section 3.1.6.10, passing SV_TYPE_POTENTIAL_BROWSER, SV_TYPE_BACKUP_BROWSER, and SV_TYPE_MASTER_BROWSER as input parameters.
 
-If the browser server is shutting down, and the system will not continue to operate as a nonbrowser server, the browser server MUST send a HostAnnouncement as specified in section [3.2.7](#Section_3.2).
+If the browser server is shutting down, and the system will not continue to operate as a nonbrowser server, the browser server MUST send a HostAnnouncement as specified in section [3.2.7](#Section_3.2.7).
 
 The server SHOULD continue processing as described later in this section even if the send fails.
 
-If the browser server is also a [**local master browser server**](#gt_local-master-browser-server), it MUST send a [RequestElection](#Section_3.3.5.11) frame with both **version** and **criterion** fields set to 0.<62> The server MUST send the RequestElection frame as specified in section [3.3.5.11](#Section_3.3.5.11).
+If the browser server is also a [**local master browser server**](#gt_local-master-browser-server), it MUST send a [RequestElection](#Section_2.2.3) frame with both **version** and **criterion** fields set to 0.<62> The server MUST send the RequestElection frame as specified in section [3.3.5.11](#Section_3.3.5.11).
 
 <a id="Section_3.4"></a>
 ## 3.4 Domain Master Browser Details
 
-A [**domain master browser server**](#gt_domain-master-browser-server) for a domain MUST act as a [**local master browser server**](#gt_local-master-browser-server) for its [**subnet**](#gt_subnet). Therefore, it acts exactly like a local master browser server (section [3.3](#Section_1.3)) except where indicated differently in this section.
+A [**domain master browser server**](#gt_domain-master-browser-server) for a domain MUST act as a [**local master browser server**](#gt_local-master-browser-server) for its [**subnet**](#gt_subnet). Therefore, it acts exactly like a local master browser server (section [3.3](#Section_3.3)) except where indicated differently in this section.
 
 Historical note: By convention, the [**PDC**](#gt_primary-domain-controller-pdc) of a domain SHOULD also be the domain master browser server for two reasons:
 
@@ -1613,14 +1613,14 @@ This section describes a hypothetical model of [**domain master browser server**
 
 **Local Master Browser Servers List:** A list of the [**local master browser servers**](#gt_local-master-browser-server) for the domain master browser server's domain on each [**subnet**](#gt_subnet). The local master browser servers list MUST NOT contain duplicate server names.
 
-**Master List of Servers:** Identical to the Servers List element described in section [3.3.1](#Section_3.1.5.1), except that it contains a list merged from all subnets in the domain.
+**Master List of Servers:** Identical to the Servers List element described in section [3.3.1](#Section_3.3.1), except that it contains a list merged from all subnets in the domain.
 
 **Master List of Machine Groups:** Identical to the Machine Groups List element described in section 3.3.1, except that it contains a list merged from all subnets in the domain.
 
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Timers
 
-A [**domain master browser server**](#gt_domain-master-browser-server) has the following timers, in addition to those as specified in section [3.3.2](#Section_3.1.2):
+A [**domain master browser server**](#gt_domain-master-browser-server) has the following timers, in addition to those as specified in section [3.3.2](#Section_3.3.2):
 
 **Local Master Browser Server Expiration Timer:** For each [**local master browser server**](#gt_local-master-browser-server) in the domain master browser servers list, the domain master browser server keeps an expiration timer. The default value for this timer SHOULD be 36 minutes.
 
@@ -1775,7 +1775,7 @@ BROWSER: Signature = 43605 (0xAA55)
 
 The figure that follows depicts the following election process:
 
-- A [**browser server**](#gt_browser-server) receives a [RequestElection](#Section_3.3.5.11) frame and determines that it is winning the election, as compared to the sender of the RequestElection (section 2.2.3) frame.
+- A [**browser server**](#gt_browser-server) receives a [RequestElection](#Section_2.2.3) frame and determines that it is winning the election, as compared to the sender of the RequestElection (section 2.2.3) frame.
 - The potential [**master browser server**](#gt_master-browser-server) sends out a RequestElection frame that contains its own election **version** and **criteria** values.
 The browser server waits for 200 msec, 400 msec, or 800 msec, based on its role in the [**machine group**](#gt_machine-group) (as specified in section [3.3.5.8](#Section_3.3.5.8)), and then repeats the RequestElection frame.
 
@@ -1790,7 +1790,7 @@ Figure 3: A browser server wins the first election round and the election
 
 The figure that follows depicts the following election process:
 
-- A [**potential browser server**](#gt_potential-browser-server) (on the right) receives a [RequestElection](#Section_3.3.5.11) frame and decides it is winning the election, as compared to the sender of the RequestElection frame (for more information, see section 2.2.3).
+- A [**potential browser server**](#gt_potential-browser-server) (on the right) receives a [RequestElection](#Section_2.2.3) frame and decides it is winning the election, as compared to the sender of the RequestElection frame (for more information, see section 2.2.3).
 - The potential browser server sends out a RequestElection frame that contains its own election version and criterion values.
 - Meanwhile, a [**browser server**](#gt_browser-server) from the [**browser**](#gt_browser) cloud (on the left) has also received the first RequestElection frame, and decides that it is a winner.
 - That browser server sends a RequestElection frame that specifies its own election version and criterion values.
@@ -1884,7 +1884,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <9> Section 2.2.1: Windows-based servers send announcements to \MAILSLOT\LANMAN, but listen for announcements on both \MAILSLOT\LANMAN and \MAILSLOT\BROWSE as specified in section [2.1](#Section_2.1).
 
-<10> Section 2.2.1: The Windows announcement frequency is as specified in section [3.2.6](#Section_3.1.6).
+<10> Section 2.2.1: The Windows announcement frequency is as specified in section [3.2.6](#Section_3.2.6).
 
 <11> Section 2.2.1: For more information, see section [1.8](#Section_1.8) for Windows operating system values.
 
@@ -1925,11 +1925,11 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <27> Section 3.1.3: For Windows machines, the requests to enumerate machines on the network would also fail if the initialization has failed.
 
-<28> Section 3.1.5.1.1: The [**browser client**](#gt_browser-client) uses an initial token value of 0, and it increments this value every time it makes a [GetBackupListRequest](#Section_3.3.5.5).
+<28> Section 3.1.5.1.1: The [**browser client**](#gt_browser-client) uses an initial token value of 0, and it increments this value every time it makes a [GetBackupListRequest](#Section_2.2.4).
 
 <29> Section 3.1.5.1.2: The browser client selects up to three of the [**backup browser servers**](#gt_backup-browser-server) and uses a pseudo-random number generator to determine which one of the servers to use from that list.
 
-<30> Section 3.1.6: Upon expiration of the timer, a Windows–based client retransmits the GetBackupListRequest twice more and, if both transmissions result in no [GetBackupListResponse](#Section_3.1.5.1.2) frames being received, a Windows–based client sends a [RequestElection](#Section_3.3.5.11) frame (section 2.2.3) with the version and criteria values set to 0. For more information about the election process, see section [3.3.5.8](#Section_3.3.5.8).
+<30> Section 3.1.6: Upon expiration of the timer, a Windows–based client retransmits the GetBackupListRequest twice more and, if both transmissions result in no [GetBackupListResponse](#Section_2.2.5) frames being received, a Windows–based client sends a [RequestElection](#Section_2.2.3) frame (section 2.2.3) with the version and criteria values set to 0. For more information about the election process, see section [3.3.5.8](#Section_3.3.5.8).
 
 <31> Section 3.1.6: Windows increments **TokenValue**.
 
@@ -1955,7 +1955,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <39> Section 3.3.1: In Windows, the contents of the Servers List element are ordered alphabetically.
 
-<40> Section 3.3.2: The local master browser will use the time-out values as specified in the DomainAnnouncement table in section [3.3.6](#Section_3.1.6).
+<40> Section 3.3.2: The local master browser will use the time-out values as specified in the DomainAnnouncement table in section [3.3.6](#Section_3.3.6).
 
 <41> Section 3.3.2: Windows-based servers use an internal notification API instead of a timer.
 

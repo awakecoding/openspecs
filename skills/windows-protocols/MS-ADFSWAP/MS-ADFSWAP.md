@@ -262,7 +262,7 @@ The protocol is based on SOAP as defined in [[SOAP1.1]](https://go.microsoft.com
 - A GetFsTrustInformation operation that enables the WS resource to obtain configuration data from the STS that is necessary to participate in [MS-MWBF] exchanges, including URL endpoints, X.509 certificates for security token validation, and identifiers for the STS.
 - A GetTrustedRealmUri operation that enables the WS resource to obtain configuration data from the STS that indicates to the security realms from which the STS accepts security tokens using [MS-MWBF].
 - A GetClaims operation that enables the WS resource to obtain configuration data from the STS that indicates the security token claims that the STS can emit.
-In section [3](#Section_1.3), the protocol specification describes the message processing model for the client and the STS to successfully emit or consume protocol messages that are created in accordance with section [2](#Section_2).
+In section [3](#Section_3), the protocol specification describes the message processing model for the client and the STS to successfully emit or consume protocol messages that are created in accordance with section [2](#Section_2).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -302,7 +302,7 @@ This protocol uses the versioning mechanisms defined in the following specificat
 
 - SOAP 1.1, as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520).
 - SOAP 1.2, as specified in [[SOAP1.2-1/2007]](https://go.microsoft.com/fwlink/?LinkId=94664) and [[SOAP1.2-2/2007]](https://go.microsoft.com/fwlink/?LinkId=119124).
-The data formatting and message processing of this protocol do not contain any further versioning mechanisms. The data itself is versioned to enable servers to determine whether clients need a full update or have an up-to-date version. This mechanism is described fully in sections [2](#Section_2) and [3](#Section_1.3) below.
+The data formatting and message processing of this protocol do not contain any further versioning mechanisms. The data itself is versioned to enable servers to determine whether clients need a full update or have an up-to-date version. This mechanism is described fully in sections [2](#Section_2) and [3](#Section_3) below.
 
 <a id="Section_1.7.2"></a>
 ### 1.7.2 Capability Negotiation
@@ -787,7 +787,7 @@ The server MUST maintain a configured method for checking revocation on the X.50
 <a id="Section_3.1.4.1.1.4.3"></a>
 Other Processing
 
-The server MUST maintain a URI to identify itself as described in section [3.1.1.1](#Section_3.2.4.1). This URI MUST be included in the response as the hostedRealmUri element.
+The server MUST maintain a URI to identify itself as described in section [3.1.1.1](#Section_3.1.1.1). This URI MUST be included in the response as the hostedRealmUri element.
 
 The server MUST maintain a URL that represents the endpoint on which it listens for [MS-MWBF](../MS-MWBF/MS-MWBF.md) requests. This URL MUST be included in the response as the lsUrl element.
 
@@ -835,7 +835,7 @@ The element named "email" MUST contain an email address conforming to [[RFC2822]
 <a id="Section_3.1.4.2.1.2"></a>
 ###### 3.1.4.2.1.2 GetTrustedRealmUriSoapIn Processing
 
-As described in section [3.2.3.2](#Section_3.1.1.2), the client MUST include an email address in the request.
+As described in section [3.2.3.2](#Section_3.2.3.2), the client MUST include an email address in the request.
 
 <a id="Section_3.1.4.2.1.3"></a>
 ###### 3.1.4.2.1.3 GetTrustedRealmUriSoapOut
@@ -918,7 +918,7 @@ The SOAP body of the GetClaims request message MUST conform to the following XML
 <a id="Section_3.1.4.3.1.2"></a>
 ###### 3.1.4.3.1.2 GetClaimsSoapIn Processing
 
-As described in section [3.2.3.3](#Section_3.1.1.3), the client MUST set the [**claim**](#gt_claim) type in the request to "Group".
+As described in section [3.2.3.3](#Section_3.2.3.3), the client MUST set the [**claim**](#gt_claim) type in the request to "Group".
 
 <a id="Section_3.1.4.3.1.3"></a>
 ###### 3.1.4.3.1.3 GetClaimsSoapOut
@@ -1054,7 +1054,7 @@ This section describes details of protocol processing that must be understood to
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-The abstract data model described in section [3.1.1](#Section_1.3) applies for the client role as well.
+The abstract data model described in section [3.1.1](#Section_3.1.1) applies for the client role as well.
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -1069,14 +1069,14 @@ Prior to receiving request messages, the server MUST open an endpoint to listen 
 <a id="Section_3.2.3.1"></a>
 #### 3.2.3.1 GetFsTrustInformation Initialization
 
-The client can maintain a cached copy of the data described in section [3.1.1.1](#Section_3.2.4.1).<1>
+The client can maintain a cached copy of the data described in section [3.1.1.1](#Section_3.1.1.1).<1>
 
 Prior to emitting a GetFsTrustInformation request, the client MUST obtain the version number and GUID of the currently cached trust information. If no trust information is cached on the client, the client MUST use a version number equal to 0 and a GUID equal to 00000000-0000-0000-0000-000000000000.
 
 <a id="Section_3.2.3.2"></a>
 #### 3.2.3.2 GetTrustedRealmUri Initialization
 
-Prior to emitting a GetTrustedRealmUri request, the client MUST have an email address conforming to [[RFC2822]](https://go.microsoft.com/fwlink/?LinkId=90385) to include in the request message. This information MUST be provided by a higher layer, as described in section [3.2.4.2](#Section_3.1.1.2).
+Prior to emitting a GetTrustedRealmUri request, the client MUST have an email address conforming to [[RFC2822]](https://go.microsoft.com/fwlink/?LinkId=90385) to include in the request message. This information MUST be provided by a higher layer, as described in section [3.2.4.2](#Section_3.2.4.2).
 
 <a id="Section_3.2.3.3"></a>
 #### 3.2.3.3 GetClaims Initialization
@@ -1086,21 +1086,21 @@ Prior to emitting a GetClaims request, the client MUST set the [**claim**](#gt_c
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
 
-The [**WSDL operations**](#gt_wsdl-operation) detailed in section [3.1.4](#Section_1.3) are unrelated to one another. A client MUST emit request messages according to the events that trigger the requests as described in the following sections. The following sections define the message processing rules separately for the GetFsTrustInformation, GetTrustedRealmUri, and GetClaims message exchanges.
+The [**WSDL operations**](#gt_wsdl-operation) detailed in section [3.1.4](#Section_3.1.4) are unrelated to one another. A client MUST emit request messages according to the events that trigger the requests as described in the following sections. The following sections define the message processing rules separately for the GetFsTrustInformation, GetTrustedRealmUri, and GetClaims message exchanges.
 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 GetFsTrustInformation
 
 The GetFsTrustInformation exchange MUST consist of a single request message and a single response message. The exchange MUST be initiated by the client with a request message to the server.
 
-As described in section [3.1.1.1](#Section_3.2.4.1), the client emits a GetFsTrustInformation request when the client needs the data described in section 3.1.1.1 to verify the [**security tokens**](#gt_security-token) issued by the server. Thus, a GetFsTrustInformation request MAY be triggered by the receipt of a security token from the server. Implementations MAY choose to improve the performance of security token verification by emitting a GetFsTrustInformation request and caching the data from the response prior to receiving a security token from the server.<2>
+As described in section [3.1.1.1](#Section_3.1.1.1), the client emits a GetFsTrustInformation request when the client needs the data described in section 3.1.1.1 to verify the [**security tokens**](#gt_security-token) issued by the server. Thus, a GetFsTrustInformation request MAY be triggered by the receipt of a security token from the server. Implementations MAY choose to improve the performance of security token verification by emitting a GetFsTrustInformation request and caching the data from the response prior to receiving a security token from the server.<2>
 
 The following sections describe the client processing for the request and response messages.
 
 <a id="Section_3.2.4.1.1"></a>
 ##### 3.2.4.1.1 GetFsTrustInformationSoapIn Processing
 
-As described in section [3.2.3.1](#Section_3.2.4.1), the client MUST include the current policy version number and corresponding GUID in the request.
+As described in section [3.2.3.1](#Section_3.2.3.1), the client MUST include the current policy version number and corresponding GUID in the request.
 
 <a id="Section_3.2.4.1.2"></a>
 ##### 3.2.4.1.2 GetFsTrustInformationSoapOut Processing
@@ -1110,12 +1110,12 @@ GetFsTrustInformation response processing can be divided into version processing
 <a id="Section_3.2.4.1.2.1"></a>
 ###### 3.2.4.1.2.1 Versioning
 
-As detailed in section [3.1.4.1.1.3](#Section_3.1.4.1.1.3), the response MUST contain a version number and GUID representing the configuration data described in section [3.1.1.1](#Section_3.2.4.1). This version number and GUID MUST be compared to the locally cached information. If the GUID from the response is different from the GUID cached locally, then the response contains newer data that MUST be used instead of the locally cached data. If the response GUID and locally cached GUID are identical, but the locally cached version number is smaller than the response version number, then the response contains newer data that MUST be used instead of the locally cached data. If there is no locally cached data, the version number and GUID SHOULD be cached for use in processing future server responses.
+As detailed in section [3.1.4.1.1.3](#Section_3.1.4.1.1.3), the response MUST contain a version number and GUID representing the configuration data described in section [3.1.1.1](#Section_3.1.1.1). This version number and GUID MUST be compared to the locally cached information. If the GUID from the response is different from the GUID cached locally, then the response contains newer data that MUST be used instead of the locally cached data. If the response GUID and locally cached GUID are identical, but the locally cached version number is smaller than the response version number, then the response contains newer data that MUST be used instead of the locally cached data. If there is no locally cached data, the version number and GUID SHOULD be cached for use in processing future server responses.
 
 <a id="Section_3.2.4.1.2.2"></a>
 ###### 3.2.4.1.2.2 Certificates
 
-The abstract data model for the certificates is described in section [3.2.3.1](#Section_3.2.4.1). The Federation Certificates data described in section 3.2.3.1 MUST include at least one X.509 certificate. The Trusted Certificates data described in section 3.2.3.1 MUST include at least one identifier that matches an X.509 certificate found in the Federation Certificates data. Each X.509 certificate from Federation Certificates that is identified in Trusted Certificates is stored locally as a way to verify [**security token**](#gt_security-token) signatures from the server. [MS-MWBF](../MS-MWBF/MS-MWBF.md) (section 5.1.2) describes a method to perform the verification.
+The abstract data model for the certificates is described in section [3.2.3.1](#Section_3.2.3.1). The Federation Certificates data described in section 3.2.3.1 MUST include at least one X.509 certificate. The Trusted Certificates data described in section 3.2.3.1 MUST include at least one identifier that matches an X.509 certificate found in the Federation Certificates data. Each X.509 certificate from Federation Certificates that is identified in Trusted Certificates is stored locally as a way to verify [**security token**](#gt_security-token) signatures from the server. [MS-MWBF](../MS-MWBF/MS-MWBF.md) (section 5.1.2) describes a method to perform the verification.
 
 The Revocation Flags data described in section 3.2.3.1 is stored locally. The semantics of this data are described in the following table.
 
@@ -2534,7 +2534,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 3.2.3.1: After the data described in section [3.1.1.1](#Section_3.2.4.1) is obtained for the first time via a GetFsTrustInformation exchange, Windows maintains a cached copy of the data described in section 3.1.1.1.
+<1> Section 3.2.3.1: After the data described in section [3.1.1.1](#Section_3.1.1.1) is obtained for the first time via a GetFsTrustInformation exchange, Windows maintains a cached copy of the data described in section 3.1.1.1.
 
 <2> Section 3.2.4.1: Windows emits a GetFsTrustInformation request when the client service is started, and caches the data from the response. If for some reason there is not a cached version of the data described in section 3.1.1.1 available when a [**security token**](#gt_security-token) is received, Windows will attempt to obtain the data again by emitting a GetFsTrustInformation request upon receipt of the security token.
 

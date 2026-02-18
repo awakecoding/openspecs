@@ -382,17 +382,17 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_3.1.5.8.3)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
-[MS-MQBR] Microsoft Corporation, "[Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm](#Section_1.3.1)".
+[MS-MQBR] Microsoft Corporation, "[Message Queuing (MSMQ): Binary Reliable Message Routing Algorithm](../MS-MQBR/MS-MQBR.md)".
 
-[MS-MQDMPR] Microsoft Corporation, "[Message Queuing (MSMQ): Common Data Model and Processing Rules](#Section_1.3.1)".
+[MS-MQDMPR] Microsoft Corporation, "[Message Queuing (MSMQ): Common Data Model and Processing Rules](../MS-MQDMPR/MS-MQDMPR.md)".
 
-[MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](#Section_1.3.1)".
+[MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](../MS-MQDSSM/MS-MQDSSM.md)".
 
-[MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](#Section_1.3.1)".
+[MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](../MS-MQDS/MS-MQDS.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_1.3.1)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
 [MS-PAC] Microsoft Corporation, "[Privilege Attribute Certificate Data Structure](../MS-PAC/MS-PAC.md)".
 
@@ -427,7 +427,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [LDAP] Microsoft Corporation, "About Lightweight Directory Access Protocol", [http://msdn.microsoft.com/en-us/library/aa366075.aspx](https://go.microsoft.com/fwlink/?LinkId=89932)
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3.1)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -494,7 +494,7 @@ Sender identity can be specified by including an [**X.509**](#gt_x509) digital c
 
 A [**queue**](#gt_queue) is a logical data structure containing an ordered list of zero or more [**messages**](#gt_message). A [**queue manager**](#gt_queue-manager-qm) maintains a set of queues that hold messages. The queue manager requires a set of predefined or system queues (defined following) that are referenced throughout this document. A queue manager configuration defines a set of user queues that are the typical targets for messages sent via the Message Queuing (MSMQ): Message Queuing Binary Protocol.
 
-Messages transferred using this protocol are addressed to specific queues by name. This protocol identifies queues by using the formats specified in [MS-MQMQ](#Section_1.3.1) section 2.1. This protocol does not mandate the implementation details of queues as long as their external behaviors are consistent with those described in this document.
+Messages transferred using this protocol are addressed to specific queues by name. This protocol identifies queues by using the formats specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1. This protocol does not mandate the implementation details of queues as long as their external behaviors are consistent with those described in this document.
 
 A queue can be transactional or non-transactional. A [**transactional queue**](#gt_transactional-queue) accepts only [**transactional messages**](#gt_transactional-message), while a non-transactional queue accepts only express and recoverable messages. A transactional queue requires persistent storage of messages and guaranteed consistency through process or node failure, while a non-transactional queue requires persistent storage of messages but does not require guaranteed consistency through process or node failures.
 
@@ -578,7 +578,7 @@ A report message contains the following information:
 
 [**Message Queuing**](#gt_microsoft-message-queuing-msmq) always attempts to establish a direct connection, or session, with the destination [**queue manager**](#gt_queue-manager-qm) using the underlying TCP or SPX network protocol. If a direct connection is not possible due to lack of IP connectivity, Message Queuing servers with routing enabled (routing servers) can temporarily store messages and subsequently forward them to the destination computer or to another routing server.
 
-Routing servers utilize this protocol to forward messages, via direct connections, to queue managers that are part of the route to a destination queue manager. This protocol utilizes the Binary Reliable Message Routing Algorithm specified in [MS-MQBR](#Section_1.3.1) to process messages that require routing.
+Routing servers utilize this protocol to forward messages, via direct connections, to queue managers that are part of the route to a destination queue manager. This protocol utilizes the Binary Reliable Message Routing Algorithm specified in [MS-MQBR](../MS-MQBR/MS-MQBR.md) to process messages that require routing.
 
 <a id="Section_1.3.8"></a>
 ### 1.3.8 Typical Scenario
@@ -598,9 +598,9 @@ The preceding diagram shows the relationship between the branch office laptop an
 
 The Message Queuing (MSMQ): Message Queuing Binary Protocol depends upon direct TCP/IP or IPX/SPX to provide a reliable stream-oriented transport for messages. The protocol uses UDP or SPX to determine server availability.
 
-This protocol uses shared state and processing rules defined in Message Queuing (MSMQ): Common Data Model and Processing Rules [MS-MQDMPR](#Section_1.3.1).
+This protocol uses shared state and processing rules defined in Message Queuing (MSMQ): Common Data Model and Processing Rules [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md).
 
-The protocol relies upon the Binary Reliable Message Routing Algorithm specified in [MS-MQBR](#Section_1.3.1) to process messages sent using public and private [**format names**](#gt_format-name).
+The protocol relies upon the Binary Reliable Message Routing Algorithm specified in [MS-MQBR](../MS-MQBR/MS-MQBR.md) to process messages sent using public and private [**format names**](#gt_format-name).
 
 The protocol relationships are described in the following diagram.
 
@@ -656,7 +656,7 @@ A client exchanges [**messages**](#gt_message) with a server over a protocol ses
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Protocol Session
 
-A protocol session is a TCP or an SPX connection used to send **UserMessage Packet**s ([MS-MQMQ](#Section_1.3.1) section 2.2.20), which contain application-defined messages and internal packets between a local and remote [**queue manager**](#gt_queue-manager-qm). The protocol session begins with an [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3) and [ConnectionParameters Packet (section 2.2.2)](#Section_2.2.2) exchange to initialize the session. From that point, **UserMessage Packet**s can be sent in either direction and are acknowledged by [SessionAck Packets (section 2.2.6)](#Section_2.2.6), [OrderAck Packets (section 2.2.4)](#Section_2.2.4), and [FinalAck Packets (section 2.2.5)](#Section_2.2.5) as required.
+A protocol session is a TCP or an SPX connection used to send **UserMessage Packet**s ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20), which contain application-defined messages and internal packets between a local and remote [**queue manager**](#gt_queue-manager-qm). The protocol session begins with an [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3) and [ConnectionParameters Packet (section 2.2.2)](#Section_2.2.2) exchange to initialize the session. From that point, **UserMessage Packet**s can be sent in either direction and are acknowledged by [SessionAck Packets (section 2.2.6)](#Section_2.2.6), [OrderAck Packets (section 2.2.4)](#Section_2.2.4), and [FinalAck Packets (section 2.2.5)](#Section_2.2.5) as required.
 
 The packets supported within a protocol session are the ConnectionParameters Packet, the EstablishConnection Packet, the **UserMessage Packet**, the SessionAck Packet, the OrderAck Packet, and the FinalAck Packet. Each of these packets MUST begin with a BaseHeader ([MS-MQMQ] section 2.2.19.1), which contains information such as packet type, signature, and packet size. The header is followed by one or more headers, depending on the packet type.
 
@@ -681,7 +681,7 @@ The Message Queuing (MSMQ): Message Queuing Binary Protocol uses [**little-endia
 This protocol uses the following data types:
 
 - **GUID** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.2)
-- **TxSequenceID** ([MS-MQMQ](#Section_1.3.1) section 2.2.18.1.2)
+- **TxSequenceID** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.2)
 - **MessageIdentifier** ([MS-MQMQ] section 2.2.18.1.3)
 - **MQFFormatNameElement** ([MS-MQMQ] section 2.2.18.1.4)
 This protocol uses the following headers:
@@ -778,7 +778,7 @@ packet-beta
   128-223: "ConnectionParametersHeader"
 ```
 
-**BaseHeader (16 bytes):** A BaseHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.19.1). The **BaseHeader.Flags.IN** field MUST be set to indicate that this packet is an internal message.
+**BaseHeader (16 bytes):** A BaseHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.19.1). The **BaseHeader.Flags.IN** field MUST be set to indicate that this packet is an internal message.
 
 **InternalHeader (4 bytes):** An [InternalHeader (section 2.2.1)](#Section_2.2.1). The **InternalHeader.Flags.PT** field MUST be set to 0x3.
 
@@ -797,7 +797,7 @@ packet-beta
   80-95: "WindowSize"
 ```
 
-**RecoverableAckTimeout (4 bytes):** A 32-bit unsigned long integer that specifies the minimum time, in milliseconds, that the protocol waits before sending a [SessionAck Packet (section 2.2.6)](#Section_2.2.6) acknowledgment after receiving a recoverable **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20). This field has a valid range from 0x000001F4 to 0x0001D4C0, inclusive.
+**RecoverableAckTimeout (4 bytes):** A 32-bit unsigned long integer that specifies the minimum time, in milliseconds, that the protocol waits before sending a [SessionAck Packet (section 2.2.6)](#Section_2.2.6) acknowledgment after receiving a recoverable **UserMessage Packet** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20). This field has a valid range from 0x000001F4 to 0x0001D4C0, inclusive.
 
 **AckTimeout (4 bytes):** A 32-bit unsigned long integer that specifies the time, in milliseconds, that the protocol waits for a SessionAck Packet before closing the session. This field has a valid range from 0x00004E20 to 0x0001D4C0, inclusive.
 
@@ -817,7 +817,7 @@ packet-beta
   128-223: "EstablishConnectionHeader (552 bytes)"
 ```
 
-**BaseHeader (16 bytes):** A BaseHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.19.1). The **BaseHeader.Flags.IN** field MUST be set to indicate that this packet is an internal message.
+**BaseHeader (16 bytes):** A BaseHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.19.1). The **BaseHeader.Flags.IN** field MUST be set to indicate that this packet is an internal message.
 
 **InternalHeader (4 bytes):** An [InternalHeader (section 2.2.1)](#Section_2.2.1). The **InternalHeader.Flags.PT** field MUST be set to 0x2.
 
@@ -908,7 +908,7 @@ packet-beta
   160-223: "MessagePropertiesHeader (variable)"
 ```
 
-**BaseHeader (16 bytes):** A BaseHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.19.1). The **BaseHeader.Flags** field MUST have all bits set to 0.
+**BaseHeader (16 bytes):** A BaseHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.19.1). The **BaseHeader.Flags** field MUST have all bits set to 0.
 
 **UserHeader (variable):** A UserHeader ([MS-MQMQ] section 2.2.19.2). The **Flags.MP** flag MUST be set to 0x1 to indicate that a MessagePropertiesHeader ([MS-MQMQ] section 2.2.19.3) is included. All other bits MUST be set to 0 except **Flags.DQ**, which MUST be set either to 0x3 or to 0x7. If **Flags.DQ** is 0x3, the **DestinationQueue** field MUST be a PrivateQueueFormatNameId ([MS-MQMQ] section 2.2.18.1.5.1) with **PrivateQueueIdentifier** set to 0x00000004. If **Flags.DQ** is 0x7, the **DestinationQueue** field MUST be a DirectQueueFormatName ([MS-MQMQ] section 2.2.18.1.5.2) with **DirectFormatName** set to a string in the format specified by the following ABNF rules.
 
@@ -945,7 +945,7 @@ packet-beta
   128-223: "Reserved (20 bytes)"
 ```
 
-**TxSequenceID (8 bytes):** A transactional [**sequence**](#gt_sequence) identifier, TxSequenceID ([MS-MQMQ](#Section_1.3.1) section 2.2.18.1.2). This value MUST be set to the transactional sequence identifier of the [**message**](#gt_message) being acknowledged.
+**TxSequenceID (8 bytes):** A transactional [**sequence**](#gt_sequence) identifier, TxSequenceID ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.2). This value MUST be set to the transactional sequence identifier of the [**message**](#gt_message) being acknowledged.
 
 **TxSequenceNumber (4 bytes):** A 32-bit unsigned integer specifying a transactional sequence number that represents the order of a message within a transactional sequence. This value MUST be set to the transactional sequence number of the message being acknowledged. This field has a valid range from 0x00000001 to 0xFFFFFFFF.
 
@@ -958,7 +958,7 @@ packet-beta
 
 The FinalAck Packet contains a stand-alone transactional acknowledgment [**message**](#gt_message) that is sent to the original sender in one of two situations: either when a transactional message is rejected by the receiver; or when an accepted transactional message with a **UserHeader.Flags.JN** or a **UserHeader.Flags.JP** field set to 0x1 is removed from the destination [**queue**](#gt_queue).
 
-The packet can represent a positive or negative acknowledgment. The **MessageClass** field of the contained MessagePropertiesHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.19.3) packet defines the type of acknowledgment. The FinalAck Packet is an end-to-end acknowledgment.
+The packet can represent a positive or negative acknowledgment. The **MessageClass** field of the contained MessagePropertiesHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.19.3) packet defines the type of acknowledgment. The FinalAck Packet is an end-to-end acknowledgment.
 
 ```mermaid
 packet-beta
@@ -1017,7 +1017,7 @@ packet-beta
   224-255: "MessageID"
 ```
 
-**TxSequenceID (8 bytes):** A TxSequenceID specifying a transactional [**sequence**](#gt_sequence) identifier. This value MUST be the transactional sequence identifier of the [**message**](#gt_message) being acknowledged. For more details, see the definition of TxSequenceID in [MS-MQMQ](#Section_1.3.1) section 2.2.18.1.2.
+**TxSequenceID (8 bytes):** A TxSequenceID specifying a transactional [**sequence**](#gt_sequence) identifier. This value MUST be the transactional sequence identifier of the [**message**](#gt_message) being acknowledged. For more details, see the definition of TxSequenceID in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.2.
 
 **TxSequenceNumber (4 bytes):** A 32-bit unsigned integer specifying a transactional sequence number that represents the order of a message within a transactional sequence. This value MUST be set to the transactional sequence number of the message being acknowledged. This field has a valid range from 0x00000001 to 0xFFFFFFFF, inclusive.
 
@@ -1030,7 +1030,7 @@ packet-beta
 <a id="Section_2.2.6"></a>
 ### 2.2.6 SessionAck Packet
 
-The SessionAck Packet contains a session acknowledgment. This packet acknowledges express and recoverable UserMessage Packets ([MS-MQMQ](#Section_1.3.1) section 2.2.20) that have been received on the session.
+The SessionAck Packet contains a session acknowledgment. This packet acknowledges express and recoverable UserMessage Packets ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) that have been received on the session.
 
 ```mermaid
 packet-beta
@@ -1072,7 +1072,7 @@ Where the bits are defined as:
 
 | Value | Description |
 | --- | --- |
-| RC | Specifies the type of the initiator. An initiator MUST set this field in a **Ping Request**, as defined in Ping Message (section 2.1.2), if the **OperatingSystemType** ADM attribute of the **QueueManager** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.1) ADM element is neither **WinServer** nor **WinEnt**; otherwise, this field MUST NOT be set. An acceptor MUST set this field in a **Ping Response**, as defined in Ping Message (section 2.1.2), to the value of this field in the **Ping Request** from the initiator. |
+| RC | Specifies the type of the initiator. An initiator MUST set this field in a **Ping Request**, as defined in Ping Message (section 2.1.2), if the **OperatingSystemType** ADM attribute of the **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1) ADM element is neither **WinServer** nor **WinEnt**; otherwise, this field MUST NOT be set. An acceptor MUST set this field in a **Ping Response**, as defined in Ping Message (section 2.1.2), to the value of this field in the **Ping Request** from the initiator. |
 | RF | An acceptor MUST set this field in a **Ping Response** if it would currently refuse a protocol session over TCP or SPX from this initiator; otherwise, the field MUST be clear if a protocol session would be accepted. An initiator MUST clear this field in a **Ping Request**. |
 | X | Unused bit field. MAY be set when sent and MUST be ignored on receipt. |
 | X | Unused bit field. MAY be set when sent and MUST be ignored on receipt. |
@@ -1100,7 +1100,7 @@ When sending a **Ping Response**, an acceptor MUST set this field to the **Cooki
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a directory. This protocol SHOULD<20> access the directory using the algorithm specified in [MS-MQDSSM](#Section_1.3.1) and using LDAP as specified in [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932) and [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4. <21>
+This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a directory. This protocol SHOULD<20> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP as specified in [[LDAP]](https://go.microsoft.com/fwlink/?LinkId=89932) and [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4. <21>
 
 <a id="Section_2.4"></a>
 ## 2.4 Cryptographic Data Structures
@@ -1164,7 +1164,7 @@ packet-beta
 | Variable | RC2 | 0x00006602 |
 | Variable | RC4 | 0x00006801 |
 
-**encryptedKey (256 bytes):** The session key, encrypted with one of the receiver's public keys using the RSAES-PKCS1-v1_5 encryption scheme specified in [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) section 7.2 and encoded in little-endian format. See section [3.1.7.1.5](#Section_3.1.7.1.5.2) for more information on how the receiver's public keys are retrieved and how a specific key is chosen.
+**encryptedKey (256 bytes):** The session key, encrypted with one of the receiver's public keys using the RSAES-PKCS1-v1_5 encryption scheme specified in [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409) section 7.2 and encoded in little-endian format. See section [3.1.7.1.5](#Section_3.1.7.1.5) for more information on how the receiver's public keys are retrieved and how a specific key is chosen.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -1179,7 +1179,7 @@ The Message Queuing (MSMQ): Message Queuing Binary Protocol is often described a
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](#Section_1.3.1) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3.1).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are co-located at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.1.1.2](#Section_3.1.1.2) specifies the elements from the shared data model that are manipulated by this protocol. Sections [3.1.1.3](#Section_3.1.1.3) through [3.1.1.5](#Section_3.1.1.5) specify the data model elements that are private to this protocol.
 
@@ -1266,7 +1266,7 @@ Figure 11: Initiator ping mechanism state
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 Shared Data Elements
 
-This protocol manipulates the following ADM elements and ADM attributes from the shared abstract data model defined in [MS-MQDMPR](#Section_1.3.1) section 3.1.1.
+This protocol manipulates the following ADM elements and ADM attributes from the shared abstract data model defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.
 
 The **QueueManager** ([MS-MQDMPR] section 3.1.1.1) ADM element.
 
@@ -1299,7 +1299,7 @@ The protocol MUST maintain these global ADM elements:
 
 **SendSymmetricKeyCacheSize:** An integer indicating the maximum number of entries in the **SendSymmetricKeyCache** ADM element and in the **SendBaseSymmetricKeyCache** ADM element.
 
-**SymmetricKeyShortLifetime:** An integer indicating the lifetimes in milliseconds of **CachedSymmetricKey** ADM element instances, as described in sections [3.1.6.10](#Section_3.1.6.10) through [3.1.6.12](#Section_3.1.6.12), section [3.1.5.8.3](#Section_3.1.5.8.3), and section [3.1.7.1.5](#Section_3.1.7.1.5.2).
+**SymmetricKeyShortLifetime:** An integer indicating the lifetimes in milliseconds of **CachedSymmetricKey** ADM element instances, as described in sections [3.1.6.10](#Section_3.1.6.10) through [3.1.6.12](#Section_3.1.6.12), section [3.1.5.8.3](#Section_3.1.5.8.3), and section [3.1.7.1.5](#Section_3.1.7.1.5).
 
 **SymmetricKeyLongLifetime:** An integer indicating the lifetimes in milliseconds of **CachedSymmetricKey** ADM element instances.
 
@@ -1333,7 +1333,7 @@ The protocol MUST maintain these global ADM elements:
 
 **MessageIDHistoryTable:** A table that contains **MessageIDHistoryEntry** ADM element instances. This table provides a lightweight duplicate elimination mechanism. For more information, see [Duplicate Detection (section 3.1.5.8.1)](#Section_3.1.5.8.1). The length of history that this table maintains is implementation-dependent; however, it MUST NOT contain more than 4,294,967,296 entries, because that is the point at which the **MessageIdOrdinal** ADM element value rolls over, and values can be reused. This table MUST be initialized to an empty table. This value SHOULD<25> survive process and node failures.
 
-**MessageIDHistoryEntry:** An ADM element that contains information about a **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) that has been received by the protocol host. This ADM element MUST contain the following ADM attributes:
+**MessageIDHistoryEntry:** An ADM element that contains information about a **UserMessage Packet** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) that has been received by the protocol host. This ADM element MUST contain the following ADM attributes:
 
 - **MessageIdentifier**: A **MessageIdentifier** ([MS-MQMQ] section 2.2.20) field.
 - **TimeStamp**: A 32-bit unsigned integer that represents the time at which a **UserMessage Packet** was received.
@@ -1341,7 +1341,7 @@ The protocol MUST maintain these global ADM elements:
 
 **PingCookie:** An integer value that MUST uniquely identify individual **Ping Requests**, as defined in [Ping Message (section 2.1.2)](#Section_2.1.2), from this host.<27> For more information, see [Ping Packet (section 2.2.7)](#Section_2.2.7).
 
-**SendInsecureNacks:** A Boolean that indicates whether insecure Nacks are sent, as discussed in section [5.1](#Section_3.1.5.8.3). Insecure Nacks are sent if this value is TRUE, and are not sent if this value is FALSE. This value SHOULD<28> be initialized to FALSE and SHOULD<29> survive process and node failures.
+**SendInsecureNacks:** A Boolean that indicates whether insecure Nacks are sent, as discussed in section [5.1](#Section_5.1). Insecure Nacks are sent if this value is TRUE, and are not sent if this value is FALSE. This value SHOULD<28> be initialized to FALSE and SHOULD<29> survive process and node failures.
 
 **ResendTimeoutsShort:** A DWORD that indicates the number of seconds used to set up the **ResendTimerTable** ADM element in section [3.1.3.1](#Section_3.1.3.1). The value SHOULD<30> be 30 seconds and MUST survive process and node failures.
 
@@ -1362,7 +1362,7 @@ The sender and receiver MUST independently maintain the following ADM elements f
 
 **NextHopIndexer:** A reference to the current item in the **NextHopCollection** ADM element that is used to try to establish a protocol session.
 
-**RemoteQMPublicKey:** An MQDSPUBLICKEYS ([MS-MQMQ](#Section_1.3.1) section 2.2.2) structure that contains the public encryption keys of the remote queue manager.
+**RemoteQMPublicKey:** An MQDSPUBLICKEYS ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.2) structure that contains the public encryption keys of the remote queue manager.
 
 **MessageSentCount:** A 16-bit unsigned integer that is the count of all **UserMessage Packets** ([MS-MQMQ] section 2.2.20) sent on a session. This value is incremented by 1 for each express, recoverable, and transacted **UserMessage Packet** sent.
 
@@ -1380,7 +1380,7 @@ The sender and receiver MUST independently maintain the following ADM elements f
 
 **OutgoingTxSequenceID:** A **TxSequenceID** ([MS-MQMQ] section 2.2.18.1.2) structure that identifies the current outgoing sequence of [**transactional messages**](#gt_transactional-message). Only one sequence is valid at a given time. When updating this value, the queue manager MUST guarantee that the new value is greater than any previously assigned value. This requirement allows the unique identification of an outgoing sequence of transactional messages. The value of **OutgoingTxSequenceID.Ordinal** MUST be set to 0x00000001, and the value of **OutgoingTxSequenceID.Timestamp** MUST be set to an implementation-dependent<35> value that is guaranteed to be greater than any previously generated value. This value MUST survive process and node failures.
 
-**TxMessageRejectCount:** Identifies the number of times that the last **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element instance sent by the remote queue manager was rejected before finally being accepted and placed in the local **Queue** ([MS-MQDMPR] section 3.1.1.2) ADM element instance. This value MUST be initialized to 0x00000000 and MUST survive process and node failures.
+**TxMessageRejectCount:** Identifies the number of times that the last **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance sent by the remote queue manager was rejected before finally being accepted and placed in the local **Queue** ([MS-MQDMPR] section 3.1.1.2) ADM element instance. This value MUST be initialized to 0x00000000 and MUST survive process and node failures.
 
 **OutgoingTxSequenceNumber:** A 32-bit unsigned integer. This ADM element is the sequence number of the next outgoing transactional **UserMessage Packet** to be sent on a session. This value MUST be initialized to 0x00000001 and MUST survive process and node failures.
 
@@ -1408,7 +1408,7 @@ The sender and receiver MUST independently maintain the following ADM elements f
 | WAITING_ECR_MSG | The protocol is waiting for an EstablishConnection Packet response packet. |
 | WAITING_RECONNECT | The protocol is waiting for the [Session Retry Connect Timer Event (section 3.1.6.1)](#Section_3.1.6.1). |
 
-**SessionActive:** A Boolean value that is set to TRUE when there is activity on the session. This value is used by the [Session Cleanup Timer (section 3.1.2.2)](#Section_3.1.2.2) to identify when there has been message activity since the last [Session Cleanup Timer Event (section 3.1.6.2)](#Section_3.1.2.2).
+**SessionActive:** A Boolean value that is set to TRUE when there is activity on the session. This value is used by the [Session Cleanup Timer (section 3.1.2.2)](#Section_3.1.2.2) to identify when there has been message activity since the last [Session Cleanup Timer Event (section 3.1.6.2)](#Section_3.1.6.2).
 
 **ReceivedAck:** A Boolean value that is set to TRUE when there is activity on the session. This value is used by the [Session Ack Wait Timer (section 3.1.2.4)](#Section_3.1.2.4) to identify when there has been message activity since the last [Session Ack Wait Timer Event (section 3.1.6.3)](#Section_3.1.6.3).
 
@@ -1451,7 +1451,7 @@ The preceding conceptual data can be implemented by using a variety of technique
 
 **ResendInterval**: A numeric value that contains the number of seconds that the local queue manager waits for an order acknowledgment before resending the message.
 
-**LastAck**: A SEQUENCE_INFO structure ([MS-MQMQ](#Section_1.3.1) section 2.2.5) that contains sequence information about the last message sent from the local queue manager to the destination queue manager for which an order acknowledgment has been received.
+**LastAck**: A SEQUENCE_INFO structure ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.5) that contains sequence information about the last message sent from the local queue manager to the destination queue manager for which an order acknowledgment has been received.
 
 **ResendTime**: A datetime value that contains the date and time when the local queue manager will attempt to send a message to the destination queue manager again.
 
@@ -1462,8 +1462,8 @@ The preceding conceptual data can be implemented by using a variety of technique
 
 **OutgoingMessagePosition:** This ADM element contains the following ADM attributes:
 
-- **MessagePosition**: A **MessagePosition** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.11) ADM element instance.
-- **UserMessage**: A **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) structure.
+- **MessagePosition**: A **MessagePosition** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.11) ADM element instance.
+- **UserMessage**: A **UserMessage Packet** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) structure.
 - **SequenceNumber**: A 16-bit unsigned integer representing the session [**sequence**](#gt_sequence) number.
 - **RecoverableSequenceNumber**: A 16-bit unsigned integer that specifies the sequence number of the recoverable **UserMessage Packet** referenced by the **UserMessage** ADM attribute within a stream of recoverable **UserMessage Packet**s that are sent on the same session identified by the **SequenceNumber** ADM attribute. This ADM attribute, along with the **SequenceNumber** ADM attribute, uniquely identifies a **UserMessage Packet** sent on a particular session. A value of zero indicates that the **UserMessage Packet** is not recoverable.
 - **TxSequenceNumber**: A 32-bit unsigned integer. This ADM attribute is the sequence number of the last outgoing transactional **UserMessage Packet** sent on a session. The value zero indicates that no transactional **UserMessage Packets** have been sent on the current sequence. This value MUST survive process and node failures.
@@ -1508,7 +1508,7 @@ Used by senders and receivers, this ADM element stores information about symmetr
 
 This ADM element stores information about a user [**certificate**](#gt_certificate) and contains the following ADM attributes:
 
-**UserCert:** An MQUSERSIGNCERT ([MS-MQMQ](#Section_1.3.1) section 2.2.22) structure.
+**UserCert:** An MQUSERSIGNCERT ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.22) structure.
 
 **SecurityID:** A [**security identifier (SID)**](#gt_security-identifier-sid) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2) that identifies the owner of the certificate.
 
@@ -1517,7 +1517,7 @@ This ADM element stores information about a user [**certificate**](#gt_certifica
 <a id="Section_3.1.1.4"></a>
 #### 3.1.1.4 Session Message Sequence
 
-The set of **UserMessage Packets** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) sent over a session represents a [**message**](#gt_message) [**sequence**](#gt_sequence). There is a local-to-remote and remote-to-local sequence. These bidirectional message sequences exist for the lifetime of the session. Both the sender and receiver maintain counts of the **UserMessage Packets** sent and received. A message is associated with a sequence number that corresponds to its position within the sequence. Sequence numbers MUST begin with 1 and increment by 1 with each subsequent message. For example, the third message sent on the session will have a sequence number of 3.
+The set of **UserMessage Packets** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) sent over a session represents a [**message**](#gt_message) [**sequence**](#gt_sequence). There is a local-to-remote and remote-to-local sequence. These bidirectional message sequences exist for the lifetime of the session. Both the sender and receiver maintain counts of the **UserMessage Packets** sent and received. A message is associated with a sequence number that corresponds to its position within the sequence. Sequence numbers MUST begin with 1 and increment by 1 with each subsequent message. For example, the third message sent on the session will have a sequence number of 3.
 
 Both the sender and receiver also maintain counts of recoverable **UserMessage Packets** transferred and associate recoverable sequence numbers to those messages. For example, the fifth recoverable message sent on a session will have a sequence number of 5.
 
@@ -1544,15 +1544,15 @@ The receiver utilizes session sequence numbers when acknowledging receipt of exp
 <a id="Section_3.1.1.5"></a>
 #### 3.1.1.5 Transactional Message Sequence
 
-To provide EOIO guarantees for [**transactional messages**](#gt_transactional-message), the protocol organizes transactional **UserMessage Packet**s ([MS-MQMQ](#Section_1.3.1) section 2.2.20) into transactional [**sequences**](#gt_sequence). A transactional message sequence is independent of the session [**message**](#gt_message) sequence of section [3.1.1.4](#Section_3.1.1.4). A transactional message is identified by a sequence number and a transactional sequence identifier pair. The transactional sequence identifier identifies the transaction, and the sequence number identifies the order of the message in that transaction. The first message within a transactional sequence is assigned a sequence number of 1. Only one transactional sequence is active at a given time.
+To provide EOIO guarantees for [**transactional messages**](#gt_transactional-message), the protocol organizes transactional **UserMessage Packet**s ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) into transactional [**sequences**](#gt_sequence). A transactional message sequence is independent of the session [**message**](#gt_message) sequence of section [3.1.1.4](#Section_3.1.1.4). A transactional message is identified by a sequence number and a transactional sequence identifier pair. The transactional sequence identifier identifies the transaction, and the sequence number identifies the order of the message in that transaction. The first message within a transactional sequence is assigned a sequence number of 1. Only one transactional sequence is active at a given time.
 
-The protocol maintains the following transactional sequence state for each session, as specified in section [3.1.1.3.1](#Section_3.1.1.3.1.3):
+The protocol maintains the following transactional sequence state for each session, as specified in section [3.1.1.3.1](#Section_3.1.1.3.1):
 
 - **OutgoingTxSequenceID**: A **TxSequenceID** ([MS-MQMQ] section 2.2.18.1.2) that identifies the current outgoing sequence of transactional messages.
 - **OutgoingTxSequenceNumber**: A 32-bit unsigned integer. This ADM element is the sequence number of the next outgoing transactional **UserMessage Packet** to be sent on this session.
 - **IncomingTxSequenceID**: A value that identifies the last incoming transactional message sequence.
 - **IncomingTxSequenceNumber**: A 32-bit unsigned integer that identifies the sequence number of the last transactional **UserMessage Packet** received on this session.
-- **TxMessageRejectCount**: The number of times that the last **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) sent by the remote [**queue manager**](#gt_queue-manager-qm) was rejected before finally being accepted and placed in the local **Queue** ([MS-MQDMPR] section 3.1.1.2).
+- **TxMessageRejectCount**: The number of times that the last **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) sent by the remote [**queue manager**](#gt_queue-manager-qm) was rejected before finally being accepted and placed in the local **Queue** ([MS-MQDMPR] section 3.1.1.2).
 A transactional **UserMessage Packet** contains a **TransactionHeader** ([MS-MQMQ] section 2.2.20.5) that specifies the message sequence ID, sequence number, and the sequence number of the previous message in the sequence. This information allows the receiver to determine whether a message is in order and to identify duplicates.
 
 Because messages can expire, gaps are allowed in the transactional sequence numbers. The **TransactionHeader** includes the previous sequence number so that the receiver can determine whether the received message follows the prior transactional message that was received.
@@ -1585,9 +1585,9 @@ The sender retransmits unacknowledged messages if it does not receive an acknowl
 <a id="Section_3.1.1.6.1"></a>
 ##### 3.1.1.6.1 Session Acknowledgment
 
-Session acknowledgments related to the session [**message**](#gt_message) [**sequence**](#gt_sequence) are specified in [Session Message Sequence (section 3.1.1.7)](#Section_3.1.1.4).
+Session acknowledgments related to the session [**message**](#gt_message) [**sequence**](#gt_sequence) are specified in [Session Message Sequence (section 3.1.1.7)](#Section_3.1.1.7).
 
-A session acknowledgment is sent from the receiver to the sender either as a stand-alone [SessionAck Packet](#Section_2.2.6) or as a SessionHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.20.4) included inside a UserMessage Packet ([MS-MQMQ] section 2.2.20). The purpose of a session acknowledgment is to notify the sender that the receiver has received messages from the sender, and, in the case of recoverable messages, has persisted them for reliable recovery.
+A session acknowledgment is sent from the receiver to the sender either as a stand-alone [SessionAck Packet](#Section_2.2.6) or as a SessionHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.4) included inside a UserMessage Packet ([MS-MQMQ] section 2.2.20). The purpose of a session acknowledgment is to notify the sender that the receiver has received messages from the sender, and, in the case of recoverable messages, has persisted them for reliable recovery.
 
 The **SessionHeader.AckSequenceNumber** field specifies the total number of messages that have been received on the session. The sender SHOULD<38> discard its local copy of express messages up to the position in the sequence specified by the receiver.
 
@@ -1600,7 +1600,7 @@ The receiver sends session acknowledgments to the sender at intervals defined by
 
 Transactional acknowledgments related to the Transactional Message Sequence are specified in [Transactional Message Sequence (section 3.1.1.5)](#Section_3.1.1.5).
 
-Transactional acknowledgments are end-to-end acknowledgments. Processing of transactional [**sequences**](#gt_sequence) MUST be done only by the original sender [**queue manager**](#gt_queue-manager-qm) and the final destination queue manager. An intermediate queue manager that receives a [Transactional Message](#Section_1.3.2.1.3) MUST pass the **TransactionHeader** ([MS-MQMQ](#Section_1.3.1) section 2.2.20.5) to the next destination but MUST NOT perform any processing related to the transactional sequence.
+Transactional acknowledgments are end-to-end acknowledgments. Processing of transactional [**sequences**](#gt_sequence) MUST be done only by the original sender [**queue manager**](#gt_queue-manager-qm) and the final destination queue manager. An intermediate queue manager that receives a [Transactional Message](#Section_1.3.2.1.3) MUST pass the **TransactionHeader** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.5) to the next destination but MUST NOT perform any processing related to the transactional sequence.
 
 A transactional acknowledgment is sent from the final destination to the sender in the form of an [OrderAck Packet (section 2.2.4)](#Section_2.2.4). The purpose of a transactional acknowledgment is to notify the original sender that the final destination has received a Transactional Message and has persisted it for reliable recovery.
 
@@ -1641,7 +1641,7 @@ The following [**sequence**](#gt_sequence) diagram demonstrates the sending of e
 
 Figure 13: Sequence for express messages
 
-The sender sends three express UserMessage Packets ([MS-MQMQ](#Section_1.3.1) section 2.2.20) to the receiver. The receiver acknowledges receipt of the UserMessage Packets by sending a [SessionAck Packet (section 2.2.6)](#Section_2.2.6) after a delay to allow batching of the session acknowledgments.
+The sender sends three express UserMessage Packets ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) to the receiver. The receiver acknowledges receipt of the UserMessage Packets by sending a [SessionAck Packet (section 2.2.6)](#Section_2.2.6) after a delay to allow batching of the session acknowledgments.
 
 After an inactivity time-out, the session is closed by either side by performing the steps listed in section [3.1.5.9](#Section_3.1.5.9). The protocol does not exchange packets as part of session closure.
 
@@ -1654,7 +1654,7 @@ The following [**sequence**](#gt_sequence) diagram demonstrates the sending of a
 
 Figure 14: Sequence for transactional messages
 
-The sender sends a transactional UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) to the receiver with positive source journaling enabled. The receiver responds by sending an [OrderAck Packet (section 2.2.4)](#Section_2.2.4). The purpose of the OrderAck Packet is to acknowledge that the transactional message was received in the correct order and was not a duplicate. The sender sends another transactional UserMessage Packet and the receiver acknowledges it with an OrderAck Packet response.
+The sender sends a transactional UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) to the receiver with positive source journaling enabled. The receiver responds by sending an [OrderAck Packet (section 2.2.4)](#Section_2.2.4). The purpose of the OrderAck Packet is to acknowledge that the transactional message was received in the correct order and was not a duplicate. The sender sends another transactional UserMessage Packet and the receiver acknowledges it with an OrderAck Packet response.
 
 The receiver sends a [SessionAck Packet (section 2.2.6)](#Section_2.2.6) that contains a session acknowledgment of both UserMessage Packets. It is important to note that session acknowledgments and transactional acknowledgments are separate mechanisms that serve different purposes.
 
@@ -1669,7 +1669,7 @@ After an inactivity time-out, the session is closed by either side by performing
 
 The Message Queuing (MSMQ): Message Queuing Binary Protocol MUST maintain the following timers, described in the following sections:
 
-- [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.1.7.1)
+- [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.2.1)
 - [Session Cleanup Timer (section 3.1.2.2)](#Section_3.1.2.2)
 - [Session Retry Connect Timer (section 3.1.2.3)](#Section_3.1.2.3)
 - [Session Ack Wait Timer (section 3.1.2.4)](#Section_3.1.2.4)
@@ -1686,7 +1686,7 @@ This timer regulates the amount of time that both the [**initiator**](#gt_initia
 <a id="Section_3.1.2.2"></a>
 #### 3.1.2.2 Session Cleanup Timer
 
-This session-specific timer regulates the amount of time that the protocol waits before closing an idle protocol session. If the value of the **SessionActive** ADM element is FALSE when the timer expires, the session is closed. The **SessionActive** ADM element is set to TRUE when a UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) is sent or received by the protocol. The duration of this timer MUST be set based on the system configuration, which is implementation-dependent.<44>
+This session-specific timer regulates the amount of time that the protocol waits before closing an idle protocol session. If the value of the **SessionActive** ADM element is FALSE when the timer expires, the session is closed. The **SessionActive** ADM element is set to TRUE when a UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) is sent or received by the protocol. The duration of this timer MUST be set based on the system configuration, which is implementation-dependent.<44>
 
 <a id="Section_3.1.2.3"></a>
 #### 3.1.2.3 Session Retry Connect Timer
@@ -1696,22 +1696,22 @@ This session-specific timer regulates the amount of time that the protocol waits
 <a id="Section_3.1.2.4"></a>
 #### 3.1.2.4 Session Ack Wait Timer
 
-This session-specific timer regulates the amount of time that the protocol waits for a session acknowledgment before closing the session. The session is closed if the timer elapses while at least one packet is awaiting acknowledgment, and no packet has been received since the previous timer event. Closing the session will cause the [**queue manager**](#gt_queue-manager-qm) to establish a new session and to retransmit the unacknowledged [**messages**](#gt_message). This timer is started when updating a UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20). See section [3.1.7.1.3](#Section_3.1.7.1.3). The duration of this timer MUST be set to a multiple<46> of the **AckWaitTimeout** ADM element.
+This session-specific timer regulates the amount of time that the protocol waits for a session acknowledgment before closing the session. The session is closed if the timer elapses while at least one packet is awaiting acknowledgment, and no packet has been received since the previous timer event. Closing the session will cause the [**queue manager**](#gt_queue-manager-qm) to establish a new session and to retransmit the unacknowledged [**messages**](#gt_message). This timer is started when updating a UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20). See section [3.1.7.1.3](#Section_3.1.7.1.3). The duration of this timer MUST be set to a multiple<46> of the **AckWaitTimeout** ADM element.
 
 <a id="Section_3.1.2.5"></a>
 #### 3.1.2.5 Session Ack Send Timer
 
-This session-specific timer regulates the amount of time that the protocol waits before sending a session acknowledgment to the remote host. This timer is started when the [**queue manager**](#gt_queue-manager-qm) receives a UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) while this timer is not running. This timer is restarted when the queue manager processes a recoverable message (section [3.1.5.8.7](#Section_3.1.5.8.7)). Upon expiration of this timer, the protocol triggers a [Session Ack Send Timer Event (section 3.1.6.4)](#Section_3.1.2.5). During the processing of this event, this timer is started if the **UnackedReceivedMsgCount** ADM element does not equal 0x0000.
+This session-specific timer regulates the amount of time that the protocol waits before sending a session acknowledgment to the remote host. This timer is started when the [**queue manager**](#gt_queue-manager-qm) receives a UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) while this timer is not running. This timer is restarted when the queue manager processes a recoverable message (section [3.1.5.8.7](#Section_3.1.5.8.7)). Upon expiration of this timer, the protocol triggers a [Session Ack Send Timer Event (section 3.1.6.4)](#Section_3.1.6.4). During the processing of this event, this timer is started if the **UnackedReceivedMsgCount** ADM element does not equal 0x0000.
 
 <a id="Section_3.1.2.6"></a>
 #### 3.1.2.6 Transactional Ack Wait Timer
 
-This session-specific timer regulates the amount of time that the protocol waits for an [OrderAck Packet](#Section_2.2.4) before resending transactional messages to the receiver. This timer is started after sending a transactional UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20). The duration of this timer MUST be **TxOutgoingSequence.ResendInterval**. When this timer is set, the value of the scheduled time for the next resend, which is the current time plus **TxOutgoingSequence.ResendInterval**, is stored in **TxOutgoingSequence.ResendTime**.
+This session-specific timer regulates the amount of time that the protocol waits for an [OrderAck Packet](#Section_2.2.4) before resending transactional messages to the receiver. This timer is started after sending a transactional UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20). The duration of this timer MUST be **TxOutgoingSequence.ResendInterval**. When this timer is set, the value of the scheduled time for the next resend, which is the current time plus **TxOutgoingSequence.ResendInterval**, is stored in **TxOutgoingSequence.ResendTime**.
 
 <a id="Section_3.1.2.7"></a>
 #### 3.1.2.7 Order Ack Send Timer
 
-This session-specific timer regulates the amount of time that the protocol waits before sending an Order acknowledgment to the sender. This timer is started when a UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) containing a Transaction Header ([MS-MQMQ] section 2.2.20.5) is received. This timer is restarted when additional [**transactional messages**](#gt_transactional-message) are received and the time elapsed since the value of the **LastOrderAckSendTime** ADM element is less than the value of the **MaximumOrderAckDelay** ADM element.
+This session-specific timer regulates the amount of time that the protocol waits before sending an Order acknowledgment to the sender. This timer is started when a UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) containing a Transaction Header ([MS-MQMQ] section 2.2.20.5) is received. This timer is restarted when additional [**transactional messages**](#gt_transactional-message) are received and the time elapsed since the value of the **LastOrderAckSendTime** ADM element is less than the value of the **MaximumOrderAckDelay** ADM element.
 
 The duration of this timer MUST be set to **OrderAckTimeout**.
 
@@ -1733,17 +1733,17 @@ This timer regulates the amount of time that the protocol waits before removing 
 <a id="Section_3.1.2.11"></a>
 #### 3.1.2.11 SendSymmetricKeyCache Cleanup Timer
 
-This timer regulates the amount of time that the protocol waits before removing expired entries from the **SendSymmetricKeyCache** ADM element. This timer is set either when a [CachedSymmetricKey (section 3.1.1.3.3)](#Section_3.1.1.3.3) ADM element instance is added to the **SendSymmetricKeyCache** ADM element, as specified in section [3.1.7.1.5](#Section_3.1.7.1.5.2), or by the [SendSymmetricKeyCache Cleanup Timer Event (section 3.1.6.11)](#Section_3.1.6.11).
+This timer regulates the amount of time that the protocol waits before removing expired entries from the **SendSymmetricKeyCache** ADM element. This timer is set either when a [CachedSymmetricKey (section 3.1.1.3.3)](#Section_3.1.1.3.3) ADM element instance is added to the **SendSymmetricKeyCache** ADM element, as specified in section [3.1.7.1.5](#Section_3.1.7.1.5), or by the [SendSymmetricKeyCache Cleanup Timer Event (section 3.1.6.11)](#Section_3.1.6.11).
 
 <a id="Section_3.1.2.12"></a>
 #### 3.1.2.12 SendBaseSymmetricKeyCache Cleanup Timer
 
-This timer regulates the amount of time that the protocol waits before removing expired entries from the **SendBaseSymmetricKeyCache** ADM element. This timer is set either when a [CachedSymmetricKey (section 3.1.1.3.3)](#Section_3.1.1.3.3) ADM element instance is added to the **SendBaseSymmetricKeyCache** ADM element, as specified in section [3.1.7.1.5](#Section_3.1.7.1.5.2), or when the [SendBaseSymmetricKeyCache Cleanup Timer Event (section 3.1.6.12)](#Section_3.1.6.12) is processed.
+This timer regulates the amount of time that the protocol waits before removing expired entries from the **SendBaseSymmetricKeyCache** ADM element. This timer is set either when a [CachedSymmetricKey (section 3.1.1.3.3)](#Section_3.1.1.3.3) ADM element instance is added to the **SendBaseSymmetricKeyCache** ADM element, as specified in section [3.1.7.1.5](#Section_3.1.7.1.5), or when the [SendBaseSymmetricKeyCache Cleanup Timer Event (section 3.1.6.12)](#Section_3.1.6.12) is processed.
 
 <a id="Section_3.1.2.13"></a>
 #### 3.1.2.13 UserCertCache Cleanup Timer
 
-This timer regulates the amount of time that the protocol waits before removing expired [CachedUserCert (section 3.1.1.3.4)](#Section_3.1.1.3.4) ADM element instances from the **UserCertCache** ADM element. This timer is set either when a **CachedUserCert** ADM element instance is added to the **UserCertCache** ADM element, as specified in section [3.1.5.8.3](#Section_3.1.5.8.3), or when the [UserCertCache Cleanup Timer Event (section 3.1.6.13)](#Section_3.1.2.13) is processed.
+This timer regulates the amount of time that the protocol waits before removing expired [CachedUserCert (section 3.1.1.3.4)](#Section_3.1.1.3.4) ADM element instances from the **UserCertCache** ADM element. This timer is set either when a **CachedUserCert** ADM element instance is added to the **UserCertCache** ADM element, as specified in section [3.1.5.8.3](#Section_3.1.5.8.3), or when the [UserCertCache Cleanup Timer Event (section 3.1.6.13)](#Section_3.1.6.13) is processed.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -1824,7 +1824,7 @@ The following values MUST be initialized for each session:
 
 In addition to the local events listed in section [3.1.7](#Section_3.1.7), the operation of the Message Queuing (MSMQ): Message Queuing Binary Protocol is initiated and subsequently driven by the following higher-layer triggered events:
 
-- Queue Manager Started ([MS-MQDMPR](#Section_1.3.1) section 3.1.4.1).
+- Queue Manager Started ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.4.1).
 - Queue Manager Stopped ([MS-MQDMPR] section 3.1.4.2).
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Queue Manager Started Event
@@ -1850,7 +1850,7 @@ The **ReceivedAck** session state ADM element MUST be set to TRUE on receipt of 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 Identifying Packet Type
 
-A packet is identified by inspecting the BaseHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.19.1) and possibly subsequent packet headers. The following list describes how to identify each packet type.
+A packet is identified by inspecting the BaseHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.19.1) and possibly subsequent packet headers. The following list describes how to identify each packet type.
 
 [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3)**:** The **BaseHeader.Flags.IN** field MUST be set, and the **InternalHeader.Flags.PT** field MUST be set to 0x2.
 
@@ -1888,14 +1888,14 @@ Establishing a session to a remote queue manager consists of the following [**se
 - [Resolve Host Address (section 3.1.5.2.1)](#Section_3.1.5.2.1)
 - [Ping Mechanism (section 3.1.5.2.2)](#Section_3.1.5.2.2)
 - [Sending an EstablishConnection Request Packet (section 3.1.5.2.3)](#Section_3.1.5.2.3)
-If the session cannot be established with the remote queue manager due to an error in these steps, the protocol MUST append an entry to the **OutgoingQueueReference.ConnectionHistory** array. The **Status** ADM attribute of the array entry MUST be set to the value specified in [MS-MQDMPR](#Section_1.3.1) section 3.1.1.3 that describes the error. If no appropriate value can be used, the **Status** ADM attribute of the array entry MUST be set to **UnknownFailure**. The **ConnectionHistoryTime** ADM attribute of the array entry MUST be set to the current time; the **Error** ADM attribute of the array entry MUST be set to an HRESULT value indicating the error; and the **AddressList** ADM attribute of the array entry MUST be set to the **RemoteQMAddress** ADM element.
+If the session cannot be established with the remote queue manager due to an error in these steps, the protocol MUST append an entry to the **OutgoingQueueReference.ConnectionHistory** array. The **Status** ADM attribute of the array entry MUST be set to the value specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.3 that describes the error. If no appropriate value can be used, the **Status** ADM attribute of the array entry MUST be set to **UnknownFailure**. The **ConnectionHistoryTime** ADM attribute of the array entry MUST be set to the current time; the **Error** ADM attribute of the array entry MUST be set to an HRESULT value indicating the error; and the **AddressList** ADM attribute of the array entry MUST be set to the **RemoteQMAddress** ADM element.
 
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Resolve Host Address
 
 The [**queue manager**](#gt_queue-manager-qm) MUST provide a [**queue**](#gt_queue) [**format name**](#gt_format-name) that specifies the destination queue manager and queue.
 
-The protocol MUST find the **OutgoingQueue** ([MS-MQDMPR](#Section_1.3.1)section 3.1.1.3) ADM element instance in the local **QueueManager.QueueCollection** with a **DestinationFormatName** equal to the provided queue format name.
+The protocol MUST find the **OutgoingQueue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md)section 3.1.1.3) ADM element instance in the local **QueueManager.QueueCollection** with a **DestinationFormatName** equal to the provided queue format name.
 
 The protocol MUST set the **OutgoingQueueReference** ADM element to the found **OutgoingQueue** ADM element instance.
 
@@ -1925,7 +1925,7 @@ If **destinationQmGuid** is not equal to all zero bytes, the protocol MUST obtai
 - For each **QueueManager** ADM element instance, referred to as *rQueueManager*, in the returned *rQueueManager*'s collection, perform the following:
 - Resolve **destinationHostName** to addresses, referred to as *destinationAddresses*, which are usable by the transports specified in section [2.1](#Section_2.1).<55>
 - For each successfully resolved *destinationAddress* in *destinationAddresses*, perform the following:
-- Format the *destinationAddress*, as specified in [MS-MQMQ](#Section_1.3.1) section 2.3.12.12, and add it to the **OutgoingQueueReference.NextHops** collection.
+- Format the *destinationAddress*, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.12.12, and add it to the **OutgoingQueueReference.NextHops** collection.
 - Create a [NextHop (section 3.1.1.3.1.3)](#Section_3.1.1.3.1.3) ADM element instance and perform the following:
 - Set **NextHop.HostName** to *rQueueManager*.**QualifiedComputerName**.
 - Set **NextHop.QMGuid** to *rQueueManager*.**Identifier**.
@@ -1950,7 +1950,7 @@ If the session is not being created in response to a [Session Retry Connect Time
 <a id="Section_3.1.5.2.3"></a>
 ##### 3.1.5.2.3 Sending an EstablishConnection Request Packet
 
-If the [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.1.7.1) is running, the protocol MUST stop the timer before sending an [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3).
+If the [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.2.1) is running, the protocol MUST stop the timer before sending an [EstablishConnection Packet (section 2.2.3)](#Section_2.2.3).
 
 The EstablishConnection Packet MUST be sent to the [**acceptor**](#gt_acceptor) by using the transport settings specified in [Protocol Session (section 2.1.1)](#Section_2.1.1). The following fields MUST be set in the EstablishConnection Packet:
 
@@ -1966,7 +1966,7 @@ The **SessionState** value MUST be set to WAITING_ECR_MSG. An entry MUST be appe
 
 After the EstablishConnection Packet is sent, the protocol MUST start the Session Initialization Timer.
 
-See [Receiving an EstablishConnection Packet (section 3.1.5.3)](#Section_2.2.3) for the next step in session initialization.
+See [Receiving an EstablishConnection Packet (section 3.1.5.3)](#Section_3.1.5.3) for the next step in session initialization.
 
 If the **OutgoingQueueReference.State** is not **OnHold**, **OutgoingQueueReference.State** MUST be set to **Waiting**.
 
@@ -2020,7 +2020,7 @@ The protocol MUST reply to a connection response by sending a [ConnectionParamet
 - The **ConnectionParametersHeader.WindowSize** field MUST be set to the **WindowSize** ADM element.
 The **SessionState** ADM element value MUST be set to WAITING_CPR_MSG. An entry MUST be appended to the **OutgoingQueueReference.ConnectionHistory** array; the **Status** ADM attribute of the array entry MUST be set to **EstablishPacketReceived**; the **ConnectionHistoryTime** ADM attribute of the array entry MUST be set to the current time; the **Error** ADM attribute of the array entry MUST be set to zero; and the **AddressList** ADM attribute of the array entry MUST be set to the **RemoteQMAddress** ADM element.
 
-See [Receiving a ConnectionParameters Packet (section 3.1.5.4)](#Section_2.2.2) for the next step in session initialization.
+See [Receiving a ConnectionParameters Packet (section 3.1.5.4)](#Section_3.1.5.4) for the next step in session initialization.
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receiving a ConnectionParameters Packet
@@ -2046,7 +2046,7 @@ The protocol MUST reply to a connection request by sending a [ConnectionParamete
 - The **ConnectionParametersHeader.RecoverableAckTimeout** field MUST be set to the value of the **ConnectionParametersHeader.RecoverableAckTimeout** field in the received packet.
 - The **ConnectionParametersHeader.AckTimeout** field MUST be set to the value of the **ConnectionParametersHeader.AckTimeout** field in the received packet.
 - The **ConnectionParametersHeader.WindowSize** field MUST be set to the value of the **WindowSize** ADM element.
-The [Session Initialization Timer](#Section_3.1.1.7.1) MUST be stopped. The value of the **SessionState** ADM element MUST be set to OPEN. The session is now initialized and is ready to send or receive UserMessage Packets ([MS-MQMQ](#Section_1.3.1) section 2.2.20).
+The [Session Initialization Timer](#Section_3.1.2.1) MUST be stopped. The value of the **SessionState** ADM element MUST be set to OPEN. The session is now initialized and is ready to send or receive UserMessage Packets ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20).
 
 <a id="Section_3.1.5.4.2"></a>
 ##### 3.1.5.4.2 Response Packet
@@ -2057,8 +2057,8 @@ The **ReceivedWindowSize** ADM element MUST be set to the value of the **Connect
 
 - Clear the **OutgoingQueueReference.NextHops** collection.
 - Get the [NextHop (section 3.1.1.3.1.3)](#Section_3.1.1.3.1.3) ADM element instance of the **NextHopCollection** ADM element, referred to as *iNextHop* and referenced by the **NextHopIterator**.
-- Format *iNextHop*.**Address**, as specified in [MS-MQMQ](#Section_1.3.1) section 2.3.12.12, and add it to the **OutgoingQueueReference.NextHops** collection.
-The [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.1.7.1) MUST be stopped. The value of the **SessionState** ADM element MUST be set to OPEN. An element MUST be appended to the **OutgoingQueueReference.ConnectionHistory** array; the **Status** ADM attribute of the array element MUST be set to **Established**; the **ConnectionHistoryTime** ADM attribute of the array element MUST be set to the current time; the **Error** ADM attribute of the array element MUST be set to zero; and the **AddressList** ADM attribute of the array element MUST be set to the **RemoteQMAddress** ADM element. The session is now initialized and is ready to send or receive **UserMessage Packet**s ([MS-MQMQ] section 2.2.20).
+- Format *iNextHop*.**Address**, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.12.12, and add it to the **OutgoingQueueReference.NextHops** collection.
+The [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.2.1) MUST be stopped. The value of the **SessionState** ADM element MUST be set to OPEN. An element MUST be appended to the **OutgoingQueueReference.ConnectionHistory** array; the **Status** ADM attribute of the array element MUST be set to **Established**; the **ConnectionHistoryTime** ADM attribute of the array element MUST be set to the current time; the **Error** ADM attribute of the array element MUST be set to zero; and the **AddressList** ADM attribute of the array element MUST be set to the **RemoteQMAddress** ADM element. The session is now initialized and is ready to send or receive **UserMessage Packet**s ([MS-MQMQ] section 2.2.20).
 
 If the **OutgoingQueueReference.State** is not **OnHold**, the **OutgoingQueueReference.State** MUST be set to **Connected**.
 
@@ -2067,14 +2067,14 @@ If the **OutgoingQueueReference.State** is not **OnHold**, the **OutgoingQueueRe
 
 If the **SessionState** ADM element is not set to the value OPEN, the protocol MUST close the session as specified in [Closing a Session (section 3.1.5.9)](#Section_3.1.5.9).
 
-A SessionHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.20.4) contains a session acknowledgment that acknowledges express and recoverable messages. A SessionHeader can appear in a [SessionAck Packet](#Section_2.2.6) or can be piggy-backed onto a UserMessage Packet ([MS-MQMQ] section 2.2.20). A SessionHeader is present in the packet when the **Flags.SH** bit field of the BaseHeader ([MS-MQMQ] section 2.2.19.1) is set.
+A SessionHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.4) contains a session acknowledgment that acknowledges express and recoverable messages. A SessionHeader can appear in a [SessionAck Packet](#Section_2.2.6) or can be piggy-backed onto a UserMessage Packet ([MS-MQMQ] section 2.2.20). A SessionHeader is present in the packet when the **Flags.SH** bit field of the BaseHeader ([MS-MQMQ] section 2.2.19.1) is set.
 
 The protocol MUST perform the following steps to process a SessionHeader:
 
 - [Mark Acknowledged Messages](#Section_3.1.5.5.1)
 - [Delete Acknowledged Express Messages](#Section_3.1.5.5.2)
 - [Delete Acknowledged Recoverable Messages](#Section_3.1.5.5.3)
-- [Source Journaling](#Section_3.1.5.5.4)
+- [Source Journaling](#Section_1.3.4)
 - [Validate Message Counts](#Section_3.1.5.5.5)
 <a id="Section_3.1.5.5.1"></a>
 ##### 3.1.5.5.1 Mark Acknowledged Messages
@@ -2083,7 +2083,7 @@ The protocol MUST set the **ReceivedSessionAck** ADM attribute to TRUE for each 
 
 The **UnAckedMessageCount** ADM element MUST be decremented by the number of **OutgoingMessagePosition** ADM element instances with **ReceivedSessionAck** ADM attributes that were set to TRUE by the preceding operation.
 
-For each **OutgoingMessagePosition** ADM element instance *sOutgoingMessagePosition* in the **OutgoingMessageTable** ADM element where *sOutgoingMessagePosition*.**ReceivedSessionAck** is FALSE, the Add Message To Dispatch Collection ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.28) event MUST be raised with the following arguments.
+For each **OutgoingMessagePosition** ADM element instance *sOutgoingMessagePosition* in the **OutgoingMessageTable** ADM element where *sOutgoingMessagePosition*.**ReceivedSessionAck** is FALSE, the Add Message To Dispatch Collection ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.28) event MUST be raised with the following arguments.
 
 - *iPosition* := A reference to *sOutgoingMessagePosition*.**MessagePosition**.
 - *iData* := A reference to *sOutgoingMessagePosition*.
@@ -2099,14 +2099,14 @@ The protocol MUST delete each [OutgoingMessagePosition (section 3.1.1.3.1.2)](
 
 The protocol MUST delete each [OutgoingMessagePosition (section 3.1.1.3.1.2)](#Section_3.1.1.3.1.2) ADM element instance *rOutgoingMessagePosition* from the **OutgoingMessageTable** ADM element where *rOutgoingMessagePosition*.**RecoverableSequenceNumber** is less than or equal to the **SessionHeader.RecoverableMsgAckSeqNumber** field and *rOutgoingMessagePosition*.**TxSequenceNumber** is set to 0x00000000.
 
-The protocol MUST delete each **OutgoingMessagePosition** ADM element instance *sOutgoingMessagePosition* from the **OutgoingMessageTable** ADM element where *sOutgoingMessagePosition*.**RecoverableSequenceNumber** is represented in the **SessionHeader.RecoverableMsgAckFlags** field with a bit set to 1 and *sOutgoingMessagePosition*.TxSequenceNumber is set to 0x00000000. Details of the **SessionHeader.RecoverableMsgAckFlags** field bit representation are specified in [MS-MQMQ](#Section_1.3.1) section 2.2.20.4.
+The protocol MUST delete each **OutgoingMessagePosition** ADM element instance *sOutgoingMessagePosition* from the **OutgoingMessageTable** ADM element where *sOutgoingMessagePosition*.**RecoverableSequenceNumber** is represented in the **SessionHeader.RecoverableMsgAckFlags** field with a bit set to 1 and *sOutgoingMessagePosition*.TxSequenceNumber is set to 0x00000000. Details of the **SessionHeader.RecoverableMsgAckFlags** field bit representation are specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.4.
 
 The protocol MUST delete each **OutgoingMessagePosition** ADM element instance *tOutgoingMessagePosition* from the **OutgoingMessageTable** ADM element where *tOutgoingMessagePosition*.**RecoverableSequenceNumber** is represented in the **SessionHeader.RecoverableMsgAckFlags** field with a bit set to 1 and where *tOutgoingMessagePosition*.**ReceivedOrderAck** is TRUE. Details of the **SessionHeader.RecoverableMsgAckFlags** field bit representation are specified in [MS-MQMQ] section 2.2.20.4.
 
 <a id="Section_3.1.5.5.4"></a>
 ##### 3.1.5.5.4 Source Journaling
 
-An acknowledged message that is deleted from the **OutgoingMessageTable** ADM element and that has the **UserMessage.UserHeader.Flags.JP** field set MUST be logged locally by generating a Move Message ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.16) event with the following arguments:
+An acknowledged message that is deleted from the **OutgoingMessageTable** ADM element and that has the **UserMessage.UserHeader.Flags.JP** field set MUST be logged locally by generating a Move Message ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) event with the following arguments:
 
 - *iMessagePos*: A **MessagePosition** ([MS-MQDMPR] section 3.1.1.11) ADM element instance referenced by the **MessagePosition** ADM attribute of the [OutgoingMessagePosition (section 3.1.1.3.1.2)](#Section_3.1.1.3.1.2) ADM element instance that was removed from the **OutgoingMessageTable** ADM element.
 - *iTargetQueue*: A **QueueManager.SystemJournalQueue** ([MS-MQDMPR] section 3.1.1.1).
@@ -2124,17 +2124,17 @@ Each recoverable [**transactional message**](#gt_transactional-message) MUST be 
 
 If the **SessionState** ADM element is not set to the value OPEN, the protocol MUST close the session as specified in [Closing a Session (section 3.1.5.9)](#Section_3.1.5.9).
 
-The ADM elements and ADM attributes defined in [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1.3) MUST be updated as follows:
+The ADM elements and ADM attributes defined in [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1) MUST be updated as follows:
 
 - **TxOutgoingSequence.TimeOfLastAck** MUST be set to the local system time.
 - **TxOutgoingSequence.ResendIntervalIndex** MUST be incremented by 1. If the new value is greater than the number of entries in the **ResendTimerTable** ADM element, it MUST be set to the index of the last entry. **TxOutgoingSequence.ResendInterval** MUST be set to the value at the index corresponding to **TxOutgoingSequence.ResendIntervalIndex** in the **ResendTimerTable** ADM element.
-- The incoming **OrderAck.MessagePropertiesHeader.MessageBody.TxSequenceNumber** field MUST be compared against the stored value of **TxOutgoingSequence.LastAck.SeqNo**. When the stored value is less, it is replaced with the value of the incoming **OrderAck.MessagePropertiesHeader.MessageBody.TxSequenceNumber** field. The **TxOutgoingSequence.UnackedSequence** list MUST be iterated over, and all stored instances of **SEQUENCE_INFO** ([MS-MQMQ](#Section_1.3.1) section 2.2.5) MUST be deleted from the **TxOutgoingSequence.UnackedSequence** list for which the value of the **SeqNo** field is less than or equal to the **TxOutgoingSequence.LastAck.SeqNo**. The stored values MUST be deleted in a manner such that the relative ordering of the undeleted **SEQUENCE_INFO** instances is unaltered.
+- The incoming **OrderAck.MessagePropertiesHeader.MessageBody.TxSequenceNumber** field MUST be compared against the stored value of **TxOutgoingSequence.LastAck.SeqNo**. When the stored value is less, it is replaced with the value of the incoming **OrderAck.MessagePropertiesHeader.MessageBody.TxSequenceNumber** field. The **TxOutgoingSequence.UnackedSequence** list MUST be iterated over, and all stored instances of **SEQUENCE_INFO** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.5) MUST be deleted from the **TxOutgoingSequence.UnackedSequence** list for which the value of the **SeqNo** field is less than or equal to the **TxOutgoingSequence.LastAck.SeqNo**. The stored values MUST be deleted in a manner such that the relative ordering of the undeleted **SEQUENCE_INFO** instances is unaltered.
 - If **TxOutgoingSequence.UnackedSequence** is empty, indicating that there are no remaining messages to be resent, **TxOutgoingSequence.ResendIntervalIndex** MUST be set to the index of the first entry of the **ResendTimerTable** ADM element.
 - **TxOutgoingSequence.LastAckCount** MUST be incremented by 1.
 - The protocol MUST delete each [OutgoingMessagePosition (section 3.1.1.3.1.2)](#Section_3.1.1.3.1.2) ADM element instance *rOutgoingMessagePosition* from the **OutgoingMessageTable** ADM element where *rOutgoingMessagePosition*.**TxSequenceNumber** is greater than 0x00000000 and is less than or equal to the **OrderAck.MessagePropertiesHeader.MessageBody.TxSequenceNumber** field and where *rOutgoingMessagePosition*.**ReceivedSessionAck** is set to TRUE.
 - A message that is deleted from the **OutgoingMessageTable** ADM element and that has the **UserMessage.UserHeader.Flags.JN** field bit set or the **UserMessage.UserHeader.Flags.JP** field bit set MUST be copied to the **AwaitingFinalACKTable** ADM element.
 - If the **OutgoingMessageTable** ADM element contains no **OutgoingMessagePosition** ADM element instances where **OutgoingMessagePosition.TxSequenceNumber** is nonzero, the protocol MUST increment **OutgoingTxSequenceID.Ordinal** by 1 and MUST set the **OutgoingTxSequenceNumber** ADM element to the value 0x00000001.
-The attributes of the **OutgoingTransferInfo** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.4) ADM element instance referenced by **OutgoingQueueReference.OutgoingTransferInfoReference** from the Session State (section 3.1.1.3.1) MUST be set as follows:
+The attributes of the **OutgoingTransferInfo** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.4) ADM element instance referenced by **OutgoingQueueReference.OutgoingTransferInfoReference** from the Session State (section 3.1.1.3.1) MUST be set as follows:
 
 - **EodLastAckTime**: This ADM attribute value MUST be set to **TxOutgoingSequence.TimeOfLastAck**.
 - **EodLastAckCount**: This ADM attribute value MUST be set to **TxOutgoingSequence.LastAckCount**.
@@ -2153,7 +2153,7 @@ If the **SessionState** ADM element is not set to the value OPEN, the protocol M
 
 A [FinalAck Packet (section 2.2.5)](#Section_2.2.5) indicates that the message represented by the **FinalAck.MessagePropertiesHeader.MessageBody.MessageID** field has been rejected by the receiver or removed from the destination [**queue**](#gt_queue).
 
-The message where the **UserMessage.UserHeader.MessageID** field is equal to the **FinalAck.MessagePropertiesHeader.MessageBody.MessageID** field in the **OutgoingMessageTable** ADM element or the **AwaitingFinalACKTable** ADM element MUST be moved to the system journal queue if the **UserMessage.UserHeader.Flags.JP** bit field is set and the **FinalAck.MessagePropertyHeader.MessageClass** field is equal to MQMSG_CLASS_ACK_RECEIVE. The Move Message ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.16) event MUST be raised with the following arguments:
+The message where the **UserMessage.UserHeader.MessageID** field is equal to the **FinalAck.MessagePropertiesHeader.MessageBody.MessageID** field in the **OutgoingMessageTable** ADM element or the **AwaitingFinalACKTable** ADM element MUST be moved to the system journal queue if the **UserMessage.UserHeader.Flags.JP** bit field is set and the **FinalAck.MessagePropertyHeader.MessageClass** field is equal to MQMSG_CLASS_ACK_RECEIVE. The Move Message ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) event MUST be raised with the following arguments:
 
 *iMessagePos*: A **MessagePosition** ([MS-MQDMPR] section 3.1.1.11) ADM element instance referenced by the **MessagePosition** ADM attribute of the **OutgoingMessagePosition** ADM element instance in the **OutgoingMessageTable** ADM element or in the **AwaitingFinalACKTable** ADM element that contains the **Message** ([MS-MQDMPR] section 3.1.1.12) ADM element instance that is moved to the **QueueManager.SystemJournalQueue** ([MS-MQDMPR] section 3.1.1.1).
 
@@ -2168,7 +2168,7 @@ The message where the **UserMessage.UserHeader.MessageID** field is equal to the
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 Receiving a UserMessage Packet
 
-A UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) contains an application-defined or system-generated message sent from the sender. A received message can be addressed to a [**queue**](#gt_queue) on the local host or to a queue on another remote host.
+A UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) contains an application-defined or system-generated message sent from the sender. A received message can be addressed to a [**queue**](#gt_queue) on the local host or to a queue on another remote host.
 
 If the **SessionState** ADM element is not set to the value OPEN, the protocol MUST close the session as specified in [Closing a Session (section 3.1.5.9)](#Section_3.1.5.9).
 
@@ -2187,7 +2187,7 @@ Processing a UserMessage Packet consists of the following [**sequence**](#gt_seq
 <a id="Section_3.1.5.8.1"></a>
 ##### 3.1.5.8.1 Duplicate Detection
 
-If the UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the message is transactional, and duplicate detection is done using the [**sequence**](#gt_sequence) numbers in the **UserMessage.TransactionHeader**, as specified in [3.1.5.8.6](#Section_3.1.5.8.6).
+If the UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the message is transactional, and duplicate detection is done using the [**sequence**](#gt_sequence) numbers in the **UserMessage.TransactionHeader**, as specified in [3.1.5.8.6](#Section_3.1.5.8.6).
 
 If the message is not transactional and the **MessageIDHistoryTable** ADM element table contains a **MessageIDHistoryEntry.MessageIdentifier.Ordinal** that matches the **UserMessage.UserHeader.MessageID** field, the protocol MUST perform the following logic:
 
@@ -2223,8 +2223,8 @@ If the value of the **UserMessage.UserHeader.QueueManagerAddress** field is equa
 - The protocol MUST disregard a message if it is addressed to a nonexistent [**queue**](#gt_queue). If the **UserMessage.UserHeader.DestinationQueue** field does not correspond to a queue in **QueueManager.QueueCollection**, the protocol MUST reject the message using the following logic:
 - If the **UserMessage.MessagePropertiesHeader.Flags.NA** bit field is set, the protocol MUST send a negative administration acknowledgment by raising a [Send Administration Acknowledgment (section 3.1.7.15)](#Section_3.1.7.15) event with the following arguments:
 - *iReceivedUserMessagePacket*: **UserMessage**
-- *iMessageClass*: MQMSG_CLASS_NACK_BAD_DST_Q ([MS-MQMQ](#Section_1.3.1) section 2.2.18.1.6)
-- If the packet contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the protocol MUST send a negative [FinalAck Packet (section 2.2.5)](#Section_2.2.5) by raising a [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.1.6.2) event with the following arguments:
+- *iMessageClass*: MQMSG_CLASS_NACK_BAD_DST_Q ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6)
+- If the packet contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the protocol MUST send a negative [FinalAck Packet (section 2.2.5)](#Section_2.2.5) by raising a [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.7.17) event with the following arguments:
 - *iMessageClass*: MQMSG_CLASS_NACK_BAD_DST_Q
 - *iUserMessagePacket*: **UserMessage**
 - The protocol MUST disregard the message and perform no further processing.
@@ -2256,7 +2256,7 @@ If the **UserMessage.UserHeader.Flags.DM** field is set to 0x1, the protocol MUS
 <a id="Section_3.1.5.8.3"></a>
 ##### 3.1.5.8.3 Security
 
-If **UserMessage.UserHeader.QueueManagerAddress** is equal to **QueueManager.Identifier** and a **SecurityHeader** is present in the UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20), the following logic MUST be applied to the message:
+If **UserMessage.UserHeader.QueueManagerAddress** is equal to **QueueManager.Identifier** and a **SecurityHeader** is present in the UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20), the following logic MUST be applied to the message:
 
 If the **UserMessage.SecurityHeader.SecurityData.Signature** field is set or the **UserMessage.MultiQueueFormatHeader.Signature** field is set, the protocol MUST perform the following steps to authenticate the packet:
 
@@ -2275,13 +2275,13 @@ If the **UserMessage.SecurityHeader.SecurityData.Signature** field is set or the
 - If the **UserMessage.MessagePropertiesHeader.Flags.NA** bit field is set, the protocol MUST send a negative administration acknowledgment by raising a [Send Administration Acknowledgment (section 3.1.7.15)](#Section_3.1.7.15) event with the following arguments:
 - *iReceivedUserMessagePacket*: **UserMessage**
 - *iMessageClass*: MQMSG_CLASS_NACK_BAD_SIGNATURE ([MS-MQMQ] section 2.2.18.1.6)
-- If the rejected message contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the protocol MUST send a negative [FinalAck Packet (section 2.2.5)](#Section_2.2.5) by raising a [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.1.6.2) event with the following arguments:
+- If the rejected message contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the protocol MUST send a negative [FinalAck Packet (section 2.2.5)](#Section_2.2.5) by raising a [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.7.17) event with the following arguments:
 - *iMessageClass*: MQMSG_CLASS_NACK_BAD_SIGNATURE
 - *iUserMessagePacket*: **UserMessage**
 - The protocol MUST disregard the message and perform no further processing.
 - If the **UserMessage.SecurityHeader.Flags.ST** field is nonzero, the protocol MUST perform the following steps to verify the identity of the sender:
 - The protocol MUST search the **UserCertCache** ADM element for a [CachedUserCert (section 3.1.1.3.4)](#Section_3.1.1.3.4) ADM element instance where **CachedUserCert.UserCert.Certificate** is bytewise identical to the certificate in the **UserMessage.SecurityHeader.SecurityData.SenderCert** field and **CachedUserCert.SecurityID** is equal to the **UserMessage.SecurityHeader.SecurityData.SecurityID** field.
-- If no such instance is found, the protocol MUST raise a Read Directory ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.20) event with the following arguments:
+- If no such instance is found, the protocol MUST raise a Read Directory ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.20) event with the following arguments:
 - *iDirectoryObjectType*: "User"
 - *iFilter*: "SecurityIdentifier" EQUALS **UserMessage.SecurityHeader.SecurityData.SecurityID**
 - If the query returns an *rStatus* value equal to **DirectoryOperationResult.Success**, the protocol MUST compare each of the certificates in *rDirectoryObject*.**Certificates** with the **UserMessage.SecurityHeader.SecurityData.SenderCert** field.
@@ -2321,7 +2321,7 @@ If the **UserMessage.SecurityHeader.Flags.EB** bit field is set, the protocol MU
 - The **RemoteQMGuid** ADM attribute set to the value of the **UserMessage.UserHeader.SourceQueueManager** field.
 - The **CryptoServiceProvider** ADM attribute set to the value of **SelectedCSP**.
 - The **CryptoAlgorithm** ADM attribute set to the value of the **UserMessage.MessagePropertiesHeader.EncryptionAlgorithm** field.
-- The **EncryptedSymmetricKey** ADM attribute set to the value of the **UserMessage.SecurityHeader.EncryptionKey** field. It MUST be a [SIMPLEBLOB (section 2.4.2)](#Section_2.4.2) generated as described in section [3.1.7.1.5](#Section_3.1.7.1.5.2).
+- The **EncryptedSymmetricKey** ADM attribute set to the value of the **UserMessage.SecurityHeader.EncryptionKey** field. It MUST be a [SIMPLEBLOB (section 2.4.2)](#Section_2.4.2) generated as described in section [3.1.7.1.5](#Section_3.1.7.1.5).
 - The **SymmetricKey** ADM attribute set to the result of decrypting the **encryptedKey** field of the SIMPLEBLOB in the **UserMessage.SecurityHeader.EncryptionKey** field according to the RSA key exchange algorithm ([RFC8017]). The [**private key**](#gt_private-key) used for the decryption is selected from implementation-dependent local storage according to the value of **SelectedCSP**.
 - The **CachedTime** ADM attribute set to the current date and time.
 - The newly created **CachedSymmetricKey** ADM element instance SHOULD<60> be added to the **ReceiveSymmetricKeyCache** ADM element. If doing so would cause the number of entries in the list to exceed the value of the **ReceiveSymmetricKeyCacheSize** ADM element, the protocol MUST create space in the list by sorting the entries by the **CachedTime** ADM attribute and by discarding the (**ReceiveSymmetricKeyCacheSize** / 2) entries that are oldest.
@@ -2357,7 +2357,7 @@ The protocol MUST perform an access check to authorize the Security Identifier (
 - The protocol MUST perform an access check by invoking the Access Check Algorithm ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2) with the following parameters:
 - *SecurityDescriptor*: *queueSecurityDescriptor*
 - *Token*: Perform the following actions to generate a token to represent the sender's authorization data. If any failure occurs in these actions, the protocol MUST continue as if access_denied is returned from the Access Check Algorithm.
-- Construct an RPC binding to the Local Security Authority (Translation Methods) Remote Protocol server on the local machine ([MS-LSAT](#Section_3.1.5.8.3) section 2.1).
+- Construct an RPC binding to the Local Security Authority (Translation Methods) Remote Protocol server on the local machine ([MS-LSAT](../MS-LSAT/MS-LSAT.md) section 2.1).
 - Invoke the **LsarOpenPolicy (Opnum 6)** method ([MS-LSAT] section 3.1.4.2) to obtain a policy handle with the *DesiredAccess* parameter set to POLICY_LOOKUP_NAMES.
 - Invoke the **LsarLookupSids (Opnum 15)** method ([MS-LSAT] section 3.1.4.11) to obtain the account name of the message sender with the following parameters:
 - *PolicyHandle*: the policy handle obtained in the preceding step.
@@ -2383,14 +2383,14 @@ The protocol MUST perform an access check to authorize the Security Identifier (
 <a id="Section_3.1.5.8.4"></a>
 ##### 3.1.5.8.4 SessionHeader Processing
 
-The remote host can include a SessionHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.20.4) in the UserMessage Packet ([MS-MQMQ] section 2.2.20) [**message**](#gt_message). A SessionHeader does not contain information about the UserMessage Packet message but instead contains session acknowledgment information for express and recoverable messages.
+The remote host can include a SessionHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.4) in the UserMessage Packet ([MS-MQMQ] section 2.2.20) [**message**](#gt_message). A SessionHeader does not contain information about the UserMessage Packet message but instead contains session acknowledgment information for express and recoverable messages.
 
 If a UserMessage Packet contains a SessionHeader, it MUST be processed as specified in [Receiving a SessionAck Packet (section 3.1.5.5)](#Section_3.1.5.5).
 
 <a id="Section_3.1.5.8.5"></a>
 ##### 3.1.5.8.5 Determining Message Destination
 
-- Let *iTargetQueue* be a **Queue** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.2) ADM element instance reference initialized to NULL.
+- Let *iTargetQueue* be a **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element instance reference initialized to NULL.
 - If the value of the **UserMessage.UserHeader.QueueManagerAddress** field is equal to the **Identifier** ADM attribute of the local **QueueManager** element instance or is filled with the value 0x00, set *iTargetQueue* to the **Queue** ADM element instance reference in the **QueueCollection** ADM attribute of the local **QueueManager** ADM element instance that corresponds to the queue address specified in the **UserMessage.UserHeader.DestinationQueue** field.
 - If the value of the **UserMessage.UserHeader.QueueManagerAddress** field is not equal to the **Identifier** ADM attribute of the local **QueueManager** ADM element instance and is not filled with the value 0x00, perform the following steps:
 - Open the [**outgoing queue**](#gt_outgoing-queue) by raising an Open Queue ([MS-MQDMPR] section 3.1.7.1.5) event with the following arguments:
@@ -2401,7 +2401,7 @@ If a UserMessage Packet contains a SessionHeader, it MUST be processed as specif
 <a id="Section_3.1.5.8.6"></a>
 ##### 3.1.5.8.6 Transactional Message Processing
 
-If the UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5) and the value of the **UserMesage.UserHeader.QueueManagerAddress** field is equal to **QueueManager.Identifier**, the following logic must be applied:
+If the UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) contains a TransactionHeader ([MS-MQMQ] section 2.2.20.5) and the value of the **UserMesage.UserHeader.QueueManagerAddress** field is equal to **QueueManager.Identifier**, the following logic must be applied:
 
 The receiver MUST schedule sending an [OrderAck Packet (section 2.2.4)](#Section_2.2.4) based on the state of the [Order Ack Send Timer (section 3.1.2.7)](#Section_3.1.2.7) and the values of the **LastOrderAckSendTime** ADM element and the **MaximumOrderAckDelay** ADM element. If the timer is active and the time elapsed from the **LastOrderAckSendTime** ADM element is less than the **MaximumOrderAckDelay** ADM element, the timer MUST be restarted with the duration set to the **OrderAckTimeout** ADM element. If the timer is inactive, it MUST be started with the duration set to the **OrderAckTimeout** ADM element. When the timer expires, an OrderAck Packet MUST be sent as specified in section [3.1.6.9](#Section_3.1.6.9).
 
@@ -2438,12 +2438,12 @@ The bit in the **RecoverableMsgAckFlags** ADM element corresponding to **Recover
 <a id="Section_3.1.5.8.8"></a>
 ##### 3.1.5.8.8 Inserting a Message into a Local Queue
 
-The **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) MUST be deserialized to a **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element instance by generating the [Get Message Data Element From Buffer (section 3.1.7.10)](#Section_3.1.7.10) event with the following argument:
+The **UserMessage Packet** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) MUST be deserialized to a **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance by generating the [Get Message Data Element From Buffer (section 3.1.7.10)](#Section_3.1.7.10) event with the following argument:
 
 - *iBuffer*: MUST be set to the incoming or outgoing **UserMessage Packet**.
 The Enqueue Message ([MS-MQDMPR] section 3.1.7.1.9) event MUST be generated with the following arguments:
 
-- *iQueue*: MUST be set to *iTargetQueue* as declared and initialized in section [3.1.5.8.5](#Section_3.1.7.1.2).
+- *iQueue*: MUST be set to *iTargetQueue* as declared and initialized in section [3.1.5.8.5](#Section_3.1.5.8.5).
 - *iMessage*: MUST be set to the *rMessage* that was returned in the call to the Get Message Data Element From Buffer event.
 If the *rStatus* returned by the Enqueue Message event is not zero:
 
@@ -2452,7 +2452,7 @@ If the *rStatus* returned by the Enqueue Message event is not zero:
 - *iReceivedUserMessagePacket*: **UserMessage**
 - *iMessageClass*: MQMSG_CLASS_NACK_Q_EXCEED_QUOTA ([MS-MQMQ] section 2.2.18.1.6)
 - If the rejected message contains a **UserMessage.UserHeader.Flags.JN** bit field that is set and does not contain a TransactionHeader ([MS-MQMQ] section 2.2.20.5), the message MUST be inserted into the **SystemDeadletterQueue** ADM attribute of the local **QueueManager** ADM element instance.
-- If the rejected message contains a **TransactionHeader**, the protocol MUST send a negative [FinalAck Packet (section 2.2.5)](#Section_2.2.5) by raising a [SendTransactional Acknowledgment (section 3.1.7.17)](#Section_3.1.1.6.2) event with the following arguments:
+- If the rejected message contains a **TransactionHeader**, the protocol MUST send a negative [FinalAck Packet (section 2.2.5)](#Section_2.2.5) by raising a [SendTransactional Acknowledgment (section 3.1.7.17)](#Section_3.1.7.17) event with the following arguments:
 - *iMessageClass*: MQMSG_CLASS_NACK_Q_EXCEED_QUOTA
 - *iUserMessagePacket*: **UserMessage**
 - The protocol MUST disregard the message and perform no further processing.
@@ -2491,10 +2491,10 @@ If the value of the **UserMessage.UserHeader.QueueManagerAddress** field is not 
 
 If the **UserMessage.BaseHeader.Flags.TR** bit field is set, the protocol MUST send a report message to the queue specified by the **UserMessage.DebugHeader.QueueIdentifier** field. Report [**messages**](#gt_message) are utilized by application logic to track the delivery of sent messages.
 
-To send a report message, the protocol MUST construct a new **Message** ADM element instance ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12), referred to as *TraceMessage*, and MUST set the following attributes:
+To send a report message, the protocol MUST construct a new **Message** ADM element instance ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12), referred to as *TraceMessage*, and MUST set the following attributes:
 
 - *TraceMessage*.**Class** is set to **Report**.
-- *TraceMessage*.**DestinationQueueFormatName** is set to a public [**format name**](#gt_format-name) ([MS-MQMQ](#Section_1.3.1) section 2.1.3) constructed using the GUID in the **DebugHeader.QueueIdentifier** field.
+- *TraceMessage*.**DestinationQueueFormatName** is set to a public [**format name**](#gt_format-name) ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.3) constructed using the GUID in the **DebugHeader.QueueIdentifier** field.
 - *TraceMessage*.**DeliveryGuarantee** is set to **Express**.
 - *TraceMessage*.**Label** is set to a [**Unicode**](#gt_unicode) string in the format specified by the following ABNF rules.
 label = qm-id %x3A message-id %x3A hops SP "received by" SP computer
@@ -2563,7 +2563,7 @@ If the **UserMessage.UserHeader.QueueManagerAddress** field of the received mess
 
 - If the **UserMessage.MessagePropertiesHeader.Flags.PA** field of the received message is set, the protocol MUST send a positive administration acknowledgment by raising a [Send Administration Acknowledgment (section 3.1.7.15)](#Section_3.1.7.15) event with the following arguments:
 - *iReceivedUserMessagePacket*: **UserMessage**
-- *iMessageClass*: MQMSG_CLASS_ACK_REACH_QUEUE ([MS-MQMQ](#Section_1.3.1) section 2.2.18.1.6)
+- *iMessageClass*: MQMSG_CLASS_ACK_REACH_QUEUE ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6)
 <a id="Section_3.1.5.9"></a>
 #### 3.1.5.9 Closing a Session
 
@@ -2580,18 +2580,18 @@ A protocol session is closed by executing the following steps. The protocol does
 <a id="Section_3.1.5.10"></a>
 #### 3.1.5.10 Handling an Incoming Transport Connection
 
-When an [**acceptor**](#gt_acceptor) accepts an incoming transport connection from a remote [**initiator**](#gt_initiator) according to the transport settings specified in [Protocol Session (section 2.1.1)](#Section_2.1.1), it MUST initialize a session as specified in [Session Initialization (section 3.1.3.2)](#Section_3.1.1.7.1). The **SessionState** ADM element value MUST be set to WAITING_EC_MSG.
+When an [**acceptor**](#gt_acceptor) accepts an incoming transport connection from a remote [**initiator**](#gt_initiator) according to the transport settings specified in [Protocol Session (section 2.1.1)](#Section_2.1.1), it MUST initialize a session as specified in [Session Initialization (section 3.1.3.2)](#Section_3.1.3.2). The **SessionState** ADM element value MUST be set to WAITING_EC_MSG.
 
-If the [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.1.7.1) is running, it MUST be stopped and then restarted; otherwise, the protocol MUST start the Session Initialization Timer.
+If the [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.2.1) is running, it MUST be stopped and then restarted; otherwise, the protocol MUST start the Session Initialization Timer.
 
 <a id="Section_3.1.5.11"></a>
 #### 3.1.5.11 Receiving Administration Acknowledgments
 
-Administration acknowledgment [**messages**](#gt_message) are system-generated **UserMessage Packet**s ([MS-MQMQ](#Section_1.3.1) section 2.2.20) that indicate that a sent message has reached its destination [**queue**](#gt_queue) or that the message has been retrieved from its destination queue.
+Administration acknowledgment [**messages**](#gt_message) are system-generated **UserMessage Packet**s ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) that indicate that a sent message has reached its destination [**queue**](#gt_queue) or that the message has been retrieved from its destination queue.
 
 Administration acknowledgment messages are identified by the **UserMessage.MessagePropertiesHeader.MessageClass** field set to one of the positive or negative arrival acknowledgment classes specified in [MS-MQMQ] section 2.2.18.1.6.
 
-Administration acknowledgment messages MUST be processed as specified in section [3.1.5.8](#Section_1.3).
+Administration acknowledgment messages MUST be processed as specified in section [3.1.5.8](#Section_3.1.5.8).
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -2609,7 +2609,7 @@ When the [Session Retry Connect Timer (section 3.1.2.3)](#Section_3.1.2.3) exp
 - Set the **RemoteQMHostName** ADM element to *rNextHop*.**HostName**.
 - Set the **RemoteQMGuid** ADM element to *rNextHop*.**QMGuid**.
 - Open the session to the remote queue manager without resolving new addresses by starting the session creation at the [Ping Mechanism (section 3.1.5.2.2)](#Section_3.1.5.2.2) stage.
-- For each **OutgoingMessagePosition** ADM element instance *iOutgoingMessagePosition* in the **OutgoingMessageTable** ADM element, the Add Message To Dispatch Collection ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.28) event MUST be raised with the following arguments:
+- For each **OutgoingMessagePosition** ADM element instance *iOutgoingMessagePosition* in the **OutgoingMessageTable** ADM element, the Add Message To Dispatch Collection ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.28) event MUST be raised with the following arguments:
 - *iPosition* := A reference to *iOutgoingMessagePosition*.**MessagePosition**.
 - *iData* := A reference to *iOutgoingMessagePosition*.
 Initializing the session results in message retransmission, as specified in section [3.1.7](#Section_3.1.7).
@@ -2661,7 +2661,7 @@ The preceding step causes all unacknowledged transactional messages to be resent
 <a id="Section_3.1.6.6"></a>
 #### 3.1.6.6 Session Initialization Timer Event
 
-For the [**initiator**](#gt_initiator), the Session Initialization Timer Event indicates a time-out while contacting the [**acceptor**](#gt_acceptor) during session initialization. For the acceptor, the Session Initialization Timer Event indicates a time-out while responding to the initiator during session initialization. When the [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.1.7.1) expires, the protocol MUST close the session as specified in section [3.1.5.9](#Section_3.1.5.9).
+For the [**initiator**](#gt_initiator), the Session Initialization Timer Event indicates a time-out while contacting the [**acceptor**](#gt_acceptor) during session initialization. For the acceptor, the Session Initialization Timer Event indicates a time-out while responding to the initiator during session initialization. When the [Session Initialization Timer (section 3.1.2.1)](#Section_3.1.2.1) expires, the protocol MUST close the session as specified in section [3.1.5.9](#Section_3.1.5.9).
 
 <a id="Section_3.1.6.7"></a>
 #### 3.1.6.7 MessageIDHistory Cleanup Timer Event
@@ -2678,9 +2678,9 @@ When the [Ping Response Timer (section 3.1.2.9)](#Section_3.1.2.9) expires, th
 <a id="Section_3.1.6.9"></a>
 #### 3.1.6.9 Order Ack Send Timer Event
 
-When the [Order Ack Send Timer (section 3.1.2.7)](#Section_3.1.2.7) expires, if the session from which the timer was started is not closed, the protocol MUST send an [OrderAck Packet (section 2.2.4)](#Section_2.2.4) to the sender by raising a [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.1.6.2) event with the following argument:
+When the [Order Ack Send Timer (section 3.1.2.7)](#Section_3.1.2.7) expires, if the session from which the timer was started is not closed, the protocol MUST send an [OrderAck Packet (section 2.2.4)](#Section_2.2.4) to the sender by raising a [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.7.17) event with the following argument:
 
-- *iMessageClass*: MQMSG_CLASS_ORDER_ACK ([MS-MQMQ](#Section_1.3.1) section 2.2.18.1.6)
+- *iMessageClass*: MQMSG_CLASS_ORDER_ACK ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6)
 The **LastOrderAckSendTime** ADM element MUST be set to current system time.
 
 <a id="Section_3.1.6.10"></a>
@@ -2714,9 +2714,9 @@ When the [UserCertCache Cleanup Timer (section 3.1.2.13)](#Section_3.1.2.13) e
 <a id="Section_3.1.7"></a>
 ### 3.1.7 Other Local Events
 
-In addition to the higher-layer triggered events listed in section [3.1.4](#Section_1.3), the operation of the Message Queuing (MSMQ): Message Queuing Binary Protocol is initiated and subsequently driven by the following events:
+In addition to the higher-layer triggered events listed in section [3.1.4](#Section_3.1.4), the operation of the Message Queuing (MSMQ): Message Queuing Binary Protocol is initiated and subsequently driven by the following events:
 
-- Message Position Deleted ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.2.1).
+- Message Position Deleted ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1).
 - Message Position Available ([MS-MQDMPR] section 3.1.7.2.2).
 - Pause Queue ([MS-MQDMPR] section 3.1.7.2.3).
 - Resume Queue ([MS-MQDMPR] section 3.1.7.2.4).
@@ -2734,14 +2734,14 @@ The following steps MUST be performed to process this event:
 - If *iQueue*.**State** is not equal to **Connected**, take no further action.
 - If the **UnAckedMessageCount** ADM element is greater than or equal to the **WindowSize** ADM element, take no further action.
 - If the **OutgoingQueueReference** ADM element of the session is NULL, set it to *iQueue*.
-- [General Processing (section 3.1.7.1.1)](#Section_3.1.5.8.2).
+- [General Processing (section 3.1.7.1.1)](#Section_3.1.7.1.1).
 - [Checking for Message Expiration (section 3.1.7.1.2)](#Section_3.1.7.1.2).
 - [Signing the Packet (section 3.1.7.1.4)](#Section_3.1.7.1.4).
-- [Encrypting the Message Body (section 3.1.7.1.5)](#Section_3.1.7.1.5.2).
+- [Encrypting the Message Body (section 3.1.7.1.5)](#Section_3.1.7.1.5).
 - [Updating the UserMessage Packet (section 3.1.7.1.3)](#Section_3.1.7.1.3).
 - [Sending the Packet (section 3.1.7.1.6)](#Section_3.1.7.1.6).
 - [Sending Trace Message (section 3.1.7.1.7)](#Section_3.1.7.1.7).
-Unless specifically noted in a subsequent section, this logic MUST be applied to any UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) sent.
+Unless specifically noted in a subsequent section, this logic MUST be applied to any UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) sent.
 
 <a id="Section_3.1.7.1.1"></a>
 ##### 3.1.7.1.1 General Processing
@@ -2749,9 +2749,9 @@ Unless specifically noted in a subsequent section, this logic MUST be applied to
 The protocol MUST serialize the message to be sent by performing the following actions:
 
 - If *iPosition*.**MessagePosition**.**MessageReference**.**Identifier** is set to 0x00000000, the *iPosition*.**MessagePosition**.**MessageReference**.**Identifier** MUST be set to the **MessageIdOrdinal** ADM element, and the **MessageIdOrdinal** ADM element MUST be incremented by 1.
-- Generate a Serialize Message to Buffer ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.32) event with the following arguments:
+- Generate a Serialize Message to Buffer ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.32) event with the following arguments:
 - *iMessage*: the **Message** ([MS-MQDMPR] section 3.1.1.12) ADM element instance referenced by *iPosition*.**MessagePosition.MessageReference**.
-- *iBuffer*: the UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) referenced by *iPosition*.**UserMessage**.
+- *iBuffer*: the UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) referenced by *iPosition*.**UserMessage**.
 <a id="Section_3.1.7.1.2"></a>
 ##### 3.1.7.1.2 Checking for Message Expiration
 
@@ -2764,15 +2764,15 @@ If CURRENT_TIME minus the **UserMessage.UserHeader.SentTime** field value is gre
 If the **UserMessage.MessagePropertiesHeader.Flags.NA** bit field is set, the protocol MUST send a negative acknowledgment by raising a [Send Administration Acknowledgment (section 3.1.7.15)](#Section_3.1.7.15) event with the following arguments:
 
 - *iReceivedUserMessagePacket*: **UserMessage**
-- *iMessageClass*: MQMSG_CLASS_NACK_REACH_QUEUE_TIMEOUT ([MS-MQMQ](#Section_1.3.1) section 2.2.18.1.6)
-If the **UserMessage.UserHeader.Flags.JN** bit field is set, then an expired message MUST be logged locally by generating a Move Message ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.16) event with the following arguments:
+- *iMessageClass*: MQMSG_CLASS_NACK_REACH_QUEUE_TIMEOUT ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6)
+If the **UserMessage.UserHeader.Flags.JN** bit field is set, then an expired message MUST be logged locally by generating a Move Message ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) event with the following arguments:
 
 - *iMessagePos*: The **MessagePosition** ADM attribute of the **OutgoingMessagePosition** ADM element instance referenced by the *iPosition* argument from the [Send User Message Event (section 3.1.7.1)](#Section_3.1.7.1).
 - *iTargetQueue*: If a TransactionHeader ([MS-MQMQ] section 2.2.20.5) is present in the message, this argument is set to **QueueManager.SystemTransactionalDeadletterQueue** ([MS-MQDMPR] section 3.1.1.1) or the **iMessagePos.MessageReference.ApplicationDeadletterQueue** ([MS-MQDMPR] section 3.1.1.12) if it is specified; otherwise, this argument is set to **QueueManager.SystemDeadletterQueue** ([MS-MQDMPR] section 3.1.1.1).
 <a id="Section_3.1.7.1.3"></a>
 ##### 3.1.7.1.3 Updating the UserMessage Packet
 
-If the **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) contains a **TransactionHeader** ([MS-MQMQ] section 2.2.20.5) and the **UserMessage.UserHeader.SourceQueueManager** field is equal to **QueueManager.Identifier** and *iPosition*.**Transmitted** is FALSE, the following steps MUST be performed:
+If the **UserMessage Packet** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) contains a **TransactionHeader** ([MS-MQMQ] section 2.2.20.5) and the **UserMessage.UserHeader.SourceQueueManager** field is equal to **QueueManager.Identifier** and *iPosition*.**Transmitted** is FALSE, the following steps MUST be performed:
 
 - The **UserMessage.TransactionHeader.TxSequenceID** field MUST be set to the **OutgoingTxSequenceID** ADM element.
 - The **UserMessage.TransactionHeader.PreviousTxSequenceNumber** field MUST be set to the **OutgoingTxSequenceNumber** ADM element - 1.
@@ -2815,17 +2815,17 @@ The value of the **SessionActive** ADM element MUST be set to TRUE.
 If **Message.AuthenticationLevel** is not **None**, the packet MUST be signed. The following steps MUST be performed to sign the packet:
 
 - If **Message.DestinationMultiQueueFormatName** is set:
-- The protocol MUST compute a hash of the fields specified in [MS-MQMQ](#Section_1.3.1) section 2.5.3 for an [**MSMQ 3.0 digital signature**](#gt_msmq-30-digital-signature), using the hash algorithm specified by the **UserMessage.MessagePropertiesHeader.HashAlgorithm** field.
+- The protocol MUST compute a hash of the fields specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.5.3 for an [**MSMQ 3.0 digital signature**](#gt_msmq-30-digital-signature), using the hash algorithm specified by the **UserMessage.MessagePropertiesHeader.HashAlgorithm** field.
 - The **UserMessage.MultiQueueFormatHeader.Signature** field MUST be set to the value of the hash encrypted using RSA and the sender [**private key**](#gt_private-key).
 - Otherwise:
-- The protocol MUST compute a hash of the fields specified in [MS-MQMQ] section 2.5 for the MSMQ digital signature type indicated by the value of the **AuthenticationLevel** ADM attribute of the **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element, using the hash algorithm specified by the **UserMessage.MessagePropertiesHeader.HashAlgorithm** field.
+- The protocol MUST compute a hash of the fields specified in [MS-MQMQ] section 2.5 for the MSMQ digital signature type indicated by the value of the **AuthenticationLevel** ADM attribute of the **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element, using the hash algorithm specified by the **UserMessage.MessagePropertiesHeader.HashAlgorithm** field.
 - The **UserMessage.SecurityHeader.SecurityData.Signature** field MUST be set to the value of the hash encrypted using RSA and the sender private key.
 <a id="Section_3.1.7.1.5"></a>
 ##### 3.1.7.1.5 Encrypting the Message Body
 
-If the **PrivacyLevel** ADM attribute of the **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element is not **None**, the [**message body**](#gt_message-body) MUST be encrypted. To encrypt the [**message**](#gt_message), the protocol MUST follow these steps:
+If the **PrivacyLevel** ADM attribute of the **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element is not **None**, the [**message body**](#gt_message-body) MUST be encrypted. To encrypt the [**message**](#gt_message), the protocol MUST follow these steps:
 
-- If the **UserMessage.UserHeader.DestinationQueue** field does not contain a public [**format name**](#gt_format-name) ([MS-MQMQ](#Section_1.3.1) section 2.1.3) or a private format name ([MS-MQMQ] section 2.1.4), the protocol MUST perform the steps in section [3.1.7.1.5.1](#Section_3.1.7.1.5.1).
+- If the **UserMessage.UserHeader.DestinationQueue** field does not contain a public [**format name**](#gt_format-name) ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.3) or a private format name ([MS-MQMQ] section 2.1.4), the protocol MUST perform the steps in section [3.1.7.1.5.1](#Section_3.1.7.1.5.1).
 - If the **RemoteQMPublicKey** ADM element is not initialized, the protocol MUST initialize it according to the following steps:
 - Raise a Read Directory ([MS-MQDMPR] section 3.1.7.1.20) event with the following arguments:
 - *iDirectoryObjectType* = "QueueManager"
@@ -2868,16 +2868,16 @@ If the **PrivacyLevel** ADM attribute of the **Message** ([MS-MQDMPR](#Section_1
 <a id="Section_3.1.7.1.5.1"></a>
 ###### 3.1.7.1.5.1 Handling Encryption Errors
 
-If an error occurs while encrypting a [**message**](#gt_message), the message MUST be deleted from the **OutgoingMessageTable** ADM element and MUST NOT be sent to the remote [**queue manager**](#gt_queue-manager-qm). If the **UserMessage.UserHeader.Flags.JN** field is set, the message MUST be logged locally by generating a Move Message event ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.16) with the following arguments:
+If an error occurs while encrypting a [**message**](#gt_message), the message MUST be deleted from the **OutgoingMessageTable** ADM element and MUST NOT be sent to the remote [**queue manager**](#gt_queue-manager-qm). If the **UserMessage.UserHeader.Flags.JN** field is set, the message MUST be logged locally by generating a Move Message event ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.16) with the following arguments:
 
 - *iMessagePos*: The **MessagePosition** ([MS-MQDMPR] section 3.1.1.11) ADM element instance referenced by the **MessagePosition** ADM attribute of the **OutgoingMessagePosition** ADM element instance that was removed from the **OutgoingMessageTable** ADM element.
-- *iTargetQueue*: If a TransactionHeader ([MS-MQMQ](#Section_1.3.1) section 2.2.20.5) is present in the message, this argument is set to **QueueManager.SystemTransactionalDeadletterQueue**; otherwise, it is set to **QueueManager.SystemDeadletterQueue**.
+- *iTargetQueue*: If a TransactionHeader ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.5) is present in the message, this argument is set to **QueueManager.SystemTransactionalDeadletterQueue**; otherwise, it is set to **QueueManager.SystemDeadletterQueue**.
 An entry MUST be appended to the **OutgoingQueueReference.ConnectionHistory** array; the **Status** ADM attribute of the array entry MUST be set to **CertificateValidationFailure**; the **ConnectionHistoryTime** ADM attribute of the array entry MUST be set to the current time; the **Error** ADM attribute of the array entry MUST be set to an HRESULT value indicating the error; and the **AddressList** ADM attribute of the array entry MUST be set to the **RemoteQMAddress** ADM element.
 
 <a id="Section_3.1.7.1.5.2"></a>
 ###### 3.1.7.1.5.2 Converting MQDSPUBLICKEY to PUBLICKEYBLOB
 
-Let **source** be the **MQDSPUBLICKEY** ([MS-MQMQ](#Section_1.3.1) section 2.2.1) structure to be converted. Let **result** be the [PUBLICKEYBLOB (section 2.4.1)](#Section_2.4.1) that is being constructed. The following steps MUST be performed to construct **result** from **source**:
+Let **source** be the **MQDSPUBLICKEY** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.1) structure to be converted. Let **result** be the [PUBLICKEYBLOB (section 2.4.1)](#Section_2.4.1) that is being constructed. The following steps MUST be performed to construct **result** from **source**:
 
 - Initialize the constant fields of **result** as shown in section 2.4.1.
 - Set the **result.bitLen** field to the **source.abuf.bitlen** field.
@@ -2886,17 +2886,17 @@ Let **source** be the **MQDSPUBLICKEY** ([MS-MQMQ](#Section_1.3.1) section 2.2.1
 <a id="Section_3.1.7.1.6"></a>
 ##### 3.1.7.1.6 Sending the Packet
 
-The UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) MUST be sent to the remote [**queue manager**](#gt_queue-manager-qm) using the TCP or SPX connection associated with the protocol session.
+The UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) MUST be sent to the remote [**queue manager**](#gt_queue-manager-qm) using the TCP or SPX connection associated with the protocol session.
 
 If the transmission succeeds, the protocol MUST set *iPosition*.**Transmitted** to TRUE. Otherwise, if the TCP or SPX connection is closed while the UserMessage Packet is being sent, the protocol MUST perform the following steps:
 
-- Raise a Remove Messages From Dispatch Collection By Queue ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.34) event with the following argument:
+- Raise a Remove Messages From Dispatch Collection By Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.34) event with the following argument:
 - *iOutgoingQueue* := *iQueue*
 - Perform the steps in [Closing a Session (section 3.1.5.9)](#Section_3.1.5.9), and then take no further action.
 <a id="Section_3.1.7.1.7"></a>
 ##### 3.1.7.1.7 Sending Trace Message
 
-If the **Flags.TR** field of the **BaseHeader** ([MS-MQMQ](#Section_1.3.1) section 2.2.19.1) is set, the protocol MUST send a report message to the queue specified by the **QueueIdentifier** field of the **DebugHeader** ([MS-MQMQ] section 2.2.20.8). Report messages are utilized by application logic to track the delivery of sent messages.
+If the **Flags.TR** field of the **BaseHeader** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.19.1) is set, the protocol MUST send a report message to the queue specified by the **QueueIdentifier** field of the **DebugHeader** ([MS-MQMQ] section 2.2.20.8). Report messages are utilized by application logic to track the delivery of sent messages.
 
 To send a report message, the protocol MUST send a **UserMessage Packet** ([MS-MQMQ] section 2.2.20) with the following field values:
 
@@ -2967,7 +2967,7 @@ The ABNF rule queue-format is as specified in [MS-MQMQ] section 2.1.
 <a id="Section_3.1.7.2"></a>
 #### 3.1.7.2 Message Position Deleted
 
-This event is triggered when the Message Position Deleted ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.2.1) event is raised.
+This event is triggered when the Message Position Deleted ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.1) event is raised.
 
 Whenever a [**message**](#gt_message) is removed from a final destination [**queue**](#gt_queue), the protocol MUST send an acknowledgment message under the conditions described in this section.
 
@@ -2976,7 +2976,7 @@ Message removal from a destination queue could be the result of the message bein
 <a id="Section_3.1.7.2.1"></a>
 ##### 3.1.7.2.1 Administration Acknowledgment
 
-If administration acknowledgments are requested, a [**message**](#gt_message) is sent to the [**administration queue**](#gt_administration-queue) specified in the message when it is removed from a destination [**queue**](#gt_queue). Administration acknowledgment messages are system-generated **UserMessage Packet**s ([MS-MQMQ](#Section_1.3.1) section 2.2.20). If the retrieved message is a recoverable message, the acknowledgment MUST be sent as a recoverable message. If the retrieved message is an express message, the acknowledgment MUST be sent as an express message.
+If administration acknowledgments are requested, a [**message**](#gt_message) is sent to the [**administration queue**](#gt_administration-queue) specified in the message when it is removed from a destination [**queue**](#gt_queue). Administration acknowledgment messages are system-generated **UserMessage Packet**s ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20). If the retrieved message is a recoverable message, the acknowledgment MUST be sent as a recoverable message. If the retrieved message is an express message, the acknowledgment MUST be sent as an express message.
 
 This section specifies the sending of an administration acknowledgment when a message is retrieved or rejected by the application. Section [3.1.5.8.10](#Section_3.1.5.8.10) specifies the sending of an administration acknowledgment when a message has reached its destination queue.
 
@@ -2996,7 +2996,7 @@ If *iPosition*.**MessageReference.AcknowledgementsRequested** is one of **AckPos
 <a id="Section_3.1.7.2.2"></a>
 ##### 3.1.7.2.2 Final Acknowledgment
 
-If *iPosition*.**MessageReference.PositiveJournalingRequested** is TRUE, or *iPosition*.**MessageReference.NegativeJournalingRequested** is TRUE, or *iPosition*.**MessageReference.FinalAckRequired** is TRUE, the protocol MUST send a [FinalAck Packet (section 2.2.5)](#Section_2.2.5) when the message is removed from the destination [**queue**](#gt_queue) by raising the [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.1.6.2) event with the following arguments:
+If *iPosition*.**MessageReference.PositiveJournalingRequested** is TRUE, or *iPosition*.**MessageReference.NegativeJournalingRequested** is TRUE, or *iPosition*.**MessageReference.FinalAckRequired** is TRUE, the protocol MUST send a [FinalAck Packet (section 2.2.5)](#Section_2.2.5) when the message is removed from the destination [**queue**](#gt_queue) by raising the [Send Transactional Acknowledgment (section 3.1.7.17)](#Section_3.1.7.17) event with the following arguments:
 
 - *iMessageClass*: the *iReason* column value in the table in section [3.1.7.2.1](#Section_3.1.7.2.1)
 - *iUserMessage*: *iPosition*.**MessageReference**
@@ -3010,7 +3010,7 @@ When the underlying transport indicates a disconnect, the protocol MUST close th
 
 The Get Destination Info event MUST be generated with the following argument:
 
-- *iFormatName*: A [**queue**](#gt_queue) [**format name**](#gt_format-name) as specified in [MS-MQMQ](#Section_1.3.1) section 2.1.
+- *iFormatName*: A [**queue**](#gt_queue) [**format name**](#gt_format-name) as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 **Return Values**:
 
 - *rStatus*: A Boolean value indicating success.
@@ -3023,7 +3023,7 @@ The server MUST perform the following actions to process this event, using the d
 - Set *rQueueManagerGuid* equal to all zero bytes.
 - If a public format name ([MS-MQMQ] section 2.1.3) or a connector format name ([MS-MQMQ] section 2.1.6) is specified, the protocol MUST perform the following steps:
 - Parse the queue format name and let PublicQueueGuid be a GUID that is initialized to the value of the QueueGuid component of the public format name.
-- Raise a Read Directory ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.20) event with the following arguments:
+- Raise a Read Directory ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.20) event with the following arguments:
 - *iDirectoryObjectType*: "Queue"
 - *iFilter* = "Identifier" EQUALS PublicQueueGuid
 - If the value in *rStatus* returned by the Read Directory event does not equal **DirectoryOperationResult.Success**, set the *rStatus* variable of this event equal to FALSE, and take no further action.
@@ -3038,7 +3038,7 @@ The server MUST perform the following actions to process this event, using the d
 
 The Get Next Hops event MUST be generated with the following arguments:
 
-- *iQmGuid*: A [**GUID**](#gt_globally-unique-identifier-guid) corresponding to an **Identifier** ADM attribute of a **QueueManager** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.1) ADM element instance.
+- *iQmGuid*: A [**GUID**](#gt_globally-unique-identifier-guid) corresponding to an **Identifier** ADM attribute of a **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1) ADM element instance.
 **Return Values:**
 
 - *rStatus*: A Boolean value indicating success.
@@ -3046,7 +3046,7 @@ The Get Next Hops event MUST be generated with the following arguments:
 The server MUST perform the following actions to process this event:
 
 - Declare the **nextHopQmGuids** variable.
-- Use the Binary Reliable Message Routing Algorithm specified in [MS-MQBR](#Section_1.3.1) to obtain a list of [**queue manager**](#gt_queue-manager-qm) GUIDs and set **nextHopQmGuids** equal to it. The queue manager GUIDs computed by the algorithm represent the possible next hop queue managers to reach the required destination. The algorithm takes as input the value of the **QueueManager.Identifier** state variable and the *iQmGuid* argument.
+- Use the Binary Reliable Message Routing Algorithm specified in [MS-MQBR](../MS-MQBR/MS-MQBR.md) to obtain a list of [**queue manager**](#gt_queue-manager-qm) GUIDs and set **nextHopQmGuids** equal to it. The queue manager GUIDs computed by the algorithm represent the possible next hop queue managers to reach the required destination. The algorithm takes as input the value of the **QueueManager.Identifier** state variable and the *iQmGuid* argument.
 - For each GUID, referred to as *rNextHopGuid*:
 - Raise a Read Directory ([MS-MQDMPR] section 3.1.7.1.20) event with the following arguments:
 - *iDirectoryObjectType*: "QueueManager"
@@ -3071,7 +3071,7 @@ The protocol MUST perform the following actions to process this event:
 - The remaining fields of *Request* MUST be initialized as specified in section 2.2.7 for an [**initiator**](#gt_initiator).
 - *Request* MUST be sent as a **Ping Request** to the acceptor specified by the *iAddress* argument as specified in section 2.1.2.
 - Start a new instance of the [Ping Response Timer (section 3.1.2.9)](#Section_3.1.2.9).
-- Wait for either the [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.2.9) raised by the instance of the Ping Response Timer started in the previous step or a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event.
+- Wait for either the [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.6.8) raised by the instance of the Ping Response Timer started in the previous step or a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event.
 - If the Ping Response Timer Event is raised, set *rStatus* to FALSE and take no further action.
 - Otherwise, if a Ping Response Processed event is raised, determine the value of *rStatus* based on the *Response* processed by the [Receive Ping Response (section 3.1.7.8)](#Section_3.1.7.8) event. If the *Response*.**Flags.RF** field is 0x0, *rStatus* MUST be set to TRUE; otherwise, *rStatus* MUST be set to FALSE. The instance of the Ping Response Timer is canceled.
 <a id="Section_3.1.7.7"></a>
@@ -3096,7 +3096,7 @@ The Receive Ping Response event is triggered when a packet is received on the UD
 - Let *Response* be a reference to a [Ping Packet (section 2.2.7)](#Section_2.2.7), initialized to refer to the Ping Response (section 2.1.2) received.
 - If the *Response*.**Signature** field is not 0x5548, the protocol MUST ignore the packet and take no further action.
 - If the *Response*.**Cookie** field has a different value from the **PingCookie** ADM element, the protocol MUST ignore the packet and take no further action.
-- If a [Send Ping Request (section 3.1.7.6)](#Section_3.1.7.6) event is waiting for a [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.2.9) as specified in step 8 of section 3.1.7.6, the protocol MUST raise a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event. Otherwise, the protocol MUST ignore the packet and take no further action.
+- If a [Send Ping Request (section 3.1.7.6)](#Section_3.1.7.6) event is waiting for a [Ping Response Timer Event (section 3.1.6.8)](#Section_3.1.6.8) as specified in step 8 of section 3.1.7.6, the protocol MUST raise a [Ping Response Processed (section 3.1.7.9)](#Section_3.1.7.9) event. Otherwise, the protocol MUST ignore the packet and take no further action.
 <a id="Section_3.1.7.9"></a>
 #### 3.1.7.9 Ping Response Processed
 
@@ -3107,10 +3107,10 @@ When this event is raised, the protocol MUST take the actions specified in step 
 
 The Get Message Data Element From Buffer event MUST be generated with the following input argument:
 
-- *iBuffer*: A **UserMessage Packet** ([MS-MQMQ](#Section_1.3.1) section 2.2.20) structure.
+- *iBuffer*: A **UserMessage Packet** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) structure.
 **Return Values:**
 
-- *rMessage:* A **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element instance that corresponds to the **UserMessage Packet** structure stored in *iBuffer*.
+- *rMessage:* A **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance that corresponds to the **UserMessage Packet** structure stored in *iBuffer*.
 The protocol MUST generate a Deserialize Message From Buffer ([MS-MQDMPR] section 3.1.7.1.31) event with the following argument:
 
 - *iBuffer* := *iBuffer* of this event
@@ -3119,14 +3119,14 @@ The protocol MUST set *rMessage* to the *rMessage* returned by the Deserialize M
 <a id="Section_3.1.7.11"></a>
 #### 3.1.7.11 Construction of a UserMessage Packet
 
-The [**Queue Manager**](#gt_queue-manager-qm) MUST generate a Construct a UserMessage Packet ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.1.30) event with the following argument:
+The [**Queue Manager**](#gt_queue-manager-qm) MUST generate a Construct a UserMessage Packet ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.30) event with the following argument:
 
 - *iMessage*: the **Message** ([MS-MQDMPR] section 3.1.1.12) ADM element instance that is being processed.
 The Queue Manager MUST perform further processing of the returned **UserMessage Packet** structure as follows.
 
 If more than 75 percent of the time on the [Session Ack Send Timer (section 3.1.2.5)](#Section_3.1.2.5) has elapsed and the **UnackedReceivedMsgCount** ADM element does not equal 0x0000, the following processing steps MUST be performed:
 
-- A **SessionHeader** ([MS-MQMQ](#Section_1.3.1) section 2.2.20.4) MUST be included in the **UserMessage Packet** structure and MUST be populated as follows:
+- A **SessionHeader** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20.4) MUST be included in the **UserMessage Packet** structure and MUST be populated as follows:
 - The **SessionHeader.AckSequenceNumber** field MUST be set to the **MessageReceivedCount** ADM element.
 - The **SessionHeader.RecoverableMsgAckSeqNumber** field MUST be set to the lowest unacknowledged recoverable message sequence number that has been persisted for reliable recovery.
 - The **SessionHeader.UserMsgSequenceNumber** field MUST be set to the **MessageSentCount** ADM element.
@@ -3141,7 +3141,7 @@ If more than 75 percent of the time on the [Session Ack Send Timer (section 3.
 <a id="Section_3.1.7.12"></a>
 #### 3.1.7.12 Message Position Available Event
 
-This event is triggered when the Message Position Available ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.2.2) event is raised and processes the same arguments as that event:
+This event is triggered when the Message Position Available ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.2) event is raised and processes the same arguments as that event:
 
 - *iQueue*: A reference to the **Queue** ([MS-MQDMPR] section 3.1.1.2) ADM element instance in which the **MessagePosition** ([MS-MQDMPR] section 3.1.1.11) ADM element instance has become available.
 - *iPosition*: A reference to the **MessagePosition** ADM element instance that has become available.
@@ -3153,7 +3153,7 @@ This event MUST be processed as follows:
 - If *iQueue* is not an **OutgoingQueue** ([MS-MQDMPR] section 3.1.1.3) ADM element instance, take no further action.
 - If *iQueue*.**Multicast** is **True**, take no further action.
 - If *iQueue*.**State** is **Locked** or **OnHold**, take no further action.
-- If *iQueue*.**DestinationFormatName** is a direct format name ([MS-MQMQ](#Section_1.3.1) section 2.1.2) and specifies usage of the HTTP or HTTPS protocol, take no further action.
+- If *iQueue*.**DestinationFormatName** is a direct format name ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.2) and specifies usage of the HTTP or HTTPS protocol, take no further action.
 - If the *iQueue*.**ConnectionHistory** array is empty, the protocol MUST establish a connection to the remote [**queue manager**](#gt_queue-manager-qm), as specified in section [3.1.5.2](#Section_3.1.5.2).
 - An [OutgoingMessagePosition (section 3.1.1.3.1.2)](#Section_3.1.1.3.1.2) ADM element instance MUST be constructed as follows and then added to the **OutgoingMessageTable** ADM element:
 - The **MessagePosition** ADM attribute MUST be set to the available **MessagePosition** ADM element instance.
@@ -3168,7 +3168,7 @@ This event MUST be processed as follows:
 <a id="Section_3.1.7.13"></a>
 #### 3.1.7.13 Pause Queue Event
 
-This event is triggered when the Pause Queue ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.2.3) event is raised. Upon this event, the [Session Ack Send Timer (section 3.1.2.5)](#Section_3.1.2.5) MUST be stopped. A [SessionAck Packet (section 2.2.6)](#Section_2.2.6) MUST be sent to the remote host with the following values:
+This event is triggered when the Pause Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.3) event is raised. Upon this event, the [Session Ack Send Timer (section 3.1.2.5)](#Section_3.1.2.5) MUST be stopped. A [SessionAck Packet (section 2.2.6)](#Section_2.2.6) MUST be sent to the remote host with the following values:
 
 - The **SessionHeader.AckSequenceNumber** field MUST be set to the **MessageReceivedCount** ADM element.
 - The **SessionHeader.RecoverableMsgAckSeqNumber** field MUST be set to the lowest unacknowledged recoverable message sequence number that has been persisted for reliable recovery.
@@ -3176,7 +3176,7 @@ This event is triggered when the Pause Queue ([MS-MQDMPR](#Section_1.3.1) sectio
 - The **SessionHeader.RecoverableMsgSeqNumber** field MUST be set to the **RecoverableMessageSentCount** ADM element.
 - The **SessionHeader.RecoverableMsgAckFlags** field MUST be set to the **RecoverableMsgAckFlags** ADM element.
 - The **SessionHeader.WindowSize** field MUST be set to 0x0001.
-Subsequently, the [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1.3) ADM elements MUST be updated as follows:
+Subsequently, the [Session State (section 3.1.1.3.1)](#Section_3.1.1.3.1) ADM elements MUST be updated as follows:
 
 - The **RecoverableMsgAckFlags** ADM element MUST be set to 0x00000000.
 - The **UnackedReceivedMsgCount** ADM element MUST be set to 0x0000, and the **LastAckedRecoverableMsgSeqNumber** ADM element MUST be set to the **RecoverableMessageReceivedCount** ADM element.
@@ -3187,7 +3187,7 @@ Finally, *iQueue*.**State** MUST be set to **OnHold**, and a Remove Messages Fro
 <a id="Section_3.1.7.14"></a>
 #### 3.1.7.14 Resume Queue Event
 
-This event is triggered when the Resume Queue ([MS-MQDMPR](#Section_1.3.1) section 3.1.7.2.4) event is raised. The [**queue manager**](#gt_queue-manager-qm) MUST establish a protocol session to the remote queue manager if there are [**messages**](#gt_message) in the *iQueue*.**MessagePositionList**. Protocol session establishment is specified in [Establish a Protocol Session (section 3.1.5.2)](#Section_3.1.5.2).
+This event is triggered when the Resume Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.2.4) event is raised. The [**queue manager**](#gt_queue-manager-qm) MUST establish a protocol session to the remote queue manager if there are [**messages**](#gt_message) in the *iQueue*.**MessagePositionList**. Protocol session establishment is specified in [Establish a Protocol Session (section 3.1.5.2)](#Section_3.1.5.2).
 
 If the session whose **OutgoingQueueReference** ADM element matches *iQueue* has messages in its **OutgoingMessageTable** ADM element, the protocol MUST perform the following:
 
@@ -3199,13 +3199,13 @@ If the session whose **OutgoingQueueReference** ADM element matches *iQueue* has
 <a id="Section_3.1.7.15"></a>
 #### 3.1.7.15 Send Administration Acknowledgment
 
-Administration acknowledgment [**messages**](#gt_message) are system-generated UserMessage Packets ([MS-MQMQ](#Section_1.3.1) section 2.2.20) that are sent to [**administration queues**](#gt_administration-queue) specified in the packets. An administration acknowledgment can indicate whether a message has reached its destination [**queue**](#gt_queue) or whether the message has been retrieved. When a message is rejected, an administration acknowledgment message can indicate the reason for its loss.
+Administration acknowledgment [**messages**](#gt_message) are system-generated UserMessage Packets ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) that are sent to [**administration queues**](#gt_administration-queue) specified in the packets. An administration acknowledgment can indicate whether a message has reached its destination [**queue**](#gt_queue) or whether the message has been retrieved. When a message is rejected, an administration acknowledgment message can indicate the reason for its loss.
 
 The Send Administration Acknowledgment event MUST be generated with the following arguments:
 
 - *iReceivedUserMessagePacket*: The UserMessage Packet ([MS-MQMQ] section 2.2.20) that triggers the sending of the acknowledgment. Can be NULL if *iReceivedMessage* is provided.
 - *iMessageClass*: A message class identifier as specified in [MS-MQMQ] section 2.2.18.1.6.
-- *iReceivedMessage*: Optional. A Message ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element instance that triggers the sending of the acknowledgment. If this argument is supplied, *iReceivedUserMessagePacket* is ignored.
+- *iReceivedMessage*: Optional. A Message ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance that triggers the sending of the acknowledgment. If this argument is supplied, *iReceivedUserMessagePacket* is ignored.
 **Return Value**:
 
 - None.
@@ -3273,7 +3273,7 @@ The protocol MUST perform the following actions to process this event:
 This event MUST be generated with the following arguments:
 
 - *iPosition*: A reference to an [OutgoingMessagePosition (section 3.1.1.3.1.2)](#Section_3.1.1.3.1.2) ADM element instance.
-- *iMessagePosition*: A reference to a **MessagePosition** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.11) ADM element instance.
+- *iMessagePosition*: A reference to a **MessagePosition** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.11) ADM element instance.
 **Return Value**:
 
 - None.
@@ -3291,9 +3291,9 @@ The details of transactional acknowledgments are specified in section [3.1.1.6.2
 
 The Send Transactional Acknowledgment event MUST be generated with the following arguments:
 
-- *iMessageClass*: A message class identifier as specified in [MS-MQMQ](#Section_1.3.1) section 2.2.18.1.6. If this argument is not MQMSG_CLASS_ORDER_ACK ([MS-MQMQ] section 2.2.18.1.6), one of *iUserMessagePacket* or *iUserMessage* is required.
+- *iMessageClass*: A message class identifier as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.6. If this argument is not MQMSG_CLASS_ORDER_ACK ([MS-MQMQ] section 2.2.18.1.6), one of *iUserMessagePacket* or *iUserMessage* is required.
 - *iUserMessagePacket*: Optional. The UserMessage Packet ([MS-MQMQ] section 2.2.20) to acknowledge.
-- *iUserMessage*: Optional. The **Message** ([MS-MQDMPR](#Section_1.3.1) section 3.1.1.12) ADM element instance to acknowledge.
+- *iUserMessage*: Optional. The **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance to acknowledge.
 **Return Value**:
 
 - None.
@@ -3382,7 +3382,7 @@ The following sections describe several operations as used in common scenarios t
 <a id="Section_4.1"></a>
 ## 4.1 Session Initialization and Express Message Example
 
-The following Message Queuing (MSMQ): Message Queuing Binary Protocol packet [**sequence**](#gt_sequence) demonstrates session initialization and transfer of an express message between two [**queue managers**](#gt_476f10ed-08f0-4887-b583-59d5cf909979). This example follows the "Session with Express Messages Sent" scenario specified in [Session Initialization (section 3.1.1.7.1)](#Section_3.1.1.7.1) and [Session with Express Messages Sent (section 3.1.1.7.2)](#Section_3.1.1.7.2), except that only a single UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20) is sent. [Ping Messages (section 2.1.2)](#Section_2.1.2) in the examples are sent over UDP. All other [**messages**](#gt_message) are exchanged using TCP/IP.
+The following Message Queuing (MSMQ): Message Queuing Binary Protocol packet [**sequence**](#gt_sequence) demonstrates session initialization and transfer of an express message between two [**queue managers**](#gt_476f10ed-08f0-4887-b583-59d5cf909979). This example follows the "Session with Express Messages Sent" scenario specified in [Session Initialization (section 3.1.1.7.1)](#Section_3.1.1.7.1) and [Session with Express Messages Sent (section 3.1.1.7.2)](#Section_3.1.1.7.2), except that only a single UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20) is sent. [Ping Messages (section 2.1.2)](#Section_2.1.2) in the examples are sent over UDP. All other [**messages**](#gt_message) are exchanged using TCP/IP.
 
 The messages follow the sequence shown.
 
@@ -4352,7 +4352,7 @@ The following sections describe security considerations for implementers of the 
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-A sender can include a digital certificate and request authentication when sending a UserMessage Packet ([MS-MQMQ](#Section_1.3.1) section 2.2.20). A sender can request encryption of the [**message body**](#gt_message-body) to ensure message privacy. Use of the AES encryption algorithm is recommended for the best encryption strength.
+A sender can include a digital certificate and request authentication when sending a UserMessage Packet ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.20). A sender can request encryption of the [**message body**](#gt_message-body) to ensure message privacy. Use of the AES encryption algorithm is recommended for the best encryption strength.
 
 Authentication and encryption are not supported when a message is sent to a queue using a direct format name. The information in a UserMessage Packet that is sent using a direct format name is susceptible to tampering.
 
@@ -4448,7 +4448,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <19> Section 2.2.7: The unused fields are uninitialized data in the Windows implementation.
 
-<20> Section 2.3: For Windows NT and Windows 2000, this protocol uses the Message Queuing (MSMQ): Directory Service Protocol [MS-MQDS](#Section_1.3.1).
+<20> Section 2.3: For Windows NT and Windows 2000, this protocol uses the Message Queuing (MSMQ): Directory Service Protocol [MS-MQDS](../MS-MQDS/MS-MQDS.md).
 
 <21> Section 2.3: For the Message Queuing (MSMQ): Directory Service Protocol [MS-MQDS], the Directory Service schema elements are described in [MS-MQDS] sections 2.2.10 and 3.1.4.21.1 through 3.1.4.21.4.
 
@@ -4506,7 +4506,7 @@ Windows removes expired entries from the **MessageIDHistoryTable** ADM element e
 
 <42> Section 3.1.1.7.1: Windows NT, Windows 2000, Windows XP, and Windows Server 2003 always respond to **Ping Requests**, as defined in Ping Message (section 2.1.2). Otherwise, Windows does not respond to **Ping Requests** by default, but **Ping Responses**, as specified in section 2.1.2, can be enabled by defining a registry key of type DWORD called HKEY_LOCAL_MACHINE\software\microsoft\msmq\parameters\security\EnablePingService and setting its value to 0x00000001.
 
-<43> Section 3.1.2.1: The Microsoft implementation sets the Session Initialization Timer (section [3.1.2.1](#Section_3.1.1.7.1)) to a value in milliseconds equal to 60000 + (2 * RoundTripDelay). The RoundTripDelay value is contained in the registry key at HKEY_LOCAL_MACHINE\software\microsoft\msmq\parameters\RoundTripDelay. If the registry key does not exist, zero is used for the RoundTripDelay value.
+<43> Section 3.1.2.1: The Microsoft implementation sets the Session Initialization Timer (section [3.1.2.1](#Section_3.1.2.1)) to a value in milliseconds equal to 60000 + (2 * RoundTripDelay). The RoundTripDelay value is contained in the registry key at HKEY_LOCAL_MACHINE\software\microsoft\msmq\parameters\RoundTripDelay. If the registry key does not exist, zero is used for the RoundTripDelay value.
 
 <44> Section 3.1.2.2: The Windows default value for the Session Cleanup Timer (section [3.1.2.2](#Section_3.1.2.2)) is 300,000 milliseconds. If the queue manager is a [**routing server**](#gt_routing-server), the default value for the Session Cleanup Timer is 120,000 milliseconds. This default value can be overridden by setting the registry key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters\CleanupInterval to the desired value, in milliseconds.
 
@@ -4552,7 +4552,7 @@ The Windows implementation of this protocol uses the **Winsock** APIs to obtain 
 
 <64> Section 3.1.6.11: Windows XP and Windows Server 2003 use the **SymmetricKeyLongLifetime** ADM element instead of the **SymmetricKeyShortLifetime** ADM element when calculating the duration with which to restart the SendSymmetricKeyCache Cleanup Timer (section [3.1.2.11](#Section_3.1.2.11)).
 
-<65> Section 3.1.7.1.5: If the remote queue manager identified by the **RemoteQMGuid** ADM element is Windows NT, Windows 2000, Windows XP, or Windows Server 2003, there are only two **MQDSPUBLICKEY** ([MS-MQMQ](#Section_1.3.1) section 2.2.1) structures, with **sProviderName** field values of "Microsoft Base Cryptographic Provider v1.0" and "Microsoft Enhanced Cryptographic Provider v1.0".
+<65> Section 3.1.7.1.5: If the remote queue manager identified by the **RemoteQMGuid** ADM element is Windows NT, Windows 2000, Windows XP, or Windows Server 2003, there are only two **MQDSPUBLICKEY** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.1) structures, with **sProviderName** field values of "Microsoft Base Cryptographic Provider v1.0" and "Microsoft Enhanced Cryptographic Provider v1.0".
 
 <66> Section 3.1.7.1.5: Windows NT, Windows 2000, Windows XP, or Windows Server 2003 select a CSP, encryption algorithm, and symmetric key length according to these steps:
 

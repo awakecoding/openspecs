@@ -418,7 +418,7 @@ Session Initiation Protocol Extensions is an extension of the original [**Sessio
 
 Session Initiation Protocol Extensions defines NTLM/Kerberos authentication extensions to support client/server authentication and message signatures. See [NTLM/Kerberos Authentication Extensions Details (section 3.1)](#Section_3.1).
 
-Session Initiation Protocol Extensions also adds a number of extensions to SIMPLE-based presence, as specified in [RFC3261], [[RFC3265]](https://go.microsoft.com/fwlink/?LinkId=90413), and [[RFC3863]](https://go.microsoft.com/fwlink/?LinkId=90446). These extensions are briefly described below and are defined further in section [3](#Section_1.3).
+Session Initiation Protocol Extensions also adds a number of extensions to SIMPLE-based presence, as specified in [RFC3261], [[RFC3265]](https://go.microsoft.com/fwlink/?LinkId=90413), and [[RFC3863]](https://go.microsoft.com/fwlink/?LinkId=90446). These extensions are briefly described below and are defined further in section [3](#Section_3).
 
 Many of the extensions have been designed to reduce the number of [**subscription**](#gt_subscription) and [**notification**](#gt_notification) messages exchanged between the [**client**](#gt_sip-client-client) and the [**server**](#gt_server). One such extension is the capability to subscribe for the presence of a number of contacts in a single subscription. The client can send a batched SUBSCRIBE request to create such a subscription. The server sends the presence information of all the contacts in the batched subscription in a single [**NOTIFY**](#gt_notify) request. This is useful when a client needs to subscribe for presence of all the contacts in the user's contact list.
 
@@ -533,7 +533,7 @@ This attribute in the activity element can be used by the client to store a stri
 - userInfo
 This element is used for storing persisted presence information for a user. This information is stored by the server and is available regardless of the device to which a user is logged on or even whether the user is logged on at all. Any valid XML can be stored on the server. The server enforces a limit of 1,024 characters on the size of the element body, where the entire element body is treated as a single string.
 
-The Presence Document is described by the XML schema in [Appendix A: Full text/xml+msrtc.pidf Presence Document Format (section 6)](#Section_2.2.1).
+The Presence Document is described by the XML schema in [Appendix A: Full text/xml+msrtc.pidf Presence Document Format (section 6)](#Section_6).
 
 Note that the schema defines two different versions of the Presence Document:
 
@@ -1876,7 +1876,7 @@ The following events are specified in this section:
 
 - [Receiving a Failure Response to SUBSCRIBE (section 3.5.5.1)](#Section_3.5.5.1)
 - [Receiving a Success Response to SUBSCRIBE (section 3.5.5.2)](#Section_3.5.5.2)
-- [Receiving a BENOTIFY (section 3.5.5.3)](#Section_3.7.5.2)
+- [Receiving a BENOTIFY (section 3.5.5.3)](#Section_3.5.5.3)
 <a id="Section_3.5.5.1"></a>
 #### 3.5.5.1 Receiving a Failure Response to SUBSCRIBE
 
@@ -1960,7 +1960,7 @@ Except as specified in the following sections, the rules for message processing 
 
 The following events are specified in this section:
 
-- Receiving a 200 OK Response to SUBSCRIBE (section [3.6.5.1)](#Section_3.5.5.2)
+- Receiving a 200 OK Response to SUBSCRIBE (section [3.6.5.1)](#Section_3.6.5.1)
 - [Receiving a NOTIFY (section 3.6.5.2)](#Section_3.6.5.2)
 <a id="Section_3.6.5.1"></a>
 #### 3.6.5.1 Receiving a 200 OK Response to SUBSCRIBE

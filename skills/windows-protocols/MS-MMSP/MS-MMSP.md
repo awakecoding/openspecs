@@ -358,7 +358,7 @@ This protocol references commonly used data types as defined in [MS-DTYP](../MS-
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Data Structures Used for Logging
 
-Logging information sent by the client to the server is formatted as a [CLIENT_LOG (section 2.2.1.1)](#Section_2.2.1.1) data structure. The CLIENT_LOG (section 2.2.1.1) structure consists of a [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.1) structure and other fields. This section defines these two structures.
+Logging information sent by the client to the server is formatted as a [CLIENT_LOG (section 2.2.1.1)](#Section_2.2.1.1) data structure. The CLIENT_LOG (section 2.2.1.1) structure consists of a [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.2) structure and other fields. This section defines these two structures.
 
 Strings in the CLIENT_LOG (section 2.2.1.1) structure and the CLIENT_LOG_INFO (section 2.2.1.2) structure always use the ANSI code page. The character set used for the ANSI code page is U.S. ASCII for the English version of Windows, but it can be different for versions of Windows localized into other languages.
 
@@ -390,7 +390,7 @@ packet-beta
 
 **cbSize (4 bytes):** An unsigned 32-bit integer. Specifies the length of the CLIENT_LOG structure in bytes.
 
-**info (1142 bytes):** A [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.1) structure.
+**info (1142 bytes):** A [CLIENT_LOG_INFO (section 2.2.1.2)](#Section_2.2.1.2) structure.
 
 **dwSourceId (4 bytes):** An unsigned 32-bit integer. It MUST be the value of the **openFileId** field in the [LinkMacToViewerReportOpenFile (section 2.2.4.7)](#Section_2.2.4.7) message.
 
@@ -694,7 +694,7 @@ version-info = major "." minor %x0000
 
 **VersionUrl (variable):** A variable-size array of Unicode characters. If the **VersionInfo** field has a nonzero size, the **VersionUrl** field MUST specify the URL from which the client can download a software update of the version specified by the **VersionInfo** field. The URL MUST adhere to the URI syntax (as specified in [[RFC3986]](https://go.microsoft.com/fwlink/?LinkId=90453)), it MUST be expressed using Unicode characters, and it MUST include a terminating null character.
 
-**AuthenPackage (variable):** A variable-size array of Unicode characters. If the server supports authentication, and if it sends a [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_5) message to this client, it MUST include a nonzero size **AuthenPackage** field. The **AuthenPackage** field MUST specify the authentication scheme the server uses, according to the following ABNF syntax:
+**AuthenPackage (variable):** A variable-size array of Unicode characters. If the server supports authentication, and if it sends a [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_2.2.4.14) message to this client, it MUST include a nonzero size **AuthenPackage** field. The **AuthenPackage** field MUST specify the authentication scheme the server uses, according to the following ABNF syntax:
 
 auth-scheme= ( "BASIC" / "NTLM" ) %x0000
 
@@ -860,7 +860,7 @@ packet-beta
 
 **hr (4 bytes):** HRESULT. Result of processing the client LinkViewerToMacOpenFile (section 2.2.4.21) request. For HRESULT codes, see [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 
-**playIncarnation (4 bytes):** A 32-bit field. It MUST be set to the value of the **playIncarnation** field in the message received from the client that triggered the transmission of this LinkMacToViewerReportOpenFile message. The message is either a LinkViewerToMacOpenFile (section 2.2.4.21) message or a [LinkViewerToMacSecurityResponse (section 2.2.4.24)](#Section_5) message.
+**playIncarnation (4 bytes):** A 32-bit field. It MUST be set to the value of the **playIncarnation** field in the message received from the client that triggered the transmission of this LinkMacToViewerReportOpenFile message. The message is either a LinkViewerToMacOpenFile (section 2.2.4.21) message or a [LinkViewerToMacSecurityResponse (section 2.2.4.24)](#Section_2.2.4.24) message.
 
 **openFileId (4 bytes):** A 32-bit field. It SHOULD be set by the server in such a way that when the client echoes the value of this field in the [RequestPacketListResend (section 2.2.5)](#Section_2.2.5) packet (or in other messages that contain an **openFileId** field), the server can identify the file referred to in the message.
 
@@ -1083,7 +1083,7 @@ packet-beta
 
 **MID (4 bytes):** Message ID. For this message, the value MUST be 0x0004001A.
 
-**playIncarnation (4 bytes):** A 32-bit field. It MUST be set to the value of the **playIncarnation** field in the message received from the client that triggered the transmission of this LinkMacToViewerSecurityChallenge message. The message is either a [LinkViewerToMacOpenFile (section 2.2.4.21)](#Section_2.2.4.21) message or a [LinkViewerToMacSecurityResponse (section 2.2.4.24)](#Section_5) message.
+**playIncarnation (4 bytes):** A 32-bit field. It MUST be set to the value of the **playIncarnation** field in the message received from the client that triggered the transmission of this LinkMacToViewerSecurityChallenge message. The message is either a [LinkViewerToMacOpenFile (section 2.2.4.21)](#Section_2.2.4.21) message or a [LinkViewerToMacSecurityResponse (section 2.2.4.24)](#Section_2.2.4.24) message.
 
 **cookie (4 bytes):** A 32-bit field. It SHOULD be set by the server in such a way that when the client echoes the value of this field in the LinkViewerToMacSecurityResponse (section 2.2.4.24) message, the server can determine what LinkMacToViewerSecurityChallenge message the LinkViewerToMacSecurityResponse (section 2.2.4.24) message is a response to.
 
@@ -1465,7 +1465,7 @@ packet-beta
 
 **MID (4 bytes):** Message ID. For this message, the value MUST be 0x0003001A.
 
-**playIncarnation (4 bytes):** A 32-bit field. This field MUST be the value of the **playIncarnation** field in the [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_5) message received from the server that triggered the transmission of this LinkViewerToMacSecurityResponse message.
+**playIncarnation (4 bytes):** A 32-bit field. This field MUST be the value of the **playIncarnation** field in the [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_2.2.4.14) message received from the server that triggered the transmission of this LinkViewerToMacSecurityResponse message.
 
 **cookie (4 bytes):** A 32-bit field. It MUST be the value of the **cookie** field in the LinkMacToViewerSecurityChallenge (section 2.2.4.14) message received from the server that triggered the transmission of this LinkViewerToMacSecurityResponse message.
 
@@ -1731,7 +1731,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-Initialization of the protocol occurs as the result of a higher layer asking for information on multimedia [**content**](#gt_content) located on a server. That event is defined in section [3.1.4.1](#Section_3.1.4.1). It also occurs as the result of receiving a LinkMacToViewerReportRedirect message, as described in section [3.1.5.7](#Section_2.2.4.9).
+Initialization of the protocol occurs as the result of a higher layer asking for information on multimedia [**content**](#gt_content) located on a server. That event is defined in section [3.1.4.1](#Section_3.1.4.1). It also occurs as the result of receiving a LinkMacToViewerReportRedirect message, as described in section [3.1.5.7](#Section_3.1.5.7).
 
 The variables defined by the abstract data model MUST initially assume their default values. Variables that do not have default defined values MUST be initialized as follows:
 
@@ -1755,7 +1755,7 @@ This event causes the client to send a [LinkViewerToMacConnect (section 2.2.4.
 - A server or intermediate device, such as a noncaching proxy that asks for information on behalf of another client.
 The higher layer MUST provide the URL that is specified in all requests that the client sends. The value of the Server-URL variable in the abstract data model MUST be set to this URL.
 
-The client MUST perform the initialization of the protocol, as specified in section [3.1.3](#Section_3.2.3).
+The client MUST perform the initialization of the protocol, as specified in section [3.1.3](#Section_3.1.3).
 
 The higher layer SHOULD specify if the client needs to connect to an MMS proxy server, and if so, provide the IP address of the MMS proxy server and the port number on which the MMS proxy server receives UDP and TCP packets. The **Proxy-Address** variable MUST be set to the IP address of the proxy server, if any. The **Proxy-Port** variable MUST be set to the port number on which the proxy server receives UDP and TCP packets, if any.
 
@@ -1774,7 +1774,7 @@ If the value of the Packet-Pair-Packets-Expected variable is greater than 0, the
 
 The message MUST be sent by the rules specified in section [3.1.5.1](#Section_3.1.5.1).
 
-After sending the message, the client MUST wait for the [LinkMacToViewerReportConnectedEX (section 2.2.4.2)](#Section_2.2.4.2) message to be received. How to process this message is specified in section [3.1.5.3](#Section_2.2.4.2).
+After sending the message, the client MUST wait for the [LinkMacToViewerReportConnectedEX (section 2.2.4.2)](#Section_2.2.4.2) message to be received. How to process this message is specified in section [3.1.5.3](#Section_3.1.5.3).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Request to Start Streaming Content
@@ -1992,7 +1992,7 @@ If the value of the UDP-Selected variable is 0, then the client MUST set the pro
 
 If the value of UDP-Selected variable is 1, then the client MUST set the proto syntax element of the **funnelName** field in the LinkViewerToMacConnectFunnel (section 2.2.4.18) message to UDP and the **port syntax** element of the **funnelName** field MUST be set to the value of the **UDP-Receive-Port** variable.
 
-After sending the LinkViewerToMacConnectFunnel (section 2.2.4.18) message, the client MUST wait for the [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message to be received. How to process this message is specified in section [3.1.5.6](#Section_2.2.4.3).
+After sending the LinkViewerToMacConnectFunnel (section 2.2.4.18) message, the client MUST wait for the [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message to be received. How to process this message is specified in section [3.1.5.6](#Section_3.1.5.6).
 
 If the client is not sending a LinkViewerToMacConnectFunnel (section 2.2.4.18) message, it MUST send a LinkViewerToMacFunnelInfo (section 2.2.4.19) message.
 
@@ -2002,7 +2002,7 @@ Otherwise, the value of the **playIncarnation** field in the LinkViewerToMacFunn
 
 - 0xF0F0F0F1 if the value of the UDP-Selected variable is 0.
 - 0xF0F0F901 if value of the UDP-Selected variable is 1.
-After sending the LinkViewerToMacFunnelInfo (section 2.2.4.19) message, the client MUST wait for the [LinkMacToViewerReportFunnelInfo (section 2.2.4.6)](#Section_2.2.4.6) message to be received. How to process this message is specified in section [3.1.5.4](#Section_2.2.4.6).
+After sending the LinkViewerToMacFunnelInfo (section 2.2.4.19) message, the client MUST wait for the [LinkMacToViewerReportFunnelInfo (section 2.2.4.6)](#Section_2.2.4.6) message to be received. How to process this message is specified in section [3.1.5.4](#Section_3.1.5.4).
 
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receiving a LinkMacToViewerReportFunnelInfo Message
@@ -2023,7 +2023,7 @@ If the value of the **playIncarnation** field of the LinkMacToViewerReportFunnel
 
 If the value of the UDP-Selected variable is 0, then the client MUST set the proto syntax element of the **funnelName** field in the LinkViewerToMacConnectFunnel (section 2.2.4.18) message to TCP. If the value of the UDP-Selected variable is 1, then the client MUST set the proto syntax element of the **funnelName** field in the LinkViewerToMacConnectFunnel (section 2.2.4.18) message to UDP, and the **port syntax** element of the **funnelName** field MUST be set to the value of the **UDP-Receive-Port** variable.
 
-After sending the LinkViewerToMacConnectFunnel (section 2.2.4.18) message, the client MUST wait for either a [LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4)](#Section_2.2.4.4) message or a [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message to be received. How to process a LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4) message is specified in section [3.1.5.5](#Section_2.2.4.4); how to process a LinkMacToViewerReportConnectedFunnel (section 2.2.4.3) message is specified in section [3.1.5.6](#Section_2.2.4.3).
+After sending the LinkViewerToMacConnectFunnel (section 2.2.4.18) message, the client MUST wait for either a [LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4)](#Section_2.2.4.4) message or a [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message to be received. How to process a LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4) message is specified in section [3.1.5.5](#Section_3.1.5.5); how to process a LinkMacToViewerReportConnectedFunnel (section 2.2.4.3) message is specified in section [3.1.5.6](#Section_3.1.5.6).
 
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 Receiving a LinkMacToViewerReportDisconnectedFunnel Message
@@ -2040,7 +2040,7 @@ The client MAY report to the higher layer that it has changed the value of the *
 
 For example, if the first LinkViewerToMacConnectFunnel (section 2.2.4.18) message specifies the protocol as UDP, the second LinkViewerToMacConnectFunnel (section 2.2.4.18) message SHOULD specify the protocol as TCP.
 
-If the client sends a new LinkViewerToMacConnectFunnel (section 2.2.4.18) message, it MUST wait for either a LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4) message or a [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message to be received. How to process a LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4) message is specified in section 3.1.5.5; how to process a LinkMacToViewerReportConnectedFunnel (section 2.2.4.3) message is specified in section [3.1.5.6](#Section_2.2.4.3).
+If the client sends a new LinkViewerToMacConnectFunnel (section 2.2.4.18) message, it MUST wait for either a LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4) message or a [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message to be received. How to process a LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4) message is specified in section 3.1.5.5; how to process a LinkMacToViewerReportConnectedFunnel (section 2.2.4.3) message is specified in section [3.1.5.6](#Section_3.1.5.6).
 
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 Receiving a LinkMacToViewerReportConnectedFunnel Message
@@ -2055,7 +2055,7 @@ The value of the **fileName** field in the LinkViewerToMacOpenFile (section 2.
 
 The client MAY set the value of the **tokenData** field in the LinkViewerToMacOpenFile (section 2.2.4.21) message to authentication data appropriate for the authentication scheme identified by the Auth-Scheme variable in the abstract data model. For example, if the value of the Auth-Scheme variable is BASIC, the client includes the user name and password in the **tokenData** field formatted according to the syntax rules for Basic authentication.<40>
 
-After sending the LinkViewerToMacOpenFile (section 2.2.4.21) message, the client MUST wait for a [LinkMacToViewerReportRedirect (section 2.2.4.9)](#Section_2.2.4.9) message, a [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_5) message, or a [LinkMacToViewerReportOpenFile (section 2.2.4.7)](#Section_2.2.4.7) message to be received. How to process a LinkMacToViewerReportRedirect (section 2.2.4.9) message is specified in section [3.1.5.7](#Section_2.2.4.9); how to process a LinkMacToViewerSecurityChallenge (section 2.2.4.14) message is specified in section [3.1.5.8](#Section_2.2.4.14); and how to process a LinkMacToViewerReportOpenFile (section 2.2.4.7) message is specified in section [3.1.5.9](#Section_2.2.4.7).
+After sending the LinkViewerToMacOpenFile (section 2.2.4.21) message, the client MUST wait for a [LinkMacToViewerReportRedirect (section 2.2.4.9)](#Section_2.2.4.9) message, a [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_2.2.4.14) message, or a [LinkMacToViewerReportOpenFile (section 2.2.4.7)](#Section_2.2.4.7) message to be received. How to process a LinkMacToViewerReportRedirect (section 2.2.4.9) message is specified in section [3.1.5.7](#Section_3.1.5.7); how to process a LinkMacToViewerSecurityChallenge (section 2.2.4.14) message is specified in section [3.1.5.8](#Section_3.1.5.8); and how to process a LinkMacToViewerReportOpenFile (section 2.2.4.7) message is specified in section [3.1.5.9](#Section_3.1.5.9).
 
 <a id="Section_3.1.5.7"></a>
 #### 3.1.5.7 Receiving a LinkMacToViewerReportRedirect Message
@@ -2064,7 +2064,7 @@ The client MUST perform the steps in section [3.1.5.2](#Section_3.1.5.2). Also, 
 
 The client MUST close the TCP connection on which it received the LinkMacToViewerReportRedirect (section 2.2.4.9) message.
 
-The client MUST perform the initialization of the protocol, as specified in section [3.1.3](#Section_3.2.3), except that the Server-URL variable, the **Trick-Mode-Rate** variable, the **UDP-Selected** variable, the **Packet-Pair-Packets-Expected** variable, the **Proxy-Address** variable, and the **Proxy-Port** variable MUST NOT be initialized.
+The client MUST perform the initialization of the protocol, as specified in section [3.1.3](#Section_3.1.3), except that the Server-URL variable, the **Trick-Mode-Rate** variable, the **UDP-Selected** variable, the **Packet-Pair-Packets-Expected** variable, the **Proxy-Address** variable, and the **Proxy-Port** variable MUST NOT be initialized.
 
 If the value of the **RedirectType** field in the LinkMacToViewerReportRedirect (section 2.2.4.9) message is 0x0001, the client MUST perform the following steps:
 
@@ -2078,17 +2078,17 @@ The client MUST then send a [LinkViewerToMacConnect (section 2.2.4.17)](#Secti
 <a id="Section_3.1.5.8"></a>
 #### 3.1.5.8 Receiving a LinkMacToViewerSecurityChallenge Message
 
-The client MUST perform the steps in section [3.1.5.2](#Section_3.1.5.2). Also, the client MUST verify that the [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_5) message adheres to the syntax specified in section 2.2.4.14.
+The client MUST perform the steps in section [3.1.5.2](#Section_3.1.5.2). Also, the client MUST verify that the [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_2.2.4.14) message adheres to the syntax specified in section 2.2.4.14.
 
 If the server's major version number is greater than or equal to 9, as specified by the Server-Version variable in the abstract data model, the client SHOULD update the value of the Auth-Scheme variable as follows: If the first two bytes of the **pToken** field in the LinkMacToViewerSecurityChallenge message are both 0x00, the Auth-Scheme variable MUST be set to NTLM. Otherwise, the Auth-Scheme variable MUST be set to BASIC.
 
 If the server's major version number is less than 9, as specified by the Server-Version variable, the client SHOULD update the value of the Auth-Scheme variable as follows: If either of the first two bytes of the **pToken** field in the LinkMacToViewerSecurityChallenge message have a value other than 0x00, the Auth-Scheme variable MUST be set to BASIC. Otherwise, the value of the Auth-Scheme variable MUST remain unchanged.<42>
 
-The client MUST send a [LinkViewerToMacSecurityResponse (section 2.2.4.24)](#Section_5) message, as specified in section 2.2.4.24.
+The client MUST send a [LinkViewerToMacSecurityResponse (section 2.2.4.24)](#Section_2.2.4.24) message, as specified in section 2.2.4.24.
 
 The client MUST set the value of the **pToken** field in the LinkViewerToMacSecurityResponse message to authentication data appropriate for the authentication scheme identified by the Auth-Scheme variable in the abstract data model. For example, if the value of the Auth-Scheme variable is BASIC, the client includes the user name and password in the **pToken** field formatted according to the syntax rules for Basic authentication.
 
-After sending the LinkViewerToMacSecurityResponse message, the client MUST wait for a [LinkMacToViewerReportRedirect (section 2.2.4.9)](#Section_2.2.4.9) message, a LinkMacToViewerSecurityChallenge message, or a [LinkMacToViewerReportOpenFile (section 2.2.4.7)](#Section_2.2.4.7) message to be received. How to process a LinkMacToViewerReportRedirect (section 2.2.4.9) message is specified in section [3.1.5.7](#Section_2.2.4.9); how to process a LinkMacToViewerSecurityChallenge message is specified in section 3.1.5.8; and how to process a LinkMacToViewerReportOpenFile (section 2.2.4.7) message is specified in section [3.1.5.9](#Section_2.2.4.7).<43>
+After sending the LinkViewerToMacSecurityResponse message, the client MUST wait for a [LinkMacToViewerReportRedirect (section 2.2.4.9)](#Section_2.2.4.9) message, a LinkMacToViewerSecurityChallenge message, or a [LinkMacToViewerReportOpenFile (section 2.2.4.7)](#Section_2.2.4.7) message to be received. How to process a LinkMacToViewerReportRedirect (section 2.2.4.9) message is specified in section [3.1.5.7](#Section_3.1.5.7); how to process a LinkMacToViewerSecurityChallenge message is specified in section 3.1.5.8; and how to process a LinkMacToViewerReportOpenFile (section 2.2.4.7) message is specified in section [3.1.5.9](#Section_3.1.5.9).<43>
 
 <a id="Section_3.1.5.9"></a>
 #### 3.1.5.9 Receiving a LinkMacToViewerReportOpenFile Message
@@ -2372,7 +2372,7 @@ If the value of the **State** variable is READY, the **Idle-Timeout** timer MUST
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2435,9 +2435,9 @@ If the value of the **playIncarnation** field of the LinkViewerToMacConnect mess
 
 If the server supports authentication, and there is a possibility that authentication will be required, the **AuthenPackage** field in the LinkMacToViewerReportConnectedEX message MUST be set to specify the name of the authentication scheme (either BASIC or NTLM).
 
-After sending the LinkMacToViewerReportConnectedEX message, the server MUST wait for either a [LinkViewerToMacFunnelInfo](#Section_2.2.4.19) message or a [LinkViewerToMacConnectFunnel](#Section_2.2.4.3) message to be received.
+After sending the LinkMacToViewerReportConnectedEX message, the server MUST wait for either a [LinkViewerToMacFunnelInfo](#Section_2.2.4.19) message or a [LinkViewerToMacConnectFunnel](#Section_2.2.4.18) message to be received.
 
-How to process a LinkViewerToMacFunnelInfo message is specified in section [3.2.5.4](#Section_2.2.4.19); how to process a LinkViewerToMacConnectFunnel message is specified in section [3.2.5.5](#Section_2.2.4.18).
+How to process a LinkViewerToMacFunnelInfo message is specified in section [3.2.5.4](#Section_3.2.5.4); how to process a LinkViewerToMacConnectFunnel message is specified in section [3.2.5.5](#Section_3.2.5.5).
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Receiving a LinkViewerToMacFunnelInfo Message
@@ -2460,7 +2460,7 @@ If the value of the **playIncarnation** field in the LinkMacToViewerReportFunnel
 
 After sending the LinkMacToViewerReportFunnelInfo message, if the value of the **playIncarnation** field in the LinkMacToViewerReportFunnelInfo message is set to 0xF0F0F0F1, the server MUST send a second and a third LinkMacToViewerReportFunnelInfo message. Each of these two messages MUST be identical to the first message, except that the contents of the **Packet-pair packet** field MUST be set to different random bytes. Also, the size of the **Packet-pair packet** field in the third message MUST be chosen so that the total size of the TcpMessageHeader packet that contains the third message becomes 1,056 bytes.
 
-After sending the last LinkMacToViewerReportFunnelInfo message, the server MUST wait for a [LinkViewerToMacConnectFunnel](#Section_2.2.4.18) message to be received. How to process this message is specified in section [3.2.5.5](#Section_2.2.4.18).
+After sending the last LinkMacToViewerReportFunnelInfo message, the server MUST wait for a [LinkViewerToMacConnectFunnel](#Section_2.2.4.18) message to be received. How to process this message is specified in section [3.2.5.5](#Section_3.2.5.5).
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Receiving a LinkViewerToMacConnectFunnel Message
@@ -2471,7 +2471,7 @@ The server MUST parse the **funnelName** field, and if the **funnelName** field 
 
 If the LinkViewerToMacConnectFunnel message is processed successfully, the server MUST send a [LinkMacToViewerReportConnectedFunnel (section 2.2.4.3)](#Section_2.2.4.3) message. Otherwise, the server MUST send a [LinkMacToViewerReportDisconnectedFunnel (section 2.2.4.4)](#Section_2.2.4.4) message.
 
-If the server sent the LinkMacToViewerReportConnectedFunnel message, the server MUST wait for a [LinkViewerToMacOpenFile](#Section_2.2.4.21) message to be received. How to process this message is specified in section [3.2.5.6](#Section_2.2.4.21).
+If the server sent the LinkMacToViewerReportConnectedFunnel message, the server MUST wait for a [LinkViewerToMacOpenFile](#Section_2.2.4.21) message to be received. How to process this message is specified in section [3.2.5.6](#Section_3.2.5.6).
 
 If the server sent the LinkMacToViewerReportDisconnectedFunnel message, the server MUST wait for a LinkViewerToMacConnectFunnel message to be received. How to process this message is specified in section 3.2.5.5.
 
@@ -2486,11 +2486,11 @@ If the higher layer indicates that the client is to be redirected to a different
 
 If there is no error in processing the LinkViewerToMacOpenFile message, and the server has not sent a LinkMacToViewerReportRedirect message, the server MUST generate a numerical identifier for the resource identified by the **fileName** field and store it in the File-ID variable of the abstract data model.
 
-If the LinkViewerToMacOpenFile message includes a nonzero size **tokenData** field, and if the server requires identification for the resource specified in the **fileName** field, the server MUST process the credentials in the **tokenData** field using the same authentication mechanism that the server previously specified in the **AuthenPackage** field of the [LinkMacToViewerReportConnectedEX](#Section_2.2.4.2) message. If the authentication algorithm requires that a challenge be sent (for example, because the credentials in the **tokenData** field are incorrect), the server MUST send a [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_5) message.
+If the LinkViewerToMacOpenFile message includes a nonzero size **tokenData** field, and if the server requires identification for the resource specified in the **fileName** field, the server MUST process the credentials in the **tokenData** field using the same authentication mechanism that the server previously specified in the **AuthenPackage** field of the [LinkMacToViewerReportConnectedEX](#Section_2.2.4.2) message. If the authentication algorithm requires that a challenge be sent (for example, because the credentials in the **tokenData** field are incorrect), the server MUST send a [LinkMacToViewerSecurityChallenge (section 2.2.4.14)](#Section_2.2.4.14) message.
 
 If the value of the **cbtoken** field in the LinkViewerToMacOpenFile message is 0x00000000, and if the server requires identification for the resource specified in the **fileName** field, the server MUST send a LinkMacToViewerSecurityChallenge message. In this case, if the client's major version number is less than 8, as specified by the Client-Version variable, the authentication algorithm used when generating the value for the **pToken** field in the LinkMacToViewerSecurityChallenge message MUST be the same as what the server previously specified in the **AuthenPackage** field of the LinkMacToViewerReportConnectedEX message. If the client's major version number is greater than or equal to 8, the authentication algorithm used when generating the value for the **pToken** field in the LinkMacToViewerSecurityChallenge message MUST be either Basic, as specified in [[RFC2617]](https://go.microsoft.com/fwlink/?LinkId=90373), or NTLM, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md).
 
-If the server sent a LinkMacToViewerSecurityChallenge message, the server MUST wait for a [LinkViewerToMacSecurityResponse](#Section_5) message to be received. How to process this message is specified in section [3.2.5.7](#Section_2.2.4.24).
+If the server sent a LinkMacToViewerSecurityChallenge message, the server MUST wait for a [LinkViewerToMacSecurityResponse](#Section_2.2.4.24) message to be received. How to process this message is specified in section [3.2.5.7](#Section_3.2.5.7).
 
 If the server did not send a LinkMacToViewerSecurityChallenge message, the server MUST send a LinkMacToViewerReportOpenFile (section 2.2.4.7) message.
 
@@ -2501,9 +2501,9 @@ If the server sent a LinkMacToViewerReportOpenFile message, the server MUST wait
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Receiving a LinkViewerToMacSecurityResponse Message
 
-The server MUST first follow the steps specified in section [3.2.5.1](#Section_3.2.5.1). Also, the server MUST verify that the [LinkViewerToMacSecurityResponse](#Section_5) message adheres to the syntax specified in section 2.2.4.24.
+The server MUST first follow the steps specified in section [3.2.5.1](#Section_3.2.5.1). Also, the server MUST verify that the [LinkViewerToMacSecurityResponse](#Section_2.2.4.24) message adheres to the syntax specified in section 2.2.4.24.
 
-The server MUST process the credentials in the **pToken** field of the LinkViewerToMacSecurityResponse message using the same authentication mechanism that the server previously specified in the **pToken** field of the [LinkMacToViewerSecurityChallenge](#Section_5) message. If the authentication algorithm requires that a challenge be sent (for example, because the credentials in the **pToken** field are incorrect), the server MUST send a LinkMacToViewerSecurityChallenge message. If the **pToken** field of the LinkViewerToMacSecurityResponse message includes the NTLM_AUTH structure (section [2.2.4.14.1](#Section_2.2.4.14.1)) and the LinkMacToViewerSecurityChallenge will include an NTLM challenge token (as defined in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 2.2.1.2), then the **pToken** field in the LinkMacToViewerSecurityChallenge message MUST include the NTLM_AUTH structure. If the **pToken** field of the LinkViewerToMacSecurityResponse message does not include the NTLM_AUTH structure, then the **pToken** field in the LinkMacToViewerSecurityChallenge message MUST NOT include the NTLM_AUTH structure.
+The server MUST process the credentials in the **pToken** field of the LinkViewerToMacSecurityResponse message using the same authentication mechanism that the server previously specified in the **pToken** field of the [LinkMacToViewerSecurityChallenge](#Section_2.2.4.14) message. If the authentication algorithm requires that a challenge be sent (for example, because the credentials in the **pToken** field are incorrect), the server MUST send a LinkMacToViewerSecurityChallenge message. If the **pToken** field of the LinkViewerToMacSecurityResponse message includes the NTLM_AUTH structure (section [2.2.4.14.1](#Section_2.2.4.14.1)) and the LinkMacToViewerSecurityChallenge will include an NTLM challenge token (as defined in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 2.2.1.2), then the **pToken** field in the LinkMacToViewerSecurityChallenge message MUST include the NTLM_AUTH structure. If the **pToken** field of the LinkViewerToMacSecurityResponse message does not include the NTLM_AUTH structure, then the **pToken** field in the LinkMacToViewerSecurityChallenge message MUST NOT include the NTLM_AUTH structure.
 
 If the server sent a LinkMacToViewerSecurityChallenge message, the server MUST wait for a LinkViewerToMacSecurityResponse message to be received. How to process this message is specified in section 3.2.5.7.
 
@@ -2547,7 +2547,7 @@ If the value of the Client-Port variable is not 0x0000, the server MUST then sen
 
 If multiple Data packets are required to send the complete ASF file header to the client, the transmission of the Data packets MUST be paced by the server. Pacing means that the server transmits the packets as quickly as possible, but the bit rate used when transmitting the Data packets MUST NOT exceed the average [**content**](#gt_content) bit rate. The average content bit rate is the value of the **dwBitRate** field in the most recently sent LinkMacToViewerReportStreamChange message or, if no such message has been sent, the value of the **fileBitRate** field in the LinkMacToViewerReportOpenFile message that was sent by the server.
 
-While sending the Data packets, the server MUST be prepared to receive a [LinkViewerToMacCancelReadBlock](#Section_2.2.4.15) message from the client. How to process this message is specified in section [3.2.5.9](#Section_2.2.4.15).
+While sending the Data packets, the server MUST be prepared to receive a [LinkViewerToMacCancelReadBlock](#Section_2.2.4.15) message from the client. How to process this message is specified in section [3.2.5.9](#Section_3.2.5.9).
 
 After sending the last Data packet containing the ASF file header, if the value of the State variable is INIT, then the State variable MUST be set to READY, and the server MUST wait for a LinkViewerToMacCancelReadBlock message, a [LinkViewerToMacStreamSwitch](#Section_2.2.4.28) message, a [LinkViewerToMacStartPlaying](#Section_2.2.4.25) message, a [LinkViewerToMacStartStriding](#Section_2.2.4.26) message, or a [LinkViewerToMacCloseFile](#Section_2.2.4.16) message to be received from the client.
 
@@ -2555,7 +2555,7 @@ How to process a LinkViewerToMacCancelReadBlock message is specified in section 
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2585,7 +2585,7 @@ If the value of the State variable is STREAMING, the server MUST continue transm
 
 If the value of the State variable is READY, the server MUST wait for a [LinkViewerToMacStartPlaying](#Section_2.2.4.25) message, a [LinkViewerToMacStartStriding](#Section_2.2.4.26) message, or a [LinkViewerToMacCloseFile](#Section_2.2.4.16) message to be received from the client.
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2690,7 +2690,7 @@ How to process a LinkViewerToMacLogging message is specified in section [3.2.5.1
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2707,7 +2707,7 @@ The server MUST wait for a [LinkViewerToMacStreamSwitch](#Section_2.2.4.28) mess
 
 How to process a LinkViewerToMacStreamSwitch message is specified in section [3.2.5.10](#Section_3.2.5.10).
 
-How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11.1).
+How to process a LinkViewerToMacStartPlaying message is specified in section [3.2.5.11](#Section_3.2.5.11).
 
 How to process a LinkViewerToMacStartStriding message is specified in section [3.2.5.12](#Section_3.2.5.12).
 
@@ -2789,8 +2789,8 @@ Figure 2: Server States
 The following describes the preceding diagram:
 
 - The server enters INIT state when it receives a LinkViewerToMacConnect message from the client, as described in section [3.2.5.3](#Section_3.2.5.3).
-- When the server is in INIT state, it can receive a request for the ASF File Header by means of a LinkViewerToMacReadBlock message, as described in section [3.1.5.8](#Section_2.2.4.14). The server sends the ASF File Header to the client, and once it has sent the last Data packet with the ASF File Header, the server transitions to READY state.
-- If the server is in READY state and it receives a request to start streaming, it will transition to STREAMING state. The request can be in the form of a LinkViewerToMacStartPlaying message (section [3.2.5.11](#Section_3.2.5.11.1)) or a LinkViewerToMacStartStriding message (section [3.2.5.12](#Section_3.2.5.12)).
+- When the server is in INIT state, it can receive a request for the ASF File Header by means of a LinkViewerToMacReadBlock message, as described in section [3.1.5.8](#Section_3.1.5.8). The server sends the ASF File Header to the client, and once it has sent the last Data packet with the ASF File Header, the server transitions to READY state.
+- If the server is in READY state and it receives a request to start streaming, it will transition to STREAMING state. The request can be in the form of a LinkViewerToMacStartPlaying message (section [3.2.5.11](#Section_3.2.5.11)) or a LinkViewerToMacStartStriding message (section [3.2.5.12](#Section_3.2.5.12)).
 - While in INIT and READY states, there is a possibility that the Idle-Timeout timer could expire. If that happens the state machine terminates the connection, as described in section [3.2.6.2](#Section_3.2.6.2).
 - If the server is in STREAMING state and it receives a request to stop streaming by means of a LinkViewerToMacStopPlaying message, it will transition to READY state, as described in section [3.2.5.14](#Section_3.2.5.14).
 - If the server is in STREAMING state and the higher layer notifies the client that the last Data packet has been sent and that no additional ASF File Headers will be made available to the client, then the server transitions to READY state, as described in section [3.2.4.1](#Section_3.2.4.1).
@@ -2811,7 +2811,7 @@ Figure 3: Sequence of TCP packets
 - The client requests information from the server with a [LinkViewerToMacFunnelInfo](#Section_2.2.4.19) message.
 - The server responds with a [LinkMacToViewerReportFunnelInfo](#Section_2.2.4.6) message.
 - The client chooses a specific port and requests that the server use it to send [**streaming**](#gt_streaming) media [**content**](#gt_content) by sending a [LinkViewerToMacConnectFunnel](#Section_2.2.4.18) message.
-- The server responds by sending a [LinkMacToViewerReportConnectedFunnel](#Section_2.2.4.3) message to notify the client that it will use the requested port.
+- The server responds by sending a [LinkMacToViewerReportConnectedFunnel](#Section_2.2.4.18) message to notify the client that it will use the requested port.
 - The client requests, by name, the specific media file it needs to have streamed to it from the server by sending a [LinkViewerToMacOpenFile](#Section_2.2.4.21) message.
 - The server responds that it was able to open the requested file with a [LinkMacToViewerReportOpenFile](#Section_2.2.4.7) message.
 - The client requests the file header from the server by sending a [LinkViewerToMacReadBlock](#Section_2.2.4.23) message.
@@ -2847,7 +2847,7 @@ Figure 4: Sequence for UDP connections
 - The client sends a [LinkViewerToMacFunnelInfo](#Section_2.2.4.19) message with the **playIncarnation** field set to "0xF0F0F901". This value corresponds to the named value of MMS_PACKET_PAIR_UDP_HIGH_ENTROPY.
 - The server sends a [LinkMacToViewerReportFunnelInfo](#Section_2.2.4.6) message with the **playIncarnation** field set to "0xF0F0F901".
 - The client sends a [LinkViewerToMacConnectFunnel](#Section_2.2.4.18) message.
-- The server sends a [LinkMacToViewerReportConnectedFunnel](#Section_2.2.4.3) message.
+- The server sends a [LinkMacToViewerReportConnectedFunnel](#Section_2.2.4.18) message.
 - The client sends a [LinkViewerToMacOpenFile](#Section_2.2.4.21) message.
 - The server sends a [LinkMacToViewerReportOpenFile](#Section_2.2.4.7) message.
 - The client sends a [LinkViewerToMacReadBlock](#Section_2.2.4.23) message.
@@ -2945,8 +2945,8 @@ Figure 9: Basic authentication sequence
 - The **cbAuthenPackage** field has a value of 6.
 The client and server then continue their normal sequence of commands.
 
-- Eventually, the client sends a [LinkViewerToMacOpenFile](#Section_2.2.4.21) message request to which the server responds with a [LinkMacToViewerSecurityChallenge](#Section_5) message.
-- The client sends a [LinkViewerToMacSecurityResponse](#Section_5) message to the server that contains the username and password. If the credentials are correct, the server responds with a [LinkMacToViewerReportOpenFile](#Section_2.2.4.7) message. Otherwise, the server responds with a LinkMacToViewerSecurityChallenge message.
+- Eventually, the client sends a [LinkViewerToMacOpenFile](#Section_2.2.4.21) message request to which the server responds with a [LinkMacToViewerSecurityChallenge](#Section_2.2.4.14) message.
+- The client sends a [LinkViewerToMacSecurityResponse](#Section_2.2.4.24) message to the server that contains the username and password. If the credentials are correct, the server responds with a [LinkMacToViewerReportOpenFile](#Section_2.2.4.7) message. Otherwise, the server responds with a LinkMacToViewerSecurityChallenge message.
 <a id="Section_4.6.2"></a>
 ### 4.6.2 NTLM Authentication Sequence
 
@@ -2961,8 +2961,8 @@ Figure 10: NTLM authentication sequence
 - The **cbAuthenPackage** field has a value of 5.
 The client and server then continue their normal sequence of commands.
 
-- Eventually, the client sends a [LinkViewerToMacOpenFile](#Section_2.2.4.21) packet request, to which the server responds with a [LinkMacToViewerSecurityChallenge](#Section_5) message.
-- The client sends a [LinkViewerToMacSecurityResponse](#Section_5) message to the server that contains the first NTLM authentication token, and the server responds with a LinkMacToViewerSecurityChallenge message that contains the NTLM challenge token.
+- Eventually, the client sends a [LinkViewerToMacOpenFile](#Section_2.2.4.21) packet request, to which the server responds with a [LinkMacToViewerSecurityChallenge](#Section_2.2.4.14) message.
+- The client sends a [LinkViewerToMacSecurityResponse](#Section_2.2.4.24) message to the server that contains the first NTLM authentication token, and the server responds with a LinkMacToViewerSecurityChallenge message that contains the NTLM challenge token.
 - The client sends a LinkViewerToMacSecurityResponse message to the server that contains the response NTLM authentication token. If the credentials are correct, the server responds with a [LinkMacToViewerReportOpenFile](#Section_2.2.4.7) message. Otherwise, the server responds with a LinkMacToViewerSecurityChallenge message.
 <a id="Section_5"></a>
 # 5 Security
@@ -2980,8 +2980,8 @@ Because MMS is a binary protocol, it is recommended that implementers take care 
 | Security parameter | Section |
 | --- | --- |
 | **tokenData** field in [LinkViewerToMacOpenFile](#Section_2.2.4.21) message | 2.2.4.21 |
-| **pToken** field in [LinkMacToViewerSecurityChallenge](#Section_5) message | 2.2.4.14 |
-| **pToken** field in [LinkViewerToMacSecurityResponse](#Section_5) message | 2.2.4.24 |
+| **pToken** field in [LinkMacToViewerSecurityChallenge](#Section_2.2.4.14) message | 2.2.4.14 |
+| **pToken** field in [LinkViewerToMacSecurityResponse](#Section_2.2.4.24) message | 2.2.4.24 |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior
@@ -3089,7 +3089,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <41> Section 3.1.5.7: Windows Media Services on Windows NT 4.0, Windows Media Services on Windows 2000 Server, and Windows Media Player 6 do not support the [LinkMacToViewerReportRedirect (section 2.2.4.9)](#Section_2.2.4.9) message.
 
-<42> Section 3.1.5.8: Windows Media Services on Windows NT 4.0, Windows Media Services on Windows 2000 Server, Windows Media Player 6, Windows Media Format 7.0 SDK, and Windows Media Format 7.1 SDK do not update the value of the Auth-Scheme variable when processing a [LinkMacToViewerSecurityChallenge](#Section_5) message.
+<42> Section 3.1.5.8: Windows Media Services on Windows NT 4.0, Windows Media Services on Windows 2000 Server, Windows Media Player 6, Windows Media Format 7.0 SDK, and Windows Media Format 7.1 SDK do not update the value of the Auth-Scheme variable when processing a [LinkMacToViewerSecurityChallenge](#Section_2.2.4.14) message.
 
 <43> Section 3.1.5.8: Windows Media Services on Windows NT, Windows 2000 Server, and Windows Server 2003 will only send the LinkMacToViewerReportRedirect message if instructed to do so by a plugin.
 

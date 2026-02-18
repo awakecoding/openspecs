@@ -268,7 +268,7 @@ The valid requests from the client are as follows:
 - [CLNT_BCAST_EX](#Section_2.2.1)
 - [CLNT_UCAST_EX](#Section_4.1)
 - [CLNT_UCAST_INST](#Section_4.2)
-- [CLNT_UCAST_DAC](#Section_2.2.4)
+- [CLNT_UCAST_DAC](#Section_4.3)
 The response from the server is always an [SVR_RESP](#Section_2.2.5) message. The response contains a string data field that is parsed by the client to extract the requested information. The contents of this string are not case-sensitive.
 
 These messages are explained in more detail in the following sections.
@@ -349,7 +349,7 @@ packet-beta
 
 **RESP_SIZE (2 bytes):** This unsigned integer specifies the length, in bytes, of subsequent response data **RESP_DATA**.
 
-**RESP_DATA (variable):** A variable-length MBCS string that does not need to be byte-aligned. The maximum size of **RESP_DATA** MUST be 1,024 bytes if the server is responding to a [CLNT_UCAST_INST (section 2.2.3)](#Section_4.2) request. If the server is responding to a [CLNT_BCAST_EX (section 2.2.1)](#Section_2.2.1) or a [CLNT_UCAST_EX (section 2.2.2)](#Section_4.1) request, the maximum size of **RESP_DATA** MUST be 65,535 bytes.
+**RESP_DATA (variable):** A variable-length MBCS string that does not need to be byte-aligned. The maximum size of **RESP_DATA** MUST be 1,024 bytes if the server is responding to a [CLNT_UCAST_INST (section 2.2.3)](#Section_2.2.3) request. If the server is responding to a [CLNT_BCAST_EX (section 2.2.1)](#Section_2.2.1) or a [CLNT_UCAST_EX (section 2.2.2)](#Section_2.2.2) request, the maximum size of **RESP_DATA** MUST be 65,535 bytes.
 
 **Note**
 
@@ -416,7 +416,7 @@ SEMICOLON YES_OR_NO SEMICOLON "Version" SEMICOLON VERSION_STRING
 <a id="Section_2.2.6"></a>
 ### 2.2.6 SVR_RESP (DAC)
 
-The format of the SVR_RESP is different for a [CLNT_UCAST_DAC](#Section_2.2.4) request only.
+The format of the SVR_RESP is different for a [CLNT_UCAST_DAC](#Section_4.3) request only.
 
 ```mermaid
 packet-beta
@@ -491,7 +491,7 @@ In the "Waiting For Request From Client" state, the server listens on UDP port 1
 
 - For [CLNT_BCAST_EX](#Section_2.2.1) and [CLNT_UCAST_EX](#Section_4.1), the server returns information about all available instances. The information about all available instances is provided by the higher layer.
 - For [CLNT_UCAST_INST](#Section_4.2), the server returns information about the specified instance only (if available). The information about the specified instance is provided by the higher layer.
-- For [CLNT_UCAST_DAC](#Section_2.2.4), the server returns information about the [**dedicated administrator connection (DAC)**](#gt_dedicated-administrator-connection-dac) only.
+- For [CLNT_UCAST_DAC](#Section_4.3), the server returns information about the [**dedicated administrator connection (DAC)**](#gt_dedicated-administrator-connection-dac) only.
 The response SHOULD include information for a particular protocol as long as the aggregate information for the instance fits within the 1,024 bytes limit. If the information for a protocol would cause the total information for all protocols to exceed 1,024 bytes—for example, trying to add a 500-byte pipe name when 800 bytes of response data have already been collected—the information for this protocol SHOULD not be sent. The information for the next protocol (if any) SHOULD be included in the response (assuming that it does not cause the response to exceed the 1,024 bytes limit). Furthermore, the server SHOULD NOT include a protocol and its information if no valid information is available. For example, if the [**TCP**](#gt_transmission-control-protocol-tcp) port is invalid, TCP would not be included in the response. The SQL Server Resolution Protocol SHOULD NOT verify the length or content of the **PIPENAME** field, which is provided by the higher layer. It is the upper layer's responsibility to ensure that **PIPENAME** conforms to the specification of a valid pipe name [[MSDN-NP]](https://go.microsoft.com/fwlink/?LinkId=90247).
 
 If the request is received on an [**IPv4**](#gt_internet-protocol-version-4-ipv4) socket, the response provides the instance's port that is associated with an IPv4 address, and likewise for [**IPv6**](#gt_internet-protocol-version-6-ipv6).
@@ -527,7 +527,7 @@ A SQL Server Resolution Protocol client does not need to maintain any state data
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-The SQL Server Resolution Protocol client MUST implement a timer for the amount of time to wait for an [SVR_RESP](#Section_2.2.5) message from the server when a [CLNT_UCAST_INST](#Section_4.2) or [CLNT_UCAST_DAC](#Section_2.2.4) request is sent. The timer mechanism that is used is implementation-specific but SHOULD<2> have a time-out value of 1 second.
+The SQL Server Resolution Protocol client MUST implement a timer for the amount of time to wait for an [SVR_RESP](#Section_2.2.5) message from the server when a [CLNT_UCAST_INST](#Section_4.2) or [CLNT_UCAST_DAC](#Section_4.3) request is sent. The timer mechanism that is used is implementation-specific but SHOULD<2> have a time-out value of 1 second.
 
 The SQL Server Resolution Protocol client MUST implement a timer for the amount of time to wait for SVR_RESP messages from servers in the network after a [CLNT_UCAST_EX](#Section_4.1) or [CLNT_BCAST_EX](#Section_2.2.1) request is sent. The timer mechanism that is used is implementation-specific.<3>
 
@@ -554,14 +554,14 @@ Because the SQL Server Resolution Protocol provides a single response per server
 
 In the "Begin" state, the client awaits a request from the higher layer. After a request from the higher layer is made, the client sends a request to the server or servers. The request type determines what state the client enters next.
 
-If the client sends a [CLNT_UCAST_INST](#Section_4.2) or [CLNT_UCAST_DAC](#Section_2.2.4) request to the server, the client MUST then enter the "Client Waits For Response From Server" state. If the client sends a [CLNT_UCAST_EX](#Section_4.1) or [CLNT_BCAST_EX](#Section_2.2.1) request to a server or servers, the client MUST then enter the "Client Waits For Response From Server(s)" state.
+If the client sends a [CLNT_UCAST_INST](#Section_4.2) or [CLNT_UCAST_DAC](#Section_4.3) request to the server, the client MUST then enter the "Client Waits For Response From Server" state. If the client sends a [CLNT_UCAST_EX](#Section_4.1) or [CLNT_BCAST_EX](#Section_2.2.1) request to a server or servers, the client MUST then enter the "Client Waits For Response From Server(s)" state.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Client Waits For Response From Server
 
 In the "Client Waits For Response From Server" state, the client waits either for a time-out to occur or for the results of a request to return. As soon as either occurs, the client MUST enter the "Waiting Completed" state.
 
-The details of the timer are outlined in section [3.2.2](#Section_3.1.2).
+The details of the timer are outlined in section [3.2.2](#Section_3.2.2).
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Client Waits For Response From Server(s)
@@ -570,14 +570,14 @@ In the "Client Waits For Response From Server(s)" state, the client waits for re
 
 For purposes of this section, invalid messages are defined as messages that do not follow the prescribed message format that is outlined in section [2](#Section_2) or defined as an unexpected [SVR_RESP](#Section_2.2.5) messages type.
 
-The details of the timer are outlined in section [3.2.2](#Section_3.1.2).
+The details of the timer are outlined in section [3.2.2](#Section_3.2.2).
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Waiting Completed
 
 The client's actions upon entering the "Waiting Completed" state are determined by the client message type to which the server is responding.
 
-[CLNT_UCAST_DAC](#Section_2.2.4): The client MUST notify the higher layer of the valid and properly formatted [SVR_RESP](#Section_2.2.5) (DAC) messages or notify the higher layer if it received an invalid message. After this, the client MUST enter the "End" state.
+[CLNT_UCAST_DAC](#Section_4.3): The client MUST notify the higher layer of the valid and properly formatted [SVR_RESP](#Section_2.2.5) (DAC) messages or notify the higher layer if it received an invalid message. After this, the client MUST enter the "End" state.
 
 [CLNT_BCAST_EX](#Section_2.2.1): The client MUST notify the higher layer of the valid and properly formatted SVR_RESP messages. The client SHOULD buffer all responses until the timer has timed out. It MUST then pass the information to the higher layer. The client MUST ignore the invalid messages and does not notify the higher layer regarding these messages. After this, the client MUST enter the "End" state.
 
@@ -756,7 +756,7 @@ Windows implementations that use Microsoft Data Access Components (MDAC) or Wind
 
 Windows implementations that use Microsoft SQL Server Native Client time out if no response is received within 1 second. If a valid response is received within 1 second, the response is immediately passed to the higher layer. If the response is not valid, an error is passed to the higher layer.
 
-For the [CLNT_UCAST_DAC](#Section_2.2.4) request:
+For the [CLNT_UCAST_DAC](#Section_4.3) request:
 
 Windows implementations that use MDAC or Windows DAC do not support this request.
 

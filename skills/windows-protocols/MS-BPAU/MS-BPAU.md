@@ -784,7 +784,7 @@ No additional security considerations are known.
 | --- | --- |
 | Kerberos [**security provider**](#gt_security-provider) required | As specified in section [1.5](#Section_1.5). |
 | Security parameters in encoded [**certificate**](#gt_certificate) properties | As specified in section [2.2.2.1](#Section_2.2.2.1). |
-| Mutual authentication required | As specified in section [3.2.3](#Section_3.1.3). |
+| Mutual authentication required | As specified in section [3.2.3](#Section_3.2.3). |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL

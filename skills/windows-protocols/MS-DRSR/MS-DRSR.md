@@ -1069,7 +1069,7 @@ As the term "replica" suggests, it is often the case that two replicas contain "
 
 See [MS-ADTS] section 3.1.1.1.3 for the particular use made of these definitions in this specification.
 
-Sections [1.5](#Section_1.5), [1.8](#Section_1.8), [1.9](#Section_1.9), [2](#Section_4.1.10.1), [3](#Section_4.1.10.1), [4](#Section_4), and [5](#Section_5) of this specification are normative. All other sections and examples in this specification are informative.
+Sections [1.5](#Section_1.5), [1.8](#Section_1.8), [1.9](#Section_1.9), [2](#Section_2), [3](#Section_3), [4](#Section_4), and [5](#Section_5) of this specification are normative. All other sections and examples in this specification are informative.
 
 <a id="Section_1.1"></a>
 ## 1.1 Glossary
@@ -1083,7 +1083,7 @@ This document uses the following terms:
 **access control list (ACL)**: A list of access control entries (ACEs) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of [**objects**](#gt_object) in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), which are both described in [MS-ADOD](#Section_4.1.10.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. Active Directory stores information about a variety of [**objects**](#gt_object) in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-directory-domain-services-ad-ds"></a>
 **Active Directory Domain Services (AD DS)**: A directory service (DS) implemented by a [**domain controller (DC)**](#gt_domain-controller-dc). The DS provides a data store for [**objects**](#gt_object) that is distributed across multiple [**DCs**](#gt_domain-controller-dc). The DCs interoperate as peers to ensure that a local change to an object replicates correctly across DCs. AD DS is a deployment of [**Active Directory**](#gt_active-directory) [MS-ADTS](../MS-ADTS/MS-ADTS.md).
@@ -1575,13 +1575,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_6)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_6)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SRPL] Microsoft Corporation, "[Directory Replication Service (DRS) Protocol Extensions for SMTP](../MS-SRPL/MS-SRPL.md)".
 
@@ -1614,9 +1614,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [KNUTH1] Knuth, D., "The Art of Computer Programming: Volume 1/Fundamental Algorithms (Second Edition)", Reading, MA: Addison-Wesley, 1973, ASIN: B000NV8YOA.
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_4.1.10.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_6)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [NELSON] Nelson, G., "Systems Programming with Modula-3", Englewood Cliffs, NJ: Prentice Hall, 1991, ISBN: 0135904641.
 
@@ -1630,7 +1630,7 @@ This document specifies the Directory Replication Service (DRS) Remote Protocol,
 
 The DRS Remote Protocol contains methods that are diverse in function and fall into the following categories:
 
-- Context handle methods: [IDL_DRSBind](#Section_4.1.3.3), [IDL_DRSUnbind](#Section_4.1.25.1). These methods create and destroy [**RPC**](#gt_remote-procedure-call-rpc) context handles that maintain volatile state used by drsuapi methods. The dsaop methods do not use context handles.
+- Context handle methods: [IDL_DRSBind](#Section_4.1.3), [IDL_DRSUnbind](#Section_4.1.25). These methods create and destroy [**RPC**](#gt_remote-procedure-call-rpc) context handles that maintain volatile state used by drsuapi methods. The dsaop methods do not use context handles.
 - Replication methods: IDL_DRSGetNCChanges, IDL_DRSReplicaSync, IDL_DRSReplicaVerifyObjects, IDL_DRSGetReplInfo. The IDL_DRSGetNCChanges method replicates [**directory**](#gt_directory) changes from the server to the client. The IDL_DRSReplicaSync and IDL_DRSReplicaVerifyObjects methods cause the server to call IDL_DRSGetNCChanges on the client. The IDL_DRSGetReplInfo method is used to gather information about the [**replication**](#gt_replication) state of the server.
 - Cross-domain move method: IDL_DRSInterDomainMove. This method is used in the server implementation of [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Modify [**DN**](#gt_distinguished-name-dn) when the DN modification moves an [**object**](#gt_object) from one [**domain NC**](#gt_domain-naming-context-domain-nc) to another.
 - Lookups: IDL_DRSVerifyNames, IDL_DRSCrackNames, IDL_DRSGetMemberships, IDL_DRSGetMemberships2. These methods perform specialized directory lookups. They are all used by a [**DC**](#gt_domain-controller-dc) client; the IDL_DRSCrackNames method is commonly used by a non-DC client.
@@ -1638,7 +1638,7 @@ The DRS Remote Protocol contains methods that are diverse in function and fall i
 - Windows NT 4.0 Replication support method: IDL_DRSGetNT4ChangeLog. This method is used in the implementation of [**Active Directory**](#gt_active-directory) support for replication to Windows NT 4.0 backup domain controllers (BDCs), specifically in the implementation of moving the [**PDC Emulator**](#gt_pdc-emulator) [**FSMO role**](#gt_fsmo-role) from one DC to another without triggering a full sync of Windows NT 4.0 BDCs (see [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.6).
 - [**Knowledge Consistency Checker (KCC)**](#gt_knowledge-consistency-checker-kcc) support methods: IDL_DRSUpdateRefs, IDL_DRSReplicaAdd, IDL_DRSReplicaDel, IDL_DRSReplicaModify, IDL_DRSExecuteKCC. These methods are used by the KCC ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.2) and by administrator tools to manage replication topology.
 - Administrator-tool support methods: IDL_DRSAddEntry, IDL_DRSAddSidHistory, IDL_DRSRemoveDsServer, IDL_DRSRemoveDsDomain, IDL_DRSGetObjectExistence, IDL_DSAPrepareScript, IDL_DSAExecuteScript, IDL_DRSWriteSPN, IDL_DRSInitDemotion, IDL_DRSFinishDemotion, IDL_DRSReplicaDemotion, IDL_DRSAddCloneDC. These methods are used by administrator tools to perform various specialized functions.
-- msDS-KeyCredentialLink attribute support methods: [IDL_DRSWriteNgcKey](#Section_4.1.30), [IDL_DRSReadNgcKey](#Section_4.1.31.2). These methods are used to create or query the msDS-KeyCredentialLink attribute on a computer account.
+- msDS-KeyCredentialLink attribute support methods: [IDL_DRSWriteNgcKey](#Section_4.1.30), [IDL_DRSReadNgcKey](#Section_4.1.31). These methods are used to create or query the msDS-KeyCredentialLink attribute on a computer account.
 The specification of each method in section [4](#Section_4), includes an *Informative summary of behavior* that provides a detailed introduction to the method.
 
 <a id="Section_1.3.2"></a>
@@ -1647,7 +1647,7 @@ The specification of each method in section [4](#Section_4), includes an *Inform
 The sequencing issues in this [**RPC**](#gt_remote-procedure-call-rpc) protocol are as follows:
 
 - For server and client initialization, see section [3.6](#Section_3.6).
-- The drsuapi RPC interface is a "context handle"–based RPC interface; [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) specifies what this means. A client obtains a [DRS_HANDLE](#Section_5.40) for a particular [**DC**](#gt_domain-controller-dc) by calling [IDL_DRSBind](#Section_4.1.3.3), then calls any other drsuapi method on that DC, passing the DRS_HANDLE as the first parameter. The client's DRS_HANDLE remains valid for making method calls until the client calls [IDL_DRSUnbind](#Section_4.1.25.1), or until the server unilaterally invalidates the DRS_HANDLE (for example, by crashing).
+- The drsuapi RPC interface is a "context handle"–based RPC interface; [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) specifies what this means. A client obtains a [DRS_HANDLE](#Section_5.40) for a particular [**DC**](#gt_domain-controller-dc) by calling [IDL_DRSBind](#Section_4.1.3), then calls any other drsuapi method on that DC, passing the DRS_HANDLE as the first parameter. The client's DRS_HANDLE remains valid for making method calls until the client calls [IDL_DRSUnbind](#Section_4.1.25), or until the server unilaterally invalidates the DRS_HANDLE (for example, by crashing).
 The only state associated with a DRS_HANDLE is the state established by IDL_DRSBind. This state is immutable for as long as the DRS_HANDLE remains valid. Therefore, if a client creates two binding handles to the same DC by using the same parameters to IDL_DRSBind, the server behavior of a drsuapi method is not affected by the client's choice of binding handle passed to the method.
 
 Because the state associated with a DRS_HANDLE is immutable so long as the DRS_HANDLE remains valid, there are no special considerations involved in making concurrent method calls using the same DRS_HANDLE; the client is free to make concurrent method calls.
@@ -1655,19 +1655,19 @@ Because the state associated with a DRS_HANDLE is immutable so long as the DRS_H
 - Two methods use the "cookie" design pattern. In this pattern, the client sends an initial request containing a designated null value for a certain parameter. The server response contains a value that is opaque to the client or contains the designated null value. If the value is not null, and the response indicates that another client request is required to complete some higher-level operation, the client sends the opaque value returned by the server in the next request rather than sending the designated null value. The exchange of requests and responses continues until some response indicates that the higher-level operation is complete.
 The two methods that follow this pattern are:
 
-- [IDL_DRSGetNCChanges](#Section_4.1.10.8): In this instance of the "cookie" pattern, the server returns a "cookie" in the response that completes the higher-level operation. The client can use this cookie at the start of the next higher-level operation. The higher-level operation is a complete [**replication cycle**](#gt_replication-cycle) that improves the client's [**up-to-date vector**](#gt_up-to-date-vector). See section [4.1.10.1](#Section_4.1.10.1.1) for an explanation of replication cycles.
+- [IDL_DRSGetNCChanges](#Section_4.1.10): In this instance of the "cookie" pattern, the server returns a "cookie" in the response that completes the higher-level operation. The client can use this cookie at the start of the next higher-level operation. The higher-level operation is a complete [**replication cycle**](#gt_replication-cycle) that improves the client's [**up-to-date vector**](#gt_up-to-date-vector). See section [4.1.10.1](#Section_4.1.10.1) for an explanation of replication cycles.
 - [IDL_DRSGetNT4ChangeLog](#Section_4.1.11): In this instance of the "cookie" pattern, the server returns a "cookie" in the response that completes the higher-level operation. The client does not use this cookie at the start of the next higher-level operation. The client supplies the designated null value at the start of the next higher-level operation. The higher-level operation is the retrieval of a complete Windows NT 4.0 change log. See the informative summary of this method in section [4.1.11.3](#Section_4.1.11.3).
-- Successfully processing an [IDL_DSAPrepareScript](#Section_4.2.1.3) request generates a password and stores that password locally on the server. The server returns this password in the IDL_DSAPrepareScript response. When a server is in this state (that is, when it holds the password created by IDL_DSAPrepareScript), it processes an [IDL_DSAExecuteScript](#Section_4.2.2) request that includes this password; otherwise it rejects the request.
-- [IDL_DRSInitDemotion](#Section_4.1.14.2) is called before the other demotion methods: [IDL_DRSReplicaDemotion](#Section_4.1.21) and [IDL_DRSFinishDemotion](#Section_4.1.7.3).
+- Successfully processing an [IDL_DSAPrepareScript](#Section_4.2.1) request generates a password and stores that password locally on the server. The server returns this password in the IDL_DSAPrepareScript response. When a server is in this state (that is, when it holds the password created by IDL_DSAPrepareScript), it processes an [IDL_DSAExecuteScript](#Section_4.2.2) request that includes this password; otherwise it rejects the request.
+- [IDL_DRSInitDemotion](#Section_4.1.14) is called before the other demotion methods: [IDL_DRSReplicaDemotion](#Section_4.1.21) and [IDL_DRSFinishDemotion](#Section_4.1.7).
 - Otherwise, all method requests are independent, apart from their dependencies on the state of the [**directory**](#gt_directory). The potential dependencies are varied, and understanding them requires understanding the state model specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1. Here are some examples:
-- Successfully processing an [IDL_DRSAddEntry](#Section_4.1.1) request can create a [**crossRef object**](#gt_crossref-object). When the directory is in this state (that is, when it holds the crossRef object), an [IDL_DRSRemoveDsDomain](#Section_4.1.17.3) request can successfully remove that crossRef object (subject to other conditions specified with IDL_DRSRemoveDsDomain).
+- Successfully processing an [IDL_DRSAddEntry](#Section_4.1.1) request can create a [**crossRef object**](#gt_crossref-object). When the directory is in this state (that is, when it holds the crossRef object), an [IDL_DRSRemoveDsDomain](#Section_4.1.17) request can successfully remove that crossRef object (subject to other conditions specified with IDL_DRSRemoveDsDomain).
 - Successfully processing an IDL_DRSAddEntry request can create an [**nTDSDSA object**](#gt_ntdsdsa-object). When the directory is in this state (that is, when it holds the nTDSDSA object), an [IDL_DRSRemoveDsServer](#Section_4.1.18) request can successfully remove that nTDSDSA object.
 - Successfully processing an [IDL_DRSReplicaAdd](#Section_4.1.19) request creates a repsFrom value on a server. When a server is in this state (that is, when it holds the repsFrom value), it has the information needed to make an IDL_DRSGetNCChanges request on the DC that is specified in IDL_DRSReplicaAdd.
 - Successfully processing an [IDL_DRSUpdateRefs](#Section_4.1.26) request creates a repsTo value on a server. When a server is in this state (that is, when it holds the repsTo value), it has the information needed to make an [IDL_DRSReplicaSync](#Section_4.1.23) request on the DC that is specified in IDL_DRSUpdateRefs.
 - Successfully processing an IDL_DRSRemoveDsDomain request first requires the removal of the metadata for all DCs hosting the [**domain NC**](#gt_domain-naming-context-domain-nc) for the [**domain**](#gt_domain) that is to be removed. This precondition is achieved by the client calling IDL_DRSRemoveDsServer for each such DC.
 State-based sequencing issues also exist between methods specified in this document and [**LDAP**](#gt_lightweight-directory-access-protocol-ldap), because LDAP provides another way to change the state of the directory.
 
-- One method, [IDL_DRSGetReplInfo](#Section_4.1.13.4.5), has a parameter of both input and output, *dwEnumerationContext*. This parameter is defined for the following:
+- One method, [IDL_DRSGetReplInfo](#Section_4.1.13), has a parameter of both input and output, *dwEnumerationContext*. This parameter is defined for the following:
 - *dwInVersion*=2, and
 - InfoType=DS_REPL_INFO_METADATA_FOR_ATTR_VALUE, or DS_REPL_INFO_METADATA_2_FOR_ATTR_VALUE, or DS_REPL_INFO_CURSORS_2_FOR_NC, or DS_REPL_INFO_CURSORS_3_FOR_NC.
 For the first call to this method for a specific InfoType, the client sets *dwEnumerationContext* in *pmsgIn* to zero. The server returns an implementation-specific value for *dwEnumerationContext* in *pmsgOut*. On subsequent calls to this method with the same InfoType, the client sets the input *dwEnumerationContext* in *pmsgIn* to the last value of that field returned from the server. The purpose of this field is to allow the client to gather all the requested information, but in more than one server call. The final call is identified when the method returns ERROR_NO_MORE_ITEMS. See the server implementation section for IDL_DRSGetReplInfo ([4.1.13.3](#Section_4.1.13.3)) for exact details.
@@ -1717,9 +1717,9 @@ Some methods in this protocol have completely functional equivalents in LDAP:
 
 This protocol is based on [**RPC**](#gt_remote-procedure-call-rpc) and therefore has the prerequisites identified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) as common to all RPC interfaces.
 
-Security configuration for usage of RPC is described further in section [2.2](#Section_4.1.10.1).
+Security configuration for usage of RPC is described further in section [2.2](#Section_2.2).
 
-The [**Active Directory**](#gt_active-directory) service must be fully initialized as described in [MS-ADOD](#Section_4.1.10.1) section 2.6.
+The [**Active Directory**](#gt_active-directory) service must be fully initialized as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.6.
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -1731,10 +1731,10 @@ This protocol is appropriate for replicating ([**DC**](#gt_domain-controller-dc)
 
 This document covers versioning issues in the following areas:
 
-- **Supported Transports**: [**RPC**](#gt_remote-procedure-call-rpc) can be implemented on top of TCP and other protocol sequences as described in section [2.1](#Section_2).
+- **Supported Transports**: [**RPC**](#gt_remote-procedure-call-rpc) can be implemented on top of TCP and other protocol sequences as described in section [2.1](#Section_2.1).
 - **Protocol Versions:** Each of the protocol interfaces described in this document has a single version number: 4.0 for drsuapi and 1.0 for dsaop.
 - **Security and Authentication Methods**: See [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 1.7.
-- **Capability Negotiation**: This protocol does explicit capability negotiation as described in [IDL_DRSBind (section 4.1.3)](#Section_4.1.3.3) behavior.
+- **Capability Negotiation**: This protocol does explicit capability negotiation as described in [IDL_DRSBind (section 4.1.3)](#Section_4.1.3) behavior.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
@@ -1747,13 +1747,13 @@ This protocol uses NTSTATUS values as defined in [MS-ERREF] section 2.3. Vendors
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| [**RPC**](#gt_remote-procedure-call-rpc) interface [**UUID**](#gt_universally-unique-identifier-uuid) for drsuapi methods | e3514235-4b06-11d1-ab04-00c04fc2dcd2 | Section [4.1.1](#Section_4.1.1) – section [4.1.29](#Section_4.1.29.3) |
-| RPC interface UUID for dsaop methods | 7c44d7d4-31d5-424c-bd5e-2b3e1f323d22 | Section [4.2.1](#Section_4.2.1.3) – section [4.2.2](#Section_4.2.2) |
+| [**RPC**](#gt_remote-procedure-call-rpc) interface [**UUID**](#gt_universally-unique-identifier-uuid) for drsuapi methods | e3514235-4b06-11d1-ab04-00c04fc2dcd2 | Section [4.1.1](#Section_4.1.1) – section [4.1.29](#Section_4.1.29) |
+| RPC interface UUID for dsaop methods | 7c44d7d4-31d5-424c-bd5e-2b3e1f323d22 | Section [4.2.1](#Section_4.2.1) – section [4.2.2](#Section_4.2.2) |
 
 <a id="Section_2"></a>
 # 2 Message Transport
 
-The following sections discuss [**RPC transport**](#gt_rpc-transport) and security considerations for this protocol. Common data types are defined and discussed in section [5](#Section_5). See section [3](#Section_4.1.10.1) for more details about the organization of this protocol specification.
+The following sections discuss [**RPC transport**](#gt_rpc-transport) and security considerations for this protocol. Common data types are defined and discussed in section [5](#Section_5). See section [3](#Section_3) for more details about the organization of this protocol specification.
 
 <a id="Section_2.1"></a>
 ## 2.1 RPC Transport
@@ -1853,7 +1853,7 @@ In the preceding SPN descriptions:
 - <NetBIOS hostname> is the NetBIOS host name of the target DC.
 - The colon (':') is the literal separator between the host name and port number.
 - <LDAP port> is the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) port on which the target DC listens.
-If an AD LDS DC runs on a machine joined to an [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain), and NTDSDSA_OPT_DISABLE_SPN_REGISTRATION is not present in the options [**attribute**](#gt_attributes) of its nTDSDSA [**object**](#gt_object) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1), the AD LDS DC MUST store these two forms of SPN as values of the servicePrincipalName attribute of the object (in the external [**AD DS**](#gt_active-directory-domain-services-ad-ds) domain) that corresponds to the [**security principal**](#gt_security-principal) that the AD LDS service is running as. This action allows mutual [**authentication**](#gt_authentication) to occur in DC-to-DC protocol operations. Additional forms that must be stored for client-to-DC protocol operations are described in section [2.2.4.3](../MS-ADTS/MS-ADTS.md).
+If an AD LDS DC runs on a machine joined to an [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain), and NTDSDSA_OPT_DISABLE_SPN_REGISTRATION is not present in the options [**attribute**](#gt_attributes) of its nTDSDSA [**object**](#gt_object) ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1), the AD LDS DC MUST store these two forms of SPN as values of the servicePrincipalName attribute of the object (in the external [**AD DS**](#gt_active-directory-domain-services-ad-ds) domain) that corresponds to the [**security principal**](#gt_security-principal) that the AD LDS service is running as. This action allows mutual [**authentication**](#gt_authentication) to occur in DC-to-DC protocol operations. Additional forms that must be stored for client-to-DC protocol operations are described in section [2.2.4.3](#Section_2.2.4.3).
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Client-to-DC Operations
@@ -1927,7 +1927,7 @@ In the preceding SPN descriptions:
 - <NetBIOS hostname> is the NetBIOS host name of the target DC.
 - The colon (':') is the literal separator between the host name and port number.
 - <LDAP port> is the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) port on which the target DC listens.
-If an AD LDS DC runs on a computer joined to an external [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain), and NTDSDSA_OPT_DISABLE_SPN_REGISTRATION is not present in the options [**attribute**](#gt_attributes) of its [**nTDSDSA object**](#gt_ntdsdsa-object) in AD LDS (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1), then the AD LDS DC MUST store these two forms of SPN as values of the servicePrincipalName attribute of the [**object**](#gt_object) (in the external [**AD DS**](#gt_active-directory-domain-services-ad-ds) domain) that corresponds to the [**security principal**](#gt_security-principal) that the AD LDS service is running as. This action allows mutual [**authentication**](#gt_authentication) to occur in "client-to-AD LDS DC" protocol operations. When the requirements of this section are added to the requirements of section [2.2.3.3](../MS-ADTS/MS-ADTS.md), an AD LDS DC that stores SPNs stores four servicePrincipalName values in all.
+If an AD LDS DC runs on a computer joined to an external [**Active Directory**](#gt_active-directory) [**domain**](#gt_domain), and NTDSDSA_OPT_DISABLE_SPN_REGISTRATION is not present in the options [**attribute**](#gt_attributes) of its [**nTDSDSA object**](#gt_ntdsdsa-object) in AD LDS (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1), then the AD LDS DC MUST store these two forms of SPN as values of the servicePrincipalName attribute of the [**object**](#gt_object) (in the external [**AD DS**](#gt_active-directory-domain-services-ad-ds) domain) that corresponds to the [**security principal**](#gt_security-principal) that the AD LDS service is running as. This action allows mutual [**authentication**](#gt_authentication) to occur in "client-to-AD LDS DC" protocol operations. When the requirements of this section are added to the requirements of section [2.2.3.3](#Section_2.2.3.3), an AD LDS DC that stores SPNs stores four servicePrincipalName values in all.
 
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
@@ -2062,7 +2062,7 @@ A *sequence* is an indexed collection of variables, called the *elements* of the
 
 A sequence type can be *open* (index type not specified) or *closed* (index type specified):
 
-- type DSNameSeq = sequence of [DSName](#Section_5.50)
+- type DSNameSeq = sequence of [DSName](#Section_5.49)
 - type Digest = sequence [0 .. 15] of byte
 A fixed-length sequence can be constructed by using the following notation:
 
@@ -2237,7 +2237,7 @@ The infix Boolean operators "and" and "or" are evaluated left to right, conditio
 <a id="Section_3.4.5"></a>
 ### 3.4.5 Access to Objects and Their Attributes
 
-The specification contains many accesses to specific [**directory**](#gt_directory) [**attributes**](#gt_attributes). The specification uses the following concise notation for these accesses to aid readability. If o is a variable that contains a [DSName](#Section_5.50) or a [DN](#Section_5.35), then:
+The specification contains many accesses to specific [**directory**](#gt_directory) [**attributes**](#gt_attributes). The specification uses the following concise notation for these accesses to aid readability. If o is a variable that contains a [DSName](#Section_5.49) or a [DN](#Section_5.35), then:
 
 o!attr
 
@@ -2437,7 +2437,7 @@ Requests and responses are rendered by using the Windows debugger in the context
 <a id="Section_3.6"></a>
 ## 3.6 Server and Client Initialization
 
-The server MUST start the [**RPC**](#gt_remote-procedure-call-rpc) service to listen on the incoming RPC. For server configurations, see section [2.1](#Section_2).
+The server MUST start the [**RPC**](#gt_remote-procedure-call-rpc) service to listen on the incoming RPC. For server configurations, see section [2.1](#Section_2.1).
 
 <a id="Section_3.6.1"></a>
 ### 3.6.1 AD LDS Specifics
@@ -2464,37 +2464,37 @@ Methods in RPC [**Opnum**](#gt_opnum) Order
 
 | Method | Description |
 | --- | --- |
-| [IDL_DRSBind](#Section_4.1.3.3) | Creates a context handle necessary to call any other method in this interface. Opnum: 0 |
-| [IDL_DRSUnbind](#Section_4.1.25.1) | Destroys a context handle previously created by the IDL_DRSBind method. Opnum: 1 |
+| [IDL_DRSBind](#Section_4.1.3) | Creates a context handle necessary to call any other method in this interface. Opnum: 0 |
+| [IDL_DRSUnbind](#Section_4.1.25) | Destroys a context handle previously created by the IDL_DRSBind method. Opnum: 1 |
 | [IDL_DRSReplicaSync](#Section_4.1.23) | Triggers [**replication**](#gt_replication) from another [**DC**](#gt_domain-controller-dc). Opnum: 2 |
-| [IDL_DRSGetNCChanges](#Section_4.1.10.8) | Replicates [**updates**](#gt_update) from an [**NC replica**](#gt_nc-replica) on the server. Opnum: 3 |
+| [IDL_DRSGetNCChanges](#Section_4.1.10) | Replicates [**updates**](#gt_update) from an [**NC replica**](#gt_nc-replica) on the server. Opnum: 3 |
 | [IDL_DRSUpdateRefs](#Section_4.1.26) | Adds or deletes a value from the repsTo [**attribute**](#gt_attributes) of a specified NC replica. Opnum: 4 |
 | [IDL_DRSReplicaAdd](#Section_4.1.19) | Adds a replication source reference for the specified [**NC**](#gt_naming-context-nc). Opnum: 5 |
-| [IDL_DRSReplicaDel](#Section_4.1.20.2) | Deletes a replication source reference for the specified NC. Opnum: 6 |
-| [IDL_DRSReplicaModify](#Section_4.1.22.2) | Updates the value for repsFrom for the NC replica. Opnum: 7 |
-| [IDL_DRSVerifyNames](#Section_4.1.27.2) | Resolves a sequence of [**object**](#gt_object) identities. Opnum: 8 |
-| [IDL_DRSGetMemberships](#Section_4.1.9) | Retrieves [**group**](#gt_group) membership for an object. Opnum: 9 |
-| [IDL_DRSInterDomainMove](#Section_4.1.15.4) | A helper method used in a cross-NC move [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) operation. Opnum: 10 |
+| [IDL_DRSReplicaDel](#Section_4.1.20) | Deletes a replication source reference for the specified NC. Opnum: 6 |
+| [IDL_DRSReplicaModify](#Section_4.1.22) | Updates the value for repsFrom for the NC replica. Opnum: 7 |
+| [IDL_DRSVerifyNames](#Section_4.1.27) | Resolves a sequence of [**object**](#gt_object) identities. Opnum: 8 |
+| [IDL_DRSGetMemberships](#Section_4.1.8) | Retrieves [**group**](#gt_group) membership for an object. Opnum: 9 |
+| [IDL_DRSInterDomainMove](#Section_4.1.15) | A helper method used in a cross-NC move [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) operation. Opnum: 10 |
 | [IDL_DRSGetNT4ChangeLog](#Section_4.1.11) | Returns a sequence of [**PDC**](#gt_primary-domain-controller-pdc) change log entries or the Windows NT 4.0 operating system replication state. Opnum: 11 |
-| [IDL_DRSCrackNames](#Section_4.1.4.2.9) | Looks up each of a set of objects in the [**directory**](#gt_directory) and returns it to the caller in the requested format. Opnum: 12 |
-| [IDL_DRSWriteSPN](#Section_4.1.28.3) | Updates the set of [**service principal names (SPNs)**](#gt_service-principal-name-spn) on an object. Opnum: 13 |
+| [IDL_DRSCrackNames](#Section_4.1.4) | Looks up each of a set of objects in the [**directory**](#gt_directory) and returns it to the caller in the requested format. Opnum: 12 |
+| [IDL_DRSWriteSPN](#Section_4.1.28) | Updates the set of [**service principal names (SPNs)**](#gt_service-principal-name-spn) on an object. Opnum: 13 |
 | [IDL_DRSRemoveDsServer](#Section_4.1.18) | Removes the representation of a DC from the directory. Opnum: 14 |
-| [IDL_DRSRemoveDsDomain](#Section_4.1.17.3) | Removes the representation of a [**domain**](#gt_domain) from the directory. Opnum: 15 |
-| [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) | Retrieves information about DCs in a given domain. Opnum: 16 |
+| [IDL_DRSRemoveDsDomain](#Section_4.1.17) | Removes the representation of a [**domain**](#gt_domain) from the directory. Opnum: 15 |
+| [IDL_DRSDomainControllerInfo](#Section_4.1.5) | Retrieves information about DCs in a given domain. Opnum: 16 |
 | [IDL_DRSAddEntry](#Section_4.1.1) | Adds one or more objects. Opnum: 17 |
-| [IDL_DRSExecuteKCC](#Section_4.1.6.3) | Validates the replication interconnections of DCs and updates them if necessary. Opnum: 18 |
-| [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) | Retrieves the replication state of the server. Opnum: 19 |
-| [IDL_DRSAddSidHistory](#Section_4.1.2.3) | Adds one or more [**SIDs**](#gt_sid) to the sIDHistory attribute of a given object. Opnum: 20 |
+| [IDL_DRSExecuteKCC](#Section_4.1.6) | Validates the replication interconnections of DCs and updates them if necessary. Opnum: 18 |
+| [IDL_DRSGetReplInfo](#Section_4.1.13) | Retrieves the replication state of the server. Opnum: 19 |
+| [IDL_DRSAddSidHistory](#Section_4.1.2) | Adds one or more [**SIDs**](#gt_sid) to the sIDHistory attribute of a given object. Opnum: 20 |
 | [IDL_DRSGetMemberships2](#Section_4.1.9) | Retrieves group memberships for a sequence of objects. Opnum: 21 |
-| [IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3) | Verifies the existence of objects in an NC replica. Opnum: 22 |
-| [IDL_DRSGetObjectExistence](#Section_4.1.12.5) | Helps the client check the consistency of object existence between its [**replica**](#gt_replica) of an NC and the server's replica of the same NC. Opnum: 23 |
-| [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) | Determines the communication cost from a "from" [**site**](#gt_site) to one or more "to" sites. Opnum: 24 |
-| [IDL_DRSInitDemotion](#Section_4.1.14.2) | Performs the first phase of the removal of a DC from an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**forest**](#gt_forest). Opnum: 25 |
+| [IDL_DRSReplicaVerifyObjects](#Section_4.1.24) | Verifies the existence of objects in an NC replica. Opnum: 22 |
+| [IDL_DRSGetObjectExistence](#Section_4.1.12) | Helps the client check the consistency of object existence between its [**replica**](#gt_replica) of an NC and the server's replica of the same NC. Opnum: 23 |
+| [IDL_DRSQuerySitesByCost](#Section_4.1.16) | Determines the communication cost from a "from" [**site**](#gt_site) to one or more "to" sites. Opnum: 24 |
+| [IDL_DRSInitDemotion](#Section_4.1.14) | Performs the first phase of the removal of a DC from an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**forest**](#gt_forest). Opnum: 25 |
 | [IDL_DRSReplicaDemotion](#Section_4.1.21) | Replicates off all changes to the specified NC and moves any [**FSMOs**](#gt_flexible-single-master-operation-fsmo) held to another server. Opnum: 26 |
-| [IDL_DRSFinishDemotion](#Section_4.1.7.3) | Finishes or cancels the removal of a DC from an AD LDS forest. Opnum: 27 |
-| [IDL_DRSAddCloneDC](#Section_4.1.29.3) | Creates a new domain controller object by copying attributes from an existing domain controller object. Opnum: 28 |
+| [IDL_DRSFinishDemotion](#Section_4.1.7) | Finishes or cancels the removal of a DC from an AD LDS forest. Opnum: 27 |
+| [IDL_DRSAddCloneDC](#Section_4.1.29) | Creates a new domain controller object by copying attributes from an existing domain controller object. Opnum: 28 |
 | [IDL_DRSWriteNgcKey](#Section_4.1.30) | Composes and updates the msDS-KeyCredentialLink value on an object. Opnum: 29 |
-| [IDL_DRSReadNgcKey](#Section_4.1.31.2) | Reads and parses the msDS-KeyCredentialLink value on an object. Opnum: 30 |
+| [IDL_DRSReadNgcKey](#Section_4.1.31) | Reads and parses the msDS-KeyCredentialLink value on an object. Opnum: 30 |
 
 The methods will affect only the directory instance that is bound to the current context. If a server has several directory instances installed, the other instances will remain unchanged.
 
@@ -2529,7 +2529,7 @@ DRS_MSG_ADDENTRYREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle that is returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle that is returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -3684,7 +3684,7 @@ prefixTable: PrefixTable
 
 ): ATTR
 
-*Informative summary of behavior*: The ENTINF_GetAttribute procedure scans an [ENTINF](#Section_5.53) structure and returns the first [ATTR](#Section_5.9) structure for the requested *attribute*. The *attribute* parameter is based on [dc](#Section_5.30).*prefixTable*, while the [**attributes**](#gt_attributes) within *entInf* are based on the *prefixTable* parameter.
+*Informative summary of behavior*: The ENTINF_GetAttribute procedure scans an [ENTINF](#Section_5.53) structure and returns the first [ATTR](#Section_5.9) structure for the requested *attribute*. The *attribute* parameter is based on [dc](#Section_4.1.29.2.3).*prefixTable*, while the [**attributes**](#gt_attributes) within *entInf* are based on the *prefixTable* parameter.
 
 attrType: ATTRTYP
 
@@ -4056,7 +4056,7 @@ DRS_MSG_ADDSIDREPLY* pmsgOut
 
 );
 
-**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** Version of the request message. Must be set to 1, because no other version is supported.
 
@@ -4076,7 +4076,7 @@ DRS_MSG_ADDSIDREPLY* pmsgOut
 <a id="Section_4.1.2.1.1"></a>
 ##### 4.1.2.1.1 DRS_MSG_ADDSIDREQ
 
-The DRS_MSG_ADDSIDREQ union defines the request messages that are sent to the [IDL_DRSAddSidHistory](#Section_4.1.2.3) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_ADDSIDREQ union defines the request messages that are sent to the [IDL_DRSAddSidHistory](#Section_4.1.2) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -4095,7 +4095,7 @@ DRS_MSG_ADDSIDREQ_V1 V1;
 <a id="Section_4.1.2.1.2"></a>
 ##### 4.1.2.1.2 DRS_MSG_ADDSIDREQ_V1
 
-The DRS_MSG_ADDSIDREQ_V1 structure defines the request message sent to the [IDL_DRSAddSidHistory](#Section_4.1.2.3) method.
+The DRS_MSG_ADDSIDREQ_V1 structure defines the request message sent to the [IDL_DRSAddSidHistory](#Section_4.1.2) method.
 
 typedef struct {
 
@@ -4156,7 +4156,7 @@ WCHAR* SrcCredsPassword;
 <a id="Section_4.1.2.1.3"></a>
 ##### 4.1.2.1.3 DRS_MSG_ADDSIDREPLY
 
-The DRS_MSG_ADDSIDREPLY union defines the response messages received from the [IDL_DRSAddSidHistory](#Section_4.1.2.3) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_ADDSIDREPLY union defines the response messages received from the [IDL_DRSAddSidHistory](#Section_4.1.2) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -4175,7 +4175,7 @@ DRS_MSG_ADDSIDREPLY_V1 V1;
 <a id="Section_4.1.2.1.4"></a>
 ##### 4.1.2.1.4 DRS_MSG_ADDSIDREPLY_V1
 
-The DRS_MSG_ADDSIDREPLY_V1 structure defines the response message received from the [IDL_DRSAddSidHistory](#Section_4.1.2.3) method.
+The DRS_MSG_ADDSIDREPLY_V1 structure defines the response message received from the [IDL_DRSAddSidHistory](#Section_4.1.2) method.
 
 typedef struct {
 
@@ -4375,7 +4375,7 @@ Performs the select statement represented by the string *query* against the serv
 <a id="Section_4.1.2.3"></a>
 #### 4.1.2.3 Server Behavior of the IDL_DRSAddSidHistory Method
 
-*Informative summary of behavior*: The [IDL_DRSAddSidHistory](#Section_4.1.2.3) method adds the [**SIDs**](#gt_sid) associated with one [**principal**](#gt_principal) (the source principal) to the sIDHistory [**attribute**](#gt_attributes) of another principal (the destination principal). The source principal's objectSid and any SIDs in the source principal's sIDHistory are added to the destination principal's sIDHistory. This method is called on a [**DC**](#gt_domain-controller-dc) whose [**default NC**](#gt_default-naming-context-default-nc) contains the destination principal. If necessary, the destination DC will contact a DC whose default NC contains the source principal as part of executing this method.
+*Informative summary of behavior*: The [IDL_DRSAddSidHistory](#Section_4.1.2) method adds the [**SIDs**](#gt_sid) associated with one [**principal**](#gt_principal) (the source principal) to the sIDHistory [**attribute**](#gt_attributes) of another principal (the destination principal). The source principal's objectSid and any SIDs in the source principal's sIDHistory are added to the destination principal's sIDHistory. This method is called on a [**DC**](#gt_domain-controller-dc) whose [**default NC**](#gt_default-naming-context-default-nc) contains the destination principal. If necessary, the destination DC will contact a DC whose default NC contains the source principal as part of executing this method.
 
 This method has three different variants on this behavior, and the caller indicates which variant is desired by specifying a combination of flags in pmsgIn^.V1.flags.
 
@@ -5418,13 +5418,13 @@ ULONG IDL_DRSBind(
 <a id="Section_4.1.3.1"></a>
 #### 4.1.3.1 Client Behavior When Sending the IDL_DRSBind Request
 
-The client uses *puuidClientDsa* to pass an identifier. If the client uses the returned DRS_HANDLE for subsequent calls to the [IDL_DRSWriteSPN](#Section_4.1.28.3) method, then the client MUST pass NTDSAPI_CLIENT_GUID in *puuidClientDsa*. For any other uses, the server places no constraints on the value of *puuidClientDsa* other than those specified in section [4.1.3.2](#Section_4.1.3.2).<11>
+The client uses *puuidClientDsa* to pass an identifier. If the client uses the returned DRS_HANDLE for subsequent calls to the [IDL_DRSWriteSPN](#Section_4.1.28) method, then the client MUST pass NTDSAPI_CLIENT_GUID in *puuidClientDsa*. For any other uses, the server places no constraints on the value of *puuidClientDsa* other than those specified in section [4.1.3.2](#Section_4.1.3.2).<11>
 
 The client uses *pextClient* to pass a properly initialized [DRS_EXTENSIONS_INT](#Section_5.39) structure to the server. If the client is a [**DC**](#gt_domain-controller-dc), it reads the value of msDS-ReplicationEpoch from its nTDSDSA [**object**](#gt_object) and assigns this value to the **dwReplEpoch** field of the DRS_EXTENSIONS_INT structure; otherwise, it sets the **dwReplEpoch** field of the DRS_EXTENSIONS_INT structure to zero. If the client is a DC, it reads the value of [**objectGUID**](#gt_objectguid) from the Config NC object and assigns this value to the **ConfigObjGUID** field of the DRS_EXTENSIONS_INT structure; otherwise, it sets the **ConfigObjGUID** field of the DRS_EXTENSIONS_INT structure to the [**NULL GUID**](#gt_null-guid) value.
 
-The remaining information in the DRS_EXTENSIONS_INT structure must be consistent with the client's capabilities. This information affects the versions of response structures that the server returns in method calls using the [DRS_HANDLE](#Section_5.40) returned by [IDL_DRSBind](#Section_4.1.3.3). In descriptions of method calls that use a DRS_HANDLE, this handle is sometimes called the client's [**RPC**](#gt_remote-procedure-call-rpc) context.<12>
+The remaining information in the DRS_EXTENSIONS_INT structure must be consistent with the client's capabilities. This information affects the versions of response structures that the server returns in method calls using the [DRS_HANDLE](#Section_5.40) returned by [IDL_DRSBind](#Section_4.1.3). In descriptions of method calls that use a DRS_HANDLE, this handle is sometimes called the client's [**RPC**](#gt_remote-procedure-call-rpc) context.<12>
 
-If a method of this protocol takes a parameter named *dwInVersion*, the client uses that parameter to specify the version of the referent of the next parameter to that method, often named *pmsgIn*. The referent of this parameter is called the method's request. The *dwInVersion* parameter is called the request version. For example, if the client passes *dwInVersion* = 7 to [IDL_DRSGetNCChanges](#Section_4.1.10.8), the client also passes a [DRS_MSG_GETCHGREQ_V7](#Section_4.1.10.2.5) request.
+If a method of this protocol takes a parameter named *dwInVersion*, the client uses that parameter to specify the version of the referent of the next parameter to that method, often named *pmsgIn*. The referent of this parameter is called the method's request. The *dwInVersion* parameter is called the request version. For example, if the client passes *dwInVersion* = 7 to [IDL_DRSGetNCChanges](#Section_4.1.10), the client also passes a [DRS_MSG_GETCHGREQ_V7](#Section_4.1.10.2.5) request.
 
 If a method of this protocol takes an integer parameter named *pdwOutVersion*, the server uses that parameter to return the version number of the referent of the next parameter to that method, often named *pmsgOut*. The referent of this parameter is called the method's response. The referent of *pdwOutVersion* is called the response version. For example, when the server returns *pdwOutVersion*^ = 9 from IDL_DRSGetNCChanges, the server also returns a [DRS_MSG_GETCHGREPLY_V9](#Section_4.1.10.2.14) response.
 
@@ -5433,7 +5433,7 @@ Most methods in this protocol are capable of generating only a certain response 
 - IDL_DRSGetNCChanges is capable of returning a version 6 response from version 7, version 8, and version 10 requests. However, the DRS_EXT_GETCHGREPLY_V6 bit must be set in the client's RPC context for the server to generate a version 6 response. Otherwise, the server returns ERROR_REVISION_MISMATCH. Note that whenever IDL_DRSGetNCChanges is capable of returning a version 6 response, it is also capable of returning a version 7 response, which is a compressed form of a version 6 response. Compression of IDL_DRSGetNCChanges responses is not controlled by the state of the client's RPC context; it is controlled on a per-request basis by the client; see DRS_USE_COMPRESSION in section [5.41](#Section_5.41).
 - IDL_DRSGetNCChanges is capable of returning a version 9 response from version 10 requests. However, the DRS_EXT_GETCHGREPLY_V9 bit must be set in the client's RPC context for the server to generate a version 9 response. Otherwise, the server returns ERROR_REVISION_MISMATCH. Note that whenever IDL_DRSGetNCChanges is capable of returning a version 9 response, it is also capable of returning a version 7 response, which is a compressed form of a version 9 response. Compression of IDL_DRSGetNCChanges responses is not controlled by the state of the client's RPC context; it is controlled on a per-request basis by the client; see DRS_USE_COMPRESSION in section 5.41.
 - [IDL_DRSAddEntry](#Section_4.1.1) can generate either a version 2 or version 3 response from either a version 2 or version 3 request. The server generates a version 3 response when DRS_EXT_ADDENTRYREPLY_V3 is set in the client's RPC context; otherwise, the server generates a version 2 response.
-- [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) has only one request version; it contains an **InfoLevel** field. The **InfoLevel**, not the *dwInputVersion*, determines the response version. Similarly, [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) has two request versions, which both contain an **InfoType** field. The **InfoType**, not the *dwInputVersion*, determines the response version.
+- [IDL_DRSDomainControllerInfo](#Section_4.1.5) has only one request version; it contains an **InfoLevel** field. The **InfoLevel**, not the *dwInputVersion*, determines the response version. Similarly, [IDL_DRSGetReplInfo](#Section_4.1.13) has two request versions, which both contain an **InfoType** field. The **InfoType**, not the *dwInputVersion*, determines the response version.
 The following tables describe how the server determines the response version based on the request version, the DRS_EXTENSIONS_INT structure specified when creating the DRS_HANDLE, and in some cases, the contents of the request message.
 
 [IDL_DRSReplicaSync](#Section_4.1.23)
@@ -5467,31 +5467,31 @@ IDL_DRSGetNCChanges
 | Variable | 1 | - - |
 | Variable | 2 | - - |
 
-[IDL_DRSReplicaDel](#Section_4.1.20.2)
+[IDL_DRSReplicaDel](#Section_4.1.20)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - - |
 
-[IDL_DRSReplicaModify](#Section_4.1.22.2)
+[IDL_DRSReplicaModify](#Section_4.1.22)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - - |
 
-[IDL_DRSVerifyNames](#Section_4.1.27.2)
+[IDL_DRSVerifyNames](#Section_4.1.27)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSGetMemberships](#Section_4.1.9)
+[IDL_DRSGetMemberships](#Section_4.1.8)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSInterDomainMove](#Section_4.1.15.4)
+[IDL_DRSInterDomainMove](#Section_4.1.15)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5503,7 +5503,7 @@ IDL_DRSGetNCChanges
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSCrackNames](#Section_4.1.4.2.9)
+[IDL_DRSCrackNames](#Section_4.1.4)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5521,7 +5521,7 @@ IDL_DRSWriteSPN
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSRemoveDsDomain](#Section_4.1.17.3)
+[IDL_DRSRemoveDsDomain](#Section_4.1.17)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5542,7 +5542,7 @@ IDL_DRSAddEntry
 | Variable | 2 | DRS_EXT_ADDENTRYREPLY_V3 3 |
 | Variable | 3 | DRS_EXT_ADDENTRYREPLY_V3 3 |
 
-[IDL_DRSExecuteKCC](#Section_4.1.6.3)
+[IDL_DRSExecuteKCC](#Section_4.1.6)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5555,7 +5555,7 @@ IDL_DRSGetReplInfo
 | Variable | 1 | - request.InfoType 2 |
 | Variable | 2 | - request.InfoType 2 |
 
-[IDL_DRSAddSidHistory](#Section_4.1.2.3)
+[IDL_DRSAddSidHistory](#Section_4.1.2)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5567,25 +5567,25 @@ IDL_DRSGetReplInfo
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3)
+[IDL_DRSReplicaVerifyObjects](#Section_4.1.24)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - - |
 
-[IDL_DRSGetObjectExistence](#Section_4.1.12.5)
+[IDL_DRSGetObjectExistence](#Section_4.1.12)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSQuerySitesByCost](#Section_4.1.16.4)
+[IDL_DRSQuerySitesByCost](#Section_4.1.16)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSInitDemotion](#Section_4.1.14.2)
+[IDL_DRSInitDemotion](#Section_4.1.14)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5597,13 +5597,13 @@ IDL_DRSGetReplInfo
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSFinishDemotion](#Section_4.1.7.3)
+[IDL_DRSFinishDemotion](#Section_4.1.7)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSAddCloneDC](#Section_4.1.29.3)
+[IDL_DRSAddCloneDC](#Section_4.1.29)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5615,13 +5615,13 @@ IDL_DRSGetReplInfo
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DRSReadNgcKey](#Section_4.1.31.2)
+[IDL_DRSReadNgcKey](#Section_4.1.31)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - 1 |
 
-[IDL_DSAPrepareScript](#Section_4.2.1.3)
+[IDL_DSAPrepareScript](#Section_4.2.1)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5644,7 +5644,7 @@ The server returns an error if *puuidClientDsa^* is set to the [**NULL GUID**](#
 
 The server sets *ppextServer* to a DRS_EXTENSIONS_INT structure whose **dwReplEpoch** and **ConfigObjGUID** fields are initialized as described in the previous section ([Client Behavior When Sending the IDL_DRSBind Request (section 4.1.3.1)](#Section_4.1.3.1)), and whose other fields describe the server.<13> The server associates the information in *ppextServer* with the RPC context handle, *phDrs*, in an implementation-specific manner and then returns a [DRS_HANDLE](#Section_5.40) as the referent of *phDrs*.
 
-The following tables specify the capability assertions made by a server that sets bits in the DRS_EXTENSIONS_INT structure returned from [IDL_DRSBind](#Section_4.1.3.3). Each row of a table gives a request version (including both *dwInVersion* and the InfoLevel of [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) and the InfoType of [IDL_DRSGetReplInfo](#Section_4.1.13.4.5)) and the DRS_EXTENSIONS_INT bit or bits that the server sets to indicate support for that request. For instance, every server supports a version 1 request to [IDL_DRSReplicaSync](#Section_4.1.23), but a server does not support a version 5 request to [IDL_DRSGetNCChanges](#Section_4.1.10.8) unless it has set both the DRS_EXT_GETCHGREQ_V5 and DRS_EXT_RESTORE_USN_OPTIMIZATION bits. For [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the IDL_DRSDomainControllerInfo method is disabled regardless of the InfoLevel set by the bits.
+The following tables specify the capability assertions made by a server that sets bits in the DRS_EXTENSIONS_INT structure returned from [IDL_DRSBind](#Section_4.1.3). Each row of a table gives a request version (including both *dwInVersion* and the InfoLevel of [IDL_DRSDomainControllerInfo](#Section_4.1.5) and the InfoType of [IDL_DRSGetReplInfo](#Section_4.1.13)) and the DRS_EXTENSIONS_INT bit or bits that the server sets to indicate support for that request. For instance, every server supports a version 1 request to [IDL_DRSReplicaSync](#Section_4.1.23), but a server does not support a version 5 request to [IDL_DRSGetNCChanges](#Section_4.1.10) unless it has set both the DRS_EXT_GETCHGREQ_V5 and DRS_EXT_RESTORE_USN_OPTIMIZATION bits. For [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds), the IDL_DRSDomainControllerInfo method is disabled regardless of the InfoLevel set by the bits.
 
 A server supports version 4 and version 7 requests to IDL_DRSGetNCChanges only via the SMTP [**replication**](#gt_replication) transport (see [MS-SRPL](../MS-SRPL/MS-SRPL.md)). These cases are noted in the relevant table. A server supports all other requests only via the [**RPC transport**](#gt_rpc-transport).
 
@@ -5677,31 +5677,31 @@ IDL_DRSGetNCChanges
 | Variable | 1 | - |
 | Variable | 2 | DRS_EXT_ASYNCREPL |
 
-[IDL_DRSReplicaDel](#Section_4.1.20.2)
+[IDL_DRSReplicaDel](#Section_4.1.20)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - |
 
-[IDL_DRSReplicaModify](#Section_4.1.22.2)
+[IDL_DRSReplicaModify](#Section_4.1.22)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - |
 
-[IDL_DRSVerifyNames](#Section_4.1.27.2)
+[IDL_DRSVerifyNames](#Section_4.1.27)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - |
 
-[IDL_DRSGetMemberships](#Section_4.1.9)
+[IDL_DRSGetMemberships](#Section_4.1.8)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - |
 
-[IDL_DRSInterDomainMove](#Section_4.1.15.4)
+[IDL_DRSInterDomainMove](#Section_4.1.15)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5713,13 +5713,13 @@ IDL_DRSGetNCChanges
 | --- | --- | --- |
 | Variable | 1 | - |
 
-[IDL_DRSCrackNames](#Section_4.1.4.2.9)
+[IDL_DRSCrackNames](#Section_4.1.4)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | - |
 
-[IDL_DRSWriteSPN](#Section_4.1.28.3)
+[IDL_DRSWriteSPN](#Section_4.1.28)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5731,7 +5731,7 @@ IDL_DRSGetNCChanges
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_REMOVEAPI |
 
-[IDL_DRSRemoveDsDomain](#Section_4.1.17.3)
+[IDL_DRSRemoveDsDomain](#Section_4.1.17)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5753,7 +5753,7 @@ IDL_DRSDomainControllerInfo
 | Variable | 2 | DRS_EXT_ADDENTRY_V2 |
 | Variable | 3 | DRS_EXT_NONDOMAIN_NCS |
 
-[IDL_DRSExecuteKCC](#Section_4.1.6.3)
+[IDL_DRSExecuteKCC](#Section_4.1.6)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5769,7 +5769,7 @@ IDL_DRSGetReplInfo
 | Variable | 2 InfoType = 6 | DRS_EXT_GETCHGREQ_V8 |
 | 2 InfoType = [7..10] | DRS_EXT_GETCHGREPLY_V6 | - |
 
-[IDL_DRSAddSidHistory](#Section_4.1.2.3)
+[IDL_DRSAddSidHistory](#Section_4.1.2)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5781,25 +5781,25 @@ IDL_DRSGetReplInfo
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_GETMEMBERSHIPS2 |
 
-[IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3)
+[IDL_DRSReplicaVerifyObjects](#Section_4.1.24)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_WHISTLER_BETA3 |
 
-[IDL_DRSGetObjectExistence](#Section_4.1.12.5)
+[IDL_DRSGetObjectExistence](#Section_4.1.12)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_WHISTLER_BETA3 |
 
-[IDL_DRSQuerySitesByCost](#Section_4.1.16.4)
+[IDL_DRSQuerySitesByCost](#Section_4.1.16)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_WHISTLER_BETA3 |
 
-[IDL_DRSInitDemotion](#Section_4.1.14.2)
+[IDL_DRSInitDemotion](#Section_4.1.14)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5811,13 +5811,13 @@ IDL_DRSGetReplInfo
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_ADAM |
 
-[IDL_DRSFinishDemotion](#Section_4.1.7.3)
+[IDL_DRSFinishDemotion](#Section_4.1.7)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | 1 | DRS_EXT_ADAM |
 
-[IDL_DSAPrepareScript](#Section_4.2.1.3)
+[IDL_DSAPrepareScript](#Section_4.2.1)
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -5834,11 +5834,11 @@ IDL_DRSGetReplInfo
 
 The client receives a [DRS_EXTENSIONS_INT](#Section_5.39) structure from the server as the referent of *ppextServer*.
 
-A server supports only a subset of the possible request versions, including both *dwInVersion* and the InfoLevel of [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) and the InfoType of [IDL_DRSGetReplInfo](#Section_4.1.13.4.5). The server informs the client of its capabilities via the DRS_EXTENSIONS_INT structure returned from [IDL_DRSBind](#Section_4.1.3.3), as described in [Server Behavior of the IDL_DRSBind Method (section 4.1.3.2)](#Section_4.1.3.2).
+A server supports only a subset of the possible request versions, including both *dwInVersion* and the InfoLevel of [IDL_DRSDomainControllerInfo](#Section_4.1.5) and the InfoType of [IDL_DRSGetReplInfo](#Section_4.1.13). The server informs the client of its capabilities via the DRS_EXTENSIONS_INT structure returned from [IDL_DRSBind](#Section_4.1.3), as described in [Server Behavior of the IDL_DRSBind Method (section 4.1.3.2)](#Section_4.1.3.2).
 
 The client receives a [DRS_HANDLE](#Section_5.40) as the referent of *phDrs*.
 
-The client retains the context handle *phDrs^* for use in method calls on the drsuapi interface. Once a valid handle has been acquired by the client, the handle remains valid until either the server unilaterally breaks the [**RPC**](#gt_remote-procedure-call-rpc) connection (for example, by crashing) or until [IDL_DRSUnbind](#Section_4.1.25.1) has been performed.
+The client retains the context handle *phDrs^* for use in method calls on the drsuapi interface. Once a valid handle has been acquired by the client, the handle remains valid until either the server unilaterally breaks the [**RPC**](#gt_remote-procedure-call-rpc) connection (for example, by crashing) or until [IDL_DRSUnbind](#Section_4.1.25) has been performed.
 
 <a id="Section_4.1.3.4"></a>
 #### 4.1.3.4 Examples of the IDL_DRSBind Method
@@ -5883,7 +5883,7 @@ Querying the nTDSDSA [**objects**](#gt_object) for the root domain NC DC=CONTOSO
 <a id="Section_4.1.3.4.2"></a>
 ##### 4.1.3.4.2 Client Request
 
-DC2 invokes the [IDL_DRSBind](#Section_4.1.3.3) method against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+DC2 invokes the [IDL_DRSBind](#Section_4.1.3) method against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *puuidClientDsa* = GUID {6aad8f5a-07cc-403a-9696-9102fe1c320b}
 - *pextClient*:
@@ -5994,7 +5994,7 @@ DRS_MSG_CRACKREPLY* pmsgOut
 
 );
 
-**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** Version of the request message.
 
@@ -6014,7 +6014,7 @@ DRS_MSG_CRACKREPLY* pmsgOut
 <a id="Section_4.1.4.1.1"></a>
 ##### 4.1.4.1.1 DRS_MSG_CRACKREQ
 
-The DRS_MSG_CRACKREQ union defines the request messages sent to the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_CRACKREQ union defines the request messages sent to the [IDL_DRSCrackNames](#Section_4.1.4) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -6033,7 +6033,7 @@ DRS_MSG_CRACKREQ_V1 V1;
 <a id="Section_4.1.4.1.2"></a>
 ##### 4.1.4.1.2 DRS_MSG_CRACKREQ_V1
 
-The DRS_MSG_CRACKREQ_V1 structure defines the request message sent to the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method.
+The DRS_MSG_CRACKREQ_V1 structure defines the request message sent to the [IDL_DRSCrackNames](#Section_4.1.4) method.
 
 typedef struct {
 
@@ -6138,7 +6138,7 @@ packet-beta
 <a id="Section_4.1.4.1.3"></a>
 ##### 4.1.4.1.3 DS_NAME_FORMAT
 
-The DS_NAME_FORMAT enumeration describes the format of a name sent to or received from the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method.
+The DS_NAME_FORMAT enumeration describes the format of a name sent to or received from the [IDL_DRSCrackNames](#Section_4.1.4) method.
 
 typedef enum
 
@@ -6193,7 +6193,7 @@ DS_DNS_DOMAIN_NAME = 12
 <a id="Section_4.1.4.1.4"></a>
 ##### 4.1.4.1.4 DS_NAME_RESULT_ITEMW
 
-The DS_NAME_RESULT_ITEMW structure defines the translated name returned by the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method.
+The DS_NAME_RESULT_ITEMW structure defines the translated name returned by the [IDL_DRSCrackNames](#Section_4.1.4) method.
 
 typedef struct {
 
@@ -6216,7 +6216,7 @@ DWORD status;
 <a id="Section_4.1.4.1.5"></a>
 ##### 4.1.4.1.5 DS_NAME_RESULTW
 
-The DS_NAME_RESULTW structure defines the translated names returned by the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method.
+The DS_NAME_RESULTW structure defines the translated names returned by the [IDL_DRSCrackNames](#Section_4.1.4) method.
 
 typedef struct {
 
@@ -6235,7 +6235,7 @@ DWORD cItems;
 <a id="Section_4.1.4.1.6"></a>
 ##### 4.1.4.1.6 DRS_MSG_CRACKREPLY
 
-The DRS_MSG_CRACKREPLY union defines the response messages received from the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method.
+The DRS_MSG_CRACKREPLY union defines the response messages received from the [IDL_DRSCrackNames](#Section_4.1.4) method.
 
 typedef
 
@@ -6254,7 +6254,7 @@ DRS_MSG_CRACKREPLY_V1 V1;
 <a id="Section_4.1.4.1.7"></a>
 ##### 4.1.4.1.7 DRS_MSG_CRACKREPLY_V1
 
-The DRS_MSG_CRACKREPLY_V1 structure defines the response message received from the [IDL_DRSCrackNames](#Section_4.1.4.2.9) method.
+The DRS_MSG_CRACKREPLY_V1 structure defines the response message received from the [IDL_DRSCrackNames](#Section_4.1.4) method.
 
 typedef struct {
 
@@ -6279,7 +6279,7 @@ This section enumerates the possible statuses of a translation operation.
 | 5 DS_NAME_ERROR_DOMAIN_ONLY | Only the [**domain**](#gt_domain) part of the name was translated. |
 | 7 DS_NAME_ERROR_TRUST_REFERRAL | The specified name belongs to a trusted [**forest**](#gt_forest), a referral is returned. |
 | 0xFFFFFFF2 DS_NAME_ERROR_IS_SID_HISTORY_UNKNOWN | The specified name matches a value in the **sidHistory** [**attribute**](#gt_attributes) of an object, but the type of the object is unknown. |
-| 0xFFFFFFF3 DS_NAME_ERROR_IS_SID_HISTORY_ALIAS | Translation was successful. The specified name matches a value in the **sidHistory** attribute of an object. The object's **sAMAccountType** attribute value is either SAM_NON_SECURITY_ALIAS_OBJECT or SAM_ALIAS_OBJECT as defined in [MS-SAMR](#Section_6) section 2.2.1.9, ACCOUNT_TYPE Values. |
+| 0xFFFFFFF3 DS_NAME_ERROR_IS_SID_HISTORY_ALIAS | Translation was successful. The specified name matches a value in the **sidHistory** attribute of an object. The object's **sAMAccountType** attribute value is either SAM_NON_SECURITY_ALIAS_OBJECT or SAM_ALIAS_OBJECT as defined in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.9, ACCOUNT_TYPE Values. |
 | 0xFFFFFFF4 DS_NAME_ERROR_IS_SID_HISTORY_GROUP | Translation was successful. The specified name matches a value in the **sidHistory** attribute of an object. The object's **sAMAccountType** attribute value is either SAM_GROUP_OBJECT or SAM_NON_SECURITY_GROUP_OBJECT as defined in [MS-SAMR] section 2.2.1.9, ACCOUNT_TYPE Values. |
 | 0xFFFFFFF5 DS_NAME_ERROR_IS_SID_HISTORY_USER | Translation was successful. The specified name matches a value in the **sidHistory** attribute of an object. The object's **sAMAccountType** attribute value is SAM_USER_OBJECT or SAM_MACHINE_ACCOUNT or SAM_TRUST_ACCOUNT as defined in [MS-SAMR] section 2.2.1.9, ACCOUNT_TYPE Values. |
 | 0xFFFFFFF6 DS_NAME_ERROR_IS_SID_UNKNOWN | The specified name matches the [**objectSid**](#gt_objectsid) attribute of an object, but the type of the object is unknown. |
@@ -6310,14 +6310,14 @@ This procedure converts *name* from [**extended canonical name**](#gt_extended-c
 
 procedure DomainDNSNameFromDomain(domainNC: DSName): unicodestring
 
-If the [**domain NC**](#gt_domain-naming-context-domain-nc), whose root has the [DSName](#Section_5.50) *domainNC*, is hosted in the [**forest**](#gt_forest), this procedure returns the DNS [**domain**](#gt_domain) name of that domain NC. Otherwise, null is returned.
+If the [**domain NC**](#gt_domain-naming-context-domain-nc), whose root has the [DSName](#Section_5.49) *domainNC*, is hosted in the [**forest**](#gt_forest), this procedure returns the DNS [**domain**](#gt_domain) name of that domain NC. Otherwise, null is returned.
 
 <a id="Section_4.1.4.2.3"></a>
 ##### 4.1.4.2.3 DomainFromDomainDNSName
 
 procedure DomainFromDomainDNSName(domainName: unicodestring): DSName
 
-If the [**DC**](#gt_domain-controller-dc) hosts an [**NC replica**](#gt_nc-replica) of the [**domain NC**](#gt_domain-naming-context-domain-nc) whose DNS [**domain**](#gt_domain) name is *domainName*, this procedure returns the [DSName](#Section_5.50) of the root of that domain NC. Otherwise, it returns null.
+If the [**DC**](#gt_domain-controller-dc) hosts an [**NC replica**](#gt_nc-replica) of the [**domain NC**](#gt_domain-naming-context-domain-nc) whose DNS [**domain**](#gt_domain) name is *domainName*, this procedure returns the [DSName](#Section_5.49) of the root of that domain NC. Otherwise, it returns null.
 
 <a id="Section_4.1.4.2.4"></a>
 ##### 4.1.4.2.4 DomainNameFromCanonicalName
@@ -6347,7 +6347,7 @@ Parses and returns the [**domain**](#gt_domain) name from a UPN-formatted string
 
 procedure DomainNetBIOSNameFromDomain(domainNC: DSName): unicodestring
 
-If the [**domain NC**](#gt_domain-naming-context-domain-nc), whose root has the [DSName](#Section_5.50) *domainNC*, is hosted in the [**forest**](#gt_forest), this procedure returns the NetBIOS [**domain**](#gt_domain) name of that domain NC. Otherwise, null is returned.
+If the [**domain NC**](#gt_domain-naming-context-domain-nc), whose root has the [DSName](#Section_5.49) *domainNC*, is hosted in the [**forest**](#gt_forest), this procedure returns the NetBIOS [**domain**](#gt_domain) name of that domain NC. Otherwise, null is returned.
 
 <a id="Section_4.1.4.2.8"></a>
 ##### 4.1.4.2.8 DomainSidFromSid
@@ -6361,7 +6361,7 @@ Removes the last subauthority from the input [**security identifier**](#gt_sid) 
 
 procedure CrackNames(DRS_MSG_CRACKREQ_V1 msgIn, DS_NAME_RESULTW *pmsgOut): ULONG
 
-The CrackNames method implements the core functionality of [IDL_DRSCrackNames](#Section_4.1.4.2.9), that is, looking up [**directory object**](#gt_directory-object) names that are provided in one format (for example, [**SPNs**](#gt_service-principal-name-spn)) and returning them in a different format (for example, [**DNs**](#gt_distinguished-name-dn)).
+The CrackNames method implements the core functionality of [IDL_DRSCrackNames](#Section_4.1.4), that is, looking up [**directory object**](#gt_directory-object) names that are provided in one format (for example, [**SPNs**](#gt_service-principal-name-spn)) and returning them in a different format (for example, [**DNs**](#gt_distinguished-name-dn)).
 
 i: DWORD
 
@@ -7411,7 +7411,7 @@ IncludingAltSecID: boolean,
 
 name: unicodestring): set of DSName
 
-*Informative summary of behavior*: Returns [DSName](#Section_5.50)s of [**objects**](#gt_object), with the given value as a value of userPrincipalName, altSecurityIdentities, or sAMAccountName.
+*Informative summary of behavior*: Returns [DSName](#Section_5.49)s of [**objects**](#gt_object), with the given value as a value of userPrincipalName, altSecurityIdentities, or sAMAccountName.
 
 rt, rt1, rt2: set of DSName
 
@@ -7581,7 +7581,7 @@ pTranslatedNames: PLSAPR_TRANSLATED_NAMES_EX
 
 ): NTSTATUS
 
-*Informative summary of behavior:* The TranslateFPOToName procedure performs an LsarLookupSids2 call ([MS-LSAT](#Section_6) section 3.1.4.10) to translate *obj* to its Windows NT 4.0 account name and [**domain**](#gt_domain).
+*Informative summary of behavior:* The TranslateFPOToName procedure performs an LsarLookupSids2 call ([MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.10) to translate *obj* to its Windows NT 4.0 account name and [**domain**](#gt_domain).
 
 hlsaPolicy: LSAPR_HANDLE
 
@@ -7897,7 +7897,7 @@ DRS_MSG_DCINFOREPLY* pmsgOut
 
 );
 
-**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** Version of the request message.
 
@@ -7917,7 +7917,7 @@ DRS_MSG_DCINFOREPLY* pmsgOut
 <a id="Section_4.1.5.1.1"></a>
 ##### 4.1.5.1.1 DRS_MSG_DCINFOREQ
 
-The DRS_MSG_DCINFOREQ union defines the request messages sent to the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_DCINFOREQ union defines the request messages sent to the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -7938,7 +7938,7 @@ DRS_MSG_DCINFOREQ_V1 V1;
 <a id="Section_4.1.5.1.2"></a>
 ##### 4.1.5.1.2 DRS_MSG_DCINFOREQ_V1
 
-The DRS_MSG_DCINFOREQ_V1 structure defines the request message sent to the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method.
+The DRS_MSG_DCINFOREQ_V1 structure defines the request message sent to the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method.
 
 typedef struct {
 
@@ -7955,7 +7955,7 @@ DWORD InfoLevel;
 <a id="Section_4.1.5.1.3"></a>
 ##### 4.1.5.1.3 DRS_MSG_DCINFOREPLY
 
-The DRS_MSG_DCINFOREPLY union defines the response messages received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method.
+The DRS_MSG_DCINFOREPLY union defines the response messages received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method.
 
 typedef
 
@@ -7992,7 +7992,7 @@ DRS_MSG_DCINFOREPLY_VFFFFFFFF VFFFFFFFF;
 <a id="Section_4.1.5.1.4"></a>
 ##### 4.1.5.1.4 DRS_MSG_DCINFOREPLY_V1
 
-The DRS_MSG_DCINFOREPLY_V1 structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method, when the client has requested InfoLevel = 1.
+The DRS_MSG_DCINFOREPLY_V1 structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method, when the client has requested InfoLevel = 1.
 
 typedef struct {
 
@@ -8009,7 +8009,7 @@ typedef struct {
 <a id="Section_4.1.5.1.5"></a>
 ##### 4.1.5.1.5 DRS_MSG_DCINFOREPLY_V2
 
-The DRS_MSG_DCINFOREPLY_V2 structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method, when the client has requested InfoLevel = 2.
+The DRS_MSG_DCINFOREPLY_V2 structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method, when the client has requested InfoLevel = 2.
 
 typedef struct {
 
@@ -8026,7 +8026,7 @@ typedef struct {
 <a id="Section_4.1.5.1.6"></a>
 ##### 4.1.5.1.6 DRS_MSG_DCINFOREPLY_V3
 
-The DRS_MSG_DCINFOREPLY_V3 structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method when the client has requested InfoLevel = 3.
+The DRS_MSG_DCINFOREPLY_V3 structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method when the client has requested InfoLevel = 3.
 
 typedef struct {
 
@@ -8043,7 +8043,7 @@ typedef struct {
 <a id="Section_4.1.5.1.7"></a>
 ##### 4.1.5.1.7 DRS_MSG_DCINFOREPLY_VFFFFFFFF
 
-The DRS_MSG_DCINFOREPLY_VFFFFFFFF structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method, when the client has requested InfoLevel = 0xFFFFFFFF.
+The DRS_MSG_DCINFOREPLY_VFFFFFFFF structure defines the response message received from the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method, when the client has requested InfoLevel = 0xFFFFFFFF.
 
 typedef struct {
 
@@ -8268,7 +8268,7 @@ DWORD Reserved1;
 <a id="Section_4.1.5.2"></a>
 #### 4.1.5.2 Server Behavior of the IDL_DRSDomainControllerInfo Method
 
-*Informative summary of behavior*: The [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method supports four information levels. For levels 1, 2, and 3, the server returns information for the [**DCs**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) of the server. For level 0xffffffff, the server returns information about the [**LDAP connections**](#gt_ldap-connection) on the server that are currently open.
+*Informative summary of behavior*: The [IDL_DRSDomainControllerInfo](#Section_4.1.5) method supports four information levels. For levels 1, 2, and 3, the server returns information for the [**DCs**](#gt_domain-controller-dc) in the [**domain**](#gt_domain) of the server. For level 0xffffffff, the server returns information about the [**LDAP connections**](#gt_ldap-connection) on the server that are currently open.
 
 Regular read access checks apply to the information that is returned to the caller. Therefore, if the caller does not have [**read permission**](#gt_read-permission) on data that needs to be returned, this data is not included in the response. See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.4.3 for more information about access check behavior in read operations.
 
@@ -8739,7 +8739,7 @@ return 0
 <a id="Section_4.1.5.3"></a>
 #### 4.1.5.3 Examples of the IDL_DRSDomainControllerInfo Method
 
-An application running on DC2 invokes the [DRSDomainControllerInfo](#Section_4.1.5.2) method on DC2 to retrieve the NetBIOS and DNS host names for all [**DCs**](#gt_domain-controller-dc) in the [**domain NC**](#gt_domain-naming-context-domain-nc) CONTOSO.COM.
+An application running on DC2 invokes the [DRSDomainControllerInfo](#Section_4.1.5) method on DC2 to retrieve the NetBIOS and DNS host names for all [**DCs**](#gt_domain-controller-dc) in the [**domain NC**](#gt_domain-naming-context-domain-nc) CONTOSO.COM.
 
 <a id="Section_4.1.5.3.1"></a>
 ##### 4.1.5.3.1 Initial State
@@ -8847,7 +8847,7 @@ Querying the DC1 computer object in domain NC DC=CONTOSO, DC=COM by performing a
 <a id="Section_4.1.5.3.2"></a>
 ##### 4.1.5.3.2 Client Request
 
-DC2 invokes the [IDL_DRSDomainControllerInfo](#Section_4.1.5.2) method against itself with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 is omitted):
+DC2 invokes the [IDL_DRSDomainControllerInfo](#Section_4.1.5) method against itself with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 is omitted):
 
 - *dwInVersion* = 1
 - *pmsgIn* = [DRS_MSG_DCINFOREQ_V1](#Section_4.1.5.1.2)
@@ -8899,7 +8899,7 @@ DRS_MSG_KCC_EXECUTE* pmsgIn
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -8915,7 +8915,7 @@ DRS_MSG_KCC_EXECUTE* pmsgIn
 <a id="Section_4.1.6.1.1"></a>
 ##### 4.1.6.1.1 DRS_MSG_KCC_EXECUTE
 
-The DRS_MSG_KCC_EXECUTE union defines the request messages sent to the [IDL_DRSExecuteKCC](#Section_4.1.6.3) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_KCC_EXECUTE union defines the request messages sent to the [IDL_DRSExecuteKCC](#Section_4.1.6) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -8934,7 +8934,7 @@ DRS_MSG_KCC_EXECUTE_V1 V1;
 <a id="Section_4.1.6.1.2"></a>
 ##### 4.1.6.1.2 DRS_MSG_KCC_EXECUTE_V1
 
-The DRS_MSG_KCC_EXECUTE_V1 structure defines the request message sent to the [IDL_DRSExecuteKCC](#Section_4.1.6.3) method.
+The DRS_MSG_KCC_EXECUTE_V1 structure defines the request message sent to the [IDL_DRSExecuteKCC](#Section_4.1.6) method.
 
 typedef struct {
 
@@ -9005,7 +9005,7 @@ If an error occurs, a [**Windows error code**](#gt_windows-error-code) is return
 <a id="Section_4.1.6.3"></a>
 #### 4.1.6.3 Server Behavior of the IDL_DRSExecuteKCC Method
 
-*Informative summary of behavior*: The [IDL_DRSExecuteKCC](#Section_4.1.6.3) method triggers the execution of tasks that generate and maintain the [**replication**](#gt_replication) topology between [**DCs**](#gt_domain-controller-dc).<15> See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.2.2 for more information related to the tasks performed by the [**KCC**](#gt_knowledge-consistency-checker-kcc) upon receipt of an IDL_DRSExecuteKCC request.
+*Informative summary of behavior*: The [IDL_DRSExecuteKCC](#Section_4.1.6) method triggers the execution of tasks that generate and maintain the [**replication**](#gt_replication) topology between [**DCs**](#gt_domain-controller-dc).<15> See [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.2.2 for more information related to the tasks performed by the [**KCC**](#gt_knowledge-consistency-checker-kcc) upon receipt of an IDL_DRSExecuteKCC request.
 
 ULONG
 
@@ -9062,7 +9062,7 @@ return ExecuteKCCTasks()
 <a id="Section_4.1.7"></a>
 ### 4.1.7 IDL_DRSFinishDemotion (Opnum 27)
 
-The IDL_DRSFinishDemotion method either performs one or more steps toward the complete removal of a [**DC**](#gt_domain-controller-dc) from an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**forest**](#gt_forest), or it undoes the effects of the first phase of removal (performed by [IDL_DRSInitDemotion](#Section_4.1.14.2)). This method is supported by AD LDS only.
+The IDL_DRSFinishDemotion method either performs one or more steps toward the complete removal of a [**DC**](#gt_domain-controller-dc) from an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**forest**](#gt_forest), or it undoes the effects of the first phase of removal (performed by [IDL_DRSInitDemotion](#Section_4.1.14)). This method is supported by AD LDS only.
 
 ULONG IDL_DRSFinishDemotion(
 
@@ -9082,7 +9082,7 @@ DRS_MSG_FINISH_DEMOTIONREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -9102,7 +9102,7 @@ DRS_MSG_FINISH_DEMOTIONREPLY* pmsgOut
 <a id="Section_4.1.7.1.1"></a>
 ##### 4.1.7.1.1 DRS_MSG_FINISH_DEMOTIONREQ
 
-The DRS_MSG_FINISH_DEMOTIONREQ union defines the request messages sent to the [IDL_DRSFinishDemotion](#Section_4.1.7.3) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_FINISH_DEMOTIONREQ union defines the request messages sent to the [IDL_DRSFinishDemotion](#Section_4.1.7) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -9121,7 +9121,7 @@ DRS_MSG_FINISH_DEMOTIONREQ_V1 V1;
 <a id="Section_4.1.7.1.2"></a>
 ##### 4.1.7.1.2 DRS_MSG_FINISH_DEMOTIONREQ_V1
 
-The DRS_MSG_FINISH_DEMOTIONREQ_V1 structure defines the request message sent to the [IDL_DRSFinishDemotion](#Section_4.1.7.3) method.
+The DRS_MSG_FINISH_DEMOTIONREQ_V1 structure defines the request message sent to the [IDL_DRSFinishDemotion](#Section_4.1.7) method.
 
 typedef struct {
 
@@ -9173,7 +9173,7 @@ packet-beta
 
 **X**: Unused. MUST be zero and ignored.
 
-**R (DS_DEMOTE_ROLLBACK_DEMOTE, 0x00000001)**: Undo the effects of [IDL_DRSInitDemotion](#Section_4.1.14.2). If present, any other flags present (except for DS_DEMOTE_OPT_FAIL_ON_UNKNOWN) are ignored.
+**R (DS_DEMOTE_ROLLBACK_DEMOTE, 0x00000001)**: Undo the effects of [IDL_DRSInitDemotion](#Section_4.1.14). If present, any other flags present (except for DS_DEMOTE_OPT_FAIL_ON_UNKNOWN) are ignored.
 
 **C (DS_DEMOTE_COMMIT_DEMOTE, 0x00000002)**: Discontinue being a [**DC**](#gt_domain-controller-dc) for the current DC instance by stopping all [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) protocols.
 
@@ -9192,7 +9192,7 @@ packet-beta
 <a id="Section_4.1.7.1.3"></a>
 ##### 4.1.7.1.3 DRS_MSG_FINISH_DEMOTIONREPLY
 
-The DRS_MSG_FINISH_DEMOTIONREPLY union defines the response messages received from the [IDL_DRSFinishDemotion](#Section_4.1.7.3) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_FINISH_DEMOTIONREPLY union defines the response messages received from the [IDL_DRSFinishDemotion](#Section_4.1.7) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -9211,7 +9211,7 @@ DRS_MSG_FINISH_DEMOTIONREPLY_V1 V1;
 <a id="Section_4.1.7.1.4"></a>
 ##### 4.1.7.1.4 DRS_MSG_FINISH_DEMOTIONREPLY_V1
 
-The DRS_MSG_FINISH_DEMOTIONREPLY_V1 structure defines the response message received from the [IDL_DRSFinishDemotion](#Section_4.1.7.3) method.
+The DRS_MSG_FINISH_DEMOTIONREPLY_V1 structure defines the response message received from the [IDL_DRSFinishDemotion](#Section_4.1.7) method.
 
 typedef struct {
 
@@ -9258,7 +9258,7 @@ The RemoveADLDSSPNs procedure connects to an [**AD DS**](#gt_active-directory-do
 <a id="Section_4.1.7.3"></a>
 #### 4.1.7.3 Server Behavior of the IDL_DRSFinishDemotion Method
 
-*Informative summary of behavior*: The [IDL_DRSFinishDemotion](#Section_4.1.7.3) method either performs one or more steps toward the complete removal of a [**DC**](#gt_domain-controller-dc) from an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**forest**](#gt_forest), or it undoes the effects of the first phase of removal (performed by [IDL_DRSInitDemotion](#Section_4.1.14.2)).<16>
+*Informative summary of behavior*: The [IDL_DRSFinishDemotion](#Section_4.1.7) method either performs one or more steps toward the complete removal of a [**DC**](#gt_domain-controller-dc) from an [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**forest**](#gt_forest), or it undoes the effects of the first phase of removal (performed by [IDL_DRSInitDemotion](#Section_4.1.14)).<16>
 
 ULONG
 
@@ -9491,7 +9491,7 @@ DRS_MSG_REVMEMB_REPLY* pmsgOut
 
 );
 
-**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** Version of the request message.
 
@@ -9511,7 +9511,7 @@ DRS_MSG_REVMEMB_REPLY* pmsgOut
 <a id="Section_4.1.8.1.1"></a>
 ##### 4.1.8.1.1 DRS_MSG_REVMEMB_REQ
 
-The DRS_MSG_REVMEMB_REQ union defines the request messages sent to the [IDL_DRSGetMemberships](#Section_4.1.9) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_REVMEMB_REQ union defines the request messages sent to the [IDL_DRSGetMemberships](#Section_4.1.8) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -9530,7 +9530,7 @@ DRS_MSG_REVMEMB_REQ_V1 V1;
 <a id="Section_4.1.8.1.2"></a>
 ##### 4.1.8.1.2 DRS_MSG_REVMEMB_REQ_V1
 
-The DRS_MSG_REVMEMB_REQ_V1 structure defines the request message sent to the [IDL_DRSGetMemberships](#Section_4.1.9) method.
+The DRS_MSG_REVMEMB_REQ_V1 structure defines the request message sent to the [IDL_DRSGetMemberships](#Section_4.1.8) method.
 
 typedef struct {
 
@@ -9548,7 +9548,7 @@ DSNAME* pLimitingDomain;
 
 **cDsNames:** The count of items in the **ppDsNames** array.
 
-**ppDsNames:** The [DSName](#Section_5.50) of the [**object**](#gt_object) whose reverse membership is being requested, plus the DSNames of [**groups**](#gt_group) of the appropriate type(s) of which it is already known to be a member.
+**ppDsNames:** The [DSName](#Section_5.49) of the [**object**](#gt_object) whose reverse membership is being requested, plus the DSNames of [**groups**](#gt_group) of the appropriate type(s) of which it is already known to be a member.
 
 **dwFlags:** Zero or more of the following bit flags, which are presented in little-endian byte order.
 
@@ -9638,7 +9638,7 @@ RevMembGlobalGroupsNonTransitive
 <a id="Section_4.1.8.1.4"></a>
 ##### 4.1.8.1.4 DRS_MSG_REVMEMB_REPLY
 
-The DRS_MSG_REVMEMB_REPLY union defines the response messages received from the [IDL_DRSGetMemberships](#Section_4.1.9) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_REVMEMB_REPLY union defines the response messages received from the [IDL_DRSGetMemberships](#Section_4.1.8) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -9657,7 +9657,7 @@ DRS_MSG_REVMEMB_REPLY_V1 V1;
 <a id="Section_4.1.8.1.5"></a>
 ##### 4.1.8.1.5 DRS_MSG_REVMEMB_REPLY_V1
 
-The DRS_MSG_REVMEMB_REPLY_V1 structure defines the response message received from the [IDL_DRSGetMemberships](#Section_4.1.9) method.
+The DRS_MSG_REVMEMB_REPLY_V1 structure defines the response message received from the [IDL_DRSGetMemberships](#Section_4.1.8) method.
 
 typedef struct {
 
@@ -9731,7 +9731,7 @@ The Closure procedure returns the set of vertices that can be reached from verte
 
 procedure DomainOf(o: DSName): DSName
 
-The DomainOf procedure returns the [DSName](#Section_5.50) of the [**domain NC**](#gt_domain-naming-context-domain-nc) to which the given DSName *o* belongs. It returns null upon failure.
+The DomainOf procedure returns the [DSName](#Section_5.49) of the [**domain NC**](#gt_domain-naming-context-domain-nc) to which the given DSName *o* belongs. It returns null upon failure.
 
 <a id="Section_4.1.8.2.4"></a>
 ##### 4.1.8.2.4 GetDSNameOfEnterpriseRODCsGroup
@@ -9745,7 +9745,7 @@ This procedure constructs a [**SID**](#gt_sid) s consisting of the [**domain SID
 
 procedure GetDSNameFromPrimaryGroupId(rid: Rid): DSName
 
-This procedure constructs a [**SID**](#gt_sid) s consisting of the [**domain SID**](#gt_domain-security-identifier-domain-sid) of the [**DC's**](#gt_domain-controller-dc) default [**domain**](#gt_domain) and the given relative identifier **rid**, and returns the [DSName](#Section_5.50) of the [**object**](#gt_object) *o* for which *o*!objectSid = *s*. If no such object *o* exists, then this procedure will return null.
+This procedure constructs a [**SID**](#gt_sid) s consisting of the [**domain SID**](#gt_domain-security-identifier-domain-sid) of the [**DC's**](#gt_domain-controller-dc) default [**domain**](#gt_domain) and the given relative identifier **rid**, and returns the [DSName](#Section_5.49) of the [**object**](#gt_object) *o* for which *o*!objectSid = *s*. If no such object *o* exists, then this procedure will return null.
 
 <a id="Section_4.1.8.2.6"></a>
 ##### 4.1.8.2.6 IsMatchedGroup
@@ -9758,7 +9758,7 @@ op: REVERSE_MEMBERSHIP_OPERATION_TYPE,
 
 limitingDomain: DSName): boolean
 
-*Informative summary of behavior*: The IsMatchedGroup procedure checks whether an [**object**](#gt_object) should be included in the result for the specified [IDL_DRSGetMemberships](#Section_4.1.9) operation.
+*Informative summary of behavior*: The IsMatchedGroup procedure checks whether an [**object**](#gt_object) should be included in the result for the specified [IDL_DRSGetMemberships](#Section_4.1.8) operation.
 
 limitToDomain, filteroutBuiltin, result: boolean
 
@@ -9826,11 +9826,11 @@ The Neighbors procedure returns the set of vertices adjacent to vertex *v* in th
 <a id="Section_4.1.8.3"></a>
 #### 4.1.8.3 Server Behavior of the IDL_DRSGetMemberships Method
 
-*Informative summary of behavior*: The [IDL_DRSGetMemberships](#Section_4.1.9) method constructs a directed graph G(V,A). The vertex set of the graph includes all the [**objects**](#gt_object) in the scope of the [**forest**](#gt_forest) if the server is a [**GC**](#gt_global-catalog-gc), or in the scope of the default [**domain NC**](#gt_domain-naming-context-domain-nc) otherwise. The arc set of the graph includes all the tuples [initial: *u*,final: *v*] if *u* is a member of *v* and both *u* and *v* are in the scope. This graph represents the membership relation in the given scope.
+*Informative summary of behavior*: The [IDL_DRSGetMemberships](#Section_4.1.8) method constructs a directed graph G(V,A). The vertex set of the graph includes all the [**objects**](#gt_object) in the scope of the [**forest**](#gt_forest) if the server is a [**GC**](#gt_global-catalog-gc), or in the scope of the default [**domain NC**](#gt_domain-naming-context-domain-nc) otherwise. The arc set of the graph includes all the tuples [initial: *u*,final: *v*] if *u* is a member of *v* and both *u* and *v* are in the scope. This graph represents the membership relation in the given scope.
 
 For a GroupMembersTransitive request, a reversed graph of G is used because member relation is queried rather than membership. The reversed graph has the same vertex set as G, but the arcs in the arc set are in the opposite direction as those in A.
 
-For other types of requests, a subgraph of G is used. The vertex set of this subgraph consists of only the [DSName](#Section_5.50) values of interest for that particular request type, and the arc set is reduced to the arcs that link two vertices in the vertex set of the subgraph.
+For other types of requests, a subgraph of G is used. The vertex set of this subgraph consists of only the [DSName](#Section_5.49) values of interest for that particular request type, and the arc set is reduced to the arcs that link two vertices in the vertex set of the subgraph.
 
 Starting from the graph, this method computes a set of objects for each DSName in the input parameters. The set could be either transitive closure of the object or the immediate neighbors of the object in the graph, depending on the type of request. The union of these sets is returned as the result.
 
@@ -10087,7 +10087,7 @@ DRS_MSG_GETMEMBERSHIPS2_REPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** Version of the request message.
 
@@ -10179,7 +10179,7 @@ typedef struct {
 <a id="Section_4.1.9.2"></a>
 #### 4.1.9.2 Server Behavior of the IDL_DRSGetMemberships2 Method
 
-*Informative summary of behavior*: The [IDL_DRSGetMemberships2](#Section_4.1.9) method is merely a way to execute a series of [IDL_DRSGetMemberships](#Section_4.1.9) [**RPC**](#gt_remote-procedure-call-rpc) calls via a single RPC request.
+*Informative summary of behavior*: The [IDL_DRSGetMemberships2](#Section_4.1.9) method is merely a way to execute a series of [IDL_DRSGetMemberships](#Section_4.1.8) [**RPC**](#gt_remote-procedure-call-rpc) calls via a single RPC request.
 
 ULONG
 
@@ -10260,7 +10260,7 @@ DRS_MSG_GETCHGREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** Version of the request message.
 
@@ -10277,7 +10277,7 @@ DRS_MSG_GETCHGREPLY* pmsgOut
 <a id="Section_4.1.10.1"></a>
 #### 4.1.10.1 Overview
 
-A client [**DC**](#gt_domain-controller-dc) sends an [IDL_DRSGetNCChanges](#Section_4.1.10.8) request (*msgIn*, of a type in the union [DRS_MSG_GETCHGREQ](#Section_4.1.10.2.1)) to a server to replicate [**directory objects**](#gt_directory-object) in a given [**NC**](#gt_naming-context-nc) from the server [**NC replica**](#gt_nc-replica) to the client NC replica.
+A client [**DC**](#gt_domain-controller-dc) sends an [IDL_DRSGetNCChanges](#Section_4.1.10) request (*msgIn*, of a type in the union [DRS_MSG_GETCHGREQ](#Section_4.1.10.2.1)) to a server to replicate [**directory objects**](#gt_directory-object) in a given [**NC**](#gt_naming-context-nc) from the server [**NC replica**](#gt_nc-replica) to the client NC replica.
 
 The response (*msgOut*, of a type in the union [DRS_MSG_GETCHGREPLY](#Section_4.1.10.2.9)) contains a set of [**updates**](#gt_update) that the client is to apply to its NC replica. Commonly, this set of updates is too large to send in a single response; in this case, multiple IDL_DRSGetNCChanges requests and responses must be sent before the server sends a response that indicates no additional updates are available.
 
@@ -10291,7 +10291,7 @@ There are five types of [**cycle**](#gt_replication-cycle) starts:
 - The client explicitly signals the start of a special single-response cycle when it requests an [**extended operation**](#gt_extended-operation). Such cycles always consist of a single response which sets msgOut.fMoreData = false.
 - The client explicitly signals the start of a cycle by sending msgIn.uuidInvocIdSrc = 0 or msgIn.usnvecFrom = 0.
 - The client sends values of msgIn.uuidInvocIdSrc and msgIn.usnvecFrom that were returned by the server as msgOut.uuidInvocIdSrc and msgOut.usnvecTo in the final message of some other cycle.
-- The server detects either that msgIn.uuidInvocIdSrc ≠ [dc](#Section_5.30).invocationId or that msgIn.uuidInvocIdSrc and msgIn.usnvecFrom were not returned by the server in the final message of some other cycle.
+- The server detects either that msgIn.uuidInvocIdSrc ≠ [dc](#Section_4.1.29.2.3).invocationId or that msgIn.uuidInvocIdSrc and msgIn.usnvecFrom were not returned by the server in the final message of some other cycle.
 - The server implementation MAY<17> declare the supplied values of msgIn.uuidInvocIdSrc and msgIn.usnvecFrom as too stale to use.
 If the server starts a new cycle based on items 4 or 5, the server ignores msgIn.usnvecFrom, treating it as though it were zero.
 
@@ -10363,7 +10363,7 @@ The [**extended operation**](#gt_extended-operation) specified by *msgIn.ulExten
 <a id="Section_4.1.10.2.1"></a>
 ##### 4.1.10.2.1 DRS_MSG_GETCHGREQ
 
-The DRS_MSG_GETCHGREQ union defines request messages that are sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. There are no V1, V2, V3, V6, or V9 messages.
+The DRS_MSG_GETCHGREQ union defines request messages that are sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method. There are no V1, V2, V3, V6, or V9 messages.
 
 typedef
 
@@ -10412,7 +10412,7 @@ DRS_MSG_GETCHGREQ_V11 V11;
 <a id="Section_4.1.10.2.2"></a>
 ##### 4.1.10.2.2 DRS_MSG_GETCHGREQ_V3
 
-The DRS_MSG_GETCHGREQ_V3 structure defines a portion of the request message that is sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method as part of SMTP [**replication**](#gt_replication) ([MS-SRPL](../MS-SRPL/MS-SRPL.md)). This is not a complete request message; it is embedded in [DRS_MSG_GETCHGREQ_V4](#Section_4.1.10.2.3) and [DRS_MSG_GETCHGREQ_V7](#Section_4.1.10.2.5).<26>
+The DRS_MSG_GETCHGREQ_V3 structure defines a portion of the request message that is sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method as part of SMTP [**replication**](#gt_replication) ([MS-SRPL](../MS-SRPL/MS-SRPL.md)). This is not a complete request message; it is embedded in [DRS_MSG_GETCHGREQ_V4](#Section_4.1.10.2.3) and [DRS_MSG_GETCHGREQ_V7](#Section_4.1.10.2.5).<26>
 
 typedef struct {
 
@@ -10465,7 +10465,7 @@ ULONG ulExtendedOp;
 <a id="Section_4.1.10.2.3"></a>
 ##### 4.1.10.2.3 DRS_MSG_GETCHGREQ_V4
 
-The DRS_MSG_GETCHGREQ_V4 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V3](#Section_4.1.10.2.2).<27>
+The DRS_MSG_GETCHGREQ_V4 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V3](#Section_4.1.10.2.2).<27>
 
 typedef struct {
 
@@ -10486,7 +10486,7 @@ DRS_MSG_GETCHGREQ_V3 V3;
 <a id="Section_4.1.10.2.4"></a>
 ##### 4.1.10.2.4 DRS_MSG_GETCHGREQ_V5
 
-The DRS_MSG_GETCHGREQ_V5 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method.
+The DRS_MSG_GETCHGREQ_V5 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method.
 
 typedef struct {
 
@@ -10535,7 +10535,7 @@ ULARGE_INTEGER liFsmoInfo;
 <a id="Section_4.1.10.2.5"></a>
 ##### 4.1.10.2.5 DRS_MSG_GETCHGREQ_V7
 
-The DRS_MSG_GETCHGREQ_V7 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V4](#Section_4.1.10.2.3).<28>
+The DRS_MSG_GETCHGREQ_V7 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V4](#Section_4.1.10.2.3).<28>
 
 typedef struct {
 
@@ -10568,7 +10568,7 @@ SCHEMA_PREFIX_TABLE PrefixTableDest;
 <a id="Section_4.1.10.2.6"></a>
 ##### 4.1.10.2.6 DRS_MSG_GETCHGREQ_V8
 
-The DRS_MSG_GETCHGREQ_V8 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V5](#Section_4.1.10.2.4).
+The DRS_MSG_GETCHGREQ_V8 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V5](#Section_4.1.10.2.4).
 
 typedef struct {
 
@@ -10629,7 +10629,7 @@ SCHEMA_PREFIX_TABLE PrefixTableDest;
 <a id="Section_4.1.10.2.7"></a>
 ##### 4.1.10.2.7 DRS_MSG_GETCHGREQ_V10
 
-The DRS_MSG_GETCHGREQ_V10 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V8](#Section_4.1.10.2.6).
+The DRS_MSG_GETCHGREQ_V10 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V8](#Section_4.1.10.2.6).
 
 typedef struct {
 
@@ -10694,7 +10694,7 @@ ULONG ulMoreFlags;
 <a id="Section_4.1.10.2.8"></a>
 ##### 4.1.10.2.8 DRS_MSG_GETCHGREQ_V11
 
-The DRS_MSG_GETCHGREQ_V11 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V10](#Section_4.1.10.2.7).
+The DRS_MSG_GETCHGREQ_V11 structure defines the request message sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version is a superset of [DRS_MSG_GETCHGREQ_V10](#Section_4.1.10.2.7).
 
 typedef struct {
 
@@ -10767,7 +10767,7 @@ GUID correlationID;
 <a id="Section_4.1.10.2.9"></a>
 ##### 4.1.10.2.9 DRS_MSG_GETCHGREPLY
 
-The DRS_MSG_GETCHGREPLY union defines the response messages received from the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. There are no V3, V4, V5, or V8 messages.
+The DRS_MSG_GETCHGREPLY union defines the response messages received from the [IDL_DRSGetNCChanges](#Section_4.1.10) method. There are no V3, V4, V5, or V8 messages.
 
 typedef
 
@@ -10810,7 +10810,7 @@ DRS_MSG_GETCHGREPLY_V9 V9;
 <a id="Section_4.1.10.2.10"></a>
 ##### 4.1.10.2.10 DRS_MSG_GETCHGREPLY_V1
 
-The DRS_MSG_GETCHGREPLY_V1 structure defines the response message received from the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method.
+The DRS_MSG_GETCHGREPLY_V1 structure defines the response message received from the [IDL_DRSGetNCChanges](#Section_4.1.10) method.
 
 typedef struct {
 
@@ -10867,7 +10867,7 @@ BOOL fMoreData;
 <a id="Section_4.1.10.2.11"></a>
 ##### 4.1.10.2.11 DRS_MSG_GETCHGREPLY_V2
 
-The DRS_MSG_GETCHGREPLY_V2 structure defines the compressed [DRS_MSG_GETCHGREPLY_V1](#Section_4.1.10.2.10) message received from the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method.
+The DRS_MSG_GETCHGREPLY_V2 structure defines the compressed [DRS_MSG_GETCHGREPLY_V1](#Section_4.1.10.2.10) message received from the [IDL_DRSGetNCChanges](#Section_4.1.10) method.
 
 typedef struct {
 
@@ -10880,7 +10880,7 @@ DRS_COMPRESSED_BLOB CompressedV1;
 <a id="Section_4.1.10.2.12"></a>
 ##### 4.1.10.2.12 DRS_MSG_GETCHGREPLY_V6
 
-The DRS_MSG_GETCHGREPLY_V6 structure defines the response message received from the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version is a superset of [DRS_MSG_GETCHGREPLY_V1](#Section_4.1.10.2.10).
+The DRS_MSG_GETCHGREPLY_V6 structure defines the response message received from the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version is a superset of [DRS_MSG_GETCHGREPLY_V1](#Section_4.1.10.2.10).
 
 typedef struct {
 
@@ -10957,7 +10957,7 @@ DWORD dwDRSError;
 <a id="Section_4.1.10.2.13"></a>
 ##### 4.1.10.2.13 DRS_MSG_GETCHGREPLY_V7
 
-The DRS_MSG_GETCHGREPLY_V7 structure defines a compressed [DRS_MSG_GETCHGREPLY_V6](#Section_4.1.10.2.12) or [**DRS_MSG_GETCHGREPLY_V9**](#Section_4.1.10.2.14) message received from the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method.
+The DRS_MSG_GETCHGREPLY_V7 structure defines a compressed [DRS_MSG_GETCHGREPLY_V6](#Section_4.1.10.2.12) or [**DRS_MSG_GETCHGREPLY_V9**](#Section_4.1.10.2.14) message received from the [IDL_DRSGetNCChanges](#Section_4.1.10) method.
 
 typedef struct {
 
@@ -10978,7 +10978,7 @@ DRS_COMPRESSED_BLOB CompressedAny;
 <a id="Section_4.1.10.2.14"></a>
 ##### 4.1.10.2.14 DRS_MSG_GETCHGREPLY_V9
 
-The **DRS_MSG_GETCHGREPLY_V9** structure defines the response message received from the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method. This message version contains all the same elements as a [DRS_MSG_GETCHGREPLY_V6](#Section_4.1.10.2.12) structure except that the data type of **rgValues** is changed from REPLVALINF_V1* to REPLVALINF_V3*. The data in a [REPLVALINF_V3](#Section_5.168) structure is a superset of the data in a [**REPLVALINF_V1**](#Section_5.167) structure. Therefore, the data in the **DRS_MSG_GETCHGREPLY_V9** structure is a superset of the data in the DRS_MSG_GETCHGREPLY_V6 structure.
+The **DRS_MSG_GETCHGREPLY_V9** structure defines the response message received from the [IDL_DRSGetNCChanges](#Section_4.1.10) method. This message version contains all the same elements as a [DRS_MSG_GETCHGREPLY_V6](#Section_4.1.10.2.12) structure except that the data type of **rgValues** is changed from REPLVALINF_V1* to REPLVALINF_V3*. The data in a [REPLVALINF_V3](#Section_5.168) structure is a superset of the data in a [**REPLVALINF_V1**](#Section_5.167) structure. Therefore, the data in the **DRS_MSG_GETCHGREPLY_V9** structure is a superset of the data in the DRS_MSG_GETCHGREPLY_V6 structure.
 
 typedef struct {
 
@@ -11164,7 +11164,7 @@ packet-beta
 <a id="Section_4.1.10.2.21"></a>
 ##### 4.1.10.2.21 EXOP_ERR Codes
 
-The following values are error codes for an [**extended operation**](#gt_extended-operation) request to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method.
+The following values are error codes for an [**extended operation**](#gt_extended-operation) request to the [IDL_DRSGetNCChanges](#Section_4.1.10) method.
 
 **EXOP_ERR_SUCCESS** (0x00000001)
 
@@ -11319,7 +11319,7 @@ return concreteUTD
 
 type AttributeAndStamp = [attribute: ATTRTYP, stamp: AttributeStamp]
 
-This [**abstract type**](#gt_abstract-type) encapsulates the [ATTRTYP](#Section_5.14) of an [**attribute**](#gt_attributes) (based on [dc](#Section_5.30).*prefixTable*) and its associated [AttributeStamp](#Section_5.11) on an [**object**](#gt_object).
+This [**abstract type**](#gt_abstract-type) encapsulates the [ATTRTYP](#Section_5.14) of an [**attribute**](#gt_attributes) (based on [dc](#Section_4.1.29.2.3).*prefixTable*) and its associated [AttributeStamp](#Section_5.11) on an [**object**](#gt_object).
 
 <a id="Section_4.1.10.3.5"></a>
 ##### 4.1.10.3.5 AttributeStampCompare
@@ -11489,7 +11489,7 @@ nc: DSName,
 
 guid: GUID): DSName
 
-*Informative summary of behavior*: The GetWellKnownObject procedure returns the [DSName](#Section_5.50) of the well-known [**object**](#gt_object) with the given *guid* in a specified [**NC replica**](#gt_nc-replica).
+*Informative summary of behavior*: The GetWellKnownObject procedure returns the [DSName](#Section_5.49) of the well-known [**object**](#gt_object) with the given *guid* in a specified [**NC replica**](#gt_nc-replica).
 
 attrVals: set of attribute value
 
@@ -11533,21 +11533,21 @@ userSid: SID
 
 groupOrAccountSid: SID)
 
-The IsUserIncluded procedure returns true if *userSid* = *groupOrAccountSid*, or if the [**object**](#gt_object) identified by *userSid* is a member of the set returned by [IDL_DRSGetMemberships (section 4.1.8)](#Section_4.1.9) with the GroupMembersTransitive option applied to the object identified by *groupOrAccountSid*.
+The IsUserIncluded procedure returns true if *userSid* = *groupOrAccountSid*, or if the [**object**](#gt_object) identified by *userSid* is a member of the set returned by [IDL_DRSGetMemberships (section 4.1.8)](#Section_4.1.8) with the GroupMembersTransitive option applied to the object identified by *groupOrAccountSid*.
 
 <a id="Section_4.1.10.3.13"></a>
 ##### 4.1.10.3.13 ObjAtts
 
 type ObjAtts = [obj: DSName, atts: sequence of ATTRTYP]
 
-The ObjAtts [**abstract type**](#gt_abstract-type) encapsulates the identity of an [**object**](#gt_object) (*obj*) and a sequence of [ATTRTYP](#Section_5.14) values (*atts*, based on [dc](#Section_5.30).*prefixTable*) for [**attributes**](#gt_attributes) of that object.
+The ObjAtts [**abstract type**](#gt_abstract-type) encapsulates the identity of an [**object**](#gt_object) (*obj*) and a sequence of [ATTRTYP](#Section_5.14) values (*atts*, based on [dc](#Section_4.1.29.2.3).*prefixTable*) for [**attributes**](#gt_attributes) of that object.
 
 <a id="Section_4.1.10.3.14"></a>
 ##### 4.1.10.3.14 ObjAttVal
 
 type ObjAttVal = [obj: DSName; att: ATTRTYP, val: attribute value]
 
-The ObjAttVal [**abstract type**](#gt_abstract-type) encapsulates the identity of an [**object**](#gt_object) (*obj*), the [ATTRTYP](#Section_5.14) of an [**attribute**](#gt_attributes) of that object (*att*, based on [dc](#Section_5.30).*prefixTable*), and a value of that attribute (*val*).
+The ObjAttVal [**abstract type**](#gt_abstract-type) encapsulates the identity of an [**object**](#gt_object) (*obj*), the [ATTRTYP](#Section_5.14) of an [**attribute**](#gt_attributes) of that object (*att*, based on [dc](#Section_4.1.29.2.3).*prefixTable*), and a value of that attribute (*val*).
 
 <a id="Section_4.1.10.3.15"></a>
 ##### 4.1.10.3.15 PerformModifyDNOperation
@@ -11573,7 +11573,7 @@ attr: ATTRTYP,
 
 attributeValue: attribute value)
 
-The RemoveAttrVal procedure removes the value *attributeValue* from the [**attribute**](#gt_attributes) *attr* on the [**object**](#gt_object) with [DSName](#Section_5.50) *obj*.
+The RemoveAttrVal procedure removes the value *attributeValue* from the [**attribute**](#gt_attributes) *attr* on the [**object**](#gt_object) with [DSName](#Section_5.49) *obj*.
 
 <a id="Section_4.1.10.3.17"></a>
 ##### 4.1.10.3.17 SetAttrStamp
@@ -11619,7 +11619,7 @@ The SetLinkStamp procedure sets the [LinkValueStamp](#Section_5.118) for the [**
 <a id="Section_4.1.10.4"></a>
 #### 4.1.10.4 Client Behavior When Sending the IDL_DRSGetNCChanges Request
 
-*Informative summary of behavior*: The following three tasks can be accomplished by sending an [IDL_DRSGetNCChanges](#Section_4.1.10.8) request to a server:
+*Informative summary of behavior*: The following three tasks can be accomplished by sending an [IDL_DRSGetNCChanges](#Section_4.1.10) request to a server:
 
 - Replicate [**objects**](#gt_object) from the server's [**NC replica**](#gt_nc-replica). The [ReplicateNCRequestMsg](#Section_4.1.10.4.1) procedure specifies the process of building [DRS_MSG_GETCHGREQ](#Section_4.1.10.2.1) to perform this task.
 - Replicate a single object from the server's NC replica. The [ReplSingleObjRequestMsg](#Section_4.1.10.4.2) procedure specifies the process of building DRS_MSG_GETCHGREQ to perform this task.
@@ -11649,13 +11649,13 @@ cMaxBytes: ULONG,
 
 var msgRequest: DRS_MSG_GETCHGREQ)
 
-*Informative summary of behavior*: The client sends an [IDL_DRSGetNCChanges](#Section_4.1.10.8) request to a server to replicate the server's changes in an [**NC replica**](#gt_nc-replica). The ReplicateNCRequestMsg procedure specifies how the client constructs the request message for this operation.
+*Informative summary of behavior*: The client sends an [IDL_DRSGetNCChanges](#Section_4.1.10) request to a server to replicate the server's changes in an [**NC replica**](#gt_nc-replica). The ReplicateNCRequestMsg procedure specifies how the client constructs the request message for this operation.
 
 The procedure has the following arguments:
 
-- *hDrs*: The [DRS_HANDLE](#Section_5.40) that is derived by sending an [IDL_DRSBind](#Section_4.1.3.3) message to the server.
+- *hDrs*: The [DRS_HANDLE](#Section_5.40) that is derived by sending an [IDL_DRSBind](#Section_4.1.3) message to the server.
 - *version*: The version number of the input message negotiated between the client and server.
-- *nc*: The [DSName](#Section_5.50) of the root of the NC replica that is to be replicated.
+- *nc*: The [DSName](#Section_5.49) of the root of the NC replica that is to be replicated.
 - *rf*: The [RepsFrom](#Section_5.172) that corresponds to the server from which to replicate.
 - *ulFlags*: Zero or more of the following bit flags. The client MUST supply the same flags for each request in a given [**replication cycle**](#gt_replication-cycle), with the exception of DRS_ADD_REF, DRS_GET_ANC, DRS_USE_COMPRESSION, and DRS_GET_NC_SIZE.
 - **DRS_ADD_REF**: Requests that the server add an entry to the repsTo [**attribute**](#gt_attributes) for the client on the root [**object**](#gt_object) of the NC replica that is being replicated.
@@ -11897,9 +11897,9 @@ fWithSecrets: boolean,
 
 var msgRequest: DRS_MSG_GETCHGREQ): DWORD
 
-*Informative summary of behavior*: The client can send an [IDL_DRSGetNCChanges](#Section_4.1.10.8) request to the server to replicate changes from a single [**object**](#gt_object). The ReplSingleObjRequestMsg procedure specifies how the request message is constructed for this operation. The arguments for this method are the same as those for the procedure [ReplicateNCRequestMsg](#Section_4.1.10.4.1), with the following exceptions:
+*Informative summary of behavior*: The client can send an [IDL_DRSGetNCChanges](#Section_4.1.10) request to the server to replicate changes from a single [**object**](#gt_object). The ReplSingleObjRequestMsg procedure specifies how the request message is constructed for this operation. The arguments for this method are the same as those for the procedure [ReplicateNCRequestMsg](#Section_4.1.10.4.1), with the following exceptions:
 
-- *object*: The [DSName](#Section_5.50) of the object that should be replicated.
+- *object*: The [DSName](#Section_5.49) of the object that should be replicated.
 - *fWithSecrets*: The object's secret [**attributes**](#gt_attributes) should be replicated. Only [**RODCs**](#gt_read-only-domain-controller-rodc) need to make, and can make, this request.
 The procedure returns a [**Windows error code**](#gt_windows-error-code) if it cannot construct *msgRequest*.
 
@@ -12096,7 +12096,7 @@ cMaxBytes: ULONG,
 
 var msgRequest: DRS_MSG_GETCHGREQ): DWORD
 
-*Informative summary of behavior*: A client sends an [IDL_DRSGetNCChanges](#Section_4.1.10.8) request to a server to perform an [**extended operation**](#gt_extended-operation). The procedure PerformExtendedOpRequestMsg specifies how the request message is constructed for this operation.
+*Informative summary of behavior*: A client sends an [IDL_DRSGetNCChanges](#Section_4.1.10) request to a server to perform an [**extended operation**](#gt_extended-operation). The procedure PerformExtendedOpRequestMsg specifies how the request message is constructed for this operation.
 
 The arguments for this method are the same as those for the procedure [ReplicateNCRequestMsg](#Section_4.1.10.4.1), with the following exceptions:
 
@@ -12109,7 +12109,7 @@ The arguments for this method are the same as those for the procedure [Replicate
 - *roleOwnerObject*: The client sets this value based on the value of *ulExtendedOp*, as per the following table:
 | ulExtendedOp | roleOwnerObject |
 | --- | --- |
-| EXOP_FSMO_REQ_ROLE | The [DSName](#Section_5.50) of the [**FSMO role object**](#gt_fsmo-role-object). |
+| EXOP_FSMO_REQ_ROLE | The [DSName](#Section_5.49) of the [**FSMO role object**](#gt_fsmo-role-object). |
 | EXOP_FSMO_REQ_RID_ALLOC | The value of the rIDManagerReference [**attribute**](#gt_attributes) of [DefaultNC](#Section_5.31)(). |
 | EXOP_FSMO_RID_REQ_ROLE | The value of the rIDManagerReference attribute of DefaultNC(). |
 | EXOP_FSMO_REQ_PDC | DefaultNC(). |
@@ -12742,7 +12742,7 @@ msgIn: DRS_MSG_GETCHGREQ_V10,
 
 var msgOut: DRS_MSG_GETCHGREPLY_NATIVE): ULONG
 
-*Informative summary of behavior*: The GetReplChanges procedure processes an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Search request with LDAP_SERVER_DIRSYNC_OID control or a normal [**replication**](#gt_replication) request; that is, an [IDL_DRSGetNCChanges](#Section_4.1.10.8) request that is not a [**FSMO role**](#gt_fsmo-role) request. It adds changed [**objects**](#gt_object) and [**link values**](#gt_link-value) to the response, subject to the scope (*msgIn.pNC^*, *msgIn.ulFlags*), filter criteria (*msgIn.pUpToDateVecDest*, *msgIn.ulFlags*, *msgIn.pPartialAttrSet*, *msgIn.pPartialAttrSetEx*, *searchFilter*, *dirSyncFlags*), response limits (*msgIn.cMaxObjects*, *msgIn.cMaxBytes*), and the previous server cookie (*msgIn.usnvecFrom*) in the request. It returns 0 if successful, otherwise a [**Windows error code**](#gt_windows-error-code).
+*Informative summary of behavior*: The GetReplChanges procedure processes an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Search request with LDAP_SERVER_DIRSYNC_OID control or a normal [**replication**](#gt_replication) request; that is, an [IDL_DRSGetNCChanges](#Section_4.1.10) request that is not a [**FSMO role**](#gt_fsmo-role) request. It adds changed [**objects**](#gt_object) and [**link values**](#gt_link-value) to the response, subject to the scope (*msgIn.pNC^*, *msgIn.ulFlags*), filter criteria (*msgIn.pUpToDateVecDest*, *msgIn.ulFlags*, *msgIn.pPartialAttrSet*, *msgIn.pPartialAttrSetEx*, *searchFilter*, *dirSyncFlags*), response limits (*msgIn.cMaxObjects*, *msgIn.cMaxBytes*), and the previous server cookie (*msgIn.usnvecFrom*) in the request. It returns 0 if successful, otherwise a [**Windows error code**](#gt_windows-error-code).
 
 err: ULONG
 
@@ -14711,7 +14711,7 @@ pdwOutVersion: ADDRESS OF DWORD,
 
 pmsgOut: ADDRESS OF DRS_MSG_GETCHGREPLY): ULONG
 
-*Informative summary of behavior*: The TransformOutput procedure transforms the native reply (a superset of all supported reply messages) into the reply version supported by the client, optionally compressing it. The compression algorithms used for the DRS_COMP_ALG_WIN2K3 algorithm type are specified in section [4.1.10.5.21](#Section_4.1.10.5.21.1). The compression algorithm used for the DRS_COMP_ALG_MSZIP algorithm type is specified in [[RFC1951]](https://go.microsoft.com/fwlink/?LinkId=90302).
+*Informative summary of behavior*: The TransformOutput procedure transforms the native reply (a superset of all supported reply messages) into the reply version supported by the client, optionally compressing it. The compression algorithms used for the DRS_COMP_ALG_WIN2K3 algorithm type are specified in section [4.1.10.5.21](#Section_4.1.10.5.21). The compression algorithm used for the DRS_COMP_ALG_MSZIP algorithm type is specified in [[RFC1951]](https://go.microsoft.com/fwlink/?LinkId=90302).
 
 pickled: sequence of BYTE
 
@@ -15092,7 +15092,7 @@ endif
 <a id="Section_4.1.10.6"></a>
 #### 4.1.10.6 Client Behavior When Receiving the IDL_DRSGetNCChanges Response
 
-The client processes an [IDL_DRSGetNCChanges](#Section_4.1.10.8) response in relation to the current state of its [**NC replica**](#gt_nc-replica) as detailed in [ProcessGetNCChangesReply](#Section_4.1.10.6.1) below. This processing, though sometimes complex, is critical to ensuring that each NC replica arrives at the same abstract state.
+The client processes an [IDL_DRSGetNCChanges](#Section_4.1.10) response in relation to the current state of its [**NC replica**](#gt_nc-replica) as detailed in [ProcessGetNCChangesReply](#Section_4.1.10.6.1) below. This processing, though sometimes complex, is critical to ensuring that each NC replica arrives at the same abstract state.
 
 <a id="Section_4.1.10.6.1"></a>
 ##### 4.1.10.6.1 ProcessGetNCChangesReply
@@ -15109,11 +15109,11 @@ dwOutVersion: ULONG,
 
 msgOut: DRS_MSG_GETCHGREPLY) : ULONG
 
-*Informative summary of behavior*: The ProcessGetNCChangesReply procedure is invoked when an [IDL_DRSGetNCChanges](#Section_4.1.10.8) response is received over [**RPC**](#gt_remote-procedure-call-rpc) or SMTP, as specified in [MS-SRPL](../MS-SRPL/MS-SRPL.md). Processing of a given response can be separated into five distinct phases: decompression, [**attribute**](#gt_attributes) value decryption, processing [**object**](#gt_object) [**updates**](#gt_update), processing [**link value**](#gt_link-value) updates, and updating the "watermark" information.
+*Informative summary of behavior*: The ProcessGetNCChangesReply procedure is invoked when an [IDL_DRSGetNCChanges](#Section_4.1.10) response is received over [**RPC**](#gt_remote-procedure-call-rpc) or SMTP, as specified in [MS-SRPL](../MS-SRPL/MS-SRPL.md). Processing of a given response can be separated into five distinct phases: decompression, [**attribute**](#gt_attributes) value decryption, processing [**object**](#gt_object) [**updates**](#gt_update), processing [**link value**](#gt_link-value) updates, and updating the "watermark" information.
 
 The arguments to this procedure are as follows:
 
-- *hDrs*: The [DRS_HANDLE](#Section_5.40) derived by sending [IDL_DRSBind](#Section_4.1.3.3) to the server.
+- *hDrs*: The [DRS_HANDLE](#Section_5.40) derived by sending [IDL_DRSBind](#Section_4.1.3) to the server.
 - *rf*: [RepsFrom](#Section_5.172) for the server.
 - *msgIn*: IDL_DRSGetNCChanges request message sent to the server.
 - *dwOutVersion*: Version of response message received from the server.
@@ -16240,7 +16240,7 @@ nc: DSName,
 
 var attributesAndStamps: set of AttributeAndStamp): DSName
 
-*Informative summary of behavior*: Given a desired [**parent object**](#gt_parent-object), the FindBestParentObject procedure validates whether the desired parent object is deleted. If the [**object**](#gt_object) that is being [**updated**](#gt_update) is not a deleted object and the desired parent object is deleted, this procedure returns the [DSName](#Section_5.50) of the [**Lost and Found container**](#gt_lost-and-found-container).
+*Informative summary of behavior*: Given a desired [**parent object**](#gt_parent-object), the FindBestParentObject procedure validates whether the desired parent object is deleted. If the [**object**](#gt_object) that is being [**updated**](#gt_update) is not a deleted object and the desired parent object is deleted, this procedure returns the [DSName](#Section_5.49) of the [**Lost and Found container**](#gt_lost-and-found-container).
 
 Following are the input parameters for this procedure:
 
@@ -16319,7 +16319,7 @@ var attributesAndStamps: set of AttributeAndStamp): DN
 
 *replEntinfList*: The [**update**](#gt_update) to be applied.
 
-*parentObject*: The [DSName](#Section_5.50) of the [**parent object**](#gt_parent-object).
+*parentObject*: The [DSName](#Section_5.49) of the [**parent object**](#gt_parent-object).
 
 *attributesAndStamps*: The [AttributeAndStamp](#Section_4.1.10.3.4) set that corresponds to the replicated update (can be modified by this procedure).
 
@@ -16460,7 +16460,7 @@ ulMoreFlags: ULONG): DWORD
 *Informative summary of behavior*: The ProcessLinkValue procedure applies the [**replicated update**](#gt_replicated-update) of a [**link value**](#gt_link-value). Following are the input parameters for this procedure.
 
 - *replValinf*: The link value replicated update.
-- *nc*: The [DSName](#Section_5.50) of the root of the [**NC replica**](#gt_nc-replica) where the replicated update is applied.
+- *nc*: The [DSName](#Section_5.49) of the root of the [**NC replica**](#gt_nc-replica) where the replicated update is applied.
 - *sourcePrefixTable*: The [**prefix table**](#gt_prefix-table) from the server.
 - *ulFlags*: A [DRS_OPTIONS](#Section_5.41) bit field.
 - *ulMoreFlags*: A [DRS_MORE_GETCHGREQ_OPTIONS](#Section_5.42) bit field.
@@ -16670,8 +16670,8 @@ ulResult: DWORD)
 *Informative summary of behavior*: Using the UpdateRepsFrom procedure, the client [**updates**](#gt_update) the [repsFrom](#Section_5.172) abstract variable after it applies the response message received from the server. Following are the input parameters for this procedure.
 
 - *rf:* The RepsFrom for the server.
-- *msgReplyNative*: The [IDL_DRSGetNCChanges](#Section_4.1.10.8) response from the server.
-- *dsaServer*: The [DSName](#Section_5.50) of the nTDSDSA [**object**](#gt_object) of the server.
+- *msgReplyNative*: The [IDL_DRSGetNCChanges](#Section_4.1.10) response from the server.
+- *dsaServer*: The [DSName](#Section_5.49) of the nTDSDSA [**object**](#gt_object) of the server.
 - *ulResult*: A [**Windows error code**](#gt_windows-error-code) that indicates whether or not the [**replicated updates**](#gt_replicated-update) in the response message are applied successfully.
 
 rfOld: RepsFrom
@@ -16731,11 +16731,11 @@ partialAttrSetEx: PARTIAL_ATTR_VECTOR_V1_EXT,
 
 nc: DSName)
 
-*Informative summary of behavior*: If the client has applied all [**replicated updates**](#gt_replicated-update) in the response message of [IDL_DRSGetNCChanges](#Section_4.1.10.8) from the server, and if the [**replication cycle**](#gt_replication-cycle) is complete, then the client [**updates**](#gt_update) the replUpToDateVector and partialAttributeSet abstract [**attributes**](#gt_attributes), as specified in the UpdateUTDandPAS procedure. This procedure has the following input parameters.
+*Informative summary of behavior*: If the client has applied all [**replicated updates**](#gt_replicated-update) in the response message of [IDL_DRSGetNCChanges](#Section_4.1.10) from the server, and if the [**replication cycle**](#gt_replication-cycle) is complete, then the client [**updates**](#gt_update) the replUpToDateVector and partialAttributeSet abstract [**attributes**](#gt_attributes), as specified in the UpdateUTDandPAS procedure. This procedure has the following input parameters.
 
 - *msgReplyNative*: The IDL_DRSGetNCChanges response from the server.
 - *partialAttrSetEx*: The [PARTIAL_ATTR_VECTOR_V1_EXT](#Section_5.146) structure that contains attributes to be added to the partialAttributeSet abstract variable.
-- *nc*: The [DSName](#Section_5.50) of the root of the [**NC replica**](#gt_nc-replica) where the replicated update is applied.
+- *nc*: The [DSName](#Section_5.49) of the root of the [**NC replica**](#gt_nc-replica) where the replicated update is applied.
 
 partialAttrSetAdd: sequence of ATTRTYP
 
@@ -16828,9 +16828,9 @@ var attrBlock: ATTRBLOCK): DWORD
 
 Following are the input parameters for this method.
 
-- *hDrs*: The [DRS_HANDLE](#Section_5.40) derived by sending [IDL_DRSBind](#Section_4.1.3.3) to the server.
+- *hDrs*: The [DRS_HANDLE](#Section_5.40) derived by sending [IDL_DRSBind](#Section_4.1.3) to the server.
 - *prefixTable*: The [**prefix table**](#gt_prefix-table) used to translate attribute IDs.
-- *attrBlock*: The [ATTRBLOCK](#Section_5.10) structure that is derived from the response of the [IDL_DRSGetNCChanges](#Section_4.1.10.8) message. If *attrBlock* has attribute values that need to be decrypted, then the values are decrypted in place. That is, at the end of the procedure call, the **pVal** field in the [ATTRVAL](#Section_5.16) structure refers to the decrypted attribute value.
+- *attrBlock*: The [ATTRBLOCK](#Section_5.10) structure that is derived from the response of the [IDL_DRSGetNCChanges](#Section_4.1.10) message. If *attrBlock* has attribute values that need to be decrypted, then the values are decrypted in place. That is, at the end of the procedure call, the **pVal** field in the [ATTRVAL](#Section_5.16) structure refers to the decrypted attribute value.
 The procedure returns a [**Windows error code**](#gt_windows-error-code) on failure. Otherwise, it returns 0.
 
 localAttid: ATTRTYP
@@ -17222,7 +17222,7 @@ Querying the user object "CN=Kim Akers, CN=Users, DC=CONTOSO, DC=COM" on DC2 ret
 <a id="Section_4.1.10.7.2"></a>
 ##### 4.1.10.7.2 Client Request
 
-DC2 invokes the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+DC2 invokes the [IDL_DRSGetNCChanges](#Section_4.1.10) method against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 10
 - *pmsgIn* = [DRS_MSG_GETCHGREQ_V10](#Section_4.1.10.2.7)
@@ -17408,7 +17408,7 @@ Querying the [**group object**](#gt_group-object) "CN=GroupA, CN=Users, DC=CONTO
 <a id="Section_4.1.10.8.2"></a>
 ##### 4.1.10.8.2 Client Request
 
-DC2 invokes the method [IDL_DRSGetNCChanges](#Section_4.1.10.8) against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+DC2 invokes the method [IDL_DRSGetNCChanges](#Section_4.1.10) against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 10
 - *pmsgIn* = [DRS_MSG_GETCHGREQ_V10](#Section_4.1.10.2.7)
@@ -17591,7 +17591,7 @@ Querying the user object "CN=Kim Akers, CN=Users, DC=CONTOSO,DC=COM" on DC2:
 <a id="Section_4.1.10.9.2"></a>
 ##### 4.1.10.9.2 Client Request
 
-DC2 invokes the method [IDL_DRSGetNCChanges](#Section_4.1.10.8) against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+DC2 invokes the method [IDL_DRSGetNCChanges](#Section_4.1.10) against DC1, with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 10
 - *pmsgIn* = [DRS_MSG_GETCHGREQ_V10](#Section_4.1.10.2.7)
@@ -17711,7 +17711,7 @@ DRS_MSG_NT4_CHGLOG_REPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -18314,7 +18314,7 @@ The [**PDC**](#gt_primary-domain-controller-pdc) change log entries on DC1 are s
 
 The IDL_DRSGetObjectExistence method helps the client check the consistency of [**object**](#gt_object) existence between its [**replica**](#gt_replica) of an [**NC**](#gt_naming-context-nc) and the server's replica of the same NC. Checking the consistency of object existence means identifying objects that have replicated to both replicas and that exist in one replica but not in the other. For the purposes of this method, an object *exists* within a [**NC replica**](#gt_nc-replica) if it is either an object or a [**tombstone**](#gt_tombstone).
 
-See [IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3) for a use of this method.
+See [IDL_DRSReplicaVerifyObjects](#Section_4.1.24) for a use of this method.
 
 ULONG IDL_DRSGetObjectExistence(
 
@@ -18334,7 +18334,7 @@ DRS_MSG_EXISTREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -18354,7 +18354,7 @@ DRS_MSG_EXISTREPLY* pmsgOut
 <a id="Section_4.1.12.1.1"></a>
 ##### 4.1.12.1.1 DRS_MSG_EXISTREQ
 
-The DRS_MSG_EXISTREQ union defines request messages sent to the [IDL_DRSGetObjectExistence](#Section_4.1.12.5) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_EXISTREQ union defines request messages sent to the [IDL_DRSGetObjectExistence](#Section_4.1.12) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -18373,7 +18373,7 @@ DRS_MSG_EXISTREQ_V1 V1;
 <a id="Section_4.1.12.1.2"></a>
 ##### 4.1.12.1.2 DRS_MSG_EXISTREQ_V1
 
-The DRS_MSG_EXISTREQ_V1 structure defines the request message sent to the [IDL_DRSGetObjectExistence](#Section_4.1.12.5) method.
+The DRS_MSG_EXISTREQ_V1 structure defines the request message sent to the [IDL_DRSGetObjectExistence](#Section_4.1.12) method.
 
 typedef struct {
 
@@ -18402,7 +18402,7 @@ UCHAR Md5Digest[16];
 <a id="Section_4.1.12.1.3"></a>
 ##### 4.1.12.1.3 DRS_MSG_EXISTREPLY
 
-The DRS_MSG_EXISTREPLY union defines the response message versions received from the [IDL_DRSGetObjectExistence](#Section_4.1.12.5) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_EXISTREPLY union defines the response message versions received from the [IDL_DRSGetObjectExistence](#Section_4.1.12) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -18421,7 +18421,7 @@ DRS_MSG_EXISTREPLY_V1 V1;
 <a id="Section_4.1.12.1.4"></a>
 ##### 4.1.12.1.4 DRS_MSG_EXISTREPLY_V1
 
-The DRS_MSG_EXISTREPLY_V1 structure defines the response message received from the [IDL_DRSGetObjectExistence](#Section_4.1.12.5) method.
+The DRS_MSG_EXISTREPLY_V1 structure defines the response message received from the [IDL_DRSGetObjectExistence](#Section_4.1.12) method.
 
 typedef struct {
 
@@ -18442,7 +18442,7 @@ DWORD dwStatusFlags;
 <a id="Section_4.1.12.2"></a>
 #### 4.1.12.2 Method-Specific Abstract Types and Procedures
 
-The following procedure is used in specifying both the client and server behavior of [IDL_DRSGetObjectExistence](#Section_4.1.12.5).
+The following procedure is used in specifying both the client and server behavior of [IDL_DRSGetObjectExistence](#Section_4.1.12).
 
 <a id="Section_4.1.12.2.1"></a>
 ##### 4.1.12.2.1 GuidSequence
@@ -18475,7 +18475,7 @@ The procedure GuidSequence returns the following:
 - An MD5 digest value *digest* that is derived from the sequence *s*.
 The first four parameters determine the result sequence *s* as follows:
 
-- Construct the following set of [DSName](#Section_5.50)s:
+- Construct the following set of [DSName](#Section_5.49)s:
 select all o subtree-ts-included nc where
 
 StampLessThanOrEqualUTD(AttrStamp(o, whenCreated), utd)
@@ -18505,7 +18505,7 @@ return md5Context.digest
 <a id="Section_4.1.12.3"></a>
 #### 4.1.12.3 Client Behavior When Sending the IDL_DRSGetObjectExistence Request
 
-*Informative summary of behavior*: The client uses [IDL_DRSGetObjectExistence](#Section_4.1.12.5) to check the consistency of [**object**](#gt_object) existence between its [**replica**](#gt_replica) of an [**NC**](#gt_naming-context-nc) and another replica of the same NC. Checking the consistency of object existence means identifying objects that have replicated to both replicas, and that exist in one replica but not in the other. For the purposes of this method, an object *exists* within an [**NC replica**](#gt_nc-replica) if it is either an object or a [**tombstone**](#gt_tombstone).
+*Informative summary of behavior*: The client uses [IDL_DRSGetObjectExistence](#Section_4.1.12) to check the consistency of [**object**](#gt_object) existence between its [**replica**](#gt_replica) of an [**NC**](#gt_naming-context-nc) and another replica of the same NC. Checking the consistency of object existence means identifying objects that have replicated to both replicas, and that exist in one replica but not in the other. For the purposes of this method, an object *exists* within an [**NC replica**](#gt_nc-replica) if it is either an object or a [**tombstone**](#gt_tombstone).
 
 IDL_DRSGetObjectExistence allows the client to perform this checking in *clusters*, as defined in the informative summary of the GuidSequence procedure (section [4.1.12.2.1](#Section_4.1.12.2.1)).
 
@@ -18521,7 +18521,7 @@ count: ULONG
 
 **nc**: The NC containing the cluster that the client will check.
 
-**utdClient, utdServer**: The [**up-to-date vectors**](#gt_up-to-date-vector) of the client and server for the NC *nc*, respectively. The client can obtain *utdServer* using [IDL_DRSGetReplInfo](#Section_4.1.13.4.5).
+**utdClient, utdServer**: The [**up-to-date vectors**](#gt_up-to-date-vector) of the client and server for the NC *nc*, respectively. The client can obtain *utdServer* using [IDL_DRSGetReplInfo](#Section_4.1.13).
 
 **guidStart**: The lower bound on the smallest objectGUID in the cluster that the client will check.
 
@@ -18678,7 +18678,7 @@ DRS_MSG_GETREPLINFO_REPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -18698,7 +18698,7 @@ DRS_MSG_GETREPLINFO_REPLY* pmsgOut
 <a id="Section_4.1.13.1.1"></a>
 ##### 4.1.13.1.1 DRS_MSG_GETREPLINFO_REQ
 
-The DRS_MSG_GETREPLINFO_REQ union defines the request message versions sent to the [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) method.
+The DRS_MSG_GETREPLINFO_REQ union defines the request message versions sent to the [IDL_DRSGetReplInfo](#Section_4.1.13) method.
 
 typedef
 
@@ -18723,7 +18723,7 @@ DRS_MSG_GETREPLINFO_REQ_V2 V2;
 <a id="Section_4.1.13.1.2"></a>
 ##### 4.1.13.1.2 DRS_MSG_GETREPLINFO_REQ_V1
 
-The DRS_MSG_GETREPLINFO_REQ_V1 structure defines a version 1 request message sent to the [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) method.
+The DRS_MSG_GETREPLINFO_REQ_V1 structure defines a version 1 request message sent to the [IDL_DRSGetReplInfo](#Section_4.1.13) method.
 
 typedef struct {
 
@@ -18744,7 +18744,7 @@ UUID uuidSourceDsaObjGuid;
 <a id="Section_4.1.13.1.3"></a>
 ##### 4.1.13.1.3 DRS_MSG_GETREPLINFO_REQ_V2
 
-The DRS_MSG_GETREPLINFO_REQ_V2 structure defines a version 2 request message sent to the [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) method. The V2 request structure is a superset of the V1 request structure.
+The DRS_MSG_GETREPLINFO_REQ_V2 structure defines a version 2 request message sent to the [IDL_DRSGetReplInfo](#Section_4.1.13) method. The V2 request structure is a superset of the V1 request structure.
 
 typedef struct {
 
@@ -18844,7 +18844,7 @@ DS_REPL_INFO codes indicate the type of [**replication**](#gt_replication) state
 <a id="Section_4.1.13.1.5"></a>
 ##### 4.1.13.1.5 DRS_MSG_GETREPLINFO_REPLY
 
-The DRS_MSG_GETREPLINFO_REPLY union defines response messages received from the [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) method.
+The DRS_MSG_GETREPLINFO_REPLY union defines response messages received from the [IDL_DRSGetReplInfo](#Section_4.1.13) method.
 
 typedef
 
@@ -18947,7 +18947,7 @@ DS_REPL_NEIGHBORSW* pRepsTo;
 <a id="Section_4.1.13.1.6"></a>
 ##### 4.1.13.1.6 DS_REPL_NEIGHBORSW
 
-The DS_REPL_NEIGHBORSW structure defines a set of [**replication**](#gt_replication) neighbors. This structure is a concrete representation of a sequence of [RepsFrom](#Section_5.172) or [RepsTo](#Section_302391a9f6e14c0ca1b25604a42e982b) values.
+The DS_REPL_NEIGHBORSW structure defines a set of [**replication**](#gt_replication) neighbors. This structure is a concrete representation of a sequence of [RepsFrom](#Section_5.172) or [RepsTo](#Section_5.173) values.
 
 typedef struct {
 
@@ -18968,7 +18968,7 @@ DWORD dwReserved;
 <a id="Section_4.1.13.1.7"></a>
 ##### 4.1.13.1.7 DS_REPL_NEIGHBORW
 
-The DS_REPL_NEIGHBORW structure defines a [**replication**](#gt_replication) neighbor. This structure is a concrete representation of a [RepsFrom](#Section_5.172) or [RepsTo](#Section_302391a9f6e14c0ca1b25604a42e982b) value.
+The DS_REPL_NEIGHBORW structure defines a [**replication**](#gt_replication) neighbor. This structure is a concrete representation of a [RepsFrom](#Section_5.172) or [RepsTo](#Section_5.173) value.
 
 typedef struct {
 
@@ -19093,7 +19093,7 @@ DWORD dwEnumerationContext;
 
 **cNumCursors:** The count of items in the **rgCursor** array.
 
-**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
+**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
 
 **rgCursor:** A set of replication cursors.
 
@@ -19135,7 +19135,7 @@ DWORD dwEnumerationContext;
 
 **cNumCursors:** The count of items in the **rgCursor** array.
 
-**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
+**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
 
 **rgCursor:** A set of replication cursors.
 
@@ -19413,7 +19413,7 @@ DWORD dwEnumerationContext;
 
 **cNumEntries:** The number of items in **rgMetaData** array.
 
-**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
+**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
 
 **rgMetaData:** The sequence of link value stamps.
 
@@ -19487,7 +19487,7 @@ DWORD dwEnumerationContext;
 
 **cNumEntries:** The number of items in the **rgMetaData** array.
 
-**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
+**dwEnumerationContext:** The value a client uses to populate the **dwEnumerationContext** field of the request on a future call to [IDL_DRSGetReplInfo](#Section_4.1.13) to retrieve additional results. For an informative description of the sequencing issues associated with this field, see section [1.3.2](#Section_1.3.2).
 
 **rgMetaData:** The sequence of link value stamps.
 
@@ -19596,9 +19596,9 @@ int pid;
 
 **lReferenceCount:** The number of references to the context.
 
-**fIsBound:** True if and only if the context has not yet been closed by the [IDL_DRSUnbind](#Section_4.1.25.1) method.
+**fIsBound:** True if and only if the context has not yet been closed by the [IDL_DRSUnbind](#Section_4.1.25) method.
 
-**uuidClient:** Zeros, or the value pointed to by the *puuidClientDsa* parameter to [IDL_DRSBind](#Section_4.1.3.3).
+**uuidClient:** Zeros, or the value pointed to by the *puuidClientDsa* parameter to [IDL_DRSBind](#Section_4.1.3).
 
 **timeLastUsed:** The date and time at which this context was last used in an RPC method call.
 
@@ -19654,7 +19654,7 @@ DWORD dwCallType;
 
 **pszServerName:** The [NetworkAddress](#Section_5.134) of the server.
 
-**fIsHandleBound:** True if and only if the [IDL_DRSBind](#Section_4.1.3.3) method has completed and the [IDL_DRSUnbind](#Section_4.1.25.1) method has not yet been called.
+**fIsHandleBound:** True if and only if the [IDL_DRSBind](#Section_4.1.3) method has completed and the [IDL_DRSUnbind](#Section_4.1.25) method has not yet been called.
 
 **fIsHandleFromCache:** True if and only if the context handle used was retrieved from the cache.
 
@@ -19673,20 +19673,20 @@ DWORD dwCallType;
 | 2 | IDL_DRSBind |
 | 3 | IDL_DRSUnbind |
 | 4 | [IDL_DRSReplicaSync](#Section_4.1.23) |
-| 5 | [IDL_DRSGetNCChanges](#Section_4.1.10.8) |
+| 5 | [IDL_DRSGetNCChanges](#Section_4.1.10) |
 | 6 | [IDL_DRSUpdateRefs](#Section_4.1.26) |
 | 7 | [IDL_DRSReplicaAdd](#Section_4.1.19) |
-| 8 | [IDL_DRSReplicaDel](#Section_4.1.20.2) |
-| 9 | [IDL_DRSVerifyNames](#Section_4.1.27.2) |
-| 10 | [IDL_DRSGetMemberships](#Section_4.1.9) |
-| 11 | [IDL_DRSInterDomainMove](#Section_4.1.15.4) |
+| 8 | [IDL_DRSReplicaDel](#Section_4.1.20) |
+| 9 | [IDL_DRSVerifyNames](#Section_4.1.27) |
+| 10 | [IDL_DRSGetMemberships](#Section_4.1.8) |
+| 11 | [IDL_DRSInterDomainMove](#Section_4.1.15) |
 | 12 | [IDL_DRSGetNT4ChangeLog](#Section_4.1.11) |
-| 13 | [IDL_DRSCrackNames](#Section_4.1.4.2.9) |
+| 13 | [IDL_DRSCrackNames](#Section_4.1.4) |
 | 14 | [IDL_DRSAddEntry](#Section_4.1.1) |
 | 15 | [IDL_DRSGetMemberships2](#Section_4.1.9) |
-| 16 | [IDL_DRSGetObjectExistence](#Section_4.1.12.5) |
-| 17 | [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) |
-| 18 | [IDL_DRSWriteSPN](#Section_4.1.28.3) |
+| 16 | [IDL_DRSGetObjectExistence](#Section_4.1.12) |
+| 17 | [IDL_DRSGetReplInfo](#Section_4.1.13) |
+| 18 | [IDL_DRSWriteSPN](#Section_4.1.28) |
 
 <a id="Section_4.1.13.2"></a>
 #### 4.1.13.2 Method-Specific Abstract Types and Procedures
@@ -19714,7 +19714,7 @@ return obj.dn
 
 procedure GetNCs(): set of DSName
 
-Returns a set containing the [DSName](#Section_5.50)s of all [**NCs**](#gt_naming-context-nc) hosted by this server.
+Returns a set containing the [DSName](#Section_5.49)s of all [**NCs**](#gt_naming-context-nc) hosted by this server.
 
 <a id="Section_4.1.13.2.4"></a>
 ##### 4.1.13.2.4 GetUpToDatenessVector
@@ -21161,7 +21161,7 @@ Querying the [**NC**](#gt_naming-context-nc) root [**object**](#gt_object) for [
 <a id="Section_4.1.13.4.1.2"></a>
 ###### 4.1.13.4.1.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21245,7 +21245,7 @@ Querying the NC root object for NC DC=ForestDnsZones,DC=contoso,DC=com on DCA1:
 <a id="Section_4.1.13.4.2.2"></a>
 ###### 4.1.13.4.2.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DCA1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DCA1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21346,7 +21346,7 @@ Querying the [**NC**](#gt_naming-context-nc) root [**object**](#gt_object) for [
 <a id="Section_4.1.13.4.3.2"></a>
 ###### 4.1.13.4.3.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21409,7 +21409,7 @@ Querying the [**NC**](#gt_naming-context-nc) root [**object**](#gt_object) for t
 <a id="Section_4.1.13.4.4.2"></a>
 ###### 4.1.13.4.4.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21481,7 +21481,7 @@ Querying OU1 on DC1:
 <a id="Section_4.1.13.4.5.2"></a>
 ###### 4.1.13.4.5.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21588,7 +21588,7 @@ Querying the GroupB on DC2:
 <a id="Section_4.1.13.4.6.2"></a>
 ###### 4.1.13.4.6.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21680,7 +21680,7 @@ Querying the GroupB on DC2:
 <a id="Section_4.1.13.4.7.2"></a>
 ###### 4.1.13.4.7.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC2 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC2 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21735,7 +21735,7 @@ DC2 is a [**replication**](#gt_replication) neighbor of DC1. DC2 is offline and 
 <a id="Section_4.1.13.4.8.2"></a>
 ###### 4.1.13.4.8.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21766,7 +21766,7 @@ A return code of 0 with the following values:
 <a id="Section_4.1.13.4.8.4"></a>
 ###### 4.1.13.4.8.4 Final State
 
-The final state is the same as the [initial state (section 4.1.13.4.8.1)](#Section_4.1.13.4.1.1); there is no change.
+The final state is the same as the [initial state (section 4.1.13.4.8.1)](#Section_4.1.13.4.8.1); there is no change.
 
 <a id="Section_4.1.13.4.9"></a>
 ##### 4.1.13.4.9 Calling IDL_DRSGetReplInfo with infoType DS_REPL_INFO_PENDING_OPS
@@ -21781,7 +21781,7 @@ DC2 is a [**replication**](#gt_replication) neighbor of DC1. DC1 is syncing [**u
 <a id="Section_4.1.13.4.9.2"></a>
 ###### 4.1.13.4.9.2 Client Request
 
-The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13.4.5) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+The client invokes the [IDL_DRSGetReplInfo (section 4.1.13)](#Section_4.1.13) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_GETREPLINFO_REQ_V2
@@ -21818,7 +21818,7 @@ A return code of 0 with the following values:
 <a id="Section_4.1.13.4.9.4"></a>
 ###### 4.1.13.4.9.4 Final State
 
-The final state is the same as the [initial state (section 4.1.13.4.9.1)](#Section_4.1.13.4.1.1); there is no change.
+The final state is the same as the [initial state (section 4.1.13.4.9.1)](#Section_4.1.13.4.9.1); there is no change.
 
 <a id="Section_4.1.14"></a>
 ### 4.1.14 IDL_DRSInitDemotion (Opnum 25)
@@ -21843,7 +21843,7 @@ DRS_MSG_INIT_DEMOTIONREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -21863,7 +21863,7 @@ DRS_MSG_INIT_DEMOTIONREPLY* pmsgOut
 <a id="Section_4.1.14.1.1"></a>
 ##### 4.1.14.1.1 DRS_MSG_INIT_DEMOTIONREQ
 
-The DRS_MSG_INIT_DEMOTIONREQ union defines request messages sent to the [IDL_DRSInitDemotion](#Section_4.1.14.2) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_INIT_DEMOTIONREQ union defines request messages sent to the [IDL_DRSInitDemotion](#Section_4.1.14) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -21882,7 +21882,7 @@ DRS_MSG_INIT_DEMOTIONREQ_V1 V1;
 <a id="Section_4.1.14.1.2"></a>
 ##### 4.1.14.1.2 DRS_MSG_INIT_DEMOTIONREQ_V1
 
-The DRS_MSG_INIT_DEMOTIONREQ_V1 structure defines a request message sent to the [IDL_DRSInitDemotion](#Section_4.1.14.2) method.
+The DRS_MSG_INIT_DEMOTIONREQ_V1 structure defines a request message sent to the [IDL_DRSInitDemotion](#Section_4.1.14) method.
 
 typedef struct {
 
@@ -21895,7 +21895,7 @@ DWORD dwReserved;
 <a id="Section_4.1.14.1.3"></a>
 ##### 4.1.14.1.3 DRS_MSG_INIT_DEMOTIONREPLY
 
-The DRS_MSG_INIT_DEMOTIONREPLY union defines the response messages received from the [IDL_DRSInitDemotion](#Section_4.1.14.2) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_INIT_DEMOTIONREPLY union defines the response messages received from the [IDL_DRSInitDemotion](#Section_4.1.14) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -21914,7 +21914,7 @@ DRS_MSG_INIT_DEMOTIONREPLY_V1 V1;
 <a id="Section_4.1.14.1.4"></a>
 ##### 4.1.14.1.4 DRS_MSG_INIT_DEMOTIONREPLY_V1
 
-The DRS_MSG_INIT_DEMOTIONREPLY_V1 structure defines a response message received from the [IDL_DRSInitDemotion](#Section_4.1.14.2) method.
+The DRS_MSG_INIT_DEMOTIONREPLY_V1 structure defines a response message received from the [IDL_DRSInitDemotion](#Section_4.1.14) method.
 
 typedef struct {
 
@@ -22016,7 +22016,7 @@ DRS_MSG_MOVEREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -22036,7 +22036,7 @@ DRS_MSG_MOVEREPLY* pmsgOut
 <a id="Section_4.1.15.1.1"></a>
 ##### 4.1.15.1.1 DRS_MSG_MOVEREQ
 
-The DRS_MSG_MOVEREQ union defines the request messages sent to the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method.
+The DRS_MSG_MOVEREQ union defines the request messages sent to the [IDL_DRSInterDomainMove](#Section_4.1.15) method.
 
 typedef
 
@@ -22061,7 +22061,7 @@ DRS_MSG_MOVEREQ_V2 V2;
 <a id="Section_4.1.15.1.2"></a>
 ##### 4.1.15.1.2 DRS_MSG_MOVEREQ_V1
 
-The DRS_MSG_MOVEREQ_V1 structure defines a request message sent to the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method. This request version is obsolete.<34>
+The DRS_MSG_MOVEREQ_V1 structure defines a request message sent to the [IDL_DRSInterDomainMove](#Section_4.1.15) method. This request version is obsolete.<34>
 
 typedef struct {
 
@@ -22090,7 +22090,7 @@ ULONG ulFlags;
 <a id="Section_4.1.15.1.3"></a>
 ##### 4.1.15.1.3 DRS_MSG_MOVEREQ_V2
 
-The DRS_MSG_MOVEREQ_V2 structure defines a request message sent to the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method.
+The DRS_MSG_MOVEREQ_V2 structure defines a request message sent to the [IDL_DRSInterDomainMove](#Section_4.1.15) method.
 
 typedef struct {
 
@@ -22127,7 +22127,7 @@ ULONG ulFlags;
 <a id="Section_4.1.15.1.4"></a>
 ##### 4.1.15.1.4 DRS_MSG_MOVEREPLY
 
-The DRS_MSG_MOVEREPLY union defines the response messages received from the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method.
+The DRS_MSG_MOVEREPLY union defines the response messages received from the [IDL_DRSInterDomainMove](#Section_4.1.15) method.
 
 typedef
 
@@ -22152,7 +22152,7 @@ DRS_MSG_MOVEREPLY_V2 V2;
 <a id="Section_4.1.15.1.5"></a>
 ##### 4.1.15.1.5 DRS_MSG_MOVEREPLY_V1
 
-The DRS_MSG_MOVEREPLY_V1 structure defines a response message received from the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method. This response version is obsolete.<35>
+The DRS_MSG_MOVEREPLY_V1 structure defines a response message received from the [IDL_DRSInterDomainMove](#Section_4.1.15) method. This response version is obsolete.<35>
 
 typedef struct {
 
@@ -22173,7 +22173,7 @@ ULONG* pError;
 <a id="Section_4.1.15.1.6"></a>
 ##### 4.1.15.1.6 DRS_MSG_MOVEREPLY_V2
 
-The DRS_MSG_MOVEREPLY_V2 structure defines a response message received from the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method.
+The DRS_MSG_MOVEREPLY_V2 structure defines a response message received from the [IDL_DRSInterDomainMove](#Section_4.1.15) method.
 
 typedef struct {
 
@@ -22252,7 +22252,7 @@ Undoes the effect of [ImpersonateAuthorizationInfo](#Section_4.1.15.2.5). After 
 <a id="Section_4.1.15.3"></a>
 #### 4.1.15.3 Server Behavior of the IDL_DRSInterDomainMove Method
 
-*Informative summary of behavior*: [IDL_DRSInterDomainMove](#Section_4.1.15.4) is used during a cross-[**NC**](#gt_naming-context-nc) move operation. This is a special [**object**](#gt_object) move operation because it involves moving an object from one [**DC**](#gt_domain-controller-dc) into another. A normal move operation moves the object within one NC on one DC; a cross-NC move involves two DCs. IDL_DRSInterDomainMove is an intermediate step in the cross-NC move operation, which is initiated by an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) call. The IDL_DRSInterDomainMove call is done by the "source" DC to the "target" DC in order to move the object with all of its data from one [**NC replica**](#gt_nc-replica) into another.
+*Informative summary of behavior*: [IDL_DRSInterDomainMove](#Section_4.1.15) is used during a cross-[**NC**](#gt_naming-context-nc) move operation. This is a special [**object**](#gt_object) move operation because it involves moving an object from one [**DC**](#gt_domain-controller-dc) into another. A normal move operation moves the object within one NC on one DC; a cross-NC move involves two DCs. IDL_DRSInterDomainMove is an intermediate step in the cross-NC move operation, which is initiated by an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) call. The IDL_DRSInterDomainMove call is done by the "source" DC to the "target" DC in order to move the object with all of its data from one [**NC replica**](#gt_nc-replica) into another.
 
 **Note** IDL_DRSInterDomainMove transfers data that is normally not readable by the end user (such as password hashes and other secrets).
 
@@ -22635,7 +22635,7 @@ Querying the user object for "Aaron Con" in the domain NC CONTOSO.COM on DC1 pri
 <a id="Section_4.1.15.4.2"></a>
 ##### 4.1.15.4.2 Client Request
 
-An [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) client invokes the [IDL_DRSInterDomainMove](#Section_4.1.15.4) method against a [**DC**](#gt_domain-controller-dc) named DCA1.ASIA.CONTOSO.COM with the following parameters ([DRS_HANDLE](#Section_5.40) to DCA1 omitted):
+An [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) client invokes the [IDL_DRSInterDomainMove](#Section_4.1.15) method against a [**DC**](#gt_domain-controller-dc) named DCA1.ASIA.CONTOSO.COM with the following parameters ([DRS_HANDLE](#Section_5.40) to DCA1 omitted):
 
 - *dwInVersion* = 2
 - *pmsgIn* = DRS_MSG_MOVEREQ_V2
@@ -22755,7 +22755,7 @@ DRS_MSG_QUERYSITESREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -22775,7 +22775,7 @@ DRS_MSG_QUERYSITESREPLY* pmsgOut
 <a id="Section_4.1.16.1.1"></a>
 ##### 4.1.16.1.1 DRS_MSG_QUERYSITESREQ
 
-The DRS_MSG_QUERYSITESREQ union defines the request message versions sent to the [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_QUERYSITESREQ union defines the request message versions sent to the [IDL_DRSQuerySitesByCost](#Section_4.1.16) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -22794,7 +22794,7 @@ DRS_MSG_QUERYSITESREQ_V1 V1;
 <a id="Section_4.1.16.1.2"></a>
 ##### 4.1.16.1.2 DRS_MSG_QUERYSITESREQ_V1
 
-The DRS_MSG_QUERYSITESREQ_V1 structure defines a request message sent to the [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) method.
+The DRS_MSG_QUERYSITESREQ_V1 structure defines a request message sent to the [IDL_DRSQuerySitesByCost](#Section_4.1.16) method.
 
 typedef struct {
 
@@ -22819,7 +22819,7 @@ DWORD dwFlags;
 <a id="Section_4.1.16.1.3"></a>
 ##### 4.1.16.1.3 DRS_MSG_QUERYSITESREPLY
 
-The DRS_MSG_QUERYSITESREPLY union defines the response messages received from the [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) method.
+The DRS_MSG_QUERYSITESREPLY union defines the response messages received from the [IDL_DRSQuerySitesByCost](#Section_4.1.16) method.
 
 typedef
 
@@ -22838,7 +22838,7 @@ DRS_MSG_QUERYSITESREPLY_V1 V1;
 <a id="Section_4.1.16.1.4"></a>
 ##### 4.1.16.1.4 DRS_MSG_QUERYSITESREPLY_V1
 
-The DRS_MSG_QUERYSITESREPLY_V1 structure defines a response message received from the [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) method.
+The DRS_MSG_QUERYSITESREPLY_V1 structure defines a response message received from the [IDL_DRSQuerySitesByCost](#Section_4.1.16) method.
 
 typedef struct {
 
@@ -23385,7 +23385,7 @@ Querying the siteLinkBridge object for domain NC CONTOSO.COM by performing an LD
 <a id="Section_4.1.16.4.1.2"></a>
 ###### 4.1.16.4.1.2 Client Request
 
-A client invokes the [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) method against Contoso with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 is omitted):
+A client invokes the [IDL_DRSQuerySitesByCost](#Section_4.1.16) method against Contoso with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 is omitted):
 
 - *dwInVersion* =1
 - *pmsgIn* = DRS_MSG_QUERYSITESREQ_V1
@@ -23578,7 +23578,7 @@ Querying the siteLink [**object**](#gt_object) for domain NC CONTOSO.COM by perf
 <a id="Section_4.1.16.4.2.2"></a>
 ###### 4.1.16.4.2.2 Client Request
 
-A client invokes the [IDL_DRSQuerySitesByCost](#Section_4.1.16.4) method against Contoso with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 is omitted):
+A client invokes the [IDL_DRSQuerySitesByCost](#Section_4.1.16) method against Contoso with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 is omitted):
 
 - *dwInVersion* = 1
 - *pmsgIn* = DRS_MSG_QUERYSITESREQ_V1
@@ -23630,7 +23630,7 @@ DRS_MSG_RMDMNREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message. This must be set to 1, because this is the only version supported.
 
@@ -23650,7 +23650,7 @@ DRS_MSG_RMDMNREPLY* pmsgOut
 <a id="Section_4.1.17.1.1"></a>
 ##### 4.1.17.1.1 DRS_MSG_RMDMNREQ
 
-The DRS_MSG_RMDMNREQ union defines the request messages sent to the [IDL_DRSRemoveDsDomain](#Section_4.1.17.3) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_RMDMNREQ union defines the request messages sent to the [IDL_DRSRemoveDsDomain](#Section_4.1.17) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -23669,7 +23669,7 @@ DRS_MSG_RMDMNREQ_V1 V1;
 <a id="Section_4.1.17.1.2"></a>
 ##### 4.1.17.1.2 DRS_MSG_RMDMNREQ_V1
 
-The DRS_MSG_RMDMNREQ_V1 structure defines a request message sent to the [IDL_DRSRemoveDsDomain](#Section_4.1.17.3) method.
+The DRS_MSG_RMDMNREQ_V1 structure defines a request message sent to the [IDL_DRSRemoveDsDomain](#Section_4.1.17) method.
 
 typedef struct {
 
@@ -23682,7 +23682,7 @@ typedef struct {
 <a id="Section_4.1.17.1.3"></a>
 ##### 4.1.17.1.3 DRS_MSG_RMDMNREPLY
 
-The DRS_MSG_RMDMNREPLY union defines the response messages received from the [IDL_DRSRemoveDsDomain](#Section_4.1.17.3) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_RMDMNREPLY union defines the response messages received from the [IDL_DRSRemoveDsDomain](#Section_4.1.17) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -23701,7 +23701,7 @@ DRS_MSG_RMDMNREPLY_V1 V1;
 <a id="Section_4.1.17.1.4"></a>
 ##### 4.1.17.1.4 DRS_MSG_RMDMNREPLY_V1
 
-The DRS_MSG_RMDMNREPLY_V1 structure defines a response message received from the [IDL_DRSRemoveDsDomain](#Section_4.1.17.3) method.
+The DRS_MSG_RMDMNREPLY_V1 structure defines a response message received from the [IDL_DRSRemoveDsDomain](#Section_4.1.17) method.
 
 typedef struct {
 
@@ -23885,7 +23885,7 @@ DRS_MSG_RMSVRREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message. Must be set to 1 because that is the only version supported.
 
@@ -24227,7 +24227,7 @@ DRS_MSG_REPADD* pmsgAdd
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwVersion:** The version of the request message.
 
@@ -24701,7 +24701,7 @@ DRS_MSG_REPDEL* pmsgDel
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by [IDL_DRSBind](#Section_4.1.3.3).
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by [IDL_DRSBind](#Section_4.1.3).
 
 **dwVersion:** The version of the request message.
 
@@ -24717,7 +24717,7 @@ DRS_MSG_REPDEL* pmsgDel
 <a id="Section_4.1.20.1.1"></a>
 ##### 4.1.20.1.1 DRS_MSG_REPDEL
 
-The DRS_MSG_REPDEL union defines the request messages sent to the [IDL_DRSReplicaDel](#Section_4.1.20.2) method. Only one version, identified by *dwVersion* = 1, is currently defined.
+The DRS_MSG_REPDEL union defines the request messages sent to the [IDL_DRSReplicaDel](#Section_4.1.20) method. Only one version, identified by *dwVersion* = 1, is currently defined.
 
 typedef
 
@@ -24736,7 +24736,7 @@ DRS_MSG_REPDEL_V1 V1;
 <a id="Section_4.1.20.1.2"></a>
 ##### 4.1.20.1.2 DRS_MSG_REPDEL_V1
 
-The DRS_MSG_REPDEL_V1 structure defines a request message sent to the [IDL_DRSReplicaDel](#Section_4.1.20.2) method.
+The DRS_MSG_REPDEL_V1 structure defines a request message sent to the [IDL_DRSReplicaDel](#Section_4.1.20) method.
 
 typedef struct {
 
@@ -24748,7 +24748,7 @@ ULONG ulOptions;
 
 } DRS_MSG_REPDEL_V1;
 
-**pNC:** A pointer to [DSName](#Section_5.50) of the root of an [**NC replica**](#gt_nc-replica) on the server.
+**pNC:** A pointer to [DSName](#Section_5.49) of the root of an [**NC replica**](#gt_nc-replica) on the server.
 
 **pszDsaSrc:** The transport-specific [NetworkAddress](#Section_5.134) of a [**DC**](#gt_domain-controller-dc).
 
@@ -25060,7 +25060,7 @@ DRS_MSG_REPLICA_DEMOTIONREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -25515,7 +25515,7 @@ DRS_MSG_REPMOD* pmsgMod
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by [IDL_DRSBind](#Section_4.1.3.3).
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by [IDL_DRSBind](#Section_4.1.3).
 
 **dwVersion:** The version of the request message.
 
@@ -25531,7 +25531,7 @@ DRS_MSG_REPMOD* pmsgMod
 <a id="Section_4.1.22.1.1"></a>
 ##### 4.1.22.1.1 DRS_MSG_REPMOD
 
-The DRS_MSG_REPMOD union defines the request messages for the [IDL_DRSReplicaModify](#Section_4.1.22.2) method. Only one version, identified by *dwVersion* = 1, is currently defined.
+The DRS_MSG_REPMOD union defines the request messages for the [IDL_DRSReplicaModify](#Section_4.1.22) method. Only one version, identified by *dwVersion* = 1, is currently defined.
 
 typedef
 
@@ -25550,7 +25550,7 @@ DRS_MSG_REPMOD_V1 V1;
 <a id="Section_4.1.22.1.2"></a>
 ##### 4.1.22.1.2 DRS_MSG_REPMOD_V1
 
-The DRS_MSG_REPMOD_V1 structure defines a request message for the [IDL_DRSReplicaModify](#Section_4.1.22.2) method.
+The DRS_MSG_REPMOD_V1 structure defines a request message for the [IDL_DRSReplicaModify](#Section_4.1.22) method.
 
 typedef struct {
 
@@ -25570,7 +25570,7 @@ ULONG ulOptions;
 
 } DRS_MSG_REPMOD_V1;
 
-**pNC:** A pointer to the [DSName](#Section_5.50) of the root of an [**NC replica**](#gt_nc-replica) on the server.
+**pNC:** A pointer to the [DSName](#Section_5.49) of the root of an [**NC replica**](#gt_nc-replica) on the server.
 
 **uuidSourceDRA:** The [**DSA GUID**](#gt_dsa-guid).
 
@@ -25784,7 +25784,7 @@ DRS_MSG_REPSYNC* pmsgSync
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwVersion:** The version of the request message.
 
@@ -25839,7 +25839,7 @@ ULONG ulOptions;
 
 } DRS_MSG_REPSYNC_V1;
 
-**pNC:** A pointer to [DSName](#Section_5.50) of the root of an [**NC replica**](#gt_nc-replica) on the server.
+**pNC:** A pointer to [DSName](#Section_5.49) of the root of an [**NC replica**](#gt_nc-replica) on the server.
 
 **uuidDsaSrc:** The [**DSA GUID**](#gt_dsa-guid).
 
@@ -25868,7 +25868,7 @@ GUID correlationID;
 
 } DRS_MSG_REPSYNC_V2;
 
-**pNC:** A pointer to [DSName](#Section_5.50) of the root of an [**NC replica**](#gt_nc-replica) on the server.
+**pNC:** A pointer to [DSName](#Section_5.49) of the root of an [**NC replica**](#gt_nc-replica) on the server.
 
 **uuidDsaSrc:** The [**DSA GUID**](#gt_dsa-guid).
 
@@ -26092,7 +26092,7 @@ DRS_MSG_REPVERIFYOBJ* pmsgVerify
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwVersion:** The version of the request message.
 
@@ -26108,7 +26108,7 @@ DRS_MSG_REPVERIFYOBJ* pmsgVerify
 <a id="Section_4.1.24.1.1"></a>
 ##### 4.1.24.1.1 DRS_MSG_REPVERIFYOBJ
 
-The DRS_MSG_REPVERIFYOBJ union defines the request messages sent to the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3) method. Only one version, identified by *dwVersion* = 1, is currently defined.
+The DRS_MSG_REPVERIFYOBJ union defines the request messages sent to the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24) method. Only one version, identified by *dwVersion* = 1, is currently defined.
 
 typedef
 
@@ -26127,7 +26127,7 @@ DRS_MSG_REPVERIFYOBJ_V1 V1;
 <a id="Section_4.1.24.1.2"></a>
 ##### 4.1.24.1.2 DRS_MSG_REPVERIFYOBJ_V1
 
-The DRS_MSG_REPVERIFYOBJ_V1 structure defines a request message sent to the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3) method.
+The DRS_MSG_REPVERIFYOBJ_V1 structure defines a request message sent to the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24) method.
 
 typedef struct {
 
@@ -26161,14 +26161,14 @@ var uTDVec: UPTODATE_VECTOR_V1_EXT
 
 ): ULONG
 
-The GetRemoteUTD procedure uses the [IDL_DRSGetReplInfo](#Section_4.1.13.4.5) method to remotely retrieve the [UPTODATE_VECTOR_V1_EXT](#Section_5.204) for the [**NC**](#gt_naming-context-nc) with the [DSName](#Section_5.50) *nc* from the [**DC**](#gt_domain-controller-dc) whose nTDSDSA [**object**](#gt_object) has the DSName *dsa*. The procedure returns either an implementation-specific value from the client implementation of the IDL_DRSGetReplInfo method, or the value returned by the remote server's IDL_DRSGetReplInfo method.
+The GetRemoteUTD procedure uses the [IDL_DRSGetReplInfo](#Section_4.1.13) method to remotely retrieve the [UPTODATE_VECTOR_V1_EXT](#Section_5.204) for the [**NC**](#gt_naming-context-nc) with the [DSName](#Section_5.49) *nc* from the [**DC**](#gt_domain-controller-dc) whose nTDSDSA [**object**](#gt_object) has the DSName *dsa*. The procedure returns either an implementation-specific value from the client implementation of the IDL_DRSGetReplInfo method, or the value returned by the remote server's IDL_DRSGetReplInfo method.
 
 <a id="Section_4.1.24.2.2"></a>
 ##### 4.1.24.2.2 ObjectExistsAtDC
 
 procedure ObjectExistsAtDC(o: DSName, dsa: DSName): boolean
 
-The ObjectExistsAtDC procedure checks that the [**object**](#gt_object) *o* exists on the [**DC**](#gt_domain-controller-dc) whose nTDSDSA object has the [DSName](#Section_5.50) *dsa* by verifying that the DC holds an object *o'* whose [**objectGUID**](#gt_objectguid) value is equal to that of object *o*. If the object exists, the procedure returns true; otherwise, the procedure returns false.
+The ObjectExistsAtDC procedure checks that the [**object**](#gt_object) *o* exists on the [**DC**](#gt_domain-controller-dc) whose nTDSDSA object has the [DSName](#Section_5.49) *dsa* by verifying that the DC holds an object *o'* whose [**objectGUID**](#gt_objectguid) value is equal to that of object *o*. If the object exists, the procedure returns true; otherwise, the procedure returns false.
 
 <a id="Section_4.1.24.3"></a>
 #### 4.1.24.3 Server Behavior of the IDL_DRSReplicaVerifyObjects Method
@@ -26297,9 +26297,9 @@ A client that has bound to DC1 is removing all [**lingering objects**](#gt_linge
 <a id="Section_4.1.24.4.1"></a>
 ##### 4.1.24.4.1 Initial State
 
-A client has bound to DC1.CONTOSO.COM using the [IDL_DRSBind](#Section_4.1.3.3) method and received a [DRS_HANDLE](#Section_5.40) to DC1.
+A client has bound to DC1.CONTOSO.COM using the [IDL_DRSBind](#Section_4.1.3) method and received a [DRS_HANDLE](#Section_5.40) to DC1.
 
-Consider the following [**objects**](#gt_object) under the Users [**container**](#gt_container), "CN=Users,DC=CONTOSO,DC=COM", listed by their [DSName](#Section_5.50):
+Consider the following [**objects**](#gt_object) under the Users [**container**](#gt_container), "CN=Users,DC=CONTOSO,DC=COM", listed by their [DSName](#Section_5.49):
 
 | Users at DC1 | Users at DC2 | Notes |
 | --- | --- | --- |
@@ -26361,7 +26361,7 @@ Relevant metadata entries for "CN=Kari Furse,CN=Users,DC=CONTOSO,DC=COM" at DC2:
 | --- | --- | --- | --- | --- | --- |
 | 441 | 4875e25f-11a9-4c70-abf4-5fb39529f84b | 5099 | 11/1/2008 04:29:47 | 1 | whenCreated |
 
-The [UPTODATE_VECTOR_V1_EXT](#Section_5.204) structures on DC1 and DC2 are also needed for the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3) method:
+The [UPTODATE_VECTOR_V1_EXT](#Section_5.204) structures on DC1 and DC2 are also needed for the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24) method:
 
 - On DC1:
 **dwVersion:** 1
@@ -26414,11 +26414,11 @@ The [UPTODATE_VECTOR_V1_EXT](#Section_5.204) structures on DC1 and DC2 are also 
 <a id="Section_4.1.24.4.2"></a>
 ##### 4.1.24.4.2 Client Request
 
-A client invokes the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24.3) method on DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+A client invokes the [IDL_DRSReplicaVerifyObjects](#Section_4.1.24) method on DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwVersion*: 1
 - *pmsgVerify*:
-**pNC:** Pointer to the [DSName](#Section_5.50) structure for DC=CONTOSO,DC=COM
+**pNC:** Pointer to the [DSName](#Section_5.49) structure for DC=CONTOSO,DC=COM
 
 **uuidDsaSrc:** e845e047-3850-4a82-8811-a0b9250863c6
 
@@ -26446,7 +26446,7 @@ The IDL_DRSReplicaVerifyObjects method has removed all [**lingering objects**](#
 <a id="Section_4.1.25"></a>
 ### 4.1.25 IDL_DRSUnbind (Opnum 1)
 
-The IDL_DRSUnbind method destroys a context handle previously created by the [IDL_DRSBind](#Section_4.1.3.3) method.
+The IDL_DRSUnbind method destroys a context handle previously created by the [IDL_DRSBind](#Section_4.1.3) method.
 
 ULONG IDL_DRSUnbind(
 
@@ -26494,7 +26494,7 @@ DRS_MSG_UPDREFS* pmsgUpdRefs
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwVersion:** The version of the request message.
 
@@ -26854,7 +26854,7 @@ DRS_MSG_VERIFYREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -26874,7 +26874,7 @@ DRS_MSG_VERIFYREPLY* pmsgOut
 <a id="Section_4.1.27.1.1"></a>
 ##### 4.1.27.1.1 DRS_MSG_VERIFYREQ
 
-The DRS_MSG_VERIFYREQ union defines the request messages sent to the [IDL_DRSVerifyNames](#Section_4.1.27.2) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_VERIFYREQ union defines the request messages sent to the [IDL_DRSVerifyNames](#Section_4.1.27) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -26893,7 +26893,7 @@ DRS_MSG_VERIFYREQ_V1 V1;
 <a id="Section_4.1.27.1.2"></a>
 ##### 4.1.27.1.2 DRS_MSG_VERIFYREQ_V1
 
-The DRS_MSG_VERIFYREQ_V1 structure defines a request message sent to the [IDL_DRSVerifyNames](#Section_4.1.27.2) method.
+The DRS_MSG_VERIFYREQ_V1 structure defines a request message sent to the [IDL_DRSVerifyNames](#Section_4.1.27) method.
 
 typedef struct {
 
@@ -26920,7 +26920,7 @@ SCHEMA_PREFIX_TABLE PrefixTable;
 
 **cNames:** The number of items in the **rpNames** array.
 
-**rpNames:** An array of pointers to [DSNames](#Section_5.50) that need to be verified.
+**rpNames:** An array of pointers to [DSNames](#Section_5.49) that need to be verified.
 
 **RequiredAttrs:** The list of [**attributes**](#gt_attributes) to be retrieved for each name that is verified.
 
@@ -26929,7 +26929,7 @@ SCHEMA_PREFIX_TABLE PrefixTable;
 <a id="Section_4.1.27.1.3"></a>
 ##### 4.1.27.1.3 DRS_MSG_VERIFYREPLY
 
-The DRS_MSG_VERIFYREPLY union defines the response messages received from the [IDL_DRSVerifyNames](#Section_4.1.27.2) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_VERIFYREPLY union defines the response messages received from the [IDL_DRSVerifyNames](#Section_4.1.27) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -26948,7 +26948,7 @@ DRS_MSG_VERIFYREPLY_V1 V1;
 <a id="Section_4.1.27.1.4"></a>
 ##### 4.1.27.1.4 DRS_MSG_VERIFYREPLY_V1
 
-The DRS_MSG_VERIFYREPLY_V1 structure defines a response message received from the [IDL_DRSVerifyNames](#Section_4.1.27.2) method.
+The DRS_MSG_VERIFYREPLY_V1 structure defines a response message received from the [IDL_DRSVerifyNames](#Section_4.1.27) method.
 
 typedef struct {
 
@@ -26973,7 +26973,7 @@ SCHEMA_PREFIX_TABLE PrefixTable;
 <a id="Section_4.1.27.2"></a>
 #### 4.1.27.2 Server Behavior of the IDL_DRSVerifyNames Method
 
-*Informative summary of behavior*: The server resolves each of a sequence of [**object**](#gt_object) names and returns its [**DSName**](#gt_dsname) and the values of zero or more of its [**attributes**](#gt_attributes). The type of the input object name is indicated by the **dwFlags** field in the request. The [IDL_DRSVerifyNames](#Section_4.1.27.2) method verifies the names of both deleted and normal objects.
+*Informative summary of behavior*: The server resolves each of a sequence of [**object**](#gt_object) names and returns its [**DSName**](#gt_dsname) and the values of zero or more of its [**attributes**](#gt_attributes). The type of the input object name is indicated by the **dwFlags** field in the request. The [IDL_DRSVerifyNames](#Section_4.1.27) method verifies the names of both deleted and normal objects.
 
 ULONG
 
@@ -27317,7 +27317,7 @@ Querying the [**user object**](#gt_user-object) JaneDow on DC=CONTOSO, DC=COM
 <a id="Section_4.1.27.3.2"></a>
 ##### 4.1.27.3.2 Client Request
 
-To get a user's [**SID**](#gt_sid), DC2 invokes the [IDL_DRSVerifyNames](#Section_4.1.27.2) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
+To get a user's [**SID**](#gt_sid), DC2 invokes the [IDL_DRSVerifyNames](#Section_4.1.27) method against DC1 with the following parameters ([DRS_HANDLE](#Section_5.40) to DC1 omitted):
 
 - *dwInVersion* = 1
 - *pmsgIn* = [DRS_MSG_VERIFYREQ_V1](#Section_4.1.27.1.2)
@@ -27377,7 +27377,7 @@ DRS_MSG_SPNREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message. Must be set to 1, because that is the only version supported.
 
@@ -27397,7 +27397,7 @@ DRS_MSG_SPNREPLY* pmsgOut
 <a id="Section_4.1.28.1.1"></a>
 ##### 4.1.28.1.1 DRS_MSG_SPNREQ
 
-The DRS_MSG_SPNREQ union defines the request messages sent to the [IDL_DRSWriteSPN](#Section_4.1.28.3) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
+The DRS_MSG_SPNREQ union defines the request messages sent to the [IDL_DRSWriteSPN](#Section_4.1.28) method. Only one version, identified by *dwInVersion* = 1, is currently defined.
 
 typedef
 
@@ -27416,7 +27416,7 @@ DRS_MSG_SPNREQ_V1 V1;
 <a id="Section_4.1.28.1.2"></a>
 ##### 4.1.28.1.2 DRS_MSG_SPNREQ_V1
 
-The DRS_MSG_SPNREQ_V1 structure defines a request message sent to the [IDL_DRSWriteSPN](#Section_4.1.28.3) method.
+The DRS_MSG_SPNREQ_V1 structure defines a request message sent to the [IDL_DRSWriteSPN](#Section_4.1.28) method.
 
 typedef struct {
 
@@ -27445,7 +27445,7 @@ DWORD flags;
 <a id="Section_4.1.28.1.3"></a>
 ##### 4.1.28.1.3 DRS_MSG_SPNREPLY
 
-The DRS_MSG_SPNREPLY union defines the response messages received from the [IDL_DRSWriteSPN](#Section_4.1.28.3) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
+The DRS_MSG_SPNREPLY union defines the response messages received from the [IDL_DRSWriteSPN](#Section_4.1.28) method. Only one version, identified by *pdwOutVersion^* = 1, is currently defined.
 
 typedef
 
@@ -27464,7 +27464,7 @@ DRS_MSG_SPNREPLY_V1 V1;
 <a id="Section_4.1.28.1.4"></a>
 ##### 4.1.28.1.4 DRS_MSG_SPNREPLY_V1
 
-The DRS_MSG_SPNREPLY_V1 structure defines a response message received from the [IDL_DRSWriteSPN](#Section_4.1.28.3) method.
+The DRS_MSG_SPNREPLY_V1 structure defines a response message received from the [IDL_DRSWriteSPN](#Section_4.1.28) method.
 
 typedef struct {
 
@@ -27507,12 +27507,12 @@ DWORD *pdwOutVersion,
 
 DRS_MSG_SPNREPLY *pmsgOut): ULONG
 
-This procedure is executed only on an [**RODC**](#gt_read-only-domain-controller-rodc). It finds a [**DC**](#gt_domain-controller-dc) that holds a [**full NC replica**](#gt_full-nc-replica) of the [**domain NC**](#gt_domain-naming-context-domain-nc) of the RODC, performs the [IDL_DRSWriteSPN](#Section_4.1.28.3) [**RPC**](#gt_remote-procedure-call-rpc) method call with the given parameters against the DC in the client's [**security context**](#gt_security-context), and returns the value returned by that RPC call.
+This procedure is executed only on an [**RODC**](#gt_read-only-domain-controller-rodc). It finds a [**DC**](#gt_domain-controller-dc) that holds a [**full NC replica**](#gt_full-nc-replica) of the [**domain NC**](#gt_domain-naming-context-domain-nc) of the RODC, performs the [IDL_DRSWriteSPN](#Section_4.1.28) [**RPC**](#gt_remote-procedure-call-rpc) method call with the given parameters against the DC in the client's [**security context**](#gt_security-context), and returns the value returned by that RPC call.
 
 <a id="Section_4.1.28.3"></a>
 #### 4.1.28.3 Server Behavior of the IDL_DRSWriteSPN Method
 
-*Informative summary of behavior*: The [IDL_DRSWriteSPN](#Section_4.1.28.3) method [**updates**](#gt_update) the servicePrincipalName [**attribute**](#gt_attributes) of an [**object**](#gt_object). The values of this multivalued attribute are called [**service principal names (SPNs)**](#gt_service-principal-name-spn). The IDL_DRSWriteSPN method does one of three things:
+*Informative summary of behavior*: The [IDL_DRSWriteSPN](#Section_4.1.28) method [**updates**](#gt_update) the servicePrincipalName [**attribute**](#gt_attributes) of an [**object**](#gt_object). The values of this multivalued attribute are called [**service principal names (SPNs)**](#gt_service-principal-name-spn). The IDL_DRSWriteSPN method does one of three things:
 
 - Adds a non-empty set of SPNs to the object's servicePrincipalName. If a member of the set is already present on the object's servicePrincipalName, it is ignored.
 - Removes all current values from the object's servicePrincipalName, then adds a (possibly empty) set of SPNs to the object's servicePrincipalName.
@@ -27736,7 +27736,7 @@ DRS_MSG_ ADDCLONEDCREPLY* pmsgOut
 
 );
 
-**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs:** The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion:** The version of the request message.
 
@@ -27756,7 +27756,7 @@ DRS_MSG_ ADDCLONEDCREPLY* pmsgOut
 <a id="Section_4.1.29.1.1"></a>
 ##### 4.1.29.1.1 DRS_MSG_ADDCLONEDCREQ
 
-The DRS_MSG_ADDCLONEDCREQ union defines the request messages sent to the [IDL_DRSAddCloneDC](#Section_4.1.29.3) method.
+The DRS_MSG_ADDCLONEDCREQ union defines the request messages sent to the [IDL_DRSAddCloneDC](#Section_4.1.29) method.
 
 typedef
 
@@ -27775,7 +27775,7 @@ DRS_MSG_ADDCLONEDCREQ_V1 V1;
 <a id="Section_4.1.29.1.2"></a>
 ##### 4.1.29.1.2 DRS_MSG_ADDCLONEDCREQ_V1
 
-The DRS_MSG_ADDCLONEDCREQ_V1 structure defines a request message sent to the [IDL_DRSAddCloneDC](#Section_4.1.29.3) method.
+The DRS_MSG_ADDCLONEDCREQ_V1 structure defines a request message sent to the [IDL_DRSAddCloneDC](#Section_4.1.29) method.
 
 typedef struct {
 
@@ -27792,7 +27792,7 @@ typedef struct {
 <a id="Section_4.1.29.1.3"></a>
 ##### 4.1.29.1.3 DRS_MSG_ADDCLONEDCREPLY
 
-The DRS_MSG_ADDCLONEDCREPLY union defines the response messages received from the [IDL_DRSAddCloneDC](#Section_4.1.29.3) method.
+The DRS_MSG_ADDCLONEDCREPLY union defines the response messages received from the [IDL_DRSAddCloneDC](#Section_4.1.29) method.
 
 typedef
 
@@ -27811,7 +27811,7 @@ DRS_MSG_ADDCLONEDCREPLY_V1 V1;
 <a id="Section_4.1.29.1.4"></a>
 ##### 4.1.29.1.4 DRS_MSG_ADDCLONEDCREPLY_V1
 
-The DRS_MSG_ADDCLONEDCREPLY_V1 structure defines a response message received from the [IDL_DRSAddCloneDC](#Section_4.1.29.3) method.
+The DRS_MSG_ADDCLONEDCREPLY_V1 structure defines a response message received from the [IDL_DRSAddCloneDC](#Section_4.1.29) method.
 
 typedef struct {
 
@@ -27926,7 +27926,7 @@ Generates a Kerb Tgt user account in the [**local domain controller (local DC)**
 - Selects a value in the range [1 .. 65535] that is not currently present as a value of the msDS-SecondaryKrbTgtNumber [**attribute**](#gt_attributes) on any [**object**](#gt_object) in this [**domain**](#gt_domain), and assigns the value to the msDS-SecondaryKrbTgtNumber attribute of the created object. If no such value exists, the result is the error *other* / *ERROR_NO_SYSTEM_RESOURCES*.
 - The selected value for msDS-SecondaryKrbTgtNumber is appended (in decimal form) to the string "krbtgt", and the resulting string is assigned to the sAMAccountName attribute on the created object.
 - The userAccountControl bits ADS_UF_ACCOUNT_DISABLE and ADS_UF_DONT_EXPIRE_PASSWD are set on the object's userAccountControl attribute.
-- The object's account password is set to a randomly generated value that satisfies all criteria in [MS-SAMR](#Section_6) section 3.1.1.7.2 and is processed as described in [MS-SAMR] section 3.1.1.8.5.
+- The object's account password is set to a randomly generated value that satisfies all criteria in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.7.2 and is processed as described in [MS-SAMR] section 3.1.1.8.5.
 - Returns the [**DSName**](#gt_dsname) of the created object.
 <a id="Section_4.1.29.2.9"></a>
 ##### 4.1.29.2.9 DuplicateObject
@@ -28110,7 +28110,7 @@ return newObj
 <a id="Section_4.1.29.3"></a>
 #### 4.1.29.3 Server Behavior of the IDL_DRSAddCloneDC Method
 
-*Informative summary of behavior*: The [IDL_DRSAddCloneDC](#Section_4.1.29.3) method is used to create a new [**domain controller (DC)**](#gt_domain-controller-dc) by duplicating the states of the original DC. The states of a DC are composed of [**computer**](#gt_computer-object), server, NTDS settings, FRS, DFSR, and connection [**objects**](#gt_object) that are maintained for each DC. When duplicating an object, this [**RPC**](#gt_remote-procedure-call-rpc) method replaces all references to the original DC with corresponding objects of the new DC. The caller has to have the [**control access right**](#gt_control-access-right) DS-Clone-Domain-Controller on the [**default NC**](#gt_default-naming-context-default-nc). When called, this RPC method:
+*Informative summary of behavior*: The [IDL_DRSAddCloneDC](#Section_4.1.29) method is used to create a new [**domain controller (DC)**](#gt_domain-controller-dc) by duplicating the states of the original DC. The states of a DC are composed of [**computer**](#gt_computer-object), server, NTDS settings, FRS, DFSR, and connection [**objects**](#gt_object) that are maintained for each DC. When duplicating an object, this [**RPC**](#gt_remote-procedure-call-rpc) method replaces all references to the original DC with corresponding objects of the new DC. The caller has to have the [**control access right**](#gt_control-access-right) DS-Clone-Domain-Controller on the [**default NC**](#gt_default-naming-context-default-nc). When called, this RPC method:
 
 - Validates that the caller has permission to perform the operation.
 - Creates new account and other objects for the new domain controller account by copying information from the existing domain controller.
@@ -28478,7 +28478,7 @@ return 0
 <a id="Section_4.1.29.4"></a>
 #### 4.1.29.4 Examples of the IDL_DRSAddCloneDC Method
 
-DC1 invokes the [IDL_DRSAddCloneDC](#Section_4.1.29.3) method on the [**PDC**](#gt_primary-domain-controller-pdc) to create a cloned [**domain controller**](#gt_domain-controller-dc) account "DC1Clone1" in the CONTOSO.COM [**domain NC**](#gt_domain-naming-context-domain-nc).
+DC1 invokes the [IDL_DRSAddCloneDC](#Section_4.1.29) method on the [**PDC**](#gt_primary-domain-controller-pdc) to create a cloned [**domain controller**](#gt_domain-controller-dc) account "DC1Clone1" in the CONTOSO.COM [**domain NC**](#gt_domain-naming-context-domain-nc).
 
 <a id="Section_4.1.29.4.1"></a>
 ##### 4.1.29.4.1 Initial State
@@ -28594,7 +28594,7 @@ Querying the DC1 configuration [**objects**](#gt_object) in [**config NC**](#gt_
 <a id="Section_4.1.29.4.2"></a>
 ##### 4.1.29.4.2 Client Request
 
-DC1 invokes the [IDL_DRSAddCloneDC](#Section_4.1.29.3) method against the [**PDC**](#gt_primary-domain-controller-pdc) with the following parameters ([DRS_HANDLE](#Section_5.40) is omitted):
+DC1 invokes the [IDL_DRSAddCloneDC](#Section_4.1.29) method against the [**PDC**](#gt_primary-domain-controller-pdc) with the following parameters ([DRS_HANDLE](#Section_5.40) is omitted):
 
 - *dwInVersion* = 1
 - *pmsgIn* = DRS_MSG_ADDCLONEDCREQ_V1
@@ -28716,7 +28716,7 @@ DRS_MSG_WRITENGCKEYREPLY* pmsgOut
 
 );
 
-**hDrs**: The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs**: The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion**: The version of the request message. Must be set to 1, because that is the only version supported.
 
@@ -29137,7 +29137,7 @@ DRS_MSG_READNGCKEYREPLY* pmsgOut
 
 );
 
-**hDrs**: The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3.3) method.
+**hDrs**: The [**RPC**](#gt_remote-procedure-call-rpc) context handle returned by the [IDL_DRSBind](#Section_4.1.3) method.
 
 **dwInVersion**: The version of the request message. Must be set to 1, because that is the only version supported.
 
@@ -29394,7 +29394,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [IDL_DSAPrepareScript](#Section_4.2.1.3) | Prepares the [**DC**](#gt_domain-controller-dc) to run a maintenance script. Opnum: 0 |
+| [IDL_DSAPrepareScript](#Section_4.2.1) | Prepares the [**DC**](#gt_domain-controller-dc) to run a maintenance script. Opnum: 0 |
 | [IDL_DSAExecuteScript](#Section_4.2.2) | Executes a maintenance script. Opnum: 1 |
 
 For information on the order of method calls, see section [1.3.2](#Section_1.3.2).
@@ -29442,7 +29442,7 @@ DSA_MSG_PREPARE_SCRIPT_REPLY* pmsgOut
 <a id="Section_4.2.1.1.1"></a>
 ##### 4.2.1.1.1 DSA_MSG_PREPARE_SCRIPT_REQ
 
-The DSA_MSG_PREPARE_SCRIPT_REQ union defines the request messages sent to the [IDL_DSAPrepareScript](#Section_4.2.1.3) method.
+The DSA_MSG_PREPARE_SCRIPT_REQ union defines the request messages sent to the [IDL_DSAPrepareScript](#Section_4.2.1) method.
 
 typedef
 
@@ -29461,7 +29461,7 @@ DSA_MSG_PREPARE_SCRIPT_REQ_V1 V1;
 <a id="Section_4.2.1.1.2"></a>
 ##### 4.2.1.1.2 DSA_MSG_PREPARE_SCRIPT_REQ_V1
 
-The DSA_MSG_PREPARE_SCRIPT_REQ_V1 structure defines a request message sent to the [IDL_DSAPrepareScript](#Section_4.2.1.3) method.
+The DSA_MSG_PREPARE_SCRIPT_REQ_V1 structure defines a request message sent to the [IDL_DSAPrepareScript](#Section_4.2.1) method.
 
 typedef struct {
 
@@ -29474,7 +29474,7 @@ DWORD Reserved;
 <a id="Section_4.2.1.1.3"></a>
 ##### 4.2.1.1.3 DSA_MSG_PREPARE_SCRIPT_REPLY
 
-The DSA_MSG_PREPARE_SCRIPT_REPLY union defines the response messages received from the [IDL_DSAPrepareScript](#Section_4.2.1.3) method.
+The DSA_MSG_PREPARE_SCRIPT_REPLY union defines the response messages received from the [IDL_DSAPrepareScript](#Section_4.2.1) method.
 
 typedef
 
@@ -29493,7 +29493,7 @@ DSA_MSG_PREPARE_SCRIPT_REPLY_V1 V1;
 <a id="Section_4.2.1.1.4"></a>
 ##### 4.2.1.1.4 DSA_MSG_PREPARE_SCRIPT_REPLY_V1
 
-The DSA_MSG_PREPARE_SCRIPT_REPLY_V1 structure defines a response message received from the [IDL_DSAPrepareScript](#Section_4.2.1.3) method.
+The DSA_MSG_PREPARE_SCRIPT_REPLY_V1 structure defines a response message received from the [IDL_DSAPrepareScript](#Section_4.2.1) method.
 
 typedef struct {
 
@@ -29546,7 +29546,7 @@ Returns the key length, in bits, of the encryption used on the *hRpc* connection
 
 procedure PrepareScriptInProgress(): boolean
 
-Returns true if an instance of the [IDL_DSAPrepareScript](#Section_4.2.1.3)() method is already executing, and false otherwise.
+Returns true if an instance of the [IDL_DSAPrepareScript](#Section_4.2.1)() method is already executing, and false otherwise.
 
 <a id="Section_4.2.1.2.3"></a>
 ##### 4.2.1.2.3 PrepareScriptVerifyScript
@@ -29579,7 +29579,7 @@ Returns a randomly generated password for use in a subsequent call to [IDL_DSAEx
 <a id="Section_4.2.1.3"></a>
 #### 4.2.1.3 Server Behavior of the IDL_DSAPrepareScript Method
 
-*Informative summary of behavior*: The [IDL_DSAPrepareScript](#Section_4.2.1.3) method prepares for a subsequent call to [IDL_DSAExecuteScript](#Section_4.2.2). The [**partitions container**](#gt_partitions-container) that is a [**child object**](#gt_9b04b599-9dca-48f1-aa9e-08e254d20553) of the root of the [**configuration NC**](#gt_configuration-naming-context-config-nc) is altered as follows:
+*Informative summary of behavior*: The [IDL_DSAPrepareScript](#Section_4.2.1) method prepares for a subsequent call to [IDL_DSAExecuteScript](#Section_4.2.2). The [**partitions container**](#gt_partitions-container) that is a [**child object**](#gt_9b04b599-9dca-48f1-aa9e-08e254d20553) of the root of the [**configuration NC**](#gt_configuration-naming-context-config-nc) is altered as follows:
 
 - The value of msDS-UpdateScript is validated.
 - If valid, a password is generated and stored in the value for msDS-ExecuteScriptPassword.
@@ -29883,7 +29883,7 @@ Executes an [**NC**](#gt_naming-context-nc) Rename(*pc*!msDS-UpdateScript, true)
 <a id="Section_4.2.2.3"></a>
 #### 4.2.2.3 Server Behavior of the IDL_DSAExecuteScript Method
 
-*Informative summary of behavior*: The value of the [**attribute**](#gt_attributes) msDS-UpdateScript is executed as a transacted sequence of [**updates**](#gt_update). The [**RPC**](#gt_remote-procedure-call-rpc) call is not authenticated using normal means (that is, it can be performed by an anonymous caller). However, the password value passed by the caller has to match the password that was obtained by a prior call to the [IDL_DSAPrepareScript](#Section_4.2.1.3) method on the same [**DC**](#gt_domain-controller-dc).
+*Informative summary of behavior*: The value of the [**attribute**](#gt_attributes) msDS-UpdateScript is executed as a transacted sequence of [**updates**](#gt_update). The [**RPC**](#gt_remote-procedure-call-rpc) call is not authenticated using normal means (that is, it can be performed by an anonymous caller). However, the password value passed by the caller has to match the password that was obtained by a prior call to the [IDL_DSAPrepareScript](#Section_4.2.1) method on the same [**DC**](#gt_domain-controller-dc).
 
 ULONG
 
@@ -29990,7 +29990,7 @@ The specification of message syntax in this section is normative for syntax only
 
 This specification uses the definitions of RPC base types. Additional data types used in this protocol are specified in this section.
 
-Note that values of some types are marshaled by RPC as structures in some cases and as little-endian byte arrays in other cases. An example is [DSName](#Section_5.50), which can be marshaled as a DSName *pObject field of an [ENTINF](#Section_5.53), or as a [UCHAR](#Section_5.195) *pVal field of an [ATTRVAL](#Section_5.16). Where such cases exist, the structure is defined both in [**MIDL**](#gt_microsoft-interface-definition-language-midl) syntax and in a byte diagram, and the byte array cases are clearly identified so that big-endian architectures can perform the necessary byte swapping. (For example, see ATTRVAL conversions.)
+Note that values of some types are marshaled by RPC as structures in some cases and as little-endian byte arrays in other cases. An example is [DSName](#Section_5.49), which can be marshaled as a DSName *pObject field of an [ENTINF](#Section_5.53), or as a [UCHAR](#Section_5.195) *pVal field of an [ATTRVAL](#Section_5.16). Where such cases exist, the structure is defined both in [**MIDL**](#gt_microsoft-interface-definition-language-midl) syntax and in a byte diagram, and the byte array cases are clearly identified so that big-endian architectures can perform the necessary byte swapping. (For example, see ATTRVAL conversions.)
 
 <a id="Section_5.1"></a>
 ## 5.1 AbstractPTFromConcretePT
@@ -30389,7 +30389,7 @@ AttributeSyntax is an [**abstract type**](#gt_abstract-type) that represents an 
 
 procedure AttrStamp(o: DSName, attr: ATTRTYP) : AttributeStamp
 
-The AttrStamp procedure returns the [AttributeStamp](#Section_5.11) for the [**attribute**](#gt_attributes) whose [ATTRTYP](#Section_5.14) is *attr* on the [**object**](#gt_object) whose [DSName](#Section_5.50) is *o*.
+The AttrStamp procedure returns the [AttributeStamp](#Section_5.11) for the [**attribute**](#gt_attributes) whose [ATTRTYP](#Section_5.14) is *attr* on the [**object**](#gt_object) whose [DSName](#Section_5.49) is *o*.
 
 <a id="Section_5.14"></a>
 ## 5.14 ATTRTYP
@@ -30530,12 +30530,12 @@ The following table lists all the supported syntaxes and how they are represente
 | String(Unicode) (2.5.5.12) | Directory String | [RFC2252] section 6.10 |
 | String(UTC-Time) (2.5.5.11) | UTC Time | [RFC2252] section 6.31 |
 | String(Generalized-Time) (2.5.5.11) | Generalized Time | [RFC2252] section 6.14 |
-| Object(DS-DN) (2.5.5.1) | - | Section [5.16.2.1](#Section_5.16.3.10) |
+| Object(DS-DN) (2.5.5.1) | - | Section [5.16.2.1](#Section_5.16.2.1) |
 | Object(DN-String) (2.5.5.14) | - | Section [5.16.2.2](#Section_5.16.2.2) |
 | Object(DN-Binary) (2.5.5.7) | - | Section [5.16.2.3](#Section_5.16.2.3) |
 | Object(Access-Point) (2.5.5.14) | - | Section [5.16.2.4](#Section_5.16.2.4) |
 | Object(OR-Name) (2.5.5.7) | - | Section [5.16.2.5](#Section_5.16.2.5) |
-| String(NT-Sec-Desc) (2.5.5.15) | - | Section [5.16.2.6](#Section_5.16.3.16) |
+| String(NT-Sec-Desc) (2.5.5.15) | - | Section [5.16.2.6](#Section_5.16.2.6) |
 | String(SID) (2.5.5.17) | - | Section [5.16.2.7](#Section_5.16.2.7) |
 | String(Teletex) (2.5.5.4) | - | Section [5.16.2.8](#Section_5.16.2.8) |
 
@@ -30571,7 +30571,7 @@ where:
 - S is a string literal that MUST be present.
 - Each : is a string literal that MUST be present.
 - *char_count* is the number of characters in the *string_value* string.
-- *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.3.10).
+- *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.2.1).
 <a id="Section_5.16.2.3"></a>
 #### 5.16.2.3 Object(DN-Binary)
 
@@ -30585,7 +30585,7 @@ where:
 - Each : is a string literal that MUST be present.
 - *char_count* is the number of hexadecimal digits in *binary_value*.
 - *binary_value* is the hexadecimal representation of a binary value.
-- *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.3.10).
+- *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.2.1).
 <a id="Section_5.16.2.4"></a>
 #### 5.16.2.4 Object(Access-Point)
 
@@ -30598,7 +30598,7 @@ where:
 - #X500 is a string literal that MUST be present.
 - : is a string literal that MUST be present.
 - *presentation_address* is a value encoded in the Object(Presentation-Address) syntax.
-- *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.3.10).
+- *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.2.1).
 <a id="Section_5.16.2.5"></a>
 #### 5.16.2.5 Object(OR-Name)
 
@@ -30606,7 +30606,7 @@ A value with the Object(OR-Name) syntax is a UTF-8 string in the following forma
 
 *object_DN*
 
-where: *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.3.10).
+where: *object_DN* is an [**object reference**](#gt_object-reference) in the format of [Object(DS-DN)](#Section_5.16.2.1).
 
 <a id="Section_5.16.2.6"></a>
 #### 5.16.2.6 String(NT-Sec-Desc)
@@ -30666,7 +30666,7 @@ Apart from the prefix table complication, these two procedures are straightforwa
 | String(Unicode) (2.5.5.12) | String16 |
 | String(UTC-Time) (2.5.5.11) | [DSTIME](#Section_5.51) |
 | String(Generalized-Time) (2.5.5.11) | DSTIME |
-| Object(DS-DN) (2.5.5.1) | [DSName](#Section_5.50) |
+| Object(DS-DN) (2.5.5.1) | [DSName](#Section_5.49) |
 | Object(DN-String) (2.5.5.14) | [SYNTAX_DISTNAME_BINARY](#Section_5.193) |
 | Object(DN-Binary) (2.5.5.7) | SYNTAX_DISTNAME_BINARY |
 | Object(Access-Point) (2.5.5.14) | SYNTAX_DISTNAME_BINARY |
@@ -30842,7 +30842,7 @@ ea 74 9a fa 02 00 00 00 .t......
 <a id="Section_5.16.3.10"></a>
 #### 5.16.3.10 Object(DS-DN)
 
-The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) representation of Object(DS-DN) is defined in section [5.16.2.1](#Section_5.16.3.10). This corresponds to [DSName](#Section_5.50) as follows:
+The [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) representation of Object(DS-DN) is defined in section [5.16.2.1](#Section_5.16.2.1). This corresponds to [DSName](#Section_5.49) as follows:
 
 The *dn* part of the LDAP representation is converted to a UCS-16 encoded [**Unicode**](#gt_unicode) string. Then, the attributeValue component (defined in [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327)) of each [**RDN**](#gt_relative-distinguished-name-rdn) in the [**DN**](#gt_distinguished-name-dn) is canonicalized according to the following rules:
 
@@ -31619,14 +31619,14 @@ var t: PrefixTable) : ATTRVAL
 
 The ATTRVALFromValue procedure converts a value in the abstract [Value](#Section_5.214) encoding *v* of syntax *s* into a concrete [ATTRVAL](#Section_5.16), using the [**prefix table**](#gt_prefix-table) represented by *t*. This procedure can mutate the supplied prefix table.
 
-See section [5.16.3](#Section_5.16.2) for the specification of this procedure.
+See section [5.16.3](#Section_5.16.3) for the specification of this procedure.
 
 <a id="Section_5.19"></a>
 ## 5.19 BindToDSA()
 
 procedure BindToDSA(dsa: DSNAME): DRS_HANDLE
 
-The BindToDSA procedure establishes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the target [**DC**](#gt_domain-controller-dc) represented by its [**DSA object**](#gt_ntdsdsa-object). It also performs the [IDL_DRSBind](#Section_4.1.3.3) call. It returns the RPC handle on success or null on failure.
+The BindToDSA procedure establishes an [**RPC**](#gt_remote-procedure-call-rpc) connection to the target [**DC**](#gt_domain-controller-dc) represented by its [**DSA object**](#gt_ntdsdsa-object). It also performs the [IDL_DRSBind](#Section_4.1.3) call. It returns the RPC handle on success or null on failure.
 
 <a id="Section_5.20"></a>
 ## 5.20 BOOL
@@ -31690,7 +31690,7 @@ The ClientExtensions server procedure gets the client extensions presented in th
 
 procedure ClientUUID(hDrs: DRS_HANDLE): UUID
 
-The ClientUUID procedure returns the [**GUID**](#gt_globally-unique-identifier-guid) that identifies the caller presented in the [IDL_DRSBind](#Section_4.1.3.3) call that created *hDrs*.
+The ClientUUID procedure returns the [**GUID**](#gt_globally-unique-identifier-guid) that identifies the caller presented in the [IDL_DRSBind](#Section_4.1.3) call that created *hDrs*.
 
 <a id="Section_5.28"></a>
 ## 5.28 ConcretePTFromAbstractPT
@@ -31728,7 +31728,7 @@ return concretePrefixTable
 
 procedure ConfigNC(): DSName
 
-The ConfigNC procedure returns the [**dsname**](#gt_dsname) of [dc](#Section_5.30).configNC.
+The ConfigNC procedure returns the [**dsname**](#gt_dsname) of [dc](#Section_4.1.29.2.3).configNC.
 
 <a id="Section_5.30"></a>
 ## 5.30 dc, DC
@@ -31794,7 +31794,7 @@ dc: DC
 
 procedure DefaultNC(): DSName
 
-The DefaultNC procedure returns the [**dsname**](#gt_dsname) of the [dc](#Section_5.30).defaultNC.
+The DefaultNC procedure returns the [**dsname**](#gt_dsname) of the [dc](#Section_4.1.29.2.3).defaultNC.
 
 <a id="Section_5.32"></a>
 ## 5.32 DelSubRef
@@ -31842,7 +31842,7 @@ procedure DescendantObject(
 
 ancestor: DSName, rdns: unicodestring): DSName
 
-The DescendantObject procedure constructs a [**DN**](#gt_distinguished-name-dn) string by concatenating *rdns* and *ancestor*.dn, and then verifies the existence of the descendant [**object**](#gt_object). It returns the [DSName](#Section_5.50) if the descendant exists, and null otherwise.
+The DescendantObject procedure constructs a [**DN**](#gt_distinguished-name-dn) string by concatenating *rdns* and *ancestor*.dn, and then verifies the existence of the descendant [**object**](#gt_object). It returns the [DSName](#Section_5.49) if the descendant exists, and null otherwise.
 
 <a id="Section_5.34"></a>
 ## 5.34 DomainNameFromDN
@@ -31863,7 +31863,7 @@ DN is an [**abstract type**](#gt_abstract-type) that is a *unicodestring* (secti
 
 DNBinary is an [**abstract type**](#gt_abstract-type) that represents the [**concrete type**](#gt_concrete-type) [SYNTAX_DISTNAME_BINARY](#Section_5.193). It consists of the following tuple:
 
-type DNBinary = [dn: [DSName](#Section_5.50), binary: sequence of [BYTE](#Section_5.21)]
+type DNBinary = [dn: [DSName](#Section_5.49), binary: sequence of [BYTE](#Section_5.21)]
 
 <a id="Section_5.37"></a>
 ## 5.37 DomainNameFromNT4AccountName
@@ -31954,19 +31954,19 @@ packet-beta
 
 **AS (DRS_EXT_ASYNCREPL, 0x00000002)**: If present, signifies that the DC supports [DRS_MSG_REPADD_V2](#Section_4.1.19.1.3).
 
-**RM (DRS_EXT_REMOVEAPI, 0x00000004)**: If present, signifies that the DC supports [IDL_DRSRemoveDsServer](#Section_4.1.18) and [IDL_DRSRemoveDsDomain](#Section_4.1.17.3).
+**RM (DRS_EXT_REMOVEAPI, 0x00000004)**: If present, signifies that the DC supports [IDL_DRSRemoveDsServer](#Section_4.1.18) and [IDL_DRSRemoveDsDomain](#Section_4.1.17).
 
 **MV (DRS_EXT_MOVEREQ_V2, 0x00000008)**: If present, signifies that the DC supports [DRS_MSG_MOVEREQ_V2](#Section_4.1.15.1.3).
 
 **DF (DRS_EXT_GETCHG_DEFLATE, 0x00000010)**: If present, signifies that the DC supports [DRS_MSG_GETCHGREPLY_V2](#Section_4.1.10.2.11).
 
-**DC (DRS_EXT_DCINFO_V1, 0x00000020)**: If present, signifies that the DC supports [IDL_DRSDomainControllerInfo](#Section_4.1.5.2).
+**DC (DRS_EXT_DCINFO_V1, 0x00000020)**: If present, signifies that the DC supports [IDL_DRSDomainControllerInfo](#Section_4.1.5).
 
 **UO (DRS_EXT_RESTORE_USN_OPTIMIZATION, 0x00000040)**: Unused. SHOULD be 1 and MUST be ignored.
 
 **AE (DRS_EXT_ADDENTRY, 0x00000080)**: If present, signifies that the DC supports [IDL_DRSAddEntry](#Section_4.1.1).
 
-**KE (DRS_EXT_KCC_EXECUTE, 0x00000100)**: If present, signifies that the DC supports [IDL_DRSExecuteKCC](#Section_4.1.6.3).
+**KE (DRS_EXT_KCC_EXECUTE, 0x00000100)**: If present, signifies that the DC supports [IDL_DRSExecuteKCC](#Section_4.1.6).
 
 **AE2 (DRS_EXT_ADDENTRY_V2, 0x00000200)**: If present, signifies that the DC supports [DRS_MSG_ADDENTRYREQ_V2](#Section_4.1.1.1.3).
 
@@ -31978,15 +31978,15 @@ packet-beta
 
 **CB (DRS_EXT_CRYPTO_BIND, 0x00002000)**: A client-only flag. If present, it indicates that the [**security provider**](#gt_security-provider) used for the connection supports [**session keys**](#gt_session-key) through [**RPC**](#gt_remote-procedure-call-rpc) (example, Kerberos connections with mutual [**authentication**](#gt_authentication) enable RPC to expose session keys, but NTLM connections do not enable RPC to expose session keys).
 
-**GRI (DRS_EXT_GET_REPL_INFO, 0x00004000)**: If present, signifies that the DC supports [IDL_DRSGetReplInfo](#Section_4.1.13.4.5).
+**GRI (DRS_EXT_GET_REPL_INFO, 0x00004000)**: If present, signifies that the DC supports [IDL_DRSGetReplInfo](#Section_4.1.13).
 
 **SE (DRS_EXT_STRONG_ENCRYPTION, 0x00008000)**: If present, signifies that the DC supports additional 128-bit encryption for passwords over the wire. DCs MUST NOT replicate passwords to other DCs that do not support this extension.
 
 **DCF (DRS_EXT_DCINFO_VFFFFFFFF, 0x00010000)**: If present, signifies that the DC supports [DRS_MSG_DCINFOREPLY_VFFFFFFFF](#Section_4.1.5.1.7).
 
-**TM (DRS_EXT_TRANSITIVE_MEMBERSHIP, 0x00020000)**: If present, signifies that the DC supports [IDL_DRSGetMemberships](#Section_4.1.9).
+**TM (DRS_EXT_TRANSITIVE_MEMBERSHIP, 0x00020000)**: If present, signifies that the DC supports [IDL_DRSGetMemberships](#Section_4.1.8).
 
-**SH (DRS_EXT_ADD_SID_HISTORY, 0x00040000)**: If present, signifies that the DC supports [IDL_DRSAddSidHistory](#Section_4.1.2.3).
+**SH (DRS_EXT_ADD_SID_HISTORY, 0x00040000)**: If present, signifies that the DC supports [IDL_DRSAddSidHistory](#Section_4.1.2).
 
 **PB3 (DRS_EXT_POST_BETA3, 0x00080000)**: Reserved. MUST be set to 1 and ignored.
 
@@ -32087,7 +32087,7 @@ This type is declared as follows:
 
 typedef [context_handle] void* DRS_HANDLE;
 
-For the specification of IDL_DRSBind, see section [4.1.3](#Section_4.1.3.3).
+For the specification of IDL_DRSBind, see section [4.1.3](#Section_4.1.3).
 
 Methods in the dsaop RPC interface do not use context handles.
 
@@ -32186,7 +32186,7 @@ packet-beta
 
 **NS (DRS_NO_SOURCE, 0x00008000)**: The NC replica has no server DCs.
 
-**FSI (DRS_FULL_SYNC_IN_PROGRESS, 0x00010000)**: When the flag DRS_FULL_SYNC_NOW is received in a call to IDL_DRSReplicaSync, the flag DRS_FULL_SYNC_IN_PROGRESS is sent in the associated calls to [IDL_DRSGetNCChanges](#Section_4.1.10.8) until the replication cycle completes. This flag is ignored by the server.
+**FSI (DRS_FULL_SYNC_IN_PROGRESS, 0x00010000)**: When the flag DRS_FULL_SYNC_NOW is received in a call to IDL_DRSReplicaSync, the flag DRS_FULL_SYNC_IN_PROGRESS is sent in the associated calls to [IDL_DRSGetNCChanges](#Section_4.1.10) until the replication cycle completes. This flag is ignored by the server.
 
 **FSP (DRS_FULL_SYNC_PACKET, 0x00020000)**: Replicate all updates in the replication request, even those that would normally be filtered.
 
@@ -32225,7 +32225,7 @@ For information about the Windows versions in which these flags were introduced,
 <a id="Section_5.42"></a>
 ## 5.42 DRS_MORE_GETCHGREQ_OPTIONS
 
-DRS_MORE_GETCHGREQ_OPTIONS is a [**concrete type**](#gt_concrete-type) for a set of extra options sent to the [IDL_DRSGetNCChanges](#Section_4.1.10.8) method.
+DRS_MORE_GETCHGREQ_OPTIONS is a [**concrete type**](#gt_concrete-type) for a set of extra options sent to the [IDL_DRSGetNCChanges](#Section_4.1.10) method.
 
 This type is declared as follows:
 
@@ -32462,7 +32462,7 @@ The *sid* field corresponds to the **Sid** field of the DSNAME structure. If the
 <a id="Section_5.50"></a>
 ## 5.50 DSNAME
 
-DSNAME is a [**concrete type**](#gt_concrete-type) for representing a [DSName](#Section_5.50), identifying a [**directory object**](#gt_directory-object) using the values of one or more of its [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) [**attributes**](#gt_attributes): objectGUID, objectSid, or distinguishedName.
+DSNAME is a [**concrete type**](#gt_concrete-type) for representing a [DSName](#Section_5.49), identifying a [**directory object**](#gt_directory-object) using the values of one or more of its [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) [**attributes**](#gt_attributes): objectGUID, objectSid, or distinguishedName.
 
 typedef struct {
 
@@ -32639,7 +32639,7 @@ attribute: ATTRTYP,
 
 prefixTable: PrefixTable): ATTRVAL
 
-*Informative summary of behavior*: The ENTINF_GetValue procedure scans an [ENTINF](#Section_5.53) structure and returns the first [ATTRVAL](#Section_5.16) structure for the requested *attribute*. The *attribute* parameter is based on [dc](#Section_5.30).prefixTable, while the [**attributes**](#gt_attributes) within *entInf* are based on the *prefixTable* parameter.
+*Informative summary of behavior*: The ENTINF_GetValue procedure scans an [ENTINF](#Section_5.53) structure and returns the first [ATTRVAL](#Section_5.16) structure for the requested *attribute*. The *attribute* parameter is based on [dc](#Section_4.1.29.2.3).prefixTable, while the [**attributes**](#gt_attributes) within *entInf* are based on the *prefixTable* parameter.
 
 attrType: ATTRTYP
 
@@ -32676,7 +32676,7 @@ attrVal: ATTRVAL,
 
 prefixTable: PrefixTable)
 
-The ENTINF_SetValue procedure [**updates**](#gt_update) an [**attribute**](#gt_attributes) value within the [ENTINF](#Section_5.53). If *attrVal* is null, then the attribute is removed from the list (if it exists). If the value is non-null, then the attribute value is updated or added to the list (when a value is not already present). The *attribute* and *attrVal* parameters are based on [dc](#Section_5.30).prefixTable, while the attributes within *entInf* are based on the *prefixTable* parameter.
+The ENTINF_SetValue procedure [**updates**](#gt_update) an [**attribute**](#gt_attributes) value within the [ENTINF](#Section_5.53). If *attrVal* is null, then the attribute is removed from the list (if it exists). If the value is non-null, then the attribute value is updated or added to the list (when a value is not already present). The *attribute* and *attrVal* parameters are based on [dc](#Section_4.1.29.2.3).prefixTable, while the attributes within *entInf* are based on the *prefixTable* parameter.
 
 <a id="Section_5.56"></a>
 ## 5.56 ENTINF_EnumerateAttributes
@@ -32687,7 +32687,7 @@ e: ENTINF,
 
 prefixTable: PrefixTable): set of ATTRTYP
 
-The ENTINF_EnumerateAttributes procedure returns the list of [**attributes**](#gt_attributes) (based on [dc](#Section_5.30).prefixTable) that are present in the [ENTINF](#Section_5.53) *e*. Attributes within *e* are based on the *prefixTable* parameter.
+The ENTINF_EnumerateAttributes procedure returns the list of [**attributes**](#gt_attributes) (based on [dc](#Section_4.1.29.2.3).prefixTable) that are present in the [ENTINF](#Section_5.53) *e*. Attributes within *e* are based on the *prefixTable* parameter.
 
 <a id="Section_5.57"></a>
 ## 5.57 ENTINFLIST
@@ -32711,7 +32711,7 @@ ENTINF Entinf;
 
 procedure Expunge(obj: DSName)
 
-The Expunge procedure physically removes an [**object**](#gt_object) whose [DSName](#Section_5.50) is *obj* from the [**directory**](#gt_directory), without enforcing referential integrity constraints. The object is immediately removed without undergoing conversion to a [**tombstone**](#gt_tombstone).
+The Expunge procedure physically removes an [**object**](#gt_object) whose [DSName](#Section_5.49) is *obj* from the [**directory**](#gt_directory), without enforcing referential integrity constraints. The object is immediately removed without undergoing conversion to a [**tombstone**](#gt_tombstone).
 
 <a id="Section_5.59"></a>
 ## 5.59 FILETIME
@@ -33032,7 +33032,7 @@ packet-beta
 
 **SidLen**: The length, in bytes, of the **Sid** field.
 
-**Sid**: The SID of a domain in the trusted forest, specified as a [SID](#Section_5.16.1.7) structure, which is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.
+**Sid**: The SID of a domain in the trusted forest, specified as a [SID](../MS-DTYP/MS-DTYP.md) structure, which is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.
 
 **DnsNameLen**: The length, in bytes, of the **DnsName** field.
 
@@ -33686,7 +33686,7 @@ ForestTrustDomainInfo = 2
 
 procedure ForestRootDomainNC(): DSName
 
-The ForestRootDomainNC procedure returns the [DSName](#Section_5.50) of the [**forest root domain NC**](#gt_forest-root-domain-nc).
+The ForestRootDomainNC procedure returns the [DSName](#Section_5.49) of the [**forest root domain NC**](#gt_forest-root-domain-nc).
 
 <a id="Section_5.67"></a>
 ## 5.67 FullReplicaExists
@@ -33926,7 +33926,7 @@ procedure GetDomainNC(o: DSName): DSName
 
 The GetDomainNC procedure returns one of the following:
 
-- The [DSName](#Section_5.50) of the [**NC**](#gt_naming-context-nc) in which the [**object**](#gt_object) whose DSName is *o* is located if *o* is in an application partition.
+- The [DSName](#Section_5.49) of the [**NC**](#gt_naming-context-nc) in which the [**object**](#gt_object) whose DSName is *o* is located if *o* is in an application partition.
 - The DSName of the NC that is the root for the [**domain**](#gt_domain) where *o* is located if *o* is in a domain partition.
 - NULL if the NC is not found or it is not of the [**DN**](#gt_distinguished-name-dn) form specified in [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327).
 <a id="Section_5.75"></a>
@@ -33941,14 +33941,14 @@ The GetDSNameFromAttrVal procedure extracts the [**DSName**](#gt_dsname) from th
 
 procedure GetDSNameFromDN(dn: unicodestring): DSName
 
-The GetDSNameFromDN procedure produces a [DSName](#Section_5.50) from *dn*. Let *d* represent the returned DSName. It is the case that d.dn = *dn*. If there is an [**object**](#gt_object) *o* in an [**NC replica**](#gt_nc-replica) hosted by the server such that *o*!distinguishedName = *dn*, then d.guid =*o*!objectGUID; otherwise, all fields of d.guid are zero. Furthermore, if *o*!objectSid ≠ null, then d.sid = *o*!o[objectSid](#Section_afac8414c6144c6ab31641f5978308bd); otherwise d.sid = null.
+The GetDSNameFromDN procedure produces a [DSName](#Section_5.49) from *dn*. Let *d* represent the returned DSName. It is the case that d.dn = *dn*. If there is an [**object**](#gt_object) *o* in an [**NC replica**](#gt_nc-replica) hosted by the server such that *o*!distinguishedName = *dn*, then d.guid =*o*!objectGUID; otherwise, all fields of d.guid are zero. Furthermore, if *o*!objectSid ≠ null, then d.sid = *o*!o[objectSid](#Section_5.16.2.1); otherwise d.sid = null.
 
 <a id="Section_5.77"></a>
 ## 5.77 GetDSNameFromNetworkAddress
 
 procedure GetDSNameFromNetworkAddress(n: NetworkAddress): DSName
 
-The GetDSNameFromNetworkAddress procedure produces a [DSName](#Section_5.50) from the [NetworkAddress](#Section_5.134) *n*. If *n* is an [**FQDN (1)**](#gt_fully-qualified-domain-name-fqdn) such that, for a [**DSA object**](#gt_ntdsdsa-object) *d*, there is a [**server object**](#gt_server-object) *s* such that *d*!parent = *s* and *s*!dnsHostName = *n*, then return the [**DSName**](#gt_dsname) of *d*. If *n* is in the format <DC-name>:<DC-identifier> as described in section 5.134, return the DSName of the DC's DSA object. Otherwise return NULL.
+The GetDSNameFromNetworkAddress procedure produces a [DSName](#Section_5.49) from the [NetworkAddress](#Section_5.134) *n*. If *n* is an [**FQDN (1)**](#gt_fully-qualified-domain-name-fqdn) such that, for a [**DSA object**](#gt_ntdsdsa-object) *d*, there is a [**server object**](#gt_server-object) *s* such that *d*!parent = *s* and *s*!dnsHostName = *n*, then return the [**DSName**](#gt_dsname) of *d*. If *n* is in the format <DC-name>:<DC-identifier> as described in section 5.134, return the DSName of the DC's DSA object. Otherwise return NULL.
 
 <a id="Section_5.78"></a>
 ## 5.78 GetForestFunctionalLevel
@@ -33976,7 +33976,7 @@ endif
 
 procedure GetFSMORoleOwner(role: integer): DSName
 
-The GetFSMORoleOwner procedure returns the [DSName](#Section_5.50) of the nTDSDSA [**object**](#gt_object) of the [**DC**](#gt_domain-controller-dc) that owns the [**FSMO role**](#gt_fsmo-role) specified by *role*. The following table lists the valid values for *role*.
+The GetFSMORoleOwner procedure returns the [DSName](#Section_5.49) of the nTDSDSA [**object**](#gt_object) of the [**DC**](#gt_domain-controller-dc) that owns the [**FSMO role**](#gt_fsmo-role) specified by *role*. The following table lists the valid values for *role*.
 
 | Symbolic constant | Value |
 | --- | --- |
@@ -33998,7 +33998,7 @@ The GetInstanceNameFromSPN procedure syntactically extracts and returns the inst
 
 procedure GetObjectNC(o: DSName): DSName
 
-The GetObjectNC procedure returns the [DSName](#Section_5.50) of the [**NC**](#gt_naming-context-nc) in which the [**object**](#gt_object) whose DSName is *o* is located, or returns NULL if the NC is not found or it is not of the [**DN**](#gt_distinguished-name-dn) form specified in [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327).
+The GetObjectNC procedure returns the [DSName](#Section_5.49) of the [**NC**](#gt_naming-context-nc) in which the [**object**](#gt_object) whose DSName is *o* is located, or returns NULL if the NC is not found or it is not of the [**DN**](#gt_distinguished-name-dn) form specified in [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327).
 
 <a id="Section_5.82"></a>
 ## 5.82 GetProxyEpoch
@@ -34350,7 +34350,7 @@ The IsGUIDBasedDNSName procedure returns true if *instanceName* is the DNS host 
 
 procedure IsMemberOfBuiltinAdminGroup(): boolean
 
-The IsMemberOfBuiltinAdminGroup procedure returns true if the client [**security context**](#gt_security-context), which MUST be retrieved using the method described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3, is a member of the BUILTIN\Administrators [**group**](#gt_group), and false if it is not. The BUILTIN\Administrators group is the group with the [**SID**](#gt_sid) S-1-5-32-544. [MS-SAMR](#Section_6) section 3.1.4.2 describes the accounts included in the built-in Administrators group by default.
+The IsMemberOfBuiltinAdminGroup procedure returns true if the client [**security context**](#gt_security-context), which MUST be retrieved using the method described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3, is a member of the BUILTIN\Administrators [**group**](#gt_group), and false if it is not. The BUILTIN\Administrators group is the group with the [**SID**](#gt_sid) S-1-5-32-544. [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.4.2 describes the accounts included in the built-in Administrators group by default.
 
 <a id="Section_5.104"></a>
 ## 5.104 IsRecycleBinEnabled
@@ -34549,7 +34549,7 @@ KCCFailedConnections is an [**abstract type**](#gt_abstract-type) consisting of 
 - **TimeFirstFailure**: A [FILETIME](#Section_5.59) that contains the time when the [**KCC**](#gt_knowledge-consistency-checker-kcc) noticed the first failure while contacting the DC.
 - **FailureCount**: An integer that contains the total number of failures the KCC encountered while contacting the DC.
 - **LastResult**: A [DWORD](#Section_5.52) that contains a [**Windows error code**](#gt_windows-error-code), as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.2, that indicates the reason for the last failure.
-The global variable [dc](#Section_5.30) for a DC has an associated field dc.kccFailedConnections, which maintains the DC's KCCFailedConnections state.
+The global variable [dc](#Section_4.1.29.2.3) for a DC has an associated field dc.kccFailedConnections, which maintains the DC's KCCFailedConnections state.
 
 <a id="Section_5.112"></a>
 ## 5.112 KCCFailedLinks
@@ -34558,7 +34558,7 @@ KCCFailedLinks is an [**abstract type**](#gt_abstract-type) that consists of a s
 
 The fields of the tuple are the same as the fields of the [KCCFailedConnections](#Section_5.111) tuple.
 
-The global variable [dc](#Section_5.30) for a DC has an associated field dc.kccFailedLinks, which maintains the DC's KCCFailedLinks state.
+The global variable [dc](#Section_4.1.29.2.3) for a DC has an associated field dc.kccFailedLinks, which maintains the DC's KCCFailedLinks state.
 
 <a id="Section_5.113"></a>
 ## 5.113 LARGE_INTEGER
@@ -35498,7 +35498,7 @@ LDAPConnections is an [**abstract type**](#gt_abstract-type) for the [**LDAP con
 - **totalRequests**: An integer that contains the total number of LDAP requests processed on the connection.
 - **userName**: A *unicodestring* (section [3.4.3](#Section_3.4.3)) that contains the name of the [**security principal**](#gt_security-principal) that opened the connection.
 - **fschemaUpgradeInProgress**: A Boolean that specifies certain constraint validations are skipped when adding, updating, or removing [**directory objects**](#gt_directory-object) on the opened connection. The skipped constraint validations are documented in the applicable constraint sections in [MS-ADTS](../MS-ADTS/MS-ADTS.md).
-The global variable [dc](#Section_5.30) for a DC has an associated field dc.ldapConnections, which maintains the DC's LDAPConnections state.
+The global variable [dc](#Section_4.1.29.2.3) for a DC has an associated field dc.ldapConnections, which maintains the DC's LDAPConnections state.
 
 <a id="Section_5.117"></a>
 ## 5.117 LinkStamp
@@ -35634,7 +35634,7 @@ remotePT: PrefixTable,
 
 remoteAttid : ATTRTYP) : ATTRTYP
 
-*Informative summary of behavior*: The LocalAttidFromRemoteAttid procedure converts the [**attribute**](#gt_attributes) ID *remoteAttid* based on the [**prefix table**](#gt_prefix-table) *remotePT* to an attribute ID based on [dc](#Section_5.30).prefixTable.
+*Informative summary of behavior*: The LocalAttidFromRemoteAttid procedure converts the [**attribute**](#gt_attributes) ID *remoteAttid* based on the [**prefix table**](#gt_prefix-table) *remotePT* to an attribute ID based on [dc](#Section_4.1.29.2.3).prefixTable.
 
 oid : OID
 
@@ -36002,7 +36002,7 @@ packet-beta
 
 PdcChangeLog is an [**abstract type**](#gt_abstract-type) for a sequence of [CHANGELOG_ENTRY](#Section_5.23) [**objects**](#gt_object). The change log is used to support [**replication**](#gt_replication) of certain [**Active Directory**](#gt_active-directory) changes to Windows NT 4.0 BDCs, and is specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.7.
 
-The global variable [dc](#Section_5.30) for a [**DC**](#gt_domain-controller-dc) has an associated field dc.pdcChangeLog. When a DC owns the [**PDC**](#gt_primary-domain-controller-pdc) [**FSMO role**](#gt_fsmo-role), this field contains its change log. As an implementation-specific behavior, other DCs might maintain the dc.pdcChangeLog field as well.
+The global variable [dc](#Section_4.1.29.2.3) for a [**DC**](#gt_domain-controller-dc) has an associated field dc.pdcChangeLog. When a DC owns the [**PDC**](#gt_primary-domain-controller-pdc) [**FSMO role**](#gt_fsmo-role), this field contains its change log. As an implementation-specific behavior, other DCs might maintain the dc.pdcChangeLog field as well.
 
 <a id="Section_5.151"></a>
 ## 5.151 PerformAddOperation
@@ -36027,7 +36027,7 @@ If data.ulFlags ∩ {ENTINF_DYNAMIC_OBJECT} = {ENTINF_DYNAMIC_OBJECT}, the resul
 
 If *fAsOriginating* is true, then add the object as an originating [**update**](#gt_update). See [MS-ADTS] section 3.1.1.1.9.
 
-If the add operation succeeds, the [DSName](#Section_5.50) of the created object is returned in *newObjectName* and the procedure returns 0. If the add operation fails, the procedure returns a [**Windows error code**](#gt_windows-error-code).
+If the add operation succeeds, the [DSName](#Section_5.49) of the created object is returned in *newObjectName* and the procedure returns 0. If the add operation fails, the procedure returns a [**Windows error code**](#gt_windows-error-code).
 
 <a id="Section_5.152"></a>
 ## 5.152 PerformAddOperationAsSystem
@@ -36146,7 +36146,7 @@ The RecycleObj procedure transforms, as described in [MS-ADTS](../MS-ADTS/MS-ADT
 
 procedure RemoveObj(o: DSName,treeDeletion: boolean): ULONG
 
-The RemoveObj procedure performs a delete operation on the [object](#gt_object) whose [DSName](#Section_5.50) is *o*. If the value of parameter *treeDeletion* is true, then the tree-delete variation of the operation is performed. As described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.5.5, the delete operation transforms the targeted object into a [deleted-object](#gt_deleted-object) or a [tombstone](#gt_tombstone), depending on the state of the [Recycle Bin](#gt_recycle-bin) [optional feature](#gt_optional-feature). The tree-delete operation performs, as described in [MS-ADTS] section 3.1.1.5.5.7.3, a delete operation on all objects in the subtree rooted at the [target object](#gt_target-object). All appropriate [attributes](#gt_attributes) (possibly including distinguishedName) are changed or removed from the deleted objects to conform to the invariants of [MS-ADTS] section 3.1.1.5.5. Any changes that need to be made to the objects are performed as an [originating update](#gt_originating-update), except for changes required to remove linked attribute values, which are simply removed from the [directory](#gt_directory). Attributes and values that already conform to the invariants are not changed. See [MS-ADTS] section 3.1.1.1.9 for more details on originating updates. If the delete operation succeeds, 0 is returned. Otherwise, this procedure returns an error code, as specified in [MS-ADTS] section 3.1.1.5.5, that indicates the reason for the failure.
+The RemoveObj procedure performs a delete operation on the [object](#gt_object) whose [DSName](#Section_5.49) is *o*. If the value of parameter *treeDeletion* is true, then the tree-delete variation of the operation is performed. As described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.5.5, the delete operation transforms the targeted object into a [deleted-object](#gt_deleted-object) or a [tombstone](#gt_tombstone), depending on the state of the [Recycle Bin](#gt_recycle-bin) [optional feature](#gt_optional-feature). The tree-delete operation performs, as described in [MS-ADTS] section 3.1.1.5.5.7.3, a delete operation on all objects in the subtree rooted at the [target object](#gt_target-object). All appropriate [attributes](#gt_attributes) (possibly including distinguishedName) are changed or removed from the deleted objects to conform to the invariants of [MS-ADTS] section 3.1.1.5.5. Any changes that need to be made to the objects are performed as an [originating update](#gt_originating-update), except for changes required to remove linked attribute values, which are simply removed from the [directory](#gt_directory). Attributes and values that already conform to the invariants are not changed. See [MS-ADTS] section 3.1.1.1.9 for more details on originating updates. If the delete operation succeeds, 0 is returned. Otherwise, this procedure returns an error code, as specified in [MS-ADTS] section 3.1.1.5.5, that indicates the reason for the failure.
 
 <a id="Section_5.162"></a>
 ## 5.162 REPLENTINFLIST
@@ -36199,7 +36199,7 @@ ReplicationQueue is an [**abstract type**](#gt_abstract-type) for queued pending
 - **DsaAddress**: A *unicodestring* (section 3.4.3) that contains the network address of the DC associated with the operation.
 - **UUIDNC**: A [GUID](#Section_5.87) that contains the objectGUID of the NC root of the NC replica associated with the operation.
 - **UUIDDsa**: A GUID that contains the [**DSA GUID**](#gt_dsa-guid) of the DC associated with the operation.
-The global variable [dc](#Section_5.30) for a DC has an associated field dc.replicationQueue, which maintains the DC's ReplicationQueue state.
+The global variable [dc](#Section_4.1.29.2.3) for a DC has an associated field dc.replicationQueue, which maintains the DC's ReplicationQueue state.
 
 <a id="Section_5.165"></a>
 ## 5.165 REPLTIMES
@@ -36561,7 +36561,7 @@ RPCClientContexts is an [**abstract type**](#gt_abstract-type) that is a sequenc
 - **TimeLastUsed**: A [FILETIME](#Section_5.59) that contains the last time a session corresponding to the context was used in an RPC method call.
 - **IPAddress**: A [DWORD](#Section_5.52) that contains the IPv4 address of the client associated with the context.
 - **PID**: An integer that contains the process ID passed in by the client as the pextClient argument of IDL_DRSBind while establishing the context.
-The global variable [dc](#Section_5.30) for a DC has an associated field dc.rpcClientContexts, which maintains the DC's RPCClientContexts state.
+The global variable [dc](#Section_4.1.29.2.3) for a DC has an associated field dc.rpcClientContexts, which maintains the DC's RPCClientContexts state.
 
 <a id="Section_5.178"></a>
 ## 5.178 RPCOutgoingContexts
@@ -36576,12 +36576,12 @@ RPCOutgoingContexts is an [**abstract type**](#gt_abstract-type) that is a seque
 - **BindingTimeOut**: An integer. If the context is set to be canceled, then this field contains the time-out, in minutes.
 - **CreateTime**: A [DSTIME](#Section_5.51) value that contains the time when the context was created.
 - **CallType**: An integer that indicates the type of RPC call that the DC is waiting on. See DS_REPL_SERVER_OUTGOING_CALL for possible values.
-The global variable [dc](#Section_5.30) for a DC has an associated field dc.rpcOutgoingContexts, which maintains the DC's RPCOutgoingContexts state.
+The global variable [dc](#Section_4.1.29.2.3) for a DC has an associated field dc.rpcOutgoingContexts, which maintains the DC's RPCOutgoingContexts state.
 
 <a id="Section_5.179"></a>
 ## 5.179 sAMAccountType Values
 
-sAMAccountType values describe information about various account type [**objects**](#gt_object). See [MS-SAMR](#Section_6) section 2.2.1.9 for descriptions of these values.
+sAMAccountType values describe information about various account type [**objects**](#gt_object). See [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.9 for descriptions of these values.
 
 | Symbolic name | Value |
 | --- | --- |
@@ -36617,7 +36617,7 @@ typedef struct {
 
 procedure SchemaInfo(): sequence of BYTE
 
-The SchemaInfo procedure returns the value of the schemaInfo attribute on the object [dc](#Section_5.30).schemaNC or a default value if that attribute has no value.
+The SchemaInfo procedure returns the value of the schemaInfo attribute on the object [dc](#Section_4.1.29.2.3).schemaNC or a default value if that attribute has no value.
 
 if dc.schemaNC()!schemaInfo = null then
 
@@ -36634,7 +36634,7 @@ endif
 
 procedure SchemaNC(): DSName
 
-The SchemaNC procedure returns the [DSName](#Section_5.50) of [dc](#Section_5.30).schemaNC.
+The SchemaNC procedure returns the [DSName](#Section_5.49) of [dc](#Section_4.1.29.2.3).schemaNC.
 
 <a id="Section_5.183"></a>
 ## 5.183 SchemaObj
@@ -36664,7 +36664,7 @@ A [**concrete type**](#gt_concrete-type) for the Windows NT operating system **S
 
 procedure SidFromStringSid(stringSID: unicodestring): SID
 
-The SidFromStringSid procedure converts the string representation of a [**SID**](#gt_sid) specified in *stringSID* (for example, S-1-5-3) to the [SID](#Section_5.16.1.7) type, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2. See [MS-DTYP] section 2.4.2.1 for the string representation of a SID.
+The SidFromStringSid procedure converts the string representation of a [**SID**](#gt_sid) specified in *stringSID* (for example, S-1-5-3) to the [SID](../MS-DTYP/MS-DTYP.md) type, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2. See [MS-DTYP] section 2.4.2.1 for the string representation of a SID.
 
 <a id="Section_5.187"></a>
 ## 5.187 StampLessThanOrEqualUTD
@@ -36705,7 +36705,7 @@ The StartsWith procedure returns true if the string *p* is a prefix of string *s
 
 procedure StringSidFromSid(sid: SID): unicodestring
 
-The StringSidFromSid procedure converts a binary [SID](#Section_5.16.1.7) specified in *sid* to the string representation of a [**SID**](#gt_sid) (for example, S-1-5-3). See [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.1 for the string representation of a SID.
+The StringSidFromSid procedure converts a binary [SID](../MS-DTYP/MS-DTYP.md) specified in *sid* to the string representation of a [**SID**](#gt_sid) (for example, S-1-5-3). See [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.1 for the string representation of a SID.
 
 <a id="Section_5.190"></a>
 ## 5.190 SubString
@@ -37329,7 +37329,7 @@ a: ATTRVAL, s: Syntax, t: PrefixTable) : Value
 
 The ValueFromATTRVAL procedure converts a value of syntax *s* expressed as a concrete [ATTRVAL](#Section_5.16) *a* into the abstract [Value](#Section_5.214) encoding, using the [**prefix table**](#gt_prefix-table) represented by *t*.
 
-See section [5.16.3](#Section_5.16.2) for the specification of this procedure.
+See section [5.16.3](#Section_5.16.3) for the specification of this procedure.
 
 <a id="Section_5.219"></a>
 ## 5.219 VAR_SIZE_BUFFER_WITH_VERSION
@@ -37369,7 +37369,7 @@ A [**concrete type**](#gt_concrete-type), as specified in [MS-DTYP](../MS-DTYP/M
 <a id="Section_6.1"></a>
 ## 6.1 Security Considerations for Implementers
 
-General security considerations for this protocol are specified in section [2.2](#Section_4.1.10.1). Security considerations for an individual method are specified in the subsection of section [4](#Section_4) that describes the behavior of that method.
+General security considerations for this protocol are specified in section [2.2](#Section_2.2). Security considerations for an individual method are specified in the subsection of section [4](#Section_4) that describes the behavior of that method.
 
 <a id="Section_6.2"></a>
 ## 6.2 Index of Security Parameters
@@ -40546,24 +40546,24 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | Data type or IDL method | Section | Introduced in Windows Server release |
 | --- | --- | --- |
 | DRS_MSG_GETCHGREQ_V7 support | [4.1.10.2.5](#Section_4.1.10.2.5) | Windows Server 2003 |
-| DRS_MSG_GETREPLINFO_REQ_V2 | [4.1.13.1.3](#Section_4.1.13.1.1) | Windows Server 2003 |
-| DRS_MSG_DCINFOREPLY_V3 | [4.1.5.1.6](#Section_4.1.5.1.3) | Windows Server 2008 |
+| DRS_MSG_GETREPLINFO_REQ_V2 | [4.1.13.1.3](#Section_4.1.13.1.3) | Windows Server 2003 |
+| DRS_MSG_DCINFOREPLY_V3 | [4.1.5.1.6](#Section_4.1.5.1.6) | Windows Server 2008 |
 | DS_DOMAIN_CONTROLLER_INFO_3W | [4.1.5.1.10](#Section_4.1.5.1.10) | Windows Server 2008 |
 | DRS_MSG_GETCHGREQ_V8 support | [4.1.10.2.6](#Section_4.1.10.2.6) | Windows Server 2003 |
 | DRS_MSG_GETCHGREQ_V10 support | [4.1.10.2.7](#Section_4.1.10.2.7) | Windows Server 2008 R2 |
 | DRS_MSG_GETCHGREPLY_V6 support | [4.1.10.2.12](#Section_4.1.10.2.12) | Windows Server 2003 |
 | DRS_MSG_GETCHGREPLY_V7 support | [4.1.10.2.13](#Section_4.1.10.2.13) | Windows Server 2003 |
 | DRS_MSG_GETCHGREPLY_V9 support | [4.1.10.2.14](#Section_4.1.10.2.14) | Windows Server 2016 |
-| DRS_MSG_ADDENTRYREQ_V3 support | [4.1.1.1.4](#Section_4.1.1.1.1) | Windows Server 2003 |
+| DRS_MSG_ADDENTRYREQ_V3 support | [4.1.1.1.4](#Section_4.1.1.1.4) | Windows Server 2003 |
 | DRS_MSG_ADDENTRYREPLY_V3 support | [4.1.1.1.8](#Section_4.1.1.1.8) | Windows Server 2003 |
-| IDL_DRSGetObjectExistence | [4.1.12](#Section_4.1.12.5) | Windows Server 2003 |
-| IDL_DRSReplicaVerifyObjects | [4.1.24](#Section_4.1.24.3) | Windows Server 2003 |
-| IDL_DRSFinishDemotion | [4.1.7](#Section_4.1.7.3) | Windows Server 2008 |
-| IDL_DRSInitDemotion | [4.1.14](#Section_4.1.14.2) | Windows Server 2008 |
+| IDL_DRSGetObjectExistence | [4.1.12](#Section_4.1.12) | Windows Server 2003 |
+| IDL_DRSReplicaVerifyObjects | [4.1.24](#Section_4.1.24) | Windows Server 2003 |
+| IDL_DRSFinishDemotion | [4.1.7](#Section_4.1.7) | Windows Server 2008 |
+| IDL_DRSInitDemotion | [4.1.14](#Section_4.1.14) | Windows Server 2008 |
 | IDL_DRSReplicaDemotion | [4.1.21](#Section_4.1.21) | Windows Server 2008 |
-| IDL_DRSAddCloneDC | [4.1.29](#Section_4.1.29.3) | Windows Server 2012 |
+| IDL_DRSAddCloneDC | [4.1.29](#Section_4.1.29) | Windows Server 2012 |
 | IDL_DRSWriteNgcKey | [4.1.30](#Section_4.1.30) | Windows Server 2016 |
-| IDL_DRSReadNgcKey | [4.1.31](#Section_4.1.31.2) | Windows Server 2016 |
+| IDL_DRSReadNgcKey | [4.1.31](#Section_4.1.31) | Windows Server 2016 |
 | DRS_MSG_GETCHGREQ_V11 support | [4.1.10.2.8](#Section_4.1.10.2.8) | Windows Server v1803 operating system |
 | DRS_MSG_REPADD_V3 support | [4.1.19.1.4](#Section_4.1.19.1.4) | Windows Server v1803 |
 | DRS_MSG_REPSYNC_V2 support | [4.1.23.1.3](#Section_4.1.23.1.3) | Windows Server v1803 |
@@ -40575,7 +40575,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <8> Section 4.1.1.3: This operation is only supported by [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) and AD DS in Windows Server 2008 and later.
 
-<9> Section 4.1.2.2.6: The function determines whether auditing is enabled on the server by querying the LSA information policy on the server associated with *ctx* and by confirming that the information policy is set to generate both success and failure audits for the "account management" audit category. To achieve this, the LsarOpenPolicy2, LsarQueryInformationPolicy, and LsarClose messages in [MS-LSAD](#Section_6) are used ([MS-LSAD] sections 3.1.4.4.1, 3.1.4.4.4, and 3.1.4.9.4). The **srcDomainController** variable in the [IDL_DRSAddSidHistory](#Section_4.1.2.3) method is used as the *SystemName* parameter to LsarOpenPolicy2, and the *DesiredAccess* parameter to LsarOpenPolicy2 is set to (POLICY_VIEW_AUDIT_INFORMATION + POLICY_VIEW_LOCAL_INFORMATION). On success, the *PolicyHandle* acquired from the LsarOpenPolicy2 message is passed to LsarQueryInformationPolicy with PolicyAuditEventsInformation as the information [**class**](#gt_class). The check to determine whether success and failure audits are enabled for "account management" is achieved by performing the following evaluation:
+<9> Section 4.1.2.2.6: The function determines whether auditing is enabled on the server by querying the LSA information policy on the server associated with *ctx* and by confirming that the information policy is set to generate both success and failure audits for the "account management" audit category. To achieve this, the LsarOpenPolicy2, LsarQueryInformationPolicy, and LsarClose messages in [MS-LSAD](../MS-LSAD/MS-LSAD.md) are used ([MS-LSAD] sections 3.1.4.4.1, 3.1.4.4.4, and 3.1.4.9.4). The **srcDomainController** variable in the [IDL_DRSAddSidHistory](#Section_4.1.2) method is used as the *SystemName* parameter to LsarOpenPolicy2, and the *DesiredAccess* parameter to LsarOpenPolicy2 is set to (POLICY_VIEW_AUDIT_INFORMATION + POLICY_VIEW_LOCAL_INFORMATION). On success, the *PolicyHandle* acquired from the LsarOpenPolicy2 message is passed to LsarQueryInformationPolicy with PolicyAuditEventsInformation as the information [**class**](#gt_class). The check to determine whether success and failure audits are enabled for "account management" is achieved by performing the following evaluation:
 
 PolicyInformation^.PolicyAuditEventsInfo.EventAuditingOptions[6] ∩
 
@@ -40587,7 +40587,7 @@ where *PolicyInformation* is the result from the LsarQueryInformationPolicy mess
 
 The function generates an audit on the DC associated with *ctx* by adding the source [**principal**](#gt_principal) *(pmsgIn^.V1.SrcPrincipal*, where *pmsgIn* is a parameter to the IDL_DRSAddSidHistory method, which in turn calls this method) to the [**group**](#gt_group) *srcDomainFlatName*$$$ on the DC associated with *ctx*, where *srcDomainFlatName* is the NetBIOS name of the [**domain**](#gt_domain) to which the source principal belongs. After adding the principal to the group, it then removes the principal from the group, leaving the group in its original state but having generated an audit event as a side effect of manipulating the group's membership.
 
-<10> Section 4.1.2.2.13: This test is implemented in two steps. First, it is determined if the DC associated with *ctx* is running at least Windows 2000. This is determined by whether a SamrConnect5 or SamrConnect4 API call (as specified in [MS-SAMR](#Section_6)) to the DC is successful. If it is, the DC is running at least Windows 2000, and the function returns true.
+<10> Section 4.1.2.2.13: This test is implemented in two steps. First, it is determined if the DC associated with *ctx* is running at least Windows 2000. This is determined by whether a SamrConnect5 or SamrConnect4 API call (as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md)) to the DC is successful. If it is, the DC is running at least Windows 2000, and the function returns true.
 
 Otherwise, the DC is considered to be running Windows NT 4.0 operating system. The function then connects to the registry service on the DC named in *ctx* and queries the value of the "CSDVersion" registry value on the "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" registry key. If the value is not equal to any of the following strings, the function returns true; otherwise, it returns false:
 
@@ -40597,7 +40597,7 @@ Otherwise, the DC is considered to be running Windows NT 4.0 operating system. T
 - Service Pack 3
 If the registry service on the DC could not be contacted, or if the registry key or registry value does not exist, the function returns false.
 
-<11> Section 4.1.3.1: Windows non-DC client callers always pass NTDSAPI_CLIENT_GUID in *puuidClientDsa*. If a Windows DC client caller uses the returned DRS_HANDLE for subsequent calls to the [IDL_DRSWriteSPN](#Section_4.1.28.3) method, then the client passes NTDSAPI_CLIENT_GUID in *puuidClientDsa*. In any other cases, Windows DC client callers pass DC!serverGuid in *puuidClientDsa*.
+<11> Section 4.1.3.1: Windows non-DC client callers always pass NTDSAPI_CLIENT_GUID in *puuidClientDsa*. If a Windows DC client caller uses the returned DRS_HANDLE for subsequent calls to the [IDL_DRSWriteSPN](#Section_4.1.28) method, then the client passes NTDSAPI_CLIENT_GUID in *puuidClientDsa*. In any other cases, Windows DC client callers pass DC!serverGuid in *puuidClientDsa*.
 
 <12> Section 4.1.3.1: Windows non-DC client callers always set the **dwFlags** field of the [DRS_EXTENSIONS_INT](#Section_5.39) structure to zero. Windows non-DC client callers always set the **SiteObjGuid** field of the DRS_EXTENSIONS_INT structure to the [**NULL GUID**](#gt_null-guid) value. Windows non-DC client callers always set the **Pid** field of the DRS_EXTENSIONS_INT structure to an implementation-specific, client-local process identifier (PID).
 
@@ -40617,7 +40617,7 @@ Windows non-DC clients do not include the following fields in the DRS_EXTENSIONS
 | --- | --- |
 | 3 | Windows Server 2008 |
 
-<15> Section 4.1.6.3: The Windows implementation of this method puts the [**KCC**](#gt_knowledge-consistency-checker-kcc) execution requests in a local-machine work queue. If DS_KCC_FLAG_DAMPED is specified in the call to [IDL_DRSExecuteKCC](#Section_4.1.6.3) and there is already a request pending, the execution request is not added to the queue in order to reduce redundant requests.
+<15> Section 4.1.6.3: The Windows implementation of this method puts the [**KCC**](#gt_knowledge-consistency-checker-kcc) execution requests in a local-machine work queue. If DS_KCC_FLAG_DAMPED is specified in the call to [IDL_DRSExecuteKCC](#Section_4.1.6) and there is already a request pending, the execution request is not added to the queue in order to reduce redundant requests.
 
 <16> Section 4.1.7.3: The Windows implementation of the IDL_DRSFinishDemotion method causes the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md) to throw an RPC_S_INVALID_TAG exception when returning ERROR_INVALID_PARAMETER.
 

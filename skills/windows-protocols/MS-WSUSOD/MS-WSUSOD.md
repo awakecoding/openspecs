@@ -231,7 +231,7 @@ This document uses the following terms:
 <a id="Section_1.3"></a>
 ## 1.3 References
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
 [MS-GPOL] Microsoft Corporation, "[Group Policy: Core Protocol](../MS-GPOL/MS-GPOL.md)".
 
@@ -430,7 +430,7 @@ WSUS can depend on other systems or external entities to provide configuration d
 <a id="Section_2.3.2.4"></a>
 #### 2.3.2.4 External Configuration System
 
-An external system that provides configuration data can be used to configure clients of WSUS. One such system is Group Policy [MS-GPOD](#Section_2.1).
+An external system that provides configuration data can be used to configure clients of WSUS. One such system is Group Policy [MS-GPOD](../MS-GPOD/MS-GPOD.md).
 
 An external configuration system can influence WSUS by configuring a client's ADM values for:
 
@@ -466,7 +466,7 @@ The actors that participate in the WSUS use cases are:
 
 **Client management tool**: A tool that provides a management interface to the [**update client**](#gt_update-client). The primary interest of the client management tool is to enable a computer user to read and update the update client configuration, start a scan for updates, and control the download and installation of updates.
 
-**Configuration system**: A supporting actor that is used by the WSUS administrator to assign user-specified values to distribute configuration settings that control the client's behavior. An example of such a configuration system is Group Policy, as described in [MS-GPOD](#Section_2.1).
+**Configuration system**: A supporting actor that is used by the WSUS administrator to assign user-specified values to distribute configuration settings that control the client's behavior. An example of such a configuration system is Group Policy, as described in [MS-GPOD](../MS-GPOD/MS-GPOD.md).
 
 <a id="Section_2.5.2"></a>
 ### 2.5.2 Use Case Summary Diagram
@@ -702,7 +702,7 @@ Supporting Actors: A configuration system such as Group Policy.
 
 Stakeholders and Interests:
 
-- A client management tool, as described in section [2.5.1](#Section_2.1), enables a computer user to read and update the [**update client**](#gt_update-client) configuration.
+- A client management tool, as described in section [2.5.1](#Section_2.5.1), enables a computer user to read and update the [**update client**](#gt_update-client) configuration.
 - Computer users, as described in section 2.5.1, expect that after this use case is executed, the client behaves in a manner consistent with the new configuration.
 - WSUS administrators, as described in section 2.5.1, can execute this use case on [**client computers**](#gt_client-computer) they manage in order to apply an organizational policy regarding client configuration.
 Preconditions:
@@ -749,7 +749,7 @@ Supporting Actors: None.
 
 Stakeholders and Interests:
 
-- A client management tool, as described in section [2.5.1](#Section_2.1), enables a computer user to start a scan for updates.
+- A client management tool, as described in section [2.5.1](#Section_2.5.1), enables a computer user to start a scan for updates.
 - Computer users, as described in section 2.5.1, expect that after this use case is executed, the results of the update scan are reported back to the computer user.
 - [**WSUS administrators**](#gt_wsus-administrator), as described in section 2.5.1 can execute this use case to understand the set of updates that are applicable to a given computer, or to understand the set of computers to which a given update is applicable.
 Preconditions:
@@ -789,7 +789,7 @@ Supporting Actors: None.
 
 Stakeholders and Interests:
 
-- A client management tool, as described in section [2.5.1](#Section_2.1), enables a Computer User to control the download and installation of updates.
+- A client management tool, as described in section [2.5.1](#Section_2.5.1), enables a Computer User to control the download and installation of updates.
 - Computer users, as described in section 2.5.1, expect that after this use case is executed, their computer is up-to-date.
 Preconditions:
 
@@ -1043,9 +1043,9 @@ Reporting data synchronization specifies message processing and sequencing for t
 <a id="Section_3.6"></a>
 ## 3.6 Example 6: Update Client Is Pointed to a New Update Server
 
-In this example, the goal of the scenario is for a particular update client to synchronize [**update metadata**](#gt_update-metadata) and deployments from a different update server than it used for its previous [**synchronization**](#gt_synchronization). This is part of both the Configure Update Client and the Start Update Scan use cases. This scenario supports the Configure Update Client - Computer User use case in section [2.5.3.6](#Section_2.1) and the Start Update Scan - Computer User use case in section [2.5.3.7](#Section_2.5.3.7).
+In this example, the goal of the scenario is for a particular update client to synchronize [**update metadata**](#gt_update-metadata) and deployments from a different update server than it used for its previous [**synchronization**](#gt_synchronization). This is part of both the Configure Update Client and the Start Update Scan use cases. This scenario supports the Configure Update Client - Computer User use case in section [2.5.3.6](#Section_2.5.3.6) and the Start Update Scan - Computer User use case in section [2.5.3.7](#Section_2.5.3.7).
 
-This scenario can be initiated by a [**WSUS administrator**](#gt_wsus-administrator) by means of a management system (such as described in [MS-GPOD](#Section_2.1)) or by a user by means of a client management tool. After this scenario occurs successfully, the [**update client**](#gt_update-client) has synchronized update metadata and deployment from the new update server and purged cached data from the old [**update server**](#gt_update-server).
+This scenario can be initiated by a [**WSUS administrator**](#gt_wsus-administrator) by means of a management system (such as described in [MS-GPOD](../MS-GPOD/MS-GPOD.md)) or by a user by means of a client management tool. After this scenario occurs successfully, the [**update client**](#gt_update-client) has synchronized update metadata and deployment from the new update server and purged cached data from the old [**update server**](#gt_update-server).
 
 The following sequence diagram illustrates the interactions between client and server during this scenario. Note that in this diagram, the update client begins by attempting a differential update synchronization and then detects that its update server has changed.
 

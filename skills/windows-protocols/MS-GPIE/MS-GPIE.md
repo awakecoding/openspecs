@@ -203,9 +203,9 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_1.3)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDN-BMPST] Microsoft Corporation, "Bitmap Storage", [http://msdn.microsoft.com/en-us/library/dd183391(VS.85).aspx](https://go.microsoft.com/fwlink/?LinkId=222603)
 
@@ -268,7 +268,7 @@ The Group Policy: Core Protocol specifies how a client can learn of an updated p
 
 The Group Policy: Internet Explorer Maintenance Extension protocol is initiated only as part of the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 1.3.3. The Group Policy: Internet Explorer Maintenance Extension protocol is dependent on the Group Policy: Core Protocol to provide it with the remote storage location for the configuration data, as specified in [MS-GPOL] and for transmitting Group Policy settings and instructions between the [**client**](#gt_client) and the Group Policy server. The Group Policy: Internet Explorer Maintenance Extension protocol is also indirectly dependent on the [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap) via the Group Policy: Core Protocol.
 
-The Group Policy: Internet Explorer Maintenance Extension protocol uses remote file access to read and write files on the remote storage location. See [MS-WPO](#Section_1.3) section 6.4 for an overview of remote file access.
+The Group Policy: Internet Explorer Maintenance Extension protocol uses remote file access to read and write files on the remote storage location. See [MS-WPO](../MS-WPO/MS-WPO.md) section 6.4 for an overview of remote file access.
 
 ![Group Policy: Internet Explorer Maintenance Extension protocol relationship diagram](media/image1.png)
 
@@ -310,7 +310,7 @@ The Group Policy: Internet Explorer Maintenance Extension protocol defines [**cl
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-All messages are exchanged by copying files, using remote file access as described in [MS-FASOD](#Section_1.3).
+All messages are exchanged by copying files, using remote file access as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md).
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -356,7 +356,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-When the administrative tool plug-in is initialized, it retrieves the extension's GPO settings as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.7, and uses remote file access to read the contents of the various configuration files which are located under [**SYSVOL**](#gt_system-volume-sysvol) as described in section [2.2](../MS-GPOL/MS-GPOL.md).
+When the administrative tool plug-in is initialized, it retrieves the extension's GPO settings as described in [MS-GPOL](../MS-GPOL/MS-GPOL.md) section 2.2.7, and uses remote file access to read the contents of the various configuration files which are located under [**SYSVOL**](#gt_system-volume-sysvol) as described in section [2.2](#Section_2.2).
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
@@ -798,7 +798,7 @@ Optional. Value to set. Can be a 32-bit number in little-endian format, an [**AN
 <a id="Section_4.1.3.2"></a>
 #### 4.1.3.2 Seczrsop.INF File Format
 
-An informative description of the specific relevant setting names and legal values for Seczrsop.inf follows, which uses the definitions of value type from section [4.1.1](#Section_4.1.1). An example of this file format is provided in section [4.4](#Section_4.1.3.2). Note that the values of these settings are not to be interpreted by the Group Policy: Internet Explorer Maintenance Extension protocol; they are merely applied as-is to Internet Explorer, which can interpret them in a way that is independent of the protocol or mechanism that is used to configure them.
+An informative description of the specific relevant setting names and legal values for Seczrsop.inf follows, which uses the definitions of value type from section [4.1.1](#Section_4.1.1). An example of this file format is provided in section [4.4](#Section_4.4). Note that the values of these settings are not to be interpreted by the Group Policy: Internet Explorer Maintenance Extension protocol; they are merely applied as-is to Internet Explorer, which can interpret them in a way that is independent of the protocol or mechanism that is used to configure them.
 
 The following table sections repeat per zone for the total count of zones. For example, for a count of 2 zones, the following sections would be Zone0_ HKCU, Zone0_ HKLM, Zone1_ HKCU, and Zone1_ HKLM.
 

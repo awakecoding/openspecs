@@ -193,10 +193,10 @@ This document uses the following terms:
 **access control entry (ACE)**: An entry in an access control list (ACL) that contains a set of user rights and a [**security identifier (SID)**](#gt_security-identifier-sid) that identifies a principal for whom the rights are allowed, denied, or audited.
 
 <a id="gt_account-domain"></a>
-**account domain**: A [**domain**](#gt_domain), identified by a [**security identifier (SID)**](#gt_security-identifier-sid), that is the [**SID**](#gt_security-identifier-sid) namespace for which a given machine is authoritative. The [**account domain**](#gt_account-domain) is the same as the primary domain for a [**domain controller (DC)**](#gt_domain-controller-dc) and is its default [**domain**](#gt_domain). For a machine that is joined to a [**domain**](#gt_domain), the [**account domain**](#gt_account-domain) is the [**SID**](#gt_security-identifier-sid) namespace defined by the local Security Accounts Manager [MS-SAMR](#Section_5).
+**account domain**: A [**domain**](#gt_domain), identified by a [**security identifier (SID)**](#gt_security-identifier-sid), that is the [**SID**](#gt_security-identifier-sid) namespace for which a given machine is authoritative. The [**account domain**](#gt_account-domain) is the same as the primary domain for a [**domain controller (DC)**](#gt_domain-controller-dc) and is its default [**domain**](#gt_domain). For a machine that is joined to a [**domain**](#gt_domain), the [**account domain**](#gt_account-domain) is the [**SID**](#gt_security-identifier-sid) namespace defined by the local Security Accounts Manager [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-user"></a>
 **active user**: A user that is currently authenticated on a computer.
@@ -373,7 +373,7 @@ This document uses the following terms:
 **schema**: The set of attributes and object classes that govern the creation and update of objects.
 
 <a id="gt_security-context"></a>
-**security context**: An abstract data structure that contains authorization information for a particular [**security principal**](#gt_security-principal) in the form of a Token/Authorization Context (see [MS-DTYP](#Section_2.2.2) section 2.5.2). A server uses the authorization information in a [**security context**](#gt_security-context) to check access to requested resources. A [**security context**](#gt_security-context) also contains a key identifier that associates mutually established cryptographic keys, along with other information needed to perform secure communication with another security principal.
+**security context**: An abstract data structure that contains authorization information for a particular [**security principal**](#gt_security-principal) in the form of a Token/Authorization Context (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2). A server uses the authorization information in a [**security context**](#gt_security-context) to check access to requested resources. A [**security context**](#gt_security-context) also contains a key identifier that associates mutually established cryptographic keys, along with other information needed to perform secure communication with another security principal.
 
 <a id="gt_security-descriptor"></a>
 **security descriptor**: A data structure containing the security information associated with a securable object. A [**security descriptor**](#gt_security-descriptor) identifies an object's owner by its [**security identifier (SID)**](#gt_security-identifier-sid). If access control is configured for the object, its [**security descriptor**](#gt_security-descriptor) contains a discretionary access control list (DACL) with [**SIDs**](#gt_security-identifier-sid) for the [**security principals**](#gt_security-principal) who are allowed or denied access. Applications use this structure to set and query an object's security status. The [**security descriptor**](#gt_security-descriptor) is used to guard access to an object as well as to control which type of auditing takes place when the object is accessed. The [**security descriptor**](#gt_security-descriptor) format is specified in [MS-DTYP] section 2.4.6; a string representation of [**security descriptors**](#gt_security-descriptor), called SDDL, is specified in [MS-DTYP] section 2.5.1.
@@ -479,19 +479,19 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DRSR] Microsoft Corporation, "[Directory Replication Service (DRS) Remote Protocol](../MS-DRSR/MS-DRSR.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.2)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SMB2] Microsoft Corporation, "[Server Message Block (SMB) Protocol Versions 2 and 3](../MS-SMB2/MS-SMB2.md)".
 
@@ -536,9 +536,9 @@ We conduct frequent surveys of the normative references to assure their continue
 
 **Note** Subscripton login or purchase to download the PDF
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_1.3)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MSFT-AUTOENROLLMENT] Microsoft Corporation, "Certificate Autoenrollment in Windows Server 2003", April 2003, [http://technet.microsoft.com/en-us/library/cc778954.aspx](https://go.microsoft.com/fwlink/?LinkId=90178)
 
@@ -588,11 +588,11 @@ The server-side protocol relationships are illustrated in the following diagram:
 
 Figure 2: Server relationships among the Workstation Service Remote Protocol and supporting protocols
 
-The server dependency on the [**Local Security Authority (LSA)**](#gt_local-security-authority-lsa) **(Domain Policy) Remote Protocol** [MS-LSAD](#Section_5) shown in the figure is a shared-state dependency resulting from the Workstation Service Remote Protocol depending on **Access Check Algorithm Pseudocode** ([MS-DTYP](#Section_2.2.2) section 2.5.3.2), which in turn depends on the state in that protocol. This protocol also depends on additional state that is maintained by the LSA (Domain Policy) Remote Protocol (section [3.2.1.6.1](../MS-LSAD/MS-LSAD.md)).
+The server dependency on the [**Local Security Authority (LSA)**](#gt_local-security-authority-lsa) **(Domain Policy) Remote Protocol** [MS-LSAD](../MS-LSAD/MS-LSAD.md) shown in the figure is a shared-state dependency resulting from the Workstation Service Remote Protocol depending on **Access Check Algorithm Pseudocode** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2), which in turn depends on the state in that protocol. This protocol also depends on additional state that is maintained by the LSA (Domain Policy) Remote Protocol (section [3.2.1.6.1](../MS-LSAD/MS-LSAD.md)).
 
 The Workstation Service Remote Protocol server uses SMB to create [**SMB sessions**](#gt_smb-session) and to establish and reuse [**authenticated (2)**](#gt_authentication) and unauthenticated connections ([MS-SMB] section 3.2.4.2).
 
-The server invokes the [**domain join**](#gt_domain-join) and unjoin tasks (sections [3.2.4.13](#Section_3.2.4.13.2) and [3.2.4.14](#Section_3.2.4.14)), and it depends on [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) and [**Active Directory**](#gt_active-directory) communication ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7) for querying and updating objects.
+The server invokes the [**domain join**](#gt_domain-join) and unjoin tasks (sections [3.2.4.13](#Section_3.2.4.13) and [3.2.4.14](#Section_3.2.4.14)), and it depends on [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) and [**Active Directory**](#gt_active-directory) communication ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7) for querying and updating objects.
 
 The Workstation Service Remote Protocol server also depends on:
 
@@ -600,7 +600,7 @@ The Workstation Service Remote Protocol server also depends on:
 - Read/write access to the **domain-secret** state variable in Active Directory ([MS-ADTS] section 6.4.1). In [**Netlogon**](#gt_netlogon) it is called the [**shared secret**](#gt_shared-secret) ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.1.1).
 - The data model for account representation in the domain ([MS-ADTS] section 6.4.2).
 - The **DsrGetDcNameEx2** method ([MS-NRPC] section 3.5.4.3.1) for [**DC**](#gt_domain-controller-dc)-location functionality.
-- The **Security Account Manager (SAM) Remote Protocol (Client-to-Server)** [MS-SAMR](#Section_5) for performing updates to the computer account (section [3.2.4.29.4](#Section_3.2.4.29.4)).
+- The **Security Account Manager (SAM) Remote Protocol (Client-to-Server)** [MS-SAMR](../MS-SAMR/MS-SAMR.md) for performing updates to the computer account (section [3.2.4.29.4](#Section_3.2.4.29.4)).
 No other protocol depends on the Workstation Service Remote Protocol.
 
 <a id="Section_1.5"></a>
@@ -660,7 +660,7 @@ This protocol allows any user to establish a connection to the RPC [**server (2)
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
 
-In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), [MS-RPCE](../MS-RPCE/MS-RPCE.md), and [MS-DTYP](#Section_2.2.2), the following data types are defined in the [**Microsoft Interface Definition Language (MIDL)**](#gt_microsoft-interface-definition-language-midl) specification for this RPC interface.
+In addition to [**RPC**](#gt_remote-procedure-call-rpc) base types [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), [MS-RPCE](../MS-RPCE/MS-RPCE.md), and [MS-DTYP](../MS-DTYP/MS-DTYP.md), the following data types are defined in the [**Microsoft Interface Definition Language (MIDL)**](#gt_microsoft-interface-definition-language-midl) specification for this RPC interface.
 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Constants
@@ -710,7 +710,7 @@ A null-terminated [**Unicode**](#gt_unicode) string that identifies the remote c
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 handle_t
 
-A concrete type for an [**RPC**](#gt_remote-procedure-call-rpc) binding [**handle**](#gt_handle) ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 4.2.9.7 and [MS-DTYP](#Section_2.2.2) section 2.1.3). The [**client**](#gt_client) MUST set the impersonation level to **SECURITY_IMPERSONATION** ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.10) for the RPC connection that refers to this handle.
+A concrete type for an [**RPC**](#gt_remote-procedure-call-rpc) binding [**handle**](#gt_handle) ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 4.2.9.7 and [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.1.3). The [**client**](#gt_client) MUST set the impersonation level to **SECURITY_IMPERSONATION** ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.10) for the RPC connection that refers to this handle.
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Enumerations
@@ -860,17 +860,17 @@ LPWKSTA_INFO_1046 WkstaInfo1046;
 
 *LPWKSTA_INFO;
 
-**WkstaInfo100:** Details about the computer environment (section [2.2.5.1](#Section_2.2.4.1))
+**WkstaInfo100:** Details about the computer environment (section [2.2.5.1](#Section_2.2.5.1))
 
 **WkstaInfo101:** Details about the computer environment (section [2.2.5.2](#Section_2.2.5.2)).
 
-**WkstaInfo102:** Details about the computer environment (section [2.2.5.3](#Section_2.2.4.1)).
+**WkstaInfo102:** Details about the computer environment (section [2.2.5.3](#Section_2.2.5.3)).
 
 **WkstaInfo502:** Details about the computer environment (section [2.2.5.4](#Section_2.2.5.4)).
 
-**WkstaInfo1013:** Details about the state of the [**SMB**](#gt_server-message-block-smb) [**network redirector**](#gt_network-redirector) (section [2.2.5.5](#Section_2.2.5.2)).
+**WkstaInfo1013:** Details about the state of the [**SMB**](#gt_server-message-block-smb) [**network redirector**](#gt_network-redirector) (section [2.2.5.5](#Section_2.2.5.5)).
 
-**WkstaInfo1018:** Details about the state of the SMB network redirector (section [2.2.5.6](#Section_2.2.5.2)).
+**WkstaInfo1018:** Details about the state of the SMB network redirector (section [2.2.5.6](#Section_2.2.5.6)).
 
 **WkstaInfo1046:** Details about the state of the SMB network redirector (section [2.2.5.7](#Section_2.2.5.7)).
 
@@ -986,7 +986,7 @@ unsigned long wki101_ver_minor;
 
 *LPWKSTA_INFO_101;
 
-**wki101_platform_id:** The type of operating system (section [2.2.5.1](#Section_2.2.4.1)).
+**wki101_platform_id:** The type of operating system (section [2.2.5.1](#Section_2.2.5.1)).
 
 **wki101_computername:** A null-terminated, [**Internet host name**](#gt_internet-host-name) or [**NetBIOS name**](#gt_netbios-name) [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) of the local computer.
 
@@ -1025,7 +1025,7 @@ unsigned long wki102_logged_on_users;
 
 *LPWKSTA_INFO_102;
 
-**wki102_platform_id:** The type of operating system (section [2.2.5.1](#Section_2.2.4.1)).
+**wki102_platform_id:** The type of operating system (section [2.2.5.1](#Section_2.2.5.1)).
 
 **wki102_computername:** A null-terminated, [**Internet host name**](#gt_internet-host-name) or [**NetBIOS name**](#gt_netbios-name) [[RFC1001]](https://go.microsoft.com/fwlink/?LinkId=90260) of the local computer.
 
@@ -1572,7 +1572,7 @@ LPWKSTA_USER_INFO_1_CONTAINER Level1;
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000000 | Specifies the **WKSTA_USER_INFO_0_CONTAINER** structure (section [2.2.5.12](#Section_2.2.5.9)). |
+| 0x00000000 | Specifies the **WKSTA_USER_INFO_0_CONTAINER** structure (section [2.2.5.12](#Section_2.2.5.12)). |
 | 0x00000001 | Specifies the **WKSTA_USER_INFO_1_CONTAINER** structure (section [2.2.5.13](#Section_2.2.5.13)). |
 
 **WkstaUserInfo:** A **WKSTA_USER_INFO_0_CONTAINER** structure or a **WKSTA_USER_INFO_1_CONTAINER** structure.
@@ -1630,7 +1630,7 @@ LPWKSTA_TRANSPORT_INFO_0_CONTAINER Level0;
 <a id="Section_2.2.5.17"></a>
 #### 2.2.5.17 JOINPR_USER_PASSWORD
 
-The **JOINPR_USER_PASSWORD** structure represents a decrypted password in the **Buffer** member of a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)).
+The **JOINPR_USER_PASSWORD** structure represents a decrypted password in the **Buffer** member of a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)).
 
 typedef struct _JOINPR_USER_PASSWORD {
 
@@ -1799,7 +1799,7 @@ CALL rc4_key(rc4key, 16, md5context.digest)
 
 CALL rc4(rc4key, 516, encrypted-buffer)
 
-The **Buffer** member of **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) is initialized with the encrypted **JOINPR_USER_PASSWORD**.
+The **Buffer** member of **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) is initialized with the encrypted **JOINPR_USER_PASSWORD**.
 
 The symbolic elements of the pseudocode are defined as follows:
 
@@ -2319,7 +2319,7 @@ The **rights** field in each **NetSecurityDescriptor** [**access control entry (
 
 - The server impersonates the client by invoking the **StartImpersonatingClient** task (section [3.2.4.29.6](#Section_3.2.4.29.6)). If this operation fails, the access check algorithm fails and the server returns an error.
 - The server retrieves the client's impersonation token ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3.1). If this operation fails, the access check algorithm fails. The server continues executing at step 4 and returns an error.
-- The server invokes the **Access Check Algorithm Pseudocode** algorithm ([MS-DTYP](#Section_2.2.2) section 2.5.3.2). For this protocol, the input parameters of that algorithm are mapped as follows:
+- The server invokes the **Access Check Algorithm Pseudocode** algorithm ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2). For this protocol, the input parameters of that algorithm are mapped as follows:
 - *SecurityDescriptor*: This is the **NetSecurityDescriptor** specified previously in this section. If the security descriptor does not exist, the client is automatically granted access.
 - *Token*: This is the token of the client, as retrieved in step 2.
 - *Access Request mask*: This is specified by each method's message processing logic and MUST be one or more of the **Access Rights** specified previously in this section.
@@ -2349,7 +2349,7 @@ The list of **alternate-computer-names** MAY<12> be empty.
 
 **OtherDomains:** Specifies a list of [**NetBIOS names**](#gt_netbios-name) of domains browsed by the computer. Each name MUST be at most 15 characters in length and MUST NOT contain trailing spaces or NetBIOS suffix ([MS-BRWS](../MS-BRWS/MS-BRWS.md) section 2.1.1). The names in the **OtherDomains** list MUST be separated by spaces.
 
-This element is shared with the Common Internet File System (CIFS) Browser Protocol [MS-BRWS] and the Common Internet File System (CIFS) Browser Auxiliary Protocol [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) through the **WkstaQueryOtherDomains** event (section [3.2.6.1](../MS-BRWS/MS-BRWS.md)).
+This element is shared with the Common Internet File System (CIFS) Browser Protocol [MS-BRWS] and the Common Internet File System (CIFS) Browser Auxiliary Protocol [MS-BRWSA](../MS-BRWSA/MS-BRWSA.md) through the **WkstaQueryOtherDomains** event (section [3.2.6.1](#Section_3.2.6.1)).
 
 **OtherDomainsInitialization:** Contains the list of NetBIOS names of [**domains**](#gt_domain) to be browsed by the computer. This list SHOULD<13> be empty.
 
@@ -2406,7 +2406,7 @@ The preceding elements provide the basis for how the domain client invokes the p
 
 ##### Interaction with the [MS-LSAD] Data Model
 
-When the [**domain client**](#gt_domain-client) is running the [**Local Security Authority (LSA)**](#gt_local-security-authority-lsa), access to its public ADM elements MUST be implemented ([MS-LSAD](#Section_5) section 3.1.1.10). The following ADM elements (section [3.2.1.6](../MS-LSAD/MS-LSAD.md)) are considered to be owned by that protocol.
+When the [**domain client**](#gt_domain-client) is running the [**Local Security Authority (LSA)**](#gt_local-security-authority-lsa), access to its public ADM elements MUST be implemented ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.10). The following ADM elements (section [3.2.1.6](#Section_3.2.1.6)) are considered to be owned by that protocol.
 
 | Domain interaction elements | [MS-LSAD] elements |
 | --- | --- |
@@ -2523,7 +2523,7 @@ The following methods make up the **wkssvc** interface.
 | Opnum19NotUsedOnWire | Reserved for local use. Opnum: 19 |
 | **NetrGetJoinInformation** (section [3.2.4.12](#Section_3.2.4.12)) | Retrieves join-status details for a specified computer. Opnum: 20 |
 | Opnum21NotUsedOnWire | Reserved for local use. Opnum: 21 |
-| **NetrJoinDomain2** (section [3.2.4.13](#Section_3.2.4.13.2)) | Uses encrypted credentials to join a computer to a workgroup or [**domain**](#gt_domain). Opnum: 22 |
+| **NetrJoinDomain2** (section [3.2.4.13](#Section_3.2.4.13)) | Uses encrypted credentials to join a computer to a workgroup or [**domain**](#gt_domain). Opnum: 22 |
 | **NetrUnjoinDomain2** (section [3.2.4.14](#Section_3.2.4.14)) | Uses encrypted credentials to unjoin a computer from a workgroup or domain. Opnum: 23 |
 | **NetrRenameMachineInDomain2** (section [3.2.4.15](#Section_3.2.4.15)) | Uses encrypted credentials to rename a computer in a domain. Opnum: 24 |
 | **NetrValidateName2** (section [3.2.4.16](#Section_3.2.4.16)) | Uses encrypted credentials to verify the validity of a computer, workgroup, or domain name. Opnum: 25 |
@@ -2560,9 +2560,9 @@ unsigned long NetrWkstaGetInfo(
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000064 | Details are returned in a **WKSTA_INFO_100** structure (section [2.2.5.1](#Section_2.2.4.1)). |
+| 0x00000064 | Details are returned in a **WKSTA_INFO_100** structure (section [2.2.5.1](#Section_2.2.5.1)). |
 | 0x00000065 | Details are returned in a **WKSTA_INFO_101** structure (section [2.2.5.2](#Section_2.2.5.2)). |
-| 0x00000066 | Details are returned in a **WKSTA_INFO_102** structure (section [2.2.5.3](#Section_2.2.4.1)). |
+| 0x00000066 | Details are returned in a **WKSTA_INFO_102** structure (section [2.2.5.3](#Section_2.2.5.3)). |
 | 0x000001F6 | Details are returned in a **WKSTA_INFO_502** structure (section [2.2.5.4](#Section_2.2.5.4)). |
 
 **WkstaInfo:** A pointer to the buffer that receives the data. The format of this data depends on the value of the *level* parameter.
@@ -2633,8 +2633,8 @@ unsigned long NetrWkstaSetInfo(
 | Value | Meaning |
 | --- | --- |
 | 0x000001F6 | The *WkstaInfo* parameter points to a **WKSTA_INFO_502** structure (section [2.2.5.4](#Section_2.2.5.4)). |
-| 0x000003F5 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1013** structure (section [2.2.5.5](#Section_2.2.5.2)). |
-| 0x000003FA | The *WkstaInfo* parameter points to a **WKSTA_INFO_1018** structure (section [2.2.5.6](#Section_2.2.5.2)). |
+| 0x000003F5 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1013** structure (section [2.2.5.5](#Section_2.2.5.5)). |
+| 0x000003FA | The *WkstaInfo* parameter points to a **WKSTA_INFO_1018** structure (section [2.2.5.6](#Section_2.2.5.6)). |
 | 0x00000416 | The *WkstaInfo* parameter points to a **WKSTA_INFO_1046** structure (section [2.2.5.7](#Section_2.2.5.7)). |
 
 **WkstaInfo:** A pointer to a buffer that specifies the data. The format of this data depends on the value of the *Level* parameter.
@@ -2651,7 +2651,7 @@ The *ErrorParameter* value corresponds to the member of the **WKSTA_INFO** struc
 | ERROR_ACCESS_DENIED 0x00000005 | Access is denied. |
 | ERROR_INVALID_PARAMETER 0x00000057 | One of the function parameters is not valid. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 If the *Level* parameter value is not valid, the server MUST fail the call as follows.
 
@@ -2778,7 +2778,7 @@ If this parameter is NULL or points to zero, the enumeration MUST start from the
 | ERROR_INVALID_LEVEL 0x0000007C | The information level is invalid. |
 | ERROR_MORE_DATA 0x000000EA | More entries are available. The *UserInfo* buffer was not large enough to contain all the entries. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The server (2) SHOULD<35> enforce security measures to verify that the caller has the required permissions to execute this routine. If the server enforces security measures, and the caller does not have the required credentials, the server MUST fail the call with ERROR_ACCESS_DENIED. Specifications for determining the identity of the caller for the purpose of performing an access check are in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.1.3.
 
@@ -2837,7 +2837,7 @@ If this parameter is NULL or points to zero, the enumeration MUST start from the
 | ERROR_INVALID_LEVEL 0x0000007C | The information level is invalid. |
 | NERR_BufTooSmall 0x0000084B | More entries are available. The *TransportInfo* buffer was not large enough to contain all the entries. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The server SHOULD<38> enforce security measures to verify that the caller has the required permissions to execute this routine. If the server enforces security measures, and the caller does not have the required credentials, the server MUST fail the call with ERROR_ACCESS_DENIED. Specifications for determining the identity of the caller for the purpose of performing an access check are in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.1.3.
 
@@ -2894,7 +2894,7 @@ unsigned long NetrWkstaTransportAdd(
 | ERROR_INVALID_PARAMETER 0x00000057 | One of the function parameters is not valid. |
 | ERROR_INVALID_LEVEL 0x0000007C | The information level is invalid. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 If the *Level* parameter is not equal to zero, the server MUST fail the call and return ERROR_INVALID_LEVEL.
 
@@ -3338,7 +3338,7 @@ unsigned long NetrGetJoinInformation(
 | ERROR_ACCESS_DENIED 0x00000005 | Access is denied. |
 | RPC_S_PROTSEQ_NOT_SUPPORTED 0x000006A7 | The [**RPC protocol sequence**](#gt_rpc-protocol-sequence) is not supported. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The following statements define the sequence of message-processing operations.
 
@@ -3357,7 +3357,7 @@ If no errors occur, the server MUST return NERR_Success.
 
 The **NetrJoinDomain2** method uses encrypted credentials to join a computer to a [**domain**](#gt_domain) or a workgroup.<57>
 
-For high-level, informative discussions about [**domain controller**](#gt_domain-controller-dc) location and [**domain join**](#gt_domain-join) and unjoin, see [MS-ADOD](#Section_1.3) sections 2.7.7 and 3.1. For more information, see the example in section [4.3](#Section_4.3).
+For high-level, informative discussions about [**domain controller**](#gt_domain-controller-dc) location and [**domain join**](#gt_domain-join) and unjoin, see [MS-ADOD](../MS-ADOD/MS-ADOD.md) sections 2.7.7 and 3.1. For more information, see the example in section [4.3](#Section_4.3).
 
 unsigned long NetrJoinDomain2(
 
@@ -3395,7 +3395,7 @@ If the string specifies the name of the preferred domain controller to perform t
 - <NetBIOSDomainName>\<UserName>
 - <FullyQualifiedDNSDomainName>\<UserName>
 - <UserName>@<FullyQualifiedDNSDomainName>
-**Password:** A pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *AccountName* parameter. Sections [3.2.4.13.1](#Section_3.2.4.13.1) and [3.2.4.13.3](#Section_3.2.4.13.3) specify the processing of this parameter.
+**Password:** A pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *AccountName* parameter. Sections [3.2.4.13.1](#Section_3.2.4.13.1) and [3.2.4.13.3](#Section_3.2.4.13.3) specify the processing of this parameter.
 
 **Options:** A 32-bit bitfield that specifies modifications to default server (2) behavior in message processing.<58>
 
@@ -3435,7 +3435,7 @@ If the string specifies the name of the preferred domain controller to perform t
 | NERR_SetupDomainController 0x00000A85 | This computer is a domain controller and cannot be unjoined from a domain. |
 | NERR_InvalidWorkgroupName 0x00000A87 | The specified workgroup name is invalid. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Message processing for the **NetrJoinDomain2** method specifies the behavior of joining either a domain or a workgroup. The behavior of this method is covered in the following subsections:
 
@@ -3465,7 +3465,7 @@ The following ordered statements specify the sequence of message processing oper
 
 - The server MUST retrieve the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) used for the current call ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.1.3.4.1), specifying the server binding [**handle**](#gt_handle) maintained by the [**RPC**](#gt_remote-procedure-call-rpc) runtime ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 6.2.1). If that RPC protocol sequence is not **NCACN_NP**, the server SHOULD return **RPC_S_PROTSEQ_NOT_SUPPORTED**.<70>
 - The server MUST check that the caller has been granted access rights using the algorithm in the **Access Control Abstract Data Model** (section [3.2.1.1](#Section_3.2.1.1)), with *Access Request mask* initialized to **WKSTA_NETAPI_CHANGE_CONFIG**; if not, the server MUST return ERROR_ACCESS_DENIED.
-- If *Password* is NULL, *PasswordString* MUST be NULL. Otherwise, the server MUST decrypt and decode the *Password* (section [2.2.5.18](#Section_2.2.5.18.2)). *PasswordString* MUST be equal to the decrypted and decoded value. The decrypted buffer is represented as **JOINPR_USER_PASSWORD** (section [2.2.5.17](#Section_2.2.5.17)). The value of the Length member MUST be less than 513; otherwise, message processing is stopped, and the server MUST return ERROR_INVALID_PASSWORD.
+- If *Password* is NULL, *PasswordString* MUST be NULL. Otherwise, the server MUST decrypt and decode the *Password* (section [2.2.5.18](#Section_2.2.5.18)). *PasswordString* MUST be equal to the decrypted and decoded value. The decrypted buffer is represented as **JOINPR_USER_PASSWORD** (section [2.2.5.17](#Section_2.2.5.17)). The value of the Length member MUST be less than 513; otherwise, message processing is stopped, and the server MUST return ERROR_INVALID_PASSWORD.
 - The server MUST impersonate the client by invoking the **StartImpersonatingClient** task (section [3.2.4.29.6](#Section_3.2.4.29.6)). If this operation fails, the server MUST return an error.
 - If the value of the *DomainNameParam* parameter is NULL, the server MUST stop message processing and return ERROR_INVALID_PARAMETER. Otherwise, message processing continues.
 - The server SHOULD return ERROR_NOT_SUPPORTED if the server does not support processing of this message.<71>
@@ -3474,20 +3474,20 @@ The following ordered statements specify the sequence of message processing oper
 <a id="Section_3.2.4.13.2"></a>
 ##### 3.2.4.13.2 State Changes Required for Domain Join
 
-A computer is said to be joined to a domain if a certain state exists on the computer and in the domain NC. See the specific state requirements that MUST occur both locally and in the domain NC at a [**domain controller (DC)**](#gt_domain-controller-dc) (sections [3.2.1.2](../MS-ADTS/MS-ADTS.md), [3.2.1.5](../MS-ADTS/MS-ADTS.md), and [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4).
+A computer is said to be joined to a domain if a certain state exists on the computer and in the domain NC. See the specific state requirements that MUST occur both locally and in the domain NC at a [**domain controller (DC)**](#gt_domain-controller-dc) (sections [3.2.1.2](#Section_3.2.1.2), [3.2.1.5](#Section_3.2.1.5), and [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4).
 
 The state changes referenced above appear in the sequence of message processing steps later in this specification but are listed here to aid the reader. To understand the domain join process, the following normative description identifies the state manipulation performed during message processing to affect the state changes required for a computer to join a domain.
 
 The server MUST persist in the machine:
 
-- The **domain-name** state variable ([MS-ADTS] section 6.4.1) and the [**domain prefix**](#gt_domain-prefix) for the [**account domain**](#gt_account-domain) of the DC, as queried by the server from the DC. The server MUST store these values in the local **DomainName** and **DomainSid** elements (section [3.2.1.6](../MS-ADTS/MS-ADTS.md)), respectively.
+- The **domain-name** state variable ([MS-ADTS] section 6.4.1) and the [**domain prefix**](#gt_domain-prefix) for the [**account domain**](#gt_account-domain) of the DC, as queried by the server from the DC. The server MUST store these values in the local **DomainName** and **DomainSid** elements (section [3.2.1.6](#Section_3.2.1.6)), respectively.
 - The **domain-secret** state variable ([MS-ADTS] section 6.4).
 The server MUST persist in the domain:
 
 - A computer account object with the following [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) attributes.<72> See [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) and [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327) for more information about LDAP.
 | LDAP attribute name | Value |
 | --- | --- |
-| userAccountControl ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.342) | The USER_WORKSTATION_TRUST_ACCOUNT bit is set, and the USER_ACCOUNT_DISABLED bit is not set ([MS-SAMR](#Section_5) section 2.2.1.12). See the userAccountControl mapping table ([MS-SAMR] section 3.1.5.14.2) for details on the mapping of these bits in the LDAP protocol. |
+| userAccountControl ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.342) | The USER_WORKSTATION_TRUST_ACCOUNT bit is set, and the USER_ACCOUNT_DISABLED bit is not set ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.12). See the userAccountControl mapping table ([MS-SAMR] section 3.1.5.14.2) for details on the mapping of these bits in the LDAP protocol. |
 | sAMAccountName ([MS-ADA3] section 2.222) | The value of machine-account-name ([MS-ADTS] section 6.4.1). This is **ComputerNameNetBIOS** (section 3.2.1.5) suffixed with a "$" character. |
 | unicodePwd ([MS-ADA3] section 2.332) | The value of **domain-secret** state variable ([MS-ADTS] section 6.4.1). Protocols that expose this attribute persist the [**NT hash**](#gt_nt-hash) of **domain-secret** ([MS-SAMR] section 3.1.5.10). |
 | dNSHostName ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.185) | The value of **ComputerNameFQDN** (section 3.2.1.5). |
@@ -3545,7 +3545,7 @@ If the call fails, the server MUST stop message processing and return ERROR_NO_S
 - If the NETSETUP_MACHINE_PWD_PASSED bit is set in *Options*, and the session fails to be established in the previous step with a non-authentication failure, the server MUST stop message processing and return the error. If the session fails to be established for some other reason, the server MUST attempt to establish an [**anonymous session**](#gt_anonymous-session). If an error occurs, the server MUST stop message processing and return that error. Otherwise, message processing continues.
 - If the NETSETUP_MACHINE_PWD_PASSED bit is not set in *Options*, the server MUST establish an authenticated (2) SMB session with the domain controller named by the value of *DomainControllerString*. The credentials that are supplied during authentication are those in *PasswordString*, and the [**security context**](#gt_security-context) that is established MUST be that of *AccountName*. If an error occurs, the server MUST stop message processing and return that error. Otherwise, message processing continues.
 - The SMB session that was established in the previous steps and the security context associated with it MUST be used for any higher-layer RPC calls made to the domain controller over the SMB NCACN_NP protocol sequence ([MS-RPCE] section 2.1.1.2 and [MS-SMB](../MS-SMB/MS-SMB.md) section 3.2.4.2.4).
-- The server MUST query the domain controller for its domain name and [**SID**](#gt_security-identifier-sid) ([MS-LSAD](#Section_5) section 3.1.4.4.3).<73>
+- The server MUST query the domain controller for its domain name and [**SID**](#gt_security-identifier-sid) ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.3).<73>
 - The server MUST store the values queried in the previous step in the local **DomainName** and **DomainSid** elements (section [3.2.1.6](#Section_3.2.1.6)).
 - If the NETSETUP_MACHINE_PWD_PASSED bit is not set in *Options*, and either the NETSETUP_WIN9X_UPGRADE bit or the NETSETUP_JOIN_UNSECURE bit is set in *Options*, *ComputerPasswordString* is the first 14 characters of **ComputerName.NetBIOS** in lowercase.
 - If the NETSETUP_MACHINE_PWD_PASSED bit is not set in *Options*, and neither the NETSETUP_WIN9X_UPGRADE bit nor the NETSETUP_JOIN_UNSECURE bit is set in *Options*, *ComputerPasswordString* is an ASCII string of randomly chosen characters. Each character's ASCII code MUST be between 32 and 122 inclusive. When randomly generating a password string, the server MUST generate 120 characters. Each character SHOULD be generated using the algorithm in [[FIPS186-2]](https://go.microsoft.com/fwlink/?LinkId=168870) Appendix 3.1 and [[RFC4086]](https://go.microsoft.com/fwlink/?LinkId=90456).<74>
@@ -3556,7 +3556,7 @@ If the call fails, the server MUST stop message processing and return ERROR_NO_S
 - *DNSComputerNameString* MUST equal the UTF-8 string **ComputerNameFQDN**.(section 3.2.1.5)
 - *Spn1* MUST be a UTF-8 string equal to the concatenation of "HOST/" and the value of *DNSComputerNameString*.
 - *Spn2* MUST be a UTF-8 string equal to the concatenation of "HOST/" and the value of *ComputerAccountString*.
-- If the NETSETUP_ACCT_CREATE bit is set in *Options*, the server MUST create the [**domain object**](#gt_domain-object) in the domain *DomainNameParam* at *DomainControllerString*. Manipulation of the domain computer object state is exposed through LDAP protocols ([[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326), [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327), and [MS-SAMR](#Section_5)). If the domain object already exists in an organizational unit (OU) ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.218) that is different from the one in *MachineAccountOU*, the server MUST stop message processing and return NERR_UserExists. If the domain object already exists but the *MachineAccountOU* is NULL or refers to the organizational unit (OU) of the domain object, the server MUST return NERR_Success. Otherwise, message processing continues.
+- If the NETSETUP_ACCT_CREATE bit is set in *Options*, the server MUST create the [**domain object**](#gt_domain-object) in the domain *DomainNameParam* at *DomainControllerString*. Manipulation of the domain computer object state is exposed through LDAP protocols ([[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326), [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327), and [MS-SAMR](../MS-SAMR/MS-SAMR.md)). If the domain object already exists in an organizational unit (OU) ([MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.218) that is different from the one in *MachineAccountOU*, the server MUST stop message processing and return NERR_UserExists. If the domain object already exists but the *MachineAccountOU* is NULL or refers to the organizational unit (OU) of the domain object, the server MUST return NERR_Success. Otherwise, message processing continues.
 - If the NETSETUP_ACCT_CREATE bit is not set in *Options* and the domain object does not already exist in the domain *DomainNameParam* at the domain controller, the server MUST stop message processing and return ERROR_NONE_MAPPED. Otherwise, message processing continues.
 - If the NETSETUP_ACCT_CREATE bit is not set in *Options*, and either the NETSETUP_WIN9X_UPGRADE bit or the NETSETUP_JOIN_UNSECURE bit is set in *Options*, the server MUST send a request to the Netlogon Remote Protocol on the local computer to perform Netlogon authentication with the domain controllers. This is to validate that the value of *ComputerPasswordString* persisted locally equals the value of the password on the domain object in the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) attribute unicodePwd. If the authentication fails, the server MUST stop message processing and return ERROR_LOGON_FAILURE. Otherwise, message processing continues. For more information about Netlogon authentication between domain-joined computers and domain controllers, see [MS-NRPC].
 - If the **NETSETUP_JOIN_READONLY** bit is not set in *Options*, the following LDAP attributes on *DomainObject* MUST be set to the values shown in the table. The security context provided to the LDAP protocol is *AccountName* and the credential is *PasswordString*. For details about attributes and attribute names, see [MS-ADTS]. For details about LDAP, see [RFC2252] and [RFC2253].
@@ -3622,7 +3622,7 @@ unsigned long NetrUnjoinDomain2(
 
 **AccountName:** A pointer to a string that specifies the account name in the joined domain to use when connecting to a [**domain controller**](#gt_domain-controller-dc). This parameter is optional. If this parameter is NULL, the caller's account name MUST be used.
 
-**Password:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *AccountName* parameter. If this parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used.
+**Password:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *AccountName* parameter. If this parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used.
 
 **Options:** A 32-bit bitfield specifying modifications to default message processing behavior.
 
@@ -3644,14 +3644,14 @@ unsigned long NetrUnjoinDomain2(
 | NERR_SetupNotJoined 0x00000A84 | This computer is not currently joined to a domain. |
 | NERR_SetupDomainController 0x00000A85 | This computer is a domain controller and cannot be unjoined from a domain. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<78>
 
 The following definitions are used in the specification of message processing that follows.
 
 - *DomainControllerString*: A UTF-8 string containing the name of a domain controller in the domain to which the server is joined.
-- *DomainObject*: An object in the domain database ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4) having the value of **ComputerNameNetBIOS** (section [3.2.1.5](../MS-ADTS/MS-ADTS.md)) suffixed with a "$" character for the **SamAccountName** attribute.
+- *DomainObject*: An object in the domain database ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4) having the value of **ComputerNameNetBIOS** (section [3.2.1.5](#Section_3.2.1.5)) suffixed with a "$" character for the **SamAccountName** attribute.
 - *PasswordString*: A [**UTF-8**](#gt_utf-8) string that contains a password in [**cleartext**](#gt_cleartext).
 The following statements define the sequence of message processing operations.
 
@@ -3669,10 +3669,10 @@ The following statements define the sequence of message processing operations.
 - The server MUST configure the local [**W32Time**](#gt_windows-time-service-w32time) [[WTSREF]](https://go.microsoft.com/fwlink/?LinkId=90586) so that it is aware of no longer being joined to a domain.
 - The server MUST set **DomainSid** to NULL.
 - The server MUST delete the persisted password that was stored previously in the **Password** ADM element when processing a **NetrJoinDomain2** message.
-- If the NETSETUP_ACCT_DELETE bit is set in *Options*, the server MUST update the *DomainObject* **userAccountControl** attribute by setting the USER_ACCOUNT_DISABLED bit. See the userAccountControl Mapping Table ([MS-SAMR](#Section_5) section 3.1.5.14.2) for details on the mapping of these bits in LDAP.
+- If the NETSETUP_ACCT_DELETE bit is set in *Options*, the server MUST update the *DomainObject* **userAccountControl** attribute by setting the USER_ACCOUNT_DISABLED bit. See the userAccountControl Mapping Table ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.14.2) for details on the mapping of these bits in LDAP.
 The security context provided to LDAP is *AccountName*, and the credential is *PasswordString*. For details on attributes and attribute names, see [MS-ADTS]. For details on LDAP, see [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) and [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327).
 
-- The server MUST configure the Certificate Auto Enrollment Service ([[MSFT-AUTOENROLLMENT]](https://go.microsoft.com/fwlink/?LinkId=90178) and [MS-CERSOD](#Section_1.3) section 2.1.2.2.2) so that it is aware of no longer being joined to a domain.
+- The server MUST configure the Certificate Auto Enrollment Service ([[MSFT-AUTOENROLLMENT]](https://go.microsoft.com/fwlink/?LinkId=90178) and [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) section 2.1.2.2.2) so that it is aware of no longer being joined to a domain.
 - The server MUST configure the local Net Logon Remote Protocol [MS-NRPC] such that it is aware of no longer being joined to a domain.
 - The server SHOULD store the Internet host name locally such that the DNS service unregisters name records for the local computer [[NIS]](https://go.microsoft.com/fwlink/?LinkId=90234).[<80>](#Appendix_A_80)
 - The server SHOULD remove the domain admins group from the local administrators group, and the server SHOULD remove the domain users group from the local users groups [MS-SAMR].
@@ -3709,7 +3709,7 @@ unsigned long NetrRenameMachineInDomain2(
 
 **AccountName:** A pointer to a string that specifies an account name in the joined domain to use when connecting to a [**domain controller**](#gt_domain-controller-dc). This parameter is optional. If this parameter is NULL, the caller's account name is used.
 
-**Password:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *AccountName* parameter. If this parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used.
+**Password:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *AccountName* parameter. If this parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used.
 
 **Options:** A 32-bit bitfield that specifies modifications to default server behavior in message processing.
 
@@ -3731,7 +3731,7 @@ unsigned long NetrRenameMachineInDomain2(
 | NERR_SetupNotJoined 0x00000A84 | This computer is not currently joined to a domain. |
 | NERR_SetupDomainController 0x00000A85 | This computer is a domain controller and cannot be renamed.[<82>](#Appendix_A_82) |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.[<83>](#Appendix_A_83)
 
@@ -3744,7 +3744,7 @@ The following definitions are used in the specification of message processing th
 - *Spn1*: A UTF-8 string.
 - *Spn2*: A UTF-8 string.
 - *PasswordString*: A UTF-8 string that contains a password in [**cleartext**](#gt_cleartext).
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
 - *ComputerAccountDN*: A UTF-8 string that contains the [**distinguished name (DN)**](#gt_distinguished-name-dn) of the computer account.
 The following statements define the sequence of message processing operations.
@@ -3873,7 +3873,7 @@ unsigned long NetrValidateName2(
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The Internet host name contains an invalid character. |
 | RPC_E_REMOTE_DISABLED 0x8001011C | Remote calls are not allowed for this process. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The following definition is used in the specification of message processing that follows.
 
@@ -3884,7 +3884,7 @@ The following statements define the sequence of message processing operations.
 - The server SHOULD<89> stop message processing and return an implementation-specific error if the caller is not local. Specifications for determining if the caller is local are in [MS-RPCE].
 - The server MUST check that the caller has been granted access rights using the algorithm in the **Access Control Abstract Data Model** (section [3.2.1.1](#Section_3.2.1.1)), with *Access Request mask* initialized to **WKSTA_NETAPI_QUERY**; if not, the server MUST return ERROR_ACCESS_DENIED.
 - The server MUST impersonate the client by invoking the **StartImpersonatingClient** task (section [3.2.4.29.6](#Section_3.2.4.29.6)). If this operation fails, the server MUST return an error.
-- If *Password* is NULL then *PasswordString* MUST be NULL. Otherwise, the server MUST decrypt and decode the *Password* (section [2.2.5.18](#Section_2.2.5.18.2)). *PasswordString* MUST equal the decrypted and decoded value. The decrypted buffer is represented as a **JOINPR_USER_PASSWORD** structure (section [2.2.5.17](#Section_2.2.5.17)). The value of the **Length** member MUST be less than 513; otherwise, message processing is stopped, and the server MUST return ERROR_INVALID_PASSWORD.
+- If *Password* is NULL then *PasswordString* MUST be NULL. Otherwise, the server MUST decrypt and decode the *Password* (section [2.2.5.18](#Section_2.2.5.18)). *PasswordString* MUST equal the decrypted and decoded value. The decrypted buffer is represented as a **JOINPR_USER_PASSWORD** structure (section [2.2.5.17](#Section_2.2.5.17)). The value of the **Length** member MUST be less than 513; otherwise, message processing is stopped, and the server MUST return ERROR_INVALID_PASSWORD.
 - If *NameType* is *NetSetupUnknown* the server MUST stop message processing and return ERROR_INVALID_PARAMETER.
 - First, the method MUST perform syntactic validation of the name as follows. For all types of validation except the **NetSetupDnsMachine** type, the syntactic validation is performed on the name expressed in the [**OEM character set**](#gt_3240e34e-920e-40ac-a672-342ac34a5e22).
 **NetSetupWorkgroup**
@@ -3959,7 +3959,7 @@ DNS_ERROR_INVALID_NAME_CHAR MUST be returned if any condition in this group is v
 - The name MUST NOT be in use by a computer accessible on the network except for the server receiving this call. ERROR_DUP_NAME MUST be returned if this condition is violated.<91>
 **NetSetupDomain**
 
-- The name MUST differ from the name of the [**built-in domain**](#gt_built-in-domain), "BUILTIN" (**Builtin Domain Principal View**, [MS-LSAT](#Section_5) section 3.1.1.1.3); the comparison MUST be case-insensitive. NERR_InvalidComputer MUST be returned if this condition is violated.
+- The name MUST differ from the name of the [**built-in domain**](#gt_built-in-domain), "BUILTIN" (**Builtin Domain Principal View**, [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.1.1.3); the comparison MUST be case-insensitive. NERR_InvalidComputer MUST be returned if this condition is violated.
 - The name MUST be a name of an existing domain. ERROR_NO_SUCH_DOMAIN MUST be returned if this condition is not satisfied.<92>
 **NetSetupNonExistentDomain**
 
@@ -4001,7 +4001,7 @@ wchar_t*** OUs
 
 **AccountName:** A pointer to a string that specifies the account name to use when connecting to a [**domain controller**](#gt_domain-controller-dc). This parameter is optional. If this parameter is NULL, the caller's account name MUST be used.
 
-**Password:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *AccountName* parameter. If the *AccountName* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
+**Password:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *AccountName* parameter. If the *AccountName* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
 
 **OUCount:** A pointer to the count of OUs that the method returns. The server MUST ignore this parameter on input.
 
@@ -4019,13 +4019,13 @@ wchar_t*** OUs
 | NERR_InvalidAPI 0x0000085E | The requested API is not supported on domain controllers. |
 | NERR_DefaultJoinRequired 0x00000A86 | The destination domain controller does not support creating machine accounts in OUs. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The following definitions are used in the specification of message processing that follows.
 
 - *PasswordString*: A [**Unicode**](#gt_unicode) [**UTF-8**](#gt_utf-8) string containing a password in [**cleartext**](#gt_cleartext).
 - *DomainControllerString*: A UTF-8 string that contains the name of a domain controller in the domain that the server is joining.
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
 - *ComputerAccountDN*: A UTF-8 string that contains the DN of the computer account.
 The following statements define the sequence of message processing operations.
@@ -4100,7 +4100,7 @@ unsigned long NetrAddAlternateComputerName(
 - <NetBIOSDomainName>\<UserName>
 - <FullyQualifiedDNSDomainName>\<UserName>
 - <UserName>@<FullyQualifiedDNSDomainName>
-**EncryptedPassword:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *DomainAccount* parameter. If the *DomainAccount* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
+**EncryptedPassword:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *DomainAccount* parameter. If the *DomainAccount* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
 
 **Reserved:** A 32-bit bitfield that SHOULD be set to zero.
 
@@ -4161,7 +4161,7 @@ Where the bits are defined as:
 | RPC_S_CALL_IN_PROGRESS 0x000006FF | A remote procedure call is already in progress.<101> |
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The [**Internet host name**](#gt_internet-host-name) contains an invalid character. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, it SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<102>
 
@@ -4323,7 +4323,7 @@ unsigned long NetrRemoveAlternateComputerName(
 - <NetBIOSDomainName>\<UserName>
 - <FullyQualifiedDNSDomainName>\<UserName>
 - <UserName>@<FullyQualifiedDNSDomainName>
-**EncryptedPassword:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *DomainAccount* parameter. If the *DomainAccount* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
+**EncryptedPassword:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *DomainAccount* parameter. If the *DomainAccount* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
 
 **Reserved:** A 32-bit bitfield that SHOULD be set to zero.
 
@@ -4385,7 +4385,7 @@ Where the bits are defined as:
 | RPC_S_CALL_IN_PROGRESS 0x000006FF | A remote procedure call is already in progress.<108> |
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The [**Internet host name**](#gt_internet-host-name) contains an invalid character. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<109>
 
@@ -4394,7 +4394,7 @@ The following definitions are used in the specification of message processing th
 - *OldAlternateNames*: MUST be a tuple entry for **alternate-computer-names** (section [3.2.1.2](#Section_3.2.1.2)).
 - *PasswordString*: A [**UTF-8**](#gt_utf-8) string containing a password in [**cleartext**](#gt_cleartext).
 - *DomainControllerString*: A UTF-8 string that contains the name of a domain controller in the domain that the server is joining.
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *WritableDomainControllerDN*: A UTF-8 string that contains the DN of the nTDSDSA object ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) for the domain controller named in *DomainControllerString*.
 - *ReadOnlyDomainControllerConnection*: An ADConnection ([MS-ADTS] section 7.3) to a read-only domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
@@ -4547,7 +4547,7 @@ unsigned long NetrSetPrimaryComputerName(
 - <NetBIOSDomainName>\<UserName>
 - <FullyQualifiedDNSDomainName>\<UserName>
 - <UserName>@<FullyQualifiedDNSDomainName>
-**EncryptedPassword:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18.2)) that specifies the encrypted password to use with the *DomainAccount* parameter. If the *DomainAccount* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
+**EncryptedPassword:** An optional pointer to a **JOINPR_ENCRYPTED_USER_PASSWORD** structure (section [2.2.5.18](#Section_2.2.5.18)) that specifies the encrypted password to use with the *DomainAccount* parameter. If the *DomainAccount* parameter is NULL, the caller's [**security context**](#gt_security-context) MUST be used, and this parameter MUST be ignored.
 
 **Reserved:** A 32-bit bitfield that SHOULD be set to zero.
 
@@ -4609,7 +4609,7 @@ Where the bits are defined as:
 | NERR_DefaultJoinRequired 0x00000A86 | The destination domain controller does not support creating machine accounts in OUs. |
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The [**Internet host name**](#gt_internet-host-name) contains an invalid character. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<116>
 
@@ -4621,7 +4621,7 @@ The following definitions are used in the specification of message processing th
 - *I*: Unsigned integer used for indexing **alternate-computer-names**.
 - *PasswordString*: A UTF-8 string containing a password in [**cleartext**](#gt_cleartext).
 - *DomainControllerString*: A UTF-8 string that contains the name of a domain controller in the domain that the server is joining.
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *WritableDomainControllerDN*: A UTF-8 string that contains the DN of the nTDSDSA object ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) for the domain controller named in *DomainControllerString*.
 - *ReadOnlyDomainControllerConnection*: An ADConnection ([MS-ADTS] section 7.3) to a read-only domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
@@ -4865,7 +4865,7 @@ Where the bits are defined as:
 | RPC_S_PROTSEQ_NOT_SUPPORTED 0x000006A7 | The [**RPC protocol sequence**](#gt_rpc-protocol-sequence) is not supported. |
 | RPC_S_CALL_IN_PROGRESS 0x000006FF | A remote procedure call is already in progress. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The following statements define the sequence of message processing operations.
 
@@ -4892,7 +4892,7 @@ If no errors occur, the server MUST return NERR_Success.
 
 The **NetrJoinDomain3** method uses encrypted credentials to join a computer to a domain or to a workgroup.<124>
 
-For high-level, informative discussions about domain controller location and domain join and unjoin, see [MS-ADOD](#Section_1.3) section 2.7.7 and 3.1. For more information, see the example in section [4.3](#Section_4.3).
+For high-level, informative discussions about domain controller location and domain join and unjoin, see [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.7.7 and 3.1. For more information, see the example in section [4.3](#Section_4.3).
 
 unsigned long NetrJoinDomain3(
 
@@ -4970,7 +4970,7 @@ If the string specifies the name of the preferred domain controller to perform t
 | NERR_SetupDomainController 0x00000A85 | This computer is a domain controller and cannot be unjoined from a domain. |
 | NERR_InvalidWorkgroupName 0x00000A87 | The specified workgroup name is invalid. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Message processing for the **NetrJoinDomain3** method specifies the behavior of joining either a domain or a workgroup. The behavior of this method is covered in the following subsections:
 
@@ -4998,7 +4998,7 @@ The following ordered statements specify the sequence of message processing oper
 
 - The server MUST retrieve the [**RPC protocol sequence**](#gt_rpc-protocol-sequence) used for the current call ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.1.3.4.1), specifying the server binding [**handle**](#gt_handle) maintained by the [**RPC**](#gt_remote-procedure-call-rpc) runtime ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 6.2.1). If that RPC protocol sequence is not **NCACN_NP**, the server SHOULD return **RPC_S_PROTSEQ_NOT_SUPPORTED**.<137>
 - The server MUST check that the caller has been granted access rights using the algorithm in the **Access Control Abstract Data Model** (section [3.2.1.1](#Section_3.2.1.1)), with *Access Request mask* initialized to **WKSTA_NETAPI_CHANGE_CONFIG**; if not, the server MUST return ERROR_ACCESS_DENIED.
-- If *Password* is NULL, *PasswordString* MUST be NULL. Otherwise, the server MUST decrypt and decode the *Password* (sections [2.2.5.18](#Section_2.2.5.18.2) and [2.2.5.19](#Section_2.2.5.19)). *PasswordString* MUST be equal to the decrypted and decoded value. The decrypted buffer is represented as **JOINPR_USER_PASSWORD** (section [2.2.5.17](#Section_2.2.5.17)). The value of the Length member MUST be less than 513; otherwise, message processing is stopped, and the server MUST return ERROR_INVALID_PASSWORD.
+- If *Password* is NULL, *PasswordString* MUST be NULL. Otherwise, the server MUST decrypt and decode the *Password* (sections [2.2.5.18](#Section_2.2.5.18) and [2.2.5.19](#Section_2.2.5.19)). *PasswordString* MUST be equal to the decrypted and decoded value. The decrypted buffer is represented as **JOINPR_USER_PASSWORD** (section [2.2.5.17](#Section_2.2.5.17)). The value of the Length member MUST be less than 513; otherwise, message processing is stopped, and the server MUST return ERROR_INVALID_PASSWORD.
 - The server MUST impersonate the client by invoking the **StartImpersonatingClient** task (section [3.2.4.29.6](#Section_3.2.4.29.6)). If this operation fails, the server MUST return an error.
 - If the value of the *DomainNameParam* parameter is NULL, the server MUST stop message processing and return ERROR_INVALID_PARAMETER. Otherwise, message processing continues.
 - The server SHOULD return ERROR_NOT_SUPPORTED if the server does not support processing of this message.<138>
@@ -5008,20 +5008,20 @@ If *Options* does not have the **NETSETUP_JOIN_DOMAIN** bit set, the server MUST
 <a id="Section_3.2.4.22.2"></a>
 ##### 3.2.4.22.2 State Changes Required for Domain Join
 
-A computer is said to be joined to a domain if a certain state exists on the computer and in the domain NC. See the specific state requirements that MUST occur both locally and in the domain NC at a [**domain controller (DC)**](#gt_domain-controller-dc) (sections [3.2.1.2](../MS-ADTS/MS-ADTS.md), [3.2.1.5](../MS-ADTS/MS-ADTS.md), and ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4).
+A computer is said to be joined to a domain if a certain state exists on the computer and in the domain NC. See the specific state requirements that MUST occur both locally and in the domain NC at a [**domain controller (DC)**](#gt_domain-controller-dc) (sections [3.2.1.2](#Section_3.2.1.2), [3.2.1.5](#Section_3.2.1.5), and ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4).
 
 The state changes referenced above appear in the sequence of message processing steps later in this specification but are listed here to aid the reader. To understand the domain join process, the following normative description identifies the state manipulation performed during message processing to affect the state changes required for a computer to join a domain.
 
 The server MUST persist in the machine:
 
-- The **domain-name** state variable ([MS-ADTS] section 6.4.1) and the [**domain prefix**](#gt_domain-prefix) for the [**account domain**](#gt_account-domain) of the DC, as queried by the server from the DC. The server MUST store these values in the local **DomainName** and **DomainSid** elements (section [3.2.1.6](../MS-ADTS/MS-ADTS.md)), respectively.
+- The **domain-name** state variable ([MS-ADTS] section 6.4.1) and the [**domain prefix**](#gt_domain-prefix) for the [**account domain**](#gt_account-domain) of the DC, as queried by the server from the DC. The server MUST store these values in the local **DomainName** and **DomainSid** elements (section [3.2.1.6](#Section_3.2.1.6)), respectively.
 - The **domain-secret** state variable ([MS-ADTS] section 6.4).
 The server MUST persist in the domain:
 
 - A computer account object with the following [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) attributes<139>. See [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) and [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327) for more information about LDAP.
 | LDAP attribute name | Value |
 | --- | --- |
-| userAccountControl ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.351) | The USER_WORKSTATION_TRUST_ACCOUNT bit is set, and the USER_ACCOUNT_DISABLED bit is not set ([MS-SAMR](#Section_5) section 2.2.1.12). See the userAccountControl mapping table ([MS-SAMR] section 3.1.5.14.2) for details on the mapping of these bits in the LDAP protocol. |
+| userAccountControl ([MS-ADA2](../MS-ADA2/MS-ADA2.md) section 2.351) | The USER_WORKSTATION_TRUST_ACCOUNT bit is set, and the USER_ACCOUNT_DISABLED bit is not set ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.12). See the userAccountControl mapping table ([MS-SAMR] section 3.1.5.14.2) for details on the mapping of these bits in the LDAP protocol. |
 | sAMAccountName ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.222) | The value of machine-account-name ([MS-ADTS] section 6.4.1). This is **ComputerNameNetBIOS** (section 3.2.1.5) suffixed with a "$" character. |
 | unicodePwd ([MS-ADA3] section 2.332) | The value of **domain-secret** state variable ([MS-ADTS] section 6.4.1). Protocols that expose this attribute persist the [**NT hash**](#gt_nt-hash) of **domain-secret** ([MS-SAMR] section 3.1.5.10). |
 | dNSHostName ([MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.185) | The value of **ComputerNameFQDN** (section 3.2.1.5). |
@@ -5074,14 +5074,14 @@ unsigned long NetrUnjoinDomain3(
 | NERR_SetupNotJoined 0x00000A84 | This computer is not currently joined to a domain. |
 | NERR_SetupDomainController 0x00000A85 | This computer is a domain controller and cannot be unjoined from a domain. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<142>
 
 The following definitions are used in the specification of message processing that follows.
 
 - *DomainControllerString*: A UTF-8 string containing the name of a domain controller in the domain to which the server is joined.
-- *DomainObject*: An object in the domain database ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4) having the value of **ComputerNameNetBIOS** (section [3.2.1.5](../MS-ADTS/MS-ADTS.md)) suffixed with a "$" character for the **SamAccountName** attribute.
+- *DomainObject*: An object in the domain database ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4) having the value of **ComputerNameNetBIOS** (section [3.2.1.5](#Section_3.2.1.5)) suffixed with a "$" character for the **SamAccountName** attribute.
 - *PasswordString*: A [**UTF-8**](#gt_utf-8) string that contains a password in [**cleartext**](#gt_cleartext).
 The following statements define the sequence of message processing operations.
 
@@ -5099,10 +5099,10 @@ The following statements define the sequence of message processing operations.
 - The server MUST configure the local [**W32Time**](#gt_windows-time-service-w32time) ([[WTSREF]](https://go.microsoft.com/fwlink/?LinkId=90586)) so that it is aware of no longer being joined to a domain.
 - The server MUST set **DomainSid** to NULL.
 - The server MUST delete the persisted password that was stored previously in the **Password** ADM element when processing a **NetrJoinDomain3** message.
-- If the NETSETUP_ACCT_DELETE bit is set in *Options*, the server MUST update the *DomainObject* **userAccountControl** attribute by setting the USER_ACCOUNT_DISABLED bit. See the userAccountControl Mapping Table ([MS-SAMR](#Section_5) section 3.1.5.14.2) for details on the mapping of these bits in LDAP.
+- If the NETSETUP_ACCT_DELETE bit is set in *Options*, the server MUST update the *DomainObject* **userAccountControl** attribute by setting the USER_ACCOUNT_DISABLED bit. See the userAccountControl Mapping Table ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.14.2) for details on the mapping of these bits in LDAP.
 The security context provided to LDAP is *AccountName*, and the credential is *PasswordString*. For details on attributes and attribute names, see [MS-ADTS]. For details on LDAP, see [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) and [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327).
 
-- The server MUST configure the Certificate Auto Enrollment Service ([[MSFT-AUTOENROLLMENT]](https://go.microsoft.com/fwlink/?LinkId=90178) and [MS-CERSOD](#Section_1.3) section 2.1.2.2.2) so that it is aware of no longer being joined to a domain.
+- The server MUST configure the Certificate Auto Enrollment Service ([[MSFT-AUTOENROLLMENT]](https://go.microsoft.com/fwlink/?LinkId=90178) and [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) section 2.1.2.2.2) so that it is aware of no longer being joined to a domain.
 - The server MUST configure the local Net Logon Remote Protocol [MS-NRPC] such that it is aware of no longer being joined to a domain.
 - The server SHOULD store the Internet host name locally such that the DNS service unregisters name records for the local computer [[NIS]](https://go.microsoft.com/fwlink/?LinkId=90234).<144>
 - The server SHOULD remove the domain admins group from the local administrators group, and the server SHOULD remove the domain users group from the local users groups ([MS-SAMR]).
@@ -5161,7 +5161,7 @@ unsigned long NetrRenameMachineInDomain3(
 | NERR_SetupNotJoined 0x00000A84 | This computer is not currently joined to a domain. |
 | NERR_SetupDomainController 0x00000A85 | This computer is a domain controller and cannot be renamed.<146> |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<147>
 
@@ -5174,7 +5174,7 @@ The following definitions are used in the specification of message processing th
 - *Spn1*: A UTF-8 string.
 - *Spn2*: A UTF-8 string.
 - *PasswordString*: A UTF-8 string that contains a password in [**cleartext**](#gt_cleartext).
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
 - *ComputerAccountDN*: A UTF-8 string that contains the [**distinguished name (DN)**](#gt_distinguished-name-dn) of the computer account.
 The following statements define the sequence of message processing operations.
@@ -5303,7 +5303,7 @@ unsigned long NetrValidateName3(
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The Internet host name contains an invalid character. |
 | RPC_E_REMOTE_DISABLED 0x8001011C | Remote calls are not allowed for this process. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 The following definition is used in the specification of message processing that follows.
 
@@ -5389,7 +5389,7 @@ DNS_ERROR_INVALID_NAME_CHAR MUST be returned if any condition in this group is v
 - The name MUST NOT be in use by a computer accessible on the network except for the server receiving this call. ERROR_DUP_NAME MUST be returned if this condition is violated.<155>
 **NetSetupDomain**
 
-- The name MUST differ from the name of the [**built-in domain**](#gt_built-in-domain), "BUILTIN" (**Builtin Domain Principal View**, [MS-LSAT](#Section_5) section 3.1.1.1.3); the comparison MUST be case-insensitive. NERR_InvalidComputer MUST be returned if this condition is violated.
+- The name MUST differ from the name of the [**built-in domain**](#gt_built-in-domain), "BUILTIN" (**Builtin Domain Principal View**, [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.1.1.3); the comparison MUST be case-insensitive. NERR_InvalidComputer MUST be returned if this condition is violated.
 - The name MUST be a name of an existing domain. ERROR_NO_SUCH_DOMAIN MUST be returned if this condition is not satisfied.<156>
 **NetSetupNonExistentDomain**
 
@@ -5491,7 +5491,7 @@ Where the bits are defined as:
 | RPC_S_CALL_IN_PROGRESS 0x000006FF | A remote procedure call is already in progress.<160> |
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The [**Internet host name**](#gt_internet-host-name) contains an invalid character. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, it SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<161>
 
@@ -5715,7 +5715,7 @@ Where the bits are defined as:
 | RPC_S_CALL_IN_PROGRESS 0x000006FF | A remote procedure call is already in progress.<167> |
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The [**Internet host name**](#gt_internet-host-name) contains an invalid character. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<168>
 
@@ -5724,7 +5724,7 @@ The following definitions are used in the specification of message processing th
 - *OldAlternateNames*: MUST be a tuple entry for **alternate-computer-names** (section [3.2.1.2](#Section_3.2.1.2)).
 - *PasswordString*: A [**UTF-8**](#gt_utf-8) string containing a password in [**cleartext**](#gt_cleartext).
 - *DomainControllerString*: A UTF-8 string that contains the name of a domain controller in the domain that the server is joining.
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *WritableDomainControllerDN*: A UTF-8 string that contains the DN of the nTDSDSA object ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) for the domain controller named in *DomainControllerString*.
 - *ReadOnlyDomainControllerConnection*: An ADConnection ([MS-ADTS] section 7.3) to a read-only domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
@@ -5939,7 +5939,7 @@ Where the bits are defined as:
 | NERR_DefaultJoinRequired 0x00000A86 | The destination domain controller does not support creating machine accounts in OUs. |
 | DNS_ERROR_INVALID_NAME_CHAR 0x00002558 | The [**Internet host name**](#gt_internet-host-name) contains an invalid character. |
 
-Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_1.3)).
+Any other return value MUST conform to the error code requirements in **Protocol Details** (section [3](#Section_3)).
 
 Unless otherwise noted, if the server encounters an error during message processing, the server SHOULD revert any state changes made, MUST stop message processing, and MUST return the error to the caller.<175>
 
@@ -5951,7 +5951,7 @@ The following definitions are used in the specification of message processing th
 - *I*: Unsigned integer used for indexing **alternate-computer-names**.
 - *PasswordString*: A UTF-8 string containing a password in [**cleartext**](#gt_cleartext).
 - *DomainControllerString*: A UTF-8 string that contains the name of a domain controller in the domain that the server is joining.
-- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to a domain controller.
+- *DomainControllerConnection*: An ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to a domain controller.
 - *WritableDomainControllerDN*: A UTF-8 string that contains the DN of the nTDSDSA object ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1.2.1.1) for the domain controller named in *DomainControllerString*.
 - *ReadOnlyDomainControllerConnection*: An ADConnection ([MS-ADTS] section 7.3) to a read-only domain controller.
 - *LdapResultMessages*: A list of LDAPMessage ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) containing results from an operation performed on DomainControllerConnection.
@@ -6151,7 +6151,7 @@ This task accepts as input the following:
 - *DisallowReferrals*: specifies whether to set LDAP_OPT_REFERRALS to LDAP_OPT_OFF on the returned connection
 Upon success, this task returns the following:
 
-- NewADConnection: an ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2).
+- NewADConnection: an ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2).
 This task executes as follows:
 
 - The server invokes the "Initializing an ADConnection" task of [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.1 with the following parameters:
@@ -6186,7 +6186,7 @@ Upon success, the result is stored in NewADConnection.
 
 This task accepts as input the following:
 
-- ADConnectionToUnbind: an ADCONNECTION_HANDLE ([MS-DTYP](#Section_2.2.2) section 2.2.2) to unbind.
+- ADConnectionToUnbind: an ADCONNECTION_HANDLE ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.2) to unbind.
 This task executes as follows:
 
 - The server invokes the "Performing an LDAP Unbind on an ADConnection" task ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.5) with the *TaskInputADConnection* parameter set to ADConnectionToUnbind.
@@ -6214,7 +6214,7 @@ This task executes as follows:
 Upon success, the server MUST store the result in *LocalSMBSession*.
 
 - The server MUST update the SAM account name with *NewSamAccountName* using the following steps:
-- The server MUST bind to the named pipe endpoint \PIPE\samr, as shown in [MS-SAMR](#Section_5) section 2.1.
+- The server MUST bind to the named pipe endpoint \PIPE\samr, as shown in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.1.
 - The server MUST connect to the SAM RPC server on the domain controller using one of the **SamrConnect** variants. See [MS-SAMR] section 1.7.2 for details about invoking the **SamrConnect** variants in order to determine the version and method supported by the RPC server. See [MS-SAMR] section 3.1.5.1 for using the Open pattern in the SAM interface.
 - ServerName = *DomainController*
 - DesiredAccess = GENERIC_ALL
@@ -6268,7 +6268,7 @@ This task returns no results to the caller. It executes as follows:
 - *UserId*: The ID of the account obtained in step 3
 - The server MUST invoke the **SamrQueryInformationUser2** method on *DomainController*, specifying the following parameters:
 - *UserHandle*: The handle obtained in step 4
-- *UserInformationClass*: **UserAllInformation** ([MS-SAMR](#Section_5) section 2.2.6.28)
+- *UserInformationClass*: **UserAllInformation** ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.6.28)
 - If the **FullName** field of the **SAMPR_USER_ALL_INFORMATION** structure returned in step 5 is equal to *MachineName* using a case-insensitive comparison, the server MUST continue executing at step 8. Otherwise, execution continues at step 7.
 - The server MUST invoke the **SamrSetInformationUser2** method on *DomainController*, specifying the following parameters:
 - *UserHandle*: The handle obtained in step 4
@@ -6393,7 +6393,7 @@ On receiving this method, the server executes the method locally to continue enu
 
 In this example, "SrvrA" is a machine that is not joined to a domain, and there exists a domain with the name "DomainA" and a domain controller of that domain named "DC-A".
 
-A client calls the [**NetrJoinDomain2**](#Section_3.2.4.13.2) method (section 3.2.4.13) on the server named "SrvrA":
+A client calls the [**NetrJoinDomain2**](#Section_3.2.4.13) method (section 3.2.4.13) on the server named "SrvrA":
 
 unsigned long NetrJoinDomain2(
 
@@ -6482,7 +6482,7 @@ How entropy is acquired is up to the implementer of any protocol. The literature
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](#Section_2.2.2) Appendix A.
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A.
 
 import "ms-dtyp.idl";
 
@@ -7643,7 +7643,7 @@ Note that the names are driver-specific.
 
 <17> Section 3.2.3: Windows server implementations initialize this value to 50.
 
-<18> Section 3.2.3: Windows server implementations initialize this value to 0x000001F4, which is the value for Windows (section [2.2.5.1](#Section_2.2.4.1)).
+<18> Section 3.2.3: Windows server implementations initialize this value to 0x000001F4, which is the value for Windows (section [2.2.5.1](#Section_2.2.5.1)).
 
 <19> Section 3.2.3: Windows server implementations initialize this value to 60 seconds.
 
@@ -7798,10 +7798,10 @@ Using the DS_FULL_SECRET_DOMAIN_6_FLAG flag ([MS-ADTS] section 6.3.3.2) ensures 
 
 <72> Section 3.2.4.13.2: Windows implementations find and set the described state through the following sequence:
 
-- The computer account object is created at a [**writable domain controller (writable DC)**](#gt_writable-domain-controller-writable-dc) using the **SamrCreateUser2InDomain** method ([MS-SAMR](#Section_5) section 3.1.5.4.4).
+- The computer account object is created at a [**writable domain controller (writable DC)**](#gt_writable-domain-controller-writable-dc) using the **SamrCreateUser2InDomain** method ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.4.4).
 - The LDAP attributes **userAccountControl** and **unicodePwd** ([MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.342 and [MS-ADA3] section 2.332, respectively) are set using the **SamrSetInformationUser2** method of [MS-SAMR] section 3.1.5.6.4.
 - The LDAP attributes **dNSHostName** and **servicePrincipalName** ([MS-ADTS] section 3.1.1.3.2.4 or [MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.185, and [MS-ADA3] section 2.253, respectively) are set using the LDAP protocol ([[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) and [[RFC2253]](https://go.microsoft.com/fwlink/?LinkId=90327)).
-<73> Section 3.2.4.13.3: Windows implementations send an **LsarOpenPolicy2** request to a domain controller and, using the returned policy handle [MS-LSAD](#Section_5), query for the domain name and [**SID**](#gt_security-identifier-sid) by sending an **LsarQueryInformationPolicy2** request for InformationClass **PolicyDnsDomainInformation**, followed by sending an **LsarQueryInformationPolicy** request for InformationClass **PolicyPrimaryDomainInformation**.
+<73> Section 3.2.4.13.3: Windows implementations send an **LsarOpenPolicy2** request to a domain controller and, using the returned policy handle [MS-LSAD](../MS-LSAD/MS-LSAD.md), query for the domain name and [**SID**](#gt_security-identifier-sid) by sending an **LsarQueryInformationPolicy2** request for InformationClass **PolicyDnsDomainInformation**, followed by sending an **LsarQueryInformationPolicy** request for InformationClass **PolicyPrimaryDomainInformation**.
 
 <74> Section 3.2.4.13.3: Windows implementations use the algorithm specified in [[FIPS186-2]](https://go.microsoft.com/fwlink/?LinkId=168870) for generating each byte of the machine password. [FIPS186-2] Appendix 3.1 describes a pseudo-random number generator (PRNG) that can use either DES or SHA-1. Windows implementations use a SHA-1–based PRNG to satisfy FIPS 140-2 level 2 cryptographic module certification requirements [[FIPS140]](https://go.microsoft.com/fwlink/?LinkId=89866).
 

@@ -654,12 +654,12 @@ Upon a successful [Dial](#Section_2.2.1.2)/[Dial Response Message](#Section_2.2.
 In the example illustrated in the following figure, the user initiates the PPP Over IrDA Dialup Protocol connection by initializing the client-side protocol as specified in section [3.3.3](#Section_3.3.3). The user then passes the phone number to the client-side PPP Over IrDA Dialup Protocol, as specified in section [3.3.4](#Section_3.3.4). It is assumed that server-side initialization, as specified in section [3.2.3](#Section_3.2.3), has already taken place:
 
 - The client sends a **Dial Message**, as specified in section [2.2.1.2](#Section_2.2.1.2), with the **Number** field containing "8001231234".
-- The server echoes the **Dial Message** back to the client as specified in section [3.2.5.1](#Section_3.3.5.2) (not shown in the following figure).
+- The server echoes the **Dial Message** back to the client as specified in section [3.2.5.1](#Section_3.2.5.1) (not shown in the following figure).
 - The server sends the [Dial Response Message](#Section_2.2.1.3) containing the connection speed at which it can operate, in the form <CR><LF>CONNECT 9600<CR><LF>, where 9600 indicates the negotiated speed between the two modems (one modem being the PPP Over IrDA Dialup Protocol server and the other modem being the device at number 800-123-1234 from step 1).
 - Once the connection is established and the client side of the PPP Over IrDA Dialup Protocol indicates to the PPP layer to send data, the client sends a **Data Message** to the server, as specified in section [2.2.2](#Section_2.2.2).
 - The server sends a **Data Message** to the client, which is delivered to the PPP Protocol as specified in [[RFC1662]](https://go.microsoft.com/fwlink/?LinkId=90284).
 - The client sends a [Hook Message](#Section_2.2.1.4) to the server.
-- The server echoes the hook message back to the client as specified in section [3.2.5.2](#Section_3.3.5.2) (not shown in the following figure).
+- The server echoes the hook message back to the client as specified in section [3.2.5.2](#Section_3.2.5.2) (not shown in the following figure).
 - The server sends the [Hook Response Message](#Section_2.2.1.5) with the **Response** client field set to "NO CARRIER".
 ![Example of PPP Over IrDA Dialup Protocol connection setup, data exchange, and connection teardown](media/image2.png)
 

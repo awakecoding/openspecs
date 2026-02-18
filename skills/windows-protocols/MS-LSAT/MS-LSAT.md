@@ -146,7 +146,7 @@ This document uses the following terms:
 **ACID**: A term that refers to the four properties that any database system has to achieve in order to be considered transactional: Atomicity, Consistency, Isolation, and Durability.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_discretionary-access-control-list-dacl"></a>
 **discretionary access control list (DACL)**: An [**access control list (ACL)**](#gt_access-control-list-acl) that is controlled by the owner of an object and that specifies the access particular users or groups can have to the object.
@@ -161,7 +161,7 @@ This document uses the following terms:
 **domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining [**domain NCs**](#gt_domain-naming-context-domain-nc) in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD] section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
 
 <a id="gt_domain-database"></a>
-**domain database**: A database where security principal information is stored. This database is the directory service [**Active Directory**](#gt_active-directory) in the case of a [**domain controller (DC)**](#gt_domain-controller-dc). On a machine that is not a [**DC**](#gt_domain-controller-dc), this database is a local database, manageable through the Security Accounts Manager Remote Protocol, as specified in [MS-SAMR](#Section_5).
+**domain database**: A database where security principal information is stored. This database is the directory service [**Active Directory**](#gt_active-directory) in the case of a [**domain controller (DC)**](#gt_domain-controller-dc). On a machine that is not a [**DC**](#gt_domain-controller-dc), this database is a local database, manageable through the Security Accounts Manager Remote Protocol, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 
 <a id="gt_domain-member-member-machine"></a>
 **domain member (member machine)**: A machine that is joined to a domain by sharing a secret between the machine and the domain.
@@ -275,13 +275,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SCMR] Microsoft Corporation, "[Service Control Manager Remote Protocol](../MS-SCMR/MS-SCMR.md)".
 
@@ -292,7 +292,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
@@ -318,7 +318,7 @@ This protocol is a simple request/response-based [**remote procedure call (RPC)*
 
 Figure 1: The relationships among the LSAT, LSAD, RPC, and SMB protocols
 
-The Local Security Authority (Translation Methods) Remote Protocol is composed of a subset of [**opnums**](#gt_opnum) in an interface that also includes the Local Security Authority (Domain Policy) Remote Protocol, as specified in [MS-LSAD](#Section_5).
+The Local Security Authority (Translation Methods) Remote Protocol is composed of a subset of [**opnums**](#gt_opnum) in an interface that also includes the Local Security Authority (Domain Policy) Remote Protocol, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md).
 
 The Local Security Authority (Translation Methods) Remote Protocol is dependent upon [**RPC**](#gt_remote-procedure-call-rpc), which is used to communicate between [**domain members**](#gt_6234a38c-ed1b-4c69-969f-6e6479566f65) and [**domain controllers**](#gt_domain-controller-dc).
 
@@ -328,7 +328,7 @@ Some messages in this protocol depend on the Netlogon Remote Protocol, as specif
 
 The Directory Replication Service (DRS) Remote Protocol, as specified in [MS-DRSR](../MS-DRSR/MS-DRSR.md), exposes functionality similar to what this protocol achieves, but serves a different purpose. The DRS Remote Protocol can translate names in different syntaxes, but lacks the functionality to translate names from different [**forests**](#gt_forest). An application uses one or both protocols, depending on the syntax of names for which the application requires translation.
 
-The Security Account Manager (SAM) Remote Protocol (Client-to-Server), as specified in [MS-SAMR](#Section_5), exposes similar functionality for [**security principals**](#gt_security-principal) that are local to a server.
+The Security Account Manager (SAM) Remote Protocol (Client-to-Server), as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md), exposes similar functionality for [**security principals**](#gt_security-principal) that are local to a server.
 
 The Active Directory Technical Specification [MS-ADTS](../MS-ADTS/MS-ADTS.md) discusses [**Active Directory**](#gt_active-directory), which is used by this protocol.
 
@@ -383,7 +383,7 @@ This protocol MUST use [**RPC dynamic endpoints**](#gt_rpc-dynamic-endpoint), as
 
 This protocol MUST use "\PIPE\lsarpc" as the [**RPC endpoint**](#gt_rpc-endpoint) when using RPC over SMB.<2>
 
-[**RPC clients**](#gt_rpc-client) for this protocol MUST use RPC over SMB for the [LsarOpenPolicy2](#Section_3.1.4.1), [LsarOpenPolicy](#Section_3.1.4.2), [LsarClose](#Section_3.1.4.3), [LsarGetUserName](#Section_3.1.4.4), [LsarLookupNames](#Section_3.1.4.8), [LsarLookupNames2](#Section_3.1.4.7), [LsarLookupNames3](#Section_3.1.4.6), [LsarLookupSids](#Section_3.1.4.11), and [LsarLookupSids2](#Section_3.1.4.10) methods. RPC clients MUST use RPC over TCP/IP for the [LsarLookupNames4](#Section_3.1.4.5) and [LsarLookupSids3](#Section_3.1.4.9) methods.<3>
+[**RPC clients**](#gt_rpc-client) for this protocol MUST use RPC over SMB for the [LsarOpenPolicy2](#Section_3.1.4.1), [LsarOpenPolicy](#Section_3.1.4.2), [LsarClose](#Section_3.1.4.3), [LsarGetUserName](#Section_3.1.4.4), [LsarLookupNames](#Section_3.1.4.8), [LsarLookupNames2](#Section_3.1.4.7), [LsarLookupNames3](#Section_3.1.4.6), [LsarLookupSids](#Section_3.1.4.9), and [LsarLookupSids2](#Section_3.1.4.10) methods. RPC clients MUST use RPC over TCP/IP for the [LsarLookupNames4](#Section_3.1.4.5) and [LsarLookupSids3](#Section_3.1.4.9) methods.<3>
 
 The server SHOULD<4> reject calls that do not use an authentication level of RPC_C_AUTHN_LEVEL_NONE, RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, or RPC_C_AUTHN_LEVEL_PKT_PRIVACY ([MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.8).
 
@@ -425,17 +425,17 @@ The following table summarizes the types that are defined in this specification.
 | [LSAPR_TRANSLATED_NAME (section 2.2.19)](#Section_2.2.19) | Contains human-readable name information about a security principal. |
 | [LSAPR_TRANSLATED_NAME_EX (section 2.2.21)](#Section_2.2.21) | Contains human-readable name information about a security principal. |
 | [LSAPR_TRANSLATED_NAMES (section 2.2.20)](#Section_2.2.20) | Defines a set of translated names. |
-| [LSAPR_TRANSLATED_NAMES_EX (section 2.2.22)](#Section_2.2.20) | Contains a set of translated names. |
+| [LSAPR_TRANSLATED_NAMES_EX (section 2.2.22)](#Section_2.2.22) | Contains a set of translated names. |
 | [LSAPR_TRANSLATED_SID_EX (section 2.2.23)](#Section_2.2.23) | Contains machine-readable identifier information about a security principal. |
 | [LSAPR_TRANSLATED_SID_EX2 (section 2.2.25)](#Section_2.2.25) | Contains machine-readable identifier information about a security principal. |
 | [LSAPR_TRANSLATED_SIDS (section 2.2.15)](#Section_2.2.15) | Defines a set of translated SIDs. |
-| [LSAPR_TRANSLATED_SIDS_EX (section 2.2.24)](#Section_2.2.15) | Contains a set of translated SIDs. |
+| [LSAPR_TRANSLATED_SIDS_EX (section 2.2.24)](#Section_2.2.24) | Contains a set of translated SIDs. |
 | [LSAPR_TRANSLATED_SIDS_EX2 (section 2.2.26)](#Section_2.2.26) | Contains a set of translated SIDs. |
 | [LSAPR_TRUST_INFORMATION (section 2.2.11)](#Section_2.2.11) | Contains information about a domain. |
 | [SECURITY_CONTEXT_TRACKING_MODE (section 2.2.7)](#Section_2.2.7) | Specifies whether user security attributes are updated on a server when they change on the client. |
 | [SECURITY_DESCRIPTOR_CONTROL (section 2.2.4)](#Section_2.2.4) | Qualifies the meaning of a security descriptor or its components. |
 | [SECURITY_IMPERSONATION_LEVEL (section 2.2.6)](#Section_2.2.6) | Specifies security impersonation levels. |
-| [SECURITY_QUALITY_OF_SERVICE (section 2.2.8)](#Section_5) | Defines information that is used to support client impersonation. |
+| [SECURITY_QUALITY_OF_SERVICE (section 2.2.8)](#Section_2.2.8) | Defines information that is used to support client impersonation. |
 | [SID_NAME_USE (section 2.2.13)](#Section_2.2.13) | Contains values that specify the type of an account. |
 | [STRING (section 2.2.2)](#Section_2.2.2) | Defines an ANSI string along with the number of characters in the string. |
 
@@ -444,7 +444,7 @@ The following citation contains a timeline of when each data type was introduced
 <a id="Section_2.2.1"></a>
 ### 2.2.1 LSAPR_HANDLE
 
-The LSAPR_HANDLE type defines a context handle, as specified in [MS-LSAD](#Section_5) section 2.2.2.1.
+The LSAPR_HANDLE type defines a context handle, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.2.1.
 
 This type is declared as follows:
 
@@ -453,7 +453,7 @@ typedef [context_handle] void* LSAPR_HANDLE;
 <a id="Section_2.2.2"></a>
 ### 2.2.2 STRING
 
-The STRING structure defines a string along with the number of characters in the string, as specified in [MS-LSAD](#Section_5) section 2.2.3.1.
+The STRING structure defines a string along with the number of characters in the string, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.1.
 
 typedef struct _STRING {
 
@@ -474,7 +474,7 @@ Individual member semantics are specified in [MS-LSAD] section 2.2.3.1.
 <a id="Section_2.2.3"></a>
 ### 2.2.3 LSAPR_ACL
 
-The LSAPR_ACL structure defines the header of an [**access control list (ACL)**](#gt_access-control-list-acl) as specified in [MS-LSAD](#Section_5) section 2.2.3.2.
+The LSAPR_ACL structure defines the header of an [**access control list (ACL)**](#gt_access-control-list-acl) as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.2.
 
 typedef struct _LSAPR_ACL {
 
@@ -495,7 +495,7 @@ Individual member semantics are specified in [MS-LSAD] section 2.2.3.2.
 <a id="Section_2.2.4"></a>
 ### 2.2.4 SECURITY_DESCRIPTOR_CONTROL
 
-The SECURITY_DESCRIPTOR_CONTROL type contains a set of bit flags as specified in [MS-LSAD](#Section_5) section 2.2.3.3.
+The SECURITY_DESCRIPTOR_CONTROL type contains a set of bit flags as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.3.
 
 This type is declared as follows:
 
@@ -504,7 +504,7 @@ typedef unsigned short SECURITY_DESCRIPTOR_CONTROL, *PSECURITY_DESCRIPTOR_CONT
 <a id="Section_2.2.5"></a>
 ### 2.2.5 LSAPR_SECURITY_DESCRIPTOR
 
-The LSAPR_SECURITY_DESCRIPTOR structure defines an object's security descriptor as specified in [MS-LSAD](#Section_5) section 2.2.3.4.
+The LSAPR_SECURITY_DESCRIPTOR structure defines an object's security descriptor as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.4.
 
 typedef struct _LSAPR_SECURITY_DESCRIPTOR {
 
@@ -531,7 +531,7 @@ Individual member semantics are specified in [MS-LSAD] section 2.2.3.4.
 <a id="Section_2.2.6"></a>
 ### 2.2.6 SECURITY_IMPERSONATION_LEVEL
 
-The SECURITY_IMPERSONATION_LEVEL enumeration defines a set of values that specify security impersonation levels as specified in [MS-LSAD](#Section_5) section 2.2.3.5.
+The SECURITY_IMPERSONATION_LEVEL enumeration defines a set of values that specify security impersonation levels as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.5.
 
 typedef enum _SECURITY_IMPERSONATION_LEVEL
 
@@ -554,7 +554,7 @@ Individual value semantics are specified in [MS-LSAD] section 2.2.3.5.
 <a id="Section_2.2.7"></a>
 ### 2.2.7 SECURITY_CONTEXT_TRACKING_MODE
 
-The SECURITY_CONTEXT_TRACKING_MODE type specifies how the server tracks the client's security context as specified in [MS-LSAD](#Section_5) section 2.2.3.6.
+The SECURITY_CONTEXT_TRACKING_MODE type specifies how the server tracks the client's security context as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.6.
 
 This type is declared as follows:
 
@@ -565,7 +565,7 @@ Possible values are specified in [MS-LSAD] section 2.2.3.6.
 <a id="Section_2.2.8"></a>
 ### 2.2.8 SECURITY_QUALITY_OF_SERVICE
 
-The SECURITY_QUALITY_OF_SERVICE structure defines information used to support client impersonation as specified in [MS-LSAD](#Section_5) section 2.2.3.7.
+The SECURITY_QUALITY_OF_SERVICE structure defines information used to support client impersonation as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.7.
 
 typedef struct _SECURITY_QUALITY_OF_SERVICE {
 
@@ -586,7 +586,7 @@ Individual member semantics are specified in [MS-LSAD] section 2.2.3.7.
 <a id="Section_2.2.9"></a>
 ### 2.2.9 LSAPR_OBJECT_ATTRIBUTES
 
-The LSAPR_OBJECT_ATTRIBUTES structure specifies an object and its properties as specified in [MS-LSAD](#Section_5) section 2.2.2.4.
+The LSAPR_OBJECT_ATTRIBUTES structure specifies an object and its properties as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.2.4.
 
 typedef struct _LSAPR_OBJECT_ATTRIBUTES {
 
@@ -617,7 +617,7 @@ This type is declared as follows:
 
 typedef unsigned long ACCESS_MASK;
 
-The possible values are defined in [MS-LSAD](#Section_5) sections 2.2.1.1.1 and 2.2.1.1.2. The ACCESS_MASK data type is further defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.3.
+The possible values are defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) sections 2.2.1.1.1 and 2.2.1.1.2. The ACCESS_MASK data type is further defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.3.
 
 For this protocol, only a subset of the possible values is required. This subset consists of POLICY_LOOKUP_NAMES, which is defined in the following table.
 
@@ -640,7 +640,7 @@ PRPC_SID Sid;
 
 *PLSAPR_TRUST_INFORMATION;
 
-Individual member semantics are specified in [MS-LSAD](#Section_5) section 2.2.7.1.
+Individual member semantics are specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.7.1.
 
 <a id="Section_2.2.12"></a>
 ### 2.2.12 LSAPR_REFERENCED_DOMAIN_LIST
@@ -1062,12 +1062,12 @@ This protocol determines whether it is running on a [**domain controller**](#gt_
 
 This section describes a possible data organization that an implementation might maintain to participate in this protocol. The described organization is provided to help explain how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with what is described in this document.
 
-The server implementing this protocol MUST create views, as specified in section [3.1.1.1](#Section_1.3), over [**domain databases**](#gt_domain-database) that the server [**trusts**](#gt_trust) to be able to translate [**SIDs**](#gt_security-identifier-sid) to names, and vice versa. These views contain SIDs and different types of names, as well as the [**domain**](#gt_domain) to which each [**security principal**](#gt_security-principal) belongs. These views MUST be kept in sync with the original databases whose data is used to create the view. The sync mechanism is implementation-specific, and there is no upper bound on the time from when a change occurs in a domain database to when that change appears in the view. A scoping parameter defined as [LSAP_LOOKUP_LEVEL](#Section_2.2.16) can be considered during message processing by applying these views to different databases.
+The server implementing this protocol MUST create views, as specified in section [3.1.1.1](#Section_3.1.1.1), over [**domain databases**](#gt_domain-database) that the server [**trusts**](#gt_trust) to be able to translate [**SIDs**](#gt_security-identifier-sid) to names, and vice versa. These views contain SIDs and different types of names, as well as the [**domain**](#gt_domain) to which each [**security principal**](#gt_security-principal) belongs. These views MUST be kept in sync with the original databases whose data is used to create the view. The sync mechanism is implementation-specific, and there is no upper bound on the time from when a change occurs in a domain database to when that change appears in the view. A scoping parameter defined as [LSAP_LOOKUP_LEVEL](#Section_2.2.16) can be considered during message processing by applying these views to different databases.
 
 The following domain databases are used in this protocol.
 
 - [**Active Directory**](#gt_active-directory), specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md).
-- The Local Security Authority (LSA) Domain Policy database, specified in [MS-LSAD](#Section_5).
+- The Local Security Authority (LSA) Domain Policy database, specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md).
 - The Service Control Manager database, specified in [MS-SCMR](../MS-SCMR/MS-SCMR.md).
 - The Predefined Translation database, specified in section [3.1.1.1.1](#Section_3.1.1.1.1).
 The domain databases MUST satisfy [**ACID**](#gt_acid) properties [GRAY] during creation or updates of views.
@@ -1500,14 +1500,14 @@ Domain database information MUST consist of the following conceptual fields:
 - **Domain DNS Name**: A Unicode string that contains the [**DNS name**](#gt_dns-name) of the [**domain database**](#gt_domain-database).
 - **Domain NetBIOS Name**: A Unicode string that contains the NetBIOS name of the domain database.
 - **Domain SID**: The [**SID**](#gt_security-identifier-sid) of the domain database.
-When the domain database is an [**Active Directory**](#gt_active-directory) domain database, this information MUST be populated from DNS Domain Information, as specified in [MS-LSAD](#Section_5) section 3.1.1.1.
+When the domain database is an [**Active Directory**](#gt_active-directory) domain database, this information MUST be populated from DNS Domain Information, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.1.
 
 Otherwise, this information MUST be populated from the Account Domain Information, as specified in [MS-LSAD] section 3.1.1.1. In this case, **Domain DNS Name** MUST be set to empty.
 
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Trusted Domains and Forests Information
 
-The Local Security Authority (LSA) Domain Policy database, as specified in [MS-LSAD](#Section_5), contains [**trust**](#gt_trust) information for a given [**domain**](#gt_domain) and [**forest**](#gt_forest). Of all the information that it manages for trusts, only the following conceptual columns are of interest to this protocol:
+The Local Security Authority (LSA) Domain Policy database, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md), contains [**trust**](#gt_trust) information for a given [**domain**](#gt_domain) and [**forest**](#gt_forest). Of all the information that it manages for trusts, only the following conceptual columns are of interest to this protocol:
 
 - **Trusted Domain DNS Name**: The [**DNS name**](#gt_dns-name) of the [**trusted domain**](#gt_trusted-domain).
 - **Trusted Domain NetBIOS Name**: The NetBIOS name of the same domain.
@@ -1522,7 +1522,7 @@ Trust information that satisfies the following criteria MUST be used by this pro
 
 - Trust Type is a Windows trust, which means that the trusted party is a Windows domain, as specified in [MS-LSAD]. A Windows trust is represented by a value of 0x0000002 in the trustType attribute. **Trust Attributes** can declare a trust to be a [**forest trust**](#gt_forest-trust) by having the 0x00000008 bit set in the trustAttributes attribute, as specified in [MS-LSAD]. For more information, see [MS-ADSC](../MS-ADSC/MS-ADSC.md), [MS-ADA1](../MS-ADA1/MS-ADA1.md), [MS-ADA2](../MS-ADA2/MS-ADA2.md), and [MS-ADA3](../MS-ADA3/MS-ADA3.md).
 - Trust Direction is outbound or bidirectional, as specified in [MS-LSAD].
-The NetBIOS and DNS names of the trusted domain can be used to locate a [**domain NC**](#gt_domain-naming-context-domain-nc) "replica" for that domain by using a [**domain controller**](#gt_domain-controller-dc) locator algorithm, an example of which is described in [MS-ADOD](#Section_1.3) sections 2.7.7.3.1 and 3.1.1.
+The NetBIOS and DNS names of the trusted domain can be used to locate a [**domain NC**](#gt_domain-naming-context-domain-nc) "replica" for that domain by using a [**domain controller**](#gt_domain-controller-dc) locator algorithm, an example of which is described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) sections 2.7.7.3.1 and 3.1.1.
 
 The [**trust attributes**](#gt_trust-attributes) declare the trust to be a forest trust, as specified in [MS-LSAD] section 3.1.1.5, if and only if the following conditions are met:
 
@@ -1547,7 +1547,7 @@ This section specifies the methods for this protocol, in addition to their proce
 
 This protocol contains some methods with parameters that have no effect on message processing in any environment. These are called out as "ignored".
 
-**Note** This protocol shares an interface with the Local Security Authority (Domain Policy) Remote Protocol, as specified in [MS-LSAD](#Section_5).
+**Note** This protocol shares an interface with the Local Security Authority (Domain Policy) Remote Protocol, as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md).
 
 Methods in RPC Opnum Order
 
@@ -1567,8 +1567,8 @@ Methods in RPC Opnum Order
 | Lsar_LSA_DP_11 | Opnum: 11 |
 | Lsar_LSA_DP_12 | Opnum: 12 |
 | Lsar_LSA_DP_13 | Opnum: 13 |
-| [LsarLookupNames](#Section_3.1.4.8) | Translates a batch of [**security principal**](#gt_security-principal) names. For information on selecting which version to use, see section [3](#Section_1.3). Opnum: 14 |
-| [LsarLookupSids](#Section_3.1.4.11) | Translates a batch of security principal [**SIDs**](#gt_security-identifier-sid). For information on selecting which version to use, see section 3. Opnum: 15 |
+| [LsarLookupNames](#Section_3.1.4.8) | Translates a batch of [**security principal**](#gt_security-principal) names. For information on selecting which version to use, see section [3](#Section_3). Opnum: 14 |
+| [LsarLookupSids](#Section_3.1.4.9) | Translates a batch of security principal [**SIDs**](#gt_security-identifier-sid). For information on selecting which version to use, see section 3. Opnum: 15 |
 | Lsar_LSA_DP_16 | Opnum: 16 |
 | Lsar_LSA_DP_17 | Opnum: 17 |
 | Lsar_LSA_DP_18 | Opnum: 18 |
@@ -1664,7 +1664,7 @@ NTSTATUS LsarOpenPolicy2(
 
 );
 
-Processing rules for this message are defined in [MS-LSAD](#Section_5) section 3.1.4.4.1.
+Processing rules for this message are defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.1.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 LsarOpenPolicy (Opnum 6)
@@ -1685,7 +1685,7 @@ NTSTATUS LsarOpenPolicy(
 
 );
 
-Processing rules for this message are defined in [MS-LSAD](#Section_5) section 3.1.4.4.2.
+Processing rules for this message are defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.2.
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 LsarClose (Opnum 0)
@@ -1698,7 +1698,7 @@ NTSTATUS LsarClose(
 
 );
 
-Processing rules for this message are defined in [MS-LSAD](#Section_5) section 3.1.4.9.4.
+Processing rules for this message are defined in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.9.4.
 
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 LsarGetUserName (Opnum 45)
@@ -1826,7 +1826,7 @@ This message is valid only if the RPC server is a domain controller. The RPC ser
 The RPC server MUST ensure that one of the following conditions is true:
 
 - The RPC_C_AUTHN_NETLOGON security provider (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) and at least RPC_C_AUTHN_LEVEL_PKT_INTEGRITY authentication level (as specified in [MS-RPCE] section 2.2.1.1.8) are used in this RPC message.
-- The RPC client token contains one of the following well-known SID types - DOMAIN_GROUP_RID_COMPUTERS, DOMAIN_GROUP_RID_CONTROLLERS, DOMAIN_GROUP_RID_READONLY_CONTROLLERS (as specified in [MS-SAMR](#Section_5) section 2.2.1.14).<26>
+- The RPC client token contains one of the following well-known SID types - DOMAIN_GROUP_RID_COMPUTERS, DOMAIN_GROUP_RID_CONTROLLERS, DOMAIN_GROUP_RID_READONLY_CONTROLLERS (as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.14).<26>
 Otherwise, the RPC server MUST return STATUS_ACCESS_DENIED.
 
 The RPC server MUST check each element in the *Names* parameter for validity, as described for the RPC_UNICODE_STRING structure in [MS-DTYP] section 2.3.10. If validation fails, the RPC server MUST return STATUS_INVALID_PARAMETER.
@@ -1839,7 +1839,7 @@ A name is interchangeably called a "qualified" or "composite" name if the name h
 
 The RPC server MUST match a name with a row in the view by using the following rules:
 
-- If the name is a qualified name, the domain name MUST match the Domain NetBIOS Name column or Domain DNS Name column, and the name MUST match the Security Principal Name column. Note that there cannot be multiple matches in this case (see section [3.1.1.1](#Section_1.3)). A domain name match against the Domain DNS Name column MUST NOT be performed if *ClientRevision* is 0x00000001 and the machine is joined to a mixed mode domain, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.4.1.
+- If the name is a qualified name, the domain name MUST match the Domain NetBIOS Name column or Domain DNS Name column, and the name MUST match the Security Principal Name column. Note that there cannot be multiple matches in this case (see section [3.1.1.1](#Section_3.1.1.1)). A domain name match against the Domain DNS Name column MUST NOT be performed if *ClientRevision* is 0x00000001 and the machine is joined to a mixed mode domain, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.4.1.
 - If the name is an isolated name:
 - If in single-label form, the name MUST match the Security Principal Name column or the Additional Security Principal Name column.
 - If there are multiple matches due to a search in multiple domains, which can happen in Forest Views, any one of the matches MAY be used to satisfy the request, as long as a consistent search order is followed.
@@ -2118,7 +2118,7 @@ This message is valid only if the RPC server is a domain controller. The RPC ser
 The RPC server MUST ensure that one of the following conditions is true:
 
 - The RPC_C_AUTHN_NETLOGON security provider (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.2.1.1.7) and at least RPC_C_AUTHN_LEVEL_PKT_INTEGRITY authentication level (as specified in [MS-RPCE] section 2.2.1.1.8) are used in this RPC message.
-- The RPC client token contains one of the following well-known SID types - DOMAIN_GROUP_RID_COMPUTERS, DOMAIN_GROUP_RID_CONTROLLERS, DOMAIN_GROUP_RID_READONLY_CONTROLLERS (as specified in [MS-SAMR](#Section_5) section 2.2.1.14).<34>
+- The RPC client token contains one of the following well-known SID types - DOMAIN_GROUP_RID_COMPUTERS, DOMAIN_GROUP_RID_CONTROLLERS, DOMAIN_GROUP_RID_READONLY_CONTROLLERS (as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.14).<34>
 Otherwise, the RPC server MUST return STATUS_ACCESS_DENIED.
 
 The RPC server MUST check each element in the *SidEnumBuffer* parameter for validity, as specified in section [2.2.18](#Section_2.2.18), and individual elements in this structure MUST be checked for validity, as described for the SID structure in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2. If validation fails, the RPC server SHOULD return STATUS_INVALID_PARAMETER.
@@ -2295,7 +2295,7 @@ For selecting between [LsarLookupNames4](#Section_3.1.4.5), [LsarLookupNames3](#
 - Domain controllers and non–domain controllers can process LsarLookupNames3, LsarLookupNames2, and LsarLookupNames messages.
 For specifics on each message, see sections 3.1.4.5, 3.1.4.6, 3.1.4.7, and 3.1.4.8.
 
-For selecting between [LsarLookupSids3](#Section_3.1.4.9), [LsarLookupSids2](#Section_3.1.4.10), and [LsarLookupSids](#Section_3.1.4.11):
+For selecting between [LsarLookupSids3](#Section_3.1.4.9), [LsarLookupSids2](#Section_3.1.4.10), and [LsarLookupSids](#Section_3.1.4.9):
 
 - Only a domain controller can process an LsarLookupSids3 message.
 - LsarLookupSids3 requires an RPC handle (specified in its RpcHandle parameter) and that the connection is authenticated using the RPC_C_AUTHN_NETLOGON security provider, as specified in [MS-RPCE] section 2.2.1.1.7.
@@ -2585,7 +2585,7 @@ The [**RPC client**](#gt_rpc-client) has to authenticate the server if the resul
 
 For ease of implementation, the full IDL is provided below, where "ms-dtyp.idl" is the IDL specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A.
 
-**Note** The lsarpc interface is shared between this protocol and the Local Security Authority (Domain Policy) Remote Protocol [MS-LSAD](#Section_5). For convenience, the IDL definitions that appear below and the IDL definitions in [MS-LSAD] section 6 have been merged and are available for download. For more information, see [[MSFT-LSA-IDL]](https://go.microsoft.com/fwlink/?LinkId=150268).
+**Note** The lsarpc interface is shared between this protocol and the Local Security Authority (Domain Policy) Remote Protocol [MS-LSAD](../MS-LSAD/MS-LSAD.md). For convenience, the IDL definitions that appear below and the IDL definitions in [MS-LSAD] section 6 have been merged and are available for download. For more information, see [[MSFT-LSA-IDL]](https://go.microsoft.com/fwlink/?LinkId=150268).
 
 import "ms-dtyp.idl";
 
@@ -3695,7 +3695,7 @@ The This Organization and Other Organization entries were added in Windows Serve
 | 76 | LsarLookupSids3 | Windows XP, Windows Server 2003 |
 | 77 | LsarLookupNames4 | Windows XP, Windows Server 2003 |
 
-<23> Section 3.1.4: Some gaps in the [**opnum**](#gt_opnum) numbering sequence correspond to opnums that are documented in [MS-LSAD](#Section_5). All other gaps in the opnum numbering sequence apply to Windows as follows.
+<23> Section 3.1.4: Some gaps in the [**opnum**](#gt_opnum) numbering sequence correspond to opnums that are documented in [MS-LSAD](../MS-LSAD/MS-LSAD.md). All other gaps in the opnum numbering sequence apply to Windows as follows.
 
 | Opnum | Description |
 | --- | --- |

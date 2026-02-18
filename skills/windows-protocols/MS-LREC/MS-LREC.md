@@ -203,7 +203,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [DMTF-DSP0226] Distributed Management Task Force, Inc., "Web Services for Management (WS-Management) Specification", version 1.0.0, February 2008, [http://dmtf.org/sites/default/files/standards/documents/DSP0226_1.0.0.pdf](https://go.microsoft.com/fwlink/?LinkId=89849)
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -324,7 +324,7 @@ A client SHOULD<1> request the RPC_C_AUTHN_LEVEL_PKT_PRIVACY authentication leve
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
 
-In addition to the [**RPC**](#gt_remote-procedure-call-rpc)-based data types and definitions specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), [MS-RPCE](../MS-RPCE/MS-RPCE.md), and [MS-DTYP](#Section_2.2.1), additional data types are defined below.
+In addition to the [**RPC**](#gt_remote-procedure-call-rpc)-based data types and definitions specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), [MS-RPCE](../MS-RPCE/MS-RPCE.md), and [MS-DTYP](../MS-DTYP/MS-DTYP.md), additional data types are defined below.
 
 All multi-byte integer values in the messages declared in this section use [**little-endian**](#gt_little-endian) byte order unless otherwise noted.
 
@@ -368,7 +368,7 @@ unsigned long BufferLength;
 
 **BufferLength:** This property specifies the length, in bytes, of the data stored in the **Buffer** field.
 
-**Buffer:** This property specifies a collection of one or more **NET_EVENT_DATA_HEADER** (section [2.3.2.2](#Section_2.2.2)) structures each followed by an event payload.
+**Buffer:** This property specifies a collection of one or more **NET_EVENT_DATA_HEADER** (section [2.3.2.2](#Section_2.3.2.2)) structures each followed by an event payload.
 
 <a id="Section_2.3"></a>
 ## 2.3 Message Syntax
@@ -407,7 +407,7 @@ uint8 Stop();
 
 };
 
-**Guid:** This property specifies a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid) for the session in curly braced string representation, as defined in [MS-DTYP](#Section_2.2.1) section 2.3.4.3.
+**Guid:** This property specifies a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid) for the session in curly braced string representation, as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3.
 
 **Name:** This property specifies a friendly name for the event session that was assigned by the client when the session was created.
 
@@ -502,7 +502,7 @@ packet-beta
   192-287: "UserData (variable)"
 ```
 
-**Header (80 bytes):** This field specifies an **EVENT_HEADER** structure as defined in [MS-DTYP](#Section_2.2.1) section 2.3.2. For more information, see [[MSDN-EVENT_HEADER]](https://go.microsoft.com/fwlink/?LinkId=208337).
+**Header (80 bytes):** This field specifies an **EVENT_HEADER** structure as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.2. For more information, see [[MSDN-EVENT_HEADER]](https://go.microsoft.com/fwlink/?LinkId=208337).
 
 **ProcessorId (1 byte):** This field specifies an implementation-specific identifier for the CPU on which the **event provider** process was running at the time of the event recording.
 
@@ -705,7 +705,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | **RpcNetEventOpenSession** (section [3.1.4.2.1](#Section_3.1.4.2.1)) | This method opens a context handle to a running event session. Opnum: 0 |
-| **RpcNetEventReceiveData** (section [3.1.4.2.2](#Section_3.1.4.2.2)) | This method retrieves a buffer with one or more **NET_EVENT_DATA_HEADER** structures (section [2.3.2.2](#Section_2.2.2)) followed by the [**event**](#gt_event) payload. Opnum: 1 |
+| **RpcNetEventReceiveData** (section [3.1.4.2.2](#Section_3.1.4.2.2)) | This method retrieves a buffer with one or more **NET_EVENT_DATA_HEADER** structures (section [2.3.2.2](#Section_2.3.2.2)) followed by the [**event**](#gt_event) payload. Opnum: 1 |
 | **RpcNetEventCloseSession** (section [3.1.4.2.3](#Section_3.1.4.2.3)) | This method closes the RPC binding handle returned by the **RpcNetEventOpenSession** method. Opnum: 2 |
 
 <a id="Section_3.1.4.2.1"></a>
@@ -859,7 +859,7 @@ The client can request data channel encryption by specifying the RPC_C_AUTHN_LEV
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](#Section_2.2.1) Appendix A. The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
+For ease of implementation the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A. The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required and pointer_default(unique) is assumed.
 
 import "ms-dtyp.idl";
 

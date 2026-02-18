@@ -232,7 +232,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 The BITS Peer-Caching: Peer Discovery Protocol is used to locate networked hosts or devices that are implementing the server role of the BITS Peer-Caching: Content Retrieval Protocol. The BITS Peer-Caching: Peer Discovery Protocol provides a way for peer servers to announce their presence to connected subnets and a way for peer clients to locate servers in connected subnets.
 
-The BITS Peer-Caching: Peer Discovery Protocol is a specialization of Web Services Dynamic Discovery (WS-Discovery), as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576), and follows its model for announcing and locating resources. The protocol defines a client role and a server role. A server announces its presence to connected IP subnets via a multicasted [Hello](#Section_3.2.4.1) message to UDP port 3702. A client discovers servers passively by listening for Hello messages. A client can also solicit for servers by multicasting a [Probe](#Section_3.2.4.3) message to the same UDP port; servers with matching characteristics reply to the client with unicast [Probe-Match](#Section_4.2) messages.
+The BITS Peer-Caching: Peer Discovery Protocol is a specialization of Web Services Dynamic Discovery (WS-Discovery), as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576), and follows its model for announcing and locating resources. The protocol defines a client role and a server role. A server announces its presence to connected IP subnets via a multicasted [Hello](#Section_3.1.4.1) message to UDP port 3702. A client discovers servers passively by listening for Hello messages. A client can also solicit for servers by multicasting a [Probe](#Section_3.1.4.3) message to the same UDP port; servers with matching characteristics reply to the client with unicast [Probe-Match](#Section_4.2) messages.
 
 Windows uses the BITS Peer-Caching: Peer Discovery Protocol to implement a distributed peer-to-peer cache of URL content for use by the Background Intelligent Transfer Service (BITS) component. For more information about BITS, see [[MSDN-BITS]](https://go.microsoft.com/fwlink/?LinkId=89959).
 
@@ -264,7 +264,7 @@ The primary purpose of the BITS Peer-Caching: Peer Discovery Protocol is to loca
 
 This document covers versioning issues in the following areas:
 
-- **Protocol Versions**: A server advertises the versions of the protocol it supports via [Hello](#Section_3.2.4.1) and [Probe-Match](#Section_4.2) messages.
+- **Protocol Versions**: A server advertises the versions of the protocol it supports via [Hello](#Section_3.1.4.1) and [Probe-Match](#Section_4.2) messages.
 A client does not advertise the protocol versions it supports.
 
 This specification defines version 1 of the BITS Peer-Caching: Peer Discovery Protocol. The format of each message in version 1 is defined in section [2](#Section_2) and [3](#Section_3). Because this is the initial release of the protocol, no additional versions are defined at time of publication.
@@ -506,7 +506,7 @@ A server is required to respond to a Resolve message that matches its Endpoint R
 
 When the server receives a Resolve message, it MAY ignore the message.<8> If the server chooses to process Resolve messages, it MUST follow the rules specified in [WS-Discovery] section 6.2.
 
-In WS-Discovery, the Resolve/Resolve-Match message exchange is used when a client knows the Endpoint Reference of a server but not its XAddrs, and it requires the XAddrs. All [Hello](#Section_3.2.4.1) and [Probe-Match](#Section_4.2) messages sent by the BITS Peer-Caching: Peer Discovery Protocol server role carry the server's XAddrs in addition to the Endpoint Reference, so the additional message exchange is not necessary.
+In WS-Discovery, the Resolve/Resolve-Match message exchange is used when a client knows the Endpoint Reference of a server but not its XAddrs, and it requires the XAddrs. All [Hello](#Section_3.1.4.1) and [Probe-Match](#Section_4.2) messages sent by the BITS Peer-Caching: Peer Discovery Protocol server role carry the server's XAddrs in addition to the Endpoint Reference, so the additional message exchange is not necessary.
 
 <a id="Section_3.1.4.5.1"></a>
 ##### 3.1.4.5.1 Messages
@@ -563,7 +563,7 @@ The server MUST then add the local address to the list of server addresses in th
 
 The server SHOULD then increment its metadata version.<12>
 
-Then the server SHOULD send a [Hello](#Section_3.2.4.1) message to announce the new address, as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 4.1.<13>
+Then the server SHOULD send a [Hello](#Section_3.1.4.1) message to announce the new address, as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 4.1.<13>
 
 When a Hello message is sent, the server MUST send the message to the subnet whose address list changed, implying that the **/s:Envelope/s:Body/d:Hello/d:XAddrs** element MUST contain the server addresses in that subnet from the table of connected subnets. The server SHOULD send the message only to that subnet, in which case it SHOULD NOT contain addresses in other subnets.<14>
 
@@ -576,7 +576,7 @@ When an IP address is to be deleted, the server MUST check whether the address i
 
 Otherwise, the server MUST remove the address from the list for that row. The server SHOULD then increment its metadata version.<15>
 
-If the list contains other addresses, the server SHOULD send a [Hello](#Section_3.2.4.1) message to update the address list, as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 4.1.<16> If the list contains no other addresses, then the server MUST delete the row from the table. The server MAY send a [Bye](#Section_3.1.4.2) message to the subnet of the deleted address, using the current instance [**GUID**](#gt_globally-unique-identifier-guid) for the **/s:Body/d:Bye/a:EndpointReference/a:Address** child element, as specified in [WS-Discovery] section 4.2.
+If the list contains other addresses, the server SHOULD send a [Hello](#Section_3.1.4.1) message to update the address list, as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 4.1.<16> If the list contains no other addresses, then the server MUST delete the row from the table. The server MAY send a [Bye](#Section_3.1.4.2) message to the subnet of the deleted address, using the current instance [**GUID**](#gt_globally-unique-identifier-guid) for the **/s:Body/d:Bye/a:EndpointReference/a:Address** child element, as specified in [WS-Discovery] section 4.2.
 
 When a Hello message is sent, the server MUST send the message to the subnet whose address list changed, implying that the **/s:Envelope/s:Body/d:Hello/d:XAddrs** element MUST contain the server addresses in that subnet from the table of connected subnets. The server SHOULD send the message only to that subnet, in which case it SHOULD NOT contain addresses in other subnets.<17>
 
@@ -622,7 +622,7 @@ For each subnet, the client maintains a table of servers and their local address
 - Its [**FQDN**](#gt_fully-qualified-domain-name-fqdn).
 - Its last known address in this subnet.
 - The [**UTC (Coordinated Universal Time)**](#gt_utc-coordinated-universal-time) of the last time this address was refreshed.
-The [**UTC**](#gt_coordinated-universal-time-utc) time of the address is updated whenever a [Hello](#Section_3.2.4.1) or [Probe-Match](#Section_4.2) from the server is processed successfully and contains this address. A higher-layer protocol SHOULD also update the time when the server is successfully contacted through content retrieval (BITS Peer-Caching: Content Retrieval Protocol).
+The [**UTC**](#gt_coordinated-universal-time-utc) time of the address is updated whenever a [Hello](#Section_3.1.4.1) or [Probe-Match](#Section_4.2) from the server is processed successfully and contains this address. A higher-layer protocol SHOULD also update the time when the server is successfully contacted through content retrieval (BITS Peer-Caching: Content Retrieval Protocol).
 
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 Scope List
@@ -642,7 +642,7 @@ An implementation MAY modify the default to any positive number of seconds, but 
 <a id="Section_3.2.2.2"></a>
 #### 3.2.2.2 Discovery Suppression Timer
 
-The protocol imposes a waiting period after sending a [Probe](#Section_3.2.4.3) message to avoid an inundation of network traffic from repeated discoveries. During this waiting period, new discovery requests from a higher-layer protocol complete immediately, without triggering a Probe message. The default value for this timer is 10 minutes; it can be any nonnegative value.
+The protocol imposes a waiting period after sending a [Probe](#Section_3.1.4.3) message to avoid an inundation of network traffic from repeated discoveries. During this waiting period, new discovery requests from a higher-layer protocol complete immediately, without triggering a Probe message. The default value for this timer is 10 minutes; it can be any nonnegative value.
 
 <a id="Section_3.2.2.3"></a>
 #### 3.2.2.3 Address Scavenger Timer
@@ -663,7 +663,7 @@ The client MUST enumerate the subnets to which it is attached and send itself an
 
 The client MUST verify that each received message matches the schema as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576), Appendix III, while discarding malformed messages. Further parsing depends on the message type.
 
-The following subsections define message formatting and processing requirements for a subset of the operations defined in section [3.1.4](#Section_3.2.4).
+The following subsections define message formatting and processing requirements for a subset of the operations defined in section [3.1.4](#Section_3.1.4).
 
 Other messages not listed in the following subsections MUST be ignored.
 
@@ -672,7 +672,7 @@ Other messages not listed in the following subsections MUST be ignored.
 
 The client adheres to the requirements as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 4.1. In addition, BITS Peer-Caching: Peer Discovery Protocol adds the following requirements:
 
-- The client MUST verify that the message satisfies the requirements in section [2.2.3](#Section_2.2.3) and section [3.1.4.1](#Section_3.2.4.1), discarding the message if not.
+- The client MUST verify that the message satisfies the requirements in section [2.2.3](#Section_2.2.3) and section [3.1.4.1](#Section_3.1.4.1), discarding the message if not.
 - The client MUST verify that the message's **/s:Envelope/s:Body/d:Hello/d:Types** element includes the type **msbits:PeerServer**, discarding the message if not.
 - The client MAY verify other administratively defined criteria, discarding the message if they are not satisfied.<21>
 - The client SHOULD add the server data to its tables as follows:
@@ -703,7 +703,7 @@ A client or server MUST support the "http://schemas.xmlsoap.org/ws/2005/04/disco
 
 The client adheres to the requirements as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 5. In addition, BITS Peer-Caching: Peer Discovery Protocol adds the following requirements:
 
-- The client MUST verify that the message satisfies the requirements in section [2.2.3](#Section_2.2.3) and section [3.1.4.4](#Section_4.2); if not, the message MUST be discarded.
+- The client MUST verify that the message satisfies the requirements in section [2.2.3](#Section_2.2.3) and section [3.1.4.4](#Section_3.1.4.4); if not, the message MUST be discarded.
 - The client MUST verify that the message's **/s:Envelope/s:Body/d:Probe-Match/d:Types** element includes the type **msbits:PeerServer**, discarding the message if not.
 - The client MUST verify that at least one of its scopes matches a scope in the message by using the rules as specified in [WS-Discovery] section 5.1, discarding the message if not.
 - The client SHOULD add the server data to the table of servers as described in section [3.2.4.1](#Section_3.2.4.1), with references to the **/s:Envelope/s:Body/d:Hello** element replaced by **/s:Envelope/s:Body/d:Probe-Match.**
@@ -719,7 +719,7 @@ When a discovery's timer expires, the higher-layer protocol MUST be notified tha
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Discovery Suppression Time-Out
 
-When the discovery suppression timer expires, nothing happens. However, the next discovery will trigger a [Probe](#Section_3.2.4.3) message because the client will see that the timer is expired.
+When the discovery suppression timer expires, nothing happens. However, the next discovery will trigger a [Probe](#Section_3.1.4.3) message because the client will see that the timer is expired.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Address Scavenger Time-Out
@@ -760,7 +760,7 @@ A higher-layer protocol MAY signal the protocol to discover more servers.
 
 When this occurs, the client MUST check the Discovery Suppression timer. If it is still pending, then a discovery has completed recently and the client MUST immediately notify the higher layer that the discovery has terminated.
 
-Otherwise, the client MUST send a [Probe](#Section_3.2.4.3) message.
+Otherwise, the client MUST send a [Probe](#Section_3.1.4.3) message.
 
 <a id="Section_3.2.6.5"></a>
 #### 3.2.6.5 Cancel Discovery Request
@@ -788,7 +788,7 @@ When the protocol is shut down, the client:
 - MUST stop listening for new messages from the transport. Queued messages MAY be processed.
 - SHOULD close the network ports as specified in [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576) section 2.4.<24>
 - MUST cancel all active discovery requests, notifying the higher-layer protocol for each one.
-- SHOULD save all tables in section [3.2.1](#Section_3.1.1) for use in the next instantiation.
+- SHOULD save all tables in section [3.2.1](#Section_3.2.1) for use in the next instantiation.
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
@@ -897,7 +897,7 @@ A host named \\myclient is a member of the [**Active Directory**](#gt_active-dir
 
 The packet is sent four times: twice to the IPv4 address 239.255.255.250 port 3702, and twice to the IPv6 address FF02::C port 3702. This follows the algorithm in [[SOAP-UDP]](https://go.microsoft.com/fwlink/?LinkId=90523) Appendix I.
 
-When the BITS Peer-Caching: Peer Discovery Protocol server is shut down, the following [Bye](#Section_3.1.4.2) message is sent. Like the [Hello](#Section_3.2.4.1) message, it is sent twice to each multicast address.
+When the BITS Peer-Caching: Peer Discovery Protocol server is shut down, the following [Bye](#Section_4.1) message is sent. Like the [Hello](#Section_3.2.4.1) message, it is sent twice to each multicast address.
 
 (1) <?xml version="1.0" encoding="utf-8"?>
 
@@ -1026,7 +1026,7 @@ When the BITS Peer-Caching: Peer Discovery Protocol client initiates a discovery
 
 The message is sent four times: twice to the IPv4 address 239.255.255.250 port 3702, and twice to the IPv6 address FF02::C port 3702. This follows the algorithm in Appendix I of [[SOAP-UDP]](https://go.microsoft.com/fwlink/?LinkId=90523).
 
-Two Peer Discovery servers in the same Active Directory domain and one in a different domain receive the [Probe](#Section_3.2.4.3).
+Two Peer Discovery servers in the same Active Directory domain and one in a different domain receive the [Probe](#Section_3.1.4.3).
 
 The host \\peer1 is a member of the MyDomain domain; after 150 milliseconds it replies with the following message:
 
@@ -1265,12 +1265,12 @@ The host \\products is a member of a different Active Directory domain. Line 25 
 <a id="Section_5.1.1"></a>
 ### 5.1.1 Potential for High Unicast Traffic
 
-WS-Discovery does not provide a way to control the number or pace of replies to a [Probe](#Section_3.2.4.3) message. In a very large network, a client can be overwhelmed by many server replies.
+WS-Discovery does not provide a way to control the number or pace of replies to a [Probe](#Section_3.1.4.3) message. In a very large network, a client can be overwhelmed by many server replies.
 
 <a id="Section_5.1.2"></a>
 ### 5.1.2 Lack of Message Authentication
 
-This protocol does not provide any authentication for messages. It is possible for a malicious host to send incorrect [Hello](#Section_3.2.4.1), [Bye](#Section_3.1.4.2), and [Probe-Match](#Section_4.2) messages in order to confuse a client. A client needs to consider all information gained from this protocol as insecure until corroborated by other means.
+This protocol does not provide any authentication for messages. It is possible for a malicious host to send incorrect [Hello](#Section_3.1.4.1), [Bye](#Section_3.1.4.2), and [Probe-Match](#Section_4.2) messages in order to confuse a client. A client needs to consider all information gained from this protocol as insecure until corroborated by other means.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -1317,7 +1317,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <12> Section 3.1.6.2: In server role, Windows does not increment its metadata version when the address list changes.
 
-<13> Section 3.1.6.2: In server role, Windows does not send the [Hello](#Section_3.2.4.1) message.
+<13> Section 3.1.6.2: In server role, Windows does not send the [Hello](#Section_3.1.4.1) message.
 
 <14> Section 3.1.6.2: In server role, Windows sends a [**URI**](#gt_uniform-resource-identifier-uri) list containing all server addresses from the table of connected subnets.
 
@@ -1335,7 +1335,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <21> Section 3.2.4.1: In client role, Windows verifies that the **/s:Body/d:Hello/a:EndpointReference/msbits:Fqdn** element matches the Active Directory [**domain**](#gt_domain) to which the client belongs. Windows supports the protocol only on hosts that are members of an Active Directory domain.
 
-<22> Section 3.2.4.2: In client role, Windows always discards [Bye](#Section_3.1.4.2) messages.
+<22> Section 3.2.4.2: In client role, Windows always discards [Bye](#Section_4.1) messages.
 
 <23> Section 3.2.4.3: In client role, Windows always sends a single scope, defined by prepending the string "https://" to the FQDN of the host.
 

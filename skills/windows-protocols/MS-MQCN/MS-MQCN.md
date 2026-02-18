@@ -243,7 +243,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -696,7 +696,7 @@ packet-beta
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses ADM elements specified in section [3.1.1](../MS-MQDSSM/MS-MQDSSM.md). A subset of these elements can be published in a directory. This protocol SHOULD<6> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<7>
+This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a directory. This protocol SHOULD<6> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<7>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -711,7 +711,7 @@ This conceptual model is common to both servers and clients of this protocol. Th
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises abstract data model (ADM) elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are collocated at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises abstract data model (ADM) elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are collocated at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.1.1.1](#Section_3.1.1.1) references the ADM elements from the shared data model that are manipulated by this protocol.
 
@@ -831,7 +831,7 @@ There are no other local events.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises ADM elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are collocated at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises ADM elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_microsoft-message-queuing-msmq) protocols that are collocated at a common [**queue manager**](#gt_queue-manager-qm). The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.2.1.1](#Section_3.2.1.1) references the ADM elements from the shared data model that are manipulated by this protocol.
 
@@ -956,7 +956,7 @@ All other PROPIDs are not used, and they MUST be ignored.
 - Raise a Delete Queue ([MS-MQDMPR] section 3.1.7.1.4) event with the following arguments:
 - *iQueue* := A reference to the **Queue** ADM element instance from the **QueueCollection** ADM attribute of the local **QueueManager** ADM element instance whose identifier is equal to the **GuidIdentifier** field.
 - *iSkipDirectory* := **True**.
-Section [3.2.1](#Section_3.1.1) specifies the abstract data model that can be used as a reference to maintain data specific to **Queue** and **QueueManager** ADM element instances in a queue manager that implements this protocol.
+Section [3.2.1](#Section_3.2.1) specifies the abstract data model that can be used as a reference to maintain data specific to **Queue** and **QueueManager** ADM element instances in a queue manager that implements this protocol.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Processing a Change Notification Message Version 0x02
@@ -989,7 +989,7 @@ The following actions MUST be performed upon the reception of a notification [**
 - *iFilter* := "Identifier" EQUALS **ObjectGuid**
 - *iAttributeList* := {"QueueManagerQuota", "JournalQuota", "Security"}
 - Update the local **QueueManager** ADM element instance with the **QueueManager** ADM element instance returned by the Read Directory event.
-Section [3.2.1](#Section_3.1.1) describes the abstract model that can be used as a reference to maintain data specific to the **Queue** and **QueueManager** ADM elements in a queue manager that implements this protocol.
+Section [3.2.1](#Section_3.2.1) describes the abstract model that can be used as a reference to maintain data specific to the **Queue** and **QueueManager** ADM elements in a queue manager that implements this protocol.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -1009,14 +1009,14 @@ There are no other local events.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises abstract data model (ADM) elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are collocated at a common queue manager. The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises abstract data model (ADM) elements that are private to this protocol and others that are shared between multiple MSMQ protocols that are collocated at a common queue manager. The shared abstract data model is defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1, and the relationship between this protocol, a queue manager, and other protocols that share a common queue manager is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 Section [3.3.1.1](#Section_3.3.1.1) references the ADM elements from the shared abstract data model that are manipulated by this protocol.
 
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Shared Data Elements
 
-The server side of this protocol manipulates the shared ADM elements listed in section [3.1.1.1](../MS-MQDMPR/MS-MQDMPR.md). In addition, this protocol manipulates the following ADM elements from the shared abstract data model defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.
+The server side of this protocol manipulates the shared ADM elements listed in section [3.1.1.1](#Section_3.1.1.1). In addition, this protocol manipulates the following ADM elements from the shared abstract data model defined in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.
 
 **OutgoingQueue:** ([MS-MQDMPR] section 3.1.1.3).
 
@@ -1072,7 +1072,7 @@ The **Notification Body** MUST be set to a [**Unicode string**](#gt_unicode-stri
 
 The **Change Notification Message** MUST be created as follows: The **Version** field MUST be set to 0x02. The **NumberOfUpdateNotifications** field MUST be set to 0x01 to indicate that there is only one update notification in the notification [**message**](#gt_message). A queue manager MUST send only one notification message at a time. The **Data** field MUST be filled with the **Notification Body** instance created as specified in this section.
 
-Finally, the **Change Notification Message** MUST be included within a **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance and MUST be sent through [**MSMQ**](#gt_microsoft-message-queuing-msmq) to the destination queue manager, as specified in section [3.3.5.3](../MS-MQDMPR/MS-MQDMPR.md).
+Finally, the **Change Notification Message** MUST be included within a **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance and MUST be sent through [**MSMQ**](#gt_microsoft-message-queuing-msmq) to the destination queue manager, as specified in section [3.3.5.3](#Section_3.3.5.3).
 
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Preparing a Change Notification Message Version 0x01
@@ -1137,7 +1137,7 @@ The [**directory service**](#gt_directory-service-ds) MUST create a [Change Noti
 - **PropertyValue[1]** = MQDS_QUEUE ([MS-MQMQ] section 2.3.13.4)
 The **Change Notification Message** MUST be created as follows. The **Version** field MUST be set to 0x01. The **NumberOfUpdateNotifications** field MUST be set to the number of **Notification Update** instances to be included in the **Data** field. A directory service can send more than one notification message at a time. The **Data** field MUST be filled with the **Notification Update** instances that MUST be created as specified in this section.
 
-Finally, the **Change Notification Message** MUST be included within a **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance and MUST be sent through [**MSMQ**](#gt_microsoft-message-queuing-msmq) to the destination queue manager, as specified in section [3.3.5.3](../MS-MQDMPR/MS-MQDMPR.md).
+Finally, the **Change Notification Message** MUST be included within a **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM element instance and MUST be sent through [**MSMQ**](#gt_microsoft-message-queuing-msmq) to the destination queue manager, as specified in section [3.3.5.3](#Section_3.3.5.3).
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Sending a Change Notification Message
@@ -1157,7 +1157,7 @@ The sender MUST perform the following actions to process this event:
 - Set *rMessage*.**SenderIdentifier** to the **Identifier** ADM attribute of the **QueueManager** ADM element instance referenced by the *iDirectoryObject* input argument to the [Send Change Notification (section 3.3.4.1)](#Section_3.3.4.1) event.
 - Set *rMessage*.**SenderIdentifierType** to **QueueManagerIdentifier**.
 - Once *rMessage* is prepared, the implementation of this protocol MUST generate an Enqueue Message ([MS-MQDMPR] section 3.1.7.1.9) event with the following arguments:
-- *iQueue* := *openNotifyQueueDescriptor*.**QueueReference**, where *openNotifyQueueDescriptor* references the **OpenQueueDescriptor** ([MS-MQDMPR] section 3.1.1.16) ADM element instance created during the initialization phase in section [3.3.3](#Section_3.2.3).
+- *iQueue* := *openNotifyQueueDescriptor*.**QueueReference**, where *openNotifyQueueDescriptor* references the **OpenQueueDescriptor** ([MS-MQDMPR] section 3.1.1.16) ADM element instance created during the initialization phase in section [3.3.3](#Section_3.3.3).
 - *iMessage* := *rMessage*
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events

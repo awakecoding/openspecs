@@ -379,7 +379,7 @@ The certificate encoding used is ASN.1 DER, as specified in [RFC3280] section 4.
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Licensing PDU Flows
 
-A target machine ([**terminal server**](#gt_terminal-server) or [**personal terminal server**](#gt_personal-terminal-server)) initiates the licensing protocol data unit (PDU) exchange by sending a **Server License Request** (section [2.2.2.1](#Section_3.3.5.1)) message on receipt of the Client Info PDU (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 2.2.1.11 and 3.3.5.3.11).
+A target machine ([**terminal server**](#gt_terminal-server) or [**personal terminal server**](#gt_personal-terminal-server)) initiates the licensing protocol data unit (PDU) exchange by sending a **Server License Request** (section [2.2.2.1](#Section_2.2.2.1)) message on receipt of the Client Info PDU (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 2.2.1.11 and 3.3.5.3.11).
 
 When a [**Remote Desktop client**](#gt_remote-desktop-client) connects to a target machine, either the client has a license, or it does not.
 
@@ -419,7 +419,7 @@ Figure 4: Remote Desktop client upgrade license flow
 
 The Remote Desktop Protocol: Licensing Extension extends the Remote Desktop Protocol: Basic Connectivity and Graphics Remoting (as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md)) by adding licensing capabilities.
 
-The licensing protocol sequence is started by the server during the [**Remote Desktop Protocol (RDP)**](#gt_remote-desktop-protocol-rdp) standard connection sequence after receiving the Client Info PDU (see sections 1.3.1.1 and 2.2.11). If exchange of licensing information is required, the server sends a [Server License Request (section 2.2.2.1)](#Section_3.3.5.1) to the client at this point. Otherwise, the RDP standard connection sequence continues (see section 1.3.1.1).
+The licensing protocol sequence is started by the server during the [**Remote Desktop Protocol (RDP)**](#gt_remote-desktop-protocol-rdp) standard connection sequence after receiving the Client Info PDU (see sections 1.3.1.1 and 2.2.11). If exchange of licensing information is required, the server sends a [Server License Request (section 2.2.2.1)](#Section_2.2.2.1) to the client at this point. Otherwise, the RDP standard connection sequence continues (see section 1.3.1.1).
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -438,7 +438,7 @@ The Remote Desktop Protocol: Licensing Extension applies whenever a [**Remote De
 
 Only one version of the Remote Desktop Protocol: Licensing Extension exists and, therefore, no version negotiation is required with the client.
 
-There is no negotiation of capabilities; however, the client advertises its capability to support the size of license data in the **wLicenseDetailLevel** field of the [Platform Challenge Response Data (section 2.2.2.5.1)](#Section_3.2.1.6) structure in the [Client Platform Challenge Response (section 2.2.2.5)](#Section_3.2.1.6).
+There is no negotiation of capabilities; however, the client advertises its capability to support the size of license data in the **wLicenseDetailLevel** field of the [Platform Challenge Response Data (section 2.2.2.5.1)](#Section_2.2.2.5.1) structure in the [Client Platform Challenge Response (section 2.2.2.5)](#Section_2.2.2.5).
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -571,7 +571,7 @@ If the PDU is being sent from the server to the client, this field MUST contain 
 
 If the PDU is being sent from the client to the server:
 
-- The **securityHeader** field SHOULD contain at least a [Basic](../MS-RDPBCGR/MS-RDPBCGR.md) security header (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.8.1.1.2.1). If the embedded flags field contains the SEC_ENCRYPT(0x0008) flag, and the Encryption Level selected by the server (see sections [5.1.1](../MS-RDPBCGR/MS-RDPBCGR.md) and [2.2.1.4.3](#Section_2.2.1.4.3)) is ENCRYPTION_LEVEL_LOW (1), ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), or ENCRYPTION_LEVEL_HIGH (3), the securityHeader SHOULD contain a [non-FIPS](#Section_2.2.1.1.2) security header.
+- The **securityHeader** field SHOULD contain at least a [Basic](../MS-RDPBCGR/MS-RDPBCGR.md) security header (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.8.1.1.2.1). If the embedded flags field contains the SEC_ENCRYPT(0x0008) flag, and the Encryption Level selected by the server (see sections [5.1.1](#Section_5.1.1) and [2.2.1.4.3](#Section_2.2.1.4.3)) is ENCRYPTION_LEVEL_LOW (1), ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), or ENCRYPTION_LEVEL_HIGH (3), the securityHeader SHOULD contain a [non-FIPS](#Section_2.2.1.1.2) security header.
 If the PDU is being sent from the server to the client, then the format of the security header depends on the Encryption Level and Encryption Method selected by the server (see [MS-RDPBCGR] section 5.3.2 and 2.2.1.4.3). This field MUST contain one of the following headers:
 
 - Basic Security Header (see [MS-RDPBCGR] section 2.2.8.1.1.2.1) if the Encryption Level selected by the server (see [MS-RDPBCGR] section 5.3.2 and 2.2.1.4.3) is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded flags field does not contain the SEC_ENCRYPT (0x0008) flag.
@@ -593,18 +593,18 @@ Sent by the server.
 
 | Value | Meaning |
 | --- | --- |
-| LICENSE_REQUEST 0x01 | The Licensing PDU is a License Request PDU, and the **LicensingMessage** contains a **SERVER_LICENSE_REQUEST** (section [2.2.2.1](#Section_3.3.5.1)) structure. |
-| PLATFORM_CHALLENGE 0x02 | The Licensing PDU is a Platform Challenge PDU, and the **LicensingMessage** contains a **SERVER_PLATFORM_CHALLENGE** (section [2.2.2.4](#Section_3.2.1.6)) structure. |
-| NEW_LICENSE 0x03 | The Licensing PDU is a New License PDU, and the **LicensingMessage** contains a **SERVER_NEW_LICENSE** (section [2.2.2.7](#Section_3.2.5.7)) structure. |
+| LICENSE_REQUEST 0x01 | The Licensing PDU is a License Request PDU, and the **LicensingMessage** contains a **SERVER_LICENSE_REQUEST** (section [2.2.2.1](#Section_2.2.2.1)) structure. |
+| PLATFORM_CHALLENGE 0x02 | The Licensing PDU is a Platform Challenge PDU, and the **LicensingMessage** contains a **SERVER_PLATFORM_CHALLENGE** (section [2.2.2.4](#Section_2.2.2.4)) structure. |
+| NEW_LICENSE 0x03 | The Licensing PDU is a New License PDU, and the **LicensingMessage** contains a **SERVER_NEW_LICENSE** (section [2.2.2.7](#Section_2.2.2.7)) structure. |
 | UPGRADE_LICENSE 0x04 | The Licensing PDU is an Upgrade License PDU, and the **LicensingMessage** contains a **SERVER_UPGRADE_LICENSE (**section [2.2.2.6](#Section_2.2.2.6)) structure. |
 
 Sent by the client.
 
 | Value | Meaning |
 | --- | --- |
-| LICENSE_INFO 0x12 | The Licensing PDU is a License Info PDU, and the **LicensingMessage** contains a **CLIENT_LICENSE_INFO** (section [2.2.2.3](#Section_3.3.5.3)) structure. |
-| NEW_LICENSE_REQUEST 0x13 | The Licensing PDU is a New License Request PDU, and the **LicensingMessage** contains a **CLIENT_NEW_LICENSE_REQUEST** (section [2.2.2.2](#Section_3.3.5.2)) structure. |
-| PLATFORM_CHALLENGE_RESPONSE 0x15 | The Licensing PDU is a Platform Challenge Response PDU, and the **LicensingMessage** contains a **CLIENT_PLATFORM_CHALLENGE_RESPONSE** (section [2.2.2.5](#Section_3.2.1.6)) structure. |
+| LICENSE_INFO 0x12 | The Licensing PDU is a License Info PDU, and the **LicensingMessage** contains a **CLIENT_LICENSE_INFO** (section [2.2.2.3](#Section_2.2.2.3)) structure. |
+| NEW_LICENSE_REQUEST 0x13 | The Licensing PDU is a New License Request PDU, and the **LicensingMessage** contains a **CLIENT_NEW_LICENSE_REQUEST** (section [2.2.2.2](#Section_2.2.2.2)) structure. |
+| PLATFORM_CHALLENGE_RESPONSE 0x15 | The Licensing PDU is a Platform Challenge Response PDU, and the **LicensingMessage** contains a **CLIENT_PLATFORM_CHALLENGE_RESPONSE** (section [2.2.2.5](#Section_2.2.2.5)) structure. |
 
 Sent by either the client or the server.
 
@@ -636,14 +636,14 @@ packet-beta
 | --- | --- |
 | KEY_EXCHANGE_ALG_RSA 0x00000001 | Indicates RSA key exchange algorithm with a 512-bit asymmetric key.<2> |
 
-**ServerCertificate (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR] section 2.2.1.12.1.2) of type BB_CERTIFICATE_BLOB (0x0003). This BLOB contains the terminal server certificate (see section [2.2.1.4](#Section_3.2.1.3)). The terminal server can choose not to send the certificate by setting the **wblobLen** field in the Licensing Binary BLOB structure to 0. If encryption is in effect and is already protecting RDP traffic, the licensing protocol MAY<3> choose not to send the server certificate (for RDP security measures, see [MS-RDPBCGR] sections 5.3 and 5.4). If the licensing protocol chooses not to send the server certificate, then the client uses the public key obtained from the server certificate sent as part of Server Security Data in the Server MCS Connect Response PDU (see [MS-RDPBCGR] section 2.2.1.4).
+**ServerCertificate (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR] section 2.2.1.12.1.2) of type BB_CERTIFICATE_BLOB (0x0003). This BLOB contains the terminal server certificate (see section [2.2.1.4](#Section_2.2.1.4)). The terminal server can choose not to send the certificate by setting the **wblobLen** field in the Licensing Binary BLOB structure to 0. If encryption is in effect and is already protecting RDP traffic, the licensing protocol MAY<3> choose not to send the server certificate (for RDP security measures, see [MS-RDPBCGR] sections 5.3 and 5.4). If the licensing protocol chooses not to send the server certificate, then the client uses the public key obtained from the server certificate sent as part of Server Security Data in the Server MCS Connect Response PDU (see [MS-RDPBCGR] section 2.2.1.4).
 
 **ScopeList (variable):** A variable-length [Scope List](#Section_3.2.1.5) structure that contains a list of entities that issued the [**client license**](#gt_client-license). This list is used by the client in conjunction with **ProductInfo** to search for an appropriate license in its [**license store**](#gt_license-store).<4>
 
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 Product Information (PRODUCT_INFO)
 
-The **Product Information** packet contains the details of the product license that is required for connecting to the [**terminal server**](#gt_terminal-server). The client uses this structure together with the [scope list](#Section_3.2.1.5) to search for and identify an appropriate license in its [**license store**](#gt_license-store). Depending on the outcome of the search, the client sends a **Client New License Request** (section [2.2.2.2](#Section_3.3.5.2)), **Client License Information** packet (section [2.2.2.3](#Section_3.3.5.3)), or **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) to the server.
+The **Product Information** packet contains the details of the product license that is required for connecting to the [**terminal server**](#gt_terminal-server). The client uses this structure together with the [scope list](#Section_3.2.1.5) to search for and identify an appropriate license in its [**license store**](#gt_license-store). Depending on the outcome of the search, the client sends a **Client New License Request** (section [2.2.2.2](#Section_2.2.2.2)), **Client License Information** packet (section [2.2.2.3](#Section_2.2.2.3)), or **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) to the server.
 
 ```mermaid
 packet-beta
@@ -698,7 +698,7 @@ packet-beta
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 Client New License Request (CLIENT_NEW_LICENSE_REQUEST)
 
-The Client New License Request packet is sent to a server when the client cannot find a license matching the product information provided in the [Server License Request](#Section_3.3.5.1) message. This message is interpreted as a new license request by the server, and the server SHOULD attempt to issue a new license to the client on receipt of this message.
+The Client New License Request packet is sent to a server when the client cannot find a license matching the product information provided in the [Server License Request](#Section_2.2.2.1) message. This message is interpreted as a new license request by the server, and the server SHOULD attempt to issue a new license to the client on receipt of this message.
 
 ```mermaid
 packet-beta
@@ -722,7 +722,7 @@ The remaining two bytes in the **PlatformId** field are used by the ISV to ident
 
 **ClientRandom (32 bytes):** A 32-byte random number generated by the client using a cryptographically secure pseudo-random number generator. The **ClientRandom** and **ServerRandom** (see section 2.2.2.1) values, along with the data in the **EncryptedPreMasterSecret** field, are used to generate licensing encryption keys (see section [5.1.2](#Section_5.1.2)). These keys are used to encrypt licensing protocol messages (see sections [5.1.3](#Section_5.1.3) and [5.1.4](#Section_5.1.4)).
 
-**EncryptedPreMasterSecret (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of type BB_RANDOM_BLOB (0x0002). This BLOB contains an encrypted 48-byte random number. For instructions on how to encrypt this random number, see section [5.1.1.1](../MS-RDPBCGR/MS-RDPBCGR.md).
+**EncryptedPreMasterSecret (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of type BB_RANDOM_BLOB (0x0002). This BLOB contains an encrypted 48-byte random number. For instructions on how to encrypt this random number, see section [5.1.1.1](#Section_5.1.1.1).
 
 **ClientUserName (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR] section 2.2.1.12.1.2) of type BB_CLIENT_USER_NAME_BLOB (0x000F). This BLOB contains the client user name string in null-terminated [**ANSI character set**](#gt_100cd8a6-5cb1-4895-9de6-e4a3c224a583) format and is used along with the **ClientMachineName** BLOB to keep track of licenses issued to clients.
 
@@ -731,7 +731,7 @@ The remaining two bytes in the **PlatformId** field are used by the ISV to ident
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Client License Information (CLIENT_LICENSE_INFO)
 
-The Client License Information packet is sent by a client that already has a license issued to it in response to the [Server License Request (section 2.2.2.1)](#Section_3.3.5.1) message.
+The Client License Information packet is sent by a client that already has a license issued to it in response to the [Server License Request (section 2.2.2.1)](#Section_2.2.2.1) message.
 
 ```mermaid
 packet-beta
@@ -744,7 +744,7 @@ packet-beta
   352-447: "MACData (16 bytes)"
 ```
 
-**PreferredKeyExchangeAlg (4 bytes):** The content and format of this field are the same as the **PreferredKeyExchangeAlg** field of the [Client New License Request (section 2.2.2.2)](#Section_3.3.5.2) message.
+**PreferredKeyExchangeAlg (4 bytes):** The content and format of this field are the same as the **PreferredKeyExchangeAlg** field of the [Client New License Request (section 2.2.2.2)](#Section_2.2.2.2) message.
 
 **PlatformId (4 bytes):** The content and format of this field are the same as the **PlatformId** field of the Client New License Request message.
 
@@ -754,7 +754,7 @@ packet-beta
 
 **LicenseInfo (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of type BB_DATA_BLOB (0x0001). This BLOB contains the CAL (see the **pbLicenseInfo** field in section [2.2.2.6.1](#Section_2.2.2.6.1)) that is retrieved from the client's [**license store**](#gt_license-store).
 
-**EncryptedHWID (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR] section 2.2.1.12.1.2). This BLOB contains a [Client Hardware Identification (section 2.2.2.3.1)](#Section_3.3.1.9) structure encrypted with the licensing encryption keys (see section [5.1.2](../MS-RDPBCGR/MS-RDPBCGR.md)), using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
+**EncryptedHWID (variable):** A Licensing Binary BLOB structure (see [MS-RDPBCGR] section 2.2.1.12.1.2). This BLOB contains a [Client Hardware Identification (section 2.2.2.3.1)](#Section_2.2.2.3.1) structure encrypted with the licensing encryption keys (see section [5.1.2](#Section_5.1.2)), using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
 
 **MACData (16 bytes):** An array of 16 bytes containing an [**MD5 digest**](#gt_md5-digest) ([**Message Authentication Code (MAC)**](#gt_message-authentication-code-mac)) that is generated over the unencrypted Client Hardware Identification structure. For instructions on how to generate this message digest, see section [5.1.5](#Section_5.1.5); for a description of how the server uses the **MACData** field to verify the integrity of the Client Hardware Identification structure, see section [3.1.5.1](#Section_3.1.5.1).
 
@@ -772,7 +772,7 @@ packet-beta
   128-159: "Data4"
 ```
 
-**PlatformId (4 bytes):** The content and format of this field are the same as the **PlatformId** field of the [Client New License Request](#Section_3.3.5.2).
+**PlatformId (4 bytes):** The content and format of this field are the same as the **PlatformId** field of the [Client New License Request](#Section_2.2.2.2).
 
 **Data1 (4 bytes):** A 32-bit unsigned integer containing client hardware-specific data. This field MUST contain a number that helps the server uniquely identify the client.
 
@@ -785,7 +785,7 @@ packet-beta
 <a id="Section_2.2.2.4"></a>
 #### 2.2.2.4 Server Platform Challenge (SERVER_PLATFORM_CHALLENGE)
 
-The Server Platform Challenge packet is sent from the server to the client after receiving the [Client New License Request (section 2.2.2.2)](#Section_3.3.5.2) or certain cases of [Client License Information (section 2.2.2.3)](#Section_3.3.5.3). For more information on Client License Information and when Server Platform Challenge is sent, see [Processing Client License Information (section 3.2.5.3)](#Section_3.2.5.3).
+The Server Platform Challenge packet is sent from the server to the client after receiving the [Client New License Request (section 2.2.2.2)](#Section_2.2.2.2) or certain cases of [Client License Information (section 2.2.2.3)](#Section_2.2.2.3). For more information on Client License Information and when Server Platform Challenge is sent, see [Processing Client License Information (section 3.2.5.3)](#Section_3.2.5.3).
 
 ```mermaid
 packet-beta
@@ -796,14 +796,14 @@ packet-beta
 
 **ConnectFlags (4 bytes):** Reserved.
 
-**EncryptedPlatformChallenge (variable):** A Licensing Binary BLOB<12> structure (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2). This BLOB contains the encrypted server platform challenge data. The server platform challenge data is a random string generated by the server and is encrypted with the licensing encryption key (see section [5.1.2](../MS-RDPBCGR/MS-RDPBCGR.md)) using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
+**EncryptedPlatformChallenge (variable):** A Licensing Binary BLOB<12> structure (see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2). This BLOB contains the encrypted server platform challenge data. The server platform challenge data is a random string generated by the server and is encrypted with the licensing encryption key (see section [5.1.2](#Section_5.1.2)) using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
 
 **MACData (16 bytes):** An array of 16 bytes containing an [**MD5 digest**](#gt_md5-digest) ([**MAC**](#gt_message-authentication-code-mac)) generated over the unencrypted platform challenge BLOB. For instructions on how to generate this message digest, see section [5.1.5](#Section_5.1.5); for a description of how the client uses the **MACData** field to verify the integrity of the platform challenge BLOB, see section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_2.2.2.5"></a>
 #### 2.2.2.5 Client Platform Challenge Response (CLIENT_PLATFORM_CHALLENGE_RESPONSE)
 
-The Client Platform Challenge Response packet is sent by the client in response to the [Server Platform Challenge (section 2.2.2.4)](#Section_3.2.1.6) message.
+The Client Platform Challenge Response packet is sent by the client in response to the [Server Platform Challenge (section 2.2.2.4)](#Section_2.2.2.4) message.
 
 ```mermaid
 packet-beta
@@ -812,16 +812,16 @@ packet-beta
   128-223: "MACData (16 bytes)"
 ```
 
-**EncryptedPlatformChallengeResponse (variable):** A LICENSE_BINARY_BLOB<13> structure (as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of **wBlobType** BB_ENCRYPTED_DATA_BLOB (0x0009). This BLOB contains the encrypted [Platform Challenge Response Data (section 2.2.2.5.1)](#Section_3.2.1.6) generated by the client and is encrypted with the licensing encryption key (see section [5.1.2](../MS-RDPBCGR/MS-RDPBCGR.md)), using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
+**EncryptedPlatformChallengeResponse (variable):** A LICENSE_BINARY_BLOB<13> structure (as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of **wBlobType** BB_ENCRYPTED_DATA_BLOB (0x0009). This BLOB contains the encrypted [Platform Challenge Response Data (section 2.2.2.5.1)](#Section_2.2.2.5.1) generated by the client and is encrypted with the licensing encryption key (see section [5.1.2](#Section_5.1.2)), using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
 
-**EncryptedHWID (variable):** A LICENSE_BINARY_BLOB structure (as specified in [MS-RDPBCGR] section 2.2.1.12.1.2) of **wBlobType** BB_ENCRYPTED_DATA_BLOB (0x0009). This BLOB contains the encrypted [Client Hardware Identification (section 2.2.2.3.1)](#Section_3.3.1.9) and is encrypted with the licensing encryption key (see section 5.1.2) using RC4 (for instructions on how to perform the encryption, see section 5.1.3).
+**EncryptedHWID (variable):** A LICENSE_BINARY_BLOB structure (as specified in [MS-RDPBCGR] section 2.2.1.12.1.2) of **wBlobType** BB_ENCRYPTED_DATA_BLOB (0x0009). This BLOB contains the encrypted [Client Hardware Identification (section 2.2.2.3.1)](#Section_2.2.2.3.1) and is encrypted with the licensing encryption key (see section 5.1.2) using RC4 (for instructions on how to perform the encryption, see section 5.1.3).
 
 **MACData (16 bytes):** An array of 16 bytes containing an [**MD5 digest**](#gt_md5-digest) ([**MAC**](#gt_message-authentication-code-mac)) generated over the Platform Challenge Response Data and decrypted Client Hardware Identification. For instructions on how to generate this message digest, see section [5.1.5](#Section_5.1.5); for a description of how the server uses the **MACData** field to verify the integrity of the Client Hardware Identification and the Platform Challenge Response Data, see section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_2.2.2.5.1"></a>
 ##### 2.2.2.5.1 Platform Challenge Response Data (PLATFORM_CHALLENGE_RESPONSE_DATA)
 
-The Platform Challenge Response Data packet contains information pertaining to the client's license handling capabilities and the Client Platform Challenge data sent by the server in the [Server Platform Challenge](#Section_3.2.1.6).
+The Platform Challenge Response Data packet contains information pertaining to the client's license handling capabilities and the Client Platform Challenge data sent by the server in the [Server Platform Challenge](#Section_3.2.5.4).
 
 ```mermaid
 packet-beta
@@ -866,7 +866,7 @@ packet-beta
   64-159: "MACData (16 bytes)"
 ```
 
-**EncryptedLicenseInfo (variable):** A LICENSE_BINARY_BLOB structure (as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of **wBlobType** BB_ENCRYPTED_DATA_BLOB (0x0009).<15> This BLOB contains the encrypted [New License Information (section 2.2.2.6.1)](#Section_2.2.2.6.1) packet and is encrypted with the licensing encryption key (see section [5.1.2](../MS-RDPBCGR/MS-RDPBCGR.md)), using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
+**EncryptedLicenseInfo (variable):** A LICENSE_BINARY_BLOB structure (as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.2) of **wBlobType** BB_ENCRYPTED_DATA_BLOB (0x0009).<15> This BLOB contains the encrypted [New License Information (section 2.2.2.6.1)](#Section_2.2.2.6.1) packet and is encrypted with the licensing encryption key (see section [5.1.2](#Section_5.1.2)), using [**RC4**](#gt_rc4) (for instructions on how to perform the encryption, see section [5.1.3](#Section_5.1.3)).
 
 **MACData (16 bytes):** An array of 16 bytes containing an [**MD5 digest**](#gt_md5-digest) ([**Message Authentication Code**](#gt_message-authentication-code-mac)) generated over the unencrypted New License Information structure. For instructions on how to generate this message digest, see section [5.1.5](#Section_5.1.5); for a description of how the server uses the **MACData** field to verify the integrity of the New License Information packet, see section [3.1.5.1](#Section_3.1.5.1).
 
@@ -888,7 +888,7 @@ packet-beta
   352-415: "pbLicenseInfo (variable)"
 ```
 
-**dwVersion (4 bytes):** The content and format of this field are the same as the **dwVersion** field of the [Product Information (section 2.2.2.1.1)](#Section_3.2.1.2) structure.
+**dwVersion (4 bytes):** The content and format of this field are the same as the **dwVersion** field of the [Product Information (section 2.2.2.1.1)](#Section_2.2.2.1.1) structure.
 
 **cbScope (4 bytes):** A 32-bit unsigned integer that contains the number of bytes in the string contained in the **pbScope** field.
 
@@ -904,12 +904,12 @@ packet-beta
 
 **cbLicenseInfo (4 bytes):** A 32-bit unsigned integer that contains the number of bytes of binary data in the **pbLicenseInfo** field.
 
-**pbLicenseInfo (variable):** This field contains the CAL issued to the client by the license server. This license consists of an X.509 certificate chain generated by the license server (encoding of the license information in the X.509 leaf certificate is described in section [2.2.2.9](#Section_2.2.2.9)). The binary data contained in this field is opaque to the client. The client sends this information back to the server in the [Client License Information](#Section_3.3.5.3) message.
+**pbLicenseInfo (variable):** This field contains the CAL issued to the client by the license server. This license consists of an X.509 certificate chain generated by the license server (encoding of the license information in the X.509 leaf certificate is described in section [2.2.2.9](#Section_2.2.2.9)). The binary data contained in this field is opaque to the client. The client sends this information back to the server in the [Client License Information](#Section_2.2.2.3) message.
 
 <a id="Section_2.2.2.7"></a>
 #### 2.2.2.7 Server New License (SERVER_NEW_LICENSE)
 
-The Server New License message is sent from the server to the client when a new license is issued to the client. The structure and the content of this message are the same as the [Server Upgrade License](#Section_2.2.2.6) message.
+The Server New License message is sent from the server to the client when a new license is issued to the client. The structure and the content of this message are the same as the [Server Upgrade License](#Section_3.2.5.6) message.
 
 <a id="Section_2.2.2.8"></a>
 #### 2.2.2.8 Licensing Error Message (LICENSE_ERROR_MESSAGE)
@@ -958,7 +958,7 @@ packet-beta
 
 **LicenseCount (4 bytes):** A 32-bit unsigned integer that specifies the number of licenses (of the type defined by the LICENSED_PRODUCT_INFO structure) that have been issued to the client.
 
-**PlatformId (4 bytes):** A 32-bit unsigned integer that is sent by the client while requesting a license. The content and format of this field are the same as the **PlatformId** field of the Client New License Request (section [2.2.2.2](#Section_3.3.5.2)) message.
+**PlatformId (4 bytes):** A 32-bit unsigned integer that is sent by the client while requesting a license. The content and format of this field are the same as the **PlatformId** field of the Client New License Request (section [2.2.2.2](#Section_2.2.2.2)) message.
 
 **LicensedLanguageId (4 bytes):** A 32-bit unsigned integer that specifies the active language identifier of the license server that issued the license (for a list of language identifiers, see [[[MSDN-MUI]](https://go.microsoft.com/fwlink/?LinkId=90048)]).
 
@@ -1097,14 +1097,14 @@ None.
 
 Both the [**server**](#gt_server) and [**client**](#gt_client) add a [**MAC**](#gt_message-authentication-code-mac) checksum to licensing messages to allow the recipient to validate the integrity of the licensing data that is contained in the message.
 
-The sender MUST generate the MAC checksum (see section [5.1.5](#Section_5.1.5)) on selected fields of a licensing message (for fields that are used to generate the MAC checksum, see the **MACData** fields in sections [2.2.2.3](#Section_3.3.5.3) through [2.2.2.6](#Section_2.2.2.6)). It then MUST encrypt those fields of the licensing message (see [Encrypting Licensing Session Data (section 5.1.3)](#Section_5.1.3)). Next, it MUST transmit the licensing message (see [Licensing PDU (section 2.2.2)](#Section_2.2.2)) containing the encrypted fields and the MAC checksum to the receiver.
+The sender MUST generate the MAC checksum (see section [5.1.5](#Section_5.1.5)) on selected fields of a licensing message (for fields that are used to generate the MAC checksum, see the **MACData** fields in sections [2.2.2.3](#Section_2.2.2.3) through [2.2.2.6](#Section_2.2.2.6)). It then MUST encrypt those fields of the licensing message (see [Encrypting Licensing Session Data (section 5.1.3)](#Section_5.1.3)). Next, it MUST transmit the licensing message (see [Licensing PDU (section 2.2.2)](#Section_2.2.2)) containing the encrypted fields and the MAC checksum to the receiver.
 
 The receiver MUST decrypt the encrypted fields of the received licensing message (see [Decrypting Licensing Session Data (section 5.1.4)](#Section_5.1.4)), and then MUST generate a MAC checksum over the decrypted fields. Next, it MUST compare the generated checksum with the received checksum. If they do not match, The receiver MAY send a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) with an error code ERR_INVALID_MAC and a state transition code of ST_TOTAL_ABORT to the sender.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Sending Licensing Error Messages
 
-Both the client and the server can send a **Licensing Error Message** (section [2.2.2.8](../MS-RDPBCGR/MS-RDPBCGR.md)). Whenever an error message is sent, the message type in the **Licensing Preamble** (section [2.2.1.2](#Section_2.2.1.2)) MUST be set to ERROR_ALERT (0xFF). For the PDU, see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.3
+Both the client and the server can send a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)). Whenever an error message is sent, the message type in the **Licensing Preamble** (section [2.2.1.2](#Section_2.2.1.2)) MUST be set to ERROR_ALERT (0xFF). For the PDU, see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) section 2.2.1.12.1.3
 
 The client and the server MUST also set the appropriate state transition value in the **dwStateTransition** field in the PDU. This is used to determine the next action to take. For state transitions, see **Processing Licensing Error Messages** (section [3.1.5.3](#Section_3.1.5.3)).
 
@@ -1157,7 +1157,7 @@ Refer to the common details abstract data model in section [3.1.1](#Section_3.1.
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Server Random
 
-The Server Random is a 32-byte random number created using a cryptographically secure pseudo-random number generator. It is used to generate encryption keys that are used in later stages of the licensing protocol; see [Server License Request (section 2.2.2.1)](#Section_3.3.5.1).
+The Server Random is a 32-byte random number created using a cryptographically secure pseudo-random number generator. It is used to generate encryption keys that are used in later stages of the licensing protocol; see [Server License Request (section 2.2.2.1)](#Section_2.2.2.1).
 
 The server random is unique for a given client connection. It is created at the beginning of the licensing protocol and is destroyed after the licensing protocol is completed. For information on how the Server Random is used, see sections 2.2.2.1 and [5.1.1](#Section_5.1.1).
 
@@ -1177,12 +1177,12 @@ pbProductId = "A02"
 <a id="Section_3.2.1.3"></a>
 #### 3.2.1.3 Server Certificate
 
-A [server certificate](#Section_3.2.1.3) MUST be either a [proprietary certificate](#Section_2.2.1.4.3) or an X.509 certificate. An X.509 certificate chain is issued to a [**terminal server**](#gt_terminal-server) by a [**license server**](#gt_license-server). If a terminal server has not received an X.509 certificate from a license server, it generates a proprietary certificate and sends it in the **ServerCertificate** field of a [Server License Request](#Section_3.3.5.1) message.
+A [server certificate](#Section_2.2.1.4) MUST be either a [proprietary certificate](#Section_2.2.1.4.3) or an X.509 certificate. An X.509 certificate chain is issued to a [**terminal server**](#gt_terminal-server) by a [**license server**](#gt_license-server). If a terminal server has not received an X.509 certificate from a license server, it generates a proprietary certificate and sends it in the **ServerCertificate** field of a [Server License Request](#Section_2.2.2.1) message.
 
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 Key Exchange List
 
-The Key Exchange List is a list of key exchange algorithms supported by the server. See the **KeyExchangeList** field in the [Server License Request](#Section_3.3.5.1) message.
+The Key Exchange List is a list of key exchange algorithms supported by the server. See the **KeyExchangeList** field in the [Server License Request](#Section_2.2.2.1) message.
 
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 Scope List
@@ -1192,7 +1192,7 @@ The [Scope List](#Section_3.2.1.5) describes the list of issuers for the CAL.<18
 <a id="Section_3.2.1.6"></a>
 #### 3.2.1.6 Platform Challenge
 
-The **Platform Challenge** is a random string generated by the server. This string is encrypted (section [5.1.3](#Section_5.1.3)) with the licensing encryption key using [**RC4**](#gt_rc4) and sent in the **EncryptedPlatformChallenge** field of the **Server Platform Challenge** (section [2.2.2.4](#Section_3.2.1.6)) message. It is created at the beginning of the licensing protocol and destroyed when the licensing protocol is completed.
+The **Platform Challenge** is a random string generated by the server. This string is encrypted (section [5.1.3](#Section_5.1.3)) with the licensing encryption key using [**RC4**](#gt_rc4) and sent in the **EncryptedPlatformChallenge** field of the **Server Platform Challenge** (section [2.2.2.4](#Section_2.2.2.4)) message. It is created at the beginning of the licensing protocol and destroyed when the licensing protocol is completed.
 
 <a id="Section_3.2.1.7"></a>
 #### 3.2.1.7 License
@@ -1202,22 +1202,22 @@ The license is an X.509 certificate chain that contains a certificate issued by 
 - Version: The version of the [**terminal server**](#gt_terminal-server) that this client is allowed to access.
 - Type: Whether the license is temporary or permanent.
 - Validity Period: The period of validity of this license.
-The server MUST send the license to the client in the [Server New License](#Section_3.2.5.7) message or the [Server Upgrade License](#Section_2.2.2.6) message.
+The server MUST send the license to the client in the [Server New License](#Section_3.2.5.7) message or the [Server Upgrade License](#Section_3.2.5.6) message.
 
 <a id="Section_3.2.1.8"></a>
 #### 3.2.1.8 ClientUserName
 
-The **ClientUserName** is the name of the user initiating the remote connection to the [**terminal server**](#gt_terminal-server). The **ClientUserName** is sent from the client to the terminal server in the CLIENT_NEW_LICENSE_REQUEST message (section [2.2.2.2](#Section_3.3.5.2)).
+The **ClientUserName** is the name of the user initiating the remote connection to the [**terminal server**](#gt_terminal-server). The **ClientUserName** is sent from the client to the terminal server in the CLIENT_NEW_LICENSE_REQUEST message (section [2.2.2.2](#Section_2.2.2.2)).
 
 <a id="Section_3.2.1.9"></a>
 #### 3.2.1.9 ClientMachineName
 
-The **ClientMachineName** is the name of the device from which the remote connection is made to the terminal server. This information is sent from the client to the terminal server in the CLIENT_NEW_LICENSE_REQUEST message (section [2.2.2.2](#Section_3.3.5.2)).
+The **ClientMachineName** is the name of the device from which the remote connection is made to the terminal server. This information is sent from the client to the terminal server in the CLIENT_NEW_LICENSE_REQUEST message (section [2.2.2.2](#Section_2.2.2.2)).
 
 <a id="Section_3.2.1.10"></a>
 #### 3.2.1.10 Encryption Keys
 
-The server uses the 128-bit licensing encryption key (section [5.1.2](#Section_5.1.2)) to encrypt the **EncryptedPlatformChallenge** field in the **Server Platform Challenge** message (section [2.2.2.4](#Section_3.2.1.6)), and decrypt the **EncryptedHWID** field in the **Client License Information** (section [2.2.2.3](#Section_3.3.5.3)) and **Client Platform Challenge** (section [2.2.2.5](#Section_3.2.1.6)) messages.
+The server uses the 128-bit licensing encryption key (section [5.1.2](#Section_5.1.2)) to encrypt the **EncryptedPlatformChallenge** field in the **Server Platform Challenge** message (section [2.2.2.4](#Section_2.2.2.4)), and decrypt the **EncryptedHWID** field in the **Client License Information** (section [2.2.2.3](#Section_2.2.2.3)) and **Client Platform Challenge** (section [2.2.2.5](#Section_2.2.2.5)) messages.
 
 <a id="Section_3.2.1.11"></a>
 #### 3.2.1.11 Server Licensing States
@@ -1226,7 +1226,7 @@ Server Licensing States is an enumeration of different licensing states that the
 
 **Server Licensing Begin**: The [**terminal server**](#gt_terminal-server) licensing protocol starts in the "Server Licensing Begin" state.
 
-**Server Process Licensing**: A successful [SERVER_LICENSE_REQUEST (section 2.2.2.1)](#Section_3.3.5.1) call brings the server to the "Server Process Licensing" state. In this state, the terminal server processes the [Client New License Requests](#Section_3.3.5.2) or [Client License Information](#Section_3.3.5.3) (as specified in sections [3.2.5.2](#Section_3.2.5.2) and [3.2.5.3](#Section_3.2.5.3)) depending on the availability of the requested license on the client.
+**Server Process Licensing**: A successful [SERVER_LICENSE_REQUEST (section 2.2.2.1)](#Section_2.2.2.1) call brings the server to the "Server Process Licensing" state. In this state, the terminal server processes the [Client New License Requests](#Section_2.2.2.2) or [Client License Information](#Section_2.2.2.3) (as specified in sections [3.2.5.2](#Section_3.2.5.2) and [3.2.5.3](#Section_3.2.5.3)) depending on the availability of the requested license on the client.
 
 **Server Licensing Aborted**: When the client sends Out-of-Sequence or Unrecognized Messages or Invalid MAC (as specified in sections [3.2.5.8](#Section_3.2.5.8) and [3.2.5.9](#Section_3.2.5.9)), the terminal server goes into "Server Licensing Aborted" state.
 
@@ -1253,12 +1253,12 @@ None.
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Sending Server License Request PDUs
 
-The server initiates the licensing protocol by sending a [Server License Request](#Section_3.3.5.1) to the client. A Server License Request uses the message type of LICENSE_REQUEST (0x01) in the [licensing preamble](#Section_2.2.1.2).
+The server initiates the licensing protocol by sending a [Server License Request](#Section_2.2.2.1) to the client. A Server License Request uses the message type of LICENSE_REQUEST (0x01) in the [licensing preamble](#Section_2.2.1.2).
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Processing Client New License Requests
 
-The client MUST send the **Client New License Request** (section [2.2.2.2](#Section_3.3.5.2)) when it does not have a license.
+The client MUST send the **Client New License Request** (section [2.2.2.2](#Section_2.2.2.2)) when it does not have a license.
 
 In case of a [**personal terminal server**](#gt_personal-terminal-server), no processing is done on the server side, and the server sends a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) with the error code STATUS_VALID_CLIENT and the state transition code ST_NO_TRANSITION. The licensing protocol is complete at this point.
 
@@ -1266,16 +1266,16 @@ In the case of terminal servers, the server tries to follow the **New License Fl
 
 The server MUST compute the [**license encryption key**](#gt_license-encryption-key) (see section [5.1.2](#Section_5.1.2)) by using the client-generated random number and [**premaster secret**](#gt_premaster-secret). The premaster secret is obtained by decrypting the encrypted premaster secret with the terminal server's private key. This allows elements of the remainder of the licensing protocol to be encrypted.
 
-The terminal server MUST decrypt (see section [5.1.4](#Section_5.1.4)) the **EncryptedHWID** field (see section [2.2.2.3](#Section_3.3.5.3)) using the license encryption key to get the **Client Hardware Identification** (section [2.2.2.3.1)](#Section_3.3.1.9) structure. It then MUST generate the [**MAC**](#gt_message-authentication-code-mac) checksum (see section [5.1.5](#Section_5.1.5)) over the decrypted **Client Hardware Identification** and MUST compare it with the MAC checksum received in the **Client License Information** (section 2.2.2.3) message to verify data integrity.
+The terminal server MUST decrypt (see section [5.1.4](#Section_5.1.4)) the **EncryptedHWID** field (see section [2.2.2.3](#Section_2.2.2.3)) using the license encryption key to get the **Client Hardware Identification** (section [2.2.2.3.1)](#Section_2.2.2.3.1) structure. It then MUST generate the [**MAC**](#gt_message-authentication-code-mac) checksum (see section [5.1.5](#Section_5.1.5)) over the decrypted **Client Hardware Identification** and MUST compare it with the MAC checksum received in the **Client License Information** (section 2.2.2.3) message to verify data integrity.
 
-The server MUST respond by issuing a [platform challenge](#Section_3.2.1.6) to the client. The server MUST encrypt and MUST send the **Platform Challenge** (section 3.2.1.6) in a **Server Platform Challenge** (section [2.2.2.4](#Section_3.2.1.6)) message.
+The server MUST respond by issuing a [platform challenge](#Section_3.2.1.6) to the client. The server MUST encrypt and MUST send the **Platform Challenge** (section 3.2.1.6) in a **Server Platform Challenge** (section [2.2.2.4](#Section_2.2.2.4)) message.
 
 The **ClientUserName** and **ClientMachineName** fields are preserved for the licensing protocol session and are used to issue a CAL to the client when the client successfully responds to the **Server Platform Challenge** message.
 
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Processing Client License Information
 
-If the client has a valid license that matches the information sent by the server in the **Server License Request** (section [2.2.2.1](#Section_3.3.5.1)) message, the client MUST send the previously issued license in the **Client License Information** (section [2.2.2.3](#Section_3.3.5.3)) message.
+If the client has a valid license that matches the information sent by the server in the **Server License Request** (section [2.2.2.1](#Section_2.2.2.1)) message, the client MUST send the previously issued license in the **Client License Information** (section [2.2.2.3](#Section_2.2.2.3)) message.
 
 In the case of a [**personal terminal server**](#gt_personal-terminal-server), the sent license is cached by the server, and then the server sends a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) with error code STATUS_VALID_CLIENT and the state transition code ST_NO_TRANSITION. The licensing protocol is complete at this point.
 
@@ -1283,7 +1283,7 @@ In the case of terminal servers, the server tries to follow the upgrade **Licens
 
 The server MUST compute the [**license encryption key**](#gt_license-encryption-key) by using the client-generated random number and the [**premaster secret**](#gt_premaster-secret). The premaster secret is obtained by decrypting the encrypted premaster secret with the terminal server's private key. This allows elements of the remainder of the licensing protocol to be encrypted.
 
-The terminal server MUST decrypt (see section [5.1.4](#Section_5.1.4)) the **EncryptedHWID** field (see section 2.2.2.3) using the license encryption key to get the **Client Hardware Identification** (section [2.2.2.3.1](#Section_3.3.1.9)) structure. It then MUST generate the [**MAC**](#gt_message-authentication-code-mac) checksum (see section [5.1.5](#Section_5.1.5)) over the decrypted **Client Hardware Identification** and compares it with the MAC checksum received in the **Client License Information** (section 2.2.2.3) message to verify data integrity.
+The terminal server MUST decrypt (see section [5.1.4](#Section_5.1.4)) the **EncryptedHWID** field (see section 2.2.2.3) using the license encryption key to get the **Client Hardware Identification** (section [2.2.2.3.1](#Section_2.2.2.3.1)) structure. It then MUST generate the [**MAC**](#gt_message-authentication-code-mac) checksum (see section [5.1.5](#Section_5.1.5)) over the decrypted **Client Hardware Identification** and compares it with the MAC checksum received in the **Client License Information** (section 2.2.2.3) message to verify data integrity.
 
 The server MUST validate the **License** (section [3.2.1.7](#Section_3.2.1.7)) present in the **LicenseInfo BLOB** (see section 2.2.2.3) by validating the following data:
 
@@ -1303,25 +1303,25 @@ The server MUST send a **Licensing Error Message** with the error code STATUS_VA
 - A valid permanent license that is about to expire (within seven days of its expiry).
 - A valid [**temporary license**](#gt_temporary-license).
 - An invalid license.
-The server MUST respond back with **Server Platform Challenge** (section [2.2.2.4](#Section_3.2.1.6)) message to the client.
+The server MUST respond back with **Server Platform Challenge** (section [2.2.2.4](#Section_2.2.2.4)) message to the client.
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Sending Server Platform Challenges
 
-The [Server Platform Challenge](#Section_3.2.1.6) message MUST be sent from the [**terminal server**](#gt_terminal-server) when a new license needs to be issued to the client or when an existing [**client license**](#gt_client-license) needs to be upgraded. The message type is PLATFORM_CHALLENGE (0x02) in the [licensing preamble](#Section_2.2.1.2).
+The [Server Platform Challenge](#Section_3.2.5.4) message MUST be sent from the [**terminal server**](#gt_terminal-server) when a new license needs to be issued to the client or when an existing [**client license**](#gt_client-license) needs to be upgraded. The message type is PLATFORM_CHALLENGE (0x02) in the [licensing preamble](#Section_2.2.1.2).
 
 The server platform challenge is never sent when the target is a [**personal terminal server**](#gt_personal-terminal-server). This is because a personal terminal server never tries to get licenses issued or upgraded.
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Processing Client Platform Challenge Responses
 
-When a server receives the **Client Platform Challenge Response** (section [2.2.2.5](#Section_3.2.1.6)) message, it decrypts the **EncryptedPlatformChallengeResponse** and **EncryptedHWID** fields in the message using the [**license encryption key**](#gt_license-encryption-key) generated while processing earlier licensing messages.
+When a server receives the **Client Platform Challenge Response** (section [2.2.2.5](#Section_2.2.2.5)) message, it decrypts the **EncryptedPlatformChallengeResponse** and **EncryptedHWID** fields in the message using the [**license encryption key**](#gt_license-encryption-key) generated while processing earlier licensing messages.
 
-The server MUST then generate the [**MAC**](#gt_message-authentication-code-mac) checksum over the decrypted **Platform Challenge Response Data** (section [2.2.2.5.1](#Section_3.2.1.6)) packet and decrypted **Client Hardware Identification** (section [2.2.2.3.1](#Section_3.3.1.9)) packet, and MUST compare it with the received MAC checksum to verify the data integrity. **Handling invalid MACs** is specified in section [3.2.5.9](#Section_3.2.5.9).
+The server MUST then generate the [**MAC**](#gt_message-authentication-code-mac) checksum over the decrypted **Platform Challenge Response Data** (section [2.2.2.5.1](#Section_2.2.2.5.1)) packet and decrypted **Client Hardware Identification** (section [2.2.2.3.1](#Section_2.2.2.3.1)) packet, and MUST compare it with the received MAC checksum to verify the data integrity. **Handling invalid MACs** is specified in section [3.2.5.9](#Section_3.2.5.9).
 
 The following cases can result:
 
-**Case 1**: A **Client License Information** (section [2.2.2.3](#Section_3.3.5.3)) message was received earlier by the server, and the CAL (LicenseInfo BLOB) in the message required an upgrade.
+**Case 1**: A **Client License Information** (section [2.2.2.3](#Section_2.2.2.3)) message was received earlier by the server, and the CAL (LicenseInfo BLOB) in the message required an upgrade.
 
 If the [**license server**](#gt_license-server) cannot be contacted to upgrade the license, and the old license is still valid, the terminal server sends the **Server Upgrade License** (section [2.2.2.6](#Section_2.2.2.6)) message and returns the old license to the client.
 
@@ -1330,7 +1330,7 @@ If the [**license server**](#gt_license-server) cannot be contacted to upgrade t
 - The CAL (LicenseInfo BLOB) received in the **Client License Information** message required an upgrade, and the license server cannot be contacted to upgrade the CAL and the old license is not valid.
 Or:
 
-- A **Client New License Request** (section [2.2.2.2](#Section_3.3.5.2)) message was received earlier, and the license server cannot be contacted to issue a new CAL.
+- A **Client New License Request** (section [2.2.2.2](#Section_2.2.2.2)) message was received earlier, and the license server cannot be contacted to issue a new CAL.
 In this case, if the server's [**grace period**](#gt_grace-period) has not been exceeded, the server responds as if the client presented a valid license by sending a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) with an error code of STATUS_VALID_CLIENT (0x00000007) and a state transition code of ST_NO_TRANSITION (0x00000002), ending the licensing protocol.
 
 If the server's grace period has been exceeded, it sends a **Licensing Error Message** with error code ERR_NO_LICENSE_SERVER (0x00000006) and a state transition of ST_TOTAL_ABORT (0x00000001). The licensing protocol is aborted.
@@ -1349,12 +1349,12 @@ If the server's grace period has been exceeded, it sends a **Licensing Error Mes
 
 **Case 5**: A **Client License Information** message was received earlier by the server; the CAL (LicenseInfo BLOB) in the message required an upgrade; the license server can be contacted; and the old license is successfully upgraded. In this case, the terminal server returns the upgraded CAL in a **Server Upgrade License** message.
 
-**Case 6**: A **Client New License Request** message was received earlier, the license server was contacted, and it issued a new license. In this case, the terminal server sends the new license to the client in a **Server New License** (section [2.2.2.7](#Section_3.2.5.7)) message.
+**Case 6**: A **Client New License Request** message was received earlier, the license server was contacted, and it issued a new license. In this case, the terminal server sends the new license to the client in a **Server New License** (section [2.2.2.7](#Section_2.2.2.7)) message.
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Sending Server Upgrade Licenses
 
-The [Server Upgrade License](#Section_2.2.2.6) message MUST be sent to the client to upgrade a license in its [**license store**](#gt_license-store). The message type is UPGRADE_LICENSE (0x04) in the [licensing preamble](#Section_2.2.1.2).
+The [Server Upgrade License](#Section_3.2.5.6) message MUST be sent to the client to upgrade a license in its [**license store**](#gt_license-store). The message type is UPGRADE_LICENSE (0x04) in the [licensing preamble](#Section_2.2.1.2).
 
 The **EncryptedLicenseInfo** field is the license information structure after encryption with the [**license encryption key**](#gt_license-encryption-key), using [**RC4**](#gt_rc4). The BLOB type is BB_ENCRYPTED_DATA_BLOB (0x0009). The **MACData** field is the 128-bit [**MD5 digest**](#gt_md5-digest) generated from the unencrypted upgraded license.
 
@@ -1392,58 +1392,58 @@ None.
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Platform ID
 
-The **PlatformId** field is sent by the client in the [Client New License Request](#Section_3.3.5.2) message or the [Client License Information](#Section_3.3.5.3) message, depending on whether the client has already been issued a license. It is also sent by the client in the [Client Hardware Identification](#Section_3.3.1.9) structure. The **PlatformId** field content is populated by the client, as specified in Client New License Request (section 2.2.2.2). The **PlatformId** field is used by the server to uniquely identify a client in conjunction with the **Data1**, **Data2**, **Data3**, and **Data4** fields of the Client Hardware Identification structure.
+The **PlatformId** field is sent by the client in the [Client New License Request](#Section_2.2.2.2) message or the [Client License Information](#Section_2.2.2.3) message, depending on whether the client has already been issued a license. It is also sent by the client in the [Client Hardware Identification](#Section_2.2.2.3.1) structure. The **PlatformId** field content is populated by the client, as specified in Client New License Request (section 2.2.2.2). The **PlatformId** field is used by the server to uniquely identify a client in conjunction with the **Data1**, **Data2**, **Data3**, and **Data4** fields of the Client Hardware Identification structure.
 
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 Client Random
 
-The **ClientRandom** field is a 32-byte random number created by using a cryptographically secure pseudo-random number generator (see sections [2.2.2.2](#Section_3.3.5.2) and [5.1.1](#Section_5.1.1)). It is created at the beginning of the licensing protocol and destroyed when the licensing protocol is completed.
+The **ClientRandom** field is a 32-byte random number created by using a cryptographically secure pseudo-random number generator (see sections [2.2.2.2](#Section_2.2.2.2) and [5.1.1](#Section_5.1.1)). It is created at the beginning of the licensing protocol and destroyed when the licensing protocol is completed.
 
 <a id="Section_3.3.1.3"></a>
 #### 3.3.1.3 Preferred Key Exchange Algorithm ID
 
-The preferred key exchange algorithm ID is the key exchange algorithm selected by the client. This MUST be set to KEY_EXCHANGE_ALG_RSA (0x00000001), which indicates RSA with a 512-bit key (see [Client New License Request (section 2.2.2.2)](#Section_3.3.5.2)).<19>
+The preferred key exchange algorithm ID is the key exchange algorithm selected by the client. This MUST be set to KEY_EXCHANGE_ALG_RSA (0x00000001), which indicates RSA with a 512-bit key (see [Client New License Request (section 2.2.2.2)](#Section_2.2.2.2)).<19>
 
 <a id="Section_3.3.1.4"></a>
 #### 3.3.1.4 Client User Name
 
-See section [2.2.2.2](#Section_3.3.5.2).
+See section [2.2.2.2](#Section_2.2.2.2).
 
 <a id="Section_3.3.1.5"></a>
 #### 3.3.1.5 Client Machine Name
 
-See section [2.2.2.2](#Section_3.3.5.2).
+See section [2.2.2.2](#Section_2.2.2.2).
 
 <a id="Section_3.3.1.6"></a>
 #### 3.3.1.6 Encrypted Premaster Secret
 
-The encrypted premaster secret is a licensing BLOB containing a 48-byte random number that is encrypted using RSA with the server's public key retrieved from the [server certificate](#Section_3.2.1.3).
+The encrypted premaster secret is a licensing BLOB containing a 48-byte random number that is encrypted using RSA with the server's public key retrieved from the [server certificate](#Section_2.2.1.4).
 
 The [**premaster secret**](#gt_premaster-secret) (along with client and server random values) is used to generate the [**license encryption key**](#gt_license-encryption-key) for later stages of the licensing protocol.
 
 <a id="Section_3.3.1.7"></a>
 #### 3.3.1.7 License
 
-The license is a licensing BLOB of type BB_DATA_BLOB (0x0001). The server MUST send it to the client in the [Server New License](#Section_3.2.5.7) message or the [Server Upgrade License](#Section_2.2.2.6) message. It is stored by the client in the [**license store**](#gt_license-store).
+The license is a licensing BLOB of type BB_DATA_BLOB (0x0001). The server MUST send it to the client in the [Server New License](#Section_3.2.5.7) message or the [Server Upgrade License](#Section_3.2.5.6) message. It is stored by the client in the [**license store**](#gt_license-store).
 
 <a id="Section_3.3.1.8"></a>
 #### 3.3.1.8 License Store
 
-This is a client-side database used for storing [**CALs**](#gt_client-access-license-cal). This database is indexed by using the [product information](#Section_3.2.1.2) and the [scope list](#Section_3.2.1.5) associated with the license. The product information and the scope list are used for faster retrieval of the license by the client when processing the [Server License Request](#Section_3.3.5.1) message.
+This is a client-side database used for storing [**CALs**](#gt_client-access-license-cal). This database is indexed by using the [product information](#Section_3.2.1.2) and the [scope list](#Section_3.2.1.5) associated with the license. The product information and the scope list are used for faster retrieval of the license by the client when processing the [Server License Request](#Section_2.2.2.1) message.
 
-On receipt of the Server License Request message, the client searches its [**license store**](#gt_license-store) for a CAL. If the client has already been issued a CAL, it retrieves the binary data for the license from its license store by using the product information and the scope list as the lookup key. The client then MUST send it as a [Licensing Binary BLOB](#Section_2.2.1.3) in the [Client License Information](#Section_3.3.5.3) message.
+On receipt of the Server License Request message, the client searches its [**license store**](#gt_license-store) for a CAL. If the client has already been issued a CAL, it retrieves the binary data for the license from its license store by using the product information and the scope list as the lookup key. The client then MUST send it as a [Licensing Binary BLOB](#Section_2.2.1.3) in the [Client License Information](#Section_2.2.2.3) message.
 
 <a id="Section_3.3.1.9"></a>
 #### 3.3.1.9 Client Hardware Identification
 
 The **Client Hardware Identification** is an identifier that uniquely identifies the client.
 
-The content and format of the **PlatformId** field of **Client Hardware Identification** (section [2.2.2.3.1](#Section_3.3.1.9)) are the same as the **PlatformId** field of the **Client License Information** (section [2.2.2.3](#Section_3.3.5.3)) and **Client New License Request** (section [2.2.2.2](#Section_3.3.5.2)) messages. This ties a particular **Client Hardware Identification** to the client's operating system. The other 16 bytes (fields **Data1** through **Data4**) of the **Client Hardware Identification** are intended to be hardware specific. Clients SHOULD attempt to use operating system-specific or hardware-specific information that is easily and consistently retrievable. Examples include hard-wired processor IDs, Ethernet addresses of nonremovable Ethernet cards, and disk subsystem serial numbers. The client SHOULD cache the Client Hardware Identification for later retrieval after it is generated.
+The content and format of the **PlatformId** field of **Client Hardware Identification** (section [2.2.2.3.1](#Section_2.2.2.3.1)) are the same as the **PlatformId** field of the **Client License Information** (section [2.2.2.3](#Section_2.2.2.3)) and **Client New License Request** (section [2.2.2.2](#Section_2.2.2.2)) messages. This ties a particular **Client Hardware Identification** to the client's operating system. The other 16 bytes (fields **Data1** through **Data4**) of the **Client Hardware Identification** are intended to be hardware specific. Clients SHOULD attempt to use operating system-specific or hardware-specific information that is easily and consistently retrievable. Examples include hard-wired processor IDs, Ethernet addresses of nonremovable Ethernet cards, and disk subsystem serial numbers. The client SHOULD cache the Client Hardware Identification for later retrieval after it is generated.
 
 <a id="Section_3.3.1.10"></a>
 #### 3.3.1.10 Encryption Keys
 
-The client uses the 128-bit licensing encryption key (section [5.1.2](#Section_5.1.2)) to decrypt the **EncryptedPlatformChallenge** field in the **Server Platform Challenge** message (section [2.2.2.4](#Section_3.2.1.6)), and encrypt the **EncryptedHWID** field in the **Client License Information** (section [2.2.2.3](#Section_3.3.5.3)) and **Client Platform Challenge** (section [2.2.2.5](#Section_3.2.1.6)) messages.
+The client uses the 128-bit licensing encryption key (section [5.1.2](#Section_5.1.2)) to decrypt the **EncryptedPlatformChallenge** field in the **Server Platform Challenge** message (section [2.2.2.4](#Section_2.2.2.4)), and encrypt the **EncryptedHWID** field in the **Client License Information** (section [2.2.2.3](#Section_2.2.2.3)) and **Client Platform Challenge** (section [2.2.2.5](#Section_2.2.2.5)) messages.
 
 <a id="Section_3.3.1.11"></a>
 #### 3.3.1.11 Client Licensing States
@@ -1452,7 +1452,7 @@ The client uses the 128-bit licensing encryption key (section [5.1.2](#Section_5
 
 **Client Licensing Await**: The client starts with the "Client Licensing Await" state.
 
-**Client Process Licensing**: The client goes into the "Client Process Licensing" state after receiving a **SERVER_LICENSE_REQUEST** (section [2.2.2.1](#Section_3.3.5.1)) request (as specified in section [3.3.5.1](#Section_3.3.5.1)). In this state the remote client sends the license information (as specified in section [3.2.5.3](#Section_3.2.5.3)) or the new license request (as specified in section [3.2.5.2](#Section_3.2.5.2)), depending on the availability of the requested license on the client to the [**terminal server**](#gt_terminal-server).
+**Client Process Licensing**: The client goes into the "Client Process Licensing" state after receiving a **SERVER_LICENSE_REQUEST** (section [2.2.2.1](#Section_2.2.2.1)) request (as specified in section [3.3.5.1](#Section_3.3.5.1)). In this state the remote client sends the license information (as specified in section [3.2.5.3](#Section_3.2.5.3)) or the new license request (as specified in section [3.2.5.2](#Section_3.2.5.2)), depending on the availability of the requested license on the client to the [**terminal server**](#gt_terminal-server).
 
 **Client Licensing Aborted**: When the terminal server sends Out-of-Sequence or Unrecognized Messages or Invalid MAC (as specified in sections [3.2.5.8](#Section_3.2.5.8) and [3.2.5.9](#Section_3.2.5.9)), the client goes into the "Server Licensing Aborted" state.
 
@@ -1482,25 +1482,25 @@ None.
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Processing Server License Requests
 
-The server initiates the licensing protocol by sending a **Server License Request** (section [2.2.2.1](#Section_3.3.5.1)) message to the client.
+The server initiates the licensing protocol by sending a **Server License Request** (section [2.2.2.1](#Section_2.2.2.1)) message to the client.
 
 The client MUST respond to the **Server License Request** in the following possible ways:
 
-- If the **Server Certificate** (section [2.2.1.4](#Section_3.2.1.3)) does not authenticate correctly, the client MUST return a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) with an error code of ERR_INVALID_SERVER_CERTIFICATE (0x01) and a state transition of ST_TOTAL_ABORT (0x01). The server MUST then end the licensing protocol.
-- The client searches its [**license store**](#gt_license-store) to find a CAL that matches the **Product Information** (section [2.2.2.1.1](#Section_3.2.1.2)) packet provided in the **Server License Request**. If the client finds a matching license, it MUST respond with a **Client License Information** (section [2.2.2.3](#Section_3.3.5.3)) message.
-- If the client does not find a license matching the **Product Information** provided in the **Server License Request**, it MUST request a new license by sending the **Client New License Request** (section [2.2.2.2](#Section_3.3.5.2)) message.
+- If the **Server Certificate** (section [2.2.1.4](#Section_2.2.1.4)) does not authenticate correctly, the client MUST return a **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)) with an error code of ERR_INVALID_SERVER_CERTIFICATE (0x01) and a state transition of ST_TOTAL_ABORT (0x01). The server MUST then end the licensing protocol.
+- The client searches its [**license store**](#gt_license-store) to find a CAL that matches the **Product Information** (section [2.2.2.1.1](#Section_2.2.2.1.1)) packet provided in the **Server License Request**. If the client finds a matching license, it MUST respond with a **Client License Information** (section [2.2.2.3](#Section_2.2.2.3)) message.
+- If the client does not find a license matching the **Product Information** provided in the **Server License Request**, it MUST request a new license by sending the **Client New License Request** (section [2.2.2.2](#Section_2.2.2.2)) message.
 - The client MAY also choose to end the licensing protocol by sending a **Licensing Error Message** with an error code of ERR_NO_LICENSE (0x02) and a state transition of ST_TOTAL_ABORT (0x01).
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 Sending Client New License Requests
 
-The Sending Client New License Request message is sent when the client cannot find a license type in its [**license store**](#gt_license-store) that matches the [Product Information](#Section_3.2.1.2) given by the server in the [Server License Request](#Section_3.3.5.1) message.
+The Sending Client New License Request message is sent when the client cannot find a license type in its [**license store**](#gt_license-store) that matches the [Product Information](#Section_3.2.1.2) given by the server in the [Server License Request](#Section_2.2.2.1) message.
 
-The message type is NEW_LICENSE_REQUEST (0x13) in the [licensing preamble](#Section_2.2.1.2). See also [Client New License Request (section 2.2.2.2)](#Section_3.3.5.2).
+The message type is NEW_LICENSE_REQUEST (0x13) in the [licensing preamble](#Section_2.2.1.2). See also [Client New License Request (section 2.2.2.2)](#Section_2.2.2.2).
 
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 Sending Client License Information
 
-The [Client License Information](#Section_3.3.5.3) message MUST be sent when a client has a license in its [**license store**](#gt_license-store) that matches the [Product Information](#Section_3.2.1.2) sent in the [Server License Request](#Section_3.3.5.1) message.
+The [Client License Information](#Section_2.2.2.3) message MUST be sent when a client has a license in its [**license store**](#gt_license-store) that matches the [Product Information](#Section_3.2.1.2) sent in the [Server License Request](#Section_2.2.2.1) message.
 
 The message type in the [licensing preamble](#Section_2.2.1.2) is LICENSE_INFO (0x12).
 
@@ -1509,21 +1509,21 @@ The message type in the [licensing preamble](#Section_2.2.1.2) is LICENSE_INFO (
 
 This message is sent from the server when a new license is required to be issued to the client or when the CAL presented by the client needs to be upgraded.
 
-The client MUST decrypt the **EncryptedPlatformChallenge** field (see section [5.1.4](#Section_5.1.4)) received in the [Server Platform Challenge (section 2.2.2.4)](#Section_3.2.1.6) message using the [**license encryption key**](#gt_license-encryption-key) to obtain the platform challenge data. It then MUST generate a [**MAC**](#gt_message-authentication-code-mac) checksum over the decrypted platform challenge data and compares it with the received MAC checksum to verify the integrity of the data.
+The client MUST decrypt the **EncryptedPlatformChallenge** field (see section [5.1.4](#Section_5.1.4)) received in the [Server Platform Challenge (section 2.2.2.4)](#Section_2.2.2.4) message using the [**license encryption key**](#gt_license-encryption-key) to obtain the platform challenge data. It then MUST generate a [**MAC**](#gt_message-authentication-code-mac) checksum over the decrypted platform challenge data and compares it with the received MAC checksum to verify the integrity of the data.
 
-The client MUST respond to the Server Platform Challenge with a [Client Platform Challenge Response (section 2.2.2.5)](#Section_3.2.1.6) message.
+The client MUST respond to the Server Platform Challenge with a [Client Platform Challenge Response (section 2.2.2.5)](#Section_2.2.2.5) message.
 
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 Sending Client Platform Challenge Responses
 
-The client MUST send the [Client Platform Challenge Response (section 2.2.2.5)](#Section_3.2.1.6) message in response to a [Server Platform Challenge (section 2.2.2.4)](#Section_3.2.1.6) message. The message type in the [licensing preamble](#Section_2.2.1.2) is PLATFORM_CHALLENGE_RESPONSE (0x15).
+The client MUST send the [Client Platform Challenge Response (section 2.2.2.5)](#Section_2.2.2.5) message in response to a [Server Platform Challenge (section 2.2.2.4)](#Section_2.2.2.4) message. The message type in the [licensing preamble](#Section_2.2.1.2) is PLATFORM_CHALLENGE_RESPONSE (0x15).
 
-The client constructs a [Platform Challenge Response Data (section 2.2.2.5.1)](#Section_3.2.1.6) structure and encrypts it (see section [5.1.3](#Section_5.1.3)) by using the [**license encryption key**](#gt_license-encryption-key). This encrypted Platform Challenge Response Data is sent as the EncryptedChallengeResponse BLOB of the Client Platform Challenge Response message.
+The client constructs a [Platform Challenge Response Data (section 2.2.2.5.1)](#Section_2.2.2.5.1) structure and encrypts it (see section [5.1.3](#Section_5.1.3)) by using the [**license encryption key**](#gt_license-encryption-key). This encrypted Platform Challenge Response Data is sent as the EncryptedChallengeResponse BLOB of the Client Platform Challenge Response message.
 
 <a id="Section_3.3.5.6"></a>
 #### 3.3.5.6 Processing Server Upgrade Licenses
 
-The client MUST receive a [Server Upgrade License (section 2.2.2.6)](#Section_2.2.2.6) message when the CAL sent by the client in the [Client License Information (section 2.2.2.3)](#Section_3.3.5.3) message needs to be upgraded.
+The client MUST receive a [Server Upgrade License (section 2.2.2.6)](#Section_2.2.2.6) message when the CAL sent by the client in the [Client License Information (section 2.2.2.3)](#Section_2.2.2.3) message needs to be upgraded.
 
 The client MUST decrypt (see section [5.1.4](#Section_5.1.4)) the **EncryptedLicenseInfo** field of the Server Upgrade License message using the [**license encryption key**](#gt_license-encryption-key) to get a [New License Information (section 2.2.2.6.1)](#Section_2.2.2.6.1) structure.
 
@@ -1534,7 +1534,7 @@ The client then MAY store the binary data for the CAL received in the **pbLicens
 <a id="Section_3.3.5.7"></a>
 #### 3.3.5.7 Processing Server New Licenses
 
-The client MUST receive a new license in the [Server New License](#Section_3.2.5.7) message. This message is processed in the same way that the client processes the [Server Upgrade License](#Section_2.2.2.6) message (see [Processing Server Upgrade Licenses](#Section_3.3.5.6)).
+The client MUST receive a new license in the [Server New License](#Section_3.2.5.7) message. This message is processed in the same way that the client processes the [Server Upgrade License](#Section_3.2.5.6) message (see [Processing Server Upgrade Licenses](#Section_3.3.5.6)).
 
 <a id="Section_3.3.5.8"></a>
 #### 3.3.5.8 Handling Out-of-Sequence or Unrecognized Messages
@@ -1566,7 +1566,7 @@ The sample protocol packets listed in sections [4.1](#Section_4.1) through [4.7]
 <a id="Section_4.1"></a>
 ## 4.1 Server License Request (SERVER_LICENSE_REQUEST)
 
-The **Server License Request** message is the first message sent by the server as part of the licensing protocol. See sections [2.2.2.1](#Section_3.3.5.1) and [3.2.5.1](#Section_3.2.5.1).
+The **Server License Request** message is the first message sent by the server as part of the licensing protocol. See sections [2.2.2.1](#Section_2.2.2.1) and [3.2.5.1](#Section_3.2.5.1).
 
 00000000 01 03 98 08 84 ef ae 20-b1 d5 9e 36 49 1a e8 2e ....... ...6I...
 
@@ -2213,7 +2213,7 @@ ServerCertificate::pBlob
 <a id="Section_4.2"></a>
 ## 4.2 Client New License Request (CLIENT_NEW_LICENSE_REQUEST)
 
-If the client does not already have a license in its store, it sends the **Client New License Request** message as a response to the **Server License Request** (section [2.2.2.1](#Section_3.3.5.1)) message. See sections [2.2.2.2](#Section_3.3.5.2) , and [3.3.5.2](../MS-EERR/MS-EERR.md). For information on ExtendedError, see [MS-EERR](../MS-EERR/MS-EERR.md).
+If the client does not already have a license in its store, it sends the **Client New License Request** message as a response to the **Server License Request** (section [2.2.2.1](#Section_2.2.2.1)) message. See sections [2.2.2.2](#Section_2.2.2.2) , and [3.3.5.2](#Section_3.3.5.2). For information on ExtendedError, see [MS-EERR](../MS-EERR/MS-EERR.md).
 
 00000000: 13 83 55 01 01 00 00 00-00 00 01 04 dc 73 a0 c8 ..U..........s..
 
@@ -2386,7 +2386,7 @@ bb d2 56 bd d8 f7 f3 16-cc 35 3b e1 93 42 78 dd
 <a id="Section_4.3"></a>
 ## 4.3 Client License Information (CLIENT_LICENSE_INFO)
 
-If the client already has a license in its [**store**](#gt_license-store), it sends the license in the **Client License Information** message as a response to the **Server License Request** (section [2.2.2.1](#Section_3.3.5.1)) message. See sections [2.2.2.3](#Section_3.3.5.3) and [3.3.5.3](#Section_3.3.5.3).
+If the client already has a license in its [**store**](#gt_license-store), it sends the license in the **Client License Information** message as a response to the **Server License Request** (section [2.2.2.1](#Section_2.2.2.1)) message. See sections [2.2.2.3](#Section_2.2.2.3) and [3.3.5.3](#Section_3.3.5.3).
 
 00000000: 12 83 fd 08 01 00 00 00-00 00 01 04 26 c9 32 34 ............&.24
 
@@ -3043,7 +3043,7 @@ dc 29 65 62 -/ EncryptedHWID::pBlob
 <a id="Section_4.4"></a>
 ## 4.4 Server Platform Challenge (SERVER_PLATFORM_CHALLENGE)
 
-The server sends the **Platform Challenge** (section [3.2.1.6](#Section_3.2.1.6)) to the client to authenticate the client. See sections [2.2.2.4](#Section_3.2.1.6) and [3.2.5.4](#Section_3.2.5.4).
+The server sends the **Platform Challenge** (section [3.2.1.6](#Section_3.2.1.6)) to the client to authenticate the client. See sections [2.2.2.4](#Section_2.2.2.4) and [3.2.5.4](#Section_3.2.5.4).
 
 00000000: 02 03 26 00 ff ff ff ff-50 f7 0a 00 46 37 85 54 ..&.....P...F7.T
 
@@ -3098,9 +3098,9 @@ The corresponding decrypted blob for the above is
 <a id="Section_4.5"></a>
 ## 4.5 Client Platform Challenge Response (CLIENT_PLATFORM_CHALLENGE_RESPONSE)
 
-The client sends the **Client Platform Challenge Response** message in response to a **Server Platform Challenge** (section [2.2.2.4](#Section_3.2.1.6)) message. The message type in the **Licensing Preamble** (section [2.2.1.2](#Section_2.2.1.2)) is PLATFORM_CHALLENGE_RESPONSE (0x15).
+The client sends the **Client Platform Challenge Response** message in response to a **Server Platform Challenge** (section [2.2.2.4](#Section_2.2.2.4)) message. The message type in the **Licensing Preamble** (section [2.2.1.2](#Section_2.2.1.2)) is PLATFORM_CHALLENGE_RESPONSE (0x15).
 
-See sections [2.2.2.5](#Section_3.2.1.6) and [3.3.5.5](#Section_3.3.5.5) for more information.
+See sections [2.2.2.5](#Section_2.2.2.5) and [3.3.5.5](#Section_3.3.5.5) for more information.
 
 00000000: 15 83 42 00 01 00 12 00-fa b4 e8 24 cf 56 b2 4e ..B........$.V.N
 
@@ -3249,7 +3249,7 @@ f1 e4 67 1f 4a b6 00 0a -/ MACData
 <a id="Section_4.6"></a>
 ## 4.6 Server New License (SERVER_NEW_LICENSE)
 
-The server sends the license to the client in the **Server New License** message. See sections [2.2.2.7](#Section_3.2.5.7) and [3.2.5.7](#Section_3.2.5.7) for more information.
+The server sends the license to the client in the **Server New License** message. See sections [2.2.2.7](#Section_2.2.2.7) and [3.2.5.7](#Section_3.2.5.7) for more information.
 
 00000000: 03 03 07 08 09 00 ef 07-db a3 13 30 79 a3 cd 9e ...........0y...
 
@@ -5024,18 +5024,18 @@ Examples, SERVER_NEW_LICENSE.
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-The Remote Desktop Protocol: Licensing Extension uses its own security layer in addition to the RDP security layer (see [MS-RDPBCGR](#Section_5073f4ed1e9345e1b0396e30c385867c) section 5). Certain fields of licensing messages (see sections [2.2.2.1](#Section_3.3.5.1) through [2.2.2.7](#Section_3.2.5.7)) are protected by encryption based on the [**license encryption key**](#gt_license-encryption-key).
+The Remote Desktop Protocol: Licensing Extension uses its own security layer in addition to the RDP security layer (see [MS-RDPBCGR](#Section_5073f4ed1e9345e1b0396e30c385867c) section 5). Certain fields of licensing messages (see sections [2.2.2.1](#Section_2.2.2.1) through [2.2.2.7](#Section_2.2.2.7)) are protected by encryption based on the [**license encryption key**](#gt_license-encryption-key).
 
-The license encryption key is different from the [**session encryption key**](#gt_session-encryption-key) used in the RDP security layer (see [MS-RDPBCGR] section 5.3.5). The license encryption key is always generated irrespective of whether RDP encryption is in effect. The client generates the license encryption key on receipt of the Server License Request message. The server generates the license encryption key on receipt of a [Client License Information](#Section_3.3.5.3) message or a [Client New License Request](#Section_3.3.5.2) message. Both client and server use the same license encryption key for the license protocol. For information on how the license encryption key is generated, see section [5.1.2](../MS-RDPBCGR/MS-RDPBCGR.md).
+The license encryption key is different from the [**session encryption key**](#gt_session-encryption-key) used in the RDP security layer (see [MS-RDPBCGR] section 5.3.5). The license encryption key is always generated irrespective of whether RDP encryption is in effect. The client generates the license encryption key on receipt of the Server License Request message. The server generates the license encryption key on receipt of a [Client License Information](#Section_2.2.2.3) message or a [Client New License Request](#Section_2.2.2.2) message. Both client and server use the same license encryption key for the license protocol. For information on how the license encryption key is generated, see section [5.1.2](#Section_5.1.2).
 
 <a id="Section_5.1.1"></a>
 ### 5.1.1 Client and Server Random Values and Premaster Secrets
 
 The client and server both generate a 32-byte random value using a cryptographically safe random number generator.
 
-The server generates a 32-byte server random value and sends it to the client in the [Server License Request](#Section_3.3.5.1) message. The server also sends its public key embedded in a [server certificate](#Section_3.2.1.3) as part of the Server License Request message.
+The server generates a 32-byte server random value and sends it to the client in the [Server License Request](#Section_2.2.2.1) message. The server also sends its public key embedded in a [server certificate](#Section_2.2.1.4) as part of the Server License Request message.
 
-On receipt of a Server License Request message, the client generates a 32-byte client random value. It also generates a 48-byte random number called the premaster secret. The client encrypts the [**premaster secret**](#gt_premaster-secret) (see section [5.1.1.1](#Section_5.1.1.1)) using the server's public key (embedded in the Server Certificate in the Server License Request message). The client then sends the client random value and the encrypted premaster secret to the server in a [Client New License Request](#Section_3.3.5.2) message or a [Client License Information](#Section_3.3.5.3) message, depending on whether the client possesses a license.
+On receipt of a Server License Request message, the client generates a 32-byte client random value. It also generates a 48-byte random number called the premaster secret. The client encrypts the [**premaster secret**](#gt_premaster-secret) (see section [5.1.1.1](#Section_5.1.1.1)) using the server's public key (embedded in the Server Certificate in the Server License Request message). The client then sends the client random value and the encrypted premaster secret to the server in a [Client New License Request](#Section_2.2.2.2) message or a [Client License Information](#Section_2.2.2.3) message, depending on whether the client possesses a license.
 
 ![Client and server random values and premaster secret flows](media/image7.png)
 
@@ -5046,7 +5046,7 @@ For information on how the licensing encryption key is generated, see section [5
 <a id="Section_5.1.1.1"></a>
 #### 5.1.1.1 Encrypting the Premaster Secret
 
-The client uses RSA to encrypt the [**premaster secret**](#gt_premaster-secret) with the public key of the server. The client obtains the public key from the [**terminal server certificate**](#gt_terminal-server-certificate), which is the leaf certificate in the certificate chain that is obtained from the [Server Certificate (SERVER_CERTIFICATE)](#Section_3.2.1.3) in the [Server License Request](#Section_3.3.5.1) message.
+The client uses RSA to encrypt the [**premaster secret**](#gt_premaster-secret) with the public key of the server. The client obtains the public key from the [**terminal server certificate**](#gt_terminal-server-certificate), which is the leaf certificate in the certificate chain that is obtained from the [Server Certificate (SERVER_CERTIFICATE)](#Section_2.2.1.4) in the [Server License Request](#Section_2.2.2.1) message.
 
 For encryption with RSA, see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 5.3.1 and 5.3.4.
 
@@ -5149,7 +5149,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <2> Section 2.2.2.1: Windows uses 2048-bit keys. Any client/server combinations that include Windows Server 2003 and Windows XP use 512-bit keys; for example, Windows XP as a client and Windows Server 2012 as a server, or Windows 8 as a client and Windows Server 2003 as a server.
 
-<3> Section 2.2.2.1: The Windows Server 2008 terminal server does not send the [server certificate](#Section_3.2.1.3) if encryption is in effect and already protecting RDP traffic (for RDP security measures, see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 5.3 and 5.4 ).
+<3> Section 2.2.2.1: The Windows Server 2008 terminal server does not send the [server certificate](#Section_2.2.1.4) if encryption is in effect and already protecting RDP traffic (for RDP security measures, see [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) sections 5.3 and 5.4 ).
 
 <4> Section 2.2.2.1: The appropriate license refers to any valid license that can be used to connect to the terminal server in question. A terminal server requires a license of the same version or later to honor the connection. For instance, if the terminal server is running Windows Server 2008, the license store is searched for a Windows Server 2008 license or later version license.
 
@@ -5186,13 +5186,13 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <14> Section 2.2.2.5.1: The wClientType is WIN32_PLATFORMCHALLENGE_TYPE for all the Microsoft remote desktop clients except for those running in Windows CE where the wClientType is WINCE_PLATFORMCHALLENGE_TYPE.
 
-<15> Section 2.2.2.6: For Windows Server 2008, Windows Server 2008 R2, and Windows Server 2012, the EncryptedLicenseInfo variable (part of the [Server Upgrade License](#Section_2.2.2.6) PDU) sent by the server to the client has the **wBlobType** parameter set to value BB_ENCRYPTED_DATA_BLOB (0x0009). For Windows Server 2003, the value of **wBlobType** is not defined.
+<15> Section 2.2.2.6: For Windows Server 2008, Windows Server 2008 R2, and Windows Server 2012, the EncryptedLicenseInfo variable (part of the [Server Upgrade License](#Section_3.2.5.6) PDU) sent by the server to the client has the **wBlobType** parameter set to value BB_ENCRYPTED_DATA_BLOB (0x0009). For Windows Server 2003, the value of **wBlobType** is not defined.
 
 <16> Section 3.1.5.3: In Windows XP, the RDP connection is not disconnected on receiving ST_TOTAL_ABORT as the state transition in the **Licensing Error Message** (section [2.2.2.8](#Section_2.2.2.8)).
 
 <17> Section 3.1.5.3: All Microsoft implementations of Licensing Extension server and Licensing Extension client never send ST_RESET_PHASE_TO_START and ST_RESEND_LAST_MESSAGE.
 
-<18> Section 3.2.1.5: For example, the **ScopeList** field in a [Server License Request](#Section_3.3.5.1) message sent by a [**terminal server**](#gt_terminal-server) running on a Windows operating system has the following content.
+<18> Section 3.2.1.5: For example, the **ScopeList** field in a [Server License Request](#Section_2.2.2.1) message sent by a [**terminal server**](#gt_terminal-server) running on a Windows operating system has the following content.
 
 ScopeCount = 1
 

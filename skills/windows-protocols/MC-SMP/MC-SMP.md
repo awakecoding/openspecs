@@ -643,7 +643,7 @@ There is no timer in SMP.
 In case of the following events, SMP closes the lower layer transport connection and an error is raised to the higher layer:
 
 - The lower-layer transport disconnects.
-- A packet is received by a [**peer**](#gt_peer) and does not follow the specifications outlined in section [2](#Section_1.3).
+- A packet is received by a [**peer**](#gt_peer) and does not follow the specifications outlined in section [2](#Section_2).
 <a id="Section_3.2"></a>
 ## 3.2 Server Details
 

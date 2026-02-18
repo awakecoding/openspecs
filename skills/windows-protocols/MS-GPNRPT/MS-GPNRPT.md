@@ -392,7 +392,7 @@ Data: This field is a 32-bit value, which MUST contain one of the following valu
 | Value | Meaning |
 | --- | --- |
 | 0x00000002 | Only DNSSEC options (that is, options defined in sections [2.2.2.4](#Section_2.2.2.4), [2.2.2.5](#Section_2.2.2.5), [2.2.2.6](#Section_2.2.2.6), and [2.2.2.7](#Section_2.2.2.7)) are specified. |
-| 0x00000004 | Only [**DirectAccess**](#gt_directaccess) options (that is, options defined in sections [2.2.2.8](#Section_2.2.2.13), [2.2.2.9](#Section_2.2.2.1), [2.2.2.10](#Section_2.2.2.10), [2.2.2.11](#Section_2.2.2.4), and [2.2.2.12](#Section_2.2.2.5)) are specified. |
+| 0x00000004 | Only [**DirectAccess**](#gt_directaccess) options (that is, options defined in sections [2.2.2.8](#Section_2.2.2.8), [2.2.2.9](#Section_2.2.2.9), [2.2.2.10](#Section_2.2.2.10), [2.2.2.11](#Section_2.2.2.11), and [2.2.2.12](#Section_2.2.2.12)) are specified. |
 | 0x00000006 | Both DNSSEC and DirectAccess options are specified. |
 | 0x00000008 | Only the Generic DNS server option (that is, the option defined in section [2.2.2.13](#Section_2.2.2.13)) is specified. |
 | 0x0000000A | The Generic DNS server option and the DNSSEC options are specified. |
@@ -532,7 +532,7 @@ Data: This field is a 32-bit value, which MUST contain one of the following valu
 | --- | --- |
 | 0x00000000 | No proxy configured. |
 | 0x00000001 | Use the default proxy. |
-| 0x00000002 | Use the proxy specified by the [**DirectAccess**](#gt_directaccess) Proxy Name (see section [2.2.2.9](#Section_2.2.2.1)). |
+| 0x00000002 | Use the proxy specified by the [**DirectAccess**](#gt_directaccess) Proxy Name (see section [2.2.2.9](#Section_2.2.2.9)). |
 
 <a id="Section_2.2.2.11"></a>
 #### 2.2.2.11 DirectAccess Query IPsec Encryption
@@ -670,7 +670,7 @@ Data: This field is a 32-bit value, which MUST contain one of the following valu
 
 The administrative plug-in mediates between the user interface (UI) and a remote data store that contains [**Name Resolution Policy Table**](#gt_name-resolution-policy-table-nrpt) Group Policy extension settings. Its purpose is to receive Name Resolution Policy Table Group Policy information from a UI and to write the same policy information to a remote data store.
 
-The NRPT Group Policy Data Extension administrative plug-in relies on a collection of settings specified in section [2.2](../MS-GPREG/MS-GPREG.md) and stored as a [**Unicode**](#gt_unicode) configuration file ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 2.2) at a remote storage location using the Group Policy: Core Protocol. The administrative plug-in parses and encodes these settings as specified in section 2.2 to perform its functions.
+The NRPT Group Policy Data Extension administrative plug-in relies on a collection of settings specified in section [2.2](#Section_2.2) and stored as a [**Unicode**](#gt_unicode) configuration file ([MS-GPREG](../MS-GPREG/MS-GPREG.md) section 2.2) at a remote storage location using the Group Policy: Core Protocol. The administrative plug-in parses and encodes these settings as specified in section 2.2 to perform its functions.
 
 The NRPT Group Policy Data Extension administrative plug-in reads in these settings from the remote storage location and displays them to an administrator through a UI.
 

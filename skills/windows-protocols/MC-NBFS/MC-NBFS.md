@@ -105,7 +105,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -646,7 +646,7 @@ packet-beta
 <a id="Section_3"></a>
 # 3 Structure Examples
 
-Following is an example of how to encode a SOAP document in the SOAP data structure format by using the [**strings**](#gt_string) specified in section [2](#Section_1.3). White space (such as spaces, tab characters, and carriage returns) improves readability, but is not part of the encoded version of the document.
+Following is an example of how to encode a SOAP document in the SOAP data structure format by using the [**strings**](#gt_string) specified in section [2](#Section_2). White space (such as spaces, tab characters, and carriage returns) improves readability, but is not part of the encoded version of the document.
 
 <s:Envelope xmlns:a="http://www.w3.org/2005/08/addressing"
 
@@ -704,7 +704,7 @@ For information on security considerations, see [MC-NBFX](../MC-NBFX/MC-NBFX.md)
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

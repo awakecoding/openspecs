@@ -522,7 +522,7 @@ The following HTTP methods are allowed to be performed on this resource.
 | HTTP method | Section | Description |
 | --- | --- | --- |
 | POST | [3.1.5.1.1](#Section_3.1.5.1.1) | Create a new device object. |
-| DELETE | [3.1.5.1.2](#Section_3.1.5.1.2.3) | Remove a device object. |
+| DELETE | [3.1.5.1.2](#Section_3.1.5.1.2) | Remove a device object. |
 
 <a id="Section_3.1.5.1.1"></a>
 ##### 3.1.5.1.1 POST
@@ -810,21 +810,21 @@ The resource used by the Device Registration Join Protocol, device, is defined i
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 device
 
-See section [3.1.5.1](#Section_3.2.5.1).
+See section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.2.5.1.1"></a>
 ##### 3.2.5.1.1 POST
 
 See section [3.1.5.1.1](#Section_3.1.5.1.1) and subsections.
 
-When the client receives the response from the server, the X.509 certificate contained in the RawBody property (section [3.1.5.1.1.2](#Section_3.1.5.1.1.2)) must be stored in the SignedDeviceCertificate ADM element (section [3.2.1](#Section_3.1.1)).
+When the client receives the response from the server, the X.509 certificate contained in the RawBody property (section [3.1.5.1.1.2](#Section_3.1.5.1.1.2)) must be stored in the SignedDeviceCertificate ADM element (section [3.2.1](#Section_3.2.1)).
 
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 DELETE
 
-See section [3.1.5.1.2](#Section_3.1.5.1.2.3) and subsections.
+See section [3.1.5.1.2](#Section_3.1.5.1.2) and subsections.
 
-The client must send the X.509 certificate that was stored in the SignedDeviceCertificate ADM element (section [3.2.1](#Section_3.1.1)) as part of client authentication for the DELETE request (section [3.1.5.1.2.3](#Section_3.1.5.1.2.3)).
+The client must send the X.509 certificate that was stored in the SignedDeviceCertificate ADM element (section [3.2.1](#Section_3.2.1)) as part of client authentication for the DELETE request (section [3.1.5.1.2.3](#Section_3.1.5.1.2.3)).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events

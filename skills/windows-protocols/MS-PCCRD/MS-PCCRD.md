@@ -312,7 +312,7 @@ None.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The PCCR Discovery Protocol uses the Web Services Dynamic Discovery ([**WS-Discovery**](#gt_ws-discovery)) Protocol [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576), and the actual transport protocol is abstracted by WSD. The PCCR Discovery Protocol simply uses WSD with certain elements set to custom values and relies on WSD for the actual transport of the [Receive Probe (section 3.2.4.1)](#Section_3.2.4.1) and [Receive ProbeMatch (section 3.1.4.1)](#Section_3.2.4.1) messages.<1>
+The PCCR Discovery Protocol uses the Web Services Dynamic Discovery ([**WS-Discovery**](#gt_ws-discovery)) Protocol [[WS-Discovery]](https://go.microsoft.com/fwlink/?LinkId=90576), and the actual transport protocol is abstracted by WSD. The PCCR Discovery Protocol simply uses WSD with certain elements set to custom values and relies on WSD for the actual transport of the [Receive Probe (section 3.2.4.1)](#Section_3.2.4.1) and [Receive ProbeMatch (section 3.1.4.1)](#Section_3.1.4.1) messages.<1>
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Message Syntax
@@ -716,7 +716,7 @@ The following is a list of the abstract data model elements for the protocol sta
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
-The [**client**](#gt_client) [**peer**](#gt_peer) MUST set a **request** timer when sending a [**Probe**](#gt_probe) message to wait for a certain period of time for the incoming replies. The request timer is configurable such that system administrators can adjust the value based on their current network environments. The default value of the request timer is in the range of 200 milliseconds to 500 milliseconds, and under all circumstances, the waiting period SHOULD NOT be smaller than the maximum **backoff** timer value as defined in section [3.2.2](#Section_3.1.2) to ensure that enough replies are received by a requesting peer. When the request timer expires on a requesting peer without receiving any [**ProbeMatch**](#gt_probematch) replies, the implementation MUST remove that **Probe** message and its associated **HoHoDk List** from the **Outstanding Probe List**.
+The [**client**](#gt_client) [**peer**](#gt_peer) MUST set a **request** timer when sending a [**Probe**](#gt_probe) message to wait for a certain period of time for the incoming replies. The request timer is configurable such that system administrators can adjust the value based on their current network environments. The default value of the request timer is in the range of 200 milliseconds to 500 milliseconds, and under all circumstances, the waiting period SHOULD NOT be smaller than the maximum **backoff** timer value as defined in section [3.2.2](#Section_3.2.2) to ensure that enough replies are received by a requesting peer. When the request timer expires on a requesting peer without receiving any [**ProbeMatch**](#gt_probematch) replies, the implementation MUST remove that **Probe** message and its associated **HoHoDk List** from the **Outstanding Probe List**.
 
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
@@ -732,7 +732,7 @@ The following table summarizes the list of [**WSDL operations**](#gt_wsdl-operat
 
 | Operation | Description |
 | --- | --- |
-| [Receive ProbeMatch](#Section_3.2.4.1) | Triggered by the WSD layer on receiving a response to a [Probe](#Section_2.2.2.1) message. |
+| [Receive ProbeMatch](#Section_3.1.4.1) | Triggered by the WSD layer on receiving a response to a [Probe](#Section_2.2.2.1) message. |
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Receive ProbeMatch

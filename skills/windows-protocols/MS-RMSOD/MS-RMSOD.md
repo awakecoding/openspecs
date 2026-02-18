@@ -139,7 +139,7 @@ This section summarizes concepts that are specific to the Rights Management Serv
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_bootstrapping"></a>
 **bootstrapping**: A process that RMS clients can use to self-activate.
@@ -218,11 +218,11 @@ This document uses the following terms:
 
 [FIPS180-2] National Institute of Standards and Technology, "Secure Hash Standard", FIPS PUB 180-2, August 2002, [http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf](https://go.microsoft.com/fwlink/?LinkId=89868)
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-MWBE] Microsoft Corporation, "[Microsoft Web Browser Federated Sign-On Protocol Extensions](#Section_2.3.2.4)".
+[MS-MWBE] Microsoft Corporation, "[Microsoft Web Browser Federated Sign-On Protocol Extensions](../MS-MWBE/MS-MWBE.md)".
 
-[MS-MWBF] Microsoft Corporation, "[Microsoft Web Browser Federated Sign-On Protocol](#Section_2.3.2.4)".
+[MS-MWBF] Microsoft Corporation, "[Microsoft Web Browser Federated Sign-On Protocol](../MS-MWBF/MS-MWBF.md)".
 
 [MS-NTHT] Microsoft Corporation, "[NTLM Over HTTP Protocol](../MS-NTHT/MS-NTHT.md)".
 
@@ -439,11 +439,11 @@ Web Services Description Language, as specified in [[WSDL]](https://go.microsoft
 
 NTLM over HTTP, as specified in [MS-NTHT](../MS-NTHT/MS-NTHT.md). This protocol provides network logon authentication by using a challenge and response process.
 
-Active Directory, as described in [MS-ADOD](#Section_2.1), can be used with the Group Expansion services.
+Active Directory, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md), can be used with the Group Expansion services.
 
 The LDAPv3 protocol, as described in [[RFC3377]](https://go.microsoft.com/fwlink/?LinkID=91337). This protocol can be used to retrieve the [**service connection points (SCPs)**](#gt_service-connection-point-scp) from Active Directory.
 
-Microsoft Web Browser Federated Sign-On Protocol, as specified in [MS-MWBF](#Section_2.3.2.4) and [MS-MWBE](#Section_2.3.2.4). This standard allows integration with Active Directory Federation Services to support federated identities. It enables two-way collaboration between organizations when only one organization has an RMS server.
+Microsoft Web Browser Federated Sign-On Protocol, as specified in [MS-MWBF](../MS-MWBF/MS-MWBF.md) and [MS-MWBE](../MS-MWBE/MS-MWBE.md). This standard allows integration with Active Directory Federation Services to support federated identities. It enables two-way collaboration between organizations when only one organization has an RMS server.
 
 <a id="Section_2.2"></a>
 ## 2.2 Protocol Summary
@@ -452,7 +452,7 @@ The following table provides a comprehensive list of the RMS protocols.
 
 | Protocol name | Description | Short name |
 | --- | --- | --- |
-| Rights Management Services (RMS): Client-to-Server Protocol | This protocol obtains and issues [**certificates**](#gt_certificate) and [**licenses**](#gt_license) that are used for creating and working with protected content. The Rights Management Services (RMS): Client-to-Server Protocol is used for all client and server communication in relation to [**bootstrapping**](#gt_bootstrapping) a client, consuming protected content, or protecting content. This protocol uses SOAP ([[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) or [SOAP1.2-1/2007]) over HTTP [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). HTTPS support is recommended; however, it is only required when using the Web Browser Federated Sign-on Protocol [MS-MWBF](#Section_2.3.2.4) in conjunction with the Licensing or Certification interfaces. | [MS-RMPR](../MS-RMPR/MS-RMPR.md) |
+| Rights Management Services (RMS): Client-to-Server Protocol | This protocol obtains and issues [**certificates**](#gt_certificate) and [**licenses**](#gt_license) that are used for creating and working with protected content. The Rights Management Services (RMS): Client-to-Server Protocol is used for all client and server communication in relation to [**bootstrapping**](#gt_bootstrapping) a client, consuming protected content, or protecting content. This protocol uses SOAP ([[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) or [SOAP1.2-1/2007]) over HTTP [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372). HTTPS support is recommended; however, it is only required when using the Web Browser Federated Sign-on Protocol [MS-MWBF](../MS-MWBF/MS-MWBF.md) in conjunction with the Licensing or Certification interfaces. | [MS-RMPR](../MS-RMPR/MS-RMPR.md) |
 | Rights Management Services (RMS): Server-to-Server Protocol | This protocol locates RMS services, enrolls servers in RMS, and performs group expansion. The Rights Management Services (RMS): Server-to-Server Protocol is used for communication between RMS servers in relation to finding service locations and group expansion, and for enrolling subordinate RMS servers. This protocol uses SOAP over HTTP. HTTPS support is recommended, but not required. Binary group expansion uses the HTTP transport. | [MS-RMPRS](../MS-RMPRS/MS-RMPRS.md) |
 | Rights Management Services (RMS): ISV Extension Protocols | This protocol communicates information between applications and RMS servers directly without using the RMS client. (ISV extensions are not supported in Windows 2000 operating system.) The Rights Management Services (RMS): ISV Extension Protocols are used for scenarios that are not supported by the RMS: Client-to-Server Protocol in relation to decommissioning protected content, precertifying users, prelicensing content, and republishing content. These protocols use SOAP over HTTP. HTTPS support is recommended, but not required. | [MS-RMSI](../MS-RMSI/MS-RMSI.md) |
 
@@ -500,12 +500,12 @@ Symmetric-key cryptography refers to encryption methods in which the key that wa
 <a id="Section_2.3.2.3"></a>
 #### 2.3.2.3 Directory Services
 
-RMS uses directory services, such as Active Directory, as a central repository for storing and retrieving identity and account information about RMS users. The directory services are also used to enable the RMS client to discover the RMS server and to authenticate requests to the server. In scenarios where Active Directory is used as the directory service and the RMS server has joined a domain, the domain serves as the primary source of identity for the RMS server and RMS users. The domain, through the relevant security protocols, provides the basis for authentication within the domain, allowing principals within the domain to establish authenticated connections with each other. After authentication, the domain provides authorization information in the form of additional identities representing groups, whereby authorization decisions can be made. RMS identifies users by email addresses (or security identifiers (SIDs)), which are stored in the directory. In scenarios where other directory services are used, separate authentication mechanisms can be used, such as anonymous authentication. For more information about Active Directory, see [MS-ADOD](#Section_2.1).
+RMS uses directory services, such as Active Directory, as a central repository for storing and retrieving identity and account information about RMS users. The directory services are also used to enable the RMS client to discover the RMS server and to authenticate requests to the server. In scenarios where Active Directory is used as the directory service and the RMS server has joined a domain, the domain serves as the primary source of identity for the RMS server and RMS users. The domain, through the relevant security protocols, provides the basis for authentication within the domain, allowing principals within the domain to establish authenticated connections with each other. After authentication, the domain provides authorization information in the form of additional identities representing groups, whereby authorization decisions can be made. RMS identifies users by email addresses (or security identifiers (SIDs)), which are stored in the directory. In scenarios where other directory services are used, separate authentication mechanisms can be used, such as anonymous authentication. For more information about Active Directory, see [MS-ADOD](../MS-ADOD/MS-ADOD.md).
 
 <a id="Section_2.3.2.4"></a>
 #### 2.3.2.4 Federated Sign-On
 
-Use of federated sign-on allows enterprises to establish relationships for exchanging protected content with entities outside their directory infrastructure. For more information about federated sign-on, see the federated sign-On protocols and extensions ([MS-MWBE](#Section_2.3.2.4) and [MS-MWBF](#Section_2.3.2.4)).
+Use of federated sign-on allows enterprises to establish relationships for exchanging protected content with entities outside their directory infrastructure. For more information about federated sign-on, see the federated sign-On protocols and extensions ([MS-MWBE](../MS-MWBE/MS-MWBE.md) and [MS-MWBF](../MS-MWBF/MS-MWBF.md)).
 
 <a id="Section_2.3.2.5"></a>
 #### 2.3.2.5 XrML
@@ -545,7 +545,7 @@ RMS defines specific XrML [**certificates**](#gt_certificate) to identify and tr
 <a id="Section_2.4"></a>
 ## 2.4 Assumptions and Preconditions
 
-Given the environment described in section [2.3](#Section_2.1), RMS has the following assumptions and preconditions:
+Given the environment described in section [2.3](#Section_2.3), RMS has the following assumptions and preconditions:
 
 - The RMS server requires a database and stored procedures to perform operations.
 - The RMS server has a directory available to authenticate users and retrieve the email address of user accounts. All user accounts and groups who use RMS to consume and publish content have an email address that is configured in the directory.
@@ -628,7 +628,7 @@ An RMS server performs enrollment before servicing any client requests. Servers 
 - **Supporting actors**: The supporting actor is the RMS cloud service.
 **Stakeholders and interests**
 
-- RMS server, as described in section [2.5.1](#Section_2.1).
+- RMS server, as described in section [2.5.1](#Section_2.5.1).
 - RMS administrator, as described in section 2.5.1.
 - RMS cloud service, as described in section 2.5.1.
 **Preconditions**
@@ -670,7 +670,7 @@ Client [**bootstrapping**](#gt_bootstrapping) is a set of initialization steps t
 - **Supporting actors**: None.
 **Stakeholders and interests**
 
-- RMS client application, as described in section [2.5.1](#Section_2.1).
+- RMS client application, as described in section [2.5.1](#Section_2.5.1).
 - RMS user, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
@@ -764,7 +764,7 @@ RMS servers use the **Service Location** interface of the RMS: Server-to-Server 
 - **Supporting actors**: Any number of other RMS servers.
 **Stakeholders and interests**
 
-- RMS client application, as described in section [2.5.1](#Section_2.1).
+- RMS client application, as described in section [2.5.1](#Section_2.5.1).
 - RMS user, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
@@ -810,7 +810,7 @@ Rights policy templates contain a predetermined access [**policy**](#gt_policy) 
 - **Supporting actors**: None.
 **Stakeholders and interests**
 
-- RMS user, as described in section [2.5.1](#Section_2.1).
+- RMS user, as described in section [2.5.1](#Section_2.5.1).
 - RMS client application, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
@@ -853,7 +853,7 @@ Publish protected content by communicating directly with the RMS server.
 - **Supporting actors**: None.
 **Stakeholders and interests**
 
-- RMS user, as described in section [2.5.1](#Section_2.1).
+- RMS user, as described in section [2.5.1](#Section_2.5.1).
 - RMS client application, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
 **Preconditions**
@@ -898,7 +898,7 @@ Protect content without making calls to an RMS server.
 - **Supporting actors**: None.
 **Stakeholders and interests**
 
-- RMS client application, as described in section [2.5.1](#Section_2.1).
+- RMS client application, as described in section [2.5.1](#Section_2.5.1).
 - RMS user, as described in section 2.5.1.
 **Preconditions**
 
@@ -942,7 +942,7 @@ Upon receiving protected content, the RMS client application submits the [**publ
 - **Supporting actors**: None.
 **Stakeholders and interests**
 
-- RMS user, as described in section [2.5.1](#Section_2.1).
+- RMS user, as described in section [2.5.1](#Section_2.5.1).
 - RMS client application, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
 **Preconditions**
@@ -993,7 +993,7 @@ The **Binary Group Expansion** interface performs the same function as the **Gro
 
 **Stakeholders and interests**
 
-- RMS client application, as described in section [2.5.1](#Section_2.1).
+- RMS client application, as described in section [2.5.1](#Section_2.5.1).
 - RMS user, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
@@ -1042,7 +1042,7 @@ RMS servers use the **Find Service Locations** interface to find the **Group Exp
 - **Supporting actors**: Any number of other RMS servers.
 **Stakeholders and interests**
 
-RMS server, as described in section [2.5.1](#Section_2.1)
+RMS server, as described in section [2.5.1](#Section_2.5.1)
 
 **Preconditions**
 
@@ -1087,7 +1087,7 @@ If an organization decides to stop using RMS entirely and to remove its deployme
 - **Supporting actors**: Any other RMS servers in the system.
 **Stakeholders and interests**
 
-- RMS administrator, as described in section [2.5.1](#Section_2.1).
+- RMS administrator, as described in section [2.5.1](#Section_2.5.1).
 - ISV application, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1.
@@ -1131,7 +1131,7 @@ This interface is useful when there is a need to alter the set of rights that wa
 - **Supporting actors**: The RMS server.
 **Stakeholders and interests**
 
-- RMS user, as described in section [2.5.1](#Section_2.1).
+- RMS user, as described in section [2.5.1](#Section_2.5.1).
 - ISV application, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
 - RMS server, as described in section 2.5.1
@@ -1178,7 +1178,7 @@ Precertification optimizes the process. With precertification, the use license f
 - **Supporting actors**: The RMS server and the recipient (an RMS user).
 **Stakeholders and interests**
 
-- ISV application, as described in section [2.5.1](#Section_2.1).
+- ISV application, as described in section [2.5.1](#Section_2.5.1).
 - The requestor, an RMS user, as described in section 2.5.1.
 - The recipient, an RMS user, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.
@@ -1225,7 +1225,7 @@ Prelicensing adds further optimization for client implementations by allowing th
 - **Supporting actors**: The RMS server and the recipient (an RMS user).
 **Stakeholders and interests**
 
-- ISV application, as described in section [2.5.1](#Section_2.1).
+- ISV application, as described in section [2.5.1](#Section_2.5.1).
 - The requestor, an RMS user, as described in section 2.5.1.
 - The recipients, a set of RMS users, as described in section 2.5.1.
 - Client computer, as described in section 2.5.1.

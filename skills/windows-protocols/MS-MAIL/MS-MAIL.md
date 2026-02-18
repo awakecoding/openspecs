@@ -322,7 +322,7 @@ packet-beta
 <a id="Section_3.1"></a>
 ## 3.1 Client Details
 
-The Remote Mailslot Protocol clients are higher-layer applications that use the mailslot protocol to send a message to the server, as described in section [3.1.4.1](#Section_3.1.4). Because this is an unreliable, unidirectional protocol, there is neither a connection phase nor an acknowledgment from the server for the send from the client.
+The Remote Mailslot Protocol clients are higher-layer applications that use the mailslot protocol to send a message to the server, as described in section [3.1.4.1](#Section_3.1.4.1). Because this is an unreliable, unidirectional protocol, there is neither a connection phase nor an acknowledgment from the server for the send from the client.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
@@ -396,7 +396,7 @@ The following element is part of the abstract data model for MS-MAIL servers:
 
 The following elements are part of the abstract data model for each mailslot on a mailslot server:
 
-**Mailslot.Name :** The name of the mailslot, which has the format described in section [3.2.1](#Section_1.3).
+**Mailslot.Name :** The name of the mailslot, which has the format described in section [3.2.1](#Section_3.2.1).
 
 **Mailslot.MessageQueue :** A queue of pending, incoming mailslot messages received on the mailslot. The length of the queue is implementation-specific.<15>
 
@@ -428,8 +428,8 @@ The Remote Mailslot Protocol server MUST expose interfaces to upper-layer applic
 
 The application provides the following data:
 
-- The name of the mailslot in the format specified in section [3.2.1](#Section_1.3).
-On a mailslot create request from an application running on the server, the server MUST search through the mailslots contained in **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) to find a mailslot for which **Mailslot.Name** (section [3.2.1.2](#Section_3.2.4.3)) matches the application-supplied name.
+- The name of the mailslot in the format specified in section [3.2.1](#Section_3.2.1).
+On a mailslot create request from an application running on the server, the server MUST search through the mailslots contained in **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) to find a mailslot for which **Mailslot.Name** (section [3.2.1.2](#Section_3.2.1.2)) matches the application-supplied name.
 
 - If a match is found, the server MUST fail the request with an implementation-specific error.
 - If a match is not found, the server MUST create a new mailslot, initialize **Mailslot.MessageQueue** (section 3.2.1.2) to an empty queue, and add the newly-created mailslot to **MailslotList**.
@@ -438,8 +438,8 @@ On a mailslot create request from an application running on the server, the serv
 
 The application provides the following data:
 
-- The name of the mailslot to read from, in the format specified in section [3.2.1](#Section_1.3).
-The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.4.3)) matches the application-supplied name.
+- The name of the mailslot to read from, in the format specified in section [3.2.1](#Section_3.2.1).
+The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.1.2)) matches the application-supplied name.
 
 - If a match is not found, the server MUST return an implementation-specific error to the caller.
 - If a match is found and **Mailslot.MessageQueue** (section 3.2.1.2) is empty, the server MAY block until a message arrives in the queue, wait for an implementation-specific timeout interval, or return an error.<16>
@@ -450,8 +450,8 @@ If a message is available in **Mailslot.MessageQueue**, the message MUST be dele
 
 The application provides the following data:
 
-- The name of the mailslot to close, in the format specified in section [3.2.1](#Section_1.3).
-The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.4.3)) matches the application-supplied name.
+- The name of the mailslot to close, in the format specified in section [3.2.1](#Section_3.2.1).
+The server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.1.2)) matches the application-supplied name.
 
 - If the server does not find a match, it MUST return an implementation-specific error to the caller.
 - If the server finds a match, it MUST perform the following steps:
@@ -468,7 +468,7 @@ On receiving a mailslot write request from a client, the mailslot server MUST ve
 
 For all valid requests, the mailslot server MUST read the name of the mailslot from the **MailslotName** field of the request (see section 2.2.1).
 
-The mailslot server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.4.3)) matches the name of the mailslot in the request.
+The mailslot server MUST search **MailslotList** (section [3.2.1.1](#Section_3.2.1.1)) for a mailslot whose **Mailslot.Name** field (section [3.2.1.2](#Section_3.2.1.2)) matches the name of the mailslot in the request.
 
 - If the server does not find a match, it MUST ignore and discard the request.
 - If the server finds a match, it MUST read the **DataOffset** field of the request (see section 3.2.1.2) to calculate the offset from the beginning of the SMB_COM_TRANSACTION message to the **Databytes** field (see section 3.2.1.2) that contains the mailslot message.
@@ -493,7 +493,7 @@ Mailslots are supported by three higher-level specialized functions, **CreateMai
 
 It is recommended that **CreateMailslot** create a local mailslot, return the server-side handle to this mailslot, and map to the higher-level server-side event (see section [3.2.4.1](#Section_3.2.4.1)). **GetMailslotInfo** and **SetMailslotInfo** are server-specific configurations about how long the server will block a read request while waiting for the message to arrive before failing back to the application, and they are implementation-specific API for local operations and not related to how the protocol functions.
 
-The client would call the **CreateFile** function to open a mailslot and then call the **WriteFile** function (for more information, see [[MSLOT]](https://go.microsoft.com/fwlink/?LinkId=90218)) to write to it. It is this write file call that generates traffic, as specified in section [3.1.4.1](#Section_3.1.4).
+The client would call the **CreateFile** function to open a mailslot and then call the **WriteFile** function (for more information, see [[MSLOT]](https://go.microsoft.com/fwlink/?LinkId=90218)) to write to it. It is this write file call that generates traffic, as specified in section [3.1.4.1](#Section_3.1.4.1).
 
 The following network traffic capture depicts the protocol message sequence for a mailslot write from a client to a mailslot server with the mailslot name \MAILSLOT\test1\sample_mailslot. This network trace is generated when a client application invokes the Remote Mailslot Protocol to send a mailslot message to a remote server, as specified in section 3.1.4.1. For a detailed description of the fields in this example, see section [2.2.1](#Section_2.2.1).
 

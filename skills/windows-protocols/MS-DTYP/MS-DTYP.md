@@ -250,7 +250,7 @@ This document provides a collection of commonly used data types, which are categ
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_1.3): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. Active Directory stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). Active Directory is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_american-national-standards-institute-ansi-character-set"></a>
 **American National Standards Institute (ANSI) character set**: A character set defined by a code page approved by the American National Standards Institute (ANSI). The term "ANSI" as used to signify Windows code pages is a historical reference and a misnomer that persists in the Windows community. The source of this misnomer stems from the fact that the Windows code page 1252 was originally based on an ANSI draft, which became International Organization for Standardization (ISO) Standard 8859-1 [[ISO/IEC-8859-1]](https://go.microsoft.com/fwlink/?LinkId=90689). In Windows, the ANSI character set can be any of the following code pages: 1252, 1250, 1251, 1253, 1254, 1255, 1256, 1257, 1258, 874, 932, 936, 949, or 950. For example, "ANSI application" is usually a reference to a non-[**Unicode**](#gt_unicode) or code-page-based application. Therefore, "ANSI character set" is often misused to refer to one of the character sets defined by a Windows code page that can be used as an active system code page; for example, character sets defined by code page 1252 or character sets defined by code page 950. Windows is now based on Unicode, so the use of ANSI character sets is strongly discouraged unless they are used to interoperate with legacy applications or legacy data.
@@ -414,7 +414,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [DALB] Dalbey, J., "Pseudocode Standard", May 2008, [http://users.csc.calpoly.edu/~jdalbey/SWE/pdl_std.html](https://go.microsoft.com/fwlink/?LinkId=89842)
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_1.3)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
@@ -1507,7 +1507,7 @@ GUID* ObjectType;
 
 **Remaining:** Remaining access bits for this element, used by the access check algorithm, as specified in section 2.5.3.2.
 
-**ObjectType:** A pointer to the [GUID](#Section_2.3.4) for the object or sub-object.
+**ObjectType:** A pointer to the [GUID](#Section_2.3.4.1) for the object or sub-object.
 
 <a id="Section_2.3.10"></a>
 ### 2.3.10 RPC_UNICODE_STRING
@@ -1776,7 +1776,7 @@ Consumers of SIDs SHOULD NOT rely on anything more than that the SID has the app
 
 The formal string syntax is given in section [2.4.2.1](#Section_2.4.2.1).
 
-The packet representation of the SID structure used by block protocols is defined in section [2.4.2.2](#Section_2.4.2).
+The packet representation of the SID structure used by block protocols is defined in section [2.4.2.2](#Section_2.4.2.2).
 
 The RPC marshaled version of the SID structure is defined in section [2.4.2.3](#Section_2.4.2.3).
 
@@ -2097,7 +2097,7 @@ packet-beta
 | ACCESS_DENIED_CALLBACK_OBJECT_ACE_TYPE 0x0C | Object-specific access-denied callback ACE that uses the [ACCESS_DENIED_CALLBACK_OBJECT_ACE (section 2.4.4.9)](#Section_2.4.4.9) structure.<51> |
 | SYSTEM_AUDIT_CALLBACK_ACE_TYPE 0x0D | System-audit callback ACE that uses the [SYSTEM_AUDIT_CALLBACK_ACE (section 2.4.4.12)](#Section_2.4.4.12) structure.<52> |
 | SYSTEM_ALARM_CALLBACK_ACE_TYPE 0x0E | Reserved for future use. |
-| SYSTEM_AUDIT_CALLBACK_OBJECT_ACE_TYPE 0x0F | Object-specific system-audit callback ACE that uses the [SYSTEM_AUDIT_CALLBACK_OBJECT_ACE (section 2.4.4.14)](#Section_2.4.4.11) structure. |
+| SYSTEM_AUDIT_CALLBACK_OBJECT_ACE_TYPE 0x0F | Object-specific system-audit callback ACE that uses the [SYSTEM_AUDIT_CALLBACK_OBJECT_ACE (section 2.4.4.14)](#Section_2.4.4.14) structure. |
 | SYSTEM_ALARM_CALLBACK_OBJECT_ACE_TYPE 0x10 | Reserved for future use. |
 | SYSTEM_MANDATORY_LABEL_ACE_TYPE 0x11 | Mandatory label ACE that uses the [SYSTEM_MANDATORY_LABEL_ACE (section 2.4.4.13)](#Section_2.4.4.13) structure. |
 | SYSTEM_RESOURCE_ATTRIBUTE_ACE_TYPE 0x12 | Resource attribute ACE that uses the [SYSTEM_RESOURCE_ATTRIBUTE_ACE](#Section_2.4.4.15) (section 2.4.4.15) |
@@ -2349,7 +2349,7 @@ packet-beta
 <a id="Section_2.4.4.9"></a>
 #### 2.4.4.9 ACCESS_DENIED_CALLBACK_OBJECT_ACE
 
-The ACCESS_DENIED_CALLBACK_OBJECT_ACE structure defines an ACE that controls denied access to an object, a property set, or property. The ACE contains a set of user rights, a [**GUID**](#gt_globally-unique-identifier-guid) that identifies the type of object, and a [SID](#Section_2.4.2) that identifies the trustee to whom the system will deny access. The ACE also contains a GUID and a set of flags that control inheritance of the ACE by child objects.
+The ACCESS_DENIED_CALLBACK_OBJECT_ACE structure defines an ACE that controls denied access to an object, a property set, or property. The ACE contains a set of user rights, a [**GUID**](#gt_globally-unique-identifier-guid) that identifies the type of object, and a [SID](#Section_2.4.2.2) that identifies the trustee to whom the system will deny access. The ACE also contains a GUID and a set of flags that control inheritance of the ACE by child objects.
 
 ```mermaid
 packet-beta
@@ -2634,7 +2634,7 @@ The security descriptor definition language (SDDL) (section [2.5.1](#Section_2.5
 
 This section defines the semantics and format of the ApplicationData field of a callback ACE holding a conditional expression.
 
-Conditional expressions are logical expressions that are part of a conditional ACE (section [2.4.4.17](#Section_2.4.4.17.1)) and are evaluated during an access check evaluation to determine if the effect (to allow or deny the specified permissions) of the conditional ACE is to apply in the access check valuation.
+Conditional expressions are logical expressions that are part of a conditional ACE (section [2.4.4.17](#Section_2.4.4.17)) and are evaluated during an access check evaluation to determine if the effect (to allow or deny the specified permissions) of the conditional ACE is to apply in the access check valuation.
 
 A conditional expression is composed of a series of one or more simpler conditional expressions or expression terms in syntactical relation to logical operators and security attributes such that when evaluated, the expression will produce TRUE, FALSE, or UNKNOWN. Conditional expressions can be operands to the AND, OR, or NOT logical operators. (Logical operators are defined in section [2.4.4.17.7](#Section_2.4.4.17.7).)
 
@@ -2661,7 +2661,7 @@ If the result of the evaluation of the conditional expression is UNKNOWN and the
 <a id="Section_2.4.4.17.4"></a>
 ##### 2.4.4.17.4 Conditional ACE Binary Formats
 
-Conditional expressions are stored in the **ApplicationData** member of certain CALLBACK ACE types (section [2.4.4.17](#Section_2.4.4.17.1)) where each operator ID and operand is persisted in postfix notation.
+Conditional expressions are stored in the **ApplicationData** member of certain CALLBACK ACE types (section [2.4.4.17](#Section_2.4.4.17)) where each operator ID and operand is persisted in postfix notation.
 
 A CALLBACK ACE contains a conditional expression if the **ApplicationData** member is prefixed by 0x61, 0x72, 0x74, 0x78 (the ACE_CONDITION_SIGNATURE) and the remainder of the data in the **ApplicationData** member immediately following the conditional ACE signature specifies a conditional expression (section [2.4.4.17.1](#Section_2.4.4.17.1)).
 
@@ -2689,7 +2689,7 @@ For tokens representing literal values, the base and sign MUST be specified from
 | Variable | Unicode String | 0x10 1 [DWORD](#Section_2.2.9) for the length in bytes. 1 [WORD](#Section_2.2.61) for each Unicode character. Characters are stored LSB first. Strings are not null-terminated. |
 | Custom data is represented as a contiguous sequence of bytes. 1 DWORD for the length in bytes. 1 BYTE for each data octet. | Octet String | 0x18 |
 | Variable | Composite | 0x50 1 DWORD that specifies the entire length in bytes of the entire set of elements. List type--can be heterogeneous. Elements are stored in contiguous fashion according to the built-in data type storage rules. |
-| Variable | SID | 0x51 1 DWORD that specifies the entire length in bytes of the SID. SID in binary representation (as specified in section [2.4.2.2](#Section_2.4.2).) |
+| Variable | SID | 0x51 1 DWORD that specifies the entire length in bytes of the SID. SID in binary representation (as specified in section [2.4.2.2](#Section_2.4.2.2).) |
 
 Tokens in the preceding table that contain a base MUST include a base code from the following table.
 
@@ -2730,7 +2730,7 @@ If any processing rule returns an error, then the entire conditional expression 
 
 **Unary Relational Operators:**
 
-The operand type MUST be either a [SID](#Section_2.4.2) literal, or a composite, each of whose elements is a SID literal.
+The operand type MUST be either a [SID](#Section_2.4.2.2) literal, or a composite, each of whose elements is a SID literal.
 
 The operand for unary operators is the variable on the top of the evaluation stack as specified in the [EvaluateAceCondition](#Section_2.5.3.1.5) algorithm in section 2.5.3.1.5.
 
@@ -2955,7 +2955,7 @@ The SECURITY_DESCRIPTOR structure defines the security attributes of an object. 
 
 Security descriptors appear in one of two forms, absolute or self-relative.
 
-A security descriptor is said to be in absolute format if it stores all of its security information via pointer fields, as specified in the RPC representation in section [2.4.6.1](#Section_2.4.6).
+A security descriptor is said to be in absolute format if it stores all of its security information via pointer fields, as specified in the RPC representation in section [2.4.6.1](#Section_2.4.6.1).
 
 A security descriptor is said to be in self-relative format if it stores all of its security information in a contiguous block of memory and expresses all of its pointer fields as offsets from its beginning. The order of appearance of pointer target fields is not required to be in any particular order; the location of the OwnerSid, GroupSid, Sacl, and/or Dacl is only based on OffsetOwner, OffsetGroup, OffsetSacl, and/or OffsetDacl pointers found in the fixed portion of the relative security descriptor.<72>
 
@@ -3194,7 +3194,7 @@ PCLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_RELATIVE pOctetString[];
 | CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64 0x0001 | **Values** member refers to an array of offsets to [LONG64](#Section_2.2.31) value(s). |
 | CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64 0x0002 | **Values** member refers to an array of offsets to [ULONG64](#Section_2.2.54) value(s). |
 | CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING 0x0003 | **Values** member refers to an array of offsets to [**Unicode character**](#gt_unicode-character) string value(s). |
-| CLAIM_SECURITY_ATTRIBUTE_TYPE_SID 0x0005 | The **Values** member refers to an array of offsets to [CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_RELATIVE](#Section_2.4.10) value(s) where the OctetString value is a [SID](#Section_2.4.2) string. |
+| CLAIM_SECURITY_ATTRIBUTE_TYPE_SID 0x0005 | The **Values** member refers to an array of offsets to [CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_RELATIVE](#Section_2.4.10.2) value(s) where the OctetString value is a [SID](#Section_2.4.2.1) string. |
 | CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN 0x0006 | The **Values** member refers to an array of offsets to ULONG64 values where each element indicates a Boolean value. The value 1 indicates TRUE, and the value 0 indicates FALSE. |
 | CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING 0x0010 | **Values** member contains an array of CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_RELATIVE value(s) as specified in section 2.4.10.2. |
 
@@ -3516,7 +3516,7 @@ lit-char = "#" / "$" / "'" / "*" / "+" / "-" / "." / "/" / ":" / ";" / "?" / "@"
 | "XU" | Audit Callback | 0xB |
 | "ZA" | Object Access Allowed Callback | 0xD |
 
-**central-policy-ace**: An ACE type that identifies a central policy to be applied to the resource. Also called a [SYSTEM_SCOPED_POLICY_ID ACE](#Section_2.4.4.16) (see section 2.4.4.16).<83>
+**central-policy-ace**: An ACE type that identifies a central policy to be applied to the resource. Also called a [SYSTEM_SCOPED_POLICY_ID ACE](#Section_aa0c0f624b4c44f09718c266a6accd9f) (see section 2.4.4.16).<83>
 
 **capid-value-sid**: A SID with an Authority value of 17 that refers to a CentralAccessPolicy within a CentralAccessPolicysList ([MS-GPCAP](../MS-GPCAP/MS-GPCAP.md) section 3.2.1.1).<84>
 
@@ -3581,7 +3581,7 @@ lit-char = "#" / "$" / "'" / "*" / "+" / "-" / "." / "/" / ":" / ";" / "?" / "@"
 
 **term**: A string specifying a stand-alone logical expression, which is the simplest form of conditional expression, or a part of a more complex conditional expression.
 
-**cond-expr**: A conditional expression in textual form. Conditional expressions are specified in section [2.4.4.17](#Section_2.4.4.17.1).
+**cond-expr**: A conditional expression in textual form. Conditional expressions are specified in section [2.4.4.17](#Section_2.4.4.17).
 
 **memberof-op**: A string identifying a Member_of type of operator as described in section [2.4.4.17.6](#Section_2.4.4.17.6). <87>
 
@@ -6340,7 +6340,7 @@ DWORD ServerGetInfo(
 
 **bufptr**: Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter.
 
-**Note** When the 101 information level is requested, the machine is considered to be a domain controller (SV_TYPE_DOMAIN_CTRL or SV_TYPE_DOMAIN_BAKCTRL) when it supports the protocols required by the Active Directory Domain Service system (either with or without Web Services) as described in [MS-ADOD](#Section_1.3) section 2.8. Once it is established that the machine is a domain controller, it is considered to be a primary domain controller (SV_TYPE_DOMAIN_CTRL) if it is currently hosting the PdcEmulationMasterRole FSMO role (as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.1.11); otherwise it is considered to be a backup domain controller (SV_TYPE_DOMAIN_BAKCTRL). The machine determines whether it is hosting the PdcEmulationMasterRole by invoking the **IsEffectiveRoleOwner** function with the *roleObject* parameter set to RoleObject(Default NC, PdcEmulationMasterRole) (see [MS-ADTS] section 3.1.1.5.1.8). When the 101 information level is requested, and the machine is not considered to be a domain controller as specified above, then it is considered to be a workstation (SV_TYPE_WORKSTATION). Additional SV_TYPE_* values can be returned as appropriate.
+**Note** When the 101 information level is requested, the machine is considered to be a domain controller (SV_TYPE_DOMAIN_CTRL or SV_TYPE_DOMAIN_BAKCTRL) when it supports the protocols required by the Active Directory Domain Service system (either with or without Web Services) as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md) section 2.8. Once it is established that the machine is a domain controller, it is considered to be a primary domain controller (SV_TYPE_DOMAIN_CTRL) if it is currently hosting the PdcEmulationMasterRole FSMO role (as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.1.11); otherwise it is considered to be a backup domain controller (SV_TYPE_DOMAIN_BAKCTRL). The machine determines whether it is hosting the PdcEmulationMasterRole by invoking the **IsEffectiveRoleOwner** function with the *roleObject* parameter set to RoleObject(Default NC, PdcEmulationMasterRole) (see [MS-ADTS] section 3.1.1.5.1.8). When the 101 information level is requested, and the machine is not considered to be a domain controller as specified above, then it is considered to be a workstation (SV_TYPE_WORKSTATION). Additional SV_TYPE_* values can be returned as appropriate.
 
 **Return Values**: If the function succeeds, the return value is NERR_Success.
 
@@ -7153,7 +7153,7 @@ The changes made to this document are listed in the following table. For more in
 | [2.4.4.8](#Section_2.4.4.8) ACCESS_ALLOWED_CALLBACK_OBJECT_ACE | 11855 : Revised descriptions of ACE_OBJECT_TYPE_PRESENT and ACE_INHERITED_OBJECT_TYPE_PRESENT to show that they indicate presence rather than validity of the objects. | Major |
 | [2.4.4.9](#Section_2.4.4.9) ACCESS_DENIED_CALLBACK_OBJECT_ACE | 11855 : Revised descriptions of ACE_OBJECT_TYPE_PRESENT and ACE_INHERITED_OBJECT_TYPE_PRESENT to show that they indicate presence rather than validity of the objects. | Major |
 | [2.4.4.11](#Section_2.4.4.11) SYSTEM_AUDIT_OBJECT_ACE | 11855 : Revised descriptions of ACE_OBJECT_TYPE_PRESENT and ACE_INHERITED_OBJECT_TYPE_PRESENT to show that they indicate presence rather than validity of the objects. | Major |
-| [2.4.4.14](#Section_2.4.4.11) SYSTEM_AUDIT_CALLBACK_OBJECT_ACE | 11855 : Revised descriptions of ACE_OBJECT_TYPE_PRESENT and ACE_INHERITED_OBJECT_TYPE_PRESENT to show that they indicate presence rather than validity of the objects. | Major |
+| [2.4.4.14](#Section_2.4.4.14) SYSTEM_AUDIT_CALLBACK_OBJECT_ACE | 11855 : Revised descriptions of ACE_OBJECT_TYPE_PRESENT and ACE_INHERITED_OBJECT_TYPE_PRESENT to show that they indicate presence rather than validity of the objects. | Major |
 | [2.4.4.17.3](#Section_2.4.4.17.3) Conditional ACE Applicability | Added result processing for ACCESS_ALLOWED_CALLBACK_OBJECT_ACE and ACCESS_DENIED_CALLBACK_OBJECT_ACE if the result of the evaluation of the conditional expression is UNKNOWN. | Major |
 
 <a id="revision-history"></a>

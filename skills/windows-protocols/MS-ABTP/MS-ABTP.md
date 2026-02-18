@@ -450,7 +450,7 @@ When the client receives the **ReadyToPair** message in any other state, the cli
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Challenge
 
-When the [**client**](#gt_client) receives a **Challenge** message (section [2.2.3.1](#Section_2.2.3.1)) in the WAITING_FOR_CHALLENGE_REQUEST state, the client MUST compute the [**response value**](#gt_response-value) (as specified in section [3.2.1](#Section_3.1.1)) using the [**challenge value**](#gt_challenge-value) of the Challenge message (section 2.2.3.1), the **Shared Secret**, and the **Numeric Value**. The client MUST send a **Response** message (section [2.2.3.5](#Section_2.2.3.5)) to the [**server**](#gt_server) containing the computed response value.
+When the [**client**](#gt_client) receives a **Challenge** message (section [2.2.3.1](#Section_2.2.3.1)) in the WAITING_FOR_CHALLENGE_REQUEST state, the client MUST compute the [**response value**](#gt_response-value) (as specified in section [3.2.1](#Section_3.2.1)) using the [**challenge value**](#gt_challenge-value) of the Challenge message (section 2.2.3.1), the **Shared Secret**, and the **Numeric Value**. The client MUST send a **Response** message (section [2.2.3.5](#Section_2.2.3.5)) to the [**server**](#gt_server) containing the computed response value.
 
 The client MUST then create a random challenge value and send a **Challenge** message to the server containing the challenge value. The client MUST compute and store the **Expected Response** (as specified in section 3.2.1) for this challenge value. The client MUST restart the **ClientGuardTimer** (section [3.1.2](#Section_3.1.2)) and transition to the WAITING_FOR_CHALLENGE_RESPONSE state.
 
@@ -550,9 +550,9 @@ The [**server**](#gt_server) role maintains the following timers.
 
 The initial **state** for the [**server**](#gt_server) is IDLE.
 
-The **Shared Secret** (section [3.2.1](#Section_3.1.1)) is set to a value chosen by the higher layer.
+The **Shared Secret** (section [3.2.1](#Section_3.2.1)) is set to a value chosen by the higher layer.
 
-The **GuardTimer** and **PausingTimer** are not set (see section [3.2.2](#Section_3.1.2)).
+The **GuardTimer** and **PausingTimer** are not set (see section [3.2.2](#Section_3.2.2)).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -565,21 +565,21 @@ The higher layer can shut down the [**server**](#gt_server) at any time. The ser
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-The message type is identified by using the **MessageId** value stored in the message header, as specified in section [2.2.1.1](#Section_2.2.1.1). A message is processed only when it has been fully received, as indicated by the value of the **Length** field specified within the message header. When the [**server**](#gt_server) is in the FATAL_ERROR, PAUSING, or WAITING_FOR_DISCONNECT state, the server MUST ignore any received messages. When the server receives a message in any other state, the **GuardTimer** (section [3.2.2](#Section_3.1.2)) MUST be started or restarted.
+The message type is identified by using the **MessageId** value stored in the message header, as specified in section [2.2.1.1](#Section_2.2.1.1). A message is processed only when it has been fully received, as indicated by the value of the **Length** field specified within the message header. When the [**server**](#gt_server) is in the FATAL_ERROR, PAUSING, or WAITING_FOR_DISCONNECT state, the server MUST ignore any received messages. When the server receives a message in any other state, the **GuardTimer** (section [3.2.2](#Section_3.2.2)) MUST be started or restarted.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 PairingRequired
 
-When the [**server**](#gt_server) receives a **PairingRequired** message (section [2.2.3.2](#Section_2.2.3.2)) in the CONNECTED state, the server MUST send a **ReadyToPair** message (section [2.2.3.4](#Section_2.2.3.4)) to the [**client**](#gt_client), restart the **GuardTimer** (section [3.2.2](#Section_3.1.2)), and transition to the WAITING_FOR_PAIRING state.
+When the [**server**](#gt_server) receives a **PairingRequired** message (section [2.2.3.2](#Section_2.2.3.2)) in the CONNECTED state, the server MUST send a **ReadyToPair** message (section [2.2.3.4](#Section_2.2.3.4)) to the [**client**](#gt_client), restart the **GuardTimer** (section [3.2.2](#Section_3.2.2)), and transition to the WAITING_FOR_PAIRING state.
 
 When the server receives the **PairingRequired** message in any other state, the server MUST initiate a disconnect of the control channel, stop the **GuardTimer**, and transition to the FATAL_ERROR state.
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Response
 
-When the [**server**](#gt_server) receives a **Response** message (section [2.2.3.5](#Section_2.2.3.5)) in the WAITING_FOR_CHALLENGE_RESPONSE state, the server MUST compare the [**response value**](#gt_response-value) of the **Response** message with the **Expected Response** (section [3.2.1](#Section_3.1.1)).
+When the [**server**](#gt_server) receives a **Response** message (section [2.2.3.5](#Section_2.2.3.5)) in the WAITING_FOR_CHALLENGE_RESPONSE state, the server MUST compare the [**response value**](#gt_response-value) of the **Response** message with the **Expected Response** (section [3.2.1](#Section_3.2.1)).
 
-If the values match, the server MUST complete the pairing with the [**client**](#gt_client), set the **Consecutive Failure Count** (section 3.2.1) to 0, and transition to the WAITING_FOR_CHALLENGE_REQUEST state. If the values do not match, the server MUST initiate a disconnect of the control channel, increment the value of the **Consecutive Failure Count** (section 3.2.1), and stop the **GuardTimer** (section [3.2.2](#Section_3.1.2)).
+If the values match, the server MUST complete the pairing with the [**client**](#gt_client), set the **Consecutive Failure Count** (section 3.2.1) to 0, and transition to the WAITING_FOR_CHALLENGE_REQUEST state. If the values do not match, the server MUST initiate a disconnect of the control channel, increment the value of the **Consecutive Failure Count** (section 3.2.1), and stop the **GuardTimer** (section [3.2.2](#Section_3.2.2)).
 
 If the value of **Consecutive Failure Count** is less than 4, the server MUST transition to the FATAL_ERROR state; otherwise, the server MUST transition to the PAUSING state.
 
@@ -588,7 +588,7 @@ When the server receives a **Response** message in any other state, the server M
 <a id="Section_3.2.5.3"></a>
 #### 3.2.5.3 Challenge
 
-When the [**server**](#gt_server) receives a **Challenge** message (section [2.2.3.1](#Section_2.2.3.1)) in the WAITING_FOR_CHALLENGE_REQUEST state, the server MUST compute the [**response value**](#gt_response-value) (as described in section [3.2.1](#Section_3.1.1)) using the [**challenge value**](#gt_challenge-value) of the **Challenge** message, the **Shared Secret** (section 3.2.1), and the **Numeric Value** (section 3.2.1). The server MUST send a **Response** message (section [2.2.3.5](#Section_2.2.3.5)) to the [**client**](#gt_client) containing the computed response value. The server MUST restart the **GuardTimer** (section [3.2.2](#Section_3.1.2)) and transition to the WAITING_FOR_DISCONNECT state.
+When the [**server**](#gt_server) receives a **Challenge** message (section [2.2.3.1](#Section_2.2.3.1)) in the WAITING_FOR_CHALLENGE_REQUEST state, the server MUST compute the [**response value**](#gt_response-value) (as described in section [3.2.1](#Section_3.2.1)) using the [**challenge value**](#gt_challenge-value) of the **Challenge** message, the **Shared Secret** (section 3.2.1), and the **Numeric Value** (section 3.2.1). The server MUST send a **Response** message (section [2.2.3.5](#Section_2.2.3.5)) to the [**client**](#gt_client) containing the computed response value. The server MUST restart the **GuardTimer** (section [3.2.2](#Section_3.2.2)) and transition to the WAITING_FOR_DISCONNECT state.
 
 When the server receives a **Challenge** message in any other state, the server MUST initiate a disconnect of the control channel, stop the **GuardTimer**, and transition to the FATAL_ERROR state.
 
@@ -597,7 +597,7 @@ When the server receives a **Challenge** message in any other state, the server 
 
 When the [**server**](#gt_server) receives a message with an unknown message type, that is, a value for the **MessageId** that is not specified in section [2.2.1.1](#Section_2.2.1.1), the server MUST send a **ProtocolErrorResponse** message (section [2.2.3.3](#Section_2.2.3.3)) indicating the unknown message type and specifying the unrecognized **MessageId** value in the message payload.
 
-When the server receives a message that cannot be parsed according to the message syntax specified in section [2.2](#Section_2.2), the server initiates a disconnect of the control channel, stops the **GuardTimer** (section [3.2.2](#Section_3.1.2)), and transitions to the FATAL_ERROR state.
+When the server receives a message that cannot be parsed according to the message syntax specified in section [2.2](#Section_2.2), the server initiates a disconnect of the control channel, stops the **GuardTimer** (section [3.2.2](#Section_3.2.2)), and transitions to the FATAL_ERROR state.
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -605,12 +605,12 @@ When the server receives a message that cannot be parsed according to the messag
 <a id="Section_3.2.6.1"></a>
 #### 3.2.6.1 GuardTimer
 
-Upon expiration of the **GuardTimer** (section [3.2.2](#Section_3.1.2)), the [**server**](#gt_server) initiates a disconnect of the control channel and transitions to the FATAL_ERROR state.
+Upon expiration of the **GuardTimer** (section [3.2.2](#Section_3.2.2)), the [**server**](#gt_server) initiates a disconnect of the control channel and transitions to the FATAL_ERROR state.
 
 <a id="Section_3.2.6.2"></a>
 #### 3.2.6.2 PausingTimer
 
-Upon expiration of the **PausingTimer** (section [3.2.2](#Section_3.1.2)), the [**server**](#gt_server) sets the **Consecutive Failure Count** (section [3.2.1](#Section_3.1.1)) to 0 and transitions to the IDLE state.
+Upon expiration of the **PausingTimer** (section [3.2.2](#Section_3.2.2)), the [**server**](#gt_server) sets the **Consecutive Failure Count** (section [3.2.1](#Section_3.2.1)) to 0 and transitions to the IDLE state.
 
 <a id="Section_3.2.7"></a>
 ### 3.2.7 Other Local Events
@@ -618,17 +618,17 @@ Upon expiration of the **PausingTimer** (section [3.2.2](#Section_3.1.2)), the [
 <a id="Section_3.2.7.1"></a>
 #### 3.2.7.1 Connect Event
 
-The [**server**](#gt_server) can only process connect events from clients when the server is in the IDLE state. When a [**client**](#gt_client) connects, the server MUST transition to the CONNECTED state, store the **Client Address** (section [3.2.1](#Section_3.1.1)), and start the **GuardTimer** (section [3.2.2](#Section_3.1.2)).
+The [**server**](#gt_server) can only process connect events from clients when the server is in the IDLE state. When a [**client**](#gt_client) connects, the server MUST transition to the CONNECTED state, store the **Client Address** (section [3.2.1](#Section_3.2.1)), and start the **GuardTimer** (section [3.2.2](#Section_3.2.2)).
 
 <a id="Section_3.2.7.2"></a>
 #### 3.2.7.2 Disconnect Event
 
-When the [**server**](#gt_server) receives a disconnect event of the control channel, the server stops the **GuardTimer** (section [3.2.2](#Section_3.1.2)) if it is running. If the **Consecutive Failure Count** (section [3.2.1](#Section_3.1.1)) equals 4, the server MUST transition to the PAUSING state and start the **PausingTimer** (section 3.2.2); otherwise, the server transitions to the IDLE state.
+When the [**server**](#gt_server) receives a disconnect event of the control channel, the server stops the **GuardTimer** (section [3.2.2](#Section_3.2.2)) if it is running. If the **Consecutive Failure Count** (section [3.2.1](#Section_3.2.1)) equals 4, the server MUST transition to the PAUSING state and start the **PausingTimer** (section 3.2.2); otherwise, the server transitions to the IDLE state.
 
 <a id="Section_3.2.7.3"></a>
 #### 3.2.7.3 Pairing indication
 
-When the [**Bluetooth**](#gt_bluetooth-bt) layer indicates that a pairing attempt has to be authenticated, the [**server**](#gt_server) compares its state to the WAITING_FOR_PAIRING state, compares the indicated peer address with the **Client Address** (section [3.2.1](#Section_3.1.1)), and compares the indicated authentication method to the numeric comparison value. If all values match, the server MUST store the indicated **Numeric Value** (section 3.2.1)**.** The server MUST then create a random [**challenge value**](#gt_challenge-value) and send a **Challenge** message (section [2.2.3.1](#Section_2.2.3.1)) to the [**client**](#gt_client) containing the challenge value. The server MUST compute and store the **Expected Response** (section 3.2.1) for this challenge value using the challenge value, the **Shared Secret** (section 3.2.1), and the **Numeric Value**. The server MUST restart the **GuardTimer** (section [3.2.2](#Section_3.1.2)) and transition to the WAITING_FOR_CHALLENGE_RESPONSE state.
+When the [**Bluetooth**](#gt_bluetooth-bt) layer indicates that a pairing attempt has to be authenticated, the [**server**](#gt_server) compares its state to the WAITING_FOR_PAIRING state, compares the indicated peer address with the **Client Address** (section [3.2.1](#Section_3.2.1)), and compares the indicated authentication method to the numeric comparison value. If all values match, the server MUST store the indicated **Numeric Value** (section 3.2.1)**.** The server MUST then create a random [**challenge value**](#gt_challenge-value) and send a **Challenge** message (section [2.2.3.1](#Section_2.2.3.1)) to the [**client**](#gt_client) containing the challenge value. The server MUST compute and store the **Expected Response** (section 3.2.1) for this challenge value using the challenge value, the **Shared Secret** (section 3.2.1), and the **Numeric Value**. The server MUST restart the **GuardTimer** (section [3.2.2](#Section_3.2.2)) and transition to the WAITING_FOR_CHALLENGE_RESPONSE state.
 
 If some of the value does not match, the server MUST ignore the indication from the Bluetooth layer.
 
@@ -674,9 +674,9 @@ Implementers are required to ensure that the [**OOB**](#gt_out-of-band-oob) exch
 
 | Security parameter | Section |
 | --- | --- |
-| Computation of the [**response value**](#gt_response-value) | [3](#Section_1.3) |
+| Computation of the [**response value**](#gt_response-value) | [3](#Section_3) |
 | Shared secret on the client | [3.1.1](#Section_3.1.1) |
-| Shared secret on the server | [3.2.1](#Section_3.1.1) |
+| Shared secret on the server | [3.2.1](#Section_3.2.1) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Product Behavior

@@ -192,7 +192,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MSKB-163846] Microsoft Corporation, "SID Values For Default Windows NT Installations", Version 2.1, November 2006, [http://support.microsoft.com/kb/163846](https://go.microsoft.com/fwlink/?LinkId=127918)
 
@@ -233,7 +233,7 @@ If acting as an SMTP server:
 - If the authentication is continuing, the NTLM software will return an NTLM message that needs to be sent to the client. This message is base64-encoded, and the SMTP padding is applied and sent to the client. Steps 2 through 4 are repeated until authentication succeeds or fails.
 The sequence that follows shows the typical flow of packets between a client and server once NTLM authentication has been selected:
 
-- The SMTP client sends an [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message) embedded in an [SMTP_AUTH_NTLM_BLOB_Command](#Section_3.2.5.2) packet to the server.
+- The SMTP client sends an [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message) embedded in an [SMTP_AUTH_NTLM_BLOB_Command](#Section_2.2.1.7) packet to the server.
 - On receiving the SMTP packet with NTLM NEGOTIATE_MESSAGE, the server sends an [**NTLM CHALLENGE_MESSAGE**](#gt_ntlm-challenge_message) embedded in an SMTP packet to the client.
 - In response, the SMTP client sends an [**NTLM AUTHENTICATE_MESSAGE**](#gt_ntlm-authenticate_message) embedded in an SMTP packet.
 - The server then sends an SMTP response to the client to successfully complete the authentication process.
@@ -300,11 +300,11 @@ The formal syntax of messages is provided in Augmented Backus-Naur Form (ABNF), 
 <a id="Section_2.2.1"></a>
 ### 2.2.1 SMTP AUTH Extensions
 
-The first category of [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) messages is within the SMTP-AUTH extensibility framework. These messages are defined in [[RFC2554]](https://go.microsoft.com/fwlink/?LinkId=94468). The NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension introduces the following messages, as specified in sections [2.2.1.1](#Section_3.1.4.1) through [2.2.1.9](#Section_2.2.1.9).
+The first category of [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) messages is within the SMTP-AUTH extensibility framework. These messages are defined in [[RFC2554]](https://go.microsoft.com/fwlink/?LinkId=94468). The NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension introduces the following messages, as specified in sections [2.2.1.1](#Section_2.2.1.1) through [2.2.1.9](#Section_2.2.1.9).
 
 The client can receive any one of the following responses during authentication:
 
-- [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3)
+- [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3)
 - [SMTP_AUTH_Fail_Response](#Section_2.2.1.4)
 - [SMTP_AUTH_Other_Failure_Response](#Section_2.2.1.5)
 - [SMTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.6)
@@ -322,7 +322,7 @@ The SMTP_AUTH_NTLM_Initiation_Command message initiates the NTLM authentication 
 
 The SMTP_NTLM_Supported_Response message indicates that the server supports [**NTLM**](#gt_nt-lan-manager-ntlm-authentication-protocol) authentication for SMTP.
 
-If the [initial-response] string is not supplied in the client [SMTP_AUTH_NTLM_Initiation_Command](#Section_3.1.4.1) message, and NTLM is supported, the [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) server will respond with an SMTP message prefixed with a status code of 334 to indicate that NTLM is supported. The only data in this message that is useful is the status code 334. The remaining data is a human-readable ASCII string whose contents are constrained by the specifications in section 4.5.3 in [[RFC2821]](https://go.microsoft.com/fwlink/?LinkId=90384). This data has no bearing on the authentication. The syntax of this command is shown as follows.
+If the [initial-response] string is not supplied in the client [SMTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1) message, and NTLM is supported, the [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) server will respond with an SMTP message prefixed with a status code of 334 to indicate that NTLM is supported. The only data in this message that is useful is the status code 334. The remaining data is a human-readable ASCII string whose contents are constrained by the specifications in section 4.5.3 in [[RFC2821]](https://go.microsoft.com/fwlink/?LinkId=90384). This data has no bearing on the authentication. The syntax of this command is shown as follows.
 
 334 <human-readable-string><CR><LF>
 
@@ -351,7 +351,7 @@ SMTP_AUTH_Fail_Response is defined as follows. This message, identified by the 5
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 SMTP_AUTH_Other_Failure_Response Message
 
-The SMTP_AUTH_Other_Failure_Response message is defined as follows. This is actually a class of messages whose syntax and interpretation are defined in [[RFC2821]](https://go.microsoft.com/fwlink/?LinkId=90384) section 4.2 and [[RFC2554]](https://go.microsoft.com/fwlink/?LinkId=94468) sections 4 and 6. They indicate an abnormal termination of the [**NTLM**](#gt_nt-lan-manager-ntlm-authentication-protocol) authentication negotiation, which can occur for various reasons such as software errors, lack of system resources, and so on. For the purposes of this document, SMTP_AUTH_Other_Failure_Response is defined as any [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) message other than [SMTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.6), [SMTP_AUTH_Fail_Response](#Section_2.2.1.4), and [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3). The interpretation of SMTP_AUTH_Other_Failure_Response, and the suggested client action when receiving such a message, is defined in [RFC2821] section 4.3. This message represents an exit from AUTH and, as such, is not really a part of AUTH negotiation.
+The SMTP_AUTH_Other_Failure_Response message is defined as follows. This is actually a class of messages whose syntax and interpretation are defined in [[RFC2821]](https://go.microsoft.com/fwlink/?LinkId=90384) section 4.2 and [[RFC2554]](https://go.microsoft.com/fwlink/?LinkId=94468) sections 4 and 6. They indicate an abnormal termination of the [**NTLM**](#gt_nt-lan-manager-ntlm-authentication-protocol) authentication negotiation, which can occur for various reasons such as software errors, lack of system resources, and so on. For the purposes of this document, SMTP_AUTH_Other_Failure_Response is defined as any [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) message other than [SMTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.6), [SMTP_AUTH_Fail_Response](#Section_2.2.1.4), and [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3). The interpretation of SMTP_AUTH_Other_Failure_Response, and the suggested client action when receiving such a message, is defined in [RFC2821] section 4.3. This message represents an exit from AUTH and, as such, is not really a part of AUTH negotiation.
 
 <a id="Section_2.2.1.6"></a>
 #### 2.2.1.6 SMTP_AUTH_NTLM_Succeeded_Response Message
@@ -388,7 +388,7 @@ The server responds with an EHLO-Response (including the EHLO-keyword AUTH) when
 <a id="Section_2.2.2"></a>
 ### 2.2.2 SMTP Server Messages
 
-This section defines the creation of [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3) messages. These are [**NTLM messages**](#gt_ntlm-message) that are sent by the server, and MUST be encapsulated as follows to conform to syntax specified by the SMTP-AUTH mechanism:
+This section defines the creation of [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3) messages. These are [**NTLM messages**](#gt_ntlm-message) that are sent by the server, and MUST be encapsulated as follows to conform to syntax specified by the SMTP-AUTH mechanism:
 
 - Encode the NTLM message data as [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7) (as specified in [[RFC1521]](https://go.microsoft.com/fwlink/?LinkId=94433)). This is required because NTLM messages contain data outside the ASCII character range whereas [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) only supports the sending of ASCII characters within the context of SMTP-AUTH.
 - To the base64-encoded string, prefix the SMTP response code "334 " (that is, the numerals 334 followed by the ASCII space character 0x20).
@@ -405,7 +405,7 @@ De-encapsulation of these messages by the client follows the reverse logic:
 <a id="Section_2.2.3"></a>
 ### 2.2.3 SMTP Client Messages
 
-This section defines the creation of [SMTP_AUTH_NTLM_BLOB_Command](#Section_3.2.5.2) messages. These [**NTLM messages**](#gt_ntlm-message) sent by the client are encapsulated as follows to conform to the SMTP-AUTH mechanism:
+This section defines the creation of [SMTP_AUTH_NTLM_BLOB_Command](#Section_2.2.1.7) messages. These [**NTLM messages**](#gt_ntlm-message) sent by the client are encapsulated as follows to conform to the SMTP-AUTH mechanism:
 
 - [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7)-encode (as specified in [[RFC1521]](https://go.microsoft.com/fwlink/?LinkId=94433)) the NTLM message data. This is required because NTLM messages contain data outside the ASCII character range whereas [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) only supports ASCII characters to be sent within the context of SMTP-AUTH.
 - Suffix the <CR> and <LF> characters (ASCII values 0x0D and 0x0A), as required by SMTP.
@@ -442,15 +442,15 @@ Figure 2: SMTP NTLM authentication client state model
 The abstract data model for the NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension has the following states:
 
 - start
-This is the state of the client before the [SMTP_AUTH_NTLM_Initiation_Command](#Section_3.1.4.1) message has been sent.
+This is the state of the client before the [SMTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1) message has been sent.
 
 - sent_authentication_request
 This is the state of the client after the SMTP_AUTH_NTLM_Initiation_Command message has been sent.
 
 - received_response
-This is the state entered by the client after it has received an [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message, or when the client receives an [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3) message.
+This is the state entered by the client after it has received an [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message, or when the client receives an [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3) message.
 
-When the client enters this state after receiving a SMTP_NTLM_Supported_Response message, the client invokes the NTLM software to get the NTLM_NEGOTIATE_MESSAGE and sends it to the server embedded inside the first [SMTP_AUTH_NTLM Blob_Command](#Section_3.2.5.2). The client transitions the state to sent_command after it sends the SMTP_AUTH_NTLM Blob_Command.
+When the client enters this state after receiving a SMTP_NTLM_Supported_Response message, the client invokes the NTLM software to get the NTLM_NEGOTIATE_MESSAGE and sends it to the server embedded inside the first [SMTP_AUTH_NTLM Blob_Command](#Section_2.2.1.7). The client transitions the state to sent_command after it sends the SMTP_AUTH_NTLM Blob_Command.
 
 The client returns to this state from the sent_command state after it receives SMTP_AUTH_NTLM_BLOB_Response from the server.
 
@@ -464,7 +464,7 @@ The client returns to this state from the received_response state after it sends
 The client transitions to completed_authentication if it receives [SMTP_AUTH_FAIL_Response](#Section_2.2.1.4), [SMTP_AUTH_Other_Failure_Response](#Section_2.2.1.5), or [SMTP_AUTH_NTLM_Succeeded_Response](#Section_2.2.1.6).
 
 - completed_authentication
-This is the state of the client on completion of authentication (successful or otherwise).. Section [3.1.5](#Section_3.2.5) defines the rules for how this state is reached. The completed_authentication represents the end state of the authentication protocol.
+This is the state of the client on completion of authentication (successful or otherwise).. Section [3.1.5](#Section_3.1.5) defines the rules for how this state is reached. The completed_authentication represents the end state of the authentication protocol.
 
 This document does not address the behavior of [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) in this state.
 
@@ -489,7 +489,7 @@ This section defines the creation of SMTP_AUTH_NTLM_Initiation_Command messages.
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Sending an SMTP_AUTH_NTLM_BLOB_Command Message
 
-This section defines the creation of [SMTP_AUTH_NTLM_BLOB_Command](#Section_3.2.5.2) messages. These [**NTLM messages**](#gt_ntlm-message) are sent by the client when the state equals received_response and are encapsulated as specified in section [2.2.3](#Section_2.2.3) to conform to the SMTP-AUTH mechanism.
+This section defines the creation of [SMTP_AUTH_NTLM_BLOB_Command](#Section_2.2.1.7) messages. These [**NTLM messages**](#gt_ntlm-message) are sent by the client when the state equals received_response and are encapsulated as specified in section [2.2.3](#Section_2.2.3) to conform to the SMTP-AUTH mechanism.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -501,11 +501,11 @@ The NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) E
 
 When the client state equals sent_authentication_request and on receiving this message, a client MUST generate the first [**NTLM message**](#gt_ntlm-message) by calling the [**NTLM software**](#gt_ntlm-software). The NTLM software then generates [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message), as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md). The client MUST then encapsulate the NTLM message, as defined in section [2.2.3](#Section_2.2.3), and send it to the server.
 
-**Note** The server will send the [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message only if the client did not embed an NTLM NEGOTIATE_MESSAGE in the [SMTP_AUTH_NTLM_Initiation_Command](#Section_3.1.4.1) [initial-response] optional parameter.
+**Note** The server will send the [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message only if the client did not embed an NTLM NEGOTIATE_MESSAGE in the [SMTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1) [initial-response] optional parameter.
 
 The state of the client MUST be changed to received_response.
 
-The command sent by the client determines whether the server response is interpreted as an SMTP_NTLM_Supported_Response or an [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3). Based on ABNF syntax alone, SMTP_NTLM_Supported_Response and SMTP_AUTH_NTLM_BLOB_Response messages appear identical, making a successful distinction between the two impossible. Therefore, the parser MUST distinguish between these messages as follows:
+The command sent by the client determines whether the server response is interpreted as an SMTP_NTLM_Supported_Response or an [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3). Based on ABNF syntax alone, SMTP_NTLM_Supported_Response and SMTP_AUTH_NTLM_BLOB_Response messages appear identical, making a successful distinction between the two impossible. Therefore, the parser MUST distinguish between these messages as follows:
 
 - If the client previously sent an SMTP_AUTH_NTLM_Initiation_Command without an [initial-response], the server response MUST be parsed as an SMTP_NTLM_Supported_Response message with a human-readable-string. The human-readable-string SHOULD be ignored by the client, except to facilitate troubleshooting and debugging. This string has no consequence on the operation of the protocol.
 - If the client previously sent an SMTP_AUTH_NTLM_Initiation_Command with an [initial-response], the server response MUST be parsed as an SMTP_AUTH_NTLM_BLOB_Response message with a base64-encoded string. The client MUST NOT ignore the base64-encoded string and it MUST be processed by the NTLM software, as described in this document.
@@ -582,15 +582,15 @@ Figure 3: SMTP NTLM authentication server state model
 The abstract data model for the NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension has the following states:
 
 - start
-This is the state of the server before the [SMTP_AUTH_NTLM_Initiation_Command (section 2.2.1.1)](#Section_3.1.4.1) message has been received.
+This is the state of the server before the [SMTP_AUTH_NTLM_Initiation_Command (section 2.2.1.1)](#Section_2.2.1.1) message has been received.
 
 - received_authentication_request
 This is the state of the server after the SMTP_AUTH_NTLM_Initiation_Command message has been received.
 
 - sent_response
-This is the state entered by the server after it has sent an [SMTP_NTLM_Supported_Response (section 2.2.1.2)](#Section_2.2.1.2) or [SMTP_AUTH_NTLM_BLOB_Response (section 2.2.1.3)](#Section_3.1.5.3) message.
+This is the state entered by the server after it has sent an [SMTP_NTLM_Supported_Response (section 2.2.1.2)](#Section_2.2.1.2) or [SMTP_AUTH_NTLM_BLOB_Response (section 2.2.1.3)](#Section_2.2.1.3) message.
 
-During this state the server waits for [SMTP_AUTH_NTLM_BLOB_Command (section 2.2.1.7)](#Section_3.2.5.2) from the client and transition the state to received_response after receiving the SMTP_AUTH_NTLM_BLOB_Command.
+During this state the server waits for [SMTP_AUTH_NTLM_BLOB_Command (section 2.2.1.7)](#Section_2.2.1.7) from the client and transition the state to received_response after receiving the SMTP_AUTH_NTLM_BLOB_Command.
 
 The server comes back to this state after it has sent SMTP_AUTH_NTLM_BLOB_Response to the client.
 
@@ -606,7 +606,7 @@ The server comes back to this state after receiving SMTP_AUTH_NTLM_BLOB_Command.
 The server MUST transition the state to completed_authentication when it sends [SMTP_AUTH_NTLM_Succeeded_Response (section 2.2.1.6)](#Section_2.2.1.6) or [SMTP_AUTH_Fail_Response (section 2.2.1.4)](#Section_2.2.1.4) or [SMTP_AUTH_Other_Failure_Response (section 2.2.1.5)](#Section_2.2.1.5) to the client.
 
 - completed_authentication
-This is the state of the server upon successfully or unsuccessfully completing authentication. Section [3.1.5](#Section_3.2.5) defines the rules for how this state is reached. The completed_authentication represents the end state of the authentication protocol.
+This is the state of the server upon successfully or unsuccessfully completing authentication. Section [3.1.5](#Section_3.1.5) defines the rules for how this state is reached. The completed_authentication represents the end state of the authentication protocol.
 
 This document does not address the behavior of [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) in this state.
 
@@ -628,7 +628,7 @@ None.
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-The NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension is driven by a series of message exchanges between an [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) server and an SMTP client. The rules governing the sequencing of commands and the internal states of the client and server are defined by a combination of [[RFC2554]](https://go.microsoft.com/fwlink/?LinkId=94468) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.2.1](#Section_3.1.1) completely defines how the rules specified in [RFC2554] and [MS-NLMP] govern SMTP authentication.
+The NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension is driven by a series of message exchanges between an [**SMTP**](#gt_simple-mail-transfer-protocol-smtp) server and an SMTP client. The rules governing the sequencing of commands and the internal states of the client and server are defined by a combination of [[RFC2554]](https://go.microsoft.com/fwlink/?LinkId=94468) and [MS-NLMP](../MS-NLMP/MS-NLMP.md). Section [3.2.1](#Section_3.2.1) completely defines how the rules specified in [RFC2554] and [MS-NLMP] govern SMTP authentication.
 
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Receiving an SMTP_AUTH_NTLM_Initiation_Command Message
@@ -644,7 +644,7 @@ There are two actions possible, depending on whether or not the client has inclu
 - If the client has included the [initial-response] parameter, the server MUST change its internal state to received_command and de-encapsulate the [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message) embedded within the [initial-response] and pass it to the [**NTLM software**](#gt_ntlm-software) with the **GSS_Accept_sec_context** call, as specified in [MS-NLMP](../MS-NLMP/MS-NLMP.md) section 3.2.4. Further, the NTLM Authentication Protocol is used with the connection-oriented NTLM negotiation option.
 The NTLM software does one of the following, as specified in [MS-NLMP]:
 
-- Report success in processing the message. The server MUST send a [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3) message to the client and change its internal state to sent_response.
+- Report success in processing the message. The server MUST send a [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3) message to the client and change its internal state to sent_response.
 - Report that the authentication failed, which could be due to some other software error or message corruption. The server MUST change its state to completed_authentication and return an [SMTP_AUTH_Other_Failure_Response](#Section_2.2.1.5) message.
 - If the client has not included the [initial-response] parameter, the server MUST change its state to received_authenticaton_request and reply with the [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message if it supports [**NTLM**](#gt_nt-lan-manager-ntlm-authentication-protocol) and change its state to the sent_response state.
 <a id="Section_3.2.5.2"></a>
@@ -738,16 +738,16 @@ EHLO test.com
 
 250 OK
 
-- The client then sends the SMTP [**AUTH command**](#gt_auth-command), [SMTP_AUTH_NTLM_Initiation_Command](#Section_3.1.4.1), initiating auth. In this example, the AUTH command being sent is without the optional [initial-response] data.
+- The client then sends the SMTP [**AUTH command**](#gt_auth-command), [SMTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1), initiating auth. In this example, the AUTH command being sent is without the optional [initial-response] data.
 AUTH NTLM
 
 - The server sends the [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message, indicating that it can perform NTLM authentication.
 334 ntlm supported
 
-- The client sends an [SMTP_AUTH_NTLM_BLOB_Command](#Section_3.2.5.2) message containing a [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7)-encoded [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message).
+- The client sends an [SMTP_AUTH_NTLM_BLOB_Command](#Section_2.2.1.7) message containing a [**base64**](#gt_179b9392-9019-45a3-880b-26f6890522b7)-encoded [**NTLM NEGOTIATE_MESSAGE**](#gt_ntlm-negotiate_message).
 TlRMTVNTUAABAAAAt4II4gAAAAAAAAAAAAAAAAAAAAAFAs4OAAAADw==
 
-- The server sends an [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3) message containing a base64-encoded [**NTLM CHALLENGE_MESSAGE**](#gt_ntlm-challenge_message).
+- The server sends an [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3) message containing a base64-encoded [**NTLM CHALLENGE_MESSAGE**](#gt_ntlm-challenge_message).
 334 TlRMTVNTUAACAAAAFgAWADgAAAA1goriZt7rI6Uq/ccAAAAAAAAAAGwAbABOAAA
 
 ABQLODgAAAA9FAFgAQwBIAC0AQwBMAEkALQA2ADYAAgAWAEUAWABDAEgALQBDAEwASQ
@@ -778,16 +778,16 @@ This section illustrates the NT LAN Manager (NTLM) Authentication: Simple Mail T
 Figure 5: SMTP client unsuccessfully attempts authentication to SMTP server
 
 - As described in the previous example for unsuccessful AUTH, the SMTP client determines if the server supports NTLM authentication by sending the EHLO command and parsing the EHLO response.
-- The client sends an [SMTP_AUTH_NTLM_Initiation_Command](#Section_3.1.4.1) to the server.
+- The client sends an [SMTP_AUTH_NTLM_Initiation_Command](#Section_2.2.1.1) to the server.
 AUTH NTLM
 
 - The server sends the [SMTP_NTLM_Supported_Response](#Section_2.2.1.2) message, indicating that it can perform NTLM authentication.
 334 ntlm supported
 
-- The client sends an [SMTP_AUTH_NTLM_BLOB_Command](#Section_3.2.5.2) message.
+- The client sends an [SMTP_AUTH_NTLM_BLOB_Command](#Section_2.2.1.7) message.
 TlRMTVNTUAABAAAAt4II4gAAAAAAAAAAAAAAAAAAAAAFAs4OAAAADw==
 
-- The server responds with an [SMTP_AUTH_NTLM_BLOB_Response](#Section_3.1.5.3) message.
+- The server responds with an [SMTP_AUTH_NTLM_BLOB_Response](#Section_2.2.1.3) message.
 334 TlRMTVNTUAACAAAAFgAWADgAAAA1goriYo7ENUsXagIAAAAAAAAAAGwAbABOAAA
 
 ABQLODgAAAA9FAFgAQwBIAC0AQwBMAEkALQA2ADYAAgAWAEUAWABDAEgALQBDAEwASQ
@@ -822,7 +822,7 @@ Implementers of the NT LAN Manager (NTLM) Authentication: Simple Mail Transfer P
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 2.0
 - Microsoft .NET Framework 3.0

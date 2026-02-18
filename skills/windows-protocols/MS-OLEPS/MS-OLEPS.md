@@ -303,7 +303,7 @@ OLEPS is appropriate for writing simple metadata to a [**file**](#gt_file), espe
 This document covers versioning issues in the following areas:
 
 - **Structure Versions:** The [PropertySetStream](#Section_2.21) packet supports two versions: version 0 and version 1. Version 0 does not support some of the property types in the PropertyType enumeration and does not support the special [Behavior property](#Section_2.18.4). These versions are defined in section [2](#Section_2).
-- **Localization:** The encoding of strings in the [CodePageString](#Section_2.5) and [PropertyIdentifier](#Section_2.1) packets is dependent on a [**property set's**](#gt_property-set) [CodePage property](#Section_2.18.2). Property sets optionally have an informational [Locale property](#Section_2.18.3) to identify the language for strings in the property set. Localization-dependent structure content is specified in section 2.
+- **Localization:** The encoding of strings in the [CodePageString](#Section_2.5) and [PropertyIdentifier](#Section_2.1) packets is dependent on a [**property set's**](#gt_property-set) [CodePage property](#Section_3.1.1). Property sets optionally have an informational [Locale property](#Section_2.18.3) to identify the language for strings in the property set. Localization-dependent structure content is specified in section 2.
 This document specifies two versions for property sets: version 0 and version 1. Version 1 supports additional [**property**](#gt_property) types and a special Behavior property. The granularity for versioning is the [PropertyIdentifier](#Section_2.1) packet, which usually contains a single property set. Therefore, in general, it is possible for a [**file**](#gt_file) to contain both version 0 and version 1 property sets.
 
 For maximum interoperability, it is recommended that implementations write property sets as version 0 unless they make use of features only supported in version 1.
@@ -343,7 +343,7 @@ typedef unsigned int PropertyIdentifier;
 | --- | --- |
 | Normal 0x00000002 — 0x7FFFFFFF | Used to identify normal properties. |
 | DICTIONARY_PROPERTY_IDENTIFIER 0x00000000 | property identifier for the [Dictionary property](#Section_2.18.1). |
-| CODEPAGE_PROPERTY_IDENTIFIER 0x00000001 | property identifier for the [CodePage property](#Section_2.18.2). |
+| CODEPAGE_PROPERTY_IDENTIFIER 0x00000001 | property identifier for the [CodePage property](#Section_3.1.1). |
 | LOCALE_PROPERTY_IDENTIFIER 0x80000000 | property identifier for the [Locale property](#Section_2.18.3). |
 | BEHAVIOR_PROPERTY_IDENTIFIER 0x80000003 | property identifier for the [Behavior property](#Section_2.18.4). |
 
@@ -387,7 +387,7 @@ typedef unsigned int PropertyType;
 | VT_STREAMED_Object 0x0044 | Type is **Stream** representing an Object in an application-specific manner, and the minimum property set version is 0. VT_STREAMED_Object is not allowed in a simple property set. |
 | VT_STORED_Object 0x0045 | Type is Storage representing an Object in an application-specific manner, and the minimum property set version is 0. VT_STORED_Object is not allowed in a simple property set. |
 | VT_BLOB_Object 0x0046 | Type is BLOB representing an object in an application-specific manner. The minimum property set version is 0. |
-| VT_CF 0x0047 | Type is [PropertyIdentifier](#Section_2.11), and the minimum property set version is 0. |
+| VT_CF 0x0047 | Type is [PropertyIdentifier](#Section_2.1), and the minimum property set version is 0. |
 | VT_CLSID 0x0048 | Type is **CLSID**, and the minimum property set version is 0. |
 | VT_VERSIONED_STREAM 0x0049 | Type is **Stream** with application-specific version [GUID](#Section_2.12) ([VersionedStream](#Section_2.13)). The minimum property set version is 0. VT_VERSIONED_STREAM is not allowed in a simple property set. |
 | VT_VECTOR \| VT_I2 0x1002 | Type is **Vector of 16-bit signed integers**, and the minimum property set version is 0. |
@@ -456,7 +456,7 @@ packet-beta
 <a id="Section_2.5"></a>
 ## 2.5 CodePageString
 
-The CodePageString packet represents a string whose encoding depends on the value of the [**property set's**](#gt_property-set) [CodePage property](#Section_2.18.2).
+The CodePageString packet represents a string whose encoding depends on the value of the [**property set's**](#gt_property-set) [CodePage property](#Section_3.1.1).
 
 ```mermaid
 packet-beta
@@ -804,7 +804,7 @@ packet-beta
 
 **PropertyIdentifier (4 bytes):** An unsigned integer representing a property identifier. MUST be a valid [PropertyIdentifier](#Section_2.1) value in the range 0x00000002 to 0x7FFFFFFF, inclusive (this specifically excludes the [**property identifiers**](#gt_property-identifier) for any of the special properties specified in section [2.18](#Section_2.18)).
 
-**Length (4 bytes):** If the property set's [CodePage property](#Section_2.18.2) has the value CP_WINUNICODE (0x04B0), MUST be the length of the **Name** field in 16-bit [**Unicode**](#gt_unicode) characters, including the null terminator but not including padding (if any). Otherwise, MUST be the length of the **Name** field in 8-bit characters, including the null terminator.
+**Length (4 bytes):** If the property set's [CodePage property](#Section_3.1.1) has the value CP_WINUNICODE (0x04B0), MUST be the length of the **Name** field in 16-bit [**Unicode**](#gt_unicode) characters, including the null terminator but not including padding (if any). Otherwise, MUST be the length of the **Name** field in 8-bit characters, including the null terminator.
 
 **Name (variable):** If the property set's CodePage property has the value CP_WINUNICODE (0x04B0), MUST be a null-terminated array of 16-bit Unicode characters, followed by zero padding to a multiple of 4 bytes. Otherwise, MUST be a null-terminated array of 8-bit characters from the code page identified by the CodePage property and MUST NOT be padded.
 
@@ -836,7 +836,7 @@ The following sections provide additional information on [**properties**](#gt_pr
 <a id="Section_2.18.1"></a>
 ### 2.18.1 Dictionary Property
 
-The Dictionary property, if present, MUST have a property identifier of 0x00000000 and MUST NOT have a [**property name**](#gt_property-name). Unlike other properties, which are represented as [TypedPropertyValue](#Section_2.15) packets, the Dictionary property MUST be represented as a [Dictionary](#Section_3.2.2.1.4) packet. A property set in which any [**properties**](#gt_property) have property names MUST have a Dictionary property.
+The Dictionary property, if present, MUST have a property identifier of 0x00000000 and MUST NOT have a [**property name**](#gt_property-name). Unlike other properties, which are represented as [TypedPropertyValue](#Section_2.15) packets, the Dictionary property MUST be represented as a [Dictionary](#Section_2.17) packet. A property set in which any [**properties**](#gt_property) have property names MUST have a Dictionary property.
 
 The Dictionary property MUST NOT have multiple entries with the same property identifier or multiple entries with the same property name. Property names MUST be compared in a case-insensitive manner unless the property set has a [Behavior property](#Section_2.18.4) with the value 0x00000001, in which case property names MUST be compared in a case-sensitive manner.
 
@@ -900,7 +900,7 @@ packet-beta
 
 **PropertyIdentifierAndOffset 0 (variable):** All PropertyIdentifierAndOffset fields MUST be a sequence of [PropertyIdentifierAndOffset](#Section_2.19) packets. The sequence MUST be in order of increasing value of the **Offset** field. Packets are not required to be in any particular order with regard to the value of the **PropertyIdentifier** field.
 
-**Property 0 (variable):** Each Property field is a sequence of property values, each of which MUST be represented by a [TypedPropertyValue](#Section_2.15) packet or a [Dictionary](#Section_3.2.2.1.4) packet in the special case of the [Dictionary property](#Section_2.18.1).
+**Property 0 (variable):** Each Property field is a sequence of property values, each of which MUST be represented by a [TypedPropertyValue](#Section_2.15) packet or a [Dictionary](#Section_2.17) packet in the special case of the [Dictionary property](#Section_2.18.1).
 
 <a id="Section_2.21"></a>
 ## 2.21 PropertySetStream
@@ -1759,7 +1759,7 @@ The field **PropertySet 0** has the following subfield values:
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Variable | 0x00000001 (property identifier for the [CodePage property](#Section_2.18.2)) | 0x00000058 |
+| Variable | 0x00000001 (property identifier for the [CodePage property](#Section_3.1.1)) | 0x00000058 |
 | Variable | 0x80000000 (property identifier for the [Locale property](#Section_2.18.3)) | 0x00000060 |
 | Variable | 0x80000001 (property identifier for the Behavior property) | 0x00000068 |
 | Variable | 0x00000000 (property identifier for the [Dictionary property](#Section_2.18.1)) | 0x00000070 |
@@ -1770,7 +1770,7 @@ The field **PropertySet 0** has the following subfield values:
 | Variable | 0x00000027 | 0x00000194 |
 | Variable | 0x00000092 | 0x000001C0 |
 
-**Property 0–9 (496 bytes total at offset 136):** A sequence of 10 [TypedPropertyValue](#Section_2.15) packets, except the Dictionary property, which is a [Dictionary](#Section_3.2.2.1.4) packet, as described in section 3.2.2.1.4.
+**Property 0–9 (496 bytes total at offset 136):** A sequence of 10 [TypedPropertyValue](#Section_2.15) packets, except the Dictionary property, which is a [Dictionary](#Section_2.17) packet, as described in section 3.2.2.1.4.
 
 <a id="Section_3.2.2.1.1"></a>
 ##### 3.2.2.1.1 CodePage
@@ -1841,7 +1841,7 @@ The following table shows the binary contents of the structure representing the 
 <a id="Section_3.2.2.1.4"></a>
 ##### 3.2.2.1.4 Dictionary
 
-The Dictionary property is an instance of the **Dictionary** structure defined in section [2.17](#Section_3.2.2.1.4).
+The Dictionary property is an instance of the **Dictionary** structure defined in section [2.17](#Section_2.17).
 
 **Property identifier:** 0x00000000
 
@@ -1886,7 +1886,7 @@ Note that two of these properties have names that are equal when compared in a m
 <a id="Section_3.2.2.1.4.1"></a>
 ###### 3.2.2.1.4.1 Dictionary Entry 0
 
-Entry 0 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.1).
+Entry 0 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.16).
 
 **Entry offset:** 0x000000A4 (decimal 164)
 
@@ -1911,7 +1911,7 @@ The following table shows the binary contents of the structure representing the 
 <a id="Section_3.2.2.1.4.2"></a>
 ###### 3.2.2.1.4.2 Dictionary Entry 1
 
-Entry 1 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.1).
+Entry 1 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.16).
 
 **Entry offset:** 0x000000C8 (decimal 200)
 
@@ -1934,7 +1934,7 @@ The following table shows the binary contents of the structure representing the 
 <a id="Section_3.2.2.1.4.3"></a>
 ###### 3.2.2.1.4.3 Dictionary Entry 2
 
-Entry 2 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.1).
+Entry 2 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.16).
 
 **Entry offset:** 0x000000E4 (decimal 228)
 
@@ -1957,7 +1957,7 @@ The following table shows the binary contents of the structure representing the 
 <a id="Section_3.2.2.1.4.4"></a>
 ###### 3.2.2.1.4.4 Dictionary Entry 3
 
-Entry 3 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.1).
+Entry 3 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.16).
 
 **Entry offset:** 0x00000104 (decimal 260)
 
@@ -1980,7 +1980,7 @@ The following table shows the binary contents of the structure representing the 
 <a id="Section_3.2.2.1.4.5"></a>
 ###### 3.2.2.1.4.5 Dictionary Entry 4
 
-Entry 4 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.1).
+Entry 4 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.16).
 
 **Entry offset:** 0x000000A4 (decimal 288)
 
@@ -2005,7 +2005,7 @@ The following table shows the binary contents of the structure representing the 
 <a id="Section_3.2.2.1.4.6"></a>
 ###### 3.2.2.1.4.6 Dictionary Entry 5
 
-Entry 5 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.1).
+Entry 5 of the [Dictionary (section 3.2.2.1.4)](#Section_3.2.2.1.4) property is an instance of the **DictionaryEntry** structure defined in section [2.16](#Section_2.16).
 
 **Entry offset:** 0x00000144 (decimal 324)
 
@@ -2295,7 +2295,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <1> Section 2.5: Windows presents properties with [PropertySet](#Section_2.20) VT_LPSTR (0x001E) to applications as null-terminated string values such that the application cannot reliably detect the presence of trailing null characters or any characters following the first embedded null character. Properties with [PropertyType](#Section_2.21) VT_BSTR (0x0008) are presented to the application as a value of type **BSTR** (for more information, see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.5), which is an explicitly-sized string type, and in which an application can detect these characters. Identical behavior also applies to scalar values of type VT_LPSTR or VT_BSTR, respectively, when these values are part of a vector or array property type.
 
-<2> Section 2.18.2: Windows enables applications creating a [**property set**](#gt_property-set) to select whether a property set is [**Unicode**](#gt_unicode), in which case the [CodePage property](#Section_2.18.2) is CP_WINUNICODE (0x04B0). Alternatively, it can select ANSI, in which case the CodePage property is the current ANSI code page identifier for the system.
+<2> Section 2.18.2: Windows enables applications creating a [**property set**](#gt_property-set) to select whether a property set is [**Unicode**](#gt_unicode), in which case the [CodePage property](#Section_3.1.1) is CP_WINUNICODE (0x04B0). Alternatively, it can select ANSI, in which case the CodePage property is the current ANSI code page identifier for the system.
 
 <3> Section 2.18.3: Windows always selects the current user's default locale for the [Locale property](#Section_2.18.3).
 
@@ -2359,7 +2359,7 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [5](#Section_3.2.2.1.3) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
+| [5](#Section_5) Appendix A: Product Behavior | Added Windows Server 2025 to the list of applicable products. | Major |
 
 <a id="revision-history"></a>
 

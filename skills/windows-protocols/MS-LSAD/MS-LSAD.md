@@ -304,7 +304,7 @@ This document uses the following terms:
 **access control list (ACL)**: A list of access control entries (ACEs) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
 
 <a id="gt_account-domain"></a>
-**account domain**: A [**domain**](#gt_domain), identified by a [**security identifier (SID)**](#gt_security-identifier-sid), that is the [**SID**](#gt_security-identifier-sid) namespace for which a given machine is authoritative. The [**account domain**](#gt_account-domain) is the same as the [**primary domain**](#gt_primary-domain) for a [**domain controller (DC)**](#gt_domain-controller-dc) and is its default [**domain**](#gt_domain). For a machine that is joined to a [**domain**](#gt_domain), the [**account domain**](#gt_account-domain) is the [**SID**](#gt_security-identifier-sid) namespace defined by the local Security Accounts Manager [MS-SAMR](#Section_5).
+**account domain**: A [**domain**](#gt_domain), identified by a [**security identifier (SID)**](#gt_security-identifier-sid), that is the [**SID**](#gt_security-identifier-sid) namespace for which a given machine is authoritative. The [**account domain**](#gt_account-domain) is the same as the [**primary domain**](#gt_primary-domain) for a [**domain controller (DC)**](#gt_domain-controller-dc) and is its default [**domain**](#gt_domain). For a machine that is joined to a [**domain**](#gt_domain), the [**account domain**](#gt_account-domain) is the [**SID**](#gt_security-identifier-sid) namespace defined by the local Security Accounts Manager [MS-SAMR](../MS-SAMR/MS-SAMR.md).
 
 <a id="gt_account-object"></a>
 **account object**: An element of a Local Security Authority (LSA) policy database that describes the rights and privileges granted by the server to a [**security principal**](#gt_security-principal). The [**security identifier (SID)**](#gt_security-identifier-sid) of the [**security principal**](#gt_security-principal) matches that of the [**account object**](#gt_account-object).
@@ -512,17 +512,17 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-GPEF] Microsoft Corporation, "[Group Policy: Encrypting File System Extension](../MS-GPEF/MS-GPEF.md)".
 
-[MS-GPSB] Microsoft Corporation, "[Group Policy: Security Protocol Extension](#Section_5)".
+[MS-GPSB] Microsoft Corporation, "[Group Policy: Security Protocol Extension](../MS-GPSB/MS-GPSB.md)".
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-NRPC] Microsoft Corporation, "[Netlogon Remote Protocol](../MS-NRPC/MS-NRPC.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [MS-SMB2] Microsoft Corporation, "[Server Message Block (SMB) Protocol Versions 2 and 3](../MS-SMB2/MS-SMB2.md)".
 
@@ -576,9 +576,9 @@ The following represent primary use cases for remote management:
 - Querying and modifying policy settings unrelated to TDOs, account objects or secret objects, such as lifetimes of Kerberos tickets.
 This protocol is used by Windows clients for the "domain join" operation (as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.4) as an implementation choice to achieve the end state, as specified in [MS-ADTS]. The specific profile of the Local Security Authority (Domain Policy) Remote Protocol for the "domain join" scenario is specified in section [1.6](#Section_1.6) as "Retrieval of policy settings by clients".
 
-The server end of the Local Security Authority (Domain Policy) Remote Protocol can be implemented on a [**domain controller (DC)**](#gt_domain-controller-dc), including [**primary domain controllers (PDCs)**](#gt_primary-domain-controller-pdc), [**backup domain controllers (BDCs)**](#gt_backup-domain-controller-bdc), [**global catalog servers (GC servers)**](#gt_global-catalog-server-gc-server), and [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc), or on a non–domain controller. In the case of a DC, including PDCs, BDCs, GC servers, and RODCs, the server end of this protocol can be in one of the [**forest functional levels**](#gt_forest-functional-level). The behavior of the server end of the Local Security Authority (Domain Policy) Remote Protocol is the same in these cases, except when noted in the message processing descriptions for the methods of this protocol. See sections [3.1.4.4.1](#Section_3.1.4.4.10), [3.1.4.4.3](#Section_3.1.4.4.3), [3.1.4.4.5](#Section_3.1.4.4.5), [3.1.4.7](#Section_2.2.1.1.5), [3.1.4.7.3](#Section_3.1.4.7.3), [3.1.4.7.4](#Section_3.1.4.7.4), [3.1.4.7.10](#Section_3.1.4.7.10), [3.1.4.7.14](#Section_3.1.4.7.14), and [3.1.4.7.16](#Section_3.1.4.7.16) for details.
+The server end of the Local Security Authority (Domain Policy) Remote Protocol can be implemented on a [**domain controller (DC)**](#gt_domain-controller-dc), including [**primary domain controllers (PDCs)**](#gt_primary-domain-controller-pdc), [**backup domain controllers (BDCs)**](#gt_backup-domain-controller-bdc), [**global catalog servers (GC servers)**](#gt_global-catalog-server-gc-server), and [**read-only domain controllers (RODCs)**](#gt_read-only-domain-controller-rodc), or on a non–domain controller. In the case of a DC, including PDCs, BDCs, GC servers, and RODCs, the server end of this protocol can be in one of the [**forest functional levels**](#gt_forest-functional-level). The behavior of the server end of the Local Security Authority (Domain Policy) Remote Protocol is the same in these cases, except when noted in the message processing descriptions for the methods of this protocol. See sections [3.1.4.4.1](#Section_3.1.4.4.1), [3.1.4.4.3](#Section_3.1.4.4.3), [3.1.4.4.5](#Section_3.1.4.4.5), [3.1.4.7](#Section_3.1.4.7), [3.1.4.7.3](#Section_3.1.4.7.3), [3.1.4.7.4](#Section_3.1.4.7.4), [3.1.4.7.10](#Section_3.1.4.7.10), [3.1.4.7.14](#Section_3.1.4.7.14), and [3.1.4.7.16](#Section_3.1.4.7.16) for details.
 
-This protocol is a simple request/response-based RPC protocol. Typically, there are no long-lived sessions, although clients can cache the RPC connection and reuse it over time. A sample sequence of requests and responses is specified in section [4](#Section_5.1.4).
+This protocol is a simple request/response-based RPC protocol. Typically, there are no long-lived sessions, although clients can cache the RPC connection and reuse it over time. A sample sequence of requests and responses is specified in section [4](#Section_4).
 
 It is helpful to consider two perspectives when understanding and implementing this protocol: an object-based perspective and a method-based perspective.
 
@@ -734,11 +734,11 @@ LsarClose: This method releases responder resources associated with the RPC cont
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The Local Security Authority (Domain Policy) Remote Protocol is composed of a subset of [**opnums**](#gt_opnum) in an interface that also includes the Local Security Authority (Translation Methods) Remote Protocol [MS-LSAT](#Section_5).
+The Local Security Authority (Domain Policy) Remote Protocol is composed of a subset of [**opnums**](#gt_opnum) in an interface that also includes the Local Security Authority (Translation Methods) Remote Protocol [MS-LSAT](../MS-LSAT/MS-LSAT.md).
 
 The Local Security Authority (Domain Policy) Remote Protocol is dependent on [**RPC**](#gt_remote-procedure-call-rpc), which is used for communication between [**domain members**](#gt_6234a38c-ed1b-4c69-969f-6e6479566f65) and [**domain controllers**](#gt_domain-controller-dc).
 
-This protocol shares the **Domain Name** field of the abstract data Account Domain Information, as specified in section [3.1.1.1](#Section_3.1.1.7) of this specification, with the Workstation Service Remote Protocol [MS-WKST](../MS-WKST/MS-WKST.md).
+This protocol shares the **Domain Name** field of the abstract data Account Domain Information, as specified in section [3.1.1.1](#Section_3.1.1.1) of this specification, with the Workstation Service Remote Protocol [MS-WKST](../MS-WKST/MS-WKST.md).
 
 This protocol depends on [**Server Message Block (SMB)**](#gt_server-message-block-smb) protocols for sending messages on the wire.
 
@@ -770,7 +770,7 @@ This protocol is applicable to the following two high-level scenarios:
 - Retrieval of policy settings by clients.
 To achieve the first scenario, this entire specification has to be implemented.
 
-To achieve the second scenario, only [**RPC**](#gt_remote-procedure-call-rpc) methods [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.10) or LsarOpenPolicy3, [LsarOpenPolicy (section 3.1.4.4.2)](#Section_3.1.4.4.10), [LsarQueryInformationPolicy2 (section 3.1.4.4.3)](#Section_3.1.4.4.3), [LsarQueryInformationPolicy (section 3.1.4.4.4)](#Section_3.1.4.4.3), and [LsarClose (section 3.1.4.9.4)](#Section_3.1.4.9.4) (and associated data structures specified in these method definitions) have to be implemented by a listener of this protocol.
+To achieve the second scenario, only [**RPC**](#gt_remote-procedure-call-rpc) methods [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.1) or LsarOpenPolicy3, [LsarOpenPolicy (section 3.1.4.4.2)](#Section_3.1.4.4.2), [LsarQueryInformationPolicy2 (section 3.1.4.4.3)](#Section_3.1.4.4.3), [LsarQueryInformationPolicy (section 3.1.4.4.4)](#Section_3.1.4.4.4), and [LsarClose (section 3.1.4.9.4)](#Section_3.1.4.9.4) (and associated data structures specified in these method definitions) have to be implemented by a listener of this protocol.
 
 Although significant protocol functionality is not dependent on server configuration, some functionality might depend on server configuration. Certain aspects of this protocol might depend on the server being a [**DC**](#gt_domain-controller-dc), including [**PDCs**](#gt_primary-domain-controller-pdc), [**BDCs**](#gt_backup-domain-controller-bdc), [**GC servers**](#gt_global-catalog-server-gc-server), and [**RODCs**](#gt_read-only-domain-controller-rodc), or on being a non–DC, and also on the server reaching a certain [**forest functional level**](#gt_forest-functional-level). These requirements are explained in their respective message processing sections.
 
@@ -778,7 +778,7 @@ Although significant protocol functionality is not dependent on server configura
 ## 1.7 Versioning and Capability Negotiation
 
 - **Supported transports**: The protocol runs over [**RPC**](#gt_remote-procedure-call-rpc)-named pipes and TCP/IP, as specified in section [2.1](#Section_2.1).
-- **Protocol version**: This protocol's RPC interface has a single version number, but the interface has been extended by placing additional methods at the end. The use of these methods is specified in section [3.1](#Section_1.3).
+- **Protocol version**: This protocol's RPC interface has a single version number, but the interface has been extended by placing additional methods at the end. The use of these methods is specified in section [3.1](#Section_3.1).
 - **Structure version**: [LSAPR_ACL (section 2.2.3.2)](#Section_2.2.3.2) structures are versioned using the first field in the structure. Only one version of those structures is used in this protocol.
 - **Localization**: This protocol uses text strings in various functions. Localization considerations for such strings are specified in section [3.1.1.2.1](#Section_3.1.1.2.1).
 <a id="Section_1.8"></a>
@@ -820,7 +820,7 @@ The responder MAY use the RPC-provided security-support-provider mechanisms as s
 
 The server SHOULD<6> reject calls that do not use an authentication level of RPC_C_AUTHN_LEVEL_NONE, RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, or RPC_C_AUTHN_LEVEL_PKT_PRIVACY ([MS-RPCE] section 2.2.1.1.8).
 
-Cryptographic operations (as specified in section [5.1](#Section_5)) MUST utilize a session key obtained from the SMB session on the client or server.
+Cryptographic operations (as specified in section [5.1](#Section_5.1)) MUST utilize a session key obtained from the SMB session on the client or server.
 
 This protocol MUST use the [**UUID**](#gt_universally-unique-identifier-uuid) and version number as follows:
 
@@ -849,24 +849,24 @@ Constant value definitions:
 
 - [ACCESS_MASK (section 2.2.1.1)](#Section_2.2.1.1)
 - [POLICY_SYSTEM_ACCESS_MODE (section 2.2.1.2)](#Section_2.2.1.2)
-- [SECURITY_INFORMATION (section 2.2.1.3)](#Section_5)
+- [SECURITY_INFORMATION (section 2.2.1.3)](#Section_2.2.1.3)
 - AEAD-AES-256-CBC-HMAC-SHA512 Constants (section 2.2.1.4)<9>
 Basic data types:
 
 - [LSAPR_HANDLE (section 2.2.2.1)](#Section_2.2.2.1)
-- [PLSAPR_HANDLE (section 2.2.2.2)](#Section_2.2.2.1)
+- [PLSAPR_HANDLE (section 2.2.2.2)](#Section_2.2.2.2)
 - [LSA_UNICODE_STRING (section 2.2.2.3)](#Section_2.2.2.3)
 - [LSAPR_OBJECT_ATTRIBUTES (section 2.2.2.4)](#Section_2.2.2.4)
-- [LSAPR_SR_SECURITY_DESCRIPTOR (section 2.2.2.5)](#Section_5)
+- [LSAPR_SR_SECURITY_DESCRIPTOR (section 2.2.2.5)](#Section_2.2.2.5)
 Data types referenced by basic data types:
 
 - [STRING (section 2.2.3.1)](#Section_2.2.3.1)
 - [LSAPR_ACL (section 2.2.3.2)](#Section_2.2.3.2)
-- [SECURITY_DESCRIPTOR_CONTROL (section 2.2.3.3)](#Section_5)
-- [LSAPR_SECURITY_DESCRIPTOR (section 2.2.3.4)](#Section_5)
-- [SECURITY_IMPERSONATION_LEVEL (section 2.2.3.5)](#Section_5)
-- [SECURITY_CONTEXT_TRACKING_MODE (section 2.2.3.6)](#Section_5)
-- [SECURITY_QUALITY_OF_SERVICE (section 2.2.3.7)](#Section_5)
+- [SECURITY_DESCRIPTOR_CONTROL (section 2.2.3.3)](#Section_2.2.3.3)
+- [LSAPR_SECURITY_DESCRIPTOR (section 2.2.3.4)](#Section_2.2.3.4)
+- [SECURITY_IMPERSONATION_LEVEL (section 2.2.3.5)](#Section_2.2.3.5)
+- [SECURITY_CONTEXT_TRACKING_MODE (section 2.2.3.6)](#Section_2.2.3.6)
+- [SECURITY_QUALITY_OF_SERVICE (section 2.2.3.7)](#Section_2.2.3.7)
 Policy query/set data types:
 
 - [POLICY_INFORMATION_CLASS (section 2.2.4.1)](#Section_2.2.4.1)
@@ -877,7 +877,7 @@ Policy query/set data types:
 - [LSAPR_POLICY_ACCOUNT_DOM_INFO (section 2.2.4.6)](#Section_2.2.4.6)
 - [LSAPR_POLICY_PD_ACCOUNT_INFO (section 2.2.4.7)](#Section_2.2.4.7)
 - [POLICY_LSA_SERVER_ROLE (section 2.2.4.8)](#Section_2.2.4.8)
-- [POLICY_LSA_SERVER_ROLE_INFO (section 2.2.4.9)](#Section_2.2.4.8)
+- [POLICY_LSA_SERVER_ROLE_INFO (section 2.2.4.9)](#Section_2.2.4.9)
 - [LSAPR_POLICY_REPLICA_SRCE_INFO (section 2.2.4.10)](#Section_2.2.4.10)
 - [POLICY_MODIFICATION_INFO (section 2.2.4.11)](#Section_2.2.4.11)
 - [POLICY_AUDIT_FULL_SET_INFO (section 2.2.4.12)](#Section_2.2.4.12)
@@ -908,11 +908,11 @@ Trusted domain query/set data types:
 - [LSAPR_TRUSTED_CONTROLLERS_INFO (section 2.2.7.5)](#Section_2.2.7.5)
 - [TRUSTED_POSIX_OFFSET_INFO (section 2.2.7.6)](#Section_2.2.7.6)
 - [LSAPR_TRUSTED_PASSWORD_INFO (section 2.2.7.7)](#Section_2.2.7.7)
-- [LSAPR_TRUSTED_DOMAIN_INFORMATION_BASIC (section 2.2.7.8)](#Section_2.2.7.3)
-- [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX (section 2.2.7.9)](#Section_2.2.7.3)
-- [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX2 (section 2.2.7.10)](#Section_2.2.7.3)
+- [LSAPR_TRUSTED_DOMAIN_INFORMATION_BASIC (section 2.2.7.8)](#Section_2.2.7.8)
+- [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX (section 2.2.7.9)](#Section_2.2.7.9)
+- [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX2 (section 2.2.7.10)](#Section_2.2.7.10)
 - [LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION (section 2.2.7.11)](#Section_2.2.7.11)
-- [LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL (section 2.2.7.12)](#Section_2.2.7.11)
+- [LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL (section 2.2.7.12)](#Section_2.2.7.12)
 - [LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION (section 2.2.7.13)](#Section_2.2.7.13)
 - [LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL (section 2.2.7.14)](#Section_2.2.7.14)
 - [LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION2 (section 2.2.7.15)](#Section_2.2.7.15)
@@ -920,9 +920,9 @@ Trusted domain query/set data types:
 - [LSAPR_AUTH_INFORMATION (section 2.2.7.17)](#Section_2.2.7.17)
 - [TRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES (section 2.2.7.18)](#Section_2.2.7.18)
 - [LSAPR_TRUSTED_ENUM_BUFFER (section 2.2.7.19)](#Section_2.2.7.19)
-- [LSAPR_TRUSTED_ENUM_BUFFER_EX (section 2.2.7.20)](#Section_2.2.7.19)
+- [LSAPR_TRUSTED_ENUM_BUFFER_EX (section 2.2.7.20)](#Section_2.2.7.20)
 - [LSA_FOREST_TRUST_RECORD (section 2.2.7.21)](#Section_2.2.7.21)
-- [LSA_FOREST_TRUST_RECORD_TYPE (section 2.2.7.22)](#Section_2.2.7.21)
+- [LSA_FOREST_TRUST_RECORD_TYPE (section 2.2.7.22)](#Section_2.2.7.22)
 - [LSA_FOREST_TRUST_BINARY_DATA (section 2.2.7.23)](#Section_2.2.7.23)
 - [LSA_FOREST_TRUST_DOMAIN_INFO (section 2.2.7.24)](#Section_2.2.7.24)
 - [LSA_FOREST_TRUST_INFORMATION (section 2.2.7.25)](#Section_2.2.7.25)
@@ -1152,7 +1152,7 @@ This section provides a cross reference of Flag values with associated descripti
 | LSA_NB_DISABLED_ADMIN 0x00000004 | The domain information trust record is disabled by the domain administrator. **Note** This flag MUST be used with a forest trust record of type ForestTrustDomainInfo only (section 2.2.7.24). |
 | LSA_NB_DISABLED_CONFLICT 0x00000008 | The domain information trust record is disabled due to a conflict. **Note** This flag MUST be used with a forest trust record of type ForestTrustDomainInfo only (section 2.2.7.24). |
 | LSA_FTRECORD_DISABLED_REASONS 0x0000FFFF | The domain information trust record is disabled. **Note** This set of flags is reserved; for current and future reasons, the trust is disabled. |
-| LSA_SCANNER_INFO_DISABLE_AUTH_TARGET_VALIDATION (0x00000001) | Domain name validation during NTLM pass-through authentication is disabled. This flag can be set and queried on ForestTrustScannerInfo records (sections [2.2.7.22](#Section_2.2.7.21) and [2.2.7.31](#Section_2.2.7.31)), but otherwise MUST be ignored. |
+| LSA_SCANNER_INFO_DISABLE_AUTH_TARGET_VALIDATION (0x00000001) | Domain name validation during NTLM pass-through authentication is disabled. This flag can be set and queried on ForestTrustScannerInfo records (sections [2.2.7.22](#Section_2.2.7.22) and [2.2.7.31](#Section_2.2.7.31)), but otherwise MUST be ignored. |
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Basic Data Types
@@ -1260,7 +1260,7 @@ ULONG SupportedFeatures;
 | Value | Meaning |
 | --- | --- |
 | 0x00000001 | Upon receipt by the client, this value, when set, indicates that the client SHOULD use AES encryption with the LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL_AES structure (section [2.2.7.29](#Section_2.2.7.29)) to encrypt password buffers when sent over the wire. Also see AES Cipher Usage (section [5.1.5](#Section_5.1.5)). |
-| 0x00000002 | Upon receipt by the client, this value, when set, indicates that the client can use authentication other than the RPC_C_AUTHN_NETLOGON security provider when it calls LsarLookupNames4 and LsarLookupSids3 ([MS-LSAT](#Section_5) sections 3.1.4.5 and 3.1.4.9). It also indicates that the server supports the method LsarOpenPolicyWithCreds (section [3.1.4.4.10](#Section_3.1.4.4.10)).<20> |
+| 0x00000002 | Upon receipt by the client, this value, when set, indicates that the client can use authentication other than the RPC_C_AUTHN_NETLOGON security provider when it calls LsarLookupNames4 and LsarLookupSids3 ([MS-LSAT](../MS-LSAT/MS-LSAT.md) sections 3.1.4.5 and 3.1.4.9). It also indicates that the server supports the method LsarOpenPolicyWithCreds (section [3.1.4.4.10](#Section_3.1.4.4.10)).<20> |
 | 0x00000004 | Upon receipt by the client, this value, when set, indicates that the client SHOULD use AES encryption with the LSAPR_AES_CIPHER_VALUE structure (section [2.2.6.2](#Section_2.2.6.2)) to encrypt private data when sent over the wire. Also see AES Cipher Usage (section 5.1.5).<21> |
 
 <a id="Section_2.2.2.7"></a>
@@ -1381,7 +1381,7 @@ PLSAPR_ACL Dacl;
 
 **Sbz1:** This field is used for alignment. This field MUST be ignored. The content is unspecified, and no requirements are placed on its value because it is never used.
 
-**Control:** A set of flags (as specified in section [2.2.3.3](#Section_5)) that qualify the meaning of the security descriptor or its individual fields.
+**Control:** A set of flags (as specified in section [2.2.3.3](#Section_2.2.3.3)) that qualify the meaning of the security descriptor or its individual fields.
 
 **Owner:** A pointer to the RPC_SID structure that represents an object's owner as a [**SID**](#gt_security-identifier-sid).
 
@@ -1467,9 +1467,9 @@ unsigned char EffectiveOnly;
 
 **Length:** This value MUST be ignored. No requirements are placed on its value because it is never used.
 
-**ImpersonationLevel:** This field contains information (as specified in section [2.2.3.5](#Section_5)) given to the server about the client that describes how the server can represent, or impersonate, the client.
+**ImpersonationLevel:** This field contains information (as specified in section [2.2.3.5](#Section_2.2.3.5)) given to the server about the client that describes how the server can represent, or impersonate, the client.
 
-**ContextTrackingMode:** This field specifies how the server tracks changes to the client's security context (as specified in section [2.2.3.6](#Section_5)).
+**ContextTrackingMode:** This field specifies how the server tracks changes to the client's security context (as specified in section [2.2.3.6](#Section_2.2.3.6)).
 
 **EffectiveOnly:** This field specifies whether the server can enable or disable [**privileges**](#gt_privilege) and groups that the client's security context might include. This value MUST be TRUE (nonzero) if the server has this right; otherwise, it MUST be FALSE (0).
 
@@ -2338,7 +2338,7 @@ unsigned char* Buffer;
 
 **MaximumLength:** This field contains the number of allocated bytes in the **Buffer** field.<30>
 
-**Buffer:** This field contains the actual secret data. If the value of the **MaximumLength** field is greater than 0, this field MUST contain a non-NULL value. This field is always encrypted using algorithms as specified in section [5.1.2](#Section_5.1.4.2).
+**Buffer:** This field contains the actual secret data. If the value of the **MaximumLength** field is greater than 0, this field MUST contain a non-NULL value. This field is always encrypted using algorithms as specified in section [5.1.2](#Section_5.1.2).
 
 <a id="Section_2.2.6.2"></a>
 #### 2.2.6.2 LSAPR_AES_CIPHER_VALUE
@@ -2547,19 +2547,19 @@ LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL_AES TrustedFullInfoInternalAes
 
 **TrustedPasswordInfo:** An instance of the LSAPR_TRUSTED_PASSWORD_INFO structure specified in section [2.2.7.7](#Section_2.2.7.7).
 
-**TrustedDomainInfoBasic:** An instance of the LSAPR_TRUSTED_DOMAIN_INFORMATION_BASIC structure specified in section [2.2.7.8](#Section_2.2.7.3).
+**TrustedDomainInfoBasic:** An instance of the LSAPR_TRUSTED_DOMAIN_INFORMATION_BASIC structure specified in section [2.2.7.8](#Section_2.2.7.8).
 
-**TrustedDomainInfoEx:** An instance of the LSAPR_TRUSTED_DOMAIN_INFORMATION_EX structure specified in section [2.2.7.9](#Section_2.2.7.3).
+**TrustedDomainInfoEx:** An instance of the LSAPR_TRUSTED_DOMAIN_INFORMATION_EX structure specified in section [2.2.7.9](#Section_2.2.7.9).
 
 **TrustedAuthInfo:** An instance of the LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION structure specified in section [2.2.7.11](#Section_2.2.7.11).
 
 **TrustedFullInfo:** An instance of the LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION structure specified in section [2.2.7.13](#Section_2.2.7.13).
 
-**TrustedAuthInfoInternal:** An instance of the LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL structure specified in section [2.2.7.12](#Section_2.2.7.11).
+**TrustedAuthInfoInternal:** An instance of the LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL structure specified in section [2.2.7.12](#Section_2.2.7.12).
 
 **TrustedFullInfoInternal:** An instance of the LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL structure specified in section [2.2.7.14](#Section_2.2.7.14).
 
-**TrustedDomainInfoEx2:** An instance of the LSAPR_TRUSTED_DOMAIN_INFORMATION_EX2 structure specified in section [2.2.7.10](#Section_2.2.7.3).
+**TrustedDomainInfoEx2:** An instance of the LSAPR_TRUSTED_DOMAIN_INFORMATION_EX2 structure specified in section [2.2.7.10](#Section_2.2.7.10).
 
 **TrustedFullInfo2:** An instance of the LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION2 structure specified in section [2.2.7.15](#Section_2.2.7.15).
 
@@ -2669,7 +2669,7 @@ unsigned long TrustAttributes;
 
 *PLSAPR_TRUSTED_DOMAIN_INFORMATION_EX;
 
-**Name:** The [**DNS name**](#gt_dns-name) of the domain. Maps to the **Name** field, as specified in section [3.1.1.5](#Section_3.1.1.7).
+**Name:** The [**DNS name**](#gt_dns-name) of the domain. Maps to the **Name** field, as specified in section [3.1.1.5](#Section_3.1.1.5).
 
 **FlatName:** The NetBIOS name of the trusted domain, as specified in [[RFC1088]](https://go.microsoft.com/fwlink/?LinkId=90266). Maps to the **Flat Name** field, as specified in section 3.1.1.5.
 
@@ -2817,13 +2817,13 @@ unsigned long ForestTrustLength;
 
 *PLSAPR_TRUSTED_DOMAIN_INFORMATION_EX2;
 
-**Name:** The [**DNS name**](#gt_dns-name) of the domain. Maps to the **Name** field, as specified in section [3.1.1.5](#Section_3.1.1.7).
+**Name:** The [**DNS name**](#gt_dns-name) of the domain. Maps to the **Name** field, as specified in section [3.1.1.5](#Section_3.1.1.5).
 
 **FlatName:** The NetBIOS name of the trusted domain, as specified in [[RFC1088]](https://go.microsoft.com/fwlink/?LinkId=90266). Maps to the **Flat Name** field, as specified in section 3.1.1.5.
 
 **Sid:** The domain [**SID**](#gt_security-identifier-sid). Maps to the **Security Identifier** field, as specified in section 3.1.1.5.
 
-**TrustDirection:** This field contains bitmapped values that define the properties of the direction of trust between the local domain and the named domain. See section [2.2.7.9](#Section_2.2.7.3) for valid values and a description of each flag. Maps to the Trusted Direction field, as specified in section 3.1.1.5.
+**TrustDirection:** This field contains bitmapped values that define the properties of the direction of trust between the local domain and the named domain. See section [2.2.7.9](#Section_2.2.7.9) for valid values and a description of each flag. Maps to the Trusted Direction field, as specified in section 3.1.1.5.
 
 **TrustType:** This field specifies the type of trust between the local domain and the named domain. See section 2.2.7.9 for valid values and a description of each value. Maps to the Trusted Type field, as specified in section 3.1.1.5.
 
@@ -2836,7 +2836,7 @@ unsigned long ForestTrustLength;
 <a id="Section_2.2.7.11"></a>
 #### 2.2.7.11 LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION
 
-The LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION structure communicates authentication material. The following structure corresponds to the TrustedDomainAuthInformation information class. [**Domain**](#gt_domain) [**trust**](#gt_trust) authentication is specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.6.9.1. This structure maps to the Incoming and Outgoing Trust Password fields, as specified in section [3.1.1.5](#Section_3.1.1.7).
+The LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION structure communicates authentication material. The following structure corresponds to the TrustedDomainAuthInformation information class. [**Domain**](#gt_domain) [**trust**](#gt_trust) authentication is specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.6.9.1. This structure maps to the Incoming and Outgoing Trust Password fields, as specified in section [3.1.1.5](#Section_3.1.1.5).
 
 typedef struct _LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION {
 
@@ -2900,7 +2900,7 @@ LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION AuthInformation;
 
 *PLSAPR_TRUSTED_DOMAIN_FULL_INFORMATION;
 
-**Information:** A structure containing name, [**SID**](#gt_security-identifier-sid), and [**trust attributes**](#gt_trust-attributes), as specified in section [2.2.7.9](#Section_2.2.7.3).
+**Information:** A structure containing name, [**SID**](#gt_security-identifier-sid), and [**trust attributes**](#gt_trust-attributes), as specified in section [2.2.7.9](#Section_2.2.7.9).
 
 **PosixOffset:** Any offset required for POSIX compliance, as specified in section [2.2.7.6](#Section_2.2.7.6).
 
@@ -2923,11 +2923,11 @@ LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL AuthInformation;
 
 *PLSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL;
 
-**Information:** A structure containing name, [**SID**](#gt_security-identifier-sid), and [**trust attributes**](#gt_trust-attributes), as specified in section [2.2.7.9](#Section_2.2.7.3).
+**Information:** A structure containing name, [**SID**](#gt_security-identifier-sid), and [**trust attributes**](#gt_trust-attributes), as specified in section [2.2.7.9](#Section_2.2.7.9).
 
 **PosixOffset:** Any offset required for POSIX compliance, as specified in section [2.2.7.6](#Section_2.2.7.6).
 
-**AuthInformation:** Authentication material, as specified in section [2.2.7.12](#Section_2.2.7.11).
+**AuthInformation:** Authentication material, as specified in section [2.2.7.12](#Section_2.2.7.12).
 
 <a id="Section_2.2.7.15"></a>
 #### 2.2.7.15 LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION2
@@ -2946,7 +2946,7 @@ LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION AuthInformation;
 
 *PLSAPR_TRUSTED_DOMAIN_FULL_INFORMATION2;
 
-**Information:** A structure containing name, [**SID**](#gt_security-identifier-sid), and [**trust attributes**](#gt_trust-attributes), as specified in section [2.2.7.10](#Section_2.2.7.3).
+**Information:** A structure containing name, [**SID**](#gt_security-identifier-sid), and [**trust attributes**](#gt_trust-attributes), as specified in section [2.2.7.10](#Section_2.2.7.10).
 
 **PosixOffset:** Any offset required for POSIX compliance, as specified in section [2.2.7.6](#Section_2.2.7.6).
 
@@ -3143,7 +3143,7 @@ unsigned long EntriesRead;
 <a id="Section_2.2.7.20"></a>
 #### 2.2.7.20 LSAPR_TRUSTED_ENUM_BUFFER_EX
 
-The LSAPR_TRUSTED_ENUM_BUFFER_EX structure specifies a collection of [**trust**](#gt_trust) information structures of type [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX](#Section_2.2.7.3).
+The LSAPR_TRUSTED_ENUM_BUFFER_EX structure specifies a collection of [**trust**](#gt_trust) information structures of type [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX](#Section_2.2.7.9).
 
 typedef struct _LSAPR_TRUSTED_ENUM_BUFFER_EX {
 
@@ -3198,7 +3198,7 @@ LSA_FOREST_TRUST_SCANNER_INFO ScannerInfo;
 
 **Flags:** Contains zero or more flags from LSA Trust Record Flags (section [2.2.1.5](#Section_2.2.1.5)). See the **Meaning** column in the table of that section for related information.
 
-**ForestTrustType:** This value is one of [LSA_FOREST_TRUST_RECORD_TYPE](#Section_2.2.7.21).
+**ForestTrustType:** This value is one of [LSA_FOREST_TRUST_RECORD_TYPE](#Section_2.2.7.22).
 
 **Time:** The date and time when this entry was created. It is a 64-bit value that represents the number of 100-nanosecond intervals since January 1, 1601, [**UTC**](#gt_coordinated-universal-time-utc).
 
@@ -3411,7 +3411,7 @@ LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL_AES AuthInformation;
 
 } LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL_AES, *PLSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL_AES;
 
-**Information:** A structure containing **Name**, **Sid**, and **TrustAttributes**, as specified in section [2.2.7.9](#Section_2.2.7.3).
+**Information:** A structure containing **Name**, **Sid**, and **TrustAttributes**, as specified in section [2.2.7.9](#Section_2.2.7.9).
 
 **PosixOffset:** Consists of any offset required for POSIX compliance, as specified in section [2.2.7.6](#Section_2.2.7.6).
 
@@ -3483,7 +3483,7 @@ LSA_FOREST_TRUST_SCANNER_INFO ScannerInfo;
 
 **Flags**: Contains zero or more flags from LSA Trust Record Flags (section [2.2.1.5](#Section_2.2.1.5)). For more information, see the **Meaning** column in the table of that section.
 
-**ForestTrustType**: This value is one of LSA_FOREST_TRUST_RECORD_TYPE (section [2.2.7.22](#Section_2.2.7.21)).
+**ForestTrustType**: This value is one of LSA_FOREST_TRUST_RECORD_TYPE (section [2.2.7.22](#Section_2.2.7.22)).
 
 **Time**: The date and time when this entry was created. It is a 64-bit value that represents the number of 100-nanosecond intervals since January 1, 1601, UTC.
 
@@ -3571,7 +3571,7 @@ The Local Security Authority (Domain Policy) Remote Protocol defines an abstract
 
 This data model MUST consist of variables whose values are maintained across system restarts and [**RPC**](#gt_remote-procedure-call-rpc) method invocations and that store those values for retrieval and update, unless otherwise specified.
 
-**Note** The abstract notation (Public) indicates that this Abstract Data Model element can be directly accessed from outside this protocol, for the purpose of documentary convenience. Such direct access MUST NOT be construed as a relaxation of the security constraints specified within this document; rather, the same authorization decisions that are applied when clients access such data elements using protocol primitives MUST also be applied during direct access of the elements. See section [3.1.1.10](#Section_3.1.1.10.1.1) for more details.
+**Note** The abstract notation (Public) indicates that this Abstract Data Model element can be directly accessed from outside this protocol, for the purpose of documentary convenience. Such direct access MUST NOT be construed as a relaxation of the security constraints specified within this document; rather, the same authorization decisions that are applied when clients access such data elements using protocol primitives MUST also be applied during direct access of the elements. See section [3.1.1.10](#Section_3.1.1.10) for more details.
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Policy Object Data Model
@@ -3622,7 +3622,7 @@ For domain-joined machines, Primary Domain Information and DNS Domain Informatio
 
 The value of the Server Role Information ADM element is determined by the following series of calls to the local SAM Remote Protocol implementation:
 
-- Invoke **SamrConnect** ([MS-SAMR](#Section_5) section 3.1.5.1.4), specifying SAM_SERVER_CONNECT for the *DesiredAccess* parameter.
+- Invoke **SamrConnect** ([MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.5.1.4), specifying SAM_SERVER_CONNECT for the *DesiredAccess* parameter.
 - Invoke **SamrLookupDomainInSamServer** ([MS-SAMR] section 3.1.5.11.1), specifying the **Name** field of the Primary Domain Information ADM element for the *Name* parameter
 - Invoke **SamrOpenDomain** ([MS-SAMR] section 3.1.5.1.5), specifying the *ServerHandle* that was obtained in step 1, DOMAIN_ALL_ACCESS for the *DesiredAccess* parameter, and the *DomainId* that was obtained in step 2.
 - Invoke **SamrQueryInformationDomain2** ([MS-SAMR] section 3.1.5.5.1), specifying the *DomainHandle* that was obtained in step 3, and DomainServerRoleInformation for the *DomainInformationClass* parameter.
@@ -3642,7 +3642,7 @@ For domain-joined machines, the **Machine Account Information** abstract data co
 <a id="Section_3.1.1.2"></a>
 #### 3.1.1.2 Accounts Rights Data Model
 
-Account Rights is composed of two submodels, Privilege and System Access Rights. When used with [**account objects**](#gt_account-object), they can be used separately in messages, as in [LsarEnumeratePrivileges](#Section_3.1.4.5.4) and [LsarGetSystemAccessAccount](#Section_3.1.4.5.7), or together, as in [LsarAddAccountRights](#Section_3.1.4.5.11). The **Name** fields in the following data models are used to identify the [**privilege**](#gt_privilege) or system access right uniquely.
+Account Rights is composed of two submodels, Privilege and System Access Rights. When used with [**account objects**](#gt_account-object), they can be used separately in messages, as in [LsarEnumeratePrivileges](#Section_3.1.4.8.1) and [LsarGetSystemAccessAccount](#Section_3.1.4.5.7), or together, as in [LsarAddAccountRights](#Section_3.1.4.5.11). The **Name** fields in the following data models are used to identify the [**privilege**](#gt_privilege) or system access right uniquely.
 
 <a id="Section_3.1.1.2.1"></a>
 ##### 3.1.1.2.1 Privilege Data Model
@@ -3740,7 +3740,7 @@ Inside the Local Security Authority (Domain Policy) Remote Protocol database, th
 
 The **Security Identifier** field identifies the account object and MUST be present. Two different account objects MUST NOT have the same [**security identifier (SID)**](#gt_security-identifier-sid). The **Security Identifier** field MUST be read-only. Any valid SID can be used to identify an account object.
 
-The **Security Descriptor** field controls access to the account object. Every account object in the Local Security Authority (Domain Policy) Remote Protocol database MUST have a valid [**security descriptor**](#gt_security-descriptor). The security descriptor can be queried by calling the [LsarQuerySecurityObject](#Section_5) method and changed by calling the [LsarSetSecurityObject](#Section_5) method. The server MUST assign a default security descriptor to every newly created account object, even if the client did not specify a default value.<50>
+The **Security Descriptor** field controls access to the account object. Every account object in the Local Security Authority (Domain Policy) Remote Protocol database MUST have a valid [**security descriptor**](#gt_security-descriptor). The security descriptor can be queried by calling the [LsarQuerySecurityObject](#Section_3.1.4.9.1) method and changed by calling the [LsarSetSecurityObject](#Section_3.1.4.9.2) method. The server MUST assign a default security descriptor to every newly created account object, even if the client did not specify a default value.<50>
 
 The **Privileges** field is a potentially empty set of "global" rights granted to the account by the server. Every "right" in the set is a pair of a [**LUIDs**](#gt_locally-unique-identifier-luid) and a bitmask of attributes. The right can be controlled by calling the [LsarAddAccountRights](#Section_3.1.4.5.11), [LsarAddPrivilegesToAccount](#Section_3.1.4.5.5), [LsarRemoveAccountRights](#Section_3.1.4.5.12), and [LsarRemovePrivilegesFromAccount](#Section_3.1.4.5.6) methods. Because there are no "negative" rights, the order of rights in the set is not relevant and the server MUST NOT associate any special semantics with the order of rights.
 
@@ -3801,7 +3801,7 @@ Global Secret: Replicates between [**domain controllers**](#gt_domain-controller
 
 Trusted Domain Secret: Used with [**trusted domain objects**](#gt_trusted-domain-object-tdo) to store [**trust**](#gt_trust) passwords. Trusted domain secrets also replicate between domain controllers in the same domain.<52>
 
-The [**security descriptor**](#gt_security-descriptor) field controls access to the secret object. Every secret object in the Local Security Authority (Domain Policy) Remote Protocol database that has Local Secret type MUST have a valid security descriptor. The security descriptor of Local Secret objects can be queried by calling the [LsarQuerySecurityObject (section 3.1.4.9.1)](#Section_5) method and changed by calling the [LsarSetSecurityObject (section 3.1.4.9.2)](#Section_5) method. The server MUST assign a default security descriptor to every newly created secret object, even if the client did not specify a default value.<53>
+The [**security descriptor**](#gt_security-descriptor) field controls access to the secret object. Every secret object in the Local Security Authority (Domain Policy) Remote Protocol database that has Local Secret type MUST have a valid security descriptor. The security descriptor of Local Secret objects can be queried by calling the [LsarQuerySecurityObject (section 3.1.4.9.1)](#Section_3.1.4.9.1) method and changed by calling the [LsarSetSecurityObject (section 3.1.4.9.2)](#Section_3.1.4.9.2) method. The server MUST assign a default security descriptor to every newly created secret object, even if the client did not specify a default value.<53>
 
 The value of a secret is a byte BLOB. Depending on the caller's choices, the server stores 0, 1, or 2 values for the secret, the 2 values being "current" and "previous" and 1 value being either "current" or "previous". Both versions of the secret's value are accompanied by a 64-bit time stamp in [**Coordinated Universal Time (UTC)**](#gt_coordinated-universal-time-utc), sometimes referred to as Greenwich Mean Time, in units of 100 nanoseconds since January 1, 1601.
 
@@ -3817,7 +3817,7 @@ Inside the Local Security Authority (Domain Policy) Remote Protocol database, a 
 | Name ([MS-ADTS] section 6.1.6.7.13) | RPC_UNICODE_STRING | trustPartner ([MS-ADA3] section 2.325) |
 | Flat Name ([MS-ADTS] section 6.1.6.7.1) | RPC_UNICODE_STRING | flatName ([MS-ADA1] section 2.232) |
 | Security Identifier ([MS-ADTS] section 6.1.6.7.8) | RPC_SID | securityIdentifier ([MS-ADA3] section 2.237) |
-| Trust Type ([MS-ADTS] section 6.1.6.7.15) | unsigned int (as specified in section [2.2.7.9](#Section_2.2.7.3) TrustType) | trustType ([MS-ADA3] section 2.327) |
+| Trust Type ([MS-ADTS] section 6.1.6.7.15) | unsigned int (as specified in section [2.2.7.9](#Section_2.2.7.9) TrustType) | trustType ([MS-ADA3] section 2.327) |
 | Trust Direction ([MS-ADTS] section 6.1.6.7.12) | unsigned int (as specified in section 2.2.7.9 TrustDirection) | trustDirection ([MS-ADA3] section 2.323) |
 | Trust Attributes ([MS-ADTS] section 6.1.6.7.9) | unsigned int (as specified in section 2.2.7.9 TrustAttributes) | trustAttributes ([MS-ADA3] section 2.320) |
 | Posix Offset ([MS-ADTS] section 6.1.6.7.14) | [TRUSTED_POSIX_OFFSET_INFO](#Section_2.2.7.6) | trustPosixOffset ([MS-ADA3] section 2.326) |
@@ -3825,7 +3825,7 @@ Inside the Local Security Authority (Domain Policy) Remote Protocol database, a 
 | Trust Outgoing Passwords ([MS-ADTS] section 6.1.6.7.11) | Array of LSAPR_AUTH_INFORMATION | trustAuthOutgoing ([MS-ADA3] section 2.322) |
 | Supported Encryption Types ([MS-ADTS] section 6.1.6.7.3) | [TRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES](#Section_2.2.7.18) | msDS-SupportedEncryptionTypes ([MS-ADA2] section 2.481) |
 | Forest Trust Information ([MS-ADTS] section 6.1.6.7.4) | [LSA_FOREST_TRUST_INFORMATION2](#Section_2.2.7.33) | msDS-TrustForestTrustInfo ([MS-ADA2] section 2.496) |
-| Security Descriptor ([MS-ADTS] section 6.1.6.7.5) | [LSAPR_SR_SECURITY_DESCRIPTOR](#Section_5) | nTSecurityDescriptor ([MS-ADA3] section 2.37) |
+| Security Descriptor ([MS-ADTS] section 6.1.6.7.5) | [LSAPR_SR_SECURITY_DESCRIPTOR](../MS-ADTS/MS-ADTS.md) | nTSecurityDescriptor ([MS-ADA3] section 2.37) |
 
 The following citation contains a timeline of when each information value was introduced.<54>
 
@@ -3839,7 +3839,7 @@ The following citation contains a timeline of when each information value was in
 | --- | --- |
 | LsaRestrictAnonymous | Boolean |
 
-The LsaRestrictAnonymous setting is used to restrict the ability of anonymous requestors to query or modify security-sensitive data.<55> See sections [3.1.4.4.1](#Section_3.1.4.4.10), [3.1.4.5.1](#Section_3.1.4.5.1), [3.1.4.5.2](#Section_3.1.4.5.2), [3.1.4.5.3](#Section_3.1.4.5.3), [3.1.4.5.10](#Section_3.1.4.5.10), [3.1.4.5.12](#Section_3.1.4.5.12), [3.1.4.6.1](#Section_3.1.4.6.1), [3.1.4.6.2](#Section_3.1.4.6.2), and [3.1.4.6.6](#Section_3.1.4.6.6) for information on how message processing is affected with this setting. The server message-processing behavior MUST always reflect the current value of this setting.
+The LsaRestrictAnonymous setting is used to restrict the ability of anonymous requestors to query or modify security-sensitive data.<55> See sections [3.1.4.4.1](#Section_3.1.4.4.1), [3.1.4.5.1](#Section_3.1.4.5.1), [3.1.4.5.2](#Section_3.1.4.5.2), [3.1.4.5.3](#Section_3.1.4.5.3), [3.1.4.5.10](#Section_3.1.4.5.10), [3.1.4.5.12](#Section_3.1.4.5.12), [3.1.4.6.1](#Section_3.1.4.6.1), [3.1.4.6.2](#Section_3.1.4.6.2), and [3.1.4.6.6](#Section_3.1.4.6.6) for information on how message processing is affected with this setting. The server message-processing behavior MUST always reflect the current value of this setting.
 
 This setting MUST be persisted across protocol and system restarts.
 
@@ -3890,16 +3890,16 @@ The following classes are referenced by this protocol (listed by ldapDisplayName
 <a id="Section_3.1.1.10"></a>
 #### 3.1.1.10 Access for Public Abstract Data Model Elements
 
-As described in section [3.1.1](#Section_3.1.1), direct access (query or set) of data elements tagged as "(Public)" MUST use the same authorization policies, enforced as if the elements were being accessed via the [**RPC**](#gt_remote-procedure-call-rpc)-based protocol methods in this document. The calling patterns described in section [1.3](#Section_1.3) provide an overview for understanding the basic flow of the query and set patterns. Section [3.1.1.10.1](#Section_3.1.1.10.1.1) provides detailed examples for the Policy Object Data Model (section [3.1.1.1](#Section_3.1.1.7)); the other object types use similar patterns.
+As described in section [3.1.1](#Section_3.1.1), direct access (query or set) of data elements tagged as "(Public)" MUST use the same authorization policies, enforced as if the elements were being accessed via the [**RPC**](#gt_remote-procedure-call-rpc)-based protocol methods in this document. The calling patterns described in section [1.3](#Section_1.3) provide an overview for understanding the basic flow of the query and set patterns. Section [3.1.1.10.1](#Section_3.1.1.10.1) provides detailed examples for the Policy Object Data Model (section [3.1.1.1](#Section_3.1.1.1)); the other object types use similar patterns.
 
 The following table describes the level of access that MUST be enforced during direct access of the described public ADM elements.
 
 | Object type | DesiredAccess required for Query pattern | DesiredAccess required for Set pattern |
 | --- | --- | --- |
 | Policy (section 3.1.1.1) | POLICY_VIEW_AUDIT_INFORMATION \| POLICY_GET_PRIVATE_INFORMATION \| POLICY_VIEW_LOCAL_INFORMATION \| READ_CONTROL | POLICY_TRUST_ADMIN \| POLICY_CREATE_ACCOUNT \| POLICY_CREATE_SECRET \| POLICY_CREATE_PRIVILEGE \| POLICY_SET_DEFAULT_QUOTA_LIMITS \| POLICY_SET_AUDIT_REQUIREMENTS \| POLICY_AUDIT_LOG_ADMIN \| POLICY_SERVER_ADMIN \| READ_CONTROL |
-| Account (section [3.1.1.3](#Section_3.1.1.7)) | ACCOUNT_VIEW \| READ_CONTROL | ACCOUNT_ADJUST_PRIVILEGES \| ACCOUNT_ADJUST_QUOTAS \| ACCOUNT_ADJUST_SYSTEM_ACCESS \| READ_CONTROL |
-| Secret (section [3.1.1.4](#Section_3.1.1.7)) | SECRET_QUERY_VALUE \| READ_CONTROL | SECRET_SET_VALUE \| READ_CONTROL |
-| TrustedDomain (section [3.1.1.5](#Section_3.1.1.7)) | TRUSTED_QUERY_DOMAIN_NAME \| READ_CONTROL | TRUSTED_SET_CONTROLLERS \| TRUSTED_SET_POSIX \| READ_CONTROL |
+| Account (section [3.1.1.3](#Section_3.1.1.3)) | ACCOUNT_VIEW \| READ_CONTROL | ACCOUNT_ADJUST_PRIVILEGES \| ACCOUNT_ADJUST_QUOTAS \| ACCOUNT_ADJUST_SYSTEM_ACCESS \| READ_CONTROL |
+| Secret (section [3.1.1.4](#Section_3.1.1.4)) | SECRET_QUERY_VALUE \| READ_CONTROL | SECRET_SET_VALUE \| READ_CONTROL |
+| TrustedDomain (section [3.1.1.5](#Section_3.1.1.5)) | TRUSTED_QUERY_DOMAIN_NAME \| READ_CONTROL | TRUSTED_SET_CONTROLLERS \| TRUSTED_SET_POSIX \| READ_CONTROL |
 
 <a id="Section_3.1.1.10.1"></a>
 ##### 3.1.1.10.1 Example Patterns for Direct Access of Policy Object ADM Elements
@@ -3909,7 +3909,7 @@ The following table describes the level of access that MUST be enforced during d
 
 Direct querying of any of the (Public) ADM elements listed in section [3.1.1](#Section_3.1.1) MUST be performed as follows:
 
-- The client MUST invoke [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.10), specifying NULL for the *SystemName* parameter and POLICY_VIEW_AUDIT_INFORMATION | POLICY_VIEW_LOCAL_INFORMATION | POLICY_GET_PRIVATE_INFORMATION | READ_CONTROL for the *DesiredAccess* parameter.
+- The client MUST invoke [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.1), specifying NULL for the *SystemName* parameter and POLICY_VIEW_AUDIT_INFORMATION | POLICY_VIEW_LOCAL_INFORMATION | POLICY_GET_PRIVATE_INFORMATION | READ_CONTROL for the *DesiredAccess* parameter.
 - The client MUST invoke [LsarQueryInformationPolicy2 (section 3.1.4.4.3)](#Section_3.1.4.4.3), specifying the policy handle obtained in step 1 for the *PolicyHandle* parameter and PolicyDnsDomainInformation for the *InformationClass* parameter.
 - The client MUST invoke [LsarClose (section 3.1.4.9.4)](#Section_3.1.4.9.4), specifying the policy handle obtained in step 1 for the *ObjectHandle* parameter.
 - The ADM elements of interest are then read from the **LSAPR_POLICY_INFORMATION.PolicyDnsDomainInfo** structure (section [2.2.4.14](#Section_2.2.4.14)) that was returned in step 2.
@@ -3918,7 +3918,7 @@ Direct querying of any of the (Public) ADM elements listed in section [3.1.1](#S
 
 Direct setting of any of the (Public) ADM elements listed in section [3.1.1](#Section_3.1.1) MUST be performed as follows:
 
-- The client MUST invoke [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.10), specifying NULL for the *SystemName* parameter and POLICY_TRUST_ADMIN | POLICY_CREATE_ACCOUNT | POLICY_CREATE_SECRET | POLICY_CREATE_PRIVILEGE | POLICY_SET_DEFAULT_QUOTA_LIMITS | POLICY_SET_AUDIT_REQUIREMENTS | POLICY_AUDIT_LOG_ADMIN | POLICY_SERVER_ADMIN | READ_CONTROL for the *DesiredAccess* parameter.
+- The client MUST invoke [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.1), specifying NULL for the *SystemName* parameter and POLICY_TRUST_ADMIN | POLICY_CREATE_ACCOUNT | POLICY_CREATE_SECRET | POLICY_CREATE_PRIVILEGE | POLICY_SET_DEFAULT_QUOTA_LIMITS | POLICY_SET_AUDIT_REQUIREMENTS | POLICY_AUDIT_LOG_ADMIN | POLICY_SERVER_ADMIN | READ_CONTROL for the *DesiredAccess* parameter.
 - The client MUST invoke [LsarQueryInformationPolicy2 (section 3.1.4.4.3)](#Section_3.1.4.4.3), specifying the policy handle obtained in step 1 for the *PolicyHandle* parameter and PolicyDnsDomainInformation for the *InformationClass* parameter.
 - The client MUST set the ADM elements of interest in the **LSAPR_POLICY_INFORMATION.PolicyDnsDomainInfo** structure (section [2.2.4.14](#Section_2.2.4.14)) that was returned in step 2 to the desired new values, leaving the remaining elements unmodified.
 - The client MUST invoke [LsarSetInformationPolicy2 (section 3.1.4.4.5)](#Section_3.1.4.4.5), specifying the policy handle obtained in step 1 for the *PolicyHandle* parameter.
@@ -3946,21 +3946,21 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [LsarClose](#Section_3.1.4.9.4) | This method closes an open handle. Opnum: 0 |
 | Opnum1NotUsedOnWire | Opnum: 1 |
-| [LsarEnumeratePrivileges](#Section_3.1.4.5.4) | This method is invoked to enumerate all [**privileges**](#gt_privilege) known to the system. Opnum: 2 |
-| [LsarQuerySecurityObject](#Section_5) | This method is invoked to query security information that is assigned to a database object. It returns the [**security descriptor**](#gt_security-descriptor) of the object. Opnum: 3 |
-| [LsarSetSecurityObject](#Section_5) | This method is invoked to set a security descriptor on an object. Opnum: 4 |
+| [LsarEnumeratePrivileges](#Section_3.1.4.8.1) | This method is invoked to enumerate all [**privileges**](#gt_privilege) known to the system. Opnum: 2 |
+| [LsarQuerySecurityObject](#Section_3.1.4.9.1) | This method is invoked to query security information that is assigned to a database object. It returns the [**security descriptor**](#gt_security-descriptor) of the object. Opnum: 3 |
+| [LsarSetSecurityObject](#Section_3.1.4.9.2) | This method is invoked to set a security descriptor on an object. Opnum: 4 |
 | Opnum5NotUsedOnWire | Opnum: 5 |
-| [LsarOpenPolicy](#Section_3.1.4.4.10) | This method is exactly the same as [LsarOpenPolicy2](#Section_3.1.4.4.10), except that the *SystemName* parameter in this function, because of its syntactic definition, contains only one character instead of a full string. Opnum: 6 |
-| [LsarQueryInformationPolicy](#Section_3.1.4.4.3) | This method is invoked to query values representing the server's information policy. Opnum: 7 |
+| [LsarOpenPolicy](#Section_3.1.4.4.2) | This method is exactly the same as [LsarOpenPolicy2](#Section_3.1.4.4.1), except that the *SystemName* parameter in this function, because of its syntactic definition, contains only one character instead of a full string. Opnum: 6 |
+| [LsarQueryInformationPolicy](#Section_3.1.4.4.4) | This method is invoked to query values representing the server's information policy. Opnum: 7 |
 | [LsarSetInformationPolicy](#Section_3.1.4.4.6) | This method is invoked to set some policy on the server. Opnum: 8 |
 | Opnum9NotUsedOnWire | Opnum: 9 |
 | [LsarCreateAccount](#Section_3.1.4.5.1) | This method is invoked to create a new [**account object**](#gt_account-object) in the server's database. Opnum: 10 |
 | [LsarEnumerateAccounts](#Section_3.1.4.5.2) | This method is invoked to request a list of account objects in the server's database. Opnum: 11 |
-| [LsarCreateTrustedDomain](#Section_3.1.4.7.10) | This method is invoked to create an object of type [**trusted domain**](#gt_trusted-domain) in the server's database. Opnum: 12 |
+| [LsarCreateTrustedDomain](#Section_3.1.4.7.12) | This method is invoked to create an object of type [**trusted domain**](#gt_trusted-domain) in the server's database. Opnum: 12 |
 | [LsarEnumerateTrustedDomains](#Section_3.1.4.7.8) | This method is invoked to request a list of [**TDOs**](#gt_trusted-domain-object-tdo) in the server's database. Opnum: 13 |
 | Lsar_LSA_TM_14 | Opnum: 14 |
 | Lsar_LSA_TM_15 | Opnum: 15 |
-| [LsarCreateSecret](#Section_3.1.4.6.11) | This method is invoked to create a new [**secret object**](#gt_secret-object) in the server's database. Opnum: 16 |
+| [LsarCreateSecret](#Section_3.1.4.6.1) | This method is invoked to create a new [**secret object**](#gt_secret-object) in the server's database. Opnum: 16 |
 | [LsarOpenAccount](#Section_3.1.4.5.3) | This method is invoked to obtain a handle to an account object. Opnum: 17 |
 | [LsarEnumeratePrivilegesAccount](#Section_3.1.4.5.4) | This method is invoked to retrieve a list of privileges granted to an account on the server. Opnum: 18 |
 | [LsarAddPrivilegesToAccount](#Section_3.1.4.5.5) | This method is invoked to add new privileges to an existing account object. Opnum: 19 |
@@ -3973,8 +3973,8 @@ Methods in RPC Opnum Order
 | [LsarQueryInfoTrustedDomain](#Section_3.1.4.7.13) | This method is invoked to retrieve information on a TDO. Opnum: 26 |
 | [LsarSetInformationTrustedDomain](#Section_3.1.4.7.14) | This method is invoked to set information on a TDO. Opnum: 27 |
 | [LsarOpenSecret](#Section_3.1.4.6.2) | This method is invoked to obtain a handle to an existing secret object. Opnum: 28 |
-| [LsarSetSecret](#Section_3.1.4.6.9) | This method is invoked to set the current and old values of the secret object. Opnum: 29 |
-| [LsarQuerySecret](#Section_3.1.4.6.10) | This method is invoked to retrieve the current and old (or previous) value of the secret object. Opnum: 30 |
+| [LsarSetSecret](#Section_3.1.4.6.3) | This method is invoked to set the current and old values of the secret object. Opnum: 29 |
+| [LsarQuerySecret](#Section_3.1.4.6.4) | This method is invoked to retrieve the current and old (or previous) value of the secret object. Opnum: 30 |
 | [LsarLookupPrivilegeValue](#Section_3.1.4.8.2) | This method is invoked to map the name of a privilege into the [**LUID**](#gt_locally-unique-identifier-luid) by which the privilege is known on the server. Opnum: 31 |
 | [LsarLookupPrivilegeName](#Section_3.1.4.8.3) | This method is invoked to map the LUID of a privilege into the string name by which the privilege is known on the server. Opnum: 32 |
 | [LsarLookupPrivilegeDisplayName](#Section_3.1.4.8.4) | This method is invoked to map the name of a privilege into a display text string in the caller's language. Opnum: 33 |
@@ -3986,7 +3986,7 @@ Methods in RPC Opnum Order
 | [LsarQueryTrustedDomainInfo](#Section_3.1.4.7.2) | This method is invoked to retrieve information on a TDO. Opnum: 39 |
 | [LsarSetTrustedDomainInfo](#Section_3.1.4.7.3) | This method is invoked to set information on a TDO. Opnum: 40 |
 | [LsarDeleteTrustedDomain](#Section_3.1.4.7.4) | This method is invoked to delete a TDO. Opnum: 41 |
-| [LsarStorePrivateData](#Section_3.1.4.6.11) | This method is invoked to store a secret value. Opnum: 42 |
+| [LsarStorePrivateData](#Section_3.1.4.6.5) | This method is invoked to store a secret value. Opnum: 42 |
 | [LsarRetrievePrivateData](#Section_3.1.4.6.6) | This method is invoked to retrieve a secret value. Opnum: 43 |
 | LsarOpenPolicy2 | This method opens a context handle to the [**RPC server**](#gt_rpc-server). Opnum: 44 |
 | Lsar_LSA_TM_45 | Opnum: 45 |
@@ -3995,7 +3995,7 @@ Methods in RPC Opnum Order
 | [LsarQueryTrustedDomainInfoByName](#Section_3.1.4.7.5) | This method is invoked to retrieve information on a TDO by its string name. Opnum: 48 |
 | [LsarSetTrustedDomainInfoByName](#Section_3.1.4.7.6) | This method is invoked to set information on a TDO by its string name. Opnum: 49 |
 | [LsarEnumerateTrustedDomainsEx](#Section_3.1.4.7.7) | This method is invoked to enumerate TDOs in the server's database. Opnum: 50 |
-| [LsarCreateTrustedDomainEx](#Section_3.1.4.7.10) | This method is invoked to create a new TDO. Opnum: 51 |
+| [LsarCreateTrustedDomainEx](#Section_3.1.4.7.11) | This method is invoked to create a new TDO. Opnum: 51 |
 | Opnum52NotUsedOnWire | Opnum: 52 |
 | [LsarQueryDomainInformationPolicy](#Section_3.1.4.4.7) | This method is invoked to retrieve policy settings pertaining to the current [**domain**](#gt_domain). Opnum: 53 |
 | [LsarSetDomainInformationPolicy](#Section_3.1.4.4.8) | This method is invoked to change policy settings pertaining to the current domain. Opnum: 54 |
@@ -4089,7 +4089,7 @@ Methods in RPC Opnum Order
 
 The following citation contains a timeline of when each method value was introduced.<59>
 
-**Note** Gaps in the [**opnum**](#gt_opnum) numbering sequence represent opnums of methods that are specified in [MS-LSAT](#Section_5), or opnums that MUST NOT be used over the wire.<60>
+**Note** Gaps in the [**opnum**](#gt_opnum) numbering sequence represent opnums of methods that are specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md), or opnums that MUST NOT be used over the wire.<60>
 
 **Note** Exceptions MUST NOT be thrown beyond those thrown by the underlying [**RPC**](#gt_remote-procedure-call-rpc) protocol (as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md)), unless otherwise specified.
 
@@ -4110,10 +4110,10 @@ The Local Security Authority (Domain Policy) Remote Protocol recognizes four typ
 
 | Handle type | Methods that return this type of handle |
 | --- | --- |
-| Policy | [LsarOpenPolicy](#Section_3.1.4.4.10) [LsarOpenPolicy2](#Section_3.1.4.4.10) |
+| Policy | [LsarOpenPolicy](#Section_3.1.4.4.2) [LsarOpenPolicy2](#Section_3.1.4.4.1) |
 | Account | [LsarCreateAccount](#Section_3.1.4.5.1) [LsarOpenAccount](#Section_3.1.4.5.3) |
-| Secret | [LsarCreateSecret](#Section_3.1.4.6.11) [LsarOpenSecret](#Section_3.1.4.6.2) |
-| Trusted Domain | [LsarCreateTrustedDomain](#Section_3.1.4.7.10) [LsarOpenTrustedDomain](#Section_3.1.4.7.1) [LsarCreateTrustedDomainEx](#Section_3.1.4.7.10) [LsarOpenTrustedDomainByName](#Section_3.1.4.7.9) [LsarCreateTrustedDomainEx2](#Section_3.1.4.7.10) |
+| Secret | [LsarCreateSecret](#Section_3.1.4.6.1) [LsarOpenSecret](#Section_3.1.4.6.2) |
+| Trusted Domain | [LsarCreateTrustedDomain](#Section_3.1.4.7.12) [LsarOpenTrustedDomain](#Section_3.1.4.7.1) [LsarCreateTrustedDomainEx](#Section_3.1.4.7.11) [LsarOpenTrustedDomainByName](#Section_3.1.4.7.9) [LsarCreateTrustedDomainEx2](#Section_3.1.4.7.10) |
 
 The server MUST keep track of all handles of each type that every caller opens, from the moment of creation until the handle has been closed (by calling [LsarClose](#Section_3.1.4.9.4) or [LsarDeleteObject](#Section_3.1.4.9.3)) or until the client disconnects.
 
@@ -4208,12 +4208,12 @@ Closing one handle MUST NOT affect any other handle on the server; that is, hand
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 Policy Object Methods
 
-The message processing of methods in this section MUST use the abstract data model defined in section [3.1.1.1](#Section_3.1.1.7).
+The message processing of methods in this section MUST use the abstract data model defined in section [3.1.1.1](#Section_3.1.1.1).
 
 | Method (opnum) | Summary |
 | --- | --- |
 | LsarOpenPolicy2 (opnum 44) | Opens a context handle to the [**RPC server**](#gt_rpc-server). |
-| LsarOpenPolicy (opnum 6) | Superseded by [LsarOpenPolicy2](#Section_3.1.4.4.10). |
+| LsarOpenPolicy (opnum 6) | Superseded by [LsarOpenPolicy2](#Section_3.1.4.4.1). |
 | LsarQueryInformationPolicy2 (opnum 46) | Obtains information from the policy object. |
 | LsarQueryInformationPolicy (opnum 7) | Obtains information from the policy object. |
 | LsarSetInformationPolicy2 (opnum 47) | Sets information on the policy object. |
@@ -4246,7 +4246,7 @@ NTSTATUS LsarOpenPolicy2(
 
 **DesiredAccess:** An [ACCESS_MASK](#Section_2.2.1.1) value that specifies the requested access rights that MUST be granted on the returned PolicyHandle if the request is successful.
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle (as specified in section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.7).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle (as specified in section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.1).
 
 **Return Values:** The following is a summary of the return values that an implementation MUST return, as specified by the message processing below.
 
@@ -4292,7 +4292,7 @@ The LsarOpenPolicy3 method supersedes this message and MUST be used whenever pos
 <a id="Section_3.1.4.4.2"></a>
 ##### 3.1.4.4.2 LsarOpenPolicy (Opnum 6)
 
-The LsarOpenPolicy method is exactly the same as [LsarOpenPolicy2](#Section_3.1.4.4.10), except that the *SystemName* parameter in this function, because of its syntactic definition, contains only one character instead of a full string. This *SystemName* parameter does not have any effect on message processing in any environment. It MUST be ignored.
+The LsarOpenPolicy method is exactly the same as [LsarOpenPolicy2](#Section_3.1.4.4.1), except that the *SystemName* parameter in this function, because of its syntactic definition, contains only one character instead of a full string. This *SystemName* parameter does not have any effect on message processing in any environment. It MUST be ignored.
 
 NTSTATUS LsarOpenPolicy(
 
@@ -4312,7 +4312,7 @@ NTSTATUS LsarOpenPolicy(
 
 **DesiredAccess:** An [ACCESS_MASK](#Section_2.2.1.1) value that specifies the requested access rights that MUST be granted on the returned PolicyHandle, if the request is successful.
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle (as specified in section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.7).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle (as specified in section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.1).
 
 Processing:
 
@@ -4335,7 +4335,7 @@ PLSAPR_POLICY_INFORMATION* PolicyInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **InformationClass:** A parameter that specifies what type of information the caller is requesting.
 
@@ -4376,7 +4376,7 @@ The server MUST verify that *PolicyHandle* grants access as specified in section
 
 The *InformationClass* parameter can take on any value in the POLICY_INFORMATION_CLASS enumeration range. For all values outside this range, the server MUST return a STATUS_INVALID_PARAMETER error code.
 
-*PolicyInformation* is an output parameter. The server MUST fill it in with the information requested by the client, based on the value of the *InformationClass* parameter and the abstract data model specified in section [3.1.1.1](#Section_3.1.1.7), as follows.
+*PolicyInformation* is an output parameter. The server MUST fill it in with the information requested by the client, based on the value of the *InformationClass* parameter and the abstract data model specified in section [3.1.1.1](#Section_3.1.1.1), as follows.
 
 | Value of InformationClass parameter | Information returned to caller from abstract data model |
 | --- | --- |
@@ -4412,7 +4412,7 @@ PLSAPR_POLICY_INFORMATION* PolicyInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **InformationClass:** A parameter that specifies what type of information the caller is requesting.
 
@@ -4449,7 +4449,7 @@ PLSAPR_POLICY_INFORMATION PolicyInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **InformationClass:** A parameter that specifies what type of information the caller is setting.
 
@@ -4490,7 +4490,7 @@ The server MUST verify that *PolicyHandle* grants access as specified in section
 
 The *InformationClass* parameter can take on any value in the POLICY_INFORMATION_CLASS enumeration range. For all values outside this range, the server MUST return the STATUS_INVALID_PARAMETER error code.
 
-The *PolicyInformation* parameter contains the data that the caller wishes to set, based on the value of the *InformationClass* parameter. The server MUST update its abstract data model, specified in section [3.1.1.1](#Section_3.1.1.7), as follows.
+The *PolicyInformation* parameter contains the data that the caller wishes to set, based on the value of the *InformationClass* parameter. The server MUST update its abstract data model, specified in section [3.1.1.1](#Section_3.1.1.1), as follows.
 
 | Value of InformationClass parameter | Information updated in abstract data model |
 | --- | --- |
@@ -4526,7 +4526,7 @@ PLSAPR_POLICY_INFORMATION PolicyInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **InformationClass:** A parameter that specifies what type of information the caller is setting.
 
@@ -4549,7 +4549,7 @@ This message MUST be processed in an identical manner to [LsarSetInformationPoli
 <a id="Section_3.1.4.4.7"></a>
 ##### 3.1.4.4.7 LsarQueryDomainInformationPolicy (Opnum 53)
 
-The LsarQueryDomainInformationPolicy method is invoked to retrieve policy settings in addition to those exposed through [LsarQueryInformationPolicy](#Section_3.1.4.4.3) and [LsarSetInformationPolicy2](#Section_3.1.4.4.5). Despite the term "Domain" in the name of the method, processing of this message occurs with local data, and furthermore, there is no requirement that this data have any relationship with the LSA information in the [**domain**](#gt_domain) to which the machine is joined.
+The LsarQueryDomainInformationPolicy method is invoked to retrieve policy settings in addition to those exposed through [LsarQueryInformationPolicy](#Section_3.1.4.4.4) and [LsarSetInformationPolicy2](#Section_3.1.4.4.5). Despite the term "Domain" in the name of the method, processing of this message occurs with local data, and furthermore, there is no requirement that this data have any relationship with the LSA information in the [**domain**](#gt_domain) to which the machine is joined.
 
 NTSTATUS LsarQueryDomainInformationPolicy(
 
@@ -4563,7 +4563,7 @@ PLSAPR_POLICY_DOMAIN_INFORMATION* PolicyDomainInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **InformationClass:** A parameter that specifies what type of information the caller is requesting.
 
@@ -4581,7 +4581,7 @@ PLSAPR_POLICY_DOMAIN_INFORMATION* PolicyDomainInformation
 
 Processing:
 
-If the *InformationClass* parameter is PolicyDomainEfsInformation, and the responder does not support Encrypting File System (EFS) Policy Information as specified in section [3.1.1.1](#Section_3.1.1.7), the request MUST fail with STATUS_OBJECT_NAME_NOT_FOUND.
+If the *InformationClass* parameter is PolicyDomainEfsInformation, and the responder does not support Encrypting File System (EFS) Policy Information as specified in section [3.1.1.1](#Section_3.1.1.1), the request MUST fail with STATUS_OBJECT_NAME_NOT_FOUND.
 
 If the *InformationClass* parameter is PolicyDomainQualityOfServiceInformation, and the responder implementation does not support Quality Of Service Information as specified in section 3.1.1.1, the request MUST fail with STATUS_INVALID_PARAMETER.
 
@@ -4608,7 +4608,7 @@ The *InformationClass* parameter can take on any value in the POLICY_DOMAIN_INFO
 <a id="Section_3.1.4.4.8"></a>
 ##### 3.1.4.4.8 LsarSetDomainInformationPolicy (Opnum 54)
 
-The LsarSetDomainInformationPolicy method is invoked to change policy settings in addition to those exposed through [LsarQueryInformationPolicy](#Section_3.1.4.4.3) and [LsarSetInformationPolicy2](#Section_3.1.4.4.5). Despite the term "Domain" in the name of the method, processing of this message occurs with local data. Also, there is no requirement that this data have any relationship with the LSA information in the [**domain**](#gt_domain) in which the machine is joined.
+The LsarSetDomainInformationPolicy method is invoked to change policy settings in addition to those exposed through [LsarQueryInformationPolicy](#Section_3.1.4.4.4) and [LsarSetInformationPolicy2](#Section_3.1.4.4.5). Despite the term "Domain" in the name of the method, processing of this message occurs with local data. Also, there is no requirement that this data have any relationship with the LSA information in the [**domain**](#gt_domain) in which the machine is joined.
 
 NTSTATUS LsarSetDomainInformationPolicy(
 
@@ -4622,7 +4622,7 @@ PLSAPR_POLICY_DOMAIN_INFORMATION PolicyDomainInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **InformationClass:** A parameter that specifies what type of information the caller is setting.
 
@@ -4639,7 +4639,7 @@ PLSAPR_POLICY_DOMAIN_INFORMATION PolicyDomainInformation
 
 Processing:
 
-If the *InformationClass* parameter is PolicyDomainEfsInformation, and the responder implementation does not support Encrypting File System (EFS) Policy Information as specified in section [3.1.1.1](#Section_3.1.1.7), the request MUST fail with STATUS_INVALID_PARAMETER.
+If the *InformationClass* parameter is PolicyDomainEfsInformation, and the responder implementation does not support Encrypting File System (EFS) Policy Information as specified in section [3.1.1.1](#Section_3.1.1.1), the request MUST fail with STATUS_INVALID_PARAMETER.
 
 If the *InformationClass* parameter is PolicyDomainQualityOfServiceInformation, and the responder implementation does not support Quality Of Service Information as specified in section 3.1.1.1, the request MUST fail with an RPC exception RPC_S_INVALID_TAG.
 
@@ -4706,7 +4706,7 @@ LsarOpenPolicy3(
 
 **OutRevisionInfo**: Revision information. For details, see the definition of the LSAPR_REVISION_INFO_V1 structure (section 2.2.2.6), which is contained in the LSAPR_REVISION_INFO union (section 2.2.2.7).
 
-**PolicyHandle**: An RPC context handle (section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.7).
+**PolicyHandle**: An RPC context handle (section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.1).
 
 **Return Values:** The following is a summary of the return values that an implementation MUST return, as specified by the message processing below.
 
@@ -4769,14 +4769,14 @@ This handle can be obtained by calling RPC runtime binding routines. For more in
 
 **OutRevisionInfo:** Revision information. For details, see the definition of the LSAPR_REVISION_INFO_V1 structure (section 2.2.2.6), which is contained in the LSAPR_REVISION_INFO union (section 2.2.2.7).
 
-**PolicyHandle:** An RPC context handle (section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.7).
+**PolicyHandle:** An RPC context handle (section [2.2.2.1](#Section_2.2.2.1)) that represents a reference to the abstract data model of a policy object, as specified in section [3.1.1.1](#Section_3.1.1.1).
 
 The return values and server processing of this method is the same as LsarOpenPolicy3.
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 Account Object Methods
 
-The message processing of methods in this section MUST use the abstract data model, as specified in section [3.1.1.3](#Section_3.1.1.7).
+The message processing of methods in this section MUST use the abstract data model, as specified in section [3.1.1.3](#Section_3.1.1.3).
 
 | Method (opnum) | Summary |
 | --- | --- |
@@ -4810,7 +4810,7 @@ NTSTATUS LsarCreateAccount(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **AccountSid:** The [**security identifier (SID)**](#gt_security-identifier-sid) of the account to be created.
 
@@ -4874,7 +4874,7 @@ NTSTATUS LsarEnumerateAccounts(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **EnumerationContext:** A pointer to a context value that is used to resume enumeration, if necessary.
 
@@ -4923,7 +4923,7 @@ NTSTATUS LsarOpenAccount(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **AccountSid:** A [**SID**](#gt_security-identifier-sid) of the account to be opened.
 
@@ -5077,7 +5077,7 @@ This message takes three arguments:
 <a id="Section_3.1.4.5.7"></a>
 ##### 3.1.4.5.7 LsarGetSystemAccessAccount (Opnum 23)
 
-The LsarGetSystemAccessAccount method is invoked to retrieve system access account flags for an [**account object**](#gt_account-object). System access account flags are described as part of the account object data model, as specified in section [3.1.1.3](#Section_3.1.1.7).
+The LsarGetSystemAccessAccount method is invoked to retrieve system access account flags for an [**account object**](#gt_account-object). System access account flags are described as part of the account object data model, as specified in section [3.1.1.3](#Section_3.1.1.3).
 
 NTSTATUS LsarGetSystemAccessAccount(
 
@@ -5156,7 +5156,7 @@ NTSTATUS LsarEnumerateAccountsWithUserRight(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **UserRight:** The name of the right to use in enumeration.
 
@@ -5200,7 +5200,7 @@ NTSTATUS LsarEnumerateAccountRights(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **AccountSid:** A [**SID**](#gt_security-identifier-sid) of the [**account object**](#gt_account-object) that the caller is inquiring about.
 
@@ -5241,7 +5241,7 @@ NTSTATUS LsarAddAccountRights(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **AccountSid:** A [**security identifier**](#gt_security-identifier-sid) of an account to add the rights to.
 
@@ -5286,7 +5286,7 @@ NTSTATUS LsarRemoveAccountRights(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **AccountSid:** A [**security descriptor**](#gt_security-descriptor) of an account object.
 
@@ -5327,7 +5327,7 @@ If the resulting set of access rights and privileges is empty, the server MUST d
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 Secret Object Methods
 
-The message processing of methods in this section MUST use the abstract data model defined in section [3.1.1.4](#Section_3.1.1.7).
+The message processing of methods in this section MUST use the abstract data model defined in section [3.1.1.4](#Section_3.1.1.4).
 
 | Method (opnum) | Summary |
 | --- | --- |
@@ -5340,9 +5340,9 @@ The message processing of methods in this section MUST use the abstract data mod
 
 The server SHOULD<75> support the following methods:
 
-- [LsarSetSecret](#Section_3.1.4.6.9)
-- [LsarQuerySecret](#Section_3.1.4.6.10)
-- [LsarStorePrivateData](#Section_3.1.4.6.11)
+- [LsarSetSecret](#Section_3.1.4.6.3)
+- [LsarQuerySecret](#Section_3.1.4.6.4)
+- [LsarStorePrivateData](#Section_3.1.4.6.5)
 - [LsarRetrievePrivateData](#Section_3.1.4.6.6)
 If the server does not support these methods, the server MUST respond with an [**RPC**](#gt_remote-procedure-call-rpc) exception. If the server supports these methods, the server MUST perform the operations in the message processing section for each method.
 
@@ -5363,7 +5363,7 @@ NTSTATUS LsarCreateSecret(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **SecretName:** The name of the secret object to be created.
 
@@ -5407,7 +5407,7 @@ The valid secret-rights bits are specified in section [2.2.1.1.4](#Section_2.2.1
 - LsaContextHandle.HandleType = "Secret"
 - LsaContextHandle.Object = the secret object
 - LsaContextHandle.GrantedAccess = as specified in section 3.1.4.2.1
-Both "current time" and "old time" attributes of a secret will be set to the server's current time at the instance of creation. Both "old value" and "current value" will be set to NULL until they are modified by the [LsarSetSecret](#Section_3.1.4.6.9) message.
+Both "current time" and "old time" attributes of a secret will be set to the server's current time at the instance of creation. Both "old value" and "current value" will be set to NULL until they are modified by the [LsarSetSecret](#Section_3.1.4.6.3) message.
 
 The server MUST check that the secret by the name *SecretName* does not already exist and fail the request with STATUS_OBJECT_NAME_COLLISION otherwise.<79>
 
@@ -5428,7 +5428,7 @@ NTSTATUS LsarOpenSecret(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **SecretName:** The name of the secret object to open.
 
@@ -5452,7 +5452,7 @@ This message takes four arguments:
 
 *PolicyHandle*: An open handle to the policy object. If the handle is not a valid context handle to the policy object or *PolicyHandle*.HandleType does not equal "Policy", the server MUST return STATUS_INVALID_HANDLE. *PolicyHandle*.GrantedAccess MUST NOT be considered for this call because the access check MUST happen on the secret object.
 
-*SecretName*: The name of the secret to be opened. The server MUST verify that the name syntax restrictions on secrets specified in section [3.1.4.6.1](#Section_3.1.4.6.11) are satisfied, and fail the request with STATUS_INVALID_PARAMETER otherwise. The server MUST verify that the secret object with this name exists in its policy database and fail the request with STATUS_OBJECT_NAME_NOT_FOUND otherwise.<80>
+*SecretName*: The name of the secret to be opened. The server MUST verify that the name syntax restrictions on secrets specified in section [3.1.4.6.1](#Section_3.1.4.6.1) are satisfied, and fail the request with STATUS_INVALID_PARAMETER otherwise. The server MUST verify that the secret object with this name exists in its policy database and fail the request with STATUS_OBJECT_NAME_NOT_FOUND otherwise.<80>
 
 *DesiredAccess*: A bitmask specifying the type of access that the caller attempts to obtain from the secret object, which is access-checked according to section [3.1.4.2.1](#Section_3.1.4.2.1). The method-specific portion of the check is as follows:
 
@@ -5505,7 +5505,7 @@ This message contains three input parameters:
 
 *SecretHandle*: An open handle to a secret object. If the handle is not a valid context handle to a secret object or *SecretHandle*.HandleType does not equal "Secret", the server MUST return STATUS_INVALID_HANDLE. The server MUST verify that *SecretHandle* grants access as specified in section [3.1.4.2.2](#Section_3.1.4.2.2) with RequiredAccess set to SECRET_SET_VALUE.<81>
 
-*EncryptedCurrentValue*: The version of the new secret value that is being set, encrypted as specified in section [5.1.2](#Section_5.1.4.2). It is valid for this parameter to be NULL, in which case the server MUST delete the current value in its database. If decryption fails, the server MUST return an implementation-specific error.<82>
+*EncryptedCurrentValue*: The version of the new secret value that is being set, encrypted as specified in section [5.1.2](#Section_5.1.2). It is valid for this parameter to be NULL, in which case the server MUST delete the current value in its database. If decryption fails, the server MUST return an implementation-specific error.<82>
 
 *EncryptedOldValue*: The version of the old secret value that is being set, encrypted as specified in section 5.1.2. It is valid for this parameter to be NULL, in which case the server MUST delete the old value in its database and replace it with the previous version of "CurrentValue". If decryption fails, the server MUST return an implementation-specific error.<83>
 
@@ -5561,7 +5561,7 @@ This message takes five arguments:
 
 *SecretHandle*: An open handle to a secret object. If the handle is not a valid context handle to a secret object or *SecretHandle*.HandleType does not equal "Secret", the server MUST return STATUS_INVALID_HANDLE. The server MUST verify that *SecretHandle* grants access as specified in section [3.1.4.2.2](#Section_3.1.4.2.2) with RequiredAccess set to SECRET_QUERY_VALUE.<84>
 
-*EncryptedCurrentValue*: Used to return the current value of the secret, encrypted as specified in section [5.1.2](#Section_5.1.4.2). This parameter can be NULL if the caller is not interested in this information.<85>
+*EncryptedCurrentValue*: Used to return the current value of the secret, encrypted as specified in section [5.1.2](#Section_5.1.2). This parameter can be NULL if the caller is not interested in this information.<85>
 
 *CurrentValueSetTime:* The time corresponding to the instant that the current value was last changed. This parameter can be NULL if the caller is not interested in this information.
 
@@ -5584,7 +5584,7 @@ NTSTATUS LsarStorePrivateData(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **KeyName:** The name under which private data will be stored.
 
@@ -5607,7 +5607,7 @@ This message takes three arguments:
 
 *KeyName*: A string identifying the name of the [**secret object**](#gt_secret-object) under which the private data would be stored. The server MUST verify that *KeyName* is syntactically valid and reject the request with STATUS_INVALID_PARAMETER otherwise. If a secret object by this name does not exist and the *EncryptedData* parameter is not NULL, the server MUST verify that the caller has POLICY_CREATE_SECRET access. If the secret does exist and the *EncryptedData* parameter is not NULL, the access check is performed for the SECRET_SET_VALUE right against the secret's [**security descriptor**](#gt_security-descriptor). If the access check fails, the server MUST return STATUS_ACCESS_DENIED. If the *EncryptedData* parameter is NULL, the server MUST check that the caller has DELETE access to the secret object and, if so, delete the secret object from the policy database.
 
-*EncryptedData*: The value of the secret to be stored. This value is encrypted as specified in section [5.1.2](#Section_5.1.4.2). As mentioned already, a caller that wants the secret to be deleted simply passes NULL for this value. If decryption fails, the server MUST return an implementation-specific error.<87>
+*EncryptedData*: The value of the secret to be stored. This value is encrypted as specified in section [5.1.2](#Section_5.1.2). As mentioned already, a caller that wants the secret to be deleted simply passes NULL for this value. If decryption fails, the server MUST return an implementation-specific error.<87>
 
 <a id="Section_3.1.4.6.6"></a>
 ##### 3.1.4.6.6 LsarRetrievePrivateData (Opnum 43)
@@ -5624,7 +5624,7 @@ NTSTATUS LsarRetrievePrivateData(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **KeyName:** The name identifying the secret value to be retrieved.
 
@@ -5648,7 +5648,7 @@ This message takes three arguments:
 
 *KeyName*: A string identifying the name of the secret object to be queried. If IsRequestorAnonymous() returns TRUE (section [3.1.4.2.3](#Section_3.1.4.2.3)) and LsaRestrictAnonymous is set to TRUE, the call MUST fail with STATUS_OBJECT_NAME_NOT_FOUND. If a secret object by this name does not exist, the server MUST return STATUS_OBJECT_NAME_NOT_FOUND.
 
-*EncryptedData*: Used to return an encrypted version of the secret value. This value is encrypted as specified in section [5.1.2](#Section_5.1.4.2).
+*EncryptedData*: Used to return an encrypted version of the secret value. This value is encrypted as specified in section [5.1.2](#Section_5.1.2).
 
 <a id="Section_3.1.4.6.7"></a>
 ##### 3.1.4.6.7 LsarOpenSecret2 (Opnum 136)
@@ -5710,7 +5710,7 @@ NTSTATUS LsarCreateSecret2(
 
 Processing:
 
-The processing is the same as LsarCreateSecret section ([3.1.4.6.1](#Section_3.1.4.6.11)) with the exception that the encrypted secret name is first decrypted.
+The processing is the same as LsarCreateSecret section ([3.1.4.6.1](#Section_3.1.4.6.1)) with the exception that the encrypted secret name is first decrypted.
 
 <a id="Section_3.1.4.6.9"></a>
 ##### 3.1.4.6.9 LsarSetSecret2 (Opnum 138)
@@ -5733,7 +5733,7 @@ NTSTATUS LsarSetSecret2(
 
 **EncryptedOldValue:** The old value encrypted to specification per AES Cipher Usage (section 5.1.5). It is valid for this parameter to be NULL, in which case the current value in the policy database is copied.
 
-**Return Values:** The return values are the same as specified for LsarSetSecret (section [3.1.4.6.3](#Section_3.1.4.6.9)).
+**Return Values:** The return values are the same as specified for LsarSetSecret (section [3.1.4.6.3](#Section_3.1.4.6.3)).
 
 Processing:
 
@@ -5768,7 +5768,7 @@ NTSTATUS LsarQuerySecret2(
 
 **OldValueSetTime:** The time corresponding to the instant that the old value was last changed. It is valid for this parameter to be NULL, in which case no value is returned.
 
-**Return Values:** The return values are the same as specified for LsarQuerySecret (section [3.1.4.6.4](#Section_3.1.4.6.10)).
+**Return Values:** The return values are the same as specified for LsarQuerySecret (section [3.1.4.6.4](#Section_3.1.4.6.4)).
 
 Processing:
 
@@ -5795,7 +5795,7 @@ NTSTATUS LsarStorePrivateData2(
 
 **EncryptedData:** The secret value to be stored. This is encrypted to specification per AES Cipher Usage (section 5.1.5).
 
-**Return Values:** The return values are the same as specified for LsarStorePrivateData (section [3.1.4.6.5](#Section_3.1.4.6.11)).
+**Return Values:** The return values are the same as specified for LsarStorePrivateData (section [3.1.4.6.5](#Section_3.1.4.6.5)).
 
 Processing:
 
@@ -5816,7 +5816,7 @@ NTSTATUS LsarRetrievePrivateData2(
 
 );
 
-**PolicyHandle:** An RPC context handle obtained from either LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.10)) or LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.10)).
+**PolicyHandle:** An RPC context handle obtained from either LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.2)) or LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.1)).
 
 **EncryptedKeyName:** The name identifying the secret value to be retrieved. This is encrypted to specification per AES Cipher Usage (section [5.1.5](#Section_5.1.5)).
 
@@ -5833,7 +5833,7 @@ The processing is the same as LsarRetrievePrivateData (section 3.1.4.6.6) with t
 
 Trusted domain objects SHOULD be created only on a server implementation that is in the [**domain controller**](#gt_domain-controller-dc) configuration.<94>
 
-The message processing of methods in this section MUST use the abstract data model as specified in section [3.1.1.5](#Section_3.1.1.7).
+The message processing of methods in this section MUST use the abstract data model as specified in section [3.1.1.5](#Section_3.1.1.5).
 
 | Method (opnum) | Summary |
 | --- | --- |
@@ -5871,7 +5871,7 @@ NTSTATUS LsarOpenTrustedDomain(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainSid:** A [**security identifier**](#gt_security-identifier-sid) of the [**trusted domain**](#gt_trusted-domain) that is being opened.
 
@@ -5926,7 +5926,7 @@ PLSAPR_TRUSTED_DOMAIN_INFO* TrustedDomainInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainSid:** A [**security descriptor**](#gt_security-descriptor) of the trusted domain object.
 
@@ -5980,7 +5980,7 @@ PLSAPR_TRUSTED_DOMAIN_INFO TrustedDomainInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainSid:** A [**SID**](#gt_security-identifier-sid) of the trusted domain object to be modified.
 
@@ -6013,7 +6013,7 @@ This message takes four arguments:
 
 *InformationClass*: A value from the [TRUSTED_INFORMATION_CLASS](#Section_2.2.7.2) enumeration that specifies which type of information the caller is setting. Not all *InformationClass* values are valid. The valid *InformationClass* values for this method are as follows:
 
-- TrustedDomainNameInformation: The server MUST act as if an [LsarCreateTrustedDomain](#Section_3.1.4.7.10) message came in with its *TrustedDomainInformation.Name* parameter as the name passed in the *TrustedDomainInformation* parameter, its *TrustedDomainInformation.Sid* parameter as the SID passed in the *TrustedDomainSid* parameter, and its *DesiredAccess* parameter set to zero.
+- TrustedDomainNameInformation: The server MUST act as if an [LsarCreateTrustedDomain](#Section_3.1.4.7.12) message came in with its *TrustedDomainInformation.Name* parameter as the name passed in the *TrustedDomainInformation* parameter, its *TrustedDomainInformation.Sid* parameter as the SID passed in the *TrustedDomainSid* parameter, and its *DesiredAccess* parameter set to zero.
 - TrustedPosixOffsetInformation: The server MUST verify that a trusted domain object with this SID exists in its policy database. If the object does not exist, the call MUST fail with STATUS_NO_SUCH_DOMAIN. Otherwise, the server MUST verify that the caller has access to the trusted domain object as specified in section [3.1.4.2.1](#Section_3.1.4.2.1) with *DesiredAccess* set to TRUSTED_SET_POSIX. There is no method-specific portion of this check.
 Then the server MUST act as if an LsarSetInformationTrustedDomain message is being processed.
 
@@ -6029,7 +6029,7 @@ If the object does exist, the server MUST set the [**trusted domain**](#gt_trust
 - *TrustDomainHandle* set to the handle to the trusted domain object.
 - *InformationClass* set to the same *InformationClass* in the original message.
 - *TrustedDomainInformation* set to the same *TrustedDomainInformation* in the original message.
-- TrustedPasswordInformation: The server MUST verify that a trusted domain object with this SID exists in its policy database. If the object does not exist, the call MUST fail with STATUS_NO_SUCH_DOMAIN. Otherwise, the server MUST open the [**secret object**](#gt_secret-object), as defined in section [3.1.1.4](#Section_3.1.1.7), (or create a secret object, if one does not already exist) with "Name" set to "G$$<Trusted Domain Name>". The server MUST then set "Old Value" of the secret object to the "OldPassword" value in *TrustedDomainInformation* and set "New Value" of the secret object to the "Password" value in *TrustedDomainInformation*, similar to the processing when an [LsarSetSecret](#Section_3.1.4.6.9) request has been made.
+- TrustedPasswordInformation: The server MUST verify that a trusted domain object with this SID exists in its policy database. If the object does not exist, the call MUST fail with STATUS_NO_SUCH_DOMAIN. Otherwise, the server MUST open the [**secret object**](#gt_secret-object), as defined in section [3.1.1.4](#Section_3.1.1.4), (or create a secret object, if one does not already exist) with "Name" set to "G$$<Trusted Domain Name>". The server MUST then set "Old Value" of the secret object to the "OldPassword" value in *TrustedDomainInformation* and set "New Value" of the secret object to the "Password" value in *TrustedDomainInformation*, similar to the processing when an [LsarSetSecret](#Section_3.1.4.6.3) request has been made.
 The server MUST return STATUS_INVALID_PARAMETER for all other *InformationClass* arguments.
 
 *TrustedDomainInformation*: Contains the data supplied by the caller to be set on the trusted domain object.
@@ -6047,7 +6047,7 @@ NTSTATUS LsarDeleteTrustedDomain(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainSid:** A [**security descriptor**](#gt_security-descriptor) of the TDO to be deleted.
 
@@ -6100,7 +6100,7 @@ PLSAPR_TRUSTED_DOMAIN_INFO* TrustedDomainInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainName:** The name of the trusted domain object to query.
 
@@ -6143,7 +6143,7 @@ PLSAPR_TRUSTED_DOMAIN_INFO TrustedDomainInformation
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainName:** The name of the trusted domain object to set information on.
 
@@ -6184,7 +6184,7 @@ NTSTATUS LsarEnumerateTrustedDomainsEx(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **EnumerationContext:** Used to keep track of the state of the enumeration in cases where the caller obtains its information in several fragments.
 
@@ -6235,7 +6235,7 @@ NTSTATUS LsarEnumerateTrustedDomains(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **EnumerationContext:** A pointer to a context value that is used to resume enumeration, if necessary.
 
@@ -6295,7 +6295,7 @@ NTSTATUS LsarOpenTrustedDomainByName(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainName:** The name of the trusted domain object.
 
@@ -6347,7 +6347,7 @@ NTSTATUS LsarCreateTrustedDomainEx2(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainInformation:** Information about the new TDO to be created.
 
@@ -6393,9 +6393,9 @@ This message takes five arguments:
 *TrustedDomainInformation*: A structure containing most components of a TDO makeup. The data provided in this parameter MUST be checked for validity in accordance with rules for TDO consistency specified in "Trust Objects" in [MS-ADTS] section 6.1.6. The server MUST reject invalid input with STATUS_INVALID_PARAMETER. The server MUST return STATUS_INVALID_DOMAIN_STATE in the following cases:
 
 - The TrustAttributes TRUST_ATTRIBUTE_FOREST_TRANSITIVE flag is set and the forestFunctionality specified in [MS-ADTS] section 3.1.1.3.2.27 is DS_BEHAVIOR_WIN2003 or higher.
-- The TrustAttributes TRUST_ATTRIBUTE_FOREST_TRANSITIVE flag is set and the **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.7)) do not contain the same value.
+- The TrustAttributes TRUST_ATTRIBUTE_FOREST_TRANSITIVE flag is set and the **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.1)) do not contain the same value.
 - The TrustAttributes TRUST_ATTRIBUTE_CROSS_ORGANIZATION flag is set and the forestFunctionality specified in [MS-ADTS] section 3.1.1.3.2.27 is DS_BEHAVIOR_WIN2003 or higher.
-If one or more properties in *TrustedDomainInformation* points to the current domain (such as the domain that the server is a part of), the server MUST return STATUS_CURRENT_DOMAIN_NOT_ALLOWED. If there is another domain that claims the same properties, the server MUST return STATUS_OBJECT_NAME_COLLISION. Each field in this structure maps to a field in the TDO model, as specified in section [3.1.1.5](#Section_3.1.1.7). If the operation succeeds, the server MUST update its database with a new TDO field populated from this input parameter.
+If one or more properties in *TrustedDomainInformation* points to the current domain (such as the domain that the server is a part of), the server MUST return STATUS_CURRENT_DOMAIN_NOT_ALLOWED. If there is another domain that claims the same properties, the server MUST return STATUS_OBJECT_NAME_COLLISION. Each field in this structure maps to a field in the TDO model, as specified in section [3.1.1.5](#Section_3.1.1.5). If the operation succeeds, the server MUST update its database with a new TDO field populated from this input parameter.
 
 *AuthenticationInformation*: A structure containing an encrypted LSAPR_TRUSTED_DOMAIN_AUTH_BLOB (section [2.2.7.16](#Section_2.2.7.16)) which specifies the authentication information for the trusted domain. The server first MUST decrypt this data structure using an algorithm (as specified in section [5.1.1](#Section_5.1.1)) with the key being the session key negotiated by the transport. The server then MUST unmarshal the data inside this structure and then store it into a structure whose format is specified in section [2.2.7.11](#Section_2.2.7.11). This structure MUST then be stored on Trust Incoming and Outgoing Password properties.
 
@@ -6431,7 +6431,7 @@ NTSTATUS LsarCreateTrustedDomainEx(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainInformation:** Information about the new TDO to be created.
 
@@ -6481,7 +6481,7 @@ NTSTATUS LsarCreateTrustedDomain(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainInformation:** Information about the new [**trusted domain object (TDO)**](#gt_trusted-domain-object-tdo) to be created.
 
@@ -6507,7 +6507,7 @@ NTSTATUS LsarCreateTrustedDomain(
 
 Processing:
 
-This message MUST be processed in an identical manner to [LsarCreateTrustedDomainEx](#Section_3.1.4.7.10) with the following mapping as input parameters.
+This message MUST be processed in an identical manner to [LsarCreateTrustedDomainEx](#Section_3.1.4.7.11) with the following mapping as input parameters.
 
 *PolicyHandle*: Same.
 
@@ -6574,7 +6574,7 @@ This message takes three arguments:
 
 *InformationClass*: A value from the TRUSTED_INFORMATION_CLASS enumeration specifying what type of information the caller is requesting. Not all values are valid. For values outside the TRUSTED_INFORMATION_CLASS range, the server MUST reject the request with STATUS_INVALID_PARAMETER. Information class values TrustedDomainAuthInformationInternal and TrustedDomainFullInformationInternal MUST be rejected with STATUS_INVALID_INFO_CLASS.
 
-*TrustedDomainInformation*: Used to return the data requested by the caller, in a structure form corresponding to the *InformationClass* parameter. Information MUST be collected from the abstract data model specified in section [3.1.1.5](#Section_3.1.1.7).
+*TrustedDomainInformation*: Used to return the data requested by the caller, in a structure form corresponding to the *InformationClass* parameter. Information MUST be collected from the abstract data model specified in section [3.1.1.5](#Section_3.1.1.5).
 
 | Value of InformationClass parameter | Information to return |
 | --- | --- |
@@ -6646,7 +6646,7 @@ This message takes three arguments:
 - TrustedDomainSupportedEncryptionTypes
 *TrustedDomainInformation*: Contains information to be set, appropriate for the *InformationClass* parameter. The server MUST validate the *TrustedDomainInformation* parameter according to information class–specific rules. The rules for internal consistency checking of trusted domain objects are specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.6.
 
-Information in the abstract data model specified in section [3.1.1.5](#Section_3.1.1.7) MUST be updated using *TrustedDomainInformation* and *InformationClass* parameters as follows:
+Information in the abstract data model specified in section [3.1.1.5](#Section_3.1.1.5) MUST be updated using *TrustedDomainInformation* and *InformationClass* parameters as follows:
 
 | Value of InformationClass parameter | Information to set |
 | --- | --- |
@@ -6660,11 +6660,11 @@ Information in the abstract data model specified in section [3.1.1.5](#Section_3
 The server MUST return STATUS_INVALID_DOMAIN_STATE in the following cases:
 
 - The TrustAttributes TRUST_ATTRIBUTE_FOREST_TRANSITIVE flag is set and the forestFunctionality specified in [MS-ADTS] section 3.1.1.3.2.27 is DS_BEHAVIOR_WIN2003 or higher.
-- The TrustAttributes TRUST_ATTRIBUTE_FOREST_TRANSITIVE flag is set and the **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.7)) do not contain the same value.
+- The TrustAttributes TRUST_ATTRIBUTE_FOREST_TRANSITIVE flag is set and the **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.1)) do not contain the same value.
 - The TrustAttributes TRUST_ATTRIBUTE_CROSS_ORGANIZATION flag is set and the forestFunctionality specified in [MS-ADTS] section 3.1.1.3.2.27 is DS_BEHAVIOR_WIN2003 or higher.
 If the server is a [**read-only domain controller**](#gt_read-only-domain-controller-rodc), it MUST return an error.<108>
 
-If the [**trust**](#gt_trust) direction is being set to incoming or bidirectional, then the server MUST create an [**interdomain trust account**](#gt_interdomain-trust-account) for this trust, if such an account does not yet exist, and populate it as specified in [MS-ADTS] section 6.1.6.8. The unicodePwd attribute of the account is updated (as specified in [MS-SAMR](#Section_5) section 3.1.1.8.7) with the clear text password (that is, the password value with AuthType being equal to 0x2) in the "Trust Incoming Passwords" information provided.
+If the [**trust**](#gt_trust) direction is being set to incoming or bidirectional, then the server MUST create an [**interdomain trust account**](#gt_interdomain-trust-account) for this trust, if such an account does not yet exist, and populate it as specified in [MS-ADTS] section 6.1.6.8. The unicodePwd attribute of the account is updated (as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 3.1.1.8.7) with the clear text password (that is, the password value with AuthType being equal to 0x2) in the "Trust Incoming Passwords" information provided.
 
 <a id="Section_3.1.4.7.15"></a>
 ##### 3.1.4.7.15 LsarQueryForestTrustInformation (Opnum 73)
@@ -6683,7 +6683,7 @@ NTSTATUS LsarQueryForestTrustInformation(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainName:** The name of the [**trusted domain**](#gt_trusted-domain) to query.
 
@@ -6713,14 +6713,14 @@ This message takes four arguments:
 
 The server MUST return STATUS_INVALID_DOMAIN_STATE if any of the following conditions is TRUE:
 
-- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.7)) do not contain the same value.
+- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.1)) do not contain the same value.
 - The forestFunctionality specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.27 is not DS_BEHAVIOR_WIN2003 or higher.
 - [**Active Directory**](#gt_active-directory) is not running on this machine.
 If a trusted domain object by the name TrustedDomainName does not exist, the server MUST return STATUS_NO_SUCH_DOMAIN.
 
-*HighestRecordType*: The caller sets this argument to the highest [LSA_FOREST_TRUST_RECORD_TYPE](#Section_2.2.7.21) enum value recognized by the caller. This parameter is ignored by the server.
+*HighestRecordType*: The caller sets this argument to the highest [LSA_FOREST_TRUST_RECORD_TYPE](#Section_2.2.7.22) enum value recognized by the caller. This parameter is ignored by the server.
 
-*ForestTrustInfo*: Used to return the forest trust information associated with the trusted domain object. This corresponds to the Forest Trust Information abstract data model specified in section [3.1.1.5](#Section_3.1.1.7). Any records of type ForestTrustBinaryInfo and later MUST be returned to the caller as ForestTrustBinaryInfo type records (sections [2.2.7.21](#Section_2.2.7.21) and 2.2.7.22).
+*ForestTrustInfo*: Used to return the forest trust information associated with the trusted domain object. This corresponds to the Forest Trust Information abstract data model specified in section [3.1.1.5](#Section_3.1.1.5). Any records of type ForestTrustBinaryInfo and later MUST be returned to the caller as ForestTrustBinaryInfo type records (sections [2.2.7.21](#Section_2.2.7.21) and 2.2.7.22).
 
 If the trusted domain object is not of the type that supports a forest trust (as determined by the presence or absence of the TRUST_ATTRIBUTE_FOREST_TRANSITIVE attribute), the server MUST return STATUS_INVALID_PARAMETER. If the forest trust information does not exist on a trusted domain object that otherwise can support a forest trust, the server MUST return STATUS_NOT_FOUND.
 
@@ -6747,7 +6747,7 @@ NTSTATUS LsarSetForestTrustInformation(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **TrustedDomainName:** The name of the trusted domain object on which to set the forest trust information.
 
@@ -6781,7 +6781,7 @@ This message takes six arguments:
 
 The server MUST return STATUS_INVALID_DOMAIN_STATE if any of the following conditions is TRUE.
 
-- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.7)) do not contain the same value.
+- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (see section [3.1.1.1](#Section_3.1.1.1)) do not contain the same value.
 - [**Active Directory**](#gt_active-directory) is not running on this machine.
 The server MUST return STATUS_INVALID_DOMAIN_ROLE if the IsEffectiveRoleOwner function specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.5.1.8 returns FALSE with the roleObject parameter set to default NC.
 
@@ -6791,11 +6791,11 @@ The server MUST verify that the caller has access to the trusted domain object a
 
 The server MUST also make sure that the [**trust attributes**](#gt_trust-attributes) associated with the trusted domain object referenced by the *TrustedDomainName* parameter has the TRUST_ATTRIBUTE_FOREST_TRANSITIVE set. If the attribute is not present, the server MUST return STATUS_INVALID_PARAMETER.
 
-*HighestRecordType*: The caller sets this argument to the highest [LSA_FOREST_TRUST_RECORD_TYPE](#Section_2.2.7.21) enumeration value recognized by the caller. If this argument is greater in value than the highest record type recognized by the server, the server MUST return STATUS_INVALID_PARAMETER.
+*HighestRecordType*: The caller sets this argument to the highest [LSA_FOREST_TRUST_RECORD_TYPE](#Section_2.2.7.22) enumeration value recognized by the caller. If this argument is greater in value than the highest record type recognized by the server, the server MUST return STATUS_INVALID_PARAMETER.
 
 *ForestTrustInfo*: A collection of forest trust records identifying the topology of the [**trusted forest**](#gt_trusted-forest). The server MUST verify that the forest trust information supplied by the caller is valid by performing a consistency check, as specified in [MS-ADTS] section 6.1.6. Note that "consistent" does not necessarily mean "collision-free". The method for determining collisions is specified in section [3.1.4.7.16.1](#Section_3.1.4.7.16.1).
 
-Records supplied by the caller in the Data field (section [2.2.7.21](#Section_2.2.7.21)), using the opaque LSA_FOREST_TRUST_BINARY_DATA structure (section [2.2.7.23](#Section_2.2.7.23)), MUST be parsed using the SubRecordType field. If SubRecordType ([MS-ADTS] section 6.1.6.9.3) is a known record type, the record MUST be validated\persisted as that record type (section [3.1.1.5](#Section_3.1.1.7)).
+Records supplied by the caller in the Data field (section [2.2.7.21](#Section_2.2.7.21)), using the opaque LSA_FOREST_TRUST_BINARY_DATA structure (section [2.2.7.23](#Section_2.2.7.23)), MUST be parsed using the SubRecordType field. If SubRecordType ([MS-ADTS] section 6.1.6.9.3) is a known record type, the record MUST be validated\persisted as that record type (section [3.1.1.5](#Section_3.1.1.5)).
 
 ForestTrustScannerInfo (section [2.2.7.31](#Section_2.2.7.31)) records MUST contain DnsName and NetbiosName data, but are not otherwise validated. Note that collision name checking is not done on ForestTrustScannerInfo records.
 
@@ -6865,7 +6865,7 @@ LsarCreateTrustedDomainEx3(
 
 );
 
-**PolicyHandle**: An [**RPC context handle**](#gt_rpc-context-handle) obtained from either LsarOpenPolicy3 (section [3.1.4.4.9](#Section_3.1.4.4.9)), LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.10)), or LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.10)).
+**PolicyHandle**: An [**RPC context handle**](#gt_rpc-context-handle) obtained from either LsarOpenPolicy3 (section [3.1.4.4.9](#Section_3.1.4.4.9)), LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.1)), or LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.2)).
 
 **TrustedDomainInformation**: Information about the new TDO to be created.
 
@@ -6885,7 +6885,7 @@ The processing is the same as LsarCreateTrustedDomainEx2 (section 3.1.4.7.10) wi
 
 If the length of **cbCipher** in *AuthenticationInformation* is less than (512 + **IncomingAuthInfoSize** + **OutgoingAuthInfoSize**) the server MUST return STATUS_INVALID_PARAMETER.
 
-The server MUST first decrypt this data structure using the algorithm specified in AES Cipher Usage (section 5.1.5) with the key being the session key negotiated by the transport. Next, the server MUST unmarshal the data inside this structure and store it in a structure, the format of which is specified in section [2.2.7.11](#Section_2.2.7.11). This structure MUST then be stored in Trust Incoming and Outgoing Password properties (section [3.1.1.5](#Section_3.1.1.7)).
+The server MUST first decrypt this data structure using the algorithm specified in AES Cipher Usage (section 5.1.5) with the key being the session key negotiated by the transport. Next, the server MUST unmarshal the data inside this structure and store it in a structure, the format of which is specified in section [2.2.7.11](#Section_2.2.7.11). This structure MUST then be stored in Trust Incoming and Outgoing Password properties (section [3.1.1.5](#Section_3.1.1.5)).
 
 <a id="Section_3.1.4.7.18"></a>
 ##### 3.1.4.7.18 LsarQueryForestTrustInformation2 (Opnum 132)
@@ -6906,7 +6906,7 @@ LsarQueryForestTrustInformation2(
 
 );
 
-**PolicyHandle:** An [**RPC context handle**](#gt_rpc-context-handle) obtained from either the LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.10)) or LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.10)) method.
+**PolicyHandle:** An [**RPC context handle**](#gt_rpc-context-handle) obtained from either the LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.2)) or LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.1)) method.
 
 **TrustedDomainName:** The name of the [**trusted domain**](#gt_trusted-domain) to query.
 
@@ -6936,14 +6936,14 @@ This message takes four arguments:
 
 The server MUST return STATUS_INVALID_DOMAIN_STATE if any of the following conditions are TRUE:
 
-- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (section [3.1.1.1](#Section_3.1.1.7)) do not contain the same value.
+- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (section [3.1.1.1](#Section_3.1.1.1)) do not contain the same value.
 - The forestFunctionality specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.3.2.27 is not DS_BEHAVIOR_WIN2003 or higher.
 - **Active Directory** is not running on this machine.
 If a trusted domain object named TrustedDomainName does not exist, the server MUST return STATUS_NO_SUCH_DOMAIN.
 
-*HighestRecordType*: The caller sets this argument to the highest LSA_FOREST_TRUST_RECORD_TYPE enum value (section [2.2.7.22](#Section_2.2.7.21)) recognized by the caller.
+*HighestRecordType*: The caller sets this argument to the highest LSA_FOREST_TRUST_RECORD_TYPE enum value (section [2.2.7.22](#Section_2.2.7.22)) recognized by the caller.
 
-*ForestTrustInfo2*: Used to return the forest trust information associated with the trusted domain object. This corresponds to the Forest Trust Information abstract data model specified in section [3.1.1.5](#Section_3.1.1.7). If any of the forest trust info records in the data model are of a type that is greater than **HighestRecordType**, these records MUST be returned to the caller as **ForestTrustBinaryInfo** records.
+*ForestTrustInfo2*: Used to return the forest trust information associated with the trusted domain object. This corresponds to the Forest Trust Information abstract data model specified in section [3.1.1.5](#Section_3.1.1.5). If any of the forest trust info records in the data model are of a type that is greater than **HighestRecordType**, these records MUST be returned to the caller as **ForestTrustBinaryInfo** records.
 
 If the trusted domain object is not of the type that supports a forest trust (as determined by the presence or absence of the TRUST_ATTRIBUTE_FOREST_TRANSITIVE attribute), the server MUST return STATUS_INVALID_PARAMETER. If the forest trust information does not exist on a trusted domain object that otherwise can support a forest trust, the server MUST return STATUS_NOT_FOUND.
 
@@ -6970,7 +6970,7 @@ NTSTATUS LsarSetForestTrustInformation2(
 
 );
 
-**PolicyHandle:** An [**RPC context handle**](#gt_rpc-context-handle) obtained from either the LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.10)) or LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.10)) method.
+**PolicyHandle:** An [**RPC context handle**](#gt_rpc-context-handle) obtained from either the LsarOpenPolicy (section [3.1.4.4.2](#Section_3.1.4.4.2)) or LsarOpenPolicy2 (section [3.1.4.4.1](#Section_3.1.4.4.1)) method.
 
 **TrustedDomainName:** The name of the trusted domain object on which to set the forest trust information.
 
@@ -7004,7 +7004,7 @@ This message takes six arguments:
 
 The server MUST return STATUS_INVALID_DOMAIN_STATE if any of the following conditions are TRUE.
 
-- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (section [3.1.1.1](#Section_3.1.1.7)) do not contain the same value.
+- The **DnsForestName** and **DnsDomainName** fields in DNS Domain Information (section [3.1.1.1](#Section_3.1.1.1)) do not contain the same value.
 - **Active Directory** is not running on this machine.
 The server MUST return STATUS_INVALID_DOMAIN_ROLE if the IsEffectiveRoleOwner function specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.5.1.8 returns FALSE with the roleObject parameter set to default NC.
 
@@ -7014,7 +7014,7 @@ The server MUST verify that the caller has access to the trusted domain object a
 
 The server MUST also make sure that the **trust attributes** associated with the trusted domain object referenced by the *TrustedDomainName* parameter has the TRUST_ATTRIBUTE_FOREST_TRANSITIVE set. If the attribute is not present, the server MUST return STATUS_INVALID_PARAMETER.
 
-*HighestRecordType*: The caller sets this argument to the highest LSA_FOREST_TRUST_RECORD_TYPE enumeration value (section [2.2.7.22](#Section_2.2.7.21)) recognized by the caller. If this argument is greater in value than the highest record type recognized by the server, the server MUST return STATUS_INVALID_PARAMETER.
+*HighestRecordType*: The caller sets this argument to the highest LSA_FOREST_TRUST_RECORD_TYPE enumeration value (section [2.2.7.22](#Section_2.2.7.22)) recognized by the caller. If this argument is greater in value than the highest record type recognized by the server, the server MUST return STATUS_INVALID_PARAMETER.
 
 *ForestTrustInfo*: A collection of forest trust records identifying the topology of the [**trusted forest**](#gt_trusted-forest). The server MUST verify that the forest trust information supplied by the caller is valid by performing a consistency check, as specified in [MS-ADTS] section 6.1.6. Note that "consistent" does not necessarily mean "collision-free". The method for determining collisions is specified in section [3.1.4.7.16.1](#Section_3.1.4.7.16.1).
 
@@ -7024,7 +7024,7 @@ ForestTrustScannerInfo records MUST contain DnsName and NetbiosName data but are
 
 *CollisionInfo*: A list of collision records. The request is considered successful even if a non-empty set of collisions is returned. The rules for generating collision information are specified in section 3.1.4.7.16.1.
 
-The server MUST store the generated *ForestTrustInfo* in the Forest Trust Information attribute specified in section [3.1.1.5](#Section_3.1.1.7).
+The server MUST store the generated *ForestTrustInfo* in the Forest Trust Information attribute specified in section [3.1.1.5](#Section_3.1.1.5).
 
 <a id="Section_3.1.4.8"></a>
 #### 3.1.4.8 Privilege Methods
@@ -7055,7 +7055,7 @@ NTSTATUS LsarEnumeratePrivileges(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **EnumerationContext:** A pointer to a context value that is used to resume enumeration, if necessary.
 
@@ -7103,7 +7103,7 @@ NTSTATUS LsarLookupPrivilegeValue(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **Name:** A string containing the name of a privilege.
 
@@ -7146,7 +7146,7 @@ NTSTATUS LsarLookupPrivilegeName(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **Value:** A LUID that the caller wishes to map to a string name.
 
@@ -7194,7 +7194,7 @@ NTSTATUS LsarLookupPrivilegeDisplayName(
 
 );
 
-**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.10) or [LsarOpenPolicy2](#Section_3.1.4.4.10).
+**PolicyHandle:** An [**RPC**](#gt_remote-procedure-call-rpc) context handle obtained from either [LsarOpenPolicy](#Section_3.1.4.4.2) or [LsarOpenPolicy2](#Section_3.1.4.4.1).
 
 **Name:** A string containing the name of a privilege.
 
@@ -7300,7 +7300,7 @@ RequiredAccess |= ACCESS_SYSTEM_SECURITY
 
 END IF
 
-*SecurityInformation*: A set of bits specifying which portions of the security descriptor the caller is interested in retrieving. The various bits and the associated access rights are specified in section [2.2.1.3](#Section_5). The server MUST reject calls that specify a bit that is not defined in section 2.2.1.3.<112>
+*SecurityInformation*: A set of bits specifying which portions of the security descriptor the caller is interested in retrieving. The various bits and the associated access rights are specified in section [2.2.1.3](#Section_2.2.1.3). The server MUST reject calls that specify a bit that is not defined in section 2.2.1.3.<112>
 
 *SecurityDescriptor*: An output parameter. If access checks pass, the server MUST fill this information with a valid self-relative security descriptor containing only the fields requested by the caller. The server MUST NOT put information into the security descriptor that the caller did not request.
 
@@ -7323,7 +7323,7 @@ NTSTATUS LsarSetSecurityObject(
 
 **ObjectHandle:** An open handle to an existing object.
 
-**SecurityInformation:** A bitmask specifying which portions of the security descriptor are to be set. The server MUST reject calls that specify a bit that is not defined in section [2.2.1.3](#Section_5).<114>
+**SecurityInformation:** A bitmask specifying which portions of the security descriptor are to be set. The server MUST reject calls that specify a bit that is not defined in section [2.2.1.3](#Section_2.2.1.3).<114>
 
 **SecurityDescriptor:** The security descriptor to be set.
 
@@ -8054,7 +8054,7 @@ This means that the size, in bytes, of the sub-portion of the structure from the
 
 Usage of [**RC4**](#gt_rc4) is specified in section [5.1.1](#Section_5.1.1). This protocol employs an implementation that reuses RC4 key stream, which subjects it to Xor and other cryptanalysis attacks. This vulnerability is applicable when multiple RC4-encrypted [**opnum**](#gt_opnum) requests are made over the same transport session, as specified in section [2.1](#Section_2.1).
 
-Usage of Data Encryption Standard (DES) in Electronic Code Book (ECB) mode is specified in section [5.1.2](#Section_5.1.4.2). This algorithm is considered inadequate for maintaining confidentiality considering the efficiency of brute-force and cryptanalysis attacks that are enabled by using year 2006, off-the-shelf computer hardware.
+Usage of Data Encryption Standard (DES) in Electronic Code Book (ECB) mode is specified in section [5.1.2](#Section_5.1.2). This algorithm is considered inadequate for maintaining confidentiality considering the efficiency of brute-force and cryptanalysis attacks that are enabled by using year 2006, off-the-shelf computer hardware.
 
 The session key for sections 5.1.1 and 5.1.2 is obtained from the [**SMB**](#gt_server-message-block-smb) transport, as specified in section 2.1. The session key is obtained from the SMB transport every time a message that needs encryption is to be sent or a message that needs decryption is to be received.
 
@@ -8378,7 +8378,7 @@ Note that enc_key is truncated to 32-bytes and the entire 64-byte mac_key is use
 
 For ease of implementation, the full IDL is provided, where ms-dtyp.idl is the IDL specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A.
 
-**Note** The lsarpc interface is shared between this protocol and the Local Security Authority (Translation Methods) Remote Protocol [MS-LSAT](#Section_5). For convenience, the IDL definitions that appear below and the IDL definitions in [MS-LSAT] section 6 have been merged and are available for download. For more information, see [[MSFT-LSA-IDL]](https://go.microsoft.com/fwlink/?LinkId=150268).
+**Note** The lsarpc interface is shared between this protocol and the Local Security Authority (Translation Methods) Remote Protocol [MS-LSAT](../MS-LSAT/MS-LSAT.md). For convenience, the IDL definitions that appear below and the IDL definitions in [MS-LSAT] section 6 have been merged and are available for download. For more information, see [[MSFT-LSA-IDL]](https://go.microsoft.com/fwlink/?LinkId=150268).
 
 import "ms-dtyp.idl";
 
@@ -10815,7 +10815,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <3> Section 2.1: Windows implementations of the client and [**server role**](#gt_server-role) for this protocol use the tamper-resistance functionality provided by [**SMB**](#gt_server-message-block-smb) transport on the products that are available, and are enabled as specified in [MS-SMB](../MS-SMB/MS-SMB.md) section 3.1.1.1 (the *MessageSigningPolicy* parameter), and [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.1.1.1 (the *RequireMessageSigning* parameter).
 
-<4> Section 2.1: If an implementation of the client role violates this specification and uses the [**RPC**](#gt_remote-procedure-call-rpc)-provided security-support-provider mechanism for the RPC connection to a Windows implementation, Windows processes all messages as specified in section [3.1](#Section_1.3) (that is, there is no change in message processing behavior), except for the messages that use encryption specified in section [5.1](#Section_5). During encryption and decryption, Windows implementations for the server role use a hard-coded key instead of the SMB transport–provided session key. The hard-coded key is represented below as bytes in hexadecimal form.
+<4> Section 2.1: If an implementation of the client role violates this specification and uses the [**RPC**](#gt_remote-procedure-call-rpc)-provided security-support-provider mechanism for the RPC connection to a Windows implementation, Windows processes all messages as specified in section [3.1](#Section_3.1) (that is, there is no change in message processing behavior), except for the messages that use encryption specified in section [5.1](#Section_5.1). During encryption and decryption, Windows implementations for the server role use a hard-coded key instead of the SMB transport–provided session key. The hard-coded key is represented below as bytes in hexadecimal form.
 
 "53 79 73 74 65 6d 4c 69-62 72 61 72 79 44 54 43"
 
@@ -10841,14 +10841,14 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | [LSAPR_HANDLE (section 2.2.2.1)](#Section_2.2.2.1) | Windows NT 3.1 |
 | [STRING (section 2.2.3.1)](#Section_2.2.3.1) | Windows NT 3.1 |
 | [LSAPR_ACL (section 2.2.3.2)](#Section_2.2.3.2) | Windows NT 3.1 |
-| [SECURITY_DESCRIPTOR_CONTROL (section 2.2.3.3)](#Section_5) | Windows NT 3.1 |
-| [LSAPR_SECURITY_DESCRIPTOR (section 2.2.3.4)](#Section_5) | Windows NT 3.1 |
-| [SECURITY_IMPERSONATION_LEVEL (section 2.2.3.5)](#Section_5) | Windows NT 3.1 |
-| [SECURITY_CONTEXT_TRACKING_MODE (section 2.2.3.6)](#Section_5) | Windows NT 3.1 |
-| [SECURITY_QUALITY_OF_SERVICE (section 2.2.3.7)](#Section_5) | Windows NT 3.1 |
+| [SECURITY_DESCRIPTOR_CONTROL (section 2.2.3.3)](#Section_2.2.3.3) | Windows NT 3.1 |
+| [LSAPR_SECURITY_DESCRIPTOR (section 2.2.3.4)](#Section_2.2.3.4) | Windows NT 3.1 |
+| [SECURITY_IMPERSONATION_LEVEL (section 2.2.3.5)](#Section_2.2.3.5) | Windows NT 3.1 |
+| [SECURITY_CONTEXT_TRACKING_MODE (section 2.2.3.6)](#Section_2.2.3.6) | Windows NT 3.1 |
+| [SECURITY_QUALITY_OF_SERVICE (section 2.2.3.7)](#Section_2.2.3.7) | Windows NT 3.1 |
 | [LSAPR_OBJECT_ATTRIBUTES (section 2.2.2.4)](#Section_2.2.2.4) | Windows NT 3.1 |
 | [ACCESS_MASK (section 2.2.1.1)](#Section_2.2.1.1) | Windows NT 3.1 |
-| [SECURITY_INFORMATION (section 2.2.1.3)](#Section_5) | Windows NT 3.1 |
+| [SECURITY_INFORMATION (section 2.2.1.3)](#Section_2.2.1.3) | Windows NT 3.1 |
 | [LSAPR_POLICY_PRIVILEGE_DEF (section 2.2.8.1)](#Section_2.2.8.1) | Windows NT 3.1 |
 | [LSAPR_PRIVILEGE_ENUM_BUFFER (section 2.2.8.2)](#Section_2.2.8.2) | Windows NT 3.1 |
 | [LSAPR_ACCOUNT_INFORMATION (section 2.2.5.1)](#Section_2.2.5.1) | Windows NT 3.1 |
@@ -10856,8 +10856,8 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | [POLICY_SYSTEM_ACCESS_CODE (section 2.2.1.2)](#Section_2.2.1.2) | Windows NT 3.1 |
 | [LSA_UNICODE_STRING (section 2.2.2.3)](#Section_2.2.2.3) | Windows NT 3.1 |
 | [LSAPR_TRUST_INFORMATION (section 2.2.7.1)](#Section_2.2.7.1) | Windows NT 3.1 |
-| [LSAPR_TRUSTED_DOMAIN_INFORMATION_BASIC (section 2.2.7.8)](#Section_2.2.7.3) | Windows NT 3.1 |
-| [LSAPR_SR_SECURITY_DESCRIPTOR (section 2.2.2.5)](#Section_5) | Windows NT 3.1 |
+| [LSAPR_TRUSTED_DOMAIN_INFORMATION_BASIC (section 2.2.7.8)](#Section_2.2.7.8) | Windows NT 3.1 |
+| [LSAPR_SR_SECURITY_DESCRIPTOR (section 2.2.2.5)](#Section_2.2.2.5) | Windows NT 3.1 |
 | [POLICY_INFORMATION_CLASS (section 2.2.4.1)](#Section_2.2.4.1) | Windows NT 3.1 |
 | [POLICY_AUDIT_LOG_INFO (section 2.2.4.3)](#Section_2.2.4.3) | Windows NT 3.1 |
 | [LSAPR_POLICY_AUDIT_EVENTS_INFO (section 2.2.4.4)](#Section_2.2.4.4) | Windows NT 3.1 |
@@ -10865,7 +10865,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | [LSAPR_POLICY_ACCOUNT_DOM_INFO (section 2.2.4.6)](#Section_2.2.4.6) | Windows NT 3.1 |
 | [LSAPR_POLICY_PD_ACCOUNT_INFO (section 2.2.4.7)](#Section_2.2.4.7) | Windows NT 3.1 |
 | [POLICY_LSA_SERVER_ROLE (section 2.2.4.8)](#Section_2.2.4.8) | Windows NT 3.1 |
-| [POLICY_LSA_SERVER_ROLE_INFO (section 2.2.4.9)](#Section_2.2.4.8) | Windows NT 3.1 |
+| [POLICY_LSA_SERVER_ROLE_INFO (section 2.2.4.9)](#Section_2.2.4.9) | Windows NT 3.1 |
 | [LSAPR_POLICY_REPLICA_SRCE_INFO (section 2.2.4.10)](#Section_2.2.4.10) | Windows NT 3.1 |
 | [POLICY_MODIFICATION_INFO (section 2.2.4.11)](#Section_2.2.4.11) | Windows NT 3.1 |
 | [POLICY_AUDIT_FULL_SET_INFO (section 2.2.4.12)](#Section_2.2.4.12) | Windows NT 3.1 |
@@ -10886,19 +10886,19 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 | [LSAPR_POLICY_DOMAIN_INFORMATION (section 2.2.4.16)](#Section_2.2.4.16) | Windows 2000 |
 | [LSAPR_POLICY_DOMAIN_EFS_INFO (section 2.2.4.18)](#Section_2.2.4.18) | Windows 2000 |
 | [LSAPR_DOMAIN_KERBEROS_TICKET_INFO (section 2.2.4.19)](#Section_2.2.4.19) | Windows 2000 |
-| [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX (section 2.2.7.9)](#Section_2.2.7.3) | Windows 2000 |
-| [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX2 (section 2.2.7.10)](#Section_2.2.7.3) | Windows 2000 |
+| [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX (section 2.2.7.9)](#Section_2.2.7.9) | Windows 2000 |
+| [LSAPR_TRUSTED_DOMAIN_INFORMATION_EX2 (section 2.2.7.10)](#Section_2.2.7.10) | Windows 2000 |
 | [LSAPR_AUTH_INFORMATION (section 2.2.7.17)](#Section_2.2.7.17) | Windows XP and Windows Server 2003 |
 | [LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION (section 2.2.7.11)](#Section_2.2.7.11) | Windows 2000 |
 | [LSAPR_TRUSTED_DOMAIN_AUTH_BLOB (section 2.2.7.16)](#Section_2.2.7.16) | Windows 2000 |
-| [LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL (section 2.2.7.12)](#Section_2.2.7.11) | Windows 2000 |
+| [LSAPR_TRUSTED_DOMAIN_AUTH_INFORMATION_INTERNAL (section 2.2.7.12)](#Section_2.2.7.12) | Windows 2000 |
 | [LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION (section 2.2.7.13)](#Section_2.2.7.13) | Windows 2000 |
 | [LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION_INTERNAL (section 2.2.7.14)](#Section_2.2.7.14) | Windows 2000 |
 | [LSAPR_TRUSTED_DOMAIN_FULL_INFORMATION2 (section 2.2.7.15)](#Section_2.2.7.15) | Windows XP and Windows Server 2003 |
 | LUID ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.7) | Windows NT 3.1 |
 | [TRUSTED_DOMAIN_SUPPORTED_ENCRYPTION_TYPES (section 2.2.7.18)](#Section_2.2.7.18) | Windows Vista and Windows Server 2008 |
 | [LSAPR_LUID_AND_ATTRIBUTES (section 2.2.5.4)](#Section_2.2.5.4) | Windows NT 3.1 |
-| [LSA_FOREST_TRUST_RECORD_TYPE (section 2.2.7.22)](#Section_2.2.7.21) | Windows XP and Windows Server 2003 |
+| [LSA_FOREST_TRUST_RECORD_TYPE (section 2.2.7.22)](#Section_2.2.7.22) | Windows XP and Windows Server 2003 |
 | [LSA_FOREST_TRUST_BINARY_DATA (section 2.2.7.23)](#Section_2.2.7.23) | Windows XP and Windows Server 2003 |
 | [LSA_FOREST_TRUST_DOMAIN_INFO (section 2.2.7.24)](#Section_2.2.7.24) | Windows XP and Windows Server 2003 |
 | [LSA_FOREST_TRUST_RECORD (section 2.2.7.21)](#Section_2.2.7.21) | Windows XP and Windows Server 2003 |
@@ -11104,7 +11104,7 @@ See sections 2.2.1.1.1 and 2.2.1.1.2 for the definitions of the generic and obje
 
 <47> Section 3.1.1.1: Windows NT 3.1, Windows NT 3.5, Windows NT 3.51, and Windows NT 4.0 domain controllers use the Netlogon Remote Protocol, as specified in [MS-NRPC](../MS-NRPC/MS-NRPC.md) section 1.3.3, to converge Event Auditing Options abstract data. These versions of Windows do not implement Kerberos Policy Information abstract data.
 
-Windows 2000 Server, Windows Server 2003, and Windows Server 2003 R2 and later domain controllers use the Group Policy: Security Protocol Extension, as specified in [MS-GPSB](#Section_5) section 2.2.2 to converge Kerberos Policy Information abstract data and [MS-GPSB] section 2.2.4 to converge Event Auditing Options abstract data.
+Windows 2000 Server, Windows Server 2003, and Windows Server 2003 R2 and later domain controllers use the Group Policy: Security Protocol Extension, as specified in [MS-GPSB](../MS-GPSB/MS-GPSB.md) section 2.2.2 to converge Kerberos Policy Information abstract data and [MS-GPSB] section 2.2.4 to converge Event Auditing Options abstract data.
 
 <48> Section 3.1.1.2.1: The following is a timeline of when each [**privilege**](#gt_privilege) value was introduced. All privilege values continue to be supported in all subsequent versions of Windows according to the applicability lists at the beginning of this section.
 
@@ -11218,17 +11218,17 @@ Note that the Boolean meaning of the TurnOffAnonymousBlock registry value is rev
 | Method | Product |
 | --- | --- |
 | [LsarClose (section 3.1.4.9.4)](#Section_3.1.4.9.4) | Windows NT 3.1 |
-| [LsarEnumeratePrivileges (section 3.1.4.8.1)](#Section_3.1.4.5.4) | Windows NT 3.1 |
-| [LsarQuerySecurityObject (section 3.1.4.9.1)](#Section_5) | Windows NT 3.1 |
-| [LsarSetSecurityObject (section 3.1.4.9.2)](#Section_5) | Windows NT 3.1 |
-| [LsarOpenPolicy (section 3.1.4.4.2)](#Section_3.1.4.4.10) | Windows NT 3.1 |
-| [LsarQueryInformationPolicy (section 3.1.4.4.4)](#Section_3.1.4.4.3) | Windows NT 3.1 |
+| [LsarEnumeratePrivileges (section 3.1.4.8.1)](#Section_3.1.4.8.1) | Windows NT 3.1 |
+| [LsarQuerySecurityObject (section 3.1.4.9.1)](#Section_3.1.4.9.1) | Windows NT 3.1 |
+| [LsarSetSecurityObject (section 3.1.4.9.2)](#Section_3.1.4.9.2) | Windows NT 3.1 |
+| [LsarOpenPolicy (section 3.1.4.4.2)](#Section_3.1.4.4.2) | Windows NT 3.1 |
+| [LsarQueryInformationPolicy (section 3.1.4.4.4)](#Section_3.1.4.4.4) | Windows NT 3.1 |
 | [LsarSetInformationPolicy (section 3.1.4.4.6)](#Section_3.1.4.4.6) | Windows NT 3.1 |
 | [LsarCreateAccount (section 3.1.4.5.1)](#Section_3.1.4.5.1) | Windows NT 3.1 |
 | [LsarEnumerateAccounts (section 3.1.4.5.2)](#Section_3.1.4.5.2) | Windows NT 3.1 |
-| [LsarCreateTrustedDomain (section 3.1.4.7.12)](#Section_3.1.4.7.10) | Windows NT 3.1 |
+| [LsarCreateTrustedDomain (section 3.1.4.7.12)](#Section_3.1.4.7.12) | Windows NT 3.1 |
 | [LsarEnumerateTrustedDomains (section 3.1.4.7.8)](#Section_3.1.4.7.8) | Windows NT 3.1 |
-| [LsarCreateSecret (section 3.1.4.6.1)](#Section_3.1.4.6.11) | Windows NT 3.1 |
+| [LsarCreateSecret (section 3.1.4.6.1)](#Section_3.1.4.6.1) | Windows NT 3.1 |
 | [LsarOpenAccount (section 3.1.4.5.3)](#Section_3.1.4.5.3) | Windows NT 3.1 |
 | [LsarEnumeratePrivilegesAccount (section 3.1.4.5.4)](#Section_3.1.4.5.4) | Windows NT 3.1 |
 | [LsarAddPrivilegesToAccount (section 3.1.4.5.5)](#Section_3.1.4.5.5) | Windows NT 3.1 |
@@ -11239,8 +11239,8 @@ Note that the Boolean meaning of the TurnOffAnonymousBlock registry value is rev
 | [LsarQueryInfoTrustedDomain (section 3.1.4.7.13)](#Section_3.1.4.7.13) | Windows NT 3.1 |
 | [LsarSetInformationTrustedDomain (section 3.1.4.7.14)](#Section_3.1.4.7.14) | Windows NT 3.1 |
 | [LsarOpenSecret (section 3.1.4.6.2)](#Section_3.1.4.6.2) | Windows NT 3.1 |
-| [LsarSetSecret (section 3.1.4.6.3)](#Section_3.1.4.6.9) | Windows NT 3.1 |
-| [LsarQuerySecret (section 3.1.4.6.4)](#Section_3.1.4.6.10) | Windows NT 3.1 |
+| [LsarSetSecret (section 3.1.4.6.3)](#Section_3.1.4.6.3) | Windows NT 3.1 |
+| [LsarQuerySecret (section 3.1.4.6.4)](#Section_3.1.4.6.4) | Windows NT 3.1 |
 | [LsarLookupPrivilegeValue (section 3.1.4.8.2)](#Section_3.1.4.8.2) | Windows NT 3.1 |
 | [LsarLookupPrivilegeName (section 3.1.4.8.3)](#Section_3.1.4.8.3) | Windows NT 3.1 |
 | [LsarLookupPrivilegeDisplayName (section 3.1.4.8.4)](#Section_3.1.4.8.4) | Windows NT 3.1 |
@@ -11252,15 +11252,15 @@ Note that the Boolean meaning of the TurnOffAnonymousBlock registry value is rev
 | [LsarQueryTrustedDomainInfo (section 3.1.4.7.2)](#Section_3.1.4.7.2) | Windows NT 3.51 |
 | [LsarSetTrustedDomainInfo (section 3.1.4.7.3)](#Section_3.1.4.7.3) | Windows NT 3.51 |
 | [LsarDeleteTrustedDomain (section 3.1.4.7.4)](#Section_3.1.4.7.4) | Windows NT 3.51 |
-| [LsarStorePrivateData (section 3.1.4.6.5)](#Section_3.1.4.6.11) | Windows NT 3.51 |
+| [LsarStorePrivateData (section 3.1.4.6.5)](#Section_3.1.4.6.5) | Windows NT 3.51 |
 | [LsarRetrievePrivateData (section 3.1.4.6.6)](#Section_3.1.4.6.6) | Windows NT 3.51 |
-| [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.10) | Windows NT 3.51 |
+| [LsarOpenPolicy2 (section 3.1.4.4.1)](#Section_3.1.4.4.1) | Windows NT 3.51 |
 | [LsarQueryInformationPolicy2 (section 3.1.4.4.3)](#Section_3.1.4.4.3) | Windows 2000 |
 | [LsarSetInformationPolicy2 (section 3.1.4.4.5)](#Section_3.1.4.4.5) | Windows 2000 |
 | [LsarQueryTrustedDomainInfoByName (section 3.1.4.7.5)](#Section_3.1.4.7.5) | Windows 2000 |
 | [LsarSetTrustedDomainInfoByName (section 3.1.4.7.6)](#Section_3.1.4.7.6) | Windows 2000 |
 | [LsarEnumerateTrustedDomainsEx (section 3.1.4.7.7)](#Section_3.1.4.7.7) | Windows 2000 |
-| [LsarCreateTrustedDomainEx (section 3.1.4.7.11)](#Section_3.1.4.7.10) | Windows 2000 |
+| [LsarCreateTrustedDomainEx (section 3.1.4.7.11)](#Section_3.1.4.7.11) | Windows 2000 |
 | [LsarQueryDomainInformationPolicy (section 3.1.4.4.7)](#Section_3.1.4.4.7) | Windows 2000 |
 | [LsarSetDomainInformationPolicy (section 3.1.4.4.8)](#Section_3.1.4.4.8) | Windows 2000 |
 | [LsarOpenTrustedDomainByName (section 3.1.4.7.9)](#Section_3.1.4.7.9) | Windows 2000 |
@@ -11270,7 +11270,7 @@ Note that the Boolean meaning of the TurnOffAnonymousBlock registry value is rev
 | [LsarOpenPolicy3 (section 3.1.4.4.9)](#Section_3.1.4.4.9) | Windows Server 2008 with [MSFT-CVE-2022-21913] |
 | [LsarCreateTrustedDomainEx3 (section 3.1.4.7.17)](#Section_3.1.4.7.17) | Windows Server 2008 with [MSFT-CVE-2022-21913] |
 
-<60> Section 3.1.4: Some gaps in the [**opnum**](#gt_opnum) numbering sequence correspond to opnums that are specified in [MS-LSAT](#Section_5). All other gaps in the opnum numbering sequence apply to Windows as follows.
+<60> Section 3.1.4: Some gaps in the [**opnum**](#gt_opnum) numbering sequence correspond to opnums that are specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md). All other gaps in the opnum numbering sequence apply to Windows as follows.
 
 | Opnum | Description |
 | --- | --- |
@@ -11446,20 +11446,20 @@ The changes made to this document are listed in the following table. For more in
 
 | Section | Description | Revision class |
 | --- | --- | --- |
-| [2.2.1.3](#Section_5) SECURITY_INFORMATION | Removed the recommendation against setting flags other than those in the table of bits relevant to the Local Security Authority (Domain Policy) Remote Protocol. | Major |
+| [2.2.1.3](#Section_2.2.1.3) SECURITY_INFORMATION | Removed the recommendation against setting flags other than those in the table of bits relevant to the Local Security Authority (Domain Policy) Remote Protocol. | Major |
 | [2.2.2.6](#Section_2.2.2.6) LSAPR_REVISION_INFO_V1 | 11824 : Revised to remove use of lowercase "may". | None |
 | [2.2.6.2](#Section_2.2.6.2) LSAPR_AES_CIPHER_VALUE | 11824 : Changed lowercase "must" to uppercase "MUST". | None |
-| [2.2.7.9](#Section_2.2.7.3) LSAPR_TRUSTED_DOMAIN_INFORMATION_EX | 11825 : Revised to avoid lowercase "must". | None |
+| [2.2.7.9](#Section_2.2.7.9) LSAPR_TRUSTED_DOMAIN_INFORMATION_EX | 11825 : Revised to avoid lowercase "must". | None |
 | [2.3](#Section_2.3) Directory Service Schema Elements | 11825 : Changed "must" to "MUST". | None |
-| [3.1.1.4](#Section_3.1.1.7) Secret Object Data Model | 11825 : Changed "must" to "MUST". | None |
-| [3.1.1.5](#Section_3.1.1.7) Trusted Domain Object Data Model | 11825 : Revised text to avoid using lowercase "must". | None |
+| [3.1.1.4](#Section_3.1.1.4) Secret Object Data Model | 11825 : Changed "must" to "MUST". | None |
+| [3.1.1.5](#Section_3.1.1.5) Trusted Domain Object Data Model | 11825 : Revised text to avoid using lowercase "must". | None |
 | [3.1.4.2.1](#Section_3.1.4.2.1) Access Checks Applied on Handle Open | 11825 : Changed lowercase "must" to "MUST". | None |
-| [3.1.4.6.3](#Section_3.1.4.6.9) LsarSetSecret (Opnum 29) | 11825 : Changed lowercase "must" to "MUST". | None |
-| [3.1.4.6.5](#Section_3.1.4.6.11) LsarStorePrivateData (Opnum 42) | 11825 : Changed lowercase "must" to "MUST". | None |
+| [3.1.4.6.3](#Section_3.1.4.6.3) LsarSetSecret (Opnum 29) | 11825 : Changed lowercase "must" to "MUST". | None |
+| [3.1.4.6.5](#Section_3.1.4.6.5) LsarStorePrivateData (Opnum 42) | 11825 : Changed lowercase "must" to "MUST". | None |
 | [3.1.4.7.15](#Section_3.1.4.7.15) LsarQueryForestTrustInformation (Opnum 73) | 11825 : Changed lowercase "must" to "MUST". | None |
 | [3.1.4.7.16.1](#Section_3.1.4.7.16.1) Forest Trust Collision Generation | 11825 : Changed lowercase "must" to "MUST". | None |
-| [3.1.4.9.1](#Section_5) LsarQuerySecurityObject (Opnum 3) | Added a sentence to the processing for SecurityInformation that the server reject calls specifying a bit other than those defined in 2.2.1.3. | Major |
-| [3.1.4.9.2](#Section_5) LsarSetSecurityObject (Opnum 4) | Added a sentence to the description of SecurityInformation that the server reject calls specifying a bit other than those defined in 2.2.1.3. | Major |
+| [3.1.4.9.1](#Section_3.1.4.9.1) LsarQuerySecurityObject (Opnum 3) | Added a sentence to the processing for SecurityInformation that the server reject calls specifying a bit other than those defined in 2.2.1.3. | Major |
+| [3.1.4.9.2](#Section_3.1.4.9.2) LsarSetSecurityObject (Opnum 4) | Added a sentence to the description of SecurityInformation that the server reject calls specifying a bit other than those defined in 2.2.1.3. | Major |
 
 <a id="revision-history"></a>
 

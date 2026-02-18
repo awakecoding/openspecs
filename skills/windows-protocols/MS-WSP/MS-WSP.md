@@ -546,7 +546,7 @@ The following table summarizes the data structures defined in this section.
 | [CCoercionRestriction](#Section_2.2.1.12) | Contains a coercion restriction that affects ranking of query results. |
 | [CFeedbackRestriction](#Section_2.2.1.15) | Contains a set of feedback documents for relevance feedback queries (for more information, see [Jones]). |
 | [CProbRestriction](#Section_2.2.1.14) | Contains probabilistic rank parameters (for more information, see [Jones]). |
-| [CRelDocRestriction](#Section_2.2.1.17) | Contains a relevant document for relevance feedback queries (for more information, see [Jones]). |
+| [CRelDocRestriction](#Section_2.2.1.13) | Contains a relevant document for relevance feedback queries (for more information, see [Jones]). |
 | [CAggregSet](#Section_2.2.1.24) | Contains a set of aggregate specifications. |
 | [CAggregSpec](#Section_2.2.1.25) | Contains a single aggregate or column specification. |
 | [CAggregSortKey](#Section_2.2.1.27) | Contains a single grouping sort key. |
@@ -894,7 +894,7 @@ packet-beta
 | --- | --- |
 | GENERATE_METHOD_EXACT 0x00000000 | Exact match. Each word in the phrase matches exactly in the inverted index. |
 | GENERATE_METHOD_PREFIX 0x00000001 | Prefix match. Each word in the phrase is considered a match if the word is a prefix of an indexed string. For example, if the word "barking" is indexed, then "bar" would match when performing a prefix match. |
-| GENERATE_METHOD_INFLECT 0x00000002 | Matches inflections of a word. An inflection of a word is a variant of the root word in the same part of speech that has been modified, according to linguistic rules of a given language. For example, inflections of the verb swim in English include swim, swims, swimming, and swam. The inflection forms of a word can be determined by calling the **Inflect** abstract interface (section [3.1.7](#Section_8)) to the GSS ([**Generic Search Service**](#gt_generic-search-service-gss)) with "*pwcsPhrase*" as an argument. |
+| GENERATE_METHOD_INFLECT 0x00000002 | Matches inflections of a word. An inflection of a word is a variant of the root word in the same part of speech that has been modified, according to linguistic rules of a given language. For example, inflections of the verb swim in English include swim, swims, swimming, and swam. The inflection forms of a word can be determined by calling the **Inflect** abstract interface (section [3.1.7](#Section_3.1.7)) to the GSS ([**Generic Search Service**](#gt_generic-search-service-gss)) with "*pwcsPhrase*" as an argument. |
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 CInternalPropertyRestriction
@@ -1353,7 +1353,7 @@ packet-beta
 | RTCoerce_Absolute 0x0000000C | The node contains a CCoercionRestriction structure with operation ABSOLUTE, as specified in section 2.2.1.12. |
 | RTProb 0x0000000D | The node contains a [CProbRestriction](#Section_2.2.1.14) structure. |
 | RTFeedback 0x0000000E | The node contains a [CFeedbackRestriction](#Section_2.2.1.15) structure. |
-| RTReldoc 0x0000000F | The node contains a [CRelDocRestriction](#Section_2.2.1.17) structure. |
+| RTReldoc 0x0000000F | The node contains a [CRelDocRestriction](#Section_2.2.1.13) structure. |
 | RTCoerce_MinMax 0x00000012 | The node contains a CCoercionRestriction structure with operation MINMAX, as specified section 2.2.1.12.<5> |
 | RTRankMerge 0x00000013 | The node contains a CRankMergeRestriction structure, as specified in section [2.2.1.46](#Section_2.2.1.46).<6> |
 
@@ -3998,7 +3998,7 @@ Any other error code can be returned, but it will be treated as informative only
 When the server receives a [CPMCreateQueryIn](#Section_2.2.3.4) message request from a client, the server MUST do the following:
 
 - Search the **ConnectedClientsIdentifiers** list for the HANDLE of the named pipe over which the server has received the CPMCreateQueryIn message. If it is not present, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
-- Run the **RunNewQuery** abstract interface of the [**GSS**](#gt_generic-security-services-gss). Pass in as parameters the HANDLE of the named pipe over which the server has received the CPMCreateQueryIn message, along with the **ColumnSet**, **RestrictionArray**, **SortSet**, **CCategorizationSet**, **RowSetProperties**, **PidMapper**, **GroupArray**, and **Lcid** values. If the *CanRunQueryNow* output parameter is not true, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error. Otherwise, report the *QueryParametersError* output parameter in the reply. Details for how to report an error are specified in section [3.1.5](#Section_1.3).
+- Run the **RunNewQuery** abstract interface of the [**GSS**](#gt_generic-security-services-gss). Pass in as parameters the HANDLE of the named pipe over which the server has received the CPMCreateQueryIn message, along with the **ColumnSet**, **RestrictionArray**, **SortSet**, **CCategorizationSet**, **RowSetProperties**, **PidMapper**, **GroupArray**, and **Lcid** values. If the *CanRunQueryNow* output parameter is not true, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error. Otherwise, report the *QueryParametersError* output parameter in the reply. Details for how to report an error are specified in section [3.1.5](#Section_3.1.5).
 - Respond to the client with a [CPMCreateQueryOut](#Section_2.2.3.5) message by using the *CursorHandlesList*, *fTrueSequential*, and *fWorkidUnique* outputs obtained from the **RunNewQuery** abstract interface to the GSS.
 - Report any errors encountered during message preparation or during any abstract interface call to the GSS. The following errors are specific to this request:
 - E_OUTOFMEMORY: generated by any resource allocation failure on the server or service side.
@@ -4327,7 +4327,7 @@ This message is currently implemented only in the Windows 7 operating system. If
 - Search the **ConnectedClientsIdentifiers** list for the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message. If it is not present, the server MUST report a STATUS_INVALID_PARAMETER (0xC000000D) error.
 - Prepare a [CPMSetScopePrioritizationOut](#Section_2.2.3.32) message. If this step fails for any reason, the server MUST report any error code encountered in performing the request in accordance with Win32 Error Codes in [MS-ERREF](../MS-ERREF/MS-ERREF.md).
 - Call the **SetScopePriority** abstract interface of the [**GSS**](#gt_generic-security-services-gss), with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message and the **priority** field as arguments.
-- If **eventFrequency** is not zero, start an [EventTimer](#Section_3.2.2) timer that expires after an interval defined by **eventFrequency**, in milliseconds. Otherwise, if **eventFrequency** is zero, then call the **FilterOutScopeStatisticsMessages** abstract interface of the GSS, with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message as the argument for the call.
+- If **eventFrequency** is not zero, start an [EventTimer](#Section_1c8a455e15804a7eb774aae57d847079) timer that expires after an interval defined by **eventFrequency**, in milliseconds. Otherwise, if **eventFrequency** is zero, then call the **FilterOutScopeStatisticsMessages** abstract interface of the GSS, with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message as the argument for the call.
 - The CPMSetScopePrioritizationOut message MUST simply acknowledge successful receipt of the CPMSetScopePrioritizationIn message and that the **SetScopePriority** abstract interface has been called, with the HANDLE of the named pipe over which the server has received the CPMSetScopePrioritizationIn message and the **priority** field as arguments to the call.
 - Report any errors encountered during message preparation or during any abstract interface call to the GSS. Errors that are specific to this request:
 - E_OUTOFMEMORY: generated by any resource allocation failure on the server or service side.
@@ -5001,7 +5001,7 @@ When requested to send this message, the client MUST do the following:
 
 With the exceptions of [CPMGetRowsIn](#Section_2.2.3.11)/[CPMGetRowsOut](#Section_2.2.3.12) and [CPMFetchValueIn](#Section_2.2.3.15)/[CPMFetchValueOut](#Section_2.2.3.16), there is a one-to-one relationship between the Windows Search Protocol messages and higher-layer requests. For the two exceptions previously mentioned, multiple messages can be generated by the client to either satisfy size requirements or to retrieve a complete property. The higher layer typically keeps track of all query-specific information (such as cursor handles opened, legal values for [**bookmark**](#gt_bookmark) and chapter handles, and **_wid** values for deferred property values) and also tracks if the client is in a connected state, but this is not enforced in any way by the client.
 
-For illustrative purposes, the client portion of the diagram in section [3](#Section_1.3) illustrates this sequence for a simple [**GSS**](#gt_generic-security-services-gss) query.
+For illustrative purposes, the client portion of the diagram in section [3](#Section_3) illustrates this sequence for a simple [**GSS**](#gt_generic-security-services-gss) query.
 
 <a id="Section_3.2.4.2.1"></a>
 ##### 3.2.4.2.1 Sending a CPMConnectIn Request
@@ -5446,7 +5446,7 @@ Assume that machine UserA-2A is running a 32-bit Windows Vista operating system,
 - The header of the message is populated as follows:
 - **_msg** is set to 0x000000CA, indicating that this is a CPMCreateQueryIn message.
 - **_status** is set to 0x00000000.
-- **_ulChecksum** contains the checksum, computed according to section [3.2.5](#Section_1.3).
+- **_ulChecksum** contains the checksum, computed according to section [3.2.5](#Section_3.2.5).
 - **_ulReserved2** is set to 0x00000000.
 - The body of the message is populated as follows:
 - The **Size** field is set to the size of the rest of the message.

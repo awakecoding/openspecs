@@ -187,7 +187,7 @@ Although not explicitly specified in [[IROBEX]](https://go.microsoft.com/fwlink/
 The applicability of this profile is limited in the following ways:
 
 - Data objects, specifically files, can be "pushed" only to the PC or by the PC. The reasons for this limitation are specified in section [3.1.5](#Section_3.1.5). In brief, this profile does not implement the GET operations defined in [[IROBEX]](https://go.microsoft.com/fwlink/?LinkId=92765) section 3.3.4.
-- Devices that implement this profile cannot exchange data objects with devices that require [**IrOBEX**](#gt_irobex) authentication as specified in [IROBEX] section 3.5. The reasons for this limitation are specified in sections 3.1.5 and [3.2.5](#Section_3.1.5). In brief, this profile does not implement the authentication sequence as specified in [IROBEX] section 3.5.
+- Devices that implement this profile cannot exchange data objects with devices that require [**IrOBEX**](#gt_irobex) authentication as specified in [IROBEX] section 3.5. The reasons for this limitation are specified in sections 3.1.5 and [3.2.5](#Section_3.2.5). In brief, this profile does not implement the authentication sequence as specified in [IROBEX] section 3.5.
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
@@ -200,7 +200,7 @@ Portions of this profile use Win32 error codes. These values are taken from the 
 
 Section [3.1.5.1](#Section_3.1.5.1) describes how a **CONNECT** message that contains a **WHO** header is parsed. The **WHO** header used in this profile contains a **UUID** used to identify itself to the IrOBEX server, the specific **UUID** (16 byte) value b9c7fd98-e5f8-11d1-bfce-0000f8753890.
 
-Vendors who want to receive Win32 error codes using the Win32 Error Message header MUST use the previous specific **UUID** in a **WHO** header, as specified in section [2.2.1.1](#Section_2.2.1.1), in addition to the IrOBEX error codes as specified in [[IROBEX]](https://go.microsoft.com/fwlink/?LinkId=92765) section 3.2.1. The effect of using this **UUID** in a **WHO** header is specified in section [3.1.5](#Section_3.1.5) and section [3.2.5](#Section_3.1.5).
+Vendors who want to receive Win32 error codes using the Win32 Error Message header MUST use the previous specific **UUID** in a **WHO** header, as specified in section [2.2.1.1](#Section_2.2.1.1), in addition to the IrOBEX error codes as specified in [[IROBEX]](https://go.microsoft.com/fwlink/?LinkId=92765) section 3.2.1. The effect of using this **UUID** in a **WHO** header is specified in section [3.1.5](#Section_3.1.5) and section [3.2.5](#Section_3.2.5).
 
 <a id="Section_1.9"></a>
 ## 1.9 Standards Assignments
@@ -223,7 +223,7 @@ The message syntax remains unchanged and is as specified in [[IROBEX]](https://g
 <a id="Section_2.2.1"></a>
 ### 2.2.1 Header Types
 
-Information about how a custom [**IrOBEX**](#gt_irobex) header can be constructed and used is specified in [[IROBEX]](https://go.microsoft.com/fwlink/?LinkId=92765) sections 2.1 and 2.2.12. The custom header used in this protocol profile, section [3](#Section_1.3), is specified in section [2.2.1.1](#Section_2.2.1.1).
+Information about how a custom [**IrOBEX**](#gt_irobex) header can be constructed and used is specified in [[IROBEX]](https://go.microsoft.com/fwlink/?LinkId=92765) sections 2.1 and 2.2.12. The custom header used in this protocol profile, section [3](#Section_3), is specified in section [2.2.1.1](#Section_2.2.1.1).
 
 Beyond this, the header types and syntax remain unchanged and is as specified in [IROBEX] section 2.1.
 

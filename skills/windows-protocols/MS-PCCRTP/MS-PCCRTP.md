@@ -377,7 +377,7 @@ If the HTTP/1.1 server sends a PeerDist-encoded response **entity-body**, it MUS
 
 If the HTTP/1.1 server does not have the **Content Information Data Structure** available for the content requested by the client, for such reasons as this is the first request for the content, then the server SHOULD send a response containing the original content and add the **X-P2P-PeerDistEx** header with *MakeHashRequest* set to true. This indicates to the client to make an additional request for the content hashes.
 
-The HTTP/1.1 server MAY<6> choose to use the algorithms and data structures defined in [MS-PCCRC] on the response **entity-body** before sending it to the HTTP/1.1 client. Furthermore, it MAY<7> send the **Connection** header field with a value of "close" to require the HTTP/1.1 client not to use the same connection for future HTTP requests. The HTTP/1.1 server SHOULD NOT<8> send the **Connection** header field in its response if the HTTP/1.1 client is known to be unable to handle the **Connection** header field gracefully, as specified in section [3.1.5.1](../MS-PCCRC/MS-PCCRC.md).
+The HTTP/1.1 server MAY<6> choose to use the algorithms and data structures defined in [MS-PCCRC] on the response **entity-body** before sending it to the HTTP/1.1 client. Furthermore, it MAY<7> send the **Connection** header field with a value of "close" to require the HTTP/1.1 client not to use the same connection for future HTTP requests. The HTTP/1.1 server SHOULD NOT<8> send the **Connection** header field in its response if the HTTP/1.1 client is known to be unable to handle the **Connection** header field gracefully, as specified in section [3.1.5.1](#Section_3.1.5.1).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events

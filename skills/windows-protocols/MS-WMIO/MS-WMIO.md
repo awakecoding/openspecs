@@ -311,7 +311,7 @@ The following sections specify annotated object block [**encoding**](#gt_encodin
 <a id="Section_2.2"></a>
 ## 2.2 Annotated Object Block Encoding
 
-[**CIM instance**](#gt_cim-instance) and [**CIM class**](#gt_cim-class) definitions, as specified in [[DMTF-DSP0004]](https://go.microsoft.com/fwlink/?LinkId=89848) section 2.1, are encoded by using a binary data format. Qualifiers for instance and instance properties are Microsoft extensions to the [**CIM**](#gt_common-information-model-cim) data model. Like qualifiers applied to a class, qualifiers applied to an instance are specific to the instance, and the qualifier need not be specified in the class from which the instance is derived. If the class defines the qualifier, then the instance can redefine the qualifier only if the class allows overriding the qualifier. To capture the semantics of [**CIM classes**](#gt_015d0e5e-5166-4987-98b9-9c4128cf55be) and [**CIM instances**](#gt_cim-instance), the layout of the block reflects the [**CIM object**](#gt_cim-object) structure and is correspondingly complex but completely canonical according to [**ABNF**](#gt_augmented-backus-naur-form-abnf), as specified in section [6](#Section_2.2.10).
+[**CIM instance**](#gt_cim-instance) and [**CIM class**](#gt_cim-class) definitions, as specified in [[DMTF-DSP0004]](https://go.microsoft.com/fwlink/?LinkId=89848) section 2.1, are encoded by using a binary data format. Qualifiers for instance and instance properties are Microsoft extensions to the [**CIM**](#gt_common-information-model-cim) data model. Like qualifiers applied to a class, qualifiers applied to an instance are specific to the instance, and the qualifier need not be specified in the class from which the instance is derived. If the class defines the qualifier, then the instance can redefine the qualifier only if the class allows overriding the qualifier. To capture the semantics of [**CIM classes**](#gt_015d0e5e-5166-4987-98b9-9c4128cf55be) and [**CIM instances**](#gt_cim-instance), the layout of the block reflects the [**CIM object**](#gt_cim-object) structure and is correspondingly complex but completely canonical according to [**ABNF**](#gt_augmented-backus-naur-form-abnf), as specified in section [6](#Section_6).
 
 Because CIM classes and CIM instances have user-name properties and values, the data block can vary significantly, depending on the item that is being encoded. The traversal of the block is precisely equivalent to top-down parsing, using the well-known LL(1) parsing algorithm, and can be implemented in a recursive-descent parser. For more information, see [AHO-ULLMAN] section 4.4.
 
@@ -496,9 +496,9 @@ PropertyLookupTable [NdTable ValueTable] ClassHeap
 
 The [ClassHeader (section 2.2.16)](#Section_2.2.16) contains information about the overall ClassPart block length and the length of various internal blocks. The [DerivationList (section 2.2.17)](#Section_2.2.17) is an encoded array that MUST contain the set of CIM class names that form the list of [**superclasses**](#gt_fbb1e623-a709-400d-8d4a-85df94ad58c3) for the current CIM class.
 
-The [ClassQualifierSet (section 2.2.20)](#Section_2.2.60) is the set of [**CIM qualifiers**](#gt_de5d4ab8-e295-4a98-bb5c-3aaf70c43ad0) for the class.
+The [ClassQualifierSet (section 2.2.20)](#Section_2.2.20) is the set of [**CIM qualifiers**](#gt_de5d4ab8-e295-4a98-bb5c-3aaf70c43ad0) for the class.
 
-The [PropertyLookupTable (section 2.2.21)](#Section_2.2.23) is a sorted dispatch table for looking up [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) values and type information. The [NdTable (section 2.2.26)](#Section_2.2.26) indicates whether a particular CIM property has a default value that is locally defined in the current CIM class or whether the default is defined in a superclass. The [ValueTable (section 2.2.29)](#Section_2.2.29) contains values inline for simple numeric properties, or references to the values in the [ClassHeap (section 2.2.37)](#Section_2.2.37) for all other specified values in the [HeapItem](#Section_2.2.67) rule, such as arrays or strings.
+The [PropertyLookupTable (section 2.2.21)](#Section_2.2.21) is a sorted dispatch table for looking up [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) values and type information. The [NdTable (section 2.2.26)](#Section_2.2.26) indicates whether a particular CIM property has a default value that is locally defined in the current CIM class or whether the default is defined in a superclass. The [ValueTable (section 2.2.29)](#Section_2.2.29) contains values inline for simple numeric properties, or references to the values in the [ClassHeap (section 2.2.37)](#Section_2.2.37) for all other specified values in the [HeapItem](#Section_2.2.67) rule, such as arrays or strings.
 
 NdTable and ValueTable are optional. Their inclusion is controlled by the number of properties in the PropertyLookupTable. If the PropertyLookupTable contains zero properties, NdTable and ValueTable MUST be omitted.
 
@@ -574,7 +574,7 @@ PropertyCount = UINT32
 <a id="Section_2.2.23"></a>
 ### 2.2.23 PropertyLookup
 
-The PropertyLookup structure represents a data block that allows a lookup of a specific named [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) in a [**CIM class**](#gt_cim-class). The [PropertyNameRef (section 2.2.24)](#Section_2.2.24) item is a reference to the string name of the [Encoded-String](#Section_2.2.78) on the [ClassHeap](#Section_2.2.37) that represents the name of the property. The [PropertyInfoRef (section 2.2.25)](#Section_2.2.30) item is a heap reference to a [PropertyInfo](#Section_2.2.30) item that contains more information about the CIM property, such as its [**CIM**](#gt_common-information-model-cim) type and any associated qualifiers.
+The PropertyLookup structure represents a data block that allows a lookup of a specific named [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) in a [**CIM class**](#gt_cim-class). The [PropertyNameRef (section 2.2.24)](#Section_2.2.24) item is a reference to the string name of the [Encoded-String](#Section_2.2.78) on the [ClassHeap](#Section_2.2.37) that represents the name of the property. The [PropertyInfoRef (section 2.2.25)](#Section_2.2.25) item is a heap reference to a [PropertyInfo](#Section_2.2.30) item that contains more information about the CIM property, such as its [**CIM**](#gt_common-information-model-cim) type and any associated qualifiers.
 
 PropertyLookup = PropertyNameRef PropertyInfoRef
 
@@ -599,7 +599,7 @@ PropertyInfoRef = HeapRef
 
 NdTable is an encoded table that represents the behavior of the default value of properties in a [**CIM class**](#gt_cim-class).
 
-Values in the table are ordered similar to the order shown in the [PropertyLookupTable](#Section_2.2.23).
+Values in the table are ordered similar to the order shown in the [PropertyLookupTable](#Section_2.2.21).
 
 Classes can establish default values for properties, as specified in [[DMTF-DSP0004]](https://go.microsoft.com/fwlink/?LinkId=89848). In some cases, the default value for a [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) can be defined in a [**superclass**](#gt_fbb1e623-a709-400d-8d4a-85df94ad58c3), for example, by using the [**MOF**](#gt_managed-object-format-mof) syntax for [**CIM**](#gt_common-information-model-cim).
 
@@ -683,7 +683,7 @@ ValueTable = *EncodedValue
 
 Depending on the type of the [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe), each [EncodedValue (section 2.2.71)](#Section_2.2.71) has variable length. The sequence of EncodedValues is packed at the octet level with no alignment or padding.
 
-To find the value for a property, navigate from the [PropertyLookupTable (section 2.2.21)](#Section_2.2.23) to its [PropertyLookup (section 2.2.23)](#Section_2.2.23), and from there get the [PropertyInfoRef (section 2.2.25)](#Section_2.2.30), which gives the [PropertyInfo (section 2.2.30)](#Section_2.2.30). From PropertyInfo, get the [ValueTableOffset (section 2.2.34)](#Section_2.2.34). Use this offset in the ValueTable (section 2.2.29) to discover the value.
+To find the value for a property, navigate from the [PropertyLookupTable (section 2.2.21)](#Section_2.2.21) to its [PropertyLookup (section 2.2.23)](#Section_2.2.23), and from there get the [PropertyInfoRef (section 2.2.25)](#Section_2.2.25), which gives the [PropertyInfo (section 2.2.30)](#Section_2.2.30). From PropertyInfo, get the [ValueTableOffset (section 2.2.34)](#Section_2.2.34). Use this offset in the ValueTable (section 2.2.29) to discover the value.
 
 If the value is numerical, the value MUST be directly located within this table. If the value is a string or an array type, the value table MUST contain a reference, [HeapRef (section 2.2.69)](#Section_2.2.69), into the [Heap (section 2.2.66)](#Section_2.2.66) to find the actual value.
 
@@ -838,7 +838,7 @@ MethodQualifiers is a set of qualifiers that are applicable to the method.
 
 MethodQualifiers = HeapQualifierSetRef
 
-MethodQualifiers MUST be a [HeapQualifierSetRef (section 2.2.47)](#Section_2.2.60) in the [MethodHeap (section 2.2.52)](#Section_2.2.52). The [QualifierSet (section 2.2.59)](#Section_2.2.59) referred to by the HeapQualifierSetRef is the [**CIM qualifiers**](#gt_de5d4ab8-e295-4a98-bb5c-3aaf70c43ad0) set that is applicable to the method. For example, in the following [**CIM class**](#gt_cim-class), the execute CIM qualifier and performance CIM qualifier are method-level qualifiers; however, in and out are parameter-level qualifiers.
+MethodQualifiers MUST be a [HeapQualifierSetRef (section 2.2.47)](#Section_2.2.47) in the [MethodHeap (section 2.2.52)](#Section_2.2.52). The [QualifierSet (section 2.2.59)](#Section_2.2.59) referred to by the HeapQualifierSetRef is the [**CIM qualifiers**](#gt_de5d4ab8-e295-4a98-bb5c-3aaf70c43ad0) set that is applicable to the method. For example, in the following [**CIM class**](#gt_cim-class), the execute CIM qualifier and performance CIM qualifier are method-level qualifiers; however, in and out are parameter-level qualifiers.
 
 class MyClass2 : MyClass
 
@@ -874,7 +874,7 @@ OutputSignature = MethodSignature
 <a id="Section_2.2.50"></a>
 ### 2.2.50 MethodSignature
 
-The [InputSignature](#Section_2.2.48) and [OutputSignature](#Section_2.2.49) fields MUST be a [HeapRef](#Section_2.2.69) to the [MethodSignatureBlock (section 2.2.70)](#Section_2.2.50) in the [MethodHeap (section 2.2.52)](#Section_2.2.52). This is because the input and output signatures for a method are encoded as a [ClassPart](#Section_2.2.15), where each [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) represents a parameter in the method.
+The [InputSignature](#Section_2.2.48) and [OutputSignature](#Section_2.2.49) fields MUST be a [HeapRef](#Section_2.2.69) to the [MethodSignatureBlock (section 2.2.70)](#Section_2.2.70) in the [MethodHeap (section 2.2.52)](#Section_2.2.52). This is because the input and output signatures for a method are encoded as a [ClassPart](#Section_2.2.15), where each [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) represents a parameter in the method.
 
 MethodSignature = HeapMethodSignatureBlockRef
 
@@ -883,7 +883,7 @@ To encode a MethodSignature as a [**CIM class**](#gt_cim-class) object, the [**e
 <a id="Section_2.2.51"></a>
 ### 2.2.51 HeapMethodSignatureBlockRef
 
-HeapMethodSignatureBlockRef MUST be a [HeapRef](#Section_2.2.69) to the [MethodSignatureBlock (section 2.2.70)](#Section_2.2.50) in the current [Heap (section 2.2.66)](#Section_2.2.66).
+HeapMethodSignatureBlockRef MUST be a [HeapRef](#Section_2.2.69) to the [MethodSignatureBlock (section 2.2.70)](#Section_2.2.70) in the current [Heap (section 2.2.66)](#Section_2.2.66).
 
 HeapMethodSignatureBlockRef = HeapRef
 
@@ -1030,7 +1030,7 @@ InstancePropQualifierSet = InstPropQualSetFlag *QualifierSet
 
 InstPropQualSetFlag = %x1 / %x2
 
-If the InstPropQualSetFlag is set to 2, the [QualifierSet](#Section_2.2.59) sequence MUST be populated. There MUST be one QualifierSet for each [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) in the class, and the properties are in the same order that occurs in the [PropertyLookupTable](#Section_2.2.23).
+If the InstPropQualSetFlag is set to 2, the [QualifierSet](#Section_2.2.59) sequence MUST be populated. There MUST be one QualifierSet for each [**CIM property**](#gt_a95b6b41-8fd2-4d80-8632-1eb34c17a4fe) in the class, and the properties are in the same order that occurs in the [PropertyLookupTable](#Section_2.2.21).
 
 If the flag value is set to 2, all the CIM qualifier sets for all the properties MUST be present, even if they are empty. For example, the following [**CIM instance**](#gt_cim-instance) has a CIM qualifier on the CIM property Data1 (the test qualifier).
 
@@ -1775,7 +1775,7 @@ In the following table, this encoding is decoded by using ABNF. Note that the Pa
 | Variable | - | 5C 00 00 00 PropertyInfo::PropertyInfoRef. Offset in Heap of the PropertyInfo for Data1 and any associated qualifiers. |
 | Variable | - | 99 00 00 00 PropertyInfo::PropertyNameRef. Offset in Heap of the CIM property name. Points to Data2. |
 | Variable | - | A0 00 00 00 PropertyInfo::PropertyInfoRef. Offset in Heap of PropertyInfo for Data2 and any associated qualifiers. |
-| Variable | - | C7 00 00 00 PropertyInfo::PropertyNameRef. Offset in Heap of the CIM property name. Points to Id. All properties that are inherited from base classes are repeated in the [PropertyLookupTable](#Section_2.2.23) for each derived class. |
+| Variable | - | C7 00 00 00 PropertyInfo::PropertyNameRef. Offset in Heap of the CIM property name. Points to Id. All properties that are inherited from base classes are repeated in the [PropertyLookupTable](#Section_2.2.21) for each derived class. |
 | Variable | - | CB 00 00 00 PropertyInfo::PropertyInfoRef. Offset in Heap of PropertyInfo for Id and any associated CIM qualifier sets. |
 | Variable | - | 47 NdTable. 01 00 01 11b. Property 0 == 11b NULL, inherits DEFAULT. Property 1 == 01 NULL, no inherited default. Property 2 == 00 Not NULL, no inheritance. Property 3 == 01 Null, no inherited default. The indexes do not refer to the ordinal position in [PropertyLookup](#Section_2.2.23); instead, they refer to the propertyIndex field for the CIM property in the PropertyInfo table for that property. |
 | Variable | - | - ValueTable. |

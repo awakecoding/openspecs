@@ -334,7 +334,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-PNRP] Microsoft Corporation, "[Peer Name Resolution Protocol (PNRP) Version 4.0](../MS-PNRP/MS-PNRP.md)".
 
-[MS-PPSEC] Microsoft Corporation, "[Peer-to-Peer Grouping Security Protocol](#Section_5)".
+[MS-PPSEC] Microsoft Corporation, "[Peer-to-Peer Grouping Security Protocol](../MS-PPSEC/MS-PPSEC.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -438,7 +438,7 @@ To support the graph security provider, each record contains a field for securit
 <a id="Section_1.3.5"></a>
 ### 1.3.5 Shared Database
 
-The primary way in which [**nodes**](#gt_node) in a [**graph**](#gt_graph) communicate with each other is through [**records**](#gt_record) in a shared [**database**](#gt_database). The graph database is the set of all records that have been published in the graph that have not yet expired. Nodes can publish new records into the database, modify existing records, or remove records from the database. The updates will be flooded from the originating nodes to all other nodes in the graph. A node that is newly joined or reconnected to the graph will synchronize its copy of the database with other active members in the graph. Section [3](#Section_1.3) describes the details of these operations.
+The primary way in which [**nodes**](#gt_node) in a [**graph**](#gt_graph) communicate with each other is through [**records**](#gt_record) in a shared [**database**](#gt_database). The graph database is the set of all records that have been published in the graph that have not yet expired. Nodes can publish new records into the database, modify existing records, or remove records from the database. The updates will be flooded from the originating nodes to all other nodes in the graph. A node that is newly joined or reconnected to the graph will synchronize its copy of the database with other active members in the graph. Section [3](#Section_3) describes the details of these operations.
 
 <a id="Section_1.3.5.1"></a>
 #### 1.3.5.1 Records
@@ -476,7 +476,7 @@ There are four internal [**record**](#gt_record) types defined by the Peer-to-Pe
 <a id="Section_1.3.5.5.1"></a>
 ##### 1.3.5.5.1 Graph Info
 
-The Graph Info Record (section [2.2.3.1](#Section_1.3.5.5.1)) contains basic information about the [**graph**](#gt_graph) and its configuration. This [**record**](#gt_record) is published when the graph is created and updated as its configuration is changed. When a Graph Info Record is received, its information is cached by the local [**node**](#gt_node).
+The Graph Info Record (section [2.2.3.1](#Section_2.2.3.1)) contains basic information about the [**graph**](#gt_graph) and its configuration. This [**record**](#gt_record) is published when the graph is created and updated as its configuration is changed. When a Graph Info Record is received, its information is cached by the local [**node**](#gt_node).
 
 <a id="Section_1.3.5.5.2"></a>
 ##### 1.3.5.5.2 Signature
@@ -513,7 +513,7 @@ peer time is measured as the number of 100s of nanosecond intervals since Jan. 1
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-The Peer-to-Peer Graphing Protocol exposes a set of APIs to access its functionalities and an interface to allow applications to plug in a [**graph security provider**](#gt_graph-security-provider) to implement network and data security. The P2P Grouping protocol [MS-PPSEC](#Section_5) uses the Peer-to-Peer Graphing Protocol and implements a graph security provider component to implement a secure distributed database protocol.
+The Peer-to-Peer Graphing Protocol exposes a set of APIs to access its functionalities and an interface to allow applications to plug in a [**graph security provider**](#gt_graph-security-provider) to implement network and data security. The P2P Grouping protocol [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md) uses the Peer-to-Peer Graphing Protocol and implements a graph security provider component to implement a secure distributed database protocol.
 
 The Peer-to-Peer Graphing Protocol uses the TCP protocol [[RFC793]](https://go.microsoft.com/fwlink/?LinkId=150872) as a transport and IPv6 [[RFC2460]](https://go.microsoft.com/fwlink/?LinkId=90357) as the network-layer protocol.
 
@@ -566,7 +566,7 @@ None.
 
 This protocol references commonly used data types as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
-Unless otherwise qualified, instances of **GUID** in sections 2 and [3](#Section_1.3) refer to [MS-DTYP] section 2.3.4.
+Unless otherwise qualified, instances of **GUID** in sections 2 and [3](#Section_3) refer to [MS-DTYP] section 2.3.4.
 
 <a id="Section_2.1"></a>
 ## 2.1 Transport
@@ -1467,10 +1467,10 @@ packet-beta
 
 This section defines a set of internal record types used by the Peer-to-Peer Graphing Protocol, and defines the structure of the **Payload Data** field of the [PEER_RECORD (section 2.2.1.9)](#Section_2.2.1.9) structure for those types.
 
-- [Graph Info Record (section 2.2.3.1)](#Section_1.3.5.5.1)
+- [Graph Info Record (section 2.2.3.1)](#Section_2.2.3.1)
 - [Signature Record (section 2.2.3.2)](#Section_2.2.3.2)
 - [Contact Record (section 2.2.3.3)](#Section_2.2.3.3)
-- [Presence Record (section 2.2.3.4)](#Section_1.3.5.5.4)
+- [Presence Record (section 2.2.3.4)](#Section_2.2.3.4)
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Graph Info Record
 
@@ -1754,7 +1754,7 @@ Note that multiple instances of the implementation can reside on a single host, 
 
 **Max Presence Records**: An integer value specifying the maximum number of presence records to be published in the graph. This value is specified by the application when creating the graph and received by other [**nodes**](#gt_node) in the graph info record.
 
-**Force Publish Presence**: A flag indicating whether the application has requested the local node to publish its presence record. For more details, see section [3.1.4.6](#Section_1.3.5.5.4).
+**Force Publish Presence**: A flag indicating whether the application has requested the local node to publish its presence record. For more details, see section [3.1.4.6](#Section_3.1.4.6).
 
 **Max Record Size**: An integer value specifying the maximum size of a [**record**](#gt_record). This value is specified by the application when creating the graph, and received by other nodes in the graph info record.
 
@@ -1822,7 +1822,7 @@ Note that multiple instances of the implementation can reside on a single host, 
 
 **Record Notify List**: A list of record types for which the application has requested a notification.
 
-**fAcceptDirectConnection**: A Boolean flag that indicates whether the node MUST accept incoming [**direct connections**](#gt_direct-connection). For more details, see section [3.1.5.2.1](#Section_3.1.5.2.11).
+**fAcceptDirectConnection**: A Boolean flag that indicates whether the node MUST accept incoming [**direct connections**](#gt_direct-connection). For more details, see section [3.1.5.2.1](#Section_3.1.5.2.1).
 
 **SYNC_TYPE**: A variable indicating the current synchronization operation (if any) for each connection. Values are in the following set: {NONE_SYNC_ALL, SYNC_HASH, SYNC_TIME}.
 
@@ -1924,12 +1924,12 @@ When creating a new graph, the local [**node**](#gt_node) MUST do the following:
 - Create a local [**node ID**](#gt_node-id) as a random 64-bit number.
 - Create the (empty) [**database**](#gt_database).
 - Set the Peer Time Delta to 0.
-- Publish a Graph Info Record containing the application-specified Graph configuration parameters. For more details, see section [3.1.7.7](#Section_1.3.5.5.1).
+- Publish a Graph Info Record containing the application-specified Graph configuration parameters. For more details, see section [3.1.7.7](#Section_3.1.7.7).
 - Set the NeverConnected flag to TRUE.
 - The Defer Expiration flag MUST be set to true if the application requested to not expire records while offline; otherwise it MUST be set to false.
 - The Record Autorefresh time MUST be set to expire in 4 seconds.
 - If Defer Expiration flag is set to false, the Record Expiration Timer MUST be set to expire in 0 seconds.
-A graph is uniquely identified by the Graph ID. A graph MUST NOT have more than one creator node (that is, it MUST have only one Graph Info Record). A security provider layer such as [MS-PPSEC](#Section_5) SHOULD be used to prevent graph merger by requiring authentication.
+A graph is uniquely identified by the Graph ID. A graph MUST NOT have more than one creator node (that is, it MUST have only one Graph Info Record). A security provider layer such as [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md) SHOULD be used to prevent graph merger by requiring authentication.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Opening an Existing Graph
@@ -1981,7 +1981,7 @@ If the above record validation fails for any reason, then the record MUST NOT be
 
 The fields of the records MUST be initialized as described in section 2.2.1.9.
 
-If a Security Provider is configured it MUST be called to secure the record. For more details, see section [3.1.7.28](#Section_3.1.7.28). The record MUST then be published. For more details, see section [3.1.7.3](#Section_3.1.7.4).
+If a Security Provider is configured it MUST be called to secure the record. For more details, see section [3.1.7.28](#Section_3.1.7.28). The record MUST then be published. For more details, see section [3.1.7.3](#Section_3.1.7.3).
 
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 Application Updates a Record
@@ -2019,7 +2019,7 @@ If the record validation fails for any reason, then the record MUST NOT be proce
 
 If a Security Provider is specified for the Group, it MUST be called to secure the record. For more details, see section [3.1.7.28](#Section_3.1.7.28).
 
-The record MUST then be written in the database, as specified in section [3.1.7.8](#Section_3.1.7.33).
+The record MUST then be written in the database, as specified in section [3.1.7.8](#Section_3.1.7.8).
 
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 Application Deletes a Record
@@ -2178,7 +2178,7 @@ If the message fails to conform to any of the following conditions, then the mes
 - **Friendly Name Offset** MUST be at most **Message Size**.
 If the CONNECT message's Update bit is set, and this message was received from a Link that is not yet in the LINK_STATE_CONNECTED state, the **Update** bit MUST be ignored. Otherwise, the addresses in the message MUST be used to update this connection's entry in the Neighbor List, and then processing of the message MUST be halted.
 
-If the CONNECT message's **Direct** bit is set, this message is intended to establish a [**direct connection**](#gt_direct-connection). If the application has not caused the Direct Connection flag to be set (see section [3.1.4.7](#Section_1.3.3)), the [**node**](#gt_node) MUST send (see section [3.1.7.1](#Section_3.1.7.1)) a REFUSE message containing the following data:
+If the CONNECT message's **Direct** bit is set, this message is intended to establish a [**direct connection**](#gt_direct-connection). If the application has not caused the Direct Connection flag to be set (see section [3.1.4.7](#Section_3.1.4.7)), the [**node**](#gt_node) MUST send (see section [3.1.7.1](#Section_3.1.7.1)) a REFUSE message containing the following data:
 
 - **Error Code** MUST be set to the value REFUSE_CODE_DIRECT_CONNECTION_DISALLOWED.
 - **Address Count** MUST be set to 0.
@@ -2429,7 +2429,7 @@ If the received record is "old", the local node MUST respond with a FLOOD messag
 
 For all three classifications, the local node MUST send (see section 3.1.7.1) an ACK message to the FLOOD message's sender, containing the record ID for this record, with the "Useful" flag set to 1 if the received record was classified as "new", and set to 0 otherwise. The local node MUST also update the [**connection utility**](#gt_connection-utility) associated with this connection, as specified in section [3.1.7.33](#Section_3.1.7.33).
 
-Further processing MUST be performed on the received record according to its Record Type. For more details, see sections [3.1.7.10](#Section_3.1.7.10.5) through [3.1.7.10.5](#Section_3.1.7.10.5).
+Further processing MUST be performed on the received record according to its Record Type. For more details, see sections [3.1.7.10](#Section_3.1.7.10) through [3.1.7.10.5](#Section_3.1.7.10.5).
 
 <a id="Section_3.1.5.2.11"></a>
 ##### 3.1.5.2.11 Receive SYNC_END
@@ -2516,11 +2516,11 @@ If a [**contact record**](#gt_contact-record) corresponding to the local [**node
 - The local node MUST delete the contact record with its own [**node ID**](#gt_node-id) from the database. For more details, see section [3.1.7.9](#Section_3.1.7.9).
 If no contact record corresponding to the local node is currently in the graph database or if all contact records corresponding to the local node in the graph database have the Deleted flag set, and the number of contacts is still lower than the minimum value calculated as specified in section 3.1.7.12:
 
-- The local node MUST publish a contact record in the graph database. For more details, see section [3.1.7.5](#Section_3.1.7.4).
+- The local node MUST publish a contact record in the graph database. For more details, see section [3.1.7.5](#Section_3.1.7.5).
 <a id="Section_3.1.6.4"></a>
 #### 3.1.6.4 Signature Timer
 
-When this timer fires, it MUST be reset to fire in 24 hours. Also, if no Signature Record is present in the [**graph**](#gt_graph) [**database**](#gt_database) or the Signature Record in the graph database has the Deleted flag set or the Signature value in the **Signature** Record is greater than the local [**node ID**](#gt_node-id), a new Signature record MUST be created with the **signature** value set to the local [**node’s**](#gt_node) node ID. This Signature record MUST then be published, as specified in section [3.1.7.6](#Section_3.1.7.4).
+When this timer fires, it MUST be reset to fire in 24 hours. Also, if no Signature Record is present in the [**graph**](#gt_graph) [**database**](#gt_database) or the Signature Record in the graph database has the Deleted flag set or the Signature value in the **Signature** Record is greater than the local [**node ID**](#gt_node-id), a new Signature record MUST be created with the **signature** value set to the local [**node’s**](#gt_node) node ID. This Signature record MUST then be published, as specified in section [3.1.7.6](#Section_3.1.7.6).
 
 <a id="Section_3.1.6.5"></a>
 #### 3.1.6.5 Partition Detection Timer
@@ -2583,7 +2583,7 @@ If the graph security provider returns an error, the message MUST be dropped.
 When creating a [**record**](#gt_record), a PEER_RECORD MUST be created, and the following fields MUST be initialized as follows:
 
 - The Record ID MUST be generated as follows:
-- If the record type is Graph Info Record, the Record ID MUST be set according to section [2.2.3.1](#Section_1.3.5.5.1).
+- If the record type is Graph Info Record, the Record ID MUST be set according to section [2.2.3.1](#Section_2.2.3.1).
 - If the record type is Signature Record, the Record ID MUST be set according to section [2.2.3.2](#Section_2.2.3.2).
 - Otherwise the Record ID MUST be calculated as follows:
 - A 128-bit GUID value, *guid*, MUST be randomly generated.
@@ -2625,8 +2625,8 @@ Regardless, the **Record** fields MUST be set as follows:
 - The **Node ID** MUST be set to the local node ID.
 - The **Attributes** MUST be set to the application-specified string.
 - The **Addresses** field MUST include the list of addresses at which the local node ID is listening, stored in Listening addresses (see section [3.1.1](#Section_3.1.1)).
-- The Autorefresh flag MUST NOT be set if the record is published because of a higher-layer application-triggered event, as specified in section [3.1.4.6](#Section_1.3.5.5.4). Otherwise the flag MUST be set.
-If there is already a presence record in the graph database with its Deleted flag unset and with the local node's node ID, the record MUST be updated using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.33). Otherwise, the new record MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.4).
+- The Autorefresh flag MUST NOT be set if the record is published because of a higher-layer application-triggered event, as specified in section [3.1.4.6](#Section_3.1.4.6). Otherwise the flag MUST be set.
+If there is already a presence record in the graph database with its Deleted flag unset and with the local node's node ID, the record MUST be updated using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.8). Otherwise, the new record MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.3).
 
 <a id="Section_3.1.7.5"></a>
 #### 3.1.7.5 Publishing a Contact Record
@@ -2639,7 +2639,7 @@ To publish a [**contact record**](#gt_contact-record), a new [**record**](#gt_re
 - The Signature MUST be set to the graph [**signature**](#gt_signature) stored in the Signature Record in the local node's database. The **Node ID** MUST be set to the local node ID.
 - The **Addresses** field MUST include the list of addresses at which the local node is listening, stored in Listening addresses (see section [3.1.1](#Section_3.1.1)).
 - The Autorefresh flag MUST be set.
-If there already exists a contact record in the graph database with its Deleted flag unset and with the local node's node ID, the record MUST be updated using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.33). Otherwise, the new record MUST be published; see section [3.1.7.3](#Section_3.1.7.4).
+If there already exists a contact record in the graph database with its Deleted flag unset and with the local node's node ID, the record MUST be updated using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.8). Otherwise, the new record MUST be published; see section [3.1.7.3](#Section_3.1.7.3).
 
 <a id="Section_3.1.7.6"></a>
 #### 3.1.7.6 Publishing a Signature Record
@@ -2656,7 +2656,7 @@ The signature record fields MUST be set as follows:
 
 - The **Signature** MUST be set to the local [**node ID**](#gt_node-id).
 - The Autorefresh flag MUST be set.
-If a signature record already exists in the database with its Deleted flag unset, the record MUST be updated using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.33). Otherwise, the new record MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.4).
+If a signature record already exists in the database with its Deleted flag unset, the record MUST be updated using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.8). Otherwise, the new record MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.3).
 
 <a id="Section_3.1.7.7"></a>
 #### 3.1.7.7 Publishing a Graph Info Record
@@ -2668,8 +2668,8 @@ To publish a [**graph info record**](#gt_graph-info-record), a new [**record**](
 - The **Record Type** MUST be set to the [**GUID**](#gt_globally-unique-identifier-guid) {00000100-0000-0000-0000-000000000000}.
 - The **Record ID** MUST be set to GUID {6c796768-7732-406b-bc6e-5e9c0d864580}
 - The **Creator ID** MUST be the local Peer ID.
-- All other fields MUST meet the requirements specified in section [2.2.3.1](#Section_1.3.5.5.1).
-If the graph info record already exists in the database with its Deleted flag unset, the record MUST be updated, using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.33). Otherwise, the new record MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.4).
+- All other fields MUST meet the requirements specified in section [2.2.3.1](#Section_2.2.3.1).
+If the graph info record already exists in the database with its Deleted flag unset, the record MUST be updated, using the newly created record, as specified in section [3.1.7.8](#Section_3.1.7.8). Otherwise, the new record MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.3).
 
 When updating a graph info record, the fields that MUST NOT be changed, as specified in section 2.2.3.1, MUST be left unchanged by the update.
 
@@ -2689,7 +2689,7 @@ When a [**record**](#gt_record) is updated, a new record MUST be supplied that m
 - The **Creator ID** MUST be the same as the record that is being updated.
 If any of the above conditions are not met, the record MUST NOT be updated.
 
-Otherwise, the existing record MUST be deleted from the database, as specified in section [3.1.7.9](#Section_3.1.7.9), and the new one MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.4).
+Otherwise, the existing record MUST be deleted from the database, as specified in section [3.1.7.9](#Section_3.1.7.9), and the new one MUST be published, as specified in section [3.1.7.3](#Section_3.1.7.3).
 
 <a id="Section_3.1.7.9"></a>
 #### 3.1.7.9 Deleting a Record
@@ -2884,7 +2884,7 @@ where:
 
 The local [**node**](#gt_node) MUST perform the following actions in sequence when a local IP address changes:
 
-If the local node has a [**presence record**](#gt_presence-record) in the Graph database with the local Node's Node ID and with its Deleted flag unset, the presence record MUST be updated, as specified in section [3.1.7.8](#Section_3.1.7.33), using an otherwise identical Presence Record that contains the new address information in its Addresses field.
+If the local node has a [**presence record**](#gt_presence-record) in the Graph database with the local Node's Node ID and with its Deleted flag unset, the presence record MUST be updated, as specified in section [3.1.7.8](#Section_3.1.7.8), using an otherwise identical Presence Record that contains the new address information in its Addresses field.
 
 If the local node has a Contact Record in the Graph database with the local Node's Node ID and with its Deleted flag unset, the Contact Record MUST be updated, as specified in section 3.1.7.8, using an otherwise identical Contact Record that contains the new address information in its Addresses field.
 
@@ -2912,7 +2912,7 @@ The local node MUST send (see section [3.1.7.1](#Section_3.1.7.1)) an AUTH_INFO 
 - The **Graph ID Data** MUST be set to the [**graph ID**](#gt_graph-id) being used.
 - The **Source Peer ID Data** MUST be set to the local Peer ID.
 - The **Destination Peer ID Data** MUST be set to the Peer ID of the destination node if that Peer ID is known. Otherwise it MUST be empty.
-- The Direct Connection flag MUST be set according to the application request. For more details, see section [3.1.4.7](#Section_1.3.3).
+- The Direct Connection flag MUST be set according to the application request. For more details, see section [3.1.4.7](#Section_3.1.4.7).
 - If no [**graph security provider**](#gt_graph-security-provider) is configured for the node, the connection state MUST be set to OUT_CONN_STATE_AUTHENTICATED.
 - If a graph security provider is configured on the node, the Connection state MUST be set to OUT_CONN_SENT_AUTHINFO and any further incoming message MUST be passed to the graph security provider to complete the connection security negotiation.
 If any error occurs during connection establishment, the connection MUST be aborted and any further messages received on the connection MUST NOT be processed.
@@ -3152,7 +3152,7 @@ The Peer-to-Peer Graphing Protocol allows a [**graph security provider**](#gt_gr
 - Negotiating secure (encrypted, integrity-protected) connections with peers.
 - Authenticating peers as Group members.
 - Checking authorization for received record additions, updates, and deletions.
-A well-designed graph security provider, such as P2P Grouping [MS-PPSEC](#Section_5), can protect against unauthorized record injection, modification, or on-the-wire inspection.
+A well-designed graph security provider, such as P2P Grouping [MS-PPSEC](../MS-PPSEC/MS-PPSEC.md), can protect against unauthorized record injection, modification, or on-the-wire inspection.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters

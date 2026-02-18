@@ -418,7 +418,7 @@ None.
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The Abstract Data Model (ADM) elements defined in section [3.1.1](#Section_3.2.1) are initialized during the client startup. They are configured by the administrator<2> and stored in persistent storage. On client startup, the configuration is read from the persistent storage and set in the ADM elements.
+The Abstract Data Model (ADM) elements defined in section [3.1.1](#Section_3.1.1) are initialized during the client startup. They are configured by the administrator<2> and stored in persistent storage. On client startup, the configuration is read from the persistent storage and set in the ADM elements.
 
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events

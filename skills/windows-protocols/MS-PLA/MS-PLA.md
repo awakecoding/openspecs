@@ -549,7 +549,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-OAUT] Microsoft Corporation, "[OLE Automation Protocol](../MS-OAUT/MS-OAUT.md)".
 
-[MS-PCQ] Microsoft Corporation, "[Performance Counter Query Protocol](#Section_2.2.13)".
+[MS-PCQ] Microsoft Corporation, "[Performance Counter Query Protocol](../MS-PCQ/MS-PCQ.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
@@ -679,9 +679,9 @@ No standards assignments have been received for this protocol. All values used i
 | RPC Interface UUID for ITraceDataProviderCollection | 03837510-098b-11d8-9414-505054503030 | As specified in [3.2.4.13](#Section_3.2.4.13) |
 | RPC Interface UUID for IScheduleCollection | 0383753d-098b-11d8-9414-505054503030 | As specified in [3.2.4.14](#Section_3.2.4.14) |
 | RPC Interface UUID for IDataCollectorCollection | 03837502-098b-11d8-9414-505054503030 | As specified in [3.2.4.15](#Section_3.2.4.15) |
-| RPC Interface UUID for IDataCollectorSetCollection | 03837524-098b-11d8-9414-505054503030 | As specified in [3.2.4.16](#Section_3.2.4.16.2) |
-| RPC Interface UUID for IValueMapItem | 03837533-098b-11d8-9414-505054503030 | As specified in [3.2.4.17](#Section_3.2.4.18.14) |
-| RPC Interface UUID for IValueMap | 03837534-098b-11d8-9414-505054503030 | As specified in [3.2.4.18](#Section_3.2.4.18.8) |
+| RPC Interface UUID for IDataCollectorSetCollection | 03837524-098b-11d8-9414-505054503030 | As specified in [3.2.4.16](#Section_3.2.4.16) |
+| RPC Interface UUID for IValueMapItem | 03837533-098b-11d8-9414-505054503030 | As specified in [3.2.4.17](#Section_3.2.4.17) |
+| RPC Interface UUID for IValueMap | 03837534-098b-11d8-9414-505054503030 | As specified in [3.2.4.18](#Section_3.2.4.18) |
 
 <a id="Section_2"></a>
 # 2 Messages
@@ -717,7 +717,7 @@ Note that the preceding HRESULTs are necessarily returned from the specified PLA
 
 | Return value/code | Description |
 | --- | --- |
-| 0x80300002 PLA_E_DCS_NOT_FOUND | The [**data collector set**](#gt_data-collector-set) was not found. This HRESULT can be returned from the following methods: [IDataCollectorSet::Commit](#Section_3.2.4.1): Name does not refer to an existing data collector set, and mode is set to plaModify. [IDataCollectorSet::Query](#Section_3.2.4.1): Name does not refer to an existing data collector set. [IDataCollector::DataCollectorSet(Get)](#Section_3.2.4.5): Data collector was never added to a data collector set. [IDataCollectorSet::LatestOutputLocation](#Section_3.2.4.5): Data collector was never added to a data collector set or it was removed from a data collector set. [IDataCollectorSet::Delete](#Section_3.2.4.1): IDataCollectorSet::Commit was not called on the data collector set. |
+| 0x80300002 PLA_E_DCS_NOT_FOUND | The [**data collector set**](#gt_data-collector-set) was not found. This HRESULT can be returned from the following methods: [IDataCollectorSet::Commit](#Section_3.2.4.1.54): Name does not refer to an existing data collector set, and mode is set to plaModify. [IDataCollectorSet::Query](#Section_3.2.4.1.53): Name does not refer to an existing data collector set. [IDataCollector::DataCollectorSet(Get)](#Section_3.2.4.5): Data collector was never added to a data collector set. [IDataCollectorSet::LatestOutputLocation](#Section_3.2.4.1.12): Data collector was never added to a data collector set or it was removed from a data collector set. [IDataCollectorSet::Delete](#Section_3.2.4.1): IDataCollectorSet::Commit was not called on the data collector set. |
 | 0x803000AA PLA_E_DCS_IN_USE | The data collector set or one of its dependencies is already in use. This HRESULT can be returned from the following method: [IDataCollectorSet::Start](#Section_3.2.4.1.56): Data collector set is already started. |
 | 0x803000B7 PLA_E_DCS_ALREADY_EXISTS | The data collector set already exists. This HRESULT can be returned from the following method: IDataCollectorSet::Commit: The data collector set already exists, and mode is set to CreateNew. |
 | 0x00300100 PLA_S_PROPERTY_IGNORED | The property value will be ignored. |
@@ -726,9 +726,9 @@ Note that the preceding HRESULTs are necessarily returned from the specified PLA
 | 0x80300106 PLA_E_NETWORK_EXE_NOT_VALID | The specified executable path refers to a network share or [**UncPath**](#gt_uncpath). This HRESULT can be returned from the following method: IDataCollectorSet::Start: IApiTracingDataCollector::ExePath refers to a nonlocal location. |
 | 0x80300107 PLA_E_EXE_ALREADY_CONFIGURED | The specified executable path is already configured for API tracing. This HRESULT can be returned from the following method: IDataCollectorSet::Start: IApiTracingDataCollector::ExePath refers to an executable that is already being traced. |
 | 0x80300108 PLA_E_EXE_PATH_NOT_VALID | The specified executable path does not exist. Verify that the specified path is correct. This HRESULT can be returned from the following method: IDataCollectorSet::Start: IApiTracingDataCollector::ExePath does not point to a file. |
-| 0x80300109 PLA_E_DC_ALREADY_EXISTS | The [**data collector**](#gt_data-collector) already exists. This HRESULT can be returned from the following method: [IDataCollectorCollection::Add](#Section_3.2.4.5): Data collector collection already contains a data collector with the same name. |
+| 0x80300109 PLA_E_DC_ALREADY_EXISTS | The [**data collector**](#gt_data-collector) already exists. This HRESULT can be returned from the following method: [IDataCollectorCollection::Add](#Section_3.2.4.15.4): Data collector collection already contains a data collector with the same name. |
 | 0x8030010A PLA_E_DCS_START_WAIT_TIMEOUT | The wait for the data collector set start notification has timed out. This HRESULT can be returned from the following method: IDataCollectorSet::Start: Synchronous start was requested but the request timed out. |
-| 0x8030010D PLA_E_NO_DUPLICATES | Duplicate items are not allowed. This HRESULT can be returned from the following methods: [IConfigurationDataCollector::RegistryKeys(Put)](#Section_3.2.4.7): Duplicate registry keys are specified in the RegistryKeys property. [IPerformanceCounterDataCollector::PerformanceCounters(Put)](#Section_3.2.4.6): Duplicate performance counters are specified in the PerformanceCounters property. [ITraceDataProviderCollection::Add](#Section_3.2.4.13): Duplicate providers are specified in the collection. [IDataCollector::Xml(Get)](#Section_3.2.4.5.21): Duplicate providers are specified in the collection. [IDataCollector::SetXml](#Section_3.2.4.5.22): Duplicate providers are specified in the collection. |
+| 0x8030010D PLA_E_NO_DUPLICATES | Duplicate items are not allowed. This HRESULT can be returned from the following methods: [IConfigurationDataCollector::RegistryKeys(Put)](#Section_3.2.4.7.14): Duplicate registry keys are specified in the RegistryKeys property. [IPerformanceCounterDataCollector::PerformanceCounters(Put)](#Section_3.2.4.6.4): Duplicate performance counters are specified in the PerformanceCounters property. [ITraceDataProviderCollection::Add](#Section_3.2.4.13.4): Duplicate providers are specified in the collection. [IDataCollector::Xml(Get)](#Section_3.2.4.5.21): Duplicate providers are specified in the collection. [IDataCollector::SetXml](#Section_3.2.4.5.22): Duplicate providers are specified in the collection. |
 | 0x8030010E PLA_E_EXE_FULL_PATH_REQUIRED | When specifying the executable file that needs to be traced, the caller MUST specify a full path to the executable file and not just a file name. This HRESULT can be returned from the following method: [IApiTracingDataCollector](#Section_3.2.4.10): IApiTracingDataCollector::ExePath: was not an absolute path. |
 
 <a id="Section_2.2.2"></a>
@@ -1104,7 +1104,7 @@ plaValidation = 4
 
 **plaFlagArray:** One or more items in the collection can be enabled. An item in the collection represents a 32-bit unsigned value (ULONG). The enabled items are not combined together as they are for the plaFlag type, but rather each item can be retrieved separately.<2>
 
-**plaValidation:** The collection contains a list of HRESULT values that are returned in an IValueMap by the validation process. The validation process occurs when [IDataCollectorSet::Commit](#Section_3.2.4.1) is called. In the validation process, the PLA Protocol analyzes the values of all the properties in the IDataCollectorSet, including the values of the IDataCollectors contained in the IDataCollectorSet and inserts a [ValueMapItem](#Section_3.2.4.18.14) into the [ValueMap](#Section_3.2.4.18.8) for any property that is problematic. The ValueMapItem holds the name of the property and the HRESULT describing why it is problematic. The following codes can be set in a validation ValueMap:
+**plaValidation:** The collection contains a list of HRESULT values that are returned in an IValueMap by the validation process. The validation process occurs when [IDataCollectorSet::Commit](#Section_3.2.4.1.54) is called. In the validation process, the PLA Protocol analyzes the values of all the properties in the IDataCollectorSet, including the values of the IDataCollectors contained in the IDataCollectorSet and inserts a [ValueMapItem](#Section_3.2.4.17) into the [ValueMap](#Section_3.2.4.18) for any property that is problematic. The ValueMapItem holds the name of the property and the HRESULT describing why it is problematic. The following codes can be set in a validation ValueMap:
 
 | Name/value | Description |
 | --- | --- |
@@ -2999,7 +2999,7 @@ The format of the instance related elements depends on the object type. If the o
 
 The Counter is specified by appending either a '>' or '<' sign along with a value.
 
-The PLA protocol cannot be used to discover which performance counters are available either on the target remote or local machine; the PLA protocol can only be used to query for performance counter values on the target machine (please see section [2.2.13](../MS-RRP/MS-RRP.md) for an example of how this is done). Clients that are interested in discovering which performance counters are available can either use the [MS-RRP](../MS-RRP/MS-RRP.md) or [MS-PCQ](#Section_2.2.13) protocols. Once a client has determined the performance counters whose values it wishes to query for, the client can then use the PLA protocol to do so, specifying each performance counter using the syntax described in this section.
+The PLA protocol cannot be used to discover which performance counters are available either on the target remote or local machine; the PLA protocol can only be used to query for performance counter values on the target machine (please see section [2.2.13](#Section_2.2.13) for an example of how this is done). Clients that are interested in discovering which performance counters are available can either use the [MS-RRP](../MS-RRP/MS-RRP.md) or [MS-PCQ](../MS-PCQ/MS-PCQ.md) protocols. Once a client has determined the performance counters whose values it wishes to query for, the client can then use the PLA protocol to do so, specifying each performance counter using the syntax described in this section.
 
 <a id="Section_2.2.11"></a>
 ### 2.2.11 Trace Provider using Filter Data
@@ -3074,23 +3074,23 @@ Before a provider raises an event to the sessions to which it is enabled, the pr
 <a id="Section_2.2.12"></a>
 ### 2.2.12 Controlling the trace provider
 
-After a trace provider is registered with [**ETW**](#gt_etw), it can be controlled using the PLA protocol. The provider is configured using the [ITraceDataProvider](#Section_3.2.4.11) interface. The ITraceDataProvider is then added to the [ITraceDataProviderCollection](#Section_3.2.4.13) for an ITraceDataProvider by calling [ITraceDataProviderCollection::Add](#Section_3.2.4.13) on the ITraceDataProviderCollection returned from [ITraceDataCollector::get_TraceDataProviders](#Section_3.2.4.9).
+After a trace provider is registered with [**ETW**](#gt_etw), it can be controlled using the PLA protocol. The provider is configured using the [ITraceDataProvider](#Section_3.2.4.11) interface. The ITraceDataProvider is then added to the [ITraceDataProviderCollection](#Section_3.2.4.13) for an ITraceDataProvider by calling [ITraceDataProviderCollection::Add](#Section_3.2.4.13.4) on the ITraceDataProviderCollection returned from [ITraceDataCollector::get_TraceDataProviders](#Section_3.2.4.9).
 
-Next, the ITraceDataCollector is added to the [IDataCollectorCollection](#Section_3.2.4.15) for an [IDataCollectorSet](#Section_3.2.4.1) by calling [IDataCollectorCollection::Add](#Section_3.2.4.5) on the IDataCollectorCollection returned from [IDataCollectorSet::get_DataCollectors](#Section_3.2.4.1).
+Next, the ITraceDataCollector is added to the [IDataCollectorCollection](#Section_3.2.4.15) for an [IDataCollectorSet](#Section_3.2.4.1) by calling [IDataCollectorCollection::Add](#Section_3.2.4.15.4) on the IDataCollectorCollection returned from [IDataCollectorSet::get_DataCollectors](#Section_3.2.4.1).
 
 Finally, the trace provider is enabled by calling [IDataCollectorSet::Start](#Section_3.2.4.1.56) and can then be disabled by calling [IDataCollectorSet::Stop](#Section_3.2.4.1.57).
 
 <a id="Section_2.2.12.1"></a>
 #### 2.2.12.1 Configuring the Trace Provider with ITraceDataProvider
 
-The [ITraceDataProvider](#Section_3.2.4.11) needs to be provided with the PLA-UID of the registered trace provider in order to enable that provider. To set the [**PLA-UID**](#gt_performance-logs-and-alerts-unique-identifier-pla-uid) of the ITraceDataProvider, [ITraceDataProvider::put_GUID()](#Section_3.2.4.11) needs to be called. The ITraceDataProvider can additionally be used to configure the KeywordsAny, KeywordsAll, Level, and FilterData for the provider. KeywordsAny, KeywordsAll, and Level can all be set by calling [IValueMap::put_Value](#Section_3.2.4.18) on the [IValueMap](#Section_3.2.4.18.8) returned from the appropriate function ([ITraceDataProvider::get_KeywordsAny](#Section_2.2.11.1.2), [ITraceDataProvider::get_KeywordsAll](#Section_2.2.11.1.2), and [ITraceDataProvider::get_Level](#Section_3.2.4.11)). The FilterData for the provider can be provided by calling [ITraceDataProvider::put_FilterEnabled](#Section_3.2.4.11) and calling ITraceDataProvider::put_FilterEnabled. Alternatively, all the properties of the ITraceDataProvider (including PLA-UID, level, keywords, and filter data) can be set by calling ITraceDataProvider::SetXml.
+The [ITraceDataProvider](#Section_3.2.4.11) needs to be provided with the PLA-UID of the registered trace provider in order to enable that provider. To set the [**PLA-UID**](#gt_performance-logs-and-alerts-unique-identifier-pla-uid) of the ITraceDataProvider, [ITraceDataProvider::put_GUID()](#Section_3.2.4.11.4) needs to be called. The ITraceDataProvider can additionally be used to configure the KeywordsAny, KeywordsAll, Level, and FilterData for the provider. KeywordsAny, KeywordsAll, and Level can all be set by calling [IValueMap::put_Value](#Section_3.2.4.18.7) on the [IValueMap](#Section_3.2.4.18) returned from the appropriate function ([ITraceDataProvider::get_KeywordsAny](#Section_3.2.4.11.6), [ITraceDataProvider::get_KeywordsAll](#Section_3.2.4.11.7), and [ITraceDataProvider::get_Level](#Section_3.2.4.11.5)). The FilterData for the provider can be provided by calling [ITraceDataProvider::put_FilterEnabled](#Section_3.2.4.11.10) and calling ITraceDataProvider::put_FilterEnabled. Alternatively, all the properties of the ITraceDataProvider (including PLA-UID, level, keywords, and filter data) can be set by calling ITraceDataProvider::SetXml.
 
 <a id="Section_2.2.13"></a>
 ### 2.2.13 Performance Counter
 
 It is important to note that the PLA protocol is used only to collect performance counter values, using the [IPerformanceCounterDataCollecter](#Section_3.2.4.6) interface, from a particular server. The protocol does not have special knowledge of the performance counters that are registered on a machine nor can it be used to register performance counters on a particular machine.
 
-A performance counter provider refers to an application, driver, or operating system component that surfaces numerical data used for performance analysis. A performance counter consumer refers to an application that queries for performance data from performance counter providers in order to perform performance analysis. The performance counter subsystem acts as a broker between performance counter providers and performance counter consumers. The PLA protocol is used by clients such as a performance counter consumers as one mechanism to call into the performance counter subsystem and collect performance counters exposed by such a performance counter provider. An example using pseudo-code is available in section [4.2](#Section_2.2.13).
+A performance counter provider refers to an application, driver, or operating system component that surfaces numerical data used for performance analysis. A performance counter consumer refers to an application that queries for performance data from performance counter providers in order to perform performance analysis. The performance counter subsystem acts as a broker between performance counter providers and performance counter consumers. The PLA protocol is used by clients such as a performance counter consumers as one mechanism to call into the performance counter subsystem and collect performance counters exposed by such a performance counter provider. An example using pseudo-code is available in section [4.2](#Section_4.2).
 
 For more information on performance counters see [[MSDN-PC/W2K8]](https://go.microsoft.com/fwlink/?LinkId=136565).
 
@@ -3109,7 +3109,7 @@ A performance counter consumer collects the values of one or more performance co
 <a id="Section_2.2.13.3"></a>
 #### 2.2.13.3 Querying for a Performance Counter with PLA
 
-Clients of the PLA protocol, such as performance counter consumers, can use the PLA protocol to query for the values of performance counters on a target machine. Clients cannot use the PLA Protocol to discover what performance counters are registered on the target machine (such as their XML manifest file was registered on the target machine). Clients can use the PLA Protocol to query for performance counter values once they have established which performance counters to query. Other protocols, such as those specified in [MS-RRP](../MS-RRP/MS-RRP.md) or [MS-PCQ](#Section_2.2.13), can be used to determine which performance counters are available on the target machine. Once a performance counter consumer has determined which performance counters on the target machine are available and of interest, it then specifies this (according to the format specified in section [2.2.10](#Section_2.2.10)) in the [IPerformanceCounterDataCollector::PerformanceCounters](#Section_3.2.4.6) property. The interval at which to query for performance counter values is specified in the [IPerformanceCounterDataCollector::SampleInterval](#Section_3.2.4.6) property. The maximum number of samples to collect is specified in the [IPerformanceCounterDataCollector::SegmentMaxRecords](#Section_3.2.4.6) property.
+Clients of the PLA protocol, such as performance counter consumers, can use the PLA protocol to query for the values of performance counters on a target machine. Clients cannot use the PLA Protocol to discover what performance counters are registered on the target machine (such as their XML manifest file was registered on the target machine). Clients can use the PLA Protocol to query for performance counter values once they have established which performance counters to query. Other protocols, such as those specified in [MS-RRP](../MS-RRP/MS-RRP.md) or [MS-PCQ](../MS-PCQ/MS-PCQ.md), can be used to determine which performance counters are available on the target machine. Once a performance counter consumer has determined which performance counters on the target machine are available and of interest, it then specifies this (according to the format specified in section [2.2.10](#Section_2.2.10)) in the [IPerformanceCounterDataCollector::PerformanceCounters](#Section_3.2.4.6.4) property. The interval at which to query for performance counter values is specified in the [IPerformanceCounterDataCollector::SampleInterval](#Section_3.2.4.6.8) property. The maximum number of samples to collect is specified in the [IPerformanceCounterDataCollector::SegmentMaxRecords](#Section_3.2.4.6.10) property.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -3147,7 +3147,7 @@ This protocol MUST indicate to the [**RPC**](#gt_remote-procedure-call-rpc) runt
 
 This protocol MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with a nonzero conformant value, as specified in [MS-RPCE] section 3.
 
-A list of full interfaces is specified in section [3.2.4](#Section_3.1.4).
+A list of full interfaces is specified in section [3.2.4](#Section_3.2.4).
 
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Processing Server Replies to Method Calls
@@ -3172,11 +3172,11 @@ No other special events require special processing on the client.
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-A [**data collector set**](#gt_data-collector-set) is the basic unit that describes all aspects of data collection, management and reporting. It includes the list of [**data collectors**](#gt_data-collector), scheduling data, [**data management**](#gt_data-management) policies, and reporting configuration. Section [3.2.4](#Section_3.1.4) specifies all the interfaces.
+A [**data collector set**](#gt_data-collector-set) is the basic unit that describes all aspects of data collection, management and reporting. It includes the list of [**data collectors**](#gt_data-collector), scheduling data, [**data management**](#gt_data-management) policies, and reporting configuration. Section [3.2.4](#Section_3.2.4) specifies all the interfaces.
 
 Data collector sets are categorized into four different categories; each category references a particular group of data collector sets. A client exercises the PLA protocol by specifying the category of the data collector set it wants to create or control on the server. From the server perspective, the category of the data collector set dictates how it ought to execute the data collector set. The categories are defined as follows:
 
-- SystemDataCollectorSet: This is a specific category of data collector sets that MUST run either in the context that is specified through the [IDataCollectorSet::SetCredential](#Section_3.2.4.1) method or in the context of the client; if no user is specified by the IDataCollectorSet::SetCredential method which has been called, then this category of data collector sets will run at the highest permission level on the server. This category of data collector sets can include the TraceDataCollector, PerformanceCounterDatacollector, ConfigurationDataCollector, and ApiTracingDataCollector; the methods of the [IDataManager](#Section_3.2.4.2) can also be used to manage the data that is generated by these data collectors. These constituent data collectors can be started, stopped, and queried by a client. However, a client cannot modify any properties of these constituent data collectors; the [IDataCollectorSet::Commit](#Section_3.2.4.1) method MUST return E_NOTIMPL.
+- SystemDataCollectorSet: This is a specific category of data collector sets that MUST run either in the context that is specified through the [IDataCollectorSet::SetCredential](#Section_3.2.4.1) method or in the context of the client; if no user is specified by the IDataCollectorSet::SetCredential method which has been called, then this category of data collector sets will run at the highest permission level on the server. This category of data collector sets can include the TraceDataCollector, PerformanceCounterDatacollector, ConfigurationDataCollector, and ApiTracingDataCollector; the methods of the [IDataManager](#Section_3.2.4.2) can also be used to manage the data that is generated by these data collectors. These constituent data collectors can be started, stopped, and queried by a client. However, a client cannot modify any properties of these constituent data collectors; the [IDataCollectorSet::Commit](#Section_3.2.4.1.54) method MUST return E_NOTIMPL.
 - ServerDataCollectorSet: This category of data collector sets supports all of the capabilities that are exposed by the [IDataCollectorSet](#Section_3.2.4.1) and its derived classes. Clients can use this category to create and delete data collector sets on the server that include the TraceDataCollector, PerformanceCounterDataCollector, ConfigurationDataCollector, and ApiTracingDataCollector. In addition, the methods of the IDataManager interface can be used to manage the data that is generated by the constituent data collectors.
 - TraceSession: This category references the TraceSession data collector set that is used to control the collection of event traces on the server; the TraceSession data collector set MUST contain a trace data collector. A client can use the PLA protocol to create and control the TraceSession data collector set on the server. However, information about the data collector sets MUST NOT be persisted across server reboots. Moreover, the TraceSession data collector set MUST ignore the segmentation propreties of IDataCollectorSet as well as the [ISchedule](#Section_3.2.4.12) and IDataManager properties. Please see section [2.2.2.11](#Section_2.2.2.11) for specific properties that are ignored by the TraceSession data collector set. Note that although this functionality can be achieved by using the ServerDataCollectorSet class, the TraceSession class provides a "lightweight" mechanism to control the TraceSession data collector set.
 - BootTraceSession: This category references a TraceSession data collector set that MUST be started by the server automatically during boot; the TraceSession data collector set MUST contain a trace data collector. A client can use the PLA protocol to create the data collector set; however, if a client attempts to start the data collector set, the server MUST return E_NOTIMPL because the data collector set can only be started upon reboot. Moreover, the server MUST return E_NOTIMPL if the client tries to stop the data collector set once it has started. The BootTraceSession data collector set MUST ignore the same properties that are ignored by the TraceSession data collector set; please see section 2.2.2.11 for these specific properties.
@@ -3339,11 +3339,11 @@ Methods in RPC Opnum order:
 
 | Method | Description |
 | --- | --- |
-| [DataCollectors (Get)](#Section_3.2.4.1) | List of data collectors in this data collector set. Opnum: 7 |
+| [DataCollectors (Get)](#Section_3.2.4.1.1) | List of data collectors in this data collector set. Opnum: 7 |
 | [Duration (Get)](#Section_3.2.4.1.2) | Retrieves the Duration property. Opnum: 8 |
 | [Duration (Put)](#Section_3.2.4.1.3) | Sets the Duration property. Opnum: 9 |
 | [Description (Get)](#Section_3.2.4.1.4) | Retrieves the Description property. Opnum: 10 |
-| [Description (Put)](#Section_3.2.4.1.54) | Sets the Description property. Opnum: 11 |
+| [Description (Put)](#Section_3.2.4.1.5) | Sets the Description property. Opnum: 11 |
 | [DescriptionUnresolved (Get)](#Section_3.2.4.1.6) | Retrieves the DescriptionUnresolved property. Opnum: 12 |
 | [DisplayName (Get)](#Section_3.2.4.1.7) | Retrieves the display name of the data collector set . Opnum: 13 |
 | [DisplayName (Put)](#Section_3.2.4.1.8) | Sets the DisplayName property. Opnum: 14 |
@@ -3365,7 +3365,7 @@ Methods in RPC Opnum order:
 | [SerialNumber (Get)](#Section_3.2.4.1.24) | Retrieves the SerialNumber property. Opnum: 30 |
 | [SerialNumber (Put)](#Section_3.2.4.1.25) | Sets the SerialNumber property. Opnum: 31 |
 | [Server (Get)](#Section_3.2.4.1.26) | Retrieves the Server property. Opnum: 32 |
-| [Status (Get)](#Section_3.2.4.1) | Retrieves the Status property. Opnum: 33 |
+| [Status (Get)](#Section_3.2.4.1.27) | Retrieves the Status property. Opnum: 33 |
 | [Subdirectory (Get)](#Section_3.2.4.1.28) | Retrieves the Subdirectory property. Opnum: 34 |
 | [Subdirectory (Put)](#Section_3.2.4.1.29) | Sets the Subdirectory property. Opnum: 35 |
 | [SubdirectoryFormat (Get)](#Section_3.2.4.1.30) | Retrieves the SubdirectoryFormat property. Opnum: 36 |
@@ -3390,10 +3390,10 @@ Methods in RPC Opnum order:
 | [StopOnCompletion (Get)](#Section_3.2.4.1.49) | Retrieves the StopOnCompletion property. Opnum: 55 |
 | [StopOnCompletion (Put)](#Section_3.2.4.1.50) | Sets the StopOnCompletion property. Opnum: 56 |
 | [DataManager (Get)](#Section_3.2.4.1.51) | Retrieves the DataManager property. Opnum: 57 |
-| [SetCredentials](#Section_3.2.4.1) | Specifies the user account under which the data collector set runs. Opnum: 58 |
-| [Query](#Section_3.2.4.1) | Loads the properties of a data collector set from storage to memory. Opnum: 59 |
-| [Commit](#Section_3.2.4.1) | Updates, validates, or saves a data collector set or flushes the event trace data collectors of a data collector set. Opnum: 60 |
-| [Delete](#Section_3.2.4.1) | Removes the data collector set from storage if it is not running. Opnum: 61 |
+| [SetCredentials](#Section_3.2.4.1.52) | Specifies the user account under which the data collector set runs. Opnum: 58 |
+| [Query](#Section_3.2.4.1.53) | Loads the properties of a data collector set from storage to memory. Opnum: 59 |
+| [Commit](#Section_3.2.4.1.54) | Updates, validates, or saves a data collector set or flushes the event trace data collectors of a data collector set. Opnum: 60 |
+| [Delete](#Section_3.2.4.1.55) | Removes the data collector set from storage if it is not running. Opnum: 61 |
 | Start | Manually starts the data collector set. Opnum: 62 |
 | [Stop](#Section_3.2.4.1.57) | Manually stops the data collector set. Opnum: 63 |
 | SetXml | Sets the property values of the data collector set based on an XML file. Opnum: 64 |
@@ -3415,7 +3415,7 @@ The DataCollectors (Get) method retrieves the DataCollectors property.
 
 **collectors:** Receives the pointer to the [**data collector**](#gt_data-collector) collection object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.2"></a>
 ##### 3.2.4.1.2 Duration (Get) (Opnum 8)
@@ -3430,7 +3430,7 @@ The Duration (Get) method retrieves the Duration property.
 
 **seconds:** Receives the maximum number of seconds for which the [**data collector set**](#gt_data-collector-set) MUST run.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.3"></a>
 ##### 3.2.4.1.3 Duration (Put) (Opnum 9)
@@ -3445,7 +3445,7 @@ The Duration (Put) method sets the Duration property.
 
 **seconds:** Supplies the maximum number of seconds for which the [**data collector set**](#gt_data-collector-set) MUST run. If zero, the data collector set MUST NOT be stopped automatically. The default is zero.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.4"></a>
 ##### 3.2.4.1.4 Description (Get) (Opnum 10)
@@ -3460,7 +3460,7 @@ The Description (Get) method retrieves the Description property.
 
 **description:** Receives the description of the [**data collector set**](#gt_data-collector-set).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.5"></a>
 ##### 3.2.4.1.5 Description (Put) (Opnum 11)
@@ -3475,14 +3475,14 @@ The Description (Put) method sets the Description property.
 
 **description:** Supplies the description of the [**data collector set**](#gt_data-collector-set).<13>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.6"></a>
 ##### 3.2.4.1.6 DescriptionUnresolved (Get) (Opnum 12)
 
 The DescriptionUnresolved (Get) method retrieves the DescriptionUnresolved property.
 
-This method MUST return the description as originally set by the IDataCollectorSet::Description method, as specified in section [3.2.4.1.5](#Section_3.2.4.1.54).
+This method MUST return the description as originally set by the IDataCollectorSet::Description method, as specified in section [3.2.4.1.5](#Section_3.2.4.1.5).
 
 [propget] HRESULT DescriptionUnresolved(
 
@@ -3492,7 +3492,7 @@ This method MUST return the description as originally set by the IDataCollectorS
 
 **Descr:** Receives the description of the [**data collector set**](#gt_data-collector-set) in its raw form.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.7"></a>
 ##### 3.2.4.1.7 DisplayName (Get) (Opnum 13)
@@ -3507,7 +3507,7 @@ The DisplayName (Get) method retrieves the display name property.
 
 **DisplayName:** Receives the display name of the [**data collector set**](#gt_data-collector-set).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.8"></a>
 ##### 3.2.4.1.8 DisplayName (Put) (Opnum 14)
@@ -3522,7 +3522,7 @@ The DisplayName (Put) method sets the DisplayName property.
 
 **DisplayName:** Supplies the display name of the [**data collector set**](#gt_data-collector-set).<14>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.9"></a>
 ##### 3.2.4.1.9 DisplayNameUnresolved (Get) (Opnum 15)
@@ -3537,7 +3537,7 @@ The DisplayNameUnresolved (Get) method retrieves the DisplayNameUnresolved prope
 
 **name:** Receives the display name of the [**data collector set**](#gt_data-collector-set) in its original form.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.10"></a>
 ##### 3.2.4.1.10 Keywords (Get) (Opnum 16)
@@ -3552,7 +3552,7 @@ The Keywords (Get) method retrieves the Keywords property, as specified in the p
 
 **keywords:** Receives an array of BSTRs that contains the keywords of the [**data collector set**](#gt_data-collector-set). There can be at most 256 separate strings in the array.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.11"></a>
 ##### 3.2.4.1.11 Keywords (Put) (Opnum 17)
@@ -3567,7 +3567,7 @@ The Keywords (Put) method sets the Keywords property, as specified in the proper
 
 **Keywords:** Supplies an array of BSTRs that contains the keywords of the [**data collector set**](#gt_data-collector-set). There can be at most 256 separate strings in the array.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.12"></a>
 ##### 3.2.4.1.12 LatestOutputLocation (Get) (Opnum 18)
@@ -3582,7 +3582,7 @@ The LatestOutputLocation (Get) method retrieves the LatestOutputLocation propert
 
 **path:** Receives the [**folder**](#gt_folder) name.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.13"></a>
 ##### 3.2.4.1.13 LatestOutputLocation (Put) (Opnum 19)
@@ -3597,7 +3597,7 @@ The LatestOutputLocation (Put) method sets the LatestOutputLocation property.
 
 **path:** Supplies the folder name.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.14"></a>
 ##### 3.2.4.1.14 Name (Get) (Opnum 20)
@@ -3612,7 +3612,7 @@ The Name (Get) method retrieves the Name property, as specified in the property 
 
 **name:** Receives the name.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.15"></a>
 ##### 3.2.4.1.15 OutputLocation (Get) (Opnum 21)
@@ -3627,7 +3627,7 @@ The OutputLocation (Get) method retrieves the OutputLocation property.
 
 **path:** Receives the name of folder.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.16"></a>
 ##### 3.2.4.1.16 RootPath (Get) (Opnum 22)
@@ -3642,7 +3642,7 @@ The RootPath (Get) method retrieves the RootPath property, as specified in the p
 
 **folder:** Receives the root path.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.17"></a>
 ##### 3.2.4.1.17 RootPath (Put) (Opnum 23)
@@ -3657,7 +3657,7 @@ The RootPath (Put) method sets the RootPath property, as specified in the proper
 
 **folder:** Supplies the root path. The path can contain environment variables.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.18"></a>
 ##### 3.2.4.1.18 Segment (Get) (Opnum 24)
@@ -3672,7 +3672,7 @@ The Segment (Get) method retrieves the Segment property, as specified in the pro
 
 **segment:** Receives a Boolean indicating whether [**segmentation**](#gt_segmentation) is enabled or disabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.19"></a>
 ##### 3.2.4.1.19 Segment (Put) (Opnum 25)
@@ -3687,7 +3687,7 @@ The Segment (Put) method sets the Segment property, as specified in the property
 
 **segment:** Supplies a Boolean indicating whether [**segmentation**](#gt_segmentation) is to be enabled or disabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.20"></a>
 ##### 3.2.4.1.20 SegmentMaxDuration (Get) (Opnum 26)
@@ -3702,7 +3702,7 @@ The SegmentMaxDuration (Get) method retrieves the SegmentMaxDuration property, a
 
 **seconds:** Receives the duration, in seconds, that the [**data collector set**](#gt_data-collector-set) can run before it triggers a [**segmentation**](#gt_segmentation).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.21"></a>
 ##### 3.2.4.1.21 SegmentMaxDuration (Put) (Opnum 27)
@@ -3717,7 +3717,7 @@ The SegmentMaxDuration (Put) method sets the SegmentMaxDuration property, as spe
 
 **seconds:** Supplies the duration, in seconds, that the [**data collector set**](#gt_data-collector-set) can run before it triggers a [**segmentation**](#gt_segmentation). If zero, there is no duration. The default MUST be zero.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.22"></a>
 ##### 3.2.4.1.22 SegmentMaxSize (Get) (Opnum 28)
@@ -3732,7 +3732,7 @@ The SegmentMaxSize (Get) method retrieves the SegmentMaxSize property, as specif
 
 **size:** Receives the maximum specified log file size, in MB, for the [**data collector set**](#gt_data-collector-set). The valid range is from 0x00000000 to 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.23"></a>
 ##### 3.2.4.1.23 SegmentMaxSize (Put) (Opnum 29)
@@ -3747,7 +3747,7 @@ The SegmentMaxSize (Put) method sets the SegmentMaxSize property, as specified i
 
 **size:** Supplies the maximum log file size, in MB, for the [**data collector set**](#gt_data-collector-set). The valid range is from 0x00000000 to 0xFFFFFFFF inclusive. The Performance Logs and Alerts Protocol SHOULD NOT<15> stop the data collector set when the size of the active log file reaches SegmentMaxSize; it creates a new file to enable the data collector set to continue logging information.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.24"></a>
 ##### 3.2.4.1.24 SerialNumber (Get) (Opnum 30)
@@ -3762,7 +3762,7 @@ The SerialNumber (Get) method retrieves the SerialNumber property, as specified 
 
 **index:** Receives the number of times that this [**data collector set**](#gt_data-collector-set) has been started, including segments. The valid range is from 0x00000000 to 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.25"></a>
 ##### 3.2.4.1.25 SerialNumber (Put) (Opnum 31)
@@ -3777,7 +3777,7 @@ The SerialNumber (Put) method sets the SerialNumber property, as specified in th
 
 **index:** Supplies the number of times that this [**data collector set**](#gt_data-collector-set) has been started, including segments. The default is zero. The valid range is from 0x00000000 to 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.26"></a>
 ##### 3.2.4.1.26 Server (Get) (Opnum 32)
@@ -3792,7 +3792,7 @@ The Server (Get) method retrieves the Server property.
 
 **server:** Receives the name of the server where the [**data collector set**](#gt_data-collector-set) runs.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.27"></a>
 ##### 3.2.4.1.27 Status (Get) (Opnum 33)
@@ -3807,7 +3807,7 @@ The Status (Get) method retrieves the Status property.
 
 **status:** Receives the status of the [**data collector set**](#gt_data-collector-set). The status of the data collector set is defined by one of the [DataCollectorSetStatus](#Section_2.2.2.4) enumeration values.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.28"></a>
 ##### 3.2.4.1.28 Subdirectory (Get) (Opnum 34)
@@ -3822,7 +3822,7 @@ The Subdirectory (Get) method retrieves the Subdirectory property.
 
 **folder:** Receives the base subdirectory of the root path where the next instance of the [**data collector set**](#gt_data-collector-set) will write its logs.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.29"></a>
 ##### 3.2.4.1.29 Subdirectory (Put) (Opnum 35)
@@ -3837,7 +3837,7 @@ The Subdirectory (Put) method sets the Subdirectory property.
 
 **folder:** Supplies the base subdirectory of the root path where the next instance of the [**data collector set**](#gt_data-collector-set) will write its logs.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.30"></a>
 ##### 3.2.4.1.30 SubdirectoryFormat (Get) (Opnum 36)
@@ -3852,7 +3852,7 @@ The SubdirectoryFormat (Get) method retrieves the SubdirectoryFormat property.
 
 **format:** Receives the subdirectory format that is determined by the [AutoPathFormat](#Section_2.2.2.1) enumeration.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.31"></a>
 ##### 3.2.4.1.31 SubdirectoryFormat (Put) (Opnum 37)
@@ -3867,7 +3867,7 @@ The SubdirectoryFormat (Put) method sets the SubdirectoryFormat property.
 
 **format:** Supplies the subdirectory format which is determined by the [AutoPathFormat](#Section_2.2.2.1) enumeration.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.32"></a>
 ##### 3.2.4.1.32 SubdirectoryFormatPattern (Get) (Opnum 38)
@@ -3882,7 +3882,7 @@ The section SubdirectoryFormatPattern method retrieves the SubdirectoryFormatPat
 
 **pattern:** Receives the format pattern to use when appending the folder name. The format is specified in section [2.2.3.1](#Section_2.2.3.1).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.33"></a>
 ##### 3.2.4.1.33 SubdirectoryFormatPattern (Put) (Opnum 39)
@@ -3897,7 +3897,7 @@ The SubdirectoryFormatPattern (Put) method sets the SubdirectoryFormatPattern pr
 
 **pattern:** Supplies the format pattern to use when appending the folder name. The format is specified in section [2.2.3.1](#Section_2.2.3.1).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.34"></a>
 ##### 3.2.4.1.34 Task (Get) (Opnum 40)
@@ -3912,7 +3912,7 @@ The Task (Get) method retrieves the Task property, as specified in the property 
 
 **task:** Receives the name of a task to be executed when data collection stops.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.35"></a>
 ##### 3.2.4.1.35 Task (Put) (Opnum 41)
@@ -3927,7 +3927,7 @@ The Task (Put) method sets the Task property, as specified in the property table
 
 **task:** Supplies the name of a task to be executed when data collection stops.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.36"></a>
 ##### 3.2.4.1.36 TaskRunAsSelf (Get) (Opnum 42)
@@ -3942,7 +3942,7 @@ The TaskRunAsSelf (Get) method retrieves the TaskRunAsSelf property, as specifie
 
 **RunAsSelf:** Receives a Boolean indicating whether the task MUST run as self. If a task is to run, this property determines whether it MUST run as the same user as the data collector set, or as the user it was created to run as.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.37"></a>
 ##### 3.2.4.1.37 TaskRunAsSelf (Put) (Opnum 43)
@@ -3957,7 +3957,7 @@ The TaskRunAsSelf (Put) method sets the TaskRunAsSelf property, as specified in 
 
 **RunAsSelf:** Supplies a Boolean indicating whether the task MUST run as self.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.38"></a>
 ##### 3.2.4.1.38 TaskArguments (Get) (Opnum 44)
@@ -3982,9 +3982,9 @@ The TaskArguments (Get) method retrieves the TaskArguments property.
 | {usertext} | String from TaskUserTextArguments. |
 | {logs} | Space-delimited list of full paths to the current data collector files. |
 | {state} | Indicates if the set is running (1 for running, 0 for stopped). |
-| {key} | Space-delimited list of key values that were specified using [IDataCollectorSet::SetValue](#Section_3.2.4.5) (to clarify, the SetValue function takes in a Key parameter and a Value parameter, and the list created here contains the Value parameters, not the Key parameters). Each individual value can be any non-empty string. The values themselves are user-provided and their use is to contain additional data that the user could want stored with the [**data collector set**](#gt_data-collector-set). The values are not interpreted by PLA and they are stored for the user's convenience. |
+| {key} | Space-delimited list of key values that were specified using [IDataCollectorSet::SetValue](#Section_3.2.4.1) (to clarify, the SetValue function takes in a Key parameter and a Value parameter, and the list created here contains the Value parameters, not the Key parameters). Each individual value can be any non-empty string. The values themselves are user-provided and their use is to contain additional data that the user could want stored with the [**data collector set**](#gt_data-collector-set). The values are not interpreted by PLA and they are stored for the user's convenience. |
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.39"></a>
 ##### 3.2.4.1.39 TaskArguments (Put) (Opnum 45)
@@ -4009,9 +4009,9 @@ The TaskArguments (Put) method sets the TaskArguments property.
 | {usertext} | String from TaskUserTextArguments. |
 | {logs} | Space-delimited list of full paths to the current [**data collector**](#gt_data-collector) files. |
 | {state} | Indicates if the set is running (1 for running, 0 for stopped). |
-| {key} | Space-delimited list of key values that were specified using [IDataCollectorSet::SetValue](#Section_3.2.4.5) (to clarify, the SetValue function takes in a Key parameter and a Value parameter, and the list created here contains the Value parameters, not the Key parameters). Each individual value can be any non-empty string. The values themselves are user-provided and their use is to contain additional data that the user could want stored with the data collector set. The values are not interpreted by PLA and they are stored for the user's convenience. |
+| {key} | Space-delimited list of key values that were specified using [IDataCollectorSet::SetValue](#Section_3.2.4.1) (to clarify, the SetValue function takes in a Key parameter and a Value parameter, and the list created here contains the Value parameters, not the Key parameters). Each individual value can be any non-empty string. The values themselves are user-provided and their use is to contain additional data that the user could want stored with the data collector set. The values are not interpreted by PLA and they are stored for the user's convenience. |
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.40"></a>
 ##### 3.2.4.1.40 TaskUserTextArguments (Get) (Opnum 46)
@@ -4026,7 +4026,7 @@ The TaskUserTextArguments (Get) method retrieves the TaskUserTextArguments prope
 
 **UserText:** Receives the value of the TaskUserTextArguments property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.41"></a>
 ##### 3.2.4.1.41 TaskUserTextArguments (Put) (Opnum 47)
@@ -4041,7 +4041,7 @@ The TaskUserTextArguments (Put) method sets the TaskUserTextArguments property, 
 
 **UserText:** Supplies the value of the TaskUserTextArguments property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.42"></a>
 ##### 3.2.4.1.42 Schedules (Get) (Opnum 48)
@@ -4056,7 +4056,7 @@ The Schedules (Get) method retrieves the Schedules property, as specified in the
 
 **ppSchedules:** Receives a pointer to the schedule collection object. Schedules are created with the [CreateSchedule](#Section_3.2.4.14.8) method.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.43"></a>
 ##### 3.2.4.1.43 SchedulesEnabled (Get) (Opnum 49)
@@ -4071,7 +4071,7 @@ The SchedulesEnabled (Get) method retrieves the SchedulesEnabled property, as sp
 
 **enabled:** Receives a Boolean indicating whether schedules are enabled or disabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.44"></a>
 ##### 3.2.4.1.44 SchedulesEnabled (Put) (Opnum 50)
@@ -4086,7 +4086,7 @@ The SchedulesEnabled (Put) method sets the SchedulesEnabled property, as specifi
 
 **enabled:** Supplies a Boolean indicating whether schedules are enabled or disabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.45"></a>
 ##### 3.2.4.1.45 UserAccount (Get) (Opnum 51)
@@ -4099,9 +4099,9 @@ The UserAccount (Get) method retrieves the UserAccount property.
 
 );
 
-**user:** Receives the user account under which the [**data collector set**](#gt_data-collector-set) will run. The value of the string that is returned will be that which was passed as a parameter to the [IDataCollectorSet::SetCredentials](#Section_3.2.4.1) method if that method was called after the last [IDataCollectorSet::Query](#Section_3.2.4.1) method was called. If the SetCredentials method was not called, then the string that is returned will be that of the user which the data collector set is registered to run as. In such a case, if the machine is joined to a domain and the user is a member of that domain, then the form of the returned string will be domain\user or user@domain.
+**user:** Receives the user account under which the [**data collector set**](#gt_data-collector-set) will run. The value of the string that is returned will be that which was passed as a parameter to the [IDataCollectorSet::SetCredentials](#Section_3.2.4.1) method if that method was called after the last [IDataCollectorSet::Query](#Section_3.2.4.1.53) method was called. If the SetCredentials method was not called, then the string that is returned will be that of the user which the data collector set is registered to run as. In such a case, if the machine is joined to a domain and the user is a member of that domain, then the form of the returned string will be domain\user or user@domain.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.46"></a>
 ##### 3.2.4.1.46 Xml (Get) (Opnum 52)
@@ -4116,7 +4116,7 @@ The Xml (Get) method retrieves the Xml property.
 
 **xml:** Receives the XML representation of the [**data collector set**](#gt_data-collector-set).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.47"></a>
 ##### 3.2.4.1.47 Security (Get) (Opnum 53)
@@ -4131,7 +4131,7 @@ The Security (Get) method retrieves the Security property, as specified in the p
 
 **pbstrSecurity:** Receives the security descriptor of the [**data collector set**](#gt_data-collector-set).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.48"></a>
 ##### 3.2.4.1.48 Security (Put) (Opnum 54)
@@ -4146,7 +4146,7 @@ The Security (Put) method sets the Security property, as specified in the proper
 
 **bstrSecurity:** Supplies the security descriptor of the [**data collector set**](#gt_data-collector-set), using the Security Descriptor Description Language (SDDL), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.1.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.49"></a>
 ##### 3.2.4.1.49 StopOnCompletion (Get) (Opnum 55)
@@ -4161,7 +4161,7 @@ The StopOnCompletion (Get) method retrieves the StopOnCompletion property, as sp
 
 **Stop:** Receives a Boolean indicating whether the [**data collector set**](#gt_data-collector-set) MUST stop when [**data collectors**](#gt_data-collector) complete.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.50"></a>
 ##### 3.2.4.1.50 StopOnCompletion (Put) (Opnum 56)
@@ -4176,7 +4176,7 @@ The StopOnCompletion (Put) method sets the StopOnCompletion property, as specifi
 
 **Stop:** Supplies a Boolean indicating whether the [**data collector set**](#gt_data-collector-set) MUST stop when [**data collectors**](#gt_data-collector) complete.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.51"></a>
 ##### 3.2.4.1.51 DataManager (Get) (Opnum 57)
@@ -4191,7 +4191,7 @@ The DataManager (Get) method retrieves the DataManager property, as specified in
 
 **DataManager:** Receives a pointer to the data manager object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.52"></a>
 ##### 3.2.4.1.52 SetCredentials (Opnum 58)
@@ -4210,7 +4210,7 @@ BSTR password
 
 **password:** Supplies the password of the user account.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.53"></a>
 ##### 3.2.4.1.53 Query (Opnum 59)
@@ -4229,7 +4229,7 @@ HRESULT Query(
 
 **server:** Not used.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.54"></a>
 ##### 3.2.4.1.54 Commit (Opnum 60)
@@ -4254,9 +4254,9 @@ CommitMode mode,
 
 **mode:** Supplies the actions to perform. See section [2.2.2.3](#Section_2.2.2.3) for a description of possible actions.
 
-**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects. The client MUST ignore the validation property if the Commit method fails. The validation property will be NULL, and an error code returned, in the case that the data collector set contains an IApiTracingDataCollectorSet and there are array elements that are part of both the IApiTracingDataCollectorSet::IncludeApis array and IApiTracingDataCollectorSet::ExcludeApis array (in other words, there is overlap between the two arrays).
+**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18). Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects. The client MUST ignore the validation property if the Commit method fails. The validation property will be NULL, and an error code returned, in the case that the data collector set contains an IApiTracingDataCollectorSet and there are array elements that are part of both the IApiTracingDataCollectorSet::IncludeApis array and IApiTracingDataCollectorSet::ExcludeApis array (in other words, there is overlap between the two arrays).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.55"></a>
 ##### 3.2.4.1.55 Delete (Opnum 61)
@@ -4267,7 +4267,7 @@ HRESULT Delete();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.56"></a>
 ##### 3.2.4.1.56 Start (Opnum 62)
@@ -4282,7 +4282,7 @@ HRESULT Start(
 
 **Synchronous:** Supplies a Boolean indicating whether the start operation MUST be synchronous or asynchronous. In asynchronous mode, the method returns after queuing or failing to queue the data collector set start. The HRESULT returned from the Start function only specifies whether the queuing operation failed or succeeded. If the queuing operation succeeded, (S_OK) is returned even if the data collector set did not start. The only method for detecting that the asynchronous start failed is to poll the Status property to check if the data collector set is still running. In synchronous mode, the method returns when the data collector set actually starts, and the HRESULT only returns (S_OK) if the data collector set started successfully.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.57"></a>
 ##### 3.2.4.1.57 Stop (Opnum 63)
@@ -4297,7 +4297,7 @@ HRESULT Stop(
 
 **Synchronous:** Supplies a Boolean indicating whether the stop operation MUST be synchronous or asynchronous. In synchronous mode, the method returns when the data collector set actually stops. In asynchronous mode, the method returns after queuing or failing to queue the data collector set stop. The HRESULT returned from the Stop function only specifies whether the queuing operation failed or succeeded. If the queuing operation succeeded, (S_OK) is returned even if the data collector set did not stop. The only method for detecting that the asynchronous stop failed is to poll the Status property to check if the data collector set is still running. In synchronous mode, the method returns when the data collector set actually stops and the HRESULT only returns (S_OK) if the data collector set stopped successfully.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.58"></a>
 ##### 3.2.4.1.58 SetXml (Opnum 64)
@@ -4314,9 +4314,9 @@ HRESULT SetXml(
 
 **xml:** Supplies the XML that contains the properties to set. Each data collector set property has a corresponding XML tag that can be used in this string to set the value of that property. The format of the XML to supply is given in section [3.2.4.1](#Section_3.2.4.1).
 
-**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
+**validation:** Receives a validation value map with a list of properties for this data collector set (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18). Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.59"></a>
 ##### 3.2.4.1.59 SetValue (Opnum 65)
@@ -4335,7 +4335,7 @@ BSTR value
 
 **value:** Supplies the value associated with the key. This is any BSTR that is metadata that needs to be associated with the data collector set or be passed as an argument when a specified task executes.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.1.60"></a>
 ##### 3.2.4.1.60 GetValue (Opnum 66)
@@ -4354,7 +4354,7 @@ BSTR key,
 
 **value:** Receives the value associated with the key. The value that is returned, associated with the key that was passed as a parameter into this method, was set by calling the SetValue method.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 IDataManager
@@ -4423,7 +4423,7 @@ The Enabled (Get) method retrieves the Enabled property, as specified in the pro
 
 **pfEnabled:** Receives a Boolean indicating whether the [**data management**](#gt_data-management) is enabled or disabled. All properties of the DataManager object are enabled when this property is set to VARIANT_TRUE.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.2"></a>
 ##### 3.2.4.2.2 Enabled (Put) (Opnum 8)
@@ -4438,7 +4438,7 @@ The Enabled (Put) method sets the Enabled property, as specified in the property
 
 **fEnabled:** Supplies a Boolean indicating whether the [**data management**](#gt_data-management) is enabled or disabled. All properties of the DataManager object are enabled when this property is set to VARIANT_TRUE.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.3"></a>
 ##### 3.2.4.2.3 CheckBeforeRunning (Get) (Opnum 9)
@@ -4453,7 +4453,7 @@ The CheckBeforeRunning (Get) method retrieves the CheckBeforeRunning property, a
 
 **pfCheck:** Receives a Boolean indicating whether or not resource policy MUST be checked before starting a [**data collector set**](#gt_data-collector-set). The ResourcePolicy property is specified in the property table, rows CheckBeforeRunning and Enabled, in section 3.2.4.2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.4"></a>
 ##### 3.2.4.2.4 CheckBeforeRunning (Put) (Opnum 10)
@@ -4468,7 +4468,7 @@ The CheckBeforeRunning (Put) method sets the CheckBeforeRunning property, as spe
 
 **fCheck:** Supplies a Boolean indicating whether or not resource policy MUST be checked before starting a [**data collector set**](#gt_data-collector-set). The ResourcePolicy property is specified in the property table, rows CheckBeforeRunning and Enabled, in section 3.2.4.2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.5"></a>
 ##### 3.2.4.2.5 MinFreeDisk (Get) (Opnum 11)
@@ -4483,7 +4483,7 @@ The MinFreeDisk (Get) method retrieves the MinFreeDisk property, as specified in
 
 **MinFreeDisk:** Receives the minimum free [**disk**](#gt_disk) space, in MB. The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.6"></a>
 ##### 3.2.4.2.6 MinFreeDisk (Put) (Opnum 12)
@@ -4498,7 +4498,7 @@ The MinFreeDisk (Put) method sets the MinFreeDisk property, as specified in the 
 
 **MinFreeDisk:** Supplies the minimum free [**disk**](#gt_disk) space, in MB. The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.7"></a>
 ##### 3.2.4.2.7 MaxSize (Get) (Opnum 13)
@@ -4513,7 +4513,7 @@ The MaxSize (Get) method retrieves the MaxSize property, as specified in the pro
 
 **pulMaxSize:** Receives the maximum [**disk**](#gt_disk) space, in MB. The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF]; otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF]; otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 <a id="Section_3.2.4.2.8"></a>
 ##### 3.2.4.2.8 MaxSize (Put) (Opnum 14)
@@ -4528,7 +4528,7 @@ The MaxSize (Put) method sets the MaxSize property, as specified in the property
 
 **ulMaxSize:** Supplies the maximum [**disk**](#gt_disk) space, in MB. The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.9"></a>
 ##### 3.2.4.2.9 MaxFolderCount (Get) (Opnum 15)
@@ -4543,7 +4543,7 @@ The MaxFolderCount (Get) method retrieves the MaxFolderCount property, as specif
 
 **pulMaxFolderCount:** Receives the maximum number of folders to be used by all [**data collectors**](#gt_data-collector) in the [**data collector set**](#gt_data-collector-set). The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.10"></a>
 ##### 3.2.4.2.10 MaxFolderCount (Put) (Opnum 16)
@@ -4558,7 +4558,7 @@ The MaxFolderCount (Put) method sets the MaxFolderCount property, as specified i
 
 **ulMaxFolderCount:** Supplies the maximum number of folders to be used by all [**data collectors**](#gt_data-collector) in the [**data collector set**](#gt_data-collector-set). The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.11"></a>
 ##### 3.2.4.2.11 ResourcePolicy (Get) (Opnum 17)
@@ -4573,7 +4573,7 @@ The ResourcePolicy (Get) method retrieves the ResourcePolicy property, as specif
 
 **pPolicy:** Receives the action to take when resource limits are exceeded.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.12"></a>
 ##### 3.2.4.2.12 ResourcePolicy (Put) (Opnum 18)
@@ -4588,7 +4588,7 @@ The ResourcePolicy (Put) method sets the ResourcePolicy property, as specified i
 
 **Policy:** Supplies the action to take when resource limits are exceeded.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.13"></a>
 ##### 3.2.4.2.13 FolderActions (Get) (Opnum 19)
@@ -4603,7 +4603,7 @@ The FolderActions (Get) method retrieves the FolderAction property, as specified
 
 **Actions:** Receives a pointer to a folder action collection object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.14"></a>
 ##### 3.2.4.2.14 ReportSchema (Get) (Opnum 20)
@@ -4618,7 +4618,7 @@ The ReportSchema (Get) method retrieves the ReportSchema property, as specified 
 
 **ReportSchema:** Receives the XML that contains the schema used to customize the report.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.15"></a>
 ##### 3.2.4.2.15 ReportSchema (Put) (Opnum 21)
@@ -4633,7 +4633,7 @@ The ReportSchema (Put) method sets the ReportSchema property, as specified in th
 
 **ReportSchema:** Supplies the XML that contains the schema used to customize the report.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.16"></a>
 ##### 3.2.4.2.16 ReportFileName (Get) (Opnum 22)
@@ -4648,7 +4648,7 @@ The ReportFileName (Get) method retrieves the ReportFileName property.
 
 **pbstrFilename:** Receives the name of the report file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.17"></a>
 ##### 3.2.4.2.17 ReportFileName (Put) (Opnum 23)
@@ -4663,7 +4663,7 @@ The ReportFileName (Put) method sets the ReportFileName property.
 
 **pbstrFilename:** Supplies the name of the report file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.18"></a>
 ##### 3.2.4.2.18 RuleTargetFileName (Get) (Opnum 24)
@@ -4678,7 +4678,7 @@ The RuleTargetFileName (Get) method retrieves the RuleTargetFileName property, a
 
 **Filename:** Receives the name of the report file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.19"></a>
 ##### 3.2.4.2.19 RuleTargetFileName (Put) (Opnum 25)
@@ -4693,7 +4693,7 @@ The RuleTargetFileName (Put) method sets the RuleTargetFileName property, as spe
 
 **Filename:** Supplies the name of the report file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.20"></a>
 ##### 3.2.4.2.20 EventsFileName (Get) (Opnum 26)
@@ -4708,7 +4708,7 @@ The EventsFileName (Get) method retrieves the EventsFileName property, as specif
 
 **pbstrFilename:** Receives the name of the events file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.21"></a>
 ##### 3.2.4.2.21 EventsFileName (Put) (Opnum 27)
@@ -4723,7 +4723,7 @@ The EventsFileName (Put) method sets the EventsFileName property, as specified i
 
 **bstrFilename:** Supplies the name of the events file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.22"></a>
 ##### 3.2.4.2.22 Rules (Get) (Opnum 28)
@@ -4738,7 +4738,7 @@ The Rules (Get) method retrieves the Rules property, as specified in the propert
 
 **pbstrXml:** Receives the XML string that contains the rules to apply to the report.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.23"></a>
 ##### 3.2.4.2.23 Rules (Put) (Opnum 29)
@@ -4753,7 +4753,7 @@ The Rules (Put) method sets the Rules property, as specified in the property tab
 
 **bstrXml:** Supplies the XML string that contains the rules to apply to the report.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.24"></a>
 ##### 3.2.4.2.24 Run (Opnum 30)
@@ -4774,9 +4774,9 @@ HRESULT Run(
 
 **bstrFolder:** Supplies the name of the subfolder where the report will be generated, rules applied, and/or HTML created.
 
-**Errors:** Receives a validation value map, stored as an [IValueMap](#Section_3.2.4.18.8), containing a list of subfolders on which the data manager did not successfully run; each subfolder is represented as an [IValueMapItem](#Section_3.2.4.18.14). The Names property of the IValueMapItem represents the path to a subfolder, while the Values property of the IValueMapItem represents the HRESULT describing the specific problem with that subfolder. The ValueMapType of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11).
+**Errors:** Receives a validation value map, stored as an [IValueMap](#Section_3.2.4.18), containing a list of subfolders on which the data manager did not successfully run; each subfolder is represented as an [IValueMapItem](#Section_3.2.4.17). The Names property of the IValueMapItem represents the path to a subfolder, while the Values property of the IValueMapItem represents the HRESULT describing the specific problem with that subfolder. The ValueMapType of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.2.25"></a>
 ##### 3.2.4.2.25 Extract (Opnum 31)
@@ -4795,7 +4795,7 @@ HRESULT Extract(
 
 **DestinationPath:** The destination path for where to place the CAB file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 IFolderAction
@@ -4839,7 +4839,7 @@ The Age (Get) method retrieves the Age property, as specified in the property ta
 
 **pulAge:** Receives the minimum age, in days, of a folder before this action will be applied to it. If a folder is younger than the minimum age (created less than pulAge days ago) then this action is not applied to it. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.2"></a>
 ##### 3.2.4.3.2 Age (Put) (Opnum 8)
@@ -4854,7 +4854,7 @@ The Age (Put) method sets the Age property, as specified in the property table i
 
 **ulAge:** Supplies the minimum age, in days, of a folder before this action will be applied to it. If a folder is younger than the minimum age (created less than pulAge days ago) then this action is not applied to it. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.3"></a>
 ##### 3.2.4.3.3 Size (Get) (Opnum 9)
@@ -4869,7 +4869,7 @@ The Size (Get) method retrieves the Size property, as specified in the property 
 
 **pulAge:** Receives the size, in MB. The valid range is from: 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.4"></a>
 ##### 3.2.4.3.4 Size (Put) (Opnum 10)
@@ -4884,7 +4884,7 @@ The Size (Put) method sets the Size property, as specified in the property table
 
 **ulAge:** Supplies the size, in MB. The valid range is from: 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.5"></a>
 ##### 3.2.4.3.5 Actions (Get) (Opnum 11)
@@ -4899,7 +4899,7 @@ The Actions (Get) method retrieves the Actions property.
 
 **Steps:** Receives the actions, as specified in section [2.2.2.8](#Section_2.2.2.8).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.6"></a>
 ##### 3.2.4.3.6 Actions (Put) (Opnum 12)
@@ -4914,7 +4914,7 @@ The Actions (Put) method sets the Actions property.
 
 **Steps:** Supplies the actions, as specified in section [2.2.2.8](#Section_2.2.2.8).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.7"></a>
 ##### 3.2.4.3.7 SendCabTo (Get) (Opnum 13)
@@ -4929,7 +4929,7 @@ The SendCabTo (Get) method retrieves the SendCabTo property, as specified in the
 
 **pbstrDestination:** Receives the destination path for the CAB file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.3.8"></a>
 ##### 3.2.4.3.8 SendCabTo (Put) (Opnum 14)
@@ -4944,7 +4944,7 @@ The SendCabTo (Put) method sets the SendCabTo property, as specified in the prop
 
 **bstrDestination:** Supplies the destination path for the CAB file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 IFolderActionCollection
@@ -4987,7 +4987,7 @@ The Count (Get) method retrieves the Count property.
 
 **Count:** Receives the number of folder actions in the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.2"></a>
 ##### 3.2.4.4.2 Item (Get) (Opnum 8)
@@ -5006,7 +5006,7 @@ The Item (Get) method retrieves the Item property.
 
 **Action:** Receives a pointer to the folder action requested.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.3"></a>
 ##### 3.2.4.4.3 _NewEnum (Get) (Opnum 9)
@@ -5021,7 +5021,7 @@ The _NewEnum (Get) method retrieves the NewEnum property, as specified in the pr
 
 **Enum:** Receives a pointer to a variant enumeration object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.4"></a>
 ##### 3.2.4.4.4 Add (Opnum 10)
@@ -5036,7 +5036,7 @@ IFolderAction* Action
 
 **Action:** Supplies the folder action to be added.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.5"></a>
 ##### 3.2.4.4.5 Remove (Opnum 11)
@@ -5051,7 +5051,7 @@ VARIANT Index
 
 **Index:** Supplies which folder action to remove. If the variant type is VT_I4 or VT_UI4, it is interpreted as the zero-based index of the folder action to remove. If the variant type is VT_DISPATCH, it is interpreted as a pointer to the folder action to remove.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.6"></a>
 ##### 3.2.4.4.6 Clear (Opnum 12)
@@ -5062,7 +5062,7 @@ HRESULT Clear();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.7"></a>
 ##### 3.2.4.4.7 AddRange (Opnum 13)
@@ -5077,7 +5077,7 @@ IFolderActionCollection* Actions
 
 **Actions:** Supplies a folder action collection object whose folder actions will be added to this folder action collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.4.8"></a>
 ##### 3.2.4.4.8 CreateFolderAction (Opnum 14)
@@ -5092,7 +5092,7 @@ HRESULT CreateFolderAction(
 
 **FolderAction:** Receives a pointer to a newly created folder action.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 IDataCollector
@@ -5147,24 +5147,24 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [DataCollectorSet (Get)](#Section_3.2.4.5.1) | Retrieves the DataCollectorSet property. Opnum: 7 |
 | Opnum8NotUsedOnWire | Reserved for local use. Opnum: 8 |
-| [DataCollectorType (Get)](#Section_2.2.2.5) | Retrieves the DataCollectorType property. Opnum: 9 |
+| [DataCollectorType (Get)](#Section_3.2.4.5.2) | Retrieves the DataCollectorType property. Opnum: 9 |
 | [FileName (Get)](#Section_3.2.4.5.3) | Retrieves the FileName property. Opnum: 10 |
 | [FileName (Put)](#Section_3.2.4.5.4) | Sets the FileName property. Opnum: 11 |
 | [FileNameFormat (Get)](#Section_3.2.4.5.5) | Retrieves the FileNameFormat property. Opnum: 12 |
 | [FileNameFormat (Put)](#Section_3.2.4.5.6) | Sets the FileNameFormat property. Opnum: 13 |
 | [FileNameFormatPattern (Get)](#Section_3.2.4.5.7) | Retrieves the FileNameFormatPattern property. Opnum: 14 |
 | [FileNameFormatPattern (Put)](#Section_3.2.4.5.8) | Sets the FileNameFormatPattern property. Opnum: 15 |
-| [LatestOutputLocation (Get)](#Section_3.2.4.1.12) | Retrieves the LatestOutputLocation property. Opnum: 16 |
-| [LatestOutputLocation (Put)](#Section_3.2.4.1.13) | Sets the LatestOutputLocation property. Opnum: 17 |
+| [LatestOutputLocation (Get)](#Section_3.2.4.5.9) | Retrieves the LatestOutputLocation property. Opnum: 16 |
+| [LatestOutputLocation (Put)](#Section_3.2.4.5.10) | Sets the LatestOutputLocation property. Opnum: 17 |
 | [LogAppend (Get)](#Section_3.2.4.5.11) | Retrieves the LogAppend property. Opnum: 18 |
 | [LogAppend (Put)](#Section_3.2.4.5.12) | Sets the LogAppend property. Opnum: 19 |
 | [LogCircular (Get)](#Section_3.2.4.5.13) | Retrieves the LogCircular property Opnum: 20 |
 | [LogCircular (Put)](#Section_3.2.4.5.14) | Sets the LogCircular property. Opnum: 21 |
 | [LogOverwrite (Get)](#Section_3.2.4.5.15) | Retrieves the LogOverwrite property. Opnum: 22 |
 | [LogOverwrite (Put)](#Section_3.2.4.5.16) | Sets the LogOverwrite property. Opnum: 23 |
-| [Name (Get)](#Section_3.2.4.1.14) | Retrieves the Name property. Opnum: 24 |
+| [Name (Get)](#Section_3.2.4.5.17) | Retrieves the Name property. Opnum: 24 |
 | [Name (Put)](#Section_3.2.4.5.18) | Sets the Name property. Opnum: 25 |
-| [OutputLocation (Get)](#Section_3.2.4.1.15) | Retrieves the OutputLocation property. Opnum: 26 |
+| [OutputLocation (Get)](#Section_3.2.4.5.19) | Retrieves the OutputLocation property. Opnum: 26 |
 | [Index (Get)](#Section_3.2.4.5.20) | Retrieves the Index property. Opnum: 27 |
 | Opnum28NotUsedOnWire | Reserved for local use. Opnum: 28 |
 | Xml (Get) | Retrieves the XML property. Opnum: 29 |
@@ -5186,7 +5186,7 @@ The DataCollectorSet (Get) method retrieves the DataCollectorSet property.
 
 **group:** Receives a pointer to the [**data collector set**](#gt_data-collector-set) to which this [**data collector**](#gt_data-collector) belongs.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.2"></a>
 ##### 3.2.4.5.2 DataCollectorType (Get) (Opnum 9)
@@ -5201,7 +5201,7 @@ The DataCollectorType (Get) method retrieves the DataCollectorType property.
 
 **type:** Receives the type of this [**data collector**](#gt_data-collector). For possible types, see the DataCollectorType enumeration (section [2.2.2.5](#Section_2.2.2.5)).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.3"></a>
 ##### 3.2.4.5.3 FileName (Get) (Opnum 10)
@@ -5216,7 +5216,7 @@ The FileName (Get) method retrieves the FileName property.
 
 **name:** Receives the name of the file that will contain the [**data collector**](#gt_data-collector) data.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.4"></a>
 ##### 3.2.4.5.4 FileName (Put) (Opnum 11)
@@ -5231,7 +5231,7 @@ The FileName (Put) method sets the FileName property.
 
 **name:** Supplies the name of the file that will contain the [**data collector**](#gt_data-collector) data.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.5"></a>
 ##### 3.2.4.5.5 FileNameFormat (Get) (Opnum 12)
@@ -5246,7 +5246,7 @@ The FileNameFormat (Get) method retrieves the FileNameFormat property, as specif
 
 **format:** Receives the file name format. If patterns are to be included in the decoration of file names, determines the pattern to use. Values are specified in [AutoPathFormat](#Section_2.2.2.1).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.6"></a>
 ##### 3.2.4.5.6 FileNameFormat (Put) (Opnum 13)
@@ -5261,7 +5261,7 @@ The FileNameFormat (Put) method sets the FileNameFormat property, as specified i
 
 **format:** Supplies the file name format. If patterns are to be included in the decoration of file names, determines the pattern to use. Values are specified in [AutoPathFormat](#Section_2.2.2.1).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.7"></a>
 ##### 3.2.4.5.7 FileNameFormatPattern (Get) (Opnum 14)
@@ -5276,7 +5276,7 @@ The FileNameFormatPattern (Get) method retrieves the FileNameFormatPattern prope
 
 **pattern:** Receives the format pattern to use when appending the file name. The possible formats are defined in section [2.2.3.1](#Section_2.2.3.1). If patterns are to be included in the decoration of file names, determines the pattern to use.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.8"></a>
 ##### 3.2.4.5.8 FileNameFormatPattern (Put) (Opnum 15)
@@ -5291,7 +5291,7 @@ The FileNameFormatPattern (Put) method sets the FileNameFormatPattern property.
 
 **pattern:** Supplies the format pattern to use when appending the file name. The possible formats are defined in section [2.2.3.1](#Section_2.2.3.1). If patterns are to be included in the decoration of file names, determines the pattern to use.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.9"></a>
 ##### 3.2.4.5.9 LatestOutputLocation (Get) (Opnum 16)
@@ -5306,7 +5306,7 @@ The LatestOutputLocation (Get) method retrieves the LatestOutputLocation propert
 
 **path:** Receives the file name that PLA used the last time it created the file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.10"></a>
 ##### 3.2.4.5.10 LatestOutputLocation (Put) (Opnum 17)
@@ -5321,7 +5321,7 @@ The LatestOutputLocation (Put) method sets the LatestOutputLocation property.
 
 **Path:** Supplies the file name that the PLA Protocol used the last time it created the file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.11"></a>
 ##### 3.2.4.5.11 LogAppend (Get) (Opnum 18)
@@ -5336,7 +5336,7 @@ The LogAppend (Get) method retrieves the LogAppend property.
 
 **append:** Receives a Boolean indicating whether append is enabled or disabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.12"></a>
 ##### 3.2.4.5.12 LogAppend (Put) (Opnum 19)
@@ -5351,7 +5351,7 @@ The LogAppend (Put) method sets the LogAppend property.
 
 **append:** Supplies a Boolean indicating whether or not append is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.13"></a>
 ##### 3.2.4.5.13 LogCircular (Get) (Opnum 20)
@@ -5366,7 +5366,7 @@ The LogCircular (Get) method retrieves the LogCircular property.
 
 **circular:** Receives a Boolean indicating whether or not circular logging is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.14"></a>
 ##### 3.2.4.5.14 LogCircular (Put) (Opnum 21)
@@ -5381,7 +5381,7 @@ The LogCircular (Put) method sets the LogCircular property.
 
 **circular:** Supplies a Boolean indicating whether or not circular logging is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.15"></a>
 ##### 3.2.4.5.15 LogOverwrite (Get) (Opnum 22)
@@ -5396,7 +5396,7 @@ The LogOverwrite (Get) method retrieves the LogOverwrite property.
 
 **overwrite:** Receives a Boolean indicating whether or not file overwriting is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.16"></a>
 ##### 3.2.4.5.16 LogOverwrite (Put) (Opnum 23)
@@ -5411,7 +5411,7 @@ The LogOverwrite (Put) method sets the LogOverwrite property.
 
 **overwrite:** Supplies a Boolean indicating whether or not file overwriting is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.17"></a>
 ##### 3.2.4.5.17 Name (Get) (Opnum 24)
@@ -5426,7 +5426,7 @@ The Name (Get) method retrieves the Name property.
 
 **name:** Receives the name of the [**data collector**](#gt_data-collector). The name is used to identify the data collector.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.18"></a>
 ##### 3.2.4.5.18 Name (Put) (Opnum 25)
@@ -5441,7 +5441,7 @@ The Name (Put) method sets the Name property.
 
 **name:** Supplies the name of the [**data collector**](#gt_data-collector). The name is used to identify the data collector.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.19"></a>
 ##### 3.2.4.5.19 OutputLocation (Get) (Opnum 26)
@@ -5456,7 +5456,7 @@ The OutputLocation (Get) method retrieves the OutputLocation property.
 
 **path:** Receives the path.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.20"></a>
 ##### 3.2.4.5.20 Index (Get) (Opnum 27)
@@ -5471,7 +5471,7 @@ The Index (Get) method retrieves the Index property.
 
 **index:** Receives the zero-based index of the [**data collector**](#gt_data-collector) within the [**data collector set**](#gt_data-collector-set).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.21"></a>
 ##### 3.2.4.5.21 Xml (Get) (Opnum 29)
@@ -5486,7 +5486,7 @@ The Xml (Get) method retrieves the XML property.
 
 **Xml:** Receives a BSTR that MUST contain an XML description of the [**data collector**](#gt_data-collector) that the client had specified. Each data collector can defined as a set of XML elements; the set of required elements are described in the section of each data collector type: PerformanceDataCollector (section [3.2.4.6](#Section_3.2.4.6)), ConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), AlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), TraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)) and ApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10)). The XML elements are also specified in section [3.2.4.19](#Section_3.2.4.19), which contains the set of XML elements required to define all data collector types within a data collector set.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.5.22"></a>
 ##### 3.2.4.5.22 SetXml (Opnum 30)
@@ -5503,9 +5503,9 @@ HRESULT SetXml(
 
 **Xml:** Supplies a BSTR that MUST contain an XML description of the data collector. Each data collector can defined as a set of XML elements; the set of required elements are described in the section of each data collector type: PerformanceDataCollector (section [3.2.4.6](#Section_3.2.4.6)), ConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), AlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), TraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)) and ApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10)). The XML elements are also specified in section [3.2.4.19](#Section_3.2.4.19), which contains the set of XML elements required to define all data collector types within a data collector set.
 
-**Validation:** Receives a validation value map with a list of properties for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
+**Validation:** Receives a validation value map with a list of properties for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18). Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 IPerformanceCounterDataCollector
@@ -5551,13 +5551,13 @@ Methods in RPC Opnum Order
 | [DataSourceName (Get)](#Section_3.2.4.6.1) | Retrieves the DataSourceName property. Opnum: 32 |
 | [DataSourceName (Put)](#Section_3.2.4.6.2) | Sets the DataSourceName property. Opnum: 33 |
 | [PerformanceCounters (Get)](#Section_3.2.4.6.3) | Retrieves the PerformanceCounters property. Opnum: 34 |
-| [PerformanceCounters (Put)](#Section_3.2.4.6) | Sets the PerformanceCounters property. Opnum: 35 |
+| [PerformanceCounters (Put)](#Section_3.2.4.6.4) | Sets the PerformanceCounters property. Opnum: 35 |
 | [LogFileFormat (Get)](#Section_3.2.4.6.5) | Retrieves the LogFileFormat property. Opnum: 36 |
 | [LogFileFormat (Put)](#Section_3.2.4.6.6) | Sets the LogFileFormat property. Opnum: 37 |
 | [SampleInterval (Get)](#Section_3.2.4.6.7) | Retrieves the SampleInterval property. Opnum: 38 |
-| [SampleInterval (Put)](#Section_3.2.4.6) | Sets the SampleInterval property. Opnum: 39 |
+| [SampleInterval (Put)](#Section_3.2.4.6.8) | Sets the SampleInterval property. Opnum: 39 |
 | [SegmentMaxRecords (Get)](#Section_3.2.4.6.9) | Retrieves the SegmentMaxRecords property. Opnum: 40 |
-| [SegmentMaxRecords (Put)](#Section_3.2.4.6) | Sets the SegmentMaxRecords property. Opnum: 41 |
+| [SegmentMaxRecords (Put)](#Section_3.2.4.6.10) | Sets the SegmentMaxRecords property. Opnum: 41 |
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface. Opnums 7–31 are used by IDataCollector.
 
@@ -5574,7 +5574,7 @@ The DataSourceName (Get) method retrieves the DataSourceName property.
 
 **dsn:** Receives the data source name if the log file is a SQL log file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.2"></a>
 ##### 3.2.4.6.2 DataSourceName (Put) (Opnum 33)
@@ -5589,7 +5589,7 @@ The DataSourceName (Put) method sets the DataSourceName property.
 
 **dsn:** Supplies the data source name if the data is stored into a SQL database. The format MUST be SQL:DSN-Name!LogsetName, where DNS-Name is the ODBC data source name and LogsetName is the user caption (the friendly name of the log file).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.3"></a>
 ##### 3.2.4.6.3 PerformanceCounters (Get) (Opnum 34)
@@ -5604,7 +5604,7 @@ The PerformanceCounters (Get) method retrieves the PerformanceCounters property.
 
 **counters:** Receives an array of [**performance counter**](#gt_performance-counter) names to query.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.4"></a>
 ##### 3.2.4.6.4 PerformanceCounters (Put) (Opnum 35)
@@ -5619,7 +5619,7 @@ The PerformanceCounters (Put) method sets the PerformanceCounters property.
 
 **counters:** Supplies an array of [**performance counter**](#gt_performance-counter) names to query.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.5"></a>
 ##### 3.2.4.6.5 LogFileFormat (Get) (Opnum 36)
@@ -5634,7 +5634,7 @@ The LogFileFormat (Get) method retrieves the LogFileFormat property.
 
 **format:** Receives the format of the log file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.6"></a>
 ##### 3.2.4.6.6 LogFileFormat (Put) (Opnum 37)
@@ -5649,7 +5649,7 @@ The LogFileFormat (Put) method sets the LogFileFormat property.
 
 **format:** Supplies the format of the log file.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.7"></a>
 ##### 3.2.4.6.7 SampleInterval (Get) (Opnum 38)
@@ -5664,7 +5664,7 @@ The SampleInterval (Get) method retrieves the SampleInterval property, as specif
 
 **interval:** Receives the sample interval, in seconds. The valid range is from 0x00000001 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.8"></a>
 ##### 3.2.4.6.8 SampleInterval (Put) (Opnum 39)
@@ -5694,7 +5694,7 @@ The SegmentMaxRecords (Get) method retrieves the SegmentMaxRecords property, as 
 
 **records:** Receives the maximum number of samples to log. The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.6.10"></a>
 ##### 3.2.4.6.10 SegmentMaxRecords (Put) (Opnum 41)
@@ -5709,7 +5709,7 @@ The SegmentMaxRecords (Put) method sets the SegmentMaxRecords property, as speci
 
 **records:** Supplies the maximum number of samples to log. The valid range is 0x00000000 through 0xFFFFFFFF.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7"></a>
 #### 3.2.4.7 IConfigurationDataCollector
@@ -5796,7 +5796,7 @@ The FileMaxCount (Get) method retrieves the FileMaxCount property.
 
 **count:** Receives the maximum number of files to collect. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive. If set to zero or not set, there is no maximum. Refer to the property table in section [3.2.4.7](#Section_3.2.4.7) for the semantics of the FileMaxCount property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.2"></a>
 ##### 3.2.4.7.2 FileMaxCount (Put) (Opnum 33)
@@ -5811,7 +5811,7 @@ The FileMaxCount (Put) method sets the FileMaxCount property.
 
 **count:** Supplies the maximum number of files to collect. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive. If set to zero or not set, there is no maximum. Refer to the property table in section [3.2.4.7](#Section_3.2.4.7) for the semantics of the FileMaxCount property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.3"></a>
 ##### 3.2.4.7.3 FileMaxRecursiveDepth (Get) (Opnum 34)
@@ -5826,7 +5826,7 @@ The FileMaxRecursiveDepth (Get) method retrieves the FileMaxRecursiveDepth prope
 
 **depth:** Receives the maximum recursive depth. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive. Refer to the property table in section [3.2.4.7](#Section_3.2.4.7) for the semantics of the FixMaxRecursiveDepth property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.4"></a>
 ##### 3.2.4.7.4 FileMaxRecursiveDepth (Put) (Opnum 35)
@@ -5841,7 +5841,7 @@ The FileMaxRecursiveDepth (Put) method sets the FileMaxRecursiveDepth property.
 
 **depth:** Supplies the maximum recursive depth. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive. Refer to the property table in section [3.2.4.7](#Section_3.2.4.7) for the semantics of the FixMaxRecursiveDepth property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.5"></a>
 ##### 3.2.4.7.5 FileMaxTotalSize (Get) (Opnum 36)
@@ -5856,7 +5856,7 @@ The FileMaxTotalSize (Get) method retrieves the FileMaxTotalSize property, as sp
 
 **size:** Receives the maximum total file size, in megabytes. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.6"></a>
 ##### 3.2.4.7.6 FileMaxTotalSize (Put) (Opnum 37)
@@ -5871,7 +5871,7 @@ The FileMaxTotalSize (Put) method sets the FileMaxTotalSize property, as specifi
 
 **sSize:** Supplies the maximum total file size, in megabytes. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.7"></a>
 ##### 3.2.4.7.7 Files (Get) (Opnum 38)
@@ -5886,7 +5886,7 @@ The Files (Get) method retrieves the Files property, as specified in the propert
 
 **pFiles:** Receives an array of BSTRs that contain the files to collect. Each element in this array can represent any arbitrary file name on the server; each file in this array represents files that are copied to the output directory. Only the file names are transferred between the client and the server; this method is used when the client wants to collect any arbitrary file that allows it to analyze the server state. For the semantics of the Files property, see the property table in section 3.2.4.7.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.8"></a>
 ##### 3.2.4.7.8 Files (Put) (Opnum 39)
@@ -5901,7 +5901,7 @@ The Files (Put) method sets the Files property, as specified in the property tab
 
 **Files:** Supplies an array of BSTRs that contain the files to collect. The paths can be absolute, relative, or Universal Naming Convention (UNC). Each element in this array can represent any arbitrary file name on the server; each file in this array will be copied to the output directory. Only the file names are transferred between the client and the server; this method is used when the client wants to collect any arbitrary file that allows it to analyze the server state. For the semantics of the Files property, see the property table in section 3.2.4.7.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.9"></a>
 ##### 3.2.4.7.9 ManagementQueries (Get) (Opnum 40)
@@ -5916,7 +5916,7 @@ The ManagementQueries (Get) method retrieves the ManagementQueries property, as 
 
 **Queries:** Receives an array of BSTRs that contain WMI queries to run. The format of ManagementQueries is specified in [MS-WMI](../MS-WMI/MS-WMI.md) section 2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.10"></a>
 ##### 3.2.4.7.10 ManagementQueries (Put) (Opnum 41)
@@ -5931,7 +5931,7 @@ The ManagementQueries (Put) method retrieves the ManagementQueries property, as 
 
 **Queries:** Supplies an array of BSTRs that contain WMI queries to run. The form is in a namespace:WQL select statement. The format of ManagementQueries is specified in [MS-WMI](../MS-WMI/MS-WMI.md) section 2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.11"></a>
 ##### 3.2.4.7.11 QueryNetworkAdapters (Get) (Opnum 42)
@@ -5946,7 +5946,7 @@ The QueryNetworkAdapters (Get) method retrieves the QueryNetworkAdapters propert
 
 **network:** Receives a Boolean indicating whether or not network adapters are queried. Information about the network adapters installed on the server includes the IP address and the offload capabilities.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.12"></a>
 ##### 3.2.4.7.12 QueryNetworkAdapters (Put) (Opnum 43)
@@ -5961,7 +5961,7 @@ The QueryNetworkAdapters (Put) method sets the QueryNetworkAdapters property, as
 
 **network:** Supplies a Boolean indicating whether or not network adapters will be queried. Information about the network adapters installed on the server includes the IP address and the offload capabilities.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.13"></a>
 ##### 3.2.4.7.13 RegistryKeys (Get) (Opnum 44)
@@ -5976,7 +5976,7 @@ The RegistryKeys (Get) method retrieves the RegistryKeys property, as specified 
 
 **query:** Receives an array of BSTRs that contain the registry keys to collect. Each BSTR element of the array is a registry key on the server that is being collected. Please see the RegistryKeys property in section 3.2.4.7 for more information.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.14"></a>
 ##### 3.2.4.7.14 RegistryKeys (Put) (Opnum 45)
@@ -5991,7 +5991,7 @@ The RegistryKeys (Put) method sets the RegistryKeys property, as specified in th
 
 **query:** Supplies an array of BSTRs that contain the registry keys to collect. Each BSTR element of the array is a registry key on the server that will be collected. For more information, see the RegistryKeys property in section 3.2.4.7.<19>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.15"></a>
 ##### 3.2.4.7.15 RegistryMaxRecursiveDepth (Get) (Opnum 46)
@@ -6006,7 +6006,7 @@ The RegistryMaxRecursiveDepth (Get) method retrieves the RegistryMaxRecursiveDep
 
 **depth:** Receives the maximum recursive depth when collecting registry keys. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive. If the depth is specified as 0x00000000, then registry keys at any depth will be collected.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.16"></a>
 ##### 3.2.4.7.16 RegistryMaxRecursiveDepth (Put) (Opnum 47)
@@ -6021,7 +6021,7 @@ The RegistryMaxRecursiveDepth (Put) method sets the RegistryMaxRecursiveDepth pr
 
 **depth:** Supplies the maximum recursive depth when collecting registry keys. The valid range for this property is 0x00000000 through 0xFFFFFFFF inclusive. If the depth is specified as 0x00000000, then registry keys at any depth will be collected.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.17"></a>
 ##### 3.2.4.7.17 SystemStateFile (Get) (Opnum 48)
@@ -6036,7 +6036,7 @@ The SystemStateFile (Get) method retrieves the SystemStateFile property, as spec
 
 **FileName:** Receives the name of the file to use when saving the system state.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.7.18"></a>
 ##### 3.2.4.7.18 SystemStateFile (Put) (Opnum 49)
@@ -6051,7 +6051,7 @@ The SystemStateFile (Put) method sets the SystemStateFile property, as specified
 
 **FileName:** Supplies the name of the file use to when saving the system state.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8"></a>
 #### 3.2.4.8 IAlertDataCollector
@@ -6109,16 +6109,16 @@ Methods in RPC Opnum Order
 | [AlertThresholds (Put)](#Section_3.2.4.8.2) | Sets the AlertThresholds property. Opnum: 33 |
 | [EventLog (Get)](#Section_3.2.4.8.3) | Retrieves the EventLog property. Opnum: 34 |
 | [EventLog (Put)](#Section_3.2.4.8.4) | Sets the EventLog property. Opnum: 35 |
-| [SampleInterval (Get)](#Section_3.2.4.6.7) | Retrieves the SampleInterval property. Opnum: 36 |
-| [SampleInterval (Put)](#Section_3.2.4.6.8) | Sets the SampleInterval property. Opnum: 37 |
-| [Task (Get)](#Section_3.2.4.1.34) | Retrieves the Task property. Opnum: 38 |
-| [Task (Put)](#Section_3.2.4.1.35) | Sets the Task property. Opnum: 39 |
-| [TaskRunAsSelf (Get)](#Section_3.2.4.1.36) | Retrieves the TaskRunAsSelf property. Opnum: 40 |
-| [TaskRunAsSelf (Put)](#Section_3.2.4.1.37) | Sets the TaskRunAsSelf property. Opnum: 41 |
+| [SampleInterval (Get)](#Section_3.2.4.8.5) | Retrieves the SampleInterval property. Opnum: 36 |
+| [SampleInterval (Put)](#Section_3.2.4.8.6) | Sets the SampleInterval property. Opnum: 37 |
+| [Task (Get)](#Section_3.2.4.8.7) | Retrieves the Task property. Opnum: 38 |
+| [Task (Put)](#Section_3.2.4.8.8) | Sets the Task property. Opnum: 39 |
+| [TaskRunAsSelf (Get)](#Section_3.2.4.8.9) | Retrieves the TaskRunAsSelf property. Opnum: 40 |
+| [TaskRunAsSelf (Put)](#Section_3.2.4.8.10) | Sets the TaskRunAsSelf property. Opnum: 41 |
 | TaskArguments (Get) | Retrieves the TaskArguments property. Opnum: 42 |
-| [TaskArguments (Put)](#Section_3.2.4.1.39) | Sets the TaskArguments property. Opnum: 43 |
-| [TaskUserTextArguments (Get)](#Section_3.2.4.1.40) | Retrieves the TaskUserTextArguments property. Opnum: 44 |
-| [TaskUserTextArguments (Put)](#Section_3.2.4.1.41) | Retrieves the TaskUserTextArguments property. Opnum: 45 |
+| [TaskArguments (Put)](#Section_3.2.4.8.12) | Sets the TaskArguments property. Opnum: 43 |
+| [TaskUserTextArguments (Get)](#Section_3.2.4.8.13) | Retrieves the TaskUserTextArguments property. Opnum: 44 |
+| [TaskUserTextArguments (Put)](#Section_3.2.4.8.14) | Retrieves the TaskUserTextArguments property. Opnum: 45 |
 | [TriggerDataCollectorSet (Get)](#Section_3.2.4.8.15) | Retrieves the TriggerDataCollectorSet property. Opnum: 46 |
 | [TriggerDataCollectorSet (Put)](#Section_3.2.4.8.16) | Sets the TriggerDataCollectorSet property. Opnum: 47 |
 
@@ -6137,7 +6137,7 @@ The AlertThresholds (Get) method retrieves the AlertThresholds property, as spec
 
 **alerts:** Receives an array of BSTRs that contain [Performance Counter Paths](#Section_2.2.10) and thresholds.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.2"></a>
 ##### 3.2.4.8.2 AlertThresholds (Put) (Opnum 33)
@@ -6152,7 +6152,7 @@ The AlertThresholds (Put) method sets the AlertThresholds property, as specified
 
 **alerts:** Supplies an array of BSTRs that contain [Performance Counter Paths](#Section_2.2.10) and thresholds.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.3"></a>
 ##### 3.2.4.8.3 EventLog (Get) (Opnum 34)
@@ -6167,7 +6167,7 @@ The EventLog (Get) method retrieves the EventLog property, as specified in the p
 
 **log:** Receives a Boolean indicating whether or not events are being written into the Eventlog when [**performance counter**](#gt_performance-counter) thresholds are crossed.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.4"></a>
 ##### 3.2.4.8.4 EventLog (Put) (Opnum 35)
@@ -6182,7 +6182,7 @@ The EventLog (Put) method sets the EventLog property, as specified in the proper
 
 **log:** Supplies a Boolean indicating whether or not events are being written into the Eventlog when [**performance counter**](#gt_performance-counter) thresholds are crossed. <21>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.5"></a>
 ##### 3.2.4.8.5 SampleInterval (Get) (Opnum 36)
@@ -6197,7 +6197,7 @@ The SampleInterval (Get) method retrieves the SampleInterval property, as specif
 
 **interval:** Receives the sample interval, in seconds. The valid range for this property is 0x00000001 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.6"></a>
 ##### 3.2.4.8.6 SampleInterval (Put) (Opnum 37)
@@ -6227,7 +6227,7 @@ The Task (Get) method retrieves the Task property, as specified in the property 
 
 **task:** Receives the name of the task.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.8"></a>
 ##### 3.2.4.8.8 Task (Put) (Opnum 39)
@@ -6242,7 +6242,7 @@ The Task (Put) method sets the Task property, as specified in the property table
 
 **task:** The name of the task.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.9"></a>
 ##### 3.2.4.8.9 TaskRunAsSelf (Get) (Opnum 40)
@@ -6257,7 +6257,7 @@ The TaskRunAsSelf (Get) method retrieves the TaskRunAsSelf property, as specifie
 
 **RunAsSelf:** Receives a Boolean indicating whether or not TaskRunAsSelf is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.10"></a>
 ##### 3.2.4.8.10 TaskRunAsSelf (Put) (Opnum 41)
@@ -6272,7 +6272,7 @@ The TaskRunAsSelf (Put) method sets the TaskRunAsSelf property, as specified in 
 
 **RunAsSelf:** Supplies a Boolean indicating whether or not TaskRunAsSelf is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.11"></a>
 ##### 3.2.4.8.11 TaskArguments (Get) (Opnum 42)
@@ -6296,7 +6296,7 @@ The TaskArguments (Get) method retrieves the TaskArguments property.
 | {value} | Value of the performance counter. |
 | {usertext} | String from TaskUserTextArguments. |
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.12"></a>
 ##### 3.2.4.8.12 TaskArguments (Put) (Opnum 43)
@@ -6320,7 +6320,7 @@ The TaskArguments (Put) method sets the TaskArguments property.
 | {value} | Value of the performance counter. |
 | {usertext} | String from TaskUserTextArguments. |
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.13"></a>
 ##### 3.2.4.8.13 TaskUserTextArguments (Get) (Opnum 44)
@@ -6335,7 +6335,7 @@ The TaskUserTextArguments (Get) methods retrieves the TaskUserTextArguments prop
 
 **task:** Receives the value of the TaskUserTextArguments property. See the property table in section [3.2.4.8](#Section_3.2.4.8) for the semantics of the TaskUserTextArguments property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.14"></a>
 ##### 3.2.4.8.14 TaskUserTextArguments (Put) (Opnum 45)
@@ -6350,7 +6350,7 @@ The TaskUserTextArguments (Put) methods retrieves the TaskUserTextArguments prop
 
 **task:** Supplies the value of the TaskUserTextArguments property. Refer to the property table in section [3.2.4.8](#Section_3.2.4.8) for the semantics of the TaskUserTextArguments property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.15"></a>
 ##### 3.2.4.8.15 TriggerDataCollectorSet (Get) (Opnum 46)
@@ -6365,7 +6365,7 @@ The TriggerDataCollectorSet (Get) method retrieves the TriggerDataCollectorSet p
 
 **name:** Receives the name of a [**data collector set**](#gt_data-collector-set) name. The name of a data collector set to start each time the counter value crosses the threshold.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.8.16"></a>
 ##### 3.2.4.8.16 TriggerDataCollectorSet (Put)(Opnum 47)
@@ -6380,7 +6380,7 @@ The TriggerDataCollectorSet (Put) method sets the TriggerDataCollectorSet proper
 
 **name:** Supplies the [**data collector set**](#gt_data-collector-set) name to start each time the counter value crosses the threshold.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9"></a>
 #### 3.2.4.9 ITraceDataCollector
@@ -6392,7 +6392,7 @@ The following properties MUST be implemented by the objects that implement the I
 | Property | Read/write | Description |
 | --- | --- | --- |
 | BufferSize | RW | Specifies the suggested buffer size, in kilobytes (KB), for each event tracing session buffer. The minimum value of the BufferSize property is 1 kilobyte. The maximum value is 1,024 KB. The default value is 8 KB. |
-| BuffersLost | R | Specifies the number of buffers that could not be written to the log file. Any unsigned long is a valid value for this property. This property is only updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) or [IDataCollectorSet::Query](#Section_3.2.4.1) methods are called.<22> |
+| BuffersLost | R | Specifies the number of buffers that could not be written to the log file. Any unsigned long is a valid value for this property. This property is only updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) or [IDataCollectorSet::Query](#Section_3.2.4.1.53) methods are called.<22> |
 | BuffersWritten | R | If running, specifies the number of buffers written to the log file. Any unsigned long is a valid value for this property. |
 | ClockType | RW | Retrieves or sets the clock resolution to use when logging the time stamp for each event. |
 | EventsLost | R | If running, specifies the number of events that were lost due to the lack of buffers to write to. Any unsigned long is a valid value for this property. This property is only updated when the IDataCollectorSet::Start or IDataCollectorSet::Query methods are called.<23> |
@@ -6404,7 +6404,7 @@ The following properties MUST be implemented by the objects that implement the I
 | MaximumBuffers | RW | Specifies the suggested maximum number of buffers to allocate for the event tracing session's buffer pool. The value of the MaximumBuffers property has to be greater than or equal to the value of the MinimumBuffers property. Any unsigned long is a valid number of maximum buffers to suggest, but there is no guarantee that the suggestion will be followed. If the MaximumBuffers property is set to zero, it implies that the user is requesting that no more than zero buffers be used. As with any other possible value for the MaximumBuffers property, the suggestion might or might not be followed depending on whether the protocol implementation supports the requested value. No error will occur if the suggestion is not followed, unless MaximumBuffers was set to a lower value than MinimumBuffers, and it is not possible to detect if the suggestion is followed. The protocol does not provide any mechanism to discover the actual number of buffers being used. |
 | MinimumBuffers | RW | Specifies the suggested minimum number of buffers to allocate for the event tracing session's buffer pool. The value of the MinimumBuffers property has to be less than or equal to the value of the MaximumBuffers property. Any unsigned long is a valid number of minimum buffers to suggest, but there is no guarantee that the suggestion will be followed. If the MinimumBuffers property is set to zero, it implies that the user is requesting that as few as zero buffers be used. As with any other possible value for the MinimumBuffers property, the suggestion might or might not be followed depending on whether the protocol implementation supports the requested value. No error will occur if the suggestion is not followed and it is not possible to detect if the suggestion is followed. The protocol does not provide any mechanism to discover the actual number of buffers being used. |
 | NumberOfBuffers | RW | Specifies the suggested number of buffers to use for logging. Any unsigned long is a valid number of buffers to suggest, though there is no guarantee that the suggestion will be followed. If the NumberOfBuffers property is set to zero, it implies that the user is requesting that zero buffers be used. As with any other possible value for the NumberOfBuffers property, the suggestion might or might not be followed depending on whether the protocol implementation supports the requested value. No error will occur if the suggestion is not followed and it is not possible to detect if the suggestion is followed. The protocol does not provide any mechanism to discover the actual number of buffers being used. |
-| PreallocateFile | RW | Specifies whether or not PLA MUST allocate the [IDataCollectorSet::SegmentMaxSize](#Section_3.2.4.5) on disk prior to the start of the trace data collector. However, if IDataCollectorSet::SegmentMaxSize is set to zero, then this property is ignored. |
+| PreallocateFile | RW | Specifies whether or not PLA MUST allocate the [IDataCollectorSet::SegmentMaxSize](#Section_3.2.4.1.22) on disk prior to the start of the trace data collector. However, if IDataCollectorSet::SegmentMaxSize is set to zero, then this property is ignored. |
 | ProcessMode | RW | Specifies whether or not a process-private logger MUST be used when the ITraceDataCollector is executing on the server. When events are logged using ETW, they are temporarily directed to buffers before they are written to a file or delivered to a real-time monitoring application. If this property is set to TRUE, then when the ITraceDataCollector begins executing on the server, the buffers will not be allocated from kernel memory, but from process memory. If this property is set to FALSE, then the buffers will be allocated from kernel memory. If this property is set to TRUE, and the ITraceDataProviderCollection is empty or if any one of the specified trace providers is a kernel-mode provider, then the IDataCollectorSet::Start method will fail and an error code will be returned. The ITraceDataCollector specifies which providers to enable to this process-private logger. The buffers will be allocated in the process-space when the ITraceDataCollector begins executing. However, nothing will be written to these buffers unless the provider, which is also specified in the ITraceDataCollector, registers with [**ETW**](#gt_etw) on the server and begins using the ETW API to log events. If this property is set to TRUE, and the provider registers multiple times with ETW from different processes, then there will be different trace files that are generated, one for each process. The file name is specified in the ITraceDataCollector, and to this file name is appended the extension, etl, and the process ID. If the process-private logger were running in a process with a process ID of 4, and the file name specified in the ITraceDataCollector is MyFile, then the file name that the events would be written to would be MyFile.etl_4. This is not the case if this property is set to FALSE, since the different provider instances from the different processes will all log to the buffers that are allocated in kernel memory, and these buffers are associated with a single trace file. As a result, no process ID is appended after the file extension etl. If a process-private logger is used, the process in which the buffers are allocated has the ability to modify the contents of the buffers. However, because the buffers are in the process, they are only visible to that process. While a process hosting a private session can edit the contents of a buffer after an event is written to it, only that process can view those buffers and consequently see those edits. If a process-private logger is not used, the buffers are allocated in the kernel. In this case, all processes can potentially view the contents of buffers, but no process has the ability to edit them. |
 | RealTimeBuffersLost | R | If running, specifies the number of buffers that could not be delivered in real time to the consumer. RealTimeBuffers are lost when the backup file for storing events cannot be read or written to by the Event Tracing for infrastructure. In these situations, the buffers are not recoverable. It is not the case that the buffers are arriving late; instead, they are not arriving at all. Any unsigned long is a valid value for RealTimeBuffersLost. This property is only updated when the IDataCollectorSet::Start or IDataCollectorSet::Query methods are called.<25> |
 | SessionId | R | This property refers to the session identifier of the ETW trace session. When an ITraceDataCollector executes, it starts an ETW trace session; this session is marked with a numeric identifier. There can be up to 64 different sessions. Each of these sessions is marked by a different numeric SessionId, which is specified in this property. Therefore, this property can have the value of 0x0000000000000000 to 0x000000000000003F. The lower 2 bytes have the session IDs that are possible (0x0000 to 0x003F) while the upper 6 bytes MUST be ignored. This property is only updated when the IDataCollectorSet::Start or IDataCollectorSet::Query methods are called.<26> |
@@ -6497,8 +6497,8 @@ Methods in RPC Opnum Order
 | [ClockType (Put)](#Section_3.2.4.9.6) | Sets the ClockType property. Opnum: 39 |
 | [EventsLost (Get)](#Section_3.2.4.9.7) | Retrieves the EventsLost property. Opnum: 40 |
 | Opnum41NotUsedOnWire | Reserved for local use. Opnum: 41 |
-| [ExtendedModes (Get)](#Section_2.2.9) | Retrieves the ExtendedModes property. Opnum: 42 |
-| [ExtendedModes (Put)](#Section_2.2.9) | Sets the ExtendedModes property. Opnum: 43 |
+| [ExtendedModes (Get)](#Section_3.2.4.9.8) | Retrieves the ExtendedModes property. Opnum: 42 |
+| [ExtendedModes (Put)](#Section_3.2.4.9.9) | Sets the ExtendedModes property. Opnum: 43 |
 | [FlushTimer (Get)](#Section_3.2.4.9.10) | Retrieves the FlushTimer property. Opnum: 44 |
 | [FlushTimer (Put)](#Section_3.2.4.9.11) | Sets the FlushTimer property. Opnum: 45 |
 | [FreeBuffers (Get)](#Section_3.2.4.9.12) | Retrieves the FreeBuffers property. Opnum: 46 |
@@ -6543,7 +6543,7 @@ The BufferSize (Get) method retrieves the BufferSize property, as specified in t
 
 **size:** Receives the amount of memory allocated for each event tracing session buffer. The amount of memory allocated is specified in kilobytes. For example, if the size parameter is set to 1, then 1 kilobyte is allocated for each event tracing session buffer. The minimum value of the BufferSize property is 1 kilobyte. The maximum value is 1024 kilobytes. For more information, see the BufferSize member in [[MSDN-EVENT_TRACE_PROPERTIES]](https://go.microsoft.com/fwlink/?LinkId=89999).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.2"></a>
 ##### 3.2.4.9.2 BufferSize (Put) (Opnum 33)
@@ -6558,7 +6558,7 @@ The BufferSize (Put) method sets the BufferSize property, as specified in the pr
 
 **size:** Supplies the amount of memory allocated for each event tracing session buffer. The amount of memory allocated is specified in kilobytes. For example, if the size parameter is set to 1, then 1 kilobyte is allocated for each event tracing session buffer. The minimum value of the BufferSize property is 1 kilobyte. The maximum value is 1024 kilobytes. For more information, see the BufferSize member in [[MSDN-EVENT_TRACE_PROPERTIES]](https://go.microsoft.com/fwlink/?LinkId=89999).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.3"></a>
 ##### 3.2.4.9.3 BuffersLost (Get) (Opnum 34)
@@ -6573,7 +6573,7 @@ The BuffersLost (Get) method retrieves the BufferLost property, as specified in 
 
 **buffers:** Receives the number of buffers that had to be discarded. Specifies the number of buffers that could not be written to the log file. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.4"></a>
 ##### 3.2.4.9.4 BuffersWritten (Get) (Opnum 36)
@@ -6588,7 +6588,7 @@ The BuffersWritten (Get) method retrieves the BuffersWritten property, as specif
 
 **buffers:** Receives the number of buffers accepted. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.5"></a>
 ##### 3.2.4.9.5 ClockType (Get) (Opnum 38)
@@ -6603,7 +6603,7 @@ The ClockType (Get) method retrieves the ClockType property.
 
 **clock:** Receives the clock resolution to use when logging the time stamp for each event. For valid values, see the ClockType enumeration specified in section [2.2.2.2](#Section_2.2.2.2).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.6"></a>
 ##### 3.2.4.9.6 ClockType (Put) (Opnum 39)
@@ -6618,7 +6618,7 @@ The ClockType (Put) method sets the ClockType property.
 
 **clock:** Supplies the clock resolution to use when logging the time stamp for each event. For valid values, see the ClockType enumeration specified in section [2.2.2.2](#Section_2.2.2.2).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.7"></a>
 ##### 3.2.4.9.7 EventsLost (Get) (Opnum 40)
@@ -6633,7 +6633,7 @@ The EventsLost (Get) method retrieves the EventsLost property, as specified in t
 
 **events:** Receives the number of events that were not written to the buffer. Specifies the number of events that were lost due to the lack of buffers to write to. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.8"></a>
 ##### 3.2.4.9.8 ExtendedModes (Get) (Opnum 42)
@@ -6648,7 +6648,7 @@ The ExtendedModes (Get) method retrieves the ExtendedModes property, as specifie
 
 **mode:** Receives the log file mode not already set by this object using the other properties. The valid values for ExtendedModes are specified in section [2.2.9](#Section_2.2.9).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.9"></a>
 ##### 3.2.4.9.9 ExtendedModes (Put) (Opnum 43)
@@ -6663,7 +6663,7 @@ The ExtendedModes (Put) method sets the ExtendedModes property, as specified in 
 
 **mode:** Supplies the log file modes not already set by other methods. The valid values for ExtendedModes are specified in section [2.2.9](#Section_2.2.9).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.10"></a>
 ##### 3.2.4.9.10 FlushTimer (Get) (Opnum 44)
@@ -6678,7 +6678,7 @@ The FlushTimer (Get) method retrieves the FlushTimer property, as specified in t
 
 **seconds:** Receives the time, in seconds, to wait before flushing buffers. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive. For more information, see the FlushTimer member in [[MSDN-EVENT_TRACE_PROPERTIES]](https://go.microsoft.com/fwlink/?LinkId=89999).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.11"></a>
 ##### 3.2.4.9.11 FlushTimer (Put) (Opnum 45)
@@ -6693,7 +6693,7 @@ The FlushTimer (Put) method sets the FlushTimer property, as specified in the pr
 
 **seconds:** Supplies the time, in seconds, to wait before flushing buffers. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive. For more information, see the FlushTimer member in [[MSDN-EVENT_TRACE_PROPERTIES]](https://go.microsoft.com/fwlink/?LinkId=89999).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.12"></a>
 ##### 3.2.4.9.12 FreeBuffers (Get) (Opnum 46)
@@ -6708,7 +6708,7 @@ The FreeBuffers (Get) method retrieves the FreeBuffers property, as specified in
 
 **buffers:** Receives the number of buffers that are allocated but unused in the event tracing session's buffer pool. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.13"></a>
 ##### 3.2.4.9.13 Guid (Get) (Opnum 48)
@@ -6723,7 +6723,7 @@ The Guid (Get) method retrieves the Guid property, as specified in the property 
 
 **guid:** Receives the session PLA-UID. Any PLA-UID other than the 0000-0000-0000-0000-0000-0000-0000-0000 is a valid value for this property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.14"></a>
 ##### 3.2.4.9.14 Guid (Put) (Opnum 49)
@@ -6738,7 +6738,7 @@ The Guid (Put) method sets the Guid property, as specified in the property table
 
 **guid:** Supplies the session PLA-UID. Any PLA-UID other than the 0000-0000-0000-0000-0000-0000-0000-0000 is a valid value for this property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.15"></a>
 ##### 3.2.4.9.15 IsKernelTrace (Get) (Opnum 50)
@@ -6753,7 +6753,7 @@ The IsKernelTrace (Get) method retrieves the IsKernelTrace property.
 
 **kernel:** Receives VARIANT_TRUE if the trace contains kernel providers.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.16"></a>
 ##### 3.2.4.9.16 MaximumBuffers (Get) (Opnum 51)
@@ -6768,7 +6768,7 @@ The MaximumBuffers (Get) method retrieves the MaximumBuffers property, as specif
 
 **buffers:** Receives the maximum number of buffers allocated for the event tracing session's buffer pool. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.<28>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.17"></a>
 ##### 3.2.4.9.17 MaximumBuffers (Put) (Opnum 52)
@@ -6783,7 +6783,7 @@ The MaximumBuffers (Put) method sets the MaximumBuffers property, as specified i
 
 **buffers:** Supplies the maximum number of buffers allocated for the event tracing session's buffer pool. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive. For more information, see the MaximumBuffers member in [[MSDN-EVENT_TRACE_PROPERTIES]](https://go.microsoft.com/fwlink/?LinkId=89999).<29>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.18"></a>
 ##### 3.2.4.9.18 MinimumBuffers (Get) (Opnum 53)
@@ -6798,7 +6798,7 @@ The MinimumBuffers (Get) method retrieves the MinimumBuffers property, as specif
 
 **buffers:** Receives the minimum number of buffers allocated for the event tracing session's buffer pool. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.<30>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.19"></a>
 ##### 3.2.4.9.19 MinimumBuffers (Put) (Opnum 54)
@@ -6813,7 +6813,7 @@ The MinimumBuffers (Put) method sets the MinimumBuffers property, as specified i
 
 **buffers:** Supplies the minimum number of buffers allocated for the event tracing session's buffer pool. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive. For more information, see the MinimumBuffers member in [[MSDN-EVENT_TRACE_PROPERTIES]](https://go.microsoft.com/fwlink/?LinkId=89999).<31>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.20"></a>
 ##### 3.2.4.9.20 NumberOfBuffers (Get) (Opnum 55)
@@ -6828,7 +6828,7 @@ The NumberOfBuffers (Get) method retrieves the NumberOfBuffers property, as spec
 
 **buffers:** Receives the number of buffers to use for logging. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.<32>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.21"></a>
 ##### 3.2.4.9.21 NumberOfBuffers (Put) (Opnum 56)
@@ -6843,7 +6843,7 @@ The NumberOfBuffers (Put) method sets the NumberOfBuffers property, as specified
 
 **buffers:** Supplies the number of buffers to use for logging. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.<33>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.22"></a>
 ##### 3.2.4.9.22 PreallocateFile (Get) (Opnum 57)
@@ -6858,7 +6858,7 @@ The PreallocateFile (Get) method retrieves the PreallocateFile property.
 
 **allocate:** Receives VARIANT_TRUE if the entire log file size is allocated before logging.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.23"></a>
 ##### 3.2.4.9.23 PreallocateFile (Put) (Opnum 58)
@@ -6873,7 +6873,7 @@ The PreallocateFile (Put) method sets the PreallocateFile property.
 
 **allocate:** Supplies VARIANT_TRUE if the entire log file size is allocated before logging.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.24"></a>
 ##### 3.2.4.9.24 ProcessMode (Get) (Opnum 59)
@@ -6888,7 +6888,7 @@ The ProcessMode (Get) method retrieves the ProcessMode property, as specified in
 
 **process:** Receives VARIANT_TRUE if the session is a private session. This VARIANT_BOOL type indicates whether the ITraceDataCollector that is running on the server is using the [**ETW**](#gt_etw) process-private logger setting. For more information, see the ProcessMode property in section 3.2.4.9. No other information about the ETW process-private logger setting is transferred between the client and the server in this method call.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.25"></a>
 ##### 3.2.4.9.25 ProcessMode (Put) (Opnum 60)
@@ -6903,7 +6903,7 @@ The ProcessMode (Put) method sets the ProcessMode property, as specified in the 
 
 **process:** Supplies VARIANT_TRUE if the session is a private session. This VARIANT_BOOL type specifies whether the ITraceDataCollector that will run on the server will use the ETW process-private logger setting. For more information, see the ProcessMode property in section 3.2.4.9. No other information about the [**ETW**](#gt_etw) process-private logger setting is transferred between the client and the server in this method call.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.26"></a>
 ##### 3.2.4.9.26 RealTimeBuffersLost (Get) (Opnum 61)
@@ -6918,7 +6918,7 @@ The RealTimeBuffersLost (Get) method retrieves the RealTimeBuffersLost property,
 
 **buffers:** The number of buffers that could not be delivered in real-time. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.27"></a>
 ##### 3.2.4.9.27 SessionId (Get) (Opnum 63)
@@ -6933,7 +6933,7 @@ The SessionId (Get) method retrieves the SessionId property, as specified in the
 
 **id:** Receives the session identifier. Only the lower 2 bytes of the id value are specified; therefore, the valid range of these lower 2 bytes is from 0x0000 to 0x003F. The upper 6 bytes of the id MUST be ignored.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.28"></a>
 ##### 3.2.4.9.28 SessionName (Get) (Opnum 65)
@@ -6948,7 +6948,7 @@ The SessionName (Get) method retrieves the SessionName.
 
 **name:** Receives the name of the event tracing session.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.29"></a>
 ##### 3.2.4.9.29 SessionName (Put) (Opnum 66)
@@ -6963,7 +6963,7 @@ The SessionName (Put) method sets the SessionName.
 
 **name:** Supplies the name of the event tracing session.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.30"></a>
 ##### 3.2.4.9.30 SessionThreadId (Get) (Opnum 67)
@@ -6978,7 +6978,7 @@ The SessionThreadId (Get) method retrieves the SessionThreadId property.
 
 **tid:** Receives the current thread of the log session, if running.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.31"></a>
 ##### 3.2.4.9.31 StreamMode (Get) (Opnum 69)
@@ -6993,7 +6993,7 @@ The StreamMode (Get) method retrieves the StreamMode property.
 
 **mode:** Receives the logging mode of the trace session.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.32"></a>
 ##### 3.2.4.9.32 StreamMode (Put) (Opnum 70)
@@ -7008,7 +7008,7 @@ The StreamMode (Put) method retrieves the StreamMode property.
 
 **mode:** Supplies the logging mode of the trace session. Valid values are specified in the StreamMode enumeration (section [2.2.2.10](#Section_2.2.2.10)).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.9.33"></a>
 ##### 3.2.4.9.33 TraceDataProviders (Get) (Opnum 71)
@@ -7023,7 +7023,7 @@ The TraceDataProviders (Get) method retrieves the TraceDataProviders property.
 
 **providers:** Receives a pointer to the trace data provider collection object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10"></a>
 #### 3.2.4.10 IApiTracingDataCollector
@@ -7098,7 +7098,7 @@ The LogApiNamesOnly (Get) method retrieves the LogApiNamesOnly property.
 
 **logapinames:** Receives the value of the LogApiNamesOnly property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.2"></a>
 ##### 3.2.4.10.2 LogApiNamesOnly (Put) (Opnum 33)
@@ -7113,7 +7113,7 @@ The LogApiNamesOnly (Put) method sets the LogApiNamesOnly property.
 
 **logapinames:** Supplies the value of the LogApiNamesOnly property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.3"></a>
 ##### 3.2.4.10.3 LogApisRecursively (Get) (Opnum 34)
@@ -7128,7 +7128,7 @@ The LogApisRecursively (Get) method retrieves the LogApisRecursively property.
 
 **logrecursively:** Receives the value of the LogApisRecursively property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.4"></a>
 ##### 3.2.4.10.4 LogApisRecursively (Put) (Opnum 35)
@@ -7143,7 +7143,7 @@ The LogApisRecursively (Put) method sets the LogApisRecursively property.
 
 **logrecursively:** Supplies the value of the LogApisRecursively property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.5"></a>
 ##### 3.2.4.10.5 ExePath (Get) (Opnum 36)
@@ -7158,7 +7158,7 @@ The ExePath (Get) method retrieves the ExePath property.
 
 **exepath:** Receives the value of the ExePath property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.6"></a>
 ##### 3.2.4.10.6 ExePath (Put) (Opnum 37)
@@ -7173,7 +7173,7 @@ The ExePath (Put) method sets the ExePath property. For more information on form
 
 **exepath:** Supplies the value of the ExePath property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.7"></a>
 ##### 3.2.4.10.7 LogFilePath (Get) (Opnum 38)
@@ -7188,7 +7188,7 @@ The LogFilePath (Get) method retrieves the LogFilePath property.
 
 **logfilepath:** Receives the value of the LogFilePath property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.8"></a>
 ##### 3.2.4.10.8 LogFilePath (Put) (Opnum 39)
@@ -7203,7 +7203,7 @@ The LogFilePath (Put) method sets the LogFilePath property.
 
 **logfilepath:** Supplies the value of the LogFilePath property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.9"></a>
 ##### 3.2.4.10.9 IncludeModules (Get) (Opnum 40)
@@ -7218,7 +7218,7 @@ The IncludeModules (Get) method retrieves the IncludeModules property, as specif
 
 **includemodules:** Receives an array of BSTRs that contains the full paths to the modules to include in the trace.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.10"></a>
 ##### 3.2.4.10.10 IncludeModules (Put) (Opnum 41)
@@ -7233,7 +7233,7 @@ The IncludeModules (Put) method sets the IncludeModules property, as specified i
 
 **includemodules:** Supplies an array of BSTRs that contains the full paths to the modules to include in the trace. For formatting, see section [2.2.3.2](#Section_2.2.3.2).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.11"></a>
 ##### 3.2.4.10.11 IncludeApis (Get) (Opnum 42)
@@ -7248,7 +7248,7 @@ The IncludeApis (Get) method retrieves the IncludeApis property, as specified in
 
 **includeapis:** Receives an array of BSTRs that contains the functions to include in the trace. The name is specified as module name, and then function name.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.12"></a>
 ##### 3.2.4.10.12 IncludeApis (Put) (Opnum 43)
@@ -7263,7 +7263,7 @@ The IncludeApis (Put) method sets the IncludeApis property, as specified in the 
 
 **includeapis:** Supplies an array of BSTRs that contains the functions to include in the trace. Specify the name as module name, and then function name. For formatting, see section [2.2.3.2](#Section_2.2.3.2).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.13"></a>
 ##### 3.2.4.10.13 ExcludeApis (Get) (Opnum 44)
@@ -7278,7 +7278,7 @@ The ExcludeApis (Get) method retrieves the ExcludeApis property.
 
 **excludeapis:** Receives an array of BSTRs that contain the functions to exclude from the trace. The name is specified as module name and then function name. For more information on formatting, see section [2.2.3.2](#Section_2.2.3.2).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.10.14"></a>
 ##### 3.2.4.10.14 ExcludeApis (Put) (Opnum 45)
@@ -7293,7 +7293,7 @@ The ExcludeApis (Put) method sets the ExcludeApis property.
 
 **excludeapis:** Supplies an array of BSTRs that contain the functions to exclude from the trace. The name is specified as module name and then function name. For more information on formatting, see section [2.2.3.2](#Section_2.2.3.2).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11"></a>
 #### 3.2.4.11 ITraceDataProvider
@@ -7310,7 +7310,7 @@ The following properties MUST be implemented by objects that implement the ITrac
 | KeywordsAny | R | The list of keywords of the provider. The keywords determine the category of events for the provider to write; this property is used in conjunction with the Level and KeywordsAll properties. On collection, events from this provider are collected only if their keywords include at least one of the keywords in KeywordsAny and all of the keywords in KeywordsAll. If KeywordsAny is zero, then the provider will successfully write all events assuming that the event's keywords pass the KeywordsAll check. The Value property of the KeywordsAny property stores the bitwise-or of the keywords in the KeywordsAny property. |
 | KeywordsAll | R | The list of keywords of the provider. The keywords determine the category of events for the provider to write; this is used in conjunction with the KeywordsAny and Level properties. On collection, events from this provider are collected only if their keywords include all of the keywords in KeywordsAll. The Value property of the KeywordsAll property stores the bitwise-or of the keywords in the KeywordsAll property. If KeywordsAll is zero, then the provider will successfully write all events assuming that the event's keywords pass the KeywordsAny check. |
 | Properties | R | The list of extra information that can be collected when events from this provider are collected. The possible properties are the user's security identifier, as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2.3, (value 1), or the session identifier that is assigned by either the Remote Desktop Session Host server, Remote Desktop Virtualization Host server, or virtual machine (value 2). |
-| FilterEnabled | RW | Determines whether provider-side filtering MUST be enabled. If the FilterEnabled property is set to VARIANT_TRUE, the filter stored in the FilterData property (as specified in section [3.2.4.11.10](#Section_3.2.4.11)) will be used to filter the provider. Otherwise, the FilterData property will be ignored. |
+| FilterEnabled | RW | Determines whether provider-side filtering MUST be enabled. If the FilterEnabled property is set to VARIANT_TRUE, the filter stored in the FilterData property (as specified in section [3.2.4.11.10](#Section_3.2.4.11.10)) will be used to filter the provider. Otherwise, the FilterData property will be ignored. |
 | FilterType | RW | Not used. Because the value is currently not used, any ULONG is a valid value, so validation will always succeed for the property. |
 | FilterData | RW | When the client enables tracing for a provider on the server, it has the option of passing back data to that provider. This data is provider-specific, and the client MUST know how the provider expects the FilterData to be formatted. The FilterData property can contain any arbitrary type that is understood by the trace provider but MUST NOT exceed 1 KB in total size. The PLA protocol has no knowledge of how this FilterData is constructed and what are its possible values. This data is opaque to the protocol. It serves as the transport for this data between the client and the server, and the PLA protocol only restriction on this property is that this data MUST NOT exceed 1 KB in size. The FilterData that is specified by the client will be sent back to the server trace provider being enabled if the FilterEnabled property is set to VARIANT_TRUE. Upon receiving this FilterData, the provider MUST use it to control which events are logged; this property serves as a filter on the events that are logged by the provider. The PLA protocol has no knowledge of whether or not the provider did use the FilterData to control which events it logs. For example, the client can specify an IP address as the value of the FilterData. When the trace provider receives this FilterData, it can only log events that have a matching IP address. |
 
@@ -7318,13 +7318,13 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [DisplayName (Get)](#Section_3.2.4.1.7) | Retrieves the DisplayName property. Opnum: 7 |
-| [DisplayName (Put)](#Section_3.2.4.1.8) | Sets the DisplayName property. Opnum: 8 |
-| [Guid (Get)](#Section_3.2.4.9.13) | Retrieves the Guid property. Opnum: 9 |
-| [Guid (Put)](#Section_3.2.4.11) | Sets the Guid property. Opnum: 10 |
-| [Level (Get)](#Section_3.2.4.11) | Retrieves the Level property. Opnum: 11 |
-| [KeywordsAny (Get)](#Section_2.2.11.1.2) | Retrieves the KeywordsAny property. Opnum: 12 |
-| [KeywordsAll (Get)](#Section_2.2.11.1.2) | Retrieves the KeywordsAll property. Opnum: 13 |
+| [DisplayName (Get)](#Section_3.2.4.11.1) | Retrieves the DisplayName property. Opnum: 7 |
+| [DisplayName (Put)](#Section_3.2.4.11.2) | Sets the DisplayName property. Opnum: 8 |
+| [Guid (Get)](#Section_3.2.4.11.3) | Retrieves the Guid property. Opnum: 9 |
+| [Guid (Put)](#Section_3.2.4.11.4) | Sets the Guid property. Opnum: 10 |
+| [Level (Get)](#Section_3.2.4.11.5) | Retrieves the Level property. Opnum: 11 |
+| [KeywordsAny (Get)](#Section_3.2.4.11.6) | Retrieves the KeywordsAny property. Opnum: 12 |
+| [KeywordsAll (Get)](#Section_3.2.4.11.7) | Retrieves the KeywordsAll property. Opnum: 13 |
 | [Properties (Get)](#Section_3.2.4.11.8) | Retrieves the Properties property. Opnum: 14 |
 | [FilterEnabled (Get)](#Section_3.2.4.11.9) | Retrieves the FilterEnabled property. Opnum: 15 |
 | FilterEnabled (Put) | Sets the FilterEnabled property. Opnum: 16 |
@@ -7332,10 +7332,10 @@ Methods in RPC Opnum Order
 | [FilterType (Put)](#Section_3.2.4.11.12) | Sets the FilterType property. Opnum: 18 |
 | [FilterData (Get)](#Section_3.2.4.11.13) | Retrieves the FilterData property. Opnum: 19 |
 | [FilterData (Put)](#Section_3.2.4.11.14) | Sets the FilterData property. Opnum: 20 |
-| [Query](#Section_3.2.4.1.53) | Populates the other properties based on the local repository of providers. Opnum: 21 |
+| [Query](#Section_3.2.4.11.15) | Populates the other properties based on the local repository of providers. Opnum: 21 |
 | [Resolve](#Section_3.2.4.11.16) | Used to resolve the properties. Opnum: 22 |
-| [SetSecurity](#Section_5) | Updates the system-wide security descriptor of the provider. Opnum: 23 |
-| [GetSecurity](#Section_5) | Retrieves the system-wide security descriptor of the provider. Opnum: 24 |
+| [SetSecurity](#Section_3.2.4.11.17) | Updates the system-wide security descriptor of the provider. Opnum: 23 |
+| [GetSecurity](#Section_3.2.4.11.18) | Retrieves the system-wide security descriptor of the provider. Opnum: 24 |
 | [GetRegisteredProcesses](#Section_3.2.4.11.19) | Retrieves a list of processes that have registered as an event trace data provider. Opnum: 25 |
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface.
@@ -7353,7 +7353,7 @@ The DisplayName (Get) method retrieves the DisplayName property, as specified in
 
 **name:** Receives the display name.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.2"></a>
 ##### 3.2.4.11.2 DisplayName (Put) (Opnum 8)
@@ -7368,7 +7368,7 @@ The DisplayName (Put) method sets the DisplayName property, as specified in the 
 
 **name:** Supplies the display name.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.3"></a>
 ##### 3.2.4.11.3 Guid (Get) (Opnum 9)
@@ -7383,7 +7383,7 @@ The Guid (Get) method retrieves the Guid property, as specified in the property 
 
 **guid:** Receives the PLA-UID. Any PLA-UID other than the value 0000-0000-0000-0000-0000-0000-0000-0000 is potentially a valid PLA-UID for a provider. Consequently, any value other than 0000-0000-0000-0000-0000-0000-0000-0000 will be considered valid for this property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.4"></a>
 ##### 3.2.4.11.4 Guid (Put) (Opnum 10)
@@ -7398,7 +7398,7 @@ The Guid (Put) method sets the Guid property, as specified in the property table
 
 **guid:** Supplies the PLA-UID. Any PLA-UID other than value 0000-0000-0000-0000-0000-0000-0000-0000 is potentially a valid PLA-UID for a provider. Consequently, any value other than 0000-0000-0000-0000-0000-0000-0000-0000 will be considered valid for this property.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.5"></a>
 ##### 3.2.4.11.5 Level (Get) (Opnum 11)
@@ -7411,9 +7411,9 @@ The Level (Get) method retrieves the Level property, as specified in the propert
 
 );
 
-**ppLevel:** Receives the level. The level is stored as an [IValueMap](#Section_3.2.4.18.8). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppLevel:** Receives the level. The level is stored as an [IValueMap](#Section_3.2.4.18). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.6"></a>
 ##### 3.2.4.11.6 KeywordsAny (Get) (Opnum 12)
@@ -7426,9 +7426,9 @@ The KeywordsAny (Get) method retrieves the KeywordsAny property, as specified in
 
 );
 
-**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.18.8). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.18). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.7"></a>
 ##### 3.2.4.11.7 KeywordsAll (Get) (Opnum 13)
@@ -7441,9 +7441,9 @@ The KeywordsAll (Get) method retrieves the KeywordsAll property, as specified in
 
 );
 
-**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.18.8). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppKeywords:** Receives the keywords. The keyword is stored as an [IValueMap](#Section_3.2.4.18). The value of the level is stored in the Value property of the IValueMap; this refers to the level at which the trace provider is enabled. Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap refers to the levels that are supported by the trace provider. The Names property of the IValueMapItem refers to the level name, while the Values field of the IValueMapItem contains the numerical value of the level. The type of the IValueMap, specified in the ValueMapType property, is plaIndex; more information can be found in section [2.2.11](#Section_2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.8"></a>
 ##### 3.2.4.11.8 Properties (Get) (Opnum 14)
@@ -7456,9 +7456,9 @@ The Properties (Get) method retrieves the Properties property, as specified in t
 
 );
 
-**ppProperties:** Receives the properties. The properties are stored as an [IValueMap](#Section_3.2.4.18.8). The properties are stored as an IValueMap. The value of the property is stored in the Value property of the IValueMap. Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap refers to an individual property. The Names property of the IValueMapItem refers to the property name, while the Values field of the IValueMapItem contains the numerical value of the property. The type of the IValueMap, specified in the [ValueMapType](#Section_2.2.2.11) property, is plaFlag; more information can be found in section [2.2.11](#Section_2.2.11).
+**ppProperties:** Receives the properties. The properties are stored as an [IValueMap](#Section_3.2.4.18). The properties are stored as an IValueMap. The value of the property is stored in the Value property of the IValueMap. Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap refers to an individual property. The Names property of the IValueMapItem refers to the property name, while the Values field of the IValueMapItem contains the numerical value of the property. The type of the IValueMap, specified in the [ValueMapType](#Section_2.2.2.11) property, is plaFlag; more information can be found in section [2.2.11](#Section_2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.9"></a>
 ##### 3.2.4.11.9 FilterEnabled (Get) (Opnum 15)
@@ -7473,7 +7473,7 @@ The FilterEnabled (Get) method retrieves the FilterEnabled property, as specifie
 
 **FilterEnabled:** Receives the filter enabled flag.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.10"></a>
 ##### 3.2.4.11.10 FilterEnabled (Put) (Opnum 16)
@@ -7488,7 +7488,7 @@ The FilterEnabled (Put) method sets the FilterEnabled property, as specified in 
 
 **FilterEnabled:** Supplies the filter enabled flag.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.11"></a>
 ##### 3.2.4.11.11 FilterType (Get) (Opnum 17)
@@ -7503,7 +7503,7 @@ The FilterType (Get) method retrieves the FilterType property, as specified in t
 
 **pulType:** Receives the filter type. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.12"></a>
 ##### 3.2.4.11.12 FilterType (Put) (Opnum 18)
@@ -7518,7 +7518,7 @@ The FilterType (Put) method sets the FilterType property, as specified in the pr
 
 **ulType:** Supplies the filter type. The valid range is from 0x00000000 through 0xFFFFFFFF inclusive.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.13"></a>
 ##### 3.2.4.11.13 FilterData (Get) (Opnum 19)
@@ -7533,7 +7533,7 @@ The FilterData (Get) method retrieves the FilterData property, as specified in t
 
 **ppData:** Receives the filter data. The FilterData is any arbitrary data, of total size that MUST NOT be greater than 1 KB, that MAY be used by the trace provider to filter which events are logged.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.14"></a>
 ##### 3.2.4.11.14 FilterData (Put) (Opnum 20)
@@ -7548,7 +7548,7 @@ The FilterData (Put) method sets the FilterData property, as specified in the pr
 
 **pData:** Supplies the filter data. The FilterData is any arbitrary data, of total size that MUST NOT be greater than 1 KB, that MAY be used by the trace provider to filter events which are logged.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.15"></a>
 ##### 3.2.4.11.15 Query (Opnum 21)
@@ -7569,14 +7569,14 @@ HRESULT Query(
 
 **bstrServer:** Not used.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.16"></a>
 ##### 3.2.4.11.16 Resolve (Opnum 22)
 
 The Resolve method, given another event trace data provider or a collection of event trace data providers, updates the properties of the original provider with information from one of the passed-in provider(s). If only one provider is passed-in, information from that provider is used. If multiple providers are passed-in, information is used from the first provider in the collection that has the same value for the ITraceDataProvider::Guid property as the original ITraceDataProvider. The Guid in this context refers to the COM interface property which is used as a [**PLA-UID**](#gt_performance-logs-and-alerts-unique-identifier-pla-uid) and does not comply with the semantics of [**GUID**](#gt_globally-unique-identifier-guid) specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824).
 
-If no provider from the passed-in collection has the same PLA-UID, the original provider is not updated. If the original provider is updated, the DisplayName property of the original provider is overwritten by the DisplayName of the passed-in provider, and the ValueMapItems in the Level, KeywordsAny, and KeywordsAll properties of the passed-in provider replace the ValueMapItems for the existing Level, KeywordsAny, and KeywordsAll properties of the original provider. However, actual value of the Level, KeywordsAny, and KeywordsAll properties are not overwritten. Consequently, the existing settings are not lost; that is, if the level is 5, the symbolic names of all the levels (which are stored as ValueMapItems) are added, but the value of the level remains as 5. For ValueMaps, see section [3.2.4.18](#Section_3.2.4.18.8).
+If no provider from the passed-in collection has the same PLA-UID, the original provider is not updated. If the original provider is updated, the DisplayName property of the original provider is overwritten by the DisplayName of the passed-in provider, and the ValueMapItems in the Level, KeywordsAny, and KeywordsAll properties of the passed-in provider replace the ValueMapItems for the existing Level, KeywordsAny, and KeywordsAll properties of the original provider. However, actual value of the Level, KeywordsAny, and KeywordsAll properties are not overwritten. Consequently, the existing settings are not lost; that is, if the level is 5, the symbolic names of all the levels (which are stored as ValueMapItems) are added, but the value of the level remains as 5. For ValueMaps, see section [3.2.4.18](#Section_3.2.4.18).
 
 Because only one provider is used to update the original provider, there is no possibility for conflicting or duplicate properties.
 
@@ -7588,7 +7588,7 @@ HRESULT Resolve(
 
 **pFrom:** Supplies a pointer to a provider or provider collection object that is used to resolve the properties.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.17"></a>
 ##### 3.2.4.11.17 SetSecurity (Opnum 23)
@@ -7603,7 +7603,7 @@ HRESULT SetSecurity(
 
 **Sddl:** Supplies a string that describes the security descriptor for the object, using the Security Descriptor Description Language (SDDL), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.1.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.18"></a>
 ##### 3.2.4.11.18 GetSecurity (Opnum 24)
@@ -7622,7 +7622,7 @@ HRESULT GetSecurity(
 
 **Sddl:** String that describes the security descriptor for the object, as specified in [MS-DTYP].
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.11.19"></a>
 ##### 3.2.4.11.19 GetRegisteredProcesses (Opnum 25)
@@ -7637,7 +7637,7 @@ HRESULT GetRegisteredProcesses(
 
 **Processes:** Receives a value map object that contains the list of processes that have registered as event trace data providers. The Key property MUST contain the name of the binary and value MUST contain the process identifier (PID).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12"></a>
 #### 3.2.4.12 ISchedule
@@ -7681,7 +7681,7 @@ The StartDate (Get) method retrieves the StartDate property, as specified in the
 
 **start:** Receives the date when the schedule becomes valid.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.2"></a>
 ##### 3.2.4.12.2 StartDate (Put) (Opnum 8)
@@ -7696,7 +7696,7 @@ The StartDate (Put) method sets the StartDate property, as specified in the prop
 
 **start:** Supplies the date when the schedule becomes valid. The variant data type MUST be VT_DATE or VT_EMPTY to unset the date.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.3"></a>
 ##### 3.2.4.12.3 EndDate (Get) (Opnum 9)
@@ -7711,7 +7711,7 @@ The EndDate (Get) method retrieves the EndDate property, as specified in the pro
 
 **end:** Receives the end date that the schedule is valid.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.4"></a>
 ##### 3.2.4.12.4 EndDate (Put) (Opnum 10)
@@ -7726,7 +7726,7 @@ The EndDate (Put) method sets the EndDate property, as specified in the property
 
 **end:** Supplies the end date that the schedule is valid. The variant data type MUST be VT_DATE or VT_EMPTY to unset the date.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.5"></a>
 ##### 3.2.4.12.5 StartTime (Get) (Opnum 11)
@@ -7741,7 +7741,7 @@ The StartTime (Get) method retrieves the StartTime property, as specified in the
 
 **start:** Receives the time of day when the [**data collector set**](#gt_data-collector-set) runs.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.6"></a>
 ##### 3.2.4.12.6 StartTime (Put) (Opnum 12)
@@ -7756,7 +7756,7 @@ The StartTime (Put) method sets the StartTime property, as specified in the prop
 
 **start:** Supplies the time of day when the [**data collector set**](#gt_data-collector-set) runs. The variant data type MUST be VT_DATE or VT_EMPTY to unset the date.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.7"></a>
 ##### 3.2.4.12.7 Days (Get) (Opnum 13)
@@ -7771,7 +7771,7 @@ The Days (Get) method retrieves the Days property.
 
 **days:** Receives the days on which to run the [**data collector set**](#gt_data-collector-set). For values, see the WeekDays enumeration specified in section [2.2.2.12](#Section_2.2.2.12).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.12.8"></a>
 ##### 3.2.4.12.8 Days (Put) (Opnum 14)
@@ -7786,7 +7786,7 @@ The Days (Put) method sets the Days property.
 
 **days:** Supplies the days on which to run the [**data collector set**](#gt_data-collector-set). For values, see the WeekDays enumeration specified in section [2.2.2.12](#Section_2.2.2.12).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13"></a>
 #### 3.2.4.13 ITraceDataProviderCollection
@@ -7805,15 +7805,15 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count (Get)](#Section_3.2.4.4.1) | Retrieves the Count property. Opnum: 7 |
-| [Item (Get)](#Section_3.2.4.4.2) | Retrieves the Item property. Opnum: 8 |
-| [_NewEnum (Get)](#Section_3.2.4.4.3) | Retrieves the NewEnum property. Opnum: 9 |
-| [Add](#Section_3.2.4.13) | Adds a trace provider to the collection. Opnum: 10 |
-| [Remove](#Section_3.2.4.4.5) | Removes a trace provider from the collection. Opnum: 11 |
-| [Clear](#Section_3.2.4.4.6) | Removes all trace providers from the collection. Opnum: 12 |
-| [AddRange](#Section_3.2.4.4.7) | Adds one or more trace providers to the collection. Opnum: 13 |
+| [Count (Get)](#Section_3.2.4.13.1) | Retrieves the Count property. Opnum: 7 |
+| [Item (Get)](#Section_3.2.4.13.2) | Retrieves the Item property. Opnum: 8 |
+| [_NewEnum (Get)](#Section_3.2.4.13.3) | Retrieves the NewEnum property. Opnum: 9 |
+| [Add](#Section_3.2.4.13.4) | Adds a trace provider to the collection. Opnum: 10 |
+| [Remove](#Section_3.2.4.13.5) | Removes a trace provider from the collection. Opnum: 11 |
+| [Clear](#Section_3.2.4.13.6) | Removes all trace providers from the collection. Opnum: 12 |
+| [AddRange](#Section_3.2.4.13.7) | Adds one or more trace providers to the collection. Opnum: 13 |
 | [CreateTraceDataProvider](#Section_3.2.4.13.8) | Creates a trace data provider object. Opnum: 14 |
-| [GetTraceDataProviders](#Section_3.2.4.9) | Populates the collection with the registered trace providers. Opnum: 15 |
+| [GetTraceDataProviders](#Section_3.2.4.13.9) | Populates the collection with the registered trace providers. Opnum: 15 |
 | [GetTraceDataProvidersByProcess](#Section_3.2.4.13.10) | Populates the collection with the list of providers that were registered by the given process. Opnum: 16 |
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface.
@@ -7831,7 +7831,7 @@ The Count (Get) method retrieves the Count property.
 
 **retVal:** Receives the number of trace providers in the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.2"></a>
 ##### 3.2.4.13.2 Item (Get) (Opnum 8)
@@ -7850,7 +7850,7 @@ The Item (Get) method retrieves the Item property.
 
 **ppProvider:** Receives a pointer to the event trace data provider requested.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.3"></a>
 ##### 3.2.4.13.3 _NewEnum (Get) (Opnum 9)
@@ -7865,7 +7865,7 @@ The _NewEnum (Get) method retrieves the NewEnum property, as specified in the pr
 
 **retVal:** Receives a pointer to a variant enumeration object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.4"></a>
 ##### 3.2.4.13.4 Add (Opnum 10)
@@ -7880,7 +7880,7 @@ ITraceDataProvider* pProvider
 
 **pProvider:** Supplies the event trace data provider to be added.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.5"></a>
 ##### 3.2.4.13.5 Remove (Opnum 11)
@@ -7895,7 +7895,7 @@ VARIANT vProvider
 
 **vProvider:** Supplies which provider to remove. If the variant type is VT_I4 or VT_UI4, it is interpreted as the zero-based index of the provider to remove. If the variant type is VT_DISPATCH, it is interpreted as a pointer to the provider to remove. VARIANT is a standard COM type and it is defined in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.29.2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.6"></a>
 ##### 3.2.4.13.6 Clear (Opnum 12)
@@ -7906,7 +7906,7 @@ HRESULT Clear();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.7"></a>
 ##### 3.2.4.13.7 AddRange (Opnum 13)
@@ -7921,7 +7921,7 @@ ITraceDataProviderCollection* providers
 
 **providers:** Supplies an event trace data provider collection object whose event trace data providers will be added to the event trace data provider collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.8"></a>
 ##### 3.2.4.13.8 CreateTraceDataProvider (Opnum 14)
@@ -7936,7 +7936,7 @@ HRESULT CreateTraceDataProvider(
 
 **Provider:** Receives a pointer to a newly create event trace data provider object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.9"></a>
 ##### 3.2.4.13.9 GetTraceDataProviders (Opnum 15)
@@ -7951,7 +7951,7 @@ HRESULT GetTraceDataProviders(
 
 **server:** Not used.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.13.10"></a>
 ##### 3.2.4.13.10 GetTraceDataProvidersByProcess (Opnum 16)
@@ -7970,7 +7970,7 @@ HRESULT GetTraceDataProvidersByProcess(
 
 **Pid:** The Process identifier of the process that registered the providers.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14"></a>
 #### 3.2.4.14 IScheduleCollection
@@ -7989,13 +7989,13 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count (Get)](#Section_3.2.4.4.1) | Retrieves the Count property. Opnum: 7 |
-| [Item (Get)](#Section_3.2.4.4.2) | Retrieves the Item property. Opnum: 8 |
-| [_NewEnum (Get)](#Section_3.2.4.4.3) | Retrieves the NewEnum property. Opnum: 9 |
-| [Add](#Section_3.2.4.4.4) | Adds a schedule to the collection. Opnum: 10 |
-| [Remove](#Section_3.2.4.4.5) | Removes a schedule from the collection. Opnum: 11 |
-| [Clear](#Section_3.2.4.4.6) | Removes all schedules from the collection. Opnum: 12 |
-| [AddRange](#Section_3.2.4.4.7) | Adds one or more schedules to the collection. Opnum: 13 |
+| [Count (Get)](#Section_3.2.4.14.1) | Retrieves the Count property. Opnum: 7 |
+| [Item (Get)](#Section_3.2.4.14.2) | Retrieves the Item property. Opnum: 8 |
+| [_NewEnum (Get)](#Section_3.2.4.14.3) | Retrieves the NewEnum property. Opnum: 9 |
+| [Add](#Section_3.2.4.14.4) | Adds a schedule to the collection. Opnum: 10 |
+| [Remove](#Section_3.2.4.14.5) | Removes a schedule from the collection. Opnum: 11 |
+| [Clear](#Section_3.2.4.14.6) | Removes all schedules from the collection. Opnum: 12 |
+| [AddRange](#Section_3.2.4.14.7) | Adds one or more schedules to the collection. Opnum: 13 |
 | [CreateSchedule](#Section_3.2.4.14.8) | Creates a schedule object. Opnum: 14 |
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface.
@@ -8013,7 +8013,7 @@ The Count (Get) method retrieves the Count property.
 
 **retVal:** Receives the number of schedules in the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.2"></a>
 ##### 3.2.4.14.2 Item (Get) (Opnum 8)
@@ -8032,12 +8032,12 @@ The Item (Get) method retrieves the Item property.
 
 **ppSchedule:** Receives a pointer to the schedule requested.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.3"></a>
 ##### 3.2.4.14.3 _NewEnum (Get) (Opnum 9)
 
-The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16.2).
+The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16).
 
 [propget, id(DISPID_NEWENUM)] HRESULT _NewEnum(
 
@@ -8047,7 +8047,7 @@ The _NewEnum (Get) method retrieves the NewEnum property, as specified in the pr
 
 **retVal:** Receives a pointer to a variant enumeration object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.4"></a>
 ##### 3.2.4.14.4 Add (Opnum 10)
@@ -8062,7 +8062,7 @@ ISchedule* pSchedule
 
 **pSchedule:** Supplies the schedule to be added to the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.5"></a>
 ##### 3.2.4.14.5 Remove (Opnum 11)
@@ -8077,7 +8077,7 @@ VARIANT vSchedule
 
 **vSchedule:** Supplies which schedule to remove. If the variant type is VT_I4 or VT_UI4, it is interpreted as the zero-based index of the schedule to remove. If the variant type is VT_DISPATCH, it's interpreted as a pointer to the schedule to remove.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.6"></a>
 ##### 3.2.4.14.6 Clear (Opnum 12)
@@ -8088,7 +8088,7 @@ HRESULT Clear();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.7"></a>
 ##### 3.2.4.14.7 AddRange (Opnum 13)
@@ -8103,7 +8103,7 @@ IScheduleCollection* pSchedules
 
 **pSchedules:** Supplies a schedule collection object whose schedules will be added to this schedule collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.14.8"></a>
 ##### 3.2.4.14.8 CreateSchedule (Opnum 14)
@@ -8118,7 +8118,7 @@ HRESULT CreateSchedule(
 
 **Schedule:** Receives a pointer to a newly created schedule.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15"></a>
 #### 3.2.4.15 IDataCollectorCollection
@@ -8137,13 +8137,13 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count (Get)](#Section_3.2.4.4.1) | Retrieves the Count property. Opnum: 7 |
-| [Item (Get)](#Section_3.2.4.4.2) | Retrieves the Item property. Opnum: 8 |
-| [_NewEnum (Get)](#Section_3.2.4.4.3) | Retrieves the NewEnum property. Opnum: 9 |
-| [Add](#Section_3.2.4.5) | Adds a data collector to the collection. Opnum: 10 |
-| [Remove](#Section_3.2.4.4.5) | Removes a data collector from the collection. Opnum: 11 |
-| [Clear](#Section_3.2.4.4.6) | Removes all data collectors from the collection. Opnum: 12 |
-| [AddRange](#Section_3.2.4.4.7) | Adds one or more data collectors to the collection. Opnum: 13 |
+| [Count (Get)](#Section_3.2.4.15.1) | Retrieves the Count property. Opnum: 7 |
+| [Item (Get)](#Section_3.2.4.15.2) | Retrieves the Item property. Opnum: 8 |
+| [_NewEnum (Get)](#Section_3.2.4.15.3) | Retrieves the NewEnum property. Opnum: 9 |
+| [Add](#Section_3.2.4.15.4) | Adds a data collector to the collection. Opnum: 10 |
+| [Remove](#Section_3.2.4.15.5) | Removes a data collector from the collection. Opnum: 11 |
+| [Clear](#Section_3.2.4.15.6) | Removes all data collectors from the collection. Opnum: 12 |
+| [AddRange](#Section_3.2.4.15.7) | Adds one or more data collectors to the collection. Opnum: 13 |
 | [CreateDataCollectorFromXml](#Section_3.2.4.15.8) | Creates a data collector using XML. Opnum: 14 |
 | [CreateDataCollector](#Section_3.2.4.15.9) | Creates a data collector of the specified type. Opnum: 15 |
 
@@ -8162,7 +8162,7 @@ The Count (Get) method retrieves the Count property.
 
 **retVal:** Receives the number of schedules in the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.2"></a>
 ##### 3.2.4.15.2 Item (Get) (Opnum 8)
@@ -8181,7 +8181,7 @@ The Item (Get) method retrieves the Item property.
 
 **collector:** Receives a pointer to the data collector requested.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.3"></a>
 ##### 3.2.4.15.3 _NewEnum (Get) (Opnum 9)
@@ -8196,7 +8196,7 @@ The _NewEnum (Get) method retrieves the NewEnum property, as specified in the pr
 
 **retVal:** Receives a pointer to a variant enumeration object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.4"></a>
 ##### 3.2.4.15.4 Add (Opnum 10)
@@ -8211,7 +8211,7 @@ IDataCollector* collector
 
 **collector:** Supplies the data collector to add to this collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.5"></a>
 ##### 3.2.4.15.5 Remove (Opnum 11)
@@ -8226,7 +8226,7 @@ VARIANT collector
 
 **collector:** Supplies which data collector to remove. If the variant type is VT_I4 or VT_UI4, it is interpreted as the zero-based index of the data collector to remove. If the variant type is VT_DISPATCH, it's interpreted as a pointer to the data collector to remove.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.6"></a>
 ##### 3.2.4.15.6 Clear (Opnum 12)
@@ -8237,7 +8237,7 @@ HRESULT Clear();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.7"></a>
 ##### 3.2.4.15.7 AddRange (Opnum 13)
@@ -8252,7 +8252,7 @@ IDataCollectorCollection* collectors
 
 **collectors:** Supplies a data collectors collection object whose data collectors will be added to this data collectors collection.<34>
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in section [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.8"></a>
 ##### 3.2.4.15.8 CreateDataCollectorFromXml (Opnum 14)
@@ -8271,11 +8271,11 @@ HRESULT CreateDataCollectorFromXml(
 
 **bstrXml:** Supplies a string that contains the XML specifying the data collector to create. The possible data collector definitions can be as follows: IPerformanceCounterDataCollector (section [3.2.4.6](#Section_3.2.4.6)), IConfigurationDataCollector (section [3.2.4.7](#Section_3.2.4.7)), IAlertDataCollector (section [3.2.4.8](#Section_3.2.4.8)), ITraceDataCollector (section [3.2.4.9](#Section_3.2.4.9)), and IApiTracingDataCollector (section [3.2.4.10](#Section_3.2.4.10)). The XML for each of those respective data collector types is in their corresponding sections; the overall XML of the data collector set, which includes the XML for each type of data collector, specified in section [3.2.4.19](#Section_3.2.4.19). The bStrXml parameter value is the set of XML elements corresponding to a single type of data collector.
 
-**pValidation:** Receives a validation value map with a list of properties from the input bstrXml for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18.8). Each [IValueMapItem](#Section_3.2.4.18.14) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
+**pValidation:** Receives a validation value map with a list of properties from the input bstrXml for this [**data collector set**](#gt_data-collector-set) (and its encapsulated objects) that are invalid or ignored. For each property of the data collector set and its associated objects, passed in by the client, that could not be set, the server MUST return in an [IValueMap](#Section_3.2.4.18). Each [IValueMapItem](#Section_3.2.4.17) in the IValueMap represents a property of the data collector set and its encapsulated objects that could not be set by the server. The Names property of the IValueMapItem represents the property name, while the Values property of the IValueMap represents the HRESULT describing the specific property corresponding to that property. The ValueMapType property of the IValueMap is plaValidation; more information can be found in section [2.2.11](#Section_2.2.11). Note that the client MAY choose to ignore any warnings or errors that are returned by the server; however, if it does so, the data collector set might not be executed by the server as the client expects.
 
 **pCollector:** Receives the newly created data collector.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.15.9"></a>
 ##### 3.2.4.15.9 CreateDataCollector (Opnum 15)
@@ -8294,7 +8294,7 @@ HRESULT CreateDataCollector(
 
 **Collector:** Receives the newly created data collector.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16"></a>
 #### 3.2.4.16 IDataCollectorSetCollection
@@ -8313,13 +8313,13 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count (Get)](#Section_3.2.4.4.1) | Retrieves the Count property. Opnum: 7 |
-| [Item (Get)](#Section_3.2.4.4.2) | Retrieves the Item property. Opnum: 8 |
-| [_NewEnum (Get)](#Section_3.2.4.4.3) | Retrieves the NewEnum property. Opnum: 9 |
-| [Add](#Section_3.2.4.4.4) | Adds a data collector set to the collection. Opnum: 10 |
-| [Remove](#Section_3.2.4.4.5) | Removes a data collector set from the collection. Opnum: 11 |
-| [Clear](#Section_3.2.4.4.6) | Removes all data collector sets from the collection. Opnum: 12 |
-| [AddRange](#Section_3.2.4.4.7) | Adds one or more data collector set to the collection. Opnum: 13 |
+| [Count (Get)](#Section_3.2.4.16.1) | Retrieves the Count property. Opnum: 7 |
+| [Item (Get)](#Section_3.2.4.16.2) | Retrieves the Item property. Opnum: 8 |
+| [_NewEnum (Get)](#Section_3.2.4.16.3) | Retrieves the NewEnum property. Opnum: 9 |
+| [Add](#Section_3.2.4.16.4) | Adds a data collector set to the collection. Opnum: 10 |
+| [Remove](#Section_3.2.4.16.5) | Removes a data collector set from the collection. Opnum: 11 |
+| [Clear](#Section_3.2.4.16.6) | Removes all data collector sets from the collection. Opnum: 12 |
+| [AddRange](#Section_3.2.4.16.7) | Adds one or more data collector set to the collection. Opnum: 13 |
 | [GetDataCollectorSets](#Section_3.2.4.16.8) | Populates data collector set collection with the persisted data collector sets. Opnum: 14 |
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface.
@@ -8337,7 +8337,7 @@ The Count (Get) method retrieves the Count property.
 
 **retVal:** Receives the number of [**data collector sets**](#gt_data-collector-set) in the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.2"></a>
 ##### 3.2.4.16.2 Item (Get) (Opnum 8)
@@ -8356,12 +8356,12 @@ The Item (Get) method retrieves the Item property.
 
 **set:** Receives a pointer to the data collector set requested.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.3"></a>
 ##### 3.2.4.16.3 _NewEnum (Get) (Opnum 9)
 
-The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16.2).
+The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.16](#Section_3.2.4.16).
 
 [proppget, id(DISPID_NEWENUM)] HRESULT _NewEnum(
 
@@ -8371,7 +8371,7 @@ The _NewEnum (Get) method retrieves the NewEnum property, as specified in the pr
 
 **retVal:** Receives a pointer to a variant enumeration object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.4"></a>
 ##### 3.2.4.16.4 Add (Opnum 10)
@@ -8386,7 +8386,7 @@ IDataCollectorSet* set
 
 **set:** Supplies the data collector set to be added.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.5"></a>
 ##### 3.2.4.16.5 Remove (Opnum 11)
@@ -8401,7 +8401,7 @@ VARIANT set
 
 **set:** Supplies which data collector set to remove. If the variant type is VT_I4 or VT_UI4, it is interpreted as the zero-based index of the data collector set to remove. If the variant type is VT_DISPATCH, it's interpreted as a pointer to the data collector set to remove.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.6"></a>
 ##### 3.2.4.16.6 Clear (Opnum 12)
@@ -8412,7 +8412,7 @@ HRESULT Clear();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.7"></a>
 ##### 3.2.4.16.7 AddRange (Opnum 13)
@@ -8427,7 +8427,7 @@ IDataCollectorSetCollection* sets
 
 **sets:** Supplies a data collector set collection object whose data collector sets will be added to this data collector set collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.16.8"></a>
 ##### 3.2.4.16.8 GetDataCollectorSets (Opnum 14)
@@ -8435,7 +8435,7 @@ IDataCollectorSetCollection* sets
 The GetDataCollectorSets method populates [**data collector set**](#gt_data-collector-set) collection with the persisted data collector sets. A data collector set is considered to be persisted if either of the following conditions is met:
 
 - The data collector set is in a running state. A data collector set is considered to be in a running state if a call to [IDataCollectorSet::getState](#Section_3.2.4.1) returns plaRunning. A data collector set enters a running state by calling [IDataCollectorSet::Start](#Section_3.2.4.1.56). A data collector set can be removed from a running state by calling [IDataCollectorSet::Stop](#Section_3.2.4.1.57).
-- The data collector set is committed. A data collector set is committed after a successful call to [IDataCollectorSet::Commit](#Section_3.2.4.1) where the CommitMode has any value other than plaValidateOnly. A data collector set can be removed from a committed state by calling [IDataCollectorSet::Delete](#Section_3.2.4.1).
+- The data collector set is committed. A data collector set is committed after a successful call to [IDataCollectorSet::Commit](#Section_3.2.4.1.54) where the CommitMode has any value other than plaValidateOnly. A data collector set can be removed from a committed state by calling [IDataCollectorSet::Delete](#Section_3.2.4.1).
 Semantically, a data collector set is persisted if it has been committed to a permanent store, such as the filesystem.<35>
 
 HRESULT GetDataCollectorSets(
@@ -8450,7 +8450,7 @@ HRESULT GetDataCollectorSets(
 
 **filter:** Not used.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17"></a>
 #### 3.2.4.17 IValueMapItem
@@ -8473,7 +8473,7 @@ The following is an XML representation of a ValueMapItem.
 | --- | --- | --- |
 | Description | RW | Specifies the description of the item. |
 | Enabled | RW | Specifies whether or not the item is enabled. If an item is not enabled, its Value property will be ignored. In typical usage, a ValueMap will contain a ValueMapItem for each of the multiple possible settings of the property that the ValueMap is passed to (such as an entry for every Keyword or every Level that can be used by an [ITraceDataProvider](#Section_3.2.4.11)). This Enabled property indicates whether or not the ValueMapItem will be used. Essentially, the ValueMap contains a ValueMapItem for each of the multiple possible options, and the Enabled property indicates which options are actually selected. |
-| Key | RW | Specifies the name of the item. The name of the item can be any non-empty BSTR. The semantics of the key depend on the ValueMapType property, specified in section [3.2.4.18](#Section_3.2.4.18.8), of the IValueMap to which this IValueMapItem belongs. The over-the-wire transmission of a BSTR is specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.23. The Performance Logs and Alerts Protocol does not have any predefined Key values or semantic definitions. The only condition Performance Logs and Alerts Protocol places on the Key is that it cannot be an empty BSTR.<36> |
+| Key | RW | Specifies the name of the item. The name of the item can be any non-empty BSTR. The semantics of the key depend on the ValueMapType property, specified in section [3.2.4.18](#Section_3.2.4.18), of the IValueMap to which this IValueMapItem belongs. The over-the-wire transmission of a BSTR is specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.23. The Performance Logs and Alerts Protocol does not have any predefined Key values or semantic definitions. The only condition Performance Logs and Alerts Protocol places on the Key is that it cannot be an empty BSTR.<36> |
 | Value | RW | Specifies the value of the item. The value is stored in a VARIANT. The format and over the wire transmission of a VARIANT is specified in [MS-OAUT] section 2.2.29. Any VARIANT is a legal value for this property. The ValueMapItem is a generic container and the semantics of the Value property depend on what it is being used to contain. The ValueMapType property contains information regarding how the Value property will be interpreted. <37> |
 | ValueMapType | RW | Specifies the type of ValueMap in which the ValueMapItem will be inserted. Information on the different types of ValueMaps are specified in section [2.2.2.11](#Section_2.2.2.11). |
 
@@ -8491,10 +8491,10 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Description (Get)](#Section_3.2.4.1.4) | Retrieves the Description property. Opnum: 7 |
-| [Description (Put)](#Section_3.2.4.1.5) | Sets the Description property. Opnum: 8 |
-| [Enabled (Get)](#Section_3.2.4.2.1) | Retrieves the Enabled property. Opnum: 9 |
-| [Enabled (Put)](#Section_3.2.4.2.2) | Sets the Enabled property. Opnum: 10 |
+| [Description (Get)](#Section_3.2.4.17.1) | Retrieves the Description property. Opnum: 7 |
+| [Description (Put)](#Section_3.2.4.17.2) | Sets the Description property. Opnum: 8 |
+| [Enabled (Get)](#Section_3.2.4.17.3) | Retrieves the Enabled property. Opnum: 9 |
+| [Enabled (Put)](#Section_3.2.4.17.4) | Sets the Enabled property. Opnum: 10 |
 | [Key (Get)](#Section_3.2.4.17.5) | Retrieves the Key property. Opnum: 11 |
 | [Key (Put)](#Section_3.2.4.17.6) | Sets the Key property. Opnum: 12 |
 | [Value (Get)](#Section_3.2.4.17.7) | Retrieves the Value property. Opnum: 13 |
@@ -8517,7 +8517,7 @@ The Description (Get) method retrieves the Description property.
 
 **description:** Receives the description of the item.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.2"></a>
 ##### 3.2.4.17.2 Description (Put) (Opnum 8)
@@ -8532,12 +8532,12 @@ The Description (Put) method sets the Description property.
 
 **description:** Supplies the description of the named-value pair item.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.3"></a>
 ##### 3.2.4.17.3 Enabled (Get) (Opnum 9)
 
-The Enabled (Get) method retrieves the Enabled property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14).
+The Enabled (Get) method retrieves the Enabled property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17).
 
 [propget] HRESULT Enabled(
 
@@ -8547,12 +8547,12 @@ The Enabled (Get) method retrieves the Enabled property, as specified in the pro
 
 **enabled:** Receives a Boolean indicating whether the item is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.4"></a>
 ##### 3.2.4.17.4 Enabled (Put) (Opnum 10)
 
-The Enabled (Put) method sets the Enabled property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14).
+The Enabled (Put) method sets the Enabled property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17).
 
 [propput] HRESULT Enabled(
 
@@ -8562,12 +8562,12 @@ The Enabled (Put) method sets the Enabled property, as specified in the property
 
 **enabled:** Supplies a Boolean indicating whether the item is enabled.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.5"></a>
 ##### 3.2.4.17.5 Key (Get) (Opnum 11)
 
-The Key (Get) method retrieves the Key property that is set in the IValueMapItem, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14). The semantics of what the key is used for depends on the ValueMapType property of the IValueMap to which the IValueMapItem belongs. For example, if the ValueMapType property (whose possible values are specified in section [2.2.2.11](#Section_2.2.2.11)) is set to plaIndex, the IValueMapItems in that IValueMap can be a collection of Levels (specified as a property of the ITraceDataProvider in section [3.2.4.11](#Section_3.2.4.11)) since only one level can be set on an ITraceDataProvider at a time. In this example, the Key will be a string that refers to the name of the level. The key can be any BSTR other than the empty BSTR. The Performance Logs and Alerts Protocol does not have any predetermined values or semantics for this key.
+The Key (Get) method retrieves the Key property that is set in the IValueMapItem, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17). The semantics of what the key is used for depends on the ValueMapType property of the IValueMap to which the IValueMapItem belongs. For example, if the ValueMapType property (whose possible values are specified in section [2.2.2.11](#Section_2.2.2.11)) is set to plaIndex, the IValueMapItems in that IValueMap can be a collection of Levels (specified as a property of the ITraceDataProvider in section [3.2.4.11](#Section_3.2.4.11)) since only one level can be set on an ITraceDataProvider at a time. In this example, the Key will be a string that refers to the name of the level. The key can be any BSTR other than the empty BSTR. The Performance Logs and Alerts Protocol does not have any predetermined values or semantics for this key.
 
 [propget] HRESULT Key(
 
@@ -8577,12 +8577,12 @@ The Key (Get) method retrieves the Key property that is set in the IValueMapItem
 
 **key:** Receives the BSTR that contains the value of the key. The semantics of the key depend on the ValueMapType property of the IValueMap to which the IValueMapItem belongs.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.6"></a>
 ##### 3.2.4.17.6 Key (Put) (Opnum 12)
 
-The Key (Put) method sets the Key property in the IValueMapItem, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14). The semantics of what the key is used for depends on the ValueMapType property of the IValueMap to which the IValueMapItem belongs. For example, if the ValueMapType property (whose possible values are specified in section [2.2.2.11](#Section_2.2.2.11)) is set to plaIndex, the IValueMapItems in that IValueMap can be a collection of Levels (specified as a property of the ITraceDataProvider in section [3.2.4.11](#Section_3.2.4.11)) since only one level can be set on an ITraceDataProvider at a time. In this example, the Key will be a string that refers to the name of the level. The key can be any BSTR other than the empty BSTR. The Performance Logs and Alerts Protocol does not have any predetermined values or semantics for this key.
+The Key (Put) method sets the Key property in the IValueMapItem, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17). The semantics of what the key is used for depends on the ValueMapType property of the IValueMap to which the IValueMapItem belongs. For example, if the ValueMapType property (whose possible values are specified in section [2.2.2.11](#Section_2.2.2.11)) is set to plaIndex, the IValueMapItems in that IValueMap can be a collection of Levels (specified as a property of the ITraceDataProvider in section [3.2.4.11](#Section_3.2.4.11)) since only one level can be set on an ITraceDataProvider at a time. In this example, the Key will be a string that refers to the name of the level. The key can be any BSTR other than the empty BSTR. The Performance Logs and Alerts Protocol does not have any predetermined values or semantics for this key.
 
 [propput] HRESULT Key(
 
@@ -8592,12 +8592,12 @@ The Key (Put) method sets the Key property in the IValueMapItem, as specified in
 
 **key:** Supplies the key value, specified as a BSTR, to set in the IValueMapItem.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.7"></a>
 ##### 3.2.4.17.7 Value (Get) (Opnum 13)
 
-The Value (Get) method retrieves the Value property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14).
+The Value (Get) method retrieves the Value property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17).
 
 [propget] HRESULT Value(
 
@@ -8607,12 +8607,12 @@ The Value (Get) method retrieves the Value property, as specified in the propert
 
 **Value:** Receives a value of the item.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.8"></a>
 ##### 3.2.4.17.8 Value (Put) (Opnum 14)
 
-The Value (Put) method retrieves the Value property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14).
+The Value (Put) method retrieves the Value property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17).
 
 [propput] HRESULT Value(
 
@@ -8622,12 +8622,12 @@ The Value (Put) method retrieves the Value property, as specified in the propert
 
 **Value:** Supplies a value of the item.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.9"></a>
 ##### 3.2.4.17.9 ValueMapType (Get) (Opnum 15)
 
-The ValueMapType (Get) method retrieves the ValueMapType property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14).
+The ValueMapType (Get) method retrieves the ValueMapType property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17).
 
 [propget] HRESULT ValueMapType(
 
@@ -8637,12 +8637,12 @@ The ValueMapType (Get) method retrieves the ValueMapType property, as specified 
 
 **type:** Receives the type of item, as specified in section [2.2.2.11](#Section_2.2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.17.10"></a>
 ##### 3.2.4.17.10 ValueMapType (Put) (Opnum 16)
 
-The ValueMapType (Put) method sets the ValueMapType property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.18.14).
+The ValueMapType (Put) method sets the ValueMapType property, as specified in the property table in section [3.2.4.17](#Section_3.2.4.17).
 
 [propput] HRESULT ValueMapType(
 
@@ -8652,7 +8652,7 @@ The ValueMapType (Put) method sets the ValueMapType property, as specified in th
 
 **type:** Supplies the type of item. For valid values, see the ValueMapType enumeration specified in section [2.2.2.11](#Section_2.2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18"></a>
 #### 3.2.4.18 IValueMap
@@ -8663,7 +8663,7 @@ Objects that implement this interface represent value maps. The following proper
 
 | Property | Read/write | Description |
 | --- | --- | --- |
-| _NewEnum | R | An enumeration object of type IEnumVariant containing a snapshot of the [IValueMapItem](#Section_3.2.4.18.14) objects in this collection. The enumeration object is specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 3.3. |
+| _NewEnum | R | An enumeration object of type IEnumVariant containing a snapshot of the [IValueMapItem](#Section_3.2.4.17) objects in this collection. The enumeration object is specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 3.3. |
 | Count | R | The number of value map items in the value map. |
 | Description | RW | Specifies the description of the value map. |
 | Item | R | Retrieves the requested value map item from the value map. |
@@ -8674,24 +8674,24 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Count (Get)](#Section_3.2.4.4.1) | Retrieves the Count property. Opnum: 7 |
-| [Item (Get)](#Section_3.2.4.4.2) | Retrieves the Item property. Opnum: 8 |
-| [_NewEnum (Get)](#Section_3.2.4.4.3) | Retrieves the NewEnum property. Opnum: 9 |
-| [Description (Get)](#Section_3.2.4.1.4) | Retrieves the Description property. Opnum: 10 |
-| [Description (Put)](#Section_3.2.4.1.5) | Sets the Description property. Opnum: 11 |
-| [Value (Get)](#Section_3.2.4.17.7) | Retrieves the Value property. Opnum: 12 |
-| [Value (Put)](#Section_3.2.4.18) | Sets the Value property. Opnum: 13 |
-| [ValueMapType (Get)](#Section_3.2.4.17.9) | Retrieves the ValueMapType property. Opnum: 14 |
-| [ValueMapType (Put)](#Section_3.2.4.17.10) | Sets the ValueMapType property. Opnum: 15 |
-| [Add](#Section_3.2.4.18) | Adds an item to the collection. Opnum: 16 |
-| [Remove](#Section_3.2.4.4.5) | Removes an item from the collection. Opnum: 17 |
-| [Clear](#Section_3.2.4.4.6) | Removes all items from the collection Opnum: 18 |
-| [AddRange](#Section_3.2.4.4.7) | Adds one or more items to the collection. Opnum: 19 |
+| [Count (Get)](#Section_3.2.4.18.1) | Retrieves the Count property. Opnum: 7 |
+| [Item (Get)](#Section_3.2.4.18.2) | Retrieves the Item property. Opnum: 8 |
+| [_NewEnum (Get)](#Section_3.2.4.18.3) | Retrieves the NewEnum property. Opnum: 9 |
+| [Description (Get)](#Section_3.2.4.18.4) | Retrieves the Description property. Opnum: 10 |
+| [Description (Put)](#Section_3.2.4.18.5) | Sets the Description property. Opnum: 11 |
+| [Value (Get)](#Section_3.2.4.18.6) | Retrieves the Value property. Opnum: 12 |
+| [Value (Put)](#Section_3.2.4.18.7) | Sets the Value property. Opnum: 13 |
+| [ValueMapType (Get)](#Section_3.2.4.18.8) | Retrieves the ValueMapType property. Opnum: 14 |
+| [ValueMapType (Put)](#Section_3.2.4.18.9) | Sets the ValueMapType property. Opnum: 15 |
+| [Add](#Section_3.2.4.18.10) | Adds an item to the collection. Opnum: 16 |
+| [Remove](#Section_3.2.4.18.11) | Removes an item from the collection. Opnum: 17 |
+| [Clear](#Section_3.2.4.18.12) | Removes all items from the collection Opnum: 18 |
+| [AddRange](#Section_3.2.4.18.13) | Adds one or more items to the collection. Opnum: 19 |
 | [CreateValueMapItem](#Section_3.2.4.18.14) | Creates a value map item object. Opnum: 20 |
 
 Opnums 0, 1, and 2 are reserved for the IUnknown interface. Opnums 3, 4, 5, and 6 are reserved for the IDispatch interface.
 
-The IValueMap is used by the Performance Logs and Alerts Protocol for primarily two purposes. The first use of the IValueMap is to return properties of the [**data collector set**](#gt_data-collector-set) (or its encapsulated objects) that could not be set by the server. Sections [3.2.4.1.54](#Section_3.2.4.1), [3.2.4.1.58](#Section_3.2.4.1.58), [3.2.4.2.24](#Section_3.2.4.2.24), [3.2.4.5.22](#Section_3.2.4.5.22), and [3.2.4.15.8](#Section_3.2.4.15.8) provide more information on how the IValueMap is used for this purpose. The second primary use of IValueMap in the Performance Logs and Alerts Protocol is to return information about a trace provider in the ITraceDataProvider interface. Sections [3.2.4.11.5](#Section_3.2.4.11), [3.2.4.11.6](#Section_2.2.11.1.2), and [3.2.4.11.7](#Section_2.2.11.1.2) detail how information about the trace provider is returned using the IValueMap.
+The IValueMap is used by the Performance Logs and Alerts Protocol for primarily two purposes. The first use of the IValueMap is to return properties of the [**data collector set**](#gt_data-collector-set) (or its encapsulated objects) that could not be set by the server. Sections [3.2.4.1.54](#Section_3.2.4.1.54), [3.2.4.1.58](#Section_3.2.4.1.58), [3.2.4.2.24](#Section_3.2.4.2.24), [3.2.4.5.22](#Section_3.2.4.5.22), and [3.2.4.15.8](#Section_3.2.4.15.8) provide more information on how the IValueMap is used for this purpose. The second primary use of IValueMap in the Performance Logs and Alerts Protocol is to return information about a trace provider in the ITraceDataProvider interface. Sections [3.2.4.11.5](#Section_3.2.4.11.5), [3.2.4.11.6](#Section_3.2.4.11.6), and [3.2.4.11.7](#Section_3.2.4.11.7) detail how information about the trace provider is returned using the IValueMap.
 
 <a id="Section_3.2.4.18.1"></a>
 ##### 3.2.4.18.1 Count (Get) (Opnum 7)
@@ -8706,7 +8706,7 @@ The Count (Get) method retrieves the Count property.
 
 **retVal:** Receives the number of items in the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.2"></a>
 ##### 3.2.4.18.2 Item (Get) (Opnum 8)
@@ -8725,12 +8725,12 @@ The Item (Get) method retrieves the Item property.
 
 **value:** An IValueMapItem interface of the retrieved item.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.3"></a>
 ##### 3.2.4.18.3 _NewEnum (Get) (Opnum 9)
 
-The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
+The _NewEnum (Get) method retrieves the NewEnum property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18).
 
 [propget, id(DISPID_NEWENUM)] HRESULT _NewEnum(
 
@@ -8740,7 +8740,7 @@ The _NewEnum (Get) method retrieves the NewEnum property, as specified in the pr
 
 **retVal:** Receives a pointer to a variant enumeration object.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.4"></a>
 ##### 3.2.4.18.4 Description (Get) (Opnum 10)
@@ -8755,7 +8755,7 @@ The Description (Get) method retrieves the Description property.
 
 **description:** Receives the description of the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.5"></a>
 ##### 3.2.4.18.5 Description (Put) (Opnum 11)
@@ -8770,12 +8770,12 @@ The Description (Put) method sets the Description property.
 
 **description:** Supplies the description of the collection.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.6"></a>
 ##### 3.2.4.18.6 Value (Get) (Opnum 12)
 
-The Value (Get) method retrieves the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
+The Value (Get) method retrieves the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18).
 
 [propget] HRESULT Value(
 
@@ -8785,12 +8785,12 @@ The Value (Get) method retrieves the Value property, as specified in the propert
 
 **Value:** Receives the value of the collection. Value can be a VARIANT type specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.29.2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.7"></a>
 ##### 3.2.4.18.7 Value (Put) (Opnum 13)
 
-The Value (Put) method sets the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
+The Value (Put) method sets the Value property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18).
 
 [propput] HRESULT Value(
 
@@ -8800,12 +8800,12 @@ The Value (Put) method sets the Value property, as specified in the property tab
 
 **Value:** Receives the value of the collection. Value can be a VARIANT type specified in [MS-OAUT](../MS-OAUT/MS-OAUT.md) section 2.2.29.2.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.8"></a>
 ##### 3.2.4.18.8 ValueMapType (Get) (Opnum 14)
 
-The ValueMapType (Get) method retrieves the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
+The ValueMapType (Get) method retrieves the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18).
 
 [propget] HRESULT ValueMapType(
 
@@ -8815,12 +8815,12 @@ The ValueMapType (Get) method retrieves the ValueMapType property, as specified 
 
 **type:** Receives the type of items in the collection, as specified in the ValueMapType enumeration in section [2.2.2.11](#Section_2.2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.9"></a>
 ##### 3.2.4.18.9 ValueMapType (Put) (Opnum 15)
 
-The ValueMapType (Put) method sets the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18.8).
+The ValueMapType (Put) method sets the ValueMapType property, as specified in the property table in section [3.2.4.18](#Section_3.2.4.18).
 
 [propput] HRESULT ValueMapType(
 
@@ -8830,7 +8830,7 @@ The ValueMapType (Put) method sets the ValueMapType property, as specified in th
 
 **type:** Supplies the type of items in the collection, as specified in the ValueMapType enumeration in section [2.2.2.11](#Section_2.2.2.11).
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.10"></a>
 ##### 3.2.4.18.10 Add (Opnum 16)
@@ -8845,7 +8845,7 @@ VARIANT value
 
 **value:** Supplies the items to be added. If the variant type is VT_DISPATCH, then it is interpreted as a value map item to be added. If the value is an integer (the variant type is VT_I4, VT_UI4, VT_I8, or VT_UI8), then a value map item is created and added to the value map. If the value is a string (the variant type is VT_BSTR), PLA MUST attempt to convert the string to an integer. The string is a BSTR where the first character in the string can be a negative sign, and that can be followed by "0x" for a hexadecimal value; each subsequent character is then the characters A-F or digits 0-9. Because the value represented by the string can be negative, the integer is of type LONGLONG. If successful, the PLA Protocol MUST add an item with the given integer value. If PLA cannot convert the string, the PLA Protocol MUST search the collection for a key that matches the string. If found, the PLA Protocol MUST enable the item; otherwise, the add fails.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.11"></a>
 ##### 3.2.4.18.11 Remove (Opnum 17)
@@ -8860,7 +8860,7 @@ VARIANT value
 
 **value:** Supplies which value map item to remove. If the variant type is VT_I4 or VT_UI4, it is interpreted as the zero-based index of the value map item to remove. If the variant type is VT_DISPATCH, it is interpreted as a pointer to the value map item to remove.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.12"></a>
 ##### 3.2.4.18.12 Clear (Opnum 18)
@@ -8871,7 +8871,7 @@ HRESULT Clear();
 
 This method has no parameters.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.13"></a>
 ##### 3.2.4.18.13 AddRange (Opnum 19)
@@ -8886,12 +8886,12 @@ IValueMap* map
 
 **map:** Supplies a value map object whose value map items will be added to this value map.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.18.14"></a>
 ##### 3.2.4.18.14 CreateValueMapItem (Opnum 20)
 
-The CreateValueMapItem method creates an object implementing the [IValueMapItem](#Section_3.2.4.18.14) interface. This object can be configured and then passed to [IValueMap::Add](#Section_3.2.4.18). This method exists to provide a means for populating ValueMaps.
+The CreateValueMapItem method creates an object implementing the [IValueMapItem](#Section_3.2.4.17) interface. This object can be configured and then passed to [IValueMap::Add](#Section_3.2.4.18.10). This method exists to provide a means for populating ValueMaps.
 
 HRESULT CreateValueMapItem(
 
@@ -8901,7 +8901,7 @@ HRESULT CreateValueMapItem(
 
 **Item:** Receives the newly created value map item.
 
-**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](../MS-ERREF/MS-ERREF.md) or one of the errors as defined in [MS-ERREF] section 2.1.
+**Return Values:** This method MUST return an HRESULT with the severity bit clear on success as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md); otherwise, it MUST return one of the errors as defined in [2.2.1](#Section_2.2.1) or one of the errors as defined in [MS-ERREF] section 2.1.
 
 <a id="Section_3.2.4.19"></a>
 #### 3.2.4.19 Schema
@@ -9304,7 +9304,7 @@ The following table lists the relevant sections for each of the key elements in 
 | DataManager | [3.2.4.2](#Section_3.2.4.2) |
 | Rules | [3.2.4.4](#Section_3.2.4.4) |
 | FolderAction | [3.2.4.3](#Section_3.2.4.3) |
-| ValueMapItem | [3.2.4.17](#Section_3.2.4.18.14) |
+| ValueMapItem | [3.2.4.17](#Section_3.2.4.17) |
 
 There can be more than one of the same type of data collector type within a data collector set. There can also be many ValueMapItems within the Level, KeywordsAny, KeywordsAll and Properties elements.
 
@@ -9550,10 +9550,10 @@ This protocol introduces no additional security considerations for transmissions
 
 | Security Parameter | Section |
 | --- | --- |
-| ITraceDataProvider::SetSecurity | [3.2.4.11.17](#Section_5) |
-| ITraceDataProvider::GetSecurity | [3.2.4.11.18](#Section_5) |
+| ITraceDataProvider::SetSecurity | [3.2.4.11.17](#Section_3.2.4.11.17) |
+| ITraceDataProvider::GetSecurity | [3.2.4.11.18](#Section_3.2.4.11.18) |
 | ITraceDataCollector::ProcessMode | [3.2.4.9](#Section_3.2.4.9) Property table the row labeled ProcessMode. |
-| IDataCollectorSet::SetCredentials | [3.2.4.1.52](#Section_3.2.4.1) |
+| IDataCollectorSet::SetCredentials | [3.2.4.1.52](#Section_3.2.4.1.52) |
 | IDataCollectorSet::Security | [3.2.4.1](#Section_3.2.4.1) Property table the row labeled Security. |
 
 <a id="Section_6"></a>
@@ -10810,7 +10810,7 @@ At runtime, the performance counter provider needs to register itself with the s
 
 Once the provider has registered the different counter sets and their corresponding performance counters through the PerfSetCounterSetInfo method, the data provider can then create instances of the counter sets by calling the PerfCreateInstance method [[MSDN-PLA-PCIF]](https://go.microsoft.com/fwlink/?LinkId=125382). The subsystem is made aware of each newly created counter set instance in order to expose this information to interested performance counter consumers. Once this has been completed, the performance counter provider can now update the performance counter values using the following methods that are exposed by the subsystem (note that which method is used depends on the type of the performance counter): PerfSetULongCounterValue [[MSDN-PLA-PSUCVF]](https://go.microsoft.com/fwlink/?LinkId=125388), PerfSetULongLongCounterValue[[MSDN-PLA-PSULCVF]](https://go.microsoft.com/fwlink/?LinkId=125389), or PerfSetCouterRefValue [[MSDN-PLA-PSCRVF]](https://go.microsoft.com/fwlink/?LinkId=125384). A performance counter provider can update the value of any instance of a performance counter using these methods at any arbitrary interval. At the end, the performance counter provider unregisters with the subsystem using the PerfStopProvider method [[MSDN-PLA-PSTPF]](https://go.microsoft.com/fwlink/?LinkId=125387); at this point, performance counter consumers cannot query for those performance counter values that were unregistered.
 
-<12> Section 3.2.4.1: In Windows Vista, if the Segment property is enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.18) method) and the SegmentMaxSize is set to a value greater than zero, PLA will stop the [**data collector set**](#gt_data-collector-set) when the log file size reaches the SegmentMaxSize value.
+<12> Section 3.2.4.1: In Windows Vista, if the Segment property is enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.19) method) and the SegmentMaxSize is set to a value greater than zero, PLA will stop the [**data collector set**](#gt_data-collector-set) when the log file size reaches the SegmentMaxSize value.
 
 <13> Section 3.2.4.1.5: Localized strings can be specified in the form @binary,#id, where binary is the EXE or DLL that contains the localized resource string, and id is the string resource identifier.
 
@@ -10818,7 +10818,7 @@ If the description is set to the @binary,#id form, when retrieving the descripti
 
 <14> Section 3.2.4.1.8: Localized strings can be specified in the form @binary,#id, where binary is the EXE or DLL that contains the localized resource string and id is the string resource identifier. If the display name is set to the @binary,#id form, it is returned as the localized string. The original display name string can be retrieved by calling the IDataCollectorSet::DisplayNameUnresolved method, as specified in section [3.2.4.1.9](#Section_3.2.4.1.9).
 
-<15> Section 3.2.4.1.23: In Windows Vista, if the Segment property has been enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.18) method) and the SegmentMaxSize is set to a value greater than zero, the Performance Logs and Alerts Protocol stops the data collector set when the log file size reaches the SegmentMaxSize value.
+<15> Section 3.2.4.1.23: In Windows Vista, if the Segment property has been enabled (through the IDataCollectorSet::[Segment](#Section_3.2.4.1.19) method) and the SegmentMaxSize is set to a value greater than zero, the Performance Logs and Alerts Protocol stops the data collector set when the log file size reaches the SegmentMaxSize value.
 
 <16> Section 3.2.4.1.52: If credentials are not specified, the Performance Logs and Alerts Protocol tries to run the set as LocalSystem if the current user is a member of the administrator group.
 
@@ -10851,7 +10851,7 @@ To collect registry information from a remote computer, include the computer nam
 
 <21> Section 3.2.4.8.4: The event identifier of the event is 2031 and the channel used is Microsoft-Windows-Diagnosis-Pla/Operational.
 
-<22> Section 3.2.4.9: On Windows, the following properties of the ITraceDataCollector are only updated when the [IDataCollectorSet::Query](#Section_3.2.4.1) method is called and only if the data collector set is of type TraceSession or BootTraceSession: BuffersLost, BuffersWritten, EventsLost, FreeBuffers, RealTimeBuffersLost, SessionThreadId. The values of these properties are not updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) method is called. The values of the above properties are not updated by calling the IDataCollectorSet::Query or IDataCollectorSet::Start methods if the data collector set type is SystemDataCollectorSet or ServerDataCollectorSet.
+<22> Section 3.2.4.9: On Windows, the following properties of the ITraceDataCollector are only updated when the [IDataCollectorSet::Query](#Section_3.2.4.1.53) method is called and only if the data collector set is of type TraceSession or BootTraceSession: BuffersLost, BuffersWritten, EventsLost, FreeBuffers, RealTimeBuffersLost, SessionThreadId. The values of these properties are not updated when the [IDataCollectorSet::Start](#Section_3.2.4.1.56) method is called. The values of the above properties are not updated by calling the IDataCollectorSet::Query or IDataCollectorSet::Start methods if the data collector set type is SystemDataCollectorSet or ServerDataCollectorSet.
 
 <23> Section 3.2.4.9: On Windows, the following properties of the ITraceDataCollector are only updated when the IDataCollectorSet::Query method is called and only if the data collector set is of type TraceSession or BootTraceSession: BuffersLost, BuffersWritten, EventsLost, FreeBuffers, RealTimeBuffersLost, SessionThreadId. The values of these properties are not updated when the IDataCollectorSet::Start method is called. The values of the above properties are not updated by calling the IDataCollectorSet::Query or IDataCollectorSet::Start methods if the data collector set type is SystemDataCollectorSet or ServerDataCollectorSet.
 
@@ -10875,7 +10875,7 @@ To collect registry information from a remote computer, include the computer nam
 
 <33> Section 3.2.4.9.21: In Windows, NumberOfBuffers is an indication of how many buffers the ETW system is using for a particular trace session. When the client sets this property, the only change that will take place is that the NumberOfBuffers property of the ITraceDataCollector will be set to the client value. If the client were then to retrieve this, it would get the same value that it had set. However, if the Query method is executed on the IDataCollectorSet, and the IDataCollectorSet contains ITraceDataCollectors, then the NumberOfBuffers will be updated to reflect the number of buffers that ETW is using for its tracing session. In this case, the value of the NumberOfBuffers can be different than what the client originally had specified, but will be greater than or equal to the value of the MinimumBuffers property, and less than or equal to the value of the MaximumBuffers property.
 
-<34> Section 3.2.4.15.7: On Windows, the IDataCollectorCollection::AddRange method will return an error that is defined in section [2.2.1](../MS-ERREF/MS-ERREF.md) or [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
+<34> Section 3.2.4.15.7: On Windows, the IDataCollectorCollection::AddRange method will return an error that is defined in section [2.2.1](#Section_2.2.1) or [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.
 
 <35> Section 3.2.4.16.8: The Windows implementation of the Performance Logs and Alerts Protocol uses either the file system or the task schedule as a persistent store.
 

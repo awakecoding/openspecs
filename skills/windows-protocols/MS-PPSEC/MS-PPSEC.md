@@ -297,7 +297,7 @@ None.
 
 [**P2P Grouping**](#gt_p2p-grouping) implements Group Security, which is a Graph Security Provider [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md). Group Security provides two classes of security features: connection security and record security.
 
-Connection security is implemented by the Group Connect subprotocol (see section [1.3.3](#Section_2.2.2)), which provides authentication and message encryption within a connection secured by TLS [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474).
+Connection security is implemented by the Group Connect subprotocol (see section [1.3.3](#Section_1.3.3)), which provides authentication and message encryption within a connection secured by TLS [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474).
 
 Record security provides authorization and record integrity, by implementing record validation and record signing.
 
@@ -742,7 +742,7 @@ This field is fixed at group creation time and MUST NOT be modified.
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 Password
 
-If the version of the Security Properties packet (section [2.2.3.1](#Section_5)) is 1.1 the following MUST be appended to the end of the Security Properties record:
+If the version of the Security Properties packet (section [2.2.3.1](#Section_2.2.3.1)) is 1.1 the following MUST be appended to the end of the Security Properties record:
 
 ```mermaid
 packet-beta
@@ -802,7 +802,7 @@ packet-beta
 
 **Password Hash (variable):** The SHA-1 hash of the password, encoded as a string. See section [2.2.1.2](#Section_2.2.1.2) for details.
 
-**Password Role UUID (16 bytes):** The role that a new member receives when joining the group using this password, encoded as a little-endian [**UUID**](#gt_universally-unique-identifier-uuid). The UUID MUST be one of the legal UUIDs listed in section [2.2.5.3](#Section_1.3.2.3).
+**Password Role UUID (16 bytes):** The role that a new member receives when joining the group using this password, encoded as a little-endian [**UUID**](#gt_universally-unique-identifier-uuid). The UUID MUST be one of the legal UUIDs listed in section [2.2.5.3](#Section_2.2.5.3).
 
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 Membership
@@ -819,7 +819,7 @@ packet-beta
   48-95: "GMC Data (variable)"
 ```
 
-**Minor Version (1 byte):** The Group Security minor version. The only defined versions are 1.0 and 1.1, hence Minor Version MUST be either 0x00 or 0x01. This field MUST match the **Minor Version** field in the Security Properties record (section [2.2.3.1](#Section_5)).
+**Minor Version (1 byte):** The Group Security minor version. The only defined versions are 1.0 and 1.1, hence Minor Version MUST be either 0x00 or 0x01. This field MUST match the **Minor Version** field in the Security Properties record (section [2.2.3.1](#Section_2.2.3.1)).
 
 **Major Version (1 byte):** The Group Security major version. The only defined versions are 1.0 and 1.1, hence the Major Version MUST be 0x01. This field MUST match the **Major Version** field in the Security Properties record (section 2.2.3.1).
 
@@ -963,7 +963,7 @@ Figure 2: Required fields for each certificate type
 
 | Sz_OID_PEERNET_GROUPING_PEERNAME | Usage | Description |
 | --- | --- | --- |
-| 1.3.6.1.4.1.311.44.3.1 | The [**PeerName**](#gt_peer-name) of the Group | The PnrpPeerName extension ([MS-PNRP] section 2.2.3.5.1.3) is used to store the Peer Name of the Group to which the certificate belongs. This extension is used to validate the certificate and the certificate chain for a Group, as specified in sections [2.2.5.2](../MS-PNRP/MS-PNRP.md) and 2.2.5.2. |
+| 1.3.6.1.4.1.311.44.3.1 | The [**PeerName**](#gt_peer-name) of the Group | The PnrpPeerName extension ([MS-PNRP] section 2.2.3.5.1.3) is used to store the Peer Name of the Group to which the certificate belongs. This extension is used to validate the certificate and the certificate chain for a Group, as specified in sections [2.2.5.2](#Section_2.2.5.2) and 2.2.5.2. |
 
 **szOID_PEERNET_IDENTITY_FLAGS:**
 
@@ -1030,7 +1030,7 @@ To be valid, a certificate chain MUST meet all constraints imposed by [**PNRP**]
 - The generated string MUST match with the Authority part of the Group Peer Name.
 - All intermediary and leaf certificates MUST be [**GMCs**](#gt_group-membership-certificate-gmc).
 - The PnrpPeerName for all certificates MUST be the same.
-- For a GMC parent and GMC child, the Roles specified in the child certificate MUST be issuable by one or more Roles specified in the parent certificate. See section [2.2.5.3](#Section_1.3.2.3) below.
+- For a GMC parent and GMC child, the Roles specified in the child certificate MUST be issuable by one or more Roles specified in the parent certificate. See section [2.2.5.3](#Section_2.2.5.3) below.
 - For a GRC parent and GMC child, any Role is valid.
 <a id="Section_2.2.5.3"></a>
 #### 2.2.5.3 Roles
@@ -1317,7 +1317,7 @@ This is triggered by a request from the higher layer application to create a new
 - Any value other than the above MUST cause the operation to abort and it is recommended that an error be returned to the application.
 The Grouping Security Protocol implementation MUST perform the following steps:
 
-- Build the Security Properties record as specified in section [2.2.3.1](#Section_5). All non-constant fields defined in section 2.2.3.1 MUST be filled based on the higher-layer application request. In particular:
+- Build the Security Properties record as specified in section [2.2.3.1](#Section_2.2.3.1). All non-constant fields defined in section 2.2.3.1 MUST be filled based on the higher-layer application request. In particular:
 - Group Security Major/Minor Version: The Group Security version MUST be specified as part of the request, so that the appropriate version numbers can be published in the Security Properties record and creator Membership record. The version MUST be 1.0 if the application has specified that the Group supports only GMC-based authentication. The version MUST be 1.1 if the application has specified that the Group supports password-based authentication.
 - Cloud: The PNRP Cloud Name supplied by the higher-layer application MUST be stored as the Cloud Name.
 - Build a Membership record containing the Local [**GMC chain**](#gt_group-membership-certificate-gmc-chain) as specified in section [3.1.7.5](#Section_3.1.7.5).
@@ -1376,7 +1376,7 @@ If no nodes are found, or connections to all the nodes that PNRP returned fail, 
 When the higher-layer application requests the node to start listening for incoming connections, the [**P2P Grouping**](#gt_p2p-grouping) Security Protocol MUST perform the following steps:
 
 - Trigger the [**P2P Graphing**](#gt_p2p-graphing) Protocol to start listening, as specified in [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md) section 3.1.4.8.
-- Publish the node information in the [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) Cloud identified by the Cloud Name opened earlier as specified in section [3.1.4.2](../MS-PNRP/MS-PNRP.md), using the following input: (See [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 3.2.4.1 for detailed specification of publishing a [**Peer Name**](#gt_peer-name) in PRNP.)
+- Publish the node information in the [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) Cloud identified by the Cloud Name opened earlier as specified in section [3.1.4.2](#Section_3.1.4.2), using the following input: (See [MS-PNRP](../MS-PNRP/MS-PNRP.md) section 3.2.4.1 for detailed specification of publishing a [**Peer Name**](#gt_peer-name) in PRNP.)
 - The elements to form a Peer Name are the following:
 - The **local IDC** MUST be used as the [**Peer Identity**](#gt_peer-identity).
 - The local [**GMC chain**](#gt_group-membership-certificate-gmc-chain) MUST be used as the Certificate Chain.
@@ -1385,7 +1385,7 @@ When the higher-layer application requests the node to start listening for incom
 - The Friendly Name string MUST contain the Classifier portion of the **Group Peer Name**. (See section [3.1.1](#Section_3.1.1).)
 - An Extended Payload MUST NOT be specified.
 - An Endpoint List MUST be specified using at most 4 of the addresses, randomly selected, on which P2P Graphing is listening.
-After the node information is published in PNRP, the node MUST publish its Membership record as specified in section [3.1.7.1](#Section_1.3.2.4) if:
+After the node information is published in PNRP, the node MUST publish its Membership record as specified in section [3.1.7.1](#Section_3.1.7.1) if:
 
 - It has not already been published.
 and
@@ -1419,17 +1419,17 @@ The following validations MUST be performed on the application-provided data. If
 - The Roles array MUST be verified as specified in [MS-PNRP](../MS-PNRP/MS-PNRP.md).
 - Validity Start MUST be greater than the ValidityStart value in the GMC of the local Node.
 - Validity End MUST be greater than ValidityEnd value in the GMC of the local Node.
-When the higher-layer application triggers publication of new credentials for an existing node, a new [**GMC chain**](#gt_group-membership-certificate-gmc-chain) MUST be created (based on section [2.2.5.3](#Section_1.3.2.3)) for the Peer Identity specified. This GMC chain MUST then be PKCS#7-encoded as specified in section [2.2.3.2](#Section_2.2.3.2), and published in a Membership record, as specified in section [3.1.7.1](#Section_1.3.2.4), if the application so specifies. The GMC chain MUST then be returned to the application.
+When the higher-layer application triggers publication of new credentials for an existing node, a new [**GMC chain**](#gt_group-membership-certificate-gmc-chain) MUST be created (based on section [2.2.5.3](#Section_2.2.5.3)) for the Peer Identity specified. This GMC chain MUST then be PKCS#7-encoded as specified in section [2.2.3.2](#Section_2.2.3.2), and published in a Membership record, as specified in section [3.1.7.1](#Section_3.1.7.1), if the application so specifies. The GMC chain MUST then be returned to the application.
 
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 Modify Security Properties
 
-To modify the group's security properties, the higher-layer application on the group creator node MUST trigger the update and publishing of an updated Security Properties record. Certain properties MUST NOT be changed as a result of the update. See section [3.1.4.7](#Section_3.1.7.1) for details.
+To modify the group's security properties, the higher-layer application on the group creator node MUST trigger the update and publishing of an updated Security Properties record. Certain properties MUST NOT be changed as a result of the update. See section [3.1.4.7](#Section_3.1.4.7) for details.
 
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 Record Publication
 
-When a higher-layer application requests a record be published by [**P2P Grouping**](#gt_p2p-grouping), the local node MUST follow the steps specified in section [3.1.7.1](#Section_1.3.2.4).
+When a higher-layer application requests a record be published by [**P2P Grouping**](#gt_p2p-grouping), the local node MUST follow the steps specified in section [3.1.7.1](#Section_3.1.7.1).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
@@ -1485,7 +1485,7 @@ When a record is received by [**P2P Graphing**](#gt_p2p-graphing), it passes the
 If the record is one of the two P2P Grouping defined record types, it MUST pass further validation. For a Membership record, the following MUST be validated:
 
 - The record MUST NOT have the deleted flag set. The size of the record payload MUST be large enough to hold the data it claims to contain.
-- The version MUST match the Group Security version defined in the Security Properties record, section [2.2.3.1](#Section_5).
+- The version MUST match the Group Security version defined in the Security Properties record, section [2.2.3.1](#Section_2.2.3.1).
 - The GMC MUST be validated as specified in sections [2.2.5.2](#Section_2.2.5.2).
 If the Membership record is valid, the P2P Grouping protocol implementation MUST:
 
@@ -1518,7 +1518,7 @@ After [**P2P Graphing**](#gt_p2p-graphing) notifies [**P2P Grouping**](#gt_p2p-g
 <a id="Section_3.1.7.4"></a>
 #### 3.1.7.4 Long Term Partition Repair
 
-When [**P2P Graphing**](#gt_p2p-graphing) requests that [**P2P Grouping**](#gt_p2p-grouping) form a new connection, P2P Grouping MUST use [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) to discover another node and attempt a connection, as specified in section [3.1.4.3](#Section_3.2.4.1). This happens as part of the P2P Graphing Long Term Partition Repair, as specified in [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md) section 1.3.2.5.
+When [**P2P Graphing**](#gt_p2p-graphing) requests that [**P2P Grouping**](#gt_p2p-grouping) form a new connection, P2P Grouping MUST use [**PNRP**](#gt_peer-name-resolution-protocol-pnrp) to discover another node and attempt a connection, as specified in section [3.1.4.3](#Section_3.1.4.3). This happens as part of the P2P Graphing Long Term Partition Repair, as specified in [MS-PPGRH](../MS-PPGRH/MS-PPGRH.md) section 1.3.2.5.
 
 <a id="Section_3.1.7.5"></a>
 #### 3.1.7.5 GMC Chain Creation
@@ -1567,7 +1567,7 @@ None.
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-In addition to the initialization specified in section [3.1.3](#Section_3.2.3), the TLS implementation MUST be initialized to use the **Local IDC** as the client certificate to establish the secure connection. The **Group Connect State** datum MUST be set to the "Initial" state.
+In addition to the initialization specified in section [3.1.3](#Section_3.1.3), the TLS implementation MUST be initialized to use the **Local IDC** as the client certificate to establish the secure connection. The **Group Connect State** datum MUST be set to the "Initial" state.
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
@@ -1575,7 +1575,7 @@ In addition to the initialization specified in section [3.1.3](#Section_3.2.3), 
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Connecting to a Group
 
-This event is triggered by a higher-layer application request to connect to an existing group, as specified in section [3.1.4.3](#Section_3.2.4.1). [**P2P Grouping**](#gt_p2p-grouping) implementation MUST have already discovered one or more Group participants, and selected one peer to connect to, as specified in section 3.1.4.3. The Group Connect sub-protocol implementation MUST initiate the TLS negotiation [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474) with the chosen peer. If the TLS negotiation fails, this instance of the Group Connect subprotocol MUST be terminated. The Grouping protocol implementation MUST terminate the TLS connection and notify the higher-layer application of the failure.
+This event is triggered by a higher-layer application request to connect to an existing group, as specified in section [3.1.4.3](#Section_3.1.4.3). [**P2P Grouping**](#gt_p2p-grouping) implementation MUST have already discovered one or more Group participants, and selected one peer to connect to, as specified in section 3.1.4.3. The Group Connect sub-protocol implementation MUST initiate the TLS negotiation [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474) with the chosen peer. If the TLS negotiation fails, this instance of the Group Connect subprotocol MUST be terminated. The Grouping protocol implementation MUST terminate the TLS connection and notify the higher-layer application of the failure.
 
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
@@ -1696,7 +1696,7 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-In addition to the initialization specified in section [3.1.3](#Section_3.2.3), the TLS implementation MUST be initialized to use the **Local IDC** as the server certificate to establish the secure connection. The **Group Authenticate State** datum MUST be set to "Initial" state.
+In addition to the initialization specified in section [3.1.3](#Section_3.1.3), the TLS implementation MUST be initialized to use the **Local IDC** as the server certificate to establish the secure connection. The **Group Authenticate State** datum MUST be set to "Initial" state.
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Higher-Layer Triggered Events
@@ -1704,7 +1704,7 @@ In addition to the initialization specified in section [3.1.3](#Section_3.2.3), 
 <a id="Section_3.3.4.1"></a>
 #### 3.3.4.1 Group Listening for Incoming Connect
 
-When a higher-layer application requests that the Grouping Security Protocol start listening for and accepting incoming Group Connect requests, as specified in section [3.1.7.1](#Section_1.3.2.4), the local node MUST already be part of the group, with a local [**GMC**](#gt_group-membership-certificate-gmc) and [**GMC chain**](#gt_group-membership-certificate-gmc-chain). The Group Connect subprotocol implementation MUST use the **Local IDC** as the server certificate and listen for incoming TLS connection requests [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474). If the binding of the **Local IDC** fails, this instance of the Group Connect subprotocol MUST be terminated.
+When a higher-layer application requests that the Grouping Security Protocol start listening for and accepting incoming Group Connect requests, as specified in section [3.1.7.1](#Section_3.1.7.1), the local node MUST already be part of the group, with a local [**GMC**](#gt_group-membership-certificate-gmc) and [**GMC chain**](#gt_group-membership-certificate-gmc-chain). The Group Connect subprotocol implementation MUST use the **Local IDC** as the server certificate and listen for incoming TLS connection requests [[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474). If the binding of the **Local IDC** fails, this instance of the Group Connect subprotocol MUST be terminated.
 
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
@@ -1792,19 +1792,19 @@ If the Password message is received when the Authenticator is in the "Hello Sent
 If neither of the above conditions are true, then the password MUST be validated as follows.
 
 - The Password Data MUST be locally generated based on the **Group Password Hash** datum and the remote [**Peer Name**](#gt_peer-name).
-- The Password Data is the SHA-1 hash of the null-terminated Password Hash String, as specified in section [2.2.1.2](#Section_2.2.1.2), concatenated with the null-terminated Remote Peer Name [**Unicode**](#gt_unicode) string, as specified in [2.2.2.4](#Section_3.3.5.2.5).
+- The Password Data is the SHA-1 hash of the null-terminated Password Hash String, as specified in section [2.2.1.2](#Section_2.2.1.2), concatenated with the null-terminated Remote Peer Name [**Unicode**](#gt_unicode) string, as specified in [2.2.2.4](#Section_2.2.2.4).
 - If the locally generated Password Data does not match the received Password Data, the connection MUST be terminated.
 If the password data values match, the remote GMC MUST be issued. A new GMC chain MUST be created for the Remote IDC and the following actions occur:
 
 - The Remote IDC MUST be validated to conform to the [**P2P Grouping**](#gt_p2p-grouping) X.509 usage, as specified in [2.2.5](#Section_2.2.5). If the validation fails, the connection MUST be terminated.
 - If it conforms, a new GMC MUST be created for the Remote IDC:
-- The role in the GMC MUST be set to the Password Role [**UUID**](#gt_universally-unique-identifier-uuid) specified in the Security Properties. See section [2.2.3.1](#Section_5).
+- The role in the GMC MUST be set to the Password Role [**UUID**](#gt_universally-unique-identifier-uuid) specified in the Security Properties. See section [2.2.3.1](#Section_2.2.3.1).
 - The [**classifier**](#gt_classifier) list MUST be set to "participant".
 - The **NotBefore** field MUST be set to the current system time. The NotAfter field MUST be set to the **NotAfter** time of the local GMC.
 - All other fields MUST be copied from the Remote IDC.
 - The remote GMC chain MUST be created using the local GMC chain and the newly created GMC.
 - A YourGMC message MUST be built and sent:
-- The AES-256 key used to encrypt the GMC MUST be derived from the SHA-1 hash of the Password Hash String (including NULL-terminator). The details of the key generation are specified in section [2.2.2.3](#Section_3.2.5.2.4).
+- The AES-256 key used to encrypt the GMC MUST be derived from the SHA-1 hash of the Password Hash String (including NULL-terminator). The details of the key generation are specified in section [2.2.2.3](#Section_2.2.2.3).
 - After being built, the message MUST be passed to the TLS layer for processing.
 - The message returned by the TLS layer MUST then be passed to [**P2P Graphing**](#gt_p2p-graphing) to be sent.
 - The local node MUST signal to P2P Graphing that the Requestor is now connected to the group.

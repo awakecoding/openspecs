@@ -743,7 +743,7 @@ This document uses the following terms:
 **Multipoint Communication Service (MCS)**: A data transmission protocol and set of services defined by the ITU T.120 standard, specifically [[T122]](https://go.microsoft.com/fwlink/?LinkId=94993) and [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543).
 
 <a id="gt_network-level-authentication-nla"></a>
-**Network Level Authentication (NLA)**: Refers to the usage of CredSSP (as described in [MS-CSSP](#Section_5)) within the context of an RDP connection to authenticate the identity of a user at the network layer before the initiation of the RDP handshake. The use of NLA ensures that server resources are only committed to authenticated users.
+**Network Level Authentication (NLA)**: Refers to the usage of CredSSP (as described in [MS-CSSP](../MS-CSSP/MS-CSSP.md)) within the context of an RDP connection to authenticate the identity of a user at the network layer before the initiation of the RDP handshake. The use of NLA ensures that server resources are only committed to authenticated users.
 
 <a id="gt_oauth-20"></a>
 **OAuth 2.0**: An authorization framework that enables a third-party application to obtain limited access to an HTTP service.
@@ -808,7 +808,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [ITUX691] ITU-T, "ASN.1 Encoding Rules: Specification of Packed Encoding Rules (PER)", Recommendation X.691, July 2002, [https://www.itu.int/rec/T-REC-X.691-200207-S](https://go.microsoft.com/fwlink/?LinkId=192078)
 
-[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](#Section_5)".
+[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](../MS-CSSP/MS-CSSP.md)".
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
@@ -820,11 +820,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RDPELE] Microsoft Corporation, "[Remote Desktop Protocol: Licensing Extension](../MS-RDPELE/MS-RDPELE.md)".
 
-[MS-RDPEMT] Microsoft Corporation, "[Remote Desktop Protocol: Multitransport Extension](#Section_2.1)".
+[MS-RDPEMT] Microsoft Corporation, "[Remote Desktop Protocol: Multitransport Extension](../MS-RDPEMT/MS-RDPEMT.md)".
 
 [MS-RDPERP] Microsoft Corporation, "[Remote Desktop Protocol: Remote Programs Virtual Channel Extension](../MS-RDPERP/MS-RDPERP.md)".
 
-[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](#Section_2.1)".
+[MS-RDPEUDP] Microsoft Corporation, "[Remote Desktop Protocol: UDP Transport Extension](../MS-RDPEUDP/MS-RDPEUDP.md)".
 
 [MS-RDPNSC] Microsoft Corporation, "[Remote Desktop Protocol: NSCodec Extension](../MS-RDPNSC/MS-RDPNSC.md)".
 
@@ -977,7 +977,7 @@ The connection sequence can be broken up into ten distinct phases:
 - Connection Initiation: The client initiates the connection by sending the server a Class 0 X.224 Connection Request PDU (section [2.2.1.1](#Section_2.2.1.1)). The server responds with a Class 0 X.224 Connection Confirm PDU (section [2.2.1.2](#Section_2.2.1.2)).
 From this point, all subsequent data sent between client and server is wrapped in an X.224 Data [**Protocol Data Unit (PDU)**](#gt_protocol-data-unit-pdu) (1).
 
-- Basic Settings Exchange: Basic settings are exchanged between the client and server by using the MCS Connect Initial PDU (section [2.2.1.3](#Section_3.3.5.3.3)) and MCS Connect Response PDU (section [2.2.1.4](#Section_3.3.5.3.4)). The Connect Initial PDU contains a Generic Conference Control (GCC) Conference Create Request, while the Connect Response PDU contains a GCC Conference Create Response.
+- Basic Settings Exchange: Basic settings are exchanged between the client and server by using the MCS Connect Initial PDU (section [2.2.1.3](#Section_2.2.1.3)) and MCS Connect Response PDU (section [2.2.1.4](#Section_2.2.1.4)). The Connect Initial PDU contains a Generic Conference Control (GCC) Conference Create Request, while the Connect Response PDU contains a GCC Conference Create Response.
 These two GCC packets contain concatenated blocks of settings data (such as core data, security data, and network data) which are read by client and server.
 
 ![MCS Connect Initial PDU](media/image2.png)
@@ -988,17 +988,17 @@ Figure 2: MCS Connect Initial PDU
 
 Figure 3: MCS Connect Response PDU
 
-- Channel Connection: The client sends an MCS Erect Domain Request PDU (section [2.2.1.5](#Section_3.2.5.3.5)), followed by an MCS Attach User Request PDU (section [2.2.1.6](#Section_4.1.6)) to attach the primary user identity to the MCS domain. The server responds with an MCS Attach User Confirm PDU (section [2.2.1.7](#Section_3.2.5.3.7)) containing the User Channel ID. The client then proceeds to join the user channel, the input/output (I/O) channel, and all of the static virtual channels (the I/O and static virtual channel IDs are obtained from the data embedded in the GCC packets) by using multiple MCS Channel Join Request PDUs (section [2.2.1.8](#Section_3.2.5.3.8)). The server confirms each channel with an MCS Channel Join Confirm PDU (section [2.2.1.9](#Section_3.3.5.3.9)). (RDP 4.0, 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 8.0, 10.2, 10.3, 10.4, and 10.5 clients send a Channel Join Request to the server only after the Channel Join Confirm for a previously sent request has been received. RDP 8.1, 10.0, and 10.1 clients send all of the Channel Join Requests to the server in a single batch to minimize the overall connection sequence time.)
+- Channel Connection: The client sends an MCS Erect Domain Request PDU (section [2.2.1.5](#Section_2.2.1.5)), followed by an MCS Attach User Request PDU (section [2.2.1.6](#Section_2.2.1.6)) to attach the primary user identity to the MCS domain. The server responds with an MCS Attach User Confirm PDU (section [2.2.1.7](#Section_2.2.1.7)) containing the User Channel ID. The client then proceeds to join the user channel, the input/output (I/O) channel, and all of the static virtual channels (the I/O and static virtual channel IDs are obtained from the data embedded in the GCC packets) by using multiple MCS Channel Join Request PDUs (section [2.2.1.8](#Section_2.2.1.8)). The server confirms each channel with an MCS Channel Join Confirm PDU (section [2.2.1.9](#Section_2.2.1.9)). (RDP 4.0, 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 8.0, 10.2, 10.3, 10.4, and 10.5 clients send a Channel Join Request to the server only after the Channel Join Confirm for a previously sent request has been received. RDP 8.1, 10.0, and 10.1 clients send all of the Channel Join Requests to the server in a single batch to minimize the overall connection sequence time.)
 From this point, all subsequent data sent from the client to the server is wrapped in an MCS Send Data Request PDU, while data sent from the server to the client is wrapped in an MCS Send Data Indication PDU. This is in addition to the data being wrapped by an X.224 Data PDU.
 
-- RDP Security Commencement: If Standard RDP Security mechanisms (section [5.3](#Section_5.3)) are being employed and encryption is in force (this is determined by examining the data embedded in the GCC Conference Create Response packet) then the client sends a Security Exchange PDU (section [2.2.1.10](#Section_2.2.1.10.1)) containing an encrypted 32-byte random number to the server. This random number is encrypted with the public key of the server as described in section [5.3.4.1](#Section_5.3.4.1) (the server's public key, as well as a 32-byte server-generated random number, are both obtained from the data embedded in the GCC Conference Create Response packet). The client and server then utilize the two 32-byte random numbers to generate session keys which are used to encrypt and validate the integrity of subsequent RDP traffic.
-From this point, all subsequent RDP traffic can be encrypted and a security header is included with the data if encryption is in force. (The Client Info PDU (section [2.2.1.11](#Section_2.2.1.11.1)) and licensing PDUs ([MS-RDPELE](../MS-RDPELE/MS-RDPELE.md) section 2.2.2) are an exception in that they always have a security header). The Security Header follows the X.224 and MCS Headers and indicates whether the attached data is encrypted. Even if encryption is in force, server-to-client traffic cannot always be encrypted, while client-to-server traffic will always be encrypted (encryption of licensing PDUs is optional, however).
+- RDP Security Commencement: If Standard RDP Security mechanisms (section [5.3](#Section_5.3)) are being employed and encryption is in force (this is determined by examining the data embedded in the GCC Conference Create Response packet) then the client sends a Security Exchange PDU (section [2.2.1.10](#Section_2.2.1.10)) containing an encrypted 32-byte random number to the server. This random number is encrypted with the public key of the server as described in section [5.3.4.1](#Section_5.3.4.1) (the server's public key, as well as a 32-byte server-generated random number, are both obtained from the data embedded in the GCC Conference Create Response packet). The client and server then utilize the two 32-byte random numbers to generate session keys which are used to encrypt and validate the integrity of subsequent RDP traffic.
+From this point, all subsequent RDP traffic can be encrypted and a security header is included with the data if encryption is in force. (The Client Info PDU (section [2.2.1.11](#Section_2.2.1.11)) and licensing PDUs ([MS-RDPELE](../MS-RDPELE/MS-RDPELE.md) section 2.2.2) are an exception in that they always have a security header). The Security Header follows the X.224 and MCS Headers and indicates whether the attached data is encrypted. Even if encryption is in force, server-to-client traffic cannot always be encrypted, while client-to-server traffic will always be encrypted (encryption of licensing PDUs is optional, however).
 
 - Secure Settings Exchange: Secure client data (such as the username, password, and auto-reconnect cookie) is sent to the server by using the Client Info PDU (section 2.2.1.11).
 - Optional Connect-Time Auto-Detection: During the Optional Connect-Time Auto-Detection phase, the goal is to determine characteristics of the network, such as the round-trip latency time and the bandwidth of the link between the server and client. This is accomplished by exchanging a collection of PDUs (specified in section [2.2.14](#Section_2.2.14)) over a predetermined period of time with enough data to ensure that the results are statistically relevant.
 - Licensing: The goal of the licensing exchange is to transfer a license from the server to the client. The client stores this license and on subsequent connections sends the license to the server for validation. However, in some situations the client cannot be issued a license to store. In effect, the packets exchanged during this phase of the protocol depend on the licensing mechanisms employed by the server. Within the context of this document, it is assumed that the client will not be issued a license to store. For details regarding more advanced licensing scenarios that take place during the Licensing phase, see [MS-RDPELE] section 1.3.
-- Optional Multitransport Bootstrapping: After the connection has been secured and the Licensing phase has run to completion, the server can choose to initiate multitransport connections ([MS-RDPEMT](#Section_2.1) section 1.3). The Initiate Multitransport Request PDU (section [2.2.15.1](#Section_2.2.15.1)) is sent by the server to the client and results in the out-of-band creation of a multitransport connection using messages from the RDP-UDP, TLS, DTLS, and multitransport protocols ([MS-RDPEMT] section 1.3.1). The client sends the Multitransport Response PDU (section [2.2.15.2](#Section_2.2.15.2)) to the server if the multitransport connection could not be established or if the server indicated support for Soft-Sync in the Server Multitransport Channel Data (section [2.2.1.4.6](#Section_2.2.1.4.6))
-- Capabilities Exchange: The server sends the set of capabilities it supports to the client in a Demand Active PDU (section [2.2.1.13.1](#Section_2.2.1.13.1)). The optional Monitor Layout PDU (section [2.2.12.1](#Section_2.2.12.1)) is sent by the server after the Demand Active PDU. The client responds to the Demand Active PDU with its capabilities by sending a Confirm Active PDU (section [2.2.1.13.2](#Section_2.2.1.13.2.1)).
+- Optional Multitransport Bootstrapping: After the connection has been secured and the Licensing phase has run to completion, the server can choose to initiate multitransport connections ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3). The Initiate Multitransport Request PDU (section [2.2.15.1](#Section_2.2.15.1)) is sent by the server to the client and results in the out-of-band creation of a multitransport connection using messages from the RDP-UDP, TLS, DTLS, and multitransport protocols ([MS-RDPEMT] section 1.3.1). The client sends the Multitransport Response PDU (section [2.2.15.2](#Section_2.2.15.2)) to the server if the multitransport connection could not be established or if the server indicated support for Soft-Sync in the Server Multitransport Channel Data (section [2.2.1.4.6](#Section_2.2.1.4.6))
+- Capabilities Exchange: The server sends the set of capabilities it supports to the client in a Demand Active PDU (section [2.2.1.13.1](#Section_2.2.1.13.1)). The optional Monitor Layout PDU (section [2.2.12.1](#Section_2.2.12.1)) is sent by the server after the Demand Active PDU. The client responds to the Demand Active PDU with its capabilities by sending a Confirm Active PDU (section [2.2.1.13.2](#Section_2.2.1.13.2)).
 - Connection Finalization: The client and server exchange PDUs to finalize the connection details. The client-to-server PDUs sent during this phase have no dependencies on any of the server-to-client PDUs; they can be sent as a single batch, provided that sequencing is maintained.
 - The Client Synchronize PDU (section [2.2.1.14](#Section_2.2.1.14)) is sent after transmitting the Confirm Active PDU.
 - The Client Control (Cooperate) PDU (section [2.2.1.15](#Section_2.2.1.15)) is sent after transmitting the Client Synchronize PDU.
@@ -1024,14 +1024,14 @@ The goal of the Security-Enhanced Connection Sequence is to provide an extensibl
 
 Negotiation-Based Approach: The client advertises the security packages which it supports (by appending a negotiation request structure to the X.224 Connection Request PDU) and the server selects the package to use (by appending a negotiation response structure to the X.224 Connection Confirm PDU). After the client receives the X.224 Connection Confirm PDU the handshake messages defined by the negotiated security package are exchanged and then all subsequent RDP traffic is secured by using the cryptographic techniques specified by the negotiated security package.
 
-Direct Approach: Instead of negotiating a security package, the client and server immediately execute a predetermined security protocol (for example, the CredSSP Protocol [MS-CSSP](#Section_5)) prior to any RDP traffic being exchanged on the wire. This approach results in all RDP traffic being secured using the hard-coded security package. However, it has the disadvantage of not working with servers that expect the connection sequence to be initiated by an X.224 Connection Request PDU.
+Direct Approach: Instead of negotiating a security package, the client and server immediately execute a predetermined security protocol (for example, the CredSSP Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md)) prior to any RDP traffic being exchanged on the wire. This approach results in all RDP traffic being secured using the hard-coded security package. However, it has the disadvantage of not working with servers that expect the connection sequence to be initiated by an X.224 Connection Request PDU.
 
 For more details about [Enhanced RDP Security](#Section_5.4), see section 5.4.
 
 <a id="Section_1.3.1.3"></a>
 #### 1.3.1.3 Deactivation-Reactivation Sequence
 
-After the connection sequence has run to completion, the server can determine that the client has to be connected to an existing session. To accomplish this task the server signals the client with a [Deactivate All PDU](#Section_3.2.5.5.1). A Deactivate All PDU implies that the connection will be dropped or that a capability re-exchange will occur. If a capability re-exchange is required, then the Capability Exchange and Connection Finalization phases of the connection sequence (section [1.3.1.1](#Section_1.3)) are re-executed.
+After the connection sequence has run to completion, the server can determine that the client has to be connected to an existing session. To accomplish this task the server signals the client with a [Deactivate All PDU](#Section_2.2.3.1). A Deactivate All PDU implies that the connection will be dropped or that a capability re-exchange will occur. If a capability re-exchange is required, then the Capability Exchange and Connection Finalization phases of the connection sequence (section [1.3.1.1](#Section_1.3.1.1)) are re-executed.
 
 The sending and processing of the Deactivate All PDU is described in sections [3.3.5.5.1](#Section_3.3.5.5.1) and [3.2.5.5.1](#Section_3.2.5.5.1) respectively.
 
@@ -1041,9 +1041,9 @@ The sending and processing of the Deactivate All PDU is described in sections [3
 <a id="Section_1.3.1.4.1"></a>
 ##### 1.3.1.4.1 User-Initiated on Client
 
-The user can initiate a client-side disconnect by closing the RDP client application. To implement this type of disconnection the client can initiate an immediate disconnect by sending the [MCS Disconnect Provider Ultimatum PDU](#Section_2.2.2.3) (with the reason code set to "user requested") and then closing the connection. Alternatively, the client can first notify the server of the intent to disconnect by sending the [Shutdown Request PDU](#Section_2.2.2.1) and then waiting for a response. The server response to this PDU is determined by whether the session is associated with a logged-on user account.
+The user can initiate a client-side disconnect by closing the RDP client application. To implement this type of disconnection the client can initiate an immediate disconnect by sending the [MCS Disconnect Provider Ultimatum PDU](#Section_4.2.3) (with the reason code set to "user requested") and then closing the connection. Alternatively, the client can first notify the server of the intent to disconnect by sending the [Shutdown Request PDU](#Section_4.2.1) and then waiting for a response. The server response to this PDU is determined by whether the session is associated with a logged-on user account.
 
-- If a logged-on user account is associated with the session, the server always denies the shutdown request and sends the client a [Shutdown Request Denied PDU](#Section_2.2.2.2). At this point the client behavior is implementation-dependent (the client can, for example, choose to display a dialog box specifying that the session will be disconnected). If the decision is made to proceed with the disconnection, the client sends the server an MCS Disconnect Provider Ultimatum PDU (with the reason code set to "user requested") and closes the connection.
+- If a logged-on user account is associated with the session, the server always denies the shutdown request and sends the client a [Shutdown Request Denied PDU](#Section_4.2.2). At this point the client behavior is implementation-dependent (the client can, for example, choose to display a dialog box specifying that the session will be disconnected). If the decision is made to proceed with the disconnection, the client sends the server an MCS Disconnect Provider Ultimatum PDU (with the reason code set to "user requested") and closes the connection.
 - If a logged-on user account is not associated with the session, the server closes the connection immediately after receiving the Shutdown Request PDU.
 The sending and processing of the Shutdown Request PDU is described in sections [3.2.5.4.1](#Section_3.2.5.4.1) and [3.3.5.4.1](#Section_3.3.5.4.1) respectively. The sending and processing of the Shutdown Request Denied PDU is described in sections [3.3.5.4.2](#Section_3.3.5.4.2) and [3.2.5.4.2](#Section_3.2.5.4.2) respectively.
 
@@ -1052,9 +1052,9 @@ The sending and processing of the Shutdown Request PDU is described in sections 
 
 The user can initiate a server-side disconnect by ending the session hosted on the server. To implement this type of disconnection, the server sends the client the following sequence of PDUs:
 
-- An optional [Set Error Info PDU](#Section_3.3.5.7.1) (containing a detailed reason for the pending disconnection)
-- An optional [Deactivate All PDU](#Section_3.2.5.5.1)
-- An optional [MCS Disconnect Provider Ultimatum PDU](#Section_2.2.2.3) (with the reason code set to "user requested")
+- An optional [Set Error Info PDU](#Section_2.2.5.1) (containing a detailed reason for the pending disconnection)
+- An optional [Deactivate All PDU](#Section_2.2.3.1)
+- An optional [MCS Disconnect Provider Ultimatum PDU](#Section_4.2.3) (with the reason code set to "user requested")
 The connection is then closed by the server.
 
 The sending of the Deactivate All and MCS Disconnect Provider Ultimatum PDUs is specified in section [3.3.5.5.1](#Section_3.3.5.5.1), while the sending of the Set Error Info PDU is specified in section [3.3.5.7.1](#Section_3.3.5.7.1).
@@ -1064,9 +1064,9 @@ The sending of the Deactivate All and MCS Disconnect Provider Ultimatum PDUs is 
 
 The administrator of a server can force a user to be logged off from a session or disconnect sessions outside of the user's control. To implement this type of disconnection, the server sends the client the following sequence of PDUs:
 
-- An optional [Set Error Info PDU](#Section_3.3.5.7.1) (containing a detailed reason for the pending disconnection)
-- An optional [Deactivate All PDU](#Section_3.2.5.5.1)
-- An optional [MCS Disconnect Provider Ultimatum PDU](#Section_2.2.2.3) (with the reason code set to "provider initiated")
+- An optional [Set Error Info PDU](#Section_2.2.5.1) (containing a detailed reason for the pending disconnection)
+- An optional [Deactivate All PDU](#Section_2.2.3.1)
+- An optional [MCS Disconnect Provider Ultimatum PDU](#Section_4.2.3) (with the reason code set to "provider initiated")
 The connection is then closed by the server.
 
 The sending of the Deactivate All and MCS Disconnect Provider Ultimatum PDUs is specified in section [3.3.5.5.1](#Section_3.3.5.5.1), while the sending of the Set Error Info PDU is specified in section [3.3.5.7.1](#Section_3.3.5.7.1).
@@ -1076,16 +1076,16 @@ The sending of the Deactivate All and MCS Disconnect Provider Ultimatum PDUs is 
 
 The Automatic Reconnection feature allows a client to reconnect to an existing session (after a short-term network failure has occurred) without having to resend the user's credentials to the server.
 
-After a successful log on, the server sends the client an "auto-reconnect cookie" in the [Save Session Info PDU](#Section_4.3). This cookie is bound to the current user's session and is stored by the client. In the case of a disconnection due to a network error, the client can try to automatically reconnect to the server. If it can connect, it sends a cryptographically modified version of the cookie to the server in the [Client Info PDU](#Section_2.2.1.11.1) (the Secure Settings Exchange phase of the connection sequence, as specified in section [1.3.1.1](#Section_1.3)). The server uses the modified cookie to confirm that the client requesting auto-reconnection is the last client that was connected to the session. If this check passes, then the client is automatically connected to the desired session upon completion of the connection sequence.
+After a successful log on, the server sends the client an "auto-reconnect cookie" in the [Save Session Info PDU](#Section_4.3). This cookie is bound to the current user's session and is stored by the client. In the case of a disconnection due to a network error, the client can try to automatically reconnect to the server. If it can connect, it sends a cryptographically modified version of the cookie to the server in the [Client Info PDU](#Section_2.2.1.11) (the Secure Settings Exchange phase of the connection sequence, as specified in section [1.3.1.1](#Section_1.3.1.1)). The server uses the modified cookie to confirm that the client requesting auto-reconnection is the last client that was connected to the session. If this check passes, then the client is automatically connected to the desired session upon completion of the connection sequence.
 
 The auto-reconnect cookie associated with a given session is flushed and regenerated whenever a client connects to the session or the session is reset. This ensures that if a different client connects to the session, then any previous clients that were connected can no longer use the auto-reconnect mechanism to connect. Furthermore, the server invalidates and updates the cookie at hourly intervals, sending the new cookie to the client in the Save Session Info PDU.
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Server Error Reporting and Status Updates
 
-A server can send detailed error codes to a client by using the [Set Error Info PDU](#Section_3.3.5.7.1) (the client indicates during the Basic Settings Exchange phase of the connection sequence, as specified in section [1.3.1.1](#Section_1.3), that it supports this [**PDU**](#gt_protocol-data-unit-pdu)). This PDU can be sent when a phase in the connection sequence fails or when the client is about to be disconnected. Error codes allow the client to give much clearer failure explanations to the user. If a server chooses not to send error codes to a client that supports receiving these codes, then the client will be unable to report a clear diagnosable reason for any server-side initiated disconnections.
+A server can send detailed error codes to a client by using the [Set Error Info PDU](#Section_2.2.5.1) (the client indicates during the Basic Settings Exchange phase of the connection sequence, as specified in section [1.3.1.1](#Section_1.3.1.1), that it supports this [**PDU**](#gt_protocol-data-unit-pdu)). This PDU can be sent when a phase in the connection sequence fails or when the client is about to be disconnected. Error codes allow the client to give much clearer failure explanations to the user. If a server chooses not to send error codes to a client that supports receiving these codes, then the client will be unable to report a clear diagnosable reason for any server-side initiated disconnections.
 
-Status updates can be sent to a client by using the [Status Info PDU](#Section_3.2.5.7.2) (the client indicates during the Basic Settings Exchange phase of the connection sequence, as specified in section 1.3.1.1, that it supports this PDU). This PDU can be sent by the server to allow the client to give feedback to a user when the server is performing processing that can take some time to complete.
+Status updates can be sent to a client by using the [Status Info PDU](#Section_2.2.5.2) (the client indicates during the Basic Settings Exchange phase of the connection sequence, as specified in section 1.3.1.1, that it supports this PDU). This PDU can be sent by the server to allow the client to give feedback to a user when the server is performing processing that can take some time to complete.
 
 The sending and processing of the Set Error Info PDU is described in sections [3.3.5.7.1](#Section_3.3.5.7.1) and [3.2.5.7.1](#Section_3.2.5.7.1) respectively, while the sending and processing of the Status Info PDU is described in sections [3.3.5.7.2](#Section_3.3.5.7.2) and [3.2.5.7.2](#Section_3.2.5.7.2) respectively.
 
@@ -1094,14 +1094,14 @@ The sending and processing of the Set Error Info PDU is described in sections [3
 
 Static Virtual Channels allow lossless communication between client and server components over the main RDP data connection. Virtual channel data is application-specific and opaque to RDP. A maximum of 31 static virtual channels can be created at connection time.
 
-The list of desired virtual channels is requested and confirmed during the Basic Settings Exchange phase of the connection sequence (as specified in section [1.3.1.1](#Section_1.3)) and the endpoints are joined during the Channel Connection phase (as specified in section 1.3.1.1). Once joined, the client and server endpoints do not exchange data until the connection sequence has completed.
+The list of desired virtual channels is requested and confirmed during the Basic Settings Exchange phase of the connection sequence (as specified in section [1.3.1.1](#Section_1.3.1.1)) and the endpoints are joined during the Channel Connection phase (as specified in section 1.3.1.1). Once joined, the client and server endpoints do not exchange data until the connection sequence has completed.
 
 Static Virtual Channel data is broken up into chunks before being transmitted. The maximum size of an individual chunk is determined by the settings exchanged in the Virtual Channel Capability Set described in section [2.2.7.1.10](#Section_2.2.7.1.10) (the chunk size does not include RDP headers). Each virtual channel acts as an independent data stream. The client and server examine the data received on each virtual channel and route the data stream to the appropriate endpoint for further processing. A particular client or server implementation can decide whether to pass on individual chunks of data as they are received, or to assemble the separate chunks of data into a complete block before passing it on to the endpoint.
 
 <a id="Section_1.3.4"></a>
 ### 1.3.4 Data Compression
 
-RDP uses a bulk compressor to compress virtual channel data and some data in [**PDUs**](#gt_protocol-data-unit-pdu) sent from server to client. Capability advertising for various versions of the bulk compressor occurs in the [Client Info PDU](#Section_2.2.1.11.1) (the Secure Settings Exchange phase of the connection sequence, as specified in section [1.3.1.1](#Section_1.3)).
+RDP uses a bulk compressor to compress virtual channel data and some data in [**PDUs**](#gt_protocol-data-unit-pdu) sent from server to client. Capability advertising for various versions of the bulk compressor occurs in the [Client Info PDU](#Section_2.2.1.11) (the Secure Settings Exchange phase of the connection sequence, as specified in section [1.3.1.1](#Section_1.3.1.1)).
 
 One version of the bulk compressor (the RDP 4.0 bulk compressor) is based on the Microsoft Point-To-Point Compression (MPPC) Protocol, as described in [[RFC2118]](https://go.microsoft.com/fwlink/?LinkId=90316), and uses an 8 kilobyte history buffer. A more advanced version of the compressor (the RDP 5.0 bulk compressor) is derived from the RDP 4.0 bulk compressor, but uses a 64 kilobyte history buffer and modified Huffman-style encoding rules.
 
@@ -1123,7 +1123,7 @@ The most fundamental output that a server can send to a connected client is bitm
 
 The client can choose to render the mouse cursor locally (if it is not included in the graphics updates sent by the server). In this case, the server sends updates of the current cursor image to ensure that it can be drawn with the correct shape (the [Pointer Update PDUs](#Section_2.2.9.1.1.4) are used to accomplish this task). Furthermore, if the mouse is programmatically moved in the user's session, the server informs the client of the new position using the [Pointer Position PDU](#Section_2.2.9.1.1.4.1).
 
-Other basic output which a server sends to a connected client includes the [Play Sound PDU](#Section_3.3.5.9.4.1), which instructs a client to play rudimentary sounds (by specifying a frequency and its duration) and Connection Management PDUs, as specified in section [2.2.10](#Section_2.2.10).
+Other basic output which a server sends to a connected client includes the [Play Sound PDU](#Section_2.2.9.1.1.5), which instructs a client to play rudimentary sounds (by specifying a frequency and its duration) and Connection Management PDUs, as specified in section [2.2.10](#Section_2.2.10).
 
 <a id="Section_1.3.7"></a>
 ### 1.3.7 Controlling Server Graphics Output
@@ -1149,7 +1149,7 @@ Assume that User A has an existing session on Server S1 (Session #3). Both Serve
 - The login credentials to use for Server S1 (if necessary).
 - Client C closes the connection to Server S2 and initiates a connection to Server S1. As part of the connection initialization data sent to Server S1, Client C sends the login credentials and requests a connection to Session #3.
 - Server S1 validates the login credentials, and, if they are correct, connects Client C to Session #3.
-If Client C cannot connect directly to Server S1, the Redirection PDU has to contain a variable-length **routing token** that contains the information required by Server S2 to redirect the client connection appropriately. The client places this token into the X.224 Connection Request PDU (section [2.2.1.1)](#Section_18a27ef96f9a4501b00094b1fe3c2c10) of the **RDP Connection Sequence** and then reconnects it back to Server S2. Server S2 reads the **routing token** and then redirects the X.224 Connection Request and all future traffic from Client C to Server S1.
+If Client C cannot connect directly to Server S1, the Redirection PDU has to contain a variable-length **routing token** that contains the information required by Server S2 to redirect the client connection appropriately. The client places this token into the X.224 Connection Request PDU (section [2.2.1.1)](#Section_2.2.1.1) of the **RDP Connection Sequence** and then reconnects it back to Server S2. Server S2 reads the **routing token** and then redirects the X.224 Connection Request and all future traffic from Client C to Server S1.
 
 For more information about **load balancing** of [**Remote Desktop**](#gt_remote-desktop) sessions and the **routing token** format, see [[MSFT-SDLBTS]](https://go.microsoft.com/fwlink/?LinkId=90204) sections "Load-Balanced Configurations", "Revectoring Clients", and "Routing Token Format".
 
@@ -1165,7 +1165,7 @@ These two items are used in the context of RDSTLS to facilitate mutual authentic
 <a id="Section_1.3.9"></a>
 ### 1.3.9 Connect-Time and Continuous Network Characteristics Detection
 
-Connect-Time Auto-Detection occurs once during the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)), and is accomplished by sending request and response messages over the main RDP connection during the Optional Connect-Time Auto-Detection phase.
+Connect-Time Auto-Detection occurs once during the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)), and is accomplished by sending request and response messages over the main RDP connection during the Optional Connect-Time Auto-Detection phase.
 
 The following messages are encapsulated in the server-to-client Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) and flow over the main RDP connection, implementing Connect-Time Auto-Detection:
 
@@ -1179,7 +1179,7 @@ The following messages are encapsulated in the client-to-server Auto-Detect Resp
 - RTT Measure Response (section [2.2.14.2.1](#Section_2.2.14.2.1))
 - Bandwidth Measure Results (section [2.2.14.2.2](#Section_2.2.14.2.2))
 - Network Characteristics Sync (section [2.2.14.2.3](#Section_2.2.14.2.3))
-Continuous Auto-Detection occurs on a constant basis after the RDP Connection Sequence has completed, and is implemented by sending request and response messages over the main RDP connection and any created sideband channels ([MS-RDPEMT](#Section_2.1) section 1.3.2).
+Continuous Auto-Detection occurs on a constant basis after the RDP Connection Sequence has completed, and is implemented by sending request and response messages over the main RDP connection and any created sideband channels ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3.2).
 
 The following messages are encapsulated in the server-to-client Auto-Detect Request PDU and flow over the main RDP connection, implementing Continuous Auto-Detection:
 
@@ -1248,10 +1248,10 @@ The following protocols extend [MS-RDPBCGR]:
 - RemoteFX Codec Extension [MS-RDPRFX](../MS-RDPRFX/MS-RDPRFX.md)
 The following protocol tunnels [MS-RDPEDYC]:
 
-- Multitransport Extension [MS-RDPEMT](#Section_2.1)
+- Multitransport Extension [MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md)
 The following protocol tunnels [MS-RDPEMT]:
 
-- UDP Transport Extension [MS-RDPEUDP](#Section_2.1)
+- UDP Transport Extension [MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md)
 The following protocol tunnels [MS-RDPBCGR]:
 
 - Gateway Server Protocol [MS-TSGU](../MS-TSGU/MS-TSGU.md)
@@ -1265,12 +1265,12 @@ This protocol assumes that the client and server systems both have an IP address
 
 This protocol is applicable in scenarios where interactions with a session or application hosted on a remote server are required. In this context, the graphical user interface of a session or application running on a remote machine is transmitted to the client machine. The client, in turn, sends keyboard and mouse input to be processed by the server allowing the client to interact with the session or application on the server.
 
-In scenarios in which more specialized communication between client and server components is needed, [Virtual Channels](#Section_3.1.5.2) (section 1.3.3) provide an extensible transport mechanism. Examples of more specialized communication include redirection of client-side devices (for example, printers, drives, smart card readers, or Plug and Play devices) and synchronization of the local and remote clipboards.
+In scenarios in which more specialized communication between client and server components is needed, [Virtual Channels](#Section_1.3.3) (section 1.3.3) provide an extensible transport mechanism. Examples of more specialized communication include redirection of client-side devices (for example, printers, drives, smart card readers, or Plug and Play devices) and synchronization of the local and remote clipboards.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-Capability negotiation for RDP is essentially the same as for T.128. The server advertises its capabilities in a [Demand Active PDU](#Section_2.2.1.13.1) sent to the client, and the client advertises its capabilities in the follow-up [Confirm Active PDU](#Section_2.2.1.13.2.1) (see the Capability Exchange phase in section [1.3.1.1](#Section_1.3)). Capability sets are packaged in a combined capability set structure. This structure contains a count of the number of capability sets, followed by the contents of the individual capability sets.
+Capability negotiation for RDP is essentially the same as for T.128. The server advertises its capabilities in a [Demand Active PDU](#Section_2.2.1.13.1) sent to the client, and the client advertises its capabilities in the follow-up [Confirm Active PDU](#Section_2.2.1.13.2) (see the Capability Exchange phase in section [1.3.1.1](#Section_1.3.1.1)). Capability sets are packaged in a combined capability set structure. This structure contains a count of the number of capability sets, followed by the contents of the individual capability sets.
 
 ![Combined Capability Set structure](media/image5.png)
 
@@ -1278,7 +1278,7 @@ Figure 5: Combined Capability Set structure
 
 Information exchanged in the capability sets includes data such as supported [**PDUs**](#gt_protocol-data-unit-pdu) and drawing orders, desktop dimensions, and allowed color depths, input device support, cache structures and feature support. The client and server do not violate any peer capabilities when sending data on the wire. This ensures that all RDP traffic on the wire is consistent with expectations and can be processed by each party.
 
-Early capability information (in the form of a bitmask) is advertised by the client as part of the data which it sends to the server during the Basic Settings Exchange phase. This information is intended for capabilities that need to be advertised prior to the actual Capability Exchange phase. For example, support for the [Set Error Info PDU](#Section_3.3.5.7.1) is established before the Licensing phase of the connection sequence, which occurs before the Capability Exchange phase (section 1.3.1.1). This is necessary because the server has to be aware of how errors can be communicated back to the client.
+Early capability information (in the form of a bitmask) is advertised by the client as part of the data which it sends to the server during the Basic Settings Exchange phase. This information is intended for capabilities that need to be advertised prior to the actual Capability Exchange phase. For example, support for the [Set Error Info PDU](#Section_2.2.5.1) is established before the Licensing phase of the connection sequence, which occurs before the Capability Exchange phase (section 1.3.1.1). This is necessary because the server has to be aware of how errors can be communicated back to the client.
 
 The client and server data exchanged during the Basic Settings Exchange phase in the RDP Connection Sequence (section 1.3.1.1) includes an RDP version number (consisting of a major and minor field). However, this version information does not accurately reflect the version of RDP being used by RDP 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 8.0, and 8.1 clients because they all advertise a minor version of "4").
 
@@ -1317,7 +1317,7 @@ Version 2 MCS Encoding Rules (defined in [[T125]](https://go.microsoft.com/fwlin
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Client X.224 Connection Request PDU
 
-The X.224 Connection Request PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Initiation phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases).
+The X.224 Connection Request PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Initiation phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases).
 
 ```mermaid
 packet-beta
@@ -1360,7 +1360,7 @@ packet-beta
 
 | Flag | Meaning |
 | --- | --- |
-| RESTRICTED_ADMIN_MODE_REQUIRED 0x01 | Indicates that the client requires credential-less logon over CredSSP (also known as "restricted admin mode"). If the server supports this mode then it is acceptable for the client to send empty credentials in the **TSPasswordCreds** structure defined in [MS-CSSP](#Section_5) section 2.2.1.2.1.<2> |
+| RESTRICTED_ADMIN_MODE_REQUIRED 0x01 | Indicates that the client requires credential-less logon over CredSSP (also known as "restricted admin mode"). If the server supports this mode then it is acceptable for the client to send empty credentials in the **TSPasswordCreds** structure defined in [MS-CSSP](../MS-CSSP/MS-CSSP.md) section 2.2.1.2.1.<2> |
 | REDIRECTED_AUTHENTICATION_MODE_REQUIRED 0x02 | Indicates that the client requires credential-less logon over CredSSP with redirected authentication over CredSSP (also known as "Remote Credential Guard"). If the server supports this mode, the client can send a redirected logon buffer in the TSRemoteGuardCreds structure defined in [MS-CSSP] section 2.2.1.2.3. |
 | CORRELATION_INFO_PRESENT 0x08 | The optional **rdpCorrelationInfo** field of the 224 Connection Request PDU (section [2.2.1.1](#Section_2.2.1.1)) is present. |
 
@@ -1370,7 +1370,7 @@ packet-beta
 
 | Flag | Meaning |
 | --- | --- |
-| PROTOCOL_RDP 0x00000000 | Standard RDP Security (section [5.3](#Section_2.2.13.2)). |
+| PROTOCOL_RDP 0x00000000 | Standard RDP Security (section [5.3](#Section_5.3)). |
 | PROTOCOL_SSL 0x00000001 | [TLS](#Section_5.4.5.2.2) 1.0, 1.1, or 1.2 (section 5.4.5.1). |
 | PROTOCOL_HYBRID 0x00000002 | [Credential Security Support Provider protocol (CredSSP)](#Section_5.4.5.2) (section 5.4.5.2). If this flag is set, then the PROTOCOL_SSL (0x00000001) flag SHOULD also be set because [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls) is a subset of CredSSP. |
 | PROTOCOL_RDSTLS 0x00000004 | RDSTLS protocol (section [5.4.5.3](#Section_5.4.5.3)). |
@@ -1404,7 +1404,7 @@ packet-beta
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Server X.224 Connection Confirm PDU
 
-The X.224 Connection Confirm PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Initiation phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent as a response to the X.224 Connection Request PDU (section [2.2.1.1](#Section_2.2.1.1)).
+The X.224 Connection Confirm PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Initiation phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent as a response to the X.224 Connection Request PDU (section [2.2.1.1](#Section_2.2.1.1)).
 
 ```mermaid
 packet-beta
@@ -1438,10 +1438,10 @@ packet-beta
 
 | Flag | Meaning |
 | --- | --- |
-| EXTENDED_CLIENT_DATA_SUPPORTED 0x01 | The server supports [**Extended Client Data Blocks**](#gt_extended-client-data-block) in the GCC Conference Create Request user data (section [2.2.1.3](#Section_3.3.5.3.3)). |
+| EXTENDED_CLIENT_DATA_SUPPORTED 0x01 | The server supports [**Extended Client Data Blocks**](#gt_extended-client-data-block) in the GCC Conference Create Request user data (section [2.2.1.3](#Section_2.2.1.3)). |
 | DYNVC_GFX_PROTOCOL_SUPPORTED 0x02 | The server supports the Graphics Pipeline Extension Protocol described in [MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) sections 1, 2, and 3. |
 | NEGRSP_FLAG_RESERVED 0x04 | An unused flag that is reserved for future use. This flag SHOULD be ignored by the client. |
-| RESTRICTED_ADMIN_MODE_SUPPORTED 0x08 | Indicates that the server supports credential-less logon over CredSSP (also known as "restricted admin mode") and it is acceptable for the client to send empty credentials in the **TSPasswordCreds** structure defined in [MS-CSSP](#Section_5) section 2.2.1.2.1.<3> |
+| RESTRICTED_ADMIN_MODE_SUPPORTED 0x08 | Indicates that the server supports credential-less logon over CredSSP (also known as "restricted admin mode") and it is acceptable for the client to send empty credentials in the **TSPasswordCreds** structure defined in [MS-CSSP](../MS-CSSP/MS-CSSP.md) section 2.2.1.2.1.<3> |
 | REDIRECTED_AUTHENTICATION_MODE_SUPPORTED 0x10 | Indicates that the server supports credential-less logon over CredSSP with credential redirection (also known as "Remote Credential Guard"). The client can send a redirected logon buffer in the TSRemoteGuardCreds structure defined in [MS-CSSP] section 2.2.1.2.3. |
 
 **length (2 bytes):** A 16-bit, unsigned integer that specifies the packet size. This field MUST be set to 0x0008 (8 bytes).
@@ -1450,7 +1450,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| PROTOCOL_RDP 0x00000000 | Standard RDP Security (section [5.3](#Section_2.2.13.2)). |
+| PROTOCOL_RDP 0x00000000 | Standard RDP Security (section [5.3](#Section_5.3)). |
 | PROTOCOL_SSL 0x00000001 | [TLS](#Section_5.4.5.2.2) 1.0, 1.1 or 1.2 (section 5.4.5.1). |
 | PROTOCOL_HYBRID 0x00000002 | [CredSSP](#Section_5.4.5.2) (section 5.4.5.2). |
 | PROTOCOL_RDSTLS 0x00000004 | RDSTLS protocol (section [5.4.5.3](#Section_5.4.5.3)). |
@@ -1481,16 +1481,16 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | SSL_REQUIRED_BY_SERVER 0x00000001 | The server requires that the client support [Enhanced RDP Security](#Section_5.4) (section 5.4) with either [TLS](#Section_5.4.5.2.2) 1.0, 1.1 or 1.2 (section 5.4.5.1) or [CredSSP](#Section_5.4.5.2) (section 5.4.5.2). If only CredSSP was requested then the server only supports TLS. |
-| SSL_NOT_ALLOWED_BY_SERVER 0x00000002 | The server is configured to only use [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) and does not support any [External Security Protocols](#Section_5) (section 5.4.5). |
+| SSL_NOT_ALLOWED_BY_SERVER 0x00000002 | The server is configured to only use [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) and does not support any [External Security Protocols](#Section_5.4.5) (section 5.4.5). |
 | SSL_CERT_NOT_ON_SERVER 0x00000003 | The server does not possess a valid authentication certificate and cannot initialize the External Security Protocol Provider (section 5.4.5). |
-| INCONSISTENT_FLAGS 0x00000004 | The list of requested security protocols is not consistent with the current security protocol in effect. This error is only possible when the [Direct Approach](#Section_5.4.2.2) (sections 5.4.2.2 and [1.3.1.2](#Section_5.4.2)) is used and an External Security Protocol (section 5.4.5) is already being used. |
+| INCONSISTENT_FLAGS 0x00000004 | The list of requested security protocols is not consistent with the current security protocol in effect. This error is only possible when the [Direct Approach](#Section_5.4.2.2) (sections 5.4.2.2 and [1.3.1.2](#Section_1.3.1.2)) is used and an External Security Protocol (section 5.4.5) is already being used. |
 | HYBRID_REQUIRED_BY_SERVER 0x00000005 | The server requires that the client support Enhanced RDP Security (section 5.4) with CredSSP (section 5.4.5.2). |
 | SSL_WITH_USER_AUTH_REQUIRED_BY_SERVER 0x00000006 | The server requires that the client support Enhanced RDP Security (section 5.4) with TLS 1.0, 1.1 or 1.2 (section 5.4.5.1) and certificate-based client authentication.<4> |
 
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 Client MCS Connect Initial PDU with GCC Conference Create Request
 
-The MCS Connect Initial PDU is an RDP Connection Sequence PDU sent from client to server during the Basic Settings Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after receiving the X.224 Connection Confirm PDU (section [2.2.1.2](#Section_2.2.1.2)). The MCS Connect Initial PDU encapsulates a GCC Conference Create Request, which encapsulates concatenated blocks of settings data. A basic high-level overview of the nested structure for the Client MCS Connect Initial PDU is illustrated in section 1.3.1.1, in the figure specifying the MCS Connect Initial PDU. Note that the order of the settings data blocks is allowed to vary from that shown in the previously mentioned figure and the message syntax layout that follows. This is possible because each data block is identified by a [User Data Header](#Section_2.2.1.4.1) structure (section 2.2.1.3.1).
+The MCS Connect Initial PDU is an RDP Connection Sequence PDU sent from client to server during the Basic Settings Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after receiving the X.224 Connection Confirm PDU (section [2.2.1.2](#Section_2.2.1.2)). The MCS Connect Initial PDU encapsulates a GCC Conference Create Request, which encapsulates concatenated blocks of settings data. A basic high-level overview of the nested structure for the Client MCS Connect Initial PDU is illustrated in section 1.3.1.1, in the figure specifying the MCS Connect Initial PDU. Note that the order of the settings data blocks is allowed to vary from that shown in the previously mentioned figure and the message syntax layout that follows. This is possible because each data block is identified by a [User Data Header](#Section_2.2.1.3.1) structure (section 2.2.1.3.1).
 
 ```mermaid
 packet-beta
@@ -1518,7 +1518,7 @@ packet-beta
 
 **clientCoreData (variable):** Variable-length [Client Core Data](#Section_2.2.1.3.2) structure (section 2.2.1.3.2).
 
-**clientSecurityData (12 bytes):** [Client Security Data](#Section_5) structure (section 2.2.1.3.3).
+**clientSecurityData (12 bytes):** [Client Security Data](#Section_2.2.1.3.3) structure (section 2.2.1.3.3).
 
 **clientNetworkData (variable):** Variable-length [Client Network Data](#Section_2.2.1.3.4) structure (section 2.2.1.3.4).
 
@@ -1548,7 +1548,7 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | CS_CORE 0xC001 | The data block that follows contains [Client Core Data](#Section_2.2.1.3.2) (section 2.2.1.3.2). |
-| CS_SECURITY 0xC002 | The data block that follows contains [Client Security Data](#Section_5) (section 2.2.1.3.3). |
+| CS_SECURITY 0xC002 | The data block that follows contains [Client Security Data](#Section_2.2.1.3.3) (section 2.2.1.3.3). |
 | CS_NET 0xC003 | The data block that follows contains [Client Network Data](#Section_2.2.1.3.4) (section 2.2.1.3.4). |
 | CS_CLUSTER 0xC004 | The data block that follows contains [Client Cluster Data](#Section_2.2.1.3.5) (section 2.2.1.3.5). |
 | CS_MONITOR 0xC005 | The data block that follows contains Client Monitor Data (section [2.2.1.3.6](#Section_2.2.1.3.6)). |
@@ -1557,7 +1557,7 @@ packet-beta
 | CS_MULTITRANSPORT 0xC00A | The data block that follows contains Client Multitransport Channel Data (section [2.2.1.3.8](#Section_2.2.1.3.8)). |
 | CS_UNUSED1 0xC00C | The data block that follows contains Client Unused1 Data (section [2.2.1.3.9](#Section_2.2.1.3.9)). |
 | SC_CORE 0x0C01 | The data block that follows contains [Server Core Data](#Section_2.2.1.4.2) (section 2.2.1.4.2). |
-| SC_SECURITY 0x0C02 | The data block that follows contains [Server Security Data](#Section_5) (section 2.2.1.4.3). |
+| SC_SECURITY 0x0C02 | The data block that follows contains [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3). |
 | SC_NET 0x0C03 | The data block that follows contains [Server Network Data](#Section_2.2.1.4.4) (section 2.2.1.4.4). |
 | SC_MCS_MSGCHANNEL 0x0C04 | The data block that follows contains Server Message Channel Data (section [2.2.1.4.5](#Section_2.2.1.4.5)). |
 | SC_MULTITRANSPORT 0x0C08 | The data block that follows contains Server Multitransport Channel Data (section [2.2.1.4.6](#Section_2.2.1.4.6)). |
@@ -1601,7 +1601,7 @@ packet-beta
   848-879: "deviceScaleFactor (optional)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in section [2.2.1.3.1](#Section_2.2.1.4.1). The **User Data Header type** field MUST be set to CS_CORE (0xC001).
+**header (4 bytes):** A GCC user data block header, as specified in section [2.2.1.3.1](#Section_2.2.1.3.1). The **User Data Header type** field MUST be set to CS_CORE (0xC001).
 
 **version (4 bytes):** A 32-bit, unsigned integer. Client version number for the [**RDP**](#gt_remote-desktop-protocol-rdp). The major version number is stored in the high 2 bytes, while the minor version number is stored in the low 2 bytes.
 
@@ -1704,18 +1704,18 @@ If this field is present, then the **highColorDepth** field MUST also be present
 
 | Flag | Meaning |
 | --- | --- |
-| RNS_UD_CS_SUPPORT_ERRINFO_PDU 0x0001 | Indicates that the client supports the **Set Error Info PDU** (section [2.2.5.1](#Section_3.3.5.7.1)). |
+| RNS_UD_CS_SUPPORT_ERRINFO_PDU 0x0001 | Indicates that the client supports the **Set Error Info PDU** (section [2.2.5.1](#Section_2.2.5.1)). |
 | RNS_UD_CS_WANT_32BPP_SESSION 0x0002 | Indicates that the client is requesting a session color depth of 32 bpp. This flag is necessary because the **highColorDepth** field does not support a value of 32. If this flag is set, the **highColorDepth** field SHOULD be set to 24 to provide an acceptable fallback for the scenario where the server does not support 32 bpp color. |
-| RNS_UD_CS_SUPPORT_STATUSINFO_PDU 0x0004 | Indicates that the client supports the **Server Status Info PDU** (section [2.2.5.2](#Section_3.2.5.7.2)). |
-| RNS_UD_CS_STRONG_ASYMMETRIC_KEYS 0x0008 | Indicates that the client supports asymmetric keys larger than 512 bits for use with the **Server Certificate** (section [2.2.1.4.3.1](#Section_2.2.1.4.3.1)) sent in the **Server Security Data** block (section [2.2.1.4.3](#Section_5)). |
+| RNS_UD_CS_SUPPORT_STATUSINFO_PDU 0x0004 | Indicates that the client supports the **Server Status Info PDU** (section [2.2.5.2](#Section_2.2.5.2)). |
+| RNS_UD_CS_STRONG_ASYMMETRIC_KEYS 0x0008 | Indicates that the client supports asymmetric keys larger than 512 bits for use with the **Server Certificate** (section [2.2.1.4.3.1](#Section_2.2.1.4.3.1)) sent in the **Server Security Data** block (section [2.2.1.4.3](#Section_2.2.1.4.3)). |
 | RNS_UD_CS_RELATIVE_MOUSE_INPUT 0x0010 | This flag MUST be ignored by the server if the **version** field is less than 0x00080011. If the **version** field is greater than or equal to 0x0008001, then this flag indicates that the client supports relative mouse mode (section [2.2.8.1.1.3.1.1.7](#Section_2.2.8.1.1.3.1.1.7) and section [2.2.8.1.2.2.7](#Section_2.2.8.1.2.2.7)). |
 | RNS_UD_CS_VALID_CONNECTION_TYPE 0x0020 | Indicates that the **connectionType** field contains valid data. |
 | RNS_UD_CS_SUPPORT_MONITOR_LAYOUT_PDU 0x0040 | Indicates that the client supports the **Monitor Layout PDU** (section [2.2.12.1](#Section_2.2.12.1)). |
 | RNS_UD_CS_SUPPORT_NETCHAR_AUTODETECT 0x0080 | Indicates that the client supports network characteristics detection using the structures and PDUs described in section [2.2.14](#Section_2.2.14). |
-| RNS_UD_CS_SUPPORT_DYNVC_GFX_PROTOCOL 0x0100 | Indicates that the client supports the Graphics Pipeline Extension Protocol described in [MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) sections 1, 2, and 3. Setting this flag requires that the client support network characteristics detection using the structures and PDUs described in section [2.2.1.4](#Section_3.3.5.3.4). |
+| RNS_UD_CS_SUPPORT_DYNVC_GFX_PROTOCOL 0x0100 | Indicates that the client supports the Graphics Pipeline Extension Protocol described in [MS-RDPEGFX](../MS-RDPEGFX/MS-RDPEGFX.md) sections 1, 2, and 3. Setting this flag requires that the client support network characteristics detection using the structures and PDUs described in section [2.2.1.4](#Section_2.2.1.4). |
 | RNS_UD_CS_SUPPORT_DYNAMIC_TIME_ZONE 0x0200 | Indicates that the client supports [**Dynamic DST**](#gt_dynamic-dst). Dynamic DST information is provided by the client in the **cbDynamicDSTTimeZoneKeyName**, **dynamicDSTTimeZoneKeyName** and **dynamicDaylightTimeDisabled** fields of the **Extended Info Packet** (section [2.2.1.11.1.1.1](#Section_4.1.10)). |
 | RNS_UD_CS_SUPPORT_HEARTBEAT_PDU 0x0400 | Indicates that the client supports the **Heartbeat PDU** (section [2.2.16.1](#Section_2.2.16.1)). |
-| RNS_UD_CS_SUPPORT_SKIP_CHANNELJOIN 0x0800 | Indicates that the client supports skipping the MCS Channel Join Request PDUs (section [2.2.1.8](#Section_3.2.5.3.8)) and MCS Channel Join Confirm PDUs (section [2.2.1.9](#Section_3.3.5.3.9)) in the Channel Connection phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). If this flag is set, the client considers all MCS channels as joined after the MCS Attach User Confirm PDU (section [2.2.1.7](#Section_3.2.5.3.7)) has been received (section [3.2.5.3.8](#Section_3.2.5.3.8)). |
+| RNS_UD_CS_SUPPORT_SKIP_CHANNELJOIN 0x0800 | Indicates that the client supports skipping the MCS Channel Join Request PDUs (section [2.2.1.8](#Section_2.2.1.8)) and MCS Channel Join Confirm PDUs (section [2.2.1.9](#Section_2.2.1.9)) in the Channel Connection phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). If this flag is set, the client considers all MCS channels as joined after the MCS Attach User Confirm PDU (section [2.2.1.7](#Section_2.2.1.7)) has been received (section [3.2.5.3.8](#Section_3.2.5.3.8)). |
 
 If this field is present, then the **supportedColorDepths** field MUST also be present. If this field is not present, all of the subsequent fields MUST NOT be present.
 
@@ -1761,7 +1761,7 @@ This value MUST be ignored if it is invalid. If this field is present, then the 
 <a id="Section_2.2.1.3.3"></a>
 ##### 2.2.1.3.3 Client Security Data (TS_UD_CS_SEC)
 
-The TS_UD_CS_SEC data block contains security-related information used to advertise client cryptographic support. This information is only relevant when [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) will be used. See sections [3](#Section_3) and [5.3.2](#Section_5.3.2) for a detailed discussion of how this information is used.
+The TS_UD_CS_SEC data block contains security-related information used to advertise client cryptographic support. This information is only relevant when [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) will be used. See sections [3](#Section_3) and [5.3.2](#Section_5.3.2) for a detailed discussion of how this information is used.
 
 ```mermaid
 packet-beta
@@ -1770,7 +1770,7 @@ packet-beta
   64-95: "extEncryptionMethods"
 ```
 
-**header (4 bytes):** A GCC user data block header as described in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.4.1). The User Data Header **type** field MUST be set to CS_SECURITY (0xC002).
+**header (4 bytes):** A GCC user data block header as described in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.3.1). The User Data Header **type** field MUST be set to CS_SECURITY (0xC002).
 
 **encryptionMethods (4 bytes):** A 32-bit, unsigned integer. Cryptographic encryption methods supported by the client and used in conjunction with Standard RDP Security. The client MUST specify at least one encryption method, and the server MUST select one of the methods specified by the client.
 
@@ -1797,7 +1797,7 @@ packet-beta
   64-127: "channelDefArray (variable)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header](#Section_2.2.1.4.1) (section 2.2.1.3.1). The User Data Header **type** field MUST be set to CS_NET (0xC003).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header](#Section_2.2.1.3.1) (section 2.2.1.3.1). The User Data Header **type** field MUST be set to CS_NET (0xC003).
 
 **channelCount (4 bytes):** A 32-bit, unsigned integer. The number of requested static virtual channels (the maximum allowed is 31).
 
@@ -1844,7 +1844,7 @@ packet-beta
   64-95: "RedirectedSessionID"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in **User Data Header** (section [2.2.1.3.1](#Section_2.2.1.4.1)). The **User Data Header type** field MUST be set to CS_CLUSTER (0xC004).
+**header (4 bytes):** A GCC user data block header, as specified in **User Data Header** (section [2.2.1.3.1](#Section_2.2.1.3.1)). The **User Data Header type** field MUST be set to CS_CLUSTER (0xC004).
 
 **Flags (4 bytes):** A 32-bit, unsigned integer. Cluster information flags.
 
@@ -1885,7 +1885,7 @@ packet-beta
   96-159: "monitorDefArray (variable)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in User Data Header (section [2.2.1.3.1](#Section_2.2.1.4.1)). The User Data Header type field MUST be set to CS_MONITOR (0xC005).
+**header (4 bytes):** A GCC user data block header, as specified in User Data Header (section [2.2.1.3.1](#Section_2.2.1.3.1)). The User Data Header type field MUST be set to CS_MONITOR (0xC005).
 
 **flags (4 bytes):** A 32-bit, unsigned integer. This field is unused and reserved for future use. It MUST be set to zero.
 
@@ -1932,14 +1932,14 @@ packet-beta
   32-63: "flags"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.4.1). The User Data Header type field MUST be set to CS_MCS_MSGCHANNEL (0xC006).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.3.1). The User Data Header type field MUST be set to CS_MCS_MSGCHANNEL (0xC006).
 
 **flags (4 bytes):** A 32-bit, unsigned integer. This field is unused and reserved for future use. It MUST be set to zero.
 
 <a id="Section_2.2.1.3.8"></a>
 ##### 2.2.1.3.8 Client Multitransport Channel Data (TS_UD_CS_MULTITRANSPORT)
 
-The TS_UD_CS_MULTITRANSPORT packet is used to indicate support for the RDP Multitransport Layer ([MS-RDPEMT](#Section_2.1) section 1.3) and to specify multitransport characteristics. This packet is an Extended Client Data Block and MUST NOT be sent to a server which does not advertise support for Extended Client Data Blocks by using the EXTENDED_CLIENT_DATA_SUPPORTED flag (0x00000001) as described in section [2.2.1.2.1](#Section_2.2.1.2.1).
+The TS_UD_CS_MULTITRANSPORT packet is used to indicate support for the RDP Multitransport Layer ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) and to specify multitransport characteristics. This packet is an Extended Client Data Block and MUST NOT be sent to a server which does not advertise support for Extended Client Data Blocks by using the EXTENDED_CLIENT_DATA_SUPPORTED flag (0x00000001) as described in section [2.2.1.2.1](#Section_2.2.1.2.1).
 
 ```mermaid
 packet-beta
@@ -1947,13 +1947,13 @@ packet-beta
   32-63: "flags"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.4.1). The User Data Header type field MUST be set to CS_MULTITRANSPORT (0xC00A).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.3.1). The User Data Header type field MUST be set to CS_MULTITRANSPORT (0xC00A).
 
 **flags (4 bytes):** A 32-bit, unsigned integer that specifies protocols supported by the client-side multitransport layer.
 
 | Value | Meaning |
 | --- | --- |
-| TRANSPORTTYPE_UDPFECR 0x01 | RDP-UDP Forward Error Correction (FEC) reliable transport ([MS-RDPEUDP](#Section_2.1) sections 1 to 3). |
+| TRANSPORTTYPE_UDPFECR 0x01 | RDP-UDP Forward Error Correction (FEC) reliable transport ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) sections 1 to 3). |
 | TRANSPORTTYPE_UDPFECL 0x04 | RDP-UDP FEC lossy transport ([MS-RDPEUDP] sections 1 to 3). |
 | TRANSPORTTYPE_UDP_PREFERRED 0x100 | Indicates that tunneling of static virtual channel traffic over UDP is supported ([MS-RDPEDYC](../MS-RDPEDYC/MS-RDPEDYC.md) section 3.1.5.4). |
 | SOFTSYNC_TCP_TO_UDP 0x200 | Indicates that switching dynamic virtual channels from the TCP to UDP transport is supported ([MS-RDPEDYC] section 3.1.5.3). |
@@ -1969,7 +1969,7 @@ packet-beta
   32-47: "pad2Octets"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.4.1). The User Data Header type field MUST be set to CS_UNUSED1 (0xC00C).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.3.1). The User Data Header type field MUST be set to CS_UNUSED1 (0xC00C).
 
 **pad2Octets (2 bytes):** A 32-bit, unsigned integer. This field is for padding, and the values in this field MUST be ignored.
 
@@ -1987,7 +1987,7 @@ packet-beta
   128-191: "monitorAttributesArray (variable)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header](#Section_2.2.1.4.1) (section 2.2.1.3.1). The User Data Header type field MUST be set to CS_MONITOR_EX (0xC008).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header](#Section_2.2.1.3.1) (section 2.2.1.3.1). The User Data Header type field MUST be set to CS_MONITOR_EX (0xC008).
 
 **flags (4 bytes):** A 32-bit, unsigned integer. This field is unused and reserved for future use. It MUST be set to zero.
 
@@ -2031,7 +2031,7 @@ packet-beta
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 Server MCS Connect Response PDU with GCC Conference Create Response
 
-The MCS Connect Response PDU is an RDP Connection Sequence PDU sent from server to client during the Basic Settings Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [MCS Connect Initial PDU](#Section_3.3.5.3.3) (section 2.2.1.3). The MCS Connect Response PDU encapsulates a GCC Conference Create Response, which encapsulates concatenated blocks of settings data. A basic high-level overview of the nested structure for the Server MCS Connect Response PDU is illustrated in section 1.3.1.1, in the figure specifying MCS Connect Response PDU. Note that the order of the settings data blocks is allowed to vary from that shown in the previously mentioned figure and the message syntax layout that follows. This is possible because each data block is identified by a [User Data Header](#Section_2.2.1.4.1) structure (section 2.2.1.4.1).
+The MCS Connect Response PDU is an RDP Connection Sequence PDU sent from server to client during the Basic Settings Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [MCS Connect Initial PDU](#Section_2.2.1.3) (section 2.2.1.3). The MCS Connect Response PDU encapsulates a GCC Conference Create Response, which encapsulates concatenated blocks of settings data. A basic high-level overview of the nested structure for the Server MCS Connect Response PDU is illustrated in section 1.3.1.1, in the figure specifying MCS Connect Response PDU. Note that the order of the settings data blocks is allowed to vary from that shown in the previously mentioned figure and the message syntax layout that follows. This is possible because each data block is identified by a [User Data Header](#Section_2.2.1.3.1) structure (section 2.2.1.4.1).
 
 ```mermaid
 packet-beta
@@ -2058,7 +2058,7 @@ packet-beta
 
 **serverNetworkData (variable):** Variable-length [Server Network Data](#Section_2.2.1.4.4) structure (section 2.2.1.4.4).
 
-**serverSecurityData (variable):** Variable-length [Server Security Data](#Section_5) structure (section 2.2.1.4.3).
+**serverSecurityData (variable):** Variable-length [Server Security Data](#Section_2.2.1.4.3) structure (section 2.2.1.4.3).
 
 **serverMessageChannelData (6 bytes):** Optional Server Message Channel Data structure (section [2.2.1.4.5](#Section_2.2.1.4.5)). This field MUST NOT be included if the client did not populate the optional **clientMessageChannelData** field in the MCS Connect Initial PDU (section 2.2.1.3).
 
@@ -2067,7 +2067,7 @@ packet-beta
 <a id="Section_2.2.1.4.1"></a>
 ##### 2.2.1.4.1 User Data Header (TS_UD_HEADER)
 
-See section [2.2.1.3.1](#Section_2.2.1.4.1) for a description of the User Data Header.
+See section [2.2.1.3.1](#Section_2.2.1.3.1) for a description of the User Data Header.
 
 <a id="Section_2.2.1.4.2"></a>
 ##### 2.2.1.4.2 Server Core Data (TS_UD_SC_CORE)
@@ -2082,7 +2082,7 @@ packet-beta
   96-127: "earlyCapabilityFlags (optional)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in **User Data Header** (section [2.2.1.3.1](#Section_2.2.1.4.1)). The **User Data Header type** field MUST be set to SC_CORE (0x0C01).
+**header (4 bytes):** A GCC user data block header, as specified in **User Data Header** (section [2.2.1.3.1](#Section_2.2.1.3.1)). The **User Data Header type** field MUST be set to SC_CORE (0x0C01).
 
 **version (4 bytes):** A 32-bit, unsigned integer. The server version number for the RDP. The major version number is stored in the high two bytes, while the minor version number is stored in the low two bytes.
 
@@ -2135,7 +2135,7 @@ packet-beta
   224-287: "serverCertificate (variable)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header](#Section_2.2.1.4.1) (section 2.2.1.3.1). The User Data Header **type** field MUST be set to SC_SECURITY (0x0C02).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header](#Section_2.2.1.3.1) (section 2.2.1.3.1). The User Data Header **type** field MUST be set to SC_SECURITY (0x0C02).
 
 **encryptionMethod (4 bytes):** A 32-bit, unsigned integer. The selected cryptographic method to use for the session. When [Enhanced RDP Security](#Section_5.4) (section 5.4) is being used, this field MUST be set to ENCRYPTION_METHOD_NONE (0).
 
@@ -2157,20 +2157,20 @@ packet-beta
 | ENCRYPTION_LEVEL_HIGH | 0x00000003 |
 | ENCRYPTION_LEVEL_FIPS | 0x00000004 |
 
-See section [5.3.1](#Section_5.4.1) for a description of each of the low, client-compatible, high, and FIPS encryption levels.
+See section [5.3.1](#Section_5.3.1) for a description of each of the low, client-compatible, high, and FIPS encryption levels.
 
 **serverRandomLen (4 bytes):** An optional 32-bit, unsigned integer that specifies the size in bytes of the **serverRandom** field. If the **encryptionMethod** and **encryptionLevel** fields are both set to zero, then this field MUST NOT be present and the length of the **serverRandom** field MUST be zero. If either the **encryptionMethod** or **encryptionLevel** field is non-zero, this field MUST be set to 0x00000020.
 
 **serverCertLen (4 bytes):** An optional 32-bit, unsigned integer that specifies the size in bytes of the **serverCertificate** field. If the **encryptionMethod** and **encryptionLevel** fields are both set to zero, then this field MUST NOT be present and the length of the **serverCertificate** field MUST be zero.
 
-**serverRandom (variable):** The variable-length server random value used to derive session keys (sections [5.3.4](#Section_5.3.4) and [5.3.5](#Section_4.11.1)). The length in bytes is given by the **serverRandomLen** field. If the **encryptionMethod** and **encryptionLevel** fields are both set to zero, then this field MUST NOT be present.
+**serverRandom (variable):** The variable-length server random value used to derive session keys (sections [5.3.4](#Section_5.3.4) and [5.3.5](#Section_5.3.5)). The length in bytes is given by the **serverRandomLen** field. If the **encryptionMethod** and **encryptionLevel** fields are both set to zero, then this field MUST NOT be present.
 
 **serverCertificate (variable):** The variable-length certificate containing the server's public key information. The length in bytes is given by the **serverCertLen** field. If the **encryptionMethod** and **encryptionLevel** fields are both set to zero, then this field MUST NOT be present.
 
 <a id="Section_2.2.1.4.3.1"></a>
 ###### 2.2.1.4.3.1 Server Certificate (SERVER_CERTIFICATE)
 
-The SERVER_CERTIFICATE structure describes the generic server certificate structure to which all server certificates present in the [Server Security Data](#Section_5) (section 2.2.1.4.3) conform.
+The SERVER_CERTIFICATE structure describes the generic server certificate structure to which all server certificates present in the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3) conform.
 
 ```mermaid
 packet-beta
@@ -2205,7 +2205,7 @@ packet-beta
 <a id="Section_2.2.1.4.3.1.1"></a>
 Server Proprietary Certificate (PROPRIETARYSERVERCERTIFICATE)
 
-The PROPRIETARYSERVERCERTIFICATE structure describes a signed certificate containing the server's public key and conforming to the structure of a [Server Certificate](#Section_2.2.1.4.3.1) (section 2.2.1.4.3.1). For a detailed description of [Proprietary Certificates](#Section_5.3.3.1), see section 5.3.3.1.
+The PROPRIETARYSERVERCERTIFICATE structure describes a signed certificate containing the server's public key and conforming to the structure of a [Server Certificate](#Section_5.3.3) (section 2.2.1.4.3.1). For a detailed description of [Proprietary Certificates](#Section_5.3.3.1), see section 5.3.3.1.
 
 ```mermaid
 packet-beta
@@ -2279,7 +2279,7 @@ packet-beta
   128-143: "Pad (optional)"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in section [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.4.1). The User Data Header **type** field MUST be set to SC_NET (0x0C03).
+**header (4 bytes):** A GCC user data block header, as specified in section [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.3.1). The User Data Header **type** field MUST be set to SC_NET (0x0C03).
 
 **MCSChannelId (2 bytes):** A 16-bit, unsigned integer. The MCS channel identifier of the I/O channel.
 
@@ -2307,7 +2307,7 @@ packet-beta
 <a id="Section_2.2.1.4.6"></a>
 ##### 2.2.1.4.6 Server Multitransport Channel Data (TS_UD_SC_MULTITRANSPORT)
 
-The **TS_UD_CS_MULTITRANSPORT** packet is used to indicate support for the RDP Multitransport Layer ([MS-RDPEMT](#Section_2.1) section 1.3) and to specify multitransport characteristics.
+The **TS_UD_CS_MULTITRANSPORT** packet is used to indicate support for the RDP Multitransport Layer ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) and to specify multitransport characteristics.
 
 ```mermaid
 packet-beta
@@ -2315,13 +2315,13 @@ packet-beta
   32-63: "flags"
 ```
 
-**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.4.1). The User Data Header type field MUST be set to SC_MULTITRANSPORT (0x0C08).
+**header (4 bytes):** A GCC user data block header, as specified in [User Data Header (section 2.2.1.3.1)](#Section_2.2.1.3.1). The User Data Header type field MUST be set to SC_MULTITRANSPORT (0x0C08).
 
 **flags (4 bytes):** A 32-bit, unsigned integer that specifies protocols supported by the server-side multitransport layer.
 
 | Value | Meaning |
 | --- | --- |
-| TRANSPORTTYPE_UDPFECR 0x01 | RDP-UDP Forward Error Correction (FEC) reliable transport ([MS-RDPEUDP](#Section_2.1) sections 1 to 3). |
+| TRANSPORTTYPE_UDPFECR 0x01 | RDP-UDP Forward Error Correction (FEC) reliable transport ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) sections 1 to 3). |
 | TRANSPORTTYPE_UDPFECL 0x04 | RDP-UDP FEC lossy transport ([MS-RDPEUDP] sections 1 to 3).<15> |
 | TRANSPORTTYPE_UDP_PREFERRED 0x100 | Indicates that tunneling of static virtual channel traffic over UDP is supported ([MS-RDPEDYC](../MS-RDPEDYC/MS-RDPEDYC.md) section 3.1.5.4). |
 | SOFTSYNC_TCP_TO_UDP 0x200 | Indicates that switching dynamic virtual channels from the TCP to UDP transport is supported ([MS-RDPEDYC] section 3.1.5.3). If the server advertises the SOFTSYNC_TCP_TO_UDP flag, then the server MUST support processing success responses in the **Initiate Multitransport Response PDU** (section [2.2.15.2](#Section_2.2.15.2)). |
@@ -2329,7 +2329,7 @@ packet-beta
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 Client MCS Erect Domain Request PDU
 
-The MCS Erect Domain Request PDU is an RDP Connection Sequence PDU sent from client to server during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after receiving the [MCS Connect Response PDU](#Section_3.3.5.3.4) (section 2.2.1.4).
+The MCS Erect Domain Request PDU is an RDP Connection Sequence PDU sent from client to server during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after receiving the [MCS Connect Response PDU](#Section_2.2.1.4) (section 2.2.1.4).
 
 ```mermaid
 packet-beta
@@ -2347,7 +2347,7 @@ packet-beta
 <a id="Section_2.2.1.6"></a>
 #### 2.2.1.6 Client MCS Attach User Request PDU
 
-The MCS Attach User Request PDU is an RDP Connection Sequence PDU sent from client to server during the Channel Connection phase of the RDP Connection Sequence to request a User Channel ID (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [MCS Erect Domain Request PDU](#Section_3.2.5.3.5) (section 2.2.1.5).
+The MCS Attach User Request PDU is an RDP Connection Sequence PDU sent from client to server during the Channel Connection phase of the RDP Connection Sequence to request a User Channel ID (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [MCS Erect Domain Request PDU](#Section_2.2.1.5) (section 2.2.1.5).
 
 ```mermaid
 packet-beta
@@ -2365,7 +2365,7 @@ packet-beta
 <a id="Section_2.2.1.7"></a>
 #### 2.2.1.7 Server MCS Attach User Confirm PDU
 
-The MCS Attach User Confirm PDU is an RDP Connection Sequence PDU sent from server to client during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [MCS Attach User Request PDU](#Section_4.1.6) (section 2.2.1.6).
+The MCS Attach User Confirm PDU is an RDP Connection Sequence PDU sent from server to client during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [MCS Attach User Request PDU](#Section_2.2.1.6) (section 2.2.1.6).
 
 ```mermaid
 packet-beta
@@ -2383,7 +2383,7 @@ packet-beta
 <a id="Section_2.2.1.8"></a>
 #### 2.2.1.8 Client MCS Channel Join Request PDU
 
-The MCS Channel Join Request PDU is an RDP Connection Sequence PDU sent from client to server during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after receiving the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) (section 2.2.1.7). The client uses the MCS Channel Join Request PDU to join the user channel obtained from the Attach User Confirm PDU, the I/O channel (section [2.2.1.4.4](#Section_2.2.1.4.4)), the message channel (section [2.2.1.4.5](#Section_2.2.1.4.5)), and all of the static virtual channels obtained from the Server Network Data structure (section 2.2.1.4.4).
+The MCS Channel Join Request PDU is an RDP Connection Sequence PDU sent from client to server during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after receiving the [MCS Attach User Confirm PDU](#Section_2.2.1.7) (section 2.2.1.7). The client uses the MCS Channel Join Request PDU to join the user channel obtained from the Attach User Confirm PDU, the I/O channel (section [2.2.1.4.4](#Section_2.2.1.4.4)), the message channel (section [2.2.1.4.5](#Section_2.2.1.4.5)), and all of the static virtual channels obtained from the Server Network Data structure (section 2.2.1.4.4).
 
 ```mermaid
 packet-beta
@@ -2401,7 +2401,7 @@ packet-beta
 <a id="Section_2.2.1.9"></a>
 #### 2.2.1.9 Server MCS Channel Join Confirm PDU
 
-The MCS Channel Join Confirm PDU is an RDP Connection Sequence PDU sent from server to client during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8).
+The MCS Channel Join Confirm PDU is an RDP Connection Sequence PDU sent from server to client during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8).
 
 ```mermaid
 packet-beta
@@ -2419,7 +2419,7 @@ packet-beta
 <a id="Section_2.2.1.10"></a>
 #### 2.2.1.10 Client Security Exchange PDU
 
-The Security Exchange PDU is an optional RDP Connection Sequence PDU that is sent from client to server during the RDP Security Commencement phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after all of the requested [MCS Channel Join Confirm PDUs (section 2.2.1.9)](#Section_3.3.5.3.9) have been received.
+The Security Exchange PDU is an optional RDP Connection Sequence PDU that is sent from client to server during the RDP Security Commencement phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after all of the requested [MCS Channel Join Confirm PDUs (section 2.2.1.9)](#Section_2.2.1.9) have been received.
 
 ```mermaid
 packet-beta
@@ -2433,14 +2433,14 @@ packet-beta
 
 **x224Data (3 bytes):** An X.224 Class 0 Data TPDU, as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-**mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the [**ASN.1**](#gt_asn1) structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a [Security Exchange PDU Data (section 2.2.1.10.1)](#Section_5) structure.
+**mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the [**ASN.1**](#gt_asn1) structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a [Security Exchange PDU Data (section 2.2.1.10.1)](#Section_2.2.1.10.1) structure.
 
 **securityExchangePduData (variable):** The actual contents of the Security Exchange PDU, as specified in section 2.2.1.10.1.
 
 <a id="Section_2.2.1.10.1"></a>
 ##### 2.2.1.10.1 Security Exchange PDU Data (TS_SECURITY_PACKET)
 
-The TS_SECURITY_PACKET structure contains the encrypted client random value which is used together with the server random (section [2.2.1.4.3](#Section_5)) to derive session keys to secure the connection (sections [5.3.4](#Section_5.3.4) and [5.3.5](#Section_4.11.1)).
+The TS_SECURITY_PACKET structure contains the encrypted client random value which is used together with the server random (section [2.2.1.4.3](#Section_2.2.1.4.3)) to derive session keys to secure the connection (sections [5.3.4](#Section_5.3.4) and [5.3.5](#Section_5.3.5)).
 
 ```mermaid
 packet-beta
@@ -2449,7 +2449,7 @@ packet-beta
   64-127: "encryptedClientRandom (variable)"
 ```
 
-**basicSecurityHeader (4 bytes):** A Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)). The **flags** field of the security header MUST contain the SEC_EXCHANGE_PKT flag (0x0001).
+**basicSecurityHeader (4 bytes):** A Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)). The **flags** field of the security header MUST contain the SEC_EXCHANGE_PKT flag (0x0001).
 
 **length (4 bytes):** A 32-bit, unsigned integer. The size in bytes of the buffer containing the encrypted client random value, not including the header length.
 
@@ -2458,7 +2458,7 @@ packet-beta
 <a id="Section_2.2.1.11"></a>
 #### 2.2.1.11 Client Info PDU
 
-The Client Info PDU is an RDP Connection Sequence PDU sent from client to server during the Secure Settings Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting a [Security Exchange PDU (section 2.2.1.10)](#Section_2.2.1.10.1) or, if the Security Exchange PDU was not sent, it is transmitted after receiving all requested [MCS Channel Join Confirm PDUs (section 2.2.1.9)](#Section_3.3.5.3.9).
+The Client Info PDU is an RDP Connection Sequence PDU sent from client to server during the Secure Settings Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting a [Security Exchange PDU (section 2.2.1.10)](#Section_2.2.1.10) or, if the Security Exchange PDU was not sent, it is transmitted after receiving all requested [MCS Channel Join Confirm PDUs (section 2.2.1.9)](#Section_2.2.1.9).
 
 ```mermaid
 packet-beta
@@ -2472,14 +2472,14 @@ packet-beta
 
 **x224Data (3 bytes):** An X.224 Class 0 Data TPDU, as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-**mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a [Client Info PDU Data (section 2.2.1.11.1)](#Section_4.1.10) structure.
+**mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a [Client Info PDU Data (section 2.2.1.11.1)](#Section_2.2.1.11.1) structure.
 
 **clientInfoPduData (variable):** The contents of the Client Info PDU, as specified in section 2.2.1.11.1.
 
 <a id="Section_2.2.1.11.1"></a>
 ##### 2.2.1.11.1 Client Info PDU Data (CLIENT_INFO_PDU)
 
-The CLIENT_INFO_PDU structure serves as a wrapper for a [Security Header](#Section_5) (section 2.2.8.1.1.2) and the actual client information contained in a [TS_INFO_PACKET](#Section_2.2.1.11.1.1) structure (section 2.2.1.11.1.1).
+The CLIENT_INFO_PDU structure serves as a wrapper for a [Security Header](#Section_2.2.8.1.1.2) (section 2.2.8.1.1.2) and the actual client information contained in a [TS_INFO_PACKET](#Section_2.2.1.11.1.1) structure (section 2.2.1.11.1.1).
 
 ```mermaid
 packet-beta
@@ -2489,9 +2489,9 @@ packet-beta
 
 **securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- [Basic Security Header](#Section_5) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.4.1) selected by the server is ENCRYPTION_LEVEL_NONE (0).
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header](#Section_2.2.8.1.1.2.1) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.3.1) selected by the server is ENCRYPTION_LEVEL_NONE (0).
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 The **flags** field of the security header MUST contain the SEC_INFO_PKT flag (section 2.2.8.1.1.2.1).
 
 **infoPacket (variable):** Client information, as specified in TS_INFO_PACKET.
@@ -2499,7 +2499,7 @@ The **flags** field of the security header MUST contain the SEC_INFO_PKT flag (s
 <a id="Section_2.2.1.11.1.1"></a>
 ###### 2.2.1.11.1.1 Info Packet (TS_INFO_PACKET)
 
-The **TS_INFO_PACKET** structure contains extra information not passed to the server during the Basic Settings Exchange phase (section [1.3.1.1](#Section_1.3)) of the RDP Connection Sequence, primarily to ensure that it gets encrypted (as auto-logon password data and other sensitive information is passed here).
+The **TS_INFO_PACKET** structure contains extra information not passed to the server during the Basic Settings Exchange phase (section [1.3.1.1](#Section_1.3.1.1)) of the RDP Connection Sequence, primarily to ensure that it gets encrypted (as auto-logon password data and other sensitive information is passed here).
 
 ```mermaid
 packet-beta
@@ -2529,7 +2529,7 @@ packet-beta
 | INFO_AUTOLOGON 0x00000008 | The client requests auto logon using the included user name, password and domain. |
 | INFO_UNICODE 0x00000010 | Indicates that the character set for strings in the **Info Packet** and **Extended Info Packet** (section 2.2.1.11.1.1.1) is Unicode. If this flag is absent, then the ANSI character set that is specified by the ANSI code page descriptor in the **CodePage** field is used for strings in the Info Packet and Extended Info Packet. |
 | INFO_MAXIMIZESHELL 0x00000020 | Indicates that the alternate shell (specified in the **AlternateShell** field of the **Info Packet** structure) MUST be started in a maximized state. |
-| INFO_LOGONNOTIFY 0x00000040 | Indicates that the client wants to be informed of the user name and domain used to log on to the server, as well as the ID of the session to which the user connected. The **Save Session Info PDU** (section [2.2.10.1](#Section_4.3)) is sent from the server to notify the client of this information using a **Logon Info Version 1** (section [2.2.10.1.1.1](#Section_2.2.10.1.1.1)) or **Logon Info Version 2** (section [2.2.10.1.1.2](#Section_2.2.10.1.1.2)) structure. |
+| INFO_LOGONNOTIFY 0x00000040 | Indicates that the client wants to be informed of the user name and domain used to log on to the server, as well as the ID of the session to which the user connected. The **Save Session Info PDU** (section [2.2.10.1](#Section_2.2.10.1)) is sent from the server to notify the client of this information using a **Logon Info Version 1** (section [2.2.10.1.1.1](#Section_2.2.10.1.1.1)) or **Logon Info Version 2** (section [2.2.10.1.1.2](#Section_2.2.10.1.1.2)) structure. |
 | INFO_COMPRESSION 0x00000080 | Indicates that the CompressionTypeMask is valid and contains the highest compression package type supported by the client. |
 | CompressionTypeMask 0x00001E00 | Indicates the highest compression package type supported. See the discussion which follows this table for more information. |
 | INFO_ENABLEWINDOWSKEY 0x00000100 | Indicates that the client uses the Windows key on Windows-compatible keyboards. |
@@ -2540,7 +2540,7 @@ packet-beta
 | INFO_MOUSE_HAS_WHEEL 0x00020000 | Indicates that the mouse which is connected to the client machine has a scroll wheel. This flag is not understood by RDP 4.0, 5.0, 5.1, and 5.2 servers. |
 | INFO_PASSWORD_IS_SC_PIN 0x00040000 | Indicates that the **Password** field in the Info Packet contains a smart card personal identification number (PIN). This flag is not understood by RDP 4.0, 5.0, 5.1, and 5.2 servers. |
 | INFO_NOAUDIOPLAYBACK 0x00080000 | Indicates that audio redirection (using the protocol defined in [MS-RDPEA](../MS-RDPEA/MS-RDPEA.md) sections 2 and 3) MUST NOT take place. This flag is not understood by RDP 4.0, 5.0, 5.1, and 5.2 servers. If the INFO_NOAUDIOPLAYBACK flag is not set, then audio redirection SHOULD take place if the INFO_REMOTECONSOLEAUDIO (0x00002000) flag is also not set. |
-| INFO_USING_SAVED_CREDS 0x00100000 | Any user credentials sent on the wire during the RDP Connection Sequence (sections 1.3.1.1 and [1.3.1.2](#Section_5.4.2)) have been retrieved from a credential store and were not obtained directly from the user. This flag is not understood by RDP 4.0, 5.0, 5.1, 5.2, and 6.0 servers. |
+| INFO_USING_SAVED_CREDS 0x00100000 | Any user credentials sent on the wire during the RDP Connection Sequence (sections 1.3.1.1 and [1.3.1.2](#Section_1.3.1.2)) have been retrieved from a credential store and were not obtained directly from the user. This flag is not understood by RDP 4.0, 5.0, 5.1, 5.2, and 6.0 servers. |
 | INFO_AUDIOCAPTURE 0x00200000 | Indicates that the redirection of client-side audio input to a session hosted on a remote server is supported using the protocol defined in [MS-RDPEAI](../MS-RDPEAI/MS-RDPEAI.md) sections 2 and 3. This flag is not understood by RDP 4.0, 5.0, 5.1, 5.2, 6.0, and 6.1 servers. |
 | INFO_VIDEO_DISABLE 0x00400000 | Indicates that video redirection or playback (using the protocol defined in [MS-RDPEV](../MS-RDPEV/MS-RDPEV.md) sections 2 and 3) MUST NOT take place. This flag is not understood by RDP 4.0, 5.0, 5.1, 5.2, 6.0, and 6.1 servers. |
 | INFO_RESERVED1 0x00800000 | An unused flag that is reserved for future use. This flag MUST NOT be set. |
@@ -2642,7 +2642,7 @@ If the **connectionType** field of the Client Core Data (section 2.2.1.3.2) is s
 
 **cbAutoReconnectCookie (2 bytes):** A 16-bit, unsigned integer. The size in bytes of the cookie specified by the **autoReconnectCookie** field. This field MUST be set to zero or 0x001C. The **cbAutoReconnectCookie** field is not read by RDP 5.0 and 5.1 servers. If this field is present, then the **performanceFlags** field MUST also be present. If this field is not present, then all of the subsequent fields MUST NOT be present.
 
-**autoReconnectCookie (28 bytes):** Buffer containing an **ARC_CS_PRIVATE_PACKET** structure (section [2.2.4.3](#Section_2.2.4.3)). This buffer is a unique cookie that allows a disconnected client to seamlessly reconnect to a previously established session (see section [5.5](#Section_1.3.1.5) for more details). The **autoReconnectCookie** field is not read by RDP 5.0 and 5.1 servers. This field MUST be present if the **cbAutoReconnectCookie** field is nonzero.
+**autoReconnectCookie (28 bytes):** Buffer containing an **ARC_CS_PRIVATE_PACKET** structure (section [2.2.4.3](#Section_2.2.4.3)). This buffer is a unique cookie that allows a disconnected client to seamlessly reconnect to a previously established session (see section [5.5](#Section_5.5) for more details). The **autoReconnectCookie** field is not read by RDP 5.0 and 5.1 servers. This field MUST be present if the **cbAutoReconnectCookie** field is nonzero.
 
 **reserved1 (2 bytes):** This field is reserved for future use and has no effect on RDP wire traffic. It SHOULD<20> be set to zero. If this field is present, the **cbAutoReconnectCookie** and **reserved2** fields MUST also be present. If this field is not present, then all of the subsequent fields MUST NOT be present.
 
@@ -2762,7 +2762,7 @@ packet-beta
 <a id="Section_2.2.1.12"></a>
 #### 2.2.1.12 Server License Error PDU - Valid Client
 
-The License Error (Valid Client) PDU is an RDP Connection Sequence PDU sent from server to client during the Licensing phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). This licensing [**PDU**](#gt_protocol-data-unit-pdu) indicates that the server will not issue the client a license to store and that the Licensing Phase has ended successfully. This is one possible licensing PDU that can be sent during the Licensing Phase (see [MS-RDPELE](../MS-RDPELE/MS-RDPELE.md) section 2.2.2 for a list of all permissible licensing PDUs).
+The License Error (Valid Client) PDU is an RDP Connection Sequence PDU sent from server to client during the Licensing phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). This licensing [**PDU**](#gt_protocol-data-unit-pdu) indicates that the server will not issue the client a license to store and that the Licensing Phase has ended successfully. This is one possible licensing PDU that can be sent during the Licensing Phase (see [MS-RDPELE](../MS-RDPELE/MS-RDPELE.md) section 2.2.2 for a list of all permissible licensing PDUs).
 
 ```mermaid
 packet-beta
@@ -2781,10 +2781,10 @@ packet-beta
 
 **securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- [Basic Security Header](#Section_5) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.4.1) selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded **flags** field does not contain the SEC_ENCRYPT (0x0008) flag.
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
-If the Encryption Level is set to ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), ENCRYPTION_LEVEL_HIGH (3), or ENCRYPTION_LEVEL_FIPS (4) and the **flags** field of the security header does not contain the SEC_ENCRYPT (0x0008) flag (the licensing PDU is not encrypted), then the field MUST contain a Basic Security Header. This MUST be the case if SEC_LICENSE_ENCRYPT_SC (0x0200) flag was not set on the [Security Exchange PDU (section 2.2.1.10)](#Section_2.2.1.10.1).
+- [Basic Security Header](#Section_2.2.8.1.1.2.1) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.3.1) selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded **flags** field does not contain the SEC_ENCRYPT (0x0008) flag.
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+If the Encryption Level is set to ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), ENCRYPTION_LEVEL_HIGH (3), or ENCRYPTION_LEVEL_FIPS (4) and the **flags** field of the security header does not contain the SEC_ENCRYPT (0x0008) flag (the licensing PDU is not encrypted), then the field MUST contain a Basic Security Header. This MUST be the case if SEC_LICENSE_ENCRYPT_SC (0x0200) flag was not set on the [Security Exchange PDU (section 2.2.1.10)](#Section_2.2.1.10).
 
 The **flags** field of the security header MUST contain the SEC_LICENSE_PKT (0x0080) flag (section 2.2.8.1.1.2.1).
 
@@ -2877,7 +2877,7 @@ packet-beta
 | BB_DATA_BLOB 0x0001 | Used by License Information PDU and Platform Challenge Response PDU ([MS-RDPELE](../MS-RDPELE/MS-RDPELE.md) sections 2.2.2.3 and 2.2.2.5). |
 | BB_RANDOM_BLOB 0x0002 | Used by License Information PDU and New License Request PDU ([MS-RDPELE] sections 2.2.2.3 and 2.2.2.2). |
 | BB_CERTIFICATE_BLOB 0x0003 | Used by License Request PDU ([MS-RDPELE] section 2.2.2.1). |
-| BB_ERROR_BLOB 0x0004 | Used by [License Error PDU (section 2.2.1.12)](#Section_2.2.1.12.1.2). |
+| BB_ERROR_BLOB 0x0004 | Used by [License Error PDU (section 2.2.1.12)](#Section_2.2.1.12). |
 | BB_ENCRYPTED_DATA_BLOB 0x0009 | Used by Platform Challenge Response PDU and Upgrade License PDU ([MS-RDPELE] sections 2.2.2.5 and 2.2.2.6). |
 | BB_KEY_EXCHG_ALG_BLOB 0x000D | Used by License Request PDU ([MS-RDPELE] section 2.2.2.1). |
 | BB_SCOPE_BLOB 0x000E | Used by License Request PDU ([MS-RDPELE] section 2.2.2.1). |
@@ -2943,7 +2943,7 @@ Sent by client and server:
 <a id="Section_2.2.1.13.1"></a>
 ##### 2.2.1.13.1 Server Demand Active PDU
 
-The Demand Active PDU is an RDP Connection Sequence PDU sent from server to client during the Capabilities Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent upon successful completion of the Licensing phase of the RDP Connection Sequence.
+The Demand Active PDU is an RDP Connection Sequence PDU sent from server to client during the Capabilities Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent upon successful completion of the Licensing phase of the RDP Connection Sequence.
 
 ```mermaid
 packet-beta
@@ -2962,9 +2962,9 @@ packet-beta
 
 **securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **demandActivePduData (variable):** The contents of the Demand Active PDU, as specified in section [2.2.1.13.1.1](#Section_2.2.1.13.1.1).
@@ -3021,7 +3021,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| CAPSTYPE_GENERAL 0x0001 | [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.11) |
+| CAPSTYPE_GENERAL 0x0001 | [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.1) |
 | CAPSTYPE_BITMAP 0x0002 | [Bitmap Capability Set (section 2.2.7.1.2)](#Section_2.2.7.1.2) |
 | CAPSTYPE_ORDER 0x0003 | [Order Capability Set (section 2.2.7.1.3)](#Section_2.2.7.1.3) |
 | CAPSTYPE_BITMAPCACHE 0x0004 | Revision 1 Bitmap Cache Capability Set (section [2.2.7.1.4.1)](#Section_101d40a756c040e1bcb91475ff63cb9d) |
@@ -3047,7 +3047,7 @@ packet-beta
 | CAPSETTYPE_MULTIFRAGMENTUPDATE 0x001A | [Multifragment Update Capability Set (section 2.2.7.2.6)](#Section_2.2.7.2.6) |
 | CAPSETTYPE_LARGE_POINTER 0x001B | [Large Pointer Capability Set (section 2.2.7.2.7)](#Section_2.2.7.2.7) |
 | CAPSETTYPE_SURFACE_COMMANDS 0x001C | [Surface Commands Capability Set (section 2.2.7.2.9)](#Section_2.2.7.2.9) |
-| CAPSETTYPE_BITMAP_CODECS 0x001D | [Bitmap Codecs Capability Set (section 2.2.7.2.10)](#Section_2.2.7.2.10.1) |
+| CAPSETTYPE_BITMAP_CODECS 0x001D | [Bitmap Codecs Capability Set (section 2.2.7.2.10)](#Section_2.2.7.2.10) |
 | CAPSSETTYPE_FRAME_ACKNOWLEDGE 0x001E | Frame Acknowledge Capability Set ([MS-RDPRFX](../MS-RDPRFX/MS-RDPRFX.md) section 2.2.1.3) |
 
 **lengthCapability (2 bytes):** A 16-bit, unsigned integer. The length in bytes of the capability data, including the size of the **capabilitySetType** and **lengthCapability** fields.
@@ -3057,7 +3057,7 @@ packet-beta
 <a id="Section_2.2.1.13.2"></a>
 ##### 2.2.1.13.2 Client Confirm Active PDU
 
-The Confirm Active PDU is an RDP Connection Sequence PDU sent from client to server during the Capabilities Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [Demand Active PDU (section 2.2.1.13.1)](#Section_2.2.1.13.1). Once the Confirm Active PDU has been sent, the client can start sending input PDUs (section [2.2.8](#Section_2.2.8)) to the server.
+The Confirm Active PDU is an RDP Connection Sequence PDU sent from client to server during the Capabilities Exchange phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent as a response to the [Demand Active PDU (section 2.2.1.13.1)](#Section_2.2.1.13.1). Once the Confirm Active PDU has been sent, the client can start sending input PDUs (section [2.2.8](#Section_2.2.8)) to the server.
 
 ```mermaid
 packet-beta
@@ -3076,8 +3076,8 @@ packet-beta
 
 **securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **confirmActivePduData (variable):** The contents of the [Confirm Active PDU](#Section_4.1.13), as specified in section 2.2.1.13.2.1.
@@ -3121,7 +3121,7 @@ packet-beta
 <a id="Section_2.2.1.14"></a>
 #### 2.2.1.14 Client Synchronize PDU
 
-The Client Synchronize PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Confirm Active PDU (section 2.2.1.13.2)](#Section_2.2.1.13.2.1).
+The Client Synchronize PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Confirm Active PDU (section 2.2.1.13.2)](#Section_2.2.1.13.2).
 
 ```mermaid
 packet-beta
@@ -3138,10 +3138,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Synchronize PDU Data (section 2.2.1.14.1)](#Section_2.2.1.14.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **synchronizePduData (22 bytes):** The contents of the Synchronize PDU, as specified in section 2.2.1.14.1.
@@ -3167,7 +3167,7 @@ packet-beta
 <a id="Section_2.2.1.15"></a>
 #### 2.2.1.15 Client Control PDU - Cooperate
 
-The Client Control (Cooperate) PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Client Synchronize PDU (section 2.2.1.14)](#Section_4.1.14).
+The Client Control (Cooperate) PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Client Synchronize PDU (section 2.2.1.14)](#Section_2.2.1.14).
 
 ```mermaid
 packet-beta
@@ -3184,10 +3184,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Control PDU Data (section 2.2.1.15.1)](#Section_2.2.1.15.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **controlPduData (26 bytes):** The actual contents of the Control PDU, as specified in section 2.2.1.15.1. The **grantId** and **controlId** fields of the Control PDU Data MUST both be set to zero, while the **action** field MUST be set to CTRLACTION_COOPERATE (0x0004).
@@ -3223,7 +3223,7 @@ packet-beta
 <a id="Section_2.2.1.16"></a>
 #### 2.2.1.16 Client Control PDU - Request Control
 
-The Client Control (Request Control) PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Client Control (Cooperate) PDU (section 2.2.1.15)](#Section_2.2.1.15.1).
+The Client Control (Request Control) PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Client Control (Cooperate) PDU (section 2.2.1.15)](#Section_2.2.1.15).
 
 ```mermaid
 packet-beta
@@ -3240,10 +3240,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Control PDU Data (section 2.2.1.15.1)](#Section_2.2.1.15.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **controlPduData (26 bytes):** The contents of the Control PDU, as specified in section 2.2.1.15.1. The **grantId** and **controlId** fields of the Control PDU Data MUST both be set to zero, while the **action** field MUST be set to CTRLACTION_REQUEST_CONTROL (0x0001).
@@ -3251,7 +3251,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.1.17"></a>
 #### 2.2.1.17 Client Persistent Key List PDU
 
-The Persistent Key List PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). A single Persistent Key List PDU or a sequence of Persistent Key List PDUs MUST be sent after transmitting the [Client Control (Request Control) PDU (section 2.2.1.16)](#Section_2.2.1.16) if the client has bitmaps that were stored in a [Persistent Bitmap Cache (section 3.2.1.14)](#Section_3.2.1.14), the server advertised support for the [Bitmap Host Cache Support Capability Set (section 2.2.7.2.1)](#Section_2.2.7.2.1), and a Deactivation-Reactivation Sequence is not in progress (see section [1.3.1.3](#Section_1.3.1.3) for an overview of the Deactivation-Reactivation Sequence).
+The Persistent Key List PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). A single Persistent Key List PDU or a sequence of Persistent Key List PDUs MUST be sent after transmitting the [Client Control (Request Control) PDU (section 2.2.1.16)](#Section_2.2.1.16) if the client has bitmaps that were stored in a [Persistent Bitmap Cache (section 3.2.1.14)](#Section_3.2.1.14), the server advertised support for the [Bitmap Host Cache Support Capability Set (section 2.2.7.2.1)](#Section_2.2.7.2.1), and a Deactivation-Reactivation Sequence is not in progress (see section [1.3.1.3](#Section_1.3.1.3) for an overview of the Deactivation-Reactivation Sequence).
 
 ```mermaid
 packet-beta
@@ -3268,10 +3268,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU), which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Persistent Key List PDU Data (section 2.2.1.17.1)](#Section_2.2.1.17.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **persistentKeyListPduData (variable):** The contents of the Persistent Key List PDU, as specified in section 2.2.1.17.1.
@@ -3279,7 +3279,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.1.17.1"></a>
 ##### 2.2.1.17.1 Persistent Key List PDU Data (TS_BITMAPCACHE_PERSISTENT_LIST_PDU)
 
-The TS_BITMAPCACHE_PERSISTENT_LIST_PDU structure contains a list of cached bitmap keys saved from Cache Bitmap (Revision 2) Orders ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.2.3) that were sent in previous sessions. By including a key in the Persistent Key List PDU Data the client indicates to the server that it has a local copy of the bitmap associated with the key, which means that the server does not need to retransmit the bitmap to the client (for more details about the Persistent Bitmap Cache, see [MS-RDPEGDI] section 3.1.1.1.1). The bitmap keys can be sent in more than one [Persistent Key List PDU](#Section_3.3.5.3.17), with each [**PDU**](#gt_protocol-data-unit-pdu) being marked using flags in the **bBitMask** field. The number of bitmap keys encapsulated within the Persistent Key List PDU Data SHOULD be limited to 169.
+The TS_BITMAPCACHE_PERSISTENT_LIST_PDU structure contains a list of cached bitmap keys saved from Cache Bitmap (Revision 2) Orders ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 2.2.2.2.1.2.3) that were sent in previous sessions. By including a key in the Persistent Key List PDU Data the client indicates to the server that it has a local copy of the bitmap associated with the key, which means that the server does not need to retransmit the bitmap to the client (for more details about the Persistent Bitmap Cache, see [MS-RDPEGDI] section 3.1.1.1.1). The bitmap keys can be sent in more than one [Persistent Key List PDU](#Section_4.1.17), with each [**PDU**](#gt_protocol-data-unit-pdu) being marked using flags in the **bBitMask** field. The number of bitmap keys encapsulated within the Persistent Key List PDU Data SHOULD be limited to 169.
 
 ```mermaid
 packet-beta
@@ -3355,7 +3355,7 @@ packet-beta
 <a id="Section_2.2.1.18"></a>
 #### 2.2.1.18 Client Font List PDU
 
-The Font List PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Persistent Key List PDUs (section 2.2.1.17)](#Section_3.3.5.3.17) or, if the Persistent Key List PDUs were not sent, it is sent after transmitting the [Client Control (Request Control) PDU (section 2.2.1.16)](#Section_2.2.1.16).
+The Font List PDU is an RDP Connection Sequence PDU sent from client to server during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the [Persistent Key List PDUs (section 2.2.1.17)](#Section_2.2.1.17) or, if the Persistent Key List PDUs were not sent, it is sent after transmitting the [Client Control (Request Control) PDU (section 2.2.1.16)](#Section_2.2.1.16).
 
 ```mermaid
 packet-beta
@@ -3372,10 +3372,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request PDU contains a Security Header and a [Font List PDU Data (section 2.2.1.18.1)](#Section_2.2.1.18.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **fontListPduData (26 bytes):** The contents of the Font List PDU, as specified in section 2.2.1.18.1.
@@ -3407,7 +3407,7 @@ packet-beta
 <a id="Section_2.2.1.19"></a>
 #### 2.2.1.19 Server Synchronize PDU
 
-The Server Synchronize PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after receiving the [Confirm Active PDU (section 2.2.1.13.2)](#Section_2.2.1.13.2.1).
+The Server Synchronize PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after receiving the [Confirm Active PDU (section 2.2.1.13.2)](#Section_2.2.1.13.2).
 
 ```mermaid
 packet-beta
@@ -3424,11 +3424,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in section 7, parts 7 and 10 of [T125]). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Synchronize PDU Data (section 2.2.1.14.1)](#Section_2.2.1.14.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **synchronizePduData (22 bytes):** The contents of the Synchronize PDU as described in section 2.2.1.14.1.
@@ -3436,7 +3436,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.1.20"></a>
 #### 2.2.1.20 Server Control PDU - Cooperate
 
-The Server Control (Cooperate) PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the Server Synchronize PDU (section [2.2.1.19](#Section_2.2.1.19)).
+The Server Control (Cooperate) PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after transmitting the Server Synchronize PDU (section [2.2.1.19](#Section_2.2.1.19)).
 
 ```mermaid
 packet-beta
@@ -3453,11 +3453,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Control PDU Data (section 2.2.1.15.1)](#Section_2.2.1.15.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **controlPduData (26 bytes):** The contents of the Control PDU as described in section 2.2.1.15.1. The **grantId** and **controlId** fields of the Control PDU Data MUST both be set to zero, while the **action** field MUST be set to CTRLACTION_COOPERATE (0x0004).
@@ -3465,7 +3465,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.1.21"></a>
 #### 2.2.1.21 Server Control PDU - Granted Control
 
-The Server Control (Granted Control) PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after receiving the Client Control (Request Control) PDU (section [2.2.1.16](#Section_2.2.1.16)).
+The Server Control (Granted Control) PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after receiving the Client Control (Request Control) PDU (section [2.2.1.16](#Section_2.2.1.16)).
 
 ```mermaid
 packet-beta
@@ -3482,19 +3482,19 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Control PDU Data](#Section_2.2.1.15.1) (section 2.2.1.15.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header](#Section_5) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.4.1) selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header](#Section_2.2.8.1.1.2.1) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.3.1) selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
-**controlPduData (26 bytes):** The contents of the Control PDU as described in section 2.2.1.15.1. The **action** field MUST be set to CTRLACTION_GRANTED_CONTROL (0x0002). The **grantId** field MUST be set to the User Channel ID (sections [2.2.1.6](#Section_4.1.6) and [2.2.1.7](#Section_3.2.5.3.7)), while the **controlId** field MUST be set to the server channel ID (0x03EA).
+**controlPduData (26 bytes):** The contents of the Control PDU as described in section 2.2.1.15.1. The **action** field MUST be set to CTRLACTION_GRANTED_CONTROL (0x0002). The **grantId** field MUST be set to the User Channel ID (sections [2.2.1.6](#Section_2.2.1.6) and [2.2.1.7](#Section_2.2.1.7)), while the **controlId** field MUST be set to the server channel ID (0x03EA).
 
 <a id="Section_2.2.1.22"></a>
 #### 2.2.1.22 Server Font Map PDU
 
-The Font Map PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). It is sent after receiving the Font List PDU (section [2.2.1.18](#Section_2.2.1.18)). The Font Map PDU is the last PDU in the connection sequence.
+The Font Map PDU is an RDP Connection Sequence PDU sent from server to client during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). It is sent after receiving the Font List PDU (section [2.2.1.18](#Section_2.2.1.18)). The Font Map PDU is the last PDU in the connection sequence.
 
 ```mermaid
 packet-beta
@@ -3511,11 +3511,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Font Map PDU Data](#Section_2.2.1.22.1) (section 2.2.1.22.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header](#Section_5) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.4.1) selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header](#Section_2.2.8.1.1.2.1) (section 2.2.8.1.1.2.1) if the [Encryption Level](#Section_5.3.1) selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **fontMapPduData (26 bytes):** The contents of the Font Map PDU, as specified in section 2.2.1.22.1.
@@ -3567,10 +3567,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Shutdown Request PDU Data (section 2.2.2.1.1)](#Section_2.2.2.1.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header](#Section_5) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header](#Section_2.2.8.1.1.2.2) (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header](#Section_2.2.8.1.1.2.3) (section 2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **shutdownRequestPduData (18 bytes):** The contents of the Shutdown Request PDU, as specified in section 2.2.2.1.1.
@@ -3578,7 +3578,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.2.1.1"></a>
 ##### 2.2.2.1.1 Shutdown Request PDU Data (TS_SHUTDOWN_REQ_PDU)
 
-The TS_SHUTDOWN_REQ_PDU structure contains the contents of the [Shutdown Request PDU](#Section_2.2.2.1) (section 2.2.2.1), which is a [Share Data Header](#Section_2.2.8.1.1.1.2) (section 2.2.8.1.1.1.2) with no [**PDU**](#gt_protocol-data-unit-pdu) body.
+The TS_SHUTDOWN_REQ_PDU structure contains the contents of the [Shutdown Request PDU](#Section_4.2.1) (section 2.2.2.1), which is a [Share Data Header](#Section_2.2.8.1.1.1.2) (section 2.2.8.1.1.1.2) with no [**PDU**](#gt_protocol-data-unit-pdu) body.
 
 ```mermaid
 packet-beta
@@ -3607,11 +3607,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Shutdown Request Denied PDU Data (section 2.2.2.2.1)](#Section_2.2.2.2.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **shutdownRequestDeniedPduData (18 bytes):** The contents of the Shutdown Request Denied PDU, as specified in section 2.2.2.2.1.
@@ -3619,7 +3619,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.2.2.1"></a>
 ##### 2.2.2.2.1 Shutdown Request Denied PDU Data (TS_SHUTDOWN_DENIED_PDU)
 
-The TS_SHUTDOWN_DENIED_PDU structure contains the contents of the [Shutdown Request Denied PDU](#Section_2.2.2.2), which is a [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) with no [**PDU**](#gt_protocol-data-unit-pdu) body.
+The TS_SHUTDOWN_DENIED_PDU structure contains the contents of the [Shutdown Request Denied PDU](#Section_4.2.2), which is a [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) with no [**PDU**](#gt_protocol-data-unit-pdu) body.
 
 ```mermaid
 packet-beta
@@ -3631,7 +3631,7 @@ packet-beta
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 MCS Disconnect Provider Ultimatum PDU
 
-The MCS Disconnect Provider Ultimatum PDU is an MCS PDU sent as part of the [Disconnection Sequences](#Section_3.3.5.4), described in section 1.3.1.4.
+The MCS Disconnect Provider Ultimatum PDU is an MCS PDU sent as part of the [Disconnection Sequences](#Section_2.2.2), described in section 1.3.1.4.
 
 ```mermaid
 packet-beta
@@ -3669,11 +3669,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Deactivate All PDU Data (section 2.2.3.1.1)](#Section_2.2.3.1.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **deactivateAllPduData (variable):** The contents of the Deactivate All PDU, as specified in section 2.2.3.1.1.
@@ -3705,7 +3705,7 @@ packet-beta
 <a id="Section_2.2.4.1"></a>
 #### 2.2.4.1 Server Auto-Reconnect Status PDU
 
-The **Auto-Reconnect Status PDU** is sent by the server to the client to indicate that automatic reconnection using the Client Auto-Reconnect Packet (section [2.2.4.3](#Section_2.2.4.3)), sent as part of the extended information of the Client Info PDU (section [2.2.1.11.1](#Section_4.1.10)), has failed.
+The **Auto-Reconnect Status PDU** is sent by the server to the client to indicate that automatic reconnection using the Client Auto-Reconnect Packet (section [2.2.4.3](#Section_2.2.4.3)), sent as part of the extended information of the Client Info PDU (section [2.2.1.11.1](#Section_2.2.1.11.1)), has failed.
 
 ```mermaid
 packet-beta
@@ -3722,11 +3722,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and an [Auto-Reconnect Status PDU Data (section 2.2.4.1.1)](#Section_2.2.4.1.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **arcStatusPduData (22 bytes):** The contents of the Auto-Reconnect Status PDU, as specified in section 2.2.4.1.1.
@@ -3769,7 +3769,7 @@ packet-beta
 
 **LogonId (4 bytes):** A 32-bit, unsigned integer. The session identifier for reconnection.
 
-**ArcRandomBits (16 bytes):** Byte buffer containing a 16-byte, random number generated as a key for secure reconnection (section [5.5](#Section_1.3.1.5)).
+**ArcRandomBits (16 bytes):** Byte buffer containing a 16-byte, random number generated as a key for secure reconnection (section [5.5](#Section_5.5)).
 
 <a id="Section_2.2.4.3"></a>
 #### 2.2.4.3 Client Auto-Reconnect Packet (ARC_CS_PRIVATE_PACKET)
@@ -3794,7 +3794,7 @@ packet-beta
 
 **LogonId (4 bytes):** A 32-bit, unsigned integer. The session identifier for reconnection.
 
-**SecurityVerifier (16 bytes):** Byte buffer containing a 16-byte verifier value derived using cryptographic methods (as specified in section [5.5](#Section_1.3.1.5)) from the **ArcRandomBits** field of the [Server Auto-Reconnect Packet](#Section_2.2.4.2) (section 2.2.4.2).
+**SecurityVerifier (16 bytes):** Byte buffer containing a 16-byte verifier value derived using cryptographic methods (as specified in section [5.5](#Section_5.5)) from the **ArcRandomBits** field of the [Server Auto-Reconnect Packet](#Section_2.2.4.2) (section 2.2.4.2).
 
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Server Error Reporting and Status Updates
@@ -3819,11 +3819,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Set Error Info PDU Data (section 2.2.5.1.1)](#Section_2.2.5.1.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the PDU.
 
 **errorInfoPduData (22 bytes):** The contents of the Set Error Info PDU, as specified in section 2.2.5.1.1.
@@ -3831,7 +3831,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.5.1.1"></a>
 ##### 2.2.5.1.1 Set Error Info PDU Data (TS_SET_ERROR_INFO_PDU)
 
-The **TS_SET_ERROR_INFO_PDU** structure contains the contents of the **Set Error Info PDU** (section [2.2.5.1](#Section_3.3.5.7.1)), which is a **Share Data Header** (section [2.2.8.1.1.1.2](#Section_2.2.8.1.1.1.2)) with an error value field.
+The **TS_SET_ERROR_INFO_PDU** structure contains the contents of the **Set Error Info PDU** (section [2.2.5.1](#Section_2.2.5.1)), which is a **Share Data Header** (section [2.2.8.1.1.1.2](#Section_2.2.8.1.1.1.2)) with an error value field.
 
 ```mermaid
 packet-beta
@@ -3907,16 +3907,16 @@ RDP specific codes:
 | ERRINFO_UNKNOWNPDUTYPE2 0x000010C9 | Unknown **pduType2** field in a received Share Data Header (section 2.2.8.1.1.1.2). |
 | ERRINFO_UNKNOWNPDUTYPE 0x000010CA | Unknown **pduType** field in a received Share Control Header (section 2.2.8.1.1.1.1). |
 | ERRINFO_DATAPDUSEQUENCE 0x000010CB | An out-of-sequence Slow-Path Data PDU (section 2.2.8.1.1.1.1) has been received. |
-| ERRINFO_CONTROLPDUSEQUENCE 0x000010CD | An out-of-sequence Demand Active PDU (section [2.2.1.13.1](#Section_2.2.1.13.1)), Confirm Active PDU (section [2.2.1.13.2](#Section_2.2.1.13.2.1)), Deactivate All PDU (section [2.2.3.1](#Section_3.2.5.5.1)) or Enhanced Security Server Redirection PDU (section [2.2.13.3.1](#Section_2.2.13.3.1)) has been received. |
-| ERRINFO_INVALIDCONTROLPDUACTION 0x000010CE | A Control PDU (sections [2.2.1.15](#Section_2.2.1.15.1) and [2.2.1.16](#Section_2.2.1.16)) has been received with an invalid **action** field. |
+| ERRINFO_CONTROLPDUSEQUENCE 0x000010CD | An out-of-sequence Demand Active PDU (section [2.2.1.13.1](#Section_2.2.1.13.1)), Confirm Active PDU (section [2.2.1.13.2](#Section_2.2.1.13.2)), Deactivate All PDU (section [2.2.3.1](#Section_2.2.3.1)) or Enhanced Security Server Redirection PDU (section [2.2.13.3.1](#Section_2.2.13.3.1)) has been received. |
+| ERRINFO_INVALIDCONTROLPDUACTION 0x000010CE | A Control PDU (sections [2.2.1.15](#Section_2.2.1.15) and [2.2.1.16](#Section_2.2.1.16)) has been received with an invalid **action** field. |
 | ERRINFO_INVALIDINPUTPDUTYPE 0x000010CF | One of two possible errors: A Slow-Path Input Event (section [2.2.8.1.1.3.1.1](#Section_2.2.8.1.1.3.1.1)) has been received with an invalid **messageType** field. A Fast-Path Input Event (section [2.2.8.1.2.2](#Section_2.2.8.1.2.2)) has been received with an invalid **eventCode** field. |
 | ERRINFO_INVALIDINPUTPDUMOUSE 0x000010D0 | One of two possible errors: A Slow-Path Mouse Event (section [2.2.8.1.1.3.1.1.3](#Section_2.2.8.1.1.3.1.1.3)) or Extended Mouse Event (section [2.2.8.1.1.3.1.1.4](#Section_2.2.8.1.1.3.1.1.4)) has been received with an invalid **pointerFlags** field. A Fast-Path Mouse Event (section [2.2.8.1.2.2.3](#Section_2.2.8.1.2.2.3)) or Fast-Path Extended Mouse Event (section [2.2.8.1.2.2.4](#Section_2.2.8.1.2.2.4)) has been received with an invalid **pointerFlags** field. |
 | ERRINFO_INVALIDREFRESHRECTPDU 0x000010D1 | An invalid Refresh Rect PDU (section [2.2.11.2](#Section_2.2.11.2)) has been received. |
-| ERRINFO_CREATEUSERDATAFAILED 0x000010D2 | The server failed to construct the GCC Conference Create Response user data (section [2.2.1.4](#Section_3.3.5.3.4)). |
-| ERRINFO_CONNECTFAILED 0x000010D3 | Processing during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases) has failed. |
+| ERRINFO_CREATEUSERDATAFAILED 0x000010D2 | The server failed to construct the GCC Conference Create Response user data (section [2.2.1.4](#Section_2.2.1.4)). |
+| ERRINFO_CONNECTFAILED 0x000010D3 | Processing during the Channel Connection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases) has failed. |
 | ERRINFO_CONFIRMACTIVEWRONGSHAREID 0x000010D4 | A Confirm Active PDU (section 2.2.1.13.2) was received from the client with an invalid **shareID** field. |
 | ERRINFO_CONFIRMACTIVEWRONGORIGINATOR 0x000010D5 | A Confirm Active PDU (section 2.2.1.13.2) was received from the client with an invalid **originatorID** field. |
-| ERRINFO_PERSISTENTKEYPDUBADLENGTH 0x000010DA | There is not enough data to process a Persistent Key List PDU (section [2.2.1.17](#Section_3.3.5.3.17)). |
+| ERRINFO_PERSISTENTKEYPDUBADLENGTH 0x000010DA | There is not enough data to process a Persistent Key List PDU (section [2.2.1.17](#Section_2.2.1.17)). |
 | ERRINFO_PERSISTENTKEYPDUILLEGALFIRST 0x000010DB | A Persistent Key List PDU (section 2.2.1.17) marked as PERSIST_PDU_FIRST (0x01) was received after the reception of a prior Persistent Key List PDU also marked as PERSIST_PDU_FIRST. |
 | ERRINFO_PERSISTENTKEYPDUTOOMANYTOTALKEYS 0x000010DC | A Persistent Key List PDU (section 2.2.1.17) was received which specified a total number of bitmap cache entries larger than 262144. |
 | ERRINFO_PERSISTENTKEYPDUTOOMANYCACHEKEYS 0x000010DD | A Persistent Key List PDU (section 2.2.1.17) was received which specified an invalid total number of keys for a bitmap cache (the number of entries that can be stored within each bitmap cache is specified in the Revision 1 or 2 Bitmap Cache Capability Set (section [2.2.7.1.4](#Section_2.2.7.1.4)) that is sent from client to server). |
@@ -3925,8 +3925,8 @@ RDP specific codes:
 | ERRINFO_SECURITYDATATOOSHORT 0x000010E0 | One of two possible errors: The **dataSignature** field of the Fast-Path Input Event PDU (section 2.2.8.1.2) does not contain enough data. The **fipsInformation** and **dataSignature** fields of the Fast-Path Input Event PDU (section 2.2.8.1.2) do not contain enough data. |
 | ERRINFO_VCHANNELDATATOOSHORT 0x000010E1 | One of two possible errors: There is not enough data in the Client Network Data (section [2.2.1.3.4](#Section_2.2.1.3.4)) to read the virtual channel configuration data. There is not enough data to read a complete Channel PDU Header (section [2.2.6.1.1](#Section_2.2.6.1.1)). |
 | ERRINFO_SHAREDATATOOSHORT 0x000010E2 | One of four possible errors: There is not enough data to process Control PDU Data (section [2.2.1.15.1](#Section_2.2.1.15.1)). There is not enough data to read a complete Share Control Header (section 2.2.8.1.1.1.1). There is not enough data to read a complete Share Data Header (section 2.2.8.1.1.1.2) of a Slow-Path Data PDU (section 2.2.8.1.1.1.1). There is not enough data to process Font List PDU Data (section [2.2.1.18.1](#Section_2.2.1.18.1)). |
-| ERRINFO_BADSUPRESSOUTPUTPDU 0x000010E3 | One of two possible errors: There is not enough data to process Suppress Output PDU Data (section [2.2.11.3.1](#Section_2.2.11.3)). The **allowDisplayUpdates** field of the Suppress Output PDU Data (section 2.2.11.3.1) is invalid. |
-| ERRINFO_CONFIRMACTIVEPDUTOOSHORT 0x000010E5 | One of two possible errors: There is not enough data to read the **shareControlHeader**, **shareID**, **originatorID**, **lengthSourceDescriptor**, and **lengthCombinedCapabilities** fields of the Confirm Active PDU Data (section [2.2.1.13.2.1](#Section_4.1.13)). There is not enough data to read the **sourceDescriptor**, **numberCapabilities**, **pad2Octets**, and **capabilitySets** fields of the Confirm Active PDU Data (section 2.2.1.13.2.1). |
+| ERRINFO_BADSUPRESSOUTPUTPDU 0x000010E3 | One of two possible errors: There is not enough data to process Suppress Output PDU Data (section [2.2.11.3.1](#Section_2.2.11.3.1)). The **allowDisplayUpdates** field of the Suppress Output PDU Data (section 2.2.11.3.1) is invalid. |
+| ERRINFO_CONFIRMACTIVEPDUTOOSHORT 0x000010E5 | One of two possible errors: There is not enough data to read the **shareControlHeader**, **shareID**, **originatorID**, **lengthSourceDescriptor**, and **lengthCombinedCapabilities** fields of the Confirm Active PDU Data (section [2.2.1.13.2.1](#Section_2.2.1.13.2.1)). There is not enough data to read the **sourceDescriptor**, **numberCapabilities**, **pad2Octets**, and **capabilitySets** fields of the Confirm Active PDU Data (section 2.2.1.13.2.1). |
 | ERRINFO_CAPABILITYSETTOOSMALL 0x000010E7 | There is not enough data to read the **capabilitySetType** and the **lengthCapability** fields in a received Capability Set (section [2.2.1.13.1.1.1](#Section_2.2.1.13.1.1.1)). |
 | ERRINFO_CAPABILITYSETTOOLARGE 0x000010E8 | A Capability Set (section 2.2.1.13.1.1.1) has been received with a **lengthCapability** field that contains a value greater than the total length of the data received. |
 | ERRINFO_NOCURSORCACHE 0x000010E9 | One of two possible errors: Both the **colorPointerCacheSize** and **pointerCacheSize** fields in the Pointer Capability Set (section [2.2.7.1.5](#Section_2.2.7.1.5)) are set to zero. The **pointerCacheSize** field in the Pointer Capability Set (section 2.2.7.1.5) is not present, and the **colorPointerCacheSize** field is set to zero. |
@@ -3941,9 +3941,9 @@ RDP specific codes:
 | ERRINFO_OFFSCRCACHEERRORPDUBADLENGTH 0x000010F6 | There is not enough data to process an Offscreen Bitmap Cache Error PDU ([MS-RDPEGDI] section 2.2.2.3.2). |
 | ERRINFO_DNGCACHEERRORPDUBADLENGTH 0x000010F7 | There is not enough data to process a DrawNineGrid Cache Error PDU ([MS-RDPEGDI] section 2.2.2.3.3). |
 | ERRINFO_GDIPLUSPDUBADLENGTH 0x000010F8 | There is not enough data to process a GDI+ Error PDU ([MS-RDPEGDI] section 2.2.2.3.4). |
-| ERRINFO_SECURITYDATATOOSHORT2 0x00001111 | There is not enough data to read a Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)). |
-| ERRINFO_SECURITYDATATOOSHORT3 0x00001112 | There is not enough data to read a Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) or FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)). |
-| ERRINFO_SECURITYDATATOOSHORT4 0x00001113 | There is not enough data to read the **basicSecurityHeader** and **length** fields of the Security Exchange PDU Data (section [2.2.1.10.1](#Section_5)). |
+| ERRINFO_SECURITYDATATOOSHORT2 0x00001111 | There is not enough data to read a Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)). |
+| ERRINFO_SECURITYDATATOOSHORT3 0x00001112 | There is not enough data to read a Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) or FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)). |
+| ERRINFO_SECURITYDATATOOSHORT4 0x00001113 | There is not enough data to read the **basicSecurityHeader** and **length** fields of the Security Exchange PDU Data (section [2.2.1.10.1](#Section_2.2.1.10.1)). |
 | ERRINFO_SECURITYDATATOOSHORT5 0x00001114 | There is not enough data to read the **CodePage**, **flags**, **cbDomain**, **cbUserName**, **cbPassword**, **cbAlternateShell**, **cbWorkingDir**, **Domain**, **UserName**, **Password**, **AlternateShell**, and **WorkingDir** fields in the Info Packet (section 2.2.1.11.1.1). |
 | ERRINFO_SECURITYDATATOOSHORT6 0x00001115 | There is not enough data to read the **CodePage**, **flags**, **cbDomain**, **cbUserName**, **cbPassword**, **cbAlternateShell**, and **cbWorkingDir** fields in the Info Packet (section 2.2.1.11.1.1). |
 | ERRINFO_SECURITYDATATOOSHORT7 0x00001116 | There is not enough data to read the **clientAddressFamily** and **cbClientAddress** fields in the Extended Info Packet (section [2.2.1.11.1.1.1](#Section_4.1.10)). |
@@ -3962,7 +3962,7 @@ RDP specific codes:
 | ERRINFO_SECURITYDATATOOSHORT20 0x00001123 | There is not enough data to read the **clientDir** field in the Extended Info Packet (section 2.2.1.11.1.1.1). |
 | ERRINFO_SECURITYDATATOOSHORT21 0x00001124 | There is not enough data to read the **clientTimeZone** field in the Extended Info Packet (section 2.2.1.11.1.1.1). |
 | ERRINFO_SECURITYDATATOOSHORT22 0x00001125 | There is not enough data to read the **clientSessionId** field in the Extended Info Packet (section 2.2.1.11.1.1.1). |
-| ERRINFO_SECURITYDATATOOSHORT23 0x00001126 | There is not enough data to read the Client Info PDU Data (section [2.2.1.11.1](#Section_4.1.10)). |
+| ERRINFO_SECURITYDATATOOSHORT23 0x00001126 | There is not enough data to read the Client Info PDU Data (section [2.2.1.11.1](#Section_2.2.1.11.1)). |
 | ERRINFO_BADMONITORDATA 0x00001129 | The number of TS_MONITOR_DEF (section [2.2.1.3.6.1](#Section_2.2.1.3.6.1)) structures present in the **monitorDefArray** field of the Client Monitor Data (section [2.2.1.3.6](#Section_2.2.1.3.6)) is less than the value specified in **monitorCount** field. |
 | ERRINFO_VCDECOMPRESSEDREASSEMBLEFAILED 0x0000112A | The server-side decompression buffer is invalid, or the size of the decompressed VC data exceeds the chunking size specified in the Virtual Channel Capability Set (section [2.2.7.1.10](#Section_2.2.7.1.10)). |
 | ERRINFO_VCDATATOOLONG 0x0000112B | The size of a received Virtual Channel PDU (section 2.2.6.1) exceeds the chunking size specified in the Virtual Channel Capability Set (section 2.2.7.1.10). |
@@ -3978,9 +3978,9 @@ RDP specific codes:
 | ERRINFO_MONITORGEOMETRYVALIDATIONFAILED 0x00001135 | The monitor geometry defined by the Client Monitor Data (section 2.2.1.3.6) is invalid. |
 | ERRINFO_INVALIDMONITORCOUNT 0x00001136 | The **monitorCount** field in the Client Monitor Data (section 2.2.1.3.6) is too large. |
 | ERRINFO_UPDATESESSIONKEYFAILED 0x00001191 | An attempt to update the session keys while using Standard RDP Security mechanisms (section [5.3.7](#Section_5.3.7)) failed. |
-| ERRINFO_DECRYPTFAILED 0x00001192 | One of two possible error conditions: Decryption using Standard RDP Security mechanisms (section [5.3.6](#Section_5.3.6)) failed. Session key creation using Standard RDP Security mechanisms (section [5.3.5](#Section_4.11.1)) failed. |
+| ERRINFO_DECRYPTFAILED 0x00001192 | One of two possible error conditions: Decryption using Standard RDP Security mechanisms (section [5.3.6](#Section_5.3.6)) failed. Session key creation using Standard RDP Security mechanisms (section [5.3.5](#Section_5.3.5)) failed. |
 | ERRINFO_ENCRYPTFAILED 0x00001193 | Encryption using Standard RDP Security mechanisms (section 5.3.6) failed. |
-| ERRINFO_ENCPKGMISMATCH 0x00001194 | Failed to find a usable Encryption Method (section [5.3.2](#Section_5.3.2)) in the **encryptionMethods** field of the Client Security Data (section [2.2.1.4.3](#Section_5)). |
+| ERRINFO_ENCPKGMISMATCH 0x00001194 | Failed to find a usable Encryption Method (section [5.3.2](#Section_5.3.2)) in the **encryptionMethods** field of the Client Security Data (section [2.2.1.4.3](#Section_2.2.1.4.3)). |
 | ERRINFO_DECRYPTFAILED2 0x00001195 | Unencrypted data was encountered in a protocol stream which is meant to be encrypted with Standard RDP Security mechanisms (section 5.3.6). |
 
 <a id="Section_2.2.5.2"></a>
@@ -4004,11 +4004,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header, a Share Data Header, and a status code.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the PDU.
 
 **shareDataHeader (18 bytes):** A Share Data Header containing information about the packet. The **type** subfield of the **pduType** field of the Share Control Header (section [2.2.8.1.1.1.1](#Section_2.2.8.1.1.1.1)) MUST be set to PDUTYPE_DATAPDU (7). The **pduType2** field of the Share Data Header MUST be set to PDUTYPE2_STATUS_INFO_PDU (54), and the **pduSource** field MUST be set to zero.
@@ -4053,16 +4053,16 @@ packet-beta
 
 If the PDU is being sent from server to client, this field MUST contain a variable-length, PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [T125] section 11.33 (the ASN.1 structure definition is given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and the **static virtual channel data**.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the security headers described in section [2.2.8.1.1.2](#Section_2.2.8.1.1.2).
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the security headers described in section [2.2.8.1.1.2](#Section_2.2.8.1.1.2).
 
 If the PDU is being sent from client to server:
 
-- The **securityHeader** field MUST contain a Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- The **securityHeader** field MUST contain a Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
 If the PDU is being sent from server to client:
 
-- The **securityHeader** field MUST contain a [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- The **securityHeader** field MUST contain a [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
 - The **securityHeader** field MUST contain a Non-FIPS Security Header (section 2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-If the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) the **securityHeader** field MUST contain a [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5).
+If the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) the **securityHeader** field MUST contain a [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3).
 
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the PDU.
 
@@ -4111,7 +4111,7 @@ Possible compression types are as follows.
 | PACKET_COMPR_TYPE_RDP6 0x2 | RDP 6.0 bulk compression ([MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 3.1.8.1). |
 | PACKET_COMPR_TYPE_RDP61 0x3 | RDP 6.1 bulk compression ([MS-RDPEGDI] section 3.1.8.2). |
 
-Instructions detailing how to compress a data stream are listed in section [3.1.8.2](#Section_3.1.8), while decompression of a data stream is described in section [3.1.8.3](#Section_3.1.8).
+Instructions detailing how to compress a data stream are listed in section [3.1.8.2](#Section_3.1.8.2), while decompression of a data stream is described in section [3.1.8.3](#Section_3.1.8.3).
 
 <a id="Section_2.2.7"></a>
 ### 2.2.7 Capability Sets
@@ -4193,13 +4193,13 @@ All RDP versions, except for RDP 4.0 and 5.0, support the following additional f
 
 | Flag | Meaning |
 | --- | --- |
-| LONG_CREDENTIALS_SUPPORTED 0x0004 | Advertiser supports long-length credentials for the user name, password, or [**domain name**](#gt_domain-name) in the **Save Session Info PDU** (section [2.2.10.1](#Section_4.3)).<25> |
+| LONG_CREDENTIALS_SUPPORTED 0x0004 | Advertiser supports long-length credentials for the user name, password, or [**domain name**](#gt_domain-name) in the **Save Session Info PDU** (section [2.2.10.1](#Section_2.2.10.1)).<25> |
 
 All RDP versions, except for RDP 4.0, 5.0 and 5.1, support the following additional flags.
 
 | Flag | Meaning |
 | --- | --- |
-| AUTORECONNECT_SUPPORTED 0x0008 | Advertiser supports auto-reconnection (section [5.5](#Section_1.3.1.5)). |
+| AUTORECONNECT_SUPPORTED 0x0008 | Advertiser supports auto-reconnection (section [5.5](#Section_5.5)). |
 | ENC_SALTED_CHECKSUM 0x0010 | Advertiser supports salted [**MAC**](#gt_message-authentication-code-mac) generation (section [5.3.6.1.1](#Section_5.3.6.1.1)). |
 
 **updateCapabilityFlag (2 bytes):** A 16-bit, unsigned integer. Support for update capability. This field MUST be set to zero.
@@ -4492,7 +4492,7 @@ packet-beta
 
 | Flag | Meaning |
 | --- | --- |
-| PERSISTENT_KEYS_EXPECTED_FLAG 0x0001 | Indicates that the client will send a [Persistent Key List PDU](#Section_3.3.5.3.17) during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases). |
+| PERSISTENT_KEYS_EXPECTED_FLAG 0x0001 | Indicates that the client will send a [Persistent Key List PDU](#Section_4.1.17) during the Connection Finalization phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases). |
 | ALLOW_CACHE_WAITING_LIST_FLAG 0x0002 | Indicates that the client supports a cache waiting list. If a waiting list is supported, new bitmaps are cached on the second hit rather than the first (that is, a bitmap is sent twice before it is cached). |
 
 **Pad2 (1 byte):** An 8-bit, unsigned integer. Padding. Values in this field MUST be ignored.
@@ -4752,7 +4752,7 @@ packet-beta
 | Flag | Meaning |
 | --- | --- |
 | VCCAPS_NO_COMPR 0x00000000 | Virtual channel compression is not supported. |
-| VCCAPS_COMPR_SC 0x00000001 | Indicates to the server that virtual channel compression is supported by the client for server-to-client traffic. The highest compression level supported by the client is advertised in the [Client Info PDU (section 2.2.1.11)](#Section_2.2.1.11.1). |
+| VCCAPS_COMPR_SC 0x00000001 | Indicates to the server that virtual channel compression is supported by the client for server-to-client traffic. The highest compression level supported by the client is advertised in the [Client Info PDU (section 2.2.1.11)](#Section_2.2.1.11). |
 | VCCAPS_COMPR_CS_8K 0x00000002 | Indicates to the client that virtual channel compression is supported by the server for client-to-server traffic (the compression level is limited to RDP 4.0 bulk compression). |
 
 **VCChunkSize (4 bytes):** A 32-bit unsigned integer. When sent from server to client, this field contains the maximum allowed size of a virtual channel chunk. When sent from client to server, the value in this field is ignored by the server; the server determines the maximum virtual channel chunk size. This value MUST be greater than or equal to CHANNEL_CHUNK_LENGTH and less than or equal to 16256.
@@ -4780,7 +4780,7 @@ packet-beta
 | --- | --- |
 | SOUND_FLAG_BEEPS 0x0001 | Playing a beep sound is supported. |
 
-If the client advertises support for beeps, it MUST support the Play Sound PDU (section [2.2.9.1.1.5](#Section_3.3.5.9.4.1)).
+If the client advertises support for beeps, it MUST support the Play Sound PDU (section [2.2.9.1.1.5](#Section_2.2.9.1.1.5)).
 
 **pad2octetsA (2 bytes):** A 16-bit, unsigned integer. Padding. Values in this field MUST be ignored.
 
@@ -5007,7 +5007,7 @@ packet-beta
 | SURFCMDS_FRAMEMARKER 0x00000010 | The Frame Marker Command (section [2.2.9.2.3](#Section_2.2.9.2.3)) is supported. |
 | SURFCMDS_STREAMSURFACEBITS 0x00000040 | The Stream Surface Bits Command (section [2.2.9.2.2](#Section_2.2.9.2.2)) is supported. |
 
-If the client advertises support for surface commands, it MUST also indicate support for fast-path output by setting the FASTPATH_OUTPUT_SUPPORTED (0x0001) flag in the **extraFlags** field of the General Capability Set (section [2.2.7.1.1](#Section_2.2.7.1.11)).
+If the client advertises support for surface commands, it MUST also indicate support for fast-path output by setting the FASTPATH_OUTPUT_SUPPORTED (0x0001) flag in the **extraFlags** field of the General Capability Set (section [2.2.7.1.1](#Section_2.2.7.1.1)).
 
 **reserved (4 bytes):** This field is reserved for future use and has no effect on the RDP wire traffic. It MUST be set to zero.
 
@@ -5132,8 +5132,8 @@ Share Control Header (TS_SHARECONTROLHEADER)
 The TS_SHARECONTROLHEADER header is a T.128 header ([[T128]](https://go.microsoft.com/fwlink/?LinkId=90544) section 8.3) that MUST be present in the following PDUs.
 
 - Demand Active PDU (section [2.2.1.13.1](#Section_2.2.1.13.1)).
-- Confirm Active PDU (section [2.2.1.13.2](#Section_2.2.1.13.2.1)).
-- Deactivate All PDU (section [2.2.3.1](#Section_3.2.5.5.1)).
+- Confirm Active PDU (section [2.2.1.13.2](#Section_2.2.1.13.2)).
+- Deactivate All PDU (section [2.2.3.1](#Section_2.2.3.1)).
 - Enhanced Security Server Redirection PDU (section [2.2.13.3.1](#Section_2.2.13.3.1)).
 - All Data PDUs (section [2.2.8.1.1.1.2](#Section_2.2.8.1.1.1.2)).
 A definitive list of all Data PDUs is given in section 2.2.8.1.1.1.2 in the description of the **pduType2** field.
@@ -5214,10 +5214,10 @@ packet-beta
 | PDUTYPE2_SYNCHRONIZE 0x1F | [Synchronize PDU (section 2.2.1.14.1)](#Section_2.2.1.14.1) |
 | PDUTYPE2_REFRESH_RECT 0x21 | [Refresh Rect PDU (section 2.2.11.2.1)](#Section_2.2.11.2.1) |
 | PDUTYPE2_PLAY_SOUND 0x22 | [Play Sound PDU (section 2.2.9.1.1.5.1)](#Section_2.2.9.1.1.5.1) |
-| PDUTYPE2_SUPPRESS_OUTPUT 0x23 | [Suppress Output PDU (section 2.2.11.3.1)](#Section_2.2.11.3) |
+| PDUTYPE2_SUPPRESS_OUTPUT 0x23 | [Suppress Output PDU (section 2.2.11.3.1)](#Section_2.2.11.3.1) |
 | PDUTYPE2_SHUTDOWN_REQUEST 0x24 | [Shutdown Request PDU (section 2.2.2.1.1)](#Section_2.2.2.1.1) |
 | PDUTYPE2_SHUTDOWN_DENIED 0x25 | [Shutdown Request Denied PDU (section 2.2.2.2.1)](#Section_2.2.2.2.1) |
-| PDUTYPE2_SAVE_SESSION_INFO 0x26 | [Save Session Info PDU (section 2.2.10.1.1)](#Section_4.3) |
+| PDUTYPE2_SAVE_SESSION_INFO 0x26 | [Save Session Info PDU (section 2.2.10.1.1)](#Section_2.2.10.1.1) |
 | PDUTYPE2_FONTLIST 0x27 | [Font List PDU (section 2.2.1.18.1)](#Section_2.2.1.18.1) |
 | PDUTYPE2_FONTMAP 0x28 | [Font Map PDU (section 2.2.1.22.1)](#Section_2.2.1.22.1) |
 | PDUTYPE2_SET_KEYBOARD_INDICATORS 0x29 | [Set Keyboard Indicators PDU (section 2.2.8.2.1.1)](#Section_2.2.8.2.1.1) |
@@ -5229,7 +5229,7 @@ packet-beta
 | PDUTYPE2_DRAWNINEGRID_ERROR_PDU 0x30 | DrawNineGrid Cache Error PDU ([MS-RDPEGDI] section 2.2.2.3.3) |
 | PDUTYPE2_DRAWGDIPLUS_ERROR_PDU 0x31 | GDI+ Error PDU ([MS-RDPEGDI] section 2.2.2.3.4) |
 | PDUTYPE2_ARC_STATUS_PDU 0x32 | [Auto-Reconnect Status PDU (section 2.2.4.1.1)](#Section_2.2.4.1.1) |
-| PDUTYPE2_STATUS_INFO_PDU 0x36 | [Status Info PDU (section 2.2.5.2)](#Section_3.2.5.7.2) |
+| PDUTYPE2_STATUS_INFO_PDU 0x36 | [Status Info PDU (section 2.2.5.2)](#Section_2.2.5.2) |
 | PDUTYPE2_MONITOR_LAYOUT_PDU 0x37 | [Monitor Layout PDU (section 2.2.12.1)](#Section_2.2.12.1) |
 
 **compressedType (1 byte):** An 8-bit, unsigned integer. The compression type and flags specifying the data following the Share Data Header (section 2.2.8.1.1.1.2).
@@ -5252,7 +5252,7 @@ Possible compression types are as follows.
 | PACKET_COMPR_TYPE_RDP6 0x2 | RDP 6.0 bulk compression ([MS-RDPEGDI] section 3.1.8.1). |
 | PACKET_COMPR_TYPE_RDP61 0x3 | RDP 6.1 bulk compression ([MS-RDPEGDI] section 3.1.8.2). |
 
-Instructions specifying how to compress a data stream are listed in section [3.1.8.2](#Section_3.1.8), while decompression of a data stream is described in section [3.1.8.3](#Section_3.1.8).
+Instructions specifying how to compress a data stream are listed in section [3.1.8.2](#Section_3.1.8.2), while decompression of a data stream is described in section [3.1.8.3](#Section_3.1.8.3).
 
 **compressedLength (2 bytes):** A 16-bit, unsigned integer. The compressed length of the packet in bytes.
 
@@ -5274,18 +5274,18 @@ packet-beta
 
 | Flag | Meaning |
 | --- | --- |
-| SEC_EXCHANGE_PKT 0x0001 | Indicates that the packet is a Security Exchange PDU (section [2.2.1.10](#Section_2.2.1.10.1)). This packet type is sent from client to server only. The client only sends this packet if it will be encrypting further communication and Standard RDP Security mechanisms (section [5.3](#Section_2.2.13.2)) are in effect. |
+| SEC_EXCHANGE_PKT 0x0001 | Indicates that the packet is a Security Exchange PDU (section [2.2.1.10](#Section_2.2.1.10)). This packet type is sent from client to server only. The client only sends this packet if it will be encrypting further communication and Standard RDP Security mechanisms (section [5.3](#Section_5.3)) are in effect. |
 | SEC_TRANSPORT_REQ 0x0002 | Indicates that the packet is an Initiate Multitransport Request PDU (section [2.2.15.1](#Section_2.2.15.1)). This flag MUST NOT be present if the PDU containing the security header is being sent from client to server. This flag MUST NOT be present if the PDU containing the security header is not being sent on the MCS message channel. The ID of the message channel is specified in the Server Message Channel Data (section [2.2.1.4.5](#Section_2.2.1.4.5)). |
 | SEC_TRANSPORT_RSP 0x0004 | Indicates that the packet is an Initiate Multitransport Response PDU (section [2.2.15.2](#Section_2.2.15.2)). This flag MUST NOT be present if the PDU containing the security header is being sent from server to client. This flag MUST NOT be present if the PDU containing the security header is not being sent on the MCS message channel. The ID of the message channel is specified in the Server Message Channel Data (section 2.2.1.4.5). |
 | SEC_ENCRYPT 0x0008 | Indicates that the packet is encrypted. |
 | SEC_RESET_SEQNO 0x0010 | This flag is not processed by any RDP clients or servers and MUST be ignored. |
 | SEC_IGNORE_SEQNO 0x0020 | This flag is not processed by any RDP clients or servers and MUST be ignored. |
-| SEC_INFO_PKT 0x0040 | Indicates that the packet is a Client Info PDU (section [2.2.1.11](#Section_2.2.1.11.1)). This packet type is sent from client to server only. If Standard RDP Security mechanisms are in effect, then this packet MUST also be encrypted. |
-| SEC_LICENSE_PKT 0x0080 | Indicates that the packet is a Licensing PDU (section [2.2.1.12](#Section_2.2.1.12.1.2)). |
+| SEC_INFO_PKT 0x0040 | Indicates that the packet is a Client Info PDU (section [2.2.1.11](#Section_2.2.1.11)). This packet type is sent from client to server only. If Standard RDP Security mechanisms are in effect, then this packet MUST also be encrypted. |
+| SEC_LICENSE_PKT 0x0080 | Indicates that the packet is a Licensing PDU (section [2.2.1.12](#Section_2.2.1.12)). |
 | SEC_LICENSE_ENCRYPT_CS 0x0200 | Indicates to the client that the server is capable of processing encrypted licensing packets. It is sent by the server together with any licensing [**PDUs**](#gt_protocol-data-unit-pdu) (section 2.2.1.12). |
 | SEC_LICENSE_ENCRYPT_SC 0x0200 | Indicates to the server that the client is capable of processing encrypted licensing packets. It is sent by the client together with the SEC_EXCHANGE_PKT flag when sending a Security Exchange PDU (section 2.2.1.10). |
 | SEC_REDIRECTION_PKT 0x0400 | Indicates that the packet is a Standard Security Server Redirection PDU (section [2.2.13.2.1](#Section_2.2.13.2.1)) and that the PDU is encrypted. |
-| SEC_SECURE_CHECKSUM 0x0800 | Indicates that the [**MAC**](#gt_message-authentication-code-mac) for the PDU was generated using the "salted MAC generation" technique (section [5.3.6.1.1](#Section_5.3.6.1.1)). If this flag is not present, then the standard technique was used (sections [2.2.8.1.1.2.2](#Section_5) and [2.2.8.1.1.2.3](#Section_5)). |
+| SEC_SECURE_CHECKSUM 0x0800 | Indicates that the [**MAC**](#gt_message-authentication-code-mac) for the PDU was generated using the "salted MAC generation" technique (section [5.3.6.1.1](#Section_5.3.6.1.1)). If this flag is not present, then the standard technique was used (sections [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2) and [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)). |
 | SEC_AUTODETECT_REQ 0x1000 | Indicates that the packet is an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)). This flag MUST NOT be present if the PDU containing the security header is being sent from client to server. This flag MUST NOT be present if the PDU containing the security header is not being sent on the MCS message channel. The ID of the message channel is specified in the Server Message Channel Data (section 2.2.1.4.5). |
 | SEC_AUTODETECT_RSP 0x2000 | Indicates that the packet is an Auto-Detect Response PDU (section [2.2.14.4](#Section_2.2.14.4)). This flag MUST NOT be present if the PDU containing the security header is being sent from server to client. This flag MUST NOT be present if the PDU containing the security header is not being sent on the MCS message channel. The ID of the message channel is specified in the Server Message Channel Data (2.2.1.4.5). |
 | SEC_HEARTBEAT 0x4000 | Indicates that the packet is a Heartbeat PDU (section [2.2.16.1](#Section_2.2.16.1)). This flag MUST NOT be present if the PDU containing the security header is not being sent on the MCS message channel. The ID of the message channel is specified in the Server Message Channel Data (2.2.1.4.5). |
@@ -5358,10 +5358,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Client Input Event PDU Data (section 2.2.8.1.1.3.1)](#Section_2.2.8.1.1.3.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **clientInputEventData (variable):** The actual contents of the Client Input Event PDU, as specified in section 2.2.8.1.1.3.1.
@@ -5605,7 +5605,7 @@ Mouse button events.
 <a id="Section_2.2.8.1.2"></a>
 ##### 2.2.8.1.2 Client Fast-Path Input Event PDU (TS_FP_INPUT_PDU)
 
-The Fast-Path Input Event PDU is used to transmit input events from client to server.<34> Fast-path revises client input packets from the first byte with the goal of improving bandwidth. The TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8), X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7), and MCS Send Data Request ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32) are replaced; the [Security Header (section 2.2.8.1.1.2)](#Section_5) is collapsed into the fast-path input header, and the [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) is replaced by a new fast-path format. The contents of the input notification events (section [2.2.8.1.1.3.1.1](#Section_2.2.8.1.1.3.1.1)) are also changed to reduce their size, particularly by removing or reducing headers. Support for fast-path input is advertised in the [Input Capability Set (section 2.2.7.1.6)](#Section_2.2.7.1.6).
+The Fast-Path Input Event PDU is used to transmit input events from client to server.<34> Fast-path revises client input packets from the first byte with the goal of improving bandwidth. The TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8), X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7), and MCS Send Data Request ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32) are replaced; the [Security Header (section 2.2.8.1.1.2)](#Section_2.2.8.1.1.2) is collapsed into the fast-path input header, and the [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) is replaced by a new fast-path format. The contents of the input notification events (section [2.2.8.1.1.3.1.1](#Section_2.2.8.1.1.3.1.1)) are also changed to reduce their size, particularly by removing or reducing headers. Support for fast-path input is advertised in the [Input Capability Set (section 2.2.7.1.6)](#Section_2.2.7.1.6).
 
 ```mermaid
 packet-beta
@@ -5645,14 +5645,14 @@ packet-beta
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Indicates that the [**MAC**](#gt_message-authentication-code-mac) signature for the PDU was generated using the "salted MAC generation" technique (section [5.3.6.1.1](#Section_5.3.6.1.1)). If this bit is not set, then the standard technique was used (sections [2.2.8.1.1.2.2](#Section_5) and [2.2.8.1.1.2.3](#Section_5)). | FASTPATH_INPUT_SECURE_CHECKSUM 0x1 | - |
+| Indicates that the [**MAC**](#gt_message-authentication-code-mac) signature for the PDU was generated using the "salted MAC generation" technique (section [5.3.6.1.1](#Section_5.3.6.1.1)). If this bit is not set, then the standard technique was used (sections [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2) and [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)). | FASTPATH_INPUT_SECURE_CHECKSUM 0x1 | - |
 | Indicates that the PDU contains an 8-byte MAC signature after the optional **length2** field (that is, the **dataSignature** field is present) and the contents of the PDU are encrypted using the negotiated encryption package (sections [5.3.2](#Section_5.3.2) and [5.3.6](#Section_5.3.6)). | FASTPATH_INPUT_ENCRYPTED 0x2 | - |
 
 **length1 (1 byte):** An 8-bit, unsigned integer. If the most significant bit of the **length1** field is not set, then the size of the PDU is in the range 1 to 127 bytes and the **length1** field contains the overall PDU length (the **length2** field is not present in this case). However, if the most significant bit of the length1 field is set, then the overall PDU length is given by the low 7 bits of the **length1** field concatenated with the 8 bits of the **length2** field, in big-endian order (the **length2** field contains the low-order bits). The overall PDU length SHOULD be less than or equal to 16,383 bytes.
 
 **length2 (1 byte):** An 8-bit, unsigned integer. If the most significant bit of the **length1** field is not set, then the **length2** field is not present. If the most significant bit of the **length1** field is set, then the overall PDU length is given by the low 7 bits of the **length1** field concatenated with the 8 bits of the **length2** field, in big-endian order (the **length2** field contains the low-order bits). The overall PDU length SHOULD be less than or equal to 16,383 bytes.
 
-**fipsInformation (4 bytes):** An optional Fast-Path FIPS Information (section [2.2.8.1.2.1](#Section_2.2.8.1.2.1)) structure, present when the Encryption Method selected by the server (sections 5.3.2 and [2.2.1.4.3](#Section_5)) is ENCRYPTION_METHOD_FIPS (0x00000010).
+**fipsInformation (4 bytes):** An optional Fast-Path FIPS Information (section [2.2.8.1.2.1](#Section_2.2.8.1.2.1)) structure, present when the Encryption Method selected by the server (sections 5.3.2 and [2.2.1.4.3](#Section_2.2.1.4.3)) is ENCRYPTION_METHOD_FIPS (0x00000010).
 
 **dataSignature (8 bytes):** MAC generated over the packet using one of the techniques described in section 5.3.6 (the FASTPATH_INPUT_SECURE_CHECKSUM flag, which is set in the **fpInputHeader** field, describes the method used to generate the signature). This field MUST be present if the FASTPATH_INPUT_ENCRYPTED flag is set in the **fpInputHeader** field.
 
@@ -5672,7 +5672,7 @@ packet-beta
   24-31: "padlen"
 ```
 
-**length (2 bytes):** A 16-bit, unsigned integer. The length of the [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5). This field MUST be set to 0x0010 (16 bytes).
+**length (2 bytes):** A 16-bit, unsigned integer. The length of the [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3). This field MUST be set to 0x0010 (16 bytes).
 
 **version (1 byte):** An 8-bit, unsigned integer. The version of the FIPS Header. This field SHOULD be set to TSFIPS_VERSION1 (0x01).
 
@@ -5877,11 +5877,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Set Keyboard Indicators PDU Data (section 2.2.8.2.1.1)](#Section_2.2.8.2.1.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **setKeyBdIndicatorsPduData (22 bytes):** The actual contents of the Set Keyboard Indicators PDU, as specified in section 2.2.8.2.1.1.
@@ -5889,7 +5889,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.8.2.1.1"></a>
 ###### 2.2.8.2.1.1 Set Keyboard Indicators PDU Data (TS_SET_KEYBOARD_INDICATORS_PDU)
 
-The TS_SET_KEYBOARD_INDICATORS_PDU structure contains the actual contents of the [Set Keyboard Indicators PDU (section 2.2.8.2.1)](#Section_3.3.5.8.2.1). The contents of the **LedFlags** field is identical to the flags used in the Client Synchronize Input Event Notification (section [2.2.8.1.1.3.1.1.5](#Section_2.2.8.1.1.3.1.1.5)).
+The TS_SET_KEYBOARD_INDICATORS_PDU structure contains the actual contents of the [Set Keyboard Indicators PDU (section 2.2.8.2.1)](#Section_2.2.8.2.1). The contents of the **LedFlags** field is identical to the flags used in the Client Synchronize Input Event Notification (section [2.2.8.1.1.3.1.1.5](#Section_2.2.8.1.1.3.1.1.5)).
 
 ```mermaid
 packet-beta
@@ -5931,11 +5931,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a Set Keyboard IME Status PDU Data (section [2.2.8.2.2.1](#Section_2.2.8.2.2.1)) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the PDU.
 
 **setKeyBdImeStatusPduData (28 bytes):** The actual contents of the Set Keyboard IME Status PDU, as specified in section 2.2.8.2.2.1.
@@ -5999,7 +5999,7 @@ The Share Headers used in conjunction with slow-path output [**PDUs**](#gt_proto
 <a id="Section_2.2.9.1.1.2"></a>
 ###### 2.2.9.1.1.2 Security Headers
 
-The Security Headers used in conjunction with slow-path output [**PDUs**](#gt_protocol-data-unit-pdu) are the same as those used in conjunction with slow-path input PDUs. These headers are described in section [2.2.8.1.1.2](#Section_5).
+The Security Headers used in conjunction with slow-path output [**PDUs**](#gt_protocol-data-unit-pdu) are the same as those used in conjunction with slow-path input PDUs. These headers are described in section [2.2.8.1.1.2](#Section_2.2.8.1.1.2).
 
 <a id="Section_2.2.9.1.1.3"></a>
 ###### 2.2.9.1.1.3 Server Graphics Update PDU (TS_GRAPHICS_PDU)
@@ -6021,11 +6021,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Slow-Path Graphics Update (section 2.2.9.1.1.3.1)](#Section_2.2.9.1.1.3.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **slowPathGraphicsUpdates (variable):** A variable-length array of Slow-Path Graphics Updates (section 2.2.9.1.1.3.1) to be processed by the client.
@@ -6213,7 +6213,7 @@ packet-beta
 <a id="Section_2.2.9.1.1.3.1.2.4"></a>
 RLE Compressed Bitmap Stream (RLE_BITMAP_STREAM)
 
-The RLE_BITMAP_STREAM structure contains a stream of bitmap data compressed using Interleaved Run-Length Encoding (RLE). Bitmap data compressed by the server MUST follow a [Compressed Data Header (section 2.2.9.1.1.3.1.2.3)](#Section_2.2.9.1.1.3.1.2.3) structure unless the exclusion of this header has been specified in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.11).
+The RLE_BITMAP_STREAM structure contains a stream of bitmap data compressed using Interleaved Run-Length Encoding (RLE). Bitmap data compressed by the server MUST follow a [Compressed Data Header (section 2.2.9.1.1.3.1.2.3)](#Section_2.2.9.1.1.3.1.2.3) structure unless the exclusion of this header has been specified in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.1).
 
 A compressed bitmap is sent as a series of compression orders that instruct the decoder how to reassemble a compressed bitmap (a particular bitmap can have many valid compressed representations). A compression order consists of an order header, followed by an optional encoded run length, followed by optional data associated with the compression order. Some orders require the decoder to refer to the previous scanline of bitmap data and because of this fact the first scanline sometimes requires special cases for decoding.
 
@@ -6378,11 +6378,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The userData field of the MCS Send Data Indication contains a Security Header and the Pointer Update PDU data.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **shareDataHeader (18 bytes):** [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) containing information about the packet. The **type** subfield of the **pduType** field of the [Share Control Header (section 2.2.8.1.1.1.1)](#Section_2.2.8.1.1.1.1) MUST be set to PDUTYPE_DATAPDU (7). The **pduType2** field of the Share Data Header MUST be set to PDUTYPE2_POINTER (27).
@@ -6530,11 +6530,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Play Sound PDU Data (section 2.2.9.1.1.5.1)](#Section_2.2.9.1.1.5.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **playSoundPduData (26 bytes):** The actual contents of the Play Sound PDU, as specified in section 2.2.9.1.1.5.1.
@@ -6542,7 +6542,7 @@ If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and 
 <a id="Section_2.2.9.1.1.5.1"></a>
 Play Sound PDU Data (TS_PLAY_SOUND_PDU_DATA)
 
-The TS_PLAY_SOUND_PDU_DATA structure contains the contents of the [Play Sound PDU](#Section_3.3.5.9.4.1), which is a [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) and two fields.
+The TS_PLAY_SOUND_PDU_DATA structure contains the contents of the [Play Sound PDU](#Section_2.2.9.1.1.5), which is a [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) and two fields.
 
 ```mermaid
 packet-beta
@@ -6560,7 +6560,7 @@ packet-beta
 <a id="Section_2.2.9.1.2"></a>
 ##### 2.2.9.1.2 Server Fast-Path Update PDU (TS_FP_UPDATE_PDU)
 
-Fast-path revises server output packets from the first byte with the goal of improving bandwidth. The TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8), X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7), and MCS Send Data Indication ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33) are replaced; the [Security Header (section 2.2.8.1.1.2)](#Section_5) is collapsed into the fast-path output header; and the [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) is replaced by a new fast-path format. The contents of the graphics and pointer updates (sections [2.2.9.1.1.3](#Section_2.2.9.1.1.3) and [2.2.9.1.1.4](#Section_2.2.9.1.1.4)) are also changed to reduce their size, particularly by removing or reducing headers. Support for fast-path output is advertised in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.11).
+Fast-path revises server output packets from the first byte with the goal of improving bandwidth. The TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8), X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7), and MCS Send Data Indication ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33) are replaced; the [Security Header (section 2.2.8.1.1.2)](#Section_2.2.8.1.1.2) is collapsed into the fast-path output header; and the [Share Data Header (section 2.2.8.1.1.1.2)](#Section_2.2.8.1.1.1.2) is replaced by a new fast-path format. The contents of the graphics and pointer updates (sections [2.2.9.1.1.3](#Section_2.2.9.1.1.3) and [2.2.9.1.1.4](#Section_2.2.9.1.1.4)) are also changed to reduce their size, particularly by removing or reducing headers. Support for fast-path output is advertised in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.1).
 
 ```mermaid
 packet-beta
@@ -6598,14 +6598,14 @@ packet-beta
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
-| Indicates that the [**MAC**](#gt_message-authentication-code-mac) signature for the PDU was generated using the "salted MAC generation" technique (section [5.3.6.1.1](#Section_5.3.6.1.1)). If this bit is not set, then the standard technique was used (sections [2.2.8.1.1.2.2](#Section_5) and [2.2.8.1.1.2.3](#Section_5)). | FASTPATH_OUTPUT_SECURE_CHECKSUM 0x1 | - |
+| Indicates that the [**MAC**](#gt_message-authentication-code-mac) signature for the PDU was generated using the "salted MAC generation" technique (section [5.3.6.1.1](#Section_5.3.6.1.1)). If this bit is not set, then the standard technique was used (sections [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2) and [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)). | FASTPATH_OUTPUT_SECURE_CHECKSUM 0x1 | - |
 | Indicates that the PDU contains an 8-byte MAC signature after the optional **length2** field (that is, the **dataSignature** field is present), and the contents of the PDU are encrypted using the negotiated encryption package (sections [5.3.2](#Section_5.3.2) and [5.3.6](#Section_5.3.6)). | FASTPATH_OUTPUT_ENCRYPTED 0x2 | - |
 
 **length1 (1 byte):** An 8-bit, unsigned integer. If the most significant bit of the **length1** field is not set, then the size of the PDU is in the range 1 to 127 bytes and the **length1** field contains the overall PDU length (the **length2** field is not present in this case). However, if the most significant bit of the **length1** field is set, then the overall PDU length is given by the low 7 bits of the **length1** field concatenated with the 8 bits of the **length2** field, in big-endian order (the **length2** field contains the low-order bits). The overall PDU length SHOULD be less than or equal to 16,383 bytes.
 
 **length2 (1 byte):** An 8-bit, unsigned integer. If the most significant bit of the **length1** field is not set, then the **length2** field is not present. If the most significant bit of the **length1** field is set, then the overall PDU length is given by the low 7 bits of the **length1** field concatenated with the 8 bits of the **length2** field, in big-endian order (the **length2** field contains the low-order bits). The overall PDU length SHOULD be less than or equal to 16,383 bytes.
 
-**fipsInformation (4 bytes):** An optional Fast-Path FIPS Information (section [2.2.8.1.2.1](#Section_2.2.8.1.2.1)) structure, present when the Encryption Method selected by the server (sections 5.3.2 and [2.2.1.4.3](#Section_5)) is ENCRYPTION_METHOD_FIPS (0x00000010).
+**fipsInformation (4 bytes):** An optional Fast-Path FIPS Information (section [2.2.8.1.2.1](#Section_2.2.8.1.2.1)) structure, present when the Encryption Method selected by the server (sections 5.3.2 and [2.2.1.4.3](#Section_2.2.1.4.3)) is ENCRYPTION_METHOD_FIPS (0x00000010).
 
 **dataSignature (8 bytes):** MAC generated over the packet using one of the techniques specified in section 5.3.6 (the FASTPATH_OUTPUT_SECURE_CHECKSUM flag, which is set in the **fpOutputHeader** field, describes the method used to generate the signature). This field MUST be present if the FASTPATH_OUTPUT_ENCRYPTED flag is set in the **fpOutputHeader** field.
 
@@ -7006,7 +7006,7 @@ packet-beta
 
 **reserved (1 byte):** An 8-bit, unsigned integer. This field is reserved for future use. It MUST be set to zero.
 
-**codecID (1 byte):** An 8-bit, unsigned integer. The client-assigned ID that identifies the bitmap codec that was used to encode the bitmap data. Bitmap codec parameters are exchanged in the Bitmap Codecs Capability Set (section [2.2.7.2.10](#Section_2.2.7.2.10.1)). If this field is 0, then the bitmap data is not encoded and can be used without performing any decoding transformation.
+**codecID (1 byte):** An 8-bit, unsigned integer. The client-assigned ID that identifies the bitmap codec that was used to encode the bitmap data. Bitmap codec parameters are exchanged in the Bitmap Codecs Capability Set (section [2.2.7.2.10](#Section_2.2.7.2.10)). If this field is 0, then the bitmap data is not encoded and can be used without performing any decoding transformation.
 
 **width (2 bytes):** A 16-bit, unsigned integer. The width of the decoded bitmap image in pixels.
 
@@ -7110,13 +7110,13 @@ packet-beta
 
 **x224Data (3 bytes):** An X.224 Class 0 Data TPDU, as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-**mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Save Session Info PDU Data (section 2.2.10.1.1)](#Section_4.3) structure.
+**mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and a [Save Session Info PDU Data (section 2.2.10.1.1)](#Section_2.2.10.1.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **saveSessionInfoPduData (variable):** The actual contents of the Save Session Info PDU, as specified in section 2.2.10.1.1.
@@ -7140,8 +7140,8 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | INFOTYPE_LOGON 0x00000000 | This is a notification that the user has logged on. The **infoData** field which follows contains a **Logon Info Version 1** (section [2.2.10.1.1.1](#Section_2.2.10.1.1.1)) structure. |
-| INFOTYPE_LOGON_LONG 0x00000001 | This is a notification that the user has logged on. The **infoData** field which follows contains a **Logon Info Version 2** (section [2.2.10.1.1.2](#Section_2.2.10.1.1.2)) structure. This type is supported by all RDP versions except for RDP 4.0 and 5.0, and SHOULD be used if the LONG_CREDENTIALS_SUPPORTED (0x00000004) flag is set in the **General Capability Set** (section [2.2.7.1.1](#Section_2.2.7.1.11)). |
-| INFOTYPE_LOGON_PLAINNOTIFY 0x00000002 | This is a notification that the user has logged on. The **infoData** field which follows contains a Plain Notify structure which contains 576 bytes of padding (section [2.2.10.1.1.3](#Section_4.3.2)). This type is supported by all RDP versions except for RDP 4.0 and 5.0. |
+| INFOTYPE_LOGON_LONG 0x00000001 | This is a notification that the user has logged on. The **infoData** field which follows contains a **Logon Info Version 2** (section [2.2.10.1.1.2](#Section_2.2.10.1.1.2)) structure. This type is supported by all RDP versions except for RDP 4.0 and 5.0, and SHOULD be used if the LONG_CREDENTIALS_SUPPORTED (0x00000004) flag is set in the **General Capability Set** (section [2.2.7.1.1](#Section_2.2.7.1.1)). |
+| INFOTYPE_LOGON_PLAINNOTIFY 0x00000002 | This is a notification that the user has logged on. The **infoData** field which follows contains a Plain Notify structure which contains 576 bytes of padding (section [2.2.10.1.1.3](#Section_2.2.10.1.1.3)). This type is supported by all RDP versions except for RDP 4.0 and 5.0. |
 | INFOTYPE_LOGON_EXTENDED_INFO 0x00000003 | The **infoData** field which follows contains a **Logon Info Extended** (section [2.2.10.1.1.4](#Section_2.2.10.1.1.4)) structure. This type is supported by all RDP versions except for RDP 4.0, 5.0, and 5.1. |
 
 **infoData (variable):** A **Logon Info Version 1** (section 2.2.10.1.1.1), **Logon Info Version 2** (section 2.2.10.1.1.2), **Plain Notify** (section 2.2.10.1.1.3), or **Logon Info Extended** (section 2.2.10.1.1.4) structure. The type of data that follows depends on the value of the **infoType** field.
@@ -7341,7 +7341,7 @@ packet-beta
 <a id="Section_2.2.11.2"></a>
 #### 2.2.11.2 Client Refresh Rect PDU
 
-The Refresh Rect PDU allows the client to request that the server redraw one or more rectangles of the session screen area. The client can use it to repaint sections of the client window that were obscured by local applications.<38> Server support for this [**PDU**](#gt_protocol-data-unit-pdu) is indicated in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.11).
+The Refresh Rect PDU allows the client to request that the server redraw one or more rectangles of the session screen area. The client can use it to repaint sections of the client window that were obscured by local applications.<38> Server support for this [**PDU**](#gt_protocol-data-unit-pdu) is indicated in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.1).
 
 ```mermaid
 packet-beta
@@ -7358,10 +7358,10 @@ packet-beta
 
 **mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) that encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given [T125] in section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Refresh Rect PDU Data (section 2.2.11.2.1)](#Section_2.2.11.2.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the PDU.
 
 **refreshRectPduData (variable):** The actual contents of the Refresh Rect PDU, as specified in section 2.2.11.2.1.
@@ -7390,7 +7390,7 @@ packet-beta
 <a id="Section_2.2.11.3"></a>
 #### 2.2.11.3 Client Suppress Output PDU
 
-The Suppress Output PDU is sent by the client to toggle all display updates from the server. This packet does not end the session or socket connection. Typically, a client sends this packet when its window is either minimized or restored. Server support for this PDU is indicated in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.11).
+The Suppress Output PDU is sent by the client to toggle all display updates from the server. This packet does not end the session or socket connection. Typically, a client sends this packet when its window is either minimized or restored. Server support for this PDU is indicated in the [General Capability Set (section 2.2.7.1.1)](#Section_2.2.7.1.1).
 
 ```mermaid
 packet-beta
@@ -7405,12 +7405,12 @@ packet-beta
 
 **x224Data (3 bytes):** An X.224 Class 0 Data TPDU, as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-**mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Client Suppress Output PDU Data (section 2.2.11.3.1)](#Section_2.2.11.3) structure.
+**mcsSDrq (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a [Client Suppress Output PDU Data (section 2.2.11.3.1)](#Section_2.2.11.3.1) structure.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the [**PDU**](#gt_protocol-data-unit-pdu).
 
 **suppressOutputPduData (variable):** TS_SUPPRESS_OUTPUT_PDU (variable number of bytes):
@@ -7468,11 +7468,11 @@ packet-beta
 
 **mcsSDin (variable):** Variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) which encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header, Share Data Header, monitor count, and a monitor definition array.
 
-**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
+**securityHeader (variable):** Optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0), then this field MUST contain one of the following headers:
 
-- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_5) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
-- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_5) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- [Basic Security Header (section 2.2.8.1.1.2.1)](#Section_2.2.8.1.1.2.1) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_LOW (1).
+- [Non-FIPS Security Header (section 2.2.8.1.1.2.2)](#Section_2.2.8.1.1.2.2) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- [FIPS Security Header (section 2.2.8.1.1.2.3)](#Section_2.2.8.1.1.2.3) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 If the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is ENCRYPTION_METHOD_NONE (0), then this header MUST NOT be included in the PDU.
 
 **shareDataHeader (18 bytes):** A [Share Data Header](#Section_2.2.8.1.1.1) containing information about the packet. The **type** subfield of the **pduType** field of the [Share Control Header (section 2.2.8.1.1.1.1)](#Section_2.2.8.1.1.1.1) MUST be set to PDUTYPE_DATAPDU (7). The **pduType2** field of the [Share Data Header](#Section_2.2.8.1.1.1.2) MUST be set to PDUTYPE2_MONITOR_LAYOUT_PDU (55), and the **pduSource** field MUST be set to zero.
@@ -7524,7 +7524,7 @@ packet-beta
 
 **Length (2 bytes):** A 16-bit unsigned integer. The overall length, in bytes, of the **Server Redirection Packet** structure.
 
-**SessionID (4 bytes):** A 32-bit unsigned integer. The session identifier to which the client MUST reconnect. This identifier MUST be specified in the **RedirectedSessionID** field of the **Client Cluster Data** (section [2.2.1.3.5](#Section_2.2.1.3.5)) if a reconnect attempt takes place. The **Client Cluster Data** is transmitted as part of the **MCS Connect Initial PDU** (section [2.2.1.3](#Section_3.3.5.3.3)).
+**SessionID (4 bytes):** A 32-bit unsigned integer. The session identifier to which the client MUST reconnect. This identifier MUST be specified in the **RedirectedSessionID** field of the **Client Cluster Data** (section [2.2.1.3.5](#Section_2.2.1.3.5)) if a reconnect attempt takes place. The **Client Cluster Data** is transmitted as part of the **MCS Connect Initial PDU** (section [2.2.1.3](#Section_2.2.1.3)).
 
 **RedirFlags (4 bytes):** A 32-bit unsigned integer. A bit field that contains redirection information flags, some of which indicate the presence of additional data at the end of the packet.
 
@@ -7553,7 +7553,7 @@ packet-beta
 
 **LoadBalanceInfoLength (4 bytes):** A 32-bit unsigned integer. The length, in bytes, of the **LoadBalanceInfo** field.
 
-**LoadBalanceInfo (variable):** A variable-length array of bytes containing load balancing information that MUST be treated as opaque data by the client and passed to the server if the LB_TARGET_NET_ADDRESS (0x00000001) flag is not present in the **RedirFlags** field and a reconnection takes place. See section [3.2.5.3.1](#Section_3.2.5.3.15) for details on populating the **routingToken** field of the **X.224 Connection Request PDU** (section [2.2.1.1](#Section_2.2.1.1)).
+**LoadBalanceInfo (variable):** A variable-length array of bytes containing load balancing information that MUST be treated as opaque data by the client and passed to the server if the LB_TARGET_NET_ADDRESS (0x00000001) flag is not present in the **RedirFlags** field and a reconnection takes place. See section [3.2.5.3.1](#Section_3.2.5.3.1) for details on populating the **routingToken** field of the **X.224 Connection Request PDU** (section [2.2.1.1](#Section_2.2.1.1)).
 
 **UserNameLength (4 bytes):** A 32-bit unsigned integer. The length, in bytes, of the **UserName** field.
 
@@ -7585,7 +7585,7 @@ packet-beta
 
 **TargetCertificateLength (4 bytes):** A 32-bit unsigned integer. The length, in bytes, of the **TargetCertificate** field.
 
-**TargetCertificate (variable):** A variable-length array of bytes containing a Base64-encoded **Target Certificate Container** (section [2.2.13.1.2](#Section_2.2.13.1.2.1)) structure in Unicode format that encapsulates the X.509 certificate of the target server.
+**TargetCertificate (variable):** A variable-length array of bytes containing a Base64-encoded **Target Certificate Container** (section [2.2.13.1.2](#Section_2.2.13.1.2)) structure in Unicode format that encapsulates the X.509 certificate of the target server.
 
 **TargetNetAddressesLength (4 bytes):** A 32-bit unsigned integer. The length, in bytes, of the **TargetNetAddresses** field.
 
@@ -7638,7 +7638,7 @@ packet-beta
 <a id="Section_2.2.13.1.2.1"></a>
 ###### 2.2.13.1.2.1 Certificate Meta Element (CERTIFICATE_META_ELEMENT)
 
-The **CERTIFICATE_META_ELEMENT** structure specifies an element contained within a **Target Certificate Container** (section [2.2.13.1.2](#Section_2.2.13.1.2.1)) structure.
+The **CERTIFICATE_META_ELEMENT** structure specifies an element contained within a **Target Certificate Container** (section [2.2.13.1.2](#Section_2.2.13.1.2)) structure.
 
 ```mermaid
 packet-beta
@@ -7681,9 +7681,9 @@ packet-beta
 
 **securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
-The **flags** field of the security header MUST contain the SEC_REDIRECTION_PKT (0x0400) flag (section [2.2.8.1.1.2.1](#Section_5)).
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+The **flags** field of the security header MUST contain the SEC_REDIRECTION_PKT (0x0400) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)).
 
 **serverRedirectionPDU (variable):** Information required by the client to initiate a reconnection to a given session on a target server encapsulated in a Server Redirection Packet (section 2.2.13.1) structure.
 
@@ -7693,7 +7693,7 @@ The **flags** field of the security header MUST contain the SEC_REDIRECTION_PKT 
 <a id="Section_2.2.13.3.1"></a>
 ##### 2.2.13.3.1 Enhanced Security Server Redirection PDU (TS_ENHANCED_SECURITY_SERVER_REDIRECTION)
 
-The Enhanced Security Server Redirection [**PDU**](#gt_protocol-data-unit-pdu) is sent by the server to the client to instruct it to reconnect to an existing session on another server. The information required to perform the reconnection is contained in an embedded [Server Redirection Packet (section 2.2.13.1)](#Section_2.2.13.1). This PDU MUST NOT be sent if Standard RDP Security (section [5.3](#Section_2.2.13.2)) is in effect. The Standard Security Server Redirection PDU (section [2.2.13.2.1](#Section_2.2.13.2.1)) MUST be used instead. Because this PDU can contain confidential information, it MUST always be encrypted by the External Security Protocol layer (section [5.4](#Section_5.4)).
+The Enhanced Security Server Redirection [**PDU**](#gt_protocol-data-unit-pdu) is sent by the server to the client to instruct it to reconnect to an existing session on another server. The information required to perform the reconnection is contained in an embedded [Server Redirection Packet (section 2.2.13.1)](#Section_2.2.13.1). This PDU MUST NOT be sent if Standard RDP Security (section [5.3](#Section_5.3)) is in effect. The Standard Security Server Redirection PDU (section [2.2.13.2.1](#Section_2.2.13.2.1)) MUST be used instead. Because this PDU can contain confidential information, it MUST always be encrypted by the External Security Protocol layer (section [5.4](#Section_5.4)).
 
 ```mermaid
 packet-beta
@@ -7749,7 +7749,7 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| 0x0001 | The RTT Measure Request message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent after the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)) has completed. |
+| 0x0001 | The RTT Measure Request message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent after the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)) has completed. |
 | 0x1001 | The RTT Measure Request message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU sent during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence. |
 
 <a id="Section_2.2.14.1.2"></a>
@@ -7775,14 +7775,14 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| 0x0014 | One of two possible meanings: The Bandwidth Measure Start message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT](#Section_2.1) section 2.2.1.1.1) structure that is being tunneled over a reliable UDP multitransport connection ([MS-RDPEMT] sections 1.3 and 2.1). The Bandwidth Measure Start message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent after the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)) has completed. |
+| 0x0014 | One of two possible meanings: The Bandwidth Measure Start message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 2.2.1.1.1) structure that is being tunneled over a reliable UDP multitransport connection ([MS-RDPEMT] sections 1.3 and 2.1). The Bandwidth Measure Start message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent after the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)) has completed. |
 | 0x0114 | The Bandwidth Measure Start message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT] section 2.2.1.1.1) structure that is being tunneled over a lossy UDP multitransport connection ([MS-RDPEMT] sections 1.3 and 2.1). |
 | 0x1014 | The Bandwidth Measure Start message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU sent during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence. |
 
 <a id="Section_2.2.14.1.3"></a>
 ##### 2.2.14.1.3 Bandwidth Measure Payload (RDP_BW_PAYLOAD)
 
-The RDP_BW_PAYLOAD structure is used to transfer data associated with a bandwidth measurement operation that occurs during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases).
+The RDP_BW_PAYLOAD structure is used to transfer data associated with a bandwidth measurement operation that occurs during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases).
 
 ```mermaid
 packet-beta
@@ -7831,8 +7831,8 @@ packet-beta
 
 | Value | Meaning |
 | --- | --- |
-| 0x002B | The Bandwidth Measure Stop message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). The **payloadLength** field is present and has a value greater than zero. |
-| 0x0429 | One of two possible meanings: The Bandwidth Measure Stop message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT](#Section_2.1) section 2.2.1.1.1) structure that is being tunneled over a reliable UDP multitransport connection ([MS-RDPEMT] sections 1.3 and 2.1). The Bandwidth Measure Stop message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU sent after the RDP Connection Sequence has completed. |
+| 0x002B | The Bandwidth Measure Stop message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). The **payloadLength** field is present and has a value greater than zero. |
+| 0x0429 | One of two possible meanings: The Bandwidth Measure Stop message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 2.2.1.1.1) structure that is being tunneled over a reliable UDP multitransport connection ([MS-RDPEMT] sections 1.3 and 2.1). The Bandwidth Measure Stop message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU sent after the RDP Connection Sequence has completed. |
 | 0x0629 | The Bandwidth Measure Stop message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT] section 2.2.1.1.1) structure that is being tunneled over a lossy UDP multitransport connection ([MS-RDPEMT] sections 1.3 and 2.1). |
 
 **payloadLength (2 bytes):** An optional 16-bit unsigned integer that specifies the size, in bytes, of the **payload** field. If this field is not present, then the size of the **payload** field is zero bytes. The **payloadLength** field MUST NOT be present if the value of the **requestType** field is not set to 0x002B. It MUST be present (and have a value greater than zero) if the value of the **requestType** field is set to 0x002B.
@@ -7902,7 +7902,7 @@ packet-beta
 <a id="Section_2.2.14.2.2"></a>
 ##### 2.2.14.2.2 Bandwidth Measure Results (RDP_BW_RESULTS)
 
-The RDP_BW_RESULTS structure is used to send the results of a bandwidth measurement operation to the initiating end-point. Bandwidth measurement is started by the initiating end-point using the Bandwidth Measure Start (section [2.2.14.1.2](#Section_2.2.14.1.2)) message and stopped by the same end-point using the Bandwidth Measure Stop (section [2.2.14.1.4](#Section_2.2.14.1.4)) message. During the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)) payloads of random data are transmitted by the initiating end-point using a sequence of Bandwidth Measure Payload (section [2.2.14.1.3](#Section_2.2.14.1.3)) messages (sent between the start and stop messages). After the RDP Connection Sequence, the PDUs sent from server to client (between start and stop messages) replace the payload messages.
+The RDP_BW_RESULTS structure is used to send the results of a bandwidth measurement operation to the initiating end-point. Bandwidth measurement is started by the initiating end-point using the Bandwidth Measure Start (section [2.2.14.1.2](#Section_2.2.14.1.2)) message and stopped by the same end-point using the Bandwidth Measure Stop (section [2.2.14.1.4](#Section_2.2.14.1.4)) message. During the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)) payloads of random data are transmitted by the initiating end-point using a sequence of Bandwidth Measure Payload (section [2.2.14.1.3](#Section_2.2.14.1.3)) messages (sent between the start and stop messages). After the RDP Connection Sequence, the PDUs sent from server to client (between start and stop messages) replace the payload messages.
 
 ```mermaid
 packet-beta
@@ -7925,7 +7925,7 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | 0x0003 | The Bandwidth Measure Results message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section [2.2.14.3](#Section_2.2.14.3)) sent during the Optional Connect-Time Auto-Detection phase of the RDP Connection Sequence (see section 1.3.1.1 for an overview of the RDP Connection Sequence phases). |
-| 0x000B | One of two possible meanings: The Bandwidth Measure Results message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section 2.2.14.3) sent after the RDP Connection Sequence has completed. The Bandwidth Measure Results message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT](#Section_2.1) section 2.2.1.1.1) structure. |
+| 0x000B | One of two possible meanings: The Bandwidth Measure Results message is encapsulated in the **autoDetectReqPduData** field of an Auto-Detect Request PDU (section 2.2.14.3) sent after the RDP Connection Sequence has completed. The Bandwidth Measure Results message is encapsulated in the **SubHeaderData** field of an RDP_TUNNEL_SUBHEADER ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 2.2.1.1.1) structure. |
 
 **timeDelta (4 bytes):** A 32-bit unsigned integer that specifies the time delta, in milliseconds, between the receipt of the Bandwidth Measure Start and the Bandwidth Measure Stop messages.
 
@@ -7934,7 +7934,7 @@ packet-beta
 <a id="Section_2.2.14.2.3"></a>
 ##### 2.2.14.2.3 Network Characteristics Sync (RDP_NETCHAR_SYNC)
 
-The RDP_NETCHAR_SYNC structure is sent in response to the RTT Measure Request (section [2.2.14.1.1](#Section_2.2.14.1.1)) message or Bandwidth Measure Start (section [2.2.14.1.2](#Section_2.2.14.1.2)) message and is used to short-circuit connect-time network characteristics detection in the case of an auto-reconnect (section [1.3.1.5](#Section_3.2.1.9) and [2.2.4](#Section_2.2.4)).
+The RDP_NETCHAR_SYNC structure is sent in response to the RTT Measure Request (section [2.2.14.1.1](#Section_2.2.14.1.1)) message or Bandwidth Measure Start (section [2.2.14.1.2](#Section_2.2.14.1.2)) message and is used to short-circuit connect-time network characteristics detection in the case of an auto-reconnect (section [1.3.1.5](#Section_1.3.1.5) and [2.2.4](#Section_2.2.4)).
 
 ```mermaid
 packet-beta
@@ -7980,11 +7980,11 @@ packet-beta
 
 **mcsSDin (variable):** A variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) that encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header and auto-detect request data.
 
-**securityHeader (variable):** A security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). This field MUST contain one of the following headers:
+**securityHeader (variable):** A security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded flags field does not contain the SEC_ENCRYPT (0x0008) flag.
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded flags field does not contain the SEC_ENCRYPT (0x0008) flag.
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
 If the Encryption Level is set to ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), ENCRYPTION_LEVEL_HIGH (3), or ENCRYPTION_LEVEL_FIPS (4) and the **flags** field of the security header does not contain the SEC_ENCRYPT (0x0008) flag (the PDU is not encrypted), then the field MUST contain a Basic Security Header.
 
 The **flags** field of the security header MUST contain the SEC_AUTODETECT_REQ (0x1000) flag (2.2.8.1.1.2.1).
@@ -8013,11 +8013,11 @@ packet-beta
 
 **mcsSDrq (variable):** A variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) that encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and auto-detect response data.
 
-**securityHeader (variable):** An optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
+**securityHeader (variable):** An optional security header. The presence and format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). If the Encryption Level selected by the server is greater than ENCRYPTION_LEVEL_NONE (0) and the Encryption Method selected by the server is greater than ENCRYPTION_METHOD_NONE (0) then this field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0).
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0).
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 The **flags** field of the security header MUST contain the SEC_AUTODETECT_RSP (0x2000) flag (2.2.8.1.1.2.1).
 
 **autoDetectRspPduData (variable):** A variable-length field that contains auto-detect response data, specifically one of the three messages described in sections [2.2.14.2.1](#Section_2.2.14.2.1), [2.2.14.2.2](#Section_2.2.14.2.2) and [2.2.14.2.3](#Section_2.2.14.2.3).
@@ -8028,7 +8028,7 @@ The **flags** field of the security header MUST contain the SEC_AUTODETECT_RSP (
 <a id="Section_2.2.15.1"></a>
 #### 2.2.15.1 Server Initiate Multitransport Request PDU
 
-The Initiate Multitransport Request PDU is sent by the server to the client and is used to bootstrap the creation of a sideband channel ([MS-RDPEMT](#Section_2.1) section 1.3). Upon receiving and successfully decoding the Initiate Multitransport Request PDU, the client SHOULD create the requested channel using the specified transport protocol ([MS-RDPEUDP](#Section_2.1) sections 1.3.2.1 and 3.1.5.2) and then secure the channel using TLS or DTLS ([MS-RDPEMT] sections 1.4 and 5.1). After the channel has been successfully created and secured, the client MUST send the Tunnel Create Request PDU ([MS-RDPEMT] section 2.2.2.1) to the server over the newly created channel ([MS-RDPEMT] section 1.3.1).
+The Initiate Multitransport Request PDU is sent by the server to the client and is used to bootstrap the creation of a sideband channel ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3). Upon receiving and successfully decoding the Initiate Multitransport Request PDU, the client SHOULD create the requested channel using the specified transport protocol ([MS-RDPEUDP](../MS-RDPEUDP/MS-RDPEUDP.md) sections 1.3.2.1 and 3.1.5.2) and then secure the channel using TLS or DTLS ([MS-RDPEMT] sections 1.4 and 5.1). After the channel has been successfully created and secured, the client MUST send the Tunnel Create Request PDU ([MS-RDPEMT] section 2.2.2.1) to the server over the newly created channel ([MS-RDPEMT] section 1.3.1).
 
 This PDU MUST only be sent over the MCS message channel. The ID of the message channel is specified in the Server Message Channel Data (section [2.2.1.4.5](#Section_2.2.1.4.5)).
 
@@ -8050,11 +8050,11 @@ packet-beta
 
 **mcsSDin (variable):** A variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) that encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a Security Header, ID, transport protocol, and a security cookie.
 
-**securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). This field MUST contain one of the following headers:
+**securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded **flags** field does not contain the SEC_ENCRYPT (0x0008) flag.
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded **flags** field does not contain the SEC_ENCRYPT (0x0008) flag.
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
 If the Encryption Level is set to ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), ENCRYPTION_LEVEL_HIGH (3), or ENCRYPTION_LEVEL_FIPS (4) and the **flags** field of the security header does not contain the SEC_ENCRYPT (0x0008) flag (the PDU is not encrypted), then the field MUST contain a Basic Security Header.
 
 The **flags** field of the security header MUST contain the SEC_TRANSPORT_REQ (0x0002) flag (section 2.2.8.1.1.2.1).
@@ -8095,11 +8095,11 @@ packet-beta
 
 **mcsSDrq (variable):** A variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) that encapsulates an MCS Send Data Request structure (SDrq, choice 25 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Request contains a Security Header and a Control PDU Data structure (section [2.2.1.15.1](#Section_2.2.1.15.1)).
 
-**securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)). This field MUST contain one of the following headers:
+**securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0).
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0).
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002).
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010).
 The **flags** field of the security header MUST contain the SEC_TRANSPORT_RSP (0x0004) flag (section 2.2.8.1.1.2.1).
 
 **requestId (4 bytes):** A 32-bit unsigned integer that MUST contain the ID that was sent to the client in the **requestId** field of the associated Initiate Multitransport Request PDU (section [2.2.15.1](#Section_2.2.15.1)).
@@ -8139,11 +8139,11 @@ packet-beta
 
 **mcsSDin (variable):** A variable-length PER-encoded MCS Domain PDU (DomainMCSPDU) that encapsulates an MCS Send Data Indication structure (SDin, choice 26 from DomainMCSPDU), as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33 (the ASN.1 structure definitions are given in [T125] section 7, parts 7 and 10). The **userData** field of the MCS Send Data Indication contains a security header and heartbeat information.
 
-**securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.1](#Section_5.4.1) and [2.2.1.4.3](#Section_5)). This field MUST contain one of the following headers:
+**securityHeader (variable):** Security header. The format of the security header depends on the Encryption Level and Encryption Method selected by the server (sections [5.3.1](#Section_5.3.1) and [2.2.1.4.3](#Section_2.2.1.4.3)). This field MUST contain one of the following headers:
 
-- Basic Security Header (section [2.2.8.1.1.2.1](#Section_5)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded **flags** field does not contain the SEC_ENCRYPT (0x0008) flag.
-- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
-- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_5)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- Basic Security Header (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) if the Encryption Level selected by the server is ENCRYPTION_LEVEL_NONE (0) or ENCRYPTION_LEVEL_LOW (1) and the embedded **flags** field does not contain the SEC_ENCRYPT (0x0008) flag.
+- Non-FIPS Security Header (section [2.2.8.1.1.2.2](#Section_2.2.8.1.1.2.2)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_40BIT (0x00000001), ENCRYPTION_METHOD_56BIT (0x00000008), or ENCRYPTION_METHOD_128BIT (0x00000002) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
+- FIPS Security Header (section [2.2.8.1.1.2.3](#Section_2.2.8.1.1.2.3)) if the Encryption Method selected by the server is ENCRYPTION_METHOD_FIPS (0x00000010) and the embedded **flags** field contains the SEC_ENCRYPT (0x0008) flag.
 If the Encryption Level is set to ENCRYPTION_LEVEL_CLIENT_COMPATIBLE (2), ENCRYPTION_LEVEL_HIGH (3), or ENCRYPTION_LEVEL_FIPS (4) and the **flags** field of the security header does not contain the SEC_ENCRYPT (0x0008) flag (meaning the PDU is not encrypted), then the field MUST contain a Basic Security Header.
 
 The **flags** field of the security header MUST contain the SEC_HEARTBEAT (0x4000) flag (section 2.2.8.1.1.2.1).
@@ -8225,7 +8225,7 @@ packet-beta
 <a id="Section_2.2.17.3"></a>
 #### 2.2.17.3 RDSTLS Authentication Request PDU with Auto-Reconnect Cookie
 
-The RDSTLS Authentication Request PDU is sent by the client to the server and is used to request user authentication using an auto-reconnect cookie that was generated as specified in section [5.5](#Section_1.3.1.5).
+The RDSTLS Authentication Request PDU is sent by the client to the server and is used to request user authentication using an auto-reconnect cookie that was generated as specified in section [5.5](#Section_5.5).
 
 ```mermaid
 packet-beta
@@ -8425,7 +8425,7 @@ The MCS Disconnect Provider Ultimatum PDU (embedded within the **mcsDPum** field
 - In the case of a user-initiated client-side disconnection (section [1.3.1.4.1](#Section_1.3.1.4.1)), the reason code set by the client MUST be rn-user-requested (3).
 - In the case of a user-initiated server-side disconnection (section [1.3.1.4.2](#Section_1.3.1.4.2)), the reason code set by the server MUST be rn-user-requested (3).
 - In the case of an administrator-initiated server-side disconnection (section [1.3.1.4.3](#Section_1.3.1.4.3)), the reason code set by the server MUST be rn-provider-initiated (1).
-If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5)) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5.4.5)) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 Once the MCS Disconnect Provider Ultimatum PDU has been sent, the network connection MUST be closed.
 
@@ -8539,9 +8539,9 @@ RDP uses a modified form of the Microsoft Point-to-Point Compression (MPPC) Prot
 
 - RDP 4.0: Based on the original MPPC Protocol, with an 8,192 byte history buffer (section [3.1.8.4.1](#Section_3.1.8.4.1)).
 - RDP 5.0: A modified version of RDP 4.0 that uses a 65,536 byte history buffer and implements rearranged Huffman style encoding for the bitstream formats (section [3.1.8.4.2](#Section_3.1.8.4.2)).
-Both the server and client can operate as the sender of compressed data. Server-to-client compression can be used for fast-path output data (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1)), slow-path output data (section [2.2.9.1.1](#Section_2.2.9.1.1.5)) or virtual channel data (section [2.2.6.1](#Section_2.2.6.1)). Client-to-server compression can currently only be used for virtual channel data.
+Both the server and client can operate as the sender of compressed data. Server-to-client compression can be used for fast-path output data (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1)), slow-path output data (section [2.2.9.1.1](#Section_2.2.9.1.1)) or virtual channel data (section [2.2.6.1](#Section_2.2.6.1)). Client-to-server compression can currently only be used for virtual channel data.
 
-The client advertises the maximum compression type it supports in the [Client Info PDU](#Section_2.2.1.11.1) (section 2.2.1.11). In response the server selects a compression type within the range advertised by the client. This compression type is then used when performing all subsequent server-to-client and client-to-server bulk compression.
+The client advertises the maximum compression type it supports in the [Client Info PDU](#Section_2.2.1.11) (section 2.2.1.11). In response the server selects a compression type within the range advertised by the client. This compression type is then used when performing all subsequent server-to-client and client-to-server bulk compression.
 
 The compression type usage is indicated on a per-PDU basis by compression flags which are set in the header flags associated with each PDU. Besides being used to indicate the compression type, the compression flags are also used to communicate compression state changes which are required to maintain state synchronization. The header used to transmit the compression flags will depend on the type of data payload, such as fast-path output data (section 2.2.9.1.2.1), virtual channel data (section 2.2.6.1) or slow-path data (section 2.2.9.1.1).
 
@@ -8606,7 +8606,7 @@ Literals and copy-tuples are encoded using the scheme described in section [3.1.
 <a id="Section_3.1.8.2.1"></a>
 ##### 3.1.8.2.1 Setting the Compression Flags
 
-The sender MUST always specify the compression flags associated with a compressed payload. These flags MUST be set in the header field appropriate to the type of data payload, such as fast-path output data (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1)), virtual channel data (section [2.2.6.1](#Section_2.2.6.1)), or slow-path output data (section [2.2.9.1.1](#Section_2.2.9.1.1.5)).
+The sender MUST always specify the compression flags associated with a compressed payload. These flags MUST be set in the header field appropriate to the type of data payload, such as fast-path output data (section [2.2.9.1.2.1](#Section_2.2.9.1.2.1)), virtual channel data (section [2.2.6.1](#Section_2.2.6.1)), or slow-path output data (section [2.2.9.1.1](#Section_2.2.9.1.1)).
 
 The compression flags are produced by performing a logical OR operation of the compression type with one or more of the following flags.
 
@@ -8748,7 +8748,7 @@ Output Buffer:
 
 for.whom.the.bell.tolls,
 
-(7) We find a match in the history buffer at position 8 of length 15 characters (".the.bell.tolls"). Encode the copy-tuple and add it to the output buffer and advance HistoryPtr by the size of the match. Recall from section [3.1.8.2](#Section_3.1.8) that the copy-offset component of the copy-tuple is an index into HistoryBuffer (counting backwards from the HistoryPtr towards the start of the buffer) where there is a match to the data to be sent.
+(7) We find a match in the history buffer at position 8 of length 15 characters (".the.bell.tolls"). Encode the copy-tuple and add it to the output buffer and advance HistoryPtr by the size of the match. Recall from section [3.1.8.2](#Section_3.1.8.2) that the copy-offset component of the copy-tuple is an index into HistoryBuffer (counting backwards from the HistoryPtr towards the start of the buffer) where there is a match to the data to be sent.
 
 History Buffer:
 
@@ -8871,7 +8871,7 @@ Literals are bytes sent uncompressed. If the value of a literal is below 0x80, i
 <a id="Section_3.1.8.4.1.2"></a>
 ###### 3.1.8.4.1.2 Copy-Tuple Encoding
 
-Copy-tuples consist of a <copy-offset> and <length-of-match> pair (see section [3.1.8.2](#Section_3.1.8) for more details).
+Copy-tuples consist of a <copy-offset> and <length-of-match> pair (see section [3.1.8.2](#Section_3.1.8.2) for more details).
 
 <a id="Section_3.1.8.4.1.2.1"></a>
 Copy-Offset Encoding
@@ -8929,7 +8929,7 @@ Literals are bytes sent uncompressed. If the value of a literal is below 0x80, i
 <a id="Section_3.1.8.4.2.2"></a>
 ###### 3.1.8.4.2.2 Copy-Tuple Encoding
 
-Copy-tuples consist of a <copy-offset> and <length-of-match> pair (see section [3.1.8.2](#Section_3.1.8) for more details).
+Copy-tuples consist of a <copy-offset> and <length-of-match> pair (see section [3.1.8.2](#Section_3.1.8.2) for more details).
 
 <a id="Section_3.1.8.4.2.2.1"></a>
 Copy-Offset Encoding
@@ -10734,7 +10734,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Received Server Data
 
-The Received Server Data store contains data received from the server during execution of the Remote Desktop Protocol. This store is initialized when processing the [MCS Connect Response PDU with GCC Conference Create Response](#Section_3.3.5.3.4) (sections 2.2.1.4 and [3.2.5.3.4](#Section_3.2.5.3.4)).
+The Received Server Data store contains data received from the server during execution of the Remote Desktop Protocol. This store is initialized when processing the [MCS Connect Response PDU with GCC Conference Create Response](#Section_2.2.1.4) (sections 2.2.1.4 and [3.2.5.3.4](#Section_3.2.5.3.4)).
 
 <a id="Section_3.2.1.2"></a>
 #### 3.2.1.2 Static Virtual Channel IDs
@@ -10754,7 +10754,7 @@ The Message Channel ID store contains the MCS channel identifier of the message 
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 User Channel ID
 
-The User Channel ID store contains the MCS channel identifier of the user channel. This data store is initialized when processing the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) (sections 2.2.1.7 and [3.2.5.3.7](#Section_3.2.5.3.7)).
+The User Channel ID store contains the MCS channel identifier of the user channel. This data store is initialized when processing the [MCS Attach User Confirm PDU](#Section_2.2.1.7) (sections 2.2.1.7 and [3.2.5.3.7](#Section_3.2.5.3.7)).
 
 <a id="Section_3.2.1.6"></a>
 #### 3.2.1.6 Server Channel ID
@@ -10774,17 +10774,17 @@ The Share ID store holds the share identifier selected by the server ([[T128]](h
 <a id="Section_3.2.1.9"></a>
 #### 3.2.1.9 Automatic Reconnection Cookie
 
-The Automatic Reconnection Cookie store contains a cookie received from the server that enables seamless reconnections in cases where the connection has been broken due to short-term transient network failure (section [5.5](#Section_1.3.1.5)). The cookie is sent by the server to the client in the [Save Session Info PDU](#Section_4.3) (sections 2.2.10.1 and [3.2.5.10.1](#Section_3.2.5.10.1)), and sent by the client to the server in the Client Info PDU (sections [2.2.1.11.1.1.1](#Section_2.2.1.11.1.1.1) and [3.3.5.3.11](#Section_3.3.5.3.11)).
+The Automatic Reconnection Cookie store contains a cookie received from the server that enables seamless reconnections in cases where the connection has been broken due to short-term transient network failure (section [5.5](#Section_5.5)). The cookie is sent by the server to the client in the [Save Session Info PDU](#Section_4.3) (sections 2.2.10.1 and [3.2.5.10.1](#Section_3.2.5.10.1)), and sent by the client to the server in the Client Info PDU (sections [2.2.1.11.1.1.1](#Section_2.2.1.11.1.1.1) and [3.3.5.3.11](#Section_3.3.5.3.11)).
 
 <a id="Section_3.2.1.10"></a>
 #### 3.2.1.10 Server Licensing Encryption Ability
 
-The Server Licensing Encryption Ability store determines whether the server has the ability to handle encrypted licensing packets when using Standard RDP Security mechanisms (see the discussion of the SEC_LICENSE_ENCRYPT_CS flag in section [2.2.8.1.1.2.1](#Section_5)). This fact is communicated to the client by setting the SEC_LICENSE_ENCRYPT_CS (0x0200) flag in all licensing [**PDUs**](#gt_protocol-data-unit-pdu) sent from the server.
+The Server Licensing Encryption Ability store determines whether the server has the ability to handle encrypted licensing packets when using Standard RDP Security mechanisms (see the discussion of the SEC_LICENSE_ENCRYPT_CS flag in section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)). This fact is communicated to the client by setting the SEC_LICENSE_ENCRYPT_CS (0x0200) flag in all licensing [**PDUs**](#gt_protocol-data-unit-pdu) sent from the server.
 
 <a id="Section_3.2.1.11"></a>
 #### 3.2.1.11 Pointer Image Cache
 
-The Pointer Image Cache contains a collection of pointer images saved from Color Pointer Updates (sections [2.2.9.1.2.1.7](#Section_2.2.9.1.2.1.7), [3.2.5.9.2](#Section_3.2.5.9.2), and [3.2.5.9.3](#Section_3.2.5.9.3.1)), New Pointer Updates (sections [2.2.9.1.2.1.8](#Section_2.2.9.1.2.1.8), 3.2.5.9.2, and 3.2.5.9.3), and Large Pointer Updates (sections [2.2.9.1.2.1.11](#Section_2.2.9.1.2.1.11) and 3.2.5.9.3). The images stored in the cache are used to set the shape of the pointer when processing a Cached Pointer Update (sections [2.2.9.1.1.4.6](#Section_2.2.9.1.1.4.6), 3.2.5.9.2, and 3.2.5.9.3). The size and color depth (either variable or fixed at 24 bpp) of the cache is specified in the Pointer Capability Set (section [2.2.7.1.5](#Section_2.2.7.1.5)).
+The Pointer Image Cache contains a collection of pointer images saved from Color Pointer Updates (sections [2.2.9.1.2.1.7](#Section_2.2.9.1.2.1.7), [3.2.5.9.2](#Section_3.2.5.9.2), and [3.2.5.9.3](#Section_3.2.5.9.3)), New Pointer Updates (sections [2.2.9.1.2.1.8](#Section_2.2.9.1.2.1.8), 3.2.5.9.2, and 3.2.5.9.3), and Large Pointer Updates (sections [2.2.9.1.2.1.11](#Section_2.2.9.1.2.1.11) and 3.2.5.9.3). The images stored in the cache are used to set the shape of the pointer when processing a Cached Pointer Update (sections [2.2.9.1.1.4.6](#Section_2.2.9.1.1.4.6), 3.2.5.9.2, and 3.2.5.9.3). The size and color depth (either variable or fixed at 24 bpp) of the cache is specified in the Pointer Capability Set (section [2.2.7.1.5](#Section_2.2.7.1.5)).
 
 <a id="Section_3.2.1.12"></a>
 #### 3.2.1.12 Session Keys
@@ -10814,7 +10814,7 @@ The Connection Start Time store contains the time at which the client first sent
 <a id="Section_3.2.1.17"></a>
 #### 3.2.1.17 Network Characteristics Byte Count
 
-The Network Characteristics Byte Count store is a byte counter that is used when determining the network characteristics by using the messages defined in section [2.2.14.1](#Section_2.2.14.1.4).
+The Network Characteristics Byte Count store is a byte counter that is used when determining the network characteristics by using the messages defined in section [2.2.14.1](#Section_2.2.14.1).
 
 <a id="Section_3.2.1.18"></a>
 #### 3.2.1.18 Network Characteristics Sequence Number
@@ -10832,7 +10832,7 @@ The Connection Sequence Timeout Timer stores the amount of time that has elapsed
 <a id="Section_3.2.2.2"></a>
 #### 3.2.2.2 Network Characteristics Timer
 
-The Network Characteristics Timer store is a millisecond-resolution timer that is used when determining the network characteristics using the messages defined in [2.2.14.1](#Section_2.2.14.1.4).
+The Network Characteristics Timer store is a millisecond-resolution timer that is used when determining the network characteristics using the messages defined in [2.2.14.1](#Section_2.2.14.1).
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
@@ -10855,16 +10855,16 @@ The majority of client-to-server slow-path PDUs have the same basic structure (s
 - **tpktHeader**: TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8)
 - **x224Data**: X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7)
 - **mcsSDrq**: MCS Send Data Request PDU ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, Part 7)
-- **securityHeader**: Optional Security Header (section [2.2.8.1.1.2](#Section_5))
+- **securityHeader**: Optional Security Header (section [2.2.8.1.1.2](#Section_2.2.8.1.1.2))
 - **shareDataHeader**: Share Data Header (section [2.2.8.1.1.1.2](#Section_2.2.8.1.1.1.2))
 - [**PDU**](#gt_protocol-data-unit-pdu) Contents (see the section describing the PDU structure and fields in section [2.2](#Section_2.2))
 The **tpktHeader** field is initialized as specified in [T123] section 8, while the **x224Data** field is initialized as specified in [X224] section 13.7.
 
-The **mcsSDrq** field is initialized as specified in [T125] section 11.32. The embedded **initiator** field MUST be set to the User Channel ID held in the User Channel ID store (section [3.2.1.5](#Section_3.3.1.2)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the I/O Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). The embedded **userData** field contains the remaining fields of the PDU.
+The **mcsSDrq** field is initialized as specified in [T125] section 11.32. The embedded **initiator** field MUST be set to the User Channel ID held in the User Channel ID store (section [3.2.1.5](#Section_3.2.1.5)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the I/O Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). The embedded **userData** field contains the remaining fields of the PDU.
 
 If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5.4.5)) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario, the **securityHeader** field MUST NOT be present.
 
-If Standard RDP Security mechanisms (section [5.3](#Section_2.2.13.2)) are in effect, the PDU data following the optional **securityHeader** field is encrypted and signed (using the methods and techniques specified in section [5.3.6](#Section_5.3.6)) based on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2). The format of the **securityHeader** field is selected as specified in the section describing the PDU structure and fields in section 2.2, and the fields populated with the appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
+If Standard RDP Security mechanisms (section [5.3](#Section_5.3)) are in effect, the PDU data following the optional **securityHeader** field is encrypted and signed (using the methods and techniques specified in section [5.3.6](#Section_5.3.6)) based on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2). The format of the **securityHeader** field is selected as specified in the section describing the PDU structure and fields in section 2.2, and the fields populated with the appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
 
 The **shareDataHeader** field contains a Share Data Header structure as described in section 2.2.8.1.1.1.2. The **pduSource** field of the embedded Share Control Header (section [2.2.8.1.1.1.1](#Section_2.2.8.1.1.1.1)) MUST be set to the User Channel ID held in the User Channel ID store (section 3.2.1.5). If the contents of the PDU are to be compressed (this MUST be done before any [**MAC**](#gt_message-authentication-code-mac) signature is constructed and encryption methods applied), the embedded **compressedType** field of the **shareDataHeader** MUST be initialized as specified in section 2.2.8.1.1.1.2. The remaining Share Data Header and Share Control Header fields MUST be populated as specified in sections 2.2.8.1.1.1.1, 2.2.8.1.1.1.2, and the section describing the PDU structure and fields in section 2.2.
 
@@ -10878,16 +10878,16 @@ The majority of server-to-client slow-path PDUs have the same basic structure (s
 - **tpktHeader**: TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8)
 - **x224Data**: X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7)
 - **mcsSDin**: MCS Send Data Indication PDU ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, part 7)
-- **securityHeader**: Optional Security Header (section [2.2.8.1.1.2](#Section_5))
+- **securityHeader**: Optional Security Header (section [2.2.8.1.1.2](#Section_2.2.8.1.1.2))
 - **shareDataHeader**: Share Data Header (section [2.2.8.1.1.1.2](#Section_2.2.8.1.1.1.2))
 - PDU Contents (see the section describing the PDU structure and fields in section [2.2](#Section_2.2))
-If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5)) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
+If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5.4.5)) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** ([T123] section 8) and **mcsSDin** ([T125] section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDin** is used to route the PDU to the appropriate target channel.
 
-The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in the section describing the PDU structure and fields in section 2.2. If the **securityHeader** field is present, the embedded **flags** field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_5)), and, if it is present, the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques specified in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect, or the data cannot be decrypted correctly, the connection SHOULD be dropped. If Enhanced RDP Security is in effect and the SEC_ENCRYPT flag is present, the connection SHOULD be dropped because double-encryption is never used in this scenario.
+The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in the section describing the PDU structure and fields in section 2.2. If the **securityHeader** field is present, the embedded **flags** field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)), and, if it is present, the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques specified in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect, or the data cannot be decrypted correctly, the connection SHOULD be dropped. If Enhanced RDP Security is in effect and the SEC_ENCRYPT flag is present, the connection SHOULD be dropped because double-encryption is never used in this scenario.
 
 The **shareDataHeader** field (which contains the Share Control Header and Share Data Header described in sections [2.2.8.1.1.1.1](#Section_2.2.8.1.1.1.1) and 2.2.8.1.1.1.2 respectively) MUST be examined to determine the PDU type (from the **pduType** and **pduType2** fields), as well as the compression usage information (from the **compressedType** field). If the data following the Share Data Header is compressed, then decompression using the techniques specified in section [3.1.8.3](#Section_3.1.8.3) MUST be performed. The value of the **totalLength** field MUST also be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped. The remaining Share Control Header and Share Data Header fields MAY be ignored.
 
@@ -10922,9 +10922,9 @@ If the **rdpNegData** field is not present, it is assumed that the server does n
 
 If an RDP Negotiation Failure structure is present, the failure code is extracted from the **failureCode** field and the connection SHOULD be dropped (see section 2.2.1.2.2 for a list of failure codes). If an RDP Negotiation Response structure is present, the **selectedProtocol** field is parsed to extract the selected protocol identifier (see section 2.2.1.2.1 for a list of identifiers).
 
-If an External Security Protocol (section [5.4.5](#Section_5)) will be used for the duration of the connection, and the Negotiation-Based Approach (section [5.4.2.1](#Section_5.4.2.1)) is being used, the client MUST execute the selected protocol at this stage by calling into the relevant External Security Protocol provider. Once the External Security Protocol handshake has successfully run to completion and all authentication requirements have been fulfilled, the client SHOULD continue with the connection sequence by sending the [MCS Connect Initial PDU](#Section_3.3.5.3.3) (section 2.2.1.3) to the server over the newly established secure channel (section [3.2.5.3.3](#Section_3.2.5.3.3)).
+If an External Security Protocol (section [5.4.5](#Section_5.4.5)) will be used for the duration of the connection, and the Negotiation-Based Approach (section [5.4.2.1](#Section_5.4.2.1)) is being used, the client MUST execute the selected protocol at this stage by calling into the relevant External Security Protocol provider. Once the External Security Protocol handshake has successfully run to completion and all authentication requirements have been fulfilled, the client SHOULD continue with the connection sequence by sending the [MCS Connect Initial PDU](#Section_2.2.1.3) (section 2.2.1.3) to the server over the newly established secure channel (section [3.2.5.3.3](#Section_3.2.5.3.3)).
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are to be used, that is, the protocol selected by the server is PROTOCOL_RDP (0x00000000), then the client SHOULD do either of the following:
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are to be used, that is, the protocol selected by the server is PROTOCOL_RDP (0x00000000), then the client SHOULD do either of the following:
 
 - Continue with the connection sequence by sending the Client MCS Connect Initial PDU (section 2.2.1.3) to the server.
 - Disconnect and then restart the connection sequence, specifying only the PROTOCOL_RDP flag (0x00000000) in the **requestedProtocols** field of the [RDP Negotiation Request](#Section_2.2.1.1.1) structure (section 2.2.1.1.1).
@@ -10933,7 +10933,7 @@ Both of these actions will result in a session that is secured using Standard RD
 <a id="Section_3.2.5.3.3"></a>
 ##### 3.2.5.3.3 Sending MCS Connect Initial PDU with GCC Conference Create Request
 
-The structure and fields of the [MCS Connect Initial PDU with GCC Conference Create Request](#Section_3.3.5.3.3) are specified in section 2.2.1.3. A basic high-level overview of the nested structure for the MCS Connect Initial PDU is illustrated in section [1.3.1.1](#Section_1.3), in the figure specifying MCS Connect Initial PDU.
+The structure and fields of the [MCS Connect Initial PDU with GCC Conference Create Request](#Section_2.2.1.3) are specified in section 2.2.1.3. A basic high-level overview of the nested structure for the MCS Connect Initial PDU is illustrated in section [1.3.1.1](#Section_1.3.1.1), in the figure specifying MCS Connect Initial PDU.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
@@ -10982,18 +10982,18 @@ The **userData** field of the MCS Connect Initial PDU contains the GCC Conferenc
 
 The **userData** field of the GCC Conference Create Request MUST be initialized with basic client settings data blocks (sections [2.2.1.3.2](#Section_2.2.1.3.2) through [2.2.1.3.5](#Section_2.2.1.3.5)). The client-to-server H.221 nonstandard key which MUST be embedded at the start of the **userData** field ([T124] section 8.7 for a description of the structure of user data) MUST be the ANSI character string "Duca".
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 <a id="Section_3.2.5.3.4"></a>
 ##### 3.2.5.3.4 Processing MCS Connect Response PDU with GCC Conference Create Response
 
-The structure and fields of the [MCS Connect Response PDU with GCC Conference Create Response](#Section_3.3.5.3.4) are specified in section 2.2.1.4. A basic high-level overview of the nested structure for the MCS Connect Response PDU is illustrated in section [1.3.1.1](#Section_1.3), in the figure specifying the MCS Connect Response PDU.
+The structure and fields of the [MCS Connect Response PDU with GCC Conference Create Response](#Section_2.2.1.4) are specified in section 2.2.1.4. A basic high-level overview of the nested structure for the MCS Connect Response PDU is illustrated in section [1.3.1.1](#Section_1.3.1.1), in the figure specifying the MCS Connect Response PDU.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
-The MCS Connect Response PDU (embedded within the **mcsCrsp** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, part 2. The client ignores the **calledConnectId** and **domainParameters** fields of this PDU. If the **result** field is set to rt-successful (0) the client MUST send the [MCS Erect Domain Request PDU](#Section_3.2.5.3.5) to the server (section [3.2.5.3.5](#Section_3.2.5.3.5)). If the **result** field is set to any other value, the client SHOULD drop the connection.
+The MCS Connect Response PDU (embedded within the **mcsCrsp** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, part 2. The client ignores the **calledConnectId** and **domainParameters** fields of this PDU. If the **result** field is set to rt-successful (0) the client MUST send the [MCS Erect Domain Request PDU](#Section_2.2.1.5) to the server (section [3.2.5.3.5](#Section_3.2.5.3.5)). If the **result** field is set to any other value, the client SHOULD drop the connection.
 
 The **mcsCrsp** field of the MCS Connect Response PDU contains the GCC Conference Create Response data (embedded within the **gccCCrsp** field). The GCC Conference Create Response is described in [[T124]](https://go.microsoft.com/fwlink/?LinkId=90542) section 8.7 and appended as user data to the MCS Connect Response PDU using the format specified in [T124] sections 9.5 and 9.6. The client MUST ignore the specified length of the MCS Connect Response PDU user data.
 
@@ -11005,136 +11005,136 @@ Once the **mcsCrsp** and **gccCCrsp** fields have been successfully parsed the c
 
 The **clientRequestedProtocols** field in the Server Core Data (section 2.2.1.4.2) is examined to ensure that it contains the same flags that the client sent to the server in the [RDP Negotiation Request (section 2.2.1.1.1)](#Section_2.2.1.1.1). If this is not the case, the client SHOULD drop the connection. In the event that this optional field is not present, the value PROTOCOL_RDP (0) MUST be assumed.
 
-Select settings in the [Server Security Data](#Section_5) (section 2.2.1.4.3) are validated using the following rules.
+Select settings in the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3) are validated using the following rules.
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
 | Variable | encryptionMethod | If this field does not contain a valid Encryption Method identifier, the client SHOULD drop the connection. If the client does not support the selected Encryption Method it SHOULD disconnect because further communication with the server will not be possible. |
 | Variable | encryptionLevel | If this field contains a nonzero value and there is not enough data to read the data in the **serverRandom** or **serverCertificate** fields, the client SHOULD drop the connection. |
 | Variable | serverRandomLen | If this field does not contain a value of 32, the client SHOULD drop the connection. |
-| Variable | serverCertificate | If this field does not contain a valid certificate, the client SHOULD drop the connection. Proprietary certificates (sections [3.2.5.3.1](#Section_3.2.5.3.15) and [5.3.3.1](#Section_5.3.3.1)) SHOULD be tested for validity using the techniques specified in section [5.3.3.1.3](#Section_5.3.3.1.3). |
+| Variable | serverCertificate | If this field does not contain a valid certificate, the client SHOULD drop the connection. Proprietary certificates (sections [3.2.5.3.1](#Section_3.2.5.3.1) and [5.3.3.1](#Section_5.3.3.1)) SHOULD be tested for validity using the techniques specified in section [5.3.3.1.3](#Section_5.3.3.1.3). |
 
-The **channelCount** and **channelIdArray** fields in the Server Network Data (section 2.2.1.4.4) MUST be examined for consistency to ensure that the packet contains enough data to extract the specified number of channel IDs. If there is not enough data, the client SHOULD drop the connection. The MCS channel IDs returned in the **channelIdArray** MUST be saved in the Static Virtual Channel IDs store (section [3.2.1.2](#Section_3.2.1.2)), while the **MCSChannelId** field MUST be saved in the I/O Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). The **MCSChannelId** field in the Server Message Channel Data (section [2.2.1.4.5](#Section_2.2.1.4.5)) MUST be saved in the Message Channel ID store (section [3.2.1.4](#Section_3.2.1.4)). These IDs MUST be used by the client when sending [MCS Channel Join Request PDUs](#Section_3.2.5.3.8) (sections 2.2.1.8 and [3.2.5.3.8](#Section_3.2.5.3.8)).
+The **channelCount** and **channelIdArray** fields in the Server Network Data (section 2.2.1.4.4) MUST be examined for consistency to ensure that the packet contains enough data to extract the specified number of channel IDs. If there is not enough data, the client SHOULD drop the connection. The MCS channel IDs returned in the **channelIdArray** MUST be saved in the Static Virtual Channel IDs store (section [3.2.1.2](#Section_3.2.1.2)), while the **MCSChannelId** field MUST be saved in the I/O Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). The **MCSChannelId** field in the Server Message Channel Data (section [2.2.1.4.5](#Section_2.2.1.4.5)) MUST be saved in the Message Channel ID store (section [3.2.1.4](#Section_3.2.1.4)). These IDs MUST be used by the client when sending [MCS Channel Join Request PDUs](#Section_2.2.1.8) (sections 2.2.1.8 and [3.2.5.3.8](#Section_3.2.5.3.8)).
 
 Once the basic server settings data blocks have been processed successfully, the client MUST send the MCS Attach User Request PDU (section [3.2.5.3.6](#Section_3.2.5.3.6)) to the server.
 
 <a id="Section_3.2.5.3.5"></a>
 ##### 3.2.5.3.5 Sending MCS Erect Domain Request PDU
 
-The structure and fields of the [MCS Erect Domain Request PDU](#Section_3.2.5.3.5) are specified in section 2.2.1.5.
+The structure and fields of the [MCS Erect Domain Request PDU](#Section_2.2.1.5) are specified in section 2.2.1.5.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
 The MCS Erect Domain Request PDU (embedded within the **mcsEDrq** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 3 and 10. The client SHOULD initialize both the **subHeight** and **subinterval** fields of the MCS Erect Domain Request PDU to zero.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 <a id="Section_3.2.5.3.6"></a>
 ##### 3.2.5.3.6 Sending MCS Attach User Request PDU
 
-The structure and fields of the [MCS Attach User Request PDU](#Section_4.1.6) are specified in section 2.2.1.6.
+The structure and fields of the [MCS Attach User Request PDU](#Section_2.2.1.6) are specified in section 2.2.1.6.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
 The MCS Attach User Request PDU (embedded within the **mcsAUrq** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 5 and 10.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 <a id="Section_3.2.5.3.7"></a>
 ##### 3.2.5.3.7 Processing MCS Attach User Confirm PDU
 
-The structure and fields of the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) are specified in section 2.2.1.7.
+The structure and fields of the [MCS Attach User Confirm PDU](#Section_2.2.1.7) are specified in section 2.2.1.7.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
-The MCS Attach User Confirm PDU (embedded within the **mcsAUcf** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 5 and 10. If the **result** field is not set to rt-successful (0), the client SHOULD drop the connection. If the **result** field is set to rt-successful (0) but the **initiator** field is not present, the client SHOULD drop the connection. If the **initiator** field is present, the client stores the value of the **initiator** in the [User Channel ID](#Section_3.3.1.2) store (section 3.2.1.5), because the **initiator** specifies the User Channel ID.
+The MCS Attach User Confirm PDU (embedded within the **mcsAUcf** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 5 and 10. If the **result** field is not set to rt-successful (0), the client SHOULD drop the connection. If the **result** field is set to rt-successful (0) but the **initiator** field is not present, the client SHOULD drop the connection. If the **initiator** field is present, the client stores the value of the **initiator** in the [User Channel ID](#Section_3.2.1.5) store (section 3.2.1.5), because the **initiator** specifies the User Channel ID.
 
 Once the User Channel ID has been extracted, the client MUST send an [MCS Channel Join Request PDU](#Section_3.2.5.3.8) for the user channel (section 3.2.5.3.8).
 
 <a id="Section_3.2.5.3.8"></a>
 ##### 3.2.5.3.8 Sending MCS Channel Join Request PDU(s)
 
-The structure and fields of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) are specified in section 2.2.1.8.
+The structure and fields of the [MCS Channel Join Request PDU](#Section_2.2.1.8) are specified in section 2.2.1.8.
 
 Multiple MCS Channel Join Request PDUs are sent to join the following channels:
 
-- User Channel (the MCS channel ID is stored in the [User Channel ID](#Section_3.3.1.2) store (section 3.2.1.5)).
+- User Channel (the MCS channel ID is stored in the [User Channel ID](#Section_3.2.1.5) store (section 3.2.1.5)).
 - I/O channel (the MCS channel ID is stored in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.2.1.3)).
 - Message channel, if the Message Channel ID is non-zero (the MCS channel ID is stored in the Message Channel ID store (section [3.2.1.4](#Section_3.2.1.4))).
-- Static Virtual Channels (the MCS channel IDs are stored in the [Static Virtual Channel IDs](#Section_3.1.5.2) store (section [3.2.1.2](#Section_3.2.1.2))).
-The MCS Channel Join Request PDUs are sent sequentially. The first [**PDU**](#gt_protocol-data-unit-pdu) is sent after receiving the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) (section 2.2.1.7) and subsequent PDUs are sent after receiving the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 2.2.1.9) for the previous request. Sending of the MCS Channel Join Request PDUs MUST continue until all channels have been successfully joined.
+- Static Virtual Channels (the MCS channel IDs are stored in the [Static Virtual Channel IDs](#Section_1.3.3) store (section [3.2.1.2](#Section_3.2.1.2))).
+The MCS Channel Join Request PDUs are sent sequentially. The first [**PDU**](#gt_protocol-data-unit-pdu) is sent after receiving the [MCS Attach User Confirm PDU](#Section_2.2.1.7) (section 2.2.1.7) and subsequent PDUs are sent after receiving the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 2.2.1.9) for the previous request. Sending of the MCS Channel Join Request PDUs MUST continue until all channels have been successfully joined.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
 The MCS Channel Join Request PDU (embedded within the **mcsCJrq** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 6 and 10. The **initiator** field is initialized with the User Channel ID obtained during the processing of the MCS Attach User Confirm PDU and stored in the User Channel ID store. The **channelId** field is initialized with the MCS channel ID of the channel that is being joined.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire.
 
-If the client set the RNS_UD_CS_SUPPORT_SKIP_CHANNELJOIN flag in the **earlyCapabilityFlags** field of the Client Core Data (section [2.2.1.3.2](#Section_2.2.1.3.2)), and the server set the RNS_UD_SC_SKIP_CHANNELJOIN_SUPPORTED flag in **earlyCapabilityFlags** field of the Server Core Data (section [2.2.1.4.2](#Section_2.2.1.4.2)), then the MCS Channel Join Request PDUs (section 2.2.1.8) and the MCS Channel Join Confirm PDUs (section 2.2.1.9) SHOULD be skipped to reduce the connection time. Upon reception of the MCS Attach User Confirm PDU (section 2.2.1.7) all the MCS channels (the user channel, the I/O channel, the message channel, and all static virtual channels) SHOULD be considered as fully joined by the client. The client SHOULD NOT send any MCS Channel Join Request PDUs to server and SHOULD proceed to the RDP Security Commencement phase (section [1.3.1.1](#Section_1.3)).
+If the client set the RNS_UD_CS_SUPPORT_SKIP_CHANNELJOIN flag in the **earlyCapabilityFlags** field of the Client Core Data (section [2.2.1.3.2](#Section_2.2.1.3.2)), and the server set the RNS_UD_SC_SKIP_CHANNELJOIN_SUPPORTED flag in **earlyCapabilityFlags** field of the Server Core Data (section [2.2.1.4.2](#Section_2.2.1.4.2)), then the MCS Channel Join Request PDUs (section 2.2.1.8) and the MCS Channel Join Confirm PDUs (section 2.2.1.9) SHOULD be skipped to reduce the connection time. Upon reception of the MCS Attach User Confirm PDU (section 2.2.1.7) all the MCS channels (the user channel, the I/O channel, the message channel, and all static virtual channels) SHOULD be considered as fully joined by the client. The client SHOULD NOT send any MCS Channel Join Request PDUs to server and SHOULD proceed to the RDP Security Commencement phase (section [1.3.1.1](#Section_1.3.1.1)).
 
 <a id="Section_3.2.5.3.9"></a>
 ##### 3.2.5.3.9 Processing MCS Channel Join Confirm PDU(s)
 
-The structure and fields of the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) are specified in section 2.2.1.9.
+The structure and fields of the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) are specified in section 2.2.1.9.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
-The MCS Channel Join Confirm PDU (embedded within the **mcsCJcf** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 6 and 10. If the optional **channelId** field is not present, the client SHOULD drop the connection. Furthermore, if the **result** field is not set to rt-successful (0), the client SHOULD also drop the connection. The **initiator** and **requested** fields MAY be ignored, however, the **channelId** field MUST be examined. If the value of the **channelId** field does not correspond with the value of the **channelId** field sent in the previous [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8) the connection SHOULD be dropped.
+The MCS Channel Join Confirm PDU (embedded within the **mcsCJcf** field) is specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 6 and 10. If the optional **channelId** field is not present, the client SHOULD drop the connection. Furthermore, if the **result** field is not set to rt-successful (0), the client SHOULD also drop the connection. The **initiator** and **requested** fields MAY be ignored, however, the **channelId** field MUST be examined. If the value of the **channelId** field does not correspond with the value of the **channelId** field sent in the previous [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8) the connection SHOULD be dropped.
 
 Once the client has successfully processed the MCS Channel Join Confirm PDU, it MUST send a new MCS Channel Join Request PDU to the server containing the ID of the next channel which has not yet been joined. If all channels have been joined, the client MUST proceed to send one of the following PDUs:
 
-- The [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10) if [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect and the [Encryption Level](#Section_5.4.1) (section 5.3.1) and Encryption Method returned from the server in the [Server Security Data](#Section_2.2.1.4.2) (sections 2.2.1.4.2 and [3.2.5.3.4](#Section_3.2.5.3.4)) are both greater than zero.
-- The [Client Info PDU](#Section_2.2.1.11.1) (section 2.2.1.11) if the Encryption Level and Encryption Method returned from the server are both zero.
+- The [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10) if [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect and the [Encryption Level](#Section_5.3.1) (section 5.3.1) and Encryption Method returned from the server in the [Server Security Data](#Section_2.2.1.4.2) (sections 2.2.1.4.2 and [3.2.5.3.4](#Section_3.2.5.3.4)) are both greater than zero.
+- The [Client Info PDU](#Section_2.2.1.11) (section 2.2.1.11) if the Encryption Level and Encryption Method returned from the server are both zero.
 <a id="Section_3.2.5.3.10"></a>
 ##### 3.2.5.3.10 Sending Security Exchange PDU
 
-The structure and fields of the [Security Exchange PDU](#Section_2.2.1.10.1) are specified in section 2.2.1.10.
+The structure and fields of the [Security Exchange PDU](#Section_2.2.1.10) are specified in section 2.2.1.10.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The **mcsSDrq** field is initialized as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32. The embedded **initiator** field MUST be set to the User Channel ID (held in the [User Channel ID](#Section_3.3.1.2) store (section 3.2.1.5)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID (held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.2.1.3). The embedded **userData** field contains the remaining fields of the Security Exchange PDU.
+The **mcsSDrq** field is initialized as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32. The embedded **initiator** field MUST be set to the User Channel ID (held in the [User Channel ID](#Section_3.2.1.5) store (section 3.2.1.5)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID (held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.2.1.3). The embedded **userData** field contains the remaining fields of the Security Exchange PDU.
 
-The embedded **flags** field of the **basicSecurityHeader** MUST contain the SEC_EXCHANGE_PKT (0x0001) flag (specified in section [2.2.8.1.1.2.1](#Section_5)) to indicate the [**PDU**](#gt_protocol-data-unit-pdu) type. If the client can handle encrypted licensing packets from the server and [Standard RDP Security](#Section_2.2.13.2) mechanisms (sections 5.3 and [5.4](#Section_5.4)) are being used, then the SEC_LICENSE_ENCRYPT_SC (0x0200) flag SHOULD also be included in the **flags** subfield of the **basicSecurityHeader** field.
+The embedded **flags** field of the **basicSecurityHeader** MUST contain the SEC_EXCHANGE_PKT (0x0001) flag (specified in section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) to indicate the [**PDU**](#gt_protocol-data-unit-pdu) type. If the client can handle encrypted licensing packets from the server and [Standard RDP Security](#Section_5.3) mechanisms (sections 5.3 and [5.4](#Section_5.4)) are being used, then the SEC_LICENSE_ENCRYPT_SC (0x0200) flag SHOULD also be included in the **flags** subfield of the **basicSecurityHeader** field.
 
-A 32-byte random number MUST be generated and then encrypted using the public key of the server and the techniques specified in section [5.3.4.1](#Section_5.3.4.1). The public key of the server is embedded in the server's certificate, which is held in the **serverCertificate** field of the [Server Security Data](#Section_5) (section 2.2.1.4.3) sent in the [MCS Connect Response PDU with GCC Conference Response](#Section_3.2.5.3.4) (section 3.2.5.3.4). Once the 32-byte random number has been successfully encrypted, it MUST be copied into the **encryptedClientRandom** field. The size of the **encryptedClientRandom** field MUST be derived as specified in section 5.3.4.1. After the encrypted client random has been copied into the **encryptedClientRandom** buffer, 8 bytes of padding (which MUST be filled with zeroes) will remain.
+A 32-byte random number MUST be generated and then encrypted using the public key of the server and the techniques specified in section [5.3.4.1](#Section_5.3.4.1). The public key of the server is embedded in the server's certificate, which is held in the **serverCertificate** field of the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3) sent in the [MCS Connect Response PDU with GCC Conference Response](#Section_3.2.5.3.4) (section 3.2.5.3.4). Once the 32-byte random number has been successfully encrypted, it MUST be copied into the **encryptedClientRandom** field. The size of the **encryptedClientRandom** field MUST be derived as specified in section 5.3.4.1. After the encrypted client random has been copied into the **encryptedClientRandom** buffer, 8 bytes of padding (which MUST be filled with zeroes) will remain.
 
-Once the client has sent the Security Exchange PDU, it MUST generate the session keys which will be used to encrypt, decrypt, and sign data sent on the wire. The 32-byte client random and server random (transmitted in the Server Security Data (section 2.2.1.4.3)) are used to accomplish this task by employing the techniques specified in section [5.3.5](#Section_4.11.1). On successful generation of the session keys, the client MUST send the [Client Info PDU](#Section_4.1.10) to the server (section 3.2.5.3.11) and store the session keys in the Session Keys store (section [3.2.1.12](#Section_3.2.1.12)).
+Once the client has sent the Security Exchange PDU, it MUST generate the session keys which will be used to encrypt, decrypt, and sign data sent on the wire. The 32-byte client random and server random (transmitted in the Server Security Data (section 2.2.1.4.3)) are used to accomplish this task by employing the techniques specified in section [5.3.5](#Section_5.3.5). On successful generation of the session keys, the client MUST send the [Client Info PDU](#Section_4.1.10) to the server (section 3.2.5.3.11) and store the session keys in the Session Keys store (section [3.2.1.12](#Section_3.2.1.12)).
 
 <a id="Section_3.2.5.3.11"></a>
 ##### 3.2.5.3.11 Sending Client Info PDU
 
-The structure and fields of the [Client Info PDU](#Section_2.2.1.11.1) are specified in section 2.2.1.11.
+The structure and fields of the [Client Info PDU](#Section_2.2.1.11) are specified in section 2.2.1.11.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The **mcsSDrq** field is initialized as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32. The embedded **initiator** field MUST be set to the User Channel ID (held in the [User Channel ID](#Section_3.3.1.2) store (section 3.2.1.5)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID (held in the [I/O Channel ID](#Section_3.2.1.3) (section 3.2.1.3)). The embedded **userData** field contains the remaining fields of the Client Info PDU.
+The **mcsSDrq** field is initialized as specified in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32. The embedded **initiator** field MUST be set to the User Channel ID (held in the [User Channel ID](#Section_3.2.1.5) store (section 3.2.1.5)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID (held in the [I/O Channel ID](#Section_3.2.1.3) (section 3.2.1.3)). The embedded **userData** field contains the remaining fields of the Client Info PDU.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest. The **securityHeader** field MUST be present; however, it will contain a [Basic Security Header](#Section_5) structure (section 2.2.8.1.1.2.1).
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest. The **securityHeader** field MUST be present; however, it will contain a [Basic Security Header](#Section_2.2.8.1.1.2.1) structure (section 2.2.8.1.1.2.1).
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect, the PDU data following the **securityHeader** field can be encrypted and signed (depending on the values of the [Encryption Level](#Section_5.4.1) (section 5.3.1) and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in [5.3.6](#Section_5.3.6). The format of the **securityHeader** field is selected as described in the section detailing the PDU structure and fields (section [2.2](#Section_2.2)) and the fields populated with appropriate security data. If the data is to be encrypted, the embedded flags field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect, the PDU data following the **securityHeader** field can be encrypted and signed (depending on the values of the [Encryption Level](#Section_5.3.1) (section 5.3.1) and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in [5.3.6](#Section_5.3.6). The format of the **securityHeader** field is selected as described in the section detailing the PDU structure and fields (section [2.2](#Section_2.2)) and the fields populated with appropriate security data. If the data is to be encrypted, the embedded flags field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
 
 The embedded flags field of the **securityHeader** field (which is always present) MUST contain the SEC_INFO_PKT (0x0040) flag (specified in section 2.2.8.1.1.2.1) to indicate the PDU type.
 
-If the client is in the process of attempting an automatic reconnection operation using a cookie stored in the [Automatic Reconnection Cookie](#Section_3.3.1.11) store (section 3.2.1.9), then it MUST populate the **autoReconnectCookie** field of the [Extended Info Structure](#Section_4.1.10) (section 2.2.1.11.1.1.1) with the contents of the cookie. The remainder of the PDU MUST be populated with client settings according to the structure and type definition in section [2.2.1.11.1.1](#Section_2.2.1.11.1.1).
+If the client is in the process of attempting an automatic reconnection operation using a cookie stored in the [Automatic Reconnection Cookie](#Section_3.2.1.9) store (section 3.2.1.9), then it MUST populate the **autoReconnectCookie** field of the [Extended Info Structure](#Section_4.1.10) (section 2.2.1.11.1.1.1) with the contents of the cookie. The remainder of the PDU MUST be populated with client settings according to the structure and type definition in section [2.2.1.11.1.1](#Section_2.2.1.11.1.1).
 
 <a id="Section_3.2.5.3.12"></a>
 ##### 3.2.5.3.12 Processing License Error PDU - Valid Client
 
-The structure and fields of the [License Error (Valid Client) PDU](#Section_2.2.1.12.1.2) are specified in section 2.2.1.12.
+The structure and fields of the [License Error (Valid Client) PDU](#Section_2.2.1.12) are specified in section 2.2.1.12.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) and **mcsSDin** ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDin** is used to route the PDU to the appropriate target channel.
 
-The **securityHeader** field MUST always be present and it MUST contain at least a [Basic Security Header](#Section_5) structure (section 2.2.8.1.1.2.1). The embedded flags field of the **securityHeader** MUST contain the SEC_LICENSE_PKT (0x0080) flag (section 2.2.8.1.1.2.1). If this flag is not present then the packet cannot be handled as a licensing PDU, and the connection SHOULD be dropped.
+The **securityHeader** field MUST always be present and it MUST contain at least a [Basic Security Header](#Section_2.2.8.1.1.2.1) structure (section 2.2.8.1.1.2.1). The embedded flags field of the **securityHeader** MUST contain the SEC_LICENSE_PKT (0x0080) flag (section 2.2.8.1.1.2.1). If this flag is not present then the packet cannot be handled as a licensing PDU, and the connection SHOULD be dropped.
 
-If the SEC_LICENSE_ENCRYPT_CS (0x0200) flag is present, then the server is able to accept encrypted licensing packets when using [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3). This fact is stored in the [Server Licensing Encryption Ability](#Section_3.2.1.10) store (section 3.2.1.10).
+If the SEC_LICENSE_ENCRYPT_CS (0x0200) flag is present, then the server is able to accept encrypted licensing packets when using [Standard RDP Security](#Section_5.3) mechanisms (section 5.3). This fact is stored in the [Server Licensing Encryption Ability](#Section_3.2.1.10) store (section 3.2.1.10).
 
 If the SEC_ENCRYPT (0x0008) flag is present, then the data following the **securityHeader** field is encrypted and it MUST be verified and decrypted using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
 
@@ -11148,34 +11148,34 @@ The remaining PDU fields MUST be interpreted and processed according to the desc
 
 The structure and fields of the [Demand Active PDU](#Section_2.2.1.13.1) are specified in section 2.2.1.13.1.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) and **mcsSDin** ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDin** is used to route the PDU to the appropriate target channel.
 
-The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in section 2.2.1.13.1. If the **securityHeader** field is present, the embedded **flags** field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_5)), and if it is present the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
+The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in section 2.2.1.13.1. If the **securityHeader** field is present, the embedded **flags** field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)), and if it is present the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
 
 The **shareControlHeader** field (which contains a [Share Control Header](#Section_2.2.8.1.1.1.1) as specified in section 2.2.8.1.1.1.1) MUST be examined to ensure that the PDU type (present in the **pduType** field) has the value PDUTYPE_DEMANDACTIVEPDU (1). If this is not the case the received PDU SHOULD be ignored. The value of the **totalLength** field MUST also be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped. If there is no length discrepancy, the server MCS channel ID (present in the **pduSource** field) MUST be stored in the Server Channel ID store (section [3.2.1.6](#Section_3.2.1.6)).
 
 The remaining PDU fields and capability data MUST be interpreted and processed according to sections [2.2.1.13.1.1](#Section_2.2.1.13.1.1) and [2.2.7](#Section_2.2.7). The capabilities received from the server MUST be stored in the [Server Capabilities](#Section_3.2.1.7) store (section 3.2.1.7) and MUST be used to determine what subset of RDP to send to the server. The contents of the **shareID** field MUST be stored in the [Share ID](#Section_3.2.1.8) store (section 3.2.1.8).
 
-After successfully processing the Demand Active PDU, the client MUST send the [Confirm Active PDU](#Section_2.2.1.13.2.1) (section 2.2.1.13.2) to the server. If processing of the Demand Active PDU was unsuccessful, the connection SHOULD be dropped.
+After successfully processing the Demand Active PDU, the client MUST send the [Confirm Active PDU](#Section_2.2.1.13.2) (section 2.2.1.13.2) to the server. If processing of the Demand Active PDU was unsuccessful, the connection SHOULD be dropped.
 
 <a id="Section_3.2.5.3.13.2"></a>
 ###### 3.2.5.3.13.2 Sending Confirm Active PDU
 
-The structure and fields of the [Confirm Active PDU](#Section_2.2.1.13.2.1) are specified in section 2.2.1.13.2.
+The structure and fields of the [Confirm Active PDU](#Section_2.2.1.13.2) are specified in section 2.2.1.13.2.
 
 The **tpktHeader** field is initialized as specified in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The **mcsSDrq** field is initialized as described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32. The embedded **initiator** field MUST be set to the User Channel ID (held in the [User Channel ID](#Section_3.3.1.2) store (section 3.2.1.5) described in section [3.3.1.6](#Section_3.3.1.6)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID (held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.2.1.3)) described in section [3.3.1.5](#Section_3.2.1.6)). The embedded **userData** field contains the remaining fields of the Confirm Active PDU.
+The **mcsSDrq** field is initialized as described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.32. The embedded **initiator** field MUST be set to the User Channel ID (held in the [User Channel ID](#Section_3.2.1.5) store (section 3.2.1.5) described in section [3.3.1.6](#Section_3.3.1.6)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID (held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.2.1.3)) described in section [3.3.1.5](#Section_3.3.1.5)). The embedded **userData** field contains the remaining fields of the Confirm Active PDU.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **securityHeader** field MUST NOT be present.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **securityHeader** field MUST NOT be present.
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect, the PDU data following the optional **securityHeader** field can be encrypted and signed (depending on the values of the [Encryption Level](#Section_5.4.1) (section 5.3.1) and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in [5.3.6](#Section_5.3.6). The format of the **securityHeader** field is selected as specified in section 2.2.1.13.2 and the fields populated with appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect, the PDU data following the optional **securityHeader** field can be encrypted and signed (depending on the values of the [Encryption Level](#Section_5.3.1) (section 5.3.1) and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in [5.3.6](#Section_5.3.6). The format of the **securityHeader** field is selected as specified in section 2.2.1.13.2 and the fields populated with appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
 
-The remaining fields are populated as described in section [2.2.1.13.2.1](#Section_4.1.13), with the combined capability set data being inserted into the **capabilitySets** field.
+The remaining fields are populated as described in section [2.2.1.13.2.1](#Section_2.2.1.13.2.1), with the combined capability set data being inserted into the **capabilitySets** field.
 
 After sending the Confirm Active PDU, the client MUST send the [Synchronize PDU](#Section_4.1.14) (section 3.2.5.3.14) to the server.
 
@@ -11191,7 +11191,7 @@ After sending the Synchronize PDU, the client MUST send the [Control (Cooperate)
 <a id="Section_3.2.5.3.15"></a>
 ##### 3.2.5.3.15 Sending Control PDU - Cooperate
 
-The structure and fields of the [Control (Cooperate) PDU](#Section_2.2.1.15.1) are specified in section 2.2.1.15, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The **grantId** and **controlId** fields SHOULD be set to zero. The contents of this PDU MUST NOT be compressed.
+The structure and fields of the [Control (Cooperate) PDU](#Section_2.2.1.15) are specified in section 2.2.1.15, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The **grantId** and **controlId** fields SHOULD be set to zero. The contents of this PDU MUST NOT be compressed.
 
 After sending the Control (Cooperate) PDU, the client MUST send the [Control (Request Control) PDU](#Section_e3a79a2c6be248b99b7a1b7be3bb25dd) (section 3.2.5.3.16) to the server.
 
@@ -11200,21 +11200,21 @@ After sending the Control (Cooperate) PDU, the client MUST send the [Control (Re
 
 The structure and fields of the [Control (Request Control) PDU](#Section_2.2.1.16) are specified in section 2.2.1.16, and the techniques described in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The **grantId** and **controlId** fields SHOULD be set to zero. The contents of this PDU MUST NOT be compressed.
 
-After sending the Control (Request Control) PDU, the client MUST send the [Persistent Key List PDU](#Section_3.3.5.3.17) (section 3.2.5.3.17) to the server if the server supports the Revision 2 bitmap caches (section [2.2.7.2.1](#Section_2.2.7.2.1) and [MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 3.1.1.1.1) and a [Deactivation-Reactivation Sequence (section 1.3.1.3)](#Section_1.3.1.3) is not in progress. If the server does not support the Revision 2 bitmap caches, the client MUST proceed to send the [Font List PDU](#Section_2.2.1.18.1) (section 3.2.5.3.18).
+After sending the Control (Request Control) PDU, the client MUST send the [Persistent Key List PDU](#Section_4.1.17) (section 3.2.5.3.17) to the server if the server supports the Revision 2 bitmap caches (section [2.2.7.2.1](#Section_2.2.7.2.1) and [MS-RDPEGDI](../MS-RDPEGDI/MS-RDPEGDI.md) section 3.1.1.1.1) and a [Deactivation-Reactivation Sequence (section 1.3.1.3)](#Section_1.3.1.3) is not in progress. If the server does not support the Revision 2 bitmap caches, the client MUST proceed to send the [Font List PDU](#Section_4.1.18) (section 3.2.5.3.18).
 
 <a id="Section_3.2.5.3.17"></a>
 ##### 3.2.5.3.17 Sending Persistent Key List PDU(s)
 
-The structure and fields of the [Persistent Key List PDU](#Section_3.3.5.3.17) are specified in section 2.2.1.17, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU MUST NOT be compressed.
+The structure and fields of the [Persistent Key List PDU](#Section_4.1.17) are specified in section 2.2.1.17, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU MUST NOT be compressed.
 
 Each of the keys sent in a Persistent Key List PDU is encapsulated in a Persistent List Entry (section [2.2.1.17.1.1](#Section_2.2.1.17.1.1)) and is obtained from the Persisted Bitmap Keys store (section [3.2.1.15](#Section_3.2.1.15)).
 
-After sending a single Persistent Key List PDU or a sequence of Persistent Key List PDUs, the client MUST send the [Font List PDU](#Section_2.2.1.18.1) (section 3.2.5.3.18) to the server.
+After sending a single Persistent Key List PDU or a sequence of Persistent Key List PDUs, the client MUST send the [Font List PDU](#Section_4.1.18) (section 3.2.5.3.18) to the server.
 
 <a id="Section_3.2.5.3.18"></a>
 ##### 3.2.5.3.18 Sending Font List PDU
 
-The structure and fields of the [Font List PDU](#Section_2.2.1.18.1) are specified in section 2.2.1.18, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU MUST NOT be compressed.
+The structure and fields of the [Font List PDU](#Section_4.1.18) are specified in section 2.2.1.18, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU MUST NOT be compressed.
 
 <a id="Section_3.2.5.3.19"></a>
 ##### 3.2.5.3.19 Processing Synchronize PDU
@@ -11234,7 +11234,7 @@ The structure and fields of the [Control (Granted Control) PDU](#Section_2.2.1.2
 <a id="Section_3.2.5.3.22"></a>
 ##### 3.2.5.3.22 Processing Font Map PDU
 
-The structure and fields of the [Font Map PDU](#Section_3.2.5.3.22) are specified in section 2.2.1.22, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **numberEntries**, **totalNumEntries**, **mapFlags**, and **entrySize** fields MUST be ignored.
+The structure and fields of the [Font Map PDU](#Section_4.1.22) are specified in section 2.2.1.22, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **numberEntries**, **totalNumEntries**, **mapFlags**, and **entrySize** fields MUST be ignored.
 
 <a id="Section_3.2.5.4"></a>
 #### 3.2.5.4 Disconnection Sequences
@@ -11242,14 +11242,14 @@ The structure and fields of the [Font Map PDU](#Section_3.2.5.3.22) are specifie
 <a id="Section_3.2.5.4.1"></a>
 ##### 3.2.5.4.1 Sending Shutdown Request PDU
 
-The structure and fields of the [Shutdown Request PDU](#Section_2.2.2.1) are specified in section 2.2.2.1, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU MUST NOT be compressed.
+The structure and fields of the [Shutdown Request PDU](#Section_4.2.1) are specified in section 2.2.2.1, and the techniques specified in section [3.2.5.1](#Section_3.2.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU MUST NOT be compressed.
 
 <a id="Section_3.2.5.4.2"></a>
 ##### 3.2.5.4.2 Processing Shutdown Request Denied PDU
 
-The structure and fields of the [Shutdown Request Denied PDU](#Section_2.2.2.2) are specified in section 2.2.2.2, and the techniques described in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
+The structure and fields of the [Shutdown Request Denied PDU](#Section_4.2.2) are specified in section 2.2.2.2, and the techniques described in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
 
-After this PDU has been processed, the client MAY prompt the user to determine whether a disconnection is required. If the user chooses to disconnect the client SHOULD send an [MCS Disconnect Provider Ultimatum PDU](#Section_2.2.2.3) (section 3.1.5.1.1) to the server and thereafter MUST drop the connection.
+After this PDU has been processed, the client MAY prompt the user to determine whether a disconnection is required. If the user chooses to disconnect the client SHOULD send an [MCS Disconnect Provider Ultimatum PDU](#Section_4.2.3) (section 3.1.5.1.1) to the server and thereafter MUST drop the connection.
 
 <a id="Section_3.2.5.5"></a>
 #### 3.2.5.5 Deactivation-Reconnection Sequence
@@ -11257,9 +11257,9 @@ After this PDU has been processed, the client MAY prompt the user to determine w
 <a id="Section_3.2.5.5.1"></a>
 ##### 3.2.5.5.1 Processing Deactivate All PDU
 
-The structure and fields of the [Deactivate All PDU](#Section_3.2.5.5.1) are specified in section 2.2.3.1, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
+The structure and fields of the [Deactivate All PDU](#Section_2.2.3.1) are specified in section 2.2.3.1, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
 
-Once this PDU has been processed, the client MUST disable its graphics and input protocol handlers and prepare either for a capability re-exchange (which will employ a [Deactivation-Reactivation Sequence](#Section_1.3.1.3) as described in section 1.3.1.3) or a disconnection (the client MUST be prepared to process the optional [MCS Disconnect Provider Ultimatum](#Section_3.1.5.1.1) PDU (section 3.1.5.1.2) after receiving the Deactivate All PDU, but prior to the actual disconnection).
+Once this PDU has been processed, the client MUST disable its graphics and input protocol handlers and prepare either for a capability re-exchange (which will employ a [Deactivation-Reactivation Sequence](#Section_1.3.1.3) as described in section 1.3.1.3) or a disconnection (the client MUST be prepared to process the optional [MCS Disconnect Provider Ultimatum](#Section_4.2.3) PDU (section 3.1.5.1.2) after receiving the Deactivate All PDU, but prior to the actual disconnection).
 
 <a id="Section_3.2.5.6"></a>
 #### 3.2.5.6 Auto-Reconnect Sequence
@@ -11277,14 +11277,14 @@ Once this PDU has been processed, the client SHOULD discard the Automatic Reconn
 <a id="Section_3.2.5.7.1"></a>
 ##### 3.2.5.7.1 Processing Set Error Info PDU
 
-The structure and fields of the [Set Error Info PDU](#Section_3.3.5.7.1) are specified in section 2.2.5.1, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
+The structure and fields of the [Set Error Info PDU](#Section_2.2.5.1) are specified in section 2.2.5.1, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
 
 The Set Error Info PDU is sent as a precursor to a server-side disconnect and informs the client of the reason for the disconnection which will follow. Once this PDU has been processed, the client MUST store the error code so that the reason for the server disconnect which will follow can be accurately reported to the user.
 
 <a id="Section_3.2.5.7.2"></a>
 ##### 3.2.5.7.2 Processing Status Info PDU
 
-The structure and fields of the [Status Info PDU](#Section_3.2.5.7.2) are specified in section 2.2.5.2, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the PDU.
+The structure and fields of the [Status Info PDU](#Section_2.2.5.2) are specified in section 2.2.5.2, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the PDU.
 
 Once this PDU has been processed, the client can use the status code to give feedback to a user to ensure that it is evident that server-side processing is taking place and that the connection is progressing.
 
@@ -11315,7 +11315,7 @@ If the client has sent a Synchronize Event, it SHOULD subsequently send key-down
 <a id="Section_3.2.5.8.1.2"></a>
 ###### 3.2.5.8.1.2 Sending Fast-Path Input Event PDU
 
-The [Fast-Path Input Event PDU](#Section_2.2.8.1.2) (section 2.2.8.1.2) has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
+The [Fast-Path Input Event PDU](#Section_4.7) (section 2.2.8.1.2) has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
 
 - **fpInputHeader**: Fast-Path Input Header (section 2.2.8.1.2)
 - **length1** and **length2**: Packet length (section 2.2.8.1.2)
@@ -11332,9 +11332,9 @@ The [Fast-Path Input Event PDU](#Section_2.2.8.1.2) (section 2.2.8.1.2) has the 
 - Relative Mouse Event (section [2.2.8.1.2.2.7](#Section_2.2.8.1.2.2.7))
 The **fpInputHeader**, **length1**, **length2**, and **numEvents** fields MUST be initialized as described in 2.2.8.1.2. Because the PDU is in fast-path format, the embedded **action** field of the **fpInputHeader** field MUST be set to FASTPATH_INPUT_ACTION_FASTPATH (0).
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **fipsInformation** and **dataSignature** fields MUST NOT be present.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **fipsInformation** and **dataSignature** fields MUST NOT be present.
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect, the PDU data following the optional **dataSignature** field can be encrypted and signed (depending on the values of the [Encryption Level](#Section_5.4.1) (section 5.3.1) and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2)), using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the data is to be encrypted, the embedded **flags** field of the **fpInputHeader** field MUST contain the FASTPATH_INPUT_ENCRYPTED (2) flag.
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect, the PDU data following the optional **dataSignature** field can be encrypted and signed (depending on the values of the [Encryption Level](#Section_5.3.1) (section 5.3.1) and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2)), using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the data is to be encrypted, the embedded **flags** field of the **fpInputHeader** field MUST contain the FASTPATH_INPUT_ENCRYPTED (2) flag.
 
 The actual PDU contents, which encapsulates a collection of input events, is populated with fast-path event data as described from 2.2.8.1.2.2.1 to 2.2.8.1.2.2.5.
 
@@ -11344,7 +11344,7 @@ The actual PDU contents, which encapsulates a collection of input events, is pop
 <a id="Section_3.2.5.8.2.1"></a>
 ###### 3.2.5.8.2.1 Processing Set Keyboard Indicators PDU
 
-The structure and fields of the [Set Keyboard Indicators PDU](#Section_3.3.5.8.2.1) are specified in section 2.2.8.2.1 and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
+The structure and fields of the [Set Keyboard Indicators PDU](#Section_2.2.8.2.1) are specified in section 2.2.8.2.1 and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
 
 Once this PDU has been processed, the client SHOULD update the local keyboard indictors.
 
@@ -11387,14 +11387,14 @@ The **messageType** field contains an identifier that describes the type of Poin
 - [Cached Pointer Update](#Section_2.2.9.1.1.4.6) (section 2.2.9.1.1.4.6)
 If a slow-path update structure is received which does not match one of the known types, the client SHOULD ignore the data in the update.
 
-Once this PDU has been processed, the client MUST carry out any operations necessary to update the local pointer position (in the case of the Position Update) or change the shape (in the case of the System, Color, New, and Cached Pointer Updates). In the case of the Color and New Pointer Updates the new pointer image MUST also be stored in the [Pointer Image Cache](#Section_3.2.1.11) (section 3.2.1.11), in the slot specified by the **cacheIndex** field. This necessary step ensures that the client is able to correctly process future Cached Pointer Updates.
+Once this PDU has been processed, the client MUST carry out any operations necessary to update the local pointer position (in the case of the Position Update) or change the shape (in the case of the System, Color, New, and Cached Pointer Updates). In the case of the Color and New Pointer Updates the new pointer image MUST also be stored in the [Pointer Image Cache](#Section_3.3.1.9) (section 3.2.1.11), in the slot specified by the **cacheIndex** field. This necessary step ensures that the client is able to correctly process future Cached Pointer Updates.
 
 <a id="Section_3.2.5.9.3"></a>
 ##### 3.2.5.9.3 Processing Fast-Path Update PDU
 
 The Fast-Path Update PDU has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
 
-- **fpOutputHeader**: Fast-Path Output Header (section [2.2.9.1.2](#Section_2.2.9.1.2.1))
+- **fpOutputHeader**: Fast-Path Output Header (section [2.2.9.1.2](#Section_2.2.9.1.2))
 - **length1** and **length2**: Packet length (section 2.2.9.1.2)
 - **fipsInformation**: Optional Fast-Path FIPS Information (section 2.2.9.1.2)
 - **dataSignature**: Optional data signature (section 2.2.9.1.2)
@@ -11411,7 +11411,7 @@ The Fast-Path Update PDU has the following basic structure (sections [5.3.8](#Se
 - Cached Pointer Update (section [2.2.9.1.2.1.9](#Section_2.2.9.1.2.1.9))
 - Surface Commands Update (section [2.2.9.1.2.1.10](#Section_2.2.9.1.2.1.10))
 - Large Pointer Update (section [2.2.9.1.2.1.11](#Section_2.2.9.1.2.1.11))
-If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
+If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
 
 The contents of the embedded **action** field of the **fpOutputHeader** field MUST be set to FASTPATH_OUTPUT_ACTION_FASTPATH (0). If it is not set to this value, the PDU is not a Fast-Path Update PDU and MUST be processed as a slow-path PDU (section [3.2.5.2](#Section_3.2.5.2)).
 
@@ -11449,7 +11449,7 @@ Figure 7: Reassembly of a fragmented update
 <a id="Section_3.2.5.9.4.1"></a>
 ###### 3.2.5.9.4.1 Processing Play Sound PDU
 
-The structure and fields of the [Play Sound PDU](#Section_3.3.5.9.4.1) are specified in section 2.2.9.1.1.5, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
+The structure and fields of the [Play Sound PDU](#Section_2.2.9.1.1.5) are specified in section 2.2.9.1.1.5, and the techniques specified in section [3.2.5.2](#Section_3.2.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
 
 Once this PDU has been processed, the client SHOULD play a sound using the frequency and duration specified by the PDU.<45>
 
@@ -11464,7 +11464,7 @@ The structure and fields of the [Save Session Info PDU](#Section_4.3) are specif
 Once this PDU has been processed, the client SHOULD respond to the type of data contained in the PDU:
 
 - In the case of a logon notification being present in the PDU, the client MAY carry out some implementation-dependent action, and if wanted, save the new user name and domain (if received) that were used to log on.
-- In the case of an auto-reconnect cookie being received in the PDU, the client SHOULD save the cookie in the [Automatic Reconnection Cookie](#Section_3.3.1.11) store (section 3.2.1.9) for possible use during an automatic reconnection sequence.
+- In the case of an auto-reconnect cookie being received in the PDU, the client SHOULD save the cookie in the [Automatic Reconnection Cookie](#Section_3.2.1.9) store (section 3.2.1.9) for possible use during an automatic reconnection sequence.
 - In the case of a logon error or warning notification being present in the PDU, the client SHOULD carry out some implementation-dependent action to respond to the notification.
 <a id="Section_3.2.5.10.2"></a>
 ##### 3.2.5.10.2 Processing Early User Authorization Result PDU
@@ -11513,7 +11513,7 @@ Once the client has completed processing the appropriate variant of this PDU, it
 <a id="Section_3.2.5.14"></a>
 #### 3.2.5.14 Network Characteristics Detection
 
-The steps that follow describe how a client SHOULD respond when receiving the server-to-client network characteristics request detection messages described in section [2.2.14.1](#Section_2.2.14.1.4).
+The steps that follow describe how a client SHOULD respond when receiving the server-to-client network characteristics request detection messages described in section [2.2.14.1](#Section_2.2.14.1).
 
 - When receiving an RTT Measure Request (section [2.2.14.1.1](#Section_2.2.14.1.1)):
 Immediately send an RTT Measure Response (section [2.2.14.2.1](#Section_2.2.14.2.1)), embedded in an Auto-Detect Response PDU (section [2.2.14.4](#Section_2.2.14.4)), to the server.
@@ -11522,7 +11522,7 @@ Immediately send an RTT Measure Response (section [2.2.14.2.1](#Section_2.2.14.2
 - If the **requestType** field equals 0x0014:
 - Clear the Network Characteristics Byte Count store (section [3.2.1.17](#Section_3.2.1.17)) and the Network Characteristics Timer (section [3.2.2.2](#Section_3.2.2.2)).
 - Start the Network Characteristics Timer (section 3.2.2.2).
-- When receiving any data from the server, add the number of bytes received to the Network Characteristics Byte Count store (section 3.2.1.17). If an RDP Security Header (section [2.2.8.1.1.2](#Section_5)) is present in the data, then only the bytes following the Security Header MUST be included in the count. If an **RDP_TUNNEL_HEADER** ([MS-RDPEMT](#Section_2.1) section 2.2.1.1) structure is present in the data, then only the data following the Tunnel PDU Header MUST be included in the count. Continue doing this until a Bandwidth Measure Stop (section [2.2.14.1.4](#Section_2.2.14.1.4)) is received.
+- When receiving any data from the server, add the number of bytes received to the Network Characteristics Byte Count store (section 3.2.1.17). If an RDP Security Header (section [2.2.8.1.1.2](#Section_2.2.8.1.1.2)) is present in the data, then only the bytes following the Security Header MUST be included in the count. If an **RDP_TUNNEL_HEADER** ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 2.2.1.1) structure is present in the data, then only the data following the Tunnel PDU Header MUST be included in the count. Continue doing this until a Bandwidth Measure Stop (section [2.2.14.1.4](#Section_2.2.14.1.4)) is received.
 - If a Bandwidth Measure Start (section 2.2.14.1.2) is received before receiving a Bandwidth Measure Stop (section 2.2.14.1.4), jump to step 1.
 - If the **requestType** field equals 0x0114:
 - Clear the Network Characteristics Byte Count store (section 3.2.1.17) and the Network Characteristics Timer (section 3.2.2.2), and save the contents of the **sequenceNumber** field to the Network Characteristics Sequence Number store (section [3.2.1.18](#Section_3.2.1.18)).
@@ -11557,14 +11557,14 @@ Extract the network metrics from the PDU.
 <a id="Section_3.2.5.15.1"></a>
 ##### 3.2.5.15.1 Processing the Initiate Multitransport Request PDU
 
-The structure and fields of the Initiate Multitransport Request PDU are described in section [2.2.14.1](#Section_2.2.14.1.4). Upon successfully decoding this PDU the client MUST attempt to establish a sideband channel ([MS-RDPEMT](#Section_2.1) sections 1.3 and 3) using the transport protocol requested in the **requestedProtocol** field (for reliable or lossy UDP). If the client is unable to initiate the creation of a sideband channel, then the Initiate Multitransport Response PDU SHOULD be sent to the server (section [3.2.5.15.2](#Section_3.2.5.15.2)).
+The structure and fields of the Initiate Multitransport Request PDU are described in section [2.2.14.1](#Section_2.2.14.1). Upon successfully decoding this PDU the client MUST attempt to establish a sideband channel ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) sections 1.3 and 3) using the transport protocol requested in the **requestedProtocol** field (for reliable or lossy UDP). If the client is unable to initiate the creation of a sideband channel, then the Initiate Multitransport Response PDU SHOULD be sent to the server (section [3.2.5.15.2](#Section_3.2.5.15.2)).
 
 If Soft-Sync (switching dynamic virtual channels from the TCP to the UDP transport) is supported by the client and server, as indicated by the SOFTSYNC_TCP_TO_UDP (0x200) flag in the Client Multitransport Channel Data (section [2.2.1.3.8](#Section_2.2.1.3.8)) and Server Multitransport Channel Data (section [2.2.1.4.6](#Section_2.2.1.4.6)), the Initiate Multitransport Response PDU MUST be sent to the server regardless of whether the sideband channel creation succeeded or failed. For more information on Soft-Sync see [MS-RDPEDYC](../MS-RDPEDYC/MS-RDPEDYC.md) section 3.1.5.3.
 
 <a id="Section_3.2.5.15.2"></a>
 ##### 3.2.5.15.2 Sending the Initiate Multitransport Response PDU
 
-The structure and fields of the Initiate Multitransport Response PDU are described in section [2.2.15.2](#Section_2.2.15.2), and the PDU MUST be initialized according to this specification. The embedded **initiator** field of the **mcsSDrq** field MUST be set to the User Channel ID held in the User Channel ID store (section [3.2.1.4](#Section_3.2.1.4)), while the embedded **channelId** field MUST be set to the MCS message channel ID held in the Message Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). Furthermore, the embedded **flags** field of the **securityHeader** MUST contain the SEC_TRANSPORT_RSP (0x0004) flag (section [2.2.8.1.1.2.1](#Section_5)).
+The structure and fields of the Initiate Multitransport Response PDU are described in section [2.2.15.2](#Section_2.2.15.2), and the PDU MUST be initialized according to this specification. The embedded **initiator** field of the **mcsSDrq** field MUST be set to the User Channel ID held in the User Channel ID store (section [3.2.1.4](#Section_3.2.1.4)), while the embedded **channelId** field MUST be set to the MCS message channel ID held in the Message Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). Furthermore, the embedded **flags** field of the **securityHeader** MUST contain the SEC_TRANSPORT_RSP (0x0004) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)).
 
 This Initiate Multitransport Response PDU indicates to the server that a sideband initiation request succeeded or failed. If the **hrResponse** field indicates a failure, the client MUST NOT attempt to create a sideband channel after sending this PDU.
 
@@ -11584,7 +11584,7 @@ None.
 <a id="Section_3.2.7.1"></a>
 #### 3.2.7.1 Disconnection Due to Network Error
 
-If the client detects that a disconnection which has taken place is due to a network error, it MAY attempt to automatically reconnect to the server using the technique specified in section [5.5](#Section_1.3.1.5). Automatic reconnection allows the client to seamlessly reconnect to an existing session (after a short-term network failure has occurred) without having to resend the user's credentials to the server.
+If the client detects that a disconnection which has taken place is due to a network error, it MAY attempt to automatically reconnect to the server using the technique specified in section [5.5](#Section_5.5). Automatic reconnection allows the client to seamlessly reconnect to an existing session (after a short-term network failure has occurred) without having to resend the user's credentials to the server.
 
 <a id="Section_3.3"></a>
 ## 3.3 Server Details
@@ -11599,7 +11599,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.3.1.1"></a>
 #### 3.3.1.1 Received Client Data
 
-The Received Client Data store contains data received from the client during execution of the Remote Desktop Protocol. This store is initialized when processing the X.224 Connection Request PDU (section [2.2.1.1)](#Section_18a27ef96f9a4501b00094b1fe3c2c10), [MCS Connect Initial PDU with GCC Conference Create Request](#Section_3.3.5.3.3) (sections 2.2.1.3 and [3.3.5.3.3](#Section_3.3.5.3.3)), and [Client Info PDU](#Section_2.2.1.11.1) (sections 2.2.1.11 and [3.3.5.3.11](#Section_3.3.5.3.11)).
+The Received Client Data store contains data received from the client during execution of the Remote Desktop Protocol. This store is initialized when processing the X.224 Connection Request PDU (section [2.2.1.1)](#Section_2.2.1.1), [MCS Connect Initial PDU with GCC Conference Create Request](#Section_2.2.1.3) (sections 2.2.1.3 and [3.3.5.3.3](#Section_3.3.5.3.3)), and [Client Info PDU](#Section_2.2.1.11) (sections 2.2.1.11 and [3.3.5.3.11](#Section_3.3.5.3.11)).
 
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 User Channel ID
@@ -11624,12 +11624,12 @@ The Server Channel ID store contains the MCS channel identifier of the server ch
 <a id="Section_3.3.1.6"></a>
 #### 3.3.1.6 Client Licensing Encryption Ability
 
-The Client Licensing Encryption Ability store determines whether the client has the ability to handle encrypted licensing packets when using [RDP Security](#Section_2.2.13.2) mechanisms (see section 5.3 and the discussion of the SEC_LICENSE_ENCRYPT_SC flag in section [2.2.8.1.1.2.1](#Section_5)). This fact is communicated to the server as part of the [Security Exchange PDU](#Section_2.2.1.10.1) (sections 2.2.1.10 and [3.2.5.3.10](#Section_3.2.5.3.10)).
+The Client Licensing Encryption Ability store determines whether the client has the ability to handle encrypted licensing packets when using [RDP Security](#Section_5.3) mechanisms (see section 5.3 and the discussion of the SEC_LICENSE_ENCRYPT_SC flag in section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)). This fact is communicated to the server as part of the [Security Exchange PDU](#Section_2.2.1.10) (sections 2.2.1.10 and [3.2.5.3.10](#Section_3.2.5.3.10)).
 
 <a id="Section_3.3.1.7"></a>
 #### 3.3.1.7 Client Capabilities
 
-The Client Capabilities store contains the capability sets (sections [1.4](#Section_1.4) and [2.2.6](#Section_2.2.6)) received from the client in the Confirm Active PDU (sections [2.2.1.13.2](#Section_2.2.1.13.2.1) and [3.3.5.3.13.2](#Section_3.3.5.3.13.2)).
+The Client Capabilities store contains the capability sets (sections [1.4](#Section_1.4) and [2.2.6](#Section_2.2.6)) received from the client in the Confirm Active PDU (sections [2.2.1.13.2](#Section_2.2.1.13.2) and [3.3.5.3.13.2](#Section_3.3.5.3.13.2)).
 
 <a id="Section_3.3.1.8"></a>
 #### 3.3.1.8 Cached Bitmap Keys
@@ -11702,9 +11702,9 @@ The **tpktHeader** field is initialized as specified in [T123] section 8, while 
 
 The **mcsSDin** field is initialized as specified in [T125] section 11.33. The embedded **initiator** field MUST be set to the MCS server channel ID held in the Server Channel ID store (section [3.3.1.5](#Section_3.3.1.5)) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the I/O Channel ID store (section [3.2.1.3](#Section_3.2.1.3)). The embedded **userData** field contains the remaining fields of the PDU.
 
-If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5)) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario, the **securityHeader** field MUST NOT be present.
+If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5.4.5)) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario, the **securityHeader** field MUST NOT be present.
 
-If Standard RDP Security mechanisms (section [5.3](#Section_2.2.13.2)) are in effect, the PDU data following the optional **securityHeader** field is encrypted and signed (using the methods and techniques specified in section [5.3.6](#Section_5.3.6)) based on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2). The format of the **securityHeader** field is selected as specified in the section describing the PDU structure and fields in section 2.2, and the fields populated with the appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
+If Standard RDP Security mechanisms (section [5.3](#Section_5.3)) are in effect, the PDU data following the optional **securityHeader** field is encrypted and signed (using the methods and techniques specified in section [5.3.6](#Section_5.3.6)) based on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation specified in section [5.3.2](#Section_5.3.2). The format of the **securityHeader** field is selected as specified in the section describing the PDU structure and fields in section 2.2, and the fields populated with the appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
 
 The **shareDataHeader** field contains a Share Data Header structure as described in section 2.2.8.1.1.1.2. The **pduSource** field of the embedded [Share Control Header (section 2.2.8.1.1.1.1)](#Section_2.2.8.1.1.1.1) MUST be set to the MCS server channel ID held in the [Server Channel ID](#Section_3.2.1.6) store (section 3.3.1.5). If the contents of the PDU are to be compressed (this MUST be done before any [**MAC**](#gt_message-authentication-code-mac) signature is constructed and encryption methods applied), the embedded **compressedType** field of the **shareDataHeader** MUST be initialized as specified in section 2.2.8.1.1.1.2. The remaining Share Data Header and Share Control Header fields MUST be populated as specified in sections 2.2.8.1.1.1.1, 2.2.8.1.1.1.2, and the section describing the PDU structure and fields in section 2.2.
 
@@ -11718,16 +11718,16 @@ The majority of client-to-server slow-path PDUs have the same basic structure (s
 - **tpktHeader**: TPKT Header ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8)
 - **x224Data**: X.224 Class 0 Data TPDU ([[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7)
 - **mcsSDrq**: MCS Send Data Request PDU ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, part 7)
-- **securityHeader**: Optional Security Header (section [2.2.8.1.1.2](#Section_5))
+- **securityHeader**: Optional Security Header (section [2.2.8.1.1.2](#Section_2.2.8.1.1.2))
 - **shareDataHeader**: [Share Data Header](#Section_2.2.8.1.1.1.2) (section 2.2.8.1.1.1.2)
 - [**PDU**](#gt_protocol-data-unit-pdu) Contents (see the section describing the PDU structure and fields in section [2.2](#Section_2.2))
-If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5)) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
+If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the External Security Protocol (section [5.4.5](#Section_5.4.5)) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** ([T123] section 8) and **mcsSDrq** ([T125] section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDrq** is used to route the PDU to the appropriate target channel.
 
-The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in the section describing the PDU structure and fields in section 2.2. If the **securityHeader** field is present, the embedded **flags** field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_5)), and, if it is present the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques specified in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect, or the data cannot be decrypted correctly, the connection SHOULD be dropped. If Enhanced RDP Security is in effect and the SEC_ENCRYPT flag is present, the connection SHOULD be dropped because double-encryption is never used in this scenario.
+The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in the section describing the PDU structure and fields in section 2.2. If the **securityHeader** field is present, the embedded **flags** field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)), and, if it is present the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques specified in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect, or the data cannot be decrypted correctly, the connection SHOULD be dropped. If Enhanced RDP Security is in effect and the SEC_ENCRYPT flag is present, the connection SHOULD be dropped because double-encryption is never used in this scenario.
 
 The **shareDataHeader** field (which contains the Share Control Header and Share Data Header described in sections [2.2.8.1.1.1.1](#Section_2.2.8.1.1.1.1) and 2.2.8.1.1.1.2 respectively) MUST be examined to determine the PDU type (from the **pduType** and **pduType2** fields), as well as the compression usage information (from the **compressedType** field). If the data following the Share Data Header is compressed, then decompression using the techniques specified in section [3.1.8.3](#Section_3.1.8.3) MUST be performed. The value of the **totalLength** field MUST also be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped. The remaining Share Control Header and Share Data Header fields MAY be ignored.
 
@@ -11766,18 +11766,18 @@ The **tpktHeader** field is initialized as specified in [[T123]](https://go.micr
 
 The **rdpNegData** field is left empty if the client did not append any negotiation data to the X.224 Connection Request PDU (section [2.2.1.1](#Section_2.2.1.1)). If the client did append negotiation data to the X.224 Connection Request PDU, the **rdpNegData** field SHOULD contain an [RDP Negotiation Response](#Section_2.2.1.2.1) (section 2.2.1.2.1) or [RDP Negotiation Failure](#Section_2.2.1.2.2) (section 2.2.1.2.2) structure.
 
-The RDP Negotiation Response structure is sent if the server supports (and is configured to use) one of the client-requested security protocols specified in the X.224 Connection Request PDU and saved in the [Received Client Data](#Section_3.2.1.1) store (section 3.3.1.1). The **selectedProtocol** field is initialized with the selected protocol identifier (see section 2.2.1.2.1 for a list of identifiers). If the server decides to use [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3), it MUST set the **selectedProtocol** field to PROTOCOL_RDP (0x00000000).
+The RDP Negotiation Response structure is sent if the server supports (and is configured to use) one of the client-requested security protocols specified in the X.224 Connection Request PDU and saved in the [Received Client Data](#Section_3.2.1.1) store (section 3.3.1.1). The **selectedProtocol** field is initialized with the selected protocol identifier (see section 2.2.1.2.1 for a list of identifiers). If the server decides to use [Standard RDP Security](#Section_5.3) mechanisms (section 5.3), it MUST set the **selectedProtocol** field to PROTOCOL_RDP (0x00000000).
 
-The RDP Negotiation Failure structure is sent if it is not possible to continue the connection with any of the client-requested [External Security Protocol](#Section_5) (section 5.4.5). The possible failure codes and a reason for sending each of them are listed in section 2.2.1.2.2. After sending the RDP Negotiation Failure structure the server MUST close the connection.
+The RDP Negotiation Failure structure is sent if it is not possible to continue the connection with any of the client-requested [External Security Protocol](#Section_5.4.5) (section 5.4.5). The possible failure codes and a reason for sending each of them are listed in section 2.2.1.2.2. After sending the RDP Negotiation Failure structure the server MUST close the connection.
 
 If an External Security Protocol, such as [TLS](#Section_5.4.5.2.2) (section 5.4.5.1) or [CredSSP](#Section_5.4.5.2) (section 5.4.5.2), will be used for the duration of the connection, the server MUST prepare to execute the selected protocol by calling into the relevant External Security Protocol Provider after the X.224 Connection Confirm PDU (with RDP Negotiation Response) has been sent to the client.
 
 <a id="Section_3.3.5.3.3"></a>
 ##### 3.3.5.3.3 Processing MCS Connect Initial PDU with GCC Conference Create Request
 
-The structure and fields of the **MCS Connect Initial PDU with GCC Conference Create Request** are specified in section [2.2.1.3](#Section_3.3.5.3.3). A basic high-level overview of the nested structure for the **MCS Connect Initial PDU** is illustrated in section [1.3.1.1](#Section_1.3), in the figure specifying **MCS Connect Initial PDU**.
+The structure and fields of the **MCS Connect Initial PDU with GCC Conference Create Request** are specified in section [2.2.1.3](#Section_2.2.1.3). A basic high-level overview of the nested structure for the **MCS Connect Initial PDU** is illustrated in section [1.3.1.1](#Section_1.3.1.1), in the figure specifying **MCS Connect Initial PDU**.
 
-If **Enhanced RDP Security** (section [5.4](#Section_5.4)) is in effect, the **External Security Protocol** (section [5.4.5](#Section_5)) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If **Enhanced RDP Security** (section [5.4](#Section_5.4)) is in effect, the **External Security Protocol** (section [5.4.5](#Section_5.4.5)) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
@@ -12029,7 +12029,7 @@ If the size of the GCC Conference Create Request data is valid, processing MUST 
 
 All of the encoded lengths within the **MCS Connect Initial PDU** and the GCC Conference Create Request MUST also be examined for consistency with the received data. If there is any discrepancy, the server MUST close the connection as specified in section 3.3.5.3.3.1.
 
-Once the **mcsCi** and **gccCCrq** fields have been successfully parsed the server examines the basic client settings data blocks in the GCC Conference Create Request user data and stores this data in the **Received Client Data** store (section [3.3.1.1](#Section_3.2.1.1)). However, before the data is stored, the basic client settings data blocks are checked for validity.
+Once the **mcsCi** and **gccCCrq** fields have been successfully parsed the server examines the basic client settings data blocks in the GCC Conference Create Request user data and stores this data in the **Received Client Data** store (section [3.3.1.1](#Section_3.3.1.1)). However, before the data is stored, the basic client settings data blocks are checked for validity.
 
 Select settings in the **Client Core Data** (section 2.2.1.3.2) are validated using the following rules.
 
@@ -12042,23 +12042,23 @@ Select settings in the **Client Core Data** (section 2.2.1.3.2) are validated us
 | Variable | highColorDepth | If this field does not contain a valid color depth (valid values are specified in section 2.2.1.3.2), a value of 8 bits per pixel is assumed. |
 | Variable | serverSelectedProtocol | If this field does not contain the same value that the server transmitted to the client in the [RDP Negotiation Response](#Section_3.3.5.3.2) (section 3.3.5.3.2), the server SHOULD drop the connection. In the event that this optional field is not present, the value PROTOCOL_RDP (0) MUST be assumed. |
 
-The **encryptionMethods** and **extEncryptionMethods** fields in the [Client Security Data](#Section_5) (section 2.2.1.3.3) are examined to ensure that they contain at least one valid flag. If no valid flags are present, the server MUST close the connection as specified in section 3.3.5.3.3.1.
+The **encryptionMethods** and **extEncryptionMethods** fields in the [Client Security Data](#Section_2.2.1.3.3) (section 2.2.1.3.3) are examined to ensure that they contain at least one valid flag. If no valid flags are present, the server MUST close the connection as specified in section 3.3.5.3.3.1.
 
 If the [Client Network Data](#Section_2.2.1.3.4) (section 2.2.1.3.4) is included in the Settings Data, the server MUST check that the **channelCount** field is within bounds. Furthermore, the data supplied in the **channelDefArray** MUST be complete. If these two conditions are not met, the server MUST close the connection as specified in section 3.3.5.3.3.1.
 
-Once the basic client settings data blocks have been processed successfully, the server MUST send the [MCS Connect Response PDU with GCC Conference Create Response](#Section_3.3.5.3.4) (section 2.2.1.4) to the client.
+Once the basic client settings data blocks have been processed successfully, the server MUST send the [MCS Connect Response PDU with GCC Conference Create Response](#Section_2.2.1.4) (section 2.2.1.4) to the client.
 
 <a id="Section_3.3.5.3.3.1"></a>
 ###### 3.3.5.3.3.1 Handling Errors in the GCC Conference Create Request Data
 
 If there is invalid data in the GCC Conference Create Request data then the server MUST follow one of the following courses of action:
 
-- Send an MCS Connect Response PDU (section [2.2.1.4](#Section_3.3.5.3.4)) to the client containing only a **result** field set to the value rt-unspecified-failure (14), and then close the connection.
+- Send an MCS Connect Response PDU (section [2.2.1.4](#Section_2.2.1.4)) to the client containing only a **result** field set to the value rt-unspecified-failure (14), and then close the connection.
 - Close the connection without sending an MCS Connect Response PDU containing the rt-unspecified-failure (14) code (in this case the client will not be able to determine that the disconnection is due to invalid GCC Conference Create Request data).
 <a id="Section_3.3.5.3.4"></a>
 ##### 3.3.5.3.4 Sending MCS Connect Response PDU with GCC Conference Create Response
 
-The structure and fields of the [MCS Connect Response PDU with GCC Conference Create Response](#Section_3.3.5.3.4) are described in section 2.2.1.4. A basic high-level overview of the nested structure for the MCS Connect Response PDU is illustrated in section [1.3.1.1](#Section_1.3), in the figure specifying MCS Connect Response PDU.
+The structure and fields of the [MCS Connect Response PDU with GCC Conference Create Response](#Section_2.2.1.4) are described in section 2.2.1.4. A basic high-level overview of the nested structure for the MCS Connect Response PDU is illustrated in section [1.3.1.1](#Section_1.3.1.1), in the figure specifying MCS Connect Response PDU.
 
 The **tpktHeader** field is initialized as described in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
@@ -12076,14 +12076,14 @@ The **nodeID** field of the GCC Conference Create Response MUST be initialized w
 
 The **userData** field of the GCC Conference Create Response MUST be initialized with basic server settings data blocks (sections [2.2.1.4.2](#Section_2.2.1.4.2) through to [2.2.1.4.4](#Section_2.2.1.4.4)). The server-to-client H.221 nonstandard key which MUST be embedded at the start of the **userData** field ([T124] section 8.7 for a description of the structure of user data) is the ANSI character string "McDn".
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 <a id="Section_3.3.5.3.5"></a>
 ##### 3.3.5.3.5 Processing MCS Erect Domain Request PDU
 
-The structure and fields of the [MCS Erect Domain Request PDU](#Section_3.2.5.3.5) are described in section 2.2.1.5.
+The structure and fields of the [MCS Erect Domain Request PDU](#Section_2.2.1.5) are described in section 2.2.1.5.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
@@ -12092,52 +12092,52 @@ The MCS Erect Domain Request PDU (embedded within the **mcsEDrq** field) is desc
 <a id="Section_3.3.5.3.6"></a>
 ##### 3.3.5.3.6 Processing MCS Attach User Request PDU
 
-The structure and fields of the [MCS Attach User Request PDU](#Section_4.1.6) are described in section 2.2.1.6.
+The structure and fields of the [MCS Attach User Request PDU](#Section_2.2.1.6) are described in section 2.2.1.6.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The MCS Attach User Request PDU (embedded within the **mcsAUrq** field) is described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 5 and 10.
 
-Upon receiving the MCS Attach User Request PDU the server MUST send the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) (section 3.3.5.3.7) to the client.
+Upon receiving the MCS Attach User Request PDU the server MUST send the [MCS Attach User Confirm PDU](#Section_2.2.1.7) (section 3.3.5.3.7) to the client.
 
 <a id="Section_3.3.5.3.7"></a>
 ##### 3.3.5.3.7 Sending MCS Attach User Confirm PDU
 
-The structure and fields of the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) are described in section 2.2.1.7.
+The structure and fields of the [MCS Attach User Confirm PDU](#Section_2.2.1.7) are described in section 2.2.1.7.
 
 The **tpktHeader** field is initialized as described in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The [MCS Connect Response PDU](#Section_3.3.5.3.4) (embedded within the **mcsCrsp** field (section 2.2.1.4)) is described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 5 and 10.
+The [MCS Connect Response PDU](#Section_2.2.1.4) (embedded within the **mcsCrsp** field (section 2.2.1.4)) is described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 5 and 10.
 
-If processing of the MCS Attach User Request was successful (section [3.3.5.3.6](#Section_3.3.5.3.6)), the **result** field MUST be set to rt-successful (0), and the optional **initiator** field MUST be present and MUST contain an integer identifier that will be used to identify the user channel (this identifier MUST be stored in the [User Channel ID](#Section_3.3.1.2) store (section 3.3.1.2)). If processing of the MCS Attach User Request was not successful, then the optional **initiator** field SHOULD NOT be present and the **result** field MUST be set to rt-unspecified-failure (14).
+If processing of the MCS Attach User Request was successful (section [3.3.5.3.6](#Section_3.3.5.3.6)), the **result** field MUST be set to rt-successful (0), and the optional **initiator** field MUST be present and MUST contain an integer identifier that will be used to identify the user channel (this identifier MUST be stored in the [User Channel ID](#Section_3.2.1.5) store (section 3.3.1.2)). If processing of the MCS Attach User Request was not successful, then the optional **initiator** field SHOULD NOT be present and the **result** field MUST be set to rt-unspecified-failure (14).
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 <a id="Section_3.3.5.3.8"></a>
 ##### 3.3.5.3.8 Processing MCS Channel Join Request PDU(s)
 
-The structure and fields of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) are described in section 2.2.1.8.
+The structure and fields of the [MCS Channel Join Request PDU](#Section_2.2.1.8) are described in section 2.2.1.8.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** field ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The MCS Channel Join Request PDU (embedded within the **mcsCJrq** field) is described in detail in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 6 and 10.
 
-Upon receiving the MCS Channel Join Request PDU the server MUST carry out any necessary processing to mark the channel as "joined" and MUST then send the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 3.3.5.3.9) to the client to indicate the result of the join operation. If the server receives a Channel Join Request PDU for a channel that has already been joined, then the request SHOULD be ignored and a Channel Join Confirm PDU SHOULD NOT be sent.
+Upon receiving the MCS Channel Join Request PDU the server MUST carry out any necessary processing to mark the channel as "joined" and MUST then send the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 3.3.5.3.9) to the client to indicate the result of the join operation. If the server receives a Channel Join Request PDU for a channel that has already been joined, then the request SHOULD be ignored and a Channel Join Confirm PDU SHOULD NOT be sent.
 
-If the client set the RNS_UD_CS_SUPPORT_SKIP_CHANNELJOIN flag in the **earlyCapabilityFlags** field of the Client Core Data (section [2.2.1.3.2](#Section_2.2.1.3.2)), and the server set the RNS_UD_SC_SKIP_CHANNELJOIN_SUPPORTED flag in **earlyCapabilityFlags** field of the Server Core Data (section [2.2.1.4.2](#Section_2.2.1.4.2)), then the MCS Channel Join Request PDUs (section 2.2.1.8) and the MCS Channel Join Confirm PDUs (section [2.2.1.9](#Section_3.3.5.3.9)) SHOULD be skipped to reduce the connection time. After sending the MCS Attach User Confirm PDU (section [2.2.1.7](#Section_3.2.5.3.7)) all the MCS channels (the user channel, the I/O channel, the message channel, and all static virtual channels) SHOULD be considered as fully joined by the server. The server SHOULD ignore any MCS Channel Join Request PDUs and SHOULD proceed to the RDP Security Commencement phase (section [1.3.1.1](#Section_1.3)).
+If the client set the RNS_UD_CS_SUPPORT_SKIP_CHANNELJOIN flag in the **earlyCapabilityFlags** field of the Client Core Data (section [2.2.1.3.2](#Section_2.2.1.3.2)), and the server set the RNS_UD_SC_SKIP_CHANNELJOIN_SUPPORTED flag in **earlyCapabilityFlags** field of the Server Core Data (section [2.2.1.4.2](#Section_2.2.1.4.2)), then the MCS Channel Join Request PDUs (section 2.2.1.8) and the MCS Channel Join Confirm PDUs (section [2.2.1.9](#Section_2.2.1.9)) SHOULD be skipped to reduce the connection time. After sending the MCS Attach User Confirm PDU (section [2.2.1.7](#Section_2.2.1.7)) all the MCS channels (the user channel, the I/O channel, the message channel, and all static virtual channels) SHOULD be considered as fully joined by the server. The server SHOULD ignore any MCS Channel Join Request PDUs and SHOULD proceed to the RDP Security Commencement phase (section [1.3.1.1](#Section_1.3.1.1)).
 
 <a id="Section_3.3.5.3.9"></a>
 ##### 3.3.5.3.9 Sending MCS Channel Join Confirm PDU(s)
 
-The structure and fields of the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) are described in section 2.2.1.9.
+The structure and fields of the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) are described in section 2.2.1.9.
 
 The **tpktHeader** field is initialized as described in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The MCS Channel Join Confirm PDU (embedded within the **mcsCJcf** field) is described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 6 and 10. The **result** field MUST be set to rt-successful (0) if the MCS channel ID in the corresponding [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 3.3.5.3.8) was successfully joined. If an error occurred during the join (for example, too many channels, no such MCS channel ID, or a memory allocation error), the server MUST set the **result** field to rt-unspecified-failure (14). The remaining fields MUST be initialized as follows (these fields are essentially copied over from the MCS Channel Join Request PDU).
+The MCS Channel Join Confirm PDU (embedded within the **mcsCJcf** field) is described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 6 and 10. The **result** field MUST be set to rt-successful (0) if the MCS channel ID in the corresponding [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 3.3.5.3.8) was successfully joined. If an error occurred during the join (for example, too many channels, no such MCS channel ID, or a memory allocation error), the server MUST set the **result** field to rt-unspecified-failure (14). The remaining fields MUST be initialized as follows (these fields are essentially copied over from the MCS Channel Join Request PDU).
 
 | Bit Range | Field | Description |
 | --- | --- | --- |
@@ -12147,35 +12147,35 @@ The MCS Channel Join Confirm PDU (embedded within the **mcsCJcf** field) is desc
 
 The optional **channelId** field MUST be included in the MCS Channel Join Confirm PDU sent to the client.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire.
 
 <a id="Section_3.3.5.3.10"></a>
 ##### 3.3.5.3.10 Processing Security Exchange PDU
 
-The structure and fields of the [Security Exchange PDU](#Section_2.2.1.10.1) are described in section 2.2.1.10.
+The structure and fields of the [Security Exchange PDU](#Section_2.2.1.10) are described in section 2.2.1.10.
 
 The embedded length fields within the **tpktHeader** ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) and the **mcsSDrq** ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDrq** is used to route the [**PDU**](#gt_protocol-data-unit-pdu) to the appropriate target channel.
 
-The embedded flags field of the **basicSecurityHeader** MUST contain the SEC_EXCHANGE_PKT (0x0001) flag (described in section [2.2.8.1.1.2.1](#Section_5)). If this flag is not present then the packet cannot be interpreted as a Security Exchange PDU, and the connection SHOULD be dropped. If the SEC_LICENSE_ENCRYPT_SC (0x0200) flag is present, then the client is able to accept encrypted licensing packets when using [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3). This fact is stored in the [Client Licensing Encryption Ability](#Section_3.3.1.6) store (section 3.3.1.6).
+The embedded flags field of the **basicSecurityHeader** MUST contain the SEC_EXCHANGE_PKT (0x0001) flag (described in section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)). If this flag is not present then the packet cannot be interpreted as a Security Exchange PDU, and the connection SHOULD be dropped. If the SEC_LICENSE_ENCRYPT_SC (0x0200) flag is present, then the client is able to accept encrypted licensing packets when using [Standard RDP Security](#Section_5.3) mechanisms (section 5.3). This fact is stored in the [Client Licensing Encryption Ability](#Section_3.3.1.6) store (section 3.3.1.6).
 
 The encrypted client random value is extracted from the **encryptedClientRandom** field using the **length** field to determine the size of the data. If the value of the **length** field is inconsistent with the size of the received data, the connection SHOULD be dropped. The encrypted client random value is then decrypted using the methods and techniques described in section [5.3.4.2](#Section_5.3.4.2).
 
-Once the server has extracted and decrypted the client random it MUST generate the session keys which will be used to encrypt, decrypt, and sign data sent on the wire. The 32-byte client random and server random (transmitted in the [Server Security Data](#Section_5) described in section 2.2.1.4.3) are used to accomplish this task by employing the techniques described in section [5.3.5](#Section_4.11.1). On successful generation of the session keys, the server MUST store the session keys in the Session Keys store (section [3.3.1.10](#Section_3.3.1.10)).
+Once the server has extracted and decrypted the client random it MUST generate the session keys which will be used to encrypt, decrypt, and sign data sent on the wire. The 32-byte client random and server random (transmitted in the [Server Security Data](#Section_2.2.1.4.3) described in section 2.2.1.4.3) are used to accomplish this task by employing the techniques described in section [5.3.5](#Section_5.3.5). On successful generation of the session keys, the server MUST store the session keys in the Session Keys store (section [3.3.1.10](#Section_3.3.1.10)).
 
 <a id="Section_3.3.5.3.11"></a>
 ##### 3.3.5.3.11 Processing Client Info PDU
 
-The structure and fields of the [Client Info PDU](#Section_2.2.1.11.1) are specified in section 2.2.1.11.
+The structure and fields of the [Client Info PDU](#Section_2.2.1.11) are specified in section 2.2.1.11.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) and the **mcsSDrq** ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDrq** is used to route the PDU to the appropriate target channel.
 
-The **securityHeader** field MUST always be present and it MUST contain at least a [Basic Security Header](#Section_5) structure (section 2.2.8.1.1.2.1). The embedded flags field of the **securityHeader** MUST contain the SEC_INFO_PKT (0x0040) flag (described in section 2.2.8.1.1.2.1). If this flag is not present then the packet cannot be interpreted as a Client Info PDU (section 2.2.1.11), and the connection SHOULD be dropped. If the SEC_ENCRYPT (0x0008) flag is present, then the data following the **securityHeader** field is encrypted and it MUST be verified and decrypted using the methods and techniques specified in section [5.3.6](#Section_5.3.6). If the [Encryption Level](#Section_5.4.1) (section 5.3.1) selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_5)) is ENCRYPTION_LEVEL_NONE (0) the SEC_ENCRYPT flag MAY<48> be set incorrectly. In this case the Encryption Level setting MUST be respected and the value of the flag MUST be ignored. If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
+The **securityHeader** field MUST always be present and it MUST contain at least a [Basic Security Header](#Section_2.2.8.1.1.2.1) structure (section 2.2.8.1.1.2.1). The embedded flags field of the **securityHeader** MUST contain the SEC_INFO_PKT (0x0040) flag (described in section 2.2.8.1.1.2.1). If this flag is not present then the packet cannot be interpreted as a Client Info PDU (section 2.2.1.11), and the connection SHOULD be dropped. If the SEC_ENCRYPT (0x0008) flag is present, then the data following the **securityHeader** field is encrypted and it MUST be verified and decrypted using the methods and techniques specified in section [5.3.6](#Section_5.3.6). If the [Encryption Level](#Section_5.3.1) (section 5.3.1) selected by the server (sections [5.3.2](#Section_5.3.2) and [2.2.1.4.3](#Section_2.2.1.4.3)) is ENCRYPTION_LEVEL_NONE (0) the SEC_ENCRYPT flag MAY<48> be set incorrectly. In this case the Encryption Level setting MUST be respected and the value of the flag MUST be ignored. If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
 
 Before reading the client settings fields, the format of the character data MUST be determined by testing for the presence of the INFO_UNICODE (0x00000010) flag (section [2.2.1.11.1.1](#Section_2.2.1.11.1.1)). If the flag is present, all character data MUST be interpreted as [**Unicode**](#gt_unicode); otherwise, it MUST be treated as ANSI characters.
 
@@ -12183,22 +12183,22 @@ All of the received client settings are stored in the [Received Client Data](#Se
 
 If there is not enough received data to completely read a variable-length field, the connection SHOULD be dropped. For example, if the **cbAlternateShell** field contains a value of 44 bytes, but only 30 bytes remain to be parsed, the connection SHOULD be dropped.
 
-If an auto-reconnect cookie exists in the **autoReconnectCookie** field, the server SHOULD store the cookie in the Automatic Reconnection Cookie store (section [3.3.1.10](#Section_3.3.1.10))and use it to log on the user once the connection sequence completes (for a description of how automatic reconnection works, see section [5.5](#Section_1.3.1.5)). If logon with the cookie fails, the credentials supplied in the Client Info PDU SHOULD be used, or alternatively the user MAY enter credentials at a server-side prompt remoted using RDP.
+If an auto-reconnect cookie exists in the **autoReconnectCookie** field, the server SHOULD store the cookie in the Automatic Reconnection Cookie store (section [3.3.1.10](#Section_3.3.1.10))and use it to log on the user once the connection sequence completes (for a description of how automatic reconnection works, see section [5.5](#Section_5.5)). If logon with the cookie fails, the credentials supplied in the Client Info PDU SHOULD be used, or alternatively the user MAY enter credentials at a server-side prompt remoted using RDP.
 
-Once the server has successfully processed the Client Info PDU, it can enter the Licensing phase of the RDP Connection Sequence and carry out a licensing exchange with the client (see section [1.3.1.1](#Section_1.3) for an overview of the RDP Connection Sequence phases).
+Once the server has successfully processed the Client Info PDU, it can enter the Licensing phase of the RDP Connection Sequence and carry out a licensing exchange with the client (see section [1.3.1.1](#Section_1.3.1.1) for an overview of the RDP Connection Sequence phases).
 
 <a id="Section_3.3.5.3.12"></a>
 ##### 3.3.5.3.12 Sending License Error PDU - Valid Client
 
-The structure and fields of the [License Error (Valid Client) PDU](#Section_2.2.1.12.1.2) are described in section 2.2.1.12.
+The structure and fields of the [License Error (Valid Client) PDU](#Section_2.2.1.12) are described in section 2.2.1.12.
 
 The **tpktHeader** field is initialized as described in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The **mcsSDin** field is initialized as described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33. The embedded **initiator** field MUST be set to the MCS server channel ID held in the [Server Channel ID](#Section_3.2.1.6) store (section 3.3.1.5) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.3.1.3). The embedded **userData** field contains the remaining fields of the Valid Client PDU.
+The **mcsSDin** field is initialized as described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33. The embedded **initiator** field MUST be set to the MCS server channel ID held in the [Server Channel ID](#Section_3.3.1.5) store (section 3.3.1.5) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.3.1.3). The embedded **userData** field contains the remaining fields of the Valid Client PDU.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest. The **securityHeader** field MUST be present; however, it will contain a [Basic Security Header](#Section_5) structure (section 2.2.8.1.1.2.1).
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest. The **securityHeader** field MUST be present; however, it will contain a [Basic Security Header](#Section_2.2.8.1.1.2.1) structure (section 2.2.8.1.1.2.1).
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect, the PDU data following the **securityHeader** field can be encrypted and signed (depending on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2) and the contents of the [Client Licensing Encryption Ability](#Section_3.3.1.6) store (section 3.3.1.6) using the methods and techniques described in section [5.3.6](#Section_5.3.6)). The format of the **securityHeader** field is selected as described in section 2.2.1.12 and the fields populated with appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect, the PDU data following the **securityHeader** field can be encrypted and signed (depending on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2) and the contents of the [Client Licensing Encryption Ability](#Section_3.3.1.6) store (section 3.3.1.6) using the methods and techniques described in section [5.3.6](#Section_5.3.6)). The format of the **securityHeader** field is selected as described in section 2.2.1.12 and the fields populated with appropriate security data. If the data is to be encrypted, the embedded **flags** field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
 
 The embedded **flags** field of the **securityHeader** field (which is always present) MUST contain the SEC_LICENSE_PKT (0x0080) flag (described in section 2.2.8.1.1.2.1) to indicate that the message is a licensing PDU. If the server can handle encrypted licensing packets from the client and Standard RDP Security mechanisms are being used, then the SEC_LICENSE_ENCRYPT_CS (0x0200) flag SHOULD also be included in the **flags** subfield of the **securityHeader** field.
 
@@ -12216,42 +12216,42 @@ The structure and fields of the [Demand Active PDU](#Section_2.2.1.13.1) are des
 
 The **tpktHeader** field is initialized as described in [[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8, while the **x224Data** field (which contains an X.224 Class 0 Data TPDU) is initialized as specified in [[X224]](https://go.microsoft.com/fwlink/?LinkId=90588) section 13.7.
 
-The **mcsSDin** field is initialized as described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33. The embedded **initiator** field MUST be set to the MCS server channel ID held in the [Server Channel ID](#Section_3.2.1.6) store (section 3.3.1.5) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.3.1.3). The embedded **userData** field contains the remaining fields of the Demand Active PDU.
+The **mcsSDin** field is initialized as described in [[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 11.33. The embedded **initiator** field MUST be set to the MCS server channel ID held in the [Server Channel ID](#Section_3.3.1.5) store (section 3.3.1.5) and the embedded **channelId** field MUST be set to the MCS I/O channel ID held in the [I/O Channel ID](#Section_3.2.1.3) store (section 3.3.1.3). The embedded **userData** field contains the remaining fields of the Demand Active PDU.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **securityHeader** field MUST NOT be present.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire [**PDU**](#gt_protocol-data-unit-pdu) and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **securityHeader** field MUST NOT be present.
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect, the PDU data following the optional **securityHeader** field can be encrypted and signed (depending on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in [5.3.6](#Section_5.3.6). The format of the **securityHeader** field is selected as described in section 2.2.1.13.1 and the fields populated with appropriate security data. If the data is to be encrypted, the embedded flags field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect, the PDU data following the optional **securityHeader** field can be encrypted and signed (depending on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in [5.3.6](#Section_5.3.6). The format of the **securityHeader** field is selected as described in section 2.2.1.13.1 and the fields populated with appropriate security data. If the data is to be encrypted, the embedded flags field of the **securityHeader** field MUST contain the SEC_ENCRYPT (0x0008) flag.
 
 The remaining fields are populated as described in section [2.2.1.13.1.1](#Section_2.2.1.13.1.1), with the combined capability set data being inserted into the **capabilitySets** field.
 
 <a id="Section_3.3.5.3.13.2"></a>
 ###### 3.3.5.3.13.2 Processing Confirm Active PDU
 
-The structure and fields of the [Confirm Active PDU](#Section_2.2.1.13.2.1) are described in section 2.2.1.13.2.
+The structure and fields of the [Confirm Active PDU](#Section_2.2.1.13.2) are described in section 2.2.1.13.2.
 
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire [**PDU**](#gt_protocol-data-unit-pdu) prior to any processing taking place.
 
 The embedded length fields within the **tpktHeader** ([[T123]](https://go.microsoft.com/fwlink/?LinkId=90541) section 8) and the **mcsSDrq** ([[T125]](https://go.microsoft.com/fwlink/?LinkId=90543) section 7, parts 7 and 10) fields MUST be examined for consistency with the received data. If there is any discrepancy, the connection SHOULD be dropped.
 
 The embedded **channelId** field within the **mcsSDrq** is used to route the PDU to the appropriate target channel.
 
-The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in section 2.2.1.13.2. If the **securityHeader** field is present, the embedded flags field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_5)), and if it is present the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
+The conditions mandating the presence of the **securityHeader** field, as well as the type of Security Header structure present in this field, are explained in section 2.2.1.13.2. If the **securityHeader** field is present, the embedded flags field MUST be examined for the presence of the SEC_ENCRYPT (0x0008) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)), and if it is present the data following the **securityHeader** field MUST be verified and decrypted using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the [**MAC**](#gt_message-authentication-code-mac) signature is incorrect or the data cannot be decrypted correctly, the connection SHOULD be dropped.
 
 The **shareControlHeader** field (which contains a [Share Control Header](#Section_2.2.8.1.1.1.1) as described in section 2.2.8.1.1.1.1) MUST be examined to ensure that the PDU type (present in the **pduType** field) has the value PDUTYPE_CONFIRMACTIVEPDU (3).
 
-The remaining PDU fields and capability data MUST be interpreted and processed according to sections [2.2.1.13.2.1](#Section_4.1.13) and [2.2.7](#Section_2.2.7). The capabilities received from the client MUST be stored in the [Client Capabilities](#Section_3.3.1.7) store (section 3.3.1.7) and MUST be used to determine what subset of RDP to send to the client.
+The remaining PDU fields and capability data MUST be interpreted and processed according to sections [2.2.1.13.2.1](#Section_2.2.1.13.2.1) and [2.2.7](#Section_2.2.7). The capabilities received from the client MUST be stored in the [Client Capabilities](#Section_3.3.1.7) store (section 3.3.1.7) and MUST be used to determine what subset of RDP to send to the client.
 
 After successfully processing the Confirm Active PDU, the server MUST send the [Synchronize PDU](#Section_4.1.14) (section 3.3.5.3.14) to the client. If processing of the Confirm Active PDU was unsuccessful, the connection SHOULD be dropped.
 
 <a id="Section_3.3.5.3.14"></a>
 ##### 3.3.5.3.14 Processing Synchronize PDU
 
-The structure and fields of the Synchronize PDU are described in section [2.2.1.14](#Section_4.1.14), and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **targetUser** field MUST be ignored.
+The structure and fields of the Synchronize PDU are described in section [2.2.1.14](#Section_2.2.1.14), and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **targetUser** field MUST be ignored.
 
 <a id="Section_3.3.5.3.15"></a>
 ##### 3.3.5.3.15 Processing Control PDU - Cooperate
 
-The structure and fields of the Control (Cooperate) PDU are described in section [2.2.1.15](#Section_2.2.1.15.1), and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **controlId** and **grantId** fields MUST be ignored.
+The structure and fields of the Control (Cooperate) PDU are described in section [2.2.1.15](#Section_2.2.1.15), and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **controlId** and **grantId** fields MUST be ignored.
 
 After successfully processing the client-to-server Control (Cooperate) PDU, the server MUST send the Control (Cooperate) PDU (section [3.3.5.3.20](#Section_3.3.5.3.20)) to the client. If processing of the client-to-server Control (Cooperate) PDU was unsuccessful, the connection SHOULD be dropped.
 
@@ -12265,14 +12265,14 @@ After successfully processing the Control (Request Control) PDU, the server MUST
 <a id="Section_3.3.5.3.17"></a>
 ##### 3.3.5.3.17 Processing Persistent Key List PDU(s)
 
-The structure and fields of the [Persistent Key List PDU](#Section_3.3.5.3.17) are described in section 2.2.1.17, and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). Note that multiple Persistent Key List PDUs can be sent in succession. The **bBitMask** flag indicates the sequencing.
+The structure and fields of the [Persistent Key List PDU](#Section_4.1.17) are described in section 2.2.1.17, and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). Note that multiple Persistent Key List PDUs can be sent in succession. The **bBitMask** flag indicates the sequencing.
 
 After the server has successfully processed the Persistent Key List PDU (or sequence of Persistent Key List PDUs), it MUST store the 64-bit bitmap keys received from the client in the [Cached Bitmap Keys](#Section_3.3.1.8) store (section 3.3.1.8).
 
 <a id="Section_3.3.5.3.18"></a>
 ##### 3.3.5.3.18 Processing Font List PDU
 
-The structure and fields of the Font List are described in section [2.2.1.18](#Section_2.2.1.18.1), and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **numberFonts**, **totalNumFonts**, **listFlags**, and **entrySize** fields MUST be ignored.
+The structure and fields of the Font List are described in section [2.2.1.18](#Section_2.2.1.18), and the techniques described in section [3.3.5.2](#Section_3.3.5.2) demonstrate how to process the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of the **numberFonts**, **totalNumFonts**, **listFlags**, and **entrySize** fields MUST be ignored.
 
 After successfully processing the Font List PDU, the server MUST send the Font Map PDU (section [3.3.5.3.22](#Section_3.3.5.3.22)) to the client. If processing of the Font List PDU was unsuccessful, the connection SHOULD be dropped.
 
@@ -12289,12 +12289,12 @@ The structure and fields of the Control (Cooperate) PDU are described in section
 <a id="Section_3.3.5.3.21"></a>
 ##### 3.3.5.3.21 Sending Control PDU - Granted Control
 
-The structure and fields of the Control (Granted Control) PDU are described in section [2.2.1.21](#Section_2.2.1.21), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The **grantId** field SHOULD be set to the User Channel ID (held in the User Channel ID store ([3.3.1.2](#Section_3.3.1.2))), while the **controlId** field SHOULD be set to the MCS server channel ID (held in the Server Channel ID store (section [3.3.1.5](#Section_3.2.1.6))). The contents of this PDU SHOULD NOT be compressed.
+The structure and fields of the Control (Granted Control) PDU are described in section [2.2.1.21](#Section_2.2.1.21), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The **grantId** field SHOULD be set to the User Channel ID (held in the User Channel ID store ([3.3.1.2](#Section_3.3.1.2))), while the **controlId** field SHOULD be set to the MCS server channel ID (held in the Server Channel ID store (section [3.3.1.5](#Section_3.3.1.5))). The contents of this PDU SHOULD NOT be compressed.
 
 <a id="Section_3.3.5.3.22"></a>
 ##### 3.3.5.3.22 Sending Font Map PDU
 
-The structure and fields of the Font Map PDU are described in section [2.2.1.22](#Section_3.2.5.3.22), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU SHOULD NOT be compressed.
+The structure and fields of the Font Map PDU are described in section [2.2.1.22](#Section_2.2.1.22), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU SHOULD NOT be compressed.
 
 Once the server has successfully sent this PDU, graphics and pointer updates (section [2.2.9](#Section_2.2.9)) SHOULD be sent to the client (section [3.3.5.9](#Section_3.3.5.9)).
 
@@ -12319,13 +12319,13 @@ The structure and fields of the Shutdown Request Denied PDU are described in sec
 <a id="Section_3.3.5.5.1"></a>
 ##### 3.3.5.5.1 Sending Deactivate All PDU
 
-The structure and fields of the Deactivate All PDU are described in section [2.2.3.1](#Section_3.2.5.5.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
+The structure and fields of the Deactivate All PDU are described in section [2.2.3.1](#Section_2.2.3.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu).
 
 The Deactivate All PDU is sent from server to client to indicate that the connection will be closed or that a capability re-exchange will occur. After sending the Deactivate All PDU the server MUST follow one of the following courses of action.
 
-- Send an [MCS Disconnect Provider Ultimatum PDU (section 3.1.5.1.1)](#Section_2.2.2.3) to notify the client of the source of the disconnection ("user requested" or "provider initiated"), and then close the connection.
+- Send an [MCS Disconnect Provider Ultimatum PDU (section 3.1.5.1.1)](#Section_3.1.5.1.1) to notify the client of the source of the disconnection ("user requested" or "provider initiated"), and then close the connection.
 - Close the connection without sending an MCS Disconnect Provider Ultimatum (in this case the client will not be informed of the source of the disconnection).
-- Initiate a capability re-exchange by re-executing the connection sequence, starting with the [Demand Active PDU (section 3.3.5.3.13.1)](#Section_4.1.12).
+- Initiate a capability re-exchange by re-executing the connection sequence, starting with the [Demand Active PDU (section 3.3.5.3.13.1)](#Section_3.3.5.3.13.1).
 <a id="Section_3.3.5.6"></a>
 #### 3.3.5.6 Auto-Reconnect Sequence
 
@@ -12340,7 +12340,7 @@ The structure and fields of the Auto-Reconnect Status PDU are described in secti
 <a id="Section_3.3.5.7.1"></a>
 ##### 3.3.5.7.1 Sending Set Error Info PDU
 
-The structure and fields of the Set Error Info PDU are described in section [2.2.5.1](#Section_3.3.5.7.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU SHOULD NOT be compressed.
+The structure and fields of the Set Error Info PDU are described in section [2.2.5.1](#Section_2.2.5.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU SHOULD NOT be compressed.
 
 This PDU MUST NOT be sent to a client which has not indicated support for it by setting the RNS_UD_CS_SUPPORT_ERRINFO_PDU flag (0x0001) in the **earlyCapabilityFlags** field of the [Client Core Data (section 2.2.1.3.2)](#Section_2.2.1.3.2).
 
@@ -12351,14 +12351,14 @@ After the PDU has been sent the server MUST disconnect the client (since the Set
 
 The process of user authorization ensures that a user has sufficient permission to access a server remotely via RDP. User authorization MUST only take place after the credentials for a user have been received.
 
-When Enhanced RDP Security (section [5.4](#Section_5.4)) with CredSSP (section [5.4.5.2](#Section_5.4.5.2)) is used, the user credentials will be accessible by the time the MCS Connect Initial PDU (section [3.3.5.3.3](#Section_3.3.5.3.3)) and MCS Connect Response PDU (section [3.3.5.3.4](#Section_3.3.5.3.4)) have been exchanged (sections [5.4.2.1](#Section_5.4.2.1) and [5.4.2.2](#Section_5.4.2.2)). In this scenario, user authorization MUST take place after all the MCS Channel Join Request PDUs (section [3.3.5.3.8](#Section_3.2.5.3.8)) and MCS Channel Join Confirm PDUs (section [3.3.5.3.9](#Section_3.3.5.3.9)) have been exchanged.
+When Enhanced RDP Security (section [5.4](#Section_5.4)) with CredSSP (section [5.4.5.2](#Section_5.4.5.2)) is used, the user credentials will be accessible by the time the MCS Connect Initial PDU (section [3.3.5.3.3](#Section_3.3.5.3.3)) and MCS Connect Response PDU (section [3.3.5.3.4](#Section_3.3.5.3.4)) have been exchanged (sections [5.4.2.1](#Section_5.4.2.1) and [5.4.2.2](#Section_5.4.2.2)). In this scenario, user authorization MUST take place after all the MCS Channel Join Request PDUs (section [3.3.5.3.8](#Section_3.3.5.3.8)) and MCS Channel Join Confirm PDUs (section [3.3.5.3.9](#Section_3.3.5.3.9)) have been exchanged.
 
 If the process of user authorization fails, and the client has indicated support for the Set Error Info PDU (section [2.2.5.1](#Section_2.2.5.1)) by setting the RNS_UD_CS_SUPPORT_ERRINFO_PDU flag (0x0001) in the **earlyCapabilityFlags** field of the Client Core Data (section [2.2.1.3.2](#Section_2.2.1.3.2)), then the server MUST send a Set Error Info PDU to the client with the error code ERRINFO_SERVER_INSUFFICIENT_PRIVILEGES (0x00000009) and close the connection. If the client does not support the Set Error Info PDU, the server MUST close the connection without sending a Set Error Info PDU.
 
 <a id="Section_3.3.5.7.2"></a>
 ##### 3.3.5.7.2 Sending Status Info PDU
 
-The structure and fields of the [Status Info PDU](#Section_3.2.5.7.2) are described in section 2.2.5.2, and the techniques specified in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the PDU. The contents of this PDU SHOULD NOT be compressed.
+The structure and fields of the [Status Info PDU](#Section_2.2.5.2) are described in section 2.2.5.2, and the techniques specified in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the PDU. The contents of this PDU SHOULD NOT be compressed.
 
 This PDU MUST NOT be sent to a client which has not indicated support for it by setting the RNS_UD_CS_SUPPORT_STATUSINFO_PDU (0x0004) in the **earlyCapabilityFlags** field of the [Client Core Data (section 2.2.1.3.2)](#Section_2.2.1.3.2).
 
@@ -12389,7 +12389,7 @@ Once this PDU has been processed, the server MUST inject the input event into th
 <a id="Section_3.3.5.8.1.2"></a>
 ###### 3.3.5.8.1.2 Processing Fast-Path Input Event PDU
 
-The [Fast-Path Input Event PDU](#Section_2.2.8.1.2) has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
+The [Fast-Path Input Event PDU](#Section_4.7) has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
 
 - **fpInputHeader**: Fast-Path Input Header (section 2.2.8.1.2)
 - **length1** and **length2**: Packet length (section 2.2.8.1.2)
@@ -12404,7 +12404,7 @@ The [Fast-Path Input Event PDU](#Section_2.2.8.1.2) has the following basic stru
 - Synchronize Event (section [2.2.8.1.2.2.5](#Section_2.2.8.1.2.2.5))
 - Quality Of Experience (QOE) Timestamp Event (section [2.2.8.1.2.2.6](#Section_2.2.8.1.2.2.6))
 - Relative Mouse Event (section [2.2.8.1.2.2.7](#Section_2.2.8.1.2.2.7))
-If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
+If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) being used to secure the connection MUST be used to decrypt and verify the integrity of the entire PDU prior to any processing taking place.
 
 The contents of the embedded **action** field of the **fpInputHeader** field MUST be set to FASTPATH_INPUT_ACTION_FASTPATH (0). If it is not set to this value the PDU is not a Fast-Path Input Event PDU and MUST be processed as a slow-path PDU (section [3.3.5.2](#Section_3.3.5.2)).
 
@@ -12420,7 +12420,7 @@ Once this PDU has been processed, the server MUST inject the input event into th
 <a id="Section_3.3.5.8.2.1"></a>
 ###### 3.3.5.8.2.1 Sending Set Keyboard Indicators PDU
 
-The structure and fields of the Set Keyboard Indicators PDU are described in section [2.2.8.2.1](#Section_3.3.5.8.2.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU SHOULD NOT be compressed.
+The structure and fields of the Set Keyboard Indicators PDU are described in section [2.2.8.2.1](#Section_2.2.8.2.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The contents of this PDU SHOULD NOT be compressed.
 
 <a id="Section_3.3.5.8.2.2"></a>
 ###### 3.3.5.8.2.2 Sending Set Keyboard IME Status PDU
@@ -12455,14 +12455,14 @@ The **messageType** field MUST be initialized with the identifier describing the
 - [Color Pointer Update (section 2.2.9.1.1.4.4)](#Section_2.2.9.1.1.4.4)
 - [New Pointer Update (section 2.2.9.1.1.4.5)](#Section_2.2.9.1.1.4.5)
 - [Cached Pointer Update (section 2.2.9.1.1.4.6)](#Section_2.2.9.1.1.4.6)
-When sending a Color or New Pointer Update, the server MUST save the pointer image in the [Pointer Image Cache (section 3.3.1.9)](#Section_3.2.1.11) and initialize the **cacheIndex** field with the index of the cache entry which was used. If the pointer image has to be changed and the image is already present in the cache the server SHOULD send the client a Cached Pointer Update to save bandwidth that would have been used to resend the image.
+When sending a Color or New Pointer Update, the server MUST save the pointer image in the [Pointer Image Cache (section 3.3.1.9)](#Section_3.3.1.9) and initialize the **cacheIndex** field with the index of the cache entry which was used. If the pointer image has to be changed and the image is already present in the cache the server SHOULD send the client a Cached Pointer Update to save bandwidth that would have been used to resend the image.
 
 The contents of this PDU SHOULD be compressed by the server before any MAC signature is constructed and encryption methods applied if the size of the data payload exceeds 50 bytes. The Share Data Header MUST be initialized with the compression usage information (section 3.3.5.1).
 
 <a id="Section_3.3.5.9.3"></a>
 ##### 3.3.5.9.3 Sending Fast-Path Update PDU
 
-The [Fast-Path Update PDU](#Section_2.2.9.1.2.1) has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
+The [Fast-Path Update PDU](#Section_2.2.9.1.2) has the following basic structure (sections [5.3.8](#Section_5.3.8) and [5.4.4](#Section_5.4.4)):
 
 - **fpOutputHeader**: Fast-Path Output Header (section 2.2.9.1.2)
 - **length1** and **length2**: Packet length (section 2.2.9.1.2)
@@ -12482,9 +12482,9 @@ The [Fast-Path Update PDU](#Section_2.2.9.1.2.1) has the following basic structu
 - Surface Commands Update (section [2.2.9.1.2.1.10](#Section_2.2.9.1.2.1.10))
 The **fpOutputHeader**, **length1**, and **length2** fields MUST be initialized as described in section 2.2.9.1.2. Because the PDU is in fast-path format, the embedded **action** field of the **fpOutputHeader** field MUST be set to FASTPATH_OUTPUT_ACTION_FASTPATH (0).
 
-If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the [External Security Protocol](#Section_5) (section 5.4.5) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **fipsInformation** and **dataSignature** fields MUST NOT be present.
+If Enhanced RDP Security (section [5.4](#Section_5.4)) is in effect, the [External Security Protocol](#Section_5.4.5) (section 5.4.5) MUST be used to encrypt the entire PDU and generate a verification digest before the PDU is transmitted over the wire. Also, in this scenario the **fipsInformation** and **dataSignature** fields MUST NOT be present.
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are in effect, the PDU data following the optional **dataSignature** field can be encrypted and signed (depending on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the data is to be encrypted, the embedded **flags** field of the **fpOutputHeader** field MUST contain the FASTPATH_OUTPUT_ENCRYPTED (2) flag.
+If [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are in effect, the PDU data following the optional **dataSignature** field can be encrypted and signed (depending on the values of the Encryption Level and Encryption Method selected by the server as part of the negotiation described in section [5.3.2](#Section_5.3.2)) using the methods and techniques described in section [5.3.6](#Section_5.3.6). If the data is to be encrypted, the embedded **flags** field of the **fpOutputHeader** field MUST contain the FASTPATH_OUTPUT_ENCRYPTED (2) flag.
 
 The PDU contents, which encapsulate a collection of output events, is populated with fast-path update data as described in sections 2.2.9.1.2.1.1 through 2.2.9.1.2.1.10. The contents of each individual update SHOULD be compressed by the server before any [**MAC**](#gt_message-authentication-code-mac) signature is constructed and encryption methods applied if the size of the data payload exceeds 50 bytes. If this is the case, the embedded **compression** field of the common **updateHeader** field MUST contain the FASTPATH_OUTPUT_COMPRESSION_USED flag and the optional **compressionFlags** field MUST be initialized with the compression usage information.
 
@@ -12494,7 +12494,7 @@ The PDU contents, which encapsulate a collection of output events, is populated 
 <a id="Section_3.3.5.9.4.1"></a>
 ###### 3.3.5.9.4.1 Sending Play Sound PDU
 
-The structure and fields of the Play Sound PDU are described in section [2.2.9.1.1.5](#Section_3.3.5.9.4.1), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The Play Sound PDU SHOULD<50> be sent to instruct a client to play a sound by specifying its frequency and duration. The contents of this PDU SHOULD NOT be compressed.
+The structure and fields of the Play Sound PDU are described in section [2.2.9.1.1.5](#Section_2.2.9.1.1.5), and the techniques described in section [3.3.5.1](#Section_3.3.5.1) demonstrate how to initialize the contents of the [**PDU**](#gt_protocol-data-unit-pdu). The Play Sound PDU SHOULD<50> be sent to instruct a client to play a sound by specifying its frequency and duration. The contents of this PDU SHOULD NOT be compressed.
 
 <a id="Section_3.3.5.10"></a>
 #### 3.3.5.10 Logon and Authorization Notifications
@@ -12502,16 +12502,16 @@ The structure and fields of the Play Sound PDU are described in section [2.2.9.1
 <a id="Section_3.3.5.10.1"></a>
 ##### 3.3.5.10.1 Sending Save Session Info PDU
 
-The structure and fields of the **Save Session Info PDU** are described in section [2.2.10.1](#Section_4.3).
+The structure and fields of the **Save Session Info PDU** are described in section [2.2.10.1](#Section_2.2.10.1).
 
 The three reasons for sending this [**PDU**](#gt_protocol-data-unit-pdu) are:
 
 - Notifying the client that the user has logged on (the username and domain which were used, as well as the ID of the session to which the user connected, can be included in this notification).
-- Transmitting an auto-reconnect cookie to the client (see section [1.3.1.5](#Section_3.2.1.9) for an overview of automatic reconnection).
+- Transmitting an auto-reconnect cookie to the client (see section [1.3.1.5](#Section_1.3.1.5) for an overview of automatic reconnection).
 - Informing the client of an error or warning that occurred while the user was logging on.
 The client SHOULD always be notified after the user has logged on. The INFOTYPE_LOGON (0x00000000), INFOTYPE_LOGON_LONG (0x00000001), or INFOTYPE_LOGON_PLAINNOTIFY (0x00000002) notification types MUST be used to accomplish this task.
 
-A logon notification of type INFOTYPE_LOGON or INFOTYPE_LOGON_LONG SHOULD<51> be sent if the INFO_LOGONNOTIFY (0x00000040) flag was set by the client in the **Client Info PDU** (sections [2.2.1.11](#Section_2.2.1.11.1) and [3.3.5.3.1](#Section_3.3.5.3.12)) or if the username or domain used to log on to the session is different from what was sent in the **Client Info PDU** (the original username or domain might have been invalid, resulting in the user having to re-enter its credentials at a remoted logon prompt). The LONG_CREDENTIALS_SUPPORTED (0x00000004) flag, in the **extraFlags** field of the **General Capability Set** (section [2.2.7.1.1](#Section_2.2.7.1.11)) received from the client (section [3.3.5.3.13.2](#Section_3.3.5.3.13.2)), determines whether the INFOTYPE_LOGON or INFOTYPE_LOGON_LONG type is used.
+A logon notification of type INFOTYPE_LOGON or INFOTYPE_LOGON_LONG SHOULD<51> be sent if the INFO_LOGONNOTIFY (0x00000040) flag was set by the client in the **Client Info PDU** (sections [2.2.1.11](#Section_2.2.1.11) and [3.3.5.3.1](#Section_3.3.5.3.1)) or if the username or domain used to log on to the session is different from what was sent in the **Client Info PDU** (the original username or domain might have been invalid, resulting in the user having to re-enter its credentials at a remoted logon prompt). The LONG_CREDENTIALS_SUPPORTED (0x00000004) flag, in the **extraFlags** field of the **General Capability Set** (section [2.2.7.1.1](#Section_2.2.7.1.1)) received from the client (section [3.3.5.3.13.2](#Section_3.3.5.3.13.2)), determines whether the INFOTYPE_LOGON or INFOTYPE_LOGON_LONG type is used.
 
 A logon notification of type INFOTYPE_LOGON_PLAINNOTIFY SHOULD be sent whenever a notification of type INFOTYPE_LOGON or INFOTYPE_LOGON_LONG would not be sent.
 
@@ -12557,7 +12557,7 @@ This PDU MUST NOT be sent to a client that has not indicated support for it by s
 
 An overview of the principles behind server redirection and an example of how it operates within the context of an RDP connection are presented in section [1.3.8](#Section_1.3.8).
 
-Two variants of the Server Redirection [**PDU**](#gt_protocol-data-unit-pdu) are used to force the client to direct the current connection to another server. The Standard Security variant (section [2.2.13.2](#Section_2.2.13.2)) of the Server Redirection PDU MUST be used when Enhanced RDP Security (section [5.4](#Section_5.4)) is not in effect. When Enhanced RDP Security is being used to secure the connection, the Enhanced Security variant (section [2.2.13.3](#Section_2.2.13.3.1)) of the PDU MUST be used.
+Two variants of the Server Redirection [**PDU**](#gt_protocol-data-unit-pdu) are used to force the client to direct the current connection to another server. The Standard Security variant (section [2.2.13.2](#Section_2.2.13.2)) of the Server Redirection PDU MUST be used when Enhanced RDP Security (section [5.4](#Section_5.4)) is not in effect. When Enhanced RDP Security is being used to secure the connection, the Enhanced Security variant (section [2.2.13.3](#Section_2.2.13.3)) of the PDU MUST be used.
 
 The actual contents of the Server Redirection PDU (embedded in the Standard Security or Enhanced Security variant) are contained in a Server Redirection Packet (section [2.2.13](#Section_2.2.13)). The server MUST initialize this structure with all of the information required by the client to connect to a new target server.
 
@@ -12578,9 +12578,9 @@ The steps that follow describe how a server SHOULD respond when receiving the cl
 <a id="Section_3.3.5.15.1"></a>
 ##### 3.3.5.15.1 Sending the Initiate Multitransport Request PDU
 
-The structure and fields of the Initiate Multitransport Request PDU are described in section [2.2.15.1](#Section_2.2.15.1) and the PDU MUST be initialized according to this specification. The embedded **initiator** field of the **mcsSDin** field MUST be set to the MCS server channel ID held in the Server Channel ID store (section [3.3.1.5](#Section_3.2.1.6)), while the embedded **channelId** field MUST be set to the MCS message channel ID held in the Message Channel ID store (section [3.3.1.4](#Section_3.3.1.4)). Furthermore, the embedded **flags** field of the **securityHeader** MUST contain the SEC_TRANSPORT_REQ (0x0002) flag (section [2.2.8.1.1.2.1](#Section_5)).
+The structure and fields of the Initiate Multitransport Request PDU are described in section [2.2.15.1](#Section_2.2.15.1) and the PDU MUST be initialized according to this specification. The embedded **initiator** field of the **mcsSDin** field MUST be set to the MCS server channel ID held in the Server Channel ID store (section [3.3.1.5](#Section_3.3.1.5)), while the embedded **channelId** field MUST be set to the MCS message channel ID held in the Message Channel ID store (section [3.3.1.4](#Section_3.3.1.4)). Furthermore, the embedded **flags** field of the **securityHeader** MUST contain the SEC_TRANSPORT_REQ (0x0002) flag (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)).
 
-A single Initiate Multitransport Request PDU MUST be sent to the client for each type of sideband channel being requested. A sideband channel utilizes either reliable UDP or lossy UDP as a transport protocol ([MS-RDPEMT](#Section_2.1) section 1.3) and hence only a maximum of two Initiate Multitransport Request PDUs can be sent to the client.
+A single Initiate Multitransport Request PDU MUST be sent to the client for each type of sideband channel being requested. A sideband channel utilizes either reliable UDP or lossy UDP as a transport protocol ([MS-RDPEMT](../MS-RDPEMT/MS-RDPEMT.md) section 1.3) and hence only a maximum of two Initiate Multitransport Request PDUs can be sent to the client.
 
 The server MUST save the request ID (specified in the **requestId** field), requested protocol (specified in the **requestedProtocol** field) and the security cookie (specified in the **securityCookie** field) in the Multitransport Request Data store (section [3.3.1.14](#Section_3.3.1.14)) so that the sideband initiation request can be correctly correlated with the Tunnel Create Request PDU ([MS-RDPEMT] section 2.2.2.1) or Initiate Multitransport Response PDU (section [2.2.15.2](#Section_2.2.15.2)).
 
@@ -12602,7 +12602,7 @@ The Server-Side Connection Sequence Timeout fires if more than 60 seconds have e
 <a id="Section_3.3.6.2"></a>
 #### 3.3.6.2 Auto-Reconnect Cookie Update
 
-The Auto-Reconnect Cookie Update event fires at hourly intervals and triggers the creation of an Auto-Reconnect cookie (section [5.5](#Section_1.3.1.5)). This cookie is effectively a 16-byte, cryptographically secure random number contained within a Server Auto-Reconnect Packet (section [2.2.4.2](#Section_2.2.4.2)), and it is sent to the client by using the Save Session Info PDU (section [2.2.10.1](#Section_4.3)).
+The Auto-Reconnect Cookie Update event fires at hourly intervals and triggers the creation of an Auto-Reconnect cookie (section [5.5](#Section_5.5)). This cookie is effectively a 16-byte, cryptographically secure random number contained within a Server Auto-Reconnect Packet (section [2.2.4.2](#Section_2.2.4.2)), and it is sent to the client by using the Save Session Info PDU (section [2.2.10.1](#Section_2.2.10.1)).
 
 <a id="Section_3.3.7"></a>
 ### 3.3.7 Other Local Events
@@ -12698,7 +12698,7 @@ d0 -> X.224: Type (high nibble) = 0xd = CC TPDU; credit (low nibble) = 0
 <a id="Section_4.1.3"></a>
 ### 4.1.3 Client MCS Connect Initial PDU with GCC Conference Create Request
 
-The following is an annotated dump of the **MCS Connect Initial PDU with GCC Conference Create Request** (section [2.2.1.3](#Section_3.3.5.3.3)).
+The following is an annotated dump of the **MCS Connect Initial PDU with GCC Conference Create Request** (section [2.2.1.3](#Section_2.2.1.3)).
 
 00000000 03 00 01 a0 02 f0 80 7f 65 82 01 94 04 01 01 04 ........e.......
 
@@ -13215,7 +13215,7 @@ CHANNEL_OPTION_ENCRYPT_RDP
 <a id="Section_4.1.4"></a>
 ### 4.1.4 Server MCS Connect Response PDU with GCC Conference Create Response
 
-The following is an annotated dump of the **MCS Connect Response PDU with GCC Conference Create Response** (section [2.2.1.4](#Section_3.3.5.3.4)).
+The following is an annotated dump of the **MCS Connect Response PDU with GCC Conference Create Response** (section [2.2.1.4](#Section_2.2.1.4)).
 
 00000000 03 00 01 51 02 f0 80 7f 66 82 01 45 0a 01 00 02 ...Q....f..E....
 
@@ -13612,7 +13612,7 @@ aa 71 3e 0f 54 b9 9a e4 99 68 3f 6c d6 76 84 61
 <a id="Section_4.1.5"></a>
 ### 4.1.5 Client MCS Erect Domain Request PDU
 
-The following is an annotated dump of the [MCS Erect Domain Request PDU](#Section_3.2.5.3.5) (section 2.2.1.5).
+The following is an annotated dump of the [MCS Erect Domain Request PDU](#Section_2.2.1.5) (section 2.2.1.5).
 
 00000000 03 00 00 0c 02 f0 80 04 01 00 01 00 ............
 
@@ -13717,7 +13717,7 @@ PER encoded (ALIGNED variant of BASIC-PER) PDU contents:
 <a id="Section_4.1.6"></a>
 ### 4.1.6 Client MCS Attach User Request PDU
 
-The following is an annotated dump of the [MCS Attach User Request PDU](#Section_4.1.6) (section 2.2.1.6).
+The following is an annotated dump of the [MCS Attach User Request PDU](#Section_2.2.1.6) (section 2.2.1.6).
 
 00000000 03 00 00 08 02 f0 80 28 .......(
 
@@ -13750,7 +13750,7 @@ PER encoded (ALIGNED variant of BASIC-PER) PDU contents:
 <a id="Section_4.1.7"></a>
 ### 4.1.7 Server MCS Attach-User Confirm PDU
 
-The following is an annotated dump of the [MCS Attach User Confirm PDU](#Section_3.2.5.3.7) (section 2.2.1.7).
+The following is an annotated dump of the [MCS Attach User Confirm PDU](#Section_2.2.1.7) (section 2.2.1.7).
 
 00000000 03 00 00 0b 02 f0 80 2e 00 00 06 ...........
 
@@ -13847,7 +13847,7 @@ PER encoded (ALIGNED variant of BASIC-PER) PDU contents:
 <a id="Section_4.1.8.1.1"></a>
 ##### 4.1.8.1.1 Client Join Request PDU for Channel 1007 (User Channel)
 
-The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8).
+The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8).
 
 00000000 03 00 00 0c 02 f0 80 38 00 06 03 ef .......8....
 
@@ -13956,7 +13956,7 @@ PER encoded (ALIGNED variant of BASIC-PER) PDU contents:
 <a id="Section_4.1.8.1.2"></a>
 ##### 4.1.8.1.2 Server Join Confirm PDU for Channel 1007 (User Channel)
 
-The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 2.2.1.9).
+The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 2.2.1.9).
 
 00000000 03 00 00 0f 02 f0 80 3e 00 00 06 03 ef 03 ef .......>.......
 
@@ -14126,7 +14126,7 @@ PER encoded (ALIGNED variant of BASIC-PER) PDU contents:
 <a id="Section_4.1.8.2.1"></a>
 ##### 4.1.8.2.1 Client Join Request PDU for Channel 1003 (I/O Channel)
 
-The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8).
+The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8).
 
 00000000 03 00 00 0c 02 f0 80 38 00 06 03 eb .......8....
 
@@ -14137,7 +14137,7 @@ ChannelJoinRequest::channelId = 0x03eb = 1003
 <a id="Section_4.1.8.2.2"></a>
 ##### 4.1.8.2.2 Server Join Confirm PDU for Channel 1003 (I/O Channel)
 
-The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 2.2.1.9).
+The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 2.2.1.9).
 
 00000000 03 00 00 0f 02 f0 80 3e 00 00 06 03 eb 03 eb .......>.......
 
@@ -14155,7 +14155,7 @@ ChannelJoinConfirm::channelId = 0x03eb = 1003
 <a id="Section_4.1.8.3.1"></a>
 ##### 4.1.8.3.1 Client Join Request PDU for Channel 1004 (rdpdr Channel)
 
-The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8).
+The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8).
 
 00000000 03 00 00 0c 02 f0 80 38 00 06 03 ec .......8....
 
@@ -14166,7 +14166,7 @@ ChannelJoinRequest::channelId = 0x03ec = 1004
 <a id="Section_4.1.8.3.2"></a>
 ##### 4.1.8.3.2 Server Join Confirm PDU for Channel 1004 (rdpdr Channel)
 
-The following is an annotated dump of the [Client MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 2.2.1.9).
+The following is an annotated dump of the [Client MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 2.2.1.9).
 
 00000000 03 00 00 0f 02 f0 80 3e 00 00 06 03 ec 03 ec .......>.......
 
@@ -14184,7 +14184,7 @@ ChannelJoinConfirm::channelId = 0x03ec = 1004
 <a id="Section_4.1.8.4.1"></a>
 ##### 4.1.8.4.1 Client Join Request PDU for Channel 1005 (cliprdr Channel)
 
-The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8).
+The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8).
 
 00000000 03 00 00 0c 02 f0 80 38 00 06 03 ed .......8....
 
@@ -14195,7 +14195,7 @@ ChannelJoinRequest::channelId = 0x03ed = 1005
 <a id="Section_4.1.8.4.2"></a>
 ##### 4.1.8.4.2 Server Join Confirm PDU for Channel 1005 (cliprdr Channel)
 
-The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 2.2.1.9).
+The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 2.2.1.9).
 
 00000000 03 00 00 0f 02 f0 80 3e 00 00 06 03 ed 03 ed .......>.......
 
@@ -14213,7 +14213,7 @@ ChannelJoinConfirm::channelId = 0x03ed = 1005
 <a id="Section_4.1.8.5.1"></a>
 ##### 4.1.8.5.1 Client Join Request PDU for Channel 1006 (rdpsnd Channel)
 
-The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_3.2.5.3.8) (section 2.2.1.8).
+The following is an annotated dump of the [MCS Channel Join Request PDU](#Section_2.2.1.8) (section 2.2.1.8).
 
 00000000 03 00 00 0c 02 f0 80 38 00 06 03 ee .......8....
 
@@ -14224,7 +14224,7 @@ ChannelJoinRequest::channelId = 0x03ee = 1006
 <a id="Section_4.1.8.5.2"></a>
 ##### 4.1.8.5.2 Server Join Confirm PDU for Channel 1006 (rdpsnd Channel)
 
-The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_3.3.5.3.9) (section 2.2.1.9).
+The following is an annotated dump of the [MCS Channel Join Confirm PDU](#Section_2.2.1.9) (section 2.2.1.9).
 
 00000000 03 00 00 0f 02 f0 80 3e 00 00 06 03 ee 03 ee .......>.......
 
@@ -14239,7 +14239,7 @@ ChannelJoinConfirm::channelId = 0x03ee = 1006
 <a id="Section_4.1.9"></a>
 ### 4.1.9 Client Security Exchange PDU
 
-The following is an annotated dump of the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10).
+The following is an annotated dump of the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10).
 
 00000000 03 00 00 5e 02 f0 80 64 00 06 03 eb 70 50 01 02 ...^...d....pP..
 
@@ -14418,7 +14418,7 @@ TS_SECURITY_PACKET::encryptedClientRandom
 <a id="Section_4.1.10"></a>
 ### 4.1.10 Client Info PDU
 
-The following is an annotated dump of the [Client Info PDU](#Section_2.2.1.11.1) (section 2.2.1.11).
+The following is an annotated dump of the [Client Info PDU](#Section_2.2.1.11) (section 2.2.1.11).
 
 00000000 03 00 01 ab 02 f0 80 64 00 06 03 eb 70 81 9c 48 .......d....p..H
 
@@ -14783,7 +14783,7 @@ TS_PERF_DISABLE_WALLPAPER
 <a id="Section_4.1.11"></a>
 ### 4.1.11 Server License Error PDU - Valid Client
 
-The following is an annotated dump of the **License Error (Valid Client) PDU** (section [2.2.1.12](#Section_2.2.1.12.1.2)).
+The following is an annotated dump of the **License Error (Valid Client) PDU** (section [2.2.1.12](#Section_2.2.1.12)).
 
 00000000 03 00 00 2a 02 f0 80 68 00 01 03 eb 70 1c 88 02 ...*...h....p...
 
@@ -15623,7 +15623,7 @@ Remainder of Demand Active PDU:
 <a id="Section_4.1.13"></a>
 ### 4.1.13 Client Confirm Active PDU
 
-The following is an annotated dump of the **Confirm Active PDU** (section [2.2.1.13.2](#Section_2.2.1.13.2.1)).
+The following is an annotated dump of the **Confirm Active PDU** (section [2.2.1.13.2](#Section_2.2.1.13.2)).
 
 00000000 03 00 02 07 02 f0 80 64 00 06 03 eb 70 81 f8 38 .......d....p..8
 
@@ -16510,7 +16510,7 @@ DrawGdiPlus Capability Set (40 bytes)
 <a id="Section_4.1.14"></a>
 ### 4.1.14 Client Synchronize PDU
 
-The following is an annotated dump of the **Synchronize PDU** (section [2.2.1.14](#Section_4.1.14)).
+The following is an annotated dump of the **Synchronize PDU** (section [2.2.1.14](#Section_2.2.1.14)).
 
 00000000 03 00 00 30 02 f0 80 64 00 06 03 eb 70 22 28 00 ...0...d....p"(.
 
@@ -16591,7 +16591,7 @@ ea 03 ->TS_SYNCHRONIZE_PDU::targetUser = 0x03ea
 <a id="Section_4.1.15"></a>
 ### 4.1.15 Client Control PDU - Cooperate
 
-The following is an annotated dump of the [Client Control (Cooperate) PDU](#Section_2.2.1.15.1) (section 2.2.1.15).
+The following is an annotated dump of the [Client Control (Cooperate) PDU](#Section_2.2.1.15) (section 2.2.1.15).
 
 00000000 03 00 00 34 02 f0 80 64 00 06 03 eb 70 26 08 00 ...4...d....p&..
 
@@ -16749,7 +16749,7 @@ ea 03 01 00 -> TS_SHAREDATAHEADER::shareID = 0x000103ea
 <a id="Section_4.1.17"></a>
 ### 4.1.17 Client Persistent Key List PDU
 
-The following is an annotated dump of the [Persistent Key List PDU](#Section_3.3.5.3.17) (section 2.2.1.17).
+The following is an annotated dump of the [Persistent Key List PDU](#Section_4.1.17) (section 2.2.1.17).
 
 00000000 03 00 01 0d 02 f0 80 64 00 06 03 eb 70 80 fe 08 .......d....p...
 
@@ -17040,7 +17040,7 @@ aa 8a 90 b3 -> High 32-bits of Cache 2, Key 24 (TS_BITMAPCACHE_PERSISTENT_LIST_E
 <a id="Section_4.1.18"></a>
 ### 4.1.18 Client Font List PDU
 
-The following is an annotated dump of the **Font List PDU** (section [2.2.1.18](#Section_2.2.1.18.1)).
+The following is an annotated dump of the **Font List PDU** (section [2.2.1.18](#Section_2.2.1.18)).
 
 00000000 03 00 00 34 02 f0 80 64 00 06 03 eb 70 26 08 00 ...4...d....p&..
 
@@ -17378,7 +17378,7 @@ ea 03 00 00 -> TS_CONTROL_PDU::controlId = 0x03ea = 1002
 <a id="Section_4.1.22"></a>
 ### 4.1.22 Server Font Map PDU
 
-The following is an annotated dump of the [Font Map PDU](#Section_3.2.5.3.22) (section 2.2.1.22).
+The following is an annotated dump of the [Font Map PDU](#Section_4.1.22) (section 2.2.1.22).
 
 00000000 03 00 00 34 02 f0 80 68 00 01 03 eb 70 26 08 08 ...4...h....p&..
 
@@ -17476,7 +17476,7 @@ The annotated disconnection sequence PDUs detailed in sections [4.2.1](#Section_
 <a id="Section_4.2.1"></a>
 ### 4.2.1 Client Shutdown Request PDU
 
-The following is an annotated dump of the [Shutdown Request PDU](#Section_2.2.2.1) (section 2.2.2.1).
+The following is an annotated dump of the [Shutdown Request PDU](#Section_4.2.1) (section 2.2.2.1).
 
 00000000 03 00 00 2c 02 f0 80 64 00 06 03 eb 70 1e 08 08 ...,...d....p...
 
@@ -17547,7 +17547,7 @@ ea 03 02 00 -> TS_SHAREDATAHEADER::shareID = 0x000203ea
 <a id="Section_4.2.2"></a>
 ### 4.2.2 Server Shutdown Request Denied PDU
 
-The following is an annotated dump of the [Shutdown Request Denied PDU](#Section_2.2.2.2) (section 2.2.2.2).
+The following is an annotated dump of the [Shutdown Request Denied PDU](#Section_4.2.2) (section 2.2.2.2).
 
 00000000 03 00 00 24 02 f0 80 68 00 01 03 eb 70 1e 08 08 ...$...h....p...
 
@@ -17618,7 +17618,7 @@ a6 -> TS_SHAREDATAHEADER::pad1
 <a id="Section_4.2.3"></a>
 ### 4.2.3 MCS Disconnect Provider Ultimatum PDU
 
-The following is an annotated dump of the [MCS Disconnect Provider Ultimatum PDU](#Section_2.2.2.3) (section 2.2.2.3).
+The following is an annotated dump of the [MCS Disconnect Provider Ultimatum PDU](#Section_4.2.3) (section 2.2.2.3).
 
 00000000 03 00 00 09 02 f0 80 21 80 .......!.
 
@@ -20972,7 +20972,7 @@ Content-Length: 2968
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-See sections [5.3](#Section_2.2.13.2) through [5.5](#Section_1.3.1.5) for complete details of RDP security considerations.
+See sections [5.3](#Section_5.3) through [5.5](#Section_5.5) for complete details of RDP security considerations.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -20985,7 +20985,7 @@ None.
 <a id="Section_5.3.1"></a>
 ### 5.3.1 Encryption Levels
 
-[Standard RDP Security](#Section_2.2.13.2) (section 5.3) supports four levels of encryption: Low, Client Compatible, High, and FIPS Compliant. The required Encryption Level is configured on the server.
+[Standard RDP Security](#Section_5.3) (section 5.3) supports four levels of encryption: Low, Client Compatible, High, and FIPS Compliant. The required Encryption Level is configured on the server.
 
 - Low: All data sent from the client to the server is protected by encryption based on the maximum key strength supported by the client.
 - Client Compatible: All data sent between the client and the server is protected by encryption based on the maximum key strength supported by the client.
@@ -20994,15 +20994,15 @@ None.
 <a id="Section_5.3.2"></a>
 ### 5.3.2 Negotiating the Cryptographic Configuration
 
-Clients advertise their cryptographic support (for use with [Standard RDP Security](#Section_2.2.13.2) mechanisms, as described in sections [5.3.3](#Section_5.3.3) to [5.3.8](#Section_5.3.8)) in the [Client Security Data](#Section_5) (section 2.2.1.3.3), sent to the server as part of the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). Upon receiving the client data the server will determine the cryptographic configuration to use for the session based on its configured Encryption Level and then send this selection to the client in the [Server Security Data](#Section_5) (section 2.2.1.4.3), as part of the Basic Settings Exchange phase. The client will use this information to configure its cryptographic modules.
+Clients advertise their cryptographic support (for use with [Standard RDP Security](#Section_5.3) mechanisms, as described in sections [5.3.3](#Section_5.3.3) to [5.3.8](#Section_5.3.8)) in the [Client Security Data](#Section_2.2.1.3.3) (section 2.2.1.3.3), sent to the server as part of the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). Upon receiving the client data the server will determine the cryptographic configuration to use for the session based on its configured Encryption Level and then send this selection to the client in the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3), as part of the Basic Settings Exchange phase. The client will use this information to configure its cryptographic modules.
 
 ![Determining the cryptographic configuration for a session](media/image8.png)
 
 Figure 8: Determining the cryptographic configuration for a session
 
-The Encryption Method and Encryption Level (section [5.3.1](#Section_5.4.1)) are closely related. If the Encryption Level is zero, then the Encryption Method is zero (the converse is also true). This means that if no encryption is being used for the session (an Encryption Level of zero), there is no Encryption Method being applied to the data. If the Encryption Level is greater than zero (encryption is in force for at least client-to-server traffic) then the Encryption Method is greater than zero (the converse is also true). This means that if encryption is in force for the session, then an Encryption Method is defined which specifies how to encrypt the data. Furthermore, if the Encryption Level is set to FIPS, then the Encryption Method selects only FIPS-compatible methods.
+The Encryption Method and Encryption Level (section [5.3.1](#Section_5.3.1)) are closely related. If the Encryption Level is zero, then the Encryption Method is zero (the converse is also true). This means that if no encryption is being used for the session (an Encryption Level of zero), there is no Encryption Method being applied to the data. If the Encryption Level is greater than zero (encryption is in force for at least client-to-server traffic) then the Encryption Method is greater than zero (the converse is also true). This means that if encryption is in force for the session, then an Encryption Method is defined which specifies how to encrypt the data. Furthermore, if the Encryption Level is set to FIPS, then the Encryption Method selects only FIPS-compatible methods.
 
-If the server determines that no encryption is necessary for the session, it can send the client a value of zero for the selected Encryption Method and Encryption Level. In this scenario the Security Commencement phase of the connection sequence (section [5.4.2.3](../MS-RDPELE/MS-RDPELE.md)) is not executed, with the result that the client does not send the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10). This [**PDU**](#gt_protocol-data-unit-pdu) can be dropped because the Client Random (section [5.3.4](#Section_5.3.4)) is redundant, since no security keys need to be generated. Furthermore, because no security measures are in effect, the Security Header (section 5.3.8) will not be included with any data sent on the wire, except for the [Client Info](#Section_4.1.10) (section 3.2.5.3.11) and licensing PDUs ([MS-RDPELE](../MS-RDPELE/MS-RDPELE.md)), which always contain the [Security Header](#Section_2.2.9.1.1.2) (section 2.2.9.1.1.2). To protect the confidentiality of client-to-server user data, an RDP server ensures that the negotiated Encryption Level is always greater than zero when using Standard RDP Security mechanisms.
+If the server determines that no encryption is necessary for the session, it can send the client a value of zero for the selected Encryption Method and Encryption Level. In this scenario the Security Commencement phase of the connection sequence (section [5.4.2.3](#Section_5.4.2.3)) is not executed, with the result that the client does not send the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10). This [**PDU**](#gt_protocol-data-unit-pdu) can be dropped because the Client Random (section [5.3.4](#Section_5.3.4)) is redundant, since no security keys need to be generated. Furthermore, because no security measures are in effect, the Security Header (section 5.3.8) will not be included with any data sent on the wire, except for the [Client Info](#Section_4.1.10) (section 3.2.5.3.11) and licensing PDUs ([MS-RDPELE](../MS-RDPELE/MS-RDPELE.md)), which always contain the [Security Header](#Section_2.2.9.1.1.2) (section 2.2.9.1.1.2). To protect the confidentiality of client-to-server user data, an RDP server ensures that the negotiated Encryption Level is always greater than zero when using Standard RDP Security mechanisms.
 
 <a id="Section_5.3.2.1"></a>
 #### 5.3.2.1 Cryptographic Negotiation Failures
@@ -21024,7 +21024,7 @@ If the server is not able to select an Encryption Method to send to the client, 
 
 Proprietary Certificates are used exclusively by servers that have not received an X.509 certificate from a Domain or Enterprise License Server. Every server creates a public/private key pair and then generates and stores a Proprietary Certificate containing the public key at least once at system start-up time. The certificate is only generated when one does not already exist.
 
-The server sends the Proprietary Certificate to the client in the [Server Security Data](#Section_5) (section 2.2.1.4.3) during the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). The [Proprietary Certificate](#Section_5.3.3.1) structure is detailed in section 2.2.1.4.3.1.1.
+The server sends the Proprietary Certificate to the client in the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3) during the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). The [Proprietary Certificate](#Section_5.3.3.1) structure is detailed in section 2.2.1.4.3.1.1.
 
 <a id="Section_5.3.3.1.1"></a>
 ##### 5.3.3.1.1 Terminal Services Signing Key
@@ -21225,16 +21225,16 @@ Example Java source code that shows how to use a private 64-byte asymmetric key 
 
 X.509-compliant certificates are issued to servers upon request by Domain or Enterprise License Servers and are required to issue client licenses (see [MS-RDPELE](../MS-RDPELE/MS-RDPELE.md) for more information on RDP Licensing). An X.509 Certificate Chain consists of a collection of certificates concatenated together in root-certificate-first order. This eliminates the need to scan the chain to the end to get the root certificate for starting chain validation. The last certificate is the certificate of the server; the second-to-last is the license server's certificate, and so forth. More details on the structure of the chain and the component certificates are in [MS-RDPELE] section 2.2.1.4.2.
 
-Servers send the X.509 Certificate Chain to clients in the [Server Security Data](#Section_5) (section 2.2.1.4.3) settings block during the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). A server that has not yet been issued an X.509 Certificate Chain will fall back to using a [Proprietary Certificate](#Section_5.3.3.1) (section 2.2.1.4.3.1.1). Proprietary Certificates are always used when an RDP 4.0 client connects to a server (the client version can be determined from the [Client Core Data](#Section_2.2.1.3.2) (section 2.2.1.3.2)).
+Servers send the X.509 Certificate Chain to clients in the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3) settings block during the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). A server that has not yet been issued an X.509 Certificate Chain will fall back to using a [Proprietary Certificate](#Section_5.3.3.1) (section 2.2.1.4.3.1.1). Proprietary Certificates are always used when an RDP 4.0 client connects to a server (the client version can be determined from the [Client Core Data](#Section_2.2.1.3.2) (section 2.2.1.3.2)).
 
 <a id="Section_5.3.4"></a>
 ### 5.3.4 Client and Server Random Values
 
 The client and server both generate a 32-byte random value using a cryptographically-safe pseudorandom number generator.
 
-The server sends the random value that it generated (along with its public key embedded in a certificate) to the client in the [Server Security Data](#Section_5) (section 2.2.1.4.3) during the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)).
+The server sends the random value that it generated (along with its public key embedded in a certificate) to the client in the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3) during the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)).
 
-If [RDP Standard Security](#Section_2.2.13.2) mechanisms (section 5.3) are being used, the client sends its random value to the server (encrypted with the server's public key) in the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10) as part of the RDP Security Commencement phase of the RDP Connection Sequence (section 1.3.1.1).
+If [RDP Standard Security](#Section_5.3) mechanisms (section 5.3) are being used, the client sends its random value to the server (encrypted with the server's public key) in the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10) as part of the RDP Security Commencement phase of the RDP Connection Sequence (section 1.3.1.1).
 
 ![Client and server random value exchange](media/image9.png)
 
@@ -21245,7 +21245,7 @@ The two random values are used by the client and server to generate session keys
 <a id="Section_5.3.4.1"></a>
 #### 5.3.4.1 Encrypting Client Random
 
-The client random is encrypted by the client with the server's public key (obtained from the [Server Security Data](#Section_5) (section 2.2.1.4.3)) using RSA. Mathematically the encryption operation is formulated as follows.
+The client random is encrypted by the client with the server's public key (obtained from the [Server Security Data](#Section_2.2.1.4.3) (section 2.2.1.4.3)) using RSA. Mathematically the encryption operation is formulated as follows.
 
 c = r^e mod n
 
@@ -21263,7 +21263,7 @@ The client random value is interpreted as an unsigned little-endian integer valu
 
 (bitlen / 8) + 8
 
-For example, if the public key of the server is 512 bits long, then the zeroed-out buffer is 72 bytes. This value can also be obtained from the **keylen** field in the public key structure (section [2.2.1.4.3.1.1.1](#Section_2.2.1.4.3.1.1.1)). The buffer is sent to the server in the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10).
+For example, if the public key of the server is 512 bits long, then the zeroed-out buffer is 72 bytes. This value can also be obtained from the **keylen** field in the public key structure (section [2.2.1.4.3.1.1.1](#Section_2.2.1.4.3.1.1.1)). The buffer is sent to the server in the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10).
 
 Example Java source code that shows how to use a public 64-byte asymmetric key to encrypt a 32-byte client random using RSA is presented in section [4.8](#Section_4.8). The code also shows how to use the associated private key to decrypt the ciphertext.
 
@@ -21284,7 +21284,7 @@ d = private exponent
 
 n = modulus
 
-The encrypted client random is obtained from the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10). The encrypted client random value is interpreted as an unsigned little-endian integer value when performing the decryption operation.
+The encrypted client random is obtained from the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10). The encrypted client random value is interpreted as an unsigned little-endian integer value when performing the decryption operation.
 
 <a id="Section_5.3.5"></a>
 ### 5.3.5 Initial Session Key Generation
@@ -21455,7 +21455,7 @@ At the end of this process the client and server will each possess three symmetr
 
 If the Encryption Level (section [5.4.1](#Section_5.4.1)) of the server is greater than zero, then encryption will always be in effect. At a minimum, all client-to-server traffic (except for licensing [**PDUs**](#gt_protocol-data-unit-pdu) which have optional encryption) will be encrypted and a [**MAC**](#gt_message-authentication-code-mac) will be appended to the data to ensure transmission integrity.
 
-The table which follows summarizes the possible encryption and MAC generation scenarios based on the Encryption Method and Encryption Level selected by the server (the Encryption Method values are described in section [2.2.1.4.3](#Section_5), while the Encryption Levels are described in 5.4.1) as part of the cryptographic negotiation described in section [5.3.2](#Section_5.3.2):
+The table which follows summarizes the possible encryption and MAC generation scenarios based on the Encryption Method and Encryption Level selected by the server (the Encryption Method values are described in section [2.2.1.4.3](#Section_2.2.1.4.3), while the Encryption Levels are described in 5.4.1) as part of the cryptographic negotiation described in section [5.3.2](#Section_5.3.2):
 
 | Selected Encryption Level | Selected Encryption Method | Data Encryption | MAC Generation |
 | --- | --- | --- | --- |
@@ -21497,7 +21497,7 @@ MACSignature = First64Bits(MD5(MACKeyN + Pad2 + SHAComponent))
 
 **EncryptionCount** is the cumulative encryption count, indicating how many encryptions have been carried out. It is expressed as a little-endian 32-bit integer. The descriptions for **DataLength**, **Data**, and **MacKeyN** are the same as in section [5.3.6.1](#Section_5.3.6.1).
 
-The use of the salted MAC is dictated by capability flags in the [General Capability Set](#Section_2.2.7.1.11) (section 2.2.7.1.1), sent by both client and server during the Capability Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). In addition, the presence of a salted MAC is indicated by the presence of the SEC_SECURE_CHECKSUM flag in the Security Header flags field (section [5.3.8](#Section_5.3.8)).
+The use of the salted MAC is dictated by capability flags in the [General Capability Set](#Section_2.2.7.1.1) (section 2.2.7.1.1), sent by both client and server during the Capability Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). In addition, the presence of a salted MAC is indicated by the presence of the SEC_SECURE_CHECKSUM flag in the Security Header flags field (section [5.3.8](#Section_5.3.8)).
 
 <a id="Section_5.3.6.2"></a>
 #### 5.3.6.2 FIPS
@@ -21526,7 +21526,7 @@ The encryption and the decryption keys are updated after 4,096 packets have been
 
 Generating an updated session key requires:
 
-- The initial session keys (generated as described in section [5.3.5](#Section_4.11.1)).
+- The initial session keys (generated as described in section [5.3.5](#Section_5.3.5)).
 - The current session keys (if no update has been performed, the current and initial session keys will be identical).
 - Knowledge of the RC4 key length (computed using Table 1 and the negotiated key length).
 The following sequence of steps shows how updated client and server encryption keys are generated (the same steps are used to update the client and server decryption keys). The following padding constants are used.
@@ -21590,12 +21590,12 @@ Finally, the new 40-bit or 56-bit encryption key (NewEncryptKey40 or NewEncryptK
 <a id="Section_5.3.7.2"></a>
 #### 5.3.7.2 FIPS
 
-No session key updates take place for the duration of a connection if [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are being used with a FIPS Encryption Level.
+No session key updates take place for the duration of a connection if [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are being used with a FIPS Encryption Level.
 
 <a id="Section_5.3.8"></a>
 ### 5.3.8 Packet Layout in the I/O Data Stream
 
-The usage of [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) results in a security header being present in all packets following the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10) when encryption is in force. Connection sequence [**PDUs**](#gt_protocol-data-unit-pdu) following the RDP Security Commencement phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)) and slow-path packets have the same general wire format.
+The usage of [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) results in a security header being present in all packets following the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10) when encryption is in force. Connection sequence [**PDUs**](#gt_protocol-data-unit-pdu) following the RDP Security Commencement phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)) and slow-path packets have the same general wire format.
 
 ![Slow-path packet layout](media/image10.png)
 
@@ -21615,20 +21615,20 @@ And in FIPS fast-path scenarios the packet layout is as follows.
 
 Figure 12: FIPS fast-path packet layout
 
-If no encryption is in effect, the Selected Encryption Method and Encryption Level (section [5.3.1](#Section_5.4.1)) returned to the client is zero. The Security Header will not be included with any data sent on the wire, except for the [Client Info](#Section_2.2.1.11.1) (section 2.2.1.11) and licensing PDUs (for an example of a licensing PDU section [2.2.1.12](#Section_2.2.1.12.1.2)), which always contain the Security Header.
+If no encryption is in effect, the Selected Encryption Method and Encryption Level (section [5.3.1](#Section_5.3.1)) returned to the client is zero. The Security Header will not be included with any data sent on the wire, except for the [Client Info](#Section_2.2.1.11) (section 2.2.1.11) and licensing PDUs (for an example of a licensing PDU section [2.2.1.12](#Section_2.2.1.12)), which always contain the Security Header.
 
 See sections [2.2.8.1](#Section_2.2.8.1) and [2.2.9.1](#Section_2.2.9.1) for more details on slow and fast-path packet formats and the structure of the Security Header in both of these scenarios.
 
 <a id="Section_5.4"></a>
 ## 5.4 Enhanced RDP Security
 
-When Enhanced RDP Security is used, RDP traffic is no longer protected by using the techniques described in section [5.3](#Section_2.2.13.2). Instead, all security operations (such as encryption and decryption, data integrity checks, and [**server authentication**](#gt_server-authentication)) are implemented by one of the following External Security Protocols:
+When Enhanced RDP Security is used, RDP traffic is no longer protected by using the techniques described in section [5.3](#Section_5.3). Instead, all security operations (such as encryption and decryption, data integrity checks, and [**server authentication**](#gt_server-authentication)) are implemented by one of the following External Security Protocols:
 
 - TLS 1.0 ([[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324))
 - TLS 1.1 ([[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474))
 - TLS 1.2 ([[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803))
 - TLS 1.3 ([[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431))
-- CredSSP ([MS-CSSP](#Section_5))
+- CredSSP ([MS-CSSP](../MS-CSSP/MS-CSSP.md))
 - RDSTLS (section [5.4.5.3](#Section_5.4.5.3))
 - RDS AAD Auth (section [5.4.5.4](#Section_5.4.5.4))
 The benefit of using an External Security Protocol is that RDP developers no longer need to manually implement protocol security mechanisms, but can instead rely on well-known and proven security protocol packages (such as the Schannel Security Package which implements SSL, see [[MSDN-SCHANNEL]](https://go.microsoft.com/fwlink/?LinkId=90121)) to provide end-to-end security.
@@ -21638,17 +21638,17 @@ Another key benefit of Enhanced RDP Security is that it enables the use of [**Ne
 <a id="Section_5.4.1"></a>
 ### 5.4.1 Encryption Levels
 
-[Enhanced RDP Security](#Section_5.4) (section 5.4) supports a subset of the encryption levels used by [Standard RDP Security](#Section_5.4.1) (section 5.3.1). The required Encryption Level is configured on the server.
+[Enhanced RDP Security](#Section_5.4) (section 5.4) supports a subset of the encryption levels used by [Standard RDP Security](#Section_5.3.1) (section 5.3.1). The required Encryption Level is configured on the server.
 
 - Client Compatible: All data sent between the client and the server is protected using encryption techniques negotiated through mechanisms defined by the negotiated security protocol.
 - High: All data sent between the client and the server is protected using encryption techniques which employ at least a 128-bit symmetric key negotiated through mechanisms defined by the negotiated security protocol. The server enforces the key strength, and clients that do not support 128-bit symmetric keys cannot connect.
 - FIPS: All data sent between the client and server is protected by the negotiated security protocol using the following Federal Information Processing Standard 140-1 validated methods: RSA for key exchange, Triple DES for bulk encryption, and SHA-1 for any hashing operations. Clients that do not support these methods cannot connect.
-When a client connects to a server configured for Enhanced RDP Security, the selected encryption level returned to the client is ENCRYPTION_LEVEL_NONE (0). This is due to the fact that the encryption for the session is provided by an [External Security Protocol](#Section_5) (section 5.4.5) and double-encryption of the RDP traffic (although possible) is not desirable from a performance standpoint.
+When a client connects to a server configured for Enhanced RDP Security, the selected encryption level returned to the client is ENCRYPTION_LEVEL_NONE (0). This is due to the fact that the encryption for the session is provided by an [External Security Protocol](#Section_5.4.5) (section 5.4.5) and double-encryption of the RDP traffic (although possible) is not desirable from a performance standpoint.
 
 <a id="Section_5.4.2"></a>
 ### 5.4.2 Security-Enhanced Connection Sequence
 
-When [Enhanced RDP Security](#Section_5.4) (section 5.4) is being used, the connection sequence is changed to incorporate the possible use of an [External Security Protocol](#Section_5) (section 5.4.5). A brief overview of the connection sequence changes are described in section [1.3.1.2](#Section_5.4.2). The two variations of the Security-Enhanced Connection Sequence are the [Negotiation-Based Approach](#Section_5.4.2.1) (section 5.4.2.1) and the [Direct Approach](#Section_5.4.2.2) (section 5.4.2.2).
+When [Enhanced RDP Security](#Section_5.4) (section 5.4) is being used, the connection sequence is changed to incorporate the possible use of an [External Security Protocol](#Section_5.4.5) (section 5.4.5). A brief overview of the connection sequence changes are described in section [1.3.1.2](#Section_1.3.1.2). The two variations of the Security-Enhanced Connection Sequence are the [Negotiation-Based Approach](#Section_5.4.2.1) (section 5.4.2.1) and the [Direct Approach](#Section_5.4.2.2) (section 5.4.2.2).
 
 <a id="Section_5.4.2.1"></a>
 #### 5.4.2.1 Negotiation-Based Approach
@@ -21657,20 +21657,20 @@ The client advertises the security protocols which it supports by appending an [
 
 Upon receipt of the RDP Negotiation Request, the server examines the client request and selects the protocol to use. The server indicates its response to the client by appending an [RDP Negotiation Response](#Section_2.2.1.2.1) (section 2.2.1.2.1) structure to the X.224 Connection Confirm PDU (section [2.2.1.2](#Section_2.2.1.2)). If the server does not support any of the protocols requested by the client, or if there was an error setting up the External Cryptographic Protocol Provider, then the server appends an [RDP Negotiation Failure](#Section_2.2.1.2.2) (section 2.2.1.2.2) structure to the X.224 Connection Confirm PDU.
 
-If the server selects an External Security Protocol via the RDP Negotiation Response and the client accepts the server's choice, then the security protocol is instantiated by the client by calling into an External Cryptographic Protocol Provider. Once the [External Security Protocol](#Section_5) (section 5.4.5) handshake has successfully run to completion, the RDP messages resume, continuing with (a) the [MCS Connect Initial PDU](#Section_3.3.5.3.3) (section 2.2.1.3); or (b) the Early User Authorization Result PDU (section [2.2.10.2](#Section_2.2.10.2)) followed by the MCS Connect Initial PDU. From this point all RDP traffic is encrypted using the External Security Protocol.
+If the server selects an External Security Protocol via the RDP Negotiation Response and the client accepts the server's choice, then the security protocol is instantiated by the client by calling into an External Cryptographic Protocol Provider. Once the [External Security Protocol](#Section_5.4.5) (section 5.4.5) handshake has successfully run to completion, the RDP messages resume, continuing with (a) the [MCS Connect Initial PDU](#Section_2.2.1.3) (section 2.2.1.3); or (b) the Early User Authorization Result PDU (section [2.2.10.2](#Section_2.2.10.2)) followed by the MCS Connect Initial PDU. From this point all RDP traffic is encrypted using the External Security Protocol.
 
 ![Negotiation-based security-enhanced connection sequence](media/image13.png)
 
 Figure 13: Negotiation-based security-enhanced connection sequence
 
-Because both the RDP Negotiation Request and RDP Negotiation Response are initially exchanged in the clear, they are re-exchanged in the reverse direction after the External Security Protocol handshake as part of the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)). This step ensures that no tampering has taken place. The client replays the server's protocol choice in the [Client Core Data](#Section_2.2.1.3.2) (section 2.2.1.3.2), while the server replays the client's requested protocols in the [Server Core Data](#Section_2.2.1.4.2) (section 2.2.1.4.2).
+Because both the RDP Negotiation Request and RDP Negotiation Response are initially exchanged in the clear, they are re-exchanged in the reverse direction after the External Security Protocol handshake as part of the Basic Settings Exchange phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)). This step ensures that no tampering has taken place. The client replays the server's protocol choice in the [Client Core Data](#Section_2.2.1.3.2) (section 2.2.1.3.2), while the server replays the client's requested protocols in the [Server Core Data](#Section_2.2.1.4.2) (section 2.2.1.4.2).
 
 <a id="Section_5.4.2.2"></a>
 #### 5.4.2.2 Direct Approach
 
 The [Negotiation-Based Approach](#Section_5.4.2.1) (specified in section 5.4.2.1) aims to have the client and server agree on a security protocol to use for the connection. The fact that the X.224 messages are unencrypted helps to ensure backward compatibility with prior versions of RDP servers, as the packets can always be read. However, the fact that the X.224 PDUs are unencrypted is also a threat because an attacker can seek to compromise or take down the server by sending malformed X.224 PDUs. Hence the goal of the Direct Approach is to ensure that all RDP traffic is protected.
 
-When using the Direct Approach, no negotiation of the security protocol takes place. The client and server are hard-coded to use the Credential Security Support Provider (CredSSP) Protocol (section [5.4.5](#Section_5)) when a connection is initiated. The Early User Authorization Result PDU (section [2.2.10.2](#Section_2.2.10.2)) is not supported in the Direct Approach. Once the security protocol handshake has completed successfully, the RDP Connection Sequence begins, starting with the X.224 messages which form the Connection Initiation phase (section [1.3.1.1](#Section_1.3)). From this point all RDP traffic is encrypted using the CredSSP External Security Protocol.
+When using the Direct Approach, no negotiation of the security protocol takes place. The client and server are hard-coded to use the Credential Security Support Provider (CredSSP) Protocol (section [5.4.5](#Section_5.4.5)) when a connection is initiated. The Early User Authorization Result PDU (section [2.2.10.2](#Section_2.2.10.2)) is not supported in the Direct Approach. Once the security protocol handshake has completed successfully, the RDP Connection Sequence begins, starting with the X.224 messages which form the Connection Initiation phase (section [1.3.1.1](#Section_1.3.1.1)). From this point all RDP traffic is encrypted using the CredSSP External Security Protocol.
 
 The [RDP Negotiation Request](#Section_2.2.1.1.1) (section 2.2.1.1.1) MUST be appended to the X.224 Connection Request PDU (section [2.2.1.1](#Section_2.2.1.1)) and the requested protocol list MUST contain the PROTOCOL_HYBRID (0x00000002) flag identifying the CredSSP protocol (section 2.2.1.1.1). If this is not the case, the server will append an [RDP Negotiation Failure](#Section_2.2.1.2.2) (section 2.2.1.2.2) to the X.224 Connection Confirm PDU (section [2.2.1.2](#Section_2.2.1.2)) with a failure code of INCONSISTENT_FLAGS (0x04). Similarly, the server MUST indicate that CredSSP is the selected protocol in the [RDP Negotiation Response](#Section_2.2.1.2.1) (section 2.2.1.2.1) which is appended to the X.224 Connection Confirm PDU.
 
@@ -21683,22 +21683,22 @@ As specified in the Negotiation-Based Approach, the client and server also confi
 <a id="Section_5.4.2.3"></a>
 #### 5.4.2.3 Changes to the Security Commencement Phase
 
-If [Standard RDP Security](#Section_2.2.13.2) mechanisms are not being used in conjunction with an External Security protocol (that is, the selected Encryption Level described in section [5.3.2](#Section_5.3.2) is ENCRYPTION_LEVEL_NONE (0)), then the Security Commencement phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3)) is not executed, with the result that the client does not send the [Security Exchange PDU](#Section_2.2.1.10.1) (section 2.2.1.10). This [**PDU**](#gt_protocol-data-unit-pdu) can be dropped because the Client Random is redundant in this case because encryption for the connection is only provided by the [External Security Protocol](#Section_5) (section 5.4.5).
+If [Standard RDP Security](#Section_5.3) mechanisms are not being used in conjunction with an External Security protocol (that is, the selected Encryption Level described in section [5.3.2](#Section_5.3.2) is ENCRYPTION_LEVEL_NONE (0)), then the Security Commencement phase of the RDP Connection Sequence (section [1.3.1.1](#Section_1.3.1.1)) is not executed, with the result that the client does not send the [Security Exchange PDU](#Section_2.2.1.10) (section 2.2.1.10). This [**PDU**](#gt_protocol-data-unit-pdu) can be dropped because the Client Random is redundant in this case because encryption for the connection is only provided by the [External Security Protocol](#Section_5.4.5) (section 5.4.5).
 
 <a id="Section_5.4.2.4"></a>
 #### 5.4.2.4 Disabling Forced Encryption of Licensing Packets
 
-Encryption of licensing [**PDUs**](#gt_protocol-data-unit-pdu) is optional when [Standard RDP Security](#Section_2.2.13.2) mechanisms (section 5.3) are being used. However, if an [External Security Protocol](#Section_5) (section 5.4.5) is being used, then the server and client do not need to ever encrypt any licensing packets because the External Security Protocol will encrypt them. For this reason, the SEC_LICENSE_ENCRYPT_CS (0x0200) and SEC_LICENSE_ENCRYPT_SC (0x0200) flags (section [2.2.8.1.1.2.1](#Section_5)) do not need to be set in the Security Header that is always attached to licensing packets.
+Encryption of licensing [**PDUs**](#gt_protocol-data-unit-pdu) is optional when [Standard RDP Security](#Section_5.3) mechanisms (section 5.3) are being used. However, if an [External Security Protocol](#Section_5.4.5) (section 5.4.5) is being used, then the server and client do not need to ever encrypt any licensing packets because the External Security Protocol will encrypt them. For this reason, the SEC_LICENSE_ENCRYPT_CS (0x0200) and SEC_LICENSE_ENCRYPT_SC (0x0200) flags (section [2.2.8.1.1.2.1](#Section_2.2.8.1.1.2.1)) do not need to be set in the Security Header that is always attached to licensing packets.
 
 <a id="Section_5.4.3"></a>
 ### 5.4.3 Encrypting and Decrypting the I/O Data Stream
 
-Encryption and decryption of RDP traffic is only carried out by the [External Security Protocol](#Section_5) (section 5.4.5) layer. Double-encryption of data does not take place.
+Encryption and decryption of RDP traffic is only carried out by the [External Security Protocol](#Section_5.4.5) (section 5.4.5) layer. Double-encryption of data does not take place.
 
 <a id="Section_5.4.4"></a>
 ### 5.4.4 Packet Layout in the I/O Data Stream
 
-Because RDP encryption is not used in the presence of an [External Security Protocol](#Section_5) (section 5.4.5) layer, the security header data (section 5.4.4) is not present in any RDP traffic (except for the [Client Info](#Section_2.2.1.11.1) (section 2.2.1.11) and licensing [**PDUs**](#gt_protocol-data-unit-pdu)). All of the RDP traffic which is encrypted by the External Security Protocol is wrapped by headers determined by the protocol specification.
+Because RDP encryption is not used in the presence of an [External Security Protocol](#Section_5.4.5) (section 5.4.5) layer, the security header data (section 5.4.4) is not present in any RDP traffic (except for the [Client Info](#Section_2.2.1.11) (section 2.2.1.11) and licensing [**PDUs**](#gt_protocol-data-unit-pdu)). All of the RDP traffic which is encrypted by the External Security Protocol is wrapped by headers determined by the protocol specification.
 
 For example, if SSL is used as the External Security Protocol, an encrypted RDP slow-path packet would appear as follows.
 
@@ -21717,7 +21717,7 @@ Notice that in both of these cases, the security header data is missing. See sec
 <a id="Section_5.4.5"></a>
 ### 5.4.5 External Security Protocols Used By RDP
 
-RDP supports seven External Security Protocols: TLS 1.0 ([[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324)), TLS 1.1 ([[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474))<53>, TLS 1.2 ([[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803))<54>, TLS 1.3 ([[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431)),<55> the Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](#Section_5),<56> RDSTLS (section [5.4.5.3](../MS-CSSP/MS-CSSP.md)), and RDS AAD Auth (section [5.4.5.4](../MS-CSSP/MS-CSSP.md)). All of the TLS variants and the CredSSP protocol require external infrastructure, such as authentication certificates (TLS and CredSSP) or Key Distribution Centers (CredSSP), to run successfully. These resources are opaque to RDP and left to implementers to provide, set up, and maintain.
+RDP supports seven External Security Protocols: TLS 1.0 ([[RFC2246]](https://go.microsoft.com/fwlink/?LinkId=90324)), TLS 1.1 ([[RFC4346]](https://go.microsoft.com/fwlink/?LinkId=90474))<53>, TLS 1.2 ([[RFC5246]](https://go.microsoft.com/fwlink/?LinkId=129803))<54>, TLS 1.3 ([[RFC8446]](https://go.microsoft.com/fwlink/?linkid=2147431)),<55> the Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md),<56> RDSTLS (section [5.4.5.3](#Section_5.4.5.3)), and RDS AAD Auth (section [5.4.5.4](#Section_5.4.5.4)). All of the TLS variants and the CredSSP protocol require external infrastructure, such as authentication certificates (TLS and CredSSP) or Key Distribution Centers (CredSSP), to run successfully. These resources are opaque to RDP and left to implementers to provide, set up, and maintain.
 
 <a id="Section_5.4.5.1"></a>
 #### 5.4.5.1 Transport Layer Security (TLS)
@@ -21727,7 +21727,7 @@ TLS 1.0, 1.1, 1.2, and 1.3 are represented by the PROTOCOL_SSL (0x00000001) flag
 <a id="Section_5.4.5.2"></a>
 #### 5.4.5.2 CredSSP
 
-[CredSSP](#Section_5) is represented by the PROTOCOL_HYBRID (0x00000002) and PROTOCOL_HYBRID_EX (0x00000008) flags in the [RDP Negotiation Request](#Section_2.2.1.1.1) (section 2.2.1.1.1) and [RDP Negotiation Response](#Section_2.2.1.2.1) (section 2.2.1.2.1) structures. The Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](#Section_5) is essentially the amalgamation of TLS with Kerberos and NT LAN Manager (NTLM). Besides enabling authentication of the remote computer's identity, the Credential Security Support Provider (CredSSP) Protocol also facilitates user authentication and the transfer of user credentials from client to server, hence enabling single-sign-on scenarios.
+[CredSSP](#Section_5.4.5) is represented by the PROTOCOL_HYBRID (0x00000002) and PROTOCOL_HYBRID_EX (0x00000008) flags in the [RDP Negotiation Request](#Section_2.2.1.1.1) (section 2.2.1.1.1) and [RDP Negotiation Response](#Section_2.2.1.2.1) (section 2.2.1.2.1) structures. The Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md) is essentially the amalgamation of TLS with Kerberos and NT LAN Manager (NTLM). Besides enabling authentication of the remote computer's identity, the Credential Security Support Provider (CredSSP) Protocol also facilitates user authentication and the transfer of user credentials from client to server, hence enabling single-sign-on scenarios.
 
 When the Credential Security Support Provider (CredSSP) Protocol begins execution, the TLS handshake will always be executed. Once a TLS channel has been successfully established (the identity of the server could have been authenticated in the process), Kerberos or NTLM will be used within the TLS channel to authenticate the user (and the server as well if Kerberos is being used). Once Kerberos or NTLM has completed successfully, the user's credentials are sent to the server. Traffic on the wire remains encrypted with TLS and is wrapped by TLS headers. There is no double-encryption of traffic because the Kerberos (or NTLM) session is securely bound to the TLS session.
 
@@ -21807,7 +21807,7 @@ The Automatic Reconnection feature allows a client to reconnect to an existing s
 - The user logs in to a new or existing session. As soon as the user has been authenticated, a [Server Auto-Reconnect Packet](#Section_2.2.4.2) (section 2.2.4.2) is generated by the server and sent to the client in the [Save Session Info PDU](#Section_4.3) (section 2.2.10.1). The Auto-Reconnect Packet (also called the auto-reconnect cookie) contains a 16-byte cryptographically secure random number (called the auto-reconnect random) and the ID of the session to which the user has connected.
 - The client receives the cookie and stores it in memory, never allowing programmatic access to it.
 - In the case of a disconnection due to a network error, the client attempts to reconnect to the server by trying to reconnect continuously or for a predetermined number of times. Once it has connected, the client and server can exchange large random numbers (the client and server random specified in section [5.3.4](#Section_5.3.4)). If [Enhanced RDP Security](#Section_5.4) (section 5.4) is in effect, no client random is sent to the server (section [5.3.2](#Section_5.3.2)).
-- The client derives a 16-byte security verifier from the random number contained in the auto-reconnect cookie received in Step 2. This security verifier is wrapped in a [Client Auto-Reconnect Packet](#Section_2.2.4.3) (section 2.2.4.3) and sent to the server as part of the extended information (section [2.2.1.11.1.1.1](#Section_4.1.10)) of the [Client Info PDU](#Section_2.2.1.11.1) (section 2.2.1.11).
+- The client derives a 16-byte security verifier from the random number contained in the auto-reconnect cookie received in Step 2. This security verifier is wrapped in a [Client Auto-Reconnect Packet](#Section_2.2.4.3) (section 2.2.4.3) and sent to the server as part of the extended information (section [2.2.1.11.1.1.1](#Section_4.1.10)) of the [Client Info PDU](#Section_2.2.1.11) (section 2.2.1.11).
 The auto-reconnect random is used to key the HMAC function ([[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314)), which uses MD5 as the iterative hash function. The security verifier is derived by applying the HMAC to the client random received in Step 3.
 
 SecurityVerifier = HMAC(AutoReconnectRandom, ClientRandom)
@@ -21947,7 +21947,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <50> Section 3.3.5.9.4.1: The Play Sound PDU is not sent by Windows 7 and Windows Server 2008 R2 Remote Desktop implementations due to architectural changes in the underlying driver subsystem. Instead, all system and application-generated beeps are dispatched to a client by using the RDP audio redirection protocol specified in [MS-RDPEA]. If a client does not support RDP audio redirection, it will not receive any beep notifications.
 
-<51> Section 3.3.5.10.1: Microsoft RDP 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 8.0, 8.1, 10.0, 10.1, 10.2, 10.3, 10.4, and 10.5 servers send the INFOTYPE_LOGON or INFOTYPE_LOGON_LONG notification if the INFO_LOGONNOTIFY and INFO_AUTOLOGON flag was set by the client in the **Client Info PDU** (section [2.2.1.11](#Section_2.2.1.11.1)) or if the username or domain used to log on to the session is different from what was sent in the Client Info PDU.
+<51> Section 3.3.5.10.1: Microsoft RDP 5.0, 5.1, 5.2, 6.0, 6.1, 7.0, 7.1, 8.0, 8.1, 10.0, 10.1, 10.2, 10.3, 10.4, and 10.5 servers send the INFOTYPE_LOGON or INFOTYPE_LOGON_LONG notification if the INFO_LOGONNOTIFY and INFO_AUTOLOGON flag was set by the client in the **Client Info PDU** (section [2.2.1.11](#Section_2.2.1.11)) or if the username or domain used to log on to the session is different from what was sent in the Client Info PDU.
 
 <52> Section 4.11: These features are available only after installation of the updates in [[MSKB-5017380]](https://go.microsoft.com/fwlink/?linkid=2205486), [[MSKB-5017381]](https://go.microsoft.com/fwlink/?linkid=2205487), [[MSKB-5017383]](https://go.microsoft.com/fwlink/?linkid=2205488).
 

@@ -4868,7 +4868,7 @@ packet-beta
 <a id="Section_2.2.5"></a>
 ### 2.2.5 Callback Messages
 
-Callbacks are the messages sent by the server to the client and function in the same manner as the regular messages. They are often sent a single message buffer. The header for these messages is explained in section [2.2.5.1](#Section_3.1.5.18)
+Callbacks are the messages sent by the server to the client and function in the same manner as the regular messages. They are often sent a single message buffer. The header for these messages is explained in section [2.2.5.1](#Section_2.2.5.1)
 
 <a id="Section_2.2.5.1"></a>
 #### 2.2.5.1 LocalAnimationCallback_OnComplete
@@ -5597,7 +5597,7 @@ The Visual object represents a node in a rendering tree. Visuals have a coordina
 
 The Visual_Create message completes construction of a new visual.
 
-The fields of the Visual_Create are specified in section [2.2.4.6.1](#Section_2.2.4.6.10).
+The fields of the Visual_Create are specified in section [2.2.4.6.1](#Section_2.2.4.6.1).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -6437,7 +6437,7 @@ The animation object allows a client to describe an animation to the server and 
 <a id="Section_3.1.5.18.1"></a>
 ##### 3.1.5.18.1 Animation_AddCompletionLink
 
-The Animation_AddCompletionLink message arranges for an animation to be auto-played as the result of another animation completing normally. The fields of the Animation_AddCompletionLink are specified in section [2.2.4.17.1](#Section_2.2.4.17.13).
+The Animation_AddCompletionLink message arranges for an animation to be auto-played as the result of another animation completing normally. The fields of the Animation_AddCompletionLink are specified in section [2.2.4.17.1](#Section_2.2.4.17.1).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -6446,7 +6446,7 @@ The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
 The Animation_SetEaseOut message changes the given keyframes across all sequences in the animation to use an Ease Out interpolation.
 
-The fields of the Animation_SetEaseOut are specified in section [2.2.4.17.2](#Section_2.2.4.17.25).
+The fields of the Animation_SetEaseOut are specified in section [2.2.4.17.2](#Section_2.2.4.17.2).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -6455,7 +6455,7 @@ The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
 The Animation_SetEaseIn message changes the given keyframes across all sequences in the animation to use an Ease In interpolation.
 
-The fields of the Animation_SetEaseIn are specified in section [2.2.4.17.3](#Section_2.2.4.17.31).
+The fields of the Animation_SetEaseIn are specified in section [2.2.4.17.3](#Section_2.2.4.17.3).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -6853,7 +6853,7 @@ The XeDevice class is the concrete implementation type for a server rendering de
 
 The XeDevice_Create message completes construction of a new device. Anything that could potentially return an error can be handled in this second stage.
 
-The fields of the XeDevice_Create are specified in section [2.2.4.22.1](#Section_2.2.4.22.11).
+The fields of the XeDevice_Create are specified in section [2.2.4.22.1](#Section_2.2.4.22.1).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7153,7 +7153,7 @@ The Dx9Device class is an abstract implementation type for a server rendering de
 
 The Dx9Device_Stop message stops rendering the current generation on this device.
 
-The fields of the Dx9Device_Stop are specified in section [2.2.4.25.1](#Section_2.2.4.25.11).
+The fields of the Dx9Device_Stop are specified in section [2.2.4.25.1](#Section_2.2.4.25.1).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7268,7 +7268,7 @@ The common header fields are specified in section [2.2.4](#Section_2.2.4).
 <a id="Section_3.1.5.27"></a>
 #### 3.1.5.27 Callback Messages
 
-Callbacks are the messages sent by the server to the client. These messages work in the same manner as the regular messages and are often sent a single message buffer. The header for these messages is the same as explained in section [2.2.5.1](#Section_3.1.5.18)
+Callbacks are the messages sent by the server to the client. These messages work in the same manner as the regular messages and are often sent a single message buffer. The header for these messages is the same as explained in section [2.2.5.1](#Section_2.2.5.1)
 
 <a id="Section_3.1.5.27.1"></a>
 ##### 3.1.5.27.1 LocalAnimationCallback_OnComplete
@@ -7279,7 +7279,7 @@ The target MUST be the ID of a valid animation.
 
 The **flAnimationProgress** field indicates the percentage of animation sequence that is completed when the animation stopped. The number MUST be between 0.0 and 1.0.
 
-The fields of the LocalAnimationCallback_OnComplete are specified in section [2.2.5.1](#Section_3.1.5.18).
+The fields of the LocalAnimationCallback_OnComplete are specified in section [2.2.5.1](#Section_2.2.5.1).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7290,7 +7290,7 @@ The LocalSoundBufferCallback_OnSoundBufferReady message notifies the listener th
 
 The **idTarget** field MUST be a valid ID of a SoundBuffer.
 
-The fields of the LocalSoundBufferCallback_OnSoundBufferReady are specified in section [2.2.5.2](#Section_2.2.4.19).
+The fields of the LocalSoundBufferCallback_OnSoundBufferReady are specified in section [2.2.5.2](#Section_2.2.5.2).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7301,7 +7301,7 @@ The LocalSoundBufferCallback_OnSoundBufferLost message notifies the listener tha
 
 The **idTarget** field MUST be a valid ID of a SoundBuffer.
 
-The fields of the LocalSoundBufferCallback_OnSoundBufferLost SetVolume are specified in section [2.2.5.3](#Section_2.2.4.19).
+The fields of the LocalSoundBufferCallback_OnSoundBufferLost SetVolume are specified in section [2.2.5.3](#Section_2.2.5.3).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7314,7 +7314,7 @@ The **target** field MUST be the ID of a valid HostWindow.
 
 The **vk** field MUST be a value in the range of 1 to 254.
 
-The fields of the LocalHostWindowCallback_OnRawExtenderInput are specified in section [2.2.5.4](#Section_3.1.5.27.4).
+The fields of the LocalHostWindowCallback_OnRawExtenderInput are specified in section [2.2.5.4](#Section_2.2.5.4).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7336,7 +7336,7 @@ The LocalHostWindowCallback_OnBeginKeyboardInput message notifies the listener t
 
 The **target** field MUST be the ID of a valid HostWindow.
 
-The fields of the LocalHostWindowCallback_OnBeginKeyboardInput are specified in section [2.2.5.6](#Section_3.1.5.24).
+The fields of the LocalHostWindowCallback_OnBeginKeyboardInput are specified in section [2.2.5.6](#Section_2.2.5.6).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7347,7 +7347,7 @@ The LocalRenderPortCallback_OnBatchProcessed message notifies the listener that 
 
 The **uBatchCompleted** field MUST be the idBuffer that is specified in a previously sent BufferInfo message.
 
-The fields of the LocalRenderPortCallback_OnBatchProcessed are specified in section [2.2.5.7](#Section_3.1.5.27.7).
+The fields of the LocalRenderPortCallback_OnBatchProcessed are specified in section [2.2.5.7](#Section_2.2.5.7).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 
@@ -7367,7 +7367,7 @@ The LocalAnimationCallback_OnComplete message notifies the listener that the ani
 
 The **target** field MUST be the ID of a valid DataBuffer.
 
-The fields of the LocalDataBufferCallback_OnComplete are specified in section [2.2.5.9](#Section_3.1.5.2).
+The fields of the LocalDataBufferCallback_OnComplete are specified in section [2.2.5.9](#Section_2.2.5.9).
 
 The common header fields are specified in section [2.2.4](#Section_2.2.4).
 

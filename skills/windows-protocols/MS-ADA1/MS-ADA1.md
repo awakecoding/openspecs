@@ -418,7 +418,7 @@ Active Directory Schema Attributes A-L contains a partial list of the objects th
 
 [JFIF] Hamilton, E., "JPEG File Interchange Format, Version 1.02", September 1992, [http://www.w3.org/Graphics/JPEG/jfif.txt](https://go.microsoft.com/fwlink/?LinkId=89925)
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_2)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
 [MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
@@ -4830,7 +4830,7 @@ Version-Specific Behavior: First implemented on Windows 2000 Server.
 <a id="Section_2.147"></a>
 ## 2.147 Attribute defaultObjectCategory
 
-This attribute specifies the value to use for the objectCategory attribute (see [MS-ADA3](#Section_2) section 2.39) if one is not specified on object instantiation. For more information on the defaultObjectCategory attribute, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.2.4.8.
+This attribute specifies the value to use for the objectCategory attribute (see [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.39) if one is not specified on object instantiation. For more information on the defaultObjectCategory attribute, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 3.1.1.2.4.8.
 
 cn: Default-Object-Category
 
@@ -11451,7 +11451,7 @@ Version-Specific Behavior: First implemented on Windows 2000 Server.
 <a id="Section_2.365"></a>
 ## 2.365 Attribute localizationDisplayId
 
-This attribute is used to index the Extrts.mc file to get the localized [displayName](#Section_2.54) for the objects, for UI purposes.
+This attribute is used to index the Extrts.mc file to get the localized [displayName](#Section_2.175) for the objects, for UI purposes.
 
 cn: Localization-Display-Id
 
@@ -11827,7 +11827,7 @@ The schemaFlagsEx attribute was added to this attribute definition in Windows Se
 <a id="Section_2.377"></a>
 ## 2.377 Attribute logonWorkstation
 
-For more information, see the userWorkstations attribute in [MS-ADA3](#Section_2).
+For more information, see the userWorkstations attribute in [MS-ADA3](../MS-ADA3/MS-ADA3.md).
 
 cn: Logon-Workstation
 

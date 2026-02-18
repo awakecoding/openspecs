@@ -491,7 +491,7 @@ DIGIT, DQUOTE, and ALPHA are as specified in [RFC4234] appendix B.
 
 [**UUID**](#gt_universally-unique-identifier-uuid) represents the string form of a UUID as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) section 3.
 
-Each KNOWNCOLUMNID maps to a property of an [**event class**](#gt_event-class) or a subscription property.<1> These are specified in section [3.1.1.1](#Section_3.1.1.1) and section [3.1.1.2](#Section_3.1.4.4).
+Each KNOWNCOLUMNID maps to a property of an [**event class**](#gt_event-class) or a subscription property.<1> These are specified in section [3.1.1.1](#Section_3.1.1.1) and section [3.1.1.2](#Section_3.1.1.2).
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Application-Specific Properties
@@ -557,7 +557,7 @@ ApplicationID = CurlyBraceGuidString
 <a id="Section_2.2.7"></a>
 ### 2.2.7 SubscriptionCollectionIdentifier
 
-The SubscriptionCollectionIdentifier is used to identify a [subscription](#Section_3.1.4.4) in a subscription collection (see section [3.1.4.6.2](#Section_3.1.4.6.2)). The format of the identifier depends on the version of the protocol that is implemented by the server (see section [3.1.4.10.1](#Section_3.1.4.10.1)).
+The SubscriptionCollectionIdentifier is used to identify a [subscription](#Section_3.1.1.2) in a subscription collection (see section [3.1.4.6.2](#Section_3.1.4.6.2)). The format of the identifier depends on the version of the protocol that is implemented by the server (see section [3.1.4.10.1](#Section_3.1.4.10.1)).
 
 The following is the ABNF syntax [[RFC4234]](https://go.microsoft.com/fwlink/?LinkId=90462) for these identifiers on servers that implement protocol version 1.
 
@@ -669,11 +669,11 @@ The [**server**](#gt_server) also maintains a table of [**subscriptions**](#gt_s
 <a id="Section_3.1.1.3"></a>
 #### 3.1.1.3 Event System
 
-The server has two state variables that affect the behavior of the [Store](#Section_3.1.4.1.2), [Remove](#Section_3.1.4.1.3), and [RemoveS](#Section_3.1.4.1.6) methods of the [IEventSystem](#Section_3.1.4.1) interface. The sections describing each method provide more detail. To control these variables, the [SetCOMCatalogBehavior](#Section_17bed20c7841436ba4c33924864828a6) method of the [IEventSystemInitialize](#Section_3.1.4.11) interface is used.
+The server has two state variables that affect the behavior of the [Store](#Section_3.1.4.1.2), [Remove](#Section_3.1.4.6.6), and [RemoveS](#Section_3.1.4.1.6) methods of the [IEventSystem](#Section_3.1.4.1) interface. The sections describing each method provide more detail. To control these variables, the [SetCOMCatalogBehavior](#Section_17bed20c7841436ba4c33924864828a6) method of the [IEventSystemInitialize](#Section_3.1.4.11) interface is used.
 
 **CatalogMode**: When this Boolean variable is TRUE, the server is in catalog mode. In this mode, the only objects that can be modified are [**transient subscriptions**](#gt_transient-subscription). By default, this variable is FALSE and the server is in non-catalog mode.
 
-**RetainSubKeys**: This Boolean variable can be TRUE only if the server is in catalog mode. This variable affects the behavior of the Store method of the IEventSystem interface. If this variable is TRUE, any properties within the [PublisherProperties](#Section_3.1.4.4) or SubscriberProperties of the existing object are retained and are not deleted, even if they do not exist within the new object. When the variable is FALSE, the PublisherProperties and SubscriberProperties of the new object replace the PublisherProperties and SubscriberProperties of the existing object.
+**RetainSubKeys**: This Boolean variable can be TRUE only if the server is in catalog mode. This variable affects the behavior of the Store method of the IEventSystem interface. If this variable is TRUE, any properties within the [PublisherProperties](#Section_3.1.1.2) or SubscriberProperties of the existing object are retained and are not deleted, even if they do not exist within the new object. When the variable is FALSE, the PublisherProperties and SubscriberProperties of the new object replace the PublisherProperties and SubscriberProperties of the existing object.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -713,7 +713,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.1.4.1.1"></a>
 ##### 3.1.4.1.1 Query (Opnum 7)
 
-The Query method is called by a [**client**](#gt_client) to query a collection for a collection of [event classes](#Section_3.1.1.1) or [subscriptions](#Section_3.1.4.4).
+The Query method is called by a [**client**](#gt_client) to query a collection for a collection of [event classes](#Section_3.1.1.1) or [subscriptions](#Section_3.1.1.2).
 
 [id(1), helpstring("method Query")] HRESULT Query(
 
@@ -752,7 +752,7 @@ When this method is called, the [**server**](#gt_server) MUST use the *progID* p
 <a id="Section_3.1.4.1.2"></a>
 ##### 3.1.4.1.2 Store (Opnum 8)
 
-The Store method is called by a [**client**](#gt_client) to store either an [event class](#Section_3.1.1.1) or a [subscription](#Section_3.1.4.4).
+The Store method is called by a [**client**](#gt_client) to store either an [event class](#Section_3.1.1.1) or a [subscription](#Section_3.1.1.2).
 
 [id(2), helpstring("method Store")] HRESULT Store(
 
@@ -804,7 +804,7 @@ The DCOM object MUST have a PartitionID property equal to GUID_NULL. If not, the
 <a id="Section_3.1.4.1.3"></a>
 ##### 3.1.4.1.3 Remove (Opnum 9)
 
-The Remove method is called by a [**client**](#gt_client) to remove a collection of [event classes](#Section_3.1.1.1) or [subscriptions](#Section_3.1.4.4) by criteria represented by a query string in the *queryCriteria* parameter.
+The Remove method is called by a [**client**](#gt_client) to remove a collection of [event classes](#Section_3.1.1.1) or [subscriptions](#Section_3.1.1.2) by criteria represented by a query string in the *queryCriteria* parameter.
 
 [id(3), helpstring("method Remove")] HRESULT Remove(
 
@@ -858,7 +858,7 @@ If the verification succeeds, the server MUST attempt to remove the event classe
 <a id="Section_3.1.4.1.4"></a>
 ##### 3.1.4.1.4 get_EventObjectChangeEventClassID (Opnum 10)
 
-The get_EventObjectChangeEventClassID method extracts the server-specific [EventClassID](#Section_3.1.1.1) for server-specific event class or [subscription](#Section_3.1.4.4) change notifications.
+The get_EventObjectChangeEventClassID method extracts the server-specific [EventClassID](#Section_3.1.1.1) for server-specific event class or [subscription](#Section_3.1.1.2) change notifications.
 
 [id(4), propget, helpstring("method get_EventObjectChangeEventClassID")] HRESULT EventObjectChangeEventClassID(
 
@@ -875,7 +875,7 @@ When this method is called, a server SHOULD return the EventClassID of an event 
 <a id="Section_3.1.4.1.5"></a>
 ##### 3.1.4.1.5 QueryS (Opnum 11)
 
-The QueryS method is called by the [**client**](#gt_client) to query a specific [event class](#Section_3.1.1.1) or [subscription](#Section_3.1.4.4).
+The QueryS method is called by the [**client**](#gt_client) to query a specific [event class](#Section_3.1.1.1) or [subscription](#Section_3.1.1.2).
 
 [id(5), helpstring("method QueryS")] HRESULT QueryS(
 
@@ -910,7 +910,7 @@ When this method is invoked, the [**server**](#gt_server) MUST use the *progID* 
 <a id="Section_3.1.4.1.6"></a>
 ##### 3.1.4.1.6 RemoveS (Opnum 12)
 
-The RemoveS method is called by the [**client**](#gt_client) to remove an [event class](#Section_3.1.1.1) or [subscription](#Section_3.1.4.4).
+The RemoveS method is called by the [**client**](#gt_client) to remove an [event class](#Section_3.1.1.1) or [subscription](#Section_3.1.1.2).
 
 [id(6), helpstring("method RemoveS")] HRESULT RemoveS(
 
@@ -970,19 +970,19 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [EventClassID](#Section_82c146e4e53d45d3ad1efdb104629b5e) | Gets the EventClassID property for the event class. Opnum: 7 |
-| [EventClassID](#Section_a5bc490cba284bf9832ba5824ee08d1a) | Sets the EventClassID property for the event class. Opnum: 8 |
-| [EventClassName](#Section_99013cfa95574546a964298761e2cc49) | Gets the EventClassName property of the event class. Opnum: 9 |
+| [EventClassID](#Section_3.1.4.2.1) | Gets the EventClassID property for the event class. Opnum: 7 |
+| [EventClassID](#Section_3.1.4.2.2) | Sets the EventClassID property for the event class. Opnum: 8 |
+| [EventClassName](#Section_3.1.4.2.3) | Gets the EventClassName property of the event class. Opnum: 9 |
 | [EventClassName](#Section_3.1.4.2.4) | Sets the EventClassName property of the event class. Opnum: 10 |
-| [OwnerSID](#Section_112d985303c947d7b19811216ef468fc) | Gets the OwnerSID property of the event class. Opnum: 11 |
-| [OwnerSID](#Section_079f4f42e91e41f3b23b302fa1ff3853) | Sets the OwnerSID property of the event class. Opnum: 12 |
-| [FiringInterfaceID](#Section_3ac9d28aab384e22b4278806da241146) | Gets the FiringInterfaceID property for the event class. Opnum: 13 |
-| [FiringInterfaceID](#Section_5eb1cad274d141acb46d785de2b6e39e) | Sets the FiringInterfaceID property for the event class. Opnum: 14 |
-| [Description](#Section_772dbd27f327483d8c9d72c44036ab85) | Gets the Description property for the event class. Opnum: 15 |
+| [OwnerSID](#Section_3.1.4.2.5) | Gets the OwnerSID property of the event class. Opnum: 11 |
+| [OwnerSID](#Section_3.1.4.2.6) | Sets the OwnerSID property of the event class. Opnum: 12 |
+| [FiringInterfaceID](#Section_3.1.4.2.7) | Gets the FiringInterfaceID property for the event class. Opnum: 13 |
+| [FiringInterfaceID](#Section_3.1.4.2.8) | Sets the FiringInterfaceID property for the event class. Opnum: 14 |
+| [Description](#Section_3.1.4.2.9) | Gets the Description property for the event class. Opnum: 15 |
 | [Description](#Section_3.1.4.2.10) | Sets the Description property for the event class. Opnum: 16 |
 | Opnum17NotUsedOnWire | Reserved for local use. Opnum: 17 |
 | Opnum18NotUsedOnWire | Reserved for local use. Opnum: 18 |
-| [TypeLib](#Section_bd5228bdf44a49b4b5117655adba82e0) | Gets the Typelib property of the event class. Opnum: 19 |
+| [TypeLib](#Section_3.1.4.2.11) | Gets the Typelib property of the event class. Opnum: 19 |
 | [TypeLib](#Section_3.1.4.2.12) | Sets the Typelib property of the event class. Opnum: 20 |
 
 In the preceding table, the term "Reserved for local use" means that the client MUST NOT send the [**opnum**](#gt_opnum), and the server behavior is undefined<12> because it does not affect interoperability.
@@ -1366,10 +1366,10 @@ Methods in RPC Opnum Order
 | [put_SubscriptionID](#Section_3.1.4.4.2) | Sets the SubscriptionID property of the subscription. Opnum: 8 |
 | [get_SubscriptionName](#Section_3.1.4.4.3) | Gets the SubscriptionName property of the subscription. Opnum: 9 |
 | [put_SubscriptionName](#Section_3.1.4.4.4) | Sets the SubscriptionName property of the subscription. Opnum: 10 |
-| [get_PublisherID](#Section_3.1.4.3.1) | Gets the PublisherID property of the subscription. Opnum: 11 |
-| [put_PublisherID](#Section_3.1.4.3.2) | Sets the PublisherID property of the subscription. Opnum: 12 |
-| [get_EventClassID](#Section_3.1.4.2.1) | Gets the EventClassID property of the subscription. Opnum: 13 |
-| [put_EventClassID](#Section_3.1.4.4.8) | Sets the EventClassID property of the subscription. Opnum: 14 |
+| [get_PublisherID](#Section_3.1.4.4.5) | Gets the PublisherID property of the subscription. Opnum: 11 |
+| [put_PublisherID](#Section_3.1.4.4.6) | Sets the PublisherID property of the subscription. Opnum: 12 |
+| [get_EventClassID](#Section_3.1.4.4.7) | Gets the EventClassID property of the subscription. Opnum: 13 |
+| [put_EventClassID](#Section_3.1.4.2.2) | Sets the EventClassID property of the subscription. Opnum: 14 |
 | [get_MethodName](#Section_3.1.4.4.9) | Gets the MethodName property of the subscription. Opnum: 15 |
 | [put_MethodName](#Section_3.1.4.4.10) | Sets the MethodName property of the subscription. Opnum: 16 |
 | [get_SubscriberCLSID](#Section_3.1.4.4.11) | Gets the SubscriberCLSID property of the subscription. Opnum: 17 |
@@ -1378,12 +1378,12 @@ Methods in RPC Opnum Order
 | [put_SubscriberInterface](#Section_3.1.4.4.14) | Sets the SubscriberInterface property of the subscription. Opnum: 20 |
 | [get_PerUser](#Section_3.1.4.4.15) | Gets the PerUser property of the subscription. Opnum: 21 |
 | [put_PerUser](#Section_3.1.4.4.16) | Sets the PerUser property of the subscription. Opnum: 22 |
-| [get_OwnerSID](#Section_3.1.4.2.5) | Gets the OwnerSID property of the subscription. Opnum: 23 |
-| [put_OwnerSID](#Section_3.1.4.2.6) | Sets the OwnerSID property of the subscription. Opnum: 24 |
+| [get_OwnerSID](#Section_3.1.4.4.17) | Gets the OwnerSID property of the subscription. Opnum: 23 |
+| [put_OwnerSID](#Section_3.1.4.4.18) | Sets the OwnerSID property of the subscription. Opnum: 24 |
 | [get_Enabled](#Section_3.1.4.4.19) | Gets the Enabled property of the subscription. Opnum: 25 |
 | [put_Enabled](#Section_3.1.4.4.20) | Sets the Enabled property of the subscription. Opnum: 26 |
-| [get_Description](#Section_3.1.4.2.9) | Gets the Description property of the subscription. Opnum: 27 |
-| [put_Description](#Section_3.1.4.2.10) | Sets the Description property of the subscription. Opnum: 28 |
+| [get_Description](#Section_3.1.4.4.21) | Gets the Description property of the subscription. Opnum: 27 |
+| [put_Description](#Section_3.1.4.4.22) | Sets the Description property of the subscription. Opnum: 28 |
 | [get_MachineName](#Section_3.1.4.4.23) | Gets the MachineName property of the subscription. Opnum: 29 |
 | [put_MachineName](#Section_3.1.4.4.24) | Sets the MachineName property of the subscription. Opnum: 30 |
 | [GetPublisherProperty](#Section_3.1.4.4.25) | Gets the application-specific [**publisher**](#gt_publisher) property for the subscription. Opnum: 31 |
@@ -1400,7 +1400,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.1.4.4.1"></a>
 ##### 3.1.4.4.1 get_SubscriptionID (Opnum 7)
 
-The get_SubscriptionID method gets the [SubscriptionID](#Section_3.1.4.4) property for the subscription.
+The get_SubscriptionID method gets the [SubscriptionID](#Section_3.1.1.2) property for the subscription.
 
 [propget, id(1), helpstring("property SubscriptionID")] HRESULT SubscriptionID(
 
@@ -1417,7 +1417,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.2"></a>
 ##### 3.1.4.4.2 put_SubscriptionID (Opnum 8)
 
-The put_SubscriptionID method sets the [SubscriptionID](#Section_3.1.4.4) property of the subscription.
+The put_SubscriptionID method sets the [SubscriptionID](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(1), helpstring("property SubscriptionID")] HRESULT SubscriptionID(
 
@@ -1434,7 +1434,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.3"></a>
 ##### 3.1.4.4.3 get_SubscriptionName (Opnum 9)
 
-The get_SubscriptionName method gets the [SubscriptionName](#Section_3.1.4.4) property of the subscription.
+The get_SubscriptionName method gets the [SubscriptionName](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(2), helpstring("property SubscriptionName")] HRESULT SubscriptionName(
 
@@ -1451,7 +1451,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.4"></a>
 ##### 3.1.4.4.4 put_SubscriptionName (Opnum 10)
 
-The put_SubscriptionName method sets the [SubscriptionName](#Section_3.1.4.4) property of the subscription.
+The put_SubscriptionName method sets the [SubscriptionName](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(2), helpstring("property SubscriptionName")] HRESULT SubscriptionName(
 
@@ -1468,7 +1468,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.5"></a>
 ##### 3.1.4.4.5 get_PublisherID (Opnum 11)
 
-The get_PublisherID method gets the [PublisherID](#Section_3.1.4.4) property of the subscription.
+The get_PublisherID method gets the [PublisherID](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(3), helpstring("property PublisherID")] HRESULT PublisherID(
 
@@ -1485,7 +1485,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.6"></a>
 ##### 3.1.4.4.6 put_PublisherID (Opnum 12)
 
-The put_PublisherID method sets the [PublisherID](#Section_3.1.4.4) property of the subscription.
+The put_PublisherID method sets the [PublisherID](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(3), helpstring("property PublisherID")] HRESULT PublisherID(
 
@@ -1502,7 +1502,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.7"></a>
 ##### 3.1.4.4.7 get_EventClassID (Opnum 13)
 
-The get_EventClassID method gets the [EventClassID](#Section_3.1.4.4) property of the subscription.
+The get_EventClassID method gets the [EventClassID](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(4), helpstring("property EventClassID")] HRESULT EventClassID(
 
@@ -1519,7 +1519,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.8"></a>
 ##### 3.1.4.4.8 put_EventClassID (Opnum 14)
 
-The put_EventClassID method sets the [EventClassID](#Section_3.1.4.4) property of the subscription.
+The put_EventClassID method sets the [EventClassID](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(4), helpstring("property EventClassID")] HRESULT EventClassID(
 
@@ -1536,7 +1536,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.9"></a>
 ##### 3.1.4.4.9 get_MethodName (Opnum 15)
 
-The get_MethodName method gets the [MethodName](#Section_3.1.4.4) property of the subscription.
+The get_MethodName method gets the [MethodName](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(5), helpstring("property MethodName")] HRESULT MethodName(
 
@@ -1553,7 +1553,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.10"></a>
 ##### 3.1.4.4.10 put_MethodName (Opnum 16)
 
-The put_MethodName method sets the [MethodName](#Section_3.1.4.4) property of the subscription.
+The put_MethodName method sets the [MethodName](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(5), helpstring("property MethodName")] HRESULT MethodName(
 
@@ -1570,7 +1570,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.11"></a>
 ##### 3.1.4.4.11 get_SubscriberCLSID (Opnum 17)
 
-The get_SubscriberCLSID method gets the [SubscriberCLSID](#Section_3.1.4.4) property of the subscription.
+The get_SubscriberCLSID method gets the [SubscriberCLSID](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(6), helpstring("property SubscriberCLSID")] HRESULT SubscriberCLSID(
 
@@ -1587,7 +1587,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.12"></a>
 ##### 3.1.4.4.12 put_SubscriberCLSID (Opnum 18)
 
-The put_SubscriberCLSID method sets the [SubscriberCLSID](#Section_3.1.4.4) property of the subscription.
+The put_SubscriberCLSID method sets the [SubscriberCLSID](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(6), helpstring("property SubscriberCLSID")] HRESULT SubscriberCLSID(
 
@@ -1604,7 +1604,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.13"></a>
 ##### 3.1.4.4.13 get_SubscriberInterface (Opnum 19)
 
-The get_SubscriberInterface method gets the [SubscriberInterface](#Section_3.1.4.4) property of the subscription.
+The get_SubscriberInterface method gets the [SubscriberInterface](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(7), helpstring("property SubscriberInterface")] HRESULT SubscriberInterface(
 
@@ -1621,7 +1621,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.14"></a>
 ##### 3.1.4.4.14 put_SubscriberInterface (Opnum 20)
 
-The put_SubscriberInterface method sets the [SubscriberInterface](#Section_3.1.4.4) property of the subscription.
+The put_SubscriberInterface method sets the [SubscriberInterface](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(7), helpstring("property SubscriberInterface")] HRESULT SubscriberInterface(
 
@@ -1638,7 +1638,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.15"></a>
 ##### 3.1.4.4.15 get_PerUser (Opnum 21)
 
-The get_PerUser method gets the [PerUser](#Section_3.1.4.4) property of the subscription.
+The get_PerUser method gets the [PerUser](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(8), helpstring("property PerUser")] HRESULT PerUser(
 
@@ -1655,7 +1655,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.16"></a>
 ##### 3.1.4.4.16 put_PerUser (Opnum 22)
 
-The put_PerUser method sets the [PerUser](#Section_3.1.4.4) property of the subscription.
+The put_PerUser method sets the [PerUser](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(8), helpstring("property PerUser")] HRESULT PerUser(
 
@@ -1672,7 +1672,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.17"></a>
 ##### 3.1.4.4.17 get_OwnerSID (Opnum 23)
 
-The get_OwnerSID method gets the [OwnerSID](#Section_3.1.4.4) property of the subscription.
+The get_OwnerSID method gets the [OwnerSID](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(9), helpstring("property OwnerSID")] HRESULT OwnerSID(
 
@@ -1689,7 +1689,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.18"></a>
 ##### 3.1.4.4.18 put_OwnerSID (Opnum 24)
 
-The put_OwnerSID method sets the [OwnerSID](#Section_3.1.4.4) property of the subscription
+The put_OwnerSID method sets the [OwnerSID](#Section_3.1.1.2) property of the subscription
 
 [propput, id(9), helpstring("property OwnerSID")] HRESULT OwnerSID(
 
@@ -1706,7 +1706,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.19"></a>
 ##### 3.1.4.4.19 get_Enabled (Opnum 25)
 
-The get_Enabled method gets the [Enabled](#Section_3.1.4.4) property of the subscription.
+The get_Enabled method gets the [Enabled](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(10), helpstring("property Enabled")] HRESULT Enabled(
 
@@ -1723,7 +1723,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.20"></a>
 ##### 3.1.4.4.20 put_Enabled (Opnum 26)
 
-The put_Enabled method sets the [Enabled](#Section_3.1.4.4) property of the subscription.
+The put_Enabled method sets the [Enabled](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(10), helpstring("property Enabled")] HRESULT Enabled(
 
@@ -1740,7 +1740,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.21"></a>
 ##### 3.1.4.4.21 get_Description (Opnum 27)
 
-The get_Description method gets the [Description](#Section_3.1.4.4) property of the subscription.
+The get_Description method gets the [Description](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(11), helpstring("property Description")] HRESULT Description(
 
@@ -1757,7 +1757,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.22"></a>
 ##### 3.1.4.4.22 put_Description (Opnum 28)
 
-The put_Description method sets the [Description](#Section_3.1.4.4) property of the subscription.
+The put_Description method sets the [Description](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(11), helpstring("property Description")] HRESULT Description(
 
@@ -1774,7 +1774,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.23"></a>
 ##### 3.1.4.4.23 get_MachineName (Opnum 29)
 
-The get_MachineName method gets the [MachineName](#Section_3.1.4.4) property of the subscription.
+The get_MachineName method gets the [MachineName](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(12), helpstring("property MachineName")] HRESULT MachineName(
 
@@ -1791,7 +1791,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.24"></a>
 ##### 3.1.4.4.24 put_MachineName (Opnum 30)
 
-The put_MachineName method sets the [MachineName](#Section_3.1.4.4) property of the subscription.
+The put_MachineName method sets the [MachineName](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(12), helpstring("property MachineName")] HRESULT MachineName(
 
@@ -1808,7 +1808,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.4.25"></a>
 ##### 3.1.4.4.25 GetPublisherProperty (Opnum 31)
 
-The GetPublisherProperty method gets the application-specific [**publisher**](#gt_publisher) property of the [subscription](#Section_3.1.4.4). See publisher properties in section 3.1.1.2.
+The GetPublisherProperty method gets the application-specific [**publisher**](#gt_publisher) property of the [subscription](#Section_3.1.1.2). See publisher properties in section 3.1.1.2.
 
 [id(13), helpstring("method GetPublisherProperty")] HRESULT GetPublisherProperty(
 
@@ -1829,7 +1829,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the *bst
 <a id="Section_3.1.4.4.26"></a>
 ##### 3.1.4.4.26 PutPublisherProperty (Opnum 32)
 
-The PutPublisherProperty method sets the application-specific [**publisher**](#gt_publisher) property of the [subscription](#Section_3.1.4.4). If the [**subscription**](#gt_subscription) does not already have a publisher property, this method will add it to the publisher property collection. If the same name property exists, it would be overwritten by the new value provided as part of this method. See publisher properties in section 3.1.1.2.
+The PutPublisherProperty method sets the application-specific [**publisher**](#gt_publisher) property of the [subscription](#Section_3.1.1.2). If the [**subscription**](#gt_subscription) does not already have a publisher property, this method will add it to the publisher property collection. If the same name property exists, it would be overwritten by the new value provided as part of this method. See publisher properties in section 3.1.1.2.
 
 [id(14), helpstring("method PutPublisherProperty")] HRESULT PutPublisherProperty(
 
@@ -1850,7 +1850,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate both the
 <a id="Section_3.1.4.4.27"></a>
 ##### 3.1.4.4.27 RemovePublisherProperty (Opnum 33)
 
-The RemovePublisherProperty method removes the specified application-specific [**publisher**](#gt_publisher) property for the [subscription](#Section_3.1.4.4). See publisher properties in section 3.1.1.2.
+The RemovePublisherProperty method removes the specified application-specific [**publisher**](#gt_publisher) property for the [subscription](#Section_3.1.1.2). See publisher properties in section 3.1.1.2.
 
 [id(15), helpstring("method RemovePublisherProperty")] HRESULT RemovePublisherProperty(
 
@@ -1867,7 +1867,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the synt
 <a id="Section_3.1.4.4.28"></a>
 ##### 3.1.4.4.28 GetPublisherPropertyCollection (Opnum 34)
 
-The GetPublisherPropertyCollection method gets all the application-specific [**publisher**](#gt_publisher) properties as a collection of the [subscription](#Section_3.1.4.4). See publisher properties in section 3.1.1.2.
+The GetPublisherPropertyCollection method gets all the application-specific [**publisher**](#gt_publisher) properties as a collection of the [subscription](#Section_3.1.1.2). See publisher properties in section 3.1.1.2.
 
 [id(16), helpstring("method GetPublisherPropertyCollection")] HRESULT GetPublisherPropertyCollection(
 
@@ -1884,7 +1884,7 @@ When this method is invoked, the [**server**](#gt_server) MUST enumerate all pub
 <a id="Section_3.1.4.4.29"></a>
 ##### 3.1.4.4.29 GetSubscriberProperty (Opnum 35)
 
-The GetSubscriberProperty method gets the value of an application-specific [**subscriber**](#gt_subscriber) property of the [subscription](#Section_3.1.4.4), as specified in section 3.1.1.2.
+The GetSubscriberProperty method gets the value of an application-specific [**subscriber**](#gt_subscriber) property of the [subscription](#Section_3.1.1.2), as specified in section 3.1.1.2.
 
 [id(17), helpstring("method GetSubscriberProperty")] HRESULT GetSubscriberProperty(
 
@@ -1905,7 +1905,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate both ins
 <a id="Section_3.1.4.4.30"></a>
 ##### 3.1.4.4.30 PutSubscriberProperty (Opnum 36)
 
-The PutSubscriberProperty method sets the value of an application-specific [**subscriber**](#gt_subscriber) property of the [subscription](#Section_3.1.4.4), as specified in section 3.1.1.2.
+The PutSubscriberProperty method sets the value of an application-specific [**subscriber**](#gt_subscriber) property of the [subscription](#Section_3.1.1.2), as specified in section 3.1.1.2.
 
 [id(18), helpstring("method PutSubscriberProperty")] HRESULT PutSubscriberProperty(
 
@@ -1926,7 +1926,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate both the
 <a id="Section_3.1.4.4.31"></a>
 ##### 3.1.4.4.31 RemoveSubscriberProperty (Opnum 37)
 
-The RemoveSubscriberProperty method removes the specified application-specific [**subscriber**](#gt_subscriber) property for the [subscription](#Section_3.1.4.4), as specified in section 3.1.1.2.
+The RemoveSubscriberProperty method removes the specified application-specific [**subscriber**](#gt_subscriber) property for the [subscription](#Section_3.1.1.2), as specified in section 3.1.1.2.
 
 [id(19), helpstring("method RemoveSubscriberProperty")] HRESULT RemoveSubscriberProperty(
 
@@ -1943,7 +1943,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the synt
 <a id="Section_3.1.4.4.32"></a>
 ##### 3.1.4.4.32 GetSubscriberPropertyCollection (Opnum 38)
 
-The GetSubscriberPropertyCollection method gets the collection of all the application-specific [**subscriber**](#gt_subscriber) properties for the [subscription](#Section_3.1.4.4), as specified in section 3.1.1.2.
+The GetSubscriberPropertyCollection method gets the collection of all the application-specific [**subscriber**](#gt_subscriber) properties for the [subscription](#Section_3.1.1.2), as specified in section 3.1.1.2.
 
 [id(20), helpstring("method GetSubscriberPropertyCollection")] HRESULT GetSubscriberPropertyCollection(
 
@@ -1960,7 +1960,7 @@ When this method is invoked, the [**server**](#gt_server) MUST enumerate all sub
 <a id="Section_3.1.4.4.33"></a>
 ##### 3.1.4.4.33 get_InterfaceID (Opnum 39)
 
-The get_InterfaceID method gets the [InterfaceID](#Section_3.1.4.4) property for the subscription.
+The get_InterfaceID method gets the [InterfaceID](#Section_3.1.1.2) property for the subscription.
 
 [id(21), propget, helpstring("property InterfaceID")] HRESULT InterfaceID(
 
@@ -1977,7 +1977,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.4.34"></a>
 ##### 3.1.4.4.34 put_InterfaceID (Opnum 40)
 
-The put_InterfaceID method sets the [InterfaceID](#Section_3.1.4.4) property for the subscription.
+The put_InterfaceID method sets the [InterfaceID](#Section_3.1.1.2) property for the subscription.
 
 [id(21), propput, helpstring("property InterfaceID")] HRESULT InterfaceID(
 
@@ -2116,7 +2116,7 @@ Methods in RPC Opnum Order
 | [get_NewEnum](#Section_3.1.4.6.3) | Gets the [IEnumEventObject](#Section_3.1.4.5) supporting the DCOM based object instance for the underlying collection. Opnum: 9 |
 | [get_Count](#Section_3.1.4.6.4) | Gets the number of items in the collection. Opnum: 10 |
 | [Add](#Section_3.1.4.6.5) | Adds an item to the collection. Opnum: 11 |
-| [Remove](#Section_3.1.4.1.3) | Removes an item from the collection. Opnum: 12 |
+| [Remove](#Section_3.1.4.6.6) | Removes an item from the collection. Opnum: 12 |
 
 <a id="Section_3.1.4.6.1"></a>
 ##### 3.1.4.6.1 get__NewEnum (Opnum 7)
@@ -2148,7 +2148,7 @@ The get_Item method gets the item in the collection with a specified ID.
 
 );
 
-**objectID:** The name of the [**object**](#gt_object) to get from the collection. If the underlying collection is of the [**publisher**](#gt_publisher) or [**subscriber**](#gt_subscriber) application-specific [**subscription**](#gt_subscription) properties, this name MUST conform to the specification of application-specific property names, as specified in section [2.2.2.1](#Section_2.2.2.1). If the underlying collection is [event classes](#Section_3.1.1.1), this MUST conform to the specification of [EventClassCollectionIdentifier](#Section_2.2.6), as specified in section 2.2.6. If the underlying collection is [subscriptions](#Section_3.1.4.4), this MUST conform to the specification of [SubscriptionCollectionIdentifier](#Section_2.2.7), as specified in section 2.2.7.
+**objectID:** The name of the [**object**](#gt_object) to get from the collection. If the underlying collection is of the [**publisher**](#gt_publisher) or [**subscriber**](#gt_subscriber) application-specific [**subscription**](#gt_subscription) properties, this name MUST conform to the specification of application-specific property names, as specified in section [2.2.2.1](#Section_2.2.2.1). If the underlying collection is [event classes](#Section_3.1.1.1), this MUST conform to the specification of [EventClassCollectionIdentifier](#Section_2.2.6), as specified in section 2.2.6. If the underlying collection is [subscriptions](#Section_3.1.1.2), this MUST conform to the specification of [SubscriptionCollectionIdentifier](#Section_2.2.7), as specified in section 2.2.7.
 
 **pItem:** If the function returns a successful HRESULT, this MUST contain an application-specific [**publisher/subscriber**](#gt_publisher-subscriber-framework) property, as specified in section [2.2.2.2](#Section_2.2.2.2), if the underlying collection is of publisher/subscriber application-specific subscriptions properties. If the underlying collection is event classes, this MUST contain a VT_UNKNOWN for the DCOM object that supports the [IEventClass2](#Section_3.1.4.3) DCOM interface. If the underlying collection is subscriptions, this MUST contain a VT_UNKNOWN for the DCOM object that supports the [IEventSubscription](#Section_3.1.4.4) DCOM interface.
 
@@ -2167,7 +2167,7 @@ The get_NewEnum method gets an [IEnumEventObject](#Section_3.1.4.5)-based [**obj
 
 );
 
-**ppEnum:** If the function returns a success HRESULT, this MUST contain a DCOM object supporting the IEnumEventObject interface. Note this method is supported only if the underlying collection is of [event classes](#Section_3.1.1.1) or [subscriptions](#Section_3.1.4.4).
+**ppEnum:** If the function returns a success HRESULT, this MUST contain a DCOM object supporting the IEnumEventObject interface. Note this method is supported only if the underlying collection is of [event classes](#Section_3.1.1.1) or [subscriptions](#Section_3.1.1.2).
 
 **Return Values:** An HRESULT specifying success or failure. All success codes MUST be treated the same, and all failure codes MUST be treated the same.
 
@@ -2203,7 +2203,7 @@ The Add method adds an item to the underlying collection of the enumerator; if t
 
 );
 
-**item:** If the underlying collection is of application-specific [**publisher/subscriber**](#gt_publisher-subscriber-framework) [**subscription**](#gt_subscription) properties, this MUST conform to the application-specific property values as specified in section [2.2.2.2](#Section_2.2.2.2). If the underlying collection is of [event classes](#Section_3.1.1.1), the type of the VARIANT MUST be VT_UNKNOWN and MUST contain a DCOM [**object**](#gt_object) supporting the [IEventClass2](#Section_3.1.4.3) interface. If the underlying collection is of [subscriptions](#Section_3.1.4.4), the type of the VARIANT MUST be VT_UNKNOWN and MUST contain a DCOM object supporting the [IEventSubscription](#Section_3.1.4.4) interface.
+**item:** If the underlying collection is of application-specific [**publisher/subscriber**](#gt_publisher-subscriber-framework) [**subscription**](#gt_subscription) properties, this MUST conform to the application-specific property values as specified in section [2.2.2.2](#Section_2.2.2.2). If the underlying collection is of [event classes](#Section_3.1.1.1), the type of the VARIANT MUST be VT_UNKNOWN and MUST contain a DCOM [**object**](#gt_object) supporting the [IEventClass2](#Section_3.1.4.3) interface. If the underlying collection is of [subscriptions](#Section_3.1.1.2), the type of the VARIANT MUST be VT_UNKNOWN and MUST contain a DCOM object supporting the [IEventSubscription](#Section_3.1.4.4) interface.
 
 **objectID:** The identity of the object. If the underlying collection is of the application-specific publisher/subscriber subscription properties, this MUST conform to the application-specific property names as specified in [2.2.2.1](#Section_2.2.2.1). If the underlying collection is of event classes, this MUST conform to the EventClassID property of the event class as specified in section 3.1.1.1. If the underlying collection is of subscriptions, this MUST conform to the SubscriptionID property of the subscription as specified in section 3.1.1.2.
 
@@ -2222,7 +2222,7 @@ The Remove method removes an item from the underlying collection of the enumerat
 
 );
 
-**objectID:** The identity of the [**object**](#gt_object). If the underlying collection is of the application-specific [**publisher/subscriber**](#gt_publisher-subscriber-framework) [**subscription**](#gt_subscription) properties, this MUST conform to the application-specific property names as specified in [2.2.2.1](#Section_2.2.2.1). If the underlying collection is of [event classes](#Section_3.1.1.1), this MUST conform to the EventClassID property of the event class as specified in section 3.1.1.1. If the underlying collection is of [subscriptions](#Section_3.1.4.4), this MUST conform to the SubscriptionID property of the subscription as specified in section 3.1.1.2.
+**objectID:** The identity of the [**object**](#gt_object). If the underlying collection is of the application-specific [**publisher/subscriber**](#gt_publisher-subscriber-framework) [**subscription**](#gt_subscription) properties, this MUST conform to the application-specific property names as specified in [2.2.2.1](#Section_2.2.2.1). If the underlying collection is of [event classes](#Section_3.1.1.1), this MUST conform to the EventClassID property of the event class as specified in section 3.1.1.1. If the underlying collection is of [subscriptions](#Section_3.1.1.2), this MUST conform to the SubscriptionID property of the subscription as specified in section 3.1.1.2.
 
 **Return Values:** An HRESULT specifying success or failure. All success codes MUST be treated the same, and all failure codes MUST be treated the same.
 
@@ -2335,7 +2335,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.1.4.8.1"></a>
 ##### 3.1.4.8.1 get_FilterCriteria (Opnum 41)
 
-The get_FilterCriteria method gets the [FilterCriteria](#Section_3.1.4.4) property for the subscription.
+The get_FilterCriteria method gets the [FilterCriteria](#Section_3.1.1.2) property for the subscription.
 
 [propget, id(22), helpstring("property FilterCriteria")] HRESULT FilterCriteria(
 
@@ -2352,7 +2352,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.8.2"></a>
 ##### 3.1.4.8.2 put_FilterCriteria (Opnum 42)
 
-The put_FilterCriteria method sets the value of the [FilterCriteria](#Section_3.1.4.4) property of the subscription.
+The put_FilterCriteria method sets the value of the [FilterCriteria](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(22), helpstring("property FilterCriteria")] HRESULT FilterCriteria(
 
@@ -2369,7 +2369,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.8.3"></a>
 ##### 3.1.4.8.3 get_SubscriberMoniker (Opnum 43)
 
-The get_SubscriberMoniker method gets the [SubscriberMoniker](#Section_3.1.4.4) property of the subscription.
+The get_SubscriberMoniker method gets the [SubscriberMoniker](#Section_3.1.1.2) property of the subscription.
 
 [propget, id(23), helpstring("property SubscriberMoniker")] HRESULT SubscriberMoniker(
 
@@ -2386,7 +2386,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.8.4"></a>
 ##### 3.1.4.8.4 put_SubscriberMoniker (Opnum 44)
 
-The put_SubscriberMoniker method sets the [SubscriberMoniker](#Section_3.1.4.4) property of the subscription.
+The put_SubscriberMoniker method sets the [SubscriberMoniker](#Section_3.1.1.2) property of the subscription.
 
 [propput, id(23), helpstring("property SubscriberMoniker")] HRESULT SubscriberMoniker(
 
@@ -2413,10 +2413,10 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [get_EventClassPartitionID](#Section_3.1.4.7.1) | Gets the EventClassPartitionID property of the subscription. Opnum: 45 |
-| [put_EventClassPartitionID](#Section_3.1.4.7.2) | Sets the EventClassPartitionID property of the subscription. Opnum: 46 |
-| [get_EventClassApplicationID](#Section_3.1.4.7.3) | Gets the EventClassApplicationID property of the subscription. Opnum: 47 |
-| [put_EventClassApplicationID](#Section_3.1.4.7.4) | Has no effect. Opnum: 48 |
+| [get_EventClassPartitionID](#Section_3.1.4.9.1) | Gets the EventClassPartitionID property of the subscription. Opnum: 45 |
+| [put_EventClassPartitionID](#Section_3.1.4.9.2) | Sets the EventClassPartitionID property of the subscription. Opnum: 46 |
+| [get_EventClassApplicationID](#Section_3.1.4.9.3) | Gets the EventClassApplicationID property of the subscription. Opnum: 47 |
+| [put_EventClassApplicationID](#Section_3.1.4.9.4) | Has no effect. Opnum: 48 |
 | [get_SubscriberPartitionID](#Section_3.1.4.9.5) | Gets the SubscriberPartitionID property of the subscription. Opnum: 49 |
 | [put_SubscriberPartitionID](#Section_3.1.4.9.6) | Sets the SubscriberPartitionID property of the subscription. Opnum: 50 |
 | [get_SubscriberApplicationID](#Section_3.1.4.9.7) | Gets the SubscriberApplicationID property of the subscription. Opnum: 51 |
@@ -2425,7 +2425,7 @@ Methods in RPC Opnum Order
 <a id="Section_3.1.4.9.1"></a>
 ##### 3.1.4.9.1 get_EventClassPartitionID (Opnum 45)
 
-The get_EventClassPartitionID gets the [EventClassPartitionID](#Section_3.1.4.4) property for the subscription.
+The get_EventClassPartitionID gets the [EventClassPartitionID](#Section_3.1.1.2) property for the subscription.
 
 [propget, id(24), helpstring("property EventClassPartitionID")] HRESULT EventClassPartitionID(
 
@@ -2442,7 +2442,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.9.2"></a>
 ##### 3.1.4.9.2 put_EventClassPartitionID (Opnum 46)
 
-The put_EventClassPartitionID method sets the [EventClassPartitionID](#Section_3.1.4.4) property for the subscription.
+The put_EventClassPartitionID method sets the [EventClassPartitionID](#Section_3.1.1.2) property for the subscription.
 
 [propput, id(24), helpstring("property EventClassPartitionID")] HRESULT EventClassPartitionID(
 
@@ -2459,7 +2459,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.9.3"></a>
 ##### 3.1.4.9.3 get_EventClassApplicationID (Opnum 47)
 
-The get_EventClassApplicationID method gets the [EventClassApplicationID](#Section_3.1.4.4) property for the subscription.
+The get_EventClassApplicationID method gets the [EventClassApplicationID](#Section_3.1.1.2) property for the subscription.
 
 [propget, id(25), helpstring("property EventClassApplicationID")] HRESULT EventClassApplicationID(
 
@@ -2493,7 +2493,7 @@ When this method is invoked, the [**server**](#gt_server) MUST do nothing, that 
 <a id="Section_3.1.4.9.5"></a>
 ##### 3.1.4.9.5 get_SubscriberPartitionID (Opnum 49)
 
-The get_SubscriberPartitionID method gets the [SubscriberPartitionID](#Section_3.1.4.4) for the subscription.
+The get_SubscriberPartitionID method gets the [SubscriberPartitionID](#Section_3.1.1.2) for the subscription.
 
 [propget, id(26), helpstring("property SubscriberPartitionID")] HRESULT SubscriberPartitionID(
 
@@ -2510,7 +2510,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.9.6"></a>
 ##### 3.1.4.9.6 put_SubscriberPartitionID (Opnum 50)
 
-The put_SubscriberPartitionID method sets the [SubscriberPartitionID](#Section_3.1.4.4) property for the subscription.
+The put_SubscriberPartitionID method sets the [SubscriberPartitionID](#Section_3.1.1.2) property for the subscription.
 
 [propput, id(26), helpstring("property SubscriberPartitionID")] HRESULT SubscriberPartitionID(
 
@@ -2527,7 +2527,7 @@ When this method is invoked, the [**server**](#gt_server) MUST validate the new 
 <a id="Section_3.1.4.9.7"></a>
 ##### 3.1.4.9.7 get_SubscriberApplicationID (Opnum 51)
 
-The get_SubscriberApplicationID method gets the [SubscriberApplicationID](#Section_3.1.4.4) property for the subscription.
+The get_SubscriberApplicationID method gets the [SubscriberApplicationID](#Section_3.1.1.2) property for the subscription.
 
 [propget, id(27), helpstring("property SubscriberApplicationID")] HRESULT SubscriberApplicationID(
 
@@ -2544,7 +2544,7 @@ When this method is invoked, the [**server**](#gt_server) MUST verify that this 
 <a id="Section_3.1.4.9.8"></a>
 ##### 3.1.4.9.8 put_SubscriberApplicationID (Opnum 52)
 
-The put_SubscriberApplicationID method sets the [SubscriberApplicationID](#Section_3.1.4.4) property for the subscription.
+The put_SubscriberApplicationID method sets the [SubscriberApplicationID](#Section_3.1.1.2) property for the subscription.
 
 [propput, id(27), helpstring("property SubscriberApplicationID")] HRESULT SubscriberApplicationID(
 
@@ -2589,7 +2589,7 @@ The GetVersion method retrieves the version of the [**server**](#gt_server) impl
 
 | Value | Meaning |
 | --- | --- |
-| 0x00000001 | The server does not support the [IEventSubscription3](#Section_3.1.4.9) and [IEventClass3](#Section_3.1.4.7) interfaces, nor does it support the PartitionID and ApplicationID properties on the [subscription](#Section_3.1.4.4) (section 3.1.1.2) and [event class](#Section_3.1.1.1) (section 3.1.1.1) [**objects**](#gt_object). |
+| 0x00000001 | The server does not support the [IEventSubscription3](#Section_3.1.4.9) and [IEventClass3](#Section_3.1.4.7) interfaces, nor does it support the PartitionID and ApplicationID properties on the [subscription](#Section_3.1.1.2) (section 3.1.1.2) and [event class](#Section_3.1.1.1) (section 3.1.1.1) [**objects**](#gt_object). |
 | 0x00000002 | The server supports the IEventSubscription3 and IEventClass3 interfaces. It also supports the PartitionID and ApplicationID properties on the subscription (section 3.1.1.2) and event class (section 3.1.1.1) objects. |
 
 **Return Values:** An HRESULT specifying success or failure. All success codes MUST be treated the same, and all failure codes MUST be treated the same.
@@ -2668,7 +2668,7 @@ The previous figure shows the sequence for a [**client**](#gt_client) [**publish
 To set up an event class:
 
 - The client application starts by performing a DCOM [**activation**](#gt_activation) for the [**event class**](#gt_event-class) [**object**](#gt_object) on the server by using the [**class ID**](#gt_class-identifier-clsid) CLSID_EventClass.
-- The client application dynamically generates a [**UUID**](#gt_universally-unique-identifier-uuid) (in this example, DF01D194-D694-41e5-BA79-8DEDE00ED0EA) according to [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5. It converts the UUID to a string using the format that is specified in section [2.2.3](#Section_2.2.3). Using the string, the client calls [put_EventClassID](#Section_3.1.4.4.8) on the event class object to set the [EventClassID](#Section_3.1.1.1) property.
+- The client application dynamically generates a [**UUID**](#gt_universally-unique-identifier-uuid) (in this example, DF01D194-D694-41e5-BA79-8DEDE00ED0EA) according to [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5. It converts the UUID to a string using the format that is specified in section [2.2.3](#Section_2.2.3). Using the string, the client calls [put_EventClassID](#Section_3.1.4.2.2) on the event class object to set the [EventClassID](#Section_3.1.1.1) property.
 HRESULT
 
 put_EventClassID(
@@ -2724,7 +2724,7 @@ To set up the subscription:
 
 - The client starts by performing a DCOM [**activation**](#gt_activation) for the subscription DCOM object on the server by using the class ID CLSID_EventSubscription.
 - The server returns an object reference to the subscription DCOM object.
-- The client generates a UUID (for example, B7E3D561-3BB1-46df-B47F-51DF3B307EC9) according to [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5. It converts the UUID to a string using the format specified in section [2.2.3](#Section_2.2.3). Using the string, the client calls [put_SubscriptionID](#Section_3.1.4.4.2) on the subscription DCOM object to set the [SubscriptionID](#Section_3.1.4.4) property for the subscription.
+- The client generates a UUID (for example, B7E3D561-3BB1-46df-B47F-51DF3B307EC9) according to [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section A.2.5. It converts the UUID to a string using the format specified in section [2.2.3](#Section_2.2.3). Using the string, the client calls [put_SubscriptionID](#Section_3.1.4.4.2) on the subscription DCOM object to set the [SubscriptionID](#Section_3.1.1.2) property for the subscription.
 HRESULT
 
 put_SubscriptionID(
@@ -2732,7 +2732,7 @@ put_SubscriptionID(
 [in] BSTR bstrSubscriptionID ="{B7E3D561-3BB1-46df-B47F-51DF3B307EC9}");
 
 - The server stores the SubscriptionID and returns S_OK.
-- The client then sets the [EventClassID](#Section_3.1.1.1) property, which identifies the event class for which it is creating the subscription by calling [put_EventClassID](#Section_3.1.4.4.8).
+- The client then sets the [EventClassID](#Section_3.1.1.1) property, which identifies the event class for which it is creating the subscription by calling [put_EventClassID](#Section_3.1.4.2.2).
 HRESULT
 
 put_EventClassID(
@@ -2810,7 +2810,7 @@ IEventObjectCollection interface}
 
 );
 
-- The client calls the [get_Item](#Section_3.1.4.6.2) method to get the particular subscription for its [SubscriptionID](#Section_3.1.4.4). In this example the format of the *objectID* is correct for a server that implements version 2 of the protocol. Because the client did not explicitly set the PartitionID and ApplicationID properties when it created the subscription, the example uses the default values for these properties.
+- The client calls the [get_Item](#Section_3.1.4.6.2) method to get the particular subscription for its [SubscriptionID](#Section_3.1.1.2). In this example the format of the *objectID* is correct for a server that implements version 2 of the protocol. Because the client did not explicitly set the PartitionID and ApplicationID properties when it created the subscription, the example uses the default values for these properties.
 HRESULT
 
 Item(

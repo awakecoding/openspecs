@@ -91,7 +91,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-This document specifies the Remote Desktop Protocol: Virtual Channel Echo Extension to Remote Desktop Protocol: Basic Connectivity and Graphics Remoting, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md). The echo messages defined in section [2.2](../MS-RDPBCGR/MS-RDPBCGR.md) are used to bounce a payload sent by a [**terminal server**](#gt_terminal-server) off of a connected terminal-server client, thereby providing a simple mechanism to determine network characteristics such as [**round-trip time (RTT)**](#gt_round-trip-time-rtt).
+This document specifies the Remote Desktop Protocol: Virtual Channel Echo Extension to Remote Desktop Protocol: Basic Connectivity and Graphics Remoting, as specified in [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md). The echo messages defined in section [2.2](#Section_2.2) are used to bounce a payload sent by a [**terminal server**](#gt_terminal-server) off of a connected terminal-server client, thereby providing a simple mechanism to determine network characteristics such as [**round-trip time (RTT)**](#gt_round-trip-time-rtt).
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -144,7 +144,7 @@ The sequence of messages exchanged by the Remote Desktop Protocol: Virtual Chann
 
 Figure 1: The echo message sequence
 
-The [**terminal server**](#gt_terminal-server) originates all Echo Request [**protocol data units (PDUs)**](#gt_protocol-data-unit-pdu) (section [2.2.1](#Section_4.1)). Each Echo Request PDU sent to a terminal-server client contains a sequence of bytes ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.1.2) that is sent back to the server in an Echo Response PDU (section [2.2.2](#Section_4.2)).
+The [**terminal server**](#gt_terminal-server) originates all Echo Request [**protocol data units (PDUs)**](#gt_protocol-data-unit-pdu) (section [2.2.1](#Section_2.2.1)). Each Echo Request PDU sent to a terminal-server client contains a sequence of bytes ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.1.2) that is sent back to the server in an Echo Response PDU (section [2.2.2](#Section_2.2.2)).
 
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
@@ -192,7 +192,7 @@ The following sections specify the Remote Desktop Protocol: Virtual Channel Echo
 <a id="Section_2.2.1"></a>
 ### 2.2.1 ECHO_REQUEST_PDU
 
-The ECHO_REQUEST_PDU message is a server-to-client [**PDU**](#gt_protocol-data-unit-pdu) that is used to transmit a sequence of bytes that MUST be echoed back to the server using an ECHO_RESPONSE_PDU message (section [2.2.2](#Section_4.2)).
+The ECHO_REQUEST_PDU message is a server-to-client [**PDU**](#gt_protocol-data-unit-pdu) that is used to transmit a sequence of bytes that MUST be echoed back to the server using an ECHO_RESPONSE_PDU message (section [2.2.2](#Section_2.2.2)).
 
 ```mermaid
 packet-beta
@@ -204,7 +204,7 @@ packet-beta
 <a id="Section_2.2.2"></a>
 ### 2.2.2 ECHO_RESPONSE_PDU
 
-The ECHO_RESPONSE_PDU message is a client-to-server [**PDU**](#gt_protocol-data-unit-pdu) that is used to echo the sequence of bytes transmitted in an ECHO_REQUEST_PDU message (section [2.2.1](#Section_4.1)). The ECHO_RESPONSE_PDU message MUST be sent only in response to an ECHO_REQUEST_PDU message.
+The ECHO_RESPONSE_PDU message is a client-to-server [**PDU**](#gt_protocol-data-unit-pdu) that is used to echo the sequence of bytes transmitted in an ECHO_REQUEST_PDU message (section [2.2.1](#Section_2.2.1)). The ECHO_RESPONSE_PDU message MUST be sent only in response to an ECHO_REQUEST_PDU message.
 
 ```mermaid
 packet-beta
@@ -245,12 +245,12 @@ None.
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 Sending ECHO_REQUEST_PDU
 
-The structure and fields of the ECHO_REQUEST_PDU message are specified in section [2.2.1](#Section_4.1). The **echoRequest** field of the ECHO_REQUEST_PDU message MUST be populated with a byte stream of at least one byte in size.
+The structure and fields of the ECHO_REQUEST_PDU message are specified in section [2.2.1](#Section_2.2.1). The **echoRequest** field of the ECHO_REQUEST_PDU message MUST be populated with a byte stream of at least one byte in size.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Processing ECHO_RESPONSE_PDU
 
-The structure and fields of the ECHO_RESPONSE_PDU message are specified in section [2.2.2](#Section_4.2). Upon receiving the ECHO_RESPONSE_PDU message, the server MAY inspect the data in the **echoResponse** field.
+The structure and fields of the ECHO_RESPONSE_PDU message are specified in section [2.2.2](#Section_2.2.2). Upon receiving the ECHO_RESPONSE_PDU message, the server MAY inspect the data in the **echoResponse** field.
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -275,7 +275,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.2.1.1"></a>
 #### 3.2.1.1 Echo Byte Stream
 
-The **Echo Byte Stream** store contains the stream of bytes that was embedded in the **echoRequest** field of the most recently received ECHO_REQUEST_PDU message (section [2.2.1](#Section_4.1)).
+The **Echo Byte Stream** store contains the stream of bytes that was embedded in the **echoRequest** field of the most recently received ECHO_REQUEST_PDU message (section [2.2.1](#Section_2.2.1)).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -298,12 +298,12 @@ None.
 <a id="Section_3.2.5.1"></a>
 #### 3.2.5.1 Processing ECHO_REQUEST_PDU
 
-The structure and fields of the ECHO_REQUEST_PDU message are specified in section [2.2.1](#Section_4.1). Upon receiving the ECHO_REQUEST_PDU message, the client MUST save the byte stream that is embedded in the **echoRequest** field to the **Echo Byte Stream** store (section [3.2.1.1](#Section_3.2.1.1)). The client then uses this saved data to construct an ECHO_RESPONSE_PDU message (section [2.2.2](#Section_4.2)), which it transmits to the server (section [3.2.5.2](#Section_3.2.5.2)).
+The structure and fields of the ECHO_REQUEST_PDU message are specified in section [2.2.1](#Section_2.2.1). Upon receiving the ECHO_REQUEST_PDU message, the client MUST save the byte stream that is embedded in the **echoRequest** field to the **Echo Byte Stream** store (section [3.2.1.1](#Section_3.2.1.1)). The client then uses this saved data to construct an ECHO_RESPONSE_PDU message (section [2.2.2](#Section_2.2.2)), which it transmits to the server (section [3.2.5.2](#Section_3.2.5.2)).
 
 <a id="Section_3.2.5.2"></a>
 #### 3.2.5.2 Sending ECHO_RESPONSE_PDU
 
-The structure and fields of the ECHO_RESPONSE_PDU message are specified in section [2.2.2](#Section_4.2). The **echoResponse** field of the ECHO_RESPONSE_PDU message MUST be populated with the data that was stored in the **Echo Byte Stream** store (section [3.2.1.1](#Section_3.2.1.1)) during the processing of the ECHO_REQUEST_PDU message (section [3.2.5.1](#Section_3.2.5.1)).
+The structure and fields of the ECHO_RESPONSE_PDU message are specified in section [2.2.2](#Section_2.2.2). The **echoResponse** field of the ECHO_RESPONSE_PDU message MUST be populated with the data that was stored in the **Echo Byte Stream** store (section [3.2.1.1](#Section_3.2.1.1)) during the processing of the ECHO_REQUEST_PDU message (section [3.2.5.1](#Section_3.2.5.1)).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -321,7 +321,7 @@ None.
 <a id="Section_4.1"></a>
 ## 4.1 ECHO_REQUEST_PDU
 
-The following is an annotated dump of an ECHO_REQUEST_PDU message (section [2.2.1](#Section_4.1)).
+The following is an annotated dump of an ECHO_REQUEST_PDU message (section [2.2.1](#Section_2.2.1)).
 
 00000000 48 65 6c 6c 6f 20 77 6f 72 6c 64 21 Hello world!
 
@@ -330,7 +330,7 @@ The following is an annotated dump of an ECHO_REQUEST_PDU message (section [2.2.
 <a id="Section_4.2"></a>
 ## 4.2 ECHO_RESPONSE_PDU
 
-The following is an annotated dump of the ECHO_RESPONSE_PDU message (section [2.2.2](#Section_4.2)) sent in response to the PDU in section [4.1](#Section_4.1).
+The following is an annotated dump of the ECHO_RESPONSE_PDU message (section [2.2.2](#Section_2.2.2)) sent in response to the PDU in section [4.1](#Section_4.1).
 
 00000000 48 65 6c 6c 6f 20 77 6f 72 6c 64 21 Hello world!
 

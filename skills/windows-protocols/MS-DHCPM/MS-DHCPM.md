@@ -762,11 +762,11 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](#Section_5)".
+[MS-LSAT] Microsoft Corporation, "[Local Security Authority (Translation Methods) Remote Protocol](../MS-LSAT/MS-LSAT.md)".
 
 [MS-RPCE] Microsoft Corporation, "[Remote Procedure Call Protocol Extensions](../MS-RPCE/MS-RPCE.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [RFC1034] Mockapetris, P., "Domain Names - Concepts and Facilities", STD 13, RFC 1034, November 1987, [https://www.rfc-edit.org/info/rfc1034](https://go.microsoft.com/fwlink/?LinkId=90263)
 
@@ -838,7 +838,7 @@ A typical application of this protocol involves the client querying or setting t
 - Retrieve counters kept by the DHCP server.
 To perform any of the above operations usually involves sending a request to the DHCP server and specifying the type of operation (enumerate, get, and set) to perform along with any parameters associated with the requested operation. The DHCP server responds with the results of the operation. The following diagram shows an example of a remote client using the DHCPM to enumerate the DHCP option values configured for a specific [**vendor class**](#gt_vendor-class) and [**user class**](#gt_user-class). The client sends a request to the DHCP server with an operation type of enumerate, as well as the vendor class and user class. The DHCP server responds with a return value of ERROR_SUCCESS or a Win32 error code. If the operation is successful, the DHCP server fills in the option values for the specified vendor class and user class in an array. The details of the various operations are defined in section [3.1.4](#Section_3.1.4), and the corresponding parameters are defined in section [2.2](#Section_2.2).
 
-**Note** The DHCP Server Management Protocol consists of two interfaces. The interface dhcpsrv provides the basic management functionality originally supported and also includes the quarantine APIs, whereas the interface [dhcpsrv2](#Section_3.2) supports enhanced functionality added in later server releases. For more information on what opnums are supported in each interface see Protocol Details section [3](#Section_1.3).
+**Note** The DHCP Server Management Protocol consists of two interfaces. The interface dhcpsrv provides the basic management functionality originally supported and also includes the quarantine APIs, whereas the interface [dhcpsrv2](#Section_3.2) supports enhanced functionality added in later server releases. For more information on what opnums are supported in each interface see Protocol Details section [3](#Section_3).
 
 ![Client/server message exchange](media/image2.png)
 
@@ -928,11 +928,11 @@ See [[MSDN-DHCP]](https://go.microsoft.com/fwlink/?LinkId=89991) for additional 
 This document covers DHCP server versioning issues in the following areas:
 
 - **Supported Transports:** DHCPM uses the [**RPC protocol**](#gt_remote-procedure-call-rpc) as a transport, as specified in section [2.1](#Section_2.1) and uses [**RPC protocol sequences**](#gt_rpc-protocol-sequence) as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
-- **Protocol Versions:** This protocol has only one interface version, but that interface has been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_1.3).
+- **Protocol Versions:** This protocol has only one interface version, but that interface has been extended by adding additional methods at the end. The use of these methods is specified in section [3.1](#Section_3.1).
 - **Security and Authentication Methods:** Authentication and security for the methods specified by this protocol are specified in [MS-RPCE].
 The DHCP server asks for the security principal name corresponding to the [**authentication service**](#gt_authentication-service-as) RPC_C_AUTHN_GSS_NEGOTIATE (section [2.1.1](#Section_2.1.1)). This principal name is then used to register authentication information with the RPC layer.
 
-Immediately after creating a binding, an RPC client using [**TCP**](#gt_transmission-control-protocol-tcp) attempts to negotiate authentication method using GSS_NEGOTIATE and [**authentication level**](#gt_authentication-level) as PKT_PRIVACY (section [3](#Section_1.3)).
+Immediately after creating a binding, an RPC client using [**TCP**](#gt_transmission-control-protocol-tcp) attempts to negotiate authentication method using GSS_NEGOTIATE and [**authentication level**](#gt_authentication-level) as PKT_PRIVACY (section [3](#Section_3)).
 
 - **Localization:** This protocol passes text strings in various methods. Localization considerations for such strings are specified in sections [2.2](#Section_2.2) and [3.1.4](#Section_3.1.4).
 - **Capability Negotiation:** DHCPM does not support negotiation of the interface version to use. Instead, this protocol uses only the interface version number ([[C706]](https://go.microsoft.com/fwlink/?LinkId=89824), section 6.1.2), specified by the [**Interface Definition Language (IDL)**](#gt_interface-definition-language-idl) of the [DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY](#Section_2.2.1.2.97) structure in [Appendix A: Full IDL](#Section_6), for versioning and capability negotiation.
@@ -967,7 +967,7 @@ The protocol MUST use the following [**universally unique identifiers (UUIDs)**]
 
 **DhcpServer:**
 
-6BFFD098-A112-3610-9833-46C3F874532D refers to [dhcpsrv](#Section_1.3). The interface version is 1.0.
+6BFFD098-A112-3610-9833-46C3F874532D refers to [dhcpsrv](#Section_3.1). The interface version is 1.0.
 
 5b821720-f63b-11d0-aad2-00c04fc324db refers to [dhcpsrv2](#Section_3.2). The interface version is 1.0.
 
@@ -1080,7 +1080,7 @@ DhcpClientName
 <a id="Section_2.2.1.1.4"></a>
 ##### 2.2.1.1.4 DHCP_OPTION_SCOPE_TYPE
 
-The **DHCP_OPTION_SCOPE_TYPE** enumeration defines the type of DHCPv4 options being referred to by an [**RPC**](#gt_remote-procedure-call-rpc) method in the DHCPM. The DHCP server allows for configuration of standard and vendor-specific options at various levels, such as the default level, server level, or [**scope**](#gt_scope) level, or for a specific [**reservation**](#gt_reservation). This value is used in conjunction with union [DHCP_OPTION_SCOPE_UNION](#Section_2.2.1.2.25), as defined in the DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41) structure, to specify option values in the RPC methods defined by this protocol.
+The **DHCP_OPTION_SCOPE_TYPE** enumeration defines the type of DHCPv4 options being referred to by an [**RPC**](#gt_remote-procedure-call-rpc) method in the DHCPM. The DHCP server allows for configuration of standard and vendor-specific options at various levels, such as the default level, server level, or [**scope**](#gt_scope) level, or for a specific [**reservation**](#gt_reservation). This value is used in conjunction with union [DHCP_OPTION_SCOPE_UNION](#Section_2.2.1.2.41), as defined in the DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41) structure, to specify option values in the RPC methods defined by this protocol.
 
 typedef enum _DHCP_OPTION_SCOPE_TYPE
 
@@ -1343,7 +1343,7 @@ NOQUARINFO
 <a id="Section_2.2.1.1.12"></a>
 ##### 2.2.1.1.12 DHCP_SEARCH_INFO_TYPE_V6
 
-The **DHCP_SEARCH_INFO_TYPE_V6** enumeration defines the field over which the search can be performed for a specific IPv6 [**DHCPv6 client**](#gt_e1d03cee-86a5-42f7-913f-8cf4e50b0d21) [**lease record**](#gt_lease-record) in the DHCPv6 server database. This enumeration is used in structure [DHCP_SEARCH_INFO_V6 (section 2.2.1.2.69)](#Section_2.2.1.2.18).
+The **DHCP_SEARCH_INFO_TYPE_V6** enumeration defines the field over which the search can be performed for a specific IPv6 [**DHCPv6 client**](#gt_e1d03cee-86a5-42f7-913f-8cf4e50b0d21) [**lease record**](#gt_lease-record) in the DHCPv6 server database. This enumeration is used in structure [DHCP_SEARCH_INFO_V6 (section 2.2.1.2.69)](#Section_2.2.1.2.69).
 
 typedef enum _DHCP_CLIENT_SEARCH_TYPE_V6
 
@@ -1700,7 +1700,7 @@ DhcpPropIdPolicyDnsSuffix,
 DhcpPropIdClientAddressStateEx,
 
 - } DHCP_PROPERTY_ID;
-**DhcpPropIdPolicyDnsSuffix:** Identifies the DNS suffix of a policy. It is of property type DhcpPropTypeString, as specified in [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117).
+**DhcpPropIdPolicyDnsSuffix:** Identifies the DNS suffix of a policy. It is of property type DhcpPropTypeString, as specified in [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26).
 
 **DhcpPropIdClientAddressStateEx:** Identifies the extended address state flags of a lease table entry. It is of property type DhcpPropTypeDword, as specified in DHCP_PROPERTY_TYPE (section 2.2.1.1.26).
 
@@ -1865,7 +1865,7 @@ typedef DWORD DHCP_RESUME_HANDLE;
 <a id="Section_2.2.1.2.7"></a>
 ##### 2.2.1.2.7 DHCP_HOST_INFO
 
-The **DHCP_HOST_INFO** structure provides information on the [**DHCPv4 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3). This structure is used in [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.12) and [DHCP_CLIENT_INFO_VQ (section 2.2.1.2.19)](#Section_2.2.1.2.19).
+The **DHCP_HOST_INFO** structure provides information on the [**DHCPv4 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3). This structure is used in [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.14) and [DHCP_CLIENT_INFO_VQ (section 2.2.1.2.19)](#Section_2.2.1.2.19).
 
 typedef struct _DHCP_HOST_INFO {
 
@@ -2033,7 +2033,7 @@ DWORD NumElements;
 
 *LPDHCP_CLIENT_INFO_ARRAY;
 
-**NumElements:** This is of type DWORD, containing the number of DHCPv4 clients in the subsequent **Clients** member field. There are no inherent restrictions on the **NumElements** member. Methods that retrieve DHCPv4 client information using the DHCP_CLIENT_INFO_ARRAY structure can limit the maximum value of the **NumElements** member. For example, [R_DhcpEnumSubnetClients (section 3.1.4.21)](#Section_3.2.4.89) restricts the number of elements based on input parameters and the size, in addition to the number, of DHCPv4 client [**lease records**](#gt_lease-record) available for retrieval.
+**NumElements:** This is of type DWORD, containing the number of DHCPv4 clients in the subsequent **Clients** member field. There are no inherent restrictions on the **NumElements** member. Methods that retrieve DHCPv4 client information using the DHCP_CLIENT_INFO_ARRAY structure can limit the maximum value of the **NumElements** member. For example, [R_DhcpEnumSubnetClients (section 3.1.4.21)](#Section_3.1.4.21) restricts the number of elements based on input parameters and the size, in addition to the number, of DHCPv4 client [**lease records**](#gt_lease-record) available for retrieval.
 
 **Clients:** This is a pointer of type LPDHCP_CLIENT_INFO (section 2.2.1.2.12) that points to the array of length **NumElements** containing the DHCPv4 client's information.
 
@@ -2094,7 +2094,7 @@ BYTE bClientType;
 <a id="Section_2.2.1.2.15"></a>
 ##### 2.2.1.2.15 DHCP_CLIENT_INFO_ARRAY_V4
 
-The **DHCP_CLIENT_INFO_ARRAY_V4** structure defines an array of [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.12) structures.
+The **DHCP_CLIENT_INFO_ARRAY_V4** structure defines an array of [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.14) structures.
 
 This structure is used by methods, such as [R_DhcpEnumSubnetClientsV4 (section 3.1.4.36)](#Section_3.1.4.36), that retrieve information for more than one DHCP client.
 
@@ -2115,7 +2115,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.16"></a>
 ##### 2.2.1.2.16 DHCP_CLIENT_INFO_V5
 
-The **DHCP_CLIENT_INFO_V5** structure defines information about the [**DHCPv4 client**](#gt_dhcp-client). It augments the [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.12) structure by including the additional element **AddressState**. This structure is used in the [DHCP_CLIENT_INFO_ARRAY_V5](#Section_2.2.1.2.17) structure.
+The **DHCP_CLIENT_INFO_V5** structure defines information about the [**DHCPv4 client**](#gt_dhcp-client). It augments the [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.14) structure by including the additional element **AddressState**. This structure is used in the [DHCP_CLIENT_INFO_ARRAY_V5](#Section_2.2.1.2.17) structure.
 
 typedef struct _DHCP_CLIENT_INFO_V5 {
 
@@ -2244,7 +2244,7 @@ union _DHCP_CLIENT_SEARCH_UNION {
 
 } DHCP_SEARCH_INFO, *LPDHCP_SEARCH_INFO;
 
-**SearchType:** This is an enumeration of type [DHCP_SEARCH_INFO_TYPE (section 2.2.1.1.3)](#Section_2.2.1.2.18) that contains the data type based on which the search is performed for a specific DHCPv4 client record held by the [**DHCPv4 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3).
+**SearchType:** This is an enumeration of type [DHCP_SEARCH_INFO_TYPE (section 2.2.1.1.3)](#Section_2.2.1.1.3) that contains the data type based on which the search is performed for a specific DHCPv4 client record held by the [**DHCPv4 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3).
 
 | Value | Meaning |
 | --- | --- |
@@ -2539,7 +2539,7 @@ LPWSTR Ipv6AddressDataOption;
 <a id="Section_2.2.1.2.24"></a>
 ##### 2.2.1.2.24 DHCP_OPTION_DATA
 
-The **DHCP_OPTION_DATA** structure defines an array of [DHCP_OPTION_DATA_ELEMENT (section 2.2.1.2.23)](#Section_2.2.1.2.23) structures. This structure is a data container for one or more data elements associated with a DHCP option. This structure is used in the [DHCP_OPTION_VALUE (section 2.2.1.2.42)](#Section_2.2.1.2.25) structure.
+The **DHCP_OPTION_DATA** structure defines an array of [DHCP_OPTION_DATA_ELEMENT (section 2.2.1.2.23)](#Section_2.2.1.2.23) structures. This structure is a data container for one or more data elements associated with a DHCP option. This structure is used in the [DHCP_OPTION_VALUE (section 2.2.1.2.42)](#Section_2.2.1.2.42) structure.
 
 typedef struct _DHCP_OPTION_DATA {
 
@@ -2558,7 +2558,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.25"></a>
 ##### 2.2.1.2.25 DHCP_OPTION
 
-The **DHCP_OPTION** structure contains the information for an option definition created on the DHCP server. This structure is used in the [LPDHCP_OPTION_ARRAY (section 2.2.1.2.26)](#Section_2.2.1.2.25) structure.
+The **DHCP_OPTION** structure contains the information for an option definition created on the DHCP server. This structure is used in the [LPDHCP_OPTION_ARRAY (section 2.2.1.2.26)](#Section_2.2.1.2.26) structure.
 
 typedef struct _DHCP_OPTION {
 
@@ -2584,7 +2584,7 @@ DHCP_OPTION_TYPE OptionType;
 
 **DefaultValue:** This is of type [DHCP_OPTION_DATA (section 2.2.1.2.24)](#Section_2.2.1.2.24), containing the default value for the option. This also defines the data type used to store the value of the option.
 
-**OptionType:** This is of type [DHCP_OPTION_TYPE (section 2.2.1.1.6)](#Section_2.2.1.2.25), indicating whether the default value is a unary item or an array of elements.
+**OptionType:** This is of type [DHCP_OPTION_TYPE (section 2.2.1.1.6)](#Section_2.2.1.1.6), indicating whether the default value is a unary item or an array of elements.
 
 <a id="Section_2.2.1.2.26"></a>
 ##### 2.2.1.2.26 DHCP_OPTION_ARRAY
@@ -2634,7 +2634,7 @@ LPWSTR ClassName;
 
 **Flags:** This is of type DWORD. This MUST be set to zero when sent and ignored on receipt.
 
-**NonVendorOptions:** This is a pointer of type [DHCP_OPTION_ARRAY (section 2.2.1.2.26)](#Section_2.2.1.2.25) structure that points to the location that contains all non-vendor-specific options created on the DHCP server.
+**NonVendorOptions:** This is a pointer of type [DHCP_OPTION_ARRAY (section 2.2.1.2.26)](#Section_2.2.1.2.26) structure that points to the location that contains all non-vendor-specific options created on the DHCP server.
 
 **NumVendorOptions:** This is of type DWORD, containing the number of vendor-specific options created on the DHCP server. This field specifies the number of vendor-specific options defined in the subsequent field, the **VendorOptions** member.
 
@@ -2710,13 +2710,13 @@ union _DHCP_OPTION_SCOPE_UNION6 {
 } ScopeInfo;
 
 - } DHCP_OPTION_SCOPE_INFO6, *LPDHCP_OPTION_SCOPE_INFO6;
-**ScopeType:** This is of type [DHCP_OPTION_SCOPE_TYPE6 (section 2.2.1.1.5)](#Section_2.2.1.1.4) enumeration, defining the scope type of the associated DHCP options, and indicates which of the following fields in the union is used.
+**ScopeType:** This is of type [DHCP_OPTION_SCOPE_TYPE6 (section 2.2.1.1.5)](#Section_2.2.1.1.5) enumeration, defining the scope type of the associated DHCP options, and indicates which of the following fields in the union is used.
 
 **ScopeInfo:** This is a union that can contain one of the following values chosen based on the value of **ScopeType**.
 
 **SubnetScopeInfo:** This is of type [DHCP_IPV6_ADDRESS (section 2.2.1.2.28)](#Section_2.2.1.2.28) structure, containing the IPv6 prefix ID of the subnet for which the option value is to be set.
 
-**ReservedScopeInfo:** This is of type [DHCP_RESERVED_SCOPE6 (section 2.2.1.2.29)](#Section_2.2.1.2.40) structure, containing the IPv6 address of the reservation and the IPv6 prefix ID for which the option value is to be set.
+**ReservedScopeInfo:** This is of type [DHCP_RESERVED_SCOPE6 (section 2.2.1.2.29)](#Section_2.2.1.2.29) structure, containing the IPv6 address of the reservation and the IPv6 prefix ID for which the option value is to be set.
 
 <a id="Section_2.2.1.2.31"></a>
 ##### 2.2.1.2.31 DHCP_IP_RANGE
@@ -3015,7 +3015,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.40"></a>
 ##### 2.2.1.2.40 DHCP_RESERVED_SCOPE
 
-The **DHCP_RESERVED_SCOPE** structure defines an IPv4 [**reservation**](#gt_reservation). This structure is used in the [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure.
+The **DHCP_RESERVED_SCOPE** structure defines an IPv4 [**reservation**](#gt_reservation). This structure is used in the [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure.
 
 typedef struct _DHCP_RESERVED_SCOPE {
 
@@ -3100,7 +3100,7 @@ DHCP_OPTION_DATA Value;
 <a id="Section_2.2.1.2.43"></a>
 ##### 2.2.1.2.43 DHCP_OPTION_VALUE_ARRAY
 
-The **DHCP_OPTION_VALUE_ARRAY** structure defines an array of [DHCP_OPTION_VALUE (section 2.2.1.2.42)](#Section_2.2.1.2.25) structures. This structure is used in the [DHCP_ALL_OPTION_VALUES (section 2.2.1.2.44)](#Section_2.2.1.2.44) structure. The first member contains the number of option values, and the second member points to the array of length **NumElements** containing option values.
+The **DHCP_OPTION_VALUE_ARRAY** structure defines an array of [DHCP_OPTION_VALUE (section 2.2.1.2.42)](#Section_2.2.1.2.42) structures. This structure is used in the [DHCP_ALL_OPTION_VALUES (section 2.2.1.2.44)](#Section_2.2.1.2.44) structure. The first member contains the number of option values, and the second member points to the array of length **NumElements** containing option values.
 
 typedef struct _DHCP_OPTION_VALUE_ARRAY {
 
@@ -3261,7 +3261,7 @@ DWORD NumPendingOffers;
 <a id="Section_2.2.1.2.48"></a>
 ##### 2.2.1.2.48 DHCP_MIB_INFO
 
-The **DHCP_MIB_INFO** structure contains counter values for the DHCPv4 server. This structure is used by [**RPC**](#gt_remote-procedure-call-rpc) methods like [R_DhcpGetMibInfo (section 3.1.4.23)](#Section_3.2.4.82) to find the [**DHCPv4 server statistics**](#gt_dhcp-server-statistics).
+The **DHCP_MIB_INFO** structure contains counter values for the DHCPv4 server. This structure is used by [**RPC**](#gt_remote-procedure-call-rpc) methods like [R_DhcpGetMibInfo (section 3.1.4.23)](#Section_3.1.4.23) to find the [**DHCPv4 server statistics**](#gt_dhcp-server-statistics).
 
 typedef struct _DHCP_MIB_INFO {
 
@@ -3437,7 +3437,7 @@ DWORD Scopes;
 
 **Scopes:** This is of type DWORD, containing the number of DHCPv4 [**scopes**](#gt_scope) configured on the current DHCPv4 server. This is used for statistical analysis by the DHCPv4 server. This field defines the number of DHCPv4 scopes in the subsequent field *ScopeInfo*.
 
-**ScopeInfo:** This is a pointer to an array [SCOPE_MIB_INFO_VQ (section 2.2.1.2.49)](#Section_2.2.1.2.47) of length **Scopes** that contains the information about the IPv4 scopes configured on DHCPv4 server.
+**ScopeInfo:** This is a pointer to an array [SCOPE_MIB_INFO_VQ (section 2.2.1.2.49)](#Section_2.2.1.2.49) of length **Scopes** that contains the information about the IPv4 scopes configured on DHCPv4 server.
 
 <a id="Section_2.2.1.2.51"></a>
 ##### 2.2.1.2.51 MSCOPE_MIB_INFO
@@ -3528,7 +3528,7 @@ DWORD Scopes;
 <a id="Section_2.2.1.2.53"></a>
 ##### 2.2.1.2.53 DHCP_SERVER_CONFIG_INFO
 
-The **DHCP_SERVER_CONFIG_INFO** structure contains settings for the DHCP server. This structure is used in the [R_DhcpServerSetConfig (section 3.1.4.26)](#Section_3.1.4.40) method.
+The **DHCP_SERVER_CONFIG_INFO** structure contains settings for the DHCP server. This structure is used in the [R_DhcpServerSetConfig (section 3.1.4.26)](#Section_3.1.4.26) method.
 
 typedef struct _DHCP_SERVER_CONFIG_INFO {
 
@@ -3744,7 +3744,7 @@ HIGH WORD bitmask (0xFFFF0000) for high-frequency debug output, that is, more ve
 <a id="Section_2.2.1.2.55"></a>
 ##### 2.2.1.2.55 DHCP_SERVER_CONFIG_INFO_VQ
 
-The **DHCP_SERVER_CONFIG_INFO_VQ** structure defines settings for the [**DHCP server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3). This structure is an extension of the [DHCP_SERVER_CONFIG_INFO_V4 (section 2.2.1.2.54)](#Section_2.2.1.2.53) structure and is used in the [R_DhcpServerSetConfigVQ (section 3.1.4.42)](#Section_3.1.4.42) method.
+The **DHCP_SERVER_CONFIG_INFO_VQ** structure defines settings for the [**DHCP server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3). This structure is an extension of the [DHCP_SERVER_CONFIG_INFO_V4 (section 2.2.1.2.54)](#Section_2.2.1.2.54) structure and is used in the [R_DhcpServerSetConfigVQ (section 3.1.4.42)](#Section_3.1.4.42) method.
 
 typedef struct _DHCP_SERVER_CONFIG_INFO_VQ {
 
@@ -3932,7 +3932,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.58"></a>
 ##### 2.2.1.2.58 DHCP_IP_RESERVATION_V6
 
-The **DHCP_IP_RESERVATION_V6** structure defines an IPv6 [**reservation**](#gt_reservation) for a [**DHCPv6 client**](#gt_e1d03cee-86a5-42f7-913f-8cf4e50b0d21) in a specific IPv6 prefix. This structure is used in the [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.33) structure.
+The **DHCP_IP_RESERVATION_V6** structure defines an IPv6 [**reservation**](#gt_reservation) for a [**DHCPv6 client**](#gt_e1d03cee-86a5-42f7-913f-8cf4e50b0d21) in a specific IPv6 prefix. This structure is used in the [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.60) structure.
 
 typedef struct _DHCP_IP_RESERVATION_V6 {
 
@@ -3955,7 +3955,7 @@ DWORD InterfaceId;
 <a id="Section_2.2.1.2.59"></a>
 ##### 2.2.1.2.59 DHCP_IP_RANGE_V6
 
-The **DHCP_IP_RANGE_V6** structure defines the IPv6 range for an IPv6 subnet. This is used in the [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.33) structure.
+The **DHCP_IP_RANGE_V6** structure defines the IPv6 range for an IPv6 subnet. This is used in the [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.60) structure.
 
 typedef struct _DHCP_IP_RANGE_V6 {
 
@@ -3993,20 +3993,20 @@ union _DHCP_SUBNET_ELEMENT_UNION_V6 {
 } Element;
 
 - } DHCP_SUBNET_ELEMENT_DATA_V6, *LPDHCP_SUBNET_ELEMENT_DATA_V6;
-**ElementType:** ElementType is of type [DHCP_SUBNET_ELEMENT_TYPE_V6 (section 2.2.1.1.8)](#Section_2.2.1.1.7) structure defining the set of possible prefix element types. This value defines which of the values is chosen from the subsequent union the **Element** member.
+**ElementType:** ElementType is of type [DHCP_SUBNET_ELEMENT_TYPE_V6 (section 2.2.1.1.8)](#Section_2.2.1.1.8) structure defining the set of possible prefix element types. This value defines which of the values is chosen from the subsequent union the **Element** member.
 
 **Element:** Element is a union of different types of IPv6 prefix elements. The value of the union is dependent on the previous field the **ElementType** member.
 
-**IpRange:** This is a pointer to a [DHCP_IP_RANGE_V6 (section 2.2.1.2.59)](#Section_2.2.1.2.31) structure that contains the IPv6 range for this IPv6 prefix.
+**IpRange:** This is a pointer to a [DHCP_IP_RANGE_V6 (section 2.2.1.2.59)](#Section_2.2.1.2.59) structure that contains the IPv6 range for this IPv6 prefix.
 
-**ReservedIp:** This is a pointer to a [DHCP_IP_RESERVATION_V6 (section 2.2.1.2.58)](#Section_2.2.1.2.10) structure that contains the information on IPv6 reservations.
+**ReservedIp:** This is a pointer to a [DHCP_IP_RESERVATION_V6 (section 2.2.1.2.58)](#Section_2.2.1.2.58) structure that contains the information on IPv6 reservations.
 
 **ExcludeIpRange:** This is a pointer to a DHCP_IP_RANGE_V6 (section 2.2.1.2.59) structure that contains information about IPv6 exclusion ranges.
 
 <a id="Section_2.2.1.2.61"></a>
 ##### 2.2.1.2.61 DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6
 
-The **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6** structure defines an array of [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.33) structures of IPv6 prefix elements. The first member contains the number of IPv6 prefix elements (such as IPv6 [**reservation**](#gt_reservation), IPv6 [**exclusion range**](#gt_exclusion-range), and IPv6 range), and the second member points to the array of length **NumElements** containing DHCPv6 IPv6 prefix elements. This structure is used in the [R_DhcpEnumSubnetElementsV6 (section 3.2.4.61)](#Section_3.2.4.61) method.
+The **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6** structure defines an array of [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.60) structures of IPv6 prefix elements. The first member contains the number of IPv6 prefix elements (such as IPv6 [**reservation**](#gt_reservation), IPv6 [**exclusion range**](#gt_exclusion-range), and IPv6 range), and the second member points to the array of length **NumElements** containing DHCPv6 IPv6 prefix elements. This structure is used in the [R_DhcpEnumSubnetElementsV6 (section 3.2.4.61)](#Section_3.2.4.61) method.
 
 typedef struct _DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6 {
 
@@ -4142,7 +4142,7 @@ DHCP_HOST_INFO_V6 OwnerHost;
 
 **ClientPrefLeaseExpires:** This is of type DATE_TIME, a structure that contains the preferred lifetime of the DHCPv6 client lease.
 
-**OwnerHost:** This is of type [DHCP_HOST_INFO_V6 (section 2.2.1.2.63)](#Section_2.2.1.2.7), a structure that contains information about the [**DHCPv6 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3) machine that has given this IPv6 lease to this DHCPv6 client.
+**OwnerHost:** This is of type [DHCP_HOST_INFO_V6 (section 2.2.1.2.63)](#Section_2.2.1.2.63), a structure that contains information about the [**DHCPv6 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3) machine that has given this IPv6 lease to this DHCPv6 client.
 
 <a id="Section_2.2.1.2.65"></a>
 ##### 2.2.1.2.65 DHCP_CLIENT_INFO_ARRAY_V6
@@ -4180,7 +4180,7 @@ DWORD NumOptions;
 
 **NumOptions:** This is of type DWORD, containing the number of DHCPv6 options in the subsequent field the **Options** member.
 
-**Options:** This is a pointer to an array of [DHCP_OPTION_VALUE (section 2.2.1.2.42)](#Section_2.2.1.2.25) structures and of length **NumOptions** containing DHCPv6 option values.
+**Options:** This is a pointer to an array of [DHCP_OPTION_VALUE (section 2.2.1.2.42)](#Section_2.2.1.2.42) structures and of length **NumOptions** containing DHCPv6 option values.
 
 <a id="Section_2.2.1.2.67"></a>
 ##### 2.2.1.2.67 SCOPE_MIB_INFO_V6
@@ -4270,7 +4270,7 @@ DWORD Scopes;
 
 **Scopes:** This is of type DWORD, containing the number of IPv6 [**scopes**](#gt_scope) configured on the current DHCPv6 server. This is used for statistical analysis by the DHCPv6 server. This field defines the number of DHCPv6 scopes in the subsequent field the **ScopeInfo** member.
 
-**ScopeInfo:** This is a pointer to an array of [SCOPE_MIB_INFO_V6 (section 2.2.1.2.67)](#Section_2.2.1.2.47) structures that points to an array of length **Scopes**, containing the information about the IPv6 scopes configured on the DHCPv6 server.
+**ScopeInfo:** This is a pointer to an array of [SCOPE_MIB_INFO_V6 (section 2.2.1.2.67)](#Section_2.2.1.2.67) structures that points to an array of length **Scopes**, containing the information about the IPv6 scopes configured on the DHCPv6 server.
 
 <a id="Section_2.2.1.2.69"></a>
 ##### 2.2.1.2.69 DHCP_SEARCH_INFO_V6
@@ -4303,7 +4303,7 @@ LPWSTR ClientName;
 
 *LPDHCP_SEARCH_INFO_V6;
 
-**SearchType:** This is an enumeration value of type [DHCP_SEARCH_INFO_TYPE_V6 (section 2.2.1.1.12)](#Section_2.2.1.2.18) enumeration that contains the data type, based on which the search is performed, for a specific DHCPv6 client record on the [**DHCPv6 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3).
+**SearchType:** This is an enumeration value of type [DHCP_SEARCH_INFO_TYPE_V6 (section 2.2.1.1.12)](#Section_2.2.1.1.12) enumeration that contains the data type, based on which the search is performed, for a specific DHCPv6 client record on the [**DHCPv6 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3).
 
 **SearchInfo:** This is a union that can contain one of the following values chosen based on the value of the **SearchType** member.
 
@@ -4574,7 +4574,7 @@ ULONG DhcpAttribUlong;
 
 *LPDHCP_ATTRIB;
 
-**DhcpAttribId:** This is of type [DHCP_ATTRIB_ID (section 2.2.1.1.1)](#Section_2.2.1.2.78), a ULONG value specifying the attribute.
+**DhcpAttribId:** This is of type [DHCP_ATTRIB_ID (section 2.2.1.1.1)](#Section_2.2.1.1.1), a ULONG value specifying the attribute.
 
 **DhcpAttribType:** This is of type ULONG. The value specifies the type of the attribute's data and which one of the values is chosen from the subsequent union.
 
@@ -4611,7 +4611,7 @@ ULONG NumElements;
 <a id="Section_2.2.1.2.80"></a>
 ##### 2.2.1.2.80 DHCP_BIND_ELEMENT
 
-The **DHCP_BIND_ELEMENT** structure defines an IPv4 interface binding for the DHCP server over which it receives DHCP packets. This structure is used in the [DHCP_BIND_ELEMENT_ARRAY (section 2.2.1.2.81)](#Section_2.2.1.2.80) structure.
+The **DHCP_BIND_ELEMENT** structure defines an IPv4 interface binding for the DHCP server over which it receives DHCP packets. This structure is used in the [DHCP_BIND_ELEMENT_ARRAY (section 2.2.1.2.81)](#Section_2.2.1.2.81) structure.
 
 typedef struct _DHCP_BIND_ELEMENT {
 
@@ -4678,7 +4678,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.82"></a>
 ##### 2.2.1.2.82 DHCPV6_BIND_ELEMENT
 
-The **DHCPV6_BIND_ELEMENT** structure defines an IPv6 interface binding for the DHCP server over which it receives DHCPv6 packets. This structure is used in [DHCPV6_BIND_ELEMENT_ARRAY (section 2.2.1.2.83)](#Section_2.2.1.2.82) structure.
+The **DHCPV6_BIND_ELEMENT** structure defines an IPv6 interface binding for the DHCP server over which it receives DHCPv6 packets. This structure is used in [DHCPV6_BIND_ELEMENT_ARRAY (section 2.2.1.2.83)](#Section_2.2.1.2.83) structure.
 
 typedef struct _DHCPV6_BIND_ELEMENT {
 
@@ -4795,7 +4795,7 @@ LPWSTR SuperScopeName;
 <a id="Section_2.2.1.2.86"></a>
 ##### 2.2.1.2.86 DHCP_SUPER_SCOPE_TABLE
 
-The **DHCP_SUPER_SCOPE_TABLE** structure defines an array of [DHCP_SUPER_SCOPE_TABLE_ENTRY (section 2.2.1.2.85)](#Section_2.2.1.2.86) structures. This contains information about more than one subnet within a [**superscope**](#gt_superscope). The first member contains the number of IPv4 subnets present, and the second member points to the array of length **cEntries** containing all subnet information. This structure is used in the [R_DhcpGetSuperScopeInfoV4 (section 3.1.4.38)](#Section_3.1.4.38) method.
+The **DHCP_SUPER_SCOPE_TABLE** structure defines an array of [DHCP_SUPER_SCOPE_TABLE_ENTRY (section 2.2.1.2.85)](#Section_2.2.1.2.85) structures. This contains information about more than one subnet within a [**superscope**](#gt_superscope). The first member contains the number of IPv4 subnets present, and the second member points to the array of length **cEntries** containing all subnet information. This structure is used in the [R_DhcpGetSuperScopeInfoV4 (section 3.1.4.38)](#Section_3.1.4.38) method.
 
 typedef struct _DHCP_SUPER_SCOPE_TABLE {
 
@@ -4828,7 +4828,7 @@ DWORD NumElements;
 
 **NumElements:** This is of type DWORD, specifying the number of classes whose information is contained in the array specified by the **Classes** member.
 
-**Classes:** A pointer to an array of [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.75) structures that contains information regarding the various user classes and vendor classes.
+**Classes:** A pointer to an array of [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.70) structures that contains information regarding the various user classes and vendor classes.
 
 <a id="Section_2.2.1.2.88"></a>
 ##### 2.2.1.2.88 DHCP_IP_CLUSTER
@@ -4976,7 +4976,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.94"></a>
 ##### 2.2.1.2.94 SCOPE_MIB_INFO_V5
 
-The **SCOPE_MIB_INFO_V5** structure defines a structure that contains the address counters for a specific IPv4 subnet. The numbers of free, used, and offered IPv4 addresses are stored in this structure. This structure is used in the [DHCP_MIB_INFO_V5 (section 2.2.1.2.95)](#Section_2.2.1.2.48) structure.
+The **SCOPE_MIB_INFO_V5** structure defines a structure that contains the address counters for a specific IPv4 subnet. The numbers of free, used, and offered IPv4 addresses are stored in this structure. This structure is used in the [DHCP_MIB_INFO_V5 (section 2.2.1.2.95)](#Section_2.2.1.2.95) structure.
 
 typedef struct _SCOPE_MIB_INFO_V5 {
 
@@ -5539,7 +5539,7 @@ BYTE fOptionsPresent;
 <a id="Section_2.2.1.2.103"></a>
 ##### 2.2.1.2.103 DHCP_RESERVATION_INFO_ARRAY
 
-The **DHCP_RESERVATION_INFO_ARRAY** structure defines an array of [DHCP_IP RESERVATION_INFO (section 2.2.1.2.102)](#Section_2.2.1.2.10) structures. This structure is used by the method [R_DhcpV4EnumSubnetReservations (section 3.2.4.120)](#Section_3.2.4.120).
+The **DHCP_RESERVATION_INFO_ARRAY** structure defines an array of [DHCP_IP RESERVATION_INFO (section 2.2.1.2.102)](#Section_2.2.1.2.102) structures. This structure is used by the method [R_DhcpV4EnumSubnetReservations (section 3.2.4.120)](#Section_3.2.4.120).
 
 typedef struct _DHCP_RESERVATION_INFO_ARRAY {
 
@@ -5942,7 +5942,7 @@ LPWSTR PolicyName;
 <a id="Section_2.2.1.2.116"></a>
 ##### 2.2.1.2.116 DHCP_CLIENT_INFO_PB_ARRAY
 
-The **DHCP_CLIENT_INFO_PB_ARRAY** structure encapsulates an array of [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.12) structures.
+The **DHCP_CLIENT_INFO_PB_ARRAY** structure encapsulates an array of [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.115) structures.
 
 typedef struct _DHCP_CLIENT_INFO_PB_ARRAY {
 
@@ -5959,7 +5959,7 @@ DWORD NumElements;
 <a id="Section_2.2.1.2.117"></a>
 ##### 2.2.1.2.117 DHCP_PROPERTY
 
-The **DHCP_PROPERTY** structure contains the type of the property, the property identifier, and the property data value. The DHCP_PROPERTY identifies a DHCP property and is used by the [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.12) and [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.110) structures, which allow a list of properties to be associated with them.
+The **DHCP_PROPERTY** structure contains the type of the property, the property identifier, and the property data value. The DHCP_PROPERTY identifies a DHCP property and is used by the [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.119) and [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.121) structures, which allow a list of properties to be associated with them.
 
 typedef struct _DHCP_PROPERTY {
 
@@ -5987,7 +5987,7 @@ union _DHCP_PROPERTY_VALUE_UNION {
 
 **ID:** An enumeration of type [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) that indicates the property identifier for the data value contained in the **Value** field.
 
-**Type:** An enumeration of type [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117) that indicates the property type for the data value contained in the **Value** field.
+**Type:** An enumeration of type [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26) that indicates the property type for the data value contained in the **Value** field.
 
 **Value:** Specifies the property data using one of the following values based on the value of the **Type** field.
 
@@ -6110,7 +6110,7 @@ LPDHCP_PROPERTY_ARRAY Properties;
 
 **Properties:** A list of properties that is associated with the given client. See the following list for properties allowed for the DHCPv4 client. Properties not identified are ignored.
 
-**AddressStateEx:** This property is present if the value of the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdClientAddressStateEx and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117) is DhcpPropTypeDword. When the **Value** member of the [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) structure is set to DwordValue, this represents the extended address state for the client and is set to the following value:
+**AddressStateEx:** This property is present if the value of the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdClientAddressStateEx and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26) is DhcpPropTypeDword. When the **Value** member of the [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) structure is set to DwordValue, this represents the extended address state for the client and is set to the following value:
 
 | Value | Description |
 | --- | --- |
@@ -6121,7 +6121,7 @@ Values not listed are reserved for future use and MUST be set to zero.
 <a id="Section_2.2.1.2.120"></a>
 ##### 2.2.1.2.120 DHCP_CLIENT_INFO_EX_ARRAY
 
-The **DHCP_CLIENT_INFO_EX_ARRAY** structure encapsulates an array of [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.12) structures.
+The **DHCP_CLIENT_INFO_EX_ARRAY** structure encapsulates an array of [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.119) structures.
 
 typedef struct DHCP_CLIENT_INFO_EX_ARRAY {
 
@@ -6183,7 +6183,7 @@ LPDHCP_PROPERTY_ARRAY Properties;
 
 **Properties:** A list of properties that is associated with the given client. See the following list for allowed properties. Properties not identified are ignored.
 
-**DNSSuffix:** This property is present if the value of the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117) is DhcpPropTypeString. When the **Value** member of the [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) structure is set to StringValue, this property points to a Unicode string representing the DNS suffix to be used when performing DNS registration on behalf of the client.
+**DNSSuffix:** This property is present if the value of the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26) is DhcpPropTypeString. When the **Value** member of the [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) structure is set to StringValue, this property points to a Unicode string representing the DNS suffix to be used when performing DNS registration on behalf of the client.
 
 <a id="Section_2.2.1.2.122"></a>
 ##### 2.2.1.2.122 DHCP_POLICY_EX_ARRAY
@@ -6204,7 +6204,7 @@ DWORD NumElements;
 
 **NumElements:** Specifies the number of policies in the array.
 
-**Elements:** A pointer of type [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.110) that points to an array with length as specified in the NumElements member.
+**Elements:** A pointer of type [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.121) that points to an array with length as specified in the NumElements member.
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -6213,7 +6213,7 @@ No additional timers or other state is required on the client side of this proto
 
 Two interfaces are supported by the [**DHCP server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3):
 
-- dhcpsrv (section [3.1](#Section_1.3)) and its associated [**opnum**](#gt_opnum) methods.<17>
+- dhcpsrv (section [3.1](#Section_3.1)) and its associated [**opnum**](#gt_opnum) methods.<17>
 - dhcpsrv2 (section [3.2](#Section_3.2)) and its associated opnum methods.<18>
 In both interfaces, the DHCP server allocates the memory for all the retrieved parameters from the DHCP server except where explicitly mentioned. The client frees the memory with the following call.
 
@@ -6270,13 +6270,13 @@ The following list describes top-level ADM data elements. Each of these elements
 
 **DHCPv6ServerClassedOptValueList (Public):** Represents the set of all option values configured at the server level. It consists of a list of **DHCPv6ClassedOptValue** ADM element objects specified in section [3.1.1.17](#Section_3.1.1.17). The option value objects represent the options that are returned to clients in DHCP packets along with values required by the client. This variable is stored in memory as well as in persistent store.
 
-**DHCPv4ServerMibInfo (Public):** Represents the [**DHCPv4 Server statistics**](#gt_dhcp-server-statistics) set. These statistics are measured from the time the DHCP service starts. The **DHCPv4ServerMibInfo** ADM element corresponds to the data type [DHCP_MIB_INFO_VQ (section 2.2.1.2.50)](#Section_2.2.1.2.50) structure, except that there are no members in it corresponding to the **Scopes** and **ScopeInfo** members of DHCP_MIB_INFO_VQ structure. It can be read using the APIs [R_DhcpGetMibInfo](#Section_3.2.4.82) and [R_DhcpGetMibInfoV5](#Section_3.2.4.82) methods. This variable is stored only in memory, not in persistent store.
+**DHCPv4ServerMibInfo (Public):** Represents the [**DHCPv4 Server statistics**](#gt_dhcp-server-statistics) set. These statistics are measured from the time the DHCP service starts. The **DHCPv4ServerMibInfo** ADM element corresponds to the data type [DHCP_MIB_INFO_VQ (section 2.2.1.2.50)](#Section_2.2.1.2.50) structure, except that there are no members in it corresponding to the **Scopes** and **ScopeInfo** members of DHCP_MIB_INFO_VQ structure. It can be read using the APIs [R_DhcpGetMibInfo](#Section_3.1.4.23) and [R_DhcpGetMibInfoV5](#Section_3.2.4.82) methods. This variable is stored only in memory, not in persistent store.
 
 **DHCPv4ServerMcastMibInfo:** Represents the set of MADCAP server statistics measured from the time the DHCP service starts. **DHCPv4ServerMcastMibInfo** is of type [DHCP_MCAST_MIB_INFO](#Section_2.2.1.2.52) structure, specified in section 2.2.1.2.52. The **Scopes** and **ScopeInfo** members of the DHCP_MIB_INFO_VQ (section 2.2.1.2.50) structure are not included. This variable is stored only in memory, not in persistent store.
 
 **DHCPv6ServerMibInfo (Public):** Represents the set of DHCPv6 Server statistics. These statistics are measured from the time the DHCP service starts. The **DHCPv6ServerMibInfo** ADM element corresponds to the data type [DHCP_MIB_INFO_V6 (section 2.2.1.2.68)](#Section_2.2.1.2.68) structure, except that there are no members in it corresponding to the **Scopes** and **ScopeInfo** members of DHCP_MIB_INFO_V6 structure. It can be read using the API [R_DhcpGetMibInfoV6](#Section_3.2.4.69) method. This variable is stored only in memory, not in persistent store.
 
-**DHCPv4ServerConfigInfo (Public):** Represents the DHCP Server configuration information. It corresponds to the data type [DHCP_SERVER_CONFIG_INFO_VQ (section 2.2.1.2.55)](#Section_2.2.1.2.55) structure. The **DHCPv4ServerConfigInfo** ADM element can be set by using the API methods [R_DhcpServerSetConfig](#Section_3.1.4.40), [R_DhcpServerSetConfigV4](#Section_3.1.4.40), and [R_DhcpServerSetConfigVQ](#Section_3.1.4.42). It can be read by using the API methods [R_DhcpServerGetConfig](#Section_3.1.4.43), [R_DhcpServerGetConfigV4](#Section_3.1.4.41), and [R_DhcpServerGetConfigVQ](#Section_3.1.4.43). This variable is stored in memory as well as in persistent store.
+**DHCPv4ServerConfigInfo (Public):** Represents the DHCP Server configuration information. It corresponds to the data type [DHCP_SERVER_CONFIG_INFO_VQ (section 2.2.1.2.55)](#Section_2.2.1.2.55) structure. The **DHCPv4ServerConfigInfo** ADM element can be set by using the API methods [R_DhcpServerSetConfig](#Section_3.1.4.26), [R_DhcpServerSetConfigV4](#Section_3.1.4.40), and [R_DhcpServerSetConfigVQ](#Section_3.1.4.42). It can be read by using the API methods [R_DhcpServerGetConfig](#Section_3.1.4.27), [R_DhcpServerGetConfigV4](#Section_3.1.4.41), and [R_DhcpServerGetConfigVQ](#Section_3.1.4.43). This variable is stored in memory as well as in persistent store.
 
 **DHCPv6ServerAuditLogState:** Stores a value that specifies whether the [**audit log**](#gt_audit-log) is enabled or disabled for the DHCPv6 Server. The **DHCPv6ServerAuditLogState** ADM element corresponds to the BOOL data type. It can be set by using the API [R_DhcpServerSetConfigV6](#Section_3.2.4.66) method and read using the API [R_DhcpServerGetConfigV6](#Section_3.2.4.67) method. This variable is stored in memory as well as in persistent store.
 
@@ -6290,7 +6290,7 @@ The following list describes top-level ADM data elements. Each of these elements
 
 **DHCPServerSpecificStrings:** Stores server-specific strings. These strings cannot be modified. **DHCPServerSpecificStrings** ADM element corresponds to the data type [DHCP_SERVER_SPECIFIC_STRINGS (section 2.2.1.2.77)](#Section_2.2.1.2.77) structure and can be retrieved using the API [R_DhcpGetServerSpecificStrings](#Section_3.2.4.47) method. This variable is stored only in memory and not in persistent store.
 
-**DHCPv4ServerBindingInfoList:** Stores the binding information of all the static interfaces on the DHCPv4 Server. The **DHCPv4ServerBindingInfoList** ADM element consists of a list of [DHCPv4ServerBindingInfo](#Section_3.1.1.28) ADM element objects and is updated whenever a static interface is modified or created. The list can be set using the API [R_DhcpSetServerBindingInfo](#Section_3.2.4.42) method, and can be read using the API [R_DhcpGetServerBindingInfo](#Section_3.2.4.70) method. This variable is stored in memory as well as in persistent store.
+**DHCPv4ServerBindingInfoList:** Stores the binding information of all the static interfaces on the DHCPv4 Server. The **DHCPv4ServerBindingInfoList** ADM element consists of a list of [DHCPv4ServerBindingInfo](#Section_3.1.1.28) ADM element objects and is updated whenever a static interface is modified or created. The list can be set using the API [R_DhcpSetServerBindingInfo](#Section_3.2.4.42) method, and can be read using the API [R_DhcpGetServerBindingInfo](#Section_3.2.4.41) method. This variable is stored in memory as well as in persistent store.
 
 **DHCPv6ServerBindingInfoList:** Stores the binding information of all the static interfaces on the DHCPv6 Server. The **DHCPv6ServerBindingInfoList** ADM element consists of a list of [DHCPv6ServerBindingInfo](#Section_3.1.1.29) ADM element objects and is updated whenever a static interface is modified or created. The list can be set using the API [R_DhcpSetServerBindingInfoV6](#Section_3.2.4.71) method, and can be read using the API [R_DhcpGetServerBindingInfoV6](#Section_3.2.4.70) method. This variable is stored in memory as well as in persistent store.
 
@@ -6441,7 +6441,7 @@ The **DHCPv4OptionValue** ADM element represents the set of option values config
 <a id="Section_3.1.1.12"></a>
 #### 3.1.1.12 DHCPv4ClassedOptValue (Public)
 
-The **DHCPv4ClassedOptValue** ADM element contains the option values defined on the DHCPv4 Server at several levels, and is of type **DHCP_OPTION_VALUE** structure (section [2.2.1.2.42](#Section_2.2.1.2.25)). The **DHCPv4ClassedOptValue** ADM element is initialized when a new [**option definition**](#gt_option-definition) is created on the [**DHCP**](#gt_dynamic-host-configuration-protocol-dhcp) Server, using the API methods [R_DhcpSetOptionValue](#Section_3.1.4.13) and [R_DhcpSetOptionValueV5](#Section_3.2.4.20). This variable is stored in memory as well as in persistent store.
+The **DHCPv4ClassedOptValue** ADM element contains the option values defined on the DHCPv4 Server at several levels, and is of type **DHCP_OPTION_VALUE** structure (section [2.2.1.2.42](#Section_2.2.1.2.42)). The **DHCPv4ClassedOptValue** ADM element is initialized when a new [**option definition**](#gt_option-definition) is created on the [**DHCP**](#gt_dynamic-host-configuration-protocol-dhcp) Server, using the API methods [R_DhcpSetOptionValue](#Section_3.1.4.13) and [R_DhcpSetOptionValueV5](#Section_3.2.4.20). This variable is stored in memory as well as in persistent store.
 
 <a id="Section_3.1.1.13"></a>
 #### 3.1.1.13 Per DHCPv4MScope
@@ -6480,12 +6480,12 @@ The **DHCPv6Scope** ADM element represents a DHCPv6 [**scope**](#gt_scope) confi
 <a id="Section_3.1.1.15"></a>
 #### 3.1.1.15 DHCPv6ExclusionRange (Public)
 
-The **DHCPv6ExclusionRange** ADM element corresponds to the data type [DHCP_IP_RANGE_V6](#Section_2.2.1.2.31) structure, as specified in section 2.2.1.2.59. The **DHCPv6ExclusionRange** ADM element is initialized by the API method [R_DhcpAddSubnetElementV6](#Section_3.2.4.60) when a new [**exclusion range**](#gt_exclusion-range) is added to a DHCPv6 subnet. This variable is stored in memory as well as in persistent store.
+The **DHCPv6ExclusionRange** ADM element corresponds to the data type [DHCP_IP_RANGE_V6](#Section_2.2.1.2.59) structure, as specified in section 2.2.1.2.59. The **DHCPv6ExclusionRange** ADM element is initialized by the API method [R_DhcpAddSubnetElementV6](#Section_3.2.4.60) when a new [**exclusion range**](#gt_exclusion-range) is added to a DHCPv6 subnet. This variable is stored in memory as well as in persistent store.
 
 <a id="Section_3.1.1.16"></a>
 #### 3.1.1.16 Per DHCPv6Reservation (Public)
 
-The **DHCPv6Reservation** ADM element corresponds to the data type [DHCP_IP_RESERVATION_V6](#Section_2.2.1.2.10) structure, as specified in section 2.2.1.2.58. The **DHCPv6Reservation** ADM element is initialized by the API method [R_DhcpAddSubnetElementV6](#Section_3.2.4.60) when a new [**reservation**](#gt_reservation) is created.
+The **DHCPv6Reservation** ADM element corresponds to the data type [DHCP_IP_RESERVATION_V6](#Section_2.2.1.2.58) structure, as specified in section 2.2.1.2.58. The **DHCPv6Reservation** ADM element is initialized by the API method [R_DhcpAddSubnetElementV6](#Section_3.2.4.60) when a new [**reservation**](#gt_reservation) is created.
 
 **DHCPv6Reservation.DHCPv6ResvClassedOptValueList:** This field is a list of **DHCPv6ClassedOptValue** ADM element objects, as specified in section [3.1.1.17](#Section_3.1.1.17). The **DHCPv6ResvClassedOptValueList** ADM element represents the set of options and their values at the reservation level for the DHCPv6 reservation. This variable is stored in memory as well as in persistent store.
 
@@ -6508,7 +6508,7 @@ The **DHCPv6ClientInfo** ADM element contains information for the clients served
 <a id="Section_3.1.1.19"></a>
 #### 3.1.1.19 DHCPv6ClassDef (Public)
 
-The **DHCPv6ClassDef** ADM element represents a [**user class**](#gt_user-class) or a [**vendor class**](#gt_vendor-class) configured on the DHCPv6 server, and it corresponds to the data type the [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.75) structure. **DHCPv6ClassDef** ADM element is initialized whenever a new user class or vendor class is configured on the DHCPv6 server. This variable is stored in memory as well as in persistent store.
+The **DHCPv6ClassDef** ADM element represents a [**user class**](#gt_user-class) or a [**vendor class**](#gt_vendor-class) configured on the DHCPv6 server, and it corresponds to the data type the [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.70) structure. **DHCPv6ClassDef** ADM element is initialized whenever a new user class or vendor class is configured on the DHCPv6 server. This variable is stored in memory as well as in persistent store.
 
 The following classes are predefined in the [**DHCP**](#gt_dynamic-host-configuration-protocol-dhcp) server and are termed built-in classes.
 
@@ -6708,7 +6708,7 @@ The DHCP server MUST perform a strict [**Network Data Representation (NDR)**](#g
 | --- | --- |
 | [R_DhcpCreateSubnet](#Section_3.1.4.1) | This method creates a new IPv4 subnet on the DHCPv4 server. Opnum: 0 |
 | [R_DhcpSetSubnetInfo](#Section_3.1.4.2) | This method sets/modifies the information about an IPv4 subnet defined on the DHCPv4 server. Opnum: 1 |
-| [R_DhcpGetSubnetInfo](#Section_3.1.4.50) | This method retrieves the information about a specific IPv4 subnet defined on the DHCPv4 server. Opnum: 2 |
+| [R_DhcpGetSubnetInfo](#Section_3.1.4.3) | This method retrieves the information about a specific IPv4 subnet defined on the DHCPv4 server. Opnum: 2 |
 | [R_DhcpEnumSubnets](#Section_3.1.4.4) | This method enumerates IPv4 subnets configured on the DHCPv4 server. Opnum: 3 |
 | [R_DhcpAddSubnetElement](#Section_3.1.4.5) | This method adds an IPv4 element (IPv4 range, IPv4 [**exclusion range**](#gt_exclusion-range), or IPv4 [**reservation**](#gt_reservation)) in an IPv4 subnet defined on the DHCPv4 server. Opnum: 4 |
 | [R_DhcpEnumSubnetElements](#Section_3.1.4.6) | This method enumerates a list of a specific type of IPv4 subnet elements for a specific IPv4 subnet defined on the DHCPv4 server. Opnum: 5 |
@@ -6726,13 +6726,13 @@ The DHCP server MUST perform a strict [**Network Data Representation (NDR)**](#g
 | [R_DhcpSetClientInfo](#Section_3.1.4.18) | This method sets/modifies an IPv4 DHCPv4 client [**lease record**](#gt_lease-record) on the DHCPv4 server. Opnum: 17 |
 | [R_DhcpGetClientInfo](#Section_3.1.4.19) | This method retrieves IPv4 DHCPv4 client lease record information from the DHCPv4 server. Opnum: 18 |
 | [R_DhcpDeleteClientInfo](#Section_3.1.4.20) | This method deletes the specified IPv4 DHCPv4 client lease record from the DHCPv4 server. Also, it frees up the DHCPv4 client IPv4 address for redistribution. Opnum: 19 |
-| [R_DhcpEnumSubnetClients](#Section_3.2.4.89) | This method retrieves all registered IPv4 DHCPv4 clients lease records of the specified subnet. Opnum: 20 |
+| [R_DhcpEnumSubnetClients](#Section_3.1.4.21) | This method retrieves all registered IPv4 DHCPv4 clients lease records of the specified subnet. Opnum: 20 |
 | [R_DhcpGetClientOptions](#Section_3.1.4.22) | This method just returns ERROR_NOT_IMPLEMENTED. It is never used. Reserved for future implementation. Opnum: 21 |
-| [R_DhcpGetMibInfo](#Section_3.2.4.82) | This method retrieves all counter values from the DHCPv4 server. Opnum: 22 |
+| [R_DhcpGetMibInfo](#Section_3.1.4.23) | This method retrieves all counter values from the DHCPv4 server. Opnum: 22 |
 | [R_DhcpEnumOptions](#Section_3.1.4.24) | This method enumerates the option definition for a default user class and vendor class pair. Opnum: 23 |
 | [R_DhcpSetOptionValues](#Section_3.1.4.25) | This method sets/modifies the option values of one or more options for a default user class and vendor class pair. Opnum: 24 |
-| [R_DhcpServerSetConfig](#Section_3.1.4.40) | This method sets/modifies the DHCPv4 server settings. Opnum: 25 |
-| [R_DhcpServerGetConfig](#Section_3.1.4.43) | This method retrieves the current settings of the DHCPv4 server. Opnum: 26 |
+| [R_DhcpServerSetConfig](#Section_3.1.4.26) | This method sets/modifies the DHCPv4 server settings. Opnum: 25 |
+| [R_DhcpServerGetConfig](#Section_3.1.4.27) | This method retrieves the current settings of the DHCPv4 server. Opnum: 26 |
 | [R_DhcpScanDatabase](#Section_3.1.4.28) | This method enumerates the DHCPv4 client IPv4 addresses that are not in sync in both the stores. Opnum: 27 |
 | [R_DhcpGetVersion](#Section_3.1.4.29) | This method retrieves the major and minor version numbers of the DHCP server. Opnum: 28 |
 | [R_DhcpAddSubnetElementV4](#Section_3.1.4.30) | This method adds an IPv4 subnet element (IPv4 reservation for DHCPv4 or BOOTP client, IPv4 exclusion range, or IPv4 range) to the IPv4 subnet in the DHCPv4 server. Opnum: 29 |
@@ -6859,7 +6859,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 R_DhcpGetSubnetInfo (Opnum 2)
 
-The **R_DhcpGetSubnetInfo** method retrieves the information about a specific IPv4 subnet defined on the DHCPv4 server. The caller of this function is responsible for freeing the memory pointed to by *SubnetInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetSubnetInfo** method retrieves the information about a specific IPv4 subnet defined on the DHCPv4 server. The caller of this function is responsible for freeing the memory pointed to by *SubnetInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetSubnetInfo(
 
@@ -6875,7 +6875,7 @@ DWORD R_DhcpGetSubnetInfo(
 
 **SubnetAddress:** This is of type [DHCP_IP_ADDRESS](#Section_2.2.1.2.1), a DWORD structure containing the IPv4 subnet ID for which the information is retrieved.
 
-**SubnetInfo:** This is a pointer of type [LPDHCP_SUBNET_INFO](#Section_2.2.1.2.8) in which the information for the subnet matching the ID specified by *SubnetAddress* is retrieved.
+**SubnetInfo:** This is a pointer of type [LPDHCP_SUBNET_INFO](#Section_e25ab58d3e8b45308ed88338850278ef) in which the information for the subnet matching the ID specified by *SubnetAddress* is retrieved.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -6898,7 +6898,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.4"></a>
 #### 3.1.4.4 R_DhcpEnumSubnets (Opnum 3)
 
-The **R_DhcpEnumSubnets** method enumerates IPv4 subnets configured on the DHCPv4 server. The caller of this function can free the memory pointed to by the *EnumInfo* parameter and its member the **Elements** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnets** method enumerates IPv4 subnets configured on the DHCPv4 server. The caller of this function can free the memory pointed to by the *EnumInfo* parameter and its member the **Elements** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnets(
 
@@ -7037,7 +7037,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 R_DhcpEnumSubnetElements (Opnum 5)
 
-The **R_DhcpEnumSubnetElements** method enumerates the list of a specific type of IPv4 subnet elements from a specific DHCPv4 IPv4 subnet. The caller of this function can free the memory pointed to by the *EnumElementInfo* parameter and its member the **Elements** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetElements** method enumerates the list of a specific type of IPv4 subnet elements from a specific DHCPv4 IPv4 subnet. The caller of this function can free the memory pointed to by the *EnumElementInfo* parameter and its member the **Elements** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetElements(
 
@@ -7069,7 +7069,7 @@ DWORD R_DhcpEnumSubnetElements(
 
 **PreferredMaximum:** This is of type DWORD that specifies the preferred maximum number of bytes to return. If the number of remaining unenumerated subnet elements (in bytes) is less than this value, all IPv4 subnet elements for a specific type are returned. To retrieve all the IPv4 subnet elements of a specific type, 0xFFFFFFFF is specified.
 
-**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY](#Section_2.2.1.2.34) in which an IPv4 subnet element of type *EnumElementType* is returned for a specific IPv4 subnet *SubnetAddress*. If no IPv4 subnet element of a specific type is available for enumeration, this value is null.
+**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY](#Section_f0af7ef4eb95480e9584e58987960ce5) in which an IPv4 subnet element of type *EnumElementType* is returned for a specific IPv4 subnet *SubnetAddress*. If no IPv4 subnet element of a specific type is available for enumeration, this value is null.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of IPv4 subnet elements read in the *EnumElementInfo* parameter for a specific type of IPv4 subnet element. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -7304,7 +7304,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 R_DhcpGetOptionInfo (Opnum 10)
 
-The **R_DhcpGetOptionInfo** method retrieves the [**option definition**](#gt_option-definition) of the specified option for the default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair at the default option level. There is an extension method [R_DhcpGetOptionInfoV5 (section 3.2.4.17)](#Section_3.2.4.17) that retrieves the option definition for a specific user class and vendor class pair. The caller of this function can free the memory pointed to by the *OptionInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetOptionInfo** method retrieves the [**option definition**](#gt_option-definition) of the specified option for the default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair at the default option level. There is an extension method [R_DhcpGetOptionInfoV5 (section 3.2.4.17)](#Section_3.2.4.17) that retrieves the option definition for a specific user class and vendor class pair. The caller of this function can free the memory pointed to by the *OptionInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetOptionInfo(
 
@@ -7394,7 +7394,7 @@ DWORD R_DhcpSetOptionValue(
 
 **OptionID:** This is of type [DHCP_OPTION_ID (section 2.2.1.2.3)](#Section_2.2.1.2.3), containing the option identifier for the option being set or modified.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the level (that is, default, server, scope, multicast scope, or reservation level) at which this option value is set on.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the level (that is, default, server, scope, multicast scope, or reservation level) at which this option value is set on.
 
 **OptionValue:** A pointer to a [DHCP_OPTION_DATA (section 2.2.1.2.24)](#Section_2.2.1.2.24) structure that contains the option value to be set. For Dynamic DNS update settings, see section [3.3.1](#Section_3.3.1).
 
@@ -7435,7 +7435,7 @@ Iterate through the **DHCPv4MScope.DHCPv4MScopeOptValuesList** ADM element, and 
 <a id="Section_3.1.4.14"></a>
 #### 3.1.4.14 R_DhcpGetOptionValue (Opnum 13)
 
-The **R_DhcpGetOptionValue** method retrieves the option value for a specific option associated with the default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair. The values can be retrieved from the default, server, [**scope**](#gt_scope), [**multicast scope**](#gt_multicast-scope), or [**reservation**](#gt_reservation) level on the DHCPv4 server. The *ScopeInfo* parameter defines the level from which the option value needs to be retrieved. The caller of this function can free the memory pointed to by the *OptionValue* parameter by calling the function midl_user_free (section [3](#Section_1.3)).
+The **R_DhcpGetOptionValue** method retrieves the option value for a specific option associated with the default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair. The values can be retrieved from the default, server, [**scope**](#gt_scope), [**multicast scope**](#gt_multicast-scope), or [**reservation**](#gt_reservation) level on the DHCPv4 server. The *ScopeInfo* parameter defines the level from which the option value needs to be retrieved. The caller of this function can free the memory pointed to by the *OptionValue* parameter by calling the function midl_user_free (section [3](#Section_3)).
 
 DWORD R_DhcpGetOptionValue(
 
@@ -7453,9 +7453,9 @@ DWORD R_DhcpGetOptionValue(
 
 **OptionID:** This is of type [DHCP_OPTION_ID (section 2.2.1.2.3)](#Section_2.2.1.2.3), containing the option identifier for the option being retrieved.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the level (that is, default, server, scope, multicast scope, or reservation level) from which the option value is retrieved.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the level (that is, default, server, scope, multicast scope, or reservation level) from which the option value is retrieved.
 
-**OptionValue:** This is a pointer of type [LPDHCP_OPTION_VALUE](#Section_2.2.1.2.25) in which the option value is retrieved corresponding to the *OptionID* parameter. For Dynamic [**DNS**](#gt_domain-name-system-dns) update settings, see section [3.3.1](#Section_3.3.1).
+**OptionValue:** This is a pointer of type [LPDHCP_OPTION_VALUE](#Section_2.2.1.2.42) in which the option value is retrieved corresponding to the *OptionID* parameter. For Dynamic [**DNS**](#gt_domain-name-system-dns) update settings, see section [3.3.1](#Section_3.3.1).
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -7481,7 +7481,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.15"></a>
 #### 3.1.4.15 R_DhcpEnumOptionValues (Opnum 14)
 
-The **R_DhcpEnumOptionValues** method enumerates all the option values for the default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair. The values can be enumerated at a specified level (that is, default, [**server**](#gt_server), [**scope**](#gt_scope), [**multicast scope**](#gt_multicast-scope), or [**reservation**](#gt_reservation) level) defined by the *ScopeInfo* parameter. The extension of this API is [R_DhcpEnumOptionValuesV5 (section 3.2.4.23)](#Section_3.2.4.23), which retrieves the option values for a specific user class and vendor class at a specific scope defined by the *ScopeInfo* parameter. The caller of this function can free the memory pointed to by the *OptionValues* parameter and its member the **Values** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumOptionValues** method enumerates all the option values for the default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair. The values can be enumerated at a specified level (that is, default, [**server**](#gt_server), [**scope**](#gt_scope), [**multicast scope**](#gt_multicast-scope), or [**reservation**](#gt_reservation) level) defined by the *ScopeInfo* parameter. The extension of this API is [R_DhcpEnumOptionValuesV5 (section 3.2.4.23)](#Section_3.2.4.23), which retrieves the option values for a specific user class and vendor class at a specific scope defined by the *ScopeInfo* parameter. The caller of this function can free the memory pointed to by the *OptionValues* parameter and its member the **Values** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumOptionValues(
 
@@ -7503,7 +7503,7 @@ DWORD R_DhcpEnumOptionValues(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are enumerated on.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are enumerated on.
 
 **ResumeHandle:** This is a pointer of type [DHCP_RESUME_HANDLE (section 2.2.1.2.6)](#Section_2.2.1.2.6) that identifies whether the enumeration operation is a continuation of a previous operation. Initially, this value MUST be set to zero, with a successful call returning the handle value used for subsequent enumeration requests. For example, if the *PreferredMaximum* parameter is set to 1,000 bytes, and 2,000 bytes worth of option values are stored on the DHCPv4 server, the resume handle can be used after the first 1,000 bytes are retrieved to obtain the next 1,000 on a subsequent call, and so forth.
 
@@ -7599,7 +7599,7 @@ DWORD R_DhcpRemoveOptionValue(
 
 **OptionID:** This is of type [DHCP_OPTION_ID (section 2.2.1.2.3)](#Section_2.2.1.2.3), containing the option identifier for the option being removed.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the level (that is, server, scope, multicast scope, or IPv4 reservation level) from which this option value is removed.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the level (that is, server, scope, multicast scope, or IPv4 reservation level) from which this option value is removed.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -7719,7 +7719,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.19"></a>
 #### 3.1.4.19 R_DhcpGetClientInfo (Opnum 18)
 
-The **R_DhcpGetClientInfo** method retrieves [**DHCPv4 client**](#gt_dhcp-client) [**lease record**](#gt_lease-record) information from the [**DHCPv4 server database**](#gt_dhcp-server-database). The caller of this function can free the memory pointed to by the *ClientInfo* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetClientInfo** method retrieves [**DHCPv4 client**](#gt_dhcp-client) [**lease record**](#gt_lease-record) information from the [**DHCPv4 server database**](#gt_dhcp-server-database). The caller of this function can free the memory pointed to by the *ClientInfo* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetClientInfo(
 
@@ -7735,7 +7735,7 @@ DWORD R_DhcpGetClientInfo(
 
 **SearchInfo:** This is a pointer of type [DHCP_SEARCH_INFO (section 2.2.1.2.18)](#Section_2.2.1.2.18) structure that defines the key to be used to search the DHCPv4 client lease record on the [**DHCPv4 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3). In case the **SearchType** member is DhcpClientName and there are multiple lease records with the same **ClientName**, the server will return client information for the client having the lowest numerical IP address.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO](#Section_2.2.1.2.12) that points to the location in which specific DHCPv4 client lease record information is retrieved. The **ClientHardwareAddress** member represents a [**DHCPv4 client unique ID**](#gt_dhcpv4-client-unique-id) (section [2.2.1.2.5.2](#Section_2.2.1.2.5.2))
+**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO](#Section_91d65e7ed5c5443ea863781dba950962) that points to the location in which specific DHCPv4 client lease record information is retrieved. The **ClientHardwareAddress** member represents a [**DHCPv4 client unique ID**](#gt_dhcpv4-client-unique-id) (section [2.2.1.2.5.2](#Section_2.2.1.2.5.2))
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -7806,7 +7806,7 @@ The resource record is populated with the following information for a DNS PTR de
 <a id="Section_3.1.4.21"></a>
 #### 3.1.4.21 R_DhcpEnumSubnetClients (Opnum 20)
 
-The **R_DhcpEnumSubnetClients** method is used to retrieve all DHCPv4 clients serviced on the specified IPv4 subnet. This method returns DHCPv4 clients from all IPv4 subnets if the subnet address provided is zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its member the **Clients** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetClients** method is used to retrieve all DHCPv4 clients serviced on the specified IPv4 subnet. This method returns DHCPv4 clients from all IPv4 subnets if the subnet address provided is zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its member the **Clients** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetClients(
 
@@ -7834,7 +7834,7 @@ DWORD R_DhcpEnumSubnetClients(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. The minimum value is 1,024 bytes (1 kilobyte), and the maximum value is 65,536 bytes (64 kilobytes). If the input value is greater or less than this range, it MUST be set to the maximum or minimum value, respectively. To retrieve all the DHCPv4 clients serviced on the specific IPv4 subnet, 0xFFFFFFFF is specified.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY](#Section_2.2.1.2.12) that points to the location which contains the DHCPv4 client [**lease record**](#gt_lease-record) array.
+**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY](#Section_d6c421de7ec6422fb9129c6b3dd99b75) that points to the location which contains the DHCPv4 client [**lease record**](#gt_lease-record) array.
 
 **ClientsRead:** This is a pointer to a DWORD that specifies the number of DHCPv4 client lease records read in the *ClientInfo* parameter. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -7890,7 +7890,7 @@ DWORD R_DhcpGetClientOptions(
 
 **ClientSubnetMask:** This is of type [DHCP_IP_MASK (section 2.2.1.2.2)](#Section_2.2.1.2.2). Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
 
-**ClientOptions:** This is a pointer of type [LPDHCP_OPTION_LIST](#Section_2.2.1.2.66). Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
+**ClientOptions:** This is a pointer of type [LPDHCP_OPTION_LIST](#Section_0a5608449df440e3b099167963ea3aa1). Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -7905,7 +7905,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.23"></a>
 #### 3.1.4.23 R_DhcpGetMibInfo (Opnum 22)
 
-The **R_DhcpGetMibInfo** method is used to retrieve the statistics of the DHCPv4 server. The caller of this function can free the memory pointed to by the *MibInfo* parameter and its member the **ScopeInfo** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetMibInfo** method is used to retrieve the statistics of the DHCPv4 server. The caller of this function can free the memory pointed to by the *MibInfo* parameter and its member the **ScopeInfo** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetMibInfo(
 
@@ -7917,7 +7917,7 @@ DWORD R_DhcpGetMibInfo(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO](#Section_2.2.1.2.48) that points to the location that contains DHCPv4 server statistics.
+**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO](#Section_b4db5a545df74a8899ddd782787c41a0) that points to the location that contains DHCPv4 server statistics.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -7939,7 +7939,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.24"></a>
 #### 3.1.4.24 R_DhcpEnumOptions (Opnum 23)
 
-The **R_DhcpEnumOptions** method enumerates the [**option definition**](#gt_option-definition) for a default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair specified at the default level. The extension of this method is [R_DhcpEnumOptionsV5 (section 3.2.4.18)](#Section_3.2.4.18), which enumerates the option definition for the specific user class and vendor class. The caller of this function can free the memory pointed to by the *Options* parameter and its member the **Options** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumOptions** method enumerates the [**option definition**](#gt_option-definition) for a default [**user class**](#gt_user-class) and [**vendor class**](#gt_vendor-class) pair specified at the default level. The extension of this method is [R_DhcpEnumOptionsV5 (section 3.2.4.18)](#Section_3.2.4.18), which enumerates the option definition for the specific user class and vendor class. The caller of this function can free the memory pointed to by the *Options* parameter and its member the **Options** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumOptions(
 
@@ -7963,7 +7963,7 @@ DWORD R_DhcpEnumOptions(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining unenumerated option definitions (in bytes) is less than this value, all option definitions are returned. To retrieve all the option definitions defined for a default user class and vendor class on the [**DHCPv4 server**](#gt_746786e7-458f-45aa-ab24-5534a94b4fb3), 0xFFFFFFFF is specified.
 
-**Options:** This is a pointer of type [LPDHCP_OPTION_ARRAY](#Section_2.2.1.2.25) that points to the location where all the option definitions for the default user class and vendor class are retrieved from the DHCPv4 server.
+**Options:** This is a pointer of type [LPDHCP_OPTION_ARRAY](#Section_34b6a3470458415a98080dc631a8c547) that points to the location where all the option definitions for the default user class and vendor class are retrieved from the DHCPv4 server.
 
 **OptionsRead:** This is a pointer to a DWORD value that specifies the number of option definitions read in the *Options* parameter. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -8012,7 +8012,7 @@ DWORD R_DhcpSetOptionValues(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are set.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are set.
 
 **OptionValues:** This is a pointer of type [DHCP_OPTION_VALUE_ARRAY (section 2.2.1.2.43)](#Section_2.2.1.2.43) structure that points to the location that contains one or more option identifiers along with the values.
 
@@ -8119,7 +8119,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.27"></a>
 #### 3.1.4.27 R_DhcpServerGetConfig (Opnum 26)
 
-The **R_DhcpServerGetConfig** method retrieves the current DHCPv4 server setting. There is an extension method [R_DhcpServerGetConfigV4 (section 3.1.4.41)](#Section_3.1.4.41) that retrieves some additional settings on the DHCPv4 server. The caller of this function can free the memory pointed to by the *ConfigInfo* parameter by calling the function midl_user_free as specified in [3](#Section_1.3).
+The **R_DhcpServerGetConfig** method retrieves the current DHCPv4 server setting. There is an extension method [R_DhcpServerGetConfigV4 (section 3.1.4.41)](#Section_3.1.4.41) that retrieves some additional settings on the DHCPv4 server. The caller of this function can free the memory pointed to by the *ConfigInfo* parameter by calling the function midl_user_free as specified in [3](#Section_3).
 
 DWORD R_DhcpServerGetConfig(
 
@@ -8131,7 +8131,7 @@ DWORD R_DhcpServerGetConfig(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ConfigInfo:** This is a pointer of type [LPDHCP_SERVER_CONFIG_INFO](#Section_2.2.1.2.53) that points to the location where the DHCPv4 server settings are retrieved. The caller of this method can free up this structure after use.
+**ConfigInfo:** This is a pointer of type [LPDHCP_SERVER_CONFIG_INFO](#Section_62b738d8c8984d6c91365269d60e05d6) that points to the location where the DHCPv4 server settings are retrieved. The caller of this method can free up this structure after use.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8150,7 +8150,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.28"></a>
 #### 3.1.4.28 R_DhcpScanDatabase (Opnum 27)
 
-The **R_DhcpScanDatabase** method is used by DHCP servers that enumerate and/or fix inconsistencies between the ADM elements DHCPv4 client [**lease records**](#gt_lease-record) specified in **DHCPv4Scope.DHCPv4ClientsList** and the bitmask representation in memory specified in **DHCPv4IpRange.BitMask**. The caller of this function can free the memory pointed to by the *ScanList* parameter and its member the **ScanItems** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpScanDatabase** method is used by DHCP servers that enumerate and/or fix inconsistencies between the ADM elements DHCPv4 client [**lease records**](#gt_lease-record) specified in **DHCPv4Scope.DHCPv4ClientsList** and the bitmask representation in memory specified in **DHCPv4IpRange.BitMask**. The caller of this function can free the memory pointed to by the *ScanList* parameter and its member the **ScanItems** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpScanDatabase(
 
@@ -8170,7 +8170,7 @@ DWORD R_DhcpScanDatabase(
 
 **FixFlag:** This is of type DWORD, defining the behavior of this method. This method enumerates the DHCPv4 client IPv4 addresses that are not in sync in both the stores, and if the *FixFlag* parameter is set to TRUE, it fixes those unmatched IPv4 addresses also.
 
-**ScanList:** This is a pointer of type [LPDHCP_SCAN_LIST](#Section_2.2.1.2.74) that points to the location containing the DHCPv4 client IPv4 addresses that are not in sync in both the stores.
+**ScanList:** This is a pointer of type [LPDHCP_SCAN_LIST](#Section_bc78876cbf9749a79093e772920b7ca1) that points to the location containing the DHCPv4 client IPv4 addresses that are not in sync in both the stores.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8347,7 +8347,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.31"></a>
 #### 3.1.4.31 R_DhcpEnumSubnetElementsV4 (Opnum 30)
 
-The **R_DhcpEnumSubnetElementsV4** method enumerates the list of a specific type of IPv4 subnet element (IPv4 [**reservation**](#gt_reservation) for DHCPv4 or BOOTP clients, IPv4 [**exclusion range**](#gt_exclusion-range), or IPv4 range) from a specific DHCPv4 IPv4 subnet. The caller of this function can free the memory pointed to by the *EnumElementInfo* parameter and its member the **Elements** array by calling the function midl_user_free specified in section [3](#Section_1.3).
+The **R_DhcpEnumSubnetElementsV4** method enumerates the list of a specific type of IPv4 subnet element (IPv4 [**reservation**](#gt_reservation) for DHCPv4 or BOOTP clients, IPv4 [**exclusion range**](#gt_exclusion-range), or IPv4 range) from a specific DHCPv4 IPv4 subnet. The caller of this function can free the memory pointed to by the *EnumElementInfo* parameter and its member the **Elements** array by calling the function midl_user_free specified in section [3](#Section_3).
 
 DWORD R_DhcpEnumSubnetElementsV4(
 
@@ -8379,7 +8379,7 @@ DWORD R_DhcpEnumSubnetElementsV4(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining un-enumerated subnet elements (in bytes) is less than this value, all IPv4 subnet elements for the specific type are returned. To retrieve all the IPv4 subnet elements of a specific type, 0xFFFFFFFF is specified.
 
-**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4](#Section_2.2.1.2.36) in which an IPv4 subnet element of type *EnumElementType* is returned for a specific IPv4 subnet *SubnetAddress*. If no IPv4 subnet element of the specific type is available for enumeration, this value is null. The caller is responsible for freeing this memory.
+**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4](#Section_753cdf6c0c4948df9143701f088d6eb2) in which an IPv4 subnet element of type *EnumElementType* is returned for a specific IPv4 subnet *SubnetAddress*. If no IPv4 subnet element of the specific type is available for enumeration, this value is null. The caller is responsible for freeing this memory.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of IPv4 subnet elements read in the *EnumElementInfo* parameter for a specific type of IPv4 subnet element. The caller MUST allocate memory for this parameter equal to the size of DWORD data type.
 
@@ -8496,7 +8496,7 @@ DWORD R_DhcpCreateClientInfoV4(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ClientInfo:** A pointer of type [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.12) structure that contains the DHCPv4 client lease record information that needs to be set on the DHCPv4 server. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** member fields when adding a DHCPv4 client lease record to the DHCPv4 server database. The **ClientHardwareAddress** member represents a [**DHCPv4 client-identifier**](#gt_dhcpv4-client-identifier) (section [2.2.1.2.5.1](#Section_2.2.1.2.5.1)). Members **ClientName**, **ClientComment**, **ClientLeaseExpires**, and **OwnerHost** are modified on the DHCPv4 client lease record identified by the **ClientIPAddress** member.
+**ClientInfo:** A pointer of type [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.14) structure that contains the DHCPv4 client lease record information that needs to be set on the DHCPv4 server. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** member fields when adding a DHCPv4 client lease record to the DHCPv4 server database. The **ClientHardwareAddress** member represents a [**DHCPv4 client-identifier**](#gt_dhcpv4-client-identifier) (section [2.2.1.2.5.1](#Section_2.2.1.2.5.1)). Members **ClientName**, **ClientComment**, **ClientLeaseExpires**, and **OwnerHost** are modified on the DHCPv4 client lease record identified by the **ClientIPAddress** member.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8550,7 +8550,7 @@ DWORD R_DhcpSetClientInfoV4(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ClientInfo:** A pointer of type [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.12) structure that contains the DHCPv4 client lease record information that needs to be modified on the DHCPv4 server database. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** member fields when modifying a DHCPv4 client lease record in the DHCPv4 server database. The **ClientHardwareAddress** member represents a [**DHCPv4 client-identifier**](#gt_dhcpv4-client-identifier) (section [2.2.1.2.5.1](#Section_2.2.1.2.5.1)). The members **ClientName**, **ClientComment**, **ClientLeaseExpires**, and **OwnerHost** are modified in the DHCPv4 client lease record identified by the **ClientIPaddress** member.
+**ClientInfo:** A pointer of type [DHCP_CLIENT_INFO_V4 (section 2.2.1.2.14)](#Section_2.2.1.2.14) structure that contains the DHCPv4 client lease record information that needs to be modified on the DHCPv4 server database. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** member fields when modifying a DHCPv4 client lease record in the DHCPv4 server database. The **ClientHardwareAddress** member represents a [**DHCPv4 client-identifier**](#gt_dhcpv4-client-identifier) (section [2.2.1.2.5.1](#Section_2.2.1.2.5.1)). The members **ClientName**, **ClientComment**, **ClientLeaseExpires**, and **OwnerHost** are modified in the DHCPv4 client lease record identified by the **ClientIPaddress** member.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8575,7 +8575,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.35"></a>
 #### 3.1.4.35 R_DhcpGetClientInfoV4 (Opnum 34)
 
-The **R_DhcpGetClientInfoV4** method retrieves the DHCPv4 client [**lease record**](#gt_lease-record) information from the [**DHCPv4 server database**](#gt_dhcp-server-database). The caller of this function can free the memory pointed to by the *ClientInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetClientInfoV4** method retrieves the DHCPv4 client [**lease record**](#gt_lease-record) information from the [**DHCPv4 server database**](#gt_dhcp-server-database). The caller of this function can free the memory pointed to by the *ClientInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetClientInfoV4(
 
@@ -8591,7 +8591,7 @@ DWORD R_DhcpGetClientInfoV4(
 
 **SearchInfo:** This is a pointer of type [DHCP_SEARCH_INFO (section 2.2.1.2.18)](#Section_2.2.1.2.18) structure that defines the key to be used to search the DHCPv4 client lease record on the DHCPv4 server. In case the *SearchType* member is DhcpClientName and there are multiple lease records with the same *ClientName*, the server will return client information for the client having the lowest numerical IP address.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_V4](#Section_2.2.1.2.12) that points to the location to which a specific DHCPv4 client lease record is retrieved. The caller is responsible for freeing this memory. The **ClientHardwareAddress** member represents a [**DHCPv4 client unique ID**](#gt_dhcpv4-client-unique-id) (section [2.2.1.2.5.2](#Section_2.2.1.2.5.2)).
+**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_V4](#Section_0605fa26c2ab4f06a15b36d81a3b0690) that points to the location to which a specific DHCPv4 client lease record is retrieved. The caller is responsible for freeing this memory. The **ClientHardwareAddress** member represents a [**DHCPv4 client unique ID**](#gt_dhcpv4-client-unique-id) (section [2.2.1.2.5.2](#Section_2.2.1.2.5.2)).
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8612,7 +8612,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.36"></a>
 #### 3.1.4.36 R_DhcpEnumSubnetClientsV4 (Opnum 35)
 
-The **R_DhcpEnumSubnetClientsV4** method is used to retrieve all DHCPv4 clients serviced from the specified IPv4 subnet. This method returns the DHCPv4 clients from all IPv4 subnets if the subnet address specified zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its member the **Clients** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetClientsV4** method is used to retrieve all DHCPv4 clients serviced from the specified IPv4 subnet. This method returns the DHCPv4 clients from all IPv4 subnets if the subnet address specified zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its member the **Clients** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetClientsV4(
 
@@ -8640,7 +8640,7 @@ DWORD R_DhcpEnumSubnetClientsV4(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. The minimum value is 1,024 bytes (1 kilobyte), and the maximum value is 65,536 bytes (64 kilobytes); if the input value is greater or less than this range, it MUST be set to the maximum or minimum value, respectively. To retrieve all the DHCPv4 clients serviced from a specific IPv4 subnet, 0xFFFFFFFF is specified.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY_V4](#Section_2.2.1.2.15) that points to the location that contains the DHCPv4 client [**lease record**](#gt_lease-record) array.
+**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY_V4](#Section_97b6fd886a1e48b5868268c2c2a1f6b3) that points to the location that contains the DHCPv4 client [**lease record**](#gt_lease-record) array.
 
 **ClientsRead:** This is a pointer to a DWORD that specifies the number of DHCPv4 client lease records read in the *ClientInfo* parameter. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -8726,7 +8726,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.38"></a>
 #### 3.1.4.38 R_DhcpGetSuperScopeInfoV4 (Opnum 37)
 
-The **R_DhcpGetSuperScopeInfoV4** method retrieves all the [**superscope**](#gt_superscope) information from the DHCPv4 server. The caller of this function can free the memory pointed to by the *SuperScopeTable* parameter and its member the **pEntries** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetSuperScopeInfoV4** method retrieves all the [**superscope**](#gt_superscope) information from the DHCPv4 server. The caller of this function can free the memory pointed to by the *SuperScopeTable* parameter and its member the **pEntries** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetSuperScopeInfoV4(
 
@@ -8738,7 +8738,7 @@ DWORD R_DhcpGetSuperScopeInfoV4(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**SuperScopeTable:** It is a pointer to type [LPDHCP_SUPER_SCOPE_TABLE](#Section_2.2.1.2.86) that points to a location that contains the information for all the superscopes.
+**SuperScopeTable:** It is a pointer to type [LPDHCP_SUPER_SCOPE_TABLE](#Section_c4fd87a712e34a7a9a28bdc40b0affca) that points to a location that contains the information for all the superscopes.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8839,7 +8839,7 @@ Most of the settings are effective immediately. The DHCPv4 server needs to be re
 - *Set_DatabasePath*
 - *Set_DatabaseLoggingFlag*
 - *Set_RestoreFlag*
-**ConfigInfo:** A pointer of type [DHCP_SERVER_CONFIG_INFO_V4 (section 2.2.1.2.54)](#Section_2.2.1.2.53) structure, containing the settings for the DHCPv4 server. The value that is passed here depends on the *FieldsToSet* parameter. Details of the dependencies follow the return value description.
+**ConfigInfo:** A pointer of type [DHCP_SERVER_CONFIG_INFO_V4 (section 2.2.1.2.54)](#Section_2.2.1.2.54) structure, containing the settings for the DHCPv4 server. The value that is passed here depends on the *FieldsToSet* parameter. Details of the dependencies follow the return value description.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully. Otherwise, the return value contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8871,7 +8871,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.41"></a>
 #### 3.1.4.41 R_DhcpServerGetConfigV4 (Opnum 40)
 
-The **R_DhcpServerGetConfigV4** method retrieves the current DHCPv4 server setting. The caller of this function can free the memory pointed to by the *ConfigInfo* parameter by calling the function **midl_user_free**, specified in section [3](#Section_1.3).
+The **R_DhcpServerGetConfigV4** method retrieves the current DHCPv4 server setting. The caller of this function can free the memory pointed to by the *ConfigInfo* parameter by calling the function **midl_user_free**, specified in section [3](#Section_3).
 
 DWORD R_DhcpServerGetConfigV4(
 
@@ -8883,7 +8883,7 @@ DWORD R_DhcpServerGetConfigV4(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ConfigInfo:** This is a pointer of type [LPDHCP_SERVER_CONFIG_INFO_V4](#Section_2.2.1.2.53) that points to the location where the DHCPv4 server settings are retrieved. The caller of this method can free up this structure after use.
+**ConfigInfo:** This is a pointer of type [LPDHCP_SERVER_CONFIG_INFO_V4](#Section_f440378824c547f8b35e14627146fce9) that points to the location where the DHCPv4 server settings are retrieved. The caller of this method can free up this structure after use.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -8980,7 +8980,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.43"></a>
 #### 3.1.4.43 R_DhcpServerGetConfigVQ (Opnum 42)
 
-The **R_DhcpServerGetConfigVQ** method retrieves the current DHCPv4 server setting. The caller of this function can free the memory pointed to by the *ConfigInfo* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpServerGetConfigVQ** method retrieves the current DHCPv4 server setting. The caller of this function can free the memory pointed to by the *ConfigInfo* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpServerGetConfigVQ(
 
@@ -8992,7 +8992,7 @@ DWORD R_DhcpServerGetConfigVQ(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ConfigInfo:** This is a pointer of type [LPDHCP_SERVER_CONFIG_INFO_VQ](#Section_2.2.1.2.55) that points to the location where the DHCPv4 server settings are retrieved. The caller of this method can free up this structure after use.
+**ConfigInfo:** This is a pointer of type [LPDHCP_SERVER_CONFIG_INFO_VQ](#Section_284142af15f44af5aa0327652e4de460) that points to the location where the DHCPv4 server settings are retrieved. The caller of this method can free up this structure after use.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -9024,7 +9024,7 @@ DWORD R_DhcpGetMibInfoVQ(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO_VQ](#Section_2.2.1.2.50) that points to the location that contains the MIB information of the DHCPv4 server.
+**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO_VQ](#Section_058a324739614b72b0ce19ef92606a04) that points to the location that contains the MIB information of the DHCPv4 server.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -9133,7 +9133,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.47"></a>
 #### 3.1.4.47 R_DhcpGetClientInfoVQ (Opnum 46)
 
-The **R_DhcpGetClientInfoVQ** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The caller of this function can free the memory pointed to by the *ClientInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetClientInfoVQ** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The caller of this function can free the memory pointed to by the *ClientInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetClientInfoVQ(
 
@@ -9170,7 +9170,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.48"></a>
 #### 3.1.4.48 R_DhcpEnumSubnetClientsVQ (Opnum 47)
 
-The **R_DhcpEnumSubnetClientsVQ** method is used to retrieve all DHCPv4 clients serviced from the specified IPv4 subnet. This method returns DHCPv4 clients from all IPv4 subnets if the subnet address specified is zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its member the **Clients** array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetClientsVQ** method is used to retrieve all DHCPv4 clients serviced from the specified IPv4 subnet. This method returns DHCPv4 clients from all IPv4 subnets if the subnet address specified is zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its member the **Clients** array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetClientsVQ(
 
@@ -9198,7 +9198,7 @@ DWORD R_DhcpEnumSubnetClientsVQ(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. The minimum value is 1,024 bytes (1 kilobyte), and the maximum value is 65,536 bytes (64 kilobytes); if the input value is greater or less than this range, it MUST be set to the maximum or minimum value, respectively. To retrieve all the DHCPv4 clients serviced by a specific IPv4 subnet, 0xFFFFFFFF is specified.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY_VQ](#Section_2.2.1.2.12) that points to the location that contains the DHCPv4 client lease record array.
+**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY_VQ](#Section_5f96067fe22c40bd9f65bde24f1ca5fa) that points to the location that contains the DHCPv4 client lease record array.
 
 **ClientsRead:** This is a pointer to a DWORD that specifies the number of DHCPv4 client lease records read in the *ClientInfo* parameter. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -9286,7 +9286,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.1.4.50"></a>
 #### 3.1.4.50 R_DhcpGetSubnetInfoVQ (Opnum 49)
 
-The **R_DhcpGetSubnetInfoVQ** method retrieves the information about a specific IPv4 subnet defined on the DHCPv4 server. This method is an extension of [R_DhcpGetSubnetInfo](#Section_3.1.4.50) method in which the [**NAP**](#gt_network-access-protection-nap) state is not returned. The caller of this function can free the memory pointed to by the *SubnetInfoVQ* parameter, by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetSubnetInfoVQ** method retrieves the information about a specific IPv4 subnet defined on the DHCPv4 server. This method is an extension of [R_DhcpGetSubnetInfo](#Section_3.1.4.3) method in which the [**NAP**](#gt_network-access-protection-nap) state is not returned. The caller of this function can free the memory pointed to by the *SubnetInfoVQ* parameter, by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetSubnetInfoVQ(
 
@@ -9302,7 +9302,7 @@ DWORD R_DhcpGetSubnetInfoVQ(
 
 **SubnetAddress:** This is of type [DHCP_IP_ADDRESS](#Section_2.2.1.2.1), containing the IPv4 subnet ID for which the information is retrieved.
 
-**SubnetInfoVQ:** This is a pointer of type [LPDHCP_SUBNET_INFO_VQ](#Section_2.2.1.2.45), in which the information for the subnet matching the ID specified by the *SubnetAddress* parameter is retrieved.
+**SubnetInfoVQ:** This is a pointer of type [LPDHCP_SUBNET_INFO_VQ](#Section_baec452a0eda44d4b2d7acd86950b2a6), in which the information for the subnet matching the ID specified by the *SubnetAddress* parameter is retrieved.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -9384,7 +9384,7 @@ For the list of calls supported by this interface, see [Appendix A: Full IDL](#S
 
 This section describes a conceptual model of possible data organization that an implementation can maintain to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-Refer to the ADM definitions described in section [3.1.1](#Section_1.3). These definitions are also applicable for Message Processing Events and Sequencing Rules in section [3.2.4](#Section_3.2).
+Refer to the ADM definitions described in section [3.1.1](#Section_3.1.1). These definitions are also applicable for Message Processing Events and Sequencing Rules in section [3.2.4](#Section_3.2.4).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -9451,7 +9451,7 @@ To receive incoming remote calls for this interface, the server MUST implement a
 | [R_DhcpAddSubnetElementV5](#Section_3.2.4.38) | This method adds an IPv4 subnet element to the specified subnet. The subnet elements can be IPv4 reservation for DHCPv4 or BOOTP clients, IPv4 range, or IPv4 exclusion range for DHCPv4 or BOOTP clients. Opnum: 37 |
 | [R_DhcpEnumSubnetElementsV5](#Section_3.2.4.39) | This method enumerates a list of IPv4 subnet elements for a specific IPv4 subnet defined on the DHCPv4 server. Opnum: 38 |
 | [R_DhcpRemoveSubnetElementV5](#Section_3.2.4.40) | This method removes an IPv4 subnet element from an IPv4 subnet defined on the DHCPv4 server. Opnum: 39 |
-| [R_DhcpGetServerBindingInfo](#Section_3.2.4.70) | This method retrieves the IPv4 binding information for the interfaces bound to the DHCPv4 server. Opnum: 40 |
+| [R_DhcpGetServerBindingInfo](#Section_3.2.4.41) | This method retrieves the IPv4 binding information for the interfaces bound to the DHCPv4 server. Opnum: 40 |
 | [R_DhcpSetServerBindingInfo](#Section_3.2.4.42) | This method sets/modifiesIPv4 interface bindings for the DHCPv4 server. Opnum: 41 |
 | [R_DhcpQueryDnsRegCredentials](#Section_3.2.4.43) | This method retrieves the currently set DNS credentials, user name, and domain. Opnum: 42 |
 | [R_DhcpSetDnsRegCredentials](#Section_3.2.4.44) | This method sets the DNS user name and credentials in the DHCP server that is used for DNS registrations for the DHCP client lease record. Opnum: 43 |
@@ -9548,7 +9548,7 @@ To receive incoming remote calls for this interface, the server MUST implement a
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 R_DhcpEnumSubnetClientsV5 (Opnum 0)
 
-The **R_DhcpEnumSubnetClientsV5** method is used to retrieve all [**DHCPv4 clients**](#gt_dhcp-client) serviced from the specified IPv4 subnet. This method returns DHCPv4 clients from all IPv4 subnets if the subnet address specified zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its **Clients** member by calling the function **midl_user_free** (see section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetClientsV5** method is used to retrieve all [**DHCPv4 clients**](#gt_dhcp-client) serviced from the specified IPv4 subnet. This method returns DHCPv4 clients from all IPv4 subnets if the subnet address specified zero. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and its **Clients** member by calling the function **midl_user_free** (see section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetClientsV5(
 
@@ -9674,7 +9674,7 @@ When processing this call, the MADCAP server MUST do the following:
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 R_DhcpGetMScopeInfo (Opnum 2)
 
-The **R_DhcpGetMScopeInfo** method retrieves the information of the IPv4 multicast subnet managed by the MADCAP server. The caller of this function can free the memory pointed by *MScopeInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetMScopeInfo** method retrieves the information of the IPv4 multicast subnet managed by the MADCAP server. The caller of this function can free the memory pointed by *MScopeInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetMScopeInfo(
 
@@ -9714,7 +9714,7 @@ When processing this call, the MADCAP server MUST do the following:
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 R_DhcpEnumMScopes (Opnum 3)
 
-The **R_DhcpEnumMScopes** method enumerates IPv4 multicast subnet names configured on the MADCAP server. The caller of this function can free the memory pointed to by the *MScopeTable* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumMScopes** method enumerates IPv4 multicast subnet names configured on the MADCAP server. The caller of this function can free the memory pointed to by the *MScopeTable* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumMScopes(
 
@@ -9829,7 +9829,7 @@ When processing this call, the MADCAP server MUST do the following:
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 R_DhcpEnumMScopeElements (Opnum 5)
 
-The **R_DhcpEnumMScopeElements** method enumerates the list of specific types of IPv4 multicast subnet elements (IPv4 range of IPv4 exclusion) from a specific IPv4 multicast subnet. The caller of this function can free the memory pointed to by *EnumElementInfo* and its member **Elements** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumMScopeElements** method enumerates the list of specific types of IPv4 multicast subnet elements (IPv4 range of IPv4 exclusion) from a specific IPv4 multicast subnet. The caller of this function can free the memory pointed to by *EnumElementInfo* and its member **Elements** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumMScopeElements(
 
@@ -9861,7 +9861,7 @@ DWORD R_DhcpEnumMScopeElements(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining unenumerated IPv4 multicast subnet element (in bytes) is less than this value, all IPv4 subnet elements for a specific type are returned. To retrieve all the IPv4 subnet elements of a specific type, 0xFFFFFFFF is specified.
 
-**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4](#Section_2.2.1.2.36) in which the IPv4 multicast subnet element of type *EnumElementType* is returned for a specific IPv4 multicast subnet corresponding to *MScopeNames*. If no IPv4 multicast subnet element of that specific type is available for enumeration, this value is null.
+**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V4](#Section_753cdf6c0c4948df9143701f088d6eb2) in which the IPv4 multicast subnet element of type *EnumElementType* is returned for a specific IPv4 multicast subnet corresponding to *MScopeNames*. If no IPv4 multicast subnet element of that specific type is available for enumeration, this value is null.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of IPv4 multicast subnet elements read in *EnumElementInfo* for a specific type of IPv4 multicast subnet element. The caller MUST allocate memory for this parameter equal to the size of a DWORD data type.
 
@@ -10002,7 +10002,7 @@ When processing this call, the MADCAP server MUST do the following:
 <a id="Section_3.2.4.9"></a>
 #### 3.2.4.9 R_DhcpScanMDatabase (Opnum 8)
 
-The **R_DhcpScanMDatabase** method can be used by DHCP servers to enumerate and/or fix inconsistencies between the MADCAP lease records and the bitmask representation in memory (section [3.1.1.4](#Section_3.1.1.4)). The caller of this function can free the memory pointed to by *ScanList* and its member **ScanItems** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpScanMDatabase** method can be used by DHCP servers to enumerate and/or fix inconsistencies between the MADCAP lease records and the bitmask representation in memory (section [3.1.1.4](#Section_3.1.1.4)). The caller of this function can free the memory pointed to by *ScanList* and its member **ScanItems** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpScanMDatabase(
 
@@ -10128,7 +10128,7 @@ When processing this call, the MADCAP server MUST do the following:
 <a id="Section_3.2.4.12"></a>
 #### 3.2.4.12 R_DhcpGetMClientInfo (Opnum 11)
 
-The **R_DhcpGetMClientInfo** method retrieves the specified MADCAP client lease record information from the MADCAP server. The caller of this function can free the memory pointed to by *ClientInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetMClientInfo** method retrieves the specified MADCAP client lease record information from the MADCAP server. The caller of this function can free the memory pointed to by *ClientInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetMClientInfo(
 
@@ -10204,7 +10204,7 @@ When processing this call, the MADCAP server MUST do the following:
 <a id="Section_3.2.4.14"></a>
 #### 3.2.4.14 R_DhcpEnumMScopeClients (Opnum 13)
 
-The **R_DhcpEnumMScopeClients** method enumerates all MADCAP clients serviced from the specified IPv4 multicast subnet. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and other client parameters by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumMScopeClients** method enumerates all MADCAP clients serviced from the specified IPv4 multicast subnet. The caller of this function can free the memory pointed to by the *ClientInfo* parameter and other client parameters by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumMScopeClients(
 
@@ -10232,7 +10232,7 @@ DWORD R_DhcpEnumMScopeClients(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. The minimum value is 1,024 bytes (1 kilobyte), and the maximum value is 65,536 bytes (64 kilobytes). If the input value is greater or less than this range, it MUST be set to the maximum or minimum value, respectively. To retrieve all the MADCAP clients serviced by a specific multicast scope, 0xFFFFFFFF is specified.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_MCLIENT_INFO_ARRAY](#Section_2.2.1.2.21) that points to the location that contains the MADCAP lease record array.
+**ClientInfo:** This is a pointer of type [LPDHCP_MCLIENT_INFO_ARRAY](#Section_d418cd5597bd4e05bb799c47cf09b6f4) that points to the location that contains the MADCAP lease record array.
 
 **ClientsRead:** This is a pointer to a DWORD that specifies the number of MADCAP client lease records read in *ClientInfo*. The caller MUST allocate memory for this parameter equal to the size of a DWORD data type.
 
@@ -10390,7 +10390,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.17"></a>
 #### 3.2.4.17 R_DhcpGetOptionInfoV5 (Opnum 16)
 
-The **R_DhcpGetOptionInfoV5** method retrieves the option definition of a specific option for a specific user class and vendor class at the default option level. If the user class or vendor class is not defined, the option definition is retrieved for the default user class or vendor class. This is an extension method of [R_DhcpGetOptionInfo (section 3.1.4.11)](#Section_3.1.4.11), which retrieves the option definition of a specific option for the default user and vendor class. The caller of this function can free the memory pointed to by *OptionInfo* by calling the function **midl_user_free** (see section [3](#Section_1.3)).
+The **R_DhcpGetOptionInfoV5** method retrieves the option definition of a specific option for a specific user class and vendor class at the default option level. If the user class or vendor class is not defined, the option definition is retrieved for the default user class or vendor class. This is an extension method of [R_DhcpGetOptionInfo (section 3.1.4.11)](#Section_3.1.4.11), which retrieves the option definition of a specific option for the default user and vendor class. The caller of this function can free the memory pointed to by *OptionInfo* by calling the function **midl_user_free** (see section [3](#Section_3)).
 
 DWORD R_DhcpGetOptionInfoV5(
 
@@ -10449,7 +10449,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.18"></a>
 #### 3.2.4.18 R_DhcpEnumOptionsV5 (Opnum 17)
 
-The **R_DhcpEnumOptionsV5** method enumerates the option definitions for a specific user class and vendor class for the default option level. If the user class or the vendor class is not defined, the option definitions are enumerated for the default user class or vendor class. This method is an extension of the method in [R_DhcpEnumOptions (section 3.1.4.24)](#Section_3.1.4.24), which enumerates the option definition for a default user and vendor class. The caller of this function can free the memory pointed to by the *Options* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumOptionsV5** method enumerates the option definitions for a specific user class and vendor class for the default option level. If the user class or the vendor class is not defined, the option definitions are enumerated for the default user class or vendor class. This method is an extension of the method in [R_DhcpEnumOptions (section 3.1.4.24)](#Section_3.1.4.24), which enumerates the option definition for a default user and vendor class. The caller of this function can free the memory pointed to by the *Options* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumOptionsV5(
 
@@ -10490,7 +10490,7 @@ DWORD R_DhcpEnumOptionsV5(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining unenumerated option definitions (in bytes) is less than this value, all option definitions are returned. To retrieve all the option definitions defined for a specific vendor and user class, 0xFFFFFFFF is specified.
 
-**Options:** This is a pointer of type [LPDHCP_OPTION_ARRAY](#Section_2.2.1.2.25) that points to the location where all the option definitions for a specific user and vendor class are retrieved from the DHCPv4 server.
+**Options:** This is a pointer of type [LPDHCP_OPTION_ARRAY](#Section_34b6a3470458415a98080dc631a8c547) that points to the location where all the option definitions for a specific user and vendor class are retrieved from the DHCPv4 server.
 
 **OptionsRead:** This is a pointer to a DWORD value that specifies the number of option definitions read in *Options*. The caller must allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -10615,7 +10615,7 @@ DWORD R_DhcpSetOptionValueV5(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being set. This parameter is optional. If the vendor class is not specified, the option value is set for a default vendor class.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the DHCPv4 scope this option value is set on. This value contains the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are set.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the DHCPv4 scope this option value is set on. This value contains the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are set.
 
 **OptionValue:** A pointer to [DHCP_OPTION_DATA (section 2.2.1.2.24)](#Section_2.2.1.2.24) structure that contains the option value that is set for an option corresponding to the *OptionId*. For Dynamic DNS update settings, see section [3.3.1](#Section_3.3.1).
 
@@ -10687,7 +10687,7 @@ DWORD R_DhcpSetOptionValuesV5(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being set. This parameter is optional. If a vendor class is not specified, the option values are set for a default vendor class.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the DHCPv4 scope this option value is set on. This value contains the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are set.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the DHCPv4 scope this option value is set on. This value contains the level (that is, default, server, scope, multicast scope, or IPv4 reservation level) at which the option values are set.
 
 **OptionValues:** This is a pointer of type [DHCP_OPTION_VALUE_ARRAY (section 2.2.1.2.43)](#Section_2.2.1.2.43) that points to location that contains one or more option identifiers, along with the values.
 
@@ -10728,7 +10728,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.22"></a>
 #### 3.2.4.22 R_DhcpGetOptionValueV5 (Opnum 21)
 
-The **R_DhcpGetOptionValueV5** method retrieves the option value for a specific option on the DHCPv4 server for a specific user class and vendor class. If the user class or the vendor class is not specified, the option value is retrieved from the default user class or vendor class. *ScopeInfo* defines the scope from which the option value needs to be retrieved. The caller of this function can free the memory pointed to by *OptionValue* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetOptionValueV5** method retrieves the option value for a specific option on the DHCPv4 server for a specific user class and vendor class. If the user class or the vendor class is not specified, the option value is retrieved from the default user class or vendor class. *ScopeInfo* defines the scope from which the option value needs to be retrieved. The caller of this function can free the memory pointed to by *OptionValue* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetOptionValueV5(
 
@@ -10763,9 +10763,9 @@ DWORD R_DhcpGetOptionValueV5(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being retrieved. This parameter is optional. If the vendor class is not specified, the option value is retrieved for the default vendor class.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the DHCPv4 scope from which this option value is retrieved. This value defines that the option is being retrieved from default, server, multicast scope, or scope level or for an IPv4 reservation.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the DHCPv4 scope from which this option value is retrieved. This value defines that the option is being retrieved from default, server, multicast scope, or scope level or for an IPv4 reservation.
 
-**OptionValue:** This is a pointer of type [LPDHCP_OPTION_VALUE](#Section_2.2.1.2.25) in which the option value is retrieved corresponding to *OptionID*. For Dynamic DNS update settings, see section [3.3.1](#Section_3.3.1).
+**OptionValue:** This is a pointer of type [LPDHCP_OPTION_VALUE](#Section_2.2.1.2.42) in which the option value is retrieved corresponding to *OptionID*. For Dynamic DNS update settings, see section [3.3.1](#Section_3.3.1).
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -10792,7 +10792,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.23"></a>
 #### 3.2.4.23 R_DhcpEnumOptionValuesV5 (Opnum 22)
 
-The **R_DhcpEnumOptionValuesV5** method enumerates all the option values for the specific user class and vendor class at a specified scope defined by *ScopeInfo*. If the user class or the vendor class is not specified, the option values are retrieved from the default user class or vendor class. The caller of this function can free the memory pointed to by *OptionValues* and the **Values** member of *OptionValues* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumOptionValuesV5** method enumerates all the option values for the specific user class and vendor class at a specified scope defined by *ScopeInfo*. If the user class or the vendor class is not specified, the option values are retrieved from the default user class or vendor class. The caller of this function can free the memory pointed to by *OptionValues* and the **Values** member of *OptionValues* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumOptionValuesV5(
 
@@ -10831,7 +10831,7 @@ DWORD R_DhcpEnumOptionValuesV5(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option values are enumerated. This parameter is optional. If the vendor class is not specified, the option values are enumerated for a default vendor class.
 
-**ScopeInfo:** This is a pointer to a **DHCP_OPTION_SCOPE_INFO** (section [2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the DHCPv4 scope the option value is enumerated on. This value defines the option values that are being retrieved from the default, server, multicast scope, scope, or IPv4 reservation level.
+**ScopeInfo:** This is a pointer to a **DHCP_OPTION_SCOPE_INFO** (section [2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the DHCPv4 scope the option value is enumerated on. This value defines the option values that are being retrieved from the default, server, multicast scope, scope, or IPv4 reservation level.
 
 **ResumeHandle:** This is a pointer of type **DHCP_RESUME_HANDLE** (section [2.2.1.2.6)](#Section_2.2.1.2.6) that identifies the enumeration operation. Initially, this value MUST be set to zero, with a successful call returning the handle value used for subsequent enumeration requests. For example, if *PreferredMaximum* is set to 1,000 bytes, and 2,000 bytes' worth of option values are stored on the DHCPv4 server, the resume handle can be used after the first 1,000 bytes are retrieved to obtain the next 1,000 on a subsequent call, and so forth.
 
@@ -10948,7 +10948,7 @@ DWORD R_DhcpRemoveOptionValueV5(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being removed. This parameter is optional, and if a vendor class is not specified, the option value is removed for the default vendor class.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the DHCPv4 scope this option value is removed on. This value defines that option as being removed from the server, multicast scope, or scope level or from an IPv4 reservation.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the DHCPv4 scope this option value is removed on. This value defines that option as being removed from the server, multicast scope, or scope level or from an IPv4 reservation.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -11102,7 +11102,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.28"></a>
 #### 3.2.4.28 R_DhcpGetClassInfo (Opnum 27)
 
-The **R_DhcpGetClassInfo** method retrieves the user class or vendor class information configured for the DHCP server. The caller of this function can free the memory pointed to by *FilledClassInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetClassInfo** method retrieves the user class or vendor class information configured for the DHCP server. The caller of this function can free the memory pointed to by *FilledClassInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetClassInfo(
 
@@ -11146,7 +11146,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.29"></a>
 #### 3.2.4.29 R_DhcpEnumClasses (Opnum 28)
 
-The **R_DhcpEnumClasses** method enumerates [**user classes**](#gt_user-class) or [**vendor classes**](#gt_vendor-class) configured for the DHCP server. The caller of this function can free the memory pointed to by *ClassInfoArray* and **Classes** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumClasses** method enumerates [**user classes**](#gt_user-class) or [**vendor classes**](#gt_vendor-class) configured for the DHCP server. The caller of this function can free the memory pointed to by *ClassInfoArray* and **Classes** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumClasses(
 
@@ -11174,7 +11174,7 @@ DWORD R_DhcpEnumClasses(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to be returned. If the number of bytes required in memory for the remaining unenumerated classes is less than the *PreferredMaximum* value, then all the classes for the DHCP server are returned. To retrieve all the classes defined on the DHCP server, 0xFFFFFFFF is specified.
 
-**ClassInfoArray:** This is a pointer of type [LPDHCP_CLASS_INFO_ARRAY](#Section_2.2.1.2.75) in which information of all the classes defined on the DHCP server is retrieved.
+**ClassInfoArray:** This is a pointer of type [LPDHCP_CLASS_INFO_ARRAY](#Section_023265a130574f43bb2b1fe304007566) in which information of all the classes defined on the DHCP server is retrieved.
 
 **nRead:** This is a pointer to a DWORD value that specifies the number of classes returned in *ClassInfoArray*. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -11208,7 +11208,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.30"></a>
 #### 3.2.4.30 R_DhcpGetAllOptions (Opnum 29)
 
-The **R_DhcpGetAllOptions** method retrieves all default option definitions, as well as specific user class and vendor class option definitions. The caller of this function can free the memory pointed to by *OptionStruct*, **NonVendorOptions** and other Options by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetAllOptions** method retrieves all default option definitions, as well as specific user class and vendor class option definitions. The caller of this function can free the memory pointed to by *OptionStruct*, **NonVendorOptions** and other Options by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetAllOptions(
 
@@ -11246,7 +11246,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.31"></a>
 #### 3.2.4.31 R_DhcpGetAllOptionValues (Opnum 30)
 
-The **R_DhcpGetAllOptionValues** method retrieves the option values for all the options configured at the DHCPv4 server from the specific scope for all [**user classes**](#gt_user-class) and [**vendor classes**](#gt_vendor-class). *ScopeInfo* defines the scope from which this option values are retrieved. The caller of this method can free the memory pointed to by *Values*, its **Options** member, and the members of each element in the **Options** array, by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetAllOptionValues** method retrieves the option values for all the options configured at the DHCPv4 server from the specific scope for all [**user classes**](#gt_user-class) and [**vendor classes**](#gt_vendor-class). *ScopeInfo* defines the scope from which this option values are retrieved. The caller of this method can free the memory pointed to by *Values*, its **Options** member, and the members of each element in the **Options** array, by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetAllOptionValues(
 
@@ -11264,9 +11264,9 @@ DWORD R_DhcpGetAllOptionValues(
 
 **Flags:** This is of type DWORD and is reserved for future use. Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
 
-**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) structure that contains information describing the DHCPv4 scope the option values are retrieved on. This value defines that option values are being retrieved from the default, server, multicast scope, or scope level, or for an IPv4 reservation.
+**ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) structure that contains information describing the DHCPv4 scope the option values are retrieved on. This value defines that option values are being retrieved from the default, server, multicast scope, or scope level, or for an IPv4 reservation.
 
-**Values:** This is a pointer to type [LPDHCP_ALL_OPTION_VALUES](#Section_2.2.1.2.44) in which a list of vendor-specific option values and default option values is retrieved.
+**Values:** This is a pointer to type [LPDHCP_ALL_OPTION_VALUES](#Section_e9cf150647f64d939893a0b97b36425a) in which a list of vendor-specific option values and default option values is retrieved.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -11296,7 +11296,7 @@ Retrieve DHCPv4ResvOptValueList from the **DHCPv4Reservation** entry.
 - Get the number of **DHCPv4OptionValue** objects in the retrieved list: **DHCPv4ServerOptValueList**, **DHCPv4ScopeOptValueList**, **DHCPv4MScopeOptValueList**, or **DHCPv4ResvOptValueList**. Allocate memory to Options whose size is equal to (2 * (number of **DHCPv4OptionValue** objects) * (size of the structure pointed to by *Options*)).
 - For each **DHCPv4OptionValue** object in the retrieved list do the following:
 - Get the first two non-filled indices in the array pointed to by *Options*. Set *IsVendor* to FALSE for the first one and to TRUE for the second one. For both of them, allocate required memory to *ClassName* and *VendorName* and copy values in **DHCPv4OptionValue.UserClass** and **DHCPv4OptionValue.VendorClass** objects into them respectively. Also allocate memory to *OptionsArray* whose size is equal to the size of the data type [DHCP_OPTION_VALUE_ARRAY](#Section_2.2.1.2.43) for both of them. Initialize *NumElements* in *OptionsArray* to zero and *Values* to NULL.
-- Go through each **DHCPv4ClassedOptValue** object in **DHCPv4ClassedOptValueList** and count the number of such objects that have *OptionId* less than or equal to 256. For the first non-filled index obtained above, set *NumElements* in *OptionsArray* equal to the count and allocate memory to *Values* in *OptionArray* whose size is equal to the size of the data type [DHCP_OPTION_VALUE](#Section_2.2.1.2.25) multiplied by the count. Copy the **DHCPv4ClassedOptValue** objects in **DHCPv4ClassedOptValueList** having *OptionId* less than or equal to 256 to *OptionsArray*.
+- Go through each **DHCPv4ClassedOptValue** object in **DHCPv4ClassedOptValueList** and count the number of such objects that have *OptionId* less than or equal to 256. For the first non-filled index obtained above, set *NumElements* in *OptionsArray* equal to the count and allocate memory to *Values* in *OptionArray* whose size is equal to the size of the data type [DHCP_OPTION_VALUE](#Section_2.2.1.2.42) multiplied by the count. Copy the **DHCPv4ClassedOptValue** objects in **DHCPv4ClassedOptValueList** having *OptionId* less than or equal to 256 to *OptionsArray*.
 - Go through each **DHCPv4ClassedOptValue** object in **DHCPv4ClassedOptValueList** and count the number of such objects that have *OptionId* greater than 256. For the second non-filled index obtained above, set *NumElements* in *OptionsArray* equal to the count and allocate memory to Values in *OptionArray* whose size is equal to the size of the data type DHCP_OPTION_VALUE multiplied by the count. Copy the **DHCPv4ClassedOptValue** objects in **DHCPv4ClassedOptValueList** having *OptionId* greater than 256 to *OptionsArray.*
 - Return ERROR_SUCCESS.
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
@@ -11304,7 +11304,7 @@ Retrieve DHCPv4ResvOptValueList from the **DHCPv4Reservation** entry.
 <a id="Section_3.2.4.32"></a>
 #### 3.2.4.32 R_DhcpGetMCastMibInfo (Opnum 31)
 
-The **R_DhcpGetMCastMibInfo** method retrieves the multicast counter values of the MADCAP server. The caller of this function can free the memory pointed to by *MibInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetMCastMibInfo** method retrieves the multicast counter values of the MADCAP server. The caller of this function can free the memory pointed to by *MibInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetMCastMibInfo(
 
@@ -11437,7 +11437,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.35"></a>
 #### 3.2.4.35 R_DhcpServerQueryAttribute (Opnum 34)
 
-The **R_DhcpServerQueryAttribute** method retrieves attribute information from the DHCP server. The caller of this function can free the memory pointed to by *pDhcpAttrib* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpServerQueryAttribute** method retrieves attribute information from the DHCP server. The caller of this function can free the memory pointed to by *pDhcpAttrib* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpServerQueryAttribute(
 
@@ -11455,7 +11455,7 @@ DWORD R_DhcpServerQueryAttribute(
 
 **dwReserved:** This flag is not used and MUST be set to 0.
 
-**DhcpAttribId:** This is of type [DHCP_ATTRIB_ID (section 2.2.1.1.1)](#Section_2.2.1.2.78), specifying the attribute to be queried.
+**DhcpAttribId:** This is of type [DHCP_ATTRIB_ID (section 2.2.1.1.1)](#Section_2.2.1.1.1), specifying the attribute to be queried.
 
 **pDhcpAttrib:** This is a pointer to type [LPDHCP_ATTRIB (section 2.2.1.2.78)](#Section_2.2.1.2.78) that points to a location that contains the value and the type of the queried attribute.
 
@@ -11482,7 +11482,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.36"></a>
 #### 3.2.4.36 R_DhcpServerQueryAttributes (Opnum 35)
 
-The **R_DhcpServerQueryAttributes** method retrieves one or more attributes information from the DHCP server. The caller of this function can free the memory pointed to by *pDhcpAttribArr* and *pDhcpAttribs* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpServerQueryAttributes** method retrieves one or more attributes information from the DHCP server. The caller of this function can free the memory pointed to by *pDhcpAttribArr* and *pDhcpAttribs* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpServerQueryAttributes (
 
@@ -11504,9 +11504,9 @@ DWORD R_DhcpServerQueryAttributes (
 
 **dwAttribCount:** This is of type ULONG and contains the number of attributes queried.
 
-**pDhcpAttribs:** This is a pointer to type [DHCP_ATTRIB_ID (section 2.2.1.1.1)](#Section_2.2.1.2.78) and points to an array of length *dwAttribCount* which contains the queried attribute.
+**pDhcpAttribs:** This is a pointer to type [DHCP_ATTRIB_ID (section 2.2.1.1.1)](#Section_2.2.1.1.1) and points to an array of length *dwAttribCount* which contains the queried attribute.
 
-**pDhcpAttribArr:** This is a pointer to type [LPDHCP_ATTRIB_ARRAY](#Section_2.2.1.2.78) that points to an array that contains attribute information for all of the valid attributes queried.
+**pDhcpAttribArr:** This is a pointer to type [LPDHCP_ATTRIB_ARRAY](#Section_3c043b1790244d36b2fc600c1ca72e46) that points to an array that contains attribute information for all of the valid attributes queried.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -11618,7 +11618,7 @@ When processing this call, the DHCP server MUST do the following:
 - If **DHCPv4Scope.DHCPv4IpRangesList** is not empty and the new IP address range is not the same as the **DHCPv4IpRange.RangeInfo** of an existing IP address range, the new IP address range (specified by the **StartAddress** and **EndAddress** members of the [DHCP_BOOTP_IP_RANGE (section 2.2.1.2.37)](#Section_2.2.1.2.37) structure) has to either be completely within the existing address range or completely contain the existing address range; if neither condition is met, return error ERROR_DHCP_INVALID_RANGE.
 - If **DHCPv4Scope.DHCPv4IpRangesList** is empty, create a new **DHCPv4IpRange** object, set the **DHCPv4IpRange.RangeInfo** to **IpRange** and **DHCPv4IpRange.RangeInfo.BootPAllocated** to 0. If the **ElementType** is set to DhcpIpRanges or DhcpIpRangesDhcpOnly or DhcpIpRangesBootpOnly, **DHCPv4IpRange.RangeInfo.MaxBootpAllowed** is set to 0xFFFFFFFF. Populate the **DHCPv4IpRange.BitMask** with bits corresponding to all of the addresses within the newly created range and initialize each bit to 0 indicating the availability of its corresponding address for allocation to a DHCPv4 client. Insert the new object into **DHCPv4Scope.DHCPv4IpRangesList**.
 - If **DHCPv4Scope.DHCPv4IpRangesList** is not empty, set the existing **DHCPv4IpRange.RangeInfo.StartAddress** and **DHCPv4IpRange.RangeInfo.EndAddress** to **IpRange.StartAddress** and **IpRange.EndAddress** respectively. **DHCPv4IpRange.BitMask** needs to be expanded or contracted according to the new **IpRange.StartAddress** and **IpRange.EndAddress**. Accordingly, add or remove bits from the **DHCPv4IpRange.BitMask**. If adding bits for expansion, initialize them to 0 indicating the availability of their corresponding addresses for allocation to a DHCPv4 client.
-- If **ElementType** member is DhcpExcludedIpRanges (section [2.2.1.1.6](#Section_2.2.1.2.25)), create a **DHCPv4ExclusionRange** element entry and set it to **ExcludeIpRange** and insert it into **DHCPv4ExclusionRangesList** element.
+- If **ElementType** member is DhcpExcludedIpRanges (section [2.2.1.1.6](#Section_2.2.1.1.6)), create a **DHCPv4ExclusionRange** element entry and set it to **ExcludeIpRange** and insert it into **DHCPv4ExclusionRangesList** element.
 - If the **ElementType** member is set to DhcpReservedIps, and **ReservedIpAddress** specified in the **ReservedIp** field in **Element** does not fall within the **DHCPv4IpRange.RangeInfo** of a range within **DHCPv4Scope.DHCPv4IpRangesList** and is not an existing reserved address, return ERROR_DHCP_NOT_RESERVED_CLIENT.<51>
 - If **ElementType** member is set to DhcpReservedIps (section 2.2.1.1.6), and there is a **DHCPv4Reservation** element in **DHCPv4ReservationsList** element that corresponds to the reserved IPv4 address and/or hardware address specified in **ReservedIp** (section 2.2.1.2.38), return ERROR_DHCP_RESERVEDIP_EXITS; else create a **DHCPv4Reservation** element entry and set it to **ReservedIp** input field. Insert the object into the **DHCPv4Scope.DHCPv4ReservationsList** ADM element.
 - If **ElementType** is set to DhcpReservedIps and the previous steps resulted in a **DHCPv4Reservation** ADM element object being inserted into the **DHCPv4Scope.DHCPv4ReservationsList** ADM element, construct a temporary [**DHCPv4 client unique ID**](#gt_dhcpv4-client-unique-id) (section [2.2.1.2.5.2](#Section_2.2.1.2.5.2)) by combining the **DHCPv4Scope.ScopeInfo.SubnetAddress** ADM element and the *ReservedForClient* input field. If a **DHCPv4Client** ADM element object corresponding to the *ReservedForClient* input field and the temporary unique ID does not exist within the **DHCPv4Scope.DHCPv4ClientsList** ADM element, create one and insert it into the list thereby marking the address as unavailable to other clients. The **DHCPv4Client** ADM element object is initialized as follows:
@@ -11650,7 +11650,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.39"></a>
 #### 3.2.4.39 R_DhcpEnumSubnetElementsV5 (Opnum 38)
 
-The **R_DhcpEnumSubnetElementsV5** method enumerates the list of a specific type of IPv4 subnet element from the specified IPv4 subnet. The caller of this function can free the memory pointed to by *EnumElementInfo* and the **Elements** field of *EnumElementInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetElementsV5** method enumerates the list of a specific type of IPv4 subnet element from the specified IPv4 subnet. The caller of this function can free the memory pointed to by *EnumElementInfo* and the **Elements** field of *EnumElementInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetElementsV5(
 
@@ -11682,7 +11682,7 @@ DWORD R_DhcpEnumSubnetElementsV5(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining unenumerated subnet elements (in bytes) is less than this value, then all IPv4 subnet elements for the specific type are returned. To retrieve all the IPv4 subnet elements of a specific type, 0xFFFFFFFF is specified.
 
-**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V5](#Section_2.2.1.2.39) in which IPv4 subnet element of type *EnumElementType* is returned for a specific IPv4 subnet *SubnetAddress*. If no IPv4 subnet element of a specific type is available for enumeration, this value is null.
+**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V5](#Section_523dee5378c6436da7f5cbd812afbeb3) in which IPv4 subnet element of type *EnumElementType* is returned for a specific IPv4 subnet *SubnetAddress*. If no IPv4 subnet element of a specific type is available for enumeration, this value is null.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of IPv4 subnet elements read in *EnumElementInfo* for a specific type of IPv4 subnet element. The caller must allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -11795,7 +11795,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.41"></a>
 #### 3.2.4.41 R_DhcpGetServerBindingInfo (Opnum 40)
 
-The **R_DhcpGetServerBindingInfo** method retrieves the array of IPv4 interface binding information for the DHCPv4 server. The caller of this function can free the memory pointed by *BindElementsInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetServerBindingInfo** method retrieves the array of IPv4 interface binding information for the DHCPv4 server. The caller of this function can free the memory pointed by *BindElementsInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetServerBindingInfo(
 
@@ -11811,7 +11811,7 @@ DWORD R_DhcpGetServerBindingInfo(
 
 **Flags:** This flag is not used, and it MUST be set to 0.
 
-**BindElementsInfo:** This is a pointer of type [LPDHCP_BIND_ELEMENT_ARRAY](#Section_2.2.1.2.80) that points to the location in which the information about the IPv4 interface binding is retrieved.
+**BindElementsInfo:** This is a pointer of type [LPDHCP_BIND_ELEMENT_ARRAY](#Section_212cafdca10f4412afbf453db6c195d5) that points to the location in which the information about the IPv4 interface binding is retrieved.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -11850,7 +11850,7 @@ DWORD R_DhcpSetServerBindingInfo(
 
 **Flags:** This flag is not used, and it MUST be set to 0.
 
-**BindElementsInfo:** This is a pointer of type [DHCP_BIND_ELEMENT_ARRAY (section 2.2.1.2.81)](#Section_2.2.1.2.80) that points to the location that contains the information about the IPv4 interface binding.
+**BindElementsInfo:** This is a pointer of type [DHCP_BIND_ELEMENT_ARRAY (section 2.2.1.2.81)](#Section_2.2.1.2.81) that points to the location that contains the information about the IPv4 interface binding.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -12027,7 +12027,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.47"></a>
 #### 3.2.4.47 R_DhcpGetServerSpecificStrings (Opnum 46)
 
-The **R_DhcpGetServerSpecificStrings** method retrieves the names of the default vendor class and user class. The caller of this function can free the memory pointed to by *ServerSpecificStrings*, **DefaultVendorClassName** and **DefaultUserClassName** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetServerSpecificStrings** method retrieves the names of the default vendor class and user class. The caller of this function can free the memory pointed to by *ServerSpecificStrings*, **DefaultVendorClassName** and **DefaultUserClassName** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetServerSpecificStrings(
 
@@ -12184,7 +12184,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.50"></a>
 #### 3.2.4.50 R_DhcpGetOptionInfoV6 (Opnum 49)
 
-The **R_DhcpGetOptionInfoV6** method retrieves the option definition of a specific option for a specific user class and vendor class at the default option level. If the user class or vendor class is not specified, the default vendor class or user class will be taken. The caller of this function can free the memory pointed to by *OptionInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetOptionInfoV6** method retrieves the option definition of a specific option for a specific user class and vendor class at the default option level. If the user class or vendor class is not specified, the default vendor class or user class will be taken. The caller of this function can free the memory pointed to by *OptionInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetOptionInfoV6(
 
@@ -12242,7 +12242,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.51"></a>
 #### 3.2.4.51 R_DhcpEnumOptionsV6 (Opnum 50)
 
-The **R_DhcpEnumOptionsV6** method enumerates the option definitions for a specific user class and vendor class at the default option level. If the user class or vendor class is not specified, the default user class or vendor class will be used. The caller of this function can free the memory pointed to by *Options* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumOptionsV6** method enumerates the option definitions for a specific user class and vendor class at the default option level. If the user class or vendor class is not specified, the default user class or vendor class will be used. The caller of this function can free the memory pointed to by *Options* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumOptionsV6(
 
@@ -12283,7 +12283,7 @@ DWORD R_DhcpEnumOptionsV6(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining unenumerated option definitions (in bytes) is less than this value, all option definitions are returned. To retrieve option definitions for a specific user and vendor class, 0xFFFFFFFF is specified.
 
-**Options:** This is a pointer of type [LPDHCP_OPTION_ARRAY](#Section_2.2.1.2.25) that points to the location where all the option definitions for a specific user and vendor class are retrieved from the DHCPv6 server.
+**Options:** This is a pointer of type [LPDHCP_OPTION_ARRAY](#Section_34b6a3470458415a98080dc631a8c547) that points to the location where all the option definitions for a specific user and vendor class are retrieved from the DHCPv6 server.
 
 **OptionsRead:** This is a pointer to a DWORD value that specifies the number of option definitions read in *Options*. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -12452,7 +12452,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.54"></a>
 #### 3.2.4.54 R_DhcpEnumOptionValuesV6 (Opnum 53)
 
-The **R_DhcpEnumOptionValuesV6** method enumerates all the option values for the specific user class or vendor class at a specified scope defined by *ScopeInfo*. If the user class or vendor class is not specified, the default user class or vendor class will be used. The caller of this function can free the memory pointed to by *OptionValues* and the **Values** member of *OptionValues* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumOptionValuesV6** method enumerates all the option values for the specific user class or vendor class at a specified scope defined by *ScopeInfo*. If the user class or vendor class is not specified, the default user class or vendor class will be used. The caller of this function can free the memory pointed to by *OptionValues* and the **Values** member of *OptionValues* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumOptionValuesV6(
 
@@ -12631,7 +12631,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.56"></a>
 #### 3.2.4.56 R_DhcpGetAllOptionsV6 (Opnum 55)
 
-The **R_DhcpGetAllOptionsV6** method retrieves all default option definitions, as well as specific user class and vendor class option definitions. The caller of this function can free the memory pointed to by *OptionStruct*, **NonVendorOptions** and **VendorOptions** and by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetAllOptionsV6** method retrieves all default option definitions, as well as specific user class and vendor class option definitions. The caller of this function can free the memory pointed to by *OptionStruct*, **NonVendorOptions** and **VendorOptions** and by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetAllOptionsV6(
 
@@ -12647,7 +12647,7 @@ DWORD R_DhcpGetAllOptionsV6(
 
 **Flags:** This field MUST be set to zero.
 
-**OptionStruct:** This is a pointer of type [LPDHCP_ALL_OPTIONS](#Section_2.2.1.2.27) that points to the location that contains all vendor-specific option definitions as well as default option definitions.
+**OptionStruct:** This is a pointer of type [LPDHCP_ALL_OPTIONS](#Section_167abd91539e484493cf5ff413cc9dd6) that points to the location that contains all vendor-specific option definitions as well as default option definitions.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -12670,7 +12670,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.57"></a>
 #### 3.2.4.57 R_DhcpGetAllOptionValuesV6 (Opnum 56)
 
-The **R_DhcpGetAllOptionValuesV6** method returns all option values for all user classes and vendor classes configured at the server, scope, or IPv6 reservation level on the DHCPv6 server. The caller of this function can free the memory pointed to by option *Values* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetAllOptionValuesV6** method returns all option values for all user classes and vendor classes configured at the server, scope, or IPv6 reservation level on the DHCPv6 server. The caller of this function can free the memory pointed to by option *Values* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetAllOptionValuesV6(
 
@@ -12690,7 +12690,7 @@ DWORD R_DhcpGetAllOptionValuesV6(
 
 **ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO6 (section 2.2.1.2.30)](#Section_2.2.1.2.30) structure that contains information describing the DHCPv6 scope for which the option values are retrieved. If this value is DhcpDefaultOptions6 the option values are retrieved at the server level, if this value is DhcpScopeOptions6 the option values are retrieved at the scope level, while if this value is DhcpReservedOptions6 the option values are retrieved at the reservations level.
 
-**Values:** This is a pointer of type [LPDHCP_ALL_OPTION_VALUES](#Section_2.2.1.2.44) that points to the location that contains all the option values retrieved from the DHCPv6 server at the server, scope, or IPv6 reservation level, depending on the **ScopeType** defined in *ScopeInfo*.
+**Values:** This is a pointer of type [LPDHCP_ALL_OPTION_VALUES](#Section_e9cf150647f64d939893a0b97b36425a) that points to the location that contains all the option values retrieved from the DHCPv6 server at the server, scope, or IPv6 reservation level, depending on the **ScopeType** defined in *ScopeInfo*.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -12759,7 +12759,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.59"></a>
 #### 3.2.4.59 R_DhcpEnumSubnetsV6 (Opnum 58)
 
-The **R_DhcpEnumSubnetsV6** method enumerates all IPv6 prefixes configured on the DHCPv6 server. The caller of this function can free the memory pointed to by *EnumInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetsV6** method enumerates all IPv6 prefixes configured on the DHCPv6 server. The caller of this function can free the memory pointed to by *EnumInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetsV6(
 
@@ -12783,7 +12783,7 @@ DWORD R_DhcpEnumSubnetsV6(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of IPv6 prefix addresses to return. If the number of remaining unenumerated options is less than this value, all the IPv6 prefixes are returned. To retrieve all the IPv6 prefixes, 0xFFFFFFFF is specified.
 
-**EnumInfo:** This is a pointer of type [LPDHCPV6_IP_ARRAY](#Section_2.2.1.2.57) in which the IPv6 prefix configured on the DHCPv6 server is returned.
+**EnumInfo:** This is a pointer of type [LPDHCPV6_IP_ARRAY](#Section_125bc7ca38b448f8b11ca4e2a4a2833f) in which the IPv6 prefix configured on the DHCPv6 server is returned.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of IPv6 prefix addresses returned in *EnumInfo*. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -12831,7 +12831,7 @@ DWORD R_DhcpAddSubnetElementV6(
 
 **SubnetAddress:** This is of type [DHCP_IPV6_ADDRESS (section 2.2.1.2.28)](#Section_2.2.1.2.28) that contains the IPv6 address of the subnet for which the IPv6 prefix element is added.
 
-**AddElementInfo:** This is a pointer to structure [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.33) that contains the IPv6 prefix element that needs to be added to the IPv6 prefix.
+**AddElementInfo:** This is a pointer to structure [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.60) that contains the IPv6 prefix element that needs to be added to the IPv6 prefix.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -12857,14 +12857,14 @@ When processing this call, the DHCP server MUST do the following:
 - If **ElementType** is set to Dhcpv6ReservedIps and there is a **DHCPv6Reservation** object in **DHCPv6ReservationList** for the IPv6 address or DHCPv6 client identifier, and an interface definition pair already exists for the reserved address specified in the reservation information, return ERROR_DHCP_RESERVEDIP_EXITS.<62>
 - If **ElementType** is Dhcpv6ReservedIps and there is already an entry in **DHCPv6ClientInfoList** for the DHCPv6 client identifier and the interface identifier with the same IPv6 address as specified in the reservation information, then add the IPv6 reservation to **DHCPv6ReservationList** and **DHCPv6ClientInfoList** as above. If there is an existing entry in **DHCPv6ClientInfoList** (which is of type **DHCPv6ClientInfo**) for the DHCPv6 client identifier and the interface, but with a different IPv6 address, and a corresponding entry in **DHCPv6ReservationList** (which is of type **DHCPv6Reservation**) also exists for the client, then return ERROR_DHCP_RESERVEDIP_EXITS. If there is an existing entry in **DHCPv6ClientInfoList** for the client with a different IPv6 address, but no corresponding entry in **DHCPv6ReservationList** exists, remove the existing entry from **DHCPv6ClientInfoList**, create a new **DHCPv6ClientInfo** object from the data in **AddElementInfo**, and add it to **DHCPv6ClientInfoList**. Also add a corresponding entry in **DHCPv6ReservationList**.<63>
 - If the **ElementType** is Dhcpv6ReservedIps and there is already an entry in **DHCPv6ClientInfoList** for the IPv6 address specified in the reservation information but the DHCPv6 client-identifier and interface identifier are different, then delete this entry, create a new **DHCPv6ClientInfo** object, and add it to **DHCPv6ClientInfoList**. Also add a corresponding **DHCPv6Reservation** entry to **DHCPv6ReservationList**.<64>
-- If **ElementType** is Dhcpv6ReservedIps and the specified reservation address is outside the subnet prefix specified in the **SubnetAddress** parameter, then create a new **DHCPv6Reservation** object from the information in **AddElementInfo**, and add it to **DHCPv6ReservationList**.This reservation does not cause the specified IPv6 address to be leased out to the DHCPv6 client that is specified by the DHCPv6 client-identifier (section 2.2.1.2.5.3) and the interface identifier (section [2.2.1.2.58](#Section_2.2.1.2.10)) in the reservation.
+- If **ElementType** is Dhcpv6ReservedIps and the specified reservation address is outside the subnet prefix specified in the **SubnetAddress** parameter, then create a new **DHCPv6Reservation** object from the information in **AddElementInfo**, and add it to **DHCPv6ReservationList**.This reservation does not cause the specified IPv6 address to be leased out to the DHCPv6 client that is specified by the DHCPv6 client-identifier (section 2.2.1.2.5.3) and the interface identifier (section [2.2.1.2.58](#Section_2.2.1.2.58)) in the reservation.
 - If **ElementType** is set to Dhcpv6IpRanges, do no processing and return ERROR_SUCCESS.
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
 <a id="Section_3.2.4.61"></a>
 #### 3.2.4.61 R_DhcpEnumSubnetElementsV6 (Opnum 60)
 
-The **R_DhcpEnumSubnetElementsV6** method returns an enumerated list of a specific type of IPv6 prefix element for a specific DHCPv6 IPv6 prefix. The caller of this function can free the memory pointed to by *EnumElementInfo* and other Elements by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetElementsV6** method returns an enumerated list of a specific type of IPv6 prefix element for a specific DHCPv6 IPv6 prefix. The caller of this function can free the memory pointed to by *EnumElementInfo* and other Elements by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetElementsV6(
 
@@ -12890,13 +12890,13 @@ DWORD R_DhcpEnumSubnetElementsV6(
 
 **SubnetAddress:** This is of type [DHCP_IPV6_ADDRESS (section 2.2.1.2.28)](#Section_2.2.1.2.28), containing the IPv6 address of the subnet from which subnet elements are enumerated.
 
-**EnumElementType:** This is of type [DHCP_SUBNET_ELEMENT_TYPE_V6 (section 2.2.1.1.8)](#Section_2.2.1.1.7) value, indicating the type of IPv6 prefix element to enumerate.
+**EnumElementType:** This is of type [DHCP_SUBNET_ELEMENT_TYPE_V6 (section 2.2.1.1.8)](#Section_2.2.1.1.8) value, indicating the type of IPv6 prefix element to enumerate.
 
 **ResumeHandle:** This is a pointer of type [DHCP_RESUME_HANDLE (section 2.2.1.2.6)](#Section_2.2.1.2.6) that identifies the enumeration operation. Initially, this value MUST be set to zero, with a successful call returning the handle value used for subsequent enumeration requests. For example, if *PreferredMaximum* is set to 1,000 bytes, and 2,000 bytes' worth of IPv6 prefix elements are stored on the DHCPv6 server, the resume handle can be used after the first 1,000 bytes are retrieved to obtain the next 1,000 on a subsequent call, and so forth.
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. If the number of remaining unenumerated subnet element (in bytes) is less than this value, all IPv6 prefix elements for specific type are returned. To retrieve all the IPv6 prefix elements of a specific type, 0xFFFFFFFF is specified.
 
-**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6](#Section_2.2.1.2.33) in which an IPv4 subnet element of type *EnumElementType* is returned for a specific IPv6 prefix *SubnetAddress*. If no IPv6 prefix elements are available for enumeration, this value is null.
+**EnumElementInfo:** This is a pointer of type [LPDHCP_SUBNET_ELEMENT_INFO_ARRAY_V6](#Section_69f63a7f55f24b1ebc0196c9ed3c92d9) in which an IPv4 subnet element of type *EnumElementType* is returned for a specific IPv6 prefix *SubnetAddress*. If no IPv6 prefix elements are available for enumeration, this value is null.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of IPv6 prefix elements read in *EnumElementInfo* for a specific type of IPv6 prefix element. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -12954,7 +12954,7 @@ DWORD R_DhcpRemoveSubnetElementV6(
 
 **SubnetAddress:** This is of type [DHCP_IPV6_ADDRESS (section 2.2.1.2.28)](#Section_2.2.1.2.28), containing the IPv6 address of the subnet for which the IPv6 prefix element is removed.
 
-**RemoveElementInfo:** This is a pointer of type [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.33), containing the IPv6 prefix element that needs to be removed from the IPv6 prefix.
+**RemoveElementInfo:** This is a pointer of type [DHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.60), containing the IPv6 prefix element that needs to be removed from the IPv6 prefix.
 
 **ForceFlag:** This is of type [DHCP_FORCE_FLAG (section 2.2.1.1.9)](#Section_2.2.1.1.9) enumeration. Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
 
@@ -12973,7 +12973,7 @@ When processing this call, the DHCP server MUST do the following:
 - Retrieve the **DHCPv6Scope** object corresponding to **SubnetAddress** from **DHCPv6ScopeList**. If the **DHCPv6Scope** object corresponding to **SubnetAddress** does not exist, return ERROR_FILE_NOT_FOUND.
 - If **ElementType** is Dhcpv6ExcludeIpRanges, and the specified exclusion range is outside of the subnet prefix specified in the **SubnetAddress** parameter, the server behavior is undefined.
 - If the **ElementType** field is set to DhcpReservedIps, and the specified reservation address does not correspond to any **DHCPv6Reservation** object in **DHCPv6Scope.DHCPv6ReservationList**, return ERROR_FILE_NOT_FOUND.
-- If **ElementType** is set to DhcpReservedIps, the corresponding **DHCPv6Scope.DHCPv6ReservationList.DHCPv6Reservation** object is removed along with the corresponding **DHCPv6Scope.DHCPv6ClientInfoList.DHCPv6ClientInfo** object that does not correspond to an active lease. The server ignores the **ReservedForClient** field specified in [DHCP_IP_RESERVATION_V6 (section 2.2.1.2.58)](#Section_2.2.1.2.10) when locating and deleting the **DHCPv6Reservation** object.
+- If **ElementType** is set to DhcpReservedIps, the corresponding **DHCPv6Scope.DHCPv6ReservationList.DHCPv6Reservation** object is removed along with the corresponding **DHCPv6Scope.DHCPv6ClientInfoList.DHCPv6ClientInfo** object that does not correspond to an active lease. The server ignores the **ReservedForClient** field specified in [DHCP_IP_RESERVATION_V6 (section 2.2.1.2.58)](#Section_2.2.1.2.58) when locating and deleting the **DHCPv6Reservation** object.
 - If **ElementType** is Dhcpv6ExcludeIpRanges, and the specified exclusion range is outside of the subnet prefix specified in the **SubnetAddress** parameter, the server behavior is undefined.
 - If **ElementType** is set to DhcpExcludedIpRanges, and the specified exclusion range does not exist in **DHCPv6Scope.DHCPv6ExclusionRangeList**, return ERROR_FILE_NOT_FOUND; else, remove the found **DHCPv6Scope.DHCPv6ExclusionRangeList.DHCPv6ExclusionRange** object from **DHCPv6ExclusionRangeList**.
 - If **ElementType** is set to Dhcpv6Ipranges, do no processing and return ERROR_SUCCESS.
@@ -13021,7 +13021,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.64"></a>
 #### 3.2.4.64 R_DhcpGetSubnetInfoV6 (Opnum 63)
 
-The **R_DhcpGetSubnetInfoV6** method retrieves the information about a specific IPv6 prefix defined on the DHCPv6 server. The caller of this function can free the memory pointed to by *SubnetInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetSubnetInfoV6** method retrieves the information about a specific IPv6 prefix defined on the DHCPv6 server. The caller of this function can free the memory pointed to by *SubnetInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetSubnetInfoV6(
 
@@ -13060,7 +13060,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.65"></a>
 #### 3.2.4.65 R_DhcpEnumSubnetClientsV6 (Opnum 64)
 
-The **R_DhcpEnumSubnetClientsV6** method is used to retrieve all DHCPv6 clients serviced from the specified IPv6 prefix. The caller of this function can free the memory pointed to by *ClientInfo* and other Elements by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumSubnetClientsV6** method is used to retrieve all DHCPv6 clients serviced from the specified IPv6 prefix. The caller of this function can free the memory pointed to by *ClientInfo* and other Elements by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumSubnetClientsV6(
 
@@ -13088,7 +13088,7 @@ DWORD R_DhcpEnumSubnetClientsV6(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to return. The minimum value is 1,024 bytes (1 kilobyte), and the maximum value is 65,536 bytes (64 kilobytes); if the input value is greater or less than this range, it MUST be set to the maximum or minimum value, respectively. To retrieve all the DHCPv6 clients serviced by a specific IPv6 prefix, 0xFFFFFFFF is specified.
 
-**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY_V6](#Section_2.2.1.2.12) that points to the location that contains the DHCPv6 client lease record array.
+**ClientInfo:** This is a pointer of type [LPDHCP_CLIENT_INFO_ARRAY_V6](#Section_da634b209854467db5c8b6d22d36e2ab) that points to the location that contains the DHCPv6 client lease record array.
 
 **ClientsRead:** This is a pointer to a DWORD that specifies the number of DHCPv6 client lease records read in *ClientInfo*. The caller MUST allocate memory for this parameter equal to the size of data type DWORD.
 
@@ -13270,7 +13270,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.69"></a>
 #### 3.2.4.69 R_DhcpGetMibInfoV6 (Opnum 68)
 
-The **R_DhcpGetMibInfoV6** method is used to retrieve the IPv6 counter values of the DHCPv6 server. The caller of this function can free the memory pointed to by *MibInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetMibInfoV6** method is used to retrieve the IPv6 counter values of the DHCPv6 server. The caller of this function can free the memory pointed to by *MibInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetMibInfoV6(
 
@@ -13282,7 +13282,7 @@ DWORD R_DhcpGetMibInfoV6(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO_V6](#Section_2.2.1.2.68) that points to the location that contains IPv6 MIB information about the DHCPv6 server.
+**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO_V6](#Section_c04ed82345d34587aa72906b80f5a2b5) that points to the location that contains IPv6 MIB information about the DHCPv6 server.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13303,7 +13303,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.70"></a>
 #### 3.2.4.70 R_DhcpGetServerBindingInfoV6 (Opnum 69)
 
-The **R_DhcpGetServerBindingInfoV6** method retrieves the array of IPv6 interface binding information for the DHCPv6 server. The caller of this function can free the memory pointed to by *BindElementsInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetServerBindingInfoV6** method retrieves the array of IPv6 interface binding information for the DHCPv6 server. The caller of this function can free the memory pointed to by *BindElementsInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetServerBindingInfoV6(
 
@@ -13319,7 +13319,7 @@ DWORD R_DhcpGetServerBindingInfoV6(
 
 **Flags:** This flag is not used, and it MUST be set to 0.
 
-**BindElementsInfo:** This is a pointer of type [LPDHCPV6_BIND_ELEMENT_ARRAY](#Section_2.2.1.2.82) that points to the location in which the information about the IPv6 interface binding is retrieved.
+**BindElementsInfo:** This is a pointer of type [LPDHCPV6_BIND_ELEMENT_ARRAY](#Section_4c84ae9b707a480da1763ebc5f113984) that points to the location in which the information about the IPv6 interface binding is retrieved.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13357,7 +13357,7 @@ DWORD R_DhcpSetServerBindingInfoV6(
 
 **Flags:** This flag is not used, and it MUST be set to 0.
 
-**BindElementsInfo:** This is a pointer of type [DHCPV6_BIND_ELEMENT_ARRAY (section 2.2.1.2.83)](#Section_2.2.1.2.82) that points to the location that contains the information about the IPv6 interface binding.
+**BindElementsInfo:** This is a pointer of type [DHCPV6_BIND_ELEMENT_ARRAY (section 2.2.1.2.83)](#Section_2.2.1.2.83) that points to the location that contains the information about the IPv6 interface binding.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13418,7 +13418,7 @@ When processing this call the DHCP server MUST do the following:
 <a id="Section_3.2.4.73"></a>
 #### 3.2.4.73 R_DhcpGetClientInfoV6 (Opnum 72)
 
-The **R_DhcpGetClientInfoV6** method retrieves IPv6 address lease information of the IPv6 reservation from the DHCPv6 server. The caller of this function can free the memory pointed to by *ClientInfo* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetClientInfoV6** method retrieves IPv6 address lease information of the IPv6 reservation from the DHCPv6 server. The caller of this function can free the memory pointed to by *ClientInfo* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetClientInfoV6(
 
@@ -13432,9 +13432,9 @@ DWORD R_DhcpGetClientInfoV6(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**SearchInfo:** This is a pointer to a structure [DHCP_SEARCH_INFO_V6 (section 2.2.1.2.69)](#Section_2.2.1.2.18) that specifies the parameter to be used for retrieving the IPv6 address lease information of IPv6 reservation.
+**SearchInfo:** This is a pointer to a structure [DHCP_SEARCH_INFO_V6 (section 2.2.1.2.69)](#Section_2.2.1.2.69) that specifies the parameter to be used for retrieving the IPv6 address lease information of IPv6 reservation.
 
-For this call with **SearchType** of Dhcpv6ClientDUID (section [2.2.1.1.12](#Section_2.2.1.2.18)), ERROR_INVALID_PARAMETER is returned.
+For this call with **SearchType** of Dhcpv6ClientDUID (section [2.2.1.1.12](#Section_2.2.1.1.12)), ERROR_INVALID_PARAMETER is returned.
 
 For this call **SearchType** of Dhcpv6ClientName (section 2.2.1.1.12), ERROR_INVALID_PARAMETER is returned.
 
@@ -13471,7 +13471,7 @@ DWORD R_DhcpDeleteClientInfoV6(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**ClientInfo:** This is a pointer to a structure [DHCP_SEARCH_INFO_V6 (section 2.2.1.2.69)](#Section_2.2.1.2.18) that defines the key to be used to search the DHCPv6 client lease record that needs to be deleted on the DHCPv6 server.
+**ClientInfo:** This is a pointer to a structure [DHCP_SEARCH_INFO_V6 (section 2.2.1.2.69)](#Section_2.2.1.2.69) that defines the key to be used to search the DHCPv6 client lease record that needs to be deleted on the DHCPv6 server.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13525,7 +13525,7 @@ DWORD R_DhcpCreateClassV6(
 
 **ReservedMustBeZero:** This flag SHOULD be set to 0. Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
 
-**ClassInfo:** This is of type [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.75), containing information regarding a class.
+**ClassInfo:** This is of type [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.70), containing information regarding a class.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13567,7 +13567,7 @@ DWORD R_DhcpModifyClassV6(
 
 **ReservedMustBeZero:** This flag SHOULD be set to 0. Currently it is not used, and any value set to this parameter will not affect the behavior of this method.
 
-**ClassInfo:** This is of type [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.75), containing information regarding a user class or a vendor class.
+**ClassInfo:** This is of type [DHCP_CLASS_INFO_V6 (section 2.2.1.2.70)](#Section_2.2.1.2.70), containing information regarding a user class or a vendor class.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13631,7 +13631,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.78"></a>
 #### 3.2.4.78 R_DhcpEnumClassesV6 (Opnum 77)
 
-The **R_DhcpEnumClassesV6** method enumerates user or vendor classes configured for the DHCPv6 server. The caller of this function can free the memory pointed to by *ClassInfoArray* and its **Classes** member by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpEnumClassesV6** method enumerates user or vendor classes configured for the DHCPv6 server. The caller of this function can free the memory pointed to by *ClassInfoArray* and its **Classes** member by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpEnumClassesV6(
 
@@ -13659,7 +13659,7 @@ DWORD R_DhcpEnumClassesV6(
 
 **PreferredMaximum:** This is of type DWORD, specifying the preferred maximum number of bytes to be returned. If the number of bytes required in memory for the remaining unenumerated classes is less than the value of this parameter, then all the classes for the DHCPv6 server are returned. To retrieve all the classes defined on the DHCPv6 server, 0xFFFFFFFF is specified.
 
-**ClassInfoArray:** This is a pointer of type [LPDHCP_CLASS_INFO_ARRAY_V6](#Section_2.2.1.2.75) in which information of all the classes defined on the DHCPv6 server is retrieved.
+**ClassInfoArray:** This is a pointer of type [LPDHCP_CLASS_INFO_ARRAY_V6](#Section_5d1ef878555943da820c970cb2597206) in which information of all the classes defined on the DHCPv6 server is retrieved.
 
 **nRead:** This is a pointer to a DWORD value that specifies the number of classes returned in *ClassInfoArray*. The caller must allocate memory for this parameter that is equal to the size of data type DWORD.
 
@@ -13693,7 +13693,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.79"></a>
 #### 3.2.4.79 R_DhcpGetOptionValueV6 (Opnum 78)
 
-The **R_DhcpGetOptionValueV6** method retrieves the option value for a specific option on the DHCPv6 server for specific user and vendor class. *ScopeInfo* defines the scope from which the option value needs to be retrieved. The caller of this function can free the memory pointed by *OptionValue* by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpGetOptionValueV6** method retrieves the option value for a specific option on the DHCPv6 server for specific user and vendor class. *ScopeInfo* defines the scope from which the option value needs to be retrieved. The caller of this function can free the memory pointed by *OptionValue* by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpGetOptionValueV6(
 
@@ -13730,7 +13730,7 @@ DWORD R_DhcpGetOptionValueV6(
 
 **ScopeInfo:** This is a pointer to a [DHCP_OPTION_SCOPE_INFO6 (section 2.2.1.2.30)](#Section_2.2.1.2.30) that contains information describing the DHCPv6 scope this option value is retrieved on. This value defines that option is being retrieved from the default, server, or scope level or for an IPv6 reservation.
 
-**OptionValue:** This is a pointer of type [LPDHCP_OPTION_VALUE](#Section_2.2.1.2.25) in which the option value is retrieved corresponding to *OptionID*. For dynamic DNS update settings, see section [3.3.2](#Section_3.3.2).
+**OptionValue:** This is a pointer of type [LPDHCP_OPTION_VALUE](#Section_2.2.1.2.42) in which the option value is retrieved corresponding to *OptionID*. For dynamic DNS update settings, see section [3.3.2](#Section_3.3.2).
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -13852,7 +13852,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.82"></a>
 #### 3.2.4.82 R_DhcpGetMibInfoV5 (Opnum 81)
 
-The **R_DhcpGetMibInfoV5** method is used to retrieve the statistics of the DHCPv4 server. The caller of this function can free the memory pointed to by *MibInfo* and its field *ScopeInfo* by calling the function midl_user_free (see section [3](#Section_1.3)).
+The **R_DhcpGetMibInfoV5** method is used to retrieve the statistics of the DHCPv4 server. The caller of this function can free the memory pointed to by *MibInfo* and its field *ScopeInfo* by calling the function midl_user_free (see section [3](#Section_3)).
 
 DWORD R_DhcpGetMibInfoV5(
 
@@ -13864,7 +13864,7 @@ DWORD R_DhcpGetMibInfoV5(
 
 **ServerIpAddress:** The IP address/host name of the DHCP server. This parameter is unused.
 
-**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO_V5](#Section_2.2.1.2.48) that points to the location that contains DHCPv4 server statistics.
+**MibInfo:** This is a pointer of type [LPDHCP_MIB_INFO_V5](#Section_779c90cadd344d80a228b433610345c6) that points to the location that contains DHCPv4 server statistics.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully, else it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or any generic failure.
 
@@ -14069,7 +14069,7 @@ DWORD R_DhcpEnumFilterV4(
 
 **ListType:** This is of type [DHCP_FILTER_LIST_TYPE (section 2.2.1.1.17)](#Section_2.2.1.1.17), which specifies the list to be enumerated.
 
-**EnumFilterInfo:** This is a pointer of type [LPDHCP_FILTER_ENUM_INFO](#Section_2.2.1.2.93) that points to the location in which the link-layer filter info configured on the DHCPv4 server is returned.
+**EnumFilterInfo:** This is a pointer of type [LPDHCP_FILTER_ENUM_INFO](#Section_2f1426c0cd0f4d0db66d32851902928d) that points to the location in which the link-layer filter info configured on the DHCPv4 server is returned.
 
 **ElementsRead:** This is a pointer to a DWORD value that specifies the number of link-layer filter entries returned in EnumFilterInfo. The caller must allocate memory for this parameter that is equal to the size of data type DWORD.
 
@@ -14357,7 +14357,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.93"></a>
 #### 3.2.4.93 R_DhcpV4FailoverGetRelationship (Opnum 92)
 
-The **R_DhcpV4FailoverGetRelationship** method retrieves the failover relationship information configured on the DHCPv4 server. The caller of this function can free the memory pointed to by the *pRelationship* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4FailoverGetRelationship** method retrieves the failover relationship information configured on the DHCPv4 server. The caller of this function can free the memory pointed to by the *pRelationship* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4FailoverGetRelationship(
 
@@ -14397,7 +14397,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.94"></a>
 #### 3.2.4.94 R_DhcpV4FailoverEnumRelationship (Opnum 93)
 
-The **R_DhcpV4FailoverEnumRelationship** method enumerates all the failover relationships on the DHCPv4 server. The caller of this function can free the memory pointed to by the *pRelationship* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4FailoverEnumRelationship** method enumerates all the failover relationships on the DHCPv4 server. The caller of this function can free the memory pointed to by the *pRelationship* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4FailoverEnumRelationship(
 
@@ -14545,7 +14545,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.97"></a>
 #### 3.2.4.97 R_DhcpV4FailoverGetScopeRelationship (Opnum 96)
 
-The **R_DhcpV4FailoverGetScopeRelationship** method retrieves the failover relationship information which is configured for a specific IPv4 subnet address. The caller of this function can free the memory pointed to by the *pRelationship* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4FailoverGetScopeRelationship** method retrieves the failover relationship information which is configured for a specific IPv4 subnet address. The caller of this function can free the memory pointed to by the *pRelationship* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4FailoverGetScopeRelationship(
 
@@ -14585,7 +14585,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.98"></a>
 #### 3.2.4.98 R_DhcpV4FailoverGetScopeStatistics (Opnum 97)
 
-The **R_DhcpV4FailoverGetScopeStatistics** method is used to retrieve the statistics of a IPv4 subnet configured for a failover relationship on the DHCPv4 server. The caller of this function can free the memory pointed to by the *pStats* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4FailoverGetScopeStatistics** method is used to retrieve the statistics of a IPv4 subnet configured for a failover relationship on the DHCPv4 server. The caller of this function can free the memory pointed to by the *pStats* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4FailoverGetScopeStatistics(
 
@@ -14625,7 +14625,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.99"></a>
 #### 3.2.4.99 R_DhcpV4FailoverGetClientInfo (Opnum 98)
 
-The **R_DhcpV4FailoverGetClientInfo** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The caller of this function can free the memory pointed to by the *ClientInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4FailoverGetClientInfo** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The caller of this function can free the memory pointed to by the *ClientInfo* parameter, by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4FailoverGetClientInfo(
 
@@ -14769,7 +14769,7 @@ DWORD R_DhcpV4SetOptionValue(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class for which the option value is being set. This parameter is optional. If the vendor class is not specified, the option value is set for the default vendor class.
 
-**ScopeInfo:** This is a pointer to a type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.25)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server or scope level at which the option value is to be set.
+**ScopeInfo:** This is a pointer to a type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.41)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server or scope level at which the option value is to be set.
 
 **OptionValue:** A pointer to a type **DHCP_OPTION_DATA** structure (section [2.2.1.2.24](#Section_2.2.1.2.24)) that contains the option value that is set for an option corresponding to the *OptionId* parameter.
 
@@ -14849,7 +14849,7 @@ DWORD R_DhcpV4SetOptionValues(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being set. This parameter is optional. If the vendor class is not specified, the option value is set for a default vendor class.
 
-**ScopeInfo:** This is a pointer to a type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.25)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server or scope level at which the option values are set.
+**ScopeInfo:** This is a pointer to a type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.41)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server or scope level at which the option values are set.
 
 **OptionValues:** This is a pointer to a type **DHCP_OPTION_VALUE_ARRAY** structure (section [2.2.1.2.43](#Section_2.2.1.2.43)) that points to the location that contains one or more option identifiers, along with the values.
 
@@ -14906,7 +14906,7 @@ After performing these steps for all **DHCP_OPTION_VALUE** structure elements in
 <a id="Section_3.2.4.104"></a>
 #### 3.2.4.104 R_DhcpV4GetOptionValue (Opnum 103)
 
-The **R_DhcpV4GetOptionValue** method gets the option value for the specified *PolicyName* parameter and *OptionID* parameter. The memory for the *OptionValue* parameter is allocated by this method and can be freed by the caller by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4GetOptionValue** method gets the option value for the specified *PolicyName* parameter and *OptionID* parameter. The memory for the *OptionValue* parameter is allocated by this method and can be freed by the caller by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4GetOptionValue(
 
@@ -14941,9 +14941,9 @@ DWORD R_DhcpV4GetOptionValue(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being set. This parameter is optional. If the vendor class is not specified, the option value is set for a default vendor class.
 
-**ScopeInfo:** This is a pointer to a type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.25)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server or scope level at which the option values are set.
+**ScopeInfo:** This is a pointer to a type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.41)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server or scope level at which the option values are set.
 
-**OptionValue:** A pointer of type **LPDHCP_OPTION_VALUE** (section [2.2.1.2.42](#Section_2.2.1.2.25)) that contains the option value that is set for an option corresponding to the *OptionId* parameter. For Dynamic DNS update settings, see section [3.3.1](#Section_3.3.1).
+**OptionValue:** A pointer of type **LPDHCP_OPTION_VALUE** (section [2.2.1.2.42](#Section_2.2.1.2.42)) that contains the option value that is set for an option corresponding to the *OptionId* parameter. For Dynamic DNS update settings, see section [3.3.1](#Section_3.3.1).
 
 The method does not perform any checks to ensure that the *OptionValue* parameter passed in is of the same **OptionType** member value as that of the option corresponding to the *OptionId* parameter passed in. It is the responsibility of the caller to ensure that the correct **OptionType** member value is used for the *OptionValue* parameter passed in. In case the **OptionType** member value of the *OptionValue* parameter passed in is different from that of the option corresponding to the *OptionId* parameter, the behavior is undefined.
 
@@ -15021,7 +15021,7 @@ DWORD R_DhcpV4RemoveOptionValue(
 
 **VendorName:** A pointer to a null-terminated Unicode string that contains the name of the vendor class to which the option value is being set. This parameter is optional. If the vendor class is not specified, the option value is set for a default vendor class.
 
-**ScopeInfo:** This is a pointer to a type [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.25) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server level or scope level at which the option values are set.
+**ScopeInfo:** This is a pointer to a type [DHCP_OPTION_SCOPE_INFO (section 2.2.1.2.41)](#Section_2.2.1.2.41) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the server level or scope level at which the option values are set.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully. Otherwise, it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or to any generic failure.
 
@@ -15061,7 +15061,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.106"></a>
 #### 3.2.4.106 R_DhcpV4GetAllOptionValues (Opnum 105)
 
-The method **R_DhcpV4GetAllOptionValues** gets all the [**server level policy**](#gt_server-level-policy) or [**scope level policy**](#gt_scope-level-policy) options configured. The memory for the *Values* parameter is allocated by this method and can be freed by the caller by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The method **R_DhcpV4GetAllOptionValues** gets all the [**server level policy**](#gt_server-level-policy) or [**scope level policy**](#gt_scope-level-policy) options configured. The memory for the *Values* parameter is allocated by this method and can be freed by the caller by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4GetAllOptionValues(
 
@@ -15084,7 +15084,7 @@ DWORD R_DhcpV4GetAllOptionValues(
 | DHCP_FLAGS_OPTION_DEFAULT 0x00000000 | Option definition is set for the default vendor class. |
 | DHCP_FLAGS_OPTION_IS_VENDOR 0x00000003 | If a bitwise AND operation with this bitmask yields a nonzero value, it indicates that the option definition is set for a specific vendor class. |
 
-**ScopeInfo:** This is a pointer of type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.25)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the default, server, scope, multicast scope, or IPv4 reservation level at which the option values are set.
+**ScopeInfo:** This is a pointer of type **DHCP_OPTION_SCOPE_INFO** structure (section [2.2.1.2.41](#Section_2.2.1.2.41)) that contains information describing the DHCPv4 scope for which this option value is set. This value contains the default, server, scope, multicast scope, or IPv4 reservation level at which the option values are set.
 
 **Values:** This is a pointer of type **LPDHCP_ALL_OPTIONS_VALUES_PB** (section [2.2.1.2.109](#Section_2.2.1.2.109)) that contains all the policy option values at server or scope level.
 
@@ -15290,7 +15290,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.110"></a>
 #### 3.2.4.110 R_DhcpV4GetPolicy (Opnum 109)
 
-The **R_DhcpV4GetPolicy** method returns the specified [**policy**](#gt_policy). The memory for the **Policy** structure is allocated by this method and can be freed by the caller by using the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4GetPolicy** method returns the specified [**policy**](#gt_policy). The memory for the **Policy** structure is allocated by this method and can be freed by the caller by using the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4GetPolicy(
 
@@ -15497,7 +15497,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.113"></a>
 #### 3.2.4.113 R_DhcpV4EnumPolicies (Opnum 112)
 
-The method **R_DhcpV4EnumPolicies** returns an enumerated list of all configured [**server level policies**](#gt_server-level-policy) or [**scope level policies**](#gt_scope-level-policy). The caller of this function can free the memory pointed to by the *EnumInfo* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The method **R_DhcpV4EnumPolicies** returns an enumerated list of all configured [**server level policies**](#gt_server-level-policy) or [**scope level policies**](#gt_scope-level-policy). The caller of this function can free the memory pointed to by the *EnumInfo* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4EnumPolicies(
 
@@ -15797,7 +15797,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.118"></a>
 #### 3.2.4.118 R_DhcpV6GetStatelessStoreParams (Opnum 117)
 
-The **R_DhcpV6GetStatelessStoreParams** method retrieves the current DHCPv6 stateless client inventory-related configuration setting at the server or scope level. The caller of this function can free the memory pointed to by the *Params* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV6GetStatelessStoreParams** method retrieves the current DHCPv6 stateless client inventory-related configuration setting at the server or scope level. The caller of this function can free the memory pointed to by the *Params* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV6GetStatelessStoreParams(
 
@@ -15841,7 +15841,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.119"></a>
 #### 3.2.4.119 R_DhcpV6GetStatelessStatistics (Opnum 118)
 
-The **R_DhcpV6GetStatelessStatistics** method is used to retrieve the statistics of the DHCPv6 stateless server. The caller of this function can free the memory pointed to by the *StatelessStats* parameter and its **ScopeStats** member array by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV6GetStatelessStatistics** method is used to retrieve the statistics of the DHCPv6 stateless server. The caller of this function can free the memory pointed to by the *StatelessStats* parameter and its **ScopeStats** member array by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV6GetStatelessStatistics(
 
@@ -15877,7 +15877,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.120"></a>
 #### 3.2.4.120 R_DhcpV4EnumSubnetReservations (Opnum 119)
 
-The **R_DhcpV4EnumSubnetReservations** method enumerates all the reservation information on the DHCPv4 server for a given IPv4 subnet address. The caller of this function can free the memory pointed to by the *EnumElementInfo* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4EnumSubnetReservations** method enumerates all the reservation information on the DHCPv4 server for a given IPv4 subnet address. The caller of this function can free the memory pointed to by the *EnumElementInfo* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4EnumSubnetReservations(
 
@@ -15942,7 +15942,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.121"></a>
 #### 3.2.4.121 R_DhcpV4GetFreeIPAddress (Opnum 120)
 
-The **R_DhcpV4GetFreeIPAddress** method retrieves the list of IPv4 addresses available to be leased out to the clients. The caller of this function can free the memory pointed to by the *IPAddrList* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4GetFreeIPAddress** method retrieves the list of IPv4 addresses available to be leased out to the clients. The caller of this function can free the memory pointed to by the *IPAddrList* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4GetFreeIPAddress(
 
@@ -16009,7 +16009,7 @@ When processing this call, the DHCP server MUST do the following:
 <a id="Section_3.2.4.122"></a>
 #### 3.2.4.122 R_DhcpV6GetFreeIPAddress (Opnum 121)
 
-The **R_DhcpV6GetFreeIPAddress** method retrieves the list of IPv6 addresses available to be leased out to the clients. The caller of this function can free the memory pointed to by the *IPAddrList* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV6GetFreeIPAddress** method retrieves the list of IPv6 addresses available to be leased out to the clients. The caller of this function can free the memory pointed to by the *IPAddrList* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV6GetFreeIPAddress(
 
@@ -16084,7 +16084,7 @@ DWORD R_DhcpV4CreateClientInfo(
 
 **ServerIpAddress:** The IP address of the DHCP server. This parameter is unused.
 
-**ClientInfo:** A pointer to a [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.12) structure that contains the DHCPv4 client lease record information to be set on the DHCPv4 server. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** members when adding a DHCPv4 client lease record to the DHCPv4 server. The **ClientHardwareAddress** member represents a DHCPv4 client-identifier as specified in section [2.2.1.2.5.1](#Section_2.2.1.2.5.1). The **ClientName**, **ClientComment**, **ClientLeaseExpires**, **bClientType**, **AddressState**, **Status**, **ProbationEnds**, **QuarantineCapable**, **PolicyName**, and **OwnerHost** members are modified on the DHCPv4 client lease record identified by the **ClientIpAddress** member.
+**ClientInfo:** A pointer to a [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.115) structure that contains the DHCPv4 client lease record information to be set on the DHCPv4 server. The caller MUST pass the **ClientIPAddress** and **ClientHardwareAddress** members when adding a DHCPv4 client lease record to the DHCPv4 server. The **ClientHardwareAddress** member represents a DHCPv4 client-identifier as specified in section [2.2.1.2.5.1](#Section_2.2.1.2.5.1). The **ClientName**, **ClientComment**, **ClientLeaseExpires**, **bClientType**, **AddressState**, **Status**, **ProbationEnds**, **QuarantineCapable**, **PolicyName**, and **OwnerHost** members are modified on the DHCPv4 client lease record identified by the **ClientIpAddress** member.
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully. Otherwise, it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or to any generic failure.
 
@@ -16125,7 +16125,7 @@ Insert the object into the **Dhcpv4Scope.DHCPv4ClientsList** ADM element.
 <a id="Section_3.2.4.124"></a>
 #### 3.2.4.124 R_DhcpV4GetClientInfo (Opnum 123)
 
-The **R_DhcpV4GetClientInfo** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The information also includes the link-layer filter status information for the DHCPv4 client and the policy, if any, that resulted in the specific IPv4 address assignment. The caller of this function can free the memory pointed to by the *ClientInfo* parameter by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The **R_DhcpV4GetClientInfo** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The information also includes the link-layer filter status information for the DHCPv4 client and the policy, if any, that resulted in the specific IPv4 address assignment. The caller of this function can free the memory pointed to by the *ClientInfo* parameter by calling the function **midl_user_free** (section [3](#Section_3)).
 
 DWORD R_DhcpV4GetClientInfo(
 
@@ -16141,7 +16141,7 @@ DWORD R_DhcpV4GetClientInfo(
 
 **SearchInfo:** A pointer to a type [DHCP_SEARCH_INFO (section 2.2.1.2.18)](#Section_2.2.1.2.18) structure that contains the key to be used to search for the DHCPv4 client lease record on the DHCPv4 server. If this parameter's **SearchType** member is set to DhcpClientName and there are multiple lease records with the same **ClientName** member, the server returns client information for the client having the lowest numerical IP address.
 
-**ClientInfo:** A pointer of type [LPDHCP_CLIENT_INFO_PB](#Section_2.2.1.2.12) that points to the location where the DHCPv4 client lease record information will be returned. The caller SHOULD free this buffer. The structure's **ClientHardwareAddress** member represents a DHCPv4 client unique-identifier as specified in section [2.2.1.2.5.2](#Section_2.2.1.2.5.2).
+**ClientInfo:** A pointer of type [LPDHCP_CLIENT_INFO_PB](#Section_6ac8d53184bb4e8c8010840c41fd72e8) that points to the location where the DHCPv4 client lease record information will be returned. The caller SHOULD free this buffer. The structure's **ClientHardwareAddress** member represents a DHCPv4 client unique-identifier as specified in section [2.2.1.2.5.2](#Section_2.2.1.2.5.2).
 
 **Return Values:** A 32-bit unsigned integer value that indicates return status. A return value of ERROR_SUCCESS (0x00000000) indicates that the operation was completed successfully. Otherwise, it contains a Win32 error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md). This error code value can correspond to a DHCP-specific failure, which takes a value between 20000 and 20099, or to any generic failure.
 
@@ -16256,7 +16256,7 @@ When processing this call, the DHCP server MUST do the following:
 
 The **R_DhcpV4CreatePolicyEx** method creates the policy according to the data specified in the policy data structure.
 
-The **R_DhcpV4CreatePolicyEx** method is an extension of the **R_DhcpV4CreatePolicy** (Opnum 108) (section [3.2.4.109)](#Section_f6a46c641d9d4a29bcdecc656ad62430) method, where a [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.110) structure is specified for the *pPolicy* parameter, rather than a [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structure. The structure contains the members of the policy to be created.
+The **R_DhcpV4CreatePolicyEx** method is an extension of the **R_DhcpV4CreatePolicy** (Opnum 108) (section [3.2.4.109)](#Section_f6a46c641d9d4a29bcdecc656ad62430) method, where a [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.121) structure is specified for the *pPolicy* parameter, rather than a [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structure. The structure contains the members of the policy to be created.
 
 Using the extension method, a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements can be specified that can be associated with the given policy when creating the policy.
 
@@ -16281,9 +16281,9 @@ The remainder of the processing behavior for this method is as defined for the *
 <a id="Section_3.2.4.128"></a>
 #### 3.2.4.128 R_DhcpV4GetPolicyEx (Opnum 127)
 
-The **R_DhcpV4GetPolicyEx** method returns the specified policy. The memory for the **Policy** structure is allocated by the method and can be freed by the caller by using the **midl_user_free** function (section [3](#Section_1.3)).
+The **R_DhcpV4GetPolicyEx** method returns the specified policy. The memory for the **Policy** structure is allocated by the method and can be freed by the caller by using the **midl_user_free** function (section [3](#Section_3)).
 
-The **R_DhcpV4GetPolicyEx** method is an extension of the **R_DhcpV4GetPolicy** (Opnum 109) (section [3.2.4.110)](#Section_a309de3150094ff89188ad21d6a119f3) method, where a [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.110) structure is queried, rather than a [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structure. The structure returns a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be associated with the given policy.
+The **R_DhcpV4GetPolicyEx** method is an extension of the **R_DhcpV4GetPolicy** (Opnum 109) (section [3.2.4.110)](#Section_a309de3150094ff89188ad21d6a119f3) method, where a [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.121) structure is queried, rather than a [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structure. The structure returns a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be associated with the given policy.
 
 DWORD R_DhcpV4GetPolicyEx(
 
@@ -16309,7 +16309,7 @@ DWORD R_DhcpV4GetPolicyEx(
 
 **Policy:** This out parameter is a pointer to a **DHCP_POLICY_EX** structure and contains the policy data for the requested policy. The **DHCP_PROPERTY** elements that are queried are as follows:
 
-**DNSSuffix:** Specifies the DNSSuffix for the policy when the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117) is DhcpPropTypeString.
+**DNSSuffix:** Specifies the DNSSuffix for the policy when the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26) is DhcpPropTypeString.
 
 **Return Values:** As specified in **R_DhcpV4CreatePolicy** (Opnum 108).
 
@@ -16322,7 +16322,7 @@ The remainder of the processing behavior for this method is as defined for the *
 
 The **R_DhcpV4SetPolicyEx** method modifies the specified policy.
 
-The method is an extension of the **R_DhcpV4SetPolicy** (Opnum 110) (section [3.2.4.111)](#Section_3.2.4.111) method, where the method specifies a [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.110) structure rather than a [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structure. The structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be updated for the policy.
+The method is an extension of the **R_DhcpV4SetPolicy** (Opnum 110) (section [3.2.4.111)](#Section_3.2.4.111) method, where the method specifies a [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.121) structure rather than a [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structure. The structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be updated for the policy.
 
 DWORD R_DhcpV4SetPolicyEx(
 
@@ -16352,7 +16352,7 @@ DWORD R_DhcpV4SetPolicyEx(
 
 **Policy:** This is a pointer to a **DHCP_POLICY_EX** structure and contains the policy data to be modified. The **DHCP_PROPERTY** elements that are modified are as follows:
 
-**DNSSuffix:** Specifies the DNSSuffix for the policy when the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117) is DhcpPropTypeString.
+**DNSSuffix:** Specifies the DNSSuffix for the policy when the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26) is DhcpPropTypeString.
 
 **Return Values:** As specified in **R_DhcpV4SetPolicy** (Opnum 110).
 
@@ -16371,9 +16371,9 @@ In addition to steps 1 through 5 specified in **R_DhcpV4SetPolicy** (Opnum 110),
 <a id="Section_3.2.4.130"></a>
 #### 3.2.4.130 R_DhcpV4EnumPoliciesEx (Opnum 129)
 
-The **R_DhcpV4EnumPoliciesEx** method returns an enumerated list of all configured server level or scope level policies. The caller of this method can free the memory pointed to by the *EnumInfo* parameter by calling the **midl_user_free** function (section [3](#Section_1.3)).
+The **R_DhcpV4EnumPoliciesEx** method returns an enumerated list of all configured server level or scope level policies. The caller of this method can free the memory pointed to by the *EnumInfo* parameter by calling the **midl_user_free** function (section [3](#Section_3)).
 
-The **R_DhcpV4EnumPoliciesEx** method is an extension of the **R_DhcpV4EnumPolicies** (Opnum 112) (section 3.2.4.130) method, where an array of [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.110) structures is enumerated, rather than an array of [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structures. Each **DHCP_POLICY_EX** structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that are associated with the given policy.
+The **R_DhcpV4EnumPoliciesEx** method is an extension of the **R_DhcpV4EnumPolicies** (Opnum 112) (section 3.2.4.130) method, where an array of [DHCP_POLICY_EX (section 2.2.1.2.121)](#Section_2.2.1.2.121) structures is enumerated, rather than an array of [DHCP_POLICY (section 2.2.1.2.110)](#Section_2.2.1.2.110) structures. Each **DHCP_POLICY_EX** structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that are associated with the given policy.
 
 DWORD R_DhcpV4EnumPoliciesEx(
 
@@ -16407,7 +16407,7 @@ DWORD R_DhcpV4EnumPoliciesEx(
 
 **EnumInfo:** This out parameter contains an array of **DHCP_POLICY_EX** structures containing an enumerated list of all configured server-level or scope-level policies for the given property. The **DHCP_PROPERTY** elements that are enumerated are as follows:
 
-**DNSSuffix:** Specifies the DNSSuffix for the policy when the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.2.117) is DhcpPropTypeString.
+**DNSSuffix:** Specifies the DNSSuffix for the policy when the [DHCP_PROPERTY_ID (section 2.2.1.1.27)](#Section_2.2.1.1.27) is DhcpPropIdPolicyDnsSuffix and the value of the [DHCP_PROPERTY_TYPE (section 2.2.1.1.26)](#Section_2.2.1.1.26) is DhcpPropTypeString.
 
 **ElementsRead:** As specified in **R_DhcpV4EnumPolicies** (Opnum 112).
 
@@ -16425,7 +16425,7 @@ The remainder of the processing behavior for this method is as defined for the *
 
 The **R_DhcpV4EnumSubnetClientsEx** method is used to retrieve all DHCPv4 clients serviced on the specified IPv4 subnet. The information retrieved also includes the link-layer filter status for the DHCPv4 client and the policy, if any, that resulted in the specific IPv4 address assignment.
 
-The **R_DhcpV4EnumSubnetClientsEx** method is an extension of the **R_DhcpV4EnumSubnetClients** (Opnum 115) (section [3.2.4.116)](#Section_54b6fd10506d49829d8f47025eb46d1d) method, where an array of [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.12) structures is enumerated, rather than an array of [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.12) structures. Each **DHCP_CLIENT_INFO_EX** structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that are associated with the given subnet client.
+The **R_DhcpV4EnumSubnetClientsEx** method is an extension of the **R_DhcpV4EnumSubnetClients** (Opnum 115) (section [3.2.4.116)](#Section_54b6fd10506d49829d8f47025eb46d1d) method, where an array of [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.119) structures is enumerated, rather than an array of [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.115) structures. Each **DHCP_CLIENT_INFO_EX** structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that are associated with the given subnet client.
 
 DWORD R_DhcpV4EnumSubnetClientsEx (
 
@@ -16472,7 +16472,7 @@ The remainder of the processing behavior for this method is as defined for the *
 
 The **R_DhcpV4CreateClientInfoEx** method creates a DHCPv4 client lease record on the DHCP server.
 
-The **R_DhcpV4CreateClientInfoEx** method is an extension of the **R_DhcpV4CreateClientInfo** (Opnum 122) (section 3.2.4.132) method, where a [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.12) structure is specified, rather than a DHCP_CLIENT_INFO_PB (section 2.2.1.2.119) structure. The structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be associated with the given DHCPv4 client.
+The **R_DhcpV4CreateClientInfoEx** method is an extension of the **R_DhcpV4CreateClientInfo** (Opnum 122) (section 3.2.4.132) method, where a [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.119) structure is specified, rather than a DHCP_CLIENT_INFO_PB (section 2.2.1.2.119) structure. The structure contains a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be associated with the given DHCPv4 client.
 
 DWORD R_DhcpV4CreateClientInfoEx(
 
@@ -16497,9 +16497,9 @@ The remainder of the processing behavior for this method is as defined for the *
 <a id="Section_3.2.4.133"></a>
 #### 3.2.4.133 R_DhcpV4GetClientInfoEx (Opnum 132)
 
-The **R_DhcpV4GetClientInfoEx** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The retrieved information also includes the link-layer filter status information for the DHCPv4 client and the policy, if any, that resulted in the specific IPv4 address assignment. The caller of this method can free the memory pointed to by the ClientInfo parameter by calling the **midl_user_free** function (section [3](#Section_1.3)).
+The **R_DhcpV4GetClientInfoEx** method retrieves DHCPv4 client lease record information from the DHCPv4 server database. The retrieved information also includes the link-layer filter status information for the DHCPv4 client and the policy, if any, that resulted in the specific IPv4 address assignment. The caller of this method can free the memory pointed to by the ClientInfo parameter by calling the **midl_user_free** function (section [3](#Section_3)).
 
-The **R_DhcpV4GetClientInfoEx** method is an extension of the **R_DhcpV4GetClientInfo** (Opnum 123) (section [3.2.4.124)](#Section_b9fbb4b0d8f34a9c8090b31a5e792d29) method, where a [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.12) structure is queried, rather than a [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.12) structure. The structure returns a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be associated with the given DHCPv4 client.
+The **R_DhcpV4GetClientInfoEx** method is an extension of the **R_DhcpV4GetClientInfo** (Opnum 123) (section [3.2.4.124)](#Section_b9fbb4b0d8f34a9c8090b31a5e792d29) method, where a [DHCP_CLIENT_INFO_EX (section 2.2.1.2.119)](#Section_2.2.1.2.119) structure is queried, rather than a [DHCP_CLIENT_INFO_PB (section 2.2.1.2.115)](#Section_2.2.1.2.115) structure. The structure returns a list of [DHCP_PROPERTY (section 2.2.1.2.117)](#Section_2.2.1.2.117) elements that can be associated with the given DHCPv4 client.
 
 DWORD R_DhcpV4GetClientInfoEx(
 
@@ -16619,7 +16619,7 @@ This section contains details about retrieving [**SIDs**](#gt_security-identifie
 <a id="Section_3.5.2"></a>
 ### 3.5.2 Retrieve DHCP User Group SID
 
-The [**DHCP Users**](#gt_dhcp-users) group [**SID**](#gt_security-identifier-sid) is retrieved by using the Local Security Authority method LsarLookupNames2. This method requires an initial call to LsarOpenPolicy to obtain a *PolicyHandle*, as specified in [MS-LSAT](#Section_5) section 3.1.4.2. The call to LsarLookupNames2 ([MS-LSAT] section 3.1.4.7) uses the parameter values described in the following table.
+The [**DHCP Users**](#gt_dhcp-users) group [**SID**](#gt_security-identifier-sid) is retrieved by using the Local Security Authority method LsarLookupNames2. This method requires an initial call to LsarOpenPolicy to obtain a *PolicyHandle*, as specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.2. The call to LsarLookupNames2 ([MS-LSAT] section 3.1.4.7) uses the parameter values described in the following table.
 
 | Parameter | Value |
 | --- | --- |
@@ -16628,14 +16628,14 @@ The [**DHCP Users**](#gt_dhcp-users) group [**SID**](#gt_security-identifier-sid
 | *LookupLevel* | LsapLookupWksta (sections 3.1.4.7 and 2.2.16) |
 | *LookupOptions* | 0 |
 
-DHCP users are created in the account database for the local domain as specified in [MS-SAMR](#Section_5) sections 4.1, 3.1.5.1.1, 3.1.5.1.5, 3.1.5.2.1, 3.1.5.4.3, and 3.1.5.11.1.
+DHCP users are created in the account database for the local domain as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 4.1, 3.1.5.1.1, 3.1.5.1.5, 3.1.5.2.1, 3.1.5.4.3, and 3.1.5.11.1.
 
 The returned DHCP users SID is copied to the ADM data element **DHCPUsersSid**.
 
 <a id="Section_3.5.3"></a>
 ### 3.5.3 Retrieve DHCP Administrators Group SID
 
-The [**DHCP Administrators**](#gt_dhcp-administrators) group [**SID**](#gt_security-identifier-sid) is retrieved by using the Local Security Authority method LsarLookupNames2. This method requires an initial call to the LsarOpenPolicy method to obtain a *PolicyHandle*, as specified in [MS-LSAT](#Section_5) section 3.1.4.2. The LsarLookupNames2 method ([MS-LSAT] section 3.1.4.7) is called with parameter values as specified in the following table.
+The [**DHCP Administrators**](#gt_dhcp-administrators) group [**SID**](#gt_security-identifier-sid) is retrieved by using the Local Security Authority method LsarLookupNames2. This method requires an initial call to the LsarOpenPolicy method to obtain a *PolicyHandle*, as specified in [MS-LSAT](../MS-LSAT/MS-LSAT.md) section 3.1.4.2. The LsarLookupNames2 method ([MS-LSAT] section 3.1.4.7) is called with parameter values as specified in the following table.
 
 | Parameter | Value |
 | --- | --- |
@@ -16644,7 +16644,7 @@ The [**DHCP Administrators**](#gt_dhcp-administrators) group [**SID**](#gt_secur
 | *LookupLevel* | LsapLookupWksta (sections 3.1.4.7 and 2.2.16) |
 | *LookupOptions* | 0 |
 
-DHCP Administrators are created in the account database for the local domain as specified in [MS-SAMR](#Section_5) sections 4.1, 3.1.5.1.1, 3.1.5.1.5, 3.1.5.2.1, 3.1.5.4.3, and 3.1.5.11.1.The returned DHCP Administrators SID is copied to the ADM data element **DHCPAdministratorsSid**.
+DHCP Administrators are created in the account database for the local domain as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) sections 4.1, 3.1.5.1.1, 3.1.5.1.5, 3.1.5.2.1, 3.1.5.4.3, and 3.1.5.11.1.The returned DHCP Administrators SID is copied to the ADM data element **DHCPAdministratorsSid**.
 
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Checks for Read Authorization
@@ -16714,28 +16714,28 @@ The call to this RPC method will return either ERROR_SUCCESS or an error code be
 
 In this example, the DHCP server is configured with three endpoints. This example illustrates how to query the list of endpoints from the DHCP server.
 
-The client calls [R_DhcpGetServerBindingInfo (section 3.2.4.41)](#Section_3.2.4.70) and provides the following parameters:
+The client calls [R_DhcpGetServerBindingInfo (section 3.2.4.41)](#Section_3.2.4.41) and provides the following parameters:
 
 - One of the RPC endpoints of the DHCP server as the server IP address.
 - Zero as the reserved ULONG parameter.
-- A pointer of type [LPDHCP_BIND_ELEMENT_ARRAY (section 2.2.1.2.81)](#Section_2.2.1.2.80) to a structure that contains a pointer to an array of [DHCP_BIND_ELEMENT (section 2.2.1.2.80)](#Section_2.2.1.2.80) and the number of elements.
+- A pointer of type [LPDHCP_BIND_ELEMENT_ARRAY (section 2.2.1.2.81)](#Section_2.2.1.2.81) to a structure that contains a pointer to an array of [DHCP_BIND_ELEMENT (section 2.2.1.2.80)](#Section_2.2.1.2.80) and the number of elements.
 The call to this RPC method will return ERROR_SUCCESS, and the following parameter is updated:
 
 - The pointer of type **LPDHCP_BIND_ELEMENT_ARRAY** to a structure will be updated with three as the number of elements in the array and a pointer to a buffer containing the addresses of the three endpoints of the DHCP server.
-When the client no longer needs the server binding information, it frees the memory pointed to by **LPDHCP_BIND_ELEMENT_ARRAY** by calling the function **midl_user_free** (see section [3](#Section_1.3)).
+When the client no longer needs the server binding information, it frees the memory pointed to by **LPDHCP_BIND_ELEMENT_ARRAY** by calling the function **midl_user_free** (see section [3](#Section_3)).
 
 <a id="Section_4.4"></a>
 ## 4.4 Enumerating the DHCP Client in a Subnet
 
 In this example, the DHCP server has assigned 120 IP address leases to clients from a specific DHCPv4 scope. This example illustrates how to enumerate the list of DHCP clients that have been assigned an active IP address lease from a DHCPv4 scope by the DHCP server.
 
-The client calls the RPC method [R_DhcpEnumSubnetClients (section 3.1.4.21)](#Section_3.2.4.89) with the following parameters:
+The client calls the RPC method [R_DhcpEnumSubnetClients (section 3.1.4.21)](#Section_3.1.4.21) with the following parameters:
 
 - An endpoint of the DHCP server as the server IP address.
 - The IPv4 address of the scope is set as the subnet address.
 - Zero as the handle to the location in the list of DHCP clients assigned an address from the specified scope in order to request data from the beginning of the data set.
 - The next field can be set to 1,024 bytes as the preferred maximum amount of data to return.
-- A pointer of type [LPDHCP_CLIENT_INFO_ARRAY (section 2.2.1.2.13)](#Section_2.2.1.2.12) to a structure that contains a pointer to an array of [DHCP_CLIENT_INFO (section 2.2.1.2.12)](#Section_2.2.1.2.12) and the number of elements in which the information about the DHCP clients will be returned.
+- A pointer of type [LPDHCP_CLIENT_INFO_ARRAY (section 2.2.1.2.13)](#Section_2.2.1.2.13) to a structure that contains a pointer to an array of [DHCP_CLIENT_INFO (section 2.2.1.2.12)](#Section_2.2.1.2.12) and the number of elements in which the information about the DHCP clients will be returned.
 - An allocated pointer to *ClientsRead*, a DWORD that will contain the number of DHCP clients whose information is being returned.
 - An allocated pointer to *ClientsTotal*, a DWORD that will contain the number of DHCP clients remaining that have an active IP address lease obtained from the specified scope whose information is still to be returned.
 The client calls the RPC method, which returns ERROR_SUCCESS and updates the following parameters:
@@ -16749,7 +16749,7 @@ The client again invokes the RPC method R_DhcpEnumSubnetClients with the same pa
 - The updated handle received from the previous call to the RPC method is passed in as the handle to the location from which the DHCP server will return data in this invocation.
 In this manner, the client can retrieve information about all the DHCP clients that have obtained an IP address lease from the specified DHCPv4 scope on the DHCP server.
 
-After the client no longer needs the list of enumerated DHCP clients, it frees the memory pointed to by **LPDHCP_CLIENT_INFO_ARRAY** by calling the function **midl_user_free** (see section [3](#Section_1.3)).
+After the client no longer needs the list of enumerated DHCP clients, it frees the memory pointed to by **LPDHCP_CLIENT_INFO_ARRAY** by calling the function **midl_user_free** (see section [3](#Section_3)).
 
 <a id="Section_4.5"></a>
 ## 4.5 Querying the List of IPv4 Multicast Subnets from the DHCP Server
@@ -16784,7 +16784,7 @@ This second call to the RPC method returns ERROR_SUCCESS, and additionally the f
 - The handle to the location on the DHCP server from which the DHCP server will return data in a subsequent invocation of this RPC method will be updated to the end of the server's data set.
 - A DWORD, the *ElementsRead* parameter, containing the number of multicast scope names returned by the API; is set to 50.
 - A DWORD, the *ElementsTotal* parameter, containing the total number of IPv4 multicast scopes configured on the DHCP server; is set to 0.
-If the client uses the same pointer of type **LPDHCP_MSCOPE_TABLE** for both calls to the RPC method **R_DhcpEnumMScopes**, the memory needs to be deallocated before the second call. In all cases, after the client no longer needs the list of enumerated IPv4 multicast scopes, the client frees the memory pointed to by the pointer of type **LPDHCP_MSCOPE_TABLE** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+If the client uses the same pointer of type **LPDHCP_MSCOPE_TABLE** for both calls to the RPC method **R_DhcpEnumMScopes**, the memory needs to be deallocated before the second call. In all cases, after the client no longer needs the list of enumerated IPv4 multicast scopes, the client frees the memory pointed to by the pointer of type **LPDHCP_MSCOPE_TABLE** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 <a id="Section_4.6"></a>
 ## 4.6 Adding an IPv4 Multicast Range to a Multicast Scope
@@ -16821,7 +16821,7 @@ The client calls the RPC method [R_DhcpEnumMScopeClients (section 3.2.4.14)](#
 - The name of multicast scope is set as the subnet preference. An example of an *MScopeName* parameter is a pointer to a WCHAR initialized with "DCHPv4 Multicast Scope Example".
 - Zero as the handle to the location in the list of MADCAP clients assigned an address from the specified scope in order to request data from the beginning of the data set.
 - The next field can be set to 1,024 bytes as the preferred maximum amount of data to return.
-- A pointer, *ClientInfo*, of type [LPDHCP_MCLIENT_INFO_ARRAY (section 2.2.1.2.84)](#Section_2.2.1.2.21) to a structure that contains the number of elements in the array and a pointer to an array of [DHCP_MCLIENT_INFO](#Section_2.2.1.2.21) in which the information about the MADCAP clients will be returned.
+- A pointer, *ClientInfo*, of type [LPDHCP_MCLIENT_INFO_ARRAY (section 2.2.1.2.84)](#Section_2.2.1.2.84) to a structure that contains the number of elements in the array and a pointer to an array of [DHCP_MCLIENT_INFO](#Section_2.2.1.2.21) in which the information about the MADCAP clients will be returned.
 - An allocated pointer, *ClientsRead*, to a DWORD that will contain the number of MADCAP clients whose information is being returned.
 - An allocated pointer, *ClientsTotal*, to a DWORD that will contain the number of MADCAP clients remaining that have an active IP address lease obtained from the specified multicast scope whose information is still to be returned.
 The client calls the RPC method, which returns ERROR_SUCCESS and updates the following parameters:
@@ -16830,7 +16830,7 @@ The client calls the RPC method, which returns ERROR_SUCCESS and updates the fol
 - The handle to the location on the DHCP server from which the DHCP server will return data about the remaining clients whose information is still to be retrieved.
 - The *ClientsRead* parameter pointer to a DWORD is updated with the number of DHCP clients whose information is included in the buffer of type **LPDHCP_MCLIENT_INFO_ARRAY**.
 - The *ClientsTotal* parameter pointer to a DWORD is updated with the value (150 – *ClientsRead*), which is the number of clients whose information is still to be retrieved.
-The client frees the memory pointed to by the pointer *ClientInfo* of type **LPDHCP_MCLIENT_INFO_ARRAY** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The client frees the memory pointed to by the pointer *ClientInfo* of type **LPDHCP_MCLIENT_INFO_ARRAY** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 The client again invokes the RPC method **R_DhcpEnumMScopeClients** with the same parameters as before except for the following:
 
@@ -16858,7 +16858,7 @@ When the client calls the RPC method as described in the preceding list, it retu
 - The handle to the location on the DHCP server from which the DHCP server will return data in a subsequent invocation of this RPC method will be updated.
 - A DWORD, the *ElementsRead* parameter, containing the number of scope addresses returned by the API; will be set to 50.
 - A DWORD, the *ElementsTotal* parameter, containing the total number of IPv6 scopes configured on the DHCP server; is set to 50.
-The client frees the memory pointed to by the pointer *EnumInfo* of type **LPDHCPV6_IP_ARRAY** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The client frees the memory pointed to by the pointer *EnumInfo* of type **LPDHCPV6_IP_ARRAY** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 The client then calls the RPC method **R_DhcpEnumSubnetsV6** again with the following parameters:
 
@@ -16885,7 +16885,7 @@ The client calls the RPC method [R_DhcpAddSubnetElementV6 (section 3.2.4.60)](
 
 - The endpoint of the DHCP server as the server IP address. This parameter is optional and can be passed as a pointer to a null Unicode string.
 - The IPv6 address of the scope is set as the subnet address. For example, the *SubnetAddress* parameter is set to a [DHCP_IPV6_ADDRESS (section 2.2.1.2.28)](#Section_2.2.1.2.28) structure initialized with 2001:db8:1234:abcd::/64 as the IPv6 address of the subnet.
-- A pointer of type [LPDHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.33) to a data structure in which the member **ElementType** is set to the value Dhcp6ExcludedpIpRanges, the member **Element** is set as the union, and the member **ExcludeIpRange** is set to the value that the client determines as the IPv6 exclusion range for that scope. For illustration, the **StartAddress** and **EndAddress** fields of the **ExcludeIpRange** member are set to the IPv6 addresses 2001:db8:1234:abcd::1 and 2001:db8:1234:abcd::10 as an excluded address range on the subnet prefix 2001:db8:1234:abcd::/64.
+- A pointer of type [LPDHCP_SUBNET_ELEMENT_DATA_V6 (section 2.2.1.2.60)](#Section_2.2.1.2.60) to a data structure in which the member **ElementType** is set to the value Dhcp6ExcludedpIpRanges, the member **Element** is set as the union, and the member **ExcludeIpRange** is set to the value that the client determines as the IPv6 exclusion range for that scope. For illustration, the **StartAddress** and **EndAddress** fields of the **ExcludeIpRange** member are set to the IPv6 addresses 2001:db8:1234:abcd::1 and 2001:db8:1234:abcd::10 as an excluded address range on the subnet prefix 2001:db8:1234:abcd::/64.
 The call to this RPC method will return either ERROR_SUCCESS or an error code between 20000 and 20099.
 
 <a id="Section_4.11"></a>
@@ -16897,11 +16897,11 @@ The client calls [R_DhcpGetServerBindingInfoV6 (section 3.2.4.70)](#Section_3.
 
 - One of the RPC endpoints of the DHCPv6 server as the server IP address. This parameter is optional and can be passed as a pointer to a null Unicode string.
 - Zero as the reserved ULONG *Flags* parameter.
-- A pointer, *BindElementsInfo*, of type [LPDHCPV6_BIND_ELEMENT_ARRAY (section 2.2.1.2.83)](#Section_2.2.1.2.82) to a structure that contains a pointer to an array of type [DHCPV6_BIND_ELEMENT (section 2.2.1.2.82)](#Section_2.2.1.2.82) and the number of elements in the array.
+- A pointer, *BindElementsInfo*, of type [LPDHCPV6_BIND_ELEMENT_ARRAY (section 2.2.1.2.83)](#Section_2.2.1.2.83) to a structure that contains a pointer to an array of type [DHCPV6_BIND_ELEMENT (section 2.2.1.2.82)](#Section_2.2.1.2.82) and the number of elements in the array.
 The call to this RPC method returns ERROR_SUCCESS, and the following parameter is updated:
 
 - The pointer, *BindElementsInfo*, of type **LPDHCPV6_BIND_ELEMENT_ARRAY** is updated with three as the number of elements in the array and a pointer to a buffer containing the addresses of the three endpoints of the DHCP server.
-Upon a successful call, after the client no longer needs the list of endpoints, the client frees the memory pointed to by the pointer *BindElementsInfo* of type **LPDHCPV6_BIND_ELEMENT_ARRAY** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+Upon a successful call, after the client no longer needs the list of endpoints, the client frees the memory pointed to by the pointer *BindElementsInfo* of type **LPDHCPV6_BIND_ELEMENT_ARRAY** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 <a id="Section_4.12"></a>
 ## 4.12 Enumerating the DHCPv6 Client in a Subnet
@@ -16914,7 +16914,7 @@ The client calls the RPC method [R_DhcpEnumSubnetClientsV6 (section 3.2.4.65)]
 - The IPv6 address of the scope is set as the subnet address.
 - Zero as the handle to the location in the list of DHCP clients assigned an address from the specified scope in order to request data from the beginning of the data set.
 - The next field can be set to 1,024 bytes as the preferred maximum amount of data to return.
-- A pointer, *ClientInfo*, of type [LPDHCP_CLIENT_INFO_ARRAY_V6](#Section_2.2.1.2.12) to a structure that contains a pointer to an array of [DHCP_CLIENT_INFO_V6](#Section_2.2.1.2.64) structures and the number of elements in the array in which the information about the DHCPv6 clients will be returned.
+- A pointer, *ClientInfo*, of type [LPDHCP_CLIENT_INFO_ARRAY_V6](#Section_da634b209854467db5c8b6d22d36e2ab) to a structure that contains a pointer to an array of [DHCP_CLIENT_INFO_V6](#Section_2.2.1.2.64) structures and the number of elements in the array in which the information about the DHCPv6 clients will be returned.
 - An allocated pointer, *ClientsRead*, to a DWORD that will contain the number of DHCPv6 clients whose information is being returned.
 - An allocated pointer, *ClientsTotal*, to a DWORD that will contain the number of DHCP clients remaining that have an active IP address lease obtained from the specified scope whose information is still to be returned.
 The client calls the RPC method, which returns ERROR_SUCCESS and updates the following parameters:
@@ -16923,7 +16923,7 @@ The client calls the RPC method, which returns ERROR_SUCCESS and updates the fol
 - The handle to the location on the DHCP server from which the DHCP server will return data about the remaining clients whose information is still to be retrieved.
 - The *ClientsRead* parameter pointer to a DWORD is updated with the number of DHCPv6 clients whose information is included in the buffer of type **LPDHCP_CLIENT_INFO_ARRAY_V6**.
 - The *ClientsTotal* parameter pointer to a DWORD is updated with the value (150 –*ClientsRead*), which is the number of clients whose information is still to be retrieved.
-The client frees the memory pointed to by the pointer *ClientInfo* of type **LPDHCP_CLIENT_INFO_ARRAY_V6** by calling the function **midl_user_free** (section [3](#Section_1.3)).
+The client frees the memory pointed to by the pointer *ClientInfo* of type **LPDHCP_CLIENT_INFO_ARRAY_V6** by calling the function **midl_user_free** (section [3](#Section_3)).
 
 The client again invokes the RPC method **R_DhcpEnumSubnetClientsV6** with the same parameters as before except for the following:
 
@@ -22087,7 +22087,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 **Note** If the *OptionID* parameter is removed it does not necessarily remove the **OptionClass**, **OptionClass** is only removed if you restart the service and hence if you just remove the *OptionID* parameter and try to remove it again then the error returned by the server is ERROR_DHCP_CLASS_NOT_FOUND. If you remove the *OptionID* parameter and restart the service and then try to remove the *OptionID* parameter again then the error returned by the server is ERROR_DHCP_OPTION_NOT_PRESENT.
 
-<31> Section 3.1.4.21: In Windows, this value is set to the correct value during the final [R_DhcpEnumSubnetClients](#Section_3.2.4.89) enumeration call or when the API call returns all the parameters. In calls where the API does not return all parameters and returns error code ERROR_MORE_DATA, the API sets this value as 0x7FFFFFFF.
+<31> Section 3.1.4.21: In Windows, this value is set to the correct value during the final [R_DhcpEnumSubnetClients](#Section_3.1.4.21) enumeration call or when the API call returns all the parameters. In calls where the API does not return all parameters and returns error code ERROR_MORE_DATA, the API sets this value as 0x7FFFFFFF.
 
 <32> Section 3.1.4.29: The following table shows the major and minor versions reported by the **R_DhcpGetVersion** method, in addition to the opnums supported by the RPC interfaces on Applicable Windows Server releases.
 

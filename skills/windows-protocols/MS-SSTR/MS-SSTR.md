@@ -2340,7 +2340,7 @@ Figure 3: Client state machine diagram
 The main data elements that are required by any implementation are:
 
 - Presentation Description: A hierarchical data element that encapsulates metadata from the [**presentation**](#gt_presentation), as specified in section [3.1.1.1](#Section_3.1.1.1).
-- Fragment Description: Metadata and [**samples**](#gt_sample) for a single fragment, as specified in section [3.1.1.2](#Section_2.2.7.5).
+- Fragment Description: Metadata and [**samples**](#gt_sample) for a single fragment, as specified in section [3.1.1.2](#Section_3.1.1.2).
 - Active Presentation: An instance of the Presentation Description data element. This data element is maintained as state by the client.
 - Presentation Available: A flag that indicates whether the Active Presentation has been successfully initialized. This data element is maintained as state by the client.
 - Sparse Stream Pointer Header: A string that contains the name of the HTTP header that is used to carry the Sparse Stream Pointer message, specified in section [2.2.5](#Section_2.2.5).
@@ -2493,7 +2493,7 @@ The Sparse Stream Pointer Header is initialized from configuration above the Smo
 The client is initiated by a higher-layer implementation that [**decodes**](#gt_decoding) [**samples**](#gt_sample) for playback to the end user and uses the state of playback and end-user interaction to initiate Fragment Requests by the client. The following events trigger specific behavior on the client:
 
 - Open Presentation, specified in section [3.1.4.1](#Section_3.1.4.1)
-- Get Fragment, specified in section [3.1.4.2](#Section_2.2.7.5)
+- Get Fragment, specified in section [3.1.4.2](#Section_3.1.4.2)
 - Close Presentation, specified in section [3.1.4.3](#Section_3.1.4.3)
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Open Presentation
@@ -2506,7 +2506,7 @@ The higher-layer implementation provides the following data element:
 When the Open Presentation event is triggered, the client sends a Manifest Request message to the server. Creation of the Manifest Request message is subject to the following rule:
 
 - The value of the **PresentationURI** field in the Fragment Request is set to the value of the [**presentation**](#gt_presentation) URI data element.
-If the processing of the Manifest Request, as specified in section [3.1.5.1](#Section_2.2.1), yields a Presentation Description data element, the client MUST perform the following operations:
+If the processing of the Manifest Request, as specified in section [3.1.5.1](#Section_3.1.5.1), yields a Presentation Description data element, the client MUST perform the following operations:
 
 - Set the Presentation Available flag to TRUE.
 - Return the Presentation Description data element to the higher-layer implementation.
@@ -2530,7 +2530,7 @@ When the Get Fragment event is triggered, the client sends a Fragment Request me
 - The value of the **CustomAttributeValue** field of each **CustomAttributesPredicate** field is set to the value of the **CustomAttributeValue** field in the corresponding **CustomAttributesElement** field.
 - The value of the **StreamName** field in the Fragment Request is set to the value of the **Name** field in the Stream Description data element.
 - The value of the **Time** field in the Fragment Request is set to the value of the **FragmentTime** field in the Request Fragment data element.
-If the processing of the Fragment Response, as specified in section [3.1.5.2](#Section_2.2.3), yields a Fragment Description data element, the client MUST return the data element to the higher-layer implementation.
+If the processing of the Fragment Response, as specified in section [3.1.5.2](#Section_3.1.5.2), yields a Fragment Description data element, the client MUST return the data element to the higher-layer implementation.
 
 No state change is effected when the Get Fragment event is triggered.
 
@@ -2546,8 +2546,8 @@ When the Close Presentation event is triggered, the client sets the Presentation
 
 The following event processing and sequencing rules apply:
 
-- Manifest Request and Manifest Response, as specified in section [3.1.5.1](#Section_2.2.1)
-- Fragment Request and Fragment Response, as specified in section [3.1.5.2](#Section_2.2.3)
+- Manifest Request and Manifest Response, as specified in section [3.1.5.1](#Section_3.1.5.1)
+- Fragment Request and Fragment Response, as specified in section [3.1.5.2](#Section_3.1.5.2)
 - The expected Response from the server to a Fragment Request message is a Fragment Response message. If the Response to a received Fragment Request message contains a message body [[RFC2616]](https://go.microsoft.com/fwlink/?LinkId=90372) but is not a valid Fragment Response, the client SHOULD return the error to the higher layer.
 - The expected Response from the server to a Manifest Request Message is a Manifest Response message. If the Response that is received is not a valid Manifest Response message, the client MUST enter the Final state.
 <a id="Section_3.1.5.1"></a>
@@ -2603,7 +2603,7 @@ Sparse Stream Notifications: A collection in which each entry contains two data 
 - Timestamp: A 64-bit, unsigned integer that represents the timestamp of the new fragment.
 If the underlying transport returns a Response that adheres to the syntax of the Fragment Response message, the message is processed to yield a Presentation Description, subject to the following processing rules:
 
-- The Fragment Description data element is using data in the **FragmentMetadata** field, as specified in section [2.2.4](#Section_2.2.4), subject to the field mapping rules that are specified in section [3.1.1.2](#Section_2.2.7.5).
+- The Fragment Description data element is using data in the **FragmentMetadata** field, as specified in section [2.2.4](#Section_2.2.4), subject to the field mapping rules that are specified in section [3.1.1.2](#Section_3.1.1.2).
 - The Sample Collection data element is populated by creating a Sample Description data element per instance of the TrunBoxPerSampleFields field, specified in section [2.2.4.5](#Section_2.2.4.5).
 - Each Sample Description data element is populated by using data in the **FragmentMetadata** field, as specified in section 2.2.4.5, subject to the field mapping rules that are specified in section [3.1.1.1.2](#Section_3.1.1.1.2).
 After the population of the Fragment Description, the following rules MUST be applied:
@@ -2861,7 +2861,7 @@ CodecPrivateData = "270000010FCBEE1670EF8A16783BF180C9089CC4AFA11C0000010E1207F8
 <a id="Section_4.2"></a>
 ## 4.2 Fragment Request
 
-The following is an example of a [Fragment Request (section 2.2.3)](#Section_2.2.3) message. It follows the [Manifest Response (section 4.1)](#Section_2.2.2) message example, in compliance with the sequencing rules that are specified in section [3.1.5](#Section_1.3).
+The following is an example of a [Fragment Request (section 2.2.3)](#Section_2.2.3) message. It follows the [Manifest Response (section 4.1)](#Section_4.1) message example, in compliance with the sequencing rules that are specified in section [3.1.5](#Section_3.1.5).
 
 /PubPoint.ism/QualityLevels(307200,Compatibility=Handheld)/Fragments(video=1968000)
 

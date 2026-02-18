@@ -1050,7 +1050,7 @@ If the length or the data of the field of any of the options in a DHCPv4 message
 
 If the **DHCPOFFER** contains any of the options defined in this specification, these options SHOULD be ignored; the client MAY<27> instead use the options to choose among offers in any implementation-specific manner.
 
-When sending a **DHCPREQUEST** in response, the DHCPv4 client SHOULD<28> include a Vendor Class Identifier Option formatted as in section [2.2.3](#Section_2.2.3) and MAY<29> include a User Class Option formatted as in section [2.2.6](#Section_2.2.6.2). Because this specification supports only one user class value in this packet, the client MUST conform to the guidelines for the User Class Data defined in section 2.2.6. The DHCPv4 client SHOULD<30> include both options 121 and 249 in the parameter request list in this message.
+When sending a **DHCPREQUEST** in response, the DHCPv4 client SHOULD<28> include a Vendor Class Identifier Option formatted as in section [2.2.3](#Section_2.2.3) and MAY<29> include a User Class Option formatted as in section [2.2.6](#Section_2.2.6). Because this specification supports only one user class value in this packet, the client MUST conform to the guidelines for the User Class Data defined in section 2.2.6. The DHCPv4 client SHOULD<30> include both options 121 and 249 in the parameter request list in this message.
 
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Receiving a DHCPACK
@@ -1063,7 +1063,7 @@ If it contains a **Microsoft Release DHCP Lease on Shutdown Option**, the DHCPv4
 
 If it contains a **Microsoft Default Router Metric Base Option** specified in section [2.2.2.3](#Section_2.2.2.3), the value for this option from the **DHCPACK** message MUST be applied by the client for the default routes on that interface.
 
-If it contains one or more **User Class Options** (77), the client MUST first check whether each option conforms to the syntax specified in section [2.2.6](#Section_2.2.6.2). If the option does not conform to the syntax, the DHCPv4 client MUST silently discard the complete DHCPv4 message and start the initialization process again. Otherwise, the client uses the information in an implementation-specific manner.
+If it contains one or more **User Class Options** (77), the client MUST first check whether each option conforms to the syntax specified in section [2.2.6](#Section_2.2.6). If the option does not conform to the syntax, the DHCPv4 client MUST silently discard the complete DHCPv4 message and start the initialization process again. Otherwise, the client uses the information in an implementation-specific manner.
 
 If it contains a **Microsoft Classless Static Route Option** (249), the client MUST first check whether the option conforms to the syntax specified in section [2.2.8](#Section_2.2.8). If any of the parameters in this DHCPv4 option are invalid or incomplete, the DHCPv4 client MUST silently discard the complete DHCPv4 message and start the initialization process again. Otherwise, if the DHCPACK does not contain a **Classless Static Route Option** (121), the specified routes MUST be inserted into the routing table in the TCP/IP stack. If it contains both a **Microsoft Classless Static Route Option** (249) and a **Classless Static Route Option** (121) then the client MUST select either set of routes (in any implementation-specific way<31>) as the routes to be added into the routing table in the TCP/IP stack.
 
@@ -1184,7 +1184,7 @@ Increment the **DHCPv4ServerMibInfo.Requests** element, a shared ADM element (se
 If the **DHCPREQUEST** message contains a [Vendor Class Identifier Option (section 2.2.3)](#Section_2.2.3) with a value defined in section 2.2.3, the following points illustrate the behavior of the [**DHCPv4**](#gt_dhcpv4) server:
 
 - The DHCPv4 server MUST include the vendor-specific options defined in section [2.2.2](#Section_2.2.2) (if configured to do so by the administrator) in the **DHCPACK** message sent to the clients.
-- The DHCPv4 server MUST interpret the User Class Option if it exists<37> in the **DHCPREQUEST** message to contain a single value as defined in section [2.2.6](#Section_2.2.6.2).
+- The DHCPv4 server MUST interpret the User Class Option if it exists<37> in the **DHCPREQUEST** message to contain a single value as defined in section [2.2.6](#Section_2.2.6).
 When the DHCPv4 server receives a request for Option 249 but not for Option 121 in the Parameter Request List, the [**Classless Static Route**](#gt_classless-static-route) information MUST be returned to the DHCPv4 client in Option 249. If the Parameter Request List contains a request for both Options 121 and 249, the Classless Static Route information SHOULD<38> be returned to the DHCPv4 client in Option 121 only.
 
 The DHCPv4 server MUST format any option values that are longer than 255 bytes, as defined in section [2.2.9](#Section_2.2.9).
@@ -1207,7 +1207,7 @@ If the **DHCPREQUEST** contains a Client Identifier Option (Option 61) with the 
 
 If the **DHCPINFORM** message does not contain Rogue Detection Request Option (section [2.2.2.4](#Section_2.2.2.4)), evaluate and apply administrative controls as described in section [1.4](#Section_1.4), point 6.<40>
 
-When a DHCPv4 server implementing this specification receives a **DHCPINFORM** message containing an OPTION_PARAMETER_REQUEST_LIST (Option 55) ([[RFC2132]](https://go.microsoft.com/fwlink/?LinkId=90319) section 9.8) with OPTION_USER_CLASS (Option 77) ([[RFC3004]](https://go.microsoft.com/fwlink/?LinkId=90402) section 4) as one of the requested options, the DHCPv4 server SHOULD<41> send a **DHCPACK** message to the DHCPv4 client containing one or more User Class Options (one for each user class configured on the DHCPv4 Server) in the format specified in section [2.2.6](#Section_2.2.6.2). If the option request is received in a message other than **DHCPINFORM** message, the request is silently ignored.
+When a DHCPv4 server implementing this specification receives a **DHCPINFORM** message containing an OPTION_PARAMETER_REQUEST_LIST (Option 55) ([[RFC2132]](https://go.microsoft.com/fwlink/?LinkId=90319) section 9.8) with OPTION_USER_CLASS (Option 77) ([[RFC3004]](https://go.microsoft.com/fwlink/?LinkId=90402) section 4) as one of the requested options, the DHCPv4 server SHOULD<41> send a **DHCPACK** message to the DHCPv4 client containing one or more User Class Options (one for each user class configured on the DHCPv4 Server) in the format specified in section [2.2.6](#Section_2.2.6). If the option request is received in a message other than **DHCPINFORM** message, the request is silently ignored.
 
 If the **DHCPINFORM** message contains the Rogue Detection Request option (section 2.2.2.4):
 
@@ -1441,7 +1441,7 @@ The message processing events and sequencing rules for the messages relating to 
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 Receiving a DHCPACK Message
 
-If a Validating Server receives a **DHCPACK** message containing a non-empty Rogue Detection Reply option (section [2.2.2.5](../MS-DHCPM/MS-DHCPM.md)), it MUST consider itself unauthorized and set the **DHCPv4ServerAttributes.IsRogue** element, a shared ADM element (see [MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.1.1.26), to TRUE.
+If a Validating Server receives a **DHCPACK** message containing a non-empty Rogue Detection Reply option (section [2.2.2.5](#Section_2.2.2.5)), it MUST consider itself unauthorized and set the **DHCPv4ServerAttributes.IsRogue** element, a shared ADM element (see [MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) section 3.1.1.26), to TRUE.
 
 If a Validating Server receives a **DHCPACK** message that either does not contain a Rogue Detection Reply option (section 2.2.2.5) or contains an empty one, it retries sending the **DHCPINFORM** message.
 
@@ -1556,7 +1556,7 @@ packet-beta
 - The DHCPv6 client receives and applies the option information sent by the DHCPv6 server.
 In another example, an administrator wants to send specific information to DHCPv4 clients on the local network when the administrator sends the DHCPv4 message as a BOOTP message.
 
-- In this case, the administrator can configure the DHCPv4 server to look for the User-Class option containing a User-Class subpacket with the value "BOOTP" (as described in section [2.2.6](#Section_2.2.6.2)) in the DHCPv4 message sent by the DHCPv4 client. If the message contains this user-class subpacket, the DHCPv4 server is configured to respond with the desired information that the administrator wants to send to the DHCPv4 client.
+- In this case, the administrator can configure the DHCPv4 server to look for the User-Class option containing a User-Class subpacket with the value "BOOTP" (as described in section [2.2.6](#Section_2.2.6)) in the DHCPv4 message sent by the DHCPv4 client. If the message contains this user-class subpacket, the DHCPv4 server is configured to respond with the desired information that the administrator wants to send to the DHCPv4 client.
 ```mermaid
 packet-beta
   0-7: "Option Code = 0x4D"
@@ -1744,7 +1744,7 @@ In applicable Windows Server releases, except Windows 2000 Server, Windows Serve
 
 <23> Section 3.1.4.1: By default, Windows DHCPv4 clients do not send the User Class Option in the DHCPv4 messages. Users can configure any data string value to be sent as the User Class value by the DHCPv4 client to the server.
 
-Windows DHCPv4 clients using BOOTP to boot from the network send the Default BOOTP class (as defined in section [2.2.6](#Section_2.2.6.2)) as their User Class.
+Windows DHCPv4 clients using BOOTP to boot from the network send the Default BOOTP class (as defined in section [2.2.6](#Section_2.2.6)) as their User Class.
 
 <24> Section 3.1.4.1: DHCPv4 clients request the User Classes defined on the Windows DHCPv4 server whenever a user tries to set the User Class for the DHCPv4 client by executing "Ipconfig /setclassid" or whenever a user tries to see the User Classes defined on the DHCPv4 server by executing "Ipconfig /showclassid".
 

@@ -262,7 +262,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MS-NRBF] Microsoft Corporation, "[.NET Remoting: Binary Format Data Structure](../MS-NRBF/MS-NRBF.md)".
 
@@ -653,7 +653,7 @@ This protocol extends the server role defined in the .NET Remoting Protocol Serv
 - The server implementation MUST register a [**Server-Activated Object (SAO)**](#gt_server-activated-object-sao) that implements the [IActivator (section 3.1)](#Section_3.1) interface. The [**Server Object URI**](#gt_server-object-uri) of the SAO MUST be "RemoteActivationService.rem".
 - Each Server Object that participates in the lifetime management MUST implement [MarshalByRefObject (section 3.2)](#Section_3.2).
 - Each Server Object that defines one or more [**Remote Fields**](#gt_remote-field) MUST implement [Object (section 3.5)](#Section_3.5).
-- The [ILease](#Section_3.3) Abstract Data Model (section [3.3.1](#Section_3.3)) extends the .NET Remoting Protocol Server Abstract Data Model ([MS-NRTP]section 3.2.1) in the following ways:
+- The [ILease](#Section_3.3) Abstract Data Model (section [3.3.1](#Section_3.3.1)) extends the .NET Remoting Protocol Server Abstract Data Model ([MS-NRTP]section 3.2.1) in the following ways:
 - Associates a Lease Object with each Server Object in the [**Server Object Table**](#gt_server-object-table).
 - Updates the [**TTL**](#gt_time-to-live-ttl) of the Lease Object on each invocation of an application-defined [**Remote Method**](#gt_remote-method).
 This protocol extends the client role defined in [MS-NRTP]section 3.3 in the following way:
@@ -1186,7 +1186,7 @@ The **RemotingTypeName** of the interface is "System.Object".
 <a id="Section_3.5.1"></a>
 ### 3.5.1 Abstract Data Model
 
-This protocol extends the .NET Remoting: Core Protocol Specification Abstract Data Model (as specified in [MS-NRTP](../MS-NRTP/MS-NRTP.md) sections 3.1.1 and [3.2.1](#Section_3.2)) to associate zero or more [**Remote Fields**](#gt_remote-field) with every active Server Object. For more information about Remote Fields, see [MS-NRTP] sections 3.1.5.1.3 and 3.1.5.2.3.
+This protocol extends the .NET Remoting: Core Protocol Specification Abstract Data Model (as specified in [MS-NRTP](../MS-NRTP/MS-NRTP.md) sections 3.1.1 and [3.2.1](#Section_3.2.1)) to associate zero or more [**Remote Fields**](#gt_remote-field) with every active Server Object. For more information about Remote Fields, see [MS-NRTP] sections 3.1.5.1.3 and 3.1.5.2.3.
 
 <a id="Section_3.5.2"></a>
 ### 3.5.2 Timers
@@ -2458,7 +2458,7 @@ void FieldSetter(String typeName, String fieldName, System.Object val);
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 1.0
 - Microsoft .NET Framework 2.0

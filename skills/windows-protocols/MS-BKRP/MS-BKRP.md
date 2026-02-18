@@ -283,7 +283,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](../MS-KILE/MS-KILE.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](../MS-NLMP/MS-NLMP.md)".
 
@@ -332,7 +332,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDN-DPAPI] Microsoft Corporation, "Windows Data Protection", October 2001, [https://learn.microsoft.com/en-us/previous-versions/ms995355(v%3Dmsdn.10)](https://go.microsoft.com/fwlink/?LinkId=89993)
 
@@ -362,9 +362,9 @@ This section presents an overview of the message flows in a typical usage of the
 
 The BackupKey Remote Protocol consists of a single [**RPC**](#gt_remote-procedure-call-rpc) method. This method takes a parameter that specifies the operation requested. This parameter has four possible values, as specified in section [3.1.4.1](#Section_3.1.4.1). These values are used to identify the messages in the call flows that follow.
 
-Although the BackupKey Remote Protocol could be used between a client and any server to provide secret wrapping and [**unwrapping**](#gt_unwrapping) services, the specific use of this protocol is between a client and a [**Domain Controller (DC)**](#gt_domain-controller-dc). Specifically, every writable DC in an [**Active Directory domain**](#gt_active-directory-domain) is a BackupKey Remote Protocol server for clients within that domain, and no other machines support BackupKey Remote Protocol server functionality. All the writable DCs in a domain are treated as equivalent. All server keys are stored as LSA global secret objects (specified in [MS-LSAD](#Section_5) section 3.1.1.4). These global secret objects are replicated across all the DCs in a domain as specified in [MS-LSAD].
+Although the BackupKey Remote Protocol could be used between a client and any server to provide secret wrapping and [**unwrapping**](#gt_unwrapping) services, the specific use of this protocol is between a client and a [**Domain Controller (DC)**](#gt_domain-controller-dc). Specifically, every writable DC in an [**Active Directory domain**](#gt_active-directory-domain) is a BackupKey Remote Protocol server for clients within that domain, and no other machines support BackupKey Remote Protocol server functionality. All the writable DCs in a domain are treated as equivalent. All server keys are stored as LSA global secret objects (specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.4). These global secret objects are replicated across all the DCs in a domain as specified in [MS-LSAD].
 
-When it needs to perform a protocol operation, the client implementation locates a writable DC that is hosting the calling user's domain-naming context. This is done using the client's implementation of the DC Locator functionality, specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6, with the DNS domain name of the calling user's primary domain as the basis. The client then establishes an RPC connection and security context, as specified in section [3.2.4](#Section_1.3), and proceeds to issue its request. For brevity, all the call flows in this section omit these initial steps, as well as the steps required to create and replicate LSA global secrets among DCs.
+When it needs to perform a protocol operation, the client implementation locates a writable DC that is hosting the calling user's domain-naming context. This is done using the client's implementation of the DC Locator functionality, specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6, with the DNS domain name of the calling user's primary domain as the basis. The client then establishes an RPC connection and security context, as specified in section [3.2.4](#Section_3.2.4), and proceeds to issue its request. For brevity, all the call flows in this section omit these initial steps, as well as the steps required to create and replicate LSA global secrets among DCs.
 
 <a id="Section_1.3.1.1"></a>
 #### 1.3.1.1 ServerWrap Subprotocol
@@ -375,7 +375,7 @@ In this subprotocol, the client submits a secret to the server for [**wrapping**
 
 Figure 1: Server-side secret wrapping
 
-The client then stores the wrapped secret. At a later time, when the client needs access to the secret, the client makes a request to the server as specified in section [3.1.4.1.2](#Section_3.1.4.1.2.1). This is shown in figure 2. The server performs access checks to ensure that the client is authorized to receive the secret, and if the checks are successful, the server returns the unwrapped secret. This process, including the access checking performed, is specified in section 3.1.4.1.2.
+The client then stores the wrapped secret. At a later time, when the client needs access to the secret, the client makes a request to the server as specified in section [3.1.4.1.2](#Section_3.1.4.1.2). This is shown in figure 2. The server performs access checks to ensure that the client is authorized to receive the secret, and if the checks are successful, the server returns the unwrapped secret. This process, including the access checking performed, is specified in section 3.1.4.1.2.
 
 ![Recovering a server-side wrapped secret](media/image2.png)
 
@@ -403,7 +403,7 @@ The BackupKey Remote Protocol is built on the Microsoft [**Remote Procedure Call
 
 The BackupKey Remote Protocol uses [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) [MS-SPNG](../MS-SPNG/MS-SPNG.md) [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) to negotiate an authentication mechanism. It uses the [**authentication level**](#gt_authentication-level) and impersonation level security extensions specified in [MS-RPCE] sections 2.2.1.1.8 and 2.2.1.1.9 to pass the client's security context to the server and to prevent exposure of secrets to network eavesdroppers.
 
-As specified in section [1.5](#Section_1.5), the BackupKey Remote protocol server has to run on a [**Domain Controller (DC)**](#gt_domain-controller-dc) in an [**Active Directory domain**](#gt_active-directory-domain). Clients use the DC Locator functionality specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6 to locate a Domain Controller. The Local Security Authority (Domain Policy) Remote Protocol (as specified in [MS-LSAD](#Section_5) section 3.1.1.4) is used by the server to replicate [**wrapping**](#gt_wrapping) keys between all DCs in a domain.
+As specified in section [1.5](#Section_1.5), the BackupKey Remote protocol server has to run on a [**Domain Controller (DC)**](#gt_domain-controller-dc) in an [**Active Directory domain**](#gt_active-directory-domain). Clients use the DC Locator functionality specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.3.6 to locate a Domain Controller. The Local Security Authority (Domain Policy) Remote Protocol (as specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.4) is used by the server to replicate [**wrapping**](#gt_wrapping) keys between all DCs in a domain.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -461,7 +461,7 @@ The client SHOULD attempt to connect to the \\pipe\protected_storage endpoint fi
 
 The server interface MUST be identified by [**universal unique identifier (UUID)**](#gt_universally-unique-identifier-uuid) [3dde7c30-165d-11d1-ab8f-00805f14db40], version 1.0.
 
-The server MUST use the RPC security extensions specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), in the manner specified in sections [3.1.3](../MS-RPCE/MS-RPCE.md) and [**3.1.4**](#Section_3.2.4). It MUST support the use of [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) [MS-SPNG](../MS-SPNG/MS-SPNG.md) [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) to negotiate [**security providers**](#gt_security-provider), and it MUST register one or more security packages that can be negotiated using this protocol.<4>
+The server MUST use the RPC security extensions specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md), in the manner specified in sections [3.1.3](#Section_3.1.3) and [**3.1.4**](#Section_3.1.4). It MUST support the use of [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) [MS-SPNG](../MS-SPNG/MS-SPNG.md) [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) to negotiate [**security providers**](#gt_security-provider), and it MUST register one or more security packages that can be negotiated using this protocol.<4>
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -640,7 +640,7 @@ packet-beta
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Secret Wrapped with Symmetric Key
 
-The following structure MUST be used by servers to wrap a secret using the [**ServerWrap subprotocol**](#gt_serverwrap-subprotocol), as specified in section [3.1.1.1](#Section_1.3.1.1).
+The following structure MUST be used by servers to wrap a secret using the [**ServerWrap subprotocol**](#gt_serverwrap-subprotocol), as specified in section [3.1.1.1](#Section_3.1.1.1).
 
 ```mermaid
 packet-beta
@@ -747,14 +747,14 @@ packet-beta
 
 **Private_Exponent (256 bytes):** This MUST be the RSA private exponent, referred to as **d** in [RFC8017]. It MUST be encoded in little-endian format.
 
-**Certificate (variable):** This field MUST contain the [**certificate**](#gt_certificate) for the key pair's [**public key**](#gt_public-key), formatted as specified in section [2.2.1](#Section_3.1.1.2).
+**Certificate (variable):** This field MUST contain the [**certificate**](#gt_certificate) for the key pair's [**public key**](#gt_public-key), formatted as specified in section [2.2.1](#Section_2.2.1).
 
 <a id="Section_2.2.6"></a>
 ### 2.2.6 Unwrapped Secret
 
 The UnwrappedSecret structure consists of the ClientWrap secret unwrapped through the [**ServerWrap subprotocol**](#gt_serverwrap-subprotocol).
 
-The UnwrappedSecret structure is used by the server to return the unwrapped secret to the client in some special cases, as specified in section [3.1.4.1.2](#Section_3.1.4.1.2.1).
+The UnwrappedSecret structure is used by the server to return the unwrapped secret to the client in some special cases, as specified in section [3.1.4.1.2](#Section_3.1.4.1.2).
 
 ```mermaid
 packet-beta
@@ -773,7 +773,7 @@ packet-beta
 <a id="Section_2.2.6.1"></a>
 #### 2.2.6.1 Recovered Secret Structure
 
-The RecoveredSecret structure MUST be formatted as follows. It MUST be encrypted with the [**RC4**](#gt_rc4) algorithm as specified in section [3.1.4.1.2](#Section_3.1.4.1.2.1). For more information about RC4, see [[SCHNEIER]](https://go.microsoft.com/fwlink/?LinkId=817338) section 17.1.
+The RecoveredSecret structure MUST be formatted as follows. It MUST be encrypted with the [**RC4**](#gt_rc4) algorithm as specified in section [3.1.4.1.2](#Section_3.1.4.1.2). For more information about RC4, see [[SCHNEIER]](https://go.microsoft.com/fwlink/?LinkId=817338) section 17.1.
 
 ```mermaid
 packet-beta
@@ -791,7 +791,7 @@ packet-beta
 <a id="Section_2.2.7"></a>
 ### 2.2.7 ServerWrap Key
 
-The following structure MUST be used for persisted ServerWrap keys that are stored and replicated between servers using the ServerWrap protocol as specified in sections [3.1.4.1.1](#Section_3.1.4.1.1) and [3.1.4.1.2](#Section_3.1.4.1.2.1).
+The following structure MUST be used for persisted ServerWrap keys that are stored and replicated between servers using the ServerWrap protocol as specified in sections [3.1.4.1.1](#Section_3.1.4.1.1) and [3.1.4.1.2](#Section_3.1.4.1.2).
 
 ```mermaid
 packet-beta
@@ -822,7 +822,7 @@ Each of the two subprotocols has its own abstract data model, as specified in th
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 ServerWrap Subprotocol
 
-**ServerWrap keys**: The server maintains a (possibly empty) set of [**symmetric keys**](#gt_symmetric-key), each identified by a unique identifier. The set of ServerWrap keys is held in persisted storage and survives system restarts. The server is assumed to have a method of looking up keys from this set based on identifier. This state is shared with the Local Security Authority (Domain Policy) Remote Protocol server (see [MS-LSAD](#Section_5)) on the same machine, as explained in sections [3.1.4.1.1](#Section_3.1.4.1.1) and [3.1.4.1.2](#Section_3.1.4.1.2.1).
+**ServerWrap keys**: The server maintains a (possibly empty) set of [**symmetric keys**](#gt_symmetric-key), each identified by a unique identifier. The set of ServerWrap keys is held in persisted storage and survives system restarts. The server is assumed to have a method of looking up keys from this set based on identifier. This state is shared with the Local Security Authority (Domain Policy) Remote Protocol server (see [MS-LSAD](../MS-LSAD/MS-LSAD.md)) on the same machine, as explained in sections [3.1.4.1.1](#Section_3.1.4.1.1) and [3.1.4.1.2](#Section_3.1.4.1.2).
 
 **Current ServerWrap key identifier**: At any point in time, exactly one [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) from the set of ServerWrap keys is designated as the current ServerWrap key, and its identifier is stored as the current ServerWrap key pair identifier. If the set of ServerWrap keys is empty, this identifier is empty as well. This identifier is held in persisted storage and survives system restarts.
 
@@ -894,8 +894,8 @@ NET_API_STATUS BackuprKey(
 | Value | Meaning |
 | --- | --- |
 | BACKUPKEY_BACKUP_GUID 7F752B10-178E-11D1-AB8F-00805F14DB40 | Requests server-side wrapping. On input, *pDataIn* MUST point to a [**BLOB**](#gt_binary-large-object-blob) containing the secret to be wrapped. The server MUST treat pDataIn as opaque binary data. On output, *ppDataOut* MUST contain the wrapped secret in the format specified in section [2.2.4](#Section_2.2.4). For details, see section [3.1.4.1.1](#Section_3.1.4.1.1). |
-| BACKUPKEY_RESTORE_GUID_WIN2K 7FE94D50-178E-11D1-AB8F-00805F14DB40 | Requests [**unwrapping**](#gt_unwrapping) of a server-side-wrapped secret. On input, *pDataIn* MUST point to a BLOB containing the wrapped key, in the format specified in section 2.2.4. On output, *ppDataOut* MUST contain a pointer to the unwrapped secret, as supplied by the client to the *BACKUPKEY_BACKUP_GUID* call. For details, see section [3.1.4.1.2](#Section_3.1.4.1.2.1). |
-| BACKUPKEY_RETRIEVE_BACKUP_KEY_GUID 018FF48A-EABA-40C6-8F6D-72370240E967 | Requests the [**public key**](#gt_public-key) part of the server's ClientWrap [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34). The server MUST ignore the *pDataIn* and *cbDataIn* parameters. On output, *ppDataOut* MUST contain a pointer to the server's public key in the format specified in section [2.2.1](#Section_3.1.1.2). For details, see section [3.1.4.1.3](#Section_3.1.4.1.3). |
+| BACKUPKEY_RESTORE_GUID_WIN2K 7FE94D50-178E-11D1-AB8F-00805F14DB40 | Requests [**unwrapping**](#gt_unwrapping) of a server-side-wrapped secret. On input, *pDataIn* MUST point to a BLOB containing the wrapped key, in the format specified in section 2.2.4. On output, *ppDataOut* MUST contain a pointer to the unwrapped secret, as supplied by the client to the *BACKUPKEY_BACKUP_GUID* call. For details, see section [3.1.4.1.2](#Section_3.1.4.1.2). |
+| BACKUPKEY_RETRIEVE_BACKUP_KEY_GUID 018FF48A-EABA-40C6-8F6D-72370240E967 | Requests the [**public key**](#gt_public-key) part of the server's ClientWrap [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34). The server MUST ignore the *pDataIn* and *cbDataIn* parameters. On output, *ppDataOut* MUST contain a pointer to the server's public key in the format specified in section [2.2.1](#Section_2.2.1). For details, see section [3.1.4.1.3](#Section_3.1.4.1.3). |
 | BACKUPKEY_RESTORE_GUID 47270C64-2FC7-499B-AC5B-0E37CDCE899A | Request unwrapping of a secret that was client-side-wrapped with the server's public key. On input, *pDataIn* MUST point to a client-side wrapped key, formatted as specified in section [2.2.2](#Section_2.2.2). On output, *ppDataOut* MUST contain a pointer to the unwrapped secret, formatted as specified in section [2.2.3](#Section_2.2.3). For details, see section [3.1.4.1.4](#Section_3.1.4.1.4). |
 
 **pDataIn:** This is the input data supplied by the client. Its format depends on *pguidActionAgent* as specified in this section.
@@ -919,7 +919,7 @@ Upon receiving a BackuprKey message, the server MUST check the *pguidActionAgent
 
 The server MUST proceed as follows:
 
-- Retrieve the current ServerWrap key identifier, which is a 16-byte [**GUID**](#gt_globally-unique-identifier-guid) stored as the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_P, using the method specified in [MS-LSAD](#Section_5) section 3.1.4.6.6. Let keyGuid denote this identifier. Let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD] section 3.1.4.6.6. This value is the current ServerWrap key, formatted as specified in section [2.2.7](../MS-LSAD/MS-LSAD.md). If this process succeeds, go to step 3. If no current ServerWrap key identifier exists, or the corresponding ServerWrap key cannot be located, or the ServerWrap key is not in the correct format, then create a new ServerWrap key as specified in step 2.
+- Retrieve the current ServerWrap key identifier, which is a 16-byte [**GUID**](#gt_globally-unique-identifier-guid) stored as the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_P, using the method specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.6.6. Let keyGuid denote this identifier. Let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD] section 3.1.4.6.6. This value is the current ServerWrap key, formatted as specified in section [2.2.7](#Section_2.2.7). If this process succeeds, go to step 3. If no current ServerWrap key identifier exists, or the corresponding ServerWrap key cannot be located, or the ServerWrap key is not in the correct format, then create a new ServerWrap key as specified in step 2.
 - Create a new ServerWrap key as follows:
 - Generate 256 random bytes using a cryptographically strong random number generator, and format the result as a ServerWrap key object, specified in section 2.2.7.
 - Using a cryptographically strong random number generator, generate a 16-byte GUID value. Let this value be denoted newGuid, and let its GUIDString representation ([MS-DTYP] section 2.3.4.3) be denoted newGuidString.
@@ -945,7 +945,7 @@ The server MUST first check the first four bytes of the wrapped secret passed in
 
 In this case, the wrapped secret (supplied in the *pDataIn* parameter) is assumed to be formatted as specified in section [2.2.4](#Section_2.2.4). The server MUST proceed as follows. If, at any point in processing, the value of *pDataIn* is found not to conform to the format specified in section 2.2.4, the server MUST stop processing and return a non-zero error code.
 
-- Let keyGuid denote the value in the [**GUID**](#gt_globally-unique-identifier-guid) of Wrapping Key field in the wrapped secret, and let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD](#Section_5) section 3.1.4.6.6. This is the ServerWrap key that was used to wrap this secret. If this LSA (Domain Policy) Remote Protocol secret object is not found, or if its value is not in the format specified in section [2.2.7](../MS-DTYP/MS-DTYP.md), stop processing and return a non-zero error code to the client. The error code SHOULD be equal to ERROR_FILE_NOT_FOUND (0x2). Otherwise, let SrvKey denote the full length of the key, which is 256 bytes.
+- Let keyGuid denote the value in the [**GUID**](#gt_globally-unique-identifier-guid) of Wrapping Key field in the wrapped secret, and let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.6.6. This is the ServerWrap key that was used to wrap this secret. If this LSA (Domain Policy) Remote Protocol secret object is not found, or if its value is not in the format specified in section [2.2.7](#Section_2.2.7), stop processing and return a non-zero error code to the client. The error code SHOULD be equal to ERROR_FILE_NOT_FOUND (0x2). Otherwise, let SrvKey denote the full length of the key, which is 256 bytes.
 - Compute the [**SHA-1**](#gt_sha-1) [**HMAC**](#gt_hash-based-message-authentication-code-hmac) [[RFC2104]](https://go.microsoft.com/fwlink/?LinkId=90314) of the **R2** field in the wrapped secret using SrvKey (computed in step 1) as the HMAC key. Use the result as a key to decrypt the contents of the **Rc4EncryptedPayload** field in the wrapped secret, using the [**RC4**](#gt_rc4) algorithm (for more information about RC4, see [[SCHNEIER]](https://go.microsoft.com/fwlink/?LinkId=817338) section 17.1). The result will be an Rc4EncryptedPayload structure as specified in section [2.2.4.1](#Section_2.2.4.1). Let this be denoted as secretPayload.
 - Extract the **R3** field of secretPayload (computed in step 2) and compute its SHA-1 HMAC [RFC2104] using SrvKey (computed in step 1) as the HMAC key. Use the result as the HMAC key to compute the SHA-1 HMAC [RFC2104] of the **SID** and **Secret** fields in secretPayload.
 - Compare the result of step 3 to the MAC field of secretPayload. If the two are not identical, stop processing and return a non-zero error code. The error code SHOULD be equal to ERROR_INVALID_ACCESS (0xC).
@@ -972,8 +972,8 @@ If the server chooses to process a ClientWrap wrapped secret that was passed by 
 
 The server MUST ignore the *cbDataIn* and *pDataIn* parameters. It MUST process the request as follows:
 
-- Retrieve the current **ClientWrap key pair identifier**, which is a 16-byte [**GUID**](#gt_globally-unique-identifier-guid) stored as the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_PREFERRED, using the method specified in [MS-LSAD](#Section_5) section 3.1.4.6.6. Let keyGuid denote this identifier. Let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. If no such LSA (Domain Policy) Remote Protocol secret object is found, then go to step 3.
-- Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD] section 3.1.4.6.6. This value is the current **ClientWrap key pair**, formatted as specified in section [2.2.5](../MS-LSAD/MS-LSAD.md). If successful, go to step 4. If this LSA (Domain Policy) Remote Protocol secret object cannot be located, or its value is not in the correct format, then continue to step 3.
+- Retrieve the current **ClientWrap key pair identifier**, which is a 16-byte [**GUID**](#gt_globally-unique-identifier-guid) stored as the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_PREFERRED, using the method specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.6.6. Let keyGuid denote this identifier. Let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. If no such LSA (Domain Policy) Remote Protocol secret object is found, then go to step 3.
+- Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD] section 3.1.4.6.6. This value is the current **ClientWrap key pair**, formatted as specified in section [2.2.5](#Section_2.2.5). If successful, go to step 4. If this LSA (Domain Policy) Remote Protocol secret object cannot be located, or its value is not in the correct format, then continue to step 3.
 - Create a new ClientWrap key as follows:
 - Generate a 2,048-bit [**RSA**](#gt_rivest-shamir-adleman-rsa) [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34). The structure of an RSA key pair is specified in [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409), and methods for generating it are specified in [[X9.31]](https://go.microsoft.com/fwlink/?LinkId=182937) section 4.1.
 - Using a cryptographically strong random number generator, generate a random 16-byte GUID. Let this value be denoted newGuid, and let its GUIDString representation ([MS-DTYP] section 2.3.4.3) be denoted newGuidString.
@@ -986,7 +986,7 @@ The server MUST ignore the *cbDataIn* and *pDataIn* parameters. It MUST process 
 The server MUST proceed as follows:
 
 - Check whether the first four bytes of the wrapped secret (supplied in the *pDataIn* parameter) constitute an acceptable value of the **dwVersion** field, as specified in section [2.2.2](#Section_2.2.2). If so, go to step 2. If not, the server SHOULD check if the first four bytes of the wrapped secret match the fixed values specified in section [2.2.4](#Section_2.2.4) and, if so, it SHOULD<11> proceed as specified in section [3.1.4.1.2.1](#Section_3.1.4.1.2.1). Otherwise, the server MUST return a non-zero error code. The error code returned SHOULD be equal to ERROR_INVALID_PARAMETER (0x57). The server MUST<12> support at least one of the **dwVersion** values specified in section 2.2.2.
-- Interpret the wrapped secret (supplied in the *pDataIn* parameter) as a Client-Side-Wrapped Secret (section 2.2.2), extract the value in the **guidKey** field. Let keyGuid denote this value, and let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD](#Section_5) section 3.1.4.6.6. This is the ClientWrap [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) that was used to wrap this secret. If this LSA (Domain Policy) Remote Protocol secret object is not found, or if its value is not in the format specified in section [2.2.5](../MS-DTYP/MS-DTYP.md), stop processing and return a non-zero error code to the client. The error code SHOULD<13> be equal to ERROR_FILE_NOT_FOUND (0x2). Otherwise, use the **Modulus** and **Private_Exponent** fields of the ClientWrap key pair to construct an [**RSA**](#gt_rivest-shamir-adleman-rsa) [**private key**](#gt_private-key), as specified in [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409). Let PrivKey denote this private key.
+- Interpret the wrapped secret (supplied in the *pDataIn* parameter) as a Client-Side-Wrapped Secret (section 2.2.2), extract the value in the **guidKey** field. Let keyGuid denote this value, and let keyGuidString denote the [**GUIDString**](#gt_guidstring) ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) representation of keyGuid. Retrieve the value of the LSA (Domain Policy) Remote Protocol secret object named G$BCKUPKEY_keyGuidString, using the method specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.6.6. This is the ClientWrap [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) that was used to wrap this secret. If this LSA (Domain Policy) Remote Protocol secret object is not found, or if its value is not in the format specified in section [2.2.5](#Section_2.2.5), stop processing and return a non-zero error code to the client. The error code SHOULD<13> be equal to ERROR_FILE_NOT_FOUND (0x2). Otherwise, use the **Modulus** and **Private_Exponent** fields of the ClientWrap key pair to construct an [**RSA**](#gt_rivest-shamir-adleman-rsa) [**private key**](#gt_private-key), as specified in [[RFC8017]](https://go.microsoft.com/fwlink/?linkid=2164409). Let PrivKey denote this private key.
 - Interpret the wrapped secret (supplied in the *pDataIn* parameter) as a Client-Side-Wrapped Secret (section 2.2.2), extract the value in the **EncryptedSecret** field. Reverse the order of bytes in this value and decrypt the result with PrivKey (computed in step 2) using the RSA algorithm with PKCS1 v1.5 padding (as specified in [RFC8017]). Let EncSecret denote the result of this decryption. If decryption fails, the server MUST return a non-zero error code. The error code returned SHOULD be equal to ERROR_INVALID_DATA (0xD).
 - Using EncSecret and the value of **dwVersion** obtained in step 1, proceed as follows:
 - If **dwVersion** is equal to 0x00000002, verify that EncSecret is formatted as specified in section [2.2.2.1](#Section_2.2.2.1). If so, let SecretValue denote the value of the **Secret** field and EncKey denote the value of the **PayloadKey** field. If not, the server MUST return an appropriate nonzero error code. The error code returned SHOULD be equal to ERROR_INVALID_DATA (0xD).
@@ -1012,7 +1012,7 @@ None.
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Other Local Events
 
-The set of ServerWrap keys and the current ServerWrap key identifier, as well as the set of ClientWrap [**key pairs**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) and the current ClientWrap key identifier, MUST be updated as the corresponding LSA (Domain Policy) Remote Protocol secret objects (specified in section 3.1.4 and its subsections) are updated by the replication mechanisms specified in [MS-LSAD](#Section_5) section 3.1.1.4.
+The set of ServerWrap keys and the current ServerWrap key identifier, as well as the set of ClientWrap [**key pairs**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) and the current ClientWrap key identifier, MUST be updated as the corresponding LSA (Domain Policy) Remote Protocol secret objects (specified in section 3.1.4 and its subsections) are updated by the replication mechanisms specified in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.4.
 
 <a id="Section_3.2"></a>
 ## 3.2 BackupKey Remote Client Details
@@ -1028,7 +1028,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **Wrapped secrets:** These are the wrapped versions of the above client secrets. Wrapped secrets have been transformed, through either client-side [**wrapping**](#gt_wrapping) or server-side wrapping, into a form that can be securely stored on potentially untrusted media. The client is responsible for the storage of all wrapped secrets.
 
-**ClientWrap public keys (ClientWrap subprotocol only):** These are the [**public keys**](#gt_public-key) from the server's ClientWrap [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) (as specified in section [3.1.1](#Section_1.3)). They are used by the client to wrap secrets, as specified in section [3.2.4.1](#Section_3.2.4.1). Clients can choose to cache these keys locally, or to retrieve them afresh from the server for each ClientWrap wrapping operation. Each ClientWrap key is associated with an [**Active Directory domain**](#gt_active-directory-domain). A client that executes this protocol against servers in multiple domains will have one ClientWrap public key for each such domain.
+**ClientWrap public keys (ClientWrap subprotocol only):** These are the [**public keys**](#gt_public-key) from the server's ClientWrap [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) (as specified in section [3.1.1](#Section_3.1.1)). They are used by the client to wrap secrets, as specified in section [3.2.4.1](#Section_3.2.4.1). Clients can choose to cache these keys locally, or to retrieve them afresh from the server for each ClientWrap wrapping operation. Each ClientWrap key is associated with an [**Active Directory domain**](#gt_active-directory-domain). A client that executes this protocol against servers in multiple domains will have one ClientWrap public key for each such domain.
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
@@ -1070,7 +1070,7 @@ If the client does not possess a cached copy of a ClientWrap [**public key**](#g
 
 If the *BACKUPKEY_RETRIEVE_BACKUP_KEY_GUID* request fails, the client MAY attempt to perform server-side wrapping by sending a *BACKUPKEY_BACKUP_GUID* instead.<19>
 
-If the *BACKUPKEY_RETRIEVE_BACKUP_KEY_GUID* request is successful, the client MUST validate that the data returned from the server is formatted as specified in section [2.2.1](#Section_3.1.1.2). Specifically, it MUST verify that it is able to parse out the fields listed in section 2.2.1 from the [**certificate**](#gt_certificate). If this validation fails, the client MUST discard the received data and return an error to the caller. For details on the X.509 certificate format, see [[X509]](https://go.microsoft.com/fwlink/?LinkId=90590) section 2 and [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034). DER encoding is specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593).
+If the *BACKUPKEY_RETRIEVE_BACKUP_KEY_GUID* request is successful, the client MUST validate that the data returned from the server is formatted as specified in section [2.2.1](#Section_2.2.1). Specifically, it MUST verify that it is able to parse out the fields listed in section 2.2.1 from the [**certificate**](#gt_certificate). If this validation fails, the client MUST discard the received data and return an error to the caller. For details on the X.509 certificate format, see [[X509]](https://go.microsoft.com/fwlink/?LinkId=90590) section 2 and [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034). DER encoding is specified in [[X690]](https://go.microsoft.com/fwlink/?LinkId=90593).
 
 Having obtained the server's ClientWrap public key, the client MUST construct a wrapped secret as specified in section [2.2.2](#Section_2.2.2) by using the following procedure, and store the secret as desired.
 
@@ -1109,7 +1109,7 @@ Consider, for example, a Windows user who logs on to a new domain-joined compute
 
 When the user subsequently attempts to sign his email, the signing application causes the DPAPI function **CryptUnprotectData** to be invoked. Ordinarily, as described in [MSDN-DPAPI], this operation will not require the Backup Master Key, and therefore the BackupKey Remote Protocol will not be invoked.
 
-Now assume that at some later date, the user forgets his password and has to ask the domain administrator to reset it for him. Now when he tries to sign his email, the signing application causes the DPAPI function **CryptUnprotectData** to be invoked once again. This time, DPAPI will not be able to decrypt the Encrypted Master Key ([MSDN-DPAPI] Figure 4). Therefore, DPAPI will retrieve the Backup Master Key from local storage and request the BackupKey protocol client to perform a ClientWrap [**unwrapping**](#gt_unwrapping) operation against the user's domain using the user's credentials. The BackupKey protocol client will execute this operation as specified in section [3.2.4](#Section_1.3) and return the result (that is, the DPAPI Master Key) to DPAPI. To execute this unwrapping operation, the client will invoke the **BackuprKey** method on a server with the *pguidActionAgent* parameter set to BACKUPKEY_RESTORE_GUID, and the server will process this request as specified in section [3.1.4.1.4](#Section_3.1.4.1.4). When the unwrapping operation completes successfully, DPAPI will be able to complete the **CryptUnprotectData** operation as described in [MSDN-DPAPI], and the signing application will be able to sign the user's email.
+Now assume that at some later date, the user forgets his password and has to ask the domain administrator to reset it for him. Now when he tries to sign his email, the signing application causes the DPAPI function **CryptUnprotectData** to be invoked once again. This time, DPAPI will not be able to decrypt the Encrypted Master Key ([MSDN-DPAPI] Figure 4). Therefore, DPAPI will retrieve the Backup Master Key from local storage and request the BackupKey protocol client to perform a ClientWrap [**unwrapping**](#gt_unwrapping) operation against the user's domain using the user's credentials. The BackupKey protocol client will execute this operation as specified in section [3.2.4](#Section_3.2.4) and return the result (that is, the DPAPI Master Key) to DPAPI. To execute this unwrapping operation, the client will invoke the **BackuprKey** method on a server with the *pguidActionAgent* parameter set to BACKUPKEY_RESTORE_GUID, and the server will process this request as specified in section [3.1.4.1.4](#Section_3.1.4.1.4). When the unwrapping operation completes successfully, DPAPI will be able to complete the **CryptUnprotectData** operation as described in [MSDN-DPAPI], and the signing application will be able to sign the user's email.
 
 <a id="Section_5"></a>
 # 5 Security
@@ -1121,13 +1121,13 @@ The BackupKey server holds cryptographic keys and other material that can be use
 
 For guarding against key loss, the wrapping keys should themselves be backed up, mirrored, or split via threshold cryptography. The choice of mechanism is up to the implementer.
 
-From the client's perspective, secrets wrapped by a server (or server's [**public key**](#gt_public-key)) are safe only as long as the server is trusted. This protocol must not be used to protect secrets from parties who have or can gain privileged access to the [**BackupKey**](#Section_3.1.4.1.4) server.
+From the client's perspective, secrets wrapped by a server (or server's [**public key**](#gt_public-key)) are safe only as long as the server is trusted. This protocol must not be used to protect secrets from parties who have or can gain privileged access to the [**BackupKey**](#Section_3.1.4.1.1) server.
 
 Any cryptographic key has to be kept secret. Any function of a secret (such as a key schedule) has to also be kept secret if the knowledge of such a function would increase an attacker's ability to discover the cryptographic key. Implementations have to be careful not to write keys or secrets directly to disk, and they should attempt to minimize the time that these are exposed in memory. Secrets and keys must not be sent in the clear over unsecured network paths.
 
 Generation of cryptographic keys, Initial Values, nonces, and padding for PKCS#1 [**encryption**](#gt_encryption) requires randomness so that the generated quantity cannot be guessed by an attacker. A cryptographically strong random number generator is essential to the security of any cryptographic implementation. Implementers have to ensure that **BackupKey** clients and servers are running on platforms with strong random-number generators.
 
-Guidance on building strong cryptographic subsystems is available in [[FIPS140]](https://go.microsoft.com/fwlink/?LinkId=89866). An overview of the Windows security architecture is available in [MS-WPO](#Section_1.3) section 9.
+Guidance on building strong cryptographic subsystems is available in [[FIPS140]](https://go.microsoft.com/fwlink/?LinkId=89866). An overview of the Windows security architecture is available in [MS-WPO](../MS-WPO/MS-WPO.md) section 9.
 
 Any implementation of a protocol exposes code to inputs from attackers. Such code has to be developed according to secure coding and development practices to avoid buffer overflows, denial-of-service attacks, escalation of privilege, and disclosure of information. For more information about these concepts, secure development best practices, and common errors, see [HOWARD].
 
@@ -1140,10 +1140,10 @@ Finally, both client and server have to ensure that they are communicating over 
 
 | Security parameter | Section |
 | --- | --- |
-| Use of [**RPC**](#gt_remote-procedure-call-rpc) security | [2.1](#Section_2.1), [3.1.3](#Section_3.1.3), [3.2.4](#Section_1.3) |
+| Use of [**RPC**](#gt_remote-procedure-call-rpc) security | [2.1](#Section_2.1), [3.1.3](#Section_3.1.3), [3.2.4](#Section_3.2.4) |
 | [**3DES**](#gt_f1896d9a-34c2-44a6-917a-759ac77f4cf1) [**encryption**](#gt_encryption) and key | [2.2.2](#Section_2.2.2), [2.2.2.3](#Section_2.2.2.3), [3.1.4.1.4](#Section_3.1.4.1.4), [3.2.4.1](#Section_3.2.4.1) |
-| [**RC4**](#gt_rc4) key | [3.1.4.1.1](#Section_3.1.4.1.1), [3.1.4.1.2](#Section_3.1.4.1.2.1), [7](#Section_7) |
-| [**RSA**](#gt_rivest-shamir-adleman-rsa) [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) | [2.2.1](#Section_3.1.1.2), [2.2.5](#Section_2.2.5), [3.1.1.2](#Section_3.1.1.2), [3.1.4.1.3](#Section_3.1.4.1.3), 3.1.4.1.4, 3.2.4.1, 7 |
+| [**RC4**](#gt_rc4) key | [3.1.4.1.1](#Section_3.1.4.1.1), [3.1.4.1.2](#Section_3.1.4.1.2), [7](#Section_7) |
+| [**RSA**](#gt_rivest-shamir-adleman-rsa) [**key pair**](#gt_3f211a0b-87e1-4884-856b-89c69c4a5d34) | [2.2.1](#Section_2.2.1), [2.2.5](#Section_2.2.5), [3.1.1.2](#Section_3.1.1.2), [3.1.4.1.3](#Section_3.1.4.1.3), 3.1.4.1.4, 3.2.4.1, 7 |
 | Authentication | 2.1, [1.7](#Section_1.7) |
 | [**SHA1**](#gt_sha-1-hash) and [**HMAC**](#gt_hash-based-message-authentication-code-hmac)-SHA1 | 2.2.2, 2.2.2.3, [2.2.4.1](#Section_2.2.4.1), 3.1.4.1.4, 3.2.4.1, 7 |
 | SHA-512 | [2.2.2.4](#Section_2.2.2.4), 3.2.4.1 |

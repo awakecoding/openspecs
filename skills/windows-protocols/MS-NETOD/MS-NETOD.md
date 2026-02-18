@@ -197,7 +197,7 @@ This document uses the following terms:
 **reliable messaging source (RMS)**: An endpoint that sends a message. For more information, see [WSRM1-0], [WSRM1-1], and [WSRM1-2].
 
 <a id="gt_remoteactivationservice"></a>
-**RemoteActivationService**: A registered [**Server-Activated Object (SAO)**](#gt_server-activated-object-sao) that implements the IActivator interface ([MS-NRLS](#Section_2.1.6) section 3.1). The [**Server Object URI**](#gt_server-object-uri) of the [**SAO**](#gt_server-activated-object-sao) is "RemoteActivationService.rem".
+**RemoteActivationService**: A registered [**Server-Activated Object (SAO)**](#gt_server-activated-object-sao) that implements the IActivator interface ([MS-NRLS](../MS-NRLS/MS-NRLS.md) section 3.1). The [**Server Object URI**](#gt_server-object-uri) of the [**SAO**](#gt_server-activated-object-sao) is "RemoteActivationService.rem".
 
 <a id="gt_resource"></a>
 **resource**: Any component that a computer can access that can read, write, and process data. This includes internal components (such as a disk drive), a service, or an application running on and managed by the cluster on a network that is used to access a file.
@@ -310,7 +310,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-IOI] Microsoft Corporation, "[IManagedObject Interface Protocol](../MS-IOI/MS-IOI.md)".
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_2.1)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MS-NETTR] Microsoft Corporation, "[.NET Tracing Protocol](../MS-NETTR/MS-NETTR.md)".
 
@@ -322,11 +322,11 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-NNS] Microsoft Corporation, "[.NET NegotiateStream Protocol](../MS-NNS/MS-NNS.md)".
 
-[MS-NRBF] Microsoft Corporation, "[.NET Remoting: Binary Format Data Structure](#Section_2.1.6)".
+[MS-NRBF] Microsoft Corporation, "[.NET Remoting: Binary Format Data Structure](../MS-NRBF/MS-NRBF.md)".
 
-[MS-NRLS] Microsoft Corporation, "[.NET Remoting: Lifetime Services Extension](#Section_2.1.6)".
+[MS-NRLS] Microsoft Corporation, "[.NET Remoting: Lifetime Services Extension](../MS-NRLS/MS-NRLS.md)".
 
-[MS-NRTP] Microsoft Corporation, "[.NET Remoting: Core Protocol](#Section_2.1.6)".
+[MS-NRTP] Microsoft Corporation, "[.NET Remoting: Core Protocol](../MS-NRTP/MS-NRTP.md)".
 
 [MS-NTHT] Microsoft Corporation, "[NTLM Over HTTP Protocol](../MS-NTHT/MS-NTHT.md)".
 
@@ -338,7 +338,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-SMB2] Microsoft Corporation, "[Server Message Block (SMB) Protocol Versions 2 and 3](../MS-SMB2/MS-SMB2.md)".
 
-[MS-TPSOD] Microsoft Corporation, "[Transaction Processing Services Protocols Overview](#Section_2.1)".
+[MS-TPSOD] Microsoft Corporation, "[Transaction Processing Services Protocols Overview](../MS-TPSOD/MS-TPSOD.md)".
 
 [MS-WFIM] Microsoft Corporation, "[Workflow Instance Management Protocol](../MS-WFIM/MS-WFIM.md)".
 
@@ -461,7 +461,7 @@ Section [2.1](#Section_2.1) provides an architectural overview of the protocols 
 
 Section [2.2](#Section_2.2) provides a summary description of all the protocols that are mentioned in this document.
 
-Section [2.3](#Section_2.1) identifies the context in which the system exists. This includes the systems that use the interfaces that are provided by this system of protocols, other systems that depend on this system, and, as appropriate, how components of the system communicate.
+Section [2.3](#Section_2.3) identifies the context in which the system exists. This includes the systems that use the interfaces that are provided by this system of protocols, other systems that depend on this system, and, as appropriate, how components of the system communicate.
 
 Section [2.4](#Section_2.4) describes assumptions and preconditions.
 
@@ -506,7 +506,7 @@ Distributed applications require reliable messaging. For this purpose, WCF imple
 
 **Transactional support**
 
-WCF allows transactional scopes to flow across multiple applications. WCF implements WS-AtomicTransaction and its extension ([MS-WSRVCAT](../MS-WSRVCAT/MS-WSRVCAT.md)), enabling software entities that use the WS-AtomicTransaction protocol to participate in transactions that are coordinated by OleTx transaction managers, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md). The entire set of transaction-related protocols supported in Windows, including [MS-WSRVCAT], is described in [MS-TPSOD](#Section_2.1).
+WCF allows transactional scopes to flow across multiple applications. WCF implements WS-AtomicTransaction and its extension ([MS-WSRVCAT](../MS-WSRVCAT/MS-WSRVCAT.md)), enabling software entities that use the WS-AtomicTransaction protocol to participate in transactions that are coordinated by OleTx transaction managers, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md). The entire set of transaction-related protocols supported in Windows, including [MS-WSRVCAT], is described in [MS-TPSOD](../MS-TPSOD/MS-TPSOD.md).
 
 **Interoperability**
 
@@ -724,13 +724,13 @@ Figure 11: Protocol stack of the .NET remoting infrastructure
 
 The .NET remoting framework supports two transport protocols, namely [**TCP**](#gt_transmission-control-protocol-tcp) and [**HTTP**](#gt_hypertext-transfer-protocol-http), but a user can add any transport to the .NET remoting stack.
 
-The .NET remoting core protocol ([MS-NRTP](#Section_2.1.6)) specifies a mechanism whereby a calling program can invoke a method in a different address space over the network.
+The .NET remoting core protocol ([MS-NRTP](../MS-NRTP/MS-NRTP.md)) specifies a mechanism whereby a calling program can invoke a method in a different address space over the network.
 
-The .NET Remote Lifetime Services Extension ([MS-NRLS](#Section_2.1.6)) extends the .NET Remoting: Core Protocol [MS-NRTP] to add a mechanism allowing clients to explicitly create Server Objects, and adds another mechanism allowing clients and servers to control the lifetime of Server Objects. The .NET Remote Lifetime Services Extension adds new methods and semantics for activation and lifetime management.
+The .NET Remote Lifetime Services Extension ([MS-NRLS](../MS-NRLS/MS-NRLS.md)) extends the .NET Remoting: Core Protocol [MS-NRTP] to add a mechanism allowing clients to explicitly create Server Objects, and adds another mechanism allowing clients and servers to control the lifetime of Server Objects. The .NET Remote Lifetime Services Extension adds new methods and semantics for activation and lifetime management.
 
 **Encoding**
 
-A .NET remoting application can use either a binary encoding for .NET remoting as specified in the .NET Remoting Binary Format ([MS-NRBF](#Section_2.1.6)), or SOAP encoding, as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520), with the .NET remoting-specific portions of the mapping specified in SOAP Serialization Format ([MS-NRTP] section 2.2.4).
+A .NET remoting application can use either a binary encoding for .NET remoting as specified in the .NET Remoting Binary Format ([MS-NRBF](../MS-NRBF/MS-NRBF.md)), or SOAP encoding, as specified in [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520), with the .NET remoting-specific portions of the mapping specified in SOAP Serialization Format ([MS-NRTP] section 2.2.4).
 
 **Binding**
 
@@ -819,9 +819,9 @@ Protocols in the following table enable communication for [**.NET remoting**](#g
 
 | Protocol name | Description | Short name |
 | --- | --- | --- |
-| .NET Remoting: Core Protocol | Specifies a mechanism by which a calling program can invoke a method in a different address space over the network. | [MS-NRTP](#Section_2.1.6) |
-| NET Remoting: Binary Format Data Structure | Defines a set of structures that represent object graph or method invocation information as an octet stream. | [MS-NRBF](#Section_2.1.6) |
-| .NET Remoting: Lifetime Services Extension | Adds lifetime and remote activation capabilities to the .NET Remoting Protocol (specified in [MS-NRTP]). | [MS-NRLS](#Section_2.1.6) |
+| .NET Remoting: Core Protocol | Specifies a mechanism by which a calling program can invoke a method in a different address space over the network. | [MS-NRTP](../MS-NRTP/MS-NRTP.md) |
+| NET Remoting: Binary Format Data Structure | Defines a set of structures that represent object graph or method invocation information as an octet stream. | [MS-NRBF](../MS-NRBF/MS-NRBF.md) |
+| .NET Remoting: Lifetime Services Extension | Adds lifetime and remote activation capabilities to the .NET Remoting Protocol (specified in [MS-NRTP]). | [MS-NRLS](../MS-NRLS/MS-NRLS.md) |
 | .NET NegotiateStream Protocol | Provides mutually authenticated and confidential communication over a TCP connection. | [MS-NNS](../MS-NNS/MS-NNS.md) |
 | IManagedObject Interface Protocol | Provides interoperability support for the [**common language runtime (CLR)**](#gt_common-language-runtime-clr). | [MS-IOI](../MS-IOI/MS-IOI.md) |
 
@@ -840,7 +840,7 @@ None.
 
 The Microsoft .NET Framework relies on the following Windows and standard protocols:
 
-- Message Queuing protocols described in [MS-MQOD](#Section_2.1)
+- Message Queuing protocols described in [MS-MQOD](../MS-MQOD/MS-MQOD.md)
 - [**TCP**](#gt_transmission-control-protocol-tcp)
 - [**Named pipes**](#gt_named-pipe), as described in [MS-CIFS](../MS-CIFS/MS-CIFS.md) / [MS-SMB2](../MS-SMB2/MS-SMB2.md)
 - [**HTTP**](#gt_hypertext-transfer-protocol-http)/HTTPS
@@ -945,7 +945,7 @@ Figure 13: Windows Communication Foundation use cases
 <a id="Section_2.5.3.2.1"></a>
 ##### 2.5.3.2.1 Dynamically Discover a Web Service
 
-See the diagram named "WCF use cases" in section [2.5.3.1](#Section_2.5).
+See the diagram named "WCF use cases" in section [2.5.3.1](#Section_2.5.3.1).
 
 **Goal**: The web client obtains the uniform resource identifier (URI) of the Web service.
 
@@ -979,7 +979,7 @@ The web client uses a multicast discovery protocol that is called WS-Discovery (
 <a id="Section_2.5.3.2.2"></a>
 ##### 2.5.3.2.2 Consume a Web Service
 
-See the diagram named WCF use cases in section [2.5.3.1](#Section_2.5).
+See the diagram named WCF use cases in section [2.5.3.1](#Section_2.5.3.1).
 
 **Goal**: The web client consumes the Web service according to the service contract. "Consume" means that the Web service successfully fulfills the web client's request.
 
@@ -1009,7 +1009,7 @@ See the diagram named WCF use cases in section [2.5.3.1](#Section_2.5).
 <a id="Section_2.5.3.2.3"></a>
 ##### 2.5.3.2.3 Use a Web Service with Reliable Messaging
 
-See the diagram named WCF use cases in section [2.5.3.1](#Section_2.5).
+See the diagram named WCF use cases in section [2.5.3.1](#Section_2.5.3.1).
 
 **Goal**: A web client is guaranteed to consume data in the same order in which it requested the data.
 
@@ -1055,7 +1055,7 @@ Because the infrastructure might be unreliable, the following scenario shows how
 <a id="Section_2.5.3.2.4"></a>
 ##### 2.5.3.2.4 Use a Web Service with Reliable Messaging and Flow Control
 
-See the diagram titled "WCF use cases" in section [2.5.3.1](#Section_2.5).
+See the diagram titled "WCF use cases" in section [2.5.3.1](#Section_2.5.3.1).
 
 **Goal**: A web client requires that the order of consumption is the same as the order of request and resending of messages is minimized by applying the flow control.
 
@@ -1087,7 +1087,7 @@ See the diagram titled "WCF use cases" in section [2.5.3.1](#Section_2.5).
 <a id="Section_2.5.3.2.5"></a>
 ##### 2.5.3.2.5 Use a Web Service with Reliable Messaging in the Request Reply
 
-See the diagram titled "WCF use cases" in section [2.5.3.1](#Section_2.5).
+See the diagram titled "WCF use cases" in section [2.5.3.1](#Section_2.5.3.1).
 
 **Goal**: The web client requires that the order of consumption is the same as the order of request over transfer protocols that only support the SOAP Request-Response protocol.
 
@@ -1316,12 +1316,12 @@ The Microsoft .NET Framework is not a system but rather a platform for applicati
 <a id="Section_3.1"></a>
 ## 3.1 Example 1 (.NET Remoting): Two-Way Method Invocation Using SOAP Over HTTP
 
-The [**.NET Remoting**](#gt_net-remoting) framework is one of the main categories of .NET protocols. This example illustrates the two-way method invocation that is mapped to the [Invoke a Method on a Server-Activated Object](#Section_2.5.4.2.1) use case. In this example, the client invokes a method on the server, and the server responds with the result, which is an object of the **address** class. For the detailed example, see [MS-NRTP](#Section_2.1.6) section 4.2.
+The [**.NET Remoting**](#gt_net-remoting) framework is one of the main categories of .NET protocols. This example illustrates the two-way method invocation that is mapped to the [Invoke a Method on a Server-Activated Object](#Section_2.5.4.2.1) use case. In this example, the client invokes a method on the server, and the server responds with the result, which is an object of the **address** class. For the detailed example, see [MS-NRTP](../MS-NRTP/MS-NRTP.md) section 4.2.
 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Initial System State
 
-- General requirements as set forth in [MS-NRTP](#Section_2.1.6) section 1.5.
+- General requirements as set forth in [MS-NRTP](../MS-NRTP/MS-NRTP.md) section 1.5.
 - The server was previously configured to respond with the address.
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Sequence of Events

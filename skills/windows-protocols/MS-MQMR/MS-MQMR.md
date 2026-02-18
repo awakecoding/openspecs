@@ -172,7 +172,7 @@ This document uses the following terms:
 **outgoing queue**: A temporary internal [**queue**](#gt_queue) that holds [**messages**](#gt_message) for a remote destination [**queue**](#gt_queue). The [**path name**](#gt_path-name) of an outgoing [**queue**](#gt_queue) is identical to the [**path name**](#gt_path-name) of the corresponding destination [**queue**](#gt_queue). An outgoing [**queue**](#gt_queue) is distinguished from its corresponding destination [**queue**](#gt_queue) by the fact that the outgoing [**queue**](#gt_queue) is located on the sending computer. The [**format name**](#gt_format-name) of an outgoing [**queue**](#gt_queue) is identical to the [**format name**](#gt_format-name) used by the [**messages**](#gt_message) to reference the destination [**queue**](#gt_queue). Messages that reference the destination [**queue**](#gt_queue) using a different [**format name**](#gt_format-name) are placed in a different outgoing [**queue**](#gt_queue).
 
 <a id="gt_path-name"></a>
-**path name**: The name of the receiving computer where the [**messages**](#gt_message) for a particular [**queue**](#gt_queue) are stored, and an optional PRIVATE$ key word indicating whether the [**queue**](#gt_queue) is private, followed by the name of the [**queue**](#gt_queue). Path names can also refer to subqueues; for more information, see [MS-MQMQ](#Section_2.2.1) section 2.1.
+**path name**: The name of the receiving computer where the [**messages**](#gt_message) for a particular [**queue**](#gt_queue) are stored, and an optional PRIVATE$ key word indicating whether the [**queue**](#gt_queue) is private, followed by the name of the [**queue**](#gt_queue). Path names can also refer to subqueues; for more information, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 
 <a id="gt_private-queue"></a>
 **private queue**: An application-defined message queue that is not registered in the MSMQ Directory Service. A private queue is deployed on a particular [**queue manager**](#gt_queue-manager-qm).
@@ -233,7 +233,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](../MS-MQDS/MS-MQDS.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_2.2.1)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
 [MS-MQQB] Microsoft Corporation, "[Message Queuing (MSMQ): Message Queuing Binary Protocol](../MS-MQQB/MS-MQQB.md)".
 
@@ -246,7 +246,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](../MS-MQDSSM/MS-MQDSSM.md)".
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-MQEIC] Microsoft Corporation, "Message Queuing Error and Information Codes", [http://msdn.microsoft.com/en-us/library/ms700106.aspx](https://go.microsoft.com/fwlink/?LinkId=90044)
 
@@ -378,7 +378,7 @@ The Message Queuing (MSMQ): Queue Manager Management Protocol MUST indicate to t
 
 In addition to RPC base types (as specified in [C706], [MS-DTYP](../MS-DTYP/MS-DTYP.md), and [MS-RPCE](../MS-RPCE/MS-RPCE.md)) the following data types are defined in the Microsoft Interface Definition Language (MIDL) specification for this RPC interface.
 
-The following table summarizes the types that are defined either in this specification or in [MS-MQMQ](#Section_2.2.1).
+The following table summarizes the types that are defined either in this specification or in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md).
 
 | Structure | Description |
 | --- | --- |
@@ -399,7 +399,7 @@ The following table summarizes the types that are defined either in this specifi
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 DL_ID
 
-This specification uses the **DL_ID** ([MS-MQMQ](#Section_2.2.1) section 2.2.9) type.
+This specification uses the **DL_ID** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.9) type.
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 MGMT_OBJECT
@@ -430,7 +430,7 @@ DWORD Reserved2;
 
 **type:** An integer discriminator for the embedded discriminated union. The value of this field MUST be 1, 2, or 3, as specified in section [2.2.2.1](#Section_2.2.2.1).
 
-**pQueueFormat:** A pointer to a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.1) section 2.2.7) structure that describes the type of the queue.
+**pQueueFormat:** A pointer to a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure that describes the type of the queue.
 
 **Reserved1:** A 32-bit unsigned integer.<5>
 
@@ -439,17 +439,17 @@ DWORD Reserved2;
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 MULTICAST_ID
 
-This specification uses the **MULTICAST_ID** ([MS-MQMQ](#Section_2.2.1) section 2.2.10) type.<7>
+This specification uses the **MULTICAST_ID** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.10) type.<7>
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 OBJECTID
 
-The **OBJECTID** ([MS-MQMQ](#Section_2.2.1) section 2.2.8) structure uniquely distinguishes a repository object from all other repository objects represented in a repository database.
+The **OBJECTID** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.8) structure uniquely distinguishes a repository object from all other repository objects represented in a repository database.
 
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 QUEUE_FORMAT
 
-The QUEUE_FORMAT structure (as specified in [MS-MQMQ](#Section_2.2.1) section 2.2.7) describes the type of [**queue**](#gt_queue) being managed and provides the appropriate connection address information.
+The QUEUE_FORMAT structure (as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) describes the type of [**queue**](#gt_queue) being managed and provides the appropriate connection address information.
 
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Enumerators
@@ -478,12 +478,12 @@ MGMT_SESSION = 3,
 <a id="Section_2.2.2.2"></a>
 #### 2.2.2.2 QUEUE_FORMAT_TYPE
 
-The **QUEUE_FORMAT_TYPE** ([MS-MQMQ](#Section_2.2.1) section 2.2.6) enumeration identifies the type of name format being used. The **QUEUE_FORMAT** ([MS-MQMQ] section 2.2.7) structure uses the values for the **m_qft** discriminated union member.
+The **QUEUE_FORMAT_TYPE** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.6) enumeration identifies the type of name format being used. The **QUEUE_FORMAT** ([MS-MQMQ] section 2.2.7) structure uses the values for the **m_qft** discriminated union member.
 
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Property Identifiers
 
-The [R_QMMgmtGetInfo](#Section_3.1.4.1) method uses property identifiers and corresponding property values. Property identifiers and properties are specified in [MS-MQMQ](#Section_2.2.1).
+The [R_QMMgmtGetInfo](#Section_3.1.4.1) method uses property identifiers and corresponding property values. Property identifiers and properties are specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md).
 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 Management Machine Property Identifiers
@@ -537,7 +537,7 @@ This protocol specifies the following properties for monitoring the active queue
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-This protocol uses ADM elements specified in section [3.1.1](#Section_3.2.1). A subset of these elements can be published in a [**directory**](#gt_directory). This protocol SHOULD<12> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<13>
+This protocol uses ADM elements specified in section [3.1.1](#Section_3.1.1). A subset of these elements can be published in a [**directory**](#gt_directory). This protocol SHOULD<12> access the directory using the algorithm specified in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) and using LDAP [MS-ADTS](../MS-ADTS/MS-ADTS.md). The Directory Service schema elements for ADM elements published in the directory are defined in [MS-MQDSSM] section 2.4.<13>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -548,7 +548,7 @@ The client side of this protocol is simply a pass-through. That is, there are no
 
 The client MUST have [**administrator**](#gt_administrator) privileges on the server machine.
 
-This protocol permits establishing a connection to an [**RPC**](#gt_remote-procedure-call-rpc) server. For each connection, the server uses the underlying RPC protocol to retrieve the identity of the invoking client call, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The server uses this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.2.4).
+This protocol permits establishing a connection to an [**RPC**](#gt_remote-procedure-call-rpc) server. For each connection, the server uses the underlying RPC protocol to retrieve the identity of the invoking client call, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 3.3.3.4.3. The server uses this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.1.4).
 
 The methods comprising this RPC interface all return 0x00000000 on success and a nonzero implementation-specific error code on failure. Unless otherwise specified in the following sections, a server-side implementation of this protocol uses any nonzero Win32 error value to signify an error condition, as specified in section [1.8](#Section_1.8). The client side of the Message Queuing (MSMQ): Queue Manager Management Protocol does not need to interpret the error codes returned from the server; instead, the client side can return the error code unprocessed to the invoking application without taking any protocol action.
 
@@ -562,7 +562,7 @@ This section describes a conceptual model of possible data organization that an 
 <a id="Section_3.1.1"></a>
 ### 3.1.1 Abstract Data Model
 
-The abstract data model for this protocol comprises elements that are shared between multiple MSMQ protocols that are co-located at a common MSMQ queue manager. The shared abstract data model is specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1 and the relationship between this protocol and other protocols that share a common MSMQ queue manager is specified in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are shared between multiple MSMQ protocols that are co-located at a common MSMQ queue manager. The shared abstract data model is specified in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1 and the relationship between this protocol and other protocols that share a common MSMQ queue manager is specified in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
 <a id="Section_3.1.1.1"></a>
 #### 3.1.1.1 Shared Data Elements
@@ -638,7 +638,7 @@ HRESULT R_QMMgmtGetInfo(
 
 **aProp:** Points to an array of property identifiers associated with the array of property values. This array MUST contain at least one element. Each element MUST specify a value from the property identifiers table, as specified in section [2.2.3](#Section_2.2.3). Each element MUST specify the property identifier for the corresponding property value at the same element index in *apVar*. This array and the array to which *apVar* points MUST be of the same length.
 
-**apVar:** Points to an array that specifies the property values associated with the array of property identifiers. Each element in this array specifies the property value for the corresponding property identifier at the same element index in the array to which *aProp* points. This array MUST contain at least one element. The property value in each element MUST correspond accordingly to the property identifier from *aProp*, as specified in section 2.2.3, and MUST be set to VT_NULL<14> (as specified in [MS-MQMQ](#Section_2.2.1) section 2.2.12) before each call to R_QMMgmtGetInfo. This array and the array to which *aProp* points MUST be of the same length.
+**apVar:** Points to an array that specifies the property values associated with the array of property identifiers. Each element in this array specifies the property value for the corresponding property identifier at the same element index in the array to which *aProp* points. This array MUST contain at least one element. The property value in each element MUST correspond accordingly to the property identifier from *aProp*, as specified in section 2.2.3, and MUST be set to VT_NULL<14> (as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.12) before each call to R_QMMgmtGetInfo. This array and the array to which *aProp* points MUST be of the same length.
 
 **Return Values:** On success, this method MUST return MQ_OK (0x00000000).
 
@@ -879,7 +879,7 @@ In the following example, an administrator needs to send [**messages**](#gt_mess
 Figure 3: QM Management Operations
 
 - This protocol can be used to determine the available private queues on a remote machine to which the client can send messages. The client retrieves a list of private queue [**path names**](#gt_path-name) by invoking the [R_QMMgmtGetInfo (section 3.1.4.1)](#Section_3.1.4.1) method with a *pObjectFormat* parameter **type** member set to the MGMT_MACHINE enumerated value, as defined in [MgmtObjectType (section 2.2.2.1)](#Section_2.2.2.1). Next, the client can create a [**format name**](#gt_format-name) pointing to one of the returned queues. Finally, the client can use the events in [MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) to open the queue of the constructed format name and to enqueue messages to it. The **OutgoingQueue** ADM element instance that was used to send messages can be used in the subsequent step.
-- The client can pause an **OutgoingQueue** ADM element instance by performing the following steps. First, construct a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.1) section 2.2.7) structure of type QUEUE_FORMAT_TYPE_DIRECT and set the **m_pDirectID** member to the name identifier of a direct queue (as specified in [MS-MQMQ] section 2.1 for the ABNF). Next, construct an [MGMT_OBJECT (section 2.2.1.2)](#Section_2.2.1.2) structure of type MGMT_QUEUE and set the **MGMT_OBJECT.pQueueFormat** member to the address of the constructed **QUEUE_FORMAT** structure instance. Finally, the client pauses the **OutgoingQueue** ADM element instance by invoking the [R_QMMgmtAction (section 3.1.4.2)](#Section_3.1.4.2) method with an *lpwszAction* parameter value equal to "PAUSE" and a *pObjectFormat* parameter value set to the address of the constructed **MGMT_OBJECT** structure.
+- The client can pause an **OutgoingQueue** ADM element instance by performing the following steps. First, construct a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure of type QUEUE_FORMAT_TYPE_DIRECT and set the **m_pDirectID** member to the name identifier of a direct queue (as specified in [MS-MQMQ] section 2.1 for the ABNF). Next, construct an [MGMT_OBJECT (section 2.2.1.2)](#Section_2.2.1.2) structure of type MGMT_QUEUE and set the **MGMT_OBJECT.pQueueFormat** member to the address of the constructed **QUEUE_FORMAT** structure instance. Finally, the client pauses the **OutgoingQueue** ADM element instance by invoking the [R_QMMgmtAction (section 3.1.4.2)](#Section_3.1.4.2) method with an *lpwszAction* parameter value equal to "PAUSE" and a *pObjectFormat* parameter value set to the address of the constructed **MGMT_OBJECT** structure.
 <a id="Section_5"></a>
 # 5 Security
 
@@ -888,7 +888,7 @@ The following sections specify security considerations for implementers of the M
 <a id="Section_5.1"></a>
 ## 5.1 Security Considerations for Implementers
 
-As specified in section [3](#Section_1.3), this protocol allows a client with [**administrator**](#gt_administrator) privileges to connect to the server. Security is dependent on the server performing security checks for each invocation of the server interface methods specified in this document. Any security bug in the server implementation of this protocol could be exploitable.
+As specified in section [3](#Section_3), this protocol allows a client with [**administrator**](#gt_administrator) privileges to connect to the server. Security is dependent on the server performing security checks for each invocation of the server interface methods specified in this document. Any security bug in the server implementation of this protocol could be exploitable.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -898,7 +898,7 @@ No security parameters are specified for this protocol.
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A (section 5), and "ms-mqmq.idl" refers to the IDL found in [MS-MQMQ](#Section_2.2.1) Appendix A (section 5). The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required, and pointer_default(unique) is assumed.
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" refers to the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A (section 5), and "ms-mqmq.idl" refers to the IDL found in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) Appendix A (section 5). The syntax uses the IDL syntax extensions defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md) sections 2.2.4 and 3.1.1.5.1. For example, as noted in [MS-RPCE] section 2.2.4.9, a pointer_default declaration is not required, and pointer_default(unique) is assumed.
 
 import "ms-dtyp.idl";
 

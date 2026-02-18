@@ -229,7 +229,7 @@ The following standards assignments are used by the Windows Protocols Unicode Re
 
 | Parameter | Value | Reference |
 | --- | --- | --- |
-| [Codepage Data File (section 2.2.2)](#Section_1.3) | **Various** | [[UNICODE-BESTFIT]](https://go.microsoft.com/fwlink/?LinkId=95708) |
+| [Codepage Data File (section 2.2.2)](#Section_2.2.2) | **Various** | [[UNICODE-BESTFIT]](https://go.microsoft.com/fwlink/?LinkId=95708) |
 
 <a id="Section_2"></a>
 # 2 Messages

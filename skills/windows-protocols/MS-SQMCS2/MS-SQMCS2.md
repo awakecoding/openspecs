@@ -667,7 +667,7 @@ There are three defined commands: request to upload SQM session data (**requploa
 <a id="Section_2.2.2.16.1"></a>
 ##### 2.2.2.16.1 requpload Command
 
-The request to upload data (**requpload**) command specifies that the client is requesting permission to upload SQM session data as described in the **req** element section [2.2.2.12](#Section_2.2.2.12), section [2.2.2.13](#Section_2.2.2.13.4), and section [2.2.2.14](#Section_2.2.2.14). The SQM server is required to approve or deny the request. There are no child **arg** elements.
+The request to upload data (**requpload**) command specifies that the client is requesting permission to upload SQM session data as described in the **req** element section [2.2.2.12](#Section_2.2.2.12), section [2.2.2.13](#Section_2.2.2.13), and section [2.2.2.14](#Section_2.2.2.14). The SQM server is required to approve or deny the request. There are no child **arg** elements.
 
 <a id="Section_2.2.2.16.2"></a>
 ##### 2.2.2.16.2 dataupload Command
@@ -695,7 +695,7 @@ Unrecognized **arg** name-value pairs are ignored by the server.
 <a id="Section_2.2.2.16.3"></a>
 ##### 2.2.2.16.3 qryrsrc Command
 
-The query resource (**qryrsrc**) command specifies that the client is requesting A-SQM version and path information. The A-SQM manifest is specific to the namespace specified in section [2.2.2.13](#Section_2.2.2.13.4). The **qryrsrc** command MUST include the following **arg** element.
+The query resource (**qryrsrc**) command specifies that the client is requesting A-SQM version and path information. The A-SQM manifest is specific to the namespace specified in section [2.2.2.13](#Section_2.2.2.13). The **qryrsrc** command MUST include the following **arg** element.
 
 **cmd arg** element:
 
@@ -733,7 +733,7 @@ The responses (**resp**) element specifies the request from the server to the cl
 
 The **namespace** element specifies the request namespace from the client to the server. The **namespace** element schema is specified in [MS-TPXS](../MS-TPXS/MS-TPXS.md) section 2.2.1.1.1.1.1. The **namespace** element and all attributes (**svc**, **ptr**, **gp**, **app**) are required.
 
-The **namespace** element MUST be the identical namespace as defined in the corresponding **req** element child **namespace** element (see section [2.2.2.13](#Section_2.2.2.13.4)).
+The **namespace** element MUST be the identical namespace as defined in the corresponding **req** element child **namespace** element (see section [2.2.2.13](#Section_2.2.2.13)).
 
 <a id="Section_2.2.3.6"></a>
 #### 2.2.3.6 cmd Element
@@ -893,7 +893,7 @@ This command specifies that the SQM server rejects the SQM client request to upl
 
 The client does not send a request upload message where the request upload namespace matches the **throttle namespace** argument for the time period specified in the **throttle period** argument as specified in section 2.2.3.6.5 and detailed in the following sections. The client maintains a catalog of throttle responses in order to query future requests to determine whether to send a future **requpload** message to the SQM server or to discard it.
 
-**period:** argument: The SQM client is required to stop any request upload or data upload messages to the SQM server for all messages, for the period of days from the client current system time, where the request namespace (see section [2.2.2.13](#Section_2.2.2.13.4)) matches the response namespace (see section [2.2.3.5](#Section_2.2.3.5)) by using the throttle namespace comparison as detailed in the following sections.
+**period:** argument: The SQM client is required to stop any request upload or data upload messages to the SQM server for all messages, for the period of days from the client current system time, where the request namespace (see section [2.2.2.13](#Section_2.2.2.13)) matches the response namespace (see section [2.2.3.5](#Section_2.2.3.5)) by using the throttle namespace comparison as detailed in the following sections.
 
 **namespace:** argument: During the throttle period, the SQM client compares the request message namespace and discard all requests where the request namespace matches the response namespace by using the throttle comparison namespace argument as specified in section 2.2.3.6.5 and detailed in the following sections.
 
@@ -955,7 +955,7 @@ The SQM client creates a SQM XML message as specified in section [2.2.2](#Sectio
 - The client constructs the **reqs** element as specified in section [2.2.2.10](#Section_2.2.2.10).
 - The client constructs a **payload** element as a child element of **reqs**. The payload arguments are set to the values computed in the SQM session creation as specified in section [2.2.2.11](#Section_2.2.2.11) and section [3.1.5.3.1](#Section_3.1.5.3.1).
 - The client constructs a **req** element, as a child element of **reqs,** for each SQM session in the appended SQM session's data BLOB. A unique **key** attribute value is created for each **req** element as specified in section [2.2.2.12](#Section_2.2.2.12).
-- The client constructs a **namespace** element as a child element of **req** as specified in section [2.2.2.13](#Section_2.2.2.13.4). Each of the namespace attributes MUST be set to a valid value.
+- The client constructs a **namespace** element as a child element of **req** as specified in section [2.2.2.13](#Section_2.2.2.13). Each of the namespace attributes MUST be set to a valid value.
 - **svc**: The client sets this value to **sqm**.
 - **ptr**: The client sets this value to a well-known partner name value. The partner name MUST be known by the SQM server as described in section [2.2.2.13.2](#Section_2.2.2.13.2).
 - **gp**: The client sets this value to a SQM client-defined value as specified in section [2.2.2.13.3](#Section_2.2.2.13.3).
@@ -1122,7 +1122,7 @@ Figure 11: Client upload through a proxy
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-The SQM protocol relay transmits protocol messages on behalf of a client in environments where the client cannot access the SQM service directly (primarily where the client is protected by the firewall). To enable the relay, a client MUST be configured to send data to the relay service by using the SQM CorporateURL registry keys (see section [3.3.3](#Section_3.2.3) for detailed description of registry keys).
+The SQM protocol relay transmits protocol messages on behalf of a client in environments where the client cannot access the SQM service directly (primarily where the client is protected by the firewall). To enable the relay, a client MUST be configured to send data to the relay service by using the SQM CorporateURL registry keys (see section [3.3.3](#Section_3.3.3) for detailed description of registry keys).
 
 When a configured client sends a message to the relay that contains a SQM payload, the relay service opens the payload and adds a data point identifying the relay. This data is added to the SQM data point section of the payload as described in section [2](#Section_2). The payload is then repackaged and sent to the SQM service. If the forwarder receives a message that does not fit the XML model for SQM, the message is forwarded directly, without modification. The ability to forward messages that do not match the XML model is necessary so that the relay can transmit valid SQM protocol messages such as A-SQM and SQM protocol headers
 

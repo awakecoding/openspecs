@@ -307,7 +307,7 @@ Establish an [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https) connectio
 
 Create a **KDC_PROXY_MESSAGE** (section [2.2.2](#Section_2.2.2)) where:
 
-**kerb-message** is set to **KerberosMessage** (section [3.1.1](#Section_3.2.1)).
+**kerb-message** is set to **KerberosMessage** (section [3.1.1](#Section_3.1.1)).
 
 **target-domain** is set to the **realm** field of the Kerberos message ([[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 5.4.1).
 
@@ -322,14 +322,14 @@ If the KKDCP client receives:
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Receiving a KDC_PROXY_MESSAGE
 
-When the KKDCP client receives the **KDC_PROXY_MESSAGE** (section [2.2.2](#Section_2.2.2)), it SHOULD set **KerberosMessage** (section [3.1.1](#Section_3.2.1)) to **KDC_PROXY_MESSAGE.kerb-message**.
+When the KKDCP client receives the **KDC_PROXY_MESSAGE** (section [2.2.2](#Section_2.2.2)), it SHOULD set **KerberosMessage** (section [3.1.1](#Section_3.1.1)) to **KDC_PROXY_MESSAGE.kerb-message**.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Receiving a HTTP Error or Dropped Connection
 
 When the KKDCP client receives an HTTP error or dropped connection:
 
-- On HTTP 403 errors, the client SHOULD set **Error** (section [3.1.1](#Section_3.2.1)) to STATUS_AUTHENTICATION_FIREWALL_FAILED.
+- On HTTP 403 errors, the client SHOULD set **Error** (section [3.1.1](#Section_3.1.1)) to STATUS_AUTHENTICATION_FIREWALL_FAILED.
 - Otherwise, the client SHOULD set **Error** (section 3.1.1) to STATUS_NO_LOGON_SERVERS.
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events

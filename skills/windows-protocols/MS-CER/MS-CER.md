@@ -287,7 +287,7 @@ HitEntry = Time SP SP Date HTAB Machine HTAB User HTAB FileName CRLF
 
 FileName = 1*260CHAR / "No CAB" ; see below for delimiter handling
 
-**Time**, **Date**, **Machine**, **User**: These elements MUST conform to section [2.2.2](#Section_7).
+**Time**, **Date**, **Machine**, **User**: These elements MUST conform to section [2.2.2](#Section_2.2.2).
 
 **FileName**: The name of the [**error reporting**](#gt_error-report) file. A CRLF pair MUST NOT appear in the **FileName**, since that is reserved as the line delimiter. An HTAB MUST NOT appear in the **FileName**, since that is reserved as the item delimiter. If an error reporting file was not written, the string "No CAB" MUST be used in its place.
 
@@ -306,7 +306,7 @@ BucketID = (%x31-39)*DIGIT
 
 ErrorSubPath = 1*CHAR ; see below for delimiter handling
 
-**Time**, **Date**, **Machine**, **User**: These elements MUST conform to section [2.2.2](#Section_7).
+**Time**, **Date**, **Machine**, **User**: These elements MUST conform to section [2.2.2](#Section_2.2.2).
 
 **ErrorInfo**: The [**CER client**](#gt_cer-client) MUST write the **BucketID** to the crash.log file if it found it in the status.txt file (section [2.2.5](#Section_2.2.5)) for the error in question; otherwise it MUST write the [**error subpath**](#gt_error-subpath).
 

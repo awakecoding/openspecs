@@ -218,9 +218,9 @@ This document covers versioning issues in the following areas:
 
 - **Supported Transports:** This protocol uses the Distributed Component Object Model (DCOM) Remote Protocol [MS-DCOM](../MS-DCOM/MS-DCOM.md), which in turn uses RPC over TCP as its only transport, as specified in section [2.1](#Section_2.1).
 - **Protocol Versions:** This protocol includes two DCOM interfaces (namely ITpmVirtualSmartCardManager and ITpmVirtualSmartCardManagerStatusCallback), both of which are version 0.0 as defined in section [2.2](#Section_2.2).
-- **Security and Authentication Methods:** Microsoft RPC, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md), is used to negotiate the authentication mechanism, as specified in [MS-SPNG](../MS-SPNG/MS-SPNG.md) and in section [3.1](../MS-RPCE/MS-RPCE.md).
+- **Security and Authentication Methods:** Microsoft RPC, as defined in [MS-RPCE](../MS-RPCE/MS-RPCE.md), is used to negotiate the authentication mechanism, as specified in [MS-SPNG](../MS-SPNG/MS-SPNG.md) and in section [3.1](#Section_3.1).
 - **Localization:** This protocol uses predefined status codes and error codes. It is the caller’s responsibility to localize the status and error codes to localized strings.
-- **Capability Negotiation:** This protocol does not support explicit capability negotiation. However, as specified in section [3.1.4](#Section_3.4), the requestor can disable the use of the ITpmVirtualSmartCardManagerStatusCallback interface by providing a NULL callback parameter. Even if a callback parameter is provided by the requestor, the target can choose to not use the ITpmVirtualSmartCardManagerStatusCallback interface.
+- **Capability Negotiation:** This protocol does not support explicit capability negotiation. However, as specified in section [3.1.4](#Section_3.1.4), the requestor can disable the use of the ITpmVirtualSmartCardManagerStatusCallback interface by providing a NULL callback parameter. Even if a callback parameter is provided by the requestor, the target can choose to not use the ITpmVirtualSmartCardManagerStatusCallback interface.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor Extensible Fields
 
@@ -246,7 +246,7 @@ This protocol uses RPC dynamic endpoints as defined in Part 4 of [[C706]](https:
 
 The client and server MUST communicate by using the DCOM Remote Protocol [MS-DCOM](../MS-DCOM/MS-DCOM.md). DCOM, in turn, uses RPC with the ncacn_ip_tcp (RPC over TCP) protocol sequence, as specified in [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
-The server MUST use the RPC security extensions specified in [MS-RPCE] in the manner specified in section [3.1.3](#Section_3.4) and section [3.1.4](#Section_3.4). It MUST support the use of Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) [MS-SPNG](../MS-SPNG/MS-SPNG.md) [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) to negotiate security providers, and it MUST register one or more security packages that can be negotiated using this protocol.
+The server MUST use the RPC security extensions specified in [MS-RPCE] in the manner specified in section [3.1.3](#Section_3.1.3) and section [3.1.4](#Section_3.1.4). It MUST support the use of Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) [MS-SPNG](../MS-SPNG/MS-SPNG.md) [[RFC4178]](https://go.microsoft.com/fwlink/?LinkId=90461) to negotiate security providers, and it MUST register one or more security packages that can be negotiated using this protocol.
 
 A server RPC interface implementing one of the DCOM interfaces specified by this protocol MUST use the appropriate UUID as specified in section [1.9](#Section_1.9).
 
@@ -520,7 +520,7 @@ packet-beta
 
 Implementations of this protocol MUST implement support for ITpmVirtualSmartCardManager and ITpmVirtualSmartCardManagerStatusCallback. They SHOULD<3> implement support for ITpmVirtualSmartCardManager2 and ITpmVirtualSmartCardManager3.
 
-The client side of the ITpmVirtualSmartCardManager, ITpmVirtualSmartCardManager2, and ITpmVirtualSmartCardManager3 interfaces is simply a pass-through. That is, no additional timers or other state is required on the client side of these interfaces. Calls made by the higher-layer protocol or application are passed directly to the transport, and the results returned by the transport are passed directly back to the higher-layer protocol or application. The set of in-progress calls is made available to the ITpmVirtualSmartCardManagerStatusCallback server as specified in section [3.2.1](#Section_3.2).
+The client side of the ITpmVirtualSmartCardManager, ITpmVirtualSmartCardManager2, and ITpmVirtualSmartCardManager3 interfaces is simply a pass-through. That is, no additional timers or other state is required on the client side of these interfaces. Calls made by the higher-layer protocol or application are passed directly to the transport, and the results returned by the transport are passed directly back to the higher-layer protocol or application. The set of in-progress calls is made available to the ITpmVirtualSmartCardManagerStatusCallback server as specified in section [3.2.1](#Section_3.2.1).
 
 Similarly, the client side of the ITpmVirtualSmartCardManagerStatusCallback interface is also a pass-through and requires no additional timers or other state. This protocol is only intended to be invoked by the ITpmVirtualSmartCardManager, ITpmVirtualSmartCardManager2, or ITpmVirtualSmartCardManager3 server while processing a call to one of its methods. When invoked in this way, the ITpmVirtualSmartCardManagerStatusCallback client simply passes the call directly to the underlying DCOM transport, using the same causality ID as the triggering ITpmVirtualSmartCardManager, ITpmVirtualSmartCardManager2, or ITpmVirtualSmartCardManager3 call as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 3.2.4.2.
 
@@ -635,7 +635,7 @@ If pbPuk is present, the server MUST create a VSC that supports PUK-based PIN re
 
 Upon successful creation of a VSC, the server MUST initialize all data structures necessary for the VSC, and register it with the underlying smart card implementation compliant with [[PCSC3]](https://go.microsoft.com/fwlink/?LinkId=90244). The server MUST allocate an instance identifier to the newly-created VSC that is unique among all such identifiers in use at that time.
 
-If pStatusCallback is present, the server SHOULD notify the client of the progress and errors of the undergoing operation, as specified in section [3.2.4](#Section_3.2). The status callback happens synchronously with the requested operation. If the status callback returns an error code, the server MUST abort the VSC creation and return a non-zero error to the client, with the severity bit in the error code set to 1. In this case, the server SHOULD also roll back all changes made in respect to the requested operation.
+If pStatusCallback is present, the server SHOULD notify the client of the progress and errors of the undergoing operation, as specified in section [3.2.4](#Section_3.2.4). The status callback happens synchronously with the requested operation. If the status callback returns an error code, the server MUST abort the VSC creation and return a non-zero error to the client, with the severity bit in the error code set to 1. In this case, the server SHOULD also roll back all changes made in respect to the requested operation.
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 DestroyVirtualSmartCard (Opnum 4)
@@ -664,7 +664,7 @@ The server MUST validate the parameters before executing the requested operation
 
 In response to the request, the server MUST locate the VSC using the provided instance identifier from the underlying smart card implementation compliant with [[PCSC3]](https://go.microsoft.com/fwlink/?LinkId=90244), remove its registration with the implementation, and clear all data structures associated with the VSC.
 
-If pStatusCallback is present, the server SHOULD notify the client of the progress and errors of the undergoing operation, as specified in section [3.2.4](#Section_3.2). The status callback happens synchronously with the requested operation. If the status callback returns an error code, the server SHOULD try to abort the requested operation and roll back all changes related to the operation. If the operation is aborted, the server MUST return a non-zero error code to the client, with the severity bit in the error code set to 1. If the operation cannot be aborted, the server MUST ignore the error from the status callback interface and complete the requested operation.
+If pStatusCallback is present, the server SHOULD notify the client of the progress and errors of the undergoing operation, as specified in section [3.2.4](#Section_3.2.4). The status callback happens synchronously with the requested operation. If the status callback returns an error code, the server SHOULD try to abort the requested operation and roll back all changes related to the operation. If the operation is aborted, the server MUST return a non-zero error code to the client, with the severity bit in the error code set to 1. If the operation cannot be aborted, the server MUST ignore the error from the status callback interface and complete the requested operation.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Timer Events
@@ -704,7 +704,7 @@ The server MUST indicate to the RPC runtime that it is to perform a strict NDR d
 
 The server MUST indicate to the RPC runtime that it is to reject a NULL unique or full pointer with a non-zero conformant value, as specified in [MS-RPCE] section 3.
 
-The server SHOULD establish a connection with the higher-layer protocol or application that issued the corresponding request on the ITpmVirtualSmartCardManager interface, in order to convey progress and error information as specified in section [3.2.4](#Section_3.2).
+The server SHOULD establish a connection with the higher-layer protocol or application that issued the corresponding request on the ITpmVirtualSmartCardManager interface, in order to convey progress and error information as specified in section [3.2.4](#Section_3.2.4).
 
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Message Processing Events and Sequencing Rules
@@ -727,7 +727,7 @@ HRESULT ReportProgress(
 
 **Status:** A TPMVSCMGR_STATUS, defined in section [2.2.1.2](#Section_2.2.1.2).
 
-**Return Values:** The server MUST return 0 unless it has been instructed to abort the **TPMVSC management request** as specified in section [3.2.6](#Section_3.2).
+**Return Values:** The server MUST return 0 unless it has been instructed to abort the **TPMVSC management request** as specified in section [3.2.6](#Section_3.2.6).
 
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -744,7 +744,7 @@ HRESULT ReportError(
 
 **Error:** A TPMVSCMGR_ERROR, defined in section [2.2.1.1](#Section_2.2.1.1).
 
-**Return Values:** The server MUST return 0 unless it has been instructed to abort the **TPMVSC management request** as specified in section [3.2.6](#Section_3.2).
+**Return Values:** The server MUST return 0 unless it has been instructed to abort the **TPMVSC management request** as specified in section [3.2.6](#Section_3.2.6).
 
 **Exceptions Thrown:** No exceptions are thrown beyond those thrown by the underlying RPC protocol [MS-RPCE](../MS-RPCE/MS-RPCE.md).
 
@@ -768,7 +768,7 @@ This interface is derived from the ITpmVirtualSmartCardManager interface and beh
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-The ITpmVirtualSmartCardManager2 interface has the same abstract data model, described in section [3.1.1](#Section_3.4).
+The ITpmVirtualSmartCardManager2 interface has the same abstract data model, described in section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.3.2"></a>
 ### 3.3.2 Timers
@@ -778,12 +778,12 @@ None.
 <a id="Section_3.3.3"></a>
 ### 3.3.3 Initialization
 
-Initialization is described in section [3.1.3](#Section_3.4).
+Initialization is described in section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.3.4"></a>
 ### 3.3.4 Message Processing Events and Sequencing Rules
 
-In addition to the methods specified in section [3.1.4](#Section_3.4), this interface includes the following method:
+In addition to the methods specified in section [3.1.4](#Section_3.1.4), this interface includes the following method:
 
 | Method | Description |
 | --- | --- |
@@ -896,7 +896,7 @@ This interface<4> is derived from the ITpmVirtualSmartCardManager2 interface and
 <a id="Section_3.4.1"></a>
 ### 3.4.1 Abstract Data Model
 
-The ITpmVirtualSmartCardManager3 interface has the same Abstract Data Model as described in section [3.1.1](#Section_3.4).
+The ITpmVirtualSmartCardManager3 interface has the same Abstract Data Model as described in section [3.1.1](#Section_3.1.1).
 
 <a id="Section_3.4.2"></a>
 ### 3.4.2 Timers
@@ -906,12 +906,12 @@ None.
 <a id="Section_3.4.3"></a>
 ### 3.4.3 Initialization
 
-Initialization is described in section [3.1.3](#Section_3.4).
+Initialization is described in section [3.1.3](#Section_3.1.3).
 
 <a id="Section_3.4.4"></a>
 ### 3.4.4 Message Processing Events and Sequencing Rules
 
-In addition to the methods specified in section [3.1.4](#Section_3.4), this interface includes the following method:
+In addition to the methods specified in section [3.1.4](#Section_3.1.4), this interface includes the following method:
 
 | Method | Description |
 | --- | --- |
@@ -1053,7 +1053,7 @@ In this example, the requestor returns zero for each call to ITpmVirtualSmartCar
 
 This protocol uses DCOM as its underlying transport. Therefore, all security considerations that apply to DCOM interfaces, as specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md) section 5, are also applicable to this protocol.
 
-The ITpmVirtualSmartCardManager interface allows the requestor to alter system state on the target computer in a persistent way. Therefore, as specified in section [3.1.4](#Section_3.4), any server implementation of this interface has to ensure that the requestor has appropriate administrative privileges.
+The ITpmVirtualSmartCardManager interface allows the requestor to alter system state on the target computer in a persistent way. Therefore, as specified in section [3.1.4](#Section_3.1.4), any server implementation of this interface has to ensure that the requestor has appropriate administrative privileges.
 
 In addition, some of the parameters to the ITpmVirtualSmartCardManager methods, in particular the PIN, PUK, and administrative keys, contain sensitive information. It is recommended that the client and server take reasonable measures to protect these parameter values, including not writing them to persistent storage and erasing them from memory immediately after use.
 
@@ -1070,7 +1070,7 @@ The security assurance of attestation statements issued by the VSC depends on ho
 
 | Security parameter | Section |
 | --- | --- |
-| Use of RPC security | section [2.1](#Section_2.1), section [3.1.3](#Section_3.4), section [3.2.3](#Section_3.2) |
+| Use of RPC security | section [2.1](#Section_2.1), section [3.1.3](#Section_3.1.3), section [3.2.3](#Section_3.2.3) |
 | Administrative privileges of caller | section [3.1.4.1](#Section_3.1.4.1), section [3.1.4.2](#Section_3.1.4.2) |
 
 <a id="Section_6"></a>

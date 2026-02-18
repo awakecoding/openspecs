@@ -240,7 +240,7 @@ The use of CBCP enables dynamic negotiation of [**callback**](#gt_callback) sett
 This document covers versioning issues in the following areas:
 
 - **Protocol Versions:** There are no versioning capabilities associated with the CBCP.
-- **Capability Negotiation:** The capability of PPP to support this protocol is determined through the LCP negotiation of [**callback**](#gt_callback) configuration option (0x0D). If PPP is capable of supporting this protocol, it will support the usage of operation 0x06 in the callback configuration option negotiated during LCP phase. See section [3.1.3](#Section_3.2.3) for more details about this step.
+- **Capability Negotiation:** The capability of PPP to support this protocol is determined through the LCP negotiation of [**callback**](#gt_callback) configuration option (0x0D). If PPP is capable of supporting this protocol, it will support the usage of operation 0x06 in the callback configuration option negotiated during LCP phase. See section [3.1.3](#Section_3.1.3) for more details about this step.
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
 
@@ -495,7 +495,7 @@ packet-beta
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-**Current State:** An enumeration value that represents the current state of the CBCP state machine for the [**caller**](#gt_caller) as specified in section [3.1.1.1](#Section_3.2.1.1). This variable will be initialized to CBCP_STATE_WAIT_FOR_REQUEST. The following are the acceptable values for this variable:
+**Current State:** An enumeration value that represents the current state of the CBCP state machine for the [**caller**](#gt_caller) as specified in section [3.1.1.1](#Section_3.1.1.1). This variable will be initialized to CBCP_STATE_WAIT_FOR_REQUEST. The following are the acceptable values for this variable:
 
 - CBCP_STATE_WAIT_FOR_REQUEST
 - CBCP_STATE_WAIT_FOR_ACK
@@ -541,7 +541,7 @@ The preceding description covers the state transitions for a successful CBCP neg
 <a id="Section_3.1.3"></a>
 ### 3.1.3 Initialization
 
-The [**caller**](#gt_caller) MUST initialize the CBCP protocol if either the caller or the [**answerer**](#gt_answerer) has successfully negotiated for operation 0x06 of the LCP configuration option 0x0D during the LCP protocol negotiation. The negotiation of LCP options is defined in [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283). The LCP Callback configuration option 0xOD is defined as LCP Extension in [[RFC1570]](https://go.microsoft.com/fwlink/?LinkId=95580) section 2.3. The operation 0x06 as defined in [[IANAPPPNUM]](https://go.microsoft.com/fwlink/?LinkId=187321) MUST be used to specify the usage of CBCP to negotiate [**callback**](#gt_callback) settings. The message syntax of the LCP Callback configuration option with the operation 0x06 is defined in section [2.2.1](#Section_2.2.3).
+The [**caller**](#gt_caller) MUST initialize the CBCP protocol if either the caller or the [**answerer**](#gt_answerer) has successfully negotiated for operation 0x06 of the LCP configuration option 0x0D during the LCP protocol negotiation. The negotiation of LCP options is defined in [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283). The LCP Callback configuration option 0xOD is defined as LCP Extension in [[RFC1570]](https://go.microsoft.com/fwlink/?LinkId=95580) section 2.3. The operation 0x06 as defined in [[IANAPPPNUM]](https://go.microsoft.com/fwlink/?LinkId=187321) MUST be used to specify the usage of CBCP to negotiate [**callback**](#gt_callback) settings. The message syntax of the LCP Callback configuration option with the operation 0x06 is defined in section [2.2.1](#Section_2.2.1).
 
 The CBCP MUST be initialized only after the Authentication Phase is complete. The **Current State** of the state machine will be set to CBCP_STATE_WAIT_FOR_REQUEST. The **Caller-specified Phone Number** will be initialized with the valid phone number the caller wants to receive the callback on. If this is not set, the caller MUST NOT use "Callback to a user-specifiable number" as the **Callback type** from the supported callback options provided by the answerer. The **Caller-specifiedCallback Delay** will be initialized to a valid delay that the caller wants to report to the answerer as a part of the [Callback Response message](#Section_2.2.4.2).
 
@@ -563,7 +563,7 @@ When messages are dropped silently and ignored, state MUST NOT change.
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Packet Processing
 
-The CBCP messages received MUST be at least 4 bytes in length, as specified in section [3.1.5.1](#Section_3.2.5.1). The first byte of the CBCP message that specifies the Code MUST be used to designate the message type.
+The CBCP messages received MUST be at least 4 bytes in length, as specified in section [3.1.5.1](#Section_3.1.5.1). The first byte of the CBCP message that specifies the Code MUST be used to designate the message type.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Receiving a Callback Request Message
@@ -577,7 +577,7 @@ is done:
 - The [**caller**](#gt_caller) MUST select one **Callback Configuration** option <5> out of the options received and respond with a Callback Response message (section [2.2.4.2](#Section_2.2.4.2)), specifying the [**callback**](#gt_callback) option selected (section 2.2.3). The Callback Response message MUST be constructed as follows:
 - If the **Callback Type** selected is 1, the **Callback Address** MUST NOT be set for the **Callback Configuration** option. If the **Callback Type** selected is 2, the **Callback Address** MUST be specified in the **Callback Configuration** option with the value of **Caller-specified Phone Number**. Similarly, the **Callback delay** field in the **Callback Configuration** option MUST be set with the value of **Caller-specified Callback Delay**. If the **Callback Type** selected is 3, the **Callback Configuration** option MUST specify the **Callback Delay** using the value of **Caller-specified Callback Delay**, and the **Callback Address** MUST NOT be specified.
 - The **Identifier** field of the **Callback Response** message MUST be set with the value of **Expected Identifier**.
-- The **Length** field MUST be computed as specified in section [2.2.4](#Section_2).
+- The **Length** field MUST be computed as specified in section [2.2.4](#Section_2.2.4).
 - The caller MUST update the **Result Callback Type** with the chosen Callback Type.
 - The **CBCP Packet Send Event** (section [3.1.7.2](#Section_3.1.7.2)) MUST be used for transmission of the **Callback Response** message. After successful transmission of the message, the caller MUST change state to CBCP_STATE_WAIT_FOR_ACK and decrement the **Retry Count**.
 - The caller MUST start a retransmission timer (section [3.1.2](#Section_3.1.2)).
@@ -588,7 +588,7 @@ Otherwise, if the **Current State** is CBCP_STATE_WAIT_FOR_ACK, the following me
 - The **Identifier** received must be stored in the **Expected Identifier** variable.
 - The **Callback Response** message that was sent when the **Current State** was CBCP_STATE_WAIT_FOR_REQUEST MUST be sent back again but with the updated **Expected Identifier**.
 - The [CBCP Packet Send Event](#Section_3.1.7.2) MUST be used for transmission of the **Callback Response** message. After successful transmission of the message, the caller MUST remain in the **Current State.**
-- The caller MUST restart a retransmission timer (section [3.2.2](#Section_3.1.2)) and decrement the **Retry Count**.
+- The caller MUST restart a retransmission timer (section [3.2.2](#Section_3.2.2)) and decrement the **Retry Count**.
 <a id="Section_3.1.5.4"></a>
 #### 3.1.5.4 Receiving a Callback Acknowledgment Message
 
@@ -691,7 +691,7 @@ The preceding description covers the state transitions for a successful CBCP neg
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
 
-The [**answerer**](#gt_answerer) MUST initialize the CBCP if either the [**caller**](#gt_caller) or the answerer has successfully negotiated for operation 0x06 of LCP configuration option 0x0D during the LCP negotiation. The negotiation of LCP options is defined in [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283). LCP Callback configuration option 0xOD is defined as LCP Extension in [[RFC1570]](https://go.microsoft.com/fwlink/?LinkId=95580) section 2.3. The operation 0x06 as defined in [[IANAPPPNUM]](https://go.microsoft.com/fwlink/?LinkId=187321) MUST be used to specify the usage of CBCP to negotiate [**callback**](#gt_callback) settings. The message syntax of the [LCP Callback configuration option](#Section_2.2.3) with the operation 0x06 is defined in section 2.2.1.
+The [**answerer**](#gt_answerer) MUST initialize the CBCP if either the [**caller**](#gt_caller) or the answerer has successfully negotiated for operation 0x06 of LCP configuration option 0x0D during the LCP negotiation. The negotiation of LCP options is defined in [[RFC1661]](https://go.microsoft.com/fwlink/?LinkId=90283). LCP Callback configuration option 0xOD is defined as LCP Extension in [[RFC1570]](https://go.microsoft.com/fwlink/?LinkId=95580) section 2.3. The operation 0x06 as defined in [[IANAPPPNUM]](https://go.microsoft.com/fwlink/?LinkId=187321) MUST be used to specify the usage of CBCP to negotiate [**callback**](#gt_callback) settings. The message syntax of the [LCP Callback configuration option](#Section_2.2.1) with the operation 0x06 is defined in section 2.2.1.
 
 The CBCP MUST be initialized only after the Authentication Phase is complete. The **Next Identifier** will be initialized to 1. The **Acceptable Callback Types** will be initialized with the list of [**callback types**](#gt_callback-type) that are allowed for the caller to choose from using the **UserPrivilege** field of the [userParameters (section 2.3.1)](#Section_2.3.1) structure.
 
@@ -702,8 +702,8 @@ The answerer MUST send a [Callback Request message](#Section_2.2.4.1) as specifi
 - The Callback Request message MUST be sent as specified in section 2.2.4.1. The [Callback Configuration option](#Section_2.2.3) list for selection by the caller MUST contain the Callback Types in the **Acceptable Callback Types** array.
 - The **Identifier** field is set to **Next Identifier** value (which is initialized to 1).
 - The **Length** field MUST be calculated as specified in section 2.2.3.
-- The [CBCP Packet Send Event (section 3.2.7.2)](#Section_3.1.7.2) MUST be used for transmission of the Callback Request message. After successful transmission of the Callback Request message, the answerer MUST change **Current State** to CBCP_STATE_WAIT_FOR_RESPONSE.
-- The retransmission timer (section [3.2.2](#Section_3.1.2)) MUST be restarted.
+- The [CBCP Packet Send Event (section 3.2.7.2)](#Section_3.2.7.2) MUST be used for transmission of the Callback Request message. After successful transmission of the Callback Request message, the answerer MUST change **Current State** to CBCP_STATE_WAIT_FOR_RESPONSE.
+- The retransmission timer (section [3.2.2](#Section_3.2.2)) MUST be restarted.
 <a id="Section_3.2.4"></a>
 ### 3.2.4 Higher-Layer Triggered Events
 
@@ -735,7 +735,7 @@ If the **Current State** is CBCP_STATE_WAIT_FOR_RESPONSE, the message processing
 - If the match is successful, the Callback Type received is stored is **Result Callback Type**, the **Callback delay** is stored in **Result Callback Delay**; if the **Callback Type** is 0x02 then store the [**callback**](#gt_callback) address received in **Result Phone Number**. The [**answerer**](#gt_answerer) MUST send a [Callback Acknowledgment message](#Section_2.2.4.3) with the following fields:
 - The **Identifier**, **Callback delay**, and **Callback address** fields MUST be set to the same values received in the Callback Response message.
 - The **Length** field MUST be calculated as specified in section 2.2.3.
-- The **CBCP Packet Send Event** MUST be used for transmission of the Callback Acknowledgment message. After successful transmission of the Callback Acknowledgment message, the answerer MUST change the **Current State** to CBCP_STATE_DONE. The [CBCP Done (section 3.2.7.3)](#Section_3.1.7.3) event will be used to inform the PPP about the successful completion of the CBCP phase.
+- The **CBCP Packet Send Event** MUST be used for transmission of the Callback Acknowledgment message. After successful transmission of the Callback Acknowledgment message, the answerer MUST change the **Current State** to CBCP_STATE_DONE. The [CBCP Done (section 3.2.7.3)](#Section_3.2.7.3) event will be used to inform the PPP about the successful completion of the CBCP phase.
 If the **Current State** is CBCP_STATE_DONE, the message processing is done as follows:
 
 - The Callback Response message MUST be in the specified format (section 2.2.4.2) with the Callback Configuration options as specified (section 2.2.3). Otherwise the Callback Request message MUST be retransmitted (section 3.2.5.3.1), and the **Current State** MUST be changed to CBCP_STATE_WAIT_FOR_RESPONSE.

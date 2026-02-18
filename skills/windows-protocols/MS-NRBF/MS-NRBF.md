@@ -275,7 +275,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MSDN-.NET-FRAMEWORK] Microsoft Corporation, "Overview of the .NET Framework", [https://learn.microsoft.com/en-us/dotnet/framework/get-started/overview](https://go.microsoft.com/fwlink/?LinkId=195551)
 
@@ -618,8 +618,8 @@ This enumeration identifies the type of the [**record**](#gt_record). Each recor
 | ObjectNull 10 | Identifies an [ObjectNull](#Section_2.5.4) record. |
 | MessageEnd 11 | Identifies a [MessageEnd](#Section_2.6.3) record. |
 | BinaryLibrary 12 | Identifies a [BinaryLibrary](#Section_2.6.2) record. |
-| ObjectNullMultiple256 13 | Identifies an [ObjectNullMultiple256](#Section_2.5.4) record. |
-| ObjectNullMultiple 14 | Identifies an [ObjectNullMultiple](#Section_2.5.4) record |
+| ObjectNullMultiple256 13 | Identifies an [ObjectNullMultiple256](#Section_2.5.6) record. |
+| ObjectNullMultiple 14 | Identifies an [ObjectNullMultiple](#Section_2.5.5) record |
 | ArraySinglePrimitive 15 | Identifies an [ArraySinglePrimitive](#Section_2.4.3.3). |
 | ArraySingleObject 16 | Identifies an [ArraySingleObject](#Section_2.4.3.2) record. |
 | ArraySingleString 17 | Identifies an [ArraySingleString](#Section_2.4.3.4) record. |
@@ -1008,7 +1008,7 @@ packet-beta
 
 This section defines [**Array**](#gt_array) records that represent Array instances. [MS-NRTP](../MS-NRTP/MS-NRTP.md) section 3.1.5.1.7, describes the mechanism to map an Array instance to a record defined in this section.
 
-Items of an Array MUST be [**serialized**](#gt_serialize) as records following the Array record, as specified in section [2.7](#Section_2.7). The number of records that contain the Array items depends on the type of Array record. For the [ArraySingleObject](#Section_2.4.3.2), [ArraySinglePrimitive](#Section_2.4.3.3), and [ArraySingleString](#Section_2.4.3.4) records, the number of records containing Array items MUST be equal to the value of the **Length** field of the **ArrayInfo** field. For [BinaryArray](#Section_2.4.3.1) records, the number of records containing Array items MUST be equal to the product of the values contained in the **Lengths** field of the BinaryArray record. In the cases where an item of an Array can contain a [**Null Object**](#gt_null-object), multiple ObjectNull records in sequence MAY be represented by a single [ObjectNullMultiple (section 2.5.5)](#Section_2.5.4) or [ObjectNullMultiple256 (section 2.5.6)](#Section_2.5.4) record. Each of these records contains a **NullCount** field that states how many [ObjectNull](#Section_2.5.4) records that the record represents. For the purpose of calculating the number of records, a single ObjectNullMultiple or ObjectNullMultiple256 record is counted as many times as the value specified in the **NullCount** field.<6>
+Items of an Array MUST be [**serialized**](#gt_serialize) as records following the Array record, as specified in section [2.7](#Section_2.7). The number of records that contain the Array items depends on the type of Array record. For the [ArraySingleObject](#Section_2.4.3.2), [ArraySinglePrimitive](#Section_2.4.3.3), and [ArraySingleString](#Section_2.4.3.4) records, the number of records containing Array items MUST be equal to the value of the **Length** field of the **ArrayInfo** field. For [BinaryArray](#Section_2.4.3.1) records, the number of records containing Array items MUST be equal to the product of the values contained in the **Lengths** field of the BinaryArray record. In the cases where an item of an Array can contain a [**Null Object**](#gt_null-object), multiple ObjectNull records in sequence MAY be represented by a single [ObjectNullMultiple (section 2.5.5)](#Section_2.5.5) or [ObjectNullMultiple256 (section 2.5.6)](#Section_2.5.6) record. Each of these records contains a **NullCount** field that states how many [ObjectNull](#Section_2.5.4) records that the record represents. For the purpose of calculating the number of records, a single ObjectNullMultiple or ObjectNullMultiple256 record is counted as many times as the value specified in the **NullCount** field.<6>
 
 <a id="Section_2.4.1"></a>
 ### 2.4.1 Enumerations
@@ -1685,7 +1685,7 @@ De-serialization of the serialization stream results in creating instances of [*
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 The terms "earlier" and "later", when used with a product version, refer to either all preceding versions or all subsequent versions, respectively. The term "through" refers to the inclusive range of versions. Applicable Microsoft products are listed chronologically in this section.
 
@@ -1712,7 +1712,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <5> Section 2.3.1.1: In Windows, the order of the Members can vary for each occurrence of the record for a given class.
 
-<6> Section 2.4: Windows uses [ObjectNullMultiple256](#Section_2.5.4) if the number of sequential [**Null Objects**](#gt_null-object) is 255 or fewer. Windows uses [ObjectNullMultiple](#Section_2.5.4) if the number of sequential Null Objects is greater than 255.
+<6> Section 2.4: Windows uses [ObjectNullMultiple256](#Section_2.5.6) if the number of sequential [**Null Objects**](#gt_null-object) is 255 or fewer. Windows uses [ObjectNullMultiple](#Section_2.5.5) if the number of sequential Null Objects is greater than 255.
 
 <7> Section 2.4.2.1: Windows uses a single counter that counts from 1 to generate the ObjectId in the ClassInfo, ArrayInfo, BinaryObjectString, and BinaryArray records, and the LibraryId in the BinaryLibrary record. The maximum value is 2,147,483,647.
 

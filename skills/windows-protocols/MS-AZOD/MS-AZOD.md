@@ -228,7 +228,7 @@ ACEs that apply to the user are cumulative, which means that the user receives t
 
 A system access control list (SACL) enables administrators to log attempts to access a secured object. Like a DACL, a SACL is a list of ACEs. Each ACE specifies the types of access attempts made by a specified account, which cause the system to generate a record in the security event log. An ACE in an SACL can generate audit records when an access attempt fails, when it succeeds, or both. For more details about the security descriptor, see [MS-DTYP] section 2.4.6.
 
-The security descriptor of a file system object is stored in the NTFS file system, whereas the security descriptor of an Active Directory object is stored in the object's **nTSecurityDescriptor** attribute (see [MS-ADA3](#Section_2.5.1.2) section 2.37). For more details, see [MS-DTYP] section 2.5.3.4.
+The security descriptor of a file system object is stored in the NTFS file system, whereas the security descriptor of an Active Directory object is stored in the object's **nTSecurityDescriptor** attribute (see [MS-ADA3](../MS-ADA3/MS-ADA3.md) section 2.37). For more details, see [MS-DTYP] section 2.5.3.4.
 
 The SECURITY_DESCRIPTOR structure ([MS-DTYP] section 2.4.6) is a compact binary representation of the security associated with an object in a directory, or on a file system, or in other stores. However, it is not convenient for use in tools that operate primarily on text strings. Therefore, a text-based form of the security descriptor is available for situations when a security descriptor is carried by a text method. This format is the Security Descriptor Description Language (SDDL). For more information about this format, see [MS-DTYP] section 2.5.1.
 
@@ -252,7 +252,7 @@ Windows accomplishes this by partitioning the access rights space. Access rights
 
 The least significant 16 bits are termed object-specific and are meaningful only to the resource manager that defines them. Thus the file system might define that bit 1 indicates the capability to read the file and that bit 2 indicates the capability to write the file, whereas the registry might define bit 1 to enumerate subkeys and bit 2 to read a key's value.
 
-Additionally, DAC supports defining access rights using GUIDs, and in this way arbitrary number of access rights can be defined. Active Directory uses this model as described in [MS-ADTS](#Section_2.5.1.2) section 5.1.3.2.1 and section 5.1.3.2.2.
+Additionally, DAC supports defining access rights using GUIDs, and in this way arbitrary number of access rights can be defined. Active Directory uses this model as described in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2.1 and section 5.1.3.2.2.
 
 The following table lists the mapping of resource managers with the corresponding access rights data structure.
 
@@ -272,7 +272,7 @@ User rights can be split into two categories: logon rights and user privileges. 
 
 User rights grant specific privileges and logon rights to users and groups in a computing environment.
 
-For a list of privileges that are supported in Windows versions, see [MS-LSAD](#Section_2.9) section 3.1.1.2.1, and for logon rights, see [MS-LSAD] section 3.1.1.2.2.
+For a list of privileges that are supported in Windows versions, see [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.1.2.1, and for logon rights, see [MS-LSAD] section 3.1.1.2.2.
 
 <a id="Section_1.1.1.7"></a>
 #### 1.1.1.7 Access Token
@@ -386,7 +386,7 @@ This document uses the following terms:
 **access control list (ACL)**: A list of [**access control entries (ACEs)**](#gt_access-control-entry-ace) that collectively describe the security rules for authorizing access to some resource; for example, an object or set of objects.
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](#Section_2.1.4.1.1). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose directory service, which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](#Section_2.1.4.1.1). [**Active Directory**](#gt_active-directory) is either deployed as Active Directory Domain Services (AD DS) or Active Directory Lightweight Directory Services (AD LDS), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-directory-client"></a>
 **Active Directory client**: The application that is running on the client computer. The user who is the primary actor uses this application to access objects or attributes of the [**Active Directory**](#gt_active-directory). The [**Active Directory client**](#gt_active-directory-client) application uses the [**Active Directory**](#gt_active-directory) protocols, as described in [MS-ADOD].
@@ -410,7 +410,7 @@ This document uses the following terms:
 **discretionary access control list (DACL)**: An [**access control list (ACL)**](#gt_access-control-list-acl) that is controlled by the owner of an object and that specifies the access particular users or groups can have to the object.
 
 <a id="gt_domain-controller-dc"></a>
-**domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its [**forest**](#gt_forest). If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD](#Section_2.1) section 1.1.1.5.2 and [MS-ADTS](#Section_2.5.1.2). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
+**domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Domain Services (AD DS), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its [**forest**](#gt_forest). If the AD DS [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its [**forest**](#gt_forest). For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5.2 and [MS-ADTS](../MS-ADTS/MS-ADTS.md). When [**Active Directory**](#gt_active-directory) is operating as Active Directory Lightweight Directory Services (AD LDS), several AD LDS [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as AD DS, only one AD DS [**DC**](#gt_domain-controller-dc) can run on one server. However, several AD LDS [**DCs**](#gt_domain-controller-dc) can coexist with one AD DS [**DC**](#gt_domain-controller-dc) on one server. The AD LDS [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its [**forest**](#gt_forest). The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
 
 <a id="gt_file-server"></a>
 **file server**: The service or process on a server computer that implements the server-side file access protocol components to enable remote file sharing for the file clients.
@@ -457,17 +457,17 @@ This document uses the following terms:
 <a id="Section_1.3"></a>
 ## 1.3 References
 
-[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](#Section_2.5.1.2)".
+[MS-ADA3] Microsoft Corporation, "[Active Directory Schema Attributes N-Z](../MS-ADA3/MS-ADA3.md)".
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
-[MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](#Section_2.5.1.2)".
+[MS-ADSC] Microsoft Corporation, "[Active Directory Schema Classes](../MS-ADSC/MS-ADSC.md)".
 
-[MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](#Section_2.5.1.2)".
+[MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
 [MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](../MS-APDS/MS-APDS.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-AZMP] Microsoft Corporation, "[Authorization Manager (AzMan) Policy File Format](../MS-AZMP/MS-AZMP.md)".
 
@@ -477,29 +477,29 @@ This document uses the following terms:
 
 [MS-COMA] Microsoft Corporation, "[Component Object Model Plus (COM+) Remote Administration Protocol](../MS-COMA/MS-COMA.md)".
 
-[MS-CTA] Microsoft Corporation, "[Claims Transformation Algorithm](#Section_2.1.4.3.2)".
+[MS-CTA] Microsoft Corporation, "[Claims Transformation Algorithm](../MS-CTA/MS-CTA.md)".
 
 [MS-DPSP] Microsoft Corporation, "[Digest Protocol Extensions](#Section_2.1.4.1.3)".
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_2.1)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
 [MS-FCIADS] Microsoft Corporation, "[File Classification Infrastructure Alternate Data Stream (ADS) File Format](../MS-FCIADS/MS-FCIADS.md)".
 
 [MS-FSA] Microsoft Corporation, "[File System Algorithms](../MS-FSA/MS-FSA.md)".
 
-[MS-FSMOD] Microsoft Corporation, "[File Services Management Protocols Overview](#Section_2.1)".
+[MS-FSMOD] Microsoft Corporation, "[File Services Management Protocols Overview](../MS-FSMOD/MS-FSMOD.md)".
 
-[MS-FSRM] Microsoft Corporation, "[File Server Resource Manager Protocol](#Section_2.5.1.1)".
+[MS-FSRM] Microsoft Corporation, "[File Server Resource Manager Protocol](../MS-FSRM/MS-FSRM.md)".
 
 [MS-GPCAP] Microsoft Corporation, "[Group Policy: Central Access Policies Protocol Extension](../MS-GPCAP/MS-GPCAP.md)".
 
 [MS-KILE] Microsoft Corporation, "[Kerberos Protocol Extensions](#Section_2.1.4.1.1)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_2.9)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
-[MS-NEGOEX] Microsoft Corporation, "[SPNEGO Extended Negotiation (NEGOEX) Security Mechanism](#Section_2.9)".
+[MS-NEGOEX] Microsoft Corporation, "[SPNEGO Extended Negotiation (NEGOEX) Security Mechanism](../MS-NEGOEX/MS-NEGOEX.md)".
 
 [MS-NLMP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication Protocol](#Section_2.1.4.1.2)".
 
@@ -511,19 +511,19 @@ This document uses the following terms:
 
 [MS-PKCA] Microsoft Corporation, "[Public Key Cryptography for Initial Authentication (PKINIT) in Kerberos Protocol](../MS-PKCA/MS-PKCA.md)".
 
-[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](#Section_2.1)".
+[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](../MS-PRSOD/MS-PRSOD.md)".
 
 [MS-RAA] Microsoft Corporation, "[Remote Authorization API Protocol](../MS-RAA/MS-RAA.md)".
 
 [MS-RCMP] Microsoft Corporation, "[Remote Certificate Mapping Protocol](../MS-RCMP/MS-RCMP.md)".
 
-[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](#Section_2.1)".
+[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](../MS-RDSOD/MS-RDSOD.md)".
 
 [MS-RPRN] Microsoft Corporation, "[Print System Remote Protocol](../MS-RPRN/MS-RPRN.md)".
 
 [MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](../MS-RRP/MS-RRP.md)".
 
-[MS-SFU] Microsoft Corporation, "[Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol](#Section_2.1.4.1.1)".
+[MS-SFU] Microsoft Corporation, "[Kerberos Protocol Extensions: Service for User and Constrained Delegation Protocol](../MS-SFU/MS-SFU.md)".
 
 [MS-SMB2] Microsoft Corporation, "[Server Message Block (SMB) Protocol Versions 2 and 3](../MS-SMB2/MS-SMB2.md)".
 
@@ -533,7 +533,7 @@ This document uses the following terms:
 
 [MS-TDS] Microsoft Corporation, "[Tabular Data Stream Protocol](../MS-TDS/MS-TDS.md)".
 
-[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](#Section_2.9)".
+[MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](../MS-TLSP/MS-TLSP.md)".
 
 [MSDN-ACCTOKENS] Microsoft Corporation, "Access Tokens", [http://msdn.microsoft.com/en-us/library/aa374909.aspx](https://go.microsoft.com/fwlink/?LinkId=89949)
 
@@ -572,7 +572,7 @@ The following table illustrates the features of the DAC model that are implement
 | Authorization feature | Active Directory objects | NTFS file system objects | Registry objects | Printer objects |
 | --- | --- | --- | --- | --- |
 | Inheritance (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.4) | Yes | Yes | Yes | Yes |
-| Object-specific access (see [MS-ADTS](#Section_2.5.1.2) section 5.1.3.3.3) | Yes | No | No | No |
+| Object-specific access (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.3.3) | Yes | No | No | No |
 | Control access rights (see [MS-ADTS] section 5.1.3.2.1) | Yes | No | No | No |
 | Validated write rights (see [MS-ADTS] section 5.1.3.2.2) | Yes | No | No | No |
 | Object visibility | Yes | No | No | No |
@@ -636,7 +636,7 @@ The following diagram shows the protocol interactions when using Kerberos Protoc
 
 Figure 8: Protocol interactions when the authentication protocol is KILE or PKCA
 
-The identity of the Kerberos application client has been authenticated using either the KILE or PKCA protocol and has obtained the service ticket for the Kerberos application server, as described in [MS-AUTHSOD](#Section_2.1) section 2.1.2.3. The Kerberos application client submits the service ticket along with the user's authorization information, as described in [MS-PAC](../MS-PAC/MS-PAC.md), in a *KRB_AP_REQ* message to the Kerberos application server using an application-specific protocol.
+The identity of the Kerberos application client has been authenticated using either the KILE or PKCA protocol and has obtained the service ticket for the Kerberos application server, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3. The Kerberos application client submits the service ticket along with the user's authorization information, as described in [MS-PAC](../MS-PAC/MS-PAC.md), in a *KRB_AP_REQ* message to the Kerberos application server using an application-specific protocol.
 
 The Kerberos application server validates the received *KRB_AP_REQ* message to verify the identity of the requesting user, and if the verification succeeds, then the Kerberos application server validates the Server Signature ([MS-PAC] section 2.8.1) in the Privilege Access Certificate (PAC), as described in [MS-PAC]. If tampering with the PAC could result in inappropriate elevation of privileges, then in addition to validating the server signature, the [**Key Distribution Center (KDC)**](#gt_key-distribution-center-kdc) signature will be validated. If PAC validation is required (see [MS-APDS](../MS-APDS/MS-APDS.md) for the requirements of PAC validation), then the authorization system forwards the PAC signature in the *KRB_AP_REQ* message to the [**domain controller**](#gt_domain-controller-dc) for verification in a *KERB_VERIFY_PAC* message as described in [MS-APDS] section 3.2, or else it directly proceeds to construct the access token. The authorization system constructs the access token with the group membership information from PAC, local security groups from the security accounts manager (SAM) database, and privileges and logon rights from the [**Local Security Authority (LSA) database**](#gt_local-security-authority-lsa-database).
 
@@ -645,14 +645,14 @@ The application server impersonates the user using this access token and invokes
 <a id="Section_2.1.4.1.2"></a>
 ##### 2.1.4.1.2 NT LAN Manager (NTLM) Authentication Protocol
 
-The identity of the application client has been authenticated using the NT LAN Manager Authentication Protocol Specification (NTLM) and Authentication Protocol Domain Support Specification (APDS) protocols, as described in [MS-AUTHSOD](#Section_2.1) section 2.1.2.3. After the authentication process succeeds, the domain controller returns a **NETLOGON_VALIDATION_SAM_INFO*** structure. The authorization system builds the access token with the group membership information from the **NETLOGON_VALIDATION_SAM_INFO*** structure, local security groups from the SAM database, privileges, and logon rights from the [**LSA policy database**](#gt_local-security-authority-lsa-database).
+The identity of the application client has been authenticated using the NT LAN Manager Authentication Protocol Specification (NTLM) and Authentication Protocol Domain Support Specification (APDS) protocols, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.3. After the authentication process succeeds, the domain controller returns a **NETLOGON_VALIDATION_SAM_INFO*** structure. The authorization system builds the access token with the group membership information from the **NETLOGON_VALIDATION_SAM_INFO*** structure, local security groups from the SAM database, privileges, and logon rights from the [**LSA policy database**](#gt_local-security-authority-lsa-database).
 
 The application server impersonates the identity access token, and invokes the access check function in the authorization system by passing the access token, access mask, and security descriptor of the requested object. The authorization system executes the access check algorithm, as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2, to verify whether the requested identity has sufficient access permissions to access the object.
 
 <a id="Section_2.1.4.1.3"></a>
 ##### 2.1.4.1.3 Digest Protocol Extensions
 
-The identity of the application client has been authenticated using the [MS-DPSP](#Section_2.1.4.1.3) and [MS-APDS](../MS-APDS/MS-APDS.md) protocols, as described in [MS-AUTHSOD](#Section_2.1) section 2.1.2.4. After authentication, the [**domain controller**](#gt_domain-controller-dc) creates and sends back the *DIGEST_VALIDATION_RESP* message ([MS-APDS]section 2.2.3.2) with authorization information in the Privilege Access Certificate (PAC) for the user's account.
+The identity of the application client has been authenticated using the [MS-DPSP](#Section_2.1.4.1.3) and [MS-APDS](../MS-APDS/MS-APDS.md) protocols, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.4. After authentication, the [**domain controller**](#gt_domain-controller-dc) creates and sends back the *DIGEST_VALIDATION_RESP* message ([MS-APDS]section 2.2.3.2) with authorization information in the Privilege Access Certificate (PAC) for the user's account.
 
 The next step of the application server is to verify the access permissions of the user. The application server contacts the authorization system to get the access token by submitting the user's authorization information received from the DC. The authorization system builds the access token with the user's authorization information, local security groups from the security accounts manager (SAM) database, and privileges and logon rights from the [**Local Security Authority (LSA) database**](#gt_local-security-authority-lsa-database), and returns the access token to the application server.
 
@@ -661,7 +661,7 @@ The application server impersonates the user with the user's access token, and i
 <a id="Section_2.1.4.1.4"></a>
 ##### 2.1.4.1.4 SSL/TLS Protocol
 
-The identity of the application client has been authenticated using the SSL/TLS (see [MS-TLSP](#Section_2.9)) and RCMP (see [MS-RCMP](../MS-RCMP/MS-RCMP.md)) protocols, as described in [MS-AUTHSOD](#Section_2.1) section 2.1.2.4.
+The identity of the application client has been authenticated using the SSL/TLS (see [MS-TLSP](../MS-TLSP/MS-TLSP.md)) and RCMP (see [MS-RCMP](../MS-RCMP/MS-RCMP.md)) protocols, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.4.
 
 On a successful authentication, the [**domain controller**](#gt_domain-controller-dc) generates the *SSL_CERT_LOGON_RESP* message, which includes the user's PAC, as specified in [MS-PAC](../MS-PAC/MS-PAC.md), and sends the message back via the Netlogon Remote Protocol ([MS-NRPC](../MS-NRPC/MS-NRPC.md)). On receipt of this message, the server generates an access token.
 
@@ -693,7 +693,7 @@ The CBAC architecture consists of the following components:
 
 **Central access policy (CAP) Admin client**
 
-- Facilitates the administrator to configure the [**claim**](#gt_claim) definitions, by indicating the claim names and types of the values, and assignment of the claims to the users and devices on the [**Active Directory**](#gt_active-directory) store using the Lightweight Directory Access Protocol (LDAP) ([MS-ADTS](#Section_2.5.1.2)).
+- Facilitates the administrator to configure the [**claim**](#gt_claim) definitions, by indicating the claim names and types of the values, and assignment of the claims to the users and devices on the [**Active Directory**](#gt_active-directory) store using the Lightweight Directory Access Protocol (LDAP) ([MS-ADTS](../MS-ADTS/MS-ADTS.md)).
 - Also facilitates the administrator to configure the [**central access rules (CARs)**](#gt_central-access-rule-car) and [**central access policies (CAPs)**](#gt_289c6ed6-fdfb-4795-9735-fc9fe20af2c6) on the Group Policy server using the Group Policy: Central Access Policies Protocol Extension ([MS-GPCAP](../MS-GPCAP/MS-GPCAP.md)).
 **Central policy store**
 
@@ -701,11 +701,11 @@ The CBAC architecture consists of the following components:
 - The Group Policy server pushes access rules and policies to the specified file servers via Group Policy Central Access Policies Protocol Extension. For more information, see [MS-GPCAP].
 **Client computer**
 
-- The identities of the Server Message Block (SMB) clients on the client computer can get authenticated by using either the NTLM protocol ([MS-NLMP](#Section_2.1.4.1.2) and [MS-APDS](../MS-APDS/MS-APDS.md)) or the Kerberos Protocol Extensions ([MS-KILE](#Section_2.1.4.1.1) or [MS-PKCA](../MS-PKCA/MS-PKCA.md)), as described in [MS-AUTHSOD](#Section_2.1). The Kerberos authentication protocol results in authorization information with the claims, whereas NTLM protocol results in authorization information without the claims.
+- The identities of the Server Message Block (SMB) clients on the client computer can get authenticated by using either the NTLM protocol ([MS-NLMP](#Section_2.1.4.1.2) and [MS-APDS](../MS-APDS/MS-APDS.md)) or the Kerberos Protocol Extensions ([MS-KILE](#Section_2.1.4.1.1) or [MS-PKCA](../MS-PKCA/MS-PKCA.md)), as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md). The Kerberos authentication protocol results in authorization information with the claims, whereas NTLM protocol results in authorization information without the claims.
 - The SMB clients request access to a file share on a remote file server by sending authorization information which is created by successful authentication.
 **File server Admin client**
 
-- Facilitates the administrator to configure the classification rules using the File Server Resource Manager (FSRM) Protocol interfaces (see [MS-FSRM](#Section_2.5.1.1)) and retrieval of central access policies IDs using the Central Access Policy Identifier (ID) Retrieval Protocol (see [MS-CAPR](../MS-CAPR/MS-CAPR.md)) on the remote file server.
+- Facilitates the administrator to configure the classification rules using the File Server Resource Manager (FSRM) Protocol interfaces (see [MS-FSRM](../MS-FSRM/MS-FSRM.md)) and retrieval of central access policies IDs using the Central Access Policy Identifier (ID) Retrieval Protocol (see [MS-CAPR](../MS-CAPR/MS-CAPR.md)) on the remote file server.
 - The file server administrator simulates the effective rights of the users on file shares using the Remote Authorization API Protocol interfaces [MS-RAA](../MS-RAA/MS-RAA.md).
 **File server**
 
@@ -716,9 +716,9 @@ The CBAC architecture consists of the following components:
 <a id="Section_2.1.4.3.1"></a>
 ##### 2.1.4.3.1 Down-Level Scenarios
 
-The following diagram shows the protocol communications for the CBAC down-level scenario, where the user tries to access the CBAC-aware shared-file resources on the file server using a file access client (CIFS or SMB or SMB2, as described in [MS-CIFS](../MS-CIFS/MS-CIFS.md). [MS-SMB](../MS-SMB/MS-SMB.md), and [MS-SMB2](../MS-SMB2/MS-SMB2.md)) on the down-level client computer that is running a pre-Windows 8 operating system version. The identity of the file access client has been authenticated by the Authentication Services system using either KILE or PKCA and has obtained the service ticket for the remote file server with the authorization information ([MS-PAC](../MS-PAC/MS-PAC.md)) of the requesting identity, as described in [MS-AUTHSOD](#Section_2.1).
+The following diagram shows the protocol communications for the CBAC down-level scenario, where the user tries to access the CBAC-aware shared-file resources on the file server using a file access client (CIFS or SMB or SMB2, as described in [MS-CIFS](../MS-CIFS/MS-CIFS.md). [MS-SMB](../MS-SMB/MS-SMB.md), and [MS-SMB2](../MS-SMB2/MS-SMB2.md)) on the down-level client computer that is running a pre-Windows 8 operating system version. The identity of the file access client has been authenticated by the Authentication Services system using either KILE or PKCA and has obtained the service ticket for the remote file server with the authorization information ([MS-PAC](../MS-PAC/MS-PAC.md)) of the requesting identity, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 
-Because the authorization information [MS-PAC] that was received by the file service does not have the user claims in it, the file service on the server computer has to obtain the service ticket to itself on behalf of the user using the Service for User to Self (S4U2self) extension described in [MS-SFU](#Section_2.1.4.1.1). By obtaining the service ticket to itself on behalf of the user, the service receives the user access token from the [**LSA policy database**](#gt_local-security-authority-lsa-database) by submitting authorization information (see [MS-PAC]) from the obtained service ticket, as described in section [2.1.4.2](../MS-PAC/MS-PAC.md), which consists of group memberships and user claims. The access token contains the authorization information received from Kerberos S4U2Self, privileges granted to the client from the LSA policy database, and local security groups assigned to the user in the SAM account database (see section 2.1.4.2). The file service impersonates the user using this user's access token and attempts to access the file on behalf of the user. The file system or object store [MS-FSA](../MS-FSA/MS-FSA.md) invokes the access check function to verify the user access rights. The authorization system checks the requested access rights using the user's access token and the object's security descriptor, as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2.
+Because the authorization information [MS-PAC] that was received by the file service does not have the user claims in it, the file service on the server computer has to obtain the service ticket to itself on behalf of the user using the Service for User to Self (S4U2self) extension described in [MS-SFU](../MS-SFU/MS-SFU.md). By obtaining the service ticket to itself on behalf of the user, the service receives the user access token from the [**LSA policy database**](#gt_local-security-authority-lsa-database) by submitting authorization information (see [MS-PAC]) from the obtained service ticket, as described in section [2.1.4.2](#Section_2.1.4.2), which consists of group memberships and user claims. The access token contains the authorization information received from Kerberos S4U2Self, privileges granted to the client from the LSA policy database, and local security groups assigned to the user in the SAM account database (see section 2.1.4.2). The file service impersonates the user using this user's access token and attempts to access the file on behalf of the user. The file system or object store [MS-FSA](../MS-FSA/MS-FSA.md) invokes the access check function to verify the user access rights. The authorization system checks the requested access rights using the user's access token and the object's security descriptor, as described in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.3.2.
 
 The following diagram shows the protocol interactions when Kerberos is the authentication protocol.
 
@@ -746,8 +746,8 @@ Claims transformation is similar to [**SID**](#gt_security-identifier-sid) filte
 The claims transformation consists of the following high-level steps:
 
 - A PAC from a cross-realm [**ticket-granting ticket (TGT)**](#gt_ticket-granting-ticket-tgt) needs to be decoded and filtered. When decoding a cross-realm TGT, the **crealm** fields inside the TGT are compared to the expected name of the realm for the inter-realm trust. If the names do not match the TGT, they are rejected, subject to other mitigating constraints. For more information, see [MS-PAC] sections 4.1.2.2 and 4.1.2.3.
-- After the filtering, the next step is to obtain the claims transformation rules. This can be accomplished by using the trust name and the direction of the traversal of the trust to look up the corresponding msDS-ClaimsTransformationPolicyType object, as described in [MS-ADSC](#Section_2.5.1.2), and to obtain the claims transformation rules from it. For more information, see [MS-ADTS](#Section_2.5.1.2) sections 3.1.1.11.1.5 and 3.1.1.11.2.11.
-- After obtaining the transformation rules, the claims to be transformed along with the transformation rules are then passed to the claims transformation algorithm, as described in [MS-CTA](#Section_2.1.4.3.2). The output of the claims transformation algorithm is further processed using the Claims Dictionary to produce claims that are relevant to the new forest in which they are used.
+- After the filtering, the next step is to obtain the claims transformation rules. This can be accomplished by using the trust name and the direction of the traversal of the trust to look up the corresponding msDS-ClaimsTransformationPolicyType object, as described in [MS-ADSC](../MS-ADSC/MS-ADSC.md), and to obtain the claims transformation rules from it. For more information, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) sections 3.1.1.11.1.5 and 3.1.1.11.2.11.
+- After obtaining the transformation rules, the claims to be transformed along with the transformation rules are then passed to the claims transformation algorithm, as described in [MS-CTA](../MS-CTA/MS-CTA.md). The output of the claims transformation algorithm is further processed using the Claims Dictionary to produce claims that are relevant to the new forest in which they are used.
 <a id="Section_2.1.5"></a>
 ### 2.1.5 Verify Authorization
 
@@ -763,7 +763,7 @@ The following table shows the mapping of the policy server with the correspondin
 
 | Policy server | Protocols used |
 | --- | --- |
-| Active Directory | Lightweight Directory Access Protocol (v3) [MS-ADTS](#Section_2.5.1.2) |
+| Active Directory | Lightweight Directory Access Protocol (v3) [MS-ADTS](../MS-ADTS/MS-ADTS.md) |
 | File server | File access protocols [MS-CIFS](../MS-CIFS/MS-CIFS.md), [MS-SMB](../MS-SMB/MS-SMB.md), and [MS-SMB2](../MS-SMB2/MS-SMB2.md) |
 | SQL Server | Tabular Data Stream Protocol [MS-TDS](../MS-TDS/MS-TDS.md) |
 
@@ -791,9 +791,9 @@ The following table provides a comprehensive list of the authorization member pr
 | Authorization Manager (AzMan) Policy File Format | The Authorization Manager (AzMan) Policy File Format contains the XML schema definitions of Authorization Manager access control policies. | [MS-AZMP](../MS-AZMP/MS-AZMP.md) | AzMan RBAC |
 | Group Policy Central Access Policies Protocol Extension | The Group Policy: Central Access Policies Extension is a Group Policy file format that communicates the Central Access Policies (CAPs) defined centrally and configured for specific computer accounts. CAPs are transferred to the file servers through Group Policy. | [MS-GPCAP](../MS-GPCAP/MS-GPCAP.md) | CBAC |
 | Central Access Policy Identifier (ID) Retrieval Protocol | This protocol enables the applications to query a remote file server for a list of Central Access Policies (CAPs) that have been configured for a remote file server. Specifically, the protocol is used to transfer the CAP IDs. | [MS-CAPR](../MS-CAPR/MS-CAPR.md) | CBAC |
-| Claims Transformation Algorithm | This document specifies a grammar for describing a transformation rule language and an algorithm for transforming input claims into output claims using a defined set of rules. Transformation of a set of claims is typically used at authentication trust traversal boundaries to transform claims from sending authority into a form acceptable to the receiving authority . | [MS-CTA](#Section_2.1.4.3.2) | CBAC |
+| Claims Transformation Algorithm | This document specifies a grammar for describing a transformation rule language and an algorithm for transforming input claims into output claims using a defined set of rules. Transformation of a set of claims is typically used at authentication trust traversal boundaries to transform claims from sending authority into a form acceptable to the receiving authority . | [MS-CTA](../MS-CTA/MS-CTA.md) | CBAC |
 | Windows Data Types | This document contains the Windows data types and algorithms associated with authorization. | [MS-DTYP](../MS-DTYP/MS-DTYP.md) | DAC, CBAC,and COM+ roles |
-| Lightweight Directory Access Protocol (LDAP) | In CBAC: This protocol enables the applications to configure the claim definitions and the user and devices claims on the Active Directory server. In RBAC: This protocol enables the retrieval of authorization policies from the Active Directory Policy Server. In DAC: [MS-ADTS] section 5.1.3 specifies the authorization rules. | [MS-ADTS](#Section_2.5.1.2) | DAC, CBAC, and AzMan RBAC |
+| Lightweight Directory Access Protocol (LDAP) | In CBAC: This protocol enables the applications to configure the claim definitions and the user and devices claims on the Active Directory server. In RBAC: This protocol enables the retrieval of authorization policies from the Active Directory Policy Server. In DAC: [MS-ADTS] section 5.1.3 specifies the authorization rules. | [MS-ADTS](../MS-ADTS/MS-ADTS.md) | DAC, CBAC, and AzMan RBAC |
 | Component Object Model Plus (COM+) Remote Administration Protocol | With regards to authorization, this protocol enables the administration interface for the role-based security configuration for the COM+ applications. | [MS-COMA](../MS-COMA/MS-COMA.md) | COM+ roles access control |
 | Tabular Data Stream Protocol | With regards to authorization, this protocol enables the retrieval of the authorization policies from the SQL Server policy store. | [MS-TDS](../MS-TDS/MS-TDS.md) | AzMan RBAC |
 
@@ -809,16 +809,16 @@ The most prominent examples of protocols and systems that have a dependency on t
 
 **DAC model**
 
-- Active Directory, as described in [MS-ADOD](#Section_2.1)
-- File system, as described in [MS-FASOD](#Section_2.1) and [MS-FSMOD](#Section_2.1)
+- Active Directory, as described in [MS-ADOD](../MS-ADOD/MS-ADOD.md)
+- File system, as described in [MS-FASOD](../MS-FASOD/MS-FASOD.md) and [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md)
 - Registry services, as described in [MS-RRP](../MS-RRP/MS-RRP.md)
-- Printing Services, as described in [MS-PRSOD](#Section_2.1)
+- Printing Services, as described in [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md)
 **CBAC model**
 
 - File Access Services, as described in [MS-FASOD]
 **AzMan RBAC model**
 
-- Remote Desktop Services, as described in [MS-RDSOD](#Section_2.1)
+- Remote Desktop Services, as described in [MS-RDSOD](../MS-RDSOD/MS-RDSOD.md)
 **COM+ roles access control model**
 
 In Windows, except for components of the COM+ platform, there are no components/subsystems that depend on this model. However, any enterprise application that uses the services of the COM+ platform can depend on this model.
@@ -867,8 +867,8 @@ The following table lists the use cases that span the functionality of the autho
 
 | Use case group | Use cases |
 | --- | --- |
-| DAC model: File server | [Check Simple Access](#Section_2.5.1.2.2) (section 2.5.1.1.2) [Check ACL Inheritance Access](#Section_2.5.1.1.3) (section 2.5.1.1.3) [Check Conditional ACEs-Based Access](#Section_2.5.1.1.4) (section 2.5.1.1.4) [Check Claims-Based Access](#Section_2.5.1.1.5) (section 2.5.1.1.5) |
-| DAC model: Active Directory | [Check Simple Access](#Section_2.5.1.2.2) (section 2.5.1.2.2) [Check Object-Specific Access](#Section_2.5.1.2.3) (section 2.5.1.2.3) [Control Access Right-Based Access](#Section_2.5.1.2.4) (section 2.5.1.2.4) [Control Validated Write-Based Access](#Section_2.5.1.2.5) (section 2.5.1.2.5) [Check Object Visibility](#Section_2.5.1.2.6) (section 2.5.1.2.6) |
+| DAC model: File server | [Check Simple Access](#Section_2.5.1.1.2) (section 2.5.1.1.2) [Check ACL Inheritance Access](#Section_2.5.1.1.3) (section 2.5.1.1.3) [Check Conditional ACEs-Based Access](#Section_2.5.1.1.4) (section 2.5.1.1.4) [Check Claims-Based Access](#Section_2.5.1.1.5) (section 2.5.1.1.5) |
+| DAC model: Active Directory | [Check Simple Access](#Section_2.5.1.1.2) (section 2.5.1.2.2) [Check Object-Specific Access](#Section_2.5.1.2.3) (section 2.5.1.2.3) [Control Access Right-Based Access](#Section_2.5.1.2.4) (section 2.5.1.2.4) [Control Validated Write-Based Access](#Section_2.5.1.2.5) (section 2.5.1.2.5) [Check Object Visibility](#Section_2.5.1.2.6) (section 2.5.1.2.6) |
 | AzMan RBAC model | [Verify Authorization](#Section_2.1.5) (section 2.5.2.1) |
 
 <a id="Section_2.5.1"></a>
@@ -915,9 +915,9 @@ The primary interest of a user is to access the file on the remote file server.
 
 **Preconditions**
 
-- The user of the file client has been authenticated by the Authentication Services subsystem. For more information, see [MS-AUTHSOD](#Section_2.1).
+- The user of the file client has been authenticated by the Authentication Services subsystem. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator using the Admin client has configured the required explicit access permissions for the requesting user to access the file on a remote file share but has not included inherited permissions from the object's parent.
-- The file server obtains the access token for the requesting user, as described in section [2.5.1.3](../MS-FSA/MS-FSA.md), and the file server makes a request to the file system by passing the user's access token (which is also called security context), access rights, and other information, as described in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
+- The file server obtains the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and the file server makes a request to the file system by passing the user's access token (which is also called security context), access rights, and other information, as described in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
 **Main success scenario**
 
 - Trigger: The user tries to access an existing file on a remote file share using the file client application.
@@ -948,9 +948,9 @@ The primary interest of a user is to access the file on the remote file server.
 
 **Preconditions**
 
-- The user of the file client has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The user of the file client has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator using the Admin client has configured explicit and inherited access permissions for the requesting user to open the file on a remote file share.
-- The file server obtains the access token for the requesting user, as described in section [2.5.1.3](../MS-FSA/MS-FSA.md), and the file server makes a request to the file system resource manager by passing the obtained user access token (which is also called security context), access rights, and other information, as described in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
+- The file server obtains the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and the file server makes a request to the file system resource manager by passing the obtained user access token (which is also called security context), access rights, and other information, as described in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
 **Main success scenario**
 
 - Trigger: The user tries to access an existing file on a remote file share using the file client application.
@@ -981,9 +981,9 @@ The primary interest of a user is to access the file on the remote file server.
 
 **Preconditions**
 
-- The user of the file client has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The user of the file client has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator using the Admin client has configured explicit, inherited, and conditional access permissions for the requesting user to open the file on a remote file share.
-- The file server obtains the access token for the requesting user as described in section [2.5.1.3](../MS-FSA/MS-FSA.md), and the file server makes a request to the file system resource manager by passing the obtained user access token (which is also called security context), access rights, and other information, as described in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
+- The file server obtains the access token for the requesting user as described in section [2.5.1.3](#Section_2.5.1.3), and the file server makes a request to the file system resource manager by passing the obtained user access token (which is also called security context), access rights, and other information, as described in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
 **Main success scenario**
 
 - Trigger: The user tries to access an existing file on a remote file share using the file client application.
@@ -1014,12 +1014,12 @@ The primary interest of a user is to access the file on the remote file server.
 
 **Preconditions**
 
-- The identity of the user and client computer (compound identity) has been authenticated by the Authentication Services subsystem, as described in [MS-KILE](#Section_2.1.4.1.1) and [MS-AUTHSOD](#Section_2.1).
+- The identity of the user and client computer (compound identity) has been authenticated by the Authentication Services subsystem, as described in [MS-KILE](#Section_2.1.4.1.1) and [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The Active Directory administrator configured the claim definitions, user, and device claims on Active Directory using the CAP Admin client tool.
 - The Group Policy administrator configured required central access policies and classification rules for the file servers.
 - The central access policies and classification rules applied to the resources of the file server.
 - If the file server is in a different forest than the user, claims in the PAC are transformed, as described in section [2.1.4.3.2](#Section_2.1.4.3.2).
-- Using this PAC, the file server obtains the access token (with user and device claims) for the requesting user, as described in section [2.5.1.3](../MS-FSA/MS-FSA.md), and the file server makes a request to the file system resource manager by passing the obtained user access token (which is also called security context), access rights, and other information, as specified in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
+- Using this PAC, the file server obtains the access token (with user and device claims) for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and the file server makes a request to the file system resource manager by passing the obtained user access token (which is also called security context), access rights, and other information, as specified in [MS-FSA](../MS-FSA/MS-FSA.md) section 2.1.5.1.
 **Main success scenario**
 
 - Trigger: The user tries to open an existing file on a remote file share using the file client application.
@@ -1043,7 +1043,7 @@ Figure 15: Active Directory authorization use cases
 
 The actors that participate in the [**Active Directory**](#gt_active-directory) DAC model use cases are:
 
-**Active Directory resource manager:** The Active Directory resource manager [MS-ADTS](#Section_2.5.1.2) is code or a component that implements the Active Directory objects.
+**Active Directory resource manager:** The Active Directory resource manager [MS-ADTS](../MS-ADTS/MS-ADTS.md) is code or a component that implements the Active Directory objects.
 
 **Admin client:** The Admin client is the authorization tool that helps the administrator to configure the access permissions for the entire Active Directory object or individual attributes of an object or the set of attributes of an object.
 
@@ -1068,10 +1068,10 @@ The primary interest of the user of the Active Directory client is to read all i
 
 **Preconditions**
 
-- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator has configured the required access permissions for the user on the Active Directory object using the Admin tool.
 - The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and it already sent a request to the Active Directory resource manager by passing the user's access token (which is also called security context), access rights, and other information.
-- The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self ([MS-ADTS](#Section_2.5.1.2) section 5.1.3.3).
+- The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.3).
 **Main success scenario**
 
 - Trigger: The user of the Active Directory client makes a request to the Active Directory server to read all the information associated with an Active Directory object.
@@ -1102,10 +1102,10 @@ The primary interest of the user is to read an individual attribute of an object
 
 **Preconditions**
 
-- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator has configured the required attribute level access permissions for the user on the Active Directory object using the Admin tool.
 - The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and the server has already sent a request to the Active Directory resource manager by passing the user's access token, (which is also called security context), access rights, and other information.
-- The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self (see [MS-ADTS](#Section_2.5.1.2) section 5.1.3.3).
+- The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self (see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.3).
 **Main success scenario**
 
 - Trigger: The user of an Active Directory client makes a request to the Active Directory server to read one attribute or set of attributes associated with an Active Directory object.
@@ -1124,7 +1124,7 @@ Verify the control access derived from right-based access that is requested by t
 
 **Context of Use**
 
-The user of the Active Directory client is required to perform certain operations that have semantics that are not tied to specific properties, or where it is desirable to control access in a way that is not supported by the standard access rights. For more information, see [MS-ADTS](#Section_2.5.1.2) section 5.1.3.2.1. The [**Active Directory server**](#gt_active-directory-server) needs to verify the user's access rights before granting access to perform the requested operation. Therefore, the Active Directory server interacts with the authorization system via the [**Active Directory**](#gt_active-directory) resource manager to verify the requested user access rights via this use case.
+The user of the Active Directory client is required to perform certain operations that have semantics that are not tied to specific properties, or where it is desirable to control access in a way that is not supported by the standard access rights. For more information, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2.1. The [**Active Directory server**](#gt_active-directory-server) needs to verify the user's access rights before granting access to perform the requested operation. Therefore, the Active Directory server interacts with the authorization system via the [**Active Directory**](#gt_active-directory) resource manager to verify the requested user access rights via this use case.
 
 **Actors**
 
@@ -1136,9 +1136,9 @@ The primary interest of a user is to perform certain operations that have semant
 
 **Preconditions**
 
-- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator has configured the required attribute level access permissions for the user on the Active Directory object using the Admin tool.
-- The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](../MS-ADTS/MS-ADTS.md), and the server has already sent a request to the Active Directory resource manager by passing the user's access token (which is also called security context), the control-access-right [**GUID**](#gt_globally-unique-identifier-guid) ([MS-ADTS] section 5.1.3.2.1), and other information.
+- The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and the server has already sent a request to the Active Directory resource manager by passing the user's access token (which is also called security context), the control-access-right [**GUID**](#gt_globally-unique-identifier-guid) ([MS-ADTS] section 5.1.3.2.1), and other information.
 - The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self ([MS-ADTS] section 5.1.3.3).
 **Main success scenario**
 
@@ -1158,7 +1158,7 @@ Verify the write access requested by the user of the [**Active Directory client*
 
 **Context of Use**
 
-The user requesting attributes has configured the validated write access permissions on an Active Directory object. Therefore, the [**Active Directory server**](#gt_active-directory-server) is required to validate the values of the attributes being written. For more information, see [MS-ADTS](#Section_2.5.1.2) section 5.1.3.2.2.
+The user requesting attributes has configured the validated write access permissions on an Active Directory object. Therefore, the [**Active Directory server**](#gt_active-directory-server) is required to validate the values of the attributes being written. For more information, see [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.2.2.
 
 **Actors**
 
@@ -1170,9 +1170,9 @@ The primary interest of the user of the Active Directory client is to write the 
 
 **Preconditions**
 
-- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The Administrator has configured the required attribute level access permissions for the user on the Active Directory object using the Admin tool.
-- The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](../MS-ADTS/MS-ADTS.md), and it already sent a request to the Active Directory resource manager by passing the user's access token (which is also called security context), the validated rights [**GUID**](#gt_globally-unique-identifier-guid) ([MS-ADTS] section 5.1.3.2.2), and other information.
+- The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and it already sent a request to the Active Directory resource manager by passing the user's access token (which is also called security context), the validated rights [**GUID**](#gt_globally-unique-identifier-guid) ([MS-ADTS] section 5.1.3.2.2), and other information.
 - The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self ([MS-ADTS] section 5.1.3.3).
 **Main success scenario**
 
@@ -1204,10 +1204,10 @@ The primary interest of the user is to enumerate all of the Active Directory obj
 
 **Preconditions**
 
-- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](#Section_2.1).
+- The identity of the user has been authenticated by the Authentication Services subsystem [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - The administrator has configured the required attribute level access permissions for the user on the Active Directory object using the Admin tool.
 - The Active Directory server obtained the access token for the requesting user, as described in section [2.5.1.3](#Section_2.5.1.3), and it already sent a request to the Active Directory resource manager by passing the user's access token (which is also called security context), access rights, and other information.
-- The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self ([MS-ADTS](#Section_2.5.1.2) section 5.1.3.3).
+- The object's [**security descriptor**](#gt_security-descriptor) has already undergone the [**SID**](#gt_security-identifier-sid) substitution for Principal Self ([MS-ADTS](../MS-ADTS/MS-ADTS.md) section 5.1.3.3).
 **Main success scenario**
 
 - Trigger: The user makes a request to the Active Directory server using the Active Directory client to enumerate all the Active Directory objects and attributes to which the user has access.
@@ -1251,7 +1251,7 @@ The primary interest of the identity of the application client is to access reso
 
 **Preconditions**
 
-- The identity of the application client has been authenticated by the Authentication Services subsystem (see [MS-AUTHSOD](#Section_2.1)).
+- The identity of the application client has been authenticated by the Authentication Services subsystem (see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md)).
 - The application server has the authorization information from the (PAC) of the requested application client's identity.
 - User rights are configured in the LSA policy database, and local groups are configured in the SAM database.
 **Main success scenario**
@@ -1346,7 +1346,7 @@ None.
 <a id="Section_3.1"></a>
 ## 3.1 Reading from a File on Remote CBAC Aware SMB2 Share
 
-This scenario demonstrates the use cases described in sections [2.5.1.1.5](#Section_2.5.1.1.5) and [2.5.1.3.1](#Section_2.5.1.3.1). The client and server can negotiate each other by using the Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO): Microsoft Extension (as described in [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](#Section_2.9)) to select the agreed authentication protocol, as described in [MS-AUTHSOD](#Section_2.1) and [MS-SPNG].
+This scenario demonstrates the use cases described in sections [2.5.1.1.5](#Section_2.5.1.1.5) and [2.5.1.3.1](#Section_2.5.1.3.1). The client and server can negotiate each other by using the Simple and Protected Generic Security Service Application Program Interface Negotiation Mechanism (SPNEGO): Microsoft Extension (as described in [MS-SPNG](../MS-SPNG/MS-SPNG.md) and [MS-NEGOEX](../MS-NEGOEX/MS-NEGOEX.md)) to select the agreed authentication protocol, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) and [MS-SPNG].
 
 Based on the agreed authentication protocol, this scenario has the following variants:
 
@@ -1362,7 +1362,7 @@ The following are the common prerequisites of this scenario.
 
 - The client computer and server computer are joined to the same [**Active Directory**](#gt_active-directory) domain.
 - The file server and file resource manager roles have been configured on the server computer.
-- The required user accounts and associated group memberships have been configured on an account database. For more information, see [MS-ADOD](#Section_2.1).
+- The required user accounts and associated group memberships have been configured on an account database. For more information, see [MS-ADOD](../MS-ADOD/MS-ADOD.md).
 - Created claim types, resource file properties, and [**central access rules (CARs)**](#gt_central-access-rule-car) are configured on the domain controller and then added to the [**central access policies (CAPs)**](#gt_289c6ed6-fdfb-4795-9735-fc9fe20af2c6) using the Active Directory Administrative Center.
 - The intended central access policies (CAPs) have been targeted to the file server computer using the Group Policy Management Console, and the CAPs to the required file shares have been enabled.
 - The required association of claims for the user and computer accounts have been set.
@@ -1383,7 +1383,7 @@ The following are the additional prerequisites that are required for this varian
 - Set the Compound-identity-supported bit flags on the **msDS-SupportedEncryptionTypes** attribute of the file server computer account. For details about the **msDS-SupportedEncryptionTypes** attribute, see [MS-KILE] section 2.2.7.
 **Initial System State**
 
-- The identity of the client computer account has been authenticated by the Authentication Services subsystem, as described in [MS-AUTHSOD](#Section_2.1) section 2.5.5.1, and the client computer has the [**TGT**](#gt_ticket-granting-ticket-tgt) for the computer account.
+- The identity of the client computer account has been authenticated by the Authentication Services subsystem, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.5.5.1, and the client computer has the [**TGT**](#gt_ticket-granting-ticket-tgt) for the computer account.
 - The identity of the user has been authenticated by [**KDC**](#gt_key-distribution-center-kdc) and the [**file server**](#gt_file-server), the identity of the file server has been authenticated by the client computer, as described in [MS-AUTHSOD] section 3.3.1, and the client computer has submitted the service ticket with the PAC containing group memberships, user, and device [**claims**](#gt_claim) to access the intended file share.
 - The file server has obtained the PAC with the group memberships, user, and device claims from the client, and the SMB2 client (on the client computer) has obtained the sessionId as described in the Connecting to an SMB2 Share example in [MS-AUTHSOD] section 3.3.1.
 - The user who is running the SMB2 client application has not been authorized to the read the remote file.
@@ -1421,7 +1421,7 @@ The following are the additional prerequisites that are required for this varian
 - The [**file server**](#gt_file-server) service has been authenticated by the [**KDC**](#gt_key-distribution-center-kdc) and has a [**TGT**](#gt_ticket-granting-ticket-tgt) for the service account.
 **Initial System State**
 
-- The identity of the client computer account has been authenticated by the Authentication Services subsystem, as described in [MS-AUTHSOD](#Section_2.1) section 2.5.5.1.
+- The identity of the client computer account has been authenticated by the Authentication Services subsystem, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.5.5.1.
 - The identity of the user has been authenticated by the KDC and the file server, and the identity of the file server has been authenticated by the client computer, as described in [MS-AUTHSOD] section 3.3.1.
 - The file server has obtained the PAC with the group memberships, but not user [**claims**](#gt_claim) from the client, and the SMB2 client (on the client computer) has obtained the **sessionId** as described in the Connecting to an SMB2 Share example in [MS-AUTHSOD] section 3.3.1.
 - The user who is running the SMB2 client application has not been authorized to the read the remote file.
@@ -1437,8 +1437,8 @@ The following sequence diagram shows the process of reading from a file on a rem
 
 Figure 19: Reading from a file on a remote CBAC-aware SMB2 share configured with only user claims
 
-- The file server service uses the Service for User to Self (S4U2self) extension to retrieve a user claim for itself on behalf of the user. The service fills out the **PA_FOR_USER** structure ([MS-SFU](#Section_2.1.4.1.1) section 2.2.1) data structure and sends the KRB_TGS_REQ message, as described in [MS-SFU] section 3.1.5.1.1, to the KDC.
-- The KDC processes the request, and retrieves the claims and group membership associated with the user from the account database , as specified in [MS-SFU] section 3.2.5.1.2 and [MS-KILE](#Section_2.1.4.1.1) section 3.3.5.6.4.6. For more information, see [MS-ADOD](#Section_2.1). The KDC returns the service ticket for the user in the KRB_TGS_REP message. The privilege attribute certificate (PAC) that is returned in the service ticket contains the group membership information and user claims, as specified in [MS-PAC](../MS-PAC/MS-PAC.md) section 3.
+- The file server service uses the Service for User to Self (S4U2self) extension to retrieve a user claim for itself on behalf of the user. The service fills out the **PA_FOR_USER** structure ([MS-SFU](../MS-SFU/MS-SFU.md) section 2.2.1) data structure and sends the KRB_TGS_REQ message, as described in [MS-SFU] section 3.1.5.1.1, to the KDC.
+- The KDC processes the request, and retrieves the claims and group membership associated with the user from the account database , as specified in [MS-SFU] section 3.2.5.1.2 and [MS-KILE](#Section_2.1.4.1.1) section 3.3.5.6.4.6. For more information, see [MS-ADOD](../MS-ADOD/MS-ADOD.md). The KDC returns the service ticket for the user in the KRB_TGS_REP message. The privilege attribute certificate (PAC) that is returned in the service ticket contains the group membership information and user claims, as specified in [MS-PAC](../MS-PAC/MS-PAC.md) section 3.
 3-10. The steps are the same as steps 1-8 in "Service Ticket with the User and Device Claims" variant as described in section [3.1.1.1](#Section_3.1.1.1).
 
 ### NT LAN Manager Authentication Protocol [MS-NLMP]
@@ -1449,7 +1449,7 @@ The prerequisites are the same as described in the common prerequisites in secti
 
 **Initial System State**
 
-- The identity of the user has been authenticated by the domain controller, as described in [MS-AUTHSOD](#Section_2.1) section 3.3.2.
+- The identity of the user has been authenticated by the domain controller, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 3.3.2.
 - The user who is running the SMB2 client application has not been authorized to read the remote file.
 - The [**file server**](#gt_file-server) has obtained the user's access token (security context) as described in section [2.5.1.3.1](#Section_2.5.1.3.1).
 **Final System State**

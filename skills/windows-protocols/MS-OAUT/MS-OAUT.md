@@ -599,7 +599,7 @@ To support type description and discovery, the OLE Automation Protocol specifies
 - How the automation server supports queries for type-description support.
 - How to specify an extended set of capabilities and relationships using automation IDL extensions.
 - How a server can provide access to the information specified in the IDL.
-An automation server specifies that it provides type information by implementing [IDispatch::GetTypeInfoCount (section 3.1.4.1)](#Section_3.1.4.1), and exposes access to the type description server that describes the server's [**dispinterface**](#gt_dispinterface) by implementing [IDispatch::GetTypeInfo (section 3.1.4.2)](#Section_3.1.4.1).
+An automation server specifies that it provides type information by implementing [IDispatch::GetTypeInfoCount (section 3.1.4.1)](#Section_3.1.4.1), and exposes access to the type description server that describes the server's [**dispinterface**](#gt_dispinterface) by implementing [IDispatch::GetTypeInfo (section 3.1.4.2)](#Section_3.1.4.2).
 
 The following diagram illustrates a generic query for type information.
 
@@ -658,7 +658,7 @@ The following [**GUIDs**](#gt_globally-unique-identifier-guid) are used by the O
 | --- | --- |
 | CLSID_RecordInfo {0000002F-0000-0000-C000-000000000046} | The OBJREF_CUSTOM unmarshaler [**CLSID**](#gt_class-identifier-clsid) for [RecordInfoData (section 2.2.31)](#Section_2.2.31). |
 | IID_IRecordInfo {0000002F-0000-0000-C000-000000000046} | The value of the **IID** field of the pRecInfo OBJREF structure (see section [2.2.28.2.1](#Section_2.2.28.2.1)). |
-| IID_IDispatch {00020400-0000-0000-C000-000000000046} | The GUID associated with the IDispatch [**interface**](#gt_interface) (see section [3.1](#Section_2.2.49.4)). |
+| IID_IDispatch {00020400-0000-0000-C000-000000000046} | The GUID associated with the IDispatch [**interface**](#gt_interface) (see section [3.1](#Section_3.1)). |
 | IID_ITypeComp {00020403-0000-0000-C000-000000000046} | The GUID associated with the ITypeComp interface (see section [3.5](#Section_3.5)). |
 | IID_ITypeInfo {00020401-0000-0000-C000-000000000046} | The GUID associated with the ITypeInfo interface (see section [3.7](#Section_3.7)). |
 | IID_ITypeInfo2 {00020412-0000-0000-C000-000000000046} | The GUID associated with the ITypeInfo2 interface (see section [3.9](#Section_3.9)). |
@@ -890,7 +890,7 @@ VT_BYREF = 0x4000
 
 | Context | Description |
 | --- | --- |
-| V, S, T | Either the specified type, or the type of the element or contained field MUST be a pointer to IDispatch (see section [3.1.4](#Section_3.9.4)). |
+| V, S, T | Either the specified type, or the type of the element or contained field MUST be a pointer to IDispatch (see section [3.1.4](#Section_3.1.4)). |
 
 **VT_ERROR:**
 
@@ -1022,7 +1022,7 @@ VT_BYREF = 0x4000
 
 | Context | Description |
 | --- | --- |
-| V, S | The type of the element or contained field MUST be a BRECORD (see section [2.2.28.2](#Section_2.2.28.2.2)). |
+| V, S | The type of the element or contained field MUST be a BRECORD (see section [2.2.28.2](#Section_2.2.28.2)). |
 
 **VT_INT_PTR:**
 
@@ -1040,7 +1040,7 @@ VT_BYREF = 0x4000
 
 | Context | Description |
 | --- | --- |
-| V, S | The type of the element or contained field MUST be a SAFEARRAY (see section [2.2.30.10](#Section_2.2.30)). |
+| V, S | The type of the element or contained field MUST be a SAFEARRAY (see section [2.2.30.10](#Section_2.2.30.10)). |
 
 **VT_BYREF:**
 
@@ -1125,7 +1125,7 @@ Hex value is 0x0000000D.
 
 Element marshaling size in bytes: 4
 
-**SF_DISPATCH:** The type of the elements contained in the SAFEARRAY MUST be a pointer to IDispatch (see section [3.1.4](#Section_3.9.4)).
+**SF_DISPATCH:** The type of the elements contained in the SAFEARRAY MUST be a pointer to IDispatch (see section [3.1.4](#Section_3.1.4)).
 
 Hex value is 0x00000009.
 
@@ -1152,7 +1152,7 @@ Element marshaling size in bytes: 4
 <a id="Section_2.2.9"></a>
 ### 2.2.9 ADVFEATUREFLAGS Advanced Feature Flags
 
-The following values are used in the field **fFeatures** of a [SAFEARRAY (section 2.2.30.10)](#Section_2.2.30) data type.
+The following values are used in the field **fFeatures** of a [SAFEARRAY (section 2.2.30.10)](#Section_2.2.30.10) data type.
 
 typedef enum tagADVFEATUREFLAGS
 
@@ -1200,7 +1200,7 @@ FADF_VARIANT = 0x0800
 
 **FADF_UNKNOWN:** The SAFEARRAY MUST contain an array of pointers to IUnknown.
 
-**FADF_DISPATCH:** The SAFEARRAY MUST contain an array of pointers to IDispatch (see section [3.1.4](#Section_3.9.4)).
+**FADF_DISPATCH:** The SAFEARRAY MUST contain an array of pointers to IDispatch (see section [3.1.4](#Section_3.1.4)).
 
 **FADF_VARIANT:** The SAFEARRAY MUST contain an array of VARIANT instances.
 
@@ -1313,7 +1313,7 @@ FUNC_DISPATCH = 4
 
 } FUNCKIND;
 
-**FUNC_PUREVIRTUAL:** MUST be set if the method described by the **FUNCDESC** structure is a member of an [**interface**](#gt_interface) whose associated TYPEKIND value is TKIND_INTERFACE (as specified in section [2.2.17](#Section_3.7.1.2)).
+**FUNC_PUREVIRTUAL:** MUST be set if the method described by the **FUNCDESC** structure is a member of an [**interface**](#gt_interface) whose associated TYPEKIND value is TKIND_INTERFACE (as specified in section [2.2.17](#Section_2.2.17)).
 
 **FUNC_STATIC:** MUST be set if the method described by the **FUNCDESC** structure is a method member of the module defined with the [**automation scope**](#gt_automation-scope) (as specified in section [2.2.49.9](#Section_2.2.49.9)).
 
@@ -1351,7 +1351,7 @@ IMPLTYPEFLAG_FDEFAULTVTABLE = 0x8
 <a id="Section_2.2.14"></a>
 ### 2.2.14 INVOKEKIND Function Invocation Constants
 
-The INVOKEKIND enumeration values are used in the **invkind** field of a [FUNCDESC (section 2.2.42)](#Section_2.2.42) to specify the way that a method is invoked using [IDispatch::Invoke (section 3.1.4.4)](#Section_3.1.4.4). They are also used in the [ITypeInfo2::GetFuncIndexOfMemId](#Section_3.9.4.3), [ITypeInfo::GetDllEntry](#Section_3.7.4.9) and [ITypeComp::Bind](#Section_3.5.4.2) methods to distinguish between properties and [**property**](#gt_property) accessor methods that have the same [MEMBERID (section 2.2.35)](#Section_2.2.35) but are invoked differently.
+The INVOKEKIND enumeration values are used in the **invkind** field of a [FUNCDESC (section 2.2.42)](#Section_2.2.42) to specify the way that a method is invoked using [IDispatch::Invoke (section 3.1.4.4)](#Section_3.1.4.4). They are also used in the [ITypeInfo2::GetFuncIndexOfMemId](#Section_3.9.4.3), [ITypeInfo::GetDllEntry](#Section_3.7.4.9) and [ITypeComp::Bind](#Section_3.5.4.1) methods to distinguish between properties and [**property**](#gt_property) accessor methods that have the same [MEMBERID (section 2.2.35)](#Section_2.2.35) but are invoked differently.
 
 Fields and parameters that contain function invocation constants MUST contain a single INVOKEKIND value, and MUST NOT contain bitwise combinations of multiple INVOKEKIND values.
 
@@ -1479,7 +1479,7 @@ TYPEFLAG_FPROXY = 0x4000
 
 **TYPEFLAG_FDUAL:** MUST be set if the type was declared with the **[dual]** attribute (see section [2.2.49.4.2](#Section_2.2.49.4.2)).
 
-**TYPEFLAG_FNONEXTENSIBLE:** MUST be set if the type was declared with the **[nonextensible]** attribute (see section [2.2.49.4](#Section_2.2.49.4.3)).
+**TYPEFLAG_FNONEXTENSIBLE:** MUST be set if the type was declared with the **[nonextensible]** attribute (see section [2.2.49.4](#Section_2.2.49.4)).
 
 **TYPEFLAG_FOLEAUTOMATION:** MUST be set if the type is a [**DCOM interface**](#gt_dcom-interface) that was declared with the **[oleautomation]** or **[dual]** attributes (see section 2.2.49.4). MUST NOT be set if the type is a [**dispinterface**](#gt_dispinterface).
 
@@ -1685,7 +1685,7 @@ SYS_WIN64 = 3
 <a id="Section_2.2.22"></a>
 ### 2.2.22 DESCKIND Name Description Constants
 
-The DESCKIND Name Description Constants enumeration values are used by the [ITypeComp::Bind](#Section_3.5.4.2) method to indicate the kind of element to which a name has been bound, as specified in section 3.5.4.1.
+The DESCKIND Name Description Constants enumeration values are used by the [ITypeComp::Bind](#Section_3.5.4.1) method to indicate the kind of element to which a name has been bound, as specified in section 3.5.4.1.
 
 The name description constants are defined in the DESCKIND enumeration.
 
@@ -1871,7 +1871,7 @@ A BRECORD is the type used for the representation of [**UDTs**](#gt_user-defined
 <a id="Section_2.2.28.2.1"></a>
 ##### 2.2.28.2.1 _wireBRECORD
 
-The _wireBRECORD structure is the wire representation of a collection of [**UDTs**](#gt_user-defined-type-udt) of the same type. This representation MUST be used when the UDTs appear inside a [SAFEARRAY (section 2.2.30.10)](#Section_2.2.30) or inside a [VARIANT (section 2.2.29.2)](#Section_2.2.29.2). Otherwise, the UDTs MUST be [**NDR**](#gt_network-data-representation-ndr)-marshaled as specified by their [**IDL**](#gt_interface-definition-language-idl). For more information, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 14.
+The _wireBRECORD structure is the wire representation of a collection of [**UDTs**](#gt_user-defined-type-udt) of the same type. This representation MUST be used when the UDTs appear inside a [SAFEARRAY (section 2.2.30.10)](#Section_2.2.30.10) or inside a [VARIANT (section 2.2.29.2)](#Section_2.2.29.2). Otherwise, the UDTs MUST be [**NDR**](#gt_network-data-representation-ndr)-marshaled as specified by their [**IDL**](#gt_interface-definition-language-idl). For more information, see [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 14.
 
 typedef struct _wireBRECORD {
 
@@ -2268,7 +2268,7 @@ ULONG Size;
 
 **Size:** The number of BRECORD elements in the aRecord array. This MUST be set to 1.
 
-**aRecord:** MUST be the collection of UDTs as specified in BRECORD (see section [2.2.28.2](#Section_2.2.28.2.2)).
+**aRecord:** MUST be the collection of UDTs as specified in BRECORD (see section [2.2.28.2](#Section_2.2.28.2)).
 
 The **Size** field of this type MUST be marshaled as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 14, with the exception that it MUST be marshaled by using a little-endian data representation, regardless of the data representation format label. For more information, see [C706] section 14.2.5.
 
@@ -2508,7 +2508,7 @@ DWORD Lcid;
 
 **Lcid:** MUST be set to the locale ID of the UDT's automation scope (see section 2.2.49.2).
 
-RecordInfoData structures allow a client and a server to fully specify the identity of the UDT type being marshaled in the containing [BRECORD (section 2.2.28.2)](#Section_2.2.28.2.2). The client and the server MUST be able to reference the same type definition, by sharing through an unspecified mechanism a consistent view of the IDL automation scope of the UDT.<13>
+RecordInfoData structures allow a client and a server to fully specify the identity of the UDT type being marshaled in the containing [BRECORD (section 2.2.28.2)](#Section_2.2.28.2). The client and the server MUST be able to reference the same type definition, by sharing through an unspecified mechanism a consistent view of the IDL automation scope of the UDT.<13>
 
 Data of this type MUST be marshaled as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) section 14, with the exception that it MUST be marshaled by using a little-endian data representation, regardless of the data representation format label. For more information, see [C706] section 14.2.5.
 
@@ -2628,7 +2628,7 @@ A type MUST NOT have more than one member with the same MEMBERID, unless the mem
 <a id="Section_2.2.35.1"></a>
 #### 2.2.35.1 Reserved MEMBERIDs
 
-The following [MEMBERIDs](#Section_2.2.35) are defined by the OLE Automation Protocol. These MEMBERIDs are reserved and are meant to provide common, well-known MEMBERIDs that are associated with methods that have similar semantics across all [**automation server**](#gt_automation-server) implementations. When an automation server needs to provide MEMBERID references that have specific semantics that map to one from the set below, they MUST use the MEMBERIDs specified in the following table.
+The following [MEMBERIDs](#Section_2.2.35.1) are defined by the OLE Automation Protocol. These MEMBERIDs are reserved and are meant to provide common, well-known MEMBERIDs that are associated with methods that have similar semantics across all [**automation server**](#gt_automation-server) implementations. When an automation server needs to provide MEMBERID references that have specific semantics that map to one from the set below, they MUST use the MEMBERIDs specified in the following table.
 
 | Constant/value | Description |
 | --- | --- |
@@ -2675,7 +2675,7 @@ USHORT vt;
 
 } TYPEDESC;
 
-**_tdUnion:** MUST contain an instance of the type, according to the [VARENUM](#Section_3fe7db9f58034dc49d145425d3f5461f) value provided in the **vt** field.
+**_tdUnion:** MUST contain an instance of the type, according to the [VARENUM](#Section_2.2.7) value provided in the **vt** field.
 
 **lptdesc:** MUST refer to a TYPEDESC that specifies the element type. If the ELEMDESC is contained in a [VARDESC](#Section_2.2.43) that describes an appobject [**coclass**](#gt_coclass), the TYPEDESC MUST specify the type of the coclass.
 
@@ -2760,7 +2760,7 @@ PARAMDESC paramdesc;
 <a id="Section_2.2.42"></a>
 ### 2.2.42 FUNCDESC
 
-The FUNCDESC structure is used by an [ITypeComp server](#Section_3.5) or [ITypeInfo server](#Section_3.7) to describe a method, as specified in sections [3.5.4.1](#Section_3.5.4.2) and [3.7.4.3](#Section_2.2.42).
+The FUNCDESC structure is used by an [ITypeComp server](#Section_3.5) or [ITypeInfo server](#Section_3.7) to describe a method, as specified in sections [3.5.4.1](#Section_3.5.4.1) and [3.7.4.3](#Section_3.7.4.3).
 
 typedef struct tagFUNCDESC {
 
@@ -2810,7 +2810,7 @@ The lprgelemdescParam array MUST NOT include parameters that are declared with t
 
 **cParamsOpt:** SHOULD be set to the number of optional VARIANT parameters<21>. MUST be set to -1 if the method was declared with the [vararg] attribute. Otherwise, MUST be set to 0.
 
-**oVft:** MUST be set to either 0 or to the [**opnum**](#gt_opnum) of the interface method multiplied by the system pointer size value (as specified in sections [2.2.44](#Section_2.2.44) and [3.11.1](#Section_3.13.4.2)).
+**oVft:** MUST be set to either 0 or to the [**opnum**](#gt_opnum) of the interface method multiplied by the system pointer size value (as specified in sections [2.2.44](#Section_2.2.44) and [3.11.1](#Section_3.11.1)).
 
 **cReserved2:** MUST be set to 0, and ignored on receipt.
 
@@ -2821,7 +2821,7 @@ The lprgelemdescParam array MUST NOT include parameters that are declared with t
 <a id="Section_2.2.43"></a>
 ### 2.2.43 VARDESC
 
-The VARDESC structure is used by an [ITypeInfo server](#Section_3.7) or [ITypeComp server](#Section_3.5) to describe a data member, constant, or [**ODL dispinterface**](#gt_odl-dispinterface) property, as specified in sections [3.5.4.1](#Section_3.5.4.2) and [3.7.4.4](#Section_3.7.4.4).
+The VARDESC structure is used by an [ITypeInfo server](#Section_3.7) or [ITypeComp server](#Section_3.5) to describe a data member, constant, or [**ODL dispinterface**](#gt_odl-dispinterface) property, as specified in sections [3.5.4.1](#Section_3.5.4.1) and [3.7.4.4](#Section_3.7.4.4).
 
 typedef struct tagVARDESC {
 
@@ -2875,7 +2875,7 @@ VARKIND varkind;
 <a id="Section_2.2.44"></a>
 ### 2.2.44 TYPEATTR
 
-The TYPEATTR structure is used by an [ITypeInfo server](#Section_3.7) to describe a type, as specified in section [3.7.4.1](#Section_2.2.44).
+The TYPEATTR structure is used by an [ITypeInfo server](#Section_3.7) to describe a type, as specified in section [3.7.4.1](#Section_3.7.4.1).
 
 typedef struct tagTYPEATTR {
 
@@ -2946,7 +2946,7 @@ WORD wReserved6;
 | Variable | TKIND_RECORD | MUST be set to an implementation-specific value<25> that specifies the size in bytes, of the structure. |
 | Variable | TKIND_ALIAS | MUST be set to an implementation-specific value<26> that specifies the size, in bytes, of the predefined type for which this type is an alias. |
 
-**typekind:** MUST be set to a value of the [TYPEKIND](#Section_3.7.1.2) enumeration, as specified in section 2.2.17.
+**typekind:** MUST be set to a value of the [TYPEKIND](#Section_2.2.17) enumeration, as specified in section 2.2.17.
 
 **cFuncs:** MUST be set to a value specified by the value of **typekind**.
 
@@ -2980,7 +2980,7 @@ WORD wReserved6;
 
 **cbAlignment:** MUST be set to 0 or to an implementation-specific positive value.<27>
 
-**wTypeFlags:** MUST be either a combination of the [TYPEFLAGS](#Section_2.2.16) bit flags that are specified in section 2.2.16, or 0.
+**wTypeFlags:** MUST be either a combination of the [TYPEFLAGS](#Section_2.2.13) bit flags that are specified in section 2.2.16, or 0.
 
 **wMajorVerNum:** MUST be set to the major version number of the [**automation scope**](#gt_automation-scope) that is associated with the ITypeLib server, as specified in section 2.2.49.2.
 
@@ -2995,7 +2995,7 @@ WORD wReserved6;
 <a id="Section_2.2.45"></a>
 ### 2.2.45 TLIBATTR
 
-The TLIBATTR structure is used to specify the attributes of an [ITypeLib server](#Section_3.11), as specified in section [3.11.4](#Section_3.9.4).
+The TLIBATTR structure is used to specify the attributes of an [ITypeLib server](#Section_3.11), as specified in section [3.11.4](#Section_3.11.4).
 
 typedef struct tagTLIBATTR {
 
@@ -3015,7 +3015,7 @@ unsigned short wLibFlags;
 
 *LPTLIBATTR;
 
-**guid:** MUST be set to the [**GUID**](#gt_globally-unique-identifier-guid) of the [**automation scope**](#gt_automation-scope) that is associated with the ITypeLib server, as specified in section [2.2.49.1](#Section_2.2.49.10).
+**guid:** MUST be set to the [**GUID**](#gt_globally-unique-identifier-guid) of the [**automation scope**](#gt_automation-scope) that is associated with the ITypeLib server, as specified in section [2.2.49.1](#Section_2.2.49.1).
 
 **lcid:** MUST be set to the [**LCID**](#gt_language-code-identifier-lcid) of the automation scope that is associated with the ITypeLib server, as specified in section 2.2.49.1.
 
@@ -3051,7 +3051,7 @@ VARIANT varValue;
 <a id="Section_2.2.47"></a>
 ### 2.2.47 CUSTDATA
 
-The CUSTDATA structure is used by an [ITypeInfo2 server](#Section_3.9) or [ITypeLib2 server](#Section_3.13) to retrieve custom data items, as specified in sections [3.9.4](#Section_3.9.4) and [3.13.4](#Section_3.9.4).
+The CUSTDATA structure is used by an [ITypeInfo2 server](#Section_3.9) or [ITypeLib2 server](#Section_3.13) to retrieve custom data items, as specified in sections [3.9.4](#Section_3.9.4) and [3.13.4](#Section_3.13.4).
 
 typedef struct tagCUSTDATA {
 
@@ -3461,7 +3461,7 @@ The constant value associated with a [custom] attribute MUST be a value that can
 <a id="Section_2.2.49.3"></a>
 #### 2.2.49.3 Automation-Compatible Types
 
-The OLE Automation Protocol restricts the types of parameters that can be used in the definition of an [**automation interface**](#gt_automation-interface) (see section [2.2.49.4](#Section_2.2.49.4.3)).
+The OLE Automation Protocol restricts the types of parameters that can be used in the definition of an [**automation interface**](#gt_automation-interface) (see section [2.2.49.4](#Section_2.2.49.4)).
 
 type-attribute = rpc-defined /
 
@@ -3561,7 +3561,7 @@ The methods of an [**Automation Interface Definition Language (AIDL) interface**
 
 **uuid-attr**: Specifies a [**GUID**](#gt_globally-unique-identifier-guid) that MUST identify the type. Any automation-compatible constructed types (enums, structs, or unions) that are not declared with a specifying GUID cannot be retrieved using [ITypeLib::GetTypeInfoOfGuid (section 3.11.4.4)](#Section_3.11.4.4).
 
-**help-attr**: Specifies information associated with the type that can be retrieved using [ITypeLib::GetDocumentation (section 3.11.4.7)](#Section_3.11.4.7) or [ITypeInfo::GetDocumentation (section 3.7.4.8)](#Section_3.13.4.3).
+**help-attr**: Specifies information associated with the type that can be retrieved using [ITypeLib::GetDocumentation (section 3.11.4.7)](#Section_3.11.4.7) or [ITypeInfo::GetDocumentation (section 3.7.4.8)](#Section_3.7.4.8).
 
 **kw-public**: Specifies that the element is an alias declared with the typedef keyword and explicitly included in an [**automation scope**](#gt_automation-scope).
 
@@ -3575,7 +3575,7 @@ The methods of an [**Automation Interface Definition Language (AIDL) interface**
 The OLE Automation Protocol allows interfaces to specify two degrees of Automation support:
 
 - Automation-compatible interfaces are interfaces whose methods use only automation-compatible types.
-- [**automation interfaces**](#gt_automation-interface) are interfaces that define an automation behavior. That is, servers that implement the automation interfaces MUST provide access to the automation functionality through an implementation of IDispatch (see section [3.1.4](#Section_3.9.4)).
+- [**automation interfaces**](#gt_automation-interface) are interfaces that define an automation behavior. That is, servers that implement the automation interfaces MUST provide access to the automation functionality through an implementation of IDispatch (see section [3.1.4](#Section_3.1.4)).
 In order for an interface to be used as an automation-compatible type (see section [2.2.49.3](#Section_2.2.49.3)), it MUST be defined as an automation-compatible interface.
 
 All automation interfaces MUST be Automation-compatible.
@@ -3612,7 +3612,7 @@ An automation-compatible interface MUST be derived from IDispatch or IUnknown, M
 <a id="Section_2.2.49.4.2"></a>
 ##### 2.2.49.4.2 Dual Interfaces
 
-A [**dual interface**](#gt_dual-interface) is an [**automation interface**](#gt_automation-interface) that allows a server to expose its functionality both to [**automation clients**](#gt_automation-client) and to regular DCOM clients. A dual interface MUST derive from IDispatch (see section [3.1.4](#Section_3.9.4)), and be Automation compatible (that is, its methods MUST have only automation-compatible parameters and return values).
+A [**dual interface**](#gt_dual-interface) is an [**automation interface**](#gt_automation-interface) that allows a server to expose its functionality both to [**automation clients**](#gt_automation-client) and to regular DCOM clients. A dual interface MUST derive from IDispatch (see section [3.1.4](#Section_3.1.4)), and be Automation compatible (that is, its methods MUST have only automation-compatible parameters and return values).
 
 To define an interface as a dual interface, the **dual** attribute MUST be specified when defining the interface.
 
@@ -3806,7 +3806,7 @@ The conceptual signature of an ODL operation (a method call, or setting or retri
 
 Any [**AIDL interface**](#gt_automation-interface-definition-language-aidl-interface) method that has the "propget", "propput", or "propputref" method MUST map to a conceptual ODL property. If only a "propget" method exists for the property, it MUST map to a "readonly" conceptual ODL property.
 
-- For an example illustrating this, see section [4.1](#Section_4.5).
+- For an example illustrating this, see section [4.1](#Section_4.1).
 - AIDL supports the definition of indexed properties, which MUST NOT be expressed as ODL properties.
 <a id="Section_2.2.49.7.2"></a>
 ##### 2.2.49.7.2 Method Equivalence
@@ -3817,7 +3817,7 @@ An AIDL method with a parameter with the **lcid** attribute MUST map to an ODL m
 
 An AIDL method that has a parameter with the **retval** attribute MUST map to an ODL method whose return type is the type of the *retval* parameter, with one level of indirection removed. The argument types of the ODL method MUST correspond to the arguments in the AIDL method, with the *retval* parameter and any *lcid* parameter removed.
 
-For an example illustrating this, see section [4.2](#Section_2.2.49.7.2).
+For an example illustrating this, see section [4.2](#Section_4.2).
 
 <a id="Section_2.2.49.8"></a>
 #### 2.2.49.8 Coclass Specifications
@@ -3991,7 +3991,7 @@ The string specified in the importlib statement is an implementation-specific st
 <a id="Section_2.2.50"></a>
 ### 2.2.50 String Handling
 
-The following sections specify the ways in which strings are compared and stored in the [ITypeComp::Bind](#Section_3.5.4.2), [ITypeComp::BindType](#Section_3.5.4.2), [ITypeLib::IsName](#Section_3.11.4.8), and [ITypeLib::FindName](#Section_3.11.4.9) methods.
+The following sections specify the ways in which strings are compared and stored in the [ITypeComp::Bind](#Section_3.5.4.1), [ITypeComp::BindType](#Section_3.5.4.2), [ITypeLib::IsName](#Section_3.11.4.8), and [ITypeLib::FindName](#Section_3.11.4.9) methods.
 
 <a id="Section_2.2.50.1"></a>
 #### 2.2.50.1 String Equivalence
@@ -5300,7 +5300,7 @@ Methods in RPC Opnum Order
 | Method | Description |
 | --- | --- |
 | [GetTypeInfoCount](#Section_3.1.4.1) | The GetTypeInfoCount method specifies whether the [**automation server**](#gt_automation-server) provides type description information. Opnum: 3 |
-| [GetTypeInfo](#Section_3.1.4.1) | The GetTypeInfo method provides access to the type description information that is exposed by the automation server. Opnum: 4 |
+| [GetTypeInfo](#Section_3.1.4.2) | The GetTypeInfo method provides access to the type description information that is exposed by the automation server. Opnum: 4 |
 | [GetIDsOfNames](#Section_3.1.4.3) | The GetIDsOfNames method maps a single member name (method or property name), and an optional set of argument names, to a corresponding set of integer [**DISPIDs**](#gt_dispatch-id-dispid), which can be used on subsequent calls to [IDispatch::Invoke](#Section_3.1.4.4). Opnum: 5 |
 | Invoke | The Invoke method provides access to properties and methods that are exposed by the automation server. Opnum: 6 |
 
@@ -5797,7 +5797,7 @@ None.
 <a id="Section_3.5.3"></a>
 ### 3.5.3 Initialization
 
-The server MUST initialize its [ITypeLib](#Section_3.11) or [ITypeInfo](#Section_3.7) reference and maintain the reference over its lifetime. The ITypeLib or ITypeInfo instance referenced by the [ITypeComp server](#Section_3.5) MUST be initialized as specified in section [3.11.3](#Section_3.11) or section [3.7.3](#Section_3.7).
+The server MUST initialize its [ITypeLib](#Section_3.11) or [ITypeInfo](#Section_3.7) reference and maintain the reference over its lifetime. The ITypeLib or ITypeInfo instance referenced by the [ITypeComp server](#Section_3.5) MUST be initialized as specified in section [3.11.3](#Section_3.11.3) or section [3.7.3](#Section_3.7.3).
 
 <a id="Section_3.5.4"></a>
 ### 3.5.4 Message Processing Events and Sequencing Rules
@@ -5810,7 +5810,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [Bind](#Section_3.5.4.2) | The Bind method retrieves a type member whose name corresponds to a specified string. Opnum: 3 |
+| [Bind](#Section_3.5.4.1) | The Bind method retrieves a type member whose name corresponds to a specified string. Opnum: 3 |
 | [BindType](#Section_3.5.4.2) | The BindType method retrieves a reference to an [**Automation type description**](#gt_automation-type-description) whose name corresponds to a specified string. Opnum: 4 |
 
 All methods MUST NOT throw exceptions. All return values use the NTSTATUS numbering space; in particular, a value of 0x00000000 indicates success, and any other return value indicates an error. All error values are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) and MUST be treated the same, unless specified otherwise.
@@ -5993,7 +5993,7 @@ None.
 <a id="Section_3.6.4"></a>
 ### 3.6.4 Message Processing Events and Sequencing Rules
 
-To retrieve a reference to an [ITypeComp server](#Section_3.5), a client MUST call [ITypeLib::GetTypeComp (section 3.11.4.6)](#Section_3.11.4.6), [ITypeInfo::GetTypeComp (section 3.7.4.2)](#Section_3.7.4.2), or [ITypeComp::Bind (section 3.5.4.1)](#Section_3.5.4.2).
+To retrieve a reference to an [ITypeComp server](#Section_3.5), a client MUST call [ITypeLib::GetTypeComp (section 3.11.4.6)](#Section_3.11.4.6), [ITypeInfo::GetTypeComp (section 3.7.4.2)](#Section_3.7.4.2), or [ITypeComp::Bind (section 3.5.4.1)](#Section_3.5.4.1).
 
 The protocol specifies no additional sequencing rules.
 
@@ -6025,7 +6025,7 @@ An [**automation type description**](#gt_automation-type-description) server pro
 Every [**automation type description**](#gt_automation-type-description) server maintains the following data elements:
 
 - The name of the type.
-- A [TYPEKIND](#Section_3.7.1.2) value that specifies the type that the automation type description describes, as specified in section 2.2.17.
+- A [TYPEKIND](#Section_2.2.17) value that specifies the type that the automation type description describes, as specified in section 2.2.17.
 - A value or structure that specifies the attributes declared with the type in the [**IDL**](#gt_interface-definition-language-idl), as specified in section [2.2.49](#Section_2.2.49).
 - A value that specifies the size, in bytes, of an instance of the type.
 - A reference to the [**automation type library**](#gt_automation-type-library) that contains the automation type description in its type information table.
@@ -6036,7 +6036,7 @@ An automation type description can include the following tables of member elemen
 A method table specifies the methods that are defined by an interface. Each element of a method table includes the following:
 
 - The name of the method.
-- The [MEMBERID](#Section_2.2.35) of the method.
+- The [MEMBERID](#Section_2.2.35.1) of the method.
 - A value or structure that specifies the attributes declared with the method in the IDL (as specified in section 2.2.49) and other method information, as specified in section [2.2.42](#Section_2.2.42).
 - An [ELEMDESC](#Section_2.2.41) that specifies the return type of the method.
 - A parameter table (see below) that specifies the parameters declared with the method in the IDL, as specified in section [2.2.49.5](#Section_2.2.49.5).
@@ -6059,14 +6059,14 @@ A parameter table contains references to method parameters. The order of the ele
 <a id="Section_3.7.1.2"></a>
 #### 3.7.1.2 TYPEKIND Dependent Automation Type Description Elements
 
-Every [**automation type description**](#gt_automation-type-description) maintains the following data elements specified by its [TYPEKIND](#Section_3.7.1.2) value.
+Every [**automation type description**](#gt_automation-type-description) maintains the following data elements specified by its [TYPEKIND](#Section_2.2.17) value.
 
 | TYPEKIND value | Type description elements |
 | --- | --- |
 | TKIND_ENUM | A data member table that specifies the values defined by the enumeration. |
 | TKIND_RECORD and TKIND_UNION | A data member table that specifies the fields of the structure or union. |
 | TKIND_INTERFACE | A method table that specifies the method members of the interface. An interface table that specifies the interfaces inherited by the described interface. A reference to the [**partner dispinterface**](#gt_partner-dispinterface) if the described type is a [**dual interface**](#gt_dual-interface) (see section [2.2.49.4.2](#Section_2.2.49.4.2)). |
-| TKIND_DISPATCH | A method table that specifies the method members defined by the [**dispinterface**](#gt_dispinterface). If the type is an [**ODL dispinterface**](#gt_odl-dispinterface), the method table includes the elements defined with the "methods" keyword. If the type is a partner dispinterface, the method table includes the methods defined by the dual interface. If the type is a [**reference dispinterface**](#gt_reference-dispinterface), the method table is empty. A "dispatch" method table that specifies the method members available through [ITypeComp::Bind](#Section_3.5.4.2). If the type is an ODL dispinterface, the dispatch method table includes the elements defined with the "methods" keyword. If the type is a reference dispinterface, the dispatch method table includes all members defined by its referenced [**DCOM interface**](#gt_dcom-interface) and its base interfaces (including IUnknown), and includes separate entries for property accessor methods with the same [MEMBERID](#Section_2.2.35) (see 2.2.35). If the type is a partner dispinterface, the dispatch method table includes all members defined by the dual interface or its base interfaces (including IUnknown), and includes separate entries for property accessor methods with the same MEMBERID (see section 2.2.35). A data member table that specifies the data members defined by the dispinterface and available through [IDispatch::Invoke](#Section_3.1.4.4). If the type is an ODL dispinterface, the data member table includes the elements defined with the properties keyword. Otherwise, it is empty. An interface table that specifies a single interface. If the type is an ODL dispinterface or a partner dispinterface, the specified interface is IDispatch. If the type is a reference dispinterface, the specified interface is its referenced DCOM interface (see section [2.2.49.4.3](#Section_2.2.49.4.3).) A reference to the [**partner interface**](#gt_partner-interface) if the described type is a dual interface (see section 2.2.49.4.2). |
+| TKIND_DISPATCH | A method table that specifies the method members defined by the [**dispinterface**](#gt_dispinterface). If the type is an [**ODL dispinterface**](#gt_odl-dispinterface), the method table includes the elements defined with the "methods" keyword. If the type is a partner dispinterface, the method table includes the methods defined by the dual interface. If the type is a [**reference dispinterface**](#gt_reference-dispinterface), the method table is empty. A "dispatch" method table that specifies the method members available through [ITypeComp::Bind](#Section_3.5.4.1). If the type is an ODL dispinterface, the dispatch method table includes the elements defined with the "methods" keyword. If the type is a reference dispinterface, the dispatch method table includes all members defined by its referenced [**DCOM interface**](#gt_dcom-interface) and its base interfaces (including IUnknown), and includes separate entries for property accessor methods with the same [MEMBERID](#Section_2.2.35.1) (see 2.2.35). If the type is a partner dispinterface, the dispatch method table includes all members defined by the dual interface or its base interfaces (including IUnknown), and includes separate entries for property accessor methods with the same MEMBERID (see section 2.2.35). A data member table that specifies the data members defined by the dispinterface and available through [IDispatch::Invoke](#Section_3.1.4.4). If the type is an ODL dispinterface, the data member table includes the elements defined with the properties keyword. Otherwise, it is empty. An interface table that specifies a single interface. If the type is an ODL dispinterface or a partner dispinterface, the specified interface is IDispatch. If the type is a reference dispinterface, the specified interface is its referenced DCOM interface (see section [2.2.49.4.3](#Section_2.2.49.4.3).) A reference to the [**partner interface**](#gt_partner-interface) if the described type is a dual interface (see section 2.2.49.4.2). |
 | TKIND_COCLASS | An interface table that specifies the interfaces and dispinterfaces defined or referenced by the [**coclass**](#gt_coclass). |
 | TKIND_MODULE | A method table that specifies the local-only methods defined by the module. A data member table that specifies the symbolic constants and static variables defined by the module (see section [2.2.49.9](#Section_2.2.49.9)). |
 | TKIND_ALIAS | A reference to the [TYPEDESC](#Section_2.2.37) that specifies the predefined type of the alias. |
@@ -6079,7 +6079,7 @@ None.
 <a id="Section_3.7.3"></a>
 ### 3.7.3 Initialization
 
-The server MUST initialize its name, [TYPEKIND](#Section_3.7.1.2), [**automation type library**](#gt_automation-type-library) reference, and [ITypeComp server](#Section_3.5) reference, and specify the size of an instance of the type in bytes. These values MUST NOT change over the [**server's**](#gt_server) lifetime.
+The server MUST initialize its name, [TYPEKIND](#Section_2.2.17), [**automation type library**](#gt_automation-type-library) reference, and [ITypeComp server](#Section_3.5) reference, and specify the size of an instance of the type in bytes. These values MUST NOT change over the [**server's**](#gt_server) lifetime.
 
 The server MUST initialize the representation of the [**IDL**](#gt_interface-definition-language-idl) attributes declared with the type and its implementation-specific documentation values. The attribute representation and documentation values MUST NOT change over the server's lifetime.
 
@@ -6101,16 +6101,16 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetTypeAttr](#Section_2.2.44) | The GetTypeAttr method retrieves a **TYPEATTR** structure that contains information about the type described by the ITypeInfo server. Opnum: 3 |
+| [GetTypeAttr](#Section_3.7.4.1) | The GetTypeAttr method retrieves a **TYPEATTR** structure that contains information about the type described by the ITypeInfo server. Opnum: 3 |
 | [GetTypeComp](#Section_3.7.4.2) | The GetTypeComp method retrieves a reference to the [ITypeComp server](#Section_3.5) instance associated with the ITypeInfo server. Opnum: 4 |
-| [GetFuncDesc](#Section_2.2.42) | The GetFuncDesc method retrieves a [FUNCDESC](#Section_2.2.42) structure that contains information about a member of the ITypeInfo server's method or dispatch method table. Opnum: 5 |
+| [GetFuncDesc](#Section_3.7.4.3) | The GetFuncDesc method retrieves a [FUNCDESC](#Section_2.2.42) structure that contains information about a member of the ITypeInfo server's method or dispatch method table. Opnum: 5 |
 | [GetVarDesc](#Section_3.7.4.4) | The GetVarDesc method retrieves a VARDESC structure that contains information about a member of the ITypeInfo server’s data member table. Opnum: 6 |
 | [GetNames](#Section_3.7.4.5) | The GetNames method retrieves the data member name, or the method and parameter names associated with a specified MEMBERID. Opnum: 7 |
 | [GetRefTypeOfImplType](#Section_3.7.4.6) | The GetRefTypeOfImplType method retrieves the HREFTYPE corresponding to the [**automation type description**](#gt_automation-type-description) of an interface that is inherited, implemented, or referenced by the ITypeInfo server. Opnum: 8 |
 | [GetImplTypeFlags](#Section_3.7.4.7) | The GetImplTypeFlags method retrieves the IMPLTYPEFLAGS values associated with an interface member of a [**coclass**](#gt_coclass). Opnum: 9 |
 | Opnum10NotUsedOnWire | Reserved for local use. Opnum: 10 |
 | Opnum11NotUsedOnWire | Reserved for local use. Opnum: 11 |
-| [GetDocumentation](#Section_3.13.4.3) | The GetDocumentation method retrieves the documentation resources associated with a type member. Opnum: 12 |
+| [GetDocumentation](#Section_3.11.4.7) | The GetDocumentation method retrieves the documentation resources associated with a type member. Opnum: 12 |
 | [GetDllEntry](#Section_3.7.4.9) | The GetDllEntry method retrieves values associated with a local-only method defined in a module. Opnum: 13 |
 | [GetRefTypeInfo](#Section_3.7.4.10) | The GetRefTypeInfo method retrieves an automation type description that describes a type that is inherited or referenced by the ITypeInfo server. Opnum: 14 |
 | Opnum15NotUsedOnWire | Reserved for local use. Opnum: 15 |
@@ -6178,7 +6178,7 @@ HRESULT GetFuncDesc(
 
 );
 
-**index:** MUST equal the ordinal position in the method table (if the type describes a [**DCOM interface**](#gt_dcom-interface) or module) or the dispatch method table (if the type describes a [**dispinterface**](#gt_dispinterface)) of the method whose description is to be returned. The value of index MUST be less than the value of the cFuncs field in the [TYPEATTR (section 2.2.44)](#Section_2.2.44) structure returned by the [GetTypeAttr (section 3.7.4.1)](#Section_2.2.44) method.
+**index:** MUST equal the ordinal position in the method table (if the type describes a [**DCOM interface**](#gt_dcom-interface) or module) or the dispatch method table (if the type describes a [**dispinterface**](#gt_dispinterface)) of the method whose description is to be returned. The value of index MUST be less than the value of the cFuncs field in the [TYPEATTR (section 2.2.44)](#Section_2.2.44) structure returned by the [GetTypeAttr (section 3.7.4.1)](#Section_3.7.4.1) method.
 
 **ppFuncDesc:** MUST be set to a FUNCDESC structure (see section 2.2.42) that contains the data values associated with the specified member of the method or dispatch method table, or NULL if no such member exists.
 
@@ -6208,7 +6208,7 @@ HRESULT GetVarDesc(
 
 );
 
-**index:** MUST equal the data member table index value of the data member whose description is to be returned. The value of index MUST be less than the value of the cVars field in the [TYPEATTR](#Section_2.2.44) structure returned by the GetTypeAttr method, as specified in [3.7.4.1](#Section_2.2.44) and 2.2.44.
+**index:** MUST equal the data member table index value of the data member whose description is to be returned. The value of index MUST be less than the value of the cVars field in the [TYPEATTR](#Section_2.2.44) structure returned by the GetTypeAttr method, as specified in [3.7.4.1](#Section_3.7.4.1) and 2.2.44.
 
 **ppVarDesc:** MUST be set to a VARDESC structure (see section 2.2.43) that contains the data values associated with the specified member of the data member table, or NULL if no such member exists.
 
@@ -6226,7 +6226,7 @@ HRESULT GetVarDesc(
 <a id="Section_3.7.4.5"></a>
 #### 3.7.4.5 ITypeInfo::GetNames (Opnum 7)
 
-The GetNames method retrieves the data member name or the method and parameter names associated with a specified [MEMBERID](#Section_2.2.35).
+The GetNames method retrieves the data member name or the method and parameter names associated with a specified [MEMBERID](#Section_2.2.35.1).
 
 HRESULT GetNames(
 
@@ -6284,15 +6284,15 @@ HRESULT GetRefTypeOfImplType(
 
 **index:** MUST be a nonnegative integer, or -1.
 
-If the ITypeInfo server describes a [**dual interface**](#gt_dual-interface) (see sections [2.2.49.4.2](#Section_2.2.49.4.2) and [3.7.1](#Section_1.3)), the value of index MUST be 0 or -1.
+If the ITypeInfo server describes a [**dual interface**](#gt_dual-interface) (see sections [2.2.49.4.2](#Section_2.2.49.4.2) and [3.7.1](#Section_3.7.1)), the value of index MUST be 0 or -1.
 
-If the ITypeInfo server describes a [**coclass**](#gt_coclass), the value of index MUST be nonnegative and less than the value of the *cImplTypes* field in the [TYPEATTR (section 2.2.44)](#Section_2.2.44) structure returned by the [GetTypeAttr (section 3.7.4.1)](#Section_2.2.44) method.
+If the ITypeInfo server describes a [**coclass**](#gt_coclass), the value of index MUST be nonnegative and less than the value of the *cImplTypes* field in the [TYPEATTR (section 2.2.44)](#Section_2.2.44) structure returned by the [GetTypeAttr (section 3.7.4.1)](#Section_3.7.4.1) method.
 
 For all other ITypeInfo servers, the value of index MUST be 0.
 
 **pRefType:** MUST be set to one of the following values, if index is -1 or specifies an interface table entry.
 
-If the ITypeInfo server describes a dual interface and index is -1, *pRefType* is specified by the [TYPEKIND](#Section_3.7.1.2) value associated with the ITypeInfo server (see section 2.2.44):
+If the ITypeInfo server describes a dual interface and index is -1, *pRefType* is specified by the [TYPEKIND](#Section_2.2.17) value associated with the ITypeInfo server (see section 2.2.44):
 
 TKIND_DISPATCH: MUST be set to the HREFTYPE of the [**partner interface**](#gt_partner-interface).
 
@@ -6320,7 +6320,7 @@ MUST be set to the HREFTYPE of the interface table member in all other cases.
 <a id="Section_3.7.4.7"></a>
 #### 3.7.4.7 ITypeInfo::GetImplTypeFlags (Opnum 9)
 
-The GetImplTypeFlags method retrieves the [IMPLTYPEFLAGS values](#Section_2743c240436242bf9482a910ac1857f7) associated with an interface member of a [**coclass**](#gt_coclass).
+The GetImplTypeFlags method retrieves the [IMPLTYPEFLAGS values](#Section_2.2.13) associated with an interface member of a [**coclass**](#gt_coclass).
 
 HRESULT GetImplTypeFlags(
 
@@ -6364,7 +6364,7 @@ HRESULT GetDocumentation(
 
 );
 
-**memid:** MUST be either the [MEMBERID](#Section_2.2.35) of a method or data member in the binding context of the [ITypeInfo server](#Section_3.7) (see section [3.5.4.1.1](#Section_3.5.4.1.1)), or MEMBERID_NIL (see section [2.2.35.1](#Section_2.2.35.1)).
+**memid:** MUST be either the [MEMBERID](#Section_2.2.35.1) of a method or data member in the binding context of the [ITypeInfo server](#Section_3.7) (see section [3.5.4.1.1](#Section_3.5.4.1.1)), or MEMBERID_NIL (see section [2.2.35.1](#Section_2.2.35.1)).
 
 **refPtrFlags:** MUST be a combination of the bit flags specified in the following table, or 0.
 
@@ -6410,7 +6410,7 @@ HRESULT GetDllEntry(
 
 );
 
-**memid:** MUST be the [MEMBERID](#Section_2.2.35) of a method member of the module defined in the [**automation type library**](#gt_automation-type-library).
+**memid:** MUST be the [MEMBERID](#Section_2.2.35.1) of a method member of the module defined in the [**automation type library**](#gt_automation-type-library).
 
 **invKind:** MUST be a value of the [INVOKEKIND (section 2.2.14)](#Section_2.2.14) enumeration that specifies a single property accessor method, if *memid* corresponds to a property with multiple accessors.
 
@@ -6500,7 +6500,7 @@ HRESULT GetMops(
 
 );
 
-**memid:** MUST be a nonzero [MEMBERID](#Section_2.2.35).
+**memid:** MUST be a nonzero [MEMBERID](#Section_2.2.35.1).
 
 **pBstrMops:** MUST be set to a NULL BSTR.
 
@@ -6523,7 +6523,7 @@ HRESULT GetContainingTypeLib(
 
 **ppTLib:** MUST be set to a reference to an ITypeLib server instance (see section 3.11).
 
-**pIndex:** MUST be set to the index value of the current [**automation type description**](#gt_automation-type-description) within the type information table (see section [3.11.1](#Section_3.13.4.2)).
+**pIndex:** MUST be set to the index value of the current [**automation type description**](#gt_automation-type-description) within the type information table (see section [3.11.1](#Section_3.11.1)).
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure, defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1. The severity bit in the structure identifies the following conditions:
 
@@ -6562,15 +6562,15 @@ None.
 
 To retrieve a reference to an [ITypeInfo server](#Section_3.7), a client MUST do one of the following:
 
-- If the client holds a reference to an [**automation server**](#gt_automation-server) IDispatch implementation, it can call [IDispatch::GetTypeInfo](#Section_3.1.4.1) (see section 3.1.4.2)
-- If the client holds a reference to an [ITypeComp server](#Section_3.5), it can call [ITypeComp::Bind](#Section_3.5.4.2) (see section 3.5.4.1) or [ITypeComp::BindType](#Section_3.5.4.2) (see section 3.5.4.2)
+- If the client holds a reference to an [**automation server**](#gt_automation-server) IDispatch implementation, it can call [IDispatch::GetTypeInfo](#Section_3.1.4.2) (see section 3.1.4.2)
+- If the client holds a reference to an [ITypeComp server](#Section_3.5), it can call [ITypeComp::Bind](#Section_3.5.4.1) (see section 3.5.4.1) or [ITypeComp::BindType](#Section_3.5.4.2) (see section 3.5.4.2)
 - If the client holds a reference to another ITypeInfo server, it can call [ITypeInfo::GetRefTypeInfo](#Section_3.7.4.10) (see section 3.7.4.10)
 - If the client holds a reference to an [ITypeLib server](#Section_3.11), it can call [ITypeLib::GetTypeInfo](#Section_3.11.4.2) (see section 3.11.4.2), [ITypeLib::GetTypeInfoOfGuid](#Section_3.11.4.4) (see section 3.11.4.4), or [ITypeLib::FindName](#Section_3.11.4.9) (see section 3.11.4.9)
-A client MUST call [ITypeInfo::GetTypeAttr (section 3.7.4.1)](#Section_2.2.44) to retrieve the essential characteristics of the type. To iterate over the data and method members of the type, the client MUST use the data retrieved in [TYPEATTR](#Section_2.2.44) and then call [ITypeInfo::GetVarDesc (section 3.7.4.4)](#Section_3.7.4.4) and [ITypeInfo::GetFuncDesc (section 3.7.4.3)](#Section_2.2.42).
+A client MUST call [ITypeInfo::GetTypeAttr (section 3.7.4.1)](#Section_3.7.4.1) to retrieve the essential characteristics of the type. To iterate over the data and method members of the type, the client MUST use the data retrieved in [TYPEATTR](#Section_2.2.44) and then call [ITypeInfo::GetVarDesc (section 3.7.4.4)](#Section_3.7.4.4) and [ITypeInfo::GetFuncDesc (section 3.7.4.3)](#Section_3.7.4.3).
 
 To discover inheritance relationships for interfaces or the set of nonsource and source interfaces supported by a [**coclass**](#gt_coclass), a client MUST enumerate the referenced types of an ITypeInfo server using [ITypeInfo::GetRefTypeOfImplType (section 3.7.4.6)](#Section_3.7.4.6) and ITypeInfo::GetRefTypeInfo (section 3.7.4.10).
 
-To retrieve string information related to the ITypeInfo server, the client MUST call [ITypeInfo::GetDocumentation (section 3.7.4.8)](#Section_3.13.4.3) or [ITypeInfo::GetNames (section 3.7.4.5)](#Section_3.7.4.5).
+To retrieve string information related to the ITypeInfo server, the client MUST call [ITypeInfo::GetDocumentation (section 3.7.4.8)](#Section_3.7.4.8) or [ITypeInfo::GetNames (section 3.7.4.5)](#Section_3.7.4.5).
 
 <a id="Section_3.8.5"></a>
 ### 3.8.5 Timer Events
@@ -6610,14 +6610,14 @@ None.
 <a id="Section_3.9.3"></a>
 ### 3.9.3 Initialization
 
-The server MUST initialize all data objects that are required of an [ITypeInfo server](#Section_3.7), as specified in section [3.7.3](#Section_3.7).
+The server MUST initialize all data objects that are required of an [ITypeInfo server](#Section_3.7), as specified in section [3.7.3](#Section_3.7.3).
 
 The server MUST initialize its collection of custom data items. The collection MUST NOT change over the [**server's**](#gt_server) lifetime.
 
 <a id="Section_3.9.4"></a>
 ### 3.9.4 Message Processing Events and Sequencing Rules
 
-The [ITypeInfo2](#Section_3.9) interface derives from the [ITypeInfo](#Section_3.7.4.13) interface. ITypeInfo2 servers MUST implement the methods defined in ITypeInfo in the order in which, and with the opnums with which, they are specified in section 3.7.4.
+The [ITypeInfo2](#Section_3.9) interface derives from the [ITypeInfo](#Section_3.7) interface. ITypeInfo2 servers MUST implement the methods defined in ITypeInfo in the order in which, and with the opnums with which, they are specified in section 3.7.4.
 
 Methods in RPC Opnum Order
 
@@ -6627,17 +6627,17 @@ Methods in RPC Opnum Order
 | [GetTypeFlags](#Section_3.9.4.2) | The GetTypeFlags method returns the TYPEFLAGS value that is associated with the automation type description. Opnum: 23 |
 | [GetFuncIndexOfMemId](#Section_3.9.4.3) | The GetFuncIndexOfMemId method retrieves the location of an element in the data member table, given the associated MEMBERID of the element. Opnum: 24 |
 | [GetVarIndexOfMemId](#Section_3.9.4.4) | The GetVarIndexOfMemId method retrieves the location of an element in the data member table, given the associated MEMBERID of the element. Opnum: 25 |
-| [GetCustData](#Section_2.2.47) | The GetCustData method retrieves the value of a custom data item that is associated with the type. Opnum: 26 |
-| [GetFuncCustData](#Section_2.2.47) | The GetFuncCustData method retrieves the value of a custom data item that is associated with the specified method. Opnum: 27 |
-| [GetParamCustData](#Section_2.2.47) | The GetParamCustData method retrieves the value of a custom data item that is associated with the specified method parameter. Opnum: 28 |
-| [GetVarCustData](#Section_2.2.47) | The GetVarCustData method retrieves the value of a custom data item that is associated with the specified data member. Opnum: 29 |
-| [GetImplTypeCustData](#Section_2.2.47) | The GetImplTypeCustData method retrieves the value of a custom data item that is associated with the specified interface. Opnum: 30 |
+| [GetCustData](#Section_3.9.4.5) | The GetCustData method retrieves the value of a custom data item that is associated with the type. Opnum: 26 |
+| [GetFuncCustData](#Section_3.9.4.6) | The GetFuncCustData method retrieves the value of a custom data item that is associated with the specified method. Opnum: 27 |
+| [GetParamCustData](#Section_3.9.4.7) | The GetParamCustData method retrieves the value of a custom data item that is associated with the specified method parameter. Opnum: 28 |
+| [GetVarCustData](#Section_3.9.4.8) | The GetVarCustData method retrieves the value of a custom data item that is associated with the specified data member. Opnum: 29 |
+| [GetImplTypeCustData](#Section_3.9.4.9) | The GetImplTypeCustData method retrieves the value of a custom data item that is associated with the specified interface. Opnum: 30 |
 | [GetDocumentation2](#Section_3.9.4.10) | The GetDocumentation2 method retrieves the values that are associated with a type member. Opnum: 31 |
-| [GetAllCustData](#Section_2.2.47) | The GetAllCustData method retrieves all the custom data items that are associated with the automation type description. Opnum: 32 |
-| [GetAllFuncCustData](#Section_2.2.47) | The GetAllFuncCustData method retrieves all the custom data items that are associated with the specified method. Opnum: 33 |
-| [GetAllParamCustData](#Section_2.2.47) | The GetAllParamCustData method retrieves all the custom data items that are associated with the specified method parameter. Opnum: 34 |
-| [GetAllVarCustData](#Section_2.2.47) | The GetAllVarCustData method retrieves all the custom data items that are associated with the specified data member. Opnum: 35 |
-| [GetAllImplTypeCustData](#Section_2.2.47) | The GetAllImplTypeCustData method retrieves all the custom data items that are associated with the specified interface. Opnum: 36 |
+| [GetAllCustData](#Section_3.9.4.11) | The GetAllCustData method retrieves all the custom data items that are associated with the automation type description. Opnum: 32 |
+| [GetAllFuncCustData](#Section_3.9.4.12) | The GetAllFuncCustData method retrieves all the custom data items that are associated with the specified method. Opnum: 33 |
+| [GetAllParamCustData](#Section_3.9.4.13) | The GetAllParamCustData method retrieves all the custom data items that are associated with the specified method parameter. Opnum: 34 |
+| [GetAllVarCustData](#Section_3.9.4.14) | The GetAllVarCustData method retrieves all the custom data items that are associated with the specified data member. Opnum: 35 |
+| [GetAllImplTypeCustData](#Section_3.9.4.15) | The GetAllImplTypeCustData method retrieves all the custom data items that are associated with the specified interface. Opnum: 36 |
 
 All methods MUST NOT throw exceptions. All return values use the NTSTATUS numbering space; in particular, a value of 0x00000000 indicates success, and any other return value indicates an error. All error values are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) and MUST be treated the same, unless specified otherwise.
 
@@ -6652,7 +6652,7 @@ HRESULT GetTypeKind(
 
 );
 
-**pTypeKind:** MUST be set to the TYPEKIND value associated with the automation type description, as specified in section [2.2.17](#Section_3.7.1.2).
+**pTypeKind:** MUST be set to the TYPEKIND value associated with the automation type description, as specified in section [2.2.17](#Section_2.2.17).
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure, defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1. The severity bit in the structure identifies the following conditions:
 
@@ -6773,7 +6773,7 @@ HRESULT GetFuncCustData(
 
 );
 
-**index:** MUST specify an ordinal position in the method table and MUST be less than the value of the **cFuncs** field in the [TYPEATTR](#Section_2.2.44) structure of the associated type, as specified in sections 2.2.44 and [3.7.4.1](#Section_2.2.44).
+**index:** MUST specify an ordinal position in the method table and MUST be less than the value of the **cFuncs** field in the [TYPEATTR](#Section_2.2.44) structure of the associated type, as specified in sections 2.2.44 and [3.7.4.1](#Section_3.7.4.1).
 
 **guid:** MUST be the [**GUID**](#gt_globally-unique-identifier-guid) associated with the custom data item using the [custom] attribute, as specified in section [2.2.49.5.1](#Section_2.2.49.5.1).
 
@@ -6805,9 +6805,9 @@ HRESULT GetParamCustData(
 
 );
 
-**indexFunc:** MUST specify an ordinal position in the method table and MUST be less than the value of the **cFuncs** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**indexFunc:** MUST specify an ordinal position in the method table and MUST be less than the value of the **cFuncs** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
-**indexParam:** MUST specify an ordinal position in the parameter table of the method specified by *indexFunc*. The value of *indexParam* MUST be less than the value of the **cParams** field in the [FUNCDESC](#Section_2.2.42) structure of the associated method, as specified in sections 2.2.42 and [3.7.4.3](#Section_2.2.42).
+**indexParam:** MUST specify an ordinal position in the parameter table of the method specified by *indexFunc*. The value of *indexParam* MUST be less than the value of the **cParams** field in the [FUNCDESC](#Section_2.2.42) structure of the associated method, as specified in sections 2.2.42 and [3.7.4.3](#Section_3.7.4.3).
 
 **guid:** MUST be the [**GUID**](#gt_globally-unique-identifier-guid) associated with the custom data item using the [custom] attribute, as specified in section [2.2.49.6](#Section_2.2.49.6).
 
@@ -6837,7 +6837,7 @@ HRESULT GetVarCustData(
 
 );
 
-**index:** MUST specify an ordinal position in the data member table and MUST be less than the value of the **cVars** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**index:** MUST specify an ordinal position in the data member table and MUST be less than the value of the **cVars** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
 **guid:** MUST be the [**GUID**](#gt_globally-unique-identifier-guid) associated with the custom data item using the [custom] attribute, as specified in section [2.2.49.5](#Section_2.2.49.5).
 
@@ -6867,7 +6867,7 @@ HRESULT GetImplTypeCustData(
 
 );
 
-**index:** MUST specify an ordinal position in the interface table and MUST be less than the value of the cImplTypes field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**index:** MUST specify an ordinal position in the interface table and MUST be less than the value of the cImplTypes field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
 **guid:** MUST be the [**GUID**](#gt_globally-unique-identifier-guid) associated with the custom data item using the [custom] attribute, as specified in section [2.2.49.8](#Section_2.2.49.8).
 
@@ -6957,7 +6957,7 @@ HRESULT GetAllFuncCustData(
 
 );
 
-**index:** MUST specify an ordinal position in the method table and MUST be less than the value of the cFuncs field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**index:** MUST specify an ordinal position in the method table and MUST be less than the value of the cFuncs field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
 **pCustData:** MUST be set to a CUSTDATA structure that contains an array of custom data items, as specified in section [2.2.49.5.1](#Section_2.2.49.5.1). The structure's **cCustData** field MUST be set to 0 and its **prgCustData** field set to NULL, if there are no custom data items associated with the method.
 
@@ -6985,9 +6985,9 @@ HRESULT GetAllParamCustData(
 
 );
 
-**indexFunc:** MUST specify an ordinal position in the method table and MUST be less than the value of the **cFuncs** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**indexFunc:** MUST specify an ordinal position in the method table and MUST be less than the value of the **cFuncs** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
-**indexParam:** MUST specify an ordinal position in the parameter table of the method specified by *indexFunc*. The value of *indexParam* MUST be less than the value of the **cParams** field in the FUNCDESC structure of the associated method, as specified in sections [2.2.42](#Section_2.2.42) and [3.7.4.3](#Section_2.2.42).
+**indexParam:** MUST specify an ordinal position in the parameter table of the method specified by *indexFunc*. The value of *indexParam* MUST be less than the value of the **cParams** field in the FUNCDESC structure of the associated method, as specified in sections [2.2.42](#Section_2.2.42) and [3.7.4.3](#Section_3.7.4.3).
 
 **pCustData:** MUST be set to a CUSTDATA structure that contains an array of custom data items, as specified in section [2.2.49.6](#Section_2.2.49.6). The structure's **cCustData** field MUST be set to 0 and its **prgCustData** field set to NULL, if there are no custom data items associated with the parameter.
 
@@ -7013,7 +7013,7 @@ HRESULT GetAllVarCustData(
 
 );
 
-**index:** MUST specify an ordinal position in the data member table and MUST be less than the value of the **cVars** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**index:** MUST specify an ordinal position in the data member table and MUST be less than the value of the **cVars** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
 **pCustData:** MUST be set to a CUSTDATA structure that contains an array of custom data items, as specified in section [2.2.49.5](#Section_2.2.49.5). The structure's **cCustData** field MUST be set to 0 and its **prgCustData** field set to NULL, if there are no custom data items associated with the data member.
 
@@ -7039,7 +7039,7 @@ HRESULT GetAllImplTypeCustData(
 
 );
 
-**index:** MUST specify an ordinal position in the interface table and MUST be less than the value of the **cImplTypes** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_2.2.44).
+**index:** MUST specify an ordinal position in the interface table and MUST be less than the value of the **cImplTypes** field in the TYPEATTR structure of the associated type, as specified in sections [2.2.44](#Section_2.2.44) and [3.7.4.1](#Section_3.7.4.1).
 
 **pCustData:** MUST be set to a CUSTDATA structure that contains an array of custom data items, as specified in section [2.2.49.8](#Section_2.2.49.8). The structure's **cCustData** field MUST be set to 0 and its **prgCustData** field set to NULL if there are no custom data items associated with the interface.
 
@@ -7083,7 +7083,7 @@ None.
 <a id="Section_3.10.4"></a>
 ### 3.10.4 Message Processing Events and Sequencing Rules
 
-To retrieve a reference to an [ITypeInfo2 server](#Section_3.9), the client MUST first retrieve a reference to an [ITypeInfo server](#Section_3.7) (as specified in section [3.7.4](#Section_3.7.4.13)), and then call IUnknown::QueryInterface and request IID_ITypeInfo2.
+To retrieve a reference to an [ITypeInfo2 server](#Section_3.9), the client MUST first retrieve a reference to an [ITypeInfo server](#Section_3.7) (as specified in section [3.7.4](#Section_3.7.4)), and then call IUnknown::QueryInterface and request IID_ITypeInfo2.
 
 The protocol specifies no additional sequencing rules.
 
@@ -7163,9 +7163,9 @@ Methods in RPC Opnum Order
 | --- | --- |
 | [GetTypeInfoCount](#Section_3.11.4.1) | The GetTypeInfoCount method provides the number of [**automation type descriptions**](#gt_automation-type-description) in the type information table. Opnum: 3 |
 | [GetTypeInfo](#Section_3.11.4.2) | The GetTypeInfo method retrieves the automation type description that has the specified ordinal position within the type information table. Opnum: 4 |
-| [GetTypeInfoType](#Section_3.11.4.3) | The GetTypeInfoType method retrieves the [TYPEKIND](#Section_3.7.1.2) value that is associated with an automation type description. Opnum: 5 |
+| [GetTypeInfoType](#Section_3.11.4.3) | The GetTypeInfoType method retrieves the [TYPEKIND](#Section_2.2.17) value that is associated with an automation type description. Opnum: 5 |
 | [GetTypeInfoOfGuid](#Section_3.11.4.4) | The GetTypeInfoOfGuid method retrieves the automation type description with the specified [**GUID**](#gt_globally-unique-identifier-guid) from the [**server's**](#gt_server) type information table. Opnum: 6 |
-| [GetLibAttr](#Section_2.2.45) | The GetLibAttr method retrieves a structure that contains the attributes that are declared with the type library. Opnum: 7 |
+| [GetLibAttr](#Section_3.11.4.5) | The GetLibAttr method retrieves a structure that contains the attributes that are declared with the type library. Opnum: 7 |
 | [GetTypeComp](#Section_3.11.4.6) | The GetTypeComp method retrieves a reference to the [ITypeComp server](#Section_3.5) instance that is associated with the [ITypeLib server](#Section_3.11). Opnum: 8 |
 | [GetDocumentation](#Section_3.11.4.7) | The GetDocumentation method retrieves the documentation resources that are associated with the [**automation type library**](#gt_automation-type-library). Opnum: 9 |
 | [IsName](#Section_3.11.4.8) | The IsName method indicates whether the specified string matches the name of a type or type member that is contained in the automation type library or its binding context. Opnum: 10 |
@@ -7224,7 +7224,7 @@ MUST refer to the [**partner dispinterface**](#gt_partner-dispinterface) if inde
 <a id="Section_3.11.4.3"></a>
 #### 3.11.4.3 ITypeLib::GetTypeInfoType (Opnum 5)
 
-The GetTypeInfoType method retrieves the [TYPEKIND](#Section_3.7.1.2) value associated with an [**automation type description**](#gt_automation-type-description).
+The GetTypeInfoType method retrieves the [TYPEKIND](#Section_2.2.17) value associated with an [**automation type description**](#gt_automation-type-description).
 
 HRESULT GetTypeInfoType(
 
@@ -7418,7 +7418,7 @@ MEMBERID* rgMemId,
 
 **lHashVal:** MUST be either the hash value corresponding to the value of *szNameBuf* (as specified in section [2.2.51](#Section_2.2.51)), or 0.
 
-**ppTInfo:** MUST be set to an array of references to ITypeInfo server instances (see section [3.7.4](#Section_3.7.4.13)). Each entry of *ppTInfo* MUST correspond to a type whose name matches the value of *szNameBuf* according to the string matching criteria (as specified in section [2.2.50](#Section_2.2.50)) or that contains a member whose name matches the value of *szNameBuf*.
+**ppTInfo:** MUST be set to an array of references to ITypeInfo server instances (see section [3.7.4](#Section_3.7.4)). Each entry of *ppTInfo* MUST correspond to a type whose name matches the value of *szNameBuf* according to the string matching criteria (as specified in section [2.2.50](#Section_2.2.50)) or that contains a member whose name matches the value of *szNameBuf*.
 
 The array MUST be empty if there are no types or method or data members of types defined in the [**automation scope**](#gt_automation-scope) whose names match the value of *szNameBuf*. Otherwise, the array MUST contain one entry for each named nonparameter element defined in the automation scope whose name matches *szNameBuf*. The array MAY contain entries for matching types or type members that are referenced, but not defined in the automation scope. <62>
 
@@ -7426,7 +7426,7 @@ If *szNameBuf* matches the name of a [**dual interface**](#gt_dual-interface) or
 
 The length of the array MUST NOT be greater than the value of *pcFound* set by the client.
 
-**rgMemId:** MUST be set to an array of [MEMBERIDs](#Section_2.2.35) (see section 2.2.35) corresponding to the ITypeInfo instances in the *ppTInfo* array. For each entry in the *ppTInfo* array, the corresponding value in the *rgMemId* array MUST specify the MEMBERID of the type member whose name matches the value of *szNameBuf*, or MEMBERID_NIL to specify that the name of the type matches the value of *szNameBuf*.
+**rgMemId:** MUST be set to an array of [MEMBERIDs](#Section_2.2.35.1) (see section 2.2.35) corresponding to the ITypeInfo instances in the *ppTInfo* array. For each entry in the *ppTInfo* array, the corresponding value in the *rgMemId* array MUST specify the MEMBERID of the type member whose name matches the value of *szNameBuf*, or MEMBERID_NIL to specify that the name of the type matches the value of *szNameBuf*.
 
 **pcFound:** The client MUST set *pcFound* to the maximum number of matches that can be returned. The server MUST set *pcFound* to the number of elements in the *ppTInfo* and *rgMemId* arrays.
 
@@ -7493,7 +7493,7 @@ An ITypeLib2 server MUST extend the functionality of [ITypeLib](#Section_3.11). 
 <a id="Section_3.13.1"></a>
 ### 3.13.1 Abstract Data Model
 
-An [ITypeLib2 server](#Section_3.13) MUST implement the data model of an [ITypeLib](#Section_3.13.4.2) server, as specified in [3.11](#Section_3.11).
+An [ITypeLib2 server](#Section_3.13) MUST implement the data model of an [ITypeLib](#Section_3.11.1) server, as specified in [3.11](#Section_3.11).
 
 An ITypeLib2 server MUST maintain a collection of the custom data items that were declared with the library keyword in the [**IDL**](#gt_interface-definition-language-idl), as specified in section [2.2.49.2](#Section_2.2.49.2). For each custom data item, the server MUST maintain the following mapping:
 
@@ -7510,23 +7510,23 @@ None.
 <a id="Section_3.13.3"></a>
 ### 3.13.3 Initialization
 
-The server MUST initialize all data objects that are required of an [ITypeLib](#Section_3.11) server, as specified in section [3.11.3](#Section_3.11).
+The server MUST initialize all data objects that are required of an [ITypeLib](#Section_3.11) server, as specified in section [3.11.3](#Section_3.11.3).
 
 The server MUST initialize its collection of custom data items. The collection MUST NOT change over the [**server's**](#gt_server) lifetime.
 
 <a id="Section_3.13.4"></a>
 ### 3.13.4 Message Processing Events and Sequencing Rules
 
-[ITypeLib2](#Section_3.13) derives from the [ITypeLib](#Section_3.11) interface. ITypeLib2 servers MUST implement the opnums with which they are specified in section [3.11.4](#Section_3.9.4).
+[ITypeLib2](#Section_3.13) derives from the [ITypeLib](#Section_3.11) interface. ITypeLib2 servers MUST implement the opnums with which they are specified in section [3.11.4](#Section_3.11.4).
 
 Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetCustData](#Section_2.2.47) | The GetCustData method retrieves the value of a custom data item that is associated with the [**automation type library**](#gt_automation-type-library). Opnum: 13 |
+| [GetCustData](#Section_3.13.4.1) | The GetCustData method retrieves the value of a custom data item that is associated with the [**automation type library**](#gt_automation-type-library). Opnum: 13 |
 | [GetLibStatistics](#Section_3.13.4.2) | The GetLibStatistics method returns statistics about the unique names in the automation type library. Opnum: 14 |
 | [GetDocumentation2](#Section_3.13.4.3) | The GetDocumentation2 method retrieves the values that are associated with the automation type library. Opnum: 15 |
-| [GetAllCustData](#Section_2.2.47) | The GetAllCustData method retrieves the values of all custom data items that are associated with the automation type library. Opnum: 16 |
+| [GetAllCustData](#Section_3.13.4.4) | The GetAllCustData method retrieves the values of all custom data items that are associated with the automation type library. Opnum: 16 |
 
 All methods MUST NOT throw exceptions. All return values use the NTSTATUS numbering space; in particular, a value of 0x00000000 indicates success, and any other return value indicates an error. All error values are specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) and MUST be treated the same, unless specified otherwise.
 
@@ -7545,7 +7545,7 @@ HRESULT GetCustData(
 
 **guid:** MUST be the [**GUID**](#gt_globally-unique-identifier-guid) associated with the custom data item using the [custom] attribute, as specified in section [2.2.49.2](#Section_2.2.49.2).
 
-**pVarVal:** MUST be set to the value of the custom data item, or [VT_EMPTY](#Section_3fe7db9f58034dc49d145425d3f5461f) if there is no custom data item associated with the specified GUID.
+**pVarVal:** MUST be set to the value of the custom data item, or [VT_EMPTY](#Section_2.2.7) if there is no custom data item associated with the specified GUID.
 
 **Return Values:** The method MUST return information in an **HRESULT** data structure, defined in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1. The severity bit in the structure identifies the following conditions:
 
@@ -7663,7 +7663,7 @@ None.
 <a id="Section_3.14.4"></a>
 ### 3.14.4 Message Processing Events and Sequencing Rules
 
-To retrieve a reference to an [ITypeLib2 server](#Section_3.13), the client MUST first retrieve a reference to an [ITypeLib server](#Section_3.11) (as specified in section [3.12.4](#Section_3.9.4)), and then call IUnknown::QueryInterface requesting IID_ITypeLib2.
+To retrieve a reference to an [ITypeLib2 server](#Section_3.13), the client MUST first retrieve a reference to an [ITypeLib server](#Section_3.11) (as specified in section [3.12.4](#Section_3.12.4)), and then call IUnknown::QueryInterface requesting IID_ITypeLib2.
 
 The protocol specifies no additional sequencing rules.
 
@@ -7792,7 +7792,7 @@ If the application exposes data that changes frequently and that is to be as cur
 
 In all the examples that follow, the client can use either the _NewEnum method or the QueryInterface method on the [**automation server**](#gt_automation-server) [**object**](#gt_object) to get the IEnumVARIANT implementation.
 
-In the examples, an array is maintained as a collection by the server, and the variable `current` shows the first position in the enumeration that has not yet been returned to the client (see section [3.3.1](#Section_3.3)).
+In the examples, an array is maintained as a collection by the server, and the variable `current` shows the first position in the enumeration that has not yet been returned to the client (see section [3.3.1](#Section_3.3.1)).
 
 <a id="Section_4.7.1"></a>
 ### 4.7.1 IEnumVARIANT Next() Example
@@ -10128,7 +10128,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <58> Section 3.7.1.1: The implementation-specific documentation values correspond to the values declared with the [helpstring], [helpcontext], and [helpfile] attributes. If the server also implements [ITypeInfo2](#Section_3.9), the documentation values include the values declared with the [helpstringcontext] and [helpstringdll] attributes.
 
-<59> Section 3.7.4.8: If the library, type, or type member was declared without the [helpstring] attribute and the Type information server implements ITypeInfo2, the [GetDocumentation](#Section_3.13.4.3) method attempts to return the localized value specified by the *pBstrHelpString* parameter of [ITypeInfo2::GetDocumentation2](#Section_3.9.4.10), using an LCID of 0.
+<59> Section 3.7.4.8: If the library, type, or type member was declared without the [helpstring] attribute and the Type information server implements ITypeInfo2, the [GetDocumentation](#Section_3.11.4.7) method attempts to return the localized value specified by the *pBstrHelpString* parameter of [ITypeInfo2::GetDocumentation2](#Section_3.9.4.10), using an LCID of 0.
 
 <60> Section 3.9.4.10: *pbstrHelpString* is set to the value of the string resource that is contained in the DLL specified by *pBstrHelpStringDll* and that is associated with the resource handle specified by *pdwHelpStringContext* and LocaleID specified by *lcid*, or is set to NULL if no such resource exists.
 

@@ -157,7 +157,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-This document provides an overview of Windows interoperability technologies and the protocols required for their implementation. It is intended for use with the technology overview documents for many of the commonly used technologies. Those documents are listed in section [1.3](#Section_2.1).
+This document provides an overview of Windows interoperability technologies and the protocols required for their implementation. It is intended for use with the technology overview documents for many of the commonly used technologies. Those documents are listed in section [1.3](#Section_1.3).
 
 This document can also be used in conjunction with the Windows Protocols Documentation Roadmap [MS-DOCO](../MS-DOCO/MS-DOCO.md), which describes the protocol documentation set, the types of protocol documents provided by Microsoft, and how to find the documents online. Detailed technical specifications for protocols, including extensions to industry-standard or other published protocols, are provided in individual technical documents referenced here and in the overview documents. These protocols are used by the versions of Windows listed in section [11](#Section_11). A list of technology areas and their corresponding protocol specifications is available in [MS-DOCO] section 4.2.
 
@@ -167,7 +167,7 @@ This document can also be used in conjunction with the Windows Protocols Documen
 This document uses the following terms:
 
 <a id="gt_active-directory"></a>
-**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), which are both described in [MS-ADOD](#Section_2.1): Active Directory Protocols Overview.
+**Active Directory**: The Windows implementation of a general-purpose [**directory service**](#gt_directory-service-ds), which uses LDAP as its primary access protocol. [**Active Directory**](#gt_active-directory) stores information about a variety of objects in the network such as user accounts, computer accounts, groups, and all related credential information used by Kerberos [MS-KILE](../MS-KILE/MS-KILE.md). [**Active Directory**](#gt_active-directory) is either deployed as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) or [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), which are both described in [MS-ADOD](../MS-ADOD/MS-ADOD.md): Active Directory Protocols Overview.
 
 <a id="gt_active-directory-domain-services-ad-ds"></a>
 **Active Directory Domain Services (AD DS)**: A [**directory service (DS)**](#gt_directory-service-ds) implemented by a [**domain controller (DC)**](#gt_domain-controller-dc). The [**DS**](#gt_directory-service-ds) provides a data store for objects that is distributed across multiple [**DCs**](#gt_domain-controller-dc). The [**DCs**](#gt_domain-controller-dc) interoperate as peers to ensure that a local change to an object replicates correctly across [**DCs**](#gt_domain-controller-dc). AD DS is a deployment of [**Active Directory**](#gt_active-directory) [MS-ADTS](../MS-ADTS/MS-ADTS.md).
@@ -215,7 +215,7 @@ This document uses the following terms:
 **Distributed File System (DFS)**: A file system that logically groups physical shared folders located on different servers by transparently connecting them to one or more hierarchical namespaces. [**DFS**](#gt_distributed-file-system-dfs) also provides fault-tolerance and load-sharing capabilities.
 
 <a id="gt_domain-controller-dc"></a>
-**domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its forest. If the [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its forest. For more information, see [MS-AUTHSOD](#Section_2.1) section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds), only one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) can run on one server. However, several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can coexist with one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) on one server. The [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its forest. The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](#Section_9.2).
+**domain controller (DC)**: The service, running on a server, that implements [**Active Directory**](#gt_active-directory), or the server hosting this service. The service hosts the data store for objects and interoperates with other [**DCs**](#gt_domain-controller-dc) to ensure that a local change to an object replicates correctly across all [**DCs**](#gt_domain-controller-dc). When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds), the [**DC**](#gt_domain-controller-dc) contains full NC replicas of the configuration naming context (config NC), schema naming context (schema NC), and one of the domain NCs in its forest. If the [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) is a global catalog server (GC server), it contains partial NC replicas of the remaining domain NCs in its forest. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5.2 and [MS-ADTS]. When [**Active Directory**](#gt_active-directory) is operating as [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can run on one server. When [**Active Directory**](#gt_active-directory) is operating as [**AD DS**](#gt_active-directory-domain-services-ad-ds), only one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) can run on one server. However, several [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DCs**](#gt_domain-controller-dc) can coexist with one [**AD DS**](#gt_active-directory-domain-services-ad-ds) [**DC**](#gt_domain-controller-dc) on one server. The [**AD LDS**](#gt_active-directory-lightweight-directory-services-ad-lds) [**DC**](#gt_domain-controller-dc) contains full NC replicas of the config NC and the schema NC in its forest. The domain controller is the server side of Authentication Protocol Domain Support [MS-APDS](../MS-APDS/MS-APDS.md).
 
 <a id="gt_dynamic-host-configuration-protocol-dhcp"></a>
 **Dynamic Host Configuration Protocol (DHCP)**: A protocol that provides a framework for passing configuration information to hosts on a TCP/IP network, as described in [[RFC2131]](https://go.microsoft.com/fwlink/?LinkId=90318).
@@ -341,7 +341,7 @@ This document uses the following terms:
 **security association (SA)**: A simplex "connection" that provides security services to the traffic carried by it. See [[RFC4301]](https://go.microsoft.com/fwlink/?LinkId=90465) for more information.
 
 <a id="gt_security-identifier-sid"></a>
-**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](#Section_9.3) section 1.1.1.2.
+**security identifier (SID)**: An identifier for security principals that is used to identify an account or a group. Conceptually, the [**SID**](#gt_security-identifier-sid) is composed of an account authority portion (typically a domain) and a smaller integer representing an identity relative to the account authority, termed the relative identifier (RID). The [**SID**](#gt_security-identifier-sid) format is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.2; a string representation of [**SIDs**](#gt_security-identifier-sid) is specified in [MS-DTYP] section 2.4.2 and [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.2.
 
 <a id="gt_security-policy-database-spd"></a>
 **security policy database (SPD)**: A database that specifies the policies that determine the disposition of all IP traffic inbound or outbound from a host or security gateway.
@@ -416,7 +416,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 **Note** There is a charge to download the specification.
 
-[MC-COMQC] Microsoft Corporation, "[Component Object Model Plus (COM+) Queued Components Protocol](#Section_2.2.1.1)".
+[MC-COMQC] Microsoft Corporation, "[Component Object Model Plus (COM+) Queued Components Protocol](../MC-COMQC/MC-COMQC.md)".
 
 [MC-IISA] Microsoft Corporation, "[Internet Information Services (IIS) Application Host COM Protocol](#Section_2.4.1)".
 
@@ -428,39 +428,39 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-ABTP] Microsoft Corporation, "[Automatic Bluetooth Pairing Protocol](../MS-ABTP/MS-ABTP.md)".
 
-[MS-ADFSOD] Microsoft Corporation, "[Active Directory Federation Services (AD FS) Protocols Overview](#Section_2.1)".
+[MS-ADFSOD] Microsoft Corporation, "[Active Directory Federation Services (AD FS) Protocols Overview](../MS-ADFSOD/MS-ADFSOD.md)".
 
-[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](#Section_2.1)".
+[MS-ADOD] Microsoft Corporation, "[Active Directory Protocols Overview](../MS-ADOD/MS-ADOD.md)".
 
 [MS-ADTG] Microsoft Corporation, "[Remote Data Services (RDS) Transport Protocol](../MS-ADTG/MS-ADTG.md)".
 
 [MS-AIPS] Microsoft Corporation, "[Authenticated Internet Protocol](../MS-AIPS/MS-AIPS.md)".
 
-[MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](#Section_9.2)".
+[MS-APDS] Microsoft Corporation, "[Authentication Protocol Domain Support](../MS-APDS/MS-APDS.md)".
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
-[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](#Section_9.3)".
+[MS-AZOD] Microsoft Corporation, "[Authorization Protocols Overview](../MS-AZOD/MS-AZOD.md)".
 
 [MS-CBCP] Microsoft Corporation, "[Callback Control Protocol](../MS-CBCP/MS-CBCP.md)".
 
-[MS-CCROD] Microsoft Corporation, "[Content Caching and Retrieval Protocols Overview](#Section_2.1)".
+[MS-CCROD] Microsoft Corporation, "[Content Caching and Retrieval Protocols Overview](../MS-CCROD/MS-CCROD.md)".
 
 [MS-CDP] Microsoft Corporation, "[Connected Devices Platform Protocol Version 3](../MS-CDP/MS-CDP.md)".
 
 [MS-CER2] Microsoft Corporation, "[Corporate Error Reporting V.2 Protocol](../MS-CER2/MS-CER2.md)".
 
-[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](#Section_9.4)".
+[MS-CERSOD] Microsoft Corporation, "[Certificate Services Protocols Overview](../MS-CERSOD/MS-CERSOD.md)".
 
 [MS-CIFS] Microsoft Corporation, "[Common Internet File System (CIFS) Protocol](../MS-CIFS/MS-CIFS.md)".
 
-[MS-COMA] Microsoft Corporation, "[Component Object Model Plus (COM+) Remote Administration Protocol](#Section_2.2.1.1)".
+[MS-COMA] Microsoft Corporation, "[Component Object Model Plus (COM+) Remote Administration Protocol](../MS-COMA/MS-COMA.md)".
 
-[MS-COMEV] Microsoft Corporation, "[Component Object Model Plus (COM+) Event System Protocol](#Section_2.2.1.1)".
+[MS-COMEV] Microsoft Corporation, "[Component Object Model Plus (COM+) Event System Protocol](../MS-COMEV/MS-COMEV.md)".
 
-[MS-COMT] Microsoft Corporation, "[Component Object Model Plus (COM+) Tracker Service Protocol](#Section_2.2.1.1)".
+[MS-COMT] Microsoft Corporation, "[Component Object Model Plus (COM+) Tracker Service Protocol](../MS-COMT/MS-COMT.md)".
 
-[MS-COM] Microsoft Corporation, "[Component Object Model Plus (COM+) Protocol](#Section_2.2.1.1)".
+[MS-COM] Microsoft Corporation, "[Component Object Model Plus (COM+) Protocol](../MS-COM/MS-COM.md)".
 
 [MS-DCOM] Microsoft Corporation, "[Distributed Component Object Model (DCOM) Remote Protocol](../MS-DCOM/MS-DCOM.md)".
 
@@ -476,7 +476,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-DHCPM] Microsoft Corporation, "[Microsoft Dynamic Host Configuration Protocol (DHCP) Server Management Protocol](../MS-DHCPM/MS-DHCPM.md)".
 
-[MS-DHCPN] Microsoft Corporation, "[Dynamic Host Configuration Protocol (DHCP) Extensions for Network Access Protection (NAP)](#Section_7.1.3)".
+[MS-DHCPN] Microsoft Corporation, "[Dynamic Host Configuration Protocol (DHCP) Extensions for Network Access Protection (NAP)](../MS-DHCPN/MS-DHCPN.md)".
 
 [MS-DNSP] Microsoft Corporation, "[Domain Name Service (DNS) Server Management Protocol](../MS-DNSP/MS-DNSP.md)".
 
@@ -498,7 +498,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-EVEN] Microsoft Corporation, "[EventLog Remoting Protocol](../MS-EVEN/MS-EVEN.md)".
 
-[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](#Section_6.4)".
+[MS-FASOD] Microsoft Corporation, "[File Access Services Protocols Overview](../MS-FASOD/MS-FASOD.md)".
 
 [MS-FASP] Microsoft Corporation, "[Firewall and Advanced Security Protocol](../MS-FASP/MS-FASP.md)".
 
@@ -510,15 +510,15 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-FSCC] Microsoft Corporation, "[File System Control Codes](../MS-FSCC/MS-FSCC.md)".
 
-[MS-FSMOD] Microsoft Corporation, "[File Services Management Protocols Overview](#Section_6.5)".
+[MS-FSMOD] Microsoft Corporation, "[File Services Management Protocols Overview](../MS-FSMOD/MS-FSMOD.md)".
 
 [MS-GPFAS] Microsoft Corporation, "[Group Policy: Firewall and Advanced Security Data Structure](../MS-GPFAS/MS-GPFAS.md)".
 
 [MS-GPIPSEC] Microsoft Corporation, "[Group Policy: IP Security (IPsec) Protocol Extension](../MS-GPIPSEC/MS-GPIPSEC.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_2.1)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
-[MS-GRVPROT] Microsoft Corporation, "[Groove Protocols Overview](#Section_2.1)".
+[MS-GRVPROT] Microsoft Corporation, "[Groove Protocols Overview](../MS-GRVPROT/MS-GRVPROT.md)".
 
 [MS-H245] Microsoft Corporation, "[H.245 Protocol: Microsoft Extensions](../MS-H245/MS-H245.md)".
 
@@ -534,9 +534,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-IOI] Microsoft Corporation, "[IManagedObject Interface Protocol](#Section_2.3.1)".
 
-[MS-IPAMM2] Microsoft Corporation, "[IP Address Management (IPAM) Management Protocol Version 2](#Section_7.1.2)".
+[MS-IPAMM2] Microsoft Corporation, "[IP Address Management (IPAM) Management Protocol Version 2](../MS-IPAMM2/MS-IPAMM2.md)".
 
-[MS-IPAMM] Microsoft Corporation, "[IP Address Management (IPAM) Management Protocol](#Section_7.1.2)".
+[MS-IPAMM] Microsoft Corporation, "[IP Address Management (IPAM) Management Protocol](../MS-IPAMM/MS-IPAMM.md)".
 
 [MS-IPHTTPS] Microsoft Corporation, "[IP over HTTPS (IP-HTTPS) Tunneling Protocol](../MS-IPHTTPS/MS-IPHTTPS.md)".
 
@@ -562,25 +562,25 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-MNPR] Microsoft Corporation, "[Microsoft NetMeeting Protocol](../MS-MNPR/MS-MNPR.md)".
 
-[MS-MQMP] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Client Protocol](#Section_2.2.3)".
+[MS-MQMP] Microsoft Corporation, "[Message Queuing (MSMQ): Queue Manager Client Protocol](../MS-MQMP/MS-MQMP.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_2.2.3)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_2.1)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
-[MS-MSSOD] Microsoft Corporation, "[Media Streaming Server Protocols Overview](#Section_2.1)".
+[MS-MSSOD] Microsoft Corporation, "[Media Streaming Server Protocols Overview](../MS-MSSOD/MS-MSSOD.md)".
 
-[MS-NAPOD] Microsoft Corporation, "[Network Access Protection Protocols Overview](#Section_2.1)".
+[MS-NAPOD] Microsoft Corporation, "[Network Access Protection Protocols Overview](../MS-NAPOD/MS-NAPOD.md)".
 
 [MS-NBTE] Microsoft Corporation, "[NetBIOS over TCP (NBT) Extensions](../MS-NBTE/MS-NBTE.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_2.1)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MS-NFPB] Microsoft Corporation, "[Near Field Proximity: Bidirectional Services Protocol](../MS-NFPB/MS-NFPB.md)".
 
 [MS-NFPS] Microsoft Corporation, "[Near Field Proximity: Sharing Protocol](../MS-NFPS/MS-NFPS.md)".
 
-[MS-NNTP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication: Network News Transfer Protocol (NNTP) Extension](#Section_9.2)".
+[MS-NNTP] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication: Network News Transfer Protocol (NNTP) Extension](../MS-NNTP/MS-NNTP.md)".
 
 [MS-NRBF] Microsoft Corporation, "[.NET Remoting: Binary Format Data Structure](../MS-NRBF/MS-NRBF.md)".
 
@@ -588,9 +588,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-OAUT] Microsoft Corporation, "[OLE Automation Protocol](#Section_2.3.2)".
 
-[MS-OCSPROT] Microsoft Corporation, "[Skype for Business and Skype for Business Server Protocols Overview](#Section_2.1)".
+[MS-OCSPROT] Microsoft Corporation, "[Skype for Business and Skype for Business Server Protocols Overview](../MS-OCSPROT/MS-OCSPROT.md)".
 
-[MS-OXPROTO] Microsoft Corporation, "[Exchange Server Protocols System Overview](#Section_2.1)".
+[MS-OXPROTO] Microsoft Corporation, "[Exchange Server Protocols System Overview](../MS-OXPROTO/MS-OXPROTO.md)".
 
 [MS-PCCRTP] Microsoft Corporation, "[Peer Content Caching and Retrieval: Hypertext Transfer Protocol (HTTP) Extensions](../MS-PCCRTP/MS-PCCRTP.md)".
 
@@ -606,7 +606,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-PPSEC] Microsoft Corporation, "[Peer-to-Peer Grouping Security Protocol](../MS-PPSEC/MS-PPSEC.md)".
 
-[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](#Section_2.1)".
+[MS-PRSOD] Microsoft Corporation, "[Print Services Protocols Overview](../MS-PRSOD/MS-PRSOD.md)".
 
 [MS-PSDP] Microsoft Corporation, "[Proximity Service Discovery Protocol](../MS-PSDP/MS-PSDP.md)".
 
@@ -618,9 +618,9 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-RDC] Microsoft Corporation, "[Remote Differential Compression Algorithm](../MS-RDC/MS-RDC.md)".
 
-[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](#Section_2.1)".
+[MS-RDSOD] Microsoft Corporation, "[Remote Desktop Services Protocols Overview](../MS-RDSOD/MS-RDSOD.md)".
 
-[MS-RMSOD] Microsoft Corporation, "[Rights Management Services Protocols Overview](#Section_2.1)".
+[MS-RMSOD] Microsoft Corporation, "[Rights Management Services Protocols Overview](../MS-RMSOD/MS-RMSOD.md)".
 
 [MS-RMSO] Microsoft Corporation, "Rights Management Services System Overview", (Archived), [Rights Management Services System Overview](https://go.microsoft.com/fwlink/?LinkID=311687)
 
@@ -644,13 +644,13 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-SMB] Microsoft Corporation, "[Server Message Block (SMB) Protocol](../MS-SMB/MS-SMB.md)".
 
-[MS-SMTPNTLM] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension](#Section_9.2)".
+[MS-SMTPNTLM] Microsoft Corporation, "[NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension](../MS-SMTPNTLM/MS-SMTPNTLM.md)".
 
 [MS-SNID] Microsoft Corporation, "[Server Network Information Discovery Protocol](../MS-SNID/MS-SNID.md)".
 
 [MS-SRVS] Microsoft Corporation, "[Server Service Remote Protocol](../MS-SRVS/MS-SRVS.md)".
 
-[MS-STOROD] Microsoft Corporation, "[Storage Services Protocols Overview](#Section_2.1)".
+[MS-STOROD] Microsoft Corporation, "[Storage Services Protocols Overview](../MS-STOROD/MS-STOROD.md)".
 
 [MS-SWSB] Microsoft Corporation, "[SOAP Over WebSocket Protocol Binding](../MS-SWSB/MS-SWSB.md)".
 
@@ -662,7 +662,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-TLSP] Microsoft Corporation, "[Transport Layer Security (TLS) Profile](../MS-TLSP/MS-TLSP.md)".
 
-[MS-TPSOD] Microsoft Corporation, "[Transaction Processing Services Protocols Overview](#Section_2.1)".
+[MS-TPSOD] Microsoft Corporation, "[Transaction Processing Services Protocols Overview](../MS-TPSOD/MS-TPSOD.md)".
 
 [MS-TRP] Microsoft Corporation, "[Telephony Remote Protocol](../MS-TRP/MS-TRP.md)".
 
@@ -670,7 +670,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-UPMC] Microsoft Corporation, "[UPnP Device and Service Templates: Media Property and Compatibility Extensions](../MS-UPMC/MS-UPMC.md)".
 
-[MS-VSOD] Microsoft Corporation, "[Virtual Storage Protocols Overview](#Section_2.1)".
+[MS-VSOD] Microsoft Corporation, "[Virtual Storage Protocols Overview](../MS-VSOD/MS-VSOD.md)".
 
 [MS-VUVP] Microsoft Corporation, "[VT-UTF8 and VT100+ Protocols](../MS-VUVP/MS-VUVP.md)".
 
@@ -682,11 +682,11 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-WKST] Microsoft Corporation, "[Workstation Service Remote Protocol](../MS-WKST/MS-WKST.md)".
 
-[MS-WMOD] Microsoft Corporation, "[Windows Management Protocols Overview](#Section_2.1)".
+[MS-WMOD] Microsoft Corporation, "[Windows Management Protocols Overview](../MS-WMOD/MS-WMOD.md)".
 
 [MS-WSP] Microsoft Corporation, "[Windows Search Protocol](../MS-WSP/MS-WSP.md)".
 
-[MS-WSUSOD] Microsoft Corporation, "[Windows Server Update Services Protocols Overview](#Section_2.1)".
+[MS-WSUSOD] Microsoft Corporation, "[Windows Server Update Services Protocols Overview](../MS-WSUSOD/MS-WSUSOD.md)".
 
 [MSDFS] Microsoft Corporation, "How DFS Works", March 2003, [http://technet.microsoft.com/en-us/library/cc782417%28WS.10%29.aspx](https://go.microsoft.com/fwlink/?LinkId=89945)
 
@@ -765,26 +765,26 @@ Most Windows interoperability protocols are described in the following technolog
 
 | Short Name | Overview Document Full Name | Description |
 | --- | --- | --- |
-| [MS-ADFSOD](#Section_2.1) | Active Directory Federation Services (AD FS) Protocols Overview | AD FS is the Microsoft implementation of federation services. AD FS provides browser-based clients (internal or external to a network) with seamless, one-prompt access to one or more protected Internet-facing applications, even when the user accounts and applications are located in different networks or organizations. |
-| [MS-ADOD](#Section_2.1) | Active Directory Protocols Overview | Provides an overview of the functionality and relationship of the protocols that make up the client-server and server-to-server behavior of Active Directory. The Active Directory protocols provide directory services for the centralized storage of identity and account information, as well as storage for other forms of data such as group policies and printer location information, a foundation for authentication services in a domain environment, domain services, and directory replication services in Windows. |
-| [MS-AUTHSOD](#Section_2.1) | Authentication Services Protocols Overview | Provides an overview of the functionality and relationship of the Authentication Services protocols, which are used to verify the identity of users, computers, and services through the interactive logon and network logon authentication processes. |
-| [MS-AZOD](#Section_9.3) | Authorization Protocols Overview | Provides an overview of the Authorization protocols, which control granting access to resources after authentication has been established. An authenticated request is not sufficient for access; a corresponding decision has to also determine whether a request is authorized. To accomplish this, several authorization models are provided in Windows. |
-| [MS-CCROD](#Section_2.1) | Content Caching and Retrieval Protocols Overview | Provides an overview of the protocols implemented in the Windows Peer Content Caching and Retrieval framework. This framework is based on a peer-to-peer discovery and distribution model designed to reduce wide-area-network (WAN) link bandwidth utilization and provide faster content downloads from a [**local area network (LAN)**](#gt_local-area-network-lan). |
-| [MS-CERSOD](#Section_9.4) | Certificate Services Protocols Overview | Provides an overview of the protocols implementing Certificate Services. Certificate Services protocols are used for certificate enrollment, certificate policy, and remote administration of certificate services. This document describes the intended functionality of the Certificate Services protocols and how these protocols interact with each other. |
-| [MS-FASOD](#Section_6.4) | File Access Services Protocols Overview | Provides an overview of the functionality and relationship of the File Access Services (FAS) protocols, which enable network file access and sharing in Windows and allow a client computer to discover, access, and share files that are hosted on, and made available by, another computer. |
-| [MS-FSMOD](#Section_6.5) | File Services Management Protocols Overview | Provides an overview of the protocols used for configuring, managing, and monitoring file services in Windows over the network. The File Services Management protocols support scenarios such as share management, DFS namespace management, SMB Server management, SMB network redirector management, file server resource management, and file replication. |
-| [MS-GPOD](#Section_2.1) | Group Policy Protocols Overview | The Group Policy protocols are used to create, read, update, and remove Group Policy Objects. These protocols enable the Group Policy client to retrieve policy settings from a Group Policy server. The base functionality of Group Policy can be extended through client-side extensions that implement application-specific policy settings, and through Administrative tool extensions that implement authored configuration settings. |
-| [MS-MQOD](#Section_2.1) | Message Queuing Protocols Overview | Provides an overview of the Message Queuing protocols. Microsoft Message Queuing (MSMQ) is a communications service that enables reliable and secure asynchronous messaging between applications over a variety of deployment topologies. |
-| [MS-MSSOD](#Section_2.1) | Media Streaming Server Protocols Overview | Provides an overview of the protocols implemented in Windows Media Streaming technologies. Media Streaming technologies are used to convert both live and prerecorded audio format and to distribute the content over a network or the Internet. |
-| [MS-NAPOD](#Section_2.1) | Network Access Protection Protocols Overview | Network Access Protection (NAP) verifies the identities of users and the proper software configuration of client computers and system states, such as antivirus software and anti-malware, through network access processes. NAP also provides mechanisms for a client to remediate problem states, such as out-of-date software or loading new antivirus signatures. |
-| [MS-NETOD](#Section_2.1) | Microsoft .NET Framework Protocols Overview | Provides an overview of the protocols that map to the .NET Framework distributed technologies that enable network communications. This includes the protocols implemented in the Windows Workflow Foundation (WF), Windows Communication Foundation (WCF), identity and directory services, data access, ASP.NET, and .NET Remoting technologies of the .NET Framework. |
-| [MS-PRSOD](#Section_2.1) | Print Services Protocols Overview | Describes a distributed system of print servers that manage printers and make them available to print clients. One or more servers can be used, each server independently managing one or more printers. Print clients use the component protocols to submit print jobs, manage jobs, receive job notifications, and administer printer drivers and print queues. |
-| [MS-RMSOD](#Section_2.1) | Rights Management Services Protocols Overview | Provides an overview of the Rights Management Services (RMS) protocols, which enable information-protection functionality that works with RMS-enabled applications to help safeguard digital information from unauthorized use, online and offline, inside and outside of the firewall. RMS is designed for organizations that need to protect sensitive and proprietary information, such as financial reports, product specifications, customer data, and confidential email messages. |
-| [MS-STOROD](#Section_2.1) | Storage Services Protocols Overview | Provides an overview of the Storage Services protocols, which provide the following services: disk and volume management services, data backup and restore, removable media management, file access control, and file encryption in Windows. |
-| [MS-TPSOD](#Section_2.1) | Transaction Processing Services Protocols Overview | Provides an overview of the functionality and relationship of the Transaction Processing protocols. Transaction processing is designed to maintain a computation system in a known, consistent state. It allows multiple individual operations to be linked together as a single, indivisible operation called an [**atomic transaction**](#gt_atomic-transaction). |
-| [MS-VSOD](#Section_2.1) | Virtual Storage Protocols Overview | Provides an overview of the functionality of and relationship among the virtual storage protocols, which provide a means for a client to access, read, and write to virtual storage, such as a virtual disk file, on a remote server. Virtual storage protocols also can provide this functionality to multiple clients by using a shared virtual [**SCSI**](#gt_small-computer-system-interface-scsi) disk. |
-| [MS-WMOD](#Section_2.1) | Windows Management Protocols Overview | Provides an overview of the Windows management protocols, which provide the ability to control settings and to collect data for a set of client and server computers. These protocols enable a computer to query another system and to perform administrative operations to monitor, troubleshoot, and conduct hardware and software inventories in remote computers. |
-| [MS-WSUSOD](#Section_2.1) | Windows Server Update Services Protocols Overview | Provides an overview of the [**Windows Server Update Services (WSUS)**](#gt_windows-server-update-services-wsus) protocols. These protocols enable communication between the WSUS client and server to enable clients to discover software updates available on the server. They also enable communication between servers to propagate software update information, the updates, and the administrative intent in a hierarchical deployment. |
+| [MS-ADFSOD](../MS-ADFSOD/MS-ADFSOD.md) | Active Directory Federation Services (AD FS) Protocols Overview | AD FS is the Microsoft implementation of federation services. AD FS provides browser-based clients (internal or external to a network) with seamless, one-prompt access to one or more protected Internet-facing applications, even when the user accounts and applications are located in different networks or organizations. |
+| [MS-ADOD](../MS-ADOD/MS-ADOD.md) | Active Directory Protocols Overview | Provides an overview of the functionality and relationship of the protocols that make up the client-server and server-to-server behavior of Active Directory. The Active Directory protocols provide directory services for the centralized storage of identity and account information, as well as storage for other forms of data such as group policies and printer location information, a foundation for authentication services in a domain environment, domain services, and directory replication services in Windows. |
+| [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) | Authentication Services Protocols Overview | Provides an overview of the functionality and relationship of the Authentication Services protocols, which are used to verify the identity of users, computers, and services through the interactive logon and network logon authentication processes. |
+| [MS-AZOD](../MS-AZOD/MS-AZOD.md) | Authorization Protocols Overview | Provides an overview of the Authorization protocols, which control granting access to resources after authentication has been established. An authenticated request is not sufficient for access; a corresponding decision has to also determine whether a request is authorized. To accomplish this, several authorization models are provided in Windows. |
+| [MS-CCROD](../MS-CCROD/MS-CCROD.md) | Content Caching and Retrieval Protocols Overview | Provides an overview of the protocols implemented in the Windows Peer Content Caching and Retrieval framework. This framework is based on a peer-to-peer discovery and distribution model designed to reduce wide-area-network (WAN) link bandwidth utilization and provide faster content downloads from a [**local area network (LAN)**](#gt_local-area-network-lan). |
+| [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md) | Certificate Services Protocols Overview | Provides an overview of the protocols implementing Certificate Services. Certificate Services protocols are used for certificate enrollment, certificate policy, and remote administration of certificate services. This document describes the intended functionality of the Certificate Services protocols and how these protocols interact with each other. |
+| [MS-FASOD](../MS-FASOD/MS-FASOD.md) | File Access Services Protocols Overview | Provides an overview of the functionality and relationship of the File Access Services (FAS) protocols, which enable network file access and sharing in Windows and allow a client computer to discover, access, and share files that are hosted on, and made available by, another computer. |
+| [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md) | File Services Management Protocols Overview | Provides an overview of the protocols used for configuring, managing, and monitoring file services in Windows over the network. The File Services Management protocols support scenarios such as share management, DFS namespace management, SMB Server management, SMB network redirector management, file server resource management, and file replication. |
+| [MS-GPOD](../MS-GPOD/MS-GPOD.md) | Group Policy Protocols Overview | The Group Policy protocols are used to create, read, update, and remove Group Policy Objects. These protocols enable the Group Policy client to retrieve policy settings from a Group Policy server. The base functionality of Group Policy can be extended through client-side extensions that implement application-specific policy settings, and through Administrative tool extensions that implement authored configuration settings. |
+| [MS-MQOD](../MS-MQOD/MS-MQOD.md) | Message Queuing Protocols Overview | Provides an overview of the Message Queuing protocols. Microsoft Message Queuing (MSMQ) is a communications service that enables reliable and secure asynchronous messaging between applications over a variety of deployment topologies. |
+| [MS-MSSOD](../MS-MSSOD/MS-MSSOD.md) | Media Streaming Server Protocols Overview | Provides an overview of the protocols implemented in Windows Media Streaming technologies. Media Streaming technologies are used to convert both live and prerecorded audio format and to distribute the content over a network or the Internet. |
+| [MS-NAPOD](../MS-NAPOD/MS-NAPOD.md) | Network Access Protection Protocols Overview | Network Access Protection (NAP) verifies the identities of users and the proper software configuration of client computers and system states, such as antivirus software and anti-malware, through network access processes. NAP also provides mechanisms for a client to remediate problem states, such as out-of-date software or loading new antivirus signatures. |
+| [MS-NETOD](../MS-NETOD/MS-NETOD.md) | Microsoft .NET Framework Protocols Overview | Provides an overview of the protocols that map to the .NET Framework distributed technologies that enable network communications. This includes the protocols implemented in the Windows Workflow Foundation (WF), Windows Communication Foundation (WCF), identity and directory services, data access, ASP.NET, and .NET Remoting technologies of the .NET Framework. |
+| [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md) | Print Services Protocols Overview | Describes a distributed system of print servers that manage printers and make them available to print clients. One or more servers can be used, each server independently managing one or more printers. Print clients use the component protocols to submit print jobs, manage jobs, receive job notifications, and administer printer drivers and print queues. |
+| [MS-RMSOD](../MS-RMSOD/MS-RMSOD.md) | Rights Management Services Protocols Overview | Provides an overview of the Rights Management Services (RMS) protocols, which enable information-protection functionality that works with RMS-enabled applications to help safeguard digital information from unauthorized use, online and offline, inside and outside of the firewall. RMS is designed for organizations that need to protect sensitive and proprietary information, such as financial reports, product specifications, customer data, and confidential email messages. |
+| [MS-STOROD](../MS-STOROD/MS-STOROD.md) | Storage Services Protocols Overview | Provides an overview of the Storage Services protocols, which provide the following services: disk and volume management services, data backup and restore, removable media management, file access control, and file encryption in Windows. |
+| [MS-TPSOD](../MS-TPSOD/MS-TPSOD.md) | Transaction Processing Services Protocols Overview | Provides an overview of the functionality and relationship of the Transaction Processing protocols. Transaction processing is designed to maintain a computation system in a known, consistent state. It allows multiple individual operations to be linked together as a single, indivisible operation called an [**atomic transaction**](#gt_atomic-transaction). |
+| [MS-VSOD](../MS-VSOD/MS-VSOD.md) | Virtual Storage Protocols Overview | Provides an overview of the functionality of and relationship among the virtual storage protocols, which provide a means for a client to access, read, and write to virtual storage, such as a virtual disk file, on a remote server. Virtual storage protocols also can provide this functionality to multiple clients by using a shared virtual [**SCSI**](#gt_small-computer-system-interface-scsi) disk. |
+| [MS-WMOD](../MS-WMOD/MS-WMOD.md) | Windows Management Protocols Overview | Provides an overview of the Windows management protocols, which provide the ability to control settings and to collect data for a set of client and server computers. These protocols enable a computer to query another system and to perform administrative operations to monitor, troubleshoot, and conduct hardware and software inventories in remote computers. |
+| [MS-WSUSOD](../MS-WSUSOD/MS-WSUSOD.md) | Windows Server Update Services Protocols Overview | Provides an overview of the [**Windows Server Update Services (WSUS)**](#gt_windows-server-update-services-wsus) protocols. These protocols enable communication between the WSUS client and server to enable clients to discover software updates available on the server. They also enable communication between servers to propagate software update information, the updates, and the administrative intent in a hierarchical deployment. |
 
 Microsoft works with many companies and participates in industry initiatives to enable Microsoft products to interoperate using networks and network services. Network protocols are developed and promoted by a variety of formal standards bodies, industry consortia, and individual companies worldwide. Microsoft actively participates and contributes to the standardization process in many standards bodies and develops implementations to make Windows interoperable with other products that use these protocols.
 
@@ -833,8 +833,8 @@ This section describes the following protocol group:
 Application server protocols provide an environment in which applications can interoperate, regardless of whether they run on remote computers, or whether the computers run different operating systems. These protocols are organized into three groups:
 
 - Component Object Model (COM)-based technologies (section [2.2.1](#Section_2.2.1)) such as COM+ and [**Distributed Component Object Model (DCOM)**](#gt_distributed-component-object-model-dcom) that provide support for object-oriented applications.
-- Transaction processing services (section [2.2.2](../MS-TPSOD/MS-TPSOD.md)), which provides distributed transaction processing across multiple operating systems. The Transaction Processing Services Protocols Overview [MS-TPSOD](#Section_2.1) provides a conceptual overview, functional architecture, and use cases of the Windows transaction processing protocols.
-- Message Queuing (MSMQ) (section [2.2.3](../MS-MQOD/MS-MQOD.md)), which supports asynchronous communications between intermittently connected applications. The Message Queuing Protocols Overview [MS-MQOD](#Section_2.1) provides a conceptual overview, functional architecture, and use cases of the Microsoft Message Queuing protocols.
+- Transaction processing services (section [2.2.2](#Section_2.2.2)), which provides distributed transaction processing across multiple operating systems. The Transaction Processing Services Protocols Overview [MS-TPSOD](../MS-TPSOD/MS-TPSOD.md) provides a conceptual overview, functional architecture, and use cases of the Windows transaction processing protocols.
+- Message Queuing (MSMQ) (section [2.2.3](#Section_2.2.3)), which supports asynchronous communications between intermittently connected applications. The Message Queuing Protocols Overview [MS-MQOD](../MS-MQOD/MS-MQOD.md) provides a conceptual overview, functional architecture, and use cases of the Microsoft Message Queuing protocols.
 **Note** The term application server sometimes includes web server software and web services. However, in this document, those technologies are treated separately.
 
 <a id="Section_2.2.1"></a>
@@ -846,16 +846,16 @@ This following table lists the COM-based protocols and specifications.
 
 | Protocol | Specification short name |
 | --- | --- |
-| Component Object Model Plus (COM+) Protocol | [MS-COM](#Section_2.2.1.1) |
-| Component Object Model Plus (COM+) Remote Administration Protocol | [MS-COMA](#Section_2.2.1.1) |
-| Component Object Model Plus (COM+) Event System Protocol | [MS-COMEV](#Section_2.2.1.1) |
-| Component Object Model Plus (COM+) Tracker Service Protocol | [MS-COMT](#Section_2.2.1.1) |
-| Component Object Model Plus (COM+) Queued Components Protocol | [MC-COMQC](#Section_2.2.1.1) |
+| Component Object Model Plus (COM+) Protocol | [MS-COM](../MS-COM/MS-COM.md) |
+| Component Object Model Plus (COM+) Remote Administration Protocol | [MS-COMA](../MS-COMA/MS-COMA.md) |
+| Component Object Model Plus (COM+) Event System Protocol | [MS-COMEV](../MS-COMEV/MS-COMEV.md) |
+| Component Object Model Plus (COM+) Tracker Service Protocol | [MS-COMT](../MS-COMT/MS-COMT.md) |
+| Component Object Model Plus (COM+) Queued Components Protocol | [MC-COMQC](../MC-COMQC/MC-COMQC.md) |
 
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 Component Object Model Plus (COM+)
 
-The Component Object Model Plus (COM+) protocol [MS-COM](#Section_2.2.1.1) extended DCOM by providing facilities to add transactions, synchronization, multiple object class configurations, security, and other attributes to distributed object applications. Windows 2000 operating system was the first operating system version in which COM+ was included.
+The Component Object Model Plus (COM+) protocol [MS-COM](../MS-COM/MS-COM.md) extended DCOM by providing facilities to add transactions, synchronization, multiple object class configurations, security, and other attributes to distributed object applications. Windows 2000 operating system was the first operating system version in which COM+ was included.
 
 COM+ enables developers to create distributed applications. It provides support for transactions, synchronization, multiple object class configurations, security, and other attributes in distributed object applications. The COM+ protocol consists of a set of extensions layered on top of the DCOM Remote Protocol.
 
@@ -876,16 +876,16 @@ The layering of the COM+ protocol with the other protocols in its stack is illus
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 COM+ Remote Administration Protocol (COMA)
 
-The COM+ Remote Administration Protocol (COMA) specified in [MS-COM](#Section_2.2.1.1), enables remote clients to register, import, remove, configure, control, and monitor components and conglomerations for an Object Request Broker (ORB) ([MS-COMA](#Section_2.2.1.1) section 1.3.1).
+The COM+ Remote Administration Protocol (COMA) specified in [MS-COM](../MS-COM/MS-COM.md), enables remote clients to register, import, remove, configure, control, and monitor components and conglomerations for an Object Request Broker (ORB) ([MS-COMA](../MS-COMA/MS-COMA.md) section 1.3.1).
 
 In COM+, the indivisible unit of software functionality is the component. Each component defined to the server is identified by a GUID called a [**class identifier (CLSID)**](#gt_class-identifier-clsid). A conglomeration, identified by a conglomeration identifier, is a collection of component configuration entries for components that a component developer or administrator wants to be managed as a group.
 
 COMA is related to the following protocols:
 
 - Distributed Component Object Model (DCOM) [MS-DCOM](../MS-DCOM/MS-DCOM.md) is the foundation on which COMA is built.
-- Component Object Model Plus (COM+) Tracker Service Protocol [MS-COMT](#Section_2.2.1.1) provides functionality for obtaining run-time information about instance containers.
-- Component Object Model Plus (COM+) Event System Protocol [MS-COMEV](#Section_2.2.1.1) provides functionality for configuring event classes and subscriptions.
-- Component Object Model Plus (COM+) Queued Components Protocol [MC-COMQC](#Section_2.2.1.1): COMA can be used to configure the COM+ Queued Components Protocol on a server. Several configuration properties of objects in the COMA catalog are designed to support enabling the COM+ Queued Components Protocol as a transport for communication between components.
+- Component Object Model Plus (COM+) Tracker Service Protocol [MS-COMT](../MS-COMT/MS-COMT.md) provides functionality for obtaining run-time information about instance containers.
+- Component Object Model Plus (COM+) Event System Protocol [MS-COMEV](../MS-COMEV/MS-COMEV.md) provides functionality for configuring event classes and subscriptions.
+- Component Object Model Plus (COM+) Queued Components Protocol [MC-COMQC](../MC-COMQC/MC-COMQC.md): COMA can be used to configure the COM+ Queued Components Protocol on a server. Several configuration properties of objects in the COMA catalog are designed to support enabling the COM+ Queued Components Protocol as a transport for communication between components.
 - Service Control Manager Remote Protocol [MS-SCMR](../MS-SCMR/MS-SCMR.md): COMA can be used to configure system services (also known as daemons) for conglomerations. The Service Control Manager Remote Protocol enables configuration of system services. Neither protocol makes the other obsolete because each enables configuration that is not available in the other.
 - Common Internet File System (CIFS) Protocol [MS-CIFS](../MS-CIFS/MS-CIFS.md): COMA provides limited management of CIFS file shares for use in replication scenarios. COMA replication functionality is intended to be used alongside CIFS to copy conglomerations between COMA servers in these replication scenarios. Other COMA functionality requiring remote file operations might use CIFS, but this is not required by the protocol.
 COMA can be used to configure COM+ on a server. COMA partitions have a natural mapping to COM+ partitions, and many configuration properties of objects in the COMA catalog are designed to support configuration of COM+ behavior that is called out as implementation-specific in [MS-COM].
@@ -895,7 +895,7 @@ COMA is not a general-purpose or extensible configuration protocol. See [MS-COMA
 <a id="Section_2.2.1.3"></a>
 #### 2.2.1.3 COM+ Event System Protocol (COMEV)
 
-The COM+ Event System Protocol (COMEV) [MS-COMEV](#Section_2.2.1.1), provides a way to manage events and subscriptions on a remote machine. The protocol is exposed as a set of DCOM interfaces.
+The COM+ Event System Protocol (COMEV) [MS-COMEV](../MS-COMEV/MS-COMEV.md), provides a way to manage events and subscriptions on a remote machine. The protocol is exposed as a set of DCOM interfaces.
 
 Using COMEV, a publisher can perform the following tasks on a remote machine:
 
@@ -904,29 +904,29 @@ Using COMEV, a publisher can perform the following tasks on a remote machine:
 - Modify, query, or delete subscriptions for an event.
 COMEV uses DCOM to communicate over the wire and authenticate requests issued against the infrastructure. This protocol also uses the OLE Automation Protocol [MS-OAUT](#Section_2.3.2) along with DCOM by using the data types BSTR and VARIANT from the IDispatch interface.
 
-COMEV can use the Component Object Model Plus (COM+) Remote Administration Protocol [MS-COMA](#Section_2.2.1.1) to perform registration of type libraries for event classes and subscriber DCOM components that it uses. COMEV can also be used to discover subscriber DCOM components registered on the server to create subscriptions.
+COMEV can use the Component Object Model Plus (COM+) Remote Administration Protocol [MS-COMA](../MS-COMA/MS-COMA.md) to perform registration of type libraries for event classes and subscriber DCOM components that it uses. COMEV can also be used to discover subscriber DCOM components registered on the server to create subscriptions.
 
 COMEV is appropriate for managing a data store of publisher and subscriber events and subscriptions for scenarios in which scalability requirements are minimal. It is not intended for scenarios with more than 100 event types and subscribers. Also, the protocol is intended for scenarios in which access to the event store (due to adding, reading, updating, or deleting subscriptions and events) is not very frequent (on the order of once every few minutes).
 
 <a id="Section_2.2.1.4"></a>
 #### 2.2.1.4 COM+ Tracker Service Protocol (COMT)
 
-The Component Object Model Plus (COM+) Tracker Service Protocol, [MS-COMT](#Section_2.2.1.1) enables remote clients to monitor instances of components running on a server. The server end of the protocol tracks the status of component instances and instance containers on the server and implements an interface that clients can use to poll for this status. Optionally, the server can include an event-driven notification system in which the client can supply a callback interface for receiving tracker events. The server calls the client's callback interface whenever new tracking data is available, for example, as a result of local events on the server.
+The Component Object Model Plus (COM+) Tracker Service Protocol, [MS-COMT](../MS-COMT/MS-COMT.md) enables remote clients to monitor instances of components running on a server. The server end of the protocol tracks the status of component instances and instance containers on the server and implements an interface that clients can use to poll for this status. Optionally, the server can include an event-driven notification system in which the client can supply a callback interface for receiving tracker events. The server calls the client's callback interface whenever new tracking data is available, for example, as a result of local events on the server.
 
-COMT is built on DCOM. The COM+ Remote Administration Protocol [MS-COMA](#Section_2.2.1.1) also provides functionality for obtaining run-time information about instance containers. COMT makes this functionality obsolete by enabling clients to obtain a richer set of information and by providing a push model.
+COMT is built on DCOM. The COM+ Remote Administration Protocol [MS-COMA](../MS-COMA/MS-COMA.md) also provides functionality for obtaining run-time information about instance containers. COMT makes this functionality obsolete by enabling clients to obtain a richer set of information and by providing a push model.
 
-Client applications that require notification receipt using the push model need to use another protocol, such as the Component Object Model Plus (COM+) Event System Protocol [MS-COMEV](#Section_2.2.1.1) to first register the COMT callback interface.
+Client applications that require notification receipt using the push model need to use another protocol, such as the Component Object Model Plus (COM+) Event System Protocol [MS-COMEV](../MS-COMEV/MS-COMEV.md) to first register the COMT callback interface.
 
 This protocol is most appropriate for monitoring running instances of components when the tracking information is used for informational purposes. It is not appropriate when this information is required for correct behavior of a client application.
 
 <a id="Section_2.2.1.5"></a>
 #### 2.2.1.5 COM+ Queued Components Protocol (COMQC)
 
-The Component Object Model Plus (COM+) Queued Components Protocol (COMQC) [MC-COMQC](#Section_2.2.1.1) enables a client to invoke methods asynchronously on a server in scenarios of limited or intermittent connectivity. The client writes all necessary states to a self-contained [**binary large object (BLOB)**](#gt_binary-large-object-blob) and sends it to the server over a message queuing transport protocol when connectivity is available. After receiving the BLOB, the server parses it and replays the method calls.
+The Component Object Model Plus (COM+) Queued Components Protocol (COMQC) [MC-COMQC](../MC-COMQC/MC-COMQC.md) enables a client to invoke methods asynchronously on a server in scenarios of limited or intermittent connectivity. The client writes all necessary states to a self-contained [**binary large object (BLOB)**](#gt_binary-large-object-blob) and sends it to the server over a message queuing transport protocol when connectivity is available. After receiving the BLOB, the server parses it and replays the method calls.
 
 The Component Object Model Plus (COM+) Queued Components Protocol interacts with the MSMQ protocols. The layering of the protocol stack is illustrated in [MC-COMQC] section 1.3.
 
-COMQC relies on DCE 1.1: Remote Procedure Call [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and the OLE Automation Protocol [MS-OAUT](#Section_2.3.2) to marshal the parameters of the recorded method calls, the Message Queuing (MSMQ): Queue Manager Client Protocol [MS-MQMP](#Section_2.2.3) for transport, and Message Queuing (MSMQ): Data Structures [MS-MQMQ](#Section_2.2.3) for common data formats. COMQC is limited to calls made on COM+ protocol objects. COMQC supports higher layer application functionality, but no other protocols rely on it.
+COMQC relies on DCE 1.1: Remote Procedure Call [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) and the OLE Automation Protocol [MS-OAUT](#Section_2.3.2) to marshal the parameters of the recorded method calls, the Message Queuing (MSMQ): Queue Manager Client Protocol [MS-MQMP](../MS-MQMP/MS-MQMP.md) for transport, and Message Queuing (MSMQ): Data Structures [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) for common data formats. COMQC is limited to calls made on COM+ protocol objects. COMQC supports higher layer application functionality, but no other protocols rely on it.
 
 COMQC is asynchronous and one-way, with information flowing exclusively from the client to the server.
 
@@ -939,7 +939,7 @@ COMQC is appropriate for performing asynchronous method calls when the client an
 <a id="Section_2.2.2"></a>
 ### 2.2.2 Transaction Processing Services
 
-Transaction Processing Services, defined in Transaction Processing Services Overview [MS-TPSOD](#Section_2.1), provides services for systems that require transactions to be coordinated in a distributed system. Transaction processing enables information processing systems, such as databases or secure web services, to change the state of resources so that either all of the changes happen or none of the changes happens. Resources can be data, such as rows in a database, or logical entities, such as the execution state of a program.
+Transaction Processing Services, defined in Transaction Processing Services Overview [MS-TPSOD](../MS-TPSOD/MS-TPSOD.md), provides services for systems that require transactions to be coordinated in a distributed system. Transaction processing enables information processing systems, such as databases or secure web services, to change the state of resources so that either all of the changes happen or none of the changes happens. Resources can be data, such as rows in a database, or logical entities, such as the execution state of a program.
 
 In transaction processing, multiple individual operations are consolidated as a single indivisible operation known as an [**atomic transaction**](#gt_atomic-transaction). If at least one of the operations fails, the transaction processing services roll back all operations in the transaction. Rollback guarantees that the system data can consistently be restored to the known state that it was in before the transaction began. However, a transaction cannot be rolled back once it successfully completes.
 
@@ -948,7 +948,7 @@ The transaction processing protocols are listed in [MS-TPSOD] section 2.2.
 <a id="Section_2.2.3"></a>
 ### 2.2.3 Message Queuing (MSMQ)
 
-The Message Queuing protocols, defined in the Message Queuing Protocols Overview [MS-MQOD](#Section_2.1), provide a communications service that decouples the act of sending a message from the act of receiving that message, allowing applications to communicate even if their execution lifetimes do not overlap.
+The Message Queuing protocols, defined in the Message Queuing Protocols Overview [MS-MQOD](../MS-MQOD/MS-MQOD.md), provide a communications service that decouples the act of sending a message from the act of receiving that message, allowing applications to communicate even if their execution lifetimes do not overlap.
 
 A list of all MSMQ member protocols is in [MS-MQOD] section 2.2.
 
@@ -996,7 +996,7 @@ This protocol allows for encodings as defined in [MS-NRTP](../MS-NRTP/MS-NRTP.md
 <a id="Section_2.3.2"></a>
 ### 2.3.2 OLE Automation Protocol
 
-The OLE Automation Protocol, specified in [MS-OAUT](#Section_2.3.2), allows applications, called automation clients, to create, activate, set properties, or call methods on automation objects that other applications share. Automation objects are objects that automation servers expose. Because automation objects are [**COM**](#gt_component-object-model-com) objects, they implement dual interfaces derived from **IDispatch** that allow automation controllers to invoke methods for which the method name, number, or parameter types cannot be determined at compile time. This is because the OLE Automation Protocol uses COM, specified in [MS-COM](#Section_2.2.1.1) to support marshaling of automation types and to support exposing COM components to automation clients through late binding. The OLE Automation Protocol also uses the Distributed Component Object Model (DCOM) Remote Protocol specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), so the automation client and server can reside on different computers connected by a network. In addition, the OLE Automation Protocol specifies how an automation type browser can discover and interpret type information from a type description server.
+The OLE Automation Protocol, specified in [MS-OAUT](#Section_2.3.2), allows applications, called automation clients, to create, activate, set properties, or call methods on automation objects that other applications share. Automation objects are objects that automation servers expose. Because automation objects are [**COM**](#gt_component-object-model-com) objects, they implement dual interfaces derived from **IDispatch** that allow automation controllers to invoke methods for which the method name, number, or parameter types cannot be determined at compile time. This is because the OLE Automation Protocol uses COM, specified in [MS-COM](../MS-COM/MS-COM.md) to support marshaling of automation types and to support exposing COM components to automation clients through late binding. The OLE Automation Protocol also uses the Distributed Component Object Model (DCOM) Remote Protocol specified in [MS-DCOM](../MS-DCOM/MS-DCOM.md), so the automation client and server can reside on different computers connected by a network. In addition, the OLE Automation Protocol specifies how an automation type browser can discover and interpret type information from a type description server.
 
 The OLE Automation Protocol is useful for exposing application functionality to scripting languages and across a distributed environment. It allows exposed objects from many applications to be used in a single programming environment. It enables objects to be accessed from any scripting environment or programming tool that implements automation.
 
@@ -1091,7 +1091,7 @@ This protocol is based on [**DCOM**](#gt_distributed-component-object-model-dcom
 
 .NET Framework provides developers with a foundation on which to build applications that communicate based on industry standards. As an application development platform, .NET Framework includes class libraries of prewritten functionality that developers can use in their applications to present graphical user interfaces, access databases and files, and communicate over networks, including the Internet. Code based on the .NET Framework can interoperate with applications developed on other platforms.
 
-The Microsoft .NET Framework Protocols Overview [MS-NETOD](#Section_2.1) describes the relationship among the protocols implemented in the .NET Framework. [MS-NETOD] section 1.3 contains a diagram depicting the relationship among the .NET Framework technologies and [MS-NETOD] section 2.2 contains a table of all of the .NET protocols.
+The Microsoft .NET Framework Protocols Overview [MS-NETOD](../MS-NETOD/MS-NETOD.md) describes the relationship among the protocols implemented in the .NET Framework. [MS-NETOD] section 1.3 contains a diagram depicting the relationship among the .NET Framework technologies and [MS-NETOD] section 2.2 contains a table of all of the .NET protocols.
 
 <a id="Section_3"></a>
 # 3 Collaboration and Communication
@@ -1111,23 +1111,23 @@ The following table lists the collaboration protocols implemented in Windows and
 | --- | --- |
 | H.245 Protocol: Microsoft Extensions | [MS-H245](../MS-H245/MS-H245.md) |
 | Microsoft NetMeeting Protocol | [MS-MNPR](../MS-MNPR/MS-MNPR.md) |
-| NT LAN Manager (NTLM) Authentication: Network News Transfer Protocol (NNTP) Extension | [MS-NNTP](#Section_9.2) |
-| NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension | [MS-SMTPNTLM](#Section_9.2) |
+| NT LAN Manager (NTLM) Authentication: Network News Transfer Protocol (NNTP) Extension | [MS-NNTP](../MS-NNTP/MS-NNTP.md) |
+| NT LAN Manager (NTLM) Authentication: Simple Mail Transfer Protocol (SMTP) Extension | [MS-SMTPNTLM](../MS-SMTPNTLM/MS-SMTPNTLM.md) |
 | Session Description Protocol (SDP) Extensions | [MS-SDP](../MS-SDP/MS-SDP.md) |
 | Session Initiation Protocol (SIP): Microsoft Extensions | [MS-SIP](../MS-SIP/MS-SIP.md) |
 | Telephony API Internet Locator Service Protocol | [MS-TAIL](../MS-TAIL/MS-TAIL.md) |
 | Telephony Remote Protocol Specification | [MS-TRP](../MS-TRP/MS-TRP.md) |
 
-**Note** The collaboration services protocols implemented in Microsoft Office are described in the Lync and Lync Server Protocols Overview [MS-OCSPROT](#Section_2.1) and the Groove Protocols Overview [MS-GRVPROT](#Section_2.1).
+**Note** The collaboration services protocols implemented in Microsoft Office are described in the Lync and Lync Server Protocols Overview [MS-OCSPROT](../MS-OCSPROT/MS-OCSPROT.md) and the Groove Protocols Overview [MS-GRVPROT](../MS-GRVPROT/MS-GRVPROT.md).
 
-The collaboration protocols implemented in Exchange Server are covered in the Exchange Server Protocols System Overview [MS-OXPROTO](#Section_2.1).
+The collaboration protocols implemented in Exchange Server are covered in the Exchange Server Protocols System Overview [MS-OXPROTO](../MS-OXPROTO/MS-OXPROTO.md).
 
 <a id="Section_3.2"></a>
 ## 3.2 Media Services Protocols
 
 Media services protocols enable network communications between a client and a server that hosts and delivers media across a network. Media services protocols enable content to be streamed over the Internet or an intranet as a [**unicast**](#gt_unicast) stream. Through these protocols, a computer can run a media encoder, a media server, and several client computers running media play clients.
 
-The media services protocols are fully described in the Media Streaming Server Protocols Overview [MS-MSSOD](#Section_2.1).
+The media services protocols are fully described in the Media Streaming Server Protocols Overview [MS-MSSOD](../MS-MSSOD/MS-MSSOD.md).
 
 <a id="Section_4"></a>
 # 4 Device-Specific Protocols
@@ -1157,7 +1157,7 @@ The following documents describe the Windows interoperability services for inter
 
 [**Active Directory**](#gt_active-directory) is a [**directory service (DS)**](#gt_directory-service-ds) that defines the data structure and services that provide the means to store, manage, and retrieve the identities and relationships of users, groups, and computers in a Windows network. Active Directory stores this information in a domain, which is a collection of computers and their associated security groups that is managed as a single entity.
 
-Active Directory stores security information, such as passwords and privileges for domain users and groups. This information is replicated across the domain by servers running Active Directory called [**domain controllers (DCs)**](#gt_domain-controller-dc). Details about the components necessary for creating a DC and how the components are invoked by clients of the domain services are described in the Active Directory Protocols Overview [MS-ADOD](#Section_2.1).
+Active Directory stores security information, such as passwords and privileges for domain users and groups. This information is replicated across the domain by servers running Active Directory called [**domain controllers (DCs)**](#gt_domain-controller-dc). Details about the components necessary for creating a DC and how the components are invoked by clients of the domain services are described in the Active Directory Protocols Overview [MS-ADOD](../MS-ADOD/MS-ADOD.md).
 
 Active Directory operates in two distinct modes: [**Active Directory Domain Services (AD DS)**](#gt_active-directory-domain-services-ad-ds) and [**Active Directory Lightweight Directory Services (AD LDS)**](#gt_active-directory-lightweight-directory-services-ad-lds), both of which are described in [MS-ADOD].
 
@@ -1187,7 +1187,7 @@ Content caching enables the retrieval of content from networked computers. It su
 
 **Distributed cache:** In which the cached content is distributed among a number of computers. This is a peer-to-peer caching model.
 
-The content caching protocols are described fully in the Content Caching and Retrieval Protocol Overview [MS-CCROD](#Section_2.1) section 2.1.2. This section describes the relationship among the protocols required for content caching and retrieval and section 2.2 lists the member protocols.
+The content caching protocols are described fully in the Content Caching and Retrieval Protocol Overview [MS-CCROD](../MS-CCROD/MS-CCROD.md) section 2.1.2. This section describes the relationship among the protocols required for content caching and retrieval and section 2.2 lists the member protocols.
 
 <a id="Section_6.3"></a>
 ## 6.3 DFS and File Replication Protocols
@@ -1213,7 +1213,7 @@ The DFS and file replication protocols are as follows:
 | File Replication Service Protocol Specification | [MS-FRS1] |
 | Remote Differential Compression Algorithm Specification | [MS-RDC] |
 
-An overview of DFS and file replication can be found in the File Services Management Protocols Overview [MS-FSMOD](#Section_6.5). Information on the DFS namespace is provided in [MS-DFSC] and in the File Access Services Protocol Overview [MS-FASOD](#Section_6.4).
+An overview of DFS and file replication can be found in the File Services Management Protocols Overview [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md). Information on the DFS namespace is provided in [MS-DFSC] and in the File Access Services Protocol Overview [MS-FASOD](../MS-FASOD/MS-FASOD.md).
 
 <a id="Section_6.4"></a>
 ## 6.4 File Access Services Protocols
@@ -1222,7 +1222,7 @@ File access services enable applications to discover, access, and share files th
 
 Most businesses and many personal computing environments have a requirement for file hierarchies stored in a file system (object store) on one computer to be accessed and manipulated by applications on other computers. This scenario is typically referred to as file sharing or remote file access. A key goal is to ensure application compatibility by providing broadly the same semantics to clients as if the shared object store were local to them. This compatibility would not be provided by sharing the files through a protocol with more limited semantics, such as FTP or [**HTTP**](#gt_hypertext-transfer-protocol-http). The file access protocols address the need for ensured compatibility.
 
-The File Access Services Protocols Overview [MS-FASOD](#Section_6.4) fully describes these protocols. The File Access Services protocols are listed in [MS-FASOD] section 2.2.
+The File Access Services Protocols Overview [MS-FASOD](../MS-FASOD/MS-FASOD.md) fully describes these protocols. The File Access Services protocols are listed in [MS-FASOD] section 2.2.
 
 Remote file systems enable an application that runs on a local computer to access files stored on a remote computer. See [Rifkin1986] for a discussion on providing transparent access to remote files.
 
@@ -1260,14 +1260,14 @@ Network captures of SMB 2 protocol traffic can include [**input/output control (
 
 The File Services Management protocols allow an administrator to remotely configure and manage file servers. They also support Distributed File System (DFS) replication and file replication operations. The administrator uses Admin Client to configure various policies that apply to the object store on a file server, such as quotas (limits on user disk space use) and screening (restrictions on the type of content allowed to be stored), and to manage the shares.
 
-The File Services Management Protocols Overview [MS-FSMOD](#Section_6.5) describes the relationship among the protocols required for remote administration and management of file servers that share data within an organization.
+The File Services Management Protocols Overview [MS-FSMOD](../MS-FSMOD/MS-FSMOD.md) describes the relationship among the protocols required for remote administration and management of file servers that share data within an organization.
 
 The member protocols are listed in [MS-FSMOD] section 2.2, and the protocol layering relationship for the File Services Management protocols is described and illustrated in [MS-FSMOD] section 2.1.5.
 
 <a id="Section_6.6"></a>
 ## 6.6 Print and Fax Services Protocols
 
-The print services protocols provide mechanisms for managing and gaining access to print services in a distributed environment. Using print services protocols, clients can print to or obtain printer drivers from servers. The Print Services Protocols Overview [MS-PRSOD](#Section_2.1) describes the print services that support the use and management of a distributed print infrastructure. The print services protocols are listed in [MS-PRSOD] section 2.2. The Fax Server and Client Remote Protocol is specified in [MS-FAX](../MS-FAX/MS-FAX.md).
+The print services protocols provide mechanisms for managing and gaining access to print services in a distributed environment. Using print services protocols, clients can print to or obtain printer drivers from servers. The Print Services Protocols Overview [MS-PRSOD](../MS-PRSOD/MS-PRSOD.md) describes the print services that support the use and management of a distributed print infrastructure. The print services protocols are listed in [MS-PRSOD] section 2.2. The Fax Server and Client Remote Protocol is specified in [MS-FAX](../MS-FAX/MS-FAX.md).
 
 Printers are often shared among multiple print clients using a print server. Printers are represented as print queues that are located on print servers. A print client has one or more connections to print queues that are shared by one or more print servers, which comprise a simple hub-spoke server-client model. The Print Services protocols enable a large number of users to print to a small number of printers, enables an administrator to enforce which printers can be used by users and when they can be used, and automates the process of installing and updating necessary printer drivers on numerous computers that send jobs to remote printers.
 
@@ -1288,12 +1288,12 @@ Fax queues use only the TIFF data format to store sent and received fax jobs; ho
 <a id="Section_6.7"></a>
 ## 6.7 Storage Services Protocols
 
-The Storage Services Protocols Overview [MS-STOROD](#Section_2.1) describes the protocols required for configuring and administering storage services operations in Windows such as managing disks and volumes, backing up and restoring data, managing removable media and the media library, file access control, and file [**encryption**](#gt_encryption) and [**decryption**](#gt_decryption). [MS-STOROD] section 2.2 lists the storage services protocols.
+The Storage Services Protocols Overview [MS-STOROD](../MS-STOROD/MS-STOROD.md) describes the protocols required for configuring and administering storage services operations in Windows such as managing disks and volumes, backing up and restoring data, managing removable media and the media library, file access control, and file [**encryption**](#gt_encryption) and [**decryption**](#gt_decryption). [MS-STOROD] section 2.2 lists the storage services protocols.
 
 <a id="Section_6.8"></a>
 ## 6.8 Virtual Storage Protocols
 
-The Virtual Storage Protocols Overview [MS-VSOD](#Section_2.1) describes the functionality and relationships among the virtual storage protocols, which provide a way for a client to access, read, and write to virtual storage on a remote server, such as a [**virtual disk file**](#gt_virtual-disk-file). Virtual Storage protocols can provide this functionality to multiple clients by using a shared virtual [**SCSI**](#gt_small-computer-system-interface-scsi) disk. [MS-VSOD] section 2.2 lists the virtual storage protocols.
+The Virtual Storage Protocols Overview [MS-VSOD](../MS-VSOD/MS-VSOD.md) describes the functionality and relationships among the virtual storage protocols, which provide a way for a client to access, read, and write to virtual storage on a remote server, such as a [**virtual disk file**](#gt_virtual-disk-file). Virtual Storage protocols can provide this functionality to multiple clients by using a shared virtual [**SCSI**](#gt_small-computer-system-interface-scsi) disk. [MS-VSOD] section 2.2 lists the virtual storage protocols.
 
 <a id="Section_7"></a>
 # 7 Networking
@@ -1318,13 +1318,13 @@ The [**Dynamic Host Configuration Protocol (DHCP)**](#gt_dynamic-host-configurat
 | --- | --- | --- |
 | Dynamic Host Configuration Protocol (DHCP) Extensions | [MS-DHCPE] | Defines the extensions to the DHCP protocol, including a Classless Static Route Option, the Microsoft Encoding Long Options Packet, Microsoft Disable NETBIOS Option, Release DHCP lease on Shutdown Option, user class option, and remote access server (RAS) specific client identifier. The user class option is used by the DHCP client to identify the type or category of user or application to allow a DHCP server to send configuration information specific to the user or application. The user class is always sent by the DHCP client to the DHCP server. The version of the user class option in these extensions has different packet encoding as well as different behavior to enable a DHCP client to discover all the user classes configured on the DHCP server. |
 | DHCP Failover Protocol Extension | [MS-DHCPF](../MS-DHCPF/MS-DHCPF.md) | Defines extensions to the DHCP Failover Protocol specified in [IETF-DHCPFOP-12]. It is used in DHCP environments where high availability of the DHCP service is required. |
-| Dynamic Host Configuration Protocol (DHCP) Extensions for Network Access Protection (NAP) | [MS-DHCPN](#Section_7.1.3) | Defines extensions to the DHCP protocol that support [**NAP**](#gt_network-access-protection-nap). It provides the mechanism through which the client can convey its health state to the DHCP server, and for the server to convey the client's NAP state and health remediation state to the client. |
+| Dynamic Host Configuration Protocol (DHCP) Extensions for Network Access Protection (NAP) | [MS-DHCPN](../MS-DHCPN/MS-DHCPN.md) | Defines extensions to the DHCP protocol that support [**NAP**](#gt_network-access-protection-nap). It provides the mechanism through which the client can convey its health state to the DHCP server, and for the server to convey the client's NAP state and health remediation state to the client. |
 | Dynamic Host Configuration Protocol (DHCP) Server Management Protocol (DHCPM) | [MS-DHCPM](../MS-DHCPM/MS-DHCPM.md) | Defines the RPC interfaces that provide methods for remotely accessing and administering the DHCP server. DHCPM is the management protocol that defines the RPC interfaces for remotely accessing and administering the DHCP server. |
 
 <a id="Section_7.1.2"></a>
 ### 7.1.2 IP Address Management
 
-The IP Address Management (IPAM) Management protocols specified in [MS-IPAMM](#Section_7.1.2) and [MS-IPAMM2](#Section_7.1.2) are used to remotely retrieve and manage data in the IPAM data store. The IPAM data store consists of the data pertaining to address space management, which includes the configuration data available with the DHCP and DNS server instances in the network.
+The IP Address Management (IPAM) Management protocols specified in [MS-IPAMM](../MS-IPAMM/MS-IPAMM.md) and [MS-IPAMM2](../MS-IPAMM2/MS-IPAMM2.md) are used to remotely retrieve and manage data in the IPAM data store. The IPAM data store consists of the data pertaining to address space management, which includes the configuration data available with the DHCP and DNS server instances in the network.
 
 The IP Address Management (IPAM) Management Protocol Version 2, implemented in Windows Server 2012 R2 operating system, adds the following capabilities to IPAM management:
 
@@ -1336,7 +1336,7 @@ The IP Address Management (IPAM) Management Protocol Version 2, implemented in W
 <a id="Section_7.1.3"></a>
 ### 7.1.3 Network Access Protection (NAP)
 
-The network access protection (NAP) protocols are described in the Network Access Protection Protocols Overview [MS-NAPOD](#Section_2.1).
+The network access protection (NAP) protocols are described in the Network Access Protection Protocols Overview [MS-NAPOD](../MS-NAPOD/MS-NAPOD.md).
 
 <a id="Section_7.1.4"></a>
 ### 7.1.4 Windows Name Resolution
@@ -1493,8 +1493,8 @@ After a security association is established, a host prepares to send an IPsec pa
 
 Authentication between two IPsec hosts can be performed using three mechanisms:
 
-- [**Generic Security Services (GSS)**](#gt_generic-security-services-gss)-API-based authentication that can be performed by hosts that are Windows-domain-joined ([MS-AUTHSOD](#Section_2.1) section 2.1.2.1 and [MS-AUTHSOD] section 2.1.2.2). This form of authentication supports Kerberos, NTLM, or TLS authentications. IKE has been extended [MS-AIPS], to use GSS-API. This extension includes the ability to authenticate users and machines.
-- Certificate-based authentication (see [MS-CERSOD](#Section_9.4)).
+- [**Generic Security Services (GSS)**](#gt_generic-security-services-gss)-API-based authentication that can be performed by hosts that are Windows-domain-joined ([MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.1.2.1 and [MS-AUTHSOD] section 2.1.2.2). This form of authentication supports Kerberos, NTLM, or TLS authentications. IKE has been extended [MS-AIPS], to use GSS-API. This extension includes the ability to authenticate users and machines.
+- Certificate-based authentication (see [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md)).
 - Shared key, specified in [RFC2409] is a deprecated authentication method in Windows that is implemented in conformance with the IPsec RFCs. [[RFC4109]](https://go.microsoft.com/fwlink/?LinkId=261707) updates [RFC2409].
 On each host, the security association negotiation is controlled by a [**security policy database (SPD)**](#gt_security-policy-database-spd). The SPD specifies how an IPsec-supporting network stack will process packets, based on criteria such as their source, destination, and encapsulated protocol. The packet-processing requirements determine what cryptographic encapsulation will be used on data packets, and hence how a security association will be negotiated for it to support the required encapsulation. An abstract data model for the IPsec SPD structure is described in [RFC4301] section 4.4.1. When an outbound data packet is sent to IPsec, IPsec uses the packet information such as source, destination IP addresses, transport protocol (such as TCP), and transport source and destination ports to match the filters in the SPD to determine whether the packet requires additional IPsec processing such as encryption and/or digital signing.
 
@@ -1569,7 +1569,7 @@ Section 1.4 in each protocol specification describes the relationship to other h
 
 Remote connectivity encompasses the Remote Desktop (RD) protocols, which support scenarios that allow users to access applications and data on a remote computer over the network. When a user wants to interact with a remote computer, the remote desktop protocols facilitate this interaction by transferring graphics display information from the remote computer to the user and transporting input (such as keyboard or mouse input) from the user to the remote computer.
 
-All of the Remote Desktop protocols are described in the Remote Desktop Services Protocols Overview [MS-RDSOD](#Section_2.1) section 2.2. The systems and components on which the Remote Desktop protocols depend are described in [MS-RDSOD] section 2.3.2.
+All of the Remote Desktop protocols are described in the Remote Desktop Services Protocols Overview [MS-RDSOD](../MS-RDSOD/MS-RDSOD.md) section 2.2. The systems and components on which the Remote Desktop protocols depend are described in [MS-RDSOD] section 2.3.2.
 
 <a id="Section_9"></a>
 # 9 Security and Identity Management
@@ -1579,16 +1579,16 @@ All of the Remote Desktop protocols are described in the Remote Desktop Services
 
 The following overview documents describe the foundational security and identity concepts in Windows.
 
-- [MS-AUTHSOD](#Section_2.1): Authentication Services Protocols Overview
-- [MS-AZOD](#Section_9.3): Authorization Protocols Overview
-- [MS-CERSOD](#Section_9.4): Certificate Services Protocols Overview
+- [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md): Authentication Services Protocols Overview
+- [MS-AZOD](../MS-AZOD/MS-AZOD.md): Authorization Protocols Overview
+- [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md): Certificate Services Protocols Overview
 - [MS-RMSO](../MS-RMSO/MS-RMSO.md): Rights Management Services Protocols Overview
 Additional concepts of impersonation and federation services are described in this section.
 
 <a id="Section_9.2"></a>
 ## 9.2 Authentication
 
-Authentication enables two communicating entities to establish the identity of one or both parties. It is presumed that the communication medium between the two entities is completely hostile, and that an attacker can inspect any message or tamper with (change, suppress, or replay) any message. Protocols have to allow the two entities to authenticate in such a challenging environment. The two entities usually consist of a client and a server. [MS-AUTHSOD](#Section_2.1) section 2.2 describes the Windows implementation of standard authentication protocols that enable the authentication of users, computers, and services.
+Authentication enables two communicating entities to establish the identity of one or both parties. It is presumed that the communication medium between the two entities is completely hostile, and that an attacker can inspect any message or tamper with (change, suppress, or replay) any message. Protocols have to allow the two entities to authenticate in such a challenging environment. The two entities usually consist of a client and a server. [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.2 describes the Windows implementation of standard authentication protocols that enable the authentication of users, computers, and services.
 
 Authentication can encompass several aspects. For example, authentication of the server can be sufficient. The use of [**SSL**](#gt_secure-sockets-layer-ssl) on the Internet primarily assures the client of the identity of the server. For protected networks, client authentication can be sufficient because the valuable resource lives on a single server, and the server is required only to address the identity of the client.
 
@@ -1597,31 +1597,31 @@ See [MS-AUTHSOD] section 1.1.2 for a description of pre-GSS authentication.
 <a id="Section_9.3"></a>
 ## 9.3 Authorization
 
-After an identity is suitably authenticated, authorization provides access to resources. The Authorization Protocols Overview [MS-AZOD](#Section_9.3) describes the authorization protocols used by Windows. The authorization protocols are listed in [MS-AZOD] section 2.2.
+After an identity is suitably authenticated, authorization provides access to resources. The Authorization Protocols Overview [MS-AZOD](../MS-AZOD/MS-AZOD.md) describes the authorization protocols used by Windows. The authorization protocols are listed in [MS-AZOD] section 2.2.
 
 <a id="Section_9.4"></a>
 ## 9.4 Certificate Services
 
 Certificate Services provide support for public key cryptography by issuing and managing certificates that bind an identity (such as a person, device or service) to a corresponding private key.
 
-Certificate Services protocols are described fully in the Certificate Services Protocols Overview [MS-CERSOD](#Section_9.4).
+Certificate Services protocols are described fully in the Certificate Services Protocols Overview [MS-CERSOD](../MS-CERSOD/MS-CERSOD.md).
 
 <a id="Section_9.5"></a>
 ## 9.5 Claim-Based Access Control
 
 Claim-based access control (CBAC) is a form of authorization management implemented in Windows Server 2012 operating system and Windows Server 2012 R2 operating system. A claim is an attribute that makes an assertion about an entity with which it is associated. That entity can be a user, a device, or a resource.
 
-For more information on claims and claim-based access control, see [MS-AZOD](#Section_9.3) section 1.1.1.11 and [MS-AZOD] section 2.1.4.3.
+For more information on claims and claim-based access control, see [MS-AZOD](../MS-AZOD/MS-AZOD.md) section 1.1.1.11 and [MS-AZOD] section 2.1.4.3.
 
 <a id="Section_9.6"></a>
 ## 9.6 Federation Services
 
-[**Active Directory Federation Services (AD FS)**](#gt_active-directory-federation-services-ad-fs) is the Microsoft implementation of federation services and supports the WS-Federation Passive Requestor Profile defined in [[WSFederation1.2]](https://go.microsoft.com/fwlink/?LinkId=306270). AD FS provides browser-based clients (internal or external to a network) with seamless, one-prompt access to one or more protected Internet-facing applications, even when the user accounts and applications are located in different networks or organizations. AD FS protocols are described fully in [MS-ADFSOD](#Section_2.1).
+[**Active Directory Federation Services (AD FS)**](#gt_active-directory-federation-services-ad-fs) is the Microsoft implementation of federation services and supports the WS-Federation Passive Requestor Profile defined in [[WSFederation1.2]](https://go.microsoft.com/fwlink/?LinkId=306270). AD FS provides browser-based clients (internal or external to a network) with seamless, one-prompt access to one or more protected Internet-facing applications, even when the user accounts and applications are located in different networks or organizations. AD FS protocols are described fully in [MS-ADFSOD](../MS-ADFSOD/MS-ADFSOD.md).
 
 <a id="Section_9.7"></a>
 ## 9.7 Impersonation
 
-Authentication protocols specified in [MS-KILE](../MS-KILE/MS-KILE.md) and [MS-APDS](#Section_9.2), transport authorization data based on [**security identifiers (SIDs)**](#gt_security-identifier-sid) and populate the user SID and security group SIDs in the [**impersonation**](#gt_impersonation) token. By default, all fields of the token are NULL and the token is not valid until populated by these protocols.
+Authentication protocols specified in [MS-KILE](../MS-KILE/MS-KILE.md) and [MS-APDS](../MS-APDS/MS-APDS.md), transport authorization data based on [**security identifiers (SIDs)**](#gt_security-identifier-sid) and populate the user SID and security group SIDs in the [**impersonation**](#gt_impersonation) token. By default, all fields of the token are NULL and the token is not valid until populated by these protocols.
 
 The authentication protocols query the local account database for the built-in and local group membership by passing the user SID and security group SIDs ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.5.2.1.1), and then updating the impersonation token. Then, the authentication protocols populate the privileges of the impersonation token ([MS-DTYP] section 2.5.2.1.2).
 
@@ -1644,7 +1644,7 @@ Data loss can lead to significant problems in an IT enterprise, with financial, 
 
 Active Directory Rights Management Services (AD RMS), introduced in Windows Server 2008 R2 operating system, and the AD RMS client augment an organization's security strategy by protecting information through persistent usage policies, which remain with the information, no matter where it is moved.
 
-RMS is described in detail in the Rights Management Services Protocols Overview [MS-RMSOD](#Section_2.1).
+RMS is described in detail in the Rights Management Services Protocols Overview [MS-RMSOD](../MS-RMSOD/MS-RMSOD.md).
 
 <a id="Section_10"></a>
 # 10 Systems Management
@@ -1656,17 +1656,17 @@ The systems management protocols enable network communication between Windows cl
 
 Three groups of system management protocols are functionality-related and are described in the following overview documents:
 
-**Group Policy protocols:** For centralized management. See the Group Policy Protocols Overview [MS-GPOD](#Section_2.1).
+**Group Policy protocols:** For centralized management. See the Group Policy Protocols Overview [MS-GPOD](../MS-GPOD/MS-GPOD.md).
 
-**Windows Server Update Services protocols:** For distribution and management of software updates from a central location. See Windows Server Update Services Protocols Overview [MS-WSUSOD](#Section_2.1).
+**Windows Server Update Services protocols:** For distribution and management of software updates from a central location. See Windows Server Update Services Protocols Overview [MS-WSUSOD](../MS-WSUSOD/MS-WSUSOD.md).
 
-**Windows management services protocols:** For infrastructure that enables a user or application to manage asset, processor and memory resources. See the Windows Management Protocols Overview [MS-WMOD](#Section_2.1).
+**Windows management services protocols:** For infrastructure that enables a user or application to manage asset, processor and memory resources. See the Windows Management Protocols Overview [MS-WMOD](../MS-WMOD/MS-WMOD.md).
 
 Several groups of Windows management protocols are described in the following sections:
 
-- Monitoring services protocols (section [10.2](#Section_2.1))
+- Monitoring services protocols (section [10.2](#Section_10.2))
 - Server management protocols (section [10.3](#Section_10.3))
-- WINS management protocols (section [10.4](#Section_2.1))
+- WINS management protocols (section [10.4](#Section_10.4))
 Individual protocols not included in the previous lists provide narrow but important systems management functionality in Windows:
 
 - Configuration and management tasks using Remote Shutdown Protocol [MS-RSP](../MS-RSP/MS-RSP.md), such as:

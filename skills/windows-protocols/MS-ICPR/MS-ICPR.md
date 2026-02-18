@@ -224,7 +224,7 @@ The ICertPassage Remote Protocol depends on the Remote Procedure Call Protocol E
 
 Figure 1: ICRP Protocol Stack
 
-The ICertPassage Remote Protocol shares ADM elements with Windows Client Certificate Enrollment Protocol [MS-WCCE](../MS-WCCE/MS-WCCE.md) as specified in section [3.1.1](#Section_3.2.1) and section [3.2.1](#Section_3.2.1). The ICertPassage Remote Protocol, the Certificate Services Remote Administration Protocol, and the Windows Client Certificate Enrollment Protocol use a common list of configuration data elements, defined in [MS-WCCE] section 3.2.1.1.4.
+The ICertPassage Remote Protocol shares ADM elements with Windows Client Certificate Enrollment Protocol [MS-WCCE](../MS-WCCE/MS-WCCE.md) as specified in section [3.1.1](#Section_3.1.1) and section [3.2.1](#Section_3.2.1). The ICertPassage Remote Protocol, the Certificate Services Remote Administration Protocol, and the Windows Client Certificate Enrollment Protocol use a common list of configuration data elements, defined in [MS-WCCE] section 3.2.1.1.4.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites and Preconditions
@@ -267,7 +267,7 @@ This protocol uses the following [**RPC**](#gt_remote-procedure-call-rpc) protoc
 
 The [**endpoint**](#gt_endpoint) pipe name for RPC over named pipe, as specified in [MS-RPCE], is `\PIPE\cert`. This endpoint is used for the authenticated RPC interface. The authenticated RPC interface allows RPC to negotiate the use of authentication and the authentication level on behalf of the [**client**](#gt_client) and [**server**](#gt_server), as specified in [MS-RPCE].
 
-In the case of using RPC over TCP, this protocol uses RPC [**dynamic endpoints**](#gt_dynamic-endpoint) as defined in Part 4 of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). For more information, see Client Initialization (section [3.1.3](#Section_3.1.3)) and Server Initialization (section [3.2.3](#Section_3.1.3)).
+In the case of using RPC over TCP, this protocol uses RPC [**dynamic endpoints**](#gt_dynamic-endpoint) as defined in Part 4 of [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). For more information, see Client Initialization (section [3.1.3](#Section_3.1.3)) and Server Initialization (section [3.2.3](#Section_3.2.3)).
 
 This protocol MUST use the [**universal unique identifier (UUID)**](#gt_universally-unique-identifier-uuid), as specified in section [3.2.4.1](#Section_3.2.4.1).
 
@@ -482,7 +482,7 @@ Security considerations for implementation of this protocol are as specified in 
 | Security parameter | Section |
 | --- | --- |
 | Authenticated [**RPC**](#gt_remote-procedure-call-rpc) association | [Initialization (section 3.1.3)](#Section_3.1.3) |
-| Cryptographic initialization | [Initialization (section 3.2.3)](#Section_3.1.3) |
+| Cryptographic initialization | [Initialization (section 3.2.3)](#Section_3.2.3) |
 
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL

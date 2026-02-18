@@ -180,7 +180,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](#Section_2.2.5.1.4)".
+[MS-SPNG] Microsoft Corporation, "[Simple and Protected GSS-API Negotiation Mechanism (SPNEGO) Extension](../MS-SPNG/MS-SPNG.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [https://www.rfc-editor.org/info/rfc2119](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -206,7 +206,7 @@ The [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) 
 
 The NEGOEX protocol is designed to address the drawbacks of the SPNEGO negotiation model. When negotiated by SPNEGO, NEGOEX uses the concepts developed in the GSS-API specification. The negotiation data is encapsulated in context-level tokens. Therefore, callers of the GSS-API do not need to be aware of the existence of the negotiation tokens but only of the SPNEGO pseudo-security mechanism. When selected, NEGOEX provides a method that allows selection of a common [**authentication**](#gt_authentication) protocol. It preserves the optimistic token semantics of SPNEGO and applies that recursively. Accordingly, a context establishment mechanism token can be included in the initial NEGOEX message, such that NEGOEX does not require an extra round trip when the initiator’s or client’s optimistic token is accepted by the target (or server acceptor).
 
-Standard GSS has a strict interpretation of client ([**initiator**](#gt_initiator)) and server ([**acceptor**](#gt_acceptor)). SPNEGO Extension (SPNG) has extended [RFC4178] to allow the server to initiate SPNG message flow. The message flow can begin from either the client or the server as the initiator, whereas the receiver is the acceptor. See [MS-SPNG](#Section_2.2.5.1.4) for client/server roles and variations.
+Standard GSS has a strict interpretation of client ([**initiator**](#gt_initiator)) and server ([**acceptor**](#gt_acceptor)). SPNEGO Extension (SPNG) has extended [RFC4178] to allow the server to initiate SPNG message flow. The message flow can begin from either the client or the server as the initiator, whereas the receiver is the acceptor. See [MS-SPNG](../MS-SPNG/MS-SPNG.md) for client/server roles and variations.
 
 <a id="Section_1.3.1"></a>
 ### 1.3.1 NEGOEX Message Flow
@@ -236,12 +236,12 @@ To avoid an extra round trip, the initial [**security token**](#gt_security-toke
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-NEGOEX cannot work outside of the [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) protocol. Its relationship to other protocols is defined in [MS-SPNG](#Section_2.2.5.1.4) section 1.3.2, which pertains specifically to NEGOEX.
+NEGOEX cannot work outside of the [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego) protocol. Its relationship to other protocols is defined in [MS-SPNG](../MS-SPNG/MS-SPNG.md) section 1.3.2, which pertains specifically to NEGOEX.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
 
-When negotiated by [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego), NEGOEX uses the concepts developed in the GSS-API specification [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). Therefore, the prerequisites/preconditions defined in [MS-SPNG](#Section_2.2.5.1.4) section 1.5 are applicable to NEGOEX.
+When negotiated by [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego), NEGOEX uses the concepts developed in the GSS-API specification [[RFC2743]](https://go.microsoft.com/fwlink/?LinkId=90378). Therefore, the prerequisites/preconditions defined in [MS-SPNG](../MS-SPNG/MS-SPNG.md) section 1.5 are applicable to NEGOEX.
 
 Because NEGOEX relies on other [**security protocols**](#gt_security-protocol) that perform [**authentication**](#gt_authentication), those protocols have to be available for it to operate. The set of available protocols is implementation specific and is set at the time of installation<1>.
 
@@ -280,7 +280,7 @@ iso.org.dod.internet.private.enterprise.microsoft.security.mechanisms.negoex (1.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-Because NEGOEX cannot work outside of [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego), the transport concepts of SPNEGO are applicable to NEGOEX, as specified in [MS-SPNG](#Section_2.2.5.1.4) section 2.1. NEGOEX is transported only when encapsulated in an [**application protocol**](#gt_application-protocol).
+Because NEGOEX cannot work outside of [**SPNEGO**](#gt_simple-and-protected-gss-api-negotiation-mechanism-spnego), the transport concepts of SPNEGO are applicable to NEGOEX, as specified in [MS-SPNG](../MS-SPNG/MS-SPNG.md) section 2.1. NEGOEX is transported only when encapsulated in an [**application protocol**](#gt_application-protocol).
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax

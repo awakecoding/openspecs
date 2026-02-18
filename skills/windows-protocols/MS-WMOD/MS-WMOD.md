@@ -239,7 +239,7 @@ This document uses the following terms:
 
 [DMTF-DSP0230] Distributed Management Task Force, Inc., "WS-CIM Mapping Specification", Version 1.0.1 April 2009, [http://www.dmtf.org/sites/default/files/standards/documents/DSP0230_1.0.1.pdf](https://go.microsoft.com/fwlink/?LinkId=89852)
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_2.1)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-DCOM] Microsoft Corporation, "[Distributed Component Object Model (DCOM) Remote Protocol](../MS-DCOM/MS-DCOM.md)".
 
@@ -302,7 +302,7 @@ Each of these protocols provides access to the [**CIM Object Manager (CIMOM)**](
 - Windows Management Instrumentation (WMI) Remote Protocol: Smaller messages than WSMV and WSMAN use binary message [**encoding**](#gt_encoding) instead of [**SOAP**](#gt_soap). See [MS-WMI] section 2.2 for details of message encoding. This protocol provides methods to modify the CIM repository on a managed host.
 - Web Services Management Protocol Extensions for Windows Server 2003: The [**HTTP**](#gt_hypertext-transfer-protocol-http)-based or [**HTTPS**](#gt_hypertext-transfer-protocol-secure-https)-based protocol allows for easier network configuration than [**Windows Management Instrumentation (WMI)**](#gt_windows-management-instrumentation-wmi) when a firewall might separate [**WM applications**](#gt_wm-application) and managed computers. This protocol is based on a prerelease draft of the WS-Management specification and is not compatible with the released standard versions.
 - Web Services Management Protocol Extensions for Windows Vista operating system: The HTTP-based or HTTPS-based protocol allows for easier network configuration than WMI when a firewall might separate WM applications and managed computers. This protocol is based on version 1.0 of the WS-Management specification. The protocol offers methods to control remote command-line shells on a managed host. See [MS-WSMV] section 3.1.4.1.31 for details.
-These three WM protocols are independent of each other, and each can be used to access CIM objects. A particular implementation can include support for one or more of these three protocols, as described in section [2.6](#Section_2.6.2).
+These three WM protocols are independent of each other, and each can be used to access CIM objects. A particular implementation can include support for one or more of these three protocols, as described in section [2.6](#Section_2.6).
 
 The following data structure is an integral part of the capabilities of the WMI protocol:
 
@@ -406,7 +406,7 @@ Figure 2: WM protocols stack
 
 The flow of communication between the [**CIM**](#gt_common-information-model-cim) client role and the CIM server role can be carried out over a network connection by using any one of the member protocols (WMI, WSMAN, and WSMV).
 
-The [**WM applications**](#gt_wm-application) are implemented to support one or more of the use cases that are described in section [2.5](#Section_2.1). All of these tasks are accomplished through the retrieval and modification of data that is to be managed. This data, which is represented by using the CIM model, is made available to the applications through the WM protocols.
+The [**WM applications**](#gt_wm-application) are implemented to support one or more of the use cases that are described in section [2.5](#Section_2.5). All of these tasks are accomplished through the retrieval and modification of data that is to be managed. This data, which is represented by using the CIM model, is made available to the applications through the WM protocols.
 
 On the remote end, this data is exposed to the WM protocols as a set of managed objects. When a WM application interacts with the WM protocols, it requests access to or a specific modification of these managed objects. The WM protocols accept this request, retrieve or modify the appropriate data in the managed objects, and then return the appropriate data to the application in response.
 
@@ -594,7 +594,7 @@ The following sections describe each use case for all use case groups.
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the CIM data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to create a CIM object.
@@ -625,7 +625,7 @@ The CIM object (instance or class) was created successfully with the schema valu
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the CIM data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to invoke a method on the CIM object.
@@ -656,7 +656,7 @@ The method was executed successfully, and the results are returned to the WM use
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the CIM data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to set the required properties.
@@ -687,7 +687,7 @@ The required properties are correctly set.
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the CIM data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services**: A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication within and outside the Windows Management system components. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services**: A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication within and outside the Windows Management system components. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to query the required property values.
@@ -719,7 +719,7 @@ The requested data is retrieved successfully.
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the CIM data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to monitor the required events.
@@ -748,7 +748,7 @@ The **WM server** delivers all requested notifications of events to the WM user.
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the [**CIM**](#gt_common-information-model-cim) data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to delete the object.
@@ -777,7 +777,7 @@ The specified object is deleted successfully.
 
 - **WM client**: The primary actor that triggers this use case. It is responsible for providing an interface to the CIM data for some set of computers. The primary interest of the WM client is to provide such functionality.
 - **WM server**: A supporting actor who implements a [**CIMOM**](#gt_common-information-model-cim-object-manager-cimom) and responds to network requests that the WM client initiates.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person who or a management application that has to access or change some set of CIM data for some set of computers. The primary interest of the WM user is to attempt to delete a CIM object that does not exist.
@@ -807,7 +807,7 @@ The **WM client** receives notification about the failure of the deletion attemp
 
 - **PSRP client**: The primary actor that triggers this use case.
 - **PSRP server**: A supporting actor that responds to network requests that are initiated by the PSRP client.
-- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](#Section_2.1).
+- **Authentication services:** A supporting actor that provides authentication services through NTLM, Kerberos, Basic, and Digest authentication to secure communications. It also provides authentication services that support the client-to-server communication. For an overview of the Authentication Services protocols, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 **Stakeholders**
 
 - **WM user**: A person or management application who has to access or change a set of system resources for a set of computers. The primary interest of the WM user is to create and invoke a pipeline.
@@ -1006,7 +1006,7 @@ This section provides a series of examples that describe the flow of communicati
 <a id="Section_3.1"></a>
 ## 3.1 Example 1: Single Request/Response WSMAN Protocol Operations
 
-Most of the operations that WM protocols carry out are comprised of a single request/response operation. The major actions that are performed in this scenario are retrieving data, modifying data, and invoking a method, as described in sections [2.5.2.2](../MS-WSMAN/MS-WSMAN.md), [2.5.2.3](../MS-WSMAN/MS-WSMAN.md), and [2.5.2.4](../MS-WSMAN/MS-WSMAN.md). Multiple WM protocols can perform this operation; however, this example uses the WSMAN protocol. The communication flow of single request/response operations is specified in [MS-WSMAN](../MS-WSMAN/MS-WSMAN.md) sections 4.1.1, 4.1.3, and 4.1.4.
+Most of the operations that WM protocols carry out are comprised of a single request/response operation. The major actions that are performed in this scenario are retrieving data, modifying data, and invoking a method, as described in sections [2.5.2.2](#Section_2.5.2.2), [2.5.2.3](#Section_2.5.2.3), and [2.5.2.4](#Section_2.5.2.4). Multiple WM protocols can perform this operation; however, this example uses the WSMAN protocol. The communication flow of single request/response operations is specified in [MS-WSMAN](../MS-WSMAN/MS-WSMAN.md) sections 4.1.1, 4.1.3, and 4.1.4.
 
 **Prerequisites**
 
@@ -1059,7 +1059,7 @@ After the WM application requests to invoke a method, the response contains the 
 <a id="Section_3.2"></a>
 ## 3.2 Example 2: Enumerations
 
-For a CIM class with multiple instances, enumeration can retrieve all the instances of the CIM class. When enumerating a set of managed objects, the result set can be too large to fit in a single response message. Therefore, enumerations consist of more than a single request/response operation. Multiple WM protocols can achieve enumerations; however, this example uses the Web Services Management Protocol Extensions for Windows Vista protocol (WSMV). For examples of the exact message content and format, see [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 4.1.2.1. This example maps to the use case, as described in section [2.5.2.4](../MS-WSMV/MS-WSMV.md), with a client and server that do not implement the Full Duplex capability, as specified in [MS-WSMV] section 3.2.4.2.1.
+For a CIM class with multiple instances, enumeration can retrieve all the instances of the CIM class. When enumerating a set of managed objects, the result set can be too large to fit in a single response message. Therefore, enumerations consist of more than a single request/response operation. Multiple WM protocols can achieve enumerations; however, this example uses the Web Services Management Protocol Extensions for Windows Vista protocol (WSMV). For examples of the exact message content and format, see [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 4.1.2.1. This example maps to the use case, as described in section [2.5.2.4](#Section_2.5.2.4), with a client and server that do not implement the Full Duplex capability, as specified in [MS-WSMV] section 3.2.4.2.1.
 
 **Prerequisites**
 
@@ -1119,7 +1119,7 @@ The CIMOM performs an access check to determine whether the requesting client is
 <a id="Section_3.3"></a>
 ## 3.3 Example 3: Pull Event Subscriptions
 
-Typically, when subscribing for the delivery of events through a WM protocol, there are three general subscription models for the message-flows: pull subscriptions, push subscriptions, and publisher-initiated subscriptions. For small networks the use of enumeration is practical, but for large networks the amount of polling traffic that this procedure generates is excessive. The objective of this scenario is therefore to use the push capability to subscribe and monitor the event, and to reduce the polling traffic, as described in section [2.5.2.5](../MS-WMI/MS-WMI.md). The communication flow of subscription and event delivery is based on invoking synchronous operations, as specified in [MS-WMI](../MS-WMI/MS-WMI.md) section 3.2.4.2.8.
+Typically, when subscribing for the delivery of events through a WM protocol, there are three general subscription models for the message-flows: pull subscriptions, push subscriptions, and publisher-initiated subscriptions. For small networks the use of enumeration is practical, but for large networks the amount of polling traffic that this procedure generates is excessive. The objective of this scenario is therefore to use the push capability to subscribe and monitor the event, and to reduce the polling traffic, as described in section [2.5.2.5](#Section_2.5.2.5). The communication flow of subscription and event delivery is based on invoking synchronous operations, as specified in [MS-WMI](../MS-WMI/MS-WMI.md) section 3.2.4.2.8.
 
 **Prerequisites**
 
@@ -1233,7 +1233,7 @@ For details about the exact message content and format, see [MS-WMI] section 3.1
 
 It is important to note that the WMI and WSMAN protocols do not support publisher-initiated event subscriptions. The following section is only relevant for use of the WSMV member protocol.
 
-This example describes the communication flow of subscription and event delivery with publisher-initiated subscriptions, in the context of the system components, as described in section [2.1.5](../MS-WSMV/MS-WSMV.md). For details about the exact message content and format, see [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.1.30. This example maps to the use case, as described in section [2.5.2.5](../MS-WSMV/MS-WSMV.md).
+This example describes the communication flow of subscription and event delivery with publisher-initiated subscriptions, in the context of the system components, as described in section [2.1.5](#Section_2.1.5). For details about the exact message content and format, see [MS-WSMV](../MS-WSMV/MS-WSMV.md) section 3.1.4.1.30. This example maps to the use case, as described in section [2.5.2.5](#Section_2.5.2.5).
 
 **Prerequisites**
 
@@ -1288,7 +1288,7 @@ For details about the exact message content and format, see [MS-WSMV] section 3.
 <a id="Section_3.6"></a>
 ## 3.6 Example 6: Create and Invoke a Pipeline
 
-This example describes a typical sequence for creating and invoking a successful [**pipeline**](#gt_pipeline) on the PowerShell server, with respect to the PSRP protocol[MS-PSRP](../MS-PSRP/MS-PSRP.md), as described in section [2.5.2.8](../MS-PSRP/MS-PSRP.md), and in the context of the system components, as described in section [2.1.4](../MS-PSRP/MS-PSRP.md). A detailed description of each message follows.
+This example describes a typical sequence for creating and invoking a successful [**pipeline**](#gt_pipeline) on the PowerShell server, with respect to the PSRP protocol[MS-PSRP](../MS-PSRP/MS-PSRP.md), as described in section [2.5.2.8](#Section_2.5.2.8), and in the context of the system components, as described in section [2.1.4](#Section_2.1.4). A detailed description of each message follows.
 
 **Prerequisites**
 

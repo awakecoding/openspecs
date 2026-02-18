@@ -276,7 +276,7 @@ This document uses the following terms:
 **outgoing queue**: A temporary internal [**queue**](#gt_queue) that holds [**messages**](#gt_message) for a remote destination [**queue**](#gt_queue). The [**path name**](#gt_path-name) of an outgoing [**queue**](#gt_queue) is identical to the [**path name**](#gt_path-name) of the corresponding destination [**queue**](#gt_queue). An outgoing [**queue**](#gt_queue) is distinguished from its corresponding destination [**queue**](#gt_queue) by the fact that the outgoing [**queue**](#gt_queue) is located on the sending computer. The [**format name**](#gt_format-name) of an outgoing [**queue**](#gt_queue) is identical to the [**format name**](#gt_format-name) used by the [**messages**](#gt_message) to reference the destination [**queue**](#gt_queue). Messages that reference the destination [**queue**](#gt_queue) using a different [**format name**](#gt_format-name) are placed in a different outgoing [**queue**](#gt_queue).
 
 <a id="gt_path-name"></a>
-**path name**: The name of the receiving computer where the [**messages**](#gt_message) for a particular [**queue**](#gt_queue) are stored, and an optional PRIVATE$ key word indicating whether the [**queue**](#gt_queue) is private, followed by the name of the [**queue**](#gt_queue). Path names can also refer to subqueues; for more information, see [MS-MQMQ](#Section_2.2.3) section 2.1.
+**path name**: The name of the receiving computer where the [**messages**](#gt_message) for a particular [**queue**](#gt_queue) are stored, and an optional PRIVATE$ key word indicating whether the [**queue**](#gt_queue) is private, followed by the name of the [**queue**](#gt_queue). Path names can also refer to subqueues; for more information, see [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 
 <a id="gt_private-queue"></a>
 **private queue**: An application-defined message queue that is not registered in the MSMQ Directory Service. A private queue is deployed on a particular [**queue manager**](#gt_queue-manager-qm).
@@ -354,7 +354,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-DTCO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transaction Protocol](../MS-DTCO/MS-DTCO.md)".
 
-[MS-DTYP] Microsoft Corporation, "[Windows Data Types](#Section_2.2.1)".
+[MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
@@ -362,7 +362,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQDS] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Protocol](../MS-MQDS/MS-MQDS.md)".
 
-[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](#Section_2.2.3)".
+[MS-MQMQ] Microsoft Corporation, "[Message Queuing (MSMQ): Data Structures](../MS-MQMQ/MS-MQMQ.md)".
 
 [MS-MQQB] Microsoft Corporation, "[Message Queuing (MSMQ): Message Queuing Binary Protocol](../MS-MQQB/MS-MQQB.md)".
 
@@ -393,7 +393,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQDSSM] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Schema Mapping](../MS-MQDSSM/MS-MQDSSM.md)".
 
-[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](#Section_1.3)".
+[MS-MQOD] Microsoft Corporation, "[Message Queuing Protocols Overview](../MS-MQOD/MS-MQOD.md)".
 
 [MSDN-MQEIC] Microsoft Corporation, "Message Queuing Error and Information Codes", [http://msdn.microsoft.com/en-us/library/ms700106.aspx](https://go.microsoft.com/fwlink/?LinkId=90044)
 
@@ -465,7 +465,7 @@ This protocol SHOULD use the following [**RPC protocol sequence**](#gt_rpc-proto
 
 This protocol SHOULD use RPC [**dynamic endpoints**](#gt_dynamic-endpoint), as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) part 4. This protocol MAY use an RPC static [**endpoint**](#gt_endpoint), as specified in [C706] part 4.
 
-This protocol allows any user to establish a connection to the RPC [**server**](#gt_server). For each connection, the server uses the underlying RPC protocol to retrieve the identity of the invoking [**client**](#gt_client), as specified in the second bullet point of [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4](../MS-RPCE/MS-RPCE.md).
+This protocol allows any user to establish a connection to the RPC [**server**](#gt_server). For each connection, the server uses the underlying RPC protocol to retrieve the identity of the invoking [**client**](#gt_client), as specified in the second bullet point of [MS-RPCE] section 3.3.3.4.3. The server SHOULD use this identity to perform method-specific access checks, as specified in section [3.1.4](#Section_3.1.4).
 
 <a id="Section_2.2"></a>
 ## 2.2 Common Data Types
@@ -476,9 +476,9 @@ Note that **LPWSTR** or **WCHAR*** types specified in an IDL structure that are 
 
 **HRESULT:** This specification uses the HRESULT type, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1.1.
 
-Note that throughout this specification, the phrase "a failure HRESULT" means any HRESULT where the Severity (S) bit is set, as specified by [MS-ERREF]. When this specification mandates the return of "a failure HRESULT" from a method, the specific error code is not relevant to the protocol, as long as the Severity bit is set. In this circumstance, the [**server**](#gt_server) can return MQ_ERROR (0xC00E0001), or any other HRESULT value where the Severity bit is set, such as a context-specific [**message queuing**](#gt_message-queuing) error code, as specified in [MS-MQMQ](#Section_2.2.3) section 2.4.
+Note that throughout this specification, the phrase "a failure HRESULT" means any HRESULT where the Severity (S) bit is set, as specified by [MS-ERREF]. When this specification mandates the return of "a failure HRESULT" from a method, the specific error code is not relevant to the protocol, as long as the Severity bit is set. In this circumstance, the [**server**](#gt_server) can return MQ_ERROR (0xC00E0001), or any other HRESULT value where the Severity bit is set, such as a context-specific [**message queuing**](#gt_message-queuing) error code, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.4.
 
-**GUID and UUID:** This type specifies a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid), as specified in [MS-DTYP](#Section_2.2.1) section 2.3.4.
+**GUID and UUID:** This type specifies a [**globally unique identifier (GUID)**](#gt_globally-unique-identifier-guid), as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.
 
 **QUEUE_FORMAT and OBJECTID:** These structures are defined in [MS-MQMQ] section 2.2.
 
@@ -563,7 +563,7 @@ CACTB_CREATECURSOR
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 XACTUOW
 
-The XACTUOW structure ([MS-MQMQ](#Section_2.2.3) section 2.2.18.1.8) uniquely identifies the [**unit of work (UOW)**](#gt_unit-of-work) for a transactional operation. For an [**external transaction**](#gt_external-transaction), this value MUST be acquired from the [**transaction**](#gt_transaction) coordinator. For an [**internal transaction**](#gt_internal-transaction), a [**client**](#gt_client) MUST create a unique random value for each transaction.<3>
+The XACTUOW structure ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) uniquely identifies the [**unit of work (UOW)**](#gt_unit-of-work) for a transactional operation. For an [**external transaction**](#gt_external-transaction), this value MUST be acquired from the [**transaction**](#gt_transaction) coordinator. For an [**internal transaction**](#gt_internal-transaction), a [**client**](#gt_client) MUST create a unique random value for each transaction.<3>
 
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 CACTransferBufferV1
@@ -762,7 +762,7 @@ DWORD* pulVersion;
 
 **Send:** The **Send** structure is present in the CACTransferBufferV1 structure when the value of the **uTransferType** member is 0x00000000 (CACTB_SEND). The **Send** structure is defined inline to the CACTransferBufferV1 structure. The **Send** structure members are defined as follows:
 
-**pAdminQueueFormat:** The **pAdminQueueFormat** member is a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.3) section 2.2.7) structure. If present, the **pAdminQueueFormat** member describes the [**administration queue**](#gt_administration-queue) that is to be used for send operation acknowledgments.
+**pAdminQueueFormat:** The **pAdminQueueFormat** member is a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure. If present, the **pAdminQueueFormat** member describes the [**administration queue**](#gt_administration-queue) that is to be used for send operation acknowledgments.
 
 **pResponseQueueFormat:** The **pResponseQueueFormat** member is a **QUEUE_FORMAT** structure. If present, the **pResponseQueueFormat** member describes the [**queue**](#gt_queue) that is to be used for application-specific responses. As an application-specific value, this field SHOULD be ignored by the [**server**](#gt_server).
 
@@ -1042,7 +1042,7 @@ OBJECTID** ppXactID;
 
 **pbLastInXact:** The **pbLastInXact** member MUST be a single byte. The **pbLastInXact** member MUST be set to a value of 0x00 (FALSE) when the associated message is not the last message in a transaction. A value other than 0x00 MUST be interpreted as indicating (TRUE) that the associated message is the last message in a transaction.
 
-**ppXactID:** The **ppXactID** member, if present, MUST be an OBJECTID structure, as specified in [MS-MQMQ](#Section_2.2.3) section 2.2.8.
+**ppXactID:** The **ppXactID** member, if present, MUST be an OBJECTID structure, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.8.
 
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 CACCreateRemoteCursor
@@ -1068,7 +1068,7 @@ DWORD cli_pQMQueue;
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 OBJECT_FORMAT
 
-An OBJECT_FORMAT structure wraps a pointer to a **QUEUE_FORMAT** structure ([MS-MQMQ](#Section_2.2.3) section 2.2.7).
+An OBJECT_FORMAT structure wraps a pointer to a **QUEUE_FORMAT** structure ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7).
 
 typedef struct OBJECT_FORMAT {
 
@@ -1106,21 +1106,21 @@ The [**client**](#gt_client) side of this protocol is simply a pass-through. Tha
 
 This section describes a conceptual model of possible data organization that an implementation maintains to participate in this protocol. The described organization is provided to facilitate the explanation of how the protocol behaves. This document does not mandate that implementations adhere to this model as long as their external behavior is consistent with that described in this document.
 
-The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_message-queuing) protocols that are co-located at a common **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1) abstract data model (ADM) element instance. The shared abstract data model is defined in [MS-MQDMPR] section 3.1.1. The relationship between this protocol, a **QueueManager** ADM element instance, and other protocols that share a common **QueueManager** ADM element instance is described in [MS-MQOD](#Section_1.3).
+The abstract data model for this protocol comprises elements that are private to this protocol and others that are shared between multiple [**MSMQ**](#gt_message-queuing) protocols that are co-located at a common **QueueManager** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.1) abstract data model (ADM) element instance. The shared abstract data model is defined in [MS-MQDMPR] section 3.1.1. The relationship between this protocol, a **QueueManager** ADM element instance, and other protocols that share a common **QueueManager** ADM element instance is described in [MS-MQOD](../MS-MQOD/MS-MQOD.md).
 
-Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol. Sections [3.1.1.2](#Section_3.1.1.3) through [3.1.1.10](#Section_3.1.1.10) detail the data model elements that are private to this protocol.
+Section [3.1.1.1](#Section_3.1.1.1) details the elements from the shared data model that are manipulated by this protocol. Sections [3.1.1.2](#Section_3.1.1.2) through [3.1.1.10](#Section_3.1.1.10) detail the data model elements that are private to this protocol.
 
 [**Servers**](#gt_server) MUST maintain instances of the following ADM elements described in the following sections:
 
 - Shared Data Elements (section 3.1.1.1)
 - LocalQueueContextHandleTable (section 3.1.1.2)
 - [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3)
-- [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.5)
+- [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.4)
 - [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5)
 - [CursorProxy (section 3.1.1.6)](#Section_3.1.1.6)
-- [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.8)
+- [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.7)
 - [RemoteQueueOpenContextHandle (section 3.1.1.8)](#Section_3.1.1.8)
-- [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.10)
+- [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.9)
 - TransactionHandle (section 3.1.1.10)
 - [Message to CACTransferBufferV2 Translation (section 3.1.1.11)](#Section_3.1.1.11)
 - [Queue PROPID to Abstract Queue Property Translations (section 3.1.1.12)](#Section_3.1.1.12)
@@ -1145,7 +1145,7 @@ The **LocalQueueContextHandleTable** ADM element contains a table of [LocalQueue
 
 The **LocalQueueContextHandle** ADM element associates an [RPC_QUEUE_HANDLE (section 2.2.1.1.2)](#Section_2.2.1.1.2) context handle with an **OpenQueueDescriptor** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.16) ADM element instance that references a [**local queue**](#gt_local-queue). This ADM element MUST contain the following attributes:
 
-**Handle:** An RPC_QUEUE_HANDLE context handle that uniquely identifies the **LocalQueueContextHandle** ADM element instance within its [LocalQueueContextHandleTable (section 3.1.1.2)](#Section_3.1.1.3) ADM element instance.
+**Handle:** An RPC_QUEUE_HANDLE context handle that uniquely identifies the **LocalQueueContextHandle** ADM element instance within its [LocalQueueContextHandleTable (section 3.1.1.2)](#Section_3.1.1.2) ADM element instance.
 
 **OpenQueueDescriptorReference:** A reference to an **OpenQueueDescriptor** ADM element instance.
 
@@ -1159,7 +1159,7 @@ The **RemoteQueueProxyHandleTable** ADM element contains a table of [RemoteQueue
 
 The **RemoteQueueProxyHandle** ADM element associates an [RPC_QUEUE_HANDLE (section 2.2.1.1.2)](#Section_2.2.1.1.2) context handle with information pertaining to an **OpenQueueDescriptor** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.16) ADM element instance located at a remote **QueueManager** ([MS-MQDMPR] section 3.1.1.1) ADM element instance other than the [**server**](#gt_server). This ADM element MUST contain the following attributes:
 
-**Handle:** An RPC_QUEUE_HANDLE context handle that uniquely identifies the **RemoteQueueProxyHandle** ADM element instance within its [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.5) ADM element instance.
+**Handle:** An RPC_QUEUE_HANDLE context handle that uniquely identifies the **RemoteQueueProxyHandle** ADM element instance within its [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.4) ADM element instance.
 
 **Context:** A DWORD value that uniquely identifies the **RemoteQueueProxyHandle** ADM element instance within the **RemoteQueueProxyHandleTable** ADM element instance.
 
@@ -1169,7 +1169,7 @@ The **RemoteQueueProxyHandle** ADM element associates an [RPC_QUEUE_HANDLE (sec
 
 **RemoteContext:** A **DWORD** value that uniquely identifies an **OpenQueueDescriptor** ADM element instance at the **QueueManager** ADM element instance from which a **RemoteHandle** attribute was obtained.
 
-**PathName:** A [**path name**](#gt_path-name) string, as defined in [MS-MQMQ](#Section_2.2.3) section 2.1.1, which contains the name of the [**queue**](#gt_queue) and the name of the **QueueManager** ADM element instance from which a **RemoteHandle** attribute was obtained.
+**PathName:** A [**path name**](#gt_path-name) string, as defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.1, which contains the name of the [**queue**](#gt_queue) and the name of the **QueueManager** ADM element instance from which a **RemoteHandle** attribute was obtained.
 
 **FormatName:** Contains the [**format name**](#gt_format-name) string that was specified when the **OpenQueueDescriptor** ADM element instance referenced by a **RemoteContext** attribute was created.
 
@@ -1196,7 +1196,7 @@ The **RemoteQueueOpenContextHandleTable** ADM element contains a table of [Remot
 
 The **RemoteQueueOpenContextHandle** ADM element associates a [PCTX_OPENREMOTE_HANDLE_TYPE (section 2.2.1.1.3)](#Section_2.2.1.1.3) context handle with a reference to an **OpenQueueDescriptor** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.16) ADM element instance created for [**remote read**](#gt_remote-read). This ADM element MUST contain the following attributes:
 
-**Handle:** A PCTX_OPENREMOTE_HANDLE_TYPE context handle that uniquely identifies the **RemoteQueueOpenContextHandle** ADM element instance within its [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.8) ADM element instance.
+**Handle:** A PCTX_OPENREMOTE_HANDLE_TYPE context handle that uniquely identifies the **RemoteQueueOpenContextHandle** ADM element instance within its [RemoteQueueOpenContextHandleTable (section 3.1.1.7)](#Section_3.1.1.7) ADM element instance.
 
 **OpenQueueDescriptorReference:** A reference to an **OpenQueueDescriptor** ADM element instance created for remote read.
 
@@ -1210,7 +1210,7 @@ The **TransactionHandleTable** ADM element contains a table of [TransactionHandl
 
 The **TransactionHandle** ADM element represents a handle that contains a reference to a **Transaction** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.14) ADM element instance. This ADM element MUST contain the following attributes:
 
-**Handle:** An [RPC_INT_XACT_HANDLE (section 2.2.1.1.1)](#Section_2.2.1.1.1) that uniquely identifies the TransactionHandleEntry within the [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.10) ADM element.
+**Handle:** An [RPC_INT_XACT_HANDLE (section 2.2.1.1.1)](#Section_2.2.1.1.1) that uniquely identifies the TransactionHandleEntry within the [TransactionHandleTable (section 3.1.1.9)](#Section_3.1.1.9) ADM element.
 
 **TransactionReference:** A reference to a **Transaction** ADM element instance.
 
@@ -1291,7 +1291,7 @@ A **Message** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.12) ADM elem
 <a id="Section_3.1.1.12"></a>
 #### 3.1.1.12 Queue PROPID to Abstract Queue Property Translation
 
-The methods [R_QMCreateObjectInternal (section 3.1.4.5)](#Section_3.1.4.5), [R_QMGetObjectProperties (section 3.1.4.9)](#Section_3.1.4.9) and [R_QMSetObjectProperties (section 3.1.4.10)](#Section_3.1.4.10) reference properties of the **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element using numerical identifiers (PROPIDs) defined in [MS-MQMQ](#Section_2.2.3) section 2.3. The following table provides correlation between the numerical [**queue property**](#gt_queue-property) identifiers and the abstract queue properties used by this protocol:
+The methods [R_QMCreateObjectInternal (section 3.1.4.5)](#Section_3.1.4.5), [R_QMGetObjectProperties (section 3.1.4.9)](#Section_3.1.4.9) and [R_QMSetObjectProperties (section 3.1.4.10)](#Section_3.1.4.10) reference properties of the **Queue** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.2) ADM element using numerical identifiers (PROPIDs) defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3. The following table provides correlation between the numerical [**queue property**](#gt_queue-property) identifiers and the abstract queue properties used by this protocol:
 
 | Queue Property Identifier (PROPID) | Abstract Queue Property | Applicable Method(s) |
 | --- | --- | --- |
@@ -1468,7 +1468,7 @@ HRESULT R_QMOpenRemoteQueue(
 
 **pdwContext:** A pointer to a variable to receive the value of the **Handle** attribute for the new **OpenQueueDescriptor** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.16) ADM element instance created by this method. It MUST NOT be NULL.
 
-**pQueueFormat:** A **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.3) section 2.2.7) structure that identifies the [**queue**](#gt_queue) to be opened. It MUST NOT be NULL and MUST conform to the [**format name**](#gt_format-name) syntax rules defined in [MS-MQMQ]. It MUST NOT be a distribution list or multicast format name. For direct format names, the protocol MUST NOT be HTTP.
+**pQueueFormat:** A **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure that identifies the [**queue**](#gt_queue) to be opened. It MUST NOT be NULL and MUST conform to the [**format name**](#gt_format-name) syntax rules defined in [MS-MQMQ]. It MUST NOT be a distribution list or multicast format name. For direct format names, the protocol MUST NOT be HTTP.
 
 **dwCallingProcessID:** MUST be ignored. Clients MAY pass 0x00000000.<15>
 
@@ -1561,7 +1561,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the [**server**](#gt_server) MUST:
 
-- Locate the [RemoteQueueOpenContextHandle (section 3.1.1.8)](#Section_3.1.1.8) ADM element instance in the *iRemoteQueueOpenContextHandleTable* (section [3.1.1.7](#Section_3.1.1.8)) of the server where the value of the **Handle** attribute of the **RemoteQueueOpenContextHandle** ADM element instance equals *pphContext*.
+- Locate the [RemoteQueueOpenContextHandle (section 3.1.1.8)](#Section_3.1.1.8) ADM element instance in the *iRemoteQueueOpenContextHandleTable* (section [3.1.1.7](#Section_3.1.1.7)) of the server where the value of the **Handle** attribute of the **RemoteQueueOpenContextHandle** ADM element instance equals *pphContext*.
 - If no such **RemoteQueueOpenContextHandle** ADM element instance exists, take no further action and immediately return.
 - Declare *iLocatedRemoteQueueOpenContextHandle* and set it to a reference to the located **RemoteQueueOpenContextHandle** ADM element instance.
 - If *iLocatedRemoteQueueOpenContextHandle*. **OpenQueueDescriptorReference.RemoteReadState** is **Opened**:
@@ -1642,11 +1642,11 @@ HRESULT R_QMCreateObjectInternal(
 
 **SDSize:** MUST be set to the byte length of the SECURITY_DESCRIPTOR buffer pointed to by *pSecurityDescriptor*. If *pSecurityDescriptor* is NULL, this parameter MUST be 0x00000000.
 
-**pSecurityDescriptor:** Must be a pointer to an array of bytes containing a **SECURITY_DESCRIPTOR** structure. The **SECURITY_DESCRIPTOR** specifies the initial security configuration for the queue to be created. This value can be NULL, in which case the [**server**](#gt_server) MUST provide a default security configuration for the new queue. The **SECURITY_DESCRIPTOR** structure is defined in [MS-DTYP](#Section_2.2.1) section 2.4.6.
+**pSecurityDescriptor:** Must be a pointer to an array of bytes containing a **SECURITY_DESCRIPTOR** structure. The **SECURITY_DESCRIPTOR** specifies the initial security configuration for the queue to be created. This value can be NULL, in which case the [**server**](#gt_server) MUST provide a default security configuration for the new queue. The **SECURITY_DESCRIPTOR** structure is defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6.
 
 **cp:** MUST be set to the size (in elements) of the arrays *aProp* and *apVar*. The arrays *aProp* and *apVar* MUST have an identical number of elements and MUST contain at least one element.
 
-**aProp:** MUST be an array of [**queue property**](#gt_queue-property) identifiers that, together with the *apVar* array, specify the initial queue property values for the new queue. Each element MUST specify a value from the queue property identifiers table defined in [MS-MQMQ](#Section_2.2.3) section 2.3.1. Each element MUST specify the property identifier for the corresponding property value at the same element index in *apVar* and MUST contain at least one element. Each element MUST contain a queue property identifier; identifiers for other properties are not permitted.
+**aProp:** MUST be an array of [**queue property**](#gt_queue-property) identifiers that, together with the *apVar* array, specify the initial queue property values for the new queue. Each element MUST specify a value from the queue property identifiers table defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1. Each element MUST specify the property identifier for the corresponding property value at the same element index in *apVar* and MUST contain at least one element. Each element MUST contain a queue property identifier; identifiers for other properties are not permitted.
 
 If the queue identified by *lpwcsPathName* already exists, the server MUST NOT alter the existing queue.
 
@@ -1695,11 +1695,11 @@ HRESULT R_QMSetObjectSecurityInternal(
 
 **pObjectFormat:** MUST point to an [OBJECT_FORMAT](#Section_2.2.3.5) structure that identifies an existing local private queue on the supporting server for which the security configuration will be updated. This MUST NOT be NULL. The **ObjType** member of the structure MUST be 0x00000001. The **pQueueFormat** member MUST NOT be NULL.
 
-**SecurityInformation:** MUST contain a value from the SECURITY_INFORMATION enumeration which indicates the portions of the provided **SECURITY_DESCRIPTOR** to be applied to the [**queue**](#gt_queue) identified by *pObjectFormat*. The SECURITY_INFORMATION enumeration is defined in [MS-MQMQ](#Section_2.2.3) section 2.2.3.
+**SecurityInformation:** MUST contain a value from the SECURITY_INFORMATION enumeration which indicates the portions of the provided **SECURITY_DESCRIPTOR** to be applied to the [**queue**](#gt_queue) identified by *pObjectFormat*. The SECURITY_INFORMATION enumeration is defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.3.
 
 **SDSize:** MUST be set to the byte length of the buffer pointed to by *pSecurityDescriptor*.
 
-**pSecurityDescriptor:** MUST be a pointer to an array of bytes containing a SECURITY_DESCRIPTOR structure (see [MS-DTYP](#Section_2.2.1) section 2.4.6).
+**pSecurityDescriptor:** MUST be a pointer to an array of bytes containing a SECURITY_DESCRIPTOR structure (see [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6).
 
 **Return Values:** On success, this method MUST return MQ_OK (0x00000000); otherwise, the [**server**](#gt_server) MUST return a failure HRESULT,<32> and the client MUST treat all failure HRESULTs identically.
 
@@ -1740,7 +1740,7 @@ HRESULT R_QMGetObjectSecurityInternal(
 
 **pObjectFormat:** MUST point to an [OBJECT_FORMAT](#Section_2.2.3.5) structure which identifies an existing local private queue on the supporting server for which the security configuration is to be retrieved. It MUST NOT be NULL. The **ObjType** member of the structure MUST be 0x00000001, and the **pQueueFormat** member MUST NOT be NULL.
 
-**RequestedInformation:** MUST contain a value from the SECURITY_INFORMATION enumeration which indicates the portions of the **SECURITY_DESCRIPTOR** ([MS-DTYP](#Section_2.2.1) section 2.4.6) to be retrieved from the [**queue**](#gt_queue) identified by *pObjectFormat*. The SECURITY_INFORMATION enumeration is defined in [MS-MQMQ](#Section_2.2.3) section 2.2.3.
+**RequestedInformation:** MUST contain a value from the SECURITY_INFORMATION enumeration which indicates the portions of the **SECURITY_DESCRIPTOR** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) to be retrieved from the [**queue**](#gt_queue) identified by *pObjectFormat*. The SECURITY_INFORMATION enumeration is defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.3.
 
 **pSecurityDescriptor:** MUST be a pointer to an array of bytes into which the [**server**](#gt_server) MUST write a self-relative **SECURITY_DESCRIPTOR** structure. The server MUST NOT write more than *nLength* bytes to the buffer. If the buffer provided by the client is too small (as indicated by the *nLength* parameter) to contain the **SECURITY_DESCRIPTOR** for the queue identified by *pObjectFormat*, the server MUST return MQ_ERROR_SECURITY_DESCRIPTOR_TOO_SMALL (0xc00e0023). This parameter can be NULL if *nLength* is 0x00000000.
 
@@ -1834,7 +1834,7 @@ HRESULT R_QMGetObjectProperties(
 
 **cp:** MUST be set to the size (in elements) of the arrays *aProp* and *apVar*. The arrays *aProp* and *apVar* MUST have an identical number of elements and MUST contain at least one element.
 
-**aProp:** MUST be an array of [**queue property**](#gt_queue-property) identifiers of properties to retrieve. Each element MUST specify a value from the queue property identifiers table defined in [MS-MQMQ](#Section_2.2.3) section 2.3.1. Each element MUST specify the queue property identifier for the corresponding queue property value at the same element index in *apVar*. MUST contain at least one element.
+**aProp:** MUST be an array of [**queue property**](#gt_queue-property) identifiers of properties to retrieve. Each element MUST specify a value from the queue property identifiers table defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1. Each element MUST specify the queue property identifier for the corresponding queue property value at the same element index in *apVar*. MUST contain at least one element.
 
 **apVar:** MUST contain at least one element. On input, each element MUST be initialized to the appropriate VARTYPE for the associated property specified by the same element in *aProp*, or VT_NULL. Otherwise, the [**server**](#gt_server) SHOULD return the failure HRESULT MQ_ERROR_PROPERTY (0xc00e0002).<36> On success, the server MUST populate the elements of this array with property values for the properties identified by the corresponding elements of *aProp*.
 
@@ -1876,7 +1876,7 @@ HRESULT R_QMSetObjectProperties(
 
 **cp:** MUST be set to the size (in elements) of the arrays *aProp* and *apVar*. The arrays *aProp* and *apVar* MUST have an identical number of elements, and MUST contain at least one element.
 
-**aProp:** MUST be an array of [**queue property**](#gt_queue-property) identifiers for properties to be updated. Each element MUST specify a value from the queue property identifiers table defined in [MS-MQMQ](#Section_2.2.3) section 2.3.1. Each element MUST specify the queue property identifier for the corresponding queue property value at the same element index in *apVar*. MUST contain at least one element.
+**aProp:** MUST be an array of [**queue property**](#gt_queue-property) identifiers for properties to be updated. Each element MUST specify a value from the queue property identifiers table defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1. Each element MUST specify the queue property identifier for the corresponding queue property value at the same element index in *apVar*. MUST contain at least one element.
 
 **apVar:** MUST be an array that specifies the property values to update. Each element MUST specify the property value for the corresponding property identifier at the same element index in *aProp*. MUST contain at least one element. The vt (VARTYPE) member of each PROPVARIANT element MUST be set to the appropriate type for the property being updated; otherwise, the [**server**](#gt_server) SHOULD return the failure HRESULT MQ_ERROR_PROPERTY (0xc00e0002).<39> Queue properties and their appropriate VARTYPEs are specified by [MS-MQMQ] section 2.3.1.
 
@@ -1910,7 +1910,7 @@ HRESULT R_QMObjectPathToObjectFormat(
 
 **hBind:** MUST be set to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle as described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**lpwcsPathName:** MUST be a pointer to a null-terminated path name string, as defined by [MS-MQMQ](#Section_2.2.3) section 2.1.1. The path name MUST identify an existing [**private queue**](#gt_private-queue) located on a [**supporting server**](#gt_supporting-server).
+**lpwcsPathName:** MUST be a pointer to a null-terminated path name string, as defined by [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.1. The path name MUST identify an existing [**private queue**](#gt_private-queue) located on a [**supporting server**](#gt_supporting-server).
 
 **pObjectFormat:** MUST be a pointer to an [OBJECT_FORMAT](#Section_2.2.3.5) structure, as specified in section 2.2.3.5. On success, this structure MUST be populated with a direct format name or private format name for the queue identified by *lpwcsPathName*. This specification does not mandate the process through which a [**server**](#gt_server) produces a format name for a given path name.
 
@@ -1994,7 +1994,7 @@ R_QMEnlistTransaction(
 
 **hBind:** MUST be set to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle as described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**pUow:** MUST point to an XACTUOW structure ([MS-MQMQ](#Section_2.2.3) section 2.2.18.1.8) that identifies the external transaction in which the [**server**](#gt_server) is to enlist, as specified in section [2.2.3.1](../MS-MQMQ/MS-MQMQ.md).
+**pUow:** MUST point to an XACTUOW structure ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) that identifies the external transaction in which the [**server**](#gt_server) is to enlist, as specified in section [2.2.3.1](#Section_2.2.3.1).
 
 **cbCookie:** MUST be set to the byte length of the buffer pointed to by *pbCookie*.
 
@@ -2020,7 +2020,7 @@ When processing this call, the server MUST:
 <a id="Section_3.1.4.14"></a>
 #### 3.1.4.14 R_QMEnlistInternalTransaction (Opnum 16)
 
-A [**client**](#gt_client) calls the R_QMEnlistInternalTransaction method to enlist the [**supporting server's**](#gt_msmq-supporting-server) [**resource manager (RM)**](#gt_resource-manager-rm) in an [**internal transaction**](#gt_internal-transaction). The [**server**](#gt_server) returns a [**transaction**](#gt_transaction) handle associated with the given [**unit of work**](#gt_unit-of-work) identifier (XACTUOW). The returned transaction handle is used when calling [R_QMCommitTransaction](#Section_3.1.4.15) or [R_QMAbortTransaction](#Section_3.1.4.16). The XACTUOW structure ([MS-MQMQ](#Section_2.2.3) section 2.2.18.1.8) is provided for calls to [rpc_ACSendMessageEx](#Section_3.1.5.2) and [rpc_ACReceiveMessageEx](#Section_3.1.5.3) of the qmcomm2 [**RPC**](#gt_remote-procedure-call-rpc) interface.
+A [**client**](#gt_client) calls the R_QMEnlistInternalTransaction method to enlist the [**supporting server's**](#gt_msmq-supporting-server) [**resource manager (RM)**](#gt_resource-manager-rm) in an [**internal transaction**](#gt_internal-transaction). The [**server**](#gt_server) returns a [**transaction**](#gt_transaction) handle associated with the given [**unit of work**](#gt_unit-of-work) identifier (XACTUOW). The returned transaction handle is used when calling [R_QMCommitTransaction](#Section_3.1.4.15) or [R_QMAbortTransaction](#Section_3.1.4.16). The XACTUOW structure ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8) is provided for calls to [rpc_ACSendMessageEx](#Section_3.1.5.2) and [rpc_ACReceiveMessageEx](#Section_3.1.5.3) of the qmcomm2 [**RPC**](#gt_remote-procedure-call-rpc) interface.
 
 HRESULT R_QMEnlistInternalTransaction(
 
@@ -2081,7 +2081,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the server MUST:
 
-- Locate the [TransactionHandle (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance in the server's *iTransactionHandleTable* (section [3.1.1.9](#Section_3.1.1.10)) where the value of the **Handle** attribute of the **TransactionHandle** ADM element instance equals the *phIntXact* parameter.
+- Locate the [TransactionHandle (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance in the server's *iTransactionHandleTable* (section [3.1.1.9](#Section_3.1.1.9)) where the value of the **Handle** attribute of the **TransactionHandle** ADM element instance equals the *phIntXact* parameter.
 - If no such **TransactionHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedTransactionHandle* and set it to a reference to the located **TransactionHandle** ADM element instance.
 - Generate a Transaction Commit ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.4.4) event with the following argument value:
@@ -2155,7 +2155,7 @@ HRESULT rpc_QMOpenQueueInternal(
 
 **hBind:** MUST be set to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle as described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**pQueueFormat:** MUST be a pointer to a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.3) section 2.2.7) structure, which identifies an existing queue to be opened. MUST NOT be NULL and MUST conform to the [**format name**](#gt_format-name) syntax rules defined in [MS-MQMQ].
+**pQueueFormat:** MUST be a pointer to a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure, which identifies an existing queue to be opened. MUST NOT be NULL and MUST conform to the [**format name**](#gt_format-name) syntax rules defined in [MS-MQMQ].
 
 **dwDesiredAccess:** A DWORD that specifies the access mode requested for the queue. The access mode defines the set of operations which can be invoked using the returned queue handle. The value MUST be one of the following:
 
@@ -2237,7 +2237,7 @@ If the method is unsuccessful for any reason, including transport failures, erro
 - **RemoteContext** := *hRemoteQueue*
 - **FormatName** := *pQueueFormat*
 - **PathName** := *iPathName*
-- Add *iNewRemoteQueueProxyHandle* to *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)).
+- Add *iNewRemoteQueueProxyHandle* to *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)).
 - Set *lplpRemoteQueueName* to NULL.
 - Set *phQueue* to *iNewRemoteQueueProxyHandle*.**Handle**.
 - Set *pdwQMContext* to *iNewRemoteQueueProxyHandle*.**Context**.
@@ -2253,7 +2253,7 @@ If the method is unsuccessful for any reason, including transport failures, erro
 - MQ_DENY_NONE (0x00000000): DenyNone
 - MQ_DENY_RECEIVE_SHARE (0x00000001): DenyReceive
 - If the *rStatus* out-argument of the Open Queue event indicates success:
-- Add a new [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance to the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) with the following values:
+- Add a new [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance to the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) with the following values:
 - **Handle** := New RPC_QUEUE_HANDLE context handle.
 - **OpenQueueDescriptorReference** := The *rOpenQueueDescriptor* out-argument of the Open Queue event.
 - Set *lplpRemoteQueueName* to NULL.
@@ -2290,7 +2290,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the server MUST:
 
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *phQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *phQueue*.
 - If such a **LocalQueueContextHandle** ADM element instance exists:
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - Generate a Close Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.2) event with the following argument value:
@@ -2299,7 +2299,7 @@ When processing this call, the server MUST:
 - Set *phQueue* to NULL.
 - Take no further action and return MQ_OK (0x00000000).
 - Else:
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *phQueue*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *phQueue*.
 - If no such **RemoteQueueProxyHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - Invoke the RemoteQMCloseQueue method of the qm2qm RPC interface as specified in [MS-MQQP](../MS-MQQP/MS-MQQP.md) section 3.1.4.4 using the binding handle in *iLocatedRemoteQueueProxyHandle*.**RemoteBindingHandle** and the following parameter value:
@@ -2335,7 +2335,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 When processing this call, the server MUST:
 
 - If hCursor is 0x0000000b, take no further action and return MQ_OK (0x00000000).
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
 - If such a **LocalQueueContextHandle** ADM element instance exists:
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - Locate a **Cursor** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.2) ADM element instance in *iLocatedLocalQueueContextHandle*.**OpenQueueDescriptorReference.CursorCollection** where the **Handle** attribute of the **Cursor** ADM element instance equals *hCursor*.
@@ -2345,7 +2345,7 @@ When processing this call, the server MUST:
 
 - Take no further action and return MQ_OK (0x00000000).
 - Else:
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
 - If no such **RemoteQueueProxyHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - Locate a [CursorProxy (section 3.1.1.6)](#Section_3.1.1.6) ADM element instance in *iLocatedRemoteQueueProxyHandle*.**CursorProxyCollection** where the value of the **Handle** attribute of the **CursorProxy** ADM element instance equals *hCursor*.
@@ -2391,7 +2391,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the server MUST:
 
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) in the server's [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.5) where **RemoteQueueProxyHandle.Handle** equals *hProxy*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) in the server's [RemoteQueueProxyHandleTable (section 3.1.1.4)](#Section_3.1.1.4) where **RemoteQueueProxyHandle.Handle** equals *hProxy*.
 - If no such RemoteQueueProxyHandle exists, take no further action and return a failure **HRESULT**.
 - Locate a CursorProxy in **RemoteQueueProxyHandle.CursorProxyCollection** where **CursorProxy.Handle** equals *hCursor*.
 - If no such CursorProxy exists, take no further action and return a failure **HRESULT**.
@@ -2421,7 +2421,7 @@ WCHAR* lpwcsFormatName,
 
 **dwFormatNameRPCBufferLen:** Length of the buffer (in Unicode characters) provided for the *lpwcsFormatName* parameter.
 
-**lpwcsFormatName:** Pointer to a Unicode character buffer into which the [**server**](#gt_server) writes the format name (as specified in [MS-MQMQ](#Section_2.2.3)) for the queue identified by the *hQueue* parameter. The character buffer MUST be null-terminated by the server prior to returning, even if the provided buffer is not large enough to contain the entire format name string. Can be NULL if *dwFormatNameRPCBufferLen* is 0x00000000. MUST NOT be NULL if *dwFormatNameRPCBufferLen* is nonzero.
+**lpwcsFormatName:** Pointer to a Unicode character buffer into which the [**server**](#gt_server) writes the format name (as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md)) for the queue identified by the *hQueue* parameter. The character buffer MUST be null-terminated by the server prior to returning, even if the provided buffer is not large enough to contain the entire format name string. Can be NULL if *dwFormatNameRPCBufferLen* is 0x00000000. MUST NOT be NULL if *dwFormatNameRPCBufferLen* is nonzero.
 
 **pdwLength:** On input, the maximum number of Unicode characters to write to the *lpwcsFormatName* buffer. This value MUST be equal to the *dwFormatNameRPCBufferLen* parameter. On return, the server MUST update the value of this parameter to indicate the complete length of the format name string for the queue identified by *hQueue*, without regard for the size of the provided buffer.
 
@@ -2445,12 +2445,12 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 The format name to be returned to the client (using the rules defined above) is determined as follows:
 
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
 - If such a **LocalQueueContextHandle** ADM element instance exists:
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - The format name to be returned to the client is *iLocatedLocalQueueContextHandle*.**OpenQueueDescriptorReference.FormatName**.
 - Else:
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the value of the Handle attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the value of the Handle attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
 - If no such **RemoteQueueProxyHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - The format name to be returned to the client is *iLocatedRemoteQueueProxyHandle*.**FormatName**.
@@ -2475,14 +2475,14 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 
 When processing this call, the server MUST:
 
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
 - If such a **LocalQueueContextHandle** ADM element instance exists:
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - Generate a Purge Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.7) event with the following argument value:
 - *iQueue* := *iLocatedLocalQueueContextHandle*.**OpenQueueDescriptorReference.QueueReference**
 - Take no further action and return MQ_OK (0x00000000).
 - Else:
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
 - If no such **RemoteQueueProxyHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - Using the binding handle contained in *iLocatedRemoteQueueProxyHandle*.**RemoteBindingHandle**, invoke the method RemoteQMPurgeQueue of the qm2qm interface defined in [MS-MQQP](../MS-MQQP/MS-MQQP.md) section 3.1.4.7 with the following argument value:
@@ -2609,9 +2609,9 @@ DWORD R_QMGetRTQMServerPort(
 
 Exceptions Thrown: No exceptions are thrown beyond those thrown by the underlying RPC protocol, as specified in [MS-RPCE].
 
-As specified in section [3.1.3](#Section_3.2.3), this protocol configures a fixed listening [**endpoint**](#gt_endpoint) at an RPC port number. For the interface and protocol specified by the *fIP* parameter, this method returns the RPC port number determined at server initialization time. If the default port is already in use, the server SHOULD increment the port number by 11 until an unused port is found.
+As specified in section [3.1.3](#Section_3.1.3), this protocol configures a fixed listening [**endpoint**](#gt_endpoint) at an RPC port number. For the interface and protocol specified by the *fIP* parameter, this method returns the RPC port number determined at server initialization time. If the default port is already in use, the server SHOULD increment the port number by 11 until an unused port is found.
 
-Security consideration: Servers MUST NOT enforce security limitations for this method, since [**clients**](#gt_client) can call this method before configuring RPC binding security. See section [5.1](#Section_5) for details.
+Security consideration: Servers MUST NOT enforce security limitations for this method, since [**clients**](#gt_client) can call this method before configuring RPC binding security. See section [5.1](#Section_5.1) for details.
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules for qmcomm2
@@ -2646,7 +2646,7 @@ HRESULT QMSendMessageInternalEx(
 
 **hBind:** MUST be set to an [**RPC**](#gt_remote-procedure-call-rpc) binding handle as described in [MS-RPCE](../MS-RPCE/MS-RPCE.md) section 2.
 
-**pQueueFormat:** MUST be a pointer to a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.3) section 2.2.7) structure, which identifies an existing [**queue**](#gt_queue) to be opened. MUST NOT be NULL, and MUST conform to the [**format name**](#gt_format-name) syntax rules defined in [MS-MQMQ]. The queue identified by *pQueueFormat* MUST be local to the [**supporting server**](#gt_supporting-server), and MUST be successfully openable via a call to [rpc_QMOpenQueueInternal](#Section_3.1.4.17) with a *dwDesiredAccess* level of MQ_SEND_ACCESS (0x00000002).
+**pQueueFormat:** MUST be a pointer to a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure, which identifies an existing [**queue**](#gt_queue) to be opened. MUST NOT be NULL, and MUST conform to the [**format name**](#gt_format-name) syntax rules defined in [MS-MQMQ]. The queue identified by *pQueueFormat* MUST be local to the [**supporting server**](#gt_supporting-server), and MUST be successfully openable via a call to [rpc_QMOpenQueueInternal](#Section_3.1.4.17) with a *dwDesiredAccess* level of MQ_SEND_ACCESS (0x00000002).
 
 **ptb:** A [CACTransferBufferV2](#Section_2.2.3.3) structure pointer as described in section 2.2.3.3. See the identical parameter in section 3.1.5.2 for details on this parameter.
 
@@ -2688,7 +2688,7 @@ HRESULT rpc_ACSendMessageEx(
 
 ptb.old.uTransferType MUST be CACTB_SEND (0x00000000).
 
-ptb.old.Send.pAdminQueueFormat can be NULL, in which case no [**administration queue**](#gt_administration-queue) [**format name**](#gt_format-name) is associated with the message. If not NULL, ptb.old.Send.pAdminQueueFormat MUST point to a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.3) section 2.2.7) structure.
+ptb.old.Send.pAdminQueueFormat can be NULL, in which case no [**administration queue**](#gt_administration-queue) [**format name**](#gt_format-name) is associated with the message. If not NULL, ptb.old.Send.pAdminQueueFormat MUST point to a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure.
 
 ptb.old.Send.pResponseQueueFormat can be NULL, in which case no response queue format name is associated with the message. If not NULL, ptb.old.Send.pResponseQueueFormat MUST point to a **QUEUE_FORMAT** structure.
 
@@ -2791,7 +2791,7 @@ Security Considerations: The caller can request that the server perform security
 When processing this call, the server MUST:
 
 - Determine if the input parameter values violate the constraints previously specified. If an invalid parameter is detected, the server MUST take no further action and return a failure **HRESULT**.
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
 - If no such **LocalQueueContextHandle** ADM element instance exists, take no further action and return a failure **HRESULT**.
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - If ptb.old.pUow is non-NULL:
@@ -2947,7 +2947,7 @@ When processing this call, the server MUST:
 - If ptb.old.pUow is non-NULL:
 - Look up a **Transaction** ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.1.14) ADM element instance in the server's **LocalQueueManager.TransactionCollection** where ptb.old.pUow matches **Transaction.Identifier**.
 - If no such **Transaction** ADM element instance exists, take no further action and return a failure **HRESULT**.
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the **Context** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQMContext*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the **Context** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQMContext*.
 - If such a **RemoteQueueProxyHandle** ADM element instance exists:
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - If ptb.old.pUow is non-NULL, take no further action and return a failure HRESULT.
@@ -3033,7 +3033,7 @@ This method is invoked at the dynamically assigned [**endpoint**](#gt_endpoint) 
 When processing this call, the server SHOULD:<76>
 
 - Determine whether the input parameter values violate the constraints previously specified. If an invalid parameter is detected, the server MUST take no further action and return a failure HRESULT.
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
 - If such a **LocalQueueContextHandle** ADM element instance exists:
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - Generate an Open Cursor ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.1) event with the following argument value:
@@ -3042,7 +3042,7 @@ When processing this call, the server SHOULD:<76>
 - Set *pcc*.**hCursor** to *rCursor*.**Handle**.
 - Take no further action and return MQ_OK (0x00000000).
 - Else:
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
 - If no such **RemoteQueueProxyHandle** ADM element instance exists, take no further action and return a failure HRESULT.
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - Bind to the remote server indicated by *iLocatedRemoteQueueProxyHandle*.**PathName** and invoke the R_QMCreateRemoteCursor (Opnum 4) (section [3.1.4.4)](#Section_3.1.4.4) method. Specify the following parameter values:
@@ -3071,7 +3071,7 @@ This event occurs on rundown of a context handle of type [RPC_QUEUE_HANDLE (sec
 
 When processing this event, the [**server**](#gt_server) MUST:
 
-- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.3)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
+- Locate a [LocalQueueContextHandle (section 3.1.1.3)](#Section_3.1.1.3) ADM element instance in the server's *iLocalQueueContextHandleTable* (section [3.1.1.2](#Section_3.1.1.2)) where the value of the **Handle** attribute of the **LocalQueueContextHandle** ADM element instance equals *hQueue*.
 - If such a **LocalQueueContextHandle** ADM element instance exists:
 - Declare *iLocatedLocalQueueContextHandle* and set it to a reference to the located **LocalQueueContextHandle** ADM element instance.
 - Generate a Close Queue ([MS-MQDMPR](../MS-MQDMPR/MS-MQDMPR.md) section 3.1.7.1.6) event with the following argument value:
@@ -3079,7 +3079,7 @@ When processing this event, the [**server**](#gt_server) MUST:
 - Delete *iLocatedLocalQueueContextHandle* from *iLocalQueueContextHandleTable*.
 - Take no further action and return MQ_OK (0x00000000).
 - Else:
-- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.5)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
+- Locate a [RemoteQueueProxyHandle (section 3.1.1.5)](#Section_3.1.1.5) ADM element instance in the server's *iRemoteQueueProxyHandleTable* (section [3.1.1.4](#Section_3.1.1.4)) where the value of the **Handle** attribute of the **RemoteQueueProxyHandle** ADM element instance equals *hQueue*.
 - If no such **RemoteQueueProxyHandle** ADM element instance exists, take no further action.
 - Declare *iLocatedRemoteQueueProxyHandle* and set it to a reference to the located **RemoteQueueProxyHandle** ADM element instance.
 - Invoke the RemoteQMCloseQueue method of the qm2qm [**RPC**](#gt_remote-procedure-call-rpc) interface as specified in [MS-MQQP](../MS-MQQP/MS-MQQP.md) section 3.1.4.4 using the binding handle in *iLocatedRemoteQueueProxyHandle*.**RemoteBindingHandle** and the following parameter value:
@@ -3185,20 +3185,20 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**queue**](#gt_qu
 - *dwObjectType* MUST 0x00000001.
 - *lpwcsPathName* MUST contain the null-terminated queue name string.
 - An initial SECURITY_DESCRIPTOR can be specified for the new queue using the *pSecurityDescriptor* and *SDSize* parameters as specified in section 3.1.4.5.
-- Initial property values can be supplied for the new queue using the *cp*, *aProp*, and *apVar* parameters as specified in section 3.1.4.5. The property identifiers in *aProp* MUST be in the table in section [3.1.1.12](#Section_3.1.1.12) and MUST be marked as applicable for a Create operation. To not specify any initial property values for the new queue, yet meet the requirement of specifying at least one property value, the client can supply the queue property PROPID_Q_PATHNAME using the same value specified for *lpwcsPathName*. MSMQ queue property values are defined in [MS-MQMQ](#Section_2.2.3) section 2.3.1.
+- Initial property values can be supplied for the new queue using the *cp*, *aProp*, and *apVar* parameters as specified in section 3.1.4.5. The property identifiers in *aProp* MUST be in the table in section [3.1.1.12](#Section_3.1.1.12) and MUST be marked as applicable for a Create operation. To not specify any initial property values for the new queue, yet meet the requirement of specifying at least one property value, the client can supply the queue property PROPID_Q_PATHNAME using the same value specified for *lpwcsPathName*. MSMQ queue property values are defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1.
 - To receive or send [**messages**](#gt_message) to the new queue, the client application MUST first open the queue, as specified in section [3.2.4.7](#Section_3.2.4.7). Opening a queue requires a [**format name**](#gt_format-name), which is either constructed by the MSMQ application or acquired from the [**server**](#gt_server), as specified in section [3.2.4.13](#Section_3.2.4.13).
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Deleting a Local Private Queue
 
 The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for the local [**private queue**](#gt_private-queue) to be deleted.
 
-- The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ](#Section_2.2.3) section 2.1.
+- The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 - The [**client**](#gt_client) MUST call [R_QMDeleteObject](#Section_3.1.4.8), supplying the following parameter value:
 - A pointer to an [OBJECT_FORMAT](#Section_2.2.3.5) structure containing the format name of the [**queue**](#gt_queue) to be deleted, as specified in section 3.1.4.8.
 <a id="Section_3.2.4.3"></a>
 #### 3.2.4.3 Updating Local Private Queue Security
 
-The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) for which the security configuration is to be updated, a new SECURITY_DESCRIPTOR for the [**queue**](#gt_queue), and a SECURITY_DESCRIPTOR value indicating which portions of the SECURITY_DESCRIPTOR are to be applied to the queue. SECURITY_DESCRIPTOR is specified in [MS-DTYP](#Section_2.2.1) section 2.4.6 and SECURITY_INFORMATION is specified in [MS-MQMQ](#Section_2.2.3) section 2.2.3.
+The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) for which the security configuration is to be updated, a new SECURITY_DESCRIPTOR for the [**queue**](#gt_queue), and a SECURITY_DESCRIPTOR value indicating which portions of the SECURITY_DESCRIPTOR are to be applied to the queue. SECURITY_DESCRIPTOR is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6 and SECURITY_INFORMATION is specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.3.
 
 - The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ] section 2.1.
 - The given SECURITY_DESCRIPTOR MUST be in self-relative form.
@@ -3208,7 +3208,7 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](
 <a id="Section_3.2.4.4"></a>
 #### 3.2.4.4 Retrieving Local Private Queue Security
 
-The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) and a SECURITY_INFORMATION value indicating which portions of the security configuration to retrieve. The [**client**](#gt_client) can provide a buffer into which the [**server**](#gt_server) returns a SECURITY_DESCRIPTOR. SECURITY_DESCRIPTOR is specified in [MS-DTYP](#Section_2.2.1) section 2.4.6 and SECURITY_INFORMATION as specified in [MS-MQMQ](#Section_2.2.3) section 2.1.
+The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) and a SECURITY_INFORMATION value indicating which portions of the security configuration to retrieve. The [**client**](#gt_client) can provide a buffer into which the [**server**](#gt_server) returns a SECURITY_DESCRIPTOR. SECURITY_DESCRIPTOR is specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6 and SECURITY_INFORMATION as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.
 
 - The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ] section 2.1.2.
 - The client MUST call [R_QMGetObjectSecurityInternal](#Section_3.1.4.7), specifying the following parameter values:
@@ -3220,7 +3220,7 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Updating Local Private Queue Properties
 
-The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) for which property values are to be updated and one or more new [**queue property**](#gt_queue-property) values for the indicated [**queue**](#gt_queue). MSMQ queue property values are defined in [MS-MQMQ](#Section_2.2.3) section 2.3.1.
+The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) for which property values are to be updated and one or more new [**queue property**](#gt_queue-property) values for the indicated [**queue**](#gt_queue). MSMQ queue property values are defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.3.1.
 
 - The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ] section 2.1.
 - The [**client**](#gt_client) MUST call [R_QMSetObjectProperties](#Section_3.1.4.10), supplying the following parameter values:
@@ -3229,7 +3229,7 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](
 <a id="Section_3.2.4.6"></a>
 #### 3.2.4.6 Retrieving Local Private Queue Properties
 
-The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) from which to retrieve property values and a set of property identifiers for which values are to be retrieved. Additionally, the [**client**](#gt_client) MUST provide a set of **PROPVARIANT**s into which the [**server**](#gt_server) will place the requested property values. MSMQ [**queue property**](#gt_queue-property) values and the **PROPVARIANT** structure are defined in [MS-MQMQ](#Section_2.2.3) section 2.2.13.2.
+The [**MSMQ**](#gt_message-queuing) application MUST supply a [**format name**](#gt_format-name) for a local [**private queue**](#gt_private-queue) from which to retrieve property values and a set of property identifiers for which values are to be retrieved. Additionally, the [**client**](#gt_client) MUST provide a set of **PROPVARIANT**s into which the [**server**](#gt_server) will place the requested property values. MSMQ [**queue property**](#gt_queue-property) values and the **PROPVARIANT** structure are defined in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.13.2.
 
 - The given format name MUST be of the "private" or "direct" variety, as specified in [MS-MQMQ] section 2.1.
 - The client MUST call [R_QMGetObjectProperties](#Section_3.1.4.9), supplying the following parameter values:
@@ -3268,7 +3268,7 @@ The client MUST execute the following steps:
 - *iOpenQueueContext*.**Context** := *pdwQMContext*
 - Take no further action. The queue has been successfully opened. Use *iOpenQueueContext* for subsequent [**message**](#gt_message) operations against the queue.
 - Else, if MQ_OK (0x00000000) is returned, and the out-parameter value for *lplpRemoteQueueName* is non-NULL:
-- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.1.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
+- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.2.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
 - At the remote server, invoke the [R_QMOpenRemoteQueue](#Section_3.1.4.2) method, supplying the following parameter values:
 - *pphContext* := Output parameter. Retrieve this value from the server.
 - *pdwContext* := Output parameter. Retrieve this value from the server.
@@ -3321,7 +3321,7 @@ The [**client**](#gt_client) MUST execute the following steps:
 - *lplpRemoteQueueName* := in/out parameter:
 - In: NULL.
 - Out: Retrieve this value from the server.
-- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.1.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
+- Using the [**RPC**](#gt_remote-procedure-call-rpc) binding procedure as specified in section [3.2.4](#Section_3.2.4), bind to the remote server indicated by the [**path name**](#gt_path-name) contained in *lplpRemoteQueueName*.
 - At the remote server, invoke the [R_QMCreateRemoteCursor](#Section_3.1.4.4) method, supplying the following parameter values:
 - *hQueue* := *pcc*.**srv_hACQueue** (out-parameter value from the rpc_ACCreateCursorEx method)
 - *phCursor* := Retrieve this out-parameter value from the server.
@@ -3390,7 +3390,7 @@ The [**MSMQ**](#gt_message-queuing) application MUST supply a [**queue**](#gt_qu
 
 - The [**client**](#gt_client) MUST call [R_QMObjectPathToObjectFormat (section 3.1.4.11)](#Section_3.1.4.11), supplying the following parameter values:
 - *lpwcsPathName* MUST contain a [**path name**](#gt_path-name).
-- *pObjectFormat* MUST point to a **QUEUE_FORMAT** ([MS-MQMQ](#Section_2.2.3) section 2.2.7) structure to be populated by the server.
+- *pObjectFormat* MUST point to a **QUEUE_FORMAT** ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.7) structure to be populated by the server.
 <a id="Section_3.2.4.14"></a>
 #### 3.2.4.14 Retrieving a Format Name for a Queue Context Handle
 
@@ -3459,7 +3459,7 @@ Figure 3: Creating a queue handle
 
 - The application invokes the [rpc_QMOpenQueueInternal](#Section_3.1.4.17) method, providing a [**format name**](#gt_format-name) for a queue to open. NULL is specified for *hRemoteQueue*.
 - The supporting server determines that the queue identified by the format name is a [**remote queue**](#gt_remote-queue). A [**path name**](#gt_path-name) for the remote queue is returned via *lplpRemoteQueueName*. All returned handles are NULL.
-- The application uses the path name returned by the rpc_QMOpenQueueInternal method to determine the computer name of the remote queue manager, as specified in [MS-MQMQ](#Section_2.2.3) section 2.1.1. The application then establishes an [**RPC**](#gt_remote-procedure-call-rpc) connection with the remote queue manager and begins the [**session**](#gt_session) by invoking the [R_QMGetRTQMServerPort](#Section_3.1.4.24) method.
+- The application uses the path name returned by the rpc_QMOpenQueueInternal method to determine the computer name of the remote queue manager, as specified in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.1.1. The application then establishes an [**RPC**](#gt_remote-procedure-call-rpc) connection with the remote queue manager and begins the [**session**](#gt_session) by invoking the [R_QMGetRTQMServerPort](#Section_3.1.4.24) method.
 - The remote queue manager returns the RPC port number requested by the application.
 - The application invokes the [R_QMOpenRemoteQueue](#Section_3.1.4.2) method at the remote queue manager, using the RPC port returned by the R_QMGetRTQMServerPort method and specifying the format name of the queue to be opened.
 - The remote queue manager opens the requested queue and returns a context handle and an **OpenQueueDescriptor** ADM element instance with its **Handle** attribute set to the application.
@@ -3514,7 +3514,7 @@ The following sequence diagram illustrates an [**application**](#gt_application)
 
 Figure 6: Using server resource manager for internal transaction
 
-- Prior to invoking [R_QMEnlistInternalTransaction (section 3.1.4.14)](#Section_3.1.4.14), the application creates a new unique transactional [**unit of work**](#gt_unit-of-work) identifier XACTUOW ([MS-MQMQ](#Section_2.2.3) section 2.2.18.1.8).<78>
+- Prior to invoking [R_QMEnlistInternalTransaction (section 3.1.4.14)](#Section_3.1.4.14), the application creates a new unique transactional [**unit of work**](#gt_unit-of-work) identifier XACTUOW ([MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.2.18.1.8).<78>
 - The application invokes R_QMEnlistInternalTransaction to create an internal transaction handle for the **XACTUOW**.
 - The application utilizes the **XACTUOW** identifier created at step 1 to perform operations in the scope of the transaction via the **qmcomm2** interface.
 - The application finally commits the transaction by calling [R_QMCommitTransaction (section 3.1.4.15)](#Section_3.1.4.15), specifying the internal transaction handle obtained at step 2.
@@ -3538,7 +3538,7 @@ None.
 <a id="Section_6"></a>
 # 6 Appendix A: Full IDL
 
-For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](#Section_2.2.1) Appendix A (section 5), "ms-mqrr.idl" is the IDL found in [MS-MQRR](../MS-MQRR/MS-MQRR.md) Appendix A (section 6), and "ms-mqmq.idl" is the IDL found in [MS-MQMQ](#Section_2.2.3) Appendix A (section 5).
+For ease of implementation, the full [**IDL**](#gt_interface-definition-language-idl) is provided below, where "ms-dtyp.idl" is the IDL found in [MS-DTYP](../MS-DTYP/MS-DTYP.md) Appendix A (section 5), "ms-mqrr.idl" is the IDL found in [MS-MQRR](../MS-MQRR/MS-MQRR.md) Appendix A (section 6), and "ms-mqmq.idl" is the IDL found in [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) Appendix A (section 5).
 
 // Please refer to [MS-MQMQ] for definitions of the
 
@@ -4454,7 +4454,7 @@ For Windows NT and Windows 2000 servers, the method [rpc_ACCreateCursorEx](#Sect
 
 <25> Section 3.1.4.2: Any premium, advanced, or data center edition of an NT-class server operating system.
 
-<26> Section 3.1.4.2: Windows applications typically invoke [R_QMOpenRemoteQueue](#Section_3.1.4.2) indirectly via the Windows API function **MQOpenQueue**. The Windows API documentation for **MQOpenQueue** includes the following error codes. For their descriptions, refer to [MS-MQMQ](#Section_2.2.3) section 2.4 or to [[MSDN-MQEIC]](https://go.microsoft.com/fwlink/?LinkId=90044) for those not described in [MS-MQMQ].
+<26> Section 3.1.4.2: Windows applications typically invoke [R_QMOpenRemoteQueue](#Section_3.1.4.2) indirectly via the Windows API function **MQOpenQueue**. The Windows API documentation for **MQOpenQueue** includes the following error codes. For their descriptions, refer to [MS-MQMQ](../MS-MQMQ/MS-MQMQ.md) section 2.4 or to [[MSDN-MQEIC]](https://go.microsoft.com/fwlink/?LinkId=90044) for those not described in [MS-MQMQ].
 
 | Name | Value |
 | --- | --- |

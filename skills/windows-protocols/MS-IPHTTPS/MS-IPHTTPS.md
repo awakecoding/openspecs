@@ -364,7 +364,7 @@ After the HTTPS connection is established, the [**IP-HTTPS client**](#gt_ip-http
 
 The IP-HTTPS link is now usable to send and receive IPv6 traffic (including neighbor and router discovery). The default MTU for the IP-HTTPS link is set to the minimum IPv6 MTU of 1280 [[RFC2460]](https://go.microsoft.com/fwlink/?LinkId=90357).
 
-Sections [3.1.5.3](#Section_3.1.5.3) and [3.1.5.4](#Section_3.2.5.3) apply when the IP-HTTPS client is in **LinkUp** state.
+Sections [3.1.5.3](#Section_3.1.5.3) and [3.1.5.4](#Section_3.1.5.4) apply when the IP-HTTPS client is in **LinkUp** state.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Data Transfer

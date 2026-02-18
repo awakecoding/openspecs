@@ -1588,7 +1588,7 @@ Attributes
 <a id="Section_2.2.1.5.14"></a>
 ##### 2.2.1.5.14 ref Element
 
-The ref XML element represents information about an error parameter. Depending on what the error is, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17.8).
+The ref XML element represents information about an error parameter. Depending on what the error is, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17).
 
 <xs:element name="ref"
 
@@ -1730,7 +1730,7 @@ Child Elements
 | --- | --- | --- |
 | timestamp | timestamp | MUST be the time when the error occurred. The format of this element is specified in section [2.2.1.5.2](#Section_2.2.1.5.2). |
 | affectedContentSets | affectedContentSets | MUST be information about content sets that are affected by this problem. The type of information contained in this field MUST be as specified in the section [2.2.1.5.13](#Section_2.2.1.5.13). |
-| errorReferences | errorReferences | MUST be the error parameters. The format of this element is specified in section [2.2.1.5.15](#Section_2.2.1.5.15). Depending on the error ID, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17.8). |
+| errorReferences | errorReferences | MUST be the error parameters. The format of this element is specified in section [2.2.1.5.15](#Section_2.2.1.5.15). Depending on the error ID, specific named parameters MUST be defined. For more information about errors and their mandatory parameters, see section [2.2.1.5.17](#Section_2.2.1.5.17). |
 
 Attributes
 
@@ -2866,9 +2866,9 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [CreateObject](#Section_3.1.5.2.1) | Create an [**Active Directory**](#gt_active-directory) object that has the specified [**distinguished name**](#gt_distinguished-name-dn) and attributes. Opnum: 6 |
-| [DeleteObject](#Section_3.1.5.2.2) | Delete an Active Directory object that has the specified distinguished name and attributes. Opnum: 7 |
-| [ModifyObject](#Section_3.1.5.2.3) | Add, delete, or modify attributes of the specified Active Directory object. Opnum: 8 |
+| [CreateObject](#Section_3.1.5.3.1) | Create an [**Active Directory**](#gt_active-directory) object that has the specified [**distinguished name**](#gt_distinguished-name-dn) and attributes. Opnum: 6 |
+| [DeleteObject](#Section_3.1.5.3.2) | Delete an Active Directory object that has the specified distinguished name and attributes. Opnum: 7 |
+| [ModifyObject](#Section_3.1.5.3.3) | Add, delete, or modify attributes of the specified Active Directory object. Opnum: 8 |
 
 <a id="Section_3.1.5.3.1"></a>
 ##### 3.1.5.3.1 CreateObject Method (Opnum 6)
@@ -2906,7 +2906,7 @@ HRESULT CreateObject(
 - If the LDAP error is LDAP_OPERATIONS_ERROR, dfsrHelperLdapErrorBase + the server-side error code.
 - For all other LDAP errors, dfsrHelperLdapErrorBase + the LDAP return code. For more information, see [[LDAP-ERR]](https://go.microsoft.com/fwlink/?LinkId=89933).
 - For all other failures, an implementation-specific nonzero HRESULT error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1, between 0x80000000 and 0xFFFFFFFF. For protocol purposes, all nonzero values MUST be treated as equivalent failures.
-The server MUST handle this message by using the same sequence of steps as for [IADProxy::CreateObject](#Section_67af51f60ed241e4aa725ff1209dff4c) (as specified in section 3.1.5.2.1), with the following additional step:
+The server MUST handle this message by using the same sequence of steps as for [IADProxy::CreateObject](#Section_3.1.5.2.1) (as specified in section 3.1.5.2.1), with the following additional step:
 
 - The server MUST execute the LDAP command under the credentials that correspond to the network resource name that is supplied in the *networkNameResourceName* parameter.
 <a id="Section_3.1.5.3.2"></a>
@@ -2938,7 +2938,7 @@ HRESULT DeleteObject(
 - A value of 0 if the LDAP error is LDAP_NO_SUCH_OBJECT.
 - A value of dfsrHelperLdapErrorBase plus the LDAP return code for all other LDAP errors. For more information, see [[LDAP-ERR]](https://go.microsoft.com/fwlink/?LinkId=89933).
 - For all other failures, an implementation-specific nonzero error code.
-The server MUST handle this message by using the same sequence of steps as for [IADProxy::DeleteObject](#Section_2defd5c726304fe4a222d1d5cb21f539) (as specified in section 3.1.5.2.2), with the following additional step:
+The server MUST handle this message by using the same sequence of steps as for [IADProxy::DeleteObject](#Section_3.1.5.2.2) (as specified in section 3.1.5.2.2), with the following additional step:
 
 - The server MUST execute the LDAP command under the credentials that correspond to the network resource name that is supplied in the *networkNameResourceName* parameter.
 <a id="Section_3.1.5.3.3"></a>
@@ -2973,7 +2973,7 @@ HRESULT ModifyObject(
 - If the LDAP error is LDAP_OPERATIONS_ERROR, dfsrHelperLdapErrorBase + the server-side error code.
 - For all other LDAP errors, dfsrHelperLdapErrorBase + the LDAP return code. For more information, see [[LDAP-ERR]](https://go.microsoft.com/fwlink/?LinkId=89933).
 - For all other failures, an implementation-specific nonzero HRESULT error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1, between 0x80000000 and 0xFFFFFFFF. For protocol purposes, all nonzero values MUST be treated as equivalent failures.
-The server MUST handle this message by using the same sequence of steps as for [IADProxy::ModifyObject](#Section_5168b7aec8e944e1b1bc2031f3a93ab1) (as specified in section 3.1.5.2.3), with the following additional step:
+The server MUST handle this message by using the same sequence of steps as for [IADProxy::ModifyObject](#Section_3.1.5.2.3) (as specified in section 3.1.5.2.3), with the following additional step:
 
 - The server MUST execute the LDAP command under the credentials that correspond to the network resource name that is supplied in the *networkNameResourceName* parameter.
 <a id="Section_3.1.5.4"></a>
@@ -2987,7 +2987,7 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetReport](#Section_3.1.5.5.1) | Retrieves health information for the specified [**replication group**](#gt_replication-group) and global health data of the DFS-R service on the server. Opnum: 3 |
+| [GetReport](#Section_3.1.5.4.1) | Retrieves health information for the specified [**replication group**](#gt_replication-group) and global health data of the DFS-R service on the server. Opnum: 3 |
 | [GetCompressedReport](#Section_3.1.5.4.2) | Gets the health information for the specified replication group and the global health data of the DFS-R service on the server. The server MUST encode the report as a field in the format that is specified by the DFS-R compression algorithm (as specified in [MS-FRS2](../MS-FRS2/MS-FRS2.md) section 3.1.1.1). Opnum: 4 |
 | [GetRawReportEx](#Section_3.1.5.4.3) | Not implemented. Opnum: 5 |
 | [GetReferenceVersionVectors](#Section_3.1.5.4.4) | Gets the [**version vectors**](#gt_version-vector) for all [**replicated folders**](#gt_replicated-folder) in the specified replication group. Opnum: 6 |
@@ -3046,7 +3046,7 @@ The server MUST also generate report XML. The server MUST get the following info
 
 - Information about the configuration of the replicated folder (replicated folder root path, staging folder path, conflict folder path, and configured staging size).
 - Information about files that were received from other DFS-R members since the DFS-R service started, which SHOULD occur when the system is booted. The required information is the count and cumulative compressed size of the files received, as well as the cumulative compressed size of the files received from other members.
-- Information about available errors that were encountered by the DFS-R service since the server started, as well as errors encountered during report generation while retrieving information about the replication group supplied by the *replicationGroupGuid* parameter. These errors are specified in section [2.2.1.5.17](#Section_2.2.1.5.17.8).
+- Information about available errors that were encountered by the DFS-R service since the server started, as well as errors encountered during report generation while retrieving information about the replication group supplied by the *replicationGroupGuid* parameter. These errors are specified in section [2.2.1.5.17](#Section_2.2.1.5.17).
 - If the REPORTING_FLAGS_BACKLOG flag was specified in message parameters, the server MUST also get the count of pending incoming changes that are known to the reference member (as specified by the version vectors passed in the method parameters) but that are not yet received on the local member.
 - If the REPORTING_FLAGS_FILES flag was specified in message parameters, the server MUST also count the number of files and cumulative file sizes for:
 - Files under the replicated folder root that are available for replication. The server MUST NOT count any files that are excluded from replication.
@@ -3087,7 +3087,7 @@ HRESULT GetCompressedReport(
 
 **memberVersionVectors:** If the flags parameter has REPORTING_FLAGS_BACKLOG set, the set of version vectors for the replicated folders on the server MUST be returned in this output parameter. The VersionVectorData structure is specified in section 2.2.1.4.
 
-**reportCompressed:** The compressed report body in the XML format MUST be returned in this output parameter. The format of the XML MUST be the same as for the *reportXML* member of the [GetReport](#Section_3.1.5.5.1) method. This MUST be an encoded field whose format is specified by the DFS-R compression algorithm (as specified in [MS-FRS2] section 3.1.1.1).
+**reportCompressed:** The compressed report body in the XML format MUST be returned in this output parameter. The format of the XML MUST be the same as for the *reportXML* member of the [GetReport](#Section_3.1.5.4.1) method. This MUST be an encoded field whose format is specified by the DFS-R compression algorithm (as specified in [MS-FRS2] section 3.1.1.1).
 
 **uncompressedReportSize:** The size, in bytes, of the uncompressed data returned in the *reportCompressed* parameter.
 
@@ -3198,8 +3198,8 @@ Methods in RPC Opnum Order
 
 | Method | Description |
 | --- | --- |
-| [GetReport](#Section_3.1.5.5.1) | Retrieves health information for the specified [**replication group**](#gt_replication-group) and global health data of the [**DFS-R**](#gt_member-dfs-r) service on the server. Opnum: 9 |
-| [GetCompressedReport](../MS-FRS2/MS-FRS2.md) | Gets the health information for the specified replication group and the global health data of the DFS-R service on the server. The server MUST encode the report as a field in the format that is specified by the DFS-R compression algorithm (as specified in [MS-FRS2](../MS-FRS2/MS-FRS2.md) section 3.1.1.1). Opnum: 10 |
+| [GetReport](#Section_3.1.5.4.1) | Retrieves health information for the specified [**replication group**](#gt_replication-group) and global health data of the [**DFS-R**](#gt_member-dfs-r) service on the server. Opnum: 9 |
+| [GetCompressedReport](#Section_3.1.5.5.2) | Gets the health information for the specified replication group and the global health data of the DFS-R service on the server. The server MUST encode the report as a field in the format that is specified by the DFS-R compression algorithm (as specified in [MS-FRS2](../MS-FRS2/MS-FRS2.md) section 3.1.1.1). Opnum: 10 |
 
 **Note** The defined methods have the same names as methods found under other opnums in the IServerHealthReport interface.
 
@@ -3248,7 +3248,7 @@ HRESULT GetReport(
 
 **Return Values:** The method MUST return 0 on success; or return an implementation-specific nonzero HRESULT error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1, between 0x80000000 and 0xFFFFFFFF on failure. For protocol purposes, all nonzero values MUST be treated as equivalent failures.
 
-The server MUST also generate report XML. Besides information defined in [3.1.5.4.1](#Section_3.1.5.5.1), the server MUST get the following information:
+The server MUST also generate report XML. Besides information defined in [3.1.5.4.1](#Section_3.1.5.4.1), the server MUST get the following information:
 
 - If the *serverName* field is an FQDN, the DFS-R Helper Protocol server MUST verify that the FQDN is a valid name on this server. If it is invalid or cannot be resolved, the generated report MUST contain an error description.
 - If the *serverName* field is NULL, the generated report MUST contain the DFS-R Helper Protocol server's local DNS and [**NetBIOS names**](#gt_netbios-name).
@@ -3289,13 +3289,13 @@ HRESULT GetCompressedReport(
 
 **memberVersionVectors:** If the flags parameter has REPORTING_FLAGS_BACKLOG set, the set of version vectors for the replicated folders on the server MUST be returned in this output parameter. The VersionVectorData structure is specified in section 2.2.1.4.
 
-**reportCompressed:** The compressed report body in the XML format MUST be returned in this output parameter. The format of the XML MUST be the same as for the *reportXML* member of the [GetReport](#Section_3.1.5.5.1) method. This MUST be an encoded field whose format is specified by the DFS-R compression algorithm (as specified in [MS-FRS2] section 3.1.1.1.
+**reportCompressed:** The compressed report body in the XML format MUST be returned in this output parameter. The format of the XML MUST be the same as for the *reportXML* member of the [GetReport](#Section_3.1.5.4.1) method. This MUST be an encoded field whose format is specified by the DFS-R compression algorithm (as specified in [MS-FRS2] section 3.1.1.1.
 
 **uncompressedReportSize:** The size, in bytes, of the uncompressed data returned in the *reportCompressed* parameter.
 
 **Return Values:** The method MUST return 0 on success; or return an implementation-specific nonzero HRESULT error code, as specified in [MS-ERREF](../MS-ERREF/MS-ERREF.md) section 2.1, between 0x80000000 and 0xFFFFFFFF on failure. For protocol purposes, all nonzero values MUST be treated as equivalent failures.
 
-After receiving this message, the server MUST create the [GetReport](#Section_3.1.5.5.1) message with the same input parameters and then process this message. The method's behavior MUST be exactly the same as defined in section [3.1.5.4.2](#Section_3.1.5.4.2), and the server MUST verify the following:
+After receiving this message, the server MUST create the [GetReport](#Section_3.1.5.4.1) message with the same input parameters and then process this message. The method's behavior MUST be exactly the same as defined in section [3.1.5.4.2](#Section_3.1.5.4.2), and the server MUST verify the following:
 
 - If the *serverName* field is an FQDN, the DFS-R Helper Protocol server MUST verify that the FQDN is a valid name on this server. If it is invalid or cannot be resolved the generated report MUST contain an error description.
 - If the *serverName* field is NULL, the generated report MUST contain the DFS-R Helper Protocol server's local DNS and [**NetBIOS names**](#gt_netbios-name).

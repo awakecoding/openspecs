@@ -147,7 +147,7 @@ This document uses the following terms:
 **SAML2**: The Security Assertion Markup Language (SAML) 2.0 [[SAMLCore2]](https://go.microsoft.com/fwlink/?LinkId=216915).
 
 <a id="gt_samlpr"></a>
-**SAMLPR**: Security Assertion Markup Language (SAML) Proxy Request Signing Protocol [MS-SAMLPR](#Section_2.5).
+**SAMLPR**: Security Assertion Markup Language (SAML) Proxy Request Signing Protocol [MS-SAMLPR](../MS-SAMLPR/MS-SAMLPR.md).
 
 <a id="gt_secure-sockets-layer-ssl"></a>
 **Secure Sockets Layer (SSL)**: A security protocol that supports confidentiality and integrity of messages in client and server applications that communicate over open networks. SSL supports server and, optionally, client authentication using [**X.509**](#gt_x509) [**certificates**](#gt_certificate) [[X509]](https://go.microsoft.com/fwlink/?LinkId=90590) and [[RFC5280]](https://go.microsoft.com/fwlink/?LinkId=131034). SSL is superseded by [**Transport Layer Security (TLS)**](#gt_transport-layer-security-tls). TLS version 1.0 is based on SSL version 3.0 [[SSL3]](https://go.microsoft.com/fwlink/?LinkId=90534).
@@ -201,11 +201,11 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-ADFSWAP] Microsoft Corporation, "[Active Directory Federation Service (AD FS) Web Agent Protocol](../MS-ADFSWAP/MS-ADFSWAP.md)".
 
-[MS-DVRD] Microsoft Corporation, "[Device Registration Discovery Protocol](#Section_2.2.3)".
+[MS-DVRD] Microsoft Corporation, "[Device Registration Discovery Protocol](../MS-DVRD/MS-DVRD.md)".
 
-[MS-DVRE] Microsoft Corporation, "[Device Registration Enrollment Protocol](#Section_2.2.3)".
+[MS-DVRE] Microsoft Corporation, "[Device Registration Enrollment Protocol](../MS-DVRE/MS-DVRE.md)".
 
-[MS-DVRJ] Microsoft Corporation, "[Device Registration Join Protocol](#Section_2.2.3)".
+[MS-DVRJ] Microsoft Corporation, "[Device Registration Join Protocol](../MS-DVRJ/MS-DVRJ.md)".
 
 [MS-KPP] Microsoft Corporation, "[Key Provisioning Protocol](../MS-KPP/MS-KPP.md)".
 
@@ -221,7 +221,7 @@ Links to a document in the Microsoft Open Specifications library point to the co
 
 [MS-PKAP] Microsoft Corporation, "[Public Key Authentication Protocol](../MS-PKAP/MS-PKAP.md)".
 
-[MS-SAMLPR] Microsoft Corporation, "[Security Assertion Markup Language (SAML) Proxy Request Signing Protocol](#Section_2.5)".
+[MS-SAMLPR] Microsoft Corporation, "[Security Assertion Markup Language (SAML) Proxy Request Signing Protocol](../MS-SAMLPR/MS-SAMLPR.md)".
 
 [MSFT-ADFS-DeepDive] Gregory, David, "ADFS Deep-Dive: Comparing WS-Fed, SAML, and OAuth", [https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/adfs-deep-dive-comparing-ws-fed-saml-and-oauth/ba-p/257584](https://go.microsoft.com/fwlink/?linkid=2152864)
 
@@ -325,7 +325,7 @@ The following table provides a list of protocols, algorithms, and structures,<1>
 | Security token generation | Security Assertion Markup Language (SAML) 1.1 and Security Assertion Markup Language (SAML) 2.0 | A language that defines XML-encoded assertions (also known as security tokens) about authentication and authorization. | [SAMLCore] and [[SAMLCore2]](https://go.microsoft.com/fwlink/?LinkId=216915) |
 | Security token generation | The Web Services Trust Language | A language to help create security tokens and build trust relationships. | [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) |
 | Security token generation | [**Active Directory**](#gt_active-directory) Federation Service (AD FS) Proxy Protocol | Provides a means for a proxy located outside a protected network to communicate with an [**STS**](#gt_security-token-service-sts) located inside the protected network. | [MS-ADFSPP](../MS-ADFSPP/MS-ADFSPP.md) |
-| Security token generation | Security Assertion Markup Language (SAML) Proxy Request Signing Protocol | Used by a proxy located outside a protected network to communicate with an STS located inside the protected network. | [MS-SAMLPR](#Section_2.5) |
+| Security token generation | Security Assertion Markup Language (SAML) Proxy Request Signing Protocol | Used by a proxy located outside a protected network to communicate with an STS located inside the protected network. | [MS-SAMLPR](../MS-SAMLPR/MS-SAMLPR.md) |
 | Security token generation | Active Directory Federation Service (AD FS) Web Agent Protocol | Enables a [**web service (WS) resource**](#gt_web-service-ws-resource) to obtain information about an STS. | [MS-ADFSWAP](../MS-ADFSWAP/MS-ADFSWAP.md) |
 | [**OAuth**](#gt_oauth) [**authorization code**](#gt_authorization-code) processing | The OAuth 2.0 Authorization Framework | Allows the owner of a protected resource or service to grant access to that resource or service. | [[RFC6749]](https://go.microsoft.com/fwlink/?LinkId=301486) |
 | OAuth authorization code processing | Active Directory Federation Services OAuth Authorization Code Lookup Protocol | Allows AD FS servers that are deployed in an [**AD FS farm**](#gt_3f0970e9-ce9e-4870-b112-ec0096345442) configuration to share OAuth authorization codes. | [MS-ADFSOAL](../MS-ADFSOAL/MS-ADFSOAL.md) |
@@ -334,7 +334,7 @@ The following table provides a list of protocols, algorithms, and structures,<1>
 | Integration of AD FS with [**pre-authentication**](#gt_pre-authentication) proxies | Active Directory Federation Services and Proxy Integration Protocol | Implements a proxy that publishes application services that are located inside the boundaries of a corporate network and orchestrates authentication for clients that are outside that boundary (that is, pre-authentication). | [MS-ADFSPIP](../MS-ADFSPIP/MS-ADFSPIP.md) |
 | [**single sign-on (SSO)**](#gt_single-sign-on-sso) | The Web Services Federation Language | Mechanisms to allow [**federation**](#gt_federation) of disparate security [**realms**](#gt_realm) so that existing authentication and authorization information can be leveraged. | [[WSFederation]](https://go.microsoft.com/fwlink/?LinkId=90581) |
 | single sign-on | The Web Services Federation Language Version 1.2 | A profile to describe how passive requestors such as web browsers can use [**WS-Federation**](#gt_ws-federation) mechanisms. | [[WSFederation1.2]](https://go.microsoft.com/fwlink/?LinkId=306270) section 13. |
-| Device Registration | Device Registration Discovery Protocol, Device Registration Enrollment Protocol, Device Registration Join Protocol, and Key Provisioning Protocol | Provides for discovery and utilization of information that is needed to register personal or corporate-owned devices with a workplace. | [MS-DVRD](#Section_2.2.3), [MS-DVRE](#Section_2.2.3), [MS-DVRJ](#Section_2.2.3), and [MS-KPP](../MS-KPP/MS-KPP.md) |
+| Device Registration | Device Registration Discovery Protocol, Device Registration Enrollment Protocol, Device Registration Join Protocol, and Key Provisioning Protocol | Provides for discovery and utilization of information that is needed to register personal or corporate-owned devices with a workplace. | [MS-DVRD](../MS-DVRD/MS-DVRD.md), [MS-DVRE](../MS-DVRE/MS-DVRE.md), [MS-DVRJ](../MS-DVRJ/MS-DVRJ.md), and [MS-KPP](../MS-KPP/MS-KPP.md) |
 | Public Key Authentication | Public Key Authentication Protocol | Allows HTTP clients to prove possession of a private key without having to rely on typical client authentication support from the underlying platform. | [MS-PKAP](../MS-PKAP/MS-PKAP.md) |
 
 <a id="Section_2.2"></a>
@@ -451,13 +451,13 @@ The primary participants in this protocol are the Web Application Proxy (WAP) th
 Mobile devices such as smart phones and tablets have become a platform that people use to perform some or much of their day-to-day work. In order to take on this role, these devices often need to be registered and connected to workplace networks and resources. The device registration protocols provide a way for devices to discover registration services and then to use these services to register personal or corporate-owned devices with a workplace.
 
 - DVRD (Device Registration Discovery Protocol)
-The Device Registration Discovery Protocol [MS-DVRD](#Section_2.2.3) defines a mechanism for the discovery of information needed to register devices using the Device Registration Enrollment Protocol [MS-DVRE](#Section_2.2.3).
+The Device Registration Discovery Protocol [MS-DVRD](../MS-DVRD/MS-DVRD.md) defines a mechanism for the discovery of information needed to register devices using the Device Registration Enrollment Protocol [MS-DVRE](../MS-DVRE/MS-DVRE.md).
 
 - DVRE (Device Registration Enrollment Protocol)
 The Device Registration Enrollment Protocol [MS-DVRE] defines a lightweight mechanism for registering personal or corporate-owned devices with a workplace. It provides for issuance of X.509v3 digital certificates, and is intended for use as a device registration server. The server is known in [**WS-Trust**](#gt_ws-trust) terminology as an [**STS**](#gt_security-token-service-sts).
 
 - DVRJ (Device Registration Join Protocol)
-The Device Registration Join Protocol [MS-DVRJ](#Section_2.2.3) defines a lightweight mechanism for registering personal or corporate-owned devices with a workplace. It provides for issuance of X.509v3 digital certificates, and is intended for use as a device registration server. It provides a single [**REST**](#gt_representational-state-transfer-rest)-based endpoint that returns [**JavaScript Object Notation (JSON)**](#gt_javascript-object-notation-json)–formatted data in the response message. Note that DVRJ is preferred over DVRE for device registration.
+The Device Registration Join Protocol [MS-DVRJ](../MS-DVRJ/MS-DVRJ.md) defines a lightweight mechanism for registering personal or corporate-owned devices with a workplace. It provides for issuance of X.509v3 digital certificates, and is intended for use as a device registration server. It provides a single [**REST**](#gt_representational-state-transfer-rest)-based endpoint that returns [**JavaScript Object Notation (JSON)**](#gt_javascript-object-notation-json)–formatted data in the response message. Note that DVRJ is preferred over DVRE for device registration.
 
 - KPP (Key Provisioning Protocol)
 The Key Provisioning Protocol [MS-KPP](../MS-KPP/MS-KPP.md) defines a mechanism for a client to register a set of cryptographic keys on a user and device pair. It provides a single REST-based endpoint that returns JSON–formatted data in the response message.

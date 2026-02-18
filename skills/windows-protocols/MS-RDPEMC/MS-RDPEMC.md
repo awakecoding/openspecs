@@ -228,14 +228,14 @@ A [**host**](#gt_host) can choose to [**share**](#gt_share) all application wind
 
 The filtering functionality of the Remote Desktop Protocol: Multiparty Virtual Channel Extension makes it highly desirable for a sharing manager to communicate the list of windows and applications that are displayed to better coordinate between participants. Protocol messages are provided to communicate filtering state, application names, and window names to the participants.
 
-For more information, see sections [3.2.5.1](#Section_2.2.4.2) and [3.3.5.1](#Section_4.1).
+For more information, see sections [3.2.5.1](#Section_3.2.5.1) and [3.3.5.1](#Section_3.3.5.1).
 
 <a id="Section_1.3.1.2"></a>
 #### 1.3.1.2 Participant Management
 
 Participant management facilities allow the [**sharing manager**](#gt_sharing-manager) to send notifications to all participants when an individual [**participant**](#gt_participant) connects or disconnects from the sharing session or when a participant's [**control level**](#gt_control-level) changes.
 
-For more information, see sections [3.2.5.2](#Section_2.2.4.2) and [3.3.5.2](#Section_4.1).
+For more information, see sections [3.2.5.2](#Section_3.2.5.2) and [3.3.5.2](#Section_3.3.5.2).
 
 <a id="Section_1.3.1.3"></a>
 #### 1.3.1.3 Graphics Stream Control
@@ -313,13 +313,13 @@ packet-beta
 | Value | Meaning |
 | --- | --- |
 | ODTYPE_FILTER_STATE_UPDATED 0x0001 | Indicates a [Filter-Updated PDU (OD_FILTER_STATE_UPDATED) (section 2.2.3.1)](#Section_2.2.3.1). |
-| ODTYPE_APP_REMOVED 0x0002 | Indicates an [Application-Removed PDU (OD_APP_REMOVED) (section 2.2.3.3)](#Section_4.1.6). |
-| ODTYPE_APP_CREATED 0x0003 | Indicates an [Application-Created PDU (OD_APP_CREATED) (section 2.2.3.2)](#Section_4.1.5). |
-| ODTYPE_WND_REMOVED 0x0004 | Indicates a [Window-Removed PDU (OD_WND_REMOVED) (section 2.2.3.5)](#Section_4.1.8). |
-| ODTYPE_WND_CREATED 0x0005 | Indicates a [Window-Created PDU (OD_WND_CREATED) (section 2.2.3.4)](#Section_4.1.7). |
+| ODTYPE_APP_REMOVED 0x0002 | Indicates an [Application-Removed PDU (OD_APP_REMOVED) (section 2.2.3.3)](#Section_2.2.3.3). |
+| ODTYPE_APP_CREATED 0x0003 | Indicates an [Application-Created PDU (OD_APP_CREATED) (section 2.2.3.2)](#Section_2.2.3.2). |
+| ODTYPE_WND_REMOVED 0x0004 | Indicates a [Window-Removed PDU (OD_WND_REMOVED) (section 2.2.3.5)](#Section_2.2.3.5). |
+| ODTYPE_WND_CREATED 0x0005 | Indicates a [Window-Created PDU (OD_WND_CREATED) (section 2.2.3.4)](#Section_2.2.3.4). |
 | ODTYPE_WND_SHOW 0x0006 | Indicates a [Show Window PDU (OD_WND_SHOW) (section 2.2.3.6)](#Section_2.2.3.6). |
 | ODTYPE_PARTICIPANT_REMOVED 0x0007 | Indicates a [Participant-Removed PDU (OD_PARTICIPANT_REMOVED) (section 2.2.4.2)](#Section_2.2.4.2). |
-| ODTYPE_PARTICIPANT_CREATED 0x0008 | Indicates a [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_3.3.5.2.1). |
+| ODTYPE_PARTICIPANT_CREATED 0x0008 | Indicates a [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_2.2.4.1). |
 | ODTYPE_PARTICIPANT_CTRL_CHANGED 0x0009 | Indicates a [Change Participant Control Level PDU (OD_PARTICIPANT_CTRL_CHANGE) (section 2.2.4.3)](#Section_2.2.4.3). |
 | ODTYPE_GRAPHICS_STREAM_PAUSED 0x000A | Indicates a [Graphics Stream-Paused PDU (OD_GRAPHICS_STREAM_PAUSED) (section 2.2.5.1)](#Section_2.2.5.1). |
 | ODTYPE_GRAPHICS_STREAM_RESUMED 0x000B | Indicates a [Graphics Stream-Resumed PDU (OD_GRAPHICS_STREAM_RESUMED) (section 2.2.5.2)](#Section_2.2.5.2). |
@@ -388,7 +388,7 @@ packet-beta
 
 **AppId (4 bytes):** A 32-bit, unsigned integer that specifies a unique identifier for the application. Implementers are free to choose any integer that uniquely identifies the application within the application list.<1>
 
-**Name (variable):** A [UNICODE_STRING](#Section_3.1.5.2) that specifies the name of the application. Implementers are free to choose any UNICODE_STRING as the **Name**, and there are no restrictions on allowable characters.<2>
+**Name (variable):** A [UNICODE_STRING](#Section_2.2.2) that specifies the name of the application. Implementers are free to choose any UNICODE_STRING as the **Name**, and there are no restrictions on allowable characters.<2>
 
 <a id="Section_2.2.3.3"></a>
 #### 2.2.3.3 Application-Removed PDU (OD_APP_REMOVED)
@@ -403,7 +403,7 @@ packet-beta
 
 **HDR (4 bytes):** The common [**PDU**](#gt_protocol-data-unit-pdu) header (as specified in [Common Order Header (section 2.2.1)](#Section_2.2.1)). The **Type** field of the common PDU header MUST be set to ODTYPE_APP_REMOVED (0x0002).
 
-**AppId (4 bytes):** The 32-bit, unsigned integer that specifies the **AppId** of the application to be removed. The integer MUST uniquely identify an application in the application list, as specified in the **AppId** field description of [Application-Created PDU (section 2.2.3.2)](#Section_4.1.5).
+**AppId (4 bytes):** The 32-bit, unsigned integer that specifies the **AppId** of the application to be removed. The integer MUST uniquely identify an application in the application list, as specified in the **AppId** field description of [Application-Created PDU (section 2.2.3.2)](#Section_2.2.3.2).
 
 <a id="Section_2.2.3.4"></a>
 #### 2.2.3.4 Window-Created PDU (OD_WND_CREATED)
@@ -427,11 +427,11 @@ packet-beta
 | --- | --- |
 | WINDOW_SHARED 0x0001 | The window is shared. |
 
-**AppId (4 bytes):** The 32-bit, unsigned integer that specifies the **AppId** of the application that owns the window. The integer MUST uniquely identify an application in the application list, as specified in the **AppId** field description of the [Application-Created PDU (section 2.2.3.2)](#Section_4.1.5).
+**AppId (4 bytes):** The 32-bit, unsigned integer that specifies the **AppId** of the application that owns the window. The integer MUST uniquely identify an application in the application list, as specified in the **AppId** field description of the [Application-Created PDU (section 2.2.3.2)](#Section_2.2.3.2).
 
 **WndId (4 bytes):** A 32-bit, unsigned integer that specifies the unique ID of the window. Implementers can choose any integer that uniquely identifies the window entry within the window list.<3>
 
-**Name (variable):** A [UNICODE_STRING](#Section_3.1.5.2) that specifies the name of the window. Implementers can choose any UNICODE_STRING as the **Name**; there are no restrictions on allowable characters.<4>
+**Name (variable):** A [UNICODE_STRING](#Section_2.2.2) that specifies the name of the window. Implementers can choose any UNICODE_STRING as the **Name**; there are no restrictions on allowable characters.<4>
 
 <a id="Section_2.2.3.5"></a>
 #### 2.2.3.5 Window-Removed PDU (OD_WND_REMOVED)
@@ -446,7 +446,7 @@ packet-beta
 
 **HDR (4 bytes):** The common [**PDU**](#gt_protocol-data-unit-pdu) header (as specified in [Common Order Header (section 2.2.1)](#Section_2.2.1)). The **Type** field of the common PDU header MUST be set to ODTYPE_WND_REMOVED (0x0004).
 
-**WndId (4 bytes):** A 32-bit, unsigned integer that specifies the **WndId** of the window to be removed. The integer MUST uniquely identify a window in the window list, as specified in the **WndId** field description of the [Window-Created PDU (section 2.2.3.4)](#Section_4.1.7).
+**WndId (4 bytes):** A 32-bit, unsigned integer that specifies the **WndId** of the window to be removed. The integer MUST uniquely identify a window in the window list, as specified in the **WndId** field description of the [Window-Created PDU (section 2.2.3.4)](#Section_2.2.3.4).
 
 <a id="Section_2.2.3.6"></a>
 #### 2.2.3.6 Show Window PDU (OD_WND_SHOW)
@@ -461,7 +461,7 @@ packet-beta
 
 **HDR (4 bytes):** The common PDU header (as specified in [Common Order Header (section 2.2.1)](#Section_2.2.1)). The **Type** field of the common PDU header MUST be set to ODTYPE_WND_SHOW (0x0006).
 
-**WndId (4 bytes):** A 32-bit, unsigned integer that specifies the **WndId** of the window to be displayed. The integer MUST uniquely identify a window in the window list, as specified in the **WndId** field description of the [Window-Created PDU (section 2.2.3.4)](#Section_4.1.7).
+**WndId (4 bytes):** A 32-bit, unsigned integer that specifies the **WndId** of the window to be displayed. The integer MUST uniquely identify a window in the window list, as specified in the **WndId** field description of the [Window-Created PDU (section 2.2.3.4)](#Section_2.2.3.4).
 
 <a id="Section_2.2.3.7"></a>
 #### 2.2.3.7 Window Region Update PDU (OD_WND_REGION_UPDATE)
@@ -520,7 +520,7 @@ packet-beta
 | MAY_INTERACT 0x0002 | The participant has permission to interact with the shared desktop. |
 | IS_PARTICIPANT 0x0004 | The PDU that is associated with the participant receiving the message (section 3.2.5.2.1). |
 
-**FriendlyName (variable):** A [UNICODE_STRING](#Section_3.1.5.2) that specifies the name that is associated with the participant.
+**FriendlyName (variable):** A [UNICODE_STRING](#Section_2.2.2) that specifies the name that is associated with the participant.
 
 <a id="Section_2.2.4.2"></a>
 #### 2.2.4.2 Participant-Removed PDU (OD_PARTICIPANT_REMOVED)
@@ -655,7 +655,7 @@ This section describes a conceptual model of possible data organization that an 
 
 This protocol allows a [**host**](#gt_host) to propagate [**participant**](#gt_participant), application, and window lists and any updates to these lists. Updates to applications, windows, and participant lists are communicated to the clients via the same [**PDUs**](#gt_protocol-data-unit-pdu) that are used to announce the creation of these elements. For instance, if an application title changes, the server sends an [Application-Created PDU](#Section_4.1.5) that corresponds to that application.
 
-A client SHOULD maintain application, window, and participant lists. A client MAY instead choose to use the information in participant, application, and window messages only to display notifications or it MAY completely ignore the messages. For instance, if an application does not want to show the participant list to the user, it MAY silently discard [Participant-Created](#Section_3.3.5.2.1) and [Participant-Removed](#Section_2.2.4.2) messages.
+A client SHOULD maintain application, window, and participant lists. A client MAY instead choose to use the information in participant, application, and window messages only to display notifications or it MAY completely ignore the messages. For instance, if an application does not want to show the participant list to the user, it MAY silently discard [Participant-Created](#Section_4.1.2) and [Participant-Removed](#Section_4.1.3) messages.
 
 A host MUST preserve each participant's current control level and the status on whether or not sharing is currently suspended.
 
@@ -705,7 +705,7 @@ More than one sharing message can be contained in a single virtual channel paylo
 <a id="Section_3.1.5.2"></a>
 #### 3.1.5.2 Processing UNICODE_STRING Fields
 
-Some messages in the Remote Desktop Protocol: Multiparty Virtual Channel Extension contain [UNICODE_STRING (section 2.2.2)](#Section_3.1.5.2) packets. These are variable size fields with the length described by the **cchString** member. Upon receiving a message that contains a nonzero length UNICODE_STRING, the receiver MUST validate the string by doubling the value of the **cchString** field to convert to bytes and then check whether there are sufficient bytes left in the message to account for the presence of the string, plus any additional fields.
+Some messages in the Remote Desktop Protocol: Multiparty Virtual Channel Extension contain [UNICODE_STRING (section 2.2.2)](#Section_2.2.2) packets. These are variable size fields with the length described by the **cchString** member. Upon receiving a message that contains a nonzero length UNICODE_STRING, the receiver MUST validate the string by doubling the value of the **cchString** field to convert to bytes and then check whether there are sufficient bytes left in the message to account for the presence of the string, plus any additional fields.
 
 <a id="Section_3.1.5.3"></a>
 #### 3.1.5.3 Processing Application, Window, and Participant IDs
@@ -714,7 +714,7 @@ When an [Application-Created](#Section_4.1.5) message is received, the client SH
 
 Window messages and [**participant**](#gt_participant) messages SHOULD be handled exactly as described in the preceding paragraph.
 
-Application IDs are also used to identify which applications own which windows. The [**sharing manager**](#gt_sharing-manager) SHOULD send the client an Application-Created PDU before it sends any [Window-Created PDUs](#Section_4.1.7) for that application. This allows a client to maintain both a global window list and a list of windows per application. Because windows are tied to applications, a window's life span is limited by the life span of the application to which it is associated. The sharing manager SHOULD send [Window-Removed PDUs](#Section_4.1.8) before sending the Application-Removed PDU for the application to which the window corresponds. If the client receives an Application-Removed PDU, it SHOULD remove any window from the window list with an **AppId** that corresponds to the application removed.
+Application IDs are also used to identify which applications own which windows. The [**sharing manager**](#gt_sharing-manager) SHOULD send the client an Application-Created PDU before it sends any [Window-Created PDUs](#Section_2.2.3.4) for that application. This allows a client to maintain both a global window list and a list of windows per application. Because windows are tied to applications, a window's life span is limited by the life span of the application to which it is associated. The sharing manager SHOULD send [Window-Removed PDUs](#Section_2.2.3.5) before sending the Application-Removed PDU for the application to which the window corresponds. If the client receives an Application-Removed PDU, it SHOULD remove any window from the window list with an **AppId** that corresponds to the application removed.
 
 <a id="Section_3.1.6"></a>
 ### 3.1.6 Timer Events
@@ -781,14 +781,14 @@ After the header is validated, the receiver MUST read the **Flags** field to det
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 Processing a Window-Created PDU
 
-The receiver of the [Window-Created PDU (OD_WND_CREATED) (section 2.2.3.4)](#Section_4.1.7) MUST validate the common header for consistency (section [3.1.5.1](#Section_3.1.5.1)). If the [**PDU**](#gt_protocol-data-unit-pdu) size is not long enough to contain all the fields in the message, the connection SHOULD be terminated.<14> After the header is validated, the receiver MUST validate the **Name** field according to the rules described in section [3.1.5.2](#Section_3.1.5.2).
+The receiver of the [Window-Created PDU (OD_WND_CREATED) (section 2.2.3.4)](#Section_2.2.3.4) MUST validate the common header for consistency (section [3.1.5.1](#Section_3.1.5.1)). If the [**PDU**](#gt_protocol-data-unit-pdu) size is not long enough to contain all the fields in the message, the connection SHOULD be terminated.<14> After the header is validated, the receiver MUST validate the **Name** field according to the rules described in section [3.1.5.2](#Section_3.1.5.2).
 
 If the receiver wants to use the application and window list facilities of this protocol, it SHOULD process the information according to section [3.1.5.3](#Section_3.1.5.3).
 
 <a id="Section_3.2.5.1.5"></a>
 ##### 3.2.5.1.5 Processing a Window-Removed PDU
 
-The receiver of the [Window-Removed PDU (OD_WND_REMOVED) (section 2.2.3.5)](#Section_4.1.8) MUST first validate the common header for consistency (section [3.1.5.1](#Section_3.1.5.1)). If the [**PDU**](#gt_protocol-data-unit-pdu) size is not long enough to contain all the fields in the message, the connection SHOULD be terminated.<15>
+The receiver of the [Window-Removed PDU (OD_WND_REMOVED) (section 2.2.3.5)](#Section_2.2.3.5) MUST first validate the common header for consistency (section [3.1.5.1](#Section_3.1.5.1)). If the [**PDU**](#gt_protocol-data-unit-pdu) size is not long enough to contain all the fields in the message, the connection SHOULD be terminated.<15>
 
 If the receiver wants use the application and window list facilities of this protocol, it SHOULD process the information according to section [3.1.5.3](#Section_3.1.5.3).
 
@@ -805,7 +805,7 @@ Receipt of this PDU indicates that the application window size has changed. The 
 <a id="Section_3.2.5.2.1"></a>
 ##### 3.2.5.2.1 Processing a Participant-Created PDU
 
-The receiver of the [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_3.3.5.2.1) MUST verify the common header for consistency (section [3.1.5.1](#Section_3.1.5.1)). If the [**PDU**](#gt_protocol-data-unit-pdu) size is not long enough to contain all the fields in the message, the connection SHOULD be terminated.<17>
+The receiver of the [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_2.2.4.1) MUST verify the common header for consistency (section [3.1.5.1](#Section_3.1.5.1)). If the [**PDU**](#gt_protocol-data-unit-pdu) size is not long enough to contain all the fields in the message, the connection SHOULD be terminated.<17>
 
 After the header is validated, the receiver MUST validate the **Name** field according to the rules specified in section [3.1.5.2](#Section_3.1.5.2).
 
@@ -918,7 +918,7 @@ The receiver of the [Change Participant Control Level PDU (OD_PARTICIPANT_CTRL_C
 
 After validating the common header, the receiver SHOULD apply the permissions requested in the **Flags** field to the participant specified in the **ParticipantId** field, and SHOULD verify that the participant is entitled to the requested permissions before granting the request.
 
-Upon granting the request, the recipient SHOULD notify participants by sending a [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_3.3.5.2.1) reflecting the new permission granted.
+Upon granting the request, the recipient SHOULD notify participants by sending a [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_2.2.4.1) reflecting the new permission granted.
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -956,7 +956,7 @@ OD_FILTER_STATE_UPDATED
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Participant-Created PDU
 
-The following are network captures of the [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_3.3.5.2.1).
+The following are network captures of the [Participant-Created PDU (OD_PARTICIPANT_CREATED) (section 2.2.4.1)](#Section_2.2.4.1).
 
 This is the [**PDU**](#gt_protocol-data-unit-pdu) sent to the [**participant**](#gt_participant) that is being added. The IS_PARTICIPANT flag is set.
 
@@ -1111,7 +1111,7 @@ OD_FILTER_STATE_UPDATED
 <a id="Section_4.1.5"></a>
 ### 4.1.5 Application-Created PDU
 
-The following is a network capture of the [Application-Created PDU (OD_APP_CREATED) (section 2.2.3.2)](#Section_4.1.5). This PDU is sent to notify participants that an application has been created.
+The following is a network capture of the [Application-Created PDU (OD_APP_CREATED) (section 2.2.3.2)](#Section_2.2.3.2). This PDU is sent to notify participants that an application has been created.
 
 OD_APP_CREATED
 
@@ -1136,7 +1136,7 @@ EC 0A 00 00 ->OD_APP_CREATED: AppId = 2796
 <a id="Section_4.1.6"></a>
 ### 4.1.6 Application-Removed PDU
 
-The following is a network capture of the [Application-Removed PDU (OD_APP_REMOVED) (section 2.2.3.3)](#Section_4.1.6). This PDU is sent to notify participants that an application has been removed.
+The following is a network capture of the [Application-Removed PDU (OD_APP_REMOVED) (section 2.2.3.3)](#Section_2.2.3.3). This PDU is sent to notify participants that an application has been removed.
 
 OD_APP_REMOVED
 
@@ -1151,7 +1151,7 @@ OD_APP_REMOVED
 <a id="Section_4.1.7"></a>
 ### 4.1.7 Window-Created PDU
 
-The following is a wire capture of the [Window-Created PDU (OD_WND_CREATED) (section 2.2.3.4)](#Section_4.1.7). This PDU is sent to notify participants that a window has been created.
+The following is a wire capture of the [Window-Created PDU (OD_WND_CREATED) (section 2.2.3.4)](#Section_2.2.3.4). This PDU is sent to notify participants that a window has been created.
 
 OD_WND_CREATED
 
@@ -1186,7 +1186,7 @@ OD_WND_CREATED: UNICODE_STRING String : "Calculator"
 <a id="Section_4.1.8"></a>
 ### 4.1.8 Window-Removed PDU
 
-The following is a wire capture of the [Window-Removed PDU (OD_WND_REMOVED) (section 2.2.3.5)](#Section_4.1.8). This PDU is sent to notify participants that a window has been removed.
+The following is a wire capture of the [Window-Removed PDU (OD_WND_REMOVED) (section 2.2.3.5)](#Section_2.2.3.5). This PDU is sent to notify participants that a window has been removed.
 
 OD_WND_REMOVED
 
@@ -1356,7 +1356,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <12> Section 3.2.5.1.3: In Windows implementation, if more data is received for a message than the receiver can parse, the receiver parses only the portion of the data that it is able to parse and ignores the rest. For every type of message, the size of the received data is verified to make sure that the message is large enough to contain all the fields for that particular message. If this is not the case, the connection is terminated.
 
-<13> Section 3.2.5.1.3: In Windows implementations, all the window and application data stored by the receiver is removed when a [Filter-Updated PDU](#Section_2.2.3.1) is received, as the [**sharing manager**](#gt_sharing-manager) is about to send an updated list.
+<13> Section 3.2.5.1.3: In Windows implementations, all the window and application data stored by the receiver is removed when a [Filter-Updated PDU](#Section_4.1.1) is received, as the [**sharing manager**](#gt_sharing-manager) is about to send an updated list.
 
 <14> Section 3.2.5.1.4: In Windows implementations, if more data is received for a message than the receiver can parse, the receiver parses only the portion of the data that it is able to parse and ignores the rest. For every type of message, the size of the received data is verified to make sure that the message is large enough to contain all the fields for that particular message. If this is not the case, the connection is terminated.
 
@@ -1366,7 +1366,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <17> Section 3.2.5.2.1: In Windows implementations, if more data is received for a message than the receiver can parse, the receiver parses only the portion of the data that it is able to parse and ignores the rest. For every type of message, the size of the received data is verified to make sure that the message is large enough to contain all the fields for that particular message. If this is not the case, the connection is terminated.
 
-<18> Section 3.2.5.2.1: When a client is connected and authenticated, the server tries to inform the client which participant in the list corresponds to the client itself. This communication is done by sending a [Participant-Created PDU](#Section_3.3.5.2.1) to only that client but with the IS_PARTICIPANT set to 1. The client verifies the presence of the flag and remembers the **ParticipantId** as corresponding to itself.
+<18> Section 3.2.5.2.1: When a client is connected and authenticated, the server tries to inform the client which participant in the list corresponds to the client itself. This communication is done by sending a [Participant-Created PDU](#Section_4.1.2) to only that client but with the IS_PARTICIPANT set to 1. The client verifies the presence of the flag and remembers the **ParticipantId** as corresponding to itself.
 
 <19> Section 3.2.5.2.1: In Windows implementations, the **GroupId** field is not interpreted by the participant.
 

@@ -3067,7 +3067,7 @@ The host that forms the protocol client or the server have to be part of an [**A
 
 This document covers versioning issues in the following areas:
 
-**Localization:** This protocol includes text strings in various messages. Localization considerations for such strings are specified in section [2.2](#Section_3.3.4.59.1) and section [3](#Section_3).
+**Localization:** This protocol includes text strings in various messages. Localization considerations for such strings are specified in section [2.2](#Section_2.2) and section [3](#Section_3).
 
 **Protocol Versions:** This protocol is not versioned.
 
@@ -3210,8 +3210,8 @@ Complex type/Description
 - [ActiveServerV6LogicalGroup](#Section_2.2.4.5) Allows extended attributes on a **LogicalGroup** type. It contains the definition of the logical group on server instances with [**IPv6**](#gt_internet-protocol-version-6-ipv6)-specific details, which are enabled for management in the IPAM data store.
 - [ActiveServerV6LogicalGroupNode](#Section_2.2.4.6) Allows extended attributes on a **LogicalGroupNode** type. It defines the custom field value at a specific level in the logical group hierarchy. It defines the criteria for categorizing server instances with IPv6-specific details that are enabled for management.
 - [AddressSpace](#Section_2.2.4.7) A set of connected networks that are reachable (routable) from one another. In IPAM, all IP blocks, subnets, ranges, and IP addresses that belong to such a set of networks are grouped together within an **AddressSpace** container. To support network virtualization, IPAM provides two types of address spaces: Provider and Customer. By default, all IPAM entities reside in a built-in address space called **DefaultIPAddressSpace**. Any conventional (nonvirtualized) network entity such as a subnet or IP address range are in the default address space.
-- [AddressSpaceByFilterEnumerationParameters](#Section_3.5.4.8.1.1) Extends **EnumerationParametersBase** and specifies the criteria used to filter the list of address spaces before enumeration.
-- [AddressSpaceEnumerationParameters](#Section_3.5.4.8.1.2) Extends **EnumerationParametersBase** and specifies the parameters to be used for enumerating the address spaces.
+- [AddressSpaceByFilterEnumerationParameters](#Section_2.2.4.8) Extends **EnumerationParametersBase** and specifies the criteria used to filter the list of address spaces before enumeration.
+- [AddressSpaceEnumerationParameters](#Section_2.2.4.9) Extends **EnumerationParametersBase** and specifies the parameters to be used for enumerating the address spaces.
 - [AddScopesToSuperscopeParameters](#Section_2.2.4.10) Allows extended attributes on an **IpamOperationWithProgressParameter**. It creates objects whose **OperationId** is **AddScopesToSuperscope**. It is used to associate a collection of [**DHCP**](#gt_dynamic-host-configuration-protocol-dhcp) scopes to a **DhcpSuperscopeV4** type.
 - [ApplyDhcpScopeConfigurationparameters](#Section_2.2.4.11) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It creates objects whose **OperationId** is ApplyScopeConfigurationTemplate. It associates the **DhcpScopeTemplateConfiguration** details with a list of scope IDs belonging to the same AddressFamily.
 - [ApplyDhcpServerConfigurationParameters](#Section_2.2.4.12) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It creates objects whose **OperationId** is ApplyServerConfigurationTemplate. It associates the **DhcpServerTemplateConfiguration** details with a list of server IDs belonging to the same AddressFamily.
@@ -3268,7 +3268,7 @@ Complex type/Description
 - [BaseDnsZone](#Section_2.2.4.63) Specifies the properties of a DNS [**zone**](#gt_zone). This consists of the properties common to both **DnsZone** as well as **DnsReverseLookupZone** complex types that extend the **BaseDnsZone**.
 - [BaseIpamObject](#Section_2.2.4.64) Contains the common properties that are applicable to most of the complex types defined in this protocol. **BaseIpamObject** allows extended attributes on the **IpamObject** that it extends.
 - [ChangeDatabaseSettingsNotAllowedForDBTypesIpamExceptionData](#Section_2.2.4.65) Extends the **IpamExceptionData** type. It creates objects whose **IpamExceptionId** is IpamApiErrorChangeDatabaseSettingsNotAllowedForDBTypes.
-- [ConfigurationAuditEnumerationParameters](#Section_3.5.4.8.1.3) Specifies the enumeration criteria for the configuration audit information.
+- [ConfigurationAuditEnumerationParameters](#Section_2.2.4.66) Specifies the enumeration criteria for the configuration audit information.
 - [ConfigurationAuditRecord](#Section_2.2.4.67) Specifies a single [**configuration audit event**](#gt_configuration-audit-event) information. The [**configuration audit**](#gt_configuration-audit) record can be used to represent both an [**IPAM configuration audit**](#gt_ipam-configuration-audit) as well as a [**DHCP configuration audit**](#gt_dhcp-configuration-audit) event.
 - [ConflictingIPAddressFailureIpamExceptionData](#Section_2.2.4.68) Specifies the information pertaining to the IP address instance overlap. This is used as the **IpamExceptionData** to provide more fault-specific information when an operation fails because of IP address instance overlap.
 - [ConflictingIPBlockFailureIpamExceptionData](#Section_2.2.4.69) Specifies the information pertaining to the IP address block instance overlap.
@@ -3284,7 +3284,7 @@ Complex type/Description
 - [CustomerAddressSpace](#Section_2.2.4.79) Extends the AddressSpace type to include information specific to a Customer address space.
 - [CustomField](#Section_2.2.4.80) Specifies a single [**custom field**](#gt_custom-field) information.
 - [CustomFieldAssociation](#Section_2.2.4.81) Specifies an association between two custom fields defined in IPAM.
-- [CustomFieldAssociationEnumerationParameters](#Section_3.5.4.8.1.4) Extends the **EnumerationParametersBase** complex type. It specifies the parameters used to enumerate custom field associations that exist in IPAM data store.
+- [CustomFieldAssociationEnumerationParameters](#Section_2.2.4.82) Extends the **EnumerationParametersBase** complex type. It specifies the parameters used to enumerate custom field associations that exist in IPAM data store.
 - [CustomFieldEnumerationParameters](#Section_2.2.4.83) Specifies the parameters to be used for enumerating the custom fields.
 - [CustomFieldPartialValue](#Section_2.2.4.84) Specifies the custom field value with minimum information when compared to that of **CustomFieldValue**. The management server uses this to return the custom field values during the enumeration operations.
 - [CustomFieldValue](#Section_2.2.4.85) Specifies a custom field value.
@@ -3300,15 +3300,15 @@ Complex type/Description
 - [DeleteDnsZonesParameters](#Section_2.2.4.95) Specifies the DNS zones to be deleted and their zone type.
 - [DeletePolicyParameters](#Section_2.2.4.96) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It creates objects whose **OperationId** is DeletePolicy and associates them to a collection of policies of type **DhcpPolicyV4**.
 - [DeleteSuperscopesParameters](#Section_2.2.4.97) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It creates objects whose **OperationId** is DeleteSuperscopes. It identifies the collection of **DhcpSuperscopeV4** instances to be deleted.
-- [DhcpEffectiveScopePoliciesEnumerationParameters](#Section_3.5.4.8.1.6) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpPolicy and associates them to a scope of type **DhcpScopeV4**.
+- [DhcpEffectiveScopePoliciesEnumerationParameters](#Section_2.2.4.98) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpPolicy and associates them to a scope of type **DhcpScopeV4**.
 - [DhcpEffectiveServerPoliciesEnumerationParameters](#Section_2.2.4.99) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpPolicy and associates them to an **DhcpServerV4** object.
 - [DhcpExclusionRange](#Section_2.2.4.100) Used to specify the DHCP [**exclusion range**](#gt_exclusion-range).
 - [DhcpExclusionRangeCollection](#Section_2.2.4.101) Specifies a collection of DHCP exclusion ranges.
 - [DhcpExclusionRangeV4](#Section_2.2.4.102) Specifies a DHCP exclusion range for an IPv4-specific DHCP scope.
 - [DhcpExclusionRangeV6](#Section_2.2.4.103) Specifies a DHCP exclusion range for an IPv6-specific DHCP scope.
 - [DhcpFailover](#Section_2.2.4.104) Allows extended attributes on a **BaseIpamObject** and models a DHCP Failover relationship.
-- [DhcpFailoverAllEnumerationParameters](#Section_3.5.4.8.1.8) Extends **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpFailover.
-- [DhcpFailoverByServerIdsEnumerationParameters](#Section_3.5.4.8.1.9) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpFailover and associates them to a list of **ServerIds** whose type is long int.
+- [DhcpFailoverAllEnumerationParameters](#Section_2.2.4.105) Extends **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpFailover.
+- [DhcpFailoverByServerIdsEnumerationParameters](#Section_2.2.4.106) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpFailover and associates them to a list of **ServerIds** whose type is long int.
 - [DhcpFailoverDeleteParameters](#Section_2.2.4.107) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It associates a **DhcpFailover** object with a force delete flag. The force delete flag identifies whether the failover relationship deletion can be attempted on the selected server even if it fails on the partner server.
 - [DhcpFailoverEnumerationParameters](#Section_2.2.4.108) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is DhcpFailover and associates a **DhcpFailover** object to the same.
 - [DhcpFailoverParameters](#Section_2.2.4.109) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It associates an **DhcpFailover** object to an object of this type.
@@ -3317,7 +3317,7 @@ Complex type/Description
 - [DhcpFailoverWithScopesParameters](#Section_2.2.4.112) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It associates its objects with a list of **DhcpScope** objects and an **DhcpFailover** object.
 - [DhcpFilter](#Section_2.2.4.113) Describes a [**DHCP filter**](#gt_dhcp-filter) and associates its various properties into one instance.
 - [DhcpFilterAllEnumerationParameters](#Section_2.2.4.114) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose ObjectType is **DhcpFilter**. It is used to get the filter details of a DHCP server.
-- [DhcpFilterByServerIdsEnumerationParameters](#Section_3.5.4.8.1.13) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is **DhcpFilter**. It is used to get the details of filters of server IDs.
+- [DhcpFilterByServerIdsEnumerationParameters](#Section_2.2.4.115) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is **DhcpFilter**. It is used to get the details of filters of server IDs.
 - [DhcpFindAndReplaceOption](#Section_2.2.4.116) Creates an association between the **DhcpOption** and its old value and the new value with which it is to be replaced. The old and new values are represented by Object types.
 - DhcpFindAndReplaceOptionV4 This is a simple derivation of **DhcpFindAndReplaceOption** with no new attributes.
 - [DhcpFindAndReplaceOptionV6](#Section_2.2.4.118) This is a simple derivation of **DhcpFindAndReplaceOption** with no new attributes.
@@ -3330,8 +3330,8 @@ Complex type/Description
 - [DhcpOptionDefinitionV6](#Section_2.2.4.125) Allows extension of the **DhcpOptionDefinition** complex type. Specifies the option definitions associated with the IPv6-specific DHCP server instance.
 - [DhcpOptionV4](#Section_2.2.4.126) Allows extension of the **DhcpOption** complex type. Specifies the DHCP option associated with the IPv4-specific DHCP server or scope instance.
 - [DhcpOptionV6](#Section_2.2.4.127) Allows extension of the **DhcpOption** complex type. Specifies the DHCP option associated with the IPv6-specific DHCP server or scope instance.
-- [DhcpPoliciesByDhcpServerIdListEnumerationParameter](#Section_3.5.4.8.1.14)s Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose ObjectType is DhcpPolicy and associates them to a collection of **DhcpServerV4** objects.
-- [DhcpPoliciesEnumerationParameters](#Section_3.5.4.8.1.15) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose ObjectType is DhcpPolicy.
+- [DhcpPoliciesByDhcpServerIdListEnumerationParameter](#Section_2.2.4.128)s Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose ObjectType is DhcpPolicy and associates them to a collection of **DhcpServerV4** objects.
+- [DhcpPoliciesEnumerationParameters](#Section_2.2.4.129) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose ObjectType is DhcpPolicy.
 - [DhcpPolicyConditionV4](#Section_2.2.4.130) Allows extended attributes on a **BaseIpamObject** type.
 - [DhcpPolicyRangeV4](#Section_2.2.4.131) Allows extended attributes on a **BaseIpamObject** type. It creates an association between the record Id of the range and its start and end IPAddress objects.
 - [DhcpPolicyV4](#Section_2.2.4.132) Allows extended attributes on a **BaseIpamObject** type.
@@ -3345,12 +3345,12 @@ Complex type/Description
 - [DhcpReservationV6TemplateConfiguration](#Section_2.2.4.140) Extends the **DhcpReservationTemplateConfiguration** complex type and is used for editing operations on a collection of DHCP IPV6 reservations. It specifies the properties of the IPv6 reservation that need to be changed for the collection in a multiselect edit operation.
 - [DhcpScope](#Section_2.2.4.141) Specifies the details associated with a DHCP scope.
 - [DhcpScopeAllEnumerationParameters](#Section_2.2.4.142) Specifies the criteria to be used for enumerating the DHCP scopes.
-- [DhcpScopeAssociatedWithVendorClassesEnumerationParameters](#Section_3.5.4.8.1.19) Specifies the criteria to use for enumerating the scopes that are associated with a given set of vendor classes.
-- [DhcpScopeByPrefixAndServerNameEnumerationParameters](#Section_3.5.4.8.1.82) Allows extended attributes on an **EnumerationParametersBase**. Specifies the criteria to use for enumerating the scopes with a specified prefix and belonging to a particular DHCP server.
+- [DhcpScopeAssociatedWithVendorClassesEnumerationParameters](#Section_2.2.4.143) Specifies the criteria to use for enumerating the scopes that are associated with a given set of vendor classes.
+- [DhcpScopeByPrefixAndServerNameEnumerationParameters](#Section_2.2.4.144) Allows extended attributes on an **EnumerationParametersBase**. Specifies the criteria to use for enumerating the scopes with a specified prefix and belonging to a particular DHCP server.
 - [DhcpScopeForIpBlockEnumerationParameters](#Section_2.2.4.145) Specifies the criteria to use for enumerating the scopes belonging to a particular address block.
 - [DhcpScopeObjectSpecificEnumerationParameters](#Section_2.2.4.146) Specifies the criteria to be used for enumerating the scopes that are associated with a given set of DHCP Reservations or DHCP Policies.
 - [DhcpScopePoliciesWithoutRangesEnumerationParameters](#Section_2.2.4.147) Specifies the criteria to be used for enumerating the policies that do not have ranges, in a given DHCP scope.
-- [DhcpScopesByDhcpServerIdListEnumerationParameters](#Section_3.5.4.8.1.22) Specifies the criteria for enumerating the scopes that belong to a set of DHCP servers.
+- [DhcpScopesByDhcpServerIdListEnumerationParameters](#Section_2.2.4.148) Specifies the criteria for enumerating the scopes that belong to a set of DHCP servers.
 - [DhcpScopeTemplateConfiguration](#Section_2.2.4.149) Used for editing operations on a collection of DHCP scopes. It specifies the properties of the scope that need to be changed in a multiselect edit operation.
 - [DhcpScopeUnmappedEnumerationParameters](#Section_2.2.4.150) Specifies the criteria to be used to enumerate the scopes that are not mapped to any address block.
 - [DhcpScopeV4](#Section_2.2.4.151) Allows the extension of the section **DhcpScope** complex type. Specifies a scope for specifying an IPv4 address assignment with DHCP.
@@ -3358,16 +3358,16 @@ Complex type/Description
 - [DhcpScopeV6](#Section_2.2.4.153) Allows the extension of the **DhcpScope** complex type. Specifies a scope for specifying IPv6 address assignment with DHCP.
 - [DhcpScopeV6TemplateConfiguration](#Section_2.2.4.154) Used for editing a collection of DHCP IPv6 Scopes. It specifies the properties of the scope that need to be changed in a multiselect edit operation.
 - [DhcpServer](#Section_2.2.4.155) Specifies the common details of a DHCP server instance.
-- [DhcpServerAllEnumerationParameters](#Section_3.5.4.8.1.24) Specifies the parameters used for enumerating the **DhcpServer** instances.
-- [DhcpServerByServerInfoIdsEnumerationParameters](#Section_3.5.4.8.1.25) Specifies the record identifiers of **ServerInfo** instances for which the **DhcpServer** instances are to be enumerated.
+- [DhcpServerAllEnumerationParameters](#Section_2.2.4.156) Specifies the parameters used for enumerating the **DhcpServer** instances.
+- [DhcpServerByServerInfoIdsEnumerationParameters](#Section_2.2.4.157) Specifies the record identifiers of **ServerInfo** instances for which the **DhcpServer** instances are to be enumerated.
 - [DhcpServerTemplateConfiguration](#Section_2.2.4.158) Allows extended attributes on a section **BaseIpamObject** type.
 - [DhcpServerV4](#Section_2.2.4.159) Allows specifying extensions to the **DhcpServer** complex type. Specifies the IPv4-specific information of the DHCP server instance.
 - [DhcpServerV4TemplateConfiguration](#Section_2.2.4.160) Allows extended attributes on a **DhcpServerTemplateConfiguration** type. It creates objects whose **dnsNotRequestingClientsUpdateType** is **DhcpDnsNotRequestingClientsUpdateType.None**.
 - [DhcpServerV6](#Section_2.2.4.161) Extends the **DhcpServer** complex type. Specifies the IPv6-specific information of the DHCP server instance.
 - [DhcpServerV6TemplateConfiguration](#Section_2.2.4.162) Allows extended attributes on a **DhcpServerTemplateConfiguration** type.
 - [DhcpSuperscopeByDhcpServerIdListEnumerationParameters](#Section_2.2.4.163) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is **DhcpSuperscope**.
-- [DhcpSuperscopeBySuperscopeAndServerNameEnumerationParameters](#Section_3.5.4.8.1.83) Allows extended attributes on an **EnumerationParametersBase**. Specifies the criteria to use for enumerating the superscope with a specified name and belonging to a particular DHCP server.
-- [DhcpSuperscopeEnumerationParameters](#Section_3.5.4.8.1.27) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is **DhcpSuperscope**.
+- [DhcpSuperscopeBySuperscopeAndServerNameEnumerationParameters](#Section_2.2.4.164) Allows extended attributes on an **EnumerationParametersBase**. Specifies the criteria to use for enumerating the superscope with a specified name and belonging to a particular DHCP server.
+- [DhcpSuperscopeEnumerationParameters](#Section_2.2.4.165) Allows extended attributes on an **EnumerationParametersBase** type. It creates objects whose **ObjectType** is **DhcpSuperscope**.
 - [DhcpSuperscopeV4](#Section_2.2.4.166) Allows extended attributes on a section **BaseIpamObject** type. This defines the properties of a DHCP superscope.
 - [DhcpUserClass](#Section_2.2.4.167) Specifies the common properties of a [**user class**](#gt_user-class).
 - [DhcpUserClassCollection](#Section_2.2.4.168) Specifies a collection of section **DhcpUserClass** complex types.
@@ -3378,10 +3378,10 @@ Complex type/Description
 - [DhcpVendorClassV4](#Section_2.2.4.173) Allows the extension of the **DhcpVendorClass** complex type. Specifies the **DhcpVendorClass** instance associated with the IPv4-specific **DhcpServer** instance.
 - [DhcpVendorClassV6](#Section_2.2.4.174) Allows the extension of the **DhcpVendorClass** complex type. Specifies the **DhcpVendorClass** instance associated with the IPv6-specific **DhcpServer** instance.
 - [DiscoveryConfig](#Section_2.2.4.175) Describes the discovery configuration for a specific [**domain**](#gt_domain).
-- [DiscoverySubnetEnumerationParameters](#Section_3.5.4.8.1.28) Specifies the criteria based on which the subnets for grouping the discovered servers are to be enumerated.
+- [DiscoverySubnetEnumerationParameters](#Section_2.2.4.176) Specifies the criteria based on which the subnets for grouping the discovered servers are to be enumerated.
 - [DnsConditionalForwarder](#Section_2.2.4.177) Allows extended attributes on a **BaseIpamObject** type. Specifies the properties of a DNS conditional forwarder.
-- [DnsConditionalForwarderByFiltersEnumerationParameters](#Section_3.5.4.8.1.84) Allows extended attributes on an **EnumerationParametersBase**. Specifies the filter criteria for enumerating DNS conditional forwarders.
-- [DnsConditionalForwarderEnumerationParameters](#Section_3.5.4.8.1.29) Allows extended attributes on an **EnumerationParametersBase**. Specifies the criteria for enumerating DNS conditional forwarders.
+- [DnsConditionalForwarderByFiltersEnumerationParameters](#Section_2.2.4.178) Allows extended attributes on an **EnumerationParametersBase**. Specifies the filter criteria for enumerating DNS conditional forwarders.
+- [DnsConditionalForwarderEnumerationParameters](#Section_2.2.4.179) Allows extended attributes on an **EnumerationParametersBase**. Specifies the criteria for enumerating DNS conditional forwarders.
 - [DnsConditionalForwarderFormatter](#Section_2.2.4.180) Allows extended attributes on an [**IpamObject**](#Section_2.2.4.285) type. It represents the formatted DNS conditional forwarder name and server name.
 - [DnsConditionalForwardersParameters](#Section_2.2.4.181) Allows extended attributes on an [**IpamOperationWithProgressParameters**](#Section_2.2.4.286) type. It represents the input parameters for DNS conditional forwarder operations.
 - [DnsResourceRecord](#Section_2.2.4.182) Specifies the properties of a DNS resource record. This consists of the properties common to all DNS resource record types.
@@ -3408,7 +3408,7 @@ Complex type/Description
 - [DnsResourceRecordDataWinsr](#Section_2.2.4.203) Extends the **DnsResourceRecordData**. It specifies the details associated with a DNS resource record of type WINS-R.
 - [DnsResourceRecordDataWks](#Section_2.2.4.204) Extends the **DnsResourceRecordData**. It specifies the details associated with a DNS resource record of type WKS.
 - [DnsResourceRecordDataX25](#Section_2.2.4.205) Extends the **DnsResourceRecordData**. It specifies the details associated with a DNS resource record of type X.25.
-- [DnsResourceRecordEnumerationParameters](#Section_3.5.4.8.1.30) Specifies the criteria for enumerating DNS resource records.
+- [DnsResourceRecordEnumerationParameters](#Section_2.2.4.206) Specifies the criteria for enumerating DNS resource records.
 - [DnsResourceRecordFilterEnumerationParameters](#Section_2.2.4.207) Allows extended attributes on an **EnumerationParametersBase**. Specifies the filter criteria for enumerating DNS resource records.
 - [DnsResourceRecordFormatter](#Section_2.2.4.208) Used to format the fields of a DNS resource record into a string used to display the result of operations. The string is formatted to include the record name, server name and zone name of the DNS resource record to uniquely identify it.
 - [DnsResourceRecordIsAlreadyMappedIpamExceptionData](#Section_2.2.4.209) Allows extended attributes on an **IpamExceptionData** type. It creates objects whose **IpamExceptionId** is IpamApiDnsResourceRecordIsAlreadyMapped.
@@ -3461,24 +3461,24 @@ Complex type/Description
 - [IpamGpoErrorInfo](#Section_2.2.4.256) Allows extended attributes on an **IpamExceptionData** type.
 - [IpamIPAddress](#Section_2.2.4.257) Specifies the common address object information in the IPAM data store.
 - [IpamIPAddressAllForLogicalGroupEnumerationParameters](#Section_2.2.4.258) Specifies the parameters for enumerating the IP address instances that map to a specified logical group.
-- [IpamIPAddressAllForLogicalGroupNodeEnumerationParameters](#Section_3.5.4.8.1.39) Specifies the criteria to be used for enumerating the addresses that map to a [**logical group node**](#gt_logical-group-node).
-- [IpamIPAddressByAddressSpaceAndVirtualizationTypeParameters](#Section_3.5.4.8.1.40) Specifies the criteria used for enumerating the address instances that are associated with a particular **AddressSpace**, are of a given **IPVirtualizationType**, and belong to a given **AddressFamily**.
+- [IpamIPAddressAllForLogicalGroupNodeEnumerationParameters](#Section_2.2.4.259) Specifies the criteria to be used for enumerating the addresses that map to a [**logical group node**](#gt_logical-group-node).
+- [IpamIPAddressByAddressSpaceAndVirtualizationTypeParameters](#Section_2.2.4.260) Specifies the criteria used for enumerating the address instances that are associated with a particular **AddressSpace**, are of a given **IPVirtualizationType**, and belong to a given **AddressFamily**.
 - [IpamIPAddressByBlockIdEnumerationParameters](#Section_2.2.4.261) Specifies the criteria used for enumerating the address instances that map to a specified address block.
-- [IpamIPAddressByFilterEnumerationParameters](#Section_3.5.4.8.1.42) Specifies the criteria used for enumerating the address instances that belong to a particular address family and also meet the conditions defined by a set of filter criteria.
+- [IpamIPAddressByFilterEnumerationParameters](#Section_2.2.4.262) Specifies the criteria used for enumerating the address instances that belong to a particular address family and also meet the conditions defined by a set of filter criteria.
 - [IpamIPAddressByManagedByAndManagedByEntityEnumerationParameters](#Section_2.2.4.263) Specifies the criteria to be used for enumerating the address instances that have a specified value for **ManagedBy** and **ManagedByEntity** built-in custom field values.
-- [IpamIPAddressByRangeIdEnumerationParameters](#Section_3.5.4.8.1.44) Specifies the filter criteria to be used for enumerating the address instances that map to a specific address range.
+- [IpamIPAddressByRangeIdEnumerationParameters](#Section_2.2.4.264) Specifies the filter criteria to be used for enumerating the address instances that map to a specific address range.
 - [IpamIPAddressBySubnetIdEnumerationParameters](#Section_2.2.4.265) Specifies the criteria to be used for enumerating the address instances that map to a specified [**IP subnet**](#gt_ip-subnet).
 - [IpamIPAddressByVirtualizationTypeParameters](#Section_2.2.4.266) Specifies the criteria to be used for enumerating the address instances that are of a given virtualization type.
 - [IpamIPAddressDataFormatter](#Section_2.2.4.267) Used to format error entities in operations relating to **IPAddress**.
-- [IpamIPAddressForUnmappedRangesEnumerationParameters](#Section_3.5.4.8.1.47) Retrieves the list of addresses in address ranges that are not already mapped to an address block.
-- [IpamIPAddressRootAddressesEnumerationParameters](#Section_3.5.4.8.1.48) Specifies the filter criteria to be used for enumerating the address instances belonging to a specified address category.
+- [IpamIPAddressForUnmappedRangesEnumerationParameters](#Section_2.2.4.268) Retrieves the list of addresses in address ranges that are not already mapped to an address block.
+- [IpamIPAddressRootAddressesEnumerationParameters](#Section_2.2.4.269) Specifies the filter criteria to be used for enumerating the address instances belonging to a specified address category.
 - [IpamIPAddressUnmappedAddressEnumerationParameters](#Section_2.2.4.270) Specifies the criteria to be used for enumerating the unmapped address instances. Unmapped address instances are those that are not mapped to any address range instances.
-- [IpamIPSubnetByFilterEnumerationParameters](#Section_3.5.4.8.1.50) Specifies the criteria to be used for filtering the enumerated list of IP subnets.
-- [IpamIPSubnetsByAddressCategoryEnumerationParameters](#Section_3.5.4.8.1.51) Specifies the criteria to be used for enumerating IP subnets that belong to a given address category and a given address family.
+- [IpamIPSubnetByFilterEnumerationParameters](#Section_2.2.4.271) Specifies the criteria to be used for filtering the enumerated list of IP subnets.
+- [IpamIPSubnetsByAddressCategoryEnumerationParameters](#Section_2.2.4.272) Specifies the criteria to be used for enumerating IP subnets that belong to a given address category and a given address family.
 - [IpamIPSubnetsByAddressSpaceAndVirtualizationTypeEnumerationParameters](#Section_2.2.4.273) Specifies the criteria to be used for enumerating IP subnets that map to a given address space and are of a given virtualization type.
-- [IpamIPSubnetsByBlockIdEnumerationParameters](#Section_3.5.4.8.1.53) Specifies the criteria to be used for enumerating IP subnets that map to a given address block.
-- [IpamIPSubnetsByUnmappedEnumerationParameters](#Section_3.5.4.8.1.54) Specifies the criteria to be used for enumerating unmapped IP subnets of a given address family and virtualization type.
-- [IpamIPSubnetsByVirtualizationTypeEnumerationParameters](#Section_3.5.4.8.1.55) Specifies the criteria to be used for enumerating IP subnets of a given address family and virtualization type.
+- [IpamIPSubnetsByBlockIdEnumerationParameters](#Section_2.2.4.274) Specifies the criteria to be used for enumerating IP subnets that map to a given address block.
+- [IpamIPSubnetsByUnmappedEnumerationParameters](#Section_2.2.4.275) Specifies the criteria to be used for enumerating unmapped IP subnets of a given address family and virtualization type.
+- [IpamIPSubnetsByVirtualizationTypeEnumerationParameters](#Section_2.2.4.276) Specifies the criteria to be used for enumerating IP subnets of a given address family and virtualization type.
 - [IpamIPSubnetsDirectChildrenByBlockIdEnumerationParameters](#Section_2.2.4.277) Specifies the criteria to be used for enumerating the IP subnet instances of a given address family that map directly to the given address block.
 - [IpamIPv4Address](#Section_2.2.4.278) Enables extension of attributes of the **IpamIPAddress** complex type. This is used to specify the details pertaining to the IPv4 address instance.
 - [IpamIPv4AddressLogicalGroup](#Section_2.2.4.279) Allows extensions to the **LogicalGroup** complex type. Specifies the **LogicalGroup** to be used to enumerate IPv4 address instances using the logical group hierarchy.
@@ -3498,23 +3498,23 @@ Complex type/Description
 - [IPAuditEnumerationParameters](#Section_2.2.4.293) Used to specify the enumeration parameters for the [**IP address audit**](#gt_ip-address-audit).
 - [IPAuditRecord](#Section_2.2.4.294) Used to specify single IP address audit.
 - [IPBlock](#Section_2.2.4.295) Specifies the address block information that is common to both **IPv4Block** and **IPv6Block**.
-- [IPBlockChildBlockEnumerationParameters](#Section_3.5.4.8.1.58) Specifies the criteria for enumerating the child blocks of a specified address block.
+- [IPBlockChildBlockEnumerationParameters](#Section_2.2.4.296) Specifies the criteria for enumerating the child blocks of a specified address block.
 - [IPBlockDataFormatter](#Section_2.2.4.297) Extends **ipam:IpamObject** and encapsulates the properties of an IP block to be formatted.
 - [IPBlockGetAllBlocksEnumerationParameters](#Section_2.2.4.298) Specifies the criteria for enumerating all the address blocks in the IPAM data store.
 - [IPBlockRootEnumerationParameters](#Section_2.2.4.299) Specifies the criteria for enumerating the rows that form the first level of address blocks.
 - [IPCumulativeUtilization](#Section_2.2.4.300) Specifies the address utilization statistics or trend information.
 - [IPRange](#Section_2.2.4.301) Specifies the common information pertaining to the address range.
 - [IPRangeAllForBlockEnumerationParameter](#Section_2.2.4.302) Used to specify the criteria on which ranges corresponding to an address block instance can be retrieved.
-- [IPRangeAllForDhcpServerEnumerationParameters](#Section_3.5.4.8.1.62) Used to specify the criteria on which address ranges corresponding to the DHCP scope instances of a particular DHCP server are enumerated.
-- [IPRangeAllForLogicalGroupNodeEnumerationParameters](#Section_3.5.4.8.1.63) Used to specify the parameters for enumerating the IP range instances corresponding to a specified logical group node in the logical group hierarchy.
+- [IPRangeAllForDhcpServerEnumerationParameters](#Section_2.2.4.303) Used to specify the criteria on which address ranges corresponding to the DHCP scope instances of a particular DHCP server are enumerated.
+- [IPRangeAllForLogicalGroupNodeEnumerationParameters](#Section_2.2.4.304) Used to specify the parameters for enumerating the IP range instances corresponding to a specified logical group node in the logical group hierarchy.
 - [IPRangeByAddressSpaceAndVirtualizationTypeParameters](#Section_2.2.4.305) Specifies the criteria to be used for enumerating IP range instances that map to a given address space and are of a given virtualization type.
-- [IPRangeByFilterEnumerationParameters](#Section_3.5.4.8.1.65) Specifies the criteria to be used for enumerating the IP range instances that belong to a particular address family and that meet the conditions defined by a set of filter criteria.
-- [IPRangeByManagedByAndManagedByEntityEnumerationParameters](#Section_3.5.4.8.1.66) Specifies the criteria required to enumerate the address ranges for which the built-in custom fields **ManagedBy** and **ManagedByEntity** have a specific value.
-- [IPRangeByVirtualizationTypeParameters](#Section_3.5.4.8.1.67) Specifies the criteria for enumerating the IP range instances of a given virtualization type.
+- [IPRangeByFilterEnumerationParameters](#Section_2.2.4.306) Specifies the criteria to be used for enumerating the IP range instances that belong to a particular address family and that meet the conditions defined by a set of filter criteria.
+- [IPRangeByManagedByAndManagedByEntityEnumerationParameters](#Section_2.2.4.307) Specifies the criteria required to enumerate the address ranges for which the built-in custom fields **ManagedBy** and **ManagedByEntity** have a specific value.
+- [IPRangeByVirtualizationTypeParameters](#Section_2.2.4.308) Specifies the criteria for enumerating the IP range instances of a given virtualization type.
 - [IPRangeDataFormatter](#Section_2.2.4.309) Specifies the key properties of an IP range that is formatted for display.
 - [IPRangeForBlockEnumerationParameters](#Section_2.2.4.310) Specifies the criteria for enumerating the address ranges that map directly onto an address block and don't include the address ranges that map to a child block for the specified address block.
-- [IPRangeForSubnetEnumerationParameter](#Section_3.5.4.8.1.69) Extends **EnumerationParametersBase** and specifies the parameters used to enumerate all ranges for a given subnet.
-- [IPRangeRootEnumerationParameters](#Section_3.5.4.8.1.70) Used to specify the criteria for enumerating the address ranges that have a specific address category.
+- [IPRangeForSubnetEnumerationParameter](#Section_2.2.4.311) Extends **EnumerationParametersBase** and specifies the parameters used to enumerate all ranges for a given subnet.
+- [IPRangeRootEnumerationParameters](#Section_2.2.4.312) Used to specify the criteria for enumerating the address ranges that have a specific address category.
 - [IPRangeUnmappedEnumerationParameters](#Section_2.2.4.313) Used to specify the criteria for enumerating the address ranges that are unmapped.
 - [IPSubnet](#Section_2.2.4.314) Allows extending the attributes of the **IPBlock** complex type to represent information pertaining to an IP subnet.
 - [IPUtilization](#Section_2.2.4.315) Used to specify the address utilization data for a specific time range.
@@ -3535,14 +3535,14 @@ Complex type/Description
 - [IPv6SubnetLogicalGroupNode](#Section_2.2.4.330) Allows extending the attributes of **LogicalGroupNode** complex type. It defines the value of the custom field that occurs at the specific level in logical group hierarchy.
 - [IPv6Utilization](#Section_2.2.4.331) Allows extending the attributes of an **IPUtilization** complex type. This is used to specify the address utilization corresponding to IPv6-specific address space.
 - [LogicalGroup](#Section_2.2.4.332) Specifies the definition of a logical group.
-- [LogicalGroupDataForLogicalGroupNodeEnumerationParameters](#Section_3.5.4.8.1.72) Specifies the logical group node information that form the criteria for enumerating the data.
+- [LogicalGroupDataForLogicalGroupNodeEnumerationParameters](#Section_2.2.4.333) Specifies the logical group node information that form the criteria for enumerating the data.
 - [LogicalGroupDataForRootAlternateItemsEnumerationParameters](#Section_2.2.4.334) Specifies the criteria for enumerating the data which map to the specified logical group.
 - [LogicalGroupDataUnmappedItemsEnumerationParameters](#Section_2.2.4.335) Specifies the criteria used to enumerate the data that do not map to a specified logical group.
 - [LogicalGroupField](#Section_2.2.4.336) Specifies one level of the multivalued custom field that forms the logical group hierarchy.
 - [LogicalGroupNode](#Section_2.2.4.337) Specifies the actual custom field values that form the criteria for the data to be satisfied to match at a particular level in the logical group hierarchy.
-- [LogicalGroupNodeChildrenEnumerationParameters](#Section_3.5.4.8.1.75) Specifies the criteria to be used for enumerating the logical group nodes that form the next level of logical group nodes in a logical group hierarchy.
-- [LogicalGroupNodeRootEnumerationParameters](#Section_3.5.4.8.1.76) Specifies the criteria for enumerating the **LogicalGroupNode** that form the first level of **LogicalGroupHierarchy**.
-- [LogicalGroupsEnumerationParameters](#Section_3.5.4.8.1.77) Specifies the criteria for enumerating the logical groups from the IPAM data store.
+- [LogicalGroupNodeChildrenEnumerationParameters](#Section_2.2.4.338) Specifies the criteria to be used for enumerating the logical group nodes that form the next level of logical group nodes in a logical group hierarchy.
+- [LogicalGroupNodeRootEnumerationParameters](#Section_2.2.4.339) Specifies the criteria for enumerating the **LogicalGroupNode** that form the first level of **LogicalGroupHierarchy**.
+- [LogicalGroupsEnumerationParameters](#Section_2.2.4.340) Specifies the criteria for enumerating the logical groups from the IPAM data store.
 - [MACAddress](#Section_2.2.4.341) Used to specify the MAC address.
 - [MovePolicyProcessingOrderParameters](#Section_2.2.4.342) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It creates objects whose **OperationId** is MovePolicyProcessingOrder and associates them to a **DhcpPolicyV4 policy** and an **ipam:PolicyProcessingOrderDirection**.
 - [MultiUpdateDnsResourceRecordParameters](#Section_2.2.4.343) Specifies the DNS resource records to be modified and the properties of the DNS resource records to be modified. It also specifies the DNS server and DNS zone on which they are to be modified.
@@ -3600,7 +3600,7 @@ Complex type/Description
 - [SetDhcpReservationCollectionParameters](#Section_2.2.4.395) Specifies the reservation fields to be changed and the collection of reservations on which edit operations can be done for multi-edit of DHCP reservations.
 - [SetDhcpReservationParameters](#Section_2.2.4.396) Specifies the reservation whose configuration needs to be modified.
 - [SetSuperscopeActivationStatusParameters](#Section_2.2.4.397) Allows extended attributes on an **IpamOperationWithProgressParameters** type. It creates objects whose **OperationId** is SetSuperscopeActivationStatus. It associates a list of **DhcpSuperscopeV4** objects to the required activation status.
-- [SubnetLogicalGroupNodeRootEnumerationParameters](#Section_3.5.4.8.1.79) Extends **EnumerationParametersBase** and specifies the logical group, address space, and the address family to be used to enumerate subnets.
+- [SubnetLogicalGroupNodeRootEnumerationParameters](#Section_2.2.4.398) Extends **EnumerationParametersBase** and specifies the logical group, address space, and the address family to be used to enumerate subnets.
 - [SubTaskInstance](#Section_2.2.4.399) Allows extended attributes on an **ipam:IpamObject** and **ipam:INotifyPropertyChanged**. These are used to break a [**task**](#gt_task) at a granular level to correspond with PowerShell commands that are used to execute them.
 - [SuperscopeV4DataFormatter](#Section_2.2.4.400) Allows extended attributes on an **IpamObject** type. It creates formatted strings with data about the server name and superscope name.
 - [sys:ArrayOfTupleOfBaseDnsServerZonelong2zwQHvQz](#Section_2.2.4.401) Specifies an array of tuple of a DNS server zone and a DNS server.
@@ -28722,7 +28722,7 @@ The **SearchConfigurationAuditTable** procedure can be used to search the **ADM_
 
 It takes the following input parameters:
 
-**Param_searchCriteriaXml:** This is the filter condition in the form of XML as specified in section [2.2.4.66](#Section_3.5.4.8.1.3).
+**Param_searchCriteriaXml:** This is the filter condition in the form of XML as specified in section [2.2.4.66](#Section_2.2.4.66).
 
 **Param_numberOfRows:** This specifies the maximum number of rows to be returned as a part of **Result_events**.
 
@@ -48619,7 +48619,7 @@ The **StartEnumeration** operation is used to trigger the processing of the enum
 
 </wsdl:operation>
 
-Upon receiving the **IIpamEnumerator_StartEnumeration_InputMessage**, the server MUST invoke **NotifyEnumerationStart** operation. The enumeration processing logic as described in section [3.5.4.8.1](#Section_3.5.4.8.1.58) has to be triggered as well.
+Upon receiving the **IIpamEnumerator_StartEnumeration_InputMessage**, the server MUST invoke **NotifyEnumerationStart** operation. The enumeration processing logic as described in section [3.5.4.8.1](#Section_3.5.4.8.1) has to be triggered as well.
 
 <a id="Section_3.5.4.8.1"></a>
 ##### 3.5.4.8.1 Enumeration Processing Logic
@@ -48746,7 +48746,7 @@ The **ConfigurationAuditEnumerationParameters** processing is done when the **En
 
 The following are the steps involved in identifying the rows to be returned as a part of the enumeration:
 
-- Validate the **ConfigurationAuditEnumerationParameters** as specified in section [2.2.4.66](#Section_3.5.4.8.1.3). If the validation conditions are not being met, return an appropriate [**SOAP fault**](#gt_soap-fault) as specified in section [2.2.2.1](#Section_2.2.2.1).
+- Validate the **ConfigurationAuditEnumerationParameters** as specified in section [2.2.4.66](#Section_2.2.4.66). If the validation conditions are not being met, return an appropriate [**SOAP fault**](#gt_soap-fault) as specified in section [2.2.2.1](#Section_2.2.2.1).
 - Call the procedure **SearchConfigurationAuditTable** in **ADM_ConfigurationAuditTable**, specifying the **ConfigurationAuditEnumerationParameters.SearchXml** as *Param_searchCriteriaXml* and **ConfigurationAuditEnumerationParameters.NumberOfRecords** as *Param_numberOfRows*.
 - The **Result_events** will form the set of events that have to be returned as **EnumOutputData**.
 <a id="Section_3.5.4.8.1.4"></a>
@@ -50322,14 +50322,14 @@ The **IPAuditStartEnumeration** operation is similar to the **StartEnumeration**
 
 </wsdl:operation>
 
-Upon receiving the **IIpamEnumerator_StartEnumeration_InputMessage**, the server MUST invoke **NotifyEnumerationStart** operation. The enumeration processing logic as described in section [3.5.4.8.1](#Section_3.5.4.8.1.58) has to be triggered as well.
+Upon receiving the **IIpamEnumerator_StartEnumeration_InputMessage**, the server MUST invoke **NotifyEnumerationStart** operation. The enumeration processing logic as described in section [3.5.4.8.1](#Section_3.5.4.8.1) has to be triggered as well.
 
 <a id="Section_3.9.4.3.1"></a>
 ##### 3.9.4.3.1 Enumeration Processing Logic
 
 The only supported **EnumInputParameter** type is **IPAuditEnumerationParameters** having the **ObjectType** to be **EnumerationObjectType.IPAudit**. Any other type is not expected and MUST result in an appropriate [**SOAP fault**](#gt_soap-fault) being returned to the client.
 
-The difference between **IIpamIPAuditEnumerator** and **IIpamEnumerator** is only in terms of the data generation logic and the user authorization. The rest of the processing remains the same including the way the generated data is returned back to the management client remains the same. See section [3.5.4.8.1](#Section_3.5.4.8.1.58) for further details.
+The difference between **IIpamIPAuditEnumerator** and **IIpamEnumerator** is only in terms of the data generation logic and the user authorization. The rest of the processing remains the same including the way the generated data is returned back to the management client remains the same. See section [3.5.4.8.1](#Section_3.5.4.8.1) for further details.
 
 <a id="Section_3.9.4.3.1.1"></a>
 ###### 3.9.4.3.1.1 IPAuditEnumerationParameters
@@ -52133,7 +52133,7 @@ The **InitializeOperationParametersResponse** element specifies the response ele
 <a id="Section_3.19.4.4"></a>
 #### 3.19.4.4 StartOperationWithCallback
 
-The **StartOperationWithCallback** operation is used to trigger the operation specified. The operation that is triggered is determined by the **IpamOperationWithProgressParameters.OperationId** field, which is of type **IpamAdminOperationId** (see section [3.19.4.3](#Section_3.19.4.3.2.1)).
+The **StartOperationWithCallback** operation is used to trigger the operation specified. The operation that is triggered is determined by the **IpamOperationWithProgressParameters.OperationId** field, which is of type **IpamAdminOperationId** (see section [3.19.4.3](#Section_3.19.4.3)).
 
 <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StartOperationWithCallback">
 
@@ -52146,7 +52146,7 @@ The **StartOperationWithCallback** operation is used to trigger the operation sp
 Upon receiving the **IIpamOperationWithProgress_StartOperationWithCallback_InputMessage** request message, the server performs the following processing steps. Upon successful completion of these steps, the server MUST respond with the **IIpamOperationWithProgress_StartOperationWithCallback_OutputMessage** message. In the event of a failure, an appropriate [**SOAP fault**](#gt_soap-fault) MUST be sent to the client as specified in section [2.2.2.1](#Section_2.2.2.1):
 
 - Invoke the **StartProgressCallback** operation on the **IIpamOperationWithProgressCallback** interface.
-- Start the processing of **OperationWithProgress** (section [3.19.4.4.1](#Section_3.19.4.4.1.47)).
+- Start the processing of **OperationWithProgress** (section [3.19.4.4.1](#Section_3.19.4.4.1)).
 <a id="Section_3.19.4.4.1"></a>
 ##### 3.19.4.4.1 OperationWithProgress Processing Logic
 
@@ -52156,8 +52156,8 @@ This **OperationWithProgress** Processing Logic section captures the steps to be
 | --- | --- | --- |
 | EditDhcpServer | UpdateDhcpServerDelegate, section [3.19.4.4.1.1](#Section_3.19.4.4.1.1) | UpdateDhcpServerParameters |
 | ApplyServerConfigurationTemplate | ApplyDhcpServerConfigurationDelegate, section [3.19.4.4.1.2](#Section_3.19.4.4.1.2) | ApplyDhcpServerConfigurationParameters |
-| CreateDhcpScope | CreateDhcpScopeDelegate, section [3.19.4.4.1.3](#Section_3.19.4.4.1.31) | CreateDhcpScopeParameters |
-| EditDhcpScope | UpdateDhcpScopeDelegate, section [3.19.4.4.1.4](#Section_3.19.4.4.1.47) | UpdateDhcpScopeParameters |
+| CreateDhcpScope | CreateDhcpScopeDelegate, section [3.19.4.4.1.3](#Section_3.19.4.4.1.3) | CreateDhcpScopeParameters |
+| EditDhcpScope | UpdateDhcpScopeDelegate, section [3.19.4.4.1.4](#Section_3.19.4.4.1.4) | UpdateDhcpScopeParameters |
 | DeleteDhcpScope | DeleteDhcpScopeDelegate, section [3.19.4.4.1.5](#Section_3.19.4.4.1.5) | DeleteDhcpScopeParameters |
 | ApplyScopeConfigurationTemplate | ApplyDhcpScopeConfigurationDelegate, section [3.19.4.4.1.6](#Section_3.19.4.4.1.6) | ApplyDhcpScopeConfigurationParameters |
 | AddScopesToSuperscope | AddScopesToSuperscopeDelegate, section [3.19.4.4.1.7](#Section_3.19.4.4.1.7) | AddScopesToSuperscopeParameters |
@@ -52875,7 +52875,7 @@ This operation is used to replicate a scope to the partner server in a DHCP fail
 - Find the partner server in a failover relationship for this scope. Search for a failover relationship corresponding to a given scope by looking for a row in **ADM_DhcpScopeFailoverTable** that has **ScopeId** equal to **Scope.RecordId**. If no record is found, skip this scope. If the ADM record is found, look for a row in **ADM_FailoverRelationTable** that has **ADM_FailoverRelationTable.RecordId** equal to **ADM_DhcpScopeFailoverTable.FailoverRelationId**. If no such ADM record is found, skip this scope. If the record is found, assign the failover relationship object to a local variable called **Relationship**.
 - Create a local variable **DestinationServer**. If **Relationship.Server1RecordId** is equal to **Scope.DHCPServerRecordId**, assign **Relationship.Server1RecordId** to **DestinationServer**. If **Relationship.Server2RecordId** is equal to **Scope.DHCPServerRecordId**, assign **Relationship.Server2RecordId** to **DestinationServer**.
 - Clone the **Scope** variable to another local variable **ScopeToStore**. Assign **DestinationServer** to **ScopeToStore.DHCPServerRecordId**.
-- Check if **ScopeToStore** already exists in **DestinationServer**. If it does, call **UpdateDhcpScopeDelegate** (section [3.19.4.4.1.4](#Section_3.19.4.4.1.47)), passing *ScopeToStore* as the parameter. If the scope does not exist in the **DestinationServer**, call **CreateDhcpScopeDelegate** (section [3.19.4.4.1.3](#Section_3.19.4.4.1.31)), passing *ScopeToStore* as the parameter.
+- Check if **ScopeToStore** already exists in **DestinationServer**. If it does, call **UpdateDhcpScopeDelegate** (section [3.19.4.4.1.4](#Section_3.19.4.4.1.4)), passing *ScopeToStore* as the parameter. If the scope does not exist in the **DestinationServer**, call **CreateDhcpScopeDelegate** (section [3.19.4.4.1.3](#Section_3.19.4.4.1.3)), passing *ScopeToStore* as the parameter.
 - Call **SetOverallStatus** with Success and 100% completion.
 <a id="Section_3.19.4.4.1.30"></a>
 ###### 3.19.4.4.1.30 DoFailoverReplicationDelegate
@@ -53141,7 +53141,7 @@ This operation creates DNS resource records. In the following steps, at any time
 
 The **UpdateDnsResourceRecordDelegate** processing is done when the **IpamOperationWithProgressParameter.OperationId** is **AdminOperationId.UpdateDnsResourceRecord**. The **IpamOperationWithProgressParameter** instance in this case MUST be of type **UpdateDnsResourceRecordParameters**.
 
-This operation is used to update a DNS resource record. In the following steps, at any time a fault is generated, **SetOverallStatus** (section [3.19.4.8](#Section_3.19.4.8.2)) SHOULD be called with the fault details:
+This operation is used to update a DNS resource record. In the following steps, at any time a fault is generated, **SetOverallStatus** (section [3.19.4.8](#Section_3.19.4.8)) SHOULD be called with the fault details:
 
 - If **IpamOperationWithProgressParameter** is NULL or not of type **UpdateDnsResourceRecordParameters**, generate an appropriate SOAP fault as specified in section [2.2.2.1](#Section_2.2.2.1). Project **IpamOperationWithProgressParameter** in a local variable as **UpdateDnsResourceRecordParameters**.
 - If **UpdateDnsResourceRecordParameters** is NULL, **UpdateDnsResourceRecordParameters.ResourceRecord** is NULL, **UpdateDnsResourceRecordParameters.ServerZoneId** is 0, or **UpdateDnsResourceRecordParameters.ZoneType** equals **ZoneLookupType.None**, generate an appropriate SOAP fault.
@@ -53163,7 +53163,7 @@ This operation is used to update a DNS resource record. In the following steps, 
 
 The **UpdateDnsResourceRecordsDelegate** processing is done when the **IpamOperationWithProgressParameter.OperationId** is **AdminOperationId.UpdateDnsResourceRecords**. The **IpamOperationWithProgressParameter** instance in this case MUST be of type **MultiUpdateDnsResourceRecordParameters**.
 
-This operation is used to update multiple DNS resource records. In the following processing steps, at any time a fault is generated, **SetOverallStatus** (section [3.19.4.8](#Section_3.19.4.8.2)) SHOULD be called with the fault details:
+This operation is used to update multiple DNS resource records. In the following processing steps, at any time a fault is generated, **SetOverallStatus** (section [3.19.4.8](#Section_3.19.4.8)) SHOULD be called with the fault details:
 
 - If **IpamOperationWithProgressParameter** is NULL or not of type **MultiUpdateDnsResourceRecordParameters**, generate an appropriate SOAP fault as specified in section [2.2.2.1](#Section_2.2.2.1). Project **IpamOperationWithProgressParameter** in a local variable as **MultiUpdateDnsResourceRecordParameters**.
 - If **MultiUpdateDnsResourceRecordParameters** is NULL, **MultiUpdateDnsResourceRecordParameters.ResourceRecords** is NULL, **MultiUpdateDnsResourceRecordParameters.ResourceRecords.Count** is 0, **MultiUpdateDnsResourceRecordParameters.ServerZoneId** is 0, or **MultiUpdateDnsResourceRecordParameters.ZoneType** is **ZoneLookupType.None**, generate an appropriate SOAP fault.
@@ -53176,7 +53176,7 @@ This operation is used to update multiple DNS resource records. In the following
 
 The **DeleteDnsResourceRecordsDelegate** processing is done when the **IpamOperationWithProgressParameter.OperationId** is **AdminOperationId.DeleteDnsResourceRecords**. The **IpamOperationWithProgressParameter** instance in this case MUST be of type **DeleteDnsResourceRecordsParameters**.
 
-This operation deletes DNS resource records. In the following steps, at any time a fault is generated, **SetOverallStatus** (section [3.19.4.8](#Section_3.19.4.8.2)) SHOULD be called with the fault details:
+This operation deletes DNS resource records. In the following steps, at any time a fault is generated, **SetOverallStatus** (section [3.19.4.8](#Section_3.19.4.8)) SHOULD be called with the fault details:
 
 - If **IpamOperationWithProgressParameter** is NULL or not of type **DeleteDnsResourceRecordsParameters**, generate an appropriate SOAP fault (as specified in section [2.2.2.1](#Section_2.2.2.1)). Project **IpamOperationWithProgressParameter** in a local variable as **DeleteDnsResourceRecordsParameters**.
 - If any of the following conditions exist, generate an appropriate SOAP fault:
@@ -53702,8 +53702,8 @@ The following table specifies the operations and the corresponding **OperationId
 | --- | --- | --- | --- |
 | EditDhcpServer | UpdateDhcpServerDelegate, section [3.19.4.4.1.1](#Section_3.19.4.4.1.1) | MsmDhcpEditServerProperties | DhcpServer |
 | ApplyServerConfigurationTemplate | ApplyDhcpServerConfigurationDelegate, section [3.19.4.4.1.2](#Section_3.19.4.4.1.2) | MsmDhcpEditServerProperties | DhcpServer |
-| CreateDhcpScope | CreateDhcpScopeDelegate, section [3.19.4.4.1.3](#Section_3.19.4.4.1.31) | MsmDhcpCreateScope | DhcpServer |
-| EditDhcpScope | UpdateDhcpScopeDelegate, section [3.19.4.4.1.4](#Section_3.19.4.4.1.47) | MsmDhcpEditScope | DhcpScope |
+| CreateDhcpScope | CreateDhcpScopeDelegate, section [3.19.4.4.1.3](#Section_3.19.4.4.1.3) | MsmDhcpCreateScope | DhcpServer |
+| EditDhcpScope | UpdateDhcpScopeDelegate, section [3.19.4.4.1.4](#Section_3.19.4.4.1.4) | MsmDhcpEditScope | DhcpScope |
 | DeleteDhcpScope | DeleteDhcpScopeDelegate, section [3.19.4.4.1.5](#Section_3.19.4.4.1.5) | MsmDhcpDeleteScope | DhcpScope |
 | ApplyScopeConfigurationTemplate | ApplyDhcpScopeConfigurationDelegate, section [3.19.4.4.1.6](#Section_3.19.4.4.1.6) | MsmDhcpEditScope | DhcpScope |
 | AddScopesToSuperscope | AddScopesToSuperscopeDelegate, section [3.19.4.4.1.7](#Section_3.19.4.4.1.7) | MsmDhcpEditSuperscope | DhcpSuperscopeV4 |

@@ -274,7 +274,7 @@ This specification covers versioning issues in the following areas:
 - Any version level between 0x00010000 and 0x00010004 implements the base features.
 - A version level of 0x00010005 implements the base features and adds support for [**coalescence**](#gt_coalesced-payload).
 - A version level of 0x00010006 implements the base features, supports coalescence, and adds support for signing.
-The version level value is specified in the **dwCurrentProtocolVersion** field of the [CONNECT](#Section_2.2.1.1), [CONNECTED](#Section_2.2.1.2), or [CONNECTED_SIGNED](#Section_3.1.5.1.3) message. These features are defined in section [2.2](#Section_2.2).
+The version level value is specified in the **dwCurrentProtocolVersion** field of the [CONNECT](#Section_2.2.1.1), [CONNECTED](#Section_2.2.1.2), or [CONNECTED_SIGNED](#Section_2.2.1.3) message. These features are defined in section [2.2](#Section_2.2).
 
 - Security and Authentication Methods: The DirectPlay 8 Protocol does not natively provide robust authentication or encryption. It provides optional signing mechanisms that can be used to mitigate denial-of-service attacks, as discussed in sections [3.1.4.4](#Section_3.1.4.4) and [3.1.5.2.7](#Section_3.1.5.2.7).
 - Capability Negotiation: This protocol detects some features by inspecting the **dwCurrentProtocolVersion** field in the CONNECT, CONNECTED, or CONNECTED_SIGNED messages, as described later in this section.
@@ -317,7 +317,7 @@ The DirectPlay 8 Protocol does not negotiate transport providers. If the transpo
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 CONNECT
 
-The CONNECT packet is used to request a connection. If accepted, the response is a [CONNECTED (section 2.2.1.2)](#Section_2.2.1.2) packet or a [CONNECTED_SIGNED (section 2.2.1.3)](#Section_3.1.5.1.3) packet, depending on whether packet signing is enabled.
+The CONNECT packet is used to request a connection. If accepted, the response is a [CONNECTED (section 2.2.1.2)](#Section_2.2.1.2) packet or a [CONNECTED_SIGNED (section 2.2.1.3)](#Section_2.2.1.3) packet, depending on whether packet signing is enabled.
 
 ```mermaid
 packet-beta
@@ -400,7 +400,7 @@ packet-beta
 
 The recipient SHOULD be prepared to support older message formats used by earlier minor versions, but MUST ignore this packet if it does not. To ensure security, the packet MUST be ignored if the recipient is using signing but the minor version number is less than 0x0006.
 
-The recipient SHOULD be prepared to receive minor version numbers higher than what it implements and supplies in its own CONNECTED or [CONNECTED_SIGNED](#Section_3.1.5.1.3) message, but both sides MUST only use message formats compatible with the lower of their two version numbers.
+The recipient SHOULD be prepared to receive minor version numbers higher than what it implements and supplies in its own CONNECTED or [CONNECTED_SIGNED](#Section_2.2.1.3) message, but both sides MUST only use message formats compatible with the lower of their two version numbers.
 
 | Value | Meaning |
 | --- | --- |
@@ -515,7 +515,7 @@ packet-beta
 
 **bRspId (1 byte):** The response identifier. This value SHOULD be set to zero, unless the connection is using **PACKET_SIGNING_FULL**; in which case, it MUST be set to the [**sequence ID**](#gt_sequence-id) of the next [**data frame (DFRAME)**](#gt_data-frame-dframe) that would have been sent had HARD_DISCONNECT not occurred.
 
-**dwCurrentProtocolVersion (4 bytes):** The version number, in [**little-endian**](#gt_little-endian) byte order, of the requestor's DirectPlay 8 Protocol. The value SHOULD match the value previously sent in a [CONNECT](#Section_2.2.1.1), [CONNECTED](#Section_2.2.1.2), or [CONNECTED_SIGNED](#Section_3.1.5.1.3) packet, and MUST be ignored on receipt.
+**dwCurrentProtocolVersion (4 bytes):** The version number, in [**little-endian**](#gt_little-endian) byte order, of the requestor's DirectPlay 8 Protocol. The value SHOULD match the value previously sent in a [CONNECT](#Section_2.2.1.1), [CONNECTED](#Section_2.2.1.2), or [CONNECTED_SIGNED](#Section_2.2.1.3) packet, and MUST be ignored on receipt.
 
 **dwSessID (4 bytes):** The session identifier. This value MUST be set to the same **dwSessID** value that is specified in the CONNECT message originally associated with the connection.
 
@@ -795,7 +795,7 @@ None.
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Listening
 
-Higher layers that accept new connections SHOULD place the DirectPlay 8 Protocol in listening mode. The protocol SHOULD begin treating [CONNECT](#Section_2.2.1.1) messages from previously unknown sources as attempts to establish a connection and SHOULD respond with [CONNECTED](#Section_2.2.1.2) or [CONNECTED_SIGNED](#Section_3.1.5.1.3) messages, as specified in section [3.1.5.1.1](#Section_3.1.5.1.1).
+Higher layers that accept new connections SHOULD place the DirectPlay 8 Protocol in listening mode. The protocol SHOULD begin treating [CONNECT](#Section_2.2.1.1) messages from previously unknown sources as attempts to establish a connection and SHOULD respond with [CONNECTED](#Section_2.2.1.2) or [CONNECTED_SIGNED](#Section_2.2.1.3) messages, as specified in section [3.1.5.1.1](#Section_3.1.5.1.1).
 
 <a id="Section_3.1.4.2"></a>
 #### 3.1.4.2 Connecting
@@ -843,7 +843,7 @@ For full-signed connections, local secrets are also modified once for each time 
 
 If the lowest sequenced packet that uses the **PACKET_COMMAND_RELIABLE** flag contains coalesced payloads, the first subpayload that is marked **PACKET_COMMAND_RELIABLE** is used to generate the modifier. If no non-**KeepAlive** reliable payload is sent with a sequence ID between 0 and 191 inclusive, the previous local secret modifier value is reused.
 
-The local secret modifier value is initialized to the secret associated with the sender when the connection was established; that is, it begins with the same value as the [CONNECTED_SIGNED](#Section_3.1.5.1.3) frame's **ullSenderSecret** field if the local computer system performed an outbound connection, and it begins with the same value as the CONNECTED_SIGNED frame's **ullReceiverSecret** field if the local computer system received an inbound connection.
+The local secret modifier value is initialized to the secret associated with the sender when the connection was established; that is, it begins with the same value as the [CONNECTED_SIGNED](#Section_2.2.1.3) frame's **ullSenderSecret** field if the local computer system performed an outbound connection, and it begins with the same value as the CONNECTED_SIGNED frame's **ullReceiverSecret** field if the local computer system received an inbound connection.
 
 After sending the packet with sequence ID 255 on a full-signed connection, the sender MUST advance the secret by making the current local secret become the previous local secret and by setting the new current local secret to the first 64 bits of a SHA-1 digest (as specified in [FIPS180]) of the following data, in sequence:
 
@@ -856,18 +856,18 @@ Implementations SHOULD also implement [**TCP**](#gt_transmission-control-protoco
 <a id="Section_3.1.4.5"></a>
 #### 3.1.4.5 Hard Disconnects
 
-Higher layers that require to terminate the connection as quickly as possible do not initiate the graceful disconnect that is specified in section [3.1.4.3](#Section_3.1.4.3). Instead, the implementation cancels all previously queued messages and terminates any packets that are still waiting for [**acknowledgments (ACKs)**](#gt_acknowledgment-ack). It MUST then send one or more [HARD_DISCONNECT](#Section_2.2.1.4) messages that are separated by brief intervals in order to make a best-effort attempt at informing the remote [**partner**](#gt_partner) of this abrupt termination. It is recommended that three HARD_DISCONNECT messages be sent by using the hard disconnect timer to schedule the subsequent attempts, as specified in section [3.1.2.4](#Section_3.1.4.5).
+Higher layers that require to terminate the connection as quickly as possible do not initiate the graceful disconnect that is specified in section [3.1.4.3](#Section_3.1.4.3). Instead, the implementation cancels all previously queued messages and terminates any packets that are still waiting for [**acknowledgments (ACKs)**](#gt_acknowledgment-ack). It MUST then send one or more [HARD_DISCONNECT](#Section_2.2.1.4) messages that are separated by brief intervals in order to make a best-effort attempt at informing the remote [**partner**](#gt_partner) of this abrupt termination. It is recommended that three HARD_DISCONNECT messages be sent by using the hard disconnect timer to schedule the subsequent attempts, as specified in section [3.1.2.4](#Section_3.1.2.4).
 
 If the connection was established with signing, the HARD_DISCONNECT ([**CFRAME**](#gt_command-frame-cframe)) MUST be signed appropriately by using the mechanism that is specified in section [3.1.4.4](#Section_3.1.4.4).
 
 Implementations MUST NOT send any additional data after initiating a hard disconnect. They MAY continue receiving packets until the remote partner acknowledges the termination request by sending its own hard disconnect packets.
 
-When a HARD_DISCONNECT packet is received from the remote partner or the maximum number of local HARD_DISCONNECT packets have been sent and the final time-out has elapsed, the implementation SHOULD consider the connection terminated. See sections [3.1.5.1.4](#Section_3.1.5.1.4) and [3.1.6.4](#Section_3.1.2.4).
+When a HARD_DISCONNECT packet is received from the remote partner or the maximum number of local HARD_DISCONNECT packets have been sent and the final time-out has elapsed, the implementation SHOULD consider the connection terminated. See sections [3.1.5.1.4](#Section_3.1.5.1.4) and [3.1.6.4](#Section_3.1.6.4).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Processing Events and Sequencing Rules
 
-When a packet arrives, the recipient SHOULD first check whether it is large enough to be a minimal [**data frame (DFRAME)**](#gt_data-frame-dframe) (4 bytes) and whether the first byte has the low bit (**PACKET_COMMAND_DATA**) set. If so, it MUST process the message as a [DFRAME (section 3.1.5.2)](#Section_2.2.2) data frame. Otherwise, if the data is at least 12 bytes and the first byte is either 0x80 or 0x88 (**PACKET_COMMAND_CFRAME** or **PACKET_COMMAND_CFRAME** | **PACKET_COMMAND_POLL**), it MUST process the message as a [CFRAME (section 3.1.5.1)](#Section_2.2.1) [**command frame**](#gt_command-frame-cframe). Otherwise, the message is not a valid DirectPlay 8 Protocol message and MUST be ignored or passed to other protocols.
+When a packet arrives, the recipient SHOULD first check whether it is large enough to be a minimal [**data frame (DFRAME)**](#gt_data-frame-dframe) (4 bytes) and whether the first byte has the low bit (**PACKET_COMMAND_DATA**) set. If so, it MUST process the message as a [DFRAME (section 3.1.5.2)](#Section_3.1.5.2) data frame. Otherwise, if the data is at least 12 bytes and the first byte is either 0x80 or 0x88 (**PACKET_COMMAND_CFRAME** or **PACKET_COMMAND_CFRAME** | **PACKET_COMMAND_POLL**), it MUST process the message as a [CFRAME (section 3.1.5.1)](#Section_3.1.5.1) [**command frame**](#gt_command-frame-cframe). Otherwise, the message is not a valid DirectPlay 8 Protocol message and MUST be ignored or passed to other protocols.
 
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 CFRAMEs
@@ -883,7 +883,7 @@ If the source address does not correspond to any existing connection, it is trea
 
 If the recipient is not enforcing signing, it SHOULD allocate resources for the new connection and send a CONNECTED response. This includes setting the connect retry timer to continue retrying the CONNECTED reply until either a valid CONNECTED response arrives from the connector, or the maximum number of retries elapses and the connection is terminated.
 
-If the recipient is enforcing signing, it SHOULD NOT allocate resources but instead, send a [CONNECTED_SIGNED](#Section_3.1.5.1.3) response that uses a cookie value in its **ullConnectSig** field that can be used to subsequently verify that the connector saw the CONNECTED_SIGNED reply. This is described in more detail in section [3.1.5.1.3](#Section_3.1.5.1.3).
+If the recipient is enforcing signing, it SHOULD NOT allocate resources but instead, send a [CONNECTED_SIGNED](#Section_2.2.1.3) response that uses a cookie value in its **ullConnectSig** field that can be used to subsequently verify that the connector saw the CONNECTED_SIGNED reply. This is described in more detail in section [3.1.5.1.3](#Section_3.1.5.1.3).
 
 <a id="Section_3.1.5.1.2"></a>
 ##### 3.1.5.1.2 CONNECTED
@@ -901,7 +901,7 @@ If the source address matches that of an established connection, the **dwSessID*
 
 If the **bExtOpcode** field indicates **FRAME_EXOPCODE_CONNECTED_SIGNED** (0x03), the source address (for example, IPv4 address and port type when running on [**UDP**](#gt_user-datagram-protocol-udp)) for the message is checked.
 
-If the source address matches that of a previously initiated outbound connection that has not completed the handshake process, the **dwSessID** field MUST match that of the previously sent [CONNECT](#Section_2.2.1.1) packet, and the **PACKET_COMMAND_POLL** flag MUST be set in the **bCommand** field before the packet can be accepted. The **dwSigningOpts** field MUST have either the **PACKET_SIGNING_FAST** or the **PACKET_SIGNING_FULL** flag set, but not both, and the one set MUST exactly match the connector's desired signing mode. If the connector did not intend to use signing, this signed response SHOULD be ignored. Otherwise, the connection SHOULD be considered established, random sender and receiver signing secrets SHOULD be generated, and a [CONNECTED_SIGNED](#Section_3.1.5.1.3) response SHOULD be sent to confirm this connection. This CONNECTED_SIGNED response MUST NOT set the **PACKET_COMMAND_POLL** flag. A reliable **KeepAlive** [**DFRAME**](#gt_data-frame-dframe) MUST also then be scheduled to ensure that the remote side that did not allocate resources yet is prompted to complete the connection establishment if the CONNECTED_SIGNED response is dropped.
+If the source address matches that of a previously initiated outbound connection that has not completed the handshake process, the **dwSessID** field MUST match that of the previously sent [CONNECT](#Section_2.2.1.1) packet, and the **PACKET_COMMAND_POLL** flag MUST be set in the **bCommand** field before the packet can be accepted. The **dwSigningOpts** field MUST have either the **PACKET_SIGNING_FAST** or the **PACKET_SIGNING_FULL** flag set, but not both, and the one set MUST exactly match the connector's desired signing mode. If the connector did not intend to use signing, this signed response SHOULD be ignored. Otherwise, the connection SHOULD be considered established, random sender and receiver signing secrets SHOULD be generated, and a [CONNECTED_SIGNED](#Section_2.2.1.3) response SHOULD be sent to confirm this connection. This CONNECTED_SIGNED response MUST NOT set the **PACKET_COMMAND_POLL** flag. A reliable **KeepAlive** [**DFRAME**](#gt_data-frame-dframe) MUST also then be scheduled to ensure that the remote side that did not allocate resources yet is prompted to complete the connection establishment if the CONNECTED_SIGNED response is dropped.
 
 If the source address matches that of a previously initiated inbound connection that has not completed the handshake process, the **dwSessID** field MUST match that of the previously received CONNECT packet, and the **PACKET_COMMAND_POLL** flag MUST NOT be set in the **bCommand** field before the packet can be accepted. If the connector is not using signing, this confirmation SHOULD be ignored. Lastly, the **ullConnectSig** cookie signature field SHOULD be validated to ensure that the sender saw the previous CONNECTED_SIGNED packet. If the signature is not valid, the packet MUST be ignored. Otherwise, the connection SHOULD be allocated and considered established, and the sender and receiver secrets provided SHOULD be saved. A reliable **KeepAlive** DFRAME SHOULD also be scheduled to immediately update [**round-trip time (RTT)**](#gt_round-trip-time-rtt) measurements.
 
@@ -1012,7 +1012,7 @@ For full-signed connections, the 64-bit signature MUST match exactly the first 6
 - If the next expected receive [**sequence ID**](#gt_sequence-id) is greater than or equal to 192, use the previous remote secret.
 - If the next expected receive sequence ID is less than 64 and the received **bSeq** value is greater than or equal to 192, use the previous remote secret.
 - Otherwise, use the current remote secret.
-For full-signed connections, remote secrets are also modified once each time the 8-bit sequence space wraps to avoid signing all data with the same value. The modification is performed using a modifier value derived from the lowest sequenced reliable payload received with a sequence ID of less than 192 that is not a **KeepAlive**. If the lowest sequenced packet using the **PACKET_COMMAND_RELIABLE** flag contains coalesced payload, the first subpayload that is marked **PACKET_COMMAND_RELIABLE** is used to generate the modifier. If no non-**KeepAlive** reliable payload is received with a sequence ID between 0 and 191 inclusive, the previous remote secret modifier value is reused. The remote secret modifier value is initialized to the secret associated with the sender when the connection was established; that is, it begins with the same value as the [CONNECTED_SIGNED](#Section_3.1.5.1.3) frame's **ullSenderSecret** field if the local computer system received an inbound connection, and it begins with the same value as the CONNECTED_SIGNED frame's **ullReceiverSecret** field if the local computer system performed an outbound connection.
+For full-signed connections, remote secrets are also modified once each time the 8-bit sequence space wraps to avoid signing all data with the same value. The modification is performed using a modifier value derived from the lowest sequenced reliable payload received with a sequence ID of less than 192 that is not a **KeepAlive**. If the lowest sequenced packet using the **PACKET_COMMAND_RELIABLE** flag contains coalesced payload, the first subpayload that is marked **PACKET_COMMAND_RELIABLE** is used to generate the modifier. If no non-**KeepAlive** reliable payload is received with a sequence ID between 0 and 191 inclusive, the previous remote secret modifier value is reused. The remote secret modifier value is initialized to the secret associated with the sender when the connection was established; that is, it begins with the same value as the [CONNECTED_SIGNED](#Section_2.2.1.3) frame's **ullSenderSecret** field if the local computer system received an inbound connection, and it begins with the same value as the CONNECTED_SIGNED frame's **ullReceiverSecret** field if the local computer system performed an outbound connection.
 
 Upon receiving the packet with sequence ID 192 on a full-signed connection, and there are no missing sequence IDs, the receiver MUST advance the secret by making the current remote secret become the previous remote secret, and then setting the new current remote secret to the first 64 bits of a SHA-1 digest of the following data, in sequence:
 

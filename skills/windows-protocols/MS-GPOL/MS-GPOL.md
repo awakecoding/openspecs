@@ -261,7 +261,7 @@ This document uses the following terms:
 **distinguished name (DN)**: A name that uniquely identifies an object by using the relative distinguished name (RDN) for the object, and the names of container objects and domains that contain the object. The distinguished name (DN) identifies the object and its location in a tree.
 
 <a id="gt_domain"></a>
-**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](#Section_1.3) section 1.1.1.5 and [MS-ADTS].
+**domain**: A set of users and computers sharing a common namespace and management infrastructure. At least one computer member of the set has to act as a [**domain controller (DC)**](#gt_domain-controller-dc) and host a member list that identifies all members of the domain, as well as optionally hosting the [**Active Directory**](#gt_active-directory) service. The domain controller provides authentication of members, creating a unit of trust for its members. Each domain has an identifier that is shared among its members. For more information, see [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 1.1.1.5 and [MS-ADTS].
 
 <a id="gt_domain-account"></a>
 **domain account**: A stored set of attributes representing a principal used to authenticate a user or machine to an [**Active Directory**](#gt_active-directory) domain.
@@ -448,7 +448,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-GPFR] Microsoft Corporation, "[Group Policy: Folder Redirection Protocol Extension](../MS-GPFR/MS-GPFR.md)".
 
-[MS-GPIPSEC] Microsoft Corporation, "[Group Policy: IP Security (IPsec) Protocol Extension](#Section_5)".
+[MS-GPIPSEC] Microsoft Corporation, "[Group Policy: IP Security (IPsec) Protocol Extension](../MS-GPIPSEC/MS-GPIPSEC.md)".
 
 [MS-GPREG] Microsoft Corporation, "[Group Policy: Registry Extension Encoding](../MS-GPREG/MS-GPREG.md)".
 
@@ -483,11 +483,11 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
-[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](#Section_1.3)".
+[MS-GPOD] Microsoft Corporation, "[Group Policy Protocols Overview](../MS-GPOD/MS-GPOD.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MSDN-AcceptSecurityContext] Microsoft Corporation, "AcceptSecurityContext (General) function", [https://learn.microsoft.com/en-us/windows/win32/api/sspi/nf-sspi-acceptsecuritycontext](https://go.microsoft.com/fwlink/?LinkId=378278)
 
@@ -517,7 +517,7 @@ Computer policy settings are either behaviors that can affect the computer (even
 
 The Group Policy: Core Protocol does not define any policy settings itself. A vendor defines settings by implementing a [**Group Policy extension**](#gt_group-policy-extension) or by using data-driven Group Policy extensions (such as the Group Policy: Registry Extension Encoding, as specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md)) that allow for the definition of new settings.
 
-An overview of when user and computer policies are applied to a client is described in [MS-GPOD](#Section_1.3) section 2.5.2.
+An overview of when user and computer policies are applied to a client is described in [MS-GPOD](../MS-GPOD/MS-GPOD.md) section 2.5.2.
 
 <a id="Section_1.3.2"></a>
 ### 1.3.2 Protocol Operational Modes
@@ -534,7 +534,7 @@ The [**client’s**](#gt_60e0e1fa-66fe-41e1-b5e3-ceab97e53506) interaction with 
 <a id="Section_1.3.3.1"></a>
 #### 1.3.3.1 Server Discovery and Group Policy Object Association
 
-[**Policy application**](#gt_policy-application) starts with a discovery step that is based on locating a [**domain controller (DC)**](#gt_domain-controller-dc) as specified in section [3.2.5.1.1](#Section_3.2.5.1.10) in order to identify a DC. The client initiates this step. After a domain controller is located, the [**Group Policy client**](#gt_group-policy-client) performs two sets of queries on the directory of the [**Group Policy server**](#gt_group-policy-server) by using the [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap).
+[**Policy application**](#gt_policy-application) starts with a discovery step that is based on locating a [**domain controller (DC)**](#gt_domain-controller-dc) as specified in section [3.2.5.1.1](#Section_3.2.5.1.1) in order to identify a DC. The client initiates this step. After a domain controller is located, the [**Group Policy client**](#gt_group-policy-client) performs two sets of queries on the directory of the [**Group Policy server**](#gt_group-policy-server) by using the [**Lightweight Directory Access Protocol (LDAP)**](#gt_lightweight-directory-access-protocol-ldap).
 
 The purpose of the first set of queries is to determine what sets of behavior specifications, called [**Group Policy Objects (GPOs)**](#gt_group-policy-object-gpo), have been assigned to the [**policy target**](#gt_policy-target) account (that is, the GPOs that an administrator has configured as being applicable to the policy target account). Because [**domain accounts**](#gt_domain-account) are stored in Active Directory, information about the GPOs that are associated with those accounts is also stored there.
 
@@ -569,7 +569,7 @@ Just as policy application supports [**Group Policy extension**](#gt_group-polic
 <a id="Section_1.4"></a>
 ## 1.4 Relationship to Other Protocols
 
-Note that the Group Policy: Core Protocol by itself is not capable of communicating [**policy settings**](#gt_policy-setting) directly. The Group Policy: Core Protocol only does so by being extended by one or more [**Group Policy extensions**](#gt_group-policy-extension) (for example, as specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md), [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md), and [MS-GPIPSEC](#Section_5)) that are capable of communicating policy settings of a given class. These Group Policy extensions depend on the Group Policy: Core Protocol to execute first on the [**Group Policy client**](#gt_group-policy-client) to identify [**GPOs**](#gt_group-policy-object-gpo) that the Group Policy extension needs to query or update. The Group Policy: Core Protocol has no dependency on any Group Policy extensions. Any number of Group Policy extensions can be added without requiring changes to the Group Policy: Core Protocol.
+Note that the Group Policy: Core Protocol by itself is not capable of communicating [**policy settings**](#gt_policy-setting) directly. The Group Policy: Core Protocol only does so by being extended by one or more [**Group Policy extensions**](#gt_group-policy-extension) (for example, as specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md), [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md), and [MS-GPIPSEC](../MS-GPIPSEC/MS-GPIPSEC.md)) that are capable of communicating policy settings of a given class. These Group Policy extensions depend on the Group Policy: Core Protocol to execute first on the [**Group Policy client**](#gt_group-policy-client) to identify [**GPOs**](#gt_group-policy-object-gpo) that the Group Policy extension needs to query or update. The Group Policy: Core Protocol has no dependency on any Group Policy extensions. Any number of Group Policy extensions can be added without requiring changes to the Group Policy: Core Protocol.
 
 Group Policy depends on the following protocols to exchange information between a client and a [**Group Policy server**](#gt_group-policy-server):
 
@@ -616,7 +616,7 @@ This document covers versioning issues in the following areas:
 
 The Group Policy: Core Protocol allows vendors to define [**Group Policy extensions**](#gt_group-policy-extension) to the protocol. These Group Policy extensions enable vendors to store vendor-specific data in a [**GPO**](#gt_group-policy-object-gpo) on the [**Group Policy server**](#gt_group-policy-server). For the [**Group Policy client**](#gt_group-policy-client) to access that data, it needs to be able to identify a system component that can retrieve and interpret that data.
 
-To facilitate this, the GPO [**Active Directory object**](#gt_active-directory-object) schema has two attributes, **gPCMachineExtensionNames** and **gPCUserExtensionNames**, in which a vendor can append both a [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) that identifies that GPO as having that vendor's particular extra Group Policy extension data stored inside it, and a [**tool extension GUID**](#gt_88ad7745-bee6-47f7-ae98-6fac7c5ef330) that allows the vendor to associate an [**administrative tool**](#gt_administrative-tool) that can update the data. The vendor obtains the [**UUIDs**](#gt_universally-unique-identifier-uuid) of the CSE GUID and the tool extension GUID by generating them according to the standard [**GUID**](#gt_globally-unique-identifier-guid) algorithm, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). After they are generated, the vendor includes the GUID in these attributes, as specified in section [2.2](../MS-DTYP/MS-DTYP.md). Vendors do not need to collaborate or obtain GUIDs from a central authority; the GUID generation algorithm ensures that no two vendors make use of the same GUID. Vendors can specify a NULL GUID for the tool extension GUID.
+To facilitate this, the GPO [**Active Directory object**](#gt_active-directory-object) schema has two attributes, **gPCMachineExtensionNames** and **gPCUserExtensionNames**, in which a vendor can append both a [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3) that identifies that GPO as having that vendor's particular extra Group Policy extension data stored inside it, and a [**tool extension GUID**](#gt_88ad7745-bee6-47f7-ae98-6fac7c5ef330) that allows the vendor to associate an [**administrative tool**](#gt_administrative-tool) that can update the data. The vendor obtains the [**UUIDs**](#gt_universally-unique-identifier-uuid) of the CSE GUID and the tool extension GUID by generating them according to the standard [**GUID**](#gt_globally-unique-identifier-guid) algorithm, as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824). After they are generated, the vendor includes the GUID in these attributes, as specified in section [2.2](#Section_2.2). Vendors do not need to collaborate or obtain GUIDs from a central authority; the GUID generation algorithm ensures that no two vendors make use of the same GUID. Vendors can specify a NULL GUID for the tool extension GUID.
 
 Each CSE GUID and tool extension GUID defined by a vendor MUST be treated as a standards assignment to the **gPCMachineExtensionNames** and **gPCUserExtensionNames** attributes that MUST be declared in the Group Policy extension documentation that is associated with the CSE GUID and tool extension GUID.
 
@@ -631,7 +631,7 @@ There are no standards assignments for the Group Policy: Core Protocol.
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The Group Policy: Core Protocol is a sequence of protocol conversations using different transports. The initial protocol conversation locates the [**Group Policy server**](#gt_group-policy-server) specified in section [3.2.5.1.1](#Section_3.2.5.1.10).
+The Group Policy: Core Protocol is a sequence of protocol conversations using different transports. The initial protocol conversation locates the [**Group Policy server**](#gt_group-policy-server) specified in section [3.2.5.1.1](#Section_3.2.5.1.1).
 
 Subsequent messages are exchanged by using a combination of file access and [**LDAP**](#gt_lightweight-directory-access-protocol-ldap). The Group Policy: Core Protocol allows [**Group Policy clients**](#gt_group-policy-client) and [**administrative tools**](#gt_administrative-tool) to access policy instructions stored on the Group Policy server. The client and administrative tools use file access and LDAP as transports to access that storage, which itself is split between network file system storage and [**Active Directory**](#gt_active-directory). Group Policy defines specific file formats and directory structure layouts that define the structure of the file system storage.
 
@@ -651,9 +651,9 @@ There are two classes of protocol conversations. Each message can be categorized
 Policy application messages are exchanged during policy application after which a [**Group Policy extension**](#gt_group-policy-extension) typically takes action to apply administrative policy. Collectively, the following sequence of eight messages is referred to in this documentation as a policy application message:
 
 - [Distinguished Name (DN) Discovery](#Section_2.2.1)
-- [Domain Scope of Management (SOM) Search](#Section_4.1.1)
-- [Site Search](#Section_3.2.5.1.4)
-- [Group Policy Object (GPO) Search](#Section_4.3.1)
+- [Domain Scope of Management (SOM) Search](#Section_2.2.2)
+- [Site Search](#Section_2.2.3)
+- [Group Policy Object (GPO) Search](#Section_2.2.4)
 - [WMI Filter Search](#Section_2.2.5)
 - [Link Speed Determination](#Section_2.2.6)
 Administrative messages allow an administrator to view and update policies in a [**domain**](#gt_domain). They are only used by an administrative plug-in, never by a client plug-in. Administrative messages consist of the following:
@@ -759,7 +759,7 @@ Another **SearchRequest** is made with the following parameters:
 | *Filter* | The following LDAP filter (using the representation as specified in [RFC2254]) MUST be used: (objectClass=*) |
 | *Attributes* | **gpLink** and **gpOptions** attributes. |
 
-The searchResponse received MUST meet the same requirements as those specified in the Domain Scope of Management Search (section [2.2.2](#Section_4.1.1)).
+The searchResponse received MUST meet the same requirements as those specified in the Domain Scope of Management Search (section [2.2.2](#Section_2.2.2)).
 
 <a id="Section_2.2.4"></a>
 ### 2.2.4 GPO Search
@@ -776,7 +776,7 @@ An LDAP SearchRequest MUST be sent to the [**Group Policy server**](#gt_group-po
 | *sizeLimit* | SHOULD be set to 65536. |
 | *timeLimit* | MAY<5> be 0 (infinite), but SHOULD be 240 (seconds). |
 | *typesOnly* | MUST be set to 0 (FALSE). |
-| *Filter* | The following LDAP filter (using the representation as specified in [[RFC2254]](https://go.microsoft.com/fwlink/?LinkId=90328)) MUST be used: (\|(**distinguishedName**=<GPOPath1>)(**distinguishedName**=<GPOPath2>)... (**distinguishedName**=<GPOPathN>)) where <GPOPath1> and <GPOPathN> are the [**GPO DNs**](#gt_group-policy-object-gpo-distinguished-name-dn) (as specified in sections [2.2.2](#Section_4.1.1) and [2.2.3](#Section_3.2.5.1.4)) without the prefix "LDAP://"; all other characters are to be interpreted literally. The following LDAP filter (using the representation as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) makes the LDAP query more efficient by returning only GPOs that are enabled and contain extensions: **GPO targeted to user policy:** (&(!(flags:1.2.840.113556.1.4.803:=1))(gPCUserExtensionNames=[*])((\|(distinguishedName=<GPOPath1>)(distinguishedName=<GPOPath2>)... (distinguishedName=<GPOPathN>))))where <GPOPath1> and <GPOPathN> are the GPO DNs (as specified in sections 2.2.2 and 2.2.3) without the prefix "LDAP://"; all other characters are to be interpreted literally. **GPO targeted to a computer policy:** (&(!(flags:1.2.840.113556.1.4.803:=2))(gPCMachineExtensionNames=[*])((\|(distinguishedName=<GPOPath1>)(distinguishedName=<GPOPath2>)... (distinguishedName=<GPOPathN>))))where <GPOPath1> and <GPOPathN> are the GPO DNs (as specified in sections 2.2.2 and 2.2.3) without the prefix "LDAP://"; all other characters are to be interpreted literally. |
+| *Filter* | The following LDAP filter (using the representation as specified in [[RFC2254]](https://go.microsoft.com/fwlink/?LinkId=90328)) MUST be used: (\|(**distinguishedName**=<GPOPath1>)(**distinguishedName**=<GPOPath2>)... (**distinguishedName**=<GPOPathN>)) where <GPOPath1> and <GPOPathN> are the [**GPO DNs**](#gt_group-policy-object-gpo-distinguished-name-dn) (as specified in sections [2.2.2](#Section_2.2.2) and [2.2.3](#Section_2.2.3)) without the prefix "LDAP://"; all other characters are to be interpreted literally. The following LDAP filter (using the representation as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) makes the LDAP query more efficient by returning only GPOs that are enabled and contain extensions: **GPO targeted to user policy:** (&(!(flags:1.2.840.113556.1.4.803:=1))(gPCUserExtensionNames=[*])((\|(distinguishedName=<GPOPath1>)(distinguishedName=<GPOPath2>)... (distinguishedName=<GPOPathN>))))where <GPOPath1> and <GPOPathN> are the GPO DNs (as specified in sections 2.2.2 and 2.2.3) without the prefix "LDAP://"; all other characters are to be interpreted literally. **GPO targeted to a computer policy:** (&(!(flags:1.2.840.113556.1.4.803:=2))(gPCMachineExtensionNames=[*])((\|(distinguishedName=<GPOPath1>)(distinguishedName=<GPOPath2>)... (distinguishedName=<GPOPathN>))))where <GPOPath1> and <GPOPathN> are the GPO DNs (as specified in sections 2.2.2 and 2.2.3) without the prefix "LDAP://"; all other characters are to be interpreted literally. |
 | *attributes* | nTSecurityDescriptor, cn, displayName, gPCFileSysPath, versionNumber, gPCMachineExtensionNames, gPCUserExtensionNames, gPCFunctionalityVersion, flags, gPCWQLFilter, and objectClass. |
 
 The client receives a reply from the search request from the Group Policy server with one or more LDAP searchResponse messages. Those messages contain one or more **searchResultEntries**. Those **searchResultEntries** MUST contain an **objectName** DN attribute that is the GPO named by that DN. The **searchResultEntry** also MUST contain an **attributes** field with the values in Active Directory for the attributes of the GPOs that were searched for. The attributes MUST have the following format.
@@ -878,7 +878,7 @@ The client SHOULD<7> use the Network Location Awareness Service Provider (NLA) t
 
 This operation is similar to the sequences for [**policy application**](#gt_policy-application), but it is targeted only at a single [**GPO**](#gt_group-policy-object-gpo). This part of the protocol allows users to view the settings and state of an individual GPO.
 
-Attributes and files MUST be interpreted in the same way as interpreted in section [2.2.4](#Section_4.3.1) with the only difference being the search protocol sequence in the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search request. This difference is specified in the following table.
+Attributes and files MUST be interpreted in the same way as interpreted in section [2.2.4](#Section_2.2.4) with the only difference being the search protocol sequence in the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) search request. This difference is specified in the following table.
 
 | Parameter | Value |
 | --- | --- |
@@ -1041,7 +1041,7 @@ The GPO Extension Update message MUST be an [**LDAP**](#gt_lightweight-directory
 | Parameter | Value |
 | --- | --- |
 | *Entry* | [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) for the [**GPO**](#gt_group-policy-object-gpo) being updated. |
-| *attributes* | This field MUST specify the attributes **versionNumber** and either **gPCUserExtensionNames** (if user [**policy settings**](#gt_policy-setting) are being modified) or **gPCMachineExtensionNames** (if computer policy settings are being modified). The operation for each attribute specified MUST be "replace" as specified in [RFC2251]. The syntax of these attributes is specified in section [2.2.4](#Section_4.3.1). If the extension GUID of the plug-in that modified the GPO is not already present from a prior update and the tool extension is adding or updating settings, **gPCUserExtensionNames** or **gPCMachineExtensionNames** MUST be updated to append the extension GUID and tool extension GUID to the directory string. If the tool extension is removing all settings managed by this tool extension, **gPCUserExtensionNames** or **gPCMachineExtensionNames** MUST be updated to remove the extension GUID and tool extension GUID from the directory string. |
+| *attributes* | This field MUST specify the attributes **versionNumber** and either **gPCUserExtensionNames** (if user [**policy settings**](#gt_policy-setting) are being modified) or **gPCMachineExtensionNames** (if computer policy settings are being modified). The operation for each attribute specified MUST be "replace" as specified in [RFC2251]. The syntax of these attributes is specified in section [2.2.4](#Section_2.2.4). If the extension GUID of the plug-in that modified the GPO is not already present from a prior update and the tool extension is adding or updating settings, **gPCUserExtensionNames** or **gPCMachineExtensionNames** MUST be updated to append the extension GUID and tool extension GUID to the directory string. If the tool extension is removing all settings managed by this tool extension, **gPCUserExtensionNames** or **gPCMachineExtensionNames** MUST be updated to remove the extension GUID and tool extension GUID from the directory string. |
 
 <a id="Section_2.2.8.3"></a>
 #### 2.2.8.3 GPO Property Update Message
@@ -1051,7 +1051,7 @@ The GPO Property Update message MUST be an [**LDAP**](#gt_lightweight-directory-
 | Parameter | Value |
 | --- | --- |
 | *Entry* | [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) for the [**GPO**](#gt_group-policy-object-gpo) being updated. |
-| *attributes* | MUST specify one or more of the attributes defined in section [2.2.4](#Section_4.3.1). Semantics of these attributes are defined in section 2.2.4. The operation for each attribute specified MUST be "replace" as specified in [RFC2251]. |
+| *attributes* | MUST specify one or more of the attributes defined in section [2.2.4](#Section_2.2.4). Semantics of these attributes are defined in section 2.2.4. The operation for each attribute specified MUST be "replace" as specified in [RFC2251]. |
 
 <a id="Section_2.2.8.4"></a>
 #### 2.2.8.4 SOM Property Update Message
@@ -1061,7 +1061,7 @@ The SOM Property Update message MUST be an [**LDAP**](#gt_lightweight-directory-
 | Parameter | Value |
 | --- | --- |
 | *Entry* | SOM DN for the SOM being updated. |
-| *attributes* | This field MUST specify one or more of the attributes: **gpLink**: A Directory String encoded in UTF-8 as defined in [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) section 6.10 specifying a list of [**GPOs**](#gt_group-policy-object-gpo) that are associated with the [**SOM**](#gt_scope-of-management-som) and the properties of the association. The format of this string is defined in section [2.2.2](#Section_4.1.1). **gpOptions**: An LDAP INTEGER specifying properties of the SOM. The syntax of these attributes is defined in section 2.2.2. The operation for each attribute specified MUST be "replace" as specified in [RFC2251]. |
+| *attributes* | This field MUST specify one or more of the attributes: **gpLink**: A Directory String encoded in UTF-8 as defined in [[RFC2252]](https://go.microsoft.com/fwlink/?LinkId=90326) section 6.10 specifying a list of [**GPOs**](#gt_group-policy-object-gpo) that are associated with the [**SOM**](#gt_scope-of-management-som) and the properties of the association. The format of this string is defined in section [2.2.2](#Section_2.2.2). **gpOptions**: An LDAP INTEGER specifying properties of the SOM. The syntax of these attributes is defined in section 2.2.2. The operation for each attribute specified MUST be "replace" as specified in [RFC2251]. |
 
 <a id="Section_2.2.8.5"></a>
 #### 2.2.8.5 GPO Deletion Message
@@ -1201,7 +1201,7 @@ The Default Policy Source Mode is used by the client to compute the [Policy Sour
 <a id="Section_3.2.1.3"></a>
 #### 3.2.1.3 Policy Source Mode
 
-Policy Source Mode determines the [**policy sources**](#gt_policy-source) used by the client to compute the [Filtered GPO list (section 3.2.1.5)](#Section_3.2.1.4), computed on the client by searching on the policy source's hierarchy in [**Active Directory**](#gt_active-directory) to identify the associated set of [**GPOs**](#gt_group-policy-object-gpo).
+Policy Source Mode determines the [**policy sources**](#gt_policy-source) used by the client to compute the [Filtered GPO list (section 3.2.1.5)](#Section_3.2.1.5), computed on the client by searching on the policy source's hierarchy in [**Active Directory**](#gt_active-directory) to identify the associated set of [**GPOs**](#gt_group-policy-object-gpo).
 
 Policy Source Mode is assigned one of the following values on the client. The client MUST choose policy sources as described for each Policy Source Mode:
 
@@ -1211,7 +1211,7 @@ Policy Source Mode is assigned one of the following values on the client. The cl
 
 **Loopback merge mode:** The Filtered GPO list MUST be computed using two policy sources: the one for the computer account and the one for the policy target account. The GPO list obtained for the computer is appended to the GPO list for the user, and the merged list is applied to the impersonated user. The GPO list for the computer is applied later and therefore has precedence if it conflicts with settings in the user's list.
 
-The Policy Source Mode computation is as specified in section [3.2.5.1](#Section_1.3.3).
+The Policy Source Mode computation is as specified in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.1.4"></a>
 #### 3.2.1.4 GPO List
@@ -1228,7 +1228,7 @@ A GPO list is a list of [**Group Policy Objects**](#gt_group-policy-object-gpo) 
 
 **Display name:** A human-readable [**directory string**](#gt_directory-string) description of the GPO.
 
-**ExtensionList:** An array of [**CSE GUIDs**](#gt_client-side-extension-guid-cse-guid) configured in the GPO. The ExtensionList is an array of CSE GUIDs from gPCMachineExtensionNames for the computer policy application mode and an array of CSE GUIDs from gPCUserExtensionNames for the user policy application mode as specified in section [2.2.4](#Section_4.3.1).
+**ExtensionList:** An array of [**CSE GUIDs**](#gt_client-side-extension-guid-cse-guid) configured in the GPO. The ExtensionList is an array of CSE GUIDs from gPCMachineExtensionNames for the computer policy application mode and an array of CSE GUIDs from gPCUserExtensionNames for the user policy application mode as specified in section [2.2.4](#Section_2.2.4).
 
 **FunctionalityVersion:** An integer that stores the functionality version of the GPO.
 
@@ -1239,7 +1239,7 @@ A GPO list is a list of [**Group Policy Objects**](#gt_group-policy-object-gpo) 
 <a id="Section_3.2.1.5"></a>
 #### 3.2.1.5 Filtered GPO List
 
-The Filtered GPO list contains only those [**GPOs**](#gt_group-policy-object-gpo) that pass all the criteria specified in sections [3.2.5.1.1](#Section_3.2.5.1.10) through [3.2.5.1.9](#Section_3.2.5.1.9). A subset of the Filtered GPO list is computed separately for each [**Group Policy extension**](#gt_group-policy-extension) at policy application time (as specified in section [3.2.5.1.10](#Section_3.2.5.1.10)) and is then shared with each specific Group Policy extension. GPOs represented in this list have passed access checking and are a subset of those in abstract data element **GPO List**.
+The Filtered GPO list contains only those [**GPOs**](#gt_group-policy-object-gpo) that pass all the criteria specified in sections [3.2.5.1.1](#Section_3.2.5.1.1) through [3.2.5.1.9](#Section_3.2.5.1.9). A subset of the Filtered GPO list is computed separately for each [**Group Policy extension**](#gt_group-policy-extension) at policy application time (as specified in section [3.2.5.1.10](#Section_3.2.5.1.10)) and is then shared with each specific Group Policy extension. GPOs represented in this list have passed access checking and are a subset of those in abstract data element **GPO List**.
 
 <a id="Section_3.2.1.6"></a>
 #### 3.2.1.6 SOM List
@@ -1467,7 +1467,7 @@ Policy target impersonation proceeds as follows:
 - For Computer [**Policy Application**](#gt_policy-application) Mode, the [**Policy Source**](#gt_policy-source) Mode MUST be set to Normal.
 - The client application retrieves the primary token of the interactive user (the policy target) during user policy application or retrieves the machine token of the computer (the policy target) during computer policy application. It then passes the token to the Start Impersonation abstract interface as specified in [MS-DTYP] section 2.7.1.
 - The client application establishes an LDAP connection to the directory server. An LDAP bind request ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.2, Bind Operation) is sent to the directory server with the credentials of the policy target.
-- The directory server verifies the credentials, as described in [MS-AUTHSOD](#Section_1.3) section 2.5.3.1.1, and sends an LDAP bind response, as specified in [RFC2251] section 4.2.3, Bind Response, to the client application.
+- The directory server verifies the credentials, as described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md) section 2.5.3.1.1, and sends an LDAP bind response, as specified in [RFC2251] section 4.2.3, Bind Response, to the client application.
 - The client application requests an [**RPC**](#gt_remote-procedure-call-rpc) binding handle to establish a connection with the directory server by using the Directory Replication Service (DRS) Remote Protocol, as defined in [MS-DRSR](../MS-DRSR/MS-DRSR.md) section 4.1.3.
 - The directory server processes the bind request and sends a response with an RPC binding handle.
 - The client application sends a request for name translation to the server using the RPC binding handle, as specified in [MS-DRSR] section4.1.4, passing in DRS_MSG_CRACKREQ with the following settings:
@@ -1506,7 +1506,7 @@ The priority list of GPOs applicable to a policy target MUST be computed as spec
 - If the Policy Source Mode is loopback replace mode, the [**computer account**](#gt_computer-account) name and computer domain MUST be used to compute the **Filtered GPO list**. Invoke the **IDL_DRSCrackNames (Opnum 12)** RPC method ([MS-DRSR] section 4.1.4) with the **formatDesired** field set to DS_DNS_DOMAIN_NAME. Retrieve the computer's domain name and assign it to abstract element **Policy Target Domain Name**.
 - If the Policy Source Mode is loopback merge mode:
 - Compute the initial **GPO List** using the policy target and policy target domain.
-- Compute a new **GPO List** using the computer account name and computer domain. In DC Discovery and AD Connection Establishment (section [3.2.5.1.1](#Section_3.2.5.1.10)), the option LDAP_OPT_DNSDOMAIN_NAME is not set a second time if the domain controller is unchanged from the first bind.
+- Compute a new **GPO List** using the computer account name and computer domain. In DC Discovery and AD Connection Establishment (section [3.2.5.1.1](#Section_3.2.5.1.1)), the option LDAP_OPT_DNSDOMAIN_NAME is not set a second time if the domain controller is unchanged from the first bind.
 - Append the second **GPO List** to the initial **GPO List** to create the **Filtered GPO list**.
 - For any other Policy Source Mode, assign an empty list to **Filtered GPO list**.
 <a id="Section_3.2.5.1.1"></a>
@@ -1528,7 +1528,7 @@ If the method returns a nonzero error code, [**policy application**](#gt_policy-
 - *TaskInputTargetName*: Value of **Group Policy Server** ADM element.
 - *TaskInputPortNumber*: 389
 - Store the new *TaskReturnADConnection* returned from the task as the [Group Policy Client AD Connection Handle](#Section_3.2.1.23) ADM element.
-If the task returns failure and it is the first iteration, repeat from step 1. Otherwise, policy application MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_1.3.3).
+If the task returns failure and it is the first iteration, repeat from step 1. Otherwise, policy application MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_3.2.5.1).
 
 - The [**Group Policy client**](#gt_group-policy-client) invokes the task "Setting an LDAP Option on an ADConnection", as defined in [MS-ADTS] section 7.6.1.2, passing the **Group Policy Client AD Connection Handle** ADM element, and setting the options specified by the following *TaskInputOptionName* and *TaskInputOptionValue* pairs:
 - LDAP_OPT_PROTOCOL_VERSION set to 3
@@ -1566,12 +1566,12 @@ If the *TaskReturnStatus* returned is not 0 and it is the first iteration, repea
 <a id="Section_3.2.5.1.2"></a>
 ##### 3.2.5.1.2 DN Discovery
 
-The client attempts to discover the [**policy target**](#gt_policy-target) [**DN**](#gt_distinguished-name-dn) to be used to query for the [**GPOs**](#gt_group-policy-object-gpo), as specified in section [2.2.1](#Section_2.2.1). The DN for the root of the domain is extracted from the fully qualified distinguished name for the requested account by parsing the [**Unicode string**](#gt_unicode-string) until an RDN beginning with 'DC=' is found. The DN of [**domain naming context (domain NC)**](#gt_domain-naming-context-domain-nc) is stored in abstract element **Policy Target Domain DN**. If the computer's account is to be used, the [**computer account**](#gt_computer-account) name MUST be specified in DS_NT4_ACCOUNT_NAME format. If the user account is to be used, the discovery is done under impersonation of the policy target, and the user account name MUST be specified in DS_NT4_ACCOUNT_NAME format. If this message is invalid, as specified in section [2.2](#Section_2.2), [**policy application**](#gt_policy-application) MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_1.3.3).
+The client attempts to discover the [**policy target**](#gt_policy-target) [**DN**](#gt_distinguished-name-dn) to be used to query for the [**GPOs**](#gt_group-policy-object-gpo), as specified in section [2.2.1](#Section_2.2.1). The DN for the root of the domain is extracted from the fully qualified distinguished name for the requested account by parsing the [**Unicode string**](#gt_unicode-string) until an RDN beginning with 'DC=' is found. The DN of [**domain naming context (domain NC)**](#gt_domain-naming-context-domain-nc) is stored in abstract element **Policy Target Domain DN**. If the computer's account is to be used, the [**computer account**](#gt_computer-account) name MUST be specified in DS_NT4_ACCOUNT_NAME format. If the user account is to be used, the discovery is done under impersonation of the policy target, and the user account name MUST be specified in DS_NT4_ACCOUNT_NAME format. If this message is invalid, as specified in section [2.2](#Section_2.2), [**policy application**](#gt_policy-application) MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.5.1.3"></a>
 ##### 3.2.5.1.3 Domain SOM Search
 
-This procedure uses the domain controller name and the policy target [**DN**](#gt_distinguished-name-dn) that were retrieved in sections [3.2.5.1.1](#Section_3.2.5.1.10) and [3.2.5.1.2](#Section_3.2.5.1.2) for the Domain [**Scope of Management**](#gt_scope-of-management-som) search. The policy target DN retrieved MUST be parsed to form the prioritized list of SOMs. The prioritized SOM list MUST store the SOM Object type (**GPLinkOrganizationalUnit** or **GPLinkDomain**) and the DN, and is populated as follows:
+This procedure uses the domain controller name and the policy target [**DN**](#gt_distinguished-name-dn) that were retrieved in sections [3.2.5.1.1](#Section_3.2.5.1.1) and [3.2.5.1.2](#Section_3.2.5.1.2) for the Domain [**Scope of Management**](#gt_scope-of-management-som) search. The policy target DN retrieved MUST be parsed to form the prioritized list of SOMs. The prioritized SOM list MUST store the SOM Object type (**GPLinkOrganizationalUnit** or **GPLinkDomain**) and the DN, and is populated as follows:
 
 - The DN MUST be parsed to compute the parent DN.
 - The parent DN that is computed MUST be appended to the end of the SOM list.
@@ -1580,8 +1580,8 @@ This procedure uses the domain controller name and the policy target [**DN**](#g
 All of the SOMs in the domain that are discovered MUST be searched to retrieve the **gpLink** and **gpOptions** attributes as follows:
 
 - Disable LDAP_OPT_REFERRALS by passing abstract element Group Policy Client AD Connection Handle (section [3.2.1.23](#Section_3.2.1.23)), setting an LDAP Option on an ADConnection.
-- An [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) SearchRequest as specified in section [2.2.2](#Section_4.1.1) MUST be sent from the client to the [**Group Policy server**](#gt_group-policy-server), and the SearchResponse received MUST be verified to satisfy the specified requirements. The SearchResponse contains the **gpLink** and **gpOptions** attribute values for all of the SOMs.
-If there are no SOMs to search for, the protocol sequence continues at section [3.2.5.1.4](#Section_3.2.5.1.4) Site Search. If Domain SOM Search fails, the entire protocol sequence MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_1.3.3).
+- An [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) SearchRequest as specified in section [2.2.2](#Section_2.2.2) MUST be sent from the client to the [**Group Policy server**](#gt_group-policy-server), and the SearchResponse received MUST be verified to satisfy the specified requirements. The SearchResponse contains the **gpLink** and **gpOptions** attribute values for all of the SOMs.
+If there are no SOMs to search for, the protocol sequence continues at section [3.2.5.1.4](#Section_3.2.5.1.4) Site Search. If Domain SOM Search fails, the entire protocol sequence MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_3.2.5.1).
 
 <a id="Section_3.2.5.1.4"></a>
 ##### 3.2.5.1.4 Site Search
@@ -1593,23 +1593,23 @@ The site to which the client computer belongs (the SiteName) is determined by in
 - NULL for *ComputerName*.
 If the method returns ERROR_NO_SITENAME, the remainder of this message MUST be skipped and the protocol sequence MUST continue at GPO Search (section [3.2.5.1.5](#Section_3.2.5.1.5)) . The initial site named "Default-First-Site-Name" is documented in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 6.1.1.2.2.1 that specifies the Site object. If the method returns any other nonzero error code, [**policy application**](#gt_policy-application) MUST be terminated. If the method returns zero, then the [**DN**](#gt_distinguished-name-dn) of the configuration container of the domain MUST be searched for as follows:
 
-- An [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) SearchRequest as specified in section [2.2.3](#Section_3.2.5.1.4) MUST be sent from the client to [**Group Policy server**](#gt_group-policy-server), and the SearchResponse received MUST be verified to satisfy the specified requirements. The SearchResponse contains the configurationNamingContext attribute value. From this value and the SiteName value (the out parameter of the previous DsrGetSiteName method call), the [**site distinguished name (DN)**](#gt_site-distinguished-name-dn) MUST be computed by concatenating the strings "CN=", <the site name>, ",CN=Sites,", and <the DN of the configuration container>. This site DN MUST be used for the remainder of this message to retrieve the attributes of the [**site**](#gt_site) object.
+- An [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) SearchRequest as specified in section [2.2.3](#Section_2.2.3) MUST be sent from the client to [**Group Policy server**](#gt_group-policy-server), and the SearchResponse received MUST be verified to satisfy the specified requirements. The SearchResponse contains the configurationNamingContext attribute value. From this value and the SiteName value (the out parameter of the previous DsrGetSiteName method call), the [**site distinguished name (DN)**](#gt_site-distinguished-name-dn) MUST be computed by concatenating the strings "CN=", <the site name>, ",CN=Sites,", and <the DN of the configuration container>. This site DN MUST be used for the remainder of this message to retrieve the attributes of the [**site**](#gt_site) object.
 - Another LDAP SearchRequest, as specified in section 2.2.3, MUST be sent from the client to the Group Policy server to retrieve the **gpLink** and **gpOptions** attribute values.
-If this message is invalid in any way, as specified in section 2.2.3, the entire Group Policy: Core Protocol policy application sequence MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_1.3.3).
+If this message is invalid in any way, as specified in section 2.2.3, the entire Group Policy: Core Protocol policy application sequence MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_3.2.5.1).
 
 The site DN and Object type (GPLinkSite) MUST be appended to the end of the [**SOM**](#gt_scope-of-management-som) list.
 
 <a id="Section_3.2.5.1.5"></a>
 ##### 3.2.5.1.5 GPO Search
 
-This message requires the success of all previous messages that have retrieved a [**scope of management**](#gt_scope-of-management-som) and a **gpLink** that are associated with each of the SOMs, and have stored them in the SOM list. If this message is invalid, [**policy application**](#gt_policy-application) MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_1.3.3).
+This message requires the success of all previous messages that have retrieved a [**scope of management**](#gt_scope-of-management-som) and a **gpLink** that are associated with each of the SOMs, and have stored them in the SOM list. If this message is invalid, [**policy application**](#gt_policy-application) MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_3.2.5.1).
 
 The following steps MUST be used to create a prioritized list of [**GPOs**](#gt_group-policy-object-gpo):
 
 - Set Allow-Enforced-GPOs-Only to FALSE.
 - For each SOM in the SOM list, beginning with the first SOM:
 - Retrieve **gpLink** and **gpOptions** attributes of current SOM: searchRequest defined by baseObject: DN of SOM, scope: zero, filter: objectClass=*, attributes: **gpLink** and **gpOptions**.
-- The client MUST parse the **gpLink** value into a list of individual directory strings of the following format, as specified in section [2.2.2](#Section_4.1.1).
+- The client MUST parse the **gpLink** value into a list of individual directory strings of the following format, as specified in section [2.2.2](#Section_2.2.2).
 [<GPO DN>;<GPLinkOptions>]
 
 For each directory string in the list, if the decimal representation of the **GPLinkOptions** bit field does not specify that the [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) MUST be ignored, an element MUST be appended to the end of SOM GPLink list as follows:
@@ -1626,9 +1626,9 @@ For each directory string in the list, if the decimal representation of the **GP
 - For each GPO DN in the Non-enforced GPLink list, beginning with the first element, GPO DN MUST be appended to the end of the GPLink list.
 - For each GPO DN in the Enforced GPLink list, beginning with the first element, GPO DN MUST be appended to the end of the GPLink list.
 - The list of GPO DNs MUST be grouped on the basis of domain. In each domain, all of the GPO DNs in that domain MUST be placed as a logical OR in the LDAP Filter. Initialize "invalid" flag to False. While "invalid" flag is False, the next group of GPO DNs MUST be queried as follows:
-- If the current group's domain is different from that stored in abstract element **Policy Target Domain DN**, bind to the new domain using the sequence shown in section [3.2.5.1.1](#Section_3.2.5.1.10), DC Discovery and AD Connection Establishment.
+- If the current group's domain is different from that stored in abstract element **Policy Target Domain DN**, bind to the new domain using the sequence shown in section [3.2.5.1.1](#Section_3.2.5.1.1), DC Discovery and AD Connection Establishment.
 - Disable LDAP_OPT_REFERRALS, as specified in [MS-ADTS](../MS-ADTS/MS-ADTS.md) section 7.6.1.2, Setting an LDAP Option on an ADConnection.
-- Perform an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) SearchRequest as specified in section [2.2.4](#Section_4.3.1) to verify the specified requirements.
+- Perform an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) SearchRequest as specified in section [2.2.4](#Section_2.2.4) to verify the specified requirements.
 - If the LDAPMessage response buffer is empty, log an error and set "invalid" flag to True.
 - Otherwise, every LDAPMessage response buffer, along with the current domain's LDAP handle used for generating the query, can be cached within the abstract element GPLink List for later retrieval of attribute values. For each GPO in the group, the following file access sequences MUST be generated:
 - File Open request for the gpt.ini file (defined in section 2.2.4) stored on the server.
@@ -1655,7 +1655,7 @@ If there are any errors in processing the previous messages, policy application 
 - The checks specified in section [3.2.5.1.6](#Section_3.2.5.1.6) MUST be performed.
 - If the represented GPO passes access checking:
 - WMI filter evaluation (section [3.2.5.1.7](#Section_3.2.5.1.7)) can be performed.
-- If the represented GPO is considered allowed, append it to abstract element [Filtered GPO list](#Section_3.2.1.4).
+- If the represented GPO is considered allowed, append it to abstract element [Filtered GPO list](#Section_3.2.1.5).
 If there are any errors in processing the previous messages, policy application MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section 3.2.5.1.
 
 <a id="Section_3.2.5.1.6"></a>
@@ -1663,7 +1663,7 @@ If there are any errors in processing the previous messages, policy application 
 
 In this procedure, the client MUST process the [**GPO**](#gt_group-policy-object-gpo) as follows:
 
-- Check for the functionality version of the GPO. If the **gPCFunctionalityVersion** field of the [Group Policy Object Search](#Section_4.3.1) message (as defined in [MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.278) is not set to 2, the GPO MUST NOT be included in the rest of the protocol sequence. The GPO MUST be considered denied.
+- Check for the functionality version of the GPO. If the **gPCFunctionalityVersion** field of the [Group Policy Object Search](#Section_2.2.4) message (as defined in [MS-ADA1](../MS-ADA1/MS-ADA1.md) section 2.278) is not set to 2, the GPO MUST NOT be included in the rest of the protocol sequence. The GPO MUST be considered denied.
 - Check whether the GPO has been disabled. The GPO MUST be considered denied in either of the following two cases:
 - If the decimal representation of the Flags bit field is equal to 1, and if the [**policy application**](#gt_policy-application) is part of [**user policy mode**](#gt_user-policy-mode).
 - If the decimal representation of the Flags bit field is equal to 2, and if the policy application is part of [**computer policy mode**](#gt_computer-policy-mode).
@@ -1683,7 +1683,7 @@ The client MUST process the [**GPO**](#gt_group-policy-object-gpo) to evaluate t
 - NULL for the *pCtx* parameter.
 If the method call is successful, the client invokes the enumerator methods (specified in [MS-WMI] section 3.1.4.4) on the returned **IEnumWbemClassObject** object (in the *ppEnum* parameter) and ensure that there is at least one CIM object returned in the query result set.
 
-If the WMI filter cannot be evaluated due to some local error on the client, [**policy application**](#gt_policy-application) MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_1.3.3).
+If the WMI filter cannot be evaluated due to some local error on the client, [**policy application**](#gt_policy-application) MUST be terminated and an event logged using an implementation-specific mechanism, as defined in section [3.2.5.1](#Section_3.2.5.1).
 
 - If the WMI query returns no results, the GPO is considered denied; otherwise, the GPO is considered allowed.
 <a id="Section_3.2.5.1.8"></a>
@@ -1695,7 +1695,7 @@ The client performs the termination of the [**Active Directory**](#gt_active-dir
 <a id="Section_3.2.5.1.9"></a>
 ##### 3.2.5.1.9 Link Speed Discovery
 
-The client attempts to estimate the speed of the link between the client and the [**domain controller (DC)**](#gt_domain-controller-dc), as specified in section [2.2.6](#Section_2.2.6). The domain controller used MUST be the domain controller discovered in section [3.2.5.1.1](#Section_3.2.5.1.10).
+The client attempts to estimate the speed of the link between the client and the [**domain controller (DC)**](#gt_domain-controller-dc), as specified in section [2.2.6](#Section_2.2.6). The domain controller used MUST be the domain controller discovered in section [3.2.5.1.1](#Section_3.2.5.1.1).
 
 <a id="Section_3.2.5.1.10"></a>
 ##### 3.2.5.1.10 Extension Protocol Sequences
@@ -1704,11 +1704,11 @@ The **Extension List** abstract element is initialized by implementation-specifi
 
 The [**Group Policy extension**](#gt_group-policy-extension) sequence is initiated by invoking the Process Group Policy event specified in the client-side Higher-Layer Triggered Events section of the corresponding Group Policy extension specification. The associated abstract interface is specified in section [3.2.4.1](#Section_3.2.4.1) of this document.
 
-The [**Group Policy client**](#gt_group-policy-client) MUST evaluate the subset of the abstract element **Filtered GPO list** separately for each Group Policy extension by including in the subset only those [**GPOs**](#gt_group-policy-object-gpo) whose **gPCUserExtensionNames** (for user policy mode) or **gPCMachineExtensionNames** (for computer policy mode) attributes contain [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) that correspond to the Group Policy extension. If the CSE GUID corresponding to the Group Policy extension is present in **Extension List**, it is invoked using the **Implementation Identifier** field. Applicability is determined as specified in section [3.2.1.5](#Section_3.2.1.4). The Group Policy Registry Extension MUST always execute first. All other applicable Group Policy extensions in the **Extension List** MUST be loaded and executed in **Extension List** order. A failure in any Group Policy extension sequence MUST NOT affect the execution of other Group Policy extensions.
+The [**Group Policy client**](#gt_group-policy-client) MUST evaluate the subset of the abstract element **Filtered GPO list** separately for each Group Policy extension by including in the subset only those [**GPOs**](#gt_group-policy-object-gpo) whose **gPCUserExtensionNames** (for user policy mode) or **gPCMachineExtensionNames** (for computer policy mode) attributes contain [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) that correspond to the Group Policy extension. If the CSE GUID corresponding to the Group Policy extension is present in **Extension List**, it is invoked using the **Implementation Identifier** field. Applicability is determined as specified in section [3.2.1.5](#Section_3.2.1.5). The Group Policy Registry Extension MUST always execute first. All other applicable Group Policy extensions in the **Extension List** MUST be loaded and executed in **Extension List** order. A failure in any Group Policy extension sequence MUST NOT affect the execution of other Group Policy extensions.
 
 As a result, each Group Policy extension sequence only generates traffic that references GPOs in which that Group Policy extension's CSE GUID was present in the **gPCUserExtensionNames** attribute for the [**user policy mode**](#gt_user-policy-mode), and only those GPOs with the CSE GUID present in **gPCMachineExtensionNames** for the [**computer policy mode**](#gt_computer-policy-mode).
 
-The behavior of a given Group Policy extension is specific to each Group Policy extension and is specified in the documentation of that Group Policy extension. A failure in any Group Policy extension sequence does not cause the [**policy application**](#gt_policy-application) sequence to fail. Failure simply means that Group Policy clients are not able to enforce settings that are associated with that specific Group Policy extension. For example, if the Group Policy: IP Security (IPSec) Protocol Extension (as specified in [MS-GPIPSEC](#Section_5)) sequence fails, the computer will not be configured according to the network administrator's IP security [**policy settings**](#gt_policy-setting). This might mean that the computer cannot access some network resources that are secured through IP security. Other Group Policy extensions are not directly affected by the failure of the Group Policy: IP Security (IPSec) Protocol Extension. For example, if the Group Policy: IP Security (IPSec) Protocol Extension fails, the Group Policy: Scripts Extension Encoding (as specified in [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md)) protocol sequence MUST still be invoked by the client.
+The behavior of a given Group Policy extension is specific to each Group Policy extension and is specified in the documentation of that Group Policy extension. A failure in any Group Policy extension sequence does not cause the [**policy application**](#gt_policy-application) sequence to fail. Failure simply means that Group Policy clients are not able to enforce settings that are associated with that specific Group Policy extension. For example, if the Group Policy: IP Security (IPSec) Protocol Extension (as specified in [MS-GPIPSEC](../MS-GPIPSEC/MS-GPIPSEC.md)) sequence fails, the computer will not be configured according to the network administrator's IP security [**policy settings**](#gt_policy-setting). This might mean that the computer cannot access some network resources that are secured through IP security. Other Group Policy extensions are not directly affected by the failure of the Group Policy: IP Security (IPSec) Protocol Extension. For example, if the Group Policy: IP Security (IPSec) Protocol Extension fails, the Group Policy: Scripts Extension Encoding (as specified in [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md)) protocol sequence MUST still be invoked by the client.
 
 If the determined Link Speed (section [3.2.5.1.9](#Section_3.2.5.1.9)) is below an implementation defined threshold, an implementation SHOULD NOT<21> invoke any Group Policy extension sequence that is bandwidth intensive.
 
@@ -1733,7 +1733,7 @@ Non-enforced GPOs in abstract element **Filtered GPO list** are processed in the
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
 
-**Computer Periodic Refresh timer**: When the Computer Periodic Refresh timer expires, the client sets the [Policy Application Mode](#Section_3.2.1.12) to Computer and attempts to apply the policy, as specified in section [3.2.5.1](#Section_1.3.3). The client also attempts to restart the timer.
+**Computer Periodic Refresh timer**: When the Computer Periodic Refresh timer expires, the client sets the [Policy Application Mode](#Section_3.2.1.12) to Computer and attempts to apply the policy, as specified in section [3.2.5.1](#Section_3.2.5.1). The client also attempts to restart the timer.
 
 **User Periodic Refresh timer**: When the User Periodic Refresh timer expires, the client sets the Policy Application Mode to User and attempts to apply the policy for that user as specified in section 3.2.5.1. The client also attempts to restart the timer.
 
@@ -1766,7 +1766,7 @@ A local event that indicates that [**policy application**](#gt_policy-applicatio
 <a id="Section_3.3.1"></a>
 ### 3.3.1 Abstract Data Model
 
-The [**administrative tool**](#gt_administrative-tool) abstract data model contains the [**Group Policy server**](#gt_group-policy-server) model defined in section [3.1.1](#Section_3.3.1). It also contains the following concepts:
+The [**administrative tool**](#gt_administrative-tool) abstract data model contains the [**Group Policy server**](#gt_group-policy-server) model defined in section [3.1.1](#Section_3.1.1). It also contains the following concepts:
 
 - Group Policy Protocol Administrative Tool (section [3.3.1.1](#Section_3.3.1.1))
 - Group Policy Extension Administrative Plug-In (section [3.3.1.2](#Section_3.3.1.2))
@@ -1836,12 +1836,12 @@ Parameters to the Group Policy Creation event are:
 <a id="Section_3.3.4.2"></a>
 #### 3.3.4.2 Group Policy Property Update
 
-The Group Policy property update occurs whenever an administrator uses a [**Group Policy extension's**](#gt_group-policy-extension)Policy Administration protocol to change properties on a [**GPO**](#gt_group-policy-object-gpo). This triggers a GPO Property Update (section [2.2.8.3](#Section_3.3.4.2)) message.
+The Group Policy property update occurs whenever an administrator uses a [**Group Policy extension's**](#gt_group-policy-extension)Policy Administration protocol to change properties on a [**GPO**](#gt_group-policy-object-gpo). This triggers a GPO Property Update (section [2.2.8.3](#Section_2.2.8.3)) message.
 
 <a id="Section_3.3.4.3"></a>
 #### 3.3.4.3 SOM Property Update
 
-The [**scope of management (SOM)**](#gt_scope-of-management-som) property update occurs whenever an administrator uses a [**Group Policy extension's**](#gt_group-policy-extension) Policy Administration protocol to change Group Policy properties on an SOM. This triggers an SOM Property Update Message (section [2.2.8.4](#Section_3.3.4.3)).
+The [**scope of management (SOM)**](#gt_scope-of-management-som) property update occurs whenever an administrator uses a [**Group Policy extension's**](#gt_group-policy-extension) Policy Administration protocol to change Group Policy properties on an SOM. This triggers an SOM Property Update Message (section [2.2.8.4](#Section_2.2.8.4)).
 
 Parameters to the **SOM Property Update** event are:
 
@@ -1876,7 +1876,7 @@ If the user policy settings are being modified then both the GPO container versi
 
 If the computer policy settings are being modified then both the GPO container version and the GPO file system version for the machine GPO version part MUST be updated as mentioned previously.
 
-Issue a GPO Property Update event (section [3.3.5.3](#Section_3.3.4.2)). This message MUST specify the **versionNumber** attribute set to the value of the GPO container version in the modifyRequest portion of the GPO Property Update event. The GPO Property Update event itself issues a GPO File System Version Update (section [3.3.5.4](#Section_3.3.5.4)) that MUST specify the GPO file system version.
+Issue a GPO Property Update event (section [3.3.5.3](#Section_3.3.5.3)). This message MUST specify the **versionNumber** attribute set to the value of the GPO container version in the modifyRequest portion of the GPO Property Update event. The GPO Property Update event itself issues a GPO File System Version Update (section [3.3.5.4](#Section_3.3.5.4)) that MUST specify the GPO file system version.
 
 <a id="Section_3.3.4.6"></a>
 #### 3.3.4.6 Group Policy Deletion
@@ -1924,7 +1924,7 @@ The following messages make up the remainder of the GPO Creation messages:
 - Create Directory request for the directory GPO Path.
 - Modify the security descriptor on the directory to the owner, primary group, and [**DACL**](#gt_discretionary-access-control-list-dacl) as specified in the **ntSecurityDescriptor** GPO attribute using an implementation-specific method.<24>
 - Create File request for the file [**GPO path**](#gt_group-policy-object-gpo-path)\gpt.ini.
-- Write File request to write the contents as defined in section [2.2.4](#Section_4.3.1) with the required section, "General"; the key, "Version"; and the value, 0 (integer).
+- Write File request to write the contents as defined in section [2.2.4](#Section_2.2.4) with the required section, "General"; the key, "Version"; and the value, 0 (integer).
 - Create Directory request for the directory user scoped GPO path.
 - Create Directory request for the directory [**computer-scoped GPO path**](#gt_75cdc562-983e-442d-9387-54845be74fcc).
 Any failures from the file operations mean that the overall GPO Creation Message (section 2.2.8.1) is invalid, and the sequence previously mentioned MUST be terminated.
@@ -1932,7 +1932,7 @@ Any failures from the file operations mean that the overall GPO Creation Message
 <a id="Section_3.3.5.2"></a>
 #### 3.3.5.2 GPO Extension Update
 
-Whenever an [**administrative tool**](#gt_administrative-tool) invokes a [**Group Policy extension**](#gt_group-policy-extension) for the abstract element **Administered GPO** and that extension modifies the [**GPO**](#gt_group-policy-object-gpo), the administrative tool invokes the GPO Extension Update sequence, which produces the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message (as defined in the specification of the GPO Extension Update Message, section [2.2.8.2](#Section_3.3.5.2)) from the client to the server. The GPO attribute **versionNumber** is incremented according to the current value associated with the "Version" key in the <GPO path>\gpt.ini file.
+Whenever an [**administrative tool**](#gt_administrative-tool) invokes a [**Group Policy extension**](#gt_group-policy-extension) for the abstract element **Administered GPO** and that extension modifies the [**GPO**](#gt_group-policy-object-gpo), the administrative tool invokes the GPO Extension Update sequence, which produces the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message (as defined in the specification of the GPO Extension Update Message, section [2.2.8.2](#Section_2.2.8.2)) from the client to the server. The GPO attribute **versionNumber** is incremented according to the current value associated with the "Version" key in the <GPO path>\gpt.ini file.
 
 If the value of the modifyResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure.
 
@@ -1941,7 +1941,7 @@ The GPO File System Version Update (section [3.3.5.4](#Section_3.3.5.4)) file ac
 <a id="Section_3.3.5.3"></a>
 #### 3.3.5.3 GPO Property Update
 
-Whenever an [**administrative tool**](#gt_administrative-tool) modifies the properties of the abstract element **Administered GPO**, it produces the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message (as defined in the specification of the [**GPO**](#gt_group-policy-object-gpo) Property Update Message section [2.2.8.3](#Section_3.3.4.2)) from the client to the server.
+Whenever an [**administrative tool**](#gt_administrative-tool) modifies the properties of the abstract element **Administered GPO**, it produces the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message (as defined in the specification of the [**GPO**](#gt_group-policy-object-gpo) Property Update Message section [2.2.8.3](#Section_2.2.8.3)) from the client to the server.
 
 If the value of the modifyResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure.
 
@@ -1966,7 +1966,7 @@ The following file access messages make up the [**GPO file system version**](#gt
 <a id="Section_3.3.5.5"></a>
 #### 3.3.5.5 SOM Property Update
 
-Whenever an [**administrative tool**](#gt_administrative-tool) modifies the properties of the SOM, it produces the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message (as specified in section [2.2.8.4](#Section_3.3.4.3)) from the client to the server.
+Whenever an [**administrative tool**](#gt_administrative-tool) modifies the properties of the SOM, it produces the [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message (as specified in section [2.2.8.4](#Section_2.2.8.4)) from the client to the server.
 
 If the value of the modifyResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure.
 
@@ -2005,14 +2005,14 @@ For each returned object, if the **objectClass** attribute is equal to "containe
 
 The following steps make up the remainder of GPO Deletion:
 
-- A domain [**SOM**](#gt_scope-of-management-som) search as defined in section [2.2.2](#Section_4.1.1) except for these fields:
+- A domain [**SOM**](#gt_scope-of-management-som) search as defined in section [2.2.2](#Section_2.2.2) except for these fields:
 | Parameter | Value |
 | --- | --- |
 | *baseObject* | LDAP DN for the root of the domain. |
 | *Scope* | MUST be the whole subtree (2). |
 | *Filter* | The following LDAP filter (using the representation as specified in [RFC2254]) MUST be used: (&(\|(objectcategory=domaindns)(objectcategory=organizationalUnit))(gplink=*)) |
 
-- A site search as defined in the first part of section [2.2.3](#Section_3.2.5.1.4) that retrieves the **configurationNamingContext**. The second search is identical except for these fields:
+- A site search as defined in the first part of section [2.2.3](#Section_2.2.3) that retrieves the **configurationNamingContext**. The second search is identical except for these fields:
 | Parameter | Value |
 | --- | --- |
 | *baseObject* | cn=Sites,<LDAP DN for the configurationNamingContext of the domain.> |
@@ -2024,7 +2024,7 @@ The following steps make up the remainder of GPO Deletion:
 <a id="Section_3.3.5.7"></a>
 #### 3.3.5.7 GPO Link Creation and Update
 
-Whenever an [**administrative tool**](#gt_administrative-tool) creates a link from a [**GPO**](#gt_group-policy-object-gpo) to a [**SOM**](#gt_scope-of-management-som), the "gpLink" attribute on the SOM is updated, which produces an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message from the client to the server (as defined in section [2.2.8.4](#Section_3.3.4.3)).
+Whenever an [**administrative tool**](#gt_administrative-tool) creates a link from a [**GPO**](#gt_group-policy-object-gpo) to a [**SOM**](#gt_scope-of-management-som), the "gpLink" attribute on the SOM is updated, which produces an [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) modifyRequest message from the client to the server (as defined in section [2.2.8.4](#Section_2.2.8.4)).
 
 The result of modifyRequest is a modifyResponse message in reply, as defined in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.6. The **resultCode** field value determines a failure or success for the message. If the value of the modifyResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure.
 
@@ -2036,7 +2036,7 @@ Parameters to the GPO Link Creation event are:
 | [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) | The distinguished name for the GPO to be added to the GPO Link list. |
 | GPO Link list | A list of GPO and GPO Link Options as defined in the "gpLink" attribute on the object referred to by the SOM DN. |
 | GPO Link position | A GPO Link position is specified that defines the link order for the GPO. |
-| GPO Link Options | A GPO Link Options is specified. The value for GPO Link Options is defined in the "gpLink" description in section [2.2.2](#Section_4.1.1). |
+| GPO Link Options | A GPO Link Options is specified. The value for GPO Link Options is defined in the "gpLink" description in section [2.2.2](#Section_2.2.2). |
 
 The GPO DN and GPO Link Options specified MUST be inserted in the GPO Link list at the position specified by the GPO Link position parameter or at the end of the GPO Link List if GPO Link position is unspecified. A directory string as defined in the "gpLink" description in section 2.2.2 MUST be created by enumerating the GPO Link list elements in order. The directory string is used as the attribute value in the "SOM Property Update Message", defined in section 2.2.8.4.
 
@@ -2045,7 +2045,7 @@ The [**link order**](#gt_link-order) for a GPO can be updated by combining a GPO
 <a id="Section_3.3.5.8"></a>
 #### 3.3.5.8 GPO Link Deletion
 
-Whenever an administrative tool deletes a link from a [**GPO**](#gt_group-policy-object-gpo) to a [**SOM**](#gt_scope-of-management-som), the "gpLink" attribute on the SOM is updated, which produces an LDAP modifyRequest message from the client to the server (as defined in section [2.2.8.4](#Section_3.3.4.3)).
+Whenever an administrative tool deletes a link from a [**GPO**](#gt_group-policy-object-gpo) to a [**SOM**](#gt_scope-of-management-som), the "gpLink" attribute on the SOM is updated, which produces an LDAP modifyRequest message from the client to the server (as defined in section [2.2.8.4](#Section_2.2.8.4)).
 
 The result of modifyRequest is a modifyResponse message in reply, as defined in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325) section 4.6. The **resultCode** field value determines a failure or success for the message. If the value of the modifyResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure.
 
@@ -2057,19 +2057,19 @@ Parameters to the GPO Link Deletion event are:
 | GPO DN | The distinguished name for the GPO to be deleted from the GPO Link list. |
 | GPO Link list | A list of GPO and GPO Link Options as defined in the "gpLink" attribute on the object referred to by the SOM DN. |
 
-The [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) specified MUST be located by comparing the GPO DN parameter against the GPO DN in each GPO Link in the GPO Link list. If the GPO DN is located in the list, it MUST be removed from the GPO Link list. A directory string as defined in the "gpLink" description in section [2.2.2](#Section_4.1.1) MUST be created by enumerating the GPO Link list elements in order. The directory string is used as the attribute value in the SOM Property Update Message, defined in section 2.2.8.4.
+The [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) specified MUST be located by comparing the GPO DN parameter against the GPO DN in each GPO Link in the GPO Link list. If the GPO DN is located in the list, it MUST be removed from the GPO Link list. A directory string as defined in the "gpLink" description in section [2.2.2](#Section_2.2.2) MUST be created by enumerating the GPO Link list elements in order. The directory string is used as the attribute value in the SOM Property Update Message, defined in section 2.2.8.4.
 
 <a id="Section_3.3.5.9"></a>
 #### 3.3.5.9 Organizational Unit Creation
 
-Whenever an administrative tool creates an Organizational Unit, it produces the LDAP addRequest message (as specified in section [2.2.8.6](#Section_2.2.8.1)) from the client to the server.
+Whenever an administrative tool creates an Organizational Unit, it produces the LDAP addRequest message (as specified in section [2.2.8.6](#Section_2.2.8.6)) from the client to the server.
 
 If the value of the addResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure and this protocol sequence MUST proceed to an LDAP UnBindRequest.
 
 <a id="Section_3.3.5.10"></a>
 #### 3.3.5.10 Organizational Unit Deletion
 
-Whenever an administrative tool deletes an organizational unit, it produces the LDAP delRequest message (as specified in section [2.2.8.7](#Section_2.2.8.5)) from the client to the server.
+Whenever an administrative tool deletes an organizational unit, it produces the LDAP delRequest message (as specified in section [2.2.8.7](#Section_2.2.8.7)) from the client to the server.
 
 If the value of the delResponse message's **resultCode** is integer 0, it indicates success. Any other **resultCode** value indicates a failure and this protocol sequence MUST proceed to an LDAP UnBindRequest.
 
@@ -2166,7 +2166,7 @@ This section describes the response to the Site Search message sent in section [
 
 This section describes the second Site Search message sent to the [**Group Policy server**](#gt_group-policy-server). This message requests the [**scope of management**](#gt_scope-of-management-som) of the site in which the [**computer account**](#gt_computer-account) is located. The baseObject value contains the [**distinguished name (DN)**](#gt_distinguished-name-dn) of the site.
 
-The site distinguished_name is computed from the site name combined with the configurationNamingContext value obtained in section [4.2.2](#Section_4.1). The site to which the client computer belongs (the **SiteName**) is detailed in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.6. In this example, the computer policy target account belongs to the site "NA-WA-RED". In this example, the distinguished_name is "CN=NA-WA-RED,CN=Sites,CN=Configuration,DC=test,DC=contoso,DC=com". For more details, see section [2.2.3](#Section_3.2.5.1.4).
+The site distinguished_name is computed from the site name combined with the configurationNamingContext value obtained in section [4.2.2](#Section_4.2.2). The site to which the client computer belongs (the **SiteName**) is detailed in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.6. In this example, the computer policy target account belongs to the site "NA-WA-RED". In this example, the distinguished_name is "CN=NA-WA-RED,CN=Sites,CN=Configuration,DC=test,DC=contoso,DC=com". For more details, see section [2.2.3](#Section_2.2.3).
 
 | Attribute | Value |
 | --- | --- |
@@ -2179,19 +2179,19 @@ The site distinguished_name is computed from the site name combined with the con
 | filter | (objectClass=*) |
 | attributes | gpLink, gpOptions |
 
-The response to the preceding message is identical to the response for the Domain SOM Search message as described in the example in section [4.1.2](#Section_4.1).
+The response to the preceding message is identical to the response for the Domain SOM Search message as described in the example in section [4.1.2](#Section_4.1.2).
 
 <a id="Section_4.3"></a>
 ## 4.3 GPO Search Message and Reply
 
-The following sections describe the message exchange with a [**Group Policy server**](#gt_group-policy-server) in which a client queries the GPOs that are associated with SOMs, as defined in section [2.2.4](#Section_4.3.1).
+The following sections describe the message exchange with a [**Group Policy server**](#gt_group-policy-server) in which a client queries the GPOs that are associated with SOMs, as defined in section [2.2.4](#Section_2.2.4).
 
 In this example, the process is initiated with a Site Search message sent to the Group Policy server. The server replies with the configurationNamingContext. This configurationNamingContext is used in a second Site Search message. The process ends with receipt of the **SOM** for the site to which the computer account belongs.
 
 <a id="Section_4.3.1"></a>
 ### 4.3.1 GPO Search Message
 
-The following table lists the values of attributes that are sent to the [**Group Policy server**](#gt_group-policy-server) in the GPO Search message (section [2.2.4](#Section_4.3.1)). The query is sent requesting all the GPOs matching under the subtree of "cn=policies,cn=system,DC=test,DC= contoso,DC=com". The GPO paths passed in the filter are as obtained in the response for section [4.1.2](#Section_4.1) and reply for section [4.2.3](#Section_4.2.3).
+The following table lists the values of attributes that are sent to the [**Group Policy server**](#gt_group-policy-server) in the GPO Search message (section [2.2.4](#Section_2.2.4)). The query is sent requesting all the GPOs matching under the subtree of "cn=policies,cn=system,DC=test,DC= contoso,DC=com". The GPO paths passed in the filter are as obtained in the response for section [4.1.2](#Section_4.1.2) and reply for section [4.2.3](#Section_4.2.3).
 
 | Attribute | Value |
 | --- | --- |
@@ -2207,9 +2207,9 @@ The following table lists the values of attributes that are sent to the [**Group
 <a id="Section_4.3.2"></a>
 ### 4.3.2 GPO Search Reply Message
 
-The following table lists the values of attributes that are returned from an LDAP search ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) that was part of a GPO Search (section [2.2.4](#Section_4.3.1)). In this example, the GPO that is returned is named Default Domain Policy and has a GPO GUID of 31B2F340-016D-11D2-945F-00C04FB984F9. The Computer section of the GPO contains settings for the Group Policy: Registry Extension Encoding (as specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md)) and the Group Policy: Scripts Extension Encoding (as specified in [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md)) client-side plug-ins. The User section of the GPO contains settings for the Group Policy Registry Extension Administrative plug-in and the Administrative Templates administrative plug-in.
+The following table lists the values of attributes that are returned from an LDAP search ([[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) that was part of a GPO Search (section [2.2.4](#Section_2.2.4)). In this example, the GPO that is returned is named Default Domain Policy and has a GPO GUID of 31B2F340-016D-11D2-945F-00C04FB984F9. The Computer section of the GPO contains settings for the Group Policy: Registry Extension Encoding (as specified in [MS-GPREG](../MS-GPREG/MS-GPREG.md)) and the Group Policy: Scripts Extension Encoding (as specified in [MS-GPSCR](../MS-GPSCR/MS-GPSCR.md)) client-side plug-ins. The User section of the GPO contains settings for the Group Policy Registry Extension Administrative plug-in and the Administrative Templates administrative plug-in.
 
-The [**GPO**](#gt_group-policy-object-gpo) with GUID "{31B2F340-016D-11D2-945F-00C04FB984F9}" is one of two default GPOs defined on a domain. Default GPOs are described in [MS-GPOD](#Section_1.3) section 1.1.9.
+The [**GPO**](#gt_group-policy-object-gpo) with GUID "{31B2F340-016D-11D2-945F-00C04FB984F9}" is one of two default GPOs defined on a domain. Default GPOs are described in [MS-GPOD](../MS-GPOD/MS-GPOD.md) section 1.1.9.
 
 | Attribute | Value |
 | --- | --- |
@@ -2229,7 +2229,7 @@ The [**GPO**](#gt_group-policy-object-gpo) with GUID "{31B2F340-016D-11D2-945F-0
 <a id="Section_4.4.1"></a>
 ### 4.4.1 WMI Filter Search Message
 
-The following table lists the values of attributes that are sent to the [**Group Policy server**](#gt_group-policy-server) for WMI Filter Search message (section [2.2.5](#Section_2.2.5)). The WMI filter is obtained from the value of attribute gPCWQLFilter in the GPO Search Reply Messages, as specified in [2.2.4](#Section_4.3.1). This is the WMI FILTER ID value as described under the **gPCWQLFilter** attribute.
+The following table lists the values of attributes that are sent to the [**Group Policy server**](#gt_group-policy-server) for WMI Filter Search message (section [2.2.5](#Section_2.2.5)). The WMI filter is obtained from the value of attribute gPCWQLFilter in the GPO Search Reply Messages, as specified in [2.2.4](#Section_2.2.4). This is the WMI FILTER ID value as described under the **gPCWQLFilter** attribute.
 
 | Attribute | Value |
 | --- | --- |
@@ -2275,7 +2275,7 @@ In this message, the query is for the "Default Domain Policy" with the GPO DN of
 | filter | (objectClass=*) |
 | attributes | nTSecurityDescriptor, cn, displayName, gPCFileSysPath, versionNumber, gPCMachineExtensionNames, gPCUserExtensionNames, gPCFunctionalityVersion, flags, and gPCWQLFilter |
 
-The response for the preceding message is identical to the reply described in section [4.3.2](#Section_4.1).
+The response for the preceding message is identical to the reply described in section [4.3.2](#Section_4.3.2).
 
 <a id="Section_4.6"></a>
 ## 4.6 GPO Creation Message
@@ -2323,7 +2323,7 @@ The following operations are involved:
 - Create Directory request for directory: \\GPSvr1.test.contoso.com \sysvol\test.contoso.com\Policies\{1FE2ABF4-613E-4980-BA93-74F7B206A6C1}
 - Modify the security descriptor on the directory to the value of the **ntSecurityDescriptor** [**Active Directory**](#gt_active-directory) [**GPO**](#gt_group-policy-object-gpo) attribute using an implementation-specific method.
 - Create File request for file: \\GPSvr1.test.contoso.com \sysvol\test.contoso.com\Policies\{1FE2ABF4-613E-4980-BA93-74F7B206A6C1}\gpt.ini
-- Write File request to write the contents of file: \\GPSvr1.test.contoso.com \sysvol\test.contoso.com\Policies\{1FE2ABF4-613E-4980-BA93-74F7B206A6C1}\gpt.ini, as defined in section [2.2.4](#Section_4.3.1) with the required section, "General"; the key, "Version"; and the value, "0".
+- Write File request to write the contents of file: \\GPSvr1.test.contoso.com \sysvol\test.contoso.com\Policies\{1FE2ABF4-613E-4980-BA93-74F7B206A6C1}\gpt.ini, as defined in section [2.2.4](#Section_2.2.4) with the required section, "General"; the key, "Version"; and the value, "0".
 - Close request for the opened file.
 - Create Directory request for directory: \\GPSvr1.test.contoso.com \sysvol\test.contoso.com\Policies\{1FE2ABF4-613E-4980-BA93-74F7B206A6C1}\User
 - Create Directory request for directory: \\GPSvr1.test.contoso.com \sysvol\test.contoso.com\Policies\{1FE2ABF4-613E-4980-BA93-74F7B206A6C1}\Machine
@@ -2363,7 +2363,7 @@ Modify the security descriptor on the directory to the value of the **nTSecurity
 <a id="Section_4.9"></a>
 ## 4.9 SOM Property Update Message
 
-In this example, the GPO with the DN of "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=test,DC=contoso,DC=com" associated with the SOM of "OU=Finance OU,DC=test,DC=contoso,DC=com" is being enforced. This message is defined in section [2.2.8.4](#Section_3.3.4.3).
+In this example, the GPO with the DN of "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=test,DC=contoso,DC=com" associated with the SOM of "OU=Finance OU,DC=test,DC=contoso,DC=com" is being enforced. This message is defined in section [2.2.8.4](#Section_2.2.8.4).
 
 | Parameter | Value |
 | --- | --- |
@@ -2391,7 +2391,7 @@ Examples of such confidential information are passwords, asset account identifie
 
 It is important for implementers to note that the [**GPO**](#gt_group-policy-object-gpo) is made up of Active Directory objects under [**GPO DN**](#gt_group-policy-object-gpo-distinguished-name-dn) and file system objects (files and directories) under the domain-based DFS path [**GPO path**](#gt_group-policy-object-gpo-path). Access to both the GPO DN and GPO path of a GPO needs to be secured to secure access to a GPO.
 
-It is important for implementers to note that a person with the appropriate permission on the [**Group Policy server**](#gt_group-policy-server) can modify the GPO settings. As specified in section [3.2.5.1.1](#Section_3.2.5.1.10), the client locates the Group Policy server - a domain controller (as specified in section [3.2.1.13](#Section_3.2.1.13)) by invoking the DsrGetDcNameEx2 method ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.3.1. A domain controller, by definition, is a [**trusted third party**](#gt_trusted-third-party) for the domain.
+It is important for implementers to note that a person with the appropriate permission on the [**Group Policy server**](#gt_group-policy-server) can modify the GPO settings. As specified in section [3.2.5.1.1](#Section_3.2.5.1.1), the client locates the Group Policy server - a domain controller (as specified in section [3.2.1.13](#Section_3.2.1.13)) by invoking the DsrGetDcNameEx2 method ([MS-NRPC](../MS-NRPC/MS-NRPC.md) section 3.5.4.3.1. A domain controller, by definition, is a [**trusted third party**](#gt_trusted-third-party) for the domain.
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -2552,7 +2552,7 @@ Upon success, the method returns a string in the output buffer, which has the fo
 
 <18> Section 3.2.5.1.5: Windows clients obtain a reference to the security token by using InitializeSecurityContext (ISC) [[MSDN-InitializeSecurityContext]](https://go.microsoft.com/fwlink/?LinkId=378277) and AcceptSecurityContext (ASC) [[MSDN-AcceptSecurityContext]](https://go.microsoft.com/fwlink/?LinkId=378278).
 
-<19> Section 3.2.5.1.5: Windows clients obtain a reference to the security token by calling OpenThreadToken (described in [[MSDN-OpenThreadToken]](https://go.microsoft.com/fwlink/?LinkId=211787)) on the current operating thread. A token is created with security impersonation level SecurityImpersonation as described in [MS-LSAD](#Section_5) section 2.2.3.5, Security Impersonation Level.
+<19> Section 3.2.5.1.5: Windows clients obtain a reference to the security token by calling OpenThreadToken (described in [[MSDN-OpenThreadToken]](https://go.microsoft.com/fwlink/?LinkId=211787)) on the current operating thread. A token is created with security impersonation level SecurityImpersonation as described in [MS-LSAD](../MS-LSAD/MS-LSAD.md) section 2.2.3.5, Security Impersonation Level.
 
 <20> Section 3.2.5.1.6: Windows clients perform access checking by calling the AccessCheckByType Win32 API, described in [[MSDN-AccessCheckByType]](https://go.microsoft.com/fwlink/?LinkId=213727).
 

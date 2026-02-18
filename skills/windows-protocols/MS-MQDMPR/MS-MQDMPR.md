@@ -441,13 +441,13 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-DTCO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transaction Protocol](#Section_3.1.1.14)".
+[MS-DTCO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transaction Protocol](../MS-DTCO/MS-DTCO.md)".
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
 [MS-ERREF] Microsoft Corporation, "[Windows Error Codes](../MS-ERREF/MS-ERREF.md)".
 
-[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](#Section_5)".
+[MS-LSAD] Microsoft Corporation, "[Local Security Authority (Domain Policy) Remote Protocol](../MS-LSAD/MS-LSAD.md)".
 
 [MS-MQCN] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Change Notification Protocol](../MS-MQCN/MS-MQCN.md)".
 
@@ -459,7 +459,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-MQSD] Microsoft Corporation, "[Message Queuing (MSMQ): Directory Service Discovery Protocol](../MS-MQSD/MS-MQSD.md)".
 
-[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](#Section_5)".
+[MS-SAMR] Microsoft Corporation, "[Security Account Manager (SAM) Remote Protocol (Client-to-Server)](../MS-SAMR/MS-SAMR.md)".
 
 [RFC1035] Mockapetris, P., "Domain Names - Implementation and Specification", STD 13, RFC 1035, November 1987, [https://www.rfc-editor.org/info/rfc1035](https://go.microsoft.com/fwlink/?LinkId=90264)
 
@@ -512,7 +512,7 @@ All MSMQ protocol implementations that are co-located on a [**queue manager**](#
 
 Figure 1: Relationships between MSMQ protocols and the shared abstract data model defined in this specification
 
-In addition, these protocol implementations can generate the internal events specified in section [3.1.7](#Section_3.2.7). This protocol defines the actions that the queue manager performs on the shared state to process these internal events.
+In addition, these protocol implementations can generate the internal events specified in section [3.1.7](#Section_3.1.7). This protocol defines the actions that the queue manager performs on the shared state to process these internal events.
 
 <a id="Section_1.5"></a>
 ## 1.5 Prerequisites/Preconditions
@@ -546,7 +546,7 @@ None.
 
 This document references commonly used data types as defined in [MS-DTYP](../MS-DTYP/MS-DTYP.md).
 
-Unless otherwise qualified, instances of **GUID** in sections 2 and [3](../MS-DTYP/MS-DTYP.md) refer to [MS-DTYP] section 2.3.4.
+Unless otherwise qualified, instances of **GUID** in sections 2 and [3](#Section_3) refer to [MS-DTYP] section 2.3.4.
 
 Unless otherwise qualified, instances of **SID** in sections 2 and 3 refer to [MS-DTYP] section 2.4.2.
 
@@ -563,7 +563,7 @@ None.
 <a id="Section_2.3"></a>
 ## 2.3 Directory Service Schema Elements
 
-[**MSMQ**](#gt_message-queuing) protocols access a [**directory**](#gt_directory) via events as specified in section [3.1.7.1](../MS-MQDSSM/MS-MQDSSM.md). The Directory Service schema elements for objects accessed via these events are defined in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) section 2.4. <1>
+[**MSMQ**](#gt_message-queuing) protocols access a [**directory**](#gt_directory) via events as specified in section [3.1.7.1](#Section_3.1.7.1). The Directory Service schema elements for objects accessed via these events are defined in [MS-MQDSSM](../MS-MQDSSM/MS-MQDSSM.md) section 2.4. <1>
 
 <a id="Section_3"></a>
 # 3 Protocol Details
@@ -1483,13 +1483,13 @@ The default expiration of this timer SHOULD be 1 hour. The expiration time MAY b
 <a id="Section_3.1.2.3"></a>
 #### 3.1.2.3 Waiting Message Read Timer
 
-This timer regulates the amount of time that the [**queue manager**](#gt_queue-manager-qm) waits before generating a [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.2.3) event.
+This timer regulates the amount of time that the [**queue manager**](#gt_queue-manager-qm) waits before generating a [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.7.3.5) event.
 
 The queue manager initializes this timer during processing of a [Waiting Message Read Timer Start (section 3.1.7.3.4)](#Section_3.1.7.3.4) event. The initialization MUST provide the duration of the timer and a [WaitingMessageReadOperation (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance.
 
 This timer MUST expire after the duration specified in the initialization. If the specified duration is Infinite, this timer MUST NOT expire.
 
-On expiration, the queue manager generates a [Waiting Message Read Timer Expired (section 3.1.6.3)](#Section_3.1.2.3) event with the following arguments:
+On expiration, the queue manager generates a [Waiting Message Read Timer Expired (section 3.1.6.3)](#Section_3.1.6.3) event with the following arguments:
 
 - *iReader* := the **WaitingMessageReadOperation** ADM element instance that was provided at initialization.
 <a id="Section_3.1.2.4"></a>
@@ -1513,7 +1513,7 @@ The initialization MUST be triggered with the following argument:
 - *iProvisioning*: A Boolean value that indicates whether the initialization is part of the [**queue manager**](#gt_queue-manager-qm) provisioning. If yes, the value is TRUE; otherwise, the value is FALSE. More details about system initialization are given in [MS-MQSO] section 6.6.
 The queue manager MUST perform the following actions to initialize the abstract data model.
 
-- The queue manager MUST call the LsarOpenPolicy2 ([MS-LSAD](#Section_5) section 3.1.4.4.1) method with the following parameter values:
+- The queue manager MUST call the LsarOpenPolicy2 ([MS-LSAD](../MS-LSAD/MS-LSAD.md) section 3.1.4.4.1) method with the following parameter values:
 - *SystemName* := an empty string
 - *DesiredAccess* := POLICY_VIEW_LOCAL_INFORMATION ([MS-LSAD] section 2.2.1.1.2)
 - Other parameters as specified in [MS-LSAD] section 3.1.4.4.1
@@ -1582,7 +1582,7 @@ The queue manager MUST perform the following actions to initialize the abstract 
 - Else if the *rStatus* returned by the Read Directory event is set to **DirectoryOperationResult.AttributeNotFound**:
 - Create an **Enterprise** ADM element instance referred to as *newEnterpriseObject* and set *newEnterpriseObject*.**NonLDAPCapableQueueManagerNotification** to True.
 - Set **LocalQueueManager.EnterpriseReference** to *newEnterpriseObject*.
-- Start the [Directory Sites Update Timer (section 3.1.2.1)](#Section_3.1.2.1) and the [Directory Site Gates Update Timer (section 3.1.2.2)](#Section_3.1.6.2).
+- Start the [Directory Sites Update Timer (section 3.1.2.1)](#Section_3.1.2.1) and the [Directory Site Gates Update Timer (section 3.1.2.2)](#Section_3.1.2.2).
 - Create [Queue (section 3.1.1.2)](#Section_3.1.1.2) ADM element instances with the **QueueType** ADM attributes set to System that represent the three system queues specified following:
 - **LocalQueueManager.SystemDeadletterQueue**
 - **LocalQueueManager.TransactionalDeadletterQueue**
@@ -1595,7 +1595,7 @@ The queue manager MUST perform the following actions to initialize the abstract 
 - Set *iQueue*.**State** := **Waiting**
 - Else if *iQueue*.**DestinationFormatName** specifies a non-HTTP format name and the **HardenedSecurity** ADM attribute of the **LocalQueueManager** ADM element is **True**:
 - Set *iQueue*.**State** := **Locked**
-- The queue manager initializes itself as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5). During Initialization ([MS-DTCO] section 3.5.3), the [**resource manager**](#gt_resource-manager-rm) initiates recovery of [**transactions**](#gt_transaction) and notifies the queue manager regarding the outcome of reenlistment. The following sections specify processing rules for these operations:
+- The queue manager initializes itself as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5). During Initialization ([MS-DTCO] section 3.5.3), the [**resource manager**](#gt_resource-manager-rm) initiates recovery of [**transactions**](#gt_transaction) and notifies the queue manager regarding the outcome of reenlistment. The following sections specify processing rules for these operations:
 - [DTC Reenlistment Commit (section 3.1.4.9)](#Section_3.1.4.9)
 - [DTC Reenlistment Abort (section 3.1.4.10)](#Section_3.1.4.10)
 - [DTC Reenlistment Timeout (section 3.1.4.11)](#Section_3.1.4.11)
@@ -1720,7 +1720,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions
 <a id="Section_3.1.4.6"></a>
 #### 3.1.4.6 DTC Transaction Prepare
 
-The [**queue manager**](#gt_queue-manager-qm) is notified by this event when the DTC [**transaction**](#gt_transaction) is prepared. This occurs when the queue manager is acting as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5) and has enlisted in the DTC transaction.
+The [**queue manager**](#gt_queue-manager-qm) is notified by this event when the DTC [**transaction**](#gt_transaction) is prepared. This occurs when the queue manager is acting as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5) and has enlisted in the DTC transaction.
 
 This event MUST be generated with the following argument:
 
@@ -1736,13 +1736,13 @@ The queue manager MUST perform the following actions to process this event:
 - If the returned *rStatus* is set to MQ_OK:
 - If **TXUSER_ENLISTMENT_MTAG_PREPAREREQ**.**fSinglePhase** is set to zero:
 - Send a **TXUSER_ENLISTMENT_MTAG_PREPAREREQDONE** user message ([MS-DTCO] section 2.2.10.2.2.12) to its local transaction manager.
-- Otherwise, generate a [DTC Transaction Commit (section 3.1.4.7)](#Section_3.1.4.4) event, with the *lTxMessage* argument set to *lTxMessage*.
+- Otherwise, generate a [DTC Transaction Commit (section 3.1.4.7)](#Section_3.1.4.7) event, with the *lTxMessage* argument set to *lTxMessage*.
 - Otherwise, if the returned *rStatus* is not set to MQ_OK:
-- Generate a [DTC Transaction Abort (section 3.1.4.8)](#Section_3.1.4.5) event, with the *lTxMessage* argument set to *lTxMessage*.
+- Generate a [DTC Transaction Abort (section 3.1.4.8)](#Section_3.1.4.8) event, with the *lTxMessage* argument set to *lTxMessage*.
 <a id="Section_3.1.4.7"></a>
 #### 3.1.4.7 DTC Transaction Commit
 
-The [**queue manager**](#gt_queue-manager-qm) is notified by this event when the DTC transaction is committed. This occurs when the queue manager is acting as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5) and has enlisted in the DTC transaction.
+The [**queue manager**](#gt_queue-manager-qm) is notified by this event when the DTC transaction is committed. This occurs when the queue manager is acting as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5) and has enlisted in the DTC transaction.
 
 This event MUST be generated with the following argument:
 
@@ -1758,7 +1758,7 @@ The queue manager MUST perform the following actions to process this event:
 <a id="Section_3.1.4.8"></a>
 #### 3.1.4.8 DTC Transaction Abort
 
-The [**queue manager**](#gt_queue-manager-qm) is notified by this event when the DTC [**transaction**](#gt_transaction) is aborted. This occurs when the queue manager is acting as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5) and has enlisted in the DTC transaction.
+The [**queue manager**](#gt_queue-manager-qm) is notified by this event when the DTC [**transaction**](#gt_transaction) is aborted. This occurs when the queue manager is acting as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5) and has enlisted in the DTC transaction.
 
 This event MUST be generated with the following argument:
 
@@ -1774,7 +1774,7 @@ The queue manager MUST perform the following actions to process this event:
 <a id="Section_3.1.4.9"></a>
 #### 3.1.4.9 DTC Reenlistment Commit
 
-The [**queue manager**](#gt_queue-manager-qm) acts as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5) and is notified by this event when it processes the Receiving a TXUSER_REENLIST_MTAG_REENLIST_COMMITTED Message ([MS-DTCO] section 3.5.5.3.1.1) event as part of processing the Recover Transaction ([MS-DTCO] section 3.5.7.1) event.
+The [**queue manager**](#gt_queue-manager-qm) acts as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5) and is notified by this event when it processes the Receiving a TXUSER_REENLIST_MTAG_REENLIST_COMMITTED Message ([MS-DTCO] section 3.5.5.3.1.1) event as part of processing the Recover Transaction ([MS-DTCO] section 3.5.7.1) event.
 
 The Recover Transaction event is signaled with an associated transaction object, referred to here as *iTransactionObject*.
 
@@ -1785,7 +1785,7 @@ The queue manager performs the following steps to process this event:
 <a id="Section_3.1.4.10"></a>
 #### 3.1.4.10 DTC Reenlistment Abort
 
-The [**queue manager**](#gt_queue-manager-qm) acts as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5) and is notified by this event when it processes the Receiving a TXUSER_REENLIST_MTAG_REENLIST_ABORTED Message ([MS-DTCO] section 3.5.5.3.1.2) event as part of processing the Recover Transaction ([MS-DTCO] section 3.5.7.1) event.
+The [**queue manager**](#gt_queue-manager-qm) acts as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5) and is notified by this event when it processes the Receiving a TXUSER_REENLIST_MTAG_REENLIST_ABORTED Message ([MS-DTCO] section 3.5.5.3.1.2) event as part of processing the Recover Transaction ([MS-DTCO] section 3.5.7.1) event.
 
 The Recover Transaction event is signaled with an associated transaction object, referred to here as *iTransactionObject*.
 
@@ -1796,7 +1796,7 @@ The queue manager performs the following steps to process this event:
 <a id="Section_3.1.4.11"></a>
 #### 3.1.4.11 DTC Reenlistment Timeout
 
-The [**queue manager**](#gt_queue-manager-qm) acts as a **Resource Manager** ([MS-DTCO](#Section_3.1.1.14) section 3.5) and is notified by this event when it processes the Reenlistment Timeout ([MS-DTCO] section 3.5.7.5) event.
+The [**queue manager**](#gt_queue-manager-qm) acts as a **Resource Manager** ([MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.5) and is notified by this event when it processes the Reenlistment Timeout ([MS-DTCO] section 3.5.7.5) event.
 
 The queue manager performs the following steps to process this event:
 
@@ -1910,7 +1910,7 @@ This event MUST be generated with the following arguments:
 - None.
 The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions to process this event:
 
-- Generate a [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.2.3) event with the following arguments:
+- Generate a [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.7.3.5) event with the following arguments:
 - *iReader* := *iReader*
 - *iStatus* := set to MQ_ERROR_IO_TIMEOUT (0xC00E001B).
 <a id="Section_3.1.7"></a>
@@ -2044,7 +2044,7 @@ The queue manager MUST perform the following actions to process this event:
 - If the user referenced by the SID in **OwnerSid** is not a domain user, **OwnerSid** MUST be set to the well-known SID with string representation S-1-5-7 (relative identifier SECURITY_ANONYMOUS_LOGON_RID combined with identifier authority SECURITY_NT_AUTHORITY).
 - If the **FinalSecurity.Dacl** field was not updated in step 7:
 - Let **WorldAccess**, **OwnerAccess**, **MachineAccess**, and **AnonymousAccess** be **MQQUEUEACCESSMASK** ([MS-MQMQ] section 2.2.24) enumerated values initialized to be zero.
-- If **OwnerSid** is a guest SID (equal to the SID designated by DOMAIN_USER_RID_GUEST, as specified in [MS-SAMR](#Section_5) section 2.2.1.14) or the user referenced by the SID in **OwnerSid** is not a domain user, **WorldAccess** MUST be set to MQSEC_QUEUE_GENERIC_ALL. Otherwise, **WorldAccess** MUST be set to (MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS), and **OwnerAccess** MUST be set to MQSEC_QUEUE_GENERIC_ALL.
+- If **OwnerSid** is a guest SID (equal to the SID designated by DOMAIN_USER_RID_GUEST, as specified in [MS-SAMR](../MS-SAMR/MS-SAMR.md) section 2.2.1.14) or the user referenced by the SID in **OwnerSid** is not a domain user, **WorldAccess** MUST be set to MQSEC_QUEUE_GENERIC_ALL. Otherwise, **WorldAccess** MUST be set to (MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS), and **OwnerAccess** MUST be set to MQSEC_QUEUE_GENERIC_ALL.
 - If **MachineSid** is nonzero, **MachineAccess** MUST be set to (MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS).
 - If messages can be sent to this queue using the Message Queuing (MSMQ): SOAP Reliable Messaging Protocol (SRMP) [MC-MQSRM](../MC-MQSRM/MC-MQSRM.md), MQSEC_WRITE_MESSAGE SHOULD<20> be added (bitwise ORed) to the current value of **WorldAccess**, and **AnonymousAccess** SHOULD be set to MQSEC_WRITE_MESSAGE.
 - An **ACCESS_ALLOWED_ACE** ([MS-DTYP] section 2.4.4.2) structure with a **Mask** field set to **WorldAccess** and containing the well-known SID with string representation S-1-1-0 (relative identifier SECURITY_WORLD_RID combined with identifier authority SECURITY_WORLD_SID_AUTHORITY) MUST be added to the **FinalSecurity.Dacl** field.
@@ -2511,7 +2511,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions
 - Take no further action.
 - Set *iQueue* to *iQueueDesc*.**QueueReference**.
 - Define *iPosition* as a [MessagePosition (section 3.1.1.11)](#Section_3.1.1.11) ADM element reference.
-- Generate a [Seek Available Message Position With Id (section 3.1.7.3.3)](#Section_3.1.7.3.2) event with the following arguments:
+- Generate a [Seek Available Message Position With Id (section 3.1.7.3.3)](#Section_3.1.7.3.3) event with the following arguments:
 - *iQueue* := *iQueue*
 - *iLookupid* := *iLookupid*
 - *iPeekOperation* := *iPeekOperation*
@@ -2717,7 +2717,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions
 - For each [WaitingMessageReadOperation (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance, referred to as *readOp*, in *queueDesc*.**WaitingMessageReadOperationCollection**:
 - If *readOp*.**Tag** does not equal NULL and is equal to *iTag*
 - Remove the **WaitingMessageReadOperation** ADM element instance referenced by *readOp* from *iQueue*.**WaitingMessageReadOperationCollection**.
-- Generate the [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.2.3) event with the following arguments:
+- Generate the [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.7.3.5) event with the following arguments:
 - *iReader* := *readOp*
 - *iStatus* := *iStatus*
 - Set *rStatus* to MQ_OK (0x00000000), and take no further action.
@@ -2849,7 +2849,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST delegate the processing of th
 
 This event MUST be generated with the following argument:
 
-- *iQueryHandle*: The **HANDLE** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.16) that was generated by the [Read Directory Begin (section 3.1.7.1.21)](#Section_3.1.7.1.20) event.
+- *iQueryHandle*: The **HANDLE** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.16) that was generated by the [Read Directory Begin (section 3.1.7.1.21)](#Section_3.1.7.1.21) event.
 **Return Values**:
 
 - *rStatus*: A **DirectoryOperationResult** that indicates the result of this directory operation.
@@ -2861,7 +2861,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST delegate the processing of th
 
 This event MUST be generated with the following argument:
 
-*iQueryHandle*: The **HANDLE** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.16) that was generated by the [Read Directory Begin (section 3.1.7.1.21)](#Section_3.1.7.1.20) event.
+*iQueryHandle*: The **HANDLE** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.2.16) that was generated by the [Read Directory Begin (section 3.1.7.1.21)](#Section_3.1.7.1.21) event.
 
 **Return Value**:
 
@@ -3413,7 +3413,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions
 | **PrivacyLevel** | **Optional** |
 | **Transactional** | **False** |
 | **MulticastAddress** | NULL |
-| **Security** | A **SECURITY_DESCRIPTOR** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) structure, generated as specified in section [3.1.7.1.3.1](../MS-DTYP/MS-DTYP.md). |
+| **Security** | A **SECURITY_DESCRIPTOR** ([MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.4.6) structure, generated as specified in section [3.1.7.1.3.1](#Section_3.1.7.1.3.1). |
 | **BasePriority** | zero |
 
 <a id="Section_3.1.7.1.34"></a>
@@ -3584,7 +3584,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions
 - *iReader* := *readOp*
 - *iTimeout* = *iTimeout*
 - Wait for one of the following events to occur:
-- [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.2.3) (where *iReader* is equivalent to the *readOp* created preceding):
+- [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.7.3.5) (where *iReader* is equivalent to the *readOp* created preceding):
 - Set *rStatus* to *rStatus* returned from the Waiting Message Read Timer Stop event.
 - [Waiting Message Read Satisfied (section 3.1.7.3.6)](#Section_3.1.7.3.6) (where *iReader* is equivalent to the *readOp* created preceding):
 - Set *rStatus* to Success.
@@ -3705,7 +3705,7 @@ The [**queue manager**](#gt_queue-manager-qm) MUST perform the following actions
 This event MUST be generated with the following arguments:
 
 - *iReader*: A reference to the [WaitingMessageReadOperation (section 3.1.1.10)](#Section_3.1.1.10) ADM element instance that was added to the **WaitingMessageReadOperationCollection** ADM attribute of an [OpenQueueDescriptor (section 3.1.1.16)](#Section_3.1.1.16) ADM element instance.
-- *iTimeout*: The amount of time to wait, in seconds, before generating a [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.2.3) event.
+- *iTimeout*: The amount of time to wait, in seconds, before generating a [Waiting Message Read Timer Stop (section 3.1.7.3.5)](#Section_3.1.7.3.5) event.
 **Return Values**:
 
 - None.
@@ -4207,7 +4207,7 @@ For the versions of Windows listed at the beginning of this section and not cite
 
 <23> Section 3.1.7.1.19: For Windows XP and Windows Server 2003, the queue manager performs the following actions instead of generating a Send Change Notification ([MS-MQCN] section 3.3.4.1) event:
 
-- Define *iComputerName* as a string that contains the NetBIOS name of the computer that hosts the queue. This can be extracted from **Pathname** of the [Queue (section 3.1.1.2)](../MS-MQMQ/MS-MQMQ.md) ADM element instance representing that queue. The processing rules for this extraction can be inferred from [MS-MQMQ] section 2.1.1.
+- Define *iComputerName* as a string that contains the NetBIOS name of the computer that hosts the queue. This can be extracted from **Pathname** of the [Queue (section 3.1.1.2)](#Section_3.1.1.2) ADM element instance representing that queue. The processing rules for this extraction can be inferred from [MS-MQMQ] section 2.1.1.
 - Generate a Read Directory (section 3.1.7.1.20) event with the following arguments:
 - *iDirectoryObjectType* := "QueueManager"
 - *iFilter* : = An array of the following attribute-filter expressions:

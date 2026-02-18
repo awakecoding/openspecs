@@ -321,7 +321,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-PRCR] Microsoft Corporation, "[Peer Channel Custom Resolver Protocol](../MC-PRCR/MC-PRCR.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [MS-PNRP] Microsoft Corporation, "[Peer Name Resolution Protocol (PNRP) Version 4.0](../MS-PNRP/MS-PNRP.md)".
 
@@ -366,7 +366,7 @@ Following are some example ChannelType URIs in the mesh "BobsNewsFlash":
 <a id="Section_1.3.3"></a>
 ### 1.3.3 Discovery
 
-The Peer Channel Protocol uses a [**discovery service**](#gt_discovery-service) as a repository to store and retrieve each [**node's**](#gt_node) **Endpoint Information** (section [3.1.1](#Section_3.1)). All nodes participating in a given [**mesh**](#gt_mesh) use the same discovery service. A node uses the discovery service to obtain connection information for a few nodes already present in the mesh that are attempting to join the mesh. The node uses this information to establish [**neighbor connections**](#gt_neighbor-connection). The discovery service can return [**endpoints**](#gt_endpoint) that are not currently active due to transient conditions. Connecting nodes can handle such error conditions by requesting additional connection information from the discovery service and then retrying the connect operations.
+The Peer Channel Protocol uses a [**discovery service**](#gt_discovery-service) as a repository to store and retrieve each [**node's**](#gt_node) **Endpoint Information** (section [3.1.1](#Section_3.1.1)). All nodes participating in a given [**mesh**](#gt_mesh) use the same discovery service. A node uses the discovery service to obtain connection information for a few nodes already present in the mesh that are attempting to join the mesh. The node uses this information to establish [**neighbor connections**](#gt_neighbor-connection). The discovery service can return [**endpoints**](#gt_endpoint) that are not currently active due to transient conditions. Connecting nodes can handle such error conditions by requesting additional connection information from the discovery service and then retrying the connect operations.
 
 <a id="Section_1.3.4"></a>
 ### 1.3.4 Connecting to Other Nodes
@@ -634,7 +634,7 @@ nillable="true" type="tns:IPAddress" />
 <a id="Section_2.2.2.3"></a>
 #### 2.2.2.3 Referral Structure
 
-A Referral contains the **Endpoint Information** (section [3.1.1](#Section_3.1)) of a [**node**](#gt_node). For information about how Referrals are used, see section [3.1](#Section_3.1). Note that the Referral structure itself does not include any information about the node that is sending or receiving the Referral; it contains information only about the referred node.
+A Referral contains the **Endpoint Information** (section [3.1.1](#Section_3.1.1)) of a [**node**](#gt_node). For information about how Referrals are used, see section [3.1](#Section_3.1). Note that the Referral structure itself does not include any information about the node that is sending or receiving the Referral; it contains information only about the referred node.
 
 <xs:complexType name="Referral">
 
@@ -825,7 +825,7 @@ Namespace: http://schemas.datacontract.org/2004/07/System.ServiceModel.Channels
 | Element | Description |
 | --- | --- |
 | LeavingMesh | The disconnecting [**node**](#gt_node) is leaving the [**mesh**](#gt_mesh). |
-| NotUsefulNeighbor | The receiving node that is receiving the message has been determined to be less useful than other [**neighbor**](#gt_neighbor) nodes, as given by the sending node. See LinkUtility message in section [2.2.3.8](#Section_3.1.5.6). |
+| NotUsefulNeighbor | The receiving node that is receiving the message has been determined to be less useful than other [**neighbor**](#gt_neighbor) nodes, as given by the sending node. See LinkUtility message in section [2.2.3.8](#Section_2.2.3.8). |
 | DuplicateNeighbor | A connection to the receiving node already exists. |
 | DuplicateNodeId | A connection to a node with the same **NodeId** as the receiving node already exists. |
 | NodeBusy | The receiving node is already serving up to the maximum number of allowed peers. |
@@ -864,7 +864,7 @@ Where:
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 RequestSecurityToken Message
 
-The RequestSecurityToken (RST) message is sent to initiate the process of authenticating a neighbor connection. The [PeerHashToken](#Section_2.2.3.1.1) element is used as the CustomToken binding of this message. The schema of this message is specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584).
+The RequestSecurityToken (RST) message is sent to initiate the process of authenticating a neighbor connection. The [PeerHashToken](#Section_2.2.2.1) element is used as the CustomToken binding of this message. The schema of this message is specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584).
 
 <wsdl:operation msc:isInitiating="true"
 
@@ -890,7 +890,7 @@ message="tns:PeerService_ProcessRequestSecurityToken_OutputMessage" />
 <a id="Section_2.2.3.1.1"></a>
 ##### 2.2.3.1.1 Computing the PeerHashToken
 
-The [PeerHashToken](#Section_2.2.3.1.1) contains only an [**authenticator**](#gt_authenticator) element. The authenticator element carries a base64-encoded security token as the text [**node**](#gt_node). The security token is an **HMACSHA256** value that MUST be computed as follows.
+The [PeerHashToken](#Section_2.2.2.1) contains only an [**authenticator**](#gt_authenticator) element. The authenticator element carries a base64-encoded security token as the text [**node**](#gt_node). The security token is an **HMACSHA256** value that MUST be computed as follows.
 
 - NodeSecurityToken = **HMACSHA256**(HASHEDKEY)
 - HASHEDKEY = (**SHA256**(**PWD**)+**PUBLICKEY**)
@@ -904,7 +904,7 @@ Where:
 <a id="Section_2.2.3.2"></a>
 #### 2.2.3.2 RequestSecurityTokenResponse Message
 
-The RequestSecurityTokenResponse message is sent to complete the process of authenticating a neighbor connection. The message carries the validation results of the [**requesting node's**](#gt_requesting-node) [PeerHashToken](#Section_2.2.3.1.1) element by the [**responding node**](#gt_responding-node). It also contains the PeerHashToken of the responding node. The schema of this message is specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) section 5.
+The RequestSecurityTokenResponse message is sent to complete the process of authenticating a neighbor connection. The message carries the validation results of the [**requesting node's**](#gt_requesting-node) [PeerHashToken](#Section_2.2.2.1) element by the [**responding node**](#gt_responding-node). It also contains the PeerHashToken of the responding node. The schema of this message is specified in [[WSTrust]](https://go.microsoft.com/fwlink/?LinkId=90584) section 5.
 
 | Element | Legal value |
 | --- | --- |
@@ -1153,7 +1153,7 @@ The receiving [**node**](#gt_node) MUST store the following information:
 - MessageDispatcher callback: The callback that accepts incoming messages for processing. Local processing of this message is handed off to this callback by the node.
 - **(Optional) X.509 Certificate for Transport Security**: An X.509 certificate for the key that is used to establish TLS over TCP connections. Required only if certificates are used to secure mesh connections.
 - **(Optional) X.509 Certificate for Message Signing**: An X.509 certificate for the key that is used to sign messages. Needed only if message authentication is enabled on mesh messages.
-- **(Optional) password**: A password that is used in security handshakes. See the [RequestSecurityToken](#Section_4.1.2) message. Needed only if passwords are used to secure the mesh.
+- **(Optional) password**: A password that is used in security handshakes. See the [RequestSecurityToken](#Section_3.1.5.1) message. Needed only if passwords are used to secure the mesh.
 - **Discovery service information**: Information used to connect to the discovery service. This MUST include the service location, port number, transport, and any applicable security settings.
 - **IdealNeighborCount**: The optimal number of neighbor connections for a node to maintain. This value SHOULD be set to 3.
 - **MaxNeighborCount**: The maximum number of neighbor connections for each node. This value SHOULD be set to 7.
@@ -1165,7 +1165,7 @@ The receiving [**node**](#gt_node) MUST store the following information:
 - **MessageID Cache timer**: A periodic timer used to initiate MessageId cache maintenance. The period of this timer SHOULD be 1 minute.
 **Note** This removes previously seen MessageIds to maintain a reasonable cache size.
 
-- **Maintenance timer**: Used to regularly run the maintenance cycle, which examines the neighbor connection set and tunes it for optimal throughput. The period of this timer SHOULD be set as specified in section [3.1.2](#Section_3.2.2).
+- **Maintenance timer**: Used to regularly run the maintenance cycle, which examines the neighbor connection set and tunes it for optimal throughput. The period of this timer SHOULD be set as specified in section [3.1.2](#Section_3.1.2).
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
 
@@ -1214,7 +1214,7 @@ For each new connection where the **ConnectionState** data element is set to the
 A [**node**](#gt_node) MUST provide (to higher-layer applications and protocols) three logical operations that can be invoked:
 
 - Opening a node (section [3.1.4.1](#Section_3.1.4.1))
-- Receiving a message (section [3.1.4.2](#Section_2.2.3))
+- Receiving a message (section [3.1.4.2](#Section_3.1.4.2))
 - Closing a node (section [3.1.4.3](#Section_3.1.4.3))
 <a id="Section_3.1.4.1"></a>
 #### 3.1.4.1 Opening a Node
@@ -1224,7 +1224,7 @@ When a higher-layer application or protocol triggers the Open event, the [**node
 - The node MUST create a TCP [**endpoint**](#gt_endpoint) for accepting node connection requests. It MUST be created on the configured ListenIPAddress and port (see section [3.1.3.1](#Section_3.1.3.1)).
 - The node MUST create a [PeerNodeAddress](#Section_2.2.2.2) structure to describe the node endpoint. It MUST be created using the [ChannelType](#Section_3551c30075a147ef8bf10cbce6d7661f) URI and configured ListenIPAddress for the node.
 - The node MUST query the [**discovery service**](#gt_discovery-service) to determine whether the [**Peer Channel**](#gt_peer-channel) protocol client will use referrals to discover new [**neighbors**](#gt_neighbor) and store the information in the **Referral Sharing mode**. (See MC-PRCR (section 2.2.3.6).)
-- The node SHOULD trigger the Maintenance timer to establish connectivity with other nodes, as specified in section [3.1.2](#Section_3.2.2).
+- The node SHOULD trigger the Maintenance timer to establish connectivity with other nodes, as specified in section [3.1.2](#Section_3.1.2).
 - The node MUST publish the PeerNodeAddress in the discovery service using the [**mesh**](#gt_mesh) name that was configured (see section 3.1.3.1) by the application.
 - The node MUST monitor changes in the configured ListenIPAddresses and update the discovery service immediately following address change notifications.
 If any aforementioned operations fail, the protocol SHOULD return to the higher-level application an error indicating the cause of the failure, and it MUST abort the operation, reverting any of the actions that were completed before the failure.
@@ -1240,7 +1240,7 @@ For each incoming message, a LinkUtilityIndex MUST be updated. A LinkUtility mes
 
 The receiver of a LinkUtility message MUST check the values of the **Useful** and **Total** fields in the message to make sure that they are within the valid boundaries specified in section [3.1.5.6.1.1](#Section_3.1.5.6.1.1).
 
-Processing and error handling for each message MUST be done by following the specification for each message type as specified in section [3.1.5](#Section_3.1).
+Processing and error handling for each message MUST be done by following the specification for each message type as specified in section [3.1.5](#Section_3.1.5).
 
 <a id="Section_3.1.4.3"></a>
 #### 3.1.4.3 Closing a Node
@@ -1304,8 +1304,8 @@ The receiving [**node**](#gt_node) MUST follow the following sequence of rules f
 - If the value of the **ConnectionState** data element for the connection is not equal to the Created state, the node MUST abort the [**neighbor connection**](#gt_neighbor-connection) and stop the protocol.
 - If the [**mesh**](#gt_mesh) is not configured to use password-based authentication, the receiving node MUST abort the neighbor connection and terminate the protocol.
 - The receiving node MUST compute the [**requesting node's**](#gt_requesting-node) [**Authenticator**](#gt_authenticator) token using the password and the requesting node's public key. The requesting node's public key is available to the [**responding node**](#gt_responding-node) as a result of TLS over TCP.
-- If the bytewise comparison of computed token and the token retrieved from the message in the [PeerHashToken](#Section_2.2.3.1.1) **Authenticator** element do not match, the node MUST abort the connection and terminate the protocol.
-- The receiving node MUST send a [RequestSecurityTokenResponse](#Section_4.1.2) message (to the requesting node) that contains the status of the validation and the responding node's Authenticator token computed using its password and the responding node's public key.
+- If the bytewise comparison of computed token and the token retrieved from the message in the [PeerHashToken](#Section_2.2.2.1) **Authenticator** element do not match, the node MUST abort the connection and terminate the protocol.
+- The receiving node MUST send a [RequestSecurityTokenResponse](#Section_2.2.3.2) message (to the requesting node) that contains the status of the validation and the responding node's Authenticator token computed using its password and the responding node's public key.
 - The receiving node transitions the value of the **ConnectionState** data element for the neighbor connection to the Authenticated state and starts the [Connect Handshake timer](#Section_3.1.6.2).
 In case of failures of any kind (communication, timing, security token validation), both nodes MUST drop the neighbor connection.
 
@@ -1314,8 +1314,8 @@ In case of failures of any kind (communication, timing, security token validatio
 
 The receiving [**node**](#gt_node) MUST follow the following sequence of rules for processing this message:
 
-- If the value of the **ConnectionState** data element for the connection is not equal to the Created state, or the node is not the initiator of the connection, the node MUST abort the connection and stop the protocol. This message MUST only be received as a response to a [RequestSecurityToken](#Section_4.1.2) message sent by the initiator of the [**neighbor connection**](#gt_neighbor-connection) immediately after establishing the connection.
-- Verify that the result of security token validation is success. If the validation token is not properly formed (see section [2.2.3.2](#Section_4.1.2)), the receiving node MUST abort the connection and stop the protocol.
+- If the value of the **ConnectionState** data element for the connection is not equal to the Created state, or the node is not the initiator of the connection, the node MUST abort the connection and stop the protocol. This message MUST only be received as a response to a [RequestSecurityToken](#Section_3.1.5.1) message sent by the initiator of the [**neighbor connection**](#gt_neighbor-connection) immediately after establishing the connection.
+- Verify that the result of security token validation is success. If the validation token is not properly formed (see section [2.2.3.2](#Section_2.2.3.2)), the receiving node MUST abort the connection and stop the protocol.
 - The receiving node MUST retrieve the [**Authenticator**](#gt_authenticator) token (contained as a base64-encoded value in the Authenticator element at the path Envelope/Body/RequestSecurityTokenResponse/RequestedSecurityToken/PeerHashToken in the message).
 - The receiving node MUST compute the sender's Authenticator token using the sender's public key and the password.
 - The receiving node compares the Authenticator tokens computed in steps 3 and 4. If the byte-wise comparison of these Authenticator tokens fails, the receiving node MUST abort the connection and stop the protocol.
@@ -1436,7 +1436,7 @@ A receiving [**node**](#gt_node) MUST process the [Refuse](#Section_3.1.5.4) mes
 
 - If the value of the **ConnectionState** data element for the [**neighbor connection**](#gt_neighbor-connection) is not equal to the Authenticated state, or the receiving [**neighbor**](#gt_neighbor) is not the initiator of the connection, the connection MUST be aborted and the protocol terminated.
 - If the [RefuseReason](#Section_2.2.2.4) specified in the message is not valid, the [Referrals](#Section_2.2.2.3) MUST not be used.
-- Otherwise, the receiving node SHOULD cache the Referrals received in the message in its [Referral cache](#Section_3.1).
+- Otherwise, the receiving node SHOULD cache the Referrals received in the message in its [Referral cache](#Section_3.1.1).
 - The receiving node MUST close the connection.
 <a id="Section_3.1.5.5"></a>
 #### 3.1.5.5 Disconnect
@@ -1471,7 +1471,7 @@ A receiving [**node**](#gt_node) MUST process a [Disconnect](#Section_3.1.5.5) m
 
 - If the [**neighbor connection**](#gt_neighbor-connection) is not in the Connected state, the connection MUST be aborted.
 - If the [DisconnectReason](#Section_2.2.2.5) identified in the message is illegal, the connection MUST be aborted.
-- The receiving node SHOULD cache the [Referrals](#Section_2.2.2.3) received in the message in its [Referral cache](#Section_3.1).
+- The receiving node SHOULD cache the [Referrals](#Section_2.2.2.3) received in the message in its [Referral cache](#Section_3.1.1).
 - The receiving node MUST close the connection.
 <a id="Section_3.1.5.6"></a>
 #### 3.1.5.6 LinkUtility
@@ -1669,7 +1669,7 @@ The algorithm MUST ensure that the node has at least IdealNeighborCount neighbor
 
 The Maintenance algorithm MUST prune excess connections by sending a [Disconnect](#Section_3.1.5.5) message. The **Reason** element MUST be set to "NotUsefulNeighbor".
 
-When new connections are required, the node SHOULD<8> [**discover**](#gt_30378073-aa2b-4e99-b2f4-25087e14e83e) nodes to connect to by examining the [Referral cache](#Section_3.1) returned from previous connection attempts. If the Referral Sharing mode is turned OFF or if the local Referral cache is empty, it MUST use the [**discovery service**](#gt_discovery-service) to locate nodes.
+When new connections are required, the node SHOULD<8> [**discover**](#gt_30378073-aa2b-4e99-b2f4-25087e14e83e) nodes to connect to by examining the [Referral cache](#Section_3.1.1) returned from previous connection attempts. If the Referral Sharing mode is turned OFF or if the local Referral cache is empty, it MUST use the [**discovery service**](#gt_discovery-service) to locate nodes.
 
 <a id="Section_3.1.6.4.1"></a>
 ##### 3.1.6.4.1 Maintenance Algorithm
@@ -1678,7 +1678,7 @@ The follow procedure SHOULD be used during maintenance to ensure that a [**node*
 
 - If the node has a [**neighbor**](#gt_neighbor) count equal to IdealNeighborCount, the node MUST skip to step 4.
 - If the neighbor count is greater than IdealNeighborCount, the node MUST perform the [Pruning](#Section_3.1.6.4.2) procedure.
-- If the neighbor count is less than IdealNeighborCount, the node MUST establish new [**neighbor connections**](#gt_neighbor-connection). **Endpoint Information** (section [3.1.1](#Section_3.1)) in the node's **Referral cache** (section 3.1.1) SHOULD be used first. If the neighbor count is still less than the IdealNeighborCount after all of the entries in the Referral cache are used, more **Endpoint Information** SHOULD be acquired via a [**discovery service**](#gt_discovery-service). If the discovery service returns more **Endpoint Information**, the **Referral cache** MUST be updated and the node MUST establish new neighbor connections. The maintenance continues on to step 4 even if the discovery service does not return enough **Endpoint Information** to make up the difference to reach IdealNeighborCount.
+- If the neighbor count is less than IdealNeighborCount, the node MUST establish new [**neighbor connections**](#gt_neighbor-connection). **Endpoint Information** (section [3.1.1](#Section_3.1.1)) in the node's **Referral cache** (section 3.1.1) SHOULD be used first. If the neighbor count is still less than the IdealNeighborCount after all of the entries in the Referral cache are used, more **Endpoint Information** SHOULD be acquired via a [**discovery service**](#gt_discovery-service). If the discovery service returns more **Endpoint Information**, the **Referral cache** MUST be updated and the node MUST establish new neighbor connections. The maintenance continues on to step 4 even if the discovery service does not return enough **Endpoint Information** to make up the difference to reach IdealNeighborCount.
 - The node MUST ensure that the maintainer itself is not closing (if the [Maintenance timer](#Section_3.1.6.4) fires during the closing of the node) and then MUST reset the Maintenance timer. If this is the first time maintenance has been run for this node, the timer SHOULD be set to 10 seconds unless at least one neighbor connection is established. Otherwise, the timer SHOULD be set to 5 minutes.
 ![Flow chart of the maintenance procedure](media/image4.png)
 
@@ -1754,7 +1754,7 @@ The higher-level application or protocol MUST provide an X.509 certificate to se
 <a id="Section_3.1.6.4.8"></a>
 ##### 3.1.6.4.8 Password-Based Security Handshake
 
-After creating a connection (TLS over TCP with anonymous X.509 certificates), the [**requesting node**](#gt_requesting-node) MUST send a [RequestSecurityToken](#Section_4.1.2) to prove the knowledge of the password. The [**responding node**](#gt_responding-node) MUST respond to this message by replying with a [RequestSecurityTokenResponse](#Section_4.1.2) message.
+After creating a connection (TLS over TCP with anonymous X.509 certificates), the [**requesting node**](#gt_requesting-node) MUST send a [RequestSecurityToken](#Section_3.1.5.1) to prove the knowledge of the password. The [**responding node**](#gt_responding-node) MUST respond to this message by replying with a [RequestSecurityTokenResponse](#Section_2.2.3.2) message.
 
 At this point, both [**nodes**](#gt_node) MUST transition the value of the **ConnectionState** data element for this connection to the Authenticated state. A [Connect handshake](#Section_3.1.6.4.9) MUST then be initiated by the requesting node. A [Connect Handshake timer](#Section_3.1.6.2) MUST be started.
 
@@ -1771,7 +1771,7 @@ The NodeId field of the Connect message must be set to a unique NodeId to identi
 
 - The requesting node must wait for up to 1 minute for a response. It SHOULD NOT wait for more than 1 minute. If a response is not received within this time frame, the requesting node SHOULD abort the connection.
 - The [**responding node**](#gt_responding-node) MUST respond with either a [Welcome](#Section_3.1.5.3) message or a [Refuse](#Section_3.1.5.4) message. If the requester receives a Welcome message, the connection transitions to the Connected state. Both nodes can now exchange Peer Channel Protocol messages. If a Refuse message is received, the requesting node MUST close the connection.
-- If the responding node included [Referrals](#Section_2.2.2.3) in the return message, they SHOULD be added to the [Referral cache](#Section_3.1) to aid in establishing additional [**neighbor**](#gt_neighbor) connections in the future.
+- If the responding node included [Referrals](#Section_2.2.2.3) in the return message, they SHOULD be added to the [Referral cache](#Section_3.1.1) to aid in establishing additional [**neighbor**](#gt_neighbor) connections in the future.
 ![Flow chart of requesting node's connection process](media/image7.png)
 
 Figure 7: Flow chart of requesting node's connection process
@@ -1795,12 +1795,12 @@ The sender role is a superset of the message processing and data model. Senders 
 <a id="Section_3.2.1"></a>
 ### 3.2.1 Abstract Data Model
 
-The sender abstract data model is the same as the receiver abstract data model (see section [3.1.1](#Section_3.1)).
+The sender abstract data model is the same as the receiver abstract data model (see section [3.1.1](#Section_3.1.1)).
 
 <a id="Section_3.2.2"></a>
 ### 3.2.2 Timers
 
-The sender timers are the same as the receiver timers (see section [3.1.2](#Section_3.2.2)).
+The sender timers are the same as the receiver timers (see section [3.1.2](#Section_3.1.2)).
 
 <a id="Section_3.2.3"></a>
 ### 3.2.3 Initialization
@@ -1838,7 +1838,7 @@ After performing the foregoing transformations on the message, the node sends th
 <a id="Section_3.2.5"></a>
 ### 3.2.5 Message Processing Events and Sequencing Rules
 
-See section [3.1.5](#Section_3.1).
+See section [3.1.5](#Section_3.1.5).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Timer Events
@@ -1861,7 +1861,7 @@ When the [**mesh**](#gt_mesh) is password secured, first the [Password-Based Sec
 <a id="Section_4.1.1"></a>
 ### 4.1.1 Connection Initiator Sends the RequestSecurityToken Message
 
-An example of a [RequestSecurityToken](#Section_4.1.2) message follows. It gives the layout of a Request Security token.
+An example of a [RequestSecurityToken](#Section_3.1.5.1) message follows. It gives the layout of a Request Security token.
 
 (00) <s:Envelope xmlns:wsa10="http://www.w3.org/2005/08/addressing"
 
@@ -1925,7 +1925,7 @@ The following notes give more detail on interesting elements of this message.
 
 08 - Beginning of the SOAP message body.
 
-09 - From here on, the rest of the message shows the formatting of [PeerHashToken](#Section_2.2.3.1.1) in a RequestSecurityToken message. This line indicates the beginning of the RequestSecurityToken element.
+09 - From here on, the rest of the message shows the formatting of [PeerHashToken](#Section_2.2.2.1) in a RequestSecurityToken message. This line indicates the beginning of the RequestSecurityToken element.
 
 10 - Indicates the token type of the message. Only "http://schemas.microsoft.com/net/2006/05/peer/peerhashtoken" is allowed for the Peer Channel Protocol RequestSecurityToken message.
 
@@ -1940,7 +1940,7 @@ The following notes give more detail on interesting elements of this message.
 <a id="Section_4.1.2"></a>
 ### 4.1.2 Responding Node Sends Back a RequestSecurityTokenResponse
 
-An example of a [RequestSecurityTokenResponse](#Section_4.1.2) message follows.
+An example of a [RequestSecurityTokenResponse](#Section_2.2.3.2) message follows.
 
 (00) <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope"
 
@@ -2006,7 +2006,7 @@ The following notes give more detail on interesting elements of this message.
 
 02 - Action header. Must be set to "RequestSecurityTokenResponse".
 
-03 - RelatesTo header identifying the MessageID of the corresponding [RequestSecurityToken](#Section_4.1.2) message (see previous section).
+03 - RelatesTo header identifying the MessageID of the corresponding [RequestSecurityToken](#Section_3.1.5.1) message (see previous section).
 
 07 - RequestSecurityTokenResponse element. Start of the body containing the response.
 
@@ -2016,7 +2016,7 @@ The following notes give more detail on interesting elements of this message.
 
 10 - Start of the "Code" element. Indicates the status code. Note that the only legal value is "http://schemas.xmlsoap.org/ws/2005/02/trust/status/valid". In error cases, a reply message must not be sent by the [**responding node**](#gt_responding-node). Instead, the responding node must close the connection.
 
-12 - Start of the "RequestedSecurityToken" element. This contains the response of the responding node. This must contain the [PeerHashToken](#Section_2.2.3.1.1) of the responding node. The hash that the requesting node separately computes for the responding party must match this value for the security handshake to succeed.
+12 - Start of the "RequestedSecurityToken" element. This contains the response of the responding node. This must contain the [PeerHashToken](#Section_2.2.2.1) of the responding node. The hash that the requesting node separately computes for the responding party must match this value for the security handshake to succeed.
 
 13 - Start of the PeerHashToken element.
 
@@ -2290,7 +2290,7 @@ If a mesh is configured with transport security with password credential, then t
 
 If a mesh is configured with transport security with trusted X.509 certificates, the remote node is authenticated during the connection establishment phase as described in section [3.1.6.4.7](#Section_3.1.6.4.7). Any connection being requested by a node with an un-trusted certificate is rejected.
 
-If a mesh is configured with message integrity check, the signature in the message is verified to preserve message integrity as described in section [3.1.4.2](#Section_2.2.3).
+If a mesh is configured with message integrity check, the signature in the message is verified to preserve message integrity as described in section [3.1.4.2](#Section_3.1.4.2).
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -2299,8 +2299,8 @@ The following security parameters are associated with this protocol.
 
 | Security parameter | Section |
 | --- | --- |
-| PeerHashToken | [2.2.2.1](#Section_2.2.3.1.1) |
-| Security configuration | [3.1.1](#Section_3.1) |
+| PeerHashToken | [2.2.2.1](#Section_2.2.2.1) |
+| Security configuration | [3.1.1](#Section_3.1.1) |
 | Message identifier | [3.1.5.9.1.1](#Section_3.1.5.9.1.1) |
 
 <a id="Section_6"></a>
@@ -3889,7 +3889,7 @@ For ease of implementation, this section provides the full [**Web Services Descr
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5
@@ -3916,7 +3916,7 @@ Unless otherwise specified, any statement of optional behavior in this specifica
 
 <7> Section 3.1.5.9.1.1: The Windows implementation of message throttling actively monitors the number of pending messages at the slowest neighbor. If the number of pending messages drops to eight or below at any point during the grace period, neighbor monitoring is discontinued, the grace period timer is canceled, and message reception at the local node resumes.
 
-<8> Section 3.1.6.4: Windows has a maximum [Referral cache](#Section_3.1) size of 50 neighbors.
+<8> Section 3.1.6.4: Windows has a maximum [Referral cache](#Section_3.1.1) size of 50 neighbors.
 
 <a id="Section_8"></a>
 # 8 Change Tracking

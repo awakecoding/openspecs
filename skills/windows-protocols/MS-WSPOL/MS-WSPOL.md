@@ -242,7 +242,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 <a id="Section_1.3"></a>
 ## 1.3 Overview
@@ -930,21 +930,21 @@ For ease of implementation the full WSDLs with schemas are provided in the follo
 | WSDL or schema name | Assertion/WSDL extension/Transport URI | Section |
 | --- | --- | --- |
 | Basic HTTP Authentication Policy Assertion | http:BasicAuthentication | [6.1](#Section_6.1) |
-| Digest HTTP Authentication Policy Assertion | http:DigestAuthentication | [6.2](#Section_2.2.3.2) |
+| Digest HTTP Authentication Policy Assertion | http:DigestAuthentication | [6.2](#Section_6.2) |
 | NTLM HTTP Authentication Policy Assertion | http:NtlmAuthentication | [6.3](#Section_6.3) |
-| Negotiate HTTP Authentication Policy Assertion | http:NegotiateAuthentication | [6.4](#Section_2.2.3.4) |
-| Streamed Message Framing Policy Assertion | msf:Streamed | [6.5](#Section_2.2.3.5) |
-| Binary Encoding Policy Assertion | msb:BinaryEncoding | [6.6](#Section_2.2.3.6) |
-| Message Framing Transport Security Policy Assertion | msf:SslTransportSecurity | [6.7](#Section_2.2.3.7) |
-| Message Framing Security Provider Negotiation Policy Assertion | msf:WindowsTransportSecurity | [6.8](#Section_2.2.3.8) |
-| One-way Policy Assertion | ow:OneWay | [6.9](#Section_2.2.3.10) |
+| Negotiate HTTP Authentication Policy Assertion | http:NegotiateAuthentication | [6.4](#Section_6.4) |
+| Streamed Message Framing Policy Assertion | msf:Streamed | [6.5](#Section_6.5) |
+| Binary Encoding Policy Assertion | msb:BinaryEncoding | [6.6](#Section_6.6) |
+| Message Framing Transport Security Policy Assertion | msf:SslTransportSecurity | [6.7](#Section_6.7) |
+| Message Framing Security Provider Negotiation Policy Assertion | msf:WindowsTransportSecurity | [6.8](#Section_6.8) |
+| One-way Policy Assertion | ow:OneWay | [6.9](#Section_6.9) |
 | Composite Duplex Policy Assertion | cdp:CompositeDuplex | 6.9 |
 | UDP Retransmission Enabled Policy Assertion | sud:RetransmissionEnabled | [6.10](#Section_6.10) |
 | WebSocket Streamed Policy Assertion | mswsp:Streamed | [6.11](#Section_6.11) |
-| WebSocket Streamed Request Policy Assertion | mswsp:StreamedRequest | [6.12](#Section_2.2.3.13) |
+| WebSocket Streamed Request Policy Assertion | mswsp:StreamedRequest | [6.12](#Section_6.12) |
 | WebSocket Streamed Response Policy Assertion | mswsp:StreamedResponse | [6.13](#Section_6.13) |
 | SOAP-over-UDP transport URI | http://schemas.microsoft.com/soap/udp | [6.14](#Section_6.14) |
-| Using Session WSDL Extension | msc:UsingSession | [6.15](#Section_2.2.6.3) |
+| Using Session WSDL Extension | msc:UsingSession | [6.15](#Section_6.15) |
 | Is Initiating WSDL Extension | msc:IsInitiating | 6.15 |
 | Is Terminating WSDL Extension | msc:IsTerminating | 6.15 |
 
@@ -1748,7 +1748,7 @@ xmlns:wsdl=http://schemas.xmlsoap.org/wsdl/>
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft .NET Framework 3.0
 - Microsoft .NET Framework 3.5

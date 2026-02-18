@@ -172,7 +172,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [DSML2] OASIS Standard, "Directory Services Markup Language v2.0", November 2001, [http://xml.coverpages.org/DSMLv2-draft14.pdf](https://go.microsoft.com/fwlink/?LinkId=119908)
 
-[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](#Section_2.2.3)".
+[MS-ADDM] Microsoft Corporation, "[Active Directory Web Services: Data Model and Common Elements](../MS-ADDM/MS-ADDM.md)".
 
 [RFC2119] Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997, [http://www.rfc-editor.org/rfc/rfc2119.txt](https://go.microsoft.com/fwlink/?LinkId=90317)
 
@@ -193,7 +193,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-ADTS] Microsoft Corporation, "[Active Directory Technical Specification](../MS-ADTS/MS-ADTS.md)".
 
-[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](#Section_1.3)".
+[MS-NETOD] Microsoft Corporation, "[Microsoft .NET Framework Protocols Overview](../MS-NETOD/MS-NETOD.md)".
 
 [RFC2696] Weider, C., Herron, A., Anantha, A., and Howes, T., "LDAP Control Extension for Simple Paged Results Manipulation", RFC 2696, September 1999, [http://www.ietf.org/rfc/rfc2696.txt](https://go.microsoft.com/fwlink/?LinkId=91352)
 
@@ -274,7 +274,7 @@ This specification defines and references various [**XML namespaces**](#gt_xml-n
 | Prefix | Namespace URI | Reference |
 | --- | --- | --- |
 | (none)<1> | urn:schema-microsoft-com:activedirectory:dsmlv2 | (none) |
-| ad | http://schemas.microsoft.com/2008/1/ActiveDirectory/Data | [MS-ADDM](#Section_2.2.3) |
+| ad | http://schemas.microsoft.com/2008/1/ActiveDirectory/Data | [MS-ADDM](../MS-ADDM/MS-ADDM.md) |
 | dsml | urn:oasis:names:tc:DSML:2:0:core | [[DSML2]](https://go.microsoft.com/fwlink/?LinkId=119908) |
 | soap | http://schemas.xmlsoap.org/soap/envelope/ | [[SOAP1.1]](https://go.microsoft.com/fwlink/?LinkId=90520) |
 | xs | http://www.w3.org/2001/XMLSchema | [[XMLSCHEMA1]](https://go.microsoft.com/fwlink/?LinkId=90608) |
@@ -295,7 +295,7 @@ The headers that are supported by SSE are specified in the following table.
 | --- | --- |
 | [BeginSession](#Section_2.2.2.1) | Used by a client request to instruct the server to begin a session. The [**SOAP body**](#gt_soap-body) to which this header is attached MUST be processed in the context of the session. That is, it MUST be processed as if the session were initiated prior to processing the request message. |
 | [Session](#Section_2.2.2.2) | Used by a client request to instruct the server to process a SOAP request message inside a session that was previously created with a BeginSession operation. Used by a server response to inform the client that the operation was performed within the requested session. |
-| [EndSession](#Section_3.1.4.3) | Used by a client request to instruct the server to terminate a session that was previously created with a BeginSession operation. The SOAP body to which this header is attached MUST be processed in the context of the session. That is, it MUST be processed as if the session were terminated after the request message completed processing. |
+| [EndSession](#Section_2.2.2.3) | Used by a client request to instruct the server to terminate a session that was previously created with a BeginSession operation. The SOAP body to which this header is attached MUST be processed in the context of the session. That is, it MUST be processed as if the session were terminated after the request message completed processing. |
 
 <a id="Section_2.2.2.1"></a>
 #### 2.2.2.1 BeginSession
@@ -343,7 +343,7 @@ The client specifies the <Session> header as follows:
 - The **soap:mustUnderstand** attribute MUST be set to 1.
 Subsequently, the server MUST attach a <Session> header to a DSML SOAP response message that contains a <dsml:batchResponse> payload in order to indicate that the corresponding <dsml:batchRequest> payload was processed in the context of a session.
 
-The server MUST attach a <Session> header when responding to a DSML SOAP message from a client that contained a <BeginSession> header (section [2.2.2.1](#Section_2.2.2.1)), a <Session> header, or an <EndSession> header (section [2.2.2.3](#Section_3.1.4.3)).
+The server MUST attach a <Session> header when responding to a DSML SOAP message from a client that contained a <BeginSession> header (section [2.2.2.1](#Section_2.2.2.1)), a <Session> header, or an <EndSession> header (section [2.2.2.3](#Section_2.2.2.3)).
 
 The following [**XML**](#gt_xml) shows a <Session> header and a <dsml:batchRequest> payload as sent by a client in a SOAP message.
 
@@ -448,8 +448,8 @@ The following table summarizes the set of common XML schema element definitions 
 | Element | Description |
 | --- | --- |
 | [BeginSession](#Section_2.2.2.1) | The XML schema definition for the <BeginSession> element. |
-| [Session](#Section_2.2.2.2) | The XML schema definition for the <Session> element. |
-| [EndSession](#Section_3.1.4.3) | The XML schema definition for the <EndSession> element. |
+| [Session](#Section_2.2.3.2) | The XML schema definition for the <Session> element. |
+| [EndSession](#Section_2.2.3.3) | The XML schema definition for the <EndSession> element. |
 
 <a id="Section_2.2.3.1"></a>
 #### 2.2.3.1 BeginSession Element
@@ -591,7 +591,7 @@ The following table summarizes the set of common XML schema attribute definition
 <a id="Section_2.2.6.1"></a>
 #### 2.2.6.1 SessionID Attribute
 
-The SessionID is an attribute in the <Session> (section [2.2.3.2](#Section_2.2.2.2)) and <EndSession> (section [2.2.3.3](#Section_3.1.4.3)) elements, the value of which uniquely identifies an existing [**session**](#gt_session). It is assigned by the server and returned in the response to a [BeginSession (section 2.2.3.1)](#Section_2.2.2.1) message.
+The SessionID is an attribute in the <Session> (section [2.2.3.2](#Section_2.2.3.2)) and <EndSession> (section [2.2.3.3](#Section_2.2.3.3)) elements, the value of which uniquely identifies an existing [**session**](#gt_session). It is assigned by the server and returned in the response to a [BeginSession (section 2.2.3.1)](#Section_2.2.3.1) message.
 
 <xs:attribute name="SessionID"
 
@@ -636,7 +636,7 @@ This section describes a conceptual model of possible data organization that an 
 
 **MaxSessionsAllowedPerIp**: A 32-bit unsigned integer that specifies the maximum number of sessions that a single client, identified by its IP address, can have open at one time.
 
-**MaxSessionIdleTimeAllowed**: A value that specifies the maximum time after which an idle session will be terminated by the server even if the client does not send an [<EndSession> (section 2.2.2.3)](#Section_3.1.4.3) header.
+**MaxSessionIdleTimeAllowed**: A value that specifies the maximum time after which an idle session will be terminated by the server even if the client does not send an [<EndSession> (section 2.2.2.3)](#Section_2.2.2.3) header.
 
 **Note** The preceding conceptual data can be implemented using a variety of techniques.
 
@@ -664,7 +664,7 @@ The following table shows the processing events that are defined for DSML:
 | --- | --- |
 | [BeginSession](#Section_2.2.2.1) | Causes a new [**session**](#gt_session) to be created. |
 | [Session](#Section_2.2.2.2) | Causes an operation to be performed using the state stored in the session. |
-| [EndSession](#Section_3.1.4.3) | Causes a session to be terminated. |
+| [EndSession](#Section_2.2.2.3) | Causes a session to be terminated. |
 | [Faults](#Section_3.1.4.4) | Performs an action if the session request cannot be processed. |
 
 <a id="Section_3.1.4.1"></a>
@@ -708,7 +708,7 @@ When all operations, if any, have been successfully completed, the server MUST g
 
 **Note** Abstract data model objects that are referenced in this section are defined in section [3.1.1](#Section_3.1.1). [**SOAP fault**](#gt_soap-fault) processing is specified in section [3.1.4.4](#Section_3.1.4.4).
 
-The server MUST perform an EndSession operation when it receives a DSML [**SOAP**](#gt_soap) request message that contains an <EndSession> header (section [2.2.2.3](#Section_3.1.4.3)).
+The server MUST perform an EndSession operation when it receives a DSML [**SOAP**](#gt_soap) request message that contains an <EndSession> header (section [2.2.2.3](#Section_2.2.2.3)).
 
 If the server is not capable of performing an EndSession operation, and if the header contains a **soap:mustUnderstand** attribute equal to 1, then the server MUST generate a SOAP fault and MUST NOT process any DSML operations that are contained in the [**SOAP body**](#gt_soap-body) of the message. Otherwise, if the server is not capable of performing an EndSession operation, and either the header does not contain a **soap:mustUnderstand** attribute equal to 1 or that attribute is not present, then the server processes the DSML operations as if the <EndSession> header were not specified.
 
@@ -933,7 +933,7 @@ remaining attributes of the object...
 
 </soap:Envelope>
 
-The client can continue requesting DSML operations in the context of the session by attaching <Session> headers as in the preceding example. When the client is finished, it terminates the session by sending an <EndSession> header (section [2.2.2.3](#Section_3.1.4.3)).
+The client can continue requesting DSML operations in the context of the session by attaching <Session> headers as in the preceding example. When the client is finished, it terminates the session by sending an <EndSession> header (section [2.2.2.3](#Section_2.2.2.3)).
 
 In this example, the client also includes a <dsml:addRequest> operation inside the <dsml:batchRequest>. This operation is performed in the context of the <Session>. That is, the operation is equivalent to the client first sending a <dsml:batchRequest> that contains the <dsml:addRequest> with a <Session> header attached, followed by an empty <dsml:batchRequest> that contains an <EndSession> header.
 
@@ -1005,7 +1005,7 @@ ad:SessionID="12345"/>
 
 Each [**session**](#gt_session) that the client asks the server to create consumes storage on the server. A server implementation can limit the number of sessions that a single client is permitted to have open at one time, or it can restrict the total number of sessions that are open at one time (see section [3.1.1](#Section_3.1.1) for Abstract Data Model elements that represent these limits). A server implementation can also limit the maximum lifetime during which a session can be left open or idle.
 
-If a client is able to guess the value of the **SessionId** attribute that is assigned to a session created by a different client, then the first client can perform operations in the second client's session by attaching a <Session> header (section [2.2.2.2](#Section_2.2.2.2)) that contains the second client's **SessionId**; or it can terminate the second client's session by using an <EndSession> header (section [2.2.2.3](#Section_3.1.4.3)) that contains the second client's **SessionId**. A server implementation can perform additional validation checks to ensure that the client using a particular **SessionId** in a <Session> or <EndSession> header is the same client that created the session.<9>
+If a client is able to guess the value of the **SessionId** attribute that is assigned to a session created by a different client, then the first client can perform operations in the second client's session by attaching a <Session> header (section [2.2.2.2](#Section_2.2.2.2)) that contains the second client's **SessionId**; or it can terminate the second client's session by using an <EndSession> header (section [2.2.2.3](#Section_2.2.2.3)) that contains the second client's **SessionId**. A server implementation can perform additional validation checks to ensure that the client using a particular **SessionId** in a <Session> or <EndSession> header is the same client that created the session.<9>
 
 <a id="Section_5.2"></a>
 ## 5.2 Index of Security Parameters
@@ -1022,7 +1022,7 @@ This specification does not describe a Web Service protocol and does not specify
 
 The information in this specification is applicable to the following Microsoft products or supplemental software. References to product versions include updates to those products.
 
-This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](#Section_1.3) section 4.
+This document specifies version-specific details in the Microsoft .NET Framework. For information about which versions of .NET Framework are available in each released Windows product or as supplemental software, see [MS-NETOD](../MS-NETOD/MS-NETOD.md) section 4.
 
 - Microsoft Directory Services Markup Language (DSML) Services for Windows
 - Microsoft .NET Framework 2.0
@@ -1038,7 +1038,7 @@ Exceptions, if any, are noted in this section. If an update version, service pac
 
 Unless otherwise specified, any statement of optional behavior in this specification that is prescribed using the terms "SHOULD" or "SHOULD NOT" implies product behavior in accordance with the SHOULD or SHOULD NOT prescription. Unless otherwise specified, the term "MAY" implies that the product does not follow the prescription.
 
-<1> Section 2.2.1: The DSML client in DSML Services for Windows uses the prefix "ad:" for the "urn:schema-microsoft-com:activedirectory:dsmlv2" namespace. The sender can use an arbitrary prefix for the "urn:schema-microsoft-com:activedirectory:dsmlv2" namespace for [BeginSession (section 3.1.4.1)](#Section_2.2.2.1), [Session (section 3.1.4.2)](#Section_2.2.2.2), and [EndSession (section 3.1.4.3)](#Section_3.1.4.3) requests. The server processes BeginSession requests with no prefixes. Session and EndSession requests that do not use a prefix will generate a fault from the server. The server response to all successful requests uses the "ad:" prefix. See [Protocol Examples (section 4)](#Section_4).
+<1> Section 2.2.1: The DSML client in DSML Services for Windows uses the prefix "ad:" for the "urn:schema-microsoft-com:activedirectory:dsmlv2" namespace. The sender can use an arbitrary prefix for the "urn:schema-microsoft-com:activedirectory:dsmlv2" namespace for [BeginSession (section 3.1.4.1)](#Section_3.1.4.1), [Session (section 3.1.4.2)](#Section_3.1.4.2), and [EndSession (section 3.1.4.3)](#Section_3.1.4.3) requests. The server processes BeginSession requests with no prefixes. Session and EndSession requests that do not use a prefix will generate a fault from the server. The server response to all successful requests uses the "ad:" prefix. See [Protocol Examples (section 4)](#Section_4).
 
 <2> Section 2.2.2.1: The DSML client in DSML Services for Windows uses the prefix "ad:" for the "urn:schema-microsoft-com:activedirectory:dsmlv2" namespace. The sender can use an arbitrary prefix for the "urn:schema-microsoft-com:activedirectory:dsmlv2" namespace for BeginSession (section 3.1.4.1), Session (section 3.1.4.2), and EndSession (section 3.1.4.3) requests. The server processes BeginSession requests with no prefixes. Session and EndSession requests that do not use a prefix will generate a fault from the server. The server response to all successful requests uses the "ad:" prefix. See Protocol Examples (section 4).
 

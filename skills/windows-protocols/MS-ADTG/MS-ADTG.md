@@ -420,7 +420,7 @@ RDS Transport Protocol does not exhibit explicit or implicit versioning or capab
 
 There are three areas of vendor extensibility in RDS Transport Protocol, including:
 
-- Data-provider (as specified in section [2.2.3.13.1](#Section_2.2.3.13.12)).
+- Data-provider (as specified in section [2.2.3.13.1](#Section_2.2.3.13.1)).
 - Command language (as specified in section [3.3.5.2.1](#Section_3.3.5.2.1)).
 - SCODEs (as specified in section [3.3.5.1.2](#Section_3.3.5.1.2)).
 The data-provider field can specify a vendor-supplied data provider used for processing the command language associated with a given RDS message. In addition, the command language is specific to the data provider and not restricted by the RDS Transport Protocol specification.
@@ -1537,7 +1537,7 @@ CRLF
 
 This section specifies the set of messages that are specific to data query and manipulation. These messages conform to the syntax of [rdsMethodRequest (section 2.2.2.1)](#Section_2.2.2.1) or [rdsMethodResponse (section 2.2.2.2)](#Section_2.2.2.2), respectively. Different types of request messages are identified by [rdsMethodName (section 2.2.2.3.1)](#Section_2.2.2.3.1). A response message follows a request message and is identified by the type of the request.
 
-These Remote Data Service (RDS) messages are encapsulated in HTTP requests and responses and are exchanged by RDS Transport Protocol clients and servers. This section also specifies the syntax and encoding of [**RecordSets**](#gt_recordset) (adtgTableGram, as specified in section [2.2.3.14](#Section_2.2.3.14.6)), which are transmitted as parameters in the following messages. The names of all the message components that are described in this document match the names of their corresponding [**ABNF**](#gt_augmented-backus-naur-form-abnf) syntax definition.
+These Remote Data Service (RDS) messages are encapsulated in HTTP requests and responses and are exchanged by RDS Transport Protocol clients and servers. This section also specifies the syntax and encoding of [**RecordSets**](#gt_recordset) (adtgTableGram, as specified in section [2.2.3.14](#Section_2.2.3.14)), which are transmitted as parameters in the following messages. The names of all the message components that are described in this document match the names of their corresponding [**ABNF**](#gt_augmented-backus-naur-form-abnf) syntax definition.
 
 The following message components are specific for the RDS Data Factory namespace and are used by all the request and response messages specified in this section. rdsMethodInfoDataFactory is the combination of rdsPostURI and rdsMethodNameSpace in section [2.2.2.3](#Section_2.2.2.3).<23> rdsClientVersionDataFactory corresponds to rdsClientVersion in section [2.2.2.4](#Section_2.2.2.4).
 
@@ -3050,7 +3050,7 @@ rdsLCID = VT-I4 LONG
 <a id="Section_2.2.3.13.15"></a>
 ##### 2.2.3.13.15 rdsFieldShapeArray
 
-The rdsFieldShapeArray specifies the order and key features of the columns of the [**RecordSet**](#gt_recordset) encapsulated in an [rdsCreateRecordsetResponse](#Section_3.1.1.2) message.
+The rdsFieldShapeArray specifies the order and key features of the columns of the [**RecordSet**](#gt_recordset) encapsulated in an [rdsCreateRecordsetResponse](#Section_2.2.3.12) message.
 
 The syntax of rdsFieldShapeArray is as follows.
 
@@ -3212,7 +3212,7 @@ adtgNonUnicodeFormatForMBCS = %x00
 
 adtgUnicodeFormatForMBCS = %x01
 
-The definition of a Unicode character is as specified in [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550). [adtgTablegram](#Section_2.2.3.14.6) uses a UTF-16LE encoding.
+The definition of a Unicode character is as specified in [[UNICODE]](https://go.microsoft.com/fwlink/?LinkId=90550). [adtgTablegram](#Section_2.2.3.14) uses a UTF-16LE encoding.
 
 The fields of an adtgHeader sub-message have the following lengths, types, and meanings:
 
@@ -4526,7 +4526,7 @@ The following DBPROPSET_ADC properties are valid only for **adtgResultDescriptor
 | PropertyId value | Property name | Description |
 | --- | --- | --- |
 | %x0B.00.00.00 | "Auto Recalc" | Type: **IntegerProperty** Default Value: %x01.00.00.00 Specifies when calculated expressions in the RecordSets obtained by executing a Shape command language query need to be recalculated. The range of allowed values is %x01.00.00.00 (always recalculate) and %x00.00.00.00 (recalculate on access). A value of %x00.00.00.00 is not valid in the context of the RDS Transport Protocol and SHOULD be ignored on receipt. The Server SHOULD set this property to %x 01.00.00.00 when the Shape command language is used, and omit it otherwise. Clients SHOULD never set this property, and Servers SHOULD ignore it on receipt. |
-| %x0D.00.00.00 | "Unique Table" | Type: **StringProperty** Default Value: BSTRNULL Specifies the table (last part of a SQL-92 three-part name, as specified in [[FIPS127]](https://go.microsoft.com/fwlink/?LinkId=89865)) to which the update or updates in this [adtgTablegram](#Section_2.2.3.14.6) need to be applied. When the original adtgTablegram that is retrieved from the data store is the result of a complex query containing nested joins or subqueries, update attempts can fail due to ambiguity about what part of the schema needs to be updated with the new value. This property is specified to target the update to a specific table in the data store. This property SHOULD be BSTRNULL when sent from the server to the client, and MUST be ignored by the client on receipt. |
+| %x0D.00.00.00 | "Unique Table" | Type: **StringProperty** Default Value: BSTRNULL Specifies the table (last part of a SQL-92 three-part name, as specified in [[FIPS127]](https://go.microsoft.com/fwlink/?LinkId=89865)) to which the update or updates in this [adtgTablegram](#Section_2.2.3.14) need to be applied. When the original adtgTablegram that is retrieved from the data store is the result of a complex query containing nested joins or subqueries, update attempts can fail due to ambiguity about what part of the schema needs to be updated with the new value. This property is specified to target the update to a specific table in the data store. This property SHOULD be BSTRNULL when sent from the server to the client, and MUST be ignored by the client on receipt. |
 | %x0E.00.00.00 | "Unique Schema" | Type: **StringProperty** Default Value: NULL-BPS Specifies the schema (middle part of a SQL-92 three-part name, as specified in [FIPS127]) to which the update or updates in this adtgTablegram need to be applied. When the original adtgTablegram that is retrieved from the data store is the result of a complex query containing nested joins or subqueries, update attempts can fail due to ambiguity about what part of the schema needs to be updated with the new value. This property is specified to target the update to a specific table in the data store. This property SHOULD be NULL-BPS when sent from the server to the client, and MUST be ignored by the client on receipt. |
 | %x0F.00.00.00 | "Unique Catalog" | Type: **StringProperty** Default Value: NULL-BPS Specifies the catalog (first part of a SQL-92 three-part name, as specified in [FIPS127]) to which the update or updates in this adtgTablegram need to be applied. When the original adtgTablegram that is retrieved from the data store is the result of a complex query containing nested joins or subqueries, update attempts can fail due to ambiguity about what part of the schema needs to be updated with the new value. This property is specified to target the update to a specific table in the data store. This property SHOULD be NULL-BPS when sent from the server to the client, and MUST be ignored by the client on receipt. |
 | %x10.00.00.00 | "Resync Command" | Type: **StringProperty** Default Value: NULL-BPS Specifies the query that is executed on the data store to refresh the data in the adtgRecordset after update, insert, and delete operations have been applied. |
@@ -5130,7 +5130,7 @@ Identifies the end of the adtgTableGram. The value MUST be set to 0x0F.
 
 The RDS Transport Protocol constants are provided as BYTE and USHORT values. The constants are the specific values of the constant terminals expressed in this documentation as part of the [**ABNF**](#gt_augmented-backus-naur-form-abnf) representation.
 
-The following constants are used throughout the syntax definitions of the [adtgTableGram](#Section_2.2.3.14.6):
+The following constants are used throughout the syntax definitions of the [adtgTableGram](#Section_2.2.3.14):
 
 BYTE Constants
 
@@ -5227,7 +5227,7 @@ A RecordSet MUST maintain all of the properties of the data store specified in s
 - Concurrency tracking: A mechanism to track original values along with changes so that database concurrency can be managed. This works with change tracking. For details, see section [3.1.1.2.2](#Section_3.1.1.2.2).
 - Hierarchal relationships: Manage multiple tables and maintain parent-child relationships between those tables.
 - Change tracking: A mechanism to track the updates to the RecordSet such that change, delete, and insert operations can be forwarded to the backend data store.
-- [**TableGram**](#gt_tablegram) generation: A facility to encode the RecordSet's tables and records as a TableGram. For details, see section [2.2.3.14](#Section_2.2.3.14.6).
+- [**TableGram**](#gt_tablegram) generation: A facility to encode the RecordSet's tables and records as a TableGram. For details, see section [2.2.3.14](#Section_2.2.3.14).
 A RecordSet can be used in local cache-only mode where the data on the client is generated, processed, and thrown away. A RecordSet can also coordinate changes with a backend data store. In this mode, the dataset is filled from the data store, changes are made, and results are sent back to the data store.
 
 <a id="Section_3.1.1.2.1"></a>
@@ -5255,14 +5255,14 @@ Figure 2: Table structure example
 
 In this example, the Employee table is the parent table and the Projects table is the child table.
 
-Looking at both the RecordSet that is constructed in memory and the result that is encoded in an [adtgTablegram](#Section_2.2.3.14.6), it is apparent that the RecordSet contains a third column in the Employee table. This third column is the [**chapter column**](#gt_chapter-column) and contains the necessary syntax from the shape command to define the relationship between the parent table and the child table. For more information, see the **RelationConditions** description in section [2.2.3.14.3.7](#Section_2.2.3.14.3.7).
+Looking at both the RecordSet that is constructed in memory and the result that is encoded in an [adtgTablegram](#Section_2.2.3.14), it is apparent that the RecordSet contains a third column in the Employee table. This third column is the [**chapter column**](#gt_chapter-column) and contains the necessary syntax from the shape command to define the relationship between the parent table and the child table. For more information, see the **RelationConditions** description in section [2.2.3.14.3.7](#Section_2.2.3.14.3.7).
 
 The parent to child relationship is managed in the RecordSet object, as described in section [3.1.1.2](#Section_3.1.1.2). The column metadata information portion of the adtgTablegram shown in section [2.2.3.14.3](#Section_2.2.3.14.3) encodes the RelationConditions and CalculationInfo fields. When a column that has the property IsChaptered is set to TRUE, the RecordSet encoding algorithm SHOULD include the RelationConditions and CalculationInfo fields. Setting the IsChaptered property to TRUE is represented in an adtgTablegram by setting the DBCOLUMNFLAGS_ISCHAPTER bit of the column's **ColumnFlags** to 1. For more information, see section [2.2.3.14.3.6](#Section_2.2.3.14.3.6).
 
 <a id="Section_3.1.1.2.2"></a>
 ##### 3.1.1.2.2 Algorithm for Processing Synchronization Results for Concurrency
 
-A [**TableGram**](#gt_tablegram), as specified in section [2.2.3.14](#Section_2.2.3.14.6), can contain new result data or commands for changing the database. When the TableGram contains commands for changing a database, these commands are known as a [**DiffGram**](#gt_diffgram). This section describes how a DiffGram is processed. A DiffGram represents changes from the client-side [**RecordSet**](#gt_recordset) that can be applied to the server-side RecordSet, so that the client-side and server-side RecordSets are synchronized.
+A [**TableGram**](#gt_tablegram), as specified in section [2.2.3.14](#Section_2.2.3.14), can contain new result data or commands for changing the database. When the TableGram contains commands for changing a database, these commands are known as a [**DiffGram**](#gt_diffgram). This section describes how a DiffGram is processed. A DiffGram represents changes from the client-side [**RecordSet**](#gt_recordset) that can be applied to the server-side RecordSet, so that the client-side and server-side RecordSets are synchronized.
 
 Clients that are using RecordSets to manage data are making changes to a locally cached copy of the server's data. The client RecordSet is initially populated from a snapshot of the data from the server. Based on input from the higher-level application, the client RecordSet can be changed and sent to the server. While the client retained the snapshot of the data from the server, there might have been other applications changing that same data on the server. The system is responsible for managing the concurrent access to the records on the system.
 
@@ -5370,7 +5370,7 @@ There is no common initialization.
 <a id="Section_3.1.4"></a>
 ### 3.1.4 Higher-Layer Triggered Events
 
-See section [3.2.4](#Section_3.2.4) for information on higher-layer triggered events for an RDS Transport Protocol client. The RDS Transport Protocol server has no higher-layer triggered events, as noted in section [3.3.4](#Section_3.2.4).
+See section [3.2.4](#Section_3.2.4) for information on higher-layer triggered events for an RDS Transport Protocol client. The RDS Transport Protocol server has no higher-layer triggered events, as noted in section [3.3.4](#Section_3.3.4).
 
 <a id="Section_3.1.5"></a>
 ### 3.1.5 Message Processing Events and Sequencing Rules
@@ -5436,16 +5436,16 @@ The client SHOULD create an HTTP connection to the target RDS Transport Protocol
 <a id="Section_3.2.4.2"></a>
 #### 3.2.4.2 Executing a Complex SQL Command Query
 
-The client uses the RDS Transport Protocol connection sequence described in section [3.2.4.1](#Section_2.1).
+The client uses the RDS Transport Protocol connection sequence described in section [3.2.4.1](#Section_3.2.4.1).
 
-The client can request the server to execute the SQL command specified in the [rdsExecuteRequest Message (section 2.2.3.1)](#Section_4.4). The higher-level application MUST provide the following:
+The client can request the server to execute the SQL command specified in the [rdsExecuteRequest Message (section 2.2.3.1)](#Section_2.2.3.1). The higher-level application MUST provide the following:
 
-- Data store [**connection string**](#gt_connection-string) (see section [2.2.3.13.1](#Section_2.2.3.13.12)).
+- Data store [**connection string**](#gt_connection-string) (see section [2.2.3.13.1](#Section_2.2.3.13.1)).
 - SQL command (see section [2.2.3.13.8](#Section_2.2.3.13.8)).
 - SQL command parameters array (see section [2.2.3.13.7](#Section_2.2.3.13.7)).
 The client MUST establish a connection to the RDS Transport Protocol server, as specified in section 3.2.4.1.
 
-The server processes the command and returns the results in an [rdsExecuteResponse Message (section 2.2.3.2)](#Section_4.5). The client MUST set the command text according to section 2.2.3.13.8. See section [3.3.5.2.3](#Section_3.3.5.2.3) for a description of command languages and bound parameters. The client MUST also provide a parameter value array for any bound parameters in the command (see section 2.2.3.13.7).
+The server processes the command and returns the results in an [rdsExecuteResponse Message (section 2.2.3.2)](#Section_2.2.3.2). The client MUST set the command text according to section 2.2.3.13.8. See section [3.3.5.2.3](#Section_3.3.5.2.3) for a description of command languages and bound parameters. The client MUST also provide a parameter value array for any bound parameters in the command (see section 2.2.3.13.7).
 
 If the execution of rdsExecuteRequest succeeds, the client receives an rdsExecuteResponse Message (section 2.2.3.2). The client MUST process the execute responses status array and the rdsExecuteResponse [**TableGram**](#gt_tablegram) components (see section [3.1.1.2.3](#Section_3.1.1.2.3)). The TableGram component SHOULD be used to populate a local cache stored in a [**RecordSet**](#gt_recordset) (see section 3.1.1.2.3).
 
@@ -5461,14 +5461,14 @@ The client-side RecordSet tracks these changes. Changes are tracked as a series 
 
 The RDS Transport Protocol client uses the processing sequence described in section [3.2.4.2](#Section_3.2.4.2) to populate a RecordSet. The RDS Transport Protocol client SHOULD expose a synchronize method (see section [3.3.5.5](#Section_3.3.5.5)). The Synchronize method provides a method to synchronize the client cache version of data with the server. The client can group together any number of changes and apply all of those changes in one batch back to the server. The RDS Transport Protocol client MUST provide the following:
 
-- [**TableGram**](#gt_tablegram) data stream (see section [2.2.3.14](#Section_2.2.3.14.6)).
+- [**TableGram**](#gt_tablegram) data stream (see section [2.2.3.14](#Section_2.2.3.14)).
 - SQL command (see section [2.2.3.13.8](#Section_2.2.3.13.8))
 - SQL command parameters array (see section [2.2.3.13.7](#Section_2.2.3.13.7)).
-The client MUST establish a connection to the RDS Transport Protocol server, as specified in section [3.2.4.1](#Section_2.1). If the connection attempt fails, the RDS Transport Protocol client MUST notify the calling application.
+The client MUST establish a connection to the RDS Transport Protocol server, as specified in section [3.2.4.1](#Section_3.2.4.1). If the connection attempt fails, the RDS Transport Protocol client MUST notify the calling application.
 
 Upon establishing the connection, the client MUST create a TableGram from the [**RecordSet**](#gt_recordset) (see section [3.1.1.2.3](#Section_3.1.1.2.3)) and send the TableGram to the RDS Transport Protocol server using the rdsSynchronizeRequest message (see section [2.2.3.5](#Section_2.2.3.5)).
 
-If the server responds with an error, the RDS Transport Protocol client MUST return that error to the higher-level application. The server will respond with an rdsSynchronizeResponse (see section [2.2.3.6](#Section_4.3)). The client MUST process the rdsStatusArray (see section [2.2.3.13.10](#Section_2.2.3.13.10)) and make appropriate changes to the RecordSet (see section [3.1.1.2](#Section_3.1.1.2)).
+If the server responds with an error, the RDS Transport Protocol client MUST return that error to the higher-level application. The server will respond with an rdsSynchronizeResponse (see section [2.2.3.6](#Section_2.2.3.6)). The client MUST process the rdsStatusArray (see section [2.2.3.13.10](#Section_2.2.3.13.10)) and make appropriate changes to the RecordSet (see section [3.1.1.2](#Section_3.1.1.2)).
 
 <a id="Section_3.2.4.5"></a>
 #### 3.2.4.5 Creating a New Set of Data and Sending It to the Server
@@ -5477,13 +5477,13 @@ The higher-level application invokes APIs to create a local [**RecordSet**](#gt_
 
 To use the RecordSet in this mode, the client MUST ensure that the RecordSet has the same table definitions as the target database. The client MUST provide the following:
 
-- Data store [**connection string**](#gt_connection-string) (see section [2.2.3.13.1](#Section_2.2.3.13.12)).
+- Data store [**connection string**](#gt_connection-string) (see section [2.2.3.13.1](#Section_2.2.3.13.1)).
 - Table name targeted for update.
 The table name provided is stored in the RecordSet and MUST be used to specify the server table when the [**TableGram**](#gt_tablegram) is created and sent to the server.
 
-The client MUST establish a connection to the RDS Transport Protocol server, as specified in section [3.2.4.1](#Section_2.1).
+The client MUST establish a connection to the RDS Transport Protocol server, as specified in section [3.2.4.1](#Section_3.2.4.1).
 
-The client MUST construct a TableGram (see section [3.1.1.2.3](#Section_3.1.1.2.3) for details). The client MUST send an rdsSynchronizeRequest message passing the TableGram (see section [2.2.3.14](#Section_2.2.3.14.6)). If the RDS Transport Protocol server returns an error, the RDS Transport Protocol client MUST surface the error to the higher-level application.
+The client MUST construct a TableGram (see section [3.1.1.2.3](#Section_3.1.1.2.3) for details). The client MUST send an rdsSynchronizeRequest message passing the TableGram (see section [2.2.3.14](#Section_2.2.3.14)). If the RDS Transport Protocol server returns an error, the RDS Transport Protocol client MUST surface the error to the higher-level application.
 
 The client MUST process rdsStatusArray (see section [2.2.3.13.10](#Section_2.2.3.13.10)) in the rdsSynchronizeResponse and apply any relevant changes to the RecordSet. If the rdsStatusArray contains errors, the client software MUST surface those errors to the higher-level application.
 
@@ -5652,7 +5652,7 @@ In parameter metadata discovery, the server parses the semantics of the query an
 <a id="Section_3.3.5.2.4"></a>
 ##### 3.3.5.2.4 Shape Command Language Details
 
-When the client issues commands to the server, those commands can contain the Shape command language. The Shape command language is a specialized command language with the primary design goal of providing a mechanism to build [**RecordSets**](#gt_recordset) that have [**child RecordSets**](#gt_child-recordset). Section [3.1.1.2.1](#Section_3.1.1.2.1) specifies how to map the parent-child relationship to entities specified in an [adtgTablegram](#Section_2.2.3.14.6).
+When the client issues commands to the server, those commands can contain the Shape command language. The Shape command language is a specialized command language with the primary design goal of providing a mechanism to build [**RecordSets**](#gt_recordset) that have [**child RecordSets**](#gt_child-recordset). Section [3.1.1.2.1](#Section_3.1.1.2.1) specifies how to map the parent-child relationship to entities specified in an [adtgTablegram](#Section_2.2.3.14).
 
 There are two distinct ways to specify the parent-child relationship between RecordSets using Shape. The first is to use a primary key–foreign key relationship, as specified in [[FIPS127]](https://go.microsoft.com/fwlink/?LinkId=89865), in which the [**parent RecordSet**](#gt_parent-recordset) contains the primary key, and the child RecordSet contains the foreign key. The Shape APPEND command is used to specify this type of relationship. Consider the following example.
 
@@ -6068,7 +6068,7 @@ unicodeNum = %x30-39 %x00
 
 The server receives an [rdsExecuteRequest](#Section_4.4) from the client. The server will process out the parameters and fashion a call to the Execute method. The parameters are processed according to the algorithm described in section [3.3.1.2](#Section_3.3.1.2).
 
-The RDS Transport Protocol server MUST use the rdsConnectionString (see section [2.2.3.13.1](#Section_2.2.3.13.12)) to establish a connection to the data store. If a connection is not established, the RDS Transport Protocol server MUST return an error to the client indicating why the connection could not be established (see section [3.3.5.1.2](#Section_3.3.5.1.2)). The RDS Transport Protocol server SHOULD<82> take caution to not expose internal information in this error response.
+The RDS Transport Protocol server MUST use the rdsConnectionString (see section [2.2.3.13.1](#Section_2.2.3.13.1)) to establish a connection to the data store. If a connection is not established, the RDS Transport Protocol server MUST return an error to the client indicating why the connection could not be established (see section [3.3.5.1.2](#Section_3.3.5.1.2)). The RDS Transport Protocol server SHOULD<82> take caution to not expose internal information in this error response.
 
 The RDS Transport Protocol server MUST process any shape commands (see section [3.3.5.2.1](#Section_3.3.5.2.1)).
 
@@ -6093,7 +6093,7 @@ The RDS Transport Protocol server MUST then construct an [rdsExecuteResponse](#S
 
 The server receives an [rdsQueryRequest](#Section_2.2.3.3) message from the client. The server will process out the parameters and fashion a call to the Query method. The parameters are processed according to the algorithm described in section [3.3.1.2](#Section_3.3.1.2).
 
-The RDS Transport Protocol server MUST use the rdsConnectionString (see section [2.2.3.13.1](#Section_2.2.3.13.12)) to establish a connection to the data store. If a connection is not established, the RDS Transport Protocol server MUST return an error to the client indicating why the connection could not be established (see section [3.3.5.1.2](#Section_3.3.5.1.2)). The RDS Transport Protocol server SHOULD<83> take caution to not expose internal information in this error response.
+The RDS Transport Protocol server MUST use the rdsConnectionString (see section [2.2.3.13.1](#Section_2.2.3.13.1)) to establish a connection to the data store. If a connection is not established, the RDS Transport Protocol server MUST return an error to the client indicating why the connection could not be established (see section [3.3.5.1.2](#Section_3.3.5.1.2)). The RDS Transport Protocol server SHOULD<83> take caution to not expose internal information in this error response.
 
 The RDS Transport Protocol server processes any parameterless shape and SQL commands (see section [3.3.5.2.1](#Section_3.3.5.2.1)).
 
@@ -6118,7 +6118,7 @@ For each delete message in a TableGram, RDS Transport Protocol server MUST execu
 
 The RDS Transport Protocol server SHOULD<85> do all of the above in a single transaction.
 
-The RDS Transport Protocol server MUST then construct an [rdsSynchronizeResponse](#Section_4.3) message. The contents of the rdsSynchronizeResponse are sent back to the client in the reply. The form of the rdsSynchronizeResponse depends on the form of the rdsSynchronizeRequest received, as follows.
+The RDS Transport Protocol server MUST then construct an [rdsSynchronizeResponse](#Section_2.2.3.6) message. The contents of the rdsSynchronizeResponse are sent back to the client in the reply. The form of the rdsSynchronizeResponse depends on the form of the rdsSynchronizeRequest received, as follows.
 
 | Request received | Response sent |
 | --- | --- |
@@ -6159,7 +6159,7 @@ The RDS Transport Protocol server MUST then construct an [rdsConvertToStringResp
 
 The server receives an [rdsCreateRecordsetRequest](#Section_2.2.3.11) message from the client. The server will process out the parameters and fashion a call to the CreateRecordset method. The parameters are processed according to the algorithm described in section [3.3.1.2](#Section_3.3.1.2).
 
-The algorithm produces an ordered list of columns. The RDS Transport Protocol server MUST then construct an [rdsCreateRecordsetResponse](#Section_3.1.1.2) from this ordered list using the algorithm described in section [3.3.5.8.2](#Section_3.3.5.8.2). The contents of the rdsCreateRecordsetResponse are sent back to the client in the reply.
+The algorithm produces an ordered list of columns. The RDS Transport Protocol server MUST then construct an [rdsCreateRecordsetResponse](#Section_2.2.3.12) from this ordered list using the algorithm described in section [3.3.5.8.2](#Section_3.3.5.8.2). The contents of the rdsCreateRecordsetResponse are sent back to the client in the reply.
 
 <a id="Section_3.3.5.8.1"></a>
 ##### 3.3.5.8.1 Algorithm for Parsing Data in an rdsCreateRecordsetRequest
@@ -6191,7 +6191,7 @@ Given an ordered list, where each item contains the following column attributes:
 - IsVisible is set to %xFF.FF (VARIANT_TRUE).
 - IsAutoIncrement is set to 0x00.00 (VARIANT_FALSE).
 - DBCOLUMNFLAGS_WRITE is set to 1.
-- The resulting recordset is converted into a [**TableGram**](#gt_tablegram) per the algorithm described in section [3.1.1.2.3](#Section_3.1.1.2.3) and returned to the client as an rdsEncapsulatedData field in an [rdsCreateRecordsSetResponse](#Section_3.1.1.2) message.
+- The resulting recordset is converted into a [**TableGram**](#gt_tablegram) per the algorithm described in section [3.1.1.2.3](#Section_3.1.1.2.3) and returned to the client as an rdsEncapsulatedData field in an [rdsCreateRecordsSetResponse](#Section_2.2.3.12) message.
 The following table identifies column attributes and data type indicator values for the various data types of interest. The following list provides more precise descriptions of some of the columns in the table:
 
 - Column Size: adtgColumnMaxLength of adtgColumnDescriptorCommon
@@ -6234,7 +6234,7 @@ The following table identifies column attributes and data type indicator values 
 <a id="Section_3.3.5.9"></a>
 #### 3.3.5.9 Method Invocation Processing
 
-Processing a method invocation is identical to the common message processing outlined in section [3.3.5.1](#Section_1.3).
+Processing a method invocation is identical to the common message processing outlined in section [3.3.5.1](#Section_3.3.5.1).
 
 <a id="Section_3.3.6"></a>
 ### 3.3.6 Timer Events
@@ -6481,7 +6481,7 @@ The following table correlates the binary data to the elements of the rdsMethodR
 <a id="Section_4.3"></a>
 ## 4.3 rdsSynchronizeResponse with Error Information
 
-This is an example of an [rdsSynchronizeResponse](#Section_4.3) message for the case when an operation cannot be successfully completed on the server. In this particular case, the row on the server was changed after it was read by the client, so the update cannot be done with the existing row data.
+This is an example of an [rdsSynchronizeResponse](#Section_2.2.3.6) message for the case when an operation cannot be successfully completed on the server. In this particular case, the row on the server was changed after it was read by the client, so the update cannot be done with the existing row data.
 
 The binary data for this example is the following.
 
@@ -7594,7 +7594,7 @@ User-Agent = "ACTIVEDATA"
 
 <26> Section 2.2.3.5: The [rdsSynchronizeRequest](#Section_2.2.3.5) message corresponds to two methods: Synchronize and Synchronize21. The Synchronize21 method is not used by Windows. Its functionality is not routinely tested by Microsoft.
 
-<27> Section 2.2.3.6: The [rdsSynchronizeResponse](#Section_4.3) message corresponds to two methods: Synchronize and Synchronize21. The Synchronize21 method is not used by Windows. Its functionality is not routinely tested by Microsoft.
+<27> Section 2.2.3.6: The [rdsSynchronizeResponse](#Section_2.2.3.6) message corresponds to two methods: Synchronize and Synchronize21. The Synchronize21 method is not used by Windows. Its functionality is not routinely tested by Microsoft.
 
 <28> Section 2.2.3.7: The [rdsSubmitChangesRequest](#Section_2.2.3.7) message corresponds to the SubmitChanges method. This method is not used by Windows. Its functionality is not routinely tested by Microsoft.
 
@@ -7670,7 +7670,7 @@ SQLConnectionString
 | Variable | DatabaseKV or InitialCatalogKV | Specifies the name of a database in the data store. A database name adheres to the constraints of the **ConnectionStringIdentifier** field. The data store can specify and enforce further restrictions on the database name. |
 | Variable | UserIdKV or uidKV | Specifies the user name. |
 | Variable | PasswordKV or pwdKV | Specifies the user password. |
-| Variable | TrustedConnectionKV | Specifies if the default authentication is to be used. "Yes" designates that the RDS Transport Protocol server uses default authentication information. "No" designates that the user name for data store authentication is taken from UserIdKV or uidKV of [rdsConnectionString](#Section_2.2.3.13.12) and the password for data store authentication is taken from PasswordKV or pwdKV. For details on data store authentication, see section [3.3.5](#Section_3.3.5). If the Value is "Yes", Integrated Authentication is used to authenticate against the data store. |
+| Variable | TrustedConnectionKV | Specifies if the default authentication is to be used. "Yes" designates that the RDS Transport Protocol server uses default authentication information. "No" designates that the user name for data store authentication is taken from UserIdKV or uidKV of [rdsConnectionString](#Section_2.2.3.13.1) and the password for data store authentication is taken from PasswordKV or pwdKV. For details on data store authentication, see section [3.3.5](#Section_3.3.5). If the Value is "Yes", Integrated Authentication is used to authenticate against the data store. |
 
 ShapeConnectionString
 
@@ -7705,7 +7705,7 @@ For example, if the client specifies "DataSource=AuthorDataBase" as the [**conne
 | rdsEncapsulatedData | VT-DISPATCH ZEROBYTE adtgInterfaceId adtgImplementationId adtgTablegram |
 | adtgInterfaceId | %x35.05.00.00.00.00.10.00.80.00.00.AA.00.6D.2E.A4 |
 | adtgImplementationId | %xB6.92.F2.3F.04.B2.CF.11.8D.23.00.AA.00.5F.FE.58 |
-| adtgTablegram | See section [2.2.3.14](#Section_2.2.3.14.6) for details. |
+| adtgTablegram | See section [2.2.3.14](#Section_2.2.3.14) for details. |
 
 <42> Section 2.2.3.13.13: A request with an [rdsTableName](#Section_2.2.3.13.13) parameter that contains the string value "[My Table]" is equivalent to a request with an rdsSQLCommandString that contains the string value "Select * from [My Table]".
 

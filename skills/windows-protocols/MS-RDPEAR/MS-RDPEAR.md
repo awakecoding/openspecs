@@ -155,7 +155,7 @@ See [Revision History](#revision-history) for full version history.
 <a id="Section_1"></a>
 # 1 Introduction
 
-Remote Desktop Protocol Authentication Redirection Virtual Channel is an extension to the Credential Security Support Provider [MS-CSSP](#Section_5) protocol which allows credentials to be used on a Remote Desktop server without passing the raw credentials directly to the server. This enhances security, as this protocol allows for RDP sessions to be set up without revealing plaintext credentials to malware which may be on the target server.
+Remote Desktop Protocol Authentication Redirection Virtual Channel is an extension to the Credential Security Support Provider [MS-CSSP](../MS-CSSP/MS-CSSP.md) protocol which allows credentials to be used on a Remote Desktop server without passing the raw credentials directly to the server. This enhances security, as this protocol allows for RDP sessions to be set up without revealing plaintext credentials to malware which may be on the target server.
 
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
@@ -174,7 +174,7 @@ This document uses the following terms:
 **CredSSP client**: Any application that executes the role of the client to authenticate the identity of a user at the network layer to the server by using the [**CredSSP Protocol**](#gt_credssp-protocol).
 
 <a id="gt_credssp-protocol"></a>
-**CredSSP Protocol**: The Credential Security Support Provider (CredSSP) Protocol enables an application to delegate the user's credentials from the client, utilizing a client side security support provider (SSP), to the target server that is utilizing a server side SSP. First CredSSP sets up an encrypted Transport Layer Security (TLS) protocol tunnel, and then negotiates [**Kerberos**](#gt_kerberos) or [**NT LAN Manager (NTLM) Authentication Protocol**](#gt_nt-lan-manager-ntlm-authentication-protocol) for authentication as described in [MS-CSSP](#Section_5).
+**CredSSP Protocol**: The Credential Security Support Provider (CredSSP) Protocol enables an application to delegate the user's credentials from the client, utilizing a client side security support provider (SSP), to the target server that is utilizing a server side SSP. First CredSSP sets up an encrypted Transport Layer Security (TLS) protocol tunnel, and then negotiates [**Kerberos**](#gt_kerberos) or [**NT LAN Manager (NTLM) Authentication Protocol**](#gt_nt-lan-manager-ntlm-authentication-protocol) for authentication as described in [MS-CSSP](../MS-CSSP/MS-CSSP.md).
 
 <a id="gt_credssp-server"></a>
 **CredSSP server**: Any application that executes the role of the server to authenticate the identity of a user at the network layer to the server by using the [**CredSSP Protocol**](#gt_credssp-protocol).
@@ -270,7 +270,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MIDLINF] Microsoft Corporation, "MIDL Language Reference", [https://learn.microsoft.com/en-us/windows/desktop/Midl/midl-language-reference](https://go.microsoft.com/fwlink/?LinkId=89938)
 
-[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](#Section_5)".
+[MS-CSSP] Microsoft Corporation, "[Credential Security Support Provider (CredSSP) Protocol](../MS-CSSP/MS-CSSP.md)".
 
 [MS-DTYP] Microsoft Corporation, "[Windows Data Types](../MS-DTYP/MS-DTYP.md)".
 
@@ -320,7 +320,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.3"></a>
 ## 1.3 Overview
 
-The Remote Desktop Protocol: Authentication Redirection Virtual Channel (RDPEAR) Protocol allows the use of credentials over a [**Remote Desktop Protocol (RDP)**](#gt_remote-desktop-protocol-rdp) connection without revealing those credentials to the remote system. Prior to this protocol, the authentication protocol under remote desktop, Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](#Section_5), passed full credentials to the remote system. This is required because the remote system logs the user on to present the full interactive session.
+The Remote Desktop Protocol: Authentication Redirection Virtual Channel (RDPEAR) Protocol allows the use of credentials over a [**Remote Desktop Protocol (RDP)**](#gt_remote-desktop-protocol-rdp) connection without revealing those credentials to the remote system. Prior to this protocol, the authentication protocol under remote desktop, Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md), passed full credentials to the remote system. This is required because the remote system logs the user on to present the full interactive session.
 
 RDPEAR Protocol is used to perform authentication over a Remote Desktop connection by establishing a [**virtual channel**](#gt_virtual-channel) between the source and the target devices to relay authentication requests received by the target device to the source device. All authentication requests for [**Kerberos**](#gt_kerberos) and [**NTLM**](#gt_nt-lan-manager-ntlm-authentication-protocol) are forwarded to the source over the new virtual channel, and responses to those requests are sent back to the target device to relay out to the resource server.
 
@@ -335,7 +335,7 @@ The primary target transport for this protocol is the Remote Desktop Protocol: D
 
 Other protocols relevant to the use and implementation of the RDPEAR Protocol are:
 
-Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](#Section_5). RDPEAR relies on CredSSP as a transport mechanism to send an initial authentication buffer over the wire to establish remote use of credentials.
+Credential Security Support Provider (CredSSP) Protocol [MS-CSSP](../MS-CSSP/MS-CSSP.md). RDPEAR relies on CredSSP as a transport mechanism to send an initial authentication buffer over the wire to establish remote use of credentials.
 
 Kerberos Protocol Extensions [MS-KILE](../MS-KILE/MS-KILE.md). The RDPEAR Protocol supports Kerberos authentication on a [**CredSSP server**](#gt_credssp-server) by performing Kerberos credential proof operations on the [**CredSSP client**](#gt_credssp-client).
 
@@ -351,14 +351,14 @@ The RDPEAR Protocol does not define any transport mechanism. It is assumed that 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
 
-The RDPEAR Protocol is intended to be applicable under any circumstance in which CredSSP [MS-CSSP](#Section_5) is used to establish a connection.
+The RDPEAR Protocol is intended to be applicable under any circumstance in which CredSSP [MS-CSSP](../MS-CSSP/MS-CSSP.md) is used to establish a connection.
 
 This protocol allows a [**CredSSP server**](#gt_credssp-server) to authenticate a user without plaintext credentials. This provides an advantage under circumstances when the security status of the server is not known. If an attacker has breached the system, the RDPEAR Protocol allows the user to use that system without exposing plaintext credentials to the attacker.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
 
-Each security package supporting this protocol implements versioning independently and negotiates version and capabilities as part of initialization. For Kerberos and NTLM, it is required that the [**CredSSP server**](#gt_credssp-server) send a **RemoteCallKerbNegotateVersion** message (sections [2.2.2.1.1](#Section_2.2.2.1.17) and [3.1.5.1](#Section_3.1.5.1)) or a **RemoteCallNtlmNegotiateVersion** message (sections [2.2.2.2.1](#Section_2.2.2.2.1) and [3.1.5.19](#Section_3.1.5.19)), respectively, with the maximum protocol version it supports. The [**CredSSP client**](#gt_credssp-client) responds with a matching message containing the protocol version that will be used for future communications. As the protocol currently has only one version; this maximum version is required to be zero.
+Each security package supporting this protocol implements versioning independently and negotiates version and capabilities as part of initialization. For Kerberos and NTLM, it is required that the [**CredSSP server**](#gt_credssp-server) send a **RemoteCallKerbNegotateVersion** message (sections [2.2.2.1.1](#Section_2.2.2.1.1) and [3.1.5.1](#Section_3.1.5.1)) or a **RemoteCallNtlmNegotiateVersion** message (sections [2.2.2.2.1](#Section_2.2.2.2.1) and [3.1.5.19](#Section_3.1.5.19)), respectively, with the maximum protocol version it supports. The [**CredSSP client**](#gt_credssp-client) responds with a matching message containing the protocol version that will be used for future communications. As the protocol currently has only one version; this maximum version is required to be zero.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -383,7 +383,7 @@ All messages are transported over an RDP dynamic virtual channel, as specified i
 
 Multiple underlying authentication protocols are supported by the RDPEAR Protocol. All messages share a standard format, regardless of protocol. There are two layers in each message:
 
-The RDPEAR Outer Layer, which is processed by CredSSP [MS-CSSP](#Section_5)
+The RDPEAR Outer Layer, which is processed by CredSSP [MS-CSSP](../MS-CSSP/MS-CSSP.md)
 
 The Security Package Inner Layer, which is processed by an individual security package, such as NTLM ([MS-NLMP](../MS-NLMP/MS-NLMP.md)) or Kerberos ([MS-KILE](../MS-KILE/MS-KILE.md)).
 
@@ -1009,7 +1009,7 @@ ULONG X509PublicKeyLen;
 
 **CallId:** An ID from the **RemoteGuardCallId** enumeration (section [2.2.1.1](#Section_2.2.1.1)) that determines which of the following union members is associated with the current message.
 
-**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.17)) that contains the maximum version agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used.
+**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.1)) that contains the maximum version agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used.
 
 **BuildAsReqAuthenticator:** A structure (section [2.2.2.1.2](#Section_2.2.2.1.2)) used to create an AS_REQ message authenticator.
 
@@ -1256,7 +1256,7 @@ KERB_RPC_ENCRYPTION_KEY* SharedKey;
 
 **CallId:** An ID from the **RemoteGuardCallId** enumeration (section [2.2.1.1](#Section_2.2.1.1)) that determines which of the following union members is associated with the current message.
 
-**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.17)) that contains the **VersionToUse** agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used for future exchanges.
+**NegotiateVersion:** A structure (section [2.2.2.1.1](#Section_2.2.2.1.1)) that contains the **VersionToUse** agreed between the server and the client. Used to negotiate the protocol version that will be used. Server sends the maximum version it supports; client replies with the version that will be used for future exchanges.
 
 **BuildAsReqAuthenticator:** A structure (section [2.2.2.1.2](#Section_2.2.2.1.2)) that contains the padata-type of the **PreauthData** field and the padata-value to be included in the KRB_AS_REQ message [[RFC4120]](https://go.microsoft.com/fwlink/?LinkId=90458) section 5.2.7.
 
@@ -2642,7 +2642,7 @@ None.
 <a id="Section_3.1.5.1"></a>
 #### 3.1.5.1 RemoteCallKerbNegotiateVersion
 
-The **RemoteCallKerbNegotiateVersion** call uses the Kerberos NegotiateVersion message (section [2.2.2.1.1](#Section_2.2.2.1.17)) to negotiate the protocol version that the Kerberos packages on the [**CredSSP server**](#gt_credssp-server) and [**CredSSP client**](#gt_credssp-client) will use to communicate. It SHOULD be called before any other calls are made. As the protocol currently has only one version, this maximum MUST be zero.
+The **RemoteCallKerbNegotiateVersion** call uses the Kerberos NegotiateVersion message (section [2.2.2.1.1](#Section_2.2.2.1.1)) to negotiate the protocol version that the Kerberos packages on the [**CredSSP server**](#gt_credssp-server) and [**CredSSP client**](#gt_credssp-client) will use to communicate. It SHOULD be called before any other calls are made. As the protocol currently has only one version, this maximum MUST be zero.
 
 To perform this message exchange, the CredSSP server MUST send a **KerbCredIsoRemoteInput** object to the CredSSP client. The **CallId** field MUST be set to RemoteCallKerbNegotiateVersion, and the **MaxSupportedVersion** member of the union MUST be populated.
 
@@ -2761,7 +2761,7 @@ To reply to the preceding input message, the CredSSP client MUST respond with a 
 
 The **RemoteCallKerbCreateECDHKeyAgreement** call uses the Kerberos CreateECDHKeyAgreement message (section [2.2.2.1.14](#Section_2.2.2.1.14)) to create a key handle to be used in Kerberos PKINIT [[RFC4556]](https://go.microsoft.com/fwlink/?LinkId=90482). The key agreement will use elliptic curve cryptography as defined in [[RFC5349]](https://go.microsoft.com/fwlink/?LinkId=129652).
 
-The output **KeyAgreementHandle** is connection-specific, and is only valid for use with the same [**CredSSP client**](#gt_credssp-client) that created the handle. This ensures that the key agreement will only be used by the [**CredSSP server**](#gt_credssp-server) that requested the handle, and only for a single negotiated session [MS-CSSP](#Section_5).
+The output **KeyAgreementHandle** is connection-specific, and is only valid for use with the same [**CredSSP client**](#gt_credssp-client) that created the handle. This ensures that the key agreement will only be used by the [**CredSSP server**](#gt_credssp-server) that requested the handle, and only for a single negotiated session [MS-CSSP](../MS-CSSP/MS-CSSP.md).
 
 To perform this message exchange, the CredSSP server MUST send a **KerbCredIsoRemoteInput** object to the CredSSP client. The **CallId** field MUST be set to RemoteCallKerbCreateECDHKeyAgreement, and the **CreateECDHKeyAgreement** member of the union MUST be populated.
 
@@ -2774,7 +2774,7 @@ The **RemoteCallKerbCreateDHKeyAgreement** call uses the Kerberos CreateDHKeyAgr
 
 The outputs of this message exchange are suitable for building a **SubjectPublicKeyInfo** structure ([[RFC3280]](https://go.microsoft.com/fwlink/?LinkId=90414)) for inclusion in a Kerberos PKINIT message exchange ([RFC4556]).
 
-The output **KeyAgreementHandle** is connection-specific and is only valid for use with the same [**CredSSP client**](#gt_credssp-client) which created the handle. This ensures that the key agreement will be used only by the [**CredSSP server**](#gt_credssp-server) that requested the handle, and only for a single negotiated session [MS-CSSP](#Section_5).
+The output **KeyAgreementHandle** is connection-specific and is only valid for use with the same [**CredSSP client**](#gt_credssp-client) which created the handle. This ensures that the key agreement will be used only by the [**CredSSP server**](#gt_credssp-server) that requested the handle, and only for a single negotiated session [MS-CSSP](../MS-CSSP/MS-CSSP.md).
 
 To perform this message exchange, the CredSSP server MUST send a **KerbCredIsoRemoteInput** object to the CredSSP client. The **CallId** field MUST be set to RemoteCallKerbCreateDHKeyAgreement, and the **CreateDHKeyAgreement** member of the union MUST be populated.
 
@@ -2803,7 +2803,7 @@ To reply to the preceding input message, the CredSSP client MUST respond with a 
 
 The **RemoteCallKerbFinalizeKeyAgreement** call uses the Kerberos FinalizeKeyAgreement message (section [2.2.2.1.18](#Section_2.2.2.1.18)) to perform the final step in a key agreement operation, resulting in a shared secret between the Kerberos client and the KDC. Upon completion, the KeyAgreementHandle used in this message exchange is no longer valid in any further message exchanges.
 
-The resulting SharedKey from this exchange is only valid for use with same CredSSP session [MS-CSSP](#Section_5) connection over which the key was created.
+The resulting SharedKey from this exchange is only valid for use with same CredSSP session [MS-CSSP](../MS-CSSP/MS-CSSP.md) connection over which the key was created.
 
 To perform this message exchange, the [**CredSSP server**](#gt_credssp-server) must send a **KerbCredIsoRemoteInput** object to the [**CredSSP client**](#gt_credssp-client). The **CallId** field MUST be set to RemoteCallKerbFinalizeKeyAgreement, and the **FinalizeKeyAgreement** member of the union MUST be populated.
 
@@ -2878,8 +2878,8 @@ Figure 1: Sequence diagram for requesting a service ticket over RDP using RDPEAR
 
 | Message Group | Description | References |
 | --- | --- | --- |
-| Establish RDP Session | Establish the initial RDP connection using CredSSP. The TGT and its associated encrypted session key are transmitted in a **KERB_TICKET_LOGON** structure. | [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) [MS-CSSP](#Section_5) [[KERB-TICKET-LOGON]](https://go.microsoft.com/fwlink/?LinkId=808713) |
-| Prepare TGS_REQ | Prepare a service ticket request for processing by the domain controller. | [MS-KILE](../MS-KILE/MS-KILE.md) [MS-RDPEAR] section [3.1.5.8](../MS-KILE/MS-KILE.md) [MS-RDPEAR] section [3.1.5.7](../MS-KILE/MS-KILE.md) [MS-RDPEAR] section [3.1.5.4](../MS-KILE/MS-KILE.md) |
+| Establish RDP Session | Establish the initial RDP connection using CredSSP. The TGT and its associated encrypted session key are transmitted in a **KERB_TICKET_LOGON** structure. | [MS-RDPBCGR](../MS-RDPBCGR/MS-RDPBCGR.md) [MS-CSSP](../MS-CSSP/MS-CSSP.md) [[KERB-TICKET-LOGON]](https://go.microsoft.com/fwlink/?LinkId=808713) |
+| Prepare TGS_REQ | Prepare a service ticket request for processing by the domain controller. | [MS-KILE](../MS-KILE/MS-KILE.md) [MS-RDPEAR] section [3.1.5.8](#Section_3.1.5.8) [MS-RDPEAR] section [3.1.5.7](#Section_3.1.5.7) [MS-RDPEAR] section [3.1.5.4](#Section_3.1.5.4) |
 | TSG_REQ Exchange | Request the service ticket from the [**KDC**](#gt_key-distribution-center-kdc). | [MS-KILE] |
 | Decrypt & validate service ticket | Decrypt the service ticket reply from the KDC using the encrypted session key that was initially sent to the RDP server in message (2). | [MS-RDPEAR] section [3.1.5.6](#Section_3.1.5.6) |
 

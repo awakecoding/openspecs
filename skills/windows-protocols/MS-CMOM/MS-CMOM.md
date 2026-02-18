@@ -200,9 +200,9 @@ This specification specifies the MSDTC Connection Manager: OleTx Management Prot
 
 Remote management allows a user to do the following:
 
-- Subscribe to and receive [**transaction**](#gt_transaction) monitoring information by using the OleTx Transports Protocol [MS-CMPO](#Section_2.1).
+- Subscribe to and receive [**transaction**](#gt_transaction) monitoring information by using the OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md).
 - Get and set transaction manager configuration information contained in registry keys by using the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) or the Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md). Collectively, these two protocols are referred to herein as the Registry Protocol.
-- Manage the life cycle of the transaction manager by using the Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3).
+- Manage the life cycle of the transaction manager by using the Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4).
 Sections 1.5, 1.8, 1.9, 2, and 3 of this specification are normative. All other sections and examples in this specification are informative.
 
 <a id="Section_1.1"></a>
@@ -226,7 +226,7 @@ This document uses the following terms:
 **connection**: In OleTx, an ordered set of logically related messages. The relationship between the messages is defined by the higher-layer protocol, but they are guaranteed to be delivered exactly one time and in order relative to other messages in the connection.
 
 <a id="gt_connection-type"></a>
-**connection type**: A specific set of interactions between participants in an OleTx protocol that accomplishes a specific set of state changes. A connection type consists of a bidirectional sequence of messages that are conveyed by using the MSDTC Connection Manager: OleTx Transports Protocol and the MSDTC Connection Manager: OleTx Multiplexing Protocol transport protocol, as described in [MS-CMPO](#Section_2.1) and [MS-CMP](../MS-CMP/MS-CMP.md). A specified transaction typically involves many different connection types during its lifetime.
+**connection type**: A specific set of interactions between participants in an OleTx protocol that accomplishes a specific set of state changes. A connection type consists of a bidirectional sequence of messages that are conveyed by using the MSDTC Connection Manager: OleTx Transports Protocol and the MSDTC Connection Manager: OleTx Multiplexing Protocol transport protocol, as described in [MS-CMPO](../MS-CMPO/MS-CMPO.md) and [MS-CMP](../MS-CMP/MS-CMP.md). A specified transaction typically involves many different connection types during its lifetime.
 
 <a id="gt_contact-identifier"></a>
 **contact identifier**: A universally unique identifier (UUID) that identifies a partner in the MSDTC Connection Manager: OleTx Transports Protocol. These UUIDs are frequently converted to and from string representations. This string representation has to follow the format specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) Appendix A. In addition, the UUIDs have to be compared, as specified in [C706] Appendix A.
@@ -325,7 +325,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MC-DTCXA] Microsoft Corporation, "[MSDTC Connection Manager: OleTx XA Protocol](../MC-DTCXA/MC-DTCXA.md)".
 
-[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](#Section_2.1)".
+[MS-CMPO] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Transports Protocol](../MS-CMPO/MS-CMPO.md)".
 
 [MS-CMP] Microsoft Corporation, "[MSDTC Connection Manager: OleTx Multiplexing Protocol](../MS-CMP/MS-CMP.md)".
 
@@ -341,7 +341,7 @@ We conduct frequent surveys of the normative references to assure their continue
 
 [MS-RRP] Microsoft Corporation, "[Windows Remote Registry Protocol](../MS-RRP/MS-RRP.md)".
 
-[MS-SCMR] Microsoft Corporation, "[Service Control Manager Remote Protocol](#Section_1.7.3)".
+[MS-SCMR] Microsoft Corporation, "[Service Control Manager Remote Protocol](#Section_2.2.4)".
 
 [MS-WKST] Microsoft Corporation, "[Workstation Service Remote Protocol](../MS-WKST/MS-WKST.md)".
 
@@ -357,7 +357,7 @@ None.
 
 The OleTx Management Protocol facilitates remote management of a [**transaction manager**](#gt_transaction-manager).
 
-The following figure illustrates the [Management Client role](#Section_1.3.1), the [Management Server role](#Section_3.3), and the Management Server role's relationship to the transaction manager.
+The following figure illustrates the [Management Client role](#Section_3.2), the [Management Server role](#Section_3.3), and the Management Server role's relationship to the transaction manager.
 
 ![Overview](media/image1.png)
 
@@ -397,11 +397,11 @@ This section provides some common scenarios for the OleTx Management Protocol.
 <a id="Section_1.3.3.1"></a>
 #### 1.3.3.1 Setting and Enabling a Configuration Setting
 
-The following figure illustrates a [**transaction manager**](#gt_transaction-manager) configuration console that implements the [Management Client protocol role](#Section_1.3.1) enabling XA [**transactions**](#gt_transaction). XA transactions are enabled by setting the [**value**](#gt_value) of the XaTransactions registry key (as specified in section [3.3.1.2.1](#Section_3.3.1.2.1)) to a nonzero value:
+The following figure illustrates a [**transaction manager**](#gt_transaction-manager) configuration console that implements the [Management Client protocol role](#Section_3.2) enabling XA [**transactions**](#gt_transaction). XA transactions are enabled by setting the [**value**](#gt_value) of the XaTransactions registry key (as specified in section [3.3.1.2.1](#Section_3.3.1.2.1)) to a nonzero value:
 
 - In the first exchange, the configuration console reads the value of the XaTransactions key via the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md).
-- In the second exchange, the configuration console sets the value of the XaTransactions registry key to 1 via the Windows Remote Registry Protocol. As specified in [3.3.1.2](#Section_2.2.1.2.2.4), the transaction manager service needs to be restarted for the [**registry**](#gt_registry) changes to be reflected.
-- In the third exchange, the configuration console stops the transaction manager service via the Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3).
+- In the second exchange, the configuration console sets the value of the XaTransactions registry key to 1 via the Windows Remote Registry Protocol. As specified in [3.3.1.2](#Section_3.3.1.2), the transaction manager service needs to be restarted for the [**registry**](#gt_registry) changes to be reflected.
+- In the third exchange, the configuration console stops the transaction manager service via the Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4).
 - In the fourth exchange, the configuration console starts the transaction manager service via the Service Control Manager Remote Protocol.
 ![Setting and enabling a configuration setting](media/image2.png)
 
@@ -434,8 +434,8 @@ Figure 4: Protocols on which the OleTx Management Protocol depends
 This protocol requires the following:
 
 - An implementation of a [**transaction manager**](#gt_transaction-manager) supporting the Abstract Data Model specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) is present and operating.
-- The transaction manager is implemented as a Service, as specified in [MS-SCMR](#Section_1.7.3).
-- All participating roles possess implementations of the MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_2.1) and the MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md).
+- The transaction manager is implemented as a Service, as specified in [MS-SCMR](#Section_2.2.4).
+- All participating roles possess implementations of the MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) and the MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md).
 - The Management Server role is implemented by the transaction manager.
 - An implementation of the Service Control Manager Remote Protocol is present and operating.
 - An implementation of the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) is present and operating.
@@ -447,7 +447,7 @@ Depending on the version of the registry protocol (as specified in section [2.2.
 
 This protocol is applicable to scenarios that require the management and monitoring of a [**transaction manager**](#gt_transaction-manager). The protocol supports the reading and setting of configuration values as well as the subscription and publication of transaction statistics and status.
 
-This protocol requires network topologies in which the MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_2.1), the MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md), the Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3), the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md), and the Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) function as a viable network transport for establishing many short-lived connection exchanges that accomplish specific tasks.
+This protocol requires network topologies in which the MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md), the MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md), the Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4), the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md), and the Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) function as a viable network transport for establishing many short-lived connection exchanges that accomplish specific tasks.
 
 <a id="Section_1.7"></a>
 ## 1.7 Versioning and Capability Negotiation
@@ -462,12 +462,12 @@ All versioning, versioning negotiation, and capability negotiation mechanisms sp
 
 The registry protocol version is not negotiable. It can be determined as specified in section [3.2.4.1](#Section_3.2.4.1).
 
-Section [2.2.1.2.1](#Section_2.2.1.2.1.3) specifies which registry keys, [**key values**](#gt_key-value), and access protocols are supported in which version of the protocol.
+Section [2.2.1.2.1](#Section_2.2.1.2.1) specifies which registry keys, [**key values**](#gt_key-value), and access protocols are supported in which version of the protocol.
 
 <a id="Section_1.7.3"></a>
 ### 1.7.3 Versioning and Capability Negotiation for the Service Control Manager Remote Protocol
 
-The versioning and capability negotiation for this protocol is specified in [MS-SCMR](#Section_1.7.3), section 1.7.
+The versioning and capability negotiation for this protocol is specified in [MS-SCMR](#Section_2.2.4), section 1.7.
 
 <a id="Section_1.8"></a>
 ## 1.8 Vendor-Extensible Fields
@@ -487,10 +487,10 @@ None.
 
 This protocol uses implementation of four transport protocols:
 
-- The MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_2.1) and the MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md).
+- The MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) and the MSDTC Connection Manager: OleTx Multiplexing Protocol [MS-CMP](../MS-CMP/MS-CMP.md).
 - The Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md).
 - The Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md).
-- The Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3).
+- The Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4).
 <a id="Section_2.1.1"></a>
 ### 2.1.1 Messages, Connections, and Sessions
 
@@ -499,7 +499,7 @@ This protocol uses implementation of four transport protocols:
 <a id="Section_2.1.2"></a>
 ### 2.1.2 MS-CMP and MS-CMPO Initialization
 
-MSDTC Connection Manager: OleTx Multiplexing Protocol Specification [MS-CMP](../MS-CMP/MS-CMP.md) initialization and MSDTC Connection Manager: OleTx Transports Protocol Specification [MS-CMPO](#Section_2.1) initialization for this protocol is as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.1.2.
+MSDTC Connection Manager: OleTx Multiplexing Protocol Specification [MS-CMP](../MS-CMP/MS-CMP.md) initialization and MSDTC Connection Manager: OleTx Transports Protocol Specification [MS-CMPO](../MS-CMPO/MS-CMPO.md) initialization for this protocol is as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.1.2.
 
 If the initialization of the underlying MSDTC Connection Manager: OleTx Multiplexing Protocol instance fails as specified in [MS-CMP] section 3.1.3.2, then the implementation-specific failure result MUST be returned to the higher-layer business logic.
 
@@ -512,7 +512,7 @@ If the initialization of the underlying MSDTC Connection Manager: OleTx Multiple
 <a id="Section_2.2.1.1"></a>
 #### 2.2.1.1 OleTx Transaction Protocol Message Versions
 
-The OleTx Transaction Protocol has five versions, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.1: 1, 2, 4, 5, and 6 (version 3 is reserved and not used). All messages and data elements specified in section [2.2](../MS-DTCO/MS-DTCO.md) MUST be supported by all protocol versions.
+The OleTx Transaction Protocol has five versions, as specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 2.2.1: 1, 2, 4, 5, and 6 (version 3 is reserved and not used). All messages and data elements specified in section [2.2](#Section_2.2) MUST be supported by all protocol versions.
 
 <a id="Section_2.2.1.2"></a>
 #### 2.2.1.2 Registry Protocol Versions
@@ -525,7 +525,7 @@ The registry protocol has nine versions for MSDTC Connection Manager: OleTx Mana
 | Optional | The registry key value SHOULD be supported in the respective protocol version. |
 | Not Supported | The registry key value MUST NOT be supported in the respective protocol version. |
 
-A supported registry key value is accessed either using the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) (as illustrated in section [4.2.1](../MS-RRP/MS-RRP.md)) or using the Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) (as illustrated in section [4.1](../MS-RRP/MS-RRP.md)), depending on the version of the registry protocol. To access a supported registry key value via the Failover Cluster: Management API (ClusAPI) Protocol, the [**cluster resource ID**](#gt_cluster-resource-id) (as specified in [MS-CMRP] section 3.1.4.2.32) MUST be known in order to construct the [**registry path**](#gt_registry-path) of the registry key.
+A supported registry key value is accessed either using the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) (as illustrated in section [4.2.1](#Section_4.2.1)) or using the Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) (as illustrated in section [4.1](#Section_4.1)), depending on the version of the registry protocol. To access a supported registry key value via the Failover Cluster: Management API (ClusAPI) Protocol, the [**cluster resource ID**](#gt_cluster-resource-id) (as specified in [MS-CMRP] section 3.1.4.2.32) MUST be known in order to construct the [**registry path**](#gt_registry-path) of the registry key.
 
 <a id="Section_2.2.1.2.1"></a>
 ##### 2.2.1.2.1 Versioning Support of the Registry Keys
@@ -636,7 +636,7 @@ The following table specifies the registry path and access protocol of the RPC s
 <a id="Section_2.2.1.2.2.4"></a>
 ###### 2.2.1.2.2.4 Registry Path and Access Protocol of the Transaction Manager Contact Registry Keys
 
-The following table specifies the registry path and access protocol of the transaction manager contact registry keys used by this protocol, as specified in section [2.2.3.5](../MS-DTYP/MS-DTYP.md). The <GUID> token is a [**GUIDString**](#gt_guidstring) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3).
+The following table specifies the registry path and access protocol of the transaction manager contact registry keys used by this protocol, as specified in section [2.2.3.5](#Section_2.2.3.5). The <GUID> token is a [**GUIDString**](#gt_guidstring) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3).
 
 | Version | Registry path | Protocol |
 | --- | --- | --- |
@@ -653,7 +653,7 @@ The following table specifies the registry path and access protocol of the trans
 <a id="Section_2.2.1.2.2.5"></a>
 ###### 2.2.1.2.2.5 Registry Path and Access Protocol of the Transaction Manager Endpoint Registry Keys
 
-The following table specifies the registry path and access protocol of the transaction manager endpoint registry keys used by this protocol, as specified in section [2.2.3.6](../MS-DTYP/MS-DTYP.md). The <GUID> token is a [**GUIDString**](#gt_guidstring) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3).
+The following table specifies the registry path and access protocol of the transaction manager endpoint registry keys used by this protocol, as specified in section [2.2.3.6](#Section_2.2.3.6). The <GUID> token is a [**GUIDString**](#gt_guidstring) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3).
 
 | Version | Registry path | Protocol |
 | --- | --- | --- |
@@ -1228,7 +1228,7 @@ The RPC security registry key values control the supported RPC protocol sequence
 
 | Name | Description | Value type | Legal values | Default Value |
 | --- | --- | --- | --- | --- |
-| "ServiceNetworkProtocols" | This setting specifies the list of RPC network protocols used to initialize the server endpoints for the transaction manager, as specified in [MS-CMPO](#Section_2.1) section 1.3.2. | REG_DWORD | Any bitwise-OR combination of zero or more RPC_NETWORK_PROTOCOL values. | Not applicable (the value is not present) |
+| "ServiceNetworkProtocols" | This setting specifies the list of RPC network protocols used to initialize the server endpoints for the transaction manager, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 1.3.2. | REG_DWORD | Any bitwise-OR combination of zero or more RPC_NETWORK_PROTOCOL values. | Not applicable (the value is not present) |
 | "AllowOnlySecureRpcCalls", "FallbackToUnsecureRPCIfNecessary", and "TurnOffRpcSecurity" | These settings determine the Security Level defined in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1. | REG_DWORD | Any | 0x00000001, 0x00000000, and 0x00000000 |
 
 <a id="Section_2.2.3.5"></a>
@@ -1296,7 +1296,7 @@ Legal values for these subkeys are specified in the following table:
 <a id="Section_2.2.4"></a>
 ### 2.2.4 Service Names Used with the Service Control Manager Remote Protocol Transport
 
-The Service Name (as specified in [MS-SCMR](#Section_1.7.3)) used for [**service**](#gt_service) control operations MUST be either:
+The Service Name (as specified in [MS-SCMR](#Section_2.2.4)) used for [**service**](#gt_service) control operations MUST be either:
 
 - "MSDTC"; or
 - Of the form "MSDTC$<GUID>", where <GUID> represents the [**GUIDString**](#gt_guidstring) (as specified in [MS-DTYP](../MS-DTYP/MS-DTYP.md) section 2.3.4.3).<5>
@@ -1326,7 +1326,7 @@ When a protocol participant initiates or accepts a connection, the **State** fie
 
 When an instance of a state machine enters the Ended state, the connection that is associated with the state machine MUST be disconnected, if it is not already disconnected, as specified in [MS-CMP] section 3.1.5.1.
 
-A protocol participant MUST support both initiating and accepting multiple concurrent connections of any type inside the same MSDTC Connection Manager: OleTx Transports Protocol session or different MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_2.1) sessions. Consequently, a protocol participant MUST support the existence of multiple instances of a single connection of the same type (sharing the same Connection ID and related to the same Session object). A protocol participant MUST also support initiating multiple concurrent sessions to a number of different endpoints.
+A protocol participant MUST support both initiating and accepting multiple concurrent connections of any type inside the same MSDTC Connection Manager: OleTx Transports Protocol session or different MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) sessions. Consequently, a protocol participant MUST support the existence of multiple instances of a single connection of the same type (sharing the same Connection ID and related to the same Session object). A protocol participant MUST also support initiating multiple concurrent sessions to a number of different endpoints.
 
 <a id="Section_3.1.2"></a>
 ### 3.1.2 Timers
@@ -1373,9 +1373,9 @@ This section describes a conceptual model of possible data organization that an 
 
 Note that it is possible to implement the conceptual data defined in this section using a variety of techniques. An implementation is at liberty to implement such data in any way it pleases.
 
-The [Management Client role](#Section_1.3.1) MUST extend the common Abstract Data Model specified in section [3.1.1](#Section_3.1.1) and the Management Server Role Abstract Data Model registry keys specified in section [3.3.1.2](#Section_2.2.1.2.2.4) to include the following data elements:
+The [Management Client role](#Section_3.2) MUST extend the common Abstract Data Model specified in section [3.1.1](#Section_3.1.1) and the Management Server Role Abstract Data Model registry keys specified in section [3.3.1.2](#Section_3.3.1.2) to include the following data elements:
 
-- **Management Client Name**: A [**Name Object**](#gt_name-object) used to identify the Management Client with the underlying OleTx Transports Protocol [MS-CMPO](#Section_2.1) transport infrastructure.
+- **Management Client Name**: A [**Name Object**](#gt_name-object) used to identify the Management Client with the underlying OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) transport infrastructure.
 - **Management Server Name**: A Name Object used to identify the Management Server with which the Management Client communicates.
 - **Management Connection**: A [**Connection**](#gt_connection) that is established with the Management Server.
 - **Management Server Cluster Resource ID**: The [**Cluster Resource ID**](#gt_cluster-resource-id) used to identify the [**cluster resource**](#gt_cluster-resource) on the Management Server.
@@ -1426,11 +1426,11 @@ None.
 
 When a Management Client is initialized:
 
-- The Management Client Name field is constructed in an implementation-specific manner. This name object MUST be used when initializing the underlying OleTx Transports Protocol implementation as the Local [**Name Object**](#gt_name-object) (as specified in [MS-CMPO](#Section_2.1) section 3.2.3). The initialization process of the underlying OleTx Transports Protocol is specified in section [2.1.2](../MS-CMPO/MS-CMPO.md).
+- The Management Client Name field is constructed in an implementation-specific manner. This name object MUST be used when initializing the underlying OleTx Transports Protocol implementation as the Local [**Name Object**](#gt_name-object) (as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.3). The initialization process of the underlying OleTx Transports Protocol is specified in section [2.1.2](#Section_2.1.2).
 - The Management Server Name is constructed by initializing the fields of the Name object (specified in [MS-CMPO] section 3.2.1.4) with the following values:
 - **HostName**: The **HostName** field is initialized with the value of the **ComputerName.NetBIOS** element of the machine as specified in [MS-WKST](../MS-WKST/MS-WKST.md) section 3.2.1.2.
 - **CID**: The **CID** field is initialized as follows:
-- Read the string value, using the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md), from the "HKEY_CLASSES_ROOT\CID\<MSDTCUIS_GUID>" registry key as specified in section [2.2.3.5](../MS-RRP/MS-RRP.md), for the Description\Default value of "MSDTCUIS" as specified in section [2.2.3.5.1](#Section_2.2.3.5.1).
+- Read the string value, using the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md), from the "HKEY_CLASSES_ROOT\CID\<MSDTCUIS_GUID>" registry key as specified in section [2.2.3.5](#Section_2.2.3.5), for the Description\Default value of "MSDTCUIS" as specified in section [2.2.3.5.1](#Section_2.2.3.5.1).
 - Convert the <MSDTCUIS_GUID> string to a GUID as specified in [[C706]](https://go.microsoft.com/fwlink/?LinkId=89824) Appendix A.
 - **Protocols**:
 - If the Allow Network Access flag is set to false:
@@ -1447,7 +1447,7 @@ The following sections specify how to determine the version of the registry prot
 <a id="Section_3.2.4.1"></a>
 #### 3.2.4.1 Determining the Version of the Registry Protocol
 
-If the Management Client role implementation has an existing MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](#Section_2.1) session with the Management Server role implementation, the Management Client role implementation MUST check the State field of the session object, as specified in [MS-CMPO], section 3.3.4.2.1.
+If the Management Client role implementation has an existing MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) session with the Management Server role implementation, the Management Client role implementation MUST check the State field of the session object, as specified in [MS-CMPO], section 3.3.4.2.1.
 
 If the Management Client role implementation has no existing MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO] session with the Management Server role implementation, the Management Client role implementation MUST use the protocol versioning negotiation mechanism, as specified in [MS-CMPO] sections 3.3.4.2.1 and 3.3.4.2.2 to determine the version of the registry protocol supported by the Management Server role implementation as follows:
 
@@ -1559,29 +1559,29 @@ If the [**higher-layer business logic**](#gt_higher-layer-business-logic) decide
 <a id="Section_3.2.5.7"></a>
 #### 3.2.5.7 Reading from a Registry Key of the Management Server
 
-If the higher-layer business logic reads a value stored in a registry key defined in section [3.3.1.2](#Section_2.2.1.2.2.4), the Management Client MUST perform the following actions:
+If the higher-layer business logic reads a value stored in a registry key defined in section [3.3.1.2](#Section_3.3.1.2), the Management Client MUST perform the following actions:
 
-- Determine the registry path and access protocol as specified in sections [2.2.1.2.2](#Section_2.2.1.2.2.3) and [3.2.4.1](#Section_3.2.4.1).
-- Establish a Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) connection to the remote machine using the Management Server Name (section [3.3.1](../MS-RRP/MS-RRP.md)).
+- Determine the registry path and access protocol as specified in sections [2.2.1.2.2](#Section_2.2.1.2.2) and [3.2.4.1](#Section_3.2.4.1).
+- Establish a Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) connection to the remote machine using the Management Server Name (section [3.3.1](#Section_3.3.1)).
 - Open the root key (defined in [MS-RRP] section 3.1.1.5) for the registry key by using the OpenLocalMachine method as specified in [MS-RRP] section 3.1.5.3.
 - Open the registry key by using the BaseRegOpenKey method for read access (as specified in [MS-RRP] section 3.1.5.15).
 - Read the registry value by using the BaseRegQueryValue method (as specified in [MS-RRP] section 3.1.5.17).
 - Return the value to the higher layer business logic.
 - Close any open key by using the BaseRegCloseKey method (as specified in [MS-RRP] section 3.1.5.6).
-For more information on how to use [MS-RRP] to access registry keys, refer to section [4.2.1](../MS-RRP/MS-RRP.md).
+For more information on how to use [MS-RRP] to access registry keys, refer to section [4.2.1](#Section_4.2.1).
 
 <a id="Section_3.2.5.8"></a>
 #### 3.2.5.8 Writing to a Registry Key of the Management Server
 
-If the higher-layer business logic writes to a value stored in a registry key defined in section [3.3.1.2](#Section_2.2.1.2.2.4), the Management Client MUST perform the following actions:
+If the higher-layer business logic writes to a value stored in a registry key defined in section [3.3.1.2](#Section_3.3.1.2), the Management Client MUST perform the following actions:
 
-- Determine the registry path and access protocol as specified in sections [2.2.1.2.2](#Section_2.2.1.2.2.3) and [3.2.4.1](#Section_3.2.4.1).
-- Establish a Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) connection to the remote machine using the Management Server Name (section [3.3.1](../MS-RRP/MS-RRP.md)).
+- Determine the registry path and access protocol as specified in sections [2.2.1.2.2](#Section_2.2.1.2.2) and [3.2.4.1](#Section_3.2.4.1).
+- Establish a Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) connection to the remote machine using the Management Server Name (section [3.3.1](#Section_3.3.1)).
 - Open the root key (defined in [MS-RRP] section 3.1.1.5) for the registry key by using the OpenLocalMachine method as specified in [MS-RRP] section 3.1.5.3.
 - Open the registry key by using the BaseRegOpenKey method for write access (as specified in [MS-RRP] section 3.1.5.15).
 - Write the registry value by using the BaseRegSetValue method (as specified in [MS-RRP] section 3.1.5.22).
 - Close any open key by using the BaseRegCloseKey method (as specified in [MS-RRP] section 3.1.5.6).
-For more information on how to use [MS-RRP] to access registry keys, refer to section [4.2.1](../MS-RRP/MS-RRP.md).
+For more information on how to use [MS-RRP] to access registry keys, refer to section [4.2.1](#Section_4.2.1).
 
 <a id="Section_3.2.6"></a>
 ### 3.2.6 Message Processing Events and Sequencing Rules
@@ -1624,7 +1624,7 @@ It is possible to implement the conceptual data defined in this section using a 
 
 The Management Server MUST maintain all the data elements specified in section [3.1.1](#Section_3.1.1). The Management Server MUST also maintain the following data elements:
 
-- **Management Server Name**: A [**Name object**](#gt_name-object) identifying the Management Server with the underlying OleTx Transports Protocol [MS-CMPO](#Section_2.1) transport infrastructure.
+- **Management Server Name**: A [**Name object**](#gt_name-object) identifying the Management Server with the underlying OleTx Transports Protocol [MS-CMPO](../MS-CMPO/MS-CMPO.md) transport infrastructure.
 - **Show Limit**: An unsigned integer value specifying the minimum age a [**transaction**](#gt_transaction) MUST have to be reported to the Management Client. This is common to all [**connections**](#gt_connection) in the Management Connection List.
 - **Update Limit**: An unsigned integer value specifying the Update Timer value. This is common to all connections in the Management Connection List.
 - **Trace Limit**: A field that MUST have one of the values in TRACE_LEVEL, and specifies what level a trace event MUST have to be reported to the Management Client. This is common to all connections in the Management Connection List.
@@ -1693,7 +1693,7 @@ This is the final state.
 <a id="Section_3.3.1.2"></a>
 #### 3.3.1.2 Registry Keys (Public)
 
-The Management Server uses the Windows registry to persistently store and retrieve the registry keys and values specified in section [2.2.3](../MS-CMPO/MS-CMPO.md), and the persistent store is shared with [MS-CMPO](#Section_2.1), [MS-DTCO](../MS-DTCO/MS-DTCO.md), [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md), and [MC-DTCXA](../MC-DTCXA/MC-DTCXA.md). The set of registry keys and values specified in section 2.2.3 MUST be exposed by the Management Server at a specified registry path via the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) or Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) depending on the registry protocol version, as specified in section [2.2.1.2](../MS-CMPO/MS-CMPO.md). Each of these protocols can have a protocol-specific configuration that is not managed by OleTx Management Protocol.
+The Management Server uses the Windows registry to persistently store and retrieve the registry keys and values specified in section [2.2.3](#Section_2.2.3), and the persistent store is shared with [MS-CMPO](../MS-CMPO/MS-CMPO.md), [MS-DTCO](../MS-DTCO/MS-DTCO.md), [MS-DTCLU](../MS-DTCLU/MS-DTCLU.md), and [MC-DTCXA](../MC-DTCXA/MC-DTCXA.md). The set of registry keys and values specified in section 2.2.3 MUST be exposed by the Management Server at a specified registry path via the Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) or Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) depending on the registry protocol version, as specified in section [2.2.1.2](#Section_2.2.1.2). Each of these protocols can have a protocol-specific configuration that is not managed by OleTx Management Protocol.
 
 The Management Server also uses the abstract data model elements specified in [MS-CMPO] section 1.3.2 and [MS-DTCO] section 3.2.1, and initialized by the MSDTC Connection Manager: OleTx Transports Protocol [MS-CMPO] and the MSDTC Connection Manager: OleTx Transaction Protocol [MS-DTCO], using the registry keys defined in sections [3.3.1.2.1](#Section_3.3.1.2.1), [3.3.1.2.2](#Section_3.3.1.2.2), [3.3.1.2.3](#Section_3.3.1.2.3), and [3.3.1.2.4](#Section_3.3.1.2.4). For each abstract data model element that is loaded from the registry, there is one instance that is shared by the Management Server and the protocol(s) that uses the abstract data model element. The abstract data model elements are immutable after the transaction manager service implementing the Management Server role has started. Any changes made to the registry keys will not be reflected in the abstract data model elements until the transaction manager service is stopped and restarted.
 
@@ -1702,19 +1702,19 @@ Sections 3.3.1.2.1, 3.3.1.2.2, 3.3.1.2.3, and 3.3.1.2.4 specify the registry key
 <a id="Section_3.3.1.2.1"></a>
 ##### 3.3.1.2.1 Functional Registry Keys
 
-If a key value in the following table is required by the registry protocol version, as specified in section [2.2.1.2.1](#Section_2.2.1.2.1.3), then the key value, if present, MUST be of the correct type and MUST be set to a legal value. The registry path of these key values and the protocol used to access them is specified in section [2.2.1.2.2.1](#Section_2.2.1.2.2.1).
+If a key value in the following table is required by the registry protocol version, as specified in section [2.2.1.2.1](#Section_2.2.1.2.1), then the key value, if present, MUST be of the correct type and MUST be set to a legal value. The registry path of these key values and the protocol used to access them is specified in section [2.2.1.2.2.1](#Section_2.2.1.2.2.1).
 
 | Key value | Abstract data model element |
 | --- | --- |
 | "LuTransactions" | Allow LUTransactions Flag specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md), section 3.2.1. If the key value is 0x00000000, then the flag MUST be set to FALSE, otherwise the flag MUST be set to TRUE. |
 | "NetworkDtcAccessTip" | Allow Tip Security Flag specified in [MS-DTCO] section 3.2.1. If the key value is 0x00000000 or is missing, then the flag MUST be set to FALSE, otherwise the flag MUST be set to TRUE. |
-| "ServerTcpPort" | A server TCP port, as specified in [MS-CMPO](#Section_2.1) section 3.2.1.1. This value determines the TCP port number of the RPC server [**endpoint**](#gt_endpoint). If the value is blank or missing, the [**transaction manager**](#gt_transaction-manager) will use the port that is automatically assigned by the RPC manager. |
+| "ServerTcpPort" | A server TCP port, as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.1.1. This value determines the TCP port number of the RPC server [**endpoint**](#gt_endpoint). If the value is blank or missing, the [**transaction manager**](#gt_transaction-manager) will use the port that is automatically assigned by the RPC manager. |
 | "XaTransactions" | Allow XA Security Flag as specified in [MS-DTCO] section 3.2.1. If the key value is 0x00000000 or is missing, then the flags MUST be set to FALSE, otherwise the flags MUST be set to TRUE. |
 
 <a id="Section_3.3.1.2.2"></a>
 ##### 3.3.1.2.2 Security Access Registry Keys
 
-If a key value in the following table is required by the registry protocol version as specified in section [2.2.1.2.1](#Section_2.2.1.2.1.3), then the key value MUST be present, MUST be of the correct type and MUST be set to a legal value. The registry path of these key values and the protocol used to access them is specified in section [2.2.1.2.2.2](#Section_2.2.1.2.2.2).
+If a key value in the following table is required by the registry protocol version as specified in section [2.2.1.2.1](#Section_2.2.1.2.1), then the key value MUST be present, MUST be of the correct type and MUST be set to a legal value. The registry path of these key values and the protocol used to access them is specified in section [2.2.1.2.2.2](#Section_2.2.1.2.2.2).
 
 | Key value | Abstract Data Model element |
 | --- | --- |
@@ -1728,12 +1728,12 @@ If a key value in the following table is required by the registry protocol versi
 <a id="Section_3.3.1.2.3"></a>
 ##### 3.3.1.2.3 RPC Security Registry Keys
 
-If a key value in the following table is required by the registry protocol version as specified in section [2.2.1.2.1](#Section_2.2.1.2.1.3), then the key value, if present, MUST be of the correct type and MUST be set to a legal value. The registry path of these key values and the protocol used to access them is specified in section [2.2.1.2.2.3](#Section_2.2.1.2.2.3).
+If a key value in the following table is required by the registry protocol version as specified in section [2.2.1.2.1](#Section_2.2.1.2.1), then the key value, if present, MUST be of the correct type and MUST be set to a legal value. The registry path of these key values and the protocol used to access them is specified in section [2.2.1.2.2.3](#Section_2.2.1.2.2.3).
 
 | Key value | Abstract Data Model element |
 | --- | --- |
 | "AllowOnlySecureRpcCalls", "FallbackToUnsecureRPCIfNecessary", and "TurnOffRpcSecurity" | Security Level specified in [MS-DTCO](../MS-DTCO/MS-DTCO.md) section 3.2.1. If the AllowOnlySecureRpcCalls registry key is supported (as specified in section 2.2.1.2.1) and is either missing or set to a value other than 0x00000000, then the Security Level MUST be set to [**mutual authentication**](#gt_mutual-authentication). Else, if the FallbackToUnsecureRPCIfNecessary registry key is supported (as specified in section 2.2.1.2.1) and is set to a value other than 0x00000000, then the Security Level MUST be set to Incoming Authentication. Else, if the TurnOffRpcSecurity registry key is supported (as specified in section 2.2.1.2.1) and is set to a value other than 0x00000000, then the Security Level MUST be set to No Security. Else, the Security Level MUST be set to the default, implementation-specific security level value. <7> |
-| "ServiceNetworkProtocols" | The Service Network Protocols abstract data model element is specified in [MS-CMPO](#Section_2.1) section 3.3.1. The list of protocols specified by the registry key ServiceNetworkProtocols MUST be mapped to the list of supported RPC protocols in the **COM_PROTOCOL** field passed to the underlying OleTx Transports Protocol layer, as specified in [MS-CMPO] section 1.3.2. The ServiceNetworkProtocols registry key has a type of Int32. Its possible values are any bitwise-OR combination of zero or more RPC_NETWORK_PROTOCOL values. If the key value is 0x00000000 or is missing, then the list of protocols MUST contain a single entry specifying TCP/IP. |
+| "ServiceNetworkProtocols" | The Service Network Protocols abstract data model element is specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.3.1. The list of protocols specified by the registry key ServiceNetworkProtocols MUST be mapped to the list of supported RPC protocols in the **COM_PROTOCOL** field passed to the underlying OleTx Transports Protocol layer, as specified in [MS-CMPO] section 1.3.2. The ServiceNetworkProtocols registry key has a type of Int32. Its possible values are any bitwise-OR combination of zero or more RPC_NETWORK_PROTOCOL values. If the key value is 0x00000000 or is missing, then the list of protocols MUST contain a single entry specifying TCP/IP. |
 
 "Mutual Authentication", "Incoming Authentication", and "No Security" are specified in [MS-CMPO], section 3.2.1.1.
 
@@ -1767,7 +1767,7 @@ The minimum and maximum values of the timer are implementation-specific and MUST
 
 When the [Management Server role](#Section_3.3) is initialized, it MUST perform the following actions:
 
-- The Management Server Name is constructed in an implementation-specific manner that MUST make use of information contained in the <EndpointRegistryPath>\<MSDTCUIS_GUID> key (see section [2.2.3.6](../MS-CMPO/MS-CMPO.md)). The sub-key values and the use of those sub-keys are specified in section 2.2.3.6. The name object MUST be used when initializing the underlying OleTx Transports Protocol implementation (as specified in [MS-CMPO](#Section_2.1) section 3.2.3). The initialization process of the underlying OleTx Transports Protocol is specified in section [2.1.2](../MS-CMPO/MS-CMPO.md).
+- The Management Server Name is constructed in an implementation-specific manner that MUST make use of information contained in the <EndpointRegistryPath>\<MSDTCUIS_GUID> key (see section [2.2.3.6](#Section_2.2.3.6)). The sub-key values and the use of those sub-keys are specified in section 2.2.3.6. The name object MUST be used when initializing the underlying OleTx Transports Protocol implementation (as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md) section 3.2.3). The initialization process of the underlying OleTx Transports Protocol is specified in section [2.1.2](#Section_2.1.2).
 - The Show Limit field MUST be loaded from the "DAC\ShowLimit" custom property of the <EndpointRegistryPath>\<MSDTCUIS_GUID> key (see section [3.3.1.2.4](#Section_3.3.1.2.4)).
 - The Update Limit field MUST be loaded from the "DAC\UpdateLimit" custom property of the <EndpointRegistryPath>\<MSDTCUIS_GUID> key.
 - The Trace Limit field MUST be loaded from the "DAC\TraceLimit" custom property of the <EndpointRegistryPath>\<MSDTCUIS_GUID> key.
@@ -1864,7 +1864,7 @@ If the Update Transaction Stats event is signaled, the Management Server MUST pe
 <a id="Section_3.3.5"></a>
 ### 3.3.5 Message Processing Events and Sequencing Rules
 
-The Show Limit, Update Limit, and Trace Limit Abstract Data Model data elements that these [**messages**](#gt_message) modify are initialized during Management Server role initialization (see section [3.3.3](#Section_3.2.3)).
+The Show Limit, Update Limit, and Trace Limit Abstract Data Model data elements that these [**messages**](#gt_message) modify are initialized during Management Server role initialization (see section [3.3.3](#Section_3.3.3)).
 
 <a id="Section_3.3.5.1"></a>
 #### 3.3.5.1 CONNTYPE_TXUSER_DTCUIC as Acceptor
@@ -1981,7 +1981,7 @@ When the Incoming Connection Request event is signaled, the Management Server MU
 <a id="Section_3.3.7.2"></a>
 #### 3.3.7.2 Service Control Events
 
-The Management Server MUST respond to [**Service Control Manager (SCM)**](#gt_service-control-manager-scm) [MS-SCMR](#Section_1.7.3) requests to perform the following actions:
+The Management Server MUST respond to [**Service Control Manager (SCM)**](#gt_service-control-manager-scm) [MS-SCMR](#Section_2.2.4) requests to perform the following actions:
 
 - Start the [**transaction manager**](#gt_transaction-manager) Service for Opnum 31 as specified in [MS-SCMR] section 3.1.4.30.
 - Stop the transaction manager Service for Opnum 1 with value SERVICE_CONTROL_STOP as specified in [MS-SCMR] section 3.1.4.2.
@@ -1989,7 +1989,7 @@ The Management Server MUST respond to [**Service Control Manager (SCM)**](#gt_se
 <a id="Section_4"></a>
 # 4 Protocol Examples
 
-These protocol examples assume that an [**OleTx**](#gt_oletx) transports [**session**](#gt_session), as specified in [MS-CMPO](#Section_2.1), has already been established between the two [**protocol participants**](#gt_protocol-participant).
+These protocol examples assume that an [**OleTx**](#gt_oletx) transports [**session**](#gt_session), as specified in [MS-CMPO](../MS-CMPO/MS-CMPO.md), has already been established between the two [**protocol participants**](#gt_protocol-participant).
 
 Protocol participants communicate with each other by using OleTx multiplexing [**connections**](#gt_connection) (as specified in [MS-CMP](../MS-CMP/MS-CMP.md)), that are in turn layered on top of the OleTx transports infrastructure (as specified in [MS-CMPO]). In these examples, [**messages**](#gt_message) are sent from one protocol participant to another by submitting a MESSAGE_PACKET (as specified in [MS-CMP] section 2.2.2) to the underlying OleTx multiplexing layer (as specified in [MS-CMP]).
 
@@ -2217,12 +2217,12 @@ When the Windows Remote Registry Protocol server receives this request from the 
 <a id="Section_4.2.2"></a>
 ### 4.2.2 Restarting the Transaction Manager on the Remote Machine
 
-Because the XaTransactions registry value is only read during the initialization of the [**transaction manager**](#gt_transaction-manager), the remote transaction manager has to be restarted by using the Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3).
+Because the XaTransactions registry value is only read during the initialization of the [**transaction manager**](#gt_transaction-manager), the remote transaction manager has to be restarted by using the Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4).
 
 <a id="Section_4.2.2.1"></a>
 #### 4.2.2.1 Stopping the Transaction Manager Service
 
-To restart the [**transaction manager**](#gt_transaction-manager) on the remote machine, the Management Client established a Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3) [**connection**](#gt_connection) with the remote machine (for example, Machine2) and sends an ROpenSCManagerW call with the following values for the parameters.
+To restart the [**transaction manager**](#gt_transaction-manager) on the remote machine, the Management Client established a Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4) [**connection**](#gt_connection) with the remote machine (for example, Machine2) and sends an ROpenSCManagerW call with the following values for the parameters.
 
 lpMachineName = L"Machine2"
 
@@ -2279,7 +2279,7 @@ On receiving this request from the client, the server closes the handle to the o
 <a id="Section_4.2.2.2"></a>
 #### 4.2.2.2 Starting the Transaction Manager Service
 
-To restart the [**transaction manager**](#gt_transaction-manager) on the remote machine, the Management Client established a Service Control Manager Remote Protocol [MS-SCMR](#Section_1.7.3) [**connection**](#gt_connection) with the remote machine (for example, Machine2) and sends an **ROpenSCManagerW** call with the following values for the parameters.
+To restart the [**transaction manager**](#gt_transaction-manager) on the remote machine, the Management Client established a Service Control Manager Remote Protocol [MS-SCMR](#Section_2.2.4) [**connection**](#gt_connection) with the remote machine (for example, Machine2) and sends an **ROpenSCManagerW** call with the following values for the parameters.
 
 lpMachineName = L"Machine2"
 
@@ -2336,7 +2336,7 @@ On receiving this request from the client, the server closes the handle to the o
 <a id="Section_5"></a>
 # 5 Security
 
-This protocol employs the security mechanism of the underlying transport infrastructure specified in [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](#Section_2.1). Because the information exchanged in messages by this protocol can contain sensitive data, like the transaction identifiers and transaction manager addresses, implementers need to use mutual authentication, as specified in [MS-CMPO] section 2.1.3.<10>
+This protocol employs the security mechanism of the underlying transport infrastructure specified in [MS-CMP](../MS-CMP/MS-CMP.md) and [MS-CMPO](../MS-CMPO/MS-CMPO.md). Because the information exchanged in messages by this protocol can contain sensitive data, like the transaction identifiers and transaction manager addresses, implementers need to use mutual authentication, as specified in [MS-CMPO] section 2.1.3.<10>
 
 The Windows Remote Registry Protocol [MS-RRP](../MS-RRP/MS-RRP.md) and Failover Cluster: Management API (ClusAPI) Protocol [MS-CMRP](../MS-CMRP/MS-CMRP.md) registry keys exposed by the Management Server are protected for access as follows:
 

@@ -360,7 +360,7 @@ We conduct frequent surveys of the normative references to assure their continue
 <a id="Section_1.2.2"></a>
 ### 1.2.2 Informative References
 
-[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](#Section_1.3)".
+[MS-WPO] Microsoft Corporation, "[Windows Protocols Overview](../MS-WPO/MS-WPO.md)".
 
 [MSDN-DiskPrompt] Microsoft Corporation, "DiskPrompt property", [http://msdn.microsoft.com/en-us/library/aa368313.aspx](https://go.microsoft.com/fwlink/?LinkId=102647)
 
@@ -407,7 +407,7 @@ Software installation settings carried by this protocol can cause the client to 
 
 This protocol depends on the Group Policy: Core Protocol (as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md)) to provide a list of applicable [**GPOs**](#gt_group-policy-object-gpo). It also transmits Group Policy settings and instructions between the client and the [**Group Policy server**](#gt_group-policy-server) by reading and writing files using remote file access.
 
-See [MS-WPO](#Section_1.3) section 6.4 for an overview of remote file system concepts.
+See [MS-WPO](../MS-WPO/MS-WPO.md) section 6.4 for an overview of remote file system concepts.
 
 The administrative tool and client plug-ins for this protocol use [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) version 3 (as specified in [[RFC2251]](https://go.microsoft.com/fwlink/?LinkId=90325)) to read and write protocol-specific data.
 
@@ -422,7 +422,7 @@ The Group Policy Protocol invokes plug-ins for protocols such as this one. In su
 
 The prerequisites for this protocol are the same as those for the Group Policy: Core Protocol, as specified in [MS-GPOL](../MS-GPOL/MS-GPOL.md).
 
-It is assumed that a client computer has an operating system component capable of performing software installation and removal based on the abstract state specified in section [3.2](#Section_1.3).
+It is assumed that a client computer has an operating system component capable of performing software installation and removal based on the abstract state specified in section [3.2](#Section_3.2).
 
 <a id="Section_1.6"></a>
 ## 1.6 Applicability Statement
@@ -458,7 +458,7 @@ This protocol defines [**CSE GUID**](#gt_client-side-extension-guid-cse-guid) an
 <a id="Section_2.1"></a>
 ## 2.1 Transport
 
-The Group Policy: Software Installation Protocol Extension requires remote file access and [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) transports as specified for use in the Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md). All messages MUST be exchanged over the LDAP and remote file access protocols between the client and server, as specified in section [2.2](../MS-GPOL/MS-GPOL.md).
+The Group Policy: Software Installation Protocol Extension requires remote file access and [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) transports as specified for use in the Group Policy: Core Protocol [MS-GPOL](../MS-GPOL/MS-GPOL.md). All messages MUST be exchanged over the LDAP and remote file access protocols between the client and server, as specified in section [2.2](#Section_2.2).
 
 <a id="Section_2.2"></a>
 ## 2.2 Message Syntax
@@ -563,7 +563,7 @@ The SearchResultEntries MUST contain attributes with the following formats.
 
 | Attribute | Format |
 | --- | --- |
-| **canUpgradeScript** | A multivalued attribute, as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.219, where each value MUST be a [**directory string**](#gt_directory-string) representing software modeled by another [**PackageRegistration object**](#gt_packageregistration-object) that is to be [**upgraded**](#gt_upgrade). Each value MUST have the following format. <SoftwareDN>\\<ObjectGuidID>:<UpgradeType> where <SoftwareDN> is a software package. This MUST be a [**DN**](#gt_distinguished-name-dn) of the form LDAP://CN=Class Store,<scoped gpo dn>, where <scoped gpo dn> is a [**scoped GPO DN**](#gt_5ae3cacc-9e3c-459e-99f8-20a41628e5fe). <ObjectGuidID> MUST be the string form of the objectId [**GUID**](#gt_globally-unique-identifier-guid) attribute, as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) section 3, of the PackageRegistration object referenced by <SoftwareDN>. <UpgradeType> is a two-character string that MUST be interpreted as a flags field. It describes how to apply the upgrade. The <UpgradeType> flags UPGFLG_Uninstall, UPGFLG_NoUninstall, UPGFLG_UpgradedBy, and UPGFLG_Enforced are specified in section [2.2.2.4.2](../MS-ADSC/MS-ADSC.md) canUpgradeScript Attribute UpgradeType Values. Either UPGFLG_Uninstall or UPGFLG_NoUninstall MUST be specified, but not both. UPGFLG_UpgradedBy and UPGFLG_Enforced MAY be added. They are not used by the client plug-in; they are used only by the administrative plug-in, to display the proper user interface. The value MUST be one of these values; if it is any other value, the behavior is undefined. It is valid for the attribute to be empty; in which case, the attribute MUST be ignored by the client. If this attribute does not conform to the format specified here, the client MUST behave as if the value is empty. |
+| **canUpgradeScript** | A multivalued attribute, as specified in [MS-ADSC](../MS-ADSC/MS-ADSC.md) section 2.219, where each value MUST be a [**directory string**](#gt_directory-string) representing software modeled by another [**PackageRegistration object**](#gt_packageregistration-object) that is to be [**upgraded**](#gt_upgrade). Each value MUST have the following format. <SoftwareDN>\\<ObjectGuidID>:<UpgradeType> where <SoftwareDN> is a software package. This MUST be a [**DN**](#gt_distinguished-name-dn) of the form LDAP://CN=Class Store,<scoped gpo dn>, where <scoped gpo dn> is a [**scoped GPO DN**](#gt_5ae3cacc-9e3c-459e-99f8-20a41628e5fe). <ObjectGuidID> MUST be the string form of the objectId [**GUID**](#gt_globally-unique-identifier-guid) attribute, as specified in [[RFC4122]](https://go.microsoft.com/fwlink/?LinkId=90460) section 3, of the PackageRegistration object referenced by <SoftwareDN>. <UpgradeType> is a two-character string that MUST be interpreted as a flags field. It describes how to apply the upgrade. The <UpgradeType> flags UPGFLG_Uninstall, UPGFLG_NoUninstall, UPGFLG_UpgradedBy, and UPGFLG_Enforced are specified in section [2.2.2.4.2](#Section_2.2.2.4.2) canUpgradeScript Attribute UpgradeType Values. Either UPGFLG_Uninstall or UPGFLG_NoUninstall MUST be specified, but not both. UPGFLG_UpgradedBy and UPGFLG_Enforced MAY be added. They are not used by the client plug-in; they are used only by the administrative plug-in, to display the proper user interface. The value MUST be one of these values; if it is any other value, the behavior is undefined. It is valid for the attribute to be empty; in which case, the attribute MUST be ignored by the client. If this attribute does not conform to the format specified here, the client MUST behave as if the value is empty. |
 | **packageFlags** | A 32-bit integer that MUST be interpreted as a flags field in which all combinations of flags are valid, unless otherwise noted. The value of the flags of this integer MUST be as specified in section [2.2.2.4.3](#Section_2.2.2.4.3), packageFlags Attribute Values. |
 | **packageType** | An integer that MUST be one of the values specified in section [2.2.2.4.4](#Section_2.2.2.4.4), packageType Attribute Values. |
 | **msiScriptPath** | MUST be an [**UncPath**](#gt_uncpath) for a file under the [**software scripts path**](#gt_software-scripts-path) directory to an [**application advertise script**](#gt_application-advertise-script) file that is named <[**curly braced GUID string**](#gt_curly-braced-guid-string)>.aas. |
@@ -1312,7 +1312,7 @@ The class of policy write administration sequences consists of the following seq
 <a id="Section_3.1.5.2.1"></a>
 ##### 3.1.5.2.1 Package Creation
 
-When an administrator deploys new software, a new software package is created. The plug-in MUST accomplish this in the following way, using the messages specified in section [2.2.3.2](#Section_3.1.5.2):
+When an administrator deploys new software, a new software package is created. The plug-in MUST accomplish this in the following way, using the messages specified in section [2.2.3.2](#Section_2.2.3.2):
 
 - The Common [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Bind sequence (section [3.2.5.6](#Section_3.2.5.6)) MUST be issued.
 - The client MUST issue a class store creation message, as specified in section [2.2.3.2.1](#Section_2.2.3.2.1). If this succeeds or returns an ldapResult message indicating that the class store instance of the classStore objectClass already exists, the protocol MUST continue to the next step. If the **resultCode** field of the addResponse message is non-zero for any other reason, then this protocol sequence MUST proceed to step 9 (LDAP UnBindRequest).
@@ -1450,7 +1450,7 @@ The plug-in MUST attempt to delete the application advertise script file identif
 <a id="Section_3.1.5.2.7"></a>
 ##### 3.1.5.2.7 Category Creation
 
-When an administrator adds a new category, a new category registration object is created. The plug-in MUST accomplish this in the following way, using the messages specified in section [2.2.3.2](#Section_3.1.5.2):
+When an administrator adds a new category, a new category registration object is created. The plug-in MUST accomplish this in the following way, using the messages specified in section [2.2.3.2](#Section_2.2.3.2):
 
 - The Common [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Bind sequence (section [3.2.5.6](#Section_3.2.5.6)) MUST be issued.
 - A [Default Naming Context Search Request](#Section_2.2.1.1) (section 2.2.1.1) message MUST be generated by the client. The corresponding response for this message is specified in section [2.2.1.2](#Section_2.2.1.2). The success of the request is determined by looking at the ldapResult status for the response portion of the message.
@@ -1471,7 +1471,7 @@ When an administrator modifies a category, the corresponding category registrati
 <a id="Section_3.1.5.2.9"></a>
 ##### 3.1.5.2.9 Category Deletion
 
-When an administrator deletes a category, the corresponding category registration object is deleted. The plug-in MUST accomplish this in the following way, using the messages specified in section [2.2.3.2](#Section_3.1.5.2):
+When an administrator deletes a category, the corresponding category registration object is deleted. The plug-in MUST accomplish this in the following way, using the messages specified in section [2.2.3.2](#Section_2.2.3.2):
 
 - The Common [**LDAP**](#gt_lightweight-directory-access-protocol-ldap) Bind sequence (section [3.2.5.6](#Section_3.2.5.6)) MUST be issued.
 - A [Default Naming Context Search Request](#Section_2.2.1.1) (section 2.2.1.1) message MUST be generated by the client. The corresponding response for this message is specified in section [2.2.1.2](#Section_2.2.1.2). The success of the request is determined by looking at the ldapResult status for the response portion of the message.

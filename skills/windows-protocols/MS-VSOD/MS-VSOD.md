@@ -105,7 +105,7 @@ This document uses the following terms:
 
 Links to a document in the Microsoft Open Specifications library point to the correct section in the most recently published version of the referenced document. However, because individual documents in the library are not updated at the same time, the section numbers in the documents may not match. You can confirm the correct section numbering by checking the [Errata](https://go.microsoft.com/fwlink/?linkid=850906).
 
-[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](#Section_1.3)".
+[MS-AUTHSOD] Microsoft Corporation, "[Authentication Services Protocols Overview](../MS-AUTHSOD/MS-AUTHSOD.md)".
 
 [MS-RSVD] Microsoft Corporation, "[Remote Shared Virtual Disk Protocol](../MS-RSVD/MS-RSVD.md)".
 
@@ -245,7 +245,7 @@ The user has permissions to access the virtual disk.
 - Trigger: Based on interactions with the user, the application requests that the virtual disk be opened.
 - The application requests that the file client make a connection to and open the virtual disk.
 - The file client first establishes the connection with the file server, as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.2.
-- The file server authenticates the user through the mechanisms described in [MS-AUTHSOD](#Section_1.3).
+- The file server authenticates the user through the mechanisms described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - If the connection is successful, the file client opens the virtual disk on the file server, as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.3.
 - The file server processes the open request, as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.3.5.9.
 - The file client returns a handle for the virtual disk to the application, as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.5.7.3.
@@ -437,7 +437,7 @@ The user has permissions to access the shared virtual SCSI disk.
 - Trigger: Based on interactions with the user, the application requests that the shared virtual SCSI disk be opened.
 - The application requests that the RSVD client connects to and opens the shared virtual SCSI disk using the file client, as described in [MS-RSVD](../MS-RSVD/MS-RSVD.md) section 3.1.4.2.
 - The file client first establishes the connection with the file server as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.2.
-- The file server authenticates the user through the mechanisms described in [MS-AUTHSOD](#Section_1.3).
+- The file server authenticates the user through the mechanisms described in [MS-AUTHSOD](../MS-AUTHSOD/MS-AUTHSOD.md).
 - If the connection is successful, the file client opens the shared virtual SCSI disk on the file server as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) section 3.2.4.3.
 - When the file server processes the open request, as described in [MS-SMB2](../MS-SMB2/MS-SMB2.md) sections 3.3.5.9 and 3.3.5.9.14, the RSVD server processes the received open request as described in [MS-RSVD](../MS-RSVD/MS-RSVD.md) section 3.2.5.1.
 - The RSVD client returns a handle for the shared virtual SCSI disk to the application.
