@@ -263,18 +263,84 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
                 }
             }
         }
-        $titleToSection = @{}
+        $getSectionSortKey = {
+            param([string]$sectionId)
+
+            if ($sectionId -match '^Section_(?<num>\d+(?:\.\d+)*)$') {
+                $parts = @($Matches['num'] -split '\.' | ForEach-Object {
+                    if ($_ -match '^\d+$') { [int]$_ } else { 0 }
+                })
+                $padded = @($parts | ForEach-Object { '{0:D8}' -f $_ })
+                return ('0|' + ($padded -join '.'))
+            }
+
+            return ('1|' + $sectionId.ToLowerInvariant())
+        }
+
+        $sectionEntries = New-Object System.Collections.Generic.List[object]
         foreach ($entry in $linkMetadata.SectionToTitle.GetEnumerator()) {
-            $key = [string]$entry.Key
-            $val = ([string]$entry.Value -replace '\s+', ' ').Trim()
-            if (-not [string]::IsNullOrWhiteSpace($val)) {
-                $titleToSection[$val] = $key
-                $withoutNum = ($val -replace '^\d+(?:\.\d+)*\s+', '').Trim()
-                if ($withoutNum -and -not $titleToSection.ContainsKey($withoutNum)) {
-                    $titleToSection[$withoutNum] = $key
+            $sectionId = [string]$entry.Key
+            $title = ([string]$entry.Value -replace '\s+', ' ').Trim()
+            if ([string]::IsNullOrWhiteSpace($sectionId) -or [string]::IsNullOrWhiteSpace($title)) {
+                continue
+            }
+
+            $titleWithoutNum = ($title -replace '^\d+(?:\.\d+)*\s+', '').Trim()
+            [void]$sectionEntries.Add([pscustomobject]@{
+                SectionId = $sectionId
+                TitleNormalized = $title
+                TitleWithoutNumber = $titleWithoutNum
+                SortKey = (& $getSectionSortKey $sectionId)
+            })
+        }
+
+        $orderedSectionEntries = @($sectionEntries | Sort-Object -Property @(
+            @{ Expression = { $_.SortKey } },
+            @{ Expression = { $_.SectionId.ToLowerInvariant() } },
+            @{ Expression = { $_.TitleNormalized.ToLowerInvariant() } }
+        ))
+
+        $sectionIdSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+        $titleToSections = @{}
+        $titleWithoutNumToSections = @{}
+
+        foreach ($entry in $orderedSectionEntries) {
+            [void]$sectionIdSet.Add($entry.SectionId)
+
+            $titleKey = $entry.TitleNormalized.ToLowerInvariant()
+            if (-not $titleToSections.ContainsKey($titleKey)) {
+                $titleToSections[$titleKey] = New-Object System.Collections.Generic.List[string]
+            }
+            if (-not $titleToSections[$titleKey].Contains($entry.SectionId)) {
+                [void]$titleToSections[$titleKey].Add($entry.SectionId)
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($entry.TitleWithoutNumber)) {
+                $withoutNumKey = $entry.TitleWithoutNumber.ToLowerInvariant()
+                if (-not $titleWithoutNumToSections.ContainsKey($withoutNumKey)) {
+                    $titleWithoutNumToSections[$withoutNumKey] = New-Object System.Collections.Generic.List[string]
+                }
+                if (-not $titleWithoutNumToSections[$withoutNumKey].Contains($entry.SectionId)) {
+                    [void]$titleWithoutNumToSections[$withoutNumKey].Add($entry.SectionId)
                 }
             }
         }
+
+        $findUniqueSection = {
+            param([System.Collections.Generic.List[string]]$candidateSections)
+
+            if ($null -eq $candidateSections) {
+                return $null
+            }
+
+            $candidates = @($candidateSections | Sort-Object)
+            if ($candidates.Count -eq 1) {
+                return $candidates[0]
+            }
+
+            return $null
+        }
+
         $sectionGuidRegex = [regex]::new('^(?:[Ss]ection_)?([a-f0-9]{32})$')
         $internalLinksArray = $linkMetadata.InternalHyperlinks.ToArray()
         foreach ($link in $internalLinksArray) {
@@ -285,18 +351,86 @@ function ConvertFrom-OpenSpecDocxWithOpenXml {
             $guid = $m.Groups[1].Value.ToLowerInvariant()
             if ($linkMetadata.GuidToSection.ContainsKey($guid)) { continue }
             $matchedSection = $null
-            if ($titleToSection.ContainsKey($text)) {
-                $matchedSection = $titleToSection[$text]
-            }
-            else {
-                foreach ($tit in $titleToSection.Keys) {
-                    if ($tit -eq $text) { $matchedSection = $titleToSection[$tit]; break }
-                    $textEsc = [Management.Automation.WildcardPattern]::Escape($text)
-                    $titEsc = [Management.Automation.WildcardPattern]::Escape($tit)
-                    if ($tit -like "*$textEsc*" -and $text.Length -ge 8) { $matchedSection = $titleToSection[$tit]; break }
-                    if ($text -like "*$titEsc*" -and $tit.Length -ge 8) { $matchedSection = $titleToSection[$tit]; break }
+
+            if ($text -match '^(?:section\s+)?(?<num>\d+(?:\.\d+)*)$') {
+                $directSection = "Section_$($Matches['num'])"
+                if ($sectionIdSet.Contains($directSection)) {
+                    $matchedSection = $directSection
                 }
             }
+
+            $textKey = $text.ToLowerInvariant()
+            if (-not $matchedSection -and $titleToSections.ContainsKey($textKey)) {
+                $matchedSection = & $findUniqueSection $titleToSections[$textKey]
+            }
+
+            $textWithoutNum = ($text -replace '^\d+(?:\.\d+)*\s+', '').Trim()
+            if (-not $matchedSection -and -not [string]::IsNullOrWhiteSpace($textWithoutNum)) {
+                $textWithoutNumKey = $textWithoutNum.ToLowerInvariant()
+                if ($titleWithoutNumToSections.ContainsKey($textWithoutNumKey)) {
+                    $matchedSection = & $findUniqueSection $titleWithoutNumToSections[$textWithoutNumKey]
+                }
+            }
+
+            if (-not $matchedSection -and $text.Length -ge 8) {
+                $fuzzyCandidates = New-Object System.Collections.Generic.List[object]
+                foreach ($entry in $orderedSectionEntries) {
+                    $candidateTitle = $entry.TitleNormalized
+                    if ([string]::IsNullOrWhiteSpace($candidateTitle) -or $candidateTitle.Length -lt 8) {
+                        continue
+                    }
+
+                    $containsText = $candidateTitle.IndexOf($text, [System.StringComparison]::OrdinalIgnoreCase) -ge 0
+                    $containsCandidate = $text.IndexOf($candidateTitle, [System.StringComparison]::OrdinalIgnoreCase) -ge 0
+                    if (-not $containsText -and -not $containsCandidate) {
+                        continue
+                    }
+
+                    $score = if ($containsText -and $containsCandidate) {
+                        0
+                    }
+                    elseif ($containsText) {
+                        1
+                    }
+                    else {
+                        2
+                    }
+
+                    [void]$fuzzyCandidates.Add([pscustomobject]@{
+                        Score = $score
+                        LengthDelta = [Math]::Abs($candidateTitle.Length - $text.Length)
+                        SortKey = $entry.SortKey
+                        SectionId = $entry.SectionId
+                    })
+                }
+
+                if ($fuzzyCandidates.Count -gt 0) {
+                    $orderedCandidates = @($fuzzyCandidates | Sort-Object -Property @(
+                        @{ Expression = { $_.Score } },
+                        @{ Expression = { $_.LengthDelta } },
+                        @{ Expression = { $_.SortKey } },
+                        @{ Expression = { $_.SectionId } }
+                    ))
+
+                    $best = $orderedCandidates[0]
+                    $isUniqueBest = $true
+                    if ($orderedCandidates.Count -gt 1) {
+                        $second = $orderedCandidates[1]
+                        if (
+                            $second.Score -eq $best.Score -and
+                            $second.LengthDelta -eq $best.LengthDelta -and
+                            $second.SortKey -eq $best.SortKey
+                        ) {
+                            $isUniqueBest = $false
+                        }
+                    }
+
+                    if ($isUniqueBest) {
+                        $matchedSection = $best.SectionId
+                    }
+                }
+            }
+
             if ($matchedSection) {
                 $linkMetadata.GuidToSection[$guid] = $matchedSection
             }

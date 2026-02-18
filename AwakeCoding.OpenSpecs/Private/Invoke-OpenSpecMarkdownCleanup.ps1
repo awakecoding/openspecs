@@ -1124,18 +1124,13 @@ function Resolve-OpenSpecGuidSectionAnchors {
     # these with the Section_X.Y.Z form fixes both issues.
     $guidToSection = @{}
     $sourceMapCount = 0
-    if ($GuidToSectionMap) {
-        foreach ($entry in $GuidToSectionMap.GetEnumerator()) {
-            $guid = ([string]$entry.Key).ToLowerInvariant()
-            $section = [string]$entry.Value
-            if ([string]::IsNullOrWhiteSpace($guid) -or [string]::IsNullOrWhiteSpace($section)) {
-                continue
-            }
-            if (-not $guidToSection.ContainsKey($guid)) {
-                $guidToSection[$guid] = $section
-                $sourceMapCount++
-            }
-        }
+    $existingSections = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+    foreach ($m in [regex]::Matches($result, '<a\s+id="(?<section>Section_\d+(?:\.\d+)*)"\s*></a>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+        [void]$existingSections.Add($m.Groups['section'].Value)
+    }
+    foreach ($m in [regex]::Matches($result, '^\s*#{1,6}\s+(?<num>\d+(?:\.\d+)*)\b', [System.Text.RegularExpressions.RegexOptions]'IgnoreCase, Multiline')) {
+        [void]$existingSections.Add("Section_$($m.Groups['num'].Value)")
     }
 
     # Order 1: GUID anchor followed by Section anchor (most common)
@@ -1162,6 +1157,20 @@ function Resolve-OpenSpecGuidSectionAnchors {
         }
     }
 
+    if ($GuidToSectionMap) {
+        foreach ($entry in $GuidToSectionMap.GetEnumerator()) {
+            $guid = ([string]$entry.Key).ToLowerInvariant()
+            $section = [string]$entry.Value
+            if ([string]::IsNullOrWhiteSpace($guid) -or [string]::IsNullOrWhiteSpace($section)) {
+                continue
+            }
+            if (-not $guidToSection.ContainsKey($guid)) {
+                $guidToSection[$guid] = $section
+                $sourceMapCount++
+            }
+        }
+    }
+
     if ($guidToSection.Count -eq 0) {
         return [pscustomobject]@{
             Markdown = $result
@@ -1172,15 +1181,38 @@ function Resolve-OpenSpecGuidSectionAnchors {
     # Rewrite all link targets that reference GUID-based section anchors.
     # Matches both (#Section_GUID) and (#section_GUID) forms.
     $rewriteCounter = @{ Value = 0 }
+    $numericPreferenceCounter = @{ Value = 0 }
     $result = [regex]::Replace(
         $result,
-        '\(#[Ss]ection_(?<guid>[0-9a-f]{32})\)',
+        '\[(?<text>[^\]]+)\]\(#[Ss]ection_(?<guid>[0-9a-f]{32})\)',
         {
             param($m)
             $guid = $m.Groups['guid'].Value.ToLowerInvariant()
-            if ($guidToSection.ContainsKey($guid)) {
+            $text = ($m.Groups['text'].Value -replace '\*+', '' -replace '\s+', ' ').Trim()
+
+            $preferredSection = $null
+            if ($text -match '^(?:section\s+)?(?<num>\d+(?:\.\d+)*)$') {
+                $numericSection = "Section_$($Matches['num'])"
+                if ($existingSections.Contains($numericSection)) {
+                    $preferredSection = $numericSection
+                    $numericPreferenceCounter.Value++
+                }
+            }
+            elseif ($text -match '\(section\s+(?<num>\d+(?:\.\d+)*)\)') {
+                $numericSection = "Section_$($Matches['num'])"
+                if ($existingSections.Contains($numericSection)) {
+                    $preferredSection = $numericSection
+                    $numericPreferenceCounter.Value++
+                }
+            }
+
+            if (-not $preferredSection -and $guidToSection.ContainsKey($guid)) {
+                $preferredSection = $guidToSection[$guid]
+            }
+
+            if ($preferredSection) {
                 $rewriteCounter.Value++
-                "(#$($guidToSection[$guid]))"
+                "[$($m.Groups['text'].Value)](#$preferredSection)"
             }
             else {
                 $m.Value
@@ -1196,6 +1228,7 @@ function Resolve-OpenSpecGuidSectionAnchors {
             Count = $rewriteCount
             MappedAnchors = $guidToSection.Count
             SourceMappedAnchors = $sourceMapCount
+            NumericPreferenceRewrites = $numericPreferenceCounter.Value
             Reason = 'GUID-based section anchors were resolved to section number anchors.'
         })
     }
@@ -1279,16 +1312,32 @@ function Repair-OpenSpecSectionNumberLinks {
     # In-document links like [5.3.8](#Section_guid) often have no guid->section mapping
     # (Word bookmark pair missing in converted output). When the link text is a section
     # number, rewrite to [5.3.8](#Section_5.3.8) so they resolve to our injected anchors.
+    $availableSections = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($m in [regex]::Matches($result, '<a\s+id="(?<section>Section_\d+(?:\.\d+)*)"\s*></a>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+        [void]$availableSections.Add($m.Groups['section'].Value)
+    }
+    foreach ($m in [regex]::Matches($result, '^\s*#{1,6}\s+(?<num>\d+(?:\.\d+)*)\b', [System.Text.RegularExpressions.RegexOptions]'IgnoreCase, Multiline')) {
+        [void]$availableSections.Add("Section_$($m.Groups['num'].Value)")
+    }
+
     $pattern = [regex]::new(
-        '\[(?<num>\d+(?:\.\d+)*)\]\(#Section_[a-f0-9]{32}\)',
+        '\[(?<num>\d+(?:\.\d+)*)\]\(#Section_(?<guid>[a-f0-9]{32})\)',
         [System.Text.RegularExpressions.RegexOptions]::IgnoreCase
     )
-    $rewriteCount = $pattern.Matches($result).Count
+    $rewriteCounter = @{ Value = 0 }
     $result = $pattern.Replace($result, {
         param($m)
         $num = $m.Groups['num'].Value
-        "[$num](#Section_$num)"
+        $targetSection = "Section_$num"
+        if ($availableSections.Contains($targetSection)) {
+            $rewriteCounter.Value++
+            "[$num](#$targetSection)"
+        }
+        else {
+            $m.Value
+        }
     })
+    $rewriteCount = $rewriteCounter.Value
 
     if ($rewriteCount -gt 0) {
         [void]$issues.Add([pscustomobject]@{
