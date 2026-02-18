@@ -22,7 +22,11 @@ $cleanupPath = Join-Path $repoRoot 'AwakeCoding.OpenSpecs\Private\Invoke-OpenSpe
 if (-not (Test-Path -LiteralPath $cleanupPath)) {
     Write-Error "Cleanup script not found: $cleanupPath"
 }
-. $cleanupPath
+$helperPath = Join-Path $PSScriptRoot 'Invoke-RepairAllBrokenLinksFile.ps1'
+if (-not (Test-Path -LiteralPath $helperPath)) {
+    Write-Error "Helper script not found: $helperPath"
+}
+. $helperPath
 
 $resolved = [System.IO.Path]::GetFullPath($Path)
 if (-not (Test-Path -LiteralPath $resolved -PathType Container)) {
@@ -42,24 +46,8 @@ $whatIfArg = $WhatIf
 
 if ($useParallel) {
     $results = $specFiles | ForEach-Object -Parallel {
-        . $using:cleanupPath
-        $mdPath = $_
-        $content = Get-Content -LiteralPath $mdPath -Raw -Encoding UTF8
-        $sectionResult = Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $content
-        $content = $sectionResult.Markdown
-        $glossaryResult = Add-OpenSpecGlossaryAnchorsAndRepairLinks -Markdown $content
-        $content = $glossaryResult.Markdown
-        $changed = ($sectionResult.LinksRepaired -gt 0) -or ($glossaryResult.AnchorsInjected -gt 0) -or ($glossaryResult.LinksRepaired -gt 0)
-        if ($changed -and -not $using:whatIfArg) {
-            Set-Content -LiteralPath $mdPath -Value $content -Encoding UTF8 -NoNewline
-        }
-        [pscustomobject]@{
-            SectionRepaired = $sectionResult.LinksRepaired
-            GlossaryRepaired = $glossaryResult.LinksRepaired
-            AnchorsInjected = $glossaryResult.AnchorsInjected
-            Updated = $changed -and -not $using:whatIfArg
-            SpecName = [System.IO.Path]::GetFileName([System.IO.Path]::GetDirectoryName($mdPath))
-        }
+        . $using:helperPath
+        Invoke-RepairAllBrokenLinksFile -Path $_ -CleanupPath $using:cleanupPath -WhatIf:$using:whatIfArg
     } -ThrottleLimit $ThrottleLimit
 
     $totalSection = ($results | Measure-Object -Property SectionRepaired -Sum).Sum
@@ -74,21 +62,13 @@ else {
     $totalGlossary = 0
     $updated = 0
     foreach ($mdPath in $specFiles) {
-        $content = Get-Content -LiteralPath $mdPath -Raw -Encoding UTF8
-        $sectionResult = Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $content
-        $content = $sectionResult.Markdown
-        $totalSection += $sectionResult.LinksRepaired
+        $result = Invoke-RepairAllBrokenLinksFile -Path $mdPath -CleanupPath $cleanupPath -WhatIf:$WhatIf
+        $totalSection += $result.SectionRepaired
+        $totalGlossary += $result.GlossaryRepaired
 
-        $glossaryResult = Add-OpenSpecGlossaryAnchorsAndRepairLinks -Markdown $content
-        $content = $glossaryResult.Markdown
-        $totalGlossary += $glossaryResult.LinksRepaired
-
-        $changed = ($sectionResult.LinksRepaired -gt 0) -or ($glossaryResult.AnchorsInjected -gt 0) -or ($glossaryResult.LinksRepaired -gt 0)
-        if ($changed -and -not $WhatIf) {
-            Set-Content -LiteralPath $mdPath -Value $content -Encoding UTF8 -NoNewline
+        if ($result.Updated) {
             $updated++
-            $rel = [System.IO.Path]::GetFileName([System.IO.Path]::GetDirectoryName($mdPath))
-            Write-Host "Updated: $rel (Section:$($sectionResult.LinksRepaired) Glossary:$($glossaryResult.LinksRepaired)+$($glossaryResult.AnchorsInjected))"
+            Write-Host "Updated: $($result.SpecName) (Section:$($result.SectionRepaired) Glossary:$($result.GlossaryRepaired)+$($result.AnchorsInjected))"
         }
     }
 }

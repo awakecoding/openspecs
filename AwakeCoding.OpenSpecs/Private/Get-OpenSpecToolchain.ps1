@@ -1,7 +1,6 @@
 function Get-OpenSpecToolchain {
     [CmdletBinding()]
     param(
-        [switch]$RequirePdfConverter,
         [switch]$RequireDocxConverter
     )
 
@@ -20,10 +19,6 @@ function Get-OpenSpecToolchain {
         HasDocling = $null -ne $doclingCommand
         HasMarkItDown = $null -ne $markitdownCommand
         HasOpenXml = $null -ne $openXmlModule
-    }
-
-    if ($RequirePdfConverter -and -not ($toolchain.HasDocling -or $toolchain.HasMarkItDown)) {
-        throw 'No PDF converter detected. Install docling or markitdown.'
     }
 
     if ($RequireDocxConverter -and -not $toolchain.HasOpenXml) {

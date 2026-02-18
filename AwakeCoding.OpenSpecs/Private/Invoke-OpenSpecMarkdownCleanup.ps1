@@ -1124,18 +1124,13 @@ function Resolve-OpenSpecGuidSectionAnchors {
     # these with the Section_X.Y.Z form fixes both issues.
     $guidToSection = @{}
     $sourceMapCount = 0
-    if ($GuidToSectionMap) {
-        foreach ($entry in $GuidToSectionMap.GetEnumerator()) {
-            $guid = ([string]$entry.Key).ToLowerInvariant()
-            $section = [string]$entry.Value
-            if ([string]::IsNullOrWhiteSpace($guid) -or [string]::IsNullOrWhiteSpace($section)) {
-                continue
-            }
-            if (-not $guidToSection.ContainsKey($guid)) {
-                $guidToSection[$guid] = $section
-                $sourceMapCount++
-            }
-        }
+    $existingSections = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+    foreach ($m in [regex]::Matches($result, '<a\s+id="(?<section>Section_\d+(?:\.\d+)*)"\s*></a>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+        [void]$existingSections.Add($m.Groups['section'].Value)
+    }
+    foreach ($m in [regex]::Matches($result, '^\s*#{1,6}\s+(?<num>\d+(?:\.\d+)*)\b', [System.Text.RegularExpressions.RegexOptions]'IgnoreCase, Multiline')) {
+        [void]$existingSections.Add("Section_$($m.Groups['num'].Value)")
     }
 
     # Order 1: GUID anchor followed by Section anchor (most common)
@@ -1162,6 +1157,20 @@ function Resolve-OpenSpecGuidSectionAnchors {
         }
     }
 
+    if ($GuidToSectionMap) {
+        foreach ($entry in $GuidToSectionMap.GetEnumerator()) {
+            $guid = ([string]$entry.Key).ToLowerInvariant()
+            $section = [string]$entry.Value
+            if ([string]::IsNullOrWhiteSpace($guid) -or [string]::IsNullOrWhiteSpace($section)) {
+                continue
+            }
+            if (-not $guidToSection.ContainsKey($guid)) {
+                $guidToSection[$guid] = $section
+                $sourceMapCount++
+            }
+        }
+    }
+
     if ($guidToSection.Count -eq 0) {
         return [pscustomobject]@{
             Markdown = $result
@@ -1172,15 +1181,38 @@ function Resolve-OpenSpecGuidSectionAnchors {
     # Rewrite all link targets that reference GUID-based section anchors.
     # Matches both (#Section_GUID) and (#section_GUID) forms.
     $rewriteCounter = @{ Value = 0 }
+    $numericPreferenceCounter = @{ Value = 0 }
     $result = [regex]::Replace(
         $result,
-        '\(#[Ss]ection_(?<guid>[0-9a-f]{32})\)',
+        '\[(?<text>[^\]]+)\]\(#[Ss]ection_(?<guid>[0-9a-f]{32})\)',
         {
             param($m)
             $guid = $m.Groups['guid'].Value.ToLowerInvariant()
-            if ($guidToSection.ContainsKey($guid)) {
+            $text = ($m.Groups['text'].Value -replace '\*+', '' -replace '\s+', ' ').Trim()
+
+            $preferredSection = $null
+            if ($text -match '^(?:section\s+)?(?<num>\d+(?:\.\d+)*)$') {
+                $numericSection = "Section_$($Matches['num'])"
+                if ($existingSections.Contains($numericSection)) {
+                    $preferredSection = $numericSection
+                    $numericPreferenceCounter.Value++
+                }
+            }
+            elseif ($text -match '\(section\s+(?<num>\d+(?:\.\d+)*)\)') {
+                $numericSection = "Section_$($Matches['num'])"
+                if ($existingSections.Contains($numericSection)) {
+                    $preferredSection = $numericSection
+                    $numericPreferenceCounter.Value++
+                }
+            }
+
+            if (-not $preferredSection -and $guidToSection.ContainsKey($guid)) {
+                $preferredSection = $guidToSection[$guid]
+            }
+
+            if ($preferredSection) {
                 $rewriteCounter.Value++
-                "(#$($guidToSection[$guid]))"
+                "[$($m.Groups['text'].Value)](#$preferredSection)"
             }
             else {
                 $m.Value
@@ -1196,6 +1228,7 @@ function Resolve-OpenSpecGuidSectionAnchors {
             Count = $rewriteCount
             MappedAnchors = $guidToSection.Count
             SourceMappedAnchors = $sourceMapCount
+            NumericPreferenceRewrites = $numericPreferenceCounter.Value
             Reason = 'GUID-based section anchors were resolved to section number anchors.'
         })
     }
@@ -1279,16 +1312,32 @@ function Repair-OpenSpecSectionNumberLinks {
     # In-document links like [5.3.8](#Section_guid) often have no guid->section mapping
     # (Word bookmark pair missing in converted output). When the link text is a section
     # number, rewrite to [5.3.8](#Section_5.3.8) so they resolve to our injected anchors.
+    $availableSections = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($m in [regex]::Matches($result, '<a\s+id="(?<section>Section_\d+(?:\.\d+)*)"\s*></a>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+        [void]$availableSections.Add($m.Groups['section'].Value)
+    }
+    foreach ($m in [regex]::Matches($result, '^\s*#{1,6}\s+(?<num>\d+(?:\.\d+)*)\b', [System.Text.RegularExpressions.RegexOptions]'IgnoreCase, Multiline')) {
+        [void]$availableSections.Add("Section_$($m.Groups['num'].Value)")
+    }
+
     $pattern = [regex]::new(
-        '\[(?<num>\d+(?:\.\d+)*)\]\(#Section_[a-f0-9]{32}\)',
+        '\[(?<num>\d+(?:\.\d+)*)\]\(#Section_(?<guid>[a-f0-9]{32})\)',
         [System.Text.RegularExpressions.RegexOptions]::IgnoreCase
     )
-    $rewriteCount = $pattern.Matches($result).Count
+    $rewriteCounter = @{ Value = 0 }
     $result = $pattern.Replace($result, {
         param($m)
         $num = $m.Groups['num'].Value
-        "[$num](#Section_$num)"
+        $targetSection = "Section_$num"
+        if ($availableSections.Contains($targetSection)) {
+            $rewriteCounter.Value++
+            "[$num](#$targetSection)"
+        }
+        else {
+            $m.Value
+        }
     })
+    $rewriteCount = $rewriteCounter.Value
 
     if ($rewriteCount -gt 0) {
         [void]$issues.Add([pscustomobject]@{
@@ -1664,8 +1713,61 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
 
     $newLine = [Environment]::NewLine
     $lineArray = $Markdown -split '\r?\n'
-    $titleToSection = @{}
+    $titleToSections = @{}
+    $sectionOrder = @{}
     $anchorIdRegex = [regex]::new('<a\s+id="([^"]+)"\s*></a>', 'IgnoreCase')
+
+    $addSectionOrder = {
+        param([string]$sectionId, [int]$index)
+
+        if ([string]::IsNullOrWhiteSpace($sectionId)) {
+            return
+        }
+
+        if (-not $sectionOrder.ContainsKey($sectionId)) {
+            $sectionOrder[$sectionId] = $index
+        }
+    }
+
+    $addTitleMapping = {
+        param([string]$title, [string]$sectionId)
+
+        if ([string]::IsNullOrWhiteSpace($title) -or [string]::IsNullOrWhiteSpace($sectionId)) {
+            return
+        }
+
+        $norm = ($title -replace '\*+', '' -replace '\s+', ' ').Trim()
+        if ([string]::IsNullOrWhiteSpace($norm)) {
+            return
+        }
+
+        $key = $norm.ToLowerInvariant()
+        if (-not $titleToSections.ContainsKey($key)) {
+            $titleToSections[$key] = [System.Collections.Generic.List[string]]::new()
+        }
+
+        $bucket = $titleToSections[$key]
+        if (-not $bucket.Contains($sectionId)) {
+            [void]$bucket.Add($sectionId)
+        }
+    }
+
+    # Capture document-order ranking for section anchors and numbered headings.
+    $orderIndex = 0
+    for ($i = 0; $i -lt $lineArray.Count; $i++) {
+        $line = $lineArray[$i]
+
+        if ($line -match '^\s*<a\s+id="(Section_\d+(?:\.\d+)*)"\s*></a>\s*$') {
+            & $addSectionOrder $Matches[1] $orderIndex
+            $orderIndex++
+            continue
+        }
+
+        if ($line -match '^\s*#{1,6}\s+(\d+(?:\.\d+)*)\s+.+$') {
+            & $addSectionOrder "Section_$($Matches[1])" $orderIndex
+            $orderIndex++
+        }
+    }
 
     # Collect all existing anchors
     $existingAnchors = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -1678,11 +1780,10 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
             $sectionId = [string]$entry.Key
             $title = [string]$entry.Value
             if ([string]::IsNullOrWhiteSpace($sectionId) -or [string]::IsNullOrWhiteSpace($title)) { continue }
-            $norm = ($title -replace '\s+', ' ').Trim()
-            if (-not $titleToSection.ContainsKey($norm)) { $titleToSection[$norm] = $sectionId }
+
+            & $addTitleMapping $title $sectionId
             $withoutNum = $title -replace '^\d+(?:\.\d+)*\s+', ''
-            $normWithout = ($withoutNum -replace '\s+', ' ').Trim()
-            if ($normWithout -and -not $titleToSection.ContainsKey($normWithout)) { $titleToSection[$normWithout] = $sectionId }
+            & $addTitleMapping $withoutNum $sectionId
         }
     }
 
@@ -1694,14 +1795,11 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
             $nextLine = if ($i + 1 -lt $lineArray.Count) { $lineArray[$i + 1].Trim() } else { '' }
             if ([string]::IsNullOrWhiteSpace($nextLine)) { continue }
             $title = if ($nextLine -match '^\s*#{1,6}\s+(?<title>.+)$') { $Matches['title'].Trim() } else { $nextLine }
-            $norm = ($title -replace '\s+', ' ').Trim()
-            if (-not $titleToSection.ContainsKey($norm)) { $titleToSection[$norm] = $sectionId }
+            & $addTitleMapping $title $sectionId
             $withoutNum = $title -replace '^\d+(?:\.\d+)*\s+', ''
-            $normWithout = ($withoutNum -replace '\s+', ' ').Trim()
-            if ($normWithout -and -not $titleToSection.ContainsKey($normWithout)) { $titleToSection[$normWithout] = $sectionId }
+            & $addTitleMapping $withoutNum $sectionId
             $withoutParen = $title -replace '\s*\([^)]*\)\s*$', ''  # "Share Control Header (TS_SHARECONTROLHEADER)" -> "Share Control Header"
-            $normNoParen = ($withoutParen -replace '\s+', ' ').Trim()
-            if ($normNoParen -and -not $titleToSection.ContainsKey($normNoParen)) { $titleToSection[$normNoParen] = $sectionId }
+            & $addTitleMapping $withoutParen $sectionId
         }
     }
 
@@ -1714,36 +1812,91 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
             $sectionNum = $hm.Groups[1].Value
             $sectionId = "Section_$sectionNum"
             $title = $hm.Groups['title'].Value.Trim()
-            $norm = ($title -replace '\s+', ' ').Trim()
-            if (-not $titleToSection.ContainsKey($norm)) { $titleToSection[$norm] = $sectionId }
+            & $addTitleMapping $title $sectionId
             $withoutNum = ($title -replace '^\d+(?:\.\d+)*\s+', '') -replace '\s*\([^)]*\)\s*$', ''
-            $normWithout = ($withoutNum -replace '\s+', ' ').Trim()
-            if ($normWithout -and -not $titleToSection.ContainsKey($normWithout)) { $titleToSection[$normWithout] = $sectionId }
+            & $addTitleMapping $withoutNum $sectionId
         }
     }
 
-    # Find best section for link text: exact match, prefix match, or extract "(section N.N.N)" from link text.
+    # Find best section for link text with deterministic tie-breaking.
     $findSectionForLinkText = {
-        param($norm, $titleToSection, $existingAnchors)
-        if ($titleToSection.ContainsKey($norm)) { return $titleToSection[$norm] }
-        # Extract section number from link text like "Share Control Header (section 2.2.8.1.1.1)"
-        if ($norm -match '\(section\s+(\d+(?:\.\d+)*)\)') {
-            $extractedId = "Section_$($Matches[1])"
+        param($norm, $titleToSections, $existingAnchors, $sectionOrder)
+
+        if ([string]::IsNullOrWhiteSpace($norm)) {
+            return $null
+        }
+
+        $normalized = ($norm -replace '\*+', '' -replace '\s+', ' ').Trim()
+        if ([string]::IsNullOrWhiteSpace($normalized)) {
+            return $null
+        }
+
+        # Prefer explicit section-number references in link text.
+        if ($normalized -match '^(?:section\s+)?(?<num>\d+(?:\.\d+)*)$') {
+            $directId = "Section_$($Matches['num'])"
+            if ($existingAnchors.Contains($directId)) { return $directId }
+        }
+
+        if ($normalized -match '\(section\s+(?<num>\d+(?:\.\d+)*)\)') {
+            $extractedId = "Section_$($Matches['num'])"
             if ($existingAnchors.Contains($extractedId)) { return $extractedId }
         }
-        $candidates = @()
-        foreach ($key in $titleToSection.Keys) {
-            if ($key -eq $norm) { return $titleToSection[$key] }
-            if ($key.StartsWith($norm + ' ') -or $key.StartsWith($norm + '(')) { $candidates += [pscustomobject]@{ Key = $key; SectionId = $titleToSection[$key] } }
-            elseif ($norm.StartsWith($key + ' ') -or $norm.StartsWith($key + '(')) { $candidates += [pscustomobject]@{ Key = $key; SectionId = $titleToSection[$key] } }
-            elseif ($key.StartsWith($norm) -or $norm.StartsWith($key)) { $candidates += [pscustomobject]@{ Key = $key; SectionId = $titleToSection[$key] } }
+
+        $normKey = $normalized.ToLowerInvariant()
+        if ($titleToSections.ContainsKey($normKey)) {
+            $exactSections = @($titleToSections[$normKey] | Sort-Object -Property @(
+                @{ Expression = { if ($sectionOrder.ContainsKey($_)) { [int]$sectionOrder[$_] } else { [int]::MaxValue } } },
+                @{ Expression = { $_.Length } },
+                @{ Expression = { $_ } }
+            ))
+            if ($exactSections.Count -gt 0) {
+                return $exactSections[0]
+            }
         }
+
+        $candidates = @()
+        foreach ($key in @($titleToSections.Keys | Sort-Object -Property @{ Expression = { $_.Length } }, @{ Expression = { $_ } })) {
+            $score = $null
+            if ($key.StartsWith($normKey + ' ') -or $key.StartsWith($normKey + '(')) {
+                $score = 1
+            }
+            elseif ($normKey.StartsWith($key + ' ') -or $normKey.StartsWith($key + '(')) {
+                $score = 2
+            }
+            elseif ($key.StartsWith($normKey) -or $normKey.StartsWith($key)) {
+                $score = 3
+            }
+
+            if ($null -eq $score) {
+                continue
+            }
+
+            foreach ($sectionId in $titleToSections[$key]) {
+                $candidates += [pscustomobject]@{
+                    Score = $score
+                    Key = $key
+                    KeyLength = $key.Length
+                    SectionId = $sectionId
+                }
+            }
+        }
+
         if ($candidates.Count -eq 1) { return $candidates[0].SectionId }
         if ($candidates.Count -gt 1) {
-            # Prefer shortest key (most specific match), e.g. "Status Info PDU" over "Status Info PDU Data (TS_...)"
-            $best = $candidates | Sort-Object -Property { $_.Key.Length } | Select-Object -First 1
+            $best = $candidates |
+                Sort-Object -Property @(
+                    @{ Expression = { $_.Score } },
+                    @{ Expression = { [Math]::Abs($_.KeyLength - $normKey.Length) } },
+                    @{ Expression = { $_.KeyLength } },
+                    @{ Expression = { if ($sectionOrder.ContainsKey($_.SectionId)) { [int]$sectionOrder[$_.SectionId] } else { [int]::MaxValue } } },
+                    @{ Expression = { $_.SectionId.Length } },
+                    @{ Expression = { $_.SectionId } },
+                    @{ Expression = { $_.Key } }
+                ) |
+                Select-Object -First 1
             return $best.SectionId
         }
+
         return $null
     }
     $guidLinkRegex = [regex]::new('\[(?<text>[^\]]+)\]\(#Section_[a-fA-F0-9]{32}\)')
@@ -1751,15 +1904,15 @@ function Repair-OpenSpecSectionGuidLinksByHeadingMatch {
         param($m)
         $rawText = $m.Groups['text'].Value
         $norm = ($rawText -replace '\*+', '' -replace '\s+', ' ').Trim()
-        $sectionId = & $findSectionForLinkText $norm $titleToSection $existingAnchors
-        if (-not $sectionId -and $rawText.Trim() -ne $norm) { $sectionId = & $findSectionForLinkText $rawText.Trim() $titleToSection $existingAnchors }
+        $sectionId = & $findSectionForLinkText $norm $titleToSections $existingAnchors $sectionOrder
+        if (-not $sectionId -and $rawText.Trim() -ne $norm) { $sectionId = & $findSectionForLinkText $rawText.Trim() $titleToSections $existingAnchors $sectionOrder }
         if ($sectionId) { "[$rawText](#$sectionId)" } else { $m.Value }
     })
     $linksRepaired = 0
     foreach ($m in $guidLinkRegex.Matches($Markdown)) {
         $norm = ($m.Groups['text'].Value -replace '\*+', '' -replace '\s+', ' ').Trim()
-        $sid = & $findSectionForLinkText $norm $titleToSection $existingAnchors
-        if (-not $sid) { $sid = & $findSectionForLinkText $m.Groups['text'].Value.Trim() $titleToSection $existingAnchors }
+        $sid = & $findSectionForLinkText $norm $titleToSections $existingAnchors $sectionOrder
+        if (-not $sid) { $sid = & $findSectionForLinkText $m.Groups['text'].Value.Trim() $titleToSections $existingAnchors $sectionOrder }
         if ($sid) { $linksRepaired++ }
     }
 

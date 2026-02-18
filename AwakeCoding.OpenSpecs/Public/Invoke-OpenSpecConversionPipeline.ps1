@@ -5,7 +5,7 @@ function Invoke-OpenSpecConversionPipeline {
 
         [string]$Query,
 
-        [ValidateSet('PDF', 'DOCX', 'Both')]
+        [ValidateSet('DOCX', 'Both')]
         [string]$Format = 'DOCX',
 
         [string]$DownloadPath = (Join-Path -Path (Get-Location) -ChildPath 'downloads-convert'),
@@ -32,6 +32,9 @@ function Invoke-OpenSpecConversionPipeline {
         Save-OpenSpecDocument -Query $Query -Format $Format -OutputPath $DownloadPath -Force:$Force
     }
 
-    $toConvert = $downloadResults | Where-Object { $_.Status -in 'Downloaded', 'Exists' }
+    $toConvert = $downloadResults | Where-Object { $_.Status -in 'Downloaded', 'Exists' -and $_.Format -eq 'DOCX' }
+    if (-not @($toConvert)) {
+        throw 'No DOCX files are available for conversion. PDF source conversion is not supported.'
+    }
     $toConvert | Convert-OpenSpecToMarkdown -OutputPath $OutputPath -Force:$Force -Parallel:$Parallel -ThrottleLimit $ThrottleLimit -RemoveDocumentIndex:$RemoveDocumentIndex
 }

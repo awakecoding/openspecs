@@ -114,26 +114,7 @@ function Save-OpenSpecDocument {
         $downloadOne = {
             param($link, $destination)
             try {
-                $attempt = 0
-                $maxRetries = 4
-                $delay = 1
-                while ($true) {
-                    $attempt++
-                    try {
-                        Invoke-WebRequest -Uri $link.Url -OutFile $destination -MaximumRedirection 8 -ErrorAction Stop
-                        break
-                    }
-                    catch {
-                        $statusCode = $null
-                        if ($_.Exception.Response -and $_.Exception.Response.StatusCode) {
-                            $statusCode = [int]$_.Exception.Response.StatusCode
-                        }
-                        $transient = ($statusCode -in 429, 500, 502, 503, 504) -or (-not $statusCode)
-                        if ($attempt -ge $maxRetries -or -not $transient) { throw }
-                        Start-Sleep -Seconds $delay
-                        $delay = [Math]::Min($delay * 2, 16)
-                    }
-                }
+                Invoke-OpenSpecRequest -Uri $link.Url -OutFile $destination | Out-Null
                 [pscustomobject]@{
                     PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                     ProtocolId = $link.ProtocolId
@@ -181,32 +162,21 @@ function Save-OpenSpecDocument {
             return $result
         }
 
+        $moduleBase = (Get-Module -Name 'AwakeCoding.OpenSpecs' | Select-Object -First 1).ModuleBase
+        $openSpecRequestPath = if ($moduleBase) { Join-Path -Path $moduleBase -ChildPath 'Private\Invoke-OpenSpecRequest.ps1' } else { $null }
         $useParallel = $Parallel -and $PSVersionTable.PSVersion.Major -ge 7 -and $toDownload.Count -gt 1
         $results = if ($useParallel) {
             $toDownload | ForEach-Object -Parallel {
                 $link = $_.Link
                 $destination = $_.Destination
                 try {
-                    $attempt = 0
-                    $maxRetries = 4
-                    $delay = 1
-                    while ($true) {
-                        $attempt++
-                        try {
-                            Invoke-WebRequest -Uri $link.Url -OutFile $destination -MaximumRedirection 8 -ErrorAction Stop
-                            break
+                    if (-not (Get-Command -Name 'Invoke-OpenSpecRequest' -CommandType Function -ErrorAction SilentlyContinue)) {
+                        if (-not $using:openSpecRequestPath -or -not (Test-Path -LiteralPath $using:openSpecRequestPath -PathType Leaf)) {
+                            throw 'Invoke-OpenSpecRequest helper script not found for parallel download.'
                         }
-                        catch {
-                            $statusCode = $null
-                            if ($_.Exception.Response -and $_.Exception.Response.StatusCode) {
-                                $statusCode = [int]$_.Exception.Response.StatusCode
-                            }
-                            $transient = ($statusCode -in 429, 500, 502, 503, 504) -or (-not $statusCode)
-                            if ($attempt -ge $maxRetries -or -not $transient) { throw }
-                            Start-Sleep -Seconds $delay
-                            $delay = [Math]::Min($delay * 2, 16)
-                        }
+                        . $using:openSpecRequestPath
                     }
+                    Invoke-OpenSpecRequest -Uri $link.Url -OutFile $destination | Out-Null
                     [pscustomobject]@{
                         PSTypeName = 'AwakeCoding.OpenSpecs.DownloadResult'
                         ProtocolId = $link.ProtocolId
@@ -239,12 +209,10 @@ function Save-OpenSpecDocument {
 
         # Retry failed DOCX via RSS fallback URLs (e.g. MS-THCH, MS-MQOD with stale Learn-page links)
         $downloadResults = New-Object System.Collections.Generic.List[object]
-        $i = 0
         foreach ($r in @($results)) {
-            $dest = $toDownload[$i].Destination
+            $dest = $r.Path
             $r = & $tryDocxFallback -result $r -destination $dest
             [void]$downloadResults.Add($r)
-            $i++
         }
 
         $existsResults

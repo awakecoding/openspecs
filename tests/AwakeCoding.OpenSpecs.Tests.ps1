@@ -75,3 +75,90 @@ Describe 'Conversion report aggregation' {
         Remove-Item -LiteralPath $tempRoot -Recurse -Force
     }
 }
+
+Describe 'Section GUID link repair' {
+    It 'is deterministic and prefers explicit section-number targets' {
+        $markdown = @'
+<a id="Section_2.2.1.3"></a>
+## 2.2.1.3 MCS Connect Initial PDU
+<a id="Section_3.2.5.3.3"></a>
+## 3.2.5.3.3 MCS Connect Initial PDU
+Numeric reference: [2.2.1.3](#Section_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+Heading reference: [MCS Connect Initial PDU](#Section_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+'@
+
+        $module = Get-Module AwakeCoding.OpenSpecs -ErrorAction Stop
+        $results = 1..5 | ForEach-Object {
+            & $module {
+                param([string]$text)
+                Repair-OpenSpecSectionGuidLinksByHeadingMatch -Markdown $text
+            } $markdown
+        }
+
+        $firstMarkdown = $results[0].Markdown
+        foreach ($item in $results) {
+            $item.Markdown | Should -Be $firstMarkdown
+        }
+
+        $firstMarkdown | Should -Match '\[2\.2\.1\.3\]\(#Section_2\.2\.1\.3\)'
+        $firstMarkdown | Should -Match '\[MCS Connect Initial PDU\]\(#Section_2\.2\.1\.3\)'
+    }
+}
+
+Describe 'GUID anchor resolution precedence' {
+    It 'prefers explicit numeric section text over conflicting source metadata' {
+        $markdown = @'
+<a id="section_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>
+<a id="Section_2.2.9"></a>
+<a id="Section_2.2.11"></a>
+From pair: [2.2.9](#Section_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+From source-map fallback: [2.2.11](#Section_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+'@
+
+        $sourceMap = @{
+            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa = 'Section_2.2.8'
+            bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb = 'Section_9.9.9'
+        }
+
+        $module = Get-Module AwakeCoding.OpenSpecs -ErrorAction Stop
+        $result = & $module {
+            param([string]$text, [object]$map)
+            Resolve-OpenSpecGuidSectionAnchors -Markdown $text -GuidToSectionMap $map
+        } $markdown $sourceMap
+
+        $result.Markdown | Should -Match '\[2\.2\.9\]\(#Section_2\.2\.9\)'
+        $result.Markdown | Should -Match '\[2\.2\.11\]\(#Section_2\.2\.11\)'
+        $result.Markdown | Should -Not -Match '\[2\.2\.9\]\(#Section_2\.2\.8\)'
+        $result.Markdown | Should -Not -Match '\[2\.2\.11\]\(#Section_9\.9\.9\)'
+
+        $issue = $result.Issues | Where-Object Type -eq 'GuidAnchorResolved' | Select-Object -First 1
+        $issue | Should -Not -BeNullOrEmpty
+        $issue.NumericPreferenceRewrites | Should -Be 2
+    }
+}
+
+Describe 'Section number link strict repair' {
+    It 'rewrites only when the referenced numeric section exists in the document' {
+        $markdown = @'
+<a id="Section_5.3.8"></a>
+Known anchor: [5.3.8](#Section_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+Unknown anchor: [7.7.7](#Section_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+## 8.1 Heading-derived section
+Heading anchor: [8.1](#Section_cccccccccccccccccccccccccccccccc)
+'@
+
+        $module = Get-Module AwakeCoding.OpenSpecs -ErrorAction Stop
+        $result = & $module {
+            param([string]$text)
+            Repair-OpenSpecSectionNumberLinks -Markdown $text
+        } $markdown
+
+        $result.Markdown | Should -Match '\[5\.3\.8\]\(#Section_5\.3\.8\)'
+        $result.Markdown | Should -Match '\[8\.1\]\(#Section_8\.1\)'
+        $result.Markdown | Should -Match '\[7\.7\.7\]\(#Section_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\)'
+
+        $issue = $result.Issues | Where-Object Type -eq 'SectionNumberLinksRepaired' | Select-Object -First 1
+        $issue | Should -Not -BeNullOrEmpty
+        $issue.Count | Should -Be 2
+    }
+}

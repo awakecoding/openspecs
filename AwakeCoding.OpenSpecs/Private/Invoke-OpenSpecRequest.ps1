@@ -4,6 +4,8 @@ function Invoke-OpenSpecRequest {
         [Parameter(Mandatory)]
         [string]$Uri,
 
+        [string]$OutFile,
+
         [int]$MaxRetries = 4,
 
         [int]$InitialDelaySeconds = 1,
@@ -22,7 +24,17 @@ function Invoke-OpenSpecRequest {
     while ($true) {
         $attempt++
         try {
-            return Invoke-WebRequest -Uri $Uri -Headers $headers -MaximumRedirection 8 -TimeoutSec $TimeoutSec -ErrorAction Stop
+            $requestParams = @{
+                Uri = $Uri
+                Headers = $headers
+                MaximumRedirection = 8
+                TimeoutSec = $TimeoutSec
+                ErrorAction = 'Stop'
+            }
+            if ($OutFile) {
+                $requestParams.OutFile = $OutFile
+            }
+            return Invoke-WebRequest @requestParams
         }
         catch {
             $statusCode = $null

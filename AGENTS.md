@@ -60,5 +60,5 @@ When you add a new exported function, add its name to the `$expected` array in t
 ## Project-specific rules
 
 - Do not remove or rename exported functions without updating `AwakeCoding.OpenSpecs.psd1` and the exports test.
-- Conversion: DOCX is handled in-module via OpenXML; PDF uses external `docling` or `markitdown` when available (see `AwakeCoding.OpenSpecs/Private/Get-OpenSpecToolchain.ps1`). Output is textual (tables, ASCII), not image-based.
+- Conversion: DOCX is handled in-module via OpenXML. PDF is not used as a conversion source. Output is textual (tables, ASCII), not image-based.
 - For bulk or CI conversions, use `-Parallel -ThrottleLimit N` with `Convert-OpenSpecToMarkdown` or `Invoke-OpenSpecConversionPipeline` (PowerShell 7 only).

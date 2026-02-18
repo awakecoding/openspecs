@@ -8,7 +8,7 @@ function Convert-OpenSpecToMarkdown {
 
         [string]$OutputPath = (Join-Path -Path (Get-Location) -ChildPath 'converted-specs'),
 
-        [ValidateSet('Auto', 'DOCX', 'PDF')]
+        [ValidateSet('Auto', 'DOCX')]
         [string]$SourceFormat = 'Auto',
 
         [switch]$Force,
@@ -84,6 +84,11 @@ function Convert-OpenSpecToMarkdown {
                 $SourceFormat
             }
 
+            if ($resolvedFormat -eq 'PDF') {
+                Write-Error "PDF source conversion is not supported. Use DOCX input for '$sourcePath'."
+                continue
+            }
+
             if ($resolvedFormat -eq 'Unknown') {
                 Write-Error "Unable to infer source format for '$sourcePath'."
                 continue
@@ -136,12 +141,6 @@ function Convert-OpenSpecToMarkdown {
                 $mediaDirectory = Join-Path -Path $specDirectory -ChildPath 'media'
                 $conversionStep = ConvertFrom-OpenSpecDocx -InputPath $sourcePath -OutputPath $rawMarkdownPath -Toolchain $toolchain -MediaOutputDirectory $mediaDirectory
             }
-            elseif ($resolvedFormat -eq 'PDF') {
-                $toolchain = Get-OpenSpecToolchain -RequirePdfConverter
-                $rawMarkdownPath = Join-Path -Path $artifactDirectory -ChildPath 'raw-pdf.md'
-                $conversionStep = ConvertFrom-OpenSpecPdf -InputPath $sourcePath -OutputPath $rawMarkdownPath -Toolchain $toolchain
-            }
-
             $rawMarkdown = Get-Content -LiteralPath $conversionStep.OutputPath -Raw
             $normalized = ConvertTo-OpenSpecTextLayout -Markdown $rawMarkdown
             $sourceLinkMetadata = if ($conversionStep.PSObject.Properties['LinkMetadata']) { $conversionStep.LinkMetadata } else { $null }
